@@ -17,7 +17,7 @@ package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.web.annotation.IgnoreResponseBodyAdvice;
 import javax.servlet.Servlet;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +48,7 @@ public class ResponseAutoConfiguration implements ResponseBodyAdvice<Object>, In
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ResponseAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(ResponseAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Override

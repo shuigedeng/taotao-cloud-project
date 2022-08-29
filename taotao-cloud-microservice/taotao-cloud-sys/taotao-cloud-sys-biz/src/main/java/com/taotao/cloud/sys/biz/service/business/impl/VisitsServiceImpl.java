@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.sys.biz.model.entity.system.Visits;
 import com.taotao.cloud.sys.biz.mapper.ILogMapper;
 import com.taotao.cloud.sys.biz.mapper.IVisitsMapper;
@@ -45,7 +45,7 @@ public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implem
 			.eq(Visits::getDate, localDate.toString()));
 		if (visits == null) {
 			visits = new Visits();
-			visits.setWeekDay(String.valueOf(DateUtil.getCurrentWeek()));
+			visits.setWeekDay(String.valueOf(DateUtils.getCurrentWeek()));
 			visits.setPvCounts(1L);
 			visits.setIpCounts(1L);
 			visits.setDate(localDate.toString());

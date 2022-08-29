@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.disruptor.handler;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
@@ -70,7 +70,7 @@ public class PathMatchingHandlerChainResolver implements HandlerChainResolver<Di
 		String eventURI = getPathWithinEvent(event);
 		for (String pathPattern : handlerChainManager.getChainNames()) {
 			if (pathMatches(pathPattern, eventURI)) {
-				LogUtil.info(
+				LogUtils.info(
 					"Matched path pattern [" + pathPattern + "] for eventURI [" + eventURI + "].  "
 						+
 						"Utilizing corresponding handler chain...");

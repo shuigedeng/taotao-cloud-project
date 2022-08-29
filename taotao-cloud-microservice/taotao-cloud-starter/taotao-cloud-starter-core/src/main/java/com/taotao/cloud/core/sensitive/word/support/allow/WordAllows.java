@@ -2,7 +2,7 @@ package com.taotao.cloud.core.sensitive.word.support.allow;
 
 import com.taotao.cloud.common.support.instance.impl.Instances;
 import com.taotao.cloud.common.support.pipeline.Pipeline;
-import com.taotao.cloud.common.utils.collection.ArrayUtil;
+import com.taotao.cloud.common.utils.collection.ArrayUtils;
 import com.taotao.cloud.core.sensitive.word.api.IWordAllow;
 
 /**
@@ -26,7 +26,7 @@ public final class WordAllows {
             protected void init(Pipeline<IWordAllow> pipeline) {
                 pipeline.addLast(wordAllow);
 
-                if(ArrayUtil.isNotEmpty(others)) {
+                if(ArrayUtils.isNotEmpty(others)) {
                     for(IWordAllow other : others) {
                         pipeline.addLast(other);
                     }

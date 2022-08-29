@@ -7,9 +7,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.web.dto.BrandDTO;
 import com.taotao.cloud.goods.api.web.query.BrandPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
@@ -57,7 +57,7 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 	@Override
 	public IPage<Brand> getBrandsByPage(BrandPageQuery page) {
 		LambdaQueryWrapper<Brand> queryWrapper = new LambdaQueryWrapper<>();
-		if (StringUtil.isNotBlank(page.getName())) {
+		if (StringUtils.isNotBlank(page.getName())) {
 			queryWrapper.like(Brand::getName, page.getName());
 		}
 
@@ -108,7 +108,7 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
 		}
 
-		return this.updateById(BeanUtil.copy(brandDTO, Brand.class));
+		return this.updateById(BeanUtils.copy(brandDTO, Brand.class));
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 	private Brand checkExist(Long brandId) {
 		Brand brand = getById(brandId);
 		if (brand == null) {
-			LogUtil.error("品牌ID为" + brandId + "的品牌不存在");
+			LogUtils.error("品牌ID为" + brandId + "的品牌不存在");
 			throw new BusinessException(ResultEnum.BRAND_NOT_EXIST);
 		}
 		return brand;

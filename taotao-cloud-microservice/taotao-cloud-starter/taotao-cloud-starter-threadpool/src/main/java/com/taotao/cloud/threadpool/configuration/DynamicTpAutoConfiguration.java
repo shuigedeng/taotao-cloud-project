@@ -2,7 +2,7 @@ package com.taotao.cloud.threadpool.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
@@ -20,7 +20,7 @@ public class DynamicTpAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DynamicTpAutoConfiguration.class, StarterName.THREADPOOL_STARTER);
+		LogUtils.started(DynamicTpAutoConfiguration.class, StarterName.THREADPOOL_STARTER);
 	}
 
 	//@Bean

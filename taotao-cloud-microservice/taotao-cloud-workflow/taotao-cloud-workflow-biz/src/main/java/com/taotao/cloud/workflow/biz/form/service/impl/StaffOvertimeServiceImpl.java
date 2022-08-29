@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.StaffOvertimeEntity;
@@ -69,8 +69,8 @@ public class StaffOvertimeServiceImpl extends ServiceImpl<StaffOvertimeMapper, S
 
     @Override
     public void data(String id, String data) {
-        StaffOvertimeForm staffOvertimeForm = JsonUtil.getJsonToBean(data, StaffOvertimeForm.class);
-        StaffOvertimeEntity entity = JsonUtil.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
+        StaffOvertimeForm staffOvertimeForm = JsonUtils.getJsonToBean(data, StaffOvertimeForm.class);
+        StaffOvertimeEntity entity = JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -9,14 +9,13 @@ import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
 import com.taotao.cloud.oss.common.model.FileOssInfo;
 import com.taotao.cloud.oss.common.model.OssInfo;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.up.UpConstant;
 import com.upyun.ParallelUploader;
 import com.upyun.RestManager;
 import com.upyun.UpException;
@@ -61,7 +60,7 @@ public class UpOssClient implements StandardOssClient {
         try {
             restManager.writeFile(getKey(targetName, true), is, null);
         } catch (IOException | UpException e) {
-            LogUtil.error("{}上传失败", targetName, e);
+            LogUtils.error("{}上传失败", targetName, e);
             throw new OssException(e);
         }
         return getInfo(targetName, false);
@@ -83,18 +82,18 @@ public class UpOssClient implements StandardOssClient {
             Response response = restManager.readFile(getKey(targetName, true));
             IoUtil.copy(response.body().byteStream(), os);
         } catch (IOException | UpException e) {
-	        LogUtil.error("{}下载失败", targetName, e);
+	        LogUtils.error("{}下载失败", targetName, e);
             throw new OssException(e);
         }
     }
 
     @Override
     public void downLoadCheckPoint(File localFile, String targetName) {
-	    LogUtil.warn("又拍云不支持断点续传下载，将使用普通下载");
+	    LogUtils.warn("又拍云不支持断点续传下载，将使用普通下载");
         try (OutputStream os = new FileOutputStream(localFile)) {
             downLoad(os, targetName);
         } catch (Exception e) {
-	        LogUtil.error("{}下载失败", targetName, e);
+	        LogUtils.error("{}下载失败", targetName, e);
             throw new OssException(e);
         }
     }
@@ -104,7 +103,7 @@ public class UpOssClient implements StandardOssClient {
         try {
             restManager.deleteFile(getKey(targetName, true), null);
         } catch (IOException | UpException e) {
-	        LogUtil.error("{}删除失败", targetName, e);
+	        LogUtils.error("{}删除失败", targetName, e);
             throw new OssException(e);
         }
     }
@@ -114,7 +113,7 @@ public class UpOssClient implements StandardOssClient {
         try {
             restManager.copyFile(getKey(targetName, true), getKey(sourceName, true), null);
         } catch (IOException | UpException e) {
-	        LogUtil.error("{}复制到{}失败", sourceName, targetName, e);
+	        LogUtils.error("{}复制到{}失败", sourceName, targetName, e);
         }
     }
 
@@ -130,7 +129,7 @@ public class UpOssClient implements StandardOssClient {
                 restManager.rmDir(newSourceName);
             }
         } catch (IOException | UpException e) {
-	        LogUtil.error("{}移动到{}失败", sourceName, targetName, e);
+	        LogUtils.error("{}移动到{}失败", sourceName, targetName, e);
             throw new OssException(e);
         }
     }
@@ -163,7 +162,7 @@ public class UpOssClient implements StandardOssClient {
             }
             return ossInfo;
         } catch (IOException | UpException e) {
-	        LogUtil.error("获取{}基本信息失败", targetName, e);
+	        LogUtils.error("获取{}基本信息失败", targetName, e);
             throw new OssException(e);
         }
     }
@@ -181,7 +180,7 @@ public class UpOssClient implements StandardOssClient {
                 return Convert.toInt(ossInfo.getLength()) > 0;
             }
         } catch (IOException | UpException e) {
-	        LogUtil.error("判断{}是否存在失败", targetName, e);
+	        LogUtils.error("判断{}是否存在失败", targetName, e);
             return false;
         }
     }

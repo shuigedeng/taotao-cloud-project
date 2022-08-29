@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.data.mybatis.plus.cipher.interceptor;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.data.mybatis.plus.cipher.annotation.Cipher;
 import com.taotao.cloud.data.mybatis.plus.cipher.annotation.Encrypted;
 import com.taotao.cloud.data.mybatis.plus.cipher.service.CryptService;
@@ -543,7 +543,7 @@ public class FieldEncryptInterceptor implements Interceptor {
 	private CryptService getCryptService() {
 		if (cryptService == null) {
 			try {
-				cryptService = ContextUtil.getBean(CryptService.class, true);
+				cryptService = ContextUtils.getBean(CryptService.class, true);
 			} catch (Exception e) {
 				LOGGER.error("CryptService not found", e);
 				throw new RuntimeException("CryptService not found");
@@ -567,7 +567,7 @@ public class FieldEncryptInterceptor implements Interceptor {
 	private ConversionService getConversionService() {
 		if (conversionService == null) {
 			try {
-				conversionService = ContextUtil.getTypeConverter();
+				conversionService = ContextUtils.getTypeConverter();
 			} catch (Exception e) {
 				LOGGER.error("TypeConverter not found", e);
 				throw new RuntimeException("TypeConverter not found");

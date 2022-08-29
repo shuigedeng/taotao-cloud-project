@@ -1,6 +1,6 @@
 package com.taotao.cloud.data.mybatis.plus.pagehelper;
 
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 import java.io.Serializable;
 import java.util.List;
 
@@ -78,7 +78,7 @@ public class PagedList<T> implements Serializable {
 
 	public void setData(List<T> data) {
 		this.data = data;
-		if (ObjectUtil.isNotEmpty(data) && this.recordCount == -1) {
+		if (ObjectUtils.isNotEmpty(data) && this.recordCount == -1) {
 			this.recordCount = data.size();
 		}
 	}

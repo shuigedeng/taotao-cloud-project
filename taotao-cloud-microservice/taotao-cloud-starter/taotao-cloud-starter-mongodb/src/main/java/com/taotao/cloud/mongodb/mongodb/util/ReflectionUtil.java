@@ -1,6 +1,6 @@
 package com.taotao.cloud.mongodb.mongodb.util;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -56,7 +56,7 @@ public class ReflectionUtil {
 		try {
 			result = field.get(obj);
 		} catch (IllegalAccessException e) {
-			LogUtil.error("不可能抛出的异常{}", e.getMessage());
+			LogUtils.error("不可能抛出的异常{}", e.getMessage());
 		}
 		return result;
 	}
@@ -74,7 +74,7 @@ public class ReflectionUtil {
 		try {
 			field.set(obj, value);
 		} catch (IllegalAccessException e) {
-			LogUtil.error("不可能抛出的异常:{}", e.getMessage());
+			LogUtils.error("不可能抛出的异常:{}", e.getMessage());
 		}
 	}
 
@@ -171,19 +171,19 @@ public class ReflectionUtil {
 		Type genType = clazz.getGenericSuperclass();
 
 		if (!(genType instanceof ParameterizedType)) {
-			LogUtil.warn(clazz.getSimpleName() + "'s superclass not ParameterizedType");
+			LogUtils.warn(clazz.getSimpleName() + "'s superclass not ParameterizedType");
 			return Object.class;
 		}
 
 		Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
 
 		if (index >= params.length || index < 0) {
-			LogUtil.warn("Index: " + index + ", Size of " + clazz.getSimpleName() + "'s Parameterized Type: "
+			LogUtils.warn("Index: " + index + ", Size of " + clazz.getSimpleName() + "'s Parameterized Type: "
 					+ params.length);
 			return Object.class;
 		}
 		if (!(params[index] instanceof Class)) {
-			LogUtil.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
+			LogUtils.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
 			return Object.class;
 		}
 

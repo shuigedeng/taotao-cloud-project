@@ -15,37 +15,19 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.alibaba.ttl.TtlCallable;
-import com.alibaba.ttl.TtlRunnable;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolFactory;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.decorator.ContextDecorator;
 import com.taotao.cloud.core.properties.AsyncProperties;
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
+
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.atomic.AtomicInteger;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.MDC;
-import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.task.TaskDecorator;
-import org.springframework.scheduling.annotation.AsyncConfigurer;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 /**
  * 异步任务配置
@@ -62,7 +44,7 @@ public class AsyncThreadPoolAutoConfiguration implements InitializingBean{
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(AsyncThreadPoolAutoConfiguration.class, StarterName.CORE_STARTER);
+		LogUtils.started(AsyncThreadPoolAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	@Bean("asyncThreadPoolTaskExecutor")

@@ -6,7 +6,7 @@ import com.pingan.radosgw.sdk.config.ObsClientConfig;
 import com.pingan.radosgw.sdk.service.RadosgwService;
 import com.pingan.radosgw.sdk.service.RadosgwServiceFactory;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
@@ -36,7 +36,7 @@ public class PingAnOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(PingAnOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(PingAnOssConfiguration.class, StarterName.OSS_STARTER);
 	}
 
     public static final String DEFAULT_BEAN_NAME = "pingAnOssClient";

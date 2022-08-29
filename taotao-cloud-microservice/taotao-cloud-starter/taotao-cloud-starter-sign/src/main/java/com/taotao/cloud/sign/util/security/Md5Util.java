@@ -1,7 +1,7 @@
 package com.taotao.cloud.sign.util.security;
 
 import cn.hutool.crypto.digest.DigestUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.properties.EncryptBodyProperties;
 import com.taotao.cloud.sign.exception.EncryptDtguaiException;
 import com.taotao.cloud.sign.util.ISecurity;
@@ -38,7 +38,7 @@ public class Md5Util implements ISecurity {
 	 */
 	@Override
 	public String decrypt(String content, String password, EncryptBodyProperties config) {
-		LogUtil.error("MD5消息摘要加密,无法解密");
+		LogUtils.error("MD5消息摘要加密,无法解密");
 		throw new EncryptDtguaiException("MD5消息摘要加密,无法解密");
 	}
 }

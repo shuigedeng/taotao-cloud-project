@@ -22,7 +22,7 @@ import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.WaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import com.taotao.cloud.disruptor.handler.DisruptorEventDispatcher;
 import com.taotao.cloud.disruptor.properties.DisruptorProperties;
@@ -37,7 +37,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * RingBufferAutoConfiguration
@@ -53,7 +52,7 @@ public class RingBufferAutoConfiguration implements ApplicationContextAware, Ini
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RingBufferAutoConfiguration.class, StarterName.DISRUPTOR_STARTER);
+		LogUtils.started(RingBufferAutoConfiguration.class, StarterName.DISRUPTOR_STARTER);
 	}
 
 	/**

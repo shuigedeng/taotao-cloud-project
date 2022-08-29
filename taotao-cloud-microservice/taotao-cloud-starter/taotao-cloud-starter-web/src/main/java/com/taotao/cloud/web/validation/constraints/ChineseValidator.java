@@ -3,7 +3,7 @@ package com.taotao.cloud.web.validation.constraints;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.CharUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -31,7 +31,7 @@ public class ChineseValidator implements ConstraintValidator<Chinese, Object> {
 			validValue = StrUtil.toString(value);
 		}
 
-		if (StringUtil.isNotBlank(validValue)) {
+		if (StringUtils.isNotBlank(validValue)) {
 			return Validator.isChinese(validValue);
 		}
 

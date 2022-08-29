@@ -16,8 +16,8 @@
 package com.taotao.cloud.monitor.collect.task;
 
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
@@ -69,7 +69,7 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			Collector collector = Collector.getCollector();
-			MonitorThreadPoolProperties monitorThreadPoolProperties = ContextUtil.getBean(
+			MonitorThreadPoolProperties monitorThreadPoolProperties = ContextUtils.getBean(
 				MonitorThreadPoolProperties.class, false);
 
 			if(Objects.nonNull(collector) && Objects.nonNull(monitorThreadPoolProperties)){
@@ -103,8 +103,8 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

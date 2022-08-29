@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.io.FileUtil;
+import com.taotao.cloud.common.utils.io.FileUtils;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.mapper.IGoodsGalleryMapper;
 import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
@@ -64,10 +64,10 @@ public class GoodsGalleryServiceImpl extends
 			SettingEnum.GOODS_SETTING.name());
 		GoodsSettingVO goodsSetting = setting.data();
 		//缩略图
-		String thumbnail = FileUtil.getUrl(origin, goodsSetting.getAbbreviationPictureWidth(),
+		String thumbnail = FileUtils.getUrl(origin, goodsSetting.getAbbreviationPictureWidth(),
 			goodsSetting.getAbbreviationPictureHeight());
 		//小图
-		String small = FileUtil.getUrl(origin, goodsSetting.getSmallPictureWidth(),
+		String small = FileUtils.getUrl(origin, goodsSetting.getSmallPictureWidth(),
 			goodsSetting.getSmallPictureHeight());
 		//赋值
 		goodsGallery.setSmall(small);

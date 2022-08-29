@@ -25,8 +25,8 @@ import ch.qos.logback.core.encoder.Encoder;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.CharPool;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.system.SystemUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.system.SystemUtils;
 import com.taotao.cloud.logger.logging.config.MicaLoggingProperties;
 import com.taotao.cloud.logger.logging.utils.LoggingUtil;
 import org.slf4j.LoggerFactory;
@@ -67,13 +67,13 @@ public class LoggingFileAppender implements ILoggingAppender {
 
 	@Override
 	public void start(LoggerContext context) {
-		LogUtil.info("File logging start.");
+		LogUtils.info("File logging start.");
 		reload(context);
 	}
 
 	@Override
 	public void reset(LoggerContext context) {
-		LogUtil.info("File logging reset.");
+		LogUtils.info("File logging reset.");
 		reload(context);
 	}
 
@@ -128,8 +128,8 @@ public class LoggingFileAppender implements ILoggingAppender {
 	private static Encoder<ILoggingEvent> patternLayoutEncoder(LoggerContext context) {
 		final PatternLayoutEncoder encoder = new PatternLayoutEncoder();
 		encoder.setContext(context);
-		encoder.setPattern(SystemUtil.getProp(LoggingSystemProperties.FILE_LOG_PATTERN));
-		String charsetName = SystemUtil.getProp(LogbackLoggingSystemProperties.FILE_LOG_CHARSET, "default");
+		encoder.setPattern(SystemUtils.getProp(LoggingSystemProperties.FILE_LOG_PATTERN));
+		String charsetName = SystemUtils.getProp(LogbackLoggingSystemProperties.FILE_LOG_CHARSET, "default");
 		encoder.setCharset(Charset.forName(charsetName));
 		encoder.start();
 		return encoder;

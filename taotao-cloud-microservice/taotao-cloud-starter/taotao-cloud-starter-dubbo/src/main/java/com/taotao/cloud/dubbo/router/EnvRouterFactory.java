@@ -15,13 +15,11 @@
  */
 package com.taotao.cloud.dubbo.router;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.cluster.Router;
 import org.apache.dubbo.rpc.cluster.RouterFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * env路由器工厂
@@ -35,7 +33,7 @@ public class EnvRouterFactory implements RouterFactory {
  
     @Override
     public Router getRouter(URL url) {
-        LogUtil.info("启动dubbo特性环境路由");
+        LogUtils.info("启动dubbo特性环境路由");
         return new EnvRouter();
     }
 }

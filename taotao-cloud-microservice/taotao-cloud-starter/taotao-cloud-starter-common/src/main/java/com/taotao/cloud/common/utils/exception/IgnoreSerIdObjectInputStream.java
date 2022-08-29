@@ -17,7 +17,7 @@
 package com.taotao.cloud.common.utils.exception;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,7 +54,7 @@ public class IgnoreSerIdObjectInputStream extends ObjectInputStream {
 		try {
 			localClass = Class.forName(resultClassDescriptor.getName());
 		} catch (ClassNotFoundException e) {
-			LogUtil.warn("No local class for " + resultClassDescriptor.getName());
+			LogUtils.warn("No local class for " + resultClassDescriptor.getName());
 			return resultClassDescriptor;
 		}
 
@@ -65,7 +65,7 @@ public class IgnoreSerIdObjectInputStream extends ObjectInputStream {
 			long streamSerId = resultClassDescriptor.getSerialVersionUID();
 			// check for serialVersionUID mismatch.
 			if (streamSerId != localSerId) {
-				LogUtil.warn(
+				LogUtils.warn(
 					"Overriding serialized class {} version mismatch: local serialVersionUID = {} stream serialVersionUID = {}",
 					localClass, localSerId, streamSerId);
 				// Use local class descriptor for deserialization

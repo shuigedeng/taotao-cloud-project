@@ -1,6 +1,6 @@
 package com.taotao.cloud.zookeeper.model;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -71,7 +71,7 @@ public class ZkIdGenerator {
 				machinePrefix.compareAndSet("", s.substring(s.length() - 3));
 			}
 		} catch (Exception e) {
-			LogUtil.error("connect to zookeeper failed, exception is ", e);
+			LogUtils.error("connect to zookeeper failed, exception is ", e);
 		}
 	}
 

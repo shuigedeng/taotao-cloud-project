@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -50,14 +50,14 @@ public class LeaveApplyController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), LeaveApplyInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), LeaveApplyInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             LeaveApplyEntity entity = leaveApplyService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, LeaveApplyInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, LeaveApplyInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -80,7 +80,7 @@ public class LeaveApplyController {
         if (!RegexUtils.checkLeave(leaveApplyForm.getLeaveHour())) {
             return Result.fail("请假小时只能是0.5的倍数");
         }
-        LeaveApplyEntity entity = JsonUtil.getJsonToBean(leaveApplyForm, LeaveApplyEntity.class);
+        LeaveApplyEntity entity = JsonUtils.getJsonToBean(leaveApplyForm, LeaveApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(leaveApplyForm.getStatus())) {
             leaveApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -108,7 +108,7 @@ public class LeaveApplyController {
         if (!RegexUtils.checkLeave(leaveApplyForm.getLeaveHour())) {
             return Result.fail("请假小时只能是0.5的倍数");
         }
-        LeaveApplyEntity entity = JsonUtil.getJsonToBean(leaveApplyForm, LeaveApplyEntity.class);
+        LeaveApplyEntity entity = JsonUtils.getJsonToBean(leaveApplyForm, LeaveApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(leaveApplyForm.getStatus())) {
             leaveApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

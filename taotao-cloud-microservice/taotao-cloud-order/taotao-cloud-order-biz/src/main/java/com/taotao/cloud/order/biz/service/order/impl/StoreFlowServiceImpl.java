@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
@@ -73,7 +73,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
 
 		//如果查询到多条支付记录，打印日志
 		if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-			LogUtil.error("订单[{}]检测到重复付款，请处理", orderSn);
+			LogUtils.error("订单[{}]检测到重复付款，请处理", orderSn);
 		}
 
 		//获取订单促销类型,如果为促销订单则获取促销商品并获取结算价
@@ -81,12 +81,12 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
 		//循环子订单记录流水
 		for (OrderItem item : orderItems) {
 			StoreFlow storeFlow = new StoreFlow();
-			BeanUtil.copyProperties(item, storeFlow);
+			BeanUtils.copyProperties(item, storeFlow);
 
 			//入账
-			storeFlow.setId(IdGeneratorUtil.getId());
+			storeFlow.setId(IdGeneratorUtils.getId());
 			storeFlow.setFlowType(FlowTypeEnum.PAY.name());
-			storeFlow.setSn(IdGeneratorUtil.createStr("SF"));
+			storeFlow.setSn(IdGeneratorUtils.createStr("SF"));
 			storeFlow.setOrderSn(item.getOrderSn());
 			storeFlow.setOrderItemSn(item.getSn());
 			storeFlow.setStoreId(order.getStoreId());
@@ -103,7 +103,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
 			storeFlow.setDistributionRebate(item.getPriceDetailDTO().getDistributionCommission());
 			storeFlow.setBillPrice(item.getPriceDetailDTO().getBillPrice());
 			//兼容为空，以及普通订单操作
-			if (StringUtil.isNotEmpty(orderPromotionType)) {
+			if (StringUtils.isNotEmpty(orderPromotionType)) {
 				if (orderPromotionType.equals(OrderPromotionTypeEnum.NORMAL.name())) {
 					//普通订单操作
 				}
@@ -131,7 +131,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
 		StoreFlow storeFlow = new StoreFlow();
 		//退款
 		storeFlow.setFlowType(FlowTypeEnum.REFUND.name());
-		storeFlow.setSn(IdGeneratorUtil.createStr("SF"));
+		storeFlow.setSn(IdGeneratorUtils.createStr("SF"));
 		storeFlow.setRefundSn(afterSale.getSn());
 		storeFlow.setOrderSn(afterSale.getOrderSn());
 		storeFlow.setOrderItemSn(afterSale.getOrderItemSn());
@@ -152,13 +152,13 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
 		storeFlow.setCategoryId(payStoreFlow.getCategoryId());
 		//佣金
 		storeFlow.setCommissionPrice(
-			CurrencyUtil.mul(CurrencyUtil.div(payStoreFlow.getCommissionPrice(), payStoreFlow.getNum()), afterSale.getNum()));
+			CurrencyUtils.mul(CurrencyUtils.div(payStoreFlow.getCommissionPrice(), payStoreFlow.getNum()), afterSale.getNum()));
 		//分销佣金
-		storeFlow.setDistributionRebate(CurrencyUtil.mul(CurrencyUtil.div(payStoreFlow.getDistributionRebate(), payStoreFlow.getNum()), afterSale.getNum()));
+		storeFlow.setDistributionRebate(CurrencyUtils.mul(CurrencyUtils.div(payStoreFlow.getDistributionRebate(), payStoreFlow.getNum()), afterSale.getNum()));
 		//流水金额
 		storeFlow.setFinalPrice(afterSale.getActualRefundPrice());
 		//最终结算金额
-		storeFlow.setBillPrice(CurrencyUtil.add(CurrencyUtil.add(storeFlow.getFinalPrice(), storeFlow.getDistributionRebate()), storeFlow.getCommissionPrice()));
+		storeFlow.setBillPrice(CurrencyUtils.add(CurrencyUtils.add(storeFlow.getFinalPrice(), storeFlow.getDistributionRebate()), storeFlow.getCommissionPrice()));
 		//获取第三方支付流水号
 		RefundLogVO refundLog = refundLogService.queryByAfterSaleSn(afterSale.getSn());
 		storeFlow.setTransactionId(refundLog.getReceivableNo());
@@ -216,21 +216,21 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
 			StoreFlow::getDistributionRebate);
 
 		//流水类型判定
-		lambdaQueryWrapper.eq(StringUtil.isNotEmpty(storeFlowPageQuery.getType()),
+		lambdaQueryWrapper.eq(StringUtils.isNotEmpty(storeFlowPageQuery.getType()),
 			StoreFlow::getFlowType, storeFlowPageQuery.getType());
 
 		//售后编号判定
-		lambdaQueryWrapper.eq(StringUtil.isNotEmpty(storeFlowPageQuery.getRefundSn()),
+		lambdaQueryWrapper.eq(StringUtils.isNotEmpty(storeFlowPageQuery.getRefundSn()),
 			StoreFlow::getRefundSn, storeFlowPageQuery.getRefundSn());
 
 		//售后编号判定
-		lambdaQueryWrapper.eq(StringUtil.isNotEmpty(storeFlowPageQuery.getOrderSn()),
+		lambdaQueryWrapper.eq(StringUtils.isNotEmpty(storeFlowPageQuery.getOrderSn()),
 			StoreFlow::getOrderSn, storeFlowPageQuery.getOrderSn());
 
 		//结算单非空，则校对结算单参数
 		if (storeFlowPageQuery.getBill() != null) {
 			StoreFlowPageQuery.BillDTO bill = storeFlowPageQuery.getBill();
-			lambdaQueryWrapper.eq(StringUtil.isNotEmpty(bill.getStoreId()), StoreFlow::getStoreId, bill.getStoreId());
+			lambdaQueryWrapper.eq(StringUtils.isNotEmpty(bill.getStoreId()), StoreFlow::getStoreId, bill.getStoreId());
 			lambdaQueryWrapper.between(bill.getStartTime() != null && bill.getEndTime() != null,
 				StoreFlow::getCreateTime, bill.getStartTime(), bill.getEndTime());
 		}

@@ -16,7 +16,7 @@
 package com.taotao.cloud.zookeeper.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.zookeeper.model.ZkIdGenerator;
 import com.taotao.cloud.zookeeper.properties.ZookeeperProperties;
 import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
@@ -45,7 +45,7 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ZookeeperAutoConfiguration.class, StarterName.ZOOKEEPER_STARTER);
+		LogUtils.started(ZookeeperAutoConfiguration.class, StarterName.ZOOKEEPER_STARTER);
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "close")

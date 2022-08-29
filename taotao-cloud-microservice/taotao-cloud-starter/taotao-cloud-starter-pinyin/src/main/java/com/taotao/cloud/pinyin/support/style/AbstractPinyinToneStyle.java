@@ -1,6 +1,6 @@
 package com.taotao.cloud.pinyin.support.style;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.model.CharToneInfo;
 import com.taotao.cloud.pinyin.spi.IPinyinToneStyle;
 import com.taotao.cloud.pinyin.util.InnerToneHelper;
@@ -19,7 +19,7 @@ public abstract class AbstractPinyinToneStyle implements IPinyinToneStyle {
 
     @Override
     public String style(String charTone) {
-        if(StringUtil.isEmpty(charTone)) {
+        if(StringUtils.isEmpty(charTone)) {
             return charTone;
         }
 

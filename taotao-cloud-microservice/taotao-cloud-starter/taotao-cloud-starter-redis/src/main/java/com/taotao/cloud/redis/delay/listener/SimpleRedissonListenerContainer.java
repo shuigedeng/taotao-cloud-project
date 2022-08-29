@@ -2,8 +2,8 @@ package com.taotao.cloud.redis.delay.listener;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.delay.message.FastJsonCodec;
 import com.taotao.cloud.redis.delay.message.RedissonMessage;
 import java.util.Map;
@@ -53,7 +53,7 @@ public class SimpleRedissonListenerContainer extends AbstractRedissonListenerCon
 		@Override
 		public void run() {
 			if (this.status != ConsumerStatus.CREATED) {
-				LogUtil.info(
+				LogUtils.info(
 					"consumer currentThread [{}] will exit, because consumer status is {},expected is CREATED",
 					this.currentThread.getName(), this.status);
 				return;
@@ -64,7 +64,7 @@ public class SimpleRedissonListenerContainer extends AbstractRedissonListenerCon
 			final RBlockingQueue<Object> blockingQueue = redisson.getBlockingQueue(queue,
 				FastJsonCodec.INSTANCE);
 			if (blockingQueue == null) {
-				LogUtil.error("error occurred while create blockingQueue for queue [{}]", queue);
+				LogUtils.error("error occurred while create blockingQueue for queue [{}]", queue);
 				return;
 			}
 			CommandAsyncExecutor commandExecutor = redisson.getCommandExecutor();
@@ -87,9 +87,9 @@ public class SimpleRedissonListenerContainer extends AbstractRedissonListenerCon
 						System.out.println("message:" + message);
 						emptyFetchTimes = 0;
 
-						JsonNode jsonNode = JsonUtil.parse(message);
+						JsonNode jsonNode = JsonUtils.parse(message);
 						String payload = jsonNode.get("payload").toString();
-						Map<String, Object> headers = JsonUtil.readMap(jsonNode.get("headers").toString());
+						Map<String, Object> headers = JsonUtils.readMap(jsonNode.get("headers").toString());
 
 						//RedissonMessage redissonMessage = JsonUtil.(message, RedissonMessage.class);
 
@@ -100,10 +100,10 @@ public class SimpleRedissonListenerContainer extends AbstractRedissonListenerCon
 				} catch (InterruptedException | RedisException e) {
 					//ignore
 				} catch (Exception e) {
-					LogUtil.error("error occurred while take message from redisson", e);
+					LogUtils.error("error occurred while take message from redisson", e);
 				}
 				if (this.status == ConsumerStatus.STOPPED) {
-					LogUtil.info("consumer currentThread [{}] will exit, because of STOPPED status",
+					LogUtils.info("consumer currentThread [{}] will exit, because of STOPPED status",
 						this.currentThread.getName());
 					break;
 				}

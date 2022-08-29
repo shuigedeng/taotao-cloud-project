@@ -18,8 +18,8 @@ package com.taotao.cloud.web.quartz;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Date;
 import java.util.Objects;
@@ -73,14 +73,14 @@ public class QuartzManager {
 			}
 
 			// 添加日志
-			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 			if (Objects.nonNull(redisRepository)) {
 				redisRepository.send(RedisConstant.QUARTZ_JOB_ADD_TOPIC, quartzJobModel);
 			}
 
-			LogUtil.info("添加Quartz定时任务成功");
+			LogUtils.info("添加Quartz定时任务成功");
 		} catch (Exception e) {
-			LogUtil.error("创建定时任务失败", e);
+			LogUtils.error("创建定时任务失败", e);
 			throw new QuartzExecutionExecution("创建定时任务失败");
 		}
 	}
@@ -115,12 +115,12 @@ public class QuartzManager {
 				pauseJob(quartzJobModel);
 			}
 
-			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 			if (Objects.nonNull(redisRepository)) {
 				redisRepository.send(RedisConstant.QUARTZ_JOB_UPDATE_CRON_TOPIC, quartzJobModel);
 			}
 		} catch (Exception e) {
-			LogUtil.error("更新定时任务失败", e);
+			LogUtils.error("更新定时任务失败", e);
 			throw new QuartzExecutionExecution("更新定时任务失败");
 		}
 	}
@@ -134,12 +134,12 @@ public class QuartzManager {
 			scheduler.pauseJob(jobKey);
 			scheduler.deleteJob(jobKey);
 
-			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 			if (Objects.nonNull(redisRepository)) {
 				redisRepository.send(RedisConstant.QUARTZ_JOB_DELETE_TOPIC, quartzJobModel);
 			}
 		} catch (Exception e) {
-			LogUtil.error("删除定时任务失败", e);
+			LogUtils.error("删除定时任务失败", e);
 			throw new QuartzExecutionExecution("删除定时任务失败");
 		}
 	}
@@ -159,12 +159,12 @@ public class QuartzManager {
 			scheduler.resumeJob(jobKey);
 			quartzJobModel.setPause(!quartzJobModel.isPause());
 
-			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 			if (Objects.nonNull(redisRepository)) {
 				redisRepository.send(RedisConstant.QUARTZ_JOB_RESUME_TOPIC, quartzJobModel);
 			}
 		} catch (Exception e) {
-			LogUtil.error("恢复定时任务失败", e);
+			LogUtils.error("恢复定时任务失败", e);
 			throw new QuartzExecutionExecution("恢复定时任务失败");
 		}
 	}
@@ -185,12 +185,12 @@ public class QuartzManager {
 			JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJobModel.getId());
 			scheduler.triggerJob(jobKey, dataMap);
 
-			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 			if (Objects.nonNull(redisRepository)) {
 				redisRepository.send(RedisConstant.QUARTZ_JOB_RUN_NOW_TOPIC, quartzJobModel);
 			}
 		} catch (Exception e) {
-			LogUtil.error("定时任务执行失败", e);
+			LogUtils.error("定时任务执行失败", e);
 			throw new QuartzExecutionExecution("定时任务执行失败");
 		}
 	}
@@ -203,12 +203,12 @@ public class QuartzManager {
 			JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJobModel.getId());
 			scheduler.pauseJob(jobKey);
 
-			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 			if (Objects.nonNull(redisRepository)) {
 				redisRepository.send(RedisConstant.QUARTZ_JOB_PAUSE_TOPIC, quartzJobModel);
 			}
 		} catch (Exception e) {
-			LogUtil.error("定时任务暂停失败", e);
+			LogUtils.error("定时任务暂停失败", e);
 			throw new QuartzExecutionExecution("定时任务暂停失败");
 		}
 	}

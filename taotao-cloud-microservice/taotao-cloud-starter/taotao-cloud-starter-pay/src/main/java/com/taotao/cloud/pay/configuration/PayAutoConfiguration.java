@@ -1,7 +1,7 @@
 package com.taotao.cloud.pay.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.pay.configurers.DefalutPayMessageConfigurer;
 import com.taotao.cloud.pay.configurers.MerchantDetailsServiceConfigurer;
 import com.taotao.cloud.pay.configurers.PayMessageConfigurer;
@@ -20,7 +20,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 /**
@@ -41,12 +40,12 @@ public class PayAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(PayAutoConfiguration.class, StarterName.PAY_STARTER);
+		LogUtils.started(PayAutoConfiguration.class, StarterName.PAY_STARTER);
 	}
 
 	@Autowired
 	public void loadPaymentPlatforms(List<PaymentPlatform> platforms) {
-		LogUtil.started(PaymentPlatform.class, StarterName.PAY_STARTER);
+		LogUtils.started(PaymentPlatform.class, StarterName.PAY_STARTER);
 		for (PaymentPlatform platform : platforms) {
 			PaymentPlatforms.loadPaymentPlatform(platform);
 		}
@@ -56,7 +55,7 @@ public class PayAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean(MerchantDetailsServiceConfigurer.class)
 	@ConditionalOnBean(PayServiceConfigurer.class)
 	public MerchantDetailsServiceConfigurer detailsServiceConfigurer() {
-		LogUtil.started(MerchantDetailsServiceConfigurer.class, StarterName.PAY_STARTER);
+		LogUtils.started(MerchantDetailsServiceConfigurer.class, StarterName.PAY_STARTER);
 
 		return new MerchantDetailsServiceConfigurer();
 	}
@@ -67,7 +66,7 @@ public class PayAutoConfiguration implements InitializingBean {
 	protected MerchantDetailsService configure(PayServiceConfigurer configurer,
 		MerchantDetailsServiceConfigurer merchantDetails,
 		PayMessageConfigurer payMessageConfigurer) {
-		LogUtil.started(MerchantDetailsService.class, StarterName.PAY_STARTER);
+		LogUtils.started(MerchantDetailsService.class, StarterName.PAY_STARTER);
 
 		configurer.configure(merchantDetails);
 		configurer.configure(payMessageConfigurer);
@@ -80,7 +79,7 @@ public class PayAutoConfiguration implements InitializingBean {
 	@ConditionalOnBean(MerchantDetailsService.class)
 	@ConditionalOnMissingBean(PayServiceManager.class)
 	public PayServiceManager payServiceManager() {
-		LogUtil.started(PayServiceManager.class, StarterName.PAY_STARTER);
+		LogUtils.started(PayServiceManager.class, StarterName.PAY_STARTER);
 
 		return new MerchantPayServiceManager();
 	}
@@ -89,7 +88,7 @@ public class PayAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean(PayMessageConfigurer.class)
 	public PayMessageConfigurer messageHandlerConfigurer() {
-		LogUtil.started(PayMessageConfigurer.class, StarterName.PAY_STARTER);
+		LogUtils.started(PayMessageConfigurer.class, StarterName.PAY_STARTER);
 
 		return new DefalutPayMessageConfigurer();
 	}

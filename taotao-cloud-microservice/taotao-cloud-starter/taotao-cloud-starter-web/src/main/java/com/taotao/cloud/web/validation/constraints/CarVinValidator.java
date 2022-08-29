@@ -2,7 +2,7 @@ package com.taotao.cloud.web.validation.constraints;
 
 import cn.hutool.core.lang.Validator;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -24,7 +24,7 @@ public class CarVinValidator implements ConstraintValidator<CarVin, String> {
 	
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isNotBlank(value)) {
+		if (StringUtils.isNotBlank(value)) {
 			return Validator.isCarVin(value);
 		}
 

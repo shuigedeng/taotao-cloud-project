@@ -18,7 +18,7 @@ package com.taotao.cloud.jetcache.enhance;
 
 import cn.hutool.crypto.SecureUtil;
 import com.alicp.jetcache.Cache;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.util.concurrent.Callable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -81,7 +81,7 @@ public class JetCacheSpringCache extends AbstractValueAdaptingCache {
 		Object value = cache.get(secure);
 		if (ObjectUtils.isNotEmpty(value)) {
 			log.trace("CACHE - Lookup data in  cache, value is : [{}]",
-				JsonUtil.toJson(value));
+				JsonUtils.toJson(value));
 			return value;
 		}
 

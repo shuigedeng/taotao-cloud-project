@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 package com.taotao.cloud.sms.common.web;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.sms.common.exception.VerificationCodeIsNullException;
 import com.taotao.cloud.sms.common.exception.VerifyFailException;
 import com.taotao.cloud.sms.common.model.NoticeInfo;
@@ -69,7 +69,7 @@ public class SmsController {
 										  @RequestParam(value = "identificationCode", required = false, defaultValue = "") String identificationCode) {
 		String code = verificationCodeService.find(phone, identificationCode);
 
-		if (StringUtil.isBlank(code)) {
+		if (StringUtils.isBlank(code)) {
 			throw new VerificationCodeIsNullException();
 		}
 

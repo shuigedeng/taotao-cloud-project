@@ -17,7 +17,7 @@ package com.taotao.cloud.springdoc.configuration;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.springdoc.properties.SpringdocProperties;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
@@ -70,7 +70,7 @@ public class SpringdocAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(SpringdocAutoConfiguration.class, StarterName.SPRINGDOC_STARTER);
+		LogUtils.started(SpringdocAutoConfiguration.class, StarterName.SPRINGDOC_STARTER);
 	}
 
 	@Bean

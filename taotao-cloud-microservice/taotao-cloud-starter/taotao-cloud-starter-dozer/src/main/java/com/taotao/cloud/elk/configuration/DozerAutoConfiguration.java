@@ -18,7 +18,7 @@ package com.taotao.cloud.elk.configuration;
 import com.github.dozermapper.core.Mapper;
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.elk.helper.DozerHelper;
 import com.taotao.cloud.elk.properties.DozerProperties;
 import org.springframework.beans.factory.InitializingBean;
@@ -49,7 +49,7 @@ public class DozerAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DozerAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(DozerAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean

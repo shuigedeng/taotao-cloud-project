@@ -1,6 +1,6 @@
 package com.taotao.cloud.redis.redisson.handle.impl;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.redisson.handle.RedisDelayQueueHandle;
 import java.util.Map;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class OrderTimeoutNotEvaluated implements RedisDelayQueueHandle {
 			Long delayTime = now - timestamp;
 			Long random = Long.valueOf(String.valueOf(map.get("random")));
 			Long diffTime = delayTime - random * 1000;
-			LogUtil.info("(OrderTimeoutNotEvaluated) orderId：{}, 预计延迟时间：{} 秒，实际延迟时间：{} 毫秒，相差：{} 毫秒",
+			LogUtils.info("(OrderTimeoutNotEvaluated) orderId：{}, 预计延迟时间：{} 秒，实际延迟时间：{} 毫秒，相差：{} 毫秒",
 				map.get("orderId"), random, delayTime, diffTime);
 		}
 

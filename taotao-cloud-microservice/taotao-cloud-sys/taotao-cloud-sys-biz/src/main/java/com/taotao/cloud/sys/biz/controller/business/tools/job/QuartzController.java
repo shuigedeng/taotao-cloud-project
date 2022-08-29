@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.controller.business.tools.job;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
@@ -89,7 +89,7 @@ public class QuartzController {
 		throws IOException {
 		List<QuartzJob> quartzJobs = quartzJobService.queryAll(criteria);
 		List<QuartzJobDto> collect = quartzJobs.stream().filter(Objects::nonNull)
-			.map(e -> BeanUtil.copyProperties(e, QuartzJobDto.class))
+			.map(e -> BeanUtils.copyProperties(e, QuartzJobDto.class))
 			.collect(Collectors.toList());
 
 		quartzJobService.download(collect, response);
@@ -103,7 +103,7 @@ public class QuartzController {
 		throws IOException {
 		List<QuartzLog> quartzLogs = quartzLogService.queryAll(criteria);
 		List<QuartzLogDto> collect = quartzLogs.stream().filter(Objects::nonNull)
-			.map(e -> BeanUtil.copyProperties(e, QuartzLogDto.class))
+			.map(e -> BeanUtils.copyProperties(e, QuartzLogDto.class))
 			.collect(Collectors.toList());
 
 		quartzLogService.download(collect, response);
@@ -129,7 +129,7 @@ public class QuartzController {
 			throw new BusinessException("A new " + ENTITY_NAME + " cannot already have an ID");
 		}
 		QuartzJob job = new QuartzJob();
-		BeanUtil.copyProperties(jobModel, job);
+		BeanUtils.copyProperties(jobModel, job);
 		return Result.success(quartzJobService.save(job));
 	}
 
@@ -140,7 +140,7 @@ public class QuartzController {
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> update(@Validated @RequestBody QuartzJobModel jobModel) {
 		QuartzJob job = new QuartzJob();
-		BeanUtil.copyProperties(jobModel, job);
+		BeanUtils.copyProperties(jobModel, job);
 		quartzJobService.updateById(job);
 		return Result.success(true);
 	}

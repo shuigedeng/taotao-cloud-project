@@ -16,7 +16,7 @@
 package com.taotao.cloud.gateway.springcloud.error;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -58,7 +58,7 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 	protected Map<String, Object> getErrorAttributes(ServerRequest request,
 		boolean includeStackTrace) {
 		Throwable error = super.getError(request);
-		LogUtil.error(error.getMessage(), error);
+		LogUtils.error(error.getMessage(), error);
 		return responseError(error.getMessage());
 	}
 
@@ -67,11 +67,11 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 		ErrorAttributeOptions options) {
 		Throwable error = super.getError(request);
 
-		LogUtil.error(
+		LogUtils.error(
 			"请求发生异常，请求URI：{}，请求方法：{}，异常信息：{}",
 			request.path(), request.methodName(), error.getMessage()
 		);
-		LogUtil.error(error.getMessage(), error);
+		LogUtils.error(error.getMessage(), error);
 
 		String errorMessage;
 		if (error instanceof NotFoundException) {

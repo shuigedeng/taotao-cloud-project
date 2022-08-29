@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
 import com.taotao.cloud.operation.api.web.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.web.vo.ArticleVO;
@@ -62,7 +62,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 	@Override
 	public Article updateArticle(Article article) {
 		Article oldArticle = this.getById(article.getId());
-		BeanUtil.copyProperties(article, oldArticle);
+		BeanUtils.copyProperties(article, oldArticle);
 		this.updateById(oldArticle);
 		return oldArticle;
 	}

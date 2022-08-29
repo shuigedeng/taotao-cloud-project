@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.websocket.interceptor;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.websocket.domain.WebSocketPrincipal;
 import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
 import javax.servlet.http.HttpSession;
@@ -77,7 +77,7 @@ public class WebSocketChannelInterceptor implements ChannelInterceptor {
 			 * 2. 例如可以在这里拿到前端的信息进行登录鉴权
 			 */
 			WebSocketPrincipal principal = (WebSocketPrincipal) accessor.getUser();
-			LogUtil.debug("Authentication user [{}], Token from frontend is [{}].",
+			LogUtils.debug("Authentication user [{}], Token from frontend is [{}].",
 				principal, token);
 		}
 

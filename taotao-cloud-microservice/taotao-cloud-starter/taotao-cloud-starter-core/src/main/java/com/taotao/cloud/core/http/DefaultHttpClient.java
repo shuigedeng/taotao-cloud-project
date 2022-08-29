@@ -17,7 +17,7 @@ package com.taotao.cloud.core.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.taotao.cloud.common.model.Callable;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import java.io.IOException;
 import java.net.URI;
@@ -25,8 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import okhttp3.MediaType;
-import org.apache.commons.codec.Charsets;
+
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -242,13 +241,13 @@ public class DefaultHttpClient implements HttpClient {
 	@Override
 	public <T> T get(String uri, TypeReference<T> ref) {
 		String rsp = this.get(uri);
-		return JsonUtil.toObject(rsp, ref);
+		return JsonUtils.toObject(rsp, ref);
 	}
 
 	@Override
 	public <T> T get(String uri, Params params, TypeReference<T> ref) {
 		String rsp = this.get(uri, params);
-		return JsonUtil.toObject(rsp, ref);
+		return JsonUtils.toObject(rsp, ref);
 	}
 
 	/**
@@ -287,7 +286,7 @@ public class DefaultHttpClient implements HttpClient {
 	@Override
 	public <T> T post(String uri, Params params, TypeReference<T> ref) {
 		String rsp = this.post(uri, params);
-		return JsonUtil.toObject(rsp, ref);
+		return JsonUtils.toObject(rsp, ref);
 	}
 
 	/**
@@ -323,7 +322,7 @@ public class DefaultHttpClient implements HttpClient {
 
 	public <T> T patch(String uri, Params params, TypeReference<T> ref) {
 		String rsp = this.put(uri, params);
-		return JsonUtil.toObject(rsp, ref);
+		return JsonUtils.toObject(rsp, ref);
 	}
 
 	/**
@@ -361,7 +360,7 @@ public class DefaultHttpClient implements HttpClient {
 	@Override
 	public <T> T put(String uri, Params params, TypeReference<T> ref) {
 		String rsp = this.put(uri, params);
-		return JsonUtil.toObject(rsp, ref);
+		return JsonUtils.toObject(rsp, ref);
 	}
 
 	/**
@@ -399,7 +398,7 @@ public class DefaultHttpClient implements HttpClient {
 	@Override
 	public <T> T delete(String uri, TypeReference<T> ref) {
 		String rsp = this.delete(uri);
-		return JsonUtil.toObject(rsp, ref);
+		return JsonUtils.toObject(rsp, ref);
 	}
 
 	@Override
@@ -410,7 +409,7 @@ public class DefaultHttpClient implements HttpClient {
 	@Override
 	public <T> T delete(String uri, Params params, TypeReference<T> ref) {
 		String rsp = this.delete(uri, params);
-		return JsonUtil.toObject(rsp, ref);
+		return JsonUtils.toObject(rsp, ref);
 	}
 
 	/**

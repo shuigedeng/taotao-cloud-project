@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -49,14 +49,14 @@ public class ApplyBanquetController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), ApplyBanquetInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ApplyBanquetInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ApplyBanquetEntity entity = applyBanquetService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, ApplyBanquetInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, ApplyBanquetInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -79,7 +79,7 @@ public class ApplyBanquetController {
         if (applyBanquetForm.getExpectedCost() != null && !RegexUtils.checkDecimals2(String.valueOf(applyBanquetForm.getExpectedCost()))) {
             return Result.fail("预计费用必须大于0，最多只能有两位小数");
         }
-        ApplyBanquetEntity entity = JsonUtil.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
+        ApplyBanquetEntity entity = JsonUtils.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyBanquetForm.getStatus())) {
             applyBanquetService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -107,7 +107,7 @@ public class ApplyBanquetController {
         if (applyBanquetForm.getExpectedCost() != null && !RegexUtils.checkDecimals2(String.valueOf(applyBanquetForm.getExpectedCost()))) {
             return Result.fail("预计费用必须大于0，最多只能有两位小数");
         }
-        ApplyBanquetEntity entity = JsonUtil.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
+        ApplyBanquetEntity entity = JsonUtils.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyBanquetForm.getStatus())) {
             applyBanquetService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

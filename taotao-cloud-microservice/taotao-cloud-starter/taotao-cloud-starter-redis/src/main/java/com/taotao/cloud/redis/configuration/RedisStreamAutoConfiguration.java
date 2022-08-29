@@ -19,9 +19,9 @@ package com.taotao.cloud.redis.configuration;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.CharPool;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.io.net.INetUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.io.NetUtils;
 import com.taotao.cloud.redis.properties.CacheProperties;
 import com.taotao.cloud.redis.stream.DefaultRStreamTemplate;
 import com.taotao.cloud.redis.stream.RStreamListenerDetector;
@@ -56,7 +56,7 @@ public class RedisStreamAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RedisStreamAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisStreamAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@Bean
@@ -109,17 +109,17 @@ public class RedisStreamAutoConfiguration implements InitializingBean {
 
 		// 消费组名称
 		String consumerGroup = streamProperties.getConsumerGroup();
-		if (StringUtil.isBlank(consumerGroup)) {
+		if (StringUtils.isBlank(consumerGroup)) {
 			String appName = environment.getRequiredProperty(CommonConstant.SPRING_APP_NAME_KEY);
 			String profile = environment.getProperty(CommonConstant.ACTIVE_PROFILES_PROPERTY);
 			consumerGroup =
-				StringUtil.isBlank(profile) ? appName : appName + CharPool.COLON + profile;
+				StringUtils.isBlank(profile) ? appName : appName + CharPool.COLON + profile;
 		}
 
 		// 消费者名称
 		String consumerName = streamProperties.getConsumerName();
-		if (StringUtil.isBlank(consumerName)) {
-			final StringBuilder consumerNameBuilder = new StringBuilder(INetUtil.getHostIp());
+		if (StringUtils.isBlank(consumerName)) {
+			final StringBuilder consumerNameBuilder = new StringBuilder(NetUtils.getHostIp());
 			serverPropertiesObjectProvider.ifAvailable(serverProperties -> {
 				consumerNameBuilder.append(CharPool.COLON).append(serverProperties.getPort());
 			});

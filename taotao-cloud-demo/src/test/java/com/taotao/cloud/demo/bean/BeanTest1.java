@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.bean;
 
 
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class BeanTest1 {
 		Class<?> clazz = Test2.class;
 		TestN1 testN1 = new TestN1();
 		testN1.setList(list);
-		TestN2 testN2 = BeanUtil.copy(testN1, TestN2.class);
+		TestN2 testN2 = BeanUtils.copy(testN1, TestN2.class);
 		System.out.println(testN2);
 
 //		ResolvableType.forMethodParameter(writeMethod, 0)

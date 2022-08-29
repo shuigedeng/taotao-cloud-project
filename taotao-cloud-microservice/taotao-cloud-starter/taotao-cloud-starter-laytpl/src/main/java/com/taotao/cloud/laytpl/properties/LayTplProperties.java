@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.laytpl.properties;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -57,19 +57,19 @@ public class LayTplProperties {
 	/**
 	 * Date 日期格式化，默认："yyyy-MM-dd HH:mm:ss"
 	 */
-	private String datePattern = DateUtil.PATTERN_DATETIME;
+	private String datePattern = DateUtils.PATTERN_DATETIME;
 	/**
 	 * java8 LocalTime时间格式化，默认："HH:mm:ss"
 	 */
-	private String localTimePattern = DateUtil.PATTERN_TIME;
+	private String localTimePattern = DateUtils.PATTERN_TIME;
 	/**
 	 * java8 LocalDate日期格式化，默认："yyyy-MM-dd"
 	 */
-	private String localDatePattern = DateUtil.PATTERN_DATE;
+	private String localDatePattern = DateUtils.PATTERN_DATE;
 	/**
 	 * java8 LocalDateTime日期时间格式化，默认："yyyy-MM-dd HH:mm:ss"
 	 */
-	private String localDateTimePattern = DateUtil.PATTERN_DATETIME;
+	private String localDateTimePattern = DateUtils.PATTERN_DATETIME;
 
 	public String getOpen() {
 		return open;

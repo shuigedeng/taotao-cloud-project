@@ -17,13 +17,12 @@
 package com.taotao.cloud.kafka.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.kafka.properties.KafkaProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Kafka 自动化配置
@@ -39,7 +38,7 @@ public class KafkaAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(KafkaAutoConfiguration.class, StarterName.KAFKA_STARTER);
+		LogUtils.started(KafkaAutoConfiguration.class, StarterName.KAFKA_STARTER);
 	}
 
 

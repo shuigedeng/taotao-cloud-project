@@ -2,7 +2,7 @@ package com.taotao.cloud.demo.utils;
 
 import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class JsonNodeTest {
 	@Test
 	public void test() {
 		String json = "123123";
-		JsonNode jsonNode = JsonUtil.readTree(json);
+		JsonNode jsonNode = JsonUtils.readTree(json);
 
 		Assert.assertEquals(jsonNode.toString(), json);
 	}
@@ -25,7 +25,7 @@ public class JsonNodeTest {
 	@Test
 	public void test1() {
 		String json = "{\"code\":1}";
-		JsonNode jsonNode = JsonUtil.readTree(json);
+		JsonNode jsonNode = JsonUtils.readTree(json);
 
 		//R<?> r = JsonUtil.getInstance().convertValue(jsonNode, R.class);
 		//
@@ -35,15 +35,15 @@ public class JsonNodeTest {
 	@Test
 	public void test2() {
 		String json1 = "1{\"code\":1}";
-		boolean isJson1 = JsonUtil.isValidJson(json1);
+		boolean isJson1 = JsonUtils.isValidJson(json1);
 		Assert.assertFalse(isJson1);
 
 		String json2 = "/**/{\"code\":1}";
-		boolean isJson2 = JsonUtil.isValidJson(json2);
+		boolean isJson2 = JsonUtils.isValidJson(json2);
 		Assert.assertFalse(isJson2);
 
 		String json3 = "{\"code\":1}";
-		boolean isJson3 = JsonUtil.isValidJson(json3);
+		boolean isJson3 = JsonUtils.isValidJson(json3);
 		Assert.assertTrue(isJson3);
 	}
 
@@ -54,7 +54,7 @@ public class JsonNodeTest {
 		bean.setDate(date);
 
 		String dateTime = DateUtil.formatDateTime(date);
-		TestBean testBean = JsonUtil.readValue(JsonUtil.toJson(bean), TestBean.class);
+		TestBean testBean = JsonUtils.readValue(JsonUtils.toJson(bean), TestBean.class);
 		Assert.assertEquals(dateTime, DateUtil.formatDateTime(testBean.getDate()));
 	}
 

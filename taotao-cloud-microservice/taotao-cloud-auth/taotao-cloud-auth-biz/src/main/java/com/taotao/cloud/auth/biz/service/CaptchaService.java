@@ -17,8 +17,8 @@ package com.taotao.cloud.auth.biz.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.common.CaptchaUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.common.CaptchaUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.auth.biz.exception.CloudAuthenticationException;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
@@ -49,10 +49,10 @@ public class CaptchaService {
 	private RedisRepository redisRepository;
 
 	public ArithmeticCaptcha getCaptcha(HttpServletRequest request) {
-		ArithmeticCaptcha captcha = CaptchaUtil.getArithmeticCaptcha();
+		ArithmeticCaptcha captcha = CaptchaUtils.getArithmeticCaptcha();
 		String text = captcha.text();
 
-		Map<String, String> params = RequestUtil.getAllRequestParam(request);
+		Map<String, String> params = RequestUtils.getAllRequestParam(request);
 		String t = params.get(PARAM_T);
 
 		redisRepository

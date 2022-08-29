@@ -17,12 +17,11 @@ package com.taotao.cloud.logger.service.impl;
 
 import com.google.common.base.Stopwatch;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -61,10 +60,10 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 	@Override
 	public void save(RequestLogger requestLogger) {
 		if (Objects.nonNull(kafkaTemplate)) {
-			String request = JsonUtil.toJSONString(requestLogger);
+			String request = JsonUtils.toJSONString(requestLogger);
 
 			ListenableFuture<SendResult<String, String>> future = kafkaTemplate
-				.send(REQUEST_LOG_TOPIC + PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY), request);
+				.send(REQUEST_LOG_TOPIC + PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY), request);
 
 			future.addCallback(new ListenableFutureCallback<>() {
 				@Override
@@ -95,7 +94,7 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 		long lastMinute = lastSuccessStopwatch.elapsed(TimeUnit.MINUTES);
 		long lastHour = lastSuccessStopwatch.elapsed(TimeUnit.HOURS);
 
-		LogUtil.info("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "请求日志消息发送成功", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		LogUtils.info("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "请求日志消息发送成功", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
 		lastSuccessStopwatch.reset().start();
 	}
 
@@ -108,7 +107,7 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 		long lastMinute = lastErrorStopwatch.elapsed(TimeUnit.MINUTES);
 		long lastHour = lastErrorStopwatch.elapsed(TimeUnit.HOURS);
 
-		LogUtil.error("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "请求日志发送远程记录失败", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
+		LogUtils.error("KafkaRequestLogger [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "请求日志发送远程记录失败", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
 		lastErrorStopwatch.reset().start();
 	}
 }

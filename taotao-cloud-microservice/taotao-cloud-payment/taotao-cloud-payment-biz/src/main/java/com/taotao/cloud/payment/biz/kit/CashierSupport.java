@@ -5,7 +5,7 @@ import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.feign.IFeignMemberWalletService;
 import com.taotao.cloud.payment.api.enums.PaymentClientEnum;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
@@ -65,7 +65,7 @@ public class CashierSupport {
 
 		//获取支付插件
 		Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
-		LogUtil.info("支付请求：客户端：{},支付类型：{},请求：{}", paymentClientEnum.name(),
+		LogUtils.info("支付请求：客户端：{},支付类型：{},请求：{}", paymentClientEnum.name(),
 			paymentMethodEnum.name(), payParam.toString());
 
 		//支付方式调用
@@ -114,7 +114,7 @@ public class CashierSupport {
 	public void callback(PaymentMethodEnum paymentMethodEnum,
 		HttpServletRequest request) {
 
-		LogUtil.info("支付回调：支付类型：{}", paymentMethodEnum.name());
+		LogUtils.info("支付回调：支付类型：{}", paymentMethodEnum.name());
 
 		//获取支付插件
 		Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
@@ -129,7 +129,7 @@ public class CashierSupport {
 	public void notify(PaymentMethodEnum paymentMethodEnum,
 		HttpServletRequest request) {
 
-		LogUtil.info("支付异步通知：支付类型：{}", paymentMethodEnum.name());
+		LogUtils.info("支付异步通知：支付类型：{}", paymentMethodEnum.name());
 
 		//获取支付插件
 		Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
@@ -165,7 +165,7 @@ public class CashierSupport {
 			cashierParam.setAutoCancel(cashierParam.getCreateTime().getTime() + minute * 1000 * 60);
 			return cashierParam;
 		}
-		LogUtil.error("错误的支付请求:{}", payParam.toString());
+		LogUtils.error("错误的支付请求:{}", payParam.toString());
 		throw new BusinessException(ResultEnum.PAY_CASHIER_ERROR);
 	}
 

@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.kit.core.kit;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 
 import javax.crypto.Cipher;
 import java.io.ByteArrayOutputStream;
@@ -87,7 +87,7 @@ public class RsaKit {
             RSAPublicKeySpec keySpec = new RSAPublicKeySpec(b1, b2);
             return (RSAPublicKey) keyFactory.generatePublic(keySpec);
         } catch (Exception e) {
-			LogUtil.error("使用模和指数生成RSA公钥错误",e);
+			LogUtils.error("使用模和指数生成RSA公钥错误",e);
             return null;
         }
     }

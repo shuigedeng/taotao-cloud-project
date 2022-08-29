@@ -3,7 +3,7 @@ package com.taotao.cloud.third.client.support.retrofit.config;
 import com.github.lianjiatech.retrofit.spring.boot.core.Constants;
 import com.github.lianjiatech.retrofit.spring.boot.core.SourceOkHttpClientRegistrar;
 import com.github.lianjiatech.retrofit.spring.boot.core.SourceOkHttpClientRegistry;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import okhttp3.OkHttpClient;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ public class CustomSourceOkHttpClientRegistrar implements SourceOkHttpClientRegi
          // 替换默认的SourceOkHttpClient
          registry.register(Constants.DEFAULT_SOURCE_OK_HTTP_CLIENT, new OkHttpClient.Builder()
                  .addInterceptor(chain -> {
-                    LogUtil.info("============替换默认的SourceOkHttpClient=============");
+                    LogUtils.info("============替换默认的SourceOkHttpClient=============");
                     return chain.proceed(chain.request());
                  })
                  .build());
@@ -23,7 +23,7 @@ public class CustomSourceOkHttpClientRegistrar implements SourceOkHttpClientRegi
          // 添加新的SourceOkHttpClient
          registry.register("testSourceOkHttpClient", new OkHttpClient.Builder()
                  .addInterceptor(chain -> {
-	                 LogUtil.info("============使用testSourceOkHttpClient=============");
+	                 LogUtils.info("============使用testSourceOkHttpClient=============");
                     return chain.proceed(chain.request());
                  })
                  .build());

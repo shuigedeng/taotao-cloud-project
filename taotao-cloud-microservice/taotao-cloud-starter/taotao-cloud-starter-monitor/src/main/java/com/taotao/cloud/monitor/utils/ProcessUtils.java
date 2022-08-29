@@ -17,7 +17,7 @@ package com.taotao.cloud.monitor.utils;
 
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;
@@ -113,7 +113,7 @@ public class ProcessUtils {
 
 			return result.toString();
 		} catch (Exception e) {
-			LogUtil.error(StarterName.MONITOR_STARTER, "execCmd", e);
+			LogUtils.error(StarterName.MONITOR_STARTER, "execCmd", e);
 		} finally {
 			closeStream(bufferIn);
 			// 销毁子进程
@@ -137,7 +137,7 @@ public class ProcessUtils {
 			try {
 				stream.close();
 			} catch (Exception e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 		}
 	}

@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.check.impl;
 
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.lang.CharUtil;
-import com.taotao.cloud.common.utils.common.RegexUtil;
+import com.taotao.cloud.common.utils.lang.CharUtils;
+import com.taotao.cloud.common.utils.common.RegexUtils;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
 import com.taotao.cloud.core.sensitive.word.support.check.ISensitiveCheck;
@@ -39,7 +39,7 @@ public class SensitiveCheckEmail implements ISensitiveCheck {
             char mappingChar = Instances.singleton(CharFormatChain.class)
                     .format(currentChar, context);
 
-            if(CharUtil.isEmilChar(mappingChar)) {
+            if(CharUtils.isEmilChar(mappingChar)) {
                 lengthCount++;
                 stringBuilder.append(currentChar);
 
@@ -66,7 +66,7 @@ public class SensitiveCheckEmail implements ISensitiveCheck {
      * @since 0.0.9
      */
     private boolean isCondition(final String string) {
-        return RegexUtil.isEmail(string);
+        return RegexUtils.isEmail(string);
     }
 
 }

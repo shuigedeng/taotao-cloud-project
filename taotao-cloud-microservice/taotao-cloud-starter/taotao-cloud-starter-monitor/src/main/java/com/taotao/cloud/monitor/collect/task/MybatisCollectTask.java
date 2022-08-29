@@ -16,7 +16,7 @@
 package com.taotao.cloud.monitor.collect.task;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.monitor.annotation.FieldReport;
@@ -79,8 +79,8 @@ public class MybatisCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

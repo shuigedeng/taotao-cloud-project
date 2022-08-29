@@ -17,7 +17,7 @@ package com.taotao.cloud.web.quartz;
 
 import static com.taotao.cloud.web.configuration.QuartzAutoConfiguration.EXECUTOR;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Objects;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.annotation.Async;
@@ -81,7 +81,7 @@ public class QuartzExecutionJob extends QuartzJobBean {
 		QuartzRunnable task = null;
 		// 执行任务
 		try {
-			LogUtil.info("任务准备执行，任务名称：{}", quartzJobModel.getJobName());
+			LogUtils.info("任务准备执行，任务名称：{}", quartzJobModel.getJobName());
 			task = new QuartzRunnable(
 				quartzJobModel.getBeanName(),
 				quartzJobModel.getMethodName(),
@@ -89,7 +89,7 @@ public class QuartzExecutionJob extends QuartzJobBean {
 
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
-			LogUtil.error(e);
+			LogUtils.error(e);
 		}
 
 		if (Objects.nonNull(task)) {

@@ -12,7 +12,7 @@
  */
 package com.taotao.cloud.sms.common.service.impl;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.sms.common.exception.PhoneIsNullException;
 import com.taotao.cloud.sms.common.exception.RetryTimeShortException;
 import com.taotao.cloud.sms.common.exception.TypeIsNullException;
@@ -67,7 +67,7 @@ public class DefaultVerificationCodeService implements VerificationCodeService {
 
 	@Override
 	public String find(String phone, String identificationCode) {
-		if (StringUtil.isBlank(phone)) {
+		if (StringUtils.isBlank(phone)) {
 			return null;
 		}
 
@@ -89,7 +89,7 @@ public class DefaultVerificationCodeService implements VerificationCodeService {
 
 	@Override
 	public void send(String tempPhone, @Nullable String type) {
-		String phone = StringUtil.trimToNull(tempPhone);
+		String phone = StringUtils.trimToNull(tempPhone);
 
 		if (phone == null) {
 			throw new PhoneIsNullException();
@@ -186,7 +186,7 @@ public class DefaultVerificationCodeService implements VerificationCodeService {
 
 	@Override
 	public boolean verify(String phone, String code, @Nullable String identificationCode) {
-		if (StringUtil.isAnyBlank(phone, code)) {
+		if (StringUtils.isAnyBlank(phone, code)) {
 			return false;
 		}
 

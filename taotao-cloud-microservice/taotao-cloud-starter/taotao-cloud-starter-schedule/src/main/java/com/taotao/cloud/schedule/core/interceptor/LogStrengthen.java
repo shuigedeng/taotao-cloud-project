@@ -2,7 +2,7 @@ package com.taotao.cloud.schedule.core.interceptor;
 
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.schedule.common.annotation.ScheduledInterceptorOrder;
 import com.taotao.cloud.schedule.common.utils.proxy.Point;
@@ -55,7 +55,7 @@ public class LogStrengthen implements BaseStrengthen {
 		scheduledLogModel.computingTime();
 
 		// 发送日志到redis  sys模块消费存入数据库
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if(redisRepository != null) {
 			redisRepository.send(RedisConstant.SCHEDULED_JOB_LOG_ADD_TOPIC, scheduledLogModel);
 		}
@@ -93,7 +93,7 @@ public class LogStrengthen implements BaseStrengthen {
 		scheduledLogModel.generateFileName();
 
 		// 发送日志到redis  sys模块消费存入数据库
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if(redisRepository != null) {
 			redisRepository.send(RedisConstant.SCHEDULED_JOB_LOG_ADD_TOPIC, scheduledLogModel);
 		}

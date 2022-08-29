@@ -17,9 +17,9 @@ package com.taotao.cloud.core.runner;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PropertyCache;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.properties.CoreProperties;
 import java.util.Map;
 import java.util.Random;
@@ -55,7 +55,7 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 		registerContextRefreshEvent();
 
 		String strArgs = String.join("|", args);
-		LogUtil.info(PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
+		LogUtils.info(PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
 			+ " -- started with arguments length: {}, args: {}", args.length, strArgs);
 	}
 
@@ -88,9 +88,9 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 	 * @since 2021-09-02 20:23:39
 	 */
 	private void refreshContext() {
-		if (ContextUtil.getApplicationContext() != null) {
-			if (ContextUtil.mainClass == null) {
-				LogUtil.error(PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
+		if (ContextUtils.getApplicationContext() != null) {
+			if (ContextUtils.mainClass == null) {
+				LogUtils.error(PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
 					+ " 检测到重启上下文事件,因无法找到启动类，重启失败!!!");
 				return;
 			}
@@ -106,11 +106,11 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 					Thread.sleep(waitTime);
 					context.stop();
 					context.close();
-					ReflectionUtils.findMethod(ContextUtil.mainClass, "main")
+					ReflectionUtils.findMethod(ContextUtils.mainClass, "main")
 						.invoke(null, new Object[]{args.getSourceArgs()});
 				} catch (Exception exp) {
-					LogUtil.error(PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY) + "根据启动类"
-						+ ContextUtil.mainClass.getName() + "动态启动main失败");
+					LogUtils.error(PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY) + "根据启动类"
+						+ ContextUtils.mainClass.getName() + "动态启动main失败");
 				}
 			});
 

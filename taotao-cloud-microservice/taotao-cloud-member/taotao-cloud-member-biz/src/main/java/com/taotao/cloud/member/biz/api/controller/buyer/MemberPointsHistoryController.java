@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.web.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.api.web.vo.MemberPointsHistoryVO;
@@ -46,7 +46,7 @@ public class MemberPointsHistoryController {
 	@GetMapping(value = "/current/points")
 	public Result<MemberPointsHistoryVO> getMemberPointsHistoryVO() {
 		return Result.success(
-			memberPointsHistoryService.getMemberPointsHistoryVO(SecurityUtil.getUserId()));
+			memberPointsHistoryService.getMemberPointsHistoryVO(SecurityUtils.getUserId()));
 	}
 
 

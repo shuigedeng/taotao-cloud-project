@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.common.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.executor.DefaultSendAsyncThreadPoolExecutor;
 import com.taotao.cloud.sms.common.executor.SendAsyncThreadPoolExecutor;
 import com.taotao.cloud.sms.common.handler.SendHandler;
@@ -49,7 +49,7 @@ public class SmsAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(SmsAutoConfiguration.class, StarterName.SMS_STARTER);
+		LogUtils.started(SmsAutoConfiguration.class, StarterName.SMS_STARTER);
 	}
 
 	@Bean

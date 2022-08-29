@@ -23,7 +23,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.web.validation.constraints.DateValue.List;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Repeatable;
@@ -61,7 +61,7 @@ public @interface DateValue {
 	/**
 	 * 日期校验的格式，默认 yyyy-MM-dd
 	 */
-	String format() default DateUtil.PATTERN_DATE;
+	String format() default DateUtils.PATTERN_DATE;
 
 	@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 	@Retention(RUNTIME)

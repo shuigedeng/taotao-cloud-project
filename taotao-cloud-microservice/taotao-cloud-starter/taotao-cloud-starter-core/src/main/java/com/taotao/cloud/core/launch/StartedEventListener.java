@@ -16,11 +16,10 @@
 package com.taotao.cloud.core.launch;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -48,7 +47,7 @@ public class StartedEventListener {
 		int localPort = event.getWebServer().getPort();
 		String profile = StringUtils.arrayToCommaDelimitedString(environment.getActiveProfiles());
 
-		LogUtil.info("---[{}]---启动完成，当前使用的端口:[{}]，环境变量:[{}]---", appName, localPort,
+		LogUtils.info("---[{}]---启动完成，当前使用的端口:[{}]，环境变量:[{}]---", appName, localPort,
 			profile);
 	}
 

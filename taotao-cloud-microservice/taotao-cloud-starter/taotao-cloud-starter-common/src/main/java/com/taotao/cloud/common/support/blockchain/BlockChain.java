@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.common.support.blockchain;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,14 +72,14 @@ public class BlockChain {
 	 */
 	public static String decryptBlockchain(String blockHash) {
 		if ("ALL".equalsIgnoreCase(blockHash)) {
-			return JsonUtil.toJSONString(BLOCK_CHAIN);
+			return JsonUtils.toJSONString(BLOCK_CHAIN);
 		} else {
 			List<Block> blockList = BLOCK_CHAIN
 				.parallelStream()
 				.filter(b -> b.hash.equals(blockHash))
 				.collect(Collectors.toList());
 			if (CollectionUtils.isNotEmpty(blockList)) {
-				return JsonUtil.toJSONString(blockList);
+				return JsonUtils.toJSONString(blockList);
 			} else {
 				return null;
 			}
@@ -104,17 +104,17 @@ public class BlockChain {
 			previousBlock = BLOCK_CHAIN.get(i - 1);
 			// 比较注册Hash散列和计算哈希
 			if (!currentBlock.hash.equals(currentBlock.calculateHash())) {
-				LogUtil.warn("当前的Hash散列不相等");
+				LogUtils.warn("当前的Hash散列不相等");
 				return false;
 			}
 			// 比较以前的Hash散列和注册的以前的Hash散列
 			if (!previousBlock.hash.equals(currentBlock.previousHash)) {
-				LogUtil.warn("以前的Hash散列不相等");
+				LogUtils.warn("以前的Hash散列不相等");
 				return false;
 			}
 			// 检查哈希是否已开采
 			if (!currentBlock.hash.substring(0, DIFFICULTY).equals(hashTarget)) {
-				LogUtil.warn("当前块链还没有被开采");
+				LogUtils.warn("当前块链还没有被开采");
 				return false;
 			}
 

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.disruptor.handler;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import com.taotao.cloud.disruptor.util.StringUtils;
 import org.springframework.util.CollectionUtils;
@@ -87,7 +87,7 @@ public class DefaultHandlerChainManager implements HandlerChainManager<Disruptor
 		if (StringUtils.isBlank(chainDefinition)) {
 			throw new NullPointerException("chainDefinition cannot be null or empty.");
 		}
-		LogUtil.debug(
+		LogUtils.debug(
 			"Creating chain [" + chainName + "] from String definition [" + chainDefinition + "]");
 		String[] handlerTokens = splitChainDefinition(chainDefinition);
 		for (String token : handlerTokens) {

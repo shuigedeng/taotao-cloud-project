@@ -16,7 +16,7 @@
 package com.taotao.cloud.monitor.dump;
 
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.io.IOException;
 import java.util.Objects;
 import javax.servlet.Filter;
@@ -51,7 +51,7 @@ public class DumpFilter implements Filter {
 			request.getContextPath(), '/');
 
 		String uri = request.getRequestURI();
-		DumpProvider dumpProvider = ContextUtil.getBean(DumpProvider.class, true);
+		DumpProvider dumpProvider = ContextUtils.getBean(DumpProvider.class, true);
 
 		if (uri.startsWith(contextPath + "/health/dump")) {
 			if (Objects.nonNull(dumpProvider)) {

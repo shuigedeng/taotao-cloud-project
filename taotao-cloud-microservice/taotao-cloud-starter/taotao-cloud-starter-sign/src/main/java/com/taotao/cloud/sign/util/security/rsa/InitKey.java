@@ -1,6 +1,6 @@
 package com.taotao.cloud.sign.util.security.rsa;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.exception.EncryptDtguaiException;
 import java.security.Key;
 import java.security.KeyPair;
@@ -43,7 +43,7 @@ public class InitKey {
 		try {
 			keyPairGenerator = KeyPairGenerator.getInstance(RsaUtil.KEY_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {
-			LogUtil.error("rsa初始化密钥对异常", e);
+			LogUtils.error("rsa初始化密钥对异常", e);
 			throw new EncryptDtguaiException("rsa初始化密钥对异常");
 		}
 		//初始化密钥生成器

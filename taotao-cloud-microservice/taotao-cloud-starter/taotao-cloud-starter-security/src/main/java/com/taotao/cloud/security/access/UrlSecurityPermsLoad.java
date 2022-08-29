@@ -1,6 +1,6 @@
 package com.taotao.cloud.security.access;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.io.InputStream;
 import java.net.URL;
@@ -94,7 +94,7 @@ public class UrlSecurityPermsLoad implements InitializingBean {
 
 						final String[] splitLine = StringUtils.splitPreserveAllTokens(line, "=", 2);
 						if (splitLine.length != 2) {
-							LogUtil.warn("错误的权限配置:{}", line);
+							LogUtils.warn("错误的权限配置:{}", line);
 							continue;
 						}
 						urlPerms.put(splitLine[0], splitLine[1]);
@@ -102,7 +102,7 @@ public class UrlSecurityPermsLoad implements InitializingBean {
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.error(e, "authority.conf不存在");
+			LogUtils.error(e, "authority.conf不存在");
 
 			// 使用redis加载权限
 			Object lsxxx = redisRepository.get("lsxxx");

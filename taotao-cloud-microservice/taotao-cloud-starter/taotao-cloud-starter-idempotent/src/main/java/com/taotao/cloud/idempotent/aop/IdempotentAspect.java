@@ -17,8 +17,8 @@ package com.taotao.cloud.idempotent.aop;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.taotao.cloud.common.utils.aop.AopUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.aop.AopUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
@@ -95,7 +95,7 @@ public class IdempotentAspect {
 
 	@Before("watchIde()")
 	public void doBefore(JoinPoint joinPoint) throws Exception {
-		Idempotent idempotent = AopUtil.getAnnotation(joinPoint, Idempotent.class);
+		Idempotent idempotent = AopUtils.getAnnotation(joinPoint, Idempotent.class);
 
 		if (enable && null != idempotent) {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -116,16 +116,16 @@ public class IdempotentAspect {
 							LOCK_WAIT_TIME,
 							TimeUnit.MILLISECONDS);
 						if (Objects.isNull(result)) {
-							LogUtil.error("命中RID重复请求");
+							LogUtils.error("命中RID重复请求");
 							throw new IdempotentException("重复请求");
 						}
-						LogUtil.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}", HEADER_RID_KEY, rid);
+						LogUtils.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}", HEADER_RID_KEY, rid);
 						ZLOCK_CONTEXT.set(result);
 					} else {
-						LogUtil.warn("msg1=header没有rid,防重复提交功能失效,,remoteHost={}" + request.getRemoteHost());
+						LogUtils.warn("msg1=header没有rid,防重复提交功能失效,,remoteHost={}" + request.getRemoteHost());
 					}
 				} catch (Exception e) {
-					LogUtil.error("获取redis锁发生异常", e);
+					LogUtils.error("获取redis锁发生异常", e);
 					throw e;
 				}
 			}
@@ -150,7 +150,7 @@ public class IdempotentAspect {
 							val = params;
 						} else {
 							//如果自定义的key,在请求参数中没有此参数,说明非法请求
-							LogUtil.warn("自定义的key,在请求参数中没有此参数,防重复提交功能失效");
+							LogUtils.warn("自定义的key,在请求参数中没有此参数,防重复提交功能失效");
 						}
 					}
 
@@ -164,20 +164,20 @@ public class IdempotentAspect {
 							if (!Objects.nonNull(result)) {
 								String targetName = joinPoint.getTarget().getClass().getName();
 								String methodName = joinPoint.getSignature().getName();
-								LogUtil.error("不允许重复执行,,key={},,targetName={},,methodName={}", perFix, targetName, methodName);
+								LogUtils.error("不允许重复执行,,key={},,targetName={},,methodName={}", perFix, targetName, methodName);
 								throw new IdempotentException("不允许重复提交");
 							}
 
 							//存储在当前线程
 							PER_FIX_KEY.set(perFix);
 							ZLOCK_CONTEXT.set(result);
-							LogUtil.info("msg1=当前请求已成功锁定:{}", perFix);
+							LogUtils.info("msg1=当前请求已成功锁定:{}", perFix);
 						} catch (Exception e) {
-							LogUtil.error("获取redis锁发生异常", e);
+							LogUtils.error("获取redis锁发生异常", e);
 							throw e;
 						}
 					} else {
-						LogUtil.warn("自定义的key,在请求参数中value为空,防重复提交功能失效");
+						LogUtils.warn("自定义的key,在请求参数中value为空,防重复提交功能失效");
 					}
 				}
 			}
@@ -187,7 +187,7 @@ public class IdempotentAspect {
 	@After("watchIde()")
 	public void doAfter(JoinPoint joinPoint) throws Throwable {
 		try {
-			Idempotent idempotent = AopUtil.getAnnotation(joinPoint, Idempotent.class);
+			Idempotent idempotent = AopUtils.getAnnotation(joinPoint, Idempotent.class);
 			if (enable && null != idempotent) {
 				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL || idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
 					ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -197,12 +197,12 @@ public class IdempotentAspect {
 						try {
 							distributedLock.unlock(ZLOCK_CONTEXT.get());
 							// redisService.unLock(REDIS_KEY_PREFIX + rid);
-							LogUtil.info("msg1=当前请求已成功处理,,rid={}", rid);
+							LogUtils.info("msg1=当前请求已成功处理,,rid={}", rid);
 
 							PER_FIX_KEY.remove();
 							ZLOCK_CONTEXT.remove();
 						} catch (Exception e) {
-							LogUtil.error("释放redis锁异常", e);
+							LogUtils.error("释放redis锁异常", e);
 						}
 					}
 				}
@@ -215,18 +215,18 @@ public class IdempotentAspect {
 						try {
 							distributedLock.unlock(ZLOCK_CONTEXT.get());
 							//redisService.unLock(PER_FIX_KEY.get());
-							LogUtil.info("msg1=当前请求已成功释放,,key={}", PER_FIX_KEY.get());
+							LogUtils.info("msg1=当前请求已成功释放,,key={}", PER_FIX_KEY.get());
 
 							PER_FIX_KEY.remove();
 							ZLOCK_CONTEXT.remove();
 						} catch (Exception e) {
-							LogUtil.error("释放redis锁异常", e);
+							LogUtils.error("释放redis锁异常", e);
 						}
 					}
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage(), e);
+			LogUtils.error(e.getMessage(), e);
 		}
 	}
 }

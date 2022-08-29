@@ -2,7 +2,7 @@ package com.taotao.cloud.gateway.springcloud.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.springcloud.properties.FilterProperties;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.ObjectProvider;
@@ -121,7 +121,7 @@ public class GrayConfiguration {
 			// 根据网关的原始网址。替换exchange url为 http://IP:PORT/path 路径的url
 			ServerWebExchangeUtils.addOriginalRequestUrl(exchange, url);
 
-			LogUtil
+			LogUtils
 				.info(ReactiveLoadBalancerClientFilter.class.getSimpleName() + " url before: {}",
 					url);
 
@@ -146,7 +146,7 @@ public class GrayConfiguration {
 
 				URI requestUrl = LoadBalancerUriTools.reconstructURI(serviceInstance, uri);
 
-				LogUtil.info("LoadBalancerClientFilter url chosen: " + requestUrl);
+				LogUtils.info("LoadBalancerClientFilter url chosen: " + requestUrl);
 
 				exchange.getAttributes()
 					.put(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR, requestUrl);
@@ -242,7 +242,7 @@ public class GrayConfiguration {
 			Map<ServiceInstance, Integer> weightMap = new HashMap<>();
 			for (ServiceInstance instance : instances) {
 				Map<String, String> metadata = instance.getMetadata();
-				LogUtil.info("taotao cloud gray loadbalancer nacos version: {} , weight: {}",
+				LogUtils.info("taotao cloud gray loadbalancer nacos version: {} , weight: {}",
 					metadata.get("version"), metadata.get("weight"));
 
 				if (metadata.containsKey("weight")) {
@@ -263,7 +263,7 @@ public class GrayConfiguration {
 		}
 
 		private Response<ServiceInstance> getServiceInstanceEmptyResponse() {
-			LogUtil.warn("No servers available for service: " + this.serviceId);
+			LogUtils.warn("No servers available for service: " + this.serviceId);
 			return new EmptyResponse();
 		}
 	}

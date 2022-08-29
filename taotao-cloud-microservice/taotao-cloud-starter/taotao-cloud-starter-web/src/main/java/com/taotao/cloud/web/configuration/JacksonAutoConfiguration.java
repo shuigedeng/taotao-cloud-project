@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_TIME_FORMAT;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
@@ -35,8 +35,8 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.json.JacksonModule;
 import com.taotao.cloud.common.support.json.LocalDateTimeDeserializer;
 import com.taotao.cloud.common.support.json.MyBeanSerializerModifier;
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -62,7 +62,7 @@ public class JacksonAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(JacksonAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(JacksonAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean
@@ -124,9 +124,9 @@ public class JacksonAutoConfiguration implements InitializingBean {
 				new LocalDateSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)));
 
 			customizer.deserializerByType(LocalTime.class, new LocalTimeDeserializer(
-				DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
+				DateTimeFormatter.ofPattern(DateUtils.DEFAULT_TIME_FORMAT)));
 			customizer.serializerByType(LocalTime.class,
-				new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
+				new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtils.DEFAULT_TIME_FORMAT)));
 
 			customizer.failOnEmptyBeans(false);
 			customizer.failOnUnknownProperties(false);

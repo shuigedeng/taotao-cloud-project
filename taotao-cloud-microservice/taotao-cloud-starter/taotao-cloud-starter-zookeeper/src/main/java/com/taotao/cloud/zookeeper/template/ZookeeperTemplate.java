@@ -18,7 +18,7 @@ package com.taotao.cloud.zookeeper.template;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,12 +29,8 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.ChildData;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
 import org.apache.curator.framework.recipes.cache.CuratorCacheListener;
-import org.apache.curator.framework.recipes.cache.CuratorCacheListener.Type;
-import org.apache.curator.framework.recipes.cache.NodeCache;
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;
-import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
-import org.apache.curator.framework.recipes.cache.TreeCache;
 import org.apache.curator.framework.recipes.cache.TreeCacheListener;
 import org.apache.zookeeper.CreateMode;
 import org.springframework.util.Assert;
@@ -147,7 +143,7 @@ public class ZookeeperTemplate {
 		}
 		CuratorCache treeCache = CuratorCache.build(client, path);
 		CuratorCacheListener listener = (type, oldData,  data) -> {
-			LogUtil.info("节点路径 --{} ,节点事件类型: {} , 节点值为: {}",
+			LogUtils.info("节点路径 --{} ,节点事件类型: {} , 节点值为: {}",
 				Objects.nonNull(data.getData()) ? Arrays.toString(data.getData()) : "无数据", type);
 		};
 		treeCache.listenable().addListener(listener);
@@ -171,7 +167,7 @@ public class ZookeeperTemplate {
 		//cacheData if true, node contents are cached in addition to the stat
 		CuratorCache pathChildrenCache =CuratorCache.build(client, path);
 		CuratorCacheListener listener = (type,  oldData,  data) -> {
-			LogUtil.info("event path is --{} ,event type is {}", data.getData(), type);
+			LogUtils.info("event path is --{} ,event type is {}", data.getData(), type);
 		};
 		pathChildrenCache.listenable().addListener(listener);
 		// StartMode : NORMAL  BUILD_INITIAL_CACHE  POST_INITIALIZED_EVENT
@@ -194,7 +190,7 @@ public class ZookeeperTemplate {
 		CuratorCache nodeCache = CuratorCache.build(client, path);
 		CuratorCacheListener listener = (type,  oldData,  data) -> {
 			Optional<ChildData> currentData = nodeCache.get(path);
-			LogUtil.info("{} Znode data is chagnge,new data is ---  {}",
+			LogUtils.info("{} Znode data is chagnge,new data is ---  {}",
 				currentData.get().getPath(),
 				new String(currentData.get().getData()));
 		};

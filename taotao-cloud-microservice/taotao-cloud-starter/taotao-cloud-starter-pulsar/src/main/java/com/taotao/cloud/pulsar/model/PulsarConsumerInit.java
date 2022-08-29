@@ -1,7 +1,7 @@
 package com.taotao.cloud.pulsar.model;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.pulsar.client.api.Consumer;
 
 import java.util.concurrent.Executors;
@@ -33,7 +33,7 @@ public class PulsarConsumerInit {
             consumer = instance.getPulsarClient().newConsumer().topic(topic).messageListener(new DummyMessageListener<>()).subscribe();
             executorService.shutdown();
         } catch (Exception e) {
-	        LogUtil.error("init pulsar producer error, exception is ", e);
+	        LogUtils.error("init pulsar producer error, exception is ", e);
         }
     }
 

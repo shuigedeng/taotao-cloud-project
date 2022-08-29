@@ -17,7 +17,7 @@
 package com.taotao.cloud.xss.support;
 
 import com.taotao.cloud.common.constant.StrPool;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.beans.PropertyEditorSupport;
 
 import com.taotao.cloud.xss.properties.XssProperties;
@@ -87,7 +87,7 @@ public class FormXssClean {
 			} else if (XssHolder.isEnabled()) {
 				String value = xssCleaner.clean(XssUtil.trim(text, properties.getTrimText()));
 				setValue(value);
-				LogUtil.debug("Request parameter value:{} cleaned up by xss, current value is:{}.", text, value);
+				LogUtils.debug("Request parameter value:{} cleaned up by xss, current value is:{}.", text, value);
 			} else {
 				setValue(XssUtil.trim(text, properties.getTrimText()));
 			}

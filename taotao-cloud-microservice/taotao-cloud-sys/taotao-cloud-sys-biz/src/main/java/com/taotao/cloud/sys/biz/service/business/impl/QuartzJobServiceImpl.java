@@ -21,8 +21,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.common.OrikaUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.sys.api.web.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.web.dto.quartz.QuartzJobQueryCriteria;
 import com.taotao.cloud.sys.biz.mapper.IQuartzJobMapper;
@@ -70,7 +70,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 		List<QuartzJob> list = page.getList();
 		List<QuartzJobDto> collect = list.stream()
 			.filter(Objects::nonNull)
-			.map(e -> OrikaUtil.convert(e, QuartzJobDto.class))
+			.map(e -> OrikaUtils.convert(e, QuartzJobDto.class))
 			.collect(Collectors.toList());
 
 		map.put("content", collect);
@@ -134,7 +134,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 		}
 
 		QuartzJobModel jobModel = new QuartzJobModel();
-		BeanUtil.copyProperties(quartzJob, jobModel);
+		BeanUtils.copyProperties(quartzJob, jobModel);
 
 		if (quartzJob.getIsPause()) {
 			quartzManager.resumeJob(jobModel);
@@ -149,7 +149,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	@Override
 	public boolean save(QuartzJob quartzJob) {
 		QuartzJobModel jobModel = new QuartzJobModel();
-		BeanUtil.copyProperties(quartzJob, jobModel);
+		BeanUtils.copyProperties(quartzJob, jobModel);
 
 		quartzManager.addJob(jobModel);
 		return SqlHelper.retBool(baseMapper.insert(quartzJob));
@@ -158,7 +158,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	@Override
 	public boolean updateById(QuartzJob quartzJob) {
 		QuartzJobModel jobModel = new QuartzJobModel();
-		BeanUtil.copyProperties(quartzJob, jobModel);
+		BeanUtils.copyProperties(quartzJob, jobModel);
 
 		quartzManager.updateJobCron(jobModel);
 		return SqlHelper.retBool(baseMapper.updateById(quartzJob));
@@ -176,7 +176,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 		}
 
 		QuartzJobModel jobModel = new QuartzJobModel();
-		BeanUtil.copyProperties(quartzJob, jobModel);
+		BeanUtils.copyProperties(quartzJob, jobModel);
 
 		quartzManager.runJobNow(jobModel);
 	}
@@ -201,7 +201,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 		idList.forEach(id -> {
 			QuartzJob quartzJob = baseMapper.selectById(id);
 			QuartzJobModel jobModel = new QuartzJobModel();
-			BeanUtil.copyProperties(quartzJob, jobModel);
+			BeanUtils.copyProperties(quartzJob, jobModel);
 			quartzManager.deleteJob(jobModel);
 		});
 

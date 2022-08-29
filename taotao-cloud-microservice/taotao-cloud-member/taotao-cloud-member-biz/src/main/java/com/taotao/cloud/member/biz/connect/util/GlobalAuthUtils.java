@@ -2,8 +2,8 @@ package com.taotao.cloud.member.biz.connect.util;
 
 import com.alibaba.fastjson.JSON;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.secure.Base64Util;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.secure.Base64Utils;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -35,7 +35,7 @@ public class GlobalAuthUtils {
      */
     public static String generateDingTalkSignature(String secretKey, String timestamp) {
         byte[] signData = sign(secretKey.getBytes(DEFAULT_ENCODING), timestamp.getBytes(DEFAULT_ENCODING), HMAC_SHA_256);
-        return urlEncode(new String(Base64Util.encode(String.valueOf(signData), Charset.defaultCharset())));
+        return urlEncode(new String(Base64Utils.encode(String.valueOf(signData), Charset.defaultCharset())));
     }
 
     /**
@@ -143,7 +143,7 @@ public class GlobalAuthUtils {
      * @return true: http协议, false: 非http协议
      */
     public static boolean isHttpProtocol(String url) {
-        if (StringUtil.isEmpty(url)) {
+        if (StringUtils.isEmpty(url)) {
             return false;
         }
         return url.startsWith("http://");
@@ -156,7 +156,7 @@ public class GlobalAuthUtils {
      * @return true: https协议, false: 非https协议
      */
     public static boolean isHttpsProtocol(String url) {
-        if (StringUtil.isEmpty(url)) {
+        if (StringUtils.isEmpty(url)) {
             return false;
         }
         return url.startsWith("https://");
@@ -169,7 +169,7 @@ public class GlobalAuthUtils {
      * @return true: 本地主机（域名）, false: 非本地主机（域名）
      */
     public static boolean isLocalHost(String url) {
-        return StringUtil.isEmpty(url) || url.contains("127.0.0.1") || url.contains("localhost");
+        return StringUtils.isEmpty(url) || url.contains("127.0.0.1") || url.contains("localhost");
     }
 
 
@@ -214,10 +214,10 @@ public class GlobalAuthUtils {
         TreeMap<String, String> map = new TreeMap<>(params);
         String str = parseMapToString(map, true);
         String baseStr = method.toUpperCase() + "&" + urlEncode(baseUrl) + "&" + urlEncode(str);
-        String signKey = apiSecret + "&" + (StringUtil.isEmpty(tokenSecret) ? "" : tokenSecret);
+        String signKey = apiSecret + "&" + (StringUtils.isEmpty(tokenSecret) ? "" : tokenSecret);
         byte[] signature = sign(signKey.getBytes(DEFAULT_ENCODING), baseStr.getBytes(DEFAULT_ENCODING), HMAC_SHA1);
 
-        return new String(Base64Util.encode(String.valueOf(signature), Charset.defaultCharset()));
+        return new String(Base64Utils.encode(String.valueOf(signature), Charset.defaultCharset()));
     }
 
     /**
@@ -291,7 +291,7 @@ public class GlobalAuthUtils {
         for (Map.Entry<String, Object> entry : treeMap.entrySet()) {
             String name = entry.getKey();
             String value = String.valueOf(entry.getValue());
-            if (StringUtil.isNotEmpty(name) && StringUtil.isNotEmpty(value)) {
+            if (StringUtils.isNotEmpty(name) && StringUtils.isNotEmpty(value)) {
                 signBuilder.append(name).append(value);
             }
         }

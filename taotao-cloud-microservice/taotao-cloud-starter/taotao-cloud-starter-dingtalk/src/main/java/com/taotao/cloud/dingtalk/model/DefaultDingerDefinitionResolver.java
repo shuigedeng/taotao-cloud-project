@@ -20,7 +20,7 @@ import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_PROPERTIE
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import com.taotao.cloud.dingtalk.listeners.DingerListenersProperty;
@@ -74,7 +74,7 @@ public class DefaultDingerDefinitionResolver extends DingerListenersProperty imp
 		String dingerLocationsProp = DINGER_PROPERTIES_PREFIX + "dinger-locations";
 		String dingerLocations = environment.getProperty(dingerLocationsProp);
 		if (dingerLocations == null) {
-			LogUtil.debug("dinger xml is not configured.");
+			LogUtils.debug("dinger xml is not configured.");
 			return;
 		}
 
@@ -87,7 +87,7 @@ public class DefaultDingerDefinitionResolver extends DingerListenersProperty imp
 			throw new DingerException(RESOURCE_CONFIG_EXCEPTION, dingerLocations);
 		}
 		if (resources.length == 0) {
-			LogUtil.warn("dinger xml is empty under {}.", dingerLocations);
+			LogUtils.warn("dinger xml is empty under {}.", dingerLocations);
 			return;
 		}
 
@@ -106,7 +106,7 @@ public class DefaultDingerDefinitionResolver extends DingerListenersProperty imp
 	 */
 	private void registerDefaultDingerConfig(Environment environment) {
 		if (environment == null) {
-			LogUtil.warn("environment is null.");
+			LogUtils.warn("environment is null.");
 			return;
 		}
 		for (DingerType dingerType : enabledDingerTypes) {
@@ -120,7 +120,7 @@ public class DefaultDingerDefinitionResolver extends DingerListenersProperty imp
 			String asyncExecuteProp = dingers + "async";
 
 			if (DingerUtils.isEmpty(tokenIdProp)) {
-				LogUtil.debug("dinger={} is not open.", dingerType);
+				LogUtils.debug("dinger={} is not open.", dingerType);
 				continue;
 			}
 			String tokenId = environment.getProperty(tokenIdProp);

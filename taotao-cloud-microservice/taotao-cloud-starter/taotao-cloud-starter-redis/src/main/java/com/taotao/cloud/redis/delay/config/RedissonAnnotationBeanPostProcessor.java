@@ -1,6 +1,6 @@
 package com.taotao.cloud.redis.delay.config;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.delay.annotation.RedissonListener;
 import com.taotao.cloud.redis.delay.consts.ListenerType;
 import com.taotao.cloud.redis.delay.handler.IsolationStrategy;
@@ -227,7 +227,7 @@ public class RedissonAnnotationBeanPostProcessor implements BeanPostProcessor, B
 				try {
 					messageConverter = this.beanFactory.getBean(MessageConverter.class);
 				} catch (BeansException e) {
-					LogUtil.error("no MessageConverter found for RedissonMessageListener to apply");
+					LogUtils.error("no MessageConverter found for RedissonMessageListener to apply");
 				}
 			}
 

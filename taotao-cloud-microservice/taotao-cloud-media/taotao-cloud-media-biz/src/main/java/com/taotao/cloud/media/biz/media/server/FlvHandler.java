@@ -3,7 +3,7 @@ package com.taotao.cloud.media.biz.media.server;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.MD5;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.common.MediaConstant;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import com.taotao.cloud.media.biz.media.service.MediaService;
@@ -80,7 +80,7 @@ public class FlvHandler extends SimpleChannelInboundHandler<Object> {
 
 			// 判断请求uri
 			if (!"/live".equals(decoder.path())) {
-				LogUtil.info("uri有误");
+				LogUtils.info("uri有误");
 				sendError(ctx, HttpResponseStatus.BAD_REQUEST);
 				return;
 			}
@@ -88,7 +88,7 @@ public class FlvHandler extends SimpleChannelInboundHandler<Object> {
 			CameraDto cameraDto = buildCamera(req.uri());
 
 			if (StrUtil.isBlank(cameraDto.getUrl())) {
-				LogUtil.info("url有误");
+				LogUtils.info("url有误");
 				sendError(ctx, HttpResponseStatus.BAD_REQUEST);
 				return;
 			}

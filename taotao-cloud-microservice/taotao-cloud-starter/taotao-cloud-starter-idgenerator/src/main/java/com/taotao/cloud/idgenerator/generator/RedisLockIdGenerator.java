@@ -3,7 +3,7 @@ package com.taotao.cloud.idgenerator.generator;
 import cn.hutool.core.net.NetUtil;
 import com.github.yitter.contract.IdGeneratorOptions;
 import com.github.yitter.idgen.YitIdHelper;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.lock.support.DistributedLock;
 import com.taotao.cloud.lock.support.ZLock;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -68,7 +68,7 @@ public class RedisLockIdGenerator implements CommandLineRunner, ApplicationConte
 		//若已缓存在缓存中，直接跳过不设置
 		if (existWorkerId) {
 			Integer workerId = (Integer) redisRepository.opsForHash().get(CACHE_ID_IP, macAddress);
-			LogUtil.info("配置分布式workerId {} - {}", macAddress, workerId);
+			LogUtils.info("配置分布式workerId {} - {}", macAddress, workerId);
 			initWorkerId(workerId);
 			return;
 		}
@@ -93,7 +93,7 @@ public class RedisLockIdGenerator implements CommandLineRunner, ApplicationConte
 			initWorkerId(workerId);
 			//设置mac地址 - workerId 到hash结构
 			redisRepository.opsForHash().put(CACHE_ID_IP, macAddress, workerId);
-			LogUtil.info("配置分布式workerId {} - {}", macAddress, workerId);
+			LogUtils.info("配置分布式workerId {} - {}", macAddress, workerId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.kit.params.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.feign.IFeignMemberRechargeService;
 import com.taotao.cloud.member.api.web.vo.MemberRechargeVO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
@@ -44,7 +44,7 @@ public class RechargeCashier implements CashierExecute {
 		PayParam payParam = paymentSuccessParams.getPayParam();
 		if (payParam.getOrderType().equals(CashierEnum.RECHARGE.name())) {
 			rechargeService.paySuccess(payParam.getSn(), paymentSuccessParams.getReceivableNo(), paymentSuccessParams.getPaymentMethod());
-			LogUtil.info("会员充值-订单号{},第三方流水：{}", payParam.getSn(), paymentSuccessParams.getReceivableNo());
+			LogUtils.info("会员充值-订单号{},第三方流水：{}", payParam.getSn(), paymentSuccessParams.getReceivableNo());
 		}
 	}
 

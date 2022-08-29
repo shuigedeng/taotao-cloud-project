@@ -1,7 +1,7 @@
 package com.taotao.cloud.feign.loadbalancer;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.loadbalancer.chooser.IRuleChooser;
 import com.taotao.cloud.feign.utils.QueryUtils;
 import java.util.List;
@@ -49,7 +49,7 @@ public class VersionLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 		// 从request中获取版本，兼容webflux方式
 		RequestData requestData = ((RequestDataContext) (request.getContext())).getClientRequest();
 		String version = getVersionFromRequestData(requestData);
-		LogUtil.debug("选择的版本号为：{}", version);
+		LogUtils.debug("选择的版本号为：{}", version);
 
 		return serviceInstanceListSuppliers.getIfAvailable().get(request).next()
 			.map(instanceList -> getInstanceResponse(instanceList, version));
@@ -100,7 +100,7 @@ public class VersionLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 		if (CollectionUtils.isNotEmpty(filteredServiceIstanceList)) {
 			ServiceInstance serviceInstance = this.ruleChooser.choose(filteredServiceIstanceList);
 			if (!Objects.isNull(serviceInstance)) {
-				LogUtil.debug("使用serviceId为：{}服务， 选择version为：{}， 地址：{}:{}，", serviceId, version
+				LogUtils.debug("使用serviceId为：{}服务， 选择version为：{}， 地址：{}:{}，", serviceId, version
 					, serviceInstance.getHost(), serviceInstance.getPort());
 				return new DefaultResponse(serviceInstance);
 			}

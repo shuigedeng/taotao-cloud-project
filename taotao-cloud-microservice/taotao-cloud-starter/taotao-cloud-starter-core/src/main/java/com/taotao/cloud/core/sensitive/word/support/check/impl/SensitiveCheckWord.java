@@ -2,7 +2,7 @@ package com.taotao.cloud.core.sensitive.word.support.check.impl;
 
 
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.AppConst;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
@@ -28,7 +28,7 @@ public class SensitiveCheckWord implements ISensitiveCheck {
             // 获取当前的 map 信息
             nowMap = getNowMap(nowMap, context, txt, i);
 
-            if (ObjectUtil.isNotNull(nowMap)) {
+            if (ObjectUtils.isNotNull(nowMap)) {
                 lengthCount++;
 
                 // 判断是否是敏感词的结尾字，如果是结尾字则判断是否继续检测
@@ -61,12 +61,12 @@ public class SensitiveCheckWord implements ISensitiveCheck {
      * @since 0.0.9
      */
     private static boolean isEnd(final Map map) {
-        if(ObjectUtil.isNull(map)) {
+        if(ObjectUtils.isNull(map)) {
             return false;
         }
 
         Object value = map.get(AppConst.IS_END);
-        if(ObjectUtil.isNull(value)) {
+        if(ObjectUtils.isNull(value)) {
             return false;
         }
 

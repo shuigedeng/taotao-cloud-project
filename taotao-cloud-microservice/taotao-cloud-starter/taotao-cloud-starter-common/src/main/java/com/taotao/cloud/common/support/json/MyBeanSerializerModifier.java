@@ -1,19 +1,15 @@
 package com.taotao.cloud.common.support.json;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanDescription;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializationConfig;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
 import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 
-import com.taotao.cloud.common.utils.reflect.ClassUtil;
-import java.io.IOException;
+import com.taotao.cloud.common.utils.reflect.ClassUtils;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import org.springframework.util.ClassUtils;
 
 /**
  * bean对象序列化规则

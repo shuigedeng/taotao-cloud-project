@@ -19,7 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.web.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
@@ -64,7 +64,7 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<PageModel<MemberAddressVO>> page(@Validated PageParam page) {
-		IPage<MemberAddress> memberAddressPage = memberAddressService.getAddressByMember(page, SecurityUtil.getUserId());
+		IPage<MemberAddress> memberAddressPage = memberAddressService.getAddressByMember(page, SecurityUtils.getUserId());
 		return Result.success(PageModel.convertMybatisPage(memberAddressPage, MemberAddressVO.class));
 	}
 
@@ -94,7 +94,7 @@ public class MemberAddressController {
 	@PostMapping
 	public Result<Boolean> addShippingAddress(@Valid MemberAddress shippingAddress) {
 		//添加会员地址
-		shippingAddress.setMemberId(SecurityUtil.getUserId());
+		shippingAddress.setMemberId(SecurityUtils.getUserId());
 		if (shippingAddress.getDefaulted() == null) {
 			shippingAddress.setDefaulted(false);
 		}

@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.web.vo.setting.SettingVO;
 import com.taotao.cloud.sys.biz.model.entity.config.Setting;
@@ -37,7 +37,7 @@ public class SettingController {
 	@NotAuth
 	public Result<SettingVO> getByKey(@RequestParam String key) {
 		Setting setting = settingService.get(key);
-		return Result.success(BeanUtil.copy(setting,SettingVO.class));
+		return Result.success(BeanUtils.copy(setting,SettingVO.class));
 	}
 
 	@NotAuth

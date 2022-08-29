@@ -5,7 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.web.dto.order.PriceDetailDTO;
@@ -347,9 +347,9 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 	 */
 	public Order(CartVO cartVO, TradeDTO tradeDTO) {
 		Long oldId = this.getId();
-		BeanUtil.copyProperties(tradeDTO, this);
-		BeanUtil.copyProperties(cartVO.getPriceDetailDTO(), this);
-		BeanUtil.copyProperties(cartVO, this);
+		BeanUtils.copyProperties(tradeDTO, this);
+		BeanUtils.copyProperties(cartVO.getPriceDetailDTO(), this);
+		BeanUtils.copyProperties(cartVO, this);
 		//填写订单类型
 		this.setTradeType(cartVO, tradeDTO);
 		setId(oldId);

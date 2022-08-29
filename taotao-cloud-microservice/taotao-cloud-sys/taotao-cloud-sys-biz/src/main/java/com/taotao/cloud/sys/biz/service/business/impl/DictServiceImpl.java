@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
@@ -133,7 +133,7 @@ public class DictServiceImpl extends
 	@Override
 	@Async
 	public Future<Dict> findAsyncByCode(String code) {
-		LogUtil.info("异步查询字典, 当前线程名称：{}", Thread.currentThread().getName());
+		LogUtils.info("异步查询字典, 当前线程名称：{}", Thread.currentThread().getName());
 
 		try {
 			Thread.sleep(3000);
@@ -148,7 +148,7 @@ public class DictServiceImpl extends
 
 		Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
 
-		LogUtil.info("findAsyncByCode: {}", result);
+		LogUtils.info("findAsyncByCode: {}", result);
 
 		return new AsyncResult<>(result);
 	}

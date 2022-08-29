@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.check.impl;
 
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.lang.CharUtil;
-import com.taotao.cloud.common.utils.common.RegexUtil;
+import com.taotao.cloud.common.utils.lang.CharUtils;
+import com.taotao.cloud.common.utils.common.RegexUtils;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
 import com.taotao.cloud.core.sensitive.word.support.check.ISensitiveCheck;
@@ -42,7 +42,7 @@ public class SensitiveCheckUrl implements ISensitiveCheck {
             char mappingChar = Instances.singleton(CharFormatChain.class)
                     .format(currentChar, context);
 
-            if(CharUtil.isWebSiteChar(mappingChar)
+            if(CharUtils.isWebSiteChar(mappingChar)
                 && lengthCount <= MAX_WEB_SITE_LEN) {
                 lengthCount++;
                 stringBuilder.append(currentChar);
@@ -70,7 +70,7 @@ public class SensitiveCheckUrl implements ISensitiveCheck {
      * @since 0.0.12
      */
     private boolean isCondition(final String string) {
-        return RegexUtil.isWebSite(string);
+        return RegexUtils.isWebSite(string);
     }
 
 

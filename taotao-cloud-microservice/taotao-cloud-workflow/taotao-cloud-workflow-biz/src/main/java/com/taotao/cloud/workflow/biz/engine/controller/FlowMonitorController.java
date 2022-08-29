@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.model.flowmonitor.FlowMonitorListVO;
@@ -50,7 +50,7 @@ public class FlowMonitorController {
         List<FlowMonitorListVO> listVO = new LinkedList<>();
         for (FlowTaskEntity taskEntity : list) {
             //用户名称赋值
-            FlowMonitorListVO vo = JsonUtil.getJsonToBean(taskEntity, FlowMonitorListVO.class);
+            FlowMonitorListVO vo = JsonUtils.getJsonToBean(taskEntity, FlowMonitorListVO.class);
             UserEntity user = userList.stream().filter(t -> t.getId().equals(taskEntity.getCreatorUserId())).findFirst().orElse(null);
             vo.setUserName(user != null ? user.getRealName() + "/" + user.getAccount() : "");
             FlowEngineEntity engine = engineList.stream().filter(t -> t.getId().equals(taskEntity.getFlowId())).findFirst().orElse(null);
@@ -60,7 +60,7 @@ public class FlowMonitorController {
                 listVO.add(vo);
             }
         }
-        PaginationVO paginationVO = JsonUtil.getJsonToBean(paginationFlowTask, PaginationVO.class);
+        PaginationVO paginationVO = JsonUtils.getJsonToBean(paginationFlowTask, PaginationVO.class);
         return Result.page(listVO, paginationVO);
     }
 

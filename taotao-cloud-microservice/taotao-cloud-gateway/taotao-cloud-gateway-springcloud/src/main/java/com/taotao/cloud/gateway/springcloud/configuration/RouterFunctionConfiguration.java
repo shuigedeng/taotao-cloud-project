@@ -18,10 +18,10 @@ package com.taotao.cloud.gateway.springcloud.configuration;
 import cn.hutool.http.HttpStatus;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.CaptchaUtil;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.CaptchaUtils;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.constant.AntiReptileConsts;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.handler.RefreshFormHandler;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.handler.ValidateFormHandler;
@@ -131,14 +131,14 @@ public class RouterFunctionConfiguration {
 			Exception exception = serverRequest.exchange()
 				.getAttribute(ServerWebExchangeUtils.CIRCUITBREAKER_EXECUTION_EXCEPTION_ATTR);
 			if (exception instanceof TimeoutException) {
-				LogUtil.error("服务超时", exception);
+				LogUtils.error("服务超时", exception);
 			} else if (exception != null && exception.getMessage() != null) {
-				LogUtil.error("服务错误" + exception.getMessage(), exception);
+				LogUtils.error("服务错误" + exception.getMessage(), exception);
 			} else {
-				LogUtil.error("服务错误", exception);
+				LogUtils.error("服务错误", exception);
 			}
 
-			LogUtil.error("网关执行请求:{}失败,请求主机: {},请求数据:{} 进行服务降级处理",
+			LogUtils.error("网关执行请求:{}失败,请求主机: {},请求数据:{} 进行服务降级处理",
 				originalUris,
 				socketAddress.orElse(new InetSocketAddress(DEFAULT_PORT)).getHostString(),
 				buildMessage(serverRequest));
@@ -158,7 +158,7 @@ public class RouterFunctionConfiguration {
 			Map<String, String> map = params.toSingleValueMap();
 			if (map.size() > 0) {
 				message.append(" 请求参数: ");
-				String serialize = JsonUtil.toJSONString(message);
+				String serialize = JsonUtils.toJSONString(message);
 				message.append(serialize);
 			}
 			Object requestBody = request.exchange()
@@ -221,9 +221,9 @@ public class RouterFunctionConfiguration {
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest request) {
 			try {
-				ArithmeticCaptcha captcha = CaptchaUtil.getArithmeticCaptcha();
+				ArithmeticCaptcha captcha = CaptchaUtils.getArithmeticCaptcha();
 				String text = captcha.text();
-				LogUtil.info(text);
+				LogUtils.info(text);
 				MultiValueMap<String, String> params = request.queryParams();
 				String t = params.getFirst(PARAM_T);
 
@@ -283,7 +283,7 @@ public class RouterFunctionConfiguration {
 				String uri = request.uri().getPath();
 
 				String html;
-				HealthCheckProvider healthProvider = ContextUtil.getBean(HealthCheckProvider.class,
+				HealthCheckProvider healthProvider = ContextUtils.getBean(HealthCheckProvider.class,
 					true);
 				if (Objects.nonNull(healthProvider) && uri.startsWith(HEALTH_REPORT)) {
 

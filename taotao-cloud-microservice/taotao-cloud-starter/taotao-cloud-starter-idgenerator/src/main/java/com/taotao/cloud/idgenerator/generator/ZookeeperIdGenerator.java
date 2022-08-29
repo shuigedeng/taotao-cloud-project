@@ -6,9 +6,9 @@ import com.github.yitter.contract.IdGeneratorOptions;
 import com.github.yitter.idgen.YitIdHelper;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.IpUtil;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.ip.IpUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 		if (initFlag) {
 			int workerId = holder.getWorkerId();
 
-			LogUtil.info("当前ID生成器编号: " + workerId);
+			LogUtils.info("当前ID生成器编号: " + workerId);
 			IdGeneratorOptions options = new IdGeneratorOptions((short) workerId);
 			options.WorkerIdBitLength = WORKER_ID_BIT_LENGTH;
 			YitIdHelper.setIdGenerator(options);
@@ -70,7 +70,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 
 		private String port;
 
-		private String projectName = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
+		private String projectName = PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 
 		private final String PREFIX_ZK_PATH = "/snowflake/" + projectName;
 
@@ -90,7 +90,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 		private final CuratorFramework curator;
 
 		public SnowflakeZookeeper(CuratorFramework curator) {
-			this.ip = IpUtil.getLocalIp();
+			this.ip = IpUtils.getLocalIp();
 			this.curator = curator;
 		}
 
@@ -143,7 +143,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 						//准备创建临时节点
 						doService(curator);
 						updateLocalWorkerID(this.workerId);
-						LogUtil.info("[Old NODE]find forever node have this endpoint ip-{} port-{} workid-{} childnode and start SUCCESS",
+						LogUtils.info("[Old NODE]find forever node have this endpoint ip-{} port-{} workid-{} childnode and start SUCCESS",
 							ip, port, this.workerId);
 					} else {
 						//表示新启动的节点,创建持久节点 ,不用check时间
@@ -153,19 +153,19 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 						this.workerId = Integer.parseInt(nodeKey[1]);
 						doService(curator);
 						updateLocalWorkerID(this.workerId);
-						LogUtil.info("[New NODE]can not find node on forever node that endpoint ip-{} port-{} workid-{},create own node on forever node and start SUCCESS ",
+						LogUtils.info("[New NODE]can not find node on forever node that endpoint ip-{} port-{} workid-{},create own node on forever node and start SUCCESS ",
 							ip, port, this.workerId);
 					}
 				}
 			} catch (Exception e) {
-				LogUtil.error("Start node ERROR {}", e);
+				LogUtils.error("Start node ERROR {}", e);
 				try {
 					Properties properties = new Properties();
 					properties.load(new FileInputStream(new File(PROP_PATH.replace("{port}", port + ""))));
 					workerId = Integer.parseInt(properties.getProperty("workerID"));
-					LogUtil.warn("START FAILED ,use local node file properties workerID-{}", workerId);
+					LogUtils.warn("START FAILED ,use local node file properties workerID-{}", workerId);
 				} catch (Exception e1) {
-					LogUtil.error("Read file error ", e1);
+					LogUtils.error("Read file error ", e1);
 					return false;
 				}
 			}
@@ -204,7 +204,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 					.withMode(CreateMode.PERSISTENT_SEQUENTIAL)
 					.forPath(PATH_FOREVER + "/" + listenAddress + "-", buildData().getBytes());
 			} catch (Exception e) {
-				LogUtil.error("create node error msg {} ", e.getMessage());
+				LogUtils.error("create node error msg {} ", e.getMessage());
 				throw e;
 			}
 		}
@@ -217,7 +217,7 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 				curator.setData().forPath(path, buildData().getBytes());
 				lastUpdateTime = System.currentTimeMillis();
 			} catch (Exception e) {
-				LogUtil.info("update init data error path is {} error is {}", path, e);
+				LogUtils.info("update init data error path is {} error is {}", path, e);
 			}
 		}
 
@@ -243,32 +243,32 @@ public class ZookeeperIdGenerator implements CommandLineRunner {
 		private void updateLocalWorkerID(int workerID) {
 			File leafConfFile = new File(PROP_PATH.replace("{port}", port));
 			boolean exists = leafConfFile.exists();
-			LogUtil.info("file exists status is {}", exists);
+			LogUtils.info("file exists status is {}", exists);
 			if (exists) {
 				try {
 					FileUtils.writeStringToFile(leafConfFile, "workerID=" + workerID, StandardCharsets.UTF_8);
-					LogUtil.info("update file cache workerID is {}", workerID);
+					LogUtils.info("update file cache workerID is {}", workerID);
 				} catch (IOException e) {
-					LogUtil.error("update file cache error ", e);
+					LogUtils.error("update file cache error ", e);
 				}
 			} else {
 				//不存在文件,父目录页肯定不存在
 				try {
 					boolean mkdirs = leafConfFile.getParentFile().mkdirs();
-					LogUtil.info(
+					LogUtils.info(
 						"init local file cache create parent dis status is {}, worker id is {}",
 						mkdirs, workerID);
 					if (mkdirs) {
 						if (leafConfFile.createNewFile()) {
 							FileUtils.writeStringToFile(leafConfFile, "workerID=" + workerID,
 								StandardCharsets.UTF_8);
-							LogUtil.info("local file cache workerID is {}", workerID);
+							LogUtils.info("local file cache workerID is {}", workerID);
 						}
 					} else {
-						LogUtil.warn("create parent dir error===");
+						LogUtils.warn("create parent dir error===");
 					}
 				} catch (IOException e) {
-					LogUtil.warn("craete workerID conf file error", e);
+					LogUtils.warn("craete workerID conf file error", e);
 				}
 			}
 		}

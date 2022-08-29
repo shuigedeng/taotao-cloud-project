@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.order.api.message.OrderMessage;
@@ -56,7 +56,7 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 			//获取订单信息
 			Order order = orderService.getBySn(orderMessage.orderSn());
 			//计算赠送经验值数量
-			BigDecimal point = CurrencyUtil.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
+			BigDecimal point = CurrencyUtils.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
 			//赠送会员经验值
 			memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(), order.getMemberId(), "会员下单，赠送经验值" + point + "分");
 		}

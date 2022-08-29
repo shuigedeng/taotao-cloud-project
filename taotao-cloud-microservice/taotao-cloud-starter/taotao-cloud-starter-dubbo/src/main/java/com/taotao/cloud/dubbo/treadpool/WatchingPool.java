@@ -15,17 +15,14 @@
  */
 package com.taotao.cloud.dubbo.treadpool;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.threadpool.support.fixed.FixedThreadPool;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -81,9 +78,9 @@ public class WatchingPool extends FixedThreadPool implements Runnable {
 
 			double percent = activeCount / (corePoolSize * 1.0);
 
-			LogUtil.info("线程池状态：{}/{},: {}%", activeCount, corePoolSize, percent * 100);
+			LogUtils.info("线程池状态：{}/{},: {}%", activeCount, corePoolSize, percent * 100);
 			if (percent > ALARM_PERCENT) {
-				LogUtil.error("超出警戒线 : host:{}, 当前使用量 {}%, URL:{}", url.getHost(), percent * 100, url);
+				LogUtils.error("超出警戒线 : host:{}, 当前使用量 {}%, URL:{}", url.getHost(), percent * 100, url);
 			}
 		}
 	}

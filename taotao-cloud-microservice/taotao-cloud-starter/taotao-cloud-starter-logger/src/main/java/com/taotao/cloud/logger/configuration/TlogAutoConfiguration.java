@@ -17,7 +17,7 @@ package com.taotao.cloud.logger.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.yomahub.tlog.springboot.lifecircle.TLogPropertyConfiguration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -36,7 +36,7 @@ public class TlogAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(TlogAutoConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(TlogAutoConfiguration.class, StarterName.LOG_STARTER);
 	}
 
 }

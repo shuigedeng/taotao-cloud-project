@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.properties.ThreadPoolProperties;
 import java.util.concurrent.Executor;
@@ -44,7 +44,7 @@ public class ThreadPoolAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ThreadPoolAutoConfiguration.class, StarterName.DINGTALK_STARTER);
+		LogUtils.started(ThreadPoolAutoConfiguration.class, StarterName.DINGTALK_STARTER);
 	}
 
 	@Bean(name = DingerConstant.DINGER_EXECUTOR)

@@ -18,7 +18,7 @@
 package com.taotao.cloud.data.mybatis.plus.l2cache;
 
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -47,7 +47,7 @@ public class RedisMybatisCache implements Cache {
 
 	public RedisMybatisCache(final String id) {
 		this.id = id;
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		if (Objects.isNull(redisRepository)) {
 			throw new BaseException("未查询到");
 		}

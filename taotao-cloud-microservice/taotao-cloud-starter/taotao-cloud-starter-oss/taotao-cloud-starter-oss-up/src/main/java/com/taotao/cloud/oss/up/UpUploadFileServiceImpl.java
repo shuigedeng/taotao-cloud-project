@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.oss.up;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
 import com.taotao.cloud.oss.common.service.AbstractUploadFileService;
@@ -71,7 +71,7 @@ public class UpUploadFileServiceImpl extends AbstractUploadFileService {
 			response = upyun.writeFile(filePath, buffer, new HashMap<>());
 			uploadFileInfo.setUrl(filePath);
 		} catch (Exception e) {
-			LogUtil.error("[UpYun]文件上传失败:", e);
+			LogUtils.error("[UpYun]文件上传失败:", e);
 			throw new UploadFileException("[UpYun]文件上传失败");
 		}
 		if (!response.isSuccessful()) {
@@ -104,7 +104,7 @@ public class UpUploadFileServiceImpl extends AbstractUploadFileService {
 			response = upyun.writeFile(filePath, buffer, new HashMap<>());
 			uploadFileInfo.setUrl(filePath);
 		} catch (Exception e) {
-			LogUtil.error("[UpYun]文件上传失败:", e);
+			LogUtils.error("[UpYun]文件上传失败:", e);
 			throw new UploadFileException("[UpYun]文件上传失败");
 		}
 
@@ -119,7 +119,7 @@ public class UpUploadFileServiceImpl extends AbstractUploadFileService {
 		try {
 			upyun.deleteFile(uploadFileInfo.getUrl(), new HashMap<>());
 		} catch (Exception e) {
-			LogUtil.error("[UpYun]文件删除失败:", e);
+			LogUtils.error("[UpYun]文件删除失败:", e);
 			throw new UploadFileException("[UpYun]文件删除失败");
 		}
 		return uploadFileInfo;

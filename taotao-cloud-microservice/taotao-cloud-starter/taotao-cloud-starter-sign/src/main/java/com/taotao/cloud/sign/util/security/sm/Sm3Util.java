@@ -1,7 +1,7 @@
 package com.taotao.cloud.sign.util.security.sm;
 
 import cn.hutool.crypto.SmUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.properties.EncryptBodyProperties;
 import com.taotao.cloud.sign.exception.EncryptDtguaiException;
 import com.taotao.cloud.sign.util.ISecurity;
@@ -39,7 +39,7 @@ public class Sm3Util implements ISecurity {
      */
     @Override
     public String decrypt(String content, String password, EncryptBodyProperties config) {
-        LogUtil.error("SM3消息摘要加密,可以用MD5作为对比理解,无法解密");
+        LogUtils.error("SM3消息摘要加密,可以用MD5作为对比理解,无法解密");
         throw new EncryptDtguaiException("SM3消息摘要加密,可以用MD5作为对比理解,无法解密");
     }
 }

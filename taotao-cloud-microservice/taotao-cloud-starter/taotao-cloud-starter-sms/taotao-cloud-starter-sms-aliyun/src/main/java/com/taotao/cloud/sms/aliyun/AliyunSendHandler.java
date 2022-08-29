@@ -20,8 +20,8 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
@@ -80,14 +80,14 @@ public class AliyunSendHandler extends AbstractSendHandler<AliyunProperties> {
 		try {
 			paramString = objectMapper.writeValueAsString(noticeData.getParams());
 		} catch (Exception e) {
-			LogUtil.debug(e.getMessage(), e);
+			LogUtils.debug(e.getMessage(), e);
 			publishSendFailEvent(noticeData, phones, e);
 			return false;
 		}
 
 		SendSmsRequest request = new SendSmsRequest();
 		request.setSysMethod(MethodType.POST);
-		request.setPhoneNumbers(StringUtil.join(phones, ","));
+		request.setPhoneNumbers(StringUtils.join(phones, ","));
 		request.setSignName(properties.getSignName());
 		request.setTemplateCode(properties.getTemplates(noticeData.getType()));
 		request.setTemplateParam(paramString);
@@ -100,13 +100,13 @@ public class AliyunSendHandler extends AbstractSendHandler<AliyunProperties> {
 				return true;
 			}
 
-			LogUtil.debug("send fail[code={}, message={}]", sendSmsResponse.getCode(),
+			LogUtils.debug("send fail[code={}, message={}]", sendSmsResponse.getCode(),
 				sendSmsResponse.getMessage());
 
 			publishSendFailEvent(noticeData, phones,
 				new SendFailedException(sendSmsResponse.getMessage()));
 		} catch (Exception e) {
-			LogUtil.debug(e.getMessage(), e);
+			LogUtils.debug(e.getMessage(), e);
 			publishSendFailEvent(noticeData, phones, e);
 		}
 		return false;

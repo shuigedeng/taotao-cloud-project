@@ -16,8 +16,8 @@
 package com.taotao.cloud.data.mybatis.plus.utils;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiFunction;
@@ -51,7 +51,7 @@ public class MybatisBatchUtil {
 	public <T, U, R> int batchUpdateOrInsert(List<T> data, Class<U> mapperClass,
 		BiFunction<T, U, R> function) {
 		int i = 1;
-		SqlSessionFactory sqlSessionFactory = ContextUtil.getBean(SqlSessionFactory.class, false);
+		SqlSessionFactory sqlSessionFactory = ContextUtils.getBean(SqlSessionFactory.class, false);
 		if (Objects.isNull(sqlSessionFactory)) {
 			throw new MybatisPlusException("未获取到sqlSession");
 		}
@@ -69,7 +69,7 @@ public class MybatisBatchUtil {
 			}
 		} catch (Exception e) {
 			sqlSession.rollback();
-			LogUtil.error(e);
+			LogUtils.error(e);
 		} finally {
 			sqlSession.close();
 		}

@@ -16,8 +16,8 @@
 package com.taotao.cloud.monitor.collect.task;
 
 
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
@@ -118,18 +118,18 @@ public class ThreadCollectTask extends AbstractCollectTask {
 			}
 			lastThreadUserTime = treadUserTime;
 			if (runable != null) {
-				threadInfo.maxRunnableDetail = ExceptionUtil.trace2String(runable.getStackTrace());
+				threadInfo.maxRunnableDetail = ExceptionUtils.trace2String(runable.getStackTrace());
 			}
 			if (wait != null) {
-				threadInfo.maxWaitingDetail = ExceptionUtil.trace2String(wait.getStackTrace());
+				threadInfo.maxWaitingDetail = ExceptionUtils.trace2String(wait.getStackTrace());
 			}
 			if (block != null) {
-				threadInfo.maxBlockedDetail = ExceptionUtil.trace2String(block.getStackTrace());
+				threadInfo.maxBlockedDetail = ExceptionUtils.trace2String(block.getStackTrace());
 			}
 			return threadInfo;
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

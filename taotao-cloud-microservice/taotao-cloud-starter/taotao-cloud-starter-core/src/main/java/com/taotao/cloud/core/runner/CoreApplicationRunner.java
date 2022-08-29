@@ -16,8 +16,8 @@
 package com.taotao.cloud.core.runner;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
@@ -32,7 +32,7 @@ public class CoreApplicationRunner implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments var1) throws Exception {
-		LogUtil.info("------- 应用[{}]已正常启动 -------",
-			PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
+		LogUtils.info("------- 应用[{}]已正常启动 -------",
+			PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY));
 	}
 }

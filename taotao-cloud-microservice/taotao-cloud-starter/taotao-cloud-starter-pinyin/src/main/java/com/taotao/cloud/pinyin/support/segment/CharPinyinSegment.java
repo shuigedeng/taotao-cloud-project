@@ -2,7 +2,7 @@ package com.taotao.cloud.pinyin.support.segment;
 
 
 import com.taotao.cloud.common.support.handler.IHandler;
-import com.taotao.cloud.common.utils.collection.ArrayPrimitiveUtil;
+import com.taotao.cloud.common.utils.collection.ArrayPrimitiveUtils;
 import com.taotao.cloud.pinyin.spi.IPinyinSegment;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class CharPinyinSegment implements IPinyinSegment {
     public List<String> segment(String string) {
         char[] chars = string.toCharArray();
 
-        return ArrayPrimitiveUtil.toList(chars, new IHandler<Character, String>() {
+        return ArrayPrimitiveUtils.toList(chars, new IHandler<Character, String>() {
             @Override
             public String handle(Character character) {
                 return String.valueOf(character);

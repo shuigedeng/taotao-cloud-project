@@ -16,8 +16,6 @@
 package com.taotao.cloud.xss.support;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;

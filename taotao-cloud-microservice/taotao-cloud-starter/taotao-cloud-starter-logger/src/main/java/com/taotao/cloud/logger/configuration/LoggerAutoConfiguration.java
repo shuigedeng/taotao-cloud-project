@@ -16,7 +16,7 @@
 package com.taotao.cloud.logger.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.aspect.RequestLoggerAspect;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
 import com.taotao.cloud.logger.listener.RequestLoggerListener;
@@ -29,7 +29,6 @@ import com.taotao.cloud.logger.service.impl.RedisRequestLoggerServiceImpl;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Component;
 
 /**
  * 当web项目引入此依赖时，自动配置对应的内容 初始化log的事件监听与切面配置
@@ -55,7 +53,7 @@ public class LoggerAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(LoggerAutoConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(LoggerAutoConfiguration.class, StarterName.LOG_STARTER);
 	}
 
 	/**
@@ -71,7 +69,7 @@ public class LoggerAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtil.started(RequestLoggerConfiguration.class, StarterName.LOG_STARTER);
+			LogUtils.started(RequestLoggerConfiguration.class, StarterName.LOG_STARTER);
 		}
 
 		@Autowired

@@ -12,7 +12,7 @@ import cn.hutool.core.util.StrUtil;
 import com.pingan.radosgw.sdk.service.RadosgwService;
 import com.pingan.radosgw.sdk.service.request.ListObjectsRequest;
 import com.pingan.radosgw.sdk.service.request.MutilpartUploadFileRequest;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
@@ -21,7 +21,6 @@ import com.taotao.cloud.oss.common.model.OssInfo;
 import com.taotao.cloud.oss.common.model.SliceConfig;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.pingan.PingAnOssConfig;
 import org.apache.http.HttpHeaders;
 import repkg.com.amazonaws.AmazonClientException;
 import repkg.com.amazonaws.services.s3.model.ObjectListing;
@@ -122,11 +121,11 @@ public class PingAnOssClient implements StandardOssClient {
 
 	@Override
 	public void downLoadCheckPoint(File localFile, String targetName) {
-		LogUtil.warn("平安云不支持断点续传下载，将使用普通下载");
+		LogUtils.warn("平安云不支持断点续传下载，将使用普通下载");
 		try (OutputStream os = new FileOutputStream(localFile)) {
 			downLoad(os, targetName);
 		} catch (Exception e) {
-			LogUtil.error("{}下载失败", targetName, e);
+			LogUtils.error("{}下载失败", targetName, e);
 			throw new OssException(e);
 		}
 	}
@@ -249,7 +248,7 @@ public class PingAnOssClient implements StandardOssClient {
 						.toString(DatePattern.NORM_DATETIME_PATTERN));
 				ossInfo.setLength(objectMetadata.getContentLength());
 			} catch (Exception e) {
-				LogUtil.error("获取{}文件属性失败", key, e);
+				LogUtils.error("获取{}文件属性失败", key, e);
 			}
 		} else {
 			ossInfo = new DirectoryOssInfo();

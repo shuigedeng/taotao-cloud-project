@@ -18,7 +18,7 @@ package com.taotao.cloud.core.monitor;
 
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Callable.Action1;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
 import com.taotao.cloud.core.model.Collector;
@@ -122,7 +122,7 @@ public class Monitor {
 				monitorShutdown();
 				asyncShutdown();
 			} catch (Exception e) {
-				LogUtil.error(e, "关闭SystemThreadPool时出错");
+				LogUtils.error(e, "关闭SystemThreadPool时出错");
 			}
 		}, Integer.MAX_VALUE, false);
 	}
@@ -144,7 +144,7 @@ public class Monitor {
 			&& monitorThreadPoolExecutor.getMaximumPoolSize()
 			<= monitorThreadPoolExecutor.getPoolSize()
 			&& monitorThreadPoolExecutor.getQueue().size() > 0) {
-			LogUtil.warn(
+			LogUtils.warn(
 				"监控线程池已满 任务开始出现排队 请修改配置 [taotao.cloud.core.threadpool.monitor.maximumPoolSize] 当前活动线程数: {}"
 				, monitorThreadPoolExecutor.getActiveCount());
 		}
@@ -154,7 +154,7 @@ public class Monitor {
 		if (asyncProperties.isCheckHealth()
 			&& asyncThreadPoolExecutor.getMaxPoolSize() <= asyncThreadPoolExecutor.getPoolSize()
 			&& asyncThreadPoolExecutor.getThreadPoolExecutor().getQueue().size() > 0) {
-			LogUtil.warn(
+			LogUtils.warn(
 				"核心线程池已满 任务开始出现排队 请修改配置 [taotao.cloud.core.threadpool.async.threadPoolMaxSiz] 当前活动线程数: {}"
 				, asyncThreadPoolExecutor.getActiveCount());
 		}
@@ -168,7 +168,7 @@ public class Monitor {
 
 	public <T> Future<T> asyncSubmit(String taskName, Callable<T> task) {
 		if (Objects.isNull(asyncThreadPoolExecutor)) {
-			LogUtil.warn("核心线程池未初始化");
+			LogUtils.warn("核心线程池未初始化");
 			return null;
 		}
 
@@ -183,7 +183,7 @@ public class Monitor {
 
 	public Future<?> asyncSubmit(String taskName, Runnable task) {
 		if (Objects.isNull(asyncThreadPoolExecutor)) {
-			LogUtil.warn("核心线程池未初始化");
+			LogUtils.warn("核心线程池未初始化");
 			return null;
 		}
 
@@ -197,7 +197,7 @@ public class Monitor {
 
 	public boolean coreIsShutdown() {
 		if (Objects.isNull(asyncThreadPoolExecutor)) {
-			LogUtil.warn("核心线程池未初始化");
+			LogUtils.warn("核心线程池未初始化");
 			return true;
 		}
 
@@ -267,7 +267,7 @@ public class Monitor {
 				try {
 					latch.await();
 				} catch (InterruptedException exp) {
-					LogUtil.error(exp, "parallelFor 任务计数异常");
+					LogUtils.error(exp, "parallelFor 任务计数异常");
 				}
 
 				for (Future<?> f : result) {
@@ -333,7 +333,7 @@ public class Monitor {
 				try {
 					latch.await();
 				} catch (InterruptedException exp) {
-					LogUtil.error(exp, "parallelFor 任务计数异常");
+					LogUtils.error(exp, "parallelFor 任务计数异常");
 				}
 				if (!exceptionRef.isNull()) {
 					throw new BaseException("parallelFor 并行执行出错", exceptionRef.getData());

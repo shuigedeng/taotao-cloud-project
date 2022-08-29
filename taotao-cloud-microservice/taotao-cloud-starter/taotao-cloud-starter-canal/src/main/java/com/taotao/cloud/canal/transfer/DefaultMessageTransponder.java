@@ -29,8 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import org.springframework.util.StringUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 
 /**
  * 默认信息转换器
@@ -53,7 +52,7 @@ public class DefaultMessageTransponder extends AbstractBasicMessageTransponder {
 		String schemaName, String tableName, CanalEntry.EventType eventType) {
 		//看看指令是否正确
 		Predicate<Map.Entry<Method, ListenPoint>> df = e ->
-			StringUtil.isEmpty(e.getValue().destination())
+			StringUtils.isEmpty(e.getValue().destination())
 				|| e.getValue().destination().equals(destination) || destination == null;
 
 		//看看数据库实例名是否一样

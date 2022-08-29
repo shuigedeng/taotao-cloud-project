@@ -15,31 +15,22 @@
  */
 package com.taotao.cloud.redis.configuration;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.enums.SerializerType;
 import com.taotao.cloud.redis.properties.CacheProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.List;
 import org.redisson.api.RedissonClient;
 import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
-import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cache.Cache;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
@@ -64,7 +55,7 @@ public class RedisAutoConfiguration  implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RedisAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	//@Bean
@@ -93,7 +84,7 @@ public class RedisAutoConfiguration  implements InitializingBean {
 		//objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(),
 		//	DefaultTyping.NON_FINAL, As.PROPERTY);
 
-		return new GenericJackson2JsonRedisSerializer(JsonUtil.MAPPER);
+		return new GenericJackson2JsonRedisSerializer(JsonUtils.MAPPER);
 	}
 
 	@Bean

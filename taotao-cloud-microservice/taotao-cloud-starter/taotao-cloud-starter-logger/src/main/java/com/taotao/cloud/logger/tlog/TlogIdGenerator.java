@@ -1,6 +1,6 @@
 package com.taotao.cloud.logger.tlog;
 
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.yomahub.tlog.id.TLogIdGenerator;
 
 /**
@@ -13,6 +13,6 @@ import com.yomahub.tlog.id.TLogIdGenerator;
 public class TlogIdGenerator extends TLogIdGenerator {
     @Override
     public String generateTraceId() {
-        return IdGeneratorUtil.getIdStr();
+        return IdGeneratorUtils.getIdStr();
     }
 }

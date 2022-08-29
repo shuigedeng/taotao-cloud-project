@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.web.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.web.query.EvaluationPageQuery;
@@ -72,7 +72,7 @@ public class MemberEvaluationBuyerController {
 	@GetMapping
 	public Result<PageModel<MemberEvaluationVO>> queryMineEvaluation(@Validated EvaluationPageQuery evaluationPageQuery) {
 		//设置当前登录会员
-		evaluationPageQuery.setMemberId(SecurityUtil.getUserId());
+		evaluationPageQuery.setMemberId(SecurityUtils.getUserId());
 		IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.managerQuery(evaluationPageQuery);
 		return Result.success(PageModel.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
 	}

@@ -17,13 +17,12 @@ package com.taotao.cloud.jetcache.configuration;
 
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.support.SpringConfigProvider;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.jetcache.enhance.JetcacheCacheManager;
 import com.taotao.cloud.jetcache.enhance.JetCacheCreateCacheFactory;
 import com.taotao.cloud.jetcache.properties.JetCacheProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -53,7 +52,7 @@ public class JetCacheAutoConfiguration implements InitializingBean {
 	public JetCacheCreateCacheFactory jetCacheCreateCacheFactory(
 		SpringConfigProvider springConfigProvider) {
 		JetCacheCreateCacheFactory factory = new JetCacheCreateCacheFactory(springConfigProvider);
-		LogUtil.info("Bean [Jet Cache Create Cache Factory] Auto Configure.");
+		LogUtils.info("Bean [Jet Cache Create Cache Factory] Auto Configure.");
 		return factory;
 	}
 
@@ -64,7 +63,7 @@ public class JetCacheAutoConfiguration implements InitializingBean {
 		JetcacheCacheManager jetcacheCacheManager = new JetcacheCacheManager(
 			jetCacheCreateCacheFactory, cacheProperties);
 		jetcacheCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
-		LogUtil.info("Bean [Jet Cache  Cache Manager] Auto Configure.");
+		LogUtils.info("Bean [Jet Cache  Cache Manager] Auto Configure.");
 		return jetcacheCacheManager;
 	}
 

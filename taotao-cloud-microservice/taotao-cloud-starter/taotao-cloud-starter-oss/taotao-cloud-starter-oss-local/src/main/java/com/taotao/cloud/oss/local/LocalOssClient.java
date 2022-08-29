@@ -9,7 +9,7 @@ import cn.hutool.core.io.file.PathUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
@@ -25,7 +25,6 @@ import com.taotao.cloud.oss.common.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.common.model.upload.UploadPart;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.local.LocalOssConfig;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -270,7 +269,7 @@ public class LocalOssClient implements StandardOssClient {
             ossInfo.setCreateTime(DateUtil.date(creationTime.toMillis()).toString(DatePattern.NORM_DATETIME_PATTERN));
             ossInfo.setLength(size);
         } catch (Exception e) {
-            LogUtil.error("获取{}文件属性失败", targetName, e);
+            LogUtils.error("获取{}文件属性失败", targetName, e);
         }
 
         return Optional.ofNullable(ossInfo).orElse(new FileOssInfo());

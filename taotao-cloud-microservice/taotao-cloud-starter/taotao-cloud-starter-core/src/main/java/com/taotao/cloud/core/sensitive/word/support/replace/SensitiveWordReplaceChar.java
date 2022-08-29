@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.support.replace;
 
-import com.taotao.cloud.common.utils.lang.CharUtil;
+import com.taotao.cloud.common.utils.lang.CharUtils;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplaceContext;
 
@@ -19,7 +19,7 @@ public class SensitiveWordReplaceChar implements ISensitiveWordReplace {
     public String replace(ISensitiveWordReplaceContext context) {
         int wordLength = context.wordLength();
 
-        return CharUtil.repeat(replaceChar, wordLength);
+        return CharUtils.repeat(replaceChar, wordLength);
     }
 
 }

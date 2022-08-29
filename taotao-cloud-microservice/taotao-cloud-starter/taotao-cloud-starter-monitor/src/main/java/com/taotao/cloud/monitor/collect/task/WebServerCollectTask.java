@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.monitor.collect.task;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
@@ -71,20 +71,20 @@ public class WebServerCollectTask extends AbstractCollectTask {
 	@Override
 	protected CollectInfo getData() {
 		try {
-			ConfigurableWebServerApplicationContext context = ContextUtil.getConfigurableWebServerApplicationContext();
+			ConfigurableWebServerApplicationContext context = ContextUtils.getConfigurableWebServerApplicationContext();
 			if (context != null) {
 				WebServer webServer = context.getWebServer();
 				if (webServer instanceof TomcatWebServer) {
 
-					Object getTomcat = ReflectionUtil.callMethod(webServer, "getTomcat", null);
-					Object getConnector = ReflectionUtil.callMethod(getTomcat, "getConnector",
+					Object getTomcat = ReflectionUtils.callMethod(webServer, "getTomcat", null);
+					Object getConnector = ReflectionUtils.callMethod(getTomcat, "getConnector",
 						null);
-					Object getProtocolHandler = ReflectionUtil.callMethod(getConnector,
+					Object getProtocolHandler = ReflectionUtils.callMethod(getConnector,
 						"getProtocolHandler", null);
-					Object executor = ReflectionUtil.callMethod(getProtocolHandler, "getExecutor",
+					Object executor = ReflectionUtils.callMethod(getProtocolHandler, "getExecutor",
 						null);
 
-					Class<?> poolCls = ReflectionUtil.tryClassForName(
+					Class<?> poolCls = ReflectionUtils.tryClassForName(
 						"org.apache.tomcat.util.threads.ThreadPoolExecutor");
 
 					if (executor != null && poolCls.isAssignableFrom(executor.getClass())) {
@@ -107,42 +107,42 @@ public class WebServerCollectTask extends AbstractCollectTask {
 				if (webServer instanceof UndertowWebServer) {
 					UndertowInfo info = new UndertowInfo();
 
-					Object undertow = ReflectionUtil.tryGetValue(webServer, "undertow");
-					info.bufferSize = ReflectionUtil.tryGetValue(undertow, "bufferSize");
-					info.ioThreads = ReflectionUtil.tryGetValue(undertow, "ioThreads");
-					info.workerThreads = ReflectionUtil.tryGetValue(undertow, "workerThreads");
-					info.listeners = ReflectionUtil.tryGetValue(undertow, "listeners.size");
-					info.listenerInfo = ReflectionUtil.tryGetValue(undertow, "listenerInfo.size");
-					info.internalWorker = ReflectionUtil.tryGetValue(undertow, "internalWorker");
-					info.byteBufferPool = ReflectionUtil.tryGetValue(undertow,
+					Object undertow = ReflectionUtils.tryGetValue(webServer, "undertow");
+					info.bufferSize = ReflectionUtils.tryGetValue(undertow, "bufferSize");
+					info.ioThreads = ReflectionUtils.tryGetValue(undertow, "ioThreads");
+					info.workerThreads = ReflectionUtils.tryGetValue(undertow, "workerThreads");
+					info.listeners = ReflectionUtils.tryGetValue(undertow, "listeners.size");
+					info.listenerInfo = ReflectionUtils.tryGetValue(undertow, "listenerInfo.size");
+					info.internalWorker = ReflectionUtils.tryGetValue(undertow, "internalWorker");
+					info.byteBufferPool = ReflectionUtils.tryGetValue(undertow,
 						"byteBufferPool.getBufferSize");
-					info.channels = ReflectionUtil.tryGetValue(undertow, "channels.size");
-					info.workerOptions = ReflectionUtil.tryGetValue(undertow, "workerOptions.size");
-					info.socketOptions = ReflectionUtil.tryGetValue(undertow, "socketOptions.size");
-					info.serverOptions = ReflectionUtil.tryGetValue(undertow, "serverOptions.size");
-					info.xinoName = ReflectionUtil.tryGetValue(undertow, "getXnio.getName");
+					info.channels = ReflectionUtils.tryGetValue(undertow, "channels.size");
+					info.workerOptions = ReflectionUtils.tryGetValue(undertow, "workerOptions.size");
+					info.socketOptions = ReflectionUtils.tryGetValue(undertow, "socketOptions.size");
+					info.serverOptions = ReflectionUtils.tryGetValue(undertow, "serverOptions.size");
+					info.xinoName = ReflectionUtils.tryGetValue(undertow, "getXnio.getName");
 
-					Object mxBean = ReflectionUtil.tryGetValue(undertow, "getWorker.getMXBean");
-					info.workName = ReflectionUtil.tryGetValue(mxBean, "getName");
-					info.workerCorePoolSize = ReflectionUtil.tryGetValue(mxBean,
+					Object mxBean = ReflectionUtils.tryGetValue(undertow, "getWorker.getMXBean");
+					info.workName = ReflectionUtils.tryGetValue(mxBean, "getName");
+					info.workerCorePoolSize = ReflectionUtils.tryGetValue(mxBean,
 						"getCoreWorkerPoolSize");
-					info.workerMaxPoolSize = ReflectionUtil.tryGetValue(mxBean,
+					info.workerMaxPoolSize = ReflectionUtils.tryGetValue(mxBean,
 						"getMaxWorkerPoolSize");
-					info.workerIoThreadCount = ReflectionUtil.tryGetValue(mxBean,
+					info.workerIoThreadCount = ReflectionUtils.tryGetValue(mxBean,
 						"getIoThreadCount");
-					info.workerBusyThreadCount = ReflectionUtil.tryGetValue(mxBean,
+					info.workerBusyThreadCount = ReflectionUtils.tryGetValue(mxBean,
 						"getBusyWorkerThreadCount");
-					info.workerProviderName = ReflectionUtil.tryGetValue(mxBean, "getProviderName");
-					info.workerServerMXBeans = ReflectionUtil.tryGetValue(mxBean,
+					info.workerProviderName = ReflectionUtils.tryGetValue(mxBean, "getProviderName");
+					info.workerServerMXBeans = ReflectionUtils.tryGetValue(mxBean,
 						"getServerMXBeans.size");
-					info.workerPoolSize = ReflectionUtil.tryGetValue(mxBean, "getWorkerPoolSize");
-					info.workerQueueSize = ReflectionUtil.tryGetValue(mxBean, "getWorkerQueueSize");
+					info.workerPoolSize = ReflectionUtils.tryGetValue(mxBean, "getWorkerPoolSize");
+					info.workerQueueSize = ReflectionUtils.tryGetValue(mxBean, "getWorkerQueueSize");
 
 					return info;
 				}
 
 				if(webServer instanceof NettyWebServer){
-					Object httpServer = ReflectionUtil.tryGetValue(webServer, "httpServer");
+					Object httpServer = ReflectionUtils.tryGetValue(webServer, "httpServer");
 					//Object metricsRecorder = ReflectionUtil.tryGetValue(httpServer, "configuration.metricsRecorder");
 					//LogUtil.info("sdfsdfasdfasdf");
 				}
@@ -152,8 +152,8 @@ public class WebServerCollectTask extends AbstractCollectTask {
 				}
 			}
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

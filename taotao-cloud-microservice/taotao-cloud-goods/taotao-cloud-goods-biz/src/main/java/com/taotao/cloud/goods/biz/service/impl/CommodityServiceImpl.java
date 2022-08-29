@@ -14,7 +14,7 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.web.dto.CommodityDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.web.vo.CommoditySkuVO;
@@ -48,7 +48,7 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean addCommodity(List<Commodity> commodityList) {
-		Long storeId = SecurityUtil.getCurrentUser().getStoreId();
+		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		for (Commodity commodity : commodityList) {
 			//检测直播商品
 			checkCommodity(commodity);
@@ -87,7 +87,7 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 
 	@Override
 	public Boolean deleteCommodity(Long goodsId) {
-		SecurityUser currentUser = SecurityUtil.getCurrentUser();
+		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 		if (currentUser == null || (currentUser.getType().equals(UserEnum.STORE.getCode())
 			&& currentUser.getStoreId() == null)) {
 			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
@@ -97,7 +97,7 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 		if ("0".equals(json.getStr("errcode"))) {
 			return this.remove(
 				new LambdaQueryWrapper<Commodity>().eq(Commodity::getLiveGoodsId, goodsId)
-					.eq(Commodity::getStoreId, SecurityUtil.getCurrentUser().getStoreId()));
+					.eq(Commodity::getStoreId, SecurityUtils.getCurrentUser().getStoreId()));
 		}
 		return false;
 	}
@@ -125,7 +125,7 @@ public class CommodityServiceImpl extends ServiceImpl<ICommodityMapper, Commodit
 
 	@Override
 	public IPage<CommoditySkuVO> commodityList(PageParam pageParam, String name, String auditStatus) {
-		SecurityUser currentUser = SecurityUtil.getCurrentUser();
+		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 
 		return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
 			new QueryWrapper<CommoditySkuVO>().like(name != null, "c.name", name)

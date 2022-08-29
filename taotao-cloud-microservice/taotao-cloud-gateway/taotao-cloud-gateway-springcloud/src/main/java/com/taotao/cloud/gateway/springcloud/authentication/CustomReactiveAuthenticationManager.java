@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.gateway.springcloud.authentication;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.core.Authentication;
 import reactor.core.publisher.Mono;
@@ -35,7 +35,7 @@ public class CustomReactiveAuthenticationManager implements ReactiveAuthenticati
 
 	@Override
 	public Mono<Authentication> authenticate(Authentication authentication) {
-		LogUtil.info("taotao cloud user authentication info : {}", authentication.toString());
+		LogUtils.info("taotao cloud user authentication info : {}", authentication.toString());
 
 		return Mono.justOrEmpty(authentication);
 

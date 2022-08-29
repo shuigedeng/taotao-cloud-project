@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.springcloud.anti_reptile.rule;
 
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.AntiReptileProperties;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +29,7 @@ public class IpRule extends AbstractRule {
 
 	@Override
 	protected boolean doExecute(ServerWebExchange exchange) {
-		String ipAddress = RequestUtil.getServerHttpRequestIpAddress(exchange.getRequest());
+		String ipAddress = RequestUtils.getServerHttpRequestIpAddress(exchange.getRequest());
 		List<String> ignoreIpList = properties.getIpRule().getIgnoreIp();
 		if (ignoreIpList != null && ignoreIpList.size() > 0) {
 			for (String ignoreIp : ignoreIpList) {
@@ -81,7 +81,7 @@ public class IpRule extends AbstractRule {
 	 */
 	@Override
 	public void reset(ServerWebExchange exchange, String realRequestUri) {
-		String ipAddress = RequestUtil.getServerHttpRequestIpAddress(exchange.getRequest());
+		String ipAddress = RequestUtils.getServerHttpRequestIpAddress(exchange.getRequest());
 		/**
 		 * 重置计数器
 		 */

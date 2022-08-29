@@ -2,7 +2,7 @@ package com.taotao.cloud.limit.guava;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -41,7 +41,7 @@ public class GuavaLimitAspect {
 		try {
 			return joinPoint.proceed();
 		} catch (Throwable e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			throw new GuavaLimitException(ResultEnum.ERROR);
 		}
     }

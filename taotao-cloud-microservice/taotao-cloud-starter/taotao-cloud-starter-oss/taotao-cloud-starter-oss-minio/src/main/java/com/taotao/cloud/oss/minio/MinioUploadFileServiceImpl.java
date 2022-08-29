@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.oss.minio;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
 import com.taotao.cloud.oss.common.service.AbstractUploadFileService;
 import com.taotao.cloud.oss.common.util.FileUtil;
@@ -197,7 +197,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	public void uploadFile(MultipartFile file, String bucketName, String fileName) {
 		//判断文件是否为空
 		if (null == file || 0 == file.getSize()) {
-			LogUtil.error("文件不能为空");
+			LogUtils.error("文件不能为空");
 		}
 		//判断存储桶是否存在
 		bucketExists(bucketName);
@@ -215,7 +215,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 						.contentType(file.getContentType())
 						.build());
 			} catch (Exception e) {
-				LogUtil.error(e.getMessage());
+				LogUtils.error(e.getMessage());
 			}
 		}
 	}
@@ -239,7 +239,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 					.contentType(file.getContentType())
 					.build());
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage());
+			LogUtils.error(e.getMessage());
 		}
 	}
 
@@ -263,8 +263,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 					.object(fileName)
 					.build());
 			//下载文件
-			HttpServletResponse response = RequestUtil.getResponse();
-			HttpServletRequest request = RequestUtil.getRequest();
+			HttpServletResponse response = RequestUtils.getResponse();
+			HttpServletRequest request = RequestUtils.getRequest();
 			try {
 				BufferedInputStream bis = new BufferedInputStream(inputStream);
 				response.setCharacterEncoding("UTF-8");
@@ -303,7 +303,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage());
+			LogUtils.error(e.getMessage());
 		} finally {
 			if (inputStream != null) {
 				try {
@@ -328,7 +328,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 					.bucket(bucketName)
 					.object(fileName)
 					.build());
-			ServletOutputStream outputStream1 = RequestUtil.getResponse()
+			ServletOutputStream outputStream1 = RequestUtils.getResponse()
 				.getOutputStream();
 			//读取指定路径下面的文件
 			OutputStream outputStream = new BufferedOutputStream(outputStream1);
@@ -365,7 +365,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 					.object(fileName)
 					.build());
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage());
+			LogUtils.error(e.getMessage());
 		}
 		return objectUrl;
 	}
@@ -382,7 +382,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 				GetObjectArgs.builder().bucket(bucketName).object(fileName).build());
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogUtil.info(e.getMessage());
+			LogUtils.info(e.getMessage());
 			return null;
 		}
 	}
@@ -497,7 +497,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 			FileUtil.writeFile(stream, filePath, objectName);
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogUtil.info(e.getMessage());
+			LogUtils.info(e.getMessage());
 		}
 	}
 
@@ -517,7 +517,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 				list.add(item);
 			}
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage());
+			LogUtils.error(e.getMessage());
 		}
 		return list;
 	}
@@ -539,7 +539,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 				list.add(item);
 			}
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage());
+			LogUtils.error(e.getMessage());
 		}
 		return list;
 	}
@@ -611,7 +611,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 			FileUtil.write(stream, filePath, objectName);
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogUtil.info(e.getMessage());
+			LogUtils.info(e.getMessage());
 		}
 	}
 

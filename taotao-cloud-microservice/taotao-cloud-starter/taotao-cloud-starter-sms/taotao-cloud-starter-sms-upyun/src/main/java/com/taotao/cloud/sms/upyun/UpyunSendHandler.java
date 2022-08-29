@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.upyun;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
@@ -61,7 +61,7 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 		String templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -85,7 +85,7 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 				.exchange(API_URL, HttpMethod.POST, httpEntity, String.class);
 
 			if (httpResponse.getBody() == null) {
-				LogUtil.debug("response body ie null");
+				LogUtils.debug("response body ie null");
 				publishSendFailEvent(noticeData, phones,
 					new SendFailedException("response body ie null"));
 				return false;
@@ -96,12 +96,12 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 			boolean isJson = responseContent.startsWith("{") && responseContent.endsWith("}");
 			boolean sendFail = !responseContent.contains("message_ids");
 			if (!isJson || sendFail) {
-				LogUtil.debug("send fail: {}", responseContent);
+				LogUtils.debug("send fail: {}", responseContent);
 				publishSendFailEvent(noticeData, phones, new SendFailedException(responseContent));
 				return false;
 			}
 
-			LogUtil.debug("responseContent: {}", responseContent);
+			LogUtils.debug("responseContent: {}", responseContent);
 
 			UpyunSendResult result = objectMapper.readValue(responseContent, UpyunSendResult.class);
 
@@ -125,7 +125,7 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 
 			return succeed;
 		} catch (Exception e) {
-			LogUtil.error(e.getLocalizedMessage(), e);
+			LogUtils.error(e.getLocalizedMessage(), e);
 			publishSendFailEvent(noticeData, phones, e);
 			return false;
 		}

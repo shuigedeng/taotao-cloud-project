@@ -17,7 +17,7 @@ package com.taotao.cloud.prometheus.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.monitor.collect.HealthCheckProvider;
 import com.taotao.cloud.monitor.configuration.HealthAutoConfiguration;
@@ -79,7 +79,7 @@ public class PrometheusAutoConfiguration implements WebMvcConfigurer, Initializi
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(PrometheusAutoConfiguration.class, StarterName.PROMETHEUS_STARTER);
+		LogUtils.started(PrometheusAutoConfiguration.class, StarterName.PROMETHEUS_STARTER);
 		if (Objects.nonNull(healthCheckProvider)) {
 			Monitor monitorThreadPool = healthCheckProvider.getMonitor();
 			ThreadPoolExecutor monitorThreadPoolExecutor = monitorThreadPool.getMonitorThreadPoolExecutor();
@@ -109,14 +109,14 @@ public class PrometheusAutoConfiguration implements WebMvcConfigurer, Initializi
 							return null;
 						});
 					} catch (Exception e) {
-						LogUtil.warn(StarterName.MONITOR_STARTER, "HealthCheck Prometheus error ",
+						LogUtils.warn(StarterName.MONITOR_STARTER, "HealthCheck Prometheus error ",
 							e);
 					}
 
 					try {
 						Thread.sleep(5 * 1000L);
 					} catch (Exception e) {
-						LogUtil.error(e);
+						LogUtils.error(e);
 					}
 				}
 			});

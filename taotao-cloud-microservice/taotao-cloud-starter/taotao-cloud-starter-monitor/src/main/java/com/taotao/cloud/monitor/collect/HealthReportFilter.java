@@ -16,10 +16,9 @@
 package com.taotao.cloud.monitor.collect;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
-import com.taotao.cloud.monitor.collect.HealthCheckProvider;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.monitor.model.Report;
 import com.taotao.cloud.monitor.properties.DumpProperties;
 import java.io.IOException;
@@ -55,8 +54,8 @@ public class HealthReportFilter implements Filter {
 		String contextPath = org.springframework.util.StringUtils.trimTrailingCharacter(request.getContextPath(), '/');
 		String uri = request.getRequestURI();
 
-		HealthCheckProvider healthProvider = ContextUtil.getBean(HealthCheckProvider.class, true);
-		DumpProperties dumpProperties = ContextUtil.getBean(DumpProperties.class, true);
+		HealthCheckProvider healthProvider = ContextUtils.getBean(HealthCheckProvider.class, true);
+		DumpProperties dumpProperties = ContextUtils.getBean(DumpProperties.class, true);
 		if (Objects.nonNull(healthProvider)
 			&& Objects.nonNull(dumpProperties) && uri.startsWith(contextPath + "/health/report")) {
 			try {
@@ -68,7 +67,7 @@ public class HealthReportFilter implements Filter {
 				if (request.getContentType() != null && request.getContentType().contains("json")) {
 					response.setHeader("Content-type", "application/json;charset=UTF-8");
 					html = report.toJson();
-					ResponseUtil.success(response, html);
+					ResponseUtils.success(response, html);
 					return;
 				} else {
 					response.setHeader("Content-type", "text/html;charset=UTF-8");
@@ -89,7 +88,7 @@ public class HealthReportFilter implements Filter {
 				response.getWriter().flush();
 				response.getWriter().close();
 			} catch (Exception e) {
-				LogUtil.error(e, StarterName.MONITOR_STARTER, "/health/report打开出错");
+				LogUtils.error(e, StarterName.MONITOR_STARTER, "/health/report打开出错");
 				response.getWriter().close();
 			}
 		}

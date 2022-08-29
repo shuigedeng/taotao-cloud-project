@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexService;
 import com.taotao.cloud.goods.api.web.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
@@ -60,14 +60,14 @@ public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Member
 	@Override
 	public Boolean clean() {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtil.getUserId());
+		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
 		return this.remove(lambdaQueryWrapper);
 	}
 
 	@Override
 	public Boolean deleteByIds(List<Long> ids) {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtil.getUserId());
+		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
 		lambdaQueryWrapper.in(MemberBrowse::getGoodsId, ids);
 		this.remove(lambdaQueryWrapper);
 		return true;
@@ -76,7 +76,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Member
 	@Override
 	public List<EsGoodsIndexVO> footPrintPage(PageParam pageParam) {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtil.getUserId());
+		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
 		lambdaQueryWrapper.eq(MemberBrowse::getDelFlag, false);
 		lambdaQueryWrapper.orderByDesc(MemberBrowse::getUpdateTime);
 		List<String> skuIdList = this.baseMapper.footprintSkuIdList(pageParam.buildMpPage(), lambdaQueryWrapper);
@@ -92,7 +92,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, Member
 	@Override
 	public Long getFootprintNum() {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtil.getUserId());
+		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
 		lambdaQueryWrapper.eq(MemberBrowse::getDelFlag, false);
 		return this.count(lambdaQueryWrapper);
 	}

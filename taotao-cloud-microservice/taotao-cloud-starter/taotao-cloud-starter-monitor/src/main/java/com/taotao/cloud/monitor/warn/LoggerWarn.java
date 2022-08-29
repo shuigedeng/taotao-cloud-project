@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.monitor.warn;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.model.Message;
 
 /**
@@ -30,6 +30,6 @@ public class LoggerWarn extends AbstractWarn {
 
 	@Override
 	public void notify(Message message) {
-		LogUtil.warn(JsonUtil.toJSONString(message));
+		LogUtils.warn(JsonUtils.toJSONString(message));
 	}
 }

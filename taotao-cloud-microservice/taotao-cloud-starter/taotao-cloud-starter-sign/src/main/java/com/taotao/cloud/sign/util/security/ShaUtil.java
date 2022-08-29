@@ -3,7 +3,7 @@
 package com.taotao.cloud.sign.util.security;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.properties.EncryptBodyProperties;
 import com.taotao.cloud.sign.enums.SHAEncryptType;
 import com.taotao.cloud.sign.exception.EncryptDtguaiException;
@@ -52,7 +52,7 @@ public class ShaUtil implements ISecurity {
 			}
 			return result.toString();
 		} catch (NoSuchAlgorithmException e) {
-			LogUtil.error("ShaEncryptUtil->encrypt 异常,string:{},type:{}", password, password);
+			LogUtils.error("ShaEncryptUtil->encrypt 异常,string:{},type:{}", password, password);
 			throw new EncryptDtguaiException("ShaEncryptUtil->encrypt 异常");
 		}
 	}
@@ -67,7 +67,7 @@ public class ShaUtil implements ISecurity {
 	 */
 	@Override
 	public String decrypt(String content, String password, EncryptBodyProperties config) {
-		LogUtil.error("SHA摘要加密,无法解密");
+		LogUtils.error("SHA摘要加密,无法解密");
 		throw new EncryptDtguaiException("SHA摘要加密,无法解密");
 	}
 }

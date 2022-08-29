@@ -17,7 +17,7 @@
 package com.taotao.cloud.common.utils.compiler;
 
 import com.taotao.cloud.common.support.function.CheckedFunction;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
 import com.taotao.cloud.common.support.function.Unchecked;
 import java.security.SecureClassLoader;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,7 +71,7 @@ public class ByteCodeLoader extends SecureClassLoader {
 	public static Class<?> load(String className, byte[] byteCode) {
 		CheckedFunction<String, Class<?>> classLoadFunc = (key) -> new ByteCodeLoader(key,
 			byteCode).loadClass(className);
-		return CollectionUtil.computeIfAbsent(JAVA_FILE_OBJECT_MAP, className,
+		return CollectionUtils.computeIfAbsent(JAVA_FILE_OBJECT_MAP, className,
 			Unchecked.function(classLoadFunc));
 	}
 

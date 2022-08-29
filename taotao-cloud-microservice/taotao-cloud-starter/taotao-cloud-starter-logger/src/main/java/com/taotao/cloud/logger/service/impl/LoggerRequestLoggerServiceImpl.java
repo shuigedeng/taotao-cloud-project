@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.logger.service.impl;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
 
@@ -31,6 +31,6 @@ public class LoggerRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	@Override
 	public void save(RequestLogger requestLogger) {
-		LogUtil.info("本地日志记录成功：{}", JsonUtil.toJSONString(requestLogger));
+		LogUtils.info("本地日志记录成功：{}", JsonUtils.toJSONString(requestLogger));
 	}
 }

@@ -16,7 +16,7 @@
 package com.taotao.cloud.monitor.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.monitor.properties.WarnProperties;
 import com.taotao.cloud.monitor.strategy.DefaultWarnStrategy;
@@ -45,7 +45,7 @@ public class WarnProviderAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(WarnProviderAutoConfiguration.class, StarterName.MONITOR_STARTER);
+		LogUtils.started(WarnProviderAutoConfiguration.class, StarterName.MONITOR_STARTER);
 	}
 
 	@Bean

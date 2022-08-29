@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.common.utils.spider;
 
-import com.taotao.cloud.common.utils.convert.ConvertUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.convert.ConvertUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -75,7 +75,7 @@ public class CssQueryMethodInterceptor implements MethodInterceptor {
 			return methodProxy.invokeSuper(object, args);
 		}
 		// 兼容 lombok bug 强制首字母小写： https://github.com/rzwitserloot/lombok/issues/1861
-		String fieldName = StringUtil.firstCharToLower(propertyDescriptor.getDisplayName());
+		String fieldName = StringUtils.firstCharToLower(propertyDescriptor.getDisplayName());
 		Field field = clazz.getDeclaredField(fieldName);
 		if (field == null) {
 			return methodProxy.invokeSuper(object, args);
@@ -99,7 +99,7 @@ public class CssQueryMethodInterceptor implements MethodInterceptor {
 		}
 		// 用于读取 field 上的注解
 		TypeDescriptor typeDescriptor = new TypeDescriptor(field);
-		return ConvertUtil.convert(proxyValue, typeDescriptor);
+		return ConvertUtils.convert(proxyValue, typeDescriptor);
 	}
 
 	@Nullable
@@ -151,7 +151,7 @@ public class CssQueryMethodInterceptor implements MethodInterceptor {
 		String attrName = cssQuery.attr();
 		// 读取的值
 		String attrValue;
-		if (StringUtil.isBlank(attrName)) {
+		if (StringUtils.isBlank(attrName)) {
 			attrValue = element.outerHtml();
 		} else if ("html".equalsIgnoreCase(attrName)) {
 			attrValue = element.html();
@@ -164,7 +164,7 @@ public class CssQueryMethodInterceptor implements MethodInterceptor {
 		}
 		// 判断是否需要正则处理
 		String regex = cssQuery.regex();
-		if (StringUtil.isBlank(attrValue) || StringUtil.isBlank(regex)) {
+		if (StringUtils.isBlank(attrValue) || StringUtils.isBlank(regex)) {
 			return attrValue;
 		}
 		// 处理正则表达式

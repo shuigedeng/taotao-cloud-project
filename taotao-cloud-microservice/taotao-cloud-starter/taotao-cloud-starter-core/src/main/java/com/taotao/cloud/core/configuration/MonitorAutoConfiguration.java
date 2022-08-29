@@ -18,7 +18,7 @@ package com.taotao.cloud.core.configuration;
 import com.alibaba.ttl.TtlCallable;
 import com.alibaba.ttl.TtlRunnable;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.monitor.Monitor;
@@ -39,8 +39,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -60,7 +58,7 @@ public class MonitorAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(MonitorAutoConfiguration.class, StarterName.CORE_STARTER);
+		LogUtils.started(MonitorAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	@Bean
@@ -178,7 +176,7 @@ public class MonitorAutoConfiguration implements InitializingBean {
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 			StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 2];
 
-			LogUtil.info(
+			LogUtils.info(
 				"className[{}] methodName[{}] lineNumber[{}] threadNamePrefix[{}] method[{}]  taskCount[{}] completedTaskCount[{}] activeCount[{}] queueSize[{}]",
 				stackTraceElement.getClassName(),
 				stackTraceElement.getMethodName(),
@@ -275,7 +273,7 @@ public class MonitorAutoConfiguration implements InitializingBean {
 		@Override
 		public void uncaughtException(Thread t, Throwable e) {
 			if (e != null) {
-				LogUtil.error(e, "[警告] [taotao-cloud-monitor-executor] 未捕获错误");
+				LogUtils.error(e, "[警告] [taotao-cloud-monitor-executor] 未捕获错误");
 			}
 
 			if (lastUncaughtExceptionHandler != null) {

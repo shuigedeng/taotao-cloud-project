@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.api.web.query.MemberReceiptPageQuery;
 import com.taotao.cloud.member.api.web.vo.MemberReceiptAddVO;
 import com.taotao.cloud.member.biz.model.entity.Member;
@@ -36,15 +36,15 @@ public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, M
 	public IPage<MemberReceipt> getPage(MemberReceiptPageQuery memberReceiptPageQuery) {
 		LambdaQueryWrapper<MemberReceipt> queryWrapper = new LambdaQueryWrapper<>();
 		//会员名称查询
-		if (StringUtil.isNotEmpty(memberReceiptPageQuery.getMemberName())) {
+		if (StringUtils.isNotEmpty(memberReceiptPageQuery.getMemberName())) {
 			queryWrapper.like(MemberReceipt::getMemberName, memberReceiptPageQuery.getMemberName());
 		}
 		//会员id查询
-		if (StringUtil.isNotEmpty(memberReceiptPageQuery.getMemberId())) {
+		if (StringUtils.isNotEmpty(memberReceiptPageQuery.getMemberId())) {
 			queryWrapper.eq(MemberReceipt::getMemberId, memberReceiptPageQuery.getMemberId());
 		}
 		//会员id查询
-		if (StringUtil.isNotEmpty(memberReceiptPageQuery.getReceiptType())) {
+		if (StringUtils.isNotEmpty(memberReceiptPageQuery.getReceiptType())) {
 			queryWrapper.eq(MemberReceipt::getReceiptType, memberReceiptPageQuery.getReceiptType());
 		}
 		queryWrapper.eq(MemberReceipt::getDeleteFlag, true);
@@ -64,7 +64,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, M
 		}
 		//参数封装
 		MemberReceipt memberReceipt = new MemberReceipt();
-		BeanUtil.copyProperties(memberReceiptAddVO, memberReceipt);
+		BeanUtils.copyProperties(memberReceiptAddVO, memberReceipt);
 		//根据会员信息查询会员
 		Member member = memberService.getById(memberId);
 		if (member != null) {
@@ -110,7 +110,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, M
 			if (receipts.size() > 0) {
 				throw new BusinessException(ResultEnum.USER_RECEIPT_REPEAT_ERROR);
 			}
-			BeanUtil.copyProperties(memberReceiptAddVO, memberReceiptDb);
+			BeanUtils.copyProperties(memberReceiptAddVO, memberReceiptDb);
 			//对发票默认进行处理  如果参数传递新添加的发票信息为默认，则需要把其他发票置为非默认
 			if (memberReceiptAddVO.getIsDefault().equals(1)) {
 				this.update(new UpdateWrapper<MemberReceipt>().eq("member_id", memberId));

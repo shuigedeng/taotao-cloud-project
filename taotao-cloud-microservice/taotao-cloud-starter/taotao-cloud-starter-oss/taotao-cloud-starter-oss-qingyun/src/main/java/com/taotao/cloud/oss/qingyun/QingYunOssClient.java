@@ -15,7 +15,7 @@ import com.qingstor.sdk.exception.QSException;
 import com.qingstor.sdk.service.Bucket;
 import com.qingstor.sdk.service.QingStor;
 import com.qingstor.sdk.service.Types;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
@@ -31,7 +31,6 @@ import com.taotao.cloud.oss.common.model.upload.UpLoadPartResult;
 import com.taotao.cloud.oss.common.model.upload.UploadPart;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
-import com.taotao.cloud.oss.qingyun.QingYunOssConfig;
 
 import java.io.File;
 import java.io.InputStream;
@@ -373,7 +372,7 @@ public class QingYunOssClient implements StandardOssClient {
                 ossInfo.setCreateTime(DateUtil.date(Date.parse(object.getLastModified())).toString(DatePattern.NORM_DATETIME_PATTERN));
                 ossInfo.setLength(object.getContentLength());
             } catch (Exception e) {
-	            LogUtil.error("获取{}文件属性失败", key, e);
+	            LogUtils.error("获取{}文件属性失败", key, e);
             }
         } else {
             ossInfo = new DirectoryOssInfo();

@@ -1,9 +1,9 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
 import com.taotao.cloud.common.support.condition.ICondition;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.common.CharsetUtil;
-import com.taotao.cloud.common.utils.io.FileUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.common.CharsetUtils;
+import com.taotao.cloud.common.utils.io.FileUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -27,14 +27,14 @@ public class StopWordTest {
 
 		List<String> allLines = DataUtil.distinctLines(sourceFile);
 
-		List<String> zhLines = CollectionUtil.conditionList(allLines, new ICondition<String>() {
+		List<String> zhLines = CollectionUtils.conditionList(allLines, new ICondition<String>() {
 			@Override
 			public boolean condition(String s) {
-				return CharsetUtil.isAllChinese(s);
+				return CharsetUtils.isAllChinese(s);
 			}
 		});
 
-		FileUtil.write(targetFile, zhLines);
+		FileUtils.write(targetFile, zhLines);
 	}
 
 }

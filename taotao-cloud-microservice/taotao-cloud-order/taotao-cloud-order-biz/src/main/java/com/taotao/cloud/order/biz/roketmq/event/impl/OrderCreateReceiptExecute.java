@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.web.vo.order.OrderVO;
 import com.taotao.cloud.order.api.web.vo.order.ReceiptVO;
@@ -38,7 +38,7 @@ public class OrderCreateReceiptExecute implements TradeEvent {
 			List<Receipt> receipts = new ArrayList<>();
 			for (OrderVO orderVO : orderList) {
 				Receipt receipt = new Receipt();
-				BeanUtil.copyProperties(receiptVO, receipt);
+				BeanUtils.copyProperties(receiptVO, receipt);
 				receipt.setMemberId(orderVO.orderBase().memberId());
 				receipt.setMemberName(orderVO.orderBase().memberName());
 				receipt.setStoreId(orderVO.orderBase().storeId());

@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -52,7 +52,7 @@ public class WarehouseReceiptController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), WarehouseReceiptInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), WarehouseReceiptInfoVO.class);
                     isData = false;
                 }
             }
@@ -60,8 +60,8 @@ public class WarehouseReceiptController {
         if (isData) {
             WarehouseReceiptEntity entity = warehouseReceiptService.getInfo(id);
             List<WarehouseEntryEntity> entityList = warehouseReceiptService.getWarehouseEntryList(id);
-            vo = JsonUtil.getJsonToBean(entity, WarehouseReceiptInfoVO.class);
-            vo.setEntryList(JsonUtil.getJsonToList(entityList, WarehouseReceiptEntityInfoModel.class));
+            vo = JsonUtils.getJsonToBean(entity, WarehouseReceiptInfoVO.class);
+            vo.setEntryList(JsonUtils.getJsonToList(entityList, WarehouseReceiptEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -76,8 +76,8 @@ public class WarehouseReceiptController {
     @Operation("新建入库申请单")
     @PostMapping
     public Result create(@RequestBody WarehouseReceiptForm warehouseReceiptForm) throws WorkFlowException {
-        WarehouseReceiptEntity warehouse = JsonUtil.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
-        List<WarehouseEntryEntity> warehouseEntryList = JsonUtil.getJsonToList(warehouseReceiptForm.getEntryList(), WarehouseEntryEntity.class);
+        WarehouseReceiptEntity warehouse = JsonUtils.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
+        List<WarehouseEntryEntity> warehouseEntryList = JsonUtils.getJsonToList(warehouseReceiptForm.getEntryList(), WarehouseEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(warehouseReceiptForm.getStatus())) {
             warehouseReceiptService.save(warehouse.getId(), warehouse, warehouseEntryList);
             return Result.success(MsgCode.SU002.get());
@@ -97,8 +97,8 @@ public class WarehouseReceiptController {
     @Operation("修改入库申请单")
     @PutMapping("/{id}")
     public Result update(@RequestBody WarehouseReceiptForm warehouseReceiptForm, @PathVariable("id") String id) throws WorkFlowException {
-        WarehouseReceiptEntity warehouse = JsonUtil.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
-        List<WarehouseEntryEntity> warehouseEntryList = JsonUtil.getJsonToList(warehouseReceiptForm.getEntryList(), WarehouseEntryEntity.class);
+        WarehouseReceiptEntity warehouse = JsonUtils.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
+        List<WarehouseEntryEntity> warehouseEntryList = JsonUtils.getJsonToList(warehouseReceiptForm.getEntryList(), WarehouseEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(warehouseReceiptForm.getStatus())) {
             warehouseReceiptService.save(id, warehouse, warehouseEntryList);
             return Result.success(MsgCode.SU002.get());

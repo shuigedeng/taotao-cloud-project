@@ -1,6 +1,6 @@
 package com.taotao.cloud.pulsar.model;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.pulsar.client.api.Consumer;
 import org.apache.pulsar.client.api.Message;
 import org.apache.pulsar.client.api.MessageListener;
@@ -18,7 +18,7 @@ public class MessageListenerSyncAtLeastOnce<T> implements MessageListener<T> {
             }
         } catch (Exception e) {
             // 业务方法可能会抛出异常
-	        LogUtil.error("exception is ", e);
+	        LogUtils.error("exception is ", e);
             consumer.negativeAcknowledge(msg);
         }
     }

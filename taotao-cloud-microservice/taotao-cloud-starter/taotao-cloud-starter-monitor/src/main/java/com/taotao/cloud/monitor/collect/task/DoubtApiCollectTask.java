@@ -15,14 +15,13 @@
  */
 package com.taotao.cloud.monitor.collect.task;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -99,8 +98,8 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

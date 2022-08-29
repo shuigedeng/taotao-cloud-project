@@ -29,7 +29,7 @@ import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.entity.SuperEntity;
@@ -149,7 +149,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 				return success(handlerImport(list));
 			}
 		} catch (Exception e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 		}
 
 		throw new BusinessException("导入Excel失败");

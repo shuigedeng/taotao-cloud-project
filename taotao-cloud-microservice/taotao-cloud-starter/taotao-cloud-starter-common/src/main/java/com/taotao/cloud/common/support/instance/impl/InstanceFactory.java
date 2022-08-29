@@ -4,8 +4,8 @@ package com.taotao.cloud.common.support.instance.impl;
 import com.taotao.cloud.common.constant.PunctuationConst;
 import com.taotao.cloud.common.exception.CommonRuntimeException;
 import com.taotao.cloud.common.support.instance.Instance;
-import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.common.ArgUtils;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -89,7 +89,7 @@ public final class InstanceFactory implements Instance {
 
         //1. 校验 map 是否存在
         Map<String, Object> map = mapThreadLocal.get();
-        if(ObjectUtil.isNull(map)) {
+        if(ObjectUtils.isNull(map)) {
             map = new ConcurrentHashMap<>();
         }
 
@@ -138,7 +138,7 @@ public final class InstanceFactory implements Instance {
 
         final String fullClassName = tClass.getName();
         T instance = (T) instanceMap.get(fullClassName);
-        if(ObjectUtil.isNull(instance)) {
+        if(ObjectUtils.isNull(instance)) {
             instance = this.multiple(tClass);
             instanceMap.put(fullClassName, instance);
         }
@@ -156,11 +156,11 @@ public final class InstanceFactory implements Instance {
     private <T> T getSingleton(final Class<T> tClass,
                                final String group, final Map<String, Object> instanceMap) {
         this.notNull(tClass);
-        ArgUtil.notEmpty(group, "key");
+        ArgUtils.notEmpty(group, "key");
 
         final String fullClassName = tClass.getName()+ PunctuationConst.MIDDLE_LINE+group;
         T instance = (T) instanceMap.get(fullClassName);
-        if(ObjectUtil.isNull(instance)) {
+        if(ObjectUtils.isNull(instance)) {
             instance = this.multiple(tClass);
             instanceMap.put(fullClassName, instance);
         }
@@ -172,7 +172,7 @@ public final class InstanceFactory implements Instance {
      * @param tClass class 信息
      */
     private void notNull(final Class tClass) {
-        ArgUtil.notNull(tClass, "class");
+        ArgUtils.notNull(tClass, "class");
     }
 
 }

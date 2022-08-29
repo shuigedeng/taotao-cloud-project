@@ -21,7 +21,7 @@ import com.taotao.cloud.common.http.HttpLogger;
 import com.taotao.cloud.common.http.HttpRequest;
 import com.taotao.cloud.common.http.LogLevel;
 import com.taotao.cloud.common.http.ResponseSpec;
-import com.taotao.cloud.common.utils.secure.Base64Util;
+import com.taotao.cloud.common.utils.secure.Base64Utils;
 import okhttp3.Cookie;
 
 import java.net.URI;
@@ -93,8 +93,8 @@ public class HttpRequestDemo {
 			.query("test", "a")
 			.query("name", "張三")
 			.query("x", 1)
-			.query("abd", Base64Util.encode("123&$#%"))
-			.queryEncoded("abc", Base64Util.encode("123&$#%"))
+			.query("abd", Base64Utils.encode("123&$#%"))
+			.queryEncoded("abc", Base64Utils.encode("123&$#%"))
 			.execute()
 			.onFailed(((request, e) -> {
 				e.printStackTrace();

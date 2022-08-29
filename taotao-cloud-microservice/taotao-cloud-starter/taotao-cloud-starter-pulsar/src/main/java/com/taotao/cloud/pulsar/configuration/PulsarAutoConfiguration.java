@@ -15,13 +15,12 @@
  */
 package com.taotao.cloud.pulsar.configuration;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.pulsar.properties.PulsarProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * PulsarAutoConfiguration
@@ -37,7 +36,7 @@ public class PulsarAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(PulsarAutoConfiguration.class, StarterName.PULSAR_STARTER);
+		LogUtils.started(PulsarAutoConfiguration.class, StarterName.PULSAR_STARTER);
 	}
 
 }

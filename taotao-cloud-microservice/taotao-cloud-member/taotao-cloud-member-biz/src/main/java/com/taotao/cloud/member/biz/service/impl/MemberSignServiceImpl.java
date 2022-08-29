@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.web.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
@@ -62,9 +62,9 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 	public Boolean memberSign() {
 		//获取当前会员信息
 		QueryWrapper<MemberSign> queryWrapper = new QueryWrapper<>();
-		queryWrapper.eq("member_id", SecurityUtil.getUserId());
-		queryWrapper.between("create_time", new Date(DateUtil.startOfTodDay() * 1000),
-			DateUtil.getCurrentDayEndTime());
+		queryWrapper.eq("member_id", SecurityUtils.getUserId());
+		queryWrapper.between("create_time", new Date(DateUtils.startOfTodDay() * 1000),
+			DateUtils.getCurrentDayEndTime());
 
 		//校验今天是否已经签到
 		List<MemberSign> todaySigns = this.baseMapper.getTodayMemberSign(queryWrapper);
@@ -72,17 +72,17 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 			throw new BusinessException(ResultEnum.MEMBER_SIGN_REPEAT);
 		}
 		//当前签到天数的前一天日期
-		List<MemberSign> signs = this.baseMapper.getBeforeMemberSign(SecurityUtil.getUserId());
+		List<MemberSign> signs = this.baseMapper.getBeforeMemberSign(SecurityUtils.getUserId());
 		//构建参数
 		MemberSign memberSign = new MemberSign();
-		memberSign.setMemberId(SecurityUtil.getUserId());
-		memberSign.setMemberName(SecurityUtil.getUsername());
+		memberSign.setMemberId(SecurityUtils.getUserId());
+		memberSign.setMemberName(SecurityUtils.getUsername());
 
 		//如果size大于0 说明昨天已经签到过，获取昨天的签到数，反之新签到
 		if (signs.size() > 0) {
 			//截止目前为止 签到总天数 不带今天
 			Integer signDay = signs.get(0).getSignDay();
-			memberSign.setSignDay(CurrencyUtil.add(BigDecimal.valueOf(signDay), BigDecimal.ONE).intValue());
+			memberSign.setSignDay(CurrencyUtils.add(BigDecimal.valueOf(signDay), BigDecimal.ONE).intValue());
 		} else {
 			memberSign.setSignDay(1);
 		}
@@ -101,8 +101,8 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 
 	@Override
 	public List<MemberSignVO> getMonthSignDay(String time) {
-		List<MemberSign> monthMemberSign = this.baseMapper.getMonthMemberSign(SecurityUtil.getUserId(), time);
-		return BeanUtil.copy(monthMemberSign, MemberSignVO.class);
+		List<MemberSign> monthMemberSign = this.baseMapper.getMonthMemberSign(SecurityUtils.getUserId(), time);
+		return BeanUtils.copy(monthMemberSign, MemberSignVO.class);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 			memberService.updateMemberPoint(point, PointTypeEnum.INCREASE.name(), memberId,
 				content);
 		} catch (Exception e) {
-			LogUtil.error("会员签到错误", e);
+			LogUtils.error("会员签到错误", e);
 		}
 	}
 

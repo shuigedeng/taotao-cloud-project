@@ -7,7 +7,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.recommend.biz.entity.PlatformViewData;
 import com.taotao.cloud.recommend.biz.mapper.PlatformViewMapper;
 import com.taotao.cloud.recommend.biz.service.MemberStatisticsService;
@@ -81,7 +81,7 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
         }
         //初始化数据，填充枚举和比例
         for (MemberDistributionVO vo : memberDistributionVOS) {
-            vo.setProportion(CurrencyUtil.div(vo.getNum(), count, 4));
+            vo.setProportion(CurrencyUtils.div(vo.getNum(), count, 4));
             //客户端填充
             if (StringUtils.isNotEmpty(vo.getClientEnum())) {
                 vo.setClientEnum(ClientTypeEnum.valueOf(vo.getClientEnum()).clientName());

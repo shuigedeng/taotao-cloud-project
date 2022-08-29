@@ -16,8 +16,8 @@
 package com.taotao.cloud.security.security;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,8 +38,8 @@ public class Oauth2AuthenticationFailureHandler implements AuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 		AuthenticationException exception) throws IOException, ServletException {
 
-		LogUtil.error("用户认证失败", exception);
-		ResponseUtil.fail(response, ResultEnum.USER_UNAUTHORIZED_ERROR);
+		LogUtils.error("用户认证失败", exception);
+		ResponseUtils.fail(response, ResultEnum.USER_UNAUTHORIZED_ERROR);
 
 	}
 }

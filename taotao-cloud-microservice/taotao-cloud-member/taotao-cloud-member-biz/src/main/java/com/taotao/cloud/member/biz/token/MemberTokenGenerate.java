@@ -17,7 +17,7 @@ package com.taotao.cloud.member.biz.token;
 
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.UserEnum;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.connect.token.TokenUtil;
 import com.taotao.cloud.member.biz.connect.token.base.AbstractTokenGenerate;
@@ -45,7 +45,7 @@ public class MemberTokenGenerate extends AbstractTokenGenerate<Member> {
 	@Override
 	public Token createToken(Member member, Boolean longTerm) {
 		//获取客户端类型
-		String clientType = RequestUtil.getRequest().getHeader("clientType");
+		String clientType = RequestUtils.getRequest().getHeader("clientType");
 		ClientTypeEnum clientTypeEnum;
 		try {
 			//如果客户端为空，则缺省值为PC，pc第三方登录时不会传递此参数

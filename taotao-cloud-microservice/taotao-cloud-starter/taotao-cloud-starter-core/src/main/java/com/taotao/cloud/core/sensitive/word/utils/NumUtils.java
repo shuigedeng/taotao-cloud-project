@@ -2,8 +2,8 @@ package com.taotao.cloud.core.sensitive.word.utils;
 
 
 import com.google.common.collect.Maps;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
 import java.util.Map;
@@ -69,7 +69,7 @@ public final class NumUtils {
      */
     public static Character getMappingChar(final Character character) {
         final Character mapChar = NUMBER_MAP.get(character);
-        if(ObjectUtil.isNotNull(mapChar)) {
+        if(ObjectUtils.isNotNull(mapChar)) {
             return mapChar;
         }
 
@@ -77,7 +77,7 @@ public final class NumUtils {
     }
 
     public static String getMappingString(final String string) {
-        if(StringUtil.isEmpty(string)) {
+        if(StringUtils.isEmpty(string)) {
             return string;
         }
 

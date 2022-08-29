@@ -17,7 +17,7 @@
 package com.taotao.cloud.feign.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.annotation.ConditionalOnFeignUseHttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.RegistryBuilder;
@@ -54,7 +54,7 @@ public class HttpClientAutoConfiguration {
 
 	@PostConstruct
 	public void postConstruct() {
-		LogUtil.started(HttpClientAutoConfiguration.class, StarterName.FEIGN_STARTER);
+		LogUtils.started(HttpClientAutoConfiguration.class, StarterName.FEIGN_STARTER);
 	}
 
 	private final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1, new ThreadFactory() {
@@ -107,7 +107,7 @@ public class HttpClientAutoConfiguration {
 	public ClientHttpRequestFactory clientHttpRequestFactory(CloseableHttpClient httpClient) {
 		HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory(
 			httpClient);
-		LogUtil.info("Bean [Client Http Request Factory for HttpClient] Auto Configure.");
+		LogUtils.info("Bean [Client Http Request Factory for HttpClient] Auto Configure.");
 		return httpComponentsClientHttpRequestFactory;
 	}
 
@@ -119,7 +119,7 @@ public class HttpClientAutoConfiguration {
 			try {
 				this.httpClient.close();
 			} catch (IOException e) {
-				LogUtil.info(" Could not correctly close httpClient.");
+				LogUtils.info(" Could not correctly close httpClient.");
 			}
 		}
 	}

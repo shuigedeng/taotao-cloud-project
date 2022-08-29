@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.common.http;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import javax.annotation.Nonnull;
@@ -32,7 +32,7 @@ public enum HttpLogger implements HttpLoggingInterceptor.Logger {
 	Slf4j() {
 		@Override
 		public void log(@Nonnull String message) {
-			LogUtil.info(message);
+			LogUtils.info(message);
 		}
 	},
 

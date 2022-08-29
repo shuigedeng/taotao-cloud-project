@@ -1,6 +1,6 @@
 package com.taotao.cloud.job.xxl.timetask;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.lock.support.DistributedLock;
 import com.taotao.cloud.lock.support.ZLock;
 import com.xxl.job.core.biz.model.ReturnT;
@@ -35,7 +35,7 @@ public class TimedTaskJobHandler {
 	 */
 	@XxlJob("everyMinuteExecute")
 	public ReturnT<String> everyMinuteExecute(String param) {
-		LogUtil.info("每分钟任务执行");
+		LogUtils.info("每分钟任务执行");
 		if (everyMinuteExecutes == null || everyMinuteExecutes.size() == 0) {
 			return ReturnT.SUCCESS;
 		}
@@ -48,13 +48,13 @@ public class TimedTaskJobHandler {
 					TimeUnit.MILLISECONDS);
 				everyMinuteExecute.execute();
 			} catch (Exception e) {
-				LogUtil.error("每分钟任务异常", e);
+				LogUtils.error("每分钟任务异常", e);
 				return ReturnT.FAIL;
 			} finally {
 				try {
 					distributedLock.unlock(result);
 				} catch (Exception e) {
-					LogUtil.error("每分钟任务异常", e);
+					LogUtils.error("每分钟任务异常", e);
 				}
 			}
 		}
@@ -66,7 +66,7 @@ public class TimedTaskJobHandler {
 	 */
 	@XxlJob("everyHourExecuteJobHandler")
 	public ReturnT<String> everyHourExecuteJobHandler(String param) {
-		LogUtil.info("每小时任务执行");
+		LogUtils.info("每小时任务执行");
 		if (everyHourExecutes == null || everyHourExecutes.size() == 0) {
 			return ReturnT.SUCCESS;
 		}
@@ -79,13 +79,13 @@ public class TimedTaskJobHandler {
 					TimeUnit.MILLISECONDS);
 				everyHourExecute.execute();
 			} catch (Exception e) {
-				LogUtil.error("每小时任务异常", e);
+				LogUtils.error("每小时任务异常", e);
 				return ReturnT.FAIL;
 			} finally {
 				try {
 					distributedLock.unlock(result);
 				} catch (Exception e) {
-					LogUtil.error("每小时任务异常", e);
+					LogUtils.error("每小时任务异常", e);
 				}
 			}
 		}
@@ -98,7 +98,7 @@ public class TimedTaskJobHandler {
 	@XxlJob("everyDayExecuteJobHandler")
 	public ReturnT<String> everyDayExecuteJobHandler(String param) {
 
-		LogUtil.info("每日任务执行");
+		LogUtils.info("每日任务执行");
 		if (everyDayExecutes == null || everyDayExecutes.size() == 0) {
 			return ReturnT.SUCCESS;
 		}
@@ -112,13 +112,13 @@ public class TimedTaskJobHandler {
 					TimeUnit.MILLISECONDS);
 				everyDayExecute.execute();
 			} catch (Exception e) {
-				LogUtil.error("每天任务异常", e);
+				LogUtils.error("每天任务异常", e);
 				return ReturnT.FAIL;
 			} finally {
 				try {
 					distributedLock.unlock(result);
 				} catch (Exception e) {
-					LogUtil.error("每天任务异常", e);
+					LogUtils.error("每天任务异常", e);
 				}
 			}
 		}

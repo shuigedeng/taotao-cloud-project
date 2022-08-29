@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.core.utils;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.core.monitor.Monitor;
 import java.util.Collection;
@@ -45,7 +45,7 @@ public class ThreadUtil {
 				action.invoke(t);
 			}
 		} else {
-			Monitor monitorThreadPool = ContextUtil.getBean(Monitor.class, false);
+			Monitor monitorThreadPool = ContextUtils.getBean(Monitor.class, false);
 			monitorThreadPool.monitorParallelFor2(taskName, parallelCount, taskList, action);
 		}
 	}

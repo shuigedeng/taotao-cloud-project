@@ -17,17 +17,13 @@ package com.taotao.cloud.logger.service.impl;
 
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.DatePattern;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -52,7 +48,7 @@ public class RedisRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	@Override
 	public void save(RequestLogger requestLogger) {
-		String date = DateUtil.format(LocalDate.now(), DatePattern.COLON_DATE_PATTERN);
+		String date = DateUtils.format(LocalDate.now(), DatePattern.COLON_DATE_PATTERN);
 
 		if (Objects.nonNull(redisRepository)) {
 			redisRepository.send(RedisConstant.REQUEST_LOG_TOPIC, requestLogger);
@@ -61,12 +57,12 @@ public class RedisRequestLoggerServiceImpl implements IRequestLoggerService {
 			if (index > 0) {
 				long andIncrement = sendSuccessNum.getAndIncrement();
 				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
-					LogUtil.info("RedisRequestLogger 远程日志记录成功：成功条数：{}", andIncrement);
+					LogUtils.info("RedisRequestLogger 远程日志记录成功：成功条数：{}", andIncrement);
 				}
 			} else {
 				long andIncrement = sendErrorsNum.getAndIncrement();
 				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {
-					LogUtil.error("RedisRequestLogger 远程日志记录失败：失败条数：{}", andIncrement);
+					LogUtils.error("RedisRequestLogger 远程日志记录失败：失败条数：{}", andIncrement);
 				}
 			}
 		}

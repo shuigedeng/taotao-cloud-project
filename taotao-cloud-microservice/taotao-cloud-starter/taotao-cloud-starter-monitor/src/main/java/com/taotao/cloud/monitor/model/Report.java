@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.monitor.model;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.number.NumberUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.number.NumberUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.strategy.Rule;
@@ -85,7 +85,7 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 			if (value instanceof Number) {
 				if (!reportList.isEmpty()) {
 					sums.replace(item.getKey(),
-						NumberUtil.scale(((Number) value).doubleValue() / reportList.size(), 2));
+						NumberUtils.scale(((Number) value).doubleValue() / reportList.size(), 2));
 				}
 			}
 		}
@@ -112,9 +112,9 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 
 				if (Objects.nonNull(itemValue)) {
 					if (itemValue instanceof Number) {
-						itemValue = NumberUtil.scale((Number) itemValue, 2);
+						itemValue = NumberUtils.scale((Number) itemValue, 2);
 					} else if (itemValue instanceof String) {
-						String text = StringUtil.nullToEmpty(itemValue);
+						String text = StringUtils.nullToEmpty(itemValue);
 						if ((item.getKey()).contains(".detail") && !text.isEmpty()) {
 							itemValue = ("<span style='color:blue;cursor:pointer' title='{title}' "
 								+ "onclick='this.innerHTML=(this.textContent==\"显示详情\"?"
@@ -124,7 +124,7 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 									.replace("\n", "/n"));
 						}
 					} else {
-						itemValue = JsonUtil.toJSONString(itemValue);
+						itemValue = JsonUtils.toJSONString(itemValue);
 					}
 				} else {
 					itemValue = "NULL";
@@ -169,7 +169,7 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 	}
 
 	public String toJson() {
-		return JsonUtil.toJSONString(this);
+		return JsonUtils.toJSONString(this);
 	}
 
 	public void eachReport(ReportItemEachCallBack callBack) {
@@ -212,7 +212,7 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 					parseObject(report2, (CollectInfo) value);
 				} else {
 					report.put(fieldReport.name(),
-						new ReportItem(fieldReport.desc(), JsonUtil.toJSONString(value), "", null));
+						new ReportItem(fieldReport.desc(), JsonUtils.toJSONString(value), "", null));
 				}
 			}
 		}

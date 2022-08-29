@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.common.support.blockchain;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.secure.SHAUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.secure.SHAUtils;
 
 /**
  * Block
@@ -56,7 +56,7 @@ public class Block {
 	public Block(String data, String previousHash) {
 		this.data = data;
 		this.previousHash = previousHash;
-		this.timestamp = DateUtil.getTimestamp();
+		this.timestamp = DateUtils.getTimestamp();
 		// 确保hash值的来源
 		this.hash = calculateHash();
 	}
@@ -69,7 +69,7 @@ public class Block {
 	 * @since 2021-09-02 19:39:49
 	 */
 	public String calculateHash() {
-		return SHAUtil.encrypt256(previousHash +
+		return SHAUtils.encrypt256(previousHash +
 			timestamp +
 			nonce +
 			data);
@@ -90,7 +90,7 @@ public class Block {
 			nonce++;
 			hash = calculateHash();
 		}
-		LogUtil.info("Block Mined: " + hash);
+		LogUtils.info("Block Mined: " + hash);
 		return hash;
 	}
 

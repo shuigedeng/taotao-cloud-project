@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.xss.interceptor;
 
-import com.taotao.cloud.common.utils.reflect.ClassUtil;
+import com.taotao.cloud.common.utils.reflect.ClassUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,7 +56,7 @@ public class XssCleanInterceptor implements AsyncHandlerInterceptor {
 		}
 
 		// 3. 处理 XssIgnore 注解
-		XssCleanIgnore xssCleanIgnore = ClassUtil.getAnnotation(handlerMethod, XssCleanIgnore.class);
+		XssCleanIgnore xssCleanIgnore = ClassUtils.getAnnotation(handlerMethod, XssCleanIgnore.class);
 		if (xssCleanIgnore == null) {
 			XssHolder.setEnable();
 		}

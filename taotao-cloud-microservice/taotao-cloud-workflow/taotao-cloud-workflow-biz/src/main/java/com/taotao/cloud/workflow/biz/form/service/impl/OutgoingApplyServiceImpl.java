@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.form.entity.OutgoingApplyEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.OutgoingApplyMapper;
@@ -44,13 +44,13 @@ public class OutgoingApplyServiceImpl extends ServiceImpl<OutgoingApplyMapper, O
             this.save(entity);
             billRuleService.useBillNumber("WF_OutgoingApplyNo");
             //添加附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             //更新附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         //流程信息
@@ -66,13 +66,13 @@ public class OutgoingApplyServiceImpl extends ServiceImpl<OutgoingApplyMapper, O
             this.save(entity);
             billRuleService.useBillNumber("WF_OutgoingApplyNo");
             //添加附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             //更新附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         //流程信息
@@ -81,8 +81,8 @@ public class OutgoingApplyServiceImpl extends ServiceImpl<OutgoingApplyMapper, O
 
     @Override
     public void data(String id, String data) {
-        OutgoingApplyForm outgoingApplyForm = JsonUtil.getJsonToBean(data, OutgoingApplyForm.class);
-        OutgoingApplyEntity entity = JsonUtil.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
+        OutgoingApplyForm outgoingApplyForm = JsonUtils.getJsonToBean(data, OutgoingApplyForm.class);
+        OutgoingApplyEntity entity = JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

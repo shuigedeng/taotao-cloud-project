@@ -1,7 +1,7 @@
 package com.taotao.cloud.sign.advice;
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.exception.SignDtguaiException;
 import com.taotao.cloud.sign.properties.SignProperties;
 import java.util.List;
@@ -55,7 +55,7 @@ public class SignAspect {
 			.map(Object::toString)
 			.orElseThrow(() -> new SignDtguaiException("数字证书timestamp不能为空"));
 
-		LogUtil.info("sign的TreeMap默认key升序排序timestamp:{} ---- json:{}", timestamp, JSON.toJSONString(reqm));
+		LogUtils.info("sign的TreeMap默认key升序排序timestamp:{} ---- json:{}", timestamp, JSON.toJSONString(reqm));
 
 		Optional.of(reqm).ifPresent(this::validSign);
 
@@ -89,14 +89,14 @@ public class SignAspect {
 			});
 
 			String dataSing = paramBuilder.append("signKey=").append(signProperties.getKey()).toString();
-			LogUtil.info("sing之前的拼装数据:{}", dataSing);
+			LogUtils.info("sing之前的拼装数据:{}", dataSing);
 			md5Sign = DigestUtils.md5Hex(dataSing);
 		} catch (Exception e) {
-			LogUtil.error("sign数据签名校验出错{}", reqm, e);
+			LogUtils.error("sign数据签名校验出错{}", reqm, e);
 			throw new SignDtguaiException(SIGN_HEADER + "数据签名校验出错");
 		}
 		if (!md5Sign.equals(sign)) {
-			LogUtil.error("验证失败:{}  传入的sign:{}  当前生成的md5Sign:{}", paramBuilder, sign, md5Sign);
+			LogUtils.error("验证失败:{}  传入的sign:{}  当前生成的md5Sign:{}", paramBuilder, sign, md5Sign);
 			throw new SignDtguaiException("数字证书校验失败");
 		}
 	}

@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.model.entity.order;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.web.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
@@ -195,9 +195,9 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 
 	public OrderItem(CartSkuVO cartSkuVO, CartVO cartVO, TradeDTO tradeDTO) {
 	    Long oldId = this.getId();
-	    BeanUtil.copyProperties(cartSkuVO.getGoodsSku(), this);
-	    BeanUtil.copyProperties(cartSkuVO.getPriceDetailDTO(), this);
-	    BeanUtil.copyProperties(cartSkuVO, this);
+	    BeanUtils.copyProperties(cartSkuVO.getGoodsSku(), this);
+	    BeanUtils.copyProperties(cartSkuVO.getPriceDetailDTO(), this);
+	    BeanUtils.copyProperties(cartSkuVO, this);
 	    this.setId(oldId);
 	    if (cartSkuVO.getPriceDetailDTO().getJoinPromotion() != null && !cartSkuVO.getPriceDetailDTO().getJoinPromotion().isEmpty()) {
 	        this.setPromotionType(

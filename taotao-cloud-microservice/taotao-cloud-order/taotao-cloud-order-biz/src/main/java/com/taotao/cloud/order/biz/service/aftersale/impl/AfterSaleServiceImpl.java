@@ -12,12 +12,12 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
-import com.taotao.cloud.common.utils.number.NumberUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
+import com.taotao.cloud.common.utils.number.NumberUtils;
 import com.taotao.cloud.order.api.web.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
@@ -152,7 +152,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 
 		afterSaleApplyVOBuilder.accountType(order.getPaymentMethod());
 		afterSaleApplyVOBuilder.applyRefundPrice(
-			CurrencyUtil.div(orderItem.getFlowPrice(), orderItem.getNum()));
+			CurrencyUtils.div(orderItem.getFlowPrice(), orderItem.getNum()));
 		afterSaleApplyVOBuilder.num(orderItem.getNum());
 		afterSaleApplyVOBuilder.goodsId(orderItem.getGoodsId());
 		afterSaleApplyVOBuilder.goodsName(orderItem.getGoodsName());
@@ -186,7 +186,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 			throw new BusinessException(ResultEnum.AFTER_SALES_PRICE_ERROR);
 		}
 		//判断退款金额与付款金额是否正确,退款金额不能大于付款金额
-		if (NumberUtil.compare(afterSale.getFlowPrice(), actualRefundPrice) < 0) {
+		if (NumberUtils.compare(afterSale.getFlowPrice(), actualRefundPrice) < 0) {
 			throw new BusinessException(ResultEnum.AFTER_SALES_PRICE_ERROR);
 		}
 		afterSale.setActualRefundPrice(actualRefundPrice);
@@ -370,10 +370,10 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	 */
 	private AfterSale addAfterSale(AfterSaleDTO afterSaleDTO) {
 		//写入其他属性
-		SecurityUser user = SecurityUtil.getCurrentUser();
+		SecurityUser user = SecurityUtils.getCurrentUser();
 
 		AfterSale afterSale = new AfterSale();
-		BeanUtil.copyProperties(afterSaleDTO, afterSale);
+		BeanUtils.copyProperties(afterSaleDTO, afterSale);
 
 		//写入会员信息
 		afterSale.setMemberId(user.getUserId());
@@ -403,7 +403,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//TODO 退还积分
 
 		//创建售后单号
-		afterSale.setSn(IdGeneratorUtil.createStr("A"));
+		afterSale.setSn(IdGeneratorUtils.createStr("A"));
 
 		//是否包含图片
 		if (afterSaleDTO.images() != null) {
@@ -415,9 +415,9 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 			afterSale.setApplyRefundPrice(orderItem.getFlowPrice());
 		} else {
 			//单价计算
-			BigDecimal utilPrice = CurrencyUtil.div(orderItem.getPriceDetailDTO().flowPrice(),
+			BigDecimal utilPrice = CurrencyUtils.div(orderItem.getPriceDetailDTO().flowPrice(),
 				orderItem.getNum());
-			afterSale.setApplyRefundPrice(CurrencyUtil.mul(afterSale.getNum(), utilPrice));
+			afterSale.setApplyRefundPrice(CurrencyUtils.mul(afterSale.getNum(), utilPrice));
 		}
 
 		//添加售后

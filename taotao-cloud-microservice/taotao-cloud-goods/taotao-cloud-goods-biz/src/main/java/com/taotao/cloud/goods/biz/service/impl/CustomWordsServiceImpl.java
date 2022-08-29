@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.goods.api.web.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 import com.taotao.cloud.goods.biz.mapper.ICustomWordsMapper;
@@ -37,7 +37,7 @@ public class CustomWordsServiceImpl extends ServiceImpl<ICustomWordsMapper, Cust
 			CustomWords::getDisabled, 1);
 		List<CustomWords> list = list(queryWrapper);
 
-		HttpServletResponse response = RequestUtil.getResponse();
+		HttpServletResponse response = RequestUtils.getResponse();
 		StringBuilder builder = new StringBuilder();
 		if (list != null && !list.isEmpty()) {
 			boolean flag = true;
@@ -47,7 +47,7 @@ public class CustomWordsServiceImpl extends ServiceImpl<ICustomWordsMapper, Cust
 						response.setHeader("Last-Modified", customWords.getCreateTime().toString());
 						response.setHeader("ETag", Integer.toString(list.size()));
 					} catch (Exception e) {
-						LogUtil.error("自定义分词错误", e);
+						LogUtils.error("自定义分词错误", e);
 					}
 					builder.append(customWords.getName());
 					flag = false;

@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.common.model;
 
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.enums.EventEnum;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.boot.CommandLineRunner;
@@ -65,29 +65,29 @@ public class PropertyCache implements CommandLineRunner {
 	@SuppressWarnings("unchecked")
 	public <T> T get(String key, T defaultValue) {
 		if (!isStart) {
-			String v = PropertyUtil.getProperty(key);
+			String v = PropertyUtils.getProperty(key);
 			if (v == null) {
 				return defaultValue;
 			} else {
-				return (T) BeanUtil.convert(v, defaultValue.getClass());
+				return (T) BeanUtils.convert(v, defaultValue.getClass());
 			}
 		}
 
 		Object value = cache.get(key);
 		if (value == null) {
-			String v = PropertyUtil.getProperty(key);
+			String v = PropertyUtils.getProperty(key);
 			if (v != null) {
 				cache.put(key, v);
 			} else {
-				cache.put(key, PropertyUtil.NULL);
+				cache.put(key, PropertyUtils.NULL);
 			}
 		}
 
 		value = cache.get(key);
-		if (PropertyUtil.NULL.equals(value)) {
+		if (PropertyUtils.NULL.equals(value)) {
 			return defaultValue;
 		} else {
-			return (T) BeanUtil.convert(value, defaultValue.getClass());
+			return (T) BeanUtils.convert(value, defaultValue.getClass());
 		}
 	}
 
@@ -105,7 +105,7 @@ public class PropertyCache implements CommandLineRunner {
 
 		if (cache.containsKey(key)) {
 			if (value == null) {
-				cache.put(key, PropertyUtil.NULL);
+				cache.put(key, PropertyUtils.NULL);
 			} else {
 				cache.put(key, value);
 			}

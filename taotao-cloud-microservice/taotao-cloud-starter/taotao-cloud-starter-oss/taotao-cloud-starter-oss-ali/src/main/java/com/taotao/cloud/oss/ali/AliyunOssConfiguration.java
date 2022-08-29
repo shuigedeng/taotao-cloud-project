@@ -18,7 +18,7 @@ package com.taotao.cloud.oss.ali;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.UploadFileService;
@@ -44,7 +44,7 @@ public class AliyunOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(AliyunOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(AliyunOssConfiguration.class, StarterName.OSS_STARTER);
 	}
 
 	private final AliyunOssProperties properties;

@@ -10,8 +10,7 @@ import cn.hutool.core.text.CharPool;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.oss.aws.AwsOssConfig;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
@@ -345,7 +344,7 @@ public class AwsOssClient implements StandardOssClient {
 				// todo 需要设置访问路径
 				//ossInfo.setUrl(ossConfig.get() + "/" + bucketName + "/" + key);
 			} catch (Exception e) {
-				LogUtil.error("获取{}文件属性失败", key, e);
+				LogUtils.error("获取{}文件属性失败", key, e);
 			}
 		} else {
 			ossInfo = new DirectoryOssInfo();

@@ -19,7 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -86,7 +86,7 @@ public record Result<T>(
 			success,
 			errorMsg
 			, StrUtil.isNotBlank(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID)) ? MDC.get(
-			CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtil.getIdStr(),
+			CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtils.getIdStr(),
 			LocalDateTime.now());
 	}
 

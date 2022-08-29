@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.sensitive.word.utils;
 
 import com.taotao.cloud.common.support.instance.impl.Instances;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.core.sensitive.word.api.ICharFormat;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.support.format.CharFormatChain;
@@ -21,7 +21,7 @@ public final class InnerFormatUtils {
      * @since 0.1.1
      */
     public static String format(String original,  IWordContext context) {
-        if(StringUtil.isEmpty(original)) {
+        if(StringUtils.isEmpty(original)) {
             return original;
         }
 

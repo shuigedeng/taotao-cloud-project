@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.util.strategy;
 
 
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
-import com.taotao.cloud.common.utils.reflect.ClassUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
+import com.taotao.cloud.common.utils.reflect.ClassUtils;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.metadata.SensitiveStrategy;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.strategy.SensitiveStrategyCardId;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.strategy.SensitiveStrategyChineseName;
@@ -50,7 +50,7 @@ public final class SensitiveStrategyBuiltInUtil {
      */
     public static IStrategy require(final Class<? extends Annotation> annotationClass) {
         IStrategy strategy = MAP.get(annotationClass);
-        if(ObjectUtil.isNull(strategy)) {
+        if(ObjectUtils.isNull(strategy)) {
             throw new SensitiveRuntimeException("不支持的系统内置方法，用户请勿在自定义注解中使用[SensitiveStrategyBuiltIn]!");
         }
         return strategy;
@@ -66,13 +66,13 @@ public final class SensitiveStrategyBuiltInUtil {
     public static Optional<IStrategy> getStrategyOpt(final Annotation[] annotations) {
         for (Annotation annotation : annotations) {
             SensitiveStrategy sensitiveStrategy = annotation.annotationType().getAnnotation(SensitiveStrategy.class);
-            if (ObjectUtil.isNotNull(sensitiveStrategy)) {
+            if (ObjectUtils.isNotNull(sensitiveStrategy)) {
                 Class<? extends IStrategy> clazz = sensitiveStrategy.value();
                 IStrategy strategy = null;
                 if (SensitiveStrategyBuiltIn.class.equals(clazz)) {
                     strategy = SensitiveStrategyBuiltInUtil.require(annotation.annotationType());
                 } else {
-                    strategy = ClassUtil.newInstance(clazz);
+                    strategy = ClassUtils.newInstance(clazz);
                 }
                 return Optional.ofNullable(strategy);
             }

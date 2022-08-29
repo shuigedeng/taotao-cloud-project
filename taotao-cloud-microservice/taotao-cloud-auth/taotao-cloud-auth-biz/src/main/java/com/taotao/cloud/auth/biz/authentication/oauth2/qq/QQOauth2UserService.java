@@ -4,7 +4,7 @@ package com.taotao.cloud.auth.biz.authentication.oauth2.qq;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Objects;
@@ -12,19 +12,12 @@ import java.util.Set;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
@@ -60,7 +53,7 @@ public class QQOauth2UserService extends DefaultOAuth2UserService {
 				.exchange(openIdRequest, new ParameterizedTypeReference<String>() {
 				});
 
-			LogUtil.info("qq的openId响应信息：{}", openIdResponse);
+			LogUtils.info("qq的openId响应信息：{}", openIdResponse);
 
 			// openId响应是类似callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} );这样的字符串
 			String openId = null;
@@ -84,7 +77,7 @@ public class QQOauth2UserService extends DefaultOAuth2UserService {
 				.exchange(userInfoRequest, new ParameterizedTypeReference<String>() {
 				});
 
-			LogUtil.info("qq的userInfo响应信息：{}", userInfoResponse);
+			LogUtils.info("qq的userInfo响应信息：{}", userInfoResponse);
 
 			String userNameAttributeName = clientRegistration.getProviderDetails()
 				.getUserInfoEndpoint().getUserNameAttributeName();

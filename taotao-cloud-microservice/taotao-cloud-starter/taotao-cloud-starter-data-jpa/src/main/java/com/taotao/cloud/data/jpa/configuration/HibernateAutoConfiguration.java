@@ -29,7 +29,7 @@ import static org.hibernate.cfg.AvailableSettings.PHYSICAL_NAMING_STRATEGY;
 import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
@@ -77,7 +77,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HibernateAutoConfiguration.class, StarterName.JPA_STARTER);
+		LogUtils.started(HibernateAutoConfiguration.class, StarterName.JPA_STARTER);
 	}
 
 	private final JpaProperties jpaProperties;
@@ -166,7 +166,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	public static class HibernateListener implements InitializingBean {
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtil.started(HibernateListener.class, StarterName.JPA_STARTER);
+			LogUtils.started(HibernateListener.class, StarterName.JPA_STARTER);
 		}
 
 		@PersistenceUnit

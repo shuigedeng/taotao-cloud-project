@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dubbo.listener;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.Exporter;
@@ -33,11 +33,11 @@ import org.apache.dubbo.rpc.listener.ExporterListenerAdapter;
 public class CustomExporterListener extends ExporterListenerAdapter {
 	@Override
 	public void exported(Exporter<?> exporter) throws RpcException {
-		LogUtil.info("Dubbo CustomExporterListener exported activate ------------------------------");
+		LogUtils.info("Dubbo CustomExporterListener exported activate ------------------------------");
 	}
 
 	@Override
 	public void unexported(Exporter<?> exporter) {
-		LogUtil.info("Dubbo CustomExporterListener unexported activate ------------------------------");
+		LogUtils.info("Dubbo CustomExporterListener unexported activate ------------------------------");
 	}
 }

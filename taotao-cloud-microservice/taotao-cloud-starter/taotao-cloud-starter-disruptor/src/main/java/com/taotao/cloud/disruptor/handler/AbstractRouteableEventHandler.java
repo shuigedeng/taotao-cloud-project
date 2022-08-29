@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.disruptor.handler;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import com.taotao.cloud.disruptor.exception.EventHandleException;
 import java.io.IOException;
@@ -75,16 +75,16 @@ public class AbstractRouteableEventHandler<T extends DisruptorEvent> extends
 
 		HandlerChainResolver<T> resolver = getHandlerChainResolver();
 		if (resolver == null) {
-			LogUtil.debug("No HandlerChainResolver configured.  Returning original HandlerChain.");
+			LogUtils.debug("No HandlerChainResolver configured.  Returning original HandlerChain.");
 			return origChain;
 		}
 
 		HandlerChain<T> resolved = resolver.getChain(event, origChain);
 		if (resolved != null) {
-			LogUtil.info("Resolved a configured HandlerChain for the current event.");
+			LogUtils.info("Resolved a configured HandlerChain for the current event.");
 			chain = resolved;
 		} else {
-			LogUtil.info("No HandlerChain configured for the current event.  Using the default.");
+			LogUtils.info("No HandlerChain configured for the current event.  Using the default.");
 		}
 
 		return chain;

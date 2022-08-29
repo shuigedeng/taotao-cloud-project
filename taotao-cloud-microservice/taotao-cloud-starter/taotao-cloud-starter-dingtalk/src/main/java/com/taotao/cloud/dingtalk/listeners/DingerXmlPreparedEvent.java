@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.listeners;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.annatations.DingerScan;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +36,7 @@ public class DingerXmlPreparedEvent implements ApplicationListener<ApplicationEn
 
 	@Override
 	public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-		LogUtil.info("ready to execute dinger analysis.");
+		LogUtils.info("ready to execute dinger analysis.");
 		loadPrimarySources(event);
 	}
 

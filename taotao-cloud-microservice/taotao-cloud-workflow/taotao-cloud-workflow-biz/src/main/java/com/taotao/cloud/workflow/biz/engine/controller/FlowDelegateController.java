@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
 import com.taotao.cloud.workflow.biz.engine.model.flowdelegate.FlowDelegatListVO;
 import com.taotao.cloud.workflow.biz.engine.model.flowdelegate.FlowDelegateCrForm;
@@ -47,8 +47,8 @@ public class FlowDelegateController {
     @GetMapping
     public Result<PageListVO<FlowDelegatListVO>> list(Pagination pagination) {
         List<FlowDelegateEntity> list = flowDelegateService.getList(pagination);
-        PaginationVO paginationVO = JsonUtil.getJsonToBean(pagination, PaginationVO.class);
-        List<FlowDelegatListVO> listVO = JsonUtil.getJsonToList(list, FlowDelegatListVO.class);
+        PaginationVO paginationVO = JsonUtils.getJsonToBean(pagination, PaginationVO.class);
+        List<FlowDelegatListVO> listVO = JsonUtils.getJsonToList(list, FlowDelegatListVO.class);
         return Result.page(listVO, paginationVO);
     }
 
@@ -75,7 +75,7 @@ public class FlowDelegateController {
     @Operation("新建流程委托")
     @PostMapping
     public Result create(@RequestBody @Valid FlowDelegateCrForm flowDelegateCrForm) {
-        FlowDelegateEntity entity = JsonUtil.getJsonToBean(flowDelegateCrForm, FlowDelegateEntity.class);
+        FlowDelegateEntity entity = JsonUtils.getJsonToBean(flowDelegateCrForm, FlowDelegateEntity.class);
         UserInfo userInfo = userProvider.get();
         if(userInfo.getUserId().equals(entity.getFTouserid())){
             return Result.fail("委托人为自己，委托失败");
@@ -93,7 +93,7 @@ public class FlowDelegateController {
     @Operation("更新流程委托")
     @PutMapping("/{id}")
     public Result update(@PathVariable("id") String id, @RequestBody @Valid FlowDelegateUpForm flowDelegateUpForm) {
-        FlowDelegateEntity entity = JsonUtil.getJsonToBean(flowDelegateUpForm, FlowDelegateEntity.class);
+        FlowDelegateEntity entity = JsonUtils.getJsonToBean(flowDelegateUpForm, FlowDelegateEntity.class);
         UserInfo userInfo = userProvider.get();
         if(userInfo.getUserId().equals(entity.getFTouserid())){
             return Result.fail("委托人为自己，委托失败");

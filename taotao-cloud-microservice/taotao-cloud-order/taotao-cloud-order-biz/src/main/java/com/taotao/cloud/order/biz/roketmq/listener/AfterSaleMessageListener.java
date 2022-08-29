@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.roketmq.listener;
 
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
@@ -40,7 +40,7 @@ public class AfterSaleMessageListener implements RocketMQListener<MessageExt> {
 						AfterSale.class);
 					afterSaleStatusChangeEvent.afterSaleStatusChange(afterSale);
 				} catch (Exception e) {
-					LogUtil.error("售后{},在{}业务中，状态修改事件执行异常",
+					LogUtils.error("售后{},在{}业务中，状态修改事件执行异常",
 						new String(messageExt.getBody()),
 						afterSaleStatusChangeEvent.getClass().getName(), e);
 				}

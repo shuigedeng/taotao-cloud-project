@@ -4,7 +4,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.vo.MemberVO;
@@ -35,7 +35,7 @@ public class StoreUserController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/info")
 	public Result<MemberVO> getUserInfo() {
-		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
+		SecurityUser tokenUser = SecurityUtils.getCurrentUser();
 		if (tokenUser != null) {
 			MemberVO member = memberService.findByUsername(tokenUser.getUsername());
 			// member.setPassword(null);

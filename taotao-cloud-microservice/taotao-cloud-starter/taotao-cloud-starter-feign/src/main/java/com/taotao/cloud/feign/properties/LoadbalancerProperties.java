@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.feign.properties;
 
-import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -53,7 +53,7 @@ public class LoadbalancerProperties {
 	private String chooser;
 
 	public LoadbalancerProperties() {
-		this.version = PropertyUtil.getProperty("taotaoCloudVersion");
+		this.version = PropertyUtils.getProperty("taotaoCloudVersion");
 	}
 
 	public boolean getEnabled() {

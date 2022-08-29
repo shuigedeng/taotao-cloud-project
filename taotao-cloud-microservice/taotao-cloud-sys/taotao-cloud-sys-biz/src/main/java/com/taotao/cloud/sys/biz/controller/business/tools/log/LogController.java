@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.controller.business.tools.log;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.web.dto.log.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.service.business.ILogService;
@@ -96,7 +96,7 @@ public class LogController {
 	@GetMapping(value = "/user")
 	public Result<Object> getUserLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("INFO");
-		criteria.setBlurry(SecurityUtil.getUsername());
+		criteria.setBlurry(SecurityUtils.getUsername());
 		return Result.success(logService.queryAllByUser(criteria, pageable));
 	}
 

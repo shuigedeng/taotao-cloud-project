@@ -1,8 +1,8 @@
 package com.taotao.cloud.common.utils.io;
 
 
-import com.taotao.cloud.common.utils.collection.MapUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.collection.MapUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -46,7 +46,7 @@ public class UrlBuilder {
 	 * @return this UrlBuilder
 	 */
 	public UrlBuilder queryParam(String key, Object value) {
-		if (StringUtil.isEmpty(key)) {
+		if (StringUtils.isEmpty(key)) {
 			throw new RuntimeException("参数名不能为空");
 		}
 		String valueAsString = (value != null ? value.toString() : null);
@@ -62,7 +62,7 @@ public class UrlBuilder {
 	 * @return this UrlBuilder
 	 */
 	public UrlBuilder pathAppend(String value) {
-		if (StringUtil.isEmpty(value)) {
+		if (StringUtils.isEmpty(value)) {
 			throw new RuntimeException("参数不能为空");
 		}
 		this.setBaseUrl(this.baseUrl += value);
@@ -85,11 +85,11 @@ public class UrlBuilder {
 	 * @return url
 	 */
 	public String build(boolean encode) {
-		if (MapUtil.isEmpty(this.params)) {
+		if (MapUtils.isEmpty(this.params)) {
 			return this.baseUrl;
 		}
-		String baseUrl = StringUtil.appendIfNotContain(this.baseUrl, "?", "&");
-		String paramString = MapUtil.parseMapToString(this.params, encode);
+		String baseUrl = StringUtils.appendIfNotContain(this.baseUrl, "?", "&");
+		String paramString = MapUtils.parseMapToString(this.params, encode);
 		return baseUrl + paramString;
 	}
 

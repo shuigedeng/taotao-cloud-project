@@ -8,7 +8,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.mail.Mail;
 import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.UserPassAuthenticator;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Collection;
@@ -23,7 +23,7 @@ import javax.mail.Session;
  */
 public class MailUtils {
 
-    private static final MailAccount ACCOUNT = ContextUtil.getBean(MailAccount.class, false);
+    private static final MailAccount ACCOUNT = ContextUtils.getBean(MailAccount.class, false);
 
     /**
      * 获取邮件发送实例

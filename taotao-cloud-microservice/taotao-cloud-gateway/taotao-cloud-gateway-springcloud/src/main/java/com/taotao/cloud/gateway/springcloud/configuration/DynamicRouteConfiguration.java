@@ -22,8 +22,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.springcloud.properties.DynamicRouteProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -108,7 +108,7 @@ public class DynamicRouteConfiguration {
 				List<RouteDefinition> routeDefinitions = getListByStr(content);
 				return Flux.fromIterable(routeDefinitions);
 			} catch (NacosException e) {
-				LogUtil.error(e, PropertyUtil.getProperty(SpringApplicationName)
+				LogUtils.error(e, PropertyUtils.getProperty(SpringApplicationName)
 					+ "get route definitions from nacos error info: {}", e.getErrMsg());
 			}
 			return Flux.fromIterable(CollUtil.newArrayList());
@@ -133,7 +133,7 @@ public class DynamicRouteConfiguration {
 							}
 						});
 			} catch (NacosException e) {
-				LogUtil.error("nacos addListener error", e);
+				LogUtils.error("nacos addListener error", e);
 			}
 		}
 
@@ -186,7 +186,7 @@ public class DynamicRouteConfiguration {
 		 */
 		public String delete(String id) {
 			try {
-				LogUtil.info("gateway delete route id {}", id);
+				LogUtils.info("gateway delete route id {}", id);
 				this.routeDefinitionWriter.delete(Mono.just(id)).subscribe();
 				this.publisher.publishEvent(new RefreshRoutesEvent(this));
 				return "delete success";
@@ -201,13 +201,13 @@ public class DynamicRouteConfiguration {
 		 * @param definitions
 		 */
 		public String updateList(List<RouteDefinition> definitions) {
-			LogUtil.info("gateway update route {}", definitions);
+			LogUtils.info("gateway update route {}", definitions);
 			// 删除缓存routerDefinition
 			List<RouteDefinition> routeDefinitionsExits = routeDefinitionLocator.getRouteDefinitions()
 				.buffer().blockFirst();
 			if (!CollUtil.isEmpty(routeDefinitionsExits)) {
 				routeDefinitionsExits.forEach(routeDefinition -> {
-					LogUtil.info("delete routeDefinition:{}", routeDefinition);
+					LogUtils.info("delete routeDefinition:{}", routeDefinition);
 					delete(routeDefinition.getId());
 				});
 			}
@@ -224,7 +224,7 @@ public class DynamicRouteConfiguration {
 		 */
 		public String updateById(RouteDefinition definition) {
 			try {
-				LogUtil.info("gateway update route {}", definition);
+				LogUtils.info("gateway update route {}", definition);
 				this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
 			} catch (Exception e) {
 				return "update fail,not find route  routeId: " + definition.getId();
@@ -244,7 +244,7 @@ public class DynamicRouteConfiguration {
 		 * @param definition
 		 */
 		public String add(RouteDefinition definition) {
-			LogUtil.info("gateway add route {}", definition);
+			LogUtils.info("gateway add route {}", definition);
 			routeDefinitionWriter.save(Mono.just(definition)).subscribe();
 			this.publisher.publishEvent(new RefreshRoutesEvent(this));
 			return "success";

@@ -17,7 +17,7 @@ package com.taotao.cloud.p6spy.logger;
 
 
 import com.p6spy.engine.spy.P6SpyOptions;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class FileLogger extends com.p6spy.engine.spy.appender.BatchFileLogger {
 			throw new IllegalStateException("setLogfile() must be called before init()");
 		}
 
-		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
+		ConfigurableApplicationContext applicationContext = ContextUtils.getApplicationContext();
 		String realFileName = applicationContext.getEnvironment().resolvePlaceholders(fileName);
 
 		try {

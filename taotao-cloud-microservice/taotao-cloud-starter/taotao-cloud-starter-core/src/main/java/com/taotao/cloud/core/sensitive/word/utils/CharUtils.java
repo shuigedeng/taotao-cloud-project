@@ -2,7 +2,7 @@ package com.taotao.cloud.core.sensitive.word.utils;
 
 
 import com.google.common.collect.Maps;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 import java.util.Map;
 
 public final class CharUtils {
@@ -50,7 +50,7 @@ public final class CharUtils {
      */
     public static Character getMappingChar(final Character character) {
         final Character mapChar = LETTER_MAP.get(character);
-        if(ObjectUtil.isNotNull(mapChar)) {
+        if(ObjectUtils.isNotNull(mapChar)) {
             return mapChar;
         }
 

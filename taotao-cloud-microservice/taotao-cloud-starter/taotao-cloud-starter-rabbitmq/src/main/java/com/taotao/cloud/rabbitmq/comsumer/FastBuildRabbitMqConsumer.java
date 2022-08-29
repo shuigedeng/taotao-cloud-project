@@ -19,7 +19,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.GetResponse;
 import com.rabbitmq.client.ShutdownSignalException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
 import com.taotao.cloud.rabbitmq.common.FastOcpRabbitMqConstants;
 import com.taotao.cloud.rabbitmq.producer.MessageProcess;
@@ -94,7 +94,7 @@ public class FastBuildRabbitMqConsumer {
 					try {
 						detailRes = messageProcess.process(messageBean);
 					} catch (Exception e) {
-						LogUtil.error("exception", e);
+						LogUtils.error("exception", e);
 						detailRes = new DetailResponse(false, "process exception: " + e, "");
 					}
 
@@ -104,27 +104,27 @@ public class FastBuildRabbitMqConsumer {
 					} else {
 						//避免过多失败log
 						Thread.sleep(FastOcpRabbitMqConstants.ONE_SECOND);
-						LogUtil.info("process message failed: " + detailRes.getErrMsg());
+						LogUtils.info("process message failed: " + detailRes.getErrMsg());
 						channel.basicNack(response.getEnvelope().getDeliveryTag(), false, true);
 					}
 
 					return detailRes;
 				} catch (InterruptedException e) {
-					LogUtil.error("exception", e);
+					LogUtils.error("exception", e);
 					return new DetailResponse(false, "interrupted exception " + e.toString(), "");
 				} catch (ShutdownSignalException | ConsumerCancelledException | IOException e) {
-					LogUtil.error("exception", e);
+					LogUtils.error("exception", e);
 
 					try {
 						channel.close();
 					} catch (IOException | TimeoutException ex) {
-						LogUtil.error("exception", ex);
+						LogUtils.error("exception", ex);
 					}
 					channel = connection.createChannel(false);
 					return new DetailResponse(false,
 						"shutdown or cancelled exception " + e.toString(), "");
 				} catch (Exception e) {
-					LogUtil.info("exception : ", e);
+					LogUtils.info("exception : ", e);
 					try {
 						channel.close();
 					} catch (IOException | TimeoutException ex) {
@@ -154,7 +154,7 @@ public class FastBuildRabbitMqConsumer {
 		try {
 			channel.close();
 		} catch (TimeoutException e) {
-			LogUtil.info("close channel time out ", e);
+			LogUtils.info("close channel time out ", e);
 		}
 	}
 }

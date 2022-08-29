@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.SystemClock;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Statement;
@@ -154,7 +154,7 @@ public class SqlLogInterceptor implements Interceptor {
 			"\nExecute SQL ：{}" +
 			"\nExecute Time：{} ms" +
 			"\n==============  Sql  End   ==============\n";
-		LogUtil.info(sqlLogger, ms.getId(), originalSql, timing);
+		LogUtils.info(sqlLogger, ms.getId(), originalSql, timing);
 		return result;
 	}
 

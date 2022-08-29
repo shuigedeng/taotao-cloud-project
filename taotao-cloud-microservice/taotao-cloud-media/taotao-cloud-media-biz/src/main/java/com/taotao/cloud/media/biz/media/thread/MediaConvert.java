@@ -1,7 +1,7 @@
 package com.taotao.cloud.media.biz.media.thread;
 
 import cn.hutool.crypto.digest.MD5;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import com.taotao.cloud.media.biz.media.service.MediaService;
 import io.netty.buffer.Unpooled;
@@ -140,10 +140,10 @@ public class MediaConvert extends Thread {
 			grabber.flush();
 		} catch (org.bytedeco.javacv.FrameRecorder.Exception e1) {
 
-			LogUtil.info("启动录制器失败", e1);
+			LogUtils.info("启动录制器失败", e1);
 			e1.printStackTrace();
 		} catch (Exception e1) {
-			LogUtil.info("拉流器异常", e1);
+			LogUtils.info("拉流器异常", e1);
 			e1.printStackTrace();
 		}
 
@@ -228,7 +228,7 @@ public class MediaConvert extends Thread {
 //				e.printStackTrace();
 			} catch (org.bytedeco.javacv.FrameRecorder.Exception e) {
 //				runing = false;
-				LogUtil.info("\r\n{}\r\n录制器出现异常。。。", cameraDto.getUrl());
+				LogUtils.info("\r\n{}\r\n录制器出现异常。。。", cameraDto.getUrl());
 				e.printStackTrace();
 			}
 		}
@@ -247,7 +247,7 @@ public class MediaConvert extends Thread {
 		} finally {
 			runing = false;
 		}
-		LogUtil.info("关闭媒体流，{} ", cameraDto.getUrl());
+		LogUtils.info("关闭媒体流，{} ", cameraDto.getUrl());
 	}
 
 	/**
@@ -302,7 +302,7 @@ public class MediaConvert extends Thread {
 		if (hcSize != newHcSize || wcSize != newWcSize) {
 			hcSize = newHcSize;
 			wcSize = newWcSize;
-			LogUtil.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize,
+			LogUtils.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize,
 				newWcSize);
 		}
 

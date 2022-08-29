@@ -17,7 +17,7 @@
 package com.taotao.cloud.mongodb.converter;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import org.bson.BasicBSONObject;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
@@ -43,7 +43,7 @@ public enum DBObjectToJsonNodeConverter implements Converter<BasicBSONObject, Js
 		if (source == null) {
 			return null;
 		}
-		return JsonUtil.MAPPER.valueToTree(source);
+		return JsonUtils.MAPPER.valueToTree(source);
 	}
 }
 

@@ -3,7 +3,7 @@ package com.taotao.cloud.feign.http;
 import static com.taotao.cloud.feign.configuration.FeignInterceptorAutoConfiguration.HEADER_NAME_LIST;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
@@ -42,7 +42,7 @@ public class RestTemplateHeaderInterceptor implements ClientHttpRequestIntercept
 
 		HttpServletRequest httpServletRequest = ((ServletRequestAttributes) requestAttributes).getRequest();
 		if (httpServletRequest == null) {
-			LogUtil.warn("path={}, 在FeignClient API接口未配置FeignConfiguration类， 故而无法在远程调用时获取请求头中的参数!",
+			LogUtils.warn("path={}, 在FeignClient API接口未配置FeignConfiguration类， 故而无法在远程调用时获取请求头中的参数!",
 				request.getURI());
 			return execution.execute(request, bytes);
 		}

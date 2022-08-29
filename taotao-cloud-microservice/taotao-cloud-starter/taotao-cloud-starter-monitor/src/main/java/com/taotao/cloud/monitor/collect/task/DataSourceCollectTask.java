@@ -16,9 +16,9 @@
 package com.taotao.cloud.monitor.collect.task;
 
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
@@ -69,75 +69,75 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			DataSourceInfo info = new DataSourceInfo();
-			String[] names = ContextUtil.getApplicationContext().getBeanNamesForType(DataSource.class);
+			String[] names = ContextUtils.getApplicationContext().getBeanNamesForType(DataSource.class);
 
 			int index = 0;
 			for (String name : names) {
-				DataSource dataSource = ContextUtil.getApplicationContext().getBean(name, DataSource.class);
+				DataSource dataSource = ContextUtils.getApplicationContext().getBean(name, DataSource.class);
 
-				Class druidCls = ReflectionUtil.tryClassForName("com.alibaba.druid.pool.DruidDataSource");
+				Class druidCls = ReflectionUtils.tryClassForName("com.alibaba.druid.pool.DruidDataSource");
 				if (druidCls != null && druidCls.isAssignableFrom(dataSource.getClass())) {
-					Field field = ReflectionUtil.findField(info.getClass(), "druid" + index++);
+					Field field = ReflectionUtils.findField(info.getClass(), "druid" + index++);
 					if (field != null) {
 						DruidDataSourceInfo druid = new DruidDataSourceInfo();
-						druid.active = (Integer) ReflectionUtil.callMethod(dataSource, "getActiveCount", null);
-						druid.connect = (Long) ReflectionUtil.callMethod(dataSource, "getConnectCount", null);
-						druid.poolingCount = (Integer) ReflectionUtil.callMethod(dataSource, "getPoolingCount", null);
-						druid.lockQueueLength = (Integer) ReflectionUtil.callMethod(dataSource, "getLockQueueLength", null);
-						druid.waitThreadCount = (Integer) ReflectionUtil.callMethod(dataSource, "getWaitThreadCount", null);
-						druid.initialSize = (Integer) ReflectionUtil.callMethod(dataSource, "getInitialSize", null);
-						druid.maxActive = (Integer) ReflectionUtil.callMethod(dataSource, "getMaxActive", null);
-						druid.minIdle = (Integer) ReflectionUtil.callMethod(dataSource, "getMinIdle", null);
-						druid.connectErrorCount = (Long) ReflectionUtil.callMethod(dataSource, "getConnectErrorCount", null);
-						druid.createTimeSpan = (Long) ReflectionUtil.callMethod(dataSource, "getCreateTimespanMillis", null);
-						druid.closeCount = (Long) ReflectionUtil.callMethod(dataSource, "getCloseCount", null);
-						druid.createCount = (Long) ReflectionUtil.callMethod(dataSource, "getCreateCount", null);
-						druid.destroyCount = (Long) ReflectionUtil.callMethod(dataSource, "getDestroyCount", null);
-						druid.isSharePreparedStatements = ReflectionUtil.callMethod(dataSource, "isSharePreparedStatements", null).toString();
-						druid.isRemoveAbandoned = ReflectionUtil.callMethod(dataSource, "isRemoveAbandoned", null).toString();
-						druid.removeAbandonedTimeout = (Integer) ReflectionUtil.callMethod(dataSource, "getRemoveAbandonedTimeout", null);
-						druid.removeAbandonedCount = (Long) ReflectionUtil.callMethod(dataSource, "getRemoveAbandonedCount", null);
-						druid.rollbackCount = (Long) ReflectionUtil.callMethod(dataSource, "getRollbackCount", null);
-						druid.commitCount = (Long) ReflectionUtil.callMethod(dataSource, "getCommitCount", null);
-						druid.startTransactionCount = (Long) ReflectionUtil.callMethod(dataSource, "getStartTransactionCount", null);
+						druid.active = (Integer) ReflectionUtils.callMethod(dataSource, "getActiveCount", null);
+						druid.connect = (Long) ReflectionUtils.callMethod(dataSource, "getConnectCount", null);
+						druid.poolingCount = (Integer) ReflectionUtils.callMethod(dataSource, "getPoolingCount", null);
+						druid.lockQueueLength = (Integer) ReflectionUtils.callMethod(dataSource, "getLockQueueLength", null);
+						druid.waitThreadCount = (Integer) ReflectionUtils.callMethod(dataSource, "getWaitThreadCount", null);
+						druid.initialSize = (Integer) ReflectionUtils.callMethod(dataSource, "getInitialSize", null);
+						druid.maxActive = (Integer) ReflectionUtils.callMethod(dataSource, "getMaxActive", null);
+						druid.minIdle = (Integer) ReflectionUtils.callMethod(dataSource, "getMinIdle", null);
+						druid.connectErrorCount = (Long) ReflectionUtils.callMethod(dataSource, "getConnectErrorCount", null);
+						druid.createTimeSpan = (Long) ReflectionUtils.callMethod(dataSource, "getCreateTimespanMillis", null);
+						druid.closeCount = (Long) ReflectionUtils.callMethod(dataSource, "getCloseCount", null);
+						druid.createCount = (Long) ReflectionUtils.callMethod(dataSource, "getCreateCount", null);
+						druid.destroyCount = (Long) ReflectionUtils.callMethod(dataSource, "getDestroyCount", null);
+						druid.isSharePreparedStatements = ReflectionUtils.callMethod(dataSource, "isSharePreparedStatements", null).toString();
+						druid.isRemoveAbandoned = ReflectionUtils.callMethod(dataSource, "isRemoveAbandoned", null).toString();
+						druid.removeAbandonedTimeout = (Integer) ReflectionUtils.callMethod(dataSource, "getRemoveAbandonedTimeout", null);
+						druid.removeAbandonedCount = (Long) ReflectionUtils.callMethod(dataSource, "getRemoveAbandonedCount", null);
+						druid.rollbackCount = (Long) ReflectionUtils.callMethod(dataSource, "getRollbackCount", null);
+						druid.commitCount = (Long) ReflectionUtils.callMethod(dataSource, "getCommitCount", null);
+						druid.startTransactionCount = (Long) ReflectionUtils.callMethod(dataSource, "getStartTransactionCount", null);
 
 						field.setAccessible(true);
-						ReflectionUtil.setFieldValue(field, info, druid);
+						ReflectionUtils.setFieldValue(field, info, druid);
 					}
 				}
 
-				Class hikariCls = ReflectionUtil.tryClassForName("com.zaxxer.hikari.HikariDataSource");
+				Class hikariCls = ReflectionUtils.tryClassForName("com.zaxxer.hikari.HikariDataSource");
 				if (hikariCls != null && hikariCls.isAssignableFrom(dataSource.getClass())) {
-					Field field = ReflectionUtil.findField(info.getClass(), "hikari"+ index++);
+					Field field = ReflectionUtils.findField(info.getClass(), "hikari"+ index++);
 					if (field != null) {
 						HikariDataSourceInfo hikari = new HikariDataSourceInfo();
-						Object hikariPoolMXBean = ReflectionUtil.callMethod(dataSource, "getHikariPoolMXBean", null);
-						Object hikariConfigMXBean = ReflectionUtil.callMethod(dataSource, "getHikariConfigMXBean", null);
+						Object hikariPoolMXBean = ReflectionUtils.callMethod(dataSource, "getHikariPoolMXBean", null);
+						Object hikariConfigMXBean = ReflectionUtils.callMethod(dataSource, "getHikariConfigMXBean", null);
 
-						hikari.activeConnections = (Integer)ReflectionUtil.callMethod(hikariPoolMXBean, "getActiveConnections", null);
-						hikari.idleConnections = (Integer)ReflectionUtil.callMethod(hikariPoolMXBean, "getIdleConnections", null);
-						hikari.threadsAwaitingConnection = (Integer)ReflectionUtil.callMethod(hikariPoolMXBean, "getThreadsAwaitingConnection", null);
-						hikari.totalConnections = (Integer)ReflectionUtil.callMethod(hikariPoolMXBean, "getTotalConnections", null);
+						hikari.activeConnections = (Integer) ReflectionUtils.callMethod(hikariPoolMXBean, "getActiveConnections", null);
+						hikari.idleConnections = (Integer) ReflectionUtils.callMethod(hikariPoolMXBean, "getIdleConnections", null);
+						hikari.threadsAwaitingConnection = (Integer) ReflectionUtils.callMethod(hikariPoolMXBean, "getThreadsAwaitingConnection", null);
+						hikari.totalConnections = (Integer) ReflectionUtils.callMethod(hikariPoolMXBean, "getTotalConnections", null);
 
-						hikari.catalog = (String) ReflectionUtil.callMethod(hikariConfigMXBean, "getCatalog", null);
-						hikari.connectionTimeout = (Long) ReflectionUtil.callMethod(hikariConfigMXBean, "getConnectionTimeout", null);
-						hikari.idleTimeout = (Long) ReflectionUtil.callMethod(hikariConfigMXBean, "getIdleTimeout", null);
-						hikari.maxLifetime = (Long) ReflectionUtil.callMethod(hikariConfigMXBean, "getMaxLifetime", null);
-						hikari.validationTimeout = (Long) ReflectionUtil.callMethod(hikariConfigMXBean, "getValidationTimeout", null);
-						hikari.leakDetectionThreshold = (Long) ReflectionUtil.callMethod(hikariConfigMXBean, "getLeakDetectionThreshold", null);
-						hikari.maximumPoolSize = (Integer) ReflectionUtil.callMethod(hikariConfigMXBean, "getMaximumPoolSize", null);
-						hikari.minimumIdle = (Integer) ReflectionUtil.callMethod(hikariConfigMXBean, "getMinimumIdle", null);
-						hikari.poolName = (String) ReflectionUtil.callMethod(hikariConfigMXBean, "getPoolName", null);
+						hikari.catalog = (String) ReflectionUtils.callMethod(hikariConfigMXBean, "getCatalog", null);
+						hikari.connectionTimeout = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getConnectionTimeout", null);
+						hikari.idleTimeout = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getIdleTimeout", null);
+						hikari.maxLifetime = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getMaxLifetime", null);
+						hikari.validationTimeout = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getValidationTimeout", null);
+						hikari.leakDetectionThreshold = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getLeakDetectionThreshold", null);
+						hikari.maximumPoolSize = (Integer) ReflectionUtils.callMethod(hikariConfigMXBean, "getMaximumPoolSize", null);
+						hikari.minimumIdle = (Integer) ReflectionUtils.callMethod(hikariConfigMXBean, "getMinimumIdle", null);
+						hikari.poolName = (String) ReflectionUtils.callMethod(hikariConfigMXBean, "getPoolName", null);
 
 						field.setAccessible(true);
-						ReflectionUtil.setFieldValue(field, info, hikari);
+						ReflectionUtils.setFieldValue(field, info, hikari);
 					}
 				}
 			}
 			return info;
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

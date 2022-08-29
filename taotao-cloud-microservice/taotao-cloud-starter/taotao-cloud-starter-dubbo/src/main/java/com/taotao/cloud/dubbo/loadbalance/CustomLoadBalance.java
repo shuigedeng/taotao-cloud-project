@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dubbo.loadbalance;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.rpc.Invoker;
@@ -41,8 +41,8 @@ public class CustomLoadBalance extends AbstractLoadBalance {
     @Override
     protected <T> Invoker<T> doSelect(List<Invoker<T>> invokers, URL url, Invocation invocation) {
 
-		LogUtil.info("Dubbo CustomLoadBalance doSelect activate ------------------------------");
-		LogUtil.info(String.valueOf(invokers.size()));
+		LogUtils.info("Dubbo CustomLoadBalance doSelect activate ------------------------------");
+		LogUtils.info(String.valueOf(invokers.size()));
 
 		return invokers.get(0);
 

@@ -16,9 +16,8 @@
 package com.taotao.cloud.web.configuration;
 
 
-import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.web.servlet.filter.TenantFilter;
 import com.taotao.cloud.web.servlet.filter.TraceFilter;
 import com.taotao.cloud.web.servlet.filter.VersionFilter;
@@ -27,9 +26,8 @@ import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.servlet.listener.MyListener;
 import com.taotao.cloud.web.servlet.servlet.MyAsyncServlet;
 import com.taotao.cloud.web.servlet.servlet.MyServlet;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import org.springframework.beans.factory.InitializingBean;
@@ -60,12 +58,12 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ServletAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(ServletAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		LogUtil.info("servletContext.getServerInfo=== {}", servletContext.getServerInfo());
+		LogUtils.info("servletContext.getServerInfo=== {}", servletContext.getServerInfo());
 
 		//注册servlet
 //		ServletRegistration.Dynamic myServlet = servletContext
@@ -96,7 +94,7 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 		servletRegistrationBean.setLoadOnStartup(1);
 		servletRegistrationBean.setAsyncSupported(true);
 		servletRegistrationBean.setUrlMappings(List.of("/myServlet"));
-		LogUtil.info("注册servlet成功，名称: {}", MyServlet.class.getName());
+		LogUtils.info("注册servlet成功，名称: {}", MyServlet.class.getName());
 		return servletRegistrationBean;
 	}
 	@Bean
@@ -106,7 +104,7 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 		servletRegistrationBean.setLoadOnStartup(1);
 		servletRegistrationBean.setAsyncSupported(true);
 		servletRegistrationBean.setUrlMappings(List.of("/my/asyncServlet"));
-		LogUtil.info("注册servlet成功，名称: {}", MyAsyncServlet.class.getName());
+		LogUtils.info("注册servlet成功，名称: {}", MyAsyncServlet.class.getName());
 		return servletRegistrationBean;
 	}
 

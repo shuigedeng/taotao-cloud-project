@@ -18,7 +18,7 @@ package com.taotao.cloud.web.base.controller;
 import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,9 +56,9 @@ public interface SaveController<T extends SuperEntity<T, I>, I extends Serializa
 	default Result<Boolean> save(@Parameter(description = "新增DTO", required = true)
 		@RequestBody @Validated SaveDTO saveDTO) {
 		if (handlerSave(saveDTO)) {
-			if (ReflectionUtil.checkField(saveDTO.getClass(), getEntityClass())) {
+			if (ReflectionUtils.checkField(saveDTO.getClass(), getEntityClass())) {
 				T t = ReflectUtil.newInstanceIfPossible(getEntityClass());
-				return success(service().save(ReflectionUtil.copyPropertiesIfRecord(t, saveDTO)));
+				return success(service().save(ReflectionUtils.copyPropertiesIfRecord(t, saveDTO)));
 			}
 		}
 		throw new BusinessException("通用单体新增失败");

@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -47,14 +47,14 @@ public class SupplementCardController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), SupplementCardInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), SupplementCardInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             SupplementCardEntity entity = supplementCardService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, SupplementCardInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, SupplementCardInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -71,7 +71,7 @@ public class SupplementCardController {
         if (supplementCardForm.getStartTime() > supplementCardForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        SupplementCardEntity entity = JsonUtil.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
+        SupplementCardEntity entity = JsonUtils.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(supplementCardForm.getStatus())) {
             supplementCardService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -93,7 +93,7 @@ public class SupplementCardController {
         if (supplementCardForm.getStartTime() > supplementCardForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        SupplementCardEntity entity = JsonUtil.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
+        SupplementCardEntity entity = JsonUtils.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(supplementCardForm.getStatus())) {
             supplementCardService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

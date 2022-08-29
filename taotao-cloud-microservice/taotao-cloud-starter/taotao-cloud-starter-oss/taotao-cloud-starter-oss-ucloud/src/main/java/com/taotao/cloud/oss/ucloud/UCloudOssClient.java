@@ -21,7 +21,7 @@ import cn.ucloud.ufile.bean.ObjectListBean;
 import cn.ucloud.ufile.bean.ObjectProfile;
 import cn.ucloud.ufile.exception.UfileClientException;
 import cn.ucloud.ufile.util.StorageType;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.DirectoryOssInfo;
@@ -335,7 +335,7 @@ public class UCloudOssClient implements StandardOssClient {
 				getBucket()).execute();
 			return objectProfile.getContentLength() > 0;
 		} catch (Exception e) {
-			LogUtil.error("", e);
+			LogUtils.error("", e);
 			return false;
 		}
 	}
@@ -372,7 +372,7 @@ public class UCloudOssClient implements StandardOssClient {
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
 				ossInfo.setLength(objectProfile.getContentLength());
 			} catch (Exception e) {
-				LogUtil.error("获取{}文件属性失败", key, e);
+				LogUtils.error("获取{}文件属性失败", key, e);
 			}
 		} else {
 			ossInfo = new DirectoryOssInfo();

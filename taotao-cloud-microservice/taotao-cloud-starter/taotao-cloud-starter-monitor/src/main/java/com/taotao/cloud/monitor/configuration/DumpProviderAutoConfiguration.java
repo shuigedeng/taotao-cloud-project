@@ -16,7 +16,7 @@
 package com.taotao.cloud.monitor.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.dump.DumpFilter;
 import com.taotao.cloud.monitor.dump.DumpProvider;
 import com.taotao.cloud.monitor.properties.DumpProperties;
@@ -44,7 +44,7 @@ public class DumpProviderAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DumpProviderAutoConfiguration.class, StarterName.MONITOR_STARTER);
+		LogUtils.started(DumpProviderAutoConfiguration.class, StarterName.MONITOR_STARTER);
 	}
 
 	@Bean

@@ -2,7 +2,7 @@ package com.taotao.cloud.sign.advice;
 
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.annotation.DecryptBody;
 import com.taotao.cloud.sign.bean.DecryptAnnotationInfoBean;
 import com.taotao.cloud.sign.bean.DecryptHttpInputMessage;
@@ -80,7 +80,7 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 			try {
 				return x.getBody();
 			} catch (IOException e) {
-				LogUtil.error("数据解密初始化异常,时间:{}", new Date());
+				LogUtils.error("数据解密初始化异常,时间:{}", new Date());
 				return null;
 			}
 		}).isEmpty()) {
@@ -99,11 +99,11 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 			sign = (String) req.get("sign");
 
 		} catch (Exception e) {
-			LogUtil.error("无法获取请求正文数据，请检查发送数据体或请求方法是否符合规范", e);
+			LogUtils.error("无法获取请求正文数据，请检查发送数据体或请求方法是否符合规范", e);
 			throw new DecryptDtguaiException("无法获取请求正文数据，请检查发送数据体或请求方法是否符合规范");
 		}
 		if (!StringUtils.hasText(body)) {
-			LogUtil.error("请求参数dataSecret为null或为空字符串，因此解密失败body:{}", body);
+			LogUtils.error("请求参数dataSecret为null或为空字符串，因此解密失败body:{}", body);
 			throw new DecryptDtguaiException("请求正文为NULL或为空字符串，因此解密失败");
 		}
 
@@ -120,7 +120,7 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 		}
 
 		decryptBody = Optional.ofNullable(decryptBody).orElseThrow(() -> {
-				LogUtil.error("decryptBody是null" + "当前类:{}", this.getClass().getName());
+				LogUtils.error("decryptBody是null" + "当前类:{}", this.getClass().getName());
 				return new DecryptDtguaiException("解密错误，请检查选择的源数据的加密方式是否正确");
 			}
 		);
@@ -128,12 +128,12 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 		try {
 			req = JSON.<LinkedHashMap<String, Object>>parseObject(decryptBody, LinkedHashMap.class);
 			req.put("sign", sign);
-			LogUtil.info("解密数据补充timestamp和sign的map:{}", JSON.toJSONString(req));
+			LogUtils.info("解密数据补充timestamp和sign的map:{}", JSON.toJSONString(req));
 			InputStream inputStream = IOUtils.toInputStream(JSON.toJSONString(req),
 				config.getEncoding());
 			return new DecryptHttpInputMessage(inputStream, inputMessage.getHeaders());
 		} catch (Exception e) {
-			LogUtil.error("字符串转换成流格式异常，请检查编码等格式是否正确,decryptBody:{}", decryptBody);
+			LogUtils.error("字符串转换成流格式异常，请检查编码等格式是否正确,decryptBody:{}", decryptBody);
 			throw new DecryptDtguaiException("字符串转换成流格式异常，请检查编码等格式是否正确,decryptBody:" + decryptBody);
 		}
 	}
@@ -247,7 +247,7 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 
 			//判断数据加密时间 时间戳+过期时间如果小于当前时间踢飞
 			if (timestamp + timeOut < nowTime) {
-				LogUtil.error("时间戳:{},时间戳+过期时间:{},当前时间:{},时间差:{},数据为:{}"
+				LogUtils.error("时间戳:{},时间戳+过期时间:{},当前时间:{},时间差:{},数据为:{}"
 					, timestamp
 					, timestamp + timeOut
 					, nowTime

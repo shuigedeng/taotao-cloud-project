@@ -22,7 +22,7 @@ import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.interfaces.MessageTransponder;
 import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.properties.CanalProperties;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -107,11 +107,11 @@ public abstract class AbstractMessageTransponder implements MessageTransponder {
 				//消息数
 				int size = message.getEntries().size();
 				//debug 模式打印消息数
-				LogUtil.debug("{}: 从 canal 服务器获取消息： >>>>> 数:{}", threadName, size);
+				LogUtils.debug("{}: 从 canal 服务器获取消息： >>>>> 数:{}", threadName, size);
 
 				//若是没有消息
 				if (batchId == -1 || size == 0) {
-					LogUtil.debug("{}: 没有任何消息啊，我休息{}毫秒", threadName, interval);
+					LogUtils.debug("{}: 没有任何消息啊，我休息{}毫秒", threadName, interval);
 					//休息
 					Thread.sleep(interval);
 				} else {
@@ -123,11 +123,11 @@ public abstract class AbstractMessageTransponder implements MessageTransponder {
 				connector.ack(batchId);
 
 				//若是 debug模式
-				LogUtil.debug("{}: 确认消息已被消费，消息ID:{}", threadName, batchId);
+				LogUtils.debug("{}: 确认消息已被消费，消息ID:{}", threadName, batchId);
 			} catch (CanalClientException e) {
 				//每次错误，重试次数减一处理
 				errorCount--;
-				LogUtil.error(threadName + ": 发生错误!! ", e);
+				LogUtils.error(threadName + ": 发生错误!! ", e);
 				try {
 					//等待时间
 					Thread.sleep(interval);
@@ -143,14 +143,14 @@ public abstract class AbstractMessageTransponder implements MessageTransponder {
 				if (errorCount <= 0) {
 					//停止 canal 客户端
 					stop();
-					LogUtil.info("{}: canal 客户端已停止... ", Thread.currentThread().getName());
+					LogUtils.info("{}: canal 客户端已停止... ", Thread.currentThread().getName());
 				}
 			}
 		}
 
 		//停止 canal 客户端
 		stop();
-		LogUtil.info("{}: canal 客户端已停止. ", Thread.currentThread().getName());
+		LogUtils.info("{}: canal 客户端已停止. ", Thread.currentThread().getName());
 	}
 
 	/**

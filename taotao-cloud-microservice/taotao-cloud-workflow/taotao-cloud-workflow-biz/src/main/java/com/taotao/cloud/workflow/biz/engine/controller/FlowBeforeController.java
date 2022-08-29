@@ -1,7 +1,7 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
@@ -100,7 +100,7 @@ public class FlowBeforeController {
         List<FlowEngineEntity> engineList = flowEngineService.getFlowList(data.stream().map(t -> t.getFlowId()).collect(Collectors.toList()));
         if (data.size() > 0) {
             for (FlowTaskListModel task : data) {
-                FlowBeforeListVO vo = JsonUtil.getJsonToBean(task, FlowBeforeListVO.class);
+                FlowBeforeListVO vo = JsonUtils.getJsonToBean(task, FlowBeforeListVO.class);
                 //用户名称赋值
                 UserEntity user = userList.stream().filter(t -> t.getId().equals(vo.getCreatorUserId())).findFirst().orElse(null);
                 vo.setUserName(user != null ? user.getRealName() + "/" + user.getAccount() : "");
@@ -109,14 +109,14 @@ public class FlowBeforeController {
                     vo.setFormType(engine.getFormType());
                 }
                 if (isBatch) {
-                    ChildNodeList childNode = JsonUtil.getJsonToBean(vo.getApproversProperties(), ChildNodeList.class);
-                    vo.setApproversProperties(JsonUtil.getObjectToString(childNode.getProperties()));
+                    ChildNodeList childNode = JsonUtils.getJsonToBean(vo.getApproversProperties(), ChildNodeList.class);
+                    vo.setApproversProperties(JsonUtils.getObjectToString(childNode.getProperties()));
                 }
                 vo.setFlowVersion(StringUtil.isEmpty(vo.getFlowVersion()) ? "" : "v" + vo.getFlowVersion());
                 listVO.add(vo);
             }
         }
-        PaginationVO paginationVO = JsonUtil.getJsonToBean(paginationFlowTask, PaginationVO.class);
+        PaginationVO paginationVO = JsonUtils.getJsonToBean(paginationFlowTask, PaginationVO.class);
         return Result.page(listVO, paginationVO);
     }
 
@@ -150,7 +150,7 @@ public class FlowBeforeController {
             FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
             flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator, "");
             if (FlowNature.ProcessCompletion.equals(operator.getCompletion())) {
-                FlowModel flowModel = JsonUtil.getJsonToBean(flowHandleModel, FlowModel.class);
+                FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
                 UserInfo userInfo = userProvider.get();
                 String rejecttKey = userInfo.getTenantId() + id;
                 if (redisUtil.exists(rejecttKey)) {
@@ -183,10 +183,10 @@ public class FlowBeforeController {
             if (FlowNature.CUSTOM.equals(engine.getFormType())) {
                 Object data = formDataAll.get("data");
                 if (data != null) {
-                    formDataAll = JsonUtil.stringToMap(String.valueOf(data));
+                    formDataAll = JsonUtils.stringToMap(String.valueOf(data));
                 }
             }
-            flowTaskOperatorEntity.setDraftData(JsonUtil.getObjectToString(formDataAll));
+            flowTaskOperatorEntity.setDraftData(JsonUtils.getObjectToString(formDataAll));
             flowTaskOperatorService.updateById(flowTaskOperatorEntity);
             return Result.success(MsgCode.SU002.get());
         }
@@ -224,7 +224,7 @@ public class FlowBeforeController {
             FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
             flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator, "");
             if (FlowNature.ProcessCompletion.equals(operator.getCompletion())) {
-                FlowModel flowModel = JsonUtil.getJsonToBean(flowHandleModel, FlowModel.class);
+                FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
                 UserInfo userInfo = userProvider.get();
                 String rejecttKey = userInfo.getTenantId() + id;
                 if (redisUtil.exists(rejecttKey)) {
@@ -276,7 +276,7 @@ public class FlowBeforeController {
         List<FlowTaskNodeEntity> nodeList = flowTaskNodeService.getList(operatorRecord.getTaskId()).stream().filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState())).collect(Collectors.toList());
         FlowTaskNodeEntity taskNode = nodeList.stream().filter(t -> t.getId().equals(operatorRecord.getTaskNodeId())).findFirst().orElse(null);
         if (taskNode != null) {
-            FlowModel flowModel = JsonUtil.getJsonToBean(flowHandleModel, FlowModel.class);
+            FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
             flowTaskNewService.recall(id, operatorRecord, flowModel);
             return Result.success("撤回成功");
         }
@@ -295,7 +295,7 @@ public class FlowBeforeController {
     public Result cancel(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) {
         FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(id);
         if (flowTaskEntity != null) {
-            FlowModel flowModel = JsonUtil.getJsonToBean(flowHandleModel, FlowModel.class);
+            FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
             flowTaskNewService.cancel(flowTaskEntity, flowModel);
             return Result.success(MsgCode.SU009.get());
         }
@@ -312,7 +312,7 @@ public class FlowBeforeController {
     @Operation("指派人")
     @PostMapping("/Assign/{id}")
     public Result assign(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        FlowModel flowModel = JsonUtil.getJsonToBean(flowHandleModel, FlowModel.class);
+        FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
         boolean isOk = flowTaskNewService.assign(id, flowModel);
         return isOk ? Result.success("指派成功") : Result.fail("指派失败");
     }
@@ -340,7 +340,7 @@ public class FlowBeforeController {
     @PostMapping("/CandidateUser/{id}")
     public Result candidateUser(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         List<FlowCandidateUserModel> candidate = flowTaskNewService.candidateUser(id, flowHandleModel);
-        PaginationVO paginationVO = JsonUtil.getJsonToBean(flowHandleModel, PaginationVO.class);
+        PaginationVO paginationVO = JsonUtils.getJsonToBean(flowHandleModel, PaginationVO.class);
         return Result.page(candidate, paginationVO);
     }
 
@@ -368,7 +368,7 @@ public class FlowBeforeController {
     public Result nodeSelector(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity engine = flowEngineService.getInfo(id);
         List<FlowBatchModel> batchList = new ArrayList<>();
-        ChildNode childNodeAll = JsonUtil.getJsonToBean(engine.getFlowTemplateJson(), ChildNode.class);
+        ChildNode childNodeAll = JsonUtils.getJsonToBean(engine.getFlowTemplateJson(), ChildNode.class);
         //获取流程节点
         List<ChildNodeList> nodeListAll = new ArrayList<>();
         List<ConditionList> conditionListAll = new ArrayList<>();

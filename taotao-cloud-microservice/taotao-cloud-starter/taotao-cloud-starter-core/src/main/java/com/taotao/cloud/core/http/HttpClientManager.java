@@ -16,7 +16,7 @@
 package com.taotao.cloud.core.http;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.ProcessExitEvent;
 import java.io.IOException;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class HttpClientManager {
 			try {
 				closeAll();
 			} catch (Exception e) {
-				LogUtil.error(e, "关闭httpclient时出错");
+				LogUtils.error(e, "关闭httpclient时出错");
 			}
 		}, Integer.MAX_VALUE - 1, false);
 	}
@@ -74,7 +74,7 @@ public class HttpClientManager {
 			try {
 				client.close();
 			} catch (Exception e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 			throw exp;
 		}
@@ -154,7 +154,7 @@ public class HttpClientManager {
 			try {
 				entry.getValue().close();
 			} catch (IOException e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 		}
 	}

@@ -17,7 +17,7 @@ package com.taotao.cloud.p6spy.configuration;
 
 import com.p6spy.engine.spy.P6SpyDriver;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.p6spy.ext.P6spyConfigLoaderBeanPostProcessor;
 import com.taotao.cloud.p6spy.properties.P6spyProperties;
 import javax.sql.DataSource;
@@ -48,7 +48,7 @@ public class P6spyAutoConfiguration implements   InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(P6spyAutoConfiguration.class, StarterName.P6SPY_STARTER);
+		LogUtils.started(P6spyAutoConfiguration.class, StarterName.P6SPY_STARTER);
 	}
 
 	@Bean

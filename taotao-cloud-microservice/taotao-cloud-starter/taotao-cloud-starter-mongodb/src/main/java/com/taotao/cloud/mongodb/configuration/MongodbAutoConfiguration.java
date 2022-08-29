@@ -16,7 +16,7 @@
 package com.taotao.cloud.mongodb.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mongodb.converter.DBObjectToJsonNodeConverter;
 import com.taotao.cloud.mongodb.converter.JsonNodeToDocumentConverter;
 import com.taotao.cloud.mongodb.converter.LocalDateTimeToString;
@@ -60,7 +60,7 @@ public class MongodbAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(MongodbAutoConfiguration.class, StarterName.MONGODB_STARTER);
+		LogUtils.started(MongodbAutoConfiguration.class, StarterName.MONGODB_STARTER);
 	}
 
 	@Primary

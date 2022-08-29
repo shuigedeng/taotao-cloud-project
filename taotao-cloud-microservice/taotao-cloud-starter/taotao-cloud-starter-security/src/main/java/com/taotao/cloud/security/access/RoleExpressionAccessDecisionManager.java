@@ -1,6 +1,6 @@
 package com.taotao.cloud.security.access;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,7 +81,7 @@ public class RoleExpressionAccessDecisionManager extends AbstractAccessDecisionM
 				throw new AccessDeniedException("权限不足2");
 			}
 		} catch (ScriptException e) {
-			LogUtil.error("脚本执行错误:[origin:{}][parse:{}][message:{}]", originScript, attribute,
+			LogUtils.error("脚本执行错误:[origin:{}][parse:{}][message:{}]", originScript, attribute,
 				e.getMessage());
 			throw new AccessDeniedException("权限不足");
 		}

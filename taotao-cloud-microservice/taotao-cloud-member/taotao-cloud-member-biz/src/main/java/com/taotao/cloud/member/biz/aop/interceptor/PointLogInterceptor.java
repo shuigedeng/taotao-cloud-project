@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.member.biz.aop.interceptor;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
@@ -91,7 +91,7 @@ public class PointLogInterceptor {
 				memberPointsHistoryService.save(memberPointsHistory);
 			}
 		} catch (Exception e) {
-			LogUtil.error("积分操作错误", e);
+			LogUtils.error("积分操作错误", e);
 		}
 	}
 }

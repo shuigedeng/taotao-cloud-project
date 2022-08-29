@@ -21,7 +21,7 @@ import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.LINK_METHOD_PARAM_EX
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsGenericType;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsType;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.annatations.DingerImageText;
 import com.taotao.cloud.dingtalk.annatations.DingerLink;
 import com.taotao.cloud.dingtalk.annatations.DingerMarkdown;
@@ -79,7 +79,7 @@ public class AnnotationDingerDefinitionResolver extends AbstractDingerDefinition
 					source = method.getAnnotation(DingerLink.class);
 					messageSubType = MessageSubType.LINK;
 				} else {
-					LogUtil.debug(
+					LogUtils.debug(
 						"register annotation dingerDefinition and skip method={}(possible use xml definition).",
 						dingerName);
 					continue;

@@ -14,7 +14,7 @@ import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +48,7 @@ public class ReadTest {
         // 这里每次会读取3000条数据 然后返回过来 直接调用使用数据就行
         EasyExcel.read(fileName, DemoData.class, new PageReadListener<DemoData>(dataList -> {
             for (DemoData demoData : dataList) {
-                LogUtil.info("读取到一条数据{}", JSON.toJSONString(demoData));
+                LogUtils.info("读取到一条数据{}", JSON.toJSONString(demoData));
             }
         })).sheet().doRead();
 
@@ -85,8 +85,8 @@ public class ReadTest {
              * 加上存储数据库
              */
             private void saveData() {
-                LogUtil.info("{}条数据，开始存储数据库！", cachedDataList.size());
-                LogUtil.info("存储数据库成功！");
+                LogUtils.info("{}条数据，开始存储数据库！", cachedDataList.size());
+                LogUtils.info("存储数据库成功！");
             }
         }).sheet().doRead();
 
@@ -300,14 +300,14 @@ public class ReadTest {
         // 这里 需要指定读用哪个class去读，然后读取第一个sheet 同步读取会自动finish
         List<DemoData> list = EasyExcel.read(fileName).head(DemoData.class).sheet().doReadSync();
         for (DemoData data : list) {
-            LogUtil.info("读取到数据:{}", JSON.toJSONString(data));
+            LogUtils.info("读取到数据:{}", JSON.toJSONString(data));
         }
 
         // 这里 也可以不指定class，返回一个list，然后读取第一个sheet 同步读取会自动finish
         List<Map<Integer, String>> listMap = EasyExcel.read(fileName).sheet().doReadSync();
         for (Map<Integer, String> data : listMap) {
             // 返回每条数据的键值对 表示所在的列 和所在列的值
-            LogUtil.info("读取到数据:{}", JSON.toJSONString(data));
+            LogUtils.info("读取到数据:{}", JSON.toJSONString(data));
         }
     }
 

@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.api.web.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +27,8 @@ public class DistributionPageQuery extends PageParam {
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		queryWrapper.like(StringUtil.isNotEmpty(memberName), "member_name", memberName);
-		queryWrapper.eq(StringUtil.isNotEmpty(distributionStatus), "distribution_status",
+		queryWrapper.like(StringUtils.isNotEmpty(memberName), "member_name", memberName);
+		queryWrapper.eq(StringUtils.isNotEmpty(distributionStatus), "distribution_status",
 			distributionStatus);
 		return queryWrapper;
 	}

@@ -5,7 +5,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.model.OssInfo;
@@ -62,7 +62,7 @@ public interface StandardOssClient {
 			ossInfo.setUploadFileInfo(uploadFileInfo);
 			return ossInfo;
 		} catch (IOException e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -93,7 +93,7 @@ public interface StandardOssClient {
 			ossInfo.setUploadFileInfo(uploadFileInfo);
 			return ossInfo;
 		} catch (IOException e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			throw new RuntimeException(e);
 		}
 	}

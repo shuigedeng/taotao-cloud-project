@@ -16,12 +16,12 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.servlet.CookieUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.servlet.CookieUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.member.api.web.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.web.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.web.dto.MemberEditDTO;
@@ -111,7 +111,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
 	@Override
 	public Member getUserInfo() {
-		SecurityUser currentUser = SecurityUtil.getCurrentUser();
+		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 		return this.findByUsername(currentUser.getUsername());
 	}
 
@@ -246,9 +246,9 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	@Override
 	public Boolean editOwn(MemberEditDTO memberEditDTO) {
 		//查询会员信息
-		Member member = this.findByUsername(SecurityUtil.getUsername());
+		Member member = this.findByUsername(SecurityUtils.getUsername());
 		//传递修改会员信息
-		BeanUtil.copyProperties(memberEditDTO, member);
+		BeanUtils.copyProperties(memberEditDTO, member);
 		//修改会员
 		this.updateById(member);
 		return true;
@@ -256,7 +256,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
 	@Override
 	public Boolean modifyPass(String oldPassword, String newPassword) {
-		Member member = this.getById(SecurityUtil.getUserId());
+		Member member = this.getById(SecurityUtils.getUserId());
 		//判断旧密码输入是否正确
 		if (!new BCryptPasswordEncoder().matches(oldPassword, member.getPassword())) {
 			throw new BusinessException(ResultEnum.USER_OLD_PASSWORD_ERROR);
@@ -291,9 +291,9 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
 	@Override
 	public Boolean changeMobile(String mobile) {
-		Member member = this.findByUsername(SecurityUtil.getUsername());
+		Member member = this.findByUsername(SecurityUtils.getUsername());
 		//判断是否用户登录并且会员ID为当前登录会员ID
-		if (!Objects.equals(SecurityUtil.getUserId(), member.getId())) {
+		if (!Objects.equals(SecurityUtils.getUserId(), member.getId())) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 		//修改会员手机号
@@ -340,24 +340,24 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	@Override
 	public Boolean updateMember(ManagerMemberEditDTO managerMemberEditDTO) {
 		//判断是否用户登录并且会员ID为当前登录会员ID
-		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
+		SecurityUser tokenUser = SecurityUtils.getCurrentUser();
 		if (tokenUser == null) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 		//过滤会员昵称敏感词
-		if (StringUtil.isNotBlank(managerMemberEditDTO.getNickName())) {
+		if (StringUtils.isNotBlank(managerMemberEditDTO.getNickName())) {
 			managerMemberEditDTO.setNickName(
 				SensitiveWordsFilter.filter(managerMemberEditDTO.getNickName()));
 		}
 		//如果密码不为空则加密密码
-		if (StringUtil.isNotBlank(managerMemberEditDTO.getPassword())) {
+		if (StringUtils.isNotBlank(managerMemberEditDTO.getPassword())) {
 			managerMemberEditDTO.setPassword(
 				new BCryptPasswordEncoder().encode(managerMemberEditDTO.getPassword()));
 		}
 		//查询会员信息
 		Member member = this.findByUsername(managerMemberEditDTO.getUsername());
 		//传递修改会员信息
-		BeanUtil.copyProperties(managerMemberEditDTO, member);
+		BeanUtils.copyProperties(managerMemberEditDTO, member);
 		this.updateById(member);
 		return true;
 	}
@@ -486,10 +486,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	 */
 	private void loginBindUser(Member member) {
 		//获取cookie存储的信息
-		String uuid = CookieUtil.getCookie(ConnectService.CONNECT_COOKIE,
-			RequestUtil.getRequest());
-		String connectType = CookieUtil.getCookie(ConnectService.CONNECT_TYPE,
-			RequestUtil.getRequest());
+		String uuid = CookieUtils.getCookie(ConnectService.CONNECT_COOKIE,
+			RequestUtils.getRequest());
+		String connectType = CookieUtils.getCookie(ConnectService.CONNECT_TYPE,
+			RequestUtils.getRequest());
 
 		//如果联合登陆存储了信息
 		if (CharSequenceUtil.isNotEmpty(uuid) && CharSequenceUtil.isNotEmpty(connectType)) {
@@ -509,13 +509,13 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 					connectService.save(connect);
 				}
 			} catch (Exception e) {
-				LogUtil.error("绑定第三方联合登陆失败：", e);
+				LogUtils.error("绑定第三方联合登陆失败：", e);
 			} finally {
 				//联合登陆成功与否，都清除掉cookie中的信息
-				CookieUtil.delCookie(ConnectService.CONNECT_COOKIE,
-					RequestUtil.getResponse());
-				CookieUtil.delCookie(ConnectService.CONNECT_TYPE,
-					RequestUtil.getResponse());
+				CookieUtils.delCookie(ConnectService.CONNECT_COOKIE,
+					RequestUtils.getResponse());
+				CookieUtils.delCookie(ConnectService.CONNECT_TYPE,
+					RequestUtils.getResponse());
 			}
 		}
 	}
@@ -527,10 +527,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	 */
 	private ConnectAuthUser checkConnectUser() {
 		//获取cookie存储的信息
-		String uuid = CookieUtil.getCookie(ConnectService.CONNECT_COOKIE,
-			RequestUtil.getRequest());
-		String connectType = CookieUtil.getCookie(ConnectService.CONNECT_TYPE,
-			RequestUtil.getRequest());
+		String uuid = CookieUtils.getCookie(ConnectService.CONNECT_COOKIE,
+			RequestUtils.getRequest());
+		String connectType = CookieUtils.getCookie(ConnectService.CONNECT_TYPE,
+			RequestUtils.getRequest());
 
 		//如果联合登陆存储了信息
 		if (CharSequenceUtil.isNotEmpty(uuid) && CharSequenceUtil.isNotEmpty(connectType)) {
@@ -594,7 +594,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 	@Override
 	public void logout(UserEnum userEnum) {
 		// 获取当前用户的token
-		String currentUserToken = RequestUtil.getRequest().getHeader("token");
+		String currentUserToken = RequestUtils.getRequest().getHeader("token");
 		if (CharSequenceUtil.isNotEmpty(currentUserToken)) {
 			redisRepository.del(CachePrefix.ACCESS_TOKEN.getPrefix(userEnum) + currentUserToken);
 		}

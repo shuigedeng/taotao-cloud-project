@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.servlet.listener;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -19,7 +19,7 @@ public class MyListener implements ServletContextListener, HttpSessionListener,
 		int minorVersion = sce.getServletContext().getMinorVersion();
 		String contextPath = sce.getServletContext().getContextPath();
 
-		LogUtil.info("Servlet : {} 容器启动, 服务信息: {} ; {}:{}:{}", servletContextName,
+		LogUtils.info("Servlet : {} 容器启动, 服务信息: {} ; {}:{}:{}", servletContextName,
 			serverInfo, majorVersion, minorVersion, contextPath);
 	}
 }

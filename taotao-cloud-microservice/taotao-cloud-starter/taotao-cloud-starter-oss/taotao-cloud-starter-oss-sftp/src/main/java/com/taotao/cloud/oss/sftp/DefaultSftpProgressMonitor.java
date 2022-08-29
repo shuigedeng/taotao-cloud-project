@@ -4,7 +4,7 @@
 package com.taotao.cloud.oss.sftp;
 
 import com.jcraft.jsch.SftpProgressMonitor;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 
 import java.text.NumberFormat;
 import java.util.concurrent.Executors;
@@ -47,22 +47,22 @@ public class DefaultSftpProgressMonitor implements SftpProgressMonitor, Runnable
         format.setMaximumFractionDigits(2);
         format.setMinimumFractionDigits(2);
         String value = format.format((upLoaded / (double) maxFileSize));
-        if (LogUtil.isDebugEnabled()) {
-	        LogUtil.debug("已传输:{}KB,传输进度:{}", upLoaded/1024, value);
+        if (LogUtils.isDebugEnabled()) {
+	        LogUtils.debug("已传输:{}KB,传输进度:{}", upLoaded/1024, value);
         }
         if (upLoaded == maxFileSize) {
             destoryThread();
             long endTime = System.currentTimeMillis();
-            if (LogUtil.isDebugEnabled()) {
-	            LogUtil.debug("传输完成!用时:{}s", (endTime - startTime)/1000);
+            if (LogUtils.isDebugEnabled()) {
+	            LogUtils.debug("传输完成!用时:{}s", (endTime - startTime)/1000);
             }
         }
     }
 
     @Override
     public void init(int op, String src, String dest, long max) {
-        if (LogUtil.isDebugEnabled()) {
-	        LogUtil.debug("开始传输文件:{},文件总大小为:{}KB", src, maxFileSize/1024);
+        if (LogUtils.isDebugEnabled()) {
+	        LogUtils.debug("开始传输文件:{},文件总大小为:{}KB", src, maxFileSize/1024);
         }
         startTime = System.currentTimeMillis();
     }

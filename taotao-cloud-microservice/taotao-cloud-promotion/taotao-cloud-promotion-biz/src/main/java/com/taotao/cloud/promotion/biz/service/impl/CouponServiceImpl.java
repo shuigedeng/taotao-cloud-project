@@ -10,7 +10,7 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
@@ -168,7 +168,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 
 		//优惠券为固定时间类型
 		if (promotions.getRangeDayType() != null && promotions.getRangeDayType().equals(CouponRangeDayEnum.FIXEDTIME.name())) {
-			long nowTime = DateUtil.getDateline() * 1000;
+			long nowTime = DateUtils.getDateline() * 1000;
 			//固定时间的优惠券不能小于当前时间
 			if (promotions.getEndTime().getTime() < nowTime) {
 				throw new BusinessException(ResultEnum.PROMOTION_END_TIME_ERROR);

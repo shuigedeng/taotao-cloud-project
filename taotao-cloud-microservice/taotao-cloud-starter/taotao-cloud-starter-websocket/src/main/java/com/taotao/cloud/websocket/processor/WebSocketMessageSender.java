@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.websocket.processor;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.websocket.domain.WebSocketChannel;
 import com.taotao.cloud.websocket.domain.WebSocketMessage;
 import com.taotao.cloud.websocket.exception.IllegalChannelException;
@@ -72,7 +72,7 @@ public class WebSocketMessageSender {
 			throw new PrincipalNotFoundException("Web socket user principal is not found!");
 		}
 
-		LogUtil.debug("Web socket send message to user [{}].", webSocketMessage.getTo());
+		LogUtils.debug("Web socket send message to user [{}].", webSocketMessage.getTo());
 		simpMessagingTemplate.convertAndSendToUser(webSocketMessage.getTo(),
 			webSocketChannel.getDestination(), webSocketMessage.getPayload());
 	}

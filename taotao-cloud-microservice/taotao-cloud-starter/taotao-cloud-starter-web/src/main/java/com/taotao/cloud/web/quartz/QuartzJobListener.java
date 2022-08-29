@@ -1,9 +1,9 @@
 package com.taotao.cloud.web.quartz;
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -34,7 +34,7 @@ public class QuartzJobListener extends JobListenerSupport {
 	@Override
 	public void jobToBeExecuted(JobExecutionContext context) {
 		String jobKey = context.getJobDetail().getKey().toString();
-		LogUtil.info("CustomJobListener 定时任务:{}-开始执行", jobKey);
+		LogUtils.info("CustomJobListener 定时任务:{}-开始执行", jobKey);
 
 		QuartzJobModel quartzJobModel = (QuartzJobModel) context.getMergedJobDataMap().get(
 			QuartzJobModel.JOB_KEY);
@@ -52,7 +52,7 @@ public class QuartzJobListener extends JobListenerSupport {
 	 */
 	@Override
 	public void jobExecutionVetoed(JobExecutionContext context) {
-		LogUtil.info("CustomJobListener 定时任务被否决执行");
+		LogUtils.info("CustomJobListener 定时任务被否决执行");
 		super.jobExecutionVetoed(context);
 	}
 
@@ -62,25 +62,25 @@ public class QuartzJobListener extends JobListenerSupport {
 	@Override
 	public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
 		String jobKey = context.getJobDetail().getKey().toString();
-		LogUtil.info("CustomJobListener 定时任务:{}-执行结束", jobKey);
+		LogUtils.info("CustomJobListener 定时任务:{}-执行结束", jobKey);
 
 		QuartzJobModel quartzJobModel = (QuartzJobModel) context.getMergedJobDataMap().get(
 			QuartzJobModel.JOB_KEY);
 
-		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+		RedisRepository redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 
 		if (Objects.isNull(jobException)) {
-			long times = DateUtil.getTimestamp() - Timestamp.valueOf(LOG.getStartTime()).getTime();
+			long times = DateUtils.getTimestamp() - Timestamp.valueOf(LOG.getStartTime()).getTime();
 			LOG.setTime(times);
 			LOG.setSuccess(true);
-			LogUtil.info("任务执行完毕，任务名称：{} 总共耗时：{} 毫秒", quartzJobModel.getJobName(), times);
+			LogUtils.info("任务执行完毕，任务名称：{} 总共耗时：{} 毫秒", quartzJobModel.getJobName(), times);
 		} else {
-			LogUtil.error("任务执行失败，任务名称：{}" + quartzJobModel.getJobName(), jobException);
-			long times = DateUtil.getTimestamp() - Timestamp.valueOf(LOG.getStartTime()).getTime();
+			LogUtils.error("任务执行失败，任务名称：{}" + quartzJobModel.getJobName(), jobException);
+			long times = DateUtils.getTimestamp() - Timestamp.valueOf(LOG.getStartTime()).getTime();
 			LOG.setTime(times);
 			// 任务状态 0：成功 1：失败
 			LOG.setSuccess(false);
-			LOG.setExceptionDetail(LogUtil.getStackTrace(jobException));
+			LOG.setExceptionDetail(LogUtils.getStackTrace(jobException));
 			quartzJobModel.setPause(false);
 
 			// 发送数据到redis  sys模块更新状态

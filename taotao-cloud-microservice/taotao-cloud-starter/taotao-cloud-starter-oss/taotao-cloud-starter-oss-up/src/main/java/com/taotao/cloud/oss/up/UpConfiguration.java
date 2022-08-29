@@ -16,7 +16,7 @@
 package com.taotao.cloud.oss.up;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.UploadFileService;
@@ -43,7 +43,7 @@ public class UpConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(UpConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(UpConfiguration.class, StarterName.OSS_STARTER);
 	}
 
 	private final UpProperties properties;

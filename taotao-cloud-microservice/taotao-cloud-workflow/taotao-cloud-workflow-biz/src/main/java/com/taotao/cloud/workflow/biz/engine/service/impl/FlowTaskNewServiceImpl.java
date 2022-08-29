@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowCandidatesEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
@@ -160,7 +160,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<FlowTaskOperatorEntity> operatorList = new ArrayList<>();
         //流程表单Json
         String formDataJson = flowTask.getFlowTemplateJson();
-        ChildNode childNodeAll = JsonUtil.getJsonToBean(formDataJson, ChildNode.class);
+        ChildNode childNodeAll = JsonUtils.getJsonToBean(formDataJson, ChildNode.class);
         //获取流程节点
         List<ChildNodeList> nodeListAll = new ArrayList<>();
         List<ConditionList> conditionListAll = new ArrayList<>();
@@ -183,14 +183,14 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         for (String nodeId : nodeIdAll.keySet()) {
             FlowTaskNodeEntity entity = flowTaskNodeService.getInfo(nodeId);
             if (entity != null) {
-                ChildNodeList childNodeList = JsonUtil.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNodeList = JsonUtils.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
                 childNodeList.getCustom().setTaskId(nodeIdAll.get(nodeId));
-                entity.setNodePropertyJson(JsonUtil.getObjectToString(childNodeList));
+                entity.setNodePropertyJson(JsonUtils.getObjectToString(childNodeList));
                 flowTaskNodeService.update(entity);
             }
         }
         //提交记录
-        ChildNodeList start = JsonUtil.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList start = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
         boolean request = requestData(start, flowModel.getFormData());
         if (request) {
             throw new WorkFlowException(MsgCode.WF001.get());
@@ -221,10 +221,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             date = DateUtil.dateAddSeconds(date, timer.getSecond());
             dateList.add(date);
         }
-        startOperator.setDescription(JsonUtil.getObjectToString(dateList));
+        startOperator.setDescription(JsonUtils.getObjectToString(dateList));
         List<FlowTaskOperatorEntity> operatorAll = this.timer(startOperator, taskNodeList, operatorList);
         for (FlowTaskOperatorEntity operatorTime : operatorAll) {
-            List<Date> dateAll = JsonUtil.getJsonToList(operatorTime.getDescription(), Date.class);
+            List<Date> dateAll = JsonUtils.getJsonToList(operatorTime.getDescription(), Date.class);
             if (dateAll.size() > 0) {
                 Date max = Collections.max(dateAll);
                 operatorTime.setCreatorTime(max);
@@ -274,21 +274,21 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowEngineEntity engine = flowEngineService.getInfo(flowTask.getFlowId());
         flowModel.setProcessId(flowTask.getId());
         flowModel.setId(flowTask.getId());
-        Map<String, Object> dataAll = JsonUtil.stringToMap(flowTask.getFlowFormContentJson());
+        Map<String, Object> dataAll = JsonUtils.stringToMap(flowTask.getFlowFormContentJson());
         if (FlowNature.CUSTOM.equals(engine.getFormType())) {
             Map<String, Object> formDataAll = flowModel.getFormData();
             flowModel.setFormData(dataAll);
             if (formDataAll.get("data") != null) {
-                Map<String, Object> data = JsonUtil.stringToMap(String.valueOf(formDataAll.get("data")));
+                Map<String, Object> data = JsonUtils.stringToMap(String.valueOf(formDataAll.get("data")));
                 flowModel.setFormData(data);
             }
         }
         //更新新流程
-        ChildNode childNodeAll = JsonUtil.getJsonToBean(flowTask.getFlowTemplateJson(), ChildNode.class);
+        ChildNode childNodeAll = JsonUtils.getJsonToBean(flowTask.getFlowTemplateJson(), ChildNode.class);
         List<ChildNodeList> nodeListAll = new ArrayList<>();
         List<ConditionList> conditionListAll = new ArrayList<>();
         List<FlowTaskNodeEntity> taskNodeLis = new ArrayList<>();
-        flowTask.setFlowFormContentJson(JsonUtil.getObjectToString(flowModel.getFormData()));
+        flowTask.setFlowFormContentJson(JsonUtils.getObjectToString(flowModel.getFormData()));
         this.updateNodeList(flowTask, childNodeAll, nodeListAll, conditionListAll, taskNodeLis);
         this.nodeListAll(taskNodeLis, flowModel, false);
         this.updateTaskNode(taskNodeLis);
@@ -308,7 +308,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         }
         FlowTaskNodeEntity taskNode = first.get();
         //当前节点属性
-        ChildNodeList nodeModel = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList nodeModel = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
         boolean request = requestData(nodeModel, flowModel.getFormData());
         if (request) {
             throw new WorkFlowException(MsgCode.WF001.get());
@@ -345,7 +345,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<ChildNodeList> nextOperatorList = new ArrayList<>();
         List<FlowTaskNodeEntity> result = this.isNextAll(taskNodeList, nextNode, taskNode, flowModel);
         for (FlowTaskNodeEntity entity : result) {
-            ChildNodeList node = JsonUtil.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList node = JsonUtils.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
             nextOperatorList.add(node);
         }
         //节点事件
@@ -353,7 +353,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         Map<String, Object> data = this.createData(engine, flowTask, flowModel);
         //更新流程节点
         this.getNextStepId(nextOperatorList, taskNodeList, flowTask, flowModel);
-        flowTask.setFlowFormContentJson(JsonUtil.getObjectToString(data));
+        flowTask.setFlowFormContentJson(JsonUtils.getObjectToString(data));
         flowTaskService.update(flowTask);
         //新增审批候选人
         Map<String, List<String>> candidateList = flowModel.getCandidateList() != null ? flowModel.getCandidateList() : new HashMap<>();
@@ -366,7 +366,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 entity.setTaskId(taskNodeEntity.getTaskId());
                 entity.setTaskNodeId(taskNodeEntity.getId());
                 entity.setAccount(userInfo.getUserAccount());
-                entity.setCandidates(JsonUtil.getObjectToString(list));
+                entity.setCandidates(JsonUtils.getObjectToString(list));
                 entity.setOperatorId(operator.getId());
                 flowCandidatesService.create(entity);
             }
@@ -378,16 +378,16 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         for (String nodeId : nodeIdAll.keySet()) {
             FlowTaskNodeEntity entity = flowTaskNodeService.getInfo(nodeId);
             if (entity != null) {
-                ChildNodeList childNodeList = JsonUtil.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNodeList = JsonUtils.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
                 childNodeList.getCustom().setTaskId(nodeIdAll.get(nodeId));
-                entity.setNodePropertyJson(JsonUtil.getObjectToString(childNodeList));
+                entity.setNodePropertyJson(JsonUtils.getObjectToString(childNodeList));
                 flowTaskNodeService.update(entity);
             }
         }
         //定时器
         List<FlowTaskOperatorEntity> operatorAll = this.timer(operator, taskNodeList, operatorList);
         for (FlowTaskOperatorEntity operatorTime : operatorAll) {
-            List<Date> dateAll = JsonUtil.getJsonToList(operatorTime.getDescription(), Date.class);
+            List<Date> dateAll = JsonUtils.getJsonToList(operatorTime.getDescription(), Date.class);
             if (dateAll.size() > 0) {
                 Date max = Collections.max(dateAll);
                 operatorTime.setCreatorTime(max);
@@ -443,7 +443,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowTaskNodeEntity taskNode = first.get();
         FlowEngineEntity engine = flowEngineService.getInfo(flowTask.getFlowId());
         //当前节点属性
-        ChildNodeList nodeModel = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList nodeModel = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
         //驳回记录
         FlowTaskOperatorRecordEntity operatorRecord = new FlowTaskOperatorRecordEntity();
         //审批数据赋值
@@ -476,7 +476,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         String[] thisStepId = flowTask.getThisStepId().split(",");
         List<FlowTaskNodeEntity> upAll = this.isUpAll(taskNodeList, taskNode, isReject, thisStepAll, rejectList, thisStepId);
         for (FlowTaskNodeEntity entity : upAll) {
-            ChildNodeList node = JsonUtil.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList node = JsonUtils.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
             nextOperatorList.add(node);
         }
         //驳回节点
@@ -487,7 +487,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             //赋值数据
             flowModel.setProcessId(flowTask.getId());
             flowModel.setId(flowTask.getId());
-            Map<String, Object> data = JsonUtil.stringToMap(flowTask.getFlowFormContentJson());
+            Map<String, Object> data = JsonUtils.stringToMap(flowTask.getFlowFormContentJson());
             flowModel.setFormData(data);
             this.nextOperator(operatorList, nextOperatorList, flowTask, flowModel);
             //驳回节点之后的状态修改
@@ -504,7 +504,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<String> stepNameList = new ArrayList<>();
         List<String> progressList = new ArrayList<>();
         for (FlowTaskNodeEntity taskNodes : thisStepAll) {
-            ChildNodeList childNode = JsonUtil.getJsonToBean(taskNodes.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(taskNodes.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             String progress = properties.getProgress();
             if (StringUtil.isNotEmpty(progress)) {
@@ -599,7 +599,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         //所有经办
         List<FlowTaskOperatorEntity> flowTaskOperatorEntityList = flowTaskOperatorService.getList(operatorRecord.getTaskId()).stream().filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState())).collect(Collectors.toList());
         //撤回节点属性
-        ChildNodeList nodeModel = JsonUtil.getJsonToBean(flowTaskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList nodeModel = JsonUtils.getJsonToBean(flowTaskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
         //拒绝不撤回
         if (FlowNature.ProcessCompletion.equals(operatorEntity.getHandleStatus())) {
             throw new WorkFlowException(MsgCode.WF104.get());
@@ -650,7 +650,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<String> progressList = new ArrayList<>();
             List<FlowTaskNodeEntity> recallNodeList = flowTaskNodeEntityList.stream().filter(x -> flowTaskNodeEntity.getSortCode().equals(x.getSortCode())).collect(Collectors.toList());
             for (FlowTaskNodeEntity taskNodeEntity : recallNodeList) {
-                ChildNodeList childNode = JsonUtil.getJsonToBean(taskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNode = JsonUtils.getJsonToBean(taskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
                 Properties properties = childNode.getProperties();
                 String progress = properties.getProgress();
                 if (StringUtil.isNotEmpty(progress)) {
@@ -681,7 +681,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         delOperatorRecordIds.add(operatorRecord.getId());
         flowTaskOperatorRecordService.updateStatus(delOperatorRecordIds);
         //撤回记录
-        FlowTaskOperatorEntity operator = JsonUtil.getJsonToBean(operatorRecord, FlowTaskOperatorEntity.class);
+        FlowTaskOperatorEntity operator = JsonUtils.getJsonToBean(operatorRecord, FlowTaskOperatorEntity.class);
         operator.setId(operatorRecord.getTaskOperatorId());
         //审批数据赋值
         FlowOperatordModel flowOperatordModel = new FlowOperatordModel();
@@ -691,7 +691,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         flowOperatordModel.setOperator(operator);
         this.operatorRecord(operatorRecord, flowOperatordModel);
         flowTaskOperatorRecordService.create(operatorRecord);
-        flowModel.setFormData(JsonUtil.stringToMap(flowTaskEntity.getFlowFormContentJson()));
+        flowModel.setFormData(JsonUtils.stringToMap(flowTaskEntity.getFlowFormContentJson()));
         //节点事件
         flowMsgUtil.event(6, nodeModel, operatorRecord, flowModel);
     }
@@ -726,7 +726,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowTaskOperatorRecordEntity operatorRecord = new FlowTaskOperatorRecordEntity();
         operatorRecord.setTaskId(flowTask.getId());
         operatorRecord.setHandleStatus(FlowRecordEnum.revoke.getCode());
-        FlowTaskOperatorEntity operator = JsonUtil.getJsonToBean(operatorRecord, FlowTaskOperatorEntity.class);
+        FlowTaskOperatorEntity operator = JsonUtils.getJsonToBean(operatorRecord, FlowTaskOperatorEntity.class);
         //审批数据赋值
         FlowOperatordModel flowOperatordModel = new FlowOperatordModel();
         flowOperatordModel.setStatus(FlowRecordEnum.revoke.getCode());
@@ -736,8 +736,8 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         this.operatorRecord(operatorRecord, flowOperatordModel);
         flowTaskOperatorRecordService.create(operatorRecord);
         //撤回事件
-        ChildNodeList nodeModel = JsonUtil.getJsonToBean(start.getNodePropertyJson(), ChildNodeList.class);
-        flowModel.setFormData(JsonUtil.stringToMap(flowTask.getFlowFormContentJson()));
+        ChildNodeList nodeModel = JsonUtils.getJsonToBean(start.getNodePropertyJson(), ChildNodeList.class);
+        flowModel.setFormData(JsonUtils.stringToMap(flowTask.getFlowFormContentJson()));
         operatorRecord.setHandleStatus(FlowTaskStatusEnum.Revoke.getCode());
         flowMsgUtil.event(3, nodeModel, operatorRecord, flowModel);
         //递归删除子流程任务
@@ -810,7 +810,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             FlowMsgModel flowMsgModel = new FlowMsgModel();
             flowMsgModel.setCirculateList(new ArrayList<>());
             flowMsgModel.setTitle("已被【指派】");
-            flowMsgModel.setData(JsonUtil.stringToMap(flowTask.getFlowFormContentJson()));
+            flowMsgModel.setData(JsonUtils.stringToMap(flowTask.getFlowFormContentJson()));
             flowMsgModel.setNodeList(taskNodeList);
             flowMsgModel.setOperatorList(operatorList);
             flowMsgModel.setTaskNodeEntity(taskNode);
@@ -862,7 +862,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         flowMsgModel.setTitle("已被【转办】");
         flowMsgModel.setNodeList(taskNodeList);
         flowMsgModel.setOperatorList(operatorList);
-        flowMsgModel.setData(JsonUtil.stringToMap(flowTask.getFlowFormContentJson()));
+        flowMsgModel.setData(JsonUtils.stringToMap(flowTask.getFlowFormContentJson()));
         flowMsgModel.setTaskNodeEntity(taskNode);
         flowMsgModel.setTaskEntity(flowTask);
         flowMsgModel.setEngine(engine);
@@ -885,7 +885,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<UserEntity> userList = serviceUtil.getUserName(userIdAll);
         for (FlowTaskOperatorRecordEntity entity : operatorRecordList) {
             UserEntity userName = userList.stream().filter(t -> t.getId().equals(entity.getHandleId())).findFirst().orElse(null);
-            FlowTaskOperatorRecordModel infoModel = JsonUtil.getJsonToBean(entity, FlowTaskOperatorRecordModel.class);
+            FlowTaskOperatorRecordModel infoModel = JsonUtils.getJsonToBean(entity, FlowTaskOperatorRecordModel.class);
             infoModel.setUserName(userName != null ? userName.getRealName() + "/" + userName.getAccount() : "");
             UserEntity operatorName = userList.stream().filter(t -> t.getId().equals(entity.getOperatorId())).findFirst().orElse(null);
             infoModel.setOperatorId(operatorName != null ? operatorName.getRealName() + "/" + operatorName.getAccount() : "");
@@ -895,7 +895,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         //流程节点
         String[] tepId = taskEntity.getThisStepId() != null ? taskEntity.getThisStepId().split(",") : new String[]{};
         List<String> tepIdAll = Arrays.asList(tepId);
-        List<FlowTaskNodeModel> flowTaskNodeListAll = JsonUtil.getJsonToList(taskNodeList, FlowTaskNodeModel.class);
+        List<FlowTaskNodeModel> flowTaskNodeListAll = JsonUtils.getJsonToList(taskNodeList, FlowTaskNodeModel.class);
         for (FlowTaskNodeModel model : flowTaskNodeListAll) {
             //流程图节点颜色
             if (colorFlag || model.getCompletion() == 1) {
@@ -911,7 +911,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 }
             }
             //查询审批人
-            ChildNodeList childNode = JsonUtil.getJsonToBean(model.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(model.getNodePropertyJson(), ChildNodeList.class);
             Custom custom = childNode.getCustom();
             Properties properties = childNode.getProperties();
             String type = properties.getAssigneeType();
@@ -971,7 +971,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             FlowTaskNodeEntity taskNode = flowTaskNodeService.getInfo(taskNodeId);
             vo.setFormOperates(new ArrayList<>());
             if (taskNode != null) {
-                ChildNodeList childNode = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNode = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 approversProperties = childNode.getProperties();
                 vo.setFormOperates(childNode.getProperties().getFormOperates());
             }
@@ -979,14 +979,14 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowJsonUtil.assignment(approversProperties);
         vo.setApproversProperties(approversProperties);
         //流程任务
-        FlowTaskModel inof = JsonUtil.getJsonToBean(taskEntity, FlowTaskModel.class);
+        FlowTaskModel inof = JsonUtils.getJsonToBean(taskEntity, FlowTaskModel.class);
         FlowEngineEntity engine = flowEngineService.getInfo(taskEntity.getFlowId());
         inof.setAppFormUrl(engine.getAppFormUrl());
         inof.setFormUrl(engine.getFormUrl());
         inof.setType(engine.getType());
         vo.setFlowTaskInfo(inof);
         //流程经办
-        vo.setFlowTaskOperatorList(JsonUtil.getJsonToList(taskOperatorList, FlowTaskOperatorModel.class));
+        vo.setFlowTaskOperatorList(JsonUtils.getJsonToList(taskOperatorList, FlowTaskOperatorModel.class));
         //流程引擎
         vo.setFlowFormInfo(taskEntity.getFlowForm());
         //草稿数据
@@ -994,7 +994,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo.setDraftData(JsonUtil.stringToMap(operator.getDraftData()));
+                    vo.setDraftData(JsonUtils.stringToMap(operator.getDraftData()));
                 }
             }
         }
@@ -1074,7 +1074,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<FlowTaskOperatorRecordEntity> recordList = operatorAll.get(key);
             List<FlowSummary> childList = new ArrayList<>();
             for (FlowTaskOperatorRecordEntity entity : recordList) {
-                FlowSummary childSummary = JsonUtil.getJsonToBean(entity, FlowSummary.class);
+                FlowSummary childSummary = JsonUtils.getJsonToBean(entity, FlowSummary.class);
                 UserEntity user = userList.stream().filter(t -> t.getId().equals(entity.getHandleId())).findFirst().orElse(null);
                 childSummary.setUserName(user != null ? user.getRealName() + "/" + user.getAccount() : "");
                 UserEntity userEntity = userList.stream().filter(t -> t.getId().equals(entity.getOperatorId())).findFirst().orElse(null);
@@ -1093,7 +1093,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowEngineEntity engine = flowEngineService.getInfo(flowTaskEntity.getFlowId());
         List<FlowTaskOperatorEntity> operatorList = flowTaskOperatorService.press(id);
         boolean flag = operatorList.size() > 0;
-        Map<String, Object> data = JsonUtil.stringToMap(flowTaskEntity.getFlowFormContentJson());
+        Map<String, Object> data = JsonUtils.stringToMap(flowTaskEntity.getFlowFormContentJson());
         List<FlowTaskNodeEntity> taskNodeList = flowTaskNodeService.getList(id);
         //发送消息
         FlowMsgModel flowMsgModel = new FlowMsgModel();
@@ -1141,7 +1141,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(list);
             List<String> userId = listByObjectIdAll.stream().map(UserRelationEntity::getUserId).collect(Collectors.toList());
             userId.addAll(properties.getApprovers());
-            Pagination pagination = JsonUtil.getJsonToBean(flowCandidateModel, Pagination.class);
+            Pagination pagination = JsonUtils.getJsonToBean(flowCandidateModel, Pagination.class);
             List<UserEntity> userName = serviceUtil.getUserName(userId, pagination);
             flowCandidateModel.setTotal(pagination.getTotal());
             for (UserEntity userEntity : userName) {
@@ -1168,8 +1168,8 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             redisUtil.insert(rejecttKey, id, 10);
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
             FlowTaskEntity taskEntity = flowTaskService.getInfo(operator.getTaskId());
-            flowHandleModel.setFormData(JsonUtil.stringToMap(taskEntity.getFlowFormContentJson()));
-            FlowModel flowModel = JsonUtil.getJsonToBean(flowHandleModel, FlowModel.class);
+            flowHandleModel.setFormData(JsonUtils.stringToMap(taskEntity.getFlowFormContentJson()));
+            FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
             switch (batchType) {
                 case 0:
                     this.audit(id, flowModel);
@@ -1190,7 +1190,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(operatorId);
         FlowTaskNodeEntity taskNode = flowTaskNodeService.getInfo(operator.getTaskNodeId());
         FlowTaskEntity task = flowTaskService.getInfo(operator.getTaskId());
-        ChildNode childNodeAll = JsonUtil.getJsonToBean(flowEngine.getFlowTemplateJson(), ChildNode.class);
+        ChildNode childNodeAll = JsonUtils.getJsonToBean(flowEngine.getFlowTemplateJson(), ChildNode.class);
         //获取流程节点
         List<ChildNodeList> nodeListAll = new ArrayList<>();
         List<ConditionList> conditionListAll = new ArrayList<>();
@@ -1207,7 +1207,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             throw new WorkFlowException("条件流程包含候选人无法批量通过");
         }
         FlowHandleModel flowCandidateModel = new FlowHandleModel();
-        Map<String, Object> objectMap = JsonUtil.stringToMap(task.getFlowFormContentJson());
+        Map<String, Object> objectMap = JsonUtils.stringToMap(task.getFlowFormContentJson());
         objectMap.put("flowId", task.getFlowId());
         flowCandidateModel.setFormData(objectMap);
         return candidates(operatorId, flowCandidateModel);
@@ -1264,12 +1264,12 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     if (FlowNature.NodeSubFlow.equals(nodeType)) {
                         candidate(taskNodeList, childNodeListAll, code, true);
                     } else {
-                        ChildNodeList childNodeList = JsonUtil.getJsonToBean(nodeEntity.getNodePropertyJson(), ChildNodeList.class);
+                        ChildNodeList childNodeList = JsonUtils.getJsonToBean(nodeEntity.getNodePropertyJson(), ChildNodeList.class);
                         childNodeListAll.add(childNodeList);
                     }
                 }
             } else {
-                ChildNodeList childNodeList = JsonUtil.getJsonToBean(taskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNodeList = JsonUtils.getJsonToBean(taskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
                 childNodeListAll.add(childNodeList);
             }
         }
@@ -1300,17 +1300,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 Map<String, Object> formDataAll = flowCandidateModel.getFormData();
                 Object data = formDataAll.get("data");
                 if (data != null) {
-                    formData = JsonUtil.stringToMap(String.valueOf(data));
+                    formData = JsonUtils.stringToMap(String.valueOf(data));
                 }
             }
-            ChildNode childNodeAll = JsonUtil.getJsonToBean(engine.getFlowTemplateJson(), ChildNode.class);
+            ChildNode childNodeAll = JsonUtils.getJsonToBean(engine.getFlowTemplateJson(), ChildNode.class);
             //获取流程节点
             List<ChildNodeList> nodeListAll = new ArrayList<>();
             List<ConditionList> conditionListAll = new ArrayList<>();
             //递归获取条件数据和节点数据
             FlowTaskEntity flowTask = new FlowTaskEntity();
             flowTask.setId(RandomUtil.uuId());
-            flowTask.setFlowFormContentJson(JsonUtil.getObjectToString(formData));
+            flowTask.setFlowFormContentJson(JsonUtils.getObjectToString(formData));
             this.updateNodeList(flowTask, childNodeAll, nodeListAll, conditionListAll, taskNodeList);
             Optional<FlowTaskNodeEntity> first = taskNodeList.stream().filter(t -> FlowNature.NodeStart.equals(t.getNodeType())).findFirst();
             if (!first.isPresent()) {
@@ -1370,7 +1370,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         taskEntity.setFlowFormContentJson(flowModel.getFormData() != null ? JsonUtilEx.getObjectToString(flowModel.getFormData()) : "{}");
         taskEntity.setParentId(flowModel.getParentId() != null ? flowModel.getParentId() : FlowNature.ParentId);
         taskEntity.setIsAsync(flowModel.getIsAsync() ? FlowNature.ChildAsync : FlowNature.ChildSync);
-        ChildNode childNode = JsonUtil.getJsonToBean(engine.getFlowTemplateJson(), ChildNode.class);
+        ChildNode childNode = JsonUtils.getJsonToBean(engine.getFlowTemplateJson(), ChildNode.class);
         boolean isBatchApproval = false;
         if (ObjectUtil.isNotEmpty(childNode.getProperties().getIsBatchApproval()) && childNode.getProperties().getIsBatchApproval()) {
             isBatchApproval = true;
@@ -1426,7 +1426,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     candidates.setTaskNodeId(entity.getId());
                     candidates.setTaskId(entity.getTaskId());
                     candidates.setAccount(userInfo.getUserAccount());
-                    candidates.setCandidates(JsonUtil.getObjectToString(list));
+                    candidates.setCandidates(JsonUtils.getObjectToString(list));
                     candidates.setOperatorId(FlowNature.ParentId);
                     candidateListAll.add(candidates);
                 }
@@ -1440,11 +1440,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         endround.setCreatorTime(new Date());
         endround.setSortCode(++maxNum);
         endround.setTaskId(startNodes.getTaskId());
-        ChildNodeList endNode = JsonUtil.getJsonToBean(startNodes.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList endNode = JsonUtils.getJsonToBean(startNodes.getNodePropertyJson(), ChildNodeList.class);
         endNode.getCustom().setNodeId(nodeNext);
         endNode.setTaskNodeId(endround.getId());
         endNode.getCustom().setType(type);
-        endround.setNodePropertyJson(JsonUtil.getObjectToString(endNode));
+        endround.setNodePropertyJson(JsonUtils.getObjectToString(endNode));
         endround.setNodeType(type);
         endround.setState(FlowNodeEnum.Process.getCode());
         dataAll.add(endround);
@@ -1530,14 +1530,14 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         //指向timer，继续指向下一个节点
         for (FlowTaskNodeEntity timer : timerList) {
             //获取到timer的上一节点
-            ChildNodeList timerlList = JsonUtil.getJsonToBean(timer.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList timerlList = JsonUtils.getJsonToBean(timer.getNodePropertyJson(), ChildNodeList.class);
             DateProperties timers = timerlList.getTimer();
             timers.setNodeId(timer.getNodeCode());
             timers.setTime(true);
             List<FlowTaskNodeEntity> upEmptyList = taskNodeList.stream().filter(t -> t.getNodeNext().contains(timer.getNodeCode())).collect(Collectors.toList());
             for (FlowTaskNodeEntity entity : upEmptyList) {
                 //上一节点赋值timer的属性
-                ChildNodeList modelList = JsonUtil.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList modelList = JsonUtils.getJsonToBean(entity.getNodePropertyJson(), ChildNodeList.class);
                 modelList.setTimer(timers);
                 entity.setNodeNext(timer.getNodeNext());
                 entity.setNodePropertyJson(JsonUtilEx.getObjectToString(modelList));
@@ -1734,7 +1734,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             }
             //【变量】
             if (FlowTaskOperatorEnum.Variate.getCode().equals(type)) {
-                Map<String, Object> dataAll = JsonUtil.stringToMap(taskEntity.getFlowFormContentJson());
+                Map<String, Object> dataAll = JsonUtils.stringToMap(taskEntity.getFlowFormContentJson());
                 Object data = dataAll.get(properties.getFormField());
                 if (data != null) {
                     List<String> handleIdAll = new ArrayList<>();
@@ -1742,7 +1742,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                         handleIdAll.addAll((List) data);
                     } else {
                         if (String.valueOf(data).contains("[")) {
-                            handleIdAll.addAll(JsonUtil.getJsonToList(String.valueOf(data), String.class));
+                            handleIdAll.addAll(JsonUtils.getJsonToList(String.valueOf(data), String.class));
                         } else {
                             handleIdAll.addAll(Arrays.asList(String.valueOf(data).split(",")));
                         }
@@ -1768,7 +1768,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 String nodeId = childNode.getTaskNodeId();
                 List<FlowCandidatesEntity> candidatesList = flowCandidatesService.getlist(nodeId);
                 candidatesList.stream().forEach(t -> {
-                    List<String> candidates = StringUtil.isNotEmpty(t.getCandidates()) ? JsonUtil.getJsonToList(t.getCandidates(), String.class) : new ArrayList<>();
+                    List<String> candidates = StringUtil.isNotEmpty(t.getCandidates()) ? JsonUtils.getJsonToList(t.getCandidates(), String.class) : new ArrayList<>();
                     userIdAll.addAll(candidates);
                 });
             } else {
@@ -1842,7 +1842,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         operator.setTaskId(childNode.getTaskId());
         operator.setNodeCode(custom.getNodeId());
         operator.setNodeName(properties.getTitle());
-        operator.setDescription(JsonUtil.getObjectToString(new ArrayList<>()));
+        operator.setDescription(JsonUtils.getObjectToString(new ArrayList<>()));
         operator.setCreatorTime(date);
         operator.setCompletion(FlowNature.ProcessCompletion);
         operator.setType(type);
@@ -1881,7 +1881,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             }
             operator.setCompletion(FlowNature.AuditCompletion);
             //修改当前审批的定时器
-            List<Date> list = JsonUtil.getJsonToList(operator.getDescription(), Date.class);
+            List<Date> list = JsonUtils.getJsonToList(operator.getDescription(), Date.class);
             DateProperties timer = nodeModel.getTimer();
             if (timer.getTime()) {
                 Date date = new Date();
@@ -1890,7 +1890,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 date = DateUtil.dateAddMinutes(date, timer.getMinute());
                 date = DateUtil.dateAddSeconds(date, timer.getSecond());
                 list.add(date);
-                operator.setDescription(JsonUtil.getObjectToString(list));
+                operator.setDescription(JsonUtils.getObjectToString(list));
             }
         } else {
             if (isApprover) {
@@ -1924,7 +1924,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             result.add(taskNode);
             //加签记录
         } else {
-            ChildNodeList nodeModel = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList nodeModel = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = nodeModel.getProperties();
             //会签通过
             boolean isCountersign = true;
@@ -2081,10 +2081,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         flowMsgModel.setOperatorList(new ArrayList<>());
         flowMsgModel.setTaskEntity(flowTask);
         FlowTaskNodeEntity taskNodeEntity = new FlowTaskNodeEntity();
-        taskNodeEntity.setNodePropertyJson(JsonUtil.getObjectToString(childNode));
+        taskNodeEntity.setNodePropertyJson(JsonUtils.getObjectToString(childNode));
         flowMsgModel.setTaskNodeEntity(taskNodeEntity);
         flowMsgModel.setEngine(engine);
-        flowMsgModel.setData(JsonUtil.stringToMap(flowTask.getFlowFormContentJson()));
+        flowMsgModel.setData(JsonUtils.stringToMap(flowTask.getFlowFormContentJson()));
         flowMsgUtil.message(flowMsgModel);
         //子流程结束，触发主流程
         boolean isEnd = this.isNext(flowTask);
@@ -2173,7 +2173,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      */
     private boolean isReject(FlowTaskNodeEntity taskNode) {
         List<FlowTaskOperatorEntity> operatorList = flowTaskOperatorService.getList(taskNode.getTaskId()).stream().filter(t -> t.getTaskNodeId().equals(taskNode.getId()) && FlowNodeEnum.Process.getCode().equals(t.getState())).collect(Collectors.toList());
-        ChildNodeList nodeModel = JsonUtil.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList nodeModel = JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
         Properties properties = nodeModel.getProperties();
         long pass = 100 - properties.getCountersignRatio();
         double total = operatorList.stream().filter(t -> FlowNature.ParentId.equals(t.getParentId())).count();
@@ -2196,11 +2196,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         try {
             Map<String, Object> data = flowModel.getFormData();
             if (FlowNature.CUSTOM.equals(engine.getFormType())) {
-                List<TableModel> tableList = JsonUtil.getJsonToList(engine.getFlowTables(), TableModel.class);
+                List<TableModel> tableList = JsonUtils.getJsonToList(engine.getFlowTables(), TableModel.class);
                 //获取属性
                 DbLinkEntity dbLink = serviceUtil.getDbLink(engine.getDbLinkId());
-                FormDataModel formData = JsonUtil.getJsonToBean(taskEntity.getFlowForm(), FormDataModel.class);
-                List<FieLdsModel> list = JsonUtil.getJsonToList(formData.getFields(), FieLdsModel.class);
+                FormDataModel formData = JsonUtils.getJsonToBean(taskEntity.getFlowForm(), FormDataModel.class);
+                List<FieLdsModel> list = JsonUtils.getJsonToList(formData.getFields(), FieLdsModel.class);
                 if (StringUtil.isNotEmpty(flowModel.getId())) {
                     //更新
                     resultData = flowDataUtil.update(data, list, tableList, taskEntity.getProcessId(), dbLink);
@@ -2210,7 +2210,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 }
             } else {
                 //系统表单
-                String dataAll = JsonUtil.getObjectToString(data);
+                String dataAll = JsonUtils.getObjectToString(data);
                 if (engine.getType() != 1) {
                     String coed = engine.getEnCode();
                     this.formData(coed, flowModel.getProcessId(), dataAll);
@@ -2300,7 +2300,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         }
         //【变量】
         if (FlowTaskOperatorEnum.Variate.getCode().equals(type)) {
-            Map<String, Object> dataAll = JsonUtil.stringToMap(taskEntity.getFlowFormContentJson());
+            Map<String, Object> dataAll = JsonUtils.stringToMap(taskEntity.getFlowFormContentJson());
             Object data = dataAll.get(properties.getFormField());
             if (data != null) {
                 List<String> handleIdAll = new ArrayList<>();
@@ -2308,7 +2308,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     handleIdAll.addAll((List) data);
                 } else {
                     if (String.valueOf(data).contains("[")) {
-                        handleIdAll.addAll(JsonUtil.getJsonToList(String.valueOf(data), String.class));
+                        handleIdAll.addAll(JsonUtils.getJsonToList(String.valueOf(data), String.class));
                     } else {
                         handleIdAll.addAll(Arrays.asList(String.valueOf(data).split(",")));
                     }
@@ -2367,10 +2367,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowModel flowModel = new FlowModel();
         String billNo = "单据规则不存在";
         if (FlowNature.CUSTOM.equals(engine.getFormType())) {
-            FormDataModel formData = JsonUtil.getJsonToBean(engine.getFormData(), FormDataModel.class);
-            List<FieLdsModel> list = JsonUtil.getJsonToList(formData.getFields(), FieLdsModel.class);
+            FormDataModel formData = JsonUtils.getJsonToBean(engine.getFormData(), FormDataModel.class);
+            List<FieLdsModel> list = JsonUtils.getJsonToList(formData.getFields(), FieLdsModel.class);
             List<FormAllModel> formAllModel = new ArrayList<>();
-            List<TableModel> tableModelList = JsonUtil.getJsonToList(engine.getFlowTables(), TableModel.class);
+            List<TableModel> tableModelList = JsonUtils.getJsonToList(engine.getFlowTables(), TableModel.class);
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             FormCloumnUtil.recursionForm(recursionForm, formAllModel);
             List<FormAllModel> mastForm = formAllModel.stream().filter(t -> FormEnum.mast.getMessage().equals(t.getJnpfKey())).collect(Collectors.toList());
@@ -2439,7 +2439,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         Set<FlowTaskNodeEntity> taskNodeList = new HashSet<>();
         List<String> taskId = parentList.stream().map(FlowTaskEntity::getId).collect(Collectors.toList());
         for (FlowTaskNodeEntity nodeEntity : parentNodeAll) {
-            ChildNodeList parentNode = JsonUtil.getJsonToBean(nodeEntity.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList parentNode = JsonUtils.getJsonToBean(nodeEntity.getNodePropertyJson(), ChildNodeList.class);
             List<String> taskIdAll = parentNode.getCustom().getTaskId();
             boolean isNum = taskIdAll.stream().filter(t -> taskId.contains(t)).count() > 0;
             if (isNum) {
@@ -2462,7 +2462,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      */
     private void parentOperator(FlowTaskOperatorEntity parentOperator, FlowTaskNodeEntity nodeEntity) {
         parentOperator.setTaskNodeId(nodeEntity.getId());
-        parentOperator.setDescription(JsonUtil.getObjectToString(new ArrayList<>()));
+        parentOperator.setDescription(JsonUtils.getObjectToString(new ArrayList<>()));
         parentOperator.setNodeCode(nodeEntity.getNodeCode());
         parentOperator.setNodeName(nodeEntity.getNodeName());
         parentOperator.setTaskId(nodeEntity.getTaskId());
@@ -2578,7 +2578,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @throws WorkFlowException
      */
     private void formData(String code, String id, String data) throws WorkFlowException {
-        Map<String, Object> objectData = JsonUtil.stringToMap(data);
+        Map<String, Object> objectData = JsonUtils.stringToMap(data);
         if (objectData.size() > 0) {
             try {
                 Class[] types = new Class[]{String.class, String.class};
@@ -2611,17 +2611,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<FlowTaskOperatorEntity> list = operatorAll.stream().filter(t -> nodeList.contains(t.getTaskNodeId())).collect(Collectors.toList());
             for (FlowTaskOperatorEntity operator : list) {
                 if (StringUtil.isNotEmpty(operator.getDescription())) {
-                    List<Date> dateList = JsonUtil.getJsonToList(operator.getDescription(), Date.class);
+                    List<Date> dateList = JsonUtils.getJsonToList(operator.getDescription(), Date.class);
                     dateListAll.addAll(dateList);
                 }
             }
             //获取单前审批定时器
             if (StringUtil.isNotEmpty(taskOperator.getDescription())) {
-                List<Date> date = JsonUtil.getJsonToList(taskOperator.getDescription(), Date.class);
+                List<Date> date = JsonUtils.getJsonToList(taskOperator.getDescription(), Date.class);
                 dateListAll.addAll(date);
             }
             for (FlowTaskOperatorEntity operator : operatorList) {
-                operator.setDescription(JsonUtil.getObjectToString(dateListAll));
+                operator.setDescription(JsonUtils.getObjectToString(dateListAll));
                 operatorListAll.add(operator);
             }
         }

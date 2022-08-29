@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.MaterialEntryEntity;
@@ -116,10 +116,10 @@ public class MaterialRequisitionServiceImpl extends ServiceImpl<MaterialRequisit
 
     @Override
     public void data(String id, String data) {
-        MaterialRequisitionForm materialRequisitionForm = JsonUtil.getJsonToBean(data, MaterialRequisitionForm.class);
-        MaterialRequisitionEntity entity = JsonUtil.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
+        MaterialRequisitionForm materialRequisitionForm = JsonUtils.getJsonToBean(data, MaterialRequisitionForm.class);
+        MaterialRequisitionEntity entity = JsonUtils.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
         List<MaterialEntryEntityInfoModel> entryList = materialRequisitionForm.getEntryList() != null ? materialRequisitionForm.getEntryList() : new ArrayList<>();
-        List<MaterialEntryEntity> materialEntryEntityList = JsonUtil.getJsonToList(entryList, MaterialEntryEntity.class);
+        List<MaterialEntryEntity> materialEntryEntityList = JsonUtils.getJsonToList(entryList, MaterialEntryEntity.class);
         entity.setId(id);
         QueryWrapper<MaterialEntryEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(MaterialEntryEntity::getLeadeId, entity.getId());

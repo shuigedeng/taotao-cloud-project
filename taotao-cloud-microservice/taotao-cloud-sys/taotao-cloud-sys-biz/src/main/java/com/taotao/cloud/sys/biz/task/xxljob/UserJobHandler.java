@@ -6,7 +6,7 @@
  */
 package com.taotao.cloud.sys.biz.task.xxljob;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -36,7 +36,7 @@ public class UserJobHandler {
 	public ReturnT<String> throwJobHandler(String param) throws Exception {
 		XxlJobHelper.log("XXL-JOB, throwwwwwwwwwwwwww");
 
-		LogUtil.info("=============xxljob throwwwwwwwwwwwwwwwwwwwwwwwwww");
+		LogUtils.info("=============xxljob throwwwwwwwwwwwwwwwwwwwwwwwwww");
 
 		throw new Exception("XXL-JOB, throwwwwwwwwwwwwww");
 	}
@@ -45,7 +45,7 @@ public class UserJobHandler {
 	public ReturnT<String> testJobHandler(String param) throws Exception {
 		XxlJobHelper.log("XXL-JOB, successsssssssssss");
 
-		LogUtil.info("=============xxljob succcccccccccccccc");
+		LogUtils.info("=============xxljob succcccccccccccccc");
 
 		return ReturnT.SUCCESS;
 	}
@@ -58,7 +58,7 @@ public class UserJobHandler {
 	    XxlJobHelper.log("XXL-JOB, Hello World.3");
 	    XxlJobHelper.log("XXL-JOB, Hello World.4");
 
-	    LogUtil.info("=============xxljob eeeeeeeeeeeeeeeeeeeee");
+	    LogUtils.info("=============xxljob eeeeeeeeeeeeeeeeeeeee");
 
         //for (int i = 0; i < 5; i++) {
 	    //    XxlJobHelper.log("beat at:" + i);
@@ -285,11 +285,11 @@ public class UserJobHandler {
 	}
 
 	public void init() {
-		LogUtil.info("init");
+		LogUtils.info("init");
 	}
 
 	public void destroy() {
-		LogUtil.info("destory");
+		LogUtils.info("destory");
 	}
 
 

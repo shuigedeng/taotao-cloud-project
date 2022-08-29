@@ -16,7 +16,7 @@
 package com.taotao.cloud.logger.initializer;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.slf4j.TtlMDCAdapter;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -35,7 +35,7 @@ public class TtlMDCAdapterInitializer implements ApplicationContextInitializer<C
 
 	@Override
 	public void initialize(ConfigurableApplicationContext applicationContext) {
-		LogUtil.started(TtlMDCAdapterInitializer.class, StarterName.CORE_STARTER);
+		LogUtils.started(TtlMDCAdapterInitializer.class, StarterName.CORE_STARTER);
 
 		if (!(applicationContext instanceof AnnotationConfigApplicationContext)) {
 			TtlMDCAdapter.getInstance();

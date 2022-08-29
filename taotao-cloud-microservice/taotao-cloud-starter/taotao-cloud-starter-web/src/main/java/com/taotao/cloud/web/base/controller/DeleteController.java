@@ -16,11 +16,10 @@
 package com.taotao.cloud.web.base.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -100,7 +99,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 		@Parameter(description = "字段值", required = true) @NotNull(message = "字段值不能为空")
 		@PathVariable(value = "filedValue") Object filedValue) {
 		if (handlerDeleteByFiled(filedName, filedValue)) {
-			if (ReflectionUtil.checkField(filedName, getEntityClass())) {
+			if (ReflectionUtils.checkField(filedName, getEntityClass())) {
 				QueryWrap<T> wrapper = Wraps.q();
 				wrapper.eq(StrUtil.toUnderlineCase(filedName), filedValue);
 				return success(service().remove(wrapper));

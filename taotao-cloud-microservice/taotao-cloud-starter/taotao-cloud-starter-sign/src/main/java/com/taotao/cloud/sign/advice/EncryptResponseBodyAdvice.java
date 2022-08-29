@@ -4,7 +4,7 @@ package com.taotao.cloud.sign.advice;
 import com.alibaba.fastjson2.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.annotation.EncryptBody;
 import com.taotao.cloud.sign.bean.EncryptAnnotationInfoBean;
 import com.taotao.cloud.sign.enums.EncryptBodyMethod;
@@ -117,7 +117,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 				.map(Object::toString)
 				.orElse(null);
 		} catch (JsonProcessingException e) {
-			LogUtil.error("响应数据的加密异常,请联系管理员", e);
+			LogUtils.error("响应数据的加密异常,请联系管理员", e);
 		}
 
 		String encryptStr;
@@ -127,7 +127,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 		} else if (classAnnotation != null && result != null) {
 			encryptStr = switchEncrypt(result, classAnnotation);
 		} else {
-			LogUtil.error("EncryptResponseBodyAdvice 加密数据失败 body:{}", body);
+			LogUtils.error("EncryptResponseBodyAdvice 加密数据失败 body:{}", body);
 			encryptStr = null;
 		}
 
@@ -148,7 +148,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 		Method method = Optional.ofNullable(methodParameter)
 			.map(MethodParameter::getMethod)
 			.orElseThrow(() -> {
-				LogUtil.error("获取方法控制器上的加密注解信息,为null--methodParameter:{}", methodParameter);
+				LogUtils.error("获取方法控制器上的加密注解信息,为null--methodParameter:{}", methodParameter);
 				return new EncryptDtguaiException("获取方法控制器上的加密注解信息,为null");
 			});
 

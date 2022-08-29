@@ -6,7 +6,7 @@ import com.baidubce.auth.DefaultBceCredentials;
 import com.baidubce.services.bos.BosClient;
 import com.baidubce.services.bos.BosClientConfiguration;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
@@ -35,7 +35,7 @@ public class BaiduOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(BaiduOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(BaiduOssConfiguration.class, StarterName.OSS_STARTER);
 	}
 
 	public static final String DEFAULT_BEAN_NAME = "baiduOssClient";

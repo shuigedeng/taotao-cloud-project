@@ -12,7 +12,7 @@
  */
 package com.taotao.cloud.sms.yunpian;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
@@ -57,7 +57,7 @@ public class YunPianSendHandler extends AbstractSendHandler<YunPianProperties> {
 		String templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -99,7 +99,7 @@ public class YunPianSendHandler extends AbstractSendHandler<YunPianProperties> {
 		if (succeed) {
 			publishSendSuccessEvent(noticeData, phones);
 		} else {
-			LogUtil.debug("send fail: {}", result.getMsg());
+			LogUtils.debug("send fail: {}", result.getMsg());
 			publishSendFailEvent(noticeData, phones, new SendFailedException(result.getMsg()));
 		}
 		return succeed;

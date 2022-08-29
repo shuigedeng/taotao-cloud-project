@@ -5,7 +5,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.druid.util.StringUtils;
 import com.taotao.cloud.common.enums.CachePrefix;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.web.dto.HotWordsDTO;
 import com.taotao.cloud.goods.biz.elasticsearch.ParamOptions;
 import com.taotao.cloud.goods.biz.elasticsearch.SelectorOptions;
@@ -109,7 +109,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 
 		NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(esGoodsSearchQuery);
 		NativeSearchQuery searchQuery = searchQueryBuilder.build();
-		LogUtil.info("searchGoods DSL:{}", searchQuery.getQuery());
+		LogUtils.info("searchGoods DSL:{}", searchQuery.getQuery());
 		SearchHits<EsGoodsIndex> search = restTemplate.search(searchQuery, EsGoodsIndex.class);
 		return SearchHitSupport.searchPageFor(search, searchQuery.getPageable());
 	}
@@ -182,7 +182,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 		NativeSearchQuery searchQuery = builder.build();
 		SearchHits<EsGoodsIndex> search = restTemplate.search(searchQuery, EsGoodsIndex.class);
 
-		LogUtil.info("getSelector DSL:{}", searchQuery.getQuery());
+		LogUtils.info("getSelector DSL:{}", searchQuery.getQuery());
 		//Map<String, Aggregation> aggregationMap = Objects.requireNonNull(search.getAggregations())
 		//	.getAsMap();
 		//return convertToEsGoodsRelatedInfo(aggregationMap, goodsSearch);

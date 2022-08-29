@@ -1,6 +1,6 @@
 package com.taotao.cloud.job.elastic.listener;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.shardingsphere.elasticjob.infra.listener.ElasticJobListener;
 import org.apache.shardingsphere.elasticjob.infra.listener.ShardingContexts;
 
@@ -16,14 +16,14 @@ public class MyJobListener implements ElasticJobListener {
 	@Override
 	public void beforeJobExecuted(ShardingContexts shardingContexts) {
 		// do something ...
-		LogUtil.info("beforeJobExecuted=========================");
+		LogUtils.info("beforeJobExecuted=========================");
 	}
 
 	@Override
 	public void afterJobExecuted(ShardingContexts shardingContexts) {
 		// do something ...
 
-		LogUtil.info("afterJobExecuted=========================");
+		LogUtils.info("afterJobExecuted=========================");
 	}
 
 	@Override

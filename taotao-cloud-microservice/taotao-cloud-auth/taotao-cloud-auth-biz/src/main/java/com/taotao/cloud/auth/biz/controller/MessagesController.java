@@ -13,18 +13,14 @@
  */
 package com.taotao.cloud.auth.biz.controller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.dubbo.IDubboDictService;
-import com.taotao.cloud.sys.api.dubbo.response.DubboDictRes;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
 import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,13 +48,13 @@ public class MessagesController {
 	@Operation(summary = "测试消息", description = "测试消息")
 	@GetMapping("/messages")
 	public String[] getMessages() {
-		LogUtil.info("slfdlaskdf;lasjdf;lj");
+		LogUtils.info("slfdlaskdf;lasjdf;lj");
 		//DubboDictRes dubboDictRes = dubboDictService.findByCode(1);
 
 		try {
 			FeignDictRes feignDictRes = feignDictService.findByCode("sd");
 		} catch (Exception e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			throw new RuntimeException(e);
 		}
 

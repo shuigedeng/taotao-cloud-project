@@ -25,8 +25,8 @@ import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Configuration;
@@ -73,7 +73,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ExceptionConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(ExceptionConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@ExceptionHandler({BaseException.class})
@@ -283,7 +283,7 @@ public class ExceptionConfiguration implements InitializingBean {
 		for (FieldError error : list) {
 			map.put(error.getField(), error.getDefaultMessage());
 		}
-		return JsonUtil.toJSONString(map);
+		return JsonUtils.toJSONString(map);
 	}
 
 	/**
@@ -301,7 +301,7 @@ public class ExceptionConfiguration implements InitializingBean {
 			String message = constraintViolation.getMessage();
 			map.put(property, message);
 		}
-		return JsonUtil.toJSONString(map);
+		return JsonUtils.toJSONString(map);
 	}
 
 	/**
@@ -312,8 +312,8 @@ public class ExceptionConfiguration implements InitializingBean {
 	 * @since 2021-09-02 21:27:34
 	 */
 	private void printLog(NativeWebRequest req, Exception e) {
-		LogUtil.error(e);
-		LogUtil.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
+		LogUtils.error(e);
+		LogUtils.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
 	}
 }

@@ -20,7 +20,7 @@ import com.taotao.cloud.canal.model.SimpleCanalClient;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import com.taotao.cloud.canal.runner.CanalApplicationRunner;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -41,7 +41,7 @@ public class CanalAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CanalAutoConfiguration.class, StarterName.CANAL_STARTER);
+		LogUtils.started(CanalAutoConfiguration.class, StarterName.CANAL_STARTER);
 	}
 
 	@Bean

@@ -17,10 +17,10 @@ package com.taotao.cloud.monitor.warn;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.monitor.enums.WarnTypeEnum;
 import com.taotao.cloud.monitor.model.Message;
@@ -71,13 +71,13 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 				try {
 					notifyRunning();
 				} catch (Exception exp) {
-					LogUtil.warn(StarterName.MONITOR_STARTER, "WarnProvider 消息循环异常");
+					LogUtils.warn(StarterName.MONITOR_STARTER, "WarnProvider 消息循环异常");
 				}
 
 				try {
 					Thread.sleep(warnProperties.getTimeSpan() * 1000L);
 				} catch (Exception e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 			}
 		});
@@ -252,10 +252,10 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 			for (AbstractWarn warn : warns) {
 				message.setTitle(String.format("[%s][%s][%s][%s]%s",
 					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
-					RequestUtil.getIpAddress(),
-					PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
-					PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
-					StringUtil.nullToEmpty(message.getTitle())));
+					RequestUtils.getIpAddress(),
+					PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+					PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY),
+					StringUtils.nullToEmpty(message.getTitle())));
 				warn.notify(message);
 			}
 		}
@@ -269,7 +269,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	@Override
 	public void run(ApplicationArguments args) {
 		atomicChannel.getAndSet(true);
-		LogUtil.info(StarterName.MONITOR_STARTER, "开启消息通道");
+		LogUtils.info(StarterName.MONITOR_STARTER, "开启消息通道");
 	}
 
 	/**
@@ -299,7 +299,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 		 * @since 2021-09-10 16:21:52
 		 */
 		public boolean ifDuplicate(String message) {
-			int hash = StringUtil.nullToEmpty(message)
+			int hash = StringUtils.nullToEmpty(message)
 				.replaceAll("\\d+", "")
 				.hashCode();
 

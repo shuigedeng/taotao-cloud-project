@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.oss.nginx;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
 import com.taotao.cloud.oss.common.service.AbstractUploadFileService;
@@ -53,14 +53,14 @@ public class NginxUploadFileServiceImpl extends AbstractUploadFileService {
 				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(f));
 				// file.transferTo(new File(config.getNginxUploadPath() + path));
 			} catch (Exception e) {
-				LogUtil.error("[nginx]文件上传错误:", e);
+				LogUtils.error("[nginx]文件上传错误:", e);
 				throw new UploadFileException("[nginx]文件上传错误");
 			}
 			String s = properties.getDownPath() + "/" + uploadFileInfo.getName();
 			uploadFileInfo.setUrl(s);
 			return uploadFileInfo;
 		} catch (Exception e) {
-			LogUtil.error("[nginx]文件上传失败:", e);
+			LogUtils.error("[nginx]文件上传失败:", e);
 			throw new UploadFileException("[nginx]文件上传失败");
 		}
 	}
@@ -78,14 +78,14 @@ public class NginxUploadFileServiceImpl extends AbstractUploadFileService {
 				FileUtils.copyInputStreamToFile(new FileInputStream(file), new File(f));
 				// file.transferTo(new File(config.getNginxUploadPath() + path));
 			} catch (Exception e) {
-				LogUtil.error("[nginx]文件上传错误:", e);
+				LogUtils.error("[nginx]文件上传错误:", e);
 				throw new UploadFileException("[nginx]文件上传错误");
 			}
 			String s = properties.getDownPath() + "/" + uploadFileInfo.getName();
 			uploadFileInfo.setUrl(s);
 			return uploadFileInfo;
 		} catch (Exception e) {
-			LogUtil.error("[nginx]文件上传失败:", e);
+			LogUtils.error("[nginx]文件上传失败:", e);
 			throw new UploadFileException("[nginx]文件上传失败");
 		}
 	}
@@ -96,7 +96,7 @@ public class NginxUploadFileServiceImpl extends AbstractUploadFileService {
 			FileUtils
 				.forceDelete(new File(properties.getUploadPath() + "/" + uploadFileInfo.getName()));
 		} catch (Exception e) {
-			LogUtil.error("[nginx]文件删除失败:", e);
+			LogUtils.error("[nginx]文件删除失败:", e);
 			throw new UploadFileException("[nginx]文件删除失败");
 		}
 		return uploadFileInfo;

@@ -16,7 +16,7 @@
 package com.taotao.cloud.core.compress;
 
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -63,7 +63,7 @@ public class CompressUtil {
 		try (OutputStream outputStream = new FileOutputStream(targetFile);) {
 			zip(srcDir, outputStream);
 		} catch (Exception exp) {
-			LogUtil.error(exp);
+			LogUtils.error(exp);
 			throw new BaseException("压缩文件出错", exp);
 		}
 	}
@@ -158,11 +158,11 @@ public class CompressUtil {
 						}
 					}
 				} else {
-					LogUtil.info(entry.getName());
+					LogUtils.info(entry.getName());
 				}
 			}
 		} catch (Exception exp) {
-			LogUtil.error(exp);
+			LogUtils.error(exp);
 			throw new BaseException("解压文件出错", exp);
 		}
 	}

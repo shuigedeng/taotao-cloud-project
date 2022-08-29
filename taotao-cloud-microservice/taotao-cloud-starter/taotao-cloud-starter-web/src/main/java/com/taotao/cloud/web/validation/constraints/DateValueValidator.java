@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.validation.constraints;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -39,7 +39,7 @@ public class DateValueValidator implements ConstraintValidator<DateValue, String
 	public boolean isValid(String dateValue, ConstraintValidatorContext context) {
 		try {
 			// 校验日期格式
-			DateUtil.parseLocalDate(dateValue, format);
+			DateUtils.parseLocalDate(dateValue, format);
 			return true;
 		} catch (Exception e) {
 			return false;

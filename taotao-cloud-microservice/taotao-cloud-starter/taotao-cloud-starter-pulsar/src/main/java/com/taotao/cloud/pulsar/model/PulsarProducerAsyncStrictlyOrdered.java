@@ -1,6 +1,6 @@
 package com.taotao.cloud.pulsar.model;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.pulsar.client.api.MessageId;
 import org.apache.pulsar.client.api.Producer;
 
@@ -14,14 +14,14 @@ public class PulsarProducerAsyncStrictlyOrdered {
         try {
             producer.sendAsync(msg).whenCompleteAsync((messageId, throwable) -> {
                 if (throwable != null) {
-	                LogUtil.info("send success, id is {}", messageId);
+	                LogUtils.info("send success, id is {}", messageId);
                     future.complete(messageId);
                     return;
                 }
                 PulsarProducerAsyncStrictlyOrdered.this.sendMsgAsync(msg, future);
             });
         } catch (Exception e) {
-	        LogUtil.error("exception is ", e);
+	        LogUtils.error("exception is ", e);
         }
     }
 

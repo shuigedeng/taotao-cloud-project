@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.common.constant;
 
-import cn.hutool.core.lang.Dict;
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.util.List;
 import java.util.Map;
 
@@ -181,7 +180,7 @@ public final class SystemConst {
 		Dict dict = new Dict();
 
 		dict.setVersion(null);
-		String s = JsonUtil.toJSONString(dict);
+		String s = JsonUtils.toJSONString(dict);
 		System.out.println(s);
 	}
 

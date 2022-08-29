@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.dubbo.monitor;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.URL;
-import org.apache.dubbo.config.spring.context.DubboBootstrapStartStopListenerSpringAdapter;
 import org.apache.dubbo.monitor.Monitor;
 import org.apache.dubbo.monitor.support.AbstractMonitorFactory;
 
@@ -34,8 +33,8 @@ import java.util.List;
 public class CustomMonitorFactory extends AbstractMonitorFactory {
 	@Override
 	protected Monitor createMonitor(URL url) {
-		LogUtil.info("Dubbo CustomMonitorFactory getExecutor activate ------------------------------");
-		LogUtil.info(url.toFullString());
+		LogUtils.info("Dubbo CustomMonitorFactory getExecutor activate ------------------------------");
+		LogUtils.info(url.toFullString());
 		return new CustomMonitor();
 	}
 
@@ -59,14 +58,14 @@ public class CustomMonitorFactory extends AbstractMonitorFactory {
 
 		@Override
 		public void collect(URL statistics) {
-			LogUtil.info("CustomMonitor collect activate ------------------------------");
-			LogUtil.info(statistics.toFullString());
+			LogUtils.info("CustomMonitor collect activate ------------------------------");
+			LogUtils.info(statistics.toFullString());
 		}
 
 		@Override
 		public List<URL> lookup(URL query) {
-			LogUtil.info("CustomMonitor lookup activate ------------------------------");
-			LogUtil.info(query.toFullString());
+			LogUtils.info("CustomMonitor lookup activate ------------------------------");
+			LogUtils.info(query.toFullString());
 
 			return new ArrayList<>();
 		}

@@ -3,7 +3,7 @@ package com.taotao.cloud.oss.up;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.model.SliceConfig;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
@@ -37,7 +37,7 @@ public class UpOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(UpOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(UpOssConfiguration.class, StarterName.OSS_STARTER);
 	}
 
     public static final String DEFAULT_BEAN_NAME = "upOssClient";

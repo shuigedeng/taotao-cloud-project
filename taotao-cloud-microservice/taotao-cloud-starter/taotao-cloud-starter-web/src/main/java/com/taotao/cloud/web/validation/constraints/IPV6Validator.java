@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.validation.constraints;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -24,7 +24,7 @@ public class IPV6Validator implements ConstraintValidator<IPV6, String> {
 	
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isNotBlank(value)) {
+		if (StringUtils.isNotBlank(value)) {
 			return Validator.isIpv6(value);
 		}
 

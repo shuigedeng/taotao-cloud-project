@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.disruptor.handler;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import java.util.List;
 
@@ -49,12 +49,12 @@ public class ProxiedHandlerChain implements HandlerChain<DisruptorEvent> {
 	@Override
 	public void doHandler(DisruptorEvent event) throws Exception {
 		if (this.handlers == null || this.handlers.size() == this.currentPosition) {
-			LogUtil.info("Invoking original filter chain.");
+			LogUtils.info("Invoking original filter chain.");
 			if (this.originalChain != null) {
 				this.originalChain.doHandler(event);
 			}
 		} else {
-			LogUtil.info("Invoking wrapped filter at index [" + this.currentPosition + "]");
+			LogUtils.info("Invoking wrapped filter at index [" + this.currentPosition + "]");
 			this.handlers.get(this.currentPosition++).doHandler(event, this);
 		}
 	}

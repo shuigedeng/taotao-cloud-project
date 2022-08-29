@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.utils;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.spring.ApplicationHome;
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -99,7 +99,7 @@ public class PackageUtils {
 			URL url = classLoader.getResource(packageName.replace(SPOT, SLANT));
 			// packageName is not exist
 			if (url == null) {
-				LogUtil.debug("packageName={} is not exist.", packageName);
+				LogUtils.debug("packageName={} is not exist.", packageName);
 				return;
 			}
 			URI uri = url.toURI();
@@ -132,7 +132,7 @@ public class PackageUtils {
 							}
 						}
 					} else {
-						LogUtil.debug("skip class {}.", clazz.getName());
+						LogUtils.debug("skip class {}.", clazz.getName());
 					}
 				} else {
 					forClassNames(packageName + SPOT + name, classNames, isInterface,
@@ -140,7 +140,7 @@ public class PackageUtils {
 				}
 			}
 		} catch (Exception ex) {
-			LogUtil.error("when analysis packageName={} catch exception=",
+			LogUtils.error("when analysis packageName={} catch exception=",
 				packageName, ex);
 		}
 	}
@@ -193,12 +193,12 @@ public class PackageUtils {
 							}
 						}
 					} else {
-						LogUtil.debug("skip class {}.", clazz.getName());
+						LogUtils.debug("skip class {}.", clazz.getName());
 					}
 				}
 			}
 		} catch (Exception ex) {
-			LogUtil.error("when analysis packageName={} catch exception=",
+			LogUtils.error("when analysis packageName={} catch exception=",
 				packageName, ex);
 		}
 	}
@@ -251,7 +251,7 @@ public class PackageUtils {
 				}
 			}
 		} catch (Exception ex) {
-			LogUtil.error("when analysis packageName={} catch exception=",
+			LogUtils.error("when analysis packageName={} catch exception=",
 				packageName, ex);
 		}
 	}

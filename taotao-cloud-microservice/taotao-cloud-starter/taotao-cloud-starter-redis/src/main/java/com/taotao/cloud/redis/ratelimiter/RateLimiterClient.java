@@ -18,7 +18,7 @@ package com.taotao.cloud.redis.ratelimiter;
 
 
 import com.taotao.cloud.common.support.function.CheckedSupplier;
-import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -88,7 +88,7 @@ public interface RateLimiterClient {
 			try {
 				return supplier.get();
 			} catch (Throwable e) {
-				throw ExceptionUtil.unchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		}
 		throw new RateLimiterException(key, max, ttl, timeUnit);

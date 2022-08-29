@@ -3,7 +3,7 @@ package com.taotao.cloud.customer.biz.api.controller.buyer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelService;
 import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -119,6 +119,6 @@ public class StoreBuyerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/apply")
 	public Result<StoreDetailVO> apply() {
-		return Result.success(storeDetailService.getStoreDetailVOByMemberId(SecurityUtil.getUserId()));
+		return Result.success(storeDetailService.getStoreDetailVOByMemberId(SecurityUtils.getUserId()));
 	}
 }

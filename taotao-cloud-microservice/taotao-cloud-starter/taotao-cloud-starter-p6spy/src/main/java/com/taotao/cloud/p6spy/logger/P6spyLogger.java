@@ -17,8 +17,8 @@ package com.taotao.cloud.p6spy.logger;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.FormattedLogger;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 
 /**
  * P6spy日志实现
@@ -31,7 +31,7 @@ public class P6spyLogger extends FormattedLogger {
 
 	@Override
 	public void logException(Exception e) {
-		LogUtil.error(e,"数据库日志错误");
+		LogUtils.error(e,"数据库日志错误");
 	}
 
 	@Override
@@ -53,16 +53,16 @@ public class P6spyLogger extends FormattedLogger {
 		final String msg = strategy.formatMessage(connectionId, now, elapsed,
 			category.toString(), prepared, sql, url);
 
-		if (StringUtil.isEmpty(msg)) {
+		if (StringUtils.isEmpty(msg)) {
 			return;
 		}
 
 		if (Category.WARN.equals(category)) {
-			LogUtil.warn(msg);
+			LogUtils.warn(msg);
 		} else if (Category.DEBUG.equals(category)) {
-			LogUtil.debug(msg);
+			LogUtils.debug(msg);
 		} else {
-			LogUtil.info(msg);
+			LogUtils.info(msg);
 		}
 	}
 

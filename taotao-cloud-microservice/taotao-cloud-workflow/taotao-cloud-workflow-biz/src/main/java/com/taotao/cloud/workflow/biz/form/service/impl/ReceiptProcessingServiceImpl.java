@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.form.entity.ReceiptProcessingEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.ReceiptProcessingMapper;
@@ -44,13 +44,13 @@ public class ReceiptProcessingServiceImpl extends ServiceImpl<ReceiptProcessingM
             this.save(entity);
             billRuleService.useBillNumber("WF_ReceiptProcessingNo");
             //添加附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             //更新附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         //流程信息
@@ -66,13 +66,13 @@ public class ReceiptProcessingServiceImpl extends ServiceImpl<ReceiptProcessingM
             this.save(entity);
             billRuleService.useBillNumber("WF_ReceiptProcessingNo");
             //添加附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             //更新附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         //流程信息
@@ -81,8 +81,8 @@ public class ReceiptProcessingServiceImpl extends ServiceImpl<ReceiptProcessingM
 
     @Override
     public void data(String id, String data) {
-        ReceiptProcessingForm receiptProcessingForm = JsonUtil.getJsonToBean(data, ReceiptProcessingForm.class);
-        ReceiptProcessingEntity entity = JsonUtil.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
+        ReceiptProcessingForm receiptProcessingForm = JsonUtils.getJsonToBean(data, ReceiptProcessingForm.class);
+        ReceiptProcessingEntity entity = JsonUtils.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

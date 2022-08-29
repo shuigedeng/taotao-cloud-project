@@ -4,7 +4,7 @@ package com.taotao.cloud.common.utils.common;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import java.util.Objects;
 
 /**
@@ -37,21 +37,21 @@ public final class OperationalJudgment {
 	 * @return 返回判定本身，防止多次查询对象
 	 */
 	public static <T> T judgment(T object, String buyerIdField, String storeIdField) {
-		Integer type = SecurityUtil.getCurrentUser().getType();
+		Integer type = SecurityUtils.getCurrentUser().getType();
 		UserEnum userEnum = UserEnum.getEnumByCode(type);
 		switch (Objects.requireNonNull(userEnum)) {
 			case MANAGER:
 				return object;
 			case MEMBER:
-				if (SecurityUtil.getCurrentUser().getUserId()
-					.equals(ReflectionUtil.getFieldValue(object, buyerIdField))) {
+				if (SecurityUtils.getCurrentUser().getUserId()
+					.equals(ReflectionUtils.getFieldValue(object, buyerIdField))) {
 					return object;
 				} else {
 					throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 				}
 			case STORE:
-				if (SecurityUtil.getCurrentUser().getStoreId()
-					.equals(ReflectionUtil.getFieldValue(object, storeIdField))) {
+				if (SecurityUtils.getCurrentUser().getStoreId()
+					.equals(ReflectionUtils.getFieldValue(object, storeIdField))) {
 					return object;
 				} else {
 					throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);

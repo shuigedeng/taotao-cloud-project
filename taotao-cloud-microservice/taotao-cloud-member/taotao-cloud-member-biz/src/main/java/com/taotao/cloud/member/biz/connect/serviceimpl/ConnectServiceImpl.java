@@ -9,10 +9,10 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.servlet.CookieUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.servlet.CookieUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.member.api.web.query.ConnectQuery;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
@@ -108,10 +108,10 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 				return token;
 			} else {
 				//写入cookie
-				CookieUtil.addCookie(CONNECT_COOKIE, uuid, 1800,
-					RequestUtil.getResponse());
-				CookieUtil.addCookie(CONNECT_TYPE, type, 1800,
-					RequestUtil.getResponse());
+				CookieUtils.addCookie(CONNECT_COOKIE, uuid, 1800,
+					RequestUtils.getResponse());
+				CookieUtils.addCookie(CONNECT_TYPE, type, 1800,
+					RequestUtils.getResponse());
 				//自动登录失败，则把信息缓存起来
 				redisRepository.setExpire(ConnectService.cacheKey(type, uuid), authUser, 30L, TimeUnit.MINUTES);
 				throw new BusinessException(ResultEnum.USER_NOT_BINDING);
@@ -125,7 +125,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 
 	@Override
 	public void bind(String unionId, String type) {
-		Connect connect = new Connect(SecurityUtil.getUserId(), unionId, type);
+		Connect connect = new Connect(SecurityUtils.getUserId(), unionId, type);
 		this.save(connect);
 	}
 
@@ -133,7 +133,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	@Transactional(rollbackFor = Exception.class)
 	public void unbind(String type) {
 		LambdaQueryWrapper<Connect> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(Connect::getUserId, SecurityUtil.getUserId());
+		queryWrapper.eq(Connect::getUserId, SecurityUtils.getUserId());
 		queryWrapper.eq(Connect::getUnionType, type);
 
 		this.remove(queryWrapper);
@@ -142,7 +142,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	@Override
 	public List<String> bindList() {
 		LambdaQueryWrapper<Connect> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(Connect::getUserId, SecurityUtil.getUserId());
+		queryWrapper.eq(Connect::getUserId, SecurityUtils.getUserId());
 		List<Connect> connects = this.list(queryWrapper);
 		List<String> keys = new ArrayList<>();
 		connects.forEach(item -> keys.add(item.getUnionType()));
@@ -218,7 +218,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 									 String unionId) {
 		String encryptedData = params.getEncryptedData(), iv = params.getIv();
 		JSONObject userInfo = this.getUserInfo(encryptedData, sessionKey, iv);
-		LogUtil.info("联合登陆返回：{}", userInfo.toString());
+		LogUtils.info("联合登陆返回：{}", userInfo.toString());
 		String phone = (String) userInfo.get("purePhoneNumber");
 
 		//手机号登录
@@ -326,7 +326,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	 * @return 用户信息
 	 */
 	public JSONObject getUserInfo(String encryptedData, String sessionKey, String iv) {
-		LogUtil.info("encryptedData:{},sessionKey:{},iv:{}", encryptedData, sessionKey, iv);
+		LogUtils.info("encryptedData:{},sessionKey:{},iv:{}", encryptedData, sessionKey, iv);
 		//被加密的数据
 		byte[] dataByte = Base64.getDecoder().decode(encryptedData);
 		//加密秘钥

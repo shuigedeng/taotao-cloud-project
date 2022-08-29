@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.web.utils;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
@@ -36,15 +36,15 @@ public class JasyptUtil {
 	private static StringEncryptor stringEncryptor;
 
 	static {
-		stringEncryptor = ContextUtil.getBean(StringEncryptor.class, true);
+		stringEncryptor = ContextUtils.getBean(StringEncryptor.class, true);
 
 		if (stringEncryptor == null) {
 			try {
-				String password = ContextUtil.getApplicationContext().getEnvironment()
+				String password = ContextUtils.getApplicationContext().getEnvironment()
 					.getProperty("jasypt.encryptor.password", "taotao-cloud");
 				stringEncryptor = getInstance(password);
 			} catch (Exception e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 		}
 	}
@@ -81,7 +81,7 @@ public class JasyptUtil {
 	 */
 	public static StringEncryptor getInstance(String password) throws Exception {
 		if (password == null || "".equals(password.trim())) {
-			LogUtil.error("秘钥不能为空！");
+			LogUtils.error("秘钥不能为空！");
 			throw new Exception("org.jasypt.encryption.StringEncryptor秘钥不能为空！");
 		}
 

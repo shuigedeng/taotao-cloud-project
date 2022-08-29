@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.delay.handler;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.redis.delay.message.RedissonHeaders;
 import com.taotao.cloud.redis.delay.message.RedissonMessage;
@@ -70,16 +70,16 @@ public class RequeueRedissonListenerErrorHandler implements RedissonListenerErro
 	private void requeue(Object payload, Map<String, Object> headers, Throwable throwable) {
 		final String queueName = (String) headers.get(RedissonHeaders.DELIVERY_QUEUE_NAME);
 		if (!StringUtils.hasText(queueName)) {
-			LogUtil.warn("message [{}] delivery queue name is empty, abandon it",
-				JsonUtil.toJSONString(payload), throwable);
+			LogUtils.warn("message [{}] delivery queue name is empty, abandon it",
+				JsonUtils.toJSONString(payload), throwable);
 			return;
 		}
 		Long requeueTimes = getLongVal(headers.get(RedissonHeaders.REQUEUE_TIMES));
 		if (requeueTimes < this.maxRequeueTimes) {
 			headers.put(RedissonHeaders.REQUEUE_TIMES, ++requeueTimes);
 		} else {
-			LogUtil.warn("message [{}] reach the max requeue times, abandon it",
-				JsonUtil.toJSONString(payload), throwable);
+			LogUtils.warn("message [{}] reach the max requeue times, abandon it",
+				JsonUtils.toJSONString(payload), throwable);
 			return;
 		}
 		final long delay = this.delayStrategy.getDelay(payload, headers);

@@ -12,9 +12,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtils.DEFAULT_TIME_FORMAT;
 
 /**
  * 在feign调用方配置， 解决入参和出参是以下类型.

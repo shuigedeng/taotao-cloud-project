@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.kit.plugin.wallet;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.web.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberWalletService;
@@ -102,7 +102,7 @@ public class WalletPlugin implements Payment {
             refundLog.setIsRefund(true);
             refundLogService.save(refundLog);
         } catch (Exception e) {
-			LogUtil.error("订单取消错误", e);
+			LogUtils.error("订单取消错误", e);
         }
     }
 
@@ -136,7 +136,7 @@ public class WalletPlugin implements Payment {
             refundLog.setIsRefund(true);
             refundLogService.save(refundLog);
         } catch (Exception e) {
-			LogUtil.error("退款失败", e);
+			LogUtils.error("退款失败", e);
         }
     }
 
@@ -171,7 +171,7 @@ public class WalletPlugin implements Payment {
                     );
 
                     paymentService.success(paymentSuccessParams);
-					LogUtil.info("支付回调通知：余额支付：{}", payParam);
+					LogUtils.info("支付回调通知：余额支付：{}", payParam);
                 } catch (ServiceException e) {
                     //业务异常，则支付手动回滚
                     memberWalletService.increase(new MemberWalletUpdateDTO(
@@ -188,7 +188,7 @@ public class WalletPlugin implements Payment {
         } catch (ServiceException e) {
             throw e;
         } catch (Exception e) {
-			LogUtil.info("余额支付异常", e);
+			LogUtils.info("余额支付异常", e);
             throw new BusinessException(ResultEnum.WALLET_INSUFFICIENT);
         }
 

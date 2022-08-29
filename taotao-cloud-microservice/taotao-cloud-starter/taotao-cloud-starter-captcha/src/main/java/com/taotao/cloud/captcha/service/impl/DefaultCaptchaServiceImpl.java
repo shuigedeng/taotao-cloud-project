@@ -21,7 +21,7 @@ import com.taotao.cloud.captcha.model.Captcha;
 import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.service.CaptchaService;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Properties;
 
 /**
@@ -112,7 +112,7 @@ public class DefaultCaptchaServiceImpl extends AbstractCaptchaService {
 			//二次校验取值后，即刻失效
 			CaptchaServiceFactory.getCache(cacheType).delete(codeKey);
 		} catch (Exception e) {
-			LogUtil.error("验证码坐标解析失败", e);
+			LogUtils.error("验证码坐标解析失败", e);
 			throw new CaptchaException(e.getMessage());
 		}
 		return captcha;

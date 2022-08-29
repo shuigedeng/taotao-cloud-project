@@ -1,7 +1,7 @@
 package com.taotao.cloud.openapi.client.proxy;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.openapi.client.annotation.OpenApiRef;
 import com.taotao.cloud.openapi.client.constant.ClientConstant;
 import com.taotao.cloud.openapi.common.exception.OpenApiClientException;
@@ -114,7 +114,7 @@ public class OpenApiRefProxyRegistry implements BeanDefinitionRegistryPostProces
 			}
 			return classes;
 		} catch (Exception ex) {
-			LogUtil.error(String.format("扫描%s下的OpenApiRef接口信息异常", scanPath), ex);
+			LogUtils.error(String.format("扫描%s下的OpenApiRef接口信息异常", scanPath), ex);
 			return classes;
 		}
 	}

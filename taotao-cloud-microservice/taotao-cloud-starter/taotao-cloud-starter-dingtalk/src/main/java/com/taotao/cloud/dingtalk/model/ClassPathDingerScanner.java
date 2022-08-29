@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.model;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.spring.DingerFactoryBean;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class ClassPathDingerScanner extends ClassPathBeanDefinitionScanner {
 		Set<BeanDefinitionHolder> beanDefinitions = super.doScan(basePackages);
 
 		if (beanDefinitions.isEmpty()) {
-			LogUtil.warn("No Dinger was found in '{}' package. Please check your configuration.",
+			LogUtils.warn("No Dinger was found in '{}' package. Please check your configuration.",
 				Arrays.toString(basePackages));
 		} else {
 			processBeanDefinitions(beanDefinitions);
@@ -116,14 +116,14 @@ public class ClassPathDingerScanner extends ClassPathBeanDefinitionScanner {
 			definition = (GenericBeanDefinition) beanDefinition.getBeanDefinition();
 			String beanClassName = definition.getBeanClassName();
 
-			LogUtil.debug("Creating DingerFactoryBean with name '{}' and '{}' dingerInterface",
+			LogUtils.debug("Creating DingerFactoryBean with name '{}' and '{}' dingerInterface",
 				beanDefinition.getBeanName(), beanClassName);
 
 			try {
 				dingerClasses.add(
 					ClassUtils.forName(beanClassName, this.getClass().getClassLoader()));
 			} catch (ClassNotFoundException e) {
-				LogUtil.warn("beanClassName=[{}] not found", beanClassName);
+				LogUtils.warn("beanClassName=[{}] not found", beanClassName);
 			}
 
 			definition.setBeanClass(DingerFactoryBean.class);

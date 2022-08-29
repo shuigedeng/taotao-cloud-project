@@ -19,7 +19,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.sys.api.web.dto.quartz.QuartzLogDto;
 import com.taotao.cloud.sys.api.web.dto.quartz.QuartzLogQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzLog;
@@ -58,7 +58,7 @@ public class QuartzLogServiceImpl extends ServiceImpl<IQuartzLogMapper, QuartzLo
 		List<QuartzLog> list = page.getList();
 		List<QuartzLogDto> collect = list.stream().filter(Objects::nonNull).map(e -> {
 			QuartzLogDto dto = new QuartzLogDto();
-			BeanUtil.copyProperties(e, dto);
+			BeanUtils.copyProperties(e, dto);
 			return dto;
 		}).collect(Collectors.toList());
 

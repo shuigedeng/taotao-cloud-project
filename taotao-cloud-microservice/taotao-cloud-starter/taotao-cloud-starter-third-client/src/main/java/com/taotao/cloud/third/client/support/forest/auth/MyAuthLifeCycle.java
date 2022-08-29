@@ -3,7 +3,7 @@ package com.taotao.cloud.third.client.support.forest.auth;
 import com.dtflys.forest.http.ForestRequest;
 import com.dtflys.forest.lifecycles.MethodAnnotationLifeCycle;
 import com.dtflys.forest.reflection.ForestMethod;
-import com.taotao.cloud.common.utils.secure.Base64Util;
+import com.taotao.cloud.common.utils.secure.Base64Utils;
 
 /**
  *  MyAuthLifeCycle 为自定义的 @MyAuth 注解的生命周期类
@@ -34,7 +34,7 @@ public class MyAuthLifeCycle implements MethodAnnotationLifeCycle<MyAuth, Object
         String username = (String) getAttribute(request, "username");
         String password = (String) getAttribute(request, "password");
         // 使用Base64进行加密
-        String basic = "MyAuth " + Base64Util.encode("{" + username + ":" + password + "}");
+        String basic = "MyAuth " + Base64Utils.encode("{" + username + ":" + password + "}");
         // 调用addHeader方法将加密结构加到请求头MyAuthorization中
         request.addHeader("MyAuthorization", basic);
         return true;

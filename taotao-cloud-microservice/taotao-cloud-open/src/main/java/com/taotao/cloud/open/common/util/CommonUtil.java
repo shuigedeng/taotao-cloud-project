@@ -3,7 +3,7 @@ package com.taotao.cloud.open.common.util;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.open.common.exception.OpenApiException;
 import com.taotao.cloud.open.common.model.InParams;
 
@@ -65,7 +65,7 @@ public class CommonUtil {
             BeanUtil.copyProperties(obj, tmp);
             return tmp;
         } catch (Exception ex) {
-            LogUtil.error("克隆新实例失败", ex);
+            LogUtils.error("克隆新实例失败", ex);
         }
         return null;
     }

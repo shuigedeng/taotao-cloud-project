@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.delay.handler;
 
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -23,7 +23,7 @@ public class DefaultIsolationStrategy implements IsolationStrategy {
             String hostName = localHost.getHostName();
             prefix = hostName + "@" + hostAddress;
         } catch (UnknownHostException e) {
-	        LogUtil.warn("can not detect host info,instead with localhost@127.0.0.1");
+	        LogUtils.warn("can not detect host info,instead with localhost@127.0.0.1");
             prefix = "localhost@127.0.0.1";
         }
         return prefix + "-" + queue;

@@ -2,7 +2,7 @@ package com.taotao.cloud.core.sensitive.sensitive.core.api;
 
 
 import com.google.common.collect.Lists;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
 import com.taotao.cloud.core.sensitive.sensitive.core.bs.SensitiveBs;
 import java.util.Collection;
 import java.util.List;
@@ -46,7 +46,7 @@ public final class SensitiveUtil {
 	 * @return 脱敏后的对象集合，
 	 */
 	public static <T> List<T> desCopyCollection(Collection<T> collection) {
-		if (CollectionUtil.isEmpty(collection)) {
+		if (CollectionUtils.isEmpty(collection)) {
 			return Lists.newArrayList();
 		}
 
@@ -66,7 +66,7 @@ public final class SensitiveUtil {
 	 * @see #desJson(Object) 单个对象的脱敏 json
 	 */
 	public static List<String> desJsonCollection(Collection<?> collection) {
-		if (CollectionUtil.isEmpty(collection)) {
+		if (CollectionUtils.isEmpty(collection)) {
 			return Lists.newArrayList();
 		}
 

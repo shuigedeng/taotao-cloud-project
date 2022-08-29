@@ -17,8 +17,8 @@ package com.taotao.cloud.security.configuration;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
@@ -84,12 +84,12 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 		//@PreAuthorize("@pms.hasPermission('export')")
 		public boolean hasPermission(String permission) {
 			// 内部调用直接跳过
-			String header = RequestUtil.getHeader(CommonConstant.TAOTAO_CLOUD_FROM_INNER);
+			String header = RequestUtils.getHeader(CommonConstant.TAOTAO_CLOUD_FROM_INNER);
 			if (Boolean.TRUE.equals(Boolean.valueOf(header))) {
 				return true;
 			}
 
-			Collection<? extends GrantedAuthority> authorities = SecurityUtil.getAuthentication()
+			Collection<? extends GrantedAuthority> authorities = SecurityUtils.getAuthentication()
 				.getAuthorities();
 			if (CollectionUtil.isEmpty(authorities)) {
 				return false;
@@ -137,7 +137,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 
 		private boolean hasPrivilege(Authentication auth, String targetType, String permission) {
 			//内部微服务调用直接返回true
-			String header = RequestUtil.getHeader(CommonConstant.TAOTAO_CLOUD_FROM_INNER);
+			String header = RequestUtils.getHeader(CommonConstant.TAOTAO_CLOUD_FROM_INNER);
 			if (Boolean.TRUE.equals(Boolean.valueOf(header))) {
 				return true;
 			}
@@ -151,7 +151,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 		}
 
 		public boolean checkInner() {
-			HttpServletRequest request = RequestUtil.getRequest();
+			HttpServletRequest request = RequestUtils.getRequest();
 
 			return true;
 		}

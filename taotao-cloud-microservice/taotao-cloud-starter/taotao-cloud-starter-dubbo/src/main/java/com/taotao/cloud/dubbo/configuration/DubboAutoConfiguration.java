@@ -16,7 +16,7 @@
 package com.taotao.cloud.dubbo.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dubbo.properties.DubboProperties;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
 import org.springframework.beans.factory.InitializingBean;
@@ -39,7 +39,7 @@ public class DubboAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DubboAutoConfiguration.class, StarterName.DUBBO_STARTER);
+		LogUtils.started(DubboAutoConfiguration.class, StarterName.DUBBO_STARTER);
 	}
 
     //@Bean

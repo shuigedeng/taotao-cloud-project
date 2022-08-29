@@ -3,9 +3,9 @@ package com.taotao.cloud.pinyin.api.impl;
 
 import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.handler.IHandler;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.api.IPinyin;
 import com.taotao.cloud.pinyin.api.IPinyinContext;
 import com.taotao.cloud.pinyin.spi.IPinyinChinese;
@@ -24,7 +24,7 @@ public class Pinyin implements IPinyin {
     public String toPinyin(String string, IPinyinContext context) {
         List<String> stringList = toPinyinList(string, context);
         final String connector = context.connector();
-        return StringUtil.join(stringList, connector);
+        return StringUtils.join(stringList, connector);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Pinyin implements IPinyin {
             List<String> tonesTwo = pinyinTone.toneList(simpleTwo, context);
 
             // 交集大于0
-            return CollectionUtil.containAny(tonesOne, tonesTwo);
+            return CollectionUtils.containAny(tonesOne, tonesTwo);
         }
 
         return false;
@@ -115,7 +115,7 @@ public class Pinyin implements IPinyin {
         for(int i = 1; i <= 5; i++) {
             String pinyinLast = pinyinRaw+ i;
             List<String> characterList = pinyinToneReverse.getHanziList(pinyinLast);
-            if(CollectionUtil.isNotEmpty(characterList)) {
+            if(CollectionUtils.isNotEmpty(characterList)) {
                 resultList.addAll(characterList);
             }
         }
@@ -129,7 +129,7 @@ public class Pinyin implements IPinyin {
      * @return 结果
      */
     private List<String> toPinyinList(final String string, final IPinyinContext context) {
-        if(StringUtil.isEmptyTrim(string)) {
+        if(StringUtils.isEmptyTrim(string)) {
             return Collections.emptyList();
         }
 
@@ -144,7 +144,7 @@ public class Pinyin implements IPinyin {
         // 映射处理与连接
         for(String entry : entryList) {
             // 直接加入原始信息
-            if(StringUtil.isEmptyTrim(entry)) {
+            if(StringUtils.isEmptyTrim(entry)) {
                 // 跳过空白信息
                 continue;
             }

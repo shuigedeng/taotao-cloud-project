@@ -14,8 +14,8 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.web.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.web.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
@@ -217,7 +217,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 		//查询商品信息
 		Goods goods = this.getById(goodsId);
 		if (goods == null) {
-			LogUtil.error("商品ID为" + goodsId + "的商品不存在");
+			LogUtils.error("商品ID为" + goodsId + "的商品不存在");
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 		//赋值
@@ -518,7 +518,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 			Boolean.TRUE.equals(goodsSetting.getGoodsCheck()) ? GoodsAuthEnum.TOBEAUDITED.name()
 				: GoodsAuthEnum.PASS.name());
 		//判断当前用户是否为店铺
-		if (SecurityUtil.getUser().getType().equals(UserEnum.STORE.getCode())) {
+		if (SecurityUtils.getUser().getType().equals(UserEnum.STORE.getCode())) {
 			StoreVO storeDetail = storeService.getStoreDetail().data();
 			if (storeDetail.getSelfOperated() != null) {
 				goods.setSelfOperated(storeDetail.getSelfOperated());
@@ -540,7 +540,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	private Goods checkExist(Long goodsId) {
 		Goods goods = getById(goodsId);
 		if (goods == null) {
-			LogUtil.error("商品ID为" + goodsId + "的商品不存在");
+			LogUtils.error("商品ID为" + goodsId + "的商品不存在");
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 		return goods;
@@ -568,7 +568,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	 * @return 当前登录的店铺
 	 */
 	private SecurityUser checkStoreAuthority() {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtils.getUser();
 		//如果当前会员不为空，且为店铺角色
 		if (currentUser != null && (currentUser.getType().equals(UserEnum.STORE.getCode())
 			&& currentUser.getStoreId() != null)) {
@@ -583,7 +583,7 @@ public class GoodsServiceImpl extends ServiceImpl<IGoodsMapper, Goods> implement
 	 * @return 当前登录的店铺
 	 */
 	private SecurityUser checkManagerAuthority() {
-		SecurityUser currentUser = SecurityUtil.getUser();
+		SecurityUser currentUser = SecurityUtils.getUser();
 		//如果当前会员不为空，且为店铺角色
 		if (currentUser != null && (currentUser.getType().equals(UserEnum.MANAGER.getCode()))) {
 			return currentUser;

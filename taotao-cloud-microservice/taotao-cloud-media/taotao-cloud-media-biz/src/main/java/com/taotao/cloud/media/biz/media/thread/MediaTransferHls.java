@@ -1,7 +1,7 @@
 package com.taotao.cloud.media.biz.media.thread;
 
 import cn.hutool.core.collection.CollUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.common.MediaConstant;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import java.io.BufferedReader;
@@ -94,7 +94,7 @@ public class MediaTransferHls extends MediaTransfer {
 	 */
 	public void execute() {
 		String join = CollUtil.join(command, " ");
-		LogUtil.info(join);
+		LogUtils.info(join);
 
 		try {
 			process = new ProcessBuilder(command).start();
@@ -113,7 +113,7 @@ public class MediaTransferHls extends MediaTransfer {
 		this.running = false;
 		try {
 			process.destroy();
-			LogUtil.info("关闭媒体流-ffmpeg，{} ", cameraDto.getUrl());
+			LogUtils.info("关闭媒体流-ffmpeg，{} ", cameraDto.getUrl());
 		} catch (Exception e) {
 			process.destroyForcibly();
 		}
@@ -143,7 +143,7 @@ public class MediaTransferHls extends MediaTransfer {
 							break;
 						}
 						if (enableLog) {
-							LogUtil.info("output: " + line);
+							LogUtils.info("output: " + line);
 						}
 					}
 				} catch (IOException e) {
@@ -172,7 +172,7 @@ public class MediaTransferHls extends MediaTransfer {
 							break;
 						}
 						if (enableLog) {
-							LogUtil.info("err: " + line);
+							LogUtils.info("err: " + line);
 						}
 					}
 				} catch (IOException e) {

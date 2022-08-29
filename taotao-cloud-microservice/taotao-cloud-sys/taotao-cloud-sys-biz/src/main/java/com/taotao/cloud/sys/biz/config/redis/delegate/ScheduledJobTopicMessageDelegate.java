@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.service.business.IScheduledJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,39 +34,39 @@ public class ScheduledJobTopicMessageDelegate {
 	private IScheduledJobService scheduledJobService;
 
 	public void updateCronScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 	public void addCronScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 	public void updateFixedDelayScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 	public void addFixedDelayScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 	public void updateFixedRateScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 	public void addFixedRateScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 	public void cancelScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 	public void runOnceScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 	public void callOffScheduled(String message) {
-		LogUtil.info(message);
+		LogUtils.info(message);
 	}
 
 }

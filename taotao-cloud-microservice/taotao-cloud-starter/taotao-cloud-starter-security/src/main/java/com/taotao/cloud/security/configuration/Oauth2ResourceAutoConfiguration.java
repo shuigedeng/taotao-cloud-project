@@ -23,16 +23,14 @@ import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.support.function.FuncUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
-import com.taotao.cloud.security.access.CustomFilterInvocationSecurityMetadataSource;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.access.RoleBasedVoter;
 import com.taotao.cloud.security.access.UrlSecurityPermsLoad;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.security.perm.VipAccessDecisionManager;
-import com.taotao.cloud.security.perm.VipSecurityMetadataSource;
 import com.taotao.cloud.security.perm.VipSecurityOauthService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,11 +47,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.log.LogMessage;
-import org.springframework.security.access.AccessDecisionManager;
-import org.springframework.security.access.AccessDecisionVoter;
-import org.springframework.security.access.vote.AuthenticatedVoter;
-import org.springframework.security.access.vote.UnanimousBased;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -66,11 +59,8 @@ import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.expression.WebExpressionVoter;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
@@ -202,12 +192,12 @@ public class Oauth2ResourceAutoConfiguration {
 			})
 			.oauth2ResourceServer(config -> config
 				.accessDeniedHandler((request, response, accessDeniedException) -> {
-					LogUtil.error("用户权限不足", accessDeniedException);
-					ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
+					LogUtils.error("用户权限不足", accessDeniedException);
+					ResponseUtils.fail(response, ResultEnum.FORBIDDEN);
 				})
 				.authenticationEntryPoint((request, response, authException) -> {
-					LogUtil.error("用户未登录认证失败", authException);
-					ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
+					LogUtils.error("用户未登录认证失败", authException);
+					ResponseUtils.fail(response, ResultEnum.UNAUTHORIZED);
 				})
 				.bearerTokenResolver(bearerTokenResolver())
 				.jwt(jwt -> jwt.decoder(jwtDecoder())
@@ -277,7 +267,7 @@ public class Oauth2ResourceAutoConfiguration {
 
 		permitAllUrls.forEach(url -> registry.antMatchers(url).permitAll());
 
-		LogUtil.info("permit all urls: {}", permitAllUrls.toString());
+		LogUtils.info("permit all urls: {}", permitAllUrls.toString());
 	}
 
 	/**
@@ -415,8 +405,8 @@ public class Oauth2ResourceAutoConfiguration {
 								.jwsAlgorithm(SignatureAlgorithm.RS256)
 								.build();
 							nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
-							ContextUtil.destroySingletonBean("reactiveJwtDecoder");
-							ContextUtil.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
+							ContextUtils.destroySingletonBean("reactiveJwtDecoder");
+							ContextUtils.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
 						}
 					});
 		}

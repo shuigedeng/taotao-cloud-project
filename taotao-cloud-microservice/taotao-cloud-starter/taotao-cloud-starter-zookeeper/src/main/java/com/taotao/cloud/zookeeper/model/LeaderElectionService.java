@@ -1,7 +1,7 @@
 package com.taotao.cloud.zookeeper.model;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -72,7 +72,7 @@ public class LeaderElectionService {
 					.withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(zkPath);
 				break;
 			} catch (Exception e) {
-				LogUtil.error("create parent path exception is ", e);
+				LogUtils.error("create parent path exception is ", e);
 				try {
 					TimeUnit.SECONDS.sleep(2);
 				} catch (InterruptedException ex) {
@@ -88,7 +88,7 @@ public class LeaderElectionService {
 				curatorFramework.start();
 				break;
 			} catch (Exception e) {
-				LogUtil.error("create parent path exception is ", e);
+				LogUtils.error("create parent path exception is ", e);
 				try {
 					TimeUnit.SECONDS.sleep(2);
 				} catch (InterruptedException ex) {
@@ -104,7 +104,7 @@ public class LeaderElectionService {
 				this.leaderLatch.start();
 				break;
 			} catch (Exception e) {
-				LogUtil.error("create parent path exception is ", e);
+				LogUtils.error("create parent path exception is ", e);
 				try {
 					TimeUnit.SECONDS.sleep(2);
 				} catch (InterruptedException ex) {
@@ -119,7 +119,7 @@ public class LeaderElectionService {
 			try {
 				leaderLatch.close();
 			} catch (Exception e) {
-				LogUtil.error("leader latch close exception ", e);
+				LogUtils.error("leader latch close exception ", e);
 			}
 		}
 
@@ -127,7 +127,7 @@ public class LeaderElectionService {
 			try {
 				curatorFramework.close();
 			} catch (Exception e) {
-				LogUtil.error("frame close exception ", e);
+				LogUtils.error("frame close exception ", e);
 			}
 		}
 	}
@@ -157,7 +157,7 @@ public class LeaderElectionService {
 						.forPath(path, serverId.getBytes(StandardCharsets.UTF_8));
 					break;
 				} catch (Exception e) {
-					LogUtil.error("rebuild exception ", e);
+					LogUtils.error("rebuild exception ", e);
 				}
 			}
 		}

@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.config.sensitive;
 
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.List;
 import java.util.Objects;
@@ -36,8 +36,8 @@ public class SensitiveWordsJob extends QuartzJobBean {
 					return -1;
 				}
 				int code = words.hashCode();
-				LogUtil.info("敏感词更新，code={}", code);
-				LogUtil.info("敏感词更新，this.code={}", SensitiveWordsJob.code);
+				LogUtils.info("敏感词更新，code={}", code);
+				LogUtils.info("敏感词更新，this.code={}", SensitiveWordsJob.code);
 				if (SensitiveWordsJob.code != code) {
 					SensitiveWordsFilter.init(sensitives);
 					return code;

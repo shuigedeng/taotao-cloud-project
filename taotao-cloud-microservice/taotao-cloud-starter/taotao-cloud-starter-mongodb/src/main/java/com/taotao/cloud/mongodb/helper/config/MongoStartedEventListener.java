@@ -18,11 +18,11 @@ package com.taotao.cloud.mongodb.helper.config;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 import com.mongodb.client.result.UpdateResult;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mongodb.helper.bean.IgnoreDocument;
 import com.taotao.cloud.mongodb.helper.bean.InitValue;
-import com.taotao.cloud.mongodb.helper.utils.SystemTool;
+
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Objects;
@@ -32,7 +32,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -48,7 +47,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.util.ClassUtils;
-import org.springframework.util.StringUtils;
 
 /**
  * 项目启动 表初始化
@@ -74,9 +72,9 @@ public class MongoStartedEventListener {
 		WebServerApplicationContext context = event.getApplicationContext();
 		Environment environment = context.getEnvironment();
 
-		Map<String, Object> beansWithAnnotation = ContextUtil.getApplicationContext()
+		Map<String, Object> beansWithAnnotation = ContextUtils.getApplicationContext()
 			.getBeansWithAnnotation(SpringBootApplication.class);
-		LogUtil.info(beansWithAnnotation.toString());
+		LogUtils.info(beansWithAnnotation.toString());
 
 		if(Objects.nonNull(mongoMappingContext) && Objects.nonNull(mongoTemplate)){
 			Object cla = beansWithAnnotation.values().stream().findFirst().get();
@@ -96,7 +94,7 @@ public class MongoStartedEventListener {
 				// 创建表
 				if (!mongoTemplate.collectionExists(clazz)) {
 					mongoTemplate.createCollection(clazz);
-					LogUtil.info("创建了" + clazz.getSimpleName() + "表");
+					LogUtils.info("创建了" + clazz.getSimpleName() + "表");
 				}
 
 				// 创建索引
@@ -145,7 +143,7 @@ public class MongoStartedEventListener {
 								Update update = new Update().set(field.getName(), value);
 								UpdateResult updateResult = mongoTemplate.updateMulti(query, update, clazz);
 
-								LogUtil.info(clazz.getSimpleName() + "表更新了" + updateResult.getModifiedCount() + "条默认值");
+								LogUtils.info(clazz.getSimpleName() + "表更新了" + updateResult.getModifiedCount() + "条默认值");
 							}
 						}
 					}

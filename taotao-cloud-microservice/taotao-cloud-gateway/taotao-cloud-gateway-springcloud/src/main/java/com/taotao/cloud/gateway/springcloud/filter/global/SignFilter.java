@@ -18,10 +18,10 @@ package com.taotao.cloud.gateway.springcloud.filter.global;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.common.utils.secure.MD5Util;
-import com.taotao.cloud.common.utils.secure.RSAUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.secure.MD5Utils;
+import com.taotao.cloud.common.utils.secure.RSAUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.gateway.springcloud.properties.FilterProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.lang.reflect.Field;
@@ -74,7 +74,7 @@ public class SignFilter implements GlobalFilter, Ordered {
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		ServerHttpRequest request = exchange.getRequest();
-		LogUtil.info("访问地址：" + request.getURI());
+		LogUtils.info("访问地址：" + request.getURI());
 
 		//1 获取时间戳
 		Long dateTimestamp = getDateTimestamp(exchange.getRequest().getHeaders());
@@ -91,7 +91,7 @@ public class SignFilter implements GlobalFilter, Ordered {
 		if (!pathMatcher.match("/user/login", requestUrl)) {
 			String token = exchange.getRequest().getHeaders().getFirst("token");
 			if (StringUtils.isBlank(token)) {
-				return ResponseUtil.fail(exchange, "无效的token");
+				return ResponseUtils.fail(exchange, "无效的token");
 			}
 		}
 
@@ -100,14 +100,14 @@ public class SignFilter implements GlobalFilter, Ordered {
 		try {
 			paramMap = updateRequestParam(exchange);
 		} catch (Exception e) {
-			return ResponseUtil.fail(exchange, "无效的url");
+			return ResponseUtils.fail(exchange, "无效的url");
 		}
 
 		//6 获取请求体,修改请求体
 		ServerRequest serverRequest = ServerRequest.create(exchange,
 			HandlerStrategies.withDefaults().messageReaders());
 		Mono<String> modifiedBody = serverRequest.bodyToMono(String.class).flatMap(body -> {
-			String encrypt = RSAUtil.decrypt(body, PRIVATE_KEY);
+			String encrypt = RSAUtils.decrypt(body, PRIVATE_KEY);
 			JSONObject jsonObject = JSON.parseObject(encrypt);
 			for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
 				paramMap.put(entry.getKey(), entry.getValue());
@@ -149,7 +149,7 @@ public class SignFilter implements GlobalFilter, Ordered {
 	public void checkSign(String sign, Long dateTimestamp, String requestId,
 		Map<String, Object> paramMap) {
 		String str = JSON.toJSONString(paramMap) + requestId + dateTimestamp;
-		String tempSign = MD5Util.encrypt(str);
+		String tempSign = MD5Utils.encrypt(str);
 		assert tempSign != null;
 		if (!tempSign.equals(sign)) {
 			throw new IllegalArgumentException(ERROR_MESSAGE);
@@ -167,7 +167,7 @@ public class SignFilter implements GlobalFilter, Ordered {
 
 		if (StringUtils.isNotBlank(query) && query.contains("param")) {
 			String[] split = query.split("=");
-			String param = RSAUtil.decrypt(split[1], PRIVATE_KEY);
+			String param = RSAUtils.decrypt(split[1], PRIVATE_KEY);
 			Field targetQuery = uri.getClass().getDeclaredField("query");
 			targetQuery.setAccessible(true);
 			targetQuery.set(uri, param);

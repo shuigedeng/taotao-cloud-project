@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.api.strategory;
 
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.core.sensitive.sensitive.api.IContext;
 import com.taotao.cloud.core.sensitive.sensitive.api.IStrategy;
 import com.taotao.cloud.core.sensitive.sensitive.core.util.strategy.SensitiveStrategyUtil;
@@ -16,7 +16,7 @@ public class StrategyChineseName implements IStrategy {
 
     @Override
     public Object des(Object original, IContext context) {
-        return SensitiveStrategyUtil.chineseName(ObjectUtil.objectToString(original));
+        return SensitiveStrategyUtil.chineseName(ObjectUtils.objectToString(original));
     }
 
 }

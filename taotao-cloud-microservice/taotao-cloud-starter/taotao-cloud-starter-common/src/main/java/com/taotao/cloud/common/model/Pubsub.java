@@ -17,7 +17,7 @@ package com.taotao.cloud.common.model;
 
 import com.taotao.cloud.common.enums.EventEnum;
 import com.taotao.cloud.common.model.Callable.Action1;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -55,7 +55,7 @@ public class Pubsub<T> {
 				try {
 					sub.getValue().action.invoke(data);
 				} catch (Exception e) {
-					LogUtil.error(e, "分发订阅失败");
+					LogUtils.error(e, "分发订阅失败");
 				}
 			}
 		}

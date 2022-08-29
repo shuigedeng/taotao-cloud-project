@@ -6,7 +6,7 @@ import com.ksyun.ks3.service.Ks3;
 import com.ksyun.ks3.service.Ks3Client;
 import com.ksyun.ks3.service.Ks3ClientConfig;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
@@ -35,7 +35,7 @@ public class JinShanOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(JinShanOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(JinShanOssConfiguration.class, StarterName.OSS_STARTER);
 	}
 
     public static final String DEFAULT_BEAN_NAME = "jinShanOssClient";

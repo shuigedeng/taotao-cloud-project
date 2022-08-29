@@ -16,7 +16,7 @@
 package com.taotao.cloud.monitor.collect.task;
 
 import com.sun.management.OperatingSystemMXBean;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
@@ -81,8 +81,8 @@ public class CpuCollectTask extends AbstractCollectTask {
 			info.cpuCoreNumber = Runtime.getRuntime().availableProcessors();
 			return info;
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

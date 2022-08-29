@@ -16,7 +16,7 @@
 package com.taotao.cloud.oss.local;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.UploadFileService;
@@ -40,7 +40,7 @@ public class LocalConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(LocalConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(LocalConfiguration.class, StarterName.OSS_STARTER);
 	}
 
 	@Bean

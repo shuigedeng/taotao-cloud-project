@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.monitor.warn;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
-import com.taotao.cloud.common.utils.servlet.RequestUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.monitor.model.Message;
 import com.taotao.cloud.monitor.properties.WarnProperties;
 
@@ -43,52 +43,52 @@ public class DingdingWarn extends AbstractWarn {
 	private final boolean driverExist;
 
 	public DingdingWarn() {
-		this.driverExist = ReflectionUtil.tryClassForName(CLASS) != null;
+		this.driverExist = ReflectionUtils.tryClassForName(CLASS) != null;
 	}
 
 	@Override
 	public void notify(Message message) {
 		if (!driverExist) {
-			LogUtil.error("未找到DingerRobot, 不支持钉钉预警");
+			LogUtils.error("未找到DingerRobot, 不支持钉钉预警");
 			return;
 		}
 
-		WarnProperties warnProperties = ContextUtil.getBean(WarnProperties.class, true);
-		Object dingerRobot = ContextUtil.getBean(ReflectionUtil.tryClassForName(CLASS), true);
+		WarnProperties warnProperties = ContextUtils.getBean(WarnProperties.class, true);
+		Object dingerRobot = ContextUtils.getBean(ReflectionUtils.tryClassForName(CLASS), true);
 
 		if (dingerRobot != null) {
-			String ip = RequestUtil.getIpAddress();
+			String ip = RequestUtils.getIpAddress();
 			String dingDingFilterIP = warnProperties.getDingdingFilterIP();
-			if (!StringUtil.isEmpty(ip) && !dingDingFilterIP.contains(ip)) {
+			if (!StringUtils.isEmpty(ip) && !dingDingFilterIP.contains(ip)) {
 				String title = "["
 					+ message.getWarnType().getDescription()
 					+ "]"
-					+ StringUtil.subString3(message.getTitle(), 100);
+					+ StringUtils.subString3(message.getTitle(), 100);
 
-				String context = StringUtil.subString3(message.getTitle(), 100)
+				String context = StringUtils.subString3(message.getTitle(), 100)
 					+ "\n"
 					+ "详情: "
-					+ RequestUtil.getBaseUrl() + "/health/\n"
-					+ StringUtil.subString3(message.getContent(), 500);
+					+ RequestUtils.getBaseUrl() + "/health/\n"
+					+ StringUtils.subString3(message.getContent(), 500);
 
 				try {
-					Object messageSubType = ReflectionUtil.findEnumObjByName(
-						Objects.requireNonNull(ReflectionUtil.tryClassForName(MESSAGE_SUB_TYPE)),
+					Object messageSubType = ReflectionUtils.findEnumObjByName(
+						Objects.requireNonNull(ReflectionUtils.tryClassForName(MESSAGE_SUB_TYPE)),
 						"name", "TEXT");
 
 					List<Object> requestParam = new ArrayList<>();
 					requestParam.add(context);
 					requestParam.add(title);
-					Object request = ReflectionUtil.callMethod(
-						ReflectionUtil.tryClassForName(DINGER_REQUEST), "request",
+					Object request = ReflectionUtils.callMethod(
+						ReflectionUtils.tryClassForName(DINGER_REQUEST), "request",
 						requestParam.toArray());
 
 					List<Object> param = new ArrayList<>();
 					param.add(messageSubType);
 					param.add(request);
-					ReflectionUtil.callMethod(dingerRobot, "send", param.toArray());
+					ReflectionUtils.callMethod(dingerRobot, "send", param.toArray());
 				} catch (Exception e) {
-					LogUtil.error(e);
+					LogUtils.error(e);
 				}
 			}
 		}

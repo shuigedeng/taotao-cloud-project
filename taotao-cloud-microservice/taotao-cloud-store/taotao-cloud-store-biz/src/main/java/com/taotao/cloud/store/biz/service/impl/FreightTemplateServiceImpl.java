@@ -9,8 +9,8 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.store.api.web.vo.FreightTemplateChildVO;
 import com.taotao.cloud.store.api.web.vo.FreightTemplateInfoVO;
@@ -20,7 +20,6 @@ import com.taotao.cloud.store.biz.mapper.FreightTemplateMapper;
 import com.taotao.cloud.store.biz.mapstruct.IFreightTemplateChildMapStruct;
 import com.taotao.cloud.store.biz.service.FreightTemplateChildService;
 import com.taotao.cloud.store.biz.service.FreightTemplateService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,7 +65,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
 			//如果模板不为空则查询子模板信息
 			for (FreightTemplate freightTemplate : freightTemplates) {
 				FreightTemplateInfoVO freightTemplateInfoVO = new FreightTemplateInfoVO();
-				BeanUtil.copyProperties(freightTemplate, freightTemplateInfoVO);
+				BeanUtils.copyProperties(freightTemplate, freightTemplateInfoVO);
 				List<FreightTemplateChild> freightTemplateChildren = freightTemplateChildService.getFreightTemplateChild(freightTemplate.getId());
 				if (!freightTemplateChildren.isEmpty()) {
 
@@ -83,7 +82,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
 	@Override
 	public IPage<FreightTemplate> getFreightTemplate(PageParam pageParam) {
 		LambdaQueryWrapper<FreightTemplate> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(FreightTemplate::getStoreId, SecurityUtil.getCurrentUser().getStoreId());
+		lambdaQueryWrapper.eq(FreightTemplate::getStoreId, SecurityUtils.getCurrentUser().getStoreId());
 		return this.baseMapper.selectPage(pageParam.buildMpPage(), lambdaQueryWrapper);
 	}
 
@@ -94,7 +93,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
 		FreightTemplate freightTemplate = this.getById(id);
 		if (freightTemplate != null) {
 			//复制属性
-			BeanUtils.copyProperties(freightTemplate, freightTemplateInfoVO);
+			org.springframework.beans.BeanUtils.copyProperties(freightTemplate, freightTemplateInfoVO);
 			//填写运费模板子内容
 			List<FreightTemplateChild> freightTemplateChildList = freightTemplateChildService.getFreightTemplateChild(id);
 			freightTemplateInfoVO.setFreightTemplateChildList(IFreightTemplateChildMapStruct.INSTANCE.freightTemplateChildListToFreightTemplateChildVoList(freightTemplateChildList));
@@ -105,12 +104,12 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
 	@Override
 	public FreightTemplateInfoVO addFreightTemplate(FreightTemplateInfoVO freightTemplateInfoVO) {
 		//获取当前登录商家账号
-		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
+		SecurityUser tokenUser = SecurityUtils.getCurrentUser();
 		FreightTemplate freightTemplate = new FreightTemplate();
 		//设置店铺ID
 		freightTemplateInfoVO.setStoreId(tokenUser.getStoreId());
 		//复制属性
-		BeanUtils.copyProperties(freightTemplateInfoVO, freightTemplate);
+		org.springframework.beans.BeanUtils.copyProperties(freightTemplateInfoVO, freightTemplate);
 		//添加运费模板
 		this.save(freightTemplate);
 		//给子模板赋父模板的id
@@ -135,14 +134,14 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
 	@Transactional(rollbackFor = Exception.class)
 	public FreightTemplateInfoVO editFreightTemplate(FreightTemplateInfoVO freightTemplateInfoVO) {
 		//获取当前登录商家账号
-		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
+		SecurityUser tokenUser = SecurityUtils.getCurrentUser();
 		if (freightTemplateInfoVO.getId().equals(tokenUser.getStoreId())) {
 			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
 
 		FreightTemplate freightTemplate = new FreightTemplate();
 		//复制属性
-		BeanUtils.copyProperties(freightTemplateInfoVO, freightTemplate);
+		org.springframework.beans.BeanUtils.copyProperties(freightTemplateInfoVO, freightTemplate);
 		//修改运费模板
 		this.updateById(freightTemplate);
 		//删除模板子内容
@@ -166,7 +165,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
 	@Transactional(rollbackFor = Exception.class)
 	public boolean removeFreightTemplate(Long id) {
 		//获取当前登录商家账号
-		SecurityUser tokenUser = SecurityUtil.getCurrentUser();
+		SecurityUser tokenUser = SecurityUtils.getCurrentUser();
 		LambdaQueryWrapper<FreightTemplate> lambdaQueryWrapper = Wrappers.lambdaQuery();
 		lambdaQueryWrapper.eq(FreightTemplate::getStoreId, tokenUser.getStoreId());
 		lambdaQueryWrapper.eq(FreightTemplate::getId, id);

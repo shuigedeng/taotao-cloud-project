@@ -15,11 +15,10 @@
  */
 package com.taotao.cloud.auth.biz.controller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -90,7 +89,7 @@ public class Oauth2Controller {
 	@RequestLogger
 	@PostMapping("/logout")
 	public Result<Boolean> logout() {
-		Authentication authentication = SecurityUtil.getAuthentication();
+		Authentication authentication = SecurityUtils.getAuthentication();
 		if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
 			Jwt jwt = jwtAuthenticationToken.getToken();
 			String kid = (String) jwt.getHeaders().get("kid");

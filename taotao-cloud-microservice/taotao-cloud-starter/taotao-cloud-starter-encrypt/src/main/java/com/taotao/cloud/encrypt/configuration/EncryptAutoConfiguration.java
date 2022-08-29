@@ -1,7 +1,7 @@
 package com.taotao.cloud.encrypt.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.encrypt.annotation.SignEncrypt;
 import com.taotao.cloud.encrypt.enums.EncryptType;
 import com.taotao.cloud.encrypt.exception.EncryptException;
@@ -51,7 +51,7 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(EncryptAutoConfiguration.class, StarterName.ENCRYPT_STARTER);
+		LogUtils.started(EncryptAutoConfiguration.class, StarterName.ENCRYPT_STARTER);
 	}
 
 	private ApplicationContext applicationContext;
@@ -133,7 +133,7 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 	public static class SignEncryptConfiguration implements InitializingBean {
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtil.started(SignEncryptConfiguration.class, StarterName.ENCRYPT_STARTER);
+			LogUtils.started(SignEncryptConfiguration.class, StarterName.ENCRYPT_STARTER);
 		}
 
 		@Bean

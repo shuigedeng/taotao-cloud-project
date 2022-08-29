@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.netease;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
@@ -84,7 +84,7 @@ public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudPro
 		String templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -125,7 +125,7 @@ public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudPro
 				new HttpEntity<>(body, headers), String.class);
 
 			if (httpResponse.getBody() == null) {
-				LogUtil.debug("response body ie null");
+				LogUtils.debug("response body ie null");
 				publishSendFailEvent(noticeData, phones,
 					new SendFailedException("response body ie null"));
 				return false;
@@ -133,7 +133,7 @@ public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudPro
 
 			String responseContent = httpResponse.getBody();
 
-			LogUtil.debug("responseContent: {}", responseContent);
+			LogUtils.debug("responseContent: {}", responseContent);
 
 			NeteaseCloudResult result = objectMapper.readValue(responseContent,
 				NeteaseCloudResult.class);
@@ -146,7 +146,7 @@ public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudPro
 			}
 			return succeed;
 		} catch (Exception e) {
-			LogUtil.debug(e.getLocalizedMessage(), e);
+			LogUtils.debug(e.getLocalizedMessage(), e);
 			publishSendFailEvent(noticeData, phones, e);
 			return false;
 		}

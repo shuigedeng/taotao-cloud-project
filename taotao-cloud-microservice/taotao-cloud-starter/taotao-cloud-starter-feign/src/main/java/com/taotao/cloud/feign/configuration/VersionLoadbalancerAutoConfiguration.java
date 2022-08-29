@@ -2,8 +2,8 @@ package com.taotao.cloud.feign.configuration;
 
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.configuration.VersionLoadbalancerAutoConfiguration.VersionLoadBalancerClients;
 import com.taotao.cloud.feign.configuration.VersionLoadbalancerAutoConfiguration.VersionLoadbalancerRegisterBeanPostProcessor;
 import com.taotao.cloud.feign.loadbalancer.VersionLoadBalancer;
@@ -52,7 +52,7 @@ public class VersionLoadbalancerAutoConfiguration {
 		@Override
 		public Object postProcessBeforeInitialization(Object bean, String beanName)
 			throws BeansException {
-			if (bean instanceof NacosDiscoveryProperties && StringUtil.isNotBlank(properties.getVersion())) {
+			if (bean instanceof NacosDiscoveryProperties && StringUtils.isNotBlank(properties.getVersion())) {
 				NacosDiscoveryProperties nacosDiscoveryProperties = (NacosDiscoveryProperties) bean;
 				nacosDiscoveryProperties.getMetadata().putIfAbsent(CommonConstant.METADATA_VERSION, properties.getVersion());
 			}
@@ -83,9 +83,9 @@ public class VersionLoadbalancerAutoConfiguration {
 					Class<?> ruleClass = ClassUtils.forName(properties.getChooser(), context.getClassLoader());
 					chooser = (IRuleChooser) ruleClass.getDeclaredConstructor().newInstance();
 				} catch (ClassNotFoundException e) {
-					LogUtil.error("没有找到定义的选择器，将使用内置的选择器", e);
+					LogUtils.error("没有找到定义的选择器，将使用内置的选择器", e);
 				} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-					LogUtil.error("没法创建定义的选择器，将使用内置的选择器", e);
+					LogUtils.error("没法创建定义的选择器，将使用内置的选择器", e);
 				}
 			}
 			return chooser;

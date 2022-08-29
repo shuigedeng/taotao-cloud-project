@@ -1,7 +1,7 @@
 package com.taotao.cloud.feign.loadbalancer.chooser;
 
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.cloud.client.ServiceInstance;
@@ -23,9 +23,9 @@ public class RoundRuleChooser implements IRuleChooser {
 
 	@Override
 	public ServiceInstance choose(List<ServiceInstance> instances) {
-		if (CollectionUtil.isNotEmpty(instances)) {
+		if (CollectionUtils.isNotEmpty(instances)) {
 			ServiceInstance serviceInstance = instances.get(Math.abs(position.incrementAndGet() % instances.size()));
-			LogUtil.info("RoundRuleChooser 选择了ip为 {}, 端口为：{} 的服务", serviceInstance.getHost(), serviceInstance.getPort());
+			LogUtils.info("RoundRuleChooser 选择了ip为 {}, 端口为：{} 的服务", serviceInstance.getHost(), serviceInstance.getPort());
 			return serviceInstance;
 		}
 		return null;

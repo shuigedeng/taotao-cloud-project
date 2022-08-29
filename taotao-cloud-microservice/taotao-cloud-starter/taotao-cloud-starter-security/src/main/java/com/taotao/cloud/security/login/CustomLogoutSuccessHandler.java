@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.security.login;
 
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +36,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) throws IOException, ServletException {
 		if (!response.isCommitted()) {
-			ResponseUtil.success(response, "退出成功");
+			ResponseUtils.success(response, "退出成功");
 		}
 	}
 }

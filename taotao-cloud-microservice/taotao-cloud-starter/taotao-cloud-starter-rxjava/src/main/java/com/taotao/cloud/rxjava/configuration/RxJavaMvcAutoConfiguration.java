@@ -16,7 +16,7 @@
 package com.taotao.cloud.rxjava.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.rxjava.annotation.RxJava;
 import com.taotao.cloud.rxjava.mvc.ObservableReturnValueHandler;
 import com.taotao.cloud.rxjava.mvc.SingleReturnValueHandler;
@@ -51,7 +51,7 @@ public class RxJavaMvcAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RxJavaMvcAutoConfiguration.class, StarterName.RXJAVA_STARTER);
+		LogUtils.started(RxJavaMvcAutoConfiguration.class, StarterName.RXJAVA_STARTER);
 	}
 
 	@Bean
@@ -59,7 +59,7 @@ public class RxJavaMvcAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(Observable.class)
 	public ObservableReturnValueHandler observableReturnValueHandler() {
-		LogUtil.started(ObservableReturnValueHandler.class, StarterName.RXJAVA_STARTER);
+		LogUtils.started(ObservableReturnValueHandler.class, StarterName.RXJAVA_STARTER);
 		return new ObservableReturnValueHandler();
 	}
 
@@ -68,7 +68,7 @@ public class RxJavaMvcAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(Single.class)
 	public SingleReturnValueHandler singleReturnValueHandler() {
-		LogUtil.started(SingleReturnValueHandler.class, StarterName.RXJAVA_STARTER);
+		LogUtils.started(SingleReturnValueHandler.class, StarterName.RXJAVA_STARTER);
 		return new SingleReturnValueHandler();
 	}
 

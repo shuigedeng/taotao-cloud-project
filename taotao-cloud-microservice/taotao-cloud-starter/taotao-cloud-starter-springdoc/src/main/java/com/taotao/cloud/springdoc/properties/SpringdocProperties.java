@@ -16,7 +16,7 @@
 package com.taotao.cloud.springdoc.properties;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import io.swagger.v3.oas.models.headers.Header;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.License;
@@ -49,7 +49,7 @@ public class SpringdocProperties {
 	/**
 	 * group default applicationName
 	 */
-	private String group = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
+	private String group = PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 
 	/**
 	 * pathsToMatch default /**
@@ -74,7 +74,7 @@ public class SpringdocProperties {
 	/**
 	 * version default taotaoCloudVersion
 	 */
-	private String version = PropertyUtil.getProperty("taotaoCloudVersion");
+	private String version = PropertyUtils.getProperty("taotaoCloudVersion");
 	/**
 	 * SecuritySchemes
 	 */
@@ -91,7 +91,7 @@ public class SpringdocProperties {
 	 * title
 	 */
 	private String title =
-		PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY).toUpperCase() + " API";
+		PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY).toUpperCase() + " API";
 	/**
 	 * description
 	 */

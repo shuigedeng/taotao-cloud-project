@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.BatchPackEntity;
@@ -68,8 +68,8 @@ public class BatchPackServiceImpl extends ServiceImpl<BatchPackMapper, BatchPack
 
     @Override
     public void data(String id, String data) {
-        BatchPackForm batchPackForm = JsonUtil.getJsonToBean(data, BatchPackForm.class);
-        BatchPackEntity entity = JsonUtil.getJsonToBean(batchPackForm, BatchPackEntity.class);
+        BatchPackForm batchPackForm = JsonUtils.getJsonToBean(data, BatchPackForm.class);
+        BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.utils;
 
 import com.taotao.cloud.common.tree.TreeNode;
-import com.taotao.cloud.common.utils.common.OrikaUtil;
+import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
 import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.sys.api.web.vo.menu.MenuMetaVO;
@@ -144,7 +144,7 @@ public class TreeUtil {
 		return menus.stream()
 			.filter(Objects::nonNull)
 			.map(sysMenu -> {
-				MenuTreeVO tree = OrikaUtil.convert(sysMenu, MenuTreeVO.class);
+				MenuTreeVO tree = OrikaUtils.convert(sysMenu, MenuTreeVO.class);
 				tree.setHidden(sysMenu.getHidden());
 
 				MenuMetaVO meta = new MenuMetaVO();

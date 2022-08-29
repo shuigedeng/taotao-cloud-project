@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.quartz;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 import org.apache.commons.lang3.StringUtils;
@@ -32,7 +32,7 @@ public class QuartzRunnable implements Callable<Object> {
 
 	QuartzRunnable(String beanName, String methodName, String params)
 		throws NoSuchMethodException, SecurityException {
-		this.target = ContextUtil.getBean(beanName, true);
+		this.target = ContextUtils.getBean(beanName, true);
 		this.params = params;
 
 		if (StringUtils.isNotBlank(params)) {

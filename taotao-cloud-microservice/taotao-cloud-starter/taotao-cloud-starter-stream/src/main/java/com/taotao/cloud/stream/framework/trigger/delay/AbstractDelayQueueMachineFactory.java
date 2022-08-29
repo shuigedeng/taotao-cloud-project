@@ -1,7 +1,7 @@
 package com.taotao.cloud.stream.framework.trigger.delay;
 
-import com.taotao.cloud.common.utils.date.DateUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,8 +26,8 @@ public abstract class AbstractDelayQueueMachineFactory implements DelayQueueMach
 		long delaySeconds = triggerTime / 1000;
 		//增加延时任务 参数依次为：队列名称、执行时间、任务id
 		boolean result = cache.zAdd(getDelayQueueName(), jobId, delaySeconds);
-		LogUtil.info("增加延时任务, 缓存key {}, 执行时间 {},任务id {}", getDelayQueueName(),
-			DateUtil.toString(triggerTime), jobId);
+		LogUtils.info("增加延时任务, 缓存key {}, 执行时间 {},任务id {}", getDelayQueueName(),
+			DateUtils.toString(triggerTime), jobId);
 		return result;
 	}
 

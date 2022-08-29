@@ -13,12 +13,11 @@
 package com.taotao.cloud.sms.chinamobile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
-import com.taotao.cloud.sms.common.utils.StringUtils;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -99,7 +98,7 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 		String templateId = properties.getTemplates(type);
 
 		if (templateId == null) {
-			LogUtil.debug("templateId invalid");
+			LogUtils.debug("templateId invalid");
 			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
 			return false;
 		}
@@ -127,7 +126,7 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 		//}
 		//String mobiles = receiverBuilder.substring(0, receiverBuilder.length() - 1);
 
-		String mobiles = StringUtil.join(phones, ",");
+		String mobiles = StringUtils.join(phones, ",");
 		String paramsString = buildTemplateParas(params);
 		String body = buildRequestBody(mobiles, templateId, paramsString);
 
@@ -138,7 +137,7 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 				.exchange(properties.getUri(), HttpMethod.POST, httpEntity, String.class);
 
 			if (httpResponse.getBody() == null) {
-				LogUtil.debug("response body ie null");
+				LogUtils.debug("response body ie null");
 				publishSendFailEvent(noticeData, phones,
 					new SendFailedException("response body ie null"));
 				return false;
@@ -146,7 +145,7 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 
 			String responseContent = httpResponse.getBody();
 
-			LogUtil.debug("responseContent: {}", responseContent);
+			LogUtils.debug("responseContent: {}", responseContent);
 
 			ChinaMobileResult result = objectMapper.readValue(responseContent,
 				ChinaMobileResult.class);
@@ -160,21 +159,21 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 			}
 			return succeed;
 		} catch (Exception e) {
-			LogUtil.debug(e.getLocalizedMessage(), e);
+			LogUtils.debug(e.getLocalizedMessage(), e);
 			publishSendFailEvent(noticeData, phones, e);
 			return false;
 		}
 	}
 
 	private String buildRequestBody(String mobiles, String templateId, String paramsString) {
-		if (StringUtils.isAnyBlank(mobiles, templateId)) {
+		if (com.taotao.cloud.sms.common.utils.StringUtils.isAnyBlank(mobiles, templateId)) {
 			throw new SendFailedException("buildRequestBody(): mobiles or templateId is null.");
 		}
 
-		String ecName = StringUtils.trimToNull(properties.getEcName());
-		String apId = StringUtils.trimToNull(properties.getApId());
-		String secretKey = StringUtils.trimToNull(properties.getSecretKey());
-		String sign = StringUtils.trimToNull(properties.getSign());
+		String ecName = com.taotao.cloud.sms.common.utils.StringUtils.trimToNull(properties.getEcName());
+		String apId = com.taotao.cloud.sms.common.utils.StringUtils.trimToNull(properties.getApId());
+		String secretKey = com.taotao.cloud.sms.common.utils.StringUtils.trimToNull(properties.getSecretKey());
+		String sign = com.taotao.cloud.sms.common.utils.StringUtils.trimToNull(properties.getSign());
 		String mac = buildMac(ecName, apId, secretKey, templateId, mobiles, paramsString, sign);
 
 		String body = String

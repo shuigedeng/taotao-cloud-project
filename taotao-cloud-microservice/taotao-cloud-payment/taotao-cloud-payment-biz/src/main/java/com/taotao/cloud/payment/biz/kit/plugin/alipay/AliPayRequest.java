@@ -13,7 +13,7 @@ import com.alipay.api.request.AlipayTradePrecreateRequest;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class AliPayRequest {
     public static void wapPay(HttpServletResponse response, AlipayTradeWapPayModel model, String returnUrl, String notifyUrl) throws AlipayApiException, IOException {
         String form = wapPayStr(model, returnUrl, notifyUrl);
         response.setContentType("text/html;charset=UTF-8");
-        LogUtil.info("支付表单{}", form);
+        LogUtils.info("支付表单{}", form);
         PrintWriter out = response.getWriter();
         out.write(form);
         out.flush();

@@ -1,10 +1,6 @@
 package com.taotao.cloud.data.mybatis.plus.pagehelper;
 
-import com.github.pagehelper.PageInfo;
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
 import java.io.Serializable;
-import java.util.List;
 
 public class PageParam<T> implements Serializable {
 

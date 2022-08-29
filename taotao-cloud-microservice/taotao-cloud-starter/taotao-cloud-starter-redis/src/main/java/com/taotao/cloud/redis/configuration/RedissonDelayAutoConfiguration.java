@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.delay.config.RedissonAnnotationBeanPostProcessor;
 import com.taotao.cloud.redis.delay.config.RedissonConfigUtils;
 import com.taotao.cloud.redis.delay.config.RedissonListenerRegistry;
@@ -31,7 +31,7 @@ public class RedissonDelayAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RedissonDelayAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedissonDelayAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@Scope(BeanDefinition.SCOPE_SINGLETON)

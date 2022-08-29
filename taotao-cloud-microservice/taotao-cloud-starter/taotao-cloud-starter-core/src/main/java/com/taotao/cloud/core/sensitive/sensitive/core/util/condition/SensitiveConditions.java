@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.util.condition;
 
 
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
-import com.taotao.cloud.common.utils.reflect.ClassUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
+import com.taotao.cloud.common.utils.reflect.ClassUtils;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.metadata.SensitiveCondition;
 import com.taotao.cloud.core.sensitive.sensitive.api.ICondition;
 import java.lang.annotation.Annotation;
@@ -25,9 +25,9 @@ public final class SensitiveConditions {
     public static Optional<ICondition> getConditionOpt(final Annotation[] annotations) {
         for (Annotation annotation : annotations) {
             SensitiveCondition sensitiveCondition = annotation.annotationType().getAnnotation(SensitiveCondition.class);
-            if (ObjectUtil.isNotNull(sensitiveCondition)) {
+            if (ObjectUtils.isNotNull(sensitiveCondition)) {
                 Class<? extends ICondition> customClass = sensitiveCondition.value();
-                ICondition condition =  ClassUtil.newInstance(customClass);
+                ICondition condition =  ClassUtils.newInstance(customClass);
                 return Optional.ofNullable(condition);
             }
         }

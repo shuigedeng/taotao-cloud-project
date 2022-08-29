@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.util.entry;
 
 
-import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.SensitiveEntry;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -23,13 +23,13 @@ public final class SensitiveEntryUtil {
      */
     public static boolean hasSensitiveEntry(Field field) {
         SensitiveEntry sensitiveEntry = field.getAnnotation(SensitiveEntry.class);
-        if (ObjectUtil.isNotNull(sensitiveEntry)) {
+        if (ObjectUtils.isNotNull(sensitiveEntry)) {
             return true;
         }
 
         for (Annotation annotation : field.getAnnotations()) {
             sensitiveEntry = annotation.annotationType().getAnnotation(SensitiveEntry.class);
-            if (ObjectUtil.isNotNull(sensitiveEntry)) {
+            if (ObjectUtils.isNotNull(sensitiveEntry)) {
                 return true;
             }
         }

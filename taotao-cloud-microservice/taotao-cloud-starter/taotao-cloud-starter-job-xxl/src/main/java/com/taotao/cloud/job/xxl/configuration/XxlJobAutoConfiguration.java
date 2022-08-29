@@ -17,15 +17,14 @@ package com.taotao.cloud.job.xxl.configuration;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.properties.XxlExecutorProperties;
 import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -52,7 +51,7 @@ public class XxlJobAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(XxlJobAutoConfiguration.class, StarterName.JOB_XXL_STARTER);
+		LogUtils.started(XxlJobAutoConfiguration.class, StarterName.JOB_XXL_STARTER);
 	}
 
 	@Bean
@@ -65,7 +64,7 @@ public class XxlJobAutoConfiguration implements InitializingBean {
 		// 应用名默认为服务名
 		String appName = executor.getAppname();
 		if (!StringUtils.hasText(appName)) {
-			appName = PropertyUtil.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
+			appName = PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 		}
 
 		xxlJobSpringExecutor.setAppname(appName);

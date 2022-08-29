@@ -2,8 +2,8 @@ package com.taotao.cloud.stream.consumer.trigger;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,7 @@ public abstract class AbstractDelayQueueListen implements ApplicationRunner {
 	 * 延时队列机器开始运作
 	 */
 	private void startDelayQueueMachine() {
-		LogUtil.info("延时队列机器{}开始运作", setDelayQueueName());
+		LogUtils.info("延时队列机器{}开始运作", setDelayQueueName());
 
 		//监听redis队列
 		while (true) {
@@ -34,8 +34,8 @@ public abstract class AbstractDelayQueueListen implements ApplicationRunner {
 				Set<Object> tuples = redisRepository.zRangeByScore(setDelayQueueName(), 0, now);
 
 				//如果任务不为空
-				if (!CollectionUtil.isEmpty(tuples)) {
-				    LogUtil.info("执行任务:{}", JSONUtil.toJsonStr(tuples));
+				if (!CollectionUtils.isEmpty(tuples)) {
+				    LogUtils.info("执行任务:{}", JSONUtil.toJsonStr(tuples));
 
 				    for (Object t : tuples) {
 					    DefaultTypedTuple tuple = (DefaultTypedTuple)t;
@@ -49,7 +49,7 @@ public abstract class AbstractDelayQueueListen implements ApplicationRunner {
 				    }
 				}
 			} catch (Exception e) {
-				LogUtil.error("处理延时任务发生异常,异常原因为{}", e.getMessage(), e);
+				LogUtils.error("处理延时任务发生异常,异常原因为{}", e.getMessage(), e);
 			} finally {
 				//间隔一秒钟搞一次
 				try {

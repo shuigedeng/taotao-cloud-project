@@ -14,7 +14,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.web.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -185,7 +185,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 				//初始化商品索引
 				this.initIndex(esGoodsIndices);
 			} catch (Exception e) {
-				LogUtil.error("商品索引生成异常：", e);
+				LogUtils.error("商品索引生成异常：", e);
 				//如果出现异常，则将进行中的任务标识取消掉，打印日志
 				redisRepository.set(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), null);
 				redisRepository.set(CachePrefix.INIT_INDEX_FLAG.getPrefix(), false);
@@ -229,7 +229,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 			//生成索引
 			goodsIndexRepository.save(goods);
 		} catch (Exception e) {
-			LogUtil.error("为商品[" + goods.getGoodsName() + "]生成索引异常", e);
+			LogUtils.error("为商品[" + goods.getGoodsName() + "]生成索引异常", e);
 		}
 		return true;
 	}
@@ -311,7 +311,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 			client.bulk(request, RequestOptions.DEFAULT);
 			throw new IOException();
 		} catch (IOException e) {
-			LogUtil.error("批量更新商品索引异常", e);
+			LogUtils.error("批量更新商品索引异常", e);
 		}
 		return true;
 	}
@@ -377,7 +377,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					addIndex(goodsIndex);
 					resultMap.put(KEY_SUCCESS, resultMap.get(KEY_SUCCESS) + 1);
 				} catch (Exception e) {
-					LogUtil.error("商品{}生成索引错误！", goodsIndex);
+					LogUtils.error("商品{}生成索引错误！", goodsIndex);
 					resultMap.put(KEY_FAIL, resultMap.get(KEY_FAIL) + 1);
 				}
 				resultMap.put(KEY_PROCESSED, resultMap.get(KEY_PROCESSED) + 1);
@@ -397,7 +397,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 			//更新索引
 			return this.updateGoodsIndexPromotion(goodsIndex, key, promotion);
 		} else {
-			LogUtil.error("更新索引商品促销信息失败！skuId 为 {} 的索引不存在！", id);
+			LogUtils.error("更新索引商品促销信息失败！skuId 为 {} 的索引不存在！", id);
 			return null;
 		}
 	}
@@ -406,9 +406,9 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	public Boolean updateEsGoodsIndexPromotions(List<Long> ids, BasePromotionsVO promotion,
 												String key) {
 		BulkRequest bulkRequest = new BulkRequest();
-		LogUtil.info("更新商品索引的促销信息----------");
-		LogUtil.info("商品ids: {}", ids);
-		LogUtil.info("活动: {}", promotion);
+		LogUtils.info("更新商品索引的促销信息----------");
+		LogUtils.info("商品ids: {}", ids);
+		LogUtils.info("活动: {}", promotion);
 		for (Long id : ids) {
 			UpdateRequest updateRequest = this.updateEsGoodsIndexPromotions(id, promotion, key);
 			if (updateRequest != null) {
@@ -423,10 +423,10 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	public Boolean updateEsGoodsIndexByList(List<PromotionGoodsVO> promotionGoodsList,
 											BasePromotionsVO promotion, String key) {
 		BulkRequest bulkRequest = new BulkRequest();
-		LogUtil.info("修改商品活动索引");
-		LogUtil.info("促销商品信息: {}", promotionGoodsList);
-		LogUtil.info("活动关键字: {}", key);
-		LogUtil.info("活动: {}", promotion);
+		LogUtils.info("修改商品活动索引");
+		LogUtils.info("促销商品信息: {}", promotionGoodsList);
+		LogUtils.info("活动关键字: {}", key);
+		LogUtils.info("活动: {}", promotion);
 		if (promotionGoodsList != null) {
 			//循环更新 促销商品索引
 			for (PromotionGoodsVO promotionGoods : promotionGoodsList) {
@@ -487,7 +487,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					updateIndex(goodsIndex);
 				}
 			} else {
-				LogUtil.error("更新索引商品促销信息失败！skuId 为 【{}】的索引不存在！", skuId);
+				LogUtils.error("更新索引商品促销信息失败！skuId 为 【{}】的索引不存在！", skuId);
 			}
 		}
 		return true;
@@ -496,9 +496,9 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Override
 	public Boolean deleteEsGoodsPromotionByPromotionKey(List<Long> skuIds, String promotionsKey) {
 		BulkRequest bulkRequest = new BulkRequest();
-		LogUtil.info("删除商品活动索引");
-		LogUtil.info("商品skuIds: {}", skuIds);
-		LogUtil.info("活动Key: {}", promotionsKey);
+		LogUtils.info("删除商品活动索引");
+		LogUtils.info("商品skuIds: {}", skuIds);
+		LogUtils.info("活动Key: {}", promotionsKey);
 		if (skuIds == null || skuIds.isEmpty()) {
 			return true;
 		}
@@ -512,7 +512,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					bulkRequest.add(updateRequest);
 				}
 			} else {
-				LogUtil.error("更新索引商品促销信息失败！skuId 为 【{}】的索引不存在！", skuId);
+				LogUtils.error("更新索引商品促销信息失败！skuId 为 【{}】的索引不存在！", skuId);
 			}
 		}
 		this.executeBulkUpdateRequest(bulkRequest);
@@ -586,7 +586,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	public EsGoodsIndex findById(Long id) {
 		Optional<EsGoodsIndex> goodsIndex = goodsIndexRepository.findById(id);
 		if (goodsIndex.isEmpty()) {
-			LogUtil.error("商品skuId为" + id + "的es索引不存在！");
+			LogUtils.error("商品skuId为" + id + "的es索引不存在！");
 			return null;
 		}
 		return goodsIndex.get();
@@ -685,10 +685,10 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 			promotionMap = goodsIndex.getPromotionMap();
 		}
 
-		LogUtil.info("ES修改商品活动索引-活动信息:{}", promotion);
-		LogUtil.info("ES修改商品活动索引-活动信息状态:{}", promotion.getPromotionStatus());
-		LogUtil.info("ES修改商品活动索引-原商品索引信息:{}", goodsIndex);
-		LogUtil.info("ES修改商品活动索引-原商品索引活动信息:{}", promotionMap);
+		LogUtils.info("ES修改商品活动索引-活动信息:{}", promotion);
+		LogUtils.info("ES修改商品活动索引-活动信息状态:{}", promotion.getPromotionStatus());
+		LogUtils.info("ES修改商品活动索引-原商品索引信息:{}", goodsIndex);
+		LogUtils.info("ES修改商品活动索引-原商品索引活动信息:{}", promotionMap);
 		//如果活动已结束
 		if (promotion.getPromotionStatus().equals(PromotionsStatusEnum.END.name())
 			|| promotion.getPromotionStatus().equals(PromotionsStatusEnum.CLOSE.name())) {//如果存在活动
@@ -697,7 +697,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		} else {
 			promotionMap.put(key, promotion);
 		}
-		LogUtil.info("ES修改商品活动索引-过滤后商品索引活动信息:{}", promotionMap);
+		LogUtils.info("ES修改商品活动索引-过滤后商品索引活动信息:{}", promotionMap);
 		return this.getGoodsIndexPromotionUpdateRequest(goodsIndex.getId(), promotionMap);
 	}
 
@@ -734,13 +734,13 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		try {
 			BulkResponse responses = this.client.bulk(bulkRequest, RequestOptions.DEFAULT);
 			if (responses.hasFailures()) {
-				LogUtil.info("批量更新商品索引的促销信息中出现部分异常：{}", responses.buildFailureMessage());
+				LogUtils.info("批量更新商品索引的促销信息中出现部分异常：{}", responses.buildFailureMessage());
 			} else {
-				LogUtil.info("批量更新商品索引的促销信息结果：{}", responses.status());
+				LogUtils.info("批量更新商品索引的促销信息结果：{}", responses.status());
 			}
 			throw new IOException();
 		} catch (IOException e) {
-			LogUtil.error("批量更新商品索引的促销信息出现异常！", e);
+			LogUtils.error("批量更新商品索引的促销信息出现异常！", e);
 		}
 	}
 
@@ -794,9 +794,9 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 				goodsWordsService.save(goodsWords);
 			}
 		} catch (MyBatisSystemException me) {
-			LogUtil.error(words + "关键字已存在！");
+			LogUtils.error(words + "关键字已存在！");
 		} catch (Exception e) {
-			LogUtil.error("关键字入库异常！", e);
+			LogUtils.error("关键字入库异常！", e);
 		}
 	}
 
@@ -851,12 +851,12 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		return new ActionListener<BulkByScrollResponse>() {
 			@Override
 			public void onResponse(BulkByScrollResponse bulkByScrollResponse) {
-				LogUtil.info("UpdateByQueryResponse: {}", bulkByScrollResponse);
+				LogUtils.info("UpdateByQueryResponse: {}", bulkByScrollResponse);
 			}
 
 			@Override
 			public void onFailure(Exception e) {
-				LogUtil.error("UpdateByQueryRequestFailure: ", e);
+				LogUtils.error("UpdateByQueryRequestFailure: ", e);
 			}
 		};
 	}

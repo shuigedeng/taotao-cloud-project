@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.oss.common.util;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -82,7 +82,7 @@ public class FtpClientUtil {
 			if (!FTPReply.isPositiveCompletion(reply)) {
 				this.isLogin = false;
 				destroy();
-				LogUtil.error(FTP_CLIENT_CONNECTION_ERROR_MESSAGE);
+				LogUtils.error(FTP_CLIENT_CONNECTION_ERROR_MESSAGE);
 			} else {
 				this.client.setFileType(FTPClient.BINARY_FILE_TYPE);
 				this.ftpHome = this.client.printWorkingDirectory();
@@ -91,7 +91,7 @@ public class FtpClientUtil {
 
 			}
 		} catch (Exception e) {
-			LogUtil.error(FTP_CLIENT_INIT_ERROR_MESSAGE + e.getMessage(), e);
+			LogUtils.error(FTP_CLIENT_INIT_ERROR_MESSAGE + e.getMessage(), e);
 		}
 	}
 
@@ -105,14 +105,14 @@ public class FtpClientUtil {
 		try {
 			this.client.logout();
 		} catch (IOException e) {
-			LogUtil.error(FTP_CLIENT_DESTORY_ERROR_MESSAGE + e.getMessage(), e);
+			LogUtils.error(FTP_CLIENT_DESTORY_ERROR_MESSAGE + e.getMessage(), e);
 		} finally {
 			try {
 				if (this.client.isConnected()) {
 					this.client.disconnect();
 				}
 			} catch (IOException e) {
-				LogUtil.error(e.getMessage());
+				LogUtils.error(e.getMessage());
 			} finally {
 				this.client = null;
 			}
@@ -133,28 +133,28 @@ public class FtpClientUtil {
 		boolean result = false;
 		if (!this.isLogin) {
 			reInit();
-			LogUtil.warn("FTP未登录，重新初始化。。。");
+			LogUtils.warn("FTP未登录，重新初始化。。。");
 		}
 		if (this.isLogin) {
 			try {
 				this.input = new FileInputStream(lFile);
 				if (sremoteDir != null && sremoteDir.length() > 0) {
 					boolean bb = this.client.changeWorkingDirectory(sremoteDir);
-					LogUtil.info("远程地址:" + sremoteDir + ",切换结果:" + bb);
+					LogUtils.info("远程地址:" + sremoteDir + ",切换结果:" + bb);
 				}
 				// 设置被动模式
 				this.client.enterLocalPassiveMode();
 				result = client.storeFile(srName, input);
-				LogUtil.info("文件[" + lFile.getPath() + "]上传结果：" + result);
+				LogUtils.info("文件[" + lFile.getPath() + "]上传结果：" + result);
 			} catch (Exception e) {
 				result = false;
-				LogUtil.error(e.getMessage());
+				LogUtils.error(e.getMessage());
 			} finally {
 				try {
 					this.input.close();
 					this.input = null;
 				} catch (IOException e) {
-					LogUtil.error(e.getMessage());
+					LogUtils.error(e.getMessage());
 				}
 			}
 		}
@@ -175,7 +175,7 @@ public class FtpClientUtil {
 		boolean result = false;
 		if (!this.isLogin) {
 			reInit();
-			LogUtil.info("FTP未登录，重新初始化。。。");
+			LogUtils.info("FTP未登录，重新初始化。。。");
 		}
 		if (this.isLogin) {
 			RandomAccessFile inputRAF = null;
@@ -196,19 +196,19 @@ public class FtpClientUtil {
 				}
 				out.flush();
 			} catch (Exception e) {
-				LogUtil.error(e.getMessage());
+				LogUtils.error(e.getMessage());
 			} finally {
 				try {
 					inputRAF.close();
 				} catch (IOException ex) {
-					LogUtil.info("" + ex);
+					LogUtils.info("" + ex);
 				}
 				try {
 					out.close();
 					result = this.client.completePendingCommand();
-					LogUtil.info("文件[" + lFile.getPath() + "]上传结果：" + result);
+					LogUtils.info("文件[" + lFile.getPath() + "]上传结果：" + result);
 				} catch (IOException ex) {
-					LogUtil.error(ex.getMessage());
+					LogUtils.error(ex.getMessage());
 				}
 			}
 		}
@@ -231,9 +231,9 @@ public class FtpClientUtil {
 			in.close();
 			return result;
 		} catch (FileNotFoundException e) {
-			LogUtil.error("本地文件未找到，上传失败", e);
+			LogUtils.error("本地文件未找到，上传失败", e);
 		} catch (IOException e) {
-			LogUtil.error("关闭本地文件流出错", e);
+			LogUtils.error("关闭本地文件流出错", e);
 		}
 		return false;
 	}
@@ -247,7 +247,7 @@ public class FtpClientUtil {
 	 */
 	public boolean upload(String remoteFile, InputStream in) {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
-		LogUtil.info("开始上传文件：" + sremoteFile);
+		LogUtils.info("开始上传文件：" + sremoteFile);
 		sremoteFile = sremoteFile.replaceAll("\\\\", "/");
 		if (sremoteFile.startsWith("/") && ftpHome != null) {
 			sremoteFile = ftpHome + sremoteFile;
@@ -265,8 +265,8 @@ public class FtpClientUtil {
 					this.client.makeDirectory(path);
 					boolean changeRes = this.client.changeWorkingDirectory(path);
 					if (!changeRes) {
-						LogUtil.info("不能打开目录：" + this.client.printWorkingDirectory() + "/" + path);
-						LogUtil.error("上传文件失败：" + sremoteFile);
+						LogUtils.info("不能打开目录：" + this.client.printWorkingDirectory() + "/" + path);
+						LogUtils.error("上传文件失败：" + sremoteFile);
 						return false;
 					}
 				}
@@ -282,15 +282,15 @@ public class FtpClientUtil {
 				out.close();
 				boolean res = this.client.completePendingCommand();
 				if (res) {
-					LogUtil.info("上传文件成功：" + sremoteFile);
+					LogUtils.info("上传文件成功：" + sremoteFile);
 				} else {
-					LogUtil.info("上传文件失败：" + sremoteFile);
+					LogUtils.info("上传文件失败：" + sremoteFile);
 				}
 				return res;
 			}
 		} catch (IOException e) {
-			LogUtil.error("上传文件失败：" + sremoteFile);
-			LogUtil.error("上传文件错误", e);
+			LogUtils.error("上传文件失败：" + sremoteFile);
+			LogUtils.error("上传文件错误", e);
 		} finally {
 			if (out != null) {
 				try {
@@ -314,7 +314,7 @@ public class FtpClientUtil {
 		try {
 			in = this.client.retrieveFileStream(sremoteFile);
 		} catch (IOException e) {
-			LogUtil.error("ftp下载失败！", e);
+			LogUtils.error("ftp下载失败！", e);
 			return null;
 		}
 		return in;
@@ -333,7 +333,7 @@ public class FtpClientUtil {
 			this.client.setFileType(FTPClient.BINARY_FILE_TYPE);
 			in = this.client.retrieveFileStream(sremoteFile);
 		} catch (IOException e) {
-			LogUtil.error("getBinaryInputStream:ftp下载失败！", e);
+			LogUtils.error("getBinaryInputStream:ftp下载失败！", e);
 			return null;
 		}
 		return in;
@@ -346,11 +346,11 @@ public class FtpClientUtil {
 		if (sremoteFile.startsWith("/") && ftpHome != null) {
 			sremoteFile = ftpHome + sremoteFile;
 		}
-		LogUtil.info("ftp下载文件：" + sremoteFile);
+		LogUtils.info("ftp下载文件：" + sremoteFile);
 		try {
 			return this.client.retrieveFile(sremoteFile, out);
 		} catch (IOException e) {
-			LogUtil.error("ftp下载失败！", e);
+			LogUtils.error("ftp下载失败！", e);
 			return false;
 		}
 	}
@@ -359,11 +359,11 @@ public class FtpClientUtil {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
 		this.client.enterLocalPassiveMode();
 		sremoteFile = sremoteFile.replaceAll("\\\\", "/");
-		LogUtil.info("ftp下载文件：" + sremoteFile);
+		LogUtils.info("ftp下载文件：" + sremoteFile);
 		try {
 			return this.client.retrieveFile(sremoteFile, out);
 		} catch (IOException e) {
-			LogUtil.error("ftp下载失败！", e);
+			LogUtils.error("ftp下载失败！", e);
 			return false;
 		}
 	}
@@ -375,12 +375,12 @@ public class FtpClientUtil {
 		if (sremoteFile.startsWith("/") && ftpHome != null) {
 			sremoteFile = ftpHome + sremoteFile;
 		}
-		LogUtil.info("ftp下载文件：" + sremoteFile);
+		LogUtils.info("ftp下载文件：" + sremoteFile);
 		try {
 			this.client.setFileType(FTPClient.BINARY_FILE_TYPE);
 			return this.client.retrieveFile(sremoteFile, out);
 		} catch (IOException e) {
-			LogUtil.error("ftp下载失败！", e);
+			LogUtils.error("ftp下载失败！", e);
 			return false;
 		}
 	}
@@ -395,13 +395,13 @@ public class FtpClientUtil {
 	public boolean renameFile(String srcFileName, String targFileName) {
 		String ssrcFileName = this.ConvertEncoding(srcFileName);
 		String stargFileName = this.ConvertEncoding(targFileName);
-		LogUtil.info("将修改文件名" + ssrcFileName + "为" + stargFileName);
+		LogUtils.info("将修改文件名" + ssrcFileName + "为" + stargFileName);
 		boolean bRet = false;
 		try {
 
 			bRet = this.client.rename(ssrcFileName, stargFileName);
 		} catch (Exception e) {
-			LogUtil.error("重命名文件名异常", e);
+			LogUtils.error("重命名文件名异常", e);
 		}
 
 		return bRet;
@@ -416,7 +416,7 @@ public class FtpClientUtil {
 		try {
 			files = client.listFiles(spath);
 		} catch (IOException e) {
-			LogUtil.error("获取文件列表异常！", e);
+			LogUtils.error("获取文件列表异常！", e);
 		}
 		return files;
 	}
@@ -444,7 +444,7 @@ public class FtpClientUtil {
 		try {
 			return new String(str.getBytes("UTF-8"), controlEncoding);
 		} catch (UnsupportedEncodingException e) {
-			LogUtil.error("编码转换错误", e);
+			LogUtils.error("编码转换错误", e);
 			return str;
 		}
 	}

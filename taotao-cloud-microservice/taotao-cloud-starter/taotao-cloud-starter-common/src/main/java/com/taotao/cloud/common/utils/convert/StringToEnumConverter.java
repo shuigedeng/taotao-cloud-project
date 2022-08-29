@@ -17,9 +17,9 @@
 package com.taotao.cloud.common.utils.convert;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -82,11 +82,11 @@ public class StringToEnumConverter implements ConditionalGenericConverter {
 	@Override
 	public Object convert(@Nullable Object source, TypeDescriptor sourceType,
 		TypeDescriptor targetType) {
-		if (StringUtil.isBlank((String) source)) {
+		if (StringUtils.isBlank((String) source)) {
 			return null;
 		}
 		Class<?> clazz = targetType.getType();
-		AccessibleObject accessibleObject = CollectionUtil.computeIfAbsent(ENUM_CACHE_MAP, clazz,
+		AccessibleObject accessibleObject = CollectionUtils.computeIfAbsent(ENUM_CACHE_MAP, clazz,
 			StringToEnumConverter::getAnnotation);
 		String value = ((String) source).trim();
 		// 如果为null，走默认的转换
@@ -96,7 +96,7 @@ public class StringToEnumConverter implements ConditionalGenericConverter {
 		try {
 			return StringToEnumConverter.invoke(clazz, accessibleObject, value);
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage(), e);
+			LogUtils.error(e.getMessage(), e);
 		}
 		return null;
 	}
@@ -113,14 +113,14 @@ public class StringToEnumConverter implements ConditionalGenericConverter {
 			Constructor constructor = (Constructor) accessibleObject;
 			Class<?> paramType = constructor.getParameterTypes()[0];
 			// 类型转换
-			Object object = ConvertUtil.convert(value, paramType);
+			Object object = ConvertUtils.convert(value, paramType);
 			return constructor.newInstance(object);
 		}
 		if (accessibleObject instanceof Method) {
 			Method method = (Method) accessibleObject;
 			Class<?> paramType = method.getParameterTypes()[0];
 			// 类型转换
-			Object object = ConvertUtil.convert(value, paramType);
+			Object object = ConvertUtils.convert(value, paramType);
 			return method.invoke(clazz, object);
 		}
 		return null;

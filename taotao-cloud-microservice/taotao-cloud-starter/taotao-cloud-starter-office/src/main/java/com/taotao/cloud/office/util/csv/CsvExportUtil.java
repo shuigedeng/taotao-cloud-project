@@ -1,13 +1,12 @@
 package com.taotao.cloud.office.util.csv;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.office.util.constant.ExportConstant;
 import com.univocity.parsers.common.processor.BeanWriterProcessor;
 import com.univocity.parsers.csv.CsvWriter;
 import com.univocity.parsers.csv.CsvWriterSettings;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.Writer;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,7 +31,7 @@ public class CsvExportUtil<T> {
             writer.writeStringRows(rowDataList);
             writer.flush();
         } catch (Exception e) {
-            LogUtil.error("CsvExportUtil exportCsv in error:{}", e);
+            LogUtils.error("CsvExportUtil exportCsv in error:{}", e);
         } finally {
             if (Objects.nonNull(writer)) {
                 writer.close();
@@ -66,7 +65,7 @@ public class CsvExportUtil<T> {
             writer.processRecords(rowDataList);
             writer.flush();
         } catch (Exception e) {
-	        LogUtil.error("CsvExportUtil exportCsvWithBean in error:{}", e);
+	        LogUtils.error("CsvExportUtil exportCsvWithBean in error:{}", e);
         } finally {
             if (Objects.nonNull(writer)) {
                 writer.close();

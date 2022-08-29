@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.springcloud.properties;
 
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +63,7 @@ public class SecurityProperties {
 	 */
 	@PostConstruct
 	public void initIgnoreUrl() {
-		ApiProperties apiProperties = ContextUtil.getBean(ApiProperties.class, true);
+		ApiProperties apiProperties = ContextUtils.getBean(ApiProperties.class, true);
 		if (Objects.nonNull(apiProperties)) {
 			String baseUri = apiProperties.getBaseUri();
 			ignoreUrl = ignoreUrl.stream().map(url -> baseUri + url)

@@ -1,7 +1,7 @@
 package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.web.strategy.BusinessHandler;
 import com.taotao.cloud.web.strategy.BusinessHandlerChooser;
 import java.util.List;
@@ -21,12 +21,12 @@ public class StrategyAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(StrategyAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(StrategyAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean
 	public BusinessHandlerChooser businessHandlerChooser(List<BusinessHandler> businessHandlers) {
-		LogUtil.started(BusinessHandlerChooser.class, StarterName.WEB_STARTER);
+		LogUtils.started(BusinessHandlerChooser.class, StarterName.WEB_STARTER);
 
 		BusinessHandlerChooser businessHandlerChooser = new BusinessHandlerChooser();
 		businessHandlerChooser.setBusinessHandlerMap(businessHandlers);

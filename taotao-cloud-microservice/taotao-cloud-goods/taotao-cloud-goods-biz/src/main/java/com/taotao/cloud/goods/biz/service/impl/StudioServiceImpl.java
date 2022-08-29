@@ -10,10 +10,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.common.OrikaUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.OrikaUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
 import com.taotao.cloud.goods.api.web.vo.CommodityVO;
 import com.taotao.cloud.goods.api.web.vo.StudioCommodityVO;
@@ -68,7 +68,7 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean create(Studio studio) {
-		studio.setStoreId(SecurityUtil.getUser().getStoreId());
+		studio.setStoreId(SecurityUtils.getUser().getStoreId());
 		//创建小程序直播
 		Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
 		studio.setRoomId(Convert.toInt(roomMap.get("roomId")));
@@ -122,7 +122,7 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 				Long.parseLong(studio.getStartTime()) * 1000L,
 				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST,
 					String.valueOf(studio.getId())),
-				DateUtil.getDelayTime(Long.parseLong(studio.getStartTime())),
+				DateUtils.getDelayTime(Long.parseLong(studio.getStartTime())),
 				rocketmqCustomProperties.getPromotionTopic());
 
 			//直播间结束
@@ -134,7 +134,7 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 				Long.parseLong(studio.getEndTime()) * 1000L,
 				DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST,
 					String.valueOf(studio.getId())),
-				DateUtil.getDelayTime(Long.parseLong(studio.getEndTime())),
+				DateUtils.getDelayTime(Long.parseLong(studio.getEndTime())),
 				rocketmqCustomProperties.getPromotionTopic());
 		}
 		return true;
@@ -145,10 +145,10 @@ public class StudioServiceImpl extends ServiceImpl<IStudioMapper, Studio> implem
 		StudioCommodityVO studioCommodityVO = new StudioCommodityVO();
 		Studio studio = this.getById(id);
 		//获取直播间信息
-		BeanUtil.copyProperties(studio, studioCommodityVO);
+		BeanUtils.copyProperties(studio, studioCommodityVO);
 		//获取直播间商品信息
 		List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioCommodityVO.getRoomId());
-		studioCommodityVO.setCommodityList(OrikaUtil.converts(commodities, CommodityVO.class));
+		studioCommodityVO.setCommodityList(OrikaUtils.converts(commodities, CommodityVO.class));
 		return studioCommodityVO;
 	}
 

@@ -16,8 +16,8 @@
 package com.taotao.cloud.monitor.collect.task;
 
 
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
@@ -67,28 +67,28 @@ public class NetworkCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			NetworkInfo ioInfo = new NetworkInfo();
-			ioInfo.processSysTcpListenNum = BeanUtil.convert(ProcessUtils.execCmd(
+			ioInfo.processSysTcpListenNum = BeanUtils.convert(ProcessUtils.execCmd(
 					"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1 |egrep -w 'LISTEN' |wc -l"),
 				Long.class);
-			ioInfo.processSysTcpEstablishedNum = BeanUtil.convert(ProcessUtils.execCmd(
+			ioInfo.processSysTcpEstablishedNum = BeanUtils.convert(ProcessUtils.execCmd(
 					"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1 |egrep -w 'ESTABLISHED' |wc -l"),
 				Long.class);
-			ioInfo.processSysTcpTimeWaitNum = BeanUtil.convert(ProcessUtils.execCmd(
+			ioInfo.processSysTcpTimeWaitNum = BeanUtils.convert(ProcessUtils.execCmd(
 					"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1 |egrep -w 'TIME_WAIT' |wc -l"),
 				Long.class);
-			ioInfo.processTcpListenNum = BeanUtil.convert(ProcessUtils.execCmd(
+			ioInfo.processTcpListenNum = BeanUtils.convert(ProcessUtils.execCmd(
 				"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1  |egrep -w '$PID' |egrep -w 'LISTEN' |wc -l".replaceAll(
 					"\\$PID", getProcessID())), Long.class);
-			ioInfo.processTcpEstablishedNum = BeanUtil.convert(ProcessUtils.execCmd(
+			ioInfo.processTcpEstablishedNum = BeanUtils.convert(ProcessUtils.execCmd(
 				"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1  |egrep -w '$PID' |egrep -w 'ESTABLISHED' |wc -l".replaceAll(
 					"\\$PID", getProcessID())), Long.class);
-			ioInfo.processTcpTimeWaitNum = BeanUtil.convert(ProcessUtils.execCmd(
+			ioInfo.processTcpTimeWaitNum = BeanUtils.convert(ProcessUtils.execCmd(
 				"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1  |egrep -w '$PID' |egrep -w 'TIME_WAIT' |wc -l".replaceAll(
 					"\\$PID", getProcessID())), Long.class);
 			return ioInfo;
 		} catch (Exception e) {
-			if(LogUtil.isErrorEnabled()){
-				LogUtil.error(e);
+			if(LogUtils.isErrorEnabled()){
+				LogUtils.error(e);
 			}
 		}
 		return null;

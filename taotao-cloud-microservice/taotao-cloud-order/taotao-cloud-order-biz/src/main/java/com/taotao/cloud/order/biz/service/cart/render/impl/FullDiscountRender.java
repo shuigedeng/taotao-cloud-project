@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.web.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
@@ -94,7 +94,7 @@ public class FullDiscountRender implements ICartRenderStep {
 							//打折
 							else if (Boolean.TRUE.equals(fullDiscount.getIsFullRate())) {
 								this.renderFullRate(cart, skuPriceDetail,
-									CurrencyUtil.div(fullDiscount.getFullRate(), 10));
+									CurrencyUtils.div(fullDiscount.getFullRate(), 10));
 							}
 							//渲染满优惠
 							renderFullMinus(cart);
@@ -128,9 +128,9 @@ public class FullDiscountRender implements ICartRenderStep {
 
 			//优惠金额=旧的优惠金额+商品金额*商品折扣比例
 			priceDetailDTO.setDiscountPrice(
-				CurrencyUtil.add(priceDetailDTO.getDiscountPrice(),
-					CurrencyUtil.mul(priceDetailDTO.getGoodsPrice(),
-						CurrencyUtil.sub(1, rate)
+				CurrencyUtils.add(priceDetailDTO.getDiscountPrice(),
+					CurrencyUtils.mul(priceDetailDTO.getGoodsPrice(),
+						CurrencyUtils.sub(1, rate)
 					)
 				)
 			);
@@ -212,7 +212,7 @@ public class FullDiscountRender implements ICartRenderStep {
 			return true;
 		} else {
 			cart.setPromotionNotice(
-				"还差" + CurrencyUtil.sub(cart.getFullDiscount().getFullMoney(), price) + " 即可参与活动（"
+				"还差" + CurrencyUtils.sub(cart.getFullDiscount().getFullMoney(), price) + " 即可参与活动（"
 					+ cart.getFullDiscount().getPromotionName() + "）" + cart.getFullDiscount()
 					.notice());
 			return false;
@@ -229,7 +229,7 @@ public class FullDiscountRender implements ICartRenderStep {
 		BigDecimal count = 0d;
 
 		for (BigDecimal price : skuPriceMap.values()) {
-			count = CurrencyUtil.add(count, price);
+			count = CurrencyUtils.add(count, price);
 		}
 
 		return count;

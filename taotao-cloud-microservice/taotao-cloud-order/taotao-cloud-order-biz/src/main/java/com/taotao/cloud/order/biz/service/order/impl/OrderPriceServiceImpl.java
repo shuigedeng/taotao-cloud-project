@@ -4,7 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.web.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
@@ -93,11 +93,11 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 		PriceDetailDTO orderPriceDetailDTO = order.getPriceDetailDTO();
 
 		//修改订单价格
-		order.setUpdatePrice(CurrencyUtil.sub(orderPrice, orderPriceDetailDTO.getOriginalPrice()));
+		order.setUpdatePrice(CurrencyUtils.sub(orderPrice, orderPriceDetailDTO.getOriginalPrice()));
 
 		//订单修改金额=使用订单原始金额-修改后金额
 		orderPriceDetailDTO.setUpdatePrice(
-			CurrencyUtil.sub(orderPrice, orderPriceDetailDTO.getOriginalPrice()));
+			CurrencyUtils.sub(orderPrice, orderPriceDetailDTO.getOriginalPrice()));
 		order.setFlowPrice(orderPriceDetailDTO.getFlowPrice());
 		order.setPriceDetail(JSONUtil.toJsonStr(orderPriceDetailDTO));
 
@@ -132,29 +132,29 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 			if (index == 0) {
 				//记录修改金额
 				priceDetailDTO.setUpdatePrice(
-					CurrencyUtil.sub(order.getUpdatePrice(), countUpdatePrice));
+					CurrencyUtils.sub(order.getUpdatePrice(), countUpdatePrice));
 				//修改订单货物金额
 				orderItem.setFlowPrice(priceDetailDTO.getFlowPrice());
 				orderItem.setUnitPrice(
-					CurrencyUtil.div(priceDetailDTO.getFlowPrice(), orderItem.getNum()));
+					CurrencyUtils.div(priceDetailDTO.getFlowPrice(), orderItem.getNum()));
 				orderItem.setPriceDetail(JSONUtil.toJsonStr(priceDetailDTO));
 			} else {
 				//SKU占总订单 金额的百分比
-				BigDecimal priceFluctuationRatio = CurrencyUtil.div(
+				BigDecimal priceFluctuationRatio = CurrencyUtils.div(
 					priceDetailDTO.getOriginalPrice(),
 					order.getPriceDetailDTO().getOriginalPrice(),
 					4);
 
 				//记录修改金额
 				priceDetailDTO.setUpdatePrice(
-					CurrencyUtil.mul(order.getUpdatePrice(), priceFluctuationRatio));
+					CurrencyUtils.mul(order.getUpdatePrice(), priceFluctuationRatio));
 
 				//修改订单货物金额
 				orderItem.setFlowPrice(priceDetailDTO.getFlowPrice());
 				orderItem.setUnitPrice(
-					CurrencyUtil.div(priceDetailDTO.getFlowPrice(), orderItem.getNum()));
+					CurrencyUtils.div(priceDetailDTO.getFlowPrice(), orderItem.getNum()));
 				orderItem.setPriceDetail(JSONUtil.toJsonStr(priceDetailDTO));
-				countUpdatePrice = CurrencyUtil.add(countUpdatePrice,
+				countUpdatePrice = CurrencyUtils.add(countUpdatePrice,
 					priceDetailDTO.getUpdatePrice());
 			}
 		}

@@ -22,8 +22,8 @@ import ch.qos.logback.core.CoreConstants;
 import com.github.loki4j.logback.*;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.CharPool;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.logging.config.MicaLoggingProperties;
 import com.taotao.cloud.logger.logging.loki.Loki4jOkHttpSender;
 import org.slf4j.LoggerFactory;
@@ -55,13 +55,13 @@ public class LoggingLokiAppender implements ILoggingAppender {
 
 	@Override
 	public void start(LoggerContext context) {
-		LogUtil.info("Loki logging start.");
+		LogUtils.info("Loki logging start.");
 		reload(context);
 	}
 
 	@Override
 	public void reset(LoggerContext context) {
-		LogUtil.info("Loki logging reset.");
+		LogUtils.info("Loki logging reset.");
 		reload(context);
 	}
 
@@ -111,7 +111,7 @@ public class LoggingLokiAppender implements ILoggingAppender {
 		// message config
 		AbstractLoki4jEncoder.MessageCfg messageCfg = new AbstractLoki4jEncoder.MessageCfg();
 		String formatMessagePattern = properties.getFormatMessagePattern();
-		if (StringUtil.isNotBlank(formatMessagePattern)) {
+		if (StringUtils.isNotBlank(formatMessagePattern)) {
 			messageCfg.setPattern(formatMessagePattern);
 		}
 		loki4jEncoder.setMessage(messageCfg);
@@ -138,7 +138,7 @@ public class LoggingLokiAppender implements ILoggingAppender {
 		httpSender.setRequestTimeoutMs(properties.getHttpRequestTimeoutMs());
 		String authUsername = properties.getHttpAuthUsername();
 		String authPassword = properties.getHttpAuthPassword();
-		if (StringUtil.isNotBlank(authUsername) && StringUtil.isNotBlank(authPassword)) {
+		if (StringUtils.isNotBlank(authUsername) && StringUtils.isNotBlank(authPassword)) {
 			AbstractHttpSender.BasicAuth basicAuth = new AbstractHttpSender.BasicAuth();
 			basicAuth.setUsername(authUsername);
 			basicAuth.setPassword(authPassword);
@@ -152,7 +152,7 @@ public class LoggingLokiAppender implements ILoggingAppender {
 		String labelPattern = properties.getFormatLabelPattern();
 		Assert.hasText(labelPattern, "MicaLoggingProperties mica.logging.loki.format-label-pattern is blank.");
 		String labelPatternExtend = properties.getFormatLabelPatternExtend();
-		if (StringUtil.isNotBlank(labelPatternExtend)) {
+		if (StringUtils.isNotBlank(labelPatternExtend)) {
 			labelPattern = labelPattern + CharPool.COMMA + labelPatternExtend;
 		}
 		return labelPattern
@@ -164,14 +164,14 @@ public class LoggingLokiAppender implements ILoggingAppender {
 	private static MicaLoggingProperties.HttpSender getHttpSender(MicaLoggingProperties.Loki properties) {
 		MicaLoggingProperties.HttpSender httpSenderProp = properties.getHttpSender();
 		if (httpSenderProp != null && httpSenderProp.isAvailable()) {
-			LogUtil.debug("mica logging use {} HttpSender", httpSenderProp);
+			LogUtils.debug("mica logging use {} HttpSender", httpSenderProp);
 			return httpSenderProp;
 		}
 		if (httpSenderProp == null) {
 			MicaLoggingProperties.HttpSender[] httpSenders = MicaLoggingProperties.HttpSender.values();
 			for (MicaLoggingProperties.HttpSender httpSender : httpSenders) {
 				if (httpSender.isAvailable()) {
-					LogUtil.debug("mica logging use {} HttpSender", httpSender);
+					LogUtils.debug("mica logging use {} HttpSender", httpSender);
 					return httpSender;
 				}
 			}

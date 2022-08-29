@@ -16,15 +16,15 @@
 package com.taotao.cloud.feign.configuration;
 
 import static com.taotao.cloud.common.constant.CommonConstant.BLANK;
-import static com.taotao.cloud.common.utils.lang.StringUtil.NEW_LINE;
+import static com.taotao.cloud.common.utils.lang.StringUtils.NEW_LINE;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.ContextConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.context.TenantContextHolder;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.properties.FeignInterceptorProperties;
 import feign.RequestInterceptor;
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class FeignInterceptorAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(FeignInterceptorAutoConfiguration.class, StarterName.FEIGN_STARTER);
+		LogUtils.started(FeignInterceptorAutoConfiguration.class, StarterName.FEIGN_STARTER);
 	}
 
 	protected List<String> requestHeaders = new ArrayList<>();
@@ -87,7 +87,7 @@ public class FeignInterceptorAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public RequestInterceptor httpFeignInterceptor() {
-		LogUtil.started(RequestInterceptor.class, StarterName.FEIGN_STARTER);
+		LogUtils.started(RequestInterceptor.class, StarterName.FEIGN_STARTER);
 
 		return template -> {
 			RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
@@ -134,7 +134,7 @@ public class FeignInterceptorAutoConfiguration implements InitializingBean {
 
 			//传递日志traceId
 			String traceId = MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
-			template.header(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, StrUtil.isNotEmpty(traceId) ? traceId : IdGeneratorUtil.getIdStr());
+			template.header(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, StrUtil.isNotEmpty(traceId) ? traceId : IdGeneratorUtils.getIdStr());
 
 			//服务内部inner
 			template.header(CommonConstant.TAOTAO_CLOUD_FROM_INNER, "true");

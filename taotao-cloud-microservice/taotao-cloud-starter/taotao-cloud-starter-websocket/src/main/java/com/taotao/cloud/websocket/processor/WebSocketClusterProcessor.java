@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.websocket.processor;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.websocket.domain.WebSocketMessage;
 import com.taotao.cloud.websocket.exception.IllegalChannelException;
 import com.taotao.cloud.websocket.exception.PrincipalNotFoundException;
@@ -63,11 +63,11 @@ public class WebSocketClusterProcessor implements InitializingBean {
 			RTopic rTopic = redissonClient.getTopic(customWebSocketProperties.getTopic(),
 				new JsonJacksonCodec());
 			rTopic.publish(webSocketMessage);
-			LogUtil.debug(
+			LogUtils.debug(
 				"Current instance can not found user [{}], publish message.",
 				webSocketMessage.getTo());
 		} catch (IllegalChannelException e) {
-			LogUtil.error("Web socket channel is incorrect.");
+			LogUtils.error("Web socket channel is incorrect.");
 		}
 	}
 
@@ -76,7 +76,7 @@ public class WebSocketClusterProcessor implements InitializingBean {
 		RTopic topic = redissonClient.getTopic(customWebSocketProperties.getTopic());
 		topic.addListener(WebSocketMessage.class,
 			(MessageListener<WebSocketMessage<String>>) (charSequence, webSocketMessage) -> {
-				LogUtil.debug("Redisson received web socket sync message [{}]",
+				LogUtils.debug("Redisson received web socket sync message [{}]",
 					webSocketMessage);
 				webSocketMessageSender.toUser(webSocketMessage);
 			});

@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.api.web.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
@@ -47,7 +47,7 @@ public class MemberPointsHistoryServiceImpl extends
 	@Override
 	public IPage<MemberPointsHistory> getByPage(PageParam pageParam) {
 		LambdaQueryWrapper<MemberPointsHistory> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.eq(MemberPointsHistory::getMemberId, SecurityUtil.getUserId());
+		queryWrapper.eq(MemberPointsHistory::getMemberId, SecurityUtils.getUserId());
 		queryWrapper.orderByDesc(MemberPointsHistory::getCreateTime);
 		return this.page(pageParam.buildMpPage(), queryWrapper);
 	}
@@ -60,7 +60,7 @@ public class MemberPointsHistoryServiceImpl extends
 			.like(memberName != null, MemberPointsHistory::getMemberName, memberName);
 
 		//如果排序为空，则默认创建时间倒序
-		if (StringUtil.isNotBlank(pageParam.getSort())) {
+		if (StringUtils.isNotBlank(pageParam.getSort())) {
 			pageParam.setSort("createTime");
 			pageParam.setOrder("desc");
 		}

@@ -18,7 +18,7 @@ package com.taotao.cloud.common.model;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.slf4j.MDC;
 
@@ -215,7 +215,7 @@ public class ResultClass<T> implements Serializable {
 			.errorMsg(errorMsg)
 			.timestamp(LocalDateTime.now())
 			.requestId(StrUtil.isNotBlank(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID)) ? MDC
-				.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtil.getIdStr())
+				.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtils.getIdStr())
 			.build();
 	}
 

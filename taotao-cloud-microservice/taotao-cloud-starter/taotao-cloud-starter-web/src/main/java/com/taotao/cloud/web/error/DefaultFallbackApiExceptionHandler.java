@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.error;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.web.error.mapper.ErrorCodeMapper;
 import com.taotao.cloud.web.error.mapper.ErrorMessageMapper;
 import com.taotao.cloud.web.error.mapper.HttpStatusMapper;
@@ -104,7 +104,7 @@ public class DefaultFallbackApiExceptionHandler implements FallbackApiExceptionH
 		ResponseErrorProperty annotation = AnnotationUtils.getAnnotation(field,
 			ResponseErrorProperty.class);
 		assert annotation != null;
-		if (!StringUtil.isEmpty(annotation.value())) {
+		if (!StringUtils.isEmpty(annotation.value())) {
 			return annotation.value();
 		}
 
@@ -115,7 +115,7 @@ public class DefaultFallbackApiExceptionHandler implements FallbackApiExceptionH
 		ResponseErrorProperty annotation = AnnotationUtils.getAnnotation(method,
 			ResponseErrorProperty.class);
 		assert annotation != null;
-		if (!StringUtil.isEmpty(annotation.value())) {
+		if (!StringUtils.isEmpty(annotation.value())) {
 			return annotation.value();
 		}
 

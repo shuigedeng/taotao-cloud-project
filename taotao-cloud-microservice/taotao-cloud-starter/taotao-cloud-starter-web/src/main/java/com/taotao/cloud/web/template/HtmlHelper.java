@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.template;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -241,6 +241,6 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @since 2021-09-02 22:17:55
 	 */
 	public String toJson(Object o) {
-		return JsonUtil.toJSONString(o);
+		return JsonUtils.toJSONString(o);
 	}
 }

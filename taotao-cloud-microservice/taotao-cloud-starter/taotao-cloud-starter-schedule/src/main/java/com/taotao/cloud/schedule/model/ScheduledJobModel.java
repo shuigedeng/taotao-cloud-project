@@ -1,6 +1,6 @@
 package com.taotao.cloud.schedule.model;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.schedule.exception.ScheduledException;
 import com.taotao.cloud.schedule.common.annotation.ScheduledBean;
 import com.taotao.cloud.schedule.enums.ScheduledType;
@@ -83,15 +83,15 @@ public class ScheduledJobModel implements Serializable {
 	}
 
 	public ScheduledJobModel(Scheduled annotation, Method method, Object bean) {
-		this.cron = StringUtil.isEmpty(annotation.cron()) ? null : annotation.cron();
+		this.cron = StringUtils.isEmpty(annotation.cron()) ? null : annotation.cron();
 		this.fixedDelay = annotation.fixedDelay() < 0 ? null : annotation.fixedDelay();
-		this.fixedDelayString = StringUtil.isEmpty(annotation.fixedDelayString()) ? null
+		this.fixedDelayString = StringUtils.isEmpty(annotation.fixedDelayString()) ? null
 			: annotation.fixedDelayString();
 		this.fixedRate = annotation.fixedRate() < 0 ? null : annotation.fixedRate();
 		this.fixedRateString =
-			StringUtil.isEmpty(annotation.fixedRateString()) ? null : annotation.fixedRateString();
+			StringUtils.isEmpty(annotation.fixedRateString()) ? null : annotation.fixedRateString();
 		this.initialDelay = annotation.initialDelay() < 0 ? null : annotation.initialDelay();
-		this.initialDelayString = StringUtil.isEmpty(annotation.initialDelayString()) ? null
+		this.initialDelayString = StringUtils.isEmpty(annotation.initialDelayString()) ? null
 			: annotation.initialDelayString();
 		this.type = confirmType();
 		this.bean = bean;
@@ -99,15 +99,15 @@ public class ScheduledJobModel implements Serializable {
 	}
 
 	public ScheduledJobModel(ScheduledBean annotation, Method method, Object bean) {
-		this.cron = StringUtil.isEmpty(annotation.cron()) ? null : annotation.cron();
+		this.cron = StringUtils.isEmpty(annotation.cron()) ? null : annotation.cron();
 		this.fixedDelay = annotation.fixedDelay() < 0 ? null : annotation.fixedDelay();
-		this.fixedDelayString = StringUtil.isEmpty(annotation.fixedDelayString()) ? null
+		this.fixedDelayString = StringUtils.isEmpty(annotation.fixedDelayString()) ? null
 			: annotation.fixedDelayString();
 		this.fixedRate = annotation.fixedRate() < 0 ? null : annotation.fixedRate();
 		this.fixedRateString =
-			StringUtil.isEmpty(annotation.fixedRateString()) ? null : annotation.fixedRateString();
+			StringUtils.isEmpty(annotation.fixedRateString()) ? null : annotation.fixedRateString();
 		this.initialDelay = annotation.initialDelay() < 0 ? null : annotation.initialDelay();
-		this.initialDelayString = StringUtil.isEmpty(annotation.initialDelayString()) ? null
+		this.initialDelayString = StringUtils.isEmpty(annotation.initialDelayString()) ? null
 			: annotation.initialDelayString();
 		this.type = confirmType();
 		this.bean = bean;

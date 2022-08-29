@@ -1,9 +1,9 @@
 package com.taotao.cloud.pinyin.util;
 
 
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.common.ArgUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.common.ArgUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.pinyin.bs.PinyinBs;
 import com.taotao.cloud.pinyin.constant.enums.PinyinStyleEnum;
 import com.taotao.cloud.pinyin.spi.IPinyinToneStyle;
@@ -45,7 +45,7 @@ public final class PinyinHelper {
      */
     public static String toPinyin(final String string,
                                   final PinyinStyleEnum styleEnum) {
-        return toPinyin(string, styleEnum, StringUtil.BLANK);
+        return toPinyin(string, styleEnum, StringUtils.BLANK);
     }
 
     /**
@@ -58,9 +58,9 @@ public final class PinyinHelper {
     public static String toPinyin(final String string,
                                   final PinyinStyleEnum styleEnum,
                                   final String connector) {
-        ArgUtil.notNull(connector, "connector");
+        ArgUtils.notNull(connector, "connector");
 
-        if(StringUtil.isEmptyTrim(string)) {
+        if(StringUtils.isEmptyTrim(string)) {
             return string;
         }
 
@@ -118,7 +118,7 @@ public final class PinyinHelper {
     public static Map<String, List<String>> samePinyinMap(final char hanzi) {
         //1. 获取汉字的多音字列表
         List<String> pinyinList = toPinyinList(hanzi, PinyinStyleEnum.NUM_LAST);
-        if(CollectionUtil.isEmpty(pinyinList)) {
+        if(CollectionUtils.isEmpty(pinyinList)) {
             return Collections.emptyMap();
         }
 

@@ -1,7 +1,7 @@
 package com.taotao.cloud.data.mybatis.plus.pagehelper;
 
 import com.github.pagehelper.PageInfo;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import java.io.Serializable;
 
 public class PageUtils implements Serializable {
@@ -20,7 +20,7 @@ public class PageUtils implements Serializable {
 		int pageNum = pageParam.getPageNum();
 		pl.setPageNum(pageNum);
 		String orderBy = pageParam.getOrderBy();
-		if (StringUtil.isNotEmpty(
+		if (StringUtils.isNotEmpty(
 			orderBy)) {
 			//防止sql注入
 			String orderBySql = SQLFilter.sqlInject(orderBy);

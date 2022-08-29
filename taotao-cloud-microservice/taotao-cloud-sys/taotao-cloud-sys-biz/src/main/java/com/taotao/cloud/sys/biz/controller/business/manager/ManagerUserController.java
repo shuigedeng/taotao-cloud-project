@@ -19,8 +19,8 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.web.dto.user.RestPasswordUserDTO;
@@ -102,7 +102,7 @@ public class ManagerUserController extends
 	@PreAuthorize("hasAuthority('sys:user:info:current')")
 	@GetMapping("/current")
 	public Result<UserQueryVO> getCurrentUser() {
-		SecurityUser securityUser = SecurityUtil.getCurrentUser();
+		SecurityUser securityUser = SecurityUtils.getCurrentUser();
 		if (Objects.isNull(securityUser)) {
 			throw new BusinessException("用户未登录");
 		}
@@ -130,7 +130,7 @@ public class ManagerUserController extends
 		@Parameter(description = "新增DTO", required = true)
 		@RequestBody @Validated UserSaveDTO saveDTO) {
 		User user = new User();
-		BeanUtil.copy(saveDTO, user);
+		BeanUtils.copy(saveDTO, user);
 		user.setAccount("sdfasfd");
 		user.setNickname("sdfasfd");
 		user.setUsername("sdfasfd");

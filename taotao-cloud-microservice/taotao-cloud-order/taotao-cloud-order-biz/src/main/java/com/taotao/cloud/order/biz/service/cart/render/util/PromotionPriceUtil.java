@@ -1,8 +1,8 @@
 package com.taotao.cloud.order.biz.service.cart.render.util;
 
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.web.vo.cart.CartSkuVO;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class PromotionPriceUtil {
 		//计算总金额
 		BigDecimal totalPrice = 0D;
 		for (BigDecimal value : skuPromotionDetail.values()) {
-			totalPrice = CurrencyUtil.add(totalPrice, value);
+			totalPrice = CurrencyUtils.add(totalPrice, value);
 		}
 
 		//极端情况，如果扣减金额小于需要支付的金额，则扣减金额=支付金额，不能成为负数
@@ -83,35 +83,35 @@ public class PromotionPriceUtil {
 					//非最后一个商品，则按照比例计算
 					if (count > 0) {
 						//商品金额占比
-						BigDecimal point = CurrencyUtil.div(
+						BigDecimal point = CurrencyUtils.div(
 							cartSkuVO.getPriceDetailDTO().getGoodsPrice(), totalPrice, 4);
 						//商品优惠金额
-						skuDiscountPrice = CurrencyUtil.mul(discountPrice, point);
+						skuDiscountPrice = CurrencyUtils.mul(discountPrice, point);
 						//累加已优惠金额
-						deducted = CurrencyUtil.add(deducted, skuDiscountPrice);
+						deducted = CurrencyUtils.add(deducted, skuDiscountPrice);
 					}
 					// 如果是最后一个商品 则减去之前优惠的金额来进行计算
 					else {
-						skuDiscountPrice = CurrencyUtil.sub(discountPrice, deducted);
+						skuDiscountPrice = CurrencyUtils.sub(discountPrice, deducted);
 					}
 					//优惠券金额，则计入优惠券 ，其他则计入总的discount price
 					if (promotionTypeEnum == PromotionTypeEnum.COUPON) {
 
 						cartSkuVO.getPriceDetailDTO().setCouponPrice(
-							CurrencyUtil.add(cartSkuVO.getPriceDetailDTO().getCouponPrice(),
+							CurrencyUtils.add(cartSkuVO.getPriceDetailDTO().getCouponPrice(),
 								skuDiscountPrice));
 					} else if (promotionTypeEnum == PromotionTypeEnum.PLATFORM_COUPON) {
 
 						cartSkuVO.getPriceDetailDTO().setSiteCouponPrice(
-							CurrencyUtil.add(cartSkuVO.getPriceDetailDTO().getCouponPrice(),
+							CurrencyUtils.add(cartSkuVO.getPriceDetailDTO().getCouponPrice(),
 								skuDiscountPrice));
 
 						cartSkuVO.getPriceDetailDTO().setCouponPrice(
-							CurrencyUtil.add(cartSkuVO.getPriceDetailDTO().getCouponPrice(),
+							CurrencyUtils.add(cartSkuVO.getPriceDetailDTO().getCouponPrice(),
 								cartSkuVO.getPriceDetailDTO().getSiteCouponPrice()));
 					} else {
 						cartSkuVO.getPriceDetailDTO().setDiscountPrice(
-							CurrencyUtil.add(cartSkuVO.getPriceDetailDTO().getDiscountPrice(),
+							CurrencyUtils.add(cartSkuVO.getPriceDetailDTO().getDiscountPrice(),
 								skuDiscountPrice));
 					}
 				}
@@ -135,11 +135,11 @@ public class PromotionPriceUtil {
 											String promotionId) {
 		long now = System.currentTimeMillis();
 		if (startTime.getTime() > now) {
-			LogUtil.error("商品ID为{}的{}活动开始时间小于当时时间，活动未开始！", promotionId, promotionType);
+			LogUtils.error("商品ID为{}的{}活动开始时间小于当时时间，活动未开始！", promotionId, promotionType);
 			return false;
 		}
 		if (endTime.getTime() < now) {
-			LogUtil.error("活动ID为{}的{}活动结束时间大于当时时间，活动已结束！", promotionId, promotionType);
+			LogUtils.error("活动ID为{}的{}活动结束时间大于当时时间，活动已结束！", promotionId, promotionType);
 			return false;
 		}
 		return true;

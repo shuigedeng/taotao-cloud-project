@@ -5,8 +5,8 @@ import com.github.yitter.contract.IdGeneratorOptions;
 import com.github.yitter.idgen.YitIdHelper;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.common.ThreadFactoryCreator;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Objects;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -53,7 +53,7 @@ public class RedisIdGenerator implements DisposableBean, CommandLineRunner {
 	 */
 	private void initIdWorker() {
 		if (Objects.isNull(redisRepository)) {
-			this.redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			this.redisRepository = ContextUtils.getBean(RedisRepository.class, true);
 		}
 
 		RedisAtomicLong redisAtomicLong = new RedisAtomicLong(
@@ -81,7 +81,7 @@ public class RedisIdGenerator implements DisposableBean, CommandLineRunner {
 			throw new RuntimeException(String.format("已尝试生成%d个ID生成器编号, 无法获取到可用编号", MAX_WORKER_ID_NUMBER_BY_MODE + 1));
 		}
 
-		LogUtil.info("当前ID生成器编号: " + workerId);
+		LogUtils.info("当前ID生成器编号: " + workerId);
 		IdGeneratorOptions options = new IdGeneratorOptions(workerId);
 		options.WorkerIdBitLength = WORKER_ID_BIT_LENGTH;
 		YitIdHelper.setIdGenerator(options);

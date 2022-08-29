@@ -19,7 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.xss.utils.XssUtil;
 
 /**
@@ -46,7 +46,7 @@ public class XssStringJsonSerializer extends JsonSerializer<String> {
 			String encodedValue = XssUtil.xssClean(value, null);
 			jsonGenerator.writeString(encodedValue);
 		} catch (Exception e) {
-			LogUtil.error("序列化失败:[{}]", value, e);
+			LogUtils.error("序列化失败:[{}]", value, e);
 		}
 	}
 

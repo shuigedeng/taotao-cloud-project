@@ -4,7 +4,7 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.io.FileTypeUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.model.OssInfo;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
@@ -84,8 +84,8 @@ public class FileServiceImpl extends
 				LocalDateTime.parse(ossInfo.getLastUpdateTime(),
 					DatePattern.NORM_DATETIME_FORMATTER));
 			file.setDataType(FileTypeUtil.getType(multipartFile.getInputStream()));
-			file.setCreateBy(SecurityUtil.getCurrentUser().getUserId());
-			file.setCreateName(SecurityUtil.getCurrentUser().getUsername());
+			file.setCreateBy(SecurityUtils.getCurrentUser().getUserId());
+			file.setCreateName(SecurityUtils.getCurrentUser().getUsername());
 		} catch (Exception ignored) {
 		}
 		file.setDelFlag(false);

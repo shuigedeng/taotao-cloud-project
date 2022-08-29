@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.rabbitmq.cache;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
 import com.taotao.cloud.rabbitmq.common.FastOcpRabbitMqConstants;
 import com.taotao.cloud.rabbitmq.producer.MessageSender;
@@ -73,14 +73,14 @@ public class RetryCache {
 					if (null != messageWithTime) {
 						if (messageWithTime.getTime() + 3 * FastOcpRabbitMqConstants.VALID_TIME
 							< now) {
-							LogUtil.info("send message {} failed after 3 min ", messageWithTime);
+							LogUtils.info("send message {} failed after 3 min ", messageWithTime);
 							RetryCache.this.del(entry.getKey());
 						} else if (messageWithTime.getTime() + FastOcpRabbitMqConstants.VALID_TIME
 							< now) {
 							DetailResponse res = sender.send(messageWithTime);
 
 							if (!res.isIfSuccess()) {
-								LogUtil.info("retry send message failed {} errMsg {}", messageWithTime,
+								LogUtils.info("retry send message failed {} errMsg {}", messageWithTime,
 									res.getErrMsg());
 							}
 						}

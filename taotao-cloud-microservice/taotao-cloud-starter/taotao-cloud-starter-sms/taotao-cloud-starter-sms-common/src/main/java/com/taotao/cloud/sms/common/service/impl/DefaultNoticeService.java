@@ -12,8 +12,8 @@
  */
 package com.taotao.cloud.sms.common.service.impl;
 
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.NotFindSendHandlerException;
 import com.taotao.cloud.sms.common.exception.SmsException;
 import com.taotao.cloud.sms.common.executor.SendAsyncThreadPoolExecutor;
@@ -56,7 +56,7 @@ public class DefaultNoticeService implements NoticeService {
 
 	@Override
 	public boolean phoneRegValidation(String phone) {
-		return StringUtil.isNotBlank(phone) && (StringUtil.isBlank(config.getReg())
+		return StringUtils.isNotBlank(phone) && (StringUtils.isBlank(config.getReg())
 			|| phone.matches(
 			config.getReg()));
 	}
@@ -85,14 +85,14 @@ public class DefaultNoticeService implements NoticeService {
 	private SendResult send0(NoticeData noticeData, Collection<String> phones) {
 		SendResult result = new SendResult();
 		if (phones.isEmpty()) {
-			LogUtil.debug("phones is empty");
+			LogUtils.debug("phones is empty");
 			return result;
 		}
 
 		List<String> phoneList = phones.stream().filter(this::phoneRegValidation).toList();
 
 		if (phoneList.isEmpty()) {
-			LogUtil.debug("after filter phones is empty");
+			LogUtils.debug("after filter phones is empty");
 			return result;
 		}
 
@@ -111,7 +111,7 @@ public class DefaultNoticeService implements NoticeService {
 		}
 
 		if (result.exception != null) {
-			LogUtil.debug(result.exception.getLocalizedMessage());
+			LogUtils.debug(result.exception.getLocalizedMessage());
 		}
 
 		return result;

@@ -2,7 +2,7 @@ package com.taotao.cloud.common.serializer.impl;
 
 import com.taotao.cloud.common.serializer.Serializer;
 import com.taotao.cloud.common.serializer.SerializerConstants;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 
@@ -26,7 +26,7 @@ public class HexSerializer implements Serializer {
                 return new byte[0];
             }
         }
-	    LogUtil.error("hex 只支持字符串序列化 ");
+	    LogUtils.error("hex 只支持字符串序列化 ");
         return new byte[0];
     }
 

@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.monitor.configuration;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.model.DingerSender;
@@ -26,7 +26,6 @@ import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
 import de.codecentric.boot.admin.server.domain.events.InstanceStatusChangedEvent;
 import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
@@ -82,7 +81,7 @@ public class NotifierConfiguration {
 
 			StringBuilder str = new StringBuilder();
 			str.append("taotaocloud微服务监控 \n");
-			str.append("[时间戳]: ").append(DateUtil.format(LocalDateTime.now(), DateUtil.DEFAULT_DATE_TIME_FORMAT)).append("\n");
+			str.append("[时间戳]: ").append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT)).append("\n");
 			str.append("[服务名] : ").append(serviceName).append("\n");
 			str.append("[服务ip]: ").append(serviceUrl).append("\n");
 
@@ -113,7 +112,7 @@ public class NotifierConfiguration {
 
 					Map<String, Object> details = ((InstanceStatusChangedEvent) event).getStatusInfo()
 						.getDetails();
-					str.append("[服务详情]: ").append(JsonUtil.toJSONString(details));
+					str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
 
 					sender.send(
 						MessageSubType.TEXT,

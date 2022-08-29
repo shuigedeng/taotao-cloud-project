@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.multi;
 
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.ALGORITHM_FIELD_INJECT_FAILED;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.model.DingerConfig;
 import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 import com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer;
@@ -70,7 +70,7 @@ public class MultiDingerAlgorithmInjectRegister implements ApplicationContextAwa
 		if (MultiDingerAlgorithmInjectRegister.applicationContext == null) {
 			MultiDingerAlgorithmInjectRegister.applicationContext = applicationContext;
 		} else {
-			LogUtil.warn("applicationContext is not null.");
+			LogUtils.warn("applicationContext is not null.");
 		}
 	}
 
@@ -78,7 +78,7 @@ public class MultiDingerAlgorithmInjectRegister implements ApplicationContextAwa
 	public void afterPropertiesSet() throws Exception {
 		if (MultiDingerScannerRegistrar.MULTIDINGER_ALGORITHM_DEFINITION_MAP.isEmpty()) {
 			// 当前算法处理容器为空, MultiDinger失效。 可能由于所有的算法处理器中无注入属性信息
-			LogUtil.info("AlgorithmHandler Container is Empty.");
+			LogUtils.info("AlgorithmHandler Container is Empty.");
 			return;
 		}
 
@@ -115,7 +115,7 @@ public class MultiDingerAlgorithmInjectRegister implements ApplicationContextAwa
 				v.getKey(), new MultiDingerConfig(algorithmHandler, dingerConfigs)
 			);
 
-			LogUtil.info(
+			LogUtils.info(
 				"dingerClassName={} exist spring inject info and algorithmHandler class={}, dingerConfigs={}.",
 				v.getKey(), algorithm.getSimpleName(), dingerConfigs.size());
 		}

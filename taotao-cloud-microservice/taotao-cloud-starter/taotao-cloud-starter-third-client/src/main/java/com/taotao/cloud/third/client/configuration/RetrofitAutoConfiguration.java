@@ -19,7 +19,7 @@ package com.taotao.cloud.third.client.configuration;
 import com.github.lianjiatech.retrofit.spring.boot.core.RetrofitScan;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.third.client.properties.RetrofitProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -43,6 +43,6 @@ public class RetrofitAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RetrofitAutoConfiguration.class, StarterName.LAYTPL_STARTER);
+		LogUtils.started(RetrofitAutoConfiguration.class, StarterName.LAYTPL_STARTER);
 	}
 }

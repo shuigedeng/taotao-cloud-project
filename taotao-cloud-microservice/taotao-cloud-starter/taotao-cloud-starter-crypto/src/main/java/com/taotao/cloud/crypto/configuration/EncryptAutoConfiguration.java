@@ -17,7 +17,7 @@ package com.taotao.cloud.crypto.configuration;
 
 import com.taotao.cloud.crypto.properties.EncryptProperties;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.crypto.encrypt.EncryptAspect;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.InitializingBean;
@@ -41,13 +41,13 @@ public class EncryptAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(EncryptAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(EncryptAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean
 	@ConditionalOnBean({StringEncryptor.class})
 	public EncryptAspect encryptAspect(StringEncryptor stringEncryptor) {
-		LogUtil.started(EncryptAspect.class, StarterName.WEB_STARTER);
+		LogUtils.started(EncryptAspect.class, StarterName.WEB_STARTER);
 
 		return new EncryptAspect(stringEncryptor);
 	}

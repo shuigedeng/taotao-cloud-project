@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.task.xxljob;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +16,6 @@ public class TestExecute implements EveryMinuteExecute {
 
 	@Override
 	public void execute() {
-		LogUtil.info(Thread.currentThread().getName() + "============ 每分钟执行");
+		LogUtils.info(Thread.currentThread().getName() + "============ 每分钟执行");
 	}
 }

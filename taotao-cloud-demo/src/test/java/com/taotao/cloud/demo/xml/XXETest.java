@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.xml;
 
-import com.taotao.cloud.common.utils.common.XmlHelper;
+import com.taotao.cloud.common.utils.common.XmlUtils;
 import org.junit.Test;
 import org.xml.sax.SAXParseException;
 
@@ -14,7 +14,7 @@ public class XXETest {
 			"   ]>\n" +
 			"   <c>&file;</c>";
 
-		XmlHelper helper = XmlHelper.safe(xml);
+		XmlUtils helper = XmlUtils.safe(xml);
 		System.out.println(helper.getString("c"));
 	}
 
@@ -28,7 +28,7 @@ public class XXETest {
 
 		// 注意：windows 下找不到文件会报错
 		try {
-			XmlHelper helper = XmlHelper.unsafe(xml);
+			XmlUtils helper = XmlUtils.unsafe(xml);
 			System.out.println(helper.getString("c"));
 		} catch (Throwable e) {
 			e.printStackTrace();

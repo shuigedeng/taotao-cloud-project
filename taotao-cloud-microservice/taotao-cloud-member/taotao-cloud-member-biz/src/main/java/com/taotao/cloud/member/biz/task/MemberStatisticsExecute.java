@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.task;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.report.api.web.dto.MemberStatisticsDTO;
 import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
@@ -46,7 +46,7 @@ public class MemberStatisticsExecute implements EveryDayExecute {
             memberStatisticsData.setNewlyAdded(memberStatisticsService.newlyAdded(startTime, endTime).data());
             memberStatisticsService.saveMemberStatistics(memberStatisticsData);
         } catch (Exception e) {
-            LogUtil.error("每日会员统计功能异常：", e);
+            LogUtils.error("每日会员统计功能异常：", e);
         }
     }
 }

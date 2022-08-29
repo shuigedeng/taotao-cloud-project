@@ -19,8 +19,8 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.model.PageModel;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -84,7 +84,7 @@ public class SearchBuilder {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		SearchRequest searchRequest = new SearchRequest(indexName);
 		searchRequest.source(searchSourceBuilder);
-		RestHighLevelClient client = ContextUtil.getBean(RestHighLevelClient.class, true);
+		RestHighLevelClient client = ContextUtils.getBean(RestHighLevelClient.class, true);
 		return new SearchBuilder(searchRequest, searchSourceBuilder, client);
 	}
 
@@ -99,7 +99,7 @@ public class SearchBuilder {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		SearchRequest searchRequest = new SearchRequest();
 		searchRequest.source(searchSourceBuilder);
-		RestHighLevelClient client = ContextUtil.getBean(RestHighLevelClient.class, true);
+		RestHighLevelClient client = ContextUtils.getBean(RestHighLevelClient.class, true);
 		return new SearchBuilder(searchRequest, searchSourceBuilder, client);
 	}
 
@@ -275,14 +275,14 @@ public class SearchBuilder {
 		List<String> list = new ArrayList<>();
 		if (searchHits != null) {
 			searchHits.forEach(item -> {
-				Map map = JsonUtil.toMap(item.getSourceAsString());
+				Map map = JsonUtils.toMap(item.getSourceAsString());
 				map.put("id", item.getId());
 
 				Map<String, HighlightField> highlightFields = item.getHighlightFields();
 				if (highlightFields != null) {
 					populateHighLightedFields(map, highlightFields);
 				}
-				String str = JsonUtil.toJSONString(map);
+				String str = JsonUtils.toJSONString(map);
 				list.add(str);
 			});
 		}

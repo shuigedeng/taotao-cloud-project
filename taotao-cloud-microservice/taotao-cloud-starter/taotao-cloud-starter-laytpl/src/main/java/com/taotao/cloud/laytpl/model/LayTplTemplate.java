@@ -19,8 +19,8 @@ package com.taotao.cloud.laytpl.model;
 import cn.hutool.script.JavaScriptEngine;
 import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.support.function.Unchecked;
-import com.taotao.cloud.common.utils.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.io.IoUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.common.utils.io.IoUtils;
 import com.taotao.cloud.laytpl.exception.LayTplException;
 import com.taotao.cloud.laytpl.js.JsConsole;
 import com.taotao.cloud.laytpl.js.JsContext;
@@ -54,7 +54,7 @@ public class LayTplTemplate implements ApplicationContextAware, InitializingBean
 	private final ConcurrentMap<String, String> tplCache = new ConcurrentHashMap<>();
 	private final Function<String, String> tplFunction = Unchecked.function(tpl -> {
 		Resource resource = LayTplTemplate.this.getApplicationContext().getResource(tpl);
-		return IoUtil.readToString(resource.getInputStream());
+		return IoUtils.readToString(resource.getInputStream());
 	});
 	private final LayTplProperties tplProperties;
 	private final JsConsole console;
@@ -102,7 +102,7 @@ public class LayTplTemplate implements ApplicationContextAware, InitializingBean
 		final String tplPath = tplProperties.getPrefix() + tplName;
 		try {
 			String html = tplProperties.isCache()
-				? CollectionUtil.computeIfAbsent(tplCache, tplPath, tplFunction)
+				? CollectionUtils.computeIfAbsent(tplCache, tplPath, tplFunction)
 				: tplFunction.apply(tplPath);
 			return renderHtml(html, data);
 		} catch (ScriptException e) {

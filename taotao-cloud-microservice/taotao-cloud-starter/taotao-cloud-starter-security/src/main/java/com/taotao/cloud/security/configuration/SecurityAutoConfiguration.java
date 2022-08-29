@@ -16,8 +16,8 @@
 package com.taotao.cloud.security.configuration;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.servlet.ResponseUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -93,14 +93,14 @@ public class SecurityAutoConfiguration {
 		@Override
 		public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
-			LogUtil.error("认证失败", authException);
+			LogUtils.error("认证失败", authException);
 			// 触发重定向到登陆页面
 			if (authorizationCodeGrantRequestMatcher.matches(request)) {
 				loginUrlAuthenticationEntryPoint.commence(request, response, authException);
 				return;
 			}
 
-			ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
+			ResponseUtils.fail(response, ResultEnum.UNAUTHORIZED);
 		}
 
 		private static class AuthorizationCodeGrantRequestMatcher implements RequestMatcher {

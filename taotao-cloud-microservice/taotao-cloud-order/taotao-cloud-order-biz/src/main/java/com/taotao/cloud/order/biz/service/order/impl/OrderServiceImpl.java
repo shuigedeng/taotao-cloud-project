@@ -21,8 +21,8 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.api.dto.GoodsCompleteMessage;
 import com.taotao.cloud.member.api.web.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
@@ -172,9 +172,9 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 			orders.add(order);
 			String message = "订单[" + item.getSn() + "]创建";
 			//记录日志
-			orderLogs.add(new OrderLog(item.getSn(), SecurityUtil.getUserId(),
-				SecurityUtil.getCurrentUser().getType(),
-				SecurityUtil.getUsername(), message));
+			orderLogs.add(new OrderLog(item.getSn(), SecurityUtils.getUserId(),
+				SecurityUtils.getCurrentUser().getType(),
+				SecurityUtils.getUsername(), message));
 			item.getCheckedSkuList().forEach(
 				sku -> orderItems.add(new OrderItem(sku, item, tradeDTO))
 			);
@@ -649,7 +649,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		for (OrderBatchDeliverDTO orderBatchDeliverDTO : list) {
 			//查看订单号是否存在-是否是当前店铺的订单
 			Order order = this.getOne(new LambdaQueryWrapper<Order>()
-				.eq(Order::getStoreId, SecurityUtil.getCurrentUser().getStoreId())
+				.eq(Order::getStoreId, SecurityUtils.getCurrentUser().getStoreId())
 				.eq(Order::getSn, orderBatchDeliverDTO.getOrderSn()));
 			if (order == null) {
 				throw new BusinessException("订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");
@@ -663,7 +663,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 					orderBatchDeliverDTO.setLogisticsId(item.getId());
 				}
 			});
-			if (StringUtil.isEmpty(orderBatchDeliverDTO.getLogisticsId())) {
+			if (StringUtils.isEmpty(orderBatchDeliverDTO.getLogisticsId())) {
 				throw new BusinessException(
 					"物流公司：'" + orderBatchDeliverDTO.getLogisticsName() + " '不存在");
 			}
@@ -792,7 +792,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		if (tradeDTO.getParentOrderSn() != null) {
 			//判断用户不能参与自己发起的拼团活动
 			Order parentOrder = this.getBySn(tradeDTO.getParentOrderSn());
-			if (parentOrder.getMemberId().equals(SecurityUtil.getUserId())) {
+			if (parentOrder.getMemberId().equals(SecurityUtils.getUserId())) {
 				throw new BusinessException(ResultEnum.PINTUAN_JOIN_ERROR);
 			}
 		}

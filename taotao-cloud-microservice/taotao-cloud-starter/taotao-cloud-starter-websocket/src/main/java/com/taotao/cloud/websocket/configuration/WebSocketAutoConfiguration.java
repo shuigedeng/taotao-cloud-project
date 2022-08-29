@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.websocket.configuration;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.websocket.interceptor.WebSocketChannelInterceptor;
 import com.taotao.cloud.websocket.interceptor.WebSocketHandshakeHandler;
 import com.taotao.cloud.websocket.processor.WebSocketClusterProcessor;
@@ -67,14 +67,14 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 
 	@PostConstruct
 	public void postConstruct() {
-		LogUtil.info("Plugin [WebSocket] Auto Configure.");
+		LogUtils.info("Plugin [WebSocket] Auto Configure.");
 	}
 
 	@Bean
 	public WebSocketChannelInterceptor webSocketChannelInterceptor() {
 		WebSocketChannelInterceptor webSocketChannelInterceptor = new WebSocketChannelInterceptor();
 		webSocketChannelInterceptor.setWebSocketProperties(customWebSocketProperties);
-		LogUtil.info("Bean [Web Socket Inbound Channel Interceptor] Auto Configure.");
+		LogUtils.info("Bean [Web Socket Inbound Channel Interceptor] Auto Configure.");
 		return webSocketChannelInterceptor;
 	}
 
@@ -82,7 +82,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	public WebSocketHandshakeHandler webSocketHandshakeHandler() {
 		WebSocketHandshakeHandler webSocketHandshakeHandler = new WebSocketHandshakeHandler();
 		webSocketHandshakeHandler.setWebSocketProperties(customWebSocketProperties);
-		LogUtil.info("Bean [Web Socket Handshake Handler] Auto Configure.");
+		LogUtils.info("Bean [Web Socket Handshake Handler] Auto Configure.");
 		return webSocketHandshakeHandler;
 	}
 
@@ -92,7 +92,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 		webSocketMessageSender.setSimpMessagingTemplate(simpMessagingTemplate);
 		webSocketMessageSender.setSimpUserRegistry(simpUserRegistry);
 		webSocketMessageSender.setWebSocketProperties(customWebSocketProperties);
-		LogUtil.info("Bean [Web Socket Message Sender] Auto Configure.");
+		LogUtils.info("Bean [Web Socket Message Sender] Auto Configure.");
 		return webSocketMessageSender;
 	}
 
@@ -103,7 +103,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 		webSocketClusterProcessor.setWebSocketProperties(customWebSocketProperties);
 		webSocketClusterProcessor.setWebSocketMessageSender(webSocketMessageSender);
 		webSocketClusterProcessor.setRedissonClient(redissonClient);
-		LogUtil.info("Bean [Web Socket Cluster Processor] Auto Configure.");
+		LogUtils.info("Bean [Web Socket Cluster Processor] Auto Configure.");
 		return webSocketClusterProcessor;
 	}
 

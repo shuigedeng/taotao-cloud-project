@@ -21,9 +21,9 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.JsonUtil;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.annotation.LoginUser;
@@ -92,7 +92,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(WebMvcAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(WebMvcAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 		//把自定义的序列化规则设置进入转换器里
 		for (HttpMessageConverter<?> converter : converters) {
 			if (converter instanceof MappingJackson2HttpMessageConverter jackson2Converter) {
-				jackson2Converter.setObjectMapper(JsonUtil.MAPPER);
+				jackson2Converter.setObjectMapper(JsonUtils.MAPPER);
 			}
 		}
 	}
@@ -324,7 +324,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 			LoginUser user = methodParameter.getParameterAnnotation(LoginUser.class);
 			boolean value = user.value();
 			HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
-			SecurityUser loginUser = SecurityUtil.getCurrentUser();
+			SecurityUser loginUser = SecurityUtils.getCurrentUser();
 
 			//根据value状态获取更多用户信息，待实现
 			return loginUser;

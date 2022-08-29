@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -52,7 +52,7 @@ public class PurchaseListController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), PurchaseListInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), PurchaseListInfoVO.class);
                     isData = false;
                 }
             }
@@ -60,8 +60,8 @@ public class PurchaseListController {
         if (isData) {
             PurchaseListEntity entity = purchaseListService.getInfo(id);
             List<PurchaseListEntryEntity> entityList = purchaseListService.getPurchaseEntryList(id);
-            vo = JsonUtil.getJsonToBean(entity, PurchaseListInfoVO.class);
-            vo.setEntryList(JsonUtil.getJsonToList(entityList, PurchaseListEntryEntityInfoModel.class));
+            vo = JsonUtils.getJsonToBean(entity, PurchaseListInfoVO.class);
+            vo.setEntryList(JsonUtils.getJsonToList(entityList, PurchaseListEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -76,8 +76,8 @@ public class PurchaseListController {
     @Operation("新建日常物品采购清单")
     @PostMapping
     public Result create(@RequestBody PurchaseListForm purchaseListForm) throws WorkFlowException {
-        PurchaseListEntity procurement = JsonUtil.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
-        List<PurchaseListEntryEntity> procurementEntryList = JsonUtil.getJsonToList(purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
+        PurchaseListEntity procurement = JsonUtils.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
+        List<PurchaseListEntryEntity> procurementEntryList = JsonUtils.getJsonToList(purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(purchaseListForm.getStatus())) {
             purchaseListService.save(procurement.getId(), procurement, procurementEntryList);
             return Result.success(MsgCode.SU002.get());
@@ -97,8 +97,8 @@ public class PurchaseListController {
     @Operation("修改日常物品采购清单")
     @PutMapping("/{id}")
     public Result update(@RequestBody PurchaseListForm purchaseListForm, @PathVariable("id") String id) throws WorkFlowException {
-        PurchaseListEntity procurement = JsonUtil.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
-        List<PurchaseListEntryEntity> procurementEntryList = JsonUtil.getJsonToList(purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
+        PurchaseListEntity procurement = JsonUtils.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
+        List<PurchaseListEntryEntity> procurementEntryList = JsonUtils.getJsonToList(purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(purchaseListForm.getStatus())) {
             purchaseListService.save(id, procurement, procurementEntryList);
             return Result.success(MsgCode.SU002.get());

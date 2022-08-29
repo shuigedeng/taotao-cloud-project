@@ -3,7 +3,7 @@ package com.taotao.cloud.common.utils.common;
 import cn.hutool.core.util.CharUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 
 /**
  * 自动递增填充零
@@ -39,7 +39,7 @@ public class AutoIncrementZerofillUtils {
 				if (autoIncrementValueI != 10) {
 					String pad = StrUtil.padPre("0", cycleIndex, '0');
 					String replaceValue = Integer.toString(autoIncrementValueI) + pad;
-					return StringUtil.replace(str, replaceValue, i, i + 1 + replaceValue.length());
+					return StringUtils.replace(str, replaceValue, i, i + 1 + replaceValue.length());
 				}
 			}
 			
@@ -65,7 +65,7 @@ public class AutoIncrementZerofillUtils {
 				if (autoDecrValueI != -1) {
 					String pad = StrUtil.padPre("9", cycleIndex, '9');
 					String replaceValue = Integer.toString(autoDecrValueI) + pad;
-					return StringUtil.replace(str, replaceValue, i, i + 1 + replaceValue.length());
+					return StringUtils.replace(str, replaceValue, i, i + 1 + replaceValue.length());
 				}
 			}
 			

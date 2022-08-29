@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.oss.ftp;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
 import com.taotao.cloud.oss.common.service.AbstractUploadFileService;
@@ -51,7 +51,7 @@ public class FtpUploadFileServiceImpl extends AbstractUploadFileService {
 			uploadFileInfo.setUrl("");
 			return uploadFileInfo;
 		} catch (Exception e) {
-			LogUtil.error("[Ftp]文件上传失败:", e);
+			LogUtils.error("[Ftp]文件上传失败:", e);
 			throw new UploadFileException("[Ftp]文件上传失败");
 		}
 	}
@@ -68,7 +68,7 @@ public class FtpUploadFileServiceImpl extends AbstractUploadFileService {
 			uploadFileInfo.setUrl("");
 			return uploadFileInfo;
 		} catch (Exception e) {
-			LogUtil.error("[Ftp]文件上传失败", e);
+			LogUtils.error("[Ftp]文件上传失败", e);
 			throw new UploadFileException("[Ftp]文件上传失败");
 		}
 	}
@@ -78,7 +78,7 @@ public class FtpUploadFileServiceImpl extends AbstractUploadFileService {
 		try {
 			ftpClientUtil.remove(uploadFileInfo.getUrl());
 		} catch (Exception e) {
-			LogUtil.error("[Ftp]文件删除失败:", e);
+			LogUtils.error("[Ftp]文件删除失败:", e);
 			throw new UploadFileException("[Ftp]文件删除失败");
 		}
 		return uploadFileInfo;

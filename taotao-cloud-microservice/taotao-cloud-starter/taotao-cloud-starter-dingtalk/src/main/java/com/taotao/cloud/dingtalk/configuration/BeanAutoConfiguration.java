@@ -19,7 +19,7 @@ import static com.taotao.cloud.dingtalk.constant.DingerConstant.MARKDOWN_MESSAGE
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.TEXT_MESSAGE;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.multi.MultiDingerAlgorithmInjectRegister;
 import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.support.CustomMessage;
@@ -52,7 +52,7 @@ public class BeanAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(BeanAutoConfiguration.class, StarterName.DINGTALK_STARTER);
+		LogUtils.started(BeanAutoConfiguration.class, StarterName.DINGTALK_STARTER);
 	}
 
 	/**

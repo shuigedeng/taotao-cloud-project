@@ -1,6 +1,6 @@
 package com.taotao.cloud.security.access;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -102,13 +102,13 @@ public class RoleBasedVoter implements AccessDecisionVoter<Object> {
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.warn("正则匹配错误,可能脚本存在问题:{}", e.getMessage());
+			LogUtils.warn("正则匹配错误,可能脚本存在问题:{}", e.getMessage());
 		}
 
 		try {
 			final Object eval = engine.eval(matchRoles);
 			if (!(eval instanceof Boolean)) {
-				LogUtil.error("脚本执行失败,返回值非 Bool 类型,默认是禁止访问:{},{}", originScript,
+				LogUtils.error("脚本执行失败,返回值非 Bool 类型,默认是禁止访问:{},{}", originScript,
 					matchRoles);
 				return ACCESS_DENIED;
 			}
@@ -117,7 +117,7 @@ public class RoleBasedVoter implements AccessDecisionVoter<Object> {
 			}
 			return ((Boolean) eval) ? ACCESS_GRANTED : ACCESS_DENIED;
 		} catch (ScriptException e) {
-			LogUtil.error("脚本执行错误:[origin:{}][parse:{}][message:{}]", originScript,
+			LogUtils.error("脚本执行错误:[origin:{}][parse:{}][message:{}]", originScript,
 				matchRoles, e.getMessage());
 			return ACCESS_DENIED;
 		}

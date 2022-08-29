@@ -16,13 +16,12 @@
 package com.taotao.cloud.monitor.strategy;
 
 import com.taotao.cloud.common.model.PropertyCache;
-import com.taotao.cloud.common.utils.bean.BeanUtil;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.model.Report;
-import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -102,7 +101,7 @@ public class Rule {
 			try {
 				if (checkValue instanceof Number) {
 					double checkValue2 = ((Number) checkValue).doubleValue();
-					double warnValue = (BeanUtil.convert(value, Number.class)).doubleValue();
+					double warnValue = (BeanUtils.convert(value, Number.class)).doubleValue();
 
 					if (type == RuleType.less && checkValue2 < warnValue) {
 						return true;
@@ -121,7 +120,7 @@ public class Rule {
 					}
 				}
 			} catch (Exception exp) {
-				LogUtil.error("health", "check 规则检查出错", exp);
+				LogUtils.error("health", "check 规则检查出错", exp);
 			}
 			return false;
 		}
@@ -212,19 +211,19 @@ public class Rule {
 		 * @since 2022-04-27 17:25:44
 		 */
 		public RulesAnalyzer() {
-			PropertyCache propertyCache = ContextUtil.getBean(PropertyCache.class, false);
+			PropertyCache propertyCache = ContextUtils.getBean(PropertyCache.class, false);
 			if (Objects.nonNull(propertyCache)) {
 				//订阅配置改变，重新注册规则
 				propertyCache.listenUpdateCache("RulesAnalyzer 动态规则订阅", (map) -> {
 					for (Map.Entry<String, Object> e : map.entrySet()) {
 						String key = e.getKey();
 
-						if (StringUtils.startsWithIgnoreCase(key,
+						if (org.springframework.util.StringUtils.startsWithIgnoreCase(key,
 							"taotao.cloud.health.strategy.")) {
 							key = key.replace("taotao.cloud.health.strategy.", "");
 							Object rule = rules.get(key);
 							if (rule != null) {
-								registerRules(key, StringUtil.nullToEmpty(e.getValue()));
+								registerRules(key, StringUtils.nullToEmpty(e.getValue()));
 							}
 						}
 					}
@@ -293,7 +292,7 @@ public class Rule {
 		 * @since 2022-04-27 17:25:44
 		 */
 		public void registerRulesByProperties(String field) {
-			String value = PropertyUtil.getPropertyCache("taotao.cloud.health.strategy." + field,
+			String value = PropertyUtils.getPropertyCache("taotao.cloud.health.strategy." + field,
 				"");
 			registerRules(field, value);
 		}
@@ -319,7 +318,7 @@ public class Rule {
 								try {
 									ruleInfo.hitCallBack.run(item.getValue());
 								} catch (Exception exp) {
-									LogUtil.error("health", "analyse分析时执行报警回调规则出错", exp);
+									LogUtils.error("health", "analyse分析时执行报警回调规则出错", exp);
 								}
 							}
 						}
@@ -397,7 +396,7 @@ public class Rule {
 		public List<RuleInfo> parser(String text) {
 			List<RuleInfo> result = new ArrayList<>();
 			try {
-				if (StringUtil.isNotBlank(text)) {
+				if (StringUtils.isNotBlank(text)) {
 					if (text.startsWith("[") && text.endsWith("]")) {
 						text = text
 							.replace("[", "")
@@ -406,7 +405,7 @@ public class Rule {
 						String[] rules = text.split(";");
 						for (String r : rules) {
 							RuleType type = RuleType.getRuleType(r.charAt(0) + "");
-							String value = StringUtils.trimLeadingCharacter(r, r.charAt(0));
+							String value = org.springframework.util.StringUtils.trimLeadingCharacter(r, r.charAt(0));
 							//val numvalue = ConvertUtils.tryConvert(value, Number.class);
 							if (type != null) {
 								result.add(new RuleInfo(type, value, null));
@@ -415,7 +414,7 @@ public class Rule {
 					}
 				}
 			} catch (Exception exp) {
-				LogUtil.error("health", "parser规则解析出错", exp);
+				LogUtils.error("health", "parser规则解析出错", exp);
 			}
 			return result;
 		}

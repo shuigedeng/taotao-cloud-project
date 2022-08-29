@@ -3,7 +3,7 @@ package com.taotao.cloud.common.support.tuple.impl;
 
 import com.google.common.collect.Lists;
 import com.taotao.cloud.common.support.tuple.ITuple;
-import com.taotao.cloud.common.utils.collection.ArrayUtil;
+import com.taotao.cloud.common.utils.collection.ArrayUtils;
 
 
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public abstract class AbstractTuple implements ITuple {
 
 	@Override
 	public Object[] toArray() {
-		return ArrayUtil.toArray(valueList);
+		return ArrayUtils.toArray(valueList);
 	}
 
 	@Override

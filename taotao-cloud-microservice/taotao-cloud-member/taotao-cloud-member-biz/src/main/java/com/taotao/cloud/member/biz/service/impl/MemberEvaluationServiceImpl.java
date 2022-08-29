@@ -10,8 +10,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.SecurityUtil;
-import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
 import com.taotao.cloud.goods.api.web.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.web.query.EvaluationPageQuery;
@@ -156,7 +156,7 @@ public class MemberEvaluationServiceImpl extends
 		UpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.update();
 		updateWrapper.set("reply_status", true);
 		updateWrapper.set("reply", reply);
-		if (StringUtil.isNotBlank(replyImage)) {
+		if (StringUtils.isNotBlank(replyImage)) {
 			updateWrapper.set("have_reply_image", true);
 			updateWrapper.set("reply_image", replyImage);
 		}
@@ -205,7 +205,7 @@ public class MemberEvaluationServiceImpl extends
 		}
 
 		//判断是否是当前会员的订单
-		if (!order.orderBase().memberId().equals(SecurityUtil.getUserId())) {
+		if (!order.orderBase().memberId().equals(SecurityUtils.getUserId())) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_USER);
 		}
 	}

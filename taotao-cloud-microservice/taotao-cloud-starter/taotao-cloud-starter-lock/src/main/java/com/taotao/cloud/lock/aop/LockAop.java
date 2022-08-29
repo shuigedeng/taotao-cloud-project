@@ -17,7 +17,7 @@ package com.taotao.cloud.lock.aop;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.exception.LockException;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.lock.annotation.Lock;
 import com.taotao.cloud.lock.support.DistributedLock;
 import com.taotao.cloud.lock.support.ZLock;
@@ -96,10 +96,10 @@ public class LockAop {
 			}
 
 			if (lockObj != null) {
-				LogUtil.info("获取Redis分布式锁[成功]，加锁完成，开始执行业务逻辑...");
+				LogUtils.info("获取Redis分布式锁[成功]，加锁完成，开始执行业务逻辑...");
 				return point.proceed();
 			} else {
-				LogUtil.error("获取分布式锁[失败]");
+				LogUtils.error("获取分布式锁[失败]");
 				throw new LockException("锁等待超时");
 			}
 		} finally {

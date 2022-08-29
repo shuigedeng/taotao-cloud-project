@@ -1,6 +1,6 @@
 package com.taotao.cloud.sign.util.security;
 
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.properties.EncryptBodyProperties;
 import com.taotao.cloud.sign.exception.DecryptDtguaiException;
 import com.taotao.cloud.sign.exception.EncryptDtguaiException;
@@ -50,7 +50,7 @@ public class AesUtil implements ISecurity {
 			.orElseThrow(() -> new DecryptDtguaiException("aes加解密getKey异常password:{}" + password));
 
 		if (passwordBytes.length != KEY_LENGTH && passwordBytes.length != KEY_LENGTH << 1) {
-			LogUtil.error("aes钥匙长度为16或32,passwordBytes.length:{}", passwordBytes.length);
+			LogUtils.error("aes钥匙长度为16或32,passwordBytes.length:{}", passwordBytes.length);
 			throw new DecryptDtguaiException("aes钥匙长度为16或32");
 		}
 
@@ -83,7 +83,7 @@ public class AesUtil implements ISecurity {
 			ciphertext = cipher.doFinal(content.getBytes(StandardCharsets.UTF_8));
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
 			| InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
-			LogUtil.error("aes加密异常,e:{}", e.getMessage());
+			LogUtils.error("aes加密异常,e:{}", e.getMessage());
 			throw new EncryptDtguaiException("aes加密异常");
 		}
 		byte[] encrypted = new byte[iv.length + ciphertext.length];
@@ -120,7 +120,7 @@ public class AesUtil implements ISecurity {
 			ciphertext = cipher.doFinal(decoded, GCM_IV_LENGTH, decoded.length - GCM_IV_LENGTH);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
 			| InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
-			LogUtil.error("aes解密异常,e:{}", e.getMessage());
+			LogUtils.error("aes解密异常,e:{}", e.getMessage());
 			throw new DecryptDtguaiException("aes解密异常");
 		}
 		return new String(ciphertext, StandardCharsets.UTF_8);

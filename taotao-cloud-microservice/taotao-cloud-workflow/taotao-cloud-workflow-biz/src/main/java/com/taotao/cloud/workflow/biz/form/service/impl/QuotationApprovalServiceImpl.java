@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.QuotationApprovalEntity;
@@ -45,13 +45,13 @@ public class QuotationApprovalServiceImpl extends ServiceImpl<QuotationApprovalM
             this.save(entity);
             billRuleService.useBillNumber("WF_QuotationApprovalNo");
             //添加附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             //更新附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         //流程信息
@@ -67,13 +67,13 @@ public class QuotationApprovalServiceImpl extends ServiceImpl<QuotationApprovalM
             this.save(entity);
             billRuleService.useBillNumber("WF_QuotationApprovalNo");
             //添加附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             //更新附件
-            List<FileModel> data = JsonUtil.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         //流程信息
@@ -82,8 +82,8 @@ public class QuotationApprovalServiceImpl extends ServiceImpl<QuotationApprovalM
 
     @Override
     public void data(String id, String data) {
-        QuotationApprovalForm quotationApprovalForm = JsonUtil.getJsonToBean(data, QuotationApprovalForm.class);
-        QuotationApprovalEntity entity = JsonUtil.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
+        QuotationApprovalForm quotationApprovalForm = JsonUtils.getJsonToBean(data, QuotationApprovalForm.class);
+        QuotationApprovalEntity entity = JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -19,10 +19,10 @@ import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.common.model.Callable.Func0;
-import com.taotao.cloud.common.utils.common.PropertyUtil;
-import com.taotao.cloud.common.utils.context.ContextUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.common.utils.number.NumberUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.number.NumberUtils;
 import com.taotao.cloud.core.properties.CoreProperties;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -61,7 +61,7 @@ public class Collector {
 	}
 
 	public static Collector getCollector() {
-		return ContextUtil.getBean(Collector.class, true);
+		return ContextUtils.getBean(Collector.class, true);
 	}
 
 	/**
@@ -99,13 +99,13 @@ public class Collector {
 			if (obj instanceof Hook hookObj) {
 				hookObj.setCoreProperties(coreProperties);
 				hookObj.setKey(key);
-				hookObj.setMaxLength(PropertyUtil.getPropertyCache(key + ".length", 10));
+				hookObj.setMaxLength(PropertyUtils.getPropertyCache(key + ".length", 10));
 
 				return hookObj;
 			}
 			return obj;
 		} catch (Exception e) {
-			LogUtil.error(e);
+			LogUtils.error(e);
 			throw new BaseException(e);
 		}
 	}
@@ -369,7 +369,7 @@ public class Collector {
 				return result;
 			} catch (Exception exp) {
 				lastErrorPerSecond.getAndIncrement();
-				LogUtil.error(exp);
+				LogUtils.error(exp);
 				throw new RuntimeException(exp);
 			} finally {
 				current.getAndDecrement();
@@ -397,7 +397,7 @@ public class Collector {
 					lastMinTimeSpan = last.getTime();
 				}
 			} catch (Exception exp) {
-				LogUtil.error(exp, "Collector hook 保存耗时统计出错");
+				LogUtils.error(exp, "Collector hook 保存耗时统计出错");
 			}
 		}
 
@@ -422,7 +422,7 @@ public class Collector {
 					lastMinTimeSpanPerMinute = last.getTime();
 				}
 			} catch (Exception exp) {
-				LogUtil.error(exp, "Collector hook 保存耗时统计出错");
+				LogUtils.error(exp, "Collector hook 保存耗时统计出错");
 			}
 		}
 
@@ -734,7 +734,7 @@ public class Collector {
 			}
 
 			if (tagCache.size() > super.size()) {
-				LogUtil.info("tag cache 缓存存在溢出风险");
+				LogUtils.info("tag cache 缓存存在溢出风险");
 			}
 
 			if (super.add(sortInfo)) {
@@ -763,7 +763,7 @@ public class Collector {
 					return last();
 				}
 			} catch (NoSuchElementException e) {
-				LogUtil.error(e);
+				LogUtils.error(e);
 			}
 			return null;
 		}
@@ -783,7 +783,7 @@ public class Collector {
 					remove(last);
 				}
 				if (count < -10) {
-					LogUtil.error("[严重bug] remove more,item:" + (last != null ? last.toString()
+					LogUtils.error("[严重bug] remove more,item:" + (last != null ? last.toString()
 						: " 长时间无法移除导致死循环"));
 					break;
 				}
@@ -800,10 +800,10 @@ public class Collector {
 			StringBuilder sb = new StringBuilder();
 			for (SortInfo sortInfo : this) {
 				sb.append(String.format(" [耗时ms]%s [tag]%s [次数]%s [最大耗时ms]%s\r\n",
-					NumberUtil.scale(sortInfo.time, 2),
+					NumberUtils.scale(sortInfo.time, 2),
 					sortInfo.tag.toString(),
 					sortInfo.count,
-					NumberUtil.scale(sortInfo.maxTime, 2)));
+					NumberUtils.scale(sortInfo.maxTime, 2)));
 			}
 			return sb.toString();
 		}

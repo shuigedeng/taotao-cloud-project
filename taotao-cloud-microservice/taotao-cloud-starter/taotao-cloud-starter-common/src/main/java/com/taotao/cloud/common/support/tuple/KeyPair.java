@@ -17,7 +17,7 @@
 package com.taotao.cloud.common.support.tuple;
 
 
-import com.taotao.cloud.common.utils.secure.RSAUtil;
+import com.taotao.cloud.common.utils.secure.RSAUtils;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
@@ -53,11 +53,11 @@ public class KeyPair {
 	}
 
 	public String getPublicBase64() {
-		return RSAUtil.getKeyString(this.getPublic());
+		return RSAUtils.getKeyString(this.getPublic());
 	}
 
 	public String getPrivateBase64() {
-		return RSAUtil.getKeyString(this.getPrivate());
+		return RSAUtils.getKeyString(this.getPrivate());
 	}
 
 	@Override

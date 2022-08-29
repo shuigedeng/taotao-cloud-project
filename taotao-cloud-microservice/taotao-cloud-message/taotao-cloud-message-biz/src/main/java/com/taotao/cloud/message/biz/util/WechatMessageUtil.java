@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.message.api.enums.WechatMessageItemEnums;
 import com.taotao.cloud.message.biz.entity.WechatMPMessage;
 import com.taotao.cloud.message.biz.entity.WechatMessage;
@@ -251,7 +251,7 @@ public class WechatMessageUtil {
             case LOGISTICS_NAME:
                 return order.getLogisticsName();
             case LOGISTICS_TIME:
-                return DateUtil.toString(order.getLogisticsTime(), DateUtil.STANDARD_FORMAT);
+                return DateUtils.toString(order.getLogisticsTime(), DateUtils.STANDARD_FORMAT);
             default:
                 return "";
         }

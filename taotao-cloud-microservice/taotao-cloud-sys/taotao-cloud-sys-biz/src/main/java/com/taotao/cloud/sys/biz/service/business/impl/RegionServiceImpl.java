@@ -23,9 +23,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.http.HttpRequest;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.common.OrikaUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.common.OrikaUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
 import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -169,7 +169,7 @@ public class RegionServiceImpl extends
 		List<RegionVO> regionVOS = new ArrayList<>();
 		regions.stream().filter(region -> ("province").equals(region.getLevel())).forEach(item -> {
 			RegionVO vo = new RegionVO();
-			OrikaUtil.copy(item, vo);
+			OrikaUtils.copy(item, vo);
 			regionVOS.add(vo);
 		});
 
@@ -177,7 +177,7 @@ public class RegionServiceImpl extends
 			for (RegionVO region : regionVOS) {
 				if (region.getId().equals(item.getParentId())) {
 					RegionVO vo = new RegionVO();
-					OrikaUtil.copy(item, vo);
+					OrikaUtils.copy(item, vo);
 					region.getChildren().add(vo);
 				}
 			}
@@ -291,7 +291,7 @@ public class RegionServiceImpl extends
 				redisRepository.setEx(RedisConstant.REGIONS_KEY, jsonString, 30 * 24 * 60 * 60);
 			}
 		} catch (Exception e) {
-			LogUtil.error("同步行政数据错误", e);
+			LogUtils.error("同步行政数据错误", e);
 		}
 	}
 
@@ -407,7 +407,7 @@ public class RegionServiceImpl extends
 		if ("100000".equals(code) && "country".equals(level)) {
 			record.setId(1L);
 		} else {
-			record.setId(IdGeneratorUtil.getId());
+			record.setId(IdGeneratorUtils.getId());
 		}
 
 		StringBuilder megName = new StringBuilder();

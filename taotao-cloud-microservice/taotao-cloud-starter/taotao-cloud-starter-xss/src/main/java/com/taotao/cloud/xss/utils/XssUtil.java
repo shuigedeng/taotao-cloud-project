@@ -17,7 +17,7 @@ package com.taotao.cloud.xss.utils;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Element;
@@ -84,20 +84,20 @@ public class XssUtil {
 				"<[\r\n| | ]*script[\r\n| | ]*>(.*?)</[\r\n| | ]*script[\r\n| | ]*>",
 				Pattern.CASE_INSENSITIVE);
 
-		LogUtil.debug(" start read XSS config file [" + ANTISAMY_SLASHDOT_XML + "]");
+		LogUtils.debug(" start read XSS config file [" + ANTISAMY_SLASHDOT_XML + "]");
 		InputStream inputStream = XssUtil.class.getClassLoader()
 				.getResourceAsStream(ANTISAMY_SLASHDOT_XML);
 		try {
 			policy = Policy.getInstance(inputStream);
-			LogUtil.debug("read XSS config file [" + ANTISAMY_SLASHDOT_XML + "] success");
+			LogUtils.debug("read XSS config file [" + ANTISAMY_SLASHDOT_XML + "] success");
 		} catch (PolicyException e) {
-			LogUtil.error("read XSS config file [" + ANTISAMY_SLASHDOT_XML + "] fail , reason:", e);
+			LogUtils.error("read XSS config file [" + ANTISAMY_SLASHDOT_XML + "] fail , reason:", e);
 		} finally {
 			if (inputStream != null) {
 				try {
 					inputStream.close();
 				} catch (IOException e) {
-					LogUtil.error(
+					LogUtils.error(
 							"close XSS config file [" + ANTISAMY_SLASHDOT_XML + "] fail , reason:",
 							e);
 				}
@@ -117,13 +117,13 @@ public class XssUtil {
 		AntiSamy antiSamy = new AntiSamy();
 
 		try {
-			LogUtil.debug("raw value before xssClean: " + paramValue);
+			LogUtils.debug("raw value before xssClean: " + paramValue);
 			if (isIgnoreParamValue(paramValue, ignoreParamValueList)) {
-				LogUtil.debug("ignore the xssClean,keep the raw paramValue: " + paramValue);
+				LogUtils.debug("ignore the xssClean,keep the raw paramValue: " + paramValue);
 				return paramValue;
 			} else {
 				final CleanResults cr = antiSamy.scan(paramValue, policy);
-				cr.getErrorMessages().forEach(LogUtil::debug);
+				cr.getErrorMessages().forEach(LogUtils::debug);
 				String str = cr.getCleanHTML();
 				str = stripXSSAndSql(str);
 				str = str.replaceAll("&quot;", "\"");
@@ -133,14 +133,14 @@ public class XssUtil {
 				//str = str.replaceAll(" ", "*");
 				str = str.replaceAll("&lt;", "<");
 				str = str.replaceAll("&gt;", ">");
-				LogUtil.debug("xss filter value after xssClean" + str);
+				LogUtils.debug("xss filter value after xssClean" + str);
 
 				return str;
 			}
 		} catch (ScanException e) {
-			LogUtil.error("scan failed is [" + paramValue + "]", e);
+			LogUtils.error("scan failed is [" + paramValue + "]", e);
 		} catch (PolicyException e) {
-			LogUtil.error("antisamy convert failed  is [" + paramValue + "]", e);
+			LogUtils.error("antisamy convert failed  is [" + paramValue + "]", e);
 		}
 		return paramValue;
 	}

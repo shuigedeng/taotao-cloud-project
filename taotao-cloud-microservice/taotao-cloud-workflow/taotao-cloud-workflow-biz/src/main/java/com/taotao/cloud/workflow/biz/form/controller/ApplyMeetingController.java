@@ -1,6 +1,6 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
@@ -50,14 +50,14 @@ public class ApplyMeetingController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), ApplyMeetingInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ApplyMeetingInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ApplyMeetingEntity entity = applyMeetingService.getInfo(id);
-            vo = JsonUtil.getJsonToBean(entity, ApplyMeetingInfoVO.class);
+            vo = JsonUtils.getJsonToBean(entity, ApplyMeetingInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -80,7 +80,7 @@ public class ApplyMeetingController {
         if (applyMeetingForm.getEstimatedAmount() != null && !RegexUtils.checkDecimals2(String.valueOf(applyMeetingForm.getEstimatedAmount()))) {
             return Result.fail("预计金额必须大于0，最多精确小数点后两位");
         }
-        ApplyMeetingEntity entity = JsonUtil.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
+        ApplyMeetingEntity entity = JsonUtils.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyMeetingForm.getStatus())) {
             applyMeetingService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -108,7 +108,7 @@ public class ApplyMeetingController {
         if (applyMeetingForm.getEstimatedAmount() != null && !RegexUtils.checkDecimals2(String.valueOf(applyMeetingForm.getEstimatedAmount()))) {
             return Result.fail("预计金额必须大于0，最多精确小数点后两位");
         }
-        ApplyMeetingEntity entity = JsonUtil.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
+        ApplyMeetingEntity entity = JsonUtils.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyMeetingForm.getStatus())) {
             applyMeetingService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -16,7 +16,7 @@
 package com.taotao.cloud.job.elastic.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.elastic.properties.ElasticJobProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -37,7 +37,7 @@ public class ElasticJobAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ElasticJobAutoConfiguration.class, StarterName.JOB_ELASTIC_STARTER);
+		LogUtils.started(ElasticJobAutoConfiguration.class, StarterName.JOB_ELASTIC_STARTER);
 	}
 
 

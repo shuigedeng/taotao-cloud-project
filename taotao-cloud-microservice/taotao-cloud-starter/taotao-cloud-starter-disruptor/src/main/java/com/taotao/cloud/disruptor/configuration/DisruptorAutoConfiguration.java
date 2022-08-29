@@ -24,7 +24,7 @@ import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.EventHandlerGroup;
 import com.lmax.disruptor.dsl.ProducerType;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.annotation.EventRule;
 import com.taotao.cloud.disruptor.context.DisruptorEventAwareProcessor;
 import com.taotao.cloud.disruptor.context.DisruptorTemplate;
@@ -65,7 +65,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.OrderComparator;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -85,7 +84,7 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DisruptorAutoConfiguration.class, StarterName.DISRUPTOR_STARTER);
+		LogUtils.started(DisruptorAutoConfiguration.class, StarterName.DISRUPTOR_STARTER);
 	}
 
 	/**
@@ -141,7 +140,7 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 					entry.getKey(), EventRule.class);
 				if (annotationType == null) {
 					// 注解为空，则打印错误信息
-					LogUtil.error("Not Found AnnotationType {} on Bean {} Whith Name {}",
+					LogUtils.error("Not Found AnnotationType {} on Bean {} Whith Name {}",
 						EventRule.class, entry.getValue().getClass(), entry.getKey());
 				} else {
 					handlerChainDefinitionMap.put(annotationType.value(), entry.getKey());
