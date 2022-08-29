@@ -6,7 +6,6 @@ package com.taotao.cloud.monitor.kuding.microservice.interfaces;//package com.ku
 // * 
 // * 用于过滤已发送过的服务器信息
 // * 
-// * @author 徐晓东
 // *
 // */
 //@FunctionalInterface

@@ -26,7 +26,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.web.annotation.EnableUser;
+import com.taotao.cloud.web.annotation.LoginUser;
 import com.taotao.cloud.web.interceptor.DoubtApiInterceptor;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.listener.RequestMappingScanListener;
@@ -312,7 +312,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 
 		@Override
 		public boolean supportsParameter(MethodParameter parameter) {
-			boolean isHasEnableUserAnn = parameter.hasParameterAnnotation(EnableUser.class);
+			boolean isHasEnableUserAnn = parameter.hasParameterAnnotation(LoginUser.class);
 			boolean isHasLoginUserParameter = parameter.getParameterType().isAssignableFrom(SecurityUser.class);
 			return isHasEnableUserAnn && isHasLoginUserParameter;
 		}
@@ -321,7 +321,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 		public Object resolveArgument(MethodParameter methodParameter,
 									  ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
 									  WebDataBinderFactory webDataBinderFactory) throws Exception {
-			EnableUser user = methodParameter.getParameterAnnotation(EnableUser.class);
+			LoginUser user = methodParameter.getParameterAnnotation(LoginUser.class);
 			boolean value = user.value();
 			HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
 			SecurityUser loginUser = SecurityUtil.getCurrentUser();

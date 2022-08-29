@@ -1,4 +1,4 @@
-package com.taotao.cloud.monitor.kuding.exceptions;
+package com.taotao.cloud.monitor.kuding;
 
 public class PrometheusException extends RuntimeException {
 

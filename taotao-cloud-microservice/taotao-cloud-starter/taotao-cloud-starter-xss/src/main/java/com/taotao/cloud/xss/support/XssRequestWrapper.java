@@ -19,6 +19,7 @@ package com.taotao.cloud.xss.support;
 import com.taotao.cloud.common.utils.log.LogUtil;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -57,12 +58,8 @@ public class XssRequestWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getQueryString() {
 		String queryString = super.getQueryString();
-		try {
-			if (null != queryString) {
-				queryString = URLDecoder.decode(queryString, "UTF-8");
-			}
-		} catch (UnsupportedEncodingException e) {
-			LogUtil.error("getQueryString", e);
+		if (null != queryString) {
+			queryString = URLDecoder.decode(queryString, StandardCharsets.UTF_8);
 		}
 		return xssClean(queryString, this.ignoreParamValueList);
 	}

@@ -28,12 +28,12 @@ import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
  * @version 2021.9
  * @since 2021-09-02 20:08:52
  */
-@Endpoint(id = "systemHealth")
-public class SystemHealthEndPoint {
+@Endpoint(id = "monitor")
+public class MonitorEndPoint {
 
 	private HealthCheckProvider healthCheckProvider;
 
-	public SystemHealthEndPoint(HealthCheckProvider healthCheckProvider) {
+	public MonitorEndPoint(HealthCheckProvider healthCheckProvider) {
 		this.healthCheckProvider = healthCheckProvider;
 	}
 

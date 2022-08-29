@@ -25,9 +25,8 @@ public class ServiceMonitorListenerConfig {
 	@Bean
 	public ServiceDiscoveredListener serviceExistedListener(ServiceCheckControl serviceCheckControl,
                                                             DiscoveryClient discoveryClient, ApplicationEventPublisher publisher) {
-		ServiceDiscoveredListener existedListener = new ServiceDiscoveredListener(serviceCheckControl,
+		return new ServiceDiscoveredListener(serviceCheckControl,
 				serviceMonitorProperties.getMonitorServices(), discoveryClient, publisher);
-		return existedListener;
 	}
 
 	@Bean
@@ -44,7 +43,6 @@ public class ServiceMonitorListenerConfig {
 
 	@Bean
 	public ServiceLostEventListener serviceLostEventListener(ServiceNoticeRepository serviceNoticeRepository) {
-		ServiceLostEventListener serviceLostEventListener = new ServiceLostEventListener(serviceNoticeRepository);
-		return serviceLostEventListener;
+		return new ServiceLostEventListener(serviceNoticeRepository);
 	}
 }

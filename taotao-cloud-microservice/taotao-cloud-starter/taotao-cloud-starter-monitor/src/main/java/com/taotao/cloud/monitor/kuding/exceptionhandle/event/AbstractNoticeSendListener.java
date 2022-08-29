@@ -1,6 +1,6 @@
 package com.taotao.cloud.monitor.kuding.exceptionhandle.event;
 
-import com.taotao.cloud.monitor.kuding.exceptionhandle.interfaces.ExceptionNoticeStatisticsRepository;
+import com.taotao.cloud.monitor.kuding.exceptionhandle.statistics.ExceptionNoticeStatisticsRepository;
 import com.taotao.cloud.monitor.kuding.message.INoticeSendComponent;
 import com.taotao.cloud.monitor.kuding.pojos.ExceptionStatistics;
 import com.taotao.cloud.monitor.kuding.pojos.notice.ExceptionNotice;
@@ -64,17 +64,22 @@ public abstract class AbstractNoticeSendListener implements
 			exceptionStatistics.setFirstCreated(false);
 			return true;
 		}
-		boolean flag = false;
+
+		boolean flag;
 		switch (exceptionNoticeFrequencyStrategyProperties.getFrequencyType()) {
 			case TIMEOUT:
 				Duration dur = Duration.between(exceptionStatistics.getNoticeTime(),
 					LocalDateTime.now());
-				flag = exceptionNoticeFrequencyStrategyProperties.getNoticeTimeInterval().compareTo(dur) < 0;
+				flag = exceptionNoticeFrequencyStrategyProperties.getNoticeTimeInterval()
+					.compareTo(dur) < 0;
 			case SHOWCOUNT:
 				flag = exceptionStatistics.getShowCount().longValue()
 					- exceptionStatistics.getLastNoticedCount()
 					.longValue() > exceptionNoticeFrequencyStrategyProperties.getNoticeShowCount()
 					.longValue();
+			default:
+				flag = false;
+
 		}
 		return flag;
 	}

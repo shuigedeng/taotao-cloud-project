@@ -63,11 +63,10 @@ public class ServiceMonitorControlConfig {
 		NoticeProperties noticeProperties,
 		ServiceNoticeRepository serviceNoticeRepository,
 		List<INoticeSendComponent<ServiceCheckNotice>> noticeSendComponents) {
-		ServiceNoticeControl serviceNoticeControl = new ServiceNoticeControl(
+		return new ServiceNoticeControl(
 			serviceMonitorProperties,
 			noticeProperties, promethuesMicroServiceScheduler, noticeSendComponents,
 			serviceNoticeRepository);
-		return serviceNoticeControl;
 	}
 
 	/**
@@ -77,9 +76,8 @@ public class ServiceMonitorControlConfig {
 	 */
 	@Bean
 	public ServiceExistControl serviceExistControl() {
-		ServiceExistControl serviceExistControl = new ServiceExistControl(
+		return new ServiceExistControl(
 			promethuesMicroServiceScheduler,
 			discoveryClient, applicationEventPublisher, serviceMonitorProperties);
-		return serviceExistControl;
 	}
 }
