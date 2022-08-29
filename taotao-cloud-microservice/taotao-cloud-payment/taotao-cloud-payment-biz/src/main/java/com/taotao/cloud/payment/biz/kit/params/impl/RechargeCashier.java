@@ -11,9 +11,9 @@ import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.BaseSetting;
+import com.taotao.cloud.sys.api.model.vo.setting.BaseSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -65,7 +65,7 @@ public class RechargeCashier implements CashierExecute {
 			cashierParam.setPrice(recharge.getRechargeMoney());
 
 			try {
-				BaseSetting baseSetting = settingService.getBaseSetting(SettingEnum.BASE_SETTING.name()).data();
+				BaseSetting baseSetting = settingService.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name()).data();
 				cashierParam.setTitle(baseSetting.getSiteName());
 			} catch (Exception e) {
 				cashierParam.setTitle("多用户商城，在线充值");

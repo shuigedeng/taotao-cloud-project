@@ -12,12 +12,12 @@ import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.OrderSettingVO;
-import com.taotao.cloud.sys.api.web.vo.setting.SettingVO;
-import com.taotao.cloud.sys.api.web.vo.setting.payment.PaymentSupportSetting;
-import com.taotao.cloud.sys.api.web.vo.setting.payment.dto.PaymentSupportItem;
+import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.payment.PaymentSupportSetting;
+import com.taotao.cloud.sys.api.model.vo.setting.payment.dto.PaymentSupportItem;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -94,7 +94,7 @@ public class CashierSupport {
 		}
 
 		//支付方式 循环获取
-		SettingVO setting = settingService.get(SettingEnum.PAYMENT_SUPPORT.name()).data();
+		SettingVO setting = settingService.get(SettingCategoryEnum.PAYMENT_SUPPORT.name()).data();
 		PaymentSupportSetting paymentSupportSetting = JSONUtil.toBean(setting.getSettingValue(),
 			PaymentSupportSetting.class);
 		for (PaymentSupportItem paymentSupportItem : paymentSupportSetting.getPaymentSupportItems()) {
@@ -159,7 +159,7 @@ public class CashierSupport {
 			cashierParam.setWalletValue(memberWalletService.getMemberWallet(
 				UserContext.getCurrentUser().getId()).getMemberWallet());
 			OrderSettingVO orderSetting = JSONUtil.toBean(
-				settingService.get(SettingEnum.ORDER_SETTING.name()).getSettingValue(),
+				settingService.get(SettingCategoryEnum.ORDER_SETTING.name()).getSettingValue(),
 				OrderSetting.class);
 			Integer minute = orderSetting.getAutoCancel();
 			cashierParam.setAutoCancel(cashierParam.getCreateTime().getTime() + minute * 1000 * 60);

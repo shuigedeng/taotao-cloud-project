@@ -21,12 +21,12 @@ import com.taotao.cloud.member.biz.connect.request.BaseAuthWeChatRequest;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.QQConnectSettingItemVO;
-import com.taotao.cloud.sys.api.web.vo.setting.QQConnectSettingVO;
-import com.taotao.cloud.sys.api.web.vo.setting.WechatConnectSettingItemVO;
-import com.taotao.cloud.sys.api.web.vo.setting.WechatConnectSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.QQConnectSettingItemVO;
+import com.taotao.cloud.sys.api.model.vo.setting.QQConnectSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingItemVO;
+import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -140,7 +140,7 @@ public class ConnectUtil {
 		switch (authInterface) {
 			case WECHAT: {
 				//寻找配置
-				WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingEnum.WECHAT_CONNECT.name()).data();
+				WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingCategoryEnum.WECHAT_CONNECT.name()).data();
 
 				for (WechatConnectSettingItemVO wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItemVOS()) {
 					if (wechatConnectSettingItem.getClientType().equals(ClientTypeEnum.H5.name())) {
@@ -155,7 +155,7 @@ public class ConnectUtil {
 			}
 			case WECHAT_PC: {
 				//寻找配置
-				WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingEnum.WECHAT_CONNECT.name()).data();
+				WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingCategoryEnum.WECHAT_CONNECT.name()).data();
 				for (WechatConnectSettingItemVO wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItemVOS()) {
 					if (wechatConnectSettingItem.getClientType().equals(ClientTypeEnum.PC.name())) {
 						authRequest = new BaseAuthWeChatPCRequest(AuthConfig.builder()
@@ -170,7 +170,7 @@ public class ConnectUtil {
 			}
 			case QQ:
 				//寻找配置
-				QQConnectSettingVO qqConnectSetting = settingService.getQQConnectSetting(SettingEnum.QQ_CONNECT.name()).data();
+				QQConnectSettingVO qqConnectSetting = settingService.getQQConnectSetting(SettingCategoryEnum.QQ_CONNECT.name()).data();
 				for (QQConnectSettingItemVO qqConnectSettingItem : qqConnectSetting.getQqConnectSettingItemList()) {
 					if (qqConnectSettingItem.getClientType().equals(ClientTypeEnum.PC.name())) {
 						authRequest = new BaseAuthQQRequest(AuthConfig.builder()

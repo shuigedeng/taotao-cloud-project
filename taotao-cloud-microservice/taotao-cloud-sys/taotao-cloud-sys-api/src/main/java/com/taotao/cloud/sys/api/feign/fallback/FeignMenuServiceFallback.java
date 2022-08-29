@@ -3,7 +3,7 @@ package com.taotao.cloud.sys.api.feign.fallback;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.IFeignMenuService;
-import com.taotao.cloud.sys.api.web.vo.menu.MenuQueryVO;
+import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import java.util.List;
 import java.util.Set;
 import org.springframework.cloud.openfeign.FallbackFactory;

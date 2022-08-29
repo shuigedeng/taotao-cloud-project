@@ -19,9 +19,9 @@ import com.taotao.cloud.distribution.biz.mapper.DistributionMapper;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.SettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -158,7 +158,7 @@ public class DistributionServiceImpl extends
 		Distribution distribution = this.getById(distributionId);
 		if (distribution != null) {
 			Result<SettingVO> settingResult = settingService.get(
-				SettingEnum.DISTRIBUTION_SETTING.name());
+				SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 			DistributionSetting distributionSetting = JSONUtil.toBean(
 				settingResult.data().getSettingValue(),
 				DistributionSetting.class);
@@ -179,7 +179,7 @@ public class DistributionServiceImpl extends
 	public void checkDistributionSetting() {
 		//获取分销是否开启
 		Result<SettingVO> settingResult = settingService.get(
-			SettingEnum.DISTRIBUTION_SETTING.name());
+			SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 		DistributionSetting distributionSetting = JSONUtil.toBean(
 			settingResult.data().getSettingValue(),
 			DistributionSetting.class);

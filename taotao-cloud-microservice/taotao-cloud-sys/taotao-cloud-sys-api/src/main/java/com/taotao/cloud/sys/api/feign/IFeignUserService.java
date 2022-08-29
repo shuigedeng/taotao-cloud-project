@@ -4,7 +4,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserServiceFallback;
-import com.taotao.cloud.sys.api.web.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

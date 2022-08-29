@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.web.dto.EmailDTO;
+import com.taotao.cloud.sys.api.model.dto.EmailDTO;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

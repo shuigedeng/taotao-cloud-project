@@ -26,10 +26,10 @@ import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.member.biz.token.MemberTokenGenerate;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.WechatConnectSettingItemVO;
-import com.taotao.cloud.sys.api.web.vo.setting.WechatConnectSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingItemVO;
+import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingVO;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -301,7 +301,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	 * @return 微信小程序配置
 	 */
 	private WechatConnectSettingItemVO getWechatMPSetting() {
-		WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingEnum.WECHAT_CONNECT.name()).data();
+		WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingCategoryEnum.WECHAT_CONNECT.name()).data();
 
 		if (wechatConnectSetting == null) {
 			throw new BusinessException(ResultEnum.WECHAT_CONNECT_NOT_EXIST);

@@ -14,9 +14,9 @@ import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.PointSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -121,6 +121,6 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 	 * @return 积分设置
 	 */
 	private PointSettingVO getPointSetting() {
-		return settingService.getPointSetting(SettingEnum.POINT_SETTING.name()).data();
+		return settingService.getPointSetting(SettingCategoryEnum.POINT_SETTING.name()).data();
 	}
 }

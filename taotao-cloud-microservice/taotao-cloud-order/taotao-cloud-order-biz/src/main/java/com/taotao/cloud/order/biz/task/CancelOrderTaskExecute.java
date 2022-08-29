@@ -7,9 +7,9 @@ import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.OrderSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import com.taotao.cloud.web.timetask.EveryMinuteExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,7 +42,7 @@ public class CancelOrderTaskExecute implements EveryMinuteExecute {
 
 	@Override
 	public void execute() {
-		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingEnum.ORDER_SETTING.name()).data();
+		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name()).data();
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//订单自动取消时间 = 当前时间 - 自动取消时间分钟数
 			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());

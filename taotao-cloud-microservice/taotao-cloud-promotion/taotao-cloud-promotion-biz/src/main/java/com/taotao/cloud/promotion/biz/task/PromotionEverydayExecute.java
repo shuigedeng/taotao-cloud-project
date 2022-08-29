@@ -3,9 +3,9 @@ package com.taotao.cloud.promotion.biz.task;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexService;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.service.SeckillService;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.SeckillSetting;
+import com.taotao.cloud.sys.api.model.vo.setting.SeckillSetting;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,7 +50,7 @@ public class PromotionEverydayExecute implements EveryDayExecute {
 	 * 添加30天后的秒杀活动
 	 */
 	private void addSeckill() {
-		SeckillSetting seckillSetting = settingService.getSeckillSetting(SettingEnum.SECKILL_SETTING.name()).data();
+		SeckillSetting seckillSetting = settingService.getSeckillSetting(SettingCategoryEnum.SECKILL_SETTING.name()).data();
 		for (int i = 1; i <= SeckillService.PRE_CREATION; i++) {
 			Seckill seckill = new Seckill(i, seckillSetting.getHours(), seckillSetting.getSeckillRule());
 			seckillService.savePromotions(seckill);

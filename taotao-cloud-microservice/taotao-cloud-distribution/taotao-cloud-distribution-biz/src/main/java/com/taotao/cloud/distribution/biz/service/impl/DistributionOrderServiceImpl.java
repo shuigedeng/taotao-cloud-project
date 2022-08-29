@@ -20,9 +20,9 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.order.api.web.query.order.StoreFlowPageQuery;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.SettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -97,7 +97,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
                 distributionOrder.setDistributionName(distribution.getMemberName());
 
                 //设置结算天数(解冻日期)
-	            Result<SettingVO> settingResult = settingService.get(SettingEnum.DISTRIBUTION_SETTING.name());
+	            Result<SettingVO> settingResult = settingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 	            DistributionSetting distributionSetting = JSONUtil.toBean(
 		            settingResult.data().getSettingValue(), DistributionSetting.class);
 				//默认解冻1天

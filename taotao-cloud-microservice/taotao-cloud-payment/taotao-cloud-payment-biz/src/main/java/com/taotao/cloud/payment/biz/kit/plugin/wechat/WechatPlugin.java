@@ -43,9 +43,9 @@ import com.taotao.cloud.payment.biz.properties.ApiProperties;
 import com.taotao.cloud.payment.biz.service.PaymentService;
 import com.taotao.cloud.payment.biz.service.RefundLogService;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.payment.WechatPaymentSetting;
+import com.taotao.cloud.sys.api.model.vo.setting.payment.WechatPaymentSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -615,7 +615,7 @@ public class WechatPlugin implements Payment {
      */
     private WechatPaymentSetting wechatPaymentSetting() {
         try {
-			WechatPaymentSetting wechatPaymentSetting = settingService.getWechatPaymentSetting(SettingEnum.WECHAT_PAYMENT.name()).data();
+			WechatPaymentSetting wechatPaymentSetting = settingService.getWechatPaymentSetting(SettingCategoryEnum.WECHAT_PAYMENT.name()).data();
             return wechatPaymentSetting;
         } catch (Exception e) {
 			LogUtils.error("微信支付暂不支持", e);

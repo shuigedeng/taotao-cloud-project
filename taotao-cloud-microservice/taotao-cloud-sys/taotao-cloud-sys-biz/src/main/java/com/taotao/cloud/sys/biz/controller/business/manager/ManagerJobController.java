@@ -16,9 +16,9 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.BaseQuery;
-import com.taotao.cloud.sys.api.web.dto.job.JobSaveDTO;
-import com.taotao.cloud.sys.api.web.dto.job.JobUpdateDTO;
-import com.taotao.cloud.sys.api.web.vo.job.JobQueryVO;
+import com.taotao.cloud.sys.api.model.dto.job.JobSaveDTO;
+import com.taotao.cloud.sys.api.model.dto.job.JobUpdateDTO;
+import com.taotao.cloud.sys.api.model.vo.job.JobQueryVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Job;
 import com.taotao.cloud.sys.biz.service.business.IJobService;
 import com.taotao.cloud.web.base.controller.SuperController;

@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service.business;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.api.web.dto.log.LogQueryCriteria;
+import com.taotao.cloud.sys.api.model.dto.log.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.system.Log;
 import java.io.IOException;
 import java.util.List;

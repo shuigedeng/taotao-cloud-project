@@ -29,9 +29,9 @@ import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.payment.biz.properties.ApiProperties;
 import com.taotao.cloud.payment.biz.service.PaymentService;
 import com.taotao.cloud.payment.biz.service.RefundLogService;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.payment.AlipayPaymentSetting;
+import com.taotao.cloud.sys.api.model.vo.setting.payment.AlipayPaymentSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -318,7 +318,7 @@ public class AliPayPlugin implements Payment {
 	 * 获取微信支付配置
 	 */
 	private AlipayPaymentSetting alipayPaymentSetting() {
-		AlipayPaymentSetting setting = settingService.getAlipayPaymentSetting(SettingEnum.ALIPAY_PAYMENT.name()).data();
+		AlipayPaymentSetting setting = settingService.getAlipayPaymentSetting(SettingCategoryEnum.ALIPAY_PAYMENT.name()).data();
 		if (setting != null) {
 			return setting;
 		}
