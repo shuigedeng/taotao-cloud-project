@@ -7,8 +7,8 @@ import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.DefaultAlipayClient;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
-import com.taotao.cloud.sys.api.web.vo.setting.payment.AlipayPaymentSetting;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
+import com.taotao.cloud.sys.api.model.vo.setting.payment.AlipayPaymentSetting;
 
 import java.util.Date;
 
@@ -52,7 +52,7 @@ public class AliPayApiConfigKit {
         AlipayPaymentSetting setting;
         try {
             SettingService settingService = (SettingService) SpringContextUtil.getBean("settingServiceImpl");
-            Setting systemSetting = settingService.get(SettingEnum.ALIPAY_PAYMENT.name());
+            Setting systemSetting = settingService.get(SettingCategoryEnum.ALIPAY_PAYMENT.name());
             setting = JSONUtil.toBean(systemSetting.getSettingValue(), AlipayPaymentSetting.class);
         } catch (Exception e) {
             throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);

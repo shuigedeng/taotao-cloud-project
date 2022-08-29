@@ -9,9 +9,9 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.ExperienceSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.ExperienceSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +69,6 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 	 * @since 2022-05-16 17:35:40
 	 */
 	private ExperienceSettingVO getExperienceSetting() {
-		return settingService.getExperienceSetting(SettingEnum.EXPERIENCE_SETTING.name()).data();
+		return settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name()).data();
 	}
 }

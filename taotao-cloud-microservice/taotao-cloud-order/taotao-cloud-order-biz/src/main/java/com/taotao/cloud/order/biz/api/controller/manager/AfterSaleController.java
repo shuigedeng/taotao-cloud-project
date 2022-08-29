@@ -10,7 +10,7 @@ import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.mapstruct.IAfterSaleMapStruct;
 import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
 import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
-import com.taotao.cloud.sys.api.web.vo.logistics.TracesVO;
+import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

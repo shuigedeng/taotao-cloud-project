@@ -4,7 +4,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.IFeignUserService;
-import com.taotao.cloud.sys.api.web.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

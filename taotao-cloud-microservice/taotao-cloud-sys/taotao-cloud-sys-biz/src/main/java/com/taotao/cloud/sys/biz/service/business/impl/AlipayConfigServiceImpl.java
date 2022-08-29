@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.sys.api.web.vo.alipay.TradeVO;
+import com.taotao.cloud.sys.api.model.vo.alipay.TradeVO;
 import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.mapper.IAlipayConfigMapper;
 import com.taotao.cloud.sys.biz.service.business.IAlipayConfigService;

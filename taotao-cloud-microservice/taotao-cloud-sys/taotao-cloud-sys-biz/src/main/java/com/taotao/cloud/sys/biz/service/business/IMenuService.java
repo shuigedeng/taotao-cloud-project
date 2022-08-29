@@ -17,8 +17,8 @@ package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
 import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
-import com.taotao.cloud.sys.api.web.vo.menu.MenuQueryVO;
-import com.taotao.cloud.sys.api.web.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
+import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Menu;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;

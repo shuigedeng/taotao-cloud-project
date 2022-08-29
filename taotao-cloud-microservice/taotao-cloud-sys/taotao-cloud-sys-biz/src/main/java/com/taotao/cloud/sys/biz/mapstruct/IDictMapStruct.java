@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
-import com.taotao.cloud.sys.api.web.dto.dict.DictSaveDTO;
+import com.taotao.cloud.sys.api.model.dto.dict.DictSaveDTO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

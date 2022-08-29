@@ -21,9 +21,9 @@ import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
 import com.taotao.cloud.promotion.biz.mapper.SeckillMapper;
 import com.taotao.cloud.promotion.biz.service.SeckillApplyService;
 import com.taotao.cloud.promotion.biz.service.SeckillService;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.SettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,7 +80,7 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
         }
         this.remove(new QueryWrapper<>());
 
-	    Result<SettingVO> settingResult = settingService.get(SettingEnum.SECKILL_SETTING.name());
+	    Result<SettingVO> settingResult = settingService.get(SettingCategoryEnum.SECKILL_SETTING.name());
         SeckillSetting seckillSetting = new Gson().fromJson(settingResult.data().getSettingValue(), SeckillSetting.class);
 
         for (int i = 1; i <= PRE_CREATION; i++) {

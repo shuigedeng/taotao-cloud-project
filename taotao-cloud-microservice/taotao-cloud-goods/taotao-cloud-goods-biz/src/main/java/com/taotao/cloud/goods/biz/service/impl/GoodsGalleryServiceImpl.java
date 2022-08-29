@@ -9,9 +9,9 @@ import com.taotao.cloud.common.utils.io.FileUtils;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.mapper.IGoodsGalleryMapper;
 import com.taotao.cloud.goods.biz.service.IGoodsGalleryService;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.GoodsSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +61,7 @@ public class GoodsGalleryServiceImpl extends
 		GoodsGallery goodsGallery = new GoodsGallery();
 		//获取商品系统配置决定是否审核
 		Result<GoodsSettingVO> setting = settingService.getGoodsSetting(
-			SettingEnum.GOODS_SETTING.name());
+			SettingCategoryEnum.GOODS_SETTING.name());
 		GoodsSettingVO goodsSetting = setting.data();
 		//缩略图
 		String thumbnail = FileUtils.getUrl(origin, goodsSetting.getAbbreviationPictureWidth(),

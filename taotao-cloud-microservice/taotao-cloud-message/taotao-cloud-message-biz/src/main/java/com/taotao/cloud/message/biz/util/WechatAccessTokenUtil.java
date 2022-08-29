@@ -8,7 +8,7 @@ import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.setting.connect.WechatConnectSetting;
 import com.taotao.cloud.sys.api.setting.connect.dto.WechatConnectSettingItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class WechatAccessTokenUtil {
                 return token;
             }
             //获取微信配置
-            Setting setting = settingService.get(SettingEnum.WECHAT_CONNECT.name());
+            Setting setting = settingService.get(SettingCategoryEnum.WECHAT_CONNECT.name());
             if (setting == null) {
                 log.error("获取token客户端异常" + clientTypeEnum.name() + ",客户端未配置微信参数，请前往后台=》联合登陆，进行对应微信配置");
                 return null;

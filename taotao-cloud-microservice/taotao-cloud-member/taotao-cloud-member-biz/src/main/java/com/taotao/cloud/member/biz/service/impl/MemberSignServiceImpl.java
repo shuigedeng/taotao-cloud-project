@@ -18,10 +18,10 @@ import com.taotao.cloud.member.biz.service.MemberSignService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.PointSettingItemVO;
-import com.taotao.cloud.sys.api.web.vo.setting.PointSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.PointSettingItemVO;
+import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -110,7 +110,7 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 		try {
 			//获取签到积分赠送设置
 			PointSettingVO pointSetting = feignSettingService.getPointSetting(
-				SettingEnum.POINT_SETTING.name()).data();
+				SettingCategoryEnum.POINT_SETTING.name()).data();
 			String content = "";
 			//赠送积分
 			Long point = null;

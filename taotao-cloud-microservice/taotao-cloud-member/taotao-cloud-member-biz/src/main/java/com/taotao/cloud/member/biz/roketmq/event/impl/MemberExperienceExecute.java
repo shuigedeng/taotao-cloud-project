@@ -6,9 +6,9 @@ import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
 import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
-import com.taotao.cloud.sys.api.enums.SettingEnum;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
-import com.taotao.cloud.sys.api.web.vo.setting.ExperienceSettingVO;
+import com.taotao.cloud.sys.api.model.vo.setting.ExperienceSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +55,7 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	 * @return 经验值设置
 	 */
 	private ExperienceSettingVO getExperienceSetting() {
-		ExperienceSettingVO setting = settingService.getExperienceSetting(SettingEnum.EXPERIENCE_SETTING.name()).data();
+		ExperienceSettingVO setting = settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name()).data();
 		return setting;
 	}
 }
