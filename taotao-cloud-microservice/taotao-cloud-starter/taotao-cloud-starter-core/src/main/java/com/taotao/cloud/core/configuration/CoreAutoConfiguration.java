@@ -18,6 +18,7 @@ package com.taotao.cloud.core.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.PropertyCache;
 import com.taotao.cloud.common.model.Pubsub;
+import com.taotao.cloud.common.utils.context.EnableContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.launch.StartedEventListener;
 import com.taotao.cloud.core.model.Collector;

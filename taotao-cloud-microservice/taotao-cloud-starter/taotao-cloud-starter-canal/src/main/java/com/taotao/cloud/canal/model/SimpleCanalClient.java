@@ -116,7 +116,7 @@ public class SimpleCanalClient extends AbstractCanalClient {
 	private void initListeners() {
 		LogUtils.info("{}: 监听器正在初始化....", Thread.currentThread().getName());
 		//获取监听器
-		List<CanalEventListener> list = ContextUtils.getBeansOfType(CanalEventListener.class);
+		List<CanalEventListener> list = ContextUtils.getBeansOfTypeWithList(CanalEventListener.class);
 		//若没有任何监听的，直接返回
 		if (list != null) {
 			//若存在目标监听，放入 listenerMap
