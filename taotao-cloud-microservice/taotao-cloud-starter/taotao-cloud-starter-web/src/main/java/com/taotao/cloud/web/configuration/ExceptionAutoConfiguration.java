@@ -31,6 +31,7 @@ import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.idempotent.exception.IdempotentException;
 import com.taotao.cloud.limit.ext.LimitException;
@@ -50,7 +51,10 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.core.MethodParameter;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
@@ -65,6 +69,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -81,6 +86,11 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 //@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
 //@RestControllerAdvice
 public class ExceptionAutoConfiguration implements InitializingBean {
+
+
+	@Autowired
+	@Qualifier("requestMappingHandlerMapping")
+	private RequestMappingHandlerMapping mapping;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -266,8 +276,8 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 		return Result.fail(ResultEnum.ERROR);
 	}
 
-	@ExceptionHandler(Exception.class)
-	public Result<String> handleThrowable(NativeWebRequest req, Throwable e) {
+	@ExceptionHandler(Error.class)
+	public Result<String> handleThrowable(NativeWebRequest req, Error e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}
@@ -351,10 +361,6 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	public Result<String> rateLimitException(RateLimitException e) {
 		return Result.fail( "限流权限控制异常",429);
 	}
-
-
-
-
 
 	/**
 	 * 获取请求路径
@@ -441,11 +447,14 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	 * @since 2021-09-02 21:27:34
 	 */
 	private void printLog(NativeWebRequest req, Throwable e) {
-		RequestMappingHandlerMapping re = new RequestMappingHandlerMapping();
 		try {
-			HandlerExecutionChain chain = re.getHandler((HttpServletRequest) req.getNativeRequest());
+			//RequestMappingHandlerMapping mapping = ContextUtils.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
+			HandlerExecutionChain chain = mapping.getHandler((HttpServletRequest) req.getNativeRequest());
 			Object handler = chain.getHandler();
-
+			if(handler instanceof HandlerMethod handlerMethod){
+				MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
+				Object bean = handlerMethod.getBean();
+			}
 		} catch (Exception ex) {
 			LogUtils.error(e);
 		}
