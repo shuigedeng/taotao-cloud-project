@@ -35,7 +35,7 @@ import java.util.Objects;
 @Entity
 @Table(name = Setting.TABLE_NAME)
 @TableName(Setting.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Dept.TABLE_NAME, comment = "配置表")
+@org.hibernate.annotations.Table(appliesTo = Setting.TABLE_NAME, comment = "配置表")
 public class Setting extends BaseSuperEntity<Setting, Long> {
 
 	public static final String TABLE_NAME = "tt_setting";
