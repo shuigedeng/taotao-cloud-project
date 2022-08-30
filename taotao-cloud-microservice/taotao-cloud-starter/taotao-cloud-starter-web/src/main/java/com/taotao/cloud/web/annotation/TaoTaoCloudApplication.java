@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.web.annotation;
 
+import com.taotao.cloud.common.utils.context.EnableContextUtils;
 import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOauth2Resource;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.mybatis.spring.annotation.MapperScan;
@@ -41,6 +42,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@EnableContextUtils
 @ServletComponentScan(basePackages = {"com.taotao.cloud.web.servlet"})
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableTaoTaoCloudOauth2Resource

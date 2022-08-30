@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils.context;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.taotao.cloud.common.exception.BaseException;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -41,7 +44,7 @@ import org.springframework.core.convert.support.DefaultConversionService;
  * @version 2021.9
  * @since 2021-09-02 17:37:14
  */
-public class ContextUtils {
+public class ContextUtils extends SpringUtil {
 
 	private ContextUtils() {
 	}
@@ -110,8 +113,6 @@ public class ContextUtils {
 	 * @since 2021-09-02 17:37:46
 	 */
 	public static <T> T getBean(Class<T> type, boolean required) {
-		ConfigurableApplicationContext applicationContext = ContextUtils.getApplicationContext();
-
 		try {
 			if (type != null && applicationContext != null) {
 				try {
@@ -127,6 +128,7 @@ public class ContextUtils {
 				}
 			}
 		} catch (BeansException e) {
+			LogUtils.error(e);
 		}
 
 		return null;
@@ -144,6 +146,7 @@ public class ContextUtils {
 				}
 			}
 		} catch (BeansException e) {
+			LogUtils.error(e);
 		}
 		return null;
 	}
@@ -158,7 +161,6 @@ public class ContextUtils {
 	 */
 	public static Object getBean(String type, boolean required) {
 		try {
-			ConfigurableApplicationContext applicationContext = ContextUtils.getApplicationContext();
 			if (type != null && applicationContext != null) {
 				if (required) {
 					return applicationContext.getBean(type);
@@ -169,6 +171,7 @@ public class ContextUtils {
 				}
 			}
 		} catch (BeansException e) {
+			LogUtils.error(e);
 		}
 		return null;
 	}
@@ -180,7 +183,6 @@ public class ContextUtils {
 	 * @since 2021-09-02 17:38:08
 	 */
 	public static String getBeanDefinitionText() {
-		ConfigurableApplicationContext applicationContext = ContextUtils.getApplicationContext();
 		StringBuilder sb = new StringBuilder();
 		try {
 			String[] beans = applicationContext.getBeanDefinitionNames();
@@ -188,7 +190,7 @@ public class ContextUtils {
 			sb = new StringBuilder();
 			for (String bean : beans) {
 				sb.append(bean).append(" -> ")
-					.append(ContextUtils.getApplicationContext().getBean(bean).getClass());
+					.append(applicationContext.getBean(bean).getClass());
 			}
 		} catch (BeansException e) {
 			e.printStackTrace();
@@ -221,7 +223,7 @@ public class ContextUtils {
 	 * @return {@link java.util.List }
 	 * @since 2021-09-02 17:38:22
 	 */
-	public static <T> List<T> getBeansOfType(Class<T> clazz) {
+	public static <T> List<T> getBeansOfTypeWithList(Class<T> clazz) {
 		//声明一个结果
 		Map<String, T> map;
 		try {
@@ -243,7 +245,6 @@ public class ContextUtils {
 	 * @since 2021-09-02 17:38:27
 	 */
 	public static void registerBean(String name, Class<?> clazz, Object... args) {
-		ConfigurableApplicationContext applicationContext = getApplicationContext();
 		checkRegisterBean(applicationContext, name, clazz);
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
 			.genericBeanDefinition(clazz);
@@ -266,7 +267,6 @@ public class ContextUtils {
 	 */
 	public static void registerBean(String name, Class clazz,
 		BeanDefinitionBuilder beanDefinitionBuilder) {
-		ConfigurableApplicationContext applicationContext = getApplicationContext();
 		checkRegisterBean(applicationContext, name, clazz);
 		BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
 		BeanDefinitionRegistry beanFactory = (BeanDefinitionRegistry) applicationContext
@@ -275,13 +275,11 @@ public class ContextUtils {
 	}
 
 	public static void registerSingletonBean(String name, Object obj) {
-		ConfigurableApplicationContext applicationContext = getApplicationContext();
 		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory)applicationContext.getAutowireCapableBeanFactory();
 		defaultListableBeanFactory.registerSingleton(name, obj);
 	}
 
 	public static void destroySingletonBean(String name) {
-		ConfigurableApplicationContext applicationContext = getApplicationContext();
 		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory)applicationContext.getAutowireCapableBeanFactory();
 		defaultListableBeanFactory.destroySingleton(name);
 	}
@@ -293,7 +291,6 @@ public class ContextUtils {
 	 * @since 2021-09-02 17:38:37
 	 */
 	public static void unRegisterBean(String name) {
-		ConfigurableApplicationContext applicationContext = ContextUtils.getApplicationContext();
 		BeanDefinitionRegistry beanFactory = (BeanDefinitionRegistry) applicationContext
 			.getBeanFactory();
 		beanFactory.removeBeanDefinition(name);
