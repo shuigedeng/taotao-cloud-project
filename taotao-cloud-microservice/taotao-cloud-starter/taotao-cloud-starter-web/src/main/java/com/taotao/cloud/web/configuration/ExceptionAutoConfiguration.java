@@ -87,7 +87,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 //@RestControllerAdvice
 public class ExceptionAutoConfiguration implements InitializingBean {
 
-
 	@Autowired
 	@Qualifier("requestMappingHandlerMapping")
 	private RequestMappingHandlerMapping mapping;
