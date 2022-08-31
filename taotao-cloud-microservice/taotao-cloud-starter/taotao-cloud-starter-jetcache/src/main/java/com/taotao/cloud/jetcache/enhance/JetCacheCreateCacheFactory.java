@@ -18,9 +18,11 @@ package com.taotao.cloud.jetcache.enhance;
 
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.support.CacheContext;
 import com.alicp.jetcache.anno.support.CachedAnnoConfig;
 import com.alicp.jetcache.anno.support.ConfigProvider;
 
+import com.alicp.jetcache.anno.support.SpringConfigProvider;
 import com.taotao.cloud.common.constant.CommonConstant;
 import java.util.concurrent.TimeUnit;
 
@@ -34,10 +36,10 @@ import java.util.concurrent.TimeUnit;
 public class JetCacheCreateCacheFactory {
 
     private static final String UNDEFINED = "$$undefined$$";
-    private final ConfigProvider configProvider;
+    private final CacheContext cacheContext;
 
-    public JetCacheCreateCacheFactory(ConfigProvider configProvider) {
-        this.configProvider = configProvider;
+    public JetCacheCreateCacheFactory(CacheContext cacheContext) {
+		this.cacheContext = cacheContext;
     }
 
     public <K, V> Cache<K, V> create(String cacheName, int expire, TimeUnit timeUnit) {
@@ -92,6 +94,6 @@ public class JetCacheCreateCacheFactory {
 
     @SuppressWarnings("unchecked")
     public <K, V> Cache<K, V> create(CachedAnnoConfig cac) {
-        return configProvider.getCacheContext().__createOrGetCache(cac, cac.getArea(), cac.getName());
+        return cacheContext.__createOrGetCache(cac, cac.getArea(), cac.getName());
     }
 }

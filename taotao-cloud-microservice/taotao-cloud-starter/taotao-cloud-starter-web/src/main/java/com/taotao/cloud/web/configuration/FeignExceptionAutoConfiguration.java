@@ -38,7 +38,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.core.MethodParameter;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -48,6 +51,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerExecutionChain;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.util.NestedServletException;
 
 /**
@@ -61,6 +67,10 @@ import org.springframework.web.util.NestedServletException;
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice(annotations ={FeignApi.class})
 public class FeignExceptionAutoConfiguration implements InitializingBean {
+
+	@Autowired
+	@Qualifier("requestMappingHandlerMapping")
+	private RequestMappingHandlerMapping mapping;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -254,7 +264,19 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 	 * @param e   异常信息
 	 * @since 2021-09-02 21:27:34
 	 */
-	private void printLog(NativeWebRequest req, Exception e) {
+	private void printLog(NativeWebRequest req, Throwable e) {
+		try {
+			//RequestMappingHandlerMapping mapping = ContextUtils.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
+			HandlerExecutionChain chain = mapping.getHandler((HttpServletRequest) req.getNativeRequest());
+			Object handler = chain.getHandler();
+			if(handler instanceof HandlerMethod handlerMethod){
+				MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
+				Object bean = handlerMethod.getBean();
+			}
+		} catch (Exception ex) {
+			LogUtils.error(e);
+		}
+
 		LogUtils.error(e);
 		LogUtils.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
