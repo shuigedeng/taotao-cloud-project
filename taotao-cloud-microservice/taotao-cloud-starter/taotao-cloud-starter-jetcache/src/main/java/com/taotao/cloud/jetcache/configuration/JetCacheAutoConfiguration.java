@@ -16,6 +16,7 @@
 package com.taotao.cloud.jetcache.configuration;
 
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import com.alicp.jetcache.anno.support.CacheContext;
 import com.alicp.jetcache.anno.support.SpringConfigProvider;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.jetcache.enhance.JetcacheCacheManager;
@@ -36,7 +37,7 @@ import org.springframework.context.annotation.Bean;
  * @version 2022.07
  * @since 2022-07-03 09:50:26
  */
-@EnableCreateCacheAnnotation
+//@EnableCreateCacheAnnotation
 @AutoConfiguration(after = com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration.class)
 @EnableConfigurationProperties(JetCacheProperties.class)
 //@EnableMethodCache(basePackages = {"com.taotao.cloud.*.biz.service.impl", "com.taotao.cloud.captcha.support"})
@@ -50,8 +51,8 @@ public class JetCacheAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public JetCacheCreateCacheFactory jetCacheCreateCacheFactory(
-		SpringConfigProvider springConfigProvider) {
-		JetCacheCreateCacheFactory factory = new JetCacheCreateCacheFactory(springConfigProvider);
+		CacheContext cacheContext) {
+		JetCacheCreateCacheFactory factory = new JetCacheCreateCacheFactory(cacheContext);
 		LogUtils.info("Bean [Jet Cache Create Cache Factory] Auto Configure.");
 		return factory;
 	}
