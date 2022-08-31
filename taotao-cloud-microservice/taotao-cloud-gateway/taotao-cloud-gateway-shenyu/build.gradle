@@ -7,39 +7,39 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-webflux'
     api 'org.springframework.boot:spring-boot-starter-actuator'
 
-    api "org.apache.shenyu:shenyu-spring-boot-starter-gateway:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-instance:2.4.3"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-gateway:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-instance:2.5.0"
 
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-param-mapping:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-waf:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-ratelimiter:2.4.3"
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-hystrix:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-resilience4j:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sentinel:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-redirect:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-rewrite:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-request:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sign:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-oauth2:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-jwt:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-modify-response:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-cryptor:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-general-context:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-websocket:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-metrics:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-cache:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-grpc:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-springcloud:2.4.3"
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-mock:2.4.3"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-param-mapping:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-waf:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-ratelimiter:2.5.0"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-hystrix:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-resilience4j:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sentinel:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-redirect:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-rewrite:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-request:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sign:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-oauth2:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-jwt:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-modify-response:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-cryptor:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-general-context:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-websocket:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-metrics:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-cache:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-grpc:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-springcloud:2.5.0"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-mock:2.5.0"
 
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-apache-dubbo:2.4.3"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-apache-dubbo:2.5.0"
     api 'org.apache.dubbo:dubbo:2.7.15'
 
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-tars:2.4.3"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-tars:2.5.0"
     //api 'com.tencent.tars:tars-client:1.7.2'
 
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sofa:2.4.3"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sofa:2.5.0"
     //api('com.alipay.sofa:sofa-rpc-all:5.7.6') {
     //    exclude group: 'net.jcip', module: 'jcip-annotations'
     //}
@@ -52,7 +52,7 @@ dependencies {
     //    exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-loadbalancer'
     //}
 
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-motan:2.4.3"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-motan:2.5.0"
     //api "com.weibo:motan-core:${motan.version}"
     //api "com.weibo:motan-transport-netty4:${motan.version}"
     //api("com.weibo:motan-registry-zookeeper:${motan.version}") {
@@ -61,17 +61,17 @@ dependencies {
     //}
     //api "com.weibo:motan-springsupport:${motan.version}"
 
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-rocketmq:2.4.3"
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-kafka:2.4.3"
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-elasticsearch:2.4.3"
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-aliyun-sls:2.4.3"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-rocketmq:2.5.0"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-kafka:2.5.0"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-elasticsearch:2.5.0"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-aliyun-sls:2.5.0"
 
-    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-zookeeper:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-websocket:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-http:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-nacos:2.4.3"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-consul:2.4.3"
-    api("org.apache.shenyu:shenyu-spring-boot-starter-sync-data-etcd:2.4.3") {
+    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-zookeeper:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-websocket:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-http:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-nacos:2.5.0"
+    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-consul:2.5.0"
+    api("org.apache.shenyu:shenyu-spring-boot-starter-sync-data-etcd:2.5.0") {
         exclude group: 'io.grpc', module: 'grpc-grpclb'
         exclude group: 'io.grpc', module: 'grpc-netty'
     }
