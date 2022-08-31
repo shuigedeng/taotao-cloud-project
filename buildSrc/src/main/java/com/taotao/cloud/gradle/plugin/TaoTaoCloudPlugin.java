@@ -31,7 +31,7 @@ public class TaoTaoCloudPlugin implements Plugin<Project> {
 	public void apply(Project project) {
 		String name = project.getName();
 		if (name.contains("starter")) {
-			//System.out.println(project.getName());
+			// System.out.println(project.getName());
 		}
 	}
 }
