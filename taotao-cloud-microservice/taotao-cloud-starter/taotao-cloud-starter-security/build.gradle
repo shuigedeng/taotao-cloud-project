@@ -3,7 +3,7 @@ dependencies {
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
 	//https://search.maven.org/artifact/org.springframework.security/spring-security-core
-	api  'org.springframework.security:spring-security-core:5.7.2'
+	api  'org.springframework.security:spring-security-core:5.7.3'
 	//api  'org.springframework.security:spring-security-web'
 	api  'org.springframework.security:spring-security-config'
 	api  'org.springframework.security:spring-security-oauth2-core'

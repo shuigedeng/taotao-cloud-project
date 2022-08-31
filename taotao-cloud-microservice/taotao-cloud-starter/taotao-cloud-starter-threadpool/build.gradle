@@ -2,7 +2,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     //https://gitee.com/dromara/dynamic-tp.git
-    //https://search.maven.org/artifact/cn.dynamictp/dynamic-tp-spring-cloud-starter-nacos/1.0.8/jar
+    //https://search.maven.org/artifact/cn.dynamictp/dynamic-tp-spring-cloud-starter-nacos
     api('cn.dynamictp:dynamic-tp-spring-cloud-starter-nacos:1.0.8') {
         exclude group: 'org.projectlombok', module: 'lombok'
     }

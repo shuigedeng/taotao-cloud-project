@@ -6,7 +6,7 @@ dependencies {
     //https://search.maven.org/artifact/com.alibaba/druid
     compileOnly 'com.alibaba:druid:1.2.11'
 
-    compileOnly 'com.alibaba.csp:sentinel-core:1.8.4'
+    compileOnly 'com.alibaba.csp:sentinel-core:1.8.5'
 
     compileOnly "org.springframework.boot:spring-boot-starter-undertow"
 

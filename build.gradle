@@ -72,7 +72,7 @@ buildscript {
         //https://search.maven.org/artifact/com.baomidou/mybatis-plus-boot-starter
         mybatisPlusStarterVersion = '3.5.2'
         //https://search.maven.org/artifact/com.baomidou/dynamic-datasource-spring-boot-starter
-        mybatisPlusDynamicDatasourceStarterVersion = '3.5.1'
+        mybatisPlusDynamicDatasourceStarterVersion = '3.5.2'
         //https://search.maven.org/artifact/com.upyun/java-sdk
         upyunJavaSdkVersion = '4.2.3'
         //https://search.maven.org/artifact/com.aliyun.oss/aliyun-sdk-oss
@@ -112,7 +112,7 @@ buildscript {
         //https://search.maven.org/artifact/io.lettuce/lettuce-core
         lettuceVersion = '6.2.0.RELEASE'
         //https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter
-        redissonVersion = "3.17.5"
+        redissonVersion = "3.17.6"
         //https://search.maven.org/artifact/io.seata/seata-all
         seataVersion = "1.5.2"
         //https://search.maven.org/artifact/org.apache.shardingsphere/sharding-jdbc-spring-namespace
@@ -158,13 +158,13 @@ buildscript {
         //https://search.maven.org/artifact/cn.afterturn/easypoi-base
         easypoiVersion = "4.4.0"
         //https://search.maven.org/artifact/com.taobao.arthas/arthas-spring-boot-starter
-        arthasVersion = "3.6.4"
+        arthasVersion = "3.6.5"
         //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
         jasyptVersion = "3.0.4"
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos
         dynamicTpVersion = "1.0.7"
         //https://search.maven.org/artifact/joda-time/joda-time
-        jodaTimeVersion = "2.11.0"
+        jodaTimeVersion = "2.11.1"
         //https://search.maven.org/artifact/org.anarres.lzo/lzo-core
         lzoVersion = "1.0.6"
         //https://search.maven.org/artifact/net.jpountz.lz4/lz4
