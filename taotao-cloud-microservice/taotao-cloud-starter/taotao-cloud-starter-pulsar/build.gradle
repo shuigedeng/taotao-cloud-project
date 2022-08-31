@@ -3,10 +3,12 @@ dependencies {
 
     //https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin
     api 'org.apache.pulsar:pulsar-client-admin:2.10.1'
+
     //https://search.maven.org/artifact/com.github.ben-manes.caffeine/caffeine
     api 'com.github.ben-manes.caffeine:caffeine:3.1.1'
+
     //https://search.maven.org/artifact/io.netty/netty-common
-    api 'io.netty:netty-common:4.1.79.Final'
+    api 'io.netty:netty-common:4.1.80.Final'
 
     //https://search.maven.org/artifact/io.github.majusko/pulsar-java-spring-boot-starter
     api('io.github.majusko:pulsar-java-spring-boot-starter:1.1.2'){

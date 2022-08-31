@@ -2,7 +2,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     //https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter
-    api("org.redisson:redisson-spring-boot-starter:3.17.5") {
+    api("org.redisson:redisson-spring-boot-starter:3.17.6") {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
@@ -14,7 +14,7 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/org.redisson/redisson-spring-data
-    api('org.redisson:redisson-spring-data-27:3.17.5'){
+    api('org.redisson:redisson-spring-data-27:3.17.6'){
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
     api('org.springframework.boot:spring-boot-starter-data-redis'){

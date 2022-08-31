@@ -3,12 +3,12 @@ dependencies {
 
     implementation 'org.ow2.asm:asm:9.3'
 
-    implementation "net.bytebuddy:byte-buddy:1.12.12"
-    implementation "net.bytebuddy:byte-buddy-agent:1.12.12"
+    implementation "net.bytebuddy:byte-buddy:1.12.14"
+    implementation "net.bytebuddy:byte-buddy-agent:1.12.14"
 
     implementation 'cglib:cglib:3.3.0'
 
-    implementation 'org.javassist:javassist:3.29.0-GA'
+    implementation 'org.javassist:javassist:3.29.1-GA'
 
     compileOnly 'org.apache.tomcat.embed:tomcat-embed-core:10.0.23'
 
