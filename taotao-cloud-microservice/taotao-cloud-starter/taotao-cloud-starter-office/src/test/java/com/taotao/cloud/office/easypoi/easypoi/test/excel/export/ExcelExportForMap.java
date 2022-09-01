@@ -10,7 +10,7 @@ import java.util.Map;
 
 //import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;

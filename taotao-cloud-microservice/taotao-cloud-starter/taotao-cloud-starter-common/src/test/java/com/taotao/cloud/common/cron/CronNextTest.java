@@ -6,7 +6,7 @@ import com.taotao.cloud.common.support.cron.util.DateUtil;
 import java.util.Date;
 import org.junit.Assert;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CronNextTest {
     @Test

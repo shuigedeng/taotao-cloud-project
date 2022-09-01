@@ -4,7 +4,7 @@ import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.test.word.entity.Person;
 import cn.afterturn.easypoi.word.WordExportUtil;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;

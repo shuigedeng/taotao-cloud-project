@@ -5,7 +5,7 @@ import com.taotao.cloud.core.sensitive.sensitive.core.DataPrepareTest;
 import com.taotao.cloud.core.sensitive.sensitive.core.bs.SensitiveBs;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.User;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SensitiveBsTest {
 

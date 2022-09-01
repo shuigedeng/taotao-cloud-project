@@ -7,7 +7,7 @@ import com.alibaba.excel.util.FileUtils;
 import com.taotao.cloud.office.easyexecl.util.TestFileUtil;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
 
 import java.io.File;

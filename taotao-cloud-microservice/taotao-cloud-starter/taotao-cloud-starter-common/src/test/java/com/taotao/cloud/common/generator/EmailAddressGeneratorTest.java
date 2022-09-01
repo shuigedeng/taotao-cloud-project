@@ -1,7 +1,7 @@
 package com.taotao.cloud.common.generator;
 
 import com.taotao.cloud.common.support.generator.EmailAddressGenerator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertNotNull;
 

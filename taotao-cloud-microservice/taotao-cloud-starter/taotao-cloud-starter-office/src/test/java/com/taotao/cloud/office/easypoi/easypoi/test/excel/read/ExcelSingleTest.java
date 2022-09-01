@@ -2,7 +2,7 @@ package com.taotao.cloud.office.easypoi.easypoi.test.excel.read;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

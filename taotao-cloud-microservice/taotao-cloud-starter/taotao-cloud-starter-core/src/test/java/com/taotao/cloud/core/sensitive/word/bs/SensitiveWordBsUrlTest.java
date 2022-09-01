@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.sensitive.word.bs;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 public class SensitiveWordBsUrlTest {

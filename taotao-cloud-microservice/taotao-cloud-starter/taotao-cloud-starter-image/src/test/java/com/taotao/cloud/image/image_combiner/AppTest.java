@@ -7,7 +7,7 @@ import com.freewayso.image.combiner.enums.GradientDirection;
 import com.freewayso.image.combiner.enums.LineAlign;
 import com.freewayso.image.combiner.enums.OutputFormat;
 import com.freewayso.image.combiner.enums.ZoomMode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

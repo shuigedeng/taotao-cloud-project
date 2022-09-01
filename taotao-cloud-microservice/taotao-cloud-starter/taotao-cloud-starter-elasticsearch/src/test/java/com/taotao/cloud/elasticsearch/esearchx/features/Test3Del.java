@@ -2,7 +2,7 @@ package com.taotao.cloud.elasticsearch.esearchx.features;
 
 
 import com.taotao.cloud.elasticsearch.esearchx.EsContext;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.test.SolonJUnit4ClassRunner;

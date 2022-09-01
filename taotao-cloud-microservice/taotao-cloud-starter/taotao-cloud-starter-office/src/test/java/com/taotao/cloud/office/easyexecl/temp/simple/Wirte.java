@@ -11,7 +11,7 @@ import com.taotao.cloud.common.execl.demo.write.DemoData;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -9,7 +9,7 @@ import ink.rayin.tools.utils.FileUtil;
 import ink.rayin.tools.utils.ResourceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
 
 import java.io.File;

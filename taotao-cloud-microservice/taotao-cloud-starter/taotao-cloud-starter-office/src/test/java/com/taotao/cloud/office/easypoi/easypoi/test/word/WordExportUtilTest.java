@@ -8,7 +8,7 @@ import java.util.Map;
 
 import cn.afterturn.easypoi.entity.ImageEntity;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import cn.afterturn.easypoi.word.WordExportUtil;
 

@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import org.apache.poi.wp.usermodel.HeaderFooterType;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link DocumentExporter}单元测试

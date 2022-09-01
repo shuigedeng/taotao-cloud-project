@@ -5,7 +5,7 @@ import cn.afterturn.easypoi.csv.entity.CsvImportParams;
 import cn.afterturn.easypoi.handler.inter.IReadHandler;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.office.easypoi.easypoi.test.excel.read.FileUtilTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -2,7 +2,7 @@ package com.taotao.cloud.pinyin.util;
 
 import com.taotao.cloud.pinyin.constant.enums.PinyinToneNumEnum;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 音调获取

@@ -1,7 +1,7 @@
 package com.taotao.cloud.office.xpdf.doc;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import wiki.xsx.core.pdf.handler.XEasyPdfHandler;
 
 import java.io.IOException;

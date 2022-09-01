@@ -23,7 +23,7 @@ import com.taotao.cloud.rxjava.dto.EventDto;
 import io.reactivex.Observable;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

@@ -9,7 +9,7 @@ package com.taotao.cloud.pinyin.benchmark;//package com.taotao.cloud.core.pinyin
 //import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 //import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 //import org.junit.Ignore;
-//import org.junit.Test;
+//import org.junit.jupiter.api.Test;
 //
 //import java.util.Arrays;
 //import java.util.List;

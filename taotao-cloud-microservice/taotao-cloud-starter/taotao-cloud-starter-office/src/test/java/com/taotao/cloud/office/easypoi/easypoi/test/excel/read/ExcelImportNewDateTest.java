@@ -5,7 +5,7 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.test.entity.NewDateEntity;
 import junit.framework.Assert;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.Date;

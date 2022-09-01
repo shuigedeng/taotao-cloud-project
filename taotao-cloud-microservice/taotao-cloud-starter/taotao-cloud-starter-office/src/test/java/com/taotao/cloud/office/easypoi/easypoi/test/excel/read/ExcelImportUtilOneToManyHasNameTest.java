@@ -6,7 +6,7 @@ import cn.afterturn.easypoi.test.entity.MsgClient;
 import cn.afterturn.easypoi.test.entity.onettomany.hasname.DemandEntity;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileInputStream;

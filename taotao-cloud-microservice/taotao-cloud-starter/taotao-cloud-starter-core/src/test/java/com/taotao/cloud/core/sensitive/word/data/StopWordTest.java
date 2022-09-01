@@ -5,7 +5,7 @@ import com.taotao.cloud.common.utils.collection.CollectionUtils;
 import com.taotao.cloud.common.utils.common.CharsetUtils;
 import com.taotao.cloud.common.utils.io.FileUtils;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 

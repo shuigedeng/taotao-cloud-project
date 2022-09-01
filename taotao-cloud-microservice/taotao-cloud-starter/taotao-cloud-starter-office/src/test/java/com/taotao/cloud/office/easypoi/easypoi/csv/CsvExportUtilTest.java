@@ -5,7 +5,7 @@ import cn.afterturn.easypoi.csv.entity.CsvExportParams;
 import cn.afterturn.easypoi.handler.inter.IWriter;
 import com.taotao.cloud.office.easypoi.test.entity.MsgClient;
 import com.taotao.cloud.office.easypoi.test.entity.groupname.GroupExportVo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;

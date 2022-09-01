@@ -5,7 +5,7 @@ import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.system.SystemBuiltInAt;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.system.SystemBuiltInAtEntry;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 系统内置注解测试

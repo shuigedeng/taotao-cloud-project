@@ -1,7 +1,7 @@
 package com.taotao.cloud.office.xpdf.component;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import wiki.xsx.core.pdf.doc.XEasyPdfPositionStyle;
 import wiki.xsx.core.pdf.handler.XEasyPdfHandler;
 

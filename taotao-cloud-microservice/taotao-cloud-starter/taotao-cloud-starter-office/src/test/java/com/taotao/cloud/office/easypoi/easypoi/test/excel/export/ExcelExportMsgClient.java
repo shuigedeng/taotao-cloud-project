@@ -8,7 +8,7 @@ import cn.afterturn.easypoi.excel.entity.params.ExcelExportEntity;
 import cn.afterturn.easypoi.test.entity.MsgClient;
 import cn.afterturn.easypoi.test.entity.MsgClientGroup;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;

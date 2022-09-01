@@ -1,6 +1,6 @@
 package com.taotao.cloud.office.xpdf.template;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import wiki.xsx.core.pdf.template.XEasyPdfTemplatePositionStyle;
 import wiki.xsx.core.pdf.template.doc.XEasyPdfTemplateDocument;
 import wiki.xsx.core.pdf.template.enums.XEasyPdfTemplatePositionStyle;

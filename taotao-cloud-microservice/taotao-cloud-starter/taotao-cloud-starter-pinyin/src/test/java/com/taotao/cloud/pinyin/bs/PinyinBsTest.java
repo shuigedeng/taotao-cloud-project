@@ -2,7 +2,7 @@ package com.taotao.cloud.pinyin.bs;
 
 import com.taotao.cloud.pinyin.support.style.PinyinToneStyles;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 public class PinyinBsTest {

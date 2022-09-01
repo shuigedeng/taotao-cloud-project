@@ -7,7 +7,7 @@ import cn.afterturn.easypoi.test.entity.MsgClient;
 import cn.afterturn.easypoi.test.excel.read.FileUtilTest;
 import cn.afterturn.easypoi.util.JSON;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

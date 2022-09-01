@@ -5,7 +5,7 @@ import cn.afterturn.easypoi.excel.entity.ExcelToHtmlParams;
 import com.taotao.cloud.office.easypoi.easypoi.test.excel.read.FileUtilTest;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileInputStream;

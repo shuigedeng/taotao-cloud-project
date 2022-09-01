@@ -8,7 +8,7 @@ import com.taotao.cloud.common.execl.demo.fill.FillData;
 import com.taotao.cloud.common.execl.temp.fill.FillData2;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;

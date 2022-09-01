@@ -4,7 +4,7 @@ import cn.wisewe.docx4j.input.builder.compression.CompressionImporter;
 import cn.wisewe.docx4j.input.builder.sheet.SpreadSheetImporter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link CompressionImporter}单元测试

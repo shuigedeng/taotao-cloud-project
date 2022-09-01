@@ -4,7 +4,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import wiki.xsx.core.pdf.component.XEasyPdfComponent;
 import wiki.xsx.core.pdf.component.table.XEasyPdfCell;
 import wiki.xsx.core.pdf.component.table.XEasyPdfRow;

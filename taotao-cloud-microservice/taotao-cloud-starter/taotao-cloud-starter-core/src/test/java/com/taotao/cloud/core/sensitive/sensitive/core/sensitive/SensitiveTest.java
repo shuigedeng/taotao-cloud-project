@@ -6,7 +6,7 @@ import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.strategory.StrategyEmail;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.User;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Sensitive 脱敏测试类

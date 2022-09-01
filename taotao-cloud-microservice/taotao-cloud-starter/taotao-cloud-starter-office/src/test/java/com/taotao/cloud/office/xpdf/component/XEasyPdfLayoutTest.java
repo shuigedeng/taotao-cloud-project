@@ -1,6 +1,6 @@
 package com.taotao.cloud.office.xpdf.component;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import wiki.xsx.core.pdf.component.XEasyPdfComponent;
 import wiki.xsx.core.pdf.component.barcode.XEasyPdfBarCode;
 import wiki.xsx.core.pdf.component.layout.XEasyPdfLayoutComponent;

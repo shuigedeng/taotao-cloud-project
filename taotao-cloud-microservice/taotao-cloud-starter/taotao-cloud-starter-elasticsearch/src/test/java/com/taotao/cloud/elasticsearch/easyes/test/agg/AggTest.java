@@ -8,7 +8,7 @@ import com.xpc.easyes.core.conditions.LambdaEsQueryWrapper;
 import com.xpc.easyes.core.toolkit.FieldUtils;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchResponse;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
