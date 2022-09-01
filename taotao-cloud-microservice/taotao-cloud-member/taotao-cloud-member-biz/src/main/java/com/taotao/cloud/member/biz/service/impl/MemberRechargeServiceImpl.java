@@ -9,14 +9,14 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.member.api.web.dto.MemberWalletUpdateDTO;
+import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberWalletService;
 import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
 import com.taotao.cloud.member.biz.mapper.MemberRechargeMapper;
 import com.taotao.cloud.member.biz.service.MemberRechargeService;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.web.query.recharge.RechargePageQuery;
+import com.taotao.cloud.order.api.model.query.recharge.RechargePageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

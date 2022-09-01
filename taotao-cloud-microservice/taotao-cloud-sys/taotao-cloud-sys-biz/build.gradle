@@ -65,14 +65,13 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter:1.17.3'
+    testImplementation 'org.testcontainers:junit-jupiter'
 
-    testImplementation 'org.assertj:assertj-guava:3.4.0'
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.testng:testng:7.5'
-    testImplementation 'com.google.inject:guice:5.1.0'
+    //testImplementation 'org.assertj:assertj-guava:3.4.0'
+    //testImplementation 'junit:junit:4.13.2'
+    //testImplementation 'org.testng:testng:7.5'
+    //testImplementation 'com.google.inject:guice:5.1.0'
 
     //implementation 'com.101tec:zkclient:0.11'
     //implementation 'org.eclipse.jgit:org.eclipse.jgit:4.11.0.201803080745-r'

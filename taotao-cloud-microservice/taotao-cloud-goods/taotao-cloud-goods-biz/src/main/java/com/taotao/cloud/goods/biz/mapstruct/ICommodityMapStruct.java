@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.web.vo.CommoditySkuVO;
+import com.taotao.cloud.goods.api.model.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;

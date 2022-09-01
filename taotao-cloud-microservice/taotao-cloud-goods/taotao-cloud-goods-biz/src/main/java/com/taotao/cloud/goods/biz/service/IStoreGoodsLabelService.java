@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelVO;
+import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 
 import java.util.List;

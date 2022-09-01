@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.service.trade;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.api.web.query.order.OrderLogPageQuery;
+import com.taotao.cloud.order.api.model.query.order.OrderLogPageQuery;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 
 import java.util.List;

@@ -10,7 +10,7 @@ import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.web.vo.MemberSignVO;
+import com.taotao.cloud.member.api.model.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.member.biz.mapper.MemberSignMapper;
 import com.taotao.cloud.member.biz.service.MemberService;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.roketmq.event;
 
-import com.taotao.cloud.member.api.web.dto.MemberPointMessageDTO;
+import com.taotao.cloud.member.api.model.dto.MemberPointMessageDTO;
 
 /**
  * 会员积分改变消息

@@ -16,7 +16,7 @@ import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
 import com.taotao.cloud.distribution.biz.mapper.DistributionCashMapper;
 import com.taotao.cloud.distribution.biz.service.DistributionCashService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
-import com.taotao.cloud.member.api.web.dto.MemberWalletUpdateDTO;
+import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.enums.MemberWithdrawalDestinationEnum;
 import com.taotao.cloud.member.api.enums.WithdrawStatusEnum;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service;
 
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.goods.api.web.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.promotion.api.web.vo.BasePromotionsVO;

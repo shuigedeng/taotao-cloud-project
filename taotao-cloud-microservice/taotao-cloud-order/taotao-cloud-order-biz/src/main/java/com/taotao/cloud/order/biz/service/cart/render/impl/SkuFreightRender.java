@@ -1,9 +1,9 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
-import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
-import com.taotao.cloud.order.api.web.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.biz.service.cart.render.ICartRenderStep;
 import com.taotao.cloud.store.api.web.dto.FreightTemplateChildDTO;
 import com.taotao.cloud.store.api.enums.FreightTemplateEnum;

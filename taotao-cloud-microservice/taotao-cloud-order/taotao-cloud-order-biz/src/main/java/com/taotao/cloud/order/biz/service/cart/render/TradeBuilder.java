@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.service.cart.render;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;

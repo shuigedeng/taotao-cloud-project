@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.order.biz.mapstruct;
 
-import com.taotao.cloud.order.api.web.vo.aftersale.AfterSaleLogVO;
+import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleLogVO;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

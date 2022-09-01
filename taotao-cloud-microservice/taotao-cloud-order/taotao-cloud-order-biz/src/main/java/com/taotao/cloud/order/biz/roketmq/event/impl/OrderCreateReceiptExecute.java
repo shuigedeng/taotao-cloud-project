@@ -2,9 +2,9 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.web.vo.order.OrderVO;
-import com.taotao.cloud.order.api.web.vo.order.ReceiptVO;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.vo.order.OrderVO;
+import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import com.taotao.cloud.order.biz.service.order.IReceiptService;

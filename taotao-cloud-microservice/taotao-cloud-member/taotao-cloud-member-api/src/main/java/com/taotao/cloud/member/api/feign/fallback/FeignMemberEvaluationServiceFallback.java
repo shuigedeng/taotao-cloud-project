@@ -2,12 +2,12 @@ package com.taotao.cloud.member.api.feign.fallback;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.member.api.web.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
-import com.taotao.cloud.member.api.web.query.EvaluationPageQuery;
-import com.taotao.cloud.member.api.web.vo.MemberEvaluationListVO;
-import com.taotao.cloud.member.api.web.vo.MemberEvaluationVO;
-import com.taotao.cloud.member.api.web.vo.StoreRatingVO;
+import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
+import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 import java.util.List;

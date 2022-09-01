@@ -13,7 +13,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.CookieUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.member.api.web.query.ConnectQuery;
+import com.taotao.cloud.member.api.model.query.ConnectQuery;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.entity.dto.WechatMPLoginParams;

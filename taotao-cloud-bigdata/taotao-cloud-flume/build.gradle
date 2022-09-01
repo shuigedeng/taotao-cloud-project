@@ -3,7 +3,7 @@ dependencies {
     implementation 'org.apache.flume:flume-ng-core:1.10.0'
     implementation 'org.apache.flume.flume-ng-sources:flume-kafka-source:1.10.0'
 
-    implementation 'com.alibaba.fastjson2:fastjson2:2.0.10'
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.12'
     implementation "mysql:mysql-connector-java"
     implementation 'com.alibaba:druid:1.2.11'
 }

@@ -12,6 +12,8 @@ dependencies {
     api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
     api platform("com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}")
 
+    api platform("org.testcontainers:testcontainers-bom:${testContainersVersion}")
+
     constraints {
         api "org.apache.commons:commons-lang3:${commonsVersion}"
         api "org.apache.commons:commons-collections4:${commonsCollections4Version}"

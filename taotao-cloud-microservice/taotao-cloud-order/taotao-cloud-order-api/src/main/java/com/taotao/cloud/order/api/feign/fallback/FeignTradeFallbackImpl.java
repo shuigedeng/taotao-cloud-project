@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.api.feign.fallback;
 
 import com.taotao.cloud.order.api.feign.IFeignTradeService;
-import com.taotao.cloud.order.api.web.vo.trade.TradeVO;
+import com.taotao.cloud.order.api.model.vo.trade.TradeVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

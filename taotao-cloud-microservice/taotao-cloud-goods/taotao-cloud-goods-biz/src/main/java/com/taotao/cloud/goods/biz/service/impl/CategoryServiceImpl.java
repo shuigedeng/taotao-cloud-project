@@ -11,7 +11,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.goods.api.web.vo.CategoryTreeVO;
+import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.goods.biz.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;

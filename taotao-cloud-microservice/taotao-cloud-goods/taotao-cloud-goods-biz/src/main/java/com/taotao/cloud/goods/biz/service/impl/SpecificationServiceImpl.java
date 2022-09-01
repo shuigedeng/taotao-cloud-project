@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.disruptor.util.StringUtils;
-import com.taotao.cloud.goods.api.web.query.SpecificationPageQuery;
+import com.taotao.cloud.goods.api.model.query.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.mapper.ISpecificationMapper;

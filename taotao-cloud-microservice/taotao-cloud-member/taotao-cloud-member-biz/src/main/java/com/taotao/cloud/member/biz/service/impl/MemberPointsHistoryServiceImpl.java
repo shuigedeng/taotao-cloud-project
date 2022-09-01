@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.member.api.web.vo.MemberPointsHistoryVO;
+import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 import com.taotao.cloud.member.biz.mapper.MemberPointsHistoryMapper;

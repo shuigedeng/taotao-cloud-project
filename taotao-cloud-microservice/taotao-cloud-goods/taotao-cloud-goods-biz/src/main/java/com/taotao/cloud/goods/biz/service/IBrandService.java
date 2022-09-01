@@ -3,8 +3,8 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.api.web.dto.BrandDTO;
-import com.taotao.cloud.goods.api.web.query.BrandPageQuery;
+import com.taotao.cloud.goods.api.model.dto.BrandDTO;
+import com.taotao.cloud.goods.api.model.query.BrandPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 
 import java.util.List;

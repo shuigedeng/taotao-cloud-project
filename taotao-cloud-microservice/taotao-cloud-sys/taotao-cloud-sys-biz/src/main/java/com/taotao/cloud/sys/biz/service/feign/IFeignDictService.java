@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.biz.service.feign;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
-import java.util.function.Function;
 
 /**
  * ISysDictService
@@ -29,6 +28,6 @@ import java.util.function.Function;
  */
 public interface IFeignDictService extends BaseSuperService<Dict, Long> {
 
-
+ <T> T test123(T t);
 
 }

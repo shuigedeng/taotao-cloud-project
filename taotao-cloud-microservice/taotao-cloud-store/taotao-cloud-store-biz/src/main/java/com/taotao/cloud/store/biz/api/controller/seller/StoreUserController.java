@@ -7,7 +7,7 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
-import com.taotao.cloud.member.api.web.vo.MemberVO;
+import com.taotao.cloud.member.api.model.vo.MemberVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

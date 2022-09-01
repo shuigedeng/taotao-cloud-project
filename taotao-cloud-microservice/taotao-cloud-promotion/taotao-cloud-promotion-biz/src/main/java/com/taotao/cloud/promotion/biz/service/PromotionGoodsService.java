@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.order.api.web.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.promotion.api.web.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 

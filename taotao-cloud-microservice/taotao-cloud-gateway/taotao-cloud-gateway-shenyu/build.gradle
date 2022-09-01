@@ -83,4 +83,11 @@ dependencies {
 
     api 'io.soabase.record-builder:record-builder-core:34'
     annotationProcessor 'io.soabase.record-builder:record-builder-processor:34'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }

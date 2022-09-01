@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.biz.elasticsearch;
 
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.goods.api.web.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;

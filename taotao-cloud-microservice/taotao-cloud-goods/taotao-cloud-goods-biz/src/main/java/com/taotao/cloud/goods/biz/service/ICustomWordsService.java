@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.goods.api.web.vo.CustomWordsVO;
+import com.taotao.cloud.goods.api.model.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 
 /**
