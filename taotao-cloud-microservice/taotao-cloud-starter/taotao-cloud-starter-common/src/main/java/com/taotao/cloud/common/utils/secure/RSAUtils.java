@@ -68,7 +68,6 @@ public class RSAUtils {
 	 * 随机生成密钥对（公钥、私钥）
 	 *
 	 * @return {@link java.util.Map }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:55:15
 	 */
 	public static Map<RSAKey, String> generatorPairKey() {
@@ -106,7 +105,6 @@ public class RSAUtils {
 	 * @param text      明文
 	 * @param publicKey 公钥
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:55:15
 	 */
 	public static String encrypt(String text, String publicKey) {
@@ -135,7 +133,6 @@ public class RSAUtils {
 	 * @param ciphertext 密文
 	 * @param privateKey 私钥
 	 * @return 明文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:55:15
 	 */
 	public static String decrypt(String ciphertext, String privateKey) {

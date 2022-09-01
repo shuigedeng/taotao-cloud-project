@@ -84,7 +84,6 @@ public class PageModelClass<R> implements Serializable {
 	 * @param page page
 	 * @param <R>  R
 	 * @return {@link PageModelClass }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:10:45
 	 */
 	public static <R, T> PageModelClass<R> convertJpaPage(Page<T> page , Class<R> r) {
@@ -109,7 +108,6 @@ public class PageModelClass<R> implements Serializable {
 	 * @param page page
 	 * @param <R>  R
 	 * @return {@link PageModelClass }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:10:49
 	 */
 	public static <R, T> PageModelClass<R> convertMybatisPage(IPage<T> page, Class<R> r) {
@@ -138,7 +136,6 @@ public class PageModelClass<R> implements Serializable {
 	 * @param data        data
 	 * @param <R>         R
 	 * @return {@link PageModelClass }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:11:10
 	 */
 	public static <R> PageModelClass<R> of(

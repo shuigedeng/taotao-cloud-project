@@ -53,7 +53,6 @@ public class GeoHash {
 	 *
 	 * @param lat 纬度
 	 * @param lng 液化天然气
-	 * @return
 	 * @since 2022-05-11 10:33:53
 	 */
 	public GeoHash(double lat, double lng) {

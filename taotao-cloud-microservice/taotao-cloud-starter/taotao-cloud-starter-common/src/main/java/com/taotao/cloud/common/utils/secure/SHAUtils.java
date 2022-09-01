@@ -46,7 +46,6 @@ public class SHAUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt(String text) {
@@ -58,7 +57,6 @@ public class SHAUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt224(String text) {
@@ -70,7 +68,6 @@ public class SHAUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt256(String text) {
@@ -82,7 +79,6 @@ public class SHAUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt384(String text) {
@@ -94,7 +90,6 @@ public class SHAUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt512(String text) {
@@ -107,7 +102,6 @@ public class SHAUtils {
 	 * @param text      明文
 	 * @param algorithm 加密类型
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:58:16
 	 */
 	private static String encrypt(String text, String algorithm) {
@@ -130,7 +124,6 @@ public class SHAUtils {
 	 *
 	 * @param bytes 字节
 	 * @return 字符串
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:58:16
 	 */
 	private static String bytes2Str(byte[] bytes) {

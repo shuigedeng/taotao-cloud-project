@@ -52,7 +52,6 @@ public class DESUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:28
 	 */
 	public static String encrypt(String text) {
@@ -65,7 +64,6 @@ public class DESUtils {
 	 * @param text 明文
 	 * @param key  秘钥
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:28
 	 */
 	public static String encrypt(String text, String key) {
@@ -98,7 +96,6 @@ public class DESUtils {
 	 *
 	 * @param ciphertext 密文
 	 * @return 明文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:28
 	 */
 	public static String decrypt(String ciphertext) {
@@ -111,7 +108,6 @@ public class DESUtils {
 	 * @param ciphertext 密文
 	 * @param key        秘钥
 	 * @return 明文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:28
 	 */
 	public static String decrypt(String ciphertext, String key) {

@@ -8,8 +8,8 @@ import java.util.Set;
  * 属性上下文上下文
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-27 17:06:36
+ * @version 2022.09
+ * @since 2022-09-01 09:46:28
  */
 public interface IAttributeContext {
 
@@ -19,7 +19,7 @@ public interface IAttributeContext {
 	 * @param key   key
 	 * @param value 值
 	 * @return {@link IAttributeContext }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:29
 	 */
 	IAttributeContext putAttr(final String key, final Object value);
 
@@ -28,7 +28,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Object }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:29
 	 */
 	Object getAttr(final String key);
 
@@ -37,7 +37,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Optional }<{@link Object }>
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:29
 	 */
 	Optional<Object> getAttrOptional(final String key);
 
@@ -46,7 +46,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link String }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:29
 	 */
 	String getAttrString(final String key);
 
@@ -55,7 +55,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Boolean }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:29
 	 */
 	Boolean getAttrBoolean(final String key);
 
@@ -64,7 +64,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Character }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	Character getAttrCharacter(final String key);
 
@@ -73,7 +73,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Byte }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	Byte getAttrByte(final String key);
 
@@ -82,7 +82,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Short }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	Short getAttrShort(final String key);
 
@@ -91,7 +91,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Integer }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	Integer getAttrInteger(final String key);
 
@@ -100,7 +100,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Float }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	Float getAttrFloat(final String key);
 
@@ -109,7 +109,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Double }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	Double getAttrDouble(final String key);
 
@@ -118,7 +118,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link Long }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	Long getAttrLong(final String key);
 
@@ -127,7 +127,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return {@link IAttributeContext }
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	IAttributeContext removeAttr(final String key);
 
@@ -136,7 +136,7 @@ public interface IAttributeContext {
 	 *
 	 * @param key key
 	 * @return boolean
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	boolean containsKey(final String key);
 
@@ -144,7 +144,7 @@ public interface IAttributeContext {
 	 * 所有的 key 集合
 	 *
 	 * @return {@link Set }<{@link String }>
-	 * @since 2022-04-27 17:06:36
+	 * @since 2022-09-01 09:46:30
 	 */
 	Set<String> keySet();
 

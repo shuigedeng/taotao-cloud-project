@@ -345,7 +345,6 @@ public class PageQueryClass<QueryDTO> implements Serializable {
 	 * }。 排序： name desc
 	 *
 	 * @return {@link IPage }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:19:05
 	 */
 	@JsonIgnore

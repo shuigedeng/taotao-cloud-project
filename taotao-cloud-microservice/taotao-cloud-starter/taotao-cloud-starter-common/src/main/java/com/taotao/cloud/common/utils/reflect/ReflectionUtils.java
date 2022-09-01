@@ -819,7 +819,6 @@ public class ReflectionUtils extends org.springframework.util.ReflectionUtils {
 	 * @param filedName   字段名称
 	 * @param entityClass 实体类
 	 * @return {@link Boolean }
-	 * @author 结果
 	 * @since 2021-10-13 17:36:08
 	 */
 	public static Boolean checkField(String filedName, Class<?> entityClass) {

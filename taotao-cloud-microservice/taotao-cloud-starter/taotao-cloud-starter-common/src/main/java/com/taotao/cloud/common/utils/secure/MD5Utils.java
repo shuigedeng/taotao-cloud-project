@@ -42,7 +42,6 @@ public class MD5Utils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:56:32
 	 */
 	public static String encrypt(String text) {

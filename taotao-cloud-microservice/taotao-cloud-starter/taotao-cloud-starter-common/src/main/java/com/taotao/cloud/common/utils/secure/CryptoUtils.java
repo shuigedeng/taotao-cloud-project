@@ -51,7 +51,6 @@ public class CryptoUtils {
 	 *
 	 * @param bytes bytes
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:35:29
 	 */
 	public static String encodeMD5(final byte[] bytes) {
@@ -63,7 +62,6 @@ public class CryptoUtils {
 	 *
 	 * @param str str
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:35:34
 	 */
 	public static String encodeMD5(final String str) {
@@ -76,7 +74,6 @@ public class CryptoUtils {
 	 * @param str     str
 	 * @param charset charset
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:35:38
 	 */
 	public static String encodeMD5(final String str, final String charset) {
@@ -96,7 +93,6 @@ public class CryptoUtils {
 	 *
 	 * @param bytes bytes
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:35:43
 	 */
 	public static String encodeSHA(final byte[] bytes) {
@@ -109,7 +105,6 @@ public class CryptoUtils {
 	 * @param str     str
 	 * @param charset charset
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:35:48
 	 */
 	public static String encodeSHA(final String str, final String charset) {
@@ -129,7 +124,6 @@ public class CryptoUtils {
 	 *
 	 * @param str str
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:35:53
 	 */
 	public static String encodeSHA(final String str) {
@@ -141,7 +135,6 @@ public class CryptoUtils {
 	 *
 	 * @param bytes bytes
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:35:57
 	 */
 	public static String encodeBASE64(final byte[] bytes) {
@@ -154,7 +147,6 @@ public class CryptoUtils {
 	 * @param str     str
 	 * @param charset charset
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:02
 	 */
 	public static String encodeBASE64(final String str, String charset) {
@@ -174,7 +166,6 @@ public class CryptoUtils {
 	 *
 	 * @param str str
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:07
 	 */
 	public static String encodeBASE64(final String str) {
@@ -186,7 +177,6 @@ public class CryptoUtils {
 	 *
 	 * @param str str
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:14
 	 */
 	public static String decodeBASE64(String str) {
@@ -199,7 +189,6 @@ public class CryptoUtils {
 	 * @param str     str
 	 * @param charset charset
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:18
 	 */
 	public static String decodeBASE64(String str, String charset) {
@@ -216,7 +205,6 @@ public class CryptoUtils {
 	 *
 	 * @param bytes bytes
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:22
 	 */
 	public static String crc32(byte[] bytes) {
@@ -231,7 +219,6 @@ public class CryptoUtils {
 	 * @param str     str
 	 * @param charset charset
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:27
 	 */
 	public static String crc32(final String str, String charset) {
@@ -248,7 +235,6 @@ public class CryptoUtils {
 	 *
 	 * @param str str
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:37
 	 */
 	public static String crc32(final String str) {
@@ -260,7 +246,6 @@ public class CryptoUtils {
 	 *
 	 * @param input input
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:42
 	 */
 	public static String crc32(InputStream input) {
@@ -284,7 +269,6 @@ public class CryptoUtils {
 	 *
 	 * @param file file
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:47
 	 */
 	public static String crc32(File file) {
@@ -305,7 +289,6 @@ public class CryptoUtils {
 	 *
 	 * @param url url
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:36:51
 	 */
 	public static String crc32(URL url) {

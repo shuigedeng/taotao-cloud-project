@@ -49,7 +49,6 @@ public class BlockChain {
 	 *
 	 * @param data data
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:40:42
 	 */
 	public static String minedBlockChain(String data) {
@@ -67,7 +66,6 @@ public class BlockChain {
 	 *
 	 * @param blockHash blockHash
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:40:46
 	 */
 	public static String decryptBlockchain(String blockHash) {
@@ -90,7 +88,6 @@ public class BlockChain {
 	 * 检查区块链的完整性
 	 *
 	 * @return {@link java.lang.Boolean }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:40:54
 	 */
 	public static Boolean isChainValid() {
