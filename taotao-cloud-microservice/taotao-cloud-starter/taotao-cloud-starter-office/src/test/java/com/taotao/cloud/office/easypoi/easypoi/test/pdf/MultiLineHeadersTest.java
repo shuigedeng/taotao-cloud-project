@@ -29,7 +29,7 @@ import cn.afterturn.easypoi.pdf.entity.PdfExportParams;
 
 import com.itextpdf.layout.Document;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 /**

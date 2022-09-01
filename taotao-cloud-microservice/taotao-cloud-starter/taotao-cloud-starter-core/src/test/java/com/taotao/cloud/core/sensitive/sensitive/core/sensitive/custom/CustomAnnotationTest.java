@@ -4,7 +4,7 @@ import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.custom.CustomPasswordEntryModel;
 import com.taotao.cloud.core.sensitive.sensitive.model.custom.CustomPasswordModel;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 自定义注解测试

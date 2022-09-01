@@ -1,7 +1,7 @@
 package com.taotao.cloud.pinyin.util;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 分词测试

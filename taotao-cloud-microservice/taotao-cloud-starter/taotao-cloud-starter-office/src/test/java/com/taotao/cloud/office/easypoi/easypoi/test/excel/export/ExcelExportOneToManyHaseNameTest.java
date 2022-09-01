@@ -9,7 +9,7 @@ import cn.afterturn.easypoi.test.entity.onettomany.hasname.DeptEntity;
 import cn.afterturn.easypoi.test.entity.onettomany.hasname.SupMaterialEntity;
 import cn.afterturn.easypoi.test.excel.handler.ExcelDictHandlerImpl;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -5,7 +5,7 @@ import com.taotao.cloud.core.sensitive.word.api.IWordResult;
 import com.taotao.cloud.core.sensitive.word.replace.MySensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.support.result.WordResultHandlers;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 

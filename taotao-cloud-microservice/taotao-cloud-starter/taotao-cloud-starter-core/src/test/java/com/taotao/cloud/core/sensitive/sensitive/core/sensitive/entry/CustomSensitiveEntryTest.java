@@ -8,7 +8,7 @@ import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.entry.CustomUse
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.entry.CustomUserEntryObject;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.entry.CustomUserGroup;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * SensitiveEntry 注解-脱敏测试类

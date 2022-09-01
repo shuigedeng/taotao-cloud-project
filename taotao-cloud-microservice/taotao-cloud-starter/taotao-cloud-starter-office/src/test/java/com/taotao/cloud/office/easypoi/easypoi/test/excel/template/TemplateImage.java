@@ -2,7 +2,7 @@ package com.taotao.cloud.office.easypoi.easypoi.test.excel.template;
 
 import com.google.common.collect.Maps;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;

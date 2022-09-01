@@ -17,7 +17,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link SpreadSheetExporter}单元测试

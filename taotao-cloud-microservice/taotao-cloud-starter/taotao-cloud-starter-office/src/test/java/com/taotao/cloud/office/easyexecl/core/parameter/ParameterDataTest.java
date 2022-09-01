@@ -12,7 +12,7 @@ import com.alibaba.excel.write.metadata.WriteTable;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
 
 import java.io.File;

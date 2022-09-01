@@ -26,7 +26,7 @@ import cn.afterturn.easypoi.test.excel.read.FileUtilTest;
 import cn.afterturn.easypoi.util.PoiPublicUtil;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 /**
  * 输入模板校验
  * 双行版本

@@ -28,7 +28,7 @@ import cn.afterturn.easypoi.test.word.entity.TaxManagement;
 import cn.afterturn.easypoi.word.WordExportUtil;
 import cn.afterturn.easypoi.word.entity.params.ExcelListEntity;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TaxManagementTest {
 

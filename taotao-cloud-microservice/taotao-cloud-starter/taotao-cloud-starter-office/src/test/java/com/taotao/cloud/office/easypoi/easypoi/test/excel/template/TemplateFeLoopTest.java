@@ -5,7 +5,7 @@ import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import cn.afterturn.easypoi.test.excel.export.ExcelExportOneToManyHaseNameTest;
 import cn.afterturn.easypoi.test.excel.handler.ExcelDictHandlerImpl;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

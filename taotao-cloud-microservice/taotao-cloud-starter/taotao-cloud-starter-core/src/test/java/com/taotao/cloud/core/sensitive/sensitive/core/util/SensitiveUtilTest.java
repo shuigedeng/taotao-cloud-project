@@ -2,7 +2,7 @@ package com.taotao.cloud.core.sensitive.sensitive.core.util;
 
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.bugs.Father;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 public class SensitiveUtilTest {

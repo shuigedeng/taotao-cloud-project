@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import cn.afterturn.easypoi.view.PoiBaseView;
 import com.taotao.cloud.office.easypoi.test.entity.MsgClient;
 import com.taotao.cloud.office.easypoi.test.entity.MsgClientGroup;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;

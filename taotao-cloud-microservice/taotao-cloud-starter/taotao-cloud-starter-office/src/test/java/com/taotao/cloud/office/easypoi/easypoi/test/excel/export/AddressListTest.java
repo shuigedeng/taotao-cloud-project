@@ -7,7 +7,7 @@ import cn.afterturn.easypoi.test.addressList.AddressListEntity;
 import cn.afterturn.easypoi.test.en.Sex;
 import cn.afterturn.easypoi.test.excel.handler.ExcelDiceAddressListHandlerImpl;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;

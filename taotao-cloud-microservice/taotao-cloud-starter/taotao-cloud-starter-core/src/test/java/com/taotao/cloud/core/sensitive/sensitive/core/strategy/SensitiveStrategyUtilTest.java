@@ -2,7 +2,7 @@ package com.taotao.cloud.core.sensitive.sensitive.core.strategy;
 
 import com.taotao.cloud.core.sensitive.sensitive.core.util.strategy.SensitiveStrategyUtil;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 脱敏策略工具类测试

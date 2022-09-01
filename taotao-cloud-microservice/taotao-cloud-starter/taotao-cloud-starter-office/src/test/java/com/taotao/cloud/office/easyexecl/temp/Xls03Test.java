@@ -6,7 +6,7 @@ import com.alibaba.fastjson2.JSON;
 import net.sf.cglib.beans.BeanMap;
 import net.sf.cglib.core.DebuggingClassWriter;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -8,7 +8,7 @@ import cn.afterturn.easypoi.excel.ExcelXorHtmlUtil;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileOutputStream;

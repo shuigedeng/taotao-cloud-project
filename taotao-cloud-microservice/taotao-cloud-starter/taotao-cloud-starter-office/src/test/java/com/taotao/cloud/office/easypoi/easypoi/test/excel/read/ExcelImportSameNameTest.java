@@ -21,7 +21,7 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.util.PoiPublicUtil;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 同名列导入测试

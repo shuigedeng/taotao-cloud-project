@@ -1,7 +1,7 @@
 package com.taotao.cloud.office.easypoi.easypoi;
 
 import cn.afterturn.easypoi.util.JSON;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

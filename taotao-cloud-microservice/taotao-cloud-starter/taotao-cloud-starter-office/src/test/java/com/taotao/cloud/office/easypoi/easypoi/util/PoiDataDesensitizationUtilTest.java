@@ -1,7 +1,7 @@
 package com.taotao.cloud.office.easypoi.easypoi.util;
 
 import cn.afterturn.easypoi.util.PoiDataDesensitizationUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 

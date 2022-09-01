@@ -2,7 +2,7 @@ package com.taotao.cloud.office.easypoi.easypoi.util;
 
 import cn.afterturn.easypoi.util.PoiElUtil;
 import junit.framework.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.HashMap;

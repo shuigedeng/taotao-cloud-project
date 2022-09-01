@@ -3,7 +3,7 @@ package com.taotao.cloud.core.sensitive.word.bs;
 import com.taotao.cloud.core.sensitive.word.support.allow.WordAllows;
 import com.taotao.cloud.core.sensitive.word.support.deny.WordDenys;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 

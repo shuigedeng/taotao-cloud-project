@@ -10,7 +10,7 @@ import com.taotao.cloud.common.support.tuple.tuple.Tuple3;
 import com.taotao.cloud.common.support.tuple.tuple.Tuple4;
 import com.taotao.cloud.common.support.tuple.tuple.Tuple5;
 import com.taotao.cloud.common.support.tuple.tuple.TupleN;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

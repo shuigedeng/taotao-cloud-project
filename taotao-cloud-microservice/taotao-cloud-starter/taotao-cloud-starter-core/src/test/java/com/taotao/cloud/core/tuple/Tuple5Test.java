@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.tuple;
 
 import com.taotao.cloud.common.support.tuple.tuple.Tuple5;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 public class Tuple5Test {

@@ -16,7 +16,7 @@ import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.common.execl.util.TestFileUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.List;

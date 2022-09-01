@@ -3,7 +3,7 @@ package com.taotao.cloud.common.generator.bank;
 import com.taotao.cloud.common.support.generator.bank.BankCardNumberGenerator;
 import com.taotao.cloud.common.support.generator.bank.BankCardTypeEnum;
 import com.taotao.cloud.common.support.generator.bank.BankNameEnum;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertNotNull;
 

@@ -3,7 +3,7 @@ package com.taotao.cloud.office.easypoi.easypoi.test.excel.read.img;
 import cn.afterturn.easypoi.test.excel.read.FileUtilTest;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.List;

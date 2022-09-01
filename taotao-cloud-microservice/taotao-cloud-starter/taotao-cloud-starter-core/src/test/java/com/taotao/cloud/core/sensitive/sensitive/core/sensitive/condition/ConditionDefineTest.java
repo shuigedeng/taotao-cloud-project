@@ -3,7 +3,7 @@ package com.taotao.cloud.core.sensitive.sensitive.core.sensitive.condition;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.condition.SensitiveConditionPassword;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 自定义条件测试

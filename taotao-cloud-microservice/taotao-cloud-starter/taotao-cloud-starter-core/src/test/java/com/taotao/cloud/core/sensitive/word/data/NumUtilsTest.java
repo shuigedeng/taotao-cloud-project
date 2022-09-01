@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;

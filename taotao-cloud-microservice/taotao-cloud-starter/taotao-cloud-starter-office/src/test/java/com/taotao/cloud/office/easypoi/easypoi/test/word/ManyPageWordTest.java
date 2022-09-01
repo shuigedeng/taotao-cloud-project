@@ -2,7 +2,7 @@ package com.taotao.cloud.office.easypoi.easypoi.test.word;
 
 import cn.afterturn.easypoi.word.WordExportUtil;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package com.taotao.cloud.core.sensitive.sensitive.core.sensitive.system;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.system.SensitiveErrorSystemBuiltInModel;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 错误的使用系统内置类测试

@@ -2,7 +2,7 @@ package com.taotao.cloud.pinyin.bugs;
 
 import com.taotao.cloud.pinyin.util.PinyinHelper;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Bug16Test {
 

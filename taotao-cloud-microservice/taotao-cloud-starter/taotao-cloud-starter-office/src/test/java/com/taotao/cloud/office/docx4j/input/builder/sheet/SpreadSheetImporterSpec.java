@@ -7,7 +7,7 @@ import com.taotao.cloud.sys.biz.support.docx4j.input.builder.sheet.SpreadSheetIm
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link SpreadSheetImporter}单元测试

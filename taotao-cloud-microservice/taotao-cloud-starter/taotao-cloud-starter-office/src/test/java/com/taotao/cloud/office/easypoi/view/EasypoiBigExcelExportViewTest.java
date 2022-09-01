@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.afterturn.easypoi.view.PoiBaseView;
 import com.taotao.cloud.office.easypoi.test.entity.MsgClient;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

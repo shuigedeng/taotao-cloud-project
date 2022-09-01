@@ -5,7 +5,7 @@ import com.taotao.cloud.core.sensitive.word.api.IWordDeny;
 import com.taotao.cloud.core.sensitive.word.bs.SensitiveWordBs;
 import com.taotao.cloud.core.sensitive.word.support.allow.WordAllows;
 import com.taotao.cloud.core.sensitive.word.support.deny.WordDenys;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MySensitiveTest {
 

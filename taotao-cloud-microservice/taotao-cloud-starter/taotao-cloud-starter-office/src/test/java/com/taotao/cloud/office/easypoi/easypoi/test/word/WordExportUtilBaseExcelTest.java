@@ -14,7 +14,7 @@ import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.test.word.entity.Person;
 import cn.afterturn.easypoi.word.WordExportUtil;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class WordExportUtilBaseExcelTest {
 

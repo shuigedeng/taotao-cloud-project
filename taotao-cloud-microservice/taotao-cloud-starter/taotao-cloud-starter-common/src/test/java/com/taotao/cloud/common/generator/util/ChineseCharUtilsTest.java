@@ -1,7 +1,7 @@
 // package com.taotao.cloud.common.generator.util;
 //
 //
-// import org.junit.Test;
+// import org.junit.jupiter.api.Test;
 //
 // import static com.taotao.cloud.common.support.generator.util.ChineseCharUtils.genFixedLengthChineseChars;
 // import static com.taotao.cloud.common.support.generator.util.ChineseCharUtils.genOneChineseChars;
