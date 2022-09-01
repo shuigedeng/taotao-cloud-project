@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.service;
 
 
-import com.taotao.cloud.member.api.web.vo.MemberVO;
+import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.promotion.api.web.vo.CouponActivityVO;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivity;
 

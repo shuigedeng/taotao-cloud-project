@@ -1,9 +1,9 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.message.OrderMessage;
-import com.taotao.cloud.order.api.web.vo.order.OrderVO;
+import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import org.springframework.beans.factory.annotation.Autowired;

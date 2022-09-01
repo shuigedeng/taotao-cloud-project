@@ -16,6 +16,6 @@ dependencies {
 //    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.2'
 
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-webflux-ui
-    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.9'
+    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.11'
 }
 

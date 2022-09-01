@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.web.dto.BrandDTO;
-import com.taotao.cloud.goods.api.web.vo.BrandVO;
+import com.taotao.cloud.goods.api.model.dto.BrandDTO;
+import com.taotao.cloud.goods.api.model.vo.BrandVO;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

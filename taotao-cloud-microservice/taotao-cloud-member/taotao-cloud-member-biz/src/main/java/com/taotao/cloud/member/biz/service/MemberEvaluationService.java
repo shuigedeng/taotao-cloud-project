@@ -2,9 +2,9 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.api.web.dto.MemberEvaluationDTO;
-import com.taotao.cloud.member.api.web.query.EvaluationPageQuery;
-import com.taotao.cloud.member.api.web.vo.EvaluationNumberVO;
+import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.model.vo.EvaluationNumberVO;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
 
 /**

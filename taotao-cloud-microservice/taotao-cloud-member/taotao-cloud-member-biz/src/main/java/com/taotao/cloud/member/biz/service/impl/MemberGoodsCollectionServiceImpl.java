@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.member.api.web.vo.GoodsCollectionVO;
+import com.taotao.cloud.member.api.model.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;
 import com.taotao.cloud.member.biz.mapper.GoodsCollectionMapper;
 import com.taotao.cloud.member.biz.service.IMemberGoodsCollectionService;

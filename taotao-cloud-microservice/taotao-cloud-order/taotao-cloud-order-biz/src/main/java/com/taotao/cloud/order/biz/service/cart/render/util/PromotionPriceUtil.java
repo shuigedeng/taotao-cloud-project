@@ -3,8 +3,8 @@ package com.taotao.cloud.order.biz.service.cart.render.util;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
-import com.taotao.cloud.order.api.web.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.web.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

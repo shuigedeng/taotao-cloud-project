@@ -1,18 +1,18 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo'))
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo')
 
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api'))
+    implementation project(':taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api')
 
     //https://search.maven.org/artifact/org.webjars/jquery
     implementation 'org.webjars:jquery:3.6.0'
@@ -54,8 +54,6 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.24'
     implementation 'io.soabase.record-builder:record-builder-core:34'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
@@ -64,11 +62,13 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
 }
-
-mainClassName="com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+mainClassName="com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
 

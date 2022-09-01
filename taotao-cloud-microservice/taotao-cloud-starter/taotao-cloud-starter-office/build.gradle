@@ -60,9 +60,9 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    testImplementation 'junit:junit:4.13.2'
+    //testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter:1.17.3'
+    testImplementation 'org.testcontainers:junit-jupiter'
 }
 
 tasks.named('test') {
@@ -135,9 +135,7 @@ tasks.named('test') {
 //    //转PNG需要
 //    api 'org.apache.xmlgraphics:batik-codec:1.14'
 //
-//    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-//
-//    testImplementation 'junit:junit:4.13.2'
+//    //testImplementation 'junit:junit:4.13.2'
 //}
 
 

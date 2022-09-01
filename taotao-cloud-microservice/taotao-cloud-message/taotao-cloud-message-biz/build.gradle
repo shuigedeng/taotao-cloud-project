@@ -41,4 +41,11 @@ dependencies {
     implementation 'com.ctrip.framework.apollo:apollo-client-config-data:1.9.1'
     //腾讯sdk(目前用在短信上)
     implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.1.390'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }

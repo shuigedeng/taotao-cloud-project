@@ -2,9 +2,9 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.api.web.dto.DraftGoodsSkuParamsDTO;
-import com.taotao.cloud.goods.api.web.query.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.api.web.vo.DraftGoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.model.dto.DraftGoodsSkuParamsDTO;
+import com.taotao.cloud.goods.api.model.query.DraftGoodsPageQuery;
+import com.taotao.cloud.goods.api.model.vo.DraftGoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
 
 /**

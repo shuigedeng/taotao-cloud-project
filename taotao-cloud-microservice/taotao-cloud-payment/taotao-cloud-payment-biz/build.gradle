@@ -28,8 +28,14 @@ dependencies {
     implementation 'com.paypal.sdk:checkout-sdk:1.0.5'
 
     implementation 'com.yungouos.pay:yungouos-pay-sdk:2.0.26'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
 }
 
+tasks.named('test') {
+    useJUnitPlatform()
+}
 //shadowJar {
 //    zip64 true
 //    mergeServiceFiles()

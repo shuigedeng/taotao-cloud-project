@@ -2,8 +2,8 @@ package com.taotao.cloud.order.biz.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.api.web.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.api.web.query.order.ReceiptPageQuery;
+import com.taotao.cloud.order.api.model.dto.order.OrderReceiptDTO;
+import com.taotao.cloud.order.api.model.query.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 
 /**

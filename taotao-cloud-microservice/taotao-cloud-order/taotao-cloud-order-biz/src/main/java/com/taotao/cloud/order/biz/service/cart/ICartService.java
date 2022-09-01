@@ -1,9 +1,9 @@
 package com.taotao.cloud.order.biz.service.cart;
 
 
-import com.taotao.cloud.order.api.web.dto.trade.TradeDTO;
+import com.taotao.cloud.order.api.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
-import com.taotao.cloud.order.api.web.vo.order.ReceiptVO;
+import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
 
 /**

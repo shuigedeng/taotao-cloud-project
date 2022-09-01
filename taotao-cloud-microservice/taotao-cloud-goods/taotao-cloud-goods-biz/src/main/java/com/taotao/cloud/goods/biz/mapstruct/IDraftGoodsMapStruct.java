@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.goods.biz.mapstruct;
 
-import com.taotao.cloud.goods.api.web.dto.DraftGoodsSkuParamsDTO;
+import com.taotao.cloud.goods.api.model.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

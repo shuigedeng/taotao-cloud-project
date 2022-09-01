@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.goods.api.web.query.SpecificationPageQuery;
+import com.taotao.cloud.goods.api.model.query.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 
 import java.util.List;

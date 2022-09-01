@@ -2,7 +2,7 @@ package com.taotao.cloud.member.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback;
-import com.taotao.cloud.member.api.web.vo.MemberAddressVO;
+import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

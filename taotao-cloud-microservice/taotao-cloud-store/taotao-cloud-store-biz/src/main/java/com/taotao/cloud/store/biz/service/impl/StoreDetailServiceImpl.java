@@ -10,7 +10,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
-import com.taotao.cloud.goods.api.web.vo.CategoryTreeVO;
+import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
 import com.taotao.cloud.store.api.web.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.web.dto.StoreSettingDTO;
 import com.taotao.cloud.store.api.web.dto.StoreSettlementDay;

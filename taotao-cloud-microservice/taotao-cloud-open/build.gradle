@@ -40,8 +40,14 @@ dependencies {
 
 	api 'io.soabase.record-builder:record-builder-core:34'
 	annotationProcessor 'io.soabase.record-builder:record-builder-processor:34'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.testcontainers:junit-jupiter'
 }
 
+tasks.named('test') {
+	useJUnitPlatform()
+}
 bootBuildImage {
 	builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"
 	runImage = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-run:base-cnb"

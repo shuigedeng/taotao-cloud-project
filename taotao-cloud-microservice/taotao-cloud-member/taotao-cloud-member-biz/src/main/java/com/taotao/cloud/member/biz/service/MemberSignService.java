@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import com.taotao.cloud.member.api.web.vo.MemberSignVO;
+import com.taotao.cloud.member.api.model.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import java.util.List;
 

@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.task;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import com.taotao.cloud.member.api.feign.IFeignMemberRechargeService;
-import com.taotao.cloud.member.api.web.vo.MemberRechargeVO;
+import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;

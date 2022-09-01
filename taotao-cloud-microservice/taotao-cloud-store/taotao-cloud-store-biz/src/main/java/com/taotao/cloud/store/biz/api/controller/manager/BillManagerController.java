@@ -6,7 +6,7 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowService;
-import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
+import com.taotao.cloud.order.api.model.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.web.query.BillPageQuery;
 import com.taotao.cloud.store.api.web.vo.BillListVO;
 import com.taotao.cloud.store.biz.model.entity.Bill;

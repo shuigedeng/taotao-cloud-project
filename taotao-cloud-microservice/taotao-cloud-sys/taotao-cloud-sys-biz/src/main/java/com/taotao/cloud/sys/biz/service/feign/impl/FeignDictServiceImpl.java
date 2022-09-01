@@ -41,4 +41,9 @@ public class FeignDictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict
 	implements IFeignDictService {
 	@Autowired
 	private IDictService dictService;
+
+    @Override
+    public <T> T test123(T t) {
+        return t;
+    }
 }

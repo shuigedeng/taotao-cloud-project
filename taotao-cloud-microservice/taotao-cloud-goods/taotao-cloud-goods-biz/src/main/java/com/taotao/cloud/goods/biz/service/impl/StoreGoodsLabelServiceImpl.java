@@ -9,7 +9,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelVO;
+import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.mapper.IStoreGoodsLabelMapper;
 import com.taotao.cloud.goods.biz.service.IStoreGoodsLabelService;
