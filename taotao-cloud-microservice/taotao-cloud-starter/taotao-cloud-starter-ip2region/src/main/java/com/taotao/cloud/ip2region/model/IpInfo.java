@@ -124,4 +124,15 @@ public class IpInfo implements Serializable {
 	public void setIsp(String isp) {
 		this.isp = isp;
 	}
+
+	@Override
+	public String toString() {
+		return "IpInfo{" +
+			"country='" + country + '\'' +
+			", region='" + region + '\'' +
+			", province='" + province + '\'' +
+			", city='" + city + '\'' +
+			", isp='" + isp + '\'' +
+			'}';
+	}
 }
