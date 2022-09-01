@@ -28,7 +28,6 @@ public interface NilFunction {
 	/**
 	 * process
 	 *
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:28:15
 	 */
 	void process() throws Exception;

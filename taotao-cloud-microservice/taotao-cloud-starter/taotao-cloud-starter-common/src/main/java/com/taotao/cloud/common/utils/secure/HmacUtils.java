@@ -55,7 +55,6 @@ public class HmacUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:28
 	 */
 	public static String encryptHmacMD5(String text) {
@@ -67,7 +66,6 @@ public class HmacUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:28
 	 */
 	public static String encryptHmacSHA1(String text) {
@@ -80,7 +78,6 @@ public class HmacUtils {
 	 * @param text 明文
 	 * @param key  秘钥
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA1(String text, String key) {
@@ -92,7 +89,6 @@ public class HmacUtils {
 	 *
 	 * @param text 明文
 	 * @return 密
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA224(String text) {
@@ -105,7 +101,6 @@ public class HmacUtils {
 	 * @param text 明文
 	 * @param key  秘钥
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA224(String text, String key) {
@@ -117,7 +112,6 @@ public class HmacUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA256(String text) {
@@ -130,7 +124,6 @@ public class HmacUtils {
 	 * @param text 明文
 	 * @param key  秘钥
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA256(String text, String key) {
@@ -142,7 +135,6 @@ public class HmacUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA384(String text) {
@@ -155,7 +147,6 @@ public class HmacUtils {
 	 * @param text 明文
 	 * @param key  秘钥
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA384(String text, String key) {
@@ -167,7 +158,6 @@ public class HmacUtils {
 	 *
 	 * @param text 明文
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA512(String text) {
@@ -180,7 +170,6 @@ public class HmacUtils {
 	 * @param text 明文
 	 * @param key  秘钥
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static String encryptHmacSHA512(String text, String key) {
@@ -194,7 +183,6 @@ public class HmacUtils {
 	 * @param key  秘钥
 	 * @param type 类型
 	 * @return 密文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	private static String encryptHmac(String text, String key, String type) {
@@ -227,7 +215,6 @@ public class HmacUtils {
 	 *
 	 * @param type 类型
 	 * @return 字节流key
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	public static byte[] getHmacKey(String type) {
@@ -252,7 +239,6 @@ public class HmacUtils {
 	 * @param bytes       数据
 	 * @param toUpperCase 是否转大写
 	 * @return 16进制编码
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:36
 	 */
 	private static String encodeHex(final byte[] bytes, final boolean toUpperCase) {

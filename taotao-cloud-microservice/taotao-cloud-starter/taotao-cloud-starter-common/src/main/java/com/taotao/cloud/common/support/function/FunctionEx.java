@@ -30,7 +30,6 @@ public interface FunctionEx<T, R> {
 	 *
 	 * @param t t
 	 * @return R
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:28:05
 	 */
 	R apply(T t) throws Exception;

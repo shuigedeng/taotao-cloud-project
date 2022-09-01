@@ -203,7 +203,6 @@ public class ResultClass<T> implements Serializable {
 	 * @param errorMsg errorMsg
 	 * @param <T>      T
 	 * @return {@link ResultClass }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:12:35
 	 */
 	public static <T> ResultClass<T> of(int code, T data, boolean success, String errorMsg) {

@@ -65,7 +65,6 @@ public class Block {
 	 * 使用 sha256 算法让一个输入转变成256位的hash值
 	 *
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:39:49
 	 */
 	public String calculateHash() {
@@ -80,7 +79,6 @@ public class Block {
 	 *
 	 * @param difficulty difficulty
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-02 19:39:56
 	 */
 	public String mineBlock(int difficulty) {
