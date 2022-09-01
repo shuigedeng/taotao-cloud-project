@@ -19,7 +19,7 @@ dependencies {
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-redirect:2.5.0"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-rewrite:2.5.0"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-request:2.5.0"
-    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging:2.5.0"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging:2.5.0"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sign:2.5.0"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-oauth2:2.5.0"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-jwt:2.5.0"
