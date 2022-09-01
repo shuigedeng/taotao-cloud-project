@@ -2,14 +2,14 @@ package com.taotao.cloud.common.generator;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.taotao.cloud.sys.biz.support.generator.InsertSQLGenerator;
+import com.taotao.cloud.common.support.generator.InsertSQLGenerator;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 
 @Test
-@Guice(modules = TestConfigModule.class)
+// @Guice(modules = TestConfigModule.class)
 public class InsertSQLGeneratorTest {
 
 	private InsertSQLGenerator generator;

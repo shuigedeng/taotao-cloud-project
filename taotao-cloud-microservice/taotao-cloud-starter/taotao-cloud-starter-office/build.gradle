@@ -61,7 +61,14 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.3'
 }
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
 
 //dependencies {
 //    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')

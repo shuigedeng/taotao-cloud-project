@@ -1,4 +1,4 @@
-package com.taotao.cloud.disruptor;
+package com.taotao.cloud.ip2region;
 
 import com.taotao.cloud.ip2region.configuration.Ip2regionAutoConfiguration;
 import com.taotao.cloud.ip2region.impl.Ip2regionSearcherImpl;
@@ -13,7 +13,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 /**
  * ip2region 测试
  *
- * @author L.cm
  */
 class Ip2regionTest {
 	private Ip2regionSearcher searcher;
