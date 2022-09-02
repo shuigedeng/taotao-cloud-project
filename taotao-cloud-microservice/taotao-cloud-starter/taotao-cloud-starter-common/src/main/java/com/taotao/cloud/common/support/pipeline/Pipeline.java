@@ -15,7 +15,7 @@ public interface Pipeline<T> {
 	 * @param t 元素
 	 * @return this
 	 */
-	Pipeline addLast(final T t);
+	Pipeline<T> addLast(final T t);
 
 	/**
 	 * 加入到列表的开头
@@ -23,7 +23,7 @@ public interface Pipeline<T> {
 	 * @param t 元素
 	 * @return this
 	 */
-	Pipeline addFirst(final T t);
+	Pipeline<T> addFirst(final T t);
 
 	/**
 	 * 设置元素 index 位置为 t
@@ -32,21 +32,21 @@ public interface Pipeline<T> {
 	 * @param t     元素
 	 * @return this
 	 */
-	Pipeline set(final int index, final T t);
+	Pipeline<T> set(final int index, final T t);
 
 	/**
 	 * 移除最后一个元素
 	 *
 	 * @return this
 	 */
-	Pipeline removeLast();
+	Pipeline<T> removeLast();
 
 	/**
 	 * 移除第一个元素
 	 *
 	 * @return this
 	 */
-	Pipeline removeFirst();
+	Pipeline<T> removeFirst();
 
 	/**
 	 * 移除 index 位置的元素
@@ -54,7 +54,7 @@ public interface Pipeline<T> {
 	 * @param index 下标值
 	 * @return this
 	 */
-	Pipeline remove(final int index);
+	Pipeline<T> remove(final int index);
 
 	/**
 	 * 获取指定位置的元素
