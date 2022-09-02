@@ -1,24 +1,24 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
 
     api "org.springframework.boot:spring-boot-starter"
     api "org.springframework.boot:spring-boot-starter-aop"
-    compileOnly 'com.baomidou:mybatis-plus-extension'
-    compileOnly 'org.springframework.kafka:spring-kafka'
+    compileOnly "com.baomidou:mybatis-plus-extension"
+    compileOnly "org.springframework.kafka:spring-kafka"
 
     //api "com.github.danielwegener:logback-kafka-appender"
     //https://search.maven.org/artifact/com.github.rahulsinghai/logback-kafka-appender
-    api 'com.github.rahulsinghai:logback-kafka-appender:0.2.2'
+    api "com.github.rahulsinghai:logback-kafka-appender:0.2.2"
     //https://search.maven.org/artifact/com.github.loki4j/loki-logback-appender
-    api 'com.github.loki4j:loki-logback-appender:1.4.0-m1'
+    api "com.github.loki4j:loki-logback-appender:1.4.0-m1"
     //https://search.maven.org/artifact/net.logstash.logback/logstash-logback-encoder
     api "net.logstash.logback:logstash-logback-encoder:7.2"
     //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-logback-1.x
-    api 'org.apache.skywalking:apm-toolkit-logback-1.x:8.11.0'
+    api "org.apache.skywalking:apm-toolkit-logback-1.x:8.11.0"
     //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-trace
-    api 'org.apache.skywalking:apm-toolkit-trace:8.11.0'
+    api "org.apache.skywalking:apm-toolkit-trace:8.11.0"
 
     //https://github.com/akkinoc/logback-access-spring-boot-starter
     //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
@@ -26,19 +26,19 @@ dependencies {
 
     // https://github.com/qqxx6661/logRecord
     //https://search.maven.org/artifact/cn.monitor4all/log-record-starter
-    api ('cn.monitor4all:log-record-starter:1.2.2'){
+    api ("cn.monitor4all:log-record-starter:1.2.2"){
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://search.maven.org/artifact/io.github.mouzt/bizlog-sdk
     //https://github.com/mouzt/mzt-biz-log
-    api ('io.github.mouzt:bizlog-sdk:3.0.0'){
+    api ("io.github.mouzt:bizlog-sdk:3.0.0"){
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://gitee.com/dromara/TLog
     //https://search.maven.org/artifact/com.yomahub/tlog-all-spring-boot-starter
-    api ('com.yomahub:tlog-all-spring-boot-starter:1.4.3'){
+    api ("com.yomahub:tlog-all-spring-boot-starter:1.4.3"){
         exclude group: "dom4j", module: "dom4j"
         exclude group: "log4j", module: "log4j"
         exclude group: "commons-beanutils", module: "commons-beanutils"
@@ -46,11 +46,11 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

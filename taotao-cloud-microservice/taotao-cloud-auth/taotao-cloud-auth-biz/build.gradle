@@ -1,58 +1,58 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
 
-    implementation project(':taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
 
     //https://search.maven.org/artifact/org.webjars/jquery
-    implementation 'org.webjars:jquery:3.6.0'
+    implementation "org.webjars:jquery:3.6.0"
     //https://search.maven.org/artifact/org.webjars/bootstrap
-    implementation 'org.webjars:bootstrap:5.2.0'
+    implementation "org.webjars:bootstrap:5.2.0"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
-    implementation 'org.webjars:webjars-locator-core:0.52'
+    implementation "org.webjars:webjars-locator-core:0.52"
 
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
 
-    implementation('org.springframework.boot:spring-boot-starter-web') {
+    implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     implementation "org.springframework.boot:spring-boot-starter-validation"
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
 
     implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server
-    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.3.1'
+    implementation "org.springframework.security:spring-security-oauth2-authorization-server:0.3.1"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.24.3'
+    implementation "com.nimbusds:nimbus-jose-jwt:9.24.3"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation 'com.nimbusds:oauth2-oidc-sdk:9.41.1'
+    implementation "com.nimbusds:oauth2-oidc-sdk:9.41.1"
 
-    implementation 'org.apache.commons:commons-collections4'
+    implementation "org.apache.commons:commons-collections4"
 
-    implementation 'org.springframework:spring-webflux'
-    implementation 'io.projectreactor.netty:reactor-netty-http'
-    implementation 'io.projectreactor.netty:reactor-netty'
+    implementation "org.springframework:spring-webflux"
+    implementation "io.projectreactor.netty:reactor-netty-http"
+    implementation "io.projectreactor.netty:reactor-netty"
 
-    implementation "org.mapstruct:mapstruct:1.5.2.Final"
-    implementation 'org.projectlombok:lombok:1.18.24'
-    implementation 'io.soabase.record-builder:record-builder-core'
+    implementation "org.mapstruct:mapstruct"
+    implementation "org.projectlombok:lombok"
+    implementation "io.soabase.record-builder:record-builder-core"
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
@@ -62,11 +62,11 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

@@ -3,20 +3,20 @@ dependencies {
 
     //https://search.maven.org/artifact/com.alibaba.otter/canal.client
     api("com.alibaba.otter:canal.client:1.1.6"){
-        exclude group: 'log4j', module: 'log4j'
-        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+        exclude group: "log4j", module: "log4j"
+        exclude group: "com.google.protobuf", module: "protobuf-java"
     }
     //https://search.maven.org/artifact/com.alibaba.otter/canal.protocol
     api "com.alibaba.otter:canal.protocol:1.1.6"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

@@ -4,8 +4,8 @@ dependencies {
     implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha"))
     implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger"))
 
-    api 'org.springframework.boot:spring-boot-starter-webflux'
-    api 'org.springframework.boot:spring-boot-starter-actuator'
+    api "org.springframework.boot:spring-boot-starter-webflux"
+    api "org.springframework.boot:spring-boot-starter-actuator"
 
     api "org.apache.shenyu:shenyu-spring-boot-starter-gateway:2.5.0"
     api "org.apache.shenyu:shenyu-spring-boot-starter-instance:2.5.0"
@@ -34,30 +34,30 @@ dependencies {
     //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-mock:2.5.0"
 
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-apache-dubbo:2.5.0"
-    api 'org.apache.dubbo:dubbo:2.7.15'
+    api "org.apache.dubbo:dubbo:2.7.15"
 
     //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-tars:2.5.0"
-    //api 'com.tencent.tars:tars-client:1.7.2'
+    //api "com.tencent.tars:tars-client:1.7.2"
 
     //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sofa:2.5.0"
-    //api('com.alipay.sofa:sofa-rpc-all:5.7.6') {
-    //    exclude group: 'net.jcip', module: 'jcip-annotations'
+    //api("com.alipay.sofa:sofa-rpc-all:5.7.6") {
+    //    exclude group: "net.jcip", module: "jcip-annotations"
     //}
 
     api "org.springframework.cloud:spring-cloud-commons"
     api("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery") {
-        exclude group: 'org.springframework.cloud', module: 'spring-cloud-loadbalancer'
+        exclude group: "org.springframework.cloud", module: "spring-cloud-loadbalancer"
     }
     //api("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${eureka - client.version}") {
-    //    exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-loadbalancer'
+    //    exclude group: "org.springframework.cloud", module: "spring-cloud-starter-loadbalancer"
     //}
 
     //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-motan:2.5.0"
     //api "com.weibo:motan-core:${motan.version}"
     //api "com.weibo:motan-transport-netty4:${motan.version}"
     //api("com.weibo:motan-registry-zookeeper:${motan.version}") {
-    //    exclude group: 'log4j', module: 'log4j'
-    //    exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    //    exclude group: "log4j", module: "log4j"
+    //    exclude group: "org.slf4j", module: "slf4j-log4j12"
     //}
     //api "com.weibo:motan-springsupport:${motan.version}"
 
@@ -72,10 +72,9 @@ dependencies {
     api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-nacos:2.5.0"
     api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-consul:2.5.0"
     api("org.apache.shenyu:shenyu-spring-boot-starter-sync-data-etcd:2.5.0") {
-        exclude group: 'io.grpc', module: 'grpc-grpclb'
-        exclude group: 'io.grpc', module: 'grpc-netty'
+        exclude group: "io.grpc", module: "grpc-grpclb"
+        exclude group: "io.grpc", module: "grpc-netty"
     }
-
 
     api "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -84,10 +83,10 @@ dependencies {
     api "io.soabase.record-builder:record-builder-core"
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

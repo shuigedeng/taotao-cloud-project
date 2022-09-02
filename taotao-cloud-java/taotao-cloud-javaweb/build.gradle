@@ -1,22 +1,22 @@
 dependencies {
-    implementation 'mysql:mysql-connector-java:8.0.27'
+    implementation "mysql:mysql-connector-java:8.0.27"
     implementation "commons-dbutils:commons-dbutils:1.7"
-    implementation 'commons-beanutils:commons-beanutils:1.9.4'
+    implementation "commons-beanutils:commons-beanutils:1.9.4"
 
-    implementation 'com.mchange:c3p0:0.9.5.5'
-    implementation 'org.apache.commons:commons-dbcp2:2.9.0'
-    implementation 'com.alibaba:druid:1.2.8'
+    implementation "com.mchange:c3p0:0.9.5.5"
+    implementation "org.apache.commons:commons-dbcp2:2.9.0"
+    implementation "com.alibaba:druid:1.2.8"
 
-    implementation 'org.springframework:spring-web'
-    implementation 'org.springframework:spring-webmvc'
-    implementation 'org.springframework:spring-tx'
-    implementation 'org.springframework:spring-context'
+    implementation "org.springframework:spring-web"
+    implementation "org.springframework:spring-webmvc"
+    implementation "org.springframework:spring-tx"
+    implementation "org.springframework:spring-context"
 
     implementation "com.google.code.gson:gson"
-    implementation 'javax.mail:mail:1.4.7'
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
-    implementation 'javax.servlet:javax.servlet-api'
-    implementation 'org.slf4j:slf4j-api'
+    implementation "javax.mail:mail:1.4.7"
+    implementation "com.fasterxml.jackson.core:jackson-databind"
+    implementation "javax.servlet:javax.servlet-api"
+    implementation "org.slf4j:slf4j-api"
 
     
 }

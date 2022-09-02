@@ -1,25 +1,25 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
-    api('com.alibaba.cloud:spring-cloud-starter-alibaba-seata') {
-        exclude group: 'io.seata', module: 'seata-spring-boot-starter'
-        exclude group: 'cglib', module: 'cglib'
+    api("com.alibaba.cloud:spring-cloud-starter-alibaba-seata") {
+        exclude group: "io.seata", module: "seata-spring-boot-starter"
+        exclude group: "cglib", module: "cglib"
     }
     //https://search.maven.org/artifact/io.seata/seata-spring-boot-starter
-    api 'io.seata:seata-spring-boot-starter:1.5.2'
+    api "io.seata:seata-spring-boot-starter:1.5.2"
 
-    compileOnly 'cglib:cglib:3.3.0'
+    compileOnly "cglib:cglib:3.3.0"
     compileOnly "com.zaxxer:HikariCP:5.0.1"
 
-    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    api "org.springframework.cloud:spring-cloud-starter-openfeign"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

@@ -1,26 +1,26 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
 
     //https://search.maven.org/artifact/org.apache.commons/commons-email
-    implementation 'org.apache.commons:commons-email:1.5'
+    implementation "org.apache.commons:commons-email:1.5"
 
-    compileOnly 'net.logstash.logback:logstash-logback-encoder:7.2'
-    compileOnly 'org.hibernate:hibernate-core:5.6.10.Final'
-    compileOnly 'io.github.openfeign:feign-core:11.8'
-    compileOnly 'io.github.openfeign:feign-slf4j:11.8'
+    compileOnly "net.logstash.logback:logstash-logback-encoder:7.2"
+    compileOnly "org.hibernate:hibernate-core:5.6.10.Final"
+    compileOnly "io.github.openfeign:feign-core:11.8"
+    compileOnly "io.github.openfeign:feign-slf4j:11.8"
 
-    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-xxl')
-    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
-    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-xxl")
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail")
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

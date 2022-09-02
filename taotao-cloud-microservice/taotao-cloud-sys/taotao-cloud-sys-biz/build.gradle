@@ -1,9 +1,9 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-elastic")
@@ -25,34 +25,34 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-third-client")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-minio')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-minio")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun")
 
-    implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
     //https://code.google.com/p/aviator/
     //http://code.google.com/p/aviator/wiki/User_Guide_zh
     //https://search.maven.org/artifact/com.googlecode.aviator/aviator
-    implementation 'com.googlecode.aviator:aviator:5.3.1'
+    implementation "com.googlecode.aviator:aviator:5.3.1"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation 'com.google.protobuf:protobuf-java:3.21.5'
+    implementation "com.google.protobuf:protobuf-java:3.21.5"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation 'com.google.protobuf:protobuf-java-util:3.21.5'
+    implementation "com.google.protobuf:protobuf-java-util:3.21.5"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
-    implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.4'
+    implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 
     //https://search.maven.org/artifact/io.protostuff/protostuff-core
-    implementation 'io.protostuff:protostuff-core:1.8.0'
+    implementation "io.protostuff:protostuff-core:1.8.0"
     //https://search.maven.org/artifact/io.protostuff/protostuff-runtime
-    implementation 'io.protostuff:protostuff-runtime:1.8.0'
+    implementation "io.protostuff:protostuff-runtime:1.8.0"
 
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
-    implementation 'io.github.memorydoc:gobrs-async-starter:1.2.1-RELEASE'
+    implementation "io.github.memorydoc:gobrs-async-starter:1.2.1-RELEASE"
 
     //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
-    implementation 'io.soabase.record-builder:record-builder-core'
+    implementation "io.soabase.record-builder:record-builder-core"
 
     //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
     //annotationProcessor project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
@@ -65,39 +65,39 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 
-    //testImplementation 'org.assertj:assertj-guava:3.4.0'
-    //testImplementation 'junit:junit:4.13.2'
-    //testImplementation 'org.testng:testng:7.5'
-    //testImplementation 'com.google.inject:guice:5.1.0'
+    //testImplementation "org.assertj:assertj-guava:3.4.0"
+    //testImplementation "junit:junit:4.13.2"
+    //testImplementation "org.testng:testng:7.5"
+    //testImplementation "com.google.inject:guice:5.1.0"
 
-    //implementation 'com.101tec:zkclient:0.11'
-    //implementation 'org.eclipse.jgit:org.eclipse.jgit:4.11.0.201803080745-r'
-    //implementation 'org.benf:cfr:0.151'
+    //implementation "com.101tec:zkclient:0.11"
+    //implementation "org.eclipse.jgit:org.eclipse.jgit:4.11.0.201803080745-r"
+    //implementation "org.benf:cfr:0.151"
     //implementation "org.ow2.asm:asm-util:8.0.1"
     //implementation "org.ow2.asm:asm-commons:8.0.1"
     //implementation "com.github.javaparser:javaparser-symbol-solver-core:3.15.21"
-    //implementation 'com.esotericsoftware:kryo:4.0.0'
-    //implementation 'com.caucho:hessian:4.0.38'
-    //implementation 'redis.clients:jedis:4.2.3'
-    //implementation 'com.jianggujin:IKAnalyzer-lucene:8.0.0'
-    //implementation 'org.lionsoul:jcseg-core:1.9.9'
-    //implementation 'org.apache.lucene:lucene-analyzers-common:4.2.0'
-    //implementation 'org.mongodb:mongo-java-driver:3.12.11'
-    //implementation 'org.apache.maven:maven-core:3.8.6'
+    //implementation "com.esotericsoftware:kryo:4.0.0"
+    //implementation "com.caucho:hessian:4.0.38"
+    //implementation "redis.clients:jedis:4.2.3"
+    //implementation "com.jianggujin:IKAnalyzer-lucene:8.0.0"
+    //implementation "org.lionsoul:jcseg-core:1.9.9"
+    //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
+    //implementation "org.mongodb:mongo-java-driver:3.12.11"
+    //implementation "org.apache.maven:maven-core:3.8.6"
     //implementation "org.eclipse.aether:aether-connector-basic:1.1.0"
     //implementation "org.eclipse.aether:aether-transport-file:1.1.0"
     //implementation "org.eclipse.aether:aether-transport-http:1.1.0"
-    //implementation 'org.apache.maven.shared:maven-invoker:3.0.1'
-    //implementation 'org.apache.lucene:lucene-core:4.2.0'
-    //implementation 'org.apache.lucene:lucene-analyzers-common:4.2.0'
-    //implementation 'commons-dbutils:commons-dbutils:1.5'
-    //implementation 'com.github.jsqlparser:jsqlparser:0.9.5'
-    //implementation 'com.alibaba:druid:1.2.11'
-    //implementation('org.springframework.boot:spring-boot-starter-freemarker') {
-    //    exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+    //implementation "org.apache.maven.shared:maven-invoker:3.0.1"
+    //implementation "org.apache.lucene:lucene-core:4.2.0"
+    //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
+    //implementation "commons-dbutils:commons-dbutils:1.5"
+    //implementation "com.github.jsqlparser:jsqlparser:0.9.5"
+    //implementation "com.alibaba:druid:1.2.11"
+    //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
+    //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
 }
 
@@ -106,45 +106,45 @@ mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
 smartdoc {
     configFile = file("src/main/resources/smart-doc.json")
     //exclude artifact
-    //exclude 'org.springframework.boot:xx'
-    //exclude 'org.springframework.boot:ddd'
+    //exclude "org.springframework.boot:xx"
+    //exclude "org.springframework.boot:ddd"
     //你可以使用include配置来让插件自动加载指定依赖的source.
-    //include 'org.springframework.boot:spring-boot-starter-tomcat'
+    //include "org.springframework.boot:spring-boot-starter-tomcat"
 }
 
 configurations {
     all {
-        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-        resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
         //resolutionStrategy {
-        //    //force 'org.codehaus.groovy:groovy:4.0.0'
-        //    force 'com.alibaba.nacos:nacos-client:2.1.0'
+        //    //force "org.codehaus.groovy:groovy:4.0.0"
+        //    force "com.alibaba.nacos:nacos-client:2.1.0"
         //}
 
-        //exclude group: 'org.codehaus.groovy', module: 'groovy'
-        //exclude group: 'org.projectlombok', module: 'lombok'
-        exclude group: 'log4j', module: 'log4j'
-        exclude group: 'log4j', module: 'slf4j-simple'
-        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-        //exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
-        //exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
-        //exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+        //exclude group: "org.codehaus.groovy", module: "groovy"
+        //exclude group: "org.projectlombok", module: "lombok"
+        exclude group: "log4j", module: "log4j"
+        exclude group: "log4j", module: "slf4j-simple"
+        exclude group: "org.slf4j", module: "slf4j-log4j12"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-api"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 
 //import org.springframework.aot.gradle.dsl.AotMode
 //
 //plugins {
-//    id 'org.springframework.experimental.aot' version '0.12.1'
+//    id "org.springframework.experimental.aot" version "0.12.1"
 //}
 //bootRun {
-//    systemProperty 'springAot', 'true'
+//    systemProperty "springAot", "true"
 //}
 //
 //springAot {

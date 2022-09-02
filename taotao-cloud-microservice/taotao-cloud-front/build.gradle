@@ -15,17 +15,17 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-autoconfigure"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
-    implementation 'cn.hutool:hutool-all'
-    implementation 'io.netty:netty-all:4.1.80.Final'
+    implementation "cn.hutool:hutool-all"
+    implementation "io.netty:netty-all"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 
@@ -36,23 +36,23 @@ tasks.named('test') {
 //    version = 1.0
 //    manifest {
 //        attributes(
-//                'Main-Class': "com.taotao.cloud.portal.TaoTaoCloudPortalApplication"
+//                "Main-Class": "com.taotao.cloud.portal.TaoTaoCloudPortalApplication"
 //        )
 //    }
 //
 //    dependencies {
-//        // exclude(dependency('xml-apis:xml-apis:.*'))
-//        // exclude(dependency('xerces:xercesImpl:.*'))
-//        // exclude(dependency { it.moduleGroup == 'xml-apis' })
-//        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
-//        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
+//        // exclude(dependency("xml-apis:xml-apis:.*"))
+//        // exclude(dependency("xerces:xercesImpl:.*"))
+//        // exclude(dependency { it.moduleGroup == "xml-apis" })
+//        // exclude(dependency { it.moduleGroup == "org.apache.spark" })
+//        // exclude(dependency { it.moduleGroup == "org.scala-lang" })
 //    }
 //
-//    //append 'META-INF/spring.handlers'
-//    //append 'META-INF/spring.schemas'
-//    //append 'META-INF/spring.tooling'
+//    //append "META-INF/spring.handlers"
+//    //append "META-INF/spring.schemas"
+//    //append "META-INF/spring.tooling"
 //    //transform(PropertiesFileTransformer) {
-//    //    paths = ['META-INF/spring.factories' ]
+//    //    paths = ["META-INF/spring.factories" ]
 //    //    mergeStrategy = "append"
 //    //}
 //}

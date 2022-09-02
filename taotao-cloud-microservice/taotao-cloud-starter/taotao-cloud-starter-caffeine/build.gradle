@@ -1,20 +1,20 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/com.github.ben-manes.caffeine/caffeine
-    api('com.github.ben-manes.caffeine:caffeine:3.1.1') {
-        exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
+    api("com.github.ben-manes.caffeine:caffeine:3.1.1") {
+        exclude group: "com.google.errorprone", module: "error_prone_annotations"
     }
 
     api "org.springframework.boot:spring-boot-starter-cache"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

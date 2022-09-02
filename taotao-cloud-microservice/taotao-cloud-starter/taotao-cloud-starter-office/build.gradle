@@ -1,37 +1,37 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/com.github.liaochong/myexcel
-    api ('com.github.liaochong:myexcel:4.2.2'){
-        exclude group: 'org.projectlombok', module: 'lombok'
+    api ("com.github.liaochong:myexcel:4.2.2"){
+        exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://search.maven.org/artifact/com.alibaba/easyexcel
-    api ('com.alibaba:easyexcel:3.1.1'){
-        exclude group: 'org.projectlombok', module: 'lombok'
+    api ("com.alibaba:easyexcel:3.1.1"){
+        exclude group: "org.projectlombok", module: "lombok"
     }
 
     //http://www.likaixuan.top/excelUtil/doc/v3
     //https://search.maven.org/artifact/net.oschina.likaixuan/excelutil
-    api ('net.oschina.likaixuan:excelutil:3.1.8'){
+    api ("net.oschina.likaixuan:excelutil:3.1.8"){
         exclude group: "org.apache.tomcat.embed", module: "tomcat-embed-core"
     }
 
     //https://search.maven.org/artifact/wiki.xsx/x-easypdf
-    api 'wiki.xsx:x-easypdf:2.10.1'
-    api 'wiki.xsx:x-easypdf-fop:2.10.1'
+    api "wiki.xsx:x-easypdf:2.10.1"
+    api "wiki.xsx:x-easypdf-fop:2.10.1"
 
     //https://gitee.com/PasseRR/docx4j-wisewe
     //https://search.maven.org/artifact/cn.wisewe/docx4j-wisewe
-    api 'cn.wisewe:docx4j-wisewe-output:1.7.0.RELEASE'
-    api 'cn.wisewe:docx4j-wisewe-input:1.7.0.RELEASE'
+    api "cn.wisewe:docx4j-wisewe-output:1.7.0.RELEASE"
+    api "cn.wisewe:docx4j-wisewe-input:1.7.0.RELEASE"
     //文档转换依赖较大（约120M），请酌情使用。
-    //api 'cn.wisewe:docx4j-wisewe-convert:1.7.0.RELEASE'
+    //api "cn.wisewe:docx4j-wisewe-convert:1.7.0.RELEASE"
 
     //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
     api "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
-    api 'cn.afterturn:easypoi-base'
-    api 'cn.afterturn:easypoi-annotation'
+    api "cn.afterturn:easypoi-base"
+    api "cn.afterturn:easypoi-annotation"
 
     //https://search.maven.org/artifact/org.apache.poi/poi-ooxml
     api("org.apache.poi:poi-ooxml:5.2.2") {
@@ -50,52 +50,52 @@ dependencies {
     api "com.itextpdf:itext-asian:5.2.0"
 
     //https://search.maven.org/artifact/org.apache.pdfbox/pdfbox
-    api 'org.apache.pdfbox:pdfbox:2.0.26'
+    api "org.apache.pdfbox:pdfbox:2.0.26"
 
-    api 'com.univocity:univocity-parsers:2.9.1'
+    api "com.univocity:univocity-parsers:2.9.1"
 
     //https://www.yuque.com/liuer_doc/rayin/eiqgx7 批量电子凭证（PDF）生成工具。
     //https://search.maven.org/artifact/ink.rayin/rayin-htmladapter-spring-boot-starter
-    //api 'ink.rayin:rayin-htmladapter-spring-boot-starter:1.0.5'
+    //api "ink.rayin:rayin-htmladapter-spring-boot-starter:1.0.5"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 
 
 //dependencies {
-//    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+//    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 //
 //    //https://gitee.com/PasseRR/docx4j-wisewe
 //    //https://search.maven.org/artifact/cn.wisewe/docx4j-wisewe
-//    api 'cn.wisewe:docx4j-wisewe-output:1.7.0.RELEASE'
-//    api 'cn.wisewe:docx4j-wisewe-input:1.7.0.RELEASE'
+//    api "cn.wisewe:docx4j-wisewe-output:1.7.0.RELEASE"
+//    api "cn.wisewe:docx4j-wisewe-input:1.7.0.RELEASE"
 //    //文档转换依赖较大（约120M），请酌情使用。
-//    //api 'cn.wisewe:docx4j-wisewe-convert:1.7.0.RELEASE'
+//    //api "cn.wisewe:docx4j-wisewe-convert:1.7.0.RELEASE"
 //
 //    // ******************************* excel ****************************************
 //    //https://search.maven.org/artifact/com.github.liaochong/myexcel
-//    api ('com.github.liaochong:myexcel:4.2.1'){
-//        exclude group: 'org.projectlombok', module: 'lombok'
+//    api ("com.github.liaochong:myexcel:4.2.1"){
+//        exclude group: "org.projectlombok", module: "lombok"
 //    }
 //    //https://search.maven.org/artifact/com.alibaba/easyexcel
-//    api ('com.alibaba:easyexcel:3.1.1'){
-//        exclude group: 'org.projectlombok', module: 'lombok'
+//    api ("com.alibaba:easyexcel:3.1.1"){
+//        exclude group: "org.projectlombok", module: "lombok"
 //    }
 //    // http://www.likaixuan.top/excelUtil/doc/v3
 //    //https://mvnrepository.com/artifact/net.oschina.likaixuan/excelutil
-//    api 'net.oschina.likaixuan:excelutil:3.1.8'
+//    api "net.oschina.likaixuan:excelutil:3.1.8"
 //    //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
 //    api "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
-//    api 'cn.afterturn:easypoi-base'
-//    api 'cn.afterturn:easypoi-annotation'
+//    api "cn.afterturn:easypoi-base"
+//    api "cn.afterturn:easypoi-annotation"
 //    //https://search.maven.org/artifact/org.apache.poi/poi-ooxml
 //    api("org.apache.poi:poi-ooxml:5.2.2") {
 //        exclude group: "org.slf4j", module: "*"
@@ -104,14 +104,14 @@ tasks.named('test') {
 //        exclude group: "com.github.virtuald", module: "curvesapi"
 //        exclude group: "org.apache.xmlgraphics", module: "batik-all"
 //    }
-//    api 'org.apache.poi:ooxml-schemas:1.4'
-//    api 'org.apache.poi:poi-ooxml-schemas:4.1.2'
-//    api 'org.apache.poi:poi-scratchpad:5.2.2'
-//    api 'org.apache.poi:poi:5.2.2'
-//    api('com.deepoove:poi-tl:1.12.0') {
-//        exclude group: 'org.slf4j', module: 'slf4j-api'
+//    api "org.apache.poi:ooxml-schemas:1.4"
+//    api "org.apache.poi:poi-ooxml-schemas:4.1.2"
+//    api "org.apache.poi:poi-scratchpad:5.2.2"
+//    api "org.apache.poi:poi:5.2.2"
+//    api("com.deepoove:poi-tl:1.12.0") {
+//        exclude group: "org.slf4j", module: "slf4j-api"
 //    }
-//    api 'fr.opensagres.xdocreport:xdocreport:2.0.3'
+//    api "fr.opensagres.xdocreport:xdocreport:2.0.3"
 //
 //    // ******************************* pdf ****************************************
 //    //https://search.maven.org/artifact/com.itextpdf/itextpdf
@@ -119,23 +119,23 @@ tasks.named('test') {
 //    //https://search.maven.org/artifact/com.itextpdf/itext-asian
 //    api "com.itextpdf:itext-asian:5.2.0"
 //    //https://search.maven.org/artifact/org.apache.pdfbox/pdfbox
-//    api 'org.apache.pdfbox:pdfbox:2.0.26'
-////    api 'net.sf.jacob-project:jacob'
-//    api 'org.bouncycastle:bcprov-jdk15on:1.70'
-//    api 'org.xhtmlrenderer:flying-saucer-pdf-itext5:9.1.22'
-//    api 'com.itextpdf.tool:xmlworker:5.5.13.3'
+//    api "org.apache.pdfbox:pdfbox:2.0.26"
+////    api "net.sf.jacob-project:jacob"
+//    api "org.bouncycastle:bcprov-jdk15on:1.70"
+//    api "org.xhtmlrenderer:flying-saucer-pdf-itext5:9.1.22"
+//    api "com.itextpdf.tool:xmlworker:5.5.13.3"
 //    //https://search.maven.org/artifact/wiki.xsx/x-easypdf
-//    api 'wiki.xsx:x-easypdf:2.9.8'
+//    api "wiki.xsx:x-easypdf:2.9.8"
 //
 //    // ******************************* pic ****************************************
-//    api 'org.apache.xmlgraphics:batik-transcoder:1.14'
-////    compile 'com.github.nintha:webp-imageio-core'
+//    api "org.apache.xmlgraphics:batik-transcoder:1.14"
+////    compile "com.github.nintha:webp-imageio-core"
 //    //转pdf需要,注意版本
-//    api 'org.apache.xmlgraphics:fop:2.7'
+//    api "org.apache.xmlgraphics:fop:2.7"
 //    //转PNG需要
-//    api 'org.apache.xmlgraphics:batik-codec:1.14'
+//    api "org.apache.xmlgraphics:batik-codec:1.14"
 //
-//    //testImplementation 'junit:junit:4.13.2'
+//    //testImplementation "junit:junit:4.13.2"
 //}
 
 

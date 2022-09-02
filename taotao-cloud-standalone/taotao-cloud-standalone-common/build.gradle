@@ -1,46 +1,46 @@
 dependencies {
-    api 'org.lionsoul:ip2region:2.6.5'
-    api 'org.springframework.security:spring-security-core:5.7.3'
+    api "org.lionsoul:ip2region:2.6.5"
+    api "org.springframework.security:spring-security-core:5.7.3"
 
-    api 'org.springframework:spring-test:5.3.22'
-    api 'commons-collections:commons-collections:3.2.2'
-    api 'com.aliyun:aliyun-java-sdk-core:4.6.1'
+    api "org.springframework:spring-test:5.3.22"
+    api "commons-collections:commons-collections:3.2.2"
+    api "com.aliyun:aliyun-java-sdk-core:4.6.1"
 
-    api 'com.github.binarywang:weixin-java-mp:4.4.0'
+    api "com.github.binarywang:weixin-java-mp:4.4.0"
 
-    api 'org.springframework.social:spring-social-security:1.1.6.RELEASE'
-    api 'org.springframework.social:spring-social-core:1.1.6.RELEASE'
-    api 'org.springframework.social:spring-social-config:1.1.6.RELEASE'
-    api 'org.springframework.social:spring-social-web:1.1.6.RELEASE'
+    api "org.springframework.social:spring-social-security:1.1.6.RELEASE"
+    api "org.springframework.social:spring-social-core:1.1.6.RELEASE"
+    api "org.springframework.social:spring-social-config:1.1.6.RELEASE"
+    api "org.springframework.social:spring-social-web:1.1.6.RELEASE"
 
-    api('org.springframework.boot:spring-boot-starter-web') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    api("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
-    api 'org.springframework.boot:spring-boot-starter-actuator'
-    api 'org.springframework.boot:spring-boot-starter-undertow'
-    api 'org.springframework.boot:spring-boot-starter-aop'
-    api 'org.springframework.boot:spring-boot-starter-mail'
-    api('org.springframework.boot:spring-boot-starter-data-redis'){
-        exclude group: 'org.yaml', module: 'snakeyaml'
+    api "org.springframework.boot:spring-boot-starter-actuator"
+    api "org.springframework.boot:spring-boot-starter-undertow"
+    api "org.springframework.boot:spring-boot-starter-aop"
+    api "org.springframework.boot:spring-boot-starter-mail"
+    api("org.springframework.boot:spring-boot-starter-data-redis"){
+        exclude group: "org.yaml", module: "snakeyaml"
     }
 
-    api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
-    api 'com.google.guava:guava:31.1-jre'
-    api 'com.github.whvcse:easy-captcha:1.6.2'
-    api 'commons-io:commons-io:2.11.0'
+    api "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4"
+    api "com.google.guava:guava:31.1-jre"
+    api "com.github.whvcse:easy-captcha:1.6.2"
+    api "commons-io:commons-io:2.11.0"
 
     api "mysql:mysql-connector-java"
 
-    api 'com.baomidou:mybatis-plus-boot-starter:3.5.2'
-    api 'com.baomidou:mybatis-plus-generator:3.5.3'
+    api "com.baomidou:mybatis-plus-boot-starter:3.5.2"
+    api "com.baomidou:mybatis-plus-generator:3.5.3"
 
-    api 'org.apache.velocity:velocity-engine-core:2.3'
+    api "org.apache.velocity:velocity-engine-core:2.3"
 
-    api 'cn.hutool:hutool-all:5.8.5'
-    api 'com.alibaba.fastjson2:fastjson2:2.0.12'
+    api "cn.hutool:hutool-all:5.8.5"
+    api "com.alibaba.fastjson2:fastjson2:2.0.12"
 
-    api 'io.jsonwebtoken:jjwt:0.9.1'
-    api 'joda-time:joda-time:2.11.1'
+    api "io.jsonwebtoken:jjwt:0.9.1"
+    api "joda-time:joda-time:2.11.1"
 
 }
 

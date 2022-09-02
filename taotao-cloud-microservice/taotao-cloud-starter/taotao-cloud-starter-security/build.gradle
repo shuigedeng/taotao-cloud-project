@@ -1,26 +1,26 @@
 dependencies {
-	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
 
 	//https://search.maven.org/artifact/org.springframework.security/spring-security-core
-	api  'org.springframework.security:spring-security-core:5.7.3'
-	//api  'org.springframework.security:spring-security-web'
-	api  'org.springframework.security:spring-security-config'
-	api  'org.springframework.security:spring-security-oauth2-core'
-	api  'org.springframework.security:spring-security-oauth2-client'
+	api  "org.springframework.security:spring-security-core:5.7.3"
+	//api  "org.springframework.security:spring-security-web"
+	api  "org.springframework.security:spring-security-config"
+	api  "org.springframework.security:spring-security-oauth2-core"
+	api  "org.springframework.security:spring-security-oauth2-client"
 
-	api 'org.springframework.boot:spring-boot-starter-security'
-	api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	api "org.springframework.boot:spring-boot-starter-security"
+	api "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
 
-	api 'io.jsonwebtoken:jjwt:0.9.1'
+	api "io.jsonwebtoken:jjwt:0.9.1"
 
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-	//testImplementation 'junit:junit:4.13.2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
+	//testImplementation "junit:junit:4.13.2"
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+	testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
 	useJUnitPlatform()
 }
