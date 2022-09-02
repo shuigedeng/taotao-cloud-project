@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.springcloud.properties.DynamicRouteProperties;
@@ -44,8 +45,6 @@ import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
-
-import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 /**
  * 基于nacos动态路由配置
@@ -108,7 +107,7 @@ public class DynamicRouteConfiguration {
 				List<RouteDefinition> routeDefinitions = getListByStr(content);
 				return Flux.fromIterable(routeDefinitions);
 			} catch (NacosException e) {
-				LogUtils.error(e, PropertyUtils.getProperty(SpringApplicationName)
+				LogUtils.error(e, PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
 					+ "get route definitions from nacos error info: {}", e.getErrMsg());
 			}
 			return Flux.fromIterable(CollUtil.newArrayList());

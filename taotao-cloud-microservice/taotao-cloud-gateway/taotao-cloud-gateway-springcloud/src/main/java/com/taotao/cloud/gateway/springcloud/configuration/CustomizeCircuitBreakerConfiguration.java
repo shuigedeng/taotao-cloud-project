@@ -16,7 +16,9 @@
 package com.taotao.cloud.gateway.springcloud.configuration;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
+import io.github.resilience4j.timelimiter.TimeLimiterRegistry;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
@@ -36,7 +38,8 @@ import org.springframework.context.annotation.Configuration;
 public class CustomizeCircuitBreakerConfiguration {
 
 	@Bean
-	public ReactiveResilience4JCircuitBreakerFactory defaultCustomizer() {
+	public ReactiveResilience4JCircuitBreakerFactory defaultCustomizer(CircuitBreakerRegistry circuitBreakerRegistry,
+		TimeLimiterRegistry timeLimiterRegistry) {
 
 		CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.custom()
 			// 滑动窗口的类型为时间窗口
@@ -57,7 +60,8 @@ public class CustomizeCircuitBreakerConfiguration {
 			.recordExceptions(Throwable.class)
 			.build();
 
-		ReactiveResilience4JCircuitBreakerFactory factory = new ReactiveResilience4JCircuitBreakerFactory();
+
+		ReactiveResilience4JCircuitBreakerFactory factory = new ReactiveResilience4JCircuitBreakerFactory(circuitBreakerRegistry, timeLimiterRegistry);
 		factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
 			.timeLimiterConfig(TimeLimiterConfig
 				.custom()

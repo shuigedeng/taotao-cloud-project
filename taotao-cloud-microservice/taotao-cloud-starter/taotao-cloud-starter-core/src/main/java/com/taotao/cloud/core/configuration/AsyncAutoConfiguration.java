@@ -22,6 +22,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.properties.AsyncProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
@@ -264,14 +265,14 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 			Map<String, String> context = MDC.getCopyOfContextMap();
 
 			return () -> {
-				if (!context.isEmpty()) {
+				if (Objects.nonNull(context) && !context.isEmpty()) {
 					MDC.setContextMap(context);
 				}
 
 				try {
 					task.run();
 				} finally {
-					if (!context.isEmpty()) {
+					if (Objects.nonNull(context) && !context.isEmpty()) {
 						MDC.clear();
 					}
 				}

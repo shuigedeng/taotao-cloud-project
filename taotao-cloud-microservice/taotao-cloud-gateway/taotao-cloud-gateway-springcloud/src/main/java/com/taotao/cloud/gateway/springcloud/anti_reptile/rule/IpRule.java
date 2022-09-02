@@ -2,9 +2,8 @@ package com.taotao.cloud.gateway.springcloud.anti_reptile.rule;
 
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.gateway.springcloud.anti_reptile.AntiReptileProperties;
+import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.redisson.api.RAtomicLong;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
@@ -54,14 +53,14 @@ public class IpRule extends AbstractRule {
 		if (!rExpirationTime.isExists()) {
 			rRequestCount.set(0L);
 			rExpirationTime.set(0L);
-			rExpirationTime.expire(expirationTime, TimeUnit.MILLISECONDS);
+			rExpirationTime.expire(Duration.ofMillis(expirationTime));
 		} else {
 			RMap rHitMap = redissonClient.getMap(RATELIMITER_HIT_CRAWLERSTRATEGY);
 			if ((rRequestCount.incrementAndGet() > requestMaxSize) || rHitMap.containsKey(
 				ipAddress)) {
 				//触发爬虫策略 ，默认10天后可重新访问
 				long lockExpire = properties.getIpRule().getLockExpire();
-				rExpirationTime.expire(lockExpire, TimeUnit.SECONDS);
+				rExpirationTime.expire(Duration.ofSeconds(lockExpire));
 				//保存触发来源
 				rHitMap.put(ipAddress, requestUrl);
 				LOGGER.info(
@@ -92,7 +91,7 @@ public class IpRule extends AbstractRule {
 			RATELIMITER_EXPIRATIONTIME_PREFIX.concat(realRequestUri).concat(ipAddress));
 		rRequestCount.set(0L);
 		rExpirationTime.set(0L);
-		rExpirationTime.expire(expirationTime, TimeUnit.MILLISECONDS);
+		rExpirationTime.expire(Duration.ofMillis(expirationTime));
 		/**
 		 * 清除记录
 		 */
