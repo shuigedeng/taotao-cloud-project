@@ -949,14 +949,14 @@ public final class ObjectUtils extends org.springframework.util.ObjectUtils {
 		return isEquals(left, right);
 	}
 
-	/**
-	 * 可遍历的元素对象的某个元素，转换为列表
-	 *
-	 * @param object  可遍历对象
-	 * @param handler 转换方式
-	 * @param <R>     R 泛型
-	 * @return 结果列表
-	 */
+	///**
+	// * 可遍历的元素对象的某个元素，转换为列表
+	// *
+	// * @param object  可遍历对象
+	// * @param handler 转换方式
+	// * @param <R>     R 泛型
+	// * @return 结果列表
+	// */
 	@SuppressWarnings("unchecked")
 	//public static <R> List<R> toList(final Object object, IHandler<Object, R> handler) {
 	//	if (ObjectUtil.isNull(object)) {

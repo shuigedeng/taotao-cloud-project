@@ -37,7 +37,6 @@ public class DependWrapper {
 	/**
 	 * 取决于包装
 	 *
-	 * @return
 	 * @since 2022-05-30 13:25:10
 	 */
 	public DependWrapper() {

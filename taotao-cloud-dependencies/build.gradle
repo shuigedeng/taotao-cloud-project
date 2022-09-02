@@ -20,6 +20,11 @@ dependencies {
         api "org.apache.httpcomponents:httpclient:${httpcomponentsVersion}"
         api "org.apache.httpcomponents:httpmime:${httpcomponentsVersion}"
 
+        api "org.projectlombok:lombok:${lombokVersion}"
+        api "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+        api "io.soabase.record-builder:record-builder-core:${recordBuilderVersion}"
+        api "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+
         api "commons-collections:commons-collections:${commonsCollectionsVersion}"
         api "commons-io:commons-io:${commonsIoVersion}"
         api "commons-net:commons-net:${commonsNetVersion}"
@@ -108,8 +113,8 @@ dependencies {
         api "cn.afterturn:easypoi-base:${easypoiVersion}"
         api "cn.afterturn:easypoi-annotation:${easypoiVersion}"
         api "com.taobao.arthas:arthas-spring-boot-starter:${arthasVersion}"
-        api "de.codecentric:spring-boot-admin-starter-server:${adminVersion}"
-        api "de.codecentric:spring-boot-admin-starter-client:${adminVersion}"
+        api "de.codecentric:spring-boot-admin-starter-server:${springBootAdminVersion}"
+        api "de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}"
         api "com.github.ulisesbocchio:jasypt-spring-boot-starter:${jasyptVersion}"
         api "io.github.lyh200:dynamic-tp-spring-cloud-starter-nacos:${dynamicTpVersion}"
         api "joda-time:joda-time:${jodaTimeVersion}"
@@ -286,7 +291,7 @@ publishing {
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
 

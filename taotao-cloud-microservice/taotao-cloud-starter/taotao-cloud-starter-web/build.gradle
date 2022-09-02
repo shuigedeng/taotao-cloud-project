@@ -53,7 +53,7 @@ dependencies {
     api 'cn.afterturn:easypoi-annotation:4.4.0'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 

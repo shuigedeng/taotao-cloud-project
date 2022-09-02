@@ -20,7 +20,7 @@ dependencies {
     //api 'org.springframework.cloud:spring-cloud-starter-kubernetes'
 
     //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-client
-    api "de.codecentric:spring-boot-admin-starter-client:2.7.4"
+    api "de.codecentric:spring-boot-admin-starter-client"
     //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 

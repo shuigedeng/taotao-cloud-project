@@ -71,7 +71,6 @@ public class MpSuperServiceImpl<M extends MpSuperMapper<T, I>, T extends MpSuper
 	 *
 	 * @param model 实体
 	 * @return {@link Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:22:52
 	 */
 	protected Result<T> handlerSave(T model) {
@@ -83,7 +82,6 @@ public class MpSuperServiceImpl<M extends MpSuperMapper<T, I>, T extends MpSuper
 	 *
 	 * @param model 实体
 	 * @return {@link Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:23:00
 	 */
 	protected Result<T> handlerUpdateAllById(T model) {
@@ -95,7 +93,6 @@ public class MpSuperServiceImpl<M extends MpSuperMapper<T, I>, T extends MpSuper
 	 *
 	 * @param model 实体
 	 * @return {@link Result }
-	 * @author shuigedeng
 	 * @since 2021-09-02 21:23:06
 	 */
 	protected Result<T> handlerUpdateById(T model) {

@@ -27,19 +27,19 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
 	implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'
 
-	annotationProcessor 'org.projectlombok:lombok:1.18.24'
-	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
-	annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
-	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
-	annotationProcessor 'io.soabase.record-builder:record-builder-processor:34'
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
+	annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
+	annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 	annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-	api 'org.projectlombok:lombok:1.18.24'
-	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+	api "org.projectlombok:lombok"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-	api 'io.soabase.record-builder:record-builder-core:34'
-	annotationProcessor 'io.soabase.record-builder:record-builder-processor:34'
+	api "io.soabase.record-builder:record-builder-core"
+	annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.testcontainers:junit-jupiter'

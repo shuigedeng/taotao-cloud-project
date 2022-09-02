@@ -3,10 +3,10 @@ dependencies {
 
     compileOnly('io.seata:seata-all:1.5.1')
 
-    api 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    api 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
-    api 'io.soabase.record-builder:record-builder-core:34'
-    annotationProcessor 'io.soabase.record-builder:record-builder-processor:34'
+    api "io.soabase.record-builder:record-builder-core"
+    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 }

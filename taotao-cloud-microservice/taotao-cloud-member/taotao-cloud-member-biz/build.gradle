@@ -11,11 +11,11 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-promotion:taotao-cloud-promotion-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-report:taotao-cloud-report-api')
 
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
-    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
-    annotationProcessor 'io.soabase.record-builder:record-builder-processor:34'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
+    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
+    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 

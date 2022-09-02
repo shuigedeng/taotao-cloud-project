@@ -12,7 +12,6 @@ public class SkippedException extends RuntimeException {
 	/**
 	 * 跳过例外
 	 *
-	 * @return
 	 * @since 2022-05-30 13:24:17
 	 */
 	public SkippedException() {
@@ -23,7 +22,6 @@ public class SkippedException extends RuntimeException {
 	 * 跳过例外
 	 *
 	 * @param message 消息
-	 * @return
 	 * @since 2022-05-30 13:24:18
 	 */
 	public SkippedException(String message) {
