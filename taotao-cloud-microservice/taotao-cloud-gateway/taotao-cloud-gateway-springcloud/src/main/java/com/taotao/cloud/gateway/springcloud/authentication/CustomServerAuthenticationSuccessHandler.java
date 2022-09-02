@@ -39,7 +39,7 @@ public class CustomServerAuthenticationSuccessHandler implements ServerAuthentic
 
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
-        MultiValueMap<String, String> headerValues = new LinkedMultiValueMap(4);
+        MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
         Object principal = authentication.getPrincipal();
 
         if (principal instanceof SecurityUser) {

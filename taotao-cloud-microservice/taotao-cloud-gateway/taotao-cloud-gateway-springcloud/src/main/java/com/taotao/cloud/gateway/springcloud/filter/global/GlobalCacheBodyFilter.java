@@ -50,7 +50,7 @@ public class GlobalCacheBodyFilter implements GlobalFilter, Ordered {
         if (method == HttpMethod.POST || method == HttpMethod.PUT) {
             if (MediaType.APPLICATION_FORM_URLENCODED_VALUE.equalsIgnoreCase(contentType)
                     || MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(contentType)
-                    || MediaType.APPLICATION_JSON_UTF8_VALUE.equals(contentType)) {
+                    || MediaType.APPLICATION_JSON_UTF8.getType().equals(contentType)) {
                 return DataBufferUtils.join(exchange.getRequest().getBody())
                         .flatMap(dataBuffer -> {
                             DataBufferUtils.retain(dataBuffer);

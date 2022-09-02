@@ -111,7 +111,7 @@ public class WebFluxUtil {
 
 	public static boolean isJsonMediaType(String contentType) {
 		return MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(contentType)
-			|| MediaType.APPLICATION_JSON_UTF8_VALUE.equalsIgnoreCase(contentType);
+			|| MediaType.APPLICATION_JSON_UTF8.getType().equalsIgnoreCase(contentType);
 	}
 
 	/**

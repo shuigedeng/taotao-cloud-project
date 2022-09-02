@@ -66,10 +66,8 @@ public class GrayConfiguration {
 	@ConditionalOnBean
 	public ReactiveLoadBalancerClientFilter gatewayLoadBalancerClientFilter(
 		LoadBalancerClientFactory clientFactory,
-		LoadBalancerProperties loadBalancerProperties,
 		GatewayLoadBalancerProperties gatewayLoadBalancerProperties) {
-		return new GrayReactiveLoadBalancerClientFilter(clientFactory, loadBalancerProperties,
-			gatewayLoadBalancerProperties);
+		return new GrayReactiveLoadBalancerClientFilter(clientFactory, gatewayLoadBalancerProperties);
 	}
 
 	/**
@@ -89,9 +87,8 @@ public class GrayConfiguration {
 
 		public GrayReactiveLoadBalancerClientFilter(
 			LoadBalancerClientFactory clientFactory,
-			LoadBalancerProperties loadBalancerProperties,
 			GatewayLoadBalancerProperties gatewayLoadBalancerProperties) {
-			super(clientFactory, gatewayLoadBalancerProperties, loadBalancerProperties);
+			super(clientFactory, gatewayLoadBalancerProperties);
 			this.gatewayLoadBalancerProperties = gatewayLoadBalancerProperties;
 			this.clientFactory = clientFactory;
 		}
