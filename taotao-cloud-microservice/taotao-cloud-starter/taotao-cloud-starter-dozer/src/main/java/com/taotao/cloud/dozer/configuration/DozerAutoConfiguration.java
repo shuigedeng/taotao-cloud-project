@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.elk.configuration;
+package com.taotao.cloud.dozer.configuration;
 
 import com.github.dozermapper.core.Mapper;
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.elk.helper.DozerHelper;
-import com.taotao.cloud.elk.properties.DozerProperties;
+import com.taotao.cloud.dozer.helper.DozerHelper;
+import com.taotao.cloud.dozer.properties.DozerProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

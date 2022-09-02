@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.bs;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SensitiveWordBsConfigTest {
@@ -20,7 +20,7 @@ public class SensitiveWordBsConfigTest {
                 .init();
 
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
-        Assert.assertTrue(wordBs.contains(text));
+		Assertions.assertTrue(wordBs.contains(text));
     }
 
 }

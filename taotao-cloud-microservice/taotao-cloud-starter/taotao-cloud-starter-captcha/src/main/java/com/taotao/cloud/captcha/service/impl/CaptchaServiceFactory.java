@@ -57,8 +57,8 @@ public class CaptchaServiceFactory {
 	 * getInstance
 	 *
 	 * @param config config
-	 * @return {@link com.taotao.cloud.captcha.service.CaptchaService }
-	 * @since 2021-09-03 21:00:32
+	 * @return {@link CaptchaService }
+	 * @since 2022-09-02 10:27:21
 	 */
 	public static CaptchaService getInstance(Properties config) {
 		//先把所有CaptchaService初始化，通过init方法，实例字体等，add by lide1202@hotmail.com

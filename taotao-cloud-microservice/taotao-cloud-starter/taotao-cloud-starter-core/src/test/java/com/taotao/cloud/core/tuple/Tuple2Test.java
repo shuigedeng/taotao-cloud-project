@@ -11,7 +11,7 @@ public class Tuple2Test {
 
     @Test
     public void testWith() {
-        Tuple2 tuple2 = Tuple2.with("test", 123);
+        Tuple2<String, Integer> tuple2 = Tuple2.with("test", 123);
         log.debug("tuple2:{}", tuple2.toString());
         log.debug("first:{}", tuple2.first);
         log.debug("second:{}", tuple2.second);
@@ -19,7 +19,7 @@ public class Tuple2Test {
 
     @Test
     public void testSwap() {
-        Tuple2 tuple2 = Tuple2.with("test", 123);
+        Tuple2<String, Integer> tuple2 = Tuple2.with("test", 123);
         log.debug("reverse:{}", tuple2.reverse().toString());
     }
 

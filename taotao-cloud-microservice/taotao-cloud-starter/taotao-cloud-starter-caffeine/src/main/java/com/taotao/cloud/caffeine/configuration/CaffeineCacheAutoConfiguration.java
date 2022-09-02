@@ -64,8 +64,7 @@ public class CaffeineCacheAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public CacheManagerCustomizers cacheManagerCustomizers(
-		ObjectProvider<CacheManagerCustomizer<?>> customizers) {
+	public CacheManagerCustomizers cacheManagerCustomizers(ObjectProvider<CacheManagerCustomizer<?>> customizers) {
 		return new CacheManagerCustomizers(
 			customizers.orderedStream().collect(Collectors.toList()));
 	}
@@ -77,14 +76,12 @@ public class CaffeineCacheAutoConfiguration {
 		ObjectProvider<Caffeine<Object, Object>> caffeine,
 		ObjectProvider<CaffeineSpec> caffeineSpec,
 		ObjectProvider<CacheLoader<Object, Object>> cacheLoader) {
-		CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine,
-			caffeineSpec, cacheLoader);
+		CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine, caffeineSpec, cacheLoader);
 		List<String> cacheNames = cacheProperties.getCacheNames();
 		if (!CollectionUtils.isEmpty(cacheNames)) {
 			cacheManager.setCacheNames(cacheNames);
 		}
 		return customizers.customize(cacheManager);
-
 	}
 
 	//@Bean("caffeineCacheManager")

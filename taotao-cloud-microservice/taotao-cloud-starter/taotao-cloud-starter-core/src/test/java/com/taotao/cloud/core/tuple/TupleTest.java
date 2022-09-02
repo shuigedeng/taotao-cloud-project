@@ -160,7 +160,7 @@ public class TupleTest {
     @Test
     public void testEquals() {
         Tuple2 tuple2 = Tuple2.with("hello", 123);
-        log.debug("equals null:{}", tuple2.equals(null));
+        log.debug("equals null:{}", tuple2 == null);
         Tuple0 tuple0 = Tuple0.with();
         Tuple0 tuple01 = Tuple0.with();
         log.debug("equals same:{}", tuple0.equals(tuple01));

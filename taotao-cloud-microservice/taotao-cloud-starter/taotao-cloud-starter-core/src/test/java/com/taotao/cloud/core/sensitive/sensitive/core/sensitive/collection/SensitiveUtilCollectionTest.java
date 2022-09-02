@@ -3,7 +3,8 @@ package com.taotao.cloud.core.sensitive.sensitive.core.sensitive.collection;
 import com.taotao.cloud.core.sensitive.sensitive.core.DataPrepareTest;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.User;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class SensitiveUtilCollectionTest {
         List<User> userList = DataPrepareTest.buildUserList();
 
         List<User> sensitiveList = SensitiveUtil.desCopyCollection(userList);
-        Assert.assertEquals("[User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}, User{username='集**试', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}]", sensitiveList.toString());
+        Assertions.assertEquals("[User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}, User{username='集**试', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}]", sensitiveList.toString());
     }
 
     /**
@@ -31,10 +32,10 @@ public class SensitiveUtilCollectionTest {
     @Test
     public void desCopyCollectionEmptyTest() {
         List<User> sensitiveList = SensitiveUtil.desCopyCollection(null);
-        Assert.assertEquals("[]", sensitiveList.toString());
+        Assertions.assertEquals("[]", sensitiveList.toString());
 
         List<User> sensitiveList2 = SensitiveUtil.desCopyCollection(new ArrayList<User>());
-        Assert.assertEquals("[]", sensitiveList2.toString());
+        Assertions.assertEquals("[]", sensitiveList2.toString());
     }
 
     /**
@@ -45,7 +46,7 @@ public class SensitiveUtilCollectionTest {
         List<User> userList = DataPrepareTest.buildUserList();
 
         List<String> sensitiveJsonList = SensitiveUtil.desJsonCollection(userList);
-        Assert.assertEquals("[{\"email\":\"123**@qq.com\",\"idCard\":\"123456**********34\",\"phone\":\"188****8888\",\"username\":\"脱*君\"}, {\"email\":\"123**@qq.com\",\"idCard\":\"123456**********34\",\"phone\":\"188****8888\",\"username\":\"集**试\"}]", sensitiveJsonList.toString());
+        Assertions.assertEquals("[{\"email\":\"123**@qq.com\",\"idCard\":\"123456**********34\",\"phone\":\"188****8888\",\"username\":\"脱*君\"}, {\"email\":\"123**@qq.com\",\"idCard\":\"123456**********34\",\"phone\":\"188****8888\",\"username\":\"集**试\"}]", sensitiveJsonList.toString());
     }
 
     /**
@@ -54,10 +55,10 @@ public class SensitiveUtilCollectionTest {
     @Test
     public void desJsonCollectionEmptyTest() {
         List<String> sensitiveList = SensitiveUtil.desJsonCollection(null);
-        Assert.assertEquals("[]", sensitiveList.toString());
+        Assertions.assertEquals("[]", sensitiveList.toString());
 
         List<String> sensitiveList2 = SensitiveUtil.desJsonCollection(new ArrayList<User>());
-        Assert.assertEquals("[]", sensitiveList2.toString());
+        Assertions.assertEquals("[]", sensitiveList2.toString());
     }
 
 }

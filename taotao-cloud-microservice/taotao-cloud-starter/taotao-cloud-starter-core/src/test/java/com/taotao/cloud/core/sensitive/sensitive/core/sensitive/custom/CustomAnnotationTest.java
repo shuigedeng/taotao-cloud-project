@@ -3,7 +3,8 @@ package com.taotao.cloud.core.sensitive.sensitive.core.sensitive.custom;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.custom.CustomPasswordEntryModel;
 import com.taotao.cloud.core.sensitive.sensitive.model.custom.CustomPasswordModel;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,11 +20,11 @@ public class CustomAnnotationTest {
         final String originalStr = "CustomPasswordModel{password='hello', fooPassword='123456'}";
         final String sensitiveStr = "CustomPasswordModel{password='**********************', fooPassword='123456'}";
         CustomPasswordModel model = buildCustomPasswordModel();
-        Assert.assertEquals(originalStr, model.toString());
+        Assertions.assertEquals(originalStr, model.toString());
 
         CustomPasswordModel sensitive = SensitiveUtil.desCopy(model);
-        Assert.assertEquals(sensitiveStr, sensitive.toString());
-        Assert.assertEquals(originalStr, model.toString());
+        Assertions.assertEquals(sensitiveStr, sensitive.toString());
+        Assertions.assertEquals(originalStr, model.toString());
     }
 
     /**
@@ -37,11 +38,11 @@ public class CustomAnnotationTest {
         CustomPasswordEntryModel model = new CustomPasswordEntryModel();
         model.setEntry(entry);
 
-        Assert.assertEquals(originalStr, model.toString());
+        Assertions.assertEquals(originalStr, model.toString());
 
         CustomPasswordEntryModel sensitive = SensitiveUtil.desCopy(model);
-        Assert.assertEquals(sensitiveStr, sensitive.toString());
-        Assert.assertEquals(originalStr, model.toString());
+        Assertions.assertEquals(sensitiveStr, sensitive.toString());
+        Assertions.assertEquals(originalStr, model.toString());
     }
 
     /**
@@ -53,8 +54,8 @@ public class CustomAnnotationTest {
         final String sensitiveJson = "{\"fooPassword\":\"123456\",\"password\":\"**********************\"}";
         CustomPasswordModel model = buildCustomPasswordModel();
 
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(model));
-        Assert.assertEquals(originalStr, model.toString());
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(model));
+        Assertions.assertEquals(originalStr, model.toString());
     }
 
     /**
@@ -68,8 +69,8 @@ public class CustomAnnotationTest {
         CustomPasswordEntryModel model = new CustomPasswordEntryModel();
         model.setEntry(entry);
 
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(model));
-        Assert.assertEquals(originalStr, model.toString());
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(model));
+        Assertions.assertEquals(originalStr, model.toString());
     }
 
     /**

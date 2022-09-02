@@ -2,7 +2,8 @@ package com.taotao.cloud.core.sensitive.sensitive.core.sensitive.system;
 
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.system.SensitiveErrorSystemBuiltInModel;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,7 +20,7 @@ public class SensitiveErrorSystemBiTest {
             SensitiveErrorSystemBuiltInModel model = new SensitiveErrorSystemBuiltInModel();
             SensitiveErrorSystemBuiltInModel copy = SensitiveUtil.desCopy(model);
         } catch (Exception e) {
-            Assert.assertEquals("不支持的系统内置方法，用户请勿在自定义注解中使用[SensitiveStrategyBuiltIn]!", e.getMessage());
+            Assertions.assertEquals("不支持的系统内置方法，用户请勿在自定义注解中使用[SensitiveStrategyBuiltIn]!", e.getMessage());
         }
     }
 
@@ -32,7 +33,7 @@ public class SensitiveErrorSystemBiTest {
             SensitiveErrorSystemBuiltInModel model = new SensitiveErrorSystemBuiltInModel();
             final String json = SensitiveUtil.desJson(model);
         } catch (Exception e) {
-            Assert.assertEquals("不支持的系统内置方法，用户请勿在自定义注解中使用[SensitiveStrategyBuiltIn]!", e.getMessage());
+            Assertions.assertEquals("不支持的系统内置方法，用户请勿在自定义注解中使用[SensitiveStrategyBuiltIn]!", e.getMessage());
         }
     }
 

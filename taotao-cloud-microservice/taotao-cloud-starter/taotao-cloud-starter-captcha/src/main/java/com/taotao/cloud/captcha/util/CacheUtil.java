@@ -36,7 +36,7 @@ public final class CacheUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(CacheUtil.class);
 
-	private static final Map<String, Object> CACHE_MAP = new ConcurrentHashMap<String, Object>();
+	private static final Map<String, Object> CACHE_MAP = new ConcurrentHashMap<>();
 
 	/**
 	 * 缓存最大个数
@@ -88,8 +88,8 @@ public final class CacheUtil {
 		}
 		CACHE_MAP.put(key, value);
 		if (expiresInSeconds > 0) {
-			CACHE_MAP.put(key + "_HoldTime",
-				System.currentTimeMillis() + expiresInSeconds * 1000);//缓存失效时间
+			//缓存失效时间
+			CACHE_MAP.put(key + "_HoldTime", System.currentTimeMillis() + expiresInSeconds * 1000);
 		}
 	}
 

@@ -1,4 +1,4 @@
-package com.taotao.cloud.elk.helper;
+package com.taotao.cloud.dozer.helper;
 
 import com.github.dozermapper.core.Mapper;
 

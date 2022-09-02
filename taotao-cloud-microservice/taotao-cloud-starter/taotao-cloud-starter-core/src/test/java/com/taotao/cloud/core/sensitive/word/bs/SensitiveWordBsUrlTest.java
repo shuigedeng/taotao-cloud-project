@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.bs;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,9 +14,9 @@ public class SensitiveWordBsUrlTest {
         final String text = "点击链接 www.baidu.com查看答案";
 
         List<String> wordList = SensitiveWordBs.newInstance().findAll(text);
-        Assert.assertEquals("[链接, www.baidu.com]", wordList.toString());
+        Assertions.assertEquals("[链接, www.baidu.com]", wordList.toString());
 
-        Assert.assertEquals("点击** *************查看答案", SensitiveWordBs
+        Assertions.assertEquals("点击** *************查看答案", SensitiveWordBs
                 .newInstance().replace(text));
     }
 
@@ -32,9 +32,9 @@ public class SensitiveWordBsUrlTest {
         final String text = "双击查看大图 www.big-image.png查看";
 
         List<String> wordList = SensitiveWordBs.newInstance().findAll(text);
-        Assert.assertEquals("[www.big-image.png]", wordList.toString());
+        Assertions.assertEquals("[www.big-image.png]", wordList.toString());
 
-        Assert.assertEquals(text, SensitiveWordBs.newInstance().replace(text));
+        Assertions.assertEquals(text, SensitiveWordBs.newInstance().replace(text));
     }
 
 }
