@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.common.spider;
 
+import com.taotao.cloud.common.http.ResponseSpec;
 import org.jsoup.helper.DataUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,11 +29,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import reactor.core.Exceptions;
 
 /**
  * 爬虫 xml 转 bean 基于 jsoup
- *
  */
 public class DomMapper {
 
@@ -55,8 +54,9 @@ public class DomMapper {
 		try {
 			return DataUtil.load(inputStream, StandardCharsets.UTF_8.name(), "");
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	/**

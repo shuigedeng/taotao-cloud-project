@@ -29,7 +29,7 @@ class QrCodeTest {
 			.encode(Charsets.UTF_8) // 默认 UTF_8，可以不设置
 			.imageFormat("png") // 默认 png，可以不设置
 			.deleteMargin(true) // 删除白边，默认为 true，可以不设置
-			.logo("/Users/lcm/Desktop/mica.png") // 设置二维码 logo
+			.logo("/Users/lcm/Desktop/tt.png") // 设置二维码 logo
 			.toFile("/Users/lcm/Desktop/xxx1.png"); // 写出，同类方法有 toImage、toStream、toBytes
 
 		// 二维码读取

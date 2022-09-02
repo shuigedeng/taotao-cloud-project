@@ -5,7 +5,7 @@ import com.taotao.cloud.core.sensitive.word.api.IWordDeny;
 import com.taotao.cloud.core.sensitive.word.bs.SensitiveWordBs;
 import com.taotao.cloud.core.sensitive.word.support.allow.WordAllows;
 import com.taotao.cloud.core.sensitive.word.support.deny.WordDenys;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class SensitiveWordBsDefineTest {
 
@@ -18,7 +18,7 @@ public class SensitiveWordBsDefineTest {
                 .wordAllow(new MyWordAllow())
                 .init();
 
-        Assert.assertEquals("[我的自定义敏感词]", wordBs.findAll(text).toString());
+        Assertions.assertEquals("[我的自定义敏感词]", wordBs.findAll(text).toString());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class SensitiveWordBsDefineTest {
                 .wordAllow(wordAllow)
                 .init();
 
-        Assert.assertEquals("[我的自定义敏感词]", wordBs.findAll(text).toString());
+        Assertions.assertEquals("[我的自定义敏感词]", wordBs.findAll(text).toString());
     }
 
 }

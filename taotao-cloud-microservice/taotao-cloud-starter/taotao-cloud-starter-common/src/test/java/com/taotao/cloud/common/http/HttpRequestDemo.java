@@ -27,7 +27,6 @@ import org.apache.logging.log4j.util.Base64Util;
 /**
  * This example of mica http
  *
- * @author L.cm
  */
 public class HttpRequestDemo {
 

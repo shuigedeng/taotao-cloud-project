@@ -6,7 +6,6 @@ import java.io.InputStream;
 /**
  * 文件上传 demo
  *
- * @author L.cm
  */
 public class HttpFileUploadDemo {
 

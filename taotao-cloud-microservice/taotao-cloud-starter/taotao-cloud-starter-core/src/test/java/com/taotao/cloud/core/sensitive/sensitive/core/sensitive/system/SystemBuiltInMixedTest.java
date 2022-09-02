@@ -3,7 +3,8 @@ package com.taotao.cloud.core.sensitive.sensitive.core.sensitive.system;
 import com.taotao.cloud.core.sensitive.sensitive.core.DataPrepareTest;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.system.SystemBuiltInMixed;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,11 +20,11 @@ public class SystemBuiltInMixedTest {
         final String originalStr = "SystemBuiltInMixed{testField='混合'}";
         final String sensitiveStr = "SystemBuiltInMixed{testField='null'}";
         SystemBuiltInMixed entry = DataPrepareTest.buildSystemBuiltInMixed();
-        Assert.assertEquals(originalStr, entry.toString());
+        Assertions.assertEquals(originalStr, entry.toString());
 
         SystemBuiltInMixed sensitive = SensitiveUtil.desCopy(entry);
-        Assert.assertEquals(sensitiveStr, sensitive.toString());
-        Assert.assertEquals(originalStr, entry.toString());
+        Assertions.assertEquals(sensitiveStr, sensitive.toString());
+        Assertions.assertEquals(originalStr, entry.toString());
     }
 
     /**
@@ -35,8 +36,8 @@ public class SystemBuiltInMixedTest {
         final String sensitiveJson = "{}";
         SystemBuiltInMixed entry = DataPrepareTest.buildSystemBuiltInMixed();
 
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(entry));
-        Assert.assertEquals(originalStr, entry.toString());
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(entry));
+        Assertions.assertEquals(originalStr, entry.toString());
     }
 
 }

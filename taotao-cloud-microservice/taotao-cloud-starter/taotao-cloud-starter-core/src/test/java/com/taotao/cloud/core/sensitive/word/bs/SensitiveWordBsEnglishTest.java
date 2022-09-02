@@ -1,6 +1,7 @@
 package com.taotao.cloud.core.sensitive.word.bs;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class SensitiveWordBsEnglishTest {
         final String text = "Ⓕⓤc⒦ the bad words";
 
         List<String> wordList = SensitiveWordBs.newInstance().findAll(text);
-        Assert.assertEquals("[Ⓕⓤc⒦]", wordList.toString());
+        Assertions.assertEquals("[Ⓕⓤc⒦]", wordList.toString());
     }
 
 }

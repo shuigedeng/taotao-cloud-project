@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.taotao.cloud.common.support.generator.CSVFileGenerator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,9 +33,7 @@ public class CSVFileGeneratorTest {
         CSVFileGenerator.generate(data, new String[] { "1", "2", "3" },
             fileName);
 
-        assertEquals(
-            Lists.newArrayList("1a,2a,3a", "1b,2b,3b", "1c,2c,3c"),
-            Files.readLines(new File(fileName), Charset.forName("utf-8")));
+        Assertions.assertEquals(Lists.newArrayList("1a,2a,3a", "1b,2b,3b", "1c,2c,3c"), Files.readLines(new File(fileName), StandardCharsets.UTF_8));
     }
 
 }

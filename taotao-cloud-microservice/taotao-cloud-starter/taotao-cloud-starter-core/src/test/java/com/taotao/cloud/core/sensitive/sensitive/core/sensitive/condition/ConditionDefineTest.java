@@ -2,7 +2,8 @@ package com.taotao.cloud.core.sensitive.sensitive.core.sensitive.condition;
 
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.condition.SensitiveConditionPassword;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -21,8 +22,8 @@ public class ConditionDefineTest {
         SensitiveConditionPassword user = buildUser();
         SensitiveConditionPassword sensitive = SensitiveUtil.desCopy(user);
 
-        Assert.assertEquals(originalStr, user.toString());
-        Assert.assertEquals(sensitiveStr, sensitive.toString());
+        Assertions.assertEquals(originalStr, user.toString());
+        Assertions.assertEquals(sensitiveStr, sensitive.toString());
     }
 
     /**
@@ -35,8 +36,8 @@ public class ConditionDefineTest {
 
         SensitiveConditionPassword user = buildUser();
 
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(user));
-        Assert.assertEquals(originalStr, user.toString());
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(user));
+        Assertions.assertEquals(originalStr, user.toString());
     }
 
     /**

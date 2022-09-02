@@ -4,7 +4,8 @@ import com.taotao.cloud.core.sensitive.sensitive.core.DataPrepareTest;
 import com.taotao.cloud.core.sensitive.sensitive.core.api.SensitiveUtil;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.system.SystemBuiltInAt;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.system.SystemBuiltInAtEntry;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -21,11 +22,11 @@ public class SystemBuiltInTest {
         final String sensitiveStr = "SystemBuiltInAt{phone='188****8888', password='null', name='脱*君', email='123**@qq.com', cardId='123456**********34'}";
 
         SystemBuiltInAt systemBuiltInAt = DataPrepareTest.buildSystemBuiltInAt();
-        Assert.assertEquals(originalStr, systemBuiltInAt.toString());
+        Assertions.assertEquals(originalStr, systemBuiltInAt.toString());
 
         SystemBuiltInAt sensitive = SensitiveUtil.desCopy(systemBuiltInAt);
-        Assert.assertEquals(sensitiveStr, sensitive.toString());
-        Assert.assertEquals(originalStr, systemBuiltInAt.toString());
+        Assertions.assertEquals(sensitiveStr, sensitive.toString());
+        Assertions.assertEquals(originalStr, systemBuiltInAt.toString());
     }
 
     /**
@@ -37,11 +38,11 @@ public class SystemBuiltInTest {
         final String sensitiveStr = "SystemBuiltInAtEntry{entry=SystemBuiltInAt{phone='188****8888', password='null', name='脱*君', email='123**@qq.com', cardId='123456**********34'}}";
 
         SystemBuiltInAtEntry entry = DataPrepareTest.buildSystemBuiltInAtEntry();
-        Assert.assertEquals(originalStr, entry.toString());
+        Assertions.assertEquals(originalStr, entry.toString());
 
         SystemBuiltInAtEntry sensitive = SensitiveUtil.desCopy(entry);
-        Assert.assertEquals(sensitiveStr, sensitive.toString());
-        Assert.assertEquals(originalStr, entry.toString());
+        Assertions.assertEquals(sensitiveStr, sensitive.toString());
+        Assertions.assertEquals(originalStr, entry.toString());
     }
 
     /**
@@ -53,8 +54,8 @@ public class SystemBuiltInTest {
         final String sensitiveJson = "{\"cardId\":\"123456**********34\",\"email\":\"123**@qq.com\",\"name\":\"脱*君\",\"phone\":\"188****8888\"}";
 
         SystemBuiltInAt systemBuiltInAt = DataPrepareTest.buildSystemBuiltInAt();
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(systemBuiltInAt));
-        Assert.assertEquals(originalStr, systemBuiltInAt.toString());
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(systemBuiltInAt));
+        Assertions.assertEquals(originalStr, systemBuiltInAt.toString());
     }
 
     /**
@@ -68,8 +69,8 @@ public class SystemBuiltInTest {
 
         SystemBuiltInAtEntry entry = DataPrepareTest.buildSystemBuiltInAtEntry();
 
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(entry));
-        Assert.assertEquals(originalStr, entry.toString());
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(entry));
+        Assertions.assertEquals(originalStr, entry.toString());
     }
 
 }

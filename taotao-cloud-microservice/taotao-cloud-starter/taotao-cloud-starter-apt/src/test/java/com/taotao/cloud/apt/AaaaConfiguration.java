@@ -16,8 +16,8 @@
 package com.taotao.cloud.apt;
 
 
-import com.taotao.cloud.apt.annotation.AutoConfigDataLoader;
-import com.taotao.cloud.apt.annotation.AutoListener;
+import com.taotao.cloud.apt.auto.annotation.AutoConfigDataLoader;
+import com.taotao.cloud.apt.auto.annotation.AutoListener;
 
 /**
  * AaaaConfiguration

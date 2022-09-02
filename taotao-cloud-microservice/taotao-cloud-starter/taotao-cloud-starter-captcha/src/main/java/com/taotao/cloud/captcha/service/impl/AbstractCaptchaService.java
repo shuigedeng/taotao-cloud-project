@@ -18,8 +18,8 @@ package com.taotao.cloud.captcha.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.captcha.model.Captcha;
 import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
-import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.CaptchaConst;
+import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.util.CacheUtil;
@@ -27,7 +27,8 @@ import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.secure.AESUtils;
 import com.taotao.cloud.common.utils.secure.MD5Utils;
-import java.awt.Font;
+
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -85,7 +86,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
 	private static FrequencyLimitHandler limitHandler;
 
-	//判断应用是否实现了自定义缓存，没有就使用内存
+	/**
+	 * 判断应用是否实现了自定义缓存，没有就使用内存
+	 */
 	@Override
 	public void init(final Properties config) {
 		//初始化底图
@@ -132,8 +135,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 * getCacheService
 	 *
 	 * @param cacheType cacheType
-	 * @return {@link com.taotao.cloud.captcha.service.CaptchaCacheService }
-	 * @since 2021-09-03 20:57:41
+	 * @return {@link CaptchaCacheService }
+	 * @since 2022-09-02 10:30:16
 	 */
 	protected CaptchaCacheService getCacheService(String cacheType) {
 		return CaptchaServiceFactory.getCache(cacheType);
@@ -189,8 +192,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	 * getValidateClientId
 	 *
 	 * @param req req
-	 * @return {@link java.lang.String }
-	 * @since 2021-09-03 20:57:47
+	 * @return {@link String }
+	 * @since 2022-09-02 10:30:52
 	 */
 	protected String getValidateClientId(Captcha req) {
 		// 以服务端获取的客户端标识 做识别标志
@@ -213,8 +216,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	protected void afterValidateFail(Captcha data) {
 		if (limitHandler != null) {
 			// 验证失败 分钟内计数
-			String fails = String.format(FrequencyLimitHandler.LIMIT_KEY, "FAIL",
-				data.getClientUid());
+			String fails = String.format(FrequencyLimitHandler.LIMIT_KEY, "FAIL", data.getClientUid());
 			CaptchaCacheService cs = getCacheService(cacheType);
 			if (!cs.exists(fails)) {
 				cs.set(fails, "1", 60);
@@ -226,7 +228,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	/**
 	 * 加载resources下的font字体 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示， 通过加载resources下的font字体解决，无需在linux中安装字体
 	 *
-	 * @since 2021-09-03 20:57:56
+	 * @since 2022-09-02 10:30:57
 	 */
 	private void loadWaterMarkFont() {
 		try {

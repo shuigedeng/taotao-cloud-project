@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.bs;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class SensitiveWordBsUserDefineTest {
         final String text = "gender 我们认为应该通过，自定义敏感词我们认为应该拒绝。";
 
         List<String> wordList = SensitiveWordBs.newInstance().findAll(text);
-        Assert.assertEquals("[自定义敏感词]", wordList.toString());
+        Assertions.assertEquals("[自定义敏感词]", wordList.toString());
     }
 
 }

@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.apt;
 
-import com.taotao.cloud.apt.annotation.AutoService;
+import com.taotao.cloud.apt.auto.annotation.AutoService;
+
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;

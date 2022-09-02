@@ -4,7 +4,7 @@ import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.api.IWordResult;
 import com.taotao.cloud.core.sensitive.word.replace.MySensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.support.result.WordResultHandlers;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class SensitiveWordHelperTest {
     public void containsTest() {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
-        Assert.assertTrue(SensitiveWordHelper.contains(text));
+		Assertions.assertTrue(SensitiveWordHelper.contains(text));
     }
 
     /**
@@ -29,7 +29,7 @@ public class SensitiveWordHelperTest {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
         List<String> wordList = SensitiveWordHelper.findAll(text);
-        Assert.assertEquals("[五星红旗, 毛主席, 天安门]", wordList.toString());
+        Assertions.assertEquals("[五星红旗, 毛主席, 天安门]", wordList.toString());
     }
 
     /**
@@ -40,7 +40,7 @@ public class SensitiveWordHelperTest {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
         List<String> wordList = SensitiveWordHelper.findAll(text, WordResultHandlers.word());
-        Assert.assertEquals("[五星红旗, 毛主席, 天安门]", wordList.toString());
+        Assertions.assertEquals("[五星红旗, 毛主席, 天安门]", wordList.toString());
     }
 
     /**
@@ -51,7 +51,7 @@ public class SensitiveWordHelperTest {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
         List<IWordResult> wordList = SensitiveWordHelper.findAll(text, WordResultHandlers.raw());
-        Assert.assertEquals("[WordResult{word='五星红旗', startIndex=0, endIndex=4}, WordResult{word='毛主席', startIndex=9, endIndex=12}, WordResult{word='天安门', startIndex=18, endIndex=21}]", wordList.toString());
+        Assertions.assertEquals("[WordResult{word='五星红旗', startIndex=0, endIndex=4}, WordResult{word='毛主席', startIndex=9, endIndex=12}, WordResult{word='天安门', startIndex=18, endIndex=21}]", wordList.toString());
     }
 
 
@@ -63,7 +63,7 @@ public class SensitiveWordHelperTest {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
         String word = SensitiveWordHelper.findFirst(text);
-        Assert.assertEquals("五星红旗", word);
+        Assertions.assertEquals("五星红旗", word);
     }
 
     /**
@@ -74,7 +74,7 @@ public class SensitiveWordHelperTest {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
         String word = SensitiveWordHelper.findFirst(text, WordResultHandlers.word());
-        Assert.assertEquals("五星红旗", word);
+        Assertions.assertEquals("五星红旗", word);
     }
 
     /**
@@ -85,7 +85,7 @@ public class SensitiveWordHelperTest {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
         IWordResult word = SensitiveWordHelper.findFirst(text, WordResultHandlers.raw());
-        Assert.assertEquals("WordResult{word='五星红旗', startIndex=0, endIndex=4}", word.toString());
+        Assertions.assertEquals("WordResult{word='五星红旗', startIndex=0, endIndex=4}", word.toString());
     }
 
     /**
@@ -96,7 +96,7 @@ public class SensitiveWordHelperTest {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
         String result = SensitiveWordHelper.replace(text);
-        Assert.assertEquals("****迎风飘扬，***的画像屹立在***前。", result);
+        Assertions.assertEquals("****迎风飘扬，***的画像屹立在***前。", result);
     }
 
     /**
@@ -107,7 +107,7 @@ public class SensitiveWordHelperTest {
         final String text = "五星红旗迎风飘扬，毛主席的画像屹立在天安门前。";
 
         String result = SensitiveWordHelper.replace(text, '0');
-        Assert.assertEquals("0000迎风飘扬，000的画像屹立在000前。", result);
+        Assertions.assertEquals("0000迎风飘扬，000的画像屹立在000前。", result);
     }
 
     /**
@@ -118,7 +118,7 @@ public class SensitiveWordHelperTest {
         final String text = "fuCK the bad words.";
 
         String word = SensitiveWordHelper.findFirst(text);
-        Assert.assertEquals("fuCK", word);
+        Assertions.assertEquals("fuCK", word);
     }
 
     /**
@@ -129,7 +129,7 @@ public class SensitiveWordHelperTest {
         final String text = "ｆｕｃｋ the bad words.";
 
         String word = SensitiveWordHelper.findFirst(text);
-        Assert.assertEquals("ｆｕｃｋ", word);
+        Assertions.assertEquals("ｆｕｃｋ", word);
     }
 
     /**
@@ -142,7 +142,7 @@ public class SensitiveWordHelperTest {
         ISensitiveWordReplace replace = new MySensitiveWordReplace();
         String result = SensitiveWordHelper.replace(text, replace);
 
-        Assert.assertEquals("国家旗帜迎风飘扬，教员的画像屹立在***前。", result);
+        Assertions.assertEquals("国家旗帜迎风飘扬，教员的画像屹立在***前。", result);
     }
 
 }

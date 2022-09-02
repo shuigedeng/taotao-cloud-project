@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.common.spider;
 
+import com.taotao.cloud.common.utils.convert.ConvertUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import org.jsoup.internal.StringUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
@@ -71,11 +73,8 @@ public class CssQueryMethodInterceptor implements MethodInterceptor {
 			return methodProxy.invokeSuper(object, args);
 		}
 		// 兼容 lombok bug 强制首字母小写： https://github.com/rzwitserloot/lombok/issues/1861
-		String fieldName = StringUtil.firstCharToLower(propertyDescriptor.getDisplayName());
+		String fieldName = StringUtils.firstCharToLower(propertyDescriptor.getDisplayName());
 		Field field = clazz.getDeclaredField(fieldName);
-		if (field == null) {
-			return methodProxy.invokeSuper(object, args);
-		}
 		CssQuery cssQuery = field.getAnnotation(CssQuery.class);
 		// 没有注解，不代理
 		if (cssQuery == null) {
@@ -95,7 +94,7 @@ public class CssQueryMethodInterceptor implements MethodInterceptor {
 		}
 		// 用于读取 field 上的注解
 		TypeDescriptor typeDescriptor = new TypeDescriptor(field);
-		return ConvertUtil.convert(proxyValue, typeDescriptor);
+		return ConvertUtils.convert(proxyValue, typeDescriptor);
 	}
 
 	@Nullable

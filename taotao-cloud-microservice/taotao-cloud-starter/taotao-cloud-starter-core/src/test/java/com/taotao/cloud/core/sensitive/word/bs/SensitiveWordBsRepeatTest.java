@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.bs;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class SensitiveWordBsRepeatTest {
         List<String> wordList = SensitiveWordBs.newInstance()
                 .ignoreRepeat(true)
                 .findAll(text);
-        Assert.assertEquals("[ⒻⒻⒻfⓤuⓤ⒰cⓒ⒦]", wordList.toString());
+        Assertions.assertEquals("[ⒻⒻⒻfⓤuⓤ⒰cⓒ⒦]", wordList.toString());
     }
 
 }

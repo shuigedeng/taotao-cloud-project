@@ -7,7 +7,8 @@ import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.entry.CustomUse
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.entry.CustomUserEntryBaseType;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.entry.CustomUserEntryObject;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.entry.CustomUserGroup;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -24,11 +25,11 @@ public class CustomSensitiveEntryTest {
         final String sensitiveStr = "CustomUserEntryBaseType{chineseNameList=[*古, *娲, *羲], chineseNameArray=[*古, *娲, *羲]}";
 
         CustomUserEntryBaseType userEntryBaseType = DataPrepareTest.buildCustomUserEntryBaseType();
-        Assert.assertEquals(originalStr, userEntryBaseType.toString());
+        Assertions.assertEquals(originalStr, userEntryBaseType.toString());
 
         CustomUserEntryBaseType sensitive = SensitiveUtil.desCopy(userEntryBaseType);
-        Assert.assertEquals(sensitiveStr, sensitive.toString());
-        Assert.assertEquals(originalStr, userEntryBaseType.toString());
+        Assertions.assertEquals(sensitiveStr, sensitive.toString());
+        Assertions.assertEquals(originalStr, userEntryBaseType.toString());
     }
 
     /**
@@ -40,11 +41,11 @@ public class CustomSensitiveEntryTest {
         final String sensitiveStr = "CustomUserEntryObject{user=User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}, userList=[User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}], userArray=[User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}]}";
 
         CustomUserEntryObject userEntryObject = DataPrepareTest.buildCustomUserEntryObject();
-        Assert.assertEquals(originalStr, userEntryObject.toString());
+        Assertions.assertEquals(originalStr, userEntryObject.toString());
 
         CustomUserEntryObject sensitiveUserEntryObject = SensitiveUtil.desCopy(userEntryObject);
-        Assert.assertEquals(sensitiveStr, sensitiveUserEntryObject.toString());
-        Assert.assertEquals(originalStr, userEntryObject.toString());
+        Assertions.assertEquals(sensitiveStr, sensitiveUserEntryObject.toString());
+        Assertions.assertEquals(originalStr, userEntryObject.toString());
     }
 
     /**
@@ -56,11 +57,11 @@ public class CustomSensitiveEntryTest {
         final String sensitiveStr = "CustomUserGroup{coolUser=User{username='脱敏君', idCard='123456190001011234', password='1234567', email='12345@qq.com', phone='18888888888'}, user=User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}, userList=[User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}], userSet=[User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}], userCollection=[User{username='脱*君', idCard='123456**********34', password='null', email='123**@qq.com', phone='188****8888'}], password='123456', userMap={map=User{username='脱敏君', idCard='123456190001011234', password='1234567', email='12345@qq.com', phone='18888888888'}}}";
 
         CustomUserGroup userGroup = DataPrepareTest.buildCustomUserGroup();
-        Assert.assertEquals(originalStr, userGroup.toString());
+        Assertions.assertEquals(originalStr, userGroup.toString());
 
         CustomUserGroup sensitiveUserGroup = SensitiveUtil.desCopy(userGroup);
-        Assert.assertEquals(sensitiveStr, sensitiveUserGroup.toString());
-        Assert.assertEquals(originalStr, userGroup.toString());
+        Assertions.assertEquals(sensitiveStr, sensitiveUserGroup.toString());
+        Assertions.assertEquals(originalStr, userGroup.toString());
     }
 
     /**
@@ -73,8 +74,8 @@ public class CustomSensitiveEntryTest {
 
         CustomUserEntryBaseType userEntryBaseType = DataPrepareTest.buildCustomUserEntryBaseType();
 
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(userEntryBaseType));
-        Assert.assertEquals(originalStr, userEntryBaseType.toString());
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(userEntryBaseType));
+        Assertions.assertEquals(originalStr, userEntryBaseType.toString());
     }
 
     /**
@@ -87,8 +88,8 @@ public class CustomSensitiveEntryTest {
 
         CustomUserEntryObject userEntryObject = DataPrepareTest.buildCustomUserEntryObject();
 
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(userEntryObject));
-        Assert.assertEquals(originalStr, userEntryObject.toString());
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(userEntryObject));
+        Assertions.assertEquals(originalStr, userEntryObject.toString());
     }
 
     /**
@@ -103,9 +104,9 @@ public class CustomSensitiveEntryTest {
 
         CustomUserCollection userCollection = DataPrepareTest.buildCustomUserCollection();
 
-        Assert.assertEquals(commonJson, JSON.toJSONString(userCollection));
-        Assert.assertEquals(sensitiveJson, SensitiveUtil.desJson(userCollection));
-        Assert.assertEquals(originalStr, userCollection.toString());
+        Assertions.assertEquals(commonJson, JSON.toJSONString(userCollection));
+        Assertions.assertEquals(sensitiveJson, SensitiveUtil.desJson(userCollection));
+        Assertions.assertEquals(originalStr, userCollection.toString());
     }
 
 }
