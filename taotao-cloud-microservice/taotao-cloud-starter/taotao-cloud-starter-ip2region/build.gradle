@@ -1,22 +1,22 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://github.com/maxmind/GeoIP2-java
     //https://search.maven.org/artifact/com.maxmind.geoip2/geoip2
-    api 'com.maxmind.geoip2:geoip2:3.0.1'
+    api "com.maxmind.geoip2:geoip2:3.0.1"
 
     //https://gitee.com/lionsoul/ip2region.git
     //https://search.maven.org/artifact/org.lionsoul/ip2region
-    api 'org.lionsoul:ip2region:2.6.5'
+    api "org.lionsoul:ip2region:2.6.5"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

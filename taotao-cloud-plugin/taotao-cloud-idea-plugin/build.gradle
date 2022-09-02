@@ -1,25 +1,25 @@
 plugins {
-    id 'java'
-    id 'org.jetbrains.intellij' version '1.8.1'
+    id "java"
+    id "org.jetbrains.intellij" version "1.8.1"
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation "junit:junit:4.13.2"
 
-    implementation 'cn.hutool:hutool-http:5.8.5'
-    implementation 'com.google.zxing:core:3.5.0'
-    implementation 'com.google.zxing:javase:3.5.0'
+    implementation "cn.hutool:hutool-http:5.8.5"
+    implementation "com.google.zxing:core:3.5.0"
+    implementation "com.google.zxing:javase:3.5.0"
 }
 
 // https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
     // 插件名称
-    pluginName = 'toolkit'
+    pluginName = "toolkit"
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
     sandboxDir = "${rootProject.rootDir}/idea-sandbox"
     // 开发环境运行时使用的版本
-    version = '2021.3'
-    type = 'IC'
+    version = "2021.3"
+    type = "IC"
 
     // 各种版本去这里找
     // https://www.jetbrains.com/intellij-repository/releases

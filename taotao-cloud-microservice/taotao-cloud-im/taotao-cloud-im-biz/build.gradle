@@ -1,13 +1,13 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-wechat:taotao-cloud-wechat-api')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-wechat:taotao-cloud-wechat-api")
 
     implementation "com.tencentcloudapi:tencentcloud-sdk-java:3.1.390"
     implementation "com.google.zxing:core:3.3.3"
     implementation "com.getui.push:restful-sdk:1.0.0.3"
 //    implementation "com.q3z3:core-upload:1.0.0"
     implementation fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
-    implementation 'io.undertow:undertow-websockets-jsr'
+    implementation "io.undertow:undertow-websockets-jsr"
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
@@ -17,10 +17,10 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

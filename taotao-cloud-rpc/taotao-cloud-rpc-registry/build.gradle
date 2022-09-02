@@ -1,7 +1,7 @@
 dependencies {
-    implementation('org.apache.zookeeper:zookeeper:3.8.0'){
-        exclude group: 'javax.jms', module: 'jms'
-        exclude group: 'jmxtools', module: 'com.sun.jdmk'
-        exclude group: 'jmxri', module: 'com.sun.jmx'
+    implementation("org.apache.zookeeper:zookeeper:3.8.0"){
+        exclude group: "javax.jms", module: "jms"
+        exclude group: "jmxtools", module: "com.sun.jdmk"
+        exclude group: "jmxri", module: "com.sun.jmx"
     }
 }

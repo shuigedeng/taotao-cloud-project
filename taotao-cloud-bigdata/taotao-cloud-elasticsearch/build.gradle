@@ -1,23 +1,23 @@
 dependencies {
-    implementation 'org.elasticsearch:elasticsearch:8.4.0'
-    implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.6'
-    implementation 'org.apache.logging.log4j:log4j-api:2.17.2'
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
-    implementation 'junit:junit:4.13.2'
+    implementation "org.elasticsearch:elasticsearch:8.4.0"
+    implementation "org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.6"
+    implementation "org.apache.logging.log4j:log4j-api:2.17.2"
+    implementation "org.apache.logging.log4j:log4j-core:2.17.2"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.13.3"
+    implementation "junit:junit:4.13.2"
 
-    implementation 'org.apache.flink:flink-scala_2.12:1.15.1'
-    implementation 'org.apache.flink:flink-streaming-scala_2.12:1.15.1'
-    implementation 'org.apache.flink:flink-clients_2.12:1.14.5'
-    implementation 'org.apache.flink:flink-connector-elasticsearch7_2.11:1.14.5'
+    implementation "org.apache.flink:flink-scala_2.12:1.15.1"
+    implementation "org.apache.flink:flink-streaming-scala_2.12:1.15.1"
+    implementation "org.apache.flink:flink-clients_2.12:1.14.5"
+    implementation "org.apache.flink:flink-connector-elasticsearch7_2.11:1.14.5"
 
-    implementation 'org.apache.spark:spark-core_2.12:3.2.2'
-    implementation 'org.apache.spark:spark-streaming_2.12:3.2.2'
+    implementation "org.apache.spark:spark-core_2.12:3.2.2"
+    implementation "org.apache.spark:spark-streaming_2.12:3.2.2"
 
-    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-test'
-    implementation 'org.springframework:spring-test'
+    implementation "org.springframework.boot:spring-boot-starter-data-elasticsearch"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    implementation "org.springframework.boot:spring-boot-test"
+    implementation "org.springframework:spring-test"
 
 
 }

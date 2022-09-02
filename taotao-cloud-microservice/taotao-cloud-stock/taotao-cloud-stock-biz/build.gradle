@@ -1,8 +1,8 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
 
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-stock:taotao-cloud-stock-api')
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-stock:taotao-cloud-stock-api")
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
@@ -12,11 +12,11 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 
@@ -27,23 +27,23 @@ tasks.named('test') {
 //    version = 1.0
 //    manifest {
 //        attributes(
-//                'Main-Class': "com.taotao.cloud.aftersale.biz.TaoTaoCloudAfterSaleApplication"
+//                "Main-Class": "com.taotao.cloud.aftersale.biz.TaoTaoCloudAfterSaleApplication"
 //        )
 //    }
 //
 //    dependencies {
-//        // exclude(dependency('xml-apis:xml-apis:.*'))
-//        // exclude(dependency('xerces:xercesImpl:.*'))
-//        // exclude(dependency { it.moduleGroup == 'xml-apis' })
-//        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
-//        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
+//        // exclude(dependency("xml-apis:xml-apis:.*"))
+//        // exclude(dependency("xerces:xercesImpl:.*"))
+//        // exclude(dependency { it.moduleGroup == "xml-apis" })
+//        // exclude(dependency { it.moduleGroup == "org.apache.spark" })
+//        // exclude(dependency { it.moduleGroup == "org.scala-lang" })
 //    }
 //
-//    //append 'META-INF/spring.handlers'
-//    //append 'META-INF/spring.schemas'
-//    //append 'META-INF/spring.tooling'
+//    //append "META-INF/spring.handlers"
+//    //append "META-INF/spring.schemas"
+//    //append "META-INF/spring.tooling"
 //    //transform(PropertiesFileTransformer) {
-//    //    paths = ['META-INF/spring.factories' ]
+//    //    paths = ["META-INF/spring.factories" ]
 //    //    mergeStrategy = "append"
 //    //}
 //}

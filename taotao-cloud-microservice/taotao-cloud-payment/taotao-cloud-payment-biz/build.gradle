@@ -16,24 +16,24 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     implementation("com.alipay.sdk:alipay-sdk-java:4.22.32.ALL") {
-        exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'xml-apis', module: 'xml-apis'
+        exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
+        exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "xml-apis", module: "xml-apis"
     }
 
     implementation "com.github.javen205:IJPay-All:2.8.1"
 
-    implementation 'com.github.binarywang:weixin-java-pay:4.1.0'
-    implementation 'com.github.binarywang:weixin-java-mp:4.1.0'
-    implementation 'com.paypal.sdk:checkout-sdk:1.0.5'
+    implementation "com.github.binarywang:weixin-java-pay:4.1.0"
+    implementation "com.github.binarywang:weixin-java-mp:4.1.0"
+    implementation "com.paypal.sdk:checkout-sdk:1.0.5"
 
-    implementation 'com.yungouos.pay:yungouos-pay-sdk:2.0.26'
+    implementation "com.yungouos.pay:yungouos-pay-sdk:2.0.26"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 //shadowJar {
@@ -43,23 +43,23 @@ tasks.named('test') {
 //    version = 1.0
 //    manifest {
 //        attributes(
-//                'Main-Class': "com.taotao.cloud.logistics.biz.TaoTaoCloudLogisticsApplication"
+//                "Main-Class": "com.taotao.cloud.logistics.biz.TaoTaoCloudLogisticsApplication"
 //        )
 //    }
 //
 //    dependencies {
-//        // exclude(dependency('xml-apis:xml-apis:.*'))
-//        // exclude(dependency('xerces:xercesImpl:.*'))
-//        // exclude(dependency { it.moduleGroup == 'xml-apis' })
-//        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
-//        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
+//        // exclude(dependency("xml-apis:xml-apis:.*"))
+//        // exclude(dependency("xerces:xercesImpl:.*"))
+//        // exclude(dependency { it.moduleGroup == "xml-apis" })
+//        // exclude(dependency { it.moduleGroup == "org.apache.spark" })
+//        // exclude(dependency { it.moduleGroup == "org.scala-lang" })
 //    }
 //
-//    //append 'META-INF/spring.handlers'
-//    //append 'META-INF/spring.schemas'
-//    //append 'META-INF/spring.tooling'
+//    //append "META-INF/spring.handlers"
+//    //append "META-INF/spring.schemas"
+//    //append "META-INF/spring.tooling"
 //    //transform(PropertiesFileTransformer) {
-//    //    paths = ['META-INF/spring.factories' ]
+//    //    paths = ["META-INF/spring.factories" ]
 //    //    mergeStrategy = "append"
 //    //}
 //}

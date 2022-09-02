@@ -1,24 +1,24 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel")
 
-    compileOnly('com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery') {
-        exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
+    compileOnly("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery") {
+        exclude group: "org.springframework.cloud", module: "spring-cloud-starter-netflix-ribbon"
     }
 
     api "io.github.openfeign:feign-okhttp"
 
     api "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    api "org.springframework.cloud:spring-cloud-starter-openfeign"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

@@ -1,30 +1,30 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://gitee.com/dromara/dynamic-tp.git
     //https://search.maven.org/artifact/cn.dynamictp/dynamic-tp-spring-cloud-starter-nacos
-    api('cn.dynamictp:dynamic-tp-spring-cloud-starter-nacos:1.0.8') {
-        exclude group: 'org.projectlombok', module: 'lombok'
+    api("cn.dynamictp:dynamic-tp-spring-cloud-starter-nacos:1.0.8") {
+        exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://gitee.com/mabaiwancn/hippo4j
     //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter
-    api 'cn.hippo4j:hippo4j-spring-boot-starter:1.4.0'
+    api "cn.hippo4j:hippo4j-spring-boot-starter:1.4.0"
     //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter-all
-    api ('cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.0'){
-        exclude group: 'cn.hippo4j', module: "hippo4j-spring-boot-starter-adapter-hystrix"
-        exclude group: 'commons-collections', module: "commons-collections"
-        exclude group: 'com.alibaba', module: "fastjson"
+    api ("cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.0"){
+        exclude group: "cn.hippo4j", module: "hippo4j-spring-boot-starter-adapter-hystrix"
+        exclude group: "commons-collections", module: "commons-collections"
+        exclude group: "com.alibaba", module: "fastjson"
     }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

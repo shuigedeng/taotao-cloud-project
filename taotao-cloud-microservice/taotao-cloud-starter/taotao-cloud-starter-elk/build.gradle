@@ -1,19 +1,19 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
 
     //https://search.maven.org/artifact/net.logstash.logback/logstash-logback-encoder
     api "net.logstash.logback:logstash-logback-encoder:7.2"
     //https://search.maven.org/artifact/org.aspectj/aspectjweaver
-    api 'org.aspectj:aspectjweaver:1.9.9.1'
+    api "org.aspectj:aspectjweaver:1.9.9.1"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

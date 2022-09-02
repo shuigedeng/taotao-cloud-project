@@ -1,18 +1,18 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-webmvc-core
-    api 'org.springdoc:springdoc-openapi-webmvc-core:1.6.11'
+    api "org.springdoc:springdoc-openapi-webmvc-core:1.6.11"
     //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-common
-    api 'org.springdoc:springdoc-openapi-common:1.6.11'
+    api "org.springdoc:springdoc-openapi-common:1.6.11"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

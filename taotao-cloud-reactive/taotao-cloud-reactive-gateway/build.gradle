@@ -1,11 +1,11 @@
 dependencies {
-//    implementation project(':taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
-    implementation 'org.springframework.security:spring-security-config'
-    implementation 'org.springframework.security:spring-security-oauth2-resource-server'
-    implementation 'org.springframework.security:spring-security-oauth2-client'
-    implementation 'org.springframework.security:spring-security-oauth2-jose'
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.24.3'
-    implementation 'cn.hutool:hutool-all:5.8.5'
+//    implementation project(":taotao-cloud-starter:taotao-cloud-starter-common")
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
+    implementation "org.springframework.cloud:spring-cloud-starter-gateway"
+    implementation "org.springframework.security:spring-security-config"
+    implementation "org.springframework.security:spring-security-oauth2-resource-server"
+    implementation "org.springframework.security:spring-security-oauth2-client"
+    implementation "org.springframework.security:spring-security-oauth2-jose"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.24.3"
+    implementation "cn.hutool:hutool-all:5.8.5"
 }

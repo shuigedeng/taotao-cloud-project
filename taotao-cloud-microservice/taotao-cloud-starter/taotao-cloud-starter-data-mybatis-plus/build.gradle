@@ -1,31 +1,31 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy")
 
-    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-jetcache')
-    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-caffeine')
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-jetcache")
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-caffeine")
 
     api "mysql:mysql-connector-java"
 
-    api 'com.baomidou:mybatis-plus-boot-starter'
-    api 'com.baomidou:dynamic-datasource-spring-boot-starter'
-    api 'com.baomidou:mybatis-plus-extension'
-    api 'com.baomidou:mybatis-plus-generator:3.5.3'
+    api "com.baomidou:mybatis-plus-boot-starter"
+    api "com.baomidou:dynamic-datasource-spring-boot-starter"
+    api "com.baomidou:mybatis-plus-extension"
+    api "com.baomidou:mybatis-plus-generator:3.5.3"
 
     //https://search.maven.org/artifact/com.github.pagehelper/pagehelper-spring-boot-starter
-    api 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.3'
+    api "com.github.pagehelper:pagehelper-spring-boot-starter:1.4.3"
 
     // 这tm的要付钱  Caused by: mybatis.mate.O000000o.O000000o: please purchase activation code, thank you for your support!
-    // api 'com.baomidou:mybatis-mate-starter:1.2.4'
+    // api "com.baomidou:mybatis-mate-starter:1.2.4"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

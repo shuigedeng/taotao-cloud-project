@@ -1,34 +1,34 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common")
 
     //百度云对象存储
     //https://search.maven.org/artifact/com.baidubce/bce-java-sdk
-    api('com.baidubce:bce-java-sdk:0.10.222'){
-        exclude group: 'com.google.protobuf', module: 'protobuf-java'
-        exclude group: 'commons-collections', module: 'commons-collections'
-        exclude group: 'commons-httpclient', module: 'commons-httpclient'
-        exclude group: 'io.netty', module: 'netty'
-        exclude group: 'log4j', module: 'log4j'
-        exclude group: 'org.apache.hadoop', module: 'hadoop-common'
-        exclude group: 'org.apache.hadoop', module: 'hadoop-yarn-common'
-        exclude group: 'org.apache.hadoop', module: 'hadoop-mapreduce-client-core'
-        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
-        exclude group: 'org.codehaus.jackson', module: 'jackson-core-asl'
-        exclude group: 'org.codehaus.jackson', module: 'jackson-mapper-asl'
-        exclude group: 'org.mortbay.jetty', module: 'jetty'
-        exclude group: 'org.mortbay.jetty', module: 'jetty-util'
+    api("com.baidubce:bce-java-sdk:0.10.222"){
+        exclude group: "com.google.protobuf", module: "protobuf-java"
+        exclude group: "commons-collections", module: "commons-collections"
+        exclude group: "commons-httpclient", module: "commons-httpclient"
+        exclude group: "io.netty", module: "netty"
+        exclude group: "log4j", module: "log4j"
+        exclude group: "org.apache.hadoop", module: "hadoop-common"
+        exclude group: "org.apache.hadoop", module: "hadoop-yarn-common"
+        exclude group: "org.apache.hadoop", module: "hadoop-mapreduce-client-core"
+        exclude group: "org.apache.zookeeper", module: "zookeeper"
+        exclude group: "org.codehaus.jackson", module: "jackson-core-asl"
+        exclude group: "org.codehaus.jackson", module: "jackson-mapper-asl"
+        exclude group: "org.mortbay.jetty", module: "jetty"
+        exclude group: "org.mortbay.jetty", module: "jetty-util"
     }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework:spring-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework:spring-test"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

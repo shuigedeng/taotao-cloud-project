@@ -1,22 +1,22 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     compileOnly "io.micrometer:micrometer-core"
 
     //https://search.maven.org/artifact/com.alibaba/druid
-    compileOnly 'com.alibaba:druid:1.2.11'
+    compileOnly "com.alibaba:druid:1.2.11"
 
-    compileOnly 'com.alibaba.csp:sentinel-core:1.8.5'
+    compileOnly "com.alibaba.csp:sentinel-core:1.8.5"
 
     compileOnly "org.springframework.boot:spring-boot-starter-undertow"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

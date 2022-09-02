@@ -20,11 +20,11 @@ dependencies {
 
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+	testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
 	useJUnitPlatform()
 }
 
@@ -37,28 +37,28 @@ bootBuildImage {
 				   "BPL_SPRING_CLOUD_BINDINGS_ENABLED": "true",
 
 				   "BP_IMAGE_LABELS": "application_name=taotao-cloud-monitor application_version=2022.09",
-				   'BP_OCI_AUTHORS': '981376577@qq.com',
-				   //'BP_OCI_CREATED': ' ',
-				   //'BP_OCI_DESCRIPTION': ' ',
-				   //'BP_OCI_DOCUMENTATION': ' ',
-				   //'BP_OCI_LICENSES': ' ',
-				   //'BP_OCI_REF_NAME': ' ',
-				   //'BP_OCI_REVISION': ' ',
-				   //'BP_OCI_SOURCE': ' ',
-				   //'BP_OCI_TITLE': ' ',
-				   //'BP_OCI_URL': ' ',
-				   //'BP_OCI_VENDOR': ' ',
-				   //'BP_OCI_VERSION': ' ',
+				   "BP_OCI_AUTHORS": "981376577@qq.com",
+				   //"BP_OCI_CREATED": " ",
+				   //"BP_OCI_DESCRIPTION": " ",
+				   //"BP_OCI_DOCUMENTATION": " ",
+				   //"BP_OCI_LICENSES": " ",
+				   //"BP_OCI_REF_NAME": " ",
+				   //"BP_OCI_REVISION": " ",
+				   //"BP_OCI_SOURCE": " ",
+				   //"BP_OCI_TITLE": " ",
+				   //"BP_OCI_URL": " ",
+				   //"BP_OCI_VENDOR": " ",
+				   //"BP_OCI_VERSION": " ",
 
-				   'BPE_APPLICATION_NAME': 'taotao-cloud-monitor',
-				   'BPE_APPLICATION_VERSION': '2022.09',
-				   'BPE_JMX_ENABLED': "true",
-				   'BPE_LANG': "zh_CN.UTF-8",
-				   'BPE_JMX_PORT': "5000",
-				   'BPE_DEBUG_ENABLED': "true",
-				   'BPE_DEBUG_PORT': "8000",
-				   'BPE_DEBUG_SUSPEND': "true",
-				   'BPE_APPEND_JAVA_TOOL_OPTIONS': " -Xms512m " +
+				   "BPE_APPLICATION_NAME": "taotao-cloud-monitor",
+				   "BPE_APPLICATION_VERSION": "2022.09",
+				   "BPE_JMX_ENABLED": "true",
+				   "BPE_LANG": "zh_CN.UTF-8",
+				   "BPE_JMX_PORT": "5000",
+				   "BPE_DEBUG_ENABLED": "true",
+				   "BPE_DEBUG_PORT": "8000",
+				   "BPE_DEBUG_SUSPEND": "true",
+				   "BPE_APPEND_JAVA_TOOL_OPTIONS": " -Xms512m " +
 						   "-Xmx2g " +
 						   "-Xss256k " +
 						   "-XX:MaxDirectMemorySize=256m " +
@@ -84,18 +84,18 @@ bootBuildImage {
 						   "-Dskywalking.collector.backend_service=192.168.10.200:11800 " +
 						   "-Dspring.profiles.active=dev ",
 
-				   'BP_JVM_VERSION': '11.*',
-				   'BP_JVM_TYPE': 'JRE',
-				   'BPL_JMX_ENABLED': "true",
-				   'BPL_JMX_PORT': "5000",
+				   "BP_JVM_VERSION": "11.*",
+				   "BP_JVM_TYPE": "JRE",
+				   "BPL_JMX_ENABLED": "true",
+				   "BPL_JMX_PORT": "5000",
 
-				   'BP_DEBUG_ENABLED': "true",
-				   'BPL_DEBUG_ENABLED': "true",
-				   'BPL_DEBUG_PORT': "8000",
-				   'BPL_DEBUG_SUSPEND': "true",
+				   "BP_DEBUG_ENABLED": "true",
+				   "BPL_DEBUG_ENABLED": "true",
+				   "BPL_DEBUG_PORT": "8000",
+				   "BPL_DEBUG_SUSPEND": "true",
 
-				   //'HTTP_PROXY': 'http://proxy.example.com',
-				   //'HTTPS_PROXY': 'http://proxy.example.com',
+				   //"HTTP_PROXY": "http://proxy.example.com",
+				   //"HTTPS_PROXY": "http://proxy.example.com",
 	 			  ]
 	bindings = ["/tmp/logs/taotao-cloud-monitor:/root/logs", "/opt/cloud/apache-skywalking-apm-bin/agent/:/skywalking/agent"]
 	cleanCache = false
@@ -130,14 +130,14 @@ jib {
 	//https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
 	allowInsecureRegistries = true
 	from {
-		image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64'
+		image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64"
 		auth {
 			username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
 			password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
 		}
 	}
 	to {
-		image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor'
+		image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor"
 		tags = ["${project.name}-${project.version}"]
 		auth {
 			username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
@@ -145,20 +145,20 @@ jib {
 		}
 	}
 	container {
-		creationTime = 'USE_CURRENT_TIMESTAMP'
-		jvmFlags = ['-Djava.security.egd=file:/dev/./urandom',
-					'-Dspring.profiles.active=dev',
-					'-Dfile.encoding=utf-8',
-					'-Duser.timezone=Asia/Shanghai']
-		mainClass = 'com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication'
-		args = ['some', 'args']
-		ports = ['33337']
-		//labels = ['app_name': 'taotao-cloud-sys', 'port': '33337']
-		environment = ['app_name': 'taotao-cloud-sys', 'port': '33337']
-		format = 'OCI'
-		user = 'root'
-		volumes = ['/root/logs']
-		workingDirectory = '/root'
+		creationTime = "USE_CURRENT_TIMESTAMP"
+		jvmFlags = ["-Djava.security.egd=file:/dev/./urandom",
+					"-Dspring.profiles.active=dev",
+					"-Dfile.encoding=utf-8",
+					"-Duser.timezone=Asia/Shanghai"]
+		mainClass = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
+		args = ["some", "args"]
+		ports = ["33337"]
+		//labels = ["app_name": "taotao-cloud-sys", "port": "33337"]
+		environment = ["app_name": "taotao-cloud-sys", "port": "33337"]
+		format = "OCI"
+		user = "root"
+		volumes = ["/root/logs"]
+		workingDirectory = "/root"
 	}
 }
 
@@ -174,8 +174,8 @@ jib {
 //		maintainer = "${dockerMaintainer}"
 //		ports = [8200]
 //		images = ["micyo202/${project.name}:${project.version}"]
-//		jvmArgs = ['-Djava.security.egd=file:/dev/./urandom', '-Xmx512m']
-//		mainClassName = 'com.lion.admin.AdminApplication'
+//		jvmArgs = ["-Djava.security.egd=file:/dev/./urandom", "-Xmx512m"]
+//		mainClassName = "com.lion.admin.AdminApplication"
 //	}
 //}
 
@@ -183,7 +183,7 @@ jib {
 //    zip64 true
 //    mergeServiceFiles()
 //    classifier = null
-//	mainClassName = 'com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication'
+//	mainClassName = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
 //}
 
 

@@ -1,20 +1,20 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/io.github.tokenjan/pinyin4j
-    api 'io.github.tokenjan:pinyin4j:2.6.1'
+    api "io.github.tokenjan:pinyin4j:2.6.1"
 
-    testImplementation 'org.assertj:assertj-guava:3.5.0'
-    testImplementation 'org.testng:testng:7.6.1'
-    testImplementation 'com.google.inject:guice:5.1.0'
+    testImplementation "org.assertj:assertj-guava:3.5.0"
+    testImplementation "org.testng:testng:7.6.1"
+    testImplementation "com.google.inject:guice:5.1.0"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

@@ -1,6 +1,6 @@
 plugins {
-    id 'maven-publish'
-    id 'java-platform'
+    id "maven-publish"
+    id "java-platform"
 }
 
 javaPlatform {
@@ -237,7 +237,7 @@ publishing {
     repositories {
         maven {
             name = "Aliyun"
-            if (project.version.endsWith('-SNAPSHOT')) {
+            if (project.version.endsWith("-SNAPSHOT")) {
                 url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
             } else {
                 url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
@@ -261,7 +261,7 @@ publishing {
 
         maven {
             name = "Sonatype"
-            if (project.version.endsWith('-SNAPSHOT')) {
+            if (project.version.endsWith("-SNAPSHOT")) {
                 url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             } else {
                 url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
@@ -286,27 +286,27 @@ publishing {
             pom {
                 name = project.name
                 description = project.name
-                url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+                url = "https://github.com/shuigedeng/taotao-cloud-project.git"
 
                 licenses {
                     license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                        name = "The Apache License, Version 2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
                     }
                 }
 
                 developers {
                     developer {
-                        id = 'shuigedeng'
-                        name = 'shuigedeng'
-                        email = '981376577@qq.com'
+                        id = "shuigedeng"
+                        name = "shuigedeng"
+                        email = "981376577@qq.com"
                     }
                 }
 
                 scm {
-                    connection = 'scm:git:git@github.com:shuigedeng/taotao-cloud-project.git'
-                    developerConnection = 'scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git'
-                    url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+                    connection = "scm:git:git@github.com:shuigedeng/taotao-cloud-project.git"
+                    developerConnection = "scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git"
+                    url = "https://github.com/shuigedeng/taotao-cloud-project.git"
                 }
             }
         }

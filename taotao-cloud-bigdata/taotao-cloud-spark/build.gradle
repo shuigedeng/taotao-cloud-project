@@ -1,17 +1,17 @@
-apply plugin: 'scala'
-apply plugin: 'java'
-apply plugin: 'idea'
+apply plugin: "scala"
+apply plugin: "java"
+apply plugin: "idea"
 
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala']
+            srcDirs = ["src/main/scala"]
         }
     }
 
     test {
         scala {
-            srcDirs = ['src/test/scala']
+            srcDirs = ["src/test/scala"]
         }
     }
 }
@@ -27,14 +27,14 @@ dependencies {
 
     implementation "org.apache.hudi:hudi-spark3.1-bundle_2.12:0.12.0"
 
-    implementation('net.heartsavior.spark:spark-sql-kafka-offset-committer_2.12:0.4.0-spark-3.0') {
-        exclude group: 'org.scala-lang', module: 'scala-library'
+    implementation("net.heartsavior.spark:spark-sql-kafka-offset-committer_2.12:0.4.0-spark-3.0") {
+        exclude group: "org.scala-lang", module: "scala-library"
     }
 
-    implementation 'org.apache.hadoop:hadoop-common:3.3.2'
-    implementation 'org.apache.hadoop:hadoop-mapreduce-client-core:3.3.2'
-    implementation 'org.apache.hadoop:hadoop-mapreduce-client-common:3.3.2'
-    implementation 'org.apache.hadoop:hadoop-hdfs:3.3.2'
+    implementation "org.apache.hadoop:hadoop-common:3.3.2"
+    implementation "org.apache.hadoop:hadoop-mapreduce-client-core:3.3.2"
+    implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.3.2"
+    implementation "org.apache.hadoop:hadoop-hdfs:3.3.2"
 
     implementation "org.scala-lang:scala-library:2.13.8"
     implementation "org.scala-lang:scala-reflect:2.13.8"

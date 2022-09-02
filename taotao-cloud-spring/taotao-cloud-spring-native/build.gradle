@@ -1,28 +1,28 @@
 //import org.springframework.aot.gradle.dsl.AotMode
 
 plugins {
-//    id 'org.springframework.experimental.aot' version '0.12.1'
+//    id "org.springframework.experimental.aot" version "0.12.1"
     id "com.bmuschko.docker-spring-boot-application" version "7.4.0"
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot'
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 
-tasks.named('bootBuildImage') {
-    builder = 'paketobuildpacks/builder:tiny'
-    environment = ['BP_NATIVE_IMAGE': 'true']
+tasks.named("bootBuildImage") {
+    builder = "paketobuildpacks/builder:tiny"
+    environment = ["BP_NATIVE_IMAGE": "true"]
 }
 
 bootRun {
-    systemProperty 'springAot', 'true'
+    systemProperty "springAot", "true"
 }
 
 //springAot {
@@ -37,9 +37,9 @@ bootRun {
 
 docker {
     springBootApplication {
-        baseImage = 'openjdk:8-alpine'
+        baseImage = "openjdk:8-alpine"
         ports = [9090, 8080]
-        images = ['awesome-spring-boot:1.115', 'awesome-spring-boot:latest']
-        jvmArgs = ['-Dspring.profiles.active=production', '-Xmx2048m']
+        images = ["awesome-spring-boot:1.115", "awesome-spring-boot:latest"]
+        jvmArgs = ["-Dspring.profiles.active=production", "-Xmx2048m"]
     }
 }

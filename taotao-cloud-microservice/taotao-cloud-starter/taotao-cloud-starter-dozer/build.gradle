@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
 
     //https://search.maven.org/artifact/com.github.dozermapper/dozer-spring-boot-starter
     api("com.github.dozermapper:dozer-spring-boot-starter:6.5.2"){
@@ -8,12 +8,12 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

@@ -1,27 +1,27 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter
     api("org.redisson:redisson-spring-boot-starter:3.17.6") {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
-        exclude group: 'org.yaml', module: 'snakeyaml'
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
+        exclude group: "org.yaml", module: "snakeyaml"
     }
 
     //https://search.maven.org/artifact/com.zengtengpeng/redisson-spring-boot-starter
-    api ('com.zengtengpeng:redisson-spring-boot-starter:1.0.17') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
-        exclude group: 'org.yaml', module: 'snakeyaml'
+    api ("com.zengtengpeng:redisson-spring-boot-starter:1.0.17") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
+        exclude group: "org.yaml", module: "snakeyaml"
     }
 
     //https://search.maven.org/artifact/org.redisson/redisson-spring-data
-    api('org.redisson:redisson-spring-data-27:3.17.6'){
-        exclude group: 'org.yaml', module: 'snakeyaml'
+    api("org.redisson:redisson-spring-data-27:3.17.6"){
+        exclude group: "org.yaml", module: "snakeyaml"
     }
-    api('org.springframework.boot:spring-boot-starter-data-redis'){
-        exclude group: 'org.yaml', module: 'snakeyaml'
+    api("org.springframework.boot:spring-boot-starter-data-redis"){
+        exclude group: "org.yaml", module: "snakeyaml"
     }
 
-    api 'org.springframework.boot:spring-boot-starter-cache'
+    api "org.springframework.boot:spring-boot-starter-cache"
     api "org.springframework:spring-messaging"
 
     api "commons-io:commons-io"
@@ -30,11 +30,11 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

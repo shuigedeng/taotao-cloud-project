@@ -1,6 +1,6 @@
-apply plugin: 'scala'
-apply plugin: 'java'
-apply plugin: 'idea'
+apply plugin: "scala"
+apply plugin: "java"
+apply plugin: "idea"
 
 dependencies {
     implementation "org.scala-lang:scala-library:2.13.8"
@@ -11,7 +11,7 @@ dependencies {
 
     //implementation "org.scala-lang:scala-implementationr:2.12.8"
 
-    implementation 'com.typesafe.akka:akka-slf4j_2.13:2.6.19'
-    implementation 'com.typesafe.akka:akka-actor_2.13:2.6.19'
-    implementation 'com.typesafe.akka:akka-remote_2.13:2.6.19'
+    implementation "com.typesafe.akka:akka-slf4j_2.13:2.6.19"
+    implementation "com.typesafe.akka:akka-actor_2.13:2.6.19"
+    implementation "com.typesafe.akka:akka-remote_2.13:2.6.19"
 }

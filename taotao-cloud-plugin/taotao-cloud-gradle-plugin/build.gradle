@@ -19,8 +19,8 @@ dependencies {
 gradlePlugin {
     plugins {
         simplePlugin {
-            id = 'first-plugin'
-            implementationClass = 'com.huangyuanlove.plugin.FirstPlugin'
+            id = "first-plugin"
+            implementationClass = "com.huangyuanlove.plugin.FirstPlugin"
         }
     }
 }
@@ -31,36 +31,36 @@ gradlePlugin {
 //        //artifact bootJar
 //        groupId project.group
 //        artifactId project.name
-//        version '1.0.2'
+//        version "1.0.2"
 //
 //        //打包类型 war: components.web jar: components.java
 //        //from components.java
 //
 //        pom {
-//            name = 'TaoTaoCloudGradlePlugin'
-//            description = 'TaoTaoCloudGradlePlugin'
-//            url = 'https://taotaocloud.top'
+//            name = "TaoTaoCloudGradlePlugin"
+//            description = "TaoTaoCloudGradlePlugin"
+//            url = "https://taotaocloud.top"
 //            properties = [
 //                    myProp: "value",
 //                    "prop.with.dots": "anotherValue"
 //            ]
 //            licenses {
 //                license {
-//                    name = 'The Apache License, Version 2.0'
-//                    url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    name = "The Apache License, Version 2.0"
+//                    url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
 //                }
 //            }
 //            developers {
 //                developer {
-//                    id = 'taotao'
-//                    name = 'taotao'
-//                    email = '981376577@qq.com'
+//                    id = "taotao"
+//                    name = "taotao"
+//                    email = "981376577@qq.com"
 //                }
 //            }
 //            scm {
-//                connection = 'scm:git:git://example.com/my-library.git'
-//                developerConnection = 'scm:git:ssh://example.com/my-library.git'
-//                url = 'http://example.com/my-library/'
+//                connection = "scm:git:git://example.com/my-library.git"
+//                developerConnection = "scm:git:ssh://example.com/my-library.git"
+//                url = "http://example.com/my-library/"
 //            }
 //        }
 //    }
@@ -69,10 +69,10 @@ gradlePlugin {
 //uploadArchives{ //当前项目可以发布到本地文件夹中
 //    repositories {
 //        mavenDeployer {
-//            repository(url: uri('/Users/huangyuan/maven_repo')) //定义本地maven仓库的地址
-//            pom.groupId = 'com.example.mygradleplugin'   //groupId
-//            pom.artifactId = 'myplugin'  //artifactId
-//            pom.version = '1.0.2' //版本号
+//            repository(url: uri("/Users/huangyuan/maven_repo")) //定义本地maven仓库的地址
+//            pom.groupId = "com.example.mygradleplugin"   //groupId
+//            pom.artifactId = "myplugin"  //artifactId
+//            pom.version = "1.0.2" //版本号
 //        }
 //    }
 //}

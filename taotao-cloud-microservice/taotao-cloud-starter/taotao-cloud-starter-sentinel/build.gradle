@@ -1,37 +1,37 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
-    api ('com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'){
-        exclude group: 'com.fasterxml.jackson.dataformat', module: 'jackson-dataformat-xml'
-        exclude group: 'com.alibaba.csp', module: 'sentinel-transport-common'
-        exclude group: 'com.alibaba.csp', module: 'sentinel-cluster-server-default'
+    api ("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"){
+        exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
+        exclude group: "com.alibaba.csp", module: "sentinel-transport-common"
+        exclude group: "com.alibaba.csp", module: "sentinel-cluster-server-default"
     }
 
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-transport-common
-    api 'com.alibaba.csp:sentinel-transport-common:1.8.5'
+    api "com.alibaba.csp:sentinel-transport-common:1.8.5"
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-transport-simple-http
-    api 'com.alibaba.csp:sentinel-transport-simple-http:1.8.5'
+    api "com.alibaba.csp:sentinel-transport-simple-http:1.8.5"
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-cluster-server-default
-    api 'com.alibaba.csp:sentinel-cluster-server-default:1.8.5'
+    api "com.alibaba.csp:sentinel-cluster-server-default:1.8.5"
     //https://search.maven.org/artifact/com.alibaba.csp/sentinel-datasource-nacos
     api ("com.alibaba.csp:sentinel-datasource-nacos:1.8.5"){
-        exclude group: 'com.alibaba.csp', module: 'sentinel-core'
+        exclude group: "com.alibaba.csp", module: "sentinel-core"
     }
 
     compileOnly "org.springframework.cloud:spring-cloud-starter-openfeign"
     
-    api 'org.springframework.boot:spring-boot-starter'
-    api 'org.springframework:spring-web'
-    api 'org.springframework:spring-webflux'
+    api "org.springframework.boot:spring-boot-starter"
+    api "org.springframework:spring-web"
+    api "org.springframework:spring-webflux"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

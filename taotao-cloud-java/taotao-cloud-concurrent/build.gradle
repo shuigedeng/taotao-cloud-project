@@ -1,21 +1,21 @@
 dependencies {
-    implementation 'org.apache.activemq:activemq-all:5.17.0'
+    implementation "org.apache.activemq:activemq-all:5.17.0"
 
-    implementation 'org.springframework:spring-webmvc:5.3.19'
-    implementation 'org.springframework:spring-context-support:5.3.19'
-    implementation 'org.springframework:spring-aop:5.3.19'
-    implementation 'org.springframework:spring-aspects:5.3.19'
-    implementation 'org.springframework:spring-context:4.3.6.RELEASE'
-    implementation 'org.springframework:spring-orm:5.3.19'
-    implementation 'org.springframework:spring-core:5.3.19'
-    implementation 'org.springframework:spring-jdbc:5.3.19'
-    implementation 'org.springframework:spring-beans:5.3.19'
-    implementation 'org.springframework:spring-web:5.2.20.RELEASE'
-    implementation 'org.springframework:spring-test:5.3.19'
+    implementation "org.springframework:spring-webmvc:5.3.19"
+    implementation "org.springframework:spring-context-support:5.3.19"
+    implementation "org.springframework:spring-aop:5.3.19"
+    implementation "org.springframework:spring-aspects:5.3.19"
+    implementation "org.springframework:spring-context:4.3.6.RELEASE"
+    implementation "org.springframework:spring-orm:5.3.19"
+    implementation "org.springframework:spring-core:5.3.19"
+    implementation "org.springframework:spring-jdbc:5.3.19"
+    implementation "org.springframework:spring-beans:5.3.19"
+    implementation "org.springframework:spring-web:5.2.20.RELEASE"
+    implementation "org.springframework:spring-test:5.3.19"
 
-    implementation 'org.apache.hadoop:hadoop-common:3.3.2'
-    implementation 'org.apache.hadoop:hadoop-hdfs:3.3.2'
-    implementation 'org.apache.hadoop:hadoop-client:3.3.2'
+    implementation "org.apache.hadoop:hadoop-common:3.3.2"
+    implementation "org.apache.hadoop:hadoop-hdfs:3.3.2"
+    implementation "org.apache.hadoop:hadoop-client:3.3.2"
 }
 
 repositories {

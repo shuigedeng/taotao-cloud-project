@@ -1,31 +1,31 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
 
-    api 'com.alibaba.cloud:spring-cloud-starter-dubbo'
+    api "com.alibaba.cloud:spring-cloud-starter-dubbo"
 
     // 3之前用这个
-    api('org.apache.dubbo:dubbo-serialization-kryo:2.7.16'){
-        exclude group: 'log4j', module: 'log4j'
+    api("org.apache.dubbo:dubbo-serialization-kryo:2.7.16"){
+        exclude group: "log4j", module: "log4j"
     }
     // 3之后用这个
-    //api 'org.apache.dubbo.extensions:dubbo-serialization-kryo:1.0.0'
+    //api "org.apache.dubbo.extensions:dubbo-serialization-kryo:1.0.0"
 
 
-    //api('com.alibaba.cloud:spring-cloud-starter-dubbo'){
-    //    exclude group: 'org.apache.dubbo', module: 'dubbo'
-    //    exclude group: 'org.apache.dubbo', module: 'dubbo-spring-boot-starter'
+    //api("com.alibaba.cloud:spring-cloud-starter-dubbo"){
+    //    exclude group: "org.apache.dubbo", module: "dubbo"
+    //    exclude group: "org.apache.dubbo", module: "dubbo-spring-boot-starter"
     //}
     //https://search.maven.org/artifact/org.apache.dubbo/dubbo-spring-boot-starter
-    //api 'org.apache.dubbo:dubbo-spring-boot-starter:3.0.9'
+    //api "org.apache.dubbo:dubbo-spring-boot-starter:3.0.9"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

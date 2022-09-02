@@ -1,27 +1,27 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin
-    api 'org.apache.pulsar:pulsar-client-admin:2.10.1'
+    api "org.apache.pulsar:pulsar-client-admin:2.10.1"
 
     //https://search.maven.org/artifact/com.github.ben-manes.caffeine/caffeine
-    api 'com.github.ben-manes.caffeine:caffeine:3.1.1'
+    api "com.github.ben-manes.caffeine:caffeine:3.1.1"
 
     //https://search.maven.org/artifact/io.netty/netty-common
-    api 'io.netty:netty-common:4.1.80.Final'
+    api "io.netty:netty-common:4.1.80.Final"
 
     //https://search.maven.org/artifact/io.github.majusko/pulsar-java-spring-boot-starter
-    api('io.github.majusko:pulsar-java-spring-boot-starter:1.1.2'){
-        exclude group: 'io.swagger', module: 'swagger-annotations'
+    api("io.github.majusko:pulsar-java-spring-boot-starter:1.1.2"){
+        exclude group: "io.swagger", module: "swagger-annotations"
     }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

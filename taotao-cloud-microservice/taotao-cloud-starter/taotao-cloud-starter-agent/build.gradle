@@ -1,27 +1,27 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
-    implementation 'org.ow2.asm:asm:9.3'
+    implementation "org.ow2.asm:asm:9.3"
 
     implementation "net.bytebuddy:byte-buddy:1.12.14"
     implementation "net.bytebuddy:byte-buddy-agent:1.12.14"
 
-    implementation 'cglib:cglib:3.3.0'
-    implementation 'org.javassist:javassist:3.29.1-GA'
+    implementation "cglib:cglib:3.3.0"
+    implementation "org.javassist:javassist:3.29.1-GA"
 
-    implementation 'io.opentelemetry:opentelemetry-api:1.17.0'
-    implementation 'io.opentelemetry:opentelemetry-sdk:1.17.0'
+    implementation "io.opentelemetry:opentelemetry-api:1.17.0"
+    implementation "io.opentelemetry:opentelemetry-sdk:1.17.0"
 
-    compileOnly 'org.apache.tomcat.embed:tomcat-embed-core:10.0.23'
+    compileOnly "org.apache.tomcat.embed:tomcat-embed-core:10.0.23"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
 

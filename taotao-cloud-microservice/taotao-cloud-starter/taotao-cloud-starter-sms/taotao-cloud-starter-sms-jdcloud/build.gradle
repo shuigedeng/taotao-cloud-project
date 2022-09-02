@@ -1,19 +1,19 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-common')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-common")
 
     //https://search.maven.org/artifact/com.jdcloud.sdk/sms
-    api('com.jdcloud.sdk:sms:1.3.3') {
-        exclude group: 'com.alibaba', module: 'fastjson'
+    api("com.jdcloud.sdk:sms:1.3.3") {
+        exclude group: "com.alibaba", module: "fastjson"
     }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework:spring-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework:spring-test"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }

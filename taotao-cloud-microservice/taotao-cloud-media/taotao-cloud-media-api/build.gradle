@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
 
     api "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

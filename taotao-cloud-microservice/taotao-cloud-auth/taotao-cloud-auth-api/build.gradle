@@ -1,8 +1,8 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
 
-    api "org.projectlombok:lombok:1.18.24"
-    annotationProcessor "org.projectlombok:lombok:1.18.24"
+    api "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
     api "io.soabase.record-builder:record-builder-core"

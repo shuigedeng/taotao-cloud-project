@@ -1,31 +1,31 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
 
-    compileOnly project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock')
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock")
 
-    api 'org.springframework.boot:spring-boot-starter-data-jpa'
-    api 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    api "org.springframework.boot:spring-boot-starter-data-jpa"
+    api "org.springframework.boot:spring-boot-starter-data-jdbc"
 
     //https://search.maven.org/artifact/com.querydsl/querydsl-apt
-    api 'com.querydsl:querydsl-apt:5.0.0'
+    api "com.querydsl:querydsl-apt:5.0.0"
     //https://search.maven.org/artifact/com.querydsl/querydsl-jpa
-    api 'com.querydsl:querydsl-jpa:5.0.0'
+    api "com.querydsl:querydsl-jpa:5.0.0"
     //https://search.maven.org/artifact/mysql/mysql-connector-java
     api "mysql:mysql-connector-java:8.0.30"
 
-    compileOnly 'org.springframework.security:spring-security-oauth2-core'
+    compileOnly "org.springframework.security:spring-security-oauth2-core"
 
     annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
+    //testImplementation "junit:junit:4.13.2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
