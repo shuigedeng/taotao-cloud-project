@@ -70,8 +70,8 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends
 	 * @param predicate predicate
 	 * @param pageable  pageable
 	 * @param orders    orders
-	 * @return {@link Page&lt;T&gt; }
-	 * @since 2021-10-09 20:29:49
+	 * @return {@link Page }<{@link T }>
+	 * @since 2022-09-02 08:28:43
 	 */
 	public Page<T> findPageable(Predicate predicate, Pageable pageable,
 		OrderSpecifier<?>... orders) {
@@ -87,8 +87,8 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends
 	 * count
 	 *
 	 * @param predicate predicate
-	 * @return 条数
-	 * @since 2021-10-09 20:30:31
+	 * @return int
+	 * @since 2022-09-02 08:28:54
 	 */
 	public int count(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
@@ -102,7 +102,7 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends
 	 *
 	 * @param predicate predicate
 	 * @return {@link Boolean }
-	 * @since 2021-10-09 20:30:15
+	 * @since 2022-09-02 08:29:00
 	 */
 	public Boolean exists(Predicate predicate) {
 		return jpaPredicateExecutor.exists(predicate);
@@ -112,8 +112,8 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends
 	 * fetch
 	 *
 	 * @param predicate predicate
-	 * @return {@link List&lt;T&gt; }
-	 * @since 2021-10-09 20:30:44
+	 * @return {@link List }<{@link T }>
+	 * @since 2022-09-02 08:29:03
 	 */
 	public List<T> fetch(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
@@ -138,8 +138,8 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends
 	 * fetchCount
 	 *
 	 * @param predicate predicate
-	 * @return 条数
-	 * @since 2021-10-09 20:31:11
+	 * @return int
+	 * @since 2022-09-02 08:29:08
 	 */
 	public int fetchCount(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
@@ -154,8 +154,8 @@ public abstract class JpaSuperRepository<T, I extends Serializable> extends
 	 * @param predicate predicate
 	 * @param expr      expr
 	 * @param o         o
-	 * @return {@link List&lt;?&gt; }
-	 * @since 2021-10-09 20:31:18
+	 * @return {@link List }<{@link ? }>
+	 * @since 2022-09-02 08:29:12
 	 */
 	public List<?> find(Predicate predicate, Expression<?> expr, OrderSpecifier<?>... o) {
 		return jpaQueryFactory

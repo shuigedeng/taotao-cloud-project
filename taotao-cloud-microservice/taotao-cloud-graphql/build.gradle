@@ -37,7 +37,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-graphql'
 
     implementation "org.mapstruct:mapstruct"
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.2.Final"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
 
     implementation 'org.springframework.cloud:spring-cloud-context'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'

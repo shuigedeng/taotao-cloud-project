@@ -106,7 +106,6 @@ public class AESUtils {
 	 *
 	 * @param ciphertext 密文
 	 * @return 明文
-	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:25
 	 */
 	public static String decrypt(String ciphertext) {

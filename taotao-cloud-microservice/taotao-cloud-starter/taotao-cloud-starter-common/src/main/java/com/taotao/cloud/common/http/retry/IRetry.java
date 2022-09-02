@@ -16,6 +16,8 @@
 package com.taotao.cloud.common.http.retry;
 
 
+import com.taotao.cloud.common.support.function.CheckedCallable;
+
 /**
  * 重试接口
  *

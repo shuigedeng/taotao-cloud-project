@@ -29,6 +29,19 @@ buildscript {
 
         //https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
         testContainersVersion = "1.17.3"
+        //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
+        springBootAdminVersion = "2.7.4"
+
+        //https://search.maven.org/artifact/org.projectlombok/lombok
+        lombokVersion = "1.18.24"
+        //https://search.maven.org/artifact/org.projectlombok/lombok-mapstruct-binding
+        lombokMapstructBindingVersion = "0.2.0"
+        //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
+        recordBuilderVersion = "34"
+        //https://search.maven.org/artifact/org.mapstruct/mapstruct-processor
+        mapstructProcessorVersion = "1.5.2.Final"
+        //https://search.maven.org/artifact/com.querydsl/querydsl-apt
+        querydslAptVersion = "5.0.0"
 
         //https://search.maven.org/artifact/org.springframework.security/spring-security-core
         springSecurityVersion = '5.7.3'
@@ -36,9 +49,6 @@ buildscript {
         springDataCommonsVersion = '2.7.2'
         //https://search.maven.org/artifact/org.springframework.kafka/spring-kafka
         springKafkaVersion = '2.9.0'
-
-        //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
-        adminVersion = "2.7.4"
 
         //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-databind
         fasterxmlVersion = '2.13.3'

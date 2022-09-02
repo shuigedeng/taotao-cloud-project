@@ -47,7 +47,7 @@ public class RedisDelayQueue {
 	/**
 	 * 获取延迟队列
 	 *
-	 * @param queueCode
+	 * @param queueCode queueCode
 	 * @return {@link T }
 	 * @since 2022-04-27 17:45:48
 	 */
