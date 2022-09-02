@@ -45,6 +45,52 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 /**
  * SentinelAutoConfiguration
  *
+ * <pre class="code">
+ *  // 注解方式进行埋点，注解方式受 AOP 代理的诸多限制
+ * @SentinelResource("com.alibabacloud.mse.demo.AApplication.AController:a")
+ * private String a(HttpServletRequest request) {
+ *     StringBuilder headerSb = new StringBuilder();
+ *     Enumeration<String> enumeration = request.getHeaderNames();
+ *     while (enumeration.hasMoreElements()) {
+ *         String headerName = enumeration.nextElement();
+ *         Enumeration<String> val = request.getHeaders(headerName);
+ *         while (val.hasMoreElements()) {
+ *             String headerVal = val.nextElement();
+ *             headerSb.append(headerName + ":" + headerVal + ",");
+ *         }
+ *     }
+ *     return "A"+SERVICE_TAG+"[" + inetUtils.findFirstNonLoopbackAddress().getHostAddress() + "]" + " -> " +
+ *             restTemplate.getForObject("http://sc-B/b", String.class);
+ * }
+ *
+ * // SDK 方式增加流控降级能力，需要侵入业务代码
+ * private String helloWorld(HttpServletRequest request) {
+ *     Entry entry = null;
+ *     try {
+ *         entry = SphU.entry("HelloWorld");
+ *
+ *         StringBuilder headerSb = new StringBuilder();
+ *         Enumeration<String> enumeration = request.getHeaderNames();
+ *         while (enumeration.hasMoreElements()) {
+ *             String headerName = enumeration.nextElement();
+ *             Enumeration<String> val = request.getHeaders(headerName);
+ *             while (val.hasMoreElements()) {
+ *                 String headerVal = val.nextElement();
+ *                 headerSb.append(headerName + ":" + headerVal + ",");
+ *             }
+ *         }
+ *         return "A"+SERVICE_TAG+"[" + inetUtils.findFirstNonLoopbackAddress().getHostAddress() + "]" + " -> " +
+ *                 restTemplate.getForObject("http://sc-B/b", String.class);
+ *     } catch (BlockException ex) {
+ *       System.err.println("blocked!");
+ *     } finally {
+ *         if (entry != null) {
+ *             entry.exit();
+ *         }
+ *     }
+ * }
+ * </pre>
+ *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-07 20:54:47

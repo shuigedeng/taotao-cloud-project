@@ -22,37 +22,37 @@ public class DefaultPipeline<T> implements Pipeline<T> {
 	private final LinkedList<T> list = new LinkedList<>();
 
 	@Override
-	public Pipeline addLast(T t) {
+	public Pipeline<T> addLast(T t) {
 		list.addLast(t);
 		return this;
 	}
 
 	@Override
-	public Pipeline addFirst(T t) {
+	public Pipeline<T> addFirst(T t) {
 		list.addFirst(t);
 		return this;
 	}
 
 	@Override
-	public Pipeline set(int index, T t) {
+	public Pipeline<T> set(int index, T t) {
 		list.set(index, t);
 		return this;
 	}
 
 	@Override
-	public Pipeline removeLast() {
+	public Pipeline<T> removeLast() {
 		list.removeLast();
 		return this;
 	}
 
 	@Override
-	public Pipeline removeFirst() {
+	public Pipeline<T> removeFirst() {
 		list.removeFirst();
 		return this;
 	}
 
 	@Override
-	public Pipeline remove(int index) {
+	public Pipeline<T> remove(int index) {
 		list.remove(index);
 		return this;
 	}
