@@ -260,7 +260,7 @@ arthas:
 
 dubbo:
   scan:
-    base-packages: com.taotao.cloud.sys.biz.service.impl.dubbo
+    base-packages: com.taotao.cloud.sys.biz.service.dubbo
   application:
     id: ${spring.application.name}
     name: ${spring.application.name}
@@ -1045,6 +1045,12 @@ taotao:
       enabled: false
     pay:
       enabled: false
+    #third:
+    #  client:
+    #    forest:
+    #      enabled: true
+    #    retrofit:
+    #      enabled: true
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
@@ -1162,6 +1168,7 @@ taotao:
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity
+  mapperLocations: classpath:mapper/*.xml
   global-config:
     db-config:
       id-type: auto
@@ -1198,6 +1205,7 @@ mybatis-plus:
     logPrefix : "dao."
   configuration-properties:
     CONSTANT_CIPHER_TEXT: taotao-cloud
+
 
 feign:
   sentinel:
