@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.configuration;
+package com.taotao.cloud.quartz.configuration;
 
-import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
-import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
-import com.taotao.cloud.web.quartz.QuartzJobListener;
-import com.taotao.cloud.web.quartz.QuartzManager;
+import com.taotao.cloud.quartz.QuartzJobListener;
+import com.taotao.cloud.quartz.QuartzManager;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -44,20 +42,20 @@ public class QuartzAutoConfiguration {
 	/**
 	 * 该处仅供参考
 	 */
-	public final static ThreadPoolExecutor EXECUTOR;
-
-	static {
-		MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
-			10,
-			50,
-			60,
-			TimeUnit.SECONDS,
-			new SynchronousQueue<>(),
-			new MonitorThreadPoolFactory("taotao-cloud-quartz-executor"));
-
-		executor.setNamePrefix("taotao-cloud-quartz-executor");
-		EXECUTOR = executor;
-	}
+	//public final static ThreadPoolExecutor EXECUTOR;
+	//
+	//static {
+	//	MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
+	//		10,
+	//		50,
+	//		60,
+	//		TimeUnit.SECONDS,
+	//		new SynchronousQueue<>(),
+	//		new MonitorThreadPoolFactory("taotao-cloud-quartz-executor"));
+	//
+	//	executor.setNamePrefix("taotao-cloud-quartz-executor");
+	//	EXECUTOR = executor;
+	//}
 
 	/**
 	 * 解决Job中注入Spring Bean为null的问题

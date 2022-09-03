@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.quartz;
+package com.taotao.cloud.quartz;
 
-import static com.taotao.cloud.web.configuration.QuartzAutoConfiguration.EXECUTOR;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Objects;
@@ -93,7 +92,7 @@ public class QuartzExecutionJob extends QuartzJobBean {
 		}
 
 		if (Objects.nonNull(task)) {
-			EXECUTOR.submit(task);
+			//EXECUTOR.submit(task);
 		}
 	}
 }

@@ -29,6 +29,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-prometheus")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-schedule")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pinyin")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-quartz")
 
     api "org.springframework.boot:spring-boot-starter-webflux"
     api("org.springframework.boot:spring-boot-starter-web") {
@@ -38,7 +39,6 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-undertow"
     api "org.springframework.boot:spring-boot-starter-aop"
     api "org.springframework.boot:spring-boot-starter-json"
-    api "org.springframework.boot:spring-boot-starter-quartz"
     api "org.springframework.boot:spring-boot-starter-validation"
     //api "org.springframework.boot:spring-boot-devtools"
     api "org.springframework.boot:spring-boot-starter-test"

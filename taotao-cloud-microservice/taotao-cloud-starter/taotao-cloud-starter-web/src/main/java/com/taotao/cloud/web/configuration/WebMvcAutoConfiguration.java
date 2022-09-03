@@ -27,6 +27,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.annotation.LoginUser;
+import com.taotao.cloud.web.aop.CountTimeAop;
 import com.taotao.cloud.web.interceptor.DoubtApiInterceptor;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.listener.RequestMappingScanListener;
@@ -46,6 +47,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.MethodParameter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -88,6 +90,7 @@ import java.util.List;
 	FilterProperties.class,
 	InterceptorProperties.class,
 })
+@Import(CountTimeAop.class)
 public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Override

@@ -440,11 +440,15 @@ spring:
             # 调度器实例ID自动生成
             instanceId: AUTO
             wrapJobExecutionInUserTransaction: false
+            # 是否开启守护线程
+            makeSchedulerThreadDaemon: true
             rmi:
               export: false
               proxy: false
           # JobStore sql: https://github.com/quartz-scheduler/quartz/tree/master/quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore
           jobStore:
+            # 在调度流程的第一步，也就是拉取待即将触发的triggers时，是上锁的状态，即不会同时存在多个线程拉取到相同的trigger的情况，也就避免的重复调度的危险。参考：https://segmentfault.com/a/1190000015492260
+            acquireTriggersWithinLock: true
             dataSource: DS
             # JobStore 实现类
             class: org.quartz.impl.jdbcjobstore.JobStoreTX
@@ -455,8 +459,10 @@ spring:
             dontSetAutoCommitFalse: false
             # 是否将JobDataMap中的属性转为字符串存储
             useProperties: false
+            #在被认为“失火”之前，调度程序将“容忍”一个Triggers将其下一个启动时间通过的毫秒数。默认值（如果您在配置中未输入此属性）为60000（60秒）。
             misfireThreshold: 60000
             isClustered: true
+            #设置此实例“检入”*与群集的其他实例的频率（以毫秒为单位）。影响检测失败实例的速度。
             clusterCheckinInterval: 5000
             maxMisfiresToHandleAtATime: 1
           dataSource:
@@ -470,14 +476,16 @@ spring:
               provider: hikaricp
           # 线程池相关配置
           threadPool:
-            # 线程池大小。默认为 10
+            # 指定线程数，至少为1（无默认值），一般设置为1-100直接的整数，根据系统资源配置。默认为 10
             threadCount: 25
-            # 线程优先级
+            # 设置线程的优先级（最大为java.lang.Thread.MAX_PRIORITY 10，最小为Thread.MIN_PRIORITY 1，默认为5）
             threadPriority: 5
             threadNamePrefix: taotao-cloud-quartz-executor
             # 指定线程池实现类，对调度器提供固定大小的线程池
             class: org.quartz.simpl.SimpleThreadPool
             threadsInheritContextClassLoaderOfInitializingThread: true
+            # 指定在线程池里面创建的线程是否是守护线程
+            makeThreadsDaemons: true
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
