@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.quartz;
+package com.taotao.cloud.quartz;
 
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.context.ContextUtils;

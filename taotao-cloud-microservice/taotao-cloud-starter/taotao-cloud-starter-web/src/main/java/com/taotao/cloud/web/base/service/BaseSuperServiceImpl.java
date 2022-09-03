@@ -23,9 +23,14 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
+import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.support.ColumnCache;
+import com.baomidou.mybatisplus.core.toolkit.support.LambdaMeta;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.querydsl.core.types.Predicate;
@@ -39,11 +44,6 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.lang.NonNull;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -51,10 +51,18 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.apache.ibatis.reflection.property.PropertyNamer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.NonNull;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 /**
  * BaseService
@@ -128,7 +136,7 @@ public class BaseSuperServiceImpl<
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<T> findByIds(@NonNull Collection<? extends Serializable> ids,
-							 Function<Collection<? extends Serializable>, Collection<T>> loader) {
+		Function<Collection<? extends Serializable>, Collection<T>> loader) {
 		if (ids.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -186,7 +194,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
-								   Predicate predicate, Wrapper<T> countWrapper, String msg) {
+		Predicate predicate, Wrapper<T> countWrapper, String msg) {
 		if (lock == null) {
 			throw new LockException("分布式锁为空");
 		}
@@ -245,7 +253,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
-								   Predicate predicate, Wrapper<T> countWrapper) {
+		Predicate predicate, Wrapper<T> countWrapper) {
 		return saveIdempotency(entity, lock, lockKey, predicate, countWrapper, null);
 	}
 
@@ -262,7 +270,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-										   Predicate predicate, Wrapper<T> countWrapper, String msg) {
+		Predicate predicate, Wrapper<T> countWrapper, String msg) {
 		if (null != entity) {
 			Class<?> cls = entity.getClass();
 			TableInfo tableInfo = TableInfoHelper.getTableInfo(cls);
@@ -294,7 +302,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-										   Predicate predicate, Wrapper<T> countWrapper) {
+		Predicate predicate, Wrapper<T> countWrapper) {
 		return saveOrUpdateIdempotency(entity, lock, lockKey, predicate, countWrapper, null);
 	}
 
@@ -345,5 +353,164 @@ public class BaseSuperServiceImpl<
 			CacheKey key = cacheKeyBuilder().key(id);
 			redisRepository.del(key);
 		}
+	}
+
+
+	/**
+	 * 默认批次提交数量
+	 */
+	public static final int DEFAULT_BATCH_SIZE = 1000;
+
+
+	public Class<T> getEntityClass() {
+		return super.getEntityClass();
+	}
+
+	/**
+	 * 获取主键明
+	 */
+	protected String getKeyProperty() {
+		TableInfo tableInfo = TableInfoHelper.getTableInfo(getEntityClass());
+		Assert.notNull(tableInfo, "错误:无法执行.因为找不到实体的 TableInfo 缓存!");
+		String keyProperty = tableInfo.getKeyProperty();
+		Assert.notNull(keyProperty, "错误:无法执行.因为无法从实体中找到主键的列!");
+		return keyProperty;
+	}
+
+	/*
+	 * 以下的方法使用介绍:
+	 *
+	 * 一. 名称介绍
+	 * 1. 方法名带有 query 的为对数据的查询操作, 方法名带有 update 的为对数据的修改操作
+	 * 2. 方法名带有 lambda 的为内部方法入参 column 支持函数式的
+	 * 二. 支持介绍
+	 *
+	 * 1. 方法名带有 query 的支持以 {@link ChainQuery} 内部的方法名结尾进行数据查询操作
+	 * 2. 方法名带有 update 的支持以 {@link ChainUpdate} 内部的方法名为结尾进行数据修改操作
+	 *
+	 * 三. 使用示例,只用不带 lambda 的方法各展示一个例子,其他类推
+	 * 1. 根据条件获取一条数据: `query().eq("column", value).one()`
+	 * 2. 根据条件删除一条数据: `update().eq("column", value).remove()`
+	 *
+	 */
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public List<T> saveAll(List<T> list) {
+		if (CollUtil.isNotEmpty(list)) {
+			saveBatch(list, DEFAULT_BATCH_SIZE);
+		}
+		return list;
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public boolean updateAllById(Collection<T> entityList) {
+		return updateBatchById(entityList, DEFAULT_BATCH_SIZE);
+	}
+
+	@Override
+	public boolean updateByField(T t, SFunction<T, ?> field, Object fieldValue) {
+		return lambdaUpdate()
+			.eq(field, fieldValue)
+			.update(t);
+	}
+
+	@Override
+	public List<T> findAll() {
+		return lambdaQuery().list();
+	}
+
+
+	@Override
+	public Optional<T> findById(Serializable id) {
+		return Optional.ofNullable(baseMapper.selectById(id));
+	}
+
+	@Override
+	public Optional<T> findByField(SFunction<T, ?> field, Object fieldValue) {
+		return lambdaQuery().eq(field, fieldValue).oneOpt();
+	}
+
+	@Override
+	public List<T> findAllByIds(Collection<? extends Serializable> idList) {
+		if (CollUtil.isEmpty(idList)) {
+			return new ArrayList<>(0);
+		}
+		return baseMapper.selectBatchIds(idList);
+	}
+
+	@Override
+	public List<T> findAllByField(SFunction<T, ?> field, Object fieldValue) {
+		return lambdaQuery().eq(field, fieldValue).list();
+	}
+
+	@Override
+	public List<T> findAllByFields(SFunction<T, ?> field,
+		Collection<? extends Serializable> fieldValues) {
+		if (CollUtil.isEmpty(fieldValues)) {
+			return new ArrayList<>(0);
+		}
+		return lambdaQuery().in(field, fieldValues).list();
+	}
+
+	@Override
+	public boolean existedById(Serializable id) {
+		String keyProperty = this.getKeyProperty();
+		return query().eq(keyProperty, id).exists();
+	}
+
+	@Override
+	public boolean existedByField(SFunction<T, ?> field, Object fieldValue) {
+		return lambdaQuery().eq(field, fieldValue).exists();
+	}
+
+	@Override
+	public boolean existedByField(SFunction<T, ?> field, Object fieldValue, Serializable id) {
+		String keyProperty = this.getKeyProperty();
+		return query().eq(getColumnName(field), fieldValue)
+			.ne(keyProperty, id)
+			.exists();
+	}
+
+	@Override
+	public Long countByField(SFunction<T, ?> field, Object fieldValue) {
+		return lambdaQuery().eq(field, fieldValue).count();
+	}
+
+	@Override
+	public boolean deleteById(Serializable id) {
+		return SqlHelper.retBool(baseMapper.deleteById(id));
+	}
+
+	@Override
+	public boolean deleteByIds(Collection<? extends Serializable> idList) {
+		if (CollUtil.isNotEmpty(idList)) {
+			return SqlHelper.retBool(baseMapper.deleteBatchIds(idList));
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteByField(SFunction<T, ?> field, Object fieldValue) {
+		return lambdaUpdate().eq(field, fieldValue).remove();
+	}
+
+	@Override
+	public boolean deleteByFields(SFunction<T, ?> field, Collection<?> fieldValues) {
+		if (CollUtil.isEmpty(fieldValues)) {
+			return false;
+		}
+		return lambdaUpdate().in(field, fieldValues).remove();
+	}
+
+	@Override
+	public String getColumnName(SFunction<T, ?> function) {
+		LambdaMeta meta = LambdaUtils.extract(function);
+		Map<String, ColumnCache> columnMap = LambdaUtils.getColumnMap(meta.getInstantiatedClass());
+		Assert.notEmpty(columnMap, "错误:无法执行.因为无法获取到实体类的表对应缓存!");
+		String fieldName = PropertyNamer.methodToProperty(meta.getImplMethodName());
+		ColumnCache columnCache = columnMap.get(LambdaUtils.formatKey(fieldName));
+		return columnCache.getColumn();
 	}
 }

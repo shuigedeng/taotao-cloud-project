@@ -176,6 +176,7 @@ dependencies {
         api "io.github.shuigedeng:taotao-cloud-starter-pinyin:${project.version}"
         api "io.github.shuigedeng:taotao-cloud-starter-prometheus:${project.version}"
         api "io.github.shuigedeng:taotao-cloud-starter-pulsar:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-quartz:${project.version}"
         api "io.github.shuigedeng:taotao-cloud-starter-rabbitmq:${project.version}"
         api "io.github.shuigedeng:taotao-cloud-starter-redis:${project.version}"
         api "io.github.shuigedeng:taotao-cloud-starter-rocketmq:${project.version}"
