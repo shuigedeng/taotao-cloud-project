@@ -17,10 +17,10 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
+import com.taotao.cloud.sys.biz.convert.RoleConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.QRole;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
-import com.taotao.cloud.sys.biz.mapstruct.IRoleMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleMenuService;
@@ -68,21 +68,21 @@ public class RoleServiceImpl extends
 	@Override
 	public List<RoleBO> findAllRoles() {
 		List<Role> roles = ir().findAll();
-		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
+		return RoleConvert.INSTANCE.convertListBO(roles);
 	}
 
 	@Override
 	public List<RoleBO> findRoleByUserIds(Set<Long> userIds) {
 		//List<Role> roles = cr().findRoleByUserIds(userIds);
 		List<Role> roles = new ArrayList<>();
-		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
+		return RoleConvert.INSTANCE.convertListBO(roles);
 	}
 
 	@Override
 	public List<RoleBO> findRoleByCodes(Set<String> codes) {
 		//List<Role> roles = cr().findRoleByCodes(codes);
 		List<Role> roles = new ArrayList<>();
-		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
+		return RoleConvert.INSTANCE.convertListBO(roles);
 	}
 
 }

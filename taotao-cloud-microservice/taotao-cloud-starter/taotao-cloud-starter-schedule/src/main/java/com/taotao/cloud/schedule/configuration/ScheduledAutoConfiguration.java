@@ -62,6 +62,7 @@ public class ScheduledAutoConfiguration implements SchedulingConfigurer {
 		taskScheduler.setAwaitTerminationSeconds(
 			threadPoolTaskSchedulerProperties.getAwaitTerminationSeconds());
 		taskScheduler.initialize();
+
 		taskRegistrar.setTaskScheduler(taskScheduler);
 	}
 
