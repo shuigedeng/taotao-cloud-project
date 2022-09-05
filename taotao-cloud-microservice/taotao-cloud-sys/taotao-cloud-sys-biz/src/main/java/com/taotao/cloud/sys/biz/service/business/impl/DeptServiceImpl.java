@@ -2,9 +2,9 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.sys.api.model.vo.dept.DeptTreeVO;
+import com.taotao.cloud.sys.biz.convert.DeptConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.sys.biz.mapper.IDeptMapper;
-import com.taotao.cloud.sys.biz.mapstruct.IDeptMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.DeptRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDeptRepository;
 import com.taotao.cloud.sys.biz.service.business.IDeptService;
@@ -33,7 +33,7 @@ public class DeptServiceImpl extends
 		queryWrapper.orderByDesc(Dept::getSortNum);
 		List<Dept> list = list(queryWrapper);
 
-		return IDeptMapStruct.INSTANCE.deptListToVoList(list)
+		return DeptConvert.INSTANCE.convertTree(list)
 			.stream()
 			.filter(Objects::nonNull)
 			.peek(e -> {

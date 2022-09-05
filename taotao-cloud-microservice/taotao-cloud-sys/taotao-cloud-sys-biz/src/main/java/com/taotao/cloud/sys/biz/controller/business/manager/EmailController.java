@@ -10,7 +10,7 @@ import com.taotao.cloud.schedule.core.ScheduledManager;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.dto.EmailDTO;
 import com.taotao.cloud.sys.api.model.vo.alipay.EmailVO;
-import com.taotao.cloud.sys.biz.mapstruct.IEmailMapStruct;
+import com.taotao.cloud.sys.biz.convert.EmailConvert;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.service.business.IEmailConfigService;
 import com.taotao.cloud.web.version.ApiInfo;
@@ -80,7 +80,7 @@ public class EmailController {
 	@NotAuth
 	@PostMapping
 	public Result<Boolean> add(@Validated @RequestBody EmailDTO emailDTO) {
-		EmailConfig emailConfig = IEmailMapStruct.INSTANCE.emailDTOToEmailConfigt(emailDTO);
+		EmailConfig emailConfig = EmailConvert.INSTANCE.convert(emailDTO);
 		emailService.save(emailConfig);
 
 		//for (int i = 0; i < 10; i++) {

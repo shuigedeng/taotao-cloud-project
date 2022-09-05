@@ -17,8 +17,8 @@ package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboMenuService;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
+import com.taotao.cloud.sys.biz.convert.MenuConvert;
 import com.taotao.cloud.sys.biz.mapper.IMenuMapper;
-import com.taotao.cloud.sys.biz.mapstruct.IMenuMapStruct;
 import com.taotao.cloud.sys.biz.model.entity.system.Menu;
 import com.taotao.cloud.sys.biz.model.entity.system.QMenu;
 import com.taotao.cloud.sys.biz.repository.cls.MenuRepository;
@@ -51,7 +51,7 @@ public class DubboMenuServiceImpl extends
 	@Override
 	public List<MenuQueryRequest> queryAllById(Long id) {
 		List<Menu> all = ir().findAll();
-		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(all);
+		return MenuConvert.INSTANCE.convertListRequest(all);
 	}
 
 

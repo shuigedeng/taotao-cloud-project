@@ -51,7 +51,6 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
  * @author Sam Brannen
  * @see EnableScheduling
  * @see ScheduledAnnotationBeanPostProcessor
- * @see ScheduleBeans
  * @since 3.0
  */
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})

@@ -30,7 +30,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
 import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
-import com.taotao.cloud.sys.biz.mapstruct.IDictMapStruct;
+import com.taotao.cloud.sys.biz.convert.DictConvert;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
@@ -97,7 +97,7 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 			//}
 		}
 		Dict dict = service().findByCode(code);
-		return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
+		return DictConvert.INSTANCE.convert(dict);
 	}
 
 	@Operation(summary = "test", description = "test")
