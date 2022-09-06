@@ -11,7 +11,7 @@
 //import com.taotao.cloud.order.biz.stream.StreamFunctionService;
 //import com.taotao.cloud.order.biz.stream.kafka.OrderProvider;
 //import com.taotao.cloud.order.biz.mapper.IOrderInfoMapper;
-//import com.taotao.cloud.order.biz.mapstruct.IOrderMapStruct;
+//import com.taotao.cloud.order.biz.convert.IOrderMapStruct;
 //import com.taotao.cloud.order.biz.stream.pulsar.ProductProducer;
 //import com.taotao.cloud.order.biz.stream.rabbitmq.SmsProvider;
 //import com.taotao.cloud.order.biz.repository.cls.OrderInfoRepository;

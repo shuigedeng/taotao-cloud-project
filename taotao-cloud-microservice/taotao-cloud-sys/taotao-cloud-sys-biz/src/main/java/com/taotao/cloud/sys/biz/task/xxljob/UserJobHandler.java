@@ -206,7 +206,7 @@ public class UserJobHandler {
 			XxlJobHelper.handleFail();
 			return;
 		}
-		boolean isPostMethod = method.equals("POST");
+		boolean isPostMethod = "POST".equals(method);
 
 		// request
 		HttpURLConnection connection = null;
