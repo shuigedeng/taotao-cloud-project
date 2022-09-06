@@ -1,12 +1,10 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.quartz.QuartzManager;
+import com.taotao.cloud.quartz.utils.QuartzManager;
 import com.taotao.cloud.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.redis.redisson.RedisDelayQueue;
-import com.taotao.cloud.schedule.core.ScheduledManager;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.dto.EmailDTO;
 import com.taotao.cloud.sys.api.model.vo.alipay.EmailVO;
@@ -25,8 +23,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
 import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
@@ -48,7 +44,7 @@ public class EmailController {
 	private final RedisDelayQueue redisDelayQueue;
 	private final RedissonTemplate redissonTemplate;
 	private final QuartzManager quartzManager;
-	private final ScheduledManager scheduledManager;
+	// private final ScheduledManager scheduledManager;
 	private final IEmailConfigService emailService;
 
 	@ApiInfo(create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
@@ -113,8 +109,8 @@ public class EmailController {
 		//jobModel.setCreateTime(LocalDateTime.now());
 		//quartzManager.addJob(jobModel);
 
-		List<String> runScheduledName = scheduledManager.getRunScheduledName();
-		LogUtils.info("===============: ", runScheduledName);
+		// List<String> runScheduledName = scheduledManager.getRunScheduledName();
+		// LogUtils.info("===============: ", runScheduledName);
 
 		return Result.success(true);
 	}

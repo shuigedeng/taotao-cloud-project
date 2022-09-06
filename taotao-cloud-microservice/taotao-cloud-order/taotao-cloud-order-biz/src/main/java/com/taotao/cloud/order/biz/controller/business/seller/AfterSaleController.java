@@ -9,7 +9,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
-import com.taotao.cloud.order.biz.mapstruct.IAfterSaleMapStruct;
+import com.taotao.cloud.order.biz.convert.AfterSaleConvert;
 import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
 import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
@@ -51,7 +51,7 @@ public class AfterSaleController {
 	@GetMapping(value = "/{sn}")
 	public Result<AfterSaleVO> get(@PathVariable String sn) {
 		AfterSale afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
-		return Result.success(IAfterSaleMapStruct.INSTANCE.afterSaleToAfterSaleVO(afterSale));
+		return Result.success(AfterSaleConvert.INSTANCE.afterSaleToAfterSaleVO(afterSale));
 	}
 
 	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务")
@@ -73,7 +73,7 @@ public class AfterSaleController {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		searchParams.setStoreId(storeId);
 		List<AfterSale> afterSales = afterSaleService.exportAfterSaleOrder(searchParams);
-		return Result.success(IAfterSaleMapStruct.INSTANCE.afterSalesToAfterSaleVOs(afterSales));
+		return Result.success(AfterSaleConvert.INSTANCE.afterSalesToAfterSaleVOs(afterSales));
 	}
 
 	@Operation(summary = "审核售后申请", description = "审核售后申请")

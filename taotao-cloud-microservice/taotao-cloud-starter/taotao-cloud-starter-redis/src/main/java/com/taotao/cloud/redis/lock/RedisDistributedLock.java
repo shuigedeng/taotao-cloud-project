@@ -118,13 +118,12 @@ public class RedisDistributedLock {
 		try {
 			// 使用lua脚本删除redis中匹配value的key，可以避免由于方法执行时间过长而redis锁自动过期失效的时候误删其他线程的锁
 			// spring自带的执行脚本方法中，集群模式直接抛出不支持执行脚本的异常，所以只能拿到原redis的connection来执行脚本
-			Boolean result = redisTemplate.execute((RedisCallback<Boolean>) connection -> {
+			return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
 				byte[] scriptByte = redisTemplate.getStringSerializer().serialize(UNLOCK_LUA);
 				return connection.eval(scriptByte, ReturnType.BOOLEAN, 1
 					, redisTemplate.getStringSerializer().serialize(key)
 					, redisTemplate.getStringSerializer().serialize(lockFlag.get()));
 			});
-			return result;
 		} catch (Exception e) {
 			LogUtils.error("release redisDistributeLock occured an exception", e);
 		} finally {

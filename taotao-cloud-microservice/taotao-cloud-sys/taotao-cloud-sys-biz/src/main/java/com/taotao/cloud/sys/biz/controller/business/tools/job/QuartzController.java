@@ -21,12 +21,11 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.quartz.QuartzJobModel;
+import com.taotao.cloud.quartz.entity.QuartzJob;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobQueryCriteria;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzLogDto;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzLogQueryCriteria;
-import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
 import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzLog;
 import com.taotao.cloud.sys.biz.service.business.IQuartzJobService;
 import com.taotao.cloud.sys.biz.service.business.IQuartzLogService;
@@ -87,7 +86,7 @@ public class QuartzController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public void download(HttpServletResponse response, QuartzJobQueryCriteria criteria)
 		throws IOException {
-		List<QuartzJob> quartzJobs = quartzJobService.queryAll(criteria);
+		List<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> quartzJobs = quartzJobService.queryAll(criteria);
 		List<QuartzJobDto> collect = quartzJobs.stream().filter(Objects::nonNull)
 			.map(e -> BeanUtils.copyProperties(e, QuartzJobDto.class))
 			.collect(Collectors.toList());
@@ -124,11 +123,11 @@ public class QuartzController {
 	@Idempotent(key = "create", perFix = "quartzJob")
 	@PostMapping
 	@PreAuthorize("@el.check('admin','timing:add')")
-	public Result<Boolean> create(@Validated @RequestBody QuartzJobModel jobModel) {
+	public Result<Boolean> create(@Validated @RequestBody QuartzJob jobModel) {
 		if (jobModel.getId() != null) {
 			throw new BusinessException("A new " + ENTITY_NAME + " cannot already have an ID");
 		}
-		QuartzJob job = new QuartzJob();
+		com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob job = new com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob();
 		BeanUtils.copyProperties(jobModel, job);
 		return Result.success(quartzJobService.save(job));
 	}
@@ -138,8 +137,8 @@ public class QuartzController {
 	@Idempotent(key = "update", perFix = "quartzJob")
 	@PutMapping
 	@PreAuthorize("@el.check('admin','timing:edit')")
-	public Result<Boolean> update(@Validated @RequestBody QuartzJobModel jobModel) {
-		QuartzJob job = new QuartzJob();
+	public Result<Boolean> update(@Validated @RequestBody QuartzJob jobModel) {
+		com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob job = new com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob();
 		BeanUtils.copyProperties(jobModel, job);
 		quartzJobService.updateById(job);
 		return Result.success(true);
@@ -152,8 +151,8 @@ public class QuartzController {
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> updateIsPause(@PathVariable Long id) {
 		quartzJobService.updateIsPause(
-			quartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>()
-				.eq(QuartzJob::getId, id)));
+			quartzJobService.getOne(new LambdaQueryWrapper<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob>()
+				.eq(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob::getId, id)));
 		return Result.success(true);
 	}
 
@@ -164,7 +163,7 @@ public class QuartzController {
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> execution(@PathVariable Long id) {
 		quartzJobService.execution(
-			quartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>().eq(QuartzJob::getId, id)));
+			quartzJobService.getOne(new LambdaQueryWrapper<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob>().eq(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob::getId, id)));
 		return Result.success(true);
 	}
 

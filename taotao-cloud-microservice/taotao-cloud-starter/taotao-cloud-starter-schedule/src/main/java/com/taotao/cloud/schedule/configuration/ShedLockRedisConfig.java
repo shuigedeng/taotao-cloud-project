@@ -15,12 +15,13 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Description SchedulerLock 基于 Redis 的配置
+ *
+ * //defaultLockAtMostFor 指定在执行节点结束时应保留锁的默认时间使用ISO8601 Duration格式
+ * //作用就是在被加锁的节点挂了时，无法释放锁，造成其他节点无法进行下一任务
+ * //这里默认55s
+ * //关于ISO8601 Duration格式用的不到，具体可上网查询下相关资料，应该就是一套规范，规定一些时间表达方式
  **/
 @Configuration
-//defaultLockAtMostFor 指定在执行节点结束时应保留锁的默认时间使用ISO8601 Duration格式
-//作用就是在被加锁的节点挂了时，无法释放锁，造成其他节点无法进行下一任务
-//这里默认55s
-//关于ISO8601 Duration格式用的不到，具体可上网查询下相关资料，应该就是一套规范，规定一些时间表达方式
 @EnableSchedulerLock(defaultLockAtMostFor = "PT55S")
 public class ShedLockRedisConfig {
 
@@ -33,12 +34,10 @@ public class ShedLockRedisConfig {
         return new RedisLockProvider(connectionFactory, env);
     }
 
-
 	//区分服务
 	@Value("${server.port}")
 	private String port;
 
-	@Scheduled(cron = "0 */1 * * * ?")
 	/**
 	 * lockAtLeastForString的作用是为了防止在任务开始之初由于各个服务器同名任务的服务器时间差，启动时间差等这些造成的一些问题，有了这个时间设置后，
 	 *     就可以避免因为上面这些小的时间差造成的一些意外，保证一个线程在抢到锁后，即便很快执行完，也不要立即释放，留下一个缓冲时间。
@@ -56,6 +55,7 @@ public class ShedLockRedisConfig {
 	 * lockAtLeastFor：成功执行任务的节点所能拥有独占所的最短时间，单位是毫秒ms
 	 * lockAtLeastForString：成功执行任务的节点所能拥有的独占锁的最短时间的字符串表达，例如“PT14M”表示为14分钟,单位可以是S,M,H
 	 */
+	@Scheduled(cron = "0 */1 * * * ?")
 	@SchedulerLock(name = "scheduledController_notice", lockAtLeastFor = "PT15M", lockAtMostFor = "PT14M")
 	public void notice() {
 		try {
@@ -66,18 +66,15 @@ public class ShedLockRedisConfig {
 	}
 
 	@Component
-	public class TaskSchedule {
+	public static class TaskSchedule {
 
 		/**
-
 		 * 每分钟执行一次
-
 		 * [秒] [分] [小时] [日] [月] [周] [年]
-
 		 */
 		@Scheduled(cron = "1 * * * * ?")
 		@SchedulerLock(name = "synchronousSchedule")
-		public void SynchronousSchedule() {
+		public void synchronousSchedule() {
 			System.out.println("Start run schedule to synchronous data:" + new Date());
 		}
 

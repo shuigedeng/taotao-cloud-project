@@ -17,7 +17,7 @@ import com.taotao.cloud.order.api.model.vo.order.OrderComplaintBaseVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
-import com.taotao.cloud.order.biz.mapstruct.IOrderComplainMapStruct;
+import com.taotao.cloud.order.biz.convert.OrderComplainConvert;
 import com.taotao.cloud.order.biz.service.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.biz.service.order.IOrderComplaintService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -79,7 +79,7 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
-		OrderComplaint orderComplaint = IOrderComplainMapStruct.INSTANCE.orderComplaintDTOToOrderComplaint(orderComplaintDTO);
+		OrderComplaint orderComplaint = OrderComplainConvert.INSTANCE.orderComplaintDTOToOrderComplaint(orderComplaintDTO);
 		orderComplaint.setId(id);
 		return Result.success(orderComplaintService.updateOrderComplain(orderComplaint));
 	}

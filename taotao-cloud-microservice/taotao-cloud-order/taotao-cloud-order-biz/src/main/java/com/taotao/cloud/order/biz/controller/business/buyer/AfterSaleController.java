@@ -15,9 +15,9 @@ import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
-import com.taotao.cloud.order.biz.mapstruct.IAfterSaleLogMapStruct;
-import com.taotao.cloud.order.biz.mapstruct.IAfterSaleMapStruct;
-import com.taotao.cloud.order.biz.mapstruct.IAfterSaleReasonMapStruct;
+import com.taotao.cloud.order.biz.convert.AfterSaleLogConvert;
+import com.taotao.cloud.order.biz.convert.AfterSaleConvert;
+import com.taotao.cloud.order.biz.convert.AfterSaleReasonConvert;
 import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleLogService;
 import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleReasonService;
 import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
@@ -75,7 +75,7 @@ public class AfterSaleController {
 	public Result<AfterSaleVO> get(
 		@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		AfterSale afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
-		return Result.success(IAfterSaleMapStruct.INSTANCE.afterSaleToAfterSaleVO(afterSale));
+		return Result.success(AfterSaleConvert.INSTANCE.afterSaleToAfterSaleVO(afterSale));
 	}
 
 	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务")
@@ -144,7 +144,7 @@ public class AfterSaleController {
 	public Result<List<AfterSaleReasonVO>> getAfterSaleReason(
 		@NotBlank(message = "售后类型不能为空") @PathVariable String serviceType) {
 		List<AfterSaleReason> afterSaleReasons = afterSaleReasonService.afterSaleReasonList(serviceType);
-		return Result.success(IAfterSaleReasonMapStruct.INSTANCE.afterSaleReasonsToAfterSaleReasonVOs(afterSaleReasons));
+		return Result.success(AfterSaleReasonConvert.INSTANCE.afterSaleReasonsToAfterSaleReasonVOs(afterSaleReasons));
 	}
 
 	@Operation(summary = "获取售后日志", description = "获取售后日志")
@@ -153,7 +153,7 @@ public class AfterSaleController {
 	@GetMapping(value = "/afterSaleLog/{sn}")
 	public Result<List<AfterSaleLogVO>> getAfterSaleLog(@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		List<AfterSaleLog> afterSaleLogList = afterSaleLogService.getAfterSaleLog(sn);
-		return Result.success(IAfterSaleLogMapStruct.INSTANCE.afterSaleLogsToAfterSaleVOs(afterSaleLogList));
+		return Result.success(AfterSaleLogConvert.INSTANCE.afterSaleLogsToAfterSaleVOs(afterSaleLogList));
 	}
 
 }

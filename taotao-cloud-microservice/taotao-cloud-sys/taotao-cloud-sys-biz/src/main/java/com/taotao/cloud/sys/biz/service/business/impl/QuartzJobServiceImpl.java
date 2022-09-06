@@ -23,12 +23,11 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
-import com.taotao.cloud.quartz.QuartzJobModel;
-import com.taotao.cloud.quartz.QuartzManager;
+import com.taotao.cloud.quartz.entity.QuartzJob;
+import com.taotao.cloud.quartz.utils.QuartzManager;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobQueryCriteria;
 import com.taotao.cloud.sys.biz.mapper.IQuartzJobMapper;
-import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
 import com.taotao.cloud.sys.biz.service.business.IQuartzJobService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,7 @@ import java.util.stream.Collectors;
 @Service
 //@CacheConfig(cacheNames = "quartzJob")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJob> implements
+public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> implements
 	IQuartzJobService {
 
 	private final QuartzManager quartzManager;
@@ -64,10 +63,10 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	@Override
 	//@Cacheable
 	public Map<String, Object> queryAll(QuartzJobQueryCriteria criteria, Pageable pageable) {
-		PageInfo<QuartzJob> page = new PageInfo<>(queryAll(criteria));
+		PageInfo<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> page = new PageInfo<>(queryAll(criteria));
 		Map<String, Object> map = new LinkedHashMap<>(2);
 
-		List<QuartzJob> list = page.getList();
+		List<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> list = page.getList();
 		List<QuartzJobDto> collect = list.stream()
 			.filter(Objects::nonNull)
 			.map(e -> OrikaUtils.convert(e, QuartzJobDto.class))
@@ -81,10 +80,10 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 
 	@Override
 	//@Cacheable
-	public List<QuartzJob> queryAll(QuartzJobQueryCriteria criteria) {
+	public List<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> queryAll(QuartzJobQueryCriteria criteria) {
 		// todo 需要修改查询条件
-		LambdaQueryWrapper<QuartzJob> query = Wrappers.<QuartzJob>lambdaQuery()
-			.eq(QuartzJob::getId, criteria.getJobName());
+		LambdaQueryWrapper<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> query = Wrappers.<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob>lambdaQuery()
+			.eq(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob::getId, criteria.getJobName());
 
 		return baseMapper.selectList(query);
 	}
@@ -128,12 +127,12 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	 * 更改定时任务状态
 	 */
 	@Override
-	public void updateIsPause(QuartzJob quartzJob) {
+	public void updateIsPause(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob quartzJob) {
 		if (quartzJob.getId().equals(1L)) {
 			throw new BusinessException("该任务不可操作");
 		}
 
-		QuartzJobModel jobModel = new QuartzJobModel();
+		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
 		if (quartzJob.getIsPause()) {
@@ -147,8 +146,8 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	}
 
 	@Override
-	public boolean save(QuartzJob quartzJob) {
-		QuartzJobModel jobModel = new QuartzJobModel();
+	public boolean save(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob quartzJob) {
+		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
 		quartzManager.addJob(jobModel);
@@ -156,11 +155,11 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	}
 
 	@Override
-	public boolean updateById(QuartzJob quartzJob) {
-		QuartzJobModel jobModel = new QuartzJobModel();
+	public boolean updateById(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob quartzJob) {
+		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
-		quartzManager.updateJobCron(jobModel);
+		// quartzManager.updateJobCron(jobModel);
 		return SqlHelper.retBool(baseMapper.updateById(quartzJob));
 	}
 
@@ -170,12 +169,12 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	 * @param quartzJob /
 	 */
 	@Override
-	public void execution(QuartzJob quartzJob) {
+	public void execution(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob quartzJob) {
 		if (quartzJob.getId().equals(1L)) {
 			throw new BusinessException("该任务不可操作");
 		}
 
-		QuartzJobModel jobModel = new QuartzJobModel();
+		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
 		quartzManager.runJobNow(jobModel);
@@ -185,13 +184,13 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	 * 查询启用的任务
 	 */
 	@Override
-	public List<QuartzJob> findByIsPauseIsFalse() {
+	public List<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> findByIsPauseIsFalse() {
 		QuartzJobQueryCriteria criteria = new QuartzJobQueryCriteria();
 		criteria.setIsPause(false);
 
 		// todo 需要修改查询条件
-		LambdaQueryWrapper<QuartzJob> query = Wrappers.<QuartzJob>lambdaQuery()
-			.eq(QuartzJob::getId, criteria.getJobName());
+		LambdaQueryWrapper<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> query = Wrappers.<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob>lambdaQuery()
+			.eq(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob::getId, criteria.getJobName());
 
 		return baseMapper.selectList(query);
 	}
@@ -199,8 +198,8 @@ public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJo
 	@Override
 	public void removeByIds(List<Integer> idList) {
 		idList.forEach(id -> {
-			QuartzJob quartzJob = baseMapper.selectById(id);
-			QuartzJobModel jobModel = new QuartzJobModel();
+			com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob quartzJob = baseMapper.selectById(id);
+			QuartzJob jobModel = new QuartzJob();
 			BeanUtils.copyProperties(quartzJob, jobModel);
 			quartzManager.deleteJob(jobModel);
 		});

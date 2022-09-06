@@ -1,11 +1,14 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock")
 
     api 'net.javacrumbs.shedlock:shedlock-spring:4.41.0'
     api 'net.javacrumbs.shedlock:shedlock-provider-redis-spring:4.41.0'
 
-    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper")
+    api "org.quartz-scheduler:quartz:2.3.2"
+
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus")
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 

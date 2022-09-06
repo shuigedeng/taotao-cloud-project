@@ -1,8 +1,11 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
 
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
     compileOnly "org.springframework.boot:spring-boot-starter-jdbc"
+    compileOnly(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus")) {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot-starter"
+    }
 
     api "org.springframework.boot:spring-boot-starter-quartz"
 
@@ -12,6 +15,13 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.springframework.boot:spring-boot-starter-web"
+
+    runtimeOnly "mysql:mysql-connector-java"
+    testImplementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    api "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 }
 
 tasks.named("test") {
