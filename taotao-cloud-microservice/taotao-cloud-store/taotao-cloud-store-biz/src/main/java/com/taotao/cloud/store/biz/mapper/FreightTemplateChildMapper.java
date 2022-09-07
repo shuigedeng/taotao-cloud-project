@@ -8,7 +8,7 @@ import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
  *
  * 
  */
-public interface FreightTemplateChildMapper extends BaseMapper<FreightTemplateChild> {
+public interface FreightTemplateChildMapper extends BaseSuperMapper<FreightTemplateChild> {
 
 
 }

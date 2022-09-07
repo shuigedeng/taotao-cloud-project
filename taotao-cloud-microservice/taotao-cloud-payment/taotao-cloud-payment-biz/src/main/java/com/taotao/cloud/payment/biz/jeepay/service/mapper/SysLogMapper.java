@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.SysLog;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface SysLogMapper extends BaseMapper<SysLog> {
+public interface SysLogMapper extends BaseSuperMapper<SysLog> {
 
 }

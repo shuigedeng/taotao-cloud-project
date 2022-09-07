@@ -11,6 +11,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.MchDivisionReceiverGroup;
  * @author [mybatis plus generator]
  * @since 2021-08-23
  */
-public interface MchDivisionReceiverGroupMapper extends BaseMapper<MchDivisionReceiverGroup> {
+public interface MchDivisionReceiverGroupMapper extends BaseSuperMapper<MchDivisionReceiverGroup> {
 
 }

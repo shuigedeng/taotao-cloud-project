@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -35,9 +35,9 @@ public class MemberPointsHistoryController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<MemberPointsHistoryPageVO>> getByPage(PageParam page) {
+	public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(PageParam page) {
 		IPage<MemberPointsHistory> memberPointsHistoryPage = memberPointsHistoryService.getByPage(page);
-		return Result.success(PageModel.convertMybatisPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
+		return Result.success(PageResult.convertMybatisPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
 	}
 
 	@Operation(summary = "获取当前会员积分", description = "获取当前会员积分")

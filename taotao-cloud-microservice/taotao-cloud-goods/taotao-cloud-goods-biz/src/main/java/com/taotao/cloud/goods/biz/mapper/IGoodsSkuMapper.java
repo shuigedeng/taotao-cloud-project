@@ -14,7 +14,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:57:22
  */
-public interface IGoodsSkuMapper extends BaseMapper<GoodsSku> {
+public interface IGoodsSkuMapper extends BaseSuperMapper<GoodsSku> {
 
 	/**
 	 * 根据商品id获取全部skuId的集合

@@ -18,7 +18,7 @@ package com.taotao.cloud.web.base.controller;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.BaseQuery;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
@@ -61,12 +61,12 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 	@PostMapping("/page")
 	@RequestLogger("通用分页查询")
 	//@PreAuthorize("@pms.hasPermission('page')")
-	default Result<PageModel<QueryVO>> page(
+	default Result<PageResult<QueryVO>> page(
 		@Parameter(description = "分页查询DTO", required = true)
 		@RequestBody @Validated PageQuery<QueryDTO> params) {
 		IPage<T> page = pageQuery(params);
-		PageModel<QueryVO> tPageModel = PageModel.convertMybatisPage(page, getQueryVOClass());
-		return Result.success(tPageModel);
+		PageResult<QueryVO> tPageResult = PageResult.convertMybatisPage(page, getQueryVOClass());
+		return Result.success(tPageResult);
 	}
 
 	/**

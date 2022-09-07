@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2021-02-14
  */
 @Mapper
-public interface SysRolePermissionMapper extends BaseMapper<SysRolePermissionDO> {
+public interface SysRolePermissionMapper extends BaseSuperMapper<SysRolePermissionDO> {
 
     /**
      * 根据角色ID，批量删除

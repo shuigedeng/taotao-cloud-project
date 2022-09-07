@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Param;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface MchNotifyRecordMapper extends BaseMapper<MchNotifyRecord> {
+public interface MchNotifyRecordMapper extends BaseSuperMapper<MchNotifyRecord> {
 
     Integer updateNotifyResult(@Param("notifyId") Long notifyId, @Param("state") Byte state, @Param("resResult") String resResult);
 

@@ -18,7 +18,7 @@ package com.taotao.cloud.elasticsearch.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.elasticsearch.model.IndexDto;
 import com.taotao.cloud.elasticsearch.service.IIndexService;
@@ -83,7 +83,7 @@ public class IndexServiceImpl implements IIndexService {
 	}
 
 	@Override
-	public PageModel<HashMap<String, String>> list(String queryStr, String indices)
+	public PageResult<HashMap<String, String>> list(String queryStr, String indices)
 		throws IOException {
 		Response response = client.getLowLevelClient()
 			.performRequest(new Request(
@@ -99,7 +99,7 @@ public class IndexServiceImpl implements IIndexService {
 			};
 			listOfIndicesFromEs = mapper.readValue(rawBody, typeRef);
 		}
-		return PageModel.of(100, 1, 10,  30, listOfIndicesFromEs);
+		return PageResult.of(100, 1, 10,  30, listOfIndicesFromEs);
 	}
 
 	/**

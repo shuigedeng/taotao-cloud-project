@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 
 @Mapper
-public interface PayNotifyRecordMapper extends BaseMapper<PayNotifyRecord> {
+public interface PayNotifyRecordMapper extends BaseSuperMapper<PayNotifyRecord> {
 }

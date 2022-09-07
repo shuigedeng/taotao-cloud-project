@@ -15,7 +15,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:55:35
  */
-public interface ICategorySpecificationMapper extends BaseMapper<CategorySpecification> {
+public interface ICategorySpecificationMapper extends BaseSuperMapper<CategorySpecification> {
 
 	/**
 	 * 根据分类id查分类绑定规格

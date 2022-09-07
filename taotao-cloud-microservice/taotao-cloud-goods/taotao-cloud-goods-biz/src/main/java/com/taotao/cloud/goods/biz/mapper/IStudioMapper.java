@@ -10,6 +10,6 @@ import com.taotao.cloud.goods.biz.model.entity.Studio;
  * @version 2022.04
  * @since 2022-04-27 16:57:49
  */
-public interface IStudioMapper extends BaseMapper<Studio> {
+public interface IStudioMapper extends BaseSuperMapper<Studio> {
 
 }

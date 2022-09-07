@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.IsvInfo;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface IsvInfoMapper extends BaseMapper<IsvInfo> {
+public interface IsvInfoMapper extends BaseSuperMapper<IsvInfo> {
 
 }

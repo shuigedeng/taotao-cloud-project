@@ -5,6 +5,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * 日常物品采购清单
  */
-public interface PurchaseListMapper extends BaseMapper<PurchaseListEntity> {
+public interface PurchaseListMapper extends BaseSuperMapper<PurchaseListEntity> {
 
 }

@@ -6,6 +6,6 @@ import com.taotao.cloud.message.biz.entity.ShortLink;
 /**
  * 短链接 Dao层
  */
-public interface ShortLinkMapper extends BaseMapper<ShortLink> {
+public interface ShortLinkMapper extends BaseSuperMapper<ShortLink> {
 
 }

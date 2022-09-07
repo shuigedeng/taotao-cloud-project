@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -34,10 +34,10 @@ public class StoreMessageManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageModel<StoreMessageVO>> getByCondition(StoreMessageQueryVO storeMessageQueryVO,
-															PageParam pageParam) {
+	public Result<PageResult<StoreMessageVO>> getByCondition(StoreMessageQueryVO storeMessageQueryVO,
+                                                             PageParam pageParam) {
 		IPage<StoreMessageVO> page = storeMessageService.getPage(storeMessageQueryVO, pageParam);
-		return Result.success(PageModel.convertMybatisPage(page, StoreMessageVO.class));
+		return Result.success(PageResult.convertMybatisPage(page, StoreMessageVO.class));
 	}
 
 }

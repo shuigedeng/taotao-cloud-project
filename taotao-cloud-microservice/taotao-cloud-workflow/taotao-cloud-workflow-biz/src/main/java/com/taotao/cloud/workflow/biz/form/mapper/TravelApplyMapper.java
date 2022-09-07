@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.TravelApplyEntity;
 /**
  * 出差预支申请单
  */
-public interface TravelApplyMapper extends BaseMapper<TravelApplyEntity> {
+public interface TravelApplyMapper extends BaseSuperMapper<TravelApplyEntity> {
 
 }

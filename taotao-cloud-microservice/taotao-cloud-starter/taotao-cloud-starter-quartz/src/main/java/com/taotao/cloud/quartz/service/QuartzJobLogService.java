@@ -1,6 +1,6 @@
 package com.taotao.cloud.quartz.service;
 
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.quartz.vo.QuartzJobLogVO;
 import com.taotao.cloud.quartz.entity.QuartzJobLog;
 import com.taotao.cloud.quartz.param.QuartzJobLogQuery;
@@ -18,7 +18,7 @@ public interface QuartzJobLogService {
 	/**
 	 * 分页
 	 */
-	public PageModel<QuartzJobLogVO> page(QuartzJobLogQuery quartzJobLogQuery);
+	public PageResult<QuartzJobLogVO> page(QuartzJobLogQuery quartzJobLogQuery);
 
 	/**
 	 * 单条

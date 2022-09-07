@@ -25,5 +25,5 @@ import com.taotao.cloud.sys.biz.model.entity.config.GenConfig;
  * @version 2022.03
  * @since 2022-03-29 09:01:48
  */
-public interface IGenConfigMapper extends BaseMapper<GenConfig> {
+public interface IGenConfigMapper extends BaseSuperMapper<GenConfig> {
 }

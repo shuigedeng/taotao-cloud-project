@@ -26,7 +26,7 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.RefundOrder;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface RefundOrderMapper extends BaseMapper<RefundOrder> {
+public interface RefundOrderMapper extends BaseSuperMapper<RefundOrder> {
 
     /** 查询全部退成功金额 **/
     Long sumSuccessRefundAmount(String payOrderId);

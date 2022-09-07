@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.LetterServiceEntity;
 /**
  * 发文单
  */
-public interface LetterServiceMapper extends BaseMapper<LetterServiceEntity> {
+public interface LetterServiceMapper extends BaseSuperMapper<LetterServiceEntity> {
 
 }

@@ -27,6 +27,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-03-29 09:01:48
  */
 
-public interface IQuartzLogMapper extends BaseMapper<QuartzLog> {
+public interface IQuartzLogMapper extends BaseSuperMapper<QuartzLog> {
 
 }

@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.SwitchEnum;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -70,24 +70,24 @@ public class MemberEvaluationBuyerController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageModel<MemberEvaluationVO>> queryMineEvaluation(@Validated EvaluationPageQuery evaluationPageQuery) {
+	public Result<PageResult<MemberEvaluationVO>> queryMineEvaluation(@Validated EvaluationPageQuery evaluationPageQuery) {
 		//设置当前登录会员
 		evaluationPageQuery.setMemberId(SecurityUtils.getUserId());
 		IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.managerQuery(evaluationPageQuery);
-		return Result.success(PageModel.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
+		return Result.success(PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
 	}
 
 	@Operation(summary = "查看某一个商品的评价列表", description = "查看某一个商品的评价列表")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/goods-evaluation/{goodsId}")
-	public Result<PageModel<MemberEvaluationVO>> queryGoodsEvaluation(EvaluationPageQuery evaluationPageQuery,
-																	  @Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
+	public Result<PageResult<MemberEvaluationVO>> queryGoodsEvaluation(EvaluationPageQuery evaluationPageQuery,
+                                                                       @Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
 		//设置查询查询商品
 		evaluationPageQuery.setGoodsId(goodsId);
 		evaluationPageQuery.setStatus(SwitchEnum.OPEN.name());
 		IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.managerQuery(evaluationPageQuery);
-		return Result.success(PageModel.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
+		return Result.success(PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
 	}
 
 	@Operation(summary = "查看某一个商品的评价数量", description = "查看某一个商品的评价数量")

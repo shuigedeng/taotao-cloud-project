@@ -30,7 +30,7 @@ import java.util.Map;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface PayOrderMapper extends BaseMapper<PayOrder> {
+public interface PayOrderMapper extends BaseSuperMapper<PayOrder> {
 
     Map payCount(Map param);
 

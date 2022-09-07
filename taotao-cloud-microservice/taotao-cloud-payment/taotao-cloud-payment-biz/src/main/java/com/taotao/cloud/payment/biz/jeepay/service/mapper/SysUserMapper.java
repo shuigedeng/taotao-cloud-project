@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.SysUser;
  * @author [mybatis plus generator]
  * @since 2020-06-13
  */
-public interface SysUserMapper extends BaseMapper<SysUser> {
+public interface SysUserMapper extends BaseSuperMapper<SysUser> {
 
 }

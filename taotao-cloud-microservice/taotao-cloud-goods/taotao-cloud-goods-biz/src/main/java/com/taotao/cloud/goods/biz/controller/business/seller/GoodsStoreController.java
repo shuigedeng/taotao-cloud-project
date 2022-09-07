@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
@@ -70,24 +70,24 @@ public class GoodsStoreController {
 	@RequestLogger("分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageModel<GoodsVO>> getByPage(GoodsPageQuery goodsPageQuery) {
+	public Result<PageResult<GoodsVO>> getByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsVO.class));
+		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 
 	@Operation(summary = "分页获取商品Sku列表", description = "分页获取商品Sku列表")
 	@RequestLogger("分页获取商品Sku列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
-	public Result<PageModel<GoodsSkuVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
+	public Result<PageResult<GoodsSkuVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+		return Result.success(PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 	}
 
 	@Operation(summary = "分页获取库存告警商品列表", description = "分页获取库存告警商品列表")
@@ -106,7 +106,7 @@ public class GoodsStoreController {
 		//商品SKU列表
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
 		StockWarningVO stockWarning = new StockWarningVO(stockWarnNum,
-			PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+			PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 		return Result.success(stockWarning);
 	}
 

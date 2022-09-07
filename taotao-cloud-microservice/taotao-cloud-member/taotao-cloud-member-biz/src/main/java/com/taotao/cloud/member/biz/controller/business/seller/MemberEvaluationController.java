@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -42,11 +42,11 @@ public class MemberEvaluationController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageModel<MemberEvaluationListVO>> getByPage(
+	public Result<PageResult<MemberEvaluationListVO>> getByPage(
 		EvaluationPageQuery evaluationPageQuery) {
 		evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
 		IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.queryPage(evaluationPageQuery);
-		return Result.success(PageModel.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
+		return Result.success(PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")

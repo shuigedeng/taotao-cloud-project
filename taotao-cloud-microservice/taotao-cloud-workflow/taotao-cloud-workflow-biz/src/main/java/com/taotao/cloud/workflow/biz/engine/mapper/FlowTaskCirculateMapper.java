@@ -7,6 +7,6 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskCirculateEntity;
  * 流程传阅
  *
  */
-public interface FlowTaskCirculateMapper extends BaseMapper<FlowTaskCirculateEntity> {
+public interface FlowTaskCirculateMapper extends BaseSuperMapper<FlowTaskCirculateEntity> {
 
 }

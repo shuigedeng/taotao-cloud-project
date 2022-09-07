@@ -10,5 +10,5 @@ import com.taotao.cloud.goods.biz.model.entity.StudioCommodity;
  * @version 2022.04
  * @since 2022-04-27 16:57:45
  */
-public interface IStudioCommodityMapper extends BaseMapper<StudioCommodity> {
+public interface IStudioCommodityMapper extends BaseSuperMapper<StudioCommodity> {
 }

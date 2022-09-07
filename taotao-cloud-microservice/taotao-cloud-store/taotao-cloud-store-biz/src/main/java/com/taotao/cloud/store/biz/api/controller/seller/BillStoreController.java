@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.api.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
@@ -49,10 +49,10 @@ public class BillStoreController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getByPage")
-	public Result<PageModel<BillListVO>> getByPage(BillPageQuery billPageQuery) {
+	public Result<PageResult<BillListVO>> getByPage(BillPageQuery billPageQuery) {
 		billPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
 		IPage<BillListVO> billListVOIPage = billService.billPage(billPageQuery);
-		return Result.success(PageModel.convertMybatisPage(billListVOIPage, BillListVO.class));
+		return Result.success(PageResult.convertMybatisPage(billListVOIPage, BillListVO.class));
 	}
 
 	@Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
@@ -67,20 +67,20 @@ public class BillStoreController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getStoreFlow")
-	public Result<PageModel<StoreFlowVO>> getStoreFlow(@PathVariable String id, @Parameter(description = "流水类型:PAY、REFUND") String flowType, PageParam pageParam) {
+	public Result<PageResult<StoreFlowVO>> getStoreFlow(@PathVariable String id, @Parameter(description = "流水类型:PAY、REFUND") String flowType, PageParam pageParam) {
 		OperationalJudgment.judgment(billService.getById(id));
 		IPage<StoreFlowVO> storeFlow = storeFlowService.getStoreFlow(id, flowType, pageParam);
-		return Result.success(PageModel.convertMybatisPage(storeFlow, StoreFlowVO.class));
+		return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
 	}
 
 	@Operation(summary = "获取商家分销订单流水分页", description = "获取商家分销订单流水分页")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getDistributionFlow")
-	public Result<PageModel<StoreFlowVO>> getDistributionFlow(@PathVariable String id, PageParam pageParam) {
+	public Result<PageResult<StoreFlowVO>> getDistributionFlow(@PathVariable String id, PageParam pageParam) {
 		OperationalJudgment.judgment(billService.getById(id));
 		IPage<StoreFlowVO> distributionFlow = storeFlowService.getDistributionFlow(id, pageParam);
-		return Result.success(PageModel.convertMybatisPage(distributionFlow, StoreFlowVO.class));
+		return Result.success(PageResult.convertMybatisPage(distributionFlow, StoreFlowVO.class));
 	}
 
 	@Operation(summary = "核对结算单", description = "核对结算单")

@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.BatchTableEntity;
 /**
  * 行文呈批表
  */
-public interface BatchTableMapper extends BaseMapper<BatchTableEntity> {
+public interface BatchTableMapper extends BaseSuperMapper<BatchTableEntity> {
 
 }

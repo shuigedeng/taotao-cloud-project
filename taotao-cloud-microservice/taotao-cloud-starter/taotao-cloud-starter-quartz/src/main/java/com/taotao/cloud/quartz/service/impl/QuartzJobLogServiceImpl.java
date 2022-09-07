@@ -3,7 +3,7 @@ package com.taotao.cloud.quartz.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.quartz.dao.QuartzJobLogMapper;
 import com.taotao.cloud.quartz.entity.QuartzJobLog;
 import com.taotao.cloud.quartz.param.QuartzJobLogQuery;
@@ -34,7 +34,7 @@ public class QuartzJobLogServiceImpl implements QuartzJobLogService {
 	}
 
 	@Override
-	public PageModel<QuartzJobLogVO> page(QuartzJobLogQuery quartzJobLogQuery) {
+	public PageResult<QuartzJobLogVO> page(QuartzJobLogQuery quartzJobLogQuery) {
 
 		LambdaQueryWrapper<QuartzJobLog> wrapper = new LambdaQueryWrapper<QuartzJobLog>();
 		wrapper
@@ -44,7 +44,7 @@ public class QuartzJobLogServiceImpl implements QuartzJobLogService {
 
 		IPage<QuartzJobLog> quartzLogIPage = this.quartzJobLogMapper.selectPage(quartzJobLogQuery.buildMpPage(), wrapper);
 
-		return PageModel.convertMybatisPage(quartzLogIPage, QuartzJobLogVO.class);
+		return PageResult.convertMybatisPage(quartzLogIPage, QuartzJobLogVO.class);
 	}
 
 	@Override

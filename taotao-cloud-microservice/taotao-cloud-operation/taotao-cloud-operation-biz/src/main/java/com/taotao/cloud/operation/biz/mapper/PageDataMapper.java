@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 楼层装修设置数据处理层
  */
-public interface PageDataMapper extends BaseMapper<PageData> {
+public interface PageDataMapper extends BaseSuperMapper<PageData> {
 
 	/**
 	 * 获取页面数据VO

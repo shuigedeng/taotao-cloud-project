@@ -15,7 +15,6 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @DS("slave")
-public @interface Slave
-{
+public @interface Slave {
 
 }

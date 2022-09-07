@@ -10,7 +10,7 @@ import com.taotao.cloud.goods.biz.model.entity.Brand;
  * @version 2022.04
  * @since 2022-04-20 16:59:38
  */
-public interface IBrandMapper extends BaseMapper<Brand> {
+public interface IBrandMapper extends BaseSuperMapper<Brand> {
 
 
 }

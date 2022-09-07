@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 /**
  * 流程引擎
  */
-public interface FlowEngineMapper extends BaseMapper<FlowEngineEntity> {
+public interface FlowEngineMapper extends BaseSuperMapper<FlowEngineEntity> {
 
 }

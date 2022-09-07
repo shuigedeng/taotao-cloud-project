@@ -1,6 +1,6 @@
 package com.taotao.cloud.quartz.service;
 
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.quartz.entity.QuartzJob;
 import com.taotao.cloud.quartz.param.QuartzJobDTO;
 import com.taotao.cloud.quartz.param.QuartzJobQuery;
@@ -98,7 +98,7 @@ public interface QuartzJobService {
 
 	QuartzJob findById(Long id);
 
-	PageModel<QuartzJobVO> page(QuartzJobQuery quartzJobQuery);
+	PageResult<QuartzJobVO> page(QuartzJobQuery quartzJobQuery);
 
 	/**
 	 * 判断是否是定时任务类

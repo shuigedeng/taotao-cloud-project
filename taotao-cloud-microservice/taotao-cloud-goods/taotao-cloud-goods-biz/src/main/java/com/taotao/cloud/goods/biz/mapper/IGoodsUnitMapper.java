@@ -11,7 +11,7 @@ import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
  * @version 2022.04
  * @since 2022-04-27 16:57:27
  */
-public interface IGoodsUnitMapper extends BaseMapper<GoodsUnit> {
+public interface IGoodsUnitMapper extends BaseSuperMapper<GoodsUnit> {
 
 
 }

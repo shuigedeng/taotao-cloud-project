@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleReasonDTO;
@@ -56,9 +56,9 @@ public class AfterSaleReasonController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<AfterSaleReasonVO>> getByPage(@Validated AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
+	public Result<PageResult<AfterSaleReasonVO>> getByPage(@Validated AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
 		IPage<AfterSaleReason> afterSaleReasonPage = afterSaleReasonService.getByPage(afterSaleReasonPageQuery);
-		return Result.success(PageModel.convertMybatisPage(afterSaleReasonPage, AfterSaleReasonVO.class));
+		return Result.success(PageResult.convertMybatisPage(afterSaleReasonPage, AfterSaleReasonVO.class));
 	}
 
 	@Operation(summary = "添加售后原因", description = "添加售后原因")

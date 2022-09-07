@@ -22,6 +22,6 @@ import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
 /**
  * 会员签到数据处理层
  */
-public interface MemberRechargeMapper extends BaseMapper<MemberRecharge> {
+public interface MemberRechargeMapper extends BaseSuperMapper<MemberRecharge> {
 
 }

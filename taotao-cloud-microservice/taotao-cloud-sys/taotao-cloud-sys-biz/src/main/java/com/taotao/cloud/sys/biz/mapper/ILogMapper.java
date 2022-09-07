@@ -33,7 +33,7 @@ import org.springframework.stereotype.Repository;
  * @version 2021.10
  * @since 2022-02-11 16:33:34
  */
-public interface ILogMapper extends BaseMapper<Log> {
+public interface ILogMapper extends BaseSuperMapper<Log> {
 
 	@Delete("delete from log where log_type = #{logType}")
 	void deleteByLogType(@Param("logType") String logType);

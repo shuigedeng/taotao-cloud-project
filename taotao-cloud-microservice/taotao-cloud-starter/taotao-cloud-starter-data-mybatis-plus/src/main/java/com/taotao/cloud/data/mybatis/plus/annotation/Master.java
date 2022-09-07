@@ -15,7 +15,6 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @DS("master")
-public @interface Master
-{
+public @interface Master {
 
 }

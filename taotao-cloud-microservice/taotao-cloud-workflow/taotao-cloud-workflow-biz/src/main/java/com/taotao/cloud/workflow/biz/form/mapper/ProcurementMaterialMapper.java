@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.ProcurementMaterialEntity;
 /**
  * 采购原材料
  */
-public interface ProcurementMaterialMapper extends BaseMapper<ProcurementMaterialEntity> {
+public interface ProcurementMaterialMapper extends BaseSuperMapper<ProcurementMaterialEntity> {
 
 }

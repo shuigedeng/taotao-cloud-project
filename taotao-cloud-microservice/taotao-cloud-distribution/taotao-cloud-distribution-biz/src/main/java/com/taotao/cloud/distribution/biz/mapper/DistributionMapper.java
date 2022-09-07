@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * 分销员数据处理层
  */
-public interface DistributionMapper extends BaseMapper<Distribution> {
+public interface DistributionMapper extends BaseSuperMapper<Distribution> {
 
 	/**
 	 * 修改分销员可提现金额

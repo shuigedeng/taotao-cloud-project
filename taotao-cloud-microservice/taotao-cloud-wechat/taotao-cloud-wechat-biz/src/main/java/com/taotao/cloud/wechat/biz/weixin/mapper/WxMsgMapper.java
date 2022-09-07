@@ -38,7 +38,7 @@ import java.util.List;
  * @author www.joolun.com
  * @date 2019-05-28 16:12:10
  */
-public interface WxMsgMapper extends BaseMapper<WxMsg> {
+public interface WxMsgMapper extends BaseSuperMapper<WxMsg> {
 
 	/**
 	 * 获取分组后的消息列表

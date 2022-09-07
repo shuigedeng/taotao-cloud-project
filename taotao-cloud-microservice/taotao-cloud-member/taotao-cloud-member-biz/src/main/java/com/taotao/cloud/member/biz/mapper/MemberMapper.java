@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * 会员数据处理层
  */
-public interface MemberMapper extends BaseMapper<Member> {
+public interface MemberMapper extends BaseSuperMapper<Member> {
 
 	/**
 	 * 获取所有的会员手机号

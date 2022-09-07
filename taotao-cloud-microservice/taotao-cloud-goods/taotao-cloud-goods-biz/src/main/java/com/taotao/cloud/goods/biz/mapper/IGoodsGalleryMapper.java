@@ -11,6 +11,6 @@ import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
  * @version 2022.04
  * @since 2022-04-27 16:55:56
  */
-public interface IGoodsGalleryMapper extends BaseMapper<GoodsGallery> {
+public interface IGoodsGalleryMapper extends BaseSuperMapper<GoodsGallery> {
 
 }

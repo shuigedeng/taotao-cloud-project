@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.ApplyMeetingEntity;
 /**
  * 会议申请
  */
-public interface ApplyMeetingMapper extends BaseMapper<ApplyMeetingEntity> {
+public interface ApplyMeetingMapper extends BaseSuperMapper<ApplyMeetingEntity> {
 
 }

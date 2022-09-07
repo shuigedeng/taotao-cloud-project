@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * 会员签到数据处理层
  */
-public interface MemberSignMapper extends BaseMapper<MemberSign> {
+public interface MemberSignMapper extends BaseSuperMapper<MemberSign> {
 
 	/**
 	 * 获取会员之前签到信息

@@ -14,7 +14,7 @@ import org.apache.ibatis.annotations.Select;
  *
  * @author shuigedeng
  */
-public interface IAfterSaleMapper extends BaseMapper<AfterSale> {
+public interface IAfterSaleMapper extends BaseSuperMapper<AfterSale> {
 
 	/**
 	 * 获取售后VO分页

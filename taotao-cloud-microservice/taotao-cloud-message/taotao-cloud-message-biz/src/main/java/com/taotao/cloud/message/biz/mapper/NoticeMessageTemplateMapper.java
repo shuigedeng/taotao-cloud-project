@@ -6,7 +6,7 @@ import com.taotao.cloud.message.biz.entity.NoticeMessage;
 /**
  * 通知类消息模板数据处理层
  */
-public interface NoticeMessageTemplateMapper extends BaseMapper<NoticeMessage> {
+public interface NoticeMessageTemplateMapper extends BaseSuperMapper<NoticeMessage> {
 
 
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -56,30 +56,30 @@ public class GoodsManagerController {
 	@RequestLogger("分页获取")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<GoodsVO>> getByPage(
+	public Result<PageResult<GoodsVO>> getByPage(
 		@Validated GoodsPageQuery goodsPageQuery) {
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsVO.class));
+		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
 	@RequestLogger("分页获取商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
-	public Result<PageModel<GoodsSkuVO>> getSkuByPage(
+	public Result<PageResult<GoodsSkuVO>> getSkuByPage(
 		@Validated GoodsPageQuery goodsPageQuery) {
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+		return Result.success(PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 	}
 
 	@Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品")
 	@RequestLogger("分页获取待审核商品")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/auth/page")
-	public Result<PageModel<GoodsVO>> getAuthPage(@Validated GoodsPageQuery goodsPageQuery) {
+	public Result<PageResult<GoodsVO>> getAuthPage(@Validated GoodsPageQuery goodsPageQuery) {
 		goodsPageQuery.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsVO.class));
+		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 
 	@Operation(summary = "管理员下架商品", description = "管理员下架商品")

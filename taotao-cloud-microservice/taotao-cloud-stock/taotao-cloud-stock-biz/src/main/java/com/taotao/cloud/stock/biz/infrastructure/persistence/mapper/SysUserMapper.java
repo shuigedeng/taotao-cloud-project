@@ -17,7 +17,7 @@ import java.util.Map;
  * @date 2021-01-23
  */
 @Mapper
-public interface SysUserMapper extends BaseMapper<SysUserDO> {
+public interface SysUserMapper extends BaseSuperMapper<SysUserDO> {
 
     /**
      * 分页查询

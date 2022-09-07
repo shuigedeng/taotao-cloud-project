@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.MchInfo;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface MchInfoMapper extends BaseMapper<MchInfo> {
+public interface MchInfoMapper extends BaseSuperMapper<MchInfo> {
 
 }

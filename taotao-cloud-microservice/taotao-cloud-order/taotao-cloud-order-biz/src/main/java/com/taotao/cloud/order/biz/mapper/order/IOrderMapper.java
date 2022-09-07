@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 订单数据处理层
  */
-public interface IOrderMapper extends BaseMapper<Order> {
+public interface IOrderMapper extends BaseSuperMapper<Order> {
 
 	/**
 	 * 修改订单状态

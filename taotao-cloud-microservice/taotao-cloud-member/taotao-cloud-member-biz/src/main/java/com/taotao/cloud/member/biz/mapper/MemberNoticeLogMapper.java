@@ -21,6 +21,6 @@ import com.taotao.cloud.member.biz.model.entity.MemberNoticeLog;
 /**
  * 会员消息数据处理层
  */
-public interface MemberNoticeLogMapper extends BaseMapper<MemberNoticeLog> {
+public interface MemberNoticeLogMapper extends BaseSuperMapper<MemberNoticeLog> {
 
 }

@@ -10,5 +10,5 @@ import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
  * @version 2022.04
  * @since 2022-04-27 16:55:53
  */
-public interface IDraftGoodsMapper extends BaseMapper<DraftGoods> {
+public interface IDraftGoodsMapper extends BaseSuperMapper<DraftGoods> {
 }

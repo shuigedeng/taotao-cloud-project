@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.DebitBillEntity;
 /**
  * 借支单
  */
-public interface DebitBillMapper extends BaseMapper<DebitBillEntity> {
+public interface DebitBillMapper extends BaseSuperMapper<DebitBillEntity> {
 
 }

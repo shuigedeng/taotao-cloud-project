@@ -7,6 +7,6 @@ import com.taotao.cloud.operation.biz.model.entity.ArticleCategory;
 /**
  * 文章分类数据处理层
  */
-public interface ArticleCategoryMapper extends BaseMapper<ArticleCategory> {
+public interface ArticleCategoryMapper extends BaseSuperMapper<ArticleCategory> {
 
 }

@@ -26,6 +26,6 @@ import org.springframework.stereotype.Repository;
  * @version 2022.03
  * @since 2022-03-29 09:01:48
  */
-public interface IScheduledLogMapper extends BaseMapper<ScheduledLog> {
+public interface IScheduledLogMapper extends BaseSuperMapper<ScheduledLog> {
 
 }

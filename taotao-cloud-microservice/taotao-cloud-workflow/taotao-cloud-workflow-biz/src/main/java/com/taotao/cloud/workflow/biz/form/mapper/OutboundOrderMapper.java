@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.OutboundOrderEntity;
 /**
  * 出库单
  */
-public interface OutboundOrderMapper extends BaseMapper<OutboundOrderEntity> {
+public interface OutboundOrderMapper extends BaseSuperMapper<OutboundOrderEntity> {
 
 }

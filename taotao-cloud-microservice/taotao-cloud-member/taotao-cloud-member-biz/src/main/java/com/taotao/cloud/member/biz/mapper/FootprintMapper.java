@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * 浏览历史数据处理层
  */
-public interface FootprintMapper extends BaseMapper<MemberBrowse> {
+public interface FootprintMapper extends BaseSuperMapper<MemberBrowse> {
 
 	/**
 	 * 获取用户足迹的SkuId分页

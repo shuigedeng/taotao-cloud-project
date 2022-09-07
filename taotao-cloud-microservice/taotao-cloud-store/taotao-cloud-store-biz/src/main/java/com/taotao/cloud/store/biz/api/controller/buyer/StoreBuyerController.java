@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.api.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelService;
@@ -62,9 +62,9 @@ public class StoreBuyerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageModel<StoreVO>> getByPage(StorePageQuery storePageQuery) {
+	public Result<PageResult<StoreVO>> getByPage(StorePageQuery storePageQuery) {
 		IPage<StoreVO> storeVOIPage = storeService.findByConditionPage(storePageQuery);
-		return Result.success(PageModel.convertMybatisPage(storeVOIPage, StoreVO.class));
+		return Result.success(PageResult.convertMybatisPage(storeVOIPage, StoreVO.class));
 	}
 
 	@Operation(summary = "通过id获取店铺信息", description = "通过id获取店铺信息")

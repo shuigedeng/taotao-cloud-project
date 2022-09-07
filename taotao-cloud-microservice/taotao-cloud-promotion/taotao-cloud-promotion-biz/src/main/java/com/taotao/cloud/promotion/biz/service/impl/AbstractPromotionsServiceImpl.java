@@ -38,7 +38,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 16:44:46
  */
-public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends BasePromotions<T, Long>> extends ServiceImpl<M, T> implements
+public class AbstractPromotionsServiceImpl<M extends BaseSuperMapper<T>, T extends BasePromotions<T, Long>> extends ServiceImpl<M, T> implements
 	AbstractPromotionsService<T> {
 
 	/**

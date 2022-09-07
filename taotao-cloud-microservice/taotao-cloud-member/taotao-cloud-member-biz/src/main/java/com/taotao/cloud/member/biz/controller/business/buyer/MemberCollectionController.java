@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -51,16 +51,16 @@ public class MemberCollectionController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{type}")
-	public Result<PageModel<StoreCollectionVO>> goodsListPage(
+	public Result<PageResult<StoreCollectionVO>> goodsListPage(
 		@Parameter(description = "类型", required = true) @PathVariable String type,
 		@Validated PageParam page) {
 		if (goods.equals(type)) {
 			IPage<GoodsCollectionVO> goodsCollectionPage = IMemberGoodsCollectionService.goodsCollection(page);
-			return Result.success(PageModel.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
+			return Result.success(PageResult.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
 		}
 
 		IPage<StoreCollectionVO> storeCollectionVOPage = storeCollectionService.storeCollection(page);
-		return Result.success(PageModel.convertMybatisPage(storeCollectionVOPage, StoreCollectionVO.class));
+		return Result.success(PageResult.convertMybatisPage(storeCollectionVOPage, StoreCollectionVO.class));
 	}
 
 	@Operation(summary = "添加会员收藏", description = "添加会员收藏")

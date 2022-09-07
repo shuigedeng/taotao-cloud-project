@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.TransferOrder;
  * @author [mybatis plus generator]
  * @since 2021-08-11
  */
-public interface TransferOrderMapper extends BaseMapper<TransferOrder> {
+public interface TransferOrderMapper extends BaseSuperMapper<TransferOrder> {
 
 }

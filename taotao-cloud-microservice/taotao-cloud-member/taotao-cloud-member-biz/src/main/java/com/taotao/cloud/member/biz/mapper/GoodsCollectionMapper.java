@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 会员收藏数据处理层
  */
-public interface GoodsCollectionMapper extends BaseMapper<MemberGoodsCollection> {
+public interface GoodsCollectionMapper extends BaseSuperMapper<MemberGoodsCollection> {
 
 	/**
 	 * 商品收藏VO分页

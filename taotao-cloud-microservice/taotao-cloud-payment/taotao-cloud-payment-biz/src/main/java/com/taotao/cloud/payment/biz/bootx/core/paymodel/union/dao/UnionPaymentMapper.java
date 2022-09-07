@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
 * @date 2022/3/11 
 */
 @Mapper
-public interface UnionPaymentMapper extends BaseMapper<UnionPayment> {
+public interface UnionPaymentMapper extends BaseSuperMapper<UnionPayment> {
 }

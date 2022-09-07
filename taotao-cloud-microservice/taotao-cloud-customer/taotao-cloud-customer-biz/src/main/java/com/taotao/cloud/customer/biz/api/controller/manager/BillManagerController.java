@@ -1,7 +1,7 @@
 package com.taotao.cloud.customer.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -51,20 +51,20 @@ public class BillManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getByPage")
-	public Result<PageModel<BillListVO>> getByPage(BillPageQuery billSearchParams) {
+	public Result<PageResult<BillListVO>> getByPage(BillPageQuery billSearchParams) {
 		IPage<BillListVO> billListVOIPage = billService.billPage(billSearchParams);
-		return Result.success(PageModel.convertMybatisPage(billListVOIPage, BillListVO.class));
+		return Result.success(PageResult.convertMybatisPage(billListVOIPage, BillListVO.class));
 	}
 
 	@Operation(summary = "获取商家结算单流水分页", description = "获取商家结算单流水分页")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getStoreFlow")
-	public Result<PageModel<StoreFlowVO>> getStoreFlow(@Parameter(description = "结算单ID") @PathVariable String id,
-													   @Parameter(description = "流水类型:PAY、REFUND") String flowType,
-													   PageParam pageParam) {
+	public Result<PageResult<StoreFlowVO>> getStoreFlow(@Parameter(description = "结算单ID") @PathVariable String id,
+                                                        @Parameter(description = "流水类型:PAY、REFUND") String flowType,
+                                                        PageParam pageParam) {
 		IPage<StoreFlowVO> storeFlow = storeFlowService.getStoreFlow(id, flowType, pageParam);
-		return Result.success(PageModel.convertMybatisPage(storeFlow, StoreFlowVO.class));
+		return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
 	}
 
 	@Operation(summary = "支付结算单", description = "支付结算单")

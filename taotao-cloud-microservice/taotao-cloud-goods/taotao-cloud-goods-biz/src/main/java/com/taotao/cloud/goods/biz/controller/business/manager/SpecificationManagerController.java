@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.dto.SpecificationDTO;
 import com.taotao.cloud.goods.api.model.query.SpecificationPageQuery;
@@ -61,11 +61,11 @@ public class SpecificationManagerController {
 	@RequestLogger("搜索规格")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageModel<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
+	public Result<PageResult<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
 		IPage<Specification> specificationPage = specificationService.getPage(
 			specificationPageQuery);
 		return Result.success(
-			PageModel.convertMybatisPage(specificationPage, SpecificationVO.class));
+			PageResult.convertMybatisPage(specificationPage, SpecificationVO.class));
 	}
 
 	@Operation(summary = "保存规格", description = "保存规格")

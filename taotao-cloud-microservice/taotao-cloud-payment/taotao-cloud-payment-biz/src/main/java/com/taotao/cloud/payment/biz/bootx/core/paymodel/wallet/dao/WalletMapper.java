@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  * @date 2021/2/24
  */
 @Mapper
-public interface WalletMapper extends BaseMapper<Wallet> {
+public interface WalletMapper extends BaseSuperMapper<Wallet> {
 
 
     /**

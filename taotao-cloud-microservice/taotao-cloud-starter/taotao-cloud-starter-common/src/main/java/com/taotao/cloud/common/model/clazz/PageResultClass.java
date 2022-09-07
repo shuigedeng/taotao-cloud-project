@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.model;
+package com.taotao.cloud.common.model.clazz;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
  * @since 2021-09-02 19:09:19
  */
 @Schema(description = "分页结果对象")
-public class PageModelClass<R> implements Serializable {
+public class PageResultClass<R> implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -275582248840137389L;
@@ -66,11 +66,11 @@ public class PageModelClass<R> implements Serializable {
 	@Schema(description = "返回数据")
 	private List<R> data;
 
-	public PageModelClass() {
+	public PageResultClass() {
 	}
 
-	public PageModelClass(long totalSize, int totalPage, int currentPage, int pageSize,
-                          List<R> data) {
+	public PageResultClass(long totalSize, int totalPage, int currentPage, int pageSize,
+						   List<R> data) {
 		this.totalSize = totalSize;
 		this.totalPage = totalPage;
 		this.currentPage = currentPage;
@@ -83,10 +83,10 @@ public class PageModelClass<R> implements Serializable {
 	 *
 	 * @param page page
 	 * @param <R>  R
-	 * @return {@link PageModelClass }
+	 * @return {@link PageResultClass }
 	 * @since 2021-09-02 19:10:45
 	 */
-	public static <R, T> PageModelClass<R> convertJpaPage(Page<T> page , Class<R> r) {
+	public static <R, T> PageResultClass<R> convertJpaPage(Page<T> page , Class<R> r) {
 		List<T> records = page.getContent();
 		List<R> collect = Optional.of(records)
 			.orElse(new ArrayList<>())
@@ -107,10 +107,10 @@ public class PageModelClass<R> implements Serializable {
 	 *
 	 * @param page page
 	 * @param <R>  R
-	 * @return {@link PageModelClass }
+	 * @return {@link PageResultClass }
 	 * @since 2021-09-02 19:10:49
 	 */
-	public static <R, T> PageModelClass<R> convertMybatisPage(IPage<T> page, Class<R> r) {
+	public static <R, T> PageResultClass<R> convertMybatisPage(IPage<T> page, Class<R> r) {
 		List<T> records = page.getRecords();
 		List<R> collect = Optional.ofNullable(records)
 			.orElse(new ArrayList<>())
@@ -135,16 +135,16 @@ public class PageModelClass<R> implements Serializable {
 	 * @param pageSize    pageSize
 	 * @param data        data
 	 * @param <R>         R
-	 * @return {@link PageModelClass }
+	 * @return {@link PageResultClass }
 	 * @since 2021-09-02 19:11:10
 	 */
-	public static <R> PageModelClass<R> of(
+	public static <R> PageResultClass<R> of(
 		long totalSize,
 		int totalPage,
 		int currentPage,
 		int pageSize,
 		List<R> data) {
-		return PageModelClass
+		return PageResultClass
 			.<R>builder()
 			.totalSize(totalSize)
 			.totalPage(totalPage)
@@ -234,8 +234,8 @@ public class PageModelClass<R> implements Serializable {
 			return this;
 		}
 
-		public PageModelClass<R> build() {
-			PageModelClass<R> pageModel = new PageModelClass<>();
+		public PageResultClass<R> build() {
+			PageResultClass<R> pageModel = new PageResultClass<>();
 			pageModel.setTotalSize(totalSize);
 			pageModel.setTotalPage(totalPage);
 			pageModel.setCurrentPage(currentPage);

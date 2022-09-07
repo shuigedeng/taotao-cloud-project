@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 物流公司数据处理层
  */
-public interface StoreLogisticsMapper extends BaseMapper<StoreLogistics> {
+public interface StoreLogisticsMapper extends BaseSuperMapper<StoreLogistics> {
 
 	/**
 	 * 获取店铺选择的物流公司

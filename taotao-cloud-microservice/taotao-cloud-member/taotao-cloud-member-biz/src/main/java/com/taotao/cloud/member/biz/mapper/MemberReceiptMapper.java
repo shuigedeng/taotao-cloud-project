@@ -22,6 +22,6 @@ import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
 /**
  * 会员发票数据层
  */
-public interface MemberReceiptMapper extends BaseMapper<MemberReceipt> {
+public interface MemberReceiptMapper extends BaseSuperMapper<MemberReceipt> {
 
 }

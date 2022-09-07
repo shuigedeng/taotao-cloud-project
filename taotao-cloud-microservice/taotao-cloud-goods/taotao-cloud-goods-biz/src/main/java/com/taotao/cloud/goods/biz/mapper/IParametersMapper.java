@@ -10,7 +10,7 @@ import com.taotao.cloud.goods.biz.model.entity.Parameters;
  * @version 2022.04
  * @since 2022-04-27 16:57:35
  */
-public interface IParametersMapper extends BaseMapper<Parameters> {
+public interface IParametersMapper extends BaseSuperMapper<Parameters> {
 
 
 }

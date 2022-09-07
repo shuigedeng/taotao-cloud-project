@@ -22,7 +22,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 会员积分历史数据处理层
  */
-public interface MemberPointsHistoryMapper extends BaseMapper<MemberPointsHistory> {
+public interface MemberPointsHistoryMapper extends BaseSuperMapper<MemberPointsHistory> {
 
 	/**
 	 * 获取所有用户的积分历史VO

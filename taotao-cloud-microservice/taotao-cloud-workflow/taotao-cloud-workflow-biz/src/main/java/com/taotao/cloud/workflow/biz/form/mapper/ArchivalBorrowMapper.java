@@ -7,6 +7,6 @@ import com.taotao.cloud.workflow.biz.form.entity.ArchivalBorrowEntity;
  * 档案借阅申请
  *
  */
-public interface ArchivalBorrowMapper extends BaseMapper<ArchivalBorrowEntity> {
+public interface ArchivalBorrowMapper extends BaseSuperMapper<ArchivalBorrowEntity> {
 
 }

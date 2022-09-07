@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.SysUserRoleRela;
  * @author [mybatis plus generator]
  * @since 2020-06-13
  */
-public interface SysUserRoleRelaMapper extends BaseMapper<SysUserRoleRela> {
+public interface SysUserRoleRelaMapper extends BaseSuperMapper<SysUserRoleRela> {
 
 }

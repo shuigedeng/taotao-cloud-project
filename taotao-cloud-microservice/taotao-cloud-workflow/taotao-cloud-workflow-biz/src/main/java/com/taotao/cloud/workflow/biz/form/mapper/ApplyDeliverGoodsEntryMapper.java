@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.ApplyDeliverGoodsEntryEntity;
 /**
  * 发货申请单明细
  */
-public interface ApplyDeliverGoodsEntryMapper extends BaseMapper<ApplyDeliverGoodsEntryEntity> {
+public interface ApplyDeliverGoodsEntryMapper extends BaseSuperMapper<ApplyDeliverGoodsEntryEntity> {
 
 }

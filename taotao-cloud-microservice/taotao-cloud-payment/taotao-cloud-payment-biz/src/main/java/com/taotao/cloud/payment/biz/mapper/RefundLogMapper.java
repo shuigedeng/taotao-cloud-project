@@ -6,6 +6,6 @@ import com.taotao.cloud.payment.biz.entity.RefundLog;
 /**
  * 退款日志数据层
  */
-public interface RefundLogMapper extends BaseMapper<RefundLog> {
+public interface RefundLogMapper extends BaseSuperMapper<RefundLog> {
 
 }

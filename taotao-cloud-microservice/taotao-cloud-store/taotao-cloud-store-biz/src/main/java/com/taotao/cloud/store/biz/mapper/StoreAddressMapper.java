@@ -8,7 +8,7 @@ import com.taotao.cloud.store.biz.model.entity.StoreAddress;
  *
  * 
  */
-public interface StoreAddressMapper extends BaseMapper<StoreAddress> {
+public interface StoreAddressMapper extends BaseSuperMapper<StoreAddress> {
 
 
 }

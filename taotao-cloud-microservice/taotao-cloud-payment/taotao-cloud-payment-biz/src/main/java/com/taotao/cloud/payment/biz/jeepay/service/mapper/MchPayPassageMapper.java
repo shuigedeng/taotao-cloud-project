@@ -30,7 +30,7 @@ import java.util.Map;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface MchPayPassageMapper extends BaseMapper<MchPayPassage> {
+public interface MchPayPassageMapper extends BaseSuperMapper<MchPayPassage> {
 
     /** 根据支付方式查询可用的支付接口列表 **/
     List<JSONObject> selectAvailablePayInterfaceList(Map params);

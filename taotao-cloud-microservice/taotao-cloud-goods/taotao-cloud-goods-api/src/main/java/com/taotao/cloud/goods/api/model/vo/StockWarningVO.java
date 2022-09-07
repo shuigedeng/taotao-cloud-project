@@ -1,6 +1,6 @@
 package com.taotao.cloud.goods.api.model.vo;
 
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -29,5 +29,5 @@ public class StockWarningVO implements Serializable {
 	private Integer stockWarningNum;
 
 	@Schema(description = "商品SKU列表")
-	private PageModel<GoodsSkuVO> goodsSkuPage;
+	private PageResult<GoodsSkuVO> goodsSkuPage;
 }

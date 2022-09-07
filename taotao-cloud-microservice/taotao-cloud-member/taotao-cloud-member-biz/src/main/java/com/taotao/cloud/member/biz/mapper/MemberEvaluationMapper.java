@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 会员商品评价数据处理层
  */
-public interface MemberEvaluationMapper extends BaseMapper<MemberEvaluation> {
+public interface MemberEvaluationMapper extends BaseSuperMapper<MemberEvaluation> {
 
 
 	/**

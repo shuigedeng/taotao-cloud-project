@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
 * @date 2022/3/2 
 */
 @Mapper
-public interface RefundRecordMapper extends BaseMapper<RefundRecord> {
+public interface RefundRecordMapper extends BaseSuperMapper<RefundRecord> {
 }

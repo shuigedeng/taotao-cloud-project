@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -82,9 +82,9 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<AfterSaleVO>> page(@Validated AfterSalePageQuery afterSalePageQuery) {
+	public Result<PageResult<AfterSaleVO>> page(@Validated AfterSalePageQuery afterSalePageQuery) {
 		IPage<AfterSale> afterSalePages = afterSaleService.getAfterSalePages(afterSalePageQuery);
-		return Result.success(PageModel.convertMybatisPage(afterSalePages, AfterSaleVO.class));
+		return Result.success(PageResult.convertMybatisPage(afterSalePages, AfterSaleVO.class));
 	}
 
 	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息")

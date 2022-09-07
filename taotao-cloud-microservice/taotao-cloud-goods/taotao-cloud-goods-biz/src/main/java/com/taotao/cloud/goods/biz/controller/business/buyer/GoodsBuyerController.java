@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.query.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
@@ -82,9 +82,9 @@ public class GoodsBuyerController {
 	@Operation(summary = "获取商品分页列表", description = "获取商品分页列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageModel<GoodsVO>> getByPage(@Validated GoodsPageQuery goodsPageQuery) {
+	public Result<PageResult<GoodsVO>> getByPage(@Validated GoodsPageQuery goodsPageQuery) {
 		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(goodsPage, GoodsVO.class));
+		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 
 	@Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息")
