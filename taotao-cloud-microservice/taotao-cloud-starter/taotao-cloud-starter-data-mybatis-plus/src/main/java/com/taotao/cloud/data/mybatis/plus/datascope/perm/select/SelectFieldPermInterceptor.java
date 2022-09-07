@@ -60,9 +60,8 @@ public class SelectFieldPermInterceptor  extends JsqlParserSupport implements In
     @Override
     protected void processSelect(Select select, int index, String sql, Object obj) {
         SelectBody selectBody = select.getSelectBody();
-        if (selectBody instanceof PlainSelect) {
-            PlainSelect plainSelect = (PlainSelect) selectBody;
-            List<SelectItem> selectItems = plainSelect.getSelectItems();
+        if (selectBody instanceof PlainSelect plainSelect) {
+			List<SelectItem> selectItems = plainSelect.getSelectItems();
 
             plainSelect.setSelectItems(selectItems);
         }

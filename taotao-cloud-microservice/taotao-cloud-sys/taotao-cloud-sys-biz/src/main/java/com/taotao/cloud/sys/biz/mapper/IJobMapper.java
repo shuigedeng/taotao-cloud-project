@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.system.Job;
+import com.taotao.cloud.sys.biz.model.entity.system.Position;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * IJobMapper
@@ -27,6 +26,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021/10/13 22:50
  */
 
-public interface IJobMapper extends BaseSuperMapper<Job, Long> {
+public interface IJobMapper extends BaseSuperMapper<Position, Long> {
 
 }

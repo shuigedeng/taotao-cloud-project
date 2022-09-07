@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.service.business;
 
-import com.taotao.cloud.sys.biz.model.entity.system.RoleMenu;
+import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.Set;
 
@@ -11,7 +11,7 @@ import java.util.Set;
  * @version 2022.03
  * @since 2022-03-25 15:01:39
  */
-public interface IRoleMenuService extends BaseSuperService<RoleMenu, Long> {
+public interface IRoleMenuService extends BaseSuperService<RoleResource, Long> {
 
 	/**
 	 * 添加角色-菜单对应关系

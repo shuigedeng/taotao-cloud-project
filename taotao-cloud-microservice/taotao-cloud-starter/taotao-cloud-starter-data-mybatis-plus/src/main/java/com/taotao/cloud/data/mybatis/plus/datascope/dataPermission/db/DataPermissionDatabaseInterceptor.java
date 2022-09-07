@@ -6,11 +6,9 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.extension.parser.JsqlParserSupport;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
-import com.fxz.common.dataPermission.rule.DataPermissionRule;
-import com.fxz.common.dataPermission.factory.DataPermissionRuleFactory;
-import com.fxz.common.mp.utils.MyBatisUtils;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.factory.DataPermissionRuleFactory;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.rule.DataPermissionRule;
+import com.taotao.cloud.data.mybatis.plus.utils.MpUtils;
 import net.sf.jsqlparser.expression.*;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.expression.operators.conditional.OrExpression;
@@ -29,6 +27,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.openjdk.nashorn.internal.objects.annotations.Getter;
 
 import java.sql.Connection;
 import java.util.*;
@@ -44,13 +43,23 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author fxz
  */
-@RequiredArgsConstructor
 public class DataPermissionDatabaseInterceptor extends JsqlParserSupport implements InnerInterceptor {
 
 	private final DataPermissionRuleFactory ruleFactory;
 
-	@Getter
 	private final MappedStatementCache mappedStatementCache = new MappedStatementCache();
+
+	public DataPermissionDatabaseInterceptor(DataPermissionRuleFactory ruleFactory) {
+		this.ruleFactory = ruleFactory;
+	}
+
+	public DataPermissionRuleFactory getRuleFactory() {
+		return ruleFactory;
+	}
+
+	public MappedStatementCache getMappedStatementCache() {
+		return mappedStatementCache;
+	}
 
 	/**
 	 * SELECT 场景
@@ -124,8 +133,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 		if (selectBody instanceof PlainSelect) {
 			processPlainSelect((PlainSelect) selectBody);
 		}
-		else if (selectBody instanceof WithItem) {
-			WithItem withItem = (WithItem) selectBody;
+		else if (selectBody instanceof WithItem withItem) {
 			processSelectBody(withItem.getSubSelect().getSelectBody());
 		}
 		else {
@@ -161,8 +169,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 		FromItem fromItem = plainSelect.getFromItem();
 		Expression where = plainSelect.getWhere();
 		processWhereSubSelect(where);
-		if (fromItem instanceof Table) {
-			Table fromTable = (Table) fromItem;
+		if (fromItem instanceof Table fromTable) {
 			plainSelect.setWhere(builderExpression(where, fromTable));
 		}
 		else {
@@ -197,40 +204,34 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 		}
 		if (where.toString().indexOf("SELECT") > 0) {
 			// 有子查询
-			if (where instanceof BinaryExpression) {
+			if (where instanceof BinaryExpression expression) {
 				// 比较符号 , and , or , 等等
-				BinaryExpression expression = (BinaryExpression) where;
 				processWhereSubSelect(expression.getLeftExpression());
 				processWhereSubSelect(expression.getRightExpression());
 			}
-			else if (where instanceof InExpression) {
+			else if (where instanceof InExpression expression) {
 				// in
-				InExpression expression = (InExpression) where;
 				ItemsList itemsList = expression.getRightItemsList();
 				if (itemsList instanceof SubSelect) {
 					processSelectBody(((SubSelect) itemsList).getSelectBody());
 				}
 			}
-			else if (where instanceof ExistsExpression) {
+			else if (where instanceof ExistsExpression expression) {
 				// exists
-				ExistsExpression expression = (ExistsExpression) where;
 				processWhereSubSelect(expression.getRightExpression());
 			}
-			else if (where instanceof NotExpression) {
+			else if (where instanceof NotExpression expression) {
 				// not exists
-				NotExpression expression = (NotExpression) where;
 				processWhereSubSelect(expression.getExpression());
 			}
-			else if (where instanceof Parenthesis) {
-				Parenthesis expression = (Parenthesis) where;
+			else if (where instanceof Parenthesis expression) {
 				processWhereSubSelect(expression.getExpression());
 			}
 		}
 	}
 
 	protected void processSelectItem(SelectItem selectItem) {
-		if (selectItem instanceof SelectExpressionItem) {
-			SelectExpressionItem selectExpressionItem = (SelectExpressionItem) selectItem;
+		if (selectItem instanceof SelectExpressionItem selectExpressionItem) {
 			if (selectExpressionItem.getExpression() instanceof SubSelect) {
 				processSelectBody(((SubSelect) selectExpressionItem.getExpression()).getSelectBody());
 			}
@@ -268,8 +269,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 	 * 处理子查询等
 	 */
 	protected void processFromItem(FromItem fromItem) {
-		if (fromItem instanceof SubJoin) {
-			SubJoin subJoin = (SubJoin) fromItem;
+		if (fromItem instanceof SubJoin subJoin) {
 			if (subJoin.getJoinList() != null) {
 				processJoins(subJoin.getJoinList());
 			}
@@ -277,8 +277,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 				processFromItem(subJoin.getLeft());
 			}
 		}
-		else if (fromItem instanceof SubSelect) {
-			SubSelect subSelect = (SubSelect) fromItem;
+		else if (fromItem instanceof SubSelect subSelect) {
 			if (subSelect.getSelectBody() != null) {
 				processSelectBody(subSelect.getSelectBody());
 			}
@@ -286,8 +285,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 		else if (fromItem instanceof ValuesList) {
 			logger.debug("Perform a subquery, if you do not give us feedback");
 		}
-		else if (fromItem instanceof LateralSubSelect) {
-			LateralSubSelect lateralSubSelect = (LateralSubSelect) fromItem;
+		else if (fromItem instanceof LateralSubSelect lateralSubSelect) {
 			if (lateralSubSelect.getSubSelect() != null) {
 				SubSelect subSelect = lateralSubSelect.getSubSelect();
 				if (subSelect.getSelectBody() != null) {
@@ -307,8 +305,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 		for (Join join : joins) {
 			// 处理 on 表达式
 			FromItem fromItem = join.getRightItem();
-			if (fromItem instanceof Table) {
-				Table fromTable = (Table) fromItem;
+			if (fromItem instanceof Table fromTable) {
 				// 获取 join 尾缀的 on 表达式列表
 				Collection<Expression> originOnExpressions = join.getOnExpressions();
 				// 正常 join on 表达式只有一个，立刻处理
@@ -338,8 +335,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 	 * 处理联接语句
 	 */
 	protected void processJoin(Join join) {
-		if (join.getRightItem() instanceof Table) {
-			Table fromTable = (Table) join.getRightItem();
+		if (join.getRightItem() instanceof Table fromTable) {
 			Expression originOnExpression = CollUtil.getFirst(join.getOnExpressions());
 			originOnExpression = builderExpression(originOnExpression, fromTable);
 			join.setOnExpressions(CollUtil.newArrayList(originOnExpression));
@@ -387,7 +383,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 			ContextHolder.setRewrite(true);
 
 			// 单条规则的条件
-			String tableName = MyBatisUtils.getTableName(table);
+			String tableName = MpUtils.getTableName(table);
 			Expression oneExpress = rule.getExpression(tableName, table.getAlias());
 			// 拼接到 allExpression 中
 			allExpression = allExpression == null ? oneExpress : new AndExpression(allExpression, oneExpress);
@@ -462,8 +458,11 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 		 * <p>
 		 * value：{@link MappedStatement#getId()} 编号
 		 */
-		@Getter
 		private final Map<Class<? extends DataPermissionRule>, Set<String>> noRewritableMappedStatements = new ConcurrentHashMap<>();
+
+		public Map<Class<? extends DataPermissionRule>, Set<String>> getNoRewritableMappedStatements() {
+			return noRewritableMappedStatements;
+		}
 
 		/**
 		 * 判断是否无需重写 ps：虽然有点中文式英语，但是容易读懂即可
@@ -498,7 +497,7 @@ public class DataPermissionDatabaseInterceptor extends JsqlParserSupport impleme
 					mappedStatementIds.add(ms.getId());
 				}
 				else {
-					noRewritableMappedStatements.put(rule.getClass(), new HashSet<>(Arrays.asList(ms.getId())));
+					noRewritableMappedStatements.put(rule.getClass(), new HashSet<>(Collections.singletonList(ms.getId())));
 				}
 			}
 		}

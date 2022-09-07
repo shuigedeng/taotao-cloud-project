@@ -1,13 +1,13 @@
 package com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.annotation;
 
-import com.fxz.common.dataPermission.rule.DataPermissionRule;
+
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.rule.DataPermissionRule;
 
 import java.lang.annotation.*;
 
 /**
  * 数据权限注解 可声明在类或者方法上，标识使用的数据权限规则
- *
- * @author fxz
+ * @author Administrator
  */
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

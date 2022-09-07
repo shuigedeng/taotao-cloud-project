@@ -1,7 +1,7 @@
 package com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.aop;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.fxz.common.dataPermission.annotation.DataPermission;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.annotation.DataPermission;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,10 +17,11 @@ public class DataPermissionContextHolder {
 	 * 使用 List 的原因，可能存在方法的嵌套调用
 	 */
 	private static final ThreadLocal<LinkedList<DataPermission>> DATA_PERMISSIONS = TransmittableThreadLocal
-			.withInitial(LinkedList::new);
+		.withInitial(LinkedList::new);
 
 	/**
 	 * 获得当前的 DataPermission 注解
+	 *
 	 * @return DataPermission 注解
 	 */
 	public static DataPermission get() {
@@ -29,6 +30,7 @@ public class DataPermissionContextHolder {
 
 	/**
 	 * 入栈 DataPermission 注解
+	 *
 	 * @param dataPermission DataPermission 注解
 	 */
 	public static void add(DataPermission dataPermission) {
@@ -37,6 +39,7 @@ public class DataPermissionContextHolder {
 
 	/**
 	 * 出栈 DataPermission 注解
+	 *
 	 * @return DataPermission 注解
 	 */
 	public static DataPermission remove() {
@@ -50,6 +53,7 @@ public class DataPermissionContextHolder {
 
 	/**
 	 * 获得所有 DataPermission
+	 *
 	 * @return DataPermission 队列
 	 */
 	public static List<DataPermission> getAll() {

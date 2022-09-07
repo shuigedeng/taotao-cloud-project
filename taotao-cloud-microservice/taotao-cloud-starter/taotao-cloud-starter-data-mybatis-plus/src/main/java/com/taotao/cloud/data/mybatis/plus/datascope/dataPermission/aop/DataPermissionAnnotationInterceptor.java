@@ -1,7 +1,6 @@
 package com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.aop;
 
-import com.fxz.common.dataPermission.annotation.DataPermission;
-import lombok.Getter;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.annotation.DataPermission;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.core.MethodClassKey;
@@ -25,9 +24,8 @@ public class DataPermissionAnnotationInterceptor implements MethodInterceptor {
 	 * DataPermission 空对象，用于方法无 {@link DataPermission} 注解时，使用 DATA_PERMISSION_NULL 进行占位
 	 */
 	static final DataPermission DATA_PERMISSION_NULL = DataPermissionAnnotationInterceptor.class
-			.getAnnotation(DataPermission.class);
+		.getAnnotation(DataPermission.class);
 
-	@Getter
 	private final Map<MethodClassKey, DataPermission> dataPermissionCache = new ConcurrentHashMap<>();
 
 	@Override
@@ -37,11 +35,11 @@ public class DataPermissionAnnotationInterceptor implements MethodInterceptor {
 		if (dataPermission != null) {
 			DataPermissionContextHolder.add(dataPermission);
 		}
+
 		try {
 			// 执行逻辑
 			return methodInvocation.proceed();
-		}
-		finally {
+		} finally {
 			// 出栈
 			if (dataPermission != null) {
 				DataPermissionContextHolder.remove();
@@ -62,13 +60,18 @@ public class DataPermissionAnnotationInterceptor implements MethodInterceptor {
 
 		// 2.1 从方法中获取
 		dataPermission = AnnotationUtils.findAnnotation(method, DataPermission.class);
+
 		// 2.2 从类上获取
 		if (dataPermission == null) {
 			dataPermission = AnnotationUtils.findAnnotation(clazz, DataPermission.class);
 		}
+
 		// 2.3 添加到缓存中
 		dataPermissionCache.put(methodClassKey, dataPermission != null ? dataPermission : DATA_PERMISSION_NULL);
 		return dataPermission;
 	}
 
+	public Map<MethodClassKey, DataPermission> getDataPermissionCache() {
+		return dataPermissionCache;
+	}
 }

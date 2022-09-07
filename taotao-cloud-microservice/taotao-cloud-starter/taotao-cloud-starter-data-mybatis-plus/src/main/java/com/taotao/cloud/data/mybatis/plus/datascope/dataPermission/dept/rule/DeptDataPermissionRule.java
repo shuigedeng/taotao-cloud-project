@@ -3,15 +3,10 @@ package com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.dept.rule;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
-import com.fxz.common.dataPermission.dept.service.DeptDataPermissionFrameworkService;
-import com.fxz.common.core.entity.DeptDataPermissionRespDTO;
-import com.fxz.common.dataPermission.rule.DataPermissionRule;
-import com.fxz.common.mp.base.BaseEntity;
-import com.fxz.common.mp.utils.MyBatisUtils;
-import com.fxz.common.security.entity.FxzAuthUser;
-import com.fxz.common.security.util.SecurityUtil;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.dept.service.DeptDataPermissionFrameworkService;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.rule.DataPermissionRule;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
@@ -31,11 +26,7 @@ import java.util.stream.Collectors;
 /**
  * 基于部门的 {@link DataPermissionRule} 数据权限规则实现 注意，使用 DeptDataPermissionRule 时，需要保证表中有
  * dept_id 部门编号的字段，可自定义。 根据登录用户拥有的数据权限构建查询条件
- *
- * @author fxz
  */
-@AllArgsConstructor
-@Slf4j
 public class DeptDataPermissionRule implements DataPermissionRule {
 
 	private static final String DEPT_COLUMN_NAME = "dept_id";
@@ -65,6 +56,10 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 	 */
 	private final Set<String> TABLE_NAMES = new HashSet<>();
 
+	public DeptDataPermissionRule(DeptDataPermissionFrameworkService deptDataPermissionService) {
+		this.deptDataPermissionService = deptDataPermissionService;
+	}
+
 	/**
 	 * 获取配置此规则的所有表名
 	 */
@@ -82,10 +77,12 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 	@Override
 	public Expression getExpression(String tableName, Alias tableAlias) {
 		// 只有有登陆用户的情况下，才进行数据权限的处理
-		FxzAuthUser loginUser = SecurityUtil.getUser(SecurityUtil.getAuthentication());
+		SecurityUser loginUser = SecurityUtils.getCurrentUserWithNull();
 		if (loginUser == null) {
 			return null;
 		}
+
+		loginUser.
 
 		// 获得用户的数据权限
 		DeptDataPermissionRespDTO deptDataPermission = deptDataPermissionService.getDeptDataPermission(loginUser);
@@ -122,6 +119,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 		if (userExpression == null) {
 			return deptExpression;
 		}
+
 		// 目前，如果有指定部门 + 可查看自己，采用 OR 条件。即，WHERE dept_id IN ? OR user_id = ?
 		return new OrExpression(deptExpression, userExpression);
 	}

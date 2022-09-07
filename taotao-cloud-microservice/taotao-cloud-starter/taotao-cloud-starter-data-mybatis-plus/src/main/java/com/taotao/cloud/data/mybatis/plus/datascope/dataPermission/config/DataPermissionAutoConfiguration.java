@@ -1,12 +1,11 @@
 package com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.config;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.fxz.common.dataPermission.aop.DataPermissionAnnotationAdvisor;
-import com.fxz.common.dataPermission.db.DataPermissionDatabaseInterceptor;
-import com.fxz.common.dataPermission.factory.DataPermissionRuleFactory;
-import com.fxz.common.dataPermission.factory.DataPermissionRuleFactoryImpl;
-import com.fxz.common.dataPermission.rule.DataPermissionRule;
-import com.fxz.common.mp.utils.MyBatisUtils;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.aop.DataPermissionAnnotationAdvisor;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.db.DataPermissionDatabaseInterceptor;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.factory.DataPermissionRuleFactory;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.factory.DataPermissionRuleFactoryImpl;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.rule.DataPermissionRule;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
@@ -14,8 +13,6 @@ import java.util.List;
 
 /**
  * 数据权限的自动配置类
- *
- * @author fxz
  */
 @AutoConfiguration
 public class DataPermissionAutoConfiguration {
@@ -34,7 +31,7 @@ public class DataPermissionAutoConfiguration {
 	 */
 	@Bean
 	public DataPermissionDatabaseInterceptor dataPermissionDatabaseInterceptor(MybatisPlusInterceptor interceptor,
-			List<DataPermissionRule> rules) {
+																			   List<DataPermissionRule> rules) {
 		// 生效的数据权限规则
 		DataPermissionRuleFactory ruleFactory = dataPermissionRuleFactory(rules);
 
