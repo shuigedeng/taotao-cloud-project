@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 分销商品数据处理层
  */
-public interface DistributionGoodsMapper extends BaseMapper<DistributionGoods> {
+public interface DistributionGoodsMapper extends BaseSuperMapper<DistributionGoods> {
 
 	/**
 	 * 获取分销员未选择商品VO分页

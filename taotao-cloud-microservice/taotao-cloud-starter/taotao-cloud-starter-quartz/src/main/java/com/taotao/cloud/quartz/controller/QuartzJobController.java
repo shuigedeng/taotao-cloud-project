@@ -1,6 +1,6 @@
 package com.taotao.cloud.quartz.controller;
 
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.quartz.param.QuartzJobQuery;
 import com.taotao.cloud.quartz.vo.QuartzJobVO;
@@ -51,7 +51,7 @@ public class QuartzJobController {
 
 	@Operation(summary = "分页")
 	@GetMapping("/page")
-	public Result<PageModel<QuartzJobVO>> page(QuartzJobQuery quartzJobQuery) {
+	public Result<PageResult<QuartzJobVO>> page(QuartzJobQuery quartzJobQuery) {
 		return Result.success(quartzJobService.page(quartzJobQuery));
 	}
 

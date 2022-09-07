@@ -11,7 +11,7 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.PayOrderDivisionRecord;
  * @author [mybatis plus generator]
  * @since 2021-08-19
  */
-public interface PayOrderDivisionRecordMapper extends BaseMapper<PayOrderDivisionRecord> {
+public interface PayOrderDivisionRecordMapper extends BaseSuperMapper<PayOrderDivisionRecord> {
 
     /** 查询全部分账成功金额 **/
     Long sumSuccessDivisionAmount(String payOrderId);

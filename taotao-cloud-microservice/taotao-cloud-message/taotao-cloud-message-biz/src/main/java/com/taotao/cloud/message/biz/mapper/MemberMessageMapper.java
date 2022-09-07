@@ -8,6 +8,6 @@ import com.taotao.cloud.message.biz.entity.MemberMessage;
 /**
  * 会员接收到消息数据处理层
  */
-public interface MemberMessageMapper extends BaseMapper<MemberMessage> {
+public interface MemberMessageMapper extends BaseSuperMapper<MemberMessage> {
 
 }

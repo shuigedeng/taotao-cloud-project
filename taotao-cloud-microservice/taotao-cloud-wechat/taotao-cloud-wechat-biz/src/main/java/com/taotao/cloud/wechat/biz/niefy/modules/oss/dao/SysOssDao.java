@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Mark sunlightcs@gmail.com
  */
 @Mapper
-public interface SysOssDao extends BaseMapper<SysOssEntity> {
+public interface SysOssDao extends BaseSuperMapper<SysOssEntity> {
 
 }

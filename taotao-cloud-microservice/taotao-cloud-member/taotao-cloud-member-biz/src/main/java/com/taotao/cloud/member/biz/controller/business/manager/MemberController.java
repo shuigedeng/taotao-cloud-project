@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.dto.ManagerMemberEditDTO;
@@ -46,9 +46,9 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageModel<MemberVO>> getByPage(MemberSearchPageQuery memberSearchPageQuery) {
+	public Result<PageResult<MemberVO>> getByPage(MemberSearchPageQuery memberSearchPageQuery) {
 		IPage<Member> memberPage = memberService.getMemberPage(memberSearchPageQuery);
-		return Result.success(PageModel.convertMybatisPage(memberPage, MemberVO.class));
+		return Result.success(PageResult.convertMybatisPage(memberPage, MemberVO.class));
 	}
 
 	@Operation(summary = "通过ID获取会员信息", description = "通过ID获取会员信息")

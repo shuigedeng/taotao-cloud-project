@@ -3,6 +3,6 @@
 //
 //import com.taotao.cloud.oauth2.biz.AuthUserOauth2;
 //
-//public interface UserOauth2Mapper extends BaseMapper<AuthUserOauth2> {
+//public interface UserOauth2Mapper extends BaseSuperMapper<AuthUserOauth2> {
 //
 //}

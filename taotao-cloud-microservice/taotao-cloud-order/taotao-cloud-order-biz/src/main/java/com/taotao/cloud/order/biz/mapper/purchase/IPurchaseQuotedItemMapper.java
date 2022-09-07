@@ -7,7 +7,7 @@ import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseQuotedItem;
 /**
  * 采购单子内容数据处理层
  */
-public interface IPurchaseQuotedItemMapper extends BaseMapper<PurchaseQuotedItem> {
+public interface IPurchaseQuotedItemMapper extends BaseSuperMapper<PurchaseQuotedItem> {
 
 
 }

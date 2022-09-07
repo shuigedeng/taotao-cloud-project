@@ -18,7 +18,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:55:41
  */
-public interface ICommodityMapper extends BaseMapper<Commodity> {
+public interface ICommodityMapper extends BaseSuperMapper<Commodity> {
 
 	/**
 	 * 获取直播商品ID列表

@@ -7,5 +7,5 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
  * 流程经办
  *
  */
-public interface FlowTaskOperatorMapper extends BaseMapper<FlowTaskOperatorEntity> {
+public interface FlowTaskOperatorMapper extends BaseSuperMapper<FlowTaskOperatorEntity> {
 }

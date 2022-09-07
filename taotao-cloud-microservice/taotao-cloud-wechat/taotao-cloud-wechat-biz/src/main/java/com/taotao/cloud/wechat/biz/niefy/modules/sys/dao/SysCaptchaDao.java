@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Mark sunlightcs@gmail.com
  */
 @Mapper
-public interface SysCaptchaDao extends BaseMapper<SysCaptchaEntity> {
+public interface SysCaptchaDao extends BaseSuperMapper<SysCaptchaEntity> {
 
 }

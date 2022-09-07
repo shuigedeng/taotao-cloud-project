@@ -2,7 +2,7 @@ package com.taotao.cloud.store.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
@@ -64,9 +64,9 @@ public class StoreManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageModel<StoreVO>> getByPage(StorePageQuery storePageQuery) {
+	public Result<PageResult<StoreVO>> getByPage(StorePageQuery storePageQuery) {
 		IPage<StoreVO> storeVOIPage = storeService.findByConditionPage(storePageQuery);
-		return Result.success(PageModel.convertMybatisPage(storeVOIPage, StoreVO.class));
+		return Result.success(PageResult.convertMybatisPage(storeVOIPage, StoreVO.class));
 	}
 
 	@Operation(summary = "获取店铺详情", description = "获取店铺详情")

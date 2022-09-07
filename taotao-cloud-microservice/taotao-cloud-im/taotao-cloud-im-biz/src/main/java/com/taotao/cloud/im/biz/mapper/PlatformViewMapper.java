@@ -10,7 +10,7 @@
 ///**
 // * 平台流量数据
 // */
-//public interface PlatformViewMapper extends BaseMapper<PlatformViewData> {
+//public interface PlatformViewMapper extends BaseSuperMapper<PlatformViewData> {
 //    /**
 //     * UV流量统计
 //     *

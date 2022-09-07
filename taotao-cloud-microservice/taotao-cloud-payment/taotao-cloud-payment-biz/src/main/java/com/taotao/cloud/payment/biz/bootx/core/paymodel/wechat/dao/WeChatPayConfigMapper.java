@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
 * @date 2021/3/19
 */
 @Mapper
-public interface WeChatPayConfigMapper extends BaseMapper<WeChatPayConfig> {
+public interface WeChatPayConfigMapper extends BaseSuperMapper<WeChatPayConfig> {
 
 }

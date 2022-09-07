@@ -10,6 +10,6 @@ import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
  * @version 2022.04
  * @since 2022-04-22 11:28:24
  */
-public interface DistributionCashMapper extends BaseMapper<DistributionCash> {
+public interface DistributionCashMapper extends BaseSuperMapper<DistributionCash> {
 
 }

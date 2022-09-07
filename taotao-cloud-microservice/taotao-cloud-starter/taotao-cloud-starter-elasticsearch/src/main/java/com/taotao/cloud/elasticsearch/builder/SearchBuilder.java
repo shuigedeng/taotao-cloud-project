@@ -18,7 +18,7 @@ package com.taotao.cloud.elasticsearch.builder;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import org.apache.lucene.search.TotalHits;
@@ -241,7 +241,7 @@ public class SearchBuilder {
 	 * @return com.taotao.cloud.core.model.PageResult<java.lang.String>
 	 * @since 2021/2/26 08:54
 	 */
-	public PageModel<String> getPage() throws IOException {
+	public PageResult<String> getPage() throws IOException {
 		return this.getPage(null, null);
 	}
 
@@ -253,7 +253,7 @@ public class SearchBuilder {
 	 * @return com.taotao.cloud.core.model.PageResult<java.lang.String>
 	 * @since 2021/2/26 08:54
 	 */
-	public PageModel<String> getPage(Integer page, Integer limit) throws IOException {
+	public PageResult<String> getPage(Integer page, Integer limit) throws IOException {
 		this.setPage(page, limit);
 		SearchResponse response = this.get();
 		SearchHits searchHits = response.getHits();

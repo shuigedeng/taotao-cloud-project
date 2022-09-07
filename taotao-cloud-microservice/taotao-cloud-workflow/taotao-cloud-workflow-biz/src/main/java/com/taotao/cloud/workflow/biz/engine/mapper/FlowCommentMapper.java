@@ -7,6 +7,6 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
  * 流程评论
  *
  */
-public interface FlowCommentMapper extends BaseMapper<FlowCommentEntity> {
+public interface FlowCommentMapper extends BaseSuperMapper<FlowCommentEntity> {
 
 }

@@ -32,6 +32,6 @@ import com.joolun.weixin.entity.WxAutoReply;
  * @author www.joolun.com
  * @date 2019-04-18 15:40:39
  */
-public interface WxAutoReplyMapper extends BaseMapper<WxAutoReply> {
+public interface WxAutoReplyMapper extends BaseSuperMapper<WxAutoReply> {
 
 }

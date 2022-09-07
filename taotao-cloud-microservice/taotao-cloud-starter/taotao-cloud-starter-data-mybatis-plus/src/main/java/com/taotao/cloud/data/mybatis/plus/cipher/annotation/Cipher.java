@@ -21,7 +21,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * EnableCipher
+ * 开启密码模式
  *
  * <pre class="code">
  * &#064;Mapper

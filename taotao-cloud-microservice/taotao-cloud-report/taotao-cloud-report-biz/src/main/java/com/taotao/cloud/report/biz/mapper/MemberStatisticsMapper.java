@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 会员统计数据处理层
  */
-public interface MemberStatisticsMapper extends BaseMapper<MemberStatisticsData> {
+public interface MemberStatisticsMapper extends BaseSuperMapper<MemberStatisticsData> {
 
     /**
      * 获取会员统计数量

@@ -14,7 +14,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 发票数据处理层
  */
-public interface IReceiptMapper extends BaseMapper<Receipt> {
+public interface IReceiptMapper extends BaseSuperMapper<Receipt> {
 
 	/**
 	 * 查询发票信息

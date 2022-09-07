@@ -14,7 +14,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:36:29
  */
-public interface CouponActivityItemMapper extends BaseMapper<CouponActivityItem> {
+public interface CouponActivityItemMapper extends BaseSuperMapper<CouponActivityItem> {
 
 	/**
 	 * 获取优惠券活动关联优惠券列表VO

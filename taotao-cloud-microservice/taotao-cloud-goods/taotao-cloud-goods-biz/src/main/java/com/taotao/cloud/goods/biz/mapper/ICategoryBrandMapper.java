@@ -15,7 +15,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:55:23
  */
-public interface ICategoryBrandMapper extends BaseMapper<CategoryBrand> {
+public interface ICategoryBrandMapper extends BaseSuperMapper<CategoryBrand> {
 
 	/**
 	 * 根据分类id查分类绑定品牌

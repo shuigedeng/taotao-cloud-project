@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.service;
 
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.elasticsearch.model.IndexDto;
 
 import java.io.IOException;
@@ -54,10 +54,10 @@ public interface IIndexService {
 	 *
 	 * @param queryStr 搜索字符串
 	 * @param indices  默认显示的索引名
-	 * @return {@link PageModel }<{@link HashMap }<{@link String }, {@link String }>>
+	 * @return {@link PageResult }<{@link HashMap }<{@link String }, {@link String }>>
 	 * @since 2022-04-27 17:23:58
 	 */
-	PageModel<HashMap<String, String>> list(String queryStr, String indices) throws IOException;
+	PageResult<HashMap<String, String>> list(String queryStr, String indices) throws IOException;
 
 
 	/**

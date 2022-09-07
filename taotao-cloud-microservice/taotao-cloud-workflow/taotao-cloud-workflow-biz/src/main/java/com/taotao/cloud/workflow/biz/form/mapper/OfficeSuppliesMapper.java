@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.OfficeSuppliesEntity;
 /**
  * 领用办公用品申请表
  */
-public interface OfficeSuppliesMapper extends BaseMapper<OfficeSuppliesEntity> {
+public interface OfficeSuppliesMapper extends BaseSuperMapper<OfficeSuppliesEntity> {
 
 }

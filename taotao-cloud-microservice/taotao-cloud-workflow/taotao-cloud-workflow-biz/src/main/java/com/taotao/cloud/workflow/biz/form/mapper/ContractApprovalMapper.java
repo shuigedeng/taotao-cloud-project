@@ -5,6 +5,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * 合同审批
  */
-public interface ContractApprovalMapper extends BaseMapper<ContractApprovalEntity> {
+public interface ContractApprovalMapper extends BaseSuperMapper<ContractApprovalEntity> {
 
 }

@@ -11,5 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2020/12/8
  */
 @Mapper
-public interface WalletLogMapper extends BaseMapper<WalletLog> {
+public interface WalletLogMapper extends BaseSuperMapper<WalletLog> {
 }

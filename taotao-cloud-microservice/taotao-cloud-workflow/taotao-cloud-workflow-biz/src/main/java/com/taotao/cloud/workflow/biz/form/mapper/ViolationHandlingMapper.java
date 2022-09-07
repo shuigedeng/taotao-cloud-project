@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.ViolationHandlingEntity;
 /**
  * 违章处理申请表
  */
-public interface ViolationHandlingMapper extends BaseMapper<ViolationHandlingEntity> {
+public interface ViolationHandlingMapper extends BaseSuperMapper<ViolationHandlingEntity> {
 
 }

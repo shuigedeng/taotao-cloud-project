@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.MaterialRequisitionEntity;
 /**
  * 领料单
  */
-public interface MaterialRequisitionMapper extends BaseMapper<MaterialRequisitionEntity> {
+public interface MaterialRequisitionMapper extends BaseSuperMapper<MaterialRequisitionEntity> {
 
 }

@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * 流程任务
  *
  */
-public interface FlowTaskMapper extends BaseMapper<FlowTaskEntity> {
+public interface FlowTaskMapper extends BaseSuperMapper<FlowTaskEntity> {
     /**
      * 已办事宜
      * @param map 参数

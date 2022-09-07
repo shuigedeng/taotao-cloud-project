@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.service.impl;
 
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
 import com.taotao.cloud.elasticsearch.service.ISearchService;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class SearchServiceImpl implements ISearchService {
 	}
 
 	@Override
-	public PageModel<String> strQuery(String indexName, SearchDto searchDto) throws IOException {
+	public PageResult<String> strQuery(String indexName, SearchDto searchDto) throws IOException {
 //		return SearchBuilder.builder(elasticsearchRestTemplate, indexName)
 //			.setStringQuery(searchDto.getQueryStr())
 //			.addSort(searchDto.getSortCol(), SortOrder.DESC)

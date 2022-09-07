@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.ReceiptSignEntity;
 /**
  * 收文签呈单
  */
-public interface ReceiptSignMapper extends BaseMapper<ReceiptSignEntity> {
+public interface ReceiptSignMapper extends BaseSuperMapper<ReceiptSignEntity> {
 
 }

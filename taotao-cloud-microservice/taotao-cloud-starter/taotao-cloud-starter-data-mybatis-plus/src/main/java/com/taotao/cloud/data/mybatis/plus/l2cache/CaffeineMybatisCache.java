@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * <p>Description: 扩展的Mybatis二级缓存 </p>
  *
  * @CacheNamespace(implementation = CaffeineMybatisCache.class, eviction = CaffeineMybatisCache.class)
- * public interface ILogMapper extends BaseMapper<Log>
+ * public interface ILogMapper extends BaseSuperMapper<Log>
  *
  * @author : gengwei.zheng
  * @date : 2021/10/26 17:02

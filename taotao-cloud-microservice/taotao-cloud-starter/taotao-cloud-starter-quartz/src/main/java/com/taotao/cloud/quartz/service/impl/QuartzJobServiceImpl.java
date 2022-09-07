@@ -5,7 +5,7 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.quartz.utils.QuartzManager;
 import com.taotao.cloud.quartz.dao.QuartzJobMapper;
 import com.taotao.cloud.quartz.entity.QuartzJob;
@@ -184,12 +184,12 @@ public class QuartzJobServiceImpl implements QuartzJobService {
 	}
 
 	@Override
-	public PageModel<QuartzJobVO> page(QuartzJobQuery quartzJobQuery) {
+	public PageResult<QuartzJobVO> page(QuartzJobQuery quartzJobQuery) {
 		LambdaQueryWrapper<QuartzJob> wrapper = new LambdaQueryWrapper<>();
 		wrapper.orderByDesc(QuartzJob::getId);
 
 		IPage<QuartzJob> quartzJobIPage = quartzJobMapper.selectPage(quartzJobQuery.buildMpPage(), wrapper);
-		return PageModel.convertMybatisPage(quartzJobIPage, QuartzJobVO.class);
+		return PageResult.convertMybatisPage(quartzJobIPage, QuartzJobVO.class);
 	}
 
 

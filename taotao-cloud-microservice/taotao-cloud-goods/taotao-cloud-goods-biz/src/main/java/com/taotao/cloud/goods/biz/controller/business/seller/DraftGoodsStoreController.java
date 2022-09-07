@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.controller.business.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.model.dto.DraftGoodsSkuParamsDTO;
@@ -49,11 +49,11 @@ public class DraftGoodsStoreController {
 	@RequestLogger("分页获取草稿商品列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<DraftGoodsVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
+	public Result<PageResult<DraftGoodsVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		draftGoodsPageQuery.setStoreId(storeId);
 		IPage<DraftGoods> draftGoods = draftGoodsService.getDraftGoods(draftGoodsPageQuery);
-		return Result.success(PageModel.convertMybatisPage(draftGoods, DraftGoodsVO.class));
+		return Result.success(PageResult.convertMybatisPage(draftGoods, DraftGoodsVO.class));
 	}
 
 	@Operation(summary = "获取草稿商品", description = "获取草稿商品")

@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.ContractApprovalSheetEntity;
 /**
  * 合同申请单表
  */
-public interface ContractApprovalSheetMapper extends BaseMapper<ContractApprovalSheetEntity> {
+public interface ContractApprovalSheetMapper extends BaseSuperMapper<ContractApprovalSheetEntity> {
 
 }

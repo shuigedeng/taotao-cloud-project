@@ -10,7 +10,7 @@ import com.taotao.cloud.promotion.biz.model.entity.CouponActivity;
  * @version 2022.04
  * @since 2022-04-27 16:36:32
  */
-public interface CouponActivityMapper extends BaseMapper<CouponActivity> {
+public interface CouponActivityMapper extends BaseSuperMapper<CouponActivity> {
 
 
 }

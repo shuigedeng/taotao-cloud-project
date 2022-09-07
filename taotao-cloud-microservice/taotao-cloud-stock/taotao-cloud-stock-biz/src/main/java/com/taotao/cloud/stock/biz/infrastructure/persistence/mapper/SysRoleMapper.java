@@ -16,7 +16,7 @@ import java.util.Map;
  * @date 2021-02-14
  */
 @Mapper
-public interface SysRoleMapper extends BaseMapper<SysRoleDO> {
+public interface SysRoleMapper extends BaseSuperMapper<SysRoleDO> {
 
     /**
      * 分页查询

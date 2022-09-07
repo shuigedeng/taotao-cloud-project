@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
 import com.taotao.cloud.goods.api.model.query.BrandPageQuery;
@@ -70,9 +70,9 @@ public class BrandManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<BrandVO>> page(@Validated BrandPageQuery page) {
+	public Result<PageResult<BrandVO>> page(@Validated BrandPageQuery page) {
 		IPage<Brand> brandPage = brandService.getBrandsByPage(page);
-		return Result.success(PageModel.convertMybatisPage(brandPage, BrandVO.class));
+		return Result.success(PageResult.convertMybatisPage(brandPage, BrandVO.class));
 	}
 
 	@Operation(summary = "新增品牌", description = "新增品牌")

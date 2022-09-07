@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.StaffOvertimeEntity;
 /**
  * 员工加班申请表
  */
-public interface StaffOvertimeMapper extends BaseMapper<StaffOvertimeEntity> {
+public interface StaffOvertimeMapper extends BaseSuperMapper<StaffOvertimeEntity> {
 
 }

@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.WorkContactSheetEntity;
 /**
  * 工作联系单
  */
-public interface WorkContactSheetMapper extends BaseMapper<WorkContactSheetEntity> {
+public interface WorkContactSheetMapper extends BaseSuperMapper<WorkContactSheetEntity> {
 
 }

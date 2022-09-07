@@ -6,5 +6,5 @@ import com.taotao.cloud.workflow.biz.form.entity.ApplyBanquetEntity;
 /**
  * 宴请申请
  */
-public interface ApplyBanquetMapper extends BaseMapper<ApplyBanquetEntity> {
+public interface ApplyBanquetMapper extends BaseSuperMapper<ApplyBanquetEntity> {
 }

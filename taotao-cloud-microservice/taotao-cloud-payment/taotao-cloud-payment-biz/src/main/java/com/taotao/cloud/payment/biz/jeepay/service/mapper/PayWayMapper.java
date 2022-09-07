@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.PayWay;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface PayWayMapper extends BaseMapper<PayWay> {
+public interface PayWayMapper extends BaseSuperMapper<PayWay> {
 
 }

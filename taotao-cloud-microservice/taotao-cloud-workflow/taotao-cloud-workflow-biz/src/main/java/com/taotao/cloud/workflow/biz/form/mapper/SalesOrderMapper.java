@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.SalesOrderEntity;
 /**
  * 销售订单
  */
-public interface SalesOrderMapper extends BaseMapper<SalesOrderEntity> {
+public interface SalesOrderMapper extends BaseSuperMapper<SalesOrderEntity> {
 
 }

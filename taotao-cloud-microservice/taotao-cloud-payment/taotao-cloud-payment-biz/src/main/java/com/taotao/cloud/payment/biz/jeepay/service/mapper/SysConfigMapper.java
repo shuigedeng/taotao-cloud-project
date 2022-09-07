@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.SysConfig;
  * @author [mybatis plus generator]
  * @since 2020-07-29
  */
-public interface SysConfigMapper extends BaseMapper<SysConfig> {
+public interface SysConfigMapper extends BaseSuperMapper<SysConfig> {
 
 }

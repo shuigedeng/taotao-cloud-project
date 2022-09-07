@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Update;
 /**
  * 店铺数据处理层
  */
-public interface StoreMapper extends BaseMapper<Store> {
+public interface StoreMapper extends BaseSuperMapper<Store> {
 
 	/**
 	 * 获取店铺详细

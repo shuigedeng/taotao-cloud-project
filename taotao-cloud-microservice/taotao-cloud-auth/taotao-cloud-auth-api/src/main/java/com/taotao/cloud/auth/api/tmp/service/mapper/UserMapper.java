@@ -6,7 +6,7 @@
 //
 ///**
 // */
-//public interface UserMapper extends BaseMapper<AuthUser> {
+//public interface UserMapper extends BaseSuperMapper<AuthUser> {
 //
 //    List<Integer> roleIds(@Param("userId") Integer userId);
 //

@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
@@ -70,11 +70,11 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageModel<OrderComplaintBaseVO>> get(OrderComplaintPageQuery orderComplaintPageQuery) {
+	public Result<PageResult<OrderComplaintBaseVO>> get(OrderComplaintPageQuery orderComplaintPageQuery) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		orderComplaintPageQuery.setStoreId(storeId);
 		IPage<OrderComplaint> orderComplainPage = orderComplaintService.getOrderComplainByPage(orderComplaintPageQuery);
-		return Result.success(PageModel.convertMybatisPage(orderComplainPage, OrderComplaintBaseVO.class));
+		return Result.success(PageResult.convertMybatisPage(orderComplainPage, OrderComplaintBaseVO.class));
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话")

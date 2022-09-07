@@ -11,6 +11,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.MchApp;
  * @author [mybatis plus generator]
  * @since 2021-06-15
  */
-public interface MchAppMapper extends BaseMapper<MchApp> {
+public interface MchAppMapper extends BaseSuperMapper<MchApp> {
 
 }

@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Param;
  * @author [mybatis plus generator]
  * @since 2020-06-13
  */
-public interface SysEntitlementMapper extends BaseMapper<SysEntitlement> {
+public interface SysEntitlementMapper extends BaseSuperMapper<SysEntitlement> {
 
     Integer userHasLeftMenu(@Param("userId") Long userId, @Param("sysType") String sysType);
 

@@ -33,7 +33,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.03
  * @since 2022-03-29 08:56:04
  */
-public interface IColumnInfoMapper extends BaseMapper<ColumnConfig> {
+public interface IColumnInfoMapper extends BaseSuperMapper<ColumnConfig> {
 
 	@Select("""
 		<script>

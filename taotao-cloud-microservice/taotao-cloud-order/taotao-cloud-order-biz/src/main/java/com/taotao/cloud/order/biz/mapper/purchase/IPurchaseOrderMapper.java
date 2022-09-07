@@ -7,7 +7,7 @@ import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrder;
 /**
  * 采购单数据处理层
  */
-public interface IPurchaseOrderMapper extends BaseMapper<PurchaseOrder> {
+public interface IPurchaseOrderMapper extends BaseSuperMapper<PurchaseOrder> {
 
 
 }

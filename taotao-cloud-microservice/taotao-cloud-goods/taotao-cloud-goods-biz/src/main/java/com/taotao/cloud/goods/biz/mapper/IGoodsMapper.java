@@ -19,7 +19,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:56:00
  */
-public interface IGoodsMapper extends BaseMapper<Goods> {
+public interface IGoodsMapper extends BaseSuperMapper<Goods> {
 
 	/**
 	 * 根据店铺ID获取商品ID列表

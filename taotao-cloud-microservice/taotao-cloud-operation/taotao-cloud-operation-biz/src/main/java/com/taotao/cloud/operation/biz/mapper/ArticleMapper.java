@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 文章数据处理层
  */
-public interface ArticleMapper extends BaseMapper<Article> {
+public interface ArticleMapper extends BaseSuperMapper<Article> {
 
 	/**
 	 * 获取文章VO分页

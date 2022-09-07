@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
 * @date 2021/2/26 
 */
 @Mapper
-public interface AliPaymentMapper extends BaseMapper<AliPayment> {
+public interface AliPaymentMapper extends BaseSuperMapper<AliPayment> {
 }

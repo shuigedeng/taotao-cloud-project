@@ -15,7 +15,7 @@ import java.util.Map;
  * @date 2021-02-14
  */
 @Mapper
-public interface SysPermissionMapper extends BaseMapper<SysPermissionDO> {
+public interface SysPermissionMapper extends BaseSuperMapper<SysPermissionDO> {
 
     /**
      * 查询权限

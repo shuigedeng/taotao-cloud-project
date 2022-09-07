@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.FinishedProductEntity;
 /**
  * 成品入库单
  */
-public interface FinishedProductMapper extends BaseMapper<FinishedProductEntity> {
+public interface FinishedProductMapper extends BaseSuperMapper<FinishedProductEntity> {
 
 }

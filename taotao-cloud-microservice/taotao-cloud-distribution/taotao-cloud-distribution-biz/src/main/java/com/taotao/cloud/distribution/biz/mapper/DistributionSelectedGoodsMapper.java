@@ -10,5 +10,5 @@ import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
  * @version 2022.04
  * @since 2022-04-22 16:24:53
  */
-public interface DistributionSelectedGoodsMapper extends BaseMapper<DistributionSelectedGoods> {
+public interface DistributionSelectedGoodsMapper extends BaseSuperMapper<DistributionSelectedGoods> {
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.api.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -39,10 +39,10 @@ public class MemberEvaluationStoreController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageModel<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
+	public Result<PageResult<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
 		evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
 		IPage<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationService.queryPage(evaluationPageQuery);
-		return Result.success(PageModel.convertMybatisPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
+		return Result.success(PageResult.convertMybatisPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")

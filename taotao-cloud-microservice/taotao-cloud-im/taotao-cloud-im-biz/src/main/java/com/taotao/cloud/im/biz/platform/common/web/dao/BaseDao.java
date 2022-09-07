@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Dao基类
  */
-public interface BaseDao<T> extends BaseMapper<T> {
+public interface BaseDao<T> extends BaseSuperMapper<T> {
 
     /**
      * 批量插入 仅适用于mysql

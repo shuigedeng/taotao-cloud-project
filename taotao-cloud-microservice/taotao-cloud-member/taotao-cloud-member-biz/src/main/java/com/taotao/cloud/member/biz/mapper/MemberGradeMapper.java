@@ -21,6 +21,6 @@ import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 /**
  * 会员等级数据层
  */
-public interface MemberGradeMapper extends BaseMapper<MemberGrade> {
+public interface MemberGradeMapper extends BaseSuperMapper<MemberGrade> {
 
 }

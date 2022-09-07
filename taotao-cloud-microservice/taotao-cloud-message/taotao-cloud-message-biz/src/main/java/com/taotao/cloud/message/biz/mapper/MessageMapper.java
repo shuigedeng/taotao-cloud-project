@@ -6,6 +6,6 @@ import com.taotao.cloud.message.biz.entity.Message;
 /**
  * 管理端发送消息内容数据处理层
  */
-public interface MessageMapper extends BaseMapper<Message> {
+public interface MessageMapper extends BaseSuperMapper<Message> {
 
 }

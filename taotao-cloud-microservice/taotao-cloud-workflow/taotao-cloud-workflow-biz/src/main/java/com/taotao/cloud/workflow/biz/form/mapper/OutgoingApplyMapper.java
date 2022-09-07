@@ -5,6 +5,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * 外出申请单
  */
-public interface OutgoingApplyMapper extends BaseMapper<OutgoingApplyEntity> {
+public interface OutgoingApplyMapper extends BaseSuperMapper<OutgoingApplyEntity> {
 
 }

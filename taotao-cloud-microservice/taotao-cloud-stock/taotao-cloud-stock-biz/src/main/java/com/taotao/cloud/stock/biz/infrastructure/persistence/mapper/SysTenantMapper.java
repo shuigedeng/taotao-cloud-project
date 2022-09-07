@@ -15,7 +15,7 @@ import java.util.Map;
  * @date 2021-02-14
  */
 @Mapper
-public interface SysTenantMapper extends BaseMapper<SysTenantDO> {
+public interface SysTenantMapper extends BaseSuperMapper<SysTenantDO> {
 
     /**
      * 分页查询租户

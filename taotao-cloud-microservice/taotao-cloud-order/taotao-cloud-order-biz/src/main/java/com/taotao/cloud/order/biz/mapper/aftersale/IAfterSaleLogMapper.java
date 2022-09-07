@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-04-28 08:49:21
  */
 @Mapper
-public interface IAfterSaleLogMapper extends BaseMapper<AfterSaleLog> {
+public interface IAfterSaleLogMapper extends BaseSuperMapper<AfterSaleLog> {
 
 }

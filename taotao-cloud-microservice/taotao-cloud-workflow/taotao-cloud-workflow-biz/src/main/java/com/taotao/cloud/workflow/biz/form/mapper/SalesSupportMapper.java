@@ -5,6 +5,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * 销售支持表
  */
-public interface SalesSupportMapper extends BaseMapper<SalesSupportEntity> {
+public interface SalesSupportMapper extends BaseSuperMapper<SalesSupportEntity> {
 
 }

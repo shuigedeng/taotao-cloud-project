@@ -32,6 +32,6 @@ import com.joolun.weixin.entity.WxUser;
  * @author www.joolun.com
  * @date 2019-03-25 15:39:39
  */
-public interface WxUserMapper extends BaseMapper<WxUser> {
+public interface WxUserMapper extends BaseSuperMapper<WxUser> {
 
 }

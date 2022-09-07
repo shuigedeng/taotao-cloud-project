@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.service;
 
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.elasticsearch.model.LogicDelDto;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
 
@@ -36,10 +36,10 @@ public interface IQueryService {
 	 *
 	 * @param indexName 索引名
 	 * @param searchDto 搜索Dto
-	 * @return {@link PageModel }<{@link String }>
+	 * @return {@link PageResult }<{@link String }>
 	 * @since 2022-04-27 17:24:08
 	 */
-	PageModel<String> strQuery(String indexName, SearchDto searchDto) throws IOException;
+	PageResult<String> strQuery(String indexName, SearchDto searchDto) throws IOException;
 
 	/**
 	 * 查询文档列表
@@ -47,10 +47,10 @@ public interface IQueryService {
 	 * @param indexName   索引名
 	 * @param searchDto   搜索Dto
 	 * @param logicDelDto 逻辑删除Dto
-	 * @return {@link PageModel }<{@link String }>
+	 * @return {@link PageResult }<{@link String }>
 	 * @since 2022-04-27 17:24:08
 	 */
-	PageModel<String> strQuery(String indexName, SearchDto searchDto, LogicDelDto logicDelDto)
+	PageResult<String> strQuery(String indexName, SearchDto searchDto, LogicDelDto logicDelDto)
 		throws IOException;
 
 	/**

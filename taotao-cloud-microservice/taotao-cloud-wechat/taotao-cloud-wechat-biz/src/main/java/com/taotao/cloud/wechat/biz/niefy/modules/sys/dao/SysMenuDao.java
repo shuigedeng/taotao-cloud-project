@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L)//缓存五分钟过期
-public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
+public interface SysMenuDao extends BaseSuperMapper<SysMenuEntity> {
 
     /**
      * 根据父菜单，查询子菜单

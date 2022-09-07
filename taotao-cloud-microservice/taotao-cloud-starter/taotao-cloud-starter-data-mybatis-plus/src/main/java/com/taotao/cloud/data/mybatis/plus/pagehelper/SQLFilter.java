@@ -18,7 +18,7 @@ public class SQLFilter {
 			"declare", "alert",
 			"drop"};        // 判断是否包含非法字符
 		for (String keyword : keywords) {
-			if (str.indexOf(keyword) != -1) {
+			if (str.contains(keyword)) {
 				throw new RuntimeException("包含非法字符");
 			}
 		}

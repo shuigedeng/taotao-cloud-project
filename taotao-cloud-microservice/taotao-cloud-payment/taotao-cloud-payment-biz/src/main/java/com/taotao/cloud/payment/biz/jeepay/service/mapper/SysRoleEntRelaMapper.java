@@ -29,7 +29,7 @@ import java.util.List;
  * @author [mybatis plus generator]
  * @since 2020-06-13
  */
-public interface SysRoleEntRelaMapper extends BaseMapper<SysRoleEntRela> {
+public interface SysRoleEntRelaMapper extends BaseSuperMapper<SysRoleEntRela> {
 
     List<String> selectEntIdsByUserId(@Param("userId") Long userId, @Param("sysType") String sysType);
 

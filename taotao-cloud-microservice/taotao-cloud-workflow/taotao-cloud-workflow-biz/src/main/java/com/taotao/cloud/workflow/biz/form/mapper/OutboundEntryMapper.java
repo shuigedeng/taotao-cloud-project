@@ -7,6 +7,6 @@ import com.taotao.cloud.workflow.biz.form.entity.OutboundEntryEntity;
  * 出库单明细
  *
  */
-public interface OutboundEntryMapper extends BaseMapper<OutboundEntryEntity> {
+public interface OutboundEntryMapper extends BaseSuperMapper<OutboundEntryEntity> {
 
 }

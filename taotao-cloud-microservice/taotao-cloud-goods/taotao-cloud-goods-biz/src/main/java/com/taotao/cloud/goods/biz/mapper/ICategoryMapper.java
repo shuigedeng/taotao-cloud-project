@@ -11,6 +11,6 @@ import com.taotao.cloud.goods.biz.model.entity.Category;
  * @version 2022.04
  * @since 2022-04-27 16:55:28
  */
-public interface ICategoryMapper extends BaseMapper<Category> {
+public interface ICategoryMapper extends BaseSuperMapper<Category> {
 
 }

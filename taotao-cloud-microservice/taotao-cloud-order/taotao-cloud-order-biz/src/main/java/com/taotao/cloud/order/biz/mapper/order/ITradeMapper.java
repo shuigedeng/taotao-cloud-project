@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Update;
 /**
  * 交易数据处理层
  */
-public interface ITradeMapper extends BaseMapper<Trade> {
+public interface ITradeMapper extends BaseSuperMapper<Trade> {
 
 	/**
 	 * 修改交易金额

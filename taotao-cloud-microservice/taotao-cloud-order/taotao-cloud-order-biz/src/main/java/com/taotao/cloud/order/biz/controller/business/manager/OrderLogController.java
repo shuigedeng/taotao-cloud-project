@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.query.order.OrderLogPageQuery;
@@ -46,9 +46,9 @@ public class OrderLogController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageModel<OrderLogVO>> getByPage(OrderLogPageQuery orderLogPageQuery) {
+	public Result<PageResult<OrderLogVO>> getByPage(OrderLogPageQuery orderLogPageQuery) {
 		IPage<OrderLog> orderLogPage = orderLogService.getByPage(orderLogPageQuery)
-		return Result.success(PageModel.convertMybatisPage(orderLogPage, OrderLogVO.class));
+		return Result.success(PageResult.convertMybatisPage(orderLogPage, OrderLogVO.class));
 	}
 
 }

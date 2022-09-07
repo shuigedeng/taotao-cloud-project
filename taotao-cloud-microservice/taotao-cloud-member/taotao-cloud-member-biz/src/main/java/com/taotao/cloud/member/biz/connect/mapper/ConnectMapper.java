@@ -6,6 +6,6 @@ import com.taotao.cloud.member.biz.connect.entity.Connect;
 /**
  * 联合登陆数据处理层
  */
-public interface ConnectMapper extends BaseMapper<Connect> {
+public interface ConnectMapper extends BaseSuperMapper<Connect> {
 
 }

@@ -7,6 +7,6 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
  * 流程委托
  *
  */
-public interface FlowDelegateMapper extends BaseMapper<FlowDelegateEntity> {
+public interface FlowDelegateMapper extends BaseSuperMapper<FlowDelegateEntity> {
 
 }

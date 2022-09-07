@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
 * @date 2022/3/19 
 */
 @Mapper
-public interface VoucherLogMapper extends BaseMapper<VoucherLog> {
+public interface VoucherLogMapper extends BaseSuperMapper<VoucherLog> {
 }

@@ -10,7 +10,7 @@ import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
  * @version 2022.04
  * @since 2022-04-27 16:55:31
  */
-public interface ICategoryParameterGroupMapper extends BaseMapper<CategoryParameterGroup> {
+public interface ICategoryParameterGroupMapper extends BaseSuperMapper<CategoryParameterGroup> {
 
 
 }

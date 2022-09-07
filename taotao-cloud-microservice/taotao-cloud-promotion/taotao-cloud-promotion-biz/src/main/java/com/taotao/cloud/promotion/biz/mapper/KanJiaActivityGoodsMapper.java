@@ -16,7 +16,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.04
  * @since 2022-04-27 16:36:49
  */
-public interface KanJiaActivityGoodsMapper extends BaseMapper<KanjiaActivityGoods> {
+public interface KanJiaActivityGoodsMapper extends BaseSuperMapper<KanjiaActivityGoods> {
 
 	/**
 	 * 获取砍价商品VO分页

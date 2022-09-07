@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -42,10 +42,10 @@ public class MemberAddressController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{memberId}")
-	public Result<PageModel<MemberAddressVO>> getByPage(@Validated PageParam page,
-														@Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") Long memberId) {
+	public Result<PageResult<MemberAddressVO>> getByPage(@Validated PageParam page,
+                                                         @Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") Long memberId) {
 		IPage<MemberAddress> addressByMember = memberAddressService.getAddressByMember(page, memberId);
-		return Result.success(PageModel.convertMybatisPage(addressByMember, MemberAddressVO.class));
+		return Result.success(PageResult.convertMybatisPage(addressByMember, MemberAddressVO.class));
 	}
 
 	@Operation(summary = "删除会员收件地址", description = "删除会员收件地址")

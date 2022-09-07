@@ -10,5 +10,5 @@ import com.taotao.cloud.goods.biz.model.entity.CustomWords;
  * @version 2022.04
  * @since 2022-04-27 16:55:50
  */
-public interface ICustomWordsMapper extends BaseMapper<CustomWords> {
+public interface ICustomWordsMapper extends BaseSuperMapper<CustomWords> {
 }

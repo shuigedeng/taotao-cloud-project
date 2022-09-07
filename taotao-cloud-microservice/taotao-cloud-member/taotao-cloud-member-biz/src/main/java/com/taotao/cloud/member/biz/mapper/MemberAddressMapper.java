@@ -22,6 +22,6 @@ import com.taotao.cloud.member.biz.model.entity.MemberAddress;
  * 会员地址数据处理层
  *
  */
-public interface MemberAddressMapper extends BaseMapper<MemberAddress> {
+public interface MemberAddressMapper extends BaseSuperMapper<MemberAddress> {
 
 }

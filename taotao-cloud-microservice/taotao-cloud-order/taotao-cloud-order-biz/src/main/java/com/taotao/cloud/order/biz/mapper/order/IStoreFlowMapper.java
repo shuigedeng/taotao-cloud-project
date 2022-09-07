@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 商家订单流水数据处理层
  */
-public interface IStoreFlowMapper extends BaseMapper<StoreFlow> {
+public interface IStoreFlowMapper extends BaseSuperMapper<StoreFlow> {
 
 	/**
 	 * 获取结算单的入账流水

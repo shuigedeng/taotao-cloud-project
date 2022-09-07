@@ -7,5 +7,5 @@ import com.taotao.cloud.operation.biz.model.entity.Special;
 /**
  * 专题活动数据处理层
  */
-public interface SpecialMapper extends BaseMapper<Special> {
+public interface SpecialMapper extends BaseSuperMapper<Special> {
 }

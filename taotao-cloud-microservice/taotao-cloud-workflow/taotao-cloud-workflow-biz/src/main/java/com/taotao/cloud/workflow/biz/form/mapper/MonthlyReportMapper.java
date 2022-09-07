@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.MonthlyReportEntity;
 /**
  * 月工作总结
  */
-public interface MonthlyReportMapper extends BaseMapper<MonthlyReportEntity> {
+public interface MonthlyReportMapper extends BaseSuperMapper<MonthlyReportEntity> {
 
 }

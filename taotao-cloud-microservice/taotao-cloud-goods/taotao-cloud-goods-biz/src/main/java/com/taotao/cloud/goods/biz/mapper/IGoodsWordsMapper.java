@@ -10,6 +10,6 @@ import com.taotao.cloud.goods.biz.model.entity.GoodsWords;
  * @version 2022.04
  * @since 2022-04-27 16:57:31
  */
-public interface IGoodsWordsMapper extends BaseMapper<GoodsWords> {
+public interface IGoodsWordsMapper extends BaseSuperMapper<GoodsWords> {
 
 }

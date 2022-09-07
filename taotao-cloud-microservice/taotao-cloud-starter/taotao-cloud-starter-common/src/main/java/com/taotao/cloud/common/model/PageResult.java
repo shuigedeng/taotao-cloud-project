@@ -36,7 +36,7 @@ import org.springframework.data.domain.Page;
  * @since 2021-09-02 19:09:19
  */
 @Schema(description = "分页结果对象")
-public record PageModel<R>(
+public record PageResult<R>(
 	/**
 	 * 总条数
 	 */
@@ -66,7 +66,7 @@ public record PageModel<R>(
 	@Serial
 	private static final long serialVersionUID = -275582248840137389L;
 
-	public static <R, T> PageModel<R> convertJpaPage(Page<T> page, Class<R> rClass) {
+	public static <R, T> PageResult<R> convertJpaPage(Page<T> page, Class<R> rClass) {
 		return convertJpaPage(page, rClass, new HashMap<>());
 	}
 
@@ -77,8 +77,8 @@ public record PageModel<R>(
 	 * @return 分页对象
 	 * @since 2021-09-02 19:10:45
 	 */
-	public static <R, T> PageModel<R> convertJpaPage(Page<T> page, Class<R> rClass,
-		Map<String, String> configMap) {
+	public static <R, T> PageResult<R> convertJpaPage(Page<T> page, Class<R> rClass,
+													  Map<String, String> configMap) {
 		List<T> records = page.getContent();
 		List<R> collect = Optional.of(records)
 			.orElse(new ArrayList<>())
@@ -94,7 +94,7 @@ public record PageModel<R>(
 		);
 	}
 
-	public static <R, T> PageModel<R> convertMybatisPage(IPage<T> page, Class<R> rClass) {
+	public static <R, T> PageResult<R> convertMybatisPage(IPage<T> page, Class<R> rClass) {
 		return convertMybatisPage(page, rClass, new HashMap<>());
 	}
 
@@ -105,8 +105,8 @@ public record PageModel<R>(
 	 * @return 分页对象
 	 * @since 2021-09-02 19:10:49
 	 */
-	public static <R, T> PageModel<R> convertMybatisPage(IPage<T> page, Class<R> rClass,
-		Map<String, String> configMap) {
+	public static <R, T> PageResult<R> convertMybatisPage(IPage<T> page, Class<R> rClass,
+														  Map<String, String> configMap) {
 		List<T> records = page.getRecords();
 		List<R> collect = Optional.ofNullable(records)
 			.orElse(new ArrayList<>())
@@ -134,12 +134,12 @@ public record PageModel<R>(
 	 * @return 分页对象
 	 * @since 2021-09-02 19:11:10
 	 */
-	public static <R> PageModel<R> of(
+	public static <R> PageResult<R> of(
 		long totalSize,
 		int totalPage,
 		int currentPage,
 		int pageSize,
 		List<R> data) {
-		return new PageModel<>(totalSize, totalPage, currentPage, pageSize, data);
+		return new PageResult<>(totalSize, totalPage, currentPage, pageSize, data);
 	}
 }

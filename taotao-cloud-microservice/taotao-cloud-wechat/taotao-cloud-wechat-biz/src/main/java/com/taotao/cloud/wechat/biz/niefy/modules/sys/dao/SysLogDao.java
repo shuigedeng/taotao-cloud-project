@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Mark sunlightcs@gmail.com
  */
 @Mapper
-public interface SysLogDao extends BaseMapper<SysLogEntity> {
+public interface SysLogDao extends BaseSuperMapper<SysLogEntity> {
 
 }

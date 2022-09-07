@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 店铺接收到消息发送数据处理层
  */
-public interface StoreMessageMapper extends BaseMapper<StoreMessage> {
+public interface StoreMessageMapper extends BaseSuperMapper<StoreMessage> {
 
 	/**
 	 * 店铺消息分页

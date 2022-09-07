@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2021-02-14
  */
 @Mapper
-public interface SysUserRoleMapper extends BaseMapper<SysUserRoleDO> {
+public interface SysUserRoleMapper extends BaseSuperMapper<SysUserRoleDO> {
 
     /**
      * 根据角色ID，批量删除

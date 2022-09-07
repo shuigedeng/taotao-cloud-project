@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L)//缓存五分钟过期
-public interface SysUserRoleDao extends BaseMapper<SysUserRoleEntity> {
+public interface SysUserRoleDao extends BaseSuperMapper<SysUserRoleEntity> {
 
     /**
      * 根据用户ID，获取角色ID列表

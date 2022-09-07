@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Delete;
 /**
  * 微信消息 Dao层
  */
-public interface WechatMessageMapper extends BaseMapper<WechatMessage> {
+public interface WechatMessageMapper extends BaseSuperMapper<WechatMessage> {
 
 	/**
 	 * 删除微信消息

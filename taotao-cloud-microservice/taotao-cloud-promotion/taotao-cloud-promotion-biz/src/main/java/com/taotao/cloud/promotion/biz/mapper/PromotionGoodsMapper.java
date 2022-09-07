@@ -17,7 +17,7 @@ import java.util.Date;
  * @version 2022.04
  * @since 2022-04-27 16:37:11
  */
-public interface PromotionGoodsMapper extends BaseMapper<PromotionGoods> {
+public interface PromotionGoodsMapper extends BaseSuperMapper<PromotionGoods> {
 
 
 	/**

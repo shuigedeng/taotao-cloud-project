@@ -26,6 +26,6 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.PayInterfaceDefine;
  * @author [mybatis plus generator]
  * @since 2021-04-27
  */
-public interface PayInterfaceDefineMapper extends BaseMapper<PayInterfaceDefine> {
+public interface PayInterfaceDefineMapper extends BaseSuperMapper<PayInterfaceDefine> {
 
 }

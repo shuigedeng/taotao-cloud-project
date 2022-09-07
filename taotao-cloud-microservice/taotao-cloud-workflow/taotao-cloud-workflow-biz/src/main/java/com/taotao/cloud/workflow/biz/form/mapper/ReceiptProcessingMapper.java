@@ -6,6 +6,6 @@ import com.taotao.cloud.workflow.biz.form.entity.ReceiptProcessingEntity;
 /**
  * 收文处理表
  */
-public interface ReceiptProcessingMapper extends BaseMapper<ReceiptProcessingEntity> {
+public interface ReceiptProcessingMapper extends BaseSuperMapper<ReceiptProcessingEntity> {
 
 }

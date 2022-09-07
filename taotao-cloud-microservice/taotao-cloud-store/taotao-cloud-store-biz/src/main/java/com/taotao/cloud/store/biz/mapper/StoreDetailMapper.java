@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 店铺详细数据处理层
  */
-public interface StoreDetailMapper extends BaseMapper<StoreDetail> {
+public interface StoreDetailMapper extends BaseSuperMapper<StoreDetail> {
 
 	/**
 	 * 获取店铺详情VO

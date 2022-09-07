@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 * @date 2021/7/27 
 */
 @Mapper
-public interface PaymentMapper extends BaseMapper<Payment> {
+public interface PaymentMapper extends BaseSuperMapper<Payment> {
 
 
 }

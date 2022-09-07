@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Param;
  * @author [mybatis plus generator]
  * @since 2020-06-13
  */
-public interface SysUserAuthMapper extends BaseMapper<SysUserAuth> {
+public interface SysUserAuthMapper extends BaseSuperMapper<SysUserAuth> {
 
     SysUserAuth selectByLogin(@Param("identifier")String identifier,
                               @Param("identityType")Byte identityType, @Param("sysType")String sysType);
