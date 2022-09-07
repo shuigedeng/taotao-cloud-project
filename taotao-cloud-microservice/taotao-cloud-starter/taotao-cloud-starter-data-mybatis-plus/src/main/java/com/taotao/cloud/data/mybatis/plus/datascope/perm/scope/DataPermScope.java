@@ -1,6 +1,7 @@
 package com.taotao.cloud.data.mybatis.plus.datascope.perm.scope;
 
 import cn.bootx.starter.data.perm.code.DataScopeEnum;
+import com.taotao.cloud.data.mybatis.plus.datascope.perm.code.DataScopeEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

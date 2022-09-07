@@ -16,14 +16,19 @@
 
 package com.taotao.cloud.data.mybatis.plus.injector;
 
+import cn.hutool.core.util.ArrayUtil;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn;
 import com.taotao.cloud.data.mybatis.plus.injector.methods.InsertBatch;
 import com.taotao.cloud.data.mybatis.plus.injector.methods.InsertIgnore;
 import com.taotao.cloud.data.mybatis.plus.injector.methods.InsertIgnoreBatch;
 import com.taotao.cloud.data.mybatis.plus.injector.methods.Replace;
 import com.taotao.cloud.data.mybatis.plus.injector.methods.ReplaceBatch;
+import com.taotao.cloud.data.mybatis.plus.injector.methods.UpdateAllById;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,6 +50,13 @@ public class MateSqlInjector extends DefaultSqlInjector {
 		methodList.add(new Replace());
 		methodList.add(new ReplaceBatch());
 		methodList.addAll(super.getMethodList(mapperClass, tableInfo));
+
+		//增加自定义方法
+		methodList.add(new InsertBatchSomeColumn(i -> i.getFieldFill() != FieldFill.UPDATE));
+		methodList.add(new UpdateAllById(field -> !ArrayUtil.containsAny(new String[]{
+			"create_time", "created_by"
+		}, field.getColumn())));
+
 		return Collections.unmodifiableList(methodList);
 	}
 }

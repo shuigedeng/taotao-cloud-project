@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.model.entity.system.Job;
+import com.taotao.cloud.sys.biz.model.entity.system.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * CompanyMapper
@@ -27,6 +26,6 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 
-public interface IJobRepository extends JpaRepository<Job, Long> {
+public interface IJobRepository extends JpaRepository<Position, Long> {
 
 }

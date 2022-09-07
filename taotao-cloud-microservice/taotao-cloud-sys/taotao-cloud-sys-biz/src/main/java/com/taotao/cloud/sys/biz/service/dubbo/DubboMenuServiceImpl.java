@@ -17,9 +17,9 @@ package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboMenuService;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
-import com.taotao.cloud.sys.biz.convert.MenuConvert;
+import com.taotao.cloud.sys.biz.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.mapper.IMenuMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.Menu;
+import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.model.entity.system.QMenu;
 import com.taotao.cloud.sys.biz.repository.cls.MenuRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IMenuRepository;
@@ -40,7 +40,7 @@ import org.springframework.stereotype.Service;
 @Service
 @DubboService(interfaceClass = IDubboMenuService.class, validation = "true")
 public class DubboMenuServiceImpl extends
-	BaseSuperServiceImpl<IMenuMapper, Menu, MenuRepository, IMenuRepository, Long>
+	BaseSuperServiceImpl<IMenuMapper, Resource, MenuRepository, IMenuRepository, Long>
 	implements IDubboMenuService {
 
 	@Autowired
@@ -50,8 +50,8 @@ public class DubboMenuServiceImpl extends
 
 	@Override
 	public List<MenuQueryRequest> queryAllById(Long id) {
-		List<Menu> all = ir().findAll();
-		return MenuConvert.INSTANCE.convertListRequest(all);
+		List<Resource> all = ir().findAll();
+		return ResourceConvert.INSTANCE.convertListRequest(all);
 	}
 
 

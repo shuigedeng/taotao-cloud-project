@@ -1,9 +1,8 @@
 package com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.aop;
 
-import com.fxz.common.dataPermission.annotation.DataPermission;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.annotation.DataPermission;
 import org.aopalliance.aop.Advice;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractPointcutAdvisor;
 import org.springframework.aop.support.ComposablePointcut;
@@ -15,8 +14,6 @@ import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
  *
  * @author fxz
  */
-@Getter
-@EqualsAndHashCode(callSuper = true)
 public class DataPermissionAnnotationAdvisor extends AbstractPointcutAdvisor {
 
 	private final Advice advice;
@@ -39,4 +36,15 @@ public class DataPermissionAnnotationAdvisor extends AbstractPointcutAdvisor {
 		return new ComposablePointcut(classPointcut).union(methodPointcut);
 	}
 
+	@NotNull
+	@Override
+	public Advice getAdvice() {
+		return advice;
+	}
+
+	@NotNull
+	@Override
+	public Pointcut getPointcut() {
+		return pointcut;
+	}
 }

@@ -1,8 +1,8 @@
 package com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.dept.config;
 
-import com.fxz.common.dataPermission.dept.rule.DeptDataPermissionRule;
-import com.fxz.common.dataPermission.dept.rule.DeptDataPermissionRuleCustomizer;
-import com.fxz.common.dataPermission.dept.service.DeptDataPermissionFrameworkService;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.dept.rule.DeptDataPermissionRule;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.dept.rule.DeptDataPermissionRuleCustomizer;
+import com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.dept.service.DeptDataPermissionFrameworkService;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +16,12 @@ import java.util.List;
  * @author fxz
  */
 @AutoConfiguration
-// @ConditionalOnBean(value = { DeptDataPermissionFrameworkService.class})
+@ConditionalOnBean(value = { DeptDataPermissionFrameworkService.class})
 public class DeptDataPermissionAutoConfiguration {
 
 	@Bean
 	public DeptDataPermissionRule deptDataPermissionRule(DeptDataPermissionFrameworkService service,
-			List<DeptDataPermissionRuleCustomizer> customizers) {
+														 List<DeptDataPermissionRuleCustomizer> customizers) {
 		// 创建 DeptDataPermissionRule 对象
 		DeptDataPermissionRule rule = new DeptDataPermissionRule(service);
 		// 补全表配置

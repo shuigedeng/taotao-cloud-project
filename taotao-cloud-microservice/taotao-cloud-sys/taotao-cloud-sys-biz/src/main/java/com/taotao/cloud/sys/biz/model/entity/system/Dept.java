@@ -59,7 +59,7 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 	/**
 	 * 上级部门id
 	 */
-	@Column(name = "parent_id", columnDefinition = "int not null default 0 comment '上级部门id'")
+	@Column(name = "parent_id", columnDefinition = "bigint not null default 0 comment '上级部门id'")
 	private Long parentId;
 
 	/**
@@ -67,6 +67,18 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 	 */
 	@Column(name = "remark", columnDefinition = "varchar(255) comment '备注'")
 	private String remark;
+
+	/**
+	 * 备注
+	 */
+	@Column(name = "id_tree", columnDefinition = "varchar(4096) comment 'id树，逗号连接'")
+	private String idTree;
+
+	/**
+	 * 当前深度
+	 */
+	@Column(name = "depth", columnDefinition = "int not null default 0 comment '当前深度 已1开始'")
+	private Integer depth;
 
 	/**
 	 * 排序值
@@ -79,6 +91,7 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
+
 	@Builder
 	public Dept(Long id, LocalDateTime createTime, Long createBy,
 		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,

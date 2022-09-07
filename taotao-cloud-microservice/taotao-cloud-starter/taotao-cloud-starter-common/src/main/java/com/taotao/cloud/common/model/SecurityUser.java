@@ -21,6 +21,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -73,14 +74,6 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 */
 	private String mobile;
 	/**
-	 * 部门id
-	 */
-	private String deptId;
-	/**
-	 * 岗位id
-	 */
-	private String jobId;
-	/**
 	 * email
 	 */
 	private String email;
@@ -112,17 +105,48 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 * type 1.平台用户 2.商户用户(个人用户/企业用户)
 	 */
 	private Integer type;
-
+	/**
+	 * 商店id
+	 */
+	private Long storeId;
+	
+	/**
+	 * 公司id
+	 */
+	private List<String> companyIds;
+	/**
+	 * 部门id
+	 */
+	private List<String> deptIds;
+	/**
+	 * 岗位id
+	 */
+	private List<String> jobIds;
 	/**
 	 * 权限列表
 	 */
 	private Set<String> permissions;
 	/**
-	 * 角色列表
+	 * 角色id
 	 */
-	private Set<String> roles;
+	private Set<String> roleIds;
+	/**
+	 * 角色code
+	 */
+	private Set<String> roleCodes;
+	/**
+	 * 租户标识
+	 */
+	private String tenant;
+	/**
+	 * 租户的超级管理员
+	 */
+	private boolean superAdmin;
+	/**
+	 * 租户的每一个公司的管理员
+	 */
+	private boolean admin;
 
-	private Long storeId;
 
 	public SecurityUser() {
 
@@ -135,19 +159,19 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 * @param username    用户名称
 	 * @param password    密码
 	 * @param permissions 权限
-	 * @param roles       权限
+	 * @param roleCodes       权限code
 	 * @since 2021-09-02 19:18:58
 	 */
 	public SecurityUser(Long userId,
 		String username,
 		String password,
 		Set<String> permissions,
-		Set<String> roles) {
+		Set<String> roleCodes) {
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.permissions = permissions;
-		this.roles = roles;
+		this.roleCodes = roleCodes;
 	}
 
 	/***
@@ -157,8 +181,8 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new HashSet<>();
-		if (!CollUtil.isEmpty(roles)) {
-			roles.parallelStream()
+		if (!CollUtil.isEmpty(roleCodes)) {
+			roleCodes.parallelStream()
 				.forEach(role -> authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + role)));
 		}
 
@@ -235,22 +259,6 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		this.password = password;
 	}
 
-	public String getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(String deptId) {
-		this.deptId = deptId;
-	}
-
-	public String getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -323,14 +331,6 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		this.permissions = permissions;
 	}
 
-	public Set<String> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<String> roles) {
-		this.roles = roles;
-	}
-
 	public String getAccount() {
 		return account;
 	}
@@ -367,6 +367,70 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		return new SecurityUserBuilder();
 	}
 
+	public List<String> getCompanyIds() {
+		return companyIds;
+	}
+
+	public void setCompanyIds(List<String> companyIds) {
+		this.companyIds = companyIds;
+	}
+
+	public List<String> getDeptIds() {
+		return deptIds;
+	}
+
+	public void setDeptIds(List<String> deptIds) {
+		this.deptIds = deptIds;
+	}
+
+	public List<String> getJobIds() {
+		return jobIds;
+	}
+
+	public void setJobIds(List<String> jobIds) {
+		this.jobIds = jobIds;
+	}
+
+	public Set<String> getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(Set<String> roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public Set<String> getRoleCodes() {
+		return roleCodes;
+	}
+
+	public void setRoleCodes(Set<String> roleCodes) {
+		this.roleCodes = roleCodes;
+	}
+
+	public boolean isSuperAdmin() {
+		return superAdmin;
+	}
+
+	public void setSuperAdmin(boolean superAdmin) {
+		this.superAdmin = superAdmin;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public String getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(String tenant) {
+		this.tenant = tenant;
+	}
+
 	@Override
 	public void eraseCredentials() {
 		this.password = null;
@@ -381,14 +445,13 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		}
 	}
 
-	//获取是否长期有效的token
+	//获取是否长期有效的token 此函数可删
     public boolean getLongTerm() {
 		return false;
     }
 
-
-    public static final class SecurityUserBuilder {
-
+	public static final class SecurityUserBuilder {
+		private String ROLE_PREFIX;
 		private Long userId;
 		private String account;
 		private String username;
@@ -396,8 +459,6 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		private String password;
 		private String phone;
 		private String mobile;
-		private String deptId;
-		private String jobId;
 		private String email;
 		private Integer sex;
 		private String birthday;
@@ -406,104 +467,124 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		private String lockFlag;
 		private String delFlag;
 		private Integer type;
+		private Long storeId;
+		private List<String> companyIds;
+		private List<String> deptIds;
+		private List<String> jobIds;
 		private Set<String> permissions;
-		private Set<String> roles;
+		private Set<String> roleIds;
+		private Set<String> roleCodes;
 
 		private SecurityUserBuilder() {
 		}
 
-		public SecurityUserBuilder userId(Long userId) {
+		public SecurityUserBuilder withUserId(Long userId) {
 			this.userId = userId;
 			return this;
 		}
 
-		public SecurityUserBuilder account(String account) {
+		public SecurityUserBuilder withAccount(String account) {
 			this.account = account;
 			return this;
 		}
 
-		public SecurityUserBuilder username(String username) {
+		public SecurityUserBuilder withUsername(String username) {
 			this.username = username;
 			return this;
 		}
 
-		public SecurityUserBuilder nickname(String nickname) {
+		public SecurityUserBuilder withNickname(String nickname) {
 			this.nickname = nickname;
 			return this;
 		}
 
-		public SecurityUserBuilder password(String password) {
+		public SecurityUserBuilder withPassword(String password) {
 			this.password = password;
 			return this;
 		}
 
-		public SecurityUserBuilder phone(String phone) {
+		public SecurityUserBuilder withPhone(String phone) {
 			this.phone = phone;
 			return this;
 		}
 
-		public SecurityUserBuilder mobile(String mobile) {
+		public SecurityUserBuilder withMobile(String mobile) {
 			this.mobile = mobile;
 			return this;
 		}
 
-		public SecurityUserBuilder deptId(String deptId) {
-			this.deptId = deptId;
-			return this;
-		}
-
-		public SecurityUserBuilder jobId(String jobId) {
-			this.jobId = jobId;
-			return this;
-		}
-
-		public SecurityUserBuilder email(String email) {
+		public SecurityUserBuilder withEmail(String email) {
 			this.email = email;
 			return this;
 		}
 
-		public SecurityUserBuilder sex(Integer sex) {
+		public SecurityUserBuilder withSex(Integer sex) {
 			this.sex = sex;
 			return this;
 		}
 
-		public SecurityUserBuilder birthday(String birthday) {
+		public SecurityUserBuilder withBirthday(String birthday) {
 			this.birthday = birthday;
 			return this;
 		}
 
-		public SecurityUserBuilder avatar(String avatar) {
+		public SecurityUserBuilder withAvatar(String avatar) {
 			this.avatar = avatar;
 			return this;
 		}
 
-		public SecurityUserBuilder status(Integer status) {
+		public SecurityUserBuilder withStatus(Integer status) {
 			this.status = status;
 			return this;
 		}
 
-		public SecurityUserBuilder lockFlag(String lockFlag) {
+		public SecurityUserBuilder withLockFlag(String lockFlag) {
 			this.lockFlag = lockFlag;
 			return this;
 		}
 
-		public SecurityUserBuilder delFlag(String delFlag) {
+		public SecurityUserBuilder withDelFlag(String delFlag) {
 			this.delFlag = delFlag;
 			return this;
 		}
 
-		public SecurityUserBuilder type(Integer type) {
+		public SecurityUserBuilder withType(Integer type) {
 			this.type = type;
 			return this;
 		}
 
-		public SecurityUserBuilder permissions(Set<String> permissions) {
+		public SecurityUserBuilder withStoreId(Long storeId) {
+			this.storeId = storeId;
+			return this;
+		}
+
+		public SecurityUserBuilder withCompanyIds(List<String> companyIds) {
+			this.companyIds = companyIds;
+			return this;
+		}
+
+		public SecurityUserBuilder withDeptIds(List<String> deptIds) {
+			this.deptIds = deptIds;
+			return this;
+		}
+
+		public SecurityUserBuilder withJobIds(List<String> jobIds) {
+			this.jobIds = jobIds;
+			return this;
+		}
+
+		public SecurityUserBuilder withPermissions(Set<String> permissions) {
 			this.permissions = permissions;
 			return this;
 		}
 
-		public SecurityUserBuilder roles(Set<String> roles) {
-			this.roles = roles;
+		public SecurityUserBuilder withRoleIds(Set<String> roleIds) {
+			this.roleIds = roleIds;
+			return this;
+		}
+
+		public SecurityUserBuilder withRoleCodes(Set<String> roleCodes) {
+			this.roleCodes = roleCodes;
 			return this;
 		}
 
@@ -516,8 +597,6 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 			securityUser.setPassword(password);
 			securityUser.setPhone(phone);
 			securityUser.setMobile(mobile);
-			securityUser.setDeptId(deptId);
-			securityUser.setJobId(jobId);
 			securityUser.setEmail(email);
 			securityUser.setSex(sex);
 			securityUser.setBirthday(birthday);
@@ -526,8 +605,13 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 			securityUser.setLockFlag(lockFlag);
 			securityUser.setDelFlag(delFlag);
 			securityUser.setType(type);
+			securityUser.setStoreId(storeId);
+			securityUser.setCompanyIds(companyIds);
+			securityUser.setDeptIds(deptIds);
+			securityUser.setJobIds(jobIds);
 			securityUser.setPermissions(permissions);
-			securityUser.setRoles(roles);
+			securityUser.setRoleIds(roleIds);
+			securityUser.setRoleCodes(roleCodes);
 			return securityUser;
 		}
 	}

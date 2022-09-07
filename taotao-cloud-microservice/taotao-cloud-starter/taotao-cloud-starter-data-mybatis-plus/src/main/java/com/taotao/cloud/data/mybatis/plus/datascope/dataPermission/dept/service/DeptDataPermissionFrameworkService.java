@@ -1,10 +1,5 @@
 package com.taotao.cloud.data.mybatis.plus.datascope.dataPermission.dept.service;
 
-import com.fxz.common.core.entity.DeptDataPermissionRespDTO;
-import com.fxz.common.security.entity.FxzAuthUser;
-import com.fxz.system.feign.RemoteRoleService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
@@ -12,9 +7,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
  *
  * @author fxz
  */
-@Slf4j
 @AutoConfiguration
-@RequiredArgsConstructor
 public class DeptDataPermissionFrameworkService {
 
 	private final RemoteRoleService remoteRoleService;

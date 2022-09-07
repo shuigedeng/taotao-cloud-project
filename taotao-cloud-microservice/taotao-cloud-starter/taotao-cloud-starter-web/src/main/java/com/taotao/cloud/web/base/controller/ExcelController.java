@@ -30,7 +30,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
+import com.taotao.cloud.data.mybatis.plus.query.conditions.query.QueryWrap;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;

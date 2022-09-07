@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.cls;
 
-import com.taotao.cloud.sys.biz.model.entity.system.Job;
+import com.taotao.cloud.sys.biz.model.entity.system.Position;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
@@ -28,10 +28,10 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class JobRepository  extends BaseSuperRepository<Job, Long> {
+public class JobRepository  extends BaseSuperRepository<Position, Long> {
 
 	public JobRepository(EntityManager em) {
-		super(Job.class, em);
+		super(Position.class, em);
 	}
 
 }

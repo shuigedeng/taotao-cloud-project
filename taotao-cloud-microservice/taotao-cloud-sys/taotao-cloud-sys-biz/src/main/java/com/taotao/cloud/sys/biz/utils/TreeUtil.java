@@ -21,7 +21,8 @@ import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
 import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuMetaVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.biz.model.entity.system.Menu;
+import com.taotao.cloud.sys.biz.model.entity.system.Resource;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -136,12 +137,12 @@ public class TreeUtil {
 	/**
 	 * 对象转树节点
 	 *
-	 * @param menus 系统菜单
+	 * @param resources 系统菜单
 	 * @return 菜单树形节点
 	 * @since 2020/10/21 11:23
 	 */
-	public static List<MenuTreeVO> buildTree(List<Menu> menus) {
-		return menus.stream()
+	public static List<MenuTreeVO> buildTree(List<Resource> resources) {
+		return resources.stream()
 			.filter(Objects::nonNull)
 			.map(sysMenu -> {
 				MenuTreeVO tree = OrikaUtils.convert(sysMenu, MenuTreeVO.class);

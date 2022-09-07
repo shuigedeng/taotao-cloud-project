@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.system.RoleMenu;
+import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * IRoleMenuMapper
@@ -27,6 +26,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021/10/13 22:50
  */
 
-public interface IRoleMenuMapper extends BaseSuperMapper<RoleMenu, Long> {
+public interface IRoleMenuMapper extends BaseSuperMapper<RoleResource, Long> {
 
 }
