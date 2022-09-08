@@ -17,16 +17,17 @@ package com.taotao.cloud.common.model;
 
 import cn.hutool.core.collection.CollUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.CredentialsContainer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.springframework.security.core.CredentialsContainer;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * 用户手机号和账号密码 身份权限认证类 登陆身份认证
@@ -109,7 +110,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 * 商店id
 	 */
 	private Long storeId;
-	
+
 	/**
 	 * 公司id
 	 */
@@ -159,14 +160,14 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	 * @param username    用户名称
 	 * @param password    密码
 	 * @param permissions 权限
-	 * @param roleCodes       权限code
+	 * @param roleCodes   权限code
 	 * @since 2021-09-02 19:18:58
 	 */
 	public SecurityUser(Long userId,
-		String username,
-		String password,
-		Set<String> permissions,
-		Set<String> roleCodes) {
+						String username,
+						String password,
+						Set<String> permissions,
+						Set<String> roleCodes) {
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
@@ -418,6 +419,9 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	public boolean isAdmin() {
 		return admin;
 	}
+	public boolean getAdmin() {
+		return admin;
+	}
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
@@ -446,9 +450,9 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	}
 
 	//获取是否长期有效的token 此函数可删
-    public boolean getLongTerm() {
+	public boolean getLongTerm() {
 		return false;
-    }
+	}
 
 	public static final class SecurityUserBuilder {
 		private String ROLE_PREFIX;

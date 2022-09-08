@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import net.sf.jsqlparser.expression.ValueListExpression;
 
 /**
- * @author zuihou
- * @version v1.0
- * @date 2021/5/17 8:52 下午
- * @create [2021/5/17 8:52 下午 ] [zuihou] [初始创建]
+ *  [初始创建]
  */
 public interface MultiTenantLineHandler extends TenantLineHandler {
     /**

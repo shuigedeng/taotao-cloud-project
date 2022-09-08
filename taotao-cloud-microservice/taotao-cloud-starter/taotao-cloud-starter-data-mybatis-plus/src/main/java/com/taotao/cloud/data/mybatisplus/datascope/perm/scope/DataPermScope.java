@@ -1,18 +1,12 @@
 package com.taotao.cloud.data.mybatisplus.datascope.perm.scope;
 
 import com.taotao.cloud.data.mybatisplus.datascope.perm.code.DataScopeEnum;
-import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.util.Set;
 
 /**
 * 数据权限范围参数
-* @author xxm
-* @date 2021/12/22
 */
-@Data
-@Accessors(chain = true)
 public class DataPermScope {
 
     /**
@@ -26,4 +20,27 @@ public class DataPermScope {
     /** 对应用户ID集合 */
     private Set<Long> UserScopeIds;
 
+	public DataScopeEnum getScopeType() {
+		return scopeType;
+	}
+
+	public void setScopeType(DataScopeEnum scopeType) {
+		this.scopeType = scopeType;
+	}
+
+	public Set<Long> getDeptScopeIds() {
+		return deptScopeIds;
+	}
+
+	public void setDeptScopeIds(Set<Long> deptScopeIds) {
+		this.deptScopeIds = deptScopeIds;
+	}
+
+	public Set<Long> getUserScopeIds() {
+		return UserScopeIds;
+	}
+
+	public void setUserScopeIds(Set<Long> userScopeIds) {
+		UserScopeIds = userScopeIds;
+	}
 }

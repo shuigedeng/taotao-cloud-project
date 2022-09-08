@@ -1,20 +1,16 @@
 package com.taotao.cloud.data.mybatisplus.datascope.perm.configuration;
 
-import cn.bootx.common.mybatisplus.interceptor.MpInterceptor;
-import cn.bootx.starter.data.perm.scope.DataScopeInterceptor;
-import cn.bootx.starter.data.perm.select.SelectFieldPermInterceptor;
-import lombok.RequiredArgsConstructor;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.scope.DataScopeInterceptor;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.select.SelectFieldPermInterceptor;
+import com.taotao.cloud.data.mybatisplus.interceptor.MpInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**   
 * 数据权限配置
-* @author xxm  
-* @date 2021/12/21 
 */
 @Configuration
-@RequiredArgsConstructor
 public class DatePermConfiguration {
 
     /**
@@ -25,6 +21,7 @@ public class DatePermConfiguration {
     public MpInterceptor dataPermInterceptorMp(DataScopeInterceptor dataScopeInterceptor) {
         return new MpInterceptor(dataScopeInterceptor);
     }
+
     /**
      * 查询字段权限插件
      */

@@ -5,8 +5,10 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.data.mybatisplus.base.entity.MpSuperEntity;
 import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.dept.service.DeptDataPermissionFrameworkService;
 import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.rule.DataPermissionRule;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
@@ -81,46 +83,46 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 			return null;
 		}
 
-		loginUser.
-
-		// 获得用户的数据权限
-		DeptDataPermissionRespDTO deptDataPermission = deptDataPermissionService.getDeptDataPermission(loginUser);
-		if (deptDataPermission == null) {
-			log.error("[getExpression][LoginUser({}) 获取数据权限为 null]", loginUser);
-			throw new NullPointerException(String.format("LoginUser(%d) Table(%s/%s) 未返回数据权限", loginUser.getUserId(),
-					tableName, tableAlias.getName()));
-		}
-
-		// 情况一，如果是 ALL 可查看全部，则无需拼接条件
-		if (deptDataPermission.getAll()) {
-			return null;
-		}
-
-		// 情况二，即不能查看部门，又不能查看自己，则说明 100% 无权限
-		if (CollUtil.isEmpty(deptDataPermission.getDeptIds()) && Boolean.FALSE.equals(deptDataPermission.getSelf())) {
-			// WHERE null = null，可以保证返回的数据为空
-			return new EqualsTo(null, null);
-		}
-
-		// 情况三，拼接 Dept 和 User 的条件，最后组合
-		Expression deptExpression = this.buildDeptExpression(tableName, tableAlias, deptDataPermission.getDeptIds());
-		Expression userExpression = this.buildUserExpression(tableName, tableAlias, deptDataPermission.getSelf(),
-				loginUser.getUserId());
-
-		if (deptExpression == null && userExpression == null) {
-			log.warn("[getExpression][LoginUser({}) Table({}/{}) DeptDataPermission({}) 构建的条件为空]", loginUser, tableName,
-					tableAlias, deptDataPermission);
-			return EXPRESSION_NULL;
-		}
-		if (deptExpression == null) {
-			return userExpression;
-		}
-		if (userExpression == null) {
-			return deptExpression;
-		}
+		// todo 需要修改
+		// // 获得用户的数据权限
+		// DeptDataPermissionRespDTO deptDataPermission = deptDataPermissionService.getDeptDataPermission(loginUser);
+		// if (deptDataPermission == null) {
+		// 	log.error("[getExpression][LoginUser({}) 获取数据权限为 null]", loginUser);
+		// 	throw new NullPointerException(String.format("LoginUser(%d) Table(%s/%s) 未返回数据权限", loginUser.getUserId(),
+		// 			tableName, tableAlias.getName()));
+		// }
+		//
+		// // 情况一，如果是 ALL 可查看全部，则无需拼接条件
+		// if (deptDataPermission.getAll()) {
+		// 	return null;
+		// }
+		//
+		// // 情况二，即不能查看部门，又不能查看自己，则说明 100% 无权限
+		// if (CollUtil.isEmpty(deptDataPermission.getDeptIds()) && Boolean.FALSE.equals(deptDataPermission.getSelf())) {
+		// 	// WHERE null = null，可以保证返回的数据为空
+		// 	return new EqualsTo(null, null);
+		// }
+		//
+		// // 情况三，拼接 Dept 和 User 的条件，最后组合
+		// Expression deptExpression = this.buildDeptExpression(tableName, tableAlias, deptDataPermission.getDeptIds());
+		// Expression userExpression = this.buildUserExpression(tableName, tableAlias, deptDataPermission.getSelf(),
+		// 		loginUser.getUserId());
+		//
+		// if (deptExpression == null && userExpression == null) {
+		// 	log.warn("[getExpression][LoginUser({}) Table({}/{}) DeptDataPermission({}) 构建的条件为空]", loginUser, tableName,
+		// 			tableAlias, deptDataPermission);
+		// 	return EXPRESSION_NULL;
+		// }
+		// if (deptExpression == null) {
+		// 	return userExpression;
+		// }
+		// if (userExpression == null) {
+		// 	return deptExpression;
+		// }
 
 		// 目前，如果有指定部门 + 可查看自己，采用 OR 条件。即，WHERE dept_id IN ? OR user_id = ?
-		return new OrExpression(deptExpression, userExpression);
+		// return new OrExpression(deptExpression, userExpression);
+		return new OrExpression();
 	}
 
 	/**
@@ -143,7 +145,7 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 		}
 
 		// 拼接条件
-		return new InExpression(MyBatisUtils.buildColumn(tableName, tableAlias, columnName),
+		return new InExpression(MpUtils.buildColumn(tableName, tableAlias, columnName),
 				new ExpressionList(deptIds.stream().map(LongValue::new).collect(Collectors.toList())));
 	}
 
@@ -168,20 +170,20 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 		}
 
 		// 拼接条件
-		return new EqualsTo(MyBatisUtils.buildColumn(tableName, tableAlias, columnName), new LongValue(userId));
+		return new EqualsTo(MpUtils.buildColumn(tableName, tableAlias, columnName), new LongValue(userId));
 	}
 
 	/**
 	 * entityClass对应的表 以DEPT_COLUMN_NAME为查询条件
 	 */
-	public void addDeptColumn(Class<? extends BaseEntity> entityClass) {
+	public void addDeptColumn(Class<? extends MpSuperEntity> entityClass) {
 		addDeptColumn(entityClass, DEPT_COLUMN_NAME);
 	}
 
 	/**
 	 * entityClass对应的表 以columnName列为查询条件
 	 */
-	public void addDeptColumn(Class<? extends BaseEntity> entityClass, String columnName) {
+	public void addDeptColumn(Class<? extends MpSuperEntity> entityClass, String columnName) {
 		String tableName = TableInfoHelper.getTableInfo(entityClass).getTableName();
 		addDeptColumn(tableName, columnName);
 	}
@@ -197,14 +199,14 @@ public class DeptDataPermissionRule implements DataPermissionRule {
 	/**
 	 * entityClass对应的实体类以USER_COLUMN_NAME列来查询
 	 */
-	public void addUserColumn(Class<? extends BaseEntity> entityClass) {
+	public void addUserColumn(Class<? extends MpSuperEntity> entityClass) {
 		addUserColumn(entityClass, USER_COLUMN_NAME);
 	}
 
 	/**
 	 * entityClass对应的表 以columnName列为查询条件
 	 */
-	public void addUserColumn(Class<? extends BaseEntity> entityClass, String columnName) {
+	public void addUserColumn(Class<? extends MpSuperEntity> entityClass, String columnName) {
 		String tableName = TableInfoHelper.getTableInfo(entityClass).getTableName();
 		addUserColumn(tableName, columnName);
 	}

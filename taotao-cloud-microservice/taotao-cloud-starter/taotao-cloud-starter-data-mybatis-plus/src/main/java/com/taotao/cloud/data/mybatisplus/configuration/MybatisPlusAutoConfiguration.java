@@ -15,38 +15,27 @@
  */
 package com.taotao.cloud.data.mybatisplus.configuration;
 
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
-import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
-import com.taotao.cloud.data.mybatis.plus.datascope.DataScopeInterceptor;
+import com.taotao.cloud.data.mybatisplus.datascope.DataScopeInterceptor;
 import com.taotao.cloud.data.mybatisplus.handler.objecthandler.AutoFieldMetaObjectHandler;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.like.FullLikeTypeHandler;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.like.LeftLikeTypeHandler;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.like.RightLikeTypeHandler;
 import com.taotao.cloud.data.mybatisplus.injector.MateSqlInjector;
-import com.taotao.cloud.data.mybatisplus.interceptor.SqlLogInterceptor;
+import com.taotao.cloud.data.mybatisplus.interceptor.MpInterceptor;
 import com.taotao.cloud.data.mybatisplus.interceptor.SqlCollectorInterceptor;
-import com.taotao.cloud.data.mybatisplus.interceptor.SqlPaginationInnerInterceptor;
-import com.taotao.cloud.data.mybatisplus.tenant.SchemaInterceptor;
-import com.taotao.cloud.data.mybatisplus.utils.DatabaseProperties;
-import com.taotao.cloud.data.mybatisplus.tenant.MultiTenantType;
+import com.taotao.cloud.data.mybatisplus.interceptor.SqlLogInterceptor;
 import com.taotao.cloud.data.mybatisplus.properties.MybatisPlusAutoFillProperties;
 import com.taotao.cloud.data.mybatisplus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatisplus.properties.TenantProperties;
-
-import net.sf.jsqlparser.expression.Expression;
-import net.sf.jsqlparser.expression.StringValue;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.apache.ibatis.type.EnumTypeHandler;
@@ -60,6 +49,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -83,10 +74,6 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	@Autowired(required = false)
 	private TenantLineInnerInterceptor tenantLineInnerInterceptor;
 
-	/**
-	 * 单页分页条数限制(默认无限制,参见 插件#handlerLimit 方法)
-	 */
-	private static final Long MAX_LIMIT = 1000L;
 
 	public MybatisPlusAutoConfiguration(
 		TenantProperties tenantProperties,
@@ -143,33 +130,26 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 * https://mybatis.plus/guide/interceptor.html#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F-%E4%BB%A5%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6%E4%B8%BE%E4%BE%8B
 	 */
 	@Bean
-	public MybatisPlusInterceptor mybatisPlusInterceptor() {
+	public MybatisPlusInterceptor mybatisPlusInterceptor(List<MpInterceptor> interceptors) {
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 
-		//5.多租户插件
-		interceptor.addInnerInterceptor(getTenantInnerInterceptor());
+		interceptors.stream()
+			.sorted(Comparator.comparing(MpInterceptor::getSortNo))
+			.map(MpInterceptor::getInnerInterceptor)
+			.forEach(interceptor::addInnerInterceptor);
 
-		//6.数据权限插件
-		if (tenantProperties.getDataScope()) {
-			interceptor.addInnerInterceptor(getDataScopeInnerInterceptor());
-		}
-
-		//3.乐观锁插件
-		interceptor.addInnerInterceptor(getOptimisticLockerInnerInterceptor());
+		// //5.多租户插件
+		// interceptor.addInnerInterceptor(getTenantInnerInterceptor());
+		//
+		// //6.数据权限插件
+		// if (tenantProperties.getDataScope()) {
+		// 	interceptor.addInnerInterceptor(getDataScopeInnerInterceptor());
+		// }
 
 		// if (tenantProperties.getEnabled() && Objects.nonNull(tenantLineInnerInterceptor)) {
 		// 	// 多租户插件
 		// 	interceptor.addInnerInterceptor(tenantLineInnerInterceptor);
 		// }
-
-		//1.分页插件
-		interceptor.addInnerInterceptor(getPaginationInnerInterceptor());
-
-		//2.防止全表更新与删除插件
-		interceptor.addInnerInterceptor(getBlockAttackInnerInterceptor());
-
-		//4.sql规范插件
-		interceptor.addInnerInterceptor(getIllegalSQLInnerInterceptor());
 
 		return interceptor;
 	}
@@ -254,77 +234,47 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	}
 
 
-	public void getTenantInnerInterceptor() {
-		LogUtils.info("检测到 lamp.database.multiTenantType={}，已启用 {} 模式", databaseProperties.getMultiTenantType().name(), databaseProperties.getMultiTenantType().getDescribe());
-		if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
-			MultiTenantType.SCHEMA.name(), MultiTenantType.SCHEMA_COLUMN.name())) {
-			ArgumentAssert.notNull(databaseProperties.getDbType(), "SCHEMA 模式请在mysql.yml、oracle.yml、sqlserver.yml中配置: {}.dbType", DatabaseProperties.PREFIX);
-
-			// SCHEMA 动态表名插件
-			SchemaInterceptor schemaInterceptor = new SchemaInterceptor(databaseProperties.getTenantDatabasePrefix(), databaseProperties.getOwner(), databaseProperties.getDbType());
-			interceptor.addInnerInterceptor(schemaInterceptor);
-		}
-
-		if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
-			MultiTenantType.COLUMN.name(), MultiTenantType.SCHEMA_COLUMN.name(), MultiTenantType.DATASOURCE_COLUMN.name())) {
-			// COLUMN 模式 多租户插件
-			TenantLineInnerInterceptor tli = new TenantLineInnerInterceptor();
-			tli.setTenantLineHandler(new TenantLineHandler() {
-				@Override
-				public String getTenantIdColumn() {
-					return databaseProperties.getTenantIdColumn();
-				}
-
-				@Override
-				public boolean ignoreTable(String tableName) {
-					return databaseProperties.getIgnoreTables() != null && databaseProperties.getIgnoreTables().contains(tableName);
-				}
-
-				@Override
-				public Expression getTenantId() {
-					return MultiTenantType.COLUMN.eq(databaseProperties.getMultiTenantType()) ?
-						new StringValue(ContextUtil.getTenant()) :
-						new StringValue(ContextUtil.getSubTenant());
-				}
-			});
-			interceptor.addInnerInterceptor(tli);
-		}
-
-
+	public InnerInterceptor getTenantInnerInterceptor() {
+		// LogUtils.info("检测到 lamp.database.multiTenantType={}，已启用 {} 模式", databaseProperties.getMultiTenantType().name(), databaseProperties.getMultiTenantType().getDescribe());
+		// if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
+		// 	MultiTenantType.SCHEMA.name(), MultiTenantType.SCHEMA_COLUMN.name())) {
+		// 	ArgumentAssert.notNull(databaseProperties.getDbType(), "SCHEMA 模式请在mysql.yml、oracle.yml、sqlserver.yml中配置: {}.dbType", DatabaseProperties.PREFIX);
+		//
+		// 	// SCHEMA 动态表名插件
+		// 	SchemaInterceptor schemaInterceptor = new SchemaInterceptor(databaseProperties.getTenantDatabasePrefix(), databaseProperties.getOwner(), databaseProperties.getDbType());
+		// 	interceptor.addInnerInterceptor(schemaInterceptor);
+		// }
+		//
+		// if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
+		// 	MultiTenantType.COLUMN.name(), MultiTenantType.SCHEMA_COLUMN.name(), MultiTenantType.DATASOURCE_COLUMN.name())) {
+		// 	// COLUMN 模式 多租户插件
+		// 	TenantLineInnerInterceptor tli = new TenantLineInnerInterceptor();
+		// 	tli.setTenantLineHandler(new TenantLineHandler() {
+		// 		@Override
+		// 		public String getTenantIdColumn() {
+		// 			return databaseProperties.getTenantIdColumn();
+		// 		}
+		//
+		// 		@Override
+		// 		public boolean ignoreTable(String tableName) {
+		// 			return databaseProperties.getIgnoreTables() != null && databaseProperties.getIgnoreTables().contains(tableName);
+		// 		}
+		//
+		// 		@Override
+		// 		public Expression getTenantId() {
+		// 			return MultiTenantType.COLUMN.eq(databaseProperties.getMultiTenantType()) ?
+		// 				new StringValue(ContextUtil.getTenant()) :
+		// 				new StringValue(ContextUtil.getSubTenant());
+		// 		}
+		// 	});
+		// 	interceptor.addInnerInterceptor(tli);
+		// }
+		return null;
 	}
 
-	public DataScopeInterceptor getDataScopeInnerInterceptor(){
+	public DataScopeInterceptor getDataScopeInnerInterceptor() {
 		return new DataScopeInterceptor();
 	}
 
-
-	public PaginationInnerInterceptor getPaginationInnerInterceptor(){
-		// 分页插件
-		SqlPaginationInnerInterceptor paginationInterceptor = new SqlPaginationInnerInterceptor();
-		// 单页分页条数限制
-		paginationInterceptor.setMaxLimit(MAX_LIMIT);
-		// 数据库类型
-		// if (databaseProperties.getDbType() != null) {
-		// 	paginationInterceptor.setDbType(DbType.MYSQL);
-		// }
-		paginationInterceptor.setDbType(DbType.MYSQL);
-		// 溢出总页数后是否进行处理
-		paginationInterceptor.setOverflow(true);
-		// 生成 countSql 优化掉 join 现在只支持 left join
-		paginationInterceptor.setOptimizeJoin(true);
-		return paginationInterceptor;
-	}
-
-	public BlockAttackInnerInterceptor getBlockAttackInnerInterceptor(){
-		return new BlockAttackInnerInterceptor();
-	}
-
-	public OptimisticLockerInnerInterceptor getOptimisticLockerInnerInterceptor(){
-		return new OptimisticLockerInnerInterceptor();
-	}
-
-	public IllegalSQLInnerInterceptor getIllegalSQLInnerInterceptor(){
-		return new IllegalSQLInnerInterceptor();
-	}
 
 }

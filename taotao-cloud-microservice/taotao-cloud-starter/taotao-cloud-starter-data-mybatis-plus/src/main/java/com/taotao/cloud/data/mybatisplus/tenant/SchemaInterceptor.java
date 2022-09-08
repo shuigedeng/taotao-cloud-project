@@ -36,13 +36,14 @@ public class SchemaInterceptor implements InnerInterceptor {
 
     protected String changeTable(String sql) {
         // 想要 执行sql时， 不切换到 lamp_base_{TENANT} 库, 请直接返回null
-        String tenantCode = ContextUtil.getTenant();
-        String database = ContextUtil.getDatabase();
-        if (StrUtil.isEmpty(tenantCode)) {
-            return sql;
-        }
+        // String tenantCode = ContextUtil.getTenant();
+        // String database = ContextUtil.getDatabase();
+        // if (StrUtil.isEmpty(tenantCode)) {
+        //     return sql;
+        // }
 
-        String schemaName = StrUtil.format("{}_{}", StrUtil.isEmpty(database) ? tenantDatabasePrefix : database, tenantCode);
+        // String schemaName = StrUtil.format("{}_{}", StrUtil.isEmpty(database) ? tenantDatabasePrefix : database, tenantCode);
+		String schemaName = "";
         if (StrUtil.isNotEmpty(owner)) {
             schemaName += "." + owner;
         }
@@ -70,6 +71,6 @@ public class SchemaInterceptor implements InnerInterceptor {
             LogUtils.debug("未替换前的sql: {}", mpBs.sql());
             mpBs.sql(this.changeTable(mpBs.sql()));
         }
-        ContextUtil.clearDatabase();
+        // ContextUtil.clearDatabase();
     }
 }

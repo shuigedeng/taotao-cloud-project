@@ -6,6 +6,7 @@ import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.db.DataPermiss
 import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.factory.DataPermissionRuleFactory;
 import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.factory.DataPermissionRuleFactoryImpl;
 import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.rule.DataPermissionRule;
+import com.taotao.cloud.data.mybatisplus.interceptor.MpInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
@@ -30,17 +31,15 @@ public class DataPermissionAutoConfiguration {
 	 * 配置拦截器 重写sql
 	 */
 	@Bean
-	public DataPermissionDatabaseInterceptor dataPermissionDatabaseInterceptor(MybatisPlusInterceptor interceptor,
-                                                                               List<DataPermissionRule> rules) {
+	public MpInterceptor dataPermissionDatabaseInterceptor(List<DataPermissionRule> rules) {
 		// 生效的数据权限规则
 		DataPermissionRuleFactory ruleFactory = dataPermissionRuleFactory(rules);
 
 		// 创建 DataPermissionDatabaseInterceptor 拦截器
-		DataPermissionDatabaseInterceptor inner = new DataPermissionDatabaseInterceptor(ruleFactory);
+		DataPermissionDatabaseInterceptor dataPermissionDatabaseInterceptor = new DataPermissionDatabaseInterceptor(ruleFactory);
 
 		// 需要加在首个，主要是为了在分页插件前面。这个是 MyBatis Plus 的规定
-		MyBatisUtils.addInterceptor(interceptor, inner, 0);
-		return inner;
+		return new MpInterceptor(dataPermissionDatabaseInterceptor, 5);
 	}
 
 	/**

@@ -1,18 +1,15 @@
 package com.taotao.cloud.data.mybatisplus.datascope.perm.scope;
 
-import cn.bootx.common.core.annotation.NestedPermission;
-import cn.bootx.common.core.annotation.Permission;
-import cn.bootx.common.core.code.CommonCode;
-import cn.bootx.common.core.entity.UserDetail;
-import cn.bootx.common.core.exception.BizException;
-import cn.bootx.starter.data.perm.code.DataScopeEnum;
-import cn.bootx.starter.data.perm.configuration.DataPermProperties;
-import cn.bootx.starter.data.perm.exception.NotLoginPermException;
-import cn.bootx.starter.data.perm.local.DataPermContextHolder;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.extension.parser.JsqlParserSupport;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
-import lombok.RequiredArgsConstructor;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.NestedPermission;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.Permission;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.code.DataScopeEnum;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.configuration.DataPermProperties;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.local.DataPermContextHolder;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 import net.sf.jsqlparser.expression.Parenthesis;
@@ -47,16 +44,20 @@ import java.util.stream.Collectors;
 
 /**
 * 数据权限处理器
-* @author xxm
-* @date 2021/12/22
 */
 @Component
-@RequiredArgsConstructor
 public class DataScopeInterceptor extends JsqlParserSupport implements InnerInterceptor {
+	public static final String CREATOR = "create_by";
+
     private final DataPermProperties dataPermProperties;
     private final DataPermScopeHandler dataPermScopeHandler;
 
-    @Override
+	public DataScopeInterceptor(DataPermProperties dataPermProperties, DataPermScopeHandler dataPermScopeHandler) {
+		this.dataPermProperties = dataPermProperties;
+		this.dataPermScopeHandler = dataPermScopeHandler;
+	}
+
+	@Override
     public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
         // 配置是否开启了权限控制
         if (!dataPermProperties.isEnableDataPerm()){
@@ -74,8 +75,10 @@ public class DataScopeInterceptor extends JsqlParserSupport implements InnerInte
         }
         // 检查是否已经登录和是否是超级管理员
         boolean admin = DataPermContextHolder.getUserDetail()
-                .map(UserDetail::isAdmin)
-                .orElseThrow(NotLoginPermException::new);
+			.map(SecurityUser::getAdmin)
+			.orElseThrow(() -> {
+				throw new BusinessException("用户未登录");
+			});
         // 是否超级管理员
         if (admin){
             return;
@@ -92,9 +95,8 @@ public class DataScopeInterceptor extends JsqlParserSupport implements InnerInte
         SelectBody selectBody = select.getSelectBody();
         if (selectBody instanceof PlainSelect) {
             this.setWhere((PlainSelect) selectBody);
-        } else if (selectBody instanceof SetOperationList) {
-            SetOperationList setOperationList = (SetOperationList) selectBody;
-            List<SelectBody> selectBodyList = setOperationList.getSelects();
+        } else if (selectBody instanceof SetOperationList setOperationList) {
+			List<SelectBody> selectBodyList = setOperationList.getSelects();
             selectBodyList.forEach(s -> this.setWhere((PlainSelect) s));
         }
     }
@@ -147,7 +149,7 @@ public class DataScopeInterceptor extends JsqlParserSupport implements InnerInte
             case ALL_SCOPE:
                 return where;
             default:{
-                throw new BizException("代码有问题");
+                throw new BusinessException("代码有问题");
             }
         }
 
@@ -159,9 +161,11 @@ public class DataScopeInterceptor extends JsqlParserSupport implements InnerInte
      */
     protected Expression selfScope(){
         Long userId = DataPermContextHolder.getUserDetail()
-                .map(UserDetail::getId)
-                .orElseThrow(NotLoginPermException::new);
-        return new EqualsTo(new Column(CommonCode.CREATOR),new LongValue(userId));
+			.map(SecurityUser::getUserId)
+			.orElseThrow(() -> {
+				throw new BusinessException("用户未登录");
+			});
+        return new EqualsTo(new Column(CREATOR),new LongValue(userId));
     }
 
     /**
@@ -169,14 +173,16 @@ public class DataScopeInterceptor extends JsqlParserSupport implements InnerInte
      */
     protected Expression userScope(Set<Long> userScopeIds){
         Long userId = DataPermContextHolder.getUserDetail()
-                .map(UserDetail::getId)
-                .orElseThrow(NotLoginPermException::new);
+			.map(SecurityUser::getUserId)
+			.orElseThrow(() -> {
+				throw new BusinessException("用户未登录");
+			});
         List<Expression> userExpressions = Optional.ofNullable(userScopeIds).orElse(new HashSet<>()).stream()
                 .map(LongValue::new)
                 .collect(Collectors.toList());
         // 追加自身
         userExpressions.add(new LongValue(userId));
-        return new InExpression(new Column(CommonCode.CREATOR), new ExpressionList(userExpressions));
+        return new InExpression(new Column(CREATOR), new ExpressionList(userExpressions));
     }
 
     /**
@@ -210,7 +216,7 @@ public class DataScopeInterceptor extends JsqlParserSupport implements InnerInte
         // 拼接子查询
         SubSelect subSelect = new SubSelect();
         subSelect.setSelectBody(plainSelect);
-        return new InExpression(new Column(CommonCode.CREATOR), subSelect);
+        return new InExpression(new Column(CREATOR), subSelect);
     }
 
     /**

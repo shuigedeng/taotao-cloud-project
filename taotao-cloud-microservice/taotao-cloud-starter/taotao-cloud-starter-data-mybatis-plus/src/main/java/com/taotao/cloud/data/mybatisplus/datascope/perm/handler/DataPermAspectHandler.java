@@ -1,12 +1,10 @@
 package com.taotao.cloud.data.mybatisplus.datascope.perm.handler;
 
-import cn.bootx.common.core.annotation.NestedPermission;
-import cn.bootx.common.core.annotation.Permission;
-import cn.bootx.common.spring.util.AopUtil;
-import cn.bootx.starter.auth.util.SecurityUtil;
-import cn.bootx.starter.data.perm.local.DataPermContextHolder;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.aop.AopUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.NestedPermission;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.Permission;
+import com.taotao.cloud.data.mybatisplus.datascope.perm.local.DataPermContextHolder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,13 +14,9 @@ import java.util.Objects;
 
 /**
 * 忽略权限控制切面处理类
-* @author xxm
-* @date 2021/12/22
 */
-@Slf4j
 @Aspect
 @Component
-@RequiredArgsConstructor
 public class DataPermAspectHandler {
 
     /**
@@ -32,13 +26,13 @@ public class DataPermAspectHandler {
     public Object doAround(ProceedingJoinPoint pjp, Permission permission) throws Throwable {
         Object obj = null;
         // 如果方法和类同时存在, 以方法上的注解为准
-        Permission methodAnnotation = AopUtil.getMethodAnnotation(pjp, Permission.class);
+        Permission methodAnnotation = AopUtils.getAnnotation(pjp, Permission.class);
         if (Objects.nonNull(methodAnnotation)){
             DataPermContextHolder.putPermission(methodAnnotation);
         } else {
             DataPermContextHolder.putPermission(permission);
         }
-        DataPermContextHolder.putUserDetail(SecurityUtil.getCurrentUser().orElse(null));
+        DataPermContextHolder.putUserDetail(SecurityUtils.getCurrentUserWithNull());
         try {
             obj = pjp.proceed();
         } finally {
@@ -51,13 +45,13 @@ public class DataPermAspectHandler {
     public Object doAround(ProceedingJoinPoint pjp, NestedPermission nestedPermission) throws Throwable {
         Object obj = null;
         // 如果方法和类同时存在, 以方法上的注解为准
-        NestedPermission methodAnnotation = AopUtil.getMethodAnnotation(pjp, NestedPermission.class);
+        NestedPermission methodAnnotation = AopUtils.getAnnotation(pjp, NestedPermission.class);
         if (Objects.nonNull(methodAnnotation)){
             DataPermContextHolder.putNestedPermission(methodAnnotation);
         } else {
             DataPermContextHolder.putNestedPermission(nestedPermission);
         }
-        DataPermContextHolder.putUserDetail(SecurityUtil.getCurrentUser().orElse(null));
+        DataPermContextHolder.putUserDetail(SecurityUtils.getCurrentUserWithNull());
         try {
             obj = pjp.proceed();
         } finally {
