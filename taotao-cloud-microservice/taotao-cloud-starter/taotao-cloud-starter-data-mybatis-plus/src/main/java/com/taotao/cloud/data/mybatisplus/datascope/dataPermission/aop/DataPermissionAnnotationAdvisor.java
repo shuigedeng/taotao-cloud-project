@@ -12,7 +12,6 @@ import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
  * DataPermission 注解的 Advisor 实现类 在spring aop中Advisor是一个接口，代表被拦截方法需要增强的逻辑。
  * Advisor通常由另两个组件组成——Advice接口和Pointcut接口，其中Advice表示实际增强的逻辑入口(通知)，Pointcut表示哪些类或者哪些方法需要被拦截(切入点)
  *
- * @author fxz
  */
 public class DataPermissionAnnotationAdvisor extends AbstractPointcutAdvisor {
 

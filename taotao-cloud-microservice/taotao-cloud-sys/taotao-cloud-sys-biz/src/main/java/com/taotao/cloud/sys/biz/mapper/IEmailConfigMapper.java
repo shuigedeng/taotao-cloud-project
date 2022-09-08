@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,6 @@ import org.springframework.stereotype.Repository;
  * @version 2022.03
  * @since 2022-03-29 09:01:48
  */
-public interface IEmailConfigMapper extends BaseSuperMapper<EmailConfig> {
+public interface IEmailConfigMapper extends BaseSuperMapper<EmailConfig, Long> {
 
 }

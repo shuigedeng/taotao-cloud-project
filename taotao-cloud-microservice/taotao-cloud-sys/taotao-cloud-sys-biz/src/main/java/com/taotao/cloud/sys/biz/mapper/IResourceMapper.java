@@ -13,25 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.repository.cls;
+package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.system.UserRole;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import javax.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import com.taotao.cloud.sys.biz.model.entity.system.Resource;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import java.util.List;
+import java.util.Set;
 
 /**
- * CompanyMapper
+ * IMenuMapper
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-@Repository
-public class UserRoleRepository  extends BaseSuperRepository<UserRole, Long> {
 
-	public UserRoleRepository(EntityManager em) {
-		super(UserRole.class, em);
-	}
+public interface IResourceMapper extends BaseSuperMapper<Resource, Long> {
 
+	List<Resource> findMenuByRoleIds(Set<Long> roleIds);
+
+	List<Long> selectIdList(List<Long> pidList);
 }

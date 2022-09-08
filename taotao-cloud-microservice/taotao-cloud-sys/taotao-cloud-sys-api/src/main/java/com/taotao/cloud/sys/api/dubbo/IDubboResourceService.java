@@ -11,7 +11,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2022-03-25 14:13:19
  */
-public interface IDubboMenuService {
+public interface IDubboResourceService {
 
 	/**
 	 * 根据id获取菜单信息

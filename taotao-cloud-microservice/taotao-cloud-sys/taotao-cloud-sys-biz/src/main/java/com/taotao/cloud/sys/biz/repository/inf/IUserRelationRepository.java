@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.mapper;
+package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.model.entity.system.Position;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * IJobMapper
+ * CompanyMapper
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
 
-public interface IJobMapper extends BaseSuperMapper<Position, Long> {
+public interface IUserRelationRepository extends JpaRepository<UserRelation, Long> {
 
 }

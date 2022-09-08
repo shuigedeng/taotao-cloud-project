@@ -23,11 +23,11 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.biz.model.entity.system.QUser;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
-import com.taotao.cloud.sys.biz.model.entity.system.UserRole;
+import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
-import com.taotao.cloud.sys.biz.service.business.IUserRoleService;
+import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.ArrayList;
@@ -57,10 +57,10 @@ public class UserServiceImpl extends
 	private final static String DEFAULT_PASSWORD = "123456";
 	private final static String DEFAULT_USERNAME = "admin";
 
-	private final IUserRoleService userRoleService;
+	private final IUserRelationService userRelationService;
 
-	public UserServiceImpl(IUserRoleService userRoleService) {
-		this.userRoleService = userRoleService;
+	public UserServiceImpl(IUserRelationService userRelationService) {
+		this.userRelationService = userRelationService;
 	}
 
 	@Override
@@ -96,17 +96,17 @@ public class UserServiceImpl extends
 		}
 
 		//此处修改用户角色
-		userRoleService.remove(
-			Wrappers.<UserRole>lambdaQuery().eq(UserRole::getId, user.getId()));
-		List<UserRole> userRoles = new ArrayList<Long>().stream()
+		userRelationService.remove(
+			Wrappers.<UserRelation>lambdaQuery().eq(UserRelation::getId, user.getId()));
+		List<UserRelation> userRoles = new ArrayList<Long>().stream()
 			.map(item -> {
-				UserRole sysUserRole = new UserRole();
-				sysUserRole.setRoleId(item);
+				UserRelation sysUserRole = new UserRelation();
+				sysUserRole.setObjectId(item);
 				sysUserRole.setUserId(user.getId());
 				return sysUserRole;
 			}).collect(Collectors.toList());
 
-		userRoleService.saveBatch(userRoles);
+		userRelationService.saveBatch(userRoles);
 		return user;
 	}
 
@@ -150,7 +150,7 @@ public class UserServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateUserRoles(Long userId, Set<Long> roleIds) {
-		return userRoleService.saveUserRoles(userId, roleIds);
+		return userRelationService.saveUserRoles(userId, roleIds);
 	}
 
 	//@Override

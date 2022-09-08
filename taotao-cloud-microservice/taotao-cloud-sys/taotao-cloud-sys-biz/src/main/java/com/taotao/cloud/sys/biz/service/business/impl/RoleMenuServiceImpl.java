@@ -17,9 +17,9 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.sys.biz.model.entity.system.QRoleMenu;
+import com.taotao.cloud.sys.biz.model.entity.system.QRoleResource;
 import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
-import com.taotao.cloud.sys.biz.mapper.IRoleMenuMapper;
+import com.taotao.cloud.sys.biz.mapper.IRoleResourceMapper;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleMenuRepository;
 import com.taotao.cloud.sys.biz.repository.cls.RoleMenuRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleMenuService;
@@ -35,14 +35,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RoleMenuServiceImpl extends
-	BaseSuperServiceImpl<IRoleMenuMapper, RoleResource, RoleMenuRepository, IRoleMenuRepository, Long>
+	BaseSuperServiceImpl<IRoleResourceMapper, RoleResource, RoleMenuRepository, IRoleMenuRepository, Long>
 	implements IRoleMenuService {
 
-	private final static QRoleMenu ROLE_MENU = QRoleMenu.roleMenu;
+	private final static QRoleResource ROLE_RESOURCE = QRoleResource.roleResource;
 
 	@Override
 	public Boolean saveRoleMenu(Long roleId, Set<Long> menuIds) {
-		BooleanExpression expression = ROLE_MENU.roleId.eq(roleId);
+		BooleanExpression expression = ROLE_RESOURCE.roleId.eq(roleId);
 		List<RoleResource> roleResources = cr().fetch(expression);
 		if (CollUtil.isNotEmpty(roleResources)) {
 			cr().deleteAll(roleResources);

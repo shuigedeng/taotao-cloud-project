@@ -24,8 +24,6 @@
 // /**
 //  * 客户端认证配置
 //  *
-//  * @author zuihou
-//  * @date 2018/11/20
 //  */
 // @Data
 // @NoArgsConstructor
@@ -83,9 +81,6 @@
 //      * 如： authority服务的租户库是 lamp_base， msg 服务的租户库是 lamp_extend，则该参数配置为： lamp_base、lamp_extend。
 //      * 如： 若所有服务的租户库都是 lamp_base， 则该参数配置为： lamp_base。
 //      *
-//      * @author tangyh
-//      * @date 2022/8/22 9:05 PM
-//      * @create [2022/8/22 9:05 PM ] [tangyh] [初始创建]
 //      */
 //     private List<String> initDatabasePrefix = Arrays.asList(TENANT_BASE_POOL_NAME_HEADER);
 //     /**

@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 /**
  * 基于部门的数据权限 Framework Service
  *
- * @author fxz
  */
 @AutoConfiguration
 public class DeptDataPermissionFrameworkService {

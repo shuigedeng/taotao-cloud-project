@@ -166,8 +166,8 @@ public class TreeUtil {
 					tree.setTypeName(MenuTypeEnum.DIR.getMessage());
 				} else if (MenuTypeEnum.MENU.getCode().equals(sysMenu.getType())) {
 					tree.setTypeName(MenuTypeEnum.MENU.getMessage());
-				} else if (MenuTypeEnum.BUTTON.getCode().equals(sysMenu.getType())) {
-					tree.setTypeName(MenuTypeEnum.BUTTON.getMessage());
+				} else if (MenuTypeEnum.RESOURCE.getCode().equals(sysMenu.getType())) {
+					tree.setTypeName(MenuTypeEnum.RESOURCE.getMessage());
 				}
 				return tree;
 			}).toList();

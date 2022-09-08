@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.QUser;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
-import com.taotao.cloud.sys.biz.service.business.IUserRoleService;
+import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -44,9 +44,9 @@ public class DubboUserServiceImpl extends
 	private final static String DEFAULT_PASSWORD = "123456";
 	private final static String DEFAULT_USERNAME = "admin";
 
-	private final IUserRoleService userRoleService;
+	private final IUserRelationService userRoleService;
 
-	public DubboUserServiceImpl(IUserRoleService userRoleService) {
+	public DubboUserServiceImpl(IUserRelationService userRoleService) {
 		this.userRoleService = userRoleService;
 	}
 
