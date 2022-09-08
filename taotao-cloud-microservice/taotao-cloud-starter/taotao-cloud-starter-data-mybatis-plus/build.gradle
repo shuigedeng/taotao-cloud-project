@@ -6,6 +6,8 @@ dependencies {
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-jetcache")
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-caffeine")
 
+    compileOnly 'com.alibaba:druid-spring-boot-starter'
+
     api "mysql:mysql-connector-java"
     api "com.alibaba:druid:1.2.6"
 
