@@ -1189,7 +1189,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    log-impl: com.taotao.cloud.data.mybatis.plus.log.CustomStdOutImpl
+    log-impl: com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
     #查询时，关闭关联对象即时加载以提高性能
     lazyLoadingEnabled : true
     #设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能
