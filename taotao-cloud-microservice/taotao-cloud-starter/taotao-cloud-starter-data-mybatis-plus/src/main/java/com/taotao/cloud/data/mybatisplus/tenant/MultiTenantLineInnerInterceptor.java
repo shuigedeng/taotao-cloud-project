@@ -63,9 +63,6 @@ import java.util.Properties;
  * 1. select 语句 where条件拼接多个租户id （tenant_id in (1，2，3，4)）
  * 2. insert、update、 delete 时，不传递租户id，则不拼接
  *
- * @author zuihou
- * @author hubin
- * @version v1.0
  * @see com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor
  */
 @SuppressWarnings({"rawtypes"})
@@ -75,7 +72,15 @@ public class MultiTenantLineInnerInterceptor extends JsqlParserSupport implement
 
     private MultiTenantLineHandler tenantLineHandler;
 
-    @Override
+	public MultiTenantLineHandler getTenantLineHandler() {
+		return tenantLineHandler;
+	}
+
+	public void setTenantLineHandler(MultiTenantLineHandler tenantLineHandler) {
+		this.tenantLineHandler = tenantLineHandler;
+	}
+
+	@Override
     public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
         if (InterceptorIgnoreHelper.willIgnoreTenantLine(ms.getId())) {
             return;
@@ -113,9 +118,8 @@ public class MultiTenantLineInnerInterceptor extends JsqlParserSupport implement
         }
         if (selectBody instanceof PlainSelect) {
             processPlainSelect((PlainSelect) selectBody);
-        } else if (selectBody instanceof WithItem) {
-            WithItem withItem = (WithItem) selectBody;
-            processSelectBody(withItem.getSubSelect().getSelectBody());
+        } else if (selectBody instanceof WithItem withItem) {
+			processSelectBody(withItem.getSubSelect().getSelectBody());
         } else {
             SetOperationList operationList = (SetOperationList) selectBody;
             List<SelectBody> selectBodys = operationList.getSelects();
@@ -247,9 +251,8 @@ public class MultiTenantLineInnerInterceptor extends JsqlParserSupport implement
             // fixed gitee pulls/141 duplicate update
             processPlainSelect(plainSelect);
             appendSelectItem(plainSelect.getSelectItems());
-        } else if (fromItem instanceof SubSelect) {
-            SubSelect subSelect = (SubSelect) fromItem;
-            appendSelectItem(plainSelect.getSelectItems());
+        } else if (fromItem instanceof SubSelect subSelect) {
+			appendSelectItem(plainSelect.getSelectItems());
             processInsertSelect(subSelect.getSelectBody());
         }
     }

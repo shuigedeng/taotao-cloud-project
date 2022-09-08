@@ -109,7 +109,7 @@ public class DataScope extends HashMap {
 		this.deptIds = deptIds;
 	}
 
-	public DataScope(Map m, String scopeFiledName, List<Integer> deptIds) {
+	public DataScope(Map<?, ?> m, String scopeFiledName, List<Integer> deptIds) {
 		super(m);
 		this.scopeFiledName = scopeFiledName;
 		this.deptIds = deptIds;

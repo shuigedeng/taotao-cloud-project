@@ -1,6 +1,7 @@
 package com.taotao.cloud.data.mybatisplus.tenant;
 
-import lombok.Getter;
+
+import org.openjdk.nashorn.internal.objects.annotations.Getter;
 
 /**
  * 多租户类型
@@ -9,10 +10,7 @@ import lombok.Getter;
  * <p>
  * DATASOURCE 模式收费，购买咨询作者
  *
- * @author zuihou
- * @date 2018/11/20
  */
-@Getter
 public enum MultiTenantType {
     /**
      * 非租户模式
@@ -49,8 +47,11 @@ public enum MultiTenantType {
     ;
     private String describe;
 
+	public String getDescribe() {
+		return describe;
+	}
 
-    MultiTenantType(String describe) {
+	MultiTenantType(String describe) {
         this.describe = describe;
     }
 
