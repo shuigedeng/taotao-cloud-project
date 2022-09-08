@@ -34,9 +34,9 @@ public enum MenuTypeEnum {
 	 */
 	MENU(2, "菜单"),
 	/**
-	 * 按钮
+	 * 资源 (包括分页、各种按钮、删除 等等 对应的是请求路径如：/api/menu/find)
 	 */
-	BUTTON(3, "按钮");
+	RESOURCE(3, "资源");
 
 	private final Integer code;
 
