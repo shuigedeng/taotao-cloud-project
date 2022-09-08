@@ -6,7 +6,7 @@ import org.aopalliance.intercept.MethodInvocation;
 /**
  * 动态解析数据源 取最后一个参数
  *
- * @author fxz @DS("#last")
+ *  @DS("#last")
  */
 public class DsLastParamProcessor extends DsProcessor {
 

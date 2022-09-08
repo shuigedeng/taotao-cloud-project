@@ -25,8 +25,7 @@ import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
-import com.taotao.cloud.sys.biz.mapper.IMenuMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.QMenu;
+import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
 import com.taotao.cloud.sys.biz.repository.cls.MenuRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IMenuRepository;
 import com.taotao.cloud.sys.biz.service.business.IResourceService;
@@ -51,7 +50,7 @@ import java.util.Set;
  */
 @Service
 public class ResourceServiceImpl extends
-	BaseSuperServiceImpl<IMenuMapper, Resource, MenuRepository, IMenuRepository, Long>
+	BaseSuperServiceImpl<IResourceMapper, Resource, MenuRepository, IMenuRepository, Long>
 	implements IResourceService {
 
 	@Autowired
@@ -71,7 +70,6 @@ public class ResourceServiceImpl extends
 	//	this.sysRoleService = sysRoleService;
 	//}
 
-	private final static QMenu MENU = QMenu.menu;
 
 	@Override
 	public List<MenuBO> findMenuByIdList(List<Long> idList) {

@@ -23,6 +23,7 @@ import com.taotao.cloud.sys.biz.model.entity.config.ColumnConfig;
 import java.util.List;
 import java.util.Map;
 
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -33,7 +34,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.03
  * @since 2022-03-29 08:56:04
  */
-public interface IColumnInfoMapper extends BaseSuperMapper<ColumnConfig> {
+public interface IColumnInfoMapper extends BaseSuperMapper<ColumnConfig, Long> {
 
 	@Select("""
 		<script>

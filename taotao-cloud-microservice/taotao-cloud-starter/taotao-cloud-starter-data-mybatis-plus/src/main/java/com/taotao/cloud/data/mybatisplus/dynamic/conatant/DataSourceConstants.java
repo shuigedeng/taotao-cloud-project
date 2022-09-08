@@ -2,7 +2,6 @@
 package com.taotao.cloud.data.mybatisplus.dynamic.conatant;
 
 /**
- * @author fxz
  * <p>
  * 数据源相关常量
  */

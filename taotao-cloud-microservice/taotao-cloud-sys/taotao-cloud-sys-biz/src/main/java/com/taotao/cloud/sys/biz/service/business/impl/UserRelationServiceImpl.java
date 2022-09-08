@@ -17,12 +17,12 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.sys.biz.model.entity.system.QUserRole;
-import com.taotao.cloud.sys.biz.model.entity.system.UserRole;
-import com.taotao.cloud.sys.biz.mapper.IUserRoleMapper;
-import com.taotao.cloud.sys.biz.repository.cls.UserRoleRepository;
-import com.taotao.cloud.sys.biz.repository.inf.IUserRoleRepository;
-import com.taotao.cloud.sys.biz.service.business.IUserRoleService;
+import com.taotao.cloud.sys.biz.model.entity.system.QUserRelation;
+import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
+import com.taotao.cloud.sys.biz.mapper.IUserRelationMapper;
+import com.taotao.cloud.sys.biz.repository.cls.UserRelationRepository;
+import com.taotao.cloud.sys.biz.repository.inf.IUserRelationRepository;
+import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.Set;
@@ -36,26 +36,26 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2020/10/21 09:20
  */
 @Service
-public class UserRoleServiceImpl extends
-	BaseSuperServiceImpl<IUserRoleMapper, UserRole, UserRoleRepository, IUserRoleRepository, Long>
-	implements IUserRoleService {
+public class UserRelationServiceImpl extends
+	BaseSuperServiceImpl<IUserRelationMapper, UserRelation, UserRelationRepository, IUserRelationRepository, Long>
+	implements IUserRelationService {
 
-	private final static QUserRole USER_ROLE = QUserRole.userRole;
+	private final static QUserRelation USER_RELATION = QUserRelation.userRelation;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean saveUserRoles(Long userId, Set<Long> roleIds) {
-		BooleanExpression expression = USER_ROLE.userId.eq(userId);
-		List<UserRole> userRoles = cr().fetch(expression);
+		BooleanExpression expression = USER_RELATION.userId.eq(userId);
+		List<UserRelation> userRoles = cr().fetch(expression);
 		if (CollUtil.isNotEmpty(userRoles)) {
 			cr().deleteAll(userRoles);
 		}
 
 		// 批量添加数据
-		List<UserRole> collect = roleIds.stream()
-			.map(roleId -> UserRole.builder()
+		List<UserRelation> collect = roleIds.stream()
+			.map(roleId -> UserRelation.builder()
 				.userId(userId)
-				.roleId(roleId)
+				.objectId(roleId)
 				.build()
 			)
 			.collect(Collectors.toList());

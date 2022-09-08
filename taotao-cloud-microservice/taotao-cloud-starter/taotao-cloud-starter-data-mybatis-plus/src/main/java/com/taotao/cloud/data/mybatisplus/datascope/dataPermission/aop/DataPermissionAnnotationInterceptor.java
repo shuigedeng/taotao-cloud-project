@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * 自定义Advice 处理实际业务逻辑 {@link DataPermission} 注解的拦截器 1. 在执行方法前，将 @DataPermission 注解入栈 2.
  * 在执行方法后，将 @DataPermission 注解出栈
  *
- * @author fxz
  * @DataPermission 用于 DATA_PERMISSION_NULL 的空对象
  */
 @DataPermission

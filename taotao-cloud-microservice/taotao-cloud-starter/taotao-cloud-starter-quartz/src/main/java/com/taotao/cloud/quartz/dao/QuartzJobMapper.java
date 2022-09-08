@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
  * 定时任务
  */
 @Mapper
-public interface QuartzJobMapper extends BaseSuperMapper<QuartzJob> {
+public interface QuartzJobMapper extends BaseMapper<QuartzJob> {
 }

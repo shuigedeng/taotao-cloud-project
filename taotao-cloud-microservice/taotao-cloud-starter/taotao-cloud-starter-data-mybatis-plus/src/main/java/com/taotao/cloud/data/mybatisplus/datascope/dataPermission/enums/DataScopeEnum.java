@@ -6,7 +6,6 @@ package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.enums;
  *
  * 用于实现数据级别的权限
  *
- * @author fxz
  */
 public enum DataScopeEnum {
 

@@ -15,22 +15,16 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.system.Resource;
+import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import java.util.List;
-import java.util.Set;
 
 /**
- * IMenuMapper
+ * IUserRoleMapper
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
+public interface IUserRelationMapper extends BaseSuperMapper<UserRelation, Long> {
 
-public interface IMenuMapper extends BaseSuperMapper<Resource, Long> {
-
-	List<Resource> findMenuByRoleIds(Set<Long> roleIds);
-
-	List<Long> selectIdList(List<Long> pidList);
 }

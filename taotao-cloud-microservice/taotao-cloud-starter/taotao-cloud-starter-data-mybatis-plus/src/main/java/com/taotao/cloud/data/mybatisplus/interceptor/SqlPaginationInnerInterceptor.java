@@ -18,8 +18,6 @@ import java.sql.SQLException;
  * <p>
  * 重构分页插件, 当 size 小于 0 时, 直接设置为 0, 防止错误查询全表
  *
- * @author seven
- * @since 2021年10月11日
  */
 public class SqlPaginationInnerInterceptor extends PaginationInnerInterceptor {
 

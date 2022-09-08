@@ -26,6 +26,6 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @since 2021/10/13 22:50
  */
 
-public interface IRoleMenuMapper extends BaseSuperMapper<RoleResource, Long> {
+public interface IRoleResourceMapper extends BaseSuperMapper<RoleResource, Long> {
 
 }

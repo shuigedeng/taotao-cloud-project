@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * 系统内置基于部门的数据权限 AutoConfiguration
  *
- * @author fxz
  */
 @AutoConfiguration
 @ConditionalOnBean(value = { DeptDataPermissionFrameworkService.class})

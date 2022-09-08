@@ -15,20 +15,21 @@
  */
 package com.taotao.cloud.sys.biz.service.dubbo;
 
-import com.taotao.cloud.sys.api.dubbo.IDubboMenuService;
+import com.taotao.cloud.sys.api.dubbo.IDubboResourceService;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
 import com.taotao.cloud.sys.biz.convert.ResourceConvert;
-import com.taotao.cloud.sys.biz.mapper.IMenuMapper;
+import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
+import com.taotao.cloud.sys.biz.model.entity.system.QResource;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
-import com.taotao.cloud.sys.biz.model.entity.system.QMenu;
 import com.taotao.cloud.sys.biz.repository.cls.MenuRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IMenuRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import java.util.List;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * MenuServiceImpl
@@ -38,15 +39,15 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:41:23
  */
 @Service
-@DubboService(interfaceClass = IDubboMenuService.class, validation = "true")
-public class DubboMenuServiceImpl extends
-	BaseSuperServiceImpl<IMenuMapper, Resource, MenuRepository, IMenuRepository, Long>
-	implements IDubboMenuService {
+@DubboService(interfaceClass = IDubboResourceService.class, validation = "true")
+public class DubboResourceServiceImpl extends
+	BaseSuperServiceImpl<IResourceMapper, Resource, MenuRepository, IMenuRepository, Long>
+	implements IDubboResourceService {
 
 	@Autowired
 	private IRoleService sysRoleService;
 
-	private final static QMenu MENU = QMenu.menu;
+	private final static QResource RESOURCE = QResource.resource;
 
 	@Override
 	public List<MenuQueryRequest> queryAllById(Long id) {

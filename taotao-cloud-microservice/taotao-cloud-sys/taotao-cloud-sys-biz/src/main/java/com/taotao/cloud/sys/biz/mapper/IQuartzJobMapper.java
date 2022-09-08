@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -27,6 +28,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-03-29 09:01:48
  */
 
-public interface IQuartzJobMapper extends BaseSuperMapper<QuartzJob> {
+public interface IQuartzJobMapper extends BaseSuperMapper<QuartzJob, Long> {
 
 }

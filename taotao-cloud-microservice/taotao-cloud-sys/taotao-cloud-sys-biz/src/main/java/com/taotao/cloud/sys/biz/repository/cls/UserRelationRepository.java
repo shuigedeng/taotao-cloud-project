@@ -13,20 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.mapper;
+package com.taotao.cloud.sys.biz.repository.cls;
 
-import com.taotao.cloud.sys.biz.model.entity.system.UserRole;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
+import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
 /**
- * IUserRoleMapper
+ * CompanyMapper
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
+@Repository
+public class UserRelationRepository extends BaseSuperRepository<UserRelation, Long> {
 
-public interface IUserRoleMapper extends BaseSuperMapper<UserRole, Long> {
+	public UserRelationRepository(EntityManager em) {
+		super(UserRelation.class, em);
+	}
 
 }

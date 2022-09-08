@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -26,6 +27,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @version 2022.03
  * @since 2022-03-29 09:01:48
  */
-public interface IAlipayConfigMapper extends BaseSuperMapper<AlipayConfig> {
+public interface IAlipayConfigMapper extends BaseSuperMapper<AlipayConfig, Long> {
 
 }

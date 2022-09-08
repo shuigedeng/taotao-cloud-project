@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.service.dubbo;
 
-import com.taotao.cloud.sys.api.dubbo.IDubboJobService;
-import com.taotao.cloud.sys.biz.mapper.IJobMapper;
+import com.taotao.cloud.sys.api.dubbo.IDubboPositionService;
+import com.taotao.cloud.sys.biz.mapper.IPositionMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.Position;
 import com.taotao.cloud.sys.biz.repository.cls.JobRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IJobRepository;
@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-@DubboService(interfaceClass =IDubboJobService.class , validation = "true")
-public class DubboJobServiceImpl extends
-	BaseSuperServiceImpl<IJobMapper, Position,JobRepository, IJobRepository, Long>
-	implements IDubboJobService {
+@DubboService(interfaceClass = IDubboPositionService.class , validation = "true")
+public class DubboPositionServiceImpl extends
+	BaseSuperServiceImpl<IPositionMapper, Position,JobRepository, IJobRepository, Long>
+	implements IDubboPositionService {
 
 
 }

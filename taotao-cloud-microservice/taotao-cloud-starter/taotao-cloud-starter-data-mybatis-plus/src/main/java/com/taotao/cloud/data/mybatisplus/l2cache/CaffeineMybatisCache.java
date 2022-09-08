@@ -32,8 +32,6 @@ import org.slf4j.LoggerFactory;
  * @CacheNamespace(implementation = CaffeineMybatisCache.class, eviction = CaffeineMybatisCache.class)
  * public interface ILogMapper extends BaseSuperMapper<Log>
  *
- * @author : gengwei.zheng
- * @date : 2021/10/26 17:02
  */
 public class CaffeineMybatisCache implements Cache {
 

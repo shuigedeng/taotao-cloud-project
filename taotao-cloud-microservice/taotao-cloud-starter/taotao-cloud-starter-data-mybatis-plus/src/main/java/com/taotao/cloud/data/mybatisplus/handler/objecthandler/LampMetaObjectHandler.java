@@ -32,8 +32,6 @@
 //  * createdBy：BaseContextHandler.getUserId()
 //  * updatedBy：BaseContextHandler.getUserId()
 //  *
-//  * @author zuihou
-//  * @date 2019/04/29
 //  */
 // @Slf4j
 // public class LampMetaObjectHandler implements MetaObjectHandler {

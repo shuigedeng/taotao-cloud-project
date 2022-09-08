@@ -11,7 +11,6 @@ import java.lang.annotation.Target;
 
 /**
  * 数据权限注解 可声明在类或者方法上，标识使用的数据权限规则
- * @author Administrator
  */
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
