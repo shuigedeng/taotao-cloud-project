@@ -13,6 +13,8 @@ import org.springframework.context.annotation.PropertySource;
 
 /**
  * Druid配置
+ *
+ * 需要添加 com.alibaba:druid-spring-boot-starter 依赖
  */
 @AutoConfiguration
 @ConditionalOnClass(DruidStatProperties.class)

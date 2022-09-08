@@ -6,6 +6,11 @@ dependencies {
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-jetcache")
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-caffeine")
 
+    compileOnly("org.springframework.security:spring-security-core") {
+        exclude group: "junit", module: "junit"
+    }
+
+
     compileOnly 'com.alibaba:druid-spring-boot-starter:1.2.11'
 
     api "mysql:mysql-connector-java"
