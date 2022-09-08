@@ -101,12 +101,13 @@ public class Resource extends BaseSuperEntity<Resource, Long> {
 	private Boolean keepAlive ;
 
 	/**
-	 * 菜单类型 (1:目录 2:菜单 3：按钮)
+	 * 菜单类型 1:目录 2:菜单 3：资源(分页查询操作、操作按钮、删除按钮、查询按钮、等等) 资源 (包括分页、各种按钮、删除 等等 对应的是请求路径如：/api/menu/find)
 	 *
 	 * @see MenuTypeEnum
 	 */
 	@Column(name = "type", columnDefinition = "int not null comment '菜单类型 (1:目录 2:菜单 3：按钮)'")
 	private Integer type ;
+
 
 	/**
 	 * 是否隐藏路由菜单: 0否,1是（默认值0）
@@ -131,6 +132,7 @@ public class Resource extends BaseSuperEntity<Resource, Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
+
 	@Builder
 	public Resource(Long id, LocalDateTime createTime, Long createBy,
 					LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
