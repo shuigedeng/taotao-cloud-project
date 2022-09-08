@@ -63,6 +63,12 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 	private Long parentId;
 
 	/**
+	 * 公司id
+	 */
+	@Column(name = "company_id", columnDefinition = "bigint not null comment '公司id'")
+	private Long companyId;
+
+	/**
 	 * 备注
 	 */
 	@Column(name = "remark", columnDefinition = "varchar(255) comment '备注'")

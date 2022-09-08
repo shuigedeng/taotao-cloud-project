@@ -108,6 +108,11 @@ public class Resource extends BaseSuperEntity<Resource, Long> {
 	@Column(name = "type", columnDefinition = "int not null comment '菜单类型 (1:目录 2:菜单 3：按钮)'")
 	private Integer type ;
 
+	/**
+	 * url请求Id (type=3 时, 此id有值)
+	 */
+	@Column(name = "request_path_id", columnDefinition = "bigint null comment 'url请求Id (type=3时, 此id有值)'")
+	private Long requestPathId;
 
 	/**
 	 * 是否隐藏路由菜单: 0否,1是（默认值0）

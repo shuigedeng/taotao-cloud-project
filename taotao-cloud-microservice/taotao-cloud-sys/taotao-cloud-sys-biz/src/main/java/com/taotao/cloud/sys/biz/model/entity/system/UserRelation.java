@@ -57,13 +57,13 @@ public class UserRelation extends SuperEntity<UserRelation, Long> {
 	private Long userId;
 
 	/**
-	 * 对象类型 dept position role company
+	 * 对象类型 dept position role company dataScope
 	 */
 	@Column(name = "object_type", columnDefinition = "varchar(255) not null comment '对象类型'")
 	private String objectType;
 
 	/**
-	 * 对象id deptId positionId roleId companyId
+	 * 对象id deptId positionId roleId companyId dataScopeId
 	 */
 	@Column(name = "object_id", columnDefinition = "bigint not null comment '对象id'")
 	private Long objectId;

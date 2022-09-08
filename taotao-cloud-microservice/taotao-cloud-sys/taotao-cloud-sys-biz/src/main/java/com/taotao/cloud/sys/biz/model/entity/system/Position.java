@@ -64,7 +64,7 @@ public class Position extends BaseSuperEntity<Position,Long> {
 	private Long deptId;
 
 	/**
-	 * 部门id
+	 * 公司id
 	 */
 	@Column(name = "company_id", columnDefinition = "bigint not null comment '公司id'")
 	private Long companyId;
