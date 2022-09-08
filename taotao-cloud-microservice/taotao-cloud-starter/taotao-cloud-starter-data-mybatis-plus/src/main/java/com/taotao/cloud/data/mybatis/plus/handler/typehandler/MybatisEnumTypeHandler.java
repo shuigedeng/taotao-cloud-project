@@ -1,12 +1,5 @@
 package com.taotao.cloud.data.mybatis.plus.handler.typehandler;
 
-/**
- * @author tangyh
- * @version v1.0
- * @date 2022/4/13 9:05 PM
- * @create [2022/4/13 9:05 PM ] [tangyh] [初始创建]
- */
-
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.annotation.IEnum;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
@@ -35,8 +28,6 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 自定义枚举属性转换器
  *
- * @author hubin
- * @since 2017-10-11
  */
 public class MybatisEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E> {
 
@@ -143,7 +134,6 @@ public class MybatisEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E
      * @param sourceValue 数据库字段值
      * @param targetValue 当前枚举属性值
      * @return 是否匹配
-     * @since 3.3.0
      */
     protected boolean equalsValue(Object sourceValue, Object targetValue) {
         String sValue = StringUtils.toStringTrim(sourceValue);

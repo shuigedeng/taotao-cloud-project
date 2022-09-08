@@ -17,28 +17,23 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.taotao.cloud.data.mybatis.plus.handler.typehandler.JacksonListTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.ibatis.annotations.ResultMap;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.time.LocalDateTime;
-import java.util.Objects;
 import org.hibernate.annotations.Type;
 
 /**
- * 部门表
+ * 数据权限表
  *
  * @author shuigedeng
  * @version 2021.10
@@ -50,54 +45,76 @@ import org.hibernate.annotations.Type;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = Company.TABLE_NAME)
-@TableName(value = Company.TABLE_NAME, autoResultMap = true)
-@org.hibernate.annotations.Table(appliesTo = Company.TABLE_NAME, comment = "公司表")
-public class Company extends BaseSuperEntity<Company, Long> {
+@Table(name = DataScope.TABLE_NAME)
+@TableName(value = DataScope.TABLE_NAME, autoResultMap = true)
+@org.hibernate.annotations.Table(appliesTo = DataScope.TABLE_NAME, comment = "数据权限表")
+public class DataScope extends BaseSuperEntity<DataScope, Long> {
 
-	public static final String TABLE_NAME = "tt_company";
+	public static final String TABLE_NAME = "tt_data_scope";
 
 	/**
-	 * 部门名称
+	 * 编码
 	 */
-	@Column(name = "name", columnDefinition = "varchar(32) not null comment '公司名称'")
+	@Column(name = "code", unique = true, columnDefinition = "varchar(255) not null comment '编码'")
+	private String code;
+
+	/**
+	 * 名称
+	 */
+	@Column(name = "名称", unique = true, columnDefinition = "varchar(255) not null comment '名称'")
 	private String name;
 
 	/**
-	 * 上级公司id
+	 * 数据范围类型
+	 *
+	 * @see DataScopeEnum
 	 */
-	@Column(name = "parent_id", columnDefinition = "int not null default 0 comment '上级公司id'")
-	private Long parentId;
+	@Column(name = "type",  columnDefinition = "int not null comment '数据范围类型'")
+	private Integer type;
 
 	/**
 	 * 备注
 	 */
-	@Column(name = "remark", columnDefinition = "varchar(255) comment '备注'")
+	@Column(name = "备注",  columnDefinition = "varchar(1024) null comment '备注'")
 	private String remark;
 
 	/**
-	 * 备注
-	 * 设置了ResultMap为`mybatis-plus_Person`后就可以拿到正确的值.
-	 * @ResultMap("mybatis-plus_Person")
-	 * @Select("SELECT * FROM person WHERE id=#{id}")
-	 * Person selectOneById(int id);
+	 * 公司id
 	 */
 	@Type(type="json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
-	@Column(name = "id_tree", columnDefinition = "json null comment 'id树'")
-	private List<String> idTree;
+	@Column(name = "company_ids", columnDefinition = "json null comment '公司id列表'")
+	private List<Long> companyIds;
 
 	/**
-	 * 当前深度
+	 * 部门id
 	 */
-	@Column(name = "depth", columnDefinition = "int not null default 0 comment '当前深度 已1开始'")
-	private Integer depth;
+	@Type(type="json")
+	@TableField(typeHandler = JacksonListTypeHandler.class)
+	@Column(name = "dept_ids", columnDefinition = "json null comment '部门id列表'")
+	private List<Long> deptIds;
 
 	/**
-	 * 排序值
+	 * 用户id
 	 */
-	@Column(name = "sort_num", columnDefinition = "int not null default 0 comment '排序值'")
-	private Integer sortNum;
+	@Type(type="json")
+	@TableField(typeHandler = JacksonListTypeHandler.class)
+	@Column(name = "user_ids", columnDefinition = "json null comment '用户id列表'")
+	private List<Long> userIds;
+
+	/**
+	 * 部门范围限制的字段名称
+	 */
+	private String scopeDeptFiledName = "dept_id";
+	/**
+	 * 公司范围限制的字段名称
+	 */
+	private String scopeCompanyFiledName = "company_id";
+	/**
+	 * 个人范围限制的字段名称
+	 */
+	private String scopeSelfFiledName = "create_by";
+
 
 	/**
 	 * 租户id
@@ -105,17 +122,6 @@ public class Company extends BaseSuperEntity<Company, Long> {
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
 
-	@Builder
-	public Company(Long id, LocalDateTime createTime, Long createBy,
-                   LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-                   String name, Long parentId, String remark, Integer sortNum, String tenantId) {
-		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
-		this.name = name;
-		this.parentId = parentId;
-		this.remark = remark;
-		this.sortNum = sortNum;
-		this.tenantId = tenantId;
-	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -126,7 +132,7 @@ public class Company extends BaseSuperEntity<Company, Long> {
 			o)) {
 			return false;
 		}
-		Company dept = (Company) o;
+		DataScope dept = (DataScope) o;
 		return getId() != null && Objects.equals(getId(), dept.getId());
 	}
 
