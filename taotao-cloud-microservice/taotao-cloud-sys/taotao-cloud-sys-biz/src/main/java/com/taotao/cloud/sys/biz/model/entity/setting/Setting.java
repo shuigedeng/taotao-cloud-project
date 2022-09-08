@@ -3,8 +3,6 @@ package com.taotao.cloud.sys.biz.model.entity.setting;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import com.taotao.cloud.data.mybatis.plus.handler.typehandler.JacksonListTypeHandler;
-import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
