@@ -54,17 +54,17 @@ public class MpUtils {
 	 * @return 影响的总行数
 	 * @since 2022-03-24 14:29:12
 	 */
-	public <T, U, R> int batchUpdateOrInsert(List<T> data, Class<U> mapperClass,
-		BiFunction<T, U, R> function) {
+	public static  <T, M, R> int batchUpdateOrInsert(List<T> data, Class<M> mapperClass,
+		BiFunction<T, M, R> function) {
 		int i = 1;
-		SqlSessionFactory sqlSessionFactory = ContextUtils.getBean(SqlSessionFactory.class, false);
+		SqlSessionFactory sqlSessionFactory = ContextUtils.getBean(SqlSessionFactory.class, true);
 		if (Objects.isNull(sqlSessionFactory)) {
 			throw new MybatisPlusException("未获取到sqlSession");
 		}
 
 		SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
 		try {
-			U mapper = sqlSession.getMapper(mapperClass);
+			M mapper = sqlSession.getMapper(mapperClass);
 			int size = data.size();
 			for (T element : data) {
 				function.apply(element, mapper);

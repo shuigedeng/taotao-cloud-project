@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.QRole;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
-import com.taotao.cloud.sys.biz.service.business.IRoleMenuService;
+import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -43,6 +43,6 @@ public class DubboRoleServiceImpl extends
 
 	private final static QRole SYS_ROLE = QRole.role;
 
-	private final IRoleMenuService sysRoleResourceService;
+	private final IRoleResourceService sysRoleResourceService;
 
 }

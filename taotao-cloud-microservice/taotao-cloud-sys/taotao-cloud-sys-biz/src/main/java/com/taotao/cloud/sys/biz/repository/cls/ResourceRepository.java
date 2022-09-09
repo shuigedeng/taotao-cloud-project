@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.repository.inf;
+package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
 /**
  * CompanyMapper
@@ -25,6 +27,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IMenuRepository extends JpaRepository<Resource, Long> {
+@Repository
+public class ResourceRepository extends BaseSuperRepository<Resource, Long> {
+
+	public ResourceRepository(EntityManager em) {
+		super(Resource.class, em);
+	}
 
 }

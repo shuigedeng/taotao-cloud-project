@@ -29,6 +29,7 @@ import com.taotao.cloud.data.mybatisplus.injector.methods.Replace;
 import com.taotao.cloud.data.mybatisplus.injector.methods.ReplaceBatch;
 import com.taotao.cloud.data.mybatisplus.injector.methods.UpdateAllById;
 
+import com.taotao.cloud.data.mybatisplus.injector.methods.UpdateBatchMethod;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,6 +57,8 @@ public class MateSqlInjector extends DefaultSqlInjector {
 		methodList.add(new UpdateAllById(field -> !ArrayUtil.containsAny(new String[]{
 			"create_time", "created_by"
 		}, field.getColumn())));
+
+		//methodList.add(new UpdateBatchMethod());
 
 		return Collections.unmodifiableList(methodList);
 	}

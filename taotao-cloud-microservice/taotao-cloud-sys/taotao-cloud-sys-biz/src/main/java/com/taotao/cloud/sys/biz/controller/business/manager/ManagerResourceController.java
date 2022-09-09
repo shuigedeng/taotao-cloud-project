@@ -63,8 +63,8 @@ import java.util.Set;
  */
 @Validated
 @RestController
-@RequestMapping("/sys/manager/menu")
-@Tag(name = "平台管理端-菜单管理API", description = "平台管理端-菜单管理API")
+@RequestMapping("/sys/manager/resource")
+@Tag(name = "平台管理端-资源管理API", description = "平台管理端-资源管理API")
 public class ManagerResourceController extends
 	SuperController<IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, MenuQueryVO> {
 

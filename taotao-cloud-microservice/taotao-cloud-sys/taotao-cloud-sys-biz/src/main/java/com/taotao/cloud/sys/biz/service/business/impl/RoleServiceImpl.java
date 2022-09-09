@@ -23,7 +23,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
-import com.taotao.cloud.sys.biz.service.business.IRoleMenuService;
+import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
@@ -47,9 +47,9 @@ public class RoleServiceImpl extends
 
 	private final static QRole SYS_ROLE = QRole.role;
 
-	private final IRoleMenuService sysRoleResourceService;
+	private final IRoleResourceService sysRoleResourceService;
 
-	public RoleServiceImpl(IRoleMenuService sysRoleResourceService) {
+	public RoleServiceImpl(IRoleResourceService sysRoleResourceService) {
 		this.sysRoleResourceService = sysRoleResourceService;
 	}
 

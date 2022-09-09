@@ -26,8 +26,8 @@ import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
-import com.taotao.cloud.sys.biz.repository.cls.MenuRepository;
-import com.taotao.cloud.sys.biz.repository.inf.IMenuRepository;
+import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
+import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.sys.biz.utils.TreeUtil;
@@ -50,7 +50,7 @@ import java.util.Set;
  */
 @Service
 public class ResourceServiceImpl extends
-	BaseSuperServiceImpl<IResourceMapper, Resource, MenuRepository, IMenuRepository, Long>
+	BaseSuperServiceImpl<IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
 	implements IResourceService {
 
 	@Autowired

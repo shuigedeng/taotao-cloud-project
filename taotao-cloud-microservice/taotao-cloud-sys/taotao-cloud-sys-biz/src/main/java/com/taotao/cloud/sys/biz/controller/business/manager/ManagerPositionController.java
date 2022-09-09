@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.sys.api.model.dto.position.PositionSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.position.PositionUpdateDTO;
-import com.taotao.cloud.sys.api.model.vo.job.JobQueryVO;
+import com.taotao.cloud.sys.api.model.vo.position.PositionQueryVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Position;
 import com.taotao.cloud.sys.biz.service.business.IPositionService;
 import com.taotao.cloud.web.base.controller.SuperController;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/position")
 @Tag(name = "平台管理端-岗位管理API", description = "平台管理端-岗位管理API")
 public class ManagerPositionController extends
-	SuperController<IPositionService, Position, Long, BaseQuery, PositionSaveDTO, PositionUpdateDTO, JobQueryVO> {
+	SuperController<IPositionService, Position, Long, BaseQuery, PositionSaveDTO, PositionUpdateDTO, PositionQueryVO> {
 
 
 }
