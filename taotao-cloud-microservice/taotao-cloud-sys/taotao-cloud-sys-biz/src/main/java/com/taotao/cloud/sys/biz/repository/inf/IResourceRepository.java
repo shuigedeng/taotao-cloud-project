@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
+import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -25,6 +25,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IRoleMenuRepository extends JpaRepository<RoleResource, Long> {
+public interface IResourceRepository extends JpaRepository<Resource, Long> {
 
 }

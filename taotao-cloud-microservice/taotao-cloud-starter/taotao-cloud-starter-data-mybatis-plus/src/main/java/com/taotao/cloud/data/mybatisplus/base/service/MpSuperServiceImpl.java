@@ -102,6 +102,7 @@ public class MpSuperServiceImpl<M extends MpSuperMapper<T, I>, T extends MpSuper
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public boolean updateAllById(T model) {
+
 		return SqlHelper.retBool(getSuperMapper().updateAllById(model));
 	}
 

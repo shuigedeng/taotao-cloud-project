@@ -27,6 +27,7 @@ import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.model.vo.region.RegionParentVO;
@@ -39,18 +40,18 @@ import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * RegionServiceImpl
@@ -103,7 +104,7 @@ public class RegionServiceImpl extends
 		LambdaQueryWrapper<Region> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 		lambdaQueryWrapper.eq(Region::getParentId, parentId);
 		List<Region> regions = this.list(lambdaQueryWrapper);
-		regions.sort(Comparator.comparing(Region::getOrderNum));
+		regions.sort(Comparator.comparing(Region::getDepth));
 
 		redisRepository.setEx(RedisConstant.REGIONS_PARENT_ID_KEY + parentId, regions, 5 * 60);
 
@@ -118,31 +119,31 @@ public class RegionServiceImpl extends
 			.eq("name", townName));
 		if (region != null) {
 			//获取它的层级关系
-			String path = region.getPath();
-			String[] result = path.split(",");
-			//因为有无用数据 所以先删除前两个
-			result = ArrayUtils.remove(result, 0);
-			result = ArrayUtils.remove(result, 0);
-			//地址id
-			StringBuilder regionIds = new StringBuilder();
-			//地址名称
-			StringBuilder regionNames = new StringBuilder();
-			//循环构建新的数据
-			for (String regionId : result) {
-				Region reg = this.baseMapper.selectById(regionId);
-				if (reg != null) {
-					regionIds.append(regionId).append(",");
-					regionNames.append(reg.getName()).append(",");
-				}
-			}
-			regionIds.append(region.getId());
-			regionNames.append(region.getName());
-			//构建返回数据
-			Map<String, Object> obj = new HashMap<>(2);
-			obj.put("id", regionIds.toString());
-			obj.put("name", regionNames.toString());
-
-			return obj;
+			//String path = region.getPath();
+			//String[] result = path.split(",");
+			////因为有无用数据 所以先删除前两个
+			//result = ArrayUtils.remove(result, 0);
+			//result = ArrayUtils.remove(result, 0);
+			////地址id
+			//StringBuilder regionIds = new StringBuilder();
+			////地址名称
+			//StringBuilder regionNames = new StringBuilder();
+			////循环构建新的数据
+			//for (String regionId : result) {
+			//	Region reg = this.baseMapper.selectById(regionId);
+			//	if (reg != null) {
+			//		regionIds.append(regionId).append(",");
+			//		regionNames.append(reg.getName()).append(",");
+			//	}
+			//}
+			//regionIds.append(region.getId());
+			//regionNames.append(region.getName());
+			////构建返回数据
+			//Map<String, Object> obj = new HashMap<>(2);
+			//obj.put("id", regionIds.toString());
+			//obj.put("name", regionNames.toString());
+			//
+			//return obj;
 		}
 		return null;
 	}
@@ -276,16 +277,18 @@ public class RegionServiceImpl extends
 				this.remove(queryWrapper);
 
 				//清空缓存的地区数据
-				redisRepository.del(
-					redisRepository.keys(RedisConstant.REGIONS_PATTERN).toArray(new String[0]));
+				Set<String> keys = redisRepository.keys(RedisConstant.REGIONS_PATTERN);
+				redisRepository.del(keys.toArray(new String[keys.size()]));
 
 				// 构造存储数据库的对象集合
 				List<Region> regions = this.initData(jsonString);
 				for (int i = 0; i < (regions.size() / 100 + (regions.size() % 100 == 0 ? 0 : 1));
-					 i++) {
+					i++) {
 					int endPoint = Math.min((100 + (i * 100)), regions.size());
 					this.saveOrUpdateBatch(regions.subList(i * 100, endPoint));
 				}
+
+				MpUtils.batchUpdateOrInsert(regions, getBaseMapper().getClass(),(t, m) -> m.insert(t));
 
 				//重新设置缓存
 				redisRepository.setEx(RedisConstant.REGIONS_KEY, jsonString, 30 * 24 * 60 * 60);
@@ -308,61 +311,87 @@ public class RegionServiceImpl extends
 		JSONArray countryAll = jsonObject.getJSONArray("districts");
 		for (int i = 0; i < countryAll.size(); i++) {
 			JSONObject contry = countryAll.getJSONObject(i);
-			String contryCode = contry.getString("citycode");
-			String contryAdCode = contry.getString("adcode");
-			String contryName = contry.getString("name");
-			String contryCenter = contry.getString("center");
-			String contryLevel = contry.getString("level");
-			//1.插入国家
-			Long id1 = insert(regions, null, contryCode, contryAdCode, contryName, contryCenter,
-				contryLevel, i);
-			JSONArray provinceAll = contry.getJSONArray("districts");
+			String countryCode = contry.getString("citycode");
+			String countryAdCode = contry.getString("adcode");
+			String countryName = contry.getString("name");
+			String countryCenter = contry.getString("center");
+			String countryLevel = contry.getString("level");
 
+			List<Long> idTree = new ArrayList<>();
+			List<String> codeTree = new ArrayList<>();
+
+			//插入国家
+			Long countryId = insert(regions, null, countryCode, countryAdCode, countryName,
+				countryCenter,
+				countryLevel, idTree, codeTree, 1,i + 1);
+
+			JSONArray provinceAll = contry.getJSONArray("districts");
 			for (int j = 0; j < provinceAll.size(); j++) {
 				JSONObject province = provinceAll.getJSONObject(j);
-				String citycode1 = province.getString("citycode");
-				String adcode1 = province.getString("adcode");
-				String name1 = province.getString("name");
-				String center1 = province.getString("center");
-				String level1 = province.getString("level");
-				//1.插入省
-				Long id2 = insert(regions, id1, citycode1, adcode1, name1, center1, level1, j,
-					id1);
-				JSONArray cityAll = province.getJSONArray("districts");
+				String provinceCode = province.getString("citycode");
+				String provinceAdcode = province.getString("adcode");
+				String provinceName = province.getString("name");
+				String provinceCenter = province.getString("center");
+				String provinceLevel = province.getString("level");
 
+				List<Long> countryIdTree = List.of(countryId );
+				List<String> countryCodeTree = List.of(countryAdCode);
+
+				//1.插入省
+				Long provinceId = insert(regions, countryId, provinceCode, provinceAdcode,
+					provinceName, provinceCenter, provinceLevel,
+					countryIdTree, countryCodeTree, 2,j + 1);
+
+				JSONArray cityAll = province.getJSONArray("districts");
 				for (int z = 0; z < cityAll.size(); z++) {
 					JSONObject city = cityAll.getJSONObject(z);
-					String citycode2 = city.getString("citycode");
-					String adcode2 = city.getString("adcode");
-					String name2 = city.getString("name");
-					String center2 = city.getString("center");
-					String level2 = city.getString("level");
+					String cityCode = city.getString("citycode");
+					String cityAdcode = city.getString("adcode");
+					String cityName = city.getString("name");
+					String cityCenter = city.getString("center");
+					String cityLevel = city.getString("level");
+
+					List<Long> provinceIdTree = List.of(countryId, provinceId );
+					List<String> provinceCodeTree = List.of(countryAdCode, provinceAdcode);
+
 					//2.插入市
-					Long id3 = insert(regions, id2, citycode2, adcode2, name2, center2, level2, z,
-						id1, id2);
+					Long cityId = insert(regions, provinceId, cityCode, cityAdcode, cityName,
+						cityCenter, cityLevel,
+						provinceIdTree, provinceCodeTree, 3,z + 1);
+
 					JSONArray districtAll = city.getJSONArray("districts");
 					for (int w = 0; w < districtAll.size(); w++) {
 						JSONObject district = districtAll.getJSONObject(w);
-						String citycode3 = district.getString("citycode");
-						String adcode3 = district.getString("adcode");
-						String name3 = district.getString("name");
-						String center3 = district.getString("center");
-						String level3 = district.getString("level");
+						String districtCode = district.getString("citycode");
+						String districtAdcode = district.getString("adcode");
+						String districtName = district.getString("name");
+						String districtCenter = district.getString("center");
+						String districtLevel = district.getString("level");
+
+						List<Long> cityIdTree = List.of(countryId, provinceId, cityId );
+						List<String> cityCodeTree = List.of(countryAdCode, provinceAdcode, cityAdcode);
+
 						//3.插入区县
-						Long id4 = insert(regions, id3, citycode3, adcode3, name3, center3,
-							level3, w, id1, id2, id3);
+						Long districtId = insert(regions, cityId, districtCode, districtAdcode,
+							districtName, districtCenter,
+							districtLevel, cityIdTree, cityCodeTree, 4,w + 1);
+
 						//有需要可以继续向下遍历
 						JSONArray streetAll = district.getJSONArray("districts");
 						for (int r = 0; r < streetAll.size(); r++) {
 							JSONObject street = streetAll.getJSONObject(r);
-							String citycode4 = street.getString("citycode");
-							String adcode4 = street.getString("adcode");
-							String name4 = street.getString("name");
-							String center4 = street.getString("center");
-							String level4 = street.getString("level");
+							String streetCode = street.getString("citycode");
+							String streetAdcode = street.getString("adcode");
+							String streetName = street.getString("name");
+							String streetCenter = street.getString("center");
+							String streetLevel = street.getString("level");
+
+							List<Long> districtIdTree = List.of(countryId, provinceId, cityId, districtId);
+							List<String> districtCodeTree = List.of(countryAdCode, provinceAdcode, cityAdcode, districtAdcode);;
+
 							//4.插入街道
-							insert(regions, id4, citycode4, adcode4, name4, center4, level4, r, id1,
-								id2, id3, id4);
+							insert(regions, districtId, streetCode, streetAdcode, streetName,
+								streetCenter, streetLevel, districtIdTree, districtCodeTree, 5,r + 1);
 						}
 					}
 				}
@@ -381,10 +410,10 @@ public class RegionServiceImpl extends
 	 * @param center   地理坐标
 	 * @param level    country:国家 province:省份（直辖市会在province和city显示） city:市（直辖市会在province和city显示）
 	 *                 district:区县 street:街道
-	 * @param ids      地区id集合
 	 */
 	public Long insert(List<Region> regions, Long parentId, String cityCode, String code,
-					   String name, String center, String level, Integer order, Long... ids) {
+		String name, String center, String level, List<Long> idTree, List<String> codeTree,
+		Integer depth, Integer orderNum) {
 		//  \"citycode\": [],\n" +
 		//         "        \"adcode\": \"100000\",\n" +
 		//         "        \"name\": \"中华人民共和国\",\n" +
@@ -403,21 +432,28 @@ public class RegionServiceImpl extends
 		record.setLevel(level);
 		record.setName(name);
 		record.setParentId(parentId);
-		record.setOrderNum(order);
 		if ("100000".equals(code) && "country".equals(level)) {
 			record.setId(1L);
 		} else {
 			record.setId(IdGeneratorUtils.getId());
 		}
 
-		StringBuilder megName = new StringBuilder();
-		for (int i = 0; i < ids.length; i++) {
-			megName.append(ids[i]);
-			if (i < ids.length - 1) {
-				megName.append(",");
-			}
-		}
-		record.setPath(megName.toString());
+		//StringBuilder megName = new StringBuilder();
+		//for (int i = 0; i < ids.length; i++) {
+		//	megName.append(ids[i]);
+		//	if (i < ids.length - 1) {
+		//		megName.append(",");
+		//	}
+		//}
+		record.setOrderNum(orderNum);
+
+		idTree.add(record.getId());
+		record.setIdTree(idTree);
+		codeTree.add(code);
+		record.setCodeTree(codeTree);
+
+		record.setDepth(depth);
+
 		regions.add(record);
 		return record.getId();
 	}

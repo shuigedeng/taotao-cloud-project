@@ -18,6 +18,7 @@ package com.taotao.cloud.data.mybatisplus.base.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.data.mybatisplus.base.entity.MpSuperEntity;
+import com.taotao.cloud.data.mybatisplus.query.BaseMapperX;
 import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;
@@ -31,7 +32,7 @@ import java.util.List;
  * @since 2021-09-02 21:17:15
  */
 public interface MpSuperMapper<T extends MpSuperEntity<I>, I extends Serializable> extends
-	BaseMapper<T> {
+	BaseMapperX<T> {
 
 	/**
 	 * 全量修改所有字段
@@ -52,5 +53,17 @@ public interface MpSuperMapper<T extends MpSuperEntity<I>, I extends Serializabl
 	 * @since 2021-09-02 21:17:23
 	 */
 	int insertBatchSomeColumn(List<T> entityList);
+
+	/**
+	 * 自定义批量插入
+	 * 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
+	 */
+	int insertBatch(@Param("list") List<T> list);
+
+	/**
+	 * 自定义批量更新，条件为主键
+	 * 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
+	 */
+	//int updateBatch(@Param("list") List<T> list);
 
 }

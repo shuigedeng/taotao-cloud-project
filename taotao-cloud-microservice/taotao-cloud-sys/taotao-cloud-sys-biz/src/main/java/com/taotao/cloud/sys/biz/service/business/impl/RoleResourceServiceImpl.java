@@ -20,9 +20,9 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.sys.biz.model.entity.system.QRoleResource;
 import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
 import com.taotao.cloud.sys.biz.mapper.IRoleResourceMapper;
-import com.taotao.cloud.sys.biz.repository.inf.IRoleMenuRepository;
-import com.taotao.cloud.sys.biz.repository.cls.RoleMenuRepository;
-import com.taotao.cloud.sys.biz.service.business.IRoleMenuService;
+import com.taotao.cloud.sys.biz.repository.inf.IRoleResourceRepository;
+import com.taotao.cloud.sys.biz.repository.cls.RoleResourceRepository;
+import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.Set;
@@ -34,9 +34,9 @@ import org.springframework.stereotype.Service;
  * @since 2020/10/21 09:48
  */
 @Service
-public class RoleMenuServiceImpl extends
-	BaseSuperServiceImpl<IRoleResourceMapper, RoleResource, RoleMenuRepository, IRoleMenuRepository, Long>
-	implements IRoleMenuService {
+public class RoleResourceServiceImpl extends
+	BaseSuperServiceImpl<IRoleResourceMapper, RoleResource, RoleResourceRepository, IRoleResourceRepository, Long>
+	implements IRoleResourceService {
 
 	private final static QRoleResource ROLE_RESOURCE = QRoleResource.roleResource;
 

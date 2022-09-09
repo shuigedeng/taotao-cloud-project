@@ -23,8 +23,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.utils.collection.CollectionUtils;
+import com.taotao.cloud.data.mybatisplus.query.BaseMapperX;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -37,7 +40,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2021-09-02 21:17:15
  */
 public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializable> extends
-	BaseMapper<T> {
+	BaseMapperX<T> {
 
 	/**
 	 * 选择页面
@@ -233,4 +236,59 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	default void updateBatch(T update) {
 		update(update, new QueryWrapper<>());
 	}
+
+	/**
+	 * 全量修改所有字段
+	 *
+	 * @param entity 实体
+	 * @return 修改数量
+	 * @since 2021-09-02 21:17:23
+	 */
+	int updateAllById(@Param(Constants.ENTITY) T entity);
+
+	/**
+	 * 批量插入所有字段
+	 * <p>
+	 * 只测试过MySQL！只测试过MySQL！只测试过MySQL！
+	 *
+	 * @param entityList 实体集合
+	 * @return 插入数量
+	 * @since 2021-09-02 21:17:23
+	 */
+	Integer insertBatchSomeColumn(Collection<T> entityList);
+
+	/**
+	 * 自定义批量插入
+	 * 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
+	 */
+	int insertBatch(@Param("list") List<T> list);
+
+	/**
+	 * 自定义批量更新，条件为主键
+	 * 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
+	 */
+	//int updateBatch(@Param("list") List<T> list);
+
+	int batchSize = 1000;  // 应为mysql对于太长的sql语句是有限制的，所以我这里设置每1000条批量插入拼接sql
+
+	default Integer batchInsert(Collection<T> entityList) {
+		int result = 0;
+		Collection<T> tempEntityList = new ArrayList<>();
+		int i = 0;
+		for (T entity : entityList) {
+			tempEntityList.add(entity);
+			if (i > 0 && (i % batchSize == 0)) {
+				result += insertBatchSomeColumn(tempEntityList);
+				tempEntityList.clear();
+			}
+			i++;
+		}
+
+		if (CollectionUtils.isNotEmpty(tempEntityList)) {
+			result += insertBatchSomeColumn(tempEntityList);
+		}
+		return result;
+	}
+
+
 }
