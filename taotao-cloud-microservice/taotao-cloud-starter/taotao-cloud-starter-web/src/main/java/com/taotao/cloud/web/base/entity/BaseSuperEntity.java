@@ -2,6 +2,9 @@ package com.taotao.cloud.web.base.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.vladmihalcea.hibernate.type.json.JsonType;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -24,6 +27,9 @@ import java.time.LocalDateTime;
  * @version 2021.9
  * @since 2021-09-04 07:40:46
  */
+@TypeDefs({
+	@TypeDef(name = "json", typeClass = JsonType.class)
+})
 @MappedSuperclass
 @EntityListeners({AuditingEntityListener.class})
 public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable> extends

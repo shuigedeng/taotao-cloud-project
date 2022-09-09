@@ -3,12 +3,11 @@ package com.taotao.cloud.sys.biz;
 import com.taotao.cloud.sys.biz.service.business.IFileService;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TaoTaoCloudSysApplicationTests {
+class RegionTests {
 
 	@Autowired
 	private IFileService fileService;
@@ -21,8 +20,8 @@ class TaoTaoCloudSysApplicationTests {
 	}
 
 	@Test
-	public void test1(){
-		fileService.findFileById(1L);
+	public void synchronizationData(){
+		regionService.synchronizationData(null);
 	}
 
 }

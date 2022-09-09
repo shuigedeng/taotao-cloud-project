@@ -8,6 +8,8 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-data-jpa"
     api "org.springframework.boot:spring-boot-starter-data-jdbc"
 
+    api 'com.vladmihalcea:hibernate-types-55:2.19.0'
+
     //https://search.maven.org/artifact/com.querydsl/querydsl-apt
     api "com.querydsl:querydsl-apt:5.0.0"
     //https://search.maven.org/artifact/com.querydsl/querydsl-jpa

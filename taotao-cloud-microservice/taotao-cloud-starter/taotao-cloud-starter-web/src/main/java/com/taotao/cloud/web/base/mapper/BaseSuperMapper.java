@@ -22,14 +22,16 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.collection.CollectionUtils;
-import com.taotao.cloud.data.mybatisplus.query.BaseMapperX;
+import com.taotao.cloud.common.utils.exception.ExceptionUtils;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -40,7 +42,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2021-09-02 21:17:15
  */
 public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializable> extends
-	BaseMapperX<T> {
+	BaseMapper<T> {
 
 	/**
 	 * 选择页面
@@ -81,7 +83,8 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 * @since 2022-09-07 08:52:08
 	 */
 	default T selectOne(String field, Object value) {
-		return selectOne(new QueryWrapper<T>().eq(field, value));
+		return Optional.ofNullable(selectOne(new QueryWrapper<T>().eq(field, value)))
+			.orElseThrow(BusinessException::notFoundException);
 	}
 
 	/**
@@ -121,7 +124,7 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 * @since 2022-09-07 08:52:08
 	 */
 	default T selectOne(SFunction<T, ?> field1, Object value1, SFunction<T, ?> field2,
-						Object value2) {
+		Object value2) {
 		return selectOne(new LambdaQueryWrapper<T>().eq(field1, value1).eq(field2, value2));
 	}
 
@@ -258,14 +261,12 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	Integer insertBatchSomeColumn(Collection<T> entityList);
 
 	/**
-	 * 自定义批量插入
-	 * 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
+	 * 自定义批量插入 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
 	 */
 	int insertBatch(@Param("list") List<T> list);
 
 	/**
-	 * 自定义批量更新，条件为主键
-	 * 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
+	 * 自定义批量更新，条件为主键 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
 	 */
 	//int updateBatch(@Param("list") List<T> list);
 

@@ -38,10 +38,10 @@ public interface ILogMapper extends BaseSuperMapper<Log, Long> {
 	@Select("""
 		<script>
 		select l.id,
-				l.create_time as createTime,
-				l.description,
-				l.request_ip as requestIp,
-				l.address,u.nickname
+			   l.create_time as createTime,
+			   l.description,
+			   l.request_ip as requestIp,
+			   l.address,u.nickname
 		from log l left join yx_user u on u.uid=l.uid
 		where l.type=1
 		<if test ="nickname !=null">

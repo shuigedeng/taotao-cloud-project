@@ -53,6 +53,7 @@ public enum ResultEnum implements BaseEnum {
 	ELASTICSEARCH_INDEX_INIT_ERROR(599005, "索引初始化失败！"),
 	PURCHASE_ORDER_DEADLINE_ERROR(599006, "供求单，已超过报名截止时间"),
 	INDEX_BUILDING(599007, "索引正在生成"),
+	NOT_FOUND(599008, "未查询到数据"),
 
 	//********************************************* 系统异常 *******************************************************
 	USER_EDIT_SUCCESS(50000, "用户修改成功"),

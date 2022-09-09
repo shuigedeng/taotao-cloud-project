@@ -58,8 +58,8 @@ public class KafkaLogger extends FormattedLogger {
 	@Override
 	public void logText(String text) {
 		if (Objects.nonNull(kafkaTemplate)) {
-			LogUtils.info("************************");
-			LogUtils.info(text);
+			//LogUtils.info("************************");
+			//LogUtils.info(text);
 
 			kafkaTemplate.send("sys-sql-" + applicationName, text);
 		}

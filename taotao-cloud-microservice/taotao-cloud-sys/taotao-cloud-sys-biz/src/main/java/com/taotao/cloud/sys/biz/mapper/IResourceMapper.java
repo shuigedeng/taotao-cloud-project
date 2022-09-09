@@ -15,10 +15,14 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.data.mybatisplus.query.LambdaQueryWrapperX;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import java.util.Set;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * IMenuMapper
@@ -27,10 +31,24 @@ import java.util.Set;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
 public interface IResourceMapper extends BaseSuperMapper<Resource, Long> {
 
+	@Select("select * from tt_resource where id in #{roleIds}")
 	List<Resource> findMenuByRoleIds(Set<Long> roleIds);
 
+	@Select("")
 	List<Long> selectIdList(List<Long> pidList);
+
+	/**
+	 * 查询资源列表
+	 */
+	default IPage<Resource> selectResourceList(Resource resource, PageParam pageParam) {
+		return this.selectPage(new LambdaQueryWrapperX<Resource>()
+			.likeIfPresent(Resource::getName,resource.getName())
+			.eqIfPresent(Resource::getParentId,resource.getParentId()),
+			pageParam
+		);
+	}
+
+
 }

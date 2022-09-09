@@ -15,9 +15,12 @@
  */
 package com.taotao.cloud.common.exception;
 
+import static com.taotao.cloud.common.enums.ResultEnum.NOT_FOUND;
+
 import com.taotao.cloud.common.enums.ResultEnum;
 
 import java.io.Serial;
+import java.util.function.Supplier;
 
 /**
  * BusinessException 
@@ -57,5 +60,18 @@ public class BusinessException extends BaseException {
 
 	public BusinessException(ResultEnum result, Throwable e) {
 		super(result, e);
+	}
+
+
+	public static Supplier<BusinessException> businessException(String msg) {
+		return () -> new BusinessException(msg);
+	}
+
+	public static Supplier<BusinessException> notFound() {
+		return () -> new BusinessException(NOT_FOUND);
+	}
+
+	public static BusinessException notFoundException() {
+		return new BusinessException(NOT_FOUND);
 	}
 }

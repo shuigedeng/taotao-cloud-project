@@ -45,63 +45,63 @@ spring:
     sentinel:
       enabled: true
       eager: true
-      datasource:
-        #流控 名称随意
-        flow:
-          nacos:
-            server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-flow-rules.json
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
-            username: nacos
-            password: nacos
-            groupId: SENTINEL_GROUP
-            data-type: json
-            # 规则类型，取值见： org.springframework.cloud.alibaba.sentinel.datasource.RuleType
-            rule-type: flow
-        #熔断降级 名称随意
-        degrade:
-          nacos:
-            server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-degrade-rules.json
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
-            username: nacos
-            password: nacos
-            groupId: SENTINEL_GROUP
-            data-type: json
-            rule-type: degrade
-        #系统规则 名称随意
-        system:
-          nacos:
-            server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-system-rules.json
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
-            username: nacos
-            password: nacos
-            groupId: SENTINEL_GROUP
-            data-type: json
-            rule-type: system
-        #授权规则 名称随意
-        authority:
-          nacos:
-            server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-authority-rules.json
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
-            username: nacos
-            password: nacos
-            groupId: SENTINEL_GROUP
-            data-type: json
-            rule-type: authority
-        #参数规则 名称随意
-        param-flow:
-          nacos:
-            server-addr: 192.168.10.200:8000
-            dataId: ${spring.application.name}-param-flow-rules.json
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
-            username: nacos
-            password: nacos
-            groupId: SENTINEL_GROUP
-            data-type: json
-            rule-type: param-flow
+#      datasource:
+#        #流控 名称随意
+#        flow:
+#          nacos:
+#            server-addr: 192.168.10.200:8000
+#            dataId: ${spring.application.name}-flow-rules.json
+#            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+#            username: nacos
+#            password: nacos
+#            groupId: SENTINEL_GROUP
+#            data-type: json
+#            # 规则类型，取值见： org.springframework.cloud.alibaba.sentinel.datasource.RuleType
+#            rule-type: flow
+#        #熔断降级 名称随意
+#        degrade:
+#          nacos:
+#            server-addr: 192.168.10.200:8000
+#            dataId: ${spring.application.name}-degrade-rules.json
+#            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+#            username: nacos
+#            password: nacos
+#            groupId: SENTINEL_GROUP
+#            data-type: json
+#            rule-type: degrade
+#        #系统规则 名称随意
+#        system:
+#          nacos:
+#            server-addr: 192.168.10.200:8000
+#            dataId: ${spring.application.name}-system-rules.json
+#            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+#            username: nacos
+#            password: nacos
+#            groupId: SENTINEL_GROUP
+#            data-type: json
+#            rule-type: system
+#        #授权规则 名称随意
+#        authority:
+#          nacos:
+#            server-addr: 192.168.10.200:8000
+#            dataId: ${spring.application.name}-authority-rules.json
+#            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+#            username: nacos
+#            password: nacos
+#            groupId: SENTINEL_GROUP
+#            data-type: json
+#            rule-type: authority
+#        #参数规则 名称随意
+#        param-flow:
+#          nacos:
+#            server-addr: 192.168.10.200:8000
+#            dataId: ${spring.application.name}-param-flow-rules.json
+#            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+#            username: nacos
+#            password: nacos
+#            groupId: SENTINEL_GROUP
+#            data-type: json
+#            rule-type: param-flow
       transport:
         dashboard: 192.168.10.200:8858
         port: 8712
