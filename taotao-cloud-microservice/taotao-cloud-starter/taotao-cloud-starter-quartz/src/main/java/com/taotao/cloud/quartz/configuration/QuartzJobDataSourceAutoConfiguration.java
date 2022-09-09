@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  * 有时候我们会希望将quartz的相关表保存在单独的一个数据库中，从而与业务相关的表分开。
  */
 @Configuration
-public class QuartzJobDataSourceConfiguration {
+public class QuartzJobDataSourceAutoConfiguration {
     /**
      * 为quartz的任务和触发器单独配置一个数据源  @QuartzDataSource注解用于声明quartz使用这个数据源
      */

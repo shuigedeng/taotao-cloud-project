@@ -45,7 +45,7 @@ import org.springframework.stereotype.Component;
  * @since 2022-03-25 15:01:01
  */
 @AutoConfiguration
-public class QuartzJobConfiguration implements ApplicationContextAware {
+public class QuartzJobAutoConfiguration implements ApplicationContextAware {
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

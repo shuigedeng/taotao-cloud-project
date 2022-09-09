@@ -1,1 +1,2 @@
 com.taotao.cloud.schedule.configuration.ScheduledAutoConfiguration
+com.taotao.cloud.schedule.configuration.ShedLockRedisAutoConfiguration
