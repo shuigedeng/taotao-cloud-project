@@ -7,6 +7,7 @@ import net.javacrumbs.shedlock.provider.redis.spring.RedisLockProvider;
 import net.javacrumbs.shedlock.spring.annotation.EnableSchedulerLock;
 import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -21,9 +22,9 @@ import org.springframework.stereotype.Component;
  * //这里默认55s
  * //关于ISO8601 Duration格式用的不到，具体可上网查询下相关资料，应该就是一套规范，规定一些时间表达方式
  **/
-@Configuration
+@AutoConfiguration
 @EnableSchedulerLock(defaultLockAtMostFor = "PT55S")
-public class ShedLockRedisConfig {
+public class ShedLockRedisAutoConfiguration {
 
     @Value("${spring.profiles.active}")
     private String env;
@@ -55,29 +56,29 @@ public class ShedLockRedisConfig {
 	 * lockAtLeastFor：成功执行任务的节点所能拥有独占所的最短时间，单位是毫秒ms
 	 * lockAtLeastForString：成功执行任务的节点所能拥有的独占锁的最短时间的字符串表达，例如“PT14M”表示为14分钟,单位可以是S,M,H
 	 */
-	@Scheduled(cron = "0 */1 * * * ?")
-	@SchedulerLock(name = "scheduledController_notice", lockAtLeastFor = "PT15M", lockAtMostFor = "PT14M")
-	public void notice() {
-		try {
-			LogUtils.info(port + "- 执行定时器 scheduledController_notice");
-		} catch (Exception e) {
-			LogUtils.error("异常信息:", e);
-		}
-	}
-
-	@Component
-	public static class TaskSchedule {
-
-		/**
-		 * 每分钟执行一次
-		 * [秒] [分] [小时] [日] [月] [周] [年]
-		 */
-		@Scheduled(cron = "1 * * * * ?")
-		@SchedulerLock(name = "synchronousSchedule")
-		public void synchronousSchedule() {
-			System.out.println("Start run schedule to synchronous data:" + new Date());
-		}
-
-	}
+	// @Scheduled(cron = "0 */1 * * * ?")
+	// @SchedulerLock(name = "scheduledController_notice", lockAtLeastFor = "PT15M", lockAtMostFor = "PT14M")
+	// public void notice() {
+	// 	try {
+	// 		LogUtils.info(port + "- 执行定时器 scheduledController_notice");
+	// 	} catch (Exception e) {
+	// 		LogUtils.error("异常信息:", e);
+	// 	}
+	// }
+	//
+	// @Component
+	// public static class TaskSchedule {
+	//
+	// 	/**
+	// 	 * 每分钟执行一次
+	// 	 * [秒] [分] [小时] [日] [月] [周] [年]
+	// 	 */
+	// 	@Scheduled(cron = "1 * * * * ?")
+	// 	@SchedulerLock(name = "synchronousSchedule")
+	// 	public void synchronousSchedule() {
+	// 		System.out.println("Start run schedule to synchronous data:" + new Date());
+	// 	}
+	//
+	// }
 
 }
