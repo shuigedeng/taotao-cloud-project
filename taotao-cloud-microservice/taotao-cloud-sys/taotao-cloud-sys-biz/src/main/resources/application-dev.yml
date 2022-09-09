@@ -449,7 +449,7 @@ spring:
           jobStore:
             # 在调度流程的第一步，也就是拉取待即将触发的triggers时，是上锁的状态，即不会同时存在多个线程拉取到相同的trigger的情况，也就避免的重复调度的危险。参考：https://segmentfault.com/a/1190000015492260
             acquireTriggersWithinLock: true
-            dataSource: DS
+            #dataSource: DS
             # JobStore 实现类
             class: org.quartz.impl.jdbcjobstore.JobStoreTX
             # 使用完全兼容JDBC的驱动
@@ -1175,20 +1175,30 @@ taotao:
         enabled: true
 
 mybatis-plus:
+  #实体扫描 多个package用户逗号或者分号分割
   typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity
+  # mapper xml 地址
   mapperLocations: classpath:mapper/*.xml
   global-config:
+    # 关闭mp3.0自带的banner
+    banner: false
     db-config:
+      #主键类型
       id-type: auto
+      #驼峰下划线转换
       table-underline: true
+      #逻辑删除全局值 1已删除
       logic-delete-value: 1
+      #逻辑未删除全局值 0未删除
       logic-not-delete-value: 0
-      insert-strategy: ignored
-      update-strategy: ignored
-      where-strategy: ignored
+      #字段策略
+      insert-strategy: not_null
+      update-strategy: not_null
+      where-strategy: not_empty
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+    # 日志打印参数class
     log-impl: com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
     #查询时，关闭关联对象即时加载以提高性能
     lazyLoadingEnabled : true
