@@ -41,7 +41,7 @@ for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
         directory.eachDir {it->
-            if (it.name != "build" && it.name != "out" && it.name != "bin") {
+            if (it.name != "build" && it.name != "out" && it.name != "bin" && it.name != "arthas-output") {
                 include "${dir}:${directory.name}"
             }
         }
@@ -52,15 +52,15 @@ def threeLayerProjects = ['microservice', 'warehouse']
 for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
-        if (directory.name != "build" && directory.name != "out" && directory.name != "src" && directory.name != "bin") {
+        if (directory.name != "build" && directory.name != "out" && directory.name != "src" && directory.name != "bin" && directory.name != "arthas-output") {
             include "${dir}:${directory.name}"
 
             directory.eachDir {it->
-                if (it.name != "build" && it.name != "src" && it.name != "out" && it.name != "bin") {
+                if (it.name != "build" && it.name != "src" && it.name != "out" && it.name != "bin" && it.name != "arthas-output") {
                     include "${dir}:${directory.name}:${it.name}"
 
                     it.eachDir {four->
-                        if (four.name != "build" && four.name != "src" && four.name != "out" && four.name != "bin") {
+                        if (four.name != "build" && four.name != "src" && four.name != "out" && four.name != "bin" && four.name != "arthas-output") {
                             include "${dir}:${directory.name}:${it.name}:${four.name}"
                         }
                     }

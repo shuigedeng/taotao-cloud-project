@@ -34,4 +34,7 @@ public class ResourceRepository extends BaseSuperRepository<Resource, Long> {
 		super(Resource.class, em);
 	}
 
+
+
+
 }

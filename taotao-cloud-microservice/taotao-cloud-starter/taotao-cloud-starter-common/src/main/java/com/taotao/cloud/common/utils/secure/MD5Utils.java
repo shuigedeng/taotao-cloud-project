@@ -16,9 +16,12 @@
 package com.taotao.cloud.common.utils.secure;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shenyu.common.exception.ShenyuException;
 
 /**
  * MD5Util
@@ -83,5 +86,48 @@ public class MD5Utils {
 		 * }
 		 * return null;
 		 */
+	}
+
+	/**
+	 * Md 5 string.
+	 *
+	 * @param src     the src
+	 * @param charset the charset
+	 *
+	 * @return the string
+	 */
+	private static String md5(final String src, final String charset) {
+		MessageDigest md5;
+		StringBuilder hexValue = new StringBuilder(32);
+		try {
+			md5 = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			throw new ShenyuException("MD5 not supported", e);
+		}
+		byte[] byteArray = new byte[0];
+		try {
+			byteArray = src.getBytes(charset);
+		} catch (UnsupportedEncodingException e) {
+			LogUtils.error(e.getMessage(), e);
+		}
+		byte[] md5Bytes = md5.digest(byteArray);
+		for (byte md5Byte : md5Bytes) {
+			int val = ((int) md5Byte) & 0xff;
+			if (val < 16) {
+				hexValue.append("0");
+			}
+			hexValue.append(Integer.toHexString(val));
+		}
+		return hexValue.toString();
+	}
+
+	/**
+	 * Md 5 string.
+	 *
+	 * @param src the src
+	 * @return the string
+	 */
+	public static String md5(final String src) {
+		return md5(src, StandardCharsets.UTF_8.name());
 	}
 }

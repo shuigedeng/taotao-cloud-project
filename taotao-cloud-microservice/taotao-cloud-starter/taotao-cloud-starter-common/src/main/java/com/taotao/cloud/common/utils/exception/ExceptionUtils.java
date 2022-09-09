@@ -15,8 +15,11 @@
  */
 package com.taotao.cloud.common.utils.exception;
 
+import static com.taotao.cloud.common.enums.ResultEnum.NOT_FOUND;
+
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
@@ -24,6 +27,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
+import java.util.function.Supplier;
 
 /**
  * ExceptionUtil
@@ -178,6 +182,29 @@ public class ExceptionUtils {
 	public static void ignoreException(Runnable runnable) {
 		ignoreException(runnable, false);
 	}
+
+
+	public static <T extends BaseException> Supplier<T> unchecked(Class<T> clazz, String msg) {
+		try {
+			T t = clazz.getDeclaredConstructor(String.class).newInstance(msg);
+			return () -> t;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static Supplier<BusinessException> businessException(String msg) {
+		return () -> new BusinessException(msg);
+	}
+
+	public static Supplier<BusinessException> notFound() {
+		return () -> new BusinessException(NOT_FOUND);
+	}
+
+	public static BusinessException notFoundException() {
+		return new BusinessException(NOT_FOUND);
+	}
+
 
 	/**
 	 * 将CheckedException转换为UncheckedException.

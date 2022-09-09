@@ -26,6 +26,7 @@ import com.taotao.cloud.common.http.HttpRequest;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.secure.SignUtils;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
 import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.disruptor.util.StringUtils;
@@ -42,13 +43,11 @@ import com.taotao.cloud.sys.biz.service.business.IRegionService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,10 +69,15 @@ public class RegionServiceImpl extends
 	@Autowired
 	private RedisRepository redisRepository;
 
+
+	private final String AMAP_KEY = System.getenv("AMAP_KEY");
+	private final String AMAP_SECURITY_KEY = System.getenv("AMAP_SECURITY_KEY");
+
 	/**
 	 * 同步请求地址
 	 */
-	private final String syncUrl = "https://restapi.amap.com/v3/config/district?subdistrict=4&key=xxxxx";
+	private final String syncUrl =
+		"https://restapi.amap.com/v3/config/district?subdistrict=4&key=" + AMAP_KEY;
 
 	@Override
 	public List<RegionParentVO> queryRegionByParentId(Long parentId) {
@@ -258,12 +262,13 @@ public class RegionServiceImpl extends
 		try {
 			//读取数据
 			String jsonString;
+			String signUrl = SignUtils.sign(AMAP_SECURITY_KEY, syncUrl);
 			if (Objects.nonNull(okHttpService)) {
-				jsonString = okHttpService.url(StringUtils.isBlank(url) ? syncUrl : url)
+					jsonString = okHttpService.url(StringUtils.isBlank(url) ? signUrl : url)
 					.get()
 					.sync();
 			} else {
-				jsonString = HttpRequest.get(StringUtils.isBlank(url) ? syncUrl : url)
+				jsonString = HttpRequest.get(StringUtils.isBlank(url) ? signUrl : url)
 					.useConsoleLog()
 					.executeAsync()
 					.join()
@@ -288,7 +293,8 @@ public class RegionServiceImpl extends
 					this.saveOrUpdateBatch(regions.subList(i * 100, endPoint));
 				}
 
-				MpUtils.batchUpdateOrInsert(regions, getBaseMapper().getClass(),(t, m) -> m.insert(t));
+				MpUtils.batchUpdateOrInsert(regions, getBaseMapper().getClass(),
+					(t, m) -> m.insert(t));
 
 				//重新设置缓存
 				redisRepository.setEx(RedisConstant.REGIONS_KEY, jsonString, 30 * 24 * 60 * 60);
@@ -297,6 +303,7 @@ public class RegionServiceImpl extends
 			LogUtils.error("同步行政数据错误", e);
 		}
 	}
+
 
 	/**
 	 * 构造数据模型
@@ -323,7 +330,7 @@ public class RegionServiceImpl extends
 			//插入国家
 			Long countryId = insert(regions, null, countryCode, countryAdCode, countryName,
 				countryCenter,
-				countryLevel, idTree, codeTree, 1,i + 1);
+				countryLevel, idTree, codeTree, 1, i + 1);
 
 			JSONArray provinceAll = contry.getJSONArray("districts");
 			for (int j = 0; j < provinceAll.size(); j++) {
@@ -334,13 +341,13 @@ public class RegionServiceImpl extends
 				String provinceCenter = province.getString("center");
 				String provinceLevel = province.getString("level");
 
-				List<Long> countryIdTree = List.of(countryId );
+				List<Long> countryIdTree = List.of(countryId);
 				List<String> countryCodeTree = List.of(countryAdCode);
 
 				//1.插入省
 				Long provinceId = insert(regions, countryId, provinceCode, provinceAdcode,
 					provinceName, provinceCenter, provinceLevel,
-					countryIdTree, countryCodeTree, 2,j + 1);
+					countryIdTree, countryCodeTree, 2, j + 1);
 
 				JSONArray cityAll = province.getJSONArray("districts");
 				for (int z = 0; z < cityAll.size(); z++) {
@@ -351,13 +358,13 @@ public class RegionServiceImpl extends
 					String cityCenter = city.getString("center");
 					String cityLevel = city.getString("level");
 
-					List<Long> provinceIdTree = List.of(countryId, provinceId );
+					List<Long> provinceIdTree = List.of(countryId, provinceId);
 					List<String> provinceCodeTree = List.of(countryAdCode, provinceAdcode);
 
 					//2.插入市
 					Long cityId = insert(regions, provinceId, cityCode, cityAdcode, cityName,
 						cityCenter, cityLevel,
-						provinceIdTree, provinceCodeTree, 3,z + 1);
+						provinceIdTree, provinceCodeTree, 3, z + 1);
 
 					JSONArray districtAll = city.getJSONArray("districts");
 					for (int w = 0; w < districtAll.size(); w++) {
@@ -368,13 +375,14 @@ public class RegionServiceImpl extends
 						String districtCenter = district.getString("center");
 						String districtLevel = district.getString("level");
 
-						List<Long> cityIdTree = List.of(countryId, provinceId, cityId );
-						List<String> cityCodeTree = List.of(countryAdCode, provinceAdcode, cityAdcode);
+						List<Long> cityIdTree = List.of(countryId, provinceId, cityId);
+						List<String> cityCodeTree = List.of(countryAdCode, provinceAdcode,
+							cityAdcode);
 
 						//3.插入区县
 						Long districtId = insert(regions, cityId, districtCode, districtAdcode,
 							districtName, districtCenter,
-							districtLevel, cityIdTree, cityCodeTree, 4,w + 1);
+							districtLevel, cityIdTree, cityCodeTree, 4, w + 1);
 
 						//有需要可以继续向下遍历
 						JSONArray streetAll = district.getJSONArray("districts");
@@ -386,12 +394,16 @@ public class RegionServiceImpl extends
 							String streetCenter = street.getString("center");
 							String streetLevel = street.getString("level");
 
-							List<Long> districtIdTree = List.of(countryId, provinceId, cityId, districtId);
-							List<String> districtCodeTree = List.of(countryAdCode, provinceAdcode, cityAdcode, districtAdcode);;
+							List<Long> districtIdTree = List.of(countryId, provinceId, cityId,
+								districtId);
+							List<String> districtCodeTree = List.of(countryAdCode, provinceAdcode,
+								cityAdcode, districtAdcode);
+							;
 
 							//4.插入街道
 							insert(regions, districtId, streetCode, streetAdcode, streetName,
-								streetCenter, streetLevel, districtIdTree, districtCodeTree, 5,r + 1);
+								streetCenter, streetLevel, districtIdTree, districtCodeTree, 5,
+								r + 1);
 						}
 					}
 				}
