@@ -71,8 +71,8 @@ dependencies {
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
-//    testImplementation 'org.jeasy:easy-random:5.0.0'
-//    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation 'org.jeasy:easy-random:5.0.0'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
 
     //testImplementation "org.assertj:assertj-guava:3.4.0"
     //testImplementation "junit:junit:4.13.2"
