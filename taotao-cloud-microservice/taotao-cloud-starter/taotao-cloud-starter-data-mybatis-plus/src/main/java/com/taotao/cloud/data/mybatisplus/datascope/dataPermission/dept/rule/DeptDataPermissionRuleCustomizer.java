@@ -3,7 +3,7 @@ package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.dept.rule;
 /**
  * 数据权限规则的自定义配置接口 用于对数据权限的规则列进行配置Ω
  *
- * @author fxz
+ *
  */
 @FunctionalInterface
 public interface DeptDataPermissionRuleCustomizer {

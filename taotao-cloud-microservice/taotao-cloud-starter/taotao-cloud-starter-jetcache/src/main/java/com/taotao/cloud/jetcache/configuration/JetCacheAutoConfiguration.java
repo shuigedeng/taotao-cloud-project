@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.jetcache.configuration;
 
+import com.alicp.jetcache.CacheManager;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.jetcache.enhance.HerodotusCacheManager;
 import com.taotao.cloud.jetcache.enhance.JetCacheCreateCacheFactory;
@@ -26,7 +27,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 

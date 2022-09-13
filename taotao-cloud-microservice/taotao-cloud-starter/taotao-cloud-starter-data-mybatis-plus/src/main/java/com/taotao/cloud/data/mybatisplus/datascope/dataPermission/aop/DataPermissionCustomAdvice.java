@@ -1,8 +1,6 @@
 package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.aop;
 
-import com.fxz.common.dataPermission.annotation.DataPermission;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.annotation.DataPermission;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.core.MethodClassKey;
@@ -15,10 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 自定义Advice 处理数据权限的拦截器 1. 在执行方法前，将 数据权限 注解入栈 2. 在执行方法后，将 数据权限 注解出栈
- *
- * @author fxz
  */
-@AllArgsConstructor(staticName = "of")
 @DataPermission
 public class DataPermissionCustomAdvice implements MethodInterceptor {
 
@@ -26,10 +21,16 @@ public class DataPermissionCustomAdvice implements MethodInterceptor {
 	 * DataPermission 空对象，方法无数据权限注解时，使用DATA_PERMISSION_NULL占位
 	 */
 	static final DataPermission DATA_PERMISSION_NULL = DataPermissionCustomAdvice.class
-			.getAnnotation(DataPermission.class);
+		.getAnnotation(DataPermission.class);
 
-	@Getter
 	private final Map<MethodClassKey, DataPermission> dataPermissionCache = new ConcurrentHashMap<>();
+
+	public Map<MethodClassKey, DataPermission> getDataPermissionCache() {
+		return dataPermissionCache;
+	}
+
+	public DataPermissionCustomAdvice() {
+	}
 
 	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
@@ -44,8 +45,7 @@ public class DataPermissionCustomAdvice implements MethodInterceptor {
 		try {
 			// 执行逻辑
 			return methodInvocation.proceed();
-		}
-		finally {
+		} finally {
 			if (Objects.nonNull(dataPermission)) {
 				// 数据权限注解出栈
 				DataPermissionContextHolder.remove();
@@ -75,7 +75,7 @@ public class DataPermissionCustomAdvice implements MethodInterceptor {
 
 		// 添加到缓存中
 		dataPermissionCache.put(methodClassKey,
-				Objects.nonNull(dataPermission) ? dataPermission : DATA_PERMISSION_NULL);
+			Objects.nonNull(dataPermission) ? dataPermission : DATA_PERMISSION_NULL);
 
 		return dataPermission;
 	}

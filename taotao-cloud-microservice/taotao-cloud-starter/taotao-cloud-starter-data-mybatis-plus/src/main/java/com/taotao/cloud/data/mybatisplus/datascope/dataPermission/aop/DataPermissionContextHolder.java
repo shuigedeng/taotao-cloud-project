@@ -1,15 +1,13 @@
 package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.aop;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.fxz.common.dataPermission.annotation.DataPermission;
+import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.annotation.DataPermission;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * 数据权限注解上下文
- *
- * @author fxz
  */
 public class DataPermissionContextHolder {
 
@@ -17,10 +15,11 @@ public class DataPermissionContextHolder {
 	 * ttl解决父子线程传值问题 由于存在方法的嵌套调用 所以使用List
 	 */
 	private static final ThreadLocal<LinkedList<DataPermission>> DATA_PERMISSIONS = TransmittableThreadLocal
-			.withInitial(LinkedList::new);
+		.withInitial(LinkedList::new);
 
 	/**
 	 * 获得当前的数据权限注解
+	 *
 	 * @return 数据权限 注解
 	 */
 	public static DataPermission get() {
@@ -29,6 +28,7 @@ public class DataPermissionContextHolder {
 
 	/**
 	 * 入栈 数据权限 注解
+	 *
 	 * @param dataPermission 数据权限注解
 	 */
 	public static void add(DataPermission dataPermission) {
@@ -37,6 +37,7 @@ public class DataPermissionContextHolder {
 
 	/**
 	 * 出栈 数据权限 注解
+	 *
 	 * @return 数据权限 注解
 	 */
 	public static void remove() {
@@ -49,6 +50,7 @@ public class DataPermissionContextHolder {
 
 	/**
 	 * 获得所有 数据权限
+	 *
 	 * @return 数据权限 队列
 	 */
 	public static List<DataPermission> getAll() {
