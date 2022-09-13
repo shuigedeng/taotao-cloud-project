@@ -84,7 +84,7 @@ dependencies {
     // jdk11删除了NashornScriptEngineFactory 引入此依赖支持其他框架以及jdk11以上版本
     api "org.openjdk.nashorn:nashorn-core"
     //https://search.maven.org/artifact/org.yaml/snakeyaml
-    api "org.yaml:snakeyaml:1.30"
+    api "org.yaml:snakeyaml:1.31"
     //https://search.maven.org/artifact/ma.glasnost.orika/orika-core
     api "ma.glasnost.orika:orika-core:1.5.4"
     //https://search.maven.org/artifact/com.github.yitter/yitter-idgenerator

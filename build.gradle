@@ -23,7 +23,7 @@ buildscript {
         //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
         springBootVersion = '2.7.3'
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
-        springCloudVersion = '2021.0.3'
+        springCloudVersion = '2021.0.4'
         //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies
         springCloudAlibabaVersion = '2021.0.1.0'
 
@@ -51,9 +51,9 @@ buildscript {
         springKafkaVersion = '2.9.0'
 
         //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-databind
-        fasterxmlVersion = '2.13.3'
+        fasterxmlVersion = '2.13.4'
         //https://search.maven.org/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
-        jacksonDatatypeJsr310Version = '2.13.3'
+        jacksonDatatypeJsr310Version = '2.13.4'
         //https://search.maven.org/artifact/com.alibaba/transmittable-thread-local
         transmittableVersion = '2.14.0'
         //https://search.maven.org/artifact/org.slf4j/slf4j-api
@@ -73,7 +73,7 @@ buildscript {
         //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
         easyCaptchaVersion = '1.6.2'
         //https://search.maven.org/artifact/cn.hutool/hutool-all
-        hutoolVersion = '5.8.5'
+        hutoolVersion = '5.8.6'
         //https://search.maven.org/artifact/javax.validation/validation-api
         validationApiVersion = '2.0.1.Final'
         //https://search.maven.org/artifact/com.querydsl/querydsl-apt
@@ -111,7 +111,7 @@ buildscript {
         //https://search.maven.org/artifact/com.github.danielwegener/logback-kafka-appender
         logbackKafkaAppenderVersion = '0.2.0-RC2'
         //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-logback-1.x
-        skywalkingVersion = "8.11.0"
+        skywalkingVersion = "8.12.0"
         //https://search.maven.org/artifact/net.logstash.logback/logstash-logback-encoder
         logstashLogbackEncoderVersion = '7.2'
         //https://search.maven.org/artifact/org.apache.commons/commons-lang3
@@ -157,7 +157,7 @@ buildscript {
         //https://search.maven.org/artifact/com.google.zxing/javase
         zxingJavaseVersion = "3.5.0"
         //https://search.maven.org/artifact/org.jsoup/jsoup
-        jsoupVersion = "1.15.2"
+        jsoupVersion = "1.15.3"
         //https://search.maven.org/artifact/com.thoughtworks.xstream/xstream
         xstreamVersion = "1.4.19"
         //https://search.maven.org/artifact/commons-configuration/commons-configuration
@@ -171,7 +171,7 @@ buildscript {
         //https://search.maven.org/artifact/cn.afterturn/easypoi-base
         easypoiVersion = "4.4.0"
         //https://search.maven.org/artifact/com.taobao.arthas/arthas-spring-boot-starter
-        arthasVersion = "3.6.5"
+        arthasVersion = "3.6.6"
         //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
         jasyptVersion = "3.0.4"
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos

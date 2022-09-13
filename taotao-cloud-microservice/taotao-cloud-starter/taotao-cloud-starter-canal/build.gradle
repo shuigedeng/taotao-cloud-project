@@ -2,7 +2,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/com.alibaba.otter/canal.client
-    api("com.alibaba.otter:canal.client:1.1.6"){
+    api("com.alibaba.otter:canal.client:1.1.6") {
         exclude group: "log4j", module: "log4j"
         exclude group: "com.google.protobuf", module: "protobuf-java"
     }
@@ -14,6 +14,7 @@ dependencies {
     //testImplementation "junit:junit:4.13.2"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
 tasks.named("test") {

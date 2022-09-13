@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @BaseRequest(baseURL = "http://localhost:8080/hello")
-public interface AmapClient {
+public interface TestAmapClient {
 	/**
 	 * 聪明的你一定看出来了@Get注解代表该方法专做GET请求 在url中的{0}代表引用第一个参数，{1}引用第二个参数
 	 */
