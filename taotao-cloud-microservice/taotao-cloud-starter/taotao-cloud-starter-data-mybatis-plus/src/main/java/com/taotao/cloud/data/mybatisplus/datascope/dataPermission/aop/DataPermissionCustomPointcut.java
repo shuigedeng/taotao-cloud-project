@@ -1,6 +1,6 @@
 package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.aop;
 
-import com.fxz.common.dataPermission.annotation.DataPermission;
+import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.annotation.DataPermission;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.ComposablePointcut;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
@@ -8,7 +8,6 @@ import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
 /**
  * 自定义Pointcut
  *
- * @author Fxz
  * @version 1.0
  * @date 2022/9/10 11:09
  */

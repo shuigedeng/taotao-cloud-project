@@ -1,6 +1,7 @@
 package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.annotation;
 
 import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.rule.DataPermissionRule;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,8 +10,6 @@ import java.lang.annotation.Target;
 
 /**
  * 数据权限注解 可声明在类或者方法上，标识使用的数据权限规则
- *
- * @author fxz
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

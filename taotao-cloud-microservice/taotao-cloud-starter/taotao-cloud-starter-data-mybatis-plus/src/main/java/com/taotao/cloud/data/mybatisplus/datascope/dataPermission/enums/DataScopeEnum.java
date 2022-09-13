@@ -1,17 +1,11 @@
 package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 /**
  * 数据范围枚举类
- *
+ * <p>
  * 用于实现数据级别的权限
- *
- * @author fxz
  */
-@Getter
-@AllArgsConstructor
 public enum DataScopeEnum {
 
 	/**
@@ -44,4 +38,11 @@ public enum DataScopeEnum {
 	 */
 	private final Integer scope;
 
+	DataScopeEnum(Integer scope) {
+		this.scope = scope;
+	}
+
+	public Integer getScope() {
+		return scope;
+	}
 }
