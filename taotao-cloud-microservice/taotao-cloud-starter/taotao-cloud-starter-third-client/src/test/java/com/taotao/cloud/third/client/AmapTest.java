@@ -1,22 +1,17 @@
-package com.taotao.cloud.quartz;
+package com.taotao.cloud.third.client;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
-
-@SpringBootTest(classes = QuartzTest.App.class,
+@SpringBootTest(classes = AmapTest.App.class,
 	properties = {
 		"spring.application.name=taotao-cloud-quartz-test",
 		"taotao.cloud.quartz.enabled=true"
 	},
 	webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
 )
-//@AutoConfigureMockMvc
-class QuartzTest {
+class AmapTest {
 
 	@SpringBootApplication
 	public static class App {

@@ -25,6 +25,7 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.http.HttpRequest;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
+import com.taotao.cloud.common.utils.io.HttpUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.secure.SignUtils;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
@@ -70,13 +71,13 @@ public class RegionServiceImpl extends
 	private RedisRepository redisRepository;
 
 
-	private final String AMAP_KEY = System.getenv("AMAP_KEY");
-	private final String AMAP_SECURITY_KEY = System.getenv("AMAP_SECURITY_KEY");
+	private final static String AMAP_KEY = System.getenv("AMAP_KEY");
+	private final static String AMAP_SECURITY_KEY = System.getenv("AMAP_SECURITY_KEY");
 
 	/**
 	 * 同步请求地址
 	 */
-	private final String syncUrl =
+	private final static String syncUrl =
 		"https://restapi.amap.com/v3/config/district?subdistrict=4&key=" + AMAP_KEY;
 
 	@Override
@@ -286,15 +287,15 @@ public class RegionServiceImpl extends
 				redisRepository.del(keys.toArray(new String[keys.size()]));
 
 				// 构造存储数据库的对象集合
-				List<Region> regions = this.initData(jsonString);
-				for (int i = 0; i < (regions.size() / 100 + (regions.size() % 100 == 0 ? 0 : 1));
-					i++) {
-					int endPoint = Math.min((100 + (i * 100)), regions.size());
-					this.saveOrUpdateBatch(regions.subList(i * 100, endPoint));
-				}
-
-				MpUtils.batchUpdateOrInsert(regions, getBaseMapper().getClass(),
-					(t, m) -> m.insert(t));
+				//List<Region> regions = this.initData(jsonString);
+				//for (int i = 0; i < (regions.size() / 100 + (regions.size() % 100 == 0 ? 0 : 1));
+				//	i++) {
+				//	int endPoint = Math.min((100 + (i * 100)), regions.size());
+				//	this.saveOrUpdateBatch(regions.subList(i * 100, endPoint));
+				//}
+				//
+				//MpUtils.batchUpdateOrInsert(regions, getBaseMapper().getClass(),
+				//	(t, m) -> m.insert(t));
 
 				//重新设置缓存
 				redisRepository.setEx(RedisConstant.REGIONS_KEY, jsonString, 30 * 24 * 60 * 60);
@@ -305,12 +306,20 @@ public class RegionServiceImpl extends
 	}
 
 
+	//public static void main(String[] args) throws IllegalAccessException {
+	//	String signUrl = SignUtils.sign(AMAP_SECURITY_KEY, syncUrl);
+	//	String request = HttpUtils.request(signUrl, "GET");
+	//	System.out.println("slfdjsldf");
+	//	List<Region> regions = initData(request);
+	//	System.out.println("lsdfsldf");
+	//}
+
 	/**
 	 * 构造数据模型
 	 *
 	 * @param jsonString jsonString
 	 */
-	private List<Region> initData(String jsonString) {
+	private static List<Region> initData(String jsonString) {
 		//最终数据承载对象
 		List<Region> regions = new ArrayList<>();
 		JSONObject jsonObject = JSONObject.parseObject(jsonString);
@@ -423,7 +432,7 @@ public class RegionServiceImpl extends
 	 * @param level    country:国家 province:省份（直辖市会在province和city显示） city:市（直辖市会在province和city显示）
 	 *                 district:区县 street:街道
 	 */
-	public Long insert(List<Region> regions, Long parentId, String cityCode, String code,
+	public static Long insert(List<Region> regions, Long parentId, String cityCode, String code,
 		String name, String center, String level, List<Long> idTree, List<String> codeTree,
 		Integer depth, Integer orderNum) {
 		//  \"citycode\": [],\n" +
@@ -459,10 +468,13 @@ public class RegionServiceImpl extends
 		//}
 		record.setOrderNum(orderNum);
 
-		idTree.add(record.getId());
-		record.setIdTree(idTree);
-		codeTree.add(code);
-		record.setCodeTree(codeTree);
+		ArrayList<Long> idTrees = new ArrayList<>(idTree);
+		idTrees.add(record.getId());
+		record.setIdTree(idTrees);
+
+		ArrayList<String> codeTrees = new ArrayList<>(codeTree);
+		codeTrees.add(code);
+		record.setCodeTree(codeTrees);
 
 		record.setDepth(depth);
 
