@@ -16,8 +16,7 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.taotao.cloud.web.base.repository.BaseIrSuperRepository;
 
 /**
  * CompanyMapper
@@ -27,6 +26,5 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 
-public interface IUserRepository extends JpaRepository<User, Long> {
-
+public interface IUserRepository extends BaseIrSuperRepository<User, Long> {
 }

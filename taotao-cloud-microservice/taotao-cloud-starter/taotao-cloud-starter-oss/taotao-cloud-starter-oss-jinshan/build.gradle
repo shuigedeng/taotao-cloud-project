@@ -4,13 +4,13 @@ dependencies {
 
     //金山云
     //https://search.maven.org/artifact/com.ksyun/ks3-kss-java-sdk
-    api("com.ksyun:ks3-kss-java-sdk:1.0.2") {
+    api("com.ksyun:ks3-kss-java-sdk:1.0.3") {
         exclude group: "commons-logging", module: "commons-logging"
     }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation "junit:junit:4.13.2"
+    
     testImplementation "org.springframework:spring-test"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"

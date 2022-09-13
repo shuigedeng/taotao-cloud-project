@@ -16,9 +16,10 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import javax.persistence.EntityManager;
+import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
 
 /**
  * CompanyMapper
@@ -28,7 +29,7 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class RegionRepository  extends BaseSuperRepository<Region, Long> {
+public class RegionRepository extends BaseCrSuperRepository<Region, Long> {
 
 	public RegionRepository(EntityManager em) {
 		super(Region.class, em);

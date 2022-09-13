@@ -1,6 +1,5 @@
-package com.taotao.cloud.spring.source.springmvc_annotation.controller;
+package com.taotao.cloud.demo.async;
 
-import com.taotao.cloud.spring.source.springmvc_annotation.service.DeferredResultQueue;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

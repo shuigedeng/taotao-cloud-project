@@ -489,7 +489,7 @@ spring:
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
-    mode: HTML5
+    mode: HTML
     prefix: classpath:/static/
     suffix: .html
     encoding: UTF-8
@@ -749,6 +749,12 @@ spring:
       sql-show: true
       check-table-metadata-enabled: true
       kernel-executor-size: 20
+      max:
+        connections:
+          size:
+            pre:
+              #开启内存模式
+              query: 50
     mode:
       type: Cluster
       overwrite: true

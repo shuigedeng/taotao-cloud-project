@@ -15,11 +15,12 @@
  */
 package com.taotao.cloud.order.biz.repository.cls;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderInfo;
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import javax.persistence.EntityManager;
+import com.taotao.cloud.order.biz.model.entity.order.OrderInfo;
+import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
 
 /**
  * @author shuigedeng
@@ -27,7 +28,7 @@ import org.springframework.stereotype.Repository;
  * @since 2020/10/22 12:46
  */
 @Repository
-public class OrderInfoRepository extends BaseSuperRepository<OrderInfo, Long> {
+public class OrderInfoRepository extends BaseCrSuperRepository<OrderInfo, Long> {
 
 	public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
 

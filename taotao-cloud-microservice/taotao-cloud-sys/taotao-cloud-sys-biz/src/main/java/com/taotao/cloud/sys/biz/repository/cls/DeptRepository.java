@@ -16,9 +16,10 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import javax.persistence.EntityManager;
+import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
 
 /**
  * CompanyMapper
@@ -28,10 +29,10 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class DeptRepository extends BaseSuperRepository< Dept, Long> {
+public class DeptRepository extends BaseCrSuperRepository<Dept, Long> {
 
 	public DeptRepository(EntityManager em) {
-		super( Dept.class, em);
+		super(Dept.class, em);
 	}
 
 }

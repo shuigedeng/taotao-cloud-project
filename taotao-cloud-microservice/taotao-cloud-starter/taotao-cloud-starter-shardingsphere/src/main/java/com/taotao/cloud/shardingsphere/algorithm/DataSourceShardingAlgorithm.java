@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.shardingsphere.algorithm;
 
-import java.util.Collection;
-import java.util.Properties;
-
 import org.apache.shardingsphere.sharding.api.sharding.hint.HintShardingAlgorithm;
 import org.apache.shardingsphere.sharding.api.sharding.hint.HintShardingValue;
+
+import java.util.Collection;
+import java.util.Properties;
 
 /**
  * 数据库分源算法
@@ -31,8 +31,7 @@ import org.apache.shardingsphere.sharding.api.sharding.hint.HintShardingValue;
 public class DataSourceShardingAlgorithm implements HintShardingAlgorithm {
 
 	@Override
-	public Collection<String> doSharding(Collection collection,
-		HintShardingValue hintShardingValue) {
+	public Collection<String> doSharding(Collection collection, HintShardingValue hintShardingValue) {
 		return hintShardingValue.getValues();
 	}
 

@@ -26,19 +26,19 @@ dependencies {
 
     // https://github.com/qqxx6661/logRecord
     //https://search.maven.org/artifact/cn.monitor4all/log-record-starter
-    api ("cn.monitor4all:log-record-starter:1.2.2"){
+    api("cn.monitor4all:log-record-starter:1.2.3") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://search.maven.org/artifact/io.github.mouzt/bizlog-sdk
     //https://github.com/mouzt/mzt-biz-log
-    api ("io.github.mouzt:bizlog-sdk:3.0.0"){
+    api("io.github.mouzt:bizlog-sdk:3.0.0") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://gitee.com/dromara/TLog
     //https://search.maven.org/artifact/com.yomahub/tlog-all-spring-boot-starter
-    api ("com.yomahub:tlog-all-spring-boot-starter:1.4.3"){
+    api("com.yomahub:tlog-all-spring-boot-starter:1.4.3") {
         exclude group: "dom4j", module: "dom4j"
         exclude group: "log4j", module: "log4j"
         exclude group: "commons-beanutils", module: "commons-beanutils"
@@ -46,7 +46,7 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation "junit:junit:4.13.2"
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.springframework.boot:spring-boot-starter-web"

@@ -4,11 +4,11 @@ dependencies {
 
     //青云
     //https://search.maven.org/artifact/com.yunify/qingstor.sdk.java
-    api "com.yunify:qingstor.sdk.java:2.5.2"
+    api "com.yunify:qingstor.sdk.java:2.6.0"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation "junit:junit:4.13.2"
+    
     testImplementation "org.springframework:spring-test"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
