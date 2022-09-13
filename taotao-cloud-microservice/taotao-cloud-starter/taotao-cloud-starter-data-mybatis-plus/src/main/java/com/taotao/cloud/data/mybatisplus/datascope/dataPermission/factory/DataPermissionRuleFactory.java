@@ -1,29 +1,20 @@
 package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.factory;
 
-
-import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.rule.DataPermissionRule;
+import com.fxz.common.dataPermission.rule.DataPermissionRule;
 
 import java.util.List;
 
 /**
- * {@link DataPermissionRule} 工厂接口 作为 {@link DataPermissionRule} 的容器，提供管理能力
+ * 数据权限规则工厂接口 管理容器中配置的数据权限规则
  *
+ * @author fxz
  */
 public interface DataPermissionRuleFactory {
 
 	/**
-	 * 获得所有数据权限规则数组
-	 *
-	 * @return 数据权限规则数组
+	 * 获取生效的数据权限规则
+	 * @return 生效的数据权限规则数组
 	 */
-	List<DataPermissionRule> getDataPermissionRules();
-
-	/**
-	 * 获得指定 Mapper 的数据权限规则数组
-	 *
-	 * @param mappedStatementId 指定 Mapper 的编号
-	 * @return 数据权限规则数组
-	 */
-	List<DataPermissionRule> getDataPermissionRule(String mappedStatementId);
+	List<DataPermissionRule> getDataPermissionRule();
 
 }

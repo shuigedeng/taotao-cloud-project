@@ -1,17 +1,26 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Engine Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+ *
+ * 1.请不要删除和修改根目录下的LICENSE文件。
+ * 2.请不要删除和修改 Dante Engine 源码头部的版权声明。
+ * 3.请保留源码和相关描述文件的项目出处，作者声明等。
+ * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.jetcache.enhance;
@@ -27,32 +36,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 
 /**
- * 自定义 缓存管理器
+ * <p>Description: 自定义 缓存管理器 </p>
  *
- * @author shuigedeng
- * @version 2022.07
- * @since 2022-07-25 08:53:34
+ * @author : gengwei.zheng
+ * @date : 2022/7/23 17:02
  */
-public class JetcacheCacheManager extends JetCacheSpringCacheManager {
+public class HerodotusCacheManager extends JetCacheSpringCacheManager {
 
-	private static final Logger log = LoggerFactory.getLogger(JetcacheCacheManager.class);
+	private static final Logger log = LoggerFactory.getLogger(HerodotusCacheManager.class);
 
-	private final JetCacheCreateCacheFactory jetCacheCreateCacheFactory;
 	private final JetCacheProperties cacheProperties;
 
-	public JetcacheCacheManager(JetCacheCreateCacheFactory jetCacheCreateCacheFactory,
+	public HerodotusCacheManager(JetCacheCreateCacheFactory jetCacheCreateCacheFactory,
 		JetCacheProperties cacheProperties) {
 		super(jetCacheCreateCacheFactory);
-		this.jetCacheCreateCacheFactory = jetCacheCreateCacheFactory;
 		this.cacheProperties = cacheProperties;
 		this.setAllowNullValues(cacheProperties.getAllowNullValues());
-		this.setDesensitization(cacheProperties.getDesensitization());
 	}
 
-	public JetcacheCacheManager(JetCacheCreateCacheFactory jetCacheCreateCacheFactory,
+	public HerodotusCacheManager(JetCacheCreateCacheFactory jetCacheCreateCacheFactory,
 		JetCacheProperties cacheProperties, String... cacheNames) {
 		super(jetCacheCreateCacheFactory, cacheNames);
-		this.jetCacheCreateCacheFactory = jetCacheCreateCacheFactory;
 		this.cacheProperties = cacheProperties;
 	}
 
@@ -64,12 +68,8 @@ public class JetcacheCacheManager extends JetCacheSpringCacheManager {
 				cacheProperties.getSeparator());
 			if (expires.containsKey(key)) {
 				Expire expire = expires.get(key);
-				log.debug("CACHE - Cache [{}] is setted to use CUSTEM exprie.",
-					name);
-				com.alicp.jetcache.Cache<Object, Object> cache = jetCacheCreateCacheFactory.create(
-					name, expire.getDuration().intValue(), expire.getUnit());
-				return new JetCacheSpringCache(name, cache, isAllowNullValues(),
-					isDesensitization());
+				log.debug("[Herodotus] |- CACHE - Cache [{}] is set to use CUSTOM expire.", name);
+				return super.createJetCache(name, expire.getTtl());
 			}
 		}
 		return super.createJetCache(name);
