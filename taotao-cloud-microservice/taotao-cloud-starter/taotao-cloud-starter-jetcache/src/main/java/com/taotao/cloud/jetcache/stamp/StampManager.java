@@ -1,17 +1,26 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Engine Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+ *
+ * 1.请不要删除和修改根目录下的LICENSE文件。
+ * 2.请不要删除和修改 Dante Engine 源码头部的版权声明。
+ * 3.请保留源码和相关描述文件的项目出处，作者声明等。
+ * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.jetcache.stamp;
@@ -27,22 +36,22 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * Stamp 服务接口
+ * <p>Description: Stamp 服务接口 </p>
  * <p>
  * 此Stamp非OAuth2 Stamp。而是用于在特定条件下生成后，在一定时间就会消除的标记性Stamp。 例如，幂等、短信验证码、Auth
  * State等，用时生成，然后进行验证，之后再删除的标记Stamp。
  *
- * @author shuigedeng
- * @version 2022.07
- * @since 2022-07-25 08:52:58
+ * @param <K> 签章缓存对应Key值的类型。
+ * @param <V> 签章缓存存储数据，对应的具体存储值的类型，
+ * @author : gengwei.zheng
+ * @date : 2021/8/22 15:00
  */
 public interface StampManager<K, V> extends InitializingBean {
 
 	/**
 	 * 过期时间
 	 *
-	 * @return {@link Duration }
-	 * @since 2022-07-25 08:52:58
+	 * @return {@link Duration}
 	 */
 	Duration getExpire();
 
@@ -53,7 +62,6 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * @param value            与Key对应的Stamp
 	 * @param expireAfterWrite 过期时间
 	 * @param timeUnit         过期时间单位
-	 * @since 2022-07-25 08:52:58
 	 */
 	void put(K key, V value, long expireAfterWrite, TimeUnit timeUnit);
 
@@ -62,8 +70,7 @@ public interface StampManager<K, V> extends InitializingBean {
 	 *
 	 * @param key    存储Key
 	 * @param value  与Key对应的Stamp值
-	 * @param expire 过期时间
-	 * @since 2022-07-25 08:52:58
+	 * @param expire 过期时间{@link Duration}
 	 */
 	default void put(K key, V value, Duration expire) {
 		put(key, value, expire.toMillis(), TimeUnit.MILLISECONDS);
@@ -74,7 +81,6 @@ public interface StampManager<K, V> extends InitializingBean {
 	 *
 	 * @param key   存储Key
 	 * @param value 与Key对应的Stamp值
-	 * @since 2022-07-25 08:52:58
 	 */
 	default void put(K key, V value) {
 		put(key, value, getExpire());
@@ -84,8 +90,7 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 生成缓存值策略方法，该方法负责生成具体存储的值。
 	 *
 	 * @param key 签章存储Key值
-	 * @return {@link V }
-	 * @since 2022-07-25 08:52:58
+	 * @return {@link String}
 	 */
 	V nextStamp(K key);
 
@@ -95,8 +100,7 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * @param key              签章存储Key值
 	 * @param expireAfterWrite 写入之后过期时间。注意：该值每次写入都会覆盖。如果有一个时间周期内的反复存取操作，需要手动计算时间差。
 	 * @param timeUnit         时间单位
-	 * @return {@link V }
-	 * @since 2022-07-25 08:52:58
+	 * @return 创建的签章值
 	 */
 	default V create(K key, long expireAfterWrite, TimeUnit timeUnit) {
 		V value = this.nextStamp(key);
@@ -108,9 +112,8 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 创建具体的Stamp签章值，并存储至本地缓存
 	 *
 	 * @param key    签章存储Key值
-	 * @param expire 过期时间
-	 * @return {@link V }
-	 * @since 2022-07-25 08:52:58
+	 * @param expire 过期时间{@link Duration}
+	 * @return 创建的签章值
 	 */
 	default V create(K key, Duration expire) {
 		return create(key, expire.toMillis(), TimeUnit.MILLISECONDS);
@@ -120,8 +123,7 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 创建具体的Stamp签章值，并存储至本地缓存
 	 *
 	 * @param key 与签章存储Key值
-	 * @return {@link V }
-	 * @since 2022-07-25 08:52:58
+	 * @return 创建的签章值
 	 */
 	default V create(K key) {
 		return create(key, getExpire());
@@ -132,8 +134,10 @@ public interface StampManager<K, V> extends InitializingBean {
 	 *
 	 * @param key   与Stamp对应的Key值
 	 * @param value 外部传入的Stamp值
-	 * @return boolean
-	 * @since 2022-07-25 08:52:58
+	 * @return ture 匹配，false 不匹配
+	 * @throws StampParameterIllegalException 传入Stamp错误
+	 * @throws StampHasExpiredException       本地数据中没有Stamp或者Stamp已经过期。
+	 * @throws StampMismatchException         Stamp与本地存储值不匹配
 	 */
 	boolean check(K key, V value)
 		throws StampParameterIllegalException, StampHasExpiredException, StampMismatchException;
@@ -142,8 +146,7 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 根据key读取Stamp
 	 *
 	 * @param key 存储数据Key值
-	 * @return {@link V }
-	 * @since 2022-07-25 08:52:58
+	 * @return 存储的Stamp值
 	 */
 	V get(K key);
 
@@ -151,17 +154,10 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 删除与Key对应的Stamp
 	 *
 	 * @param key 存储数据Key值
-	 * @since 2022-07-25 08:52:58
+	 * @throws StampDeleteFailedException Stamp删除错误
 	 */
 	void delete(K key) throws StampDeleteFailedException;
 
-	/**
-	 * 包含关键
-	 *
-	 * @param key 关键
-	 * @return boolean
-	 * @since 2022-07-25 08:52:59
-	 */
 	default boolean containKey(K key) {
 		V value = get(key);
 		return ObjectUtils.isNotEmpty(value);
@@ -175,8 +171,8 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * @param key      存储Key
 	 * @param expire   过期时间
 	 * @param timeUnit 过期时间单位
-	 * @return {@link AutoReleaseLock }
-	 * @since 2022-07-25 08:52:59
+	 * @return {@link AutoReleaseLock}
+	 * @see <a href="https://github.com/alibaba/jetcache/wiki/CacheAPI_CN">JetCache Wiki</a>
 	 */
 	AutoReleaseLock lock(K key, long expire, TimeUnit timeUnit);
 
@@ -186,9 +182,9 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 非堵塞的尝试获取一个锁，如果对应的key还没有锁，返回一个AutoReleaseLock，否则立即返回空。如果Cache实例是本地的，它是一个本地锁，在本JVM中有效；如果是redis等远程缓存，它是一个不十分严格的分布式锁。锁的超时时间由expire和timeUnit指定。多级缓存的情况会使用最后一级做tryLock操作。
 	 *
 	 * @param key    存储Key
-	 * @param expire 过期时间
-	 * @return {@link AutoReleaseLock }
-	 * @since 2022-07-25 08:52:59
+	 * @param expire 过期时间{@link Duration}
+	 * @return {@link AutoReleaseLock}
+	 * @see <a href="https://github.com/alibaba/jetcache/wiki/CacheAPI_CN">JetCache Wiki</a>
 	 */
 	default AutoReleaseLock lock(K key, Duration expire) {
 		return lock(key, expire.toMillis(), TimeUnit.MILLISECONDS);
@@ -198,10 +194,11 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 锁定值
 	 * <p>
 	 * 非堵塞的尝试获取一个锁，如果对应的key还没有锁，返回一个AutoReleaseLock，否则立即返回空。如果Cache实例是本地的，它是一个本地锁，在本JVM中有效；如果是redis等远程缓存，它是一个不十分严格的分布式锁。锁的超时时间由expire和timeUnit指定。多级缓存的情况会使用最后一级做tryLock操作。
+	 * *
 	 *
 	 * @param key 存储Key
-	 * @return {@link AutoReleaseLock }
-	 * @since 2022-07-25 08:52:59
+	 * @return {@link AutoReleaseLock}
+	 * @see <a href="https://github.com/alibaba/jetcache/wiki/CacheAPI_CN">JetCache Wiki</a>
 	 */
 	default AutoReleaseLock lock(K key) {
 		return lock(key, getExpire());
@@ -215,9 +212,9 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * @param key      存储Key
 	 * @param expire   过期时间
 	 * @param timeUnit 过期时间单位
-	 * @param action   需要执行的操作
-	 * @return boolean
-	 * @since 2022-07-25 08:52:59
+	 * @param action   需要执行的操作 {@link Runnable}
+	 * @return 是否执行成功
+	 * @see <a href="https://github.com/alibaba/jetcache/wiki/CacheAPI_CN">JetCache Wiki</a>
 	 */
 	boolean lockAndRun(K key, long expire, TimeUnit timeUnit, Runnable action);
 
@@ -227,10 +224,10 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 非堵塞的尝试获取一个锁，如果对应的key还没有锁，返回一个AutoReleaseLock，否则立即返回空。如果Cache实例是本地的，它是一个本地锁，在本JVM中有效；如果是redis等远程缓存，它是一个不十分严格的分布式锁。锁的超时时间由expire和timeUnit指定。多级缓存的情况会使用最后一级做tryLock操作。
 	 *
 	 * @param key    存储Key
-	 * @param expire 过期时间
-	 * @param action 需要执行的操作
-	 * @return boolean
-	 * @since 2022-07-25 08:52:59
+	 * @param expire 过期时间{@link Duration}
+	 * @param action 需要执行的操作 {@link Runnable}
+	 * @return 是否执行成功
+	 * @see <a href="https://github.com/alibaba/jetcache/wiki/CacheAPI_CN">JetCache Wiki</a>
 	 */
 	default boolean lockAndRun(K key, Duration expire, Runnable action) {
 		return lockAndRun(key, expire.toMillis(), TimeUnit.MILLISECONDS, action);
@@ -242,9 +239,9 @@ public interface StampManager<K, V> extends InitializingBean {
 	 * 非堵塞的尝试获取一个锁，如果对应的key还没有锁，返回一个AutoReleaseLock，否则立即返回空。如果Cache实例是本地的，它是一个本地锁，在本JVM中有效；如果是redis等远程缓存，它是一个不十分严格的分布式锁。锁的超时时间由expire和timeUnit指定。多级缓存的情况会使用最后一级做tryLock操作。
 	 *
 	 * @param key    存储Key
-	 * @param action 需要执行的操作
-	 * @return boolean
-	 * @since 2022-07-25 08:52:59
+	 * @param action 需要执行的操作 {@link Runnable}
+	 * @return 是否执行成功
+	 * @see <a href="https://github.com/alibaba/jetcache/wiki/CacheAPI_CN">JetCache Wiki</a>
 	 */
 	default boolean lockAndRun(K key, Runnable action) {
 		return lockAndRun(key, getExpire(), action);

@@ -1,38 +1,44 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Engine Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+ *
+ * 1.请不要删除和修改根目录下的LICENSE文件。
+ * 2.请不要删除和修改 Dante Engine 源码头部的版权声明。
+ * 3.请保留源码和相关描述文件的项目出处，作者声明等。
+ * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.jetcache.enhance;
 
-import cn.hutool.crypto.SecureUtil;
 import com.alicp.jetcache.Cache;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import java.util.concurrent.Callable;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.support.AbstractValueAdaptingCache;
 import org.springframework.lang.Nullable;
 
 /**
- * 基于 JetCache 的 Spring Cache 扩展
+ * <p>Description: 基于 JetCache 的 Spring Cache 扩展 </p>
  *
- * @author shuigedeng
- * @version 2022.07
- * @since 2022-07-25 08:54:40
+ * @author : gengwei.zheng
+ * @date : 2022/7/23 11:11
  */
 public class JetCacheSpringCache extends AbstractValueAdaptingCache {
 
@@ -40,27 +46,12 @@ public class JetCacheSpringCache extends AbstractValueAdaptingCache {
 
 	private final String cacheName;
 	private final Cache<Object, Object> cache;
-	private final boolean desensitization;
 
 	public JetCacheSpringCache(String cacheName, Cache<Object, Object> cache,
-		boolean allowNullValues, boolean desensitization) {
+		boolean allowNullValues) {
 		super(allowNullValues);
 		this.cacheName = cacheName;
 		this.cache = cache;
-		this.desensitization = desensitization;
-	}
-
-	private String secure(Object key) {
-		String original = String.valueOf(key);
-		if (desensitization) {
-			if (StringUtils.isNotBlank(original) && StringUtils.startsWith(original, "sql:")) {
-				String recent = SecureUtil.md5(original);
-				log.trace("CACHE - Secure the sql type key [{}] to [{}]", original,
-					recent);
-				return recent;
-			}
-		}
-		return original;
 	}
 
 	@Override
@@ -76,11 +67,9 @@ public class JetCacheSpringCache extends AbstractValueAdaptingCache {
 	@Override
 	@Nullable
 	protected Object lookup(Object key) {
-		String secure = secure(key);
-
-		Object value = cache.get(secure);
+		Object value = cache.get(key);
 		if (ObjectUtils.isNotEmpty(value)) {
-			log.trace("CACHE - Lookup data in  cache, value is : [{}]",
+			log.trace("[Herodotus] |- CACHE - Lookup data in herodotus cache, value is : [{}]",
 				JsonUtils.toJson(value));
 			return value;
 		}
@@ -92,15 +81,14 @@ public class JetCacheSpringCache extends AbstractValueAdaptingCache {
 	@Override
 	@Nullable
 	public <T> T get(Object key, Callable<T> valueLoader) {
-		String secure = secure(key);
 
-		log.trace("CACHE - Get data in  cache, key: {}", secure);
+		log.trace("[Herodotus] |- CACHE - Get data in herodotus cache, key: {}", key);
 
-		return (T) fromStoreValue(cache.computeIfAbsent(secure, k -> {
+		return (T) fromStoreValue(cache.computeIfAbsent(key, k -> {
 			try {
 				return toStoreValue(valueLoader.call());
 			} catch (Throwable ex) {
-				throw new ValueRetrievalException(secure, valueLoader, ex);
+				throw new ValueRetrievalException(key, valueLoader, ex);
 			}
 		}));
 	}
@@ -108,40 +96,34 @@ public class JetCacheSpringCache extends AbstractValueAdaptingCache {
 	@Override
 	@Nullable
 	public void put(Object key, @Nullable Object value) {
-		String secure = secure(key);
-		log.trace("CACHE - Put data in  cache, key: {}", secure);
-		cache.put(secure, this.toStoreValue(value));
+		log.trace("[Herodotus] |- CACHE - Put data in herodotus cache, key: {}", key);
+		cache.put(key, this.toStoreValue(value));
 	}
 
 
 	@Override
 	@Nullable
 	public ValueWrapper putIfAbsent(Object key, @Nullable Object value) {
-		String secure = secure(key);
-		log.trace("CACHE - PutIfPresent data in  cache, key: {}", secure);
-		Object existing = cache.putIfAbsent(secure, toStoreValue(value));
+		log.trace("[Herodotus] |- CACHE - PutIfPresent data in herodotus cache, key: {}", key);
+		Object existing = cache.putIfAbsent(key, toStoreValue(value));
 		return toValueWrapper(existing);
 	}
 
 	@Override
 	public void evict(Object key) {
-		String secure = secure(key);
-		log.trace("CACHE - Evict data in  cache, key: {}", secure);
-		cache.remove(secure);
+		log.trace("[Herodotus] |- CACHE - Evict data in herodotus cache, key: {}", key);
+		cache.remove(key);
 	}
 
 	@Override
 	public boolean evictIfPresent(Object key) {
-		String secure = secure(key);
-		log.trace("CACHE - EvictIfPresent data in  cache, key: {}", secure);
-		return cache.remove(secure);
+		log.trace("[Herodotus] |- CACHE - EvictIfPresent data in herodotus cache, key: {}", key);
+		return cache.remove(key);
 	}
 
 	@Override
 	public void clear() {
-		log.trace("CACHE - Clear data in  cache.");
+		log.trace("[Herodotus] |- CACHE - Clear data in herodotus cache.");
 		cache.close();
 	}
-
-
 }

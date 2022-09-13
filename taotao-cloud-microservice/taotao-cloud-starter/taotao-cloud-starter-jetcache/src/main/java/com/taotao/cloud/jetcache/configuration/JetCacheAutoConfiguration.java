@@ -15,20 +15,20 @@
  */
 package com.taotao.cloud.jetcache.configuration;
 
-import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
-import com.alicp.jetcache.anno.support.CacheContext;
-import com.alicp.jetcache.anno.support.SpringConfigProvider;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.jetcache.enhance.JetcacheCacheManager;
+import com.taotao.cloud.jetcache.enhance.HerodotusCacheManager;
 import com.taotao.cloud.jetcache.enhance.JetCacheCreateCacheFactory;
 import com.taotao.cloud.jetcache.properties.JetCacheProperties;
+import com.taotao.cloud.jetcache.utils.JetCacheUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 
 /**
  * jetcache 配置
@@ -50,22 +50,24 @@ public class JetCacheAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public JetCacheCreateCacheFactory jetCacheCreateCacheFactory(
-		CacheContext cacheContext) {
-		JetCacheCreateCacheFactory factory = new JetCacheCreateCacheFactory(cacheContext);
-		LogUtils.info("Bean [Jet Cache Create Cache Factory] Auto Configure.");
+	@ConditionalOnClass(CacheManager.class)
+	public JetCacheCreateCacheFactory jetCacheCreateCacheFactory(CacheManager jcCacheManager) {
+		JetCacheCreateCacheFactory factory = new JetCacheCreateCacheFactory(jcCacheManager);
+		JetCacheUtils.setJetCacheCreateCacheFactory(factory);
+		LogUtils.trace("[Herodotus] |- Bean [Jet Cache Create Cache Factory] Auto Configure.");
 		return factory;
 	}
 
-	@Bean(name = "jetCacheCacheManager")
+	@Bean
+	@Primary
 	@ConditionalOnMissingBean
-	public CacheManager jetCacheCacheManager(
+	public HerodotusCacheManager herodotusCacheManager(
 		JetCacheCreateCacheFactory jetCacheCreateCacheFactory, JetCacheProperties cacheProperties) {
-		JetcacheCacheManager jetcacheCacheManager = new JetcacheCacheManager(
+		HerodotusCacheManager herodotusCacheManager = new HerodotusCacheManager(
 			jetCacheCreateCacheFactory, cacheProperties);
-		jetcacheCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
-		LogUtils.info("Bean [Jet Cache  Cache Manager] Auto Configure.");
-		return jetcacheCacheManager;
+		herodotusCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
+		LogUtils.trace("[Herodotus] |- Bean [Jet Cache Herodotus Cache Manager] Auto Configure.");
+		return herodotusCacheManager;
 	}
 
 

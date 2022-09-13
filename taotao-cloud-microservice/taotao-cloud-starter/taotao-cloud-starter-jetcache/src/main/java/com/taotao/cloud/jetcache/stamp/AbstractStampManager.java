@@ -1,57 +1,86 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Engine Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+ *
+ * 1.请不要删除和修改根目录下的LICENSE文件。
+ * 2.请不要删除和修改 Dante Engine 源码头部的版权声明。
+ * 3.请保留源码和相关描述文件的项目出处，作者声明等。
+ * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 6.若您的项目无法满足以上几点，可申请商业授权
  */
+
 package com.taotao.cloud.jetcache.stamp;
 
 import com.alicp.jetcache.AutoReleaseLock;
 import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
 import com.taotao.cloud.jetcache.exception.StampDeleteFailedException;
 import com.taotao.cloud.jetcache.exception.StampHasExpiredException;
 import com.taotao.cloud.jetcache.exception.StampMismatchException;
 import com.taotao.cloud.jetcache.exception.StampParameterIllegalException;
+import com.taotao.cloud.jetcache.utils.JetCacheUtils;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
- * 抽象Stamp管理
+ * <p>Description: 抽象Stamp管理 </p>
  *
- * @author shuigedeng
- * @version 2022.07
- * @since 2022-07-25 08:53:08
+ * @param <K> 签章缓存对应Key值的类型。
+ * @param <V> 签章缓存存储数据，对应的具体存储值的类型，
+ * @author : gengwei.zheng
+ * @date : 2021/8/23 11:51
  */
 public abstract class AbstractStampManager<K, V> implements StampManager<K, V> {
+
+	private static final Duration DEFAULT_EXPIRE = Duration.ofMinutes(30);
+
+	private String cacheName;
+	private CacheType cacheType;
+	private Duration expire;
+	private Cache<K, V> cache;
+
+	public AbstractStampManager(String cacheName) {
+		this(cacheName, CacheType.BOTH);
+	}
+
+	public AbstractStampManager(String cacheName, CacheType cacheType) {
+		this(cacheName, cacheType, DEFAULT_EXPIRE);
+	}
+
+	public AbstractStampManager(String cacheName, CacheType cacheType, Duration expire) {
+		this.cacheName = cacheName;
+		this.cacheType = cacheType;
+		this.expire = expire;
+		this.cache = JetCacheUtils.create(this.cacheName, this.cacheType, this.expire);
+	}
 
 	/**
 	 * 指定数据存储缓存
 	 *
 	 * @return {@link Cache}
 	 */
-	protected abstract Cache<K, V> getCache();
-
-	private static final Duration DEFAULT_EXPIRE = Duration.ofMinutes(1);
-
-	private Duration expire;
+	protected Cache<K, V> getCache() {
+		return this.cache;
+	}
 
 	@Override
 	public Duration getExpire() {
-		if (ObjectUtils.isEmpty(this.expire) || this.expire.equals(Duration.ZERO)) {
-			return DEFAULT_EXPIRE;
-		} else {
-			return this.expire;
-		}
+		return this.expire;
 	}
 
 	public void setExpire(Duration expire) {

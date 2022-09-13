@@ -552,8 +552,8 @@ spring:
     encoder: proto3
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
@@ -606,8 +606,10 @@ spring:
               prepStmtCacheSize: 250
   jpa:
     database: mysql
+    database-platform: mysql
     show-sql: true
-    open-in-view: false
+    open-in-view: true
+    generate-ddl: true
     hibernate:
       ddl-auto: update
       naming:
@@ -617,7 +619,26 @@ spring:
       hibernate:
         hbm2ddl.auto: update
         dialect: org.hibernate.dialect.MySQL8Dialect
-    generate-ddl: true
+    #properties:
+    #  javax:
+    #    persistence:
+    #      sharedCache:
+    #        mode: ENABLE_SELECTIVE
+    #  hibernate:
+    #    dialect: mysql
+    #    format_sql: false
+    #    show_sql: false
+    #    generate_statistics: false
+    #    cache:
+    #      use_query_cache: true
+    #      use_second_level_cache: true
+    #      region:
+    #        factory_class: 二级缓存class
+    #    javax:
+    #      cache:
+    #        missing_cache_strategy: create
+    #    temp:
+    #      use_jdbc_metadata_defaults: false
   redis:
     #host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
     #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
@@ -1201,26 +1222,26 @@ mybatis-plus:
     # 日志打印参数class
     log-impl: com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
     #查询时，关闭关联对象即时加载以提高性能
-    lazyLoadingEnabled : true
+    lazyLoadingEnabled: true
     #设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能
-    aggressiveLazyLoading : false
+    aggressiveLazyLoading: false
     #对于未知的SQL查询，允许返回不同的结果集以达到通用的效果
-    multipleResultSetsEnabled : true
+    multipleResultSetsEnabled: true
     #允许使用列标签代替列名
-    useColumnLabel : true
+    useColumnLabel: true
     #允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖
-    useGeneratedKeys : true
+    useGeneratedKeys: true
     #给予被嵌套的resultMap以字段-属性的映射支持
-    autoMappingBehavior : FULL
+    autoMappingBehavior: FULL
     #对于批量更新操作缓存SQL以提高性能
-    defaultExecutorType : SIMPLE
+    defaultExecutorType: SIMPLE
     #数据库超过15秒仍未响应则超时，部分语句可单独指定超时时间
-    defaultStatementTimeout : 15
-    jdbcTypeForNull : NULL
+    defaultStatementTimeout: 15
+    jdbcTypeForNull: NULL
     #当参数为NULL且字段列可为空的Double等类型时可直接当NULL插入
-    callSettersOnNulls : true
+    callSettersOnNulls: true
     #打印sql语句
-    logPrefix : "dao."
+    logPrefix: "dao."
   configuration-properties:
     CONSTANT_CIPHER_TEXT: taotao-cloud
 

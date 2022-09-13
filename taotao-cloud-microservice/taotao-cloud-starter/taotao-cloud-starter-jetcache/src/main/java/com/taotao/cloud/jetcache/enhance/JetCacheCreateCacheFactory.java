@@ -1,99 +1,140 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Engine licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+ *
+ * 1.请不要删除和修改根目录下的LICENSE文件。
+ * 2.请不要删除和修改 Dante Engine 源码头部的版权声明。
+ * 3.请保留源码和相关描述文件的项目出处，作者声明等。
+ * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
+ * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.jetcache.enhance;
 
 import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.CacheManager;
 import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.support.CacheContext;
-import com.alicp.jetcache.anno.support.CachedAnnoConfig;
-import com.alicp.jetcache.anno.support.ConfigProvider;
-
-import com.alicp.jetcache.anno.support.SpringConfigProvider;
-import com.taotao.cloud.common.constant.CommonConstant;
-import java.util.concurrent.TimeUnit;
+import com.alicp.jetcache.template.QuickConfig;
+import java.time.Duration;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
- * JetCache 手动创建Cache 工厂
+ * <p>Description: JetCache 手动创建Cache 工厂 </p>
  *
- * @author shuigedeng
- * @version 2022.07
- * @since 2022-07-25 08:54:36
+ * @author : gengwei.zheng
+ * @date : 2022/7/23 10:49
  */
 public class JetCacheCreateCacheFactory {
 
-    private static final String UNDEFINED = "$$undefined$$";
-    private final CacheContext cacheContext;
+	private final CacheManager cacheManager;
 
-    public JetCacheCreateCacheFactory(CacheContext cacheContext) {
-		this.cacheContext = cacheContext;
-    }
+	public JetCacheCreateCacheFactory(CacheManager cacheManager) {
+		this.cacheManager = cacheManager;
+	}
 
-    public <K, V> Cache<K, V> create(String cacheName, int expire, TimeUnit timeUnit) {
-        return create(cacheName, CacheType.BOTH, expire, timeUnit);
-    }
+	public <K, V> Cache<K, V> create(String name) {
+		return create(name, Duration.ofHours(2L));
+	}
 
-    public <K, V> Cache<K, V> create(String cacheName, CacheType cacheType, int expire, TimeUnit timeUnit) {
-        return create(CommonConstant.LOWERCASE_DEFAULT, cacheName, cacheType, expire, timeUnit);
-    }
+	public <K, V> Cache<K, V> create(String name, Duration expire) {
+		return create(name, expire, true);
+	}
 
-    public <K, V> Cache<K, V> create(String cacheName) {
-        return create(cacheName, CacheType.BOTH);
-    }
+	public <K, V> Cache<K, V> create(String name, Duration expire, Boolean cacheNullValue) {
+		return create(name, expire, cacheNullValue, null);
+	}
 
-    public <K, V> Cache<K, V> create(String cacheName, CacheType cacheType) {
-        return create(cacheName, cacheType, Integer.MIN_VALUE);
-    }
+	public <K, V> Cache<K, V> create(String name, Duration expire, Boolean cacheNullValue,
+		Boolean syncLocal) {
+		return create(name, CacheType.BOTH, expire, cacheNullValue, syncLocal);
+	}
 
-    public <K, V> Cache<K, V> create(String cacheName, CacheType cacheType, int expire) {
-        return create(CommonConstant.LOWERCASE_DEFAULT, cacheName, cacheType, expire);
-    }
+	public <K, V> Cache<K, V> create(String name, CacheType cacheType) {
+		return create(name, cacheType, null);
+	}
 
-    public <K, V> Cache<K, V> create(String area, String cacheName, CacheType cacheType, int expire) {
-        return create(area, cacheName, cacheType, expire, TimeUnit.SECONDS);
-    }
+	public <K, V> Cache<K, V> create(String name, CacheType cacheType, Duration expire) {
+		return create(name, cacheType, expire, true);
+	}
 
-    public <K, V> Cache<K, V> create(String area, String cacheName, CacheType cacheType, int expire, TimeUnit timeUnit) {
-        return create(area, cacheName, cacheType, expire, timeUnit, Integer.MIN_VALUE);
-    }
+	public <K, V> Cache<K, V> create(String name, CacheType cacheType, Duration expire,
+		Boolean cacheNullValue) {
+		return create(name, cacheType, expire, cacheNullValue, null);
+	}
 
-    public <K, V> Cache<K, V> create(String area, String cacheName, CacheType cacheType, int expire, TimeUnit timeUnit, int localExpire) {
-        return create(area, cacheName, cacheType, expire, timeUnit, localExpire, Integer.MIN_VALUE);
-    }
+	public <K, V> Cache<K, V> create(String name, CacheType cacheType, Duration expire,
+		Boolean cacheNullValue, Boolean syncLocal) {
+		return create(null, name, cacheType, expire, cacheNullValue, syncLocal);
+	}
 
-    public <K, V> Cache<K, V> create(String area, String cacheName, CacheType cacheType, int expire, TimeUnit timeUnit, int localExpire, int localLimit) {
-        return create(area, cacheName, cacheType, expire, timeUnit, localExpire, localLimit, UNDEFINED, UNDEFINED);
-    }
+	public <K, V> Cache<K, V> create(String area, String name, CacheType cacheType, Duration expire,
+		Boolean cacheNullValue, Boolean syncLocal) {
+		return create(area, name, cacheType, expire, cacheNullValue, syncLocal, null);
+	}
 
-    public <K, V> Cache<K, V> create(String area, String cacheName, CacheType cacheType, int expire, TimeUnit timeUnit, int localExpire, int localLimit, String serialPolicy, String keyConvertor) {
-        CachedAnnoConfig cac = new CachedAnnoConfig();
-        cac.setArea(area);
-        cac.setName(cacheName);
-        cac.setCacheType(cacheType);
-        cac.setExpire(expire);
-        cac.setTimeUnit(timeUnit);
-        cac.setLocalExpire(localExpire);
-        cac.setLocalLimit(localLimit);
-        cac.setSerialPolicy(serialPolicy);
-        cac.setKeyConvertor(keyConvertor);
-        return create(cac);
-    }
+	public <K, V> Cache<K, V> create(String area, String name, CacheType cacheType, Duration expire,
+		Boolean cacheNullValue, Boolean syncLocal, Duration localExpire) {
+		return create(area, name, cacheType, expire, cacheNullValue, syncLocal, localExpire, null);
+	}
 
-    @SuppressWarnings("unchecked")
-    public <K, V> Cache<K, V> create(CachedAnnoConfig cac) {
-        return cacheContext.__createOrGetCache(cac, cac.getArea(), cac.getName());
-    }
+	public <K, V> Cache<K, V> create(String area, String name, CacheType cacheType, Duration expire,
+		Boolean cacheNullValue, Boolean syncLocal, Duration localExpire, Integer localLimit) {
+		return create(area, name, cacheType, expire, cacheNullValue, syncLocal, localExpire,
+			localLimit, false);
+	}
+
+	public <K, V> Cache<K, V> create(String area, String name, CacheType cacheType, Duration expire,
+		Boolean cacheNullValue, Boolean syncLocal, Duration localExpire, Integer localLimit,
+		Boolean useAreaInPrefix) {
+		return create(area, name, cacheType, expire, cacheNullValue, syncLocal, localExpire,
+			localLimit, useAreaInPrefix, false, null);
+	}
+
+	public <K, V> Cache<K, V> create(String area, String name, CacheType cacheType, Duration expire,
+		Boolean cacheNullValue, Boolean syncLocal, Duration localExpire, Integer localLimit,
+		Boolean useAreaInPrefix, Boolean penetrationProtect, Duration penetrationProtectTimeout) {
+		QuickConfig.Builder builder = StringUtils.isEmpty(area) ? QuickConfig.newBuilder(name)
+			: QuickConfig.newBuilder(area, name);
+		builder.cacheType(cacheType);
+		builder.expire(expire);
+		if (cacheType == CacheType.BOTH) {
+			builder.syncLocal(syncLocal);
+		}
+		builder.localExpire(localExpire);
+		builder.localLimit(localLimit);
+		builder.cacheNullValue(cacheNullValue);
+		builder.useAreaInPrefix(useAreaInPrefix);
+		if (ObjectUtils.isNotEmpty(penetrationProtect)) {
+			builder.penetrationProtect(penetrationProtect);
+			if (BooleanUtils.isTrue(penetrationProtect) && ObjectUtils.isNotEmpty(
+				penetrationProtectTimeout)) {
+				builder.penetrationProtectTimeout(penetrationProtectTimeout);
+			}
+		}
+
+		QuickConfig quickConfig = builder.build();
+		return create(quickConfig);
+	}
+
+
+	@SuppressWarnings("unchecked")
+	private <K, V> Cache<K, V> create(QuickConfig quickConfig) {
+		return cacheManager.getOrCreateCache(quickConfig);
+	}
 }
