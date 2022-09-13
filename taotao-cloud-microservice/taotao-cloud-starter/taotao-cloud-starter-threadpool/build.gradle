@@ -11,7 +11,7 @@ dependencies {
     //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter
     api "cn.hippo4j:hippo4j-spring-boot-starter:1.4.0"
     //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter-all
-    api ("cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.0"){
+    api("cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.0") {
         exclude group: "cn.hippo4j", module: "hippo4j-spring-boot-starter-adapter-hystrix"
         exclude group: "commons-collections", module: "commons-collections"
         exclude group: "com.alibaba", module: "fastjson"
@@ -19,9 +19,10 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation "junit:junit:4.13.2"
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
 tasks.named("test") {

@@ -2,7 +2,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/org.apache.shardingsphere/shardingsphere-jdbc-core-spring-boot-starter
-    api("org.apache.shardingsphere:shardingsphere-jdbc-core-spring-boot-starter:5.1.2") {
+    api("org.apache.shardingsphere:shardingsphere-jdbc-core-spring-boot-starter:5.2.0") {
         exclude group: "org.apache.groovy", module: "groovy"
         exclude group: "org.projectlombok", module: "lombok"
         exclude group: "log4j", module: "log4j"
@@ -12,7 +12,7 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation "junit:junit:4.13.2"
+    
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.springframework.boot:spring-boot-starter-web"

@@ -16,10 +16,11 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import java.util.Optional;
-import javax.persistence.EntityManager;
+import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import java.util.Optional;
 
 /**
  * CompanyMapper
@@ -29,7 +30,7 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class DictRepository  extends BaseSuperRepository<Dict, Long> {
+public class DictRepository extends BaseCrSuperRepository<Dict, Long> {
 
 	public DictRepository(EntityManager em) {
 		super(Dict.class, em);

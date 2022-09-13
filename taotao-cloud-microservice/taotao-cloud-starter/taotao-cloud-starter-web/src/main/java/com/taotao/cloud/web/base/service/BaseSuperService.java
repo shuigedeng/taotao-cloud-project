@@ -23,12 +23,7 @@ import com.taotao.cloud.lock.support.DistributedLock;
 import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
+import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,6 +31,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * BaseSuperService
@@ -58,10 +59,10 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	/**
 	 * 获取repository类型
 	 *
-	 * @return {@link BaseSuperRepository }<{@link T }, {@link I }>
+	 * @return {@link BaseCrSuperRepository }<{@link T }, {@link I }>
 	 * @since 2022-09-13 09:30:42
 	 */
-	BaseSuperRepository<T, I> cr();
+	BaseCrSuperRepository<T, I> cr();
 
 	/**
 	 * 获取jpa repository类型
@@ -113,7 +114,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-13 09:30:42
 	 */
 	List<T> findByIds(@NonNull Collection<? extends Serializable> ids,
-		Function<Collection<? extends Serializable>, Collection<T>> loader);
+					  Function<Collection<? extends Serializable>, Collection<T>> loader);
 
 
 	/**
@@ -129,8 +130,8 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-13 09:30:42
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
-		Wrapper<T> countWrapper,
-		String msg);
+							Wrapper<T> countWrapper,
+							String msg);
 
 	/**
 	 * 幂等性新增记录
@@ -144,7 +145,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-13 09:30:42
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
-		Wrapper<T> countWrapper);
+							Wrapper<T> countWrapper);
 
 	/**
 	 * 幂等性新增或更新记录
@@ -159,7 +160,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-13 09:30:42
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, Wrapper<T> countWrapper, String msg);
+									Predicate predicate, Wrapper<T> countWrapper, String msg);
 
 	/**
 	 * 幂等性新增或更新记录
@@ -173,7 +174,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-13 09:30:42
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, Wrapper<T> countWrapper);
+									Predicate predicate, Wrapper<T> countWrapper);
 
 
 	/**
@@ -273,7 +274,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-13 09:30:44
 	 */
 	List<T> findAllByFields(SFunction<T, ?> field,
-		Collection<? extends Serializable> fieldValues);
+							Collection<? extends Serializable> fieldValues);
 
 	/**
 	 * 根据字段查询列表
@@ -493,7 +494,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-13 09:30:46
 	 */
 	default Page<T> jpaFindByPage(int pageNumber, int pageSize, Sort.Direction direction,
-		String... properties) {
+								  String... properties) {
 		return jpaFindByPage(PageRequest.of(pageNumber, pageSize, direction, properties));
 	}
 

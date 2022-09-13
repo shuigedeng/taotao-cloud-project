@@ -27,5 +27,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface IUserRelationRepository extends JpaRepository<UserRelation, Long> {
-
 }

@@ -9,17 +9,17 @@ import io.grpc.ManagedChannelBuilder;
 
 public class GrpcClient {
 
-    public static void main(String[] args) {
-        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 8899).
-                usePlaintext(true).build();
-        StudentServiceGrpc.StudentServiceBlockingStub blockingStub = StudentServiceGrpc.
-                newBlockingStub(managedChannel);
-        StudentServiceGrpc.StudentServiceStub stub = StudentServiceGrpc.newStub(managedChannel);
+	public static void main(String[] args) {
+		ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 8899).
+			usePlaintext().build();
+		StudentServiceGrpc.StudentServiceBlockingStub blockingStub = StudentServiceGrpc.
+			newBlockingStub(managedChannel);
+		StudentServiceGrpc.StudentServiceStub stub = StudentServiceGrpc.newStub(managedChannel);
 
-        MyResponse myResponse = blockingStub.
-                getRealNameByUsername(MyRequest.newBuilder().setUsername("zhangsan").build());
+		MyResponse myResponse = blockingStub.
+			getRealNameByUsername(MyRequest.newBuilder().setUsername("zhangsan").build());
 
-        System.out.println(myResponse.getRealname());
+		System.out.println(myResponse.getRealname());
 
 //        System.out.println("--------------------");
 //
@@ -99,5 +99,5 @@ public class GrpcClient {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-    }
+	}
 }

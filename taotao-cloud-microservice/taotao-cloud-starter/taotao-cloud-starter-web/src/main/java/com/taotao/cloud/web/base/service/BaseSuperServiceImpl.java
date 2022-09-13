@@ -43,7 +43,14 @@ import com.taotao.cloud.redis.model.CacheKeyBuilder;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
+import org.apache.ibatis.reflection.property.PropertyNamer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.NonNull;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -57,12 +64,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.apache.ibatis.reflection.property.PropertyNamer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.lang.NonNull;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 /**
  * BaseService
@@ -74,7 +75,7 @@ import org.springframework.util.Assert;
 public class BaseSuperServiceImpl<
 	M extends BaseSuperMapper<T, I>,
 	T extends SuperEntity<T, I>,
-	CR extends BaseSuperRepository<T, I>,
+	CR extends BaseCrSuperRepository<T, I>,
 	IR extends JpaRepository<T, I>,
 	I extends Serializable> extends ServiceImpl<M, T> implements BaseSuperService<T, I> {
 
@@ -136,7 +137,7 @@ public class BaseSuperServiceImpl<
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<T> findByIds(@NonNull Collection<? extends Serializable> ids,
-		Function<Collection<? extends Serializable>, Collection<T>> loader) {
+							 Function<Collection<? extends Serializable>, Collection<T>> loader) {
 		if (ids.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -194,7 +195,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, Wrapper<T> countWrapper, String msg) {
+								   Predicate predicate, Wrapper<T> countWrapper, String msg) {
 		if (lock == null) {
 			throw new LockException("分布式锁为空");
 		}
@@ -253,7 +254,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, Wrapper<T> countWrapper) {
+								   Predicate predicate, Wrapper<T> countWrapper) {
 		return saveIdempotency(entity, lock, lockKey, predicate, countWrapper, null);
 	}
 
@@ -270,7 +271,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, Wrapper<T> countWrapper, String msg) {
+										   Predicate predicate, Wrapper<T> countWrapper, String msg) {
 		if (null != entity) {
 			Class<?> cls = entity.getClass();
 			TableInfo tableInfo = TableInfoHelper.getTableInfo(cls);
@@ -302,7 +303,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-		Predicate predicate, Wrapper<T> countWrapper) {
+										   Predicate predicate, Wrapper<T> countWrapper) {
 		return saveOrUpdateIdempotency(entity, lock, lockKey, predicate, countWrapper, null);
 	}
 
@@ -362,6 +363,7 @@ public class BaseSuperServiceImpl<
 	public static final int DEFAULT_BATCH_SIZE = 1000;
 
 
+	@Override
 	public Class<T> getEntityClass() {
 		return super.getEntityClass();
 	}
@@ -447,7 +449,7 @@ public class BaseSuperServiceImpl<
 
 	@Override
 	public List<T> findAllByFields(SFunction<T, ?> field,
-		Collection<? extends Serializable> fieldValues) {
+								   Collection<? extends Serializable> fieldValues) {
 		if (CollUtil.isEmpty(fieldValues)) {
 			return new ArrayList<>(0);
 		}

@@ -16,9 +16,10 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import javax.persistence.EntityManager;
+import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
 
 /**
  * CompanyMapper
@@ -28,7 +29,7 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class RoleRepository  extends BaseSuperRepository<Role, Long> {
+public class RoleRepository extends BaseCrSuperRepository<Role, Long> {
 
 	public RoleRepository(EntityManager em) {
 		super(Role.class, em);

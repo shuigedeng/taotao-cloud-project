@@ -4,7 +4,7 @@ dependencies {
 
     //百度云对象存储
     //https://search.maven.org/artifact/com.baidubce/bce-java-sdk
-    api("com.baidubce:bce-java-sdk:0.10.222"){
+    api("com.baidubce:bce-java-sdk:0.10.226") {
         exclude group: "com.google.protobuf", module: "protobuf-java"
         exclude group: "commons-collections", module: "commons-collections"
         exclude group: "commons-httpclient", module: "commons-httpclient"
@@ -22,7 +22,7 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //testImplementation "junit:junit:4.13.2"
+    
     testImplementation "org.springframework:spring-test"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
