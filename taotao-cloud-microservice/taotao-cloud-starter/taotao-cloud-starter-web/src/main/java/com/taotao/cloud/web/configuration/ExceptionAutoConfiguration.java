@@ -31,7 +31,6 @@ import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.idempotent.exception.IdempotentException;
 import com.taotao.cloud.limit.ext.LimitException;
@@ -50,12 +49,14 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import org.apache.ibatis.exceptions.PersistenceException;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.core.MethodParameter;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -282,7 +283,8 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	}
 
 	@ExceptionHandler(UndeclaredThrowableException.class)
-	public Result<String> handleUndeclaredThrowableException(NativeWebRequest req, UndeclaredThrowableException ex) {
+	public Result<String> handleUndeclaredThrowableException(NativeWebRequest req,
+		UndeclaredThrowableException ex) {
 		printLog(req, ex);
 		Throwable e = ex.getCause();
 
@@ -304,13 +306,13 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 			errMsg = "限流权限控制异常";
 		}
 
-		return Result.fail( errMsg,429);
+		return Result.fail(errMsg, 429);
 	}
 
 	@ExceptionHandler(BlockException.class)
 	public Result<String> handleBlockException(NativeWebRequest req, BlockException e) {
 		printLog(req, e);
-		LogUtils.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
+		LogUtils.error("WebmvcHandler sentinel 降级 资源名称{}" , e, e.getRule().getResource());
 		String errMsg = e.getMessage();
 		if (e instanceof FlowException) {
 			errMsg = "被限流了";
@@ -327,38 +329,71 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 		if (e instanceof AuthorityException) {
 			errMsg = "限流权限控制异常";
 		}
-		return Result.fail( errMsg,429);
+		return Result.fail(errMsg, 429);
 	}
 
 	@ExceptionHandler(FlowException.class)
 	public Result<String> handleFlowException(NativeWebRequest req, FlowException e) {
 		printLog(req, e);
-		return Result.fail( "被限流了",429);
+		return Result.fail("被限流了" , 429);
 	}
+
 	@ExceptionHandler(DegradeException.class)
 	public Result<String> handleDegradeException(NativeWebRequest req, DegradeException e) {
 		printLog(req, e);
-		return Result.fail( "服务降级了",429);
+		return Result.fail("服务降级了" , 429);
 	}
+
 	@ExceptionHandler(ParamFlowException.class)
 	public Result<String> handleParamFlowException(NativeWebRequest req, ParamFlowException e) {
 		printLog(req, e);
-		return Result.fail( "服务热点降级了",429);
+		return Result.fail("服务热点降级了" , 429);
 	}
+
 	@ExceptionHandler(SystemBlockException.class)
 	public Result<String> handleSystemBlockException(NativeWebRequest req, SystemBlockException e) {
 		printLog(req, e);
-		return Result.fail( "系统过载保护",429);
+		return Result.fail("系统过载保护" , 429);
 	}
+
 	@ExceptionHandler(AuthorityException.class)
 	public Result<String> handleAuthorityException(NativeWebRequest req, AuthorityException e) {
 		printLog(req, e);
-		return Result.fail( "限流权限控制异常",429);
+		return Result.fail("限流权限控制异常" , 429);
 	}
 
 	@ExceptionHandler(value = RateLimitException.class)
 	public Result<String> rateLimitException(RateLimitException e) {
-		return Result.fail( "限流权限控制异常",429);
+		return Result.fail("限流权限控制异常" , 429);
+	}
+
+	// mysql exception
+
+	/**
+	 * 主键或UNIQUE索引，数据重复异常
+	 */
+	@ExceptionHandler(DuplicateKeyException.class)
+	public Result<String> handleDuplicateKeyException(DuplicateKeyException e,
+		HttpServletRequest request) {
+		String requestURI = request.getRequestURI();
+		LogUtils.error("请求地址'{}',数据库中已存在记录'{}'" , requestURI, e.getMessage());
+		return Result.fail("数据库中已存在该记录，请联系管理员确认");
+	}
+
+	/**
+	 * Mybatis系统异常 通用处理
+	 */
+	@ExceptionHandler(MyBatisSystemException.class)
+	public Result<String> handleCannotFindDataSourceException(MyBatisSystemException e,
+		HttpServletRequest request) {
+		String requestURI = request.getRequestURI();
+		String message = e.getMessage();
+		if (message.contains("CannotFindDataSourceException")) {
+			LogUtils.error("请求地址'{}', 未找到数据源" , requestURI);
+			return Result.fail("未找到数据源，请联系管理员确认");
+		}
+		LogUtils.error("请求地址'{}', Mybatis系统异常" , requestURI, e);
+		return Result.fail(message);
 	}
 
 	/**
@@ -448,9 +483,10 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	private void printLog(NativeWebRequest req, Throwable e) {
 		try {
 			//RequestMappingHandlerMapping mapping = ContextUtils.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
-			HandlerExecutionChain chain = mapping.getHandler((HttpServletRequest) req.getNativeRequest());
+			HandlerExecutionChain chain = mapping.getHandler(
+				(HttpServletRequest) req.getNativeRequest());
 			Object handler = chain.getHandler();
-			if(handler instanceof HandlerMethod handlerMethod){
+			if (handler instanceof HandlerMethod handlerMethod) {
 				MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
 				Object bean = handlerMethod.getBean();
 			}
@@ -459,7 +495,7 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 		}
 
 		LogUtils.error(e);
-		LogUtils.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
+		LogUtils.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} " , e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
 	}
 }

@@ -61,6 +61,11 @@ public final class CommonConstant {
 	public static final char COLON = ':';
 
 	/**
+	 * 符号：感叹号
+	 */
+	public static final String EXCLAMATORY_MARK = "!";
+
+	/**
 	 * char 小数点
 	 */
 	public static final char DOT = '.';
@@ -84,6 +89,16 @@ public final class CommonConstant {
 	 * 星星
 	 */
 	public static final char STAR = '*';
+
+	/**
+	 * String 类型的空值
+	 */
+	public static final String STRING_NULL = "null";
+
+	/**
+	 * 未知的
+	 */
+	public static final String UNKNOWN = "unknown";
 
 	/**
 	 * 文件分隔符
