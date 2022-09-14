@@ -18,7 +18,6 @@ package com.taotao.cloud.data.mybatisplus.interceptor;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
-import java.util.Properties;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -30,6 +29,8 @@ import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+
+import java.util.Properties;
 
 /**
  * SqlMybatisInterceptor
@@ -65,7 +66,7 @@ public class SqlCollectorInterceptor implements Interceptor {
 		BoundSql boundSql = mappedStatement.getBoundSql(parameter);
 		String sql = boundSql.getSql();
 
-		return collector.hook("taotao.cloud.health.mybatis.sql.hook").run(
+		return collector.hook("taotao.cloud.monitor.mybatis.sql.hook").run(
 			StringUtils.nullToEmpty(sql).replace("\r", "").replace("\n", ""), () -> {
 				try {
 					return invocation.proceed();

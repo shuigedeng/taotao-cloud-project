@@ -308,7 +308,7 @@ public class RouterFunctionConfiguration {
 						html = "dump信息:<a href='/health/dump/'>查看</a><br/>" + html;
 					}
 				} else {
-					html = "请配置taotao.cloud.health.enabled=true,taotao.cloud.health.check.enabled=true";
+					html = "请配置taotao.cloud.monitor.enabled=true,taotao.cloud.monitor.check.enabled=true";
 				}
 
 				return ServerResponse

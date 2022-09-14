@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.constant;
 
 /**
- * 微服务名称常量 
+ * 微服务名称常量
  *
  * @author shuigedeng
  * @version 2021.9
@@ -31,17 +31,17 @@ public final class ServiceName {
 
 	public static final String TAOTAO_CLOUD_SYS = "taotao-cloud-sys";
 
-	public static final String TAOTAO_CLOUD_MEMBER_CENTER = "taotao-cloud-member-biz";
+	public static final String TAOTAO_CLOUD_MEMBER_CENTER = "taotao-cloud-member";
 
 	public static final String TAOTAO_CLOUD_FILE = "taotao-cloud-file";
 
 	public static final String TAOTAO_CLOUD_ORDER = "taotao-cloud-order";
 
-	public static final String TAOTAO_CLOUD_GOODS = "taotao-cloud-goods-biz";
+	public static final String TAOTAO_CLOUD_GOODS = "taotao-cloud-goods";
 
 	public static final String TAOTAO_CLOUD_AFTERSALE_CENTER = "taotao-cloud-aftersale";
 
-	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer-biz";
+	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer";
 
 	public static final String TAOTAO_CLOUD_LOGISTICS_CENTER = "taotao-cloud-logistics";
 

@@ -18,20 +18,21 @@ package com.taotao.cloud.monitor.utils;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.core.enums.ExceptionTypeEnum;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.monitor.Monitor;
-import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.monitor.enums.WarnLevelEnum;
 import com.taotao.cloud.monitor.enums.WarnTypeEnum;
 import com.taotao.cloud.monitor.model.Message;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.entity.ContentType;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.entity.ContentType;
 
 /**
  * ExceptionUtils
@@ -42,7 +43,7 @@ import org.apache.http.entity.ContentType;
  */
 public class ExceptionUtils {
 
-	private final static String exceptionUrl = "taotao.cloud.health.report.exception.url";
+	private final static String exceptionUrl = "taotao.cloud.monitor.report.exception.url";
 
 	/**
 	 * 上报异常
@@ -124,7 +125,7 @@ public class ExceptionUtils {
 	 * @since 2021-09-10 16:36:09
 	 */
 	public static void reportException(WarnLevelEnum warnLevelEnum, String title,
-		String content) {
+									   String content) {
 		reportException(new Message(
 				WarnTypeEnum.ERROR,
 				title,
@@ -147,8 +148,8 @@ public class ExceptionUtils {
 	 * @since 2021-09-10 16:36:15
 	 */
 	public static void reportException(WarnLevelEnum warnLevelEnumType, String title,
-		String content,
-		String applicationName) {
+									   String content,
+									   String applicationName) {
 		reportException(new Message(WarnTypeEnum.ERROR,
 			title,
 			content,

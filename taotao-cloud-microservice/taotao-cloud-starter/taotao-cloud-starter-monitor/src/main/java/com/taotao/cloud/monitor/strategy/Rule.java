@@ -80,7 +80,7 @@ public class Rule {
 		 * @since 2022-04-27 17:25:43
 		 */
 		public RuleInfo(RuleType type, Object value,
-			HitCallBack hitCallBack) {
+						HitCallBack hitCallBack) {
 			this.type = type;
 			this.value = value;
 			this.hitCallBack = hitCallBack;
@@ -219,8 +219,8 @@ public class Rule {
 						String key = e.getKey();
 
 						if (org.springframework.util.StringUtils.startsWithIgnoreCase(key,
-							"taotao.cloud.health.strategy.")) {
-							key = key.replace("taotao.cloud.health.strategy.", "");
+							"taotao.cloud.monitor.strategy.")) {
+							key = key.replace("taotao.cloud.monitor.strategy.", "");
 							Object rule = rules.get(key);
 							if (rule != null) {
 								registerRules(key, StringUtils.nullToEmpty(e.getValue()));
@@ -292,7 +292,7 @@ public class Rule {
 		 * @since 2022-04-27 17:25:44
 		 */
 		public void registerRulesByProperties(String field) {
-			String value = PropertyUtils.getPropertyCache("taotao.cloud.health.strategy." + field,
+			String value = PropertyUtils.getPropertyCache("taotao.cloud.monitor.strategy." + field,
 				"");
 			registerRules(field, value);
 		}

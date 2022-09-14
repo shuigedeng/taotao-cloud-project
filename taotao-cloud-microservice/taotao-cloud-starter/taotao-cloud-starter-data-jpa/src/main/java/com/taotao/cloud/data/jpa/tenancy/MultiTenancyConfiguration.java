@@ -24,9 +24,6 @@ import java.util.function.Supplier;
 
 /**
  * <p>Description: Data JPA 模块 多租户配置 </p>
- *
- * @author : gengwei.zheng
- * @date : 2022/9/8 22:15
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnMultiTenancyEnabled
@@ -72,19 +69,20 @@ public class MultiTenancyConfiguration {
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
-																	   HibernateProperties hibernateProperties, JpaVendorAdapter jpaVendorAdapter,
-																	   JpaProperties jpaProperties, MultiTenancyProperties multiTenancyProperties,
+																	   HibernateProperties hibernateProperties,
+																	   JpaVendorAdapter jpaVendorAdapter,
+																	   JpaProperties jpaProperties,
+																	   MultiTenancyProperties multiTenancyProperties,
 																	   MultiTenantConnectionProvider multiTenantConnectionProvider,
 																	   CurrentTenantIdentifierResolver currentTenantIdentifierResolver) {
-
 		Supplier<String> defaultDdlMode = hibernateProperties::getDdlAuto;
 		Map<String, Object> properties = hibernateProperties.determineHibernateProperties(
 			jpaProperties.getProperties(), new HibernateSettings().ddlAuto(defaultDdlMode));
 
 		properties.put(Environment.MULTI_TENANT, multiTenancyProperties.getTenancyStrategy());
 		properties.put(Environment.MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
-		properties.put(Environment.MULTI_TENANT_IDENTIFIER_RESOLVER,
-			currentTenantIdentifierResolver);
+		properties.put(Environment.MULTI_TENANT_IDENTIFIER_RESOLVER, currentTenantIdentifierResolver);
+
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource);
 		//此处不能省略，哪怕你使用了 @EntityScan，实际上 @EntityScan 会失效

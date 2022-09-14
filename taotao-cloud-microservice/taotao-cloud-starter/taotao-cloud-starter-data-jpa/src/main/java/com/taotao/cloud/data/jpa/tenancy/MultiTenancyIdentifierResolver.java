@@ -10,9 +10,6 @@ import org.slf4j.LoggerFactory;
  * <p>Description: 租户选择器 </p>
  * <p>
  * 选择具体使用哪个租户
- *
- * @author : gengwei.zheng
- * @date : 2022/9/8 18:14
  */
 public class MultiTenancyIdentifierResolver implements CurrentTenantIdentifierResolver {
 

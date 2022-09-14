@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.order.biz.model.entity.cart;
 
-import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

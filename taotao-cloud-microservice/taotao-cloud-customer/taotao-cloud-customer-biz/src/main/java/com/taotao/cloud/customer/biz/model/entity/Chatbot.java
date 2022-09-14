@@ -1,14 +1,15 @@
 package com.taotao.cloud.customer.biz.model.entity;
 
-import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 机器人客服表
@@ -79,6 +80,7 @@ public class Chatbot extends JpaSuperEntity {
 
 	/**
 	 * 工作模式
+	 *
 	 * @see WorkModeEnum
 	 */
 	@Column(name = "work_mode", columnDefinition = "int not null default 0 comment '工作模式'")

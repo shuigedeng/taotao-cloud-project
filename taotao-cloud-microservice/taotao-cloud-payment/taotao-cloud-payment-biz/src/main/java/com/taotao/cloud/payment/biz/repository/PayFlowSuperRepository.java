@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.repository;
 
-import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
+import com.taotao.cloud.data.jpa.base.repository.JpaSuperRepository;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +23,8 @@ import javax.persistence.EntityManager;
 
 /**
  * @author shuigedeng
- * @since 2020/11/13 10:01
  * @version 2022.03
+ * @since 2020/11/13 10:01
  */
 @Repository
 public class PayFlowSuperRepository extends JpaSuperRepository<PayFlow, Long> {

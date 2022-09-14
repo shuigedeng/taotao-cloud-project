@@ -19,6 +19,7 @@ import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.monitor.collect.task.IOCollectTask;
 import com.taotao.cloud.monitor.model.Report;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +31,7 @@ import java.util.List;
  * @version 2021.9
  * @since 2021-09-10 17:02:08
  */
-public class DefaultWarnStrategy implements WarnStrategy{
+public class DefaultWarnStrategy implements WarnStrategy {
 
 	protected static int maxCacheSize = 3;
 	protected static List<Report> cacheReports = Collections.synchronizedList(new ArrayList<>(maxCacheSize + 2));
@@ -60,33 +61,33 @@ public class DefaultWarnStrategy implements WarnStrategy{
 	 */
 	public void setDefaultStrategy() {
 		rulesAnalyzer.registerRules("cpu.process",
-			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.cpu.process", "[>0.7]"));
+			PropertyUtils.getPropertyCache("taotao.cloud.monitor.strategy.cpu.process", "[>0.7]"));
 		rulesAnalyzer.registerRules("cpu.system",
-			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.cpu.system", "[>0.7]"));
+			PropertyUtils.getPropertyCache("taotao.cloud.monitor.strategy.cpu.system", "[>0.7]"));
 		rulesAnalyzer.registerRules("io.current.dir.usable.size",
-			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.io.current.dir.usable.size",
+			PropertyUtils.getPropertyCache("taotao.cloud.monitor.strategy.io.current.dir.usable.size",
 				"[<500]"));
 		rulesAnalyzer.registerRules("memery.jvm.max",
-			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.memery.jvm.max", "[<256]"));
+			PropertyUtils.getPropertyCache("taotao.cloud.monitor.strategy.memery.jvm.max", "[<256]"));
 		rulesAnalyzer.registerRules("memery.system.free",
-			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.memery.system.free",
+			PropertyUtils.getPropertyCache("taotao.cloud.monitor.strategy.memery.system.free",
 				"[<256]"));
 		rulesAnalyzer.registerRules("thread.deadlocked.count",
-			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.thread.deadlocked.count",
+			PropertyUtils.getPropertyCache("taotao.cloud.monitor.strategy.thread.deadlocked.count",
 				"[>10]"));
 		rulesAnalyzer.registerRules("thread.total",
-			PropertyUtils.getPropertyCache("taotao.cloud.health.strategy.thread.total", "[>1000]"));
+			PropertyUtils.getPropertyCache("taotao.cloud.monitor.strategy.thread.total", "[>1000]"));
 		rulesAnalyzer.registerRules("tomcat.threadPool.poolSize.count",
 			PropertyUtils.getPropertyCache(
-				"taotao.cloud.health.strategy.tomcat.threadPool.poolSize.count",
+				"taotao.cloud.monitor.strategy.tomcat.threadPool.poolSize.count",
 				"[>1000]"));
 		rulesAnalyzer.registerRules("tomcat.threadPool.active.count",
 			PropertyUtils.getPropertyCache(
-				"taotao.cloud.health.strategy.tomcat.threadPool.active.count",
+				"taotao.cloud.monitor.strategy.tomcat.threadPool.active.count",
 				"[>200]"));
 		rulesAnalyzer.registerRules("tomcat.threadPool.queue.size",
 			PropertyUtils.getPropertyCache(
-				"taotao.cloud.health.strategy.tomcat.threadPool.queue.size",
+				"taotao.cloud.monitor.strategy.tomcat.threadPool.queue.size",
 				"[>50]"));
 
 		if (rulesAnalyzer.getRules("io.current.dir.usable.size") != null) {

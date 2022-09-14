@@ -18,15 +18,15 @@ package com.taotao.cloud.web.interceptor;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.web.properties.InterceptorProperties;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 拦截器，统计接口内存增长
@@ -86,7 +86,7 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 
 				Collector collector = ContextUtils.getBean(Collector.class, true);
 				if (Objects.nonNull(collector)) {
-					collector.value("taotao.cloud.health.doubtapi.info").set(statisticMap);
+					collector.value("taotao.cloud.monitor.doubtapi.info").set(statisticMap);
 				}
 			}
 		}
@@ -149,7 +149,7 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 			long cha = doubtApiInfo.count > 0 ?
 				doubtApiInfo.totalIncreMem / doubtApiInfo.count
 				: doubtApiInfo.totalIncreMem - this.count > 0 ?
-					this.totalIncreMem / this.count : this.totalIncreMem;
+				this.totalIncreMem / this.count : this.totalIncreMem;
 
 			if (cha > 0) {
 				return 1;

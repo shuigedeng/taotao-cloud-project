@@ -15,12 +15,14 @@
  */
 package com.taotao.cloud.sys.api.dubbo.request;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 菜单查询对象
@@ -35,6 +37,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MenuQueryRequest implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 5126530068827085130L;
 
 	/**

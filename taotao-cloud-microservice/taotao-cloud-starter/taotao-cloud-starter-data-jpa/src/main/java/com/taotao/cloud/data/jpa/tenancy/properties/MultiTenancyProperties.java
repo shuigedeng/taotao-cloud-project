@@ -9,9 +9,6 @@ import java.util.Map;
 
 /**
  * <p>Description: 自定义 JPA 配置 </p>
- *
- * @author : gengwei.zheng
- * @date : 2022/9/8 18:22
  */
 @ConfigurationProperties(prefix = "taotao.cloud.multi-tenancy.enabled")
 public class MultiTenancyProperties {

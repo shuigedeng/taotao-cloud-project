@@ -11,9 +11,6 @@ import javax.sql.DataSource;
  * <p>Description: 数据库连接提供者 </p>
  * <p>
  * 通过该类明确，在租户系统中具体使用的是哪个 Database 或 Schema
- *
- * @author : gengwei.zheng
- * @date : 2022/9/8 18:14
  */
 public class MultiTenancyConnectionProvider extends
 	AbstractDataSourceBasedMultiTenantConnectionProviderImpl {
