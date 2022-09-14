@@ -42,7 +42,6 @@ public class SensitiveAutoConfiguration implements InitializingBean {
 		LogUtils.started(SensitiveAutoConfiguration.class, StarterName.ELK_STARTER);
 	}
 
-
 	@Bean
 	public SensitiveWordsRunner sensitiveWordsRunner() {
 		return new SensitiveWordsRunner();

@@ -15,9 +15,6 @@ import java.util.Properties;
 
 /**
  * <p>Description: DataSource 查询 </p>
- *
- * @author : gengwei.zheng
- * @date : 2022/9/8 18:55
  */
 public class MultiTenancyDataSourceLookup extends MapDataSourceLookup {
 

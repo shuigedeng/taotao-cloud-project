@@ -17,7 +17,7 @@ package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * IDeptRepository
@@ -27,5 +27,7 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 public interface IDeptRepository extends JpaRepository<Dept, Long> {
+	@Query("select d from Dept d where d.version <> ?1")
+	Dept findByVersionNot(Integer version);
 
 }

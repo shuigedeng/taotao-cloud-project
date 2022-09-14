@@ -1,18 +1,19 @@
 package com.taotao.cloud.dubbo.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * 支付流水表
  *
  * @author shuigedeng
- * @since 2020/11/13 09:46
  * @version 2022.03
+ * @since 2020/11/13 09:46
  */
 @Entity
 @Table(name = "tt_pay_flow")

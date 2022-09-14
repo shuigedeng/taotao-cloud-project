@@ -20,7 +20,6 @@ import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
-import java.util.Objects;
 import org.hibernate.HibernateException;
 import org.hibernate.event.internal.DefaultDeleteEventListener;
 import org.hibernate.event.internal.DefaultLoadEventListener;
@@ -29,6 +28,8 @@ import org.hibernate.event.spi.DeleteEvent;
 import org.hibernate.event.spi.LoadEvent;
 import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.hibernate.resource.jdbc.spi.StatementInspector;
+
+import java.util.Objects;
 
 /**
  * HibernateInterceptor
@@ -53,7 +54,7 @@ public class HibernateInspector implements StatementInspector {
 						.replace("\r", "")
 						.replace("\n", "");
 
-					collector.hook("taotao.cloud.health.jpa.onSaveOrUpdate.sql.hook")
+					collector.hook("taotao.cloud.monitor.jpa.onSaveOrUpdate.sql.hook")
 						.run(replace, () -> {
 							try {
 								super.onSaveOrUpdate(event);
@@ -78,7 +79,7 @@ public class HibernateInspector implements StatementInspector {
 				try {
 					String replace = StringUtils.nullToEmpty(sql)
 						.replace("\r", "").replace("\n", "");
-					collector.hook("taotao.cloud.health.jpa.delete.sql.hook")
+					collector.hook("taotao.cloud.monitor.jpa.delete.sql.hook")
 						.run(replace, () -> {
 							try {
 								super.onDelete(event);
@@ -97,14 +98,14 @@ public class HibernateInspector implements StatementInspector {
 
 		@Override
 		public void onLoad(LoadEvent event,
-			LoadType loadType) throws HibernateException {
+						   LoadType loadType) throws HibernateException {
 			Collector collector = ContextUtils.getBean(Collector.class, true);
 			String sql = SqlContextHolder.getSql();
 			if (Objects.nonNull(collector)) {
 				try {
 					String replace = StringUtils.nullToEmpty(sql).replace("\r", "")
 						.replace("\n", "");
-					collector.hook("taotao.cloud.health.jpa.load.sql.hook")
+					collector.hook("taotao.cloud.monitor.jpa.load.sql.hook")
 						.run(replace, () -> {
 							try {
 								super.onLoad(event, loadType);

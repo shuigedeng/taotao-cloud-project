@@ -17,7 +17,6 @@ package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.model.entity.file.File;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * IFileMapper
@@ -26,7 +25,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
 public interface IFileMapper extends BaseSuperMapper<File, Long> {
 
 }

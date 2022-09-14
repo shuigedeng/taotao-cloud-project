@@ -2,9 +2,6 @@ package com.taotao.cloud.data.jpa.tenancy.properties;
 
 /**
  * <p>Description: 租户数据源配置 </p>
- *
- * @author : gengwei.zheng
- * @date : 2022/9/8 18:24
  */
 public class MultiTenancyDataSource {
 
