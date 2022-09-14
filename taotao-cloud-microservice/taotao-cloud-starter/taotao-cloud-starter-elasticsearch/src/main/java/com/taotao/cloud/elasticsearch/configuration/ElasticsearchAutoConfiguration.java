@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.configuration;
 
+import cn.easyes.starter.register.EsMapperScan;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.elasticsearch.esearchx.EsContext;
@@ -54,7 +55,8 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  */
 @AutoConfiguration
 @EnableConfigurationProperties({RestClientPoolProperties.class, ElasticsearchProperties.class})
-@ConditionalOnProperty(prefix = ElasticsearchProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = ElasticsearchProperties.PREFIX, name = "enabled" , havingValue = "true")
+@EsMapperScan("com.taotao.cloud.*.es.mapper")
 public class ElasticsearchAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -63,7 +65,9 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	}
 
 	@Configuration
-	public static class ElasticsearchConfig extends ElasticsearchConfiguration implements InitializingBean {
+	public static class ElasticsearchConfig extends ElasticsearchConfiguration implements
+		InitializingBean {
+
 		@Override
 		public void afterPropertiesSet() throws Exception {
 			LogUtils.started(ElasticsearchConfig.class, StarterName.ELASTICSEARCH_STARTER);
@@ -133,7 +137,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	 * @since 2021/2/26 08:53
 	 */
 	private void setRequestConfig(RestClientBuilder builder,
-								  RestClientPoolProperties poolProperties) {
+		RestClientPoolProperties poolProperties) {
 		builder.setRequestConfigCallback(requestConfigBuilder -> {
 			requestConfigBuilder
 				.setConnectTimeout(poolProperties.getConnectTimeOut())
@@ -152,8 +156,8 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	 * @since 2021/2/26 08:53
 	 */
 	private void setHttpClientConfig(RestClientBuilder builder,
-									 RestClientPoolProperties poolProperties,
-									 ElasticsearchRestClientProperties restProperties) {
+		RestClientPoolProperties poolProperties,
+		ElasticsearchRestClientProperties restProperties) {
 		builder.setHttpClientConfigCallback(httpClientBuilder -> {
 			httpClientBuilder
 				.setMaxConnTotal(poolProperties.getMaxConnectNum())

@@ -71,6 +71,8 @@ spring:
           to: 981376577@qq.com
           cc: 981376577@qq.com
           from: Spring Boot Admin <981376577@qq.com>
+      ui:
+        title: taotao cloud
   #mail:
   #  host: smtp.qq.com
   #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
