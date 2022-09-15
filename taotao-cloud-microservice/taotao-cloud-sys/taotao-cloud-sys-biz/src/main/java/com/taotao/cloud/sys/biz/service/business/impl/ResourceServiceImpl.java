@@ -23,9 +23,9 @@ import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
 import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.biz.convert.ResourceConvert;
-import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
+import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
+import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IResourceService;
@@ -151,7 +151,7 @@ public class ResourceServiceImpl extends
 
 	@Override
 	public List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> vos,
-		Long parentId) {
+													Long parentId) {
 		//List<MenuTreeVO> menuTreeList = vos.stream()
 		//	.filter(vo -> MenuTypeEnum.DIR.getCode() == vo.type())
 		//	.map(e -> MenuTreeVO.builder()

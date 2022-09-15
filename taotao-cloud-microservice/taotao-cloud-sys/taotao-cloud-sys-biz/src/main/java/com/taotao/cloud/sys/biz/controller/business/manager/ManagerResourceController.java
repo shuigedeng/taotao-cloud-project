@@ -30,7 +30,7 @@ import com.taotao.cloud.sys.api.model.dto.resource.ResourceSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.resource.ResourceUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.biz.convert.ResourceConvert;
+import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.service.business.IResourceService;
 import com.taotao.cloud.web.base.controller.SuperController;
@@ -67,6 +67,8 @@ import java.util.Set;
 @Tag(name = "平台管理端-资源管理API", description = "平台管理端-资源管理API")
 public class ManagerResourceController extends
 	SuperController<IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, MenuQueryVO> {
+
+	//************************************************菜单*************************************************************
 
 	@Operation(summary = "根据角色id获取菜单列表", description = "根据角色id获取菜单列表")
 	@RequestLogger
@@ -156,7 +158,7 @@ public class ManagerResourceController extends
 
 		Result<List<MenuQueryVO>> result = findResourceByCodes(roleCodes);
 		List<MenuQueryVO> resourceVOList = result.data();
-		
+
 		List<MenuTreeVO> trees = service().findCurrentUserMenuTree(resourceVOList,
 			parentId);
 		return Result.success(trees);
@@ -223,5 +225,8 @@ public class ManagerResourceController extends
 		LogUtils.error(" 该接口已经被限流啦", e);
 		return Result.fail("该接口已经被限流啦");
 	}
+
+
+	//************************************************资源*************************************************************
 
 }

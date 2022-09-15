@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.controller.business.tools.log;
+package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -22,8 +22,6 @@ import com.taotao.cloud.sys.api.model.dto.log.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.service.business.ILogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,6 +31,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * LogController
@@ -46,7 +47,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "工具管理端-日志管理API", description = "工具管理端-日志管理API")
 @RequestMapping("/sys/tools/log")
-public class LogController {
+public class ManagerLogController {
 
 	private final ILogService logService;
 

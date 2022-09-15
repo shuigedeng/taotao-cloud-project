@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.utils;
 import com.taotao.cloud.common.tree.TreeNode;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
-import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
+import com.taotao.cloud.sys.api.enums.ResourceTypeEnum;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuMetaVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
@@ -154,7 +154,7 @@ public class TreeUtil {
 				tree.setMeta(meta);
 
 				// 只有当菜单类型为目录的时候，如果是顶级，则强制修改为Layout
-				if (sysMenu.getParentId() == -1L && MenuTypeEnum.DIR.getCode()
+				if (sysMenu.getParentId() == -1L && ResourceTypeEnum.DIR.getCode()
 					.equals(sysMenu.getType())) {
 					tree.setComponent("Layout");
 					tree.setRedirect("noRedirect");
@@ -162,12 +162,12 @@ public class TreeUtil {
 				}
 				tree.setSort(sysMenu.getSortNum());
 
-				if (MenuTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
-					tree.setTypeName(MenuTypeEnum.DIR.getMessage());
-				} else if (MenuTypeEnum.MENU.getCode().equals(sysMenu.getType())) {
-					tree.setTypeName(MenuTypeEnum.MENU.getMessage());
-				} else if (MenuTypeEnum.RESOURCE.getCode().equals(sysMenu.getType())) {
-					tree.setTypeName(MenuTypeEnum.RESOURCE.getMessage());
+				if (ResourceTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
+					tree.setTypeName(ResourceTypeEnum.DIR.getMessage());
+				} else if (ResourceTypeEnum.MENU.getCode().equals(sysMenu.getType())) {
+					tree.setTypeName(ResourceTypeEnum.MENU.getMessage());
+				} else if (ResourceTypeEnum.RESOURCE.getCode().equals(sysMenu.getType())) {
+					tree.setTypeName(ResourceTypeEnum.RESOURCE.getMessage());
 				}
 				return tree;
 			}).toList();

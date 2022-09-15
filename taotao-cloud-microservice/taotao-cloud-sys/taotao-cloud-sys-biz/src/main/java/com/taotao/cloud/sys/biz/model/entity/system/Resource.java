@@ -16,9 +16,8 @@
 package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
+import com.taotao.cloud.sys.api.enums.ResourceTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +29,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -92,21 +92,21 @@ public class Resource extends BaseSuperEntity<Resource, Long> {
 	 * 排序值
 	 */
 	@Column(name = "sort_num", columnDefinition = "int(11) not null default 0 comment '排序值'")
-	private Integer sortNum ;
+	private Integer sortNum;
 
 	/**
 	 * 是否缓存页面: 0:否 1:是 (默认值0)
 	 */
 	@Column(name = "keep_alive", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否缓存页面: 0:否 1:是 (默认值0)'")
-	private Boolean keepAlive ;
+	private Boolean keepAlive;
 
 	/**
 	 * 菜单类型 1:目录 2:菜单 3：资源(分页查询操作、操作按钮、删除按钮、查询按钮、等等) 资源 (包括分页、各种按钮、删除 等等 对应的是请求路径如：/api/menu/find)
 	 *
-	 * @see MenuTypeEnum
+	 * @see ResourceTypeEnum
 	 */
-	@Column(name = "type", columnDefinition = "int not null comment '菜单类型 (1:目录 2:菜单 3：按钮)'")
-	private Integer type ;
+	@Column(name = "type", columnDefinition = "int not null comment '菜单类型 (1:目录 2:菜单 3：资源)'")
+	private Integer type;
 
 	/**
 	 * url请求Id (type=3 时, 此id有值)

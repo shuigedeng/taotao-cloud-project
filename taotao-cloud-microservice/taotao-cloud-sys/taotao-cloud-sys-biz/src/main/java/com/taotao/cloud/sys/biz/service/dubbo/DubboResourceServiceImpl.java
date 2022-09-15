@@ -17,8 +17,8 @@ package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboResourceService;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
-import com.taotao.cloud.sys.biz.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
+import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.QResource;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;

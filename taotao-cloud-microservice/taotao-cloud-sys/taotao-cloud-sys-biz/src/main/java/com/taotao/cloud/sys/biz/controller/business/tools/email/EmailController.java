@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.controller.business.manager;
+package com.taotao.cloud.sys.biz.controller.business.tools.email;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -8,7 +8,7 @@ import com.taotao.cloud.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.dto.EmailDTO;
 import com.taotao.cloud.sys.api.model.vo.alipay.EmailVO;
-import com.taotao.cloud.sys.biz.convert.EmailConvert;
+import com.taotao.cloud.sys.biz.model.convert.EmailConvert;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.service.business.IEmailConfigService;
 import com.taotao.cloud.web.version.ApiInfo;

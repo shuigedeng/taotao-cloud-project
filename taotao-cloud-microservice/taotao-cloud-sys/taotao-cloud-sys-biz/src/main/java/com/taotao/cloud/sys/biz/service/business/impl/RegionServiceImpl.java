@@ -25,23 +25,25 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.http.HttpRequest;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
-import com.taotao.cloud.common.utils.io.HttpUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.secure.SignUtils;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
-import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.model.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.api.model.vo.region.RegionVO;
-import com.taotao.cloud.sys.biz.convert.RegionConvert;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
+import com.taotao.cloud.sys.biz.model.convert.RegionConvert;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -49,9 +51,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * RegionServiceImpl
@@ -265,7 +264,7 @@ public class RegionServiceImpl extends
 			String jsonString;
 			String signUrl = SignUtils.sign(AMAP_SECURITY_KEY, syncUrl);
 			if (Objects.nonNull(okHttpService)) {
-					jsonString = okHttpService.url(StringUtils.isBlank(url) ? signUrl : url)
+				jsonString = okHttpService.url(StringUtils.isBlank(url) ? signUrl : url)
 					.get()
 					.sync();
 			} else {
@@ -433,8 +432,8 @@ public class RegionServiceImpl extends
 	 *                 district:区县 street:街道
 	 */
 	public static Long insert(List<Region> regions, Long parentId, String cityCode, String code,
-		String name, String center, String level, List<Long> idTree, List<String> codeTree,
-		Integer depth, Integer orderNum) {
+							  String name, String center, String level, List<Long> idTree, List<String> codeTree,
+							  Integer depth, Integer orderNum) {
 		//  \"citycode\": [],\n" +
 		//         "        \"adcode\": \"100000\",\n" +
 		//         "        \"name\": \"中华人民共和国\",\n" +

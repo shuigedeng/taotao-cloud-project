@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.convert;
+package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
-import com.taotao.cloud.sys.biz.model.entity.region.Region;
+import com.taotao.cloud.sys.api.model.vo.dept.DeptTreeVO;
+import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -24,29 +24,29 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * iregion地图结构
+ * DeptMapStruct
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-28 13:39:46
+ * @since 2022-04-28 13:39:18
  */
 @Mapper(
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface RegionConvert {
+public interface DeptConvert {
 
 	/**
 	 * 实例
 	 */
-	RegionConvert INSTANCE = Mappers.getMapper(RegionConvert.class);
+	DeptConvert INSTANCE = Mappers.getMapper(DeptConvert.class);
 
 	/**
-	 * 区域列表给签证官
+	 * 部门列表给签证官
 	 *
-	 * @param regionList 区域列表
-	 * @return {@link List }<{@link RegionTreeVO }>
-	 * @since 2022-04-28 13:39:46
+	 * @param deptList 部门列表
+	 * @return {@link List }<{@link DeptTreeVO }>
+	 * @since 2022-04-28 13:39:18
 	 */
-	List<RegionTreeVO> convertTree(List<Region> regionList);
+	List<DeptTreeVO> convertTree(List<Dept> deptList);
 
 }

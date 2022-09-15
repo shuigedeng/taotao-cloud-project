@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.controller.business.tools.job;
+package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.quartz.entity.QuartzJob;
@@ -31,14 +31,6 @@ import com.taotao.cloud.sys.biz.service.business.IQuartzJobService;
 import com.taotao.cloud.sys.biz.service.business.IQuartzLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -52,6 +44,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 /**
  * QuartzController
  *
@@ -64,7 +65,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/tools/job/quart")
 @Tag(name = "工具管理端-quartz定时任务管理API", description = "工具管理端-quartz定时任务管理API")
-public class QuartzController {
+public class ManagerQuartzController {
 
 	private static final String ENTITY_NAME = "quartzJob";
 
@@ -113,7 +114,7 @@ public class QuartzController {
 	@GetMapping(value = "/logs")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Map<String, Object>> getJobLogs(QuartzLogQueryCriteria criteria,
-		Pageable pageable) {
+												  Pageable pageable) {
 		Map<String, Object> stringObjectMap = quartzLogService.queryAll(criteria, pageable);
 		return Result.success(stringObjectMap);
 	}

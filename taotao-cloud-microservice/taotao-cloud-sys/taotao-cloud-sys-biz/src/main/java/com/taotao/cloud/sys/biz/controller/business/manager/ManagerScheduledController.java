@@ -1,4 +1,4 @@
-// package com.taotao.cloud.sys.biz.controller.business.tools.job;
+// package com.taotao.cloud.sys.biz.controller.business.manager;
 //
 //
 // import com.taotao.cloud.schedule.core.ScheduledManager;
@@ -27,7 +27,7 @@
 // @RestController
 // @Tag(name = "工具管理端-scheduled定时任务管理API", description = "工具管理端-scheduled管理API")
 // @RequestMapping("/sys/tools/job/scheduled")
-// public class ScheduledController {
+// public class ManagerScheduledController {
 //
 // 	private final ScheduledManager scheduledManager;
 // 	private final IScheduledJobService scheduledJobService;

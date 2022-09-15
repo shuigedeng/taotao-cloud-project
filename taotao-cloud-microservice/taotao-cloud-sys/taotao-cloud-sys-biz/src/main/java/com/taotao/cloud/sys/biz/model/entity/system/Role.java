@@ -17,7 +17,6 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,10 +28,11 @@ import org.hibernate.Hibernate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * 角色表 
+ * 角色表
  *
  * @author shuigedeng
  * @version 2021.10
@@ -47,7 +47,7 @@ import java.util.Objects;
 @Table(name = Role.TABLE_NAME)
 @TableName(Role.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Role.TABLE_NAME, comment = "角色表")
-public class Role extends BaseSuperEntity<Role,Long> {
+public class Role extends BaseSuperEntity<Role, Long> {
 
 	public static final String TABLE_NAME = "tt_role";
 
@@ -74,10 +74,11 @@ public class Role extends BaseSuperEntity<Role,Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
+
 	@Builder
 	public Role(Long id, LocalDateTime createTime, Long createBy,
-		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-		String name, String code, String remark, String tenantId) {
+				LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+				String name, String code, String remark, String tenantId) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.name = name;
 		this.code = code;
@@ -87,7 +88,7 @@ public class Role extends BaseSuperEntity<Role,Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
