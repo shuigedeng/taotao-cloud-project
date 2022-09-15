@@ -13,25 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.dubbo;
+package com.taotao.cloud.sys.biz.model.bo;
 
-import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import io.soabase.recordbuilder.core.RecordBuilder;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
- * ISysDictService
+ * 字典项查询对象
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2021-10-09 20:32:36
+ * @since 2021-10-09 15:32:25
  */
-public interface IDubboDictService {
-
+@RecordBuilder
+public record DictItemBO(
 	/**
-	 * 字典code查询
-	 *
-	 * @param code 代码
-	 * @return {@link DubboDictResponse }
-	 * @since 2022-06-29 21:45:44
+	 * id
 	 */
-	DubboDictResponse findByCode(Integer code);
+	Long id,
+	/**
+	 * 字典id
+	 */
+	Long dictId,
+	/**
+	 * 字典项文本
+	 */
+	String itemText,
+	/**
+	 * 字典项值
+	 */
+	String itemValue,
+	/**
+	 * 描述
+	 */
+	String description,
+	/**
+	 * 状态(1不启用 2启用)
+	 */
+	Integer status,
+	/**
+	 * 创建时间
+	 */
+	LocalDateTime createTime,
+	/**
+	 * 最后修改时间
+	 */
+	LocalDateTime lastModifiedTime) implements Serializable {
+
+	static final long serialVersionUID = 5126530068827085130L;
+
+
 }

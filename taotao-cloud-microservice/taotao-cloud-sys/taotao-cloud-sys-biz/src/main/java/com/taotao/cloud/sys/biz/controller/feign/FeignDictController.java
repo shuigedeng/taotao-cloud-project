@@ -26,7 +26,7 @@ import com.taotao.cloud.limit.guava.GuavaLimit;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
-import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
+import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import com.taotao.cloud.sys.biz.model.convert.DictConvert;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
@@ -88,7 +88,7 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	@Limit(key = "limitTest", period = 10, count = 3)
 	@SentinelResource("findByCode")
 	@GetMapping("/code")
-	public FeignDictRes findByCode(@RequestParam(value = "code") String code) {
+	public FeignDictResponse findByCode(@RequestParam(value = "code") String code) {
 		if ("sd".equals(code)) {
 			throw new BusinessException("我出错了");
 			//try {

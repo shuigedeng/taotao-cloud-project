@@ -18,12 +18,12 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
-import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
-import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
+import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
+import com.taotao.cloud.sys.biz.model.bo.MenuBO;
+import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
@@ -84,7 +84,7 @@ public class ResourceServiceImpl extends
 	}
 
 	@Override
-	public List<MenuQueryRequest> findAllById(Long id) {
+	public List<DubboMenuQueryRequest> findAllById(Long id) {
 		//List<Menu> menus = ir().findAll();
 		//List<Menu> menus =im().selectList(new QueryWrapper<>());
 

@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboResourceService;
-import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
 import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.QResource;
@@ -50,7 +50,7 @@ public class DubboResourceServiceImpl extends
 	private final static QResource RESOURCE = QResource.resource;
 
 	@Override
-	public List<MenuQueryRequest> queryAllById(Long id) {
+	public List<DubboMenuQueryRequest> queryAllById(Long id) {
 		List<Resource> all = ir().findAll();
 		return ResourceConvert.INSTANCE.convertListRequest(all);
 	}

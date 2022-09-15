@@ -16,7 +16,7 @@ package com.taotao.cloud.auth.biz.controller;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.dubbo.IDubboDictService;
 import com.taotao.cloud.sys.api.feign.IFeignDictService;
-import com.taotao.cloud.sys.api.feign.response.FeignDictRes;
+import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -42,7 +42,7 @@ public class MessagesController {
 	@Autowired
 	private IFeignDictService feignDictService;
 
-	@DubboReference(check=false)
+	@DubboReference(check = false)
 	private IDubboDictService dubboDictService;
 
 	@Operation(summary = "测试消息", description = "测试消息")
@@ -52,7 +52,7 @@ public class MessagesController {
 		//DubboDictRes dubboDictRes = dubboDictService.findByCode(1);
 
 		try {
-			FeignDictRes feignDictRes = feignDictService.findByCode("sd");
+			FeignDictResponse feignDictResponse = feignDictService.findByCode("sd");
 		} catch (Exception e) {
 			LogUtils.error(e);
 			throw new RuntimeException(e);

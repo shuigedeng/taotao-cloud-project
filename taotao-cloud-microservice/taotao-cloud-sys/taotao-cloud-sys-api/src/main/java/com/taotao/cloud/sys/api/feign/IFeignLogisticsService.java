@@ -29,7 +29,7 @@ public interface IFeignLogisticsService {
 	 * @since 2022-04-25 16:47:29
 	 */
 	@GetMapping("/logistic/codes")
-	Result<LogisticsVO> getById(@RequestParam Long logisticsId);
+	LogisticsVO getById(@RequestParam Long logisticsId);
 
 	/**
 	 * 得到物流
@@ -40,7 +40,7 @@ public interface IFeignLogisticsService {
 	 * @since 2022-04-25 16:47:32
 	 */
 	@GetMapping("/logistic/info")
-	Result<TracesVO> getLogistic(@RequestParam Long logisticsId, @RequestParam String logisticsNo);
+	TracesVO getLogistic(@RequestParam Long logisticsId, @RequestParam String logisticsNo);
 
 	@GetMapping("/logistic/list")
 	List<LogisticsVO> list();

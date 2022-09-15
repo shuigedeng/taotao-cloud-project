@@ -16,8 +16,8 @@
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
+import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.QRole;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;

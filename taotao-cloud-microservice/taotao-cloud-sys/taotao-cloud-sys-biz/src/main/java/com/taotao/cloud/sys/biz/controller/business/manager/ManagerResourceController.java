@@ -24,12 +24,12 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
-import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
-import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
+import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
 import com.taotao.cloud.sys.api.model.dto.resource.ResourceSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.resource.ResourceUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.service.business.IResourceService;
@@ -183,7 +183,7 @@ public class ManagerResourceController extends
 	@GetMapping("/test/se")
 	public Result<Boolean> testNotAuth() {
 
-		List<MenuQueryRequest> allById = service().findAllById(1L);
+		List<DubboMenuQueryRequest> allById = service().findAllById(1L);
 		return Result.success(true);
 	}
 

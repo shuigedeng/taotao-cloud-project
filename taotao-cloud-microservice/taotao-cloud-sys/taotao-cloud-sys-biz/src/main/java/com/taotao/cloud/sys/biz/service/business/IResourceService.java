@@ -15,12 +15,13 @@
  */
 package com.taotao.cloud.sys.biz.service.business;
 
-import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
-import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
+import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+
 import java.util.List;
 import java.util.Set;
 
@@ -48,7 +49,7 @@ public interface IResourceService extends BaseSuperService<Resource, Long> {
 	 * @return 菜单列表
 	 * @since 2022-03-23 08:55:48
 	 */
-	List<MenuQueryRequest> findAllById(Long id);
+	List<DubboMenuQueryRequest> findAllById(Long id);
 
 	/**
 	 * 根据角色id列表获取角色列表
@@ -105,7 +106,7 @@ public interface IResourceService extends BaseSuperService<Resource, Long> {
 	 * @since 2021-10-09 20:39:41
 	 */
 	List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> MenuVOList,
-		Long parentId);
+											 Long parentId);
 
 	//Future<Boolean> testAsync();
 	//

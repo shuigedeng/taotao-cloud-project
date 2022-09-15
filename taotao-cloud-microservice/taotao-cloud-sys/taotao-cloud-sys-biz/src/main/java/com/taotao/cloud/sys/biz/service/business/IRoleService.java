@@ -15,9 +15,10 @@
  */
 package com.taotao.cloud.sys.biz.service.business;
 
-import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
+import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+
 import java.util.List;
 import java.util.Set;
 

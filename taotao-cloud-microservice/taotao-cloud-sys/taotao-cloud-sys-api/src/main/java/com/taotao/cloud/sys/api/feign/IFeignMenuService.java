@@ -1,14 +1,14 @@
 package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.FeignMenuServiceFallback;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
-import java.util.List;
-import java.util.Set;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 远程调用后台菜单模块
@@ -28,6 +28,6 @@ public interface IFeignMenuService {
 	 * @since 2020/10/21 15:24
 	 */
 	@GetMapping("/menu/info/codes")
-	Result<List<MenuQueryVO>> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
+	List<MenuQueryVO> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
 
 }

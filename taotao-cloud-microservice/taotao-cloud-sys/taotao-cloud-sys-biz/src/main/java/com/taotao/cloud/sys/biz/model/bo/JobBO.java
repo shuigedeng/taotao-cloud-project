@@ -13,47 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.dubbo.response;
+package com.taotao.cloud.sys.biz.model.bo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
- * 角色查询对象
+ * 岗位查询对象
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-09 15:23:58
+ * @version 2022.03
+ * @since 2022-03-23 08:49:58
  */
 @RecordBuilder
-public record RoleBO(
+public record JobBO(
 	/**
-	 * id
-	 */
-	Long id,
-	/**
-	 * 角色名称
+	 * 岗位名称
 	 */
 	String name,
+
 	/**
-	 * 角色code
+	 * 部门id
 	 */
-	String code,
+	Long deptId,
+
 	/**
 	 * 备注
 	 */
 	String remark,
-	/**
-	 * 创建时间
-	 */
-	LocalDateTime createTime,
-	/**
-	 * 最后修改时间
-	 */
-	LocalDateTime lastModifiedTime) implements Serializable {
 
-	static final long serialVersionUID = 5126530068827085130L;
+	/**
+	 * 排序值
+	 */
+	Integer sortNum,
+
+	/**
+	 * 租户id
+	 */
+	String tenantId) implements Serializable {
+
+	static final long serialVersionUID = -7605952923416404638L;
 
 
 }

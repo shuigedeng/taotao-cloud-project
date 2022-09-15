@@ -16,7 +16,6 @@
 package com.taotao.cloud.sys.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
-import com.taotao.cloud.core.utils.ThreadUtil;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
@@ -48,8 +47,6 @@ public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
 		setNacosProperty();
-
-		ThreadUtil.parallelFor();
 
 		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 	}

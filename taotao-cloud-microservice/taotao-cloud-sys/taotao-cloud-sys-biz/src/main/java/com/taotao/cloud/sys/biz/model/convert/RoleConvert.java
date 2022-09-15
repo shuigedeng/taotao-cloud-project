@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
 import com.taotao.cloud.sys.api.model.dto.role.RoleQueryDTO;
 import com.taotao.cloud.sys.api.model.vo.role.RoleQueryVO;
+import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
