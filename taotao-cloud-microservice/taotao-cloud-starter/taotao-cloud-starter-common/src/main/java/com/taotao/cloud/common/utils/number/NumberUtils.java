@@ -153,11 +153,13 @@ public class NumberUtils extends org.springframework.util.NumberUtils {
 	/**
 	 * hanArr
 	 */
-	private static String[] hanArr = {"零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
+	private static final String[] hanArr = {"零", "一", "二", "三", "四", "五", "六", "七", "八",
+		"九"};
 	/**
 	 * unitArr
 	 */
-	private static String[] unitArr = {"十", "百", "千", "万", "十", "白", "千", "亿", "十", "百", "千"};
+	private static final String[] unitArr = {"十", "百", "千", "万", "十", "白", "千", "亿", "十",
+		"百", "千"};
 
 	/**
 	 * 数字转double
