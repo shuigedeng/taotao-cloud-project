@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.IFeignUserService;
@@ -18,24 +17,24 @@ public class FeignUserServiceFallback implements FallbackFactory<IFeignUserServi
 	public IFeignUserService create(Throwable throwable) {
 		return new IFeignUserService() {
 			@Override
-			public Result<UserQueryVO> findUserInfoByUsername(String username) {
+			public UserQueryVO findUserInfoByUsername(String username) {
 				LogUtils.error("调用findUserInfoByUsername异常：{}", throwable, username);
-				return Result.fail(null, 500);
+				return null;
 			}
 
 			@Override
-			public Result<SecurityUser> getUserInfoBySocial(String providerId, int providerUserId) {
+			public SecurityUser getUserInfoBySocial(String providerId, int providerUserId) {
 				LogUtils.error("调用getUserInfoBySocial异常：providerId: {}, providerUserId: {}",
 					throwable, providerId, providerUserId);
-				return Result.fail(null, 500);
+				return null;
 			}
 
 			@Override
-			public Result<SecurityUser> getSysSecurityUser(
+			public SecurityUser getSysSecurityUser(
 				String nicknameOrUserNameOrPhoneOrEmail) {
 				LogUtils.error("调用getUserInfoBySocial异常：nicknameOrUserNameOrPhoneOrEmail: {}",
 					nicknameOrUserNameOrPhoneOrEmail);
-				return Result.fail(null, 500);
+				return null;
 			}
 		};
 	}

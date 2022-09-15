@@ -15,10 +15,10 @@
  */
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRequest;
-import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
+import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -56,10 +56,10 @@ public interface ResourceConvert {
 	 * 实体查询bos
 	 *
 	 * @param resources 菜单
-	 * @return {@link List }<{@link MenuQueryRequest }>
+	 * @return {@link List }<{@link DubboMenuQueryRequest }>
 	 * @since 2022-04-28 13:39:41
 	 */
-	List<MenuQueryRequest> convertListRequest(List<Resource> resources);
+	List<DubboMenuQueryRequest> convertListRequest(List<Resource> resources);
 
 	/**
 	 * 菜单bos

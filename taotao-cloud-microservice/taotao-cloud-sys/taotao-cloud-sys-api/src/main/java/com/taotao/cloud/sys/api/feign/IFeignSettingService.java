@@ -36,10 +36,10 @@ public interface IFeignSettingService {
 	 * @since 2022-03-25 14:10:22
 	 */
 	@GetMapping("/sys/tools/setting")
-	Result<SettingVO> get(@RequestParam(value = "key") String key);
+	SettingVO get(@RequestParam(value = "key") String key);
 
 	@GetMapping("/sys/tools/setting/base")
-	Result<BaseSetting> getBaseSetting(String name);
+	BaseSetting getBaseSetting(String name);
 
 	/**
 	 * 获得商品设置
@@ -49,30 +49,30 @@ public interface IFeignSettingService {
 	 * @since 2022-04-25 16:47:40
 	 */
 	@GetMapping("/sys/tools/setting/goods")
-	Result<GoodsSettingVO> getGoodsSetting(String name);
+	GoodsSettingVO getGoodsSetting(String name);
 
 	@GetMapping("/sys/tools/setting/order")
-	Result<OrderSettingVO> getOrderSetting(String name);
+	OrderSettingVO getOrderSetting(String name);
 
 	@GetMapping("/sys/tools/setting/experience")
-	Result<ExperienceSettingVO> getExperienceSetting(String name);
+	ExperienceSettingVO getExperienceSetting(String name);
 
 	@GetMapping("/sys/tools/setting/point")
-	Result<PointSettingVO> getPointSetting(String name);
-
+	PointSettingVO getPointSetting(String name);
 
 	@GetMapping("/sys/tools/setting/qq/connect")
-	Result<QQConnectSettingVO> getQQConnectSetting(String name);
+	QQConnectSettingVO getQQConnectSetting(String name);
 
 	@GetMapping("/sys/tools/setting/wechat/connect")
-	Result<WechatConnectSettingVO> getWechatConnectSetting(String name);
+	WechatConnectSettingVO getWechatConnectSetting(String name);
 
 	@GetMapping("/sys/tools/setting/seckill")
-	Result<SeckillSetting> getSeckillSetting(String name);
+	SeckillSetting getSeckillSetting(String name);
 
 	@GetMapping("/sys/tools/setting/ali")
-	Result<AlipayPaymentSetting> getAlipayPaymentSetting(String name);
+	AlipayPaymentSetting getAlipayPaymentSetting(String name);
+
 	@GetMapping("/sys/tools/setting/wechat")
-	Result<WechatPaymentSetting> getWechatPaymentSetting(String name);
+	WechatPaymentSetting getWechatPaymentSetting(String name);
 
 }

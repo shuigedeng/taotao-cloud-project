@@ -40,7 +40,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "公司查询对象")
-public class CompanyQueryRequest implements Serializable {
+public class FeignCompanyQueryRequest implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;

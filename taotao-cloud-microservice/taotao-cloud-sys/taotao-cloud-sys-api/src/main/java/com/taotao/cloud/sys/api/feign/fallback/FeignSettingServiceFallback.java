@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import com.taotao.cloud.sys.api.model.vo.setting.BaseSetting;
 import com.taotao.cloud.sys.api.model.vo.setting.ExperienceSettingVO;
@@ -27,58 +26,58 @@ public class FeignSettingServiceFallback implements FallbackFactory<IFeignSettin
 	public IFeignSettingService create(Throwable throwable) {
 		return new IFeignSettingService() {
 			@Override
-			public Result<SettingVO> get(String key) {
+			public SettingVO get(String key) {
 				return null;
 			}
 
 			@Override
-			public Result<BaseSetting> getBaseSetting(String name) {
+			public BaseSetting getBaseSetting(String name) {
 				return null;
 			}
 
 			@Override
-			public Result<GoodsSettingVO> getGoodsSetting(
+			public GoodsSettingVO getGoodsSetting(
 				String name) {
 				return null;
 			}
 
 			@Override
-			public Result<OrderSettingVO> getOrderSetting(String name) {
+			public OrderSettingVO getOrderSetting(String name) {
 				return null;
 			}
 
 			@Override
-			public Result<ExperienceSettingVO> getExperienceSetting(String name) {
+			public ExperienceSettingVO getExperienceSetting(String name) {
 				return null;
 			}
 
 			@Override
-			public Result<PointSettingVO> getPointSetting(String name) {
+			public PointSettingVO getPointSetting(String name) {
 				return null;
 			}
 
 			@Override
-			public Result<QQConnectSettingVO> getQQConnectSetting(String name) {
+			public QQConnectSettingVO getQQConnectSetting(String name) {
 				return null;
 			}
 
 			@Override
-			public Result<WechatConnectSettingVO> getWechatConnectSetting(String name) {
+			public WechatConnectSettingVO getWechatConnectSetting(String name) {
 				return null;
 			}
 
 			@Override
-			public Result<SeckillSetting> getSeckillSetting(String name) {
+			public SeckillSetting getSeckillSetting(String name) {
 				return null;
 			}
 
 			@Override
-			public Result<AlipayPaymentSetting> getAlipayPaymentSetting(String name) {
+			public AlipayPaymentSetting getAlipayPaymentSetting(String name) {
 				return null;
 			}
 
 			@Override
-			public Result<WechatPaymentSetting> getWechatPaymentSetting(String name) {
+			public WechatPaymentSetting getWechatPaymentSetting(String name) {
 				return null;
 			}
 		};

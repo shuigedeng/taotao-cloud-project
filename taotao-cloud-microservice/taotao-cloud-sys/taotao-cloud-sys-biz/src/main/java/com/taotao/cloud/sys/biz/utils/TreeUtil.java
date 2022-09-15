@@ -17,10 +17,10 @@ package com.taotao.cloud.sys.biz.utils;
 
 import com.taotao.cloud.common.tree.TreeNode;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
-import com.taotao.cloud.sys.api.dubbo.response.MenuBO;
 import com.taotao.cloud.sys.api.enums.ResourceTypeEnum;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuMetaVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 
 import java.util.ArrayList;

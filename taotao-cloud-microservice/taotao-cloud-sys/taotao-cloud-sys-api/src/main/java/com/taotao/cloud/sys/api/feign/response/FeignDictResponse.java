@@ -17,13 +17,14 @@ package com.taotao.cloud.sys.api.feign.response;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
-import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 公司查询VO
@@ -38,7 +39,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "公司查询VO")
-public class FeignDictRes implements Serializable {
+public class FeignDictResponse implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;

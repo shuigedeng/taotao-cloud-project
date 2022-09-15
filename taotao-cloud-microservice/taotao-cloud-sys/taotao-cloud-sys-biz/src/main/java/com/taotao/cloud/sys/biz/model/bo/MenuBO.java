@@ -13,87 +13,88 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.dubbo.response;
-
+package com.taotao.cloud.sys.biz.model.bo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
- * CompanyBO
+ * 菜单查询对象
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2021-10-19 20:47:05
+ * @since 2021-10-09 15:27:42
  */
 @RecordBuilder
-public record CompanyResponse(
+public record MenuBO(
 	/**
-	 * 租户id
+	 * id
 	 */
-	String tenantId,
-
+	Long id,
 	/**
-	 * 租户密钥
-	 */
-	String tenantSecret,
-
-	/**
-	 * 公司名称
+	 * 菜单名称
 	 */
 	String name,
-
 	/**
-	 * 企业全称
+	 * 菜单类型 1：目录 2：菜单 3：按钮
 	 */
-	String fullName,
-
+	int type,
 	/**
-	 * 信用代码
+	 * 权限标识
 	 */
-	String creditCode,
-
+	String perms,
 	/**
-	 * 邮箱
+	 * 前端path / 即跳转路由
 	 */
-	String email,
-
+	String path,
 	/**
-	 * 联系人
+	 * 菜单组件
 	 */
-	String username,
-
+	String component,
 	/**
-	 * 联系人手机号
+	 * 父菜单ID
 	 */
-	String phone,
-
+	Long parentId,
 	/**
-	 * 联系人地址
+	 * 图标
 	 */
-	String address,
-
+	String icon,
 	/**
-	 * 请求域名
+	 * 是否缓存页面: 0:否 1:是 (默认值0)
 	 */
-	String domain,
-
+	boolean keepAlive,
 	/**
-	 * 公司网址
+	 * 是否隐藏路由菜单: 0否,1是（默认值0）
 	 */
-	String webSite,
-
+	boolean hidden,
 	/**
-	 * 所在地区
+	 * 聚合路由 0否,1是（默认值0）
 	 */
-	String regionInfo,
-
+	boolean alwaysShow,
 	/**
-	 * 公司类型
+	 * 重定向
 	 */
-	Integer type) implements Serializable {
+	String redirect,
+	/**
+	 * 是否为外链 0否,1是（默认值0）
+	 */
+	boolean isFrame,
+	/**
+	 * 排序值
+	 */
+	int sortNum,
+	/**
+	 * 创建时间
+	 */
+	LocalDateTime createTime,
+	/**
+	 * 最后修改时间
+	 */
+	LocalDateTime lastModifiedTime) implements Serializable {
 
 	static final long serialVersionUID = 5126530068827085130L;
 
 }
+

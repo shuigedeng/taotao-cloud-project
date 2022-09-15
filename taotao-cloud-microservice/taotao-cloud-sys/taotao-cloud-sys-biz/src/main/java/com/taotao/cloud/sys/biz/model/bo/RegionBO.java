@@ -13,46 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.dubbo.response;
+package com.taotao.cloud.sys.biz.model.bo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
+
 import java.io.Serializable;
 
 /**
- * 岗位查询对象
+ * 地区查询对象
  *
  * @author shuigedeng
  * @version 2022.03
- * @since 2022-03-23 08:49:58
+ * @since 2022-03-23 08:50:04
  */
 @RecordBuilder
-public record JobBO(
+public record RegionBO(
 	/**
-	 * 岗位名称
+	 * 地区编码
+	 */
+	String code,
+
+	/**
+	 * 地区名称
 	 */
 	String name,
 
 	/**
-	 * 部门id
+	 * 地区级别（1:省份province,2:市city,3:区县district,4:街道street）
 	 */
-	Long deptId,
+	Integer level,
 
 	/**
-	 * 备注
+	 * 城市编码
 	 */
-	String remark,
+	String cityCode,
 
 	/**
-	 * 排序值
+	 * 城市中心经度
 	 */
-	Integer sortNum,
+	String lng,
 
 	/**
-	 * 租户id
+	 * 城市中心纬度
 	 */
-	String tenantId) implements Serializable {
+	String lat,
+
+	/**
+	 * 地区父节点
+	 */
+	Long parentId) implements Serializable {
 
 	static final long serialVersionUID = -7605952923416404638L;
 
