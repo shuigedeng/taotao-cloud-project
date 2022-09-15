@@ -23,7 +23,7 @@ package com.taotao.cloud.sys.api.enums;
  * @version 2021.9
  * @since 2021-09-02 22:14:43
  */
-public enum MenuTypeEnum {
+public enum ResourceTypeEnum {
 
 	/**
 	 * 目录
@@ -42,7 +42,7 @@ public enum MenuTypeEnum {
 
 	private final String message;
 
-	MenuTypeEnum(Integer code, String message) {
+	ResourceTypeEnum(Integer code, String message) {
 		this.code = code;
 		this.message = message;
 	}

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.convert;
+package com.taotao.cloud.sys.biz.model.convert;
 
 import com.taotao.cloud.sys.api.model.dto.user.UserQueryDTO;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;

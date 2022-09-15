@@ -27,7 +27,7 @@ import com.taotao.cloud.sys.api.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.api.model.dto.user.UserSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.user.UserUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
-import com.taotao.cloud.sys.biz.convert.UserConvert;
+import com.taotao.cloud.sys.biz.model.convert.UserConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import com.taotao.cloud.web.base.controller.SuperController;

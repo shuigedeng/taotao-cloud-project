@@ -22,7 +22,7 @@ import com.taotao.cloud.sys.api.dubbo.response.RoleBO;
 import com.taotao.cloud.sys.api.model.dto.role.RoleSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.role.RoleUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.role.RoleQueryVO;
-import com.taotao.cloud.sys.biz.convert.RoleConvert;
+import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.controller.SuperController;

@@ -6,10 +6,11 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.office.excel.core.ExcelListener;
 import com.taotao.cloud.office.excel.core.ExcelResult;
-import com.taotao.cloud.sys.api.model.excel.imports.SysUserImport;
+import com.taotao.cloud.sys.api.model.excel.imports.UserImport;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 /**
  * 系统用户自定义导入
@@ -27,8 +28,8 @@ import lombok.extern.slf4j.Slf4j;
  * @author Lion Li
  */
 @Slf4j
-public class SysUserImportListener extends AnalysisEventListener<SysUserImport> implements
-	ExcelListener<SysUserImport> {
+public class SysUserImportListener extends AnalysisEventListener<UserImport> implements
+	ExcelListener<UserImport> {
 
 	private final IUserService userService;
 
@@ -52,7 +53,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImport> 
 	}
 
 	@Override
-	public void invoke(SysUserImport userVo, AnalysisContext context) {
+	public void invoke(UserImport userVo, AnalysisContext context) {
 		//SysUser user = this.userService.selectUserByUserName(userVo.getUserName());
 		//try {
 		//	// 验证是否存在这个用户
@@ -91,8 +92,8 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImport> 
 	}
 
 	@Override
-	public ExcelResult<SysUserImport> getExcelResult() {
-		return new ExcelResult<SysUserImport>() {
+	public ExcelResult<UserImport> getExcelResult() {
+		return new ExcelResult<UserImport>() {
 
 			@Override
 			public String getAnalysis() {
@@ -108,7 +109,7 @@ public class SysUserImportListener extends AnalysisEventListener<SysUserImport> 
 			}
 
 			@Override
-			public List<SysUserImport> getList() {
+			public List<UserImport> getList() {
 				return null;
 			}
 

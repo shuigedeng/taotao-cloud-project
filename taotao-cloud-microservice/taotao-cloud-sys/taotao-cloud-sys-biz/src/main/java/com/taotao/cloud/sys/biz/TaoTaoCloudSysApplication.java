@@ -16,15 +16,16 @@
 package com.taotao.cloud.sys.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import com.taotao.cloud.core.utils.ThreadUtil;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
-import java.io.File;
 import org.springframework.boot.SpringApplication;
-import org.springframework.retry.annotation.EnableRetry;
+
+import java.io.File;
 
 /**
  * TaoTaoCloudSysApplication
  * 抑制java9 module 报错
- *
+ * <p>
  * --add-opens java.base/java.lang=ALL-UNNAMED
  * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
  * --add-opens java.base/java.lang.invoke=ALL-UNNAMED
@@ -48,10 +49,12 @@ public class TaoTaoCloudSysApplication {
 	public static void main(String[] args) {
 		setNacosProperty();
 
+		ThreadUtil.parallelFor();
+
 		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 	}
 
-	public static void setNacosProperty(){
+	public static void setNacosProperty() {
 		/**
 		 * 设置nacos客户端日志和快照目录
 		 *
