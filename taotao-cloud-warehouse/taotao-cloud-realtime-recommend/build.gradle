@@ -21,8 +21,3 @@ dependencies {
     //需要在自己本地安装jar包
     //compile "org.wltea.ik-analyzer:ik-analyzer:4.10.2"
 }
-
-repositories {
-    mavenCentral()
-}
-

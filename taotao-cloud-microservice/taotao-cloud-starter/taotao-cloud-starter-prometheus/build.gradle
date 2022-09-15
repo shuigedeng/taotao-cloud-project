@@ -3,13 +3,13 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-monitor")
 
     //https://search.maven.org/artifact/io.micrometer/micrometer-registry-prometheus
-    api "io.micrometer:micrometer-registry-prometheus:1.9.3"
+    api "io.micrometer:micrometer-registry-prometheus:1.9.4"
 
     compileOnly "org.springframework.cloud:spring-cloud-commons"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.springframework.boot:spring-boot-starter-web"

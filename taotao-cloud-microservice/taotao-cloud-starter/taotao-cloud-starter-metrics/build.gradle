@@ -6,13 +6,14 @@ dependencies {
     //https://search.maven.org/artifact/com.alibaba/druid
     compileOnly "com.alibaba:druid:1.2.12"
 
+    //https://search.maven.org/artifact/com.alibaba.csp/sentinel-core
     compileOnly "com.alibaba.csp:sentinel-core:1.8.5"
 
     compileOnly "org.springframework.boot:spring-boot-starter-undertow"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.springframework.boot:spring-boot-starter-web"

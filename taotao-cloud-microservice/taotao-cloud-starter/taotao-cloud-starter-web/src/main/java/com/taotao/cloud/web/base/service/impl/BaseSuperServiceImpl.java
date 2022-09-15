@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.base.service;
+package com.taotao.cloud.web.base.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
@@ -44,6 +44,7 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
+import com.taotao.cloud.web.base.service.BaseSuperService;
 import org.apache.ibatis.reflection.property.PropertyNamer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;

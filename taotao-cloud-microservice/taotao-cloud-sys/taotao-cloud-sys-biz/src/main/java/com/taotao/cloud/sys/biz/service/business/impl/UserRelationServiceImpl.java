@@ -17,18 +17,19 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.taotao.cloud.sys.biz.mapper.IUserRelationMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.QUserRelation;
 import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
-import com.taotao.cloud.sys.biz.mapper.IUserRelationMapper;
 import com.taotao.cloud.sys.biz.repository.cls.UserRelationRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRelationRepository;
 import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author shuigedeng

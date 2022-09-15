@@ -13,7 +13,7 @@ dependencies {
     implementation "org.apache.flink:flink-streaming-java_2.12:1.14.4"
 
     implementation "org.apache.flink:flink-connector-kafka_2.12:1.14.4"
-    implementation "org.apache.kafka:kafka_2.12:3.1.0"
+    implementation "org.apache.kafka:kafka_2.12:3.2.1"
 
     implementation("org.apache.hudi:hudi-common:0.12.0")
     implementation("org.apache.hudi:hudi-client:0.12.0")

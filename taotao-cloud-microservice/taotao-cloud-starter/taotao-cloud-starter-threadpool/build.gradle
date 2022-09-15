@@ -9,9 +9,9 @@ dependencies {
 
     //https://gitee.com/mabaiwancn/hippo4j
     //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter
-    api "cn.hippo4j:hippo4j-spring-boot-starter:1.4.0"
+    api "cn.hippo4j:hippo4j-spring-boot-starter:1.4.1"
     //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter-all
-    api("cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.0") {
+    api("cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.1") {
         exclude group: "cn.hippo4j", module: "hippo4j-spring-boot-starter-adapter-hystrix"
         exclude group: "commons-collections", module: "commons-collections"
         exclude group: "com.alibaba", module: "fastjson"

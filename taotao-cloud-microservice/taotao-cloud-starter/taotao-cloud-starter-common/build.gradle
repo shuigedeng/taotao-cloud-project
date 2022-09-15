@@ -7,7 +7,8 @@ dependencies {
     api "com.fasterxml.jackson.core:jackson-core"
     api "com.fasterxml.jackson.core:jackson-annotations"
     api "com.fasterxml.jackson.module:jackson-module-kotlin"
-    api "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.3"
+    //https://search.maven.org/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
+    api "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4"
 
     //apache
     api("org.apache.httpcomponents:httpclient") {
@@ -17,8 +18,11 @@ dependencies {
     api "org.apache.commons:commons-pool2"
     api "org.apache.commons:commons-lang3"
     api "org.apache.commons:commons-collections4"
+    //https://search.maven.org/artifact/org.apache.commons/commons-compress
     api "org.apache.commons:commons-compress:1.21"
+    //https://search.maven.org/artifact/commons-fileupload/commons-fileupload
     api "commons-fileupload:commons-fileupload:1.4"
+    //https://search.maven.org/artifact/commons-io/commons-io
     api "commons-io:commons-io:2.11.0"
     api "commons-codec:commons-codec"
     api "commons-configuration:commons-configuration"
@@ -84,7 +88,7 @@ dependencies {
     // jdk11删除了NashornScriptEngineFactory 引入此依赖支持其他框架以及jdk11以上版本
     api "org.openjdk.nashorn:nashorn-core"
     //https://search.maven.org/artifact/org.yaml/snakeyaml
-    api "org.yaml:snakeyaml:1.31"
+    api "org.yaml:snakeyaml:1.32"
     //https://search.maven.org/artifact/ma.glasnost.orika/orika-core
     api "ma.glasnost.orika:orika-core:1.5.4"
     //https://search.maven.org/artifact/com.github.yitter/yitter-idgenerator
@@ -99,7 +103,6 @@ dependencies {
     //testImplementation "org.testng:testng:7.6.1"
     //testImplementation "com.google.inject:guice:5.1.0"
 
-    
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
 }

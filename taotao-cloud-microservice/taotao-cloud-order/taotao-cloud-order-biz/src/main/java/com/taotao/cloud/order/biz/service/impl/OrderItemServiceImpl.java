@@ -8,7 +8,7 @@
 //import com.taotao.cloud.order.biz.repository.cls.OrderItemRepository;
 //import com.taotao.cloud.order.biz.repository.inf.IOrderItemRepository;
 //import com.taotao.cloud.order.biz.service.IOrderItemService;
-//import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+//import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 //import org.apache.dubbo.config.annotation.DubboService;
 //import org.springframework.stereotype.Service;
 //

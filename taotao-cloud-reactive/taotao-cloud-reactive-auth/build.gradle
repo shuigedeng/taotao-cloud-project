@@ -1,8 +1,8 @@
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-webflux"
     implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation "com.nimbusds:nimbus-jose-jwt:9.24.3"
-    api("org.springframework.boot:spring-boot-starter-data-redis-reactive"){
+    implementation "com.nimbusds:nimbus-jose-jwt:9.24.4"
+    api("org.springframework.boot:spring-boot-starter-data-redis-reactive") {
         exclude group: "org.yaml", module: "snakeyaml"
     }
 }

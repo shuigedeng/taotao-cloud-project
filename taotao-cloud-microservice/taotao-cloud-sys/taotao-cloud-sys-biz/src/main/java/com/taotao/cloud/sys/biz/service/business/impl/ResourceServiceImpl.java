@@ -31,7 +31,7 @@ import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.sys.biz.utils.TreeUtil;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

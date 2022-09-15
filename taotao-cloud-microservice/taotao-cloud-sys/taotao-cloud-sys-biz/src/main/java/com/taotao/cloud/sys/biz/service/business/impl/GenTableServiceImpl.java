@@ -30,7 +30,7 @@ import com.taotao.cloud.sys.biz.service.business.IGenTableService;
 import com.taotao.cloud.sys.biz.utils.GenUtils;
 import com.taotao.cloud.sys.biz.utils.VelocityInitializer;
 import com.taotao.cloud.sys.biz.utils.VelocityUtils;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.velocity.Template;

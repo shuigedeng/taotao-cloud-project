@@ -1,11 +1,11 @@
 dependencies {
-    implementation "mysql:mysql-connector-java:8.0.27"
+    implementation "mysql:mysql-connector-java:8.0.30"
     implementation "commons-dbutils:commons-dbutils:1.7"
     implementation "commons-beanutils:commons-beanutils:1.9.4"
 
     implementation "com.mchange:c3p0:0.9.5.5"
     implementation "org.apache.commons:commons-dbcp2:2.9.0"
-    implementation "com.alibaba:druid:1.2.8"
+    implementation "com.alibaba:druid:1.2.12"
 
     implementation "org.springframework:spring-web"
     implementation "org.springframework:spring-webmvc"
@@ -18,7 +18,7 @@ dependencies {
     implementation "javax.servlet:javax.servlet-api"
     implementation "org.slf4j:slf4j-api"
 
-    
+
 }
 
 repositories {

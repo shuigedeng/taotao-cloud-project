@@ -25,7 +25,7 @@ import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

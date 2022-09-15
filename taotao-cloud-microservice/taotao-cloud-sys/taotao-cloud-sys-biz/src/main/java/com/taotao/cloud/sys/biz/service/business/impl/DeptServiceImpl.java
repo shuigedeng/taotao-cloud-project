@@ -8,7 +8,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.sys.biz.repository.cls.DeptRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDeptRepository;
 import com.taotao.cloud.sys.biz.service.business.IDeptService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

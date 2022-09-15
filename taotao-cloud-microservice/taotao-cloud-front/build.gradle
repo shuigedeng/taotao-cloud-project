@@ -9,6 +9,7 @@ dependencies {
         exclude group: "org.junit.vintage", module: "junit-vintage-engine"
     }
 
+    //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
     implementation "com.github.whvcse:easy-captcha:1.6.2"
     implementation "javax.servlet:javax.servlet-api"
 

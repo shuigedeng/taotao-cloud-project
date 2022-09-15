@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
 import com.taotao.cloud.sys.biz.mapper.ISettingMapper;
+import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
 import com.taotao.cloud.sys.biz.repository.cls.SettingRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISettingRepository;
 import com.taotao.cloud.sys.biz.service.business.ISettingService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

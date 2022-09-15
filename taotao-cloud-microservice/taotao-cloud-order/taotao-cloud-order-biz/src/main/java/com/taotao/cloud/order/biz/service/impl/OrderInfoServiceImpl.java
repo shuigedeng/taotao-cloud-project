@@ -20,7 +20,7 @@
 //import com.taotao.cloud.order.biz.service.IOrderInfoService;
 //import com.taotao.cloud.order.biz.service.IOrderItemService;
 //import com.taotao.cloud.uc.api.dubbo.IDubboResourceService;
-//import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+//import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 //import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
 //import java.util.ArrayList;
 //import java.util.List;
