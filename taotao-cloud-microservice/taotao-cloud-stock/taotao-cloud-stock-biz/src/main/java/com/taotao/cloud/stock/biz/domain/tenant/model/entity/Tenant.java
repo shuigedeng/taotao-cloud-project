@@ -6,9 +6,6 @@ import com.taotao.cloud.stock.biz.domain.model.tenant.TenantName;
 import com.taotao.cloud.stock.biz.domain.tenant.model.vo.TenantCode;
 import com.taotao.cloud.stock.biz.domain.tenant.model.vo.TenantId;
 import com.taotao.cloud.stock.biz.domain.tenant.model.vo.TenantName;
-import com.xtoon.cloud.common.core.domain.Entity;
-import com.xtoon.cloud.common.core.domain.StatusEnum;
-import com.xtoon.cloud.sys.domain.model.user.UserId;
 
 /**
  * 租户实体

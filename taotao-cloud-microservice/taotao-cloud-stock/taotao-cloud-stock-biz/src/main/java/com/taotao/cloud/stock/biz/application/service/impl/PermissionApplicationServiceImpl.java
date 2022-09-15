@@ -1,14 +1,5 @@
 package com.taotao.cloud.stock.biz.application.service.impl;
 
-import com.xtoon.cloud.sys.application.PermissionApplicationService;
-import com.xtoon.cloud.sys.application.assembler.PermissionDTOAssembler;
-import com.xtoon.cloud.sys.application.command.PermissionCommand;
-import com.xtoon.cloud.sys.domain.model.permission.Permission;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
-import com.xtoon.cloud.sys.domain.service.PermissionDisableService;
-import com.xtoon.cloud.sys.domain.specification.PermissionCreateSpecification;
-import com.xtoon.cloud.sys.domain.specification.PermissionDeleteSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -12,8 +12,6 @@ import com.taotao.cloud.stock.biz.domain.permission.model.vo.PermissionId;
 import com.taotao.cloud.stock.biz.domain.permission.model.enums.PermissionLevelEnum;
 import com.taotao.cloud.stock.biz.domain.permission.model.vo.PermissionName;
 import com.taotao.cloud.stock.biz.domain.permission.model.enums.PermissionTypeEnum;
-import com.xtoon.cloud.common.core.domain.Entity;
-import com.xtoon.cloud.common.core.domain.StatusEnum;
 
 import java.util.List;
 

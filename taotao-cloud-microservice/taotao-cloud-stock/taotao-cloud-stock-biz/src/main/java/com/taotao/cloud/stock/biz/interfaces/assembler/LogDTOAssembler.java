@@ -1,8 +1,5 @@
 package com.taotao.cloud.stock.biz.interfaces.assembler;
 
-import com.xtoon.cloud.sys.domain.model.log.Log;
-import com.xtoon.cloud.sys.domain.model.user.UserName;
-import com.xtoon.cloud.sys.dto.LogDTO;
 
 /**
  * 日志Assembler

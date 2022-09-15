@@ -6,9 +6,6 @@ import com.taotao.cloud.stock.biz.domain.model.role.RoleName;
 import com.taotao.cloud.stock.biz.domain.role.model.vo.RoleCode;
 import com.taotao.cloud.stock.biz.domain.role.model.vo.RoleId;
 import com.taotao.cloud.stock.biz.domain.role.model.vo.RoleName;
-import com.xtoon.cloud.common.core.domain.Entity;
-import com.xtoon.cloud.common.core.domain.StatusEnum;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
 
 import java.util.List;
 

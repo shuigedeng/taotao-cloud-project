@@ -1,6 +1,6 @@
 package com.taotao.cloud.stock.biz.domain.role.model.vo;
 
-import com.xtoon.cloud.common.core.domain.ValueObject;
+import com.taotao.cloud.stock.api.common.domain.ValueObject;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 

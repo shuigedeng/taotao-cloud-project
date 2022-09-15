@@ -1,9 +1,9 @@
 package com.taotao.cloud.stock.biz.domain.permission.model.specification;
 
-import com.xtoon.cloud.common.core.domain.AbstractSpecification;
-import com.xtoon.cloud.sys.domain.model.permission.Permission;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
+
+import com.taotao.cloud.stock.api.common.domain.AbstractSpecification;
+import com.taotao.cloud.stock.biz.domain.permission.model.vo.PermissionId;
+import com.taotao.cloud.stock.biz.domain.permission.repository.PermissionRepository;
 
 /**
  * 权限删除Specification

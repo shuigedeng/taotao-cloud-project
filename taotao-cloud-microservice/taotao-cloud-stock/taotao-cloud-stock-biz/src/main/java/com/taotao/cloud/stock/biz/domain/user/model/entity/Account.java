@@ -8,7 +8,6 @@ import com.taotao.cloud.stock.biz.domain.user.model.vo.AccountId;
 import com.taotao.cloud.stock.biz.domain.user.model.vo.Email;
 import com.taotao.cloud.stock.biz.domain.user.model.vo.Mobile;
 import com.taotao.cloud.stock.biz.domain.user.model.vo.Password;
-import com.xtoon.cloud.common.core.domain.Entity;
 
 /**
  * 账号

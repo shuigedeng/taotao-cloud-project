@@ -1,22 +1,6 @@
 package com.taotao.cloud.stock.biz.application.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.xtoon.cloud.common.mybatis.util.Page;
-import com.xtoon.cloud.common.mybatis.util.PageAssembler;
-import com.xtoon.cloud.common.mybatis.util.Query;
-import com.xtoon.cloud.sys.application.PermissionQueryService;
-import com.xtoon.cloud.sys.application.UserQueryService;
-import com.xtoon.cloud.sys.application.assembler.UserDTOAssembler;
-import com.xtoon.cloud.sys.application.dto.TenantDTO;
-import com.xtoon.cloud.sys.application.dto.UserDTO;
-import com.xtoon.cloud.sys.domain.model.user.User;
-import com.xtoon.cloud.sys.domain.model.user.UserId;
-import com.xtoon.cloud.sys.domain.model.user.UserRepository;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysTenantDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysPermissionMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysTenantMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

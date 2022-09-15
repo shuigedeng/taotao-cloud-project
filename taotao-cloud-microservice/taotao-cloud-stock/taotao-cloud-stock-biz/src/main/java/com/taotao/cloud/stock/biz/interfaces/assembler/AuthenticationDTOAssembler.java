@@ -1,7 +1,5 @@
 package com.taotao.cloud.stock.biz.interfaces.assembler;
 
-import com.xtoon.cloud.sys.domain.model.user.User;
-import com.xtoon.cloud.sys.dto.AuthenticationDTO;
 
 /**
  * Assembler class for the AuthenticationDTOAssembler.

@@ -5,10 +5,6 @@ import com.taotao.cloud.stock.biz.domain.model.user.UserId;
 import com.taotao.cloud.stock.biz.domain.model.user.UserName;
 import com.taotao.cloud.stock.biz.domain.user.model.vo.UserId;
 import com.taotao.cloud.stock.biz.domain.user.model.vo.UserName;
-import com.xtoon.cloud.common.core.domain.Entity;
-import com.xtoon.cloud.common.core.domain.StatusEnum;
-import com.xtoon.cloud.sys.domain.model.role.RoleId;
-import com.xtoon.cloud.sys.domain.model.tenant.TenantId;
 
 import java.util.List;
 
