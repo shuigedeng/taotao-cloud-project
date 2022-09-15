@@ -29,7 +29,7 @@ import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
 import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

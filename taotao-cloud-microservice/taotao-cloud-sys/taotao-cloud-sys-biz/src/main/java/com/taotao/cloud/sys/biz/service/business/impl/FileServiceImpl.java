@@ -12,17 +12,18 @@ import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.common.service.UploadFileService;
 import com.taotao.cloud.oss.common.util.FileUtil;
 import com.taotao.cloud.sys.api.model.vo.file.UploadFileVO;
-import com.taotao.cloud.sys.biz.model.entity.file.File;
 import com.taotao.cloud.sys.biz.mapper.IFileMapper;
+import com.taotao.cloud.sys.biz.model.entity.file.File;
 import com.taotao.cloud.sys.biz.repository.cls.FileRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IFileRepository;
 import com.taotao.cloud.sys.biz.service.business.IFileService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import java.time.LocalDateTime;
-import java.util.Optional;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * 文件上传服务

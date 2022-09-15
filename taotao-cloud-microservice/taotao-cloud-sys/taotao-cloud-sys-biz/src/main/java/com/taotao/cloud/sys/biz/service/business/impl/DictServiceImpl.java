@@ -16,20 +16,21 @@
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
+import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.concurrent.Future;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * DictServiceImpl

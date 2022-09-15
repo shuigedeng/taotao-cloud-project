@@ -39,7 +39,7 @@ import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

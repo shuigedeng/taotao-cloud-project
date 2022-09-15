@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.data.mybatisplus.base.service;
+package com.taotao.cloud.data.mybatisplus.base.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
@@ -21,9 +21,11 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatisplus.base.entity.MpSuperEntity;
 import com.taotao.cloud.data.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.cloud.data.mybatisplus.base.service.MpSuperService;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 不含缓存的Service实现

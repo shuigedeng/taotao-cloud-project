@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;

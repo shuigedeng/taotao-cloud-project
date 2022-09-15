@@ -10,11 +10,11 @@ dependencies {
         exclude group: "junit", module: "junit"
     }
 
-
-    compileOnly 'com.alibaba:druid-spring-boot-starter:1.2.11'
+    //https://search.maven.org/artifact/com.alibaba/druid-spring-boot-starter
+    compileOnly 'com.alibaba:druid-spring-boot-starter:1.2.12'
+    api "com.alibaba:druid:1.2.12"
 
     api "mysql:mysql-connector-java"
-    api "com.alibaba:druid:1.2.6"
 
     api "com.baomidou:mybatis-plus-boot-starter"
     api "com.baomidou:dynamic-datasource-spring-boot-starter"
@@ -29,7 +29,6 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.springframework.boot:spring-boot-starter-web"

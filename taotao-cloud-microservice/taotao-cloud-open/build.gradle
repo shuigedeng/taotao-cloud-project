@@ -1,180 +1,180 @@
 dependencies {
-	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
-	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-goods:taotao-cloud-goods-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-goods:taotao-cloud-goods-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
 
-	implementation "org.apache.pdfbox:pdfbox:2.0.26"
-	implementation "io.soabase.record-builder:record-builder-core:34"
+    implementation "org.apache.pdfbox:pdfbox:2.0.26"
+    implementation "io.soabase.record-builder:record-builder-core:34"
 
-	implementation "com.google.protobuf:protobuf-java:3.21.2"
-	implementation "com.google.protobuf:protobuf-java-util:3.21.2"
-	implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
+    implementation "com.google.protobuf:protobuf-java:3.21.5"
+    implementation "com.google.protobuf:protobuf-java-util:3.21.5"
+    implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 
-	implementation "io.protostuff:protostuff-core:1.8.0"
-	implementation "io.protostuff:protostuff-runtime:1.4.0"
+    implementation "io.protostuff:protostuff-core:1.8.0"
+    implementation "io.protostuff:protostuff-runtime:1.8.0"
 
-	implementation "com.dtflys.forest:forest-spring-boot-starter:1.5.24"
-	implementation "com.github.lianjiatech:retrofit-spring-boot-starter:2.3.5"
+    implementation "com.dtflys.forest:forest-spring-boot-starter:1.5.26"
+    implementation "com.github.lianjiatech:retrofit-spring-boot-starter:2.3.7"
 
-	implementation "org.springframework.cloud:spring-cloud-square-retrofit:0.4.1"
-	implementation "org.springframework.cloud:spring-cloud-square-okhttp:0.4.1"
+    implementation "org.springframework.cloud:spring-cloud-square-retrofit:0.4.1"
+    implementation "org.springframework.cloud:spring-cloud-square-okhttp:0.4.1"
 
-	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-	annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-	annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-	annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
+    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
+    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-	api "org.projectlombok:lombok"
-	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    api "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-	api "io.soabase.record-builder:record-builder-core"
-	annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+    api "io.soabase.record-builder:record-builder-core"
+    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 
-	testImplementation "org.springframework.boot:spring-boot-starter-test"
-	testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 
 tasks.named("test") {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 bootBuildImage {
-	builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"
-	runImage = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-run:base-cnb"
-	imageName = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-open:${project.version}"
-	pullPolicy = "IF_NOT_PRESENT"
-	environment = [
-				   "BPL_SPRING_CLOUD_BINDINGS_ENABLED": "true",
+    builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"
+    runImage = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-run:base-cnb"
+    imageName = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-open:${project.version}"
+    pullPolicy = "IF_NOT_PRESENT"
+    environment = [
+            "BPL_SPRING_CLOUD_BINDINGS_ENABLED": "true",
 
-				   "BP_IMAGE_LABELS": "application_name=taotao-cloud-open application_version=2022.09",
-				   "BP_OCI_AUTHORS": "981376577@qq.com",
-				   //"BP_OCI_CREATED": " ",
-				   //"BP_OCI_DESCRIPTION": " ",
-				   //"BP_OCI_DOCUMENTATION": " ",
-				   //"BP_OCI_LICENSES": " ",
-				   //"BP_OCI_REF_NAME": " ",
-				   //"BP_OCI_REVISION": " ",
-				   //"BP_OCI_SOURCE": " ",
-				   //"BP_OCI_TITLE": " ",
-				   //"BP_OCI_URL": " ",
-				   //"BP_OCI_VENDOR": " ",
-				   //"BP_OCI_VERSION": " ",
+            "BP_IMAGE_LABELS"                  : "application_name=taotao-cloud-open application_version=2022.09",
+            "BP_OCI_AUTHORS"                   : "981376577@qq.com",
+            //"BP_OCI_CREATED": " ",
+            //"BP_OCI_DESCRIPTION": " ",
+            //"BP_OCI_DOCUMENTATION": " ",
+            //"BP_OCI_LICENSES": " ",
+            //"BP_OCI_REF_NAME": " ",
+            //"BP_OCI_REVISION": " ",
+            //"BP_OCI_SOURCE": " ",
+            //"BP_OCI_TITLE": " ",
+            //"BP_OCI_URL": " ",
+            //"BP_OCI_VENDOR": " ",
+            //"BP_OCI_VERSION": " ",
 
-				   "BPE_APPLICATION_NAME": "taotao-cloud-open",
-				   "BPE_APPLICATION_VERSION": "2022.09",
-				   "BPE_JMX_ENABLED": "true",
-				   "BPE_LANG": "zh_CN.UTF-8",
-				   "BPE_JMX_PORT": "5000",
-				   "BPE_DEBUG_ENABLED": "true",
-				   "BPE_DEBUG_PORT": "8000",
-				   "BPE_DEBUG_SUSPEND": "true",
-				   "BPE_APPEND_JAVA_TOOL_OPTIONS": " -Xms512m " +
-						   "-Xmx2g " +
-						   "-Xss256k " +
-						   "-XX:MaxDirectMemorySize=256m " +
-						   "-XX:SurvivorRatio=8 " +
-						   "-XX:+UseCompressedOops " +
-						   "-XX:+UseCompressedClassPointers " +
-						   "-XX:+SegmentedCodeCache " +
-						   "-XX:+PrintCommandLineFlags " +
-						   "-XX:+ExplicitGCInvokesConcurrent " +
-						   "-XX:+HeapDumpOnOutOfMemoryError " +
-						   "-XX:MetaspaceSize=256m " +
-						   "-XX:MaxMetaspaceSize=256m " +
-						   "-verbose:gc " +
-						   "-XX:ParallelGCThreads=4 " +
-						   "-Djava.security.egd=file:/dev/./urandom " +
-						   "-Dfile.encoding=utf-8 " +
-						   "-javaagent:/skywalking/agent/skywalking-agent.jar " +
-						   "-Dskywalking.agent.service_name=taotao-cloud-open " +
-						   "-Dskywalking.agent.authentication=taotao-cloud " +
-						   "-Dskywalking.logging.file_name=taotao-cloud-open.skywalking.log " +
-						   "-Dskywalking.logging.level=INFO " +
-						   "-Dskywalking.logging.dir=/root/logs/taotao-cloud-open " +
-						   "-Dskywalking.collector.backend_service=192.168.10.200:11800 " +
-						   "-Dspring.profiles.active=dev ",
+            "BPE_APPLICATION_NAME"             : "taotao-cloud-open",
+            "BPE_APPLICATION_VERSION"          : "2022.09",
+            "BPE_JMX_ENABLED"                  : "true",
+            "BPE_LANG"                         : "zh_CN.UTF-8",
+            "BPE_JMX_PORT"                     : "5000",
+            "BPE_DEBUG_ENABLED"                : "true",
+            "BPE_DEBUG_PORT"                   : "8000",
+            "BPE_DEBUG_SUSPEND"                : "true",
+            "BPE_APPEND_JAVA_TOOL_OPTIONS"     : " -Xms512m " +
+                    "-Xmx2g " +
+                    "-Xss256k " +
+                    "-XX:MaxDirectMemorySize=256m " +
+                    "-XX:SurvivorRatio=8 " +
+                    "-XX:+UseCompressedOops " +
+                    "-XX:+UseCompressedClassPointers " +
+                    "-XX:+SegmentedCodeCache " +
+                    "-XX:+PrintCommandLineFlags " +
+                    "-XX:+ExplicitGCInvokesConcurrent " +
+                    "-XX:+HeapDumpOnOutOfMemoryError " +
+                    "-XX:MetaspaceSize=256m " +
+                    "-XX:MaxMetaspaceSize=256m " +
+                    "-verbose:gc " +
+                    "-XX:ParallelGCThreads=4 " +
+                    "-Djava.security.egd=file:/dev/./urandom " +
+                    "-Dfile.encoding=utf-8 " +
+                    "-javaagent:/skywalking/agent/skywalking-agent.jar " +
+                    "-Dskywalking.agent.service_name=taotao-cloud-open " +
+                    "-Dskywalking.agent.authentication=taotao-cloud " +
+                    "-Dskywalking.logging.file_name=taotao-cloud-open.skywalking.log " +
+                    "-Dskywalking.logging.level=INFO " +
+                    "-Dskywalking.logging.dir=/root/logs/taotao-cloud-open " +
+                    "-Dskywalking.collector.backend_service=192.168.10.200:11800 " +
+                    "-Dspring.profiles.active=dev ",
 
-				   "BP_JVM_VERSION": "11.*",
-				   "BP_JVM_TYPE": "JRE",
-				   "BPL_JMX_ENABLED": "true",
-				   "BPL_JMX_PORT": "5000",
+            "BP_JVM_VERSION"                   : "11.*",
+            "BP_JVM_TYPE"                      : "JRE",
+            "BPL_JMX_ENABLED"                  : "true",
+            "BPL_JMX_PORT"                     : "5000",
 
-				   "BP_DEBUG_ENABLED": "true",
-				   "BPL_DEBUG_ENABLED": "true",
-				   "BPL_DEBUG_PORT": "8000",
-				   "BPL_DEBUG_SUSPEND": "true",
+            "BP_DEBUG_ENABLED"                 : "true",
+            "BPL_DEBUG_ENABLED"                : "true",
+            "BPL_DEBUG_PORT"                   : "8000",
+            "BPL_DEBUG_SUSPEND"                : "true",
 
-				   //"HTTP_PROXY": "http://proxy.example.com",
-				   //"HTTPS_PROXY": "http://proxy.example.com",
-	 			  ]
-	bindings = ["/tmp/logs/taotao-cloud-open:/root/logs", "/opt/cloud/apache-skywalking-apm-bin/agent/:/skywalking/agent"]
-	cleanCache = false
-	verboseLogging = true
-	publish = true
+            //"HTTP_PROXY": "http://proxy.example.com",
+            //"HTTPS_PROXY": "http://proxy.example.com",
+    ]
+    bindings = ["/tmp/logs/taotao-cloud-open:/root/logs", "/opt/cloud/apache-skywalking-apm-bin/agent/:/skywalking/agent"]
+    cleanCache = false
+    verboseLogging = true
+    publish = true
 
-	docker {
-		//host = "tcp://127.0.0.1:2376"
-		//tlsVerify = true
-		//certPath = "/home/users/.minikube/certs"
+    docker {
+        //host = "tcp://127.0.0.1:2376"
+        //tlsVerify = true
+        //certPath = "/home/users/.minikube/certs"
 
-		builderRegistry {
-			username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
-			password = findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
-			url = "registry.cn-hangzhou.aliyuncs.com"
-		}
+        builderRegistry {
+            username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+            password = findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+            url = "registry.cn-hangzhou.aliyuncs.com"
+        }
 
-		publishRegistry {
-			username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
-			password = findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
-			url = "registry.cn-hangzhou.aliyuncs.com"
-		}
-	}
+        publishRegistry {
+            username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+            password = findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+            url = "registry.cn-hangzhou.aliyuncs.com"
+        }
+    }
 }
 
 jib {
-	//https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
-	allowInsecureRegistries = true
-	from {
-		image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64"
-		auth {
-			username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
-			password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
-		}
-	}
-	to {
-		image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-open"
-		tags = ["${project.name}-${project.version}"]
-		auth {
-			username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
-			password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
-		}
-	}
-	container {
-		creationTime = "USE_CURRENT_TIMESTAMP"
-		jvmFlags = ["-Djava.security.egd=file:/dev/./urandom",
-					"-Dspring.profiles.active=dev",
-					"-Dfile.encoding=utf-8",
-					"-Duser.timezone=Asia/Shanghai"]
-		mainClass = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
-		args = ["some", "args"]
-		ports = ["33337"]
-		//labels = ["app_name": "taotao-cloud-sys", "port": "33337"]
-		environment = ["app_name": "taotao-cloud-sys", "port": "33337"]
-		format = "OCI"
-		user = "root"
-		volumes = ["/root/logs"]
-		workingDirectory = "/root"
-	}
+    //https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
+    allowInsecureRegistries = true
+    from {
+        image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64"
+        auth {
+            username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
+            password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
+        }
+    }
+    to {
+        image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-open"
+        tags = ["${project.name}-${project.version}"]
+        auth {
+            username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
+            password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
+        }
+    }
+    container {
+        creationTime = "USE_CURRENT_TIMESTAMP"
+        jvmFlags = ["-Djava.security.egd=file:/dev/./urandom",
+                    "-Dspring.profiles.active=dev",
+                    "-Dfile.encoding=utf-8",
+                    "-Duser.timezone=Asia/Shanghai"]
+        mainClass = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
+        args = ["some", "args"]
+        ports = ["33337"]
+        //labels = ["app_name": "taotao-cloud-sys", "port": "33337"]
+        environment = ["app_name": "taotao-cloud-sys", "port": "33337"]
+        format = "OCI"
+        user = "root"
+        volumes = ["/root/logs"]
+        workingDirectory = "/root"
+    }
 }
 
 //docker {

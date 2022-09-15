@@ -21,12 +21,10 @@ import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.function.Function;
 
 /**
  * DictServiceImpl
@@ -42,8 +40,8 @@ public class FeignDictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict
 	@Autowired
 	private IDictService dictService;
 
-    @Override
-    public <T> T test123(T t) {
-        return t;
-    }
+	@Override
+	public <T> T test123(T t) {
+		return t;
+	}
 }
