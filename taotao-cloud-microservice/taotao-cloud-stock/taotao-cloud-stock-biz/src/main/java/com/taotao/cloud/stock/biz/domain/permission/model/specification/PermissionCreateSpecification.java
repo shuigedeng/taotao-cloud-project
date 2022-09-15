@@ -1,9 +1,7 @@
 package com.taotao.cloud.stock.biz.domain.permission.model.specification;
 
-import com.xtoon.cloud.common.core.domain.AbstractSpecification;
-import com.xtoon.cloud.sys.domain.model.permission.Permission;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionTypeEnum;
+import com.taotao.cloud.stock.biz.domain.permission.model.enums.PermissionTypeEnum;
+import com.taotao.cloud.stock.biz.domain.permission.repository.PermissionRepository;
 import org.apache.commons.lang.StringUtils;
 
 /**

@@ -1,11 +1,8 @@
 package com.taotao.cloud.stock.biz.domain.captcha.model.entity;
 
-import com.taotao.cloud.stock.biz.domain.model.captcha.CaptchaCode;
-import com.taotao.cloud.stock.biz.domain.model.captcha.Uuid;
+import com.taotao.cloud.stock.api.common.domain.Entity;
 import com.taotao.cloud.stock.biz.domain.captcha.model.vo.CaptchaCode;
 import com.taotao.cloud.stock.biz.domain.captcha.model.vo.Uuid;
-import com.xtoon.cloud.common.core.domain.Entity;
-import com.xtoon.cloud.common.core.util.DateUtil;
 
 import java.util.Date;
 

@@ -1,7 +1,6 @@
 package com.taotao.cloud.stock.biz.infrastructure.persistence.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserRoleDO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

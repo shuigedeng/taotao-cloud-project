@@ -1,7 +1,8 @@
 package com.taotao.cloud.stock.biz.application.service;
 
-import com.xtoon.cloud.sys.application.command.PasswordCommand;
-import com.xtoon.cloud.sys.application.command.UserCommand;
+
+import com.taotao.cloud.stock.biz.interfaces.command.PasswordCommand;
+import com.taotao.cloud.stock.biz.interfaces.command.UserCommand;
 
 import java.util.List;
 

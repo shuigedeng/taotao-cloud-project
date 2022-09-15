@@ -2,11 +2,6 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xtoon.cloud.sys.domain.model.log.Log;
-import com.xtoon.cloud.sys.domain.model.log.LogRepository;
-import com.xtoon.cloud.sys.infrastructure.persistence.converter.LogConverter;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysLogDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysLogMapper;
 import org.springframework.stereotype.Repository;
 
 /**

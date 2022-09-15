@@ -1,6 +1,5 @@
 package com.taotao.cloud.stock.biz.application.service;
 
-import com.xtoon.cloud.common.mybatis.util.Page;
 
 import java.util.Map;
 

@@ -3,16 +3,6 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.repository;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
-import com.xtoon.cloud.sys.domain.model.role.*;
-import com.xtoon.cloud.sys.infrastructure.persistence.converter.RoleConverter;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysPermissionDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysRoleDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysRolePermissionDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysPermissionMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysRoleMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysRolePermissionMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,5 @@
 package com.taotao.cloud.stock.biz.domain.captcha.external;
 
-import com.xtoon.cloud.sys.domain.model.captcha.Captcha;
-import com.xtoon.cloud.sys.domain.model.captcha.CaptchaCode;
-import com.xtoon.cloud.sys.domain.model.captcha.CaptchaRepository;
-import com.xtoon.cloud.sys.domain.model.captcha.Uuid;
 
 /**
  * 验证码校验服务

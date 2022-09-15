@@ -2,9 +2,6 @@ package com.taotao.cloud.stock.biz.domain.log.model.entity;
 
 import com.taotao.cloud.stock.biz.domain.model.log.LogId;
 import com.taotao.cloud.stock.biz.domain.log.model.vo.LogId;
-import com.xtoon.cloud.common.core.domain.Entity;
-import com.xtoon.cloud.sys.domain.model.tenant.TenantId;
-import com.xtoon.cloud.sys.domain.model.user.UserName;
 
 /**
  * 日志实体

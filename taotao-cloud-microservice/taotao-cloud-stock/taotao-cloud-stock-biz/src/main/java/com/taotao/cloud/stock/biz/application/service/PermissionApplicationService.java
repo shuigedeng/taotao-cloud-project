@@ -1,6 +1,5 @@
 package com.taotao.cloud.stock.biz.application.service;
 
-import com.xtoon.cloud.sys.application.command.PermissionCommand;
 
 /**
  * 权限应用服务接口

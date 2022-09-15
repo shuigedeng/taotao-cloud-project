@@ -1,14 +1,13 @@
 package com.taotao.cloud.stock.biz.infrastructure.persistence.converter;
 
-import com.xtoon.cloud.common.core.domain.StatusEnum;
-import com.xtoon.cloud.common.core.exception.BaseException;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
-import com.xtoon.cloud.sys.domain.model.role.Role;
-import com.xtoon.cloud.sys.domain.model.role.RoleCode;
-import com.xtoon.cloud.sys.domain.model.role.RoleId;
-import com.xtoon.cloud.sys.domain.model.role.RoleName;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysPermissionDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysRoleDO;
+
+import com.taotao.cloud.stock.api.common.domain.StatusEnum;
+import com.taotao.cloud.stock.biz.domain.permission.model.vo.PermissionId;
+import com.taotao.cloud.stock.biz.domain.role.model.vo.RoleCode;
+import com.taotao.cloud.stock.biz.domain.role.model.vo.RoleId;
+import com.taotao.cloud.stock.biz.domain.role.model.vo.RoleName;
+import com.taotao.cloud.stock.biz.infrastructure.persistence.po.SysPermissionDO;
+import com.taotao.cloud.stock.biz.infrastructure.persistence.po.SysRoleDO;
 
 import java.util.ArrayList;
 import java.util.List;

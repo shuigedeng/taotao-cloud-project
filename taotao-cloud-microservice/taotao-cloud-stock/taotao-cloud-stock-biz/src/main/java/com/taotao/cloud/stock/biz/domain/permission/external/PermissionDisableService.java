@@ -1,8 +1,5 @@
 package com.taotao.cloud.stock.biz.domain.permission.external;
 
-import com.xtoon.cloud.sys.domain.model.permission.Permission;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
 
 /**
  * 权限禁用服务

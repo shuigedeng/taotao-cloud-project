@@ -2,12 +2,6 @@ package com.taotao.cloud.stock.biz.application.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.xtoon.cloud.common.mybatis.util.Page;
-import com.xtoon.cloud.common.mybatis.util.PageAssembler;
-import com.xtoon.cloud.common.mybatis.util.Query;
-import com.xtoon.cloud.sys.application.LogQueryService;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysLogDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysLogMapper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

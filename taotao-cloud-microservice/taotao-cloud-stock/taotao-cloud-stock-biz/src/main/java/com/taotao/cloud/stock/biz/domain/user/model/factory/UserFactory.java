@@ -14,8 +14,6 @@ import com.taotao.cloud.stock.biz.domain.user.model.vo.Mobile;
 import com.taotao.cloud.stock.biz.domain.user.model.vo.Password;
 import com.taotao.cloud.stock.biz.domain.user.model.vo.UserName;
 import com.taotao.cloud.stock.biz.domain.user.repository.UserRepository;
-import com.xtoon.cloud.sys.domain.model.role.RoleId;
-import com.xtoon.cloud.sys.domain.model.tenant.TenantId;
 
 import java.util.List;
 

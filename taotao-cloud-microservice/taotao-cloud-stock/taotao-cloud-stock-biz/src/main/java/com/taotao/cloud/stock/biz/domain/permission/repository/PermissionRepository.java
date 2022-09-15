@@ -6,7 +6,6 @@ import com.taotao.cloud.stock.biz.domain.model.permission.PermissionName;
 import com.taotao.cloud.stock.biz.domain.permission.model.entity.Permission;
 import com.taotao.cloud.stock.biz.domain.permission.model.vo.PermissionId;
 import com.taotao.cloud.stock.biz.domain.permission.model.vo.PermissionName;
-import com.xtoon.cloud.sys.domain.model.role.RoleCode;
 
 import java.util.List;
 import java.util.Map;
