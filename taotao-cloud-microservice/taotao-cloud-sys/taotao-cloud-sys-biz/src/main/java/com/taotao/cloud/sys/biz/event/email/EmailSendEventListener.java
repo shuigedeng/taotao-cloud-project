@@ -15,17 +15,11 @@
  */
 package com.taotao.cloud.sys.biz.event.email;
 
-import cn.hutool.extra.spring.SpringUtil;
-import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.logger.event.RequestLoggerEvent;
 import com.taotao.cloud.logger.model.RequestLogger;
-import com.taotao.cloud.logger.service.IRequestLoggerService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Objects;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 /**
  * 注解形式的监听 异步监听日志事件
@@ -39,6 +33,7 @@ public class EmailSendEventListener {
 
 	@Async
 	@EventListener(EmailSendEvent.class)
+	@TransactionalEventListener
 	public void saveRequestLog(EmailSendEvent event) {
 		RequestLogger requestLogger = (RequestLogger) event.getSource();
 

@@ -319,12 +319,12 @@ public class ConvertUtils {
 				ip = address.nextElement();
 				// 外网IP
 				if (!ip.isSiteLocalAddress() && !ip.isLoopbackAddress()
-					&& ip.getHostAddress().indexOf(":") == -1) {
+					&& !ip.getHostAddress().contains(":")) {
 					netip = ip.getHostAddress();
 					finded = true;
 					break;
 				} else if (ip.isSiteLocalAddress() && !ip.isLoopbackAddress()
-					&& ip.getHostAddress().indexOf(":") == -1) {
+					&& !ip.getHostAddress().contains(":")) {
 					// 内网IP
 					localip = ip.getHostAddress();
 				}

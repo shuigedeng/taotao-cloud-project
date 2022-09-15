@@ -1,7 +1,8 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
 
-    compileOnly("io.seata:seata-all:1.5.1")
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
+    compileOnly "io.seata:seata-all:1.5.1"
 
     api "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
