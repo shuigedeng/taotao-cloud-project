@@ -2,18 +2,6 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xtoon.cloud.common.core.util.TenantContext;
-import com.xtoon.cloud.sys.domain.model.role.RoleId;
-import com.xtoon.cloud.sys.domain.model.user.*;
-import com.xtoon.cloud.sys.infrastructure.persistence.converter.UserConverter;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysAccountDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysRoleDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserRoleDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysAccountMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysRoleMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysUserMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

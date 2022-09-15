@@ -1,8 +1,5 @@
 package com.taotao.cloud.stock.biz.domain.role.model.specification;
 
-import com.xtoon.cloud.common.core.domain.AbstractSpecification;
-import com.xtoon.cloud.sys.domain.model.role.Role;
-import com.xtoon.cloud.sys.domain.model.role.RoleRepository;
 
 /**
  * 角色创建Specification

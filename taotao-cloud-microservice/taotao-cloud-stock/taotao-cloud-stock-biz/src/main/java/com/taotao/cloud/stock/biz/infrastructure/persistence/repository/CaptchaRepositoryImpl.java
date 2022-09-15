@@ -2,12 +2,6 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xtoon.cloud.sys.domain.model.captcha.Captcha;
-import com.xtoon.cloud.sys.domain.model.captcha.CaptchaRepository;
-import com.xtoon.cloud.sys.domain.model.captcha.Uuid;
-import com.xtoon.cloud.sys.infrastructure.persistence.converter.CaptchaConverter;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysCaptchaDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysCaptchaMapper;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -2,7 +2,6 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.xtoon.cloud.common.mybatis.util.BaseDO;
 import lombok.Data;
 
 /**

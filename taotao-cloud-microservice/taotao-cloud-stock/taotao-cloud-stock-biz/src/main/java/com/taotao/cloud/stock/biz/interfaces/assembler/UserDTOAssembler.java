@@ -1,12 +1,10 @@
 package com.taotao.cloud.stock.biz.interfaces.assembler;
 
-import com.xtoon.cloud.common.core.domain.StatusEnum;
-import com.xtoon.cloud.sys.application.command.UserCommand;
-import com.xtoon.cloud.sys.application.dto.UserDTO;
-import com.xtoon.cloud.sys.domain.model.role.RoleId;
-import com.xtoon.cloud.sys.domain.model.user.User;
-import com.xtoon.cloud.sys.domain.model.user.UserId;
-import com.xtoon.cloud.sys.domain.model.user.UserName;
+
+import com.taotao.cloud.stock.api.dto.UserDTO;
+import com.taotao.cloud.stock.biz.domain.role.model.vo.RoleId;
+import com.taotao.cloud.stock.biz.domain.user.model.vo.UserId;
+import com.taotao.cloud.stock.biz.interfaces.command.UserCommand;
 
 import java.util.ArrayList;
 import java.util.List;

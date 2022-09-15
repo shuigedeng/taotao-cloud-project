@@ -1,9 +1,5 @@
 package com.taotao.cloud.stock.biz.application.service.impl;
 
-import com.xtoon.cloud.sys.application.TenantApplicationService;
-import com.xtoon.cloud.sys.domain.model.tenant.Tenant;
-import com.xtoon.cloud.sys.domain.model.tenant.TenantId;
-import com.xtoon.cloud.sys.domain.model.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

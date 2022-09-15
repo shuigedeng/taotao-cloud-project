@@ -1,7 +1,7 @@
 package com.taotao.cloud.stock.biz.application.service;
 
-import com.xtoon.cloud.common.mybatis.util.Page;
-import com.xtoon.cloud.sys.application.dto.RoleDTO;
+
+import com.taotao.cloud.stock.api.dto.RoleDTO;
 
 import java.util.List;
 import java.util.Map;

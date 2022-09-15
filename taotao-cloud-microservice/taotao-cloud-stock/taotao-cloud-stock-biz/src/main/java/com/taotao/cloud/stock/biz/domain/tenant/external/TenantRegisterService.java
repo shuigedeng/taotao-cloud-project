@@ -1,14 +1,5 @@
 package com.taotao.cloud.stock.biz.domain.tenant.external;
 
-import com.xtoon.cloud.common.core.domain.StatusEnum;
-import com.xtoon.cloud.sys.domain.model.permission.Permission;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionLevelEnum;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
-import com.xtoon.cloud.sys.domain.model.role.*;
-import com.xtoon.cloud.sys.domain.model.tenant.*;
-import com.xtoon.cloud.sys.domain.model.user.*;
-import com.xtoon.cloud.sys.domain.specification.TenantCreateSpecification;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

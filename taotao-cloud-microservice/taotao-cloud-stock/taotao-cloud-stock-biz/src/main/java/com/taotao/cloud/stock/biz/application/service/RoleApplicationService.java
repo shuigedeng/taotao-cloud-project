@@ -1,6 +1,5 @@
 package com.taotao.cloud.stock.biz.application.service;
 
-import com.xtoon.cloud.sys.application.command.RoleCommand;
 
 import java.util.List;
 

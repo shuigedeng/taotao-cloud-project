@@ -1,20 +1,6 @@
 package com.taotao.cloud.stock.biz.application.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.xtoon.cloud.common.core.domain.StatusEnum;
-import com.xtoon.cloud.common.core.util.TenantContext;
-import com.xtoon.cloud.sys.application.PermissionQueryService;
-import com.xtoon.cloud.sys.application.assembler.PermissionDTOAssembler;
-import com.xtoon.cloud.sys.application.dto.PermissionDTO;
-import com.xtoon.cloud.sys.domain.model.permission.Permission;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionRepository;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionTypeEnum;
-import com.xtoon.cloud.sys.domain.model.role.RoleCode;
-import com.xtoon.cloud.sys.domain.model.tenant.TenantId;
-import com.xtoon.cloud.sys.domain.model.user.UserId;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysPermissionDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysPermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

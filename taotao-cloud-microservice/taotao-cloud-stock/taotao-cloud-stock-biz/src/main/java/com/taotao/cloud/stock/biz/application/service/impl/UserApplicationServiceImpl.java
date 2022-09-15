@@ -1,15 +1,5 @@
 package com.taotao.cloud.stock.biz.application.service.impl;
 
-import com.xtoon.cloud.common.core.util.TenantContext;
-import com.xtoon.cloud.sys.application.UserApplicationService;
-import com.xtoon.cloud.sys.application.assembler.UserDTOAssembler;
-import com.xtoon.cloud.sys.application.command.PasswordCommand;
-import com.xtoon.cloud.sys.application.command.UserCommand;
-import com.xtoon.cloud.sys.domain.model.role.RoleId;
-import com.xtoon.cloud.sys.domain.model.tenant.TenantId;
-import com.xtoon.cloud.sys.domain.model.tenant.TenantRepository;
-import com.xtoon.cloud.sys.domain.model.user.*;
-import com.xtoon.cloud.sys.domain.specification.UserUpdateSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

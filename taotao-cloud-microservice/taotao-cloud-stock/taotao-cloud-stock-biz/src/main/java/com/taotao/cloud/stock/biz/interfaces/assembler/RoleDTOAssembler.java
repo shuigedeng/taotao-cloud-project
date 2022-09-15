@@ -1,13 +1,6 @@
 package com.taotao.cloud.stock.biz.interfaces.assembler;
 
-import com.xtoon.cloud.sys.application.command.RoleCommand;
-import com.xtoon.cloud.sys.application.dto.RoleDTO;
-import com.xtoon.cloud.sys.domain.model.permission.PermissionId;
-import com.xtoon.cloud.sys.domain.model.role.Role;
-import com.xtoon.cloud.sys.domain.model.role.RoleCode;
-import com.xtoon.cloud.sys.domain.model.role.RoleId;
-import com.xtoon.cloud.sys.domain.model.role.RoleName;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysRoleDO;
+import com.taotao.cloud.stock.api.dto.RoleDTO;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;

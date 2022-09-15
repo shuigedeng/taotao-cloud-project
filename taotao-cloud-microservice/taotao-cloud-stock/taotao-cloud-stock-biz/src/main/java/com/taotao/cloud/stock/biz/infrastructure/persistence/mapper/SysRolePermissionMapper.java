@@ -1,7 +1,5 @@
 package com.taotao.cloud.stock.biz.infrastructure.persistence.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysRolePermissionDO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,13 +13,13 @@ import java.util.List;
 @Mapper
 public interface SysRolePermissionMapper extends BaseSuperMapper<SysRolePermissionDO> {
 
-    /**
-     * 根据角色ID，批量删除
-     */
-    int deleteByRoleIds(List<String> roleIds);
+	/**
+	 * 根据角色ID，批量删除
+	 */
+	int deleteByRoleIds(List<String> roleIds);
 
-    /**
-     * 根据权限ID，批量删除
-     */
-    int deleteByPermissionIds(List<String> permissionIds);
+	/**
+	 * 根据权限ID，批量删除
+	 */
+	int deleteByPermissionIds(List<String> permissionIds);
 }

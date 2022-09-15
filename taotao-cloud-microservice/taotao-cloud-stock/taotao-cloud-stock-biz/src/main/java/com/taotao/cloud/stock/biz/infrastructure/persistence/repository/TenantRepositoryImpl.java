@@ -3,11 +3,6 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.repository;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xtoon.cloud.common.core.util.TenantContext;
-import com.xtoon.cloud.sys.domain.model.tenant.*;
-import com.xtoon.cloud.sys.infrastructure.persistence.converter.TenantConverter;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysTenantDO;
-import com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysTenantMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
