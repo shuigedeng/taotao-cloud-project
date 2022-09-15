@@ -1,11 +1,6 @@
 package com.taotao.cloud.stock.biz.application.service.impl;
 
 import com.google.code.kaptcha.Producer;
-import com.xtoon.cloud.sys.application.CaptchaApplicationService;
-import com.xtoon.cloud.sys.domain.model.captcha.Captcha;
-import com.xtoon.cloud.sys.domain.model.captcha.CaptchaCode;
-import com.xtoon.cloud.sys.domain.model.captcha.CaptchaRepository;
-import com.xtoon.cloud.sys.domain.model.captcha.Uuid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

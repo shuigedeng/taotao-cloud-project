@@ -1,16 +1,5 @@
 package com.taotao.cloud.stock.biz.interfaces.facade;
 
-import com.xtoon.cloud.sys.application.PermissionQueryService;
-import com.xtoon.cloud.sys.application.assembler.AuthenticationDTOAssembler;
-import com.xtoon.cloud.sys.domain.model.captcha.CaptchaCode;
-import com.xtoon.cloud.sys.domain.model.captcha.CaptchaRepository;
-import com.xtoon.cloud.sys.domain.model.captcha.Uuid;
-import com.xtoon.cloud.sys.domain.model.user.Mobile;
-import com.xtoon.cloud.sys.domain.model.user.User;
-import com.xtoon.cloud.sys.domain.model.user.UserRepository;
-import com.xtoon.cloud.sys.domain.service.CaptchaValidateService;
-import com.xtoon.cloud.sys.dto.AuthenticationDTO;
-import com.xtoon.cloud.sys.service.AuthenticationService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;

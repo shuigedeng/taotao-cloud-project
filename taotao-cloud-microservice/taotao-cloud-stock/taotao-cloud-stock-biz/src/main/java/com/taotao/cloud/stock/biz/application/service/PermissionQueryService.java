@@ -1,6 +1,5 @@
 package com.taotao.cloud.stock.biz.application.service;
 
-import com.xtoon.cloud.sys.application.dto.PermissionDTO;
 
 import java.util.List;
 import java.util.Set;

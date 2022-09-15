@@ -1,7 +1,5 @@
 package com.taotao.cloud.stock.biz.domain.user.model.specification;
 
-import com.xtoon.cloud.common.core.domain.AbstractSpecification;
-import com.xtoon.cloud.sys.domain.model.user.User;
 
 /**
  * 账号登录Specification

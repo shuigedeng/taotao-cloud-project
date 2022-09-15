@@ -1,13 +1,5 @@
 package com.taotao.cloud.stock.biz.application.service.impl;
 
-import com.xtoon.cloud.sys.application.RoleApplicationService;
-import com.xtoon.cloud.sys.application.assembler.RoleDTOAssembler;
-import com.xtoon.cloud.sys.application.command.RoleCommand;
-import com.xtoon.cloud.sys.domain.model.role.Role;
-import com.xtoon.cloud.sys.domain.model.role.RoleId;
-import com.xtoon.cloud.sys.domain.model.role.RoleRepository;
-import com.xtoon.cloud.sys.domain.specification.RoleCreateSpecification;
-import com.xtoon.cloud.sys.domain.specification.RoleUpdateSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

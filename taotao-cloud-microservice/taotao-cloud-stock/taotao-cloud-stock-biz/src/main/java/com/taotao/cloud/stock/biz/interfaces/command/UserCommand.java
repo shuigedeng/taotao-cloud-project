@@ -1,7 +1,5 @@
 package com.taotao.cloud.stock.biz.interfaces.command;
 
-import com.xtoon.cloud.common.web.util.validator.group.AddGroup;
-import com.xtoon.cloud.common.web.util.validator.group.UpdateGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

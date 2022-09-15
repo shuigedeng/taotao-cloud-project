@@ -1,6 +1,5 @@
 package com.taotao.cloud.stock.biz.domain.permission.model.enums;
 
-import com.xtoon.cloud.common.core.domain.ValueObject;
 import org.apache.commons.lang.StringUtils;
 
 /**

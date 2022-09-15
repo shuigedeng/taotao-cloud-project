@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysUserMapper">
+<mapper namespace="com.taotao.cloud.sys.infrastructure.persistence.mapper.SysUserMapper">
 
     <select id="queryPage" parameterType="Map"
-            resultType="com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserDO">
+            resultType="com.taotao.cloud.sys.infrastructure.persistence.entity.SysUserDO">
         SELECT
         u.*,a.email,a.mobile
         FROM
@@ -27,7 +27,7 @@
     </select>
 
     <select id="queryUser" parameterType="Map"
-            resultType="com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserDO">
+            resultType="com.taotao.cloud.sys.infrastructure.persistence.entity.SysUserDO">
         SELECT
         u.*,t.tenant_code,t.tenant_name
         FROM
@@ -46,7 +46,7 @@
     </select>
 
     <select id="queryUserNoTenant" parameterType="Map"
-            resultType="com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserDO">
+            resultType="com.taotao.cloud.sys.infrastructure.persistence.entity.SysUserDO">
         SELECT
         u.*,t.tenant_code,t.tenant_name
         FROM

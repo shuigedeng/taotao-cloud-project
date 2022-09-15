@@ -1,9 +1,5 @@
 package com.taotao.cloud.stock.biz.infrastructure.persistence.converter;
 
-import com.xtoon.cloud.sys.domain.model.captcha.Captcha;
-import com.xtoon.cloud.sys.domain.model.captcha.CaptchaCode;
-import com.xtoon.cloud.sys.domain.model.captcha.Uuid;
-import com.xtoon.cloud.sys.infrastructure.persistence.entity.SysCaptchaDO;
 
 /**
  * 验证码转换类

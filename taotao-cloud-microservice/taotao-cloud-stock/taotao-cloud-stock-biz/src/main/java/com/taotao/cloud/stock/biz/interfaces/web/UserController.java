@@ -1,17 +1,5 @@
 package com.taotao.cloud.stock.biz.interfaces.web;
 
-import com.xtoon.cloud.common.core.util.RequestUtils;
-import com.xtoon.cloud.common.log.SysLog;
-import com.xtoon.cloud.common.mybatis.constant.PageConstant;
-import com.xtoon.cloud.common.mybatis.util.Page;
-import com.xtoon.cloud.common.web.util.Result;
-import com.xtoon.cloud.common.web.util.validator.ValidatorUtils;
-import com.xtoon.cloud.common.web.util.validator.group.AddGroup;
-import com.xtoon.cloud.common.web.util.validator.group.UpdateGroup;
-import com.xtoon.cloud.sys.application.UserApplicationService;
-import com.xtoon.cloud.sys.application.UserQueryService;
-import com.xtoon.cloud.sys.application.command.PasswordCommand;
-import com.xtoon.cloud.sys.application.command.UserCommand;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

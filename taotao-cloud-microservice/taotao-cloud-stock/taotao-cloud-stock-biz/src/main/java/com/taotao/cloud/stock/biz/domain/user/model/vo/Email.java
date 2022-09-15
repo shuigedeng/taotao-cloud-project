@@ -1,6 +1,5 @@
 package com.taotao.cloud.stock.biz.domain.user.model.vo;
 
-import com.xtoon.cloud.common.core.domain.ValueObject;
 import org.apache.commons.lang.Validate;
 
 import java.util.regex.Pattern;

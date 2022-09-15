@@ -1,11 +1,5 @@
 package com.taotao.cloud.stock.biz.interfaces.web;
 
-import com.xtoon.cloud.common.log.SysLog;
-import com.xtoon.cloud.common.mybatis.constant.PageConstant;
-import com.xtoon.cloud.common.mybatis.util.Page;
-import com.xtoon.cloud.common.web.util.Result;
-import com.xtoon.cloud.sys.application.TenantApplicationService;
-import com.xtoon.cloud.sys.application.TenantQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
