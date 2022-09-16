@@ -19,10 +19,10 @@ package com.taotao.cloud.core.version;
 import java.util.jar.Attributes.Name;
 
 /**
- * Class that exposes the Spring Boot version. Fetches the {@link Name#IMPLEMENTATION_VERSION
- * Implementation-Version} manifest attribute from the jar file via {@link
- * Package#getImplementationVersion()}, falling back to locating the jar file that contains this
- * class and reading the {@code Implementation-Version} attribute from its manifest.
+ * Class that exposes the Spring Boot version. Fetches the
+ * {@link Name#IMPLEMENTATION_VERSION Implementation-Version} manifest attribute from the jar file
+ * via {@link Package#getImplementationVersion()}, falling back to locating the jar file that
+ * contains this class and reading the {@code Implementation-Version} attribute from its manifest.
  * <p>
  * This class might not be able to determine the Spring Boot version in all environments. Consider
  * using a reflection-based check instead: For example, checking for the presence of a specific
@@ -46,7 +46,7 @@ public final class SpringCloudDependenciesVersion {
 	 * @see Package#getImplementationVersion()
 	 */
 	public static String getVersion() {
-		return "2021.0.3";
+		return "2021.0.4";
 	}
 
 
