@@ -21,9 +21,7 @@ import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoo
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.decorator.ContextDecorator;
 import com.taotao.cloud.core.properties.AsyncProperties;
-
 import java.util.concurrent.ThreadPoolExecutor;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -37,7 +35,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2021-09-02 20:01:42
  */
 @AutoConfiguration
-public class AsyncThreadPoolAutoConfiguration implements InitializingBean{
+public class AsyncThreadPoolAutoConfiguration implements InitializingBean {
 
 	@Autowired
 	private AsyncProperties asyncProperties;
@@ -64,7 +62,8 @@ public class AsyncThreadPoolAutoConfiguration implements InitializingBean{
 		// 是否允许核心线程超时
 		executor.setAllowCoreThreadTimeOut(asyncProperties.isAllowCoreThreadTimeOut());
 		// 应用关闭时-是否等待未完成任务继续执行，再继续销毁其他的Bean
-		executor.setWaitForTasksToCompleteOnShutdown(asyncProperties.isWaitForTasksToCompleteOnShutdown());
+		executor.setWaitForTasksToCompleteOnShutdown(
+			asyncProperties.isWaitForTasksToCompleteOnShutdown());
 		// 应用关闭时-继续等待时间（单位：秒）
 		executor.setAwaitTerminationSeconds(asyncProperties.getAwaitTerminationSeconds());
 		// ThreadFactory
@@ -75,6 +74,10 @@ public class AsyncThreadPoolAutoConfiguration implements InitializingBean{
 		 线程池拒绝策略
 		 rejection-policy：当pool已经达到max size的时候，如何处理新任务
 		 CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
+		 // AbortPolicy: 直接抛出java.util.concurrent.RejectedExecutionException异常
+		// CallerRunsPolicy: 主线程直接执行该任务，执行完之后尝试添加下一个任务到线程池中，可以有效降低向线程池内添加任务的速度
+		// DiscardOldestPolicy: 抛弃旧的任务、暂不支持；会导致被丢弃的任务无法再次被执行
+		// DiscardPolicy: 抛弃当前任务、暂不支持；会导致被丢弃的任务无法再次被执行
 		 */
 		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 
