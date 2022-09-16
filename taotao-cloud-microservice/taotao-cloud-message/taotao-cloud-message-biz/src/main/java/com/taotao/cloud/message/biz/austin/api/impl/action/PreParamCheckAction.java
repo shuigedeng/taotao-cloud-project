@@ -2,16 +2,15 @@ package com.taotao.cloud.message.biz.austin.api.impl.action;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.service.api.domain.MessageParam;
-import com.java3y.austin.service.api.impl.domain.SendTaskModel;
-import com.java3y.austin.support.pipeline.BusinessProcess;
-import com.java3y.austin.support.pipeline.ProcessContext;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.service.api.domain.MessageParam;
+import com.taotao.cloud.message.biz.austin.service.api.impl.domain.SendTaskModel;
+import com.taotao.cloud.message.biz.austin.support.pipeline.BusinessProcess;
+import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,8 +43,8 @@ public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
 
         // 2.过滤 receiver=null 的messageParam
         List<MessageParam> resultMessageParamList = messageParamList.stream()
-                .filter(messageParam -> !StrUtil.isBlank(messageParam.getReceiver()))
-                .collect(Collectors.toList());
+            .filter(messageParam -> !StrUtil.isBlank(messageParam.getReceiver()))
+            .collect(Collectors.toList());
         if (CollUtil.isEmpty(resultMessageParamList)) {
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
             return;
@@ -55,8 +54,8 @@ public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
         // 3.过滤receiver大于100的请求
         if (messageParamList.stream().anyMatch(messageParam -> messageParam.getReceiver().split(StrUtil.COMMA).length > BATCH_RECEIVER_SIZE)) {
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TOO_MANY_RECEIVER));
-            return;
-        }
+			return;
+		}
 
-    }
+	}
 }

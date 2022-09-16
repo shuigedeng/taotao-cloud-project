@@ -6,11 +6,11 @@ import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiGettokenRequest;
 import com.dingtalk.api.response.OapiGettokenResponse;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.constant.SendAccountConstant;
-import com.java3y.austin.common.dto.account.DingDingWorkNoticeAccount;
-import com.java3y.austin.support.config.SupportThreadPoolConfig;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
+import com.taotao.cloud.message.biz.austin.common.dto.account.DingDingWorkNoticeAccount;
+import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +76,7 @@ public class RefreshDingDingAccessTokenHandler {
             accessToken = rsp.getAccessToken();
         } catch (Exception e) {
             log.error("RefreshDingDingAccessTokenHandler#getAccessToken fail:{}", Throwables.getStackTraceAsString(e));
-        }
-        return accessToken;
-    }
+		}
+		return accessToken;
+	}
 }

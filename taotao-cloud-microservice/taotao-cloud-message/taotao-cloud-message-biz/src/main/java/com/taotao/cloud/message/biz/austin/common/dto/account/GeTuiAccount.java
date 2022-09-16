@@ -22,9 +22,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GeTuiAccount {
 
-    private String appId;
+	private String appId;
 
-    private String appKey;
+	private String appKey;
 
-    private String masterSecret;
+	private String masterSecret;
 }

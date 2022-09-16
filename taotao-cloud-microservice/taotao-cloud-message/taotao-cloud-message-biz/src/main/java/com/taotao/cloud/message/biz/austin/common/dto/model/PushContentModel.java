@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 3y
- *
+ * <p>
  * 通知栏消息推送
  */
 @Data
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PushContentModel extends ContentModel {
 
-    private String title;
-    private String content;
-    private String url;
+	private String title;
+	private String content;
+	private String url;
 }

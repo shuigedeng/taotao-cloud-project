@@ -7,11 +7,11 @@ package com.taotao.cloud.message.biz.austin.cron.service;
  */
 public interface TaskHandler {
 
-    /**
-     * 处理具体的逻辑
-     *
-     * @param messageTemplateId
-     */
-    void handle(Long messageTemplateId);
+	/**
+	 * 处理具体的逻辑
+	 *
+	 * @param messageTemplateId
+	 */
+	void handle(Long messageTemplateId);
 
 }

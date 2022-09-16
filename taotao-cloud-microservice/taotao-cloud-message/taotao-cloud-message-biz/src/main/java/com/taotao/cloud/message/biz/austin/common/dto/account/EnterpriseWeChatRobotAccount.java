@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnterpriseWeChatRobotAccount {
-    /**
-     * 自定义群机器人中的 webhook
-     */
-    private String webhook;
+	/**
+	 * 自定义群机器人中的 webhook
+	 */
+	private String webhook;
 
 }

@@ -6,11 +6,11 @@ import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
 import cn.binarywang.wx.miniapp.api.impl.WxMaSubscribeServiceImpl;
 import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
-import com.java3y.austin.common.constant.SendAccountConstant;
-import com.java3y.austin.common.dto.account.WeChatMiniProgramAccount;
-import com.java3y.austin.handler.domain.wechat.WeChatMiniProgramParam;
-import com.java3y.austin.handler.wechat.MiniProgramAccountService;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
+import com.taotao.cloud.message.biz.austin.common.dto.account.WeChatMiniProgramAccount;
+import com.taotao.cloud.message.biz.austin.handler.domain.wechat.WeChatMiniProgramParam;
+import com.taotao.cloud.message.biz.austin.handler.wechat.MiniProgramAccountService;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,9 +34,9 @@ public class MiniProgramAccountServiceImpl implements MiniProgramAccountService 
     @Override
     public void send(WeChatMiniProgramParam miniProgramParam) throws Exception {
         WeChatMiniProgramAccount miniProgramAccount = accountUtils.getAccount(miniProgramParam.getSendAccount(),
-                SendAccountConstant.WECHAT_MINI_PROGRAM_ACCOUNT_KEY,
-                SendAccountConstant.WECHAT_MINI_PROGRAM_PREFIX,
-                WeChatMiniProgramAccount.class);
+            SendAccountConstant.WECHAT_MINI_PROGRAM_ACCOUNT_KEY,
+            SendAccountConstant.WECHAT_MINI_PROGRAM_PREFIX,
+            WeChatMiniProgramAccount.class);
 
         WxMaSubscribeService wxMaSubscribeService = initService(miniProgramAccount);
         List<WxMaSubscribeMessage> subscribeMessageList = assembleReq(miniProgramParam, miniProgramAccount);
@@ -55,12 +55,12 @@ public class MiniProgramAccountServiceImpl implements MiniProgramAccountService 
         // 构建微信小程序订阅消息
         for (String openId : receiver) {
             WxMaSubscribeMessage subscribeMessage = WxMaSubscribeMessage.builder()
-                    .toUser(openId)
-                    .data(getWxMTemplateData(miniProgramParam.getData()))
-                    .miniprogramState(miniProgramAccount.getMiniProgramState())
-                    .templateId(miniProgramAccount.getTemplateId())
-                    .page(miniProgramAccount.getPage())
-                    .build();
+                .toUser(openId)
+                .data(getWxMTemplateData(miniProgramParam.getData()))
+                .miniprogramState(miniProgramAccount.getMiniProgramState())
+                .templateId(miniProgramAccount.getTemplateId())
+                .page(miniProgramAccount.getPage())
+                .build();
             messageList.add(subscribeMessage);
         }
         return messageList;
@@ -88,6 +88,6 @@ public class MiniProgramAccountServiceImpl implements MiniProgramAccountService 
         wxMaConfig.setAppid(miniProgramAccount.getAppId());
         wxMaConfig.setSecret(miniProgramAccount.getAppSecret());
         wxMaService.setWxMaConfig(wxMaConfig);
-        return new WxMaSubscribeServiceImpl(wxMaService);
-    }
+		return new WxMaSubscribeServiceImpl(wxMaService);
+	}
 }

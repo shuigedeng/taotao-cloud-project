@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.message.api.feign;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.message.api.feign.fallback.FeignNoticeMessageServiceFallback;
 import com.taotao.cloud.message.api.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.api.vo.StoreMessageVO;
@@ -32,7 +32,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignNoticeMessageServiceFallback.class)
 public interface IFeignStoreMessageService {
 
-
-	IPage<StoreMessageVO> getPage(StoreMessageQueryVO storeMessageQueryVO, PageParam pageParam);
+	PageResult<StoreMessageVO> getPage(StoreMessageQueryVO storeMessageQueryVO, PageParam pageParam);
 }
 

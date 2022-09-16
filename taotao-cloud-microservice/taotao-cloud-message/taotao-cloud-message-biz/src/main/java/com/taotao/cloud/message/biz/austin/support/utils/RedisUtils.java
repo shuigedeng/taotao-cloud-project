@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.support.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
@@ -83,7 +83,7 @@ public class RedisUtils {
             redisTemplate.executePipelined((RedisCallback<String>) connection -> {
                 for (Map.Entry<String, String> entry : keyValues.entrySet()) {
                     connection.setEx(entry.getKey().getBytes(), seconds,
-                            entry.getValue().getBytes());
+                        entry.getValue().getBytes());
                 }
                 return null;
             });
@@ -177,7 +177,7 @@ public class RedisUtils {
         }
 
         return false;
-    }
+	}
 
 
 }

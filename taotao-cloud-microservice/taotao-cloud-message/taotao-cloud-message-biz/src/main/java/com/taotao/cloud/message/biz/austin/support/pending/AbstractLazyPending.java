@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.support.pending;
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
-import com.java3y.austin.support.config.SupportThreadPoolConfig;
+import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -87,7 +87,7 @@ public abstract class AbstractLazyPending<T> {
      */
     private boolean dataReady() {
         return tasks.size() >= pendingParam.getNumThreshold() ||
-                (System.currentTimeMillis() - lastHandleTime >= pendingParam.getTimeThreshold());
+            (System.currentTimeMillis() - lastHandleTime >= pendingParam.getTimeThreshold());
     }
 
     /**

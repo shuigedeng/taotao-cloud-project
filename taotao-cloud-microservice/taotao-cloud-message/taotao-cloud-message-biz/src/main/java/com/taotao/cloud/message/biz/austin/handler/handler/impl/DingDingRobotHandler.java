@@ -5,19 +5,19 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.constant.SendAccountConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.account.DingDingRobotAccount;
-import com.java3y.austin.common.dto.model.DingDingRobotContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.SendMessageType;
-import com.java3y.austin.handler.domain.dingding.DingDingRobotParam;
-import com.java3y.austin.handler.domain.dingding.DingDingRobotResult;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.account.DingDingRobotAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.model.DingDingRobotContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.SendMessageType;
+import com.taotao.cloud.message.biz.austin.handler.domain.dingding.DingDingRobotParam;
+import com.taotao.cloud.message.biz.austin.handler.domain.dingding.DingDingRobotResult;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
+import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +64,6 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
     }
 
 
-
     private DingDingRobotParam assembleParam(TaskInfo taskInfo) {
 
         // 接收者相关
@@ -78,8 +77,8 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
         // 消息类型以及内容相关
         DingDingRobotContentModel contentModel = (DingDingRobotContentModel) taskInfo.getContentModel();
         DingDingRobotParam param = DingDingRobotParam.builder().at(atVo)
-                .msgtype(SendMessageType.getDingDingRobotTypeByCode(contentModel.getSendType()))
-                .build();
+            .msgtype(SendMessageType.getDingDingRobotTypeByCode(contentModel.getSendType()))
+            .build();
         if (SendMessageType.TEXT.getCode().equals(contentModel.getSendType())) {
             param.setText(DingDingRobotParam.TextVO.builder().content(contentModel.getContent()).build());
         }
@@ -130,16 +129,16 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
             mac.init(new SecretKeySpec(secret.getBytes(AustinConstant.CHARSET_NAME), AustinConstant.HMAC_SHA256_ENCRYPTION_ALGO));
             byte[] signData = mac.doFinal(stringToSign.getBytes(AustinConstant.CHARSET_NAME));
             sign = URLEncoder.encode(new String(Base64.encodeBase64(signData)), AustinConstant.CHARSET_NAME);
-        } catch (Exception e) {
-            log.error("DingDingHandler#assembleSign fail!:{}", Throwables.getStackTraceAsString(e));
-        }
-        return sign;
-    }
+		} catch (Exception e) {
+			log.error("DingDingHandler#assembleSign fail!:{}", Throwables.getStackTraceAsString(e));
+		}
+		return sign;
+	}
 
 
-    @Override
-    public void recall(MessageTemplate messageTemplate) {
+	@Override
+	public void recall(MessageTemplate messageTemplate) {
 
-    }
+	}
 }
 
