@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.handler.shield;
 
-import com.java3y.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 
 /**
  * 屏蔽服务
@@ -10,9 +10,10 @@ import com.java3y.austin.common.domain.TaskInfo;
 public interface ShieldService {
 
 
-    /**
-     * 屏蔽消息
-     * @param taskInfo
-     */
-    void shield(TaskInfo taskInfo);
+	/**
+	 * 屏蔽消息
+	 *
+	 * @param taskInfo
+	 */
+	void shield(TaskInfo taskInfo);
 }

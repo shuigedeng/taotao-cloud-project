@@ -34,6 +34,36 @@ public class FeignNoticeMessageServiceFallback implements FallbackFactory<IFeign
 			public void noticeMessage(NoticeMessageDTO noticeMessageDTO) {
 
 			}
+
+			@Override
+			public boolean sendSms() {
+				return false;
+			}
+
+			@Override
+			public boolean sendMessage() {
+				return false;
+			}
+
+			@Override
+			public boolean sendDingtalk() {
+				return false;
+			}
+
+			@Override
+			public boolean sendWechat() {
+				return false;
+			}
+
+			@Override
+			public boolean sendEmail() {
+				return false;
+			}
+
+			@Override
+			public boolean sendStoreMessage() {
+				return false;
+			}
 		};
 	}
 }

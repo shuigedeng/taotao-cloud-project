@@ -4,22 +4,20 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.model.SmsContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.handler.domain.sms.MessageTypeSmsConfig;
-import com.java3y.austin.handler.domain.sms.SmsParam;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.handler.script.SmsScriptHolder;
-import com.java3y.austin.support.dao.SmsRecordDao;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.domain.SmsRecord;
-import com.java3y.austin.support.service.ConfigService;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.model.SmsContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.MessageTypeSmsConfig;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
+import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
+import com.taotao.cloud.message.biz.austin.handler.script.SmsScriptHolder;
+import com.taotao.cloud.message.biz.austin.support.dao.SmsRecordDao;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
+import com.taotao.cloud.message.biz.austin.support.service.ConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -53,10 +51,10 @@ public class SmsHandler extends BaseHandler implements Handler {
     @Override
     public boolean handler(TaskInfo taskInfo) {
         SmsParam smsParam = SmsParam.builder()
-                .phones(taskInfo.getReceiver())
-                .content(getSmsContent(taskInfo))
-                .messageTemplateId(taskInfo.getMessageTemplateId())
-                .build();
+            .phones(taskInfo.getReceiver())
+            .content(getSmsContent(taskInfo))
+            .messageTemplateId(taskInfo.getMessageTemplateId())
+            .build();
         try {
             /**
              * 1、动态配置做流量负载
@@ -72,7 +70,7 @@ public class SmsHandler extends BaseHandler implements Handler {
             }
         } catch (Exception e) {
             log.error("SmsHandler#handler fail:{},params:{}",
-                    Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
+                Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
         }
         return false;
     }
@@ -152,14 +150,14 @@ public class SmsHandler extends BaseHandler implements Handler {
     private String getSmsContent(TaskInfo taskInfo) {
         SmsContentModel smsContentModel = (SmsContentModel) taskInfo.getContentModel();
         if (StrUtil.isNotBlank(smsContentModel.getUrl())) {
-            return smsContentModel.getContent() + " " + smsContentModel.getUrl();
-        } else {
-            return smsContentModel.getContent();
-        }
-    }
+			return smsContentModel.getContent() + " " + smsContentModel.getUrl();
+		} else {
+			return smsContentModel.getContent();
+		}
+	}
 
-    @Override
-    public void recall(MessageTemplate messageTemplate) {
+	@Override
+	public void recall(MessageTemplate messageTemplate) {
 
-    }
+	}
 }

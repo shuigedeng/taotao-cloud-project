@@ -1,19 +1,18 @@
 package com.taotao.cloud.message.biz.austin.web.service.impl;
 
 import cn.hutool.core.util.IdUtil;
-import com.alibaba.fastjson.JSON;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiMediaUploadRequest;
 import com.dingtalk.api.response.OapiMediaUploadResponse;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.SendAccountConstant;
-import com.java3y.austin.common.enums.FileType;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.web.service.MaterialService;
-import com.java3y.austin.web.vo.UploadResponseVo;
 import com.taobao.api.FileItem;
+import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
+import com.taotao.cloud.message.biz.austin.common.enums.FileType;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.web.service.MaterialService;
+import com.taotao.cloud.message.biz.austin.web.vo.UploadResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;

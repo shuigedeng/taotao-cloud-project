@@ -4,21 +4,22 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.support.config.SupportThreadPoolConfig;
-import com.java3y.austin.support.utils.KafkaUtils;
-import com.java3y.austin.support.utils.RedisUtils;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
+import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 
 /**
  * 夜间屏蔽的延迟处理类
- *
+ * <p>
  * example:当消息下发至austin平台时，已经是凌晨1点，业务希望此类消息在次日的早上9点推送
  *
  * @author 3y
@@ -30,7 +31,7 @@ public class NightShieldLazyPendingHandler {
     private static final String NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY = "night_shield_send";
 
     @Autowired
-    private KafkaUtils kafkaUtils;
+    private KafkaTemplate kafkaTemplate;
     @Value("${austin.business.topic.name}")
     private String topicName;
     @Autowired
@@ -47,13 +48,13 @@ public class NightShieldLazyPendingHandler {
                 String taskInfo = redisUtils.lPop(NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY);
                 if (StrUtil.isNotBlank(taskInfo)) {
                     try {
-                        kafkaUtils.send(topicName, JSON.toJSONString(Arrays.asList(JSON.parseObject(taskInfo, TaskInfo.class))
-                                , new SerializerFeature[]{SerializerFeature.WriteClassName}));
+                        kafkaTemplate.send(topicName, JSON.toJSONString(Arrays.asList(JSON.parseObject(taskInfo, TaskInfo.class))
+                            , new SerializerFeature[]{SerializerFeature.WriteClassName}));
                     } catch (Exception e) {
                         log.error("nightShieldLazyJob send kafka fail! e:{},params:{}", Throwables.getStackTraceAsString(e), taskInfo);
-                    }
-                }
-            }
-        });
-    }
+					}
+				}
+			}
+		});
+	}
 }

@@ -1,10 +1,10 @@
 package com.taotao.cloud.message.biz.austin.handler.wechat.impl;
 
-import com.java3y.austin.common.constant.SendAccountConstant;
-import com.java3y.austin.common.dto.account.WeChatOfficialAccount;
-import com.java3y.austin.handler.domain.wechat.WeChatOfficialParam;
-import com.java3y.austin.handler.wechat.OfficialAccountService;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
+import com.taotao.cloud.message.biz.austin.common.dto.account.WeChatOfficialAccount;
+import com.taotao.cloud.message.biz.austin.handler.domain.wechat.WeChatOfficialParam;
+import com.taotao.cloud.message.biz.austin.handler.wechat.OfficialAccountService;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
@@ -52,12 +52,12 @@ public class OfficialAccountServiceImpl implements OfficialAccountService {
         // 构建微信模板消息
         for (String openId : receiver) {
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                    .toUser(openId)
-                    .templateId(officialAccount.getTemplateId())
-                    .url(officialAccount.getUrl())
-                    .data(getWxMpTemplateData(officialParam.getData()))
-                    .miniProgram(new WxMpTemplateMessage.MiniProgram(officialAccount.getMiniProgramId(), officialAccount.getPath(), false))
-                    .build();
+                .toUser(openId)
+                .templateId(officialAccount.getTemplateId())
+                .url(officialAccount.getUrl())
+                .data(getWxMpTemplateData(officialParam.getData()))
+                .miniProgram(new WxMpTemplateMessage.MiniProgram(officialAccount.getMiniProgramId(), officialAccount.getPath(), false))
+                .build();
             wxMpTemplateMessages.add(templateMessage);
         }
         return wxMpTemplateMessages;
@@ -84,7 +84,7 @@ public class OfficialAccountServiceImpl implements OfficialAccountService {
         WxMpDefaultConfigImpl config = new WxMpDefaultConfigImpl();
         config.setAppId(officialAccount.getAppId());
         config.setSecret(officialAccount.getSecret());
-        wxMpService.setWxMpConfigStorage(config);
-        return wxMpService;
-    }
+		wxMpService.setWxMpConfigStorage(config);
+		return wxMpService;
+	}
 }

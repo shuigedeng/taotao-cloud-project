@@ -1,29 +1,22 @@
 package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
-import cn.hutool.core.codec.Base64;
-import cn.hutool.core.io.file.FileReader;
-import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.SendAccountConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.account.EnterpriseWeChatRobotAccount;
-import com.java3y.austin.common.dto.account.FeiShuRobotAccount;
-import com.java3y.austin.common.dto.model.EnterpriseWeChatRobotContentModel;
-import com.java3y.austin.common.dto.model.FeiShuRobotContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.SendMessageType;
-import com.java3y.austin.handler.domain.feishu.FeiShuRobotParam;
-import com.java3y.austin.handler.domain.feishu.FeiShuRobotResult;
-import com.java3y.austin.handler.domain.wechat.robot.EnterpriseWeChatRobotParam;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.account.FeiShuRobotAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.model.FeiShuRobotContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.SendMessageType;
+import com.taotao.cloud.message.biz.austin.handler.domain.feishu.FeiShuRobotParam;
+import com.taotao.cloud.message.biz.austin.handler.domain.feishu.FeiShuRobotResult;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
+import com.taotao.cloud.message.biz.austin.handler.handler.Handler;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,10 +46,10 @@ public class FeiShuRobotHandler extends BaseHandler implements Handler {
             FeiShuRobotAccount account = accountUtils.getAccount(taskInfo.getSendAccount(), SendAccountConstant.FEI_SHU_ROBOT_ACCOUNT_KEY, SendAccountConstant.FEI_SHU_ROBOT_PREFIX, FeiShuRobotAccount.class);
             FeiShuRobotParam feiShuRobotParam = assembleParam(taskInfo);
             String result = HttpRequest.post(account.getWebhook())
-                    .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                    .body(JSON.toJSONString(feiShuRobotParam))
-                    .timeout(2000)
-                    .execute().body();
+                .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+                .body(JSON.toJSONString(feiShuRobotParam))
+                .timeout(2000)
+                .execute().body();
             FeiShuRobotResult feiShuRobotResult = JSON.parseObject(result, FeiShuRobotResult.class);
             if (feiShuRobotResult.getStatusCode() == 0) {
                 return true;
@@ -72,7 +65,7 @@ public class FeiShuRobotHandler extends BaseHandler implements Handler {
         FeiShuRobotContentModel contentModel = (FeiShuRobotContentModel) taskInfo.getContentModel();
 
         FeiShuRobotParam param = FeiShuRobotParam.builder()
-                .msgType(SendMessageType.geFeiShuRobotTypeByCode(contentModel.getSendType())).build();
+            .msgType(SendMessageType.geFeiShuRobotTypeByCode(contentModel.getSendType())).build();
 
         if (SendMessageType.TEXT.getCode().equals(contentModel.getSendType())) {
             param.setContent(FeiShuRobotParam.ContentDTO.builder().text(contentModel.getContent()).build());
@@ -82,8 +75,8 @@ public class FeiShuRobotHandler extends BaseHandler implements Handler {
             List<List<FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.PostContentDTO>> postContentList = new ArrayList<>();
             postContentList.add(postContentDTOS);
             FeiShuRobotParam.ContentDTO.PostDTO postDTO = FeiShuRobotParam.ContentDTO.PostDTO.builder()
-                    .zhCn(FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.builder().title(contentModel.getTitle()).content(postContentList).build())
-                    .build();
+                .zhCn(FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.builder().title(contentModel.getTitle()).content(postContentList).build())
+                .build();
             param.setContent(FeiShuRobotParam.ContentDTO.builder().post(postDTO).build());
         }
         if (SendMessageType.SHARE_CHAT.getCode().equals(contentModel.getSendType())) {
@@ -91,16 +84,16 @@ public class FeiShuRobotHandler extends BaseHandler implements Handler {
         }
         if (SendMessageType.IMAGE.getCode().equals(contentModel.getSendType())) {
             param.setContent(FeiShuRobotParam.ContentDTO.builder().imageKey(contentModel.getMediaId()).build());
-        }
-        if (SendMessageType.ACTION_CARD.getCode().equals(contentModel.getSendType())) {
-            //
-        }
-        return param;
-    }
+		}
+		if (SendMessageType.ACTION_CARD.getCode().equals(contentModel.getSendType())) {
+			//
+		}
+		return param;
+	}
 
-    @Override
-    public void recall(MessageTemplate messageTemplate) {
+	@Override
+	public void recall(MessageTemplate messageTemplate) {
 
-    }
+	}
 }
 

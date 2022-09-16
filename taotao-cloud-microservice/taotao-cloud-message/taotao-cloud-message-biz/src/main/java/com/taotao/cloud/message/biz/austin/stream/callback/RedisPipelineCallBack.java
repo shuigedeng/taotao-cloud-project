@@ -12,12 +12,12 @@ import java.util.List;
  */
 public interface RedisPipelineCallBack {
 
-    /**
-     * 具体执行逻辑
-     *
-     * @param redisAsyncCommands
-     * @return
-     */
-    List<RedisFuture<?>> invoke(RedisAsyncCommands redisAsyncCommands);
+	/**
+	 * 具体执行逻辑
+	 *
+	 * @param redisAsyncCommands
+	 * @return
+	 */
+	List<RedisFuture<?>> invoke(RedisAsyncCommands redisAsyncCommands);
 
 }

@@ -17,15 +17,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DingDingRobotAccount {
 
-    /**
-     * 密钥
-     */
-    private String secret;
+	/**
+	 * 密钥
+	 */
+	private String secret;
 
-    /**
-     * 自定义群机器人中的 webhook
-     */
-    private String webhook;
+	/**
+	 * 自定义群机器人中的 webhook
+	 */
+	private String webhook;
 
 
 }

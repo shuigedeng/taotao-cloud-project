@@ -1,20 +1,20 @@
 package com.taotao.cloud.member.api.feign;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberServiceFallback;
+import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 远程调用会员用户模块
@@ -65,8 +65,9 @@ public interface IFeignMemberEvaluationService {
 
 	/**
 	 * LambdaQueryWrapper<MemberEvaluation> lambdaQueryWrapper = Wrappers.lambdaQuery();
-	 * 			lambdaQueryWrapper.eq(MemberEvaluation::getStoreId, store.getId());
-	 * 			lambdaQueryWrapper.eq(MemberEvaluation::getStatus, SwitchEnum.OPEN.name());
+	 * lambdaQueryWrapper.eq(MemberEvaluation::getStoreId, store.getId());
+	 * lambdaQueryWrapper.eq(MemberEvaluation::getStatus, SwitchEnum.OPEN.name());
+	 *
 	 * @param id
 	 * @param name
 	 * @return
@@ -81,6 +82,6 @@ public interface IFeignMemberEvaluationService {
 	void reply(@RequestParam Long id, @RequestParam String reply, @RequestParam String replyImage);
 
 	@GetMapping(value = "/member/evaluation/queryPage")
-	IPage<MemberEvaluationListVO> queryPage(@RequestParam EvaluationPageQuery evaluationPageQuery);
+	PageResult<MemberEvaluationListVO> queryPage(@RequestParam EvaluationPageQuery evaluationPageQuery);
 }
 

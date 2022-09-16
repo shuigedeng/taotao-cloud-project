@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.config;
 
 import cn.hutool.core.thread.ExecutorBuilder;
-import com.java3y.austin.common.constant.ThreadPoolConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.ThreadPoolConstant;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author 3y
  * support 线程池配置类
- *
  */
 public class SupportThreadPoolConfig {
 
@@ -21,13 +20,13 @@ public class SupportThreadPoolConfig {
      */
     public static ExecutorService getPendingSingleThreadPool() {
         return ExecutorBuilder.create()
-                .setCorePoolSize(ThreadPoolConstant.SINGLE_CORE_POOL_SIZE)
-                .setMaxPoolSize(ThreadPoolConstant.SINGLE_MAX_POOL_SIZE)
-                .setWorkQueue(ThreadPoolConstant.BIG_BLOCKING_QUEUE)
-                .setHandler(new ThreadPoolExecutor.CallerRunsPolicy())
-                .setAllowCoreThreadTimeOut(true)
-                .setKeepAliveTime(ThreadPoolConstant.SMALL_KEEP_LIVE_TIME, TimeUnit.SECONDS)
-                .build();
-    }
+            .setCorePoolSize(ThreadPoolConstant.SINGLE_CORE_POOL_SIZE)
+            .setMaxPoolSize(ThreadPoolConstant.SINGLE_MAX_POOL_SIZE)
+            .setWorkQueue(ThreadPoolConstant.BIG_BLOCKING_QUEUE)
+            .setHandler(new ThreadPoolExecutor.CallerRunsPolicy())
+            .setAllowCoreThreadTimeOut(true)
+            .setKeepAliveTime(ThreadPoolConstant.SMALL_KEEP_LIVE_TIME, TimeUnit.SECONDS)
+            .build();
+	}
 
 }

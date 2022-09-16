@@ -31,5 +31,22 @@ public interface IFeignNoticeMessageService {
 
 	void noticeMessage(NoticeMessageDTO noticeMessageDTO);
 
+	boolean sendSms();
+
+	/**
+	 * 站内信
+	 *
+	 * @return
+	 */
+	boolean sendMessage();
+
+	boolean sendDingtalk();
+
+	boolean sendWechat();
+
+	boolean sendEmail();
+
+	boolean sendStoreMessage();
+
 }
 

@@ -3,10 +3,8 @@ package com.taotao.cloud.message.biz.austin.support.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.support.service.ConfigService;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.support.service.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,12 +36,8 @@ public class AccountUtils {
             T object = jsonObject.getObject(prefix + sendAccount, clazz);
             if (object != null) {
                 return object;
-            }
-        }
-        return null;
-    }
-
-
-
-
+			}
+		}
+		return null;
+	}
 }

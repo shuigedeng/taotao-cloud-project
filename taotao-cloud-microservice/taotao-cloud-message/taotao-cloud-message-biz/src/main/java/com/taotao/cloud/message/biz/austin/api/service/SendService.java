@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.austin.api.service;
 
-import com.java3y.austin.service.api.domain.BatchSendRequest;
-import com.java3y.austin.service.api.domain.SendRequest;
-import com.java3y.austin.service.api.domain.SendResponse;
+import com.taotao.cloud.message.biz.austin.service.api.domain.BatchSendRequest;
+import com.taotao.cloud.message.biz.austin.service.api.domain.SendRequest;
+import com.taotao.cloud.message.biz.austin.service.api.domain.SendResponse;
 
 /**
  * 发送接口
@@ -14,6 +14,7 @@ public interface SendService {
 
     /**
      * 单文案发送接口
+     *
      * @param sendRequest
      * @return
      */
@@ -22,6 +23,7 @@ public interface SendService {
 
     /**
      * 多文案发送接口
+     *
      * @param batchSendRequest
      * @return
      */
