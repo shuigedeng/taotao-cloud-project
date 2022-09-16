@@ -96,6 +96,10 @@ dependencies {
 
     api "org.apache.shenyu:shenyu-common:2.4.3"
 
+    //https://github.com/amaembo/streamex
+    //https://search.maven.org/artifact/one.util/streamex
+    api 'one.util:streamex:0.8.1'
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     //testImplementation "org.assertj:assertj-guava:3.5.0"
