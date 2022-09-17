@@ -30,10 +30,6 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
-
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
@@ -53,12 +49,12 @@ configurations {
 }
 
 smartdoc {
-	configFile = file("src/main/resources/smart-doc.json")
-	// exclude artifact
-	//exclude "org.springframework.boot:xx"
-	//exclude "org.springframework.boot:ddd"
-	// 你可以使用include配置来让插件自动加载指定依赖的source.
-	//include "org.springframework.boot:spring-boot-starter-tomcat"
+    configFile = file("src/main/resources/smart-doc.json")
+    // exclude artifact
+    //exclude "org.springframework.boot:xx"
+    //exclude "org.springframework.boot:ddd"
+    // 你可以使用include配置来让插件自动加载指定依赖的source.
+    //include "org.springframework.boot:spring-boot-starter-tomcat"
 }
 
 //configurations {

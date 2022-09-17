@@ -33,9 +33,6 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
 //shadowJar {
 //    zip64 true
 //    mergeServiceFiles()

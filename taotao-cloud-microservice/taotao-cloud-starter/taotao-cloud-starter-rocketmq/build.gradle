@@ -10,7 +10,3 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }
-
-tasks.named("test") {
-    useJUnitPlatform()
-}

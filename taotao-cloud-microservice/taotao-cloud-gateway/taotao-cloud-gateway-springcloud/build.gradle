@@ -53,10 +53,6 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
-
 configurations {
     all {
         exclude group: "org.springframework", module: "spring-webmvc"

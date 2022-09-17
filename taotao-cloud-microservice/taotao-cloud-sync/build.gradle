@@ -1,28 +1,24 @@
 dependencies {
-	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
-	implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
 
-	implementation "org.springframework.boot:spring-boot-starter-security"
-	//implementation "org.springframework.boot:spring-boot-starter-mail"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    //implementation "org.springframework.boot:spring-boot-starter-mail"
 
-	implementation("org.springframework.boot:spring-boot-starter-web") {
-		exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-	}
-	implementation "org.springframework.boot:spring-boot-starter-actuator"
-	implementation "org.springframework.boot:spring-boot-starter-undertow"
-	implementation "org.springframework.boot:spring-boot-autoconfigure"
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
 
-	implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-	implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
-	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-	testImplementation "org.springframework.boot:spring-boot-starter-test"
-	testImplementation "org.testcontainers:junit-jupiter"
-}
-
-tasks.named("test") {
-	useJUnitPlatform()
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.testcontainers:junit-jupiter"
 }
 

@@ -19,10 +19,6 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
-
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"

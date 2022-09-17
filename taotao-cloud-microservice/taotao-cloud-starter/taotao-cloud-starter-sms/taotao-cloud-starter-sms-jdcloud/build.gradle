@@ -8,12 +8,9 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    
+
     testImplementation "org.springframework:spring-test"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}

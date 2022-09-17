@@ -18,7 +18,3 @@ dependencies {
 
     testImplementation 'org.jeasy:easy-random:5.0.0'
 }
-
-tasks.named("test") {
-    useJUnitPlatform()
-}

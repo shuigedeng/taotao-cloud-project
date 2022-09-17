@@ -234,8 +234,10 @@ buildscript {
 
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+
         //https://github.com/google/protobuf-gradle-plugin/
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.19'
+        
         //https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin
         //classpath "com.google.cloud.tools:jib-gradle-plugin:3.3.0"
     }
