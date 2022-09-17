@@ -25,7 +25,7 @@ buildscript {
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
         springCloudVersion = '2021.0.4'
         //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies
-        springCloudAlibabaVersion = '2021.0.1.0'
+        springCloudAlibabaVersion = '2021.0.4.0'
 
         //https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
         testContainersVersion = "1.17.3"
