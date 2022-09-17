@@ -13,21 +13,6 @@ dependencies {
     testImplementation "net.ltgt.gradle.incap:incap:0.3"
     testImplementation "com.google.testing.compile:compile-testing:0.19"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
     //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
     //annotationProcessor project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-}
-
-tasks.named("test") {
-    useJUnitPlatform()
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
 }

@@ -2,14 +2,5 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock")
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}

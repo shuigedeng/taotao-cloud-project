@@ -54,13 +54,4 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
-}
-
-tasks.named("test") {
-    useJUnitPlatform()
 }

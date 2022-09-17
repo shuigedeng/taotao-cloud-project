@@ -55,10 +55,14 @@ public class TaoTaoCloudAuthApplication {
 	public static void main(String[] args) {
 		setNacosProperty();
 
+		/**
+		 * @see LoginPlatformEnum
+		 */
 		String s = "b端用户 -> 用户+密码登录 手机号码+短信登录 用户+密码+验证码登录";
 
 		String s1 = "c端用户之pc端 -> 用户+密码登录 手机扫码登录 手机号码+短信登录 第三方登录(qq登录 微信登录 支付宝登录 github/gitee/weibo/抖音/钉钉/gitlab 等等)";
 		String s2 = "c端用户之小程序 -> 微信一键登录 手机号码+短信登录";
+		String s4 = "c端用户之微信公众号 -> 微信公众号登录";
 		String s3 = "c端用户之app -> 短信密码登录 本机号码一键登录(不需要密码) 手机号码+短信登录 指纹登录 面部识别登录 手势登录 第三方登录(qq登录 微信登录 支付宝登录)";
 
 		SpringApplication.run(TaoTaoCloudAuthApplication.class, args);

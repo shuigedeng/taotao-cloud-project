@@ -13,17 +13,6 @@ dependencies {
     implementation "org.noear:snack3:3.2.37"
 
     testImplementation "org.noear:solon-test:1.10.1"
-    
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
-}
-
-tasks.named("test") {
-    useJUnitPlatform()
 }

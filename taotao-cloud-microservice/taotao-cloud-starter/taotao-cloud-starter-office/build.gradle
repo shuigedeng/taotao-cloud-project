@@ -2,18 +2,18 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/com.github.liaochong/myexcel
-    api ("com.github.liaochong:myexcel:4.2.2"){
+    api("com.github.liaochong:myexcel:4.2.2") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://search.maven.org/artifact/com.alibaba/easyexcel
-    api ("com.alibaba:easyexcel:3.1.1"){
+    api("com.alibaba:easyexcel:3.1.1") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //http://www.likaixuan.top/excelUtil/doc/v3
     //https://search.maven.org/artifact/net.oschina.likaixuan/excelutil
-    api ("net.oschina.likaixuan:excelutil:3.1.8"){
+    api("net.oschina.likaixuan:excelutil:3.1.8") {
         exclude group: "org.apache.tomcat.embed", module: "tomcat-embed-core"
     }
 
@@ -24,7 +24,7 @@ dependencies {
     //https://gitee.com/PasseRR/docx4j-wisewe
     //https://search.maven.org/artifact/cn.wisewe/docx4j-wisewe
     api "cn.wisewe:docx4j-wisewe-output:1.7.0.RELEASE"
-    api("cn.wisewe:docx4j-wisewe-input:1.7.0.RELEASE"){
+    api("cn.wisewe:docx4j-wisewe-input:1.7.0.RELEASE") {
         exclude group: "org.hibernate", module: "hibernate-validator"
     }
     //文档转换依赖较大（约120M），请酌情使用。
@@ -61,11 +61,6 @@ dependencies {
     //api "ink.rayin:rayin-htmladapter-spring-boot-starter:1.0.5"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
 tasks.named("test") {

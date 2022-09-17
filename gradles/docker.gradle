@@ -1,0 +1,18 @@
+apply plugin: "com.bmuschko.docker-spring-boot-application"
+
+docker {
+    registryCredentials {
+        url = "${dockerUrl}"
+        username = "${dockerUsername}"
+        password = "${dockerPassword}"
+        email = "${dockerEmail}"
+    }
+    springBootApplication {
+        baseImage = "${dockerBaseImage}"
+        maintainer = "${dockerMaintainer}"
+        ports = [8200]
+        images = ["micyo202/${project.name}:${project.version}"]
+        jvmArgs = ["-Djava.security.egd=file:/dev/./urandom", "-Xmx512m"]
+        //mainClassName = "com.lion.admin.AdminApplication"
+    }
+}

@@ -4,7 +4,7 @@ dependencies {
     api "com.alibaba.cloud:spring-cloud-starter-dubbo"
 
     // 3之前用这个
-    api("org.apache.dubbo:dubbo-serialization-kryo:2.7.16"){
+    api("org.apache.dubbo:dubbo-serialization-kryo:2.7.16") {
         exclude group: "log4j", module: "log4j"
     }
     // 3之后用这个
@@ -18,15 +18,6 @@ dependencies {
     //https://search.maven.org/artifact/org.apache.dubbo/dubbo-spring-boot-starter
     //api "org.apache.dubbo:dubbo-spring-boot-starter:3.0.9"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
 

@@ -8,15 +8,6 @@ dependencies {
     //https://search.maven.org/artifact/com.github.yitter/yitter-idgenerator
     api "com.github.yitter:yitter-idgenerator:1.0.6"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
 

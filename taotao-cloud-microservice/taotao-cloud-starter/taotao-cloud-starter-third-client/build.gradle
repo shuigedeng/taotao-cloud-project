@@ -18,13 +18,5 @@ dependencies {
     api "org.springframework.cloud:spring-cloud-square-okhttp:0.4.1"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
