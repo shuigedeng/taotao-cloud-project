@@ -3,19 +3,16 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common")
 
     //https://search.maven.org/artifact/com.github.tobato/fastdfs-client
-    api("com.github.tobato:fastdfs-client:1.27.2"){
+    api("com.github.tobato:fastdfs-client:1.27.2") {
         exclude group: "commons-beanutils", module: "commons-beanutils"
     }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    
+
     testImplementation "org.springframework:spring-test"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
 

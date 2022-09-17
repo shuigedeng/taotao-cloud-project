@@ -45,9 +45,6 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
 bootBuildImage {
     builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"
     runImage = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-run:base-cnb"

@@ -66,9 +66,5 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
-
 mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
 

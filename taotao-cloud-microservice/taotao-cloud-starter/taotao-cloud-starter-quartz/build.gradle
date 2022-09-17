@@ -19,8 +19,4 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-jdbc'
 }
 
-tasks.named("test") {
-    useJUnitPlatform()
-}
-
 
