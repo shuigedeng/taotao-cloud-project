@@ -20,10 +20,12 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao cloud project** 仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码**
+**taotao cloud project** 仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **
+仓库代码中不涉及公司任何业务代码**
 主要包括如下几部分
 
-- **大数据模块** 集成基于**spark、hive**的日志数据处理和分析, 用户行为分析、推荐系统, **flink、spark streaming**离线/流式计算,
+- **大数据模块** 集成基于**spark、hive**的日志数据处理和分析, 用户行为分析、推荐系统, **flink、spark
+  streaming**离线/流式计算,
   **hadoop hive tidb**离线数据仓库, **apache hudi**数据湖 **presto**计算框架等大数据处理
 
 
@@ -32,17 +34,22 @@
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
 
 
-- **商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统, 支持商家入驻支, 持分布式部署, 使用**github action
+- **商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统, 支持商家入驻支, 持分布式部署,
+  使用**github action
   CI/CD**持续集成, 前后端均使用**kubernetes**部署，
-  各个API独立, 管理前端使用**vue3 ant-design-vue**开发, 移动端使用**taro taro-ui**开发, **系统全端全部代码开源**
+  各个API独立, 管理前端使用**vue3 ant-design-vue**开发, 移动端使用**taro taro-ui**开发, **
+  系统全端全部代码开源**
 
 
-- **前端模块** 主要使用**react antd**进行前后端分离开发, 集成以**taro, taro-ui, react native**为主的多端合一框架。
+- **前端模块** 主要使用**react antd**进行前后端分离开发, 集成以**taro, taro-ui, react native**
+  为主的多端合一框架。
 
 
-- **python模块** 主要是集成了基于**django**的web开发, 基于**scrapy**爬虫开发, **homeassistant**家庭自动化框架原理的分析
+- **python模块** 主要是集成了基于**django**的web开发, 基于**scrapy**爬虫开发, **homeassistant**
+  家庭自动化框架原理的分析
 
-总之基于**spring cloud alibaba**的微服务架构 **spark hive hudi flink**等大数据处理实践。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
+总之基于**spring cloud alibaba**的微服务架构 **spark hive hudi flink**
+等大数据处理实践。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
 
 ## 2. spring cloud 微服务架构图
 
@@ -105,7 +112,7 @@ Maven:
 Spring |  5.3.22
 Spring Boot |  2.7.3
 Spring Cloud | 2021.0.4
-Spring Cloud alibaba | 2021.0.1.0
+Spring Cloud alibaba | 2021.0.4.0
 Spring Security | 5.7.3
 Mybatis Plus | 3.5.2
 Hutool | 5.5.9
@@ -122,22 +129,28 @@ Guava | 29.0-jre
 
 ## 6. 演示地址
 
-* Github: [https://github.com/shuigedeng/taotao-cloud-project](https://github.com/shuigedeng/taotao-cloud-project)
-* Gitee: [https://gitee.com/dtbox/taotao-cloud-project](https://gitee.com/dtbox/taotao-cloud-project)
+*
+Github: [https://github.com/shuigedeng/taotao-cloud-project](https://github.com/shuigedeng/taotao-cloud-project)
+*
+Gitee: [https://gitee.com/dtbox/taotao-cloud-project](https://gitee.com/dtbox/taotao-cloud-project)
 
 
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top)
   源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
-* 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限, 需多刷新几次)
+* 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限,
+  需多刷新几次)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top)
   源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-microservice/taotao-cloud-front)
 * 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top)
   源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-datav)
-* 平台管理地址(进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456)
+* 平台管理地址(进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (
+  admin/123456)
   源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-manager)
-* 商户管理地址(进度5%): [https://merchant.taotaocloud.top](https://merchant.taotaocloud.top) (taotao/123456)
+* 商户管理地址(进度5%): [https://merchant.taotaocloud.top](https://merchant.taotaocloud.top) (
+  taotao/123456)
   源码地址: [taotao-cloud-merchant](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-merchant)
-* 开放平台地址(进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (taotao/123456)
+* 开放平台地址(进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (
+  taotao/123456)
   源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-open)
 * 移动端在线预览(进度5%)
   源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-mall)
@@ -148,8 +161,10 @@ Guava | 29.0-jre
 
 ## 7. 功能特点
 
-* **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**非功能性需求**
-* **主体框架**：采用最新的Spring Boot 2.7.1、Spring Cloud 2021.0.2、Spring Cloud Alibaba 2021.0.1.0版本进行设计
+* **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**
+  非功能性需求**
+* **主体框架**：采用最新的Spring Boot 2.7.1、Spring Cloud 2021.0.2、Spring Cloud Alibaba
+  2021.0.1.0版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
@@ -231,14 +246,18 @@ taotao-cloud-project -- 父项目
 
 ## 9.开源共建
 
-1. 欢迎提交 [pull request](https://github.com/shuigedeng/taotao-cloud-project)，注意对应提交对应 `dev` 分支
+1. 欢迎提交 [pull request](https://github.com/shuigedeng/taotao-cloud-project)
+   ，注意对应提交对应 `dev` 分支
 
-2. 欢迎提交 [issue](https://github.com/shuigedeng/taotao-cloud-project/issues)，请写清楚遇到问题的原因、开发环境、复显步骤。
+2. 欢迎提交 [issue](https://github.com/shuigedeng/taotao-cloud-project/issues)
+   ，请写清楚遇到问题的原因、开发环境、复显步骤。
 
-3. 不接受`功能请求`的 [issue](https://github.com/shuigedeng/taotao-cloud-project/issues)，功能请求可能会被直接关闭。
+3. 不接受`功能请求`的 [issue](https://github.com/shuigedeng/taotao-cloud-project/issues)
+   ，功能请求可能会被直接关闭。
 
 4. mail: <a href="981376577@qq.com">981376577@qq.com</a>
-   | <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3130998334&site=qq&menu=yes"> QQ: 981376577</a>
+   | <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3130998334&site=qq&menu=yes"> QQ:
+   981376577</a>
 
 ## 10.参与贡献
 
