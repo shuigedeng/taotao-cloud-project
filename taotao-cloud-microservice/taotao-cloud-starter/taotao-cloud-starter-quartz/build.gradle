@@ -17,10 +17,6 @@ dependencies {
 
     runtimeOnly "mysql:mysql-connector-java"
     testImplementation 'org.springframework.boot:spring-boot-starter-jdbc'
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
 tasks.named("test") {

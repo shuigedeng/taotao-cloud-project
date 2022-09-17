@@ -2,7 +2,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
-    api("org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter:3.0.1"){
+    api("org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter:3.0.1") {
         exclude group: "org.projectlombok", module: "lombok"
         exclude group: "log4j", module: "log4j"
     }
@@ -14,14 +14,5 @@ dependencies {
     api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-email:3.0.1"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
-}
-
-tasks.named("test") {
-    useJUnitPlatform()
 }
 

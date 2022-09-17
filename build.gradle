@@ -248,13 +248,26 @@ plugins {
     id 'signing'
     id 'maven-publish'
     //id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-    id "com.google.cloud.tools.jib" version "3.3.0"
-    id "com.github.johnrengelman.processes" version "0.5.0"
-    id "org.springdoc.openapi-gradle-plugin" version "1.4.0"
-    id "com.github.shalousun.smart-doc" version "2.5.1"
-    id "org.owasp.dependencycheck" version "7.1.2"
-    //id "com.bmuschko.docker-spring-boot-application" version "8.0.0"
 
+    //https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
+    id "com.google.cloud.tools.jib" version "3.3.0"
+
+    //https://plugins.gradle.org/plugin/com.github.johnrengelman.processes
+    id "com.github.johnrengelman.processes" version "0.5.0"
+
+    // https://plugins.gradle.org/plugin/org.springdoc.openapi-gradle-plugin
+    id "org.springdoc.openapi-gradle-plugin" version "1.4.0"
+
+    // https://plugins.gradle.org/plugin/com.github.shalousun.smart-doc
+    id "com.github.shalousun.smart-doc" version "2.5.3"
+
+    //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
+    id "org.owasp.dependencycheck" version "7.2.0"
+
+    //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
+    id "com.bmuschko.docker-spring-boot-application" version "8.0.0"
+
+    //https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
@@ -309,229 +322,46 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: 'java'
     apply plugin: 'java-library'
     apply plugin: 'idea'
-    apply plugin: 'signing'
-    //apply plugin: 'checkstyle'
-    apply plugin: 'maven-publish'
-	apply plugin: 'application'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: "org.springdoc.openapi-gradle-plugin"
-    apply plugin: "com.github.shalousun.smart-doc"
-    //apply plugin: 'io.spring.dependency-management'
-
-    apply plugin: "com.google.cloud.tools.jib"
 
     apply plugin: "com.taotao.cloud.plugin"
     apply plugin: "org.owasp.dependencycheck"
 
-    //apply plugin: "com.bmuschko.docker-spring-boot-application"
+    apply from: rootProject.file('gradles/jacoco.gradle')
+    apply from: rootProject.file('gradles/publish.gradle')
+    apply from: rootProject.file('gradles/test.gradle')
+    apply from: rootProject.file('gradles/jar.gradle')
+    apply from: rootProject.file('gradles/checkstyle.gradle')
 
     dependencies {
         implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
+
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testImplementation "org.testcontainers:junit-jupiter"
+        testImplementation "org.springframework.boot:spring-boot-starter-web"
     }
 
-    //checkstyle {
-    //    project.ext.checkstyleVersion = '10.3.3'
-    //    // The version of the code quality tool to be used.
-    //    // The most recent version of Checkstyle can be found at https://github.com/checkstyle/checkstyle/releases
-    //    toolVersion = "10.3.3"
-    //    configFile = file("${rootDir}/checkstyle/google_checks.xml")
-    //    //configFile = rootProject.file('quality/google_checks.xml')
-    //
-    //    // The source sets to be analyzed as part of the check and build tasks.
-    //    // Use 'sourceSets = []' to remove Checkstyle from the check and build tasks.
-    //    // sourceSets = [project.sourceSets.main, project.sourceSets.test]
-    //
-    //    // Whether or not to allow the build to continue if there are warnings.
-    //    ignoreFailures = false
-    //
-    //    // Whether or not rule violations are to be displayed on the console.
-    //    showViolations = true
-    //}
-
-    configurations.all {
-        resolutionStrategy {
-            cacheChangingModulesFor 0, "seconds"
-            cacheDynamicVersionsFor 0, "seconds"
-        }
-    }
-
-    javadoc {
-        failOnError false
-
-        options {
-            //encoding "UTF-8"
-            //charSet 'UTF-8'
-            author true
-            version true
-            title project.name
-        }
-
-        options.addStringOption('Xdoclint:none', '-quiet')
-        options.addStringOption('encoding', 'UTF-8')
-        options.addStringOption('charSet', 'UTF-8')
-    }
-
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        //from sourceSets.main.allJava
-        from sourceSets.main.allSource
-
-        archiveClassifier = 'sources'
-    }
-
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        from javadoc
-        archiveClassifier = 'javadoc'
-    }
-
-    gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs += [
-                    '-Xlint:unchecked',
-                    '-Xlint:deprecation',
-                    '--add-exports=java.desktop/sun.font=ALL-UNNAMED',
-                    '--add-exports=java.base/sun.reflect.generics.tree=ALL-UNNAMED',
-                    '--add-exports=java.base/sun.net.www.protocol.ftp=ALL-UNNAMED'
-            ]
-        }
-    }
-
-    /**
-     * 该过滤器会导致resource下文件编码错误
-     * 根据环境打包默认dev开发环境，命令：./gradlew -x test clean bootJar -Denv=dev
-     */
-    /*
-    def env = System.getProperty("env") ?: "dev"
-    processResources {
-        filter org.apache.tools.ant.filters.ReplaceTokens, tokens: [env: env]
-    }
-    */
-
-    tasks.withType(Jar) {
-        from(project.rootDir) {
-            include 'LICENSE.txt'
-            include 'NOTICE.txt'
-            into 'META-INF'
-        }
-    }
-
-    bootJar{
-        manifest {
-            attributes project.tasks.jar.manifest.attributes
-        }
-    }
-
-    jar {
-        enabled = true
-        classifier = null
-
-        manifest {
-            attributes (
-                    'Implementation-Title': project.name,
-                    'Implementation-Version': project.version,
-                    'Implementation-Vendor': 'Apache Software Foundation',
-                    'Implementation-Vendor-Id': project.group,
-                    'Specification-Version': "2022",
-                    'Specification-Vendor': 'Apache Software Foundation',
-                    'Specification-Title': project.name,
-                    'Built-By': 'shuigedeng',
-                    'Automatic-Module-Name': project.name.replace("-", "."),
-                    'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
-                    'Build-Jdk-Spec': JavaVersion.VERSION_17.toString()
-            )
-        }
-    }
-
-    publishing {
-        repositories {
-            maven {
-                //https://repomanage.rdc.aliyun.com/
-                name = "Aliyun"
-                if (project.version.endsWith('-SNAPSHOT')) {
-                    url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
-                } else {
-                    url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
-                }
-
-                allowInsecureProtocol = true
-                credentials {
-                    username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                    password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
-                }
-            }
-
-            maven {
-                name = "GitHub"
-                url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
-                credentials {
-                    username = findProperty("githubUsername") ?: System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
-                    password = findProperty("githubPassword") ?: System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
-                }
-            }
-
-            maven {
-                name = "Sonatype"
-                if (project.version.endsWith('-SNAPSHOT')) {
-                    url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                } else {
-                    url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                }
-                allowInsecureProtocol = true
-                credentials {
-                    username = findProperty("ossrhUsername") ?: System.getenv("TAOTAO_CLOUD_OSSRH_USERNAME")
-                    password = findProperty("ossrhPassword") ?: System.getenv("TAOTAO_CLOUD_OSSRH_PASSWORD")
-                }
+    configurations {
+        all {
+            resolutionStrategy {
+                cacheChangingModulesFor 0, "seconds"
+                cacheDynamicVersionsFor 0, "seconds"
             }
         }
-
-        publications {
-            mavenJava(MavenPublication) {
-                groupId rootProject.group
-                artifactId project.name
-                version rootProject.version
-
-                //打包类型 war: components.web jar: components.java
-                from components.java
-
-                // artifact shadowJar
-                artifact sourcesJar
-                artifact javadocJar
-
-                pom {
-                    name = project.name
-                    description = project.name
-                    url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
-
-                    licenses {
-                        license {
-                            name = 'The Apache License, Version 2.0'
-                            url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id = 'shuigedeng'
-                            name = 'shuigedeng'
-                            email = '981376577@qq.com'
-                        }
-                    }
-
-                    scm {
-                        connection = 'scm:git:git@github.com:shuigedeng/taotao-cloud-project.git'
-                        developerConnection = 'scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git'
-                        url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
-                    }
-                }
-            }
+        compileOnly {
+            extendsFrom annotationProcessor
         }
+
+        // 排除 logback 依赖（使用 log4j2）
+        //implementation.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        // 排除 tomcat 依赖（使用 undertow）
+        //implementation.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
 
-    signing {
-        sign publishing.publications.mavenJava
-    }
 }
 
-configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) }) { project ->
+configure(subprojects.findAll { it -> (!it.name.startsWith("taotao-cloud-starter") && it.name != "taotao-cloud-dependencies") }) { project ->
+
+    apply from: rootProject.file('gradles/springboot.gradle')
 
     apply plugin: "com.github.johnrengelman.shadow"
 
@@ -570,12 +400,17 @@ configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) })
     classes {
         dependsOn createProperties
     }
+}
 
-//    configurations {
-//        all {
-//            exclude group: 'log4j', module: 'log4j'
-//        }
-//    }
+configure(subprojects.findAll { (it.name.startsWith("taotao-cloud-starter")) }) { project ->
+    dependencies {
+
+        api "io.soabase.record-builder:record-builder-core"
+        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    }
+
 }
 
 //configurations.all{

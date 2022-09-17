@@ -14,15 +14,6 @@ dependencies {
 
     compileOnly "org.apache.tomcat.embed:tomcat-embed-core:10.0.23"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-}
-
-tasks.named("test") {
-    useJUnitPlatform()
 }
 
 

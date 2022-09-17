@@ -8,16 +8,16 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/com.zengtengpeng/redisson-spring-boot-starter
-    api ("com.zengtengpeng:redisson-spring-boot-starter:1.0.17") {
+    api("com.zengtengpeng:redisson-spring-boot-starter:1.0.17") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
         exclude group: "org.yaml", module: "snakeyaml"
     }
 
     //https://search.maven.org/artifact/org.redisson/redisson-spring-data
-    api("org.redisson:redisson-spring-data-27:3.17.6"){
+    api("org.redisson:redisson-spring-data-27:3.17.6") {
         exclude group: "org.yaml", module: "snakeyaml"
     }
-    api("org.springframework.boot:spring-boot-starter-data-redis"){
+    api("org.springframework.boot:spring-boot-starter-data-redis") {
         exclude group: "org.yaml", module: "snakeyaml"
     }
 
@@ -30,10 +30,6 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
 }
 
 tasks.named("test") {

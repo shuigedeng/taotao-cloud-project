@@ -10,10 +10,9 @@ import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.data.mybatisplus.base.entity.MpSuperEntity;
 import com.taotao.cloud.data.mybatisplus.properties.MybatisPlusAutoFillProperties;
-import org.apache.ibatis.reflection.MetaObject;
-
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import org.apache.ibatis.reflection.MetaObject;
 
 /**
  * 自定义填充公共字段
@@ -72,7 +71,7 @@ public class AutoFieldMetaObjectHandler implements MetaObjectHandler {
 
 		//1. 继承了SuperEntity 若 ID 中有值，就不设置
 		if (metaObject.getOriginalObject() instanceof MpSuperEntity) {
-			Object oldId = ((MpSuperEntity) metaObject.getOriginalObject()).getId();
+			Object oldId = ((MpSuperEntity<?>) metaObject.getOriginalObject()).getId();
 			if (oldId != null) {
 				return;
 			}
@@ -121,7 +120,8 @@ public class AutoFieldMetaObjectHandler implements MetaObjectHandler {
 		}
 
 		// 反射得到 主键的值
-		Field idField = ReflectUtil.getField(metaObject.getOriginalObject().getClass(), keyProperty);
+		Field idField = ReflectUtil.getField(metaObject.getOriginalObject().getClass(),
+			keyProperty);
 		Object fieldValue = ReflectUtil.getFieldValue(metaObject.getOriginalObject(), idField);
 		// 判断ID 是否有值，有值就不
 		if (ObjectUtil.isNotEmpty(fieldValue)) {
@@ -143,7 +143,8 @@ public class AutoFieldMetaObjectHandler implements MetaObjectHandler {
 		if (metaObject.hasGetter(autoFillProperties.getCreateByField())) {
 			Object oldVal = metaObject.getValue(autoFillProperties.getCreateByField());
 			if (oldVal == null) {
-				this.setFieldValByName(autoFillProperties.getCreateByField(), SecurityUtils.getUserIdWithAnonymous(),
+				this.setFieldValByName(autoFillProperties.getCreateByField(),
+					SecurityUtils.getUserIdWithAnonymous(),
 					metaObject);
 			}
 		}
@@ -180,7 +181,8 @@ public class AutoFieldMetaObjectHandler implements MetaObjectHandler {
 		if (metaObject.hasGetter(autoFillProperties.getUpdateByField())) {
 			Object oldVal = metaObject.getValue(autoFillProperties.getUpdateByField());
 			if (oldVal == null) {
-				this.setFieldValByName(autoFillProperties.getUpdateByField(), SecurityUtils.getUserIdWithAnonymous(),
+				this.setFieldValByName(autoFillProperties.getUpdateByField(),
+					SecurityUtils.getUserIdWithAnonymous(),
 					metaObject);
 			}
 		}

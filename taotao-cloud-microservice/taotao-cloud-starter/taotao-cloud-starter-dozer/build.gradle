@@ -2,20 +2,10 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/com.github.dozermapper/dozer-spring-boot-starter
-    api("com.github.dozermapper:dozer-spring-boot-starter:6.5.2"){
+    api("com.github.dozermapper:dozer-spring-boot-starter:6.5.2") {
         exclude group: "commons-collections", module: "commons-collections"
     }
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
-}
-
-tasks.named("test") {
-    useJUnitPlatform()
 }
 
 
