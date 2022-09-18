@@ -13,7 +13,7 @@ test {
     }
 
     afterSuite { desc, result ->
-        println "测试完成 ${result}"
+        println "Execution test ${result} ${desc}"
         //if(!desc.parent)
         //    println("${result.resultType}" +
         //            "${result.testCount} tests" +

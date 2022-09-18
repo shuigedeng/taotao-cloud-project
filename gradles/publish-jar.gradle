@@ -1,0 +1,181 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+javadoc {
+    failOnError false
+
+    options {
+        //encoding "UTF-8"
+        //charSet 'UTF-8'
+        author true
+        version true
+        title project.name
+    }
+
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs += [
+                '-Xlint:unchecked',
+                '-Xlint:deprecation',
+                '--add-exports=java.desktop/sun.font=ALL-UNNAMED',
+                '--add-exports=java.base/sun.reflect.generics.tree=ALL-UNNAMED',
+                '--add-exports=java.base/sun.net.www.protocol.ftp=ALL-UNNAMED'
+        ]
+    }
+}
+
+/**
+ * 该过滤器会导致resource下文件编码错误
+ * 根据环境打包默认dev开发环境，命令：./gradlew -x test clean bootJar -Denv=dev
+ */
+/*
+def env = System.getProperty("env") ?: "dev"
+processResources {
+    filter org.apache.tools.ant.filters.ReplaceTokens, tokens: [env: env]
+}
+*/
+
+tasks.withType(Jar) {
+    from(project.rootDir) {
+        include 'LICENSE.txt'
+        include 'NOTICE.txt'
+        into 'META-INF'
+    }
+}
+
+
+jar {
+    enabled = true
+    classifier = null
+
+    manifest {
+        attributes(
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Apache Software Foundation',
+                'Implementation-Vendor-Id': project.group,
+                'Specification-Version': "2022",
+                'Specification-Vendor': 'Apache Software Foundation',
+                'Specification-Title': project.name,
+                'Built-By': 'shuigedeng',
+                'Automatic-Module-Name': project.name.replace("-", "."),
+                'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
+                'Build-Jdk-Spec': JavaVersion.VERSION_17.toString()
+        )
+    }
+}
+
+// ci 自动发布 版本
+task publishJar(type: GradleBuild) {
+    def names = ['test', 'compileTestJava']
+    startParameter.setExcludedTaskNames(names)
+
+    tasks = ['clean', 'build', 'publishAllPublicationsToSonatypeRepository']
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    //from sourceSets.main.allJava
+    from sourceSets.main.allSource
+
+    archiveClassifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc
+    archiveClassifier = 'javadoc'
+}
+
+publishing {
+    repositories {
+        maven {
+            //https://repomanage.rdc.aliyun.com/
+            name = "Aliyun"
+            if (project.version.endsWith('-SNAPSHOT')) {
+                url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
+            } else {
+                url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
+            }
+
+            allowInsecureProtocol = true
+            credentials {
+                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
+        }
+
+        maven {
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
+            credentials {
+                username = findProperty("githubUsername") ?: System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
+                password = findProperty("githubPassword") ?: System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
+            }
+        }
+
+        maven {
+            name = "Sonatype"
+            if (project.version.endsWith('-SNAPSHOT')) {
+                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            } else {
+                url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            }
+            allowInsecureProtocol = true
+            credentials {
+                username = findProperty("ossrhUsername") ?: System.getenv("TAOTAO_CLOUD_OSSRH_USERNAME")
+                password = findProperty("ossrhPassword") ?: System.getenv("TAOTAO_CLOUD_OSSRH_PASSWORD")
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            groupId rootProject.group
+            artifactId project.name
+            version rootProject.version
+
+            //打包类型 war: components.web jar: components.java
+            from components.java
+
+            // artifact shadowJar
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom {
+                name = project.name
+                description = project.name
+                url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'shuigedeng'
+                        name = 'shuigedeng'
+                        email = '981376577@qq.com'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git@github.com:shuigedeng/taotao-cloud-project.git'
+                    developerConnection = 'scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git'
+                    url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+                }
+
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}

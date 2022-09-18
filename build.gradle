@@ -237,7 +237,7 @@ buildscript {
 
         //https://github.com/google/protobuf-gradle-plugin/
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.19'
-        
+
         //https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin
         //classpath "com.google.cloud.tools:jib-gradle-plugin:3.3.0"
     }
@@ -329,9 +329,8 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: "org.owasp.dependencycheck"
 
     apply from: rootProject.file('gradles/jacoco.gradle')
-    apply from: rootProject.file('gradles/publish.gradle')
+    apply from: rootProject.file('gradles/publish-jar.gradle')
     apply from: rootProject.file('gradles/test.gradle')
-    apply from: rootProject.file('gradles/jar.gradle')
     apply from: rootProject.file('gradles/checkstyle.gradle')
 
     dependencies {
