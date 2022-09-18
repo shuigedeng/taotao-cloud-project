@@ -56,7 +56,6 @@ public class ZookeeperTemplate {
 	 * @param path 节点路径
 	 * @param node 节点名称
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:39:47
 	 */
 	public String createNode(String path, String node) {
@@ -142,7 +141,7 @@ public class ZookeeperTemplate {
 			throw new RuntimeException("there is not connect to zkServer...");
 		}
 		CuratorCache treeCache = CuratorCache.build(client, path);
-		CuratorCacheListener listener = (type, oldData,  data) -> {
+		CuratorCacheListener listener = (type, oldData, data) -> {
 			LogUtils.info("节点路径 --{} ,节点事件类型: {} , 节点值为: {}",
 				Objects.nonNull(data.getData()) ? Arrays.toString(data.getData()) : "无数据", type);
 		};
@@ -157,7 +156,6 @@ public class ZookeeperTemplate {
 	/**
 	 * 监听给定节点下的子节点的创建、删除、更新
 	 *
-	 * @author shuigedeng
 	 * @since 2022-02-09 16:21:47
 	 */
 	public void addWatcherWithChildCache(String path) {
@@ -165,8 +163,8 @@ public class ZookeeperTemplate {
 			throw new RuntimeException("there is not connect to zkServer...");
 		}
 		//cacheData if true, node contents are cached in addition to the stat
-		CuratorCache pathChildrenCache =CuratorCache.build(client, path);
-		CuratorCacheListener listener = (type,  oldData,  data) -> {
+		CuratorCache pathChildrenCache = CuratorCache.build(client, path);
+		CuratorCacheListener listener = (type, oldData, data) -> {
 			LogUtils.info("event path is --{} ,event type is {}", data.getData(), type);
 		};
 		pathChildrenCache.listenable().addListener(listener);
@@ -188,7 +186,7 @@ public class ZookeeperTemplate {
 		}
 		// dataIsCompressed if true, data in the path is compressed
 		CuratorCache nodeCache = CuratorCache.build(client, path);
-		CuratorCacheListener listener = (type,  oldData,  data) -> {
+		CuratorCacheListener listener = (type, oldData, data) -> {
 			Optional<ChildData> currentData = nodeCache.get(path);
 			LogUtils.info("{} Znode data is chagnge,new data is ---  {}",
 				currentData.get().getPath(),
@@ -209,7 +207,6 @@ public class ZookeeperTemplate {
 	 * @param node       节点名称
 	 * @param createMode 类型
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:39:57
 	 */
 	public String createNode(String path, String node, CreateMode createMode) {
@@ -235,7 +232,6 @@ public class ZookeeperTemplate {
 	 * @param node  节点名称
 	 * @param value 节点值
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:07
 	 */
 	public String createNode(String path, String node, String value) {
@@ -255,7 +251,6 @@ public class ZookeeperTemplate {
 	 * @param value      节点值
 	 * @param createMode 节点类型
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:15
 	 */
 	public String createNode(String path, String node, String value, CreateMode createMode) {
@@ -281,10 +276,9 @@ public class ZookeeperTemplate {
 	 * @param path 路径
 	 * @param node 节点名称
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:25
 	 */
-	public String get(String path, String node){
+	public String get(String path, String node) {
 		try {
 			path = buildPath(path, node);
 			byte[] bytes = client.getData().forPath(path);
@@ -304,10 +298,9 @@ public class ZookeeperTemplate {
 	 * @param node  节点名称
 	 * @param value 更新值
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:33
 	 */
-	public String update(String path, String node, String value){
+	public String update(String path, String node, String value) {
 		Assert.isTrue(StrUtil.isNotEmpty(value), "zookeeper节点值不能为空!");
 
 		try {
@@ -325,10 +318,9 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path 路径
 	 * @param node 节点名称
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:41
 	 */
-	public void delete(String path, String node)  {
+	public void delete(String path, String node) {
 		path = buildPath(path, node);
 		try {
 			client.delete().quietly().deletingChildrenIfNeeded().forPath(path);
@@ -342,7 +334,6 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path 节点路径
 	 * @return {@link java.util.List }
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:48
 	 */
 	public List<String> getChildren(String path) {
@@ -367,7 +358,6 @@ public class ZookeeperTemplate {
 	 * @param path 路径
 	 * @param node 节点名称
 	 * @return boolean
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:56
 	 */
 	public boolean exists(String path, String node) {
@@ -380,7 +370,6 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path     节点路径
 	 * @param listener 回调方法
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:41:03
 	 */
 	public void watchNode(String path, NodeCacheListener listener) {
@@ -398,7 +387,6 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path     节点路径
 	 * @param listener 回调方法
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:41:10
 	 */
 	public void watchChildren(String path, PathChildrenCacheListener listener) {
@@ -416,7 +404,6 @@ public class ZookeeperTemplate {
 	 * @param path     节点路径
 	 * @param maxDepth 回调方法
 	 * @param listener 监听
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:41:17
 	 */
 	public void watchTree(String path, int maxDepth, TreeCacheListener listener) {
@@ -434,12 +421,11 @@ public class ZookeeperTemplate {
 	 * @param path 路径
 	 * @param node 节点名
 	 * @return {@link java.lang.String }
-	 * @author shuigedeng
 	 * @since 2021-09-07 20:41:26
 	 */
 	private String buildPath(String path, String node) {
 		Assert.isTrue(StrUtil.isNotEmpty(path) && StrUtil.isNotEmpty(node)
-			,"zookeeper路径或者节点名称不能为空！");
+			, "zookeeper路径或者节点名称不能为空！");
 
 		if (!path.startsWith(CommonConstant.PATH_SPLIT)) {
 			path = CommonConstant.PATH_SPLIT + path;

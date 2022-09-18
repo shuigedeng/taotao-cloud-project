@@ -1,0 +1,86 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+publishing {
+    repositories {
+        maven {
+            name = "Aliyun"
+            if (project.version.endsWith("-SNAPSHOT")) {
+                url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
+            } else {
+                url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
+            }
+
+            allowInsecureProtocol = true
+            credentials {
+                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
+        }
+
+        maven {
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
+            credentials {
+                username = findProperty("githubUsername") ?: System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
+                password = findProperty("githubPassword") ?: System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
+            }
+        }
+
+        maven {
+            name = "Sonatype"
+            if (project.version.endsWith("-SNAPSHOT")) {
+                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            } else {
+                url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            }
+            allowInsecureProtocol = true
+            credentials {
+                username = findProperty("ossrhUsername") ?: System.getenv("TAOTAO_CLOUD_OSSRH_USERNAME")
+                password = findProperty("ossrhPassword") ?: System.getenv("TAOTAO_CLOUD_OSSRH_PASSWORD")
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            groupId rootProject.group
+            artifactId project.name
+            version rootProject.version
+
+            //打包类型 war: components.web jar: components.java
+            from components.javaPlatform
+
+            pom {
+                name = project.name
+                description = project.name
+                url = "https://github.com/shuigedeng/taotao-cloud-project.git"
+
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "shuigedeng"
+                        name = "shuigedeng"
+                        email = "981376577@qq.com"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git@github.com:shuigedeng/taotao-cloud-project.git"
+                    developerConnection = "scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git"
+                    url = "https://github.com/shuigedeng/taotao-cloud-project.git"
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}

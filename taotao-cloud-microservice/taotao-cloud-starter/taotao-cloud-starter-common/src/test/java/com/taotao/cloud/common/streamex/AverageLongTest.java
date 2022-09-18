@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.common.streamex;
 
-import one.util.streamex.LongStreamEx;
-import one.util.streamex.MoreCollectors;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -30,12 +29,10 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
-
-import static one.util.streamex.Internals.AverageLong;
-import static one.util.streamex.TestHelpers.repeat;
-import static one.util.streamex.TestHelpers.withRandom;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import one.util.streamex.Internals.AverageLong;
+import one.util.streamex.LongStreamEx;
+import one.util.streamex.MoreCollectors;
+import org.junit.Test;
 
 /**
  * @author Tagir Valeev
@@ -68,8 +65,9 @@ public class AverageLongTest {
 			assertEquals(expected, Arrays.stream(input)
 				.collect(AverageLong::new, AverageLong::accept, AverageLong::combine).result());
 
-			assertEquals(expected, Arrays.stream(input).parallel().collect(AverageLong::new, AverageLong::accept,
-				AverageLong::combine).result());
+			assertEquals(expected,
+				Arrays.stream(input).parallel().collect(AverageLong::new, AverageLong::accept,
+					AverageLong::combine).result());
 		});
 	}
 
@@ -80,10 +78,12 @@ public class AverageLongTest {
 			AverageLong avg2 = new AverageLong();
 			long[] set1 = r.longs(100).toArray();
 			long[] set2 = r.longs(100).toArray();
-			double expected = LongStreamEx.of(set1).append(set2).boxed().collect(getBigIntegerAverager()).getAsDouble();
+			double expected = LongStreamEx.of(set1).append(set2).boxed()
+				.collect(getBigIntegerAverager()).getAsDouble();
 			LongStream.of(set1).forEach(avg1::accept);
 			LongStream.of(set2).forEach(avg2::accept);
-			assertEquals(expected, avg1.combine(avg2).result().getAsDouble(), Math.abs(expected / 1e14));
+			assertEquals(expected, avg1.combine(avg2).result().getAsDouble(),
+				Math.abs(expected / 1e14));
 		}));
 	}
 
@@ -93,18 +93,22 @@ public class AverageLongTest {
 			long[] input = LongStreamEx.of(r, 1000).toArray();
 			Supplier<LongStream> supplier = () -> Arrays.stream(input);
 			double expected = supplier.get().boxed().collect(getBigIntegerAverager()).getAsDouble();
-			assertEquals(expected, supplier.get().collect(AverageLong::new, AverageLong::accept, AverageLong::combine)
-				.result().getAsDouble(), Math.abs(expected) / 1e14);
-			assertEquals(expected, supplier.get().parallel().collect(AverageLong::new, AverageLong::accept,
-				AverageLong::combine).result().getAsDouble(), Math.abs(expected) / 1e14);
+			assertEquals(expected,
+				supplier.get().collect(AverageLong::new, AverageLong::accept, AverageLong::combine)
+					.result().getAsDouble(), Math.abs(expected) / 1e14);
+			assertEquals(expected,
+				supplier.get().parallel().collect(AverageLong::new, AverageLong::accept,
+					AverageLong::combine).result().getAsDouble(), Math.abs(expected) / 1e14);
 		});
 	}
 
 	private static Collector<Long, ?, OptionalDouble> getBigIntegerAverager() {
-		BiFunction<BigInteger, Long, OptionalDouble> finisher = (BigInteger sum, Long cnt) -> cnt == 0L ? OptionalDouble
-			.empty()
-			: OptionalDouble.of(new BigDecimal(sum).divide(BigDecimal.valueOf(cnt), MathContext.DECIMAL64)
-			.doubleValue());
+		BiFunction<BigInteger, Long, OptionalDouble> finisher = (BigInteger sum, Long cnt) ->
+			cnt == 0L ? OptionalDouble
+				.empty()
+				: OptionalDouble.of(
+					new BigDecimal(sum).divide(BigDecimal.valueOf(cnt), MathContext.DECIMAL64)
+						.doubleValue());
 		return MoreCollectors.pairing(Collectors.reducing(BigInteger.ZERO,
 			BigInteger::valueOf, BigInteger::add), Collectors.counting(), finisher);
 	}
