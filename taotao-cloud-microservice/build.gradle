@@ -2,3 +2,82 @@ dependencies {
 
 }
 
+subprojects {
+    dependencies {
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testImplementation "org.testcontainers:junit-jupiter"
+        testImplementation "org.springframework.boot:spring-boot-starter-web"
+    }
+}
+
+configure(subprojects.findAll { it -> (!it.name.startsWith("taotao-cloud-starter")) }) { project ->
+
+    apply from: rootProject.file('gradles/springboot.gradle')
+
+    apply plugin: "com.github.johnrengelman.shadow"
+
+    //shadowJar {
+    //    manifest {
+    //        inheritFrom project.tasks.jar.manifest
+    //    }
+    //}
+
+    shadowJar {
+        zip64 true
+        mergeServiceFiles()
+        classifier = null
+    }
+
+    task createProperties(dependsOn: processResources) {
+        doLast {
+            def fileDir = new File("$buildDir/resources/main");
+            if (fileDir.exists() && fileDir.isDirectory()) {
+                def pro = ["application.properties", "bootstrap.properties"]
+                pro.forEach(item -> {
+                    new File("$buildDir/resources/main/$item").withWriter { w ->
+                        def projectProperties = project.properties
+                        Properties p = new Properties()
+                        projectProperties.each { entry ->
+                            p[entry.key.toString()] = entry.value.toString()
+                        }
+
+                        p.store w, null
+                    }
+                })
+            }
+        }
+    }
+
+    classes {
+        dependsOn createProperties
+    }
+
+    dependencies {
+        api "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+
+        api "io.soabase.record-builder:record-builder-core"
+        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
+
+        annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
+        annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    }
+
+}
+
+configure(subprojects.findAll { (it.name.startsWith("taotao-cloud-starter")) }) { project ->
+    dependencies {
+
+        api "io.soabase.record-builder:record-builder-core"
+        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    }
+
+}

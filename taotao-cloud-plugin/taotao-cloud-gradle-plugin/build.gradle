@@ -5,10 +5,10 @@ plugins {
     id "java-gradle-plugin"
 }
 
-shadowJar {
-    zip64 true
-    mergeServiceFiles()
-}
+//shadowJar {
+//    zip64 true
+//    mergeServiceFiles()
+//}
 
 dependencies {
     //添加gradle对应api

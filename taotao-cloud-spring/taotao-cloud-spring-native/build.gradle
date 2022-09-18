@@ -16,14 +16,14 @@ tasks.named("test") {
     useJUnitPlatform()
 }
 
-tasks.named("bootBuildImage") {
-    builder = "paketobuildpacks/builder:tiny"
-    environment = ["BP_NATIVE_IMAGE": "true"]
-}
+//tasks.named("bootBuildImage") {
+//    builder = "paketobuildpacks/builder:tiny"
+//    environment = ["BP_NATIVE_IMAGE": "true"]
+//}
 
-bootRun {
-    systemProperty "springAot", "true"
-}
+//bootRun {
+//    systemProperty "springAot", "true"
+//}
 
 //springAot {
 //    mode = AotMode.NATIVE

@@ -4,10 +4,5 @@ dependencies {
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
     compileOnly "io.seata:seata-all:1.5.1"
 
-    api "org.projectlombok:lombok"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
-    api "io.soabase.record-builder:record-builder-core"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 }

@@ -69,14 +69,6 @@ dependencies {
     //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
     //annotationProcessor project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation 'org.jeasy:easy-random:5.0.0'

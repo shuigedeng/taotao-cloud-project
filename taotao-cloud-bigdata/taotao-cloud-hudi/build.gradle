@@ -1,4 +1,6 @@
 apply plugin: "scala"
+apply plugin: "com.github.johnrengelman.shadow"
+
 //import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
 
 dependencies {
@@ -73,7 +75,7 @@ configurations {
     }
 }
 
-mainClassName = "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
+//mainClassName = "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
 
 shadowJar {
     mergeServiceFiles()
