@@ -115,9 +115,9 @@ services:
     container_name: nacos1
     privileged: true
     ports:
-      - "8840:8848"
-      - "7840:7848"
-      - "9840:9848"
+      - "8845:8848"
+      - "7845:7848"
+      - "9845:9848"
       - "9841:9849"
     environment:
       MODE: cluster
@@ -142,10 +142,10 @@ services:
     container_name: nacos2
     privileged: true
     ports:
-      - "8841:8848"
-      - "7841:7848"
-      - "9842:9848"
-      - "9843:9849"
+      - "8846:8848"
+      - "7846:7848"
+      - "9846:9848"
+      - "9842:9849"
     environment:
       MODE: cluster
       NACOS_APPLICATION_PORT: 8848
@@ -169,10 +169,10 @@ services:
     container_name: nacos3
     privileged: true
     ports:
-      - "8843:8848"
-      - "7843:7848"
-      - "9844:9848"
-      - "9845:9849"
+      - "8847:8848"
+      - "7847:7848"
+      - "9847:9848"
+      - "9843:9849"
     environment:
       MODE: cluster
       NACOS_APPLICATION_PORT: 8848
@@ -194,9 +194,13 @@ services:
     restart: always
     container_name: nacos-nginx
     ports:
-      - "8000:80"
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
     volumes:
-      - /root/cloud/nacos-nginx/config.d:/etc/nginx/conf.d
+      - /root/cloud/nacos-nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /root/cloud/nacos-nginx/conf:/etc/nginx/conf.d
+      - /root/cloud/nacos-nginx/logs:/var/log/nginx
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.19
@@ -401,7 +405,7 @@ services:
     environment:
       - node.name=es1
       - cluster.name=taotao-cloud-elasticsearch-cluster
-#      - discovery.seed_hosts=es2,es3
+      #      - discovery.seed_hosts=es2,es3
       - cluster.initial_master_nodes=es1
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - bootstrap.memory_lock=true
@@ -421,60 +425,60 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.32
-#  es2:
-#    image: elasticsearch:8.1.0
-#    container_name: es2
-#    environment:
-#      - node.name=es2
-#      - cluster.name=taotao-cloud-elasticsearch-cluster
-#      - discovery.seed_hosts=es1,es3
-#      - cluster.initial_master_nodes=es1
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#      - bootstrap.memory_lock=true
-#      - TZ="Asia/Shanghai"
-#      - xpack.security.enabled=false
-#      - http.cors.enabled=true
-#      - http.cors.allow-origin=*
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    volumes:
-#      - /root/cloud/es/es2/data:/usr/share/elasticsearch/data
-#      - /root/cloud/es/es2/plugins:/usr/share/elasticsearch/plugins
-#    ports:
-#      - "9201:9200"
-#      - "9301:9300"
-#    networks:
-#      taotao-cluster-network:
-#        ipv4_address: 172.11.0.33
-#  es3:
-#    image: elasticsearch:8.1.0
-#    container_name: es3
-#    environment:
-#      - node.name=es3
-#      - cluster.name=taotao-cloud-elasticsearch-cluster
-#      - discovery.seed_hosts=es1,es2
-#      - cluster.initial_master_nodes=es1
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#      - bootstrap.memory_lock=true
-#      - TZ="Asia/Shanghai"
-#      - xpack.security.enabled=false
-#      - http.cors.enabled=true
-#      - http.cors.allow-origin=*
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    volumes:
-#      - /root/cloud/es/es3/data:/usr/share/elasticsearch/data
-#      - /root/cloud/es/es3/plugins:/usr/share/elasticsearch/plugins
-#    ports:
-#      - "9202:9200"
-#      - "9302:9300"
-#    networks:
-#      taotao-cluster-network:
-#        ipv4_address: 172.11.0.34
+  #  es2:
+  #    image: elasticsearch:8.1.0
+  #    container_name: es2
+  #    environment:
+  #      - node.name=es2
+  #      - cluster.name=taotao-cloud-elasticsearch-cluster
+  #      - discovery.seed_hosts=es1,es3
+  #      - cluster.initial_master_nodes=es1
+  #      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #      - bootstrap.memory_lock=true
+  #      - TZ="Asia/Shanghai"
+  #      - xpack.security.enabled=false
+  #      - http.cors.enabled=true
+  #      - http.cors.allow-origin=*
+  #    ulimits:
+  #      memlock:
+  #        soft: -1
+  #        hard: -1
+  #    volumes:
+  #      - /root/cloud/es/es2/data:/usr/share/elasticsearch/data
+  #      - /root/cloud/es/es2/plugins:/usr/share/elasticsearch/plugins
+  #    ports:
+  #      - "9201:9200"
+  #      - "9301:9300"
+  #    networks:
+  #      taotao-cluster-network:
+  #        ipv4_address: 172.11.0.33
+  #  es3:
+  #    image: elasticsearch:8.1.0
+  #    container_name: es3
+  #    environment:
+  #      - node.name=es3
+  #      - cluster.name=taotao-cloud-elasticsearch-cluster
+  #      - discovery.seed_hosts=es1,es2
+  #      - cluster.initial_master_nodes=es1
+  #      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #      - bootstrap.memory_lock=true
+  #      - TZ="Asia/Shanghai"
+  #      - xpack.security.enabled=false
+  #      - http.cors.enabled=true
+  #      - http.cors.allow-origin=*
+  #    ulimits:
+  #      memlock:
+  #        soft: -1
+  #        hard: -1
+  #    volumes:
+  #      - /root/cloud/es/es3/data:/usr/share/elasticsearch/data
+  #      - /root/cloud/es/es3/plugins:/usr/share/elasticsearch/plugins
+  #    ports:
+  #      - "9202:9200"
+  #      - "9302:9300"
+  #    networks:
+  #      taotao-cluster-network:
+  #        ipv4_address: 172.11.0.34
 
   #https://github.com/medcl/elasticsearch-analysis-ik/releases
   kibana:
@@ -484,8 +488,8 @@ services:
       - es1
     depends_on:
       - es1
-#      - es2
-#      - es3
+    #      - es2
+    #      - es3
     environment:
       I18N_LOCALE: zh-CN
       ELASTICSEARCH_URL: http://es1:9200
