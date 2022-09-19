@@ -17,14 +17,12 @@ package com.taotao.cloud.sys.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import java.io.File;
 import org.springframework.boot.SpringApplication;
 
-import java.io.File;
-
 /**
- * TaoTaoCloudSysApplication
- * 抑制java9 module 报错
- * <p>
+ * TaoTaoCloudSysApplication 抑制java9 module 报错
+ * <pre class="code">
  * --add-opens java.base/java.lang=ALL-UNNAMED
  * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
  * --add-opens java.base/java.lang.invoke=ALL-UNNAMED
@@ -37,6 +35,7 @@ import java.io.File;
  * --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
  * --add-exports java.desktop/sun.awt=ALL-UNNAMED
  * --add-exports java.desktop/sun.font=ALL-UNNAMED
+ * </pre>
  *
  * @author shuigedeng
  * @version 2022.03
@@ -50,7 +49,7 @@ public class TaoTaoCloudSysApplication {
 
 		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 	}
-	
+
 	public static void setNacosProperty() {
 		/**
 		 * 设置nacos客户端日志和快照目录
@@ -58,9 +57,11 @@ public class TaoTaoCloudSysApplication {
 		 * @see LocalConfigInfoProcessor
 		 */
 		String userHome = System.getProperty("user.home");
-		System.setProperty("JM.LOG.PATH", userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
-		System.setProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
-		System.setProperty("nacos.logging.default.config.enabled", "false");
+		System.setProperty("JM.LOG.PATH",
+			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
+		System.setProperty("JM.SNAPSHOT.PATH",
+			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
+		System.setProperty("nacos.logging.default.config.enabled", "true");
 	}
 
 }
