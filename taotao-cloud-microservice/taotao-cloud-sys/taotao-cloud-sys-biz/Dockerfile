@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-sys-biz-2022.09.jar ./
+ADD ./build/libs/taotao-cloud-sys-2022.09.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-sys-biz-2022.09.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-sys-2022.09.jar extract
 
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
