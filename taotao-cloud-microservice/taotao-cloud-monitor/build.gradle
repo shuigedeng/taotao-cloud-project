@@ -19,11 +19,11 @@ dependencies {
     implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 
+mainClassName = "com.taotao.cloud.monitor.biz.TaoTaoCloudMonitorApplication"
+description = "监控模块"
+archivesBaseName = 'taotao-cloud-monitor'
 
 bootBuildImage {
     builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"

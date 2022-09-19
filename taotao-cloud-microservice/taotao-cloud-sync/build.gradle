@@ -15,10 +15,9 @@ dependencies {
 
     implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
     implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
+
+mainClassName = "com.taotao.cloud.sync.biz.TaoTaoCloudSyncApplication"
+description = "数据同步模块"
+archivesBaseName = 'taotao-cloud-sync'
 

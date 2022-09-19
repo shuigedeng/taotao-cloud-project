@@ -9,7 +9,7 @@ on:
   #    - 'taotao-cloud-microservice/taotao-cloud-starter/**'
   #  branches: [ master ]
   release:
-    types: [created]
+    types: [ created ]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
@@ -71,14 +71,14 @@ jobs:
             if [ -d $starter_inner_dir ];then
               if [ -d "$starter_inner_dir/src" ];then
                  cd $starter_inner_dir
-                 gradle --continue clean build -x test -x bootJar
+                 gradle --continue clean build -x test -x bootJar --parallel
                  gradle publishAllPublicationsToSonatypeRepository
               else
                 for two_starter in `ls $starter_inner_dir`
                 do
                   if [ -d "$starter_inner_dir/$two_starter" ];then
                     cd "$starter_inner_dir/$two_starter"
-                    gradle --continue clean build -x test -x bootJar
+                    gradle --continue clean build -x test -x bootJar --parallel
                     gradle publishAllPublicationsToSonatypeRepository
                   fi
                 done

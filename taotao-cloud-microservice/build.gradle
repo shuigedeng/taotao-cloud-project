@@ -1,32 +1,25 @@
-dependencies {
-
-}
-
 subprojects {
     dependencies {
         testImplementation "org.springframework.boot:spring-boot-starter-test"
         testImplementation "org.testcontainers:junit-jupiter"
         testImplementation "org.springframework.boot:spring-boot-starter-web"
+
+        api "io.soabase.record-builder:record-builder-core"
+        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
     }
 }
 
 configure(subprojects.findAll { it -> (!it.name.startsWith("taotao-cloud-starter")) }) { project ->
 
-    apply from: rootProject.file('gradles/springboot.gradle')
-
-    apply plugin: "com.github.johnrengelman.shadow"
-
-    //shadowJar {
-    //    manifest {
-    //        inheritFrom project.tasks.jar.manifest
-    //    }
-    //}
-
-    shadowJar {
-        zip64 true
-        mergeServiceFiles()
-        classifier = null
-    }
+    apply from: rootProject.file('gradle/springboot.gradle')
+    apply from: rootProject.file('gradle/smart-doc.gradle')
+    apply from: rootProject.file('gradle/springdoc-openapi.gradle')
+    apply from: rootProject.file('gradle/docker.gradle')
+    apply from: rootProject.file('gradle/google-tools-jib.gradle')
+    //apply from: rootProject.file('gradle/sonar.gradle')
+    apply from: rootProject.file('gradle/shadow.gradle')
 
     task createProperties(dependsOn: processResources) {
         doLast {
@@ -60,24 +53,12 @@ configure(subprojects.findAll { it -> (!it.name.startsWith("taotao-cloud-starter
         api "io.soabase.record-builder:record-builder-core"
         annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 
+        api "org.mapstruct:mapstruct"
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
 
         annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
         annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
     }
-
-}
-
-configure(subprojects.findAll { (it.name.startsWith("taotao-cloud-starter")) }) { project ->
-    dependencies {
-
-        api "io.soabase.record-builder:record-builder-core"
-        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-
-        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-    }
-
 }

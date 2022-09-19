@@ -36,18 +36,14 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-graphql"
 
-    implementation "org.mapstruct:mapstruct"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-
     implementation "org.springframework.cloud:spring-cloud-context"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
     api "javax.servlet:javax.servlet-api"
     developmentOnly "org.springframework.boot:spring-boot-devtools"
     runtimeOnly "com.h2database:h2"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 
+mainClassName = "com.taotao.cloud.graphql.biz.TaoTaoCloudGraphqlApplication"
+description = "graphql模块"
+archivesBaseName = 'taotao-cloud-graphql'

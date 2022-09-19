@@ -28,35 +28,9 @@ dependencies {
     implementation "com.paypal.sdk:checkout-sdk:1.0.5"
 
     implementation "com.yungouos.pay:yungouos-pay-sdk:2.0.26"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 
-//shadowJar {
-//    zip64 true
-//    mergeServiceFiles()
-//    classifier = null
-//    version = 1.0
-//    manifest {
-//        attributes(
-//                "Main-Class": "com.taotao.cloud.logistics.biz.TaoTaoCloudLogisticsApplication"
-//        )
-//    }
-//
-//    dependencies {
-//        // exclude(dependency("xml-apis:xml-apis:.*"))
-//        // exclude(dependency("xerces:xercesImpl:.*"))
-//        // exclude(dependency { it.moduleGroup == "xml-apis" })
-//        // exclude(dependency { it.moduleGroup == "org.apache.spark" })
-//        // exclude(dependency { it.moduleGroup == "org.scala-lang" })
-//    }
-//
-//    //append "META-INF/spring.handlers"
-//    //append "META-INF/spring.schemas"
-//    //append "META-INF/spring.tooling"
-//    //transform(PropertiesFileTransformer) {
-//    //    paths = ["META-INF/spring.factories" ]
-//    //    mergeStrategy = "append"
-//    //}
-//}
+mainClassName = "com.taotao.cloud.payment.biz.TaoTaoCloudPayApplication"
+description = "支付模块"
+archivesBaseName = 'taotao-cloud-payment'
+

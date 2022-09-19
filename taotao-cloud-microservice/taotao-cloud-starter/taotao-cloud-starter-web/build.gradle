@@ -42,9 +42,6 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-test"
     api "org.springframework.boot:spring-boot-starter-thymeleaf"
 
-    //https://search.maven.org/artifact/org.mapstruct/mapstruct
-    api "org.mapstruct:mapstruct"
-
     //https://search.maven.org/artifact/cn.afterturn/easypoi
     api "cn.afterturn:easypoi-base:4.4.0"
     api "cn.afterturn:easypoi-web:4.4.0"

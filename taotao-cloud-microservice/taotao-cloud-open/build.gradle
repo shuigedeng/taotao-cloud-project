@@ -40,10 +40,11 @@ dependencies {
 
     api "io.soabase.record-builder:record-builder-core"
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
+
+mainClassName = "com.taotao.cloud.open.biz.TaoTaoCloudOpenApplication"
+description = "开发平台模块"
+archivesBaseName = 'taotao-cloud-open'
 
 bootBuildImage {
     builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"

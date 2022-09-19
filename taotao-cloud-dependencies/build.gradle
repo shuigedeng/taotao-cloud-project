@@ -2,7 +2,7 @@ plugins {
     id "java-platform"
 }
 
-apply from: rootProject.file('gradles/publish-bom.gradle')
+apply from: rootProject.file('gradle/publish-bom.gradle')
 
 javaPlatform {
     allowDependencies()

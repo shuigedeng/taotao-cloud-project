@@ -20,10 +20,44 @@ package com.taotao.cloud.common.utils.io;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
-import java.util.*;
+
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+import java.util.OptionalLong;
+import java.util.PrimitiveIterator;
+import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.Spliterators.AbstractSpliterator;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
+import java.util.function.Function;
+import java.util.function.IntConsumer;
+import java.util.function.IntFunction;
+import java.util.function.LongConsumer;
+import java.util.function.LongFunction;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static java.lang.Math.min;
 import static java.util.Objects.requireNonNull;
@@ -981,5 +1015,30 @@ public class StreamUtils {
 		}
 		return map;
 	}
+
+	/**
+	 * 利用java8的stream对list进行分页
+	 * <p>
+	 * 这种一次性查出来的数据如果相当大，比如1GB、10GB，有可能发生内存溢出。一万条数据（60个字段）大概3MB。建议表数据量在100万条数据内，使用此方法
+	 *
+	 * @param list     需要分页的list，一般为全量
+	 * @param pageNum  当前页
+	 * @param pageSize 每页大小
+	 * @param <E>      元素
+	 * @return list
+	 */
+	public static <E> List<E> getLimitList(List<E> list, Integer pageNum, Integer pageSize) {
+		if (list == null || list.size() == 0) {
+			return list;
+		}
+		if (pageNum == null || pageNum < 1) {
+			pageNum = 1;
+		}
+		if (pageSize == null || pageSize < 0) {
+			pageSize = 10;
+		}
+		return list.stream().skip((long) (pageNum - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
+	}
+
 
 }

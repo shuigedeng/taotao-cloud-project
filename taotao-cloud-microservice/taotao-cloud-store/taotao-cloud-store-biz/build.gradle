@@ -15,11 +15,11 @@ dependencies {
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 
+mainClassName = "com.taotao.cloud.sync.biz.TaoTaoCloudStoreApplication"
+description = "商店模块"
+archivesBaseName = 'taotao-cloud-store'
 
 configurations {
     all {
@@ -41,32 +41,4 @@ configurations {
     }
 }
 
-//shadowJar {
-//    zip64 true
-//    mergeServiceFiles()
-//    classifier = null
-//    version = 1.0
-//    manifest {
-//        attributes(
-//                "Main-Class": "com.taotao.cloud.aftersale.biz.TaoTaoCloudAfterSaleApplication"
-//        )
-//    }
-//
-//    dependencies {
-//        // exclude(dependency("xml-apis:xml-apis:.*"))
-//        // exclude(dependency("xerces:xercesImpl:.*"))
-//        // exclude(dependency { it.moduleGroup == "xml-apis" })
-//        // exclude(dependency { it.moduleGroup == "org.apache.spark" })
-//        // exclude(dependency { it.moduleGroup == "org.scala-lang" })
-//    }
-//
-//    //append "META-INF/spring.handlers"
-//    //append "META-INF/spring.schemas"
-//    //append "META-INF/spring.tooling"
-//    //transform(PropertiesFileTransformer) {
-//    //    paths = ["META-INF/spring.factories" ]
-//    //    mergeStrategy = "append"
-//    //}
-//}
-//
-//
+

@@ -3,6 +3,6 @@ dependencies {
 
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
     compileOnly "io.seata:seata-all:1.5.1"
-
-
 }
+
+description = "系统模块api"

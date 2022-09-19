@@ -13,6 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*
+    buildscript代码块中的声明是gradle脚本自身需要的资源。
+    可以声明的资源包括依赖项、第三方插件、maven仓库地址等。
+    gradle在执行脚本时，会优先执行buildscript代码块中的内容，然后才会执行剩余的build脚本。
+    该部分代码应该置顶
+*/
 buildscript {
     ext {
         taotaoCloudVersion = version
@@ -233,53 +240,80 @@ buildscript {
     }
 
     dependencies {
+        /* 添加插件依赖路径（通过jar方式） */
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 
         //https://github.com/google/protobuf-gradle-plugin/
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.19'
-
-        //https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin
-        //classpath "com.google.cloud.tools:jib-gradle-plugin:3.3.0"
     }
 }
 
 plugins {
-    id 'java'
-    id 'java-library'
-    id 'idea'
-    id 'signing'
-    id 'maven-publish'
-    //id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    // *******************************************gradle核心插件************************************************************
+    //https://docs.gradle.org/current/userguide/plugin_reference.html
 
+    //Java 插件将 Java 编译以及测试和捆绑功能添加到项目中。它是许多其他 JVM 语言 Gradle 插件的基础
+    id 'java'
+    // Java 库插件通过提供有关 Java 库的特定知识来扩展 Java 插件的功能。
+    id 'java-library'
+    //IDEA 插件生成 IntelliJ IDEA 使用的文件，从而可以从 IDEA（文件 - 打开项目）打开项目。外部依赖项（包括相关的源文件和 Javadoc 文件）和项目依赖项都被考虑在内。
+    id 'idea'
+    //签名插件增加了对构建文件和工件进行数字签名的能力。然后，这些数字签名可用于证明谁构建了签名所附加的工件以及其他信息，例如生成签名的时间。
+    id 'signing'
+    //Maven 发布插件提供了将构建工件发布到 Apache Maven 存储库的能力
+    id 'maven-publish'
+    //JaCoCo 插件通过与 JaCoCo 集成为 Java 代码提供代码覆盖率指标。
+    id 'jacoco'
+    //Checkstyle 插件使用 Checkstyle 对项目的 Java 源文件执行质量检查，并根据这些检查生成报告。
+    id 'checkstyle'
+    //Application 插件有助于创建可执行的 JVM 应用程序。它可以在开发过程中轻松地在本地启动应用程序，并将应用程序打包为 TAR 和/或 ZIP，包括操作系统特定的启动脚本。
+    id 'application'
+
+    // *******************************************第三方插件************************************************************
+    //google出品的一个插件，可以直接将SpringBoot构建推送到Docker仓库
     //https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
     id "com.google.cloud.tools.jib" version "3.3.0"
 
+    //用于创建和管理外部进程的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.processes
     id "com.github.johnrengelman.processes" version "0.5.0"
 
+    //此插件在构建期间生成 json OpenAPI 描述
     // https://plugins.gradle.org/plugin/org.springdoc.openapi-gradle-plugin
     id "org.springdoc.openapi-gradle-plugin" version "1.4.0"
 
+    //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.github.shalousun.smart-doc
     id "com.github.shalousun.smart-doc" version "2.5.3"
 
+    //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
     id "org.owasp.dependencycheck" version "7.2.0"
 
+    //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
     id "com.bmuschko.docker-spring-boot-application" version "8.0.0"
 
+    //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
     id "com.github.johnrengelman.shadow" version "7.1.2"
+
+    //用于运行 SonarQube 分析的 Gradle 插件。
+    //https://plugins.gradle.org/plugin/org.sonarqube
+    id "org.sonarqube" version "3.4.0.2513"
+
+    //id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 }
 
 allprojects {
     version project.taotaoCloudVersion
     group project.taotaoCloudGroup
 
+    /* 指定jdk版本 */
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 
+    /* java编译的时候缺省状态下会因为中文字符而失败 */
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
     repositories {
@@ -317,6 +351,16 @@ allprojects {
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
         maven { url 'https://repo.spring.io/release' }
+
+        maven { name "Alibaba central"; url "https://maven.aliyun.com/repository/central" }
+        maven { name "Alibaba"; url "https://maven.aliyun.com/repository/public" }
+        maven { name "Alibaba google"; url "https://maven.aliyun.com/repository/google" }
+        maven { name "Alibaba gradle-plugin"; url "https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { name "Alibaba spring"; url "https://maven.aliyun.com/repository/spring" }
+        maven { name "Alibaba spring-plugin"; url "https://maven.aliyun.com/repository/spring-plugin" }
+        maven { name "Alibaba grails-core"; url "https://maven.aliyun.com/repository/grails-core" }
+        maven { name "Alibaba apache-snapshots"; url "https://maven.aliyun.com/repository/apache-snapshots" }
+        maven { name = "华为开源镜像库"; url "https://mirrors.huaweicloud.com/repository/maven/" }
     }
 }
 
@@ -328,10 +372,10 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: "com.taotao.cloud.plugin"
     apply plugin: "org.owasp.dependencycheck"
 
-    apply from: rootProject.file('gradles/jacoco.gradle')
-    apply from: rootProject.file('gradles/publish-jar.gradle')
-    apply from: rootProject.file('gradles/test.gradle')
-    apply from: rootProject.file('gradles/checkstyle.gradle')
+    apply from: rootProject.file('gradle/jacoco.gradle')
+    apply from: rootProject.file('gradle/publish-jar.gradle')
+    apply from: rootProject.file('gradle/test.gradle')
+    apply from: rootProject.file('gradle/checkstyle.gradle')
 
     dependencies {
         implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
