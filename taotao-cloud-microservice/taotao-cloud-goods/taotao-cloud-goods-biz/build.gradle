@@ -16,10 +16,11 @@ dependencies {
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
+
+mainClassName = "com.taotao.cloud.goods.biz.TaoTaoCloudGoodsApplication"
+description = "商品模块"
+archivesBaseName = 'taotao-cloud-goods'
 
 configurations {
     all {

@@ -21,15 +21,8 @@ dependencies {
     // 腾讯企点开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-qidian-spring-boot-starter
     implementation "com.github.binarywang:wx-java-qidian-spring-boot-starter:4.4.0"
-
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
+
+mainClassName = "com.taotao.cloud.wechat.biz.TaoTaoCloudWechatApplication"
+description = "微信模块"
+archivesBaseName = 'taotao-cloud-wechat'

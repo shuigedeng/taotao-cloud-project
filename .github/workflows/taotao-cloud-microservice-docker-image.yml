@@ -77,7 +77,7 @@ jobs:
           username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
           password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
           registry: registry.cn-hangzhou.aliyuncs.com
-          buildoptions: "--compress --force-rm"
+          buildoptions: "--compress --force-rm --parallel"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
 
@@ -97,7 +97,7 @@ jobs:
           username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
           password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
           registry: registry.cn-hangzhou.aliyuncs.com
-          buildoptions: "--compress --force-rm"
+          buildoptions: "--compress --force-rm --parallel"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway
 
@@ -117,7 +117,7 @@ jobs:
           username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
           password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
           registry: registry.cn-hangzhou.aliyuncs.com
-          buildoptions: "--compress --force-rm"
+          buildoptions: "--compress --force-rm --parallel"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
 
@@ -137,7 +137,7 @@ jobs:
           username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
           password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
           registry: registry.cn-hangzhou.aliyuncs.com
-          buildoptions: "--compress --force-rm"
+          buildoptions: "--compress --force-rm --parallel"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-xxljob
 
@@ -157,7 +157,7 @@ jobs:
           username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
           password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
           registry: registry.cn-hangzhou.aliyuncs.com
-          buildoptions: "--compress --force-rm"
+          buildoptions: "--compress --force-rm --parallel"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
 
@@ -177,7 +177,7 @@ jobs:
           username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
           password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
           registry: registry.cn-hangzhou.aliyuncs.com
-          buildoptions: "--compress --force-rm"
+          buildoptions: "--compress --force-rm --parallel"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
 

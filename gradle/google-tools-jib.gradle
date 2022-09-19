@@ -1,0 +1,37 @@
+apply plugin: "com.google.cloud.tools.jib"
+
+jib {
+    //https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
+    allowInsecureRegistries = true
+    from {
+        image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64"
+        auth {
+            username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
+            password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
+        }
+    }
+    to {
+        image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor"
+        tags = ["${project.name}-${project.version}"]
+        auth {
+            username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
+            password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
+        }
+    }
+    container {
+        creationTime = "USE_CURRENT_TIMESTAMP"
+        jvmFlags = ["-Djava.security.egd=file:/dev/./urandom",
+                    "-Dspring.profiles.active=dev",
+                    "-Dfile.encoding=utf-8",
+                    "-Duser.timezone=Asia/Shanghai"]
+        mainClass = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
+        args = ["some", "args"]
+        ports = ["33337"]
+        //labels = ["app_name": "taotao-cloud-sys", "port": "33337"]
+        environment = ["app_name": "taotao-cloud-sys", "port": "33337"]
+        format = "OCI"
+        user = "root"
+        volumes = ["/root/logs"]
+        workingDirectory = "/root"
+    }
+}

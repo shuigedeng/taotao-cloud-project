@@ -1,8 +1,3 @@
-apply from: rootProject.file('gradles/smart-doc.gradle')
-apply from: rootProject.file('gradles/springdoc-openapi.gradle')
-apply from: rootProject.file('gradles/docker.gradle')
-apply from: rootProject.file('gradles/google-tools-jib.gradle')
-
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream")
@@ -69,8 +64,6 @@ dependencies {
     //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
     //annotationProcessor project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
     testImplementation 'org.jeasy:easy-random:5.0.0'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
 
@@ -109,6 +102,7 @@ dependencies {
 
 mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
 description = "系统模块"
+archivesBaseName = 'taotao-cloud-sys'
 
 configurations {
     all {

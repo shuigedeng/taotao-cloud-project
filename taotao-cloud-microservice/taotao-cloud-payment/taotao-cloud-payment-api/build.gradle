@@ -1,10 +1,5 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
-
-    api "org.projectlombok:lombok"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-
-    api "io.soabase.record-builder:record-builder-core"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 }
+
+description = "支付模块api"

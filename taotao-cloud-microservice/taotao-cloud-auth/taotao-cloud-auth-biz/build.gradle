@@ -49,22 +49,8 @@ dependencies {
     implementation "org.springframework:spring-webflux"
     implementation "io.projectreactor.netty:reactor-netty-http"
     implementation "io.projectreactor.netty:reactor-netty"
-
-    implementation "org.mapstruct:mapstruct"
-    implementation "org.projectlombok:lombok"
-    implementation "io.soabase.record-builder:record-builder-core"
-
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 
 mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
-
+description = "认证模块"
+archivesBaseName = 'taotao-cloud-auth'

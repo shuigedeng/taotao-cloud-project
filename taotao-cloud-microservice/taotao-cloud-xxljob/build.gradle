@@ -14,11 +14,9 @@ dependencies {
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2"
     implementation "mysql:mysql-connector-java"
     implementation "com.xuxueli:xxl-job-core"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
+
+mainClassName = "com.taotao.cloud.xxljob.biz.TaoTaoCloudXxlJobApplication"
+description = "xxljob模块"
+archivesBaseName = 'taotao-cloud-xxljob'
 

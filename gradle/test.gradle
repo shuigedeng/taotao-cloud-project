@@ -1,0 +1,51 @@
+test {
+    // 如需要打印日志 添加 --info
+    //:taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-biz:test --tests "com.taotao.cloud.sys.biz.RegionTests.synchronizationData" --info
+    useJUnitPlatform()
+    ignoreFailures = true
+
+    testLogging {
+        outputs.upToDateWhen { false }
+    }
+
+    afterTest { desc, result ->
+        logger.quiet "Execution test ${desc.name} [${desc.className}] with result; ${result.resultType}"
+    }
+
+    afterSuite { desc, result ->
+        println "Execution test ${result} ${desc}"
+        //if(!desc.parent)
+        //    println("${result.resultType}" +
+        //            "${result.testCount} tests" +
+        //            "${result.successful}")
+    }
+
+    jvmArgs = [
+            '-Xshare:off',
+            '--add-opens=java.base/java.lang=ALL-UNNAMED',
+            '--add-opens=java.base/java.lang.reflect=ALL-UNNAMED',
+            '--add-opens=java.base/java.lang.invoke=ALL-UNNAMED',
+            '--add-opens=java.base/java.util=ALL-UNNAMED',
+            '--add-opens=java.base/sun.net=ALL-UNNAMED',
+            '--add-opens=java.base/java.math=ALL-UNNAMED',
+            '--add-opens=java.base/sun.reflect.annotation=ALL-UNNAMED',
+            '--add-opens=java.desktop/sun.awt=ALL-UNNAMED',
+            '--add-opens=java.desktop/sun.font=ALL-UNNAMED',
+            '--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED',
+            '--add-exports=java.desktop/sun.awt=ALL-UNNAMED',
+            '--add-exports=java.desktop/sun.font=ALL-UNNAMED'
+    ]
+
+    //编译时自动执行jacocoTestReport，生成报告；报告路径build/reports/jacoco/test/html/index.html
+    finalizedBy jacocoTestReport // report is always generated after tests run
+
+}
+
+/**
+ * clean 命令时删除 logs 目录
+ */
+task cleanOutDir(type: Delete) {
+    delete "${projectDir}/logs"
+    delete "${rootDir}/logs"
+}
+tasks.clean.dependsOn(cleanOutDir)
