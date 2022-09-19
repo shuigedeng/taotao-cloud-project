@@ -71,14 +71,14 @@ jobs:
             if [ -d $starter_inner_dir ];then
               if [ -d "$starter_inner_dir/src" ];then
                  cd $starter_inner_dir
-                 gradle  --parallel --continue clean build -x test -x checkstyle
+                 gradle  --parallel --continue clean build -x test -x checkstyleMain -x checkstyleTest
                  gradle publishAllPublicationsToSonatypeRepository
               else
                 for two_starter in `ls $starter_inner_dir`
                 do
                   if [ -d "$starter_inner_dir/$two_starter" ];then
                     cd "$starter_inner_dir/$two_starter"
-                    gradle  --parallel --continue clean build -x test -x checkstyle
+                    gradle  --parallel --continue clean build -x test -x checkstyleMain -x checkstyleTest
                     gradle publishAllPublicationsToSonatypeRepository
                   fi
                 done
