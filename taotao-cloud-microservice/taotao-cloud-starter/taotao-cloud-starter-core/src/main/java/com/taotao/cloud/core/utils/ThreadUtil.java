@@ -64,17 +64,17 @@ public class ThreadUtil extends cn.hutool.core.thread.ThreadUtil {
 	/**
 	 * 线程池分批执行某个方法（batchExecute(temList,storeCode1)），所有数据都执行完成后返回数据
 	 *
-	 * @param pageSize   页面大小
-	 * @param timeout    超时(分组)
-	 * @param dataList   数据列表
-	 * @param middleFunc 中间函数
-	 * @param resultFunc 结果函数
+	 * @param batchExecuteSize 批次执行的数量
+	 * @param timeout          超时(分组)
+	 * @param dataList         数据列表
+	 * @param middleFunc       中间函数
+	 * @param resultFunc       结果函数
 	 * @return {@link List }<{@link R }>
-	 * @since 2022-09-15 13:05:39
+	 * @since 2022-09-19 16:35:32
 	 */
-	public static <R, M, D> List<R> batchExecute(int pageSize, long timeout, List<D> dataList, java.util.function.Function<List<D>, M> middleFunc, java.util.function.Function<M, R> resultFunc) {
+	public static <R, M, D> List<R> batchExecute(int batchExecuteSize, long timeout, List<D> dataList, java.util.function.Function<List<D>, M> middleFunc, java.util.function.Function<M, R> resultFunc) {
 		int totalSize = dataList.size();
-		int totalPage = totalSize / pageSize;
+		int totalPage = totalSize / batchExecuteSize;
 
 		ExecutorService pool = new ThreadPoolExecutor(totalPage + 1, totalPage + 1,
 			0L, TimeUnit.MILLISECONDS,
@@ -82,8 +82,8 @@ public class ThreadUtil extends cn.hutool.core.thread.ThreadUtil {
 
 		List<Future<M>> futureList = new ArrayList<>();
 		for (int pageNum = 1; pageNum <= totalPage + 1; pageNum++) {
-			int starNum = (pageNum - 1) * pageSize;
-			int endNum = Math.min(pageNum * pageSize, totalSize);
+			int starNum = (pageNum - 1) * batchExecuteSize;
+			int endNum = Math.min(pageNum * batchExecuteSize, totalSize);
 			List<D> temList = dataList.subList(starNum, endNum);
 
 			if (CollectionUtil.isNotEmpty(temList)) {

@@ -30,9 +30,9 @@ public class DependWrapper {
 	 * @since 2022-05-30 13:25:10
 	 */
 	public DependWrapper(WorkerWrapper<?, ?> dependWrapper, boolean must) {
-        this.dependWrapper = dependWrapper;
-        this.must = must;
-    }
+		this.dependWrapper = dependWrapper;
+		this.must = must;
+	}
 
 	/**
 	 * 取决于包装
@@ -40,17 +40,17 @@ public class DependWrapper {
 	 * @since 2022-05-30 13:25:10
 	 */
 	public DependWrapper() {
-    }
+	}
 
 	/**
 	 * 得靠包装
 	 *
 	 * @return {@link WorkerWrapper }<{@link ? }, {@link ? }>
-	 * @since 2022-05-30 13:25:10
+	 * @since 2022-09-19 16:38:39
 	 */
 	public WorkerWrapper<?, ?> getDependWrapper() {
-        return dependWrapper;
-    }
+		return dependWrapper;
+	}
 
 	/**
 	 * 设置取决于包装
@@ -59,8 +59,8 @@ public class DependWrapper {
 	 * @since 2022-05-30 13:25:10
 	 */
 	public void setDependWrapper(WorkerWrapper<?, ?> dependWrapper) {
-        this.dependWrapper = dependWrapper;
-    }
+		this.dependWrapper = dependWrapper;
+	}
 
 	/**
 	 * 是必须
@@ -69,8 +69,8 @@ public class DependWrapper {
 	 * @since 2022-05-30 13:25:10
 	 */
 	public boolean isMust() {
-        return must;
-    }
+		return must;
+	}
 
 	/**
 	 * 设置必须
@@ -79,8 +79,8 @@ public class DependWrapper {
 	 * @since 2022-05-30 13:25:10
 	 */
 	public void setMust(boolean must) {
-        this.must = must;
-    }
+		this.must = must;
+	}
 
 	/**
 	 * 字符串
@@ -89,10 +89,10 @@ public class DependWrapper {
 	 * @since 2022-05-30 13:25:10
 	 */
 	@Override
-    public String toString() {
-        return "DependWrapper{" +
-                "dependWrapper=" + dependWrapper +
-                ", must=" + must +
-                '}';
-    }
+	public String toString() {
+		return "DependWrapper{" +
+			"dependWrapper=" + dependWrapper +
+			", must=" + must +
+			'}';
+	}
 }
