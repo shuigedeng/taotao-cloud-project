@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.config.runner;
+package com.taotao.cloud.sys.biz.config.init;
 
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
 import com.taotao.cloud.sys.biz.service.business.IVisitsService;

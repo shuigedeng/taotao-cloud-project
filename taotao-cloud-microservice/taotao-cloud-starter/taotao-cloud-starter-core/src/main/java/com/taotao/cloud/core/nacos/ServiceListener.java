@@ -18,19 +18,17 @@ package com.taotao.cloud.core.nacos;
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.alibaba.cloud.nacos.NacosServiceManager;
 import com.alibaba.cloud.nacos.discovery.NacosDiscoveryClient;
-import com.alibaba.nacos.api.naming.listener.Event;
-import com.alibaba.nacos.api.naming.listener.EventListener;
 import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * ConfigService
@@ -59,46 +57,41 @@ public class ServiceListener implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			nacosServiceManager.getNamingService(new Properties()).subscribe(properties.getService(), properties.getGroup(),
-				Arrays.asList(properties.getClusterName()), new EventListener() {
-					@Override
-					public void onEvent(Event event) {
-						if (event instanceof NamingEvent) {
-							List<Instance> instances = ((NamingEvent) event).getInstances();
+			nacosServiceManager.getNamingService().subscribe(properties.getService(), properties.getGroup(),
+				Collections.singletonList(properties.getClusterName()), event -> {
+					if (event instanceof NamingEvent) {
+						List<Instance> instances = ((NamingEvent) event).getInstances();
 
-							LogUtils.info("");
+						LogUtils.info("");
 
-							//Optional instanceOptional = NacosWatch.this.selectCurrentInstance(instances);
-							//instanceOptional.ifPresent((currentInstance) -> {
-							//	NacosWatch.this.resetIfNeeded(currentInstance);
-							//});
-						}
-
+						//Optional instanceOptional = NacosWatch.this.selectCurrentInstance(instances);
+						//instanceOptional.ifPresent((currentInstance) -> {
+						//	NacosWatch.this.resetIfNeeded(currentInstance);
+						//});
 					}
+
 				});
 
 
 			List<String> services = discoveryClient.getServices();
 			if (!services.isEmpty()) {
 				for (String service : services) {
-					nacosServiceManager.getNamingService(new Properties())
-						.subscribe(service, this.properties.getGroup(),
+					nacosServiceManager.getNamingService()
+						.subscribe(service,
+							this.properties.getGroup(),
 							List.of(this.properties.getClusterName()),
-							new EventListener() {
-								@Override
-								public void onEvent(Event event) {
-									if (event instanceof NamingEvent) {
-										List instances = ((NamingEvent) event).getInstances();
+							event -> {
+								if (event instanceof NamingEvent) {
+									List instances = ((NamingEvent) event).getInstances();
 
-										LogUtils.info("");
+									LogUtils.info("");
 
-										//Optional instanceOptional = NacosWatch.this.selectCurrentInstance(instances);
-										//instanceOptional.ifPresent((currentInstance) -> {
-										//	NacosWatch.this.resetIfNeeded(currentInstance);
-										//});
-									}
-
+									//Optional instanceOptional = NacosWatch.this.selectCurrentInstance(instances);
+									//instanceOptional.ifPresent((currentInstance) -> {
+									//	NacosWatch.this.resetIfNeeded(currentInstance);
+									//});
 								}
+
 							});
 				}
 			}

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * 代码生成相关配置
  */
 @Component
-@ConfigurationProperties(prefix = "gen")
+@ConfigurationProperties(prefix = "taotao.cloud.sys.gen")
 public class GenConfig {
 	/**
 	 * 作者

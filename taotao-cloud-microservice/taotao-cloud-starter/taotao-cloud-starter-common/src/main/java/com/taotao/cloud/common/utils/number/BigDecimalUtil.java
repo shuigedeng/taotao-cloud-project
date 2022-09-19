@@ -115,10 +115,12 @@ public class BigDecimalUtil {
 
 	/**
 	 * 比较大小
+	 * first > last =1 / first == last = 0 / first < last = -1
 	 *
 	 * @param first 数字1
 	 * @param last  数字2
-	 * @return first > last =1 / first == last = 0 / first < last = -1
+	 * @return int
+	 * @since 2022-09-19 16:34:20
 	 */
 	public static int compareTo(BigDecimal first, BigDecimal last) {
 		BigDecimal newFirst = BigDecimal.ZERO;
@@ -180,7 +182,7 @@ public class BigDecimalUtil {
 	 * @return 拆分后每项的价格
 	 */
 	public static <E> Map<E, BigDecimal> averageNumber(BigDecimal totalNumber,
-		Map<E, BigDecimal> items) {
+													   Map<E, BigDecimal> items) {
 		return averageNumber(totalNumber, items, 2, RoundingMode.UP);
 	}
 
@@ -194,7 +196,7 @@ public class BigDecimalUtil {
 	 * @return 拆分后每项的数字
 	 */
 	public static <E> Map<E, BigDecimal> averageNumber(BigDecimal totalNumber,
-		Map<E, BigDecimal> items, int scale, RoundingMode roundingMode) {
+													   Map<E, BigDecimal> items, int scale, RoundingMode roundingMode) {
 		BigDecimal number = items.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
 		BigDecimal remainderNumber = totalNumber;
 		Map<E, BigDecimal> result = new LinkedHashMap<>();
