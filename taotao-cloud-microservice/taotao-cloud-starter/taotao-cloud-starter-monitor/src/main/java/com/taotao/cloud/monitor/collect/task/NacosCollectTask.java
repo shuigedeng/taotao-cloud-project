@@ -17,7 +17,6 @@ import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -59,7 +58,8 @@ public class NacosCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			Collector collector = Collector.getCollector();
-			NacosServiceManager nacosServiceManager = ContextUtils.getBean(NacosServiceManager.class,
+			NacosServiceManager nacosServiceManager = ContextUtils.getBean(
+				NacosServiceManager.class,
 				false);
 			if (Objects.nonNull(collector) && Objects.nonNull(nacosServiceManager)) {
 				NacosClientInfo info = new NacosClientInfo();
@@ -69,7 +69,7 @@ public class NacosCollectTask extends AbstractCollectTask {
 				NacosNamingService nacosNamingService = (NacosNamingService) namingService;
 
 				info.namespace = ReflectionUtils.getFieldValue(nacosNamingService, "namespace");
-				info.endpoint = ReflectionUtils.getFieldValue(nacosNamingService, "endpoint");
+				//info.endpoint = ReflectionUtils.getFieldValue(nacosNamingService, "endpoint");
 				info.serverList = ReflectionUtils.getFieldValue(nacosNamingService, "serverList");
 				info.cacheDir = ReflectionUtils.getFieldValue(nacosNamingService, "cacheDir");
 				info.logName = ReflectionUtils.getFieldValue(nacosNamingService, "logName");
@@ -93,7 +93,7 @@ public class NacosCollectTask extends AbstractCollectTask {
 				return info;
 			}
 		} catch (Exception e) {
-			if(LogUtils.isErrorEnabled()){
+			if (LogUtils.isErrorEnabled()) {
 				LogUtils.error(e);
 			}
 		}

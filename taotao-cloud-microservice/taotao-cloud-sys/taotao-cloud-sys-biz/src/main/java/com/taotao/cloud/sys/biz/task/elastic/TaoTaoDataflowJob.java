@@ -1,12 +1,14 @@
 package com.taotao.cloud.sys.biz.task.elastic;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import org.apache.calcite.adapter.jdbc.JdbcSchema.Foo;
+import com.taotao.cloud.sys.biz.task.elastic.TaoTaoDataflowJob.Foo;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.shardingsphere.elasticjob.api.ShardingContext;
 import org.apache.shardingsphere.elasticjob.dataflow.job.DataflowJob;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * 淘淘数据流工作
@@ -22,12 +24,44 @@ public class TaoTaoDataflowJob implements DataflowJob<Foo> {
 	public List<Foo> fetchData(final ShardingContext shardingContext) {
 		// 获取数据
 		LogUtils.info("MyDataflowJob *******************");
+		LogUtils.info("Item : {}, Time: {}, Thread: {}, type:  {}",
+			shardingContext.getShardingItem(),
+			LocalDateTime.now(), Thread.currentThread().getId(), "DATAFLOW");
 
-		return null;
+		return new ArrayList<>();
 	}
 
 	@Override
 	public void processData(final ShardingContext shardingContext, final List<Foo> data) {
 		// 处理数据
+		LogUtils.info("Item : {}, Time: {}, Thread: {}, type:  {}",
+			shardingContext.getShardingItem(),
+			LocalDateTime.now(), Thread.currentThread().getId(), "DATAFLOW");
+
+	}
+
+	public static class Foo implements Serializable {
+
+		private final long id;
+		private final String location;
+		private final String status;
+
+		public Foo(long id, String location, String status) {
+			this.id = id;
+			this.location = location;
+			this.status = status;
+		}
+
+		public long getId() {
+			return id;
+		}
+
+		public String getLocation() {
+			return location;
+		}
+
+		public String getStatus() {
+			return status;
+		}
 	}
 }

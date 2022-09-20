@@ -13,7 +13,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pulsar")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rxjava")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-laytpl")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere")
+    //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rabbitmq")
@@ -60,6 +60,8 @@ dependencies {
 
     //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
     implementation 'org.apache.velocity:velocity-engine-core:2.3'
+
+    implementation 'cglib:cglib:3.3.0'
 
     //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
     //annotationProcessor project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
