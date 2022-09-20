@@ -1,3 +1,5 @@
+import java.time.LocalDateTime
+
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
@@ -5,11 +7,10 @@ javadoc {
     failOnError false
 
     options {
-        //encoding "UTF-8"
-        //charSet 'UTF-8'
         author true
         version true
         title project.name
+        links "http://docs.oracle.com/javase/8/docs/api"
     }
 
     options.addStringOption('Xdoclint:none', '-quiet')
@@ -59,13 +60,18 @@ jar {
                 'Implementation-Version': project.version,
                 'Implementation-Vendor': 'Apache Software Foundation',
                 'Implementation-Vendor-Id': project.group,
-                'Specification-Version': "2022",
+                'Specification-Version': LocalDateTime.now().getYear(),
                 'Specification-Vendor': 'Apache Software Foundation',
                 'Specification-Title': project.name,
                 'Built-By': 'shuigedeng',
                 'Automatic-Module-Name': project.name.replace("-", "."),
                 'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
-                'Build-Jdk-Spec': JavaVersion.VERSION_17.toString()
+                'Build-Jdk-Spec': JavaVersion.VERSION_17.toString(),
+                'Bundle-DocURL': 'https://github.com/shuigedeng/taotao-cloud-project',
+                'Built-Gradle': gradle.gradleVersion,
+                'Build-OS': System.getProperty("os.name"),
+                'Build-Jdk': System.getProperty("java.version"),
+                'Build-Timestamp': LocalDateTime.now().format("yyyy-MM-dd HH:mm:ss")
         )
     }
 }
