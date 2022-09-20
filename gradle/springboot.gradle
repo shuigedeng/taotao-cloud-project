@@ -1,22 +1,52 @@
 apply plugin: 'application'
+
+//https://docs.spring.io/spring-boot/docs/2.7.3/gradle-plugin/reference/htmlsingle/
 apply plugin: 'org.springframework.boot'
 
 /* 依赖管理，用来传递spring的依赖 */
+//https://docs.spring.io/dependency-management-plugin/docs/current-SNAPSHOT/reference/html/
 //apply plugin: 'io.spring.dependency-management'
 
 bootJar {
     manifest {
         attributes project.tasks.jar.manifest.attributes
     }
+
+    //layered {
+    //    application {
+    //        intoLayer("spring-boot-loader") {
+    //            include "org/springframework/boot/loader/**"
+    //        }
+    //        intoLayer("application")
+    //    }
+    //    dependencies {
+    //        intoLayer("application") {
+    //            includeProjectDependencies()
+    //        }
+    //        intoLayer("snapshot-dependencies") {
+    //            include "*:*:*SNAPSHOT"
+    //        }
+    //        intoLayer("dependencies")
+    //    }
+    //    layerOrder = ["dependencies", "spring-boot-loader", "snapshot-dependencies", "application"]
+    //}
 }
 
-springBoot {
-    buildInfo {
-        prperties {
-            
-        }
-    }
-}
+//springBoot {
+//    buildInfo {
+//        properties {
+//            artifact = 'example-app'
+//            version = '1.2.3'
+//            group = 'com.example'
+//            name = 'Example application'
+//
+//            additional = [
+//                    'a': 'alpha',
+//                    'b': 'bravo'
+//            ]
+//        }
+//    }
+//}
 
 bootBuildImage {
     builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"
