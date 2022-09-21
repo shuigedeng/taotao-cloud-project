@@ -26,7 +26,7 @@ buildscript {
         taotaoCloudGroup = "io.github.shuigedeng"
 
         //https://search.maven.org/artifact/org.springframework/spring
-        springVersion = '5.3.22'
+        springVersion = '5.3.23'
         //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
         springBootVersion = '2.7.3'
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
@@ -37,7 +37,7 @@ buildscript {
         //https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
         testContainersVersion = "1.17.3"
         //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
-        springBootAdminVersion = "2.7.4"
+        springBootAdminVersion = "2.7.5"
 
         //https://search.maven.org/artifact/org.projectlombok/lombok
         lombokVersion = "1.18.24"
@@ -53,9 +53,9 @@ buildscript {
         //https://search.maven.org/artifact/org.springframework.security/spring-security-core
         springSecurityVersion = '5.7.3'
         //https://search.maven.org/artifact/org.springframework.data/spring-data-commons
-        springDataCommonsVersion = '2.7.2'
+        springDataCommonsVersion = '2.7.3'
         //https://search.maven.org/artifact/org.springframework.kafka/spring-kafka
-        springKafkaVersion = '2.9.0'
+        springKafkaVersion = '2.9.1'
 
         //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-databind
         fasterxmlVersion = '2.13.4'
@@ -70,17 +70,17 @@ buildscript {
         //https://search.maven.org/artifact/org.aspectj/aspectjweaver
         aspectjweaverVersion = '1.9.9.1'
         //https://search.maven.org/artifact/io.projectreactor/reactor-core
-        reactorVersion = '3.4.22'
+        reactorVersion = '3.4.23'
         //https://search.maven.org/artifact/javax.servlet/javax.servlet-api
         servletApiVersion = '4.0.1'
         //https://search.maven.org/artifact/com.nepxion/banner
         bannerVersion = "1.0.2"
         //https://search.maven.org/artifact/org.javassist/javassist
-        javassistVersion = '3.29.1-GA'
+        javassistVersion = '3.29.2-GA'
         //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
         easyCaptchaVersion = '1.6.2'
         //https://search.maven.org/artifact/cn.hutool/hutool-all
-        hutoolVersion = '5.8.6'
+        hutoolVersion = '5.8.7'
         //https://search.maven.org/artifact/javax.validation/validation-api
         validationApiVersion = '2.0.1.Final'
         //https://search.maven.org/artifact/com.querydsl/querydsl-apt
@@ -154,7 +154,7 @@ buildscript {
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
         mapstructVersion = "1.5.2.Final"
         //https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2
-        fastjson2Version = "2.0.12"
+        fastjson2Version = "2.0.14"
         //https://search.maven.org/artifact/com.caucho/hessian
         hessianVersion = "4.0.66"
         //https://search.maven.org/artifact/com.esotericsoftware/kryo
@@ -192,9 +192,9 @@ buildscript {
         //https://search.maven.org/artifact/org.xerial.snappy/snappy-java
         snappyVersion = "1.1.8.4"
         //https://search.maven.org/artifact/com.github.pagehelper/pagehelper
-        pagehelperVersion = "5.3.1"
+        pagehelperVersion = "5.3.2"
         //https://search.maven.org/artifact/org.glassfish.jaxb/jaxb-runtime
-        jaxbVersion = "4.0.0"
+        jaxbVersion = "4.0.1"
         //https://search.maven.org/artifact/com.lmax/disruptor
         disruptorVersion = "3.4.4"
         //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
