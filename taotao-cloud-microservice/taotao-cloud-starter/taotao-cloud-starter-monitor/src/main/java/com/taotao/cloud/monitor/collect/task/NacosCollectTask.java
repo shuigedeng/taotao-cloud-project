@@ -70,8 +70,8 @@ public class NacosCollectTask extends AbstractCollectTask {
 
 				info.namespace = ReflectionUtils.getFieldValue(nacosNamingService, "namespace");
 				//info.endpoint = ReflectionUtils.getFieldValue(nacosNamingService, "endpoint");
-				info.serverList = ReflectionUtils.getFieldValue(nacosNamingService, "serverList");
-				info.cacheDir = ReflectionUtils.getFieldValue(nacosNamingService, "cacheDir");
+				//info.serverList = ReflectionUtils.getFieldValue(nacosNamingService, "serverList");
+				//info.cacheDir = ReflectionUtils.getFieldValue(nacosNamingService, "cacheDir");
 				info.logName = ReflectionUtils.getFieldValue(nacosNamingService, "logName");
 
 				//HostReactor hostReactor = ReflectionUtil.getFieldValue(nacosNamingService,
