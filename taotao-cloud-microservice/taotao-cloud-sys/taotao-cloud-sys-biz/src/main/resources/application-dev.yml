@@ -1317,7 +1317,7 @@ management:
 logging:
   level:
     root: INFO
-    org.apache.zookeeper.Environment: off
+    org.apache.zookeeper.ZooKeeper: error
     com.taotao.cloud.sys.api.feign: debug
     #org.springframework.cloud.openfeign: debug
     #org.springframework.web: off
