@@ -15,7 +15,6 @@ dependencies {
         exclude group: "io.swagger", module: "swagger-annotations"
     }
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }
 

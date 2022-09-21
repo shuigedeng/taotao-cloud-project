@@ -10,9 +10,6 @@ dependencies {
 
     api "org.springframework.cloud:spring-cloud-starter-openfeign"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
     testImplementation 'org.jeasy:easy-random:5.0.0'
 }
 

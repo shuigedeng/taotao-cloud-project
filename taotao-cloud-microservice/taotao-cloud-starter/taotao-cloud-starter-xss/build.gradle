@@ -8,6 +8,4 @@ dependencies {
         exclude group: "org.slf4j", module: "slf4j-api"
     }
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
 }

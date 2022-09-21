@@ -28,7 +28,6 @@ dependencies {
     api "org.apache.commons:commons-pool2"
     api "org.apache.commons:commons-collections4"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }
 

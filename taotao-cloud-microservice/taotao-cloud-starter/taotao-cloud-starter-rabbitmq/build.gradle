@@ -3,6 +3,5 @@ dependencies {
 
     api "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }

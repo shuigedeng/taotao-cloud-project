@@ -6,12 +6,5 @@ dependencies {
 
     //https://search.maven.org/artifact/com.aliyun/aliyun-java-sdk-dysmsapi
     api "com.aliyun:aliyun-java-sdk-dysmsapi:2.2.1"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 

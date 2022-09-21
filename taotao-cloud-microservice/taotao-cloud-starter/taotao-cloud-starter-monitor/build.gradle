@@ -13,7 +13,6 @@ dependencies {
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail")
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }
 

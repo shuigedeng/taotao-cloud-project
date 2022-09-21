@@ -7,6 +7,5 @@ dependencies {
 
     compileOnly "org.springframework.cloud:spring-cloud-commons"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }

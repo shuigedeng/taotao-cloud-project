@@ -6,9 +6,6 @@ dependencies {
 
     testImplementation "org.mockito:mockito-all:1.10.19"
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }
 

@@ -7,6 +7,5 @@ dependencies {
     //    exclude group: "com.alibaba", module: "fastjson"
     //}
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }
