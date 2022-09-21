@@ -21,7 +21,7 @@ public class WeChatUnSubscribeHandler implements WeChatMpMessageHandler{
     }
 
     @Override
-    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
+    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) {
         return null;
     }
 }

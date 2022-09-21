@@ -1,6 +1,9 @@
 package com.taotao.cloud.office.easyexecl.temp.poi;
 
-import com.taotao.cloud.common.execl.util.TestFileUtil;
+import com.taotao.cloud.office.easyexecl.util.TestFileUtil;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import org.apache.poi.hssf.record.crypto.Biff8EncryptionKey;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.opc.OPCPackage;
@@ -14,46 +17,41 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-
 /**
  * 测试poi
- *
-
  */
 @Ignore
 public class Poi3Test {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Poi3Test.class);
 
-    @Test
-    public void Encryption() throws Exception {
-        String file = TestFileUtil.getPath() + "large" + File.separator + "large07.xlsx";
-        POIFSFileSystem fs = new POIFSFileSystem();
-        EncryptionInfo info = new EncryptionInfo(EncryptionMode.agile);
-        Encryptor enc = info.getEncryptor();
-        enc.confirmPassword("foobaa");
-        OPCPackage opc = OPCPackage.open(new File(file), PackageAccess.READ_WRITE);
-        OutputStream os = enc.getDataStream(fs);
-        opc.save(os);
-        opc.close();
+	private static final Logger LOGGER = LoggerFactory.getLogger(Poi3Test.class);
 
-        // Write out the encrypted version
-        FileOutputStream fos = new FileOutputStream("D:\\test\\99999999999.xlsx");
-        fs.writeFilesystem(fos);
-        fos.close();
-        fs.close();
+	@Test
+	public void Encryption() throws Exception {
+		String file = TestFileUtil.getPath() + "large" + File.separator + "large07.xlsx";
+		POIFSFileSystem fs = new POIFSFileSystem();
+		EncryptionInfo info = new EncryptionInfo(EncryptionMode.agile);
+		Encryptor enc = info.getEncryptor();
+		enc.confirmPassword("foobaa");
+		OPCPackage opc = OPCPackage.open(new File(file), PackageAccess.READ_WRITE);
+		OutputStream os = enc.getDataStream(fs);
+		opc.save(os);
+		opc.close();
 
-    }
+		// Write out the encrypted version
+		FileOutputStream fos = new FileOutputStream("D:\\test\\99999999999.xlsx");
+		fs.writeFilesystem(fos);
+		fos.close();
+		fs.close();
 
-    @Test
-    public void Encryption2() throws Exception {
-        Biff8EncryptionKey.setCurrentUserPassword("123456");
-        POIFSFileSystem fs = new POIFSFileSystem(new File("d:/test/simple03.xls"), true);
-        HSSFWorkbook hwb = new HSSFWorkbook(fs.getRoot(), true);
-        Biff8EncryptionKey.setCurrentUserPassword(null);
-        System.out.println(hwb.getSheetAt(0).getSheetName());
+	}
 
-    }
+	@Test
+	public void Encryption2() throws Exception {
+		Biff8EncryptionKey.setCurrentUserPassword("123456");
+		POIFSFileSystem fs = new POIFSFileSystem(new File("d:/test/simple03.xls"), true);
+		HSSFWorkbook hwb = new HSSFWorkbook(fs.getRoot(), true);
+		Biff8EncryptionKey.setCurrentUserPassword(null);
+		System.out.println(hwb.getSheetAt(0).getSheetName());
+
+	}
 }

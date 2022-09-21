@@ -34,7 +34,7 @@ public class WeChatSubscribeHandler implements WeChatMpMessageHandler {
     }
 
     @Override
-    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
+    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) {
         String openId = wxMessage.getFromUser();
         log.info("新关注用户 OPENID: " + openId);
         // 判断是否携带参数, 携带参数出厂扫码情况

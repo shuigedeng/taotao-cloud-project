@@ -23,7 +23,7 @@ import java.util.Map;
 public class WeChatMsgHandler implements WxMpMessageHandler {
 
     @Override
-    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) throws WxErrorException {
+    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) {
 
         // 回复消息的时候发送人和接收人要反过来
         return WxMpXmlOutMessage.TEXT()

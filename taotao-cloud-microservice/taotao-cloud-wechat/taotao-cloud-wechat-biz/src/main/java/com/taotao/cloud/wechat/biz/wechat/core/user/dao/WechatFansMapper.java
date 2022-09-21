@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2022-07-16
  */
 @Mapper
-public interface WechatFansMapper extends BaseSuperMapper<WechatFans> {
+public interface WechatFansMapper extends BaseMapper<WechatFans> {
 }

@@ -31,7 +31,7 @@ public class WeChatQrScanHandler implements WeChatMpMessageHandler{
     }
 
     @Override
-    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> map, WxMpService wxMpService, WxSessionManager wxSessionManager) throws WxErrorException {
+    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> map, WxMpService wxMpService, WxSessionManager wxSessionManager) {
         // 扫描用户的OpenId
         String openId = wxMessage.getFromUser();
         // 二维码key值
