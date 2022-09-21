@@ -10,6 +10,5 @@ dependencies {
 
     api "org.springframework.cloud:spring-cloud-starter-openfeign"
 
-    testImplementation 'org.jeasy:easy-random:5.0.0'
 }
 

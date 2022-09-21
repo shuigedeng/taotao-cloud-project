@@ -10,6 +10,5 @@ dependencies {
         exclude group: "com.squareup.okhttp3", module: "okhttp"
     }
 
-    testImplementation 'org.jeasy:easy-random:5.0.0'
 }
 
