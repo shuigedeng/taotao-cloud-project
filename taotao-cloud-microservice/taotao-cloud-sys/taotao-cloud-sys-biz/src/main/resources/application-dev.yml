@@ -271,6 +271,7 @@ dubbo:
     metadata-type: local
     environment: develop
     qos-port: 20880
+    #禁用qos同一台集群可能会有端口冲突现象
     qos-enable: false
     qos-accept-foreign-ip: false
     logger: slf4j
@@ -278,15 +279,21 @@ dubbo:
     subscribed-services: taotao-cloud-order
     registry-type: spring-cloud
   registry:
-    address: nacos://192.168.10.200:8848?group=DUBBO_REGISTRY_GROUP&namespace=343852d5-6e0d-4e27-8719-7866452e5ab0
+    address: nacos://192.168.10.200:8848
+    group: DUBBO_REGISTRY_GROUP
+    parameters:
+      namespace: 343852d5-6e0d-4e27-8719-7866452e5ab0
     timeout: 15000
     username: nacos
     password: nacos
-    protocol:
+    protocol: dubbo
     version: ${taotaoCloudVersion}
     check: false
     register: true
     weight: 10
+    subscribe: true
+    use-as-config-center: false
+    use-as-metadata-center: false
   protocol:
     name: dubbo
     port: 20883
@@ -303,6 +310,8 @@ dubbo:
     loadbalance: roundrobin
     version: ${taotaoCloudVersion}
     threads: 500
+    #retries: -1
+    #delay: 3000 #延时注册服务（毫秒）
   consumer:
     check: false
     timeout: 300000
@@ -1308,7 +1317,8 @@ management:
 logging:
   level:
     root: INFO
-    #com.taotao.cloud.sys.api.feign: debug
+    org.apache.zookeeper.Environment: off
+    com.taotao.cloud.sys.api.feign: debug
     #org.springframework.cloud.openfeign: debug
     #org.springframework.web: off
     #org.springframework.security: off
@@ -1336,6 +1346,4 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
-
 
