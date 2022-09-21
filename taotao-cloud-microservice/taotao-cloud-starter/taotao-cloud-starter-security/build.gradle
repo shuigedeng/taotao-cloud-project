@@ -14,5 +14,4 @@ dependencies {
 
     api "io.jsonwebtoken:jjwt:0.9.1"
 
-    testImplementation 'org.jeasy:easy-random:5.0.0'
 }

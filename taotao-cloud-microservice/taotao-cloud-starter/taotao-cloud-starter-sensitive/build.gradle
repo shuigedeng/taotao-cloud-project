@@ -6,6 +6,5 @@ dependencies {
         exclude group: "junit", module: "junit"
     }
 
-    testImplementation 'org.jeasy:easy-random:5.0.0'
 }
 
