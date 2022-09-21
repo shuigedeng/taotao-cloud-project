@@ -3,14 +3,14 @@ dependencies {
 
     implementation "org.ow2.asm:asm:9.3"
 
-    implementation "net.bytebuddy:byte-buddy:1.12.14"
-    implementation "net.bytebuddy:byte-buddy-agent:1.12.14"
+    implementation "net.bytebuddy:byte-buddy:1.12.16"
+    implementation "net.bytebuddy:byte-buddy-agent:1.12.16"
 
     implementation "cglib:cglib:3.3.0"
     implementation "org.javassist:javassist:3.29.1-GA"
 
-    implementation "io.opentelemetry:opentelemetry-api:1.17.0"
-    implementation "io.opentelemetry:opentelemetry-sdk:1.17.0"
+    implementation "io.opentelemetry:opentelemetry-api:1.18.0"
+    implementation "io.opentelemetry:opentelemetry-sdk:1.18.0"
 
     compileOnly "org.apache.tomcat.embed:tomcat-embed-core:10.0.23"
 

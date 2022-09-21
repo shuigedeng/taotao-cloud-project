@@ -36,7 +36,7 @@ dependencies {
     api "cn.afterturn:easypoi-annotation"
 
     //https://search.maven.org/artifact/org.apache.poi/poi-ooxml
-    api("org.apache.poi:poi-ooxml:5.2.2") {
+    api("org.apache.poi:poi-ooxml:5.2.3") {
         exclude group: "org.slf4j", module: "*"
         exclude group: "commons-codec", module: "commons-codec"
         exclude group: "org.bouncycastle", module: "*"
