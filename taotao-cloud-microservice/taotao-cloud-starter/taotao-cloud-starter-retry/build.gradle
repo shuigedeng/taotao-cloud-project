@@ -9,6 +9,5 @@ dependencies {
         exclude group: "com.google.guava", module: "guava"
     }
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }

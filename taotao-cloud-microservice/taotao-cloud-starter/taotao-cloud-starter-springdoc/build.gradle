@@ -6,7 +6,5 @@ dependencies {
     //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-common
     api "org.springdoc:springdoc-openapi-common:1.6.11"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
 
 }

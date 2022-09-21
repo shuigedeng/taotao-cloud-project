@@ -6,8 +6,6 @@ dependencies {
         exclude group: "junit", module: "junit"
     }
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
     testImplementation 'org.jeasy:easy-random:5.0.0'
 }
 

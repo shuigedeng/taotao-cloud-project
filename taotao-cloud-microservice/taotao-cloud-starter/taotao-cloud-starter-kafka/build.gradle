@@ -5,6 +5,4 @@ dependencies {
     api "org.springframework.cloud:spring-cloud-stream-binder-kafka"
 
     api "org.springframework.kafka:spring-kafka"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

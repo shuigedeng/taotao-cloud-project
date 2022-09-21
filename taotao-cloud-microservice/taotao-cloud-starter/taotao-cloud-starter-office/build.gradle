@@ -60,7 +60,6 @@ dependencies {
     //https://search.maven.org/artifact/ink.rayin/rayin-htmladapter-spring-boot-starter
     //api "ink.rayin:rayin-htmladapter-spring-boot-starter:1.0.5"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
 

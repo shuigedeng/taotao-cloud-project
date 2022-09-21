@@ -6,11 +6,5 @@ dependencies {
     //api "com.pingan.obs:fincloud-pingan-obs-java-sdk:3.9.0.1"
     api fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 

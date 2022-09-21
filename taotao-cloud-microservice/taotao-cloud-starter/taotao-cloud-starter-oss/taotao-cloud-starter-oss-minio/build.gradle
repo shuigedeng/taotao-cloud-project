@@ -10,11 +10,4 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:4.10.0"
     api "com.squareup.okio:okio"
     api "com.google.guava:guava"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }

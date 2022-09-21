@@ -5,13 +5,6 @@ dependencies {
     //UCloud
     //https://search.maven.org/artifact/cn.ucloud.ufile/ufile-client-java
     api "cn.ucloud.ufile:ufile-client-java:2.6.6"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 
 

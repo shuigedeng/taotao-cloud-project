@@ -5,8 +5,6 @@ dependencies {
     //https://search.maven.org/artifact/org.springframework.boot/spring-boot-starter-websocket
     api "org.springframework.boot:spring-boot-starter-websocket"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
 }
 
 

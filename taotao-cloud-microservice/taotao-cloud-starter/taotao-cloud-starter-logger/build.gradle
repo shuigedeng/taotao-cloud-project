@@ -44,6 +44,5 @@ dependencies {
         exclude group: "commons-beanutils", module: "commons-beanutils"
     }
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 

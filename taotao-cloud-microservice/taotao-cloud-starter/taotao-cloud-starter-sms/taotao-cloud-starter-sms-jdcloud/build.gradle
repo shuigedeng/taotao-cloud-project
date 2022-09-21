@@ -5,12 +5,5 @@ dependencies {
     api("com.jdcloud.sdk:sms:1.3.3") {
         exclude group: "com.alibaba", module: "fastjson"
     }
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 

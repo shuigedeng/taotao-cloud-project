@@ -11,5 +11,4 @@ dependencies {
 
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus")
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

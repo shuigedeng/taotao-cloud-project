@@ -7,11 +7,4 @@ dependencies {
     api("com.upyun:java-sdk:4.2.3") {
         exclude group: "org.json", module: "json"
     }
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }

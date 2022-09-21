@@ -5,12 +5,5 @@ dependencies {
     api("com.qiniu:qiniu-java-sdk:7.11.0") {
         exclude group: "org.projectlombok", module: "lombok"
     }
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 

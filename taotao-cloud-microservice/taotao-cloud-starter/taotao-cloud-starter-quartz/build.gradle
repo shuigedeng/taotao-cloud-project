@@ -9,7 +9,6 @@ dependencies {
 
     api "org.springframework.boot:spring-boot-starter-quartz"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     api "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

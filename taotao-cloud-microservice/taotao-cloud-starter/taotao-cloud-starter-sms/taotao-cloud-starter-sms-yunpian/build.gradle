@@ -4,11 +4,5 @@ dependencies {
     //https://search.maven.org/artifact/com.yunpian.sdk/yunpian-java-sdk
     api "com.yunpian.sdk:yunpian-java-sdk:1.2.7"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 

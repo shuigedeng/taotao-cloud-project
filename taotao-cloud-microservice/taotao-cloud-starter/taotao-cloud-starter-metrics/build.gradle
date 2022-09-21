@@ -11,6 +11,5 @@ dependencies {
 
     compileOnly "org.springframework.boot:spring-boot-starter-undertow"
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }

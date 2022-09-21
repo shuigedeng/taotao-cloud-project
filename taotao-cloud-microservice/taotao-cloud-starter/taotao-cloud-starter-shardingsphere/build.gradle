@@ -10,9 +10,6 @@ dependencies {
         exclude group: "com.squareup.okhttp3", module: "okhttp"
     }
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
     testImplementation 'org.jeasy:easy-random:5.0.0'
 }
 

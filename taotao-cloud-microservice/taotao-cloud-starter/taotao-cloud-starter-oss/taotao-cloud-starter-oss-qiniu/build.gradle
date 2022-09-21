@@ -7,12 +7,5 @@ dependencies {
     api "com.qiniu:qiniu-java-sdk:7.11.0"
     //https://search.maven.org/artifact/com.qiniu/happy-dns-java
     api "com.qiniu:happy-dns-java:0.1.6"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-
-    testImplementation "org.springframework:spring-test"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.testcontainers:junit-jupiter"
 }
 
