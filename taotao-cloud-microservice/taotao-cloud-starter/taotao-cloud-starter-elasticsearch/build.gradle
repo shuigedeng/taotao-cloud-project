@@ -5,12 +5,12 @@ dependencies {
 
     //https://gitee.com/dromara/easy-es.git
     //https://search.maven.org/artifact/cn.easy-es/easy-es-boot-starter
-    implementation("cn.easy-es:easy-es-boot-starter:1.0.1") {
+    implementation("cn.easy-es:easy-es-boot-starter:1.0.2") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://search.maven.org/artifact/org.noear/snack3
-    implementation "org.noear:snack3:3.2.37"
+    implementation "org.noear:snack3:3.2.39"
 
     testImplementation "org.noear:solon-test:1.10.1"
 
