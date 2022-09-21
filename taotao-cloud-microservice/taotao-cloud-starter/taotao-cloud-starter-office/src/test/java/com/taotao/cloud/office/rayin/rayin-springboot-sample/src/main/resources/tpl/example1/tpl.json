@@ -1,7 +1,0 @@
-{
-  "templateName":"template2",
-  "elements":[
-    {"elementPath":"tpl/example1/element1.html"},
-    {"elementPath":"tpl/example1/element2.html"}
-  ]
-}

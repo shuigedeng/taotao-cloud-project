@@ -17,7 +17,7 @@ public interface WeChatMpMessageHandler extends WxMpMessageHandler {
      */
     default String getMsgType(){
         return WxConsts.XmlMsgType.EVENT;
-    };
+    }
 
     /**
      * event值

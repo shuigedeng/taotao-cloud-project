@@ -123,7 +123,7 @@ public class WeChatMenuService {
     @SneakyThrows
     public void clearMenu(){
         WxMpMenuService menuService = wxMpService.getMenuService();
-        menuService.menuDelete();;
+        menuService.menuDelete();
     }
 
 }

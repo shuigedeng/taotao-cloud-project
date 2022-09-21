@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2022-08-08
  */
 @Mapper
-public interface WeChatMenuMapper extends BaseSuperMapper<WeChatMenu> {
+public interface WeChatMenuMapper extends BaseMapper<WeChatMenu> {
 }

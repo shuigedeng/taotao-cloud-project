@@ -1,9 +1,13 @@
 package com.taotao.cloud.office.easyexecl.temp.poi;
 
 import com.alibaba.excel.EasyExcel;
-import com.taotao.cloud.common.execl.core.encrypt.EncryptData;
-import com.taotao.cloud.common.execl.core.simple.SimpleData;
-import com.taotao.cloud.common.execl.util.TestFileUtil;
+import com.taotao.cloud.office.easyexecl.core.encrypt.EncryptData;
+import com.taotao.cloud.office.easyexecl.core.simple.SimpleData;
+import com.taotao.cloud.office.easyexecl.util.TestFileUtil;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.poi.poifs.crypt.EncryptionInfo;
 import org.apache.poi.poifs.crypt.EncryptionMode;
 import org.apache.poi.poifs.crypt.Encryptor;
@@ -14,65 +18,57 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * TODO
- *
-
  */
 @Ignore
 public class PoiEncryptTest {
-    @Test
-    public void encrypt() throws Exception {
 
+	@Test
+	public void encrypt() throws Exception {
 
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		SXSSFWorkbook sxssfWorkbook = new SXSSFWorkbook(workbook);
 
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        SXSSFWorkbook sxssfWorkbook = new SXSSFWorkbook(workbook);
+		Sheet sheet = sxssfWorkbook.createSheet("sheet1");
+		sheet.createRow(0).createCell(0).setCellValue("T2");
 
-        Sheet sheet = sxssfWorkbook.createSheet("sheet1");
-        sheet.createRow(0).createCell(0).setCellValue("T2");
+		POIFSFileSystem fs = new POIFSFileSystem();
+		EncryptionInfo info = new EncryptionInfo(EncryptionMode.agile);
 
+		Encryptor enc = info.getEncryptor();
+		enc.confirmPassword("123456");
 
-        POIFSFileSystem fs = new POIFSFileSystem();
-        EncryptionInfo info = new EncryptionInfo(EncryptionMode.agile);
+		// write the workbook into the encrypted OutputStream
+		OutputStream encos = enc.getDataStream(fs);
+		sxssfWorkbook.write(encos);
+		sxssfWorkbook.dispose();
+		sxssfWorkbook.close();
+		encos.close(); // this is necessary before writing out the FileSystem
 
-        Encryptor enc = info.getEncryptor();
-        enc.confirmPassword("123456");
+		OutputStream os = new FileOutputStream(
+			TestFileUtil.createNewFile("encrypt" + System.currentTimeMillis() + ".xlsx"));
+		fs.writeFilesystem(os);
+		os.close();
+		fs.close();
+	}
 
-        // write the workbook into the encrypted OutputStream
-        OutputStream encos = enc.getDataStream(fs);
-        sxssfWorkbook.write(encos);
-        sxssfWorkbook.dispose();
-        sxssfWorkbook.close();
-        encos.close(); // this is necessary before writing out the FileSystem
+	@Test
+	public void encryptExcel() throws Exception {
+		EasyExcel.write(
+				TestFileUtil.createNewFile("encryptv2" + System.currentTimeMillis() + ".xlsx"),
+				EncryptData.class).password("123456")
+			.sheet().doWrite(data());
+	}
 
-        OutputStream os = new FileOutputStream(
-            TestFileUtil.createNewFile("encrypt" + System.currentTimeMillis() + ".xlsx"));
-        fs.writeFilesystem(os);
-        os.close();
-        fs.close();
-    }
-
-    @Test
-    public void encryptExcel() throws Exception {
-        EasyExcel.write(TestFileUtil.createNewFile("encryptv2" + System.currentTimeMillis() + ".xlsx"),
-            EncryptData.class).password("123456")
-            .sheet().doWrite(data());
-    }
-
-    private List<SimpleData> data() {
-        List<SimpleData> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            SimpleData simpleData = new SimpleData();
-            simpleData.setName("姓名" + i);
-            list.add(simpleData);
-        }
-        return list;
-    }
+	private List<SimpleData> data() {
+		List<SimpleData> list = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			SimpleData simpleData = new SimpleData();
+			simpleData.setName("姓名" + i);
+			list.add(simpleData);
+		}
+		return list;
+	}
 
 }
