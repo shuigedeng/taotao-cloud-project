@@ -315,6 +315,28 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	Optional<T> findById(Serializable id);
 
 	/**
+	 * 发现通过id列
+	 *
+	 * @param id      id
+	 * @param columns 列
+	 * @return {@link Optional }<{@link T }>
+	 * @since 2022-09-22 10:00:54
+	 */
+	@SuppressWarnings("unchecked")
+	Optional<T> findByIdWithColumns(Serializable id, SFunction<T, ?>... columns);
+
+	/**
+	 * 发现通过id列
+	 *
+	 * @param ids     id
+	 * @param columns 列
+	 * @return {@link List }<{@link T }>
+	 * @since 2022-09-22 10:00:57
+	 */
+	@SuppressWarnings("unchecked")
+	List<T> findByIdsWithColumns(List<Serializable> ids, SFunction<T, ?>... columns)
+
+	/**
 	 * 查询全部
 	 *
 	 * @return {@link List }<{@link T }>
