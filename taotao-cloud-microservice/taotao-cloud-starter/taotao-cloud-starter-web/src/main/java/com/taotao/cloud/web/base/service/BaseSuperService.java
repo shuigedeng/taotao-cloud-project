@@ -334,7 +334,7 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-22 10:00:57
 	 */
 	@SuppressWarnings("unchecked")
-	List<T> findByIdsWithColumns(List<Serializable> ids, SFunction<T, ?>... columns)
+	List<T> findByIdsWithColumns(List<Serializable> ids, SFunction<T, ?>... columns);
 
 	/**
 	 * 查询全部
