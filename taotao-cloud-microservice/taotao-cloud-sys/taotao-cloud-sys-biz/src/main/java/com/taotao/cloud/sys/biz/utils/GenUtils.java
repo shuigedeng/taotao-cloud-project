@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.utils;
 
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.sys.api.constant.GenConstants;
-import com.taotao.cloud.sys.biz.config.gen.GenConfig;
+import com.taotao.cloud.sys.biz.config.gen.GenProperties;
 import com.taotao.cloud.sys.biz.model.entity.gen.GenTable;
 import com.taotao.cloud.sys.biz.model.entity.gen.GenTableColumn;
 import lombok.AccessLevel;
@@ -22,11 +22,11 @@ public class GenUtils {
 	 */
 	public static void initTable(GenTable genTable, Long operName) {
 		genTable.setClassName(convertClassName(genTable.getTableName()));
-		genTable.setPackageName(GenConfig.getPackageName());
-		genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
+		genTable.setPackageName(GenProperties.getPackageName());
+		genTable.setModuleName(getModuleName(GenProperties.getPackageName()));
 		genTable.setBusinessName(getBusinessName(genTable.getTableName()));
 		genTable.setFunctionName(replaceText(genTable.getTableComment()));
-		genTable.setFunctionAuthor(GenConfig.getAuthor());
+		genTable.setFunctionAuthor(GenProperties.getAuthor());
 		genTable.setCreateBy(operName);
 	}
 
@@ -165,8 +165,8 @@ public class GenUtils {
 	 * @return 类名
 	 */
 	public static String convertClassName(String tableName) {
-		boolean autoRemovePre = GenConfig.getAutoRemovePre();
-		String tablePrefix = GenConfig.getTablePrefix();
+		boolean autoRemovePre = GenProperties.getAutoRemovePre();
+		String tablePrefix = GenProperties.getTablePrefix();
 		if (autoRemovePre && StringUtils.isNotEmpty(tablePrefix)) {
 			String[] searchList = StringUtils.split(tablePrefix, ",");
 			tableName = replaceFirst(tableName, searchList);
