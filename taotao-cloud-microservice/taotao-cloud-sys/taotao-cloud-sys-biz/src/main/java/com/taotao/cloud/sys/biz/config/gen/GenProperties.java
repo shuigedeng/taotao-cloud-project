@@ -1,14 +1,20 @@
 package com.taotao.cloud.sys.biz.config.gen;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
  * 代码生成相关配置
+ *
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-09-22 09:41:54
  */
 @Component
 @ConfigurationProperties(prefix = "taotao.cloud.sys.gen")
-public class GenConfig {
+@EnableConfigurationProperties({GenProperties.class})
+public class GenProperties {
 	/**
 	 * 作者
 	 */
@@ -34,7 +40,7 @@ public class GenConfig {
 	}
 
 	public void setAuthor(String author) {
-		GenConfig.author = author;
+		GenProperties.author = author;
 	}
 
 	public static String getPackageName() {
@@ -42,7 +48,7 @@ public class GenConfig {
 	}
 
 	public void setPackageName(String packageName) {
-		GenConfig.packageName = packageName;
+		GenProperties.packageName = packageName;
 	}
 
 	public static boolean getAutoRemovePre() {
@@ -50,7 +56,7 @@ public class GenConfig {
 	}
 
 	public void setAutoRemovePre(boolean autoRemovePre) {
-		GenConfig.autoRemovePre = autoRemovePre;
+		GenProperties.autoRemovePre = autoRemovePre;
 	}
 
 	public static String getTablePrefix() {
@@ -58,6 +64,6 @@ public class GenConfig {
 	}
 
 	public void setTablePrefix(String tablePrefix) {
-		GenConfig.tablePrefix = tablePrefix;
+		GenProperties.tablePrefix = tablePrefix;
 	}
 }
