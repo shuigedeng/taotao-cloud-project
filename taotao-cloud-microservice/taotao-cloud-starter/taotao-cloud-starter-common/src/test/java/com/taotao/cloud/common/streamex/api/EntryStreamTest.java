@@ -19,7 +19,6 @@ import one.util.streamex.EntryStream;
 import one.util.streamex.IntStreamEx;
 import one.util.streamex.MoreCollectors;
 import one.util.streamex.StreamEx;
-import one.util.streamex.TestHelpers.Point;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -53,13 +52,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
-import static one.util.streamex.TestHelpers.StreamExSupplier;
-import static one.util.streamex.TestHelpers.checkAsString;
-import static one.util.streamex.TestHelpers.checkIllegalStateException;
-import static one.util.streamex.TestHelpers.entryStream;
-import static one.util.streamex.TestHelpers.repeat;
-import static one.util.streamex.TestHelpers.streamEx;
-import static one.util.streamex.TestHelpers.withRandom;
 import static org.junit.Assert.*;
 
 /**

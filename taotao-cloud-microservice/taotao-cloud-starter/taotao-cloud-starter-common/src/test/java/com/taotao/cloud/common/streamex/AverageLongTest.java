@@ -15,8 +15,10 @@
  */
 package com.taotao.cloud.common.streamex;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import one.util.streamex.Internals;
+import one.util.streamex.LongStreamEx;
+import one.util.streamex.MoreCollectors;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -29,10 +31,9 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
-import one.util.streamex.Internals.AverageLong;
-import one.util.streamex.LongStreamEx;
-import one.util.streamex.MoreCollectors;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author Tagir Valeev
@@ -41,7 +42,7 @@ public class AverageLongTest {
 
 	@Test
 	public void testAverageLongNoOverflow() {
-		AverageLong avg = new AverageLong();
+		Internals.AverageLong avg = new Internals.AverageLong();
 		assertFalse(avg.result().isPresent());
 		avg.accept(1);
 		avg.accept(2);
@@ -53,7 +54,7 @@ public class AverageLongTest {
 		avg.accept(8);
 		assertEquals(2.0, avg.result().getAsDouble(), 0.0);
 
-		AverageLong avg1 = new AverageLong();
+		Internals.AverageLong avg1 = new Internals.AverageLong();
 		avg1.accept(-2);
 		AverageLong avg2 = new AverageLong();
 		avg2.accept(-2);
@@ -107,8 +108,8 @@ public class AverageLongTest {
 			cnt == 0L ? OptionalDouble
 				.empty()
 				: OptionalDouble.of(
-					new BigDecimal(sum).divide(BigDecimal.valueOf(cnt), MathContext.DECIMAL64)
-						.doubleValue());
+				new BigDecimal(sum).divide(BigDecimal.valueOf(cnt), MathContext.DECIMAL64)
+					.doubleValue());
 		return MoreCollectors.pairing(Collectors.reducing(BigInteger.ZERO,
 			BigInteger::valueOf, BigInteger::add), Collectors.counting(), finisher);
 	}

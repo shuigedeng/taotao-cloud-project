@@ -1,14 +1,10 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
-    api("com.alibaba.cloud:spring-cloud-starter-alibaba-seata") {
-        exclude group: "cglib", module: "cglib"
-    }
+    api "com.alibaba.cloud:spring-cloud-starter-alibaba-seata"
 
-    compileOnly "cglib:cglib:3.3.0"
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
     compileOnly "com.zaxxer:HikariCP:5.0.1"
-
-    api "org.springframework.cloud:spring-cloud-starter-openfeign"
 
 }
 

@@ -23,23 +23,24 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * SeataDataSourceConfiguration
@@ -65,11 +66,13 @@ public class SeataAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnClass(RequestInterceptor.class)
 	public SeataInterceptor seataInterceptor() {
 		return new SeataInterceptor();
 	}
 
 	@Bean
+	@ConditionalOnBean(DataSource.class)
 	public DetectTable detectTable(DataSource dataSource) {
 		return new DetectTable(dataSource);
 	}
@@ -100,7 +103,8 @@ public class SeataAutoConfiguration implements InitializingBean {
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
 			/**
-			 * 判断当前数据库是否有undo_log 该表，如果没有， 创建该表 undo_log 为seata 记录事务sql执行的记录表 第二阶段时，如果confirm会清除记录，如果是cancel
+			 * 判断当前数据库是否有undo_log 该表，如果没有， 创建该表 undo_log 为seata 记录事务sql执行的记录表
+			 * 第二阶段时，如果confirm会清除记录，如果是cancel
 			 * 会根据记录补偿原数据
 			 */
 			try {
@@ -120,7 +124,7 @@ public class SeataAutoConfiguration implements InitializingBean {
 
 		@Override
 		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain) throws ServletException, IOException {
+										FilterChain filterChain) throws ServletException, IOException {
 			String restXid = request.getHeader("xid");
 			if (StrUtil.isNotBlank(restXid)) {
 				RootContext.bind(restXid);

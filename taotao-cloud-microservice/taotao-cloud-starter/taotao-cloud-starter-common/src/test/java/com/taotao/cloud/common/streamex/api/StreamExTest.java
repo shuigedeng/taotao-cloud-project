@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.streamex.api;
 
+import com.taotao.cloud.common.streamex.TestHelpers;
 import one.util.streamex.EntryStream;
 import one.util.streamex.IntStreamEx;
 import one.util.streamex.Joining;
@@ -85,6 +86,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static com.taotao.cloud.common.streamex.TestHelpers.checkIllegalStateException;
+import static com.taotao.cloud.common.streamex.TestHelpers.emptyStreamEx;
+import static com.taotao.cloud.common.streamex.TestHelpers.repeat;
+import static com.taotao.cloud.common.streamex.TestHelpers.streamEx;
+import static com.taotao.cloud.common.streamex.TestHelpers.withRandom;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 
@@ -893,14 +899,14 @@ public class StreamExTest {
 			.pairMap((a, b) -> b - a).distinct().count()));
 	}
 
-	private static double interpolate(Point[] points, double x) {
+	private static double interpolate(TestHelpers.Point[] points, double x) {
 		return StreamEx.of(points).parallel().pairMap((p1, p2) -> p1.x <= x && p2.x >= x ? (x - p1.x) / (p2.x - p1.x)
 			* (p2.y - p1.y) + p1.y : null).nonNull().findAny().orElse(Double.NaN);
 	}
 
 	@Test
 	public void testPairMapInterpolation() {
-		Point[] points = IntStreamEx.range(1000).mapToObj(i -> new Point(i, i % 2 == 0 ? 1 : 0)).toArray(Point[]::new);
+		TestHelpers.Point[] points = IntStreamEx.range(1000).mapToObj(i -> new Point(i, i % 2 == 0 ? 1 : 0)).toArray(Point[]::new);
 		assertEquals(1, interpolate(points, 10), 0.0);
 		assertEquals(0, interpolate(points, 999), 0.0);
 		assertTrue(Double.isNaN(interpolate(points, -10)));

@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.common.streamex;
 
-import one.util.streamex.CollapseSpliterator;
 import one.util.streamex.IntStreamEx;
-import one.util.streamex.Internals;
 import one.util.streamex.StreamEx;
 import org.junit.Test;
 

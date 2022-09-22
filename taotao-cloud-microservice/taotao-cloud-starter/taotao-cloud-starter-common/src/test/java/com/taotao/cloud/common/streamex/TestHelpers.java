@@ -46,7 +46,6 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-import static one.util.streamex.Internals.TailSpliterator;
 import static one.util.streamex.Internals.finished;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -368,14 +367,14 @@ public class TestHelpers {
 		assertEquals(msg, expected, seq);
 
 		// Test TailSpliterator
-		if (sequential instanceof TailSpliterator) {
+		if (sequential instanceof Internals.TailSpliterator) {
 			seq.clear();
-			TailSpliterator.forEachWithTail(supplier.get(), seq::add);
+			Internals.TailSpliterator.forEachWithTail(supplier.get(), seq::add);
 			assertEquals(msg, expected, seq);
 			seq.clear();
 			sequential = supplier.get();
 			while (sequential != null) {
-				sequential = TailSpliterator.tryAdvanceWithTail(sequential, seq::add);
+				sequential = Internals.TailSpliterator.tryAdvanceWithTail(sequential, seq::add);
 			}
 		}
 		assertEquals(msg, expected, seq);
