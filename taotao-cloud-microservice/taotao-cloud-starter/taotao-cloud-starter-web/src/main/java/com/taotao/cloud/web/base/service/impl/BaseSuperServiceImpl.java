@@ -20,6 +20,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
@@ -428,6 +429,24 @@ public class BaseSuperServiceImpl<
 	@Override
 	public Optional<T> findById(Serializable id) {
 		return Optional.ofNullable(baseMapper.selectById(id));
+	}
+
+	@SafeVarargs
+	@Override
+	public final Optional<T> findByIdWithColumns(Serializable id, SFunction<T, ?>... columns) {
+		LambdaQueryWrapper<T> queryWrapper = new LambdaQueryWrapper<>();
+		queryWrapper.select(columns);
+		queryWrapper.eq(SuperEntity::getId, id);
+		return Optional.ofNullable(im().selectOne(queryWrapper));
+	}
+
+	@SafeVarargs
+	@Override
+	public final List<T> findByIdsWithColumns(List<Serializable> ids, SFunction<T, ?>... columns) {
+		LambdaQueryWrapper<T> queryWrapper = new LambdaQueryWrapper<>();
+		queryWrapper.select(columns);
+		queryWrapper.in(SuperEntity::getId, ids);
+		return im().selectList(queryWrapper);
 	}
 
 	@Override
