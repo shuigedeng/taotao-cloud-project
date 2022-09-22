@@ -19,10 +19,11 @@ dependencies {
     api "com.baomidou:mybatis-plus-boot-starter"
     api "com.baomidou:dynamic-datasource-spring-boot-starter"
     api "com.baomidou:mybatis-plus-extension"
+    //https://search.maven.org/artifact/com.baomidou/mybatis-plus-generator
     api "com.baomidou:mybatis-plus-generator:3.5.3"
 
     //https://search.maven.org/artifact/com.github.pagehelper/pagehelper-spring-boot-starter
-    api "com.github.pagehelper:pagehelper-spring-boot-starter:1.4.3"
+    api "com.github.pagehelper:pagehelper-spring-boot-starter:1.4.5"
 
     // 这tm的要付钱  Caused by: mybatis.mate.O000000o.O000000o: please purchase activation code, thank you for your support!
     // api "com.baomidou:mybatis-mate-starter:1.2.4"
