@@ -37,6 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -69,6 +70,8 @@ public class UserServiceImpl extends
 		if (Objects.nonNull(sysUser.getId())) {
 			throw new BusinessException("不允许存在id值");
 		}
+		Optional<User> byIdWithColumns = findByIdWithColumns(sysUser.getId(), User::getId, User::getUsername, User::getPhone);
+
 		String phone = sysUser.getPhone();
 		Boolean isExists = existsByPhone(phone);
 		if (isExists) {

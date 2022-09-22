@@ -20,7 +20,7 @@ dependencies {
 
     compileOnly "org.springframework.security:spring-security-oauth2-core"
 
-    annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 
 }
