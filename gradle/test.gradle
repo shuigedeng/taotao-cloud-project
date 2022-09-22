@@ -46,6 +46,9 @@ test {
  */
 task cleanOutDir(type: Delete) {
     delete "${projectDir}/logs"
+    delete "${projectDir}/arthas-output"
     delete "${rootDir}/logs"
+    delete "${rootDir}/arthas-output"
 }
 tasks.clean.dependsOn(cleanOutDir)
+tasks.build.dependsOn(cleanOutDir)
