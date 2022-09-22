@@ -15,12 +15,14 @@
  */
 package com.taotao.cloud.dubbo.router;
 
-import java.util.List;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.rpc.Invoker;
 import org.apache.dubbo.rpc.RpcException;
 import org.apache.dubbo.rpc.cluster.router.AbstractRouter;
+import org.apache.dubbo.rpc.cluster.router.RouterResult;
+
+import java.util.List;
 
 /**
  * env路由器
@@ -36,9 +38,8 @@ public class EnvRouter extends AbstractRouter {
 	}
 
 	@Override
-	public <T> List<Invoker<T>> route(List<Invoker<T>> invokers, URL url, Invocation invocation)
-		throws RpcException {
+	public <T> RouterResult<Invoker<T>> route(List<Invoker<T>> invokers, URL url, Invocation invocation, boolean needToPrintMessage) throws RpcException {
 		//TODO 逻辑处理
-		return invokers;
+		return super.route(invokers, url, invocation, needToPrintMessage);
 	}
 }

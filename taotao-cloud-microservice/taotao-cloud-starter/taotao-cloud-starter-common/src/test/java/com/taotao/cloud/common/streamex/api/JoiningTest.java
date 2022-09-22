@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.streamex.api;
 
+import com.taotao.cloud.common.streamex.TestHelpers;
 import one.util.streamex.IntStreamEx;
 import one.util.streamex.Joining;
 import one.util.streamex.StreamEx;
@@ -32,10 +33,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static one.util.streamex.TestHelpers.StreamExSupplier;
-import static one.util.streamex.TestHelpers.checkCollector;
-import static one.util.streamex.TestHelpers.checkShortCircuitCollector;
-import static one.util.streamex.TestHelpers.streamEx;
+import static com.taotao.cloud.common.streamex.TestHelpers.checkCollector;
+import static com.taotao.cloud.common.streamex.TestHelpers.checkShortCircuitCollector;
+import static com.taotao.cloud.common.streamex.TestHelpers.streamEx;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -86,7 +86,7 @@ public class JoiningTest {
 				int pos = exp2.lastIndexOf(", ", exp2.endsWith(", ...") ? exp2.length() - 6 : exp2.length());
 				exp2 = pos >= 0 ? exp2.substring(0, pos + 2) + "..." : "...";
 			}
-			for (StreamExSupplier<String> supplier : streamEx(input::stream)) {
+			for (TestHelpers.StreamExSupplier<String> supplier : streamEx(input::stream)) {
 				assertEquals(supplier + "/#" + i, exp, supplier.get().collect(
 					Joining.with(", ").maxChars(i).cutAnywhere()));
 				assertEquals(supplier + "/#" + i, expected.substring(0, Math.min(i, expected.length())), supplier.get()

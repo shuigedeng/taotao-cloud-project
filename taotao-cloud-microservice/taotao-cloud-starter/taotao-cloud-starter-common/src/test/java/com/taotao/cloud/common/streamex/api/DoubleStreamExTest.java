@@ -49,8 +49,8 @@ import java.util.stream.DoubleStream;
 import java.util.stream.DoubleStream.Builder;
 import java.util.stream.LongStream;
 
-import static one.util.streamex.TestHelpers.checkSpliterator;
-import static one.util.streamex.TestHelpers.streamEx;
+import static com.taotao.cloud.common.streamex.TestHelpers.checkSpliterator;
+import static com.taotao.cloud.common.streamex.TestHelpers.streamEx;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

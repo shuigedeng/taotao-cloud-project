@@ -53,10 +53,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.IntStream.Builder;
 
-import static one.util.streamex.TestHelpers.checkSpliterator;
-import static one.util.streamex.TestHelpers.intStreamEx;
-import static one.util.streamex.TestHelpers.streamEx;
-import static one.util.streamex.TestHelpers.withRandom;
+import static com.taotao.cloud.common.streamex.TestHelpers.streamEx;
+import static com.taotao.cloud.common.streamex.TestHelpers.withRandom;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -61,8 +61,6 @@ dependencies {
     //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
     implementation 'org.apache.velocity:velocity-engine-core:2.3'
 
-    implementation 'cglib:cglib:3.3.0'
-
     //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
     //annotationProcessor project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-apt")
 
