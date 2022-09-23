@@ -2,7 +2,7 @@ dependencies {
     api "org.lionsoul:ip2region:2.6.5"
     api "org.springframework.security:spring-security-core:5.7.3"
 
-    api "org.springframework:spring-test:5.3.22"
+    api "org.springframework:spring-test:5.3.23"
     api "commons-collections:commons-collections:3.2.2"
     api "com.aliyun:aliyun-java-sdk-core:4.6.1"
 
