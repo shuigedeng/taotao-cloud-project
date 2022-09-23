@@ -10,7 +10,7 @@ javadoc {
         author true
         version true
         title project.name
-        links "http://docs.oracle.com/javase/8/docs/api"
+        links "https://docs.oracle.com/en/java/javase/17/docs/api/index.html"
     }
 
     options.addStringOption('Xdoclint:none', '-quiet')
