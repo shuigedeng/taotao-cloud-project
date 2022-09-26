@@ -5,6 +5,8 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
@@ -29,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,11 +57,10 @@ public interface StandardOssClient {
 	 * @return {@link OssInfo }
 	 * @since 2022-04-27 17:35:53
 	 */
-	default OssInfo upLoad(MultipartFile multipartFile) {
+	default OssInfo upLoadWithMultipartFile(MultipartFile multipartFile) {
 		try {
-			UploadFileInfo uploadFileInfo = FileUtil.getMultipartFileInfo(
-				multipartFile);
-			OssInfo ossInfo = upLoad(multipartFile.getInputStream(), uploadFileInfo.getName());
+			UploadFileInfo uploadFileInfo = FileUtil.getMultipartFileInfo(multipartFile);
+			OssInfo ossInfo = upLoadWithInputStream(multipartFile.getInputStream(), uploadFileInfo.getName());
 			ossInfo.setUploadFileInfo(uploadFileInfo);
 			return ossInfo;
 		} catch (IOException e) {
@@ -74,8 +76,8 @@ public interface StandardOssClient {
 	 * @return {@link OssInfo }
 	 * @since 2022-04-27 17:35:55
 	 */
-	default OssInfo upLoad(String path) {
-		return upLoad(new File(path));
+	default OssInfo upLoadWithPath(String path) {
+		return upLoadWithFile(new File(path));
 	}
 
 	/**
@@ -85,11 +87,10 @@ public interface StandardOssClient {
 	 * @return {@link OssInfo }
 	 * @since 2022-04-27 17:35:58
 	 */
-	default OssInfo upLoad(File file) {
+	default OssInfo upLoadWithFile(File file) {
 		try {
-			UploadFileInfo uploadFileInfo = FileUtil.getFileInfo(
-				file);
-			OssInfo ossInfo = upLoad(new FileInputStream(file), uploadFileInfo.getName());
+			UploadFileInfo uploadFileInfo = FileUtil.getFileInfo(file);
+			OssInfo ossInfo = upLoadWithInputStream(new FileInputStream(file), uploadFileInfo.getName());
 			ossInfo.setUploadFileInfo(uploadFileInfo);
 			return ossInfo;
 		} catch (IOException e) {
@@ -106,7 +107,7 @@ public interface StandardOssClient {
 	 * @return {@link OssInfo }
 	 * @since 2022-04-27 17:36:18
 	 */
-	default OssInfo upLoad(InputStream is, String targetName) {
+	default OssInfo upLoadWithInputStream(InputStream is, String targetName) {
 		return upLoad(is, targetName, true);
 	}
 
@@ -154,8 +155,7 @@ public interface StandardOssClient {
 	 * @return {@link OssInfo }
 	 * @since 2022-04-27 17:36:29
 	 */
-	default OssInfo uploadFile(File upLoadFile, String targetName, SliceConfig slice,
-							   String ossType) {
+	default OssInfo uploadFile(File upLoadFile, String targetName, SliceConfig slice, String ossType) {
 		String checkpointFile = upLoadFile.getPath() + StrUtil.DOT + ossType;
 
 		UpLoadCheckPoint upLoadCheckPoint = new UpLoadCheckPoint();
@@ -278,7 +278,7 @@ public interface StandardOssClient {
 	 * @version 2022.04
 	 * @since 2022-04-27 17:36:49
 	 */
-	class UploadPartTask implements Callable<UpLoadPartResult> {
+	public static class UploadPartTask implements Callable<UpLoadPartResult> {
 
 		/**
 		 * OSS客户端
@@ -302,7 +302,7 @@ public interface StandardOssClient {
 
 		@Override
 		public UpLoadPartResult call() {
-			InputStream inputStream =  cn.hutool.core.io.FileUtil.getInputStream(upLoadCheckPoint.getUploadFile());
+			InputStream inputStream = cn.hutool.core.io.FileUtil.getInputStream(upLoadCheckPoint.getUploadFile());
 			UpLoadPartResult upLoadPartResult = ossClient.uploadPart(upLoadCheckPoint, partNum,
 				inputStream);
 			if (!upLoadPartResult.isFailed()) {
@@ -853,7 +853,9 @@ public interface StandardOssClient {
 				key = key.substring(1);
 			}
 		}
-		return key;
+		String date = DateUtils.format(LocalDateTime.now(), "yyyy/MM/dd");
+
+		return date + "/" + IdGeneratorUtils.getId() + "/" + key;
 	}
 
 	/**

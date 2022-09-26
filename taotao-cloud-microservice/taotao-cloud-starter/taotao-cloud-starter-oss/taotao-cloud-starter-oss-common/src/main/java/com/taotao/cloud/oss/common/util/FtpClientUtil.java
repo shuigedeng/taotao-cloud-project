@@ -33,8 +33,8 @@ import java.io.UnsupportedEncodingException;
  * ftp客户端工具类
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/12 16:36
+ * @version 2022.09
+ * @since 2022-09-23 10:40:04
  */
 public class FtpClientUtil {
 
@@ -53,8 +53,18 @@ public class FtpClientUtil {
 	private String ftpHome = null;
 	private String controlEncoding = null;
 
+	/**
+	 * ftp客户端跑龙套
+	 *
+	 * @param host      主机
+	 * @param port      港口
+	 * @param username  用户名
+	 * @param passwd    passwd
+	 * @param remoteDir 远程dir
+	 * @since 2022-09-23 10:40:05
+	 */
 	public FtpClientUtil(String host, String port, String username, String passwd,
-		String remoteDir) {
+						 String remoteDir) {
 		this.host = host;
 		this.port = port;
 		this.username = username;
@@ -63,17 +73,28 @@ public class FtpClientUtil {
 		init();
 	}
 
+	/**
+	 * ftp客户端跑龙套
+	 *
+	 * @param host     主机
+	 * @param port     港口
+	 * @param username 用户名
+	 * @param passwd   passwd
+	 * @since 2022-09-23 10:40:05
+	 */
 	public FtpClientUtil(String host, String port, String username, String passwd) {
 		this(host, port, username, passwd, null);
 	}
 
 	/**
 	 * 初始化APACHE的FTPClient
+	 *
+	 * @since 2022-09-23 10:40:05
 	 */
 	private void init() {
 		try {
 			this.client = new FTPClient();
-//			获取服务器编码
+			// 获取服务器编码
 			this.controlEncoding = client.getControlEncoding();
 
 			this.client.connect(this.host, Integer.parseInt(this.port));
@@ -97,6 +118,8 @@ public class FtpClientUtil {
 
 	/**
 	 * 销毁FTP
+	 *
+	 * @since 2022-09-23 10:40:05
 	 */
 	public void destroy() {
 		if (this.client == null) {
@@ -167,7 +190,8 @@ public class FtpClientUtil {
 	 * @param remoteDir
 	 * @param rName     远程文件名
 	 * @param lFile     本地文件
-	 * @return
+	 * @return boolean
+	 * @since 2022-09-23 10:40:31
 	 */
 	public boolean uploadBigFiles(String remoteDir, String rName, File lFile) {
 		String sremoteDir = this.ConvertEncoding(remoteDir);
@@ -220,7 +244,8 @@ public class FtpClientUtil {
 	 *
 	 * @param remoteFile 相对当前ftp路径的文件路径及文件全名
 	 * @param localFile  本地文件全路径
-	 * @return 上传结果，true：成功，false：失败
+	 * @return boolean
+	 * @since 2022-09-23 10:40:40
 	 */
 	public boolean upload(String remoteFile, String localFile) {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
@@ -243,7 +268,8 @@ public class FtpClientUtil {
 	 *
 	 * @param remoteFile 相对当前ftp路径的文件路径及文件全名
 	 * @param in         文件来源的本地流
-	 * @return 上传结果，true：成功，false：失败
+	 * @return boolean
+	 * @since 2022-09-23 10:40:43
 	 */
 	public boolean upload(String remoteFile, InputStream in) {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
@@ -303,6 +329,13 @@ public class FtpClientUtil {
 		return false;
 	}
 
+	/**
+	 * 获取输入流
+	 *
+	 * @param remoteFile 远程文件
+	 * @return {@link InputStream }
+	 * @since 2022-09-23 10:40:47
+	 */
 	public InputStream getInputStream(String remoteFile) {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
 		this.client.enterLocalPassiveMode();
@@ -320,6 +353,13 @@ public class FtpClientUtil {
 		return in;
 	}
 
+	/**
+	 * 得到二进制输入流
+	 *
+	 * @param remoteFile 远程文件
+	 * @return {@link InputStream }
+	 * @since 2022-09-23 10:40:49
+	 */
 	public InputStream getBinaryInputStream(String remoteFile) {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
 
@@ -339,6 +379,14 @@ public class FtpClientUtil {
 		return in;
 	}
 
+	/**
+	 * 下载
+	 *
+	 * @param remoteFile 远程文件
+	 * @param out        出
+	 * @return boolean
+	 * @since 2022-09-23 10:40:52
+	 */
 	public boolean download(String remoteFile, OutputStream out) {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
 		this.client.enterLocalPassiveMode();
@@ -355,6 +403,14 @@ public class FtpClientUtil {
 		}
 	}
 
+	/**
+	 * 下载kdh
+	 *
+	 * @param remoteFile 远程文件
+	 * @param out        出
+	 * @return boolean
+	 * @since 2022-09-23 10:40:54
+	 */
 	public boolean downloadForKDH(String remoteFile, OutputStream out) {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
 		this.client.enterLocalPassiveMode();
@@ -368,6 +424,14 @@ public class FtpClientUtil {
 		}
 	}
 
+	/**
+	 * 二进制下载
+	 *
+	 * @param remoteFile 远程文件
+	 * @param out        出
+	 * @return boolean
+	 * @since 2022-09-23 10:40:56
+	 */
 	public boolean binaryDownload(String remoteFile, OutputStream out) {
 		String sremoteFile = this.ConvertEncoding(remoteFile);
 		this.client.enterLocalPassiveMode();
@@ -390,7 +454,8 @@ public class FtpClientUtil {
 	 *
 	 * @param srcFileName  待修改的文件名称
 	 * @param targFileName 要修改成的文件名
-	 * @return
+	 * @return boolean
+	 * @since 2022-09-23 10:40:59
 	 */
 	public boolean renameFile(String srcFileName, String targFileName) {
 		String ssrcFileName = this.ConvertEncoding(srcFileName);
@@ -409,6 +474,10 @@ public class FtpClientUtil {
 
 	/**
 	 * 获取文件集合
+	 *
+	 * @param path 路径
+	 * @return {@link FTPFile[] }
+	 * @since 2022-09-23 10:41:01
 	 */
 	public FTPFile[] listFiles(String path) {
 		String spath = this.ConvertEncoding(path);
@@ -422,6 +491,13 @@ public class FtpClientUtil {
 	}
 
 
+	/**
+	 * 删除
+	 *
+	 * @param filePath 文件路径
+	 * @return boolean
+	 * @since 2022-09-23 10:41:03
+	 */
 	public boolean remove(String filePath) {
 		try {
 			return client.remoteStore(filePath);
@@ -431,11 +507,23 @@ public class FtpClientUtil {
 		return false;
 	}
 
+	/**
+	 * 重新初始化
+	 *
+	 * @since 2022-09-23 10:41:06
+	 */
 	private void reInit() {
 		destroy();
 		init();
 	}
 
+	/**
+	 * 转换编码
+	 *
+	 * @param str str
+	 * @return {@link String }
+	 * @since 2022-09-23 10:41:08
+	 */
 	private String ConvertEncoding(String str) {
 		if (str == null || "".equals(str.trim()) || controlEncoding == null || ""
 			.equals(controlEncoding.trim())) {

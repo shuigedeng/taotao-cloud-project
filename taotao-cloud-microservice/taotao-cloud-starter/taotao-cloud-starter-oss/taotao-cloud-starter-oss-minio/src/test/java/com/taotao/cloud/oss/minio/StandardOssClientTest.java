@@ -1,4 +1,4 @@
-package com.taotao.cloud.oss;
+package com.taotao.cloud.oss.minio;
 
 import cn.hutool.core.io.FileUtil;
 import com.taotao.cloud.oss.common.model.OssInfo;
@@ -7,7 +7,7 @@ import com.taotao.cloud.oss.common.service.StandardOssClient;
 public interface StandardOssClientTest {
 
 	default void upLoad() {
-		OssInfo ossInfo = getOssClient().upLoad(FileUtil.getInputStream("/Users/admin/test.png"), "test.png");
+		OssInfo ossInfo = getOssClient().upLoadWithInputStream(FileUtil.getInputStream("C:\\Users\\Administrator\\Desktop\\流程配置信息\\附件1：用户信息69.xlsx"), "附件1：用户信息69.xlsx");
 		System.out.println(ossInfo);
 	}
 

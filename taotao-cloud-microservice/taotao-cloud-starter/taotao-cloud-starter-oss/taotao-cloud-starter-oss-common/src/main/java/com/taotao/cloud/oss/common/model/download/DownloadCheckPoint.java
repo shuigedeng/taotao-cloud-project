@@ -41,6 +41,7 @@ public class DownloadCheckPoint implements Serializable {
 	 * 从缓存文件中加载断点数据
 	 *
 	 * @param checkPointFile 断点续传进度记录文件
+	 * @since 2022-09-23 10:44:26
 	 */
 	public synchronized void load(String checkPointFile)
 		throws IOException, ClassNotFoundException {
@@ -54,6 +55,8 @@ public class DownloadCheckPoint implements Serializable {
 
 	/**
 	 * 将断点信息写入到断点缓存文件
+	 *
+	 * @since 2022-09-23 10:44:24
 	 */
 	public synchronized void dump() throws IOException {
 		this.md5 = hashCode();
@@ -67,7 +70,8 @@ public class DownloadCheckPoint implements Serializable {
 	/**
 	 * 获取下载缓存文件名称
 	 *
-	 * @return 缓存文件名
+	 * @return {@link String }
+	 * @since 2022-09-23 10:44:22
 	 */
 	public String getTempDownloadFile() {
 		return downloadFile + ".tmp";
@@ -78,6 +82,7 @@ public class DownloadCheckPoint implements Serializable {
 	 *
 	 * @param index     分片索引
 	 * @param completed 对应分片是否完成
+	 * @since 2022-09-23 10:44:20
 	 */
 	public synchronized void update(int index, boolean completed) {
 		downloadParts.get(index).setCompleted(completed);
@@ -87,7 +92,8 @@ public class DownloadCheckPoint implements Serializable {
 	 * 校验下载文件与断点信息是否一致
 	 *
 	 * @param objectStat 文件状态
-	 * @return 校验是否通过
+	 * @return boolean
+	 * @since 2022-09-23 10:44:18
 	 */
 	public synchronized boolean isValid(DownloadObjectStat objectStat) {
 		// 比较checkpoint的magic和md5

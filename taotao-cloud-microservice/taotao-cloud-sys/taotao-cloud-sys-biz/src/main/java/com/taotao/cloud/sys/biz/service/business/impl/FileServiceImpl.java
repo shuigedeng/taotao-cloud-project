@@ -63,7 +63,7 @@ public class FileServiceImpl extends
 	@Override
 	public UploadFileVO uploadFile(String type, MultipartFile multipartFile) {
 		// 上传文件
-		OssInfo ossInfo = standardOssClient.upLoad(multipartFile);
+		OssInfo ossInfo = standardOssClient.upLoadWithMultipartFile(multipartFile);
 
 		// 添加文件
 		File file = File.builder()

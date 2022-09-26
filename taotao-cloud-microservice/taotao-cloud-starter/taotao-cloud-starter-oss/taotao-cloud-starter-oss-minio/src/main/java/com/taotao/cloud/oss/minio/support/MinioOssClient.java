@@ -1,4 +1,4 @@
-package com.taotao.cloud.oss.minio;
+package com.taotao.cloud.oss.minio.support;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
@@ -26,6 +26,7 @@ import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
 import io.minio.ListObjectsArgs;
 import io.minio.MinioClient;
+import io.minio.ObjectWriteResponse;
 import io.minio.PutObjectArgs;
 import io.minio.RemoveObjectArgs;
 import io.minio.Result;
@@ -43,9 +44,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
- * <a href="http://docs.minio.org.cn/docs/master/minio-monitoring-guide">http://docs.minio.org.cn/docs/master/minio-monitoring-guide</a> https://docs.min.io/
+ * {@link <a href="http://docs.minio.org.cn/docs/master/minio-monitoring-guide">...</a>" }
+ * <p>
+ * {@link <a href="https://docs.minio.org.cn/docs/master/minio-monitoring-guide"></a>}
+ * <p>
+ * {@link <a href="https://docs.min.io/">...</a>}
  *
  * @author shuigedeng
  * @version 2022.04
@@ -67,12 +73,13 @@ public class MinioOssClient implements StandardOssClient {
 	public OssInfo upLoad(InputStream is, String targetName, Boolean isOverride) {
 		try {
 			String bucket = getBucket();
-			String key = getKey(targetName, true);
-			minioClient.putObject(PutObjectArgs.builder()
+			String key = getKey(targetName, false);
+			ObjectWriteResponse objectWriteResponse = minioClient.putObject(PutObjectArgs.builder()
 				.bucket(bucket)
 				.object(key)
 				.stream(is, is.available(), -1)
 				.build());
+			LogUtils.info("minio objectWriteResponse ----- etag: {}, object: {}, versionId:{}, headers: {}", objectWriteResponse.etag(), objectWriteResponse.object(), objectWriteResponse.versionId(), objectWriteResponse.headers());
 		} catch (Exception e) {
 			throw new OssException(e);
 		}
@@ -222,8 +229,7 @@ public class MinioOssClient implements StandardOssClient {
 
 				for (Result<Item> result : results) {
 					Item item = result.get();
-					String childKey = OssPathUtil.replaceKey(item.objectName(), getBasePath(),
-						true);
+					String childKey = OssPathUtil.replaceKey(item.objectName(), getBasePath(), true);
 					if (item.isDir()) {
 						directoryInfos.add(getInfo(childKey, true));
 					} else {
@@ -231,12 +237,10 @@ public class MinioOssClient implements StandardOssClient {
 					}
 				}
 
-				if (ObjectUtil.isNotEmpty(fileOssInfos) && fileOssInfos.get(
-					0) instanceof FileOssInfo) {
+				if (ObjectUtil.isNotEmpty(fileOssInfos) && fileOssInfos.get(0) instanceof FileOssInfo) {
 					ReflectUtil.setFieldValue(ossInfo, "fileInfos", fileOssInfos);
 				}
-				if (ObjectUtil.isNotEmpty(directoryInfos) && directoryInfos.get(
-					0) instanceof DirectoryOssInfo) {
+				if (ObjectUtil.isNotEmpty(directoryInfos) && directoryInfos.get(0) instanceof DirectoryOssInfo) {
 					ReflectUtil.setFieldValue(ossInfo, "directoryInfos", directoryInfos);
 				}
 			}
@@ -253,7 +257,7 @@ public class MinioOssClient implements StandardOssClient {
 
 	@Override
 	public Map<String, Object> getClientObject() {
-		return new HashMap<String, Object>() {
+		return new HashMap<>() {
 			{
 				put(MINIO_OBJECT_NAME, getMinioClient());
 			}
@@ -265,7 +269,7 @@ public class MinioOssClient implements StandardOssClient {
 	}
 
 	public OssInfo getBaseInfo(String targetName) {
-		String key = getKey(targetName, true);
+		String key = getKey(targetName, false);
 		OssInfo ossInfo;
 		String bucketName = getBucket();
 		if (isFile(key)) {
@@ -280,7 +284,7 @@ public class MinioOssClient implements StandardOssClient {
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
 				ossInfo.setLastUpdateTime(DateUtil.date(headers.getDate(HttpHeaders.LAST_MODIFIED))
 					.toString(DatePattern.NORM_DATETIME_PATTERN));
-				ossInfo.setLength(Long.valueOf(headers.get(HttpHeaders.CONTENT_LENGTH)));
+				ossInfo.setLength(Long.valueOf(Objects.requireNonNull(headers.get(HttpHeaders.CONTENT_LENGTH))));
 				ossInfo.setUrl(minioOssConfig.getEndpoint() + "/" + bucketName + key);
 			} catch (Exception e) {
 				LogUtils.error("获取{}文件属性失败", key, e);
@@ -288,9 +292,8 @@ public class MinioOssClient implements StandardOssClient {
 		} else {
 			ossInfo = new DirectoryOssInfo();
 		}
-		ossInfo.setName(StrUtil.equals(targetName, StrUtil.SLASH) ? targetName
-			: FileNameUtil.getName(targetName));
-		ossInfo.setPath(OssPathUtil.replaceKey(targetName,minioOssConfig.getBasePath() , true));
+		ossInfo.setName(StrUtil.equals(targetName, StrUtil.SLASH) ? targetName : FileNameUtil.getName(targetName));
+		ossInfo.setPath(OssPathUtil.replaceKey(targetName, minioOssConfig.getBasePath(), true));
 		return ossInfo;
 	}
 

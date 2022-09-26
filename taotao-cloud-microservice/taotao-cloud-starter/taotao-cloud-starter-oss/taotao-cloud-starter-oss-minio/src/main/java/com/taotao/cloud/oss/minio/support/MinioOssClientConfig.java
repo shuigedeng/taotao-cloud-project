@@ -1,4 +1,4 @@
-package com.taotao.cloud.oss.minio;
+package com.taotao.cloud.oss.minio.support;
 
 
 import com.taotao.cloud.oss.common.constant.OssConstant;
@@ -11,9 +11,9 @@ import com.taotao.cloud.oss.common.constant.OssConstant;
  * @since 2022-04-27 17:41:41
  */
 public class MinioOssClientConfig {
-    private Long connectTimeout = OssConstant.DEFAULT_CONNECTION_TIMEOUT;
-    private Long writeTimeout = OssConstant.DEFAULT_CONNECTION_TIMEOUT;
-    private Long readTimeout = OssConstant.DEFAULT_CONNECTION_TIMEOUT;
+	private Long connectTimeout = OssConstant.DEFAULT_CONNECTION_TIMEOUT;
+	private Long writeTimeout = OssConstant.DEFAULT_CONNECTION_TIMEOUT;
+	private Long readTimeout = OssConstant.DEFAULT_CONNECTION_TIMEOUT;
 
 	public Long getConnectTimeout() {
 		return connectTimeout;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.oss.minio;
+package com.taotao.cloud.oss.minio.support;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,22 +20,22 @@ public class MinioOssProperties extends MinioOssConfig implements InitializingBe
 
 	public static final String PREFIX = "taotao.cloud.oss.miniooss";
 
-    private Map<String, MinioOssConfig> ossConfig = new HashMap<>();
+	private Map<String, MinioOssConfig> ossConfig = new HashMap<>();
 
-    @Override
-    public void afterPropertiesSet() {
-        if (ossConfig.isEmpty()) {
-            this.init();
-        } else {
-            ossConfig.values().forEach(MinioOssConfig::init);
-        }
-    }
+	@Override
+	public void afterPropertiesSet() {
+		if (ossConfig.isEmpty()) {
+			this.init();
+		} else {
+			ossConfig.values().forEach(MinioOssConfig::init);
+		}
+	}
+
 	public Map<String, MinioOssConfig> getOssConfig() {
 		return ossConfig;
 	}
 
-	public void setOssConfig(
-		Map<String, MinioOssConfig> ossConfig) {
+	public void setOssConfig(Map<String, MinioOssConfig> ossConfig) {
 		this.ossConfig = ossConfig;
 	}
 }

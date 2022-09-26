@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.oss.minio;
+package com.taotao.cloud.oss.minio.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.UploadFileService;
+import com.taotao.cloud.oss.minio.properties.MinioProperties;
+import com.taotao.cloud.oss.minio.service.MinioUploadFileServiceImpl;
 import io.minio.MinioClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

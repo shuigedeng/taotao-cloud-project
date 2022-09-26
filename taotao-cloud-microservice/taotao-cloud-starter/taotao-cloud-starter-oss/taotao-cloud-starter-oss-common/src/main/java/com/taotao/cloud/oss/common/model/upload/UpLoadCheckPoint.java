@@ -35,14 +35,14 @@ public class UpLoadCheckPoint implements Serializable {
 	private String checkpointFile;
 	private String uploadId;
 	private List<UploadPart> uploadParts = Collections.synchronizedList(new ArrayList<>());
-	private List<UpLoadPartEntityTag> partEntityTags = Collections.synchronizedList(
-		new ArrayList<>());
+	private List<UpLoadPartEntityTag> partEntityTags = Collections.synchronizedList(new ArrayList<>());
 	private long originPartSize;
 
 	/**
 	 * 从缓存文件中加载断点数据
 	 *
 	 * @param checkpointFile 断点缓存文件
+	 * @since 2022-09-23 10:44:51
 	 */
 	public synchronized void load(String checkpointFile) {
 		try {
@@ -57,6 +57,8 @@ public class UpLoadCheckPoint implements Serializable {
 
 	/**
 	 * 将断点信息写入到断点缓存文件
+	 *
+	 * @since 2022-09-23 10:44:56
 	 */
 	public synchronized void dump() {
 		this.setMd5(hashCode());
@@ -73,9 +75,10 @@ public class UpLoadCheckPoint implements Serializable {
 	 * @param partIndex     分片索引
 	 * @param partEntityTag 分片Tag
 	 * @param completed     分片是否完成
+	 * @since 2022-09-23 10:44:58
 	 */
 	public synchronized void update(int partIndex, UpLoadPartEntityTag partEntityTag,
-		boolean completed) {
+									boolean completed) {
 		this.getPartEntityTags().add(partEntityTag);
 		this.getUploadParts().get(partIndex).setCompleted(completed);
 	}
@@ -83,7 +86,8 @@ public class UpLoadCheckPoint implements Serializable {
 	/**
 	 * 检查断点缓存文件是否与断点一致
 	 *
-	 * @return 校验是否通过
+	 * @return boolean
+	 * @since 2022-09-23 10:45:00
 	 */
 	public synchronized boolean isValid() {
 		// 比较checkpoint的magic和md5
