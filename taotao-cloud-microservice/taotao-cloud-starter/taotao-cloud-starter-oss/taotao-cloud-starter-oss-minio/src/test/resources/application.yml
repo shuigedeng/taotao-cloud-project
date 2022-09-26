@@ -1,0 +1,28 @@
+taotao:
+  cloud:
+    oss:
+      enabled: true
+      type: minio
+      miniooss:
+        endpoint:
+        access-key: cqlyyroot
+        secret-key: lyy@admin+10086
+        bucket-name: xstest
+        #base-path: taotao-cloud-dev
+        slice-config:
+          task-num: 8
+          part-size: 104857600
+        client-config:
+          connect-timeout: 5000
+      #        oss-config:
+      #          minio1:
+      #            endpoint: https://play.min.io
+      #            access-key: Q3AM3UQ867SPQQA43P2F
+      #            secret-key: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
+      #            bucket-name: asiatrip
+      #            base-path: /test
+      #            slice-config:
+      #              task-num: 8
+      #              part-size: 104857600
+      #            client-config:
+      #              connect-timeout: 5000

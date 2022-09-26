@@ -1,4 +1,4 @@
-package com.taotao.cloud.oss.minio;
+package com.taotao.cloud.oss.minio.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -16,13 +16,13 @@ public class MinioProperties {
 
 	public static final String PREFIX = "taotao.cloud.oss.minio";
 
-    private String accessKey;
+	private String accessKey;
 
-    private String secretKey;
+	private String secretKey;
 
-    private String url;
+	private String url;
 
-    private String bucketName;
+	private String bucketName;
 
 	public String getAccessKey() {
 		return accessKey;

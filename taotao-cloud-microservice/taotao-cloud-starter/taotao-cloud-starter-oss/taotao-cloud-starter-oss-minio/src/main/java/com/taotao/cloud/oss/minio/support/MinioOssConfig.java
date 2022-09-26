@@ -1,8 +1,9 @@
-package com.taotao.cloud.oss.minio;
+package com.taotao.cloud.oss.minio.support;
 
 
 import com.taotao.cloud.oss.common.model.SliceConfig;
 import com.taotao.cloud.oss.common.util.OssPathUtil;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * minio oss配置
@@ -13,23 +14,25 @@ import com.taotao.cloud.oss.common.util.OssPathUtil;
  */
 public class MinioOssConfig {
 
-    private String basePath;
-    private String endpoint;
-    private String accessKey;
-    private String secretKey;
-    private String bucketName;
+	private String basePath;
+	private String endpoint;
+	private String accessKey;
+	private String secretKey;
+	private String bucketName;
 
-    private MinioOssClientConfig clientConfig = new MinioOssClientConfig();
+	@NestedConfigurationProperty
+	private MinioOssClientConfig clientConfig = new MinioOssClientConfig();
 
-    /**
-     * 断点续传参数
-     */
-    private SliceConfig sliceConfig = new SliceConfig();
+	/**
+	 * 断点续传参数
+	 */
+	@NestedConfigurationProperty
+	private SliceConfig sliceConfig = new SliceConfig();
 
-    public void init() {
-        this.sliceConfig.init();
-        basePath = OssPathUtil.valid(basePath);
-    }
+	public void init() {
+		this.sliceConfig.init();
+		basePath = OssPathUtil.valid(basePath);
+	}
 
 	public String getBasePath() {
 		return basePath;

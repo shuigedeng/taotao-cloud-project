@@ -55,8 +55,8 @@ import java.util.zip.ZipOutputStream;
  * 文件工具类
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/10/26 11:10
+ * @version 2022.09
+ * @since 2022-09-23 10:39:33
  */
 public class FileUtil {
 
@@ -66,6 +66,11 @@ public class FileUtil {
 	public static final String UPLOAD_FILE_DATA_FORMAT = "yyyy/MM/dd/HH/mm";
 	public static final String UPLOAD_FILE_TOO_BIG = "文件过大";
 
+	/**
+	 * 文件跑龙套
+	 *
+	 * @since 2022-09-23 10:39:34
+	 */
 	private FileUtil() {
 	}
 
@@ -73,8 +78,8 @@ public class FileUtil {
 	 * 获取文件信息
 	 *
 	 * @param multipartFile 文件对象
-	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @since 2020/10/26 10:43
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static UploadFileInfo getMultipartFileInfo(MultipartFile multipartFile) {
 		try {
@@ -106,8 +111,8 @@ public class FileUtil {
 	 * 获取文件信息
 	 *
 	 * @param file 文件对象
-	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @since 2020/10/26 10:43
+	 * @return {@link UploadFileInfo }
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static UploadFileInfo getFileInfo(File file) {
 		try {
@@ -130,8 +135,8 @@ public class FileUtil {
 	 * 文件的md5
 	 *
 	 * @param inputStream inputStream
-	 * @return java.lang.String
-	 * @since 2020/10/26 10:43
+	 * @return {@link String }
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static String fileMd5(InputStream inputStream) {
 		return DigestUtil.md5Hex(inputStream);
@@ -142,8 +147,8 @@ public class FileUtil {
 	 *
 	 * @param file 文件对象
 	 * @param path 保存路径
-	 * @return java.lang.String
-	 * @since 2020/10/26 10:43
+	 * @return {@link String }
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static String saveFile(MultipartFile file, String path) {
 		try {
@@ -167,7 +172,7 @@ public class FileUtil {
 	 *
 	 * @param path 文件路径
 	 * @return boolean
-	 * @since 2020/10/26 10:44
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static boolean deleteFile(String path) {
 		File file = new File(path);
@@ -189,7 +194,8 @@ public class FileUtil {
 	 *
 	 * @param file        文件对象
 	 * @param acceptTypes 接受类型
-	 * @since 2020/10/26 10:44
+	 * @return {@link Boolean }
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static Boolean validType(MultipartFile file, String[] acceptTypes) {
 		if (ArrayUtil.isEmpty(acceptTypes)) {
@@ -215,8 +221,8 @@ public class FileUtil {
 	 * 获取文件名
 	 *
 	 * @param file 文件对象
-	 * @return java.lang.String
-	 * @since 2020/10/26 10:44
+	 * @return {@link String }
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static String extractFilename(MultipartFile file) {
 		String fileName = file.getOriginalFilename();
@@ -229,8 +235,8 @@ public class FileUtil {
 	 *
 	 * @param fileName  文件名称
 	 * @param extension 扩展名称
-	 * @return java.lang.String
-	 * @since 2020/10/26 10:44
+	 * @return {@link String }
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static String extractFilename(String fileName, String extension) {
 		return DateUtil.format(new Date(), UPLOAD_FILE_DATA_FORMAT) + "/" + encodingFilename(
@@ -242,8 +248,8 @@ public class FileUtil {
 	 * 编码文件名
 	 *
 	 * @param fileName fileName
-	 * @return java.lang.String
-	 * @since 2020/10/26 10:44
+	 * @return {@link String }
+	 * @since 2022-09-23 10:39:34
 	 */
 	private static String encodingFilename(String fileName) {
 		fileName = fileName.replace("_", " ");
@@ -255,8 +261,8 @@ public class FileUtil {
 	 * 获取文件名的后缀
 	 *
 	 * @param file file
-	 * @return java.lang.String
-	 * @since 2020/10/26 10:44
+	 * @return {@link String }
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static String getExtension(MultipartFile file) {
 		String extension = cn.hutool.core.io.FileUtil.extName(file.getOriginalFilename());
@@ -271,7 +277,7 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return boolean
-	 * @since 2020/10/26 10:45
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static boolean isImage(File file) {
 		if (!file.exists()) {
@@ -291,7 +297,7 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return boolean
-	 * @since 2020/10/26 10:45
+	 * @since 2022-09-23 10:39:34
 	 */
 	public static boolean isImage(MultipartFile file) {
 		if (file == null) {
@@ -306,6 +312,13 @@ public class FileUtil {
 		}
 	}
 
+	/**
+	 * 得到文件字节数组
+	 *
+	 * @param file 文件
+	 * @return {@link byte[] }
+	 * @since 2022-09-23 10:39:35
+	 */
 	public static byte[] getFileByteArray(File file) {
 		long fileSize = file.length();
 		if (fileSize > Integer.MAX_VALUE) {
@@ -336,7 +349,8 @@ public class FileUtil {
 	 * File转MultipartFile
 	 *
 	 * @param file 文件
-	 * @return MultipartFile
+	 * @return {@link MultipartFile }
+	 * @since 2022-09-23 10:39:35
 	 */
 	public static MultipartFile fileToMultipartFile(File file) {
 		FileItemFactory factory = new DiskFileItemFactory(16, null);
@@ -344,7 +358,7 @@ public class FileUtil {
 		int bytesRead;
 		byte[] buffer = new byte[8192];
 		try (FileInputStream fis = new FileInputStream(file);
-			OutputStream os = item.getOutputStream()) {
+			 OutputStream os = item.getOutputStream()) {
 			while ((bytesRead = fis.read(buffer, 0, 8192)) != -1) {
 				os.write(buffer, 0, bytesRead);
 			}
@@ -354,6 +368,13 @@ public class FileUtil {
 		return new CommonsMultipartFile(item);
 	}
 
+	/**
+	 * 文件通过模拟多部分文件
+	 *
+	 * @param file 文件
+	 * @return {@link MultipartFile }
+	 * @since 2022-09-23 10:39:35
+	 */
 	public static MultipartFile fileToMultipartFileByMock(File file) {
 		MultipartFile multipartFile;
 		try {
@@ -367,6 +388,14 @@ public class FileUtil {
 		return multipartFile;
 	}
 
+	/**
+	 * 多部分文件文件
+	 *
+	 * @param path          路径
+	 * @param multipartFile 多部分文件
+	 * @return {@link File }
+	 * @since 2022-09-23 10:39:35
+	 */
 	public static File multipartFileToFile(String path, MultipartFile multipartFile) {
 		File file = new File(path);
 		try {
@@ -382,6 +411,8 @@ public class FileUtil {
 	 * 判断文件夹是否存在
 	 *
 	 * @param filePath 文件地址
+	 * @return boolean
+	 * @since 2022-09-23 10:39:35
 	 */
 	public static boolean fileIsExists(String filePath) {
 		File f = new File(filePath);
@@ -394,11 +425,10 @@ public class FileUtil {
 	/**
 	 * 压缩文件夹
 	 *
-	 * @param srcDir           压缩文件夹路径
 	 * @param outDir           压缩文件路径
 	 * @param keepDirStructure 是否保留原来的目录结构, true:保留目录结构;
-	 *                         false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
-	 * @throws RuntimeException 压缩失败会抛出运行时异常
+	 * @param srcDir           压缩文件夹路径
+	 * @since 2022-09-23 10:39:35
 	 */
 	public static void toZip(String outDir, boolean keepDirStructure, String... srcDir) {
 		try {
@@ -430,8 +460,16 @@ public class FileUtil {
 
 	private static final int BUFFER_SIZE = 2 * 1024;
 
+	/**
+	 * 压缩
+	 *
+	 * @param sourceFileList   源文件列表
+	 * @param zos              环球
+	 * @param keepDirStructure 保持dir结构
+	 * @since 2022-09-23 10:39:35
+	 */
 	private static void compress(List<File> sourceFileList, ZipOutputStream zos,
-		boolean keepDirStructure) throws Exception {
+								 boolean keepDirStructure) throws Exception {
 		byte[] buf = new byte[BUFFER_SIZE];
 		for (File sourceFile : sourceFileList) {
 			String name = sourceFile.getName();
@@ -473,10 +511,10 @@ public class FileUtil {
 	 * @param zos              zip输出流
 	 * @param name             压缩后的名称
 	 * @param keepDirStructure 是否保留原来的目录结构, true:保留目录结构;
-	 *                         false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
+	 * @since 2022-09-23 10:39:35
 	 */
 	private static void compress(File sourceFile, ZipOutputStream zos, String name,
-		boolean keepDirStructure) throws Exception {
+								 boolean keepDirStructure) throws Exception {
 		byte[] buf = new byte[BUFFER_SIZE];
 		if (sourceFile.isFile()) {
 			zos.putNextEntry(new ZipEntry(name));

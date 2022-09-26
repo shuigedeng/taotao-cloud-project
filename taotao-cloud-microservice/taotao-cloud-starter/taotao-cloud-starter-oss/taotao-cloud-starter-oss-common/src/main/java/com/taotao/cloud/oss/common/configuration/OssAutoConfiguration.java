@@ -17,6 +17,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @AutoConfiguration
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(OssProperties.class)
-public class OssConfiguration {
+public class OssAutoConfiguration {
 
 }

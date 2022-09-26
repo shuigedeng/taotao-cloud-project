@@ -1,5 +1,7 @@
 package com.taotao.cloud.oss.common.exception;
 
+import com.taotao.cloud.common.enums.ResultEnum;
+
 /**
  * 重复例外
  *
@@ -8,23 +10,32 @@ package com.taotao.cloud.oss.common.exception;
  * @since 2022-04-27 17:35:04
  */
 public class DuplicateException extends OssException {
-    public DuplicateException() {
-        super();
-    }
 
-    public DuplicateException(String message) {
-        super(message);
-    }
+	public DuplicateException(String message) {
+		super(message);
+	}
 
-    public DuplicateException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	public DuplicateException(Integer code, String message) {
+		super(code, message);
+	}
 
-    public DuplicateException(Throwable cause) {
-        super(cause);
-    }
+	public DuplicateException(Throwable e) {
+		super(e);
+	}
 
-    protected DuplicateException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+	public DuplicateException(String message, Throwable e) {
+		super(message, e);
+	}
+
+	public DuplicateException(Integer code, String message, Throwable e) {
+		super(code, message, e);
+	}
+
+	public DuplicateException(ResultEnum result) {
+		super(result);
+	}
+
+	public DuplicateException(ResultEnum result, Throwable e) {
+		super(result, e);
+	}
 }

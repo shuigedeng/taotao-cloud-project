@@ -80,7 +80,8 @@ public abstract class AbstractUploadFileService implements UploadFileService {
 	 * @param file           文件
 	 * @param uploadFileInfo 上传文件信息
 	 * @return {@link UploadFileInfo }
-	 * @since 2022-04-27 17:33:27
+	 * @throws UploadFileException 上传异常
+	 * @since 2022-09-23 10:42:37
 	 */
 	protected abstract UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo)
 		throws UploadFileException;
@@ -91,6 +92,7 @@ public abstract class AbstractUploadFileService implements UploadFileService {
 	 * @param file           文件
 	 * @param uploadFileInfo 上传文件信息
 	 * @return {@link UploadFileInfo }
+	 * @throws UploadFileException 上传异常
 	 * @since 2022-04-27 17:33:37
 	 */
 	protected abstract UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo)

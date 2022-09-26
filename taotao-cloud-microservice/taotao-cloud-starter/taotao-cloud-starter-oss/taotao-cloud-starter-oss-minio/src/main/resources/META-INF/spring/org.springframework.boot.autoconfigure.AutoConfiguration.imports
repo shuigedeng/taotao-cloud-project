@@ -1,2 +1,2 @@
-com.taotao.cloud.oss.minio.MinioConfiguration
-com.taotao.cloud.oss.minio.MinioOssConfiguration
+#com.taotao.cloud.oss.minio.configuration.MinioConfiguration
+com.taotao.cloud.oss.minio.support.MinioOssConfiguration

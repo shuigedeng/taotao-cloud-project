@@ -1,4 +1,4 @@
-package com.taotao.cloud.oss.minio;
+package com.taotao.cloud.oss.minio.support;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
@@ -9,7 +9,6 @@ import io.minio.MinioClient;
 import io.minio.http.HttpUtils;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,30 +27,36 @@ import java.util.Map;
 @AutoConfiguration
 @ConditionalOnOssEnabled
 @EnableConfigurationProperties({MinioOssProperties.class})
-@ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "MINIO")
+@ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "minio")
 public class MinioOssConfiguration implements InitializingBean {
 
-    public static final String DEFAULT_BEAN_NAME = "minioOssClient";
+	public static final String DEFAULT_BEAN_NAME = "minioOssClient";
 
-    @Autowired
-    private MinioOssProperties minioOssProperties;
+	private final MinioOssProperties minioOssProperties;
+
+	public MinioOssConfiguration(MinioOssProperties minioOssProperties) {
+		this.minioOssProperties = minioOssProperties;
+	}
 
 	@Bean
 	@ConditionalOnMissingBean
-    public StandardOssClient minioOssClient(MinioOssConfig minioOssConfig) {
-        return new MinioOssClient(minioClient(minioOssConfig), minioOssConfig);
-    }
+	public StandardOssClient minioOssClient(MinioOssConfig minioOssConfig) {
+		return new MinioOssClient(minioClient(minioOssConfig), minioOssConfig);
+	}
 
-    public MinioClient minioClient(MinioOssConfig minioOssConfig) {
-        MinioOssClientConfig clientConfig = minioOssConfig.getClientConfig();
-        OkHttpClient okHttpClient = HttpUtils.newDefaultHttpClient(
-                clientConfig.getConnectTimeout(), clientConfig.getWriteTimeout(), clientConfig.getReadTimeout());
-        return MinioClient.builder()
-                .endpoint(minioOssConfig.getEndpoint())
-                .credentials(minioOssConfig.getAccessKey(), minioOssConfig.getSecretKey())
-                .httpClient(okHttpClient)
-                .build();
-    }
+	public MinioClient minioClient(MinioOssConfig minioOssConfig) {
+		MinioOssClientConfig clientConfig = minioOssConfig.getClientConfig();
+		OkHttpClient okHttpClient = HttpUtils.newDefaultHttpClient(
+			clientConfig.getConnectTimeout(),
+			clientConfig.getWriteTimeout(),
+			clientConfig.getReadTimeout());
+
+		return MinioClient.builder()
+			.endpoint(minioOssConfig.getEndpoint())
+			.credentials(minioOssConfig.getAccessKey(), minioOssConfig.getSecretKey())
+			.httpClient(okHttpClient)
+			.build();
+	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

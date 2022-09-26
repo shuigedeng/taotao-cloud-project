@@ -25,8 +25,8 @@ import java.io.File;
  * 文件上传接口
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-27 17:33:20
+ * @version 2022.09
+ * @since 2022-09-23 10:42:14
  */
 public interface UploadFileService {
 
@@ -35,7 +35,8 @@ public interface UploadFileService {
 	 *
 	 * @param file 文件对象
 	 * @return {@link UploadFileInfo }
-	 * @since 2022-04-27 17:33:20
+	 * @throws UploadFileException 上传异常
+	 * @since 2022-09-23 10:42:14
 	 */
 	UploadFileInfo upload(File file) throws UploadFileException;
 
@@ -45,7 +46,8 @@ public interface UploadFileService {
 	 * @param file    file
 	 * @param fileKey fileKey
 	 * @return {@link UploadFileInfo }
-	 * @since 2022-04-27 17:33:20
+	 * @throws UploadFileException 上传异常
+	 * @since 2022-09-23 10:42:14
 	 */
 	UploadFileInfo upload(File file, String fileKey) throws UploadFileException;
 
@@ -54,7 +56,8 @@ public interface UploadFileService {
 	 *
 	 * @param file file
 	 * @return {@link UploadFileInfo }
-	 * @since 2022-04-27 17:33:20
+	 * @throws UploadFileException 上传异常
+	 * @since 2022-09-23 10:42:14
 	 */
 	UploadFileInfo upload(MultipartFile file) throws UploadFileException;
 
@@ -64,7 +67,8 @@ public interface UploadFileService {
 	 * @param file    file
 	 * @param fileKey fileKey
 	 * @return {@link UploadFileInfo }
-	 * @since 2022-04-27 17:33:20
+	 * @throws UploadFileException 上传异常
+	 * @since 2022-09-23 10:42:14
 	 */
 	UploadFileInfo upload(MultipartFile file, String fileKey) throws UploadFileException;
 
@@ -73,7 +77,8 @@ public interface UploadFileService {
 	 *
 	 * @param uploadFileInfo fileInfo
 	 * @return {@link UploadFileInfo }
-	 * @since 2022-04-27 17:33:20
+	 * @throws UploadFileException 上传异常
+	 * @since 2022-09-23 10:42:14
 	 */
 	UploadFileInfo delete(UploadFileInfo uploadFileInfo) throws UploadFileException;
 }

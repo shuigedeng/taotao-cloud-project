@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.oss.minio;
+package com.taotao.cloud.oss.minio.service;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.oss.common.model.UploadFileInfo;
 import com.taotao.cloud.oss.common.service.AbstractUploadFileService;
 import com.taotao.cloud.oss.common.util.FileUtil;
+import com.taotao.cloud.oss.minio.properties.MinioProperties;
 import io.minio.BucketExistsArgs;
 import io.minio.CopyObjectArgs;
 import io.minio.CopySource;
@@ -55,6 +56,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.ZonedDateTime;
@@ -62,21 +64,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * NginxUploadFileService
+ * MinioUploadFileServiceImpl
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2021/08/24 16:12
+ * @version 2022.09
+ * @since 2022-09-23 11:04:00
  */
 public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 
 	private final MinioProperties properties;
 	private final MinioClient minioClient;
 
+	/**
+	 * minio上传文件服务实现类
+	 *
+	 * @param properties  属性
+	 * @param minioClient minio客户
+	 * @since 2022-09-23 11:04:00
+	 */
 	public MinioUploadFileServiceImpl(MinioProperties properties, MinioClient minioClient) {
 		this.properties = properties;
 		this.minioClient = minioClient;
@@ -100,7 +110,10 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 获取上传临时签名
 	 *
-	 * @since : 2021/5/13 14:12
+	 * @param fileName 文件名称
+	 * @param time     时间
+	 * @return {@link Map }
+	 * @since 2022-09-23 11:04:01
 	 */
 	public Map getPolicy(String fileName, ZonedDateTime time) {
 		PostPolicy postPolicy = new PostPolicy(properties.getBucketName(), time);
@@ -114,8 +127,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 			map1.put("host", properties.getUrl() + "/" + properties.getBucketName());
 			return map1;
 		} catch (ErrorResponseException | InsufficientDataException | InternalException |
-		         InvalidResponseException | InvalidKeyException | IOException |
-		         NoSuchAlgorithmException | ServerException | XmlParserException e) {
+				 InvalidResponseException | InvalidKeyException | IOException |
+				 NoSuchAlgorithmException | ServerException | XmlParserException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -125,7 +138,12 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 获取上传文件的url
 	 *
-	 * @since : 2021/5/13 14:15
+	 * @param objectName 对象名称
+	 * @param method     方法
+	 * @param time       时间
+	 * @param timeUnit   时间单位
+	 * @return {@link String }
+	 * @since 2022-09-23 11:04:01
 	 */
 	public String getPolicyUrl(String objectName, Method method, int time, TimeUnit timeUnit) {
 		try {
@@ -135,8 +153,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 				.object(objectName)
 				.expiry(time, timeUnit).build());
 		} catch (ErrorResponseException | InternalException | InsufficientDataException |
-		         InvalidKeyException | InvalidResponseException | IOException |
-		         NoSuchAlgorithmException | XmlParserException | ServerException e) {
+				 InvalidKeyException | InvalidResponseException | IOException |
+				 NoSuchAlgorithmException | XmlParserException | ServerException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -146,7 +164,9 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 上传文件
 	 *
-	 * @since : 2021/5/13 14:17
+	 * @param file     文件
+	 * @param fileName 文件名称
+	 * @since 2022-09-23 11:04:01
 	 */
 	public void upload1(MultipartFile file, String fileName) {
 		// 使用putObject上传一个文件到存储桶中。
@@ -159,8 +179,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 				.contentType(file.getContentType())
 				.build());
 		} catch (ErrorResponseException | InsufficientDataException | InternalException |
-		         InvalidKeyException | InvalidResponseException | IOException |
-		         NoSuchAlgorithmException | ServerException | XmlParserException e) {
+				 InvalidKeyException | InvalidResponseException | IOException |
+				 NoSuchAlgorithmException | ServerException | XmlParserException e) {
 			e.printStackTrace();
 		}
 	}
@@ -168,7 +188,11 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 根据filename获取文件访问地址
 	 *
-	 * @since : 2021/5/17 11:28
+	 * @param objectName 对象名称
+	 * @param time       时间
+	 * @param timeUnit   时间单位
+	 * @return {@link String }
+	 * @since 2022-09-23 11:04:01
 	 */
 	public String getUrl(String objectName, int time, TimeUnit timeUnit) {
 		String url = null;
@@ -179,8 +203,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 				.object(objectName)
 				.expiry(time, timeUnit).build());
 		} catch (ErrorResponseException | InsufficientDataException | InternalException |
-		         InvalidKeyException | InvalidResponseException | IOException |
-		         NoSuchAlgorithmException | XmlParserException | ServerException e) {
+				 InvalidKeyException | InvalidResponseException | IOException |
+				 NoSuchAlgorithmException | XmlParserException | ServerException e) {
 			e.printStackTrace();
 		}
 		return url;
@@ -193,6 +217,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	 * @param file       文件
 	 * @param bucketName bucket名称
 	 * @param fileName   文件名称
+	 * @since 2022-09-23 11:04:01
 	 */
 	public void uploadFile(MultipartFile file, String bucketName, String fileName) {
 		//判断文件是否为空
@@ -223,9 +248,10 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 上传文件（可以传空） 数据备份使用
 	 *
-	 * @param filePath
-	 * @param bucketName
-	 * @param fileName
+	 * @param filePath   文件路径
+	 * @param bucketName bucket名称
+	 * @param fileName   文件名称
+	 * @since 2022-09-23 11:04:31
 	 */
 	public void uploadFiles(String filePath, String bucketName, String fileName)
 		throws IOException {
@@ -267,6 +293,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 			HttpServletRequest request = RequestUtils.getRequest();
 			try {
 				BufferedInputStream bis = new BufferedInputStream(inputStream);
+				assert response != null;
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("text/plain");
 				if (fileName.contains(".svg")) {
@@ -274,18 +301,19 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 				}
 				//编码的文件名字,关于中文乱码的改造
 				String codeFileName = "";
+				assert request != null;
 				String agent = request.getHeader("USER-AGENT").toLowerCase();
-				if (-1 != agent.indexOf("msie") || -1 != agent.indexOf("trident")) {
+				if (agent.contains("msie") || agent.contains("trident")) {
 					//IE
-					codeFileName = URLEncoder.encode(fileName, "UTF-8");
-				} else if (-1 != agent.indexOf("mozilla")) {
+					codeFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
+				} else if (agent.contains("mozilla")) {
 					//火狐，谷歌
-					codeFileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
+					codeFileName = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
 				} else {
-					codeFileName = URLEncoder.encode(fileName, "UTF-8");
+					codeFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
 				}
 				response.setHeader("Content-Disposition",
-					"attachment;filename=" + new String(codeFileName.getBytes(), "utf-8"));
+					"attachment;filename=" + new String(codeFileName.getBytes(), StandardCharsets.UTF_8));
 				OutputStream os = response.getOutputStream();
 				int i;
 				byte[] buff = new byte[1024 * 8];
@@ -320,6 +348,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	 *
 	 * @param fileName   文件名
 	 * @param bucketName 桶名（文件夹）
+	 * @since 2022-09-23 11:04:46
 	 */
 	public void dowloadMinioFile(String fileName, String bucketName) {
 		try {
@@ -328,8 +357,9 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 					.bucket(bucketName)
 					.object(fileName)
 					.build());
-			ServletOutputStream outputStream1 = RequestUtils.getResponse()
+			ServletOutputStream outputStream1 = Objects.requireNonNull(RequestUtils.getResponse())
 				.getOutputStream();
+
 			//读取指定路径下面的文件
 			OutputStream outputStream = new BufferedOutputStream(outputStream1);
 			//创建存放文件内容的数组
@@ -352,8 +382,10 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 获取資源
 	 *
-	 * @param fileName
-	 * @param bucketName
+	 * @param fileName   文件名称
+	 * @param bucketName bucket名称
+	 * @return {@link String }
+	 * @since 2022-09-23 11:04:55
 	 */
 	public String getFile(String fileName, String bucketName) {
 		String objectUrl = null;
@@ -375,6 +407,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	 *
 	 * @param fileName   文件名称
 	 * @param bucketName 存储桶名称
+	 * @return {@link InputStream }
+	 * @since 2022-09-23 11:04:58
 	 */
 	public InputStream downloadMinio(String fileName, String bucketName) {
 		try {
@@ -390,7 +424,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 获取全部bucket
 	 *
-	 * @return
+	 * @return {@link List }<{@link String }>
+	 * @since 2022-09-23 11:05:01
 	 */
 	public List<String> getAllBuckets() throws Exception {
 		return minioClient.listBuckets().stream().map(Bucket::name).collect(Collectors.toList());
@@ -400,6 +435,7 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	 * 根据bucketName删除信息
 	 *
 	 * @param bucketName bucket名称
+	 * @since 2022-09-23 11:05:03
 	 */
 	public void removeBucket(String bucketName) throws Exception {
 		minioClient.removeBucket(RemoveBucketArgs.builder().bucket(bucketName).build());
@@ -408,8 +444,10 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 删除一个对象
 	 *
-	 * @param name
-	 * @return /
+	 * @param bucketName bucket名称
+	 * @param name       名称
+	 * @return boolean
+	 * @since 2022-09-23 11:05:05
 	 */
 	public boolean removeFile(String bucketName, String name) {
 		boolean isOK = true;
@@ -426,8 +464,9 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 检查存储桶是否已经存在(不存在不创建)
 	 *
-	 * @param name
-	 * @return /
+	 * @param name 名称
+	 * @return boolean
+	 * @since 2022-09-23 11:05:07
 	 */
 	public boolean bucketExists(String name) {
 		boolean isExist = false;
@@ -442,8 +481,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 检查存储桶是否已经存在(不存在则创建)
 	 *
-	 * @param name
-	 * @return /
+	 * @param name 名称
+	 * @since 2022-09-23 11:05:11
 	 */
 	public void bucketExistsCreate(String name) {
 		try {
@@ -460,7 +499,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	 * @param filePath   文件路径
 	 * @param bucketName 存储桶
 	 * @param objectName 文件夹名称
-	 * @return /
+	 * @return boolean
+	 * @since 2022-09-23 11:05:19
 	 */
 	public boolean putFolder(String filePath, String bucketName, String objectName) {
 		boolean flag = false;
@@ -485,9 +525,10 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 通过流下载文件
 	 *
-	 * @param bucketName
-	 * @param filePath
-	 * @param objectName
+	 * @param bucketName bucket名称
+	 * @param filePath   文件路径
+	 * @param objectName 对象名称
+	 * @since 2022-09-23 11:05:29
 	 */
 	public void streamToDown(String bucketName, String filePath, String objectName) {
 		try {
@@ -505,7 +546,8 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	 * 获取存储桶下所有文件
 	 *
 	 * @param bucketName 存储桶名
-	 * @return
+	 * @return {@link List }<{@link Item }>
+	 * @since 2022-09-23 11:05:32
 	 */
 	public List<Item> getFileList(String bucketName) {
 		List<Item> list = new ArrayList<>();
@@ -525,9 +567,10 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 获取存储桶下所有文件
 	 *
-	 * @param bucketName 存储桶名
-	 * @param bucketName 桶下的文件夹
-	 * @return
+	 * @param bucketName bucket名称
+	 * @param type       类型
+	 * @return {@link List }
+	 * @since 2022-09-23 11:05:38
 	 */
 	public List getFileList(String bucketName, String type) {
 		List<Item> list = new ArrayList<>();
@@ -551,9 +594,10 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	 * @param objectName       文件名称
 	 * @param copyToBucketName 目标bucket名称
 	 * @param copyToObjectName 目标文件名称
+	 * @since 2022-09-23 11:05:41
 	 */
 	public void copyObject(String bucketName, String objectName, String copyToBucketName,
-		String copyToObjectName) {
+						   String copyToObjectName) {
 		try {
 			minioClient.copyObject(
 				CopyObjectArgs.builder()
@@ -569,8 +613,9 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * String转MakeBucketArgs
 	 *
-	 * @param name
-	 * @return
+	 * @param name 名称
+	 * @return {@link MakeBucketArgs }
+	 * @since 2022-09-23 11:05:44
 	 */
 	public static MakeBucketArgs getMakeBucketArgs(String name) {
 		return MakeBucketArgs.builder().bucket(name).build();
@@ -579,8 +624,9 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * String转BucketExistsArgs
 	 *
-	 * @param name
-	 * @return
+	 * @param name 名称
+	 * @return {@link BucketExistsArgs }
+	 * @since 2022-09-23 11:05:45
 	 */
 	public static BucketExistsArgs getBucketExistsArgs(String name) {
 		return BucketExistsArgs.builder().bucket(name).build();
@@ -589,8 +635,9 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * String转SetBucketPolicyArgs
 	 *
-	 * @param name
-	 * @return
+	 * @param name 名称
+	 * @return {@link SetBucketPolicyArgs }
+	 * @since 2022-09-23 11:05:48
 	 */
 	public static SetBucketPolicyArgs getSetBucketPolicyArgs(String name) {
 		return SetBucketPolicyArgs.builder().bucket(name).build();
@@ -599,9 +646,10 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 	/**
 	 * 通过流下载文件
 	 *
-	 * @param bucketName
-	 * @param filePath
-	 * @param objectName
+	 * @param bucketName bucket名称
+	 * @param filePath   文件路径
+	 * @param objectName 对象名称
+	 * @since 2022-09-23 11:05:53
 	 */
 	public void downToLocal(String bucketName, String filePath, String objectName) {
 		try {
@@ -614,7 +662,6 @@ public class MinioUploadFileServiceImpl extends AbstractUploadFileService {
 			LogUtils.info(e.getMessage());
 		}
 	}
-
 
 }
 
