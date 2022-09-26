@@ -1,6 +1,7 @@
 package com.taotao.cloud.oss.minio;
 
 
+import com.taotao.cloud.oss.StandardOssClientTest;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
 import com.taotao.cloud.oss.minio.support.MinioOssConfiguration;
 import org.junit.jupiter.api.Test;

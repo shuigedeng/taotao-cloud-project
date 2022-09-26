@@ -40,7 +40,7 @@ public class YunPianSendHandler extends AbstractSendHandler<YunPianProperties> {
 	private final YunpianClient client;
 
 	public YunPianSendHandler(YunPianProperties properties,
-		ApplicationEventPublisher eventPublisher) {
+							  ApplicationEventPublisher eventPublisher) {
 		super(properties, eventPublisher);
 		client = new YunpianClient(properties.getApikey()).init();
 	}
@@ -58,7 +58,7 @@ public class YunPianSendHandler extends AbstractSendHandler<YunPianProperties> {
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -97,17 +97,17 @@ public class YunPianSendHandler extends AbstractSendHandler<YunPianProperties> {
 
 		boolean succeed = Objects.equals(result.getCode(), 0);
 		if (succeed) {
-			publishSendSuccessEvent(noticeData, phones);
+			publishSendSuccessEvent(noticeData, phones, result);
 		} else {
 			LogUtils.debug("send fail: {}", result.getMsg());
-			publishSendFailEvent(noticeData, phones, new SendFailedException(result.getMsg()));
+			publishSendFailEvent(noticeData, phones, new SendFailedException(result.getMsg()), result);
 		}
 		return succeed;
 	}
 
 	private String getEncodeValue(String value) {
 		try {
-			return URLEncoder.encode(value, StandardCharsets.UTF_8.name());
+			return URLEncoder.encode(value, StandardCharsets.UTF_8);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getLocalizedMessage(), e);
 		}

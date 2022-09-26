@@ -49,8 +49,8 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 	private final RestTemplate restTemplate;
 
 	public ChinaMobileSendHandler(ChinaMobileProperties properties,
-		ApplicationEventPublisher eventPublisher,
-		ObjectMapper objectMapper, RestTemplate restTemplate) {
+								  ApplicationEventPublisher eventPublisher,
+								  ObjectMapper objectMapper, RestTemplate restTemplate) {
 		super(properties, eventPublisher);
 		this.objectMapper = objectMapper;
 		this.restTemplate = restTemplate;
@@ -85,8 +85,8 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 	}
 
 	private static String buildMac(String ecName, String apId, String secretKey, String templateId,
-		String mobiles,
-		String params, String sign) {
+								   String mobiles,
+								   String params, String sign) {
 		String origin = ecName + apId + secretKey + templateId + mobiles + params + sign;
 		return DigestUtils.md5DigestAsHex(origin.getBytes(StandardCharsets.UTF_8));
 	}
@@ -99,7 +99,7 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -130,16 +130,17 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 		String paramsString = buildTemplateParas(params);
 		String body = buildRequestBody(mobiles, templateId, paramsString);
 
+		ResponseEntity<String> httpResponse = null;
 		try {
 			HttpEntity<String> httpEntity = new HttpEntity<>(body, new HttpHeaders());
 
-			ResponseEntity<String> httpResponse = restTemplate
+			httpResponse = restTemplate
 				.exchange(properties.getUri(), HttpMethod.POST, httpEntity, String.class);
 
 			if (httpResponse.getBody() == null) {
 				LogUtils.debug("response body ie null");
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException("response body ie null"));
+					new SendFailedException("response body ie null"), null);
 				return false;
 			}
 
@@ -152,15 +153,15 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 
 			boolean succeed = ChinaMobileResult.SUCCESS_RSPCOD.equals(result.getRspcod());
 			if (succeed) {
-				publishSendSuccessEvent(noticeData, phones);
+				publishSendSuccessEvent(noticeData, phones, httpResponse);
 			} else {
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException(result.getRspcod()));
+					new SendFailedException(result.getRspcod()), httpResponse);
 			}
 			return succeed;
 		} catch (Exception e) {
 			LogUtils.debug(e.getLocalizedMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, httpResponse);
 			return false;
 		}
 	}
@@ -170,10 +171,10 @@ public class ChinaMobileSendHandler extends AbstractSendHandler<ChinaMobilePrope
 			throw new SendFailedException("buildRequestBody(): mobiles or templateId is null.");
 		}
 
-		String ecName = com.taotao.cloud.sms.common.utils.StringUtils.trimToNull(properties.getEcName());
-		String apId = com.taotao.cloud.sms.common.utils.StringUtils.trimToNull(properties.getApId());
-		String secretKey = com.taotao.cloud.sms.common.utils.StringUtils.trimToNull(properties.getSecretKey());
-		String sign = com.taotao.cloud.sms.common.utils.StringUtils.trimToNull(properties.getSign());
+		String ecName = StringUtils.trimToNull(properties.getEcName());
+		String apId = StringUtils.trimToNull(properties.getApId());
+		String secretKey = StringUtils.trimToNull(properties.getSecretKey());
+		String sign = StringUtils.trimToNull(properties.getSign());
 		String mac = buildMac(ecName, apId, secretKey, templateId, mobiles, paramsString, sign);
 
 		String body = String

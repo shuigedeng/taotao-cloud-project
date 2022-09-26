@@ -48,7 +48,7 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 	private final RestTemplate restTemplate;
 
 	public UpyunSendHandler(UpyunProperties properties, ApplicationEventPublisher eventPublisher,
-		ObjectMapper objectMapper, RestTemplate restTemplate) {
+							ObjectMapper objectMapper, RestTemplate restTemplate) {
 		super(properties, eventPublisher);
 		this.objectMapper = objectMapper;
 		this.restTemplate = restTemplate;
@@ -62,7 +62,7 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -77,17 +77,18 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add(HttpHeaders.AUTHORIZATION, properties.getToken());
 
+		ResponseEntity<String> httpResponse = null;
 		try {
 			HttpEntity<String> httpEntity = new HttpEntity<>(
 				objectMapper.writeValueAsString(request), headers);
 
-			ResponseEntity<String> httpResponse = restTemplate
+			httpResponse = restTemplate
 				.exchange(API_URL, HttpMethod.POST, httpEntity, String.class);
 
 			if (httpResponse.getBody() == null) {
 				LogUtils.debug("response body ie null");
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException("response body ie null"));
+					new SendFailedException("response body ie null"), null);
 				return false;
 			}
 
@@ -97,7 +98,7 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 			boolean sendFail = !responseContent.contains("message_ids");
 			if (!isJson || sendFail) {
 				LogUtils.debug("send fail: {}", responseContent);
-				publishSendFailEvent(noticeData, phones, new SendFailedException(responseContent));
+				publishSendFailEvent(noticeData, phones, new SendFailedException(responseContent), httpResponse);
 				return false;
 			}
 
@@ -109,7 +110,7 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 
 			if (messageIds == null || messageIds.isEmpty()) {
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException("empty messageIds list"));
+					new SendFailedException("empty messageIds list"), httpResponse);
 				return false;
 			}
 
@@ -117,16 +118,16 @@ public class UpyunSendHandler extends AbstractSendHandler<UpyunProperties> {
 				.anyMatch(MessageId::succeed);
 
 			if (succeed) {
-				publishSendSuccessEvent(noticeData, phones);
+				publishSendSuccessEvent(noticeData, phones, httpResponse);
 			} else {
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException("templateId invalid"));
+					new SendFailedException("templateId invalid"), httpResponse);
 			}
 
 			return succeed;
 		} catch (Exception e) {
 			LogUtils.error(e.getLocalizedMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, httpResponse);
 			return false;
 		}
 	}

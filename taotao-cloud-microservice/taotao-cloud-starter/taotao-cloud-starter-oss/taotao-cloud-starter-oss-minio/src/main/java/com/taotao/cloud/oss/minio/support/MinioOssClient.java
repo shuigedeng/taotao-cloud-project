@@ -47,19 +47,30 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * {@link <a href="http://docs.minio.org.cn/docs/master/minio-monitoring-guide">...</a>" }
- * <p>
- * {@link <a href="https://docs.minio.org.cn/docs/master/minio-monitoring-guide"></a>}
- * <p>
- * {@link <a href="https://docs.min.io/">...</a>}
- *
  * @author shuigedeng
  * @version 2022.04
+ * @link <a href="http://docs.minio.org.cn/docs/master/minio-monitoring-guide">minio-monitoring-guide</a>"
+ * <p>
+ * @link <a href="https://docs.minio.org.cn/docs/master/minio-monitoring-guide">minio-monitoring-guide</a>
+ * <p>
+ * @link <a href="https://docs.min.io/">docs.min.io</a>
  * @since 2022-04-27 17:41:49
  */
 public class MinioOssClient implements StandardOssClient {
 
 	public static final String MINIO_OBJECT_NAME = "minioClient";
+
+	/**
+	 * See  <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1">HTTP/1.1 documentation</a>  sdfsadf .
+	 */
+	public static final String ACCEPT = "Accept";
+	/**
+	 * See <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.2">HTTP/1.1 documentation</a>
+	 */
+	/**
+	 * @see <a href="http://google.com">http://google.com</a>  sdfsadf
+	 */
+	public static final String ACCEPT_CHARSET = "Accept-Charset";
 
 	private MinioClient minioClient;
 	private MinioOssConfig minioOssConfig;

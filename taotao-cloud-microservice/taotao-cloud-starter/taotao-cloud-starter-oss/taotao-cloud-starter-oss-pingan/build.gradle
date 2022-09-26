@@ -5,6 +5,7 @@ dependencies {
     //平安云
     //api "com.pingan.obs:fincloud-pingan-obs-java-sdk:3.9.0.1"
     api fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
+    testImplementation project(path: ":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common", configuration: 'tests')
 
 }
 

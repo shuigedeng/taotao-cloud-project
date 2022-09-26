@@ -52,14 +52,20 @@ public class SmsSendFailEvent extends ApplicationEvent {
 	 */
 	private final Throwable cause;
 
+	/**
+	 * 返回数据
+	 */
+	private final Object response;
+
 	public SmsSendFailEvent(SendHandler source, String sendChannel, Collection<String> phones,
-							String type, Map<String, String> params, Throwable cause) {
+							String type, Map<String, String> params, Throwable cause, Object response) {
 		super(source);
 		this.sendChannel = sendChannel;
 		this.phones = phones;
 		this.type = type;
 		this.params = params;
 		this.cause = cause;
+		this.response = response;
 	}
 
 
@@ -81,5 +87,9 @@ public class SmsSendFailEvent extends ApplicationEvent {
 
 	public Throwable getCause() {
 		return cause;
+	}
+
+	public Object getResponse() {
+		return response;
 	}
 }

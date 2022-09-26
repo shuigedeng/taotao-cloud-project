@@ -53,8 +53,8 @@ public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudPro
 	private final RestTemplate restTemplate;
 
 	public NeteaseCloudSendHandler(NeteaseCloudProperties properties,
-		ApplicationEventPublisher eventPublisher,
-		ObjectMapper objectMapper, RestTemplate restTemplate) {
+								   ApplicationEventPublisher eventPublisher,
+								   ObjectMapper objectMapper, RestTemplate restTemplate) {
 		super(properties, eventPublisher);
 		this.objectMapper = objectMapper;
 		this.restTemplate = restTemplate;
@@ -85,7 +85,7 @@ public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudPro
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -119,15 +119,15 @@ public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudPro
 		body.add("templateid", templateId);
 		body.add("mobiles", mobilesString);
 		body.add("params", paramsString);
-
+		ResponseEntity<String> httpResponse = null;
 		try {
-			ResponseEntity<String> httpResponse = restTemplate.exchange(SERVER_URL, HttpMethod.POST,
+			httpResponse = restTemplate.exchange(SERVER_URL, HttpMethod.POST,
 				new HttpEntity<>(body, headers), String.class);
 
 			if (httpResponse.getBody() == null) {
 				LogUtils.debug("response body ie null");
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException("response body ie null"));
+					new SendFailedException("response body ie null"), httpResponse);
 				return false;
 			}
 
@@ -140,14 +140,14 @@ public class NeteaseCloudSendHandler extends AbstractSendHandler<NeteaseCloudPro
 
 			boolean succeed = NeteaseCloudResult.SUCCESS_CODE.equals(result.getCode());
 			if (succeed) {
-				publishSendSuccessEvent(noticeData, phones);
+				publishSendSuccessEvent(noticeData, phones, httpResponse);
 			} else {
-				publishSendFailEvent(noticeData, phones, new SendFailedException(result.getMsg()));
+				publishSendFailEvent(noticeData, phones, new SendFailedException(result.getMsg()), httpResponse);
 			}
 			return succeed;
 		} catch (Exception e) {
 			LogUtils.debug(e.getLocalizedMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, httpResponse);
 			return false;
 		}
 	}

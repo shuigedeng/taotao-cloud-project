@@ -1,0 +1,5 @@
+taotao:
+  cloud:
+    oss:
+      enabled: true
+      type: fastdfs

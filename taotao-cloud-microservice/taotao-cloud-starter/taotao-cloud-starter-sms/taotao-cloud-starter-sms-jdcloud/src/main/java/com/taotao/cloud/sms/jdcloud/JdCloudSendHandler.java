@@ -43,7 +43,7 @@ public class JdCloudSendHandler extends AbstractSendHandler<JdCloudProperties> {
 	private final SmsClient smsClient;
 
 	public JdCloudSendHandler(JdCloudProperties properties,
-		ApplicationEventPublisher eventPublisher) {
+							  ApplicationEventPublisher eventPublisher) {
 		super(properties, eventPublisher);
 		CredentialsProvider credentialsProvider = new StaticCredentialsProvider(
 			properties.getAccessKeyId(),
@@ -61,7 +61,7 @@ public class JdCloudSendHandler extends AbstractSendHandler<JdCloudProperties> {
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -89,10 +89,10 @@ public class JdCloudSendHandler extends AbstractSendHandler<JdCloudProperties> {
 		boolean flag = status != null && status;
 
 		if (flag) {
-			publishSendSuccessEvent(noticeData, phones);
+			publishSendSuccessEvent(noticeData, phones, result);
 		} else {
 			LogUtils.debug("send fail [code:{}, message:{}]", result.getCode(), result.getMessage());
-			publishSendFailEvent(noticeData, phones, new SendFailedException(result.getMessage()));
+			publishSendFailEvent(noticeData, phones, new SendFailedException(result.getMessage()), result);
 		}
 
 		return flag;

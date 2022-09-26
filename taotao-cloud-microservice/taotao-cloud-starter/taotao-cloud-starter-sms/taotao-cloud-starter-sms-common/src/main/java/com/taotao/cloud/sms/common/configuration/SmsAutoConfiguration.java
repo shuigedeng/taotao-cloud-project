@@ -41,6 +41,8 @@ import org.springframework.web.client.RestTemplate;
  * 短信服务配置
  *
  * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-09-26 17:50:03
  */
 @AutoConfiguration
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "enabled", havingValue = "true")

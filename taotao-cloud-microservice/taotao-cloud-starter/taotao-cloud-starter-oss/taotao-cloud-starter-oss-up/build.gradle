@@ -7,4 +7,6 @@ dependencies {
     api("com.upyun:java-sdk:4.2.3") {
         exclude group: "org.json", module: "json"
     }
+    testImplementation project(path: ":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common", configuration: 'tests')
+
 }

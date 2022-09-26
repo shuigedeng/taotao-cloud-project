@@ -59,7 +59,7 @@ public class TencentSendHandler extends AbstractSendHandler<TencentProperties> {
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -109,23 +109,24 @@ public class TencentSendHandler extends AbstractSendHandler<TencentProperties> {
 	}
 
 	private boolean send0(NoticeData noticeData, int templateId, ArrayList<String> params,
-		String nationCode,
-		ArrayList<String> phones) {
+						  String nationCode,
+						  ArrayList<String> phones) {
+		SmsMultiSenderResult result = null;
 		try {
-			SmsMultiSenderResult result = sender
+			result = sender
 				.sendWithParam(nationCode, phones, templateId, params, properties.getSmsSign(), "",
 					"");
 
 			if (result.result == 0) {
-				publishSendSuccessEvent(noticeData, phones);
+				publishSendSuccessEvent(noticeData, phones, result);
 				return true;
 			}
 
 			LogUtils.debug("send fail[code={}, errMsg={}]", result.result, result.errMsg);
-			publishSendFailEvent(noticeData, phones, new SendFailedException(result.errMsg));
+			publishSendFailEvent(noticeData, phones, new SendFailedException(result.errMsg), result);
 		} catch (Exception e) {
 			LogUtils.debug(e.getMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, result);
 		}
 
 		return false;

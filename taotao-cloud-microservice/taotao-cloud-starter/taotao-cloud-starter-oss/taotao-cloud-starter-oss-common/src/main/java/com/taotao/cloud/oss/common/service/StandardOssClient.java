@@ -5,8 +5,6 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
-import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.constant.OssConstant;
 import com.taotao.cloud.oss.common.exception.OssException;
@@ -31,7 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +37,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import static com.taotao.cloud.oss.common.util.OssPathUtil.getTargetName;
 
 /**
  * 标准操作系统客户端
@@ -60,7 +59,7 @@ public interface StandardOssClient {
 	default OssInfo upLoadWithMultipartFile(MultipartFile multipartFile) {
 		try {
 			UploadFileInfo uploadFileInfo = FileUtil.getMultipartFileInfo(multipartFile);
-			OssInfo ossInfo = upLoadWithInputStream(multipartFile.getInputStream(), uploadFileInfo.getName());
+			OssInfo ossInfo = upLoadWithInputStream(multipartFile.getInputStream(), getTargetName(multipartFile));
 			ossInfo.setUploadFileInfo(uploadFileInfo);
 			return ossInfo;
 		} catch (IOException e) {
@@ -90,7 +89,7 @@ public interface StandardOssClient {
 	default OssInfo upLoadWithFile(File file) {
 		try {
 			UploadFileInfo uploadFileInfo = FileUtil.getFileInfo(file);
-			OssInfo ossInfo = upLoadWithInputStream(new FileInputStream(file), uploadFileInfo.getName());
+			OssInfo ossInfo = upLoadWithInputStream(new FileInputStream(file), getTargetName(file));
 			ossInfo.setUploadFileInfo(uploadFileInfo);
 			return ossInfo;
 		} catch (IOException e) {
@@ -133,6 +132,11 @@ public interface StandardOssClient {
 	 */
 	default OssInfo upLoadCheckPoint(String file, String targetName) {
 		return upLoadCheckPoint(new File(file), targetName);
+	}
+
+	default OssInfo upLoadCheckPoint(String filePath) {
+		File file = new File(filePath);
+		return upLoadCheckPoint(file, getTargetName(file));
 	}
 
 	/**
@@ -853,10 +857,9 @@ public interface StandardOssClient {
 				key = key.substring(1);
 			}
 		}
-		String date = DateUtils.format(LocalDateTime.now(), "yyyy/MM/dd");
-
-		return date + "/" + IdGeneratorUtils.getId() + "/" + key;
+		return key;
 	}
+
 
 	/**
 	 * 获取文件存储根路径

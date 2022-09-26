@@ -11,5 +11,5 @@ dependencies {
     api "com.squareup.okio:okio"
     api "com.google.guava:guava"
 
-//    testImplementation project(path: ":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common", configuration: 'tests')
+    testImplementation project(path: ":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common", configuration: 'tests')
 }

@@ -39,6 +39,8 @@ import org.springframework.context.annotation.Bean;
  * 验证码服务配置
  *
  * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-09-26 17:50:30
  */
 @AutoConfiguration(after = SmsAutoConfiguration.class)
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "enabled", havingValue = "true")

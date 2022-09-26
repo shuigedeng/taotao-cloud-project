@@ -47,12 +47,18 @@ public class SmsSendSuccessEvent extends ApplicationEvent {
 	 */
 	private final Map<String, String> params;
 
-	public SmsSendSuccessEvent(SendHandler source, String sendChannel, Collection<String> phones, String type, Map<String, String> params) {
+	/**
+	 * 返回对象
+	 */
+	private final Object response;
+
+	public SmsSendSuccessEvent(SendHandler source, String sendChannel, Collection<String> phones, String type, Map<String, String> params, Object response) {
 		super(source);
 		this.sendChannel = sendChannel;
 		this.phones = phones;
 		this.type = type;
 		this.params = params;
+		this.response = response;
 	}
 
 	public String getSendChannel() {
@@ -69,5 +75,9 @@ public class SmsSendSuccessEvent extends ApplicationEvent {
 
 	public Map<String, String> getParams() {
 		return params;
+	}
+
+	public Object getResponse() {
+		return response;
 	}
 }

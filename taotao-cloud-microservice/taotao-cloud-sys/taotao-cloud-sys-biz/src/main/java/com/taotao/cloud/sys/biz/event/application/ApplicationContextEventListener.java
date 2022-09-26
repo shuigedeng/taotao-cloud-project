@@ -2,15 +2,15 @@ package com.taotao.cloud.sys.biz.event.application;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.ContextStoppedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.ServletRequestHandledEvent;
 
-@Configuration
+@Component
 public class ApplicationContextEventListener {
 	/**
 	 * <pre class="code">
@@ -26,13 +26,15 @@ public class ApplicationContextEventListener {
 	 * 一个特定于Web的事件，告诉所有Bean HTTP请求已得到服务。请求完成后，将发布此事件。此事件仅适用于使用Spring的DispatcherServlet的Web应用程序。
 	 * </pre>
 	 */
-	@Component
-	public static class ContextRefreshedEventListener implements ApplicationListener<ContextRefreshedEvent> {
-		@Override
-		public void onApplicationEvent(ContextRefreshedEvent event) {
-			LogUtils.info("ApplicationContextEventListener ----- ContextRefreshedEvent onApplicationEvent {}", event);
-		}
+	@EventListener(ContextRefreshedEvent.class)
+	public void contextRefreshedEventListener(ContextRefreshedEvent event) {
+		LogUtils.info("ApplicationContextEventListener ----- ContextRefreshedEvent onApplicationEvent {}", event);
 	}
+
+	// @Async
+	// @EventListener(ContextRefreshedEvent.class)
+	// public void saveRequestLog(ContextRefreshedEvent event) {
+	// }
 
 	@Component
 	public static class ContextStartedEventListener implements ApplicationListener<ContextStartedEvent> {

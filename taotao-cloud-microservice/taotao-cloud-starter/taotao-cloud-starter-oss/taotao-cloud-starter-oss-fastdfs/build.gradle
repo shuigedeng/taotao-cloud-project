@@ -6,6 +6,8 @@ dependencies {
     api("com.github.tobato:fastdfs-client:1.27.2") {
         exclude group: "commons-beanutils", module: "commons-beanutils"
     }
+    testImplementation project(path: ":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common", configuration: 'tests')
+
 }
 
 
