@@ -52,9 +52,9 @@ public class AliyunAutoConfiguration {
 	@Bean
 	@ConditionalOnBean(SmsSenderLoadBalancer.class)
 	public AliyunSendHandler aliyunSendHandler(AliyunProperties properties,
-                                               ObjectMapper objectMapper,
-                                               SmsSenderLoadBalancer loadbalancer,
-                                               ApplicationEventPublisher eventPublisher) {
+											   ObjectMapper objectMapper,
+											   SmsSenderLoadBalancer loadbalancer,
+											   ApplicationEventPublisher eventPublisher) throws Exception {
 		AliyunSendHandler handler = new AliyunSendHandler(properties, eventPublisher, objectMapper);
 		loadbalancer.addTarget(handler, true);
 		loadbalancer.setWeight(handler, properties.getWeight());

@@ -12,22 +12,24 @@
  */
 package com.taotao.cloud.sms.aliyun;
 
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.aliyuncs.http.MethodType;
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
+import com.aliyun.auth.credentials.Credential;
+import com.aliyun.auth.credentials.provider.StaticCredentialProvider;
+import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
+import com.aliyun.dysmsapi20170525.models.SendSmsResponseBody;
+import com.aliyun.sdk.service.dysmsapi20170525.AsyncClient;
+import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsRequest;
+import com.aliyun.teaopenapi.models.Config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.exception.SendFailedException;
 import com.taotao.cloud.sms.common.handler.AbstractSendHandler;
 import com.taotao.cloud.sms.common.model.NoticeData;
+import darabonba.core.client.ClientOverrideConfiguration;
 import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 阿里云短信发送处理
@@ -46,7 +48,9 @@ public class AliyunSendHandler extends AbstractSendHandler<AliyunProperties> {
 
 	private final ObjectMapper objectMapper;
 
-	private final IAcsClient acsClient;
+	private final com.aliyun.dysmsapi20170525.Client aliyunSmsClient;
+	private final AsyncClient asyncClient;
+
 
 	/**
 	 * 构造阿里云短信发送处理
@@ -56,7 +60,7 @@ public class AliyunSendHandler extends AbstractSendHandler<AliyunProperties> {
 	 * @param objectMapper   objectMapper
 	 */
 	public AliyunSendHandler(AliyunProperties properties, ApplicationEventPublisher eventPublisher,
-		ObjectMapper objectMapper) {
+							 ObjectMapper objectMapper) throws Exception {
 		super(properties, eventPublisher);
 		this.objectMapper = objectMapper;
 
@@ -64,14 +68,36 @@ public class AliyunSendHandler extends AbstractSendHandler<AliyunProperties> {
 		String accessKeyId = properties.getAccessKeyId();
 		String accessKeySecret = properties.getAccessKeySecret();
 
-		IClientProfile profile = DefaultProfile.getProfile(endPoint, accessKeyId, accessKeySecret);
-		DefaultProfile.addEndpoint(endPoint, PRODUCT, DOMAIN);
+		com.aliyun.teaopenapi.models.Config config = new Config()
+			// 您的 AccessKey ID
+			.setAccessKeyId(accessKeyId)
+			// 您的 AccessKey Secret
+			.setAccessKeySecret(accessKeySecret);
+		// 访问的域名
+		config.endpoint = DOMAIN;
+		this.aliyunSmsClient = new com.aliyun.dysmsapi20170525.Client(config);
 
-		//可自助调整超时时间
-		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
-		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
+		// ******************************异步客户端******************************
+		// Configure Credentials authentication information, including ak, secret, token
+		StaticCredentialProvider provider = StaticCredentialProvider.create(Credential.builder()
+			.accessKeyId(accessKeyId)
+			.accessKeySecret(accessKeySecret)
+			//.securityToken("<your-token>") // use STS token
+			.build());
 
-		acsClient = new DefaultAcsClient(profile);
+		// Configure the Client
+		this.asyncClient = AsyncClient.builder()
+			.region(endPoint) // Region ID
+			//.httpClient(httpClient) // Use the configured HttpClient, otherwise use the default HttpClient (Apache HttpClient)
+			.credentialsProvider(provider)
+			//.serviceConfiguration(Configuration.create()) // Service-level configuration
+			// Client-level configuration rewrite, can set Endpoint, Http request parameters, etc.
+			.overrideConfiguration(
+				ClientOverrideConfiguration.create()
+					.setEndpointOverride(DOMAIN)
+				//.setReadTimeout(Duration.ofSeconds(30))
+			)
+			.build();
 	}
 
 	@Override
@@ -81,33 +107,57 @@ public class AliyunSendHandler extends AbstractSendHandler<AliyunProperties> {
 			paramString = objectMapper.writeValueAsString(noticeData.getParams());
 		} catch (Exception e) {
 			LogUtils.debug(e.getMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, null);
 			return false;
 		}
 
-		SendSmsRequest request = new SendSmsRequest();
-		request.setSysMethod(MethodType.POST);
-		request.setPhoneNumbers(StringUtils.join(phones, ","));
-		request.setSignName(properties.getSignName());
-		request.setTemplateCode(properties.getTemplates(noticeData.getType()));
-		request.setTemplateParam(paramString);
+		com.aliyun.dysmsapi20170525.models.SendSmsRequest sendSmsRequest = new com.aliyun.dysmsapi20170525.models.SendSmsRequest()
+			.setSignName(properties.getSignName())
+			.setTemplateCode(properties.getTemplates(noticeData.getType()))
+			.setPhoneNumbers(StringUtils.join(phones, ","))
+			.setTemplateParam(paramString);
 
+		// Parameter settings for API request
+		SendSmsRequest asyncSendSmsRequest = SendSmsRequest.builder()
+			.signName(properties.getSignName())
+			.templateCode(properties.getTemplates(noticeData.getType()))
+			.phoneNumbers(StringUtils.join(phones, ","))
+			.templateParam(paramString)
+			// Request-level configuration rewrite, can set Http request parameters, etc.
+			// .requestConfiguration(RequestConfiguration.create().setHttpHeaders(new HttpHeaders()))
+			.build();
+
+		com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsResponse asyncSendSmsResponse = null;
+		SendSmsResponse sendSmsResponse = null;
 		try {
-			SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
+			if (noticeData.isAsnyc()) {
+				CompletableFuture<com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsResponse> response = asyncClient.sendSms(asyncSendSmsRequest);
+				// Synchronously get the return value of the API request
+				asyncSendSmsResponse = response.get();
+				com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsResponseBody body = asyncSendSmsResponse.getBody();
+				if (OK.equals(body.getCode())) {
+					publishSendSuccessEvent(noticeData, phones, asyncSendSmsResponse);
+					return true;
+				}
 
-			if (OK.equals(sendSmsResponse.getCode())) {
-				publishSendSuccessEvent(noticeData, phones);
-				return true;
+				LogUtils.debug("send fail[code={}, message={}]", body.getCode(), body.getMessage());
+
+				publishSendFailEvent(noticeData, phones, new SendFailedException(body.getMessage()), asyncSendSmsResponse);
+			} else {
+				sendSmsResponse = aliyunSmsClient.sendSms(sendSmsRequest);
+				SendSmsResponseBody body = sendSmsResponse.getBody();
+				if (OK.equals(body.getCode())) {
+					publishSendSuccessEvent(noticeData, phones, sendSmsResponse);
+					return true;
+				}
+
+				LogUtils.debug("send fail[code={}, message={}]", body.getCode(), body.getMessage());
+
+				publishSendFailEvent(noticeData, phones, new SendFailedException(body.getMessage()), sendSmsResponse);
 			}
-
-			LogUtils.debug("send fail[code={}, message={}]", sendSmsResponse.getCode(),
-				sendSmsResponse.getMessage());
-
-			publishSendFailEvent(noticeData, phones,
-				new SendFailedException(sendSmsResponse.getMessage()));
 		} catch (Exception e) {
 			LogUtils.debug(e.getMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, noticeData.isAsnyc() ? asyncSendSmsResponse : sendSmsResponse);
 		}
 		return false;
 	}

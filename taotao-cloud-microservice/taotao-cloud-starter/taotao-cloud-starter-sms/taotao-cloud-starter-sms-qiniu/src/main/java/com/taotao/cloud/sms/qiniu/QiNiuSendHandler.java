@@ -53,25 +53,25 @@ public class QiNiuSendHandler extends AbstractSendHandler<QiNiuProperties> {
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
-
+		Response response = null;
 		try {
-			Response response = smsManager
+			response = smsManager
 				.sendMessage(templateId, phones.toArray(new String[]{}), noticeData.getParams());
 
 			if (response.isOK()) {
-				publishSendSuccessEvent(noticeData, phones);
+				publishSendSuccessEvent(noticeData, phones, response);
 				return true;
 			}
 
 			LogUtils.debug("send fail, error: {}", response.error);
-			publishSendFailEvent(noticeData, phones, new SendFailedException(response.error));
+			publishSendFailEvent(noticeData, phones, new SendFailedException(response.error), response);
 			return false;
 		} catch (Exception e) {
 			LogUtils.debug(e.getLocalizedMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, response);
 		}
 
 		return false;

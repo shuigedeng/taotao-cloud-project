@@ -44,7 +44,7 @@ public class JPushSendHandler extends AbstractSendHandler<JPushProperties> {
 	private final RestTemplate restTemplate;
 
 	public JPushSendHandler(JPushProperties properties, ApplicationEventPublisher eventPublisher,
-		ObjectMapper objectMapper, RestTemplate restTemplate) {
+							ObjectMapper objectMapper, RestTemplate restTemplate) {
 		super(properties, eventPublisher);
 		this.objectMapper = objectMapper;
 		this.restTemplate = restTemplate;
@@ -58,14 +58,14 @@ public class JPushSendHandler extends AbstractSendHandler<JPushProperties> {
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
 		String[] phoneArray = phones.toArray(new String[]{});
 
+		Result result = null;
 		try {
-			Result result;
 			if (phoneArray.length > 1) {
 				MultiRecipient data = new MultiRecipient();
 				data.setSignId(properties.getSignId());
@@ -95,16 +95,16 @@ public class JPushSendHandler extends AbstractSendHandler<JPushProperties> {
 			}
 
 			if (result.getError() == null) {
-				publishSendSuccessEvent(noticeData, phones);
+				publishSendSuccessEvent(noticeData, phones, result);
 				return true;
 			} else {
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException(result.getError().getMessage()));
+					new SendFailedException(result.getError().getMessage()), result);
 				return false;
 			}
 		} catch (Exception e) {
 			LogUtils.debug(e.getLocalizedMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, result);
 		}
 
 		return false;

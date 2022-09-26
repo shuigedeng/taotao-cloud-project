@@ -1,0 +1,6 @@
+taotao:
+  cloud:
+    sms:
+      type: aliyun
+      aliyun:
+        access-key-id:

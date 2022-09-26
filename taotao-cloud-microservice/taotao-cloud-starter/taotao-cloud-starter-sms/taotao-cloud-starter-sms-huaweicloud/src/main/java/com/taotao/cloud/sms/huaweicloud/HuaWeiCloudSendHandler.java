@@ -66,8 +66,8 @@ public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudPrope
 	private final RestTemplate restTemplate;
 
 	public HuaWeiCloudSendHandler(HuaWeiCloudProperties properties,
-		ApplicationEventPublisher eventPublisher,
-		ObjectMapper objectMapper, RestTemplate restTemplate) {
+								  ApplicationEventPublisher eventPublisher,
+								  ObjectMapper objectMapper, RestTemplate restTemplate) {
 		super(properties, eventPublisher);
 		this.objectMapper = objectMapper;
 		this.restTemplate = restTemplate;
@@ -122,7 +122,7 @@ public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudPrope
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -161,14 +161,15 @@ public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudPrope
 		headers.set(HttpHeaders.AUTHORIZATION, AUTH_HEADER_VALUE);
 		headers.set("X-WSSE", wsseHeader);
 
+		ResponseEntity<String> httpResponse = null;
 		try {
-			ResponseEntity<String> httpResponse = restTemplate.exchange(properties.getUri(),
+			httpResponse = restTemplate.exchange(properties.getUri(),
 				HttpMethod.POST, new HttpEntity<>(body, headers), String.class);
 
 			if (httpResponse.getBody() == null) {
 				LogUtils.debug("response body ie null");
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException("response body ie null"));
+					new SendFailedException("response body ie null"), httpResponse);
 				return false;
 			}
 
@@ -181,21 +182,21 @@ public class HuaWeiCloudSendHandler extends AbstractSendHandler<HuaWeiCloudPrope
 
 			boolean succeed = HuaWeiCloudResult.SUCCESS_CODE.equals(result.getCode());
 			if (succeed) {
-				publishSendSuccessEvent(noticeData, phones);
+				publishSendSuccessEvent(noticeData, phones, httpResponse);
 			} else {
 				publishSendFailEvent(noticeData, phones,
-					new SendFailedException(result.getDescription()));
+					new SendFailedException(result.getDescription()), httpResponse);
 			}
 			return succeed;
 		} catch (Exception e) {
 			LogUtils.debug(e.getLocalizedMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, httpResponse);
 			return false;
 		}
 	}
 
 	private MultiValueMap<String, String> buildRequestBody(String receiver, String templateId,
-		String templateParas) {
+														   String templateParas) {
 		if (StringUtils.isAnyBlank(receiver, templateId)) {
 			throw new SendFailedException("buildRequestBody(): receiver or templateId is null.");
 		}

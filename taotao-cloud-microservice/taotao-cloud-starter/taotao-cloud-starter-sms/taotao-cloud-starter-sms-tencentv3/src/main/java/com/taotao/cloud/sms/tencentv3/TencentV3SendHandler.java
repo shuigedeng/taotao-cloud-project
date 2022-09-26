@@ -80,7 +80,7 @@ public class TencentV3SendHandler extends AbstractSendHandler<TencentV3Propertie
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -102,7 +102,8 @@ public class TencentV3SendHandler extends AbstractSendHandler<TencentV3Propertie
 	}
 
 	private boolean send0(NoticeData noticeData, String templateId, ArrayList<String> params,
-		Collection<String> phones) {
+						  Collection<String> phones) {
+		SendSmsResponse result = null;
 		try {
 			SendSmsRequest request = new SendSmsRequest();
 			request.setSmsSdkAppid(properties.getSmsAppId());
@@ -111,7 +112,7 @@ public class TencentV3SendHandler extends AbstractSendHandler<TencentV3Propertie
 			request.setTemplateParamSet(params.toArray(new String[0]));
 			request.setPhoneNumberSet(phones.toArray(new String[0]));
 
-			SendSmsResponse result = sender.SendSms(request);
+			result = sender.SendSms(request);
 
 			if (result.getSendStatusSet() == null) {
 				return false;
@@ -131,18 +132,18 @@ public class TencentV3SendHandler extends AbstractSendHandler<TencentV3Propertie
 					message = sendStatus.getMessage();
 					LogUtils.debug("send fail[phone={}, code={}, errMsg={}]", phone, code, message);
 					publishSendFailEvent(noticeData, Collections.singleton(phone),
-						new SendFailedException(message));
+						new SendFailedException(message), result);
 				}
 			}
 
 			if (!success.isEmpty()) {
-				publishSendSuccessEvent(noticeData, success);
+				publishSendSuccessEvent(noticeData, success, result);
 			}
 
 			return !success.isEmpty();
 		} catch (Exception e) {
 			LogUtils.debug(e.getMessage(), e);
-			publishSendFailEvent(noticeData, phones, e);
+			publishSendFailEvent(noticeData, phones, e, result);
 		}
 
 		return false;

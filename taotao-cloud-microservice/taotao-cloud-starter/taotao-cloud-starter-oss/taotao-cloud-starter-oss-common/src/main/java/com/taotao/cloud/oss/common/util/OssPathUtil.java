@@ -2,6 +2,12 @@ package com.taotao.cloud.oss.common.util;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
+import com.taotao.cloud.common.utils.date.DateUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.time.LocalDateTime;
 
 /**
  * oss路径跑龙套
@@ -74,4 +80,16 @@ public class OssPathUtil {
 		}
 		return convertPath(newPath, isAbsolute);
 	}
+
+
+	public static String getTargetName(File file) {
+		String date = DateUtils.format(LocalDateTime.now(), "yyyy/MM/dd");
+		return date + "/" + IdGeneratorUtils.getId() + "/" + file.getName();
+	}
+
+	public static String getTargetName(MultipartFile file) {
+		String date = DateUtils.format(LocalDateTime.now(), "yyyy/MM/dd");
+		return date + "/" + IdGeneratorUtils.getId() + "/" + file.getName();
+	}
+
 }

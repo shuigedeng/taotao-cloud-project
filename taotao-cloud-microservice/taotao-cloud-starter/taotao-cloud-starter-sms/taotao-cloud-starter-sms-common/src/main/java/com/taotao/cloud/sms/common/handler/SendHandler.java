@@ -13,7 +13,6 @@
 package com.taotao.cloud.sms.common.handler;
 
 
-
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.sms.common.model.NoticeData;
 

@@ -47,12 +47,18 @@ public class SmsSendFinallyEvent extends ApplicationEvent {
 	 */
 	private final Map<String, String> params;
 
-	public SmsSendFinallyEvent(SendHandler source, String sendChannel, Collection<String> phones, String type, Map<String, String> params) {
+	/**
+	 * 返回数据
+	 */
+	private final Object response;
+
+	public SmsSendFinallyEvent(SendHandler source, String sendChannel, Collection<String> phones, String type, Map<String, String> params, Object response) {
 		super(source);
 		this.sendChannel = sendChannel;
 		this.phones = phones;
 		this.type = type;
 		this.params = params;
+		this.response = response;
 	}
 
 	public Collection<String> getPhones() {
@@ -69,5 +75,9 @@ public class SmsSendFinallyEvent extends ApplicationEvent {
 
 	public String getSendChannel() {
 		return sendChannel;
+	}
+
+	public Object getResponse() {
+		return response;
 	}
 }

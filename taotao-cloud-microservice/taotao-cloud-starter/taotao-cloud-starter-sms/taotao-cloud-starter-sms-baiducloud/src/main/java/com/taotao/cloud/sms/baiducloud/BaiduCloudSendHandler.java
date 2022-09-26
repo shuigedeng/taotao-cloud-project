@@ -38,7 +38,7 @@ public class BaiduCloudSendHandler extends AbstractSendHandler<BaiduCloudPropert
 	private final SmsClient client;
 
 	public BaiduCloudSendHandler(BaiduCloudProperties properties,
-		ApplicationEventPublisher eventPublisher) {
+								 ApplicationEventPublisher eventPublisher) {
 		super(properties, eventPublisher);
 
 		SmsClientConfiguration config = new SmsClientConfiguration();
@@ -62,7 +62,7 @@ public class BaiduCloudSendHandler extends AbstractSendHandler<BaiduCloudPropert
 
 		if (templateId == null) {
 			LogUtils.debug("templateId invalid");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("templateId invalid"), null);
 			return false;
 		}
 
@@ -76,17 +76,15 @@ public class BaiduCloudSendHandler extends AbstractSendHandler<BaiduCloudPropert
 
 		if (response == null) {
 			LogUtils.debug("send fail: empty response");
-			publishSendFailEvent(noticeData, phones, new SendFailedException("empty response"));
+			publishSendFailEvent(noticeData, phones, new SendFailedException("empty response"), response);
 			return false;
 		} else if (!response.isSuccess()) {
-			LogUtils.debug("send fail: [code:{}, message:{}]", response.getCode(),
-				response.getMessage());
-			publishSendFailEvent(noticeData, phones,
-				new SendFailedException(response.getMessage()));
+			LogUtils.debug("send fail: [code:{}, message:{}]", response.getCode(), response.getMessage());
+			publishSendFailEvent(noticeData, phones, new SendFailedException(response.getMessage()), response);
 			return false;
 		}
 
-		publishSendSuccessEvent(noticeData, phones);
+		publishSendSuccessEvent(noticeData, phones, response);
 		return true;
 	}
 }

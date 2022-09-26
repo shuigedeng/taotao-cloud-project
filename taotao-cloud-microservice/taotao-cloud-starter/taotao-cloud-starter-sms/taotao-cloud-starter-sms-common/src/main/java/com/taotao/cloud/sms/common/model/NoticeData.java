@@ -25,7 +25,7 @@ import java.util.Map;
 public class NoticeData {
 
 	/**
-	 * 类型
+	 * 类型 template_code
 	 */
 	private String type;
 
@@ -33,6 +33,11 @@ public class NoticeData {
 	 * 参数列表
 	 */
 	private Map<String, String> params;
+
+	/**
+	 * 目前仅支持 阿里云
+	 */
+	private boolean asnyc;
 
 	public String getType() {
 		return type;
@@ -48,5 +53,13 @@ public class NoticeData {
 
 	public void setParams(Map<String, String> params) {
 		this.params = params;
+	}
+
+	public boolean isAsnyc() {
+		return asnyc;
+	}
+
+	public void setAsnyc(boolean asnyc) {
+		this.asnyc = asnyc;
 	}
 }

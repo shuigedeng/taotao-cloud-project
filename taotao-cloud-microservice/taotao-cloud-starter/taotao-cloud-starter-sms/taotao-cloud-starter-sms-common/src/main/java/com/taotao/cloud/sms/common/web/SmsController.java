@@ -11,6 +11,7 @@
  * limitations under the License.
  */
 package com.taotao.cloud.sms.common.web;
+
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.sms.common.exception.VerificationCodeIsNullException;
 import com.taotao.cloud.sms.common.exception.VerifyFailException;
@@ -44,7 +45,7 @@ public class SmsController {
 	private final NoticeService noticeService;
 
 	public SmsController(VerificationCodeService verificationCodeService,
-		NoticeService noticeService) {
+						 NoticeService noticeService) {
 		this.verificationCodeService = verificationCodeService;
 		this.noticeService = noticeService;
 	}
