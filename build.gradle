@@ -80,7 +80,7 @@ buildscript {
         //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
         easyCaptchaVersion = '1.6.2'
         //https://search.maven.org/artifact/cn.hutool/hutool-all
-        hutoolVersion = '5.8.7'
+        hutoolVersion = '5.8.8'
         //https://search.maven.org/artifact/javax.validation/validation-api
         validationApiVersion = '2.0.1.Final'
         //https://search.maven.org/artifact/com.querydsl/querydsl-apt
