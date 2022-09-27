@@ -14,8 +14,13 @@ dependencies {
 
     //https://gitee.com/bboss/bboss-elastic
     //https://esdoc.bbossgroups.com/#/spring-booter-with-bboss
-    api 'com.bbossgroups.plugins:bboss-elasticsearch-rest-jdbc:6.7.5'
-    api 'com.bbossgroups.plugins:bboss-elasticsearch-spring-boot-starter:6.7.5'
+    api('com.bbossgroups.plugins:bboss-elasticsearch-rest-jdbc:6.7.5') {
+        exclude group: "org.slf4j", module: "slf4j-log4j12"
+        exclude group: "commons-collections", module: "commons-collections"
+    }
+    api('com.bbossgroups.plugins:bboss-elasticsearch-spring-boot-starter:6.7.5') {
+        exclude group: "org.slf4j", module: "slf4j-log4j12"
+    }
 
     testImplementation "org.noear:solon-test:1.10.1"
 }
