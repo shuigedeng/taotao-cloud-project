@@ -29,6 +29,7 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -50,8 +51,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @since 2021-09-07 21:17:02
  */
 @AutoConfiguration
-@EnableConfigurationProperties({RedisProperties.class, CacheProperties.class})
-public class RedisAutoConfiguration  implements InitializingBean {
+@ConditionalOnProperty(prefix = com.taotao.cloud.redis.properties.RedisProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@EnableConfigurationProperties({RedisProperties.class, CacheProperties.class, com.taotao.cloud.redis.properties.RedisProperties.class})
+public class RedisAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -66,7 +68,7 @@ public class RedisAutoConfiguration  implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean(RedisSerializer.class)
 	public RedisSerializer<Object> redisSerializer(CacheProperties properties,
-		ObjectProvider<ObjectMapper> objectProvider) {
+												   ObjectProvider<ObjectMapper> objectProvider) {
 		SerializerType serializerType = properties.getSerializerType();
 
 		if (SerializerType.JDK == serializerType) {
@@ -95,7 +97,7 @@ public class RedisAutoConfiguration  implements InitializingBean {
 	@Bean
 	@ConditionalOnClass(RedisOperations.class)
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory,
-		RedisSerializer<Object> redisSerializer) {
+													   RedisSerializer<Object> redisSerializer) {
 		RedisTemplate<String, Object> template = new RedisTemplate<>();
 		template.setConnectionFactory(factory);
 

@@ -104,7 +104,7 @@ public class VerificationCodeAutoConfiguration {
 	@Bean
 	@ConditionalOnBean(RedisRepository.class)
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = VerificationCodeProperties.PREFIX, name = "repository", havingValue = "redis", matchIfMissing = true)
+	@ConditionalOnProperty(prefix = VerificationCodeProperties.PREFIX, name = "repository", havingValue = "redis")
 	public VerificationCodeRepository verificationCodeRedisRepository(
 		RedisRepository redisRepository,
 		ObjectMapper objectMapper) {
