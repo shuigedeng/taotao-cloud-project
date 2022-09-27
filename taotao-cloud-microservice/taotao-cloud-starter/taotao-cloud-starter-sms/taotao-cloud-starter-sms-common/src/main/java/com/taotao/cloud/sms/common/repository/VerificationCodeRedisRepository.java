@@ -12,8 +12,8 @@
  */
 package com.taotao.cloud.sms.common.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.constant.RedisConstant;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -35,45 +35,29 @@ public class VerificationCodeRedisRepository implements VerificationCodeReposito
 
 	private final RedisRepository redisRepository;
 
-	private final ObjectMapper objectMapper;
-
-	public VerificationCodeRedisRepository(
-		RedisRepository redisRepository,
-		ObjectMapper objectMapper) {
+	public VerificationCodeRedisRepository(RedisRepository redisRepository) {
 		this.redisRepository = redisRepository;
-		this.objectMapper = objectMapper;
 	}
 
 	@Override
 	public VerificationCode findOne(String phone, @Nullable String identificationCode) {
 		String key = key(phone, identificationCode);
-		String data = (String) redisRepository.get(key);
+		String value = (String) redisRepository.get(key);
 
-		if (StringUtils.isBlank(data)) {
+		if (StringUtils.isBlank(value)) {
 			LogUtils.debug("json data is empty for key: {}", key);
 			return null;
 		}
 
-		try {
-			return objectMapper.readValue(data, VerificationCode.class);
-		} catch (Exception e) {
-			LogUtils.debug(e.getMessage(), e);
-			return null;
-		}
+		return JsonUtils.toObject(value, VerificationCode.class);
 	}
 
 	@Override
 	public void save(VerificationCode verificationCode) {
 		String key = key(verificationCode.getPhone(), verificationCode.getIdentificationCode());
 		LocalDateTime expirationTime = verificationCode.getExpirationTime();
-		String value;
 
-		try {
-			value = objectMapper.writeValueAsString(verificationCode);
-		} catch (Exception e) {
-			LogUtils.debug(e.getMessage(), e);
-			throw new RuntimeException(e);
-		}
+		String value = JsonUtils.toJSONString(verificationCode);
 
 		if (expirationTime == null) {
 			redisRepository.set(key, value);
@@ -92,19 +76,13 @@ public class VerificationCodeRedisRepository implements VerificationCodeReposito
 	}
 
 	private String key(String phone, @Nullable String identificationCode) {
+		assert identificationCode != null;
 		String tempIdentificationCode = StringUtils.trimToNull(identificationCode);
 
-		StringBuilder keyBuilder = new StringBuilder();
-
-		keyBuilder.append(RedisConstant.SMS_VERIFICATION_CODE_KEY_PREFIX);
-		keyBuilder.append(StringUtils.trimToNull(phone));
-
-		if (tempIdentificationCode != null) {
-			keyBuilder.append(":");
-			keyBuilder.append(tempIdentificationCode);
-		}
-
-		return keyBuilder.toString();
+		return RedisConstant.SMS_VERIFICATION_CODE_KEY_PREFIX +
+			StringUtils.trimToNull(phone) +
+			":" +
+			tempIdentificationCode;
 	}
 
 }
