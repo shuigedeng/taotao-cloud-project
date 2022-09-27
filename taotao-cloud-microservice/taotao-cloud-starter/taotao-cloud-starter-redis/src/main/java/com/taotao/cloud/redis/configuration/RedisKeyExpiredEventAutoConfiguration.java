@@ -2,8 +2,10 @@ package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +24,7 @@ import org.springframework.scheduling.annotation.Async;
  * @since 2022-07-03 09:24:57
  */
 @AutoConfiguration
+@ConditionalOnBean(RedissonClient.class)
 @ConditionalOnProperty(prefix = "taotao.cloud.redis.key-expired-event.enable", value = "true", matchIfMissing = true)
 public class RedisKeyExpiredEventAutoConfiguration implements InitializingBean {
 

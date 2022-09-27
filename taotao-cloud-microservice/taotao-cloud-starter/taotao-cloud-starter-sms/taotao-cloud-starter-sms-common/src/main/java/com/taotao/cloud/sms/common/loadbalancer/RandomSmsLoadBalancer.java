@@ -17,7 +17,6 @@ import com.taotao.cloud.sms.common.model.NoticeData;
 import org.springframework.lang.Nullable;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * random Load Balancer
@@ -34,10 +33,10 @@ public class RandomSmsLoadBalancer extends RandomLoadBalancer<SendHandler, Notic
 	@Nullable
 	@Override
 	protected SendHandler choose0(List<TargetWrapper<SendHandler>> activeTargetList,
-		NoticeData chooseReferenceObject) {
+								  NoticeData chooseReferenceObject) {
 		List<TargetWrapper<SendHandler>> newActiveTargetList = activeTargetList.stream()
 			.filter(wrapper -> chooseFilter(wrapper, chooseReferenceObject))
-			.collect(Collectors.toList());
+			.toList();
 		if (newActiveTargetList.isEmpty()) {
 			return null;
 		}
