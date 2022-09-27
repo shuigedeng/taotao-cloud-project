@@ -5,14 +5,17 @@ dependencies {
 
     //https://gitee.com/dromara/easy-es.git
     //https://search.maven.org/artifact/cn.easy-es/easy-es-boot-starter
-    implementation("cn.easy-es:easy-es-boot-starter:1.0.2") {
+    api("cn.easy-es:easy-es-boot-starter:1.0.2") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
     //https://search.maven.org/artifact/org.noear/snack3
-    implementation "org.noear:snack3:3.2.39"
+    api "org.noear:snack3:3.2.39"
+
+    //https://gitee.com/bboss/bboss-elastic
+    //https://esdoc.bbossgroups.com/#/spring-booter-with-bboss
+    api 'com.bbossgroups.plugins:bboss-elasticsearch-rest-jdbc:6.7.5'
+    api 'com.bbossgroups.plugins:bboss-elasticsearch-spring-boot-starter:6.7.5'
 
     testImplementation "org.noear:solon-test:1.10.1"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
