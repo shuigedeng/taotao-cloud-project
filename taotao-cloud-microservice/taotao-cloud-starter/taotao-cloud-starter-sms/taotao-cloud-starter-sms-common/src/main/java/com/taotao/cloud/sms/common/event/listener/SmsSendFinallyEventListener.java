@@ -10,16 +10,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sms.common.handler;
+package com.taotao.cloud.sms.common.event.listener;
 
-import com.taotao.cloud.sms.common.event.SmsSendSuccessEvent;
+import com.taotao.cloud.sms.common.event.SmsSendFinallyEvent;
 import org.springframework.context.ApplicationListener;
 
 /**
- * 发送成功事件监听接口
+ * 发送完成事件监听接口
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-27 17:48:41
+ * @since 2022-04-27 17:48:38
  */
-public interface SmsSendSuccessEventListener extends ApplicationListener<SmsSendSuccessEvent> {}
+public interface SmsSendFinallyEventListener extends ApplicationListener<SmsSendFinallyEvent> {
+}

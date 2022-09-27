@@ -15,8 +15,8 @@ package com.taotao.cloud.sms.common.handler;
 import com.taotao.cloud.sms.common.event.SmsSendFailEvent;
 import com.taotao.cloud.sms.common.event.SmsSendFinallyEvent;
 import com.taotao.cloud.sms.common.event.SmsSendSuccessEvent;
-import com.taotao.cloud.sms.common.model.AbstractHandlerProperties;
 import com.taotao.cloud.sms.common.model.NoticeData;
+import com.taotao.cloud.sms.common.properties.AbstractHandlerProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.lang.Nullable;
 

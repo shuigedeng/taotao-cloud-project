@@ -12,7 +12,7 @@
  */
 package com.taotao.cloud.sms.yunpian;
 
-import com.taotao.cloud.sms.common.model.AbstractHandlerProperties;
+import com.taotao.cloud.sms.common.properties.AbstractHandlerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 

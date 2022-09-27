@@ -1,4 +1,4 @@
-package com.taotao.cloud.message.biz.event;
+package com.taotao.cloud.message.biz.event.message;
 
 import org.springframework.context.ApplicationEvent;
 

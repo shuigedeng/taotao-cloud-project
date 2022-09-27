@@ -12,7 +12,6 @@
  */
 package com.taotao.cloud.sms.common.configuration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sms.common.model.VerificationCodeTypeGenerate;
@@ -105,12 +104,8 @@ public class VerificationCodeAutoConfiguration {
 	@ConditionalOnBean(RedisRepository.class)
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = VerificationCodeProperties.PREFIX, name = "repository", havingValue = "redis")
-	public VerificationCodeRepository verificationCodeRedisRepository(
-		RedisRepository redisRepository,
-		ObjectMapper objectMapper) {
-		VerificationCodeRepository repository = new VerificationCodeRedisRepository(
-			redisRepository,
-			objectMapper);
+	public VerificationCodeRepository verificationCodeRedisRepository(RedisRepository redisRepository) {
+		VerificationCodeRepository repository = new VerificationCodeRedisRepository(redisRepository);
 		LogUtils.debug("create VerificationCodeRepository: Redis");
 		return repository;
 	}
