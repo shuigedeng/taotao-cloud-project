@@ -25,40 +25,40 @@ import java.util.Set;
 @Service(value = "SlideWindowLimitService")
 public class SlideWindowLimitService extends AbstractLimitService {
 
-    private static final String LIMIT_TAG = "SW_";
+	private static final String LIMIT_TAG = "SW_";
 
-    @Autowired
-    private RedisUtils redisUtils;
-
-
-    private DefaultRedisScript<Long> redisScript;
+	@Autowired
+	private RedisUtils redisUtils;
 
 
-    @PostConstruct
-    public void init() {
-        redisScript = new DefaultRedisScript();
-        redisScript.setResultType(Long.class);
-        redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("limit.lua")));
-    }
+	private DefaultRedisScript<Long> redisScript;
 
 
-    /**
-     * @param service  去重器对象
-     * @param taskInfo
-     * @param param    去重参数
-     * @return 返回不符合条件的手机号码
-     */
-    @Override
-    public Set<String> limitFilter(AbstractDeduplicationService service, TaskInfo taskInfo, DeduplicationParam param) {
+	@PostConstruct
+	public void init() {
+		redisScript = new DefaultRedisScript();
+		redisScript.setResultType(Long.class);
+		redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("limit.lua")));
+	}
 
-        Set<String> filterReceiver = new HashSet<>(taskInfo.getReceiver().size());
-        long nowTime = System.currentTimeMillis();
-        for (String receiver : taskInfo.getReceiver()) {
-            String key = LIMIT_TAG + deduplicationSingleKey(service, taskInfo, receiver);
-            String scoreValue = String.valueOf(IdUtil.getSnowflake().nextId());
-            String score = String.valueOf(nowTime);
-            if (redisUtils.execLimitLua(redisScript, Arrays.asList(key), String.valueOf(param.getDeduplicationTime() * 1000), score, String.valueOf(param.getCountNum()), scoreValue)) {
-                filterReceiver.add(receiver);
+
+	/**
+	 * @param service  去重器对象
+	 * @param taskInfo
+	 * @param param    去重参数
+	 * @return 返回不符合条件的手机号码
+	 */
+	@Override
+	public Set<String> limitFilter(AbstractDeduplicationService service, TaskInfo taskInfo, DeduplicationParam param) {
+
+		Set<String> filterReceiver = new HashSet<>(taskInfo.getReceiver().size());
+		long nowTime = System.currentTimeMillis();
+		for (String receiver : taskInfo.getReceiver()) {
+			String key = LIMIT_TAG + deduplicationSingleKey(service, taskInfo, receiver);
+			String scoreValue = String.valueOf(IdUtil.getSnowflake().nextId());
+			String score = String.valueOf(nowTime);
+			if (redisUtils.execLimitLua(redisScript, Arrays.asList(key), String.valueOf(param.getDeduplicationTime() * 1000), score, String.valueOf(param.getCountNum()), scoreValue)) {
+				filterReceiver.add(receiver);
 			}
 
 		}

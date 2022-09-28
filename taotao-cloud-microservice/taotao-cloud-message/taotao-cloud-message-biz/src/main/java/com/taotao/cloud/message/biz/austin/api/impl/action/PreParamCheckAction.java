@@ -23,37 +23,37 @@ import java.util.stream.Collectors;
 @Service
 public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
 
-    /**
-     * 最大的人数
-     */
-    private static final Integer BATCH_RECEIVER_SIZE = 100;
+	/**
+	 * 最大的人数
+	 */
+	private static final Integer BATCH_RECEIVER_SIZE = 100;
 
-    @Override
-    public void process(ProcessContext<SendTaskModel> context) {
-        SendTaskModel sendTaskModel = context.getProcessModel();
+	@Override
+	public void process(ProcessContext<SendTaskModel> context) {
+		SendTaskModel sendTaskModel = context.getProcessModel();
 
-        Long messageTemplateId = sendTaskModel.getMessageTemplateId();
-        List<MessageParam> messageParamList = sendTaskModel.getMessageParamList();
+		Long messageTemplateId = sendTaskModel.getMessageTemplateId();
+		List<MessageParam> messageParamList = sendTaskModel.getMessageParamList();
 
-        // 1.没有传入 消息模板Id 或者 messageParam
-        if (messageTemplateId == null || CollUtil.isEmpty(messageParamList)) {
-            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
-            return;
-        }
+		// 1.没有传入 消息模板Id 或者 messageParam
+		if (messageTemplateId == null || CollUtil.isEmpty(messageParamList)) {
+			context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
+			return;
+		}
 
-        // 2.过滤 receiver=null 的messageParam
-        List<MessageParam> resultMessageParamList = messageParamList.stream()
-            .filter(messageParam -> !StrUtil.isBlank(messageParam.getReceiver()))
-            .collect(Collectors.toList());
-        if (CollUtil.isEmpty(resultMessageParamList)) {
-            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
-            return;
-        }
-        sendTaskModel.setMessageParamList(resultMessageParamList);
+		// 2.过滤 receiver=null 的messageParam
+		List<MessageParam> resultMessageParamList = messageParamList.stream()
+			.filter(messageParam -> !StrUtil.isBlank(messageParam.getReceiver()))
+			.collect(Collectors.toList());
+		if (CollUtil.isEmpty(resultMessageParamList)) {
+			context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
+			return;
+		}
+		sendTaskModel.setMessageParamList(resultMessageParamList);
 
-        // 3.过滤receiver大于100的请求
-        if (messageParamList.stream().anyMatch(messageParam -> messageParam.getReceiver().split(StrUtil.COMMA).length > BATCH_RECEIVER_SIZE)) {
-            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TOO_MANY_RECEIVER));
+		// 3.过滤receiver大于100的请求
+		if (messageParamList.stream().anyMatch(messageParam -> messageParam.getReceiver().split(StrUtil.COMMA).length > BATCH_RECEIVER_SIZE)) {
+			context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TOO_MANY_RECEIVER));
 			return;
 		}
 

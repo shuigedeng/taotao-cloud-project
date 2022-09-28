@@ -15,8 +15,8 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MiniProgramContentModel extends ContentModel {
-	/**
-	 * 模板消息发送的数据
-	 */
-	Map<String, String> map;
+    /**
+     * 模板消息发送的数据
+     */
+    Map<String, String> map;
 }

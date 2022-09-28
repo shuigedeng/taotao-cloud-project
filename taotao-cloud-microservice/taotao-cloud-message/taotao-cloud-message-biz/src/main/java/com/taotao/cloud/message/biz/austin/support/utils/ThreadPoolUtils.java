@@ -27,5 +27,5 @@ public class ThreadPoolUtils {
     public void register(DtpExecutor dtpExecutor) {
         DtpRegistry.register(dtpExecutor, SOURCE_NAME);
         shutdownDefinition.registryExecutor(dtpExecutor);
-	}
+    }
 }

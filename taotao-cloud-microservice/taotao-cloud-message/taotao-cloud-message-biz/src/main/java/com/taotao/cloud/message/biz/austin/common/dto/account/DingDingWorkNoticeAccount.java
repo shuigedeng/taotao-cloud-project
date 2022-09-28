@@ -21,19 +21,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DingDingWorkNoticeAccount {
 
-	/**
-	 * 应用的唯一标识key。
-	 */
-	private String appKey;
+    /**
+     * 应用的唯一标识key。
+     */
+    private String appKey;
 
-	/**
-	 * 应用的密钥
-	 */
-	private String appSecret;
+    /**
+     * 应用的密钥
+     */
+    private String appSecret;
 
-	/**
-	 * 发送消息时使用的微应用的AgentID
-	 */
-	private String agentId;
+    /**
+     * 发送消息时使用的微应用的AgentID
+     */
+    private String agentId;
 
 }

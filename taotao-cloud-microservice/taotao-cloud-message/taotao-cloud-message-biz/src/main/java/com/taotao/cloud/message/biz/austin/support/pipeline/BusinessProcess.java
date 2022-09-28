@@ -7,10 +7,9 @@ package com.taotao.cloud.message.biz.austin.support.pipeline;
  */
 public interface BusinessProcess<T extends ProcessModel> {
 
-	/**
-	 * 真正处理逻辑
-	 *
-	 * @param context
-	 */
-	void process(ProcessContext<T> context);
+    /**
+     * 真正处理逻辑
+     * @param context
+     */
+    void process(ProcessContext<T> context);
 }

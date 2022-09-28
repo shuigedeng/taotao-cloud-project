@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.handler.flowcontrol.annotations;
 
-import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
+import com.java3y.austin.handler.enums.RateLimitStrategy;
 import org.springframework.stereotype.Service;
 
 import java.lang.annotation.Documented;
@@ -19,5 +19,5 @@ import java.lang.annotation.Target;
 @Documented
 @Service
 public @interface LocalRateLimit {
-  RateLimitStrategy rateLimitStrategy() default RateLimitStrategy.REQUEST_RATE_LIMIT;
+	RateLimitStrategy rateLimitStrategy() default RateLimitStrategy.REQUEST_RATE_LIMIT;
 }

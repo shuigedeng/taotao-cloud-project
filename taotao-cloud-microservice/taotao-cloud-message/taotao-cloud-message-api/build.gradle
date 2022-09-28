@@ -2,4 +2,4 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
 }
 
-description = "消息模块"
+description = "消息模块api"

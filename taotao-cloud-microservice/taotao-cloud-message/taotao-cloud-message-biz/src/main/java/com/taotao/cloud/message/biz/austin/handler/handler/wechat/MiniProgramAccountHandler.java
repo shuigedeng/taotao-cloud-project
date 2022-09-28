@@ -1,4 +1,4 @@
-package com.taotao.cloud.message.biz.austin.handler.handler.impl;
+package com.taotao.cloud.message.biz.austin.handler.handler.wechat;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;

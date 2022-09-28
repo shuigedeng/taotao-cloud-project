@@ -23,9 +23,9 @@ import java.util.List;
 @Component
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.ROCKET_MQ)
 @RocketMQMessageListener(topic = "${austin.business.topic.name}",
-    consumerGroup = "${austin.rocketmq.biz.consumer.group}",
-    selectorType = SelectorType.TAG,
-    selectorExpression = "${austin.business.tagId.value}"
+        consumerGroup = "${austin.rocketmq.biz.consumer.group}",
+        selectorType = SelectorType.TAG,
+        selectorExpression = "${austin.business.tagId.value}"
 )
 public class RocketMqBizReceiver implements RocketMQListener<String> {
 
@@ -38,6 +38,6 @@ public class RocketMqBizReceiver implements RocketMQListener<String> {
             return;
         }
         List<TaskInfo> taskInfoLists = JSON.parseArray(message, TaskInfo.class);
-		consumeService.consume2Send(taskInfoLists);
-	}
+        consumeService.consume2Send(taskInfoLists);
+    }
 }

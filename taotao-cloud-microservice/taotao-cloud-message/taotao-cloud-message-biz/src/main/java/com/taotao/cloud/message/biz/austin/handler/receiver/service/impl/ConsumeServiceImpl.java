@@ -1,6 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
 import com.taotao.cloud.message.biz.austin.common.domain.LogParam;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
@@ -49,7 +50,7 @@ public class ConsumeServiceImpl implements ConsumeService {
 
     @Override
     public void consume2recall(MessageTemplate messageTemplate) {
-		logUtils.print(LogParam.builder().bizType(LOG_BIZ_RECALL_TYPE).object(messageTemplate).build());
-		handlerHolder.route(messageTemplate.getSendChannel()).recall(messageTemplate);
-	}
+        logUtils.print(LogParam.builder().bizType(LOG_BIZ_RECALL_TYPE).object(messageTemplate).build());
+        handlerHolder.route(messageTemplate.getSendChannel()).recall(messageTemplate);
+    }
 }

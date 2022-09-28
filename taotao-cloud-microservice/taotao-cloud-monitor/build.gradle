@@ -24,13 +24,3 @@ dependencies {
 mainClassName = "com.taotao.cloud.monitor.biz.TaoTaoCloudMonitorApplication"
 description = "监控模块"
 archivesBaseName = 'taotao-cloud-monitor'
-
-
-//shadowJar {
-//    zip64 true
-//    mergeServiceFiles()
-//    classifier = null
-//	mainClassName = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
-//}
-
-

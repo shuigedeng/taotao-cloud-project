@@ -15,14 +15,12 @@ public interface EventBusListener {
 
     /**
      * 消费消息
-     *
      * @param lists
      */
     void consume(List<TaskInfo> lists);
 
     /**
      * 撤回消息
-     *
      * @param messageTemplate
      */
     void recall(MessageTemplate messageTemplate);

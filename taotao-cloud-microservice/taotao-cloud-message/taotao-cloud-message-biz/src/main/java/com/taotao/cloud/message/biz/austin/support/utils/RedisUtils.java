@@ -83,7 +83,7 @@ public class RedisUtils {
             redisTemplate.executePipelined((RedisCallback<String>) connection -> {
                 for (Map.Entry<String, String> entry : keyValues.entrySet()) {
                     connection.setEx(entry.getKey().getBytes(), seconds,
-                        entry.getValue().getBytes());
+                            entry.getValue().getBytes());
                 }
                 return null;
             });
@@ -177,7 +177,7 @@ public class RedisUtils {
         }
 
         return false;
-	}
+    }
 
 
 }

@@ -9,10 +9,10 @@ import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationPa
  */
 public interface DeduplicationService {
 
-    /**
-     * 去重
-     *
-     * @param param
-     */
-    void deduplication(DeduplicationParam param);
+	/**
+	 * 去重
+	 *
+	 * @param param
+	 */
+	void deduplication(DeduplicationParam param);
 }

@@ -21,34 +21,34 @@ import java.util.Set;
 @Builder
 public class BatchSendPushParam {
 
-	/**
-	 * audience
-	 */
-	@JSONField(name = "audience")
-	private AudienceVO audience;
-	/**
-	 * taskid
-	 */
-	@JSONField(name = "taskid")
-	private String taskId;
-	/**
-	 * isAsync
-	 */
-	@JSONField(name = "is_async")
-	private Boolean isAsync;
+    /**
+     * audience
+     */
+    @JSONField(name = "audience")
+    private AudienceVO audience;
+    /**
+     * taskid
+     */
+    @JSONField(name = "taskid")
+    private String taskId;
+    /**
+     * isAsync
+     */
+    @JSONField(name = "is_async")
+    private Boolean isAsync;
 
-	/**
-	 * AudienceVO
-	 */
-	@NoArgsConstructor
-	@Data
-	@Builder
-	@AllArgsConstructor
-	public static class AudienceVO {
-		/**
-		 * cid
-		 */
-		@JSONField(name = "cid")
-		private Set<String> cid;
-	}
+    /**
+     * AudienceVO
+     */
+    @NoArgsConstructor
+    @Data
+    @Builder
+    @AllArgsConstructor
+    public static class AudienceVO {
+        /**
+         * cid
+         */
+        @JSONField(name = "cid")
+        private Set<String> cid;
+    }
 }

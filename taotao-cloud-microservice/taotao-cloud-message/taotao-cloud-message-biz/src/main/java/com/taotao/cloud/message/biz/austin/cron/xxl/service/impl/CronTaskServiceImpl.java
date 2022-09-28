@@ -6,12 +6,12 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.cron.xxl.constants.XxlJobConstant;
 import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobGroup;
 import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.cron.xxl.service.CronTaskService;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.xxl.job.core.biz.model.ReturnT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +43,7 @@ public class CronTaskServiceImpl implements CronTaskService {
     public BasicResultVO saveCronTask(XxlJobInfo xxlJobInfo) {
         Map<String, Object> params = JSON.parseObject(JSON.toJSONString(xxlJobInfo), Map.class);
         String path = xxlJobInfo.getId() == null ? xxlAddresses + XxlJobConstant.INSERT_URL
-            : xxlAddresses + XxlJobConstant.UPDATE_URL;
+                : xxlAddresses + XxlJobConstant.UPDATE_URL;
 
         HttpResponse response;
         ReturnT returnT = null;
@@ -62,7 +62,7 @@ public class CronTaskServiceImpl implements CronTaskService {
             }
         } catch (Exception e) {
             log.error("CronTaskService#saveTask fail,e:{},param:{},response:{}", Throwables.getStackTraceAsString(e)
-                , JSON.toJSONString(xxlJobInfo), JSON.toJSONString(returnT));
+                    , JSON.toJSONString(xxlJobInfo), JSON.toJSONString(returnT));
         }
         return BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR, JSON.toJSONString(returnT));
     }
@@ -84,7 +84,7 @@ public class CronTaskServiceImpl implements CronTaskService {
             }
         } catch (Exception e) {
             log.error("CronTaskService#deleteCronTask fail,e:{},param:{},response:{}", Throwables.getStackTraceAsString(e)
-                , JSON.toJSONString(params), JSON.toJSONString(returnT));
+                    , JSON.toJSONString(params), JSON.toJSONString(returnT));
         }
         return BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR, JSON.toJSONString(returnT));
     }
@@ -106,7 +106,7 @@ public class CronTaskServiceImpl implements CronTaskService {
             }
         } catch (Exception e) {
             log.error("CronTaskService#startCronTask fail,e:{},param:{},response:{}", Throwables.getStackTraceAsString(e)
-                , JSON.toJSONString(params), JSON.toJSONString(returnT));
+                    , JSON.toJSONString(params), JSON.toJSONString(returnT));
         }
         return BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR, JSON.toJSONString(returnT));
     }
@@ -128,7 +128,7 @@ public class CronTaskServiceImpl implements CronTaskService {
             }
         } catch (Exception e) {
             log.error("CronTaskService#stopCronTask fail,e:{},param:{},response:{}", Throwables.getStackTraceAsString(e)
-                , JSON.toJSONString(params), JSON.toJSONString(returnT));
+                    , JSON.toJSONString(params), JSON.toJSONString(returnT));
         }
         return BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR, JSON.toJSONString(returnT));
     }
@@ -150,7 +150,7 @@ public class CronTaskServiceImpl implements CronTaskService {
             }
         } catch (Exception e) {
             log.error("CronTaskService#getGroupId fail,e:{},param:{},response:{}", Throwables.getStackTraceAsString(e)
-                , JSON.toJSONString(params), JSON.toJSONString(response.body()));
+                    , JSON.toJSONString(params), JSON.toJSONString(response.body()));
         }
         return BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR, JSON.toJSONString(response.body()));
     }
@@ -171,7 +171,7 @@ public class CronTaskServiceImpl implements CronTaskService {
             }
         } catch (Exception e) {
             log.error("CronTaskService#createGroup fail,e:{},param:{},response:{}", Throwables.getStackTraceAsString(e)
-                , JSON.toJSONString(params), JSON.toJSONString(returnT));
+                    , JSON.toJSONString(params), JSON.toJSONString(returnT));
         }
         return BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR, JSON.toJSONString(returnT));
     }
@@ -201,8 +201,8 @@ public class CronTaskServiceImpl implements CronTaskService {
             }
         } catch (Exception e) {
             log.error("CronTaskService#createGroup getCookie,e:{},param:{},response:{}", Throwables.getStackTraceAsString(e)
-				, JSON.toJSONString(params), JSON.toJSONString(response));
-		}
-		return null;
-	}
+                    , JSON.toJSONString(params), JSON.toJSONString(response));
+        }
+        return null;
+    }
 }

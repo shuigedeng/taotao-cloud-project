@@ -19,19 +19,19 @@ import java.util.List;
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.EVENT_BUS)
 public class EventBusReceiver implements EventBusListener {
 
-	@Autowired
-	private ConsumeService consumeService;
+    @Autowired
+    private ConsumeService consumeService;
 
-	@Override
-	@Subscribe
-	public void consume(List<TaskInfo> lists) {
-		consumeService.consume2Send(lists);
+    @Override
+    @Subscribe
+    public void consume(List<TaskInfo> lists) {
+        consumeService.consume2Send(lists);
 
-	}
+    }
 
-	@Override
-	@Subscribe
-	public void recall(MessageTemplate messageTemplate) {
-		consumeService.consume2recall(messageTemplate);
-	}
+    @Override
+    @Subscribe
+    public void recall(MessageTemplate messageTemplate) {
+        consumeService.consume2recall(messageTemplate);
+    }
 }

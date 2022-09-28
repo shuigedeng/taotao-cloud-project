@@ -13,35 +13,35 @@ import java.util.List;
 public interface ChannelAccountService {
 
 
-    /**
-     * 保存/修改渠道账号信息
-     *
-     * @param channelAccount
-     * @return
-     */
-    ChannelAccount save(ChannelAccount channelAccount);
+	/**
+	 * 保存/修改渠道账号信息
+	 *
+	 * @param channelAccount
+	 * @return
+	 */
+	ChannelAccount save(ChannelAccount channelAccount);
 
-    /**
-     * 根据渠道标识查询账号信息
-     *
-     * @param channelType 渠道标识
-     * @return
-     */
-    List<ChannelAccount> queryByChannelType(Integer channelType);
+	/**
+	 * 根据渠道标识查询账号信息
+	 *
+	 * @param channelType 渠道标识
+	 * @return
+	 */
+	List<ChannelAccount> queryByChannelType(Integer channelType);
 
 
-    /**
-     * 列表信息 无条件
-     *
-     * @return
-     */
-    List<ChannelAccount> list();
+	/**
+	 * 列表信息 无条件
+	 *
+	 * @return
+	 */
+	List<ChannelAccount> list();
 
-    /**
-     * 软删除(deleted=1)
-     *
-     * @param ids
-     */
-    void deleteByIds(List<Long> ids);
+	/**
+	 * 软删除(deleted=1)
+	 *
+	 * @param ids
+	 */
+	void deleteByIds(List<Long> ids);
 
 }

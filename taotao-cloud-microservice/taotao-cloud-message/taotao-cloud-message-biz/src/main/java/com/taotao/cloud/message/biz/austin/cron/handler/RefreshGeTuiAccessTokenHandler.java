@@ -9,8 +9,8 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
 import com.taotao.cloud.message.biz.austin.common.dto.account.GeTuiAccount;
-import com.taotao.cloud.message.biz.austin.cron.dto.getui.GeTuiTokenResultDTO;
 import com.taotao.cloud.message.biz.austin.cron.dto.getui.QueryTokenParamDTO;
+import com.taotao.cloud.message.biz.austin.cron.dto.getui.GeTuiTokenResultDTO;
 import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -70,22 +70,22 @@ public class RefreshGeTuiAccessTokenHandler {
             String time = String.valueOf(System.currentTimeMillis());
             String digest = SecureUtil.sha256().digestHex(account.getAppKey() + time + account.getMasterSecret());
             QueryTokenParamDTO param = QueryTokenParamDTO.builder()
-                .timestamp(time)
-                .appKey(account.getAppKey())
-                .sign(digest).build();
+                    .timestamp(time)
+                    .appKey(account.getAppKey())
+                    .sign(digest).build();
 
             String body = HttpRequest.post(url).header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                .body(JSON.toJSONString(param))
-                .timeout(20000)
-                .execute().body();
+                    .body(JSON.toJSONString(param))
+                    .timeout(20000)
+                    .execute().body();
             GeTuiTokenResultDTO geTuiTokenResultDTO = JSON.parseObject(body, GeTuiTokenResultDTO.class);
             if (geTuiTokenResultDTO.getCode().equals(0)) {
                 accessToken = geTuiTokenResultDTO.getData().getToken();
             }
         } catch (Exception e) {
             log.error("RefreshGeTuiAccessTokenHandler#getAccessToken fail:{}", Throwables.getStackTraceAsString(e));
-		}
-		return accessToken;
-	}
+        }
+        return accessToken;
+    }
 
 }
