@@ -22,40 +22,40 @@ import java.util.Properties;
 @Slf4j
 @Component
 public class NacosUtils {
-	@Value("${austin.nacos.server}")
-	private String nacosServer;
-	@Value("${austin.nacos.group}")
-	private String nacosGroup;
-	@Value("${austin.nacos.dataId}")
-	private String nacosDataId;
-	@Value("${austin.nacos.namespace}")
-	private String nacosNamespace;
-	private final Properties request = new Properties();
-	private final Properties properties = new Properties();
+    @Value("${austin.nacos.server}")
+    private String nacosServer;
+    @Value("${austin.nacos.group}")
+    private String nacosGroup;
+    @Value("${austin.nacos.dataId}")
+    private String nacosDataId;
+    @Value("${austin.nacos.namespace}")
+    private String nacosNamespace;
+    private final Properties request = new Properties();
+    private final Properties properties = new Properties();
 
-	public String getProperty(String key, String defaultValue) {
-		try {
-			String property = this.getContext();
-			if (StringUtils.hasText(property)) {
-				properties.load(new StringReader(property));
-			}
-		} catch (Exception e) {
-			log.error("Nacos error:{}", ExceptionUtils.getStackTrace(e));
-		}
-		String property = properties.getProperty(key);
-		return StrUtil.isBlank(property) ? defaultValue : property;
-	}
+    public String getProperty(String key, String defaultValue) {
+        try {
+            String property = this.getContext();
+            if (StringUtils.hasText(property)) {
+                properties.load(new StringReader(property));
+            }
+        } catch (Exception e) {
+            log.error("Nacos error:{}", ExceptionUtils.getStackTrace(e));
+        }
+        String property = properties.getProperty(key);
+        return StrUtil.isBlank(property) ? defaultValue : property;
+    }
 
-	private String getContext() {
-		String context = null;
-		try {
-			request.put(PropertyKeyConst.SERVER_ADDR, nacosServer);
-			request.put(PropertyKeyConst.NAMESPACE, nacosNamespace);
-			context = NacosFactory.createConfigService(request)
-				.getConfig(nacosDataId, nacosGroup, 5000);
-		} catch (NacosException e) {
-			log.error("Nacos error:{}", ExceptionUtils.getStackTrace(e));
-		}
-		return context;
-	}
+    private String getContext() {
+        String context = null;
+        try {
+            request.put(PropertyKeyConst.SERVER_ADDR, nacosServer);
+            request.put(PropertyKeyConst.NAMESPACE, nacosNamespace);
+            context = NacosFactory.createConfigService(request)
+                    .getConfig(nacosDataId, nacosGroup, 5000);
+        } catch (NacosException e) {
+            log.error("Nacos error:{}", ExceptionUtils.getStackTrace(e));
+        }
+        return context;
+    }
 }

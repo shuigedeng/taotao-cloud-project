@@ -1,7 +1,6 @@
 package com.taotao.cloud.message.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
@@ -10,7 +9,6 @@ import com.taotao.cloud.message.biz.entity.MemberMessage;
 import com.taotao.cloud.message.biz.service.MemberMessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -41,7 +39,7 @@ public class MemberMessageBuyerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<IPage<MemberMessage>> page(MemberMessageQueryVO memberMessageQueryVO,
-		PageVO page) {
+											 PageVO page) {
 		memberMessageQueryVO.setMemberId(UserContext.getCurrentUser().getId());
 		return Result.success(memberMessageService.getPage(memberMessageQueryVO, page));
 	}

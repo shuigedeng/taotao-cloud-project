@@ -35,5 +35,5 @@ public class RocketMqSendMqServiceImpl implements SendMqService {
     @Override
     public void send(String topic, String jsonValue) {
         rocketMQTemplate.send(topic, MessageBuilder.withPayload(jsonValue).build());
-	}
+    }
 }

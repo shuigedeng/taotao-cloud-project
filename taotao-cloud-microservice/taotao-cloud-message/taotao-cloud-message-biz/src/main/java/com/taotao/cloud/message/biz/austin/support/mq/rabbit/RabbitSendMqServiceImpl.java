@@ -41,5 +41,5 @@ public class RabbitSendMqServiceImpl implements SendMqService {
     @Override
     public void send(String topic, String jsonValue) {
         send(topic, jsonValue, null);
-	}
+    }
 }

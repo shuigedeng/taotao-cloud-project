@@ -40,7 +40,7 @@ public abstract class AbstractLazyPending<T> {
     /**
      * 是否终止线程
      */
-    private Boolean stop = false;
+    private volatile Boolean stop = false;
 
     /**
      * 单线程消费 阻塞队列的数据
@@ -87,7 +87,7 @@ public abstract class AbstractLazyPending<T> {
      */
     private boolean dataReady() {
         return tasks.size() >= pendingParam.getNumThreshold() ||
-            (System.currentTimeMillis() - lastHandleTime >= pendingParam.getTimeThreshold());
+                (System.currentTimeMillis() - lastHandleTime >= pendingParam.getTimeThreshold());
     }
 
     /**

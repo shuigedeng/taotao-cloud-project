@@ -52,12 +52,12 @@ public class OfficialAccountServiceImpl implements OfficialAccountService {
         // 构建微信模板消息
         for (String openId : receiver) {
             WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser(openId)
-                .templateId(officialAccount.getTemplateId())
-                .url(officialAccount.getUrl())
-                .data(getWxMpTemplateData(officialParam.getData()))
-                .miniProgram(new WxMpTemplateMessage.MiniProgram(officialAccount.getMiniProgramId(), officialAccount.getPath(), false))
-                .build();
+                    .toUser(openId)
+                    .templateId(officialAccount.getTemplateId())
+                    .url(officialAccount.getUrl())
+                    .data(getWxMpTemplateData(officialParam.getData()))
+                    .miniProgram(new WxMpTemplateMessage.MiniProgram(officialAccount.getMiniProgramId(), officialAccount.getPath(), false))
+                    .build();
             wxMpTemplateMessages.add(templateMessage);
         }
         return wxMpTemplateMessages;
@@ -84,7 +84,7 @@ public class OfficialAccountServiceImpl implements OfficialAccountService {
         WxMpDefaultConfigImpl config = new WxMpDefaultConfigImpl();
         config.setAppId(officialAccount.getAppId());
         config.setSecret(officialAccount.getSecret());
-		wxMpService.setWxMpConfigStorage(config);
-		return wxMpService;
-	}
+        wxMpService.setWxMpConfigStorage(config);
+        return wxMpService;
+    }
 }

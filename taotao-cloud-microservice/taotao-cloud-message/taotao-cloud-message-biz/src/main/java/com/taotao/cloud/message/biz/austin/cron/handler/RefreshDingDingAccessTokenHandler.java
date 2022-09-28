@@ -76,7 +76,7 @@ public class RefreshDingDingAccessTokenHandler {
             accessToken = rsp.getAccessToken();
         } catch (Exception e) {
             log.error("RefreshDingDingAccessTokenHandler#getAccessToken fail:{}", Throwables.getStackTraceAsString(e));
-		}
-		return accessToken;
-	}
+        }
+        return accessToken;
+    }
 }

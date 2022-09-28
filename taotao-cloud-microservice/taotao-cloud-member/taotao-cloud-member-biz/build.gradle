@@ -31,49 +31,21 @@ mainClassName = "com.taotao.cloud.member.biz.TaoTaoCloudMemberApplication"
 description = "会员模块"
 archivesBaseName = 'taotao-cloud-member'
 
-configurations {
-    all {
-        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
-
-        //resolutionStrategy {
-        //    force "org.codehaus.groovy:groovy:4.0.0"
-        //}
-
-        //exclude group: "org.codehaus.groovy", module: "groovy"
-        exclude group: "log4j", module: "log4j"
-        exclude group: "log4j", module: "slf4j-simple"
-        exclude group: "org.slf4j", module: "slf4j-log4j12"
-        exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
-        exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-    }
-}
-
-//shadowJar {
-//    zip64 true
-//    mergeServiceFiles()
-//    classifier = null
-//    version = 1.0
-//    manifest {
-//        attributes(
-//                "Main-Class": "com.taotao.cloud.mail.biz.TaoTaoCloudMailApplication"
-//        )
-//    }
+//configurations {
+//    all {
+//        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+//        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 //
-//    dependencies {
-//        // exclude(dependency("xml-apis:xml-apis:.*"))
-//        // exclude(dependency("xerces:xercesImpl:.*"))
-//        // exclude(dependency { it.moduleGroup == "xml-apis" })
-//        // exclude(dependency { it.moduleGroup == "org.apache.spark" })
-//        // exclude(dependency { it.moduleGroup == "org.scala-lang" })
-//    }
+//        //resolutionStrategy {
+//        //    force "org.codehaus.groovy:groovy:4.0.0"
+//        //}
 //
-//    //append "META-INF/spring.handlers"
-//    //append "META-INF/spring.schemas"
-//    //append "META-INF/spring.tooling"
-//    //transform(PropertiesFileTransformer) {
-//    //    paths = ["META-INF/spring.factories" ]
-//    //    mergeStrategy = "append"
-//    //}
+//        //exclude group: "org.codehaus.groovy", module: "groovy"
+//        exclude group: "log4j", module: "log4j"
+//        exclude group: "log4j", module: "slf4j-simple"
+//        exclude group: "org.slf4j", module: "slf4j-log4j12"
+//        exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
+//        exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
+//        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+//    }
 //}

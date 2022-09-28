@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.api.impl.domain;
 
+import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.service.api.domain.MessageParam;
 import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
 import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessModel;
 import lombok.AllArgsConstructor;

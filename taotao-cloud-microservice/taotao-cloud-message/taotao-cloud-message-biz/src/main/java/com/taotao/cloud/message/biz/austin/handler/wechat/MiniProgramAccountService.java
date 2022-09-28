@@ -7,13 +7,13 @@ import com.taotao.cloud.message.biz.austin.handler.domain.wechat.WeChatMiniProgr
  */
 public interface MiniProgramAccountService {
 
-	/**
-	 * 发送订阅消息
-	 *
-	 * @param miniProgramParam 订阅消息参数
-	 * @return
-	 * @throws Exception
-	 */
-	void send(WeChatMiniProgramParam miniProgramParam) throws Exception;
+    /**
+     * 发送订阅消息
+     *
+     * @param miniProgramParam 订阅消息参数
+     * @return
+     * @throws Exception
+     */
+    void send(WeChatMiniProgramParam miniProgramParam) throws Exception;
 
 }

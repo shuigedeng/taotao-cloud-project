@@ -17,28 +17,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MessageTemplateParam {
 
-    /**
-     * 当前页码
-     */
-    private Integer page;
+	/**
+	 * 当前页码
+	 */
+	private Integer page;
 
-    /**
-     * 当前页大小
-     */
-    private Integer perPage;
+	/**
+	 * 当前页大小
+	 */
+	private Integer perPage;
 
-    /**
-     * 模板ID
-     */
-    private Long id;
+	/**
+	 * 模板ID
+	 */
+	private Long id;
 
-    /**
-     * 消息接收者(测试发送时使用)
-     */
-    private String receiver;
+	/**
+	 * 消息接收者(测试发送时使用)
+	 */
+	private String receiver;
 
-    /**
-     * 下发参数信息
-     */
-    private String msgContent;
+	/**
+	 * 下发参数信息
+	 */
+	private String msgContent;
 }

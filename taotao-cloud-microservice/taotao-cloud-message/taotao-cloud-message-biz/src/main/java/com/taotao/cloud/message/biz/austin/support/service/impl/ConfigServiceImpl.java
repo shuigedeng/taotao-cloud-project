@@ -50,6 +50,6 @@ public class ConfigServiceImpl implements ConfigService {
             return nacosUtils.getProperty(key, defaultValue);
         } else {
             return props.getProperty(key, defaultValue);
-		}
-	}
+        }
+    }
 }

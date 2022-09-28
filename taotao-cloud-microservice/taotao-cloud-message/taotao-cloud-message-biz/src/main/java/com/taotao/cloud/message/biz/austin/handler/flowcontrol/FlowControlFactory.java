@@ -9,6 +9,10 @@ import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
 import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
 import com.taotao.cloud.message.biz.austin.handler.flowcontrol.annotations.LocalRateLimit;
 import com.taotao.cloud.message.biz.austin.support.service.ConfigService;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
@@ -16,11 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author 3y
@@ -93,8 +92,8 @@ public class FlowControlFactory implements ApplicationContextAware {
                 LocalRateLimit localRateLimit = AopUtils.getTargetClass(service).getAnnotation(LocalRateLimit.class);
                 RateLimitStrategy rateLimitStrategy = localRateLimit.rateLimitStrategy();
                 //通常情况下 实现的限流service与rateLimitStrategy一一对应
-				flowControlServiceMap.put(rateLimitStrategy, (FlowControlService) service);
-			}
-		});
-	}
+                flowControlServiceMap.put(rateLimitStrategy, (FlowControlService) service);
+            }
+        });
+    }
 }

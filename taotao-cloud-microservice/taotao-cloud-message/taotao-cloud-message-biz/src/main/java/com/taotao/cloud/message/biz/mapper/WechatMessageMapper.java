@@ -1,13 +1,13 @@
 package com.taotao.cloud.message.biz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.message.biz.entity.WechatMessage;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Delete;
 
 /**
  * 微信消息 Dao层
  */
-public interface WechatMessageMapper extends BaseSuperMapper<WechatMessage> {
+public interface WechatMessageMapper extends BaseSuperMapper<WechatMessage, Long> {
 
 	/**
 	 * 删除微信消息

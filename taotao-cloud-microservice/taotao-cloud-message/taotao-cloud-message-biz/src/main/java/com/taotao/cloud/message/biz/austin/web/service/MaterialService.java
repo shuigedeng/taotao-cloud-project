@@ -12,15 +12,15 @@ import org.springframework.web.multipart.MultipartFile;
 public interface MaterialService {
 
 
-    /**
-     * 钉钉素材上传
-     * @param file
-     * @param sendAccount
-     * @param fileType
-     * @return
-     */
-    BasicResultVO dingDingMaterialUpload(MultipartFile file, String sendAccount, String fileType);
-
+	/**
+	 * 钉钉素材上传
+	 *
+	 * @param file
+	 * @param sendAccount
+	 * @param fileType
+	 * @return
+	 */
+	BasicResultVO dingDingMaterialUpload(MultipartFile file, String sendAccount, String fileType);
 
 
 }

@@ -1,17 +1,17 @@
 package com.taotao.cloud.message.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.message.biz.entity.StoreMessage;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
  * 店铺接收到消息发送数据处理层
  */
-public interface StoreMessageMapper extends BaseSuperMapper<StoreMessage> {
+public interface StoreMessageMapper extends BaseSuperMapper<StoreMessage, Long> {
 
 	/**
 	 * 店铺消息分页
@@ -26,5 +26,5 @@ public interface StoreMessageMapper extends BaseSuperMapper<StoreMessage> {
 		${ew.customSqlSegment}
 		""")
 	IPage<StoreMessage> queryByParams(IPage<StoreMessage> page,
-		@Param(Constants.WRAPPER) Wrapper<StoreMessage> queryWrapper);
+									  @Param(Constants.WRAPPER) Wrapper<StoreMessage> queryWrapper);
 }
