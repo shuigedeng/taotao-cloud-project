@@ -6,16 +6,22 @@ dependencies {
     api("cn.dynamictp:dynamic-tp-spring-cloud-starter-nacos:1.0.8") {
         exclude group: "org.projectlombok", module: "lombok"
     }
+    api 'cn.dynamictp:dynamic-tp-extension-skywalking:1.0.8'
+    api 'cn.dynamictp:dynamic-tp-spring-boot-starter-extension-limiter-redis:1.0.8'
 
-    //https://gitee.com/mabaiwancn/hippo4j
-    //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter
-    api "cn.hippo4j:hippo4j-spring-boot-starter:1.4.1"
-    //https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter-all
-    api("cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.1") {
-        exclude group: "cn.hippo4j", module: "hippo4j-spring-boot-starter-adapter-hystrix"
-        exclude group: "commons-collections", module: "commons-collections"
-        exclude group: "com.alibaba", module: "fastjson"
-    }
+    api 'cn.dynamictp:dynamic-tp-spring-boot-starter-adapter-webserver:1.0.8'
+    api 'cn.dynamictp:dynamic-tp-spring-boot-starter-adapter-dubbo:1.0.8'
+    api 'cn.dynamictp:dynamic-tp-spring-boot-starter-adapter-rocketmq:1.0.8'
+
+    ////https://gitee.com/mabaiwancn/hippo4j
+    ////https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter
+    //api "cn.hippo4j:hippo4j-spring-boot-starter:1.4.1"
+    ////https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter-all
+    //api("cn.hippo4j:hippo4j-spring-boot-starter-adapter-all:1.4.1") {
+    //    exclude group: "cn.hippo4j", module: "hippo4j-spring-boot-starter-adapter-hystrix"
+    //    exclude group: "commons-collections", module: "commons-collections"
+    //    exclude group: "com.alibaba", module: "fastjson"
+    //}
 
 }
 

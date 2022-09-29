@@ -3,8 +3,11 @@ package com.taotao.cloud.threadpool.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.threadpool.properties.ThreadPoolProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -15,6 +18,8 @@ import org.springframework.context.annotation.PropertySource;
  * @since 2022-02-25 09:41:50
  */
 @AutoConfiguration
+@ConditionalOnProperty(prefix = ThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true")
+@EnableConfigurationProperties(ThreadPoolProperties.class)
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:dynamic-tp.yml")
 public class DynamicTpAutoConfiguration implements InitializingBean {
 

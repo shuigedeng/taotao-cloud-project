@@ -8,12 +8,26 @@ import org.springframework.stereotype.Component;
 
 @Configuration
 public class NacosEventListener {
+
 	@Component
 	public static class NacosDiscoveryInfoChangedEventListener implements ApplicationListener<NacosDiscoveryInfoChangedEvent> {
 		@Override
 		public void onApplicationEvent(NacosDiscoveryInfoChangedEvent event) {
 			LogUtils.info("NacosEventListener ----- NacosDiscoveryInfoChangedEvent onApplicationEvent {}", event);
-
 		}
 	}
+
+	// @Autowired
+	// private NacosRefresher nacosRefresher;
+	//
+	// @NacosConfigListener(dataId = "config")
+	// private void onMessage(String msg) {
+	// 	nacosRefresher.refresh(msg, ConfigFileTypeEnum.YAML);
+	// 	System.out.println("配置变动" + msg);
+	// }
+	//
+	// @Component
+	// public static class NacosRefresher extends AbstractRefresher {
+	// }
+
 }
