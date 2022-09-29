@@ -24,6 +24,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket-netty")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-third-client")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-threadpool")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-schedule")
