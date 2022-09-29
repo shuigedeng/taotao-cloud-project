@@ -44,6 +44,11 @@ public class QuartzJobInit implements ApplicationRunner {
 	 */
 	@Override
 	public void run(ApplicationArguments applicationArguments) {
+
+		//DtpExecutor dtpExecutor1 = DtpRegistry.getDtpExecutor("dtpExecutor1");
+		//LogUtils.info("dtpExecutor1-----------{}", dtpExecutor1);
+		//System.out.println("=================================");
+
 		//System.out.println("--------------------注入定时任务---------------------");
 		//List<QuartzJob> quartzJobs = IQuartzJobService.findByIsPauseIsFalse();
 		//List<QuartzJobModel> quartzJobModels = new ArrayList<>();

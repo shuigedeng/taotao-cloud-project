@@ -28,64 +28,92 @@ public class SpringApplicationEventListener {
 	 * </pre>
 	 */
 	@Component
-	public static class ApplicationStartingEventListener implements ApplicationListener<ApplicationStartingEvent> {
+	public static class ApplicationStartingEventListener implements
+		ApplicationListener<ApplicationStartingEvent> {
+
 		@Override
 		public void onApplicationEvent(ApplicationStartingEvent event) {
-			LogUtils.info("SpringApplicationEventListener ----- ApplicationStartingEvent onApplicationEvent {}", event);
+			LogUtils.info(
+				"SpringApplicationEventListener ----- ApplicationStartingEvent onApplicationEvent {}",
+				event);
 
 		}
 	}
 
 	@Component
-	public static class ApplicationEnvironmentPreparedEventListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
+	public static class ApplicationEnvironmentPreparedEventListener implements
+		ApplicationListener<ApplicationEnvironmentPreparedEvent> {
+
 		@Override
 		public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-			LogUtils.info("SpringApplicationEventListener ----- ApplicationEnvironmentPreparedEvent onApplicationEvent {}", event);
+			LogUtils.info(
+				"SpringApplicationEventListener ----- ApplicationEnvironmentPreparedEvent onApplicationEvent {}",
+				event);
 
 		}
 	}
 
 	@Component
-	public static class ApplicationContextInitializedEventListener implements ApplicationListener<ApplicationContextInitializedEvent> {
+	public static class ApplicationContextInitializedEventListener implements
+		ApplicationListener<ApplicationContextInitializedEvent> {
+
 		@Override
 		public void onApplicationEvent(ApplicationContextInitializedEvent event) {
-			LogUtils.info("SpringApplicationEventListener ----- ApplicationContextInitializedEvent onApplicationEvent {}", event);
+			LogUtils.info(
+				"SpringApplicationEventListener ----- ApplicationContextInitializedEvent onApplicationEvent {}",
+				event);
 
 		}
 	}
 
 	@Component
-	public static class ApplicationPreparedEventListener implements ApplicationListener<ApplicationPreparedEvent> {
+	public static class ApplicationPreparedEventListener implements
+		ApplicationListener<ApplicationPreparedEvent> {
+
 		@Override
 		public void onApplicationEvent(ApplicationPreparedEvent event) {
-			LogUtils.info("SpringApplicationEventListener ----- ApplicationPreparedEvent onApplicationEvent {}", event);
+			LogUtils.info(
+				"SpringApplicationEventListener ----- ApplicationPreparedEvent onApplicationEvent {}",
+				event);
 
 		}
 	}
 
 	@Component
-	public static class ApplicationStartedEventListener implements ApplicationListener<ApplicationStartedEvent> {
+	public static class ApplicationStartedEventListener implements
+		ApplicationListener<ApplicationStartedEvent> {
+
 		@Override
 		public void onApplicationEvent(ApplicationStartedEvent event) {
-			LogUtils.info("SpringApplicationEventListener ----- ApplicationStartedEvent onApplicationEvent {}", event);
+			LogUtils.info(
+				"SpringApplicationEventListener ----- ApplicationStartedEvent onApplicationEvent {}",
+				event);
 
 		}
 	}
 
 	@Component
-	public static class ApplicationReadyEventListener implements ApplicationListener<ApplicationReadyEvent> {
+	public static class ApplicationReadyEventListener implements
+		ApplicationListener<ApplicationReadyEvent> {
+
 		@Override
 		public void onApplicationEvent(ApplicationReadyEvent event) {
-			LogUtils.info("SpringApplicationEventListener ----- ApplicationReadyEvent onApplicationEvent {}", event);
+			LogUtils.info(
+				"SpringApplicationEventListener ----- ApplicationReadyEvent onApplicationEvent {}",
+				event);
 
 		}
 	}
 
 	@Component
-	public static class ApplicationFailedEventListener implements ApplicationListener<ApplicationFailedEvent> {
+	public static class ApplicationFailedEventListener implements
+		ApplicationListener<ApplicationFailedEvent> {
+
 		@Override
 		public void onApplicationEvent(ApplicationFailedEvent event) {
-			LogUtils.info("SpringApplicationEventListener ----- ApplicationFailedEvent onApplicationEvent {}", event);
+			LogUtils.info(
+				"SpringApplicationEventListener ----- ApplicationFailedEvent onApplicationEvent {}",
+				event);
 
 		}
 	}

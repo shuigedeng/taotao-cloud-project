@@ -31,7 +31,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-quartz")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-minio")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
 
