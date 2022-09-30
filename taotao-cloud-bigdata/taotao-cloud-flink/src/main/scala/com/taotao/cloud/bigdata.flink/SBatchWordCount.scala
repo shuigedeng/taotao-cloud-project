@@ -24,7 +24,7 @@ import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, createT
 *
 *
 * @author shuigedeng
-* @version 2022.09
+* @version 2022.10
 * @since 2022 -07-21 10:44:58
 */
 object SBatchWordCount {

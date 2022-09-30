@@ -74,7 +74,7 @@ Gradle:
 ```
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2022.09"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2022.10"
   }
 }
 
@@ -89,7 +89,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2022.09</version>
+      <version>2022.10</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -107,33 +107,35 @@ Maven:
 
 ## 5. 核心依赖
 
-依赖 | 版本
----|---
-Spring |  5.3.22
-Spring Boot |  2.7.3
-Spring Cloud | 2021.0.4
-Spring Cloud alibaba | 2021.0.4.0
-Spring Security | 5.7.3
-Mybatis Plus | 3.5.2
-Hutool | 5.5.9
-Mysql | 8.0.30
-Querydsl | 5.0.0
-Swagger | 3.3.0
-Knife4j | 3.0.2
-Redisson | 3.15.0
-Lettuce | 6.0.2.RELEASE
-Elasticsearch | 7.1.2
-Xxl-job | 2.2.0
-EasyCaptcha | 1.6.2
-Guava | 29.0-jre
+ 依赖                   | 版本            
+----------------------|---------------
+ Spring               | 5.3.22        
+ Spring Boot          | 2.7.3         
+ Spring Cloud         | 2021.0.4      
+ Spring Cloud alibaba | 2021.0.4.0    
+ Spring Security      | 5.7.3         
+ Mybatis Plus         | 3.5.2         
+ Hutool               | 5.5.9         
+ Mysql                | 8.0.30        
+ Querydsl             | 5.0.0         
+ Swagger              | 3.3.0         
+ Knife4j              | 3.0.2         
+ Redisson             | 3.15.0        
+ Lettuce              | 6.0.2.RELEASE 
+ Elasticsearch        | 7.1.2         
+ Xxl-job              | 2.2.0         
+ EasyCaptcha          | 1.6.2         
+ Guava                | 29.0-jre      
 
 ## 6. 演示地址
 
 *
-Github: [https://github.com/shuigedeng/taotao-cloud-project](https://github.com/shuigedeng/taotao-cloud-project)
-*
-Gitee: [https://gitee.com/dtbox/taotao-cloud-project](https://gitee.com/dtbox/taotao-cloud-project)
 
+Github: [https://github.com/shuigedeng/taotao-cloud-project](https://github.com/shuigedeng/taotao-cloud-project)
+
+*
+
+Gitee: [https://gitee.com/dtbox/taotao-cloud-project](https://gitee.com/dtbox/taotao-cloud-project)
 
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top)
   源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
@@ -155,8 +157,8 @@ Gitee: [https://gitee.com/dtbox/taotao-cloud-project](https://gitee.com/dtbox/ta
 * 移动端在线预览(进度5%)
   源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-mall)
 
-| <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                         | <center>小程序</center>     | <center>H5</center>                                       |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|-----------------------------------------------------------|
+| <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                         | <center>小程序</center>     | <center>H5</center>                               |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|---------------------------------------------------|
 | 安卓：[滔滔商城.apk](https://github.com/wuba/Taro-Mortgage-Calculator/raw/e0c432bdc6096a08d9020542e7ce401861026bfa/app-arm64-v8a-release.apk.1.zip) <br> IOS：[滔滔商城.app](https://github.com/wuba/Taro-Mortgage-Calculator/raw/a67459bc6667b0478978621482d33103d04e7538/taroDemo.app.zip)(目前暂不可用) | ![](snapshot/qrcode.png) | ![](snapshot/h5.png)<br>https://m.taotaocloud.top |
 
 ## 7. 功能特点
