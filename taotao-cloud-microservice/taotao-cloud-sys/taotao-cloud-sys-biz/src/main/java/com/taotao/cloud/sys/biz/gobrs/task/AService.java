@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.gobrs.task;
 
 import com.gobrs.async.TaskSupport;
 import com.gobrs.async.anno.Task;
+import com.gobrs.async.domain.TaskResult;
 import com.gobrs.async.task.AsyncTask;
 import com.taotao.cloud.common.exception.BusinessException;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,8 @@ public class AService extends AsyncTask<Object, String> {
 	//核心任务执行
 	@Override
 	public String task(Object o, TaskSupport support) {
+		String result = getResult(support);
+		TaskResult<String> taskResult = getTaskResult(support);
 
 		try {
 			System.out.println("AService Begin");
