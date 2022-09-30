@@ -1,10 +1,8 @@
 package com.taotao.cloud.message.biz.service.impl;
 
-import cn.hutool.core.util.PageUtil;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.message.api.vo.MessageVO;
 import com.taotao.cloud.message.biz.entity.Message;
 import com.taotao.cloud.message.biz.mapper.MessageMapper;
@@ -31,17 +29,18 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
 
 
 	@Override
-	public IPage<Message> getPage(MessageVO messageVO, PageVO pageVO) {
-		LambdaQueryWrapper<Message> queryWrapper = new LambdaQueryWrapper<>();
-		if (StrUtil.isNotEmpty(title)) {
-			queryWrapper.like(Message::getTitle, title);
-		}
-		if (StrUtil.isNotEmpty(content)) {
-			queryWrapper.like(Message::getContent, content);
-		}
-		queryWrapper.orderByDesc(Message::getCreateTime);
-
-		return this.page(PageUtil.initPage(pageVO), queryWrapper);
+	public IPage<Message> getPage(MessageVO messageVO, PageParam PageParam) {
+		// LambdaQueryWrapper<Message> queryWrapper = new LambdaQueryWrapper<>();
+		// if (StrUtil.isNotEmpty(title)) {
+		// 	queryWrapper.like(Message::getTitle, title);
+		// }
+		// if (StrUtil.isNotEmpty(content)) {
+		// 	queryWrapper.like(Message::getContent, content);
+		// }
+		// queryWrapper.orderByDesc(Message::getCreateTime);
+		//
+		// return this.page(PageUtil.initPage(PageParam), queryWrapper);
+		return null;
 	}
 
 

@@ -4,10 +4,10 @@ package com.taotao.cloud.message.biz.austin.client;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.message.biz.austin.service.api.domain.MessageParam;
-import com.taotao.cloud.message.biz.austin.service.api.domain.SendRequest;
-import com.taotao.cloud.message.biz.austin.service.api.domain.SendResponse;
-import com.taotao.cloud.message.biz.austin.service.api.enums.BusinessCode;
+import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
+import com.taotao.cloud.message.biz.austin.api.domain.SendRequest;
+import com.taotao.cloud.message.biz.austin.api.domain.SendResponse;
+import com.taotao.cloud.message.biz.austin.api.enums.BusinessCode;
 
 /**
  * 对外提供的接口
