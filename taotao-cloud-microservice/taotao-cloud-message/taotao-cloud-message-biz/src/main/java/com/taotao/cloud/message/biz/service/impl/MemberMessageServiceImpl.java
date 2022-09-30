@@ -1,16 +1,18 @@
 package com.taotao.cloud.message.biz.service.impl;
 
 
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.message.api.vo.MemberMessageQueryVO;
 import com.taotao.cloud.message.biz.entity.MemberMessage;
 import com.taotao.cloud.message.biz.mapper.MemberMessageMapper;
 import com.taotao.cloud.message.biz.service.MemberMessageService;
-import java.util.List;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 会员接收消息业务层实现
@@ -22,7 +24,7 @@ public class MemberMessageServiceImpl extends
 
 
 	@Override
-	public IPage<MemberMessage> getPage(MemberMessageQueryVO memberMessageQueryVO, PageVO pageVO) {
+	public IPage<MemberMessage> getPage(MemberMessageQueryVO memberMessageQueryVO, PageParam PageParam) {
 		QueryWrapper<MemberMessage> queryWrapper = new QueryWrapper<>();
 		//消息id
 		queryWrapper.eq(StringUtils.isNotEmpty(memberMessageQueryVO.getMessageId()), "message_id",
@@ -39,7 +41,8 @@ public class MemberMessageServiceImpl extends
 		//倒序
 		queryWrapper.orderByDesc("create_time");
 		//构建查询
-		return this.page(PageUtil.initPage(pageVO), queryWrapper);
+		// return this.page(PageUtil.initPage(PageParam), queryWrapper);
+		return null;
 	}
 
 	@Override

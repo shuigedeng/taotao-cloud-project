@@ -2,8 +2,10 @@ package com.taotao.cloud.message.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.message.api.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.biz.entity.StoreMessage;
+
 import java.util.List;
 
 /**
@@ -24,10 +26,10 @@ public interface StoreMessageService extends IService<StoreMessage> {
 	 * 多条件分页获取
 	 *
 	 * @param storeMessageQueryVO 店铺消息查询VO
-	 * @param pageVO              分页
+	 * @param PageParam           分页
 	 * @return 店铺消息分页
 	 */
-	IPage<StoreMessage> getPage(StoreMessageQueryVO storeMessageQueryVO, PageVO pageVO);
+	IPage<StoreMessage> getPage(StoreMessageQueryVO storeMessageQueryVO, PageParam PageParam);
 
 	/**
 	 * 保存店铺消息信息

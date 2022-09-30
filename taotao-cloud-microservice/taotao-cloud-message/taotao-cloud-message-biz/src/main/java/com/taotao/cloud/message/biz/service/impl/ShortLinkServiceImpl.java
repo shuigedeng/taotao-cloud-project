@@ -1,6 +1,5 @@
 package com.taotao.cloud.message.biz.service.impl;
 
-import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.message.biz.entity.ShortLink;
 import com.taotao.cloud.message.biz.mapper.ShortLinkMapper;
@@ -16,8 +15,9 @@ import java.util.List;
 public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink> implements
 	ShortLinkService {
 
-    @Override
-    public List<ShortLink> queryShortLinks(ShortLink shortLink) {
-        return this.list(PageUtil.initWrapper(shortLink));
-    }
+	@Override
+	public List<ShortLink> queryShortLinks(ShortLink shortLink) {
+		// return this.list(PageUtil.initWrapper(shortLink));
+		return null;
+	}
 }

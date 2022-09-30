@@ -43,6 +43,11 @@ dependencies {
     implementation "com.ctrip.framework.apollo:apollo-client-config-data:1.9.1"
     //腾讯sdk(目前用在短信上)
     implementation "com.tencentcloudapi:tencentcloud-sdk-java:3.1.390"
+
+
+    implementation 'com.alipay.sdk:alipay-sdk-java:4.22.32.ALL'
+    implementation 'com.github.binarywang:weixin-java-mp:4.4.0'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.4.0'
 }
 
 mainClassName = "com.taotao.cloud.message.biz.TaoTaoCloudMessageApplication"

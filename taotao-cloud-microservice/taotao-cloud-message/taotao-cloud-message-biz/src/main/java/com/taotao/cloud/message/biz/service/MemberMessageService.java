@@ -2,8 +2,10 @@ package com.taotao.cloud.message.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.message.api.vo.MemberMessageQueryVO;
 import com.taotao.cloud.message.biz.entity.MemberMessage;
+
 import java.util.List;
 
 /**
@@ -15,10 +17,10 @@ public interface MemberMessageService extends IService<MemberMessage> {
 	 * 会员消息查询接口
 	 *
 	 * @param memberMessageQueryVO 会员查询条件
-	 * @param pageVO               分页条件
+	 * @param PageParam            分页条件
 	 * @return 会员消息分页
 	 */
-	IPage<MemberMessage> getPage(MemberMessageQueryVO memberMessageQueryVO, PageVO pageVO);
+	IPage<MemberMessage> getPage(MemberMessageQueryVO memberMessageQueryVO, PageParam PageParam);
 
 	/**
 	 * 修改会员消息状态

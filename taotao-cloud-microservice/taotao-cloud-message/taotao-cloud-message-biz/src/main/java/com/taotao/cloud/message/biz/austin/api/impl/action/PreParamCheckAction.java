@@ -2,10 +2,10 @@ package com.taotao.cloud.message.biz.austin.api.impl.action;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
+import com.taotao.cloud.message.biz.austin.api.impl.domain.SendTaskModel;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.service.api.domain.MessageParam;
-import com.taotao.cloud.message.biz.austin.service.api.impl.domain.SendTaskModel;
 import com.taotao.cloud.message.biz.austin.support.pipeline.BusinessProcess;
 import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessContext;
 import lombok.extern.slf4j.Slf4j;
