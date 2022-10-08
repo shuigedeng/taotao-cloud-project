@@ -3,4 +3,10 @@ dependencies {
 
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper")
+
+    //https://search.maven.org/artifact/com.gitee.wangjkui/kylin-lock-spring-boot-starter
+    api("com.gitee.wangjkui:kylin-lock-spring-boot-starter:1.0.1") {
+        exclude group: "org.slf4j", module: "slf4j-api"
+        exclude group: "org.slf4j", module: "slf4j-log4j12"
+    }
 }
