@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<!--scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。-->
+	<!--scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。-->
+	<!--debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。-->
 	<contextName>${APP_NAME}</contextName>
 
 	<!-- Context listeners -->
@@ -79,6 +82,7 @@
     <logger name="net.add1s.slf4j-logback" level="DEBUG" additivity="false">
       <appender-ref ref="task" />
     </logger>
+    addtivity:是否向上级loger传递打印信息。默认是true。
     注意：additivity必须设置为false，这样只会交给task这个appender，否则其他appender也会打印net.add1s.slf4j-logback里的log信息。
 
     3、这样，在net.add1s.slf4j-logback的logger就会是上面定义的logger了。
@@ -101,6 +105,18 @@
 	<logger name="java.sql.Connection" level="DEBUG"/>
 	<logger name="java.sql.Statement" level="DEBUG"/>
 	<logger name="java.sql.PreparedStatement" level="DEBUG"/>
+
+	<!-- 输出SQL到控制台和文件-->
+	<logger name="org.hibernate.SQL" additivity="false">
+		<level value="DEBUG"/>
+		<appender-ref ref="FILE_SQL_ASYNC"/>
+	</logger>
+
+	<!-- 输出SQL的参数到控制台和文件-->
+	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false" level="TRACE">
+		<level value="TRACE"/>
+		<appender-ref ref="FILE_SQL_ASYNC"/>
+	</logger>
 
 	<!-- 日志输出级别，OFF level > FATAL > ERROR > WARN > INFO > DEBUG > ALL level -->
 	<root level="INFO">
@@ -143,8 +159,14 @@
 		</root>
 	</springProfile>
 
+	<!-- 生产环境,多个使用逗号隔开,生产环境输出ERROR级别日志,只以文件形式输出-->
 	<springProfile name="pro">
-		<root level="INFO">
+		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false" level="TRACE">
+			<level value="TRACE"/>
+			<appender-ref ref="FILE_SQL_ASYNC"/>
+		</logger>
+
+		<root level="ERROR">
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
