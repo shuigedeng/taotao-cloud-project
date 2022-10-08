@@ -58,7 +58,7 @@ sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_
 server-id=2
 # 启用二进制日志
 log-bin=mysql-bin
-relay-log = mysql-relay
+relay-log=mysql-relay
 # 设置不要复制的数据库(可设置多个)
 #binlog-ignore-db=mysql
 #binlog-ignore-db=information_schema
