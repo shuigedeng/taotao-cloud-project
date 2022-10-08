@@ -54,6 +54,7 @@ dependencies {
     //https://search.maven.org/artifact/org.apache.pdfbox/pdfbox
     api "org.apache.pdfbox:pdfbox:2.0.26"
 
+    //https://search.maven.org/artifact/com.univocity/univocity-parsers
     api "com.univocity:univocity-parsers:2.9.1"
 
     //https://www.yuque.com/liuer_doc/rayin/eiqgx7 批量电子凭证（PDF）生成工具。
