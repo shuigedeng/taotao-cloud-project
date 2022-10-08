@@ -17,29 +17,33 @@
 	<property name="CURRENT_DATE" value="%d{yyyy-MM-dd}"/>
 
 	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion"
-					defaultValue="--"/>
+		defaultValue="--"/>
 	<springProperty name="APP_NAME" scope="context" source="spring.application.name"
-					defaultValue="--"/>
+		defaultValue="--"/>
 	<springProperty name="SPRING_PROFILES_ACTIVE" scope="context" source="spring.profiles.active"/>
 	<springProperty name="LOG_FILE" scope="context" source="logging.file.path"
-					defaultValue="${LOG_PATH}/logs/${APP_NAME}"/>
-	<springProperty name="LOG_MAX_FILE_SIZE" scope="context" source="logging.logback.rollingpolicy.max-file-size"
-					defaultValue="2GB"/>
+		defaultValue="${LOG_PATH}/logs/${APP_NAME}"/>
+	<springProperty name="LOG_MAX_FILE_SIZE" scope="context"
+		source="logging.logback.rollingpolicy.max-file-size"
+		defaultValue="2GB"/>
 	<springProperty name="CLEAN_HISTORY_ON_START" scope="context"
-					source="logging.logback.rollingpolicy.clean-history-on-start"
-					defaultValue="true"/>
-	<springProperty name="TOTAL_SIZE_CAP" scope="context" source="logging.logback.rollingpolicy.total-size-cap"
-					defaultValue="7GB"/>
-	<springProperty name="LOG_FILE_MAX_DAY" scope="context" source="logging.logback.rollingpolicy.max-history"
-					defaultValue="30"/>
+		source="logging.logback.rollingpolicy.clean-history-on-start"
+		defaultValue="true"/>
+	<springProperty name="TOTAL_SIZE_CAP" scope="context"
+		source="logging.logback.rollingpolicy.total-size-cap"
+		defaultValue="7GB"/>
+	<springProperty name="LOG_FILE_MAX_DAY" scope="context"
+		source="logging.logback.rollingpolicy.max-history"
+		defaultValue="30"/>
 	<springProperty name="SERVER_IP" scope="context" source="spring.cloud.client.ip-address"
-					defaultValue="0.0.0.0"/>
+		defaultValue="0.0.0.0"/>
 	<springProperty name="SERVER_PORT" scope="context" source="server.port"
-					defaultValue="--"/>
+		defaultValue="--"/>
 	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers"
-					defaultValue="192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094"/>
-	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination"
-					defaultValue="192.168.10.200:9601"/>
+		defaultValue="192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094"/>
+	<springProperty name="LOGSTASH_DESTINATION" scope="context"
+		source="logging.extend.logstash-appender.destination"
+		defaultValue="192.168.10.200:9601"/>
 
 	<!--https://logback.qos.ch/manual/layouts.html-->
 
@@ -47,21 +51,21 @@
 	<!--<springProperty name="CONSOLE_LOG_PATTERN" source="logging.pattern.console"-->
 	<!--	defaultValue="[%clr(${APP_NAME}){green}:%clr(${SERVER_IP}){green}:%clr(${SERVER_PORT}){green}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){green} %clr([%thread]){red} %clr([${SPRING_PROFILES_ACTIVE:-}]){green} %clr([%level]){blue} %clr([${PID}]){magenta} %clr([${OS_NAME:-}:${OS_VERSION:-}]){yellow} %clr([${USER_TIMEZONE:-}]){yellow} %clr([${JAVA_VERSION:-}]){yellow} %clr(Version:[${TAOTAO_CLOUD_VERSION}]){green} %clr(TraceId:[%X{taotao-cloud-trace-id:-}]){orange} %clr(TenantId:[%X{taotao-cloud-tenant-id:-}]){cyan} %clr(RequestVersion:[%X{taotao-cloud-request-version:-}]){yellow} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr([%tid]){magenta} %clr(%logger{360}){cyan} %clr([%F:%M:%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>-->
 	<springProperty name="CONSOLE_LOG_PATTERN" source="logging.pattern.console"
-					defaultValue="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){green} %clr(%level){blue} %clr(${PID}){magenta} %clr([${APP_NAME}:${SERVER_IP}:${SERVER_PORT}]){green} %clr([${TAOTAO_CLOUD_VERSION}]){green} %clr([%thread]){red} %clr([${SPRING_PROFILES_ACTIVE:--}]){faint} %clr([${OS_NAME:-}:${OS_VERSION:-}:${USER_TIMEZONE:-}:${JAVA_VERSION:-}]){yellow} %clr(Tlog:[%X{tl}]){cyan} %clr(TraceId:[%X{taotao-cloud-trace-id:-}]){orange} %clr(TenantId:[%X{taotao-cloud-tenant-id:-}]){cyan} %clr(RequestVersion:[%X{taotao-cloud-request-version:-}]){yellow} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr([%tid]){magenta} %clr(%class{360}:%M:%L){cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+		defaultValue="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){green} %clr(%level){blue} %clr(${PID}){magenta} %clr([${APP_NAME}:${SERVER_IP}:${SERVER_PORT}]){green} %clr([${TAOTAO_CLOUD_VERSION}]){green} %clr([%thread]){red} %clr([${SPRING_PROFILES_ACTIVE:--}]){faint} %clr([${OS_NAME:-}:${OS_VERSION:-}:${USER_TIMEZONE:-}:${JAVA_VERSION:-}]){yellow} %clr(Tlog:[%X{tl}]){cyan} %clr(TraceId:[%X{taotao-cloud-trace-id:-}]){orange} %clr(TenantId:[%X{taotao-cloud-tenant-id:-}]){cyan} %clr(RequestVersion:[%X{taotao-cloud-request-version:-}]){yellow} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr([%tid]){magenta} %clr(%class{360}:%M:%L){cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
 	<!--<springProperty name="CONSOLE_LOG_PATTERN_NO_COLOR" source="logging.pattern.console.no.color"-->
 	<!--	defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [${SPRING_PROFILES_ACTIVE:-}] [%level] [${PID}] [${OS_NAME:-}:${OS_VERSION:-}] [${USER_TIMEZONE:-}] [${JAVA_VERSION:-}] Version:[${TAOTAO_CLOUD_VERSION}] TraceId:[%X{taotao-cloud-trace-id:-}] TenantId:[%X{taotao-cloud-tenant-id:-}] RequestVersion:[%X{taotao-cloud-request-version:-}] ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] [%tid] %logger{360} %clr([%F:%M:%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>-->
 	<springProperty name="CONSOLE_LOG_PATTERN_NO_COLOR" source="logging.pattern.console.no.color"
-					defaultValue="%d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] [${TAOTAO_CLOUD_VERSION}] [%thread] [${SPRING_PROFILES_ACTIVE:--}] [${OS_NAME:-}:${OS_VERSION:-}:${USER_TIMEZONE:-}:${JAVA_VERSION:-}] Tlog:[%X{tl}] TraceId:[%X{taotao-cloud-trace-id:-}] TenantId:[%X{taotao-cloud-tenant-id:-}] RequestVersion:[%X{taotao-cloud-request-version:-}] ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] [%tid] %class{360}:%M:%L : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+		defaultValue="%d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] [${TAOTAO_CLOUD_VERSION}] [%thread] [${SPRING_PROFILES_ACTIVE:--}] [${OS_NAME:-}:${OS_VERSION:-}:${USER_TIMEZONE:-}:${JAVA_VERSION:-}] Tlog:[%X{tl}] TraceId:[%X{taotao-cloud-trace-id:-}] TenantId:[%X{taotao-cloud-tenant-id:-}] RequestVersion:[%X{taotao-cloud-request-version:-}] ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] [%tid] %class{360}:%M:%L : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
 	<conversionRule conversionWord="clr"
-					converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+		converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
 	<conversionRule conversionWord="wex"
-					converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+		converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
 	<conversionRule conversionWord="wEx"
-					converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+		converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
 	<conversionRule conversionWord="wEx2"
-					converterClass="com.taotao.cloud.logger.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+		converterClass="com.taotao.cloud.logger.logback.ExtendedWhitespaceThrowableProxyConverter"/>
 
 	<include resource="logback/console-appender.xml"/>
 
@@ -141,6 +145,7 @@
 
 	<springProfile name="test">
 		<root level="INFO">
+			<appender-ref ref="CONSOLE_ASYNC"/>
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
@@ -151,6 +156,7 @@
 
 	<springProfile name="pre">
 		<root level="INFO">
+			<appender-ref ref="CONSOLE_ASYNC"/>
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
@@ -161,12 +167,14 @@
 
 	<!-- 生产环境,多个使用逗号隔开,生产环境输出ERROR级别日志,只以文件形式输出-->
 	<springProfile name="pro">
-		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false" level="TRACE">
+		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false"
+			level="TRACE">
 			<level value="TRACE"/>
 			<appender-ref ref="FILE_SQL_ASYNC"/>
 		</logger>
 
 		<root level="ERROR">
+			<appender-ref ref="CONSOLE_ASYNC"/>
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>

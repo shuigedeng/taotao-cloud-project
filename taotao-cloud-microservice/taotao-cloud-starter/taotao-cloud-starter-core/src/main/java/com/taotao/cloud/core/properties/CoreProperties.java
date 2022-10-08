@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.core.properties;
 
-import com.taotao.cloud.core.enums.EnvironmentEnum;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -35,7 +34,7 @@ public class CoreProperties {
 	/**
 	 * 核心环境变量
 	 */
-	private EnvironmentEnum env;
+	//private EnvironmentEnum env;
 	/**
 	 * 是否开启核心属性配置
 	 */
@@ -53,14 +52,13 @@ public class CoreProperties {
 	 */
 	private int contextRestartTimespan = 10;
 
-
-	public EnvironmentEnum getEnv() {
-		return env;
-	}
-
-	public void setEnv(EnvironmentEnum env) {
-		this.env = env;
-	}
+	//public EnvironmentEnum getEnv() {
+	//	return env;
+	//}
+	//
+	//public void setEnv(EnvironmentEnum env) {
+	//	this.env = env;
+	//}
 
 	public boolean getEnabled() {
 		return enabled;

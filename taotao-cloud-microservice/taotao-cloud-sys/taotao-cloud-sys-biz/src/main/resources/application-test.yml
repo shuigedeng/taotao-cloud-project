@@ -503,7 +503,7 @@ spring:
   #              threshold: 1
   gobrs:
     async:
-      enable: false
+      enable: true
       rules:
         - name: "general"
           content: "AService->BService->FService->GService->HService;EService->CService;AService"
@@ -1405,13 +1405,13 @@ management:
 
 logging:
   file:
-    path: ${LOG_PATH}/logs/${APP_NAME}
+    path: ${user.home}/logs/${spring.application.name}
   logback:
     rollingpolicy:
       max-file-size: 10GB
       max-history: 30
       clean-history-on-start: true
-      total-size-cap: 2GB
+      total-size-cap: 20GB
   level:
     root: INFO
     org.apache.zookeeper.ZooKeeper: error
