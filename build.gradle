@@ -35,7 +35,7 @@ buildscript {
         springCloudAlibabaVersion = '2021.0.4.0'
 
         //https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
-        testContainersVersion = "1.17.3"
+        testContainersVersion = "1.17.5"
         //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
         springBootAdminVersion = "2.7.5"
 
@@ -46,7 +46,7 @@ buildscript {
         //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
         recordBuilderVersion = "34"
         //https://search.maven.org/artifact/org.mapstruct/mapstruct-processor
-        mapstructProcessorVersion = "1.5.2.Final"
+        mapstructProcessorVersion = "1.5.3.Final"
         //https://search.maven.org/artifact/com.querydsl/querydsl-apt
         querydslAptVersion = "5.0.0"
 
@@ -96,7 +96,7 @@ buildscript {
         //https://search.maven.org/artifact/com.upyun/java-sdk
         upyunJavaSdkVersion = '4.2.3'
         //https://search.maven.org/artifact/com.aliyun.oss/aliyun-sdk-oss
-        aliyunSdkOssVersion = '3.15.1'
+        aliyunSdkOssVersion = '3.15.2'
         //https://search.maven.org/artifact/com.qiniu/qiniu-java-sdk
         qiniuJavaSdkVersion = '7.11.0'
         //https://search.maven.org/artifact/com.google.code.gson/gson
@@ -130,9 +130,9 @@ buildscript {
         //https://search.maven.org/artifact/org.apache.commons/commons-collections4
         commonsCollections4Version = '4.4'
         //https://search.maven.org/artifact/io.lettuce/lettuce-core
-        lettuceVersion = '6.2.0.RELEASE'
+        lettuceVersion = '6.2.1.RELEASE'
         //https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter
-        redissonVersion = "3.17.6"
+        redissonVersion = "3.17.7"
         //https://search.maven.org/artifact/io.seata/seata-all
         seataVersion = "1.5.2"
         //https://search.maven.org/artifact/org.apache.shardingsphere/sharding-jdbc-spring-namespace
@@ -141,7 +141,7 @@ buildscript {
         //https://search.maven.org/artifact/io.springfox/springfox-swagger2
         swaggerVersion = '3.0.0'
         //https://search.maven.org/artifact/io.swagger.core.v3/swagger-models
-        swaggerModelsVersion = '2.2.2'
+        swaggerModelsVersion = '2.2.3'
         //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-spring-ui
         knife4jVersion = '3.0.3'
 
@@ -152,9 +152,9 @@ buildscript {
         //https://search.maven.org/artifact/com.xuxueli/xxl-job-core
         xxlJobVersion = '2.3.1'
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
-        mapstructVersion = "1.5.2.Final"
+        mapstructVersion = "1.5.3.Final"
         //https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2
-        fastjson2Version = "2.0.14"
+        fastjson2Version = "2.0.15"
         //https://search.maven.org/artifact/com.caucho/hessian
         hessianVersion = "4.0.66"
         //https://search.maven.org/artifact/com.esotericsoftware/kryo
@@ -184,7 +184,7 @@ buildscript {
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos
         dynamicTpVersion = "1.0.7"
         //https://search.maven.org/artifact/joda-time/joda-time
-        jodaTimeVersion = "2.11.1"
+        jodaTimeVersion = "2.11.2"
         //https://search.maven.org/artifact/org.anarres.lzo/lzo-core
         lzoVersion = "1.0.6"
         //https://search.maven.org/artifact/net.jpountz.lz4/lz4

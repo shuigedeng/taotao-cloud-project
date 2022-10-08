@@ -9,7 +9,7 @@ dependencies {
     api "com.dtflys.forest:forest-spring-boot-starter:1.5.26"
 
     //https://search.maven.org/artifact/com.github.lianjiatech/retrofit-spring-boot-starter
-    api "com.github.lianjiatech:retrofit-spring-boot-starter:2.3.7"
+    api "com.github.lianjiatech:retrofit-spring-boot-starter:2.3.8"
 
     //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-square-retrofit
     api "org.springframework.cloud:spring-cloud-square-retrofit:0.4.1"

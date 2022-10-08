@@ -44,7 +44,7 @@ public class RabbitMQBuildMessageProducer {
 
 
 	public MessageProducer buildMessageSender(final String exchange, final String routingKey,
-		final String queue) throws IOException {
+											  final String queue) throws IOException {
 		return buildMessageSender(exchange, routingKey, queue, Constants.DIRECT_TYPE);
 	}
 
@@ -54,7 +54,7 @@ public class RabbitMQBuildMessageProducer {
 	}
 
 	public MessageProducer buildMessageSender(final String exchange, final String routingKey,
-		final String queue, final String type) throws IOException {
+											  final String queue, final String type) throws IOException {
 
 		final Connection connection = connectionFactory.createConnection();
 		if (type.equals(Constants.DIRECT_TYPE)) {
@@ -83,9 +83,9 @@ public class RabbitMQBuildMessageProducer {
 
 		//回调函数: return返回
 		rabbitTemplate
-			.setReturnCallback((message, replyCode, replyText, tmpExchange, tmpRoutingKey) -> {
-				LogUtils.info("send message failed: " + replyCode + " " + replyText);
-				rabbitTemplate.send(message);
+			.setReturnsCallback((callback) -> {
+				LogUtils.info("send message failed: " + callback.getReplyCode() + " " + callback.getReplyText());
+				rabbitTemplate.send(callback.getMessage());
 			});
 
 		return new MessageProducer() {
@@ -98,7 +98,7 @@ public class RabbitMQBuildMessageProducer {
 
 
 	private void buildQueue(String exchange, String routingKey,
-		final String queue, Connection connection, String type) throws IOException {
+							final String queue, Connection connection, String type) throws IOException {
 		Channel channel = connection.createChannel(false);
 
 		if (type.equals(Constants.DIRECT_TYPE)) {

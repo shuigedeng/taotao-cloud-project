@@ -8,7 +8,7 @@ dependencies {
     api "com.github.ben-manes.caffeine:caffeine:3.1.1"
 
     //https://search.maven.org/artifact/io.netty/netty-common
-    api "io.netty:netty-common:4.1.81.Final"
+    api "io.netty:netty-common:4.1.82.Final"
 
     //https://search.maven.org/artifact/io.github.majusko/pulsar-java-spring-boot-starter
     api("io.github.majusko:pulsar-java-spring-boot-starter:1.1.2") {

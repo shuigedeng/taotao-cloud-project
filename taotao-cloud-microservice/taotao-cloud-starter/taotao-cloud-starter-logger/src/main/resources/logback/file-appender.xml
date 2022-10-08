@@ -14,8 +14,8 @@
 			</fileNamePattern>
 			<MaxHistory>${LOG_FILE_MAX_DAY}</MaxHistory>
 			<maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
-			<totalSizeCap>7GB</totalSizeCap>
-			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+			<cleanHistoryOnStart>${CLEAN_HISTORY_ON_START}</cleanHistoryOnStart>
 		</rollingPolicy>
 	</appender>
 
@@ -33,8 +33,8 @@
 			</fileNamePattern>
 			<MaxHistory>${LOG_FILE_MAX_DAY}</MaxHistory>
 			<maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
-			<totalSizeCap>7GB</totalSizeCap>
-			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+			<cleanHistoryOnStart>${CLEAN_HISTORY_ON_START}</cleanHistoryOnStart>
 		</rollingPolicy>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>WARN</level>
@@ -57,8 +57,8 @@
 			</fileNamePattern>
 			<MaxHistory>${LOG_FILE_MAX_DAY}</MaxHistory>
 			<maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
-			<totalSizeCap>7GB</totalSizeCap>
-			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+			<cleanHistoryOnStart>${CLEAN_HISTORY_ON_START}</cleanHistoryOnStart>
 		</rollingPolicy>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>ERROR</level>
@@ -68,7 +68,9 @@
 	</appender>
 
 	<appender name="FILE_ALL_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
 		<queueSize>512</queueSize>
+		<!-- 默认情况下，当阻塞队列的剩余容量为20％时，它将丢弃TRACE，DEBUG和INFO级别的事件，仅保留WARN和ERROR级别的事件。要保留所有事件，请将discardingThreshold设置为0。 -->
 		<discardingThreshold>0</discardingThreshold>
 		<includeCallerData>true</includeCallerData>
 

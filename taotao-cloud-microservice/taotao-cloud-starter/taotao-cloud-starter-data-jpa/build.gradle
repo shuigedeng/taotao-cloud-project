@@ -16,7 +16,7 @@ dependencies {
     //https://search.maven.org/artifact/com.querydsl/querydsl-jpa
     api "com.querydsl:querydsl-jpa:5.0.0"
     //https://search.maven.org/artifact/mysql/mysql-connector-java
-    api "mysql:mysql-connector-java:8.0.30"
+    api "mysql:mysql-connector-java"
 
     compileOnly "org.springframework.security:spring-security-oauth2-core"
 
