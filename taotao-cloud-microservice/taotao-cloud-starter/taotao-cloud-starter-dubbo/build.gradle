@@ -2,14 +2,13 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
     compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
 
-    api 'org.apache.dubbo:dubbo-spring-boot-starter:3.1.0'
-    api 'org.apache.dubbo:dubbo-spring-boot-actuator:3.1.0'
+    api 'org.apache.dubbo:dubbo-spring-boot-starter:3.1.1'
+    api 'org.apache.dubbo:dubbo-spring-boot-actuator:3.1.1'
 
-    api 'org.apache.dubbo:dubbo-metrics:3.1.0'
-    api 'org.apache.dubbo:dubbo-serialization:3.1.0'
-    api 'org.apache.dubbo:dubbo-filter:3.1.0'
-    api 'org.apache.dubbo:dubbo-monitor:3.1.0'
-
+    api 'org.apache.dubbo:dubbo-metrics:3.1.1'
+    api 'org.apache.dubbo:dubbo-serialization:3.1.1'
+    api 'org.apache.dubbo:dubbo-filter:3.1.1'
+    api 'org.apache.dubbo:dubbo-monitor:3.1.1'
 }
 
 
