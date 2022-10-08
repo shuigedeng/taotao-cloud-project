@@ -4,7 +4,8 @@
 		<file>${LOG_FILE}/${APP_NAME}.all.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+			<layout
+				class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</layout>
 		</encoder>
@@ -24,10 +25,11 @@
 	</appender>
 
 	<appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_FILE}/${APP_NAME}.WARN.log</file>
+		<file>${LOG_FILE}/${APP_NAME}.warn.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+			<layout
+				class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</layout>
 		</encoder>
@@ -53,7 +55,8 @@
 		<file>${LOG_FILE}/${APP_NAME:-}.error.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+			<layout
+				class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</layout>
 		</encoder>
@@ -77,7 +80,8 @@
 		<file>${LOG_FILE}/${APP_NAME:-}.sql.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+			<layout
+				class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</layout>
 		</encoder>
