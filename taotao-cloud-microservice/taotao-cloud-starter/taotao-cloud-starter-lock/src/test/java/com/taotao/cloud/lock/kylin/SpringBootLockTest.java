@@ -7,11 +7,9 @@ import com.taotao.cloud.lock.kylin.service.IndexService;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * https://blog.csdn.net/qq_44413835/article/details/117320028
@@ -27,8 +25,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 @SpringBootTest
 public class SpringBootLockTest {
 
-	@Autowired
-	private StringRedisTemplate stringRedisTemplate;
+	//@Autowired
+	//private StringRedisTemplate stringRedisTemplate;
 
 	@Autowired
 	private IndexService indexService;
@@ -411,12 +409,12 @@ public class SpringBootLockTest {
 	 * org.redisson.spring.starter.RedissonAutoConfiguration#redissonConnectionFactory(org.redisson.api.RedissonClient)
 	 */
 
-	@Test
-	public void testDemoMethod16() {
-		//共用一个连接池即是 redisson
-		stringRedisTemplate.opsForValue().set("zs", "10", 100, TimeUnit.SECONDS);
-
-		indexService.simple1();
-	}
+	//@Test
+	//public void testDemoMethod16() {
+	//	//共用一个连接池即是 redisson
+	//	stringRedisTemplate.opsForValue().set("zs", "10", 100, TimeUnit.SECONDS);
+	//
+	//	indexService.simple1();
+	//}
 
 }

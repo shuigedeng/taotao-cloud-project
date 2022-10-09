@@ -1,13 +1,13 @@
 package com.taotao.cloud.lock.kylin.service.impl;
 
+import com.taotao.cloud.lock.kylin.annotation.KylinLock;
+import com.taotao.cloud.lock.kylin.enums.LockType;
+import com.taotao.cloud.lock.kylin.executor.redisson.RedissonLockExecutor;
+import com.taotao.cloud.lock.kylin.executor.zookeeper.ZookeeperLockExecutor;
+import com.taotao.cloud.lock.kylin.model.LockInfo;
 import com.taotao.cloud.lock.kylin.model.User;
 import com.taotao.cloud.lock.kylin.service.IndexService;
-import com.wjk.kylin.lock.annotation.KylinLock;
-import com.wjk.kylin.lock.enums.LockType;
-import com.wjk.kylin.lock.executor.redisson.RedissonLockExecutor;
-import com.wjk.kylin.lock.executor.zookeeper.ZookeeperLockExecutor;
-import com.wjk.kylin.lock.model.LockInfo;
-import com.wjk.kylin.lock.template.LockTemplate;
+import com.taotao.cloud.lock.kylin.template.LockTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

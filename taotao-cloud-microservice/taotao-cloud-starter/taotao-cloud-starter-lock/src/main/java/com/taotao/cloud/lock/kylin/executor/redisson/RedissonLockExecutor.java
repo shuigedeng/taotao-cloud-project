@@ -109,26 +109,13 @@ public class RedissonLockExecutor extends AbstractLockExecutor<RLock> {
 	public RLock getLockInstance(String lockKey, LockType lockType, String[] keySuffix) {
 		RLock lockInstance = null;
 		switch (lockType) {
-			case REENTRANT:
-				lockInstance = redissonClient.getLock(lockKey);
-				break;
-			case READ:
-				lockInstance = redissonClient.getReadWriteLock(lockKey).readLock();
-				break;
-			case WRITE:
-				lockInstance = redissonClient.getReadWriteLock(lockKey).writeLock();
-				break;
-			case MULTI:
-				lockInstance = this.getMultiLock(lockKey, keySuffix);
-				break;
-			case RED:
-				lockInstance = this.getRedLock(lockKey, keySuffix);
-				break;
-			case FAIR:
-				lockInstance = redissonClient.getFairLock(lockKey);
-				break;
-			default:
-				LOGGER.error("lockType is not support ,lockType:{}", lockType);
+			case REENTRANT -> lockInstance = redissonClient.getLock(lockKey);
+			case READ -> lockInstance = redissonClient.getReadWriteLock(lockKey).readLock();
+			case WRITE -> lockInstance = redissonClient.getReadWriteLock(lockKey).writeLock();
+			case MULTI -> lockInstance = this.getMultiLock(lockKey, keySuffix);
+			case RED -> lockInstance = this.getRedLock(lockKey, keySuffix);
+			case FAIR -> lockInstance = redissonClient.getFairLock(lockKey);
+			default -> LOGGER.error("lockType is not support ,lockType:{}", lockType);
 		}
 		return lockInstance;
 	}
