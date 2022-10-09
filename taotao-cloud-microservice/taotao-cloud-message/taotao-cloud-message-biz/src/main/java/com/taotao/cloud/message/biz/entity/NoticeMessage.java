@@ -1,20 +1,33 @@
 package com.taotao.cloud.message.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
+import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Table;
-import lombok.Data;
 
 /**
  * 通知类消息模板表
  */
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = NoticeMessage.TABLE_NAME)
 @TableName(NoticeMessage.TABLE_NAME)
+@EntityListeners({AbstractListener.class})
 @org.hibernate.annotations.Table(appliesTo = NoticeMessage.TABLE_NAME, comment = "通知类消息模板表")
 public class NoticeMessage extends BaseSuperEntity<NoticeMessage, Long> {
 

@@ -1,17 +1,18 @@
 package com.taotao.cloud.promotion.api.web.query;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 砍价活动搜索参数
  */
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivitySearchQuery extends BasePromotionsSearchQuery {
@@ -34,16 +35,16 @@ public class KanjiaActivitySearchQuery extends BasePromotionsSearchQuery {
 	@Schema(description = "规格商品ID", hidden = true)
 	private String goodsSkuId;
 
-
-	public <T> QueryWrapper<T> wrapper() {
-		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-
-		queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityId), "id", kanjiaActivityId);
-		queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityGoodsId), "kanjia_activity_goods_id", kanjiaActivityGoodsId);
-		queryWrapper.eq(StrUtil.isNotEmpty(goodsSkuId), "sku_id", goodsSkuId);
-		queryWrapper.eq(StrUtil.isNotEmpty(memberId), "member_id", memberId);
-		queryWrapper.eq(StrUtil.isNotEmpty(status), "status", status);
-		return queryWrapper;
-	}
+	//
+	// public <T> QueryWrapper<T> wrapper() {
+	// 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+	//
+	// 	queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityId), "id", kanjiaActivityId);
+	// 	queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityGoodsId), "kanjia_activity_goods_id", kanjiaActivityGoodsId);
+	// 	queryWrapper.eq(StrUtil.isNotEmpty(goodsSkuId), "sku_id", goodsSkuId);
+	// 	queryWrapper.eq(StrUtil.isNotEmpty(memberId), "member_id", memberId);
+	// 	queryWrapper.eq(StrUtil.isNotEmpty(status), "status", status);
+	// 	return queryWrapper;
+	// }
 }
 

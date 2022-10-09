@@ -28,7 +28,6 @@ public class PointsGoodsVO extends PointsGoodsBaseVO {
 	private GoodsSkuVO goodsSku;
 
 	@Data
-	@Builder
 	@AllArgsConstructor
 	@NoArgsConstructor
 	public static class GoodsSkuVO {

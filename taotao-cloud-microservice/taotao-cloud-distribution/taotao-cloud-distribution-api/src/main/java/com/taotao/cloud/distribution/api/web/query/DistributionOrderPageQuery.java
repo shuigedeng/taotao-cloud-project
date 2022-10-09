@@ -1,18 +1,15 @@
 package com.taotao.cloud.distribution.api.web.query;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.io.Serial;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serial;
+import java.time.LocalDateTime;
 
 /**
  * 分销员对象
@@ -49,19 +46,19 @@ public class DistributionOrderPageQuery extends PageParam {
 	@Schema(description = "结束时间")
 	private LocalDateTime endTime;
 
-	public <T> QueryWrapper<T> queryWrapper() {
-		QueryWrapper<T> queryWrapper = Wrappers.query();
-		queryWrapper.like(StringUtils.isNotBlank(distributionName), "distribution_name",
-			distributionName);
-		queryWrapper.eq(StringUtils.isNotBlank(distributionOrderStatus), "distribution_order_status",
-			distributionOrderStatus);
-		queryWrapper.eq(StringUtils.isNotBlank(orderSn), "order_sn", orderSn);
-		queryWrapper.eq(StringUtils.isNotBlank(distributionId), "distribution_id", distributionId);
-		queryWrapper.eq(StringUtils.isNotBlank(storeId), "store_id", storeId);
-		if (endTime != null && startTime != null) {
-			queryWrapper.between("create_time", startTime, endTime);
-		}
-		return queryWrapper;
-	}
+	// public <T> QueryWrapper<T> queryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = Wrappers.query();
+	// 	queryWrapper.like(StringUtils.isNotBlank(distributionName), "distribution_name",
+	// 		distributionName);
+	// 	queryWrapper.eq(StringUtils.isNotBlank(distributionOrderStatus), "distribution_order_status",
+	// 		distributionOrderStatus);
+	// 	queryWrapper.eq(StringUtils.isNotBlank(orderSn), "order_sn", orderSn);
+	// 	queryWrapper.eq(StringUtils.isNotBlank(distributionId), "distribution_id", distributionId);
+	// 	queryWrapper.eq(StringUtils.isNotBlank(storeId), "store_id", storeId);
+	// 	if (endTime != null && startTime != null) {
+	// 		queryWrapper.between("create_time", startTime, endTime);
+	// 	}
+	// 	return queryWrapper;
+	// }
 
 }

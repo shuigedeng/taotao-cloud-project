@@ -1,6 +1,5 @@
 package com.taotao.cloud.order.api.model.vo.order;
 
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 

@@ -1,13 +1,16 @@
 package com.taotao.cloud.operation.api.web.query;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 商品查询条件
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-21 16:59:38

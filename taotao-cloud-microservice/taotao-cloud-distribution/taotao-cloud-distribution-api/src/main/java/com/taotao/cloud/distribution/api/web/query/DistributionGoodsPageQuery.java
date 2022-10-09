@@ -1,9 +1,6 @@
 package com.taotao.cloud.distribution.api.web.query;
 
-import cn.hutool.core.text.CharSequenceUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,23 +28,23 @@ public class DistributionGoodsPageQuery extends PageParam {
 	@Schema(description = "是否已选择")
 	private boolean isChecked;
 
-	public <T> QueryWrapper<T> queryWrapper() {
-		QueryWrapper<T> queryWrapper = this.distributionQueryWrapper();
-		queryWrapper.eq(CharSequenceUtil.isNotEmpty(goodsId), "goods_id", goodsId);
-		queryWrapper.eq(CharSequenceUtil.isNotEmpty(goodsName), "goods_name", goodsId);
-		return queryWrapper;
-	}
-
-	public <T> QueryWrapper<T> storeQueryWrapper() {
-		QueryWrapper<T> queryWrapper = this.distributionQueryWrapper();
-		queryWrapper.eq("dg.store_id", SecurityUtils.getCurrentUser().getStoreId());
-		return queryWrapper;
-	}
-
-	public <T> QueryWrapper<T> distributionQueryWrapper() {
-		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		queryWrapper.like(CharSequenceUtil.isNotEmpty(goodsName), "dg.goods_name", goodsName);
-		return queryWrapper;
-	}
+	// public <T> QueryWrapper<T> queryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = this.distributionQueryWrapper();
+	// 	queryWrapper.eq(CharSequenceUtil.isNotEmpty(goodsId), "goods_id", goodsId);
+	// 	queryWrapper.eq(CharSequenceUtil.isNotEmpty(goodsName), "goods_name", goodsId);
+	// 	return queryWrapper;
+	// }
+	//
+	// public <T> QueryWrapper<T> storeQueryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = this.distributionQueryWrapper();
+	// 	queryWrapper.eq("dg.store_id", SecurityUtils.getCurrentUser().getStoreId());
+	// 	return queryWrapper;
+	// }
+	//
+	// public <T> QueryWrapper<T> distributionQueryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+	// 	queryWrapper.like(CharSequenceUtil.isNotEmpty(goodsName), "dg.goods_name", goodsName);
+	// 	return queryWrapper;
+	// }
 
 }

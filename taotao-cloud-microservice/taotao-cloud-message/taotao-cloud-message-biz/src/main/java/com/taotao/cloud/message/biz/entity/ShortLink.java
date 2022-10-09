@@ -1,20 +1,32 @@
 package com.taotao.cloud.message.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Table;
-import lombok.Data;
 
 
 /**
  * 短链接/暂时只用于小程序二维码业务
  */
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = ShortLink.TABLE_NAME)
 @TableName(ShortLink.TABLE_NAME)
+@EntityListeners({AbstractListener.class})
 @org.hibernate.annotations.Table(appliesTo = ShortLink.TABLE_NAME, comment = "短链接/暂时只用于小程序二维码业务表")
 public class ShortLink extends BaseSuperEntity<ShortLink, Long> {
 

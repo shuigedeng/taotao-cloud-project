@@ -1,32 +1,25 @@
 package com.taotao.cloud.promotion.api.web.query;
 
-import cn.hutool.core.text.CharSequenceUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
-import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
-import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.Date;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 优惠券查询通用类
  */
 @Setter
 @Getter
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponPageQuery extends BasePromotionsSearchQuery implements Serializable {
@@ -76,92 +69,92 @@ public class CouponPageQuery extends BasePromotionsSearchQuery implements Serial
 	@Schema(description = "会员优惠券状态")
 	private String memberCouponStatus;
 
-	@Override
-	public <T> QueryWrapper<T> queryWrapper() {
-		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		if (storeId != null) {
-			queryWrapper.in("store_id", Collections.singletonList(storeId));
-		}
-		if (CharSequenceUtil.isNotEmpty(couponName)) {
-			queryWrapper.like("coupon_name", couponName);
-		}
-		if (memberId != null) {
-			queryWrapper.eq("member_id", memberId);
-		}
-		if (CharSequenceUtil.isNotEmpty(couponType)) {
-			queryWrapper.eq("coupon_type", CouponTypeEnum.valueOf(couponType).name());
-		}
-		if (CharSequenceUtil.isNotEmpty(scopeType)) {
-			queryWrapper.eq("scope_type", PromotionsScopeTypeEnum.valueOf(scopeType).name());
-		}
-		if (CharSequenceUtil.isNotEmpty(scopeId)) {
-			queryWrapper.eq("scope_id", scopeId);
-		}
-		if (CharSequenceUtil.isNotEmpty(getType)) {
-			queryWrapper.eq("get_type", CouponGetEnum.valueOf(getType).name());
-		}
-		if (CharSequenceUtil.isNotEmpty(memberCouponStatus)) {
-			queryWrapper.eq("member_coupon_status",
-				MemberCouponStatusEnum.valueOf(memberCouponStatus).name());
-		}
-		if (CharSequenceUtil.isNotEmpty(this.getPromotionStatus())) {
-			switch (PromotionsStatusEnum.valueOf(this.getPromotionStatus())) {
-				case NEW -> queryWrapper.nested(i -> i.gt(PromotionTools.START_TIME_COLUMN, new Date())
-					.gt(PromotionTools.END_TIME_COLUMN, new Date()))
-				;
-				case START -> queryWrapper.nested(i -> i.le(PromotionTools.START_TIME_COLUMN, new Date())
-						.ge(PromotionTools.END_TIME_COLUMN, new Date()))
-					.or(i -> i.gt("effective_days", 0)
-						.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.DYNAMICTIME.name()));
-				case END -> queryWrapper.nested(i -> i.lt(PromotionTools.START_TIME_COLUMN, new Date())
-					.lt(PromotionTools.END_TIME_COLUMN, new Date()));
-				case CLOSE -> queryWrapper.nested(n -> n.nested(
-						i -> i.isNull(PromotionTools.START_TIME_COLUMN)
-							.isNull(PromotionTools.END_TIME_COLUMN)
-							.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.FIXEDTIME.name())).
-					or(i -> i.le("effective_days", 0)
-						.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.DYNAMICTIME.name())));
-				default -> {
-				}
-			}
-		}
-		if (this.getStartTime() != null) {
-			queryWrapper.ge("start_time", new Date(this.getEndTime()));
-		}
-		if (this.getEndTime() != null) {
-			queryWrapper.le("end_time", new Date(this.getEndTime()));
-		}
-		queryWrapper.eq("delete_flag", false);
-		this.betweenWrapper(queryWrapper);
-		queryWrapper.orderByDesc("create_time");
-		return queryWrapper;
-	}
-
-	private <T> void betweenWrapper(QueryWrapper<T> queryWrapper) {
-		if (CharSequenceUtil.isNotEmpty(publishNum)) {
-			String[] s = publishNum.split("_");
-			if (s.length > 1) {
-				queryWrapper.ge("publish_num", s[1]);
-			} else {
-				queryWrapper.le("publish_num", publishNum);
-			}
-		}
-		if (CharSequenceUtil.isNotEmpty(price)) {
-			String[] s = price.split("_");
-			if (s.length > 1) {
-				queryWrapper.ge(PRICE_COLUMN, s[1]);
-			} else {
-				queryWrapper.le(PRICE_COLUMN, s[0]);
-			}
-		}
-		if (CharSequenceUtil.isNotEmpty(receivedNum)) {
-			String[] s = receivedNum.split("_");
-			if (s.length > 1) {
-				queryWrapper.ge("received_num", s[1]);
-			} else {
-				queryWrapper.le("received_num", s[0]);
-			}
-		}
-	}
+	// @Override
+	// public <T> QueryWrapper<T> queryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+	// 	if (storeId != null) {
+	// 		queryWrapper.in("store_id", Collections.singletonList(storeId));
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(couponName)) {
+	// 		queryWrapper.like("coupon_name", couponName);
+	// 	}
+	// 	if (memberId != null) {
+	// 		queryWrapper.eq("member_id", memberId);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(couponType)) {
+	// 		queryWrapper.eq("coupon_type", CouponTypeEnum.valueOf(couponType).name());
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(scopeType)) {
+	// 		queryWrapper.eq("scope_type", PromotionsScopeTypeEnum.valueOf(scopeType).name());
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(scopeId)) {
+	// 		queryWrapper.eq("scope_id", scopeId);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(getType)) {
+	// 		queryWrapper.eq("get_type", CouponGetEnum.valueOf(getType).name());
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(memberCouponStatus)) {
+	// 		queryWrapper.eq("member_coupon_status",
+	// 			MemberCouponStatusEnum.valueOf(memberCouponStatus).name());
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(this.getPromotionStatus())) {
+	// 		switch (PromotionsStatusEnum.valueOf(this.getPromotionStatus())) {
+	// 			case NEW -> queryWrapper.nested(i -> i.gt(PromotionTools.START_TIME_COLUMN, new Date())
+	// 				.gt(PromotionTools.END_TIME_COLUMN, new Date()))
+	// 			;
+	// 			case START -> queryWrapper.nested(i -> i.le(PromotionTools.START_TIME_COLUMN, new Date())
+	// 					.ge(PromotionTools.END_TIME_COLUMN, new Date()))
+	// 				.or(i -> i.gt("effective_days", 0)
+	// 					.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.DYNAMICTIME.name()));
+	// 			case END -> queryWrapper.nested(i -> i.lt(PromotionTools.START_TIME_COLUMN, new Date())
+	// 				.lt(PromotionTools.END_TIME_COLUMN, new Date()));
+	// 			case CLOSE -> queryWrapper.nested(n -> n.nested(
+	// 					i -> i.isNull(PromotionTools.START_TIME_COLUMN)
+	// 						.isNull(PromotionTools.END_TIME_COLUMN)
+	// 						.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.FIXEDTIME.name())).
+	// 				or(i -> i.le("effective_days", 0)
+	// 					.eq(RANGE_DAY_TYPE_COLUMN, CouponRangeDayEnum.DYNAMICTIME.name())));
+	// 			default -> {
+	// 			}
+	// 		}
+	// 	}
+	// 	if (this.getStartTime() != null) {
+	// 		queryWrapper.ge("start_time", new Date(this.getEndTime()));
+	// 	}
+	// 	if (this.getEndTime() != null) {
+	// 		queryWrapper.le("end_time", new Date(this.getEndTime()));
+	// 	}
+	// 	queryWrapper.eq("delete_flag", false);
+	// 	this.betweenWrapper(queryWrapper);
+	// 	queryWrapper.orderByDesc("create_time");
+	// 	return queryWrapper;
+	// }
+	//
+	// private <T> void betweenWrapper(QueryWrapper<T> queryWrapper) {
+	// 	if (CharSequenceUtil.isNotEmpty(publishNum)) {
+	// 		String[] s = publishNum.split("_");
+	// 		if (s.length > 1) {
+	// 			queryWrapper.ge("publish_num", s[1]);
+	// 		} else {
+	// 			queryWrapper.le("publish_num", publishNum);
+	// 		}
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(price)) {
+	// 		String[] s = price.split("_");
+	// 		if (s.length > 1) {
+	// 			queryWrapper.ge(PRICE_COLUMN, s[1]);
+	// 		} else {
+	// 			queryWrapper.le(PRICE_COLUMN, s[0]);
+	// 		}
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(receivedNum)) {
+	// 		String[] s = receivedNum.split("_");
+	// 		if (s.length > 1) {
+	// 			queryWrapper.ge("received_num", s[1]);
+	// 		} else {
+	// 			queryWrapper.le("received_num", s[0]);
+	// 		}
+	// 	}
+	// }
 
 }

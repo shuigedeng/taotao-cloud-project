@@ -1,8 +1,8 @@
 package com.taotao.cloud.order.api.feign;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.order.api.feign.fallback.FeignTradeFallbackImpl;
 import com.taotao.cloud.order.api.model.vo.order.StoreFlowVO;
 import com.taotao.cloud.order.api.model.vo.trade.TradeVO;
@@ -21,8 +21,8 @@ public interface IFeignStoreFlowService {
 	@GetMapping(value = "/trade")
 	TradeVO getBySn(String sn);
 
-	IPage<StoreFlowVO> getStoreFlow(String id, String flowType, PageParam pageParam);
+	PageResult<StoreFlowVO> getStoreFlow(String id, String flowType, PageParam pageParam);
 
-	IPage<StoreFlowVO> getDistributionFlow(String id, PageParam pageParam);
+	PageResult<StoreFlowVO> getDistributionFlow(String id, PageParam pageParam);
 }
 

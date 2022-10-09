@@ -4,20 +4,22 @@ package com.taotao.cloud.message.biz.austin.common.dto.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
  * @author 3y
- *
+ * <p>
  * 通知栏消息推送
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class PushContentModel extends ContentModel {
 
-    private String title;
-    private String content;
-    private String url;
+	private String title;
+	private String content;
+	private String url;
 }

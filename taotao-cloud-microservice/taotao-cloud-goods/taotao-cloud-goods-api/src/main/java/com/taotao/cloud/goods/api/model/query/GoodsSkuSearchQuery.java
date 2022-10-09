@@ -1,9 +1,10 @@
 package com.taotao.cloud.goods.api.model.query;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 
@@ -26,10 +27,10 @@ public class GoodsSkuSearchQuery extends GoodsPageQuery {
 	@Schema(description = "商品id")
 	private String goodsId;
 
-	@Override
-	public <T> QueryWrapper<T> queryWrapper() {
-		QueryWrapper<T> queryWrapper = super.queryWrapper();
-		queryWrapper.eq(StringUtils.isNotEmpty(goodsId), "goods_id", goodsId);
-		return queryWrapper;
-	}
+	// @Override
+	// public <T> QueryWrapper<T> queryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = super.queryWrapper();
+	// 	queryWrapper.eq(StringUtils.isNotEmpty(goodsId), "goods_id", goodsId);
+	// 	return queryWrapper;
+	// }
 }

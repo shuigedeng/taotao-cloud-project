@@ -1,22 +1,20 @@
 package com.taotao.cloud.store.api.web.dto;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
  * 店铺修改DTO
  *
- * 
  * @since 2020-08-22 15:10:51
  */
 @Data
@@ -140,7 +138,6 @@ public class StoreEditDTO {
 	 * 同城配送达达店铺编码
 	 */
 	@Schema(description = "同城配送达达店铺编码")
-	@TableField(value = "dd_code")
 	private String ddCode;
 
 	//店铺退货收件地址

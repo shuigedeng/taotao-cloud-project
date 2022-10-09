@@ -3,6 +3,7 @@ package com.taotao.cloud.message.biz.austin.common.dto.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -15,17 +16,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class EmailContentModel extends ContentModel {
 
-    /**
-     * 标题
-     */
-    private String title;
+	/**
+	 * 标题
+	 */
+	private String title;
 
-    /**
-     * 内容(可写入HTML)
-     */
-    private String content;
+	/**
+	 * 内容(可写入HTML)
+	 */
+	private String content;
 
 
 }

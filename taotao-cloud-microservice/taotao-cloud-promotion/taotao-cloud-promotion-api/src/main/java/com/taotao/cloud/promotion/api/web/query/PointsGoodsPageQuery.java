@@ -1,17 +1,18 @@
 package com.taotao.cloud.promotion.api.web.query;
 
-import cn.hutool.core.text.CharSequenceUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 积分商品查询通用类
  */
-@Setter
 @Getter
-@SuperBuilder
+@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PointsGoodsPageQuery extends BasePromotionsSearchQuery {
@@ -29,27 +30,27 @@ public class PointsGoodsPageQuery extends BasePromotionsSearchQuery {
 	private String points;
 
 
-	@Override
-	public <T> QueryWrapper<T> queryWrapper() {
-		QueryWrapper<T> queryWrapper = super.queryWrapper();
-		if (CharSequenceUtil.isNotEmpty(goodsName)) {
-			queryWrapper.like("goods_name", goodsName);
-		}
-		if (CharSequenceUtil.isNotEmpty(skuId)) {
-			queryWrapper.eq("sku_id", skuId);
-		}
-		if (CharSequenceUtil.isNotEmpty(pointsGoodsCategoryId)) {
-			queryWrapper.eq("points_goods_category_id", pointsGoodsCategoryId);
-		}
-		if (CharSequenceUtil.isNotEmpty(points)) {
-			String[] s = points.split("_");
-			if (s.length > 1) {
-				queryWrapper.between("points", s[0], s[1]);
-			} else {
-				queryWrapper.eq("points", s[0]);
-			}
-		}
-		return queryWrapper;
-	}
+	// @Override
+	// public <T> QueryWrapper<T> queryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = super.queryWrapper();
+	// 	if (CharSequenceUtil.isNotEmpty(goodsName)) {
+	// 		queryWrapper.like("goods_name", goodsName);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(skuId)) {
+	// 		queryWrapper.eq("sku_id", skuId);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(pointsGoodsCategoryId)) {
+	// 		queryWrapper.eq("points_goods_category_id", pointsGoodsCategoryId);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(points)) {
+	// 		String[] s = points.split("_");
+	// 		if (s.length > 1) {
+	// 			queryWrapper.between("points", s[0], s[1]);
+	// 		} else {
+	// 			queryWrapper.eq("points", s[0]);
+	// 		}
+	// 	}
+	// 	return queryWrapper;
+	// }
 
 }

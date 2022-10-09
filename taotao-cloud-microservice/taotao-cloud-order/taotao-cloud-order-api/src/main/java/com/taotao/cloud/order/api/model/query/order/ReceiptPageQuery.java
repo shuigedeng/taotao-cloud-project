@@ -1,7 +1,5 @@
 package com.taotao.cloud.order.api.model.query.order;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -11,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
-import java.util.Objects;
 
 /**
  * 发票搜索参数
@@ -55,34 +52,34 @@ public class ReceiptPageQuery extends PageParam {
 	@Schema(description = "发票状态")
 	private String receiptStatus;
 
-	public <T> QueryWrapper<T> wrapper() {
-		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		if (StrUtil.isNotEmpty(receiptTitle)) {
-			queryWrapper.like("r.receipt_title", receiptTitle);
-		}
-		if (Objects.nonNull(taxpayerId)) {
-			queryWrapper.like("r.taxpayer_id", taxpayerId);
-		}
-		if (Objects.nonNull(memberId)) {
-			queryWrapper.eq("r.member_id", memberId);
-		}
-		if (StrUtil.isNotEmpty(storeName)) {
-			queryWrapper.like("r.store_name", storeName);
-		}
-		if (Objects.nonNull(storeId)) {
-			queryWrapper.eq("r.store_id", storeId);
-		}
-		if (StrUtil.isNotEmpty(memberName)) {
-			queryWrapper.like("r.member_name", memberName);
-		}
-		if (StrUtil.isNotEmpty(receiptStatus)) {
-			queryWrapper.like("r.receipt_status", receiptStatus);
-		}
-		if (StrUtil.isNotEmpty(orderSn)) {
-			queryWrapper.like("r.order_sn", orderSn);
-		}
-		queryWrapper.eq("r.delete_flag", false);
-		return queryWrapper;
-	}
+	// public <T> QueryWrapper<T> wrapper() {
+	// 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+	// 	if (StrUtil.isNotEmpty(receiptTitle)) {
+	// 		queryWrapper.like("r.receipt_title", receiptTitle);
+	// 	}
+	// 	if (Objects.nonNull(taxpayerId)) {
+	// 		queryWrapper.like("r.taxpayer_id", taxpayerId);
+	// 	}
+	// 	if (Objects.nonNull(memberId)) {
+	// 		queryWrapper.eq("r.member_id", memberId);
+	// 	}
+	// 	if (StrUtil.isNotEmpty(storeName)) {
+	// 		queryWrapper.like("r.store_name", storeName);
+	// 	}
+	// 	if (Objects.nonNull(storeId)) {
+	// 		queryWrapper.eq("r.store_id", storeId);
+	// 	}
+	// 	if (StrUtil.isNotEmpty(memberName)) {
+	// 		queryWrapper.like("r.member_name", memberName);
+	// 	}
+	// 	if (StrUtil.isNotEmpty(receiptStatus)) {
+	// 		queryWrapper.like("r.receipt_status", receiptStatus);
+	// 	}
+	// 	if (StrUtil.isNotEmpty(orderSn)) {
+	// 		queryWrapper.like("r.order_sn", orderSn);
+	// 	}
+	// 	queryWrapper.eq("r.delete_flag", false);
+	// 	return queryWrapper;
+	// }
 
 }
