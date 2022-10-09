@@ -17,7 +17,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -36,8 +35,12 @@ public class LockAutoConfiguration {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(LockAutoConfiguration.class);
 
-	@Autowired
-	private KylinLockProperties properties;
+	//@Autowired
+	private final KylinLockProperties properties;
+
+	public LockAutoConfiguration(KylinLockProperties properties) {
+		this.properties = properties;
+	}
 
 	/**
 	 * 锁 模板
