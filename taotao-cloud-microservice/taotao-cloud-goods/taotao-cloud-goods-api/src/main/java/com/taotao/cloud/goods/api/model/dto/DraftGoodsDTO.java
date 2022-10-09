@@ -1,13 +1,14 @@
 package com.taotao.cloud.goods.api.model.dto;
 
-import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
+import com.taotao.cloud.goods.api.enums.DraftGoodsSaveTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.math.BigDecimal;
 
 /**
  * 草稿商品
@@ -153,7 +154,7 @@ public class DraftGoodsDTO {
 	/**
 	 * 草稿商品保存类型
 	 *
-	 * @see DraftGoodsSaveType
+	 * @see DraftGoodsSaveTypeEnum
 	 */
 	private String saveType;
 

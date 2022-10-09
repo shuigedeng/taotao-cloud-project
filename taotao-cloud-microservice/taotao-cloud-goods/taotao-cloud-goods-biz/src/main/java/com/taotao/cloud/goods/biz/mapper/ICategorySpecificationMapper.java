@@ -1,8 +1,8 @@
 package com.taotao.cloud.goods.biz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:55:35
  */
-public interface ICategorySpecificationMapper extends BaseSuperMapper<CategorySpecification> {
+public interface ICategorySpecificationMapper extends BaseSuperMapper<CategorySpecification, Long> {
 
 	/**
 	 * 根据分类id查分类绑定规格

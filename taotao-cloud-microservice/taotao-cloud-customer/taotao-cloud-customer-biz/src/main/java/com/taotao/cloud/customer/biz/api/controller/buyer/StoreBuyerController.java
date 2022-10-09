@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelService;
+import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.store.api.web.dto.StoreBankDTO;
@@ -20,8 +20,6 @@ import com.taotao.cloud.store.biz.service.StoreService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +28,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 /**
@@ -50,7 +51,7 @@ public class StoreBuyerController {
 	 * 店铺商品分类
 	 */
 	@Autowired
-	private IFeignStoreGoodsLabelService storeGoodsLabelService;
+	private IFeignStoreGoodsLabelApi storeGoodsLabelService;
 	/**
 	 * 店铺详情
 	 */

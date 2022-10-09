@@ -11,15 +11,15 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.model.vo.MemberSignVO;
-import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.member.biz.mapper.MemberSignMapper;
+import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.member.biz.service.MemberSignService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -51,7 +51,7 @@ public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberS
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingService feignSettingService;
+	private IFeignSettingApi feignSettingService;
 	/**
 	 * 会员
 	 */

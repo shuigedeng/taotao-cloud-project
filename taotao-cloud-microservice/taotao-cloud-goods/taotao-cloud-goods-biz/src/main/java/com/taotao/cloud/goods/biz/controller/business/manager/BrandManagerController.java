@@ -7,9 +7,9 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
 import com.taotao.cloud.goods.api.model.query.BrandPageQuery;
 import com.taotao.cloud.goods.api.model.vo.BrandVO;
+import com.taotao.cloud.goods.biz.model.convert.BrandConvert;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
-import com.taotao.cloud.goods.biz.mapstruct.IBrandMapStruct;
-import com.taotao.cloud.goods.biz.service.IBrandService;
+import com.taotao.cloud.goods.biz.service.business.IBrandService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -54,7 +54,7 @@ public class BrandManagerController {
 	@GetMapping(value = "/{id}")
 	public Result<BrandVO> getById(@NotBlank(message = "id不能为空") @PathVariable Long id) {
 		Brand brand = brandService.getById(id);
-		return Result.success(IBrandMapStruct.INSTANCE.brandToBrandVO(brand));
+		return Result.success(BrandConvert.INSTANCE.convert(brand));
 	}
 
 	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌")
@@ -63,7 +63,7 @@ public class BrandManagerController {
 	@GetMapping(value = "/all/available")
 	public Result<List<BrandVO>> getAllAvailable() {
 		List<Brand> list = brandService.getAllAvailable();
-		return Result.success(IBrandMapStruct.INSTANCE.brandsToBrandVOs(list));
+		return Result.success(BrandConvert.INSTANCE.convert(list));
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取")
@@ -97,7 +97,7 @@ public class BrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{brandId}")
 	public Result<Boolean> disable(@PathVariable Long brandId, @RequestParam Boolean disable) {
-			return Result.success(brandService.brandDisable(brandId, disable));
+		return Result.success(brandService.brandDisable(brandId, disable));
 	}
 
 	@Operation(summary = "批量删除", description = "批量删除")

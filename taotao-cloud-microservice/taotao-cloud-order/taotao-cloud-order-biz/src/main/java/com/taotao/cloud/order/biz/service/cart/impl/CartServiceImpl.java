@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.biz.service.cart.impl;
 
+import MemberCouponDTO;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
@@ -11,22 +12,21 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchService;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
-import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVOBuilder;
+import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchApi;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.api.vo.GoodsSkuBaseVOBuilder;
 import com.taotao.cloud.goods.api.vo.GoodsSkuVOBuilder;
 import com.taotao.cloud.member.api.feign.IFeignMemberAddressService;
 import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
-import MemberCouponDTO;
-import com.taotao.cloud.order.api.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
+import com.taotao.cloud.order.api.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
-import com.taotao.cloud.order.api.vo.cart.CartSkuVOBuilder;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVOBuilder;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
 import com.taotao.cloud.order.biz.service.cart.ICartService;
 import com.taotao.cloud.order.biz.service.cart.render.TradeBuilder;
@@ -79,7 +79,7 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * 规格商品
 	 */
-	private final IFeignGoodsSkuService goodsSkuService;
+	private final IFeignGoodsSkuApi goodsSkuService;
 	/**
 	 * 促销商品
 	 */
@@ -95,11 +95,11 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * ES商品
 	 */
-	private final IFeignEsGoodsSearchService esGoodsSearchService;
+	private final IFeignEsGoodsSearchApi esGoodsSearchService;
 	/**
 	 * ES商品
 	 */
-	private final IFeignGoodsService goodsService;
+	private final IFeignGoodsApi goodsService;
 	/**
 	 * 拼团
 	 */
@@ -401,8 +401,8 @@ public class CartServiceImpl implements ICartService {
 
 		GoodsSkuVOBuilder goodsSkuVOBuilder = GoodsSkuVOBuilder.builder(dataSku);
 		GoodsSkuBaseVOBuilder goodsSkuBaseVOBuilder = GoodsSkuBaseVOBuilder.builder(dataSku.goodsSkuBase());
-		
-		
+
+
 		if (!GoodsAuthEnum.PASS.name().equals(dataSku.goodsSkuBase().isAuth()) || !GoodsStatusEnum.UPPER.name()
 			.equals(dataSku.goodsSkuBase().marketEnable())) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
@@ -438,7 +438,7 @@ public class CartServiceImpl implements ICartService {
 		if (enableStock <= 0 || enableStock < num) {
 			throw new BusinessException(ResultEnum.GOODS_SKU_QUANTITY_NOT_ENOUGH);
 		}
-		
+
 		CartSkuVOBuilder cartSkuVOBuilder = CartSkuVOBuilder.builder(cartSkuVO);
 		if (enableStock <= num) {
 			cartSkuVOBuilder.num(enableStock);
@@ -487,7 +487,7 @@ public class CartServiceImpl implements ICartService {
 		if (CharSequenceUtil.isNotEmpty(way)) {
 			cartTypeEnum = CartTypeEnum.valueOf(way);
 		}
-		
+
 		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
 		for (CartVO cartVO : tradeDTO.getCartList()) {
 			if (cartVO.cartBase().storeId().equals(storeId)) {

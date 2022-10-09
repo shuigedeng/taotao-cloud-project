@@ -3,12 +3,12 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.model.vo.CategoryVO;
 import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
+import com.taotao.cloud.goods.api.model.vo.CategoryVO;
+import com.taotao.cloud.goods.biz.model.convert.CategoryConvert;
 import com.taotao.cloud.goods.biz.model.entity.Category;
-import com.taotao.cloud.goods.biz.mapstruct.ICategoryMapStruct;
-import com.taotao.cloud.goods.biz.service.ICategoryService;
-import com.taotao.cloud.goods.biz.service.IGoodsService;
+import com.taotao.cloud.goods.biz.service.business.ICategoryService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -60,7 +60,7 @@ public class CategoryManagerController {
 	@GetMapping(value = "/{parentId}/children/all")
 	public Result<List<CategoryVO>> list(@PathVariable Long parentId) {
 		List<Category> categories = this.categoryService.dbList(parentId);
-		return Result.success(ICategoryMapStruct.INSTANCE.categorysToCategoryBaseVOs(categories));
+		return Result.success(CategoryConvert.INSTANCE.convert(categories));
 	}
 
 	@Operation(summary = "查询全部分类列表", description = "查询全部分类列表")
@@ -126,7 +126,7 @@ public class CategoryManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{id}")
 	public Result<Boolean> disable(@PathVariable Long id,
-		@RequestParam Boolean enableOperations) {
+								   @RequestParam Boolean enableOperations) {
 		Category category = categoryService.getById(id);
 		if (category == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

@@ -2,9 +2,9 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.dto.ParametersDTO;
+import com.taotao.cloud.goods.biz.model.convert.ParametersConvert;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
-import com.taotao.cloud.goods.biz.mapstruct.IParametersMapStruct;
-import com.taotao.cloud.goods.biz.service.IParametersService;
+import com.taotao.cloud.goods.biz.service.business.IParametersService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -43,7 +43,7 @@ public class ParameterManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Validated @RequestBody ParametersDTO parametersDTO) {
-		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(
+		Parameters parameters = ParametersConvert.INSTANCE.convert(
 			parametersDTO);
 		return Result.success(parametersService.save(parameters));
 	}
@@ -53,8 +53,8 @@ public class ParameterManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
-		@PathVariable Long id) {
-		Parameters parameters = IParametersMapStruct.INSTANCE.parametersDTOToParameters(
+								  @PathVariable Long id) {
+		Parameters parameters = ParametersConvert.INSTANCE.convert(
 			parametersDTO);
 		parameters.setId(id);
 		return Result.success(parametersService.updateParameter(parameters));

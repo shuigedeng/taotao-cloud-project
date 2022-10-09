@@ -6,12 +6,12 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
-import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 @Service
 public class CheckDataRender implements ICartRenderStep {
 
-	private final IFeignGoodsSkuService goodsSkuService;
+	private final IFeignGoodsSkuApi goodsSkuService;
 
 	private final IOrderService orderService;
 

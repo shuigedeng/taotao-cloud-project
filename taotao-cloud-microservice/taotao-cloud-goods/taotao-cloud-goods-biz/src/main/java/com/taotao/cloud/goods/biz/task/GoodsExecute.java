@@ -2,8 +2,8 @@ package com.taotao.cloud.goods.biz.task;
 
 import cn.hutool.core.convert.Convert;
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
+import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
-import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -1,15 +1,16 @@
 package com.taotao.cloud.goods.api.model.vo;
 
-import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
+import com.taotao.cloud.goods.api.enums.DraftGoodsSaveTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import java.io.Serial;
-import java.io.Serializable;
-import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 草稿商品基础VO
@@ -164,7 +165,7 @@ public class DraftGoodsVO implements Serializable {
 	/**
 	 * 草稿商品保存类型
 	 *
-	 * @see DraftGoodsSaveType
+	 * @see DraftGoodsSaveTypeEnum
 	 */
 	private String saveType;
 

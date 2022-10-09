@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.task;
 
-import com.taotao.cloud.goods.biz.service.ICommodityService;
-import com.taotao.cloud.web.timetask.EveryHourExecute;
+import com.taotao.cloud.goods.biz.service.business.ICommodityService;
+import com.taotao.cloud.job.xxl.timetask.EveryHourExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

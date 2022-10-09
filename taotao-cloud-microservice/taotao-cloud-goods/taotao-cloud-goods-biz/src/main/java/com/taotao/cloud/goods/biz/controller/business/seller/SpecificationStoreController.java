@@ -3,9 +3,9 @@ package com.taotao.cloud.goods.biz.controller.business.seller;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.vo.SpecificationVO;
+import com.taotao.cloud.goods.biz.model.convert.SpecificationConvert;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
-import com.taotao.cloud.goods.biz.mapstruct.ISpecificationMapStruct;
-import com.taotao.cloud.goods.biz.service.ICategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,7 +47,7 @@ public class SpecificationStoreController {
 		List<Specification> categorySpecList = categorySpecificationService.getCategorySpecList(
 			categoryId);
 		return Result.success(
-			ISpecificationMapStruct.INSTANCE.specificationsToSpecificationVOs(categorySpecList));
+			SpecificationConvert.INSTANCE.convert(categorySpecList));
 	}
 
 }

@@ -9,23 +9,23 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
+import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.store.api.web.dto.CollectionDTO;
 import com.taotao.cloud.store.api.web.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.web.dto.StoreCompanyDTO;
 import com.taotao.cloud.store.api.web.dto.StoreEditDTO;
 import com.taotao.cloud.store.api.web.dto.StoreOtherInfoDTO;
-import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.web.query.StorePageQuery;
 import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.biz.mapper.StoreMapper;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
-import com.taotao.cloud.store.biz.mapper.StoreMapper;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.store.biz.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	 * 商品
 	 */
 	@Autowired
-	private IFeignGoodsService goodsService;
+	private IFeignGoodsApi goodsService;
 	/**
 	 * 店铺详情
 	 */

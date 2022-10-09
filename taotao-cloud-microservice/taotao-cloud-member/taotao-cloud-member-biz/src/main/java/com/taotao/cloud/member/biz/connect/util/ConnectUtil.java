@@ -22,7 +22,7 @@ import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.QQConnectSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.QQConnectSettingVO;
 import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingItemVO;
@@ -47,7 +47,7 @@ public class ConnectUtil {
 	@Autowired
 	private ConnectService connectService;
 	@Autowired
-	private IFeignSettingService settingService;
+	private IFeignSettingApi settingService;
 	@Autowired
 	private ApiProperties apiProperties;
 	@Autowired

@@ -15,7 +15,7 @@ package com.taotao.cloud.auth.biz.controller;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.dubbo.IDubboDictService;
-import com.taotao.cloud.sys.api.feign.IFeignDictService;
+import com.taotao.cloud.sys.api.feign.IFeignDictApi;
 import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessagesController {
 
 	@Autowired
-	private IFeignDictService feignDictService;
+	private IFeignDictApi feignDictService;
 
 	@DubboReference(check = false)
 	private IDubboDictService dubboDictService;

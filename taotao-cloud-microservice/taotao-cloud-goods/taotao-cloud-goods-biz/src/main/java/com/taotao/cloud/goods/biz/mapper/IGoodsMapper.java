@@ -1,11 +1,11 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -19,7 +19,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:56:00
  */
-public interface IGoodsMapper extends BaseSuperMapper<Goods> {
+public interface IGoodsMapper extends BaseSuperMapper<Goods, Long> {
 
 	/**
 	 * 根据店铺ID获取商品ID列表
@@ -48,7 +48,7 @@ public interface IGoodsMapper extends BaseSuperMapper<Goods> {
 		WHERE id = #{goodsId}
 		""")
 	void addGoodsCommentNum(@Param("commentNum") Integer commentNum,
-		@Param("goodsId") Long goodsId);
+							@Param("goodsId") Long goodsId);
 
 	/**
 	 * 查询商品VO分页
@@ -63,5 +63,5 @@ public interface IGoodsMapper extends BaseSuperMapper<Goods> {
 		from tt_goods as g
 		""")
 	IPage<GoodsSkuParamsVO> queryByParams(IPage<GoodsSkuParamsVO> page,
-		@Param(Constants.WRAPPER) Wrapper<GoodsSkuParamsVO> queryWrapper);
+										  @Param(Constants.WRAPPER) Wrapper<GoodsSkuParamsVO> queryWrapper);
 }

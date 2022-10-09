@@ -14,20 +14,20 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.model.dto.order.StoreAppealDTO;
-import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
-import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.model.query.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
+import com.taotao.cloud.order.biz.mapper.order.IOrderComplaintMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
-import com.taotao.cloud.order.biz.mapper.order.IOrderComplaintMapper;
 import com.taotao.cloud.order.biz.service.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.biz.service.order.IOrderComplaintService;
 import com.taotao.cloud.order.biz.service.order.IOrderItemService;
@@ -62,7 +62,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	/**
 	 * 商品规格
 	 */
-	private final IFeignGoodsSkuService goodsSkuService;
+	private final IFeignGoodsSkuApi goodsSkuService;
 	/**
 	 * 交易投诉沟通
 	 */

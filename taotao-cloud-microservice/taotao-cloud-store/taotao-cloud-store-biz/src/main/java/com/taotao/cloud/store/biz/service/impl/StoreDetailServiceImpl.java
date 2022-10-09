@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.goods.api.feign.IFeignCategoryService;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsService;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.goods.api.feign.IFeignCategoryApi;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
 import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
 import com.taotao.cloud.store.api.web.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.web.dto.StoreSettingDTO;
@@ -18,9 +18,9 @@ import com.taotao.cloud.store.api.web.vo.StoreBasicInfoVO;
 import com.taotao.cloud.store.api.web.vo.StoreDetailInfoVO;
 import com.taotao.cloud.store.api.web.vo.StoreManagementCategoryVO;
 import com.taotao.cloud.store.api.web.vo.StoreOtherVO;
+import com.taotao.cloud.store.biz.mapper.StoreDetailMapper;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
-import com.taotao.cloud.store.biz.mapper.StoreDetailMapper;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.store.biz.service.StoreService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -55,10 +55,10 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 	 * 分类
 	 */
 	@Autowired
-	private IFeignCategoryService categoryService;
+	private IFeignCategoryApi categoryService;
 
 	@Autowired
-	private IFeignGoodsService goodsService;
+	private IFeignGoodsApi goodsService;
 
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;

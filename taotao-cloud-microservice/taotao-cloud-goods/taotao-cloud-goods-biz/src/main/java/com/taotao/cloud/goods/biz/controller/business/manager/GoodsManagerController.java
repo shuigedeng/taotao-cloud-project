@@ -6,13 +6,13 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.model.vo.GoodsVO;
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.model.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.service.IGoodsService;
-import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -87,7 +87,7 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/under")
 	public Result<Boolean> underGoods(@PathVariable Long goodsId,
-		@NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
+									  @NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
 		List<Long> goodsIds = List.of(goodsId);
 		return Result.success(
 			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
@@ -98,7 +98,7 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "{goodsIds}/auth")
 	public Result<Boolean> auth(@PathVariable List<Long> goodsIds,
-		@RequestParam String authFlag) {
+								@RequestParam String authFlag) {
 		//校验商品是否存在
 		return Result.success(goodsService.auditGoods(goodsIds, GoodsAuthEnum.valueOf(authFlag)));
 	}

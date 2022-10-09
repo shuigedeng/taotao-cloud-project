@@ -2,11 +2,11 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
-import com.taotao.cloud.goods.biz.service.IGoodsUnitService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -76,7 +76,7 @@ public class GoodsUnitManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@NotNull @PathVariable Long id,
-		@Valid @RequestBody GoodsUnit goodsUnit) {
+								  @Valid @RequestBody GoodsUnit goodsUnit) {
 		goodsUnit.setId(Long.valueOf(id));
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}

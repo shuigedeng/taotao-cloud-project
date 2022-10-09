@@ -5,16 +5,15 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.query.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.model.vo.GoodsVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.model.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
-import com.taotao.cloud.goods.biz.service.IEsGoodsSearchService;
-import com.taotao.cloud.goods.biz.service.IGoodsService;
-import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.IEsGoodsSearchService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.netty.annotation.RequestParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,6 +24,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
@@ -33,6 +33,7 @@ import java.util.Map;
 
 /**
  * 买家端,商品接口
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-20 16:59:38

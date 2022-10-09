@@ -3,20 +3,20 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 import cn.hutool.core.convert.Convert;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
-import com.taotao.cloud.promotion.api.web.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityGoodsService;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
 import com.taotao.cloud.promotion.api.feign.IFeignPointsGoodsService;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
+import com.taotao.cloud.promotion.api.web.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.web.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.web.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.api.web.vo.PromotionGoodsVO;
@@ -60,7 +60,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuService goodsSkuService;
+	private IFeignGoodsSkuApi goodsSkuService;
 	/**
 	 * 促销商品
 	 */

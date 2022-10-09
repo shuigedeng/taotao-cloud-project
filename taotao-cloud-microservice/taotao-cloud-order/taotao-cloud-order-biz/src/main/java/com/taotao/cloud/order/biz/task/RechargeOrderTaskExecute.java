@@ -5,7 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import com.taotao.cloud.member.api.feign.IFeignMemberRechargeService;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import com.taotao.cloud.web.timetask.EveryMinuteExecute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingService settingService;
+	private IFeignSettingApi settingService;
 
 
 	@Override

@@ -10,8 +10,8 @@ import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.common.utils.servlet.CookieUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.CookieUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.member.api.model.query.ConnectQuery;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
@@ -27,7 +27,7 @@ import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.member.biz.token.MemberTokenGenerate;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingVO;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -60,7 +60,7 @@ public class ConnectServiceImpl extends ServiceImpl<ConnectMapper, Connect> impl
 	static final boolean AUTO_REGION = true;
 
 	@Autowired
-	private IFeignSettingService settingService;
+	private IFeignSettingApi settingService;
 	@Autowired
 	private MemberService memberService;
 	@Autowired

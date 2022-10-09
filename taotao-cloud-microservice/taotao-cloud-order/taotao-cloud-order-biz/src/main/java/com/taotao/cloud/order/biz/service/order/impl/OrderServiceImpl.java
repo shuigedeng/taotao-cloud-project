@@ -25,9 +25,6 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.api.dto.GoodsCompleteMessage;
 import com.taotao.cloud.member.api.model.dto.MemberAddressDTO;
-import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.model.dto.order.OrderBatchDeliverDTO;
-import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -36,6 +33,9 @@ import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.message.OrderMessage;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.dto.order.OrderBatchDeliverDTO;
 import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
@@ -43,13 +43,13 @@ import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.order.api.model.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
+import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
+import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
-import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
 import com.taotao.cloud.order.biz.service.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.order.IOrderService;
 import com.taotao.cloud.order.biz.service.order.IReceiptService;
@@ -69,7 +69,7 @@ import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import com.taotao.cloud.sys.api.feign.IFeignLogisticsService;
+import com.taotao.cloud.sys.api.feign.IFeignLogisticsApi;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import lombok.AllArgsConstructor;
 import org.apache.poi.ss.util.CellRangeAddressList;
@@ -123,7 +123,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	/**
 	 * 物流公司
 	 */
-	private final IFeignLogisticsService logisticsService;
+	private final IFeignLogisticsApi logisticsService;
 	/**
 	 * 订单日志
 	 */
@@ -208,7 +208,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public List<Order> queryListByPromotion(String orderPromotionType, String payStatus,
-		String parentOrderSn, String orderSn) {
+											String parentOrderSn, String orderSn) {
 		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 		//查找团长订单和已和当前拼团订单拼团的订单
 		queryWrapper.eq(Order::getOrderPromotionType, orderPromotionType)
@@ -220,7 +220,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public long queryCountByPromotion(String orderPromotionType, String payStatus,
-		String parentOrderSn, String orderSn) {
+									  String parentOrderSn, String orderSn) {
 		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 		//查找团长订单和已和当前拼团订单拼团的订单
 		queryWrapper.eq(Order::getOrderPromotionType, orderPromotionType)
@@ -635,7 +635,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page,
-                                                Wrapper<PaymentLogVO> queryWrapper) {
+												Wrapper<PaymentLogVO> queryWrapper) {
 		return baseMapper.queryPaymentLogs(page, queryWrapper);
 	}
 

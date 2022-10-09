@@ -7,12 +7,10 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
-import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
@@ -22,6 +20,8 @@ import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.message.OrderMessageBuilder;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
@@ -72,7 +72,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	private IFeignMemberCouponService memberCouponService;
 
 	@Autowired
-	private IFeignGoodsSkuService goodsSkuService;
+	private IFeignGoodsSkuApi goodsSkuService;
 
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;
