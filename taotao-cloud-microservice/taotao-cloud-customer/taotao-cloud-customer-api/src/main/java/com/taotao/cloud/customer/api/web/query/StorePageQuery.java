@@ -1,22 +1,19 @@
 package com.taotao.cloud.customer.api.web.query;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.taotao.cloud.common.model.PageParam;
-import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+
 /**
  * 店铺搜索参数VO
  *
- * 
  * @since 2020-03-07 17:02:05
  */
 @Data
@@ -47,26 +44,26 @@ public class StorePageQuery extends PageParam {
 	@Schema(description = "结束时间")
 	private String endDate;
 
-	public <T> QueryWrapper<T> queryWrapper() {
-	    QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-	    if (StringUtils.isNotEmpty(storeName)) {
-	        queryWrapper.like("store_name", storeName);
-	    }
-	    if (StringUtils.isNotEmpty(memberName)) {
-	        queryWrapper.like("member_name", memberName);
-	    }
-	    if (StringUtils.isNotEmpty(storeDisable)) {
-	        queryWrapper.eq("store_disable", storeDisable);
-	    } else {
-	        queryWrapper.eq("store_disable", StoreStatusEnum.OPEN.name()).or().eq("store_disable", StoreStatusEnum.CLOSED.name());
-	    }
-	    //按时间查询
-	    if (StringUtils.isNotEmpty(startDate)) {
-	        queryWrapper.ge("create_time", DateUtils.parse(startDate));
-	    }
-	    if (StringUtils.isNotEmpty(endDate)) {
-	        queryWrapper.le("create_time", DateUtils.parse(endDate));
-	    }
-	    return queryWrapper;
-	}
+	// public <T> QueryWrapper<T> queryWrapper() {
+	//     QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+	//     if (StringUtils.isNotEmpty(storeName)) {
+	//         queryWrapper.like("store_name", storeName);
+	//     }
+	//     if (StringUtils.isNotEmpty(memberName)) {
+	//         queryWrapper.like("member_name", memberName);
+	//     }
+	//     if (StringUtils.isNotEmpty(storeDisable)) {
+	//         queryWrapper.eq("store_disable", storeDisable);
+	//     } else {
+	//         queryWrapper.eq("store_disable", StoreStatusEnum.OPEN.name()).or().eq("store_disable", StoreStatusEnum.CLOSED.name());
+	//     }
+	//     //按时间查询
+	//     if (StringUtils.isNotEmpty(startDate)) {
+	//         queryWrapper.ge("create_time", DateUtils.parse(startDate));
+	//     }
+	//     if (StringUtils.isNotEmpty(endDate)) {
+	//         queryWrapper.le("create_time", DateUtils.parse(endDate));
+	//     }
+	//     return queryWrapper;
+	// }
 }

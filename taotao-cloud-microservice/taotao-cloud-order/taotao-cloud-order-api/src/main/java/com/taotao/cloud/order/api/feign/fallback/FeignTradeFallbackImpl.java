@@ -20,6 +20,11 @@ public class FeignTradeFallbackImpl implements FallbackFactory<IFeignTradeServic
 			public TradeVO getBySn(String sn) {
 				return null;
 			}
+
+			@Override
+			public void payTrade(String sn, String paymentMethod, String receivableNo) {
+				
+			}
 		};
 	}
 }

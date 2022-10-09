@@ -15,7 +15,7 @@ import java.util.List;
 public record OrderVO(
 
 	@Schema(description = "订单商品项目")
-	List<OrderItem> orderItems,
+	List<OrderItemVO> orderItems,
 
 	@Schema(description = "订单vo")
 	OrderBaseVO orderBase
