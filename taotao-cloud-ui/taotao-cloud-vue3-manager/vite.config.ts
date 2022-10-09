@@ -1,13 +1,12 @@
-import type { UserConfig, ConfigEnv } from 'vite';
+import type {ConfigEnv, UserConfig} from 'vite';
+import {loadEnv} from 'vite';
+import {resolve} from 'path';
 
-import { loadEnv } from 'vite';
-import { resolve } from 'path';
-
-import { generateModifyVars } from './build/generate/generateModifyVars';
-import { createProxy } from './build/vite/proxy';
-import { wrapperEnv } from './build/utils';
-import { createVitePlugins } from './build/vite/plugin';
-import { OUTPUT_DIR } from './build/constant';
+import {generateModifyVars} from './script/generate/generateModifyVars';
+import {createProxy} from './script/vite/proxy';
+import {wrapperEnv} from './script/utils';
+import {createVitePlugins} from './script/vite/plugin';
+import {OUTPUT_DIR} from './script/constant';
 
 import pkg from './package.json';
 import moment from 'moment';
@@ -16,13 +15,13 @@ function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
 
-const { dependencies, devDependencies, name, version } = pkg;
+const {dependencies, devDependencies, name, version} = pkg;
 const __APP_INFO__ = {
-  pkg: { dependencies, devDependencies, name, version },
+  pkg: {dependencies, devDependencies, name, version},
   lastBuildTime: moment().format('YYYY-MM-DD HH:mm:ss'),
 };
 
-export default ({ command, mode }: ConfigEnv): UserConfig => {
+export default ({command, mode}: ConfigEnv): UserConfig => {
   const root = process.cwd();
 
   const env = loadEnv(mode, root);
@@ -30,7 +29,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   // The boolean type read by loadEnv is a string. This function can be converted to boolean type
   const viteEnv = wrapperEnv(env);
 
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
+  const {VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE} = viteEnv;
 
   const isBuild = command === 'build';
 
