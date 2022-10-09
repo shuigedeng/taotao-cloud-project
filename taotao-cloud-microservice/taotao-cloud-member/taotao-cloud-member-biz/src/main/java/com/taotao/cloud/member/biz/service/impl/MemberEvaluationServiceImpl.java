@@ -12,15 +12,15 @@ import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
-import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
+import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.EvaluationNumberVO;
+import com.taotao.cloud.member.biz.mapper.MemberEvaluationMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
-import com.taotao.cloud.member.biz.mapper.MemberEvaluationMapper;
 import com.taotao.cloud.member.biz.service.MemberEvaluationService;
 import com.taotao.cloud.member.biz.service.MemberService;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
@@ -32,13 +32,14 @@ import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Resource;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 会员商品评价业务层实现
@@ -74,7 +75,7 @@ public class MemberEvaluationServiceImpl extends
 	 * 商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuService goodsSkuService;
+	private IFeignGoodsSkuApi goodsSkuService;
 	/**
 	 * rocketMq
 	 */

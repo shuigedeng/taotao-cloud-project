@@ -5,9 +5,9 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.model.dto.StoreGoodsLabelDTO;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelInfoVO;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
+import com.taotao.cloud.goods.biz.model.convert.GoodsLabelStoreConvert;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
-import com.taotao.cloud.goods.biz.mapstruct.IGoodsLabelStoreMapStruct;
-import com.taotao.cloud.goods.biz.service.IStoreGoodsLabelService;
+import com.taotao.cloud.goods.biz.service.business.IStoreGoodsLabelService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -61,7 +61,7 @@ public class GoodsLabelStoreController {
 	public Result<StoreGoodsLabelInfoVO> getStoreGoodsLabel(@PathVariable Long id) {
 		StoreGoodsLabel storeGoodsLabel = storeGoodsLabelService.getById(id);
 		return Result.success(
-			IGoodsLabelStoreMapStruct.INSTANCE.storeGoodsLabelToStoreGoodsLabelInfoVO(
+			GoodsLabelStoreConvert.INSTANCE.convert(
 				storeGoodsLabel
 			));
 	}
@@ -71,7 +71,7 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> add(@Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
-		StoreGoodsLabel storeGoodsLabel = IGoodsLabelStoreMapStruct.INSTANCE.storeGoodsLabelDTOToStoreGoodsLabel(
+		StoreGoodsLabel storeGoodsLabel = GoodsLabelStoreConvert.INSTANCE.convert(
 			storeGoodsLabelDTO);
 		return Result.success(storeGoodsLabelService.addStoreGoodsLabel(storeGoodsLabel));
 	}
@@ -81,7 +81,7 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> edit(@PathVariable Long id, @Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
-		StoreGoodsLabel storeGoodsLabel = IGoodsLabelStoreMapStruct.INSTANCE.storeGoodsLabelDTOToStoreGoodsLabel(
+		StoreGoodsLabel storeGoodsLabel = GoodsLabelStoreConvert.INSTANCE.convert(
 			storeGoodsLabelDTO);
 		storeGoodsLabel.setId(id);
 		return Result.success(storeGoodsLabelService.editStoreGoodsLabel(storeGoodsLabel));

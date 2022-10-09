@@ -2,12 +2,12 @@ package com.taotao.cloud.goods.biz.controller.business.seller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.vo.GoodsUnitVO;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
-import com.taotao.cloud.goods.biz.service.IGoodsUnitService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -43,7 +43,7 @@ public class GoodsUnitStoreController {
 	@GetMapping
 	public Result<PageResult<GoodsUnitVO>> getByPage(PageParam pageParam) {
 		IPage<GoodsUnit> page = goodsUnitService.page(pageParam.buildMpPage());
-		return Result.success(PageResult.convertMybatisPage(page,GoodsUnitVO.class));
+		return Result.success(PageResult.convertMybatisPage(page, GoodsUnitVO.class));
 	}
 
 }

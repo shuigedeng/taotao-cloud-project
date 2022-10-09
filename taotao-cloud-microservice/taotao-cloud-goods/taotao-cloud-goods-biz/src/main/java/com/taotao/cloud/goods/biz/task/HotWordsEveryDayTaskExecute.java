@@ -1,8 +1,8 @@
 package com.taotao.cloud.goods.biz.task;
 
 import com.taotao.cloud.common.enums.CachePrefix;
+import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

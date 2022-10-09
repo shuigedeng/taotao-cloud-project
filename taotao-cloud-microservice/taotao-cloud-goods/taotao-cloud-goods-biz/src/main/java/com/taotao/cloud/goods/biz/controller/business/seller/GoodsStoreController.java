@@ -5,19 +5,19 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.model.dto.GoodsSkuStockDTO;
-import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
-import com.taotao.cloud.goods.api.model.vo.GoodsVO;
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.api.model.vo.GoodsVO;
 import com.taotao.cloud.goods.api.model.vo.StockWarningVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.service.IGoodsService;
-import com.taotao.cloud.goods.biz.service.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsService;
+import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import com.taotao.cloud.store.api.web.vo.StoreDetailVO;
@@ -132,7 +132,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}")
 	public Result<Boolean> update(@RequestBody GoodsOperationDTO goodsOperationDTO,
-		@PathVariable Long goodsId) {
+								  @PathVariable Long goodsId) {
 		return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
 	}
 
@@ -167,7 +167,7 @@ public class GoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/freight")
 	public Result<Boolean> freight(@RequestParam List<Long> goodsId,
-		@RequestParam Long templateId) {
+								   @RequestParam Long templateId) {
 		return Result.success(goodsService.freight(goodsId, templateId));
 	}
 

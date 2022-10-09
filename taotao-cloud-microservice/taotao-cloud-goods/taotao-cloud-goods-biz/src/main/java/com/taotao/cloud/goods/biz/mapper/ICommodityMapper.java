@@ -1,11 +1,11 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.goods.api.model.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:55:41
  */
-public interface ICommodityMapper extends BaseSuperMapper<Commodity> {
+public interface ICommodityMapper extends BaseSuperMapper<Commodity, Long> {
 
 	/**
 	 * 获取直播商品ID列表
@@ -75,6 +75,6 @@ public interface ICommodityMapper extends BaseSuperMapper<Commodity> {
 		${ew.customSqlSegment}
 		""")
 	IPage<CommoditySkuVO> commodityVOList(IPage<CommoditySkuVO> page,
-                                          @Param(Constants.WRAPPER) Wrapper<CommoditySkuVO> queryWrapper);
+										  @Param(Constants.WRAPPER) Wrapper<CommoditySkuVO> queryWrapper);
 
 }

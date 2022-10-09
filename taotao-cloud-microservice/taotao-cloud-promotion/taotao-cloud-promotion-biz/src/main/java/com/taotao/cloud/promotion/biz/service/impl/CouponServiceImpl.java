@@ -11,21 +11,21 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.date.DateUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.web.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.web.query.FullDiscountPageQuery;
 import com.taotao.cloud.promotion.api.web.query.PromotionGoodsPageQuery;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.web.vo.CouponVO;
+import com.taotao.cloud.promotion.biz.mapper.CouponMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
-import com.taotao.cloud.promotion.biz.mapper.CouponMapper;
 import com.taotao.cloud.promotion.biz.service.CouponActivityItemService;
 import com.taotao.cloud.promotion.biz.service.CouponService;
 import com.taotao.cloud.promotion.biz.service.FullDiscountService;
@@ -55,7 +55,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuService goodsSkuService;
+	private IFeignGoodsSkuApi goodsSkuService;
 	/**
 	 * 促销商品
 	 */

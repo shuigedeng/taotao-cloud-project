@@ -1,0 +1,35 @@
+package com.taotao.cloud.goods.biz.service.business;
+
+import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
+import com.taotao.cloud.goods.biz.model.entity.Specification;
+import com.taotao.cloud.web.base.service.BaseSuperService;
+
+import java.util.List;
+
+/**
+ * 商品分类规格业务层
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-27 16:59:40
+ */
+public interface ICategorySpecificationService extends BaseSuperService<CategorySpecification, Long> {
+
+	/**
+	 * 根据分类id查询规格信息
+	 *
+	 * @param categoryId 分类id
+	 * @return {@link List }<{@link Specification }>
+	 * @since 2022-04-27 16:59:40
+	 */
+	List<Specification> getCategorySpecList(Long categoryId);
+
+	/**
+	 * 通过分类ID删除关联规格
+	 *
+	 * @param categoryId 分类ID
+	 * @return {@link Boolean }
+	 * @since 2022-04-27 16:59:40
+	 */
+	Boolean deleteByCategoryId(Long categoryId);
+}

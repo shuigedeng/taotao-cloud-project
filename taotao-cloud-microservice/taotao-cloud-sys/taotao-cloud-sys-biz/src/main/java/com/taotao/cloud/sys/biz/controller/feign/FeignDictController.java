@@ -25,7 +25,7 @@ import com.taotao.cloud.limit.ext.Limit;
 import com.taotao.cloud.limit.guava.GuavaLimit;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
-import com.taotao.cloud.sys.api.feign.IFeignDictService;
+import com.taotao.cloud.sys.api.feign.IFeignDictApi;
 import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import com.taotao.cloud.sys.biz.model.convert.DictConvert;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -74,7 +74,7 @@ public class FeignDictController extends SimpleController<IDictService, Dict, Lo
 	private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
 	/**
-	 * 字典列表code查询 {@link IFeignDictService#findByCode(String)}
+	 * 字典列表code查询 {@link IFeignDictApi#findByCode(String)}
 	 */
 	@ApiInfo(
 		create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),

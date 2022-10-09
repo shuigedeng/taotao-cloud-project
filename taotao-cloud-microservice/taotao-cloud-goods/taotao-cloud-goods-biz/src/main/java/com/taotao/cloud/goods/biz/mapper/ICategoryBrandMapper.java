@@ -1,8 +1,8 @@
 package com.taotao.cloud.goods.biz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.goods.api.model.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:55:23
  */
-public interface ICategoryBrandMapper extends BaseSuperMapper<CategoryBrand> {
+public interface ICategoryBrandMapper extends BaseSuperMapper<CategoryBrand, Long> {
 
 	/**
 	 * 根据分类id查分类绑定品牌

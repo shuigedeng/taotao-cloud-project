@@ -13,18 +13,19 @@ import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import com.taotao.cloud.sys.api.model.vo.setting.payment.PaymentSupportSetting;
 import com.taotao.cloud.sys.api.model.vo.setting.payment.dto.PaymentSupportItem;
-import java.math.BigDecimal;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 收银台工具
@@ -46,7 +47,7 @@ public class CashierSupport {
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingService settingService;
+	private IFeignSettingApi settingService;
 
 	/**
 	 * 支付
@@ -56,9 +57,9 @@ public class CashierSupport {
 	 * @return 支付消息
 	 */
 	public Result<Object> payment(PaymentMethodEnum paymentMethodEnum,
-		PaymentClientEnum paymentClientEnum,
-		HttpServletRequest request, HttpServletResponse response,
-		PayParam payParam) {
+								  PaymentClientEnum paymentClientEnum,
+								  HttpServletRequest request, HttpServletResponse response,
+								  PayParam payParam) {
 		if (paymentClientEnum == null || paymentMethodEnum == null) {
 			throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
 		}
@@ -112,7 +113,7 @@ public class CashierSupport {
 	 * @return 回调消息
 	 */
 	public void callback(PaymentMethodEnum paymentMethodEnum,
-		HttpServletRequest request) {
+						 HttpServletRequest request) {
 
 		LogUtils.info("支付回调：支付类型：{}", paymentMethodEnum.name());
 
@@ -127,7 +128,7 @@ public class CashierSupport {
 	 * @param paymentMethodEnum 支付渠道
 	 */
 	public void notify(PaymentMethodEnum paymentMethodEnum,
-		HttpServletRequest request) {
+					   HttpServletRequest request) {
 
 		LogUtils.info("支付异步通知：支付类型：{}", paymentMethodEnum.name());
 

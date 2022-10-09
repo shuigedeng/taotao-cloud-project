@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:57:22
  */
-public interface IGoodsSkuMapper extends BaseSuperMapper<GoodsSku> {
+public interface IGoodsSkuMapper extends BaseSuperMapper<GoodsSku, Long> {
 
 	/**
 	 * 根据商品id获取全部skuId的集合

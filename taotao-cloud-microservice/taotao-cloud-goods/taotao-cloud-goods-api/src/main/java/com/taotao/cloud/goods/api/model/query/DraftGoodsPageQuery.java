@@ -1,6 +1,6 @@
 package com.taotao.cloud.goods.api.model.query;
 
-import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
+import com.taotao.cloud.goods.api.enums.DraftGoodsSaveTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +26,7 @@ public class DraftGoodsPageQuery extends GoodsPageQuery {
 	private static final long serialVersionUID = -1057830772267228050L;
 
 	/**
-	 * @see DraftGoodsSaveType
+	 * @see DraftGoodsSaveTypeEnum
 	 */
 	@Schema(description = "草稿商品保存类型")
 	private String saveType;

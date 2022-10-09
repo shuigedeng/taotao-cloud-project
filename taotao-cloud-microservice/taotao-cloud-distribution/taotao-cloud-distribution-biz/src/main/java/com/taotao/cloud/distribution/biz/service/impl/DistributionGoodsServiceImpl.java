@@ -8,11 +8,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.distribution.api.web.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.web.vo.DistributionGoodsVO;
-import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.mapper.DistributionGoodsMapper;
+import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuService;
+import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,106 +28,106 @@ import java.util.Objects;
 public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsMapper, DistributionGoods> implements
 	DistributionGoodsService {
 
-    /**
-     * 分销员
-     */
-    @Autowired
-    private DistributionService distributionService;
-    /**
-     * 规格商品
-     */
-    @Autowired
-    private IFeignGoodsSkuService goodsSkuService;
+	/**
+	 * 分销员
+	 */
+	@Autowired
+	private DistributionService distributionService;
+	/**
+	 * 规格商品
+	 */
+	@Autowired
+	private IFeignGoodsSkuApi goodsSkuService;
 
-    @Override
-    public IPage<DistributionGoodsVO> goodsPage(DistributionGoodsPageQuery searchParams) {
-        //获取商家的分销商品列表
-        if (Objects.requireNonNull(UserContext.getCurrentUser()).getRole().equals(UserEnums.STORE)) {
-            return this.baseMapper.getDistributionGoodsVO(PageUtil.initPage(searchParams), searchParams.storeQueryWrapper());
-        } else if (UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
-            //判断当前登录用户是否为分销员
-            Distribution distribution = distributionService.getDistribution();
-            if (distribution != null) {
-                //判断查看已选择的分销商品列表
-                if (searchParams.isChecked()) {
-                    return this.baseMapper.selectGoods(PageUtil.initPage(searchParams), searchParams.distributionQueryWrapper(), distribution.getId());
-                } else {
-                    return this.baseMapper.notSelectGoods(PageUtil.initPage(searchParams), searchParams.distributionQueryWrapper(), distribution.getId());
-                }
-            }
-            throw new BusinessException(ResultEnum.DISTRIBUTION_NOT_EXIST);
-        }
-        //如果是平台则直接进行查询
-        return this.baseMapper.getDistributionGoodsVO(PageUtil.initPage(searchParams), searchParams.distributionQueryWrapper());
-    }
+	@Override
+	public IPage<DistributionGoodsVO> goodsPage(DistributionGoodsPageQuery searchParams) {
+		//获取商家的分销商品列表
+		if (Objects.requireNonNull(UserContext.getCurrentUser()).getRole().equals(UserEnums.STORE)) {
+			return this.baseMapper.getDistributionGoodsVO(PageUtil.initPage(searchParams), searchParams.storeQueryWrapper());
+		} else if (UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
+			//判断当前登录用户是否为分销员
+			Distribution distribution = distributionService.getDistribution();
+			if (distribution != null) {
+				//判断查看已选择的分销商品列表
+				if (searchParams.isChecked()) {
+					return this.baseMapper.selectGoods(PageUtil.initPage(searchParams), searchParams.distributionQueryWrapper(), distribution.getId());
+				} else {
+					return this.baseMapper.notSelectGoods(PageUtil.initPage(searchParams), searchParams.distributionQueryWrapper(), distribution.getId());
+				}
+			}
+			throw new BusinessException(ResultEnum.DISTRIBUTION_NOT_EXIST);
+		}
+		//如果是平台则直接进行查询
+		return this.baseMapper.getDistributionGoodsVO(PageUtil.initPage(searchParams), searchParams.distributionQueryWrapper());
+	}
 
-    /**
-     * 根据条件查询分销商品信息列表
-     *
-     * @param distributionGoodsPageQuery 商品条件
-     * @return 分销商品信息列表
-     */
-    @Override
-    public List<DistributionGoods> getDistributionGoodsList(DistributionGoodsPageQuery distributionGoodsPageQuery) {
-        return this.list(distributionGoodsPageQuery.queryWrapper());
-    }
+	/**
+	 * 根据条件查询分销商品信息列表
+	 *
+	 * @param distributionGoodsPageQuery 商品条件
+	 * @return 分销商品信息列表
+	 */
+	@Override
+	public List<DistributionGoods> getDistributionGoodsList(DistributionGoodsPageQuery distributionGoodsPageQuery) {
+		return this.list(distributionGoodsPageQuery.queryWrapper());
+	}
 
-    /**
-     * 根据条件查询分销商品信息
-     *
-     * @param distributionGoodsPageQuery 条件
-     * @return 分销商品信息
-     */
-    @Override
-    public DistributionGoods getDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
-        return this.getOne(distributionGoodsPageQuery.queryWrapper(), false);
-    }
+	/**
+	 * 根据条件查询分销商品信息
+	 *
+	 * @param distributionGoodsPageQuery 条件
+	 * @return 分销商品信息
+	 */
+	@Override
+	public DistributionGoods getDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
+		return this.getOne(distributionGoodsPageQuery.queryWrapper(), false);
+	}
 
-    /**
-     * 根据条件删除分销商品
-     *
-     * @param distributionGoodsPageQuery 条件
-     */
-    @Override
-    public boolean deleteDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
-        return this.remove(distributionGoodsPageQuery.queryWrapper());
-    }
+	/**
+	 * 根据条件删除分销商品
+	 *
+	 * @param distributionGoodsPageQuery 条件
+	 */
+	@Override
+	public boolean deleteDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
+		return this.remove(distributionGoodsPageQuery.queryWrapper());
+	}
 
-    @Override
-    public DistributionGoods distributionGoodsVO(String id) {
+	@Override
+	public DistributionGoods distributionGoodsVO(String id) {
 
-        return this.getById(id);
-    }
+		return this.getById(id);
+	}
 
-    @Override
-    public DistributionGoods distributionGoodsVOBySkuId(String skuId) {
-        return this.getOne(new LambdaUpdateWrapper<DistributionGoods>().eq(DistributionGoods::getSkuId, skuId));
-    }
+	@Override
+	public DistributionGoods distributionGoodsVOBySkuId(String skuId) {
+		return this.getOne(new LambdaUpdateWrapper<DistributionGoods>().eq(DistributionGoods::getSkuId, skuId));
+	}
 
-    @Override
-    public List<DistributionGoods> distributionGoods(List<String> skuIds) {
-        return this.list(new LambdaUpdateWrapper<DistributionGoods>().in(DistributionGoods::getSkuId, skuIds));
-    }
+	@Override
+	public List<DistributionGoods> distributionGoods(List<String> skuIds) {
+		return this.list(new LambdaUpdateWrapper<DistributionGoods>().in(DistributionGoods::getSkuId, skuIds));
+	}
 
-    @Override
-    public DistributionGoods checked(String skuId, BigDecimal commission, String storeId) {
+	@Override
+	public DistributionGoods checked(String skuId, BigDecimal commission, String storeId) {
 
-        //检查分销功能开关
-        distributionService.checkDistributionSetting();
+		//检查分销功能开关
+		distributionService.checkDistributionSetting();
 
-        //判断是否存在分销商品，如果存在不能添加
-        QueryWrapper queryWrapper = Wrappers.query().eq("sku_id", skuId);
+		//判断是否存在分销商品，如果存在不能添加
+		QueryWrapper queryWrapper = Wrappers.query().eq("sku_id", skuId);
 
-        if (this.getOne(queryWrapper) != null) {
-            throw new BusinessException(ResultEnum.DISTRIBUTION_GOODS_BigDecimal);
-        }
-        GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(skuId);
-        if (!goodsSku.getStoreId().equals(storeId)) {
-            throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
-        }
-        DistributionGoods distributionGoods = new DistributionGoods(goodsSku, commission);
-        this.save(distributionGoods);
-        return distributionGoods;
-    }
+		if (this.getOne(queryWrapper) != null) {
+			throw new BusinessException(ResultEnum.DISTRIBUTION_GOODS_BigDecimal);
+		}
+		GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+		if (!goodsSku.getStoreId().equals(storeId)) {
+			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
+		}
+		DistributionGoods distributionGoods = new DistributionGoods(goodsSku, commission);
+		this.save(distributionGoods);
+		return distributionGoods;
+	}
 
 }

@@ -7,9 +7,9 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.dto.SpecificationDTO;
 import com.taotao.cloud.goods.api.model.query.SpecificationPageQuery;
 import com.taotao.cloud.goods.api.model.vo.SpecificationVO;
+import com.taotao.cloud.goods.biz.model.convert.SpecificationConvert;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
-import com.taotao.cloud.goods.biz.mapstruct.ISpecificationMapStruct;
-import com.taotao.cloud.goods.biz.service.ISpecificationService;
+import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -54,7 +54,7 @@ public class SpecificationManagerController {
 	public Result<List<SpecificationVO>> getAll() {
 		List<Specification> specifications = specificationService.list();
 		return Result.success(
-			ISpecificationMapStruct.INSTANCE.specificationsToSpecificationVOs(specifications));
+			SpecificationConvert.INSTANCE.convert(specifications));
 	}
 
 	@Operation(summary = "搜索规格", description = "搜索规格")
@@ -73,7 +73,7 @@ public class SpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Valid @RequestBody SpecificationDTO specificationDTO) {
-		Specification specification = ISpecificationMapStruct.INSTANCE.specificationDTOToSpecification(
+		Specification specification = SpecificationConvert.INSTANCE.convert(
 			specificationDTO);
 		return Result.success(specificationService.save(specification));
 	}
@@ -83,8 +83,8 @@ public class SpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO,
-		@PathVariable Long id) {
-		Specification specification = ISpecificationMapStruct.INSTANCE.specificationDTOToSpecification(
+								  @PathVariable Long id) {
+		Specification specification = SpecificationConvert.INSTANCE.convert(
 			specificationDTO);
 		specification.setId(id);
 

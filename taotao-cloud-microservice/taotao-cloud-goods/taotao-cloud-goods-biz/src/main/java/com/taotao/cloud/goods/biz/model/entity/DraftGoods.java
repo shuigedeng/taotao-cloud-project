@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.model.entity;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.http.HtmlUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.goods.api.enums.DraftGoodsSaveType;
+import com.taotao.cloud.goods.api.enums.DraftGoodsSaveTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
@@ -199,7 +199,7 @@ public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
 	/**
 	 * 草稿商品保存类型
 	 *
-	 * @see DraftGoodsSaveType
+	 * @see DraftGoodsSaveTypeEnum
 	 */
 	@Column(name = "save_type", columnDefinition = "varchar(255) not null comment '草稿商品保存类型'")
 	private String saveType;
@@ -252,7 +252,7 @@ public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
