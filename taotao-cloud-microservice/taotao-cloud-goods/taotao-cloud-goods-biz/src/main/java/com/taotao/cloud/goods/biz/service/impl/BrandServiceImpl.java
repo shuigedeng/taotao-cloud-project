@@ -12,22 +12,20 @@ import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
 import com.taotao.cloud.goods.api.model.query.BrandPageQuery;
+import com.taotao.cloud.goods.biz.mapper.IBrandMapper;
+import com.taotao.cloud.goods.biz.mapstruct.IBrandMapStruct;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
-import com.taotao.cloud.goods.biz.mapper.IBrandMapper;
-import com.taotao.cloud.goods.biz.mapstruct.IBrandMapStruct;
 import com.taotao.cloud.goods.biz.service.IBrandService;
 import com.taotao.cloud.goods.biz.service.ICategoryBrandService;
 import com.taotao.cloud.goods.biz.service.ICategoryService;
 import com.taotao.cloud.goods.biz.service.IGoodsService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -77,8 +75,8 @@ public class BrandServiceImpl extends ServiceImpl<IBrandMapper, Brand> implement
 	}
 
 	@Override
-	public List<Brand> getBrandsByCategorys(Long categoryIds){
-		Map<String,  List<Brand>> map = this.baseMapper.selectBrandsByCategorysAsMap(categoryIds)
+	public List<Brand> getBrandsByCategorys(Long categoryIds) {
+		//Map<String,  List<Brand>> map = this.baseMapper.selectBrandsByCategorysAsMap(categoryIds)
 
 		QueryWrapper<CategoryBrand> queryWrapper = new QueryWrapper<>();
 		queryWrapper.in("category_id", categoryIds);
