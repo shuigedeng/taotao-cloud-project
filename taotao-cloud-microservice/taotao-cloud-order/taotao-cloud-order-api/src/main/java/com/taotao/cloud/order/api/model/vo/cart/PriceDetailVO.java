@@ -1,8 +1,6 @@
 package com.taotao.cloud.order.api.model.vo.cart;
 
 import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
-import com.taotao.cloud.order.api.vo.cart.PriceDetailVOBuilder;
-import com.taotao.cloud.order.api.web.vo.cart.PriceDetailVOBuilder;
 import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 

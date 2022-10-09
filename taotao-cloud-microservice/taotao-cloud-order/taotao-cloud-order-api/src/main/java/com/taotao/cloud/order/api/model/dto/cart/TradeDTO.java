@@ -1,14 +1,14 @@
 package com.taotao.cloud.order.api.model.dto.cart;
 
+import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
+import com.taotao.cloud.order.api.enums.cart.SuperpositionPromotionEnum;
 import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
+import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTOBuilder;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.order.api.model.vo.cart.PriceDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
-import com.taotao.cloud.order.api.dto.order.PriceDetailDTOBuilder;
-import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
-import com.taotao.cloud.order.api.enums.cart.SuperpositionPromotionEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

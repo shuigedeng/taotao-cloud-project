@@ -1,25 +1,20 @@
 package com.taotao.cloud.promotion.api.web.query;
 
-import cn.hutool.core.text.CharSequenceUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 促销商品查询通用类
  */
 @Setter
 @Getter
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PromotionGoodsPageQuery extends BasePromotionsSearchQuery {
@@ -49,37 +44,37 @@ public class PromotionGoodsPageQuery extends BasePromotionsSearchQuery {
 	private List<Long> promotionIds;
 
 
-	@Override
-	public <T> QueryWrapper<T> queryWrapper() {
-		if (CharSequenceUtil.isEmpty(this.getScopeType())) {
-			this.setScopeType(PromotionsScopeTypeEnum.PORTION_GOODS.name());
-		}
-		QueryWrapper<T> queryWrapper = super.queryWrapper();
-		if (Objects.nonNull(promotionId)) {
-			queryWrapper.eq("promotion_id", promotionId);
-		}
-		if (CharSequenceUtil.isNotEmpty(goodsName)) {
-			queryWrapper.like("goods_name", goodsName);
-		}
-		if (CharSequenceUtil.isNotEmpty(promotionType)) {
-			queryWrapper.eq("promotion_type", promotionType);
-		}
-		if (CharSequenceUtil.isNotEmpty(categoryPath)) {
-			queryWrapper.like("category_path", categoryPath);
-		}
-		if (CharSequenceUtil.isNotEmpty(storeId)) {
-			queryWrapper.in("store_id", Arrays.asList(storeId.split(",")));
-		}
-		if (CharSequenceUtil.isNotEmpty(skuId)) {
-			queryWrapper.in("sku_id", Arrays.asList(skuId.split(",")));
-		}
-		if (skuIds != null && !skuIds.isEmpty()) {
-			queryWrapper.in("sku_id", skuIds);
-		}
-		if (promotionIds != null && promotionIds.isEmpty()) {
-			queryWrapper.in("promotion_id", promotionIds);
-		}
-		return queryWrapper;
-	}
+	// @Override
+	// public <T> QueryWrapper<T> queryWrapper() {
+	// 	if (CharSequenceUtil.isEmpty(this.getScopeType())) {
+	// 		this.setScopeType(PromotionsScopeTypeEnum.PORTION_GOODS.name());
+	// 	}
+	// 	QueryWrapper<T> queryWrapper = super.queryWrapper();
+	// 	if (Objects.nonNull(promotionId)) {
+	// 		queryWrapper.eq("promotion_id", promotionId);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(goodsName)) {
+	// 		queryWrapper.like("goods_name", goodsName);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(promotionType)) {
+	// 		queryWrapper.eq("promotion_type", promotionType);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(categoryPath)) {
+	// 		queryWrapper.like("category_path", categoryPath);
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(storeId)) {
+	// 		queryWrapper.in("store_id", Arrays.asList(storeId.split(",")));
+	// 	}
+	// 	if (CharSequenceUtil.isNotEmpty(skuId)) {
+	// 		queryWrapper.in("sku_id", Arrays.asList(skuId.split(",")));
+	// 	}
+	// 	if (skuIds != null && !skuIds.isEmpty()) {
+	// 		queryWrapper.in("sku_id", skuIds);
+	// 	}
+	// 	if (promotionIds != null && promotionIds.isEmpty()) {
+	// 		queryWrapper.in("promotion_id", promotionIds);
+	// 	}
+	// 	return queryWrapper;
+	// }
 
 }

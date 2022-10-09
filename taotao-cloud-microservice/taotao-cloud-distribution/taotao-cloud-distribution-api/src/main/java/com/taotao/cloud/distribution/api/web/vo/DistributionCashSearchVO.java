@@ -1,17 +1,17 @@
 package com.taotao.cloud.distribution.api.web.vo;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 分销佣金查询信息
  */
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,19 +27,19 @@ public class DistributionCashSearchVO {
 	@Schema(description = "分销员提现状态", allowableValues = "APPLY,PASS,REFUSE")
 	private String distributionCashStatus;
 
-	public <T> QueryWrapper<T> queryWrapper() {
-		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		if (StringUtils.isNotEmpty(memberName)) {
-			queryWrapper.like("distribution_name", memberName);
-		}
-		if (StringUtils.isNotEmpty(sn)) {
-			queryWrapper.like("sn", sn);
-		}
-		if (StringUtils.isNotEmpty(distributionCashStatus)) {
-			queryWrapper.like("distribution_cash_status", distributionCashStatus);
-		}
-		return queryWrapper;
-	}
+	// public <T> QueryWrapper<T> queryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+	// 	if (StringUtils.isNotEmpty(memberName)) {
+	// 		queryWrapper.like("distribution_name", memberName);
+	// 	}
+	// 	if (StringUtils.isNotEmpty(sn)) {
+	// 		queryWrapper.like("sn", sn);
+	// 	}
+	// 	if (StringUtils.isNotEmpty(distributionCashStatus)) {
+	// 		queryWrapper.like("distribution_cash_status", distributionCashStatus);
+	// 	}
+	// 	return queryWrapper;
+	// }
 
 
 }

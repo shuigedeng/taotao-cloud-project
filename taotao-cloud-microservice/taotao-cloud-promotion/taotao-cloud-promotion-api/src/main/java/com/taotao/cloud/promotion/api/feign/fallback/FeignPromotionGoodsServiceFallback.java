@@ -19,8 +19,10 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
 import com.taotao.cloud.promotion.api.web.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.web.vo.PromotionGoodsVO;
-import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * RemoteLogFallbackImpl
@@ -41,6 +43,11 @@ public class FeignPromotionGoodsServiceFallback implements FallbackFactory<IFeig
 			@Override
 			public void updateBatchById(List<PromotionGoodsVO> promotionGoods) {
 
+			}
+
+			@Override
+			public BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList) {
+				return null;
 			}
 		};
 	}

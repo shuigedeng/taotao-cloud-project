@@ -1,21 +1,22 @@
 package com.taotao.cloud.promotion.api.web.query;
 
 
-import cn.hutool.core.text.CharSequenceUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 砍价活动商品查询通用类
  */
 @Setter
 @Getter
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivityGoodsPageQuery extends BasePromotionsSearchQuery implements Serializable {
@@ -29,18 +30,18 @@ public class KanjiaActivityGoodsPageQuery extends BasePromotionsSearchQuery impl
 	@Schema(description = "skuId")
 	private String skuId;
 
-	@Override
-	public <T> QueryWrapper<T> queryWrapper() {
-		QueryWrapper<T> queryWrapper = super.queryWrapper();
-
-		if (CharSequenceUtil.isNotEmpty(goodsName)) {
-			queryWrapper.like("goods_name", goodsName);
-		}
-		//if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
-		//    queryWrapper.gt("stock", 0);
-		//}
-		queryWrapper.eq("delete_flag", false);
-		return queryWrapper;
-	}
+	// @Override
+	// public <T> QueryWrapper<T> queryWrapper() {
+	// 	QueryWrapper<T> queryWrapper = super.queryWrapper();
+	//
+	// 	if (CharSequenceUtil.isNotEmpty(goodsName)) {
+	// 		queryWrapper.like("goods_name", goodsName);
+	// 	}
+	// 	//if (UserContext.getCurrentUser() != null && UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
+	// 	//    queryWrapper.gt("stock", 0);
+	// 	//}
+	// 	queryWrapper.eq("delete_flag", false);
+	// 	return queryWrapper;
+	// }
 
 }
