@@ -1,10 +1,7 @@
 package com.taotao.cloud.goods.api.model.query;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 
@@ -17,15 +14,13 @@ import java.io.Serial;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
-@NoArgsConstructor
 public class GoodsSkuSearchQuery extends GoodsPageQuery {
 
 	@Serial
 	private static final long serialVersionUID = -6235885068610635045L;
 
-	@Schema(description = "商品id")
-	private String goodsId;
+	// @Schema(description = "商品id")
+	// private String goodsId;
 
 	// @Override
 	// public <T> QueryWrapper<T> queryWrapper() {
