@@ -39,8 +39,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "公司查询对象")
-public class CompanyQueryRequest implements Serializable {
+@Schema(description = "商品查询请求")
+public class GoodsQueryRequest implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
