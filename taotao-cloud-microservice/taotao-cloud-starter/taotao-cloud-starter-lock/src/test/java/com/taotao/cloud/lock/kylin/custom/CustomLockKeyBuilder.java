@@ -1,6 +1,6 @@
 package com.taotao.cloud.lock.kylin.custom;
 
-import com.wjk.kylin.lock.key.DefaultLockKeyBuilder;
+import com.taotao.cloud.lock.kylin.key.DefaultLockKeyBuilder;
 import org.springframework.stereotype.Component;
 
 /**

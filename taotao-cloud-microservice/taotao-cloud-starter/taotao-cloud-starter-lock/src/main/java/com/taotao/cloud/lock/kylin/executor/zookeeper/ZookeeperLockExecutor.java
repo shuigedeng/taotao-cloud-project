@@ -121,24 +121,15 @@ public class ZookeeperLockExecutor extends AbstractLockExecutor<InterProcessLock
 		InterProcessLock lockInstance = null;
 
 		switch (lockType) {
-			case REENTRANT:
-				lockInstance = this.getReentrantLockData(nodePath);
-				break;
-			case READ:
+			case REENTRANT -> lockInstance = this.getReentrantLockData(nodePath);
+			case READ ->
 				lockInstance = new InterProcessReadWriteLock(curatorFramework, nodePath).readLock();
-				break;
-			case WRITE:
-				lockInstance = new InterProcessReadWriteLock(curatorFramework,
-					nodePath).writeLock();
-				break;
-			case MULTI:
-				lockInstance = this.getMultiLock(nodePath, keySuffix);
-				break;
-			case SEMAPHORE:
+			case WRITE -> lockInstance = new InterProcessReadWriteLock(curatorFramework,
+				nodePath).writeLock();
+			case MULTI -> lockInstance = this.getMultiLock(nodePath, keySuffix);
+			case SEMAPHORE ->
 				lockInstance = new InterProcessSemaphoreMutex(curatorFramework, nodePath);
-				break;
-			default:
-				LOGGER.error("lockType is not support ,lockType:{}", lockType);
+			default -> LOGGER.error("lockType is not support ,lockType:{}", lockType);
 		}
 		return lockInstance;
 	}

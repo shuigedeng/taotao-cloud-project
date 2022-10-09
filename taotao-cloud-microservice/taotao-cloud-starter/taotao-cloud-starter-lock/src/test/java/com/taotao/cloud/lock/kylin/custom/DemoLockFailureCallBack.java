@@ -1,7 +1,7 @@
 package com.taotao.cloud.lock.kylin.custom;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.wjk.kylin.lock.fail.LockFailureCallBack;
+import com.taotao.cloud.lock.kylin.fail.LockFailureCallBack;
 import org.springframework.stereotype.Component;
 
 
