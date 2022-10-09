@@ -1,6 +1,6 @@
 import colors from 'windicss/colors';
-import { defineConfig } from 'vite-plugin-windicss';
-import { primaryColor } from './build/config/themeConfig';
+import {defineConfig} from 'vite-plugin-windicss';
+import {primaryColor} from './script/config/themeConfig';
 
 export default defineConfig({
   darkMode: 'class',
@@ -48,7 +48,7 @@ function createEnterPlugin(maxOutput = 10) {
       },
     };
   };
-  const handler = ({ addBase }) => {
+  const handler = ({addBase}) => {
     const addRawCss = {};
     for (let index = 1; index < maxOutput; index++) {
       Object.assign(addRawCss, {
@@ -72,5 +72,5 @@ function createEnterPlugin(maxOutput = 10) {
       },
     });
   };
-  return { handler };
+  return {handler};
 }

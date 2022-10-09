@@ -10,8 +10,8 @@
     "bootstrap": "yarn install",
     "serve": "npm run dev",
     "dev": "vite",
-    "build": "cross-env NODE_ENV=production vite build && esno ./build/script/postBuild.ts",
-    "build:test": "cross-env vite build --mode test && esno ./build/script/postBuild.ts",
+    "build": "cross-env NODE_ENV=production vite build && esno ./script/script/postBuild.ts",
+    "build:test": "cross-env vite build --mode test && esno ./script/script/postBuild.ts",
     "build:no-cache": "yarn clean:cache && npm run build",
     "report": "cross-env REPORT=true npm run build",
     "type:check": "vue-tsc --noEmit --skipLibCheck",
@@ -30,7 +30,7 @@
     "test:gzip": "http-server dist --cors --gzip -c-1",
     "test:br": "http-server dist --cors --brotli -c-1",
     "reinstall": "rimraf yarn.lock && rimraf package.lock.json && rimraf node_modules && npm run bootstrap",
-    "gen:icon": "esno ./build/generate/icon/index.ts"
+    "gen:icon": "esno ./script/generate/icon/index.ts"
   },
   "dependencies": {
     "@iconify/iconify": "^2.0.4",
@@ -140,7 +140,7 @@
     "vue-tsc": "^0.3.0"
   },
   "resolutions": {
-    "//": "Used to install imagemin dependencies, because imagemin may not be installed in China. If it is abroad, you can delete it",
+    "abroad": "Used to install imagemin dependencies, because imagemin may not be installed in China. If it is abroad, you can delete it",
     "bin-wrapper": "npm:bin-wrapper-china",
     "rollup": "^2.56.2"
   },
