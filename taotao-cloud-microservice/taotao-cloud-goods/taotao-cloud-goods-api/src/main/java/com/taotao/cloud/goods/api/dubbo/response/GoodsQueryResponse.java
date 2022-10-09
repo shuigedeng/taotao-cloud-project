@@ -28,7 +28,7 @@ import java.io.Serializable;
  * @since 2021-10-19 20:47:05
  */
 @RecordBuilder
-public record CompanyResponse(
+public record GoodsQueryResponse(
 	/**
 	 * 租户id
 	 */
