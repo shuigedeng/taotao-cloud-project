@@ -6,20 +6,20 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.api.model.dto.order.OrderComplaintCommunicationDTO;
-import com.taotao.cloud.order.api.model.dto.order.OrderComplaintDTO;
-import com.taotao.cloud.order.api.model.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.dto.order.OrderComplaintOperationDTOBuilder;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
+import com.taotao.cloud.order.api.model.dto.order.OrderComplaintCommunicationDTO;
+import com.taotao.cloud.order.api.model.dto.order.OrderComplaintDTO;
+import com.taotao.cloud.order.api.model.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.model.query.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderComplaintBaseVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderComplaintVO;
+import com.taotao.cloud.order.biz.model.convert.OrderComplainConvert;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
-import com.taotao.cloud.order.biz.convert.OrderComplainConvert;
-import com.taotao.cloud.order.biz.service.order.IOrderComplaintCommunicationService;
-import com.taotao.cloud.order.biz.service.order.IOrderComplaintService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -79,7 +79,7 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
-		OrderComplaint orderComplaint = OrderComplainConvert.INSTANCE.orderComplaintDTOToOrderComplaint(orderComplaintDTO);
+		OrderComplaint orderComplaint = OrderComplainConvert.INSTANCE.convert(orderComplaintDTO);
 		orderComplaint.setId(id);
 		return Result.success(orderComplaintService.updateOrderComplain(orderComplaint));
 	}

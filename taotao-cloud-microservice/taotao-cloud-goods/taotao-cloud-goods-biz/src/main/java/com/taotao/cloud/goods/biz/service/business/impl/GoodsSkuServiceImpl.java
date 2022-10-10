@@ -38,7 +38,7 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
+import com.taotao.cloud.member.api.feign.FeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
@@ -104,7 +104,7 @@ public class GoodsSkuServiceImpl extends
 	/**
 	 * 会员评价服务
 	 */
-	private final IFeignMemberEvaluationService memberEvaluationService;
+	private final FeignMemberEvaluationApi memberEvaluationService;
 	/**
 	 * 商品服务
 	 */

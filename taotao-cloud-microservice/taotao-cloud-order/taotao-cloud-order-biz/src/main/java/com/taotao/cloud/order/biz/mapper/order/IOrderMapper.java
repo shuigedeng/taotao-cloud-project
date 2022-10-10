@@ -8,6 +8,7 @@ import com.taotao.cloud.order.api.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.model.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * 订单数据处理层
  */
-public interface IOrderMapper extends BaseSuperMapper<Order> {
+public interface IOrderMapper extends BaseSuperMapper<Order, Long> {
 
 	/**
 	 * 修改订单状态

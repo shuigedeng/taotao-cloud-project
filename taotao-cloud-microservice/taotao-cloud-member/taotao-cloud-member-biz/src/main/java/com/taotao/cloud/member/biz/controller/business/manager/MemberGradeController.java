@@ -3,14 +3,14 @@ package com.taotao.cloud.member.biz.controller.business.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberGradeVO;
+import com.taotao.cloud.member.biz.model.convert.MemberGradeConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberGrade;
-import com.taotao.cloud.member.biz.mapstruct.IMemberGradeMapStruct;
-import com.taotao.cloud.member.biz.service.MemberGradeService;
+import com.taotao.cloud.member.biz.service.business.IMemberGradeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-会员等级管理API", description = "管理端-会员等级管理API")
 public class MemberGradeController {
 
-	private final MemberGradeService memberGradeService;
+	private final IMemberGradeService memberGradeService;
 
 	@Operation(summary = "通过id获取会员等级", description = "通过id获取会员等级")
 	@RequestLogger
@@ -44,7 +44,7 @@ public class MemberGradeController {
 	@GetMapping(value = "/{id}")
 	public Result<MemberGradeVO> get(@PathVariable Long id) {
 		MemberGrade memberGrade = memberGradeService.getById(id);
-		return Result.success(IMemberGradeMapStruct.INSTANCE.memberGradeToMemberGradeVO(memberGrade));
+		return Result.success(MemberGradeConvert.INSTANCE.convert(memberGrade));
 	}
 
 	@Operation(summary = "获取会员等级分页", description = "获取会员等级分页")

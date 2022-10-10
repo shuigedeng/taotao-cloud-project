@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.roketmq.event.impl;
 
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberLoginEvent;
-import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.member.biz.service.business.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

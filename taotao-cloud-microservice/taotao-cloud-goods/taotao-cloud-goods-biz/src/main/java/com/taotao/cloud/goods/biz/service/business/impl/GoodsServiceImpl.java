@@ -34,7 +34,7 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
+import com.taotao.cloud.member.api.feign.FeignMemberEvaluationApi;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.store.api.feign.IFeignFreightTemplateService;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
@@ -97,7 +97,7 @@ public class GoodsServiceImpl extends
 	/**
 	 * 会员评价
 	 */
-	private final IFeignMemberEvaluationService memberEvaluationService;
+	private final FeignMemberEvaluationApi memberEvaluationService;
 	/**
 	 * rocketMq
 	 */

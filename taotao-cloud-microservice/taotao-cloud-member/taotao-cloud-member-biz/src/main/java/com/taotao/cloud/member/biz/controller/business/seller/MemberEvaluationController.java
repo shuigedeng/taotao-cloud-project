@@ -9,9 +9,9 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.biz.model.convert.MemberEvaluationConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
-import com.taotao.cloud.member.biz.mapstruct.IMemberEvaluationMapStruct;
-import com.taotao.cloud.member.biz.service.MemberEvaluationService;
+import com.taotao.cloud.member.biz.service.business.IMemberEvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/member/seller/member/evaluation")
 public class MemberEvaluationController {
 
-	private final MemberEvaluationService memberEvaluationService;
+	private final IMemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表")
 	@RequestLogger
@@ -55,7 +55,7 @@ public class MemberEvaluationController {
 	@GetMapping(value = "/{id}")
 	public Result<MemberEvaluationVO> get(@PathVariable Long id) {
 		MemberEvaluation memberEvaluation = OperationalJudgment.judgment(memberEvaluationService.queryById(id));
-		return Result.success(IMemberEvaluationMapStruct.INSTANCE.memberEvaluationToMemberEvaluationVO(memberEvaluation));
+		return Result.success(MemberEvaluationConvert.INSTANCE.convert(memberEvaluation));
 	}
 
 	@Operation(summary = "回复评价", description = "回复评价")
@@ -63,7 +63,7 @@ public class MemberEvaluationController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping(value = "/reply/{id}")
 	public Result<Boolean> reply(@PathVariable Long id, @RequestParam String reply,
-											@RequestParam String replyImage) {
+								 @RequestParam String replyImage) {
 		OperationalJudgment.judgment(memberEvaluationService.queryById(id));
 		return Result.success(memberEvaluationService.reply(id, reply, replyImage));
 	}

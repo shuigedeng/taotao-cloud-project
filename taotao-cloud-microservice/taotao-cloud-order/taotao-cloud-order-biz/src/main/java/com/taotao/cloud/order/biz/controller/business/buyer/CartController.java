@@ -5,7 +5,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
-import com.taotao.cloud.order.biz.service.cart.ICartService;
+import com.taotao.cloud.order.biz.service.business.cart.ICartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -174,7 +174,7 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/coupon")
 	public Result<Boolean> selectCoupon(String way,
-									   @NotNull(message = "优惠券id不能为空") String memberCouponId, boolean used) {
+										@NotNull(message = "优惠券id不能为空") String memberCouponId, boolean used) {
 		return Result.success(this.cartService.selectCoupon(memberCouponId, way, used));
 	}
 

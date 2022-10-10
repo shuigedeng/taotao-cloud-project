@@ -13,7 +13,7 @@ import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

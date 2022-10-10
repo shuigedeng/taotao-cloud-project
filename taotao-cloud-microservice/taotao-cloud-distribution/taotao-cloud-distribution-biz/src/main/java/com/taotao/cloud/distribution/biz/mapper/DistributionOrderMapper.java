@@ -1,8 +1,8 @@
 package com.taotao.cloud.distribution.biz.mapper;
 
 import cn.hutool.core.date.DateTime;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Update;
 
 /**
@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Update;
  * @version 2022.04
  * @since 2022-04-22 11:27:46
  */
-public interface DistributionOrderMapper extends BaseSuperMapper<DistributionOrder> {
+public interface DistributionOrderMapper extends BaseSuperMapper<DistributionOrder, Long> {
 
 	/**
 	 * 修改分销员提现金额

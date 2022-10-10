@@ -9,8 +9,8 @@ import com.taotao.cloud.order.api.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.service.order.IOrderPriceService;
-import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderPriceService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -91,7 +91,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{orderSn}/consignee")
 	public Result<Order> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
-		@Valid MemberAddressDTO memberAddressDTO) {
+								   @Valid MemberAddressDTO memberAddressDTO) {
 		return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
 	}
 
@@ -99,7 +99,7 @@ public class OrderController {
 	@RequestLogger
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Boolean> updateOrderPrice(@PathVariable String orderSn,
-		@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
+											@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
 		return Result.success(orderPriceService.updatePrice(orderSn, price));
 	}
 
@@ -108,7 +108,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Order> cancel(@PathVariable String orderSn,
-		@RequestParam String reason) {
+								@RequestParam String reason) {
 		return Result.success(orderService.cancel(orderSn, reason));
 	}
 

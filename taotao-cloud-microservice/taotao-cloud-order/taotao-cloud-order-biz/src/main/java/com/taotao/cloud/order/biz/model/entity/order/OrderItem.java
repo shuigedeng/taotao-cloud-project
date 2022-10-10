@@ -4,11 +4,11 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.promotion.api.web.vo.PromotionSkuVO;
@@ -194,46 +194,46 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 	private Integer returnGoodsNumber;
 
 	public OrderItem(CartSkuVO cartSkuVO, CartVO cartVO, TradeDTO tradeDTO) {
-	    Long oldId = this.getId();
-	    BeanUtils.copyProperties(cartSkuVO.getGoodsSku(), this);
-	    BeanUtils.copyProperties(cartSkuVO.getPriceDetailDTO(), this);
-	    BeanUtils.copyProperties(cartSkuVO, this);
-	    this.setId(oldId);
-	    if (cartSkuVO.getPriceDetailDTO().getJoinPromotion() != null && !cartSkuVO.getPriceDetailDTO().getJoinPromotion().isEmpty()) {
-	        this.setPromotionType(
-		        CollUtil.join(cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream().map(
-			        PromotionSkuVO::getPromotionType).collect(Collectors.toList()), ","));
-	        this.setPromotionId(CollUtil.join(cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream().map(PromotionSkuVO::getActivityId).collect(Collectors.toList()), ","));
-	    }
-	    this.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.NEW.name());
-	    this.setCommentStatus(CommentStatusEnum.NEW.name());
-	    this.setComplainStatus(OrderComplaintStatusEnum.NEW.name());
-	    this.setPriceDetailDTO(cartSkuVO.getPriceDetailDTO());
-	    this.setOrderSn(cartVO.getSn());
-	    this.setTradeSn(tradeDTO.getSn());
-	    this.setImage(cartSkuVO.getGoodsSku().getThumbnail());
-	    this.setGoodsName(cartSkuVO.getGoodsSku().getGoodsName());
-	    this.setSkuId(cartSkuVO.getGoodsSku().getId());
-	    this.setCategoryId(cartSkuVO.getGoodsSku().getCategoryPath().substring(
-	            cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1
-	    ));
-	    this.setGoodsPrice(cartSkuVO.getGoodsSku().getPrice());
-	    this.setUnitPrice(cartSkuVO.getPurchasePrice());
-	    this.setSubTotal(cartSkuVO.getSubTotal());
-	    this.setSn(SnowFlake.createStr("OI"))
+		Long oldId = this.getId();
+		BeanUtils.copyProperties(cartSkuVO.getGoodsSku(), this);
+		BeanUtils.copyProperties(cartSkuVO.getPriceDetailDTO(), this);
+		BeanUtils.copyProperties(cartSkuVO, this);
+		this.setId(oldId);
+		if (cartSkuVO.getPriceDetailDTO().getJoinPromotion() != null && !cartSkuVO.getPriceDetailDTO().getJoinPromotion().isEmpty()) {
+			this.setPromotionType(
+				CollUtil.join(cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream().map(
+					PromotionSkuVO::getPromotionType).collect(Collectors.toList()), ","));
+			this.setPromotionId(CollUtil.join(cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream().map(PromotionSkuVO::getActivityId).collect(Collectors.toList()), ","));
+		}
+		this.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.NEW.name());
+		this.setCommentStatus(CommentStatusEnum.NEW.name());
+		this.setComplainStatus(OrderComplaintStatusEnum.NEW.name());
+		this.setPriceDetailDTO(cartSkuVO.getPriceDetailDTO());
+		this.setOrderSn(cartVO.getSn());
+		this.setTradeSn(tradeDTO.getSn());
+		this.setImage(cartSkuVO.getGoodsSku().getThumbnail());
+		this.setGoodsName(cartSkuVO.getGoodsSku().getGoodsName());
+		this.setSkuId(cartSkuVO.getGoodsSku().getId());
+		this.setCategoryId(cartSkuVO.getGoodsSku().getCategoryPath().substring(
+			cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1
+		));
+		this.setGoodsPrice(cartSkuVO.getGoodsSku().getPrice());
+		this.setUnitPrice(cartSkuVO.getPurchasePrice());
+		this.setSubTotal(cartSkuVO.getSubTotal());
+		this.setSn(SnowFlake.createStr("OI"));
 	}
 
 	public PriceDetailDTO getPriceDetailDTO() {
-	    return JSONUtil.toBean(priceDetail, PriceDetailDTO.class);
+		return JSONUtil.toBean(priceDetail, PriceDetailDTO.class);
 	}
 
 	public void setPriceDetailDTO(PriceDetailDTO priceDetail) {
-	    this.priceDetail = JSONUtil.toJsonStr(priceDetail);
+		this.priceDetail = JSONUtil.toJsonStr(priceDetail);
 	}
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

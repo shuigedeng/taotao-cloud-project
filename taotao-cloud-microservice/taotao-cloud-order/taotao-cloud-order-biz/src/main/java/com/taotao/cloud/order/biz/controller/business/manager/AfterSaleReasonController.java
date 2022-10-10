@@ -7,9 +7,9 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleReasonDTO;
 import com.taotao.cloud.order.api.model.query.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleReasonVO;
+import com.taotao.cloud.order.biz.model.convert.AfterSaleReasonConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
-import com.taotao.cloud.order.biz.convert.AfterSaleReasonConvert;
-import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleReasonService;
+import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -49,7 +49,7 @@ public class AfterSaleReasonController {
 	@GetMapping(value = "/{id}")
 	public Result<AfterSaleReasonVO> get(@PathVariable String id) {
 		AfterSaleReason afterSaleReason = afterSaleReasonService.getById(id);
-		return Result.success(AfterSaleReasonConvert.INSTANCE.afterSaleReasonToAfterSaleReasonVO(afterSaleReason));
+		return Result.success(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReason));
 	}
 
 	@Operation(summary = "分页获取售后原因", description = "分页获取售后原因")
@@ -66,7 +66,7 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO) {
-		afterSaleReasonService.save(AfterSaleReasonConvert.INSTANCE.afterSaleReasonDTOToAfterSaleReason(afterSaleReasonDTO));
+		afterSaleReasonService.save(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO));
 		return Result.success(true);
 	}
 
@@ -76,7 +76,7 @@ public class AfterSaleReasonController {
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO,
 								  @PathVariable("id") Long id) {
-		AfterSaleReason afterSaleReason = AfterSaleReasonConvert.INSTANCE.afterSaleReasonDTOToAfterSaleReason(afterSaleReasonDTO);
+		AfterSaleReason afterSaleReason = AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO);
 		afterSaleReason.setId(id);
 		return Result.success(afterSaleReasonService.editAfterSaleReason(afterSaleReason));
 	}

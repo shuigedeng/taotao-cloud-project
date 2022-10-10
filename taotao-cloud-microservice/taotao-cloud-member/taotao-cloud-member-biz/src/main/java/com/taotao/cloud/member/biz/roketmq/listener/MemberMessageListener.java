@@ -24,16 +24,16 @@ import com.taotao.cloud.member.biz.roketmq.event.MemberLoginEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberPointChangeEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberWithdrawalEvent;
-import com.taotao.cloud.member.biz.service.MemberSignService;
+import com.taotao.cloud.member.biz.service.business.IMemberSignService;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
-import java.util.List;
-
 import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 会员消息
@@ -46,7 +46,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 	 * 会员签到
 	 */
 	@Autowired
-	private MemberSignService memberSignService;
+	private IMemberSignService memberSignService;
 	/**
 	 * 会员积分变化
 	 */

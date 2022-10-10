@@ -8,10 +8,10 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
-import com.taotao.cloud.member.api.feign.IFeignMemberService;
+import com.taotao.cloud.member.api.feign.FeignMemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
@@ -61,12 +61,12 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 	 * 会员
 	 */
 	@Autowired
-	private IFeignMemberService memberService;
+	private FeignMemberApi memberService;
 	/**
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderService orderService;
+	private IFeignOrderApi orderService;
 
 	/**
 	 * 获取当前拼团的会员

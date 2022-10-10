@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.order.api.feign.fallback.FeignOrderFallbackImpl, \
-com.taotao.cloud.order.api.feign.fallback.FeignOrderItemFallbackImpl, \
-com.taotao.cloud.order.api.feign.fallback.FeignTradeFallbackImpl
+com.taotao.cloud.order.api.feign.fallback.FeignOrderApiFallback, \
+com.taotao.cloud.order.api.feign.fallback.FeignOrderItemApiFallback, \
+com.taotao.cloud.order.api.feign.fallback.FeignTradeApiFallback

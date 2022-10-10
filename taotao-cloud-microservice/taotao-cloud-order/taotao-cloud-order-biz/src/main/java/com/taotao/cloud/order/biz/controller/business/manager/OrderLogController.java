@@ -7,7 +7,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.query.order.OrderLogPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderLogVO;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
-import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
+import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -47,7 +47,7 @@ public class OrderLogController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageResult<OrderLogVO>> getByPage(OrderLogPageQuery orderLogPageQuery) {
-		IPage<OrderLog> orderLogPage = orderLogService.getByPage(orderLogPageQuery)
+		IPage<OrderLog> orderLogPage = orderLogService.getByPage(orderLogPageQuery);
 		return Result.success(PageResult.convertMybatisPage(orderLogPage, OrderLogVO.class));
 	}
 

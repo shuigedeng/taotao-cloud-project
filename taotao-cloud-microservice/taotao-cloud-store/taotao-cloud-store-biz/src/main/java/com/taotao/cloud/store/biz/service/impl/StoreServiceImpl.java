@@ -12,7 +12,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
-import com.taotao.cloud.member.api.feign.IFeignMemberService;
+import com.taotao.cloud.member.api.feign.FeignMemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
@@ -47,7 +47,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	 * 会员
 	 */
 	@Autowired
-	private IFeignMemberService memberService;
+	private FeignMemberApi memberService;
 	/**
 	 * 商品
 	 */

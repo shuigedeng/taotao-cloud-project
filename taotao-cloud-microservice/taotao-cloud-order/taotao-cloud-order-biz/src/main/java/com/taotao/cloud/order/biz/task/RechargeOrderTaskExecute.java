@@ -2,12 +2,12 @@ package com.taotao.cloud.order.biz.task;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
-import com.taotao.cloud.member.api.feign.IFeignMemberRechargeService;
+import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;
+import com.taotao.cloud.member.api.feign.FeignMemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
-import com.taotao.cloud.web.timetask.EveryMinuteExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 	 * 充值
 	 */
 	@Autowired
-	private IFeignMemberRechargeService rechargeService;
+	private FeignMemberRechargeApi rechargeService;
 	/**
 	 * 设置
 	 */

@@ -1,14 +1,14 @@
 package com.taotao.cloud.customer.biz.api.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowService;
+import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.web.query.BillPageQuery;
 import com.taotao.cloud.store.api.web.vo.BillListVO;
@@ -17,7 +17,6 @@ import com.taotao.cloud.store.biz.service.BillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,6 +25,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 店铺端,结算单接口
@@ -42,7 +43,7 @@ public class BillStoreController {
 	private BillService billService;
 
 	@Autowired
-	private IFeignStoreFlowService storeFlowService;
+	private IFeignStoreFlowApi storeFlowService;
 
 	@Operation(summary = "获取结算单分页", description = "获取结算单分页")
 	@RequestLogger

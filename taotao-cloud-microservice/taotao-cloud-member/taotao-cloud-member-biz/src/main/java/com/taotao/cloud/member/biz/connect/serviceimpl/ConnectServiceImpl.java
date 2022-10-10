@@ -23,7 +23,7 @@ import com.taotao.cloud.member.biz.connect.request.HttpUtils;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.member.biz.service.business.MemberService;
 import com.taotao.cloud.member.biz.token.MemberTokenGenerate;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;

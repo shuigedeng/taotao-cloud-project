@@ -4,9 +4,9 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
+import com.taotao.cloud.member.biz.model.convert.MemberConvert;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.member.biz.mapstruct.IMemberMapStruct;
-import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.member.biz.service.business.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -38,7 +38,7 @@ public class StoreUserController {
 	public Result<MemberVO> getUserInfo() {
 		Member member = memberService.findByUsername(SecurityUtils.getUsername());
 		member.setPassword(null);
-		return Result.success(IMemberMapStruct.INSTANCE.memberToMemberVO(member));
+		return Result.success(MemberConvert.INSTANCE.convert(member));
 	}
 
 

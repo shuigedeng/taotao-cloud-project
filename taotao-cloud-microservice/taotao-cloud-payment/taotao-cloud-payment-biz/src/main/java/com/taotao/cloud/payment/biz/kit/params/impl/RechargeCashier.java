@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.kit.params.impl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.member.api.feign.IFeignMemberRechargeService;
+import com.taotao.cloud.member.api.feign.FeignMemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.payment.api.enums.CashierEnum;
@@ -26,7 +26,7 @@ public class RechargeCashier implements CashierExecute {
 	 * 余额
 	 */
 	@Autowired
-	private IFeignMemberRechargeService rechargeService;
+	private FeignMemberRechargeApi rechargeService;
 	/**
 	 * 设置
 	 */

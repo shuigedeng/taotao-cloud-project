@@ -5,22 +5,22 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTOBuilder;
+import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.model.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleLogVO;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleReasonVO;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.biz.model.convert.AfterSaleConvert;
+import com.taotao.cloud.order.biz.model.convert.AfterSaleLogConvert;
+import com.taotao.cloud.order.biz.model.convert.AfterSaleReasonConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
-import com.taotao.cloud.order.biz.convert.AfterSaleLogConvert;
-import com.taotao.cloud.order.biz.convert.AfterSaleConvert;
-import com.taotao.cloud.order.biz.convert.AfterSaleReasonConvert;
-import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleLogService;
-import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleReasonService;
-import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
+import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
+import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonService;
+import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
 import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -75,7 +75,7 @@ public class AfterSaleController {
 	public Result<AfterSaleVO> get(
 		@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		AfterSale afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
-		return Result.success(AfterSaleConvert.INSTANCE.afterSaleToAfterSaleVO(afterSale));
+		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSale));
 	}
 
 	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务")
@@ -144,7 +144,7 @@ public class AfterSaleController {
 	public Result<List<AfterSaleReasonVO>> getAfterSaleReason(
 		@NotBlank(message = "售后类型不能为空") @PathVariable String serviceType) {
 		List<AfterSaleReason> afterSaleReasons = afterSaleReasonService.afterSaleReasonList(serviceType);
-		return Result.success(AfterSaleReasonConvert.INSTANCE.afterSaleReasonsToAfterSaleReasonVOs(afterSaleReasons));
+		return Result.success(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasons));
 	}
 
 	@Operation(summary = "获取售后日志", description = "获取售后日志")
@@ -153,7 +153,7 @@ public class AfterSaleController {
 	@GetMapping(value = "/afterSaleLog/{sn}")
 	public Result<List<AfterSaleLogVO>> getAfterSaleLog(@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		List<AfterSaleLog> afterSaleLogList = afterSaleLogService.getAfterSaleLog(sn);
-		return Result.success(AfterSaleLogConvert.INSTANCE.afterSaleLogsToAfterSaleVOs(afterSaleLogList));
+		return Result.success(AfterSaleLogConvert.INSTANCE.convert(afterSaleLogList));
 	}
 
 }

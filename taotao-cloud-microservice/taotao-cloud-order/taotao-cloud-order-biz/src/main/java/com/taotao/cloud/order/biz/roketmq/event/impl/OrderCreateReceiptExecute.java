@@ -7,7 +7,7 @@ import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
-import com.taotao.cloud.order.biz.service.order.IReceiptService;
+import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

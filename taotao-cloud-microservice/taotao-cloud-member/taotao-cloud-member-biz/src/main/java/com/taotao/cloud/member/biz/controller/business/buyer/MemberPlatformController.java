@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
-import com.taotao.cloud.member.biz.service.IMemberPlatformService;
+import com.taotao.cloud.member.biz.service.business.IMemberPlatformService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;

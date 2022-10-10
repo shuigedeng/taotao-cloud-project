@@ -5,7 +5,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
@@ -31,7 +31,7 @@ public class OrderCashier implements CashierExecute {
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderService orderService;
+	private IFeignOrderApi orderService;
 	/**
 	 * 设置
 	 */

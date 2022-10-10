@@ -10,9 +10,9 @@ import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.EvaluationNumberVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.biz.model.convert.MemberEvaluationConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
-import com.taotao.cloud.member.biz.mapstruct.IMemberEvaluationMapStruct;
-import com.taotao.cloud.member.biz.service.MemberEvaluationService;
+import com.taotao.cloud.member.biz.service.business.IMemberEvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -46,7 +46,7 @@ public class MemberEvaluationBuyerController {
 	/**
 	 * 会员商品评价
 	 */
-	private final MemberEvaluationService memberEvaluationService;
+	private final IMemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "添加会员评价", description = "添加会员评价")
 	@RequestLogger
@@ -63,7 +63,7 @@ public class MemberEvaluationBuyerController {
 	public Result<MemberEvaluationVO> queryById(
 		@Parameter(description = "评价ID", required = true) @NotBlank(message = "评价ID不能为空") @PathVariable("id") Long id) {
 		MemberEvaluation memberEvaluation = memberEvaluationService.queryById(id);
-		return Result.success(IMemberEvaluationMapStruct.INSTANCE.memberEvaluationToMemberEvaluationVO(memberEvaluation));
+		return Result.success(MemberEvaluationConvert.INSTANCE.convert(memberEvaluation));
 	}
 
 	@Operation(summary = "查看当前会员评价列表", description = "查看当前会员评价列表")
@@ -82,7 +82,7 @@ public class MemberEvaluationBuyerController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/goods-evaluation/{goodsId}")
 	public Result<PageResult<MemberEvaluationVO>> queryGoodsEvaluation(EvaluationPageQuery evaluationPageQuery,
-                                                                       @Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
+																	   @Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
 		//设置查询查询商品
 		evaluationPageQuery.setGoodsId(goodsId);
 		evaluationPageQuery.setStatus(SwitchEnum.OPEN.name());

@@ -12,7 +12,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
-import com.taotao.cloud.member.api.feign.IFeignMemberService;
+import com.taotao.cloud.member.api.feign.FeignMemberApi;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.web.dto.KanjiaActivityDTO;
@@ -53,7 +53,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 	@Autowired
 	private KanjiaActivityLogService kanjiaActivityLogService;
 	@Autowired
-	private IFeignMemberService memberService;
+	private FeignMemberApi memberService;
 	@Autowired
 	private IFeignGoodsSkuApi goodsSkuService;
 

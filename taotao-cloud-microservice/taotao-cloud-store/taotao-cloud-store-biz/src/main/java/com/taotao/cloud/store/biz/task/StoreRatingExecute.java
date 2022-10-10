@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.enums.SwitchEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
+import com.taotao.cloud.member.api.feign.FeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.biz.model.entity.Store;
@@ -30,7 +30,7 @@ public class StoreRatingExecute implements EveryDayExecute {
 	 * 会员评价
 	 */
 	@Resource
-	private IFeignMemberEvaluationService memberEvaluationService;
+	private FeignMemberEvaluationApi memberEvaluationService;
 
 	@Override
 	public void execute() {

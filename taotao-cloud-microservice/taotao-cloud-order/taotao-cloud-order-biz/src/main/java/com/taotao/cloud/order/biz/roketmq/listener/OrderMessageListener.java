@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.roketmq.listener;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.message.OrderMessage;
+import com.taotao.cloud.order.api.model.message.OrderMessage;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import com.taotao.cloud.redis.repository.RedisRepository;

@@ -3,11 +3,10 @@ package com.taotao.cloud.member.biz.controller.business.buyer;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberSignVO;
-import com.taotao.cloud.member.biz.service.MemberSignService;
+import com.taotao.cloud.member.biz.service.business.IMemberSignService;
 import com.taotao.cloud.netty.annotation.RequestParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 买家端-会员签到API
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/member/buyer/member/sign")
 public class MemberSignController {
 
-	private final MemberSignService memberSignService;
+	private final IMemberSignService memberSignService;
 
 	@Operation(summary = "会员签到", description = "会员签到")
 	@RequestLogger
