@@ -38,7 +38,8 @@ import reactor.core.publisher.Mono;
  * @since 2020/4/29 22:10
  */
 @Component
-public class CustomReactiveAuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
+public class GatewayReactiveAuthorizationManager implements
+	ReactiveAuthorizationManager<AuthorizationContext> {
 
 	@Autowired
 	private RedisRepository redisRepository;
@@ -54,7 +55,7 @@ public class CustomReactiveAuthorizationManager implements ReactiveAuthorization
 
 				// 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
 				Boolean hasKey = redisRepository.exists(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid);
-				if(hasKey){
+				if (hasKey) {
 					throw new InvalidTokenException("无效的token");
 				}
 			}
@@ -63,7 +64,7 @@ public class CustomReactiveAuthorizationManager implements ReactiveAuthorization
 			ServerHttpRequest request = exchange.getRequest();
 
 			//可在此处鉴权也可在各个微服务鉴权
-            //boolean isPermission = super.hasPermission(auth, request.getMethodValue(), request.getURI().getPath());
+			//boolean isPermission = super.hasPermission(auth, request.getMethodValue(), request.getURI().getPath());
 
 			return new AuthorizationDecision(true);
 		}).defaultIfEmpty(new AuthorizationDecision(false));

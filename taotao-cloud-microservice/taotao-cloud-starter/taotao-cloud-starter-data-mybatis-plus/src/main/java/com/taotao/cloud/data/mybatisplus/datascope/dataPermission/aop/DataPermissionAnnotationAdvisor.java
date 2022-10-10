@@ -17,9 +17,9 @@ public class DataPermissionAnnotationAdvisor extends DefaultPointcutAdvisor {
 
 	public DataPermissionAnnotationAdvisor() {
 		// 自定义通知
-		this.advice = new DataPermissionCustomAdvice();
+		this.advice = new DataPermissionAdvice();
 		// 自定义切入点
-		this.pointcut = DataPermissionCustomPointcut.of();
+		this.pointcut = DataPermissionPointcut.of();
 	}
 
 	@Override
@@ -43,7 +43,8 @@ public class DataPermissionAnnotationAdvisor extends DefaultPointcutAdvisor {
 		this.pointcut = pointcut;
 	}
 
-	public DataPermissionAnnotationAdvisor(Pointcut pointcut, Advice advice, Advice advice1, Pointcut pointcut1) {
+	public DataPermissionAnnotationAdvisor(Pointcut pointcut, Advice advice, Advice advice1,
+		Pointcut pointcut1) {
 		super(pointcut, advice);
 		this.advice = advice1;
 		this.pointcut = pointcut1;

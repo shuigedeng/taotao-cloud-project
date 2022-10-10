@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 /**
- * 使道道云oauth2资源
+ * 开启oauth2资源
  *
  * @author shuigedeng
  * @version 2022.06

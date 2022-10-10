@@ -16,6 +16,7 @@
 package com.taotao.cloud.sys.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
@@ -24,6 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +49,14 @@ public class BuyerDictController extends SimpleController<IDictService, Dict, Lo
 		return service().add();
 	}
 
+	@NotAuth
+	@GetMapping("/test/{code}")
+	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+	public Result<Boolean> testCode(@PathVariable("code") String code) {
+		Dict byCode = service().findByCode(code);
+		LogUtils.info(String.valueOf(byCode));
+		return Result.success(true);
+	}
 
 }
 

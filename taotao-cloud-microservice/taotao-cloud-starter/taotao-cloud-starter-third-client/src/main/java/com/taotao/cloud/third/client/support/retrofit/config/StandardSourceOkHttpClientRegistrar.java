@@ -7,7 +7,8 @@ import okhttp3.OkHttpClient;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomSourceOkHttpClientRegistrar implements SourceOkHttpClientRegistrar {
+public class StandardSourceOkHttpClientRegistrar implements SourceOkHttpClientRegistrar {
+
 	@Override
 	public void register(SourceOkHttpClientRegistry registry) {
 

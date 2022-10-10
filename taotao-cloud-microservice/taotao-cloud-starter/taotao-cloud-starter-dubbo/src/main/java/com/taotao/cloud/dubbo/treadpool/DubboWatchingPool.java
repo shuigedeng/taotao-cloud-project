@@ -16,10 +16,6 @@
 package com.taotao.cloud.dubbo.treadpool;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import org.apache.dubbo.common.URL;
-import org.apache.dubbo.common.threadpool.support.fixed.FixedThreadPool;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
@@ -27,6 +23,9 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import org.apache.dubbo.common.URL;
+import org.apache.dubbo.common.threadpool.support.fixed.FixedThreadPool;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 看着池
@@ -35,7 +34,7 @@ import java.util.concurrent.TimeUnit;
  * @version 2022.07
  * @since 2022-07-08 10:45:52
  */
-public class WatchingPool extends FixedThreadPool implements Runnable {
+public class DubboWatchingPool extends FixedThreadPool implements Runnable {
 
 	/**
 	 * 线程池预警值【可以根据实际情况动态调整大小】
@@ -44,7 +43,7 @@ public class WatchingPool extends FixedThreadPool implements Runnable {
 
 	private final Map<URL, ThreadPoolExecutor> theadPoolMap = new ConcurrentHashMap<>();
 
-	public WatchingPool() {
+	public DubboWatchingPool() {
 		// 创建一个定时任务，每3秒执行一次【可以根据实际情况动态调整参数】
 		new ScheduledThreadPoolExecutor(1, new ThreadFactory() {
 			@Override
@@ -80,7 +79,8 @@ public class WatchingPool extends FixedThreadPool implements Runnable {
 
 			LogUtils.info("线程池状态：{}/{},: {}%", activeCount, corePoolSize, percent * 100);
 			if (percent > ALARM_PERCENT) {
-				LogUtils.error("超出警戒线 : host:{}, 当前使用量 {}%, URL:{}", url.getHost(), percent * 100, url);
+				LogUtils.error("超出警戒线 : host:{}, 当前使用量 {}%, URL:{}", url.getHost(),
+					percent * 100, url);
 			}
 		}
 	}

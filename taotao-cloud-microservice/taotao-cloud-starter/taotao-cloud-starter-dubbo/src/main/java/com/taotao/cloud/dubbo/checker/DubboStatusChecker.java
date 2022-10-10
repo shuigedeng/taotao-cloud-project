@@ -13,31 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.dubbo.listener;
+package com.taotao.cloud.dubbo.checker;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
-import org.apache.dubbo.rpc.Invoker;
-import org.apache.dubbo.rpc.RpcException;
-import org.apache.dubbo.rpc.listener.InvokerListenerAdapter;
+import org.apache.dubbo.common.status.Status;
+import org.apache.dubbo.common.status.StatusChecker;
 
 /**
- * 自定义调用程序侦听器
+ * 自定义状态检查
  *
  * @author shuigedeng
  * @version 2022.07
- * @since 2022-07-08 10:18:59
+ * @since 2022-07-08 10:18:23
  */
-@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER}, order = 10003)
-public class CustomInvokerListener extends InvokerListenerAdapter {
-	@Override
-	public void referred(Invoker<?> invoker) throws RpcException {
-		LogUtils.info("CustomInvokerListener referred activate ------------------------------");
-	}
+@Activate
+public class DubboStatusChecker implements StatusChecker {
 
 	@Override
-	public void destroyed(Invoker<?> invoker) {
-		LogUtils.info("CustomInvokerListener destroyed activate ------------------------------");
+	public Status check() {
+		LogUtils.info("DubboStatusChecker activate ---------------------------------------");
+		return new Status(Status.Level.OK, "");
 	}
 }

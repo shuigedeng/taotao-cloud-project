@@ -19,26 +19,25 @@ import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterRegistry;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
+import java.time.Duration;
 import org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 import org.springframework.context.annotation.Bean;
-
-import java.time.Duration;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * CustomizeCircuitBreakerConfiguration
+ * GatewayCircuitBreakerConfiguration
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2021/11/23 14:28
  */
 @Configuration
-public class CustomizeCircuitBreakerConfiguration {
+public class GatewayCircuitBreakerConfiguration {
 
 	@Bean
-	public ReactiveResilience4JCircuitBreakerFactory defaultCustomizer(CircuitBreakerRegistry circuitBreakerRegistry,
+	public ReactiveResilience4JCircuitBreakerFactory reactiveResilience4JCircuitBreakerFactory(
+		CircuitBreakerRegistry circuitBreakerRegistry,
 		TimeLimiterRegistry timeLimiterRegistry) {
 
 		CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.custom()
@@ -60,8 +59,8 @@ public class CustomizeCircuitBreakerConfiguration {
 			.recordExceptions(Throwable.class)
 			.build();
 
-
-		ReactiveResilience4JCircuitBreakerFactory factory = new ReactiveResilience4JCircuitBreakerFactory(circuitBreakerRegistry, timeLimiterRegistry);
+		ReactiveResilience4JCircuitBreakerFactory factory = new ReactiveResilience4JCircuitBreakerFactory(
+			circuitBreakerRegistry, timeLimiterRegistry);
 		factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
 			.timeLimiterConfig(TimeLimiterConfig
 				.custom()

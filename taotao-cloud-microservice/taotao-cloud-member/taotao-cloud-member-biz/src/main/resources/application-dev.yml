@@ -337,18 +337,18 @@ spring:
     wait-for-jobs-to-complete-on-shutdown: true
     overwrite-existing-jobs: true
     properties:
-      org.quartz.scheduler.instanceName : quartzScheduler
-      org.quartz.scheduler.instanceId : AUTO
+      org.quartz.scheduler.instanceName: quartzScheduler
+      org.quartz.scheduler.instanceId: AUTO
       org.quartz.scheduler.rmi.export: false
       org.quartz.scheduler.rmi.proxy: false
       org.quartz.scheduler.wrapJobExecutionInUserTransaction: false
-      org.quartz.jobStore.class : org.quartz.simpl.RAMJobStore
+      org.quartz.jobStore.class: org.quartz.simpl.RAMJobStore
       org.quartz.jobStore.misfireThreshold: 60000
-      org.quartz.threadPool.class : org.quartz.simpl.SimpleThreadPool
-      org.quartz.threadPool.threadCount : 10
-      org.quartz.threadPool.threadNamePrefix : taotao-cloud-quartz-thread
-      org.quartz.threadPool.threadPriority : 5
-      org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread : true
+      org.quartz.threadPool.class: org.quartz.simpl.SimpleThreadPool
+      org.quartz.threadPool.threadCount: 10
+      org.quartz.threadPool.threadNamePrefix: taotao-cloud-quartz-thread
+      org.quartz.threadPool.threadPriority: 5
+      org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread: true
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
@@ -1024,7 +1024,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    log-impl: com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
+    log-impl: com.taotao.cloud.data.mybatisplus.log.StandardStdOutImpl
 
 feign:
   sentinel:

@@ -18,26 +18,27 @@ package com.taotao.cloud.dubbo.listener;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
-import org.apache.dubbo.rpc.Exporter;
+import org.apache.dubbo.rpc.Invoker;
 import org.apache.dubbo.rpc.RpcException;
-import org.apache.dubbo.rpc.listener.ExporterListenerAdapter;
+import org.apache.dubbo.rpc.listener.InvokerListenerAdapter;
 
 /**
- * 自定义出口国侦听器
+ * 自定义调用程序侦听器
  *
  * @author shuigedeng
  * @version 2022.07
- * @since 2022-07-08 10:18:50
+ * @since 2022-07-08 10:18:59
  */
-@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER}, order = 10002)
-public class CustomExporterListener extends ExporterListenerAdapter {
+@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER}, order = 10003)
+public class DubboInvokerListener extends InvokerListenerAdapter {
+
 	@Override
-	public void exported(Exporter<?> exporter) throws RpcException {
-		LogUtils.info("Dubbo CustomExporterListener exported activate ------------------------------");
+	public void referred(Invoker<?> invoker) throws RpcException {
+		LogUtils.info("DubboInvokerListener referred activate ------------------------------");
 	}
 
 	@Override
-	public void unexported(Exporter<?> exporter) {
-		LogUtils.info("Dubbo CustomExporterListener unexported activate ------------------------------");
+	public void destroyed(Invoker<?> invoker) {
+		LogUtils.info("DubboInvokerListener destroyed activate ------------------------------");
 	}
 }

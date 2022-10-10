@@ -30,22 +30,22 @@ import reactor.core.publisher.Mono;
  * @since 2022/01/06 16:42
  */
 @Component
-public class CustomRateLimiter extends AbstractRateLimiter<CustomRateLimiter.Config> {
+public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.Config> {
 
 	private final RateLimiter rateLimiter = RateLimiter.create(2.0);
 
-	public static final String CONFIG_PROPERTY_NAME="taotao-cloud-gateway-springcloud-rate-limiter";
+	public static final String CONFIG_PROPERTY_NAME = "taotao-cloud-gateway-springcloud-rate-limiter";
 
-	protected CustomRateLimiter(ConfigurationService configurationService) {
+	protected GatewayRateLimiter(ConfigurationService configurationService) {
 		super(Config.class, CONFIG_PROPERTY_NAME, configurationService);
 	}
 
 	@Override
 	public Mono<Response> isAllowed(String routeId, String id) {
 		Config config = getConfig().get(routeId);
-		return Mono.fromSupplier(()-> {
+		return Mono.fromSupplier(() -> {
 			boolean acquire = rateLimiter.tryAcquire(config.requestedToken);
-			if(acquire){
+			if (acquire) {
 				return new Response(true, Maps.newHashMap());
 			}
 
@@ -53,7 +53,8 @@ public class CustomRateLimiter extends AbstractRateLimiter<CustomRateLimiter.Con
 		});
 	}
 
-	public static class Config{
+	public static class Config {
+
 		// 每次请求多少个token
 		private Integer requestedToken;
 

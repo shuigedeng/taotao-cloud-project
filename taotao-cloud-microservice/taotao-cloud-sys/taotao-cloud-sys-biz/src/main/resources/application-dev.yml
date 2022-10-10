@@ -1273,7 +1273,6 @@ taotao:
         tenant:
           enabled: false
     core:
-      env: dev
       enabled: true
     captcha:
       enabled: false
@@ -1296,6 +1295,9 @@ taotao:
       enabled: true
       netty:
         enabled: true
+    security:
+      ignore-url:
+        - /test/{code}
 
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割

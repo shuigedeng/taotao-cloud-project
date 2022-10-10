@@ -17,28 +17,28 @@ package com.taotao.cloud.dubbo.treadpool;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.threadpool.ThreadPool;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
-
 /**
  * 自定义线程池
- *
+ * <p>
  * 如何估算线程数？
  * Dubbo的默认配置并不一定适合所有的业务场景，线程池的配置要根据具体的机器以及业务类型来决定。在电商业务类型下，任务大部分都是IO密集型的，而IO密集型的线程数可以根据如下公式计算得出：线程池线程数=CPU核数*(响应时间/（响应时间-调用第三方接口时间-访问数据库时间））。
- *
+ * <p>
  * 比如一个获取商品详细的接口平均响应时间为50ms，调用库存接口用了10ms，调用优惠接口用了10ms，调用数据库用来20ms，该服务所在机器CPU核数为10，则可以估算出线程数为:threads=10*(50/50-10-10-20)=50。
  *
  * @author shuigedeng
  * @version 2022.07
  * @since 2022-07-08 10:19:44
  */
-public class CustomThreadPool implements ThreadPool {
+public class DubboThreadPool implements ThreadPool {
+
 	@Override
 	public Executor getExecutor(URL url) {
-		LogUtils.info("Dubbo CustomThreadPool getExecutor activate ------------------------------");
+		LogUtils.info("DubboThreadPool getExecutor activate ------------------------------");
 		LogUtils.info(url.toFullString());
 
 		AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor executor = new AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor();

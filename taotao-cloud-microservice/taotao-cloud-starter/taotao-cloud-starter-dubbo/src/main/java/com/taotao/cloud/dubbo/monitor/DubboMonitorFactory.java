@@ -16,12 +16,11 @@
 package com.taotao.cloud.dubbo.monitor;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.monitor.Monitor;
 import org.apache.dubbo.monitor.support.AbstractMonitorFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 自定义监控工厂
@@ -30,16 +29,16 @@ import java.util.List;
  * @version 2022.07
  * @since 2022-07-08 10:19:23
  */
-public class CustomMonitorFactory extends AbstractMonitorFactory {
+public class DubboMonitorFactory extends AbstractMonitorFactory {
+
 	@Override
 	protected Monitor createMonitor(URL url) {
-		LogUtils.info("Dubbo CustomMonitorFactory getExecutor activate ------------------------------");
+		LogUtils.info("DubboMonitorFactory createMonitor activate ------------------------------");
 		LogUtils.info(url.toFullString());
-		return new CustomMonitor();
+		return new DubboMonitor();
 	}
 
-
-	public static class CustomMonitor implements Monitor {
+	public static class DubboMonitor implements Monitor {
 
 		@Override
 		public URL getUrl() {
@@ -58,13 +57,13 @@ public class CustomMonitorFactory extends AbstractMonitorFactory {
 
 		@Override
 		public void collect(URL statistics) {
-			LogUtils.info("CustomMonitor collect activate ------------------------------");
+			LogUtils.info("DubboMonitor collect activate ------------------------------");
 			LogUtils.info(statistics.toFullString());
 		}
 
 		@Override
 		public List<URL> lookup(URL query) {
-			LogUtils.info("CustomMonitor lookup activate ------------------------------");
+			LogUtils.info("DubboMonitor lookup activate ------------------------------");
 			LogUtils.info(query.toFullString());
 
 			return new ArrayList<>();

@@ -27,7 +27,7 @@ import reactor.core.publisher.Mono;
  * @version 2022.03
  * @since 2020/4/29 22:09
  */
-public class CustomReactiveAuthenticationManager implements ReactiveAuthenticationManager {
+public class GatewayReactiveAuthenticationManager implements ReactiveAuthenticationManager {
 
 	private static final String FAILURE = "token已失效";
 	private static final String EXPIRED = "token已过期";

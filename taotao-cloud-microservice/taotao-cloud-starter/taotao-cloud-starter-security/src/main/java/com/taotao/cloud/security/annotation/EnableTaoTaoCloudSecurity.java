@@ -26,9 +26,10 @@ import org.springframework.context.annotation.Import;
 @Documented
 @Import({
 	//Oauth2LoginSecurityConfigurer.class,
-//	CustomOAuth2AuthenticationSuccessHandler.class,
+	//CustomOAuth2AuthenticationSuccessHandler.class,
 	CustomLogoutSuccessHandler.class
 })
+@Deprecated
 public @interface EnableTaoTaoCloudSecurity {
 
 	String value() default "";
