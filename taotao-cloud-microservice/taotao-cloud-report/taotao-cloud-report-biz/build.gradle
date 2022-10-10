@@ -1,7 +1,11 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-report:taotao-cloud-report-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-stream")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rocketmq")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-xxl")
 
+    implementation project(":taotao-cloud-microservice:taotao-cloud-report:taotao-cloud-report-api")
 }
 
 mainClassName = "com.taotao.cloud.report.biz.TaoTaoCloudReportApplication"
