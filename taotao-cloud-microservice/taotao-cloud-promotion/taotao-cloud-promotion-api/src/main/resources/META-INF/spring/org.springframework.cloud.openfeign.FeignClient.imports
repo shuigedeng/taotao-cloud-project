@@ -1,0 +1,6 @@
+com.taotao.cloud.promotion.api.feign.fallback.FeignCouponApiFallback
+com.taotao.cloud.promotion.api.feign.fallback.FeignKanjiaActivityApiFallback
+com.taotao.cloud.promotion.api.feign.fallback.FeignMemberCouponApiFallback
+com.taotao.cloud.promotion.api.feign.fallback.FeignPintuanApiFallback
+com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionGoodsApiFallback
+com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionApiFallback

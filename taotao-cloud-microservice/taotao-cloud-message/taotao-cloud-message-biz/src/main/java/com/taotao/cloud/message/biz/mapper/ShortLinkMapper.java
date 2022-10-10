@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.mapper;
 
-import com.taotao.cloud.message.biz.entity.ShortLink;
+import com.taotao.cloud.message.biz.model.entity.ShortLink;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**

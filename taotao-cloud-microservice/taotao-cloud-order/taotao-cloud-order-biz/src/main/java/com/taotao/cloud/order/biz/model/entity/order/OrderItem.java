@@ -11,7 +11,7 @@ import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
-import com.taotao.cloud.promotion.api.web.vo.PromotionSkuVO;
+import com.taotao.cloud.promotion.api.model.vo.PromotionSkuVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

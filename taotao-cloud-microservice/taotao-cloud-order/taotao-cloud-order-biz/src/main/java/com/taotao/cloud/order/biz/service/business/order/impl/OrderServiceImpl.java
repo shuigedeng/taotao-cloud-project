@@ -57,8 +57,8 @@ import com.taotao.cloud.order.biz.service.business.order.IStoreFlowService;
 import com.taotao.cloud.order.biz.service.business.order.ITradeService;
 import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
-import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
-import com.taotao.cloud.promotion.api.web.vo.PintuanVO;
+import com.taotao.cloud.promotion.api.feign.IFeignPintuanApi;
+import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
@@ -71,16 +71,6 @@ import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsApi;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
-import lombok.AllArgsConstructor;
-import org.apache.poi.ss.util.CellRangeAddressList;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-import zipkin2.storage.Traces;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
@@ -89,6 +79,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import zipkin2.storage.Traces;
 
 /**
  * 子订单业务层实现
@@ -143,7 +142,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	/**
 	 * 拼团
 	 */
-	private final IFeignPintuanService pintuanService;
+	private final IFeignPintuanApi pintuanService;
 	/**
 	 * 交易服务
 	 */
@@ -208,7 +207,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public List<Order> queryListByPromotion(String orderPromotionType, String payStatus,
-											String parentOrderSn, String orderSn) {
+		String parentOrderSn, String orderSn) {
 		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 		//查找团长订单和已和当前拼团订单拼团的订单
 		queryWrapper.eq(Order::getOrderPromotionType, orderPromotionType)
@@ -220,7 +219,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public long queryCountByPromotion(String orderPromotionType, String payStatus,
-									  String parentOrderSn, String orderSn) {
+		String parentOrderSn, String orderSn) {
 		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 		//查找团长订单和已和当前拼团订单拼团的订单
 		queryWrapper.eq(Order::getOrderPromotionType, orderPromotionType)
@@ -366,8 +365,9 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		Order order = OperationalJudgment.judgment(this.getBySn(orderSn));
 
 		//要记录之前的收货地址，所以需要以代码方式进行调用 不采用注解
-		String message = "订单[" + orderSn + "]收货信息修改，由[" + order.getConsigneeDetail() + "]修改为["
-			+ memberAddressDTO.getConsigneeDetail() + "]";
+		String message =
+			"订单[" + orderSn + "]收货信息修改，由[" + order.getConsigneeDetail() + "]修改为["
+				+ memberAddressDTO.getConsigneeDetail() + "]";
 		//记录订单操作日志
 		BeanUtil.copyProperties(memberAddressDTO, order);
 		this.updateById(order);
@@ -635,7 +635,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page,
-												Wrapper<PaymentLogVO> queryWrapper) {
+		Wrapper<PaymentLogVO> queryWrapper) {
 		return baseMapper.queryPaymentLogs(page, queryWrapper);
 	}
 
@@ -652,7 +652,8 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 				.eq(Order::getStoreId, SecurityUtils.getCurrentUser().getStoreId())
 				.eq(Order::getSn, orderBatchDeliverDTO.getOrderSn()));
 			if (order == null) {
-				throw new BusinessException("订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");
+				throw new BusinessException(
+					"订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");
 			} else if (!order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
 				throw new BusinessException(
 					"订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不能发货");

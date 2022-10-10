@@ -31,17 +31,16 @@ import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
-import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
+import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponApi;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 订单状态处理类
@@ -69,7 +68,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	private IOrderLogService orderLogService;
 
 	@Autowired
-	private IFeignMemberCouponService memberCouponService;
+	private IFeignMemberCouponApi memberCouponService;
 
 	@Autowired
 	private IFeignGoodsSkuApi goodsSkuService;
@@ -88,7 +87,8 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 				if ((cartVO.giftList() != null && !cartVO.giftList().isEmpty())
 					|| (cartVO.giftPoint() != null && cartVO.giftPoint() > 0)
 					|| (cartVO.giftCouponList() != null && !cartVO.giftCouponList().isEmpty())) {
-					redisRepository.set(CachePrefix.ORDER.getPrefix() + cartVO.sn(), JSONUtil.toJsonStr(cartVO));
+					redisRepository.set(CachePrefix.ORDER.getPrefix() + cartVO.sn(),
+						JSONUtil.toJsonStr(cartVO));
 				}
 			}
 		);
@@ -98,8 +98,11 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	public void orderChange(OrderMessage orderMessage) {
 		//如果订单已支付
 		if (orderMessage.newStatus().equals(OrderStatusEnum.PAID)) {
-			LogUtils.info("满减活动，订单状态操作 {}", CachePrefix.ORDER.getPrefix() + orderMessage.orderSn());
-			renderGift(JSONUtil.toBean(redisRepository.get(CachePrefix.ORDER.getPrefix() + orderMessage.getOrderSn()).toString(), CartVO.class), orderMessage);
+			LogUtils.info("满减活动，订单状态操作 {}",
+				CachePrefix.ORDER.getPrefix() + orderMessage.orderSn());
+			renderGift(JSONUtil.toBean(
+				redisRepository.get(CachePrefix.ORDER.getPrefix() + orderMessage.getOrderSn())
+					.toString(), CartVO.class), orderMessage);
 		}
 	}
 
@@ -120,18 +123,20 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		//赠送积分判定
 		try {
 			if (cartVO.giftPoint() != null && cartVO.giftPoint() > 0) {
-				memberService.updateMemberPoint(cartVO.giftPoint().longValue(), PointTypeEnum.INCREASE.name(),
+				memberService.updateMemberPoint(cartVO.giftPoint().longValue(),
+					PointTypeEnum.INCREASE.name(),
 					order.getMemberId(), "订单满优惠赠送积分" + cartVO.giftPoint());
 			}
 		} catch (Exception e) {
 			LogUtils.error("订单赠送积分异常", e);
 		}
 
-
 		try {
 			//优惠券判定
 			if (cartVO.giftCouponList() != null && !cartVO.giftCouponList().isEmpty()) {
-				cartVO.giftCouponList().forEach(couponId -> memberCouponService.receiveCoupon(couponId, order.getMemberId(), order.getMemberName()));
+				cartVO.giftCouponList().forEach(
+					couponId -> memberCouponService.receiveCoupon(couponId, order.getMemberId(),
+						order.getMemberName()));
 			}
 		} catch (Exception e) {
 			LogUtils.error("订单赠送优惠券异常", e);
@@ -166,13 +171,16 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 
 		//赠品分类，分为实体商品/虚拟商品/电子卡券
 		List<GoodsSkuSpecGalleryVO> physicalSkus = goodsSkus.stream()
-			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.PHYSICAL_GOODS.name()))
+			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType()
+				.equals(GoodsTypeEnum.PHYSICAL_GOODS.name()))
 			.toList();
 		List<GoodsSkuSpecGalleryVO> virtualSkus = goodsSkus.stream()
-			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.VIRTUAL_GOODS.name()))
+			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType()
+				.equals(GoodsTypeEnum.VIRTUAL_GOODS.name()))
 			.toList();
 		List<GoodsSkuSpecGalleryVO> eCouponSkus = goodsSkus.stream()
-			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType().equals(GoodsTypeEnum.E_COUPON.name()))
+			.filter(goodsSku -> goodsSku.goodsSkuBase().goodsType()
+				.equals(GoodsTypeEnum.E_COUPON.name()))
 			.toList();
 
 		//如果赠品不为空，则生成对应的赠品订单
@@ -195,7 +203,8 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	 * @param orderTypeEnum 订单类型
 	 * @since 2022-05-16 17:35:18
 	 */
-	private void giftOrderHandler(List<GoodsSkuSpecGalleryVO> skuList, Order originOrder, OrderTypeEnum orderTypeEnum) {
+	private void giftOrderHandler(List<GoodsSkuSpecGalleryVO> skuList, Order originOrder,
+		OrderTypeEnum orderTypeEnum) {
 		//初始化订单对象/订单日志/自订单
 		Order order = new Order();
 		List<OrderItem> orderItems = new ArrayList<>();
@@ -216,7 +225,8 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		order.setClientType(originOrder.getClientType());
 		//订单日志
 		String message = "赠品订单[" + order.getSn() + "]创建";
-		orderLogs.add(new OrderLog(order.getSn(), originOrder.getMemberId(), UserEnum.MEMBER.name(), originOrder.getMemberName(), message));
+		orderLogs.add(new OrderLog(order.getSn(), originOrder.getMemberId(), UserEnum.MEMBER.name(),
+			originOrder.getMemberName(), message));
 
 		//生成子订单
 		for (GoodsSkuSpecGalleryVO goodsSku : skuList) {
@@ -251,8 +261,10 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 			.newStatus(OrderStatusEnum.PAID)
 			.build();
 
-		String destination = rocketmqCustomProperties.getOrderTopic() + ":" + OrderTagsEnum.STATUS_CHANGE.name();
+		String destination =
+			rocketmqCustomProperties.getOrderTopic() + ":" + OrderTagsEnum.STATUS_CHANGE.name();
 		//发送订单变更mq消息
-		rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(orderMessage), RocketmqSendCallbackBuilder.commonCallback());
+		rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(orderMessage),
+			RocketmqSendCallbackBuilder.commonCallback());
 	}
 }

@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.task;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
-import com.taotao.cloud.promotion.biz.service.MemberCouponService;
+import com.taotao.cloud.promotion.biz.service.business.MemberCouponService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

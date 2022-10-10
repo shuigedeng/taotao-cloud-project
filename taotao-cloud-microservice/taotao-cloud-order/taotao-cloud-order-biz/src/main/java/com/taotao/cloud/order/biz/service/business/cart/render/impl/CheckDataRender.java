@@ -17,17 +17,16 @@ import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
-import com.taotao.cloud.promotion.api.web.vo.PointsGoodsVO;
-import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.stereotype.Service;
-
+import com.taotao.cloud.promotion.api.feign.IFeignPintuanApi;
+import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import org.springframework.stereotype.Service;
 
 /**
  * 商品有效性校验
@@ -44,7 +43,7 @@ public class CheckDataRender implements ICartRenderStep {
 
 	private final IOrderService orderService;
 
-	private final IFeignPintuanService pintuanService;
+	private final IFeignPintuanApi pintuanService;
 
 	private final FeignMemberApi memberService;
 
@@ -113,7 +112,8 @@ public class CheckDataRender implements ICartRenderStep {
 				//设置购物车未选中
 				cartSkuVO.setChecked(false);
 				//设置失效消息
-				cartSkuVO.setErrorMessage("商品库存不足,现有库存数量[" + dataSku.getQuantity() + "]");
+				cartSkuVO.setErrorMessage(
+					"商品库存不足,现有库存数量[" + dataSku.getQuantity() + "]");
 			}
 		}
 	}

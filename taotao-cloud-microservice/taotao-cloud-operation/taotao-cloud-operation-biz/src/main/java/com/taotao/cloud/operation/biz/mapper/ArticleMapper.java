@@ -1,11 +1,11 @@
 package com.taotao.cloud.operation.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.operation.api.web.vo.ArticleVO;
+import com.taotao.cloud.operation.api.model.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.model.entity.Article;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 文章数据处理层
  */
-public interface ArticleMapper extends BaseSuperMapper<Article> {
+public interface ArticleMapper extends BaseSuperMapper<Article, Long> {
 
 	/**
 	 * 获取文章VO分页

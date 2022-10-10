@@ -2,7 +2,7 @@ package com.taotao.cloud.promotion.biz.task;
 
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
-import com.taotao.cloud.promotion.biz.service.SeckillService;
+import com.taotao.cloud.promotion.biz.service.business.SeckillService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.SeckillSetting;

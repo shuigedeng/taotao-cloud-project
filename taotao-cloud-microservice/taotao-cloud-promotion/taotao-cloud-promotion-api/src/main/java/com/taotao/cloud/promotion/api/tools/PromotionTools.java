@@ -4,7 +4,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.promotion.api.web.vo.BasePromotionsVO;
+import com.taotao.cloud.promotion.api.model.vo.BasePromotionsVO;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
