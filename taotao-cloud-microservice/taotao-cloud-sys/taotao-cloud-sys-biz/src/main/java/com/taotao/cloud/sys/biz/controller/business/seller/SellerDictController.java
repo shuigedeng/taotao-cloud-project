@@ -36,5 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "商户管理端-字典管理API", description = "商户管理端-字典管理API")
 public class SellerDictController extends SimpleController<IDictService, Dict, Long> {
 
+
 }
 

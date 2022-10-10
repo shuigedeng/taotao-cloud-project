@@ -19,6 +19,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.io.FileUtils;
 import com.taotao.cloud.common.utils.io.StreamUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.constant.GenConstants;
 import com.taotao.cloud.sys.biz.mapper.IGenTableColumnMapper;
 import com.taotao.cloud.sys.biz.mapper.IGenTableMapper;
@@ -173,7 +174,8 @@ public class GenTableServiceImpl extends
 						saveColumns.add(column);
 					}
 					if (CollUtil.isNotEmpty(saveColumns)) {
-						genTableColumnMapper.insertBatch(saveColumns);
+						int i = genTableColumnMapper.insertBatch(saveColumns);
+						LogUtils.info("importGenTable success {}", i);
 					}
 				}
 			}
@@ -296,7 +298,8 @@ public class GenTableServiceImpl extends
 			}
 		});
 		if (CollUtil.isNotEmpty(saveColumns)) {
-			genTableColumnMapper.insertBatch(saveColumns);
+			int i = genTableColumnMapper.insertBatch(saveColumns);
+			LogUtils.info("importGenTable success {}", i);
 		}
 
 		List<GenTableColumn> delColumns = StreamUtils.filter(tableColumns, column -> !dbTableColumnNames.contains(column.getColumnName()));
