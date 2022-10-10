@@ -1,15 +1,15 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
-import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
+import com.taotao.cloud.member.biz.service.business.IMemberPointsHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/member/buyer/member/points/history")
 public class MemberPointsHistoryController {
 
-	private final MemberPointsHistoryService memberPointsHistoryService;
+	private final IMemberPointsHistoryService memberPointsHistoryService;
 
 	@Operation(summary = "分页获取当前会员积分历史", description = "分页获取当前会员积分历史")
 	@RequestLogger

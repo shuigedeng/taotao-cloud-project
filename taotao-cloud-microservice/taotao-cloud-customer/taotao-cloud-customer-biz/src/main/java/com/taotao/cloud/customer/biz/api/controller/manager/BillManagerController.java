@@ -1,11 +1,11 @@
 package com.taotao.cloud.customer.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowService;
+import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.web.query.BillPageQuery;
 import com.taotao.cloud.store.api.web.vo.BillListVO;
@@ -14,7 +14,6 @@ import com.taotao.cloud.store.biz.service.BillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 管理端,商家结算单接口
@@ -37,7 +38,7 @@ public class BillManagerController {
 	private BillService billService;
 
 	@Autowired
-	private IFeignStoreFlowService storeFlowService;
+	private IFeignStoreFlowApi storeFlowService;
 
 	@Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
 	@RequestLogger
@@ -61,8 +62,8 @@ public class BillManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getStoreFlow")
 	public Result<PageResult<StoreFlowVO>> getStoreFlow(@Parameter(description = "结算单ID") @PathVariable String id,
-                                                        @Parameter(description = "流水类型:PAY、REFUND") String flowType,
-                                                        PageParam pageParam) {
+														@Parameter(description = "流水类型:PAY、REFUND") String flowType,
+														PageParam pageParam) {
 		IPage<StoreFlowVO> storeFlow = storeFlowService.getStoreFlow(id, flowType, pageParam);
 		return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
 	}

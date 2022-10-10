@@ -4,8 +4,8 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
-import com.taotao.cloud.order.biz.service.order.IOrderService;
-import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -35,7 +35,7 @@ public class OrderLogController {
 	private final IOrderLogService orderLogService;
 
 	private final IOrderService orderService;
-	
+
 	@Operation(summary = "通过订单编号获取订单日志", description = "通过订单编号获取订单日志")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")

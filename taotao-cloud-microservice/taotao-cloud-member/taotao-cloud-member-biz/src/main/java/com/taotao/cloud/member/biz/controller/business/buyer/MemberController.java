@@ -6,7 +6,7 @@
 //import com.taotao.cloud.member.api.query.MemberQuery;
 //import com.taotao.cloud.member.api.vo.MemberVO;
 //import com.taotao.cloud.member.biz.mapper.MemberMapper;
-//import com.taotao.cloud.member.biz.service.IMemberService;
+//import com.taotao.cloud.member.biz.service.business.IMemberService;
 //import io.swagger.v3.oas.annotations.tags.Tag;
 //import java.util.Objects;
 //import javax.validation.constraints.NotBlank;

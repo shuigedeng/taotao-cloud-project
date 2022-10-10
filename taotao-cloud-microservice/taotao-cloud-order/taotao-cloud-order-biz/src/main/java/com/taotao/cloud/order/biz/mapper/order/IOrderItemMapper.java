@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * 子订单数据处理层
  */
-public interface IOrderItemMapper extends BaseSuperMapper<OrderItem> {
+public interface IOrderItemMapper extends BaseSuperMapper<OrderItem, Long> {
 
 	/**
 	 * 获取等待操作订单子项目

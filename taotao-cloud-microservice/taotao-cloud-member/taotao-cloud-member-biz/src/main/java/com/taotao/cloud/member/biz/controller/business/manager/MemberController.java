@@ -9,9 +9,9 @@ import com.taotao.cloud.member.api.model.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.model.query.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberSearchVO;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
+import com.taotao.cloud.member.biz.model.convert.MemberConvert;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.member.biz.mapstruct.IMemberMapStruct;
-import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.member.biz.service.business.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -57,7 +57,7 @@ public class MemberController {
 	@GetMapping(value = "/{id}")
 	public Result<MemberVO> get(@PathVariable Long id) {
 		Member member = memberService.getById(id);
-		return Result.success(IMemberMapStruct.INSTANCE.memberToMemberVO(member));
+		return Result.success(MemberConvert.INSTANCE.convert(member));
 	}
 
 	@Operation(summary = "添加会员", description = "添加会员")

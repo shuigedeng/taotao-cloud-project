@@ -6,11 +6,10 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.service.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +39,6 @@ public class PaymentLogController {
 	@GetMapping("/tree")
 	public Result<IPage<PaymentLogVO>> getByPage(Order order,
 												 SearchVO searchVo) {
-		ElasticsearchConfiguration elasticsearchConfiguration
 		return Result.success(orderService.queryPaymentLogs(
 			PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
 	}

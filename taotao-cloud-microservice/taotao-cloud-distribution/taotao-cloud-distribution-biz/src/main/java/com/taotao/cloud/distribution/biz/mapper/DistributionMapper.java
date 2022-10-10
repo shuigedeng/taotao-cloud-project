@@ -1,7 +1,7 @@
 package com.taotao.cloud.distribution.biz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Update;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * 分销员数据处理层
  */
-public interface DistributionMapper extends BaseSuperMapper<Distribution> {
+public interface DistributionMapper extends BaseSuperMapper<Distribution, Long> {
 
 	/**
 	 * 修改分销员可提现金额

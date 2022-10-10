@@ -11,11 +11,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowService;
+import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.model.query.order.StoreFlowQuery;
 import com.taotao.cloud.store.api.enums.BillStatusEnum;
 import com.taotao.cloud.store.api.web.query.BillPageQuery;
@@ -24,8 +24,8 @@ import com.taotao.cloud.store.api.web.vo.StoreDetailInfoVO;
 import com.taotao.cloud.store.api.web.vo.StoreDetailVO;
 import com.taotao.cloud.store.api.web.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.web.vo.StoreFlowRefundDownloadVO;
-import com.taotao.cloud.store.biz.model.entity.Bill;
 import com.taotao.cloud.store.biz.mapper.BillMapper;
+import com.taotao.cloud.store.biz.model.entity.Bill;
 import com.taotao.cloud.store.biz.service.BillService;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +64,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
 	 * 商家流水
 	 */
 	@Autowired
-	private IFeignStoreFlowService storeFlowService;
+	private IFeignStoreFlowApi storeFlowService;
 
 	@Override
 	public void createBill(Long storeId, LocalDateTime startTime, LocalDateTime endTime) {

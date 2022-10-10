@@ -1,4 +1,3 @@
-
 package com.taotao.cloud.distribution.biz.service.impl;
 
 import cn.hutool.core.util.PageUtil;
@@ -11,16 +10,16 @@ import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.distribution.api.web.vo.DistributionCashSearchVO;
+import com.taotao.cloud.distribution.biz.mapper.DistributionCashMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
-import com.taotao.cloud.distribution.biz.mapper.DistributionCashMapper;
 import com.taotao.cloud.distribution.biz.service.DistributionCashService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
-import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.enums.MemberWithdrawalDestinationEnum;
 import com.taotao.cloud.member.api.enums.WithdrawStatusEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberWalletService;
+import com.taotao.cloud.member.api.feign.FeignMemberWalletApi;
+import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
@@ -49,7 +48,7 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
 	 * 会员余额
 	 */
 	@Autowired
-	private IFeignMemberWalletService memberWalletService;
+	private FeignMemberWalletApi memberWalletService;
 	@Autowired
 	private RocketMQTemplate rocketMQTemplate;
 	@Autowired

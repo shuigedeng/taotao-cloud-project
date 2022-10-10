@@ -1,0 +1,2 @@
+com.taotao.cloud.member.api.feign.fallback.FeignMemberApiFallback
+com.taotao.cloud.member.api.feign.fallback.FeignMemberEvaluationApiFallback

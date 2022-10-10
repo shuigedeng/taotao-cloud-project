@@ -7,8 +7,6 @@ import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
@@ -16,6 +14,8 @@ import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.AllArgsConstructor;
@@ -51,7 +51,7 @@ import java.util.Optional;
 @Table(name = Order.TABLE_NAME)
 @TableName(Order.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Order.TABLE_NAME, comment = "订单表")
-public class Order extends BaseSuperEntity<OrderInfo, Long> {
+public class Order extends BaseSuperEntity<Order, Long> {
 
 	public static final String TABLE_NAME = "tt_order";
 
@@ -433,7 +433,7 @@ public class Order extends BaseSuperEntity<OrderInfo, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

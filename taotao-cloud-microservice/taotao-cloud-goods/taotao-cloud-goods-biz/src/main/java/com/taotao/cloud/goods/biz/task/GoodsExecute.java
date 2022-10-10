@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.task;
 import cn.hutool.core.convert.Convert;
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
 import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
-import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationService;
+import com.taotao.cloud.member.api.feign.FeignMemberEvaluationApi;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -24,7 +24,7 @@ public class GoodsExecute implements EveryDayExecute {
 	 * 会员评价
 	 */
 	@Resource
-	private IFeignMemberEvaluationService memberEvaluationMapper;
+	private FeignMemberEvaluationApi memberEvaluationMapper;
 	/**
 	 * 货物映射器
 	 * 商品

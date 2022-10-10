@@ -1,14 +1,14 @@
 package com.taotao.cloud.store.biz.api.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowService;
+import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.model.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.web.query.BillPageQuery;
 import com.taotao.cloud.store.api.web.vo.BillListVO;
@@ -43,7 +43,7 @@ public class BillStoreController {
 	private BillService billService;
 
 	@Autowired
-	private IFeignStoreFlowService storeFlowService;
+	private IFeignStoreFlowApi storeFlowService;
 
 	@Operation(summary = "获取结算单分页", description = "获取结算单分页")
 	@RequestLogger

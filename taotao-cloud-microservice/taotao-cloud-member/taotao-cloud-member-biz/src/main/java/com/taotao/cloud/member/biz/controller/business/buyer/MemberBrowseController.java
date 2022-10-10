@@ -4,7 +4,7 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.member.biz.service.IMemberBrowseService;
+import com.taotao.cloud.member.biz.service.business.IMemberBrowseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

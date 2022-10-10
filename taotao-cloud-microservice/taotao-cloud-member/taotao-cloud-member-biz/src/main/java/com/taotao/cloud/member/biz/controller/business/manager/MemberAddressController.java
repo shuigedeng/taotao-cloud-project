@@ -1,13 +1,13 @@
 package com.taotao.cloud.member.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
-import com.taotao.cloud.member.biz.service.MemberAddressService;
+import com.taotao.cloud.member.biz.service.business.IMemberAddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,14 +36,14 @@ import javax.validation.Valid;
 @Tag(name = "管理端-会员地址管理API", description = "管理端-会员地址管理API")
 public class MemberAddressController {
 
-	private final MemberAddressService memberAddressService;
+	private final IMemberAddressService memberAddressService;
 
 	@Operation(summary = "会员地址分页列表", description = "会员地址分页列表")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{memberId}")
 	public Result<PageResult<MemberAddressVO>> getByPage(@Validated PageParam page,
-                                                         @Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") Long memberId) {
+														 @Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") Long memberId) {
 		IPage<MemberAddress> addressByMember = memberAddressService.getAddressByMember(page, memberId);
 		return Result.success(PageResult.convertMybatisPage(addressByMember, MemberAddressVO.class));
 	}

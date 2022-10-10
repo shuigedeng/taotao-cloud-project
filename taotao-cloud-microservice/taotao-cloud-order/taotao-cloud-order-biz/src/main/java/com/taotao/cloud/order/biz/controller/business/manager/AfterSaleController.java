@@ -6,9 +6,9 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.biz.model.convert.AfterSaleConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
-import com.taotao.cloud.order.biz.convert.AfterSaleConvert;
-import com.taotao.cloud.order.biz.service.aftersale.IAfterSaleService;
+import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
 import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,7 +61,7 @@ public class AfterSaleController {
 	@GetMapping(value = "/exportAfterSaleOrder")
 	public Result<List<AfterSaleVO>> exportAfterSaleOrder(AfterSalePageQuery searchParams) {
 		List<AfterSale> afterSales = afterSaleService.exportAfterSaleOrder(searchParams);
-		return Result.success(AfterSaleConvert.INSTANCE.afterSalesToAfterSaleVOs(afterSales));
+		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSales));
 	}
 
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情")
@@ -71,7 +71,7 @@ public class AfterSaleController {
 	public Result<AfterSaleVO> get(
 		@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
 		AfterSale afterSale = afterSaleService.getAfterSale(sn);
-		return Result.success(AfterSaleConvert.INSTANCE.afterSaleToAfterSaleVO(afterSale));
+		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSale));
 	}
 
 	@Operation(summary = "查看买家退货物流踪迹", description = "查看买家退货物流踪迹")

@@ -16,15 +16,15 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
+import com.taotao.cloud.member.biz.model.convert.MemberAddressConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
-import com.taotao.cloud.member.biz.mapstruct.IMemberAddressMapStruct;
-import com.taotao.cloud.member.biz.service.MemberAddressService;
+import com.taotao.cloud.member.biz.service.business.IMemberAddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -57,7 +57,7 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("/member/buyer/member/address")
 public class MemberAddressController {
 
-	private final MemberAddressService memberAddressService;
+	private final IMemberAddressService memberAddressService;
 
 	@Operation(summary = "分页获取当前会员收件地址列表", description = "分页获取当前会员收件地址列表")
 	@RequestLogger
@@ -76,7 +76,7 @@ public class MemberAddressController {
 		@Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") Long id) {
 		MemberAddress memberAddress = memberAddressService.getMemberAddress(id);
-		return Result.success(IMemberAddressMapStruct.INSTANCE.memberAddressToMemberAddressVO(memberAddress));
+		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddress));
 	}
 
 	@Operation(summary = "获取当前会员默认收件地址", description = "获取当前会员默认收件地址")
@@ -85,7 +85,7 @@ public class MemberAddressController {
 	@GetMapping(value = "/current/default")
 	public Result<MemberAddressVO> getDefaultShippingAddress() {
 		MemberAddress memberAddress = memberAddressService.getDefaultMemberAddress();
-		return Result.success(IMemberAddressMapStruct.INSTANCE.memberAddressToMemberAddressVO(memberAddress));
+		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddress));
 	}
 
 	@Operation(summary = "新增会员收件地址", description = "新增会员收件地址")

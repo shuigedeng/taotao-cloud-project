@@ -10,7 +10,7 @@ import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberService;
+import com.taotao.cloud.member.api.feign.FeignMemberApi;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
@@ -18,19 +18,19 @@ import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.message.OrderMessage;
 import com.taotao.cloud.order.api.message.OrderMessageBuilder;
 import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
+import com.taotao.cloud.order.api.model.message.OrderMessage;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
-import com.taotao.cloud.order.biz.service.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.order.IOrderService;
-import com.taotao.cloud.order.biz.service.trade.IOrderLogService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
 import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -57,7 +57,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	private RedisRepository redisRepository;
 
 	@Autowired
-	private IFeignMemberService memberService;
+	private FeignMemberApi memberService;
 
 	@Autowired
 	private IOrderService orderService;

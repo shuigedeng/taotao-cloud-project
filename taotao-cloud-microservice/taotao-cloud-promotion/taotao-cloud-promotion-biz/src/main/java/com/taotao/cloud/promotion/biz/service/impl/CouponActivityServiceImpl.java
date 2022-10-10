@@ -6,20 +6,20 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.member.api.feign.IFeignMemberService;
+import com.taotao.cloud.member.api.feign.FeignMemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
-import com.taotao.cloud.promotion.api.web.dto.CouponActivityDTO;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
+import com.taotao.cloud.promotion.api.web.dto.CouponActivityDTO;
 import com.taotao.cloud.promotion.api.web.vo.CouponActivityVO;
+import com.taotao.cloud.promotion.biz.mapper.CouponActivityMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivity;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivityItem;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
-import com.taotao.cloud.promotion.biz.mapper.CouponActivityMapper;
 import com.taotao.cloud.promotion.biz.service.CouponActivityItemService;
 import com.taotao.cloud.promotion.biz.service.CouponActivityService;
 import com.taotao.cloud.promotion.biz.service.CouponService;
@@ -53,7 +53,7 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 	@Autowired
 	private CouponActivityItemService couponActivityItemService;
 	@Autowired
-	private IFeignMemberService memberService;
+	private FeignMemberApi memberService;
 
 	@Override
 	public CouponActivityVO getCouponActivityVO(String couponActivityId) {

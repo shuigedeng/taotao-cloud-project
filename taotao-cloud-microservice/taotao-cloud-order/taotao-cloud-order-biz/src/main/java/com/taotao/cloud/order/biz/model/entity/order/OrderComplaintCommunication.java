@@ -34,7 +34,7 @@ import java.util.Objects;
 @Table(name = OrderComplaintCommunication.TABLE_NAME)
 @TableName(OrderComplaintCommunication.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = OrderComplaintCommunication.TABLE_NAME, comment = "订单交易投诉通信表")
-public class OrderComplaintCommunication extends BaseSuperEntity<OrderInfo, Long> {
+public class OrderComplaintCommunication extends BaseSuperEntity<OrderComplaintCommunication, Long> {
 
 	public static final String TABLE_NAME = "tt_order_complaint_communication";
 
@@ -69,7 +69,7 @@ public class OrderComplaintCommunication extends BaseSuperEntity<OrderInfo, Long
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

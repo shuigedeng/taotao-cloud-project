@@ -7,9 +7,9 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.biz.model.convert.MemberEvaluationConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
-import com.taotao.cloud.member.biz.mapstruct.IMemberEvaluationMapStruct;
-import com.taotao.cloud.member.biz.service.MemberEvaluationService;
+import com.taotao.cloud.member.biz.service.business.IMemberEvaluationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,7 +36,7 @@ import javax.validation.constraints.NotNull;
 @Tag(name = "管理端-会员商品评价管理API", description = "管理端-会员商品评价管理API")
 public class MemberEvaluationController {
 
-	private final MemberEvaluationService memberEvaluationService;
+	private final IMemberEvaluationService memberEvaluationService;
 
 	@Operation(summary = "通过id获取评论", description = "通过id获取评论")
 	@RequestLogger
@@ -44,7 +44,7 @@ public class MemberEvaluationController {
 	@GetMapping(value = "/{id}")
 	public Result<MemberEvaluationVO> get(@PathVariable Long id) {
 		MemberEvaluation memberEvaluation = memberEvaluationService.queryById(id);
-		return Result.success(IMemberEvaluationMapStruct.INSTANCE.memberEvaluationToMemberEvaluationVO(memberEvaluation));
+		return Result.success(MemberEvaluationConvert.INSTANCE.convert(memberEvaluation));
 	}
 
 	@Operation(summary = "获取评价分页", description = "获取评价分页")

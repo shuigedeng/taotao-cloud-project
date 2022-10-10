@@ -4,8 +4,8 @@ package com.taotao.cloud.member.biz.roketmq.event.impl;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
-import com.taotao.cloud.member.biz.service.MemberService;
-import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.ExperienceSettingVO;
@@ -32,7 +32,7 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderService orderService;
+	private IFeignOrderApi orderService;
 
 	/**
 	 * 会员注册赠送经验值

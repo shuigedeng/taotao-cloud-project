@@ -30,11 +30,11 @@ import javax.persistence.EntityManager;
 @Repository
 public class OrderInfoRepository extends BaseCrSuperRepository<OrderInfo, Long> {
 
-	public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
-
 	public OrderInfoRepository(EntityManager em) {
 		super(OrderInfo.class, em);
 	}
+
+	public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
 
 	public OrderInfo findOrderInfoById(Long id) {
 		OrderInfo fetch = jpaQueryFactory()

@@ -1,12 +1,12 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.GoodsCollectionVO;
-import com.taotao.cloud.member.biz.service.IMemberGoodsCollectionService;
+import com.taotao.cloud.member.biz.service.business.IMemberGoodsCollectionService;
 import com.taotao.cloud.store.api.feign.IFeignStoreCollectionService;
 import com.taotao.cloud.store.api.web.vo.StoreCollectionVO;
 import io.swagger.v3.oas.annotations.Operation;

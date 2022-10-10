@@ -14,7 +14,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
-import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
@@ -103,7 +103,7 @@ public class WechatPlugin implements Payment {
 	 * 联合登陆
 	 */
 	@Autowired
-	private IFeignOrderService orderService;
+	private IFeignOrderApi orderService;
 
 
 	@Override

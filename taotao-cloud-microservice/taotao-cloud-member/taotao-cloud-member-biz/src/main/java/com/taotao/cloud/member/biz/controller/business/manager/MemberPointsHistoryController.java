@@ -8,7 +8,7 @@ import com.taotao.cloud.member.api.model.query.MemberPointHistoryPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
-import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
+import com.taotao.cloud.member.biz.service.business.IMemberPointsHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-会员积分历史管理API", description = "管理端-会员积分历史管理API")
 public class MemberPointsHistoryController {
 
-	private final MemberPointsHistoryService memberPointsHistoryService;
+	private final IMemberPointsHistoryService memberPointsHistoryService;
 
 	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger

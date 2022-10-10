@@ -1,13 +1,14 @@
 package com.taotao.cloud.auth.biz.service;
 
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.member.api.feign.IFeignMemberService;
-import java.util.HashSet;
-import java.util.Set;
+import com.taotao.cloud.member.api.feign.FeignMemberApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -20,7 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class MemberUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private IFeignMemberService feignMemberService;
+	private FeignMemberApi feignMemberService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
