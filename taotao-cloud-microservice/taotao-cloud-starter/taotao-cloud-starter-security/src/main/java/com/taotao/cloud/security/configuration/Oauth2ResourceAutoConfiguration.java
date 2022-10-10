@@ -23,8 +23,8 @@ import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.support.function.FuncUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.access.RoleBasedVoter;
@@ -32,6 +32,17 @@ import com.taotao.cloud.security.access.UrlSecurityPermsLoad;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.security.perm.VipAccessDecisionManager;
 import com.taotao.cloud.security.perm.VipSecurityOauthService;
+import com.taotao.cloud.security.properties.SecurityProperties;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -57,6 +68,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder.JwkSetUriJwtDecoderBuilder;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
@@ -67,17 +79,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.util.pattern.PathPattern;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * Oauth2ResourceSecurityConfigurer
@@ -91,6 +92,9 @@ public class Oauth2ResourceAutoConfiguration {
 
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
+
+	@Autowired
+	private SecurityProperties securityProperties;
 
 	@Autowired
 	private CacheManager redisCacheManager;
@@ -109,13 +113,17 @@ public class Oauth2ResourceAutoConfiguration {
 				.findFirst()
 				.orElse(jwkSetUri);
 		}
-		Cache cache = redisCacheManager.getCache("jwt");
 
-		NimbusJwtDecoder nimbusJwtDecoder = NimbusJwtDecoder
-			.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank, "http://127.0.0.1:33336/oauth2/jwks"))
-			.cache(cache)
-			.jwsAlgorithm(SignatureAlgorithm.RS256)
-			.build();
+		JwkSetUriJwtDecoderBuilder jwkSetUriJwtDecoderBuilder = NimbusJwtDecoder
+			.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
+				"http://127.0.0.1:33336/oauth2/jwks"))
+			.jwsAlgorithm(SignatureAlgorithm.RS256);
+
+		Cache cache = redisCacheManager.getCache("jwt");
+		if (cache != null) {
+			jwkSetUriJwtDecoderBuilder.cache(cache);
+		}
+		NimbusJwtDecoder nimbusJwtDecoder = jwkSetUriJwtDecoderBuilder.build();
 		nimbusJwtDecoder.setJwtValidator(JwtValidators.createDefault());
 		return nimbusJwtDecoder;
 	}
@@ -130,30 +138,32 @@ public class Oauth2ResourceAutoConfiguration {
 	}
 
 	@Bean
-	public VipSecurityOauthService vipSecurityOauthService(){
+	public VipSecurityOauthService vipSecurityOauthService() {
 		return new VipSecurityOauthService();
 	}
+
 	@Bean
-	public VipAccessDecisionManager vipAccessDecisionManager(){
+	public VipAccessDecisionManager vipAccessDecisionManager() {
 		return new VipAccessDecisionManager();
 	}
 
 	@Bean
-	public RoleBasedVoter roleBasedVoter(){
+	public RoleBasedVoter roleBasedVoter() {
 		return new RoleBasedVoter();
 	}
+
 	@Bean
-	public UrlSecurityPermsLoad urlSecurityPermsLoad(){
+	public UrlSecurityPermsLoad urlSecurityPermsLoad() {
 		return new UrlSecurityPermsLoad();
 	}
 
 	@Bean
-	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http,
-		VipSecurityOauthService vipSecurityOauthService,
-		VipAccessDecisionManager vipAccessDecisionManager,
-		RoleBasedVoter roleBasedVoter,
-		UrlSecurityPermsLoad urlSecurityPermsLoad)
-		throws Exception {
+	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http
+		//VipSecurityOauthService vipSecurityOauthService,
+		//VipAccessDecisionManager vipAccessDecisionManager,
+		//RoleBasedVoter roleBasedVoter,
+		//UrlSecurityPermsLoad urlSecurityPermsLoad
+	) throws Exception {
 		HttpSecurity httpSecurity = http
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.NEVER)
@@ -164,31 +174,31 @@ public class Oauth2ResourceAutoConfiguration {
 				registry
 					.anyRequest()
 					.authenticated();
-					// 动态权限
-					//.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-					//	@Override
-					//	public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
-					//		fi.setSecurityMetadataSource(new VipSecurityMetadataSource(fi.getSecurityMetadataSource(), vipSecurityOauthService));
-					//		fi.setAccessDecisionManager(vipAccessDecisionManager);
-					//
-					//		return fi;
-					//	}
-					//})
-					//.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-					//	@Override
-					//	public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
-					//		fi.setSecurityMetadataSource(new CustomFilterInvocationSecurityMetadataSource(urlSecurityPermsLoad, fi.getSecurityMetadataSource()));
-					//		List<AccessDecisionVoter<? extends Object>> decisionVoters
-					//			= Arrays.asList(
-					//			new WebExpressionVoter(),
-					//			roleBasedVoter,
-					//			new AuthenticatedVoter());
-					//		UnanimousBased based = new UnanimousBased(decisionVoters);
-					//		fi.setAccessDecisionManager(based);
-					//
-					//		return fi;
-					//	}
-					//});
+				// 动态权限
+				//.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+				//	@Override
+				//	public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
+				//		fi.setSecurityMetadataSource(new VipSecurityMetadataSource(fi.getSecurityMetadataSource(), vipSecurityOauthService));
+				//		fi.setAccessDecisionManager(vipAccessDecisionManager);
+				//
+				//		return fi;
+				//	}
+				//})
+				//.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+				//	@Override
+				//	public <O extends FilterSecurityInterceptor> O postProcess(O fi) {
+				//		fi.setSecurityMetadataSource(new CustomFilterInvocationSecurityMetadataSource(urlSecurityPermsLoad, fi.getSecurityMetadataSource()));
+				//		List<AccessDecisionVoter<? extends Object>> decisionVoters
+				//			= Arrays.asList(
+				//			new WebExpressionVoter(),
+				//			roleBasedVoter,
+				//			new AuthenticatedVoter());
+				//		UnanimousBased based = new UnanimousBased(decisionVoters);
+				//		fi.setAccessDecisionManager(based);
+				//
+				//		return fi;
+				//	}
+				//});
 			})
 			.oauth2ResourceServer(config -> config
 				.accessDeniedHandler((request, response, accessDeniedException) -> {
@@ -205,47 +215,28 @@ public class Oauth2ResourceAutoConfiguration {
 		return httpSecurity.build();
 	}
 
-	// @Override
-	// protected void configure(HttpSecurity http) throws Exception {
-	// 	http.csrf().disable()
-	// 		.authorizeRequests(registry -> {
-	// 			permitAllUrls(registry, http.getSharedObject(ApplicationContext.class));
-	// 			registry.anyRequest().authenticated();
-	// 		})
-	// 		.oauth2ResourceServer(config -> config
-	// 			.accessDeniedHandler((request, response, accessDeniedException) -> {
-	// 				LogUtil.error("用户权限不足", accessDeniedException);
-	// 				ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
-	// 			})
-	// 			.authenticationEntryPoint((request, response, authException) -> {
-	// 				LogUtil.error("用户未登录认证失败", authException);
-	// 				ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
-	// 			})
-	// 			.bearerTokenResolver(bearerTokenResolver())
-	// 			.jwt(jwt -> jwt.decoder(jwtDecoder())
-	// 				.jwtAuthenticationConverter(jwtAuthenticationConverter())));
-	// }
-
 	private void permitAllUrls(
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry,
 		ApplicationContext ac) {
-		List<String> permitAllUrls = new ArrayList<>(Arrays.asList(
-			"/swagger-ui.html",
-			"/v3/**",
-			"/favicon.ico",
-			"/swagger-resources/**",
-			"/webjars/**",
-			"/actuator/**",
-			"/index",
-			"/index.html",
-			"/doc.html",
-			"/*.js",
-			"/*.css",
-			"/*.json",
-			"/*.min.js",
-			"/*.min.css",
-			"/doc/**",
-			"/health/**"));
+		List<String> permitAllUrls = securityProperties.getIgnoreUrl();
+
+		//List<String> permitAllUrls = new ArrayList<>(Arrays.asList(
+		//	"/swagger-ui.html",
+		//	"/v3/**",
+		//	"/favicon.ico",
+		//	"/swagger-resources/**",
+		//	"/webjars/**",
+		//	"/actuator/**",
+		//	"/index",
+		//	"/index.html",
+		//	"/doc.html",
+		//	"/*.js",
+		//	"/*.css",
+		//	"/*.json",
+		//	"/*.min.js",
+		//	"/*.min.css",
+		//	"/doc/**",
+		//	"/health/**"));
 
 		RequestMappingHandlerMapping mapping = ac.getBean("requestMappingHandlerMapping",
 			RequestMappingHandlerMapping.class);
@@ -324,8 +315,7 @@ public class Oauth2ResourceAutoConfiguration {
 
 		/**
 		 * Sets the name of token claim to use for mapping {@link GrantedAuthority authorities} by
-		 * this converter. Defaults to
-		 * .
+		 * this converter. Defaults to .
 		 *
 		 * @param authoritiesClaimName The token claim name to map authorities
 		 * @since 5.2
@@ -365,7 +355,7 @@ public class Oauth2ResourceAutoConfiguration {
 				return Collections.emptyList();
 			}
 			if (authorities instanceof Collection) {
-				return castAuthoritiesToCollection(authorities);
+				return (Collection<String>) authorities;
 			}
 			return Collections.emptyList();
 		}
@@ -378,7 +368,7 @@ public class Oauth2ResourceAutoConfiguration {
 
 	@Configuration
 	@ConditionalOnNacosDiscoveryEnabled
-	public static class NacosServiceListenerWithAuth implements InitializingBean {
+	public static class NimbusReactiveJwtDecoderNacosServiceListener implements InitializingBean {
 
 		@Autowired
 		private NacosServiceManager nacosServiceManager;
@@ -394,11 +384,12 @@ public class Oauth2ResourceAutoConfiguration {
 					event -> {
 						if (event instanceof NamingEvent) {
 							List<Instance> instances = ((NamingEvent) event).getInstances();
-							if(instances.isEmpty()){
+							if (instances.isEmpty()) {
 								return;
 							}
 							Instance instance = instances.get(0);
-							String jwkSetUri = String.format("http://%s:%s" + "/oauth2/jwks", instance.getIp(), instance.getPort());
+							String jwkSetUri = String.format("http://%s:%s" + "/oauth2/jwks",
+								instance.getIp(), instance.getPort());
 
 							NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder
 								.withJwkSetUri(jwkSetUri)
@@ -406,7 +397,8 @@ public class Oauth2ResourceAutoConfiguration {
 								.build();
 							nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
 							ContextUtils.destroySingletonBean("reactiveJwtDecoder");
-							ContextUtils.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
+							ContextUtils.registerSingletonBean("reactiveJwtDecoder",
+								nimbusReactiveJwtDecoder);
 						}
 					});
 		}

@@ -32,34 +32,38 @@ import reactor.core.publisher.Mono;
  * 认证成功处理类
  *
  * @author shuigedeng
- * @since 2020/4/29 22:10
  * @version 2022.03
+ * @since 2020/4/29 22:10
  */
-public class CustomServerAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
+public class GatewayServerAuthenticationSuccessHandler implements
+	ServerAuthenticationSuccessHandler {
 
-    @Override
-    public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
-        MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
-        Object principal = authentication.getPrincipal();
+	@Override
+	public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange,
+		Authentication authentication) {
+		MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
+		Object principal = authentication.getPrincipal();
 
-        if (principal instanceof SecurityUser) {
-            SecurityUser user = (SecurityUser) authentication.getPrincipal();
-            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_ID_HEADER, String.valueOf(user.getUserId()));
-            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_HEADER, JSON.toJSONString(user));
-            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_NAME_HEADER, user.getUsername());
-        }
+		if (principal instanceof SecurityUser) {
+			SecurityUser user = (SecurityUser) authentication.getPrincipal();
+			headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_ID_HEADER,
+				String.valueOf(user.getUserId()));
+			headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_HEADER, JSON.toJSONString(user));
+			headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_NAME_HEADER, user.getUsername());
+		}
 
 //        OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
 //        String clientId = oauth2Authentication.getOAuth2Request().getClientId();
 //        headerValues.add(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, clientId);
-        headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_ROLE_HEADER, CollectionUtil.join(authentication.getAuthorities(), ","));
+		headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_ROLE_HEADER,
+			CollectionUtil.join(authentication.getAuthorities(), ","));
 
-        ServerWebExchange exchange = webFilterExchange.getExchange();
-        ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
-                .headers(h -> h.addAll(headerValues))
-                .build();
+		ServerWebExchange exchange = webFilterExchange.getExchange();
+		ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
+			.headers(h -> h.addAll(headerValues))
+			.build();
 
-        ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
-        return webFilterExchange.getChain().filter(build);
-    }
+		ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
+		return webFilterExchange.getChain().filter(build);
+	}
 }

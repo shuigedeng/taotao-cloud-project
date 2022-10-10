@@ -1,26 +1,25 @@
 package com.taotao.cloud.data.mybatisplus.datascope.dataPermission.aop;
 
 import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.annotation.DataPermission;
+import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.core.MethodClassKey;
 import org.springframework.core.annotation.AnnotationUtils;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * 自定义Advice 处理数据权限的拦截器 1. 在执行方法前，将 数据权限 注解入栈 2. 在执行方法后，将 数据权限 注解出栈
  */
 @DataPermission
-public class DataPermissionCustomAdvice implements MethodInterceptor {
+public class DataPermissionAdvice implements MethodInterceptor {
 
 	/**
 	 * DataPermission 空对象，方法无数据权限注解时，使用DATA_PERMISSION_NULL占位
 	 */
-	static final DataPermission DATA_PERMISSION_NULL = DataPermissionCustomAdvice.class
+	static final DataPermission DATA_PERMISSION_NULL = DataPermissionAdvice.class
 		.getAnnotation(DataPermission.class);
 
 	private final Map<MethodClassKey, DataPermission> dataPermissionCache = new ConcurrentHashMap<>();
@@ -29,7 +28,7 @@ public class DataPermissionCustomAdvice implements MethodInterceptor {
 		return dataPermissionCache;
 	}
 
-	public DataPermissionCustomAdvice() {
+	public DataPermissionAdvice() {
 	}
 
 	@Override
@@ -56,7 +55,8 @@ public class DataPermissionCustomAdvice implements MethodInterceptor {
 	private DataPermission findAnnotation(MethodInvocation methodInvocation) {
 		Method method = methodInvocation.getMethod();
 		Object targetObject = methodInvocation.getThis();
-		Class<?> clazz = Objects.nonNull(targetObject) ? targetObject.getClass() : method.getDeclaringClass();
+		Class<?> clazz =
+			Objects.nonNull(targetObject) ? targetObject.getClass() : method.getDeclaringClass();
 		MethodClassKey methodClassKey = new MethodClassKey(method, clazz);
 
 		// 从缓存中获取数据权限注解

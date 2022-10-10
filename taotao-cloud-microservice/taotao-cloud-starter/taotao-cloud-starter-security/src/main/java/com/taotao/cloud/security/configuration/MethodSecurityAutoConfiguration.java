@@ -51,7 +51,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 	@Override
 	protected MethodSecurityExpressionHandler createExpressionHandler() {
 		DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
-		expressionHandler.setPermissionEvaluator(new CustomPermissionEvaluator());
+		expressionHandler.setPermissionEvaluator(new StandardPermissionEvaluator());
 		expressionHandler.setApplicationContext(this.applicationContext);
 		return expressionHandler;
 	}
@@ -105,7 +105,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 		}
 	}
 
-	public static class CustomPermissionEvaluator implements PermissionEvaluator {
+	public static class StandardPermissionEvaluator implements PermissionEvaluator {
 
 		/**
 		 * 用于SpEL表达式解析.

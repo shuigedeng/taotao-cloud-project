@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.gateway.springcloud.error;
 
+import java.util.Collections;
+import java.util.List;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -34,9 +36,6 @@ import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.result.view.ViewResolver;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
  * 自定义异常处理
  *
@@ -49,7 +48,7 @@ import java.util.List;
 @ConditionalOnClass(WebFluxConfigurer.class)
 @AutoConfigureBefore(WebFluxAutoConfiguration.class)
 @EnableConfigurationProperties({ServerProperties.class, WebProperties.class})
-public class CustomErrorWebFluxAutoConfiguration {
+public class GatewayErrorWebFluxAutoConfiguration {
 
 	private final ServerProperties serverProperties;
 	private final ApplicationContext applicationContext;
@@ -57,7 +56,7 @@ public class CustomErrorWebFluxAutoConfiguration {
 	private final List<ViewResolver> viewResolvers;
 	private final ServerCodecConfigurer serverCodecConfigurer;
 
-	public CustomErrorWebFluxAutoConfiguration(ServerProperties serverProperties,
+	public GatewayErrorWebFluxAutoConfiguration(ServerProperties serverProperties,
 		WebProperties webProperties,
 		ObjectProvider<List<ViewResolver>> viewResolversProvider,
 		ServerCodecConfigurer serverCodecConfigurer,

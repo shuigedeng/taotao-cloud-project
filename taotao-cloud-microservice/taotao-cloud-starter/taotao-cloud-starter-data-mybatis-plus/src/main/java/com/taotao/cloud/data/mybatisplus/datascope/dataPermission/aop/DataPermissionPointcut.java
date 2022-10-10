@@ -11,7 +11,7 @@ import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
  * @version 1.0
  * @date 2022/9/10 11:09
  */
-public class DataPermissionCustomPointcut {
+public class DataPermissionPointcut {
 
 	/**
 	 * 自定义切入点 复合切点，为创建多个切点而提供的方便操作类。它所有的方法都返回ComposablePointcut类，这样，我们就可以使用链接表达式对其进行操作。
@@ -22,7 +22,7 @@ public class DataPermissionCustomPointcut {
 		return new ComposablePointcut(classPointcut).union(methodPointcut);
 	}
 
-	private DataPermissionCustomPointcut() {
+	private DataPermissionPointcut() {
 	}
 
 }

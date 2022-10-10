@@ -23,8 +23,8 @@ import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.support.function.FuncUtil;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.gateway.springcloud.exception.InvalidTokenException;
@@ -62,10 +62,10 @@ import org.springframework.security.web.server.authorization.ServerAccessDeniedH
 @Configuration
 @EnableWebFluxSecurity
 @ConditionalOnProperty(prefix = SecurityProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-public class ResourceServerConfiguration {
+public class GatewayResourceServerConfiguration {
 
 	@Autowired
-	private CustomReactiveAuthorizationManager customReactiveAuthorizationManager;
+	private GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
 	@Autowired
 	private SecurityProperties securityProperties;
 
@@ -114,7 +114,7 @@ public class ResourceServerConfiguration {
 			.pathMatchers(ignoreUrl.toArray(new String[ignoreUrl.size()])).permitAll()
 			.pathMatchers(HttpMethod.OPTIONS).permitAll()
 			.matchers(EndpointRequest.toAnyEndpoint()).permitAll()
-			.anyExchange().access(customReactiveAuthorizationManager)
+			.anyExchange().access(gatewayReactiveAuthorizationManager)
 			.and()
 			//.addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
 			.exceptionHandling()
@@ -147,13 +147,15 @@ public class ResourceServerConfiguration {
 			jwkSetUri = discoveryClient.getServices().stream()
 				.filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
 				.flatMap(s -> discoveryClient.getInstances(s).stream())
-				.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(), instance.getPort()))
+				.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(),
+					instance.getPort()))
 				.findFirst()
 				.orElse(jwkSetUri);
 		}
 
 		NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder
-			.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank, "http://127.0.0.1:33336/oauth2/jwks"))
+			.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
+				"http://127.0.0.1:33336/oauth2/jwks"))
 			.jwsAlgorithm(SignatureAlgorithm.RS256)
 			.build();
 
@@ -189,11 +191,12 @@ public class ResourceServerConfiguration {
 					event -> {
 						if (event instanceof NamingEvent) {
 							List<Instance> instances = ((NamingEvent) event).getInstances();
-							if(instances.isEmpty()){
+							if (instances.isEmpty()) {
 								return;
 							}
 							Instance instance = instances.get(0);
-							String jwkSetUri = String.format("http://%s:%s" + "/oauth2/jwks", instance.getIp(), instance.getPort());
+							String jwkSetUri = String.format("http://%s:%s" + "/oauth2/jwks",
+								instance.getIp(), instance.getPort());
 
 							NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder
 								.withJwkSetUri(jwkSetUri)
@@ -201,7 +204,8 @@ public class ResourceServerConfiguration {
 								.build();
 							nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
 							ContextUtils.destroySingletonBean("reactiveJwtDecoder");
-							ContextUtils.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
+							ContextUtils.registerSingletonBean("reactiveJwtDecoder",
+								nimbusReactiveJwtDecoder);
 						}
 					});
 		}

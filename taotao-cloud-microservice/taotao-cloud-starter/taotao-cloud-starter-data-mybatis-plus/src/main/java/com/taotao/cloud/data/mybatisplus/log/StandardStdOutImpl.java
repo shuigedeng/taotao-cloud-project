@@ -28,7 +28,7 @@ import org.apache.ibatis.logging.Log;
  * @version 2022.03
  * @since 2021/10/28 10:42
  */
-public class CustomStdOutImpl implements Log {
+public class StandardStdOutImpl implements Log {
 
 	private static final Set<String> DML = new HashSet<>();
 
@@ -39,7 +39,7 @@ public class CustomStdOutImpl implements Log {
 		DML.add("select");
 	}
 
-	public CustomStdOutImpl(String clazz) {
+	public StandardStdOutImpl(String clazz) {
 		// Do Nothing
 	}
 
@@ -56,7 +56,7 @@ public class CustomStdOutImpl implements Log {
 	@Override
 	public void error(String s, Throwable e) {
 		e.printStackTrace();
-		LogUtils.error(e,SqlFormatter.format(s));
+		LogUtils.error(e, SqlFormatter.format(s));
 	}
 
 	@Override

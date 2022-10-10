@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.security.configuration;
 
+import com.taotao.cloud.security.properties.SecurityProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -26,7 +27,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 2020/7/29 14:18
  */
 @AutoConfiguration
-@EnableConfigurationProperties({})
+@EnableConfigurationProperties(SecurityProperties.class)
 public class PropertiesAutoConfiguration {
 
 }
