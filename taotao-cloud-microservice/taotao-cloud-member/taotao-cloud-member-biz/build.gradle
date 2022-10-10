@@ -22,8 +22,8 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    implementation "com.xkcoding.http:simple-http:1.0.3"
-    implementation("com.alipay.sdk:alipay-sdk-java:4.22.32.ALL") {
+    implementation "com.xkcoding.http:simple-http:1.0.5"
+    implementation("com.alipay.sdk:alipay-sdk-java:4.34.0.ALL") {
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "xml-apis", module: "xml-apis"

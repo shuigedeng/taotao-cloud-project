@@ -4,7 +4,7 @@ dependencies {
     implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha"))
     implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger"))
 
-    implementation "org.springframework.security:spring-security-core:5.7.1"
+    implementation "org.springframework.security:spring-security-core:5.7.3"
     implementation "org.springframework.security:spring-security-config"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     implementation "org.springframework.security:spring-security-oauth2-resource-server"
@@ -28,8 +28,11 @@ dependencies {
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
 
-    implementation "org.springdoc:springdoc-openapi-webflux-ui:1.6.9"
-    implementation "org.springdoc:springdoc-openapi-webflux-core:1.6.9"
+    //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-webflux-ui
+    implementation "org.springdoc:springdoc-openapi-webflux-ui:1.6.11"
+    //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-webflux-core
+    implementation "org.springdoc:springdoc-openapi-webflux-core:1.6.11"
+    //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-springdoc-ui
     implementation "com.github.xiaoymin:knife4j-springdoc-ui:3.0.3"
     implementation "com.github.xiaoymin:knife4j-spring-boot-starter:3.0.3"
 
