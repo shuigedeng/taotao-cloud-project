@@ -17,9 +17,6 @@ package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
 import com.taotao.cloud.web.base.service.BaseSuperService;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 
 /**
  * ISettingService
@@ -28,7 +25,6 @@ import org.springframework.cache.annotation.Cacheable;
  * @version v1.0
  * @since 2022/03/10 10:31
  */
-@CacheConfig(cacheNames = "{setting}")
 public interface ISettingService extends BaseSuperService<Setting, Long> {
 
 	/**
@@ -36,7 +32,6 @@ public interface ISettingService extends BaseSuperService<Setting, Long> {
 	 *
 	 * @param key
 	 */
-	@Cacheable(key = "#key")
 	Setting get(String key);
 
 	/**
@@ -44,6 +39,5 @@ public interface ISettingService extends BaseSuperService<Setting, Long> {
 	 *
 	 * @param setting
 	 */
-	@CacheEvict(key = "#setting.id")
 	boolean saveUpdate(Setting setting);
 }

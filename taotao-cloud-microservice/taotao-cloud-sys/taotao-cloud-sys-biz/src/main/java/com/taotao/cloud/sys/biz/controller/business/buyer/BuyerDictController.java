@@ -15,11 +15,15 @@
  */
 package com.taotao.cloud.sys.biz.controller.business.buyer;
 
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +39,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/buyer/dict")
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
 public class BuyerDictController extends SimpleController<IDictService, Dict, Long> {
+
+	@NotAuth
+	@GetMapping("/add")
+	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+	public Result<Boolean> add() {
+		return service().add();
+	}
+
 
 }
 

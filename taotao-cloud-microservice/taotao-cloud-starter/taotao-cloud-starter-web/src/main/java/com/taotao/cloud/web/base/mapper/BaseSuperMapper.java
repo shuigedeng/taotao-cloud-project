@@ -25,14 +25,14 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.collection.CollectionUtils;
-import com.taotao.cloud.common.utils.exception.ExceptionUtils;
 import com.taotao.cloud.web.base.entity.SuperEntity;
+import org.apache.ibatis.annotations.Param;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 基于MP的 BaseMapper 新增了2个方法： insertBatchSomeColumn、updateAllById
@@ -124,7 +124,7 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 * @since 2022-09-07 08:52:08
 	 */
 	default T selectOne(SFunction<T, ?> field1, Object value1, SFunction<T, ?> field2,
-		Object value2) {
+						Object value2) {
 		return selectOne(new LambdaQueryWrapper<T>().eq(field1, value1).eq(field2, value2));
 	}
 
@@ -236,8 +236,8 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 * @param update 更新
 	 * @since 2022-09-07 08:52:09
 	 */
-	default void updateBatch(T update) {
-		update(update, new QueryWrapper<>());
+	default void update(T update) {
+		update(update, new LambdaQueryWrapper<T>().eq(SuperEntity::getId, update.getId()));
 	}
 
 	/**
@@ -258,10 +258,14 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 * @return 插入数量
 	 * @since 2021-09-02 21:17:23
 	 */
-	Integer insertBatchSomeColumn(Collection<T> entityList);
+	int insertBatchSomeColumn(@Param("collection") Collection<T> entityList);
 
 	/**
 	 * 自定义批量插入 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
+	 *
+	 * @param list 列表
+	 * @return int
+	 * @since 2022-10-10 13:48:20
 	 */
 	int insertBatch(@Param("list") List<T> list);
 
@@ -270,7 +274,8 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 */
 	//int updateBatch(@Param("list") List<T> list);
 
-	int batchSize = 1000;  // 应为mysql对于太长的sql语句是有限制的，所以我这里设置每1000条批量插入拼接sql
+	// 应为mysql对于太长的sql语句是有限制的，所以我这里设置每1000条批量插入拼接sql
+	int BATCH_SIZE = 1000;
 
 	default Integer batchInsert(Collection<T> entityList) {
 		int result = 0;
@@ -278,7 +283,7 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 		int i = 0;
 		for (T entity : entityList) {
 			tempEntityList.add(entity);
-			if (i > 0 && (i % batchSize == 0)) {
+			if (i > 0 && (i % BATCH_SIZE == 0)) {
 				result += insertBatchSomeColumn(tempEntityList);
 				tempEntityList.clear();
 			}

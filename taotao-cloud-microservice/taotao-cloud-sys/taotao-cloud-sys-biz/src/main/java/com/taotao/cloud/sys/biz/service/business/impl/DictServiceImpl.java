@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -29,6 +30,8 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
@@ -157,5 +160,15 @@ public class DictServiceImpl extends
 	@Override
 	public String async() {
 		return "sdfasf";
+	}
+
+	@Override
+	public Result<Boolean> add() {
+		List<Dict> list = new ArrayList<>();
+		Dict d1 = Dict.builder().dictCode("asdfsadf").dictName("sldf").build();
+		Dict d2 = Dict.builder().dictCode("asdfsadf222").dictName("sldf222").build();
+		int i = im().insertBatchSomeColumn(List.of(d1, d2));
+
+		return null;
 	}
 }

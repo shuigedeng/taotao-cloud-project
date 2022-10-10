@@ -15,8 +15,10 @@
  */
 package com.taotao.cloud.sys.biz.service.business;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+
 import java.util.concurrent.Future;
 
 /**
@@ -26,7 +28,7 @@ import java.util.concurrent.Future;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IDictService extends BaseSuperService<Dict,Long> {
+public interface IDictService extends BaseSuperService<Dict, Long> {
 
 	///**
 	// * 添加字典
@@ -97,4 +99,5 @@ public interface IDictService extends BaseSuperService<Dict,Long> {
 	String async();
 
 
+	Result<Boolean> add();
 }
