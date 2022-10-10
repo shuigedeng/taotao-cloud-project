@@ -20,22 +20,21 @@ import com.taotao.cloud.order.biz.model.entity.order.Trade;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.order.biz.service.business.order.ITradeService;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
-import com.taotao.cloud.promotion.api.feign.IFeignCouponService;
-import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
-import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
+import com.taotao.cloud.promotion.api.feign.IFeignCouponApi;
+import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityApi;
+import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponApi;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import lombok.AllArgsConstructor;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 交易业务层实现
@@ -64,15 +63,15 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
 	/**
 	 * 优惠券
 	 */
-	private final IFeignCouponService couponService;
+	private final IFeignCouponApi couponService;
 	/**
 	 * 会员优惠券
 	 */
-	private final IFeignMemberCouponService memberCouponService;
+	private final IFeignMemberCouponApi memberCouponService;
 	/**
 	 * 砍价
 	 */
-	private final IFeignKanjiaActivityService kanjiaActivityService;
+	private final IFeignKanjiaActivityApi kanjiaActivityService;
 	/**
 	 * RocketMQ
 	 */

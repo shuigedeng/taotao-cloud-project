@@ -49,7 +49,6 @@ public class BuyerDictController extends SimpleController<IDictService, Dict, Lo
 		return service().add();
 	}
 
-	@NotAuth
 	@GetMapping("/test/{code}")
 	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
 	public Result<Boolean> testCode(@PathVariable("code") String code) {

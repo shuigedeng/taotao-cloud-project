@@ -1,7 +1,6 @@
 package com.taotao.cloud.promotion.biz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.promotion.api.web.vo.CouponActivityItemVO;
+import com.taotao.cloud.promotion.api.model.vo.CouponActivityItemVO;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivityItem;
 import org.apache.ibatis.annotations.Select;
 

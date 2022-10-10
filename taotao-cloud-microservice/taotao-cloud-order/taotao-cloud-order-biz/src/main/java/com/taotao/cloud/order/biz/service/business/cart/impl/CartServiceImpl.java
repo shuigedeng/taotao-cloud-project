@@ -33,19 +33,14 @@ import com.taotao.cloud.order.biz.service.business.cart.render.TradeBuilder;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
-import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityGoodsService;
-import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityService;
-import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponService;
-import com.taotao.cloud.promotion.api.feign.IFeignPintuanService;
-import com.taotao.cloud.promotion.api.feign.IFeignPointsGoodsService;
-import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsService;
-import com.taotao.cloud.promotion.api.web.vo.PointsGoodsVO;
+import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityApi;
+import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityGoodsApi;
+import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponApi;
+import com.taotao.cloud.promotion.api.feign.IFeignPintuanApi;
+import com.taotao.cloud.promotion.api.feign.IFeignPointsGoodsApi;
+import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
+import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,6 +49,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 购物车业务层实现
@@ -75,7 +74,7 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * 会员优惠券
 	 */
-	private final IFeignMemberCouponService memberCouponService;
+	private final IFeignMemberCouponApi memberCouponService;
 	/**
 	 * 规格商品
 	 */
@@ -83,11 +82,11 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * 促销商品
 	 */
-	private final IFeignPromotionGoodsService promotionGoodsService;
+	private final IFeignPromotionGoodsApi promotionGoodsService;
 	/**
 	 * 促销商品
 	 */
-	private final IFeignPointsGoodsService pointsGoodsService;
+	private final IFeignPointsGoodsApi pointsGoodsService;
 	/**
 	 * 会员地址
 	 */
@@ -103,15 +102,15 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * 拼团
 	 */
-	private final IFeignPintuanService pintuanService;
+	private final IFeignPintuanApi pintuanService;
 	/**
 	 * 砍价活动
 	 */
-	private final IFeignKanjiaActivityService kanjiaActivityService;
+	private final IFeignKanjiaActivityApi kanjiaActivityService;
 	/**
 	 * 砍价商品
 	 */
-	private final IFeignKanjiaActivityGoodsService kanjiaActivityGoodsService;
+	private final IFeignKanjiaActivityGoodsApi kanjiaActivityGoodsService;
 	/**
 	 * 交易
 	 */
@@ -136,7 +135,8 @@ public class CartServiceImpl implements ICartService {
 					.filter(i -> i.getGoodsSku().getId().equals(skuId)).findFirst().orElse(null);
 
 				//购物车中已经存在，更新数量
-				if (cartSkuVO != null && dataSku.getUpdateTime().equals(cartSkuVO.getGoodsSku().getUpdateTime())) {
+				if (cartSkuVO != null && dataSku.getUpdateTime()
+					.equals(cartSkuVO.getGoodsSku().getUpdateTime())) {
 					//如果覆盖购物车中商品数量
 					if (Boolean.TRUE.equals(cover)) {
 						cartSkuVO.setNum(num);
@@ -148,7 +148,8 @@ public class CartServiceImpl implements ICartService {
 					}
 
 					//计算购物车小计
-					cartSkuVO.setSubTotal(CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+					cartSkuVO.setSubTotal(
+						CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 				} else {
 					//先清理一下 如果商品无效的话
 					cartSkuVOS.remove(cartSkuVO);
@@ -160,7 +161,8 @@ public class CartServiceImpl implements ICartService {
 					//再设置加入购物车的数量
 					this.checkSetGoodsQuantity(cartSkuVO, skuId, num);
 					//计算购物车小计
-					cartSkuVO.setSubTotal(CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+					cartSkuVO.setSubTotal(
+						CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 					cartSkuVOS.add(cartSkuVO);
 				}
 
@@ -180,7 +182,8 @@ public class CartServiceImpl implements ICartService {
 				//检测购物车数据
 				checkCart(cartTypeEnum, cartSkuVO, skuId, num);
 				//计算购物车小计
-				cartSkuVO.setSubTotal(CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+				cartSkuVO.setSubTotal(
+					CurrencyUtils.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 				cartSkuVOS.add(cartSkuVO);
 			}
 
@@ -400,22 +403,25 @@ public class CartServiceImpl implements ICartService {
 		}
 
 		GoodsSkuVOBuilder goodsSkuVOBuilder = GoodsSkuVOBuilder.builder(dataSku);
-		GoodsSkuBaseVOBuilder goodsSkuBaseVOBuilder = GoodsSkuBaseVOBuilder.builder(dataSku.goodsSkuBase());
+		GoodsSkuBaseVOBuilder goodsSkuBaseVOBuilder = GoodsSkuBaseVOBuilder.builder(
+			dataSku.goodsSkuBase());
 
-
-		if (!GoodsAuthEnum.PASS.name().equals(dataSku.goodsSkuBase().isAuth()) || !GoodsStatusEnum.UPPER.name()
+		if (!GoodsAuthEnum.PASS.name().equals(dataSku.goodsSkuBase().isAuth())
+			|| !GoodsStatusEnum.UPPER.name()
 			.equals(dataSku.goodsSkuBase().marketEnable())) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 
-		BigDecimal validSeckillGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
+		BigDecimal validSeckillGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(
+			skuId,
 			Collections.singletonList(PromotionTypeEnum.SECKILL.name()));
 		if (validSeckillGoodsPrice != null) {
 			goodsSkuBaseVOBuilder.promotionFlag(true);
 			goodsSkuBaseVOBuilder.promotionPrice(validSeckillGoodsPrice);
 		}
 
-		BigDecimal validPintuanGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(skuId,
+		BigDecimal validPintuanGoodsPrice = promotionGoodsService.getValidPromotionsGoodsPrice(
+			skuId,
 			Collections.singletonList(PromotionTypeEnum.PINTUAN.name()));
 		if (validPintuanGoodsPrice != null && CartTypeEnum.PINTUAN.name().equals(cartType)) {
 			goodsSkuBaseVOBuilder.promotionFlag(true);
@@ -598,7 +604,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param cartTypeEnum 购物车
 	 */
 	private void useCoupon(TradeDTO tradeDTO, MemberCoupon memberCoupon,
-						   CartTypeEnum cartTypeEnum) {
+		CartTypeEnum cartTypeEnum) {
 
 		//截取符合优惠券的商品
 		List<CartSkuVO> cartSkuVOS = checkCoupon(memberCoupon, tradeDTO);
@@ -671,17 +677,20 @@ public class CartServiceImpl implements ICartService {
 		//当初购物车商品中是否存在符合优惠券条件的商品sku
 		if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.ALL.name())) {
 			return cartSkuVOS;
-		} else if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS_CATEGORY.name())) {
+		} else if (memberCoupon.getScopeType()
+			.equals(PromotionsScopeTypeEnum.PORTION_GOODS_CATEGORY.name())) {
 			//分类路径是否包含
 			return cartSkuVOS.stream().filter(i ->
 				i.getGoodsSku().getCategoryPath().indexOf("," + memberCoupon.getScopeId() + ",")
 					<= 0).collect(Collectors.toList());
-		} else if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())) {
+		} else if (memberCoupon.getScopeType()
+			.equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())) {
 			//范围关联ID是否包含
 			return cartSkuVOS.stream().filter(
 					i -> memberCoupon.getScopeId().indexOf("," + i.getGoodsSku().getId() + ",") <= 0)
 				.collect(Collectors.toList());
-		} else if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_SHOP_CATEGORY.name())) {
+		} else if (memberCoupon.getScopeType()
+			.equals(PromotionsScopeTypeEnum.PORTION_SHOP_CATEGORY.name())) {
 			//店铺分类路径是否包含
 			return cartSkuVOS.stream().filter(i -> i.getGoodsSku().getStoreCategoryPath()
 				.indexOf("," + memberCoupon.getScopeId() + ",") <= 0).collect(Collectors.toList());
@@ -698,7 +707,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param num          数量
 	 */
 	private void checkCart(CartTypeEnum cartTypeEnum, CartSkuVO cartSkuVO, String skuId,
-						   Integer num) {
+		Integer num) {
 
 		this.checkSetGoodsQuantity(cartSkuVO, skuId, num);
 		//拼团判定

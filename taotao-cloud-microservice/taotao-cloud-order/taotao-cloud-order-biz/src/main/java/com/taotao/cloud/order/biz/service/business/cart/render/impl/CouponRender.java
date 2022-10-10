@@ -12,7 +12,7 @@ import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
 import com.taotao.cloud.order.biz.service.business.cart.render.util.PromotionPriceUtil;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
-import com.taotao.cloud.promotion.api.web.vo.MemberCouponVO;
+import com.taotao.cloud.promotion.api.model.vo.MemberCouponVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

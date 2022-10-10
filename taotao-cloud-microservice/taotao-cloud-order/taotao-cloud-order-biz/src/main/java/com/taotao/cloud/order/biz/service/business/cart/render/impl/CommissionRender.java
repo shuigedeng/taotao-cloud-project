@@ -8,7 +8,7 @@ import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
-import com.taotao.cloud.promotion.api.web.vo.PointsGoodsVO;
+import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

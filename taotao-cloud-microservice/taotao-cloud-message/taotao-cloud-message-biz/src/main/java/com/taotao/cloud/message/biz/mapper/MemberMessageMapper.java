@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.mapper;
 
 
-import com.taotao.cloud.message.biz.entity.MemberMessage;
+import com.taotao.cloud.message.biz.model.entity.MemberMessage;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 

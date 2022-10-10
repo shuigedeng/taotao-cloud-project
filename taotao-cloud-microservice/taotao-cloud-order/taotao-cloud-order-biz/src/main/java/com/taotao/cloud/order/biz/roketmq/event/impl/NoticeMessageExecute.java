@@ -1,9 +1,9 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
-import com.taotao.cloud.message.api.dto.NoticeMessageDTO;
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
-import com.taotao.cloud.message.api.feign.IFeignNoticeMessageService;
+import com.taotao.cloud.message.api.feign.IFeignNoticeMessageApi;
+import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
@@ -15,11 +15,10 @@ import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -34,7 +33,7 @@ public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent,
 	AfterSaleStatusChangeEvent {
 
 	@Autowired
-	private IFeignNoticeMessageService noticeMessageService;
+	private IFeignNoticeMessageApi noticeMessageService;
 
 	@Autowired
 	private IOrderService orderService;

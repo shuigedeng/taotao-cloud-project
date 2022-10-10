@@ -1,13 +1,13 @@
 package com.taotao.cloud.store.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.message.api.feign.IFeignStoreMessageService;
-import com.taotao.cloud.message.api.vo.StoreMessageQueryVO;
-import com.taotao.cloud.message.api.vo.StoreMessageVO;
+import com.taotao.cloud.message.api.feign.IFeignStoreMessageApi;
+import com.taotao.cloud.message.api.model.vo.StoreMessageQueryVO;
+import com.taotao.cloud.message.api.model.vo.StoreMessageVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreMessageManagerController {
 
 	@Autowired
-	private IFeignStoreMessageService storeMessageService;
+	private IFeignStoreMessageApi storeMessageService;
 
 	@Operation(summary = "多条件分页获取", description = "多条件分页获取")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageResult<StoreMessageVO>> getByCondition(StoreMessageQueryVO storeMessageQueryVO,
-                                                             PageParam pageParam) {
+	public Result<PageResult<StoreMessageVO>> getByCondition(
+		StoreMessageQueryVO storeMessageQueryVO,
+		PageParam pageParam) {
 		IPage<StoreMessageVO> page = storeMessageService.getPage(storeMessageQueryVO, pageParam);
 		return Result.success(PageResult.convertMybatisPage(page, StoreMessageVO.class));
 	}

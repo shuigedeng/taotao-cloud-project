@@ -6,7 +6,7 @@ import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.web.vo.CouponVO;
+import com.taotao.cloud.promotion.api.model.vo.CouponVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
