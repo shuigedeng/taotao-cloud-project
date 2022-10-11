@@ -35,7 +35,6 @@ public class LockAutoConfiguration {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(LockAutoConfiguration.class);
 
-	//@Autowired
 	private final KylinLockProperties properties;
 
 	public LockAutoConfiguration(KylinLockProperties properties) {

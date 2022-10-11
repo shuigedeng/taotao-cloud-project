@@ -26,13 +26,12 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.collection.CollectionUtils;
 import com.taotao.cloud.web.base.entity.SuperEntity;
-import org.apache.ibatis.annotations.Param;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 基于MP的 BaseMapper 新增了2个方法： insertBatchSomeColumn、updateAllById
@@ -124,7 +123,7 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 * @since 2022-09-07 08:52:08
 	 */
 	default T selectOne(SFunction<T, ?> field1, Object value1, SFunction<T, ?> field2,
-						Object value2) {
+		Object value2) {
 		return selectOne(new LambdaQueryWrapper<T>().eq(field1, value1).eq(field2, value2));
 	}
 
@@ -258,7 +257,7 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	 * @return 插入数量
 	 * @since 2021-09-02 21:17:23
 	 */
-	int insertBatchSomeColumn(@Param("collection") Collection<T> entityList);
+	int insertBatchSomeColumn(@Param("list") Collection<T> entityList);
 
 	/**
 	 * 自定义批量插入 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
@@ -272,7 +271,7 @@ public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializ
 	/**
 	 * 自定义批量更新，条件为主键 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
 	 */
-	//int updateBatch(@Param("list") List<T> list);
+	//int updateBatch(@Param("collection") List<T> list);
 
 	// 应为mysql对于太长的sql语句是有限制的，所以我这里设置每1000条批量插入拼接sql
 	int BATCH_SIZE = 1000;

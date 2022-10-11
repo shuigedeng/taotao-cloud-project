@@ -15,14 +15,13 @@
  */
 package com.taotao.cloud.data.mybatisplus.base.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.data.mybatisplus.base.entity.MpSuperEntity;
 import com.taotao.cloud.data.mybatisplus.query.BaseMapperX;
-import org.apache.ibatis.annotations.Param;
-
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 基于MP的 BaseMapper 新增了2个方法： insertBatchSomeColumn、updateAllById
@@ -52,18 +51,17 @@ public interface MpSuperMapper<T extends MpSuperEntity<I>, I extends Serializabl
 	 * @return 插入数量
 	 * @since 2021-09-02 21:17:23
 	 */
-	int insertBatchSomeColumn(List<T> entityList);
+	int insertBatchSomeColumn(@Param("list") Collection<T> entityList);
 
 	/**
-	 * 自定义批量插入
-	 * 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
+	 * 自定义批量插入 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
 	 */
-	int insertBatch(@Param("list") List<T> list);
+	int insertBatch(@Param("collection") List<T> list);
 
 	/**
 	 * 自定义批量更新，条件为主键
 	 * 如果要自动填充，@Param(xx) xx参数名必须是 list/collection/array 3个的其中之一
 	 */
-	//int updateBatch(@Param("list") List<T> list);
+	//int updateBatch(@Param("collection") List<T> list);
 
 }

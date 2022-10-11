@@ -37,6 +37,14 @@ import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,15 +52,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 
 /**
  * 平台管理端-菜单管理API
@@ -157,14 +156,15 @@ public class ManagerResourceController extends
 		}
 
 		Result<List<MenuQueryVO>> result = findResourceByCodes(roleCodes);
-		List<MenuQueryVO> resourceVOList = result.data();
+		List<MenuQueryVO> resourceVOList = result.getData();
 
 		List<MenuTreeVO> trees = service().findCurrentUserMenuTree(resourceVOList,
 			parentId);
 		return Result.success(trees);
 	}
 
-	@Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 " +
+	@Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 "
+		+
 		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:tree')")
@@ -225,7 +225,6 @@ public class ManagerResourceController extends
 		LogUtils.error(" 该接口已经被限流啦", e);
 		return Result.fail("该接口已经被限流啦");
 	}
-
 
 	//************************************************资源*************************************************************
 

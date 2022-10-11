@@ -79,7 +79,7 @@ public class AbstractInsertBatch extends AbstractMethod {
 		String valuesScript = SqlScriptUtils.convertTrim(getAllInsertSqlPropertyMaybeIf(tableInfo),
 			LEFT_BRACKET, RIGHT_BRACKET, null, COMMA);
 		// 列表 sql
-		String valuesScripts = SqlScriptUtils.convertForeach(valuesScript, COLLECTION, null, ENTITY,
+		String valuesScripts = SqlScriptUtils.convertForeach(valuesScript, "list", null, ENTITY,
 			COMMA);
 		String sql = String.format(sqlTemp, tableInfo.getTableName(), columnScript, valuesScripts);
 		SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);

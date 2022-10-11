@@ -16,16 +16,15 @@
 package com.taotao.cloud.common.utils.aop;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.framework.AopProxy;
-
-import java.lang.reflect.Field;
+import org.springframework.util.ClassUtils;
 
 /**
  * 获取代理原始对象的工具
@@ -44,22 +43,22 @@ public class AopUtils extends org.springframework.aop.support.AopUtils {
 	 * @since 2022-04-27 17:05:43
 	 */
 	public static Object getTarget(Object proxy) {
-        // 不是代理对象，直接返回参数对象
-        if (!isAopProxy(proxy)) {
-            return proxy;
-        }
-        // 判断是否是jdk还是cglib代理的对象
-        try {
-            if (isJdkDynamicProxy(proxy)) {
-                return getJdkDynamicProxyTargetObject(proxy);
-            } else {
-                return getCglibProxyTargetObject(proxy);
-            }
-        } catch (Exception e) {
-            LogUtils.error("获取代理对象异常", e);
-            return null;
-        }
-    }
+		// 不是代理对象，直接返回参数对象
+		if (!isAopProxy(proxy)) {
+			return proxy;
+		}
+		// 判断是否是jdk还是cglib代理的对象
+		try {
+			if (isJdkDynamicProxy(proxy)) {
+				return getJdkDynamicProxyTargetObject(proxy);
+			} else {
+				return getCglibProxyTargetObject(proxy);
+			}
+		} catch (Exception e) {
+			LogUtils.error("获取代理对象异常", e);
+			return null;
+		}
+	}
 
 	/**
 	 * 获取cglib代理的对象
@@ -69,13 +68,14 @@ public class AopUtils extends org.springframework.aop.support.AopUtils {
 	 * @since 2022-04-27 17:05:44
 	 */
 	private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
-        Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
-        h.setAccessible(true);
-        Object dynamicAdvisedInterceptor = h.get(proxy);
-        Field advised = dynamicAdvisedInterceptor.getClass().getDeclaredField("advised");
-        advised.setAccessible(true);
-        return ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
-    }
+		Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
+		h.setAccessible(true);
+		Object dynamicAdvisedInterceptor = h.get(proxy);
+		Field advised = dynamicAdvisedInterceptor.getClass().getDeclaredField("advised");
+		advised.setAccessible(true);
+		return ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource()
+			.getTarget();
+	}
 
 	/**
 	 * 获取jdk代理的对象
@@ -85,13 +85,13 @@ public class AopUtils extends org.springframework.aop.support.AopUtils {
 	 * @since 2022-04-27 17:05:44
 	 */
 	private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
-        Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
-        h.setAccessible(true);
-        AopProxy aopProxy = (AopProxy) h.get(proxy);
-        Field advised = aopProxy.getClass().getDeclaredField("advised");
-        advised.setAccessible(true);
-        return ((AdvisedSupport) advised.get(aopProxy)).getTargetSource().getTarget();
-    }
+		Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
+		h.setAccessible(true);
+		AopProxy aopProxy = (AopProxy) h.get(proxy);
+		Field advised = aopProxy.getClass().getDeclaredField("advised");
+		advised.setAccessible(true);
+		return ((AdvisedSupport) advised.get(aopProxy)).getTargetSource().getTarget();
+	}
 
 	/**
 	 * 获取切面方法上包含的指定注解
@@ -101,7 +101,8 @@ public class AopUtils extends org.springframework.aop.support.AopUtils {
 	 * @return 注解类型
 	 * @since 2021-09-02 19:41:20
 	 */
-	public static <T extends Annotation> T getAnnotation(JoinPoint joinPoint, Class<T> annotationClass) {
+	public static <T extends Annotation> T getAnnotation(JoinPoint joinPoint,
+		Class<T> annotationClass) {
 		String methodName = joinPoint.getSignature().getName();
 		Object[] arguments = joinPoint.getArgs();
 		Method[] methods = joinPoint.getSignature().getDeclaringType().getMethods();
@@ -113,6 +114,25 @@ public class AopUtils extends org.springframework.aop.support.AopUtils {
 			}
 		}
 		return null;
+	}
+
+	public static Method getMethod(JoinPoint joinPoint) {
+		String methodName = joinPoint.getSignature().getName();
+		Object[] arguments = joinPoint.getArgs();
+		List<? extends Class<?>> collect = Arrays.stream(arguments).map(Object::getClass).toList();
+
+		return ClassUtils.getMethodIfAvailable(
+			(Class<?>) joinPoint.getSignature().getDeclaringType(),
+			methodName, collect.toArray(new Class<?>[collect.size()]));
+		//Method[] methods = joinPoint.getSignature().getDeclaringType().getMethods();
+		//for (Method m : methods) {
+		//	if (m.getName().equals(methodName)) {
+		//		if (m.getParameterTypes().length == arguments.length) {
+		//			return m;
+		//		}
+		//	}
+		//}
+		//return null;
 	}
 
 	///**

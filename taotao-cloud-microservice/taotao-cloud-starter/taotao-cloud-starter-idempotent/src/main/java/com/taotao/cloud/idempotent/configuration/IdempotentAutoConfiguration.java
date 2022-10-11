@@ -45,7 +45,7 @@ public class IdempotentAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean({DistributedLock.class})
+	@ConditionalOnBean
 	public IdempotentAspect idempotentAspect(DistributedLock distributedLock) {
 		return new IdempotentAspect(distributedLock);
 	}

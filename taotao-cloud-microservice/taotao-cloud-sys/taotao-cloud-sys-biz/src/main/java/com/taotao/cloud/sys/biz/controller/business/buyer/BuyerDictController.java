@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
@@ -45,8 +46,16 @@ public class BuyerDictController extends SimpleController<IDictService, Dict, Lo
 	@NotAuth
 	@GetMapping("/add")
 	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+	@Idempotent(perFix = "findByCode")
 	public Result<Boolean> add() {
-		return service().add();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Boolean result = service().add();
+		return success(result);
 	}
 
 	@GetMapping("/test/{code}")
