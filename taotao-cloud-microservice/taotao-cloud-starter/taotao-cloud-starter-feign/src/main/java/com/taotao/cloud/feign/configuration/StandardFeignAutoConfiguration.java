@@ -87,13 +87,14 @@ import org.springframework.http.MediaType;
  */
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @AutoConfiguration(before = SentinelFeignAutoConfiguration.class)
-@EnableConfigurationProperties({LoadbalancerProperties.class, FeignProperties.class, FeignInterceptorProperties.class})
+@EnableConfigurationProperties({LoadbalancerProperties.class, FeignProperties.class,
+	FeignInterceptorProperties.class})
 @ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-public class CustomFeignAutoConfiguration implements InitializingBean {
+public class StandardFeignAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(CustomFeignAutoConfiguration.class, StarterName.FEIGN_STARTER);
+		LogUtils.started(StandardFeignAutoConfiguration.class, StarterName.FEIGN_STARTER);
 	}
 
 	@Bean
@@ -195,9 +196,11 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 						type = new ParameterizedTypeImpl(new Type[]{type}, null, Result.class);
 						Object object = super.decode(response, type);
 						if (object instanceof Result<?> result) {
-							if (result.code() != 200) {
-								LogUtils.error("调用Feign接口出现异常，接口:{}, 异常: {}", response.request().url(), result.errorMsg());
-								throw new FeignErrorException(result.code(), result.errorMsg());
+							if (result.getCode() != 200) {
+								LogUtils.error("调用Feign接口出现异常，接口:{}, 异常: {}",
+									response.request().url(), result.getErrorMsg());
+								throw new FeignErrorException(result.getCode(),
+									result.getErrorMsg());
 							}
 							return result;
 						}
@@ -218,7 +221,8 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 			try {
 				String res = Util.toString(response.body().asReader(StandardCharsets.UTF_8));
 				LogUtils.error("feign调用异常{}", res);
-				FeignExceptionResult feignExceptionResult = JsonUtils.toObject(res, FeignExceptionResult.class);
+				FeignExceptionResult feignExceptionResult = JsonUtils.toObject(res,
+					FeignExceptionResult.class);
 				errorContent = feignExceptionResult.getMsg();
 			} catch (Exception e) {
 				LogUtils.error(e);
@@ -237,7 +241,8 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 	public static class FeignInnerContract extends SpringMvcContract {
 
 		@Override
-		protected void processAnnotationOnMethod(MethodMetadata data, Annotation methodAnnotation, Method method) {
+		protected void processAnnotationOnMethod(MethodMetadata data, Annotation methodAnnotation,
+			Method method) {
 			if (Inner.class.isInstance(methodAnnotation)) {
 				Inner inner = findMergedAnnotation(method, Inner.class);
 				if (ObjectUtils.isNotEmpty(inner)) {
@@ -254,7 +259,8 @@ public class CustomFeignAutoConfiguration implements InitializingBean {
 	 * 设置解码器为fastjson
 	 */
 	private ObjectFactory<HttpMessageConverters> feignHttpMessageConverter() {
-		final HttpMessageConverters httpMessageConverters = new HttpMessageConverters(this.getFastJsonConverter());
+		final HttpMessageConverters httpMessageConverters = new HttpMessageConverters(
+			this.getFastJsonConverter());
 		return () -> httpMessageConverters;
 	}
 

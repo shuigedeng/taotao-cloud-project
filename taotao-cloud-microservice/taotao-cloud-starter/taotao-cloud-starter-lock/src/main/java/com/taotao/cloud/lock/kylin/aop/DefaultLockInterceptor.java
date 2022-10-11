@@ -73,6 +73,7 @@ public class DefaultLockInterceptor implements LockInterceptor, InitializingBean
 		if (verifyAopClass(invocation)) {
 			return invocation.proceed();
 		}
+
 		//2.获取注解
 		KylinLock kylinLock = invocation.getMethod().getAnnotation(KylinLock.class);
 		LockInfo lockInfo = null;

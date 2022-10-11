@@ -14,6 +14,7 @@ server:
       enabled: true
   servlet:
     application-display-name: ${spring.application.name}
+    #context-path: sys
 
 jasypt:
   encryptor:
@@ -1297,7 +1298,7 @@ taotao:
         enabled: true
     security:
       ignore-url:
-        - /test/{code}
+        - /sys/buyer/dict/test/{code}
 
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割

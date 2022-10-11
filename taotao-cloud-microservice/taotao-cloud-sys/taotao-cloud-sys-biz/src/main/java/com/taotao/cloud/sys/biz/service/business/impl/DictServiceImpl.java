@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -23,17 +22,15 @@ import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Future;
 import lombok.AllArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Future;
 
 /**
  * DictServiceImpl
@@ -128,7 +125,8 @@ public class DictServiceImpl extends
 	public Dict findByCode(String code) {
 		//Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
 		//return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
-		return Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now()).dictCode("123123123").dictName("lsdfjaslf")
+		return Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now())
+			.dictCode("123123123").dictName("lsdfjaslf")
 			.remark("sdfasfd")
 			.description("sdflasjdfl")
 			.build();
@@ -163,12 +161,11 @@ public class DictServiceImpl extends
 	}
 
 	@Override
-	public Result<Boolean> add() {
-		List<Dict> list = new ArrayList<>();
-		Dict d1 = Dict.builder().dictCode("asdfsadf").dictName("sldf").build();
-		Dict d2 = Dict.builder().dictCode("asdfsadf222").dictName("sldf222").build();
+	public Boolean add() {
+		Dict d1 = Dict.builder().dictCode("asdfsadf").dictName("sldf").sortNum(3).build();
+		Dict d2 = Dict.builder().dictCode("asdfsadf222").dictName("sldf222").sortNum(5).build();
 		int i = im().insertBatchSomeColumn(List.of(d1, d2));
 
-		return null;
+		return true;
 	}
 }

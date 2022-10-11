@@ -18,8 +18,8 @@ package com.taotao.cloud.web.base.controller;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.BaseQuery;
-import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.reflect.ReflectionUtils;
 import com.taotao.cloud.data.mybatisplus.query.conditions.Wraps;
@@ -89,7 +89,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 		handlerQueryParams(params);
 
 		IPage<T> page = params.buildMpPage();
-		QueryWrap<T> wrapper = handlerWrapper(params.query());
+		QueryWrap<T> wrapper = handlerWrapper(params.getEqQuery());
 		IPage<T> data = service().page(page, wrapper);
 		handlerResult(data);
 		return data;
@@ -112,15 +112,19 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.filter(Objects::nonNull)
 				.filter(eqDTO -> StrUtil.isNotBlank(eqDTO.filed()))
 				.filter(eqDTO -> ReflectionUtils.checkField(eqDTO.filed(), getEntityClass()))
-				.forEach(eqDTO -> wrapper.eq(StrUtil.toUnderlineCase(eqDTO.filed()), eqDTO.value()));
+				.forEach(
+					eqDTO -> wrapper.eq(StrUtil.toUnderlineCase(eqDTO.filed()), eqDTO.value()));
 
 			Optional.ofNullable(baseQuery.dateTimeBetweenQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(dateTimeBetweenDTO -> StrUtil.isNotBlank(dateTimeBetweenDTO.filed()))
-				.filter(dateTimeBetweenDTO -> ReflectionUtils.checkField(dateTimeBetweenDTO.getClass(), getEntityClass()))
-				.forEach(dateTimeBetweenDTO -> wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.filed()),
+				.filter(
+					dateTimeBetweenDTO -> ReflectionUtils.checkField(dateTimeBetweenDTO.getClass(),
+						getEntityClass()))
+				.forEach(dateTimeBetweenDTO -> wrapper.between(
+					StrUtil.toUnderlineCase(dateTimeBetweenDTO.filed()),
 					dateTimeBetweenDTO.startTime(), dateTimeBetweenDTO.endTime()));
 
 			Optional.ofNullable(baseQuery.likeQuery())
@@ -129,7 +133,8 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.filter(Objects::nonNull)
 				.filter(likeDTO -> StrUtil.isNotBlank(likeDTO.filed()))
 				.filter(likeDTO -> ReflectionUtils.checkField(likeDTO.getClass(), getEntityClass()))
-				.forEach(likeDTO -> wrapper.like(StrUtil.toUnderlineCase(likeDTO.filed()), likeDTO.value()));
+				.forEach(likeDTO -> wrapper.like(StrUtil.toUnderlineCase(likeDTO.filed()),
+					likeDTO.value()));
 
 			Optional.ofNullable(baseQuery.inQuery())
 				.orElse(new ArrayList<>())
@@ -137,14 +142,16 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.filter(Objects::nonNull)
 				.filter(inDTO -> StrUtil.isNotBlank(inDTO.filed()))
 				.filter(inDTO -> ReflectionUtils.checkField(inDTO.getClass(), getEntityClass()))
-				.forEach(inDTO -> wrapper.in(StrUtil.toUnderlineCase(inDTO.filed()), inDTO.values()));
+				.forEach(
+					inDTO -> wrapper.in(StrUtil.toUnderlineCase(inDTO.filed()), inDTO.values()));
 
 			Optional.ofNullable(baseQuery.notInQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(notInDTO -> StrUtil.isNotBlank(notInDTO.filed()))
-				.filter(notInDTO -> ReflectionUtils.checkField(notInDTO.getClass(), getEntityClass()))
+				.filter(
+					notInDTO -> ReflectionUtils.checkField(notInDTO.getClass(), getEntityClass()))
 				.forEach(notInDTO -> wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.filed()),
 					notInDTO.values()));
 		}

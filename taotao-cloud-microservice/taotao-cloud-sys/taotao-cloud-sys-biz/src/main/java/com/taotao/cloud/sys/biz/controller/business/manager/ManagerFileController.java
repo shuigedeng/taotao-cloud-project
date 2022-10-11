@@ -11,6 +11,11 @@ import com.taotao.cloud.sys.biz.service.business.IFileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
@@ -22,11 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.NotNull;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 文件管理API
@@ -76,7 +76,7 @@ public class ManagerFileController {
 			//List<UploadFileVO> result = uploads.stream().map(
 			//		upload -> UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build())
 			//	.collect(Collectors.toList());
-			return Result.success(null);
+			return Result.success(new ArrayList<>());
 		}
 
 		throw new BusinessException("文件上传失败");

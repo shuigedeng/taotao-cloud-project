@@ -16,12 +16,12 @@
 package com.taotao.cloud.idempotent.annotation;
 
 import com.taotao.cloud.idempotent.enums.IdempotentTypeEnum;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Idempotent
@@ -49,4 +49,19 @@ public @interface Idempotent {
 	 * 禁止重复提交的模式 默认是全部使用
 	 */
 	IdempotentTypeEnum ideTypeEnum() default IdempotentTypeEnum.ALL;
+
+	/**
+	 * 获取锁的最大尝试时间(单位 {@code unit}) 该值大于0则使用 locker.tryLock 方法加锁，否则使用 locker.lock 方法
+	 */
+	long waitTime() default 0;
+
+	/**
+	 * 加锁的时间(单位 {@code unit})，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
+	 */
+	long leaseTime() default -1;
+
+	/**
+	 * 参数的时间单位
+	 */
+	TimeUnit unit() default TimeUnit.SECONDS;
 }

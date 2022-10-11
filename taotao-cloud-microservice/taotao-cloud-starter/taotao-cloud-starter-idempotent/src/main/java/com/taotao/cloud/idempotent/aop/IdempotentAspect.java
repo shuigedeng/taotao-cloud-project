@@ -19,15 +19,14 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.common.utils.aop.AopUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.idempotent.annotation.Idempotent;
+import com.taotao.cloud.idempotent.enums.IdempotentTypeEnum;
+import com.taotao.cloud.idempotent.exception.IdempotentException;
+import com.taotao.cloud.lock.support.DistributedLock;
+import com.taotao.cloud.lock.support.ZLock;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
-
-import com.taotao.cloud.idempotent.exception.IdempotentException;
-import com.taotao.cloud.idempotent.enums.IdempotentTypeEnum;
-import com.taotao.cloud.idempotent.annotation.Idempotent;
-import com.taotao.cloud.lock.support.DistributedLock;
-import com.taotao.cloud.lock.support.ZLock;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -35,6 +34,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.CodeSignature;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -95,42 +95,49 @@ public class IdempotentAspect {
 
 	@Before("watchIde()")
 	public void doBefore(JoinPoint joinPoint) throws Exception {
-		Idempotent idempotent = AopUtils.getAnnotation(joinPoint, Idempotent.class);
+		Idempotent idempotent = AnnotationUtils.getAnnotation(AopUtils.getMethod(joinPoint),
+			Idempotent.class);
 
 		if (enable && null != idempotent) {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 			if (null == attributes) {
-				throw new IdempotentException("数据为空");
+				throw new IdempotentException("请求数据为空");
 			}
 			HttpServletRequest request = attributes.getRequest();
 
 			//1.判断模式
-			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL || idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
+			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
+				|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
 				//2.1.通过rid模式判断是否属于重复提交
-				String rid = request.getHeader(HEADER_RID_KEY);
+				//String rid = request.getHeader(HEADER_RID_KEY);
+				String rid = "111";
 
 				try {
 					if (StringUtils.isNotBlank(rid)) {
 						ZLock result = distributedLock.tryLock(
 							REDIS_KEY_PREFIX + rid,
-							LOCK_WAIT_TIME,
-							TimeUnit.MILLISECONDS);
+							1,
+							10,
+							TimeUnit.SECONDS);
 						if (Objects.isNull(result)) {
 							LogUtils.error("命中RID重复请求");
 							throw new IdempotentException("重复请求");
 						}
-						LogUtils.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}", HEADER_RID_KEY, rid);
+						LogUtils.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}",
+							HEADER_RID_KEY, rid);
 						ZLOCK_CONTEXT.set(result);
 					} else {
-						LogUtils.warn("msg1=header没有rid,防重复提交功能失效,,remoteHost={}" + request.getRemoteHost());
+						LogUtils.warn("msg1=header没有rid,防重复提交功能失效,,remoteHost={}"
+							+ request.getRemoteHost());
 					}
 				} catch (Exception e) {
 					LogUtils.error("获取redis锁发生异常", e);
-					throw e;
+					throw new IdempotentException("服务内部错误、请联系管理员");
 				}
 			}
 
-			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL || idempotent.ideTypeEnum() == IdempotentTypeEnum.KEY) {
+			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
+				|| idempotent.ideTypeEnum() == IdempotentTypeEnum.KEY) {
 				//2.2.通过自定义key模式判断是否属于重复提交
 				String key = idempotent.key();
 				if (StringUtils.isNotBlank(key)) {
@@ -160,11 +167,16 @@ public class IdempotentAspect {
 						perFix = perFix + ":" + val;
 
 						try {
-							ZLock result = distributedLock.tryLock(perFix, LOCK_WAIT_TIME, TimeUnit.MILLISECONDS);
-							if (!Objects.nonNull(result)) {
+							ZLock result = distributedLock.tryLock(perFix,
+								1,
+								10,
+								TimeUnit.SECONDS);
+							if (Objects.isNull(result)) {
 								String targetName = joinPoint.getTarget().getClass().getName();
 								String methodName = joinPoint.getSignature().getName();
-								LogUtils.error("不允许重复执行,,key={},,targetName={},,methodName={}", perFix, targetName, methodName);
+								LogUtils.error(
+									"不允许重复执行,,key={},,targetName={},,methodName={}", perFix,
+									targetName, methodName);
 								throw new IdempotentException("不允许重复提交");
 							}
 
@@ -173,8 +185,8 @@ public class IdempotentAspect {
 							ZLOCK_CONTEXT.set(result);
 							LogUtils.info("msg1=当前请求已成功锁定:{}", perFix);
 						} catch (Exception e) {
-							LogUtils.error("获取redis锁发生异常", e);
-							throw e;
+							LogUtils.error("获取锁发生异常", e);
+							throw new IdempotentException("服务内部错误、请联系管理员");
 						}
 					} else {
 						LogUtils.warn("自定义的key,在请求参数中value为空,防重复提交功能失效");
@@ -189,10 +201,13 @@ public class IdempotentAspect {
 		try {
 			Idempotent idempotent = AopUtils.getAnnotation(joinPoint, Idempotent.class);
 			if (enable && null != idempotent) {
-				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL || idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
+				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
+					|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
 					ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 					HttpServletRequest request = attributes.getRequest();
-					String rid = request.getHeader(HEADER_RID_KEY);
+					//String rid = request.getHeader(HEADER_RID_KEY);
+					String rid = "111";
+
 					if (StringUtils.isNotBlank(rid)) {
 						try {
 							distributedLock.unlock(ZLOCK_CONTEXT.get());

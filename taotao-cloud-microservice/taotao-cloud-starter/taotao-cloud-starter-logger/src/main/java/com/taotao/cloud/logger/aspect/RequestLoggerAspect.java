@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.logger.aspect;
 
+import static com.taotao.cloud.common.model.DatePattern.NORM_DATETIME_PATTERN;
+
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.convert.ConvertException;
 import cn.hutool.core.util.ArrayUtil;
@@ -41,6 +43,16 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.logger.event.RequestLoggerEvent;
 import com.taotao.cloud.logger.properties.RequestLoggerProperties;
 import io.swagger.v3.oas.annotations.Operation;
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Consumer;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -62,19 +74,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Consumer;
-
-import static com.taotao.cloud.common.model.DatePattern.NORM_DATETIME_PATTERN;
 
 
 /**
@@ -166,11 +165,11 @@ public class RequestLoggerAspect {
 			if (Objects.nonNull(ret) && ret instanceof Result) {
 				try {
 					Result<?> r = Convert.convert(Result.class, ret);
-					if (r.code() == HttpStatus.OK.value()) {
+					if (r.getCode() == HttpStatus.OK.value()) {
 						requestLogger.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getCode());
 					} else {
 						requestLogger.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
-						requestLogger.setExDetail(r.errorMsg());
+						requestLogger.setExDetail(r.getErrorMsg());
 					}
 
 				} catch (ConvertException e) {
@@ -184,7 +183,8 @@ public class RequestLoggerAspect {
 			requestLogger.setConsumingTime(endTime - requestLogger.getStartTime());
 
 			if (requestOperateLog.response()) {
-				requestLogger.setResult(getText(ret == null ? StrPool.EMPTY : JsonUtils.toJSONString(ret)));
+				requestLogger.setResult(
+					getText(ret == null ? StrPool.EMPTY : JsonUtils.toJSONString(ret)));
 			}
 
 			publisher.publishEvent(new RequestLoggerEvent(requestLogger));
@@ -206,9 +206,11 @@ public class RequestLoggerAspect {
 			requestLogger.setExDetail(stackTrace.replaceAll("\"", "'").replace("\n", ""));
 			requestLogger.setExDesc(e.getMessage().replaceAll("\"", "'").replace("\n", ""));
 
-			if (!requestOperateLog.request() && requestOperateLog.requestByError() && StrUtil.isEmpty(requestLogger.getParams())) {
+			if (!requestOperateLog.request() && requestOperateLog.requestByError()
+				&& StrUtil.isEmpty(requestLogger.getParams())) {
 				Object[] args = joinPoint.getArgs();
-				HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+				HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(
+					RequestContextHolder.getRequestAttributes())).getRequest();
 				String strArgs = getArgs(args, request);
 				requestLogger.setParams(getText(strArgs));
 			}
@@ -240,9 +242,10 @@ public class RequestLoggerAspect {
 
 	@NonNull
 	private com.taotao.cloud.logger.model.RequestLogger buildRequestLog(JoinPoint joinPoint,
-																		RequestLogger requestLoggerAnnotation) {
+		RequestLogger requestLoggerAnnotation) {
 		com.taotao.cloud.logger.model.RequestLogger requestLogger = new com.taotao.cloud.logger.model.RequestLogger();
-		ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+		ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(
+			RequestContextHolder.getRequestAttributes());
 		RequestContextHolder.setRequestAttributes(attributes, true);
 		HttpServletRequest request = attributes.getRequest();
 
@@ -265,15 +268,18 @@ public class RequestLoggerAspect {
 			}
 		}
 		requestLogger.setArgs(argsList.toString().replaceAll("\"", "'").replace("\n", ""));
-		requestLogger.setBrowser(request.getHeader("user-agent").replaceAll("\"", "'").replace("\n", ""));
-		requestLogger.setClasspath(joinPoint.getTarget().getClass().getName().replaceAll("\"", "'").replace("\n", ""));
+		requestLogger.setBrowser(
+			request.getHeader("user-agent").replaceAll("\"", "'").replace("\n", ""));
+		requestLogger.setClasspath(
+			joinPoint.getTarget().getClass().getName().replaceAll("\"", "'").replace("\n", ""));
 
 		String name = joinPoint.getSignature().getName();
 		requestLogger.setMethodName(name);
 		requestLogger.setParams(JsonUtils.toJSONString(RequestUtils.getAllRequestParam(request))
 			.replaceAll("\"", "'")
 			.replace("\n", ""));
-		requestLogger.setHeaders(JsonUtils.toJSONString(RequestUtils.getAllRequestHeaders(request)));
+		requestLogger.setHeaders(
+			JsonUtils.toJSONString(RequestUtils.getAllRequestHeaders(request)));
 		requestLogger.setRequestType(LogUtils.getRequestType(name));
 		requestLogger.setSource(DEFAULT_SOURCE);
 		requestLogger.setCtime(DateUtils.format(LocalDateTime.now(), NORM_DATETIME_PATTERN));
@@ -307,7 +313,8 @@ public class RequestLoggerAspect {
 		}
 
 		// 读取目标类上的注解
-		RequestLogger targetClass = joinPoint.getTarget().getClass().getAnnotation(RequestLogger.class);
+		RequestLogger targetClass = joinPoint.getTarget().getClass()
+			.getAnnotation(RequestLogger.class);
 
 		// 加上 RequestLogger == null 会导致父类上的方法永远需要记录日志
 		return targetClass != null && !targetClass.enabled();
@@ -323,7 +330,8 @@ public class RequestLoggerAspect {
 	}
 
 	/**
-	 * 优先从子类获取 @RequestLogger： 1，若子类重写了该方法，有标记就记录日志，没标记就忽略日志 2，若子类没有重写该方法，就从父类获取，父类有标记就记录日志，没标记就忽略日志
+	 * 优先从子类获取 @RequestLogger： 1，若子类重写了该方法，有标记就记录日志，没标记就忽略日志
+	 * 2，若子类没有重写该方法，就从父类获取，父类有标记就记录日志，没标记就忽略日志
 	 */
 	public static RequestLogger getTargetAnnotation(JoinPoint point) {
 		try {
@@ -362,9 +370,10 @@ public class RequestLoggerAspect {
 	}
 
 	private void setDescription(JoinPoint joinPoint, RequestLogger requestLoggerAnnotation,
-								com.taotao.cloud.logger.model.RequestLogger requestLogger) {
+		com.taotao.cloud.logger.model.RequestLogger requestLogger) {
 		StringBuilder controllerDescription = new StringBuilder();
-		Operation operation = AnnotationUtils.findAnnotation(((MethodSignature)joinPoint.getSignature()).getMethod(), Operation.class);
+		Operation operation = AnnotationUtils.findAnnotation(
+			((MethodSignature) joinPoint.getSignature()).getMethod(), Operation.class);
 		if (operation != null) {
 			String summary = operation.summary();
 			if (StringUtils.isNotBlank(summary)) {
@@ -383,14 +392,17 @@ public class RequestLoggerAspect {
 		}
 
 		String controllerMethodDescription = getDescribe(requestLoggerAnnotation);
-		if (StrUtil.isNotBlank(controllerMethodDescription) && StrUtil.contains(controllerMethodDescription, StrPool.HASH)) {
+		if (StrUtil.isNotBlank(controllerMethodDescription) && StrUtil.contains(
+			controllerMethodDescription, StrPool.HASH)) {
 			//获取方法参数值
 			Object[] args = joinPoint.getArgs();
 			MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-			controllerMethodDescription = getValBySpEl(controllerMethodDescription, methodSignature, args);
+			controllerMethodDescription = getValBySpEl(controllerMethodDescription, methodSignature,
+				args);
 		}
 
-		if (requestLoggerAnnotation.controllerApiValue() && StringUtils.isNotBlank(controllerDescription)) {
+		if (requestLoggerAnnotation.controllerApiValue() && StringUtils.isNotBlank(
+			controllerDescription)) {
 			requestLogger.setDescription(controllerDescription + "-" + controllerMethodDescription);
 		} else {
 			requestLogger.setDescription(controllerDescription.toString());

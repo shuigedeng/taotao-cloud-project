@@ -2,12 +2,12 @@ package com.taotao.cloud.quartz.controller;
 
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.quartz.param.QuartzJobQuery;
-import com.taotao.cloud.quartz.vo.QuartzJobVO;
 import com.taotao.cloud.quartz.entity.QuartzJob;
 import com.taotao.cloud.quartz.param.QuartzJobDTO;
+import com.taotao.cloud.quartz.param.QuartzJobQuery;
 import com.taotao.cloud.quartz.service.QuartzJobService;
 import com.taotao.cloud.quartz.utils.CronUtils;
+import com.taotao.cloud.quartz.vo.QuartzJobVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +59,7 @@ public class QuartzJobController {
 	@GetMapping("/findById")
 	public Result<QuartzJobVO> findById(Long id) {
 		QuartzJob quartzJob = quartzJobService.findById(id);
-		return Result.success(null);
+		return Result.success(new QuartzJobVO());
 	}
 
 	@Operation(summary = "启动")
