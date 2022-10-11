@@ -10,33 +10,35 @@ RUN java -Djarmode=layertools -jar taotao-cloud-sys-2022.10.jar extract
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1
 
-ARG BACKEND_SERVICE=192.168.10.200:11800
-ARG AGENT_AUTHENTICATION=taotao-cloud
+ARG SKYWALKING_BACKEND_SERVICE=192.168.10.200:11800
+ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG DINGDING_TOKEN_ID=xxx
 ARG DINGDING_SECRET=xxx
 ARG TAOTAO_CLOUD_MAIL_PASSWORD=xxxx
 ARG APP_NAME=taotao-cloud-sys
 ARG APP_VERSION=2022.10
-ARG JAR=${APP_NAME}-${VERSION}
-ARG JAR_NAME=${JAR}.jar
+ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33337
-ARG PRROFILES=dev
+ARG APP_PRROFILES=dev
 
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
 LABEL org.opencontainers.image.authors=981376577@qq.com
 
 ENV TZ=Asia/Shanghai
+#app
+ENV APP_NAME=${APP_NAME}
+ENV APP_VERSION=${APP_VERSION}
+ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
+ENV APP_PRROFILES=${APP_PRROFILES}
+#mail
+ENV TAOTAO_CLOUD_MAIL_PASSWORD=${TAOTAO_CLOUD_MAIL_PASSWORD}
+#dingding
 ENV DINGDING_TOKEN_ID=${DINGDING_TOKEN_ID}
 ENV DINGDING_SECRET=${DINGDING_SECRET}
-ENV APP_NAME=${APP_NAME}
-ENV VERSION=${APP_VERSION}
-ENV JAR_NAME=${APP_NAME}-${VERSION}.jar
-ENV BACKEND_SERVICE=${BACKEND_SERVICE}
-ENV AGENT_AUTHENTICATION=${AGENT_AUTHENTICATION}
-ENV TAOTAO_CLOUD_MAIL_PASSWORD=${TAOTAO_CLOUD_MAIL_PASSWORD}
-ENV PRROFILES=${PRROFILES}
-
+#skywalking
+ENV SKYWALKING_BACKEND_SERVICE=${SKYWALKING_BACKEND_SERVICE}
+ENV SKYWALKING_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
 # pyroscope
 ENV PYROSCOPE_APPLICATION_NAME=${APP_NAME}
 ENV PYROSCOPE_SERVER_ADDRESS=http://192.168.10.200:4040
@@ -93,15 +95,15 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${PRROFILES} \
+                  -Dspring.profiles.active=${APP_PRROFILES} \
                   -javaagent:/skywalking/agent/pyroscope.jar \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
-                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
+                  -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
                   -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
                   -Dskywalking.logging.level=INFO \
                   -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} "
+                  -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
 
 USER root
 
