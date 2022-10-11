@@ -114,9 +114,13 @@ public class IdempotentAspect {
 
 				try {
 					if (StringUtils.isNotBlank(rid)) {
-						ZLock result = distributedLock.tryLock(
+						//ZLock result = distributedLock.tryLock(
+						//	REDIS_KEY_PREFIX + rid,
+						//	1,
+						//	10,
+						//	TimeUnit.SECONDS);
+						ZLock result = distributedLock.lock(
 							REDIS_KEY_PREFIX + rid,
-							1,
 							10,
 							TimeUnit.SECONDS);
 						if (Objects.isNull(result)) {
@@ -167,8 +171,12 @@ public class IdempotentAspect {
 						perFix = perFix + ":" + val;
 
 						try {
-							ZLock result = distributedLock.tryLock(perFix,
-								1,
+							//ZLock result = distributedLock.tryLock(perFix,
+							//	1,
+							//	10,
+							//	TimeUnit.SECONDS);
+							ZLock result = distributedLock.lock(
+								perFix,
 								10,
 								TimeUnit.SECONDS);
 							if (Objects.isNull(result)) {
