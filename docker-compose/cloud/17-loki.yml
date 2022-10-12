@@ -1,0 +1,57 @@
+version: "3"
+
+networks:
+  loki:
+
+services:
+  loki:
+    container_name: loki
+    image: grafana/loki
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=zh_CN.UTF-8
+    ports:
+      - 6667:3100
+    networks:
+      - loki
+
+  promtail:
+    container_name: pt
+    image: grafana/promtail
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=zh_CN.UTF-8
+    ports:
+      - 6668:9080
+    networks:
+      - loki
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:master
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=zh_CN.UTF-8
+    ports:
+      - 6666:3000
+    networks:
+      - loki
+      - #      # loki配置文件目录
+        #  /etc/loki/loki.yml
+        #  # promtail配置文件目录
+        #  etc/promtail/config.yml
+
+        #编辑/etc/docker/daemon:
+        #  json，内容为:
+        #  {
+        #    "log-driver": "loki",
+        #    "log-opts": {
+        #      "loki-url": "http://xxx.xxx.xxx.xxx:3100/loki/api/v1/push",
+        #      "max-size": "50m",
+        #      "max-file": "10"
+        #    },
+        #    "registry-mirrors": ["https://registry.docker-cn.com"]
+      #  }
