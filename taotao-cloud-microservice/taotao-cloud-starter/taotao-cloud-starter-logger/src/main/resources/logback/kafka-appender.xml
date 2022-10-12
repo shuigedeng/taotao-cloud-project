@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-	<appender name="KAFKA" class="com.taotao.cloud.logger.appender.TaoTaoCloudKafkaAppender">
-<!--	<appender name="KAFKA" class="com.github.rahulsinghai.logback.kafka.KafkaAppender">-->
+	<appender name="KAFKA_APPENDER" class="com.taotao.cloud.logger.appender.TaoTaoCloudKafkaAppender">
+		<!--	<appender name="KAFKA" class="com.github.rahulsinghai.logback.kafka.KafkaAppender">-->
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
 			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>
@@ -55,13 +55,13 @@
 		<producerConfig>compression.type=gzip</producerConfig>
 	</appender>
 
-<!--	<appender name="KAFKA_ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
-<!--		<queueSize>500</queueSize>-->
-<!--		<neverBlock>true</neverBlock>-->
-<!--		<discardingThreshold>0</discardingThreshold>-->
-<!--		<includeCallerData>true</includeCallerData>-->
+	<appender name="KAFKA_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>500</queueSize>
+		<neverBlock>true</neverBlock>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
 
-<!--		<appender-ref ref="KAFKA"/>-->
-<!--	</appender>-->
+		<appender-ref ref="KAFKA_APPENDER"/>
+	</appender>
 
 </included>

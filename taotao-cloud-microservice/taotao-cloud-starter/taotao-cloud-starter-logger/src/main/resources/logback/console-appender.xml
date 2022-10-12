@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
 	<!-- 控制台日志 -->
-	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
 		<withJansi>true</withJansi>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
 			<layout class="com.taotao.cloud.logger.logback.layout.TraceIdPatternLogbackLayout">
@@ -10,11 +10,11 @@
 		</encoder>
 	</appender>
 
-	<appender name="CONSOLE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="CONSOLE_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
 		<queueSize>512</queueSize>
 		<discardingThreshold>0</discardingThreshold>
 		<includeCallerData>true</includeCallerData>
 
-		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="CONSOLE_APPENDER"/>
 	</appender>
 </included>

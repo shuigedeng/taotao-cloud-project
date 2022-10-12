@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-	<appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
+	<appender name="GELF_APPENDER" class="de.siegmar.logbackgelf.GelfUdpAppender">
 		<!-- Graylog服务的地址 -->
 		<graylogHost>ip</graylogHost>
 		<!-- UDP Input端口 -->
@@ -26,15 +26,15 @@
 			</fullPatternLayout>
 
 			<!-- 配置应用名称（服务名称），通过staticField标签可以自定义一些固定的日志字段 -->
-			<staticField>app_name:austin</staticField>
+			<staticField>app_name:taotao-cloud</staticField>
 		</encoder>
 	</appender>
 
-	<appender name="FILE_SQL_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="GELF_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
 		<queueSize>512</queueSize>
 		<discardingThreshold>0</discardingThreshold>
 		<includeCallerData>true</includeCallerData>
 
-		<appender-ref ref="FILE_SQL"/>
+		<appender-ref ref="GELF_APPENDER"/>
 	</appender>
 </included>

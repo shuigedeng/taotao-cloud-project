@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-	<appender name="FILE_ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE_ALL_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_FILE}/${APP_NAME}.all.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -24,7 +24,7 @@
 		</rollingPolicy>
 	</appender>
 
-	<appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE_WARN_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_FILE}/${APP_NAME}.warn.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -51,7 +51,7 @@
 		</filter>
 	</appender>
 
-	<appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE_ERROR_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_FILE}/${APP_NAME:-}.error.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -76,7 +76,7 @@
 		</filter>
 	</appender>
 
-	<appender name="FILE_SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE_SQL_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_FILE}/${APP_NAME:-}.sql.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -101,7 +101,7 @@
 		</filter>
 	</appender>
 
-	<appender name="FILE_ALL_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="FILE_ALL_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
 		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
 		<queueSize>512</queueSize>
 		<!-- 默认情况下，当阻塞队列的剩余容量为20％时，它将丢弃TRACE，DEBUG和INFO级别的事件，仅保留WARN和ERROR级别的事件。要保留所有事件，请将discardingThreshold设置为0。 -->
@@ -109,30 +109,30 @@
 		<!--提取调用者数据的代价是相当昂贵的。为了提升性能，默认情况下，当event被加入到queue时，event关联的调用者数据不会被提取。默认情况下，只有"cheap"的数据，如线程名。-->
 		<includeCallerData>true</includeCallerData>
 
-		<appender-ref ref="FILE_ALL"/>
+		<appender-ref ref="FILE_ALL_APPENDER"/>
 	</appender>
 
-	<appender name="FILE_WARN_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="FILE_WARN_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
 		<queueSize>512</queueSize>
 		<discardingThreshold>0</discardingThreshold>
 		<includeCallerData>true</includeCallerData>
 
-		<appender-ref ref="FILE_WARN"/>
+		<appender-ref ref="FILE_WARN_APPENDER"/>
 	</appender>
 
-	<appender name="FILE_ERROR_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="FILE_ERROR_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
 		<queueSize>512</queueSize>
 		<discardingThreshold>0</discardingThreshold>
 		<includeCallerData>true</includeCallerData>
 
-		<appender-ref ref="FILE_ERROR"/>
+		<appender-ref ref="FILE_ERROR_APPENDER"/>
 	</appender>
 
-	<appender name="FILE_SQL_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="FILE_SQL_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
 		<queueSize>512</queueSize>
 		<discardingThreshold>0</discardingThreshold>
 		<includeCallerData>true</includeCallerData>
 
-		<appender-ref ref="FILE_SQL"/>
+		<appender-ref ref="FILE_SQL_APPENDER"/>
 	</appender>
 </included>
