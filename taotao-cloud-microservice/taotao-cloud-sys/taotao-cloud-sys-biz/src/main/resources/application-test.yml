@@ -14,6 +14,7 @@ server:
       enabled: true
   servlet:
     application-display-name: ${spring.application.name}
+    #context-path: sys
 
 jasypt:
   encryptor:
@@ -507,10 +508,10 @@ spring:
       rules:
         - name: "general"
           content: "AService->BService->FService->GService->HService;EService->CService;AService"
-        - name: "anyConditionRule"
-          content: "AServiceCondition,BServiceCondition,CServiceCondition->DServiceCondition:anyCondition"
-        - name: "anyConditionRuleAppend"
-          content: "AServiceCondition,BServiceCondition,CServiceCondition->DServiceCondition:anyCondition->EServiceCondition"
+        #- name: "anyConditionRule"
+        #  content: "AServiceCondition,BServiceCondition,CServiceCondition->DServiceCondition:anyCondition"
+        #- name: "anyConditionRuleAppend"
+        #  content: "AServiceCondition,BServiceCondition,CServiceCondition->DServiceCondition:anyCondition->EServiceCondition"
       #局部异常是否打断主流程
       task-interrupt: true
       transaction: true
@@ -1273,7 +1274,6 @@ taotao:
         tenant:
           enabled: false
     core:
-      env: dev
       enabled: true
     captcha:
       enabled: false
@@ -1296,6 +1296,9 @@ taotao:
       enabled: true
       netty:
         enabled: true
+    security:
+      ignore-url:
+        - /sys/buyer/dict/test/{code}
 
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割
@@ -1450,12 +1453,12 @@ kylin:
     expire: 30000               #过期时间，默认值30000L 单位：毫秒
     retry-interval: 100         #获取锁失败时重试时间间隔，默认值100L 单位：毫秒
     lock-key-prefix: kylin-lock #锁前缀 默认配置
-    primary-executor: com.wjk.kylin.lock.executor.redisson.RedissonLockExecutor #默认执行器。默认redisson>zookeeper
+    primary-executor: com.taotao.cloud.lock.kylin.executor.redisson.RedissonLockExecutor #默认执行器。默认redisson>zookeeper
     redisson: true              #是否开启redisson 默认true
-    zookeeper:
-      zk-servers: 127.0.0.1:2181 #zk的server地址，多个server之间使用英文逗号分隔开 。配置地址则开启zookeeper
-      session-timeout: 60000     #会话超时时间，默认值60000 单位：毫秒
-      connection-timeout: 15000  #连接超时时间，默认值15000 单位：毫秒
-      base-sleep-time-ms: 5000   #初始sleep时间，默认值5000 单位：毫秒
-      max-retries: 3             #最大失败重试次数
-      namespace: curator/kylin/lock #命名空间
+    #zookeeper:
+    #  zk-servers: 127.0.0.1:2181 #zk的server地址，多个server之间使用英文逗号分隔开 。配置地址则开启zookeeper
+    #  session-timeout: 60000     #会话超时时间，默认值60000 单位：毫秒
+    #  connection-timeout: 15000  #连接超时时间，默认值15000 单位：毫秒
+    #  base-sleep-time-ms: 5000   #初始sleep时间，默认值5000 单位：毫秒
+    #  max-retries: 3             #最大失败重试次数
+    #  namespace: curator/kylin/lock #命名空间

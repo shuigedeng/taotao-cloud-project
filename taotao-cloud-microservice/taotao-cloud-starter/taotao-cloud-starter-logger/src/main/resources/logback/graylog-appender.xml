@@ -2,7 +2,7 @@
 <included>
 	<appender name="GELF_APPENDER" class="de.siegmar.logbackgelf.GelfUdpAppender">
 		<!-- Graylog服务的地址 -->
-		<graylogHost>ip</graylogHost>
+		<graylogHost>192.168.10.210</graylogHost>
 		<!-- UDP Input端口 -->
 		<graylogPort>12201</graylogPort>
 		<!-- 最大GELF数据块大小（单位：字节），508为建议最小值，最大值为65467 -->
@@ -22,11 +22,12 @@
 				<pattern>%m%nopex</pattern>
 			</shortPatternLayout>
 			<fullPatternLayout class="ch.qos.logback.classic.PatternLayout">
-				<pattern>%d - [%thread] %-5level %logger{35} - %msg%n</pattern>
+				<!--				<pattern>%d - [%thread] %-5level %logger{35} - %msg%n</pattern>-->
+				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</fullPatternLayout>
 
 			<!-- 配置应用名称（服务名称），通过staticField标签可以自定义一些固定的日志字段 -->
-			<staticField>app_name:taotao-cloud</staticField>
+			<staticField>app_name:taotao-cloud-sys</staticField>
 		</encoder>
 	</appender>
 

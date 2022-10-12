@@ -10,11 +10,11 @@
 		<useDirectBuffers>true</useDirectBuffers>
 		<sendQueueMaxBytes>41943040</sendQueueMaxBytes>
 		<http class="com.github.loki4j.logback.ApacheHttpSender">
-			<url>http://localhost:3100/loki/api/v1/push</url>
-			<auth>
-				<username>example_username</username>
-				<password>example_api_token</password>
-			</auth>
+			<url>http://192.168.10.210:3100/loki/api/v1/push</url>
+			<!--			<auth>-->
+			<!--				<username>example_username</username>-->
+			<!--				<password>example_api_token</password>-->
+			<!--			</auth>-->
 			<maxConnections>10</maxConnections>
 			<connectionTimeoutMs>30000</connectionTimeoutMs>
 			<requestTimeoutMs>15000</requestTimeoutMs>

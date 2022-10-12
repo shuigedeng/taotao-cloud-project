@@ -1,0 +1,544 @@
+# 新建网络 docker-compose -f  3-zk-kafka-cluster.yml up -d
+# docker network ls #查看当前网络
+# docker network create --driver bridge --subnet 172.11.0.0/16 --gateway 172.11.0.1 taotao-cluster-network
+
+version: '3.8'
+services:
+  #https://www.pudn.com/news/632d53b0272bb74d44e90b24.html    需要执行 START SLAVE;
+  mysql8-master:
+    hostname: mysql8-master
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: master
+      MYSQL_PASSWORD: 123456
+    command:
+      --bind-address=172.11.0.10
+      --default-authentication-plugin=mysql_native_password
+      --max_connections=1000
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --default-time-zone='+8:00'
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+      --expire-logs-days=7
+    image: mysql:8.0
+    privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+    restart: always
+    container_name: mysql8-master
+    ports:
+      - "13306:3306"
+    volumes:
+      - /root/compose/mysql/master/data:/var/lib/mysql
+      - /root/compose/mysql/master/logs:/var/log/mysql
+      - /root/compose/mysql/master/conf/my.cnf:/etc/mysql/my.cnf
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.10
+  mysql8-slave:
+    hostname: mysql8-slave
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: slave
+      MYSQL_PASSWORD: 123456
+    command:
+      --bind-address=172.11.0.11
+      --default-authentication-plugin=mysql_native_password
+      --max_connections=1000
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --default-time-zone='+8:00'
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+      --expire-logs-days=7
+    image: mysql:8.0
+    privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+    restart: always
+    container_name: mysql8-slave
+    ports:
+      - "13307:3306"
+    volumes:
+      - /root/compose/mysql/slave/data:/var/lib/mysql
+      - /root/compose/mysql/slave/logs:/var/log/mysql
+      - /root/compose/mysql/slave/conf/my.cnf:/etc/mysql/my.cnf
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.11
+
+  redis:
+    image: redis:6.0-alpine
+    container_name: redis
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+    command: [ "redis-server","/etc/redis/redis.conf" ]
+    restart: always
+    volumes:
+      - /root/compose/redis/conf:/etc/redis/
+      - /root/compose/redis/data:/data
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.12
+
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    environment:
+      TZ: Asia/Shanghai
+    restart: always
+    ports:
+      - "2181:2181"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.13
+  kafka:
+    image: wurstmeister/kafka:2.13-2.8.1
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=172.11.0.14
+      - KAFKA_ZOOKEEPER_CONNECT=172.11.0.13:2181
+      - KAFKA_BROKER_ID=1
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.10.210:9092
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_HEAP_OPTS="-Xmx512M -Xms16M"
+      - TZ=Asia/Shanghai
+    restart: always
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.14
+  kafka_manager:
+    image: sheepkiller/kafka-manager:stable
+    container_name: kafka-manager
+    privileged: true
+    ports:
+      - "9000:9000"
+    environment:
+      ZK_HOSTS: 172.11.0.13:2181
+      KAFKA_BROKERS: 172.11.0.14:9092
+      APPLICATION_SECRET: 123456
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+    restart: always
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.15
+
+  nacos:
+    image: nacos/nacos-server:v2.1.1
+    restart: always
+    container_name: nacos
+    privileged: true
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    environment:
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: 172.11.0.10
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: 123456
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.1.1
+      MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+    volumes:
+      - /root/compose/nacos/logs/:/home/nacos/logs
+      - /root/compose/nacos/plugins/:/home/nacos/plugins
+      - /root/compose/nacos/data:/home/nacos/data
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.16
+
+  seata:
+    container_name: seata
+    image: seataio/seata-server:1.5.1
+    restart: always
+    ports:
+      - "8091:8091"
+      - "7091:7091"
+    volumes:
+      - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime"        #设置系统时区
+      - "/usr/share/zoneinfo/Asia/Shanghai:/etc/timezone"  #设置时区
+      - /root/compose/seata/application.yml:/seata-server/resources/application.yml
+    environment:
+      STORE_MODE: db
+      SEATA_PORT: 8091
+      SEATA_IP: 192.168.10.210
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.17
+
+  elasticsearch:
+    image: elasticsearch:8.2.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+      - TZ="Asia/Shanghai"
+      - xpack.security.enabled=false
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.11.0.18
+  kibana:
+    image: kibana:8.2.2
+    container_name: kibana
+    environment:
+      I18N_LOCALE: zh-CN
+      ELASTICSEARCH_URL: http://172.11.0.18:9200
+      ELASTICSEARCH_HOSTS: http://172.11.0.18:9200
+    ports:
+      - "5601:5601"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.19
+
+  prometheus:
+    image: prom/prometheus:v2.39.1
+    container_name: prometheus
+    hostname: prometheus
+    restart: always
+    volumes:
+      - /root/compose/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.20
+  alertmanager:
+    image: prom/alertmanager:v0.14.0
+    container_name: alertmanager
+    hostname: alertmanager
+    restart: always
+    volumes:
+      - /root/compose/prometheus/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - "9093:9093"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.21
+  grafana:
+    image: grafana/grafana:9.1.8
+    container_name: grafana
+    hostname: grafana
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3000:3000"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.22
+  node-exporter:
+    image: prom/node-exporter:v1.4.0
+    container_name: node-exporter
+    hostname: node-exporter
+    restart: always
+    ports:
+      - "9101:9100"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.23
+
+  skywalking-oap:
+    image: apache/skywalking-oap-server:9.2.0
+    container_name: skywalking-oap
+    restart: always
+    ports:
+      - "11800:11800"
+      - "12800:12800"
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.24
+  skywalking-ui:
+    image: apache/skywalking-ui:9.2.0
+    container_name: skywalking-ui
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - TZ=Asia/Shanghai
+      - SW_OAP_ADDRESS=http://172.11.0.24:12800
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.25
+
+  zipkin:
+    image: openzipkin/zipkin:2.23
+    container_name: zipkin
+    environment:
+      - STORAGE_TYPE=mysql
+      - MYSQL_DB=taotao-cloud-zipkin-2.23
+      - MYSQL_USER=root
+      - MYSQL_PASS=123456
+      - MYSQL_HOST=192.168.10.210
+      - MYSQL_TCP_PORT=3306
+    ports:
+      - "9411:9411"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.30
+
+  sentinel-dashboard:
+    image: dreamkaylee/sentinel-dashboard:1.8.5
+    container_name: sentinel-dashboard
+    ports:
+      - "8858:8858"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.31
+
+  rocketmq-namesrv:
+    image: apache/rocketmq:4.9.4
+    container_name: rocketmq-namesrv
+    restart: always
+    ports:
+      - "9876:9876"
+    environment:
+      JAVA_OPT: -server -Xms512m -Xmx512m
+    command: sh mqnamesrv
+    volumes:
+      - /root/compose/rocketmq/namesrv/logs:/home/rocketmq/logs
+      - /root/compose/rocketmq/namesrv/store:/home/rocketmq/store
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.32
+  rocketmq-broker:
+    image: apache/rocketmq:4.9.4
+    container_name: rocketmq-broker
+    restart: always
+    ports:
+      - "10909:10909"
+      - "10911:10911"
+      - "10912:10912"
+    volumes:
+      - /root/compose/rocketmq/broker/logs:/home/rocketmq/logs/rocketmqlogs
+      - /root/compose/rocketmq/broker/store:/home/rocketmq/store
+      - /root/compose/rocketmq/broker/broker.conf:/home/rocketmq/rocketmq-4.9.4/conf/broker.conf
+    environment:
+      JAVA_OPT_EXT: -server -Xms512M -Xmx512M -Xmn256m
+    command: sh mqbroker -c /home/rocketmq/rocketmq-4.9.4/conf/broker.conf
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.33
+  rocketmq-console:
+    image: styletang/rocketmq-console-ng
+    container_name: rocketmq-console
+    restart: always
+    ports:
+      - "19876:19876"
+    environment:
+      JAVA_OPTS: -Dserver.port=19876 -Drocketmq.namesrv.addr=172.11.0.32:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.34
+
+  rabbitmq:
+    image: rabbitmq:3.9.13-management
+    container_name: rabbitmq
+    restart: always
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - /root/cloud/rabbitmq/rabbitmq1/data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=123456
+      - RABBITMQ_ERLANG_COOKIE=CURIOAPPLICATION
+      - RABBITMQ_NODENAME:rabbitmq
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.35
+
+  yapi:
+    image: mrjin/yapi:latest
+    container_name: yapi
+    environment:
+      - VERSION=1.10.2
+      - LOG_PATH=/tmp/yapi.log
+      - HOME=/home
+      - PORT=3000
+      - ADMIN_EMAIL=981376577@qq.com
+      - DB_SERVER=mongo
+      - DB_NAME=yapi
+      - DB_PORT=27017
+    restart: always
+    ports:
+      - "3001:3000"
+    volumes:
+      - /root/compose/yapi/yapi.log:/home/vendors/log
+    depends_on:
+      - mongo
+    entrypoint: "bash /wait-for-it.sh mongo:27017 -- entrypoint.sh"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.36
+  mongo:
+    image: mongo:6.0.2
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - /root/compose/mongodb:/data/db
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.37
+
+  pyroscope:
+    image: pyroscope/pyroscope:0.31.0
+    container_name: pyroscope
+    restart: always
+    ports:
+      - "4040:4040"
+    command:
+      - "server"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.38
+
+  graylog:
+    image: graylog/graylog:4.2
+    restart: always
+    container_name: graylog
+    environment:
+      - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
+      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://192.168.10.210:9009/ # 这里注意要改ip ip:port访问 admin/admin
+    #entrypoint: /usr/bin/tini -- wait-for-it elasticsearch:9200 --  /docker-entrypoint.sh
+    depends_on:
+      - mongo
+      - elasticsearch
+    ports:
+      - "9009:9000"
+      - "1514:1514"
+      - "1514:1514/udp"
+      - "12201:12201"
+      - "12201:12201/udp"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.39
+
+  loki:
+    container_name: loki
+    image: grafana/loki:main
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=zh_CN.UTF-8
+    ports:
+      - "3100:3100"
+    #command: -config.file=/mnt/config/loki-config.yaml
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.40
+  promtail:
+    container_name: promtail
+    image: grafana/promtail:main
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=zh_CN.UTF-8
+    ports:
+      - "9080:9080"
+    #command: -config.file=/mnt/config/promtail-config.yaml
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.41
+
+  arthas:
+    image: hengyunabc/arthas:latest
+    container_name: pyroscope
+    restart: always
+    ports:
+      - "4040:4040"
+    command:
+      - "java -jar /opt/arthas/arthas-boot.jar"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.42
+
+  canal-server:
+    image: canal/canal-server:v1.1.6
+    container_name: canal-server
+    ports:
+      - "11111:11111"
+    environment:
+      - canal.instance.mysql.slaveId=12   # slaveId 不与其他重复即可
+      - canal.auto.scan=false                # 自动扫描
+      - canal.destinations=test         #  client 需要指定此 dest
+      - canal.instance.master.address=127.0.0.1:3306   # mysql 地址
+      - canal.instance.dbUsername=canal               # mysql username
+      - canal.instance.dbPassword=canal        # mysql 密码
+      - canal.instance.connectionCharset=UTF-8
+      - canal.instance.gtidon=false
+      - canal.instance.tsdb.enable=true
+      - canal.instance.filter.regex=.*\\..*
+      - canal.mq.topic=example
+    volumes:
+      - /root/compose/canal/conf/:/home/admin/canal-server/conf/
+      - /root/compose/canal/logs/:/home/admin/canal-server/logs/
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.43
+  canal-admin:
+    network_mode: "bridge"  #因为我mysql和canal-server是在这个默认的网络下面，所以我的canal-admin也加入这个网络
+    image: canal/canal-admin:v1.1.6
+    container_name: canal-admin
+    ports:
+      - "8089:8089"
+    environment:
+      - server.port=8089
+      - canal.adminUser=admin
+      - canal.adminPasswd=admin
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.44
+
+  logstash:
+    image: logstash:8.4.3
+    container_name: logstash
+    ports:
+      - "4560:4560"
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      #挂载logstash的配置文件
+      - /root/compose/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.45
+
+networks:
+  taotao-cluster-network:
+    external: true
