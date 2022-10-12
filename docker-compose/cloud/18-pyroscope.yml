@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  pyroscope:
+    container_name: pyroscope
+    image: pyroscope/pyroscope:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=zh_CN.UTF-8
+    ports:
+      - "4040:4040"
+    command:
+      - "server"
+    networks:
+      - loki
