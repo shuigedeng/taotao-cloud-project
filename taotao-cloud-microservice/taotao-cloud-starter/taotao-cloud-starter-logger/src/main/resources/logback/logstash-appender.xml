@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-	<appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+	<appender name="LOGSTASH_APPENDER" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
 		<destination>${LOGSTASH_DESTINATION}</destination>
 		<includeCallerData>true</includeCallerData>
 		<keepAliveDuration>5 minutes</keepAliveDuration>
@@ -22,7 +22,7 @@
 
 		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
 			<providers>
-				<provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider" />
+				<provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider"/>
 
 				<mdc/>
 				<version>
@@ -54,19 +54,19 @@
 					<includeNonStructuredArguments>true</includeNonStructuredArguments>
 				</arguments>
 
-<!--				<callerData>-->
-<!--					<classFieldName>class</classFieldName>-->
-<!--					<methodFieldName>method</methodFieldName>-->
-<!--					<lineFieldName>line</lineFieldName>-->
-<!--					<fileFieldName>file</fileFieldName>-->
-<!--				</callerData>-->
+				<!--				<callerData>-->
+				<!--					<classFieldName>class</classFieldName>-->
+				<!--					<methodFieldName>method</methodFieldName>-->
+				<!--					<lineFieldName>line</lineFieldName>-->
+				<!--					<fileFieldName>file</fileFieldName>-->
+				<!--				</callerData>-->
 
-<!--				<jsonFactoryDecorator class="net.logstash.logback.decorate.CharacterEscapesJsonFactoryDecorator">-->
-<!--					<escape>-->
-<!--						<targetCharacterCode>10</targetCharacterCode>-->
-<!--						<escapeSequence>\u2028</escapeSequence>-->
-<!--					</escape>-->
-<!--				</jsonFactoryDecorator>-->
+				<!--				<jsonFactoryDecorator class="net.logstash.logback.decorate.CharacterEscapesJsonFactoryDecorator">-->
+				<!--					<escape>-->
+				<!--						<targetCharacterCode>10</targetCharacterCode>-->
+				<!--						<escapeSequence>\u2028</escapeSequence>-->
+				<!--					</escape>-->
+				<!--				</jsonFactoryDecorator>-->
 
 				<pattern>
 					<omitEmptyFields>false</omitEmptyFields>
@@ -209,11 +209,11 @@
 		<!--		</encoder>-->
 	</appender>
 
-	<appender name="LOGSTASH_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="LOGSTASH_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
 		<queueSize>512</queueSize>
 		<discardingThreshold>0</discardingThreshold>
 		<includeCallerData>true</includeCallerData>
 
-		<appender-ref ref="LOGSTASH"/>
+		<appender-ref ref="LOGSTASH_APPENDER"/>
 	</appender>
 </included>
