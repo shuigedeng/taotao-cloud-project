@@ -4,7 +4,7 @@
 
 version: '3.8'
 services:
-  #https://www.pudn.com/news/632d53b0272bb74d44e90b24.html    需要执行 START SLAVE;
+  #https://www.pudn.com/news/632d53b0272bb74d44e90b24.html    需要执行 START SLAVE ; SHOW SLAVE STATUS\G
   mysql8-master:
     hostname: mysql8-master
     environment:
@@ -93,7 +93,8 @@ services:
         ipv4_address: 172.11.0.12
 
   zookeeper:
-    image: wurstmeister/zookeeper:latest
+    image: zookeeper:3.6.3
+    container_name: zookeeper
     environment:
       TZ: Asia/Shanghai
     restart: always
@@ -104,6 +105,7 @@ services:
         ipv4_address: 172.11.0.13
   kafka:
     image: wurstmeister/kafka:2.13-2.8.1
+    container_name: kafka
     ports:
       - "9092:9092"
     environment:
@@ -184,9 +186,9 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.17
 
-  elasticsearch:
+  elasticsearch8:
     image: elasticsearch:8.2.0
-    container_name: elasticsearch
+    container_name: elasticsearch8
     environment:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -203,7 +205,7 @@ services:
       - "9200:9200"
       - "9300:9300"
     networks:
-      kafka-cluster-network:
+      taotao-cluster-network:
         ipv4_address: 172.11.0.18
   kibana:
     image: kibana:8.2.2
@@ -355,7 +357,7 @@ services:
     ports:
       - "19876:19876"
     environment:
-      JAVA_OPTS: -Dserver.port=19876 -Drocketmq.namesrv.addr=172.11.0.32:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+      JAVA_OPTS: -Dserver.port=19876 -Drocketmq.namesrv.addr=192.168.10.210:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.34
@@ -369,7 +371,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     volumes:
-      - /root/cloud/rabbitmq/rabbitmq1/data:/var/lib/rabbitmq
+      - /root/compose/rabbitmq/data:/var/lib/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=root
       - RABBITMQ_DEFAULT_PASS=123456
@@ -496,7 +498,7 @@ services:
       - canal.instance.mysql.slaveId=12   # slaveId 不与其他重复即可
       - canal.auto.scan=false                # 自动扫描
       - canal.destinations=test         #  client 需要指定此 dest
-      - canal.instance.master.address=127.0.0.1:3306   # mysql 地址
+      - canal.instance.master.address=172.11.0.10:3306   # mysql 地址
       - canal.instance.dbUsername=canal               # mysql username
       - canal.instance.dbPassword=canal        # mysql 密码
       - canal.instance.connectionCharset=UTF-8
@@ -511,7 +513,6 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.43
   canal-admin:
-    network_mode: "bridge"  #因为我mysql和canal-server是在这个默认的网络下面，所以我的canal-admin也加入这个网络
     image: canal/canal-admin:v1.1.6
     container_name: canal-admin
     ports:
@@ -519,7 +520,7 @@ services:
     environment:
       - server.port=8089
       - canal.adminUser=admin
-      - canal.adminPasswd=admin
+      - canal.adminPasswd=123456
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.44
@@ -538,6 +539,28 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.45
+
+  elasticsearch:
+    image: elasticsearch:7.17.6
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+      - TZ="Asia/Shanghai"
+      - xpack.security.enabled=false
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "19200:9200"
+      - "19300:9300"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.46
 
 networks:
   taotao-cluster-network:
