@@ -72,8 +72,8 @@
 	<include resource="logback/kafka-appender.xml"/>
 	<include resource="logback/loki-appender.xml"/>
 	<include resource="logback/graylog-appender.xml"/>
+	<include resource="logback/logstash-appender.xml"/>
 	<!--<include resource="logback/db-appender.xml"/>-->
-	<!--<include resource="logback/logstash-appender.xml"/>-->
 
 	<!--为某个包单独配置logger
     比如定时任务，写代码的包名为：net.add1s.slf4j-logback
