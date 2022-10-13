@@ -116,14 +116,14 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
 
 RUN ls -l /etc/apk
-#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
-#RUN echo 'http://mirrors.ustc.edu.cn/alpine/v3.7/main \
-#       http://mirrors.ustc.edu.cn/alpine/v3.7/community\
-#       http://mirrors.ustc.edu.cn/alpine/edge/main\
-#       http://mirrors.ustc.edu.cn/alpine/edge/community\
-#       http://mirrors.ustc.edu.cn/alpine/edge/testing' >/etc/apk/repositories
+RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.7/main \
+       https://mirrors.ustc.edu.cn/alpine/v3.7/community\
+       https://mirrors.ustc.edu.cn/alpine/edge/main\
+       https://mirrors.ustc.edu.cn/alpine/edge/community\
+       https://mirrors.ustc.edu.cn/alpine/edge/testing' >/etc/apk/repositories
 RUN apk update && apk add curl
 
 # RUN apk update && apk agdd libreoffice
