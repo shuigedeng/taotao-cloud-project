@@ -17,7 +17,7 @@ ARG DINGDING_TOKEN_ID=xxx
 ARG DINGDING_SECRET=xxx
 ARG TAOTAO_CLOUD_MAIL_PASSWORD=xxxx
 ARG APP_NAME=taotao-cloud-sys
-ARG APP_VERSION="2022.10"
+ARG APP_VERSION=2022.10
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33337
 ARG APP_PRROFILES=dev
@@ -125,6 +125,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 #       https://mirrors.ustc.edu.cn/alpine/edge/community\
 #       https://mirrors.ustc.edu.cn/alpine/edge/testing' >/etc/apk/repositories
 RUN apk update --allow-untrusted && apk add curl --allow-untrusted
+RUN apk add libstdc++
 
 # RUN apk update && apk agdd libreoffice
 # RUN apk add --no-cache msttcorefonts-installer fontconfig
