@@ -40,10 +40,10 @@
 	<springProperty name="SERVER_PORT" scope="context" source="server.port"
 		defaultValue="--"/>
 	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers"
-		defaultValue="192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094"/>
+		defaultValue="192.168.10.210:9092"/>
 	<springProperty name="LOGSTASH_DESTINATION" scope="context"
 		source="logging.extend.logstash-appender.destination"
-		defaultValue="192.168.10.200:4560"/>
+		defaultValue="192.168.10.210:4560"/>
 
 	<!--https://logback.qos.ch/manual/layouts.html-->
 
@@ -72,7 +72,7 @@
 	<include resource="logback/kafka-appender.xml"/>
 	<include resource="logback/loki-appender.xml"/>
 	<include resource="logback/graylog-appender.xml"/>
-	<include resource="logback/logstash-appender.xml"/>
+	<!--	<include resource="logback/logstash-appender.xml"/>-->
 	<!--<include resource="logback/db-appender.xml"/>-->
 
 	<!--为某个包单独配置logger
@@ -128,8 +128,8 @@
 		<appender-ref ref="FILE_WARN_ASYNC_APPENDER"/>
 		<appender-ref ref="FILE_ERROR_ASYNC_APPENDER"/>
 		<appender-ref ref="KAFKA_ASYNC_APPENDER"/>
-		<appender-ref ref="GELF_ASYNC_APPENDER"/>
-		<appender-ref ref="LOKI_ASYNC_APPENDER"/>
+		<!--		<appender-ref ref="GELF_ASYNC_APPENDER"/>-->
+		<!--		<appender-ref ref="LOKI_ASYNC_APPENDER"/>-->
 		<!--<appender-ref ref="LOGSTASH_ASYNC_APPENDER"/>-->
 	</root>
 
@@ -142,7 +142,7 @@
 			<appender-ref ref="KAFKA_ASYNC_APPENDER"/>
 			<appender-ref ref="GELF_ASYNC_APPENDER"/>
 			<appender-ref ref="LOKI_ASYNC_APPENDER"/>
-			<appender-ref ref="LOGSTASH_ASYNC_APPENDER"/>
+			<!--			<appender-ref ref="LOGSTASH_ASYNC_APPENDER"/>-->
 		</root>
 	</springProfile>
 
