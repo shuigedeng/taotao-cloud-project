@@ -116,6 +116,7 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
 
 RUN pwd /etc/apk/repositories
+RUN ls -l /etc/apk
 
 RUN echo 'http://mirrors.ustc.edu.cn/alpine/v3.7/main \
        http://mirrors.ustc.edu.cn/alpine/v3.7/community\
