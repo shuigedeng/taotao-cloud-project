@@ -113,15 +113,18 @@ WORKDIR /root
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 	  && echo $TZ > /etc/timezone \
     && mkdir -p /root/logs/${APP_NAME} \
-	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log \
-    && echo 'http://mirrors.ustc.edu.cn/alpine/v3.7/main \
+	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
+
+RUN pwd /etc/apk/repositories
+
+RUN echo 'http://mirrors.ustc.edu.cn/alpine/v3.7/main \
        http://mirrors.ustc.edu.cn/alpine/v3.7/community\
        http://mirrors.ustc.edu.cn/alpine/edge/main\
        http://mirrors.ustc.edu.cn/alpine/edge/community\
-       http://mirrors.ustc.edu.cn/alpine/edge/testing' >/etc/apk/repositories \
-    && apk add curl
+       http://mirrors.ustc.edu.cn/alpine/edge/testing' >/etc/apk/repositories
+RUN apk update && apk add curl
 
-# RUN apk update && apk add libreoffice
+# RUN apk update && apk agdd libreoffice
 # RUN apk add --no-cache msttcorefonts-installer fontconfig
 # RUN update-ms-fonts
 #
