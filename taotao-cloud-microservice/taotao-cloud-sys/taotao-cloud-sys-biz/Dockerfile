@@ -125,7 +125,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 #       https://mirrors.ustc.edu.cn/alpine/edge/community\
 #       https://mirrors.ustc.edu.cn/alpine/edge/testing' >/etc/apk/repositories
 RUN apk update --allow-untrusted && apk add curl --allow-untrusted
-RUN apk add libstdc++
+RUN apk add libstdc++ --allow-untrusted
 
 # RUN apk update && apk agdd libreoffice
 # RUN apk add --no-cache msttcorefonts-installer fontconfig
