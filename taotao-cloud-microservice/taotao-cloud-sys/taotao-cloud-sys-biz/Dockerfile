@@ -119,7 +119,7 @@ RUN ls -l /etc/apk
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
-RUN #echo 'https://mirrors.ustc.edu.cn/alpine/v3.7/main \
+#RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.7/main \
 #       https://mirrors.ustc.edu.cn/alpine/v3.7/community\
 #       https://mirrors.ustc.edu.cn/alpine/edge/main\
 #       https://mirrors.ustc.edu.cn/alpine/edge/community\
