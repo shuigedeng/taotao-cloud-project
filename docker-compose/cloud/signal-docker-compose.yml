@@ -100,6 +100,9 @@ services:
     restart: always
     ports:
       - "2181:2181"
+    volumes:
+      - "/root/compose/zookeeper/zoo.cfg:/conf/zoo.cfg"
+      - "/root/compose/zookeeper/data:/data"
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.13

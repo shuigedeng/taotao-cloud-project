@@ -30,6 +30,7 @@ import org.springframework.boot.SpringApplication;
  * --add-opens java.base/sun.net=ALL-UNNAMED
  * --add-opens java.base/java.math=ALL-UNNAMED
  * --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED
+ * --add-opens java.base/sun.net=ALL-UNNAMED
  * --add-opens java.desktop/sun.awt=ALL-UNNAMED
  * --add-opens java.desktop/sun.font=ALL-UNNAMED
  * --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED

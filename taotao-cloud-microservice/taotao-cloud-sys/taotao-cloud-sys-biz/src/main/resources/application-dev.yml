@@ -191,7 +191,7 @@ elasticjob:
   #  type: RDB
   reg-center:
     server-lists: 192.168.10.210:2181
-    namespace: taotao-cloud-elasticjob1
+    namespace: taotao-cloud-elasticjob
   jobs:
     taotao-cloud-simple-job:
       elastic-job-class: com.taotao.cloud.sys.biz.task.elastic.TaoTaoSimpleJob
@@ -811,8 +811,8 @@ spring:
       #database: yapi
       host: 192.168.10.210
       port: 27017
-      username:
-      password:
+      #username:
+      #password:
       #是否记录慢查询到数据库中
       slowQuery: true
       #慢查询最短时间,默认为1000毫秒

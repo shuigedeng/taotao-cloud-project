@@ -93,6 +93,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.base/java.util=ALL-UNNAMED \
                   --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
                   --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED \
+                  --add-opens java.base/sun.net=ALL-UNNAMED \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
