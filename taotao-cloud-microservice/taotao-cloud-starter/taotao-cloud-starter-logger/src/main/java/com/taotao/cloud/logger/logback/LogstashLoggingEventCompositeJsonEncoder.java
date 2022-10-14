@@ -18,9 +18,7 @@ package com.taotao.cloud.logger.logback;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.spi.ContextAware;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import net.logstash.logback.composite.AbstractCompositeJsonFormatter;
 import net.logstash.logback.composite.loggingevent.LoggingEventCompositeJsonFormatter;
 import net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder;
@@ -39,17 +37,6 @@ public class LogstashLoggingEventCompositeJsonEncoder extends LoggingEventCompos
 		return new LogstashLoggingEventCompositeJsonFormatter(this);
 	}
 
-	@Override
-	public byte[] encode(ILoggingEvent iLoggingEvent) {
-		try {
-			return super.encode(iLoggingEvent);
-		} catch (Exception e) {
-			LogUtils.error(e);
-		}
-		return new String("logstash json encoder error").getBytes(StandardCharsets.UTF_8);
-	}
-
-
 	public static class LogstashLoggingEventCompositeJsonFormatter extends
 		LoggingEventCompositeJsonFormatter {
 
@@ -62,8 +49,6 @@ public class LogstashLoggingEventCompositeJsonEncoder extends LoggingEventCompos
 				generator.writeEndObject();
 				generator.flush();
 			} catch (Exception e) {
-				LogUtils.error("LogstashLoggingEventCompositeJsonFormatter encode error",
-					e.getMessage());
 			}
 		}
 
