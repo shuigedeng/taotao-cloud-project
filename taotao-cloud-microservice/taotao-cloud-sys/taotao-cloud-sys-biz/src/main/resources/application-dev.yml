@@ -1133,7 +1133,7 @@ spring:
 taotao:
   cloud:
     zookeeper:
-      enabled: true
+      enabled: false
       connectString: 192.168.10.210:2181
     dozer:
       enabled: true
