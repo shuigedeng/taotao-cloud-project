@@ -22,14 +22,15 @@
 		</http>
 		<format class="com.github.loki4j.logback.JsonEncoder">
 			<label>
-				<pattern>app=my-app,host=${HOSTNAME},level=%level</pattern>
+				<!--				<pattern>app=my-app,host=${HOSTNAME},level=%level</pattern>-->
+				<pattern>app=taotao-cloud</pattern>
 				<keyValueSeparator>=</keyValueSeparator>
 				<pairSeparator>,</pairSeparator>
 				<nopex>true</nopex>
 			</label>
 			<message>
-				<!--<pattern>l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex</pattern>-->
-				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
+				<pattern>l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex</pattern>
+				<!--				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>-->
 			</message>
 			<staticLabels>true</staticLabels>
 			<sortByTime>true</sortByTime>

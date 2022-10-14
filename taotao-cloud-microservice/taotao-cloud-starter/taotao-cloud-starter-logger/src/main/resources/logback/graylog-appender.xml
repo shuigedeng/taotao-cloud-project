@@ -19,7 +19,7 @@
 			<!-- 是否发送日志级别的名称，否则默认以数字代表日志级别 -->
 			<includeLevelName>true</includeLevelName>
 			<shortPatternLayout class="ch.qos.logback.classic.PatternLayout">
-				<pattern>%m%nopex</pattern>
+				<pattern>${SERVER_IP}:${APP_NAME}:%m%nopex</pattern>
 			</shortPatternLayout>
 			<fullPatternLayout class="ch.qos.logback.classic.PatternLayout">
 				<!--				<pattern>%d - [%thread] %-5level %logger{35} - %msg%n</pattern>-->
@@ -27,7 +27,8 @@
 			</fullPatternLayout>
 
 			<!-- 配置应用名称（服务名称），通过staticField标签可以自定义一些固定的日志字段 -->
-			<staticField>app_name:taotao-cloud-sys</staticField>
+			<staticField>app_name:${APP_NAME}</staticField>
+			<staticField>server_ip:${SERVER_IP}</staticField>
 		</encoder>
 	</appender>
 

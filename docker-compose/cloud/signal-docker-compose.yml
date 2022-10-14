@@ -350,6 +350,20 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.33
+  rocketmq-broker1:
+    image: apache/rocketmq:4.9.4
+    container_name: rocketmq-broker1
+    restart: always
+    ports:
+      - "20909:10909"
+      - "20911:10911"
+      - "20912:10912"
+    environment:
+      JAVA_OPT_EXT: -server -Xms512M -Xmx512M -Xmn256m
+    command: sh mqbroker -c /home/rocketmq/rocketmq-4.9.4/conf/broker.conf
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.100
   rocketmq-console:
     image: styletang/rocketmq-console-ng
     container_name: rocketmq-console
@@ -410,6 +424,11 @@ services:
     restart: always
     ports:
       - "27017:27017"
+    environment:
+      TZ: Asiz/Shanghai
+      MONGO_INITDB_DATABASE: taotao-cloud
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
     volumes:
       - /root/compose/mongodb:/data/db
     networks:
@@ -541,7 +560,7 @@ services:
         ipv4_address: 172.11.0.45
 
   elasticsearch:
-    image: elasticsearch:7.17.6
+    image: elasticsearch:7.10.2
     container_name: elasticsearch
     environment:
       - discovery.type=single-node
