@@ -29,8 +29,8 @@
 				<nopex>true</nopex>
 			</label>
 			<message>
-				<pattern>l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex</pattern>
-				<!--				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>-->
+				<!--				<pattern>l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex</pattern>-->
+				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</message>
 			<staticLabels>true</staticLabels>
 			<sortByTime>true</sortByTime>
