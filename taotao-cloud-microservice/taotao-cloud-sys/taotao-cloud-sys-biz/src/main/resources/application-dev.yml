@@ -185,6 +185,7 @@ redisson:
   #  scanInterval: 1000
 
 elasticjob:
+  enabled: false
   #dump:
   #  port: 9888
   #tracing:
