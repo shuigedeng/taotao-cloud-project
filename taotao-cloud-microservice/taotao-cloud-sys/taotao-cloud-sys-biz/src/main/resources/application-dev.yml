@@ -806,9 +806,9 @@ spring:
   data:
     elasticsearch:
       repositories:
-        enabled: false
+        enabled: true
     mongodb:
-      database: yapi
+      #database: yapi
       host: 192.168.10.210
       port: 27017
       username:
@@ -1409,9 +1409,9 @@ management:
       application: ${spring.application.name}
   health:
     elasticsearch:
-      enabled: false
+      enabled: true
     rabbit:
-      enabled: false
+      enabled: true
 
 logging:
   file:
@@ -1424,8 +1424,11 @@ logging:
       total-size-cap: 20GB
   level:
     root: INFO
-    org.apache.zookeeper.ZooKeeper: error
+    org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.sys.api.feign: debug
+    #kafka.server.KafkaConfig: info
+    #org.I0Itec.zkclient: info
+    #kafka.admin.AdminClient.AdminConfig: info
     #org.springframework.cloud.openfeign: debug
     #org.springframework.web: off
     #org.springframework.security: off
