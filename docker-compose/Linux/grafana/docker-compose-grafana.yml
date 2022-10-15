@@ -1,0 +1,12 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana:master                                # 原镜像`grafana/grafana:master`
+    container_name: grafana                                      # 容器名为'grafana'
+    restart: unless-stopped                                              # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                                                     # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./grafana/data:/var/lib/grafana"
+      #      - "./grafana/config:/etc/grafana"
+      - "./grafana/log:/var/log/grafana"
+    ports:                              # 映射端口
+      - "3000:3000"

@@ -1,0 +1,226 @@
+Thu Dec 13 08:22:51.062 <kernel> AirPort_Brcm43xx::syncPowerState: WWEN[disabled]
+Thu Dec 13 08:22:51.063 <airportd[165]> _handleLinkEvent: WiFi is not powered. Resetting state variables.
+Thu Dec 13 08:22:51.167 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:22:51.181 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:28.308 <kernel> Unexpected payload found for message 9, dataLen 0
+Thu Dec 13 08:23:32.236 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:32.934 <airportd[165]> _processIPv4Changes: ARP/NDP offloads disabled, not programming the offload
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7
+Thu Dec 13 08:23:01.708 <airportd[165]> ERROR: com.apple.preference.network.remoteservice (1424) is not entitled for com.apple.wifi.events, but allowing anyways for event type 7

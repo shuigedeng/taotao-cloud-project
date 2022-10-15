@@ -1,0 +1,19 @@
+# https://github.com/rancher/rancher
+# sudo docker run --privileged -d --restart=unless-stopped -p 80:80 -p 443:443 --name rancher registry.cn-hangzhou.aliyuncs.com/zhengqing/rancher:v2.6.0
+version: '3'
+services:
+  rancher:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/rancher:v2.6.0  # 原镜像`rancher/rancher:v2.6.0`
+    container_name: rancher                                       # 容器名为'rancher'
+    restart: unless-stopped                                       # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                                                      # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./rancher/data:/var/lib/rancher"
+      - "./rancher/kubelet:/var/lib/kubelet"
+      - "./rancher/log:/var/log"
+    environment:                        # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    privileged: true                    # 获取宿主机root权限
+    ports:                              # 映射端口
+      - "80:80"
+      - "443:443"

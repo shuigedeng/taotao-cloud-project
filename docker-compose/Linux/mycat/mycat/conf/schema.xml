@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+    <!-- 逻辑库：TESTDB     限制每一条sql最多访问100条数据     指定数据节点：dn1 -->
+    <schema name="TESTDB" checkSQLschema="true" sqlMaxLimit="100">
+        <!-- 对`t_user`表进行分片,主键id,自增,数据节点为dn1,dn2,dn3,分片规则为`auto-sharding-long` -->
+        <table name="t_user" primaryKey="id" autoIncrement="true" dataNode="dn1,dn2,dn3" rule="auto-sharding-long" />
+    </schema>
+    <!-- 指定数据节点对应指定的数据主机以及后端真实物理数据库 -->
+    <dataNode name="dn1" dataHost="localhost1" database="db1" />
+    <dataNode name="dn2" dataHost="localhost1" database="db2" />
+    <dataNode name="dn3" dataHost="localhost1" database="db3" />
+    <!-- 定义最大连接数，最小连接数，是否对后端的多个从库进行负载均衡，数据库类型，驱动... -->
+    <dataHost name="localhost1" maxCon="1000" minCon="10" balance="1" writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
+        <!-- 定义如何监测后端数据库是否健康 -->
+        <heartbeat>select user()</heartbeat>
+        <!-- 写数据库 -->
+        <writeHost host="www.zhengqingya.com" url="www.zhengqingya.com:3306" user="root" password="root">
+            <!-- 读数据库 -->
+            <readHost host="www.zhengqingya.com" url="www.zhengqingya.com:3307" user="root" password="root" />
+        </writeHost>
+    </dataHost>
+</mycat:schema>

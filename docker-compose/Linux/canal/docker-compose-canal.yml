@@ -1,0 +1,60 @@
+# 可参考 https://github.com/alibaba/canal/wiki/QuickStart
+
+version: '3'
+
+# 网桥canal -> 方便相互通讯
+networks:
+  canal:
+
+services:
+  canal_admin:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/canal-admin:v1.1.5      # 原镜像`canal/canal-admin:v1.1.5`
+    container_name: canal_admin               # 容器名为'canal_admin'
+    restart: unless-stopped                   # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                                  # 数据卷挂载路径设置,将本机目录映射到容器目录
+#      - "./canal/canal-admin/conf/application.yml:/home/admin/canal-admin/conf/application.yml"
+      # 如果需要jvm内存控制可放开下面注释，修改`JAVA_OPTS`参数
+#      - "./canal/canal-admin/bin/startup.sh:/home/admin/canal-admin/bin/startup.sh"
+      - "./canal/canal-admin/logs:/home/admin/canal-admin/logs"
+    environment: # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+      canal.adminUser: admin
+      canal.adminPasswd: 123456
+      spring.datasource.address: www.zhengqingya.com:3306
+      spring.datasource.database: canal_manager
+      spring.datasource.username: root
+      spring.datasource.password: root
+    ports:
+      - "8089:8089"
+    networks:
+      - canal
+
+  canal_server:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/canal-server:v1.1.5      # 原镜像`canal/canal-server:v1.1.5`
+    container_name: canal_server              # 容器名为'canal_server'
+    restart: unless-stopped                   # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                                  # 数据卷挂载路径设置,将本机目录映射到容器目录
+#      - "./canal/canal-server/conf/example/instance.properties:/home/admin/canal-server/conf/example/instance.properties"
+#      - "./canal/canal-server/conf/canal.properties:/home/admin/canal-server/conf/canal.properties"
+#      - "./canal/canal-server/conf/canal_local.properties:/home/admin/canal-server/conf/canal_local.properties"
+      - "./canal/canal-server/logs:/home/admin/canal-server/logs"
+    environment:                              # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+      canal.register.ip: www.zhengqingya.com
+      canal.admin.manager: canal_admin:8089
+      canal.admin.port: 11110
+      canal.admin.user: admin
+      canal.admin.passwd: 6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9
+#      canal.admin.register.cluster: online
+    ports:
+      - "11110:11110"
+      - "11111:11111"
+      - "11112:11112"
+    depends_on:
+      - canal_admin
+    links:
+      - canal_admin
+    networks:
+      - canal

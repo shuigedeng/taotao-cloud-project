@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nextcloud:
+    image: nextcloud                              # 镜像`nextcloud`
+    container_name: nextcloud                     # 容器名为'nextcloud'
+    restart: unless-stopped                               # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                                      # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./nextcloud/data:/var/www/html"
+    # 容器的映射端口
+    ports:
+      - 81:80

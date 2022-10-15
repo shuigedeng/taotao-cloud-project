@@ -1,0 +1,48 @@
+# docker-compose配置参考：https://github.com/grafana/loki/blob/master/production/docker-compose.yaml
+version: "3"
+
+# 网桥loki -> 方便相互通讯
+networks:
+  loki:
+
+services:
+  # Loki日志系统
+  loki:
+    image: grafana/loki:latest
+    container_name: grafana_promtail_loki_demo_loki
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./grafana_promtail_loki/loki:/etc/loki
+    command: -config.file=/etc/loki/loki-local-config.yaml
+    networks:
+      - loki
+
+  # Loki官方支持的日志采集端
+  promtail:
+    image: grafana/promtail:latest
+    container_name: grafana_promtail_loki_demo_promtail
+    restart: unless-stopped
+    volumes:
+      - ./grafana_promtail_loki/logs:/var/logs
+      - ./grafana_promtail_loki/promtail:/etc/promtail
+    command: -config.file=/etc/promtail/promtail-docker-config.yaml
+    networks:
+      - loki
+
+  # 用于UI展示
+  grafana:
+    image: grafana/grafana:master
+    container_name: grafana_promtail_loki_demo_grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./grafana_promtail_loki/grafana/data:/var/lib/grafana"
+      #      - "./grafana_promtail_loki/grafana/config:/etc/grafana"
+      - "./grafana_promtail_loki/grafana/log:/var/log/grafana"
+    environment:
+      GF_EXPLORE_ENABLED: "true"
+    networks:
+      - loki

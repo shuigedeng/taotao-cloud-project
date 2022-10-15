@@ -1,0 +1,58 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    container_name: walle-mysql
+    hostname: walle-mysql
+    env_file:
+      # walle.env文件位置
+      - ./walle/walle.env
+    command: [ '--default-authentication-plugin=mysql_native_password', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - /data/walle/mysql:/var/lib/mysql
+    networks:
+      - walle-net
+    restart: unless-stopped
+
+  python:
+    image: alenx/walle-python:2.1
+    container_name: walle-python
+    hostname: walle-python
+    env_file:
+      # walle.env文件位置
+      - ./walle/walle.env
+    command: bash -c "cd /opt/walle_home/ && /bin/bash admin.sh migration &&  python waller.py"
+    expose:
+      - "5000"
+    volumes:
+      - /opt/walle_home/plugins/:/opt/walle_home/plugins/
+      - /opt/walle_home/codebase/:/opt/walle_home/codebase/
+      - /opt/walle_home/logs/:/opt/walle_home/logs/
+      - /root/.ssh:/root/.ssh/
+    depends_on:
+      - db
+    networks:
+      - walle-net
+    restart: unless-stopped
+
+  web:
+    image: alenx/walle-web:2.1
+    container_name: walle-nginx
+    hostname: nginx-web
+    ports:
+      # 如果宿主机80端口被占用，可自行修改为其他port(>=1024)
+      # 0.0.0.0:要绑定的宿主机端口:docker容器内端口80
+      - "80:80"
+    depends_on:
+      - python
+    networks:
+      - walle-net
+    restart: unless-stopped
+
+networks:
+  walle-net:
+    driver: bridge

@@ -116,3 +116,25 @@ start slave;
 
 show slave status;
 show slave status\G
+
+
+
+mysql -h 127.0.0.1 -uroot -p123456 -e "
+use mysql;
+update user set host='%' where user='root';
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+alter user 'root'@'%' identified by '123456' password expire never;
+flush privileges;
+
+create database `taotao-cloud-nacos-2.1.0`;
+use `taotao-cloud-nacos-2.1.0`;
+source nacos.sql;
+
+create database `taotao-cloud-seata-1.5.1`;
+use `taotao-cloud-seata-1.5.1`;
+source seata.sql;
+
+create database `taotao-cloud-zipkin-0.3.0`;
+use `taotao-cloud-zipkin-0.3.0`;
+source zipkin.sql;
+"

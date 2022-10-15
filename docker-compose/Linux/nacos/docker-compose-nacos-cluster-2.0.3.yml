@@ -1,0 +1,119 @@
+# docker-compose参考：https://github.com/nacos-group/nacos-docker/blob/master/example/cluster-hostname.yaml
+# Nacos2.0.0兼容性文档：https://nacos.io/zh-cn/docs/2.0.0-compatibility.html
+version: '3'
+
+# 网桥 -> 方便相互通讯
+networks:
+  nacos:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.22.0.0/24"
+
+services:
+  # nginx
+  nacos-nginx:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/nginx:1.21.1      # 镜像`nginx:1.21.1`
+    container_name: nacos-nginx                                          # 容器名为'nacos-nginx'
+    restart: unless-stopped                                              # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                            # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./nacos_cluster_2.0.3/nginx/conf/nginx.conf:/etc/nginx/nginx.conf"
+      - "./nacos_cluster_2.0.3/nginx/conf/conf.d/default.conf:/etc/nginx/conf.d/default.conf"
+      - "./nacos_cluster_2.0.3/nginx/html:/usr/share/nginx/html"
+      - "./nacos_cluster_2.0.3/nginx/log:/var/log/nginx"
+    environment:                        # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    ports:                              # 映射端口
+      - "8880:8880"
+    networks:
+      nacos:
+        ipv4_address: 172.22.0.80
+    depends_on:
+      - nacos-server-1
+  # nacos节点1
+  nacos-server-1:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/nacos-server:2.0.3    # 原镜像`nacos/nacos-server:2.0.3`
+    container_name: nacos-server-1                                           # 容器名为'nacos-server-1'
+    hostname: nacos-server-1                                                 # 指定容器hostname
+    restart: unless-stopped                                              # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    env_file:
+      - ./nacos_cluster_2.0.3/env/nacos-hostname.env
+    volumes:                                                     # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./nacos_cluster_2.0.3/nacos_1_logs:/home/nacos/logs"
+      - "./nacos_cluster_2.0.3/init.d/custom.properties:/home/nacos/init.d/custom.properties"
+      - "./nacos_cluster_2.0.3/conf/application.properties:/home/nacos/conf/application.properties"
+      - "./nacos_cluster_2.0.3/conf/cluster.conf:/home/nacos/conf/cluster.conf"
+    environment:            # 设置环境变量,相当于docker run命令中的-e
+      - NACOS_SERVERS=nacos-server-1:8848,nacos-server-2:8848,nacos-server-3:8848   # nacos cluster地址
+      - PREFER_HOST_MODE=hostname
+      # - NACOS_SERVER_IP=nacos-server-1   # 多网卡下的自定义nacos服务器IP
+    ports:                              # 映射端口  (Nacos2.0版本相比1.X新增了gRPC的通信方式，因此需要增加2个端口：9848、9849)
+      - "7848:7848"
+      - "8848:8848"
+      # 以 8848 为基础偏移 1000 和 1001，不能乱映射，不然服务会连不上 Nacos
+      - "9848:9848"
+      - "9849:9849"
+      - "9555:9555"
+    networks:
+      nacos:
+        ipv4_address: 172.22.0.11
+    depends_on:
+      - nacos-server-2
+    mem_limit: 2000m   # 最大使用内存
+  # nacos节点2
+  nacos-server-2:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/nacos-server:2.0.3    # 原镜像`nacos/nacos-server:2.0.3`
+    container_name: nacos-server-2                                           # 容器名为'nacos-server-2'
+    hostname: nacos-server-2                                                 # 指定容器hostname
+    restart: unless-stopped                                              # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    env_file:
+      - ./nacos_cluster_2.0.3/env/nacos-hostname.env
+    volumes:                                                     # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./nacos_cluster_2.0.3/nacos_2_logs:/home/nacos/logs"
+      - "./nacos_cluster_2.0.3/init.d/custom.properties:/home/nacos/init.d/custom.properties"
+      - "./nacos_cluster_2.0.3/conf/application.properties:/home/nacos/conf/application.properties"
+      - "./nacos_cluster_2.0.3/conf/cluster.conf:/home/nacos/conf/cluster.conf"
+    environment: # 设置环境变量,相当于docker run命令中的-e
+      - NACOS_SERVERS=nacos-server-1:8848,nacos-server-2:8848,nacos-server-3:8848   # nacos cluster地址
+      - PREFER_HOST_MODE=hostname
+      # - NACOS_SERVER_IP=nacos-server-2   # 多网卡下的自定义nacos服务器IP
+    ports:                              # 映射端口  (Nacos2.0版本相比1.X新增了gRPC的通信方式，因此需要增加2个端口：9848、9849)
+      - "17848:7848"
+      - "18848:8848"
+      - "19848:9848"
+      - "19849:9849"
+      - "19555:9555"
+    networks:
+      nacos:
+        ipv4_address: 172.22.0.22
+    depends_on:
+      - nacos-server-3
+    mem_limit: 2000m   # 最大使用内存
+  # nacos节点3
+  nacos-server-3:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/nacos-server:2.0.3    # 原镜像`nacos/nacos-server:2.0.3`
+    container_name: nacos-server-3                                           # 容器名为'nacos-server-3'
+    hostname: nacos-server-3                                                 # 指定容器hostname
+    restart: unless-stopped                                              # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    env_file:
+      - ./nacos_cluster_2.0.3/env/nacos-hostname.env
+    volumes:                                                     # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./nacos_cluster_2.0.3/nacos_3_logs:/home/nacos/logs"
+      - "./nacos_cluster_2.0.3/init.d/custom.properties:/home/nacos/init.d/custom.properties"
+      - "./nacos_cluster_2.0.3/conf/application.properties:/home/nacos/conf/application.properties"
+      - "./nacos_cluster_2.0.3/conf/cluster.conf:/home/nacos/conf/cluster.conf"
+    environment: # 设置环境变量,相当于docker run命令中的-e
+      - NACOS_SERVERS=nacos-server-1:8848,nacos-server-2:8848,nacos-server-3:8848   # nacos cluster地址
+      - PREFER_HOST_MODE=hostname
+      # - NACOS_SERVER_IP=nacos-server-3   # 多网卡下的自定义nacos服务器IP
+    ports:                              # 映射端口  (Nacos2.0版本相比1.X新增了gRPC的通信方式，因此需要增加2个端口：9848、9849)
+      - "27848:7848"
+      - "28848:8848"
+      - "29848:9848"
+      - "29849:9849"
+      - "29555:9555"
+    networks:
+      nacos:
+        ipv4_address: 172.22.0.33
+    mem_limit: 2000m   # 最大使用内存

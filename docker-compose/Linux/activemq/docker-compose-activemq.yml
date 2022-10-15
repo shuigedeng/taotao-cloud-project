@@ -1,0 +1,23 @@
+version: '3'
+services:
+  activemq:
+    image: webcenter/activemq                    # 镜像`webcenter/activemq`
+    container_name: activemq                     # 容器名为'activemq'
+    hostname: myActivemq                         # 定义主机名
+    restart: unless-stopped                              # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    #容器的映射端口
+    ports:
+      - 61613:61613
+      - 61616:61616
+      - 8161:8161
+    volumes:                                    # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - /etc/localtime:/etc/localtime:ro
+      - ./activemq/data/activemq:/data/activemq
+      - ./activemq/var/log/activemq:/var/log/activemq
+    environment:                                # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+      ACTIVEMQ_ADMIN_LOGIN: admin      # 登录账号
+      ACTIVEMQ_ADMIN_PASSWORD: admin   # 登录密码
+      ACTIVEMQ_CONFIG_MINMEMORY: 512
+      ACTIVEMQ_CONFIG_MAXMEMORY: 2048

@@ -1,0 +1,10 @@
+store.mode=db
+store.db.datasource=druid
+store.db.dbType=mysql
+store.db.driverClassName=com.mysql.jdbc.Driver
+store.db.url=jdbc:mysql://www.zhengqingya.com:3306/seata?useUnicode=true&rewriteBatchedStatements=true
+store.db.user=root
+store.db.password=root
+service.vgroupMapping.my_test_tx_group=default
+service.vgroupMapping.user-tx-group=default
+service.vgroupMapping.order-tx-group=default

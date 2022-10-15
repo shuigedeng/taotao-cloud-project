@@ -1,0 +1,10 @@
+version: '3'
+services:
+  tomcat:
+    image: tomcat                                                # 原镜像`tomcat`
+    container_name: tomcat                                       # 容器名为'tomcat'
+    restart: unless-stopped                                              # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                                                     # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./tomcat/webapps:/usr/local/tomcat/webapps"
+    ports:                              # 映射端口
+      - "8081:8080"

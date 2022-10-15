@@ -1,0 +1,16 @@
+version: '3'
+
+# 网桥 -> 方便相互通讯
+networks:
+  mycat-web:
+    driver: bridge
+
+services:
+  mycat-web:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/mycat-web
+    container_name: mycat-web                                     # 容器名为'mycat-web'
+    restart: unless-stopped                                       # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    ports:                              # 映射端口
+      - "8082:8082"
+    networks:
+      - mycat-web

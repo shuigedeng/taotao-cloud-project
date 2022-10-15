@@ -1,0 +1,25 @@
+# https://hub.docker.com/_/sonarqube
+version: '3'
+
+# 网桥elk -> 方便相互通讯
+networks:
+  sonarqube:
+
+services:
+  sonarqube:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/sonarqube:6.7.1      # 原镜像`sonarqube:6.7.1`
+    container_name: sonarqube
+    restart: unless-stopped        # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:
+      - "./sonarqube/data:/opt/sonarqube/data"
+      - "./sonarqube/logs:/opt/sonarqube/logs"
+      - "./sonarqube/extensions/plugins/sonar-l10n-zh-plugin-1.19.jar:/opt/sonarqube/extensions/plugins/sonar-l10n-zh-plugin-1.19.jar"
+#      - "./sonarqube/conf:/opt/sonarqube/conf"
+    environment:
+      SONARQUBE_JDBC_USERNAME: root
+      SONARQUBE_JDBC_PASSWORD: root
+      SONARQUBE_JDBC_URL: "jdbc:mysql://www.zhengqingya.com:3306/sonarqube?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
+    ports:
+      - "9005:9000"
+    networks:
+      - sonarqube
