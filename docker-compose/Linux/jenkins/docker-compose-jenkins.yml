@@ -1,0 +1,23 @@
+version: '3'
+services:
+  jenkins:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/jenkins:lts                  # 原镜像`jenkins/jenkins:lts`
+    container_name: jenkins                     # 容器名为'jenkins'
+    restart: unless-stopped                             # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                                    # 数据卷挂载路径设置,将本机目录映射到容器目录 (下面映射可在容器中执行宿主机docker命令)
+      - "/usr/bin/docker:/usr/bin/docker"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/usr/lib64/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7"
+      - "./jenkins/jenkins_home:/var/jenkins_home"
+      # ThinBackup插件备份jenkins配置存储目录
+      - "./jenkins/jenkins_config:/var/jenkins_config"
+      # 解决jenkins安装插件报错： An error occurred during installation: No such plugin: cloudbees-folder
+      # 下载地址  http://ftp.icm.edu.pl/packages/jenkins/plugins/cloudbees-folder/
+#      - "./jenkins/jenkins_home/war/META-INF/detached-plugins/cloudbees-folder.hpi:/var/jenkins_home/war/META-INF/detached-plugins/cloudbees-folder.hpi"
+    environment:                                # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+      JAVA_OPTS: '-Xmx1024M -Xms1024M -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:MaxNewSize=128m -Djava.util.logging.config.file=/var/jenkins_home/log.properties -Duser.timezone=Asia/Shanghai'
+    user: root                                  # 使用root权限运行容器【docker中通过`-u root`命令】
+    ports:                                      # 映射端口
+      - "8080:8080"

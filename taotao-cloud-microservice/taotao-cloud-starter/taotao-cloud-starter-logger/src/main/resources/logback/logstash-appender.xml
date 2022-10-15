@@ -3,11 +3,11 @@
 	<appender name="LOGSTASH_APPENDER"
 		class="net.logstash.logback.appender.LogstashTcpSocketAppender">
 		<destination>${LOGSTASH_DESTINATION}</destination>
-		<includeCallerData>true</includeCallerData>
-		<keepAliveDuration>5 minutes</keepAliveDuration>
-		<reconnectionDelay>1 second</reconnectionDelay>
-		<writeBufferSize>16384</writeBufferSize>
-		<writeTimeout>1 minute</writeTimeout>
+		<!--		<includeCallerData>true</includeCallerData>-->
+		<!--		<keepAliveDuration>5 minutes</keepAliveDuration>-->
+		<!--		<reconnectionDelay>1 second</reconnectionDelay>-->
+		<!--		<writeBufferSize>16384</writeBufferSize>-->
+		<!--		<writeTimeout>1 minute</writeTimeout>-->
 
 		<!--		<connectionStrategy>-->
 		<!--			<random>-->

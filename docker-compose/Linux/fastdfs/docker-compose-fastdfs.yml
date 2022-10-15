@@ -1,0 +1,33 @@
+version: '3'
+services:
+  # tracker容器: 跟踪服务器，起到调度的作用
+  fastdfs-tracker:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/fastdfs:latest        # 原镜像`delron/fastdfs`
+    container_name: fastdfs_tracker
+    hostname: fastdfs-tracker
+    network_mode: "host"
+    command: tracker
+    #    volumes:
+    #      - ./fastdfs/tracker_data:/var/fdfs
+    ports:
+      - "22122:22122"
+
+  # storage容器：存储服务器，提供容量和备份服务
+  fastdfs-storage:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/fastdfs:latest        # 原镜像`delron/fastdfs`
+    container_name: fastdfs_storage
+    hostname: fastdfs-storage
+    network_mode: "host"
+    #    volumes:
+    #      - ./fastdfs/nginx.conf:/usr/local/nginx/conf/nginx.conf # Nginx配置文件
+    #      - ./fastdfs/storage.conf:/etc/fdfs/storage.conf # http访问配置
+    #      - ./fastdfs/storage_data:/var/fdfs # 文件数据
+    environment:
+      - TRACKER_SERVER=www.zhengqingya.com:22122 # TODO 修改为自己的ip地址
+      - GROUP_NAME=group1
+    command: storage
+    depends_on:
+      - fastdfs-tracker
+    ports:
+      - "8888:8888"
+      - "23000:23000"

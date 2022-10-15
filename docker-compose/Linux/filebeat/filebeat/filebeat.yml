@@ -1,0 +1,168 @@
+# 可参考 https://www.elastic.co/guide/en/beats/filebeat/7.14/filebeat-reference-yml.html
+
+# ============================== ↓↓↓↓↓↓ Filebeat 输入配置 ↓↓↓↓↓↓ ===============================
+# input设置，支持Docker,Container,HTTP JSON,Log,Kafka,MQTT,NetFlow,Redis,TCP,DCP,Syslog,Stdin
+filebeat:
+  inputs:
+    # input类型，默认是log
+    # 一个type表示一个input，可以有多个，下面举例：采集多个文件到不同的索引
+    - type: log      # 默认log，从日志文件读取每一行。stdin，从标准输入读取
+      enabled: true  # 配置是否生效
+      fields:
+        index: 'demo'
+      #input文件的位置，可以有多个
+      encoding: utf-8
+      paths:
+        # - /usr/share/filebeat/my-log/*.log
+        - /usr/share/filebeat/my-log/demo*.log
+      tags: ["demo"]
+
+      # 如果启用任何一个以 json 开头的配置项，则会将每行日志文本按 JSON 格式解析，解析的字段默认保存到一个名为 json 的字段的子字典中
+      # 解析 JSON 的操作会在 multiline 之前执行。因此建议让 filebeat 只执行 multiline 操作，将日志发送到 Logstash 时才解析 JSON
+      # json.add_error_key: true      # 如果解析出错，则加入 error.message 等字段
+      # json.message_key: log         # 指定存储日志内容的字段名。如果指定了该字段，当该字段为顶级字段、取值为字符串类型时，会进行 multiline、include、exclude 操作
+      # json.keys_under_root: false   # 是否将解析的字典保存为日志的顶级字段
+      # json.overwrite_keys: false    # 在启用了 keys_under_root 时，如果解析出的字段与原有字段冲突，是否覆盖
+
+      # 默认将每行日志文本视作一个日志事件，可以通过 multiline 规则将连续的多行文本记录成同一个日志事件 => 可解决日志换行问题
+      # multiline 操作会在 include_lines 之前执行
+      multiline:
+        pattern: '^\d{4}\-\d{2}\-\d{2}\s\d{2}:\d{2}:\d{2}' # 匹配的正则 不是以 2021-10-01 12:00:00 格式开头的将合并到上一行
+        negate: true                                       # 是否反向匹配
+        match: after                                       # 取值为 after 则放到上一行之后，取值为 before 则放到下一行之前
+        timeout: 3s
+
+
+      #encoding: utf-8               # 编码格式
+      scan_frequency: 1s           # 每隔多久扫描一次日志文件，如果有变动则创建 harvester 进行采集
+      ignore_older: 0s              # 不扫描最后修改时间在多久之前的文件，默认不限制时间。其值应该大于 close_inactive
+      harvester_buffer_size: 16384  # 每个 harvester 在采集日志时的缓冲区大小，单位 bytes
+      max_bytes: 102400             # 每条日志的 message 部分的最大字节数，超过的部分不会发送（但依然会读取）。默认为 10 M ，这里设置为 100 K
+      tail_files: false             # 是否从文件的末尾开始，倒序读取
+      backoff: 1s                   # 如果 harvester 读取到文件末尾，则每隔多久检查一次文件是否更新
+      backoff_factor: 2
+      max_backoff: 1s              # 无新日志时隔 backoff * backoff_factor后再次检测，最大达到max_backoff会被重新检测新日志
+
+      # 配置 close_* 参数可以让 harvester 尽早关闭文件，但不利于实时采集日志
+      # close_timeout: 0s             # harvester 每次读取文件的超时时间，超时之后立即关闭。默认不限制
+      # close_eof: false              # 如果 harvester 读取到文件末尾，则立即关闭
+      # close_inactive: 5m            # 如果 harvester 读取到文件末尾之后，超过该时长没有读取到新日志，则立即关闭
+      # close_removed: true           # 如果 harvester 读取到文件末尾之后，检查发现日志文件被删除，则立即关闭
+      # close_renamed: false          # 如果 harvester 读取到文件末尾之后，检查发现日志文件被重命名，则立即关闭
+
+      # 配置 clean_* 参数可以自动清理 registry 文件，但可能导致遗漏采集，或重复采集
+      # clean_removed: true           # 如果日志文件在磁盘中被删除，则从 registry 中删除它
+      # clean_inactive: 0s            # 如果日志文件长时间未活动，则从 registry 中删除它。默认不限制时间。其值应该大于 scan_frequency + ignore_older
+
+
+    - type: log
+      enabled: true
+      fields:
+        index: 'tool'
+      paths:
+        - /usr/share/filebeat/my-log/tool*.log
+      tags: ["demo"]
+
+
+
+  # 自定义索引名称 可查看 http://127.0.0.1:5601/app/management/data/index_management/templates
+  #setup.ilm.enabled: false
+  #setup.template.name: "my-log"
+  #setup.template.pattern: "my-log-*"
+
+
+
+  # ================================== ↓↓↓↓↓↓ 输出配置 ↓↓↓↓↓↓ ===================================
+
+  # output设置，可以output到kafka,logstash,elasticsearch,redis,file,console,elastic cloud
+  # output到任意一个都行
+
+  # ---------------------------- Elasticsearch Output ----------------------------
+
+  # 输出到elasticsearch
+  # output.elasticsearch:
+  #   hosts: ["192.168.101.88:9200"] # es地址，可以有多个，用逗号","隔开
+  #   username: "elastic"            # ES用户名
+  #   password: "123456"             # ES密码
+  #   indices:
+  #     - index: "demo-%{+yyyy.MM.dd}"     # 以日期为后缀，每天新建一个索引
+  #       when.contains:
+  #         fields:
+  #           index: "demo"
+  #     - index: "tool-%{+yyyy.MM.dd}"
+  #       when.contains:
+  #         fields:
+  #           index: "tool"
+  # 对采集内容进行预处理(过滤等),定义一个pipeline，此处主要是将@timestamps时间修改日志的时间（默认是采集的时间）
+  #pipeline: "timestamp-pipeline-id"
+  #document_type: log # 该type会被添加到type字段，对于输出到ES来说，这个输入时的type字段会被存储，默认log
+  #max_retries: 3     # ES重试次数，默认3次，超过3次后，当前事件将被丢弃
+
+
+#============================== Kibana =====================================
+# setup.kibana:
+#   host: "192.168.101.88:5601"
+
+# ------------------------------ Logstash Output -------------------------------
+
+# 输出到logstash
+output.logstash:
+  hosts: ["192.168.101.88:5044"] # logstash服务器地址，可以有多个，以逗号","隔开
+  index: demo #指定output到哪个索引
+
+# ================================== ↓↓↓↓↓↓ Logging ↓↓↓↓↓↓ ===================================
+
+#filebeat日志级别，error, warning, info, debug，默认info
+logging.level: debug
+
+
+#================================ ↓↓↓↓↓↓ Procesors ↓↓↓↓↓↓ =====================================
+# Configure processors to enhance or manipulate events generated by the beat.
+# processors:
+#   # 自定义字段 - 取日志中的时间
+#   - script:
+#       lang: javascript
+#       id: my_filter
+#       tag: enable
+#       source: >
+#         function process(event) {
+#             var str= event.Get("message");
+#             var time =str.substr(0, 23);
+#             event.Put("log_time",time);
+#         }
+#   # 将自定义的字段替换到系统默认时间戳，解决顺序错乱问题（写入时间与抓取时间不一致导致）
+#   - timestamp:
+#       field: log_time
+#       timezone: Asia/Shanghai
+#       layouts:
+#         - '2021-10-01 12:00:00'
+#         - '2021-10-01 12:00:00.999'
+#       test:
+#         - '2021-10-01 22:00:00'
+#   - add_host_metadata: ~     # 主机相关信息
+#   - add_cloud_metadata: ~    # 云服务器的元数据信息,包括阿里云ECS 腾讯云QCloud AWS的EC2的相关信息
+#   - add_docker_metadata: ~
+
+
+# ============================== ↓↓↓↓↓↓ Filebeat modules ↓↓↓↓↓↓ ==============================
+
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml # 用于配置加载的全局模式
+    reload.enabled: false                # 是否允许重新加载
+    #reload.period: 10s                  # 重新加载的时间间隔
+
+# ============================== ↓↓↓↓↓↓ Filebeat autodiscover ↓↓↓↓↓↓ ==============================
+
+# filebeat.autodiscover:
+#   providers:
+#     - type: docker
+#       hints.enabled: true
+
+
+filebeat.registry.flush: 1s
+queue:
+  mem:
+    events: 32
+    flush.min_events: 1
+    flush.timeout: 1s

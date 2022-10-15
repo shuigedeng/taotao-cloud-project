@@ -1,0 +1,27 @@
+# 可参考： https://github.com/openzipkin/zipkin/blob/master/docker/examples/docker-compose-mysql.yml
+version: '3'
+services:
+  zipkin:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/zipkin:2  # 原镜像`openzipkin/zipkin:2`
+    container_name: zipkin                                       # 容器名为'zipkin'
+    restart: unless-stopped                                      # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    environment:                        # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+      # 基于mysql存储
+      STORAGE_TYPE: mysql
+      # Point the zipkin at the storage backend
+      # TODO 修改数据库配置信息
+      MYSQL_HOST: www.zhengqingya.com
+      MYSQL_TCP_PORT: 3306
+      MYSQL_DB: zipkin
+      MYSQL_USER: root
+      MYSQL_PASS: root
+        # Uncomment to enable scribe
+        #   SCRIBE_ENABLED: true
+        # Uncomment to enable self-tracing
+        #   SELF_TRACING_ENABLED: true
+        # Uncomment to enable debug logging
+        #   JAVA_OPTS: -Dlogging.level.zipkin=DEBUG -Dlogging.level.zipkin2=DEBUG
+    ports:                              # 映射端口
+      - "9411:9411"

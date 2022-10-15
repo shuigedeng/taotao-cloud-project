@@ -1,0 +1,16 @@
+# docker run -d -p 9000:9000 --restart=always --name portainer -v /var/run/docker.sock:/var/run/docker.sock registry.cn-hangzhou.aliyuncs.com/zhengqing/portainer:1.24.1
+version: '3'
+services:
+  portainer:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/portainer:1.24.1  # 原镜像`portainer/portainer:1.24.1`
+    container_name: portainer                                            # 容器名为'portainer'
+    restart: always                                                      # 指定容器退出后的重启策略为始终重启
+    volumes:                                                             # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./portainer/data:/data"
+      - "./portainer/Portainer-CN:/public"   # 汉化
+    environment:                        # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    ports:                              # 映射端口
+      - "9000:9000"

@@ -1,0 +1,37 @@
+version: "3"
+services:
+  nginx:
+    build: ./
+    container_name: grafana_promtail_loki_nginx_demo_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/etc/promtail
+      - ./nginx/logs:/var/log
+  loki:
+    image: grafana/loki:master
+    container_name: grafana_promtail_loki_nginx_demo_loki
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./:/etc/loki
+    command: -config.file=/etc/loki/loki-local-config.yaml
+  promtail:
+    image: grafana/promtail:make-images-static-26a87c9
+    container_name: grafana_promtail_loki_nginx_demo_promtail
+    restart: unless-stopped
+    volumes:
+      - ./:/etc/promtail
+      - ./log:/var/log
+    command:
+      -config.file=/etc/promtail/promtail-docker-config.yaml
+  grafana:
+    image: grafana/grafana:master
+    container_name: grafana_promtail_loki_nginx_demo_grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - "GF_EXPLORE_ENABLED=true"

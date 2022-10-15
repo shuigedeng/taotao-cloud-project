@@ -1,0 +1,16 @@
+version: '3'
+services:
+  nginx:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/nginx:1.21.1                 # 镜像`nginx:1.21.1`
+    container_name: nginx               # 容器名为'nginx'
+    restart: unless-stopped                                       # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                            # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./nginx/conf/nginx.conf:/etc/nginx/nginx.conf"
+      - "./nginx/conf/conf.d/default.conf:/etc/nginx/conf.d/default.conf"
+      - "./nginx/html:/usr/share/nginx/html"
+      - "./nginx/log:/var/log/nginx"
+    environment:                        # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    ports:                              # 映射端口
+      - "80:80"

@@ -1,0 +1,12 @@
+# docker run -d -p 8888:8888 --name jrebel registry.cn-hangzhou.aliyuncs.com/zhengqing/jrebel
+version: '3'
+services:
+  jrebel:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/jrebel   # 原镜像`ilanyu/golang-reverseproxy`
+    container_name: jrebel                                      # 容器名为'jrebel'
+    restart: unless-stopped                                             # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    environment:                                                # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    ports:                              # 映射端口
+      - "8888:8888"

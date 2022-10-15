@@ -1,0 +1,44 @@
+# docker-compose配置参考：https://github.com/jinfeijie/yapi/blob/master/docker-compose.yml
+version: '3'
+
+# 网桥yapi -> 方便相互通讯
+networks:
+  yapi:
+    driver: bridge
+
+services:
+  # yapi服务
+  yapi:
+    image: mrjin/yapi:latest
+    container_name: yapi_web
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - VERSION=1.5.6
+      - LOG_PATH=/tmp/yapi.log
+      - HOME=/home
+      - PORT=3000
+      - ADMIN_EMAIL=admin@admin.com
+      - DB_SERVER=mongo
+      - DB_NAME=yapi
+      - DB_PORT=27017
+    volumes:
+      - "./yapi/yapi_log:/home/vendors/log"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    entrypoint: "bash /wait-for-it.sh mongo:27017 -- entrypoint.sh"
+    networks:
+      - yapi
+  # mongo服务
+  mongo:
+    image:  mongo
+    container_name: yapi_mongo
+    restart: unless-stopped
+    #    volumes:
+    #      - "./yapi/mongo_data:/data/db"
+    ports:
+      - "27017:27017"
+    networks:
+      - yapi

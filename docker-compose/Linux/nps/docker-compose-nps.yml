@@ -1,0 +1,25 @@
+# 可参考 https://hub.docker.com/r/ffdfgdfg/nps
+
+version: '3'
+
+# 网桥nps -> 方便相互通讯
+networks:
+  nps:
+
+services:
+  nps:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/nps:v0.26.10      # 原镜像`ffdfgdfg/nps:v0.26.10`
+    container_name: nps                       # 容器名为'nps'
+    restart: unless-stopped                   # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:                                  # 数据卷挂载路径设置,将本机目录映射到容器目录
+      - "./nps/conf:/conf"
+    environment:                              # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    ports:
+      - "8080:8080"           # web_port
+      - "8024:8024"           # bridge_port
+      - "8100-8200:8100-8200" # 预留端口
+#    network_mode: host # 容器使用宿主机网络
+    networks:
+      - nps

@@ -1,0 +1,20 @@
+# 可参考: https://flowable.com/open-source/docs/bpmn/ch14-Applications/
+# mysql驱动下载: https://dev.mysql.com/downloads/connector/j/
+# 注：mysql需使用8.0.22版本，否则会出现第一次启动服务正常，第二次却无法启动问题，此问题可查看 => https://bugs.mysql.com/bug.php?id=102435
+version: '3'
+services:
+  flowable-ui:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/flowable-ui:6.6.0  # 原镜像`flowable/flowable-ui:6.6.0`
+    container_name: flowable-ui
+    restart: unless-stopped
+    volumes:
+      - "./flowable/mysql-connector-java-8.0.22.jar:/app/WEB-INF/lib/mysql-connector-java-8.0.22.jar"
+    environment:
+      - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver # mysql8驱动
+      - spring.datasource.url=jdbc:mysql://www.zhengqingya.com:3306/flowable?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&useSSL=false&nullCatalogMeansCurrent=true
+      - spring.datasource.username=root        # 数据库账号
+      - spring.datasource.password=root        # 数据库密码
+      - flowable.async-executor-activate=false # 关闭定时任务JOB
+      - flowable.database-schema-update=true   # 当Flowable发现库与数据库表结构不一致时，会自动将数据库表结构升级至新版本
+    ports:
+      - "9004:8080"

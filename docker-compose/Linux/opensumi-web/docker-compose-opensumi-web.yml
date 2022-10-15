@@ -1,0 +1,14 @@
+# https://opensumi.com/zh
+# docker run --rm -d  -p 20000:8000/tcp registry.cn-hangzhou.aliyuncs.com/zhengqing/opensumi-web:latest
+version: '3'
+services:
+  activemq:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/opensumi-web:latest  # 镜像`ghcr.io/opensumi/opensumi-web:latest`
+    container_name: opensumi-web                         # 容器名为'opensumi-web'
+    restart: unless-stopped                              # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    #容器的映射端口
+    ports:
+      - 20000:8000
+    environment:                                # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8

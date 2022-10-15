@@ -1,0 +1,56 @@
+# https://hub.docker.com/_/sonarqube
+version: '3'
+
+# 网桥elk -> 方便相互通讯
+networks:
+  sonarqube:
+
+services:
+  # postgres
+  postgres:
+    image: postgres:12.3
+    restart: always
+    container_name: sonarqube_postgres
+    ports:
+      - "5432:5432"
+    volumes:
+#        - "./sonarqube/postgres/postgresql:/var/lib/postgresql"
+#        - "./sonarqube/postgres/data:/var/lib/postgresql/data"
+      - "/etc/localtime:/etc/localtime:ro"  # 设置与宿主机时间同步
+    environment:
+      TZ: Asia/Shanghai
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
+    networks:
+      - sonarqube
+
+  # sonarqube
+  sonarqube:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/sonarqube:9.2.1-community      # 原镜像`sonarqube:9.2.1-community`
+    container_name: sonarqube
+    restart: unless-stopped        # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    volumes:
+#      - "./sonarqube/data:/opt/sonarqube/data"
+#      - "./sonarqube/logs:/opt/sonarqube/logs"
+#      - "./sonarqube/conf:/opt/sonarqube/conf"
+      - "/etc/localtime:/etc/localtime:ro"  # 设置与宿主机时间同步
+    command:
+      # 内存设置
+      - -Dsonar.ce.javaOpts=-Xmx2048m
+      - -Dsonar.web.javaOpts=-Xmx2048m
+      # 设置服务代理路径
+      - -Dsonar.web.context=/
+      # 此设置用于集成gitlab时，回调地址设置
+      - -Dsonar.core.serverBaseURL=https://sonarqube.example.com
+    environment:
+      TZ: Asia/Shanghai
+      SONARQUBE_JDBC_USERNAME: sonar
+      SONARQUBE_JDBC_PASSWORD: sonar
+      SONARQUBE_JDBC_URL: jdbc:postgresql://postgres:5432/sonar
+    ports:
+      - "9005:9000"
+    depends_on:
+      - postgres
+    networks:
+      - sonarqube

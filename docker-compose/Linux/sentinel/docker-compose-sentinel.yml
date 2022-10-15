@@ -1,0 +1,11 @@
+version: '3'
+services:
+  sentinel:
+    image: registry.cn-hangzhou.aliyuncs.com/zhengqing/sentinel-dashboard:1.8.2
+    container_name: sentinel                                     # 容器名为'sentinel'
+    restart: unless-stopped                                      # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+    environment:                                                 # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    ports:                                                       # 映射端口
+      - "8858:8858"
