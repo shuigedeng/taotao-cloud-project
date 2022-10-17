@@ -378,6 +378,12 @@ allprojects {
             url "https://maven.aliyun.com/repository/apache-snapshots"
         }
         maven { name = "华为开源镜像库"; url "https://mirrors.huaweicloud.com/repository/maven/" }
+        maven {
+            url "https://repository.aspose.com/repo/"
+        }
+        maven {
+            url "https://repo.e-iceblue.cn/repository/maven-public/"
+        }
     }
 }
 
