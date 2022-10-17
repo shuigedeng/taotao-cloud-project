@@ -4,10 +4,14 @@ dependencies {
     api "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
     api "org.springframework.boot:spring-boot-autoconfigure-processor:${springBootVersion}"
 
+    //https://search.maven.org/artifact/com.google.auto.service/auto-service
     compileOnly "com.google.auto.service:auto-service:1.0.1"
+    //https://search.maven.org/artifact/com.google.auto.service/auto-service
     annotationProcessor "com.google.auto.service:auto-service:1.0.1"
 
+    //https://search.maven.org/artifact/net.ltgt.gradle.incap/incap
     compileOnly "net.ltgt.gradle.incap:incap:0.3"
+    //https://search.maven.org/artifact/net.ltgt.gradle.incap/incap-processor
     annotationProcessor "net.ltgt.gradle.incap:incap-processor:0.3"
 
     testImplementation "net.ltgt.gradle.incap:incap:0.3"

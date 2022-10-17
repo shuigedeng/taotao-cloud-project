@@ -94,7 +94,8 @@ dependencies {
     //https://search.maven.org/artifact/com.github.yitter/yitter-idgenerator
     api "com.github.yitter:yitter-idgenerator:1.0.6"
 
-    api "org.apache.shenyu:shenyu-common:2.4.3"
+    //https://search.maven.org/artifact/org.apache.shenyu/shenyu-common
+    api "org.apache.shenyu:shenyu-common:2.5.0"
 
     //https://github.com/amaembo/streamex
     //https://search.maven.org/artifact/one.util/streamex

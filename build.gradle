@@ -53,7 +53,7 @@ buildscript {
         //https://search.maven.org/artifact/org.springframework.security/spring-security-core
         springSecurityVersion = '5.7.3'
         //https://search.maven.org/artifact/org.springframework.data/spring-data-commons
-        springDataCommonsVersion = '2.7.3'
+        springDataCommonsVersion = '2.7.5'
         //https://search.maven.org/artifact/org.springframework.kafka/spring-kafka
         springKafkaVersion = '2.9.1'
 
@@ -62,7 +62,7 @@ buildscript {
         //https://search.maven.org/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
         jacksonDatatypeJsr310Version = '2.13.4'
         //https://search.maven.org/artifact/com.alibaba/transmittable-thread-local
-        transmittableVersion = '2.14.0'
+        transmittableVersion = '2.14.1'
         //https://search.maven.org/artifact/org.slf4j/slf4j-api
         slf4jVersion = '1.7.36'
         //https://search.maven.org/artifact/cn.afterturn/easypoi-base
@@ -70,7 +70,7 @@ buildscript {
         //https://search.maven.org/artifact/org.aspectj/aspectjweaver
         aspectjweaverVersion = '1.9.9.1'
         //https://search.maven.org/artifact/io.projectreactor/reactor-core
-        reactorVersion = '3.4.23'
+        reactorVersion = '3.4.24'
         //https://search.maven.org/artifact/javax.servlet/javax.servlet-api
         servletApiVersion = '4.0.1'
         //https://search.maven.org/artifact/com.nepxion/banner
@@ -141,7 +141,7 @@ buildscript {
         //https://search.maven.org/artifact/io.springfox/springfox-swagger2
         swaggerVersion = '3.0.0'
         //https://search.maven.org/artifact/io.swagger.core.v3/swagger-models
-        swaggerModelsVersion = '2.2.3'
+        swaggerModelsVersion = '2.2.4'
         //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-spring-ui
         knife4jVersion = '3.0.3'
 
@@ -184,7 +184,7 @@ buildscript {
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos
         dynamicTpVersion = "1.0.7"
         //https://search.maven.org/artifact/joda-time/joda-time
-        jodaTimeVersion = "2.11.2"
+        jodaTimeVersion = "2.12.0"
         //https://search.maven.org/artifact/org.anarres.lzo/lzo-core
         lzoVersion = "1.0.6"
         //https://search.maven.org/artifact/net.jpountz.lz4/lz4

@@ -6,11 +6,11 @@ dependencies {
     //implementation "com.sun.xml.bind:jaxb-impl:3.0.2"
 
     // https://search.maven.org/artifact/org.glassfish.jaxb/jaxb-runtime
-    api "org.glassfish.jaxb:jaxb-runtime:4.0.0"
+    api "org.glassfish.jaxb:jaxb-runtime:4.0.1"
     // https://search.maven.org/artifact/org.glassfish.jaxb/jaxb-core
-    api "org.glassfish.jaxb:jaxb-core:4.0.0"
+    api "org.glassfish.jaxb:jaxb-core:4.0.1"
     // https://search.maven.org/artifact/org.glassfish.jaxb/jaxb-xjc
-    api "org.glassfish.jaxb:jaxb-xjc:4.0.0"
+    api "org.glassfish.jaxb:jaxb-xjc:4.0.1"
 
 }
 

@@ -17,7 +17,7 @@ dependencies {
     //https://search.maven.org/artifact/org.webjars/jquery
     implementation "org.webjars:jquery:3.6.1"
     //https://search.maven.org/artifact/org.webjars/bootstrap
-    implementation "org.webjars:bootstrap:5.2.0"
+    implementation "org.webjars:bootstrap:5.2.2"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
     implementation "org.webjars:webjars-locator-core:0.52"
 

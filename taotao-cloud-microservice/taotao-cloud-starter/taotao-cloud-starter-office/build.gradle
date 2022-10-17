@@ -44,7 +44,7 @@ dependencies {
 
     //https://search.maven.org/artifact/org.apache.pdfbox/pdfbox
     //pdfbox：PDF转图片
-    api "org.apache.pdfbox:pdfbox:2.0.26"
+    api "org.apache.pdfbox:pdfbox:2.0.27"
 
     //https://search.maven.org/artifact/com.univocity/univocity-parsers
     api "com.univocity:univocity-parsers:2.9.1"
