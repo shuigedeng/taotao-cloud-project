@@ -90,14 +90,14 @@ dependencies {
     implementation fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
 }
 
-repositories {
-    maven {
-        url "https://repository.aspose.com/repo/"
-    }
-    maven {
-        url "https://repo.e-iceblue.cn/repository/maven-public/"
-    }
-}
+//repositories {
+//    maven {
+//        url "https://repository.aspose.com/repo/"
+//    }
+//    maven {
+//        url "https://repo.e-iceblue.cn/repository/maven-public/"
+//    }
+//}
 
 //dependencies {
 //    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
