@@ -47,7 +47,6 @@ public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
 		setNacosProperty();
-
 		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 	}
 
