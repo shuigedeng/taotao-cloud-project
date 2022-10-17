@@ -270,12 +270,12 @@ dubbo:
     owner: 981376577
     architecture: china
     organization: taotao-cloud
-    metadata-type: local
-    environment: develop
-    qos-port: 20880
-    #禁用qos同一台集群可能会有端口冲突现象
-    qos-enable: false
-    qos-accept-foreign-ip: false
+    #metadata-type: local
+    #environment: develop
+    #qos-port: 20880
+    ##禁用qos同一台集群可能会有端口冲突现象
+    #qos-enable: false
+    #qos-accept-foreign-ip: false
     logger: slf4j
   cloud:
     subscribed-services: taotao-cloud-order
@@ -290,36 +290,36 @@ dubbo:
     password: nacos
     protocol: dubbo
     version: ${taotaoCloudVersion}
-    check: false
-    register: true
-    weight: 10
-    subscribe: true
-    use-as-config-center: false
-    use-as-metadata-center: false
+    #check: false
+    #register: true
+    #weight: 10
+    #subscribe: true
+    #use-as-config-center: false
+    #use-as-metadata-center: false
   protocol:
     name: dubbo
     port: 20883
     ssl-enabled: false
     accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
     #serialization: kryo
-    status: server
-    payload: 83886080
-    threadpool: fixed
-    threadname: taotao-cloud-dubbo-executor
-    threads: 200
-  provider:
-    timeout: 300000
-    loadbalance: roundrobin
-    version: ${taotaoCloudVersion}
-    threads: 500
-    #retries: -1
-    #delay: 3000 #延时注册服务（毫秒）
-  consumer:
-    check: false
-    timeout: 300000
-    loadbalance: roundrobin
-    version: ${taotaoCloudVersion}
-    threads: 100
+    #status: server
+    #payload: 83886080
+    #threadpool: fixed
+    #threadname: taotao-cloud-dubbo-executor
+    #threads: 200
+  #provider:
+  #  timeout: 300000
+  #  loadbalance: roundrobin
+  #  version: ${taotaoCloudVersion}
+  #  threads: 500
+  #  #retries: -1
+  #  #delay: 3000 #延时注册服务（毫秒）
+  #consumer:
+  #  check: false
+  #  timeout: 300000
+  #  loadbalance: roundrobin
+  #  version: ${taotaoCloudVersion}
+  #  threads: 100
   #module:
   #  name: ${spring.application.name}
   #monitor:
