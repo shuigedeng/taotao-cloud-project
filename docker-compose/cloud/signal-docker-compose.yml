@@ -584,6 +584,18 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.46
 
+  sys:
+    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2022.1
+    container_name: sys
+    ports:
+      - "33337:33337"
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.47
+
 networks:
   taotao-cluster-network:
     external: true

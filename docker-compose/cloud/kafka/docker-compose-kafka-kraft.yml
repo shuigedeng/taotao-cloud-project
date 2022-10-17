@@ -1,0 +1,90 @@
+#kafka-topics.sh --create --topic foo --partitions 5 --replication-factor 3 --bootstrap-server 192.168.86.59:9092,192.168.86.20:9092,192.168.86.43:9092
+#kafka-topics.sh --list --bootstrap-server 192.168.86.59:9092,192.168.86.20:9092,192.168.86.43:9092
+#kafka-topics.sh --describe --topic foo --bootstrap-server 192.168.86.59:9092,192.168.86.20:9092,192.168.86.43:9092
+
+
+#kafka-console-consumer.sh --bootstrap-server 192.168.86.59:9092,192.168.86.20:9092,192.168.86.43:9092 --topic foo
+#kafka-console-producer.sh --broker-list 192.168.86.59:9092,192.168.86.20:9092,192.168.86.43:9092 --topic foo
+#kafka-topics.sh --delete --topic foo --bootstrap-server 192.168.86.59:9092,192.168.86.20:9092,192.168.86.43:9092
+version: "3"
+services:
+  kafka1:
+    image: 'bitnami/kafka:lastest'
+    user: root
+    ports:
+      - 19092:9092
+      - 19093:9093
+    environment:
+      - KAFKA_ENABLE_KRAFT=yes
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_LISTENER=PLAINTEXT://:19092,CONTROLLER://:19093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.102:19092 #宿主机ip
+      - KAFKA_BROKER_ID=1
+      - KAFKA_KRAFT_CLUSTER_ID=admin123
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOYERS=1@kafka1:9093,2@kafka2:9093,3@kafka3:993
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    volumes:
+      - ./kkraft1:/bitnami/kafka:rw
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+    networks:
+      net_kafka:
+        ipv4_address: 172.23.0.11
+  kafka2:
+    image: 'bitnami/kafka:lastest'
+    user: root
+    ports:
+      - 29092:9092
+      - 29093:9093
+    environment:
+      - KAFKA_ENABLE_KRAFT=yes
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_LISTENER=PLAINTEXT://:29092,CONTROLLER://:29093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.102:29092 #宿主机ip
+      - KAFKA_BROKER_ID=2
+      - KAFKA_KRAFT_CLUSTER_ID=admin123
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOYERS=1@kafka1:9093,2@kafka2:9093,3@kafka3:993
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    volumes:
+      - ./kkraft1:/bitnami/kafka:rw
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+    networks:
+      net_kafka:
+        ipv4_address: 172.23.0.12
+  kafka3:
+    image: 'bitnami/kafka:lastest'
+    user: root
+    ports:
+      - 39092:9092
+      - 39093:9093
+    environment:
+      - KAFKA_ENABLE_KRAFT=yes
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_LISTENER=PLAINTEXT://:39092,CONTROLLER://:39093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.102:39092 #宿主机ip
+      - KAFKA_BROKER_ID=3
+      - KAFKA_KRAFT_CLUSTER_ID=admin123
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOYERS=1@kafka1:9093,2@kafka2:9093,3@kafka3:993
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    volumes:
+      - ./kkraft1:/bitnami/kafka:rw
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+    networks:
+      net_kafka:
+        ipv4_address: 172.23.0.13
+networks:
+  net_kafka:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.23.0.0/24
+        - gateway: 172.23.0.1

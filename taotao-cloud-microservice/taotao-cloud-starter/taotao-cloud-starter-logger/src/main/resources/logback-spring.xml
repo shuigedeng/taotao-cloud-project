@@ -165,7 +165,7 @@
 	<!--	</root>-->
 
 	<springProfile name="dev">
-		<root level="INFO">
+		<root level="DEBUG">
 			<appender-ref ref="CONSOLE_ASYNC_APPENDER"/>
 			<appender-ref ref="FILE_ALL_ASYNC_APPENDER"/>
 			<appender-ref ref="FILE_WARN_ASYNC_APPENDER"/>
