@@ -35,15 +35,6 @@ dependencies {
     api "cn.afterturn:easypoi-base"
     api "cn.afterturn:easypoi-annotation"
 
-    //https://search.maven.org/artifact/org.apache.poi/poi-ooxml
-    api("org.apache.poi:poi-ooxml:5.2.3") {
-        exclude group: "org.slf4j", module: "*"
-        exclude group: "commons-codec", module: "commons-codec"
-        exclude group: "org.bouncycastle", module: "*"
-        exclude group: "com.github.virtuald", module: "curvesapi"
-        exclude group: "org.apache.xmlgraphics", module: "batik-all"
-    }
-
     //https://search.maven.org/artifact/org.glassfish/javax.el/
     //api "org.glassfish:javax.el:3.0.1-b12"
     //https://search.maven.org/artifact/com.itextpdf/itextpdf
@@ -52,6 +43,7 @@ dependencies {
     api "com.itextpdf:itext-asian:5.2.0"
 
     //https://search.maven.org/artifact/org.apache.pdfbox/pdfbox
+    //pdfbox：PDF转图片
     api "org.apache.pdfbox:pdfbox:2.0.26"
 
     //https://search.maven.org/artifact/com.univocity/univocity-parsers
@@ -61,8 +53,51 @@ dependencies {
     //https://search.maven.org/artifact/ink.rayin/rayin-htmladapter-spring-boot-starter
     //api "ink.rayin:rayin-htmladapter-spring-boot-starter:1.0.5"
 
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.60'
+    implementation 'org.bouncycastle:bcpkix-jdk15on:1.60'
+    //aspose-words 文档操作工具包
+    implementation 'com.aspose:aspose-cells:22.10:javadoc'
+    implementation(group: 'com.aspose', name: 'aspose-cells', version: '22.10')
+    implementation(group: 'com.aspose', name: 'aspose-words', version: '22.10', classifier: 'jdk17')
+
+    // pdf 转 word
+    implementation 'e-iceblue:spire.doc.free:5.2.0'
+    implementation 'e-iceblue:spire.pdf.free:5.1.0'
+    // md转html
+    implementation 'com.youbenzi:MD2File:1.0.2'
+    //https://mvnrepository.com/artifact/org.xhtmlrenderer/core-renderer
+    implementation 'org.xhtmlrenderer:core-renderer:R8'
+    //https://mvnrepository.com/artifact/xerces/xercesImpl
+    implementation 'xerces:xercesImpl:2.12.2'
+    //https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml
+    implementation 'net.sourceforge.nekohtml:nekohtml:1.9.22'
+
+    //word文档 转 html文件
+    //https://search.maven.org/artifact/org.apache.poi/poi-ooxml
+    api("org.apache.poi:poi-ooxml:5.2.3") {
+        exclude group: "org.slf4j", module: "*"
+        exclude group: "commons-codec", module: "commons-codec"
+        exclude group: "org.bouncycastle", module: "*"
+        exclude group: "com.github.virtuald", module: "curvesapi"
+        exclude group: "org.apache.xmlgraphics", module: "batik-all"
+    }
+    api "org.apache.poi:poi:5.2.3"
+    api 'org.apache.poi:poi-scratchpad:5.2.3'
+    api 'fr.opensagres.xdocreport:org.apache.poi.xwpf.converter.xhtml:1.0.6'
+    api 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document:2.0.4'
+
+    //html2image
+    implementation fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
 }
 
+repositories {
+    maven {
+        url "https://repository.aspose.com/repo/"
+    }
+    maven {
+        url "https://repo.e-iceblue.cn/repository/maven-public/"
+    }
+}
 
 //dependencies {
 //    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
