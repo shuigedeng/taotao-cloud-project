@@ -10,7 +10,7 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/org.noear/snack3
-    api "org.noear:snack3:3.2.39"
+    api "org.noear:snack3:3.2.44"
 
     //https://gitee.com/bboss/bboss-elastic
     //https://esdoc.bbossgroups.com/#/spring-booter-with-bboss

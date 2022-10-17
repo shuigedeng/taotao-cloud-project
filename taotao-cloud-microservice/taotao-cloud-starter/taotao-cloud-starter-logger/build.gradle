@@ -27,7 +27,7 @@ dependencies {
 
     // https://github.com/qqxx6661/logRecord
     //https://search.maven.org/artifact/cn.monitor4all/log-record-starter
-    api("cn.monitor4all:log-record-starter:1.2.3") {
+    api("cn.monitor4all:log-record-starter:1.2.4") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
