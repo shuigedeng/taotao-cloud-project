@@ -1,16 +1,14 @@
-package com.taotao.cloud.common.mq;
+package com.taotao.cloud.core.mq;
 
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
+import org.springframework.util.Assert;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.util.Assert;
 
 /**
  * 消息队列生产者实例工厂
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 public class MessageQueueProviderFactory {
 

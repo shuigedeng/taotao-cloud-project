@@ -1,4 +1,4 @@
-package com.taotao.cloud.common.mq.consumer;
+package com.taotao.cloud.core.mq.consumer;
 
 
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -6,9 +6,6 @@ import com.taotao.cloud.common.exception.BaseException;
 
 /**
  * 消息队列消费者异常
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 public class MessageQueueConsumerException extends BaseException {
 

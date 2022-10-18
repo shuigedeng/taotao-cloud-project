@@ -1,10 +1,7 @@
-package com.taotao.cloud.common.mq.producer;
+package com.taotao.cloud.core.mq.producer;
 
 /**
  * 消息发送回调接口
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 public interface MessageSendCallback {
 

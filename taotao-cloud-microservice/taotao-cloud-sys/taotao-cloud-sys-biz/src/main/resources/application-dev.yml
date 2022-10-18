@@ -819,6 +819,7 @@ spring:
       #慢查询最短时间,默认为1000毫秒
       slowTime: 2000
   kafka:
+    enabled: true
     bootstrap-servers: 192.168.10.210:9092
     producer:
       retries: 1
@@ -1307,6 +1308,16 @@ taotao:
     security:
       ignore-url:
         - /sys/buyer/dict/test/{code}
+    mq:
+      enabled: true
+      kafka:
+        enabled: true
+      #rocketmq:
+      #  enabled: true
+      #  consumer:
+      #    topic: aaa
+      #  producer:
+      #    namespace: aaa
 
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割

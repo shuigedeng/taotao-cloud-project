@@ -1,16 +1,14 @@
 package com.taotao.cloud.rocketmq.rocketmq.core;
 
 import com.google.common.collect.Lists;
-import com.taotao.cloud.common.mq.Message;
-import com.taotao.cloud.common.mq.MessageQueueConsumer;
-import com.taotao.cloud.common.mq.MessageQueueListener;
-import com.taotao.cloud.common.mq.MessageQueueProperties;
-import com.taotao.cloud.common.mq.consumer.MessageQueueConsumerException;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.core.mq.Message;
+import com.taotao.cloud.core.mq.MessageQueueConsumer;
+import com.taotao.cloud.core.mq.MessageQueueListener;
+import com.taotao.cloud.core.mq.MessageQueueProperties;
+import com.taotao.cloud.core.mq.consumer.MessageQueueConsumerException;
 import com.taotao.cloud.rocketmq.rocketmq.autoconfigure.RocketMQMessageQueueAutoConfiguration;
 import com.taotao.cloud.rocketmq.rocketmq.env.FixedRocketMQConsumerProperties;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.acl.common.AclClientRPCHook;
@@ -25,11 +23,11 @@ import org.apache.rocketmq.spring.autoconfigure.RocketMQProperties;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
 /**
  * RocketMQ 消费者
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 public class RocketMQConsumer implements InitializingBean, DisposableBean {
 
@@ -52,9 +50,9 @@ public class RocketMQConsumer implements InitializingBean, DisposableBean {
 	private final List<MessageQueueConsumer> messageQueueConsumers;
 
 	public RocketMQConsumer(MessageQueueProperties messageQueueProperties,
-		RocketMQProperties rocketMQProperties,
-		FixedRocketMQConsumerProperties fixedRocketMQConsumerProperties,
-		List<MessageQueueConsumer> messageQueueConsumers) {
+							RocketMQProperties rocketMQProperties,
+							FixedRocketMQConsumerProperties fixedRocketMQConsumerProperties,
+							List<MessageQueueConsumer> messageQueueConsumers) {
 		this.messageQueueProperties = messageQueueProperties;
 		this.rocketMQProperties = rocketMQProperties;
 		this.fixedRocketMQConsumerProperties = fixedRocketMQConsumerProperties;

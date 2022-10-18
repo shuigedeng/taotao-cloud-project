@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = RocketmqProperties.PREFIX)
 public class RocketmqProperties {
 
-	public static final String PREFIX = "taotao.cloud.rocketmq";
+	public static final String PREFIX = "taotao.cloud.mq.rocketmq";
 
 	private boolean enabled = false;
 

@@ -1,11 +1,11 @@
 package com.taotao.cloud.kafka.kafka.core;
 
-import com.taotao.cloud.common.mq.Message;
-import com.taotao.cloud.common.mq.MessageQueueProvider;
-import com.taotao.cloud.common.mq.producer.MessageQueueProducerException;
-import com.taotao.cloud.common.mq.producer.MessageSendCallback;
-import com.taotao.cloud.common.mq.producer.MessageSendResult;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.core.mq.Message;
+import com.taotao.cloud.core.mq.MessageQueueProvider;
+import com.taotao.cloud.core.mq.producer.MessageQueueProducerException;
+import com.taotao.cloud.core.mq.producer.MessageSendCallback;
+import com.taotao.cloud.core.mq.producer.MessageSendResult;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -15,9 +15,6 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 
 /**
  * Kafka 生产者
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 public class KafkaProvider implements MessageQueueProvider {
 

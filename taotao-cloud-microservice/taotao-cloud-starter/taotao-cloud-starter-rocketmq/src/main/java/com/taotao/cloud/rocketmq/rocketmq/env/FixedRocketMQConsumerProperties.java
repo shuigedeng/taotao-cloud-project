@@ -6,12 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 完善 RocketMQ 4.7.x 版本的配置
  *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @link
- * https://github.com/apache/rocketmq-spring/blob/master/rocketmq-spring-boot/src/main/java/org/apache/rocketmq/spring/autoconfigure/RocketMQProperties.java
- * @since 2.4.13
+ * @link https://github.com/apache/rocketmq-spring/blob/master/rocketmq-spring-boot/src/main/java/org/apache/rocketmq/spring/autoconfigure/RocketMQProperties.java
  */
-@ConfigurationProperties(prefix = "rocketmq.consumer")
+@ConfigurationProperties(prefix = "taotao.cloud.mq.rocketmq.consumer")
 public class FixedRocketMQConsumerProperties {
 
 	/**

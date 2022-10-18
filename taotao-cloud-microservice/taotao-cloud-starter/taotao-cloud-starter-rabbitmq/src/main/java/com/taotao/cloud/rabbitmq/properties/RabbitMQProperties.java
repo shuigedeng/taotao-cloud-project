@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = RabbitMQProperties.PREFIX)
 public class RabbitMQProperties {
 
-	public static final String PREFIX = "taotao.cloud.rabbitmq";
+	public static final String PREFIX = "taotao.cloud.mq.rabbitmq";
 
 	private boolean enabled = false;
 

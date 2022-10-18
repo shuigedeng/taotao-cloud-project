@@ -1,10 +1,15 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
+    //https://github.com/liaochong/myexcel
     //https://search.maven.org/artifact/com.github.liaochong/myexcel
     api("com.github.liaochong:myexcel:4.2.2") {
         exclude group: "org.projectlombok", module: "lombok"
     }
+
+    //https://github.com/pig-mesh/excel-spring-boot-starter
+    //https://search.maven.org/artifact/com.pig4cloud.excel/excel-spring-boot-starter
+    api 'com.pig4cloud.excel:excel-spring-boot-starter:1.2.7'
 
     //https://search.maven.org/artifact/com.alibaba/easyexcel
     api("com.alibaba:easyexcel:3.1.1") {
@@ -17,6 +22,7 @@ dependencies {
         exclude group: "org.apache.tomcat.embed", module: "tomcat-embed-core"
     }
 
+    //https://gitee.com/dromara/x-easypdf
     //https://search.maven.org/artifact/wiki.xsx/x-easypdf
     api "wiki.xsx:x-easypdf:2.10.1"
     api "wiki.xsx:x-easypdf-fop:2.10.1"

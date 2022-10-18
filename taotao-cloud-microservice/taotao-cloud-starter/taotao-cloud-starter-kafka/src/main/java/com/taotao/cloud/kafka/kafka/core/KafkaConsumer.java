@@ -2,15 +2,12 @@ package com.taotao.cloud.kafka.kafka.core;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.taotao.cloud.common.mq.Message;
-import com.taotao.cloud.common.mq.MessageQueueConsumer;
-import com.taotao.cloud.common.mq.MessageQueueListener;
-import com.taotao.cloud.common.mq.MessageQueueProperties;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.core.mq.Message;
+import com.taotao.cloud.core.mq.MessageQueueConsumer;
+import com.taotao.cloud.core.mq.MessageQueueListener;
+import com.taotao.cloud.core.mq.MessageQueueProperties;
 import com.taotao.cloud.kafka.kafka.autoconfigure.KafkaMessageQueueAutoConfiguration;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -23,11 +20,12 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.kafka.core.ConsumerFactory;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 /**
  * RocketMQ 消费者
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 public class KafkaConsumer implements InitializingBean, DisposableBean {
 
@@ -52,8 +50,8 @@ public class KafkaConsumer implements InitializingBean, DisposableBean {
 	private final TaskExecutor taskExecutor;
 
 	public KafkaConsumer(MessageQueueProperties messageQueueProperties,
-		KafkaProperties kafkaProperties, List<MessageQueueConsumer> messageQueueConsumers,
-		ConsumerFactory<String, String> consumerFactory, TaskExecutor taskExecutor) {
+						 KafkaProperties kafkaProperties, List<MessageQueueConsumer> messageQueueConsumers,
+						 ConsumerFactory<String, String> consumerFactory, TaskExecutor taskExecutor) {
 		this.messageQueueProperties = messageQueueProperties;
 		this.kafkaProperties = kafkaProperties;
 		this.messageQueueConsumers = messageQueueConsumers;
