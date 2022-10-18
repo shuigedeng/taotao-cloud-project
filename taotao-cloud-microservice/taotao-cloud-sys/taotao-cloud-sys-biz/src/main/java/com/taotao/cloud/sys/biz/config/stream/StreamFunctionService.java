@@ -1,12 +1,11 @@
 package com.taotao.cloud.sys.biz.config.stream;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import java.util.function.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
-import java.util.function.Consumer;
 
 /**
  * 流函数服务
@@ -28,6 +27,11 @@ public class StreamFunctionService {
 
 	public void sendRabbit(String content) {
 		boolean send = bridge.send("outputRabbit-out-0", content);
+		LogUtils.info(String.valueOf(send));
+	}
+
+	public void sendRocketmq(String content) {
+		boolean send = bridge.send("outputEmail-out-0", content);
 		LogUtils.info(String.valueOf(send));
 	}
 
@@ -57,6 +61,20 @@ public class StreamFunctionService {
 	public Consumer<String> inputRabbit2() {
 		return str -> {
 			LogUtils.info("inputRabbit2 message: {}", str);
+		};
+	}
+
+	@Bean
+	public Consumer<String> inputRocketmq1() {
+		return str -> {
+			LogUtils.info("inputRocketmq1 message: {}", str);
+		};
+	}
+
+	@Bean
+	public Consumer<String> inputRocketmq2() {
+		return str -> {
+			LogUtils.info("inputRocketmq2 message: {}", str);
 		};
 	}
 
