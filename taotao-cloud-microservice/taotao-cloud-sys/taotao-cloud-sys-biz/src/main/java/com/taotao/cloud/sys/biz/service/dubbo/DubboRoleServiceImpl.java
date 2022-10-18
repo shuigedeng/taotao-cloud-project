@@ -24,6 +24,7 @@ import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -35,7 +36,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-//@DubboService(interfaceClass = IDubboRoleService.class, validation = "true")
+@DubboService(interfaceClass = IDubboRoleService.class, validation = "true")
 public class DubboRoleServiceImpl extends
 	BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
 	implements IDubboRoleService {

@@ -23,6 +23,7 @@ import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,7 +35,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-//@DubboService(interfaceClass = IDubboDictService.class, validation = "true")
+@DubboService(interfaceClass = IDubboDictService.class, validation = "true")
 public class DubboDictServiceImpl extends
 	BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
 	implements IDubboDictService {
