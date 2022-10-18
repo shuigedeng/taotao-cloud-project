@@ -3,9 +3,9 @@ dependencies {
 
     api "com.alibaba.cloud:spring-cloud-starter-stream-rocketmq"
 
-    //api("org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.1") {
-    //    exclude group: "com.alibaba", module: "fastjson"
-    //}
+    api("org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.2") {
+        exclude group: "com.alibaba", module: "fastjson"
+    }
 
 
 }
