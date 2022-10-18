@@ -25,11 +25,9 @@ import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import org.apache.dubbo.config.annotation.DubboService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * MenuServiceImpl
@@ -39,7 +37,7 @@ import java.util.List;
  * @since 2021-10-09 20:41:23
  */
 @Service
-@DubboService(interfaceClass = IDubboResourceService.class, validation = "true")
+//@DubboService(interfaceClass = IDubboResourceService.class, validation = "true")
 public class DubboResourceServiceImpl extends
 	BaseSuperServiceImpl<IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
 	implements IDubboResourceService {

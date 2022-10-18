@@ -16,12 +16,9 @@
 package com.taotao.cloud.core.model;
 
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Callable;
-import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.model.Callable.Action0;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -48,7 +45,7 @@ public class ProcessExitEvent {
 	 *
 	 * @param action0 action0
 	 * @param order   order
-	 * @param async  async
+	 * @param async   async
 	 * @since 2021-09-02 20:37:02
 	 */
 	public static void register(Callable.Action0 action0, int order, Boolean async) {
@@ -70,7 +67,7 @@ public class ProcessExitEvent {
 								a.action0.invoke();
 							} catch (Exception e2) {
 								LogUtils.error(e2,
-										"进程关闭事件回调处理出错");
+									"进程关闭事件回调处理出错");
 							}
 						};
 
@@ -81,13 +78,9 @@ public class ProcessExitEvent {
 						}
 					}
 				}
-				LogUtils.info(
-						PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
-								+ " 应用已正常退出！");
+				LogUtils.info(" 应用已正常退出！");
 			} catch (Exception e) {
-				LogUtils.error(
-						PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
-								+ " 进程关闭事件回调处理出错", e);
+				LogUtils.error(" 进程关闭事件回调处理出错", e);
 			}
 		}));
 	}
