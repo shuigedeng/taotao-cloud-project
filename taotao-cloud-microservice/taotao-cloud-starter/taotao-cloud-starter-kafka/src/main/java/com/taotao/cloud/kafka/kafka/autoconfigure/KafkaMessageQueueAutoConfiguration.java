@@ -1,6 +1,7 @@
 package com.taotao.cloud.kafka.kafka.autoconfigure;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.mq.MessageQueueAutoConfiguration;
 import com.taotao.cloud.core.mq.MessageQueueConsumer;
 import com.taotao.cloud.core.mq.MessageQueueProperties;
@@ -8,6 +9,7 @@ import com.taotao.cloud.core.mq.MessageQueueProvider;
 import com.taotao.cloud.core.mq.MessageQueueProviderFactory;
 import com.taotao.cloud.kafka.kafka.core.KafkaConsumer;
 import com.taotao.cloud.kafka.kafka.core.KafkaProvider;
+import java.util.List;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -16,11 +18,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-
-import java.util.List;
 
 /**
  * Kafka 自动配置
@@ -44,10 +43,10 @@ public class KafkaMessageQueueAutoConfiguration {
 
 	@Bean(BEAN_CONSUMER)
 	public KafkaConsumer kafkaConsumer(MessageQueueProperties messageQueueProperties,
-									   KafkaProperties kafkaProperties,
-									   ObjectProvider<List<MessageQueueConsumer>> messageListeners,
-									   ObjectProvider<ConsumerFactory<String, String>> consumerFactory,
-									   TaskExecutor taskExecutor) {
+		KafkaProperties kafkaProperties,
+		ObjectProvider<List<MessageQueueConsumer>> messageListeners,
+		ObjectProvider<ConsumerFactory<String, String>> consumerFactory,
+		AsyncThreadPoolTaskExecutor taskExecutor) {
 		LogUtils.debug(AUTOWIRED_KAKFA_CONSUMER);
 		return new KafkaConsumer(messageQueueProperties, kafkaProperties,
 			messageListeners.getIfAvailable(),
