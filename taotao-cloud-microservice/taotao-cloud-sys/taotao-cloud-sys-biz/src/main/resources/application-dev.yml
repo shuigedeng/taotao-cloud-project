@@ -421,6 +421,17 @@ seata:
     # 客户端事务消息请求是否批量合并发送（默认true）
     enable-client-batch-send-request: true
 
+rocketmq:
+  name-server: http://192.168.10.210:9876
+  producer:
+    # 组名称
+    group: ${spring.application.name}
+    #消息发送时长
+    send-message-timeout: 3000
+    # 阿里云购买的rocketmq
+    #access-key:
+    #secret-key:
+
 spring:
   #  dynamic:
   #    tp:
@@ -819,6 +830,13 @@ spring:
       slowQuery: true
       #慢查询最短时间,默认为1000毫秒
       slowTime: 2000
+  rabbitmq:
+    host: 192.168.10.210
+    port: 5672
+    username: root
+    password: 123456
+    # 虚拟host 可以不设置  需要再server端搭建自己的虚拟host
+    #virtual-host: /
   kafka:
     enabled: true
     bootstrap-servers: 192.168.10.210:9092
@@ -1062,11 +1080,6 @@ spring:
               standard:
                 sharding-column: id
                 sharding-algorithm-name: tt-sys-user-inline
-  rabbitmq:
-    addresses: 192.168.10.210:5672
-    username: root
-    password: 123456
-    virtual-host: /
   cloud:
     compatibility-verifier:
       enabled: false
@@ -1100,6 +1113,14 @@ spring:
       rocketmq:
         binder:
           name-server: 192.168.10.210:9876
+        #RocketMQSpecificPropertiesProvider
+        bindings:
+          email-output:
+            producer:
+              sendMsgTimeout: 3000
+          email-input:
+            consumer:
+              pullThresholdForQueue: 1000
       rabbit:
         bindings:
           sms-output:
