@@ -1,24 +1,22 @@
 package com.taotao.cloud.rocketmq.rocketmq.core;
 
-import com.taotao.cloud.common.mq.Message;
-import com.taotao.cloud.common.mq.MessageQueueProvider;
-import com.taotao.cloud.common.mq.producer.MessageQueueProducerException;
-import com.taotao.cloud.common.mq.producer.MessageSendCallback;
-import com.taotao.cloud.common.mq.producer.MessageSendResult;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.core.mq.Message;
+import com.taotao.cloud.core.mq.MessageQueueProvider;
+import com.taotao.cloud.core.mq.producer.MessageQueueProducerException;
+import com.taotao.cloud.core.mq.producer.MessageSendCallback;
+import com.taotao.cloud.core.mq.producer.MessageSendResult;
 import com.taotao.cloud.rocketmq.rocketmq.env.FixedRocketMQProducerProperties;
-import java.nio.charset.StandardCharsets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * RockMQ 生产者
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 public class RocketMQProvider implements MessageQueueProvider {
 
@@ -31,7 +29,7 @@ public class RocketMQProvider implements MessageQueueProvider {
 	private final FixedRocketMQProducerProperties fixedRocketMQProducerProperties;
 
 	public RocketMQProvider(RocketMQTemplate rocketMQTemplate,
-		FixedRocketMQProducerProperties fixedRocketMQProducerProperties) {
+							FixedRocketMQProducerProperties fixedRocketMQProducerProperties) {
 		this.rocketMQTemplate = rocketMQTemplate;
 		this.fixedRocketMQProducerProperties = fixedRocketMQProducerProperties;
 	}

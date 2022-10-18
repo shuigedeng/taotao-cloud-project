@@ -1,11 +1,8 @@
-package com.taotao.cloud.common.mq;
+package com.taotao.cloud.core.mq;
 
 
 /**
  * 消息模型
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 public class Message {
 

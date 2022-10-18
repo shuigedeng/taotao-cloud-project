@@ -1,22 +1,18 @@
-package com.taotao.cloud.common.mq;
+package com.taotao.cloud.core.mq;
 
-import com.taotao.cloud.common.mq.consumer.MessageModel;
-import com.taotao.cloud.common.mq.consumer.MessageSelectorType;
 import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.core.mq.consumer.MessageModel;
+import com.taotao.cloud.core.mq.consumer.MessageSelectorType;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.springframework.stereotype.Component;
 
 /**
  * 消息队列监听注解
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
-@Component
 @Documented
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

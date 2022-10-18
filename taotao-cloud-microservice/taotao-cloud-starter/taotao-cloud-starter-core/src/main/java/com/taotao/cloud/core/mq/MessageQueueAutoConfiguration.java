@@ -1,4 +1,4 @@
-package com.taotao.cloud.common.mq;
+package com.taotao.cloud.core.mq;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -8,9 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 分布式锁操作自动装配
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
 @ConditionalOnProperty(name = MessageQueueProperties.ENABLED, matchIfMissing = true)
 @EnableConfigurationProperties(MessageQueueProperties.class)
