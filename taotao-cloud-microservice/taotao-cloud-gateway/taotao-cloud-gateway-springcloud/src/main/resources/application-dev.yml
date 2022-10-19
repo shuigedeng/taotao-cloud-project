@@ -60,63 +60,63 @@ redisson:
   #等待获取锁超时时间,-1则是一直等待
   attemptTimeout: 10000
   dataValidTime: 1800000
-  #single_server_config:
-  #  #服务器地址,必填ip:port
-  #  address: "192.168.10.200:6379"
-  #  #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
-  #  subscription_connection_minimum_idle_size: 1
-  #  #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
-  #  subscription_connection_pool_size: 50
-  #  #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
-  #  connection_minimum_idle_size: 24
-  #  #连接池最大容量。连接池的连接数量自动弹性伸缩。
-  #  connection_pool_size: 64
-  #  #尝试连接的数据库编号。
-  #  database: 3
-  #  #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
-  #  dns_monitoring_interval: 5000
-  multiple-server-config:
-    #在多Redis服务节点的环境里，可以选用以下几种负载均衡方式选择一个节点：
-    #org.redisson.connection.balancer.WeightedRoundRobinBalancer - 权重轮询调度算法
-    #org.redisson.connection.balancer.RoundRobinLoadBalancer - 轮询调度算法
-    #org.redisson.connection.balancer.RandomLoadBalancer - 随机调度算法
-    loadBalancer: "org.redisson.connection.balancer.RoundRobinLoadBalancer"
-    #多从节点的环境里，每个 从服务节点里用于普通操作（非 发布和订阅）的最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时读取反映速度。
-    slaveConnectionMinimumIdleSize: 32
-    #多从节点的环境里，每个 从服务节点里用于普通操作（非 发布和订阅）连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
-    slaveConnectionPoolSize: 64
-    failedSlaveReconnectionInterval: 3000
-    failedSlaveCheckInterval: 180000
-    #多节点的环境里，每个 主节点的最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
-    masterConnectionMinimumIdleSize: 32
-    #多主节点的环境里，每个 主节点的连接池最大容量。连接池的连接数量自动弹性伸缩。
-    masterConnectionPoolSize: 64
-    #设置读取操作选择节点的模式。 可用值为： SLAVE - 只在从服务节点里读取。 MASTER - 只在主服务节点里读取。 MASTER_SLAVE - 在主从服务节点里都可以读取。
-    readMode: slave
-    #设置订阅操作选择节点的模式。 可用值为： SLAVE - 只在从服务节点里订阅。 MASTER - 只在主服务节点里订阅。
-    subscriptionMode: slave
-    #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。 redisson.multiple-server-config.subscriptionConnectionPoolSize
-    subscriptionConnectionMinimumIdleSize: 1
-    subscriptionConnectionPoolSize: 50
-    #监测DNS的变化情况的时间间隔。
-    dnsMonitoringInterval: 5000
-    #服务器节点地址.必填
-    #redisson.multiple-server-config.node-addresses[0]=127.0.0.1:6379
-    #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
-    #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
-    nodeAddresses:
-      - "192.168.10.200:6381"
-      - "192.168.10.200:6382"
-      - "192.168.10.200:6383"
-      - "192.168.10.200:6384"
-      - "192.168.10.200:6385"
-      - "192.168.10.200:6386"
-    #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
-    database: 1
-    #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
-    masterName:
-    #(集群,哨兵,云托管模特特有) 对Redis集群节点状态扫描的时间间隔。单位是毫秒。
-    scanInterval: 1000
+  single_server_config:
+    #服务器地址,必填ip:port
+    address: "192.168.10.210:6379"
+    #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
+    subscription_connection_minimum_idle_size: 1
+    #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
+    subscription_connection_pool_size: 50
+    #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
+    connection_minimum_idle_size: 24
+    #连接池最大容量。连接池的连接数量自动弹性伸缩。
+    connection_pool_size: 64
+    #尝试连接的数据库编号。
+    database: 3
+    #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
+    dns_monitoring_interval: 5000
+  #multiple-server-config:
+  #  #在多Redis服务节点的环境里，可以选用以下几种负载均衡方式选择一个节点：
+  #  #org.redisson.connection.balancer.WeightedRoundRobinBalancer - 权重轮询调度算法
+  #  #org.redisson.connection.balancer.RoundRobinLoadBalancer - 轮询调度算法
+  #  #org.redisson.connection.balancer.RandomLoadBalancer - 随机调度算法
+  #  loadBalancer: "org.redisson.connection.balancer.RoundRobinLoadBalancer"
+  #  #多从节点的环境里，每个 从服务节点里用于普通操作（非 发布和订阅）的最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时读取反映速度。
+  #  slaveConnectionMinimumIdleSize: 32
+  #  #多从节点的环境里，每个 从服务节点里用于普通操作（非 发布和订阅）连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
+  #  slaveConnectionPoolSize: 64
+  #  failedSlaveReconnectionInterval: 3000
+  #  failedSlaveCheckInterval: 180000
+  #  #多节点的环境里，每个 主节点的最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
+  #  masterConnectionMinimumIdleSize: 32
+  #  #多主节点的环境里，每个 主节点的连接池最大容量。连接池的连接数量自动弹性伸缩。
+  #  masterConnectionPoolSize: 64
+  #  #设置读取操作选择节点的模式。 可用值为： SLAVE - 只在从服务节点里读取。 MASTER - 只在主服务节点里读取。 MASTER_SLAVE - 在主从服务节点里都可以读取。
+  #  readMode: slave
+  #  #设置订阅操作选择节点的模式。 可用值为： SLAVE - 只在从服务节点里订阅。 MASTER - 只在主服务节点里订阅。
+  #  subscriptionMode: slave
+  #  #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。 redisson.multiple-server-config.subscriptionConnectionPoolSize
+  #  subscriptionConnectionMinimumIdleSize: 1
+  #  subscriptionConnectionPoolSize: 50
+  #  #监测DNS的变化情况的时间间隔。
+  #  dnsMonitoringInterval: 5000
+  #  #服务器节点地址.必填
+  #  #redisson.multiple-server-config.node-addresses[0]=127.0.0.1:6379
+  #  #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
+  #  #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
+  #  nodeAddresses:
+  #    - "192.168.10.210:6381"
+  #    - "192.168.10.210:6382"
+  #    - "192.168.10.210:6383"
+  #    - "192.168.10.210:6384"
+  #    - "192.168.10.210:6385"
+  #    - "192.168.10.210:6386"
+  #  #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
+  #  database: 1
+  #  #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
+  #  masterName:
+  #  #(集群,哨兵,云托管模特特有) 对Redis集群节点状态扫描的时间间隔。单位是毫秒。
+  #  scanInterval: 1000
 
 spring:
   main:
@@ -131,7 +131,7 @@ spring:
   #      jwt:
   #        #配置RSA的公钥访问地址
   #        #          jwk-set-uri: http://taotao-cloud-auth/oauth2/jwks
-  #        jwk-set-uri: http://192.168.10.200:9998/oauth2/jwks
+  #        jwk-set-uri: http://192.168.10.210:9998/oauth2/jwks
   sleuth:
     enabled: true
     web:
@@ -141,7 +141,7 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.200}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://192.168.10.210:9411
     discoveryClientEnabled: false
     sender:
       type: WEB
@@ -151,14 +151,14 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   redis:
-    #host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
-    #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
-    #database: 1
+    host: 192.168.10.210
+    port: 6379
+    database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
-    cluster:
-      nodes: 192.168.10.200:6381,192.168.10.200:6382,192.168.10.200:6383,192.168.10.200:6384,192.168.10.200:6385,192.168.10.200:6386
-      max-redirects: 3
+    #cluster:
+    #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
+    #  max-redirects: 3
     #sentinel:
     #  master:
     #  nodes:
@@ -171,43 +171,50 @@ spring:
         min-idle: 100
     redisson:
       config: |
-        clusterServersConfig:
+        singleServerConfig:
+          # 连接空闲超时，单位：毫秒
           idleConnectionTimeout: 10000
+          # 连接超时，单位：毫秒
           connectTimeout: 10000
+          # 命令等待超时，单位：毫秒
           timeout: 3000
+          # 命令失败重试次数,如果尝试达到 retryAttempts（命令失败重试次数） 仍然不能将命令发送至某个指定的节点时，将抛出错误。
+          # 如果尝试在此限制之内发送成功，则开始启用 timeout（命令等待超时） 计时。
           retryAttempts: 3
+          # 命令重试发送时间间隔，单位：毫秒
           retryInterval: 1500
-          failedSlaveReconnectionInterval: 3000
-          failedSlaveCheckInterval: 60000
+          # 密码，没有设置密码时，需要注释掉，否则会报错
           password: taotao-cloud
+          # 单个连接最大订阅数量
           subscriptionsPerConnection: 5
-          clientName: null
-          loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+          # 客户端名称
+          clientName: "taotao-cloud-redis-client"
+          # 节点地址
+          address: "redis://192.168.10.210:6379"
+          # 发布和订阅连接的最小空闲连接数
           subscriptionConnectionMinimumIdleSize: 1
+          # 发布和订阅连接池大小
           subscriptionConnectionPoolSize: 50
-          slaveConnectionMinimumIdleSize: 24
-          slaveConnectionPoolSize: 64
-          masterConnectionMinimumIdleSize: 24
-          masterConnectionPoolSize: 64
-          readMode: "SLAVE"
-          subscriptionMode: "SLAVE"
-          nodeAddresses:
-          - "redis://192.168.10.200:6381"
-          - "redis://192.168.10.200:6382"
-          - "redis://192.168.10.200:6383"
-          - "redis://192.168.10.200:6384"
-          - "redis://192.168.10.200:6385"
-          - "redis://192.168.10.200:6386"
-          scanInterval: 1000
-          pingConnectionInterval: 0
-          keepAlive: false
-          tcpNoDelay: false
-        threads: 16
-        nettyThreads: 32
-        codec: !<org.redisson.codec.MarshallingCodec> {}
-        transportMode: "NIO"
+          # 最小空闲连接数
+          connectionMinimumIdleSize: 32
+          # 连接池大小
+          connectionPoolSize: 64
+          # 数据库编号
+          database: 1
+          # DNS监测时间间隔，单位：毫秒
+          dnsMonitoringInterval: 5000
+        # 线程池数量,默认值: 当前处理核数量 * 2
+        threads: 0
+        # Netty线程池数量,默认值: 当前处理核数量 * 2
+        nettyThreads: 0
+        # 编码
+        codec: !<org.redisson.codec.JsonJacksonCodec> {}
+        # 传输模式
+        transportMode : "NIO"
+        # 配置看门狗的默认超时时间为30s，这里改为 10s
+        lockWatchdogTimeout: 10000
   kafka:
-    bootstrap-servers: 192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094
+    bootstrap-servers: 192.168.10.210:9092
     producer:
       retries: 0
       batch-size: 16384
@@ -231,8 +238,8 @@ spring:
       enabled: true
       eager: true
       transport:
-        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:192.168.10.200}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
-        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8710}
+        dashboard: 192.168.10.210:8858
+        port: 8712
       scg:
         fallback:
           mode: response

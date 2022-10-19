@@ -22,6 +22,7 @@ import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import io.seata.spring.annotation.GlobalTransactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import org.slf4j.MDC;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * DictServiceImpl
@@ -161,7 +163,32 @@ public class DictServiceImpl extends
 	}
 
 	@Override
+	@GlobalTransactional(name = "sys-dict-global-transactional-1", rollbackFor = Exception.class)
 	public Boolean add() {
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+
+		Dict d1 = Dict.builder().dictCode("asdfsadf").dictName("sldf").sortNum(3).build();
+		Dict d2 = Dict.builder().dictCode("asdfsadf222").dictName("sldf222").sortNum(5).build();
+		int i = im().insertBatchSomeColumn(List.of(d1, d2));
+
+		return true;
+	}
+
+	@Override
+	@GlobalTransactional(name = "sys-dict-global-transactional-2", rollbackFor = Exception.class)
+	@Transactional(rollbackFor = Exception.class)
+	public Boolean add1() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+
 		Dict d1 = Dict.builder().dictCode("asdfsadf").dictName("sldf").sortNum(3).build();
 		Dict d2 = Dict.builder().dictCode("asdfsadf222").dictName("sldf222").sortNum(5).build();
 		int i = im().insertBatchSomeColumn(List.of(d1, d2));

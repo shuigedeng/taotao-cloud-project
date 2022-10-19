@@ -34,8 +34,10 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
@@ -205,7 +207,26 @@ public class Monitor {
 	}
 
 	public void monitorShutdown() {
-		monitorThreadPoolExecutor.shutdown();
+		shutdownThreadlPool(monitorThreadPoolExecutor);
+	}
+
+	public static void shutdownThreadlPool(ExecutorService executorService) {
+		executorService.shutdown();
+		int retry = 3;
+		while (retry > 0) {
+			retry--;
+			try {
+				if (executorService.awaitTermination(100, TimeUnit.MICROSECONDS)) {
+					return;
+				}
+			} catch (InterruptedException e) {
+				executorService.shutdownNow();
+				Thread.interrupted();
+			} catch (Throwable e) {
+				LogUtils.error(e, "executorService shutdown executor has error");
+			}
+		}
+		executorService.shutdownNow();
 	}
 
 	public void asyncShutdown() {

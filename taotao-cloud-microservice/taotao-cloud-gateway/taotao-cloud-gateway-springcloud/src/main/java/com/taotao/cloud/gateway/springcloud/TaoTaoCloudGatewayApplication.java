@@ -37,15 +37,17 @@ public class TaoTaoCloudGatewayApplication {
 		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 	}
 
-	public static void setNacosProperty(){
+	public static void setNacosProperty() {
 		/**
 		 * 设置nacos客户端日志和快照目录
 		 *
 		 * @see LocalConfigInfoProcessor
 		 */
 		String userHome = System.getProperty("user.home");
-		System.setProperty("JM.LOG.PATH", userHome + File.separator + "logs" + File.separator + "taotao-cloud-gateway-springcloud");
-		System.setProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs" + File.separator + "taotao-cloud-gateway-springcloud");
+		System.setProperty("JM.LOG.PATH", userHome + File.separator + "logs" + File.separator
+			+ "taotao-cloud-gateway-springcloud");
+		System.setProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs" + File.separator
+			+ "taotao-cloud-gateway-springcloud");
 		System.setProperty("nacos.logging.default.config.enabled", "false");
 	}
 }

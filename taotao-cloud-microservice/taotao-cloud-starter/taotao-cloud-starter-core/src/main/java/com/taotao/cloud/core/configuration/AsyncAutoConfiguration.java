@@ -144,6 +144,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 
 			return t;
 		}
+
 	}
 
 	public static class AsyncThreadPoolUncaughtExceptionHandler implements

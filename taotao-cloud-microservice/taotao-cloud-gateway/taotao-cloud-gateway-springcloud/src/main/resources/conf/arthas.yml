@@ -8,4 +8,4 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.200:7777/ws
+  tunnel-server: ws://192.168.10.210:7777/ws

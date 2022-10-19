@@ -48,10 +48,12 @@ dependencies {
 configurations {
     all {
         exclude group: "org.springframework", module: "spring-webmvc"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+        exclude group: "com.querydsl", module: "querydsl-apt"
     }
 }
 
-mainClassName = "com.taotao.cloud.gatewway.springcloud.TaoTaoCloudGatewayApplication"
+mainClassName = "com.taotao.cloud.gateway.springcloud.TaoTaoCloudGatewayApplication"
 description = "springcloud网关模块"
 archivesBaseName = 'taotao-cloud-gateway-springcloud'

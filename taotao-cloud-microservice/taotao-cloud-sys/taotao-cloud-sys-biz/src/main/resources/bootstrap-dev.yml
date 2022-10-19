@@ -41,7 +41,7 @@ spring:
         password: nacos
         group: TAOTAO_CLOUD_GROUP
         file-extension: yml
-        cluster-name: SC
+        cluster-name: CQ
         refresh-enabled: true
         #使用nacos配置中心配置 dynamic-tp-nacos-cloud-demo-dtp-dev.yml
         #extension-configs:

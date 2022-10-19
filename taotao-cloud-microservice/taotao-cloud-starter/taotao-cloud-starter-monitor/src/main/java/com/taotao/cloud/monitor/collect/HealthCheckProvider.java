@@ -141,7 +141,8 @@ public class HealthCheckProvider implements AutoCloseable {
 				try {
 					Report report2 = task.getReport();
 					if (report2 != null) {
-						report.put(task.getName(), report2.setDesc(task.getDesc()).setName(task.getName()));
+						report.put(task.getName(),
+							report2.setDesc(task.getDesc()).setName(task.getName()));
 					}
 				} catch (Exception e) {
 					LogUtils.error(e,
@@ -160,6 +161,9 @@ public class HealthCheckProvider implements AutoCloseable {
 	@Override
 	public void close() {
 		close = true;
+
+		monitor.monitorShutdown();
+
 		for (AbstractCollectTask task : checkTasks) {
 			try {
 				task.close();
