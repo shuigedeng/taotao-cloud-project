@@ -3,15 +3,16 @@ name: Assemble Datav
 on:
   push:
     paths:
-      - 'taotao-cloud-ui/vue3/taotao-cloud-datav/**'
+      - 'taotao-cloud-ui/taotao-cloud-vue3-datav/**'
   pull_request:
-    branches: [ master ]
+    branches: [ datav ]
+    #branches: [ master ]
 
   workflow_dispatch:
 
 defaults:
   run:
-    working-directory: ./taotao-cloud-ui/vue3/taotao-cloud-datav
+    working-directory: ./taotao-cloud-ui/taotao-cloud-vue3-datav
 
 jobs:
   assemble:

@@ -5,11 +5,13 @@ name: assemble rn android release
 on:
   push:
     paths:
-      - 'taotao-cloud-ui/taro/taotao-cloud-mall/**'
-    branches: [ v1 ]
+      - 'taotao-cloud-ui/taotao-cloud-taro-mall/**'
+    branches: [ taro ]
+    #branches: [ master ]
     tags: [ v* ]
   pull_request:
-    branches: [ master ]
+    branches: [ taro ]
+    #branches: [ master ]
 
   workflow_dispatch:
 
@@ -42,7 +44,7 @@ env:
 
 defaults:
   run:
-    working-directory: ${{ github.workspace }}/taotao-cloud-ui/taro/taotao-cloud-mall
+    working-directory: ${{ github.workspace }}/taotao-cloud-ui/taotao-cloud-taro-mall
 
 # 工作流作业
 jobs:

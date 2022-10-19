@@ -3,14 +3,16 @@ name: assemble open
 on:
   push:
     paths:
-      - 'taotao-cloud-ui/vue3/taotao-cloud-open/**'
-    branches: [ master ]
+      - 'taotao-cloud-ui/taotao-cloud-vue3-open/**'
+    branches: [ open ]
+    #branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ open ]
+    #branches: [ master ]
 
 defaults:
   run:
-    working-directory: ./taotao-cloud-ui/vue3/taotao-cloud-open
+    working-directory: ./taotao-cloud-ui/taotao-cloud-vue3-open
 
 env:
   TAOTAO_CLOUD_VERSION: 2022.10
@@ -59,7 +61,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "taotao-cloud-ui/vue3/taotao-cloud-open/dist/"
+          SOURCE: "taotao-cloud-ui/taotao-cloud-vue3-open/dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_OPEN_TARGET }}
@@ -73,7 +75,7 @@ jobs:
           registry: registry.cn-hangzhou.aliyuncs.com
           buildoptions: "--compress --force-rm"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-          workdir: ${{ github.workspace }}/taotao-cloud-ui/vue3/taotao-cloud-open
+          workdir: ${{ github.workspace }}/taotao-cloud-ui/taotao-cloud-vue3-open
 
       - name: send failure dingding notify
         if: failure()
