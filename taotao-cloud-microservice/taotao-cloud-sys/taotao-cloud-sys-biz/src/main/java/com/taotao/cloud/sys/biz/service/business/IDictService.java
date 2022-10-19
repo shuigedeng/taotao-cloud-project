@@ -98,4 +98,6 @@ public interface IDictService extends BaseSuperService<Dict, Long> {
 
 
 	Boolean add();
+
+	Boolean add1();
 }

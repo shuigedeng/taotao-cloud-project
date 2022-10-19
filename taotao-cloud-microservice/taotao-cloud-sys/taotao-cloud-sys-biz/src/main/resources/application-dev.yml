@@ -284,8 +284,10 @@ dubbo:
   registry:
     address: nacos://192.168.10.210:8848
     group: DUBBO_REGISTRY_GROUP
+    cluster: CQ
     parameters:
       namespace: taotao-cloud-dev
+      cluster-name: CQ
     timeout: 15000
     username: nacos
     password: nacos
@@ -337,6 +339,7 @@ seata:
   tx-service-group: taotao_cloud_tx_group
   enable-auto-data-source-proxy: true
   use-jdk-proxy: false
+  data-source-proxy-mode: AT
   service:
     grouplist:
       CQ: 192.168.10.210:8091

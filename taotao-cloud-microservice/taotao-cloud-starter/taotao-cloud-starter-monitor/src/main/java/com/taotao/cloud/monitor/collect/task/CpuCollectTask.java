@@ -21,7 +21,6 @@ import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
-
 import java.lang.management.ManagementFactory;
 
 /**
@@ -64,12 +63,13 @@ public class CpuCollectTask extends AbstractCollectTask {
 		return properties.isCpuEnabled();
 	}
 
+
 	@Override
 	protected CollectInfo getData() {
 		try {
 			CpuInfo info = new CpuInfo();
 			info.processCpuLoad = systemBean.getProcessCpuLoad();
-			info.systemCpuLoad = systemBean. getCpuLoad();
+			info.systemCpuLoad = systemBean.getCpuLoad();
 
 			info.committedVirtualMemorySize = systemBean.getCommittedVirtualMemorySize();
 			info.totalSwapSpaceSize = systemBean.getTotalSwapSpaceSize();
@@ -81,7 +81,7 @@ public class CpuCollectTask extends AbstractCollectTask {
 			info.cpuCoreNumber = Runtime.getRuntime().availableProcessors();
 			return info;
 		} catch (Exception e) {
-			if(LogUtils.isErrorEnabled()){
+			if (LogUtils.isErrorEnabled()) {
 				LogUtils.error(e);
 			}
 		}
@@ -94,7 +94,8 @@ public class CpuCollectTask extends AbstractCollectTask {
 		private Double processCpuLoad = 0.0;
 		@FieldReport(name = TASK_NAME + ".system", desc = "系统cpu负载")
 		private Double systemCpuLoad = 0.0;
-		@FieldReport(name = TASK_NAME + ".committed.virtual.memory.size", desc = "已提交的虚拟内存大小")
+		@FieldReport(name = TASK_NAME
+			+ ".committed.virtual.memory.size", desc = "已提交的虚拟内存大小")
 		private Long committedVirtualMemorySize = 0L;
 		@FieldReport(name = TASK_NAME + ".total.swap.space.size", desc = "总交换空间大小")
 		private Long totalSwapSpaceSize = 0L;

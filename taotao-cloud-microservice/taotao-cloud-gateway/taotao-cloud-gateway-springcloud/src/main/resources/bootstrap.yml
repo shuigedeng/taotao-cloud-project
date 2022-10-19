@@ -21,25 +21,27 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: 192.168.10.200:8848
+        server-addr: 192.168.10.210:8848
         metadata:
           version: ${taotaoCloudVersion}
           user.name: "admin"
           user.password: "123456"
         group: TAOTAO_CLOUD_GROUP
-        namespace: 343852d5-6e0d-4e27-8719-7866452e5ab0
+        namespace: taotao-cloud-dev
         username: nacos
         password: nacos
-        cluster-name: SC
+        cluster-name: CQ
+        naming-load-cache-at-start: false
       config:
         enabled: true
-        server-addr: 192.168.10.200:8848
-        namespace: 343852d5-6e0d-4e27-8719-7866452e5ab0
+        server-addr: 192.168.10.210:8848
+        namespace: taotao-cloud-dev
         file-extension: yml
-        cluster-name: SC
+        cluster-name: CQ
         group: TAOTAO_CLOUD_GROUP
         username: nacos
         password: nacos
+        refresh-enabled: true
     sentinel:
       enabled: true
       eager: true
@@ -47,9 +49,9 @@ spring:
         #流控 名称随意
         flow:
           nacos:
-            server-addr: 192.168.10.200:8848
+            server-addr: 192.168.10.210:8848
             dataId: ${spring.application.name}-flow-rules
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+            namespace: taotao-cloud-sentinel
             username: nacos
             password: nacos
             groupId: SENTINEL_GROUP
@@ -59,9 +61,9 @@ spring:
         #熔断降级 名称随意
         degrade:
           nacos:
-            server-addr: 192.168.10.200:8848
+            server-addr: 192.168.10.210:8848
             dataId: ${spring.application.name}-degrade-rules
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+            namespace: taotao-cloud-sentinel
             username: nacos
             password: nacos
             groupId: SENTINEL_GROUP
@@ -70,9 +72,9 @@ spring:
         #系统规则 名称随意
         system:
           nacos:
-            server-addr: 192.168.10.200:8848
+            server-addr: 192.168.10.210:8848
             dataId: ${spring.application.name}-system-rules
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+            namespace: taotao-cloud-sentinel
             username: nacos
             password: nacos
             groupId: SENTINEL_GROUP
@@ -81,9 +83,9 @@ spring:
         #授权规则 名称随意
         authority:
           nacos:
-            server-addr: 192.168.10.200:8848
+            server-addr: 192.168.10.210:8848
             dataId: ${spring.application.name}-authority-rules
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+            namespace: taotao-cloud-sentinel
             username: nacos
             password: nacos
             groupId: SENTINEL_GROUP
@@ -92,16 +94,16 @@ spring:
         #参数规则 名称随意
         param-flow:
           nacos:
-            server-addr: 192.168.10.200:8848
+            server-addr: 192.168.10.210:8848
             dataId: ${spring.application.name}-param-flow-rules
-            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+            namespace: taotao-cloud-sentinel
             username: nacos
             password: nacos
             groupId: SENTINEL_GROUP
             data-type: json
             rule-type: param-flow
       transport:
-        dashboard: 192.168.10.200:8858
+        dashboard: 192.168.10.210:8858
         port: 8712
       metric:
         file-single-size: 1024 * 1024 * 50

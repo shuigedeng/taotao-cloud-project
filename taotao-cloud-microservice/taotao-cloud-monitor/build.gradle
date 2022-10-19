@@ -24,3 +24,10 @@ dependencies {
 mainClassName = "com.taotao.cloud.monitor.biz.TaoTaoCloudMonitorApplication"
 description = "监控模块"
 archivesBaseName = 'taotao-cloud-monitor'
+
+configurations {
+    all {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
+        exclude group: "com.querydsl", module: "querydsl-apt"
+    }
+}

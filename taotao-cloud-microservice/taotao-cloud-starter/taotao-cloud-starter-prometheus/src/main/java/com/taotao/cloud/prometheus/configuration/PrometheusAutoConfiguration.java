@@ -31,6 +31,11 @@ import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadPoolExecutor;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,11 +48,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ThreadPoolExecutor;
-
 /**
  * PrometheusConfiguration
  *
@@ -59,7 +59,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 @ConditionalOnProperty(prefix = PrometheusProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfiguration(after = HealthAutoConfiguration.class)
 @Import(PrometheusCollector.class)
-public class PrometheusAutoConfiguration implements WebMvcConfigurer, InitializingBean {
+public class PrometheusAutoConfiguration implements WebMvcConfigurer, InitializingBean,
+	DisposableBean {
 
 	@Autowired(required = false)
 	private HealthCheckProvider healthCheckProvider;
@@ -71,6 +72,7 @@ public class PrometheusAutoConfiguration implements WebMvcConfigurer, Initializi
 	private PrometheusCollector prometheusCollector;
 
 	private final Map<String, Gauge> gaugeMap = new ConcurrentHashMap<>();
+	private ThreadPoolExecutor monitorThreadPoolExecutor;
 
 	@Bean
 	MeterRegistryCustomizer<MeterRegistry> appMetricsCommonTags() {
@@ -78,11 +80,18 @@ public class PrometheusAutoConfiguration implements WebMvcConfigurer, Initializi
 	}
 
 	@Override
+	public void destroy() throws Exception {
+		if (null != monitorThreadPoolExecutor) {
+			Monitor.shutdownThreadlPool(monitorThreadPoolExecutor);
+		}
+	}
+
+	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtils.started(PrometheusAutoConfiguration.class, StarterName.PROMETHEUS_STARTER);
 		if (Objects.nonNull(healthCheckProvider)) {
 			Monitor monitorThreadPool = healthCheckProvider.getMonitor();
-			ThreadPoolExecutor monitorThreadPoolExecutor = monitorThreadPool.getMonitorThreadPoolExecutor();
+			monitorThreadPoolExecutor = monitorThreadPool.getMonitorThreadPoolExecutor();
 			monitorThreadPoolExecutor.submit(() -> {
 				while (!monitorThreadPool.monitorIsShutdown()) {
 					try {

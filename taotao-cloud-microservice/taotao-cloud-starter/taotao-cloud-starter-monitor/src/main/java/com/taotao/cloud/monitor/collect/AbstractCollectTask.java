@@ -36,15 +36,15 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 */
 	protected long byteToMb = 1024 * 1024L;
 
+	protected volatile boolean start = true;
+
 	/**
-	 * 最后收集信息
-	 * 上次采集的信息
+	 * 最后收集信息 上次采集的信息
 	 */
 	private CollectInfo lastCollectInfo = null;
 
 	/**
-	 * 持续运行时间
-	 * 上次运行时间
+	 * 持续运行时间 上次运行时间
 	 */
 	protected long lastRunTime = System.currentTimeMillis();
 
@@ -87,17 +87,20 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * @since 2022-04-27 17:27:14
 	 */
 	public Report getReport() {
-		long time = System.currentTimeMillis() - lastRunTime;
-		if (getTimeSpan() > 0 && time > getTimeSpan() * 1000L) {
-			lastRunTime = System.currentTimeMillis();
-			lastCollectInfo = getData();
-		}
+		if (start) {
+			long time = System.currentTimeMillis() - lastRunTime;
+			if (getTimeSpan() > 0 && time > getTimeSpan() * 1000L) {
+				lastRunTime = System.currentTimeMillis();
+				lastCollectInfo = getData();
+			}
 
-		if (lastCollectInfo == null) {
-			return null;
-		}
+			if (lastCollectInfo == null) {
+				return null;
+			}
 
-		return new Report(lastCollectInfo);
+			return new Report(lastCollectInfo);
+		}
+		return null;
 	}
 
 	/**
@@ -158,6 +161,14 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 */
 	@Override
 	public void close() throws Exception {
+		start = false;
+	}
 
+	public boolean isStart() {
+		return start;
+	}
+
+	public void setStart(boolean start) {
+		this.start = start;
 	}
 }

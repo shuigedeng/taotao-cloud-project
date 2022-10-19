@@ -300,7 +300,8 @@ public class Collector {
 				Optional<Method> find = Arrays.stream(obj.getClass().getMethods())
 					.filter(c -> methodName.equalsIgnoreCase(c.getName())).findFirst();
 				if (!find.isPresent()) {
-					throw new BaseException("未找到方法:" + obj.getClass().getName() + "下" + methodName);
+					throw new BaseException(
+						"未找到方法:" + obj.getClass().getName() + "下" + methodName);
 				}
 				method = find.get();
 			}
@@ -370,7 +371,7 @@ public class Collector {
 			} catch (Exception exp) {
 				lastErrorPerSecond.getAndIncrement();
 				LogUtils.error(exp);
-				throw new RuntimeException(exp);
+				return null;
 			} finally {
 				current.getAndDecrement();
 			}

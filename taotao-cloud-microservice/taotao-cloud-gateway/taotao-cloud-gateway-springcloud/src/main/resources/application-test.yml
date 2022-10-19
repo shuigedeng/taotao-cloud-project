@@ -62,7 +62,7 @@ redisson:
   dataValidTime: 1800000
   #single_server_config:
   #  #服务器地址,必填ip:port
-  #  address: "192.168.10.200:6379"
+  #  address: "192.168.10.210:6379"
   #  #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
   #  subscription_connection_minimum_idle_size: 1
   #  #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
@@ -105,12 +105,12 @@ redisson:
     #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
     #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
     nodeAddresses:
-      - "192.168.10.200:6381"
-      - "192.168.10.200:6382"
-      - "192.168.10.200:6383"
-      - "192.168.10.200:6384"
-      - "192.168.10.200:6385"
-      - "192.168.10.200:6386"
+      - "192.168.10.210:6381"
+      - "192.168.10.210:6382"
+      - "192.168.10.210:6383"
+      - "192.168.10.210:6384"
+      - "192.168.10.210:6385"
+      - "192.168.10.210:6386"
     #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
     database: 1
     #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
@@ -131,7 +131,7 @@ spring:
   #      jwt:
   #        #配置RSA的公钥访问地址
   #        #          jwk-set-uri: http://taotao-cloud-auth/oauth2/jwks
-  #        jwk-set-uri: http://192.168.10.200:9998/oauth2/jwks
+  #        jwk-set-uri: http://192.168.10.210:9998/oauth2/jwks
   sleuth:
     enabled: true
     web:
@@ -141,7 +141,7 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.200}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.210}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     discoveryClientEnabled: false
     sender:
       type: WEB
@@ -151,13 +151,13 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   redis:
-    #host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
+    #host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.210}
     #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     #database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
     cluster:
-      nodes: 192.168.10.200:6381,192.168.10.200:6382,192.168.10.200:6383,192.168.10.200:6384,192.168.10.200:6385,192.168.10.200:6386
+      nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
       max-redirects: 3
     #sentinel:
     #  master:
@@ -192,12 +192,12 @@ spring:
           readMode: "SLAVE"
           subscriptionMode: "SLAVE"
           nodeAddresses:
-          - "redis://192.168.10.200:6381"
-          - "redis://192.168.10.200:6382"
-          - "redis://192.168.10.200:6383"
-          - "redis://192.168.10.200:6384"
-          - "redis://192.168.10.200:6385"
-          - "redis://192.168.10.200:6386"
+          - "redis://192.168.10.210:6381"
+          - "redis://192.168.10.210:6382"
+          - "redis://192.168.10.210:6383"
+          - "redis://192.168.10.210:6384"
+          - "redis://192.168.10.210:6385"
+          - "redis://192.168.10.210:6386"
           scanInterval: 1000
           pingConnectionInterval: 0
           keepAlive: false
@@ -208,7 +208,7 @@ spring:
         transportMode: "NIO"
 
   kafka:
-    bootstrap-servers: 192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094
+    bootstrap-servers: 192.168.10.210:9092,192.168.10.210:9093,192.168.10.210:9094
     producer:
       retries: 0
       batch-size: 16384
@@ -232,7 +232,7 @@ spring:
       enabled: true
       eager: true
       transport:
-        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:192.168.10.200}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:192.168.10.210}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
         port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8710}
       scg:
         fallback:

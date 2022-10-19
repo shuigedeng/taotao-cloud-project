@@ -112,11 +112,11 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 	public static Map<String, Object> responseError(String errorMessage) {
 		Result<Object> result = Result.fail(errorMessage);
 		Map<String, Object> res = new HashMap<>();
-		res.put("errorMsg", result.errorMsg());
-		res.put("code", result.code());
-		res.put("success", result.success());
-		res.put("requestId", result.requestId());
-		LocalDateTime timestamp = result.timestamp();
+		res.put("errorMsg", result.getErrorMsg());
+		res.put("code", result.getCode());
+		res.put("success", result.isSuccess());
+		res.put("requestId", result.getRequestId());
+		LocalDateTime timestamp = result.getTimestamp();
 		timestamp = timestamp == null ? LocalDateTime.now() : timestamp;
 		res.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
