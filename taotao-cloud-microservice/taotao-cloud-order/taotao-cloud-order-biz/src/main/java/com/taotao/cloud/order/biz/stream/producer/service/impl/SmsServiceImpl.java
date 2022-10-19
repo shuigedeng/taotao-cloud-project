@@ -1,10 +1,10 @@
 package com.taotao.cloud.order.biz.stream.producer.service.impl;
 
+import com.taotao.cloud.order.biz.stream.producer.service.ISmsService;
+import com.taotao.cloud.pulsar.constant.MessageConstant;
 import lombok.AllArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
-import vip.mate.core.rocketmq.constant.MessageConstant;
-import vip.mate.message.service.ISmsService;
 
 /**
  * 发送短信实现类
