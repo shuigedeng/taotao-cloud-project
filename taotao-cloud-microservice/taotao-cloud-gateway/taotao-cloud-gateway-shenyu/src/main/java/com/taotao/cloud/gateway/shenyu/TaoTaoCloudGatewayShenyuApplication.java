@@ -17,6 +17,8 @@
 
 package com.taotao.cloud.gateway.shenyu;
 
+import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import java.io.File;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -26,12 +28,27 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TaoTaoCloudGatewayShenyuApplication {
 
-    /**
-     * Main Entrance.
-     *
-     * @param args startup arguments
-     */
-    public static void main(final String[] args) {
-        SpringApplication.run(TaoTaoCloudGatewayShenyuApplication.class, args);
-    }
+	/**
+	 * Main Entrance.
+	 *
+	 * @param args startup arguments
+	 */
+	public static void main(final String[] args) {
+		setNacosProperty();
+		SpringApplication.run(TaoTaoCloudGatewayShenyuApplication.class, args);
+	}
+
+	public static void setNacosProperty() {
+		/**
+		 * 设置nacos客户端日志和快照目录
+		 *
+		 * @see LocalConfigInfoProcessor
+		 */
+		String userHome = System.getProperty("user.home");
+		System.setProperty("JM.LOG.PATH", userHome + File.separator + "logs" + File.separator
+			+ "taotao-cloud-gateway-springcloud");
+		System.setProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs" + File.separator
+			+ "taotao-cloud-gateway-springcloud");
+		System.setProperty("nacos.logging.default.config.enabled", "true");
+	}
 }
