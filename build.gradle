@@ -37,7 +37,7 @@ buildscript {
         //https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
         testContainersVersion = "1.17.5"
         //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
-        springBootAdminVersion = "2.7.5"
+        springBootAdminVersion = "2.7.6"
 
         //https://search.maven.org/artifact/org.projectlombok/lombok
         lombokVersion = "1.18.24"
