@@ -1,11 +1,21 @@
 package com.taotao.cloud.sys.biz.config.stream;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import org.apache.rocketmq.common.message.MessageConst;
+import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * 流函数服务
@@ -19,6 +29,36 @@ public class StreamFunctionService {
 
 	@Autowired
 	private StreamBridge bridge;
+
+	public void sendRocketmqExample() {
+		boolean s1 = bridge.send("example-out-0", "topic example");
+		LogUtils.info("example send msg:{}", s1);
+	}
+
+	public void sendRocketmqDemo() throws Exception {
+		//tag 发送
+		String payload = "消息体demo1发送到tag s1";
+		Map<String, Object> headers = new HashMap<>();
+		headers.put(MessageConst.PROPERTY_TAGS, "s1");
+		MessageHeaders messageHeaders = new MessageHeaders(headers);
+		Message<String> message = MessageBuilder.withPayload(payload)
+			.copyHeadersIfAbsent(messageHeaders).build();
+		boolean s3 = bridge.send("demo1-out-0", message);
+		LogUtils.info("demo1 send msg:{}", s3);
+	}
+
+	public void sendRocketmqTest() throws Exception {
+		String payload = "消息体tag s3 延迟消息 topic test";
+		Map<String, Object> headers = new HashMap<>();
+		//延迟消费 延迟10秒
+		headers.put(MessageConst.PROPERTY_DELAY_TIME_LEVEL, "3");
+		MessageHeaders messageHeaders = new MessageHeaders(headers);
+		Message<String> message = MessageBuilder.withPayload(payload)
+			.copyHeadersIfAbsent(messageHeaders).build();
+		boolean s3 = bridge.send("test1-out-0", message);
+		LogUtils.info("test send msg:{}", s3);
+	}
+
 
 	public void sendKafka(String content) {
 		boolean send = bridge.send("outputKafka-out-0", content);
@@ -64,18 +104,30 @@ public class StreamFunctionService {
 		};
 	}
 
+
 	@Bean
-	public Consumer<String> inputRocketmq1() {
-		return str -> {
-			LogUtils.info("inputRocketmq1 message: {}", str);
+	public Consumer<Message<String>> demo() {
+		return message -> {
+			LogUtils.info("demo1获取消息tag:{}",
+				message.getHeaders().get(RocketMQHeaders.PREFIX + RocketMQHeaders.TAGS));
+			LogUtils.info("demo1接收数据:{}", message.getPayload());
 		};
 	}
 
 	@Bean
-	public Consumer<String> inputRocketmq2() {
-		return str -> {
-			LogUtils.info("inputRocketmq2 message: {}", str);
-		};
+	public Function<Flux<Message<String>>, Mono<Void>> example() {
+		return flux -> flux.map(message -> {
+			LogUtils.info("example接收数据:{}", message.getPayload());
+			return message;
+		}).then();
+	}
+
+	@Bean
+	public Consumer<Flux<Message<String>>> test() {
+		return flux -> flux.map(message -> {
+			LogUtils.info("test接收数据:{}", message.getPayload());
+			return message;
+		}).subscribe();
 	}
 
 	//@Bean

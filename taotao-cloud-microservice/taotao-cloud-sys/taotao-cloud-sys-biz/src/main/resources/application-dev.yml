@@ -261,7 +261,7 @@ arthas:
   tunnel-server: ws://192.168.10.210:7777/ws
 
 dubbo:
-  enabled: false
+  enabled: true
   scan:
     base-packages: com.taotao.cloud.sys.biz.service.dubbo
   application:
@@ -302,7 +302,7 @@ dubbo:
     port: 20883
     ssl-enabled: false
     accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
-    serialization: kryo
+    #serialization: kryo
     status: server
     payload: 83886080
     threadpool: fixed
@@ -325,8 +325,8 @@ dubbo:
     name: ${spring.application.name}
   monitor:
     id: ${spring.application.name}
-  metadata-report:
-    id: ${spring.application.name}
+  #metadata-report:
+  #  id: ${spring.application.name}
   config-center:
     check: false
 
@@ -1085,8 +1085,40 @@ spring:
       enabled: false
     loadbalancer:
       enabled: true
+    function:
+      # functionName对应服务中的Bean
+      definition: inputKafka1;inputKafka2;inputRabbit1;inputRabbit2;demo;example;test
     stream:
       bindings:
+        #消费者
+        demo-in-0:
+          binder: rocketmq
+          destination: dtopic #topic
+          content-type: application/json
+          group: demo1-group #group
+        demo-out-0:
+          binder: rocketmq
+          destination: dtopic #topic
+          group: pd-group
+        example-in-0:
+          binder: rocketmq
+          destination: extopic #topic
+          content-type: application/json
+          group: example-group #group
+        example-out-0:
+          binder: rocketmq
+          destination: extopic #topic
+          group: px-group
+        test-in-0:
+          binder: rocketmq
+          destination: ttopic #topic
+          content-type: application/json
+          group: t-group #group
+        test-out-0:
+          binder: rocketmq
+          destination: ttopic #topic
+          group: pt-group #group
+        # rabbit
         sms-output:
           destination: sms-topic
           binder: rabbit
@@ -1094,14 +1126,7 @@ spring:
           destination: sms-topic
           group: sms-group
           binder: rabbit
-        email-output:
-          destination: email-topic
-          content-type: application/json
-          binder: rocketmq
-        email-input:
-          destination: email-topic
-          group: email-group
-          binder: rocketmq
+        # kafka
         order-output:
           destination: order-topic
           content-type: application/json
@@ -1113,15 +1138,35 @@ spring:
       rocketmq:
         binder:
           name-server: 192.168.10.210:9876
+          vip-channel-enabled: false
+          group: demo
         #RocketMQSpecificPropertiesProvider
         bindings:
-          email-output:
-            producer:
-              sendMsgTimeout: 3000
-          email-input:
+          demo-in-0:
             consumer:
-              pullThresholdForQueue: 1000
+              tags: s1||s2  #消费tag
+              broadcasting: false # 是否使用广播消费，默认为 false 使用集群消费
+          demo-out-0:
+            producer:
+              #开启同步发送
+              sync: true
+          example-in-0:
+            consumer:
+              tags:   #消费tag
+              broadcasting: true # 是否使用广播消费，默认为 false 使用集群消费
+          example-out-0:
+            producer:
+              sync: false #默认异步
+          test-in-0:
+            consumer:
+              tags:   #消费tag
+              broadcasting: false # 是否使用广播消费，默认为 false 使用集群消费
+          test-out-0:
+            producer:
+              sync: true
       rabbit:
+        binder:
+          admin-addresses: 192.168.10.210:5672
         bindings:
           sms-output:
             producer:
@@ -1139,8 +1184,6 @@ spring:
               #auto-bind-dlq: true
               # 重投到死信队列并带有报错信息
               #republish-to-dlq: true
-        binder:
-          admin-addresses: 192.168.10.210:5672
       kafka:
         binder:
           brokers: 192.168.10.210:9092
