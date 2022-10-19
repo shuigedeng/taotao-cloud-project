@@ -48,6 +48,6 @@ public class TaoTaoCloudGatewayApplication {
 			+ "taotao-cloud-gateway-springcloud");
 		System.setProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs" + File.separator
 			+ "taotao-cloud-gateway-springcloud");
-		System.setProperty("nacos.logging.default.config.enabled", "false");
+		System.setProperty("nacos.logging.default.config.enabled", "true");
 	}
 }
