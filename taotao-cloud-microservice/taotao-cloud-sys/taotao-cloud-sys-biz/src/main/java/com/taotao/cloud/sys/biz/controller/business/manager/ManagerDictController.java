@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.api.model.dto.dict.DictUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.dict.DictQueryVO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.web.base.controller.SuperController;
+import com.taotao.cloud.web.base.controller.BusinessSuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/dict")
 @Tag(name = "平台管理端-字典管理API", description = "平台管理端-字典管理API")
 public class ManagerDictController extends
-	SuperController<IDictService, Dict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
+	BusinessSuperController<IDictService, Dict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
 
 	///**
 	// * 通过code查询所有字典列表

@@ -33,7 +33,7 @@ import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.service.business.IResourceService;
-import com.taotao.cloud.web.base.controller.SuperController;
+import com.taotao.cloud.web.base.controller.BusinessSuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -65,7 +65,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/resource")
 @Tag(name = "平台管理端-资源管理API", description = "平台管理端-资源管理API")
 public class ManagerResourceController extends
-	SuperController<IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, MenuQueryVO> {
+	BusinessSuperController<IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, MenuQueryVO> {
 
 	//************************************************菜单*************************************************************
 

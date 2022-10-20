@@ -33,7 +33,7 @@ import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import com.taotao.cloud.sys.biz.model.convert.DictConvert;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.web.base.controller.SimpleController;
+import com.taotao.cloud.web.base.controller.FeignBaseController;
 import com.taotao.cloud.web.version.ApiInfo;
 import com.yomahub.tlog.core.annotation.TLogAspect;
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,7 +67,7 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 @Validated
 @RestController
 @RequestMapping("/sys/remote/dict")
-public class FeignDictController extends SimpleController<IDictService, Dict, Long> {
+public class FeignDictController extends FeignBaseController<IDictService, Dict, Long> {
 
 	@Autowired
 	private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
