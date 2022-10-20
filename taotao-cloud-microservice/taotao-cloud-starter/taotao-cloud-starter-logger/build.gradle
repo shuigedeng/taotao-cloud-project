@@ -46,7 +46,7 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/de.siegmar/logback-gelf/
-    implementation 'de.siegmar:logback-gelf:4.0.2'
+    api 'de.siegmar:logback-gelf:4.0.2'
 
 }
 
