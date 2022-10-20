@@ -37,7 +37,6 @@ public class TaoTaoCloudGatewayApplication {
 		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 	}
 
-	
 	public static void setNacosProperty() {
 		/**
 		 * 设置nacos客户端日志和快照目录

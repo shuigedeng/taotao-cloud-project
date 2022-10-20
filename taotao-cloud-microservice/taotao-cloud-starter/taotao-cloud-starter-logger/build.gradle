@@ -48,5 +48,6 @@ dependencies {
     //https://search.maven.org/artifact/de.siegmar/logback-gelf/
     api 'de.siegmar:logback-gelf:4.0.2'
 
+    api 'xerces:xercesImpl:2.12.2'
 }
 
