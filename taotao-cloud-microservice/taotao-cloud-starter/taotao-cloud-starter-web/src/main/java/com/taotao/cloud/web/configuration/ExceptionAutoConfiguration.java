@@ -35,6 +35,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.idempotent.exception.IdempotentException;
 import com.taotao.cloud.limit.ext.LimitException;
 import com.taotao.cloud.limit.ratelimiter.RateLimitException;
+import com.taotao.cloud.web.annotation.BusinessApi;
 import feign.codec.DecodeException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.SQLException;
@@ -83,9 +84,10 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * @since 2021-09-02 21:26:19
  */
 @AutoConfiguration
-@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
 //@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
 //@RestControllerAdvice
+//@RestControllerAdvice(basePackages = {"com.taotao.cloud.**.biz.controller.business"})
+@RestControllerAdvice(annotations = BusinessApi.class)
 public class ExceptionAutoConfiguration implements InitializingBean {
 
 	@Autowired
@@ -312,7 +314,7 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	@ExceptionHandler(BlockException.class)
 	public Result<String> handleBlockException(NativeWebRequest req, BlockException e) {
 		printLog(req, e);
-		LogUtils.error("WebmvcHandler sentinel 降级 资源名称{}" , e, e.getRule().getResource());
+		LogUtils.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
 		String errMsg = e.getMessage();
 		if (e instanceof FlowException) {
 			errMsg = "被限流了";
@@ -335,36 +337,36 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	@ExceptionHandler(FlowException.class)
 	public Result<String> handleFlowException(NativeWebRequest req, FlowException e) {
 		printLog(req, e);
-		return Result.fail("被限流了" , 429);
+		return Result.fail("被限流了", 429);
 	}
 
 	@ExceptionHandler(DegradeException.class)
 	public Result<String> handleDegradeException(NativeWebRequest req, DegradeException e) {
 		printLog(req, e);
-		return Result.fail("服务降级了" , 429);
+		return Result.fail("服务降级了", 429);
 	}
 
 	@ExceptionHandler(ParamFlowException.class)
 	public Result<String> handleParamFlowException(NativeWebRequest req, ParamFlowException e) {
 		printLog(req, e);
-		return Result.fail("服务热点降级了" , 429);
+		return Result.fail("服务热点降级了", 429);
 	}
 
 	@ExceptionHandler(SystemBlockException.class)
 	public Result<String> handleSystemBlockException(NativeWebRequest req, SystemBlockException e) {
 		printLog(req, e);
-		return Result.fail("系统过载保护" , 429);
+		return Result.fail("系统过载保护", 429);
 	}
 
 	@ExceptionHandler(AuthorityException.class)
 	public Result<String> handleAuthorityException(NativeWebRequest req, AuthorityException e) {
 		printLog(req, e);
-		return Result.fail("限流权限控制异常" , 429);
+		return Result.fail("限流权限控制异常", 429);
 	}
 
 	@ExceptionHandler(value = RateLimitException.class)
 	public Result<String> rateLimitException(RateLimitException e) {
-		return Result.fail("限流权限控制异常" , 429);
+		return Result.fail("限流权限控制异常", 429);
 	}
 
 	// mysql exception
@@ -376,7 +378,7 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 	public Result<String> handleDuplicateKeyException(DuplicateKeyException e,
 		HttpServletRequest request) {
 		String requestURI = request.getRequestURI();
-		LogUtils.error("请求地址'{}',数据库中已存在记录'{}'" , requestURI, e.getMessage());
+		LogUtils.error("请求地址'{}',数据库中已存在记录'{}'", requestURI, e.getMessage());
 		return Result.fail("数据库中已存在该记录，请联系管理员确认");
 	}
 
@@ -389,10 +391,10 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 		String requestURI = request.getRequestURI();
 		String message = e.getMessage();
 		if (message.contains("CannotFindDataSourceException")) {
-			LogUtils.error("请求地址'{}', 未找到数据源" , requestURI);
+			LogUtils.error("请求地址'{}', 未找到数据源", requestURI);
 			return Result.fail("未找到数据源，请联系管理员确认");
 		}
-		LogUtils.error("请求地址'{}', Mybatis系统异常" , requestURI, e);
+		LogUtils.error("请求地址'{}', Mybatis系统异常", requestURI, e);
 		return Result.fail(message);
 	}
 
@@ -495,7 +497,7 @@ public class ExceptionAutoConfiguration implements InitializingBean {
 		}
 
 		LogUtils.error(e);
-		LogUtils.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} " , e,
+		LogUtils.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
 	}
 }

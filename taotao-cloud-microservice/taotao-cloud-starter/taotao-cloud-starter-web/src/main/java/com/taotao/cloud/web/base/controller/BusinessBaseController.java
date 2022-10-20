@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.web.base.controller;
 
+import com.taotao.cloud.web.annotation.BusinessApi;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
@@ -33,8 +34,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 2021.9
  * @since 2021-09-02 21:15:37
  */
-public abstract class SimpleController<S extends BaseSuperService<T, I>,
-	T extends SuperEntity<T,I>,
+@BusinessApi
+public abstract class BusinessBaseController<S extends BaseSuperService<T, I>,
+	T extends SuperEntity<T, I>,
 	I extends Serializable>
 	implements BaseController<T, I> {
 

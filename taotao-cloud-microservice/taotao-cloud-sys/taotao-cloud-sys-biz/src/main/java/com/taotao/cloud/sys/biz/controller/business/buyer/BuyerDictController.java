@@ -20,8 +20,9 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.web.base.controller.SimpleController;
+import com.taotao.cloud.web.base.controller.BusinessBaseController;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.sql.SQLIntegrityConstraintViolationException;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,13 +41,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/buyer/dict")
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
-public class BuyerDictController extends SimpleController<IDictService, Dict, Long> {
+public class BuyerDictController extends BusinessBaseController<IDictService, Dict, Long> {
 
 	@NotAuth
-	@GetMapping("/add")
+	@GetMapping("/add/{type}")
 	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
-	public Result<Boolean> add() {
-		Boolean result = service().add();
+	public Result<Boolean> add(@PathVariable String type)
+		throws SQLIntegrityConstraintViolationException {
+		Boolean result = service().add(type);
 		return success(result);
 	}
 

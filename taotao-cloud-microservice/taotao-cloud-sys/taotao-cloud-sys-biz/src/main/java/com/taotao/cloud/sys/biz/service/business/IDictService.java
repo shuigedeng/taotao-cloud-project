@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.concurrent.Future;
 
 /**
@@ -97,7 +98,7 @@ public interface IDictService extends BaseSuperService<Dict, Long> {
 	String async();
 
 
-	Boolean add();
+	Boolean add(String type) throws SQLIntegrityConstraintViolationException;
 
 	Boolean add1();
 }

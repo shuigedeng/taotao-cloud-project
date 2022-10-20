@@ -65,7 +65,8 @@ import org.springframework.web.util.NestedServletException;
  */
 @AutoConfiguration
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
-@RestControllerAdvice(annotations ={FeignApi.class})
+@RestControllerAdvice(annotations = {FeignApi.class})
+//@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller.feign"})
 public class FeignExceptionAutoConfiguration implements InitializingBean {
 
 	@Autowired
@@ -100,7 +101,8 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 
 	@ExceptionHandler(UndeclaredThrowableException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
-	public String handleUndeclaredThrowableException(NativeWebRequest req, UndeclaredThrowableException ex) {
+	public String handleUndeclaredThrowableException(NativeWebRequest req,
+		UndeclaredThrowableException ex) {
 		printLog(req, ex);
 		Throwable e = ex.getCause();
 
@@ -129,7 +131,7 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleBlockException(NativeWebRequest req, BlockException e) {
 		printLog(req, e);
-        LogUtils.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
+		LogUtils.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
 		String errMsg = e.getMessage();
 		if (e instanceof FlowException) {
 			errMsg = "被限流了";
@@ -155,24 +157,28 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 		printLog(req, e);
 		return JsonUtils.toJSONString(new FeignExceptionResult("被限流了"));
 	}
+
 	@ExceptionHandler(DegradeException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleDegradeException(NativeWebRequest req, DegradeException e) {
 		printLog(req, e);
 		return JsonUtils.toJSONString(new FeignExceptionResult("服务降级了"));
 	}
+
 	@ExceptionHandler(ParamFlowException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleParamFlowException(NativeWebRequest req, ParamFlowException e) {
 		printLog(req, e);
 		return JsonUtils.toJSONString(new FeignExceptionResult("服务热点降级了"));
 	}
+
 	@ExceptionHandler(SystemBlockException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleSystemBlockException(NativeWebRequest req, SystemBlockException e) {
 		printLog(req, e);
 		return JsonUtils.toJSONString(new FeignExceptionResult("系统过载保护"));
 	}
+
 	@ExceptionHandler(AuthorityException.class)
 	@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 	public String handleAuthorityException(NativeWebRequest req, AuthorityException e) {
@@ -267,9 +273,10 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 	private void printLog(NativeWebRequest req, Throwable e) {
 		try {
 			//RequestMappingHandlerMapping mapping = ContextUtils.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
-			HandlerExecutionChain chain = mapping.getHandler((HttpServletRequest) req.getNativeRequest());
+			HandlerExecutionChain chain = mapping.getHandler(
+				(HttpServletRequest) req.getNativeRequest());
 			Object handler = chain.getHandler();
-			if(handler instanceof HandlerMethod handlerMethod){
+			if (handler instanceof HandlerMethod handlerMethod) {
 				MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
 				Object bean = handlerMethod.getBean();
 			}
@@ -278,7 +285,7 @@ public class FeignExceptionAutoConfiguration implements InitializingBean {
 		}
 
 		LogUtils.error(e);
-		LogUtils.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
+		LogUtils.error("【feign请求异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
 	}
 }

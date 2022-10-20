@@ -27,19 +27,18 @@ import com.taotao.cloud.sys.api.model.vo.region.RegionQueryVO;
 import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
-import com.taotao.cloud.web.base.controller.SuperController;
+import com.taotao.cloud.web.base.controller.BusinessSuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * 平台管理端-地区管理API
@@ -52,7 +51,7 @@ import java.util.List;
 @RequestMapping("/sys/manager/region")
 @Tag(name = "平台管理端-地区管理API", description = "平台管理端-地区管理API")
 public class ManagerRegionController extends
-	SuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
+	BusinessSuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger
@@ -71,8 +70,9 @@ public class ManagerRegionController extends
 	@GetMapping(value = "/tree")
 	@NotAuth
 	//@PreAuthorize("hasAuthority('sys:region:info:true')")
-	public Result<List<RegionParentVO>> tree(@RequestParam(required = false, defaultValue = "1") Long parentId,
-											 @RequestParam(required = false, defaultValue = "1024") Integer depth) {
+	public Result<List<RegionParentVO>> tree(
+		@RequestParam(required = false, defaultValue = "1") Long parentId,
+		@RequestParam(required = false, defaultValue = "1024") Integer depth) {
 		List<RegionParentVO> result = service().tree(parentId, depth);
 		return Result.success(result);
 	}

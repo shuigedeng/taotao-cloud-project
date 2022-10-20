@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -23,6 +24,7 @@ import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import io.seata.spring.annotation.GlobalTransactional;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -164,12 +166,14 @@ public class DictServiceImpl extends
 
 	@Override
 	@GlobalTransactional(name = "sys-dict-global-transactional-1", rollbackFor = Exception.class)
-	public Boolean add() {
+	public Boolean add(String type) throws SQLIntegrityConstraintViolationException {
 
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
+		if ("1".equals(type)) {
+			throw new BusinessException("xxxxxx");
+		}
+		if ("2".equals(type)) {
+			throw new SQLIntegrityConstraintViolationException(
+				"SQLIntegrityConstraintViolationException");
 		}
 
 		Dict d1 = Dict.builder().dictCode("asdfsadf").dictName("sldf").sortNum(3).build();

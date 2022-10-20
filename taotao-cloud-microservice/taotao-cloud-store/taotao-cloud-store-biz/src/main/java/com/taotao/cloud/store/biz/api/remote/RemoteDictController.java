@@ -17,7 +17,7 @@ package com.taotao.cloud.store.biz.api.remote;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
-import com.taotao.cloud.web.base.controller.SimpleController;
+import com.taotao.cloud.web.base.controller.BusinessBaseController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/remote/mall/dict")
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class RemoteDictController extends SimpleController<IDictService, Dict, Long> {
+public class RemoteDictController extends BusinessBaseController<IDictService, Dict, Long> {
 
 }
 
