@@ -47,7 +47,12 @@ public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
 		setNacosProperty();
-		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
+		try {
+			SpringApplication.run(TaoTaoCloudSysApplication.class, args);
+		} catch (Throwable e) {
+			System.out.println(e.toString());
+			e.printStackTrace();
+		}
 	}
 
 	public static void setNacosProperty() {
