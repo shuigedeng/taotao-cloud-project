@@ -29,9 +29,10 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
 
     //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-webflux-ui
-    implementation "org.springdoc:springdoc-openapi-webflux-ui:1.6.11"
+    implementation "org.springdoc:springdoc-openapi-webflux-ui:1.6.12"
     //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-webflux-core
-    implementation "org.springdoc:springdoc-openapi-webflux-core:1.6.11"
+    implementation "org.springdoc:springdoc-openapi-webflux-core:1.6.12"
+
     //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-springdoc-ui
     implementation "com.github.xiaoymin:knife4j-springdoc-ui:3.0.3"
     implementation "com.github.xiaoymin:knife4j-spring-boot-starter:3.0.3"

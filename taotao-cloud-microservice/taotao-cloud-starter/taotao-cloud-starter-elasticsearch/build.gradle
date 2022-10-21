@@ -14,6 +14,7 @@ dependencies {
 
     //https://gitee.com/bboss/bboss-elastic
     //https://esdoc.bbossgroups.com/#/spring-booter-with-bboss
+    //https://search.maven.org/artifact/com.bbossgroups.plugins/bboss-elasticsearch-rest-jdbc
     api('com.bbossgroups.plugins:bboss-elasticsearch-rest-jdbc:6.7.5') {
         exclude group: "org.slf4j", module: "slf4j-log4j12"
         exclude group: "commons-collections", module: "commons-collections"

@@ -33,7 +33,7 @@ dependencies {
 
     //https://search.maven.org/artifact/io.github.mouzt/bizlog-sdk
     //https://github.com/mouzt/mzt-biz-log
-    api("io.github.mouzt:bizlog-sdk:3.0.1") {
+    api("io.github.mouzt:bizlog-sdk:3.0.2") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
