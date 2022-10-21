@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.gen.GenTableColumn;
-import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
+import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -29,7 +29,7 @@ import javax.persistence.EntityManager;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class GenTableColumnRepository extends BaseCrSuperRepository<GenTableColumn, Long> {
+public class GenTableColumnRepository extends BaseClassSuperRepository<GenTableColumn, Long> {
 
 	public GenTableColumnRepository(EntityManager em) {
 		super(GenTableColumn.class, em);

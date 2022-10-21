@@ -16,8 +16,7 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 
 /**
  * CompanyMapper
@@ -27,6 +26,6 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 
-public interface IDictItemRepository extends JpaRepository<DictItem, Long> {
+public interface IDictItemRepository extends BaseInterfaceSuperRepository<DictItem, Long> {
 
 }

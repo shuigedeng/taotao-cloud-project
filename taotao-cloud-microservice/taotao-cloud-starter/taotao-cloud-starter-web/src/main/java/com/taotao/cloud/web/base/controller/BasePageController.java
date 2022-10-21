@@ -47,7 +47,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:06:58
  */
-public interface PageController<T extends SuperEntity<T, I>, I extends Serializable, QueryDTO, QueryVO> extends
+public interface BasePageController<T extends SuperEntity<T, I>, I extends Serializable, QueryDTO, QueryVO> extends
 	BaseController<T, I> {
 
 	/**

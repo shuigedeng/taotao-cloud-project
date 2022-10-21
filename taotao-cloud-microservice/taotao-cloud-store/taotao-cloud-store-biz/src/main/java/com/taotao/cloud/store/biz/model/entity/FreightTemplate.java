@@ -2,8 +2,8 @@ package com.taotao.cloud.store.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
-import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,7 +34,7 @@ import java.util.Objects;
 @Entity
 @Table(name = FreightTemplate.TABLE_NAME)
 @TableName(FreightTemplate.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = FreightTemplate.TABLE_NAME, comment = "运费模板表")
 public class FreightTemplate extends BaseSuperEntity<FreightTemplate, Long> {
 
@@ -51,6 +51,7 @@ public class FreightTemplate extends BaseSuperEntity<FreightTemplate, Long> {
 	 */
 	@Column(name = "pricing_method", columnDefinition = "varchar(32) not null comment '计价方式：按件、按重量 WEIGHT,NUM,FREE'")
 	private String pricingMethod;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

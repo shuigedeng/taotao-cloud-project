@@ -3,17 +3,18 @@ package com.taotao.cloud.message.biz.model.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.message.api.enums.MessageSendClientEnum;
 import com.taotao.cloud.message.api.enums.RangeEnum;
-import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
+import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
 
 
 /**
@@ -27,7 +28,7 @@ import lombok.ToString;
 @Entity
 @Table(name = Message.TABLE_NAME)
 @TableName(Message.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = Message.TABLE_NAME, comment = "消息表")
 public class Message extends BaseSuperEntity<Message, Long> {
 

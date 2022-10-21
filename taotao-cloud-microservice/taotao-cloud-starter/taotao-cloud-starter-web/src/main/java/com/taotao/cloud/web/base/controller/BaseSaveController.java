@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:12:22
  */
-public interface SaveController<T extends SuperEntity<T, I>, I extends Serializable, SaveDTO> extends
+public interface BaseSaveController<T extends SuperEntity<T, I>, I extends Serializable, SaveDTO> extends
 	BaseController<T, I> {
 
 	/**

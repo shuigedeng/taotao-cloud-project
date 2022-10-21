@@ -25,7 +25,7 @@ import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
-import com.taotao.cloud.web.base.controller.BusinessSuperController;
+import com.taotao.cloud.web.base.controller.BaseSuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -55,7 +55,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/role")
 @Tag(name = "平台管理端-角色管理API", description = "平台管理端-角色管理API")
 public class ManagerRoleController extends
-	BusinessSuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
+        BaseSuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
 	@Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表")
 	@RequestLogger

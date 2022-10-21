@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:15:51
  */
-public interface UpdateController<T extends SuperEntity<T, I>, I extends Serializable, UpdateDTO> extends
+public interface BaseUpdateController<T extends SuperEntity<T, I>, I extends Serializable, UpdateDTO> extends
 	BaseController<T, I> {
 
 	/**

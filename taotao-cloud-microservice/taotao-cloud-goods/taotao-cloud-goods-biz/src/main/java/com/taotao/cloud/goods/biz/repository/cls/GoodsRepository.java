@@ -16,7 +16,7 @@
 package com.taotao.cloud.goods.biz.repository.cls;
 
 import com.taotao.cloud.goods.biz.model.entity.Goods;
-import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
+import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -29,7 +29,7 @@ import javax.persistence.EntityManager;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class GoodsRepository extends BaseCrSuperRepository<Goods, Long> {
+public class GoodsRepository extends BaseClassSuperRepository<Goods, Long> {
 
 	public GoodsRepository(EntityManager em) {
 		super(Goods.class, em);

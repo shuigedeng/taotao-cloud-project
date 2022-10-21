@@ -23,7 +23,7 @@ import com.taotao.cloud.lock.support.DistributedLock;
 import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
+import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,10 +59,10 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	/**
 	 * 获取repository类型
 	 *
-	 * @return {@link BaseCrSuperRepository }<{@link T }, {@link I }>
+	 * @return {@link BaseClassSuperRepository }<{@link T }, {@link I }>
 	 * @since 2022-09-13 09:30:42
 	 */
-	BaseCrSuperRepository<T, I> cr();
+	BaseClassSuperRepository<T, I> cr();
 
 	/**
 	 * 获取jpa repository类型
@@ -313,28 +313,6 @@ public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Seriali
 	 * @since 2022-09-13 09:30:44
 	 */
 	Optional<T> findById(Serializable id);
-
-	/**
-	 * 发现通过id列
-	 *
-	 * @param id      id
-	 * @param columns 列
-	 * @return {@link Optional }<{@link T }>
-	 * @since 2022-09-22 10:00:54
-	 */
-	@SuppressWarnings("unchecked")
-	Optional<T> findByIdWithColumns(Serializable id, SFunction<T, ?>... columns);
-
-	/**
-	 * 发现通过id列
-	 *
-	 * @param ids     id
-	 * @param columns 列
-	 * @return {@link List }<{@link T }>
-	 * @since 2022-09-22 10:00:57
-	 */
-	@SuppressWarnings("unchecked")
-	List<T> findByIdsWithColumns(List<Serializable> ids, SFunction<T, ?>... columns);
 
 	/**
 	 * 查询全部

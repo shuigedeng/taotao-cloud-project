@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
-import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
+import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -29,7 +29,7 @@ import javax.persistence.EntityManager;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class SensitiveWordRepository extends BaseCrSuperRepository<SensitiveWord, Long> {
+public class SensitiveWordRepository extends BaseClassSuperRepository<SensitiveWord, Long> {
 
 	public SensitiveWordRepository(EntityManager em) {
 		super(SensitiveWord.class, em);

@@ -14,18 +14,21 @@ package com.taotao.cloud.sys.biz.controller.feign;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.web.base.controller.FeignBaseController;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.stereotype.Controller;
+import com.taotao.cloud.web.base.controller.BaseFeignController;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
-@Controller
-@RequestMapping("/async/controller")
-public class AsyncHelloController extends FeignBaseController<IDictService, Dict, Long> {
+import java.util.ArrayList;
+import java.util.List;
+
+@Validated
+@RestController
+@RequestMapping("/sys/feign/hello")
+public class AsyncHelloController extends BaseFeignController<IDictService, Dict, Long> {
 
 	private final List<DeferredResult<String>> deferredResultList = new ArrayList<>();
 

@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
+import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -30,7 +30,7 @@ import java.util.Optional;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class DictRepository extends BaseCrSuperRepository<Dict, Long> {
+public class DictRepository extends BaseClassSuperRepository<Dict, Long> {
 
 	public DictRepository(EntityManager em) {
 		super(Dict.class, em);

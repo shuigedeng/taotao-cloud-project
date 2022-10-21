@@ -27,7 +27,7 @@ import com.taotao.cloud.sys.api.model.vo.region.RegionQueryVO;
 import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
-import com.taotao.cloud.web.base.controller.BusinessSuperController;
+import com.taotao.cloud.web.base.controller.BaseSuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,7 +51,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/region")
 @Tag(name = "平台管理端-地区管理API", description = "平台管理端-地区管理API")
 public class ManagerRegionController extends
-	BusinessSuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
+        BaseSuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger

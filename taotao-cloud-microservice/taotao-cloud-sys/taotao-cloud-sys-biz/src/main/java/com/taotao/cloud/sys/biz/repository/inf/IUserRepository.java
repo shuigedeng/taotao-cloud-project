@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.User;
-import com.taotao.cloud.web.base.repository.BaseIrSuperRepository;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 
 /**
  * CompanyMapper
@@ -26,5 +26,5 @@ import com.taotao.cloud.web.base.repository.BaseIrSuperRepository;
  * @since 2021/10/13 22:50
  */
 
-public interface IUserRepository extends BaseIrSuperRepository<User, Long> {
+public interface IUserRepository extends BaseInterfaceSuperRepository<User, Long> {
 }

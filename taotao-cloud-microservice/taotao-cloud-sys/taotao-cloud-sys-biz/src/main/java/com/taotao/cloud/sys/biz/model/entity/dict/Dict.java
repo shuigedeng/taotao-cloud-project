@@ -16,10 +16,8 @@
 package com.taotao.cloud.sys.biz.model.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.web.base.entity.AbstractListener;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,10 +26,19 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.annotation.PreDestroy;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostRemove;
+import javax.persistence.PostUpdate;
+import javax.persistence.PrePersist;
+import javax.persistence.PreRemove;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -49,7 +56,7 @@ import java.util.Objects;
 @Entity
 @Table(name = Dict.TABLE_NAME)
 @TableName(Dict.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({Dict.DictEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = Dict.TABLE_NAME, comment = "字典表")
 public class Dict extends BaseSuperEntity<Dict, Long> {
 
@@ -87,8 +94,8 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
 
 	@Builder
 	public Dict(Long id, LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
-		Long updateBy, Integer version, Boolean delFlag, String dictName, String dictCode,
-		String description, Integer sortNum, String remark) {
+				Long updateBy, Integer version, Boolean delFlag, String dictName, String dictCode,
+				String description, Integer sortNum, String remark) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.dictName = dictName;
 		this.dictCode = dictCode;
@@ -113,5 +120,102 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
 	public int hashCode() {
 		return getClass().hashCode();
 	}
+
+
+	public static class DictEntityListener {
+
+		/**
+		 * 在新实体持久化之前（添加到EntityManager）
+		 *
+		 * @param object 对象
+		 * @since 2022-10-21 11:59:54
+		 */
+		@PrePersist
+		public void prePersist(Object object) {
+			LogUtils.info(" DictEntityListener prePersis: {}", object);
+		}
+
+		/**
+		 * 在数据库中存储新实体（在commit或期间flush）
+		 *
+		 * @param object 对象
+		 * @since 2022-10-21 11:59:54
+		 */
+		@PostPersist
+		public void postPersist(Object object) {
+			LogUtils.info("DictEntityListener postPersist: {}", object);
+		}
+
+		/**
+		 * 从数据库中检索实体后。
+		 *
+		 * @param object 对象
+		 * @since 2022-10-21 11:59:55
+		 */
+		@PostLoad
+		public void postLoad(Object object) {
+			LogUtils.info("DictEntityListener postLoad: {}", object);
+		}
+
+		/**
+		 * 当一个实体被识别为被修改时EntityManager
+		 *
+		 * @param object 对象
+		 * @since 2022-10-21 11:59:54
+		 */
+		@PreUpdate
+		public void preUpdate(Object object) {
+			LogUtils.info("DictEntityListener preUpdate: {}", object);
+		}
+
+
+		/**
+		 * 更新数据库中的实体（在commit或期间flush）
+		 *
+		 * @param object 对象
+		 * @since 2022-10-21 11:59:54
+		 */
+		@PostUpdate
+		public void postUpdate(Object object) {
+			LogUtils.info("DictEntityListener postUpdate: {}", object);
+		}
+
+
+		/**
+		 * 在EntityManager中标记要删除的实体时
+		 *
+		 * @param object 对象
+		 * @since 2022-10-21 11:59:54
+		 */
+		@PreRemove
+		public void preRemove(Object object) {
+			LogUtils.info("DictEntityListener preRemove: {}", object);
+		}
+
+		/**
+		 * 从数据库中删除实体（在commit或期间flush）
+		 *
+		 * @param object 对象
+		 * @since 2022-10-21 11:59:55
+		 */
+		@PostRemove
+		public void postRemove(Object object) {
+			LogUtils.info("DictEntityListener postRemove: {}", object);
+		}
+
+		/**
+		 * 前摧毁
+		 *
+		 * @param object 对象
+		 * @since 2022-10-21 11:59:54
+		 */
+		@PreDestroy
+		public void preDestroy(Object object) {
+			LogUtils.info("DictEntityListener preDestroy: {}", object);
+		}
+
+
+	}
+
 }
 
