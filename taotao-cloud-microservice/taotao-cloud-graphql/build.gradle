@@ -39,7 +39,8 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-context"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
-    api "javax.servlet:javax.servlet-api"
+    implementation "javax.servlet:javax.servlet-api"
+
     developmentOnly "org.springframework.boot:spring-boot-devtools"
     runtimeOnly "com.h2database:h2"
 }

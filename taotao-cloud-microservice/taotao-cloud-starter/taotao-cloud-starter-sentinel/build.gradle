@@ -5,6 +5,7 @@ dependencies {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
 
+    //https://search.maven.org/artifact/com.alibaba.csp/sentinel-apache-dubbo3-adapter
     api 'com.alibaba.csp:sentinel-apache-dubbo3-adapter:1.8.5'
     api 'com.alibaba.csp:sentinel-apache-httpclient-adapter:1.8.5'
     api 'com.alibaba.csp:sentinel-okhttp-adapter:1.8.5'

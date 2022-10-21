@@ -1092,6 +1092,10 @@ spring:
       # functionName对应服务中的Bean
       definition: inputKafka1;inputKafka2;inputRabbit1;inputRabbit2;demo;example;test
     stream:
+      #该参数指定了当前消费者的总实例数量；
+      #instance-count: 2
+      #该参数设置当前实例的索引号，从0开始，最大值为
+      #instance-index: 0
       bindings:
         #消费者
         demo-in-0:

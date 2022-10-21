@@ -2,7 +2,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/io.netty/netty-all/
-    api "io.netty:netty-all:4.1.82.Final"
+    api "io.netty:netty-all:4.1.84.Final"
 
     //https://search.maven.org/artifact/org.yeauty/netty-websocket-spring-boot-starter
     api "org.yeauty:netty-websocket-spring-boot-starter:0.12.0"

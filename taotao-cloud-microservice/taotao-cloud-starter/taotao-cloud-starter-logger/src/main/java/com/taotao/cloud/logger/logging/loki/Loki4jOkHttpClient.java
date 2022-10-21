@@ -19,7 +19,12 @@ import com.github.loki4j.client.http.HttpConfig;
 import com.github.loki4j.client.http.HttpHeaders;
 import com.github.loki4j.client.http.Loki4jHttpClient;
 import com.github.loki4j.client.http.LokiResponse;
-import okhttp3.*;
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import okhttp3.internal.Util;
 
 import java.io.IOException;
@@ -73,14 +78,14 @@ public class Loki4jOkHttpClient implements Loki4jHttpClient {
 	public LokiResponse send(ByteBuffer batch) throws Exception {
 		Request.Builder request = requestBuilder.newBuilder();
 		if (batch.hasArray()) {
-			request.post(RequestBody.create(mediaType, batch.array(), batch.position(), batch.remaining()));
+			request.post(RequestBody.create(batch.array(), mediaType, batch.position(), batch.remaining()));
 		} else {
 			int len = batch.remaining();
 			if (len > bodyBuffer.length) {
 				bodyBuffer = new byte[len];
 			}
 			batch.get(bodyBuffer, 0, len);
-			request.post(RequestBody.create(mediaType, bodyBuffer, 0, len));
+			request.post(RequestBody.create(bodyBuffer, mediaType, 0, len));
 		}
 		Call call = httpClient.newCall(request.build());
 		try (Response response = call.execute()) {
@@ -95,6 +100,7 @@ public class Loki4jOkHttpClient implements Loki4jHttpClient {
 	public void close() throws Exception {
 		httpClient.dispatcher().executorService().shutdown();
 		httpClient.connectionPool().evictAll();
+		assert httpClient.cache() != null;
 		Util.closeQuietly(httpClient.cache());
 	}
 }
