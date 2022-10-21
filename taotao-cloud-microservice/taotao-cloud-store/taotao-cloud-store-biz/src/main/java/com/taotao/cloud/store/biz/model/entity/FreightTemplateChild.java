@@ -1,8 +1,8 @@
 package com.taotao.cloud.store.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +35,7 @@ import java.util.Objects;
 @Entity
 @Table(name = FreightTemplateChild.TABLE_NAME)
 @TableName(FreightTemplateChild.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = FreightTemplateChild.TABLE_NAME, comment = "运费模板子配置表")
 public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, Long> {
 
@@ -61,6 +61,7 @@ public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, 
 
 	@Column(name = "area_id", columnDefinition = "varchar(32) not null comment '地区ID，示例参数：1,2,3,4'")
 	private String areaId;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

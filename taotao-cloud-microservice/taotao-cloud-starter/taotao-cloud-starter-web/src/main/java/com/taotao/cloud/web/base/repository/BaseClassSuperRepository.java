@@ -46,7 +46,7 @@ import java.util.List;
  * @version 2021.9
  * @since 2021-09-04 07:32:26
  */
-public abstract class BaseCrSuperRepository<T extends SuperEntity<T, I>, I extends Serializable> extends
+public abstract class BaseClassSuperRepository<T extends SuperEntity<T, I>, I extends Serializable> extends
 	SimpleJpaRepository<T, I> {
 
 	private final JPAQueryFactory jpaQueryFactory;
@@ -55,7 +55,7 @@ public abstract class BaseCrSuperRepository<T extends SuperEntity<T, I>, I exten
 	private final EntityPath<T> path;
 	private final Querydsl querydsl;
 
-	public BaseCrSuperRepository(Class<T> domainClass, EntityManager em) {
+	public BaseClassSuperRepository(Class<T> domainClass, EntityManager em) {
 		super(domainClass, em);
 		this.em = em;
 		this.jpaPredicateExecutor = new QuerydslJpaPredicateExecutor<>(

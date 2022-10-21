@@ -4,8 +4,8 @@ package com.taotao.cloud.store.biz.model.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
-import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,7 +38,7 @@ import java.util.Objects;
 @Entity
 @Table(name = StoreDetail.TABLE_NAME)
 @TableName(StoreDetail.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = StoreDetail.TABLE_NAME, comment = "店铺详细表")
 public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
 

@@ -61,8 +61,8 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 2021.9
  * @since 2021-09-02 21:07:59
  */
-public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializable, QueryDTO, QueryVO> extends
-	PageController<T, I, QueryDTO, QueryVO> {
+public interface BaseExcelController<T extends SuperEntity<T, I>, I extends Serializable, QueryDTO, QueryVO> extends
+	BasePageController<T, I, QueryDTO, QueryVO> {
 
 	/**
 	 * 通用导出Excel

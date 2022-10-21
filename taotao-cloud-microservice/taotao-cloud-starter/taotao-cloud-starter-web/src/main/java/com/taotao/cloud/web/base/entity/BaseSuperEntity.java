@@ -15,7 +15,6 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
-import javax.validation.groups.Default;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -31,7 +30,7 @@ import java.time.LocalDateTime;
 	@TypeDef(name = "json", typeClass = JsonType.class)
 })
 @MappedSuperclass
-@EntityListeners({AuditingEntityListener.class})
+@EntityListeners({AuditingEntityListener.class, JpaEntityListener.class})
 public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable> extends
 	SuperEntity<T, I> implements Serializable {
 
@@ -71,7 +70,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	}
 
 	public BaseSuperEntity(I id, LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
-		Long updateBy, Integer version, Boolean delFlag) {
+						   Long updateBy, Integer version, Boolean delFlag) {
 		super(id);
 		this.createTime = createTime;
 		this.createBy = createBy;
@@ -82,7 +81,7 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	}
 
 	public BaseSuperEntity(LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
-		Long updateBy, Integer version, Boolean delFlag) {
+						   Long updateBy, Integer version, Boolean delFlag) {
 		this.createTime = createTime;
 		this.createBy = createBy;
 		this.updateTime = updateTime;
@@ -138,7 +137,6 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	public void setDelFlag(boolean delFlag) {
 		this.delFlag = delFlag;
 	}
-
 
 
 }

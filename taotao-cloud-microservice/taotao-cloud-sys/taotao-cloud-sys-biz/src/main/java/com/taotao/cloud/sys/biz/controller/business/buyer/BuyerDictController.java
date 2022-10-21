@@ -20,7 +20,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.web.base.controller.BusinessBaseController;
+import com.taotao.cloud.web.base.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.sql.SQLIntegrityConstraintViolationException;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/buyer/dict")
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
-public class BuyerDictController extends BusinessBaseController<IDictService, Dict, Long> {
+public class BuyerDictController extends BaseBusinessController<IDictService, Dict, Long> {
 
 	@NotAuth
 	@GetMapping("/add/{type}")

@@ -2,15 +2,8 @@ package com.taotao.cloud.store.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.store.api.enums.BillStatusEnum;
-import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
+import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,9 +12,16 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 /**
  * 结算清单表
- *
  */
 @Getter
 @Setter
@@ -32,7 +32,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Bill.TABLE_NAME)
 @TableName(Bill.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = Bill.TABLE_NAME, comment = "结算清单表")
 public class Bill extends BaseSuperEntity<Bill, Long> {
 
@@ -111,6 +111,7 @@ public class Bill extends BaseSuperEntity<Bill, Long> {
 
 	@Column(name = "bill_price", columnDefinition = "decimal(10,2) not null default 0 comment '最终结算金额'")
 	private BigDecimal billPrice;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

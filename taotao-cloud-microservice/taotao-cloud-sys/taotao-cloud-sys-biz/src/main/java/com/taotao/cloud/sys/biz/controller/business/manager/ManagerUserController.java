@@ -30,7 +30,7 @@ import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import com.taotao.cloud.sys.biz.model.convert.UserConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
-import com.taotao.cloud.web.base.controller.BusinessSuperController;
+import com.taotao.cloud.web.base.controller.BaseSuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -62,7 +62,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/user")
 @Tag(name = "平台管理端-用户管理API", description = "平台管理端-用户管理API")
 public class ManagerUserController extends
-	BusinessSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
+        BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
 	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
 	@RequestLogger

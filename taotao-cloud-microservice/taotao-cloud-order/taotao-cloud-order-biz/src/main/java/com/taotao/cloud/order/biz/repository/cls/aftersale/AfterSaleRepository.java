@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.repository.cls.aftersale;
 
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
-import com.taotao.cloud.web.base.repository.BaseCrSuperRepository;
+import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 
 import javax.persistence.EntityManager;
 
@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
  *
  * @author shuigedeng
  */
-public class AfterSaleRepository extends BaseCrSuperRepository<AfterSale, Long> {
+public class AfterSaleRepository extends BaseClassSuperRepository<AfterSale, Long> {
 
 	public AfterSaleRepository(EntityManager em) {
 		super(AfterSale.class, em);

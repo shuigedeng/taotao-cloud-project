@@ -3,8 +3,8 @@ package com.taotao.cloud.message.biz.model.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
-import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = NoticeMessage.TABLE_NAME)
 @TableName(NoticeMessage.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = NoticeMessage.TABLE_NAME, comment = "通知类消息模板表")
 public class NoticeMessage extends BaseSuperEntity<NoticeMessage, Long> {
 

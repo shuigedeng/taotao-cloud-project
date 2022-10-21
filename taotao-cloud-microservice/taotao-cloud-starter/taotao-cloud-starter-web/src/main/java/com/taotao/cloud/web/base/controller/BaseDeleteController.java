@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @version 2021.9
  * @since 2021-09-02 21:05:45
  */
-public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializable> extends
+public interface BaseDeleteController<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseController<T, I> {
 
 	/**

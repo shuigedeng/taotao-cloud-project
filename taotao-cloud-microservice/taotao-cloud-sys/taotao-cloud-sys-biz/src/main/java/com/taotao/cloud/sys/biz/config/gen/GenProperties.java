@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @since 2022-09-22 09:41:54
  */
 @Component
-@ConfigurationProperties(prefix = "taotao.cloud.sys.gen")
+@ConfigurationProperties(prefix = "sys.gen")
 @EnableConfigurationProperties({GenProperties.class})
 public class GenProperties {
 	/**

@@ -1,12 +1,8 @@
 package com.taotao.cloud.store.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
+import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +11,10 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -29,7 +29,7 @@ import java.util.Objects;
 @Entity
 @Table(name = StoreLogistics.TABLE_NAME)
 @TableName(StoreLogistics.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = StoreLogistics.TABLE_NAME, comment = "店铺-物流公司设置表")
 public class StoreLogistics extends BaseSuperEntity<StoreLogistics, Long> {
 

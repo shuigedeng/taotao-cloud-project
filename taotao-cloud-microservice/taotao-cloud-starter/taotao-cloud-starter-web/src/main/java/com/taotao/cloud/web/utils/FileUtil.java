@@ -16,12 +16,6 @@
 package com.taotao.cloud.web.utils;
 
 import com.google.common.base.Preconditions;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Arrays;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +23,14 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /**
  * 文件处理工具类
@@ -70,6 +72,7 @@ public class FileUtil {
 		}
 		return type;
 	}
+
 	/**
 	 * 获取文件类型
 	 *
@@ -109,7 +112,7 @@ public class FileUtil {
 	 * @since 2021-09-02 22:24:23
 	 */
 	public static void download(String filePath, String fileName, Boolean delete,
-			HttpServletResponse response) throws Exception {
+								HttpServletResponse response) throws Exception {
 		File file = new File(filePath);
 		if (!file.exists()) {
 			throw new Exception("文件未找到");
@@ -120,11 +123,11 @@ public class FileUtil {
 			throw new Exception("暂不支持该类型文件下载");
 		}
 		response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-				"attachment;fileName=" + java.net.URLEncoder.encode(fileName, "utf-8"));
+			"attachment;fileName=" + java.net.URLEncoder.encode(fileName, StandardCharsets.UTF_8));
 		response.setContentType(MediaType.MULTIPART_FORM_DATA_VALUE);
 		response.setCharacterEncoding("utf-8");
 		try (InputStream inputStream = new FileInputStream(
-				file); OutputStream os = response.getOutputStream()) {
+			file); OutputStream os = response.getOutputStream()) {
 			byte[] b = new byte[2048];
 			int length;
 			while ((length = inputStream.read(b)) > 0) {
@@ -171,11 +174,11 @@ public class FileUtil {
 		headers.add("Pragma", "no-cache");
 		headers.add("Expires", "0");
 		return ResponseEntity
-				.ok()
-				.headers(headers)
-				.contentLength(file.length())
-				.contentType(MediaType.parseMediaType("application/octet-stream"))
-				.body(new FileSystemResource(file));
+			.ok()
+			.headers(headers)
+			.contentLength(file.length())
+			.contentType(MediaType.parseMediaType("application/octet-stream"))
+			.body(new FileSystemResource(file));
 	}
 
 }

@@ -25,15 +25,16 @@ import com.taotao.cloud.web.base.dto.BatchDTO.BatchUpdate;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * DeleteController
@@ -46,7 +47,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:05:45
  */
-public interface BatchController<T extends SuperEntity<T, I>, I extends Serializable, SaveDTO, UpdateDTO> extends
+public interface BaseBatchController<T extends SuperEntity<T, I>, I extends Serializable, SaveDTO, UpdateDTO> extends
 	BaseController<T, I> {
 
 	/**

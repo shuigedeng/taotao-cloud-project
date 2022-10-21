@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.web.base.entity.AbstractListener;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = WechatMessage.TABLE_NAME)
 @TableName(WechatMessage.TABLE_NAME)
-@EntityListeners({AbstractListener.class})
+@EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = WechatMessage.TABLE_NAME, comment = "微信消息表")
 public class WechatMessage extends BaseSuperEntity<WechatMessage, Long> {
 

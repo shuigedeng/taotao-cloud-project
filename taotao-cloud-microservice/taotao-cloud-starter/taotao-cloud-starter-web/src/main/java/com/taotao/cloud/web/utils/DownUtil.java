@@ -2,6 +2,12 @@ package com.taotao.cloud.web.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -11,11 +17,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * 了实效
@@ -108,15 +109,15 @@ public class DownUtil {
 			String agent = request.getHeader("USER-AGENT").toLowerCase();
 			if (agent.contains("msie") || agent.contains("trident")) {
 				//IE
-				codeFileName = URLEncoder.encode(fileName, Constants.UTF_8);
+				codeFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
 			} else if (agent.contains("mozilla")) {
 				//火狐，谷歌
-				codeFileName = new String(fileName.getBytes(Constants.UTF_8), "iso-8859-1");
+				codeFileName = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
 			} else {
-				codeFileName = URLEncoder.encode(fileName, Constants.UTF_8);
+				codeFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
 			}
 			response.setHeader("Content-Disposition",
-				"attachment;filename=" + new String(codeFileName.getBytes(), "utf-8"));
+				"attachment;filename=" + new String(codeFileName.getBytes(), StandardCharsets.UTF_8));
 			OutputStream os = response.getOutputStream();
 			int i;
 			byte[] buff = new byte[1024 * 8];
