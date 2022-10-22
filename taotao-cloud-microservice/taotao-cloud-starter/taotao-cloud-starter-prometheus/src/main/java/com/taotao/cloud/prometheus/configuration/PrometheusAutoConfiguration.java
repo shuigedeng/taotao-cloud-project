@@ -17,6 +17,7 @@ package com.taotao.cloud.prometheus.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.support.cron.util.DateUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.monitor.collect.HealthCheckProvider;
@@ -31,13 +32,15 @@ import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -45,6 +48,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -70,9 +74,11 @@ public class PrometheusAutoConfiguration implements WebMvcConfigurer, Initializi
 	private String applicationName;
 	@Autowired
 	private PrometheusCollector prometheusCollector;
+	@Autowired
+	@Qualifier("prometheusThreadPoolTaskScheduler")
+	public ThreadPoolTaskScheduler prometheusThreadPoolTaskScheduler;
 
 	private final Map<String, Gauge> gaugeMap = new ConcurrentHashMap<>();
-	private ThreadPoolExecutor monitorThreadPoolExecutor;
 
 	@Bean
 	MeterRegistryCustomizer<MeterRegistry> appMetricsCommonTags() {
@@ -81,19 +87,17 @@ public class PrometheusAutoConfiguration implements WebMvcConfigurer, Initializi
 
 	@Override
 	public void destroy() throws Exception {
-		if (null != monitorThreadPoolExecutor) {
-			Monitor.shutdownThreadlPool(monitorThreadPoolExecutor);
-		}
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtils.started(PrometheusAutoConfiguration.class, StarterName.PROMETHEUS_STARTER);
+
 		if (Objects.nonNull(healthCheckProvider)) {
 			Monitor monitorThreadPool = healthCheckProvider.getMonitor();
-			monitorThreadPoolExecutor = monitorThreadPool.getMonitorThreadPoolExecutor();
-			monitorThreadPoolExecutor.submit(() -> {
-				while (!monitorThreadPool.monitorIsShutdown()) {
+
+			prometheusThreadPoolTaskScheduler.scheduleAtFixedRate(() -> {
+				if (!monitorThreadPool.monitorIsShutdown()) {
 					try {
 						Report report = healthCheckProvider.getReport(false);
 						report.eachReport((field, reportItem) -> {
@@ -117,18 +121,16 @@ public class PrometheusAutoConfiguration implements WebMvcConfigurer, Initializi
 							}
 							return null;
 						});
+						LogUtils.info("prometheusThreadPoolTaskScheduler , {}, 时间：{}",
+							Thread.currentThread().getName(),
+							LocalDateTime.now()
+								.format(DateTimeFormatter.ofPattern(DateUtil.SDF_DATETIME)));
 					} catch (Exception e) {
 						LogUtils.warn(StarterName.MONITOR_STARTER, "HealthCheck Prometheus error ",
 							e);
 					}
-
-					try {
-						Thread.sleep(5 * 1000L);
-					} catch (Exception e) {
-						LogUtils.error(e);
-					}
 				}
-			});
+			}, 6 * 10 * 1000);
 		}
 	}
 

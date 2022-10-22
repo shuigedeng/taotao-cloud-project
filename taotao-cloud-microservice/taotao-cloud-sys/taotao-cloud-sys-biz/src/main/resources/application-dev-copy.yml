@@ -267,17 +267,15 @@ dubbo:
   application:
     #当前应用名称
     name: ${spring.application.name}
-    #Java字节码编译器，用于动态类的生成，可选：jdk或javassist
     compiler: javassist
     version: ${taotaoCloudVersion}
     owner: 981376577
-    architecture: china
     organization: taotao-cloud
-    metadata-type: local
+    architecture: china
     environment: develop
     #禁用qos同一台集群可能会有端口冲突现象
     qos-port: 20880
-    qos-enable: false
+    qos-enable: true
     qos-accept-foreign-ip: true
     logger: slf4j
     shutwait: 3000
@@ -297,20 +295,19 @@ dubbo:
     check: false
     register: true
     weight: 10
-    subscribe: true
+    #subscribe: true
     use-as-config-center: false
     use-as-metadata-center: false
   protocol:
     name: dubbo
     port: 20883
     ssl-enabled: false
-    accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
-    #serialization: kryo
-    status: server
+    #status: server
     payload: 83886080
     threadpool: fixed
     threadname: taotao-cloud-dubbo-executor
     threads: 200
+    accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
   provider:
     timeout: 3000
     version: ${taotaoCloudVersion}
@@ -341,6 +338,20 @@ dubbo:
     validation: true
     protocol: dubbo
     group: taotao-cloud-dev
+  metrics:
+    enable-jvm-metrics: true
+    protocol: prometheus
+    aggregation:
+      enabled: true
+      bucketNum: 100
+      timeWindowSeconds: 30
+    prometheus:
+      exporter:
+        enabled: true
+        enableHttpServiceDiscovery: true
+        metricsPort: 18081
+      pushgateway:
+        enabled: true
   module:
     name: ${spring.application.name}
     version: ${taotaoCloudVersion}
@@ -374,26 +385,9 @@ dubbo:
     parameters:
       namespace: taotao-cloud-dev
     check: false
-  metrics:
-    default: true
-    id: ${spring.application.name}
-    prefixes:
-      - /test
-    port: 9091
-    enable-jvm-metrics: true
-    protocol: prometheus
-    aggregation:
-      enabled: true
-      bucketNum: 100
-      timeWindowSeconds: 30
-    prometheus:
-      exporter:
-        enabled: true
-        enableHttpServiceDiscovery: true
-        metricsPort: 18081
-        metricsPath: /xx
-      pushgateway:
-        enabled: false
+    #config-file: dubbo.properties
+    #app-config-file: dubbo-sys.properties
+    #include-spring-env: true
 
 seata:
   enabled: true
@@ -892,6 +886,10 @@ spring:
       port: 27017
       #username:
       #password:
+      #是否记录慢查询到数据库中
+      slowQuery: true
+      #慢查询最短时间,默认为1000毫秒
+      slowTime: 2000
   rabbitmq:
     host: 192.168.10.210
     port: 5672
@@ -1339,10 +1337,6 @@ taotao:
       title: 系统管理模块
     mongodb:
       enabled: true
-      #是否记录慢查询到数据库中
-      slowQuery: true
-      #慢查询最短时间,默认为1000毫秒
-      slowTime: 2000
     metrics:
       enabled: false
       druid:
@@ -1361,6 +1355,8 @@ taotao:
           - logger
     laytpl:
       enabled: false
+    kafka:
+      enabled: true
     job:
       xxl:
         enabled: true
@@ -1406,7 +1402,8 @@ taotao:
         auto-fill:
           enabled: true
         dynamic:
-          enabled: false
+          datasource:
+            enabled: false
         tenant:
           enabled: false
       jpa:
@@ -1420,6 +1417,19 @@ taotao:
       enabled: false
     mail:
       enabled: false
+    sms:
+      enabled: true
+      type: aliyun
+      aliyun:
+        access-key-id: xxxx
+        access-key-secret: lsdflsdf
+        sign-name: sdfaslfd
+        templates:
+          ch: xlsldf
+        params-orders:
+          ch:
+            - lsdkfjl
+            - sdflksf
     websocket:
       enabled: true
       netty:

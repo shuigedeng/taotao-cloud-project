@@ -44,13 +44,6 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import com.taotao.cloud.web.base.service.AbstractBaseSuperService;
-import org.apache.ibatis.reflection.property.PropertyNamer;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.lang.NonNull;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -64,6 +57,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.apache.ibatis.reflection.property.PropertyNamer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.NonNull;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 /**
  * BaseService
@@ -81,13 +80,13 @@ public class BaseSuperServiceImpl<
 
 	protected static final int MAX_BATCH_KEY_SIZE = 20;
 
-	@Resource
+	@Autowired
 	private CR classRepository;
 
-	@Resource
+	@Autowired
 	private IR interfaceRepository;
 
-	@Resource
+	@Autowired
 	private RedisRepository redisRepository;
 
 	@Override
@@ -137,7 +136,7 @@ public class BaseSuperServiceImpl<
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<T> findByIds(@NonNull Collection<? extends Serializable> ids,
-							 Function<Collection<? extends Serializable>, Collection<T>> loader) {
+		Function<Collection<? extends Serializable>, Collection<T>> loader) {
 		if (ids.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -195,7 +194,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
-								   Predicate predicate, Wrapper<T> countWrapper, String msg) {
+		Predicate predicate, Wrapper<T> countWrapper, String msg) {
 		if (lock == null) {
 			throw new LockException("分布式锁为空");
 		}
@@ -254,7 +253,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
-								   Predicate predicate, Wrapper<T> countWrapper) {
+		Predicate predicate, Wrapper<T> countWrapper) {
 		return saveIdempotency(entity, lock, lockKey, predicate, countWrapper, null);
 	}
 
@@ -271,7 +270,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-										   Predicate predicate, Wrapper<T> countWrapper, String msg) {
+		Predicate predicate, Wrapper<T> countWrapper, String msg) {
 		if (null != entity) {
 			Class<?> cls = entity.getClass();
 			TableInfo tableInfo = TableInfoHelper.getTableInfo(cls);
@@ -303,7 +302,7 @@ public class BaseSuperServiceImpl<
 	 */
 	@Override
 	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
-										   Predicate predicate, Wrapper<T> countWrapper) {
+		Predicate predicate, Wrapper<T> countWrapper) {
 		return saveOrUpdateIdempotency(entity, lock, lockKey, predicate, countWrapper, null);
 	}
 
@@ -450,7 +449,7 @@ public class BaseSuperServiceImpl<
 
 	@Override
 	public List<T> findAllByFields(SFunction<T, ?> field,
-								   Collection<? extends Serializable> fieldValues) {
+		Collection<? extends Serializable> fieldValues) {
 		if (CollUtil.isEmpty(fieldValues)) {
 			return new ArrayList<>(0);
 		}

@@ -1,1 +1,1 @@
-custom=com.taotao.cloud.dubbo.checker.CustomStatusChecker
+dubboStatusChecker=com.taotao.cloud.dubbo.checker.DubboStatusChecker

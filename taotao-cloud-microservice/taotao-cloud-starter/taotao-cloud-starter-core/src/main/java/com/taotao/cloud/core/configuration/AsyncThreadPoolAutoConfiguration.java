@@ -26,6 +26,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
  * 异步任务配置
@@ -82,6 +83,17 @@ public class AsyncThreadPoolAutoConfiguration implements InitializingBean {
 		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 
 		executor.initialize();
+
+		return executor;
+	}
+
+	@Bean("prometheusThreadPoolTaskScheduler")
+	public ThreadPoolTaskScheduler prometheusThreadPoolTaskScheduler() {
+		ThreadPoolTaskScheduler executor = new ThreadPoolTaskScheduler();
+		executor.setPoolSize(5);
+		executor.setThreadGroupName("taotao-cloud-prometheus-task-scheduler");
+		executor.setAwaitTerminationSeconds(60);
+		executor.setWaitForTasksToCompleteOnShutdown(true);
 
 		return executor;
 	}
