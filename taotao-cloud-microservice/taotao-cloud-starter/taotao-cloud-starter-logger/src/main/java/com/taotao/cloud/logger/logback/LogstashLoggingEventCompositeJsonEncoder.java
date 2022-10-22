@@ -18,7 +18,9 @@ package com.taotao.cloud.logger.logback;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.spi.ContextAware;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import net.logstash.logback.composite.AbstractCompositeJsonFormatter;
 import net.logstash.logback.composite.loggingevent.LoggingEventCompositeJsonFormatter;
 import net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder;
@@ -44,6 +46,11 @@ public class LogstashLoggingEventCompositeJsonEncoder extends LoggingEventCompos
 		protected void writeEventToGenerator(JsonGenerator generator, ILoggingEvent event)
 			throws IOException {
 			try {
+				int length = event.getMessage().getBytes(StandardCharsets.UTF_8).length;
+				if (length > 352349886) {
+					LogUtils.error("超大数据了============352349886");
+					return;
+				}
 				generator.writeStartObject();
 				super.getProviders().writeTo(generator, event);
 				generator.writeEndObject();

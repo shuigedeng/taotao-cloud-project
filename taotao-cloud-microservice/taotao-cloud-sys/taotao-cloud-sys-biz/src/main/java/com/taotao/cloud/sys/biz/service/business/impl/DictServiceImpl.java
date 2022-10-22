@@ -16,6 +16,7 @@
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.RandomUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -187,16 +188,23 @@ public class DictServiceImpl extends
 	@GlobalTransactional(name = "sys-dict-global-transactional-2", rollbackFor = Exception.class)
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean add1() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
 
-		Dict d1 = Dict.builder().dictCode("asdfsadf").dictName("sldf").sortNum(3).build();
-		Dict d2 = Dict.builder().dictCode("asdfsadf222").dictName("sldf222").sortNum(5).build();
-		int i = im().insertBatchSomeColumn(List.of(d1, d2));
+		String s1 = RandomUtils.randomChar(6);
+		String s2 = RandomUtils.randomChar(6);
 
+		Dict d1 = Dict.builder().dictCode(s1).dictName("sldf").sortNum(3).build();
+		Dict d2 = Dict.builder().dictCode(s2).dictName("sldf222").sortNum(5).build();
+		//int i = im().insertBatchSomeColumn(List.of(d1, d2));
+
+		List<Dict> dicts = cr().saveAll(List.of(d1, d2));
+
+		String s3 = RandomUtils.randomChar(6);
+		String s4 = RandomUtils.randomChar(6);
+		Dict d3 = Dict.builder().dictCode(s3).dictName("sldf").sortNum(3).build();
+		Dict d4 = Dict.builder().dictCode(s4).dictName("sldf222").sortNum(5).build();
+
+		List<Dict> dicts1 = ir().saveAllAndFlush(List.of(d3, d4));
+		
 		return true;
 	}
 }

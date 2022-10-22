@@ -174,7 +174,8 @@
 			<appender-ref ref="KAFKA_ASYNC_APPENDER"/>
 			<appender-ref ref="GELF_ASYNC_APPENDER"/>
 			<appender-ref ref="LOKI_ASYNC_APPENDER"/>
-			<appender-ref ref="LOGSTASH_ASYNC_APPENDER"/>
+			<!--			<appender-ref ref="LOGSTASH_ASYNC_APPENDER"/>-->
+			<appender-ref ref="LOGSTASH_APPENDER"/>
 		</root>
 	</springProfile>
 

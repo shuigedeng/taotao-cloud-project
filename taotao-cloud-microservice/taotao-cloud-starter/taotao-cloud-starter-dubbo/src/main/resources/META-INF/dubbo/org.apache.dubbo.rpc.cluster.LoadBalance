@@ -1,1 +1,1 @@
-custom=com.taotao.cloud.dubbo.loadbalance.CustomLoadBalance
+dubboLoadBalance=com.taotao.cloud.dubbo.loadbalance.DubboLoadBalance

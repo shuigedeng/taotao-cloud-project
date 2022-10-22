@@ -1,1 +1,1 @@
-custom=com.taotao.cloud.dubbo.listener.CustomInvokerListener
+dubboInvokerListener=com.taotao.cloud.dubbo.listener.DubboInvokerListener

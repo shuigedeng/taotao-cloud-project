@@ -6,7 +6,7 @@
 		<!--		<includeCallerData>true</includeCallerData>-->
 		<!--		<keepAliveDuration>5 minutes</keepAliveDuration>-->
 		<!--		<reconnectionDelay>1 second</reconnectionDelay>-->
-		<!--		<writeBufferSize>16384</writeBufferSize>-->
+		<writeBufferSize>0</writeBufferSize>
 		<!--		<writeTimeout>1 minute</writeTimeout>-->
 
 		<!--		<connectionStrategy>-->
