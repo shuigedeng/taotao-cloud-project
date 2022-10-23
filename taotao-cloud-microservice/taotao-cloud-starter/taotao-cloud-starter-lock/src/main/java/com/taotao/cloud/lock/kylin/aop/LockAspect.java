@@ -1,37 +1,43 @@
 package com.taotao.cloud.lock.kylin.aop;
 
 import com.taotao.cloud.lock.kylin.annotation.KylinLock;
-import com.taotao.cloud.lock.kylin.configuration.KylinLockProperties;
 import com.taotao.cloud.lock.kylin.enums.LockType;
 import com.taotao.cloud.lock.kylin.fail.LockFailureCallBack;
 import com.taotao.cloud.lock.kylin.key.LockKeyBuilder;
 import com.taotao.cloud.lock.kylin.model.LockInfo;
+import com.taotao.cloud.lock.kylin.spring.boot.autoconfigure.KylinLockProperties;
 import com.taotao.cloud.lock.kylin.template.LockTemplate;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-
 /**
- * 解析注解 KylinLock 默认 分布式锁aop处理器 方法拦截器,它是一个接口,用于Spring AOP编程中的动态代理.实现该接口可以对需要增强的方法进行增强.
+ * 分布式锁aop处理器 环绕通知
  *
  * @author wangjinkui
  */
-public class DefaultLockInterceptor implements LockInterceptor, InitializingBean {
+@Aspect
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class LockAspect implements InitializingBean {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultLockInterceptor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LockAspect.class);
 	private final Map<Class<? extends LockFailureCallBack>, LockFailureCallBack> lockFailureCallBackMap = new LinkedHashMap<>();
 
 	protected final LockTemplate lockTemplate;
@@ -47,7 +53,7 @@ public class DefaultLockInterceptor implements LockInterceptor, InitializingBean
 	 * @param lockFailureCallBackList 锁失败回调类
 	 * @param lockProperties          配置信息
 	 */
-	public DefaultLockInterceptor(LockTemplate lockTemplate,
+	public LockAspect(LockTemplate lockTemplate,
 		LockKeyBuilder lockKeyBuilder,
 		LockFailureCallBack lockFailureCallBack,
 		List<LockFailureCallBack> lockFailureCallBackList,
@@ -60,56 +66,64 @@ public class DefaultLockInterceptor implements LockInterceptor, InitializingBean
 	}
 
 	/**
-	 * 增强
-	 *
-	 * @param invocation 拦截器链
-	 * @return 业务返回
+	 * @param joinPoint 方法执行切点
+	 * @return 业务方法返回
 	 * @throws Throwable 异常
 	 */
-	@Nullable
-	@Override
-	public Object invoke(@Nonnull MethodInvocation invocation) throws Throwable {
-		//1.验证class
-		if (verifyAopClass(invocation)) {
-			return invocation.proceed();
-		}
-
-		//2.获取注解
-		KylinLock kylinLock = invocation.getMethod().getAnnotation(KylinLock.class);
-		LockInfo lockInfo = null;
+	@Around("@annotation(com.wjk.kylin.lock.annotation.KylinLock) || @annotation(com.wjk.kylin.lock.annotation.KylinLocks)")
+	public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+		List<LockInfo> lockInfoList = new ArrayList<>();
 		try {
-			//加锁
-			lockInfo = lock(invocation, kylinLock);
+			//获取方法
+			Method method = this.getMethod(joinPoint);
+			Object[] args = joinPoint.getArgs();
+			//获取注解
+			KylinLock[] locks = method.getAnnotationsByType(KylinLock.class);
 
-			//加锁成功
-			if (null != lockInfo) {
-				LOGGER.debug("acquire lock success, lockKey:{}", lockInfo.getLockKey());
-				//执行原始方法
-				return invocation.proceed();
+			KylinLock nextLock = null;
+			//循环加锁
+			for (KylinLock kylinLock : locks) {
+				nextLock = kylinLock;
+				//加锁
+				LockInfo lockInfo = this.lock(method, args, kylinLock);
+				//加锁成功
+				if (null != lockInfo) {
+					LOGGER.debug("acquire lock success, lockKey:{}", lockInfo.getLockKey());
+					lockInfoList.add(lockInfo);
+				} else {
+					//只要有一个失败，则跳出
+					break;
+				}
 			}
-			//加锁失败
-			return this.lockFailure(kylinLock.lockFailure(), invocation.getMethod(),
-				invocation.getArguments());
+
+			//全部加锁成功，才算成功
+			if (lockInfoList.size() == locks.length) {
+				return joinPoint.proceed();
+			}
+			//失败
+			return this.lockFailure(nextLock.lockFailure(), method, args);
 		} finally {
-			//解锁
-			releaseLock(lockInfo);
+			if (lockInfoList.size() > 0) {
+				lockInfoList.forEach(this::releaseLock);
+			}
 		}
 	}
 
 	/**
 	 * 加锁
 	 *
-	 * @param invocation 拦截器链
-	 * @param kylinLock  锁注解
+	 * @param method    加锁方法
+	 * @param args      加锁方法参数
+	 * @param kylinLock 锁注解
 	 * @return 锁信息
 	 * @throws Throwable 异常
 	 */
-	protected LockInfo lock(@Nonnull MethodInvocation invocation, KylinLock kylinLock)
+	protected LockInfo lock(@Nonnull Method method, Object[] args, KylinLock kylinLock)
 		throws Throwable {
 		//组装锁key
-		final String lockKey = getLockKey(invocation, kylinLock);
+		final String lockKey = getLockKey(method, args, kylinLock);
 		//联锁、红锁后缀key
-		final String[] kysSuffix = getKeySuffix(invocation, kylinLock);
+		final String[] kysSuffix = getKeySuffix(method, args, kylinLock);
 
 		//加锁
 		return lockTemplate.lock(lockKey, kylinLock.expire(), kylinLock.acquireTimeout(),
@@ -169,15 +183,16 @@ public class DefaultLockInterceptor implements LockInterceptor, InitializingBean
 	/**
 	 * 联锁、红锁 key后缀支持SpEL表达式
 	 *
-	 * @param invocation 拦截器链
-	 * @param kylinLock  锁注解
+	 * @param method    加锁方法
+	 * @param args      加锁方法参数
+	 * @param kylinLock 锁注解
 	 * @return 解析联锁、红锁 key后缀的值
 	 */
-	private String[] getKeySuffix(@Nonnull MethodInvocation invocation, KylinLock kylinLock) {
+	private String[] getKeySuffix(@Nonnull Method method, Object[] args, KylinLock kylinLock) {
 		String[] keySuffix = kylinLock.keySuffix();
 		if (Objects.equals(kylinLock.lockType(), LockType.MULTI)
 			|| Objects.equals(kylinLock.lockType(), LockType.RED)) {
-			lockKeyBuilder.buildKeySuffix(invocation, keySuffix);
+			lockKeyBuilder.buildKeySuffix(method, args, keySuffix);
 		}
 		return keySuffix;
 	}
@@ -185,35 +200,19 @@ public class DefaultLockInterceptor implements LockInterceptor, InitializingBean
 	/**
 	 * 组装 锁 key
 	 *
-	 * @param invocation 拦截器链
-	 * @param kylinLock  锁注解
+	 * @param method    加锁方法
+	 * @param args      加锁方法参数
+	 * @param kylinLock 锁注解
 	 * @return 锁key
 	 */
-	private String getLockKey(@Nonnull MethodInvocation invocation, KylinLock kylinLock) {
+	private String getLockKey(@Nonnull Method method, Object[] args, KylinLock kylinLock) {
 		String prefix = lockProperties.getLockKeyPrefix() + ":";
 		prefix += StringUtils.hasText(kylinLock.name()) ? kylinLock.name() :
-			invocation.getMethod().getDeclaringClass().getName() + "." + invocation.getMethod()
-				.getName();
+			method.getDeclaringClass().getName() + "." + method.getName();
 
-		String buildKey = lockKeyBuilder.buildKey(invocation, kylinLock.keys());
+		String buildKey = lockKeyBuilder.buildKey(method, args, kylinLock.keys());
 		return StringUtils.hasText(buildKey) ? (prefix + "#" + buildKey) : prefix;
 	}
-
-	/**
-	 * 验证class
-	 *
-	 * @param invocation 拦截器链
-	 * @return 验证是否通过
-	 */
-	protected boolean verifyAopClass(@Nonnull MethodInvocation invocation) {
-		//fix 使用其他aop组件时,aop切了两次.
-		//获取一个代理对象的最终对象类型
-		//https://blog.csdn.net/wolfcode_cn/article/details/80660478
-		Class<?> cls = AopProxyUtils.ultimateTargetClass(
-			Objects.requireNonNull(invocation.getThis()));
-		return !cls.equals(invocation.getThis().getClass());
-	}
-
 
 	/**
 	 * 获取锁的失败回调
@@ -226,6 +225,27 @@ public class DefaultLockInterceptor implements LockInterceptor, InitializingBean
 		final LockFailureCallBack lockFailureCallBack = lockFailureCallBackMap.get(clazz);
 		Assert.notNull(lockFailureCallBack, String.format("can not get bean type of %s", clazz));
 		return lockFailureCallBack;
+	}
+
+	/**
+	 * 获取执行方法
+	 *
+	 * @param joinPoint 方法执行切点
+	 * @return
+	 */
+	protected Method getMethod(@Nonnull ProceedingJoinPoint joinPoint) {
+		Method method = null;
+
+		try {
+			Signature signature = joinPoint.getSignature();
+			MethodSignature ms = (MethodSignature) signature;
+			Object target = joinPoint.getTarget();
+			method = target.getClass().getMethod(ms.getName(), ms.getParameterTypes());
+		} catch (NoSuchMethodException e) {
+			LOGGER.error("acquire lock get method error", e);
+		}
+
+		return method;
 	}
 
 	@Override

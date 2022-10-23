@@ -1,5 +1,5 @@
 com.taotao.cloud.lock.configuration.LockAutoConfiguration
-com.taotao.cloud.lock.kylin.configuration.LockAutoConfiguration
-com.taotao.cloud.lock.kylin.configuration.redisson.RedissonLockAutoConfiguration
-com.taotao.cloud.lock.kylin.configuration.zookeeper.ZookeeperLockAutoConfiguration
+#com.taotao.cloud.lock.kylin.configuration.LockAutoConfiguration
+#com.taotao.cloud.lock.kylin.configuration.redisson.RedissonLockAutoConfiguration
+#com.taotao.cloud.lock.kylin.configuration.zookeeper.ZookeeperLockAutoConfiguration
 

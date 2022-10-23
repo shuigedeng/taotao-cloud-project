@@ -1,4 +1,4 @@
-package com.taotao.cloud.lock.kylin.configuration.zookeeper;
+package com.taotao.cloud.lock.kylin.spring.boot.autoconfigure.zookeeper;
 
 import com.taotao.cloud.lock.kylin.condition.ZookeeperCondition;
 import com.taotao.cloud.lock.kylin.executor.zookeeper.ZookeeperLockExecutor;
@@ -9,7 +9,6 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +20,6 @@ import org.springframework.core.annotation.Order;
  *
  * @author wangjinkui
  */
-@AutoConfiguration
 @Conditional(ZookeeperCondition.class)
 @EnableConfigurationProperties(ZookeeperLockProperties.class)
 public class ZookeeperLockAutoConfiguration {
