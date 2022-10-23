@@ -1,0 +1,2 @@
+com.taotao.cloud.mq.rocketmq.configuration.RocketMQAutoConfiguration
+com.taotao.cloud.mq.rocketmq.rocketmq.autoconfigure.RocketMQMessageQueueAutoConfiguration

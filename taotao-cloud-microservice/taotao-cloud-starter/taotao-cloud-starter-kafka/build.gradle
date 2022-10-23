@@ -1,8 +1,0 @@
-dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
-
-    api "org.springframework.cloud:spring-cloud-starter-stream-kafka"
-    api "org.springframework.cloud:spring-cloud-stream-binder-kafka"
-
-    api "org.springframework.kafka:spring-kafka"
-}

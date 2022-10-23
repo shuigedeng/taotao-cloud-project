@@ -1,0 +1,15 @@
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-common")
+
+    api "org.springframework.cloud:spring-cloud-starter-stream-kafka"
+    api "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
+    api "com.alibaba.cloud:spring-cloud-starter-stream-rocketmq"
+
+    //https://search.maven.org/artifact/org.apache.rocketmq/rocketmq-spring-boot-starter
+    api "org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.2"
+
+}
+
+
