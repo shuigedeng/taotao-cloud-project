@@ -1,0 +1,2 @@
+com.taotao.cloud.mq.kafka.configuration.KafkaAutoConfiguration
+com.taotao.cloud.mq.kafka.kafka.autoconfigure.KafkaMessageQueueAutoConfiguration
