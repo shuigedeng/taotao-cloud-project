@@ -1,6 +1,5 @@
 package com.taotao.cloud.lock.kylin.key;
 
-import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
@@ -31,31 +30,29 @@ public class DefaultLockKeyBuilder implements LockKeyBuilder {
     private static final ExpressionParser PARSER = new SpelExpressionParser();
 
     /**
-     *
-     * @param invocation     拦截器链
-     * @param definitionKeys 定义
-     * @return 解析keys后的数据
+     * @param method    加锁方法
+     * @param args      加锁方法参数
+     * @param keySuffix 联锁、红锁 key后缀
      */
     @Override
-    public String buildKey(MethodInvocation invocation, String[] definitionKeys) {
-        Method method = invocation.getMethod();
-        if (null != definitionKeys && definitionKeys.length > 0) {
-            return getSpELDefinitionKey(definitionKeys, method, invocation.getArguments());
+    public void buildKeySuffix(Method method, Object[] args, String[] keySuffix) {
+        if (null != keySuffix && keySuffix.length > 0) {
+            getSpELKeySuffix(keySuffix, method, args);
         }
-        return "";
     }
 
     /**
-     *
-     * @param invocation 拦截器链
-     * @param keySuffix  联锁、红锁 key后缀
+     * @param method         加锁方法
+     * @param args           加锁方法参数
+     * @param definitionKeys keys
+     * @return
      */
     @Override
-    public void buildKeySuffix(MethodInvocation invocation, String[] keySuffix) {
-        Method method = invocation.getMethod();
-        if (null != keySuffix && keySuffix.length > 0) {
-            getSpELKeySuffix(keySuffix, method, invocation.getArguments());
+    public String buildKey(Method method, Object[] args, String[] definitionKeys) {
+        if (null != definitionKeys && definitionKeys.length > 0) {
+            return getSpELDefinitionKey(definitionKeys, method, args);
         }
+        return "";
     }
 
     /**

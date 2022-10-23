@@ -1,10 +1,9 @@
 package com.taotao.cloud.lock.kylin.annotation;
 
-
-import com.taotao.cloud.lock.kylin.configuration.KylinLockProperties;
 import com.taotao.cloud.lock.kylin.enums.LockType;
 import com.taotao.cloud.lock.kylin.executor.LockExecutor;
 import com.taotao.cloud.lock.kylin.fail.LockFailureCallBack;
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
@@ -19,6 +18,7 @@ import java.lang.annotation.Target;
 @Target(value = {ElementType.METHOD})
 @Retention(value = RetentionPolicy.RUNTIME)
 @Repeatable(KylinLocks.class)
+@Documented
 public @interface KylinLock {
 
 	/**
@@ -63,7 +63,7 @@ public @interface KylinLock {
 	LockType lockType() default LockType.REENTRANT;
 
 	/**
-	 * redisson 红锁 联锁 zk联锁 联红锁个数以及其中每个锁的后缀key 默认三个，原始key + 1,2,3 支持SpEL 表达式
+	 * redisson 红锁联锁 zk联锁 联红锁个数以及其中每个锁的后缀key 默认三个，原始key + 1,2,3 支持SpEL 表达式
 	 *
 	 * @return key后缀
 	 */

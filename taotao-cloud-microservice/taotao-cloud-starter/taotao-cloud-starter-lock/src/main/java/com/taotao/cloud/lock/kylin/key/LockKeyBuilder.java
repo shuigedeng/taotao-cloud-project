@@ -1,6 +1,6 @@
 package com.taotao.cloud.lock.kylin.key;
 
-import org.aopalliance.intercept.MethodInvocation;
+import java.lang.reflect.Method;
 
 /**
  * 分布式锁Key生成器 接口
@@ -10,19 +10,19 @@ import org.aopalliance.intercept.MethodInvocation;
 public interface LockKeyBuilder {
 
     /**
-     * 构建key
-     *
-     * @param invocation     拦截器链
-     * @param definitionKeys 定义
+     * @param method         加锁方法
+     * @param args           加锁方法参数
+     * @param definitionKeys keys
      * @return 解析keys后的拼接起来的字符串
      */
-    String buildKey(MethodInvocation invocation, String[] definitionKeys);
+    String buildKey(Method method, Object[] args, String[] definitionKeys);
 
     /**
      * 构建 联锁、红锁 key后缀
      *
-     * @param invocation 拦截器链
-     * @param keySuffix  联锁、红锁 key后缀
+     * @param method    加锁方法
+     * @param args      加锁方法参数
+     * @param keySuffix 联锁、红锁 key后缀
      */
-    void buildKeySuffix(MethodInvocation invocation, String[] keySuffix);
+    void buildKeySuffix(Method method, Object[] args, String[] keySuffix);
 }

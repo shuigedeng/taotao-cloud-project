@@ -1,9 +1,6 @@
 package com.taotao.cloud.lock.kylin.annotation;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * 用于重复注解 KylinLock
@@ -13,6 +10,7 @@ import java.lang.annotation.Target;
  */
 @Target(value = {ElementType.METHOD})
 @Retention(value = RetentionPolicy.RUNTIME)
+@Documented
 public @interface KylinLocks {
     /**
      * @return 分布式锁注解

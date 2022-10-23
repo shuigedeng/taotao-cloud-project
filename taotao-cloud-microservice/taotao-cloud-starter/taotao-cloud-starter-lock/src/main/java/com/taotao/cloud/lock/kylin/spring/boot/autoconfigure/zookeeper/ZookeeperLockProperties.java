@@ -1,4 +1,4 @@
-package com.taotao.cloud.lock.kylin.configuration.zookeeper;
+package com.taotao.cloud.lock.kylin.spring.boot.autoconfigure.zookeeper;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

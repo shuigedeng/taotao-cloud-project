@@ -1,15 +1,13 @@
-package com.taotao.cloud.lock.kylin.configuration;
+package com.taotao.cloud.lock.kylin.spring.boot.autoconfigure;
 
 import com.taotao.cloud.lock.kylin.executor.LockExecutor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * kylin-lock 配置
  *
  * @author wangjinkui
  */
-@RefreshScope
 @ConfigurationProperties(prefix = "kylin.lock")
 public class KylinLockProperties {
 

@@ -1,10 +1,10 @@
 package com.taotao.cloud.lock.kylin.template;
 
-import com.taotao.cloud.lock.kylin.configuration.KylinLockProperties;
 import com.taotao.cloud.lock.kylin.enums.LockType;
 import com.taotao.cloud.lock.kylin.exception.LockException;
 import com.taotao.cloud.lock.kylin.executor.LockExecutor;
 import com.taotao.cloud.lock.kylin.model.LockInfo;
+import com.taotao.cloud.lock.kylin.spring.boot.autoconfigure.KylinLockProperties;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
