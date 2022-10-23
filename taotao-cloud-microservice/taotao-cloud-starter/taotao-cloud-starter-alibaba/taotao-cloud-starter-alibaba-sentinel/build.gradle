@@ -1,12 +1,21 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-common")
 
-    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
-
-    compileOnly("org.springframework.security:spring-security-core") {
-        exclude group: "junit", module: "junit"
+    api("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
+        exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
 
+    api 'com.alibaba.csp:sentinel-apache-dubbo3-adapter:1.8.5'
+    api 'com.alibaba.csp:sentinel-apache-httpclient-adapter:1.8.5'
+    api 'com.alibaba.csp:sentinel-okhttp-adapter:1.8.5'
+    api 'com.alibaba.csp:sentinel-reactor-adapter:1.8.5'
+    api 'com.alibaba.csp:sentinel-web-servlet:1.8.5'
+
+    compileOnly "org.springframework.cloud:spring-cloud-starter-openfeign"
+
+    api "org.springframework.boot:spring-boot-starter"
+    api "org.springframework:spring-web"
+    api "org.springframework:spring-webflux"
 }
 
 
