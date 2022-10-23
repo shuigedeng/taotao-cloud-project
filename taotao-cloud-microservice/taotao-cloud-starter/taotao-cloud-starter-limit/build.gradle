@@ -1,7 +1,7 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
 
     // springboot 限流 https://search.maven.org/artifact/com.eeeffff.limiter/ip-limiter-core-web
     //api "com.eeeffff.limiter:ip-limiter-core-web:1.1.3"

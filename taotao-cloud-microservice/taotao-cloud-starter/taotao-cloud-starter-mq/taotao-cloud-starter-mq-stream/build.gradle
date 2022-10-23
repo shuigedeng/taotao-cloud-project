@@ -1,7 +1,6 @@
 dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-common")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
 
     api "org.springframework.cloud:spring-cloud-starter-stream-kafka"
     api "org.springframework.cloud:spring-cloud-starter-stream-rabbit"

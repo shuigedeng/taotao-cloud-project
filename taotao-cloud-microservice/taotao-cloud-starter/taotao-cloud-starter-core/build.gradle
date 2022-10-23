@@ -1,11 +1,6 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
-    api("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery") {
-        exclude group: "org.springframework.cloud", module: "spring-cloud-starter-netflix-ribbon"
-    }
-    api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
-
     api "org.springframework.cloud:spring-cloud-starter-bootstrap"
     api "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     api "org.springframework.cloud:spring-cloud-starter-sleuth"
@@ -25,6 +20,7 @@ dependencies {
     //https://search.maven.org/artifact/org.xerial.snappy/snappy-java
     api "org.xerial.snappy:snappy-java:1.1.8.4"
 
+    api "com.alibaba.cloud:spring-cloud-alibaba-commons"
 
 //    testImplementation "org.assertj:assertj-guava:3.5.0"
 //    

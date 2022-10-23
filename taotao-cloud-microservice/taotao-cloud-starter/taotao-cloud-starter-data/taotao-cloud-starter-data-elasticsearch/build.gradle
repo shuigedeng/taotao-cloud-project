@@ -1,0 +1,29 @@
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-common")
+
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+
+    api "org.springframework.boot:spring-boot-starter-data-elasticsearch"
+
+    //https://gitee.com/dromara/easy-es.git
+    //https://search.maven.org/artifact/cn.easy-es/easy-es-boot-starter
+    api("cn.easy-es:easy-es-boot-starter:1.0.2") {
+        exclude group: "org.projectlombok", module: "lombok"
+    }
+
+    //https://search.maven.org/artifact/org.noear/snack3
+    api "org.noear:snack3:3.2.44"
+
+    //https://gitee.com/bboss/bboss-elastic
+    //https://esdoc.bbossgroups.com/#/spring-booter-with-bboss
+    //https://search.maven.org/artifact/com.bbossgroups.plugins/bboss-elasticsearch-rest-jdbc
+    api('com.bbossgroups.plugins:bboss-elasticsearch-rest-jdbc:6.7.5') {
+        exclude group: "org.slf4j", module: "slf4j-log4j12"
+        exclude group: "commons-collections", module: "commons-collections"
+    }
+    api('com.bbossgroups.plugins:bboss-elasticsearch-spring-boot-starter:6.7.5') {
+        exclude group: "org.slf4j", module: "slf4j-log4j12"
+    }
+
+    testImplementation "org.noear:solon-test:1.10.1"
+}
