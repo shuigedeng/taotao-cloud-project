@@ -1,5 +1,4 @@
 dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-common")
 
     //https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin

@@ -1,0 +1,25 @@
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-common")
+
+    //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-lite-spring-boot-starter
+    api("org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter:3.0.1") {
+        exclude group: "org.projectlombok", module: "lombok"
+        exclude group: "log4j", module: "log4j"
+//        exclude group: "org.apache.curator", module: "curator-recipes"
+//        exclude group: "org.apache.curator", module: "curator-client"
+//        exclude group: "org.apache.curator", module: "curator-framework"
+    }
+
+//    api "org.apache.curator:curator-recipes:5.3.0"
+//    api "org.apache.curator:curator-client:5.3.0"
+//    api "org.apache.curator:curator-framework:5.3.0"
+
+    //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-error-handler-dingtalk
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-dingtalk:3.0.1"
+    //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-error-handler-wechat
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-wechat:3.0.1"
+    //https://search.maven.org/artifact/org.apache.shardingsphere.elasticjob/elasticjob-error-handler-email
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-email:3.0.1"
+
+}
+

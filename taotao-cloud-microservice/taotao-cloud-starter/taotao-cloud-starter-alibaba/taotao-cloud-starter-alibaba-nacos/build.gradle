@@ -1,0 +1,11 @@
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-common")
+
+    api("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery") {
+        exclude group: "org.springframework.cloud", module: "spring-cloud-starter-netflix-ribbon"
+    }
+    api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+
+}
+
+

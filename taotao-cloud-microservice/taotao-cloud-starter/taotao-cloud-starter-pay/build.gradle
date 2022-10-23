@@ -1,18 +1,5 @@
 dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
-
-    //https://search.maven.org/artifact/com.egzosn/pay-java-common
-    api "com.egzosn:pay-java-common:2.14.4"
-    api "com.egzosn:pay-java-ali:2.14.4"
-    api "com.egzosn:pay-java-wx:2.14.4"
-    api "com.egzosn:pay-java-wx-youdian:2.14.4"
-    api "com.egzosn:pay-java-union:2.14.4"
-    api "com.egzosn:pay-java-payoneer:2.14.4"
-    api "com.egzosn:pay-java-paypal:2.14.4"
-    api "com.egzosn:pay-java-fuiou:2.14.4"
-
-    api "org.springframework.boot:spring-boot-starter-data-jdbc"
-
+   
 }
 
 

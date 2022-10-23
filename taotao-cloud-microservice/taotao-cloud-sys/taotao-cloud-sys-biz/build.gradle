@@ -1,19 +1,12 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-stream")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-elastic")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-xxl")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mongodb")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rxjava")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-laytpl")
-    //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha")
@@ -23,16 +16,26 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-threadpool")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-schedule")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-quartz")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-elastic")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-xxl")
+
+    //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-shardingsphere")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-elasticsearch")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-mongodb")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-elasticsearch")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-stream")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-schedule")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-quartz")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-pulsar")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-rocketmq")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-rabbitmq")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-kafka")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-stream")
+
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-minio")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
 

@@ -1,6 +1,6 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
 
     //https://search.maven.org/artifact/org.springframework.security/spring-security-core
     api "org.springframework.security:spring-security-core"

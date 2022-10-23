@@ -1,14 +1,14 @@
 dependencies {
 //    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 //
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
 //    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security")
 //    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-jpa")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
 //    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-seata")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-seata")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-sentinel")
 //
 //    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
 //    implementation project(":taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api")

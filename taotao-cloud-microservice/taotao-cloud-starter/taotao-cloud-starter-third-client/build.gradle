@@ -1,6 +1,6 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
 
     //https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2
     api "com.alibaba.fastjson2:fastjson2"

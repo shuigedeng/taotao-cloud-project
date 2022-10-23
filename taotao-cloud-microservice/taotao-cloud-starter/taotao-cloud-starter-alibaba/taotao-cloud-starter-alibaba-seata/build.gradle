@@ -1,0 +1,13 @@
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-common")
+
+    api "com.alibaba.cloud:spring-cloud-starter-alibaba-seata"
+
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
+
+    //https://search.maven.org/artifact/com.zaxxer/HikariCP
+    compileOnly "com.zaxxer:HikariCP:5.0.1"
+
+}
+
+
