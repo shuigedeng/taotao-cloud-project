@@ -1,8 +1,8 @@
 package com.taotao.cloud.mq.stream.framework.trigger.delay;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

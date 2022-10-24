@@ -2,6 +2,7 @@ package com.taotao.cloud.member.biz.connect.request;
 
 import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.io.UrlBuilder;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.biz.connect.config.AuthConfig;
@@ -14,7 +15,6 @@ import com.taotao.cloud.member.biz.connect.entity.enums.AuthResponseStatus;
 import com.taotao.cloud.member.biz.connect.entity.enums.AuthUserGender;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
 import com.taotao.cloud.member.biz.connect.util.GlobalAuthUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
 
 import java.util.Map;
 

@@ -12,11 +12,11 @@
  */
 package com.taotao.cloud.sms.common.repository;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sms.common.model.VerificationCode;
 import org.springframework.lang.Nullable;
 

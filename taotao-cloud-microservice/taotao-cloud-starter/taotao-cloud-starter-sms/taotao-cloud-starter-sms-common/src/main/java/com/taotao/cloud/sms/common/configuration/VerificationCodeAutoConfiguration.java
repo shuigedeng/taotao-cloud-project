@@ -12,8 +12,8 @@
  */
 package com.taotao.cloud.sms.common.configuration;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sms.common.model.VerificationCodeTypeGenerate;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
 import com.taotao.cloud.sms.common.properties.VerificationCodeMemoryRepositoryProperties;

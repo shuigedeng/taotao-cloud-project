@@ -18,18 +18,12 @@ package com.taotao.cloud.gateway.springcloud.filter.global;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.secure.MD5Utils;
 import com.taotao.cloud.common.utils.secure.RSAUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.gateway.springcloud.properties.FilterProperties;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.lang.reflect.Field;
-import java.net.URI;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -52,6 +46,13 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.lang.reflect.Field;
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * SignFilter
@@ -147,7 +148,7 @@ public class SignFilter implements GlobalFilter, Ordered {
 	}
 
 	public void checkSign(String sign, Long dateTimestamp, String requestId,
-		Map<String, Object> paramMap) {
+						  Map<String, Object> paramMap) {
 		String str = JSON.toJSONString(paramMap) + requestId + dateTimestamp;
 		String tempSign = MD5Utils.encrypt(str);
 		assert tempSign != null;
@@ -250,7 +251,7 @@ public class SignFilter implements GlobalFilter, Ordered {
 		}
 
 		public void initial(Map<String, Object> paramMap, String requestId, String sign,
-			Long dateTimestamp) {
+							Long dateTimestamp) {
 			this.paramMap = paramMap;
 			this.requestId = requestId;
 			this.sign = sign;

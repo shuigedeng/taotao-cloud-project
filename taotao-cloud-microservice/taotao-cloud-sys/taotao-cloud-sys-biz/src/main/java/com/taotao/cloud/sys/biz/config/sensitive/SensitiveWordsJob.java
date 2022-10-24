@@ -1,15 +1,7 @@
 package com.taotao.cloud.sys.biz.config.sensitive;
 
 
-import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
-import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import org.quartz.JobExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;

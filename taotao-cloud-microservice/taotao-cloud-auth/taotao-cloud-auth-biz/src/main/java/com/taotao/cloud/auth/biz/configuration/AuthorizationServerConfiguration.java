@@ -1,22 +1,15 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import static com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_MOBILE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_TYPE;
-import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
-
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
 import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationToken;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.UserTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.Arrays;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,6 +42,14 @@ import org.springframework.security.oauth2.server.authorization.web.authenticati
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+
+import java.util.Arrays;
+import java.util.Map;
+
+import static com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_MOBILE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_TYPE;
+import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
 
 
 /**

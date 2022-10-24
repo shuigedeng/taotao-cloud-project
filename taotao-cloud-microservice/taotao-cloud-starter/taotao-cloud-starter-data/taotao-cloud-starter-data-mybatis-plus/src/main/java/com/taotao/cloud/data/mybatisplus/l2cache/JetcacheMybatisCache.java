@@ -17,7 +17,7 @@
 package com.taotao.cloud.data.mybatisplus.l2cache;
 
 import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.jetcache.enhance.JetCacheCreateCacheFactory;
+import com.taotao.cloud.cache.jetcache.enhance.JetCacheCreateCacheFactory;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReadWriteLock;

@@ -2,6 +2,7 @@ package com.taotao.cloud.order.biz.service.business.cart.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -40,7 +41,11 @@ import com.taotao.cloud.promotion.api.feign.IFeignPintuanApi;
 import com.taotao.cloud.promotion.api.feign.IFeignPointsGoodsApi;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
-import com.taotao.cloud.redis.repository.RedisRepository;
+import lombok.AllArgsConstructor;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,10 +54,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * 购物车业务层实现
@@ -604,7 +605,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param cartTypeEnum 购物车
 	 */
 	private void useCoupon(TradeDTO tradeDTO, MemberCoupon memberCoupon,
-		CartTypeEnum cartTypeEnum) {
+						   CartTypeEnum cartTypeEnum) {
 
 		//截取符合优惠券的商品
 		List<CartSkuVO> cartSkuVOS = checkCoupon(memberCoupon, tradeDTO);
@@ -707,7 +708,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param num          数量
 	 */
 	private void checkCart(CartTypeEnum cartTypeEnum, CartSkuVO cartSkuVO, String skuId,
-		Integer num) {
+						   Integer num) {
 
 		this.checkSetGoodsQuantity(cartSkuVO, skuId, num);
 		//拼团判定

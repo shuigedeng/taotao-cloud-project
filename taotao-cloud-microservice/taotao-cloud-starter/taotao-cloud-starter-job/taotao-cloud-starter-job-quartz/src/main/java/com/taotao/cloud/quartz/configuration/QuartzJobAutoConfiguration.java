@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.quartz.configuration;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.quartz.event.DefaultQuartzEventListener;
 import com.taotao.cloud.quartz.event.RedisQuartzEventListener;
 import com.taotao.cloud.quartz.listener.QuartzListenerRegister;
 import com.taotao.cloud.quartz.utils.QuartzManager;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import org.jetbrains.annotations.NotNull;
 import org.quartz.Scheduler;
 import org.quartz.spi.TriggerFiredBundle;
@@ -96,18 +96,19 @@ public class QuartzJobAutoConfiguration implements ApplicationContextAware {
 	}
 
 	@Bean
-	public QuartzListenerRegister quartzListenerRegister(){
+	public QuartzListenerRegister quartzListenerRegister() {
 		return new QuartzListenerRegister();
 	}
 
 	@Bean
 	@ConditionalOnBean(RedisRepository.class)
-	public RedisQuartzEventListener redisQuartzLogEventListener(){
+	public RedisQuartzEventListener redisQuartzLogEventListener() {
 		return new RedisQuartzEventListener();
 	}
+
 	@Bean
 	@ConditionalOnMissingBean
-	public DefaultQuartzEventListener defaultQuartzLogEventListener(){
+	public DefaultQuartzEventListener defaultQuartzLogEventListener() {
 		return new DefaultQuartzEventListener();
 	}
 }

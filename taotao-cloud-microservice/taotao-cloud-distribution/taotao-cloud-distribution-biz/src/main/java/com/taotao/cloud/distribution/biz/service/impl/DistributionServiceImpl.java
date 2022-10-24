@@ -4,6 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -11,23 +12,22 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.distribution.api.web.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.web.query.DistributionPageQuery;
-import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
-import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.mapper.DistributionMapper;
+import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 分销员接口实现

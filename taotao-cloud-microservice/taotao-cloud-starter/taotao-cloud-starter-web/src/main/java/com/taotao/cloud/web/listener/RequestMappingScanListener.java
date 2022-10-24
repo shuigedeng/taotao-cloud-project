@@ -1,21 +1,13 @@
 package com.taotao.cloud.web.listener;
 
-import static com.taotao.cloud.common.constant.CommonConstant.RESOURCE_EXPIRE;
-
 import com.google.common.collect.Maps;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.endpoint.RequestMappingEndPoint;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import io.swagger.v3.oas.annotations.Operation;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -33,6 +25,15 @@ import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import static com.taotao.cloud.common.constant.CommonConstant.RESOURCE_EXPIRE;
 
 /**
  * 请求资源扫描监听器
@@ -68,7 +69,7 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 			}
 
 			// 所有接口映射
-			RequestMappingHandlerMapping mapping = applicationContext.getBean("requestMappingHandlerMapping",RequestMappingHandlerMapping.class);
+			RequestMappingHandlerMapping mapping = applicationContext.getBean("requestMappingHandlerMapping", RequestMappingHandlerMapping.class);
 			// 获取url与类和方法的对应信息
 			Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 			List<Map<String, String>> list = new ArrayList<>();

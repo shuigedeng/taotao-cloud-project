@@ -1,1 +1,1 @@
-com.taotao.cloud.caffeine.configuration.CaffeineCacheAutoConfiguration
+com.taotao.cloud.cache.caffeine.configuration.CaffeineCacheAutoConfiguration

@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.service.dubbo;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.dubbo.IDubboRegionService;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;

@@ -1,12 +1,12 @@
 package com.taotao.cloud.order.biz.service.business.cart.render.impl;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
 import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

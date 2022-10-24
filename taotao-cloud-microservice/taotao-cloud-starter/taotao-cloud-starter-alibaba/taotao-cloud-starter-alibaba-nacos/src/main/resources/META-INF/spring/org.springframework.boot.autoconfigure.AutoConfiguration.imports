@@ -1,1 +1,1 @@
-com.taotao.cloud.alibaba.nacos.NacosListenerAutoConfiguration
+com.taotao.cloud.alibaba.nacos.configuration.NacosListenerAutoConfiguration

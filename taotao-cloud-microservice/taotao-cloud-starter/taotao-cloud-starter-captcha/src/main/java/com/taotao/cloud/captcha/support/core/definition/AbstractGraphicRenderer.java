@@ -17,6 +17,7 @@
 package com.taotao.cloud.captcha.support.core.definition;
 
 import cn.hutool.core.util.IdUtil;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.support.core.definition.domain.Metadata;
 import com.taotao.cloud.captcha.support.core.dto.Captcha;
 import com.taotao.cloud.captcha.support.core.dto.GraphicCaptcha;
@@ -25,13 +26,13 @@ import com.taotao.cloud.captcha.support.core.exception.CaptchaHasExpiredExceptio
 import com.taotao.cloud.captcha.support.core.exception.CaptchaIsEmptyException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaMismatchException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaParameterIllegalException;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.awt.Font;
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.awt.*;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Description: 抽象的图形验证码 </p>

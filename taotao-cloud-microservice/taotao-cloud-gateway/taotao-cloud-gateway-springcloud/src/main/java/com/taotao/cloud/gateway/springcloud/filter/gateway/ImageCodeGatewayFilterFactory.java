@@ -16,10 +16,10 @@
 package com.taotao.cloud.gateway.springcloud.filter.gateway;
 
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;

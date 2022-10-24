@@ -2,6 +2,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
@@ -32,15 +33,15 @@ import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
 import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponApi;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 订单状态处理类
@@ -204,7 +205,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	 * @since 2022-05-16 17:35:18
 	 */
 	private void giftOrderHandler(List<GoodsSkuSpecGalleryVO> skuList, Order originOrder,
-		OrderTypeEnum orderTypeEnum) {
+								  OrderTypeEnum orderTypeEnum) {
 		//初始化订单对象/订单日志/自订单
 		Order order = new Order();
 		List<OrderItem> orderItems = new ArrayList<>();

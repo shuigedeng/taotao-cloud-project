@@ -16,13 +16,14 @@
 package com.taotao.cloud.crypto.ext.processor;
 
 import cn.hutool.core.util.IdUtil;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.time.Duration;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.Duration;
 
 /**
  * <p>Description: 接口加密解密处理器 </p>
@@ -42,7 +43,7 @@ public class HttpCryptoProcessor {
 	private RedisRepository redisRepository;
 
 	public HttpCryptoProcessor(AsymmetricCryptoProcessor asymmetricCryptoProcessor,
-		SymmetricCryptoProcessor symmetricCryptoProcessor) {
+							   SymmetricCryptoProcessor symmetricCryptoProcessor) {
 		this.asymmetricCryptoProcessor = asymmetricCryptoProcessor;
 		this.symmetricCryptoProcessor = symmetricCryptoProcessor;
 	}
@@ -87,7 +88,7 @@ public class HttpCryptoProcessor {
 
 		// 根据Token的有效时间设置
 		Duration expire = getExpire(accessTokenValiditySeconds);
-		redisRepository.insert(identity,expire.getSeconds(), secretKey);
+		redisRepository.insert(identity, expire.getSeconds(), secretKey);
 		return secretKey;
 	}
 
@@ -97,7 +98,7 @@ public class HttpCryptoProcessor {
 
 	private SecretKey getSecretKey(String identity) {
 		if (isSessionValid(identity)) {
-			SecretKey secretKey = (SecretKey)redisRepository.get(identity);
+			SecretKey secretKey = (SecretKey) redisRepository.get(identity);
 			if (ObjectUtils.isNotEmpty(secretKey)) {
 				log.trace(
 					"Decrypt Or Encrypt content use param identity [{}], cached identity is [{}].",
