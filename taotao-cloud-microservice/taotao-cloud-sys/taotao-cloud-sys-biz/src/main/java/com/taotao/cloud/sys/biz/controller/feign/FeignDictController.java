@@ -15,13 +15,16 @@
  */
 package com.taotao.cloud.sys.biz.controller.feign;
 
+import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
+import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
+
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
-import com.taotao.cloud.limit.ext.Limit;
-import com.taotao.cloud.limit.guava.GuavaLimit;
+import com.taotao.cloud.limit.annotation.GuavaLimit;
+import com.taotao.cloud.limit.annotation.Limit;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.feign.IFeignDictApi;
@@ -33,6 +36,16 @@ import com.taotao.cloud.web.base.controller.BaseFeignController;
 import com.taotao.cloud.web.version.ApiInfo;
 import com.yomahub.tlog.core.annotation.TLogAspect;
 import io.swagger.v3.oas.annotations.Operation;
+import java.io.IOException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import javax.servlet.AsyncContext;
+import javax.servlet.AsyncEvent;
+import javax.servlet.AsyncListener;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,20 +54,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.context.request.async.WebAsyncTask;
-
-import javax.servlet.AsyncContext;
-import javax.servlet.AsyncEvent;
-import javax.servlet.AsyncListener;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
-import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
-import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
 
 /**
  * 内部服务端-字典API
@@ -129,7 +128,8 @@ public class FeignDictController extends BaseFeignController<IDictService, Dict,
 
 	/**
 	 * @Async、WebAsyncTask、Callable、DeferredResult的区别 所在的包不同：
-	 * @Async：org.springframework.scheduling.annotation; WebAsyncTask：org.springframework.web.context.request.async; Callable：java.util.concurrent；
+	 * @Async：org.springframework.scheduling.annotation;
+	 * WebAsyncTask：org.springframework.web.context.request.async; Callable：java.util.concurrent；
 	 * DeferredResult：org.springframework.web.context.request.async;
 	 * 通过所在的包，我们应该隐隐约约感到一些区别，比如@Async是位于scheduling包中，而WebAsyncTask和DeferredResult是用于Web（Spring
 	 * MVC）的，而Callable是用于concurrent（并发）处理的。
@@ -143,7 +143,7 @@ public class FeignDictController extends BaseFeignController<IDictService, Dict,
 	 */
 	@RequestMapping("/asyncTask")
 	public void asyncTask(HttpServletRequest request,
-						  HttpServletResponse response) throws Exception {
+		HttpServletResponse response) throws Exception {
 		System.out.println("控制层线程:" + Thread.currentThread().getName());
 		AsyncContext asyncContext = request.startAsync();
 		asyncContext.addListener(new AsyncListener() {

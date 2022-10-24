@@ -1,4 +1,4 @@
-package com.taotao.cloud.limit.guava;
+package com.taotao.cloud.limit.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,8 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 番石榴限制
- * 直接将注解打在控制层的方法上，需要配合Spring框架的Controller注解使用
+ * 番石榴限制 直接将注解打在控制层的方法上，需要配合Spring框架的Controller注解使用
  * <pre class="code">
  *
  * &#064;GuavaLimit(token  = 20, message = "无法访问！")
@@ -24,9 +23,9 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface GuavaLimit {
+
 	/**
-	 * 每秒访问的次数
-	 * 默认可以访问20次
+	 * 每秒访问的次数 默认可以访问20次
 	 */
 	double token() default 20;
 

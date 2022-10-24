@@ -16,8 +16,11 @@
 package com.taotao.cloud.sys.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.boot.SpringApplication;
 
 /**
@@ -62,6 +65,20 @@ public class TaoTaoCloudSysApplication {
 		System.setProperty("JM.SNAPSHOT.PATH",
 			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
 		System.setProperty("nacos.logging.default.config.enabled", "true");
+	}
+
+
+	public static void aa(List<RegionTreeVO> data) {
+		data.stream().reduce((prev, cure) -> {
+			List<RegionTreeVO> regionTreeVOS = new ArrayList<>();
+			regionTreeVOS.add(cure);
+
+			cure.getChildren().forEach(v -> {
+
+			});
+
+
+		});
 	}
 
 }

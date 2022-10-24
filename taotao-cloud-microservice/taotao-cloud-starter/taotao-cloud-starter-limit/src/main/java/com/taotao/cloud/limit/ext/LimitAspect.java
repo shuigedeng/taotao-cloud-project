@@ -22,14 +22,14 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.cloud.limit.annotation.Limit;
+import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
-
-import java.lang.reflect.Method;
 
 /**
  * LimitAspect
@@ -79,7 +79,7 @@ public class LimitAspect {
 		this.redisRepository = redisRepository;
 	}
 
-	@Around("execution(public * *(..)) && @annotation(com.taotao.cloud.web.limit.Limit)")
+	@Around("execution(public * *(..)) && @annotation(com.taotao.cloud.limit.annotation.Limit)")
 	public Object around(ProceedingJoinPoint pjp) {
 		MethodSignature signature = (MethodSignature) pjp.getSignature();
 		Method method = signature.getMethod();
@@ -93,16 +93,19 @@ public class LimitAspect {
 		//根据限流类型获取不同的key ,如果不传我们会以方法名作为key
 		String key = switch (limitType) {
 			case IP -> RequestUtils.getHttpServletRequestIpAddress();
-			case CUSTOMER ->
-				StrUtil.isBlank(limitAnnotation.key()) ? org.apache.commons.lang.StringUtils.upperCase(method.getName()) : limitAnnotation.key();
+			case CUSTOMER -> StrUtil.isBlank(limitAnnotation.key())
+				? org.apache.commons.lang.StringUtils.upperCase(method.getName())
+				: limitAnnotation.key();
 		};
 
-		ImmutableList<String> keys = ImmutableList.of(StringUtils.join(limitAnnotation.prefix(), key));
+		ImmutableList<String> keys = ImmutableList.of(
+			StringUtils.join(limitAnnotation.prefix(), key));
 
 		try {
 			String luaScript = buildLuaScript();
 			RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);
-			Number count = redisRepository.getRedisTemplate().execute(redisScript, keys, limitCount, limitPeriod);
+			Number count = redisRepository.getRedisTemplate()
+				.execute(redisScript, keys, limitCount, limitPeriod);
 			if (count != null && count.intValue() <= limitCount) {
 				return pjp.proceed();
 			} else {
