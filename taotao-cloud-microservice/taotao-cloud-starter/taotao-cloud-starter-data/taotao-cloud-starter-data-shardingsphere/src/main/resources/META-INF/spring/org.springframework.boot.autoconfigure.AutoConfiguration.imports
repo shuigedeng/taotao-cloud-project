@@ -1,1 +1,1 @@
-com.taotao.cloud.shardingsphere.configuration.ShardingJdbcAutoConfiguration
+com.taotao.cloud.data.shardingsphere.configuration.ShardingJdbcAutoConfiguration

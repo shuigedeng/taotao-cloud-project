@@ -1326,7 +1326,7 @@ taotao:
       dateformat: yyyy-MM-dd HH:mm:ss
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.p6spy.logger.KafkaLogger
+      appender: com.taotao.cloud.data.p6spy.logger.KafkaLogger
       logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
     oss:
       enabled: false
