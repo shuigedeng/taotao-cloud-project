@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.task.xxljob;
+package com.taotao.cloud.sys.biz.job.xxljob;
 /*
  * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *

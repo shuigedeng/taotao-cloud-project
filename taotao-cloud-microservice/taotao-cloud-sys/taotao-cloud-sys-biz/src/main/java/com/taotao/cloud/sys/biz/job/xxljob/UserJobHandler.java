@@ -4,13 +4,15 @@
  * Date: 2020/6/16 14:43
  * Author: shuigedeng
  */
-package com.taotao.cloud.sys.biz.task.xxljob;
+package com.taotao.cloud.sys.biz.job.xxljob;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import io.seata.spring.annotation.GlobalTransactional;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -18,8 +20,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
-import org.springframework.stereotype.Component;
-
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -50,26 +50,26 @@ public class UserJobHandler {
 		return ReturnT.SUCCESS;
 	}
 
-    @XxlJob("UserJobHandler")
-    public ReturnT<String> userJobHandler(String param) throws Exception {
-	    XxlJobHelper.log("XXL-JOB, Hello World.");
-	    XxlJobHelper.log("XXL-JOB, Hello World.1");
-	    XxlJobHelper.log("XXL-JOB, Hello World.2");
-	    XxlJobHelper.log("XXL-JOB, Hello World.3");
-	    XxlJobHelper.log("XXL-JOB, Hello World.4");
+	@XxlJob("UserJobHandler")
+	public ReturnT<String> userJobHandler(String param) throws Exception {
+		XxlJobHelper.log("XXL-JOB, Hello World.");
+		XxlJobHelper.log("XXL-JOB, Hello World.1");
+		XxlJobHelper.log("XXL-JOB, Hello World.2");
+		XxlJobHelper.log("XXL-JOB, Hello World.3");
+		XxlJobHelper.log("XXL-JOB, Hello World.4");
 
-	    LogUtils.info("=============xxljob eeeeeeeeeeeeeeeeeeeee");
+		LogUtils.info("=============xxljob eeeeeeeeeeeeeeeeeeeee");
 
-        //for (int i = 0; i < 5; i++) {
-	    //    XxlJobHelper.log("beat at:" + i);
-        //    System.out.println("XXL-JOB测试-----" + i);
-        //    TimeUnit.SECONDS.sleep(2);
-        //}
+		//for (int i = 0; i < 5; i++) {
+		//    XxlJobHelper.log("beat at:" + i);
+		//    System.out.println("XXL-JOB测试-----" + i);
+		//    TimeUnit.SECONDS.sleep(2);
+		//}
 
 		//throw new RuntimeException("XXL-JOB测试异常");
 
-        return ReturnT.FAIL;
-    }
+		return ReturnT.FAIL;
+	}
 
 
 	/**

@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.task.quartz;
+package com.taotao.cloud.sys.biz.job.quartz;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobDataMap;

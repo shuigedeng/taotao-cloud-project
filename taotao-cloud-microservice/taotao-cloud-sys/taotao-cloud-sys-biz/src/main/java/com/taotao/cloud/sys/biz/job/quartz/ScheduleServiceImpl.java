@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.task.quartz;
+package com.taotao.cloud.sys.biz.job.quartz;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.UUID;

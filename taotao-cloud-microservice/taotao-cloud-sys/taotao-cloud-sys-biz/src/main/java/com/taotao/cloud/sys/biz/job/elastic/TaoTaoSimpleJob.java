@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.task.elastic;
+package com.taotao.cloud.sys.biz.job.elastic;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.shardingsphere.elasticjob.api.ShardingContext;

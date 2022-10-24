@@ -195,7 +195,7 @@ elasticjob:
     namespace: taotao-cloud-elasticjob
   jobs:
     taotao-cloud-simple-job:
-      elastic-job-class: com.taotao.cloud.sys.biz.task.elastic.TaoTaoSimpleJob
+      elastic-job-class: com.taotao.cloud.sys.biz.job.elastic.TaoTaoSimpleJob
       jobBootstrapBeanName: taoTaoSimpleBootstrapJob
       cron: 0 0/30 * * * ?
       timeZone: GMT+08:00
@@ -228,7 +228,7 @@ elasticjob:
           bcc:
           debug: false
     taotao-cloud-data-flow-job:
-      elastic-job-class: com.taotao.cloud.sys.biz.task.elastic.TaoTaoDataflowJob
+      elastic-job-class: com.taotao.cloud.sys.biz.job.elastic.TaoTaoDataflowJob
       jobBootstrapBeanName: taoTaoDataflowBootstrapJob
       cron: 0 0/30 * * * ?
       timeZone: GMT+08:00

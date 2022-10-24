@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.task.quartz;
+package com.taotao.cloud.sys.biz.job.quartz;
 
 import org.springframework.stereotype.Component;
 
