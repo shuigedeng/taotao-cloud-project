@@ -1,4 +1,4 @@
-wget https://github.com/alibaba/arthas/releases/download/arthas-all-3.5.2/arthas-tunnel-server-3.5.2-fatjar.jar
+wget https://github.com/alibaba/arthas/releases/download/arthas-all-3.6.6/arthas-tunnel-server-3.6.6-fatjar.jar
 
 http://127.0.0.1:8081/actuator/arthas 登陆用户名是arthas
 密码在arthas tunnel server的日志里可以找到，比如：
@@ -19,7 +19,7 @@ arthas:
 
 function start_arthas() {
    nohup java -jar \
-    -Dserver.port=8081 \
+    -Dserver.port=7777 \
     /opt/cloud/arthas/arthas-tunnel-server-3.5.2-fatjar.jar \
     >/opt/cloud/arthas/start.out 2>&1 &
 
