@@ -17,6 +17,7 @@
 package com.taotao.cloud.captcha.support.behavior.renderer;
 
 import cn.hutool.core.util.IdUtil;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.support.behavior.definition.AbstractBehaviorRenderer;
 import com.taotao.cloud.captcha.support.behavior.dto.WordClickCaptcha;
 import com.taotao.cloud.captcha.support.core.definition.domain.Coordinate;
@@ -29,10 +30,13 @@ import com.taotao.cloud.captcha.support.core.exception.CaptchaHasExpiredExceptio
 import com.taotao.cloud.captcha.support.core.exception.CaptchaMismatchException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaParameterIllegalException;
 import com.taotao.cloud.captcha.support.core.provider.RandomProvider;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.time.Duration;
@@ -40,11 +44,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>Description: 文字点选验证码处理器 </p>
@@ -164,7 +163,7 @@ public class WordClickCaptchaRenderer extends AbstractBehaviorRenderer {
 	}
 
 	private Coordinate drawWord(Graphics graphics, int width, int height, int index, int wordCount,
-		String word) {
+								String word) {
 		Coordinate coordinate = randomWordCoordinate(width, height, index, wordCount);
 
 		//随机字体颜色
@@ -203,7 +202,7 @@ public class WordClickCaptchaRenderer extends AbstractBehaviorRenderer {
 	 * @return 当前汉字的坐标 {@link  Coordinate}
 	 */
 	private Coordinate randomWordCoordinate(int backgroundImageWidth, int backgroundImageHeight,
-		int wordIndex, int wordCount) {
+											int wordIndex, int wordCount) {
 		int wordSize = getFontSize();
 		int halfWordSize = getHalfFontSize();
 

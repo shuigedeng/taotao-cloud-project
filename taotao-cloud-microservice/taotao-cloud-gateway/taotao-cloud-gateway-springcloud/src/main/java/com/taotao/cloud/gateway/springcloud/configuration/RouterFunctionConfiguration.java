@@ -16,6 +16,7 @@
 package com.taotao.cloud.gateway.springcloud.configuration;
 
 import cn.hutool.http.HttpStatus;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.CaptchaUtils;
@@ -28,7 +29,6 @@ import com.taotao.cloud.gateway.springcloud.anti_reptile.handler.ValidateFormHan
 import com.taotao.cloud.gateway.springcloud.properties.ApiProperties;
 import com.taotao.cloud.monitor.collect.HealthCheckProvider;
 import com.taotao.cloud.monitor.model.Report;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;

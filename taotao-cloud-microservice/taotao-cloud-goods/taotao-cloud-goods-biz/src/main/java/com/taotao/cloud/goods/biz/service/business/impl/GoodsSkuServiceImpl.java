@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -44,11 +45,16 @@ import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,11 +67,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品sku业务层实现
@@ -144,7 +145,7 @@ public class GoodsSkuServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean update(List<Map<String, Object>> skuList, Goods goods,
-		Boolean regeneratorSkuFlag) {
+						  Boolean regeneratorSkuFlag) {
 		// 是否存在规格
 		if (skuList == null || skuList.isEmpty()) {
 			throw new BusinessException(ResultEnum.MUST_HAVE_GOODS_SKU);
@@ -678,7 +679,7 @@ public class GoodsSkuServiceImpl extends
 	 * @param esGoodsIndex 商品索引
 	 */
 	private void skuInfo(GoodsSku sku, Goods goods, Map<String, Object> map,
-		EsGoodsIndex esGoodsIndex) {
+						 EsGoodsIndex esGoodsIndex) {
 		//规格简短信息
 		StringBuilder simpleSpecs = new StringBuilder();
 		//商品名称

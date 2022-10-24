@@ -1,9 +1,9 @@
 package com.taotao.cloud.member.biz.task;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.job.xxl.timetask.EveryHourExecute;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.report.api.web.vo.OnlineMemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

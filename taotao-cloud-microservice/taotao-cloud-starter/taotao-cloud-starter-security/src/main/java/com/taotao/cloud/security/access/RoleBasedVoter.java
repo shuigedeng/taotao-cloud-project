@@ -1,15 +1,7 @@
 package com.taotao.cloud.security.access;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDecisionVoter;
@@ -17,6 +9,15 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.FilterInvocation;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RoleBasedVoter implements AccessDecisionVoter<Object> {
 
@@ -41,7 +42,7 @@ public class RoleBasedVoter implements AccessDecisionVoter<Object> {
 
 	@Override
 	public int vote(Authentication authentication, Object object,
-		Collection<ConfigAttribute> attributes) {
+					Collection<ConfigAttribute> attributes) {
 		if (authentication == null) {
 			return ACCESS_DENIED;
 		}

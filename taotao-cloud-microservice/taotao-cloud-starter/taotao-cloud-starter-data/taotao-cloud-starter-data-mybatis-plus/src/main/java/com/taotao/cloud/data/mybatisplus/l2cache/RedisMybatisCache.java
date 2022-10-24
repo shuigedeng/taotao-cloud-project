@@ -17,21 +17,22 @@
 
 package com.taotao.cloud.data.mybatisplus.l2cache;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 /**
  * <p>Description: 扩展的Mybatis二级缓存 </p>
  * * @CacheNamespace(implementation = RedisMybatisCache.class, eviction = RedisMybatisCache.class)
- *  * public interface ILogMapper extends BaseSuperMapper<Log>
+ * * public interface ILogMapper extends BaseSuperMapper<Log>
  */
 public class RedisMybatisCache implements Cache {
 

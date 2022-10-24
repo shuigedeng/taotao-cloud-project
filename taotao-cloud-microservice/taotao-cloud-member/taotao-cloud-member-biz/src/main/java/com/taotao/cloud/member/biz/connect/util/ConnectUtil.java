@@ -1,5 +1,6 @@
 package com.taotao.cloud.member.biz.connect.util;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -20,7 +21,6 @@ import com.taotao.cloud.member.biz.connect.request.BaseAuthWeChatPCRequest;
 import com.taotao.cloud.member.biz.connect.request.BaseAuthWeChatRequest;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.QQConnectSettingItemVO;

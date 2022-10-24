@@ -1,11 +1,11 @@
 package com.taotao.cloud.security.perm;
 
-import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.stereotype.Component;
 
 @Component
 public class VipSecurityOauthService {

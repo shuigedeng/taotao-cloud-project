@@ -15,13 +15,13 @@
  */
 package com.taotao.cloud.logger.service.impl;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.DatePattern;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
-import com.taotao.cloud.redis.repository.RedisRepository;
 
 import java.time.LocalDate;
 import java.util.Objects;

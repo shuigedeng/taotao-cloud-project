@@ -16,16 +16,17 @@
 package com.taotao.cloud.auth.biz.service;
 
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.auth.biz.exception.CloudAuthenticationException;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.common.CaptchaUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.auth.biz.exception.CloudAuthenticationException;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * CaptchaService

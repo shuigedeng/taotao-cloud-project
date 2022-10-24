@@ -1,11 +1,11 @@
 package com.taotao.cloud.mq.stream.consumer.trigger;
 
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mq.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.mq.stream.framework.trigger.util.DelayQueueTools;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;

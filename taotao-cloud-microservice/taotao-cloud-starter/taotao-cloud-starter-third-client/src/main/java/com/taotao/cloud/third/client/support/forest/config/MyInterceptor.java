@@ -5,7 +5,7 @@ import com.dtflys.forest.http.ForestRequest;
 import com.dtflys.forest.http.ForestResponse;
 import com.dtflys.forest.interceptor.Interceptor;
 import com.dtflys.forest.reflection.ForestMethod;
-import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.logger.configuration;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.aspect.RequestLoggerAspect;
@@ -26,10 +27,6 @@ import com.taotao.cloud.logger.service.IRequestLoggerService;
 import com.taotao.cloud.logger.service.impl.KafkaRequestLoggerServiceImpl;
 import com.taotao.cloud.logger.service.impl.LoggerRequestLoggerServiceImpl;
 import com.taotao.cloud.logger.service.impl.RedisRequestLoggerServiceImpl;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -38,6 +35,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 当web项目引入此依赖时，自动配置对应的内容 初始化log的事件监听与切面配置
@@ -92,17 +92,17 @@ public class LoggerAutoConfiguration implements InitializingBean {
 		}
 
 		@Bean
-		public List<IRequestLoggerService> requestLoggerServices(){
+		public List<IRequestLoggerService> requestLoggerServices() {
 			List<IRequestLoggerService> requestLoggerServices = new ArrayList<>();
 			RequestLoggerTypeEnum[] types = properties.getTypes();
 			for (RequestLoggerTypeEnum type : types) {
-				if(RequestLoggerTypeEnum.LOGGER.equals(type)){
+				if (RequestLoggerTypeEnum.LOGGER.equals(type)) {
 					requestLoggerServices.add(new LoggerRequestLoggerServiceImpl());
 				}
-				if(RequestLoggerTypeEnum.REDIS.equals(type)){
+				if (RequestLoggerTypeEnum.REDIS.equals(type)) {
 					requestLoggerServices.add(new RedisRequestLoggerServiceImpl(redisRepository));
 				}
-				if(RequestLoggerTypeEnum.KAFKA.equals(type)){
+				if (RequestLoggerTypeEnum.KAFKA.equals(type)) {
 					requestLoggerServices.add(new KafkaRequestLoggerServiceImpl(kafkaTemplate));
 				}
 			}

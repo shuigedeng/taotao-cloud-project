@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.data.mybatisplus.l2cache;
 
-import com.taotao.cloud.caffeine.manager.CaffeineAutoCacheManager;
+import com.taotao.cloud.cache.caffeine.manager.CaffeineAutoCacheManager;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;

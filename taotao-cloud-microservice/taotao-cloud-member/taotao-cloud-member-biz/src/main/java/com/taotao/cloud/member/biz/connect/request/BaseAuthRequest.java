@@ -1,6 +1,7 @@
 package com.taotao.cloud.member.biz.connect.request;
 
 import com.alibaba.nacos.common.utils.UuidUtils;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.io.UrlBuilder;
 import com.taotao.cloud.common.utils.io.UrlUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
@@ -14,7 +15,6 @@ import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.entity.enums.AuthResponseStatus;
 import com.taotao.cloud.member.biz.connect.exception.AuthException;
 import com.taotao.cloud.member.biz.connect.util.AuthChecker;
-import com.taotao.cloud.redis.repository.RedisRepository;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public abstract class BaseAuthRequest implements AuthRequest {
 
 
 	public BaseAuthRequest(AuthConfig config, ConnectAuth connectAuth,
-		RedisRepository redisRepository) {
+						   RedisRepository redisRepository) {
 		this.config = config;
 		this.source = connectAuth;
 		this.redisRepository = redisRepository;
@@ -107,11 +107,11 @@ public abstract class BaseAuthRequest implements AuthRequest {
 	@Override
 	public String authorize(String state) {
 		return UrlBuilder.fromBaseUrl(source.authorize())
-		        .queryParam("response_type", "code")
-		        .queryParam("client_id", config.getClientId())
-		        .queryParam("redirect_uri", config.getRedirectUri())
-		        .queryParam("state", getRealState(state))
-		        .build();
+			.queryParam("response_type", "code")
+			.queryParam("client_id", config.getClientId())
+			.queryParam("redirect_uri", config.getRedirectUri())
+			.queryParam("state", getRealState(state))
+			.build();
 	}
 
 

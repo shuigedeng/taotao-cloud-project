@@ -1,10 +1,10 @@
 package com.taotao.cloud.sys.biz.controller.business.tools.email;
 
+import com.taotao.cloud.cache.redis.delay.config.RedissonTemplate;
+import com.taotao.cloud.cache.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.quartz.utils.QuartzManager;
-import com.taotao.cloud.redis.delay.config.RedissonTemplate;
-import com.taotao.cloud.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.dto.EmailDTO;
 import com.taotao.cloud.sys.api.model.vo.alipay.EmailVO;

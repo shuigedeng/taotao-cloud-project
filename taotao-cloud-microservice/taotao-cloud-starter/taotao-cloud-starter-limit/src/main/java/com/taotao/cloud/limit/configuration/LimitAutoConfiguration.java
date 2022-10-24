@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.limit.configuration;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.limit.ext.LimitProperties;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.limit.guava.GuavaLimitAspect;
 import com.taotao.cloud.limit.ext.LimitAspect;
+import com.taotao.cloud.limit.ext.LimitProperties;
+import com.taotao.cloud.limit.guava.GuavaLimitAspect;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -54,7 +54,7 @@ public class LimitAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnClass({com.google.common.util.concurrent.RateLimiter.class})
-	public GuavaLimitAspect guavaLimitAspect(){
+	public GuavaLimitAspect guavaLimitAspect() {
 		return new GuavaLimitAspect();
 	}
 }

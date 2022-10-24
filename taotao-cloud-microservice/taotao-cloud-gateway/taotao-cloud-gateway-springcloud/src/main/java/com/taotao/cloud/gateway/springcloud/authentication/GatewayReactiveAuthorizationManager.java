@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.gateway.springcloud.authentication;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.gateway.springcloud.exception.InvalidTokenException;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -46,7 +46,7 @@ public class GatewayReactiveAuthorizationManager implements
 
 	@Override
 	public Mono<AuthorizationDecision> check(Mono<Authentication> authentication,
-		AuthorizationContext authorizationContext) {
+											 AuthorizationContext authorizationContext) {
 		return authentication.map(auth -> {
 
 			if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {

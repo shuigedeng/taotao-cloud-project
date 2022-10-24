@@ -10,6 +10,7 @@ import cn.hutool.extra.pinyin.PinyinUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -45,21 +46,9 @@ import com.taotao.cloud.promotion.api.feign.IFeignPromotionApi;
 import com.taotao.cloud.promotion.api.model.vo.BasePromotionsVO;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.assertj.core.util.IterableUtil;
 import org.elasticsearch.action.ActionListener;
@@ -84,6 +73,18 @@ import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * 商品索引业务层实现
@@ -390,7 +391,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 	@Override
 	public UpdateRequest updateEsGoodsIndexPromotions(Long id, BasePromotionsVO promotion,
-		String key) {
+													  String key) {
 		EsGoodsIndex goodsIndex = findById(id);
 		if (goodsIndex != null) {
 			//更新索引
@@ -403,7 +404,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 	@Override
 	public Boolean updateEsGoodsIndexPromotions(List<Long> ids, BasePromotionsVO promotion,
-		String key) {
+												String key) {
 		BulkRequest bulkRequest = new BulkRequest();
 		LogUtils.info("更新商品索引的促销信息----------");
 		LogUtils.info("商品ids: {}", ids);
@@ -420,7 +421,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 	@Override
 	public Boolean updateEsGoodsIndexByList(List<PromotionGoodsVO> promotionGoodsList,
-		BasePromotionsVO promotion, String key) {
+											BasePromotionsVO promotion, String key) {
 		BulkRequest bulkRequest = new BulkRequest();
 		LogUtils.info("修改商品活动索引");
 		LogUtils.info("促销商品信息: {}", promotionGoodsList);
@@ -470,7 +471,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 	@Override
 	public Boolean deleteEsGoodsPromotionIndexByList(List<Long> skuIds,
-		PromotionTypeEnum promotionType) {
+													 PromotionTypeEnum promotionType) {
 		//批量删除活动索引
 		for (Long skuId : skuIds) {
 			EsGoodsIndex goodsIndex = findById(skuId);
@@ -544,7 +545,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 * @param promotionsKey 促销活动key
 	 */
 	private UpdateRequest removePromotionByPromotionKey(EsGoodsIndex goodsIndex,
-		String promotionsKey) {
+														String promotionsKey) {
 		Map<String, Object> promotionMap = goodsIndex.getPromotionMap();
 		if (promotionMap != null && !promotionMap.isEmpty()) {
 			//如果存在同促销ID的活动删除
@@ -622,7 +623,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 */
 	@Override
 	public List<Long> getPromotionIdByPromotionType(Long id,
-		PromotionTypeEnum promotionTypeEnum) {
+													PromotionTypeEnum promotionTypeEnum) {
 		Map<String, Object> promotionMap = this.getPromotionMap(id);
 		//如果没有促销信息，则返回新的
 		if (promotionMap == null || promotionMap.isEmpty()) {
@@ -649,7 +650,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 */
 	@Override
 	public EsGoodsIndex getResetEsGoodsIndex(GoodsSku goodsSku,
-		List<GoodsParamsDTO> goodsParamDTOS) {
+											 List<GoodsParamsDTO> goodsParamDTOS) {
 		EsGoodsIndex index = new EsGoodsIndex(goodsSku, goodsParamDTOS);
 
 		//获取活动信息
@@ -676,7 +677,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 * @param promotion  活动
 	 */
 	private UpdateRequest updateGoodsIndexPromotion(EsGoodsIndex goodsIndex, String key,
-		BasePromotionsVO promotion) {
+													BasePromotionsVO promotion) {
 		Map<String, Object> promotionMap;
 		//数据非空处理，如果空给一个新的信息
 		if (goodsIndex.getPromotionMap() == null || goodsIndex.getPromotionMap().isEmpty()) {
@@ -708,7 +709,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 * @param promotionMap 促销信息
 	 */
 	private UpdateRequest getGoodsIndexPromotionUpdateRequest(Long id,
-		Map<String, Object> promotionMap) {
+															  Map<String, Object> promotionMap) {
 		UpdateRequest updateRequest = new UpdateRequest();
 		updateRequest.index(getIndexName());
 		updateRequest.id(String.valueOf(id));
@@ -753,7 +754,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 * @param needRemoveKeys 需移除的促销活动
 	 */
 	private void removePromotionKey(String currentKey, Map<String, Object> promotionMap,
-		String... needRemoveKeys) {
+									String... needRemoveKeys) {
 		//判定是否需要移除
 		if (CharSequenceUtil.containsAny(currentKey, needRemoveKeys)) {
 			List<String> removeKeys = new ArrayList<>();

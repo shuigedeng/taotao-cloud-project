@@ -15,15 +15,16 @@
  */
 package com.taotao.cloud.captcha.service.impl;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
+
 import java.util.Objects;
 
 /**
- * CaptchaCacheServiceRedisImpl 
+ * CaptchaCacheServiceRedisImpl
  *
  * @author shuigedeng
  * @version 2021.9

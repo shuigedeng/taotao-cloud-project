@@ -16,7 +16,7 @@
 package com.taotao.cloud.data.jpa.base.service;
 
 import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
-import com.taotao.cloud.redis.model.CacheKey;
+import com.taotao.cloud.cache.redis.model.CacheKey;
 import org.springframework.lang.NonNull;
 
 import java.io.Serializable;

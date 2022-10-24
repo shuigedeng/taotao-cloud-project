@@ -2,14 +2,15 @@ package com.taotao.cloud.mq.stream.consumer.trigger;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.collection.CollectionUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.data.redis.core.DefaultTypedTuple;
+
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 延时队列工厂

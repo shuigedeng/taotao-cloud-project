@@ -1,14 +1,15 @@
 package com.taotao.cloud.gateway.springcloud.service.impl;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.gateway.springcloud.rule.BlackList;
 import com.taotao.cloud.gateway.springcloud.rule.RuleConstant;
 import com.taotao.cloud.gateway.springcloud.service.IRuleCacheService;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 /**
  * 规则缓存实现业务类

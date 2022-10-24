@@ -1,14 +1,7 @@
 package com.taotao.cloud.security.access;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.AccessDeniedException;
@@ -17,6 +10,14 @@ import org.springframework.security.access.vote.AbstractAccessDecisionManager;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 public class RoleExpressionAccessDecisionManager extends AbstractAccessDecisionManager {
 
@@ -42,7 +43,7 @@ public class RoleExpressionAccessDecisionManager extends AbstractAccessDecisionM
 	 */
 	@Override
 	public void decide(Authentication authentication, Object object,
-		Collection<ConfigAttribute> configAttributes)
+					   Collection<ConfigAttribute> configAttributes)
 		throws AccessDeniedException, InsufficientAuthenticationException {
 		final ConfigAttribute configAttribute = configAttributes.iterator().next();
 		String attribute = configAttribute.getAttribute();

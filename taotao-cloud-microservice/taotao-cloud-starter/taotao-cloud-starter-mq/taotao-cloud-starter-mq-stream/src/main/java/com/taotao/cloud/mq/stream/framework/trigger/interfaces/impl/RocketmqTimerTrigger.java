@@ -1,6 +1,7 @@
 package com.taotao.cloud.mq.stream.framework.trigger.interfaces.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.common.RandomUtils;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
@@ -10,13 +11,13 @@ import com.taotao.cloud.mq.stream.framework.trigger.delay.DelayQueueMachine;
 import com.taotao.cloud.mq.stream.framework.trigger.interfaces.TimeTrigger;
 import com.taotao.cloud.mq.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.mq.stream.framework.trigger.util.DelayQueueTools;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.List;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 延时任务实现
@@ -84,7 +85,7 @@ public class RocketmqTimerTrigger implements TimeTrigger {
 	 * @param topic        rocketmq topic
 	 */
 	private void addExecute(String executorName, Object param, Long triggerTime, String uniqueKey,
-		String topic) {
+							String topic) {
 
 		TimeTriggerMsg timeTriggerMsg = new TimeTriggerMsg(executorName, triggerTime, param,
 			uniqueKey, topic);
@@ -96,7 +97,7 @@ public class RocketmqTimerTrigger implements TimeTrigger {
 
 	@Override
 	public void edit(String executorName, Object param, Long oldTriggerTime, Long triggerTime,
-		String uniqueKey, int delayTime, String topic) {
+					 String uniqueKey, int delayTime, String topic) {
 		this.delete(executorName, oldTriggerTime, uniqueKey, topic);
 		this.addDelay(new TimeTriggerMsg(executorName, triggerTime, param, uniqueKey, topic));
 	}

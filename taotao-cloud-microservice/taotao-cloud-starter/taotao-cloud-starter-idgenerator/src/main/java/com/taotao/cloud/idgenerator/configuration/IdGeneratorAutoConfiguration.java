@@ -15,14 +15,14 @@
  */
 package com.taotao.cloud.idgenerator.configuration;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.idgenerator.properties.IdGeneratorProperties;
 import com.taotao.cloud.idgenerator.generator.RedisIdGenerator;
 import com.taotao.cloud.idgenerator.generator.RedisLockIdGenerator;
 import com.taotao.cloud.idgenerator.generator.ZookeeperIdGenerator;
+import com.taotao.cloud.idgenerator.properties.IdGeneratorProperties;
 import com.taotao.cloud.lock.support.DistributedLock;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

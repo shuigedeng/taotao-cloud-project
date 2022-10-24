@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.quartz.event;
 
-import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;

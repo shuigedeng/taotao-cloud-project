@@ -18,6 +18,7 @@ package com.taotao.cloud.captcha.support.behavior.renderer;
 
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.util.IdUtil;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.support.behavior.definition.AbstractBehaviorRenderer;
 import com.taotao.cloud.captcha.support.behavior.dto.JigsawCaptcha;
 import com.taotao.cloud.captcha.support.core.algorithm.GaussianBlur;
@@ -30,25 +31,20 @@ import com.taotao.cloud.captcha.support.core.exception.CaptchaHasExpiredExceptio
 import com.taotao.cloud.captcha.support.core.exception.CaptchaMismatchException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaParameterIllegalException;
 import com.taotao.cloud.captcha.support.core.provider.RandomProvider;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Transparency;
-import java.awt.image.BufferedImage;
-import java.time.Duration;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.time.Duration;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Description: 拼图滑块验证码处理器 </p>
@@ -155,7 +151,7 @@ public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer {
 	 * @return 滑块拼图验证码数据
 	 */
 	private Metadata draw(BufferedImage originalImage, BufferedImage templateImage,
-		String sliderImageBase64) {
+						  String sliderImageBase64) {
 
 		int originalImageWidth = originalImage.getWidth();
 		int originalImageHeight = originalImage.getHeight();
@@ -221,7 +217,7 @@ public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer {
 	 * @return 拼图坐标 {@link Coordinate}
 	 */
 	private Coordinate createImageMattingCoordinate(int originalImageWidth, int originalImageHeight,
-		int templateImageWidth, int templateImageHeight) {
+													int templateImageWidth, int templateImageHeight) {
 
 		int availableWidth = originalImageWidth - templateImageWidth;
 		int availableHeight = originalImageHeight - templateImageHeight;
@@ -252,7 +248,7 @@ public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer {
 	 * @param y             随机扣取坐标y
 	 */
 	private void mattingByTemplate(BufferedImage originalImage, BufferedImage templateImage,
-		BufferedImage jigsawImage, int x, int y) {
+								   BufferedImage jigsawImage, int x, int y) {
 		// 临时数组遍历用于高斯模糊存周边像素值
 		int[][] matrix = new int[AREA_SIZE][AREA_SIZE];
 		int[] values = new int[AREA_ARRAY_SIZE];
@@ -360,7 +356,7 @@ public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer {
 	}
 
 	private void addInterference(BufferedImage originalImage, String sliderImageBase64,
-		int position) {
+								 int position) {
 		while (true) {
 			String data = this.getResourceProvider().getRandomBase64TemplateImage();
 			if (!sliderImageBase64.equals(data)) {
@@ -380,7 +376,7 @@ public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer {
 	 * @param y             随机扣取坐标y
 	 */
 	private void interferenceByTemplate(BufferedImage originalImage, BufferedImage templateImage,
-		int x, int y) {
+										int x, int y) {
 		//临时数组遍历用于高斯模糊存周边像素值
 		int[][] matrix = new int[AREA_SIZE][AREA_SIZE];
 		int[] values = new int[AREA_ARRAY_SIZE];

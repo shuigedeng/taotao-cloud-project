@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.lock.support.DistributedLock;
-import com.taotao.cloud.redis.model.CacheKey;
+import com.taotao.cloud.cache.redis.model.CacheKey;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
