@@ -1,1 +1,1 @@
-com.taotao.cloud.quartz.configuration.QuartzJobAutoConfiguration
+com.taotao.cloud.job.quartz.configuration.QuartzJobAutoConfiguration
