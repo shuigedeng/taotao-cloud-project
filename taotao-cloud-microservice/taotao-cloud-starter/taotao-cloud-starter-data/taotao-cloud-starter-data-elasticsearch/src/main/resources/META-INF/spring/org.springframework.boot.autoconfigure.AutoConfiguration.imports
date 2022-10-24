@@ -1,1 +1,1 @@
-com.taotao.cloud.elasticsearch.configuration.ElasticsearchAutoConfiguration
+com.taotao.cloud.data.elasticsearch.configuration.ElasticsearchAutoConfiguration

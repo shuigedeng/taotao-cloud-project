@@ -1,1 +1,1 @@
-com.taotao.cloud.mongodb.configuration.MongodbAutoConfiguration
+com.taotao.cloud.data.mongodb.configuration.MongodbAutoConfiguration
