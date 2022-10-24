@@ -1,14 +1,15 @@
-package com.taotao.cloud.sys.biz.task.elastic;
+package com.taotao.cloud.sys.biz.job.elastic;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.sys.biz.task.elastic.TaoTaoDataflowJob.Foo;
+import com.taotao.cloud.sys.biz.job.elastic.TaoTaoDataflowJob.Foo;
+import org.apache.shardingsphere.elasticjob.api.ShardingContext;
+import org.apache.shardingsphere.elasticjob.dataflow.job.DataflowJob;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.shardingsphere.elasticjob.api.ShardingContext;
-import org.apache.shardingsphere.elasticjob.dataflow.job.DataflowJob;
-import org.springframework.stereotype.Component;
 
 /**
  * 淘淘数据流工作

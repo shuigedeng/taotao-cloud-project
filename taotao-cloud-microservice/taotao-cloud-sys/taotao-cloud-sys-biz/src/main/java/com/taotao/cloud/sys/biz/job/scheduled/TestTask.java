@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.task.scheduled;
+package com.taotao.cloud.sys.biz.job.scheduled;
 
 import org.springframework.stereotype.Component;
 

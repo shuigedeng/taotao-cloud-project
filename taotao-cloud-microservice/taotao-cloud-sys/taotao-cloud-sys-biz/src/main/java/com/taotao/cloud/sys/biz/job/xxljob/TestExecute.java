@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.task.xxljob;
+package com.taotao.cloud.sys.biz.job.xxljob;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;

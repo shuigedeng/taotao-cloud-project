@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.task.quartz;
+package com.taotao.cloud.sys.biz.job.quartz;
 
 import java.util.Date;
 import org.quartz.Job;
