@@ -17,10 +17,11 @@
 package com.taotao.cloud.cache.jetcache.properties;
 
 import com.google.common.base.MoreObjects;
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * jetcache metrics 配置
@@ -33,7 +34,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(JetCacheProperties.PREFIX)
 public class JetCacheProperties {
 
-	public static final String PREFIX = "taotao.cloud.jetcache";
+	public static final String PREFIX = "taotao.cloud.cache.jetcache";
 
 	/**
 	 * 开启 jetcache metrics，默认：true

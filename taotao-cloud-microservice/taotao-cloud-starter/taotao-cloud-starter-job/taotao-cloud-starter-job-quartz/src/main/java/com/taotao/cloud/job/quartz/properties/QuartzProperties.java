@@ -1,4 +1,4 @@
-package com.taotao.cloud.job.schedule.properties;
+package com.taotao.cloud.job.quartz.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -11,10 +11,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2022-02-09 16:51:07
  */
 @RefreshScope
-@ConfigurationProperties(prefix = ScheduledProperties.PREFIX)
-public class ScheduledProperties {
+@ConfigurationProperties(prefix = QuartzProperties.PREFIX)
+public class QuartzProperties {
 
-	public static final String PREFIX = "taotao.cloud.job.scheduled";
+	public static final String PREFIX = "taotao.cloud.job.quartz";
 
 	//是否开启
 	private Boolean enabled = true;

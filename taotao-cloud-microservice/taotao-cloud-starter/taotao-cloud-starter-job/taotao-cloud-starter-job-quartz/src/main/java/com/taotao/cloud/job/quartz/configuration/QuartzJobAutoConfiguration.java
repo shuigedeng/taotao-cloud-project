@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.job.quartz.event.DefaultQuartzEventListener;
 import com.taotao.cloud.job.quartz.event.RedisQuartzEventListener;
 import com.taotao.cloud.job.quartz.listener.QuartzListenerRegister;
+import com.taotao.cloud.job.quartz.properties.QuartzProperties;
 import com.taotao.cloud.job.quartz.utils.QuartzManager;
 import org.jetbrains.annotations.NotNull;
 import org.quartz.Scheduler;
@@ -29,6 +30,8 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -45,6 +48,8 @@ import org.springframework.stereotype.Component;
  * @since 2022-03-25 15:01:01
  */
 @AutoConfiguration
+@ConditionalOnProperty(prefix = QuartzProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@EnableConfigurationProperties(value = {QuartzProperties.class})
 public class QuartzJobAutoConfiguration implements ApplicationContextAware {
 
 	@Override

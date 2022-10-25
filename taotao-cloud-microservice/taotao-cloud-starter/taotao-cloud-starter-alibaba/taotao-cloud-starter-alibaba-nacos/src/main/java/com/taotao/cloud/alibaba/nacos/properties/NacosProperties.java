@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.alibaba.sentinel.properties;
+package com.taotao.cloud.alibaba.nacos.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * SentinelProperties
+ * SeataProperties
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-07 20:54:47
  */
 @RefreshScope
-@ConfigurationProperties(prefix = SentinelProperties.PREFIX)
-public class SentinelProperties {
+@ConfigurationProperties(prefix = NacosProperties.PREFIX)
+public class NacosProperties {
 
-	public static final String PREFIX = "taotao.cloud.alibaba.sentinel";
+	public static final String PREFIX = "taotao.cloud.alibaba.nacos";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	public boolean getEnabled() {
 		return enabled;

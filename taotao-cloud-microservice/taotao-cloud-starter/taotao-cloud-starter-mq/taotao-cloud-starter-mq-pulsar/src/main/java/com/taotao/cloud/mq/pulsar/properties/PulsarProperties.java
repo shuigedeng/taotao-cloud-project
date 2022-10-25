@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = PulsarProperties.PREFIX)
 public class PulsarProperties {
 
-	public static final String PREFIX = "taotao.cloud.pulsar";
+	public static final String PREFIX = "taotao.cloud.mq.pulsar";
 
 	private boolean enabled = false;
 

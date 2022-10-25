@@ -10,8 +10,7 @@ import org.springframework.core.env.Environment;
 @ConfigurationProperties(prefix = P6spyProperties.PREFIX)
 public class P6spyProperties implements EnvironmentAware {
 
-	public static final String PREFIX = "taotao.cloud.p6spy";
-	private Environment environment;
+	public static final String PREFIX = "taotao.cloud.data.p6spy";
 	private boolean enabled = true;
 
 	private String realdatasourceproperties;
@@ -332,7 +331,6 @@ public class P6spyProperties implements EnvironmentAware {
 
 	@Override
 	public void setEnvironment(Environment environment) {
-		this.environment = environment;
 
 		if (StrUtil.isBlank(this.logfile)) {
 			String userHome = environment.getProperty("user.home");

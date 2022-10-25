@@ -15,17 +15,11 @@
  */
 package com.taotao.cloud.cache.redis.configuration;
 
+import com.taotao.cloud.cache.redis.properties.CacheManagerProperties;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.cache.redis.properties.CacheProperties;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import jodd.util.StringPool;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
@@ -52,6 +46,13 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.lang.Nullable;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * TaoTaoCloudCacheAutoConfiguration
  *
@@ -62,7 +63,7 @@ import org.springframework.lang.Nullable;
 @EnableCaching
 @AutoConfiguration(after = RedisAutoConfiguration.class)
 @EnableConfigurationProperties({org.springframework.boot.autoconfigure.cache.CacheProperties.class})
-@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = CacheManagerProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CacheManagerAutoConfiguration extends CachingConfigurerSupport implements
 	InitializingBean {
 
@@ -81,8 +82,8 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 	private final RedisCacheConfiguration redisCacheConfiguration;
 
 	CacheManagerAutoConfiguration(RedisSerializer<Object> redisSerializer,
-		org.springframework.boot.autoconfigure.cache.CacheProperties cacheProperties,
-		ObjectProvider<RedisCacheConfiguration> redisCacheConfiguration) {
+								  org.springframework.boot.autoconfigure.cache.CacheProperties cacheProperties,
+								  ObjectProvider<RedisCacheConfiguration> redisCacheConfiguration) {
 		this.redisSerializer = redisSerializer;
 		this.cacheProperties = cacheProperties;
 		this.redisCacheConfiguration = redisCacheConfiguration.getIfAvailable();
@@ -94,6 +95,7 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 		return new CacheManagerCustomizers(customizers.getIfAvailable());
 	}
 
+	@Override
 	@Bean
 	public KeyGenerator keyGenerator() {
 		return (target, method, objects) -> {
@@ -110,7 +112,6 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 			return sb.toString();
 		};
 	}
-
 
 
 	/**
@@ -144,7 +145,7 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 
 	@Primary
 	@Bean(name = "redisCacheManager")
-	@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "type", havingValue = "redis", matchIfMissing = true)
+	@ConditionalOnProperty(prefix = CacheManagerProperties.PREFIX, name = "type", havingValue = "redis", matchIfMissing = true)
 	public CacheManager cacheManager(
 		CacheManagerCustomizers cacheManagerCustomizers,
 		ObjectProvider<RedisConnectionFactory> connectionFactoryObjectProvider) {
@@ -225,16 +226,16 @@ public class CacheManagerAutoConfiguration extends CachingConfigurerSupport impl
 	public static class RedisAutoCacheManager extends RedisCacheManager {
 
 		public RedisAutoCacheManager(RedisCacheWriter cacheWriter,
-			RedisCacheConfiguration defaultCacheConfiguration,
-			Map<String, RedisCacheConfiguration> initialCacheConfigurations,
-			boolean allowInFlightCacheCreation) {
+									 RedisCacheConfiguration defaultCacheConfiguration,
+									 Map<String, RedisCacheConfiguration> initialCacheConfigurations,
+									 boolean allowInFlightCacheCreation) {
 			super(cacheWriter, defaultCacheConfiguration, initialCacheConfigurations,
 				allowInFlightCacheCreation);
 		}
 
 		@Override
 		protected RedisCache createRedisCache(String name,
-			@Nullable RedisCacheConfiguration cacheConfig) {
+											  @Nullable RedisCacheConfiguration cacheConfig) {
 			if (StringUtils.isBlank(name) || !name.contains(StringPool.HASH)) {
 				return super.createRedisCache(name, cacheConfig);
 			}

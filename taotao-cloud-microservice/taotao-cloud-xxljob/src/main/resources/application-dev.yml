@@ -326,12 +326,13 @@ xxl:
 
 taotao:
   cloud:
-    p6spy:
-      enabled: true
-      dateformat: yyyy-MM-dd HH:mm:ss
-      driverlist: com.mysql.cj.jdbc.Driver
-      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.p6spy.engine.spy.appender.FileLogger
+    data:
+      p6spy:
+        enabled: true
+        dateformat: yyyy-MM-dd HH:mm:ss
+        driverlist: com.mysql.cj.jdbc.Driver
+        database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+        appender: com.p6spy.engine.spy.appender.FileLogger
     core:
       enabled: true
       collect-hook-enabled: true

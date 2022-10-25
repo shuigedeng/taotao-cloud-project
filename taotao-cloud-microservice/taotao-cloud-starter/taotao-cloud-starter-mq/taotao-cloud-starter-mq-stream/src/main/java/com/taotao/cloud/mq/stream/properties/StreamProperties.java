@@ -30,7 +30,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class StreamProperties {
 
 
-	public static final String PREFIX = "taotao.cloud.stream";
+	public static final String PREFIX = "taotao.cloud.mq.stream";
 
 	private boolean enabled = false;
 

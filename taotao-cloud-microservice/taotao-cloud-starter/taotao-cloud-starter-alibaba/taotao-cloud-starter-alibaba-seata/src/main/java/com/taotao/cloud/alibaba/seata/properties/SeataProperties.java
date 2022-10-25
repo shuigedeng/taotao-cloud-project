@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = SeataProperties.PREFIX)
 public class SeataProperties {
 
-	public static final String PREFIX = "taotao.cloud.seata";
+	public static final String PREFIX = "taotao.cloud.alibaba.seata";
 
 	private boolean enabled = false;
 
