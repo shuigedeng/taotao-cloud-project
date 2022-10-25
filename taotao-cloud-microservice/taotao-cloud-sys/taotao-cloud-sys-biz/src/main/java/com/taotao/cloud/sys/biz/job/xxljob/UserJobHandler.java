@@ -1,7 +1,5 @@
 /**
- * Project Name: my-projects
- * Package Name: com.taotao.cloud.sys.biz.job
- * Date: 2020/6/16 14:43
+ * Project Name: my-projects Package Name: com.taotao.cloud.sys.biz.job Date: 2020/6/16 14:43
  * Author: shuigedeng
  */
 package com.taotao.cloud.sys.biz.job.xxljob;
@@ -12,8 +10,6 @@ import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import io.seata.spring.annotation.GlobalTransactional;
-import org.springframework.stereotype.Component;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import org.springframework.stereotype.Component;
 
 /**
  * UserJobHandler
@@ -52,7 +49,7 @@ public class UserJobHandler {
 	}
 
 	@XxlJob("UserJobHandler")
-	@XxlRegister(cron = "59 59 23 * * ?")
+	@XxlRegister(cron = "59 59 23 * * ?", author = "shuigedeng")
 	public ReturnT<String> userJobHandler(String param) throws Exception {
 		XxlJobHelper.log("XXL-JOB, Hello World.");
 		XxlJobHelper.log("XXL-JOB, Hello World.1");
@@ -136,7 +133,8 @@ public class UserJobHandler {
 			Process process = processBuilder.start();
 			//Process process = Runtime.getRuntime().exec(command);
 
-			BufferedInputStream bufferedInputStream = new BufferedInputStream(process.getInputStream());
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(
+				process.getInputStream());
 			bufferedReader = new BufferedReader(new InputStreamReader(bufferedInputStream));
 
 			// command log
@@ -239,7 +237,8 @@ public class UserJobHandler {
 
 			// data
 			if (isPostMethod && data != null && data.trim().length() > 0) {
-				DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
+				DataOutputStream dataOutputStream = new DataOutputStream(
+					connection.getOutputStream());
 				dataOutputStream.write(data.getBytes("UTF-8"));
 				dataOutputStream.flush();
 				dataOutputStream.close();
@@ -252,7 +251,8 @@ public class UserJobHandler {
 			}
 
 			// result
-			bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+			bufferedReader = new BufferedReader(
+				new InputStreamReader(connection.getInputStream(), "UTF-8"));
 			StringBuilder result = new StringBuilder();
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {

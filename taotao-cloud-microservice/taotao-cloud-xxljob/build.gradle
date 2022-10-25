@@ -4,6 +4,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-freemarker"
@@ -17,7 +18,28 @@ dependencies {
     implementation "com.xuxueli:xxl-job-core"
 }
 
-mainClassName = "com.taotao.cloud.xxljob.biz.TaoTaoCloudXxlJobApplication"
+mainClassName = "com.taotao.cloud.xxljob.TaoTaoCloudXxlJobApplication"
 description = "xxljob模块"
 archivesBaseName = 'taotao-cloud-xxljob'
 
+configurations {
+    all {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        //resolutionStrategy {
+        //    //force "org.codehaus.groovy:groovy:4.0.0"
+        //    force "com.alibaba.nacos:nacos-client:2.1.0"
+        //}
+
+        //exclude group: "org.codehaus.groovy", module: "groovy"
+        //exclude group: "org.projectlombok", module: "lombok"
+        //exclude group: "log4j", module: "log4j"
+        //exclude group: "log4j", module: "slf4j-simple"
+        //exclude group: "org.slf4j", module: "slf4j-log4j12"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-api"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+}

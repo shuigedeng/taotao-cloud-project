@@ -83,7 +83,7 @@ redisson:
   #锁的模式.如果不设置, REENTRANT(可重入锁),FAIR(公平锁),MULTIPLE(联锁),REDLOCK(红锁),READ(读锁), WRITE(写锁)
   lock-model: auto
   #集群模式:SINGLE(单例),SENTINEL(哨兵),MASTERSLAVE(主从),CLUSTER(集群),REPLICATED(云托管)
-  model: cluster
+  model: single
   #Redisson的对象编码类是用于将对象进行序列化和反序列化，以实现对该对象在Redis里的读取和存储
   codec: "com.zengtengpeng.codec.MyJsonJacksonCodec"
   #这个线程池数量被所有RTopic对象监听器，RRemoteService调用者和RExecutorService任务共同共享。
@@ -287,7 +287,7 @@ dubbo:
     group: DUBBO_REGISTRY_GROUP
     cluster: CQ
     parameters:
-      namespace: taotao-cloud-dev
+      namespace: taotao-cloud-dubbo
       cluster-name: CQ
     timeout: 15000
     username: nacos
@@ -309,13 +309,13 @@ dubbo:
     status: server
     payload: 83886080
     threadpool: fixed
-    threadname: taotao-cloud-dubbo-executor
+    threadname: taotao-cloud-sys-dubbo-protocol-executor
     threads: 200
   provider:
     timeout: 3000
     version: ${taotaoCloudVersion}
     threads: 500
-    group: taotao-cloud-dev
+    group: taotao-cloud-sys-dev
     #延时注册服务（毫秒）
     #delay: 3000
     protocol: dubbo
@@ -325,7 +325,7 @@ dubbo:
     accesslog: ${user.home}/logs/${spring.application.name}/dubbo/provider.log
     owner: 981376577
     threadpool: fixed
-    threadname: taotao-cloud-dubbo-provider-executor
+    threadname: taotao-cloud-sys-dubbo-provider-executor
   consumer:
     check: false
     timeout: 3000
@@ -363,7 +363,7 @@ dubbo:
     password: nacos
     group: DUBBO_REGISTRY_GROUP
     parameters:
-      namespace: taotao-cloud-dev
+      namespace: taotao-cloud-dubbo
       cluster-name: CQ
   config-center:
     id: ${spring.application.name}
@@ -372,7 +372,7 @@ dubbo:
     password: nacos
     group: DUBBO_REGISTRY_GROUP
     parameters:
-      namespace: taotao-cloud-dev
+      namespace: taotao-cloud-dubbo
     check: false
   metrics:
     default: true
@@ -389,7 +389,7 @@ dubbo:
         enabled: true
         enableHttpServiceDiscovery: true
         metricsPort: 18081
-        metricsPath: /xx
+        metricsPath: /test
       pushgateway:
         enabled: false
 
@@ -397,7 +397,7 @@ seata:
   enabled: true
   application-id: ${spring.application.name}
   # 事务群组（可以每个应用独立取名，也可以使用相同的名字）
-  tx-service-group: taotao_cloud_tx_group
+  tx-service-group: taotao_cloud_sys_tx_group
   enable-auto-data-source-proxy: true
   use-jdk-proxy: false
   data-source-proxy-mode: AT
@@ -414,7 +414,7 @@ seata:
   config:
     type: nacos
     nacos:
-      namespace: 9dc5fed7-fcb3-4b27-b06b-a573e96a8706
+      namespace: taotao-cloud-seata
       server-addr: 192.168.10.210:8848
       group: SEATA_GROUP
       username: nacos
@@ -423,10 +423,10 @@ seata:
   registry:
     type: nacos
     nacos:
+      namespace: taotao-cloud-seata
       application: taotao-cloud-seata-server
       server-addr: 192.168.10.210:8848
       group: SEATA_GROUP
-      namespace: 9dc5fed7-fcb3-4b27-b06b-a573e96a8706
       username: nacos
       password: nacos
       cluster: CQ
@@ -1368,6 +1368,7 @@ taotao:
           #addresses: http://127.0.0.1:8080/xxl-job-admin
         executor:
           appname: ${spring.application.name}
+          title: ${spring.application.name}-executor
           #address: 127.0.0.1:9999
           #ip: 127.0.0.1
           port: 9999

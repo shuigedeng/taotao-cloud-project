@@ -7,6 +7,10 @@ import com.taotao.cloud.job.xxl.executor.model.XxlJobInfo;
 import com.taotao.cloud.job.xxl.executor.service.JobGroupService;
 import com.taotao.cloud.job.xxl.executor.service.JobInfoService;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -16,11 +20,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.MethodIntrospector;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * xxl汽车登记工作
@@ -52,7 +51,7 @@ public class XxlJobAutoRegister implements ApplicationListener<ApplicationReadyE
 		try {
 			addJobGroup();
 		} catch (Exception e) {
-			LogUtils.info("get xxl-job cookie error!");
+			LogUtils.error("get xxl-job cookie error!");
 			return;
 		}
 
@@ -75,12 +74,14 @@ public class XxlJobAutoRegister implements ApplicationListener<ApplicationReadyE
 		List<XxlJobGroup> jobGroups = jobGroupService.getJobGroup();
 		XxlJobGroup xxlJobGroup = jobGroups.get(0);
 
-		String[] beanDefinitionNames = applicationContext.getBeanNamesForType(Object.class, false, true);
+		String[] beanDefinitionNames = applicationContext.getBeanNamesForType(Object.class, false,
+			true);
 		for (String beanDefinitionName : beanDefinitionNames) {
 			Object bean = applicationContext.getBean(beanDefinitionName);
 
 			Map<Method, XxlJob> annotatedMethods = MethodIntrospector.selectMethods(bean.getClass(),
-				(MethodIntrospector.MetadataLookup<XxlJob>) method -> AnnotatedElementUtils.findMergedAnnotation(method, XxlJob.class));
+				(MethodIntrospector.MetadataLookup<XxlJob>) method -> AnnotatedElementUtils.findMergedAnnotation(
+					method, XxlJob.class));
 
 			for (Map.Entry<Method, XxlJob> methodXxlJobEntry : annotatedMethods.entrySet()) {
 				Method executeMethod = methodXxlJobEntry.getKey();
@@ -89,11 +90,13 @@ public class XxlJobAutoRegister implements ApplicationListener<ApplicationReadyE
 				//自动注册
 				if (executeMethod.isAnnotationPresent(XxlRegister.class)) {
 					XxlRegister xxlRegister = executeMethod.getAnnotation(XxlRegister.class);
-					List<XxlJobInfo> jobInfo = jobInfoService.getJobInfo(xxlJobGroup.getId(), xxlJob.value());
+					List<XxlJobInfo> jobInfo = jobInfoService.getJobInfo(xxlJobGroup.getId(),
+						xxlJob.value());
 					if (!jobInfo.isEmpty()) {
 						//因为是模糊查询，需要再判断一次
 						Optional<XxlJobInfo> first = jobInfo.stream()
-							.filter(xxlJobInfo -> xxlJobInfo.getExecutorHandler().equals(xxlJob.value()))
+							.filter(xxlJobInfo -> xxlJobInfo.getExecutorHandler()
+								.equals(xxlJob.value()))
 							.findFirst();
 						if (first.isPresent()) {
 							continue;
@@ -102,13 +105,15 @@ public class XxlJobAutoRegister implements ApplicationListener<ApplicationReadyE
 
 					XxlJobInfo xxlJobInfo = createXxlJobInfo(xxlJobGroup, xxlJob, xxlRegister);
 					Integer jobInfoId = jobInfoService.addJobInfo(xxlJobInfo);
-					LogUtils.info("xxljob 自动注册成功 XxlJobInfo: {}, jobInfoId: {}", xxlJobInfo, jobInfoId);
+					LogUtils.info("xxljob 自动注册成功 XxlJobInfo: {}, jobInfoId: {}", xxlJobInfo,
+						jobInfoId);
 				}
 			}
 		}
 	}
 
-	private XxlJobInfo createXxlJobInfo(XxlJobGroup xxlJobGroup, XxlJob xxlJob, XxlRegister xxlRegister) {
+	private XxlJobInfo createXxlJobInfo(XxlJobGroup xxlJobGroup, XxlJob xxlJob,
+		XxlRegister xxlRegister) {
 		XxlJobInfo xxlJobInfo = new XxlJobInfo();
 		xxlJobInfo.setJobGroup(xxlJobGroup.getId());
 		xxlJobInfo.setJobDesc(xxlRegister.jobDesc());
