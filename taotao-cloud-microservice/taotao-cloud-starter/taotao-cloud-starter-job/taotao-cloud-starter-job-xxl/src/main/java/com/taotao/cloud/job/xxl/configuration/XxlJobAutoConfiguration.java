@@ -19,18 +19,20 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.job.xxl.properties.XxlAdminProperties;
 import com.taotao.cloud.job.xxl.properties.XxlExecutorProperties;
 import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
+
+import java.util.stream.Collectors;
 
 /**
  * XxlJobConfiguration
@@ -54,9 +56,13 @@ public class XxlJobAutoConfiguration implements InitializingBean {
 		LogUtils.started(XxlJobAutoConfiguration.class, StarterName.JOB_XXL_STARTER);
 	}
 
+	@Autowired
+	private XxlJobProperties xxlJobProperties;
+	@Autowired(required = false)
+	private DiscoveryClient discoveryClient;
+
 	@Bean
-	public XxlJobSpringExecutor xxlJobSpringExecutor(XxlJobProperties xxlJobProperties,
-		Environment environment, DiscoveryClient discoveryClient) {
+	public XxlJobSpringExecutor xxlJobSpringExecutor() {
 
 		XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
 		XxlExecutorProperties executor = xxlJobProperties.getExecutor();
@@ -88,6 +94,10 @@ public class XxlJobAutoConfiguration implements InitializingBean {
 				.map(instance -> String.format("http://%s:%s", instance.getHost(), instance.getPort()))
 				.collect(Collectors.joining(","));
 			xxlJobSpringExecutor.setAdminAddresses(serverList);
+
+			XxlAdminProperties admin = xxlJobProperties.getAdmin();
+			admin.setAddresses(serverList);
+			xxlJobProperties.setAdmin(admin);
 		} else {
 			xxlJobSpringExecutor.setAdminAddresses(xxlJobProperties.getAdmin().getAddresses());
 		}

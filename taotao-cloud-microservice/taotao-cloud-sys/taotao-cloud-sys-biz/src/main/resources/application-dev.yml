@@ -1363,13 +1363,17 @@ taotao:
       xxl:
         enabled: true
         admin:
-          addresses:
+          username: admin
+          password: 123456
+          #addresses: http://127.0.0.1:8080/xxl-job-admin
         executor:
           appname: ${spring.application.name}
-          ip:
-          port: 1110
+          #address: 127.0.0.1:9999
+          #ip: 127.0.0.1
+          port: 9999
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
           log-path: ${user.home}/logs/${spring.application.name}/xxl-job
+          log-retention-days: 30
       elastic:
         enabled: false
     ip2region:

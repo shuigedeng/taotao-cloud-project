@@ -1,46 +1,50 @@
 package com.taotao.cloud.job.xxl.executor.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.executor.service.JobLoginService;
+import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.net.HttpCookie;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /**
- * @author : Hydra
- * @date: 2022/9/19 17:49
- * @version: 1.0
+ * 工作登录服务实现类
+ *
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-10-25 09:44:54
  */
 @Service
 public class JobLoginServiceImpl implements JobLoginService {
-
-	@Value("${xxl.job.admin.addresses}")
-	private String adminAddresses;
-
-	@Value("${xxl.job.admin.username}")
-	private String username;
-
-	@Value("${xxl.job.admin.password}")
-	private String password;
+	@Autowired
+	private XxlJobProperties xxlJobProperties;
 
 	private final Map<String, String> loginCookie = new HashMap<>();
 
 	@Override
 	public void login() {
-		String url = adminAddresses + "/login";
+		if (StrUtil.isBlank(xxlJobProperties.getAdmin().getAddresses())) {
+			throw new RuntimeException("xxl admin address url 不能为空");
+		}
+
+		String url = xxlJobProperties.getAdmin().getAddresses() + "/login";
 		HttpResponse response = HttpRequest.post(url)
-			.form("userName", username)
-			.form("password", password)
+			.form("userName", xxlJobProperties.getAdmin().getUsername())
+			.form("password", xxlJobProperties.getAdmin().getPassword())
 			.execute();
 		List<HttpCookie> cookies = response.getCookies();
 		Optional<HttpCookie> cookieOpt = cookies.stream()
-			.filter(cookie -> cookie.getName().equals("XXL_JOB_LOGIN_IDENTITY")).findFirst();
-		if (!cookieOpt.isPresent()) {
+			.filter(cookie -> "XXL_JOB_LOGIN_IDENTITY".equals(cookie.getName())).findFirst();
+		if (cookieOpt.isEmpty()) {
+			LogUtils.info("get xxl-job cookie error!");
 			throw new RuntimeException("get xxl-job cookie error!");
 		}
 
@@ -55,7 +59,11 @@ public class JobLoginServiceImpl implements JobLoginService {
 			if (cookieStr != null) {
 				return "XXL_JOB_LOGIN_IDENTITY=" + cookieStr;
 			}
-			login();
+			try {
+				login();
+			} catch (Exception e) {
+				LogUtils.error("获取xxljob cookieStr 错误, 次数: {}", i);
+			}
 		}
 		throw new RuntimeException("get xxl-job cookie error!");
 	}
