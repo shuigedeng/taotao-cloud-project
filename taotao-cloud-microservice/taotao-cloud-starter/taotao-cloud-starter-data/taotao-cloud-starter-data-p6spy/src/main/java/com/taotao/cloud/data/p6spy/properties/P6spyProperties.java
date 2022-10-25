@@ -1,14 +1,17 @@
 package com.taotao.cloud.data.p6spy.properties;
 
+import cn.hutool.core.util.StrUtil;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 
 @RefreshScope
 @ConfigurationProperties(prefix = P6spyProperties.PREFIX)
-public class P6spyProperties {
+public class P6spyProperties implements EnvironmentAware {
 
 	public static final String PREFIX = "taotao.cloud.p6spy";
-
+	private Environment environment;
 	private boolean enabled = true;
 
 	private String realdatasourceproperties;
@@ -41,7 +44,8 @@ public class P6spyProperties {
 	private String filter;
 	private String jndicontextproviderurl;
 	private String outagedetection = "true";
-	private String logfile = "${user.home}/logs/${spring.application.name}/p6spy/spy.log";
+	private String logfile;
+	//private String logfile = "${user.home}/logs/${spring.application.name}/p6spy/spy.log";
 	private String databaseDialectDateFormat = "yyyy-MM-dd HH:mm:ss";
 	private String excludebinary;
 	private String realdatasourceclass;
@@ -324,5 +328,17 @@ public class P6spyProperties {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	@Override
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+
+		if (StrUtil.isBlank(this.logfile)) {
+			String userHome = environment.getProperty("user.home");
+			String springApplicationName = environment.getProperty("spring.application.name");
+
+			this.logfile = userHome + "/logs/" + springApplicationName + "/p6spy/spy.log";
+		}
 	}
 }
