@@ -16,16 +16,20 @@
 package com.taotao.cloud.sys.biz.utils;
 
 import com.taotao.cloud.common.tree.TreeNode;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.sys.api.enums.ResourceTypeEnum;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuMetaVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.bo.MenuBO;
+import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -257,5 +261,239 @@ public class TreeUtil {
 	//		}
 	//	}
 	//}
+
+
+	/**
+	 * java8使用stream流将数据处理成树状结构（非递归）
+	 * <pre class="code">
+	 * "tree": [
+	 *        {
+	 * 	    "id": 1,
+	 * 	    "code": "110000000000",
+	 * 	    "name": "北京市",
+	 * 	    "pcode": "0",
+	 * 	    "pname": "中国",
+	 * 	    "abbreviate": "北京",
+	 * 	    "type": 1,
+	 * 	    "state": true,
+	 * 	    "sort": 0,
+	 * 	    "children": [
+	 *            {
+	 * 	            "id": 2,
+	 * 	            "code": "110100000000",
+	 * 	            "name": "市辖区",
+	 * 	            "pcode": "110000000000",
+	 * 	            "pname": "北京市",
+	 * 	            "abbreviate": "北京",
+	 * 	            "type": 2,
+	 * 	            "state": true,
+	 * 	            "sort": 0,
+	 * 	            "children": [
+	 *                    {
+	 * 	                    "id": 3,
+	 * 	                    "code": "110102000000",
+	 * 	                    "name": "东城区",
+	 * 	                    "pcode": "110100000000",
+	 * 	                    "pname": "市辖区",
+	 * 	                    "abbreviate": "东城",
+	 * 	                    "type": 3,
+	 * 	                    "state": true,
+	 * 	                    "sort": 0,
+	 * 	                    "children": null
+	 *                    },
+	 *                    {
+	 * 	                    "id": 4,
+	 * 	                    "code": "110101000000",
+	 * 	                    "name": "西城区",
+	 * 	                    "pcode": "110100000000",
+	 * 	                    "pname": "市辖区",
+	 * 	                    "abbreviate": "西城",
+	 * 	                    "type": 3,
+	 * 	                    "state": true,
+	 * 	                    "sort": 0,
+	 * 	                    "children": null
+	 *                    },
+	 *                    {
+	 * 	                    "id": 5,
+	 * 	                    "code": "110105000000",
+	 * 	                    "name": "朝阳区",
+	 * 	                    "pcode": "110100000000",
+	 * 	                    "pname": "市辖区",
+	 * 	                    "abbreviate": "朝阳",
+	 * 	                    "type": 3,
+	 * 	                    "state": true,
+	 * 	                    "sort": 0,
+	 * 	                    "children": null
+	 *                    },
+	 * 	            ]
+	 *            }
+	 * 	    ]
+	 *    },
+	 *    {
+	 * 	    "id": 19,
+	 * 	    "code": "120000000000",
+	 * 	    "name": "天津市",
+	 * 	    "pcode": "0",
+	 * 	    "pname": "中国",
+	 * 	    "abbreviate": "天津",
+	 * 	    "type": 1,
+	 * 	    "state": true,
+	 * 	    "sort": 0,
+	 * 	    "children": [
+	 *            {
+	 * 	            "id": 20,
+	 * 	            "code": "120100000000",
+	 * 	            "name": "市辖区",
+	 * 	            "pcode": "120000000000",
+	 * 	            "pname": "天津市",
+	 * 	            "abbreviate": "天津",
+	 * 	            "type": 2,
+	 * 	            "state": true,
+	 * 	            "sort": 0,
+	 * 	            "children": [
+	 *                    {
+	 * 	                    "id": 21,
+	 * 	                    "code": "120101000000",
+	 * 	                    "name": "和平区",
+	 * 	                    "pcode": "120100000000",
+	 * 	                    "pname": "市辖区",
+	 * 	                    "abbreviate": "和平",
+	 * 	                    "type": 3,
+	 * 	                    "state": true,
+	 * 	                    "sort": 0,
+	 * 	                    "children": null
+	 *                    },
+	 *                    {
+	 * 	                    "id": 22,
+	 * 	                    "code": "120102000000",
+	 * 	                    "name": "河东区",
+	 * 	                    "pcode": "120100000000",
+	 * 	                    "pname": "市辖区",
+	 * 	                    "abbreviate": "河东",
+	 * 	                    "type": 3,
+	 * 	                    "state": true,
+	 * 	                    "sort": 0,
+	 * 	                    "children": null
+	 *                    }
+	 * 	            ]
+	 *            }
+	 * 	    ]
+	 *    },
+	 * ]
+	 * </pre>
+	 *
+	 * @return {@link Map }<{@link String }, {@link List }<{@link Region }>>
+	 * @since 2022-10-25 09:05:07
+	 */
+	public Map<String, List<Region>> test2() {
+		Map<String, List<Region>> map = new HashMap<>();
+		// List<Region> regionList = list();
+		List<Region> regionList = new ArrayList<>();
+		List<Region> emptyList = new ArrayList<>();
+
+		// 将数组数据转为map结构，pcode为key
+		Map<String, List<Region>> regionMap = regionList.stream().map(item -> {
+			Region region = new Region();
+			BeanUtils.copyProperties(item, region);
+			return region;
+		}).collect(Collectors.groupingBy(Region::getCode, Collectors.toList()));
+		// 上面的Collectors.groupingBy将数据按Pcode分组，方便下面操作
+
+		// 封装树形结构并塞进emptyList数组中
+		regionMap.forEach((pcode, collect) -> {
+			if (pcode.equals("0")) {
+				emptyList.addAll(collect);
+			}
+			collect.forEach(item -> {
+				// item.setCodeTree(regionMap.get(item.getCode()));
+				// 因为上面根据pcode分组了，所以这里的collect是以pcode为key的map对象
+				// ,item则是当前遍历的pcode底下的children
+			});
+		});
+		map.put("tree", emptyList);
+		return map;
+	}
+
+
+	/**
+	 * java8使用stream流将数据处理成树状结构（非递归）
+	 * 如果数据是两张表A B，B表的parentId对应A表的id这种形式，可以用下面的方法：
+	 * <pre class="code">
+	 *  "data":
+	 *  [
+	 *       {
+	 *         "id": "1181729226915577857",
+	 *         "title": "第七章：I/O流",
+	 *         "children": [
+	 *           {
+	 *             "id": "1189471423678939138",
+	 *             "title": "test",
+	 *             "free": null
+	 *           },
+	 *           {
+	 *             "id": "1189476403626409986",
+	 *             "title": "22",
+	 *             "free": null
+	 *           }
+	 *         ]
+	 *       },
+	 *       {
+	 *         "id": "15",
+	 *         "title": "第一章：Java入门",
+	 *         "children": [
+	 *           {
+	 *             "id": "17",
+	 *             "title": "第一节：Java简介",
+	 *             "free": null
+	 *           },
+	 *           {
+	 *             "id": "18",
+	 *             "title": "第二节：表达式和赋值语句",
+	 *             "free": null
+	 *           },
+	 *           {
+	 *             "id": "19",
+	 *             "title": "第三节：String类",
+	 *             "free": null
+	 *           },
+	 *           {
+	 *             "id": "20",
+	 *             "title": "第四节：程序风格",
+	 *             "free": null
+	 *           }
+	 *         ]
+	 *       }
+	 * ]
+	 * </pre>
+	 *
+	 * @return {@link Map }<{@link String }, {@link List }<{@link Region }>>
+	 * @since 2022-10-25 09:05:07
+	 */
+	public List<Object> getChapterVideoByCourseId() {
+		// 	// 章节信息
+		// 	List<EduChapter> eduChapterList = eduChapterService.list(null);
+		//
+		// 	// 小节信息
+		// 	List<EduVideo> eduVideoList = eduVideoService.list(null);
+		//
+		// 	List<ChapterVo> chapterVoList = eduChapterList.stream().map(item1 -> {
+		// 		ChapterVo chapterVo = new ChapterVo();
+		// 		BeanUtils.copyProperties(item1, chapterVo);
+		// 		List<VideoVo> videoVoList = eduVideoList.stream()
+		// 			.filter(item2 -> item1.getId().equals(item2.getChapterId()))
+		// 			.map(item3 -> {
+		// 				VideoVo videoVo = new VideoVo();
+		// 				BeanUtils.copyProperties(item3, videoVo);
+		// 				return videoVo;
+		// 			}).collect(Collectors.toList());
+		// 		chapterVo.setChildren(videoVoList);
+		// 		return chapterVo;
+		// 	}).collect(Collectors.toList());
+		//
+		// 	return chapterVoList;
+		return null;
+	}
+
+
 }
 

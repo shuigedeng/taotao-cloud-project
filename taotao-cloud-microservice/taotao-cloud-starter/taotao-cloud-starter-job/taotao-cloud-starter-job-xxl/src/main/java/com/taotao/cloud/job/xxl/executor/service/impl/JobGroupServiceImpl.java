@@ -8,57 +8,53 @@ import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.job.xxl.executor.model.XxlJobGroup;
 import com.taotao.cloud.job.xxl.executor.service.JobGroupService;
 import com.taotao.cloud.job.xxl.executor.service.JobLoginService;
+import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /**
- * @author : Hydra
- * @date: 2022/9/19 17:34
- * @version: 1.0
+ * 工作集团服务实现类
+ *
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-10-25 09:44:42
  */
 @Service
 public class JobGroupServiceImpl implements JobGroupService {
 
-	@Value("${xxl.job.admin.addresses}")
-	private String adminAddresses;
-
-	@Value("${xxl.job.executor.appname}")
-	private String appName;
-
-	@Value("${xxl.job.executor.title}")
-	private String title;
+	@Autowired
+	private XxlJobProperties xxlJobProperties;
 
 	@Autowired
 	private JobLoginService jobLoginService;
 
 	@Override
 	public List<XxlJobGroup> getJobGroup() {
-		String url = adminAddresses + "/jobgroup/pageList";
+		String url = xxlJobProperties.getAdmin().getAddresses() + "/jobgroup/pageList";
 		HttpResponse response = HttpRequest.post(url)
-			.form("appname", appName)
-			.form("title", title)
+			.form("appname", xxlJobProperties.getExecutor().getAppname())
+			.form("title", xxlJobProperties.getExecutor().getTitle())
 			.cookie(jobLoginService.getCookie())
 			.execute();
 
 		String body = response.body();
 		JSONArray array = JSONUtil.parse(body).getByPath("data", JSONArray.class);
-		List<XxlJobGroup> list = array.stream()
+
+		return array.stream()
 			.map(o -> JSONUtil.toBean((JSONObject) o, XxlJobGroup.class))
 			.collect(Collectors.toList());
-
-		return list;
 	}
 
 	@Override
 	public boolean autoRegisterGroup() {
-		String url = adminAddresses + "/jobgroup/save";
+		String url = xxlJobProperties.getAdmin().getAddresses() + "/jobgroup/save";
 		HttpResponse response = HttpRequest.post(url)
-			.form("appname", appName)
-			.form("title", title)
+			.form("appname", xxlJobProperties.getExecutor().getAppname())
+			.form("title", xxlJobProperties.getExecutor().getTitle())
 			.cookie(jobLoginService.getCookie())
 			.execute();
 		Object code = JSONUtil.parse(response.body()).getByPath("code");
@@ -69,8 +65,8 @@ public class JobGroupServiceImpl implements JobGroupService {
 	public boolean preciselyCheck() {
 		List<XxlJobGroup> jobGroup = getJobGroup();
 		Optional<XxlJobGroup> has = jobGroup.stream()
-			.filter(xxlJobGroup -> xxlJobGroup.getAppname().equals(appName)
-				&& xxlJobGroup.getTitle().equals(title))
+			.filter(xxlJobGroup -> xxlJobGroup.getAppname().equals(xxlJobProperties.getExecutor().getAppname())
+				&& xxlJobGroup.getTitle().equals(xxlJobProperties.getExecutor().getTitle()))
 			.findAny();
 		return has.isPresent();
 	}

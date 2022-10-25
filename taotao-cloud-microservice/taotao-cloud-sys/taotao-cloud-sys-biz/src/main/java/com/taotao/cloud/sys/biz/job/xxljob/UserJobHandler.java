@@ -7,6 +7,7 @@
 package com.taotao.cloud.sys.biz.job.xxljob;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.job.xxl.executor.annotation.XxlRegister;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -51,6 +52,7 @@ public class UserJobHandler {
 	}
 
 	@XxlJob("UserJobHandler")
+	@XxlRegister(cron = "59 59 23 * * ?")
 	public ReturnT<String> userJobHandler(String param) throws Exception {
 		XxlJobHelper.log("XXL-JOB, Hello World.");
 		XxlJobHelper.log("XXL-JOB, Hello World.1");
@@ -76,6 +78,8 @@ public class UserJobHandler {
 	 * 1、简单任务示例（Bean模式）
 	 */
 	@XxlJob("demoJobHandler")
+	@XxlRegister(cron = "59 1-2 0 * * ?",
+		triggerStatus = 1)
 	public void demoJobHandler() throws Exception {
 		XxlJobHelper.log("XXL-JOB, Hello World.");
 
@@ -91,6 +95,9 @@ public class UserJobHandler {
 	 * 2、分片广播任务
 	 */
 	@XxlJob("shardingJobHandler")
+	@XxlRegister(cron = "0 0 0 * * ? *",
+		author = "hydra",
+		jobDesc = "测试job")
 	public void shardingJobHandler() throws Exception {
 
 		// 分片参数

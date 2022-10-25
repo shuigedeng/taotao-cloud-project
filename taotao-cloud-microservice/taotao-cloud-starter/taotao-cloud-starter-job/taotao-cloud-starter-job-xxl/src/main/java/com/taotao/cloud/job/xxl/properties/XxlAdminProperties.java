@@ -29,6 +29,14 @@ public class XxlAdminProperties {
 	 * 执行器将会使用该地址进行"执行器心跳注册"和"任务结果回调"；为空则关闭自动注册；
 	 */
 	private String addresses;
+	/**
+	 * 密码
+	 */
+	private String password;
+	/**
+	 * 用户名
+	 */
+	private String username;
 
 	public String getAddresses() {
 		return addresses;
@@ -36,5 +44,21 @@ public class XxlAdminProperties {
 
 	public void setAddresses(String addresses) {
 		this.addresses = addresses;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

@@ -11,30 +11,33 @@ import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.job.xxl.executor.model.XxlJobInfo;
 import com.taotao.cloud.job.xxl.executor.service.JobInfoService;
 import com.taotao.cloud.job.xxl.executor.service.JobLoginService;
+import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /**
- * @author : Hydra
- * @date: 2022/9/20 10:36
- * @version: 1.0
+ * 工作信息服务实现类
+ *
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-10-25 09:44:47
  */
 @Service
 public class JobInfoServiceImpl implements JobInfoService {
 
-	@Value("${xxl.job.admin.addresses}")
-	private String adminAddresses;
+	@Autowired
+	private XxlJobProperties xxlJobProperties;
 
 	@Autowired
 	private JobLoginService jobLoginService;
 
 	@Override
 	public List<XxlJobInfo> getJobInfo(Integer jobGroupId, String executorHandler) {
-		String url = adminAddresses + "/jobinfo/pageList";
+		String url = xxlJobProperties.getAdmin().getAddresses() + "/jobinfo/pageList";
 		HttpResponse response = HttpRequest.post(url)
 			.form("jobGroup", jobGroupId)
 			.form("executorHandler", executorHandler)
@@ -44,16 +47,15 @@ public class JobInfoServiceImpl implements JobInfoService {
 
 		String body = response.body();
 		JSONArray array = JSONUtil.parse(body).getByPath("data", JSONArray.class);
-		List<XxlJobInfo> list = array.stream()
+
+		return array.stream()
 			.map(o -> JSONUtil.toBean((JSONObject) o, XxlJobInfo.class))
 			.collect(Collectors.toList());
-
-		return list;
 	}
 
 	@Override
 	public Integer addJobInfo(XxlJobInfo xxlJobInfo) {
-		String url = adminAddresses + "/jobinfo/add";
+		String url = xxlJobProperties.getAdmin().getAddresses() + "/jobinfo/add";
 		Map<String, Object> paramMap = BeanUtil.beanToMap(xxlJobInfo);
 		HttpResponse response = HttpRequest.post(url)
 			.form(paramMap)

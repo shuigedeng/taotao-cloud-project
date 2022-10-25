@@ -26,6 +26,11 @@ package com.taotao.cloud.job.xxl.properties;
 public class XxlExecutorProperties {
 
 	/**
+	 * 执行器名称
+	 */
+	private String title;
+
+	/**
 	 * 执行器AppName [选填]：执行器心跳注册分组依据；为空则关闭自动注册
 	 */
 	private String appname;
@@ -59,6 +64,14 @@ public class XxlExecutorProperties {
 	 * 执行器日志保存天数 [选填] ：值大于3时生效，启用执行器Log文件定期清理功能，否则不生效；
 	 */
 	private Integer logRetentionDays = 30;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getAppname() {
 		return appname;
