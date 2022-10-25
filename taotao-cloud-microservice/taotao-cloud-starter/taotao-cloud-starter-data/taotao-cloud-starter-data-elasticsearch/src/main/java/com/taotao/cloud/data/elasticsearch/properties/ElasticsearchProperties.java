@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = ElasticsearchProperties.PREFIX)
 public class ElasticsearchProperties {
 
-	public static final String PREFIX = "taotao.cloud.elasticsearch";
+	public static final String PREFIX = "taotao.cloud.data.elasticsearch";
 
 	/**
 	 * Elasticsearch 总开关

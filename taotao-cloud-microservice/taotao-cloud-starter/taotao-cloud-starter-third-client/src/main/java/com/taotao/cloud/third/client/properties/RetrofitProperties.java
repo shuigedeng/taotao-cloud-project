@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = RetrofitProperties.PREFIX)
 public class RetrofitProperties {
 
-	public static final String PREFIX = "taotao.cloud.third.client.retrofit";
+	public static final String PREFIX = "taotao.cloud.third-client.retrofit";
 
 	private boolean enabled = false;
 

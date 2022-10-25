@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.cache.redis.configuration;
 
-import com.taotao.cloud.cache.redis.properties.CacheProperties;
+import com.taotao.cloud.cache.redis.properties.CacheManagerProperties;
 import com.taotao.cloud.cache.redis.stream.DefaultRStreamTemplate;
 import com.taotao.cloud.cache.redis.stream.RStreamListenerDetector;
 import com.taotao.cloud.cache.redis.stream.RStreamTemplate;
@@ -52,7 +52,7 @@ import java.time.Duration;
  * @since 2022-07-03 09:33:26
  */
 @AutoConfiguration
-@ConditionalOnProperty(prefix = CacheProperties.Stream.PREFIX, name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = CacheManagerProperties.Stream.PREFIX, name = "enable", havingValue = "true")
 public class RedisStreamAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -63,14 +63,14 @@ public class RedisStreamAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean
 	public StreamMessageListenerContainerOptions<String, MapRecord<String, String, byte[]>> streamMessageListenerContainerOptions(
-		CacheProperties properties,
+		CacheManagerProperties properties,
 		ObjectProvider<ErrorHandler> errorHandlerObjectProvider) {
 		StreamMessageListenerContainer.StreamMessageListenerContainerOptionsBuilder<String, MapRecord<String, String, byte[]>> builder = StreamMessageListenerContainerOptions
 			.builder()
 			.keySerializer(RedisSerializer.string())
 			.hashKeySerializer(RedisSerializer.string())
 			.hashValueSerializer(RedisSerializer.byteArray());
-		CacheProperties.Stream streamProperties = properties.getStream();
+		CacheManagerProperties.Stream streamProperties = properties.getStream();
 		// 批量大小
 		Integer pollBatchSize = streamProperties.getPollBatchSize();
 		if (pollBatchSize != null && pollBatchSize > 0) {
@@ -104,9 +104,9 @@ public class RedisStreamAutoConfiguration implements InitializingBean {
 		StreamMessageListenerContainer<String, MapRecord<String, String, byte[]>> streamMessageListenerContainer,
 		RedisTemplate<String, Object> redisTemplate,
 		ObjectProvider<ServerProperties> serverPropertiesObjectProvider,
-		CacheProperties properties,
+		CacheManagerProperties properties,
 		Environment environment) {
-		CacheProperties.Stream streamProperties = properties.getStream();
+		CacheManagerProperties.Stream streamProperties = properties.getStream();
 
 		// 消费组名称
 		String consumerGroup = streamProperties.getConsumerGroup();

@@ -17,7 +17,10 @@ package com.taotao.cloud.alibaba.nacos.configuration;
 
 import com.taotao.cloud.alibaba.nacos.listener.NacosConfigListener;
 import com.taotao.cloud.alibaba.nacos.listener.NacosServiceListener;
+import com.taotao.cloud.alibaba.nacos.properties.NacosProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -29,6 +32,8 @@ import org.springframework.context.annotation.Import;
  */
 @AutoConfiguration
 @Import({NacosConfigListener.class, NacosServiceListener.class})
+@EnableConfigurationProperties({NacosProperties.class})
+@ConditionalOnProperty(prefix = NacosProperties.PREFIX, name = "enabled", havingValue = "true")
 public class NacosListenerAutoConfiguration {
 
 }

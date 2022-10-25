@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = MongodbProperties.PREFIX)
 public class MongodbProperties {
 
-	public static final String PREFIX = "taotao.cloud.mongodb";
+	public static final String PREFIX = "taotao.cloud.data.mongodb";
 
 	/**
 	 * mongodb 总开关

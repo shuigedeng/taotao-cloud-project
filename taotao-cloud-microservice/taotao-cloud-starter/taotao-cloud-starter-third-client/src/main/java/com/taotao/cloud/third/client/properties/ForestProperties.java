@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = ForestProperties.PREFIX)
 public class ForestProperties {
 
-	public static final String PREFIX = "taotao.cloud.third.client.forest";
+	public static final String PREFIX = "taotao.cloud.third-client.forest";
 
 	private boolean enabled = false;
 

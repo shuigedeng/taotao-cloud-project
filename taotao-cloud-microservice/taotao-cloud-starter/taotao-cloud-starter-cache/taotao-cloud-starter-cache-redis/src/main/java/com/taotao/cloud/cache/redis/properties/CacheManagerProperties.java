@@ -17,10 +17,11 @@ package com.taotao.cloud.cache.redis.properties;
 
 import com.taotao.cloud.cache.redis.enums.CacheType;
 import com.taotao.cloud.cache.redis.enums.SerializerType;
-import java.time.Duration;
-import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+
+import java.time.Duration;
+import java.util.Map;
 
 /**
  * CustomCacheProperties
@@ -30,10 +31,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2021-09-07 21:15:21
  */
 @RefreshScope
-@ConfigurationProperties(prefix = CacheProperties.PREFIX)
-public class CacheProperties {
+@ConfigurationProperties(prefix = CacheManagerProperties.PREFIX)
+public class CacheManagerProperties {
 
-	public static final String PREFIX = "taotao.cloud.redis.cache";
+	public static final String PREFIX = "taotao.cloud.cache.redis.cache-manager";
 
 	private boolean enabled = true;
 
@@ -68,7 +69,7 @@ public class CacheProperties {
 
 	public static class Stream {
 
-		public static final String PREFIX = CacheProperties.PREFIX + ".stream";
+		public static final String PREFIX = CacheManagerProperties.PREFIX + ".stream";
 		/**
 		 * 是否开启 stream
 		 */

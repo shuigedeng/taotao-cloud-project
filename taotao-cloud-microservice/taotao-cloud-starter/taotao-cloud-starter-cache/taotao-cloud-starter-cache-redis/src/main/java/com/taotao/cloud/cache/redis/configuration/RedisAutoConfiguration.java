@@ -17,7 +17,7 @@ package com.taotao.cloud.cache.redis.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.cache.redis.enums.SerializerType;
-import com.taotao.cloud.cache.redis.properties.CacheProperties;
+import com.taotao.cloud.cache.redis.properties.CacheManagerProperties;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.JsonUtils;
@@ -52,7 +52,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @AutoConfiguration
 @ConditionalOnProperty(prefix = com.taotao.cloud.cache.redis.properties.RedisProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-@EnableConfigurationProperties({RedisProperties.class, CacheProperties.class, com.taotao.cloud.cache.redis.properties.RedisProperties.class})
+@EnableConfigurationProperties({RedisProperties.class, CacheManagerProperties.class, com.taotao.cloud.cache.redis.properties.RedisProperties.class})
 public class RedisAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -67,7 +67,7 @@ public class RedisAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnMissingBean(RedisSerializer.class)
-	public RedisSerializer<Object> redisSerializer(CacheProperties properties,
+	public RedisSerializer<Object> redisSerializer(CacheManagerProperties properties,
 												   ObjectProvider<ObjectMapper> objectProvider) {
 		SerializerType serializerType = properties.getSerializerType();
 

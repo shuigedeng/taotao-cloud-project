@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = RedisProperties.PREFIX)
 public class RedisProperties {
 
-	public static final String PREFIX = "taotao.cloud.redis";
+	public static final String PREFIX = "taotao.cloud.cache.redis";
 
 	private boolean enabled = true;
 

@@ -30,7 +30,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(CaffeineProperties.PREFIX)
 public class CaffeineProperties {
 
-	public static final String PREFIX = "taotao.cloud.caffeine";
+	public static final String PREFIX = "taotao.cloud.cache.caffeine";
 
 	/**
 	 * 开启

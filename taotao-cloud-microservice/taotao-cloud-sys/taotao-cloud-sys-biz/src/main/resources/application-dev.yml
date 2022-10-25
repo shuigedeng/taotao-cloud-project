@@ -1297,22 +1297,35 @@ taotao:
         web-context: true
         report: true
         ping: true
-    shardingsphere:
-      enabled: false
-    sentinel:
-      enabled: true
-    seata:
-      enabled: true
-    rocketmq:
-      enabled: false
-    redis:
-      cache:
+    alibaba:
+      nacos:
         enabled: true
-        type: redis
-    rabbitmq:
-      enabled: false
-    pulsar:
-      enabled: false
+      sentinel:
+        enabled: true
+      seata:
+        enabled: true
+    mq:
+      enabled: true
+      rocketmq:
+        enabled: true
+      rabbitmq:
+        enabled: true
+      kafka:
+        enabled: true
+      pulsar:
+        enabled: false
+      stream:
+        enabled: true
+    cache:
+      jetcache:
+        enabled: false
+      caffeine:
+        enabled: false
+      redis:
+        enabled: true
+        cache-manager:
+          enabled: true
+          type: redis
     pay:
       enabled: false
     #third:
@@ -1321,13 +1334,37 @@ taotao:
     #      enabled: true
     #    retrofit:
     #      enabled: true
-    p6spy:
-      enabled: true
-      dateformat: yyyy-MM-dd HH:mm:ss
-      driverlist: com.mysql.cj.jdbc.Driver
-      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.data.p6spy.logger.KafkaLogger
-      logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
+    data:
+      elasticsearch:
+        enabled: true
+      mybatis-plus:
+        enabled: true
+        auto-fill:
+          enabled: true
+        dynamic:
+          enabled: false
+        tenant:
+          enabled: false
+      jpa:
+        enabled: true
+        packages: com.taotao.cloud.sys.biz.model.entity
+        tenant:
+          enabled: false
+      shardingsphere:
+        enabled: false
+      mongodb:
+        enabled: true
+        #是否记录慢查询到数据库中
+        slowQuery: true
+        #慢查询最短时间,默认为1000毫秒
+        slowTime: 2000
+      p6spy:
+        enabled: true
+        dateformat: yyyy-MM-dd HH:mm:ss
+        driverlist: com.mysql.cj.jdbc.Driver
+        database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+        appender: com.taotao.cloud.data.p6spy.logger.KafkaLogger
+        logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
     oss:
       enabled: false
     springdoc:
@@ -1335,12 +1372,6 @@ taotao:
       group: ${spring.applicaion.name}
       version: ${taotaoCloudVersion}
       title: 系统管理模块
-    mongodb:
-      enabled: true
-      #是否记录慢查询到数据库中
-      slowQuery: true
-      #慢查询最短时间,默认为1000毫秒
-      slowTime: 2000
     metrics:
       enabled: false
       druid:
@@ -1377,6 +1408,10 @@ taotao:
           log-retention-days: 30
       elastic:
         enabled: false
+      quartz:
+        enabled: false
+      scheduled:
+        enabled: false
     ip2region:
       enabled: true
     monitor:
@@ -1399,24 +1434,8 @@ taotao:
         enabled: false
     elk:
       enabled: false
-    elasticsearch:
-      enabled: false
     dubbo:
       enabled: true
-    data:
-      mybatis-plus:
-        enabled: true
-        auto-fill:
-          enabled: true
-        dynamic:
-          enabled: false
-        tenant:
-          enabled: false
-      jpa:
-        enabled: true
-        packages: com.taotao.cloud.sys.biz.model.entity
-        tenant:
-          enabled: false
     core:
       enabled: true
     captcha:
@@ -1430,16 +1449,6 @@ taotao:
     security:
       ignore-url:
         - /sys/buyer/dict/test/{code}
-    mq:
-      enabled: true
-      kafka:
-        enabled: true
-      #rocketmq:
-      #  enabled: true
-      #  consumer:
-      #    topic: aaa
-      #  producer:
-      #    namespace: aaa
 
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割

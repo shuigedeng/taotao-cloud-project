@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = ShardingJdbcProperties.PREIX)
 public class ShardingJdbcProperties {
 
-	public static final String PREIX = "taotao.cloud.shardingsphere";
+	public static final String PREIX = "taotao.cloud.data.shardingsphere";
 
 	private boolean enabled = false;
 
