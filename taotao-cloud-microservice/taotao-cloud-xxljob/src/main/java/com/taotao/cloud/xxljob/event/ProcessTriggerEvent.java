@@ -15,8 +15,9 @@
  */
 package com.taotao.cloud.xxljob.event;
 
+import com.taotao.cloud.xxljob.core.model.XxlJobGroup;
+import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.core.model.XxlJobLog;
-import com.taotao.cloud.xxljob.core.trigger.XxlJobTrigger;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -28,13 +29,19 @@ import org.springframework.context.ApplicationEvent;
  */
 public class ProcessTriggerEvent extends ApplicationEvent {
 
-	private final XxlJobLog afterSaleLog;
+	private final XxlJobLog xxlJobLog;
+	private final XxlJobGroup group;
+	private final XxlJobInfo jobInfo;
+
 	private final long time;
 
-	public ProcessTriggerEvent(XxlJobTrigger xxlJobTrigger, XxlJobLog afterSaleLog, long time) {
-		super(xxlJobTrigger);
+	public ProcessTriggerEvent(XxlJobGroup group, XxlJobInfo jobInfo, XxlJobLog xxlJobLog, long time) {
+		super(xxlJobLog);
 
-		this.afterSaleLog = afterSaleLog;
+		this.xxlJobLog = xxlJobLog;
+		this.group = group;
+		this.jobInfo = jobInfo;
+
 		this.time = time;
 	}
 
@@ -42,7 +49,15 @@ public class ProcessTriggerEvent extends ApplicationEvent {
 		return time;
 	}
 
-	public XxlJobLog getAfterSaleLog() {
-		return afterSaleLog;
+	public XxlJobLog getXxlJobLog() {
+		return xxlJobLog;
+	}
+
+	public XxlJobGroup getGroup() {
+		return group;
+	}
+
+	public XxlJobInfo getJobInfo() {
+		return jobInfo;
 	}
 }
