@@ -16,12 +16,13 @@
 package com.taotao.cloud.core.endpoint;
 
 import cn.hutool.json.JSONObject;
-import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
 import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
+
+import javax.annotation.Nullable;
 
 /**
  * TaoTaoCloudEndPoint
@@ -30,8 +31,8 @@ import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
  * @version 2021.9
  * @since 2021-09-02 20:08:52
  */
-@Endpoint(id = "customPoint")
-public class CustomEndPoint {
+@Endpoint(id = "standardPoint")
+public class StandardEndPoint {
 
 	private String STATUS = "up";
 	private String DETAIL = "一切正常";

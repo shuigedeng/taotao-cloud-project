@@ -24,9 +24,6 @@ import com.taotao.cloud.idempotent.enums.IdempotentTypeEnum;
 import com.taotao.cloud.idempotent.exception.IdempotentException;
 import com.taotao.cloud.lock.support.DistributedLock;
 import com.taotao.cloud.lock.support.ZLock;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -37,6 +34,10 @@ import org.aspectj.lang.reflect.CodeSignature;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 注解执行器 处理重复请求 和串行指定条件的请求
@@ -212,6 +213,7 @@ public class IdempotentAspect {
 				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
 					|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
 					ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+					assert attributes != null;
 					HttpServletRequest request = attributes.getRequest();
 					//String rid = request.getHeader(HEADER_RID_KEY);
 					String rid = "111";

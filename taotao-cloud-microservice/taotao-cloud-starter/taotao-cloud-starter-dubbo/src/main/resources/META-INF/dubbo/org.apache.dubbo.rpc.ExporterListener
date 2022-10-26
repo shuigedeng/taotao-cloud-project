@@ -1,1 +1,1 @@
-dubboTraceFilter=com.taotao.cloud.dubbo.listener.DubboExporterListener
+dubboExporterListener=com.taotao.cloud.dubbo.listener.DubboExporterListener

@@ -17,6 +17,7 @@ package com.taotao.cloud.dubbo.router;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.URL;
+import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.cluster.Router;
 import org.apache.dubbo.rpc.cluster.RouterFactory;
@@ -28,12 +29,12 @@ import org.apache.dubbo.rpc.cluster.RouterFactory;
  * @version 2022.07
  * @since 2022-07-08 10:46:08
  */
-@Activate(order = 1)
+@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER})
 public class EnvRouterFactory implements RouterFactory {
- 
-    @Override
-    public Router getRouter(URL url) {
-        LogUtils.info("启动dubbo特性环境路由");
-        return new EnvRouter();
-    }
+
+	@Override
+	public Router getRouter(URL url) {
+		LogUtils.info("启动dubbo特性环境路由");
+		return new EnvRouter();
+	}
 }

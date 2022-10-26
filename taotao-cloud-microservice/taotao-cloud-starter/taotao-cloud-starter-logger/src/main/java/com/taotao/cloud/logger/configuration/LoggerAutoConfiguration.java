@@ -82,12 +82,12 @@ public class LoggerAutoConfiguration implements InitializingBean {
 		private RedisRepository redisRepository;
 
 		@Bean
-		public RequestLoggerListener requestLogListener(List<IRequestLoggerService> requestLoggerServices) {
+		public RequestLoggerListener requestLoggerListener(List<IRequestLoggerService> requestLoggerServices) {
 			return new RequestLoggerListener(requestLoggerServices);
 		}
 
 		@Bean
-		public RequestLoggerAspect requestLogAspect() {
+		public RequestLoggerAspect requestLoggerAspect() {
 			return new RequestLoggerAspect();
 		}
 

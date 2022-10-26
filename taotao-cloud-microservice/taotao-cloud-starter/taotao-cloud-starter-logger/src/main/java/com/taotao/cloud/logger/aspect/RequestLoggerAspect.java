@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.logger.aspect;
 
-import static com.taotao.cloud.common.model.DatePattern.NORM_DATETIME_PATTERN;
-
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.convert.ConvertException;
 import cn.hutool.core.util.ArrayUtil;
@@ -43,16 +41,6 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.logger.event.RequestLoggerEvent;
 import com.taotao.cloud.logger.properties.RequestLoggerProperties;
 import io.swagger.v3.oas.annotations.Operation;
-import java.lang.reflect.Method;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Consumer;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -74,6 +62,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Consumer;
+
+import static com.taotao.cloud.common.model.DatePattern.NORM_DATETIME_PATTERN;
 
 
 /**
@@ -171,7 +172,6 @@ public class RequestLoggerAspect {
 						requestLogger.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
 						requestLogger.setExDetail(r.getErrorMsg());
 					}
-
 				} catch (ConvertException e) {
 					LogUtils.error(e);
 				}
@@ -242,7 +242,7 @@ public class RequestLoggerAspect {
 
 	@NonNull
 	private com.taotao.cloud.logger.model.RequestLogger buildRequestLog(JoinPoint joinPoint,
-		RequestLogger requestLoggerAnnotation) {
+																		RequestLogger requestLoggerAnnotation) {
 		com.taotao.cloud.logger.model.RequestLogger requestLogger = new com.taotao.cloud.logger.model.RequestLogger();
 		ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(
 			RequestContextHolder.getRequestAttributes());
@@ -370,7 +370,7 @@ public class RequestLoggerAspect {
 	}
 
 	private void setDescription(JoinPoint joinPoint, RequestLogger requestLoggerAnnotation,
-		com.taotao.cloud.logger.model.RequestLogger requestLogger) {
+								com.taotao.cloud.logger.model.RequestLogger requestLogger) {
 		StringBuilder controllerDescription = new StringBuilder();
 		Operation operation = AnnotationUtils.findAnnotation(
 			((MethodSignature) joinPoint.getSignature()).getMethod(), Operation.class);

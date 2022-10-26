@@ -16,6 +16,7 @@
 package com.taotao.cloud.dubbo.checker;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.common.status.Status;
 import org.apache.dubbo.common.status.StatusChecker;
@@ -27,7 +28,7 @@ import org.apache.dubbo.common.status.StatusChecker;
  * @version 2022.07
  * @since 2022-07-08 10:18:23
  */
-@Activate
+@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER})
 public class DubboStatusChecker implements StatusChecker {
 
 	@Override

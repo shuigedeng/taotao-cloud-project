@@ -75,7 +75,7 @@ public class VersionLoadbalancerAutoConfiguration {
 		@Bean
 		@ConditionalOnMissingBean(IRuleChooser.class)
 		@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX + ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
-		public IRuleChooser customRuleChooser(ApplicationContext context) {
+		public IRuleChooser ruleChooser(ApplicationContext context) {
 			IRuleChooser chooser = new RoundRuleChooser();
 
 			if (org.apache.commons.lang3.StringUtils.isNotBlank(properties.getChooser())) {
@@ -84,7 +84,8 @@ public class VersionLoadbalancerAutoConfiguration {
 					chooser = (IRuleChooser) ruleClass.getDeclaredConstructor().newInstance();
 				} catch (ClassNotFoundException e) {
 					LogUtils.error("没有找到定义的选择器，将使用内置的选择器", e);
-				} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+				} catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+						 InvocationTargetException e) {
 					LogUtils.error("没法创建定义的选择器，将使用内置的选择器", e);
 				}
 			}

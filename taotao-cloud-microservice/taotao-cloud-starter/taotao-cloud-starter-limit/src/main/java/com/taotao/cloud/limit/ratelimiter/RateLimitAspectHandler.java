@@ -13,40 +13,47 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 速率限制方面处理程序
+ *
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-10-26 08:56:25
+ */
 @Aspect
 @Order(0)
 public class RateLimitAspectHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(RateLimitAspectHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(RateLimitAspectHandler.class);
 
-    private final RateLimiterService rateLimiterService;
-    private final RScript rScript;
+	private final RateLimiterService rateLimiterService;
+	private final RScript rScript;
 
-    public RateLimitAspectHandler(RedissonClient client, RateLimiterService lockInfoProvider) {
-        this.rateLimiterService = lockInfoProvider;
-        this.rScript = client.getScript();
-    }
+	public RateLimitAspectHandler(RedissonClient client, RateLimiterService rateLimiterService) {
+		this.rateLimiterService = rateLimiterService;
+		this.rScript = client.getScript();
+	}
 
-    @Around(value = "@annotation(rateLimit)")
-    public Object around(ProceedingJoinPoint joinPoint, RateLimit rateLimit) throws Throwable {
-        RateLimiterInfo limiterInfo = rateLimiterService.getRateLimiterInfo(joinPoint, rateLimit);
+	@Around(value = "@annotation(rateLimit)")
+	public Object around(ProceedingJoinPoint joinPoint, RateLimit rateLimit) throws Throwable {
+		RateLimiterInfo limiterInfo = rateLimiterService.getRateLimiterInfo(joinPoint, rateLimit);
 
-        List<Object> keys = new ArrayList<>();
-        keys.add(limiterInfo.getKey());
-        keys.add(limiterInfo.getRate());
-        keys.add(limiterInfo.getRateInterval());
-        List<Long> results = rScript.eval(RScript.Mode.READ_WRITE, LuaScript.getRateLimiterScript(), RScript.ReturnType.MULTI, keys);
-        boolean allowed = results.get(0) == 0L;
-        if (!allowed) {
-            logger.info("Trigger current limiting,key:{}", limiterInfo.getKey());
-            if (StringUtils.hasLength(rateLimit.fallbackFunction())) {
-                return rateLimiterService.executeFunction(rateLimit.fallbackFunction(), joinPoint);
-            }
-            long ttl = results.get(1);
-            throw new RateLimitException("Too Many Requests", ttl);
-        }
-        return joinPoint.proceed();
-    }
+		List<Object> keys = new ArrayList<>();
+		keys.add(limiterInfo.getKey());
+		keys.add(limiterInfo.getRate());
+		keys.add(limiterInfo.getRateInterval());
+		List<Long> results = rScript.eval(RScript.Mode.READ_WRITE, LuaScript.getRateLimiterScript(), RScript.ReturnType.MULTI, keys);
+		boolean allowed = results.get(0) == 0L;
+		if (!allowed) {
+			logger.info("Trigger current limiting,key:{}", limiterInfo.getKey());
+			if (StringUtils.hasLength(rateLimit.fallbackFunction())) {
+				return rateLimiterService.executeFunction(rateLimit.fallbackFunction(), joinPoint);
+			}
+			long ttl = results.get(1);
+			throw new RateLimitException("Too Many Requests", ttl);
+		}
+		return joinPoint.proceed();
+	}
 
 
 }

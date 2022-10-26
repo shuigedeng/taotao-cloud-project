@@ -19,13 +19,13 @@ import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 
 /**
- * CustomHealthIndicator 
+ * StandardHealthIndicator
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:02:46
  */
-public class CustomHealthIndicator implements HealthIndicator {
+public class StandardHealthIndicator implements HealthIndicator {
 
 	@Override
 	public Health health() {

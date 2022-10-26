@@ -20,14 +20,14 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
- * MBeanDemo 
+ * MBeanDemo
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:05:36
  */
-@ManagedResource(objectName = "com.taotao.cloud.core.endpoint:name=MBeanDemo")
-public class MBeanDemo {
+@ManagedResource(objectName = "com.taotao.cloud.core.endpoint:name=StandardMBean")
+public class StandardMBean {
 
 	@ManagedAttribute
 	public String getName() {

@@ -20,7 +20,6 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.annotation.ConditionalOnFeignUseOkHttp;
 import com.taotao.cloud.feign.okhttp.OkHttpResponseInterceptor;
-import java.util.Objects;
 import okhttp3.ConnectionPool;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -35,6 +34,7 @@ import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -54,55 +54,55 @@ import java.util.concurrent.TimeUnit;
 @ConditionalOnFeignUseOkHttp
 public class OkHttpAutoConfiguration {
 
-    private okhttp3.OkHttpClient okHttpClient;
+	private okhttp3.OkHttpClient okHttpClient;
 
-    @PostConstruct
-    public void postConstruct() {
-	    LogUtils.started(OkHttpAutoConfiguration.class, StarterName.FEIGN_STARTER);
-    }
+	@PostConstruct
+	public void postConstruct() {
+		LogUtils.started(OkHttpAutoConfiguration.class, StarterName.FEIGN_STARTER);
+	}
 
-    @Bean
-    @ConditionalOnMissingBean(ConnectionPool.class)
-    public ConnectionPool ConnectionPool(FeignHttpClientProperties feignHttpClientProperties, OkHttpClientConnectionPoolFactory connectionPoolFactory) {
-        int maxTotalConnections = feignHttpClientProperties.getMaxConnections();
-        long timeToLive = feignHttpClientProperties.getTimeToLive();
-        TimeUnit ttlUnit = feignHttpClientProperties.getTimeToLiveUnit();
-        return connectionPoolFactory.create(maxTotalConnections, timeToLive, ttlUnit);
-    }
+	@Bean
+	@ConditionalOnMissingBean(ConnectionPool.class)
+	public ConnectionPool connectionPool(FeignHttpClientProperties feignHttpClientProperties, OkHttpClientConnectionPoolFactory connectionPoolFactory) {
+		int maxTotalConnections = feignHttpClientProperties.getMaxConnections();
+		long timeToLive = feignHttpClientProperties.getTimeToLive();
+		TimeUnit ttlUnit = feignHttpClientProperties.getTimeToLiveUnit();
+		return connectionPoolFactory.create(maxTotalConnections, timeToLive, ttlUnit);
+	}
 
-    @Bean
-    public okhttp3.OkHttpClient okHttpClient(OkHttpClientFactory okHttpClientFactory, ConnectionPool connectionPool, FeignClientProperties feignClientProperties, FeignHttpClientProperties feignHttpClientProperties) {
-        FeignClientProperties.FeignClientConfiguration defaultConfig = feignClientProperties.getConfig().get("default");
+	@Bean
+	public okhttp3.OkHttpClient okHttpClient(OkHttpClientFactory okHttpClientFactory, ConnectionPool connectionPool, FeignClientProperties feignClientProperties, FeignHttpClientProperties feignHttpClientProperties) {
+		FeignClientProperties.FeignClientConfiguration defaultConfig = feignClientProperties.getConfig().get("default");
 		int readTimeout = 5000;
-		if(Objects.nonNull(defaultConfig)){
-			 readTimeout = defaultConfig.getReadTimeout();
+		if (Objects.nonNull(defaultConfig)) {
+			readTimeout = defaultConfig.getReadTimeout();
 		}
-        int connectTimeout = feignHttpClientProperties.getConnectionTimeout();
-        boolean disableSslValidation = feignHttpClientProperties.isDisableSslValidation();
-        boolean followRedirects = feignHttpClientProperties.isFollowRedirects();
-        this.okHttpClient = okHttpClientFactory.createBuilder(disableSslValidation)
-                .readTimeout(readTimeout, TimeUnit.MILLISECONDS)
-                .connectTimeout(connectTimeout, TimeUnit.MILLISECONDS)
-                .followRedirects(followRedirects)
-                .connectionPool(connectionPool)
-                .addInterceptor(new OkHttpResponseInterceptor())
-                .build();
+		int connectTimeout = feignHttpClientProperties.getConnectionTimeout();
+		boolean disableSslValidation = feignHttpClientProperties.isDisableSslValidation();
+		boolean followRedirects = feignHttpClientProperties.isFollowRedirects();
+		this.okHttpClient = okHttpClientFactory.createBuilder(disableSslValidation)
+			.readTimeout(readTimeout, TimeUnit.MILLISECONDS)
+			.connectTimeout(connectTimeout, TimeUnit.MILLISECONDS)
+			.followRedirects(followRedirects)
+			.connectionPool(connectionPool)
+			.addInterceptor(new OkHttpResponseInterceptor())
+			.build();
 
-        return this.okHttpClient;
-    }
+		return this.okHttpClient;
+	}
 
-    @Bean
-    public ClientHttpRequestFactory clientHttpRequestFactory(okhttp3.OkHttpClient okHttpClient) {
-        OkHttp3ClientHttpRequestFactory factory = new OkHttp3ClientHttpRequestFactory(okHttpClient);
-        LogUtils.info("Bean [Client Http Request Factory for OkHttp] Auto Configure.");
-        return factory;
-    }
+	@Bean
+	public ClientHttpRequestFactory clientHttpRequestFactory(okhttp3.OkHttpClient okHttpClient) {
+		OkHttp3ClientHttpRequestFactory factory = new OkHttp3ClientHttpRequestFactory(okHttpClient);
+		LogUtils.info("Bean [Client Http Request Factory for OkHttp] Auto Configure.");
+		return factory;
+	}
 
-    @PreDestroy
-    public void destroy() {
-        if (this.okHttpClient != null) {
-            this.okHttpClient.dispatcher().executorService().shutdown();
-            this.okHttpClient.connectionPool().evictAll();
-        }
-    }
+	@PreDestroy
+	public void destroy() {
+		if (this.okHttpClient != null) {
+			this.okHttpClient.dispatcher().executorService().shutdown();
+			this.okHttpClient.connectionPool().evictAll();
+		}
+	}
 }

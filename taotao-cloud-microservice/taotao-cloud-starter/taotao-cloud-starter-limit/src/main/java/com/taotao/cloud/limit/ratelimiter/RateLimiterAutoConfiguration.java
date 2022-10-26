@@ -1,21 +1,24 @@
 package com.taotao.cloud.limit.ratelimiter;
 
+import com.taotao.cloud.limit.ext.LimitProperties;
 import org.redisson.api.RedissonClient;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@AutoConfigureAfter(RedisAutoConfiguration.class)
+/**
+ * 速度限制器自动配置
+ *
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-10-26 08:56:50
+ */
+@EnableConfigurationProperties({LimitProperties.class})
+@ConditionalOnProperty(prefix = LimitProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@AutoConfiguration(after = RedisAutoConfiguration.class)
 public class RateLimiterAutoConfiguration {
-
-
-	@Bean
-	public RateLimiterService rateLimiterInfoProvider() {
-		return new RateLimiterService();
-	}
 
 	@Bean
 	public BizKeyProvider bizKeyProvider() {
@@ -23,10 +26,14 @@ public class RateLimiterAutoConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnBean(RedissonClient.class)
+	public RateLimiterService rateLimiterService(BizKeyProvider bizKeyProvider) {
+		return new RateLimiterService(bizKeyProvider);
+	}
+
+	@Bean
 	public RateLimitAspectHandler rateLimitAspectHandler(RedissonClient client,
-		RateLimiterService lockInfoProvider) {
-		return new RateLimitAspectHandler(client, lockInfoProvider);
+														 RateLimiterService rateLimiterService) {
+		return new RateLimitAspectHandler(client, rateLimiterService);
 	}
 
 }

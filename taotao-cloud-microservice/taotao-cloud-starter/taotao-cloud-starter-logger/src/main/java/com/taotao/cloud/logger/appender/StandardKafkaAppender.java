@@ -24,6 +24,13 @@ import com.github.rahulsinghai.logback.kafka.KafkaAppenderConfig;
 import com.github.rahulsinghai.logback.kafka.delivery.FailedDeliveryCallback;
 import com.google.common.base.Stopwatch;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.KafkaException;
+import org.apache.kafka.common.serialization.ByteArraySerializer;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -31,12 +38,6 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.KafkaException;
-import org.apache.kafka.common.serialization.ByteArraySerializer;
 
 /**
  * TaotaoKafkaAppender
@@ -45,7 +46,7 @@ import org.apache.kafka.common.serialization.ByteArraySerializer;
  * @version 2022.03
  * @since 2020/6/12 16:28
  */
-public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
+public class StandardKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 	/**
 	 * Kafka clients uses this prefix for its slf4j logging. This appender defers appends of any
@@ -54,9 +55,9 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	private static final String KAFKA_LOGGER_PREFIX = "org.apache.kafka.clients";
 	private static final int THRESHOLD = 1000;
 
-	private final Stopwatch  currentStopwatch = Stopwatch.createStarted();
-	private final Stopwatch  lastSuccessStopwatch = Stopwatch.createStarted();
-	private final Stopwatch  lastErrorStopwatch = Stopwatch.createStarted();
+	private final Stopwatch currentStopwatch = Stopwatch.createStarted();
+	private final Stopwatch lastSuccessStopwatch = Stopwatch.createStarted();
+	private final Stopwatch lastErrorStopwatch = Stopwatch.createStarted();
 
 	private final AtomicLong sendErrorNum = new AtomicLong(0L);
 	private final AtomicLong msgErrorNum = new AtomicLong(0L);
@@ -74,7 +75,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		}
 	};
 
-	public TaoTaoCloudKafkaAppender() {
+	public StandardKafkaAppender() {
 		// setting these as config values sidesteps an unnecessary warning (minor bug in KafkaProducer)
 		addProducerConfigValue(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
 			ByteArraySerializer.class.getName());
@@ -215,7 +216,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		long seconds = currentStopwatch.elapsed(TimeUnit.SECONDS);
 
 		long lastSeconds = lastErrorStopwatch.elapsed(TimeUnit.SECONDS);
-		long lastMinute =lastErrorStopwatch.elapsed(TimeUnit.MINUTES);
+		long lastMinute = lastErrorStopwatch.elapsed(TimeUnit.MINUTES);
 		long lastHour = lastErrorStopwatch.elapsed(TimeUnit.HOURS);
 
 		LogUtils.error("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", msg, num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);
@@ -228,7 +229,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		long seconds = currentStopwatch.elapsed(TimeUnit.SECONDS);
 
 		long lastSeconds = lastSuccessStopwatch.elapsed(TimeUnit.SECONDS);
-		long lastMinute =lastSuccessStopwatch.elapsed(TimeUnit.MINUTES);
+		long lastMinute = lastSuccessStopwatch.elapsed(TimeUnit.MINUTES);
 		long lastHour = lastSuccessStopwatch.elapsed(TimeUnit.HOURS);
 
 		LogUtils.info("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时, 最近一次用时{}秒 {}分 {}小时]", "系统日志消息发送成功", num, seconds, minute, hour, lastSeconds, lastMinute, lastHour);

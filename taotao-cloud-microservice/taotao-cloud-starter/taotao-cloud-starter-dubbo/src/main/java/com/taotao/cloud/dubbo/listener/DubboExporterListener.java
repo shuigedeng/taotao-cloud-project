@@ -29,7 +29,7 @@ import org.apache.dubbo.rpc.listener.ExporterListenerAdapter;
  * @version 2022.07
  * @since 2022-07-08 10:18:50
  */
-@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER}, order = 10002)
+@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER})
 public class DubboExporterListener extends ExporterListenerAdapter {
 
 	@Override

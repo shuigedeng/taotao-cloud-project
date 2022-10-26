@@ -23,13 +23,14 @@ import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.limit.annotation.Limit;
-import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
+
+import java.lang.reflect.Method;
 
 /**
  * LimitAspect
@@ -79,27 +80,25 @@ public class LimitAspect {
 		this.redisRepository = redisRepository;
 	}
 
-	@Around("execution(public * *(..)) && @annotation(com.taotao.cloud.limit.annotation.Limit)")
-	public Object around(ProceedingJoinPoint pjp) {
+	@Around(value = "@annotation(limit)")
+	public Object around(ProceedingJoinPoint pjp, Limit limit) {
 		MethodSignature signature = (MethodSignature) pjp.getSignature();
 		Method method = signature.getMethod();
-		Limit limitAnnotation = method.getAnnotation(Limit.class);
 
-		LimitType limitType = limitAnnotation.limitType();
-		String name = limitAnnotation.name();
-		int limitPeriod = limitAnnotation.period();
-		int limitCount = limitAnnotation.count();
+		LimitType limitType = limit.limitType();
+		String name = limit.name();
+		int limitPeriod = limit.period();
+		int limitCount = limit.count();
 
 		//根据限流类型获取不同的key ,如果不传我们会以方法名作为key
 		String key = switch (limitType) {
 			case IP -> RequestUtils.getHttpServletRequestIpAddress();
-			case CUSTOMER -> StrUtil.isBlank(limitAnnotation.key())
+			case CUSTOMER -> StrUtil.isBlank(limit.key())
 				? org.apache.commons.lang.StringUtils.upperCase(method.getName())
-				: limitAnnotation.key();
+				: limit.key();
 		};
 
-		ImmutableList<String> keys = ImmutableList.of(
-			StringUtils.join(limitAnnotation.prefix(), key));
+		ImmutableList<String> keys = ImmutableList.of(StringUtils.join(limit.prefix(), key));
 
 		try {
 			String luaScript = buildLuaScript();
