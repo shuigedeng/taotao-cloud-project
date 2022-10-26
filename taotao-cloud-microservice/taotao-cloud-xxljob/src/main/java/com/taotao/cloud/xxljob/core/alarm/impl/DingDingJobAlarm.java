@@ -12,11 +12,12 @@ import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.core.model.XxlJobLog;
 import com.taotao.cloud.xxljob.core.util.I18nUtil;
 import com.xxl.job.core.biz.model.ReturnT;
-import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 /**
  * job alarm by email
@@ -46,20 +47,19 @@ public class DingDingJobAlarm implements JobAlarm {
 
 		// email info
 		XxlJobGroup group = XxlJobAdminConfig.getAdminConfig().getXxlJobGroupDao()
-			.load(Integer.valueOf(info.getJobGroup()));
+			.load(info.getJobGroup());
 
 		StringBuilder str = new StringBuilder();
 		str.append("taotao-cloud-xxljob监控告警明细： \n");
 		str.append("[时间戳]: ").append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT)).append("\n");
-		str.append("["+I18nUtil.getString("jobinfo_field_jobgroup")+"] : ").append(group != null ? group.getTitle() : "null").append("\n");
-		str.append("["+I18nUtil.getString("jobinfo_field_id")+"] : ").append(info.getId()).append("\n");
-		str.append("["+I18nUtil.getString("jobinfo_field_jobdesc")+"] : ").append(info.getJobDesc()).append("\n");
-		str.append("["+I18nUtil.getString("jobconf_monitor_alarm_title")+"] : ").append(I18nUtil.getString("jobconf_monitor_alarm_type")).append("\n");
-		str.append("["+I18nUtil.getString("jobconf_monitor_alarm_content")+"] : ").append(alarmContent).append("\n");
+		str.append("[" + I18nUtil.getString("jobinfo_field_jobgroup") + "] : ").append(group != null ? group.getTitle() : "null").append("\n");
+		str.append("[" + I18nUtil.getString("jobinfo_field_id") + "] : ").append(info.getId()).append("\n");
+		str.append("[" + I18nUtil.getString("jobinfo_field_jobdesc") + "] : ").append(info.getJobDesc()).append("\n");
+		str.append("[" + I18nUtil.getString("jobconf_monitor_alarm_title") + "] : ").append(I18nUtil.getString("jobconf_monitor_alarm_type")).append("\n");
+		str.append("[" + I18nUtil.getString("jobconf_monitor_alarm_content") + "] : ").append(alarmContent).append("\n");
 
 		try {
-			sender.send(MessageSubType.TEXT,
-				DingerRequest.request(str.toString()));
+			sender.send(MessageSubType.TEXT, DingerRequest.request(str.toString()));
 		} catch (Exception e) {
 			LogUtils.error(e);
 			alarmResult = false;

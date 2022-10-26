@@ -275,14 +275,15 @@ spring:
   mail:
     host: smtp.qq.com
     port: 465
-    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:uxanoulvnsrabbce}
     username: 981376577@qq.com
-    from: 981376577@qq.com
-    protocol: smtps
     properties:
       mail:
+        transport:
+          protocol: smtp
         smtp:
           auth: true
+          port: ${spring.mail.port}
           starttls:
             enable: true
             required: true
@@ -337,6 +338,8 @@ taotao:
       enabled: true
       collect-hook-enabled: true
       context-restart-enabled: false
+      async:
+        enabled: true
     dinger:
       enabled: true
       httpclient:

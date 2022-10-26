@@ -15,14 +15,32 @@
  */
 package com.taotao.cloud.xxljob.event;
 
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.dingtalk.entity.DingerRequest;
+import com.taotao.cloud.dingtalk.enums.MessageSubType;
+import com.taotao.cloud.dingtalk.model.DingerSender;
+import com.taotao.cloud.xxljob.core.conf.XxlJobAdminConfig;
+import com.taotao.cloud.xxljob.core.model.XxlJobGroup;
+import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
+import com.taotao.cloud.xxljob.core.model.XxlJobLog;
+import com.taotao.cloud.xxljob.core.util.I18nUtil;
+import com.xxl.job.core.biz.model.ReturnT;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.context.event.EventListener;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import javax.mail.internet.MimeMessage;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * 异步监听售后日志事件
+ * 进程触发事件
  *
  * @author shuigedeng
  * @version 2022.04
@@ -32,12 +50,94 @@ import org.springframework.stereotype.Component;
 public class processTriggerListener {
 
 	@Autowired
-	private IAfterSaleLogService afterSaleLogService;
+	private DingerSender dingerSender;
+	@Autowired
+	private MailProperties mailProperties;
 
 	@Async
 	@EventListener(ProcessTriggerEvent.class)
-	public void saveAfterSaleLog(@NotNull ProcessTriggerEvent event) {
-		AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
-		afterSaleLogService.save(afterSaleLog);
+	public void processTriggerEventListener(@NotNull ProcessTriggerEvent event) {
+		XxlJobLog xxlJobLog = event.getXxlJobLog();
+		XxlJobInfo jobInfo = event.getJobInfo();
+		long time = event.getTime();
+
+		sendDingDing(xxlJobLog, jobInfo, time);
+		sendEmail(xxlJobLog, jobInfo, time);
+	}
+
+	private void sendDingDing(XxlJobLog jobLog, XxlJobInfo info, long time) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("执行日志信息", jobLog);
+		data.put("执行job信息", info);
+		data.put("执行时间", time);
+
+		String jsonData = JsonUtils.toJSONString(data);
+
+		dingerSender.send(MessageSubType.TEXT, DingerRequest.request(jsonData));
+	}
+
+	private void sendEmail(XxlJobLog jobLog, XxlJobInfo info, long time) {
+		// alarmContent
+		String alarmContent = "Alarm Job LogId=" + jobLog.getId();
+		if (jobLog.getTriggerCode() != ReturnT.SUCCESS_CODE) {
+			alarmContent += "<br>TriggerMsg=<br>" + jobLog.getTriggerMsg();
+		}
+		if (jobLog.getHandleCode() > 0 && jobLog.getHandleCode() != ReturnT.SUCCESS_CODE) {
+			alarmContent += "<br>HandleCode=" + jobLog.getHandleMsg();
+		}
+
+		XxlJobGroup group = XxlJobAdminConfig.getAdminConfig().getXxlJobGroupDao().load(info.getJobGroup());
+		String personal = I18nUtil.getString("admin_name_full");
+		String title = I18nUtil.getString("jobconf_monitor");
+		String content = MessageFormat.format(loadEmailJobAlarmTemplate(),
+			group != null ? group.getTitle() : "null",
+			info.getId(),
+			info.getJobDesc(),
+			time,
+			alarmContent);
+
+		// make mail
+		try {
+			MimeMessage mimeMessage = XxlJobAdminConfig.getAdminConfig().getMailSender().createMimeMessage();
+
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+			helper.setFrom(mailProperties.getUsername());
+			helper.setTo("981376577@qq.com");
+			helper.setSubject(title);
+			helper.setText(content, true);
+
+			XxlJobAdminConfig.getAdminConfig().getMailSender().send(mimeMessage);
+		} catch (Exception e) {
+			LogUtils.error(">>>>>>>>>>> xxl-job, job fail alarm email send error, JobLogId:{}", jobLog.getId(), e);
+		}
+	}
+
+	/**
+	 * load email job alarm template
+	 */
+	private static String loadEmailJobAlarmTemplate() {
+		return "<h5>" + I18nUtil.getString("jobconf_monitor_detail") + "：</span>" +
+			"<table border=\"1\" cellpadding=\"3\" style=\"border-collapse:collapse; width:80%;\" >\n" +
+			"   <thead style=\"font-weight: bold;color: #ffffff;background-color: #ff8c00;\" >" +
+			"      <tr>\n" +
+			"         <td width=\"20%\" >" + I18nUtil.getString("jobinfo_field_jobgroup") + "</td>\n" +
+			"         <td width=\"10%\" >" + I18nUtil.getString("jobinfo_field_id") + "</td>\n" +
+			"         <td width=\"10%\" >" + I18nUtil.getString("jobinfo_field_jobdesc") + "</td>\n" +
+			"         <td width=\"10%\" >" + "执行时间" + "</td>\n" +
+			"         <td width=\"10%\" >" + I18nUtil.getString("jobconf_monitor_alarm_title") + "</td>\n" +
+			"         <td width=\"40%\" >" + I18nUtil.getString("jobconf_monitor_alarm_content") + "</td>\n" +
+			"      </tr>\n" +
+			"   </thead>\n" +
+			"   <tbody>\n" +
+			"      <tr>\n" +
+			"         <td>{0}</td>\n" +
+			"         <td>{1}</td>\n" +
+			"         <td>{2}</td>\n" +
+			"         <td>{3}</td>\n" +
+			"         <td>" + I18nUtil.getString("jobconf_monitor_alarm_type") + "</td>\n" +
+			"         <td>{4}</td>\n" +
+			"      </tr>\n" +
+			"   </tbody>\n" +
+			"</table>";
 	}
 }

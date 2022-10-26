@@ -8,15 +8,18 @@ import com.taotao.cloud.xxljob.core.model.XxlJobLog;
 import com.taotao.cloud.xxljob.core.route.ExecutorRouteStrategyEnum;
 import com.taotao.cloud.xxljob.core.scheduler.XxlJobScheduler;
 import com.taotao.cloud.xxljob.core.util.I18nUtil;
+import com.taotao.cloud.xxljob.event.ProcessTriggerEvent;
 import com.xxl.job.core.biz.ExecutorBiz;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.biz.model.TriggerParam;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.util.IpUtil;
 import com.xxl.job.core.util.ThrowableUtil;
-import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * xxl-job trigger Created by xuxueli on 17/7/13.
@@ -36,11 +39,11 @@ public class XxlJobTrigger {
 	 * @param addressList           null: use executor addressList not null: cover
 	 */
 	public static void trigger(int jobId,
-		TriggerTypeEnum triggerType,
-		int failRetryCount,
-		String executorShardingParam,
-		String executorParam,
-		String addressList) {
+							   TriggerTypeEnum triggerType,
+							   int failRetryCount,
+							   String executorShardingParam,
+							   String executorParam,
+							   String addressList) {
 
 		// load data
 		XxlJobInfo jobInfo = XxlJobAdminConfig.getAdminConfig().getXxlJobInfoDao().loadById(jobId);
@@ -108,7 +111,7 @@ public class XxlJobTrigger {
 	 * @param total               sharding index
 	 */
 	private static void processTrigger(XxlJobGroup group, XxlJobInfo jobInfo,
-		int finalFailRetryCount, TriggerTypeEnum triggerType, int index, int total) {
+									   int finalFailRetryCount, TriggerTypeEnum triggerType, int index, int total) {
 		Stopwatch stopwatch = Stopwatch.createStarted();
 
 		// param
@@ -219,7 +222,10 @@ public class XxlJobTrigger {
 		jobLog.setTriggerCode(triggerResult.getCode());
 		jobLog.setTriggerMsg(triggerMsgSb.toString());
 		XxlJobAdminConfig.getAdminConfig().getXxlJobLogDao().updateTriggerInfo(jobLog);
-		
+
+		XxlJobAdminConfig.getAdminConfig().getApplicationEventPublisher()
+			.publishEvent(new ProcessTriggerEvent(group, jobInfo, jobLog, stopwatch.elapsed(TimeUnit.MILLISECONDS)));
+
 		logger.debug(">>>>>>>>>>> xxl-job trigger end, jobId:{}", jobLog.getId());
 	}
 
