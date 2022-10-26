@@ -1326,14 +1326,11 @@ taotao:
         cache-manager:
           enabled: true
           type: redis
-    pay:
-      enabled: false
-    #third:
-    #  client:
-    #    forest:
-    #      enabled: true
-    #    retrofit:
-    #      enabled: true
+    third-client:
+      forest:
+        enabled: false
+      retrofit:
+        enabled: false
     data:
       elasticsearch:
         enabled: true

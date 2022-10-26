@@ -37,7 +37,7 @@ import org.apache.dubbo.rpc.RpcException;
  * @version 2022.07
  * @since 2022-07-08 10:18:45
  */
-@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER}, value = "dubboTraceFilter", order = 10001)
+@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER})
 public class DubboTraceFilter implements Filter {
 
 	@Override
@@ -64,6 +64,7 @@ public class DubboTraceFilter implements Filter {
 				invocation.setAttachment(CommonConstant.TAOTAO_CLOUD_TRACE_ID, traceId);
 			}
 		}
+		
 		try {
 			return invoker.invoke(invocation);
 		} finally {

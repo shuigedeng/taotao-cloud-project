@@ -33,6 +33,9 @@ public class DubboProperties {
 
 	private boolean enabled = true;
 
+	private boolean requestLog = true;
+	
+
 	public boolean getEnabled() {
 		return enabled;
 	}
