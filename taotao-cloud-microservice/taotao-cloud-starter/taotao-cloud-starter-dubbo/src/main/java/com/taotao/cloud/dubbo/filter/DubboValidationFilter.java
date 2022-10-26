@@ -15,16 +15,9 @@
  */
 package com.taotao.cloud.dubbo.filter;
 
-import static org.apache.dubbo.common.constants.CommonConstants.CONSUMER;
-import static org.apache.dubbo.common.constants.CommonConstants.PROVIDER;
-import static org.apache.dubbo.common.constants.FilterConstants.VALIDATION_KEY;
-
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
+import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.ConfigUtils;
@@ -37,6 +30,13 @@ import org.apache.dubbo.rpc.RpcException;
 import org.apache.dubbo.validation.Validation;
 import org.apache.dubbo.validation.Validator;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
+import java.util.Set;
+
+import static org.apache.dubbo.common.constants.FilterConstants.VALIDATION_KEY;
+
 /**
  * CustomValidationFilter
  *
@@ -44,7 +44,7 @@ import org.apache.dubbo.validation.Validator;
  * @version 2021.10
  * @since 2022-03-10 13:36:55
  */
-@Activate(group = {CONSUMER, PROVIDER})
+@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER})
 public class DubboValidationFilter implements Filter {
 
 	private Validation validation;

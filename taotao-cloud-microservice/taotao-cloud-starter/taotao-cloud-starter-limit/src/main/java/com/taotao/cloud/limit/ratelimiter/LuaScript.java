@@ -1,12 +1,20 @@
 package com.taotao.cloud.limit.ratelimiter;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StreamUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
+/**
+ * lua脚本
+ *
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-10-26 08:56:57
+ */
 public final class LuaScript {
 
 	private LuaScript() {
@@ -20,7 +28,7 @@ public final class LuaScript {
 		InputStream in = Thread.currentThread().getContextClassLoader()
 			.getResourceAsStream(RATE_LIMITER_FILE_PATH);
 		try {
-			rateLimiterScript =  StreamUtils.copyToString(in, StandardCharsets.UTF_8);
+			rateLimiterScript = StreamUtils.copyToString(in, StandardCharsets.UTF_8);
 		} catch (IOException ignored) {
 
 		}
@@ -37,7 +45,7 @@ public final class LuaScript {
 			local limitResult = 0;
 			local ttlResult = 0;
 			local currValue = redis.call('incr', rateLimitKey);
-			
+						
 			if (currValue == 1) then
 			    redis.call('expire', rateLimitKey, rateInterval);
 			    limitResult = 0;
@@ -47,7 +55,7 @@ public final class LuaScript {
 			        ttlResult = redis.call('ttl', rateLimitKey);
 			    end
 			end
-			
+						
 			return { limitResult, ttlResult }
 			""";
 	}

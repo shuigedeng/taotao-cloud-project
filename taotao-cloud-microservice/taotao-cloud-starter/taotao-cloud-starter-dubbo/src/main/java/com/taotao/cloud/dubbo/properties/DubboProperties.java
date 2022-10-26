@@ -34,7 +34,18 @@ public class DubboProperties {
 	private boolean enabled = true;
 
 	private boolean requestLog = true;
-	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public boolean isRequestLog() {
+		return requestLog;
+	}
+
+	public void setRequestLog(boolean requestLog) {
+		this.requestLog = requestLog;
+	}
 
 	public boolean getEnabled() {
 		return enabled;

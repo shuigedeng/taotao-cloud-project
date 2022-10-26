@@ -29,7 +29,7 @@ import org.apache.dubbo.rpc.listener.InvokerListenerAdapter;
  * @version 2022.07
  * @since 2022-07-08 10:18:59
  */
-@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER}, order = 10003)
+@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER})
 public class DubboInvokerListener extends InvokerListenerAdapter {
 
 	@Override

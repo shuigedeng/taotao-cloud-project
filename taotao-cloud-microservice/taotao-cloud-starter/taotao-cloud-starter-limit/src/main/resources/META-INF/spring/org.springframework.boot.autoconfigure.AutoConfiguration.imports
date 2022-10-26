@@ -1,1 +1,2 @@
 com.taotao.cloud.limit.configuration.LimitAutoConfiguration
+com.taotao.cloud.limit.ratelimiter.RateLimiterAutoConfiguration

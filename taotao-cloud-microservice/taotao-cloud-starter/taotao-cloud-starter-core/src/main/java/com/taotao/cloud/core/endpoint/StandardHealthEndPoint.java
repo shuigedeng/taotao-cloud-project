@@ -15,27 +15,27 @@
  */
 package com.taotao.cloud.core.endpoint;
 
-import com.taotao.cloud.core.endpoint.indicator.CustomHealthIndicator;
+import com.taotao.cloud.core.endpoint.indicator.StandardHealthIndicator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
 import org.springframework.boot.actuate.health.Health;
 
 /**
- * CustomEndPoint
+ * StandardHealthEndPoint
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 20:13:40
  */
-@WebEndpoint(id = "customHealth")
-public class CustomHealthEndPoint {
+@WebEndpoint(id = "standardHealth")
+public class StandardHealthEndPoint {
 
 	@Autowired
-	private CustomHealthIndicator customHealthIndicator;
+	private StandardHealthIndicator standardHealthIndicator;
 
 	@ReadOperation
 	public Health health() {
-		return customHealthIndicator.getHealth(true);
+		return standardHealthIndicator.getHealth(true);
 	}
 }

@@ -17,19 +17,20 @@ package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.core.endpoint.CustomHealthEndPoint;
 import com.taotao.cloud.core.endpoint.RequestMappingEndPoint;
-import com.taotao.cloud.core.endpoint.indicator.CustomHealthIndicator;
-import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
-import com.taotao.cloud.core.endpoint.mbean.MBeanDemo;
-import com.taotao.cloud.core.endpoint.CustomEndPoint;
+import com.taotao.cloud.core.endpoint.StandardEndPoint;
+import com.taotao.cloud.core.endpoint.StandardHealthEndPoint;
+import com.taotao.cloud.core.endpoint.StandardMbeanRegistrar;
+import com.taotao.cloud.core.endpoint.indicator.StandardHealthIndicator;
+import com.taotao.cloud.core.endpoint.mbean.StandardMBean;
 import com.taotao.cloud.core.properties.EndpointProperties;
-import javax.management.MalformedObjectNameException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+
+import javax.management.MalformedObjectNameException;
 
 /**
  * EndPointConfiguration
@@ -49,32 +50,32 @@ public class EndPointAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public CustomHealthIndicator customHealthIndicator() {
-		return new CustomHealthIndicator();
+	public StandardHealthIndicator standardHealthIndicator() {
+		return new StandardHealthIndicator();
 	}
 
 	@Bean
-	public CustomHealthEndPoint myEndPoint() {
-		return new CustomHealthEndPoint();
+	public StandardHealthEndPoint standardHealthEndPoint() {
+		return new StandardHealthEndPoint();
 	}
 
 	@Bean
-	public CustomEndPoint taoTaoCloudEndPoint() {
-		return new CustomEndPoint();
+	public StandardEndPoint standardEndPoint() {
+		return new StandardEndPoint();
 	}
 
 	@Bean
-	public RequestMappingEndPoint requestMappingEndPoint(){
+	public RequestMappingEndPoint requestMappingEndPoint() {
 		return new RequestMappingEndPoint();
 	}
 
 	@Bean
-	public MBeanDemo mBeanDemo() {
-		return new MBeanDemo();
+	public StandardMBean standardMBean() {
+		return new StandardMBean();
 	}
 
 	@Bean
-	public CustomMbeanRegistrar customMbeanRegistrar() throws MalformedObjectNameException {
-		return new CustomMbeanRegistrar();
+	public StandardMbeanRegistrar standardMbeanRegistrar() throws MalformedObjectNameException {
+		return new StandardMbeanRegistrar();
 	}
 }
