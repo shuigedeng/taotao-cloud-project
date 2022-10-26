@@ -304,7 +304,7 @@ services:
       - MYSQL_DB=taotao-cloud-zipkin-2.23
       - MYSQL_USER=root
       - MYSQL_PASS=123456
-      - MYSQL_HOST=192.168.10.210
+      - MYSQL_HOST=172.11.0.10
       - MYSQL_TCP_PORT=3306
     ports:
       - "9411:9411"

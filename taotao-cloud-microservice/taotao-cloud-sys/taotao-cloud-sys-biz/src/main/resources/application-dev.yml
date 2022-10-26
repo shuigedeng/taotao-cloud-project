@@ -1406,9 +1406,9 @@ taotao:
       elastic:
         enabled: false
       quartz:
-        enabled: false
+        enabled: true
       scheduled:
-        enabled: false
+        enabled: true
     ip2region:
       enabled: true
     monitor:

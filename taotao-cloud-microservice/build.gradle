@@ -4,9 +4,9 @@ subprojects {
         testImplementation "org.testcontainers:junit-jupiter"
         testImplementation "org.springframework.boot:spring-boot-starter-web"
 
-//        //https://search.maven.org/artifact/org.jeasy/easy-random
+        //https://search.maven.org/artifact/org.jeasy/easy-random
         testImplementation 'org.jeasy:easy-random:5.0.0'
-//        //https://search.maven.org/artifact/com.github.javafaker/javafaker
+        //https://search.maven.org/artifact/com.github.javafaker/javafaker
         testImplementation('com.github.javafaker:javafaker:1.0.2') {
             exclude group: "org.yaml", module: "snakeyaml"
         }
