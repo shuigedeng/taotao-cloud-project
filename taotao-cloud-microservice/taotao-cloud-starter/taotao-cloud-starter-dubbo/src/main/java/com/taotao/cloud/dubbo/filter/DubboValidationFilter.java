@@ -20,12 +20,11 @@ import static org.apache.dubbo.common.constants.CommonConstants.PROVIDER;
 import static org.apache.dubbo.common.constants.FilterConstants.VALIDATION_KEY;
 
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
-
-import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.ConfigUtils;
@@ -45,7 +44,7 @@ import org.apache.dubbo.validation.Validator;
  * @version 2021.10
  * @since 2022-03-10 13:36:55
  */
-@Activate(group = {CONSUMER, PROVIDER}, value = "dubboValidationFilter", order = 10000)
+@Activate(group = {CONSUMER, PROVIDER})
 public class DubboValidationFilter implements Filter {
 
 	private Validation validation;
@@ -59,7 +58,8 @@ public class DubboValidationFilter implements Filter {
 		LogUtils.info("DubboValidationFilter activate ------------------------------");
 
 		if (validation != null && !invocation.getMethodName().startsWith("$")
-			&& ConfigUtils.isNotEmpty(invoker.getUrl().getMethodParameter(invocation.getMethodName(), VALIDATION_KEY))) {
+			&& ConfigUtils.isNotEmpty(
+			invoker.getUrl().getMethodParameter(invocation.getMethodName(), VALIDATION_KEY))) {
 			try {
 				Validator validator = validation.getValidator(invoker.getUrl());
 				if (validator != null) {
