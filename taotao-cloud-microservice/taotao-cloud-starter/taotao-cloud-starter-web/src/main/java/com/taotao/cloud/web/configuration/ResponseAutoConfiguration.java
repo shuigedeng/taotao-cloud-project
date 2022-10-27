@@ -18,6 +18,7 @@ package com.taotao.cloud.web.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.web.annotation.BusinessApi;
 import com.taotao.cloud.web.annotation.IgnoreResponseBodyAdvice;
 import javax.servlet.Servlet;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 @AutoConfiguration
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
+//@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.api.controller"})
+@RestControllerAdvice(annotations = BusinessApi.class)
 public class ResponseAutoConfiguration implements ResponseBodyAdvice<Object>, InitializingBean {
 
 	@Override
@@ -54,7 +56,8 @@ public class ResponseAutoConfiguration implements ResponseBodyAdvice<Object>, In
 	@Override
 	public boolean supports(MethodParameter methodParameter, @NotNull Class aClass) {
 		// 类上如果被 IgnoreResponseBodyAdvice 标识就不拦截
-		if (methodParameter.getDeclaringClass().isAnnotationPresent(IgnoreResponseBodyAdvice.class)) {
+		if (methodParameter.getDeclaringClass()
+			.isAnnotationPresent(IgnoreResponseBodyAdvice.class)) {
 			return false;
 		}
 
@@ -72,6 +75,7 @@ public class ResponseAutoConfiguration implements ResponseBodyAdvice<Object>, In
 		if (o == null) {
 			return null;
 		}
+		
 		if (o instanceof Result) {
 			return o;
 		}

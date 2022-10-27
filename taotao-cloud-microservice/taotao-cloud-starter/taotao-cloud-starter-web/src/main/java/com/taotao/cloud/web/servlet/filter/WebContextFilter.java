@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 /**
  * 上下文过滤器
  *
@@ -32,14 +33,17 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 @WebFilter(filterName = "WebContextFilter", urlPatterns = "/*", asyncSupported = true)
 public class WebContextFilter extends OncePerRequestFilter {
+	
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 		return RequestUtils.excludeActuator(request);
 	}
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws ServletException, IOException {
 		RequestUtils.bindContext(request, response);
+
 		try {
 			filterChain.doFilter(request, response);
 		} finally {

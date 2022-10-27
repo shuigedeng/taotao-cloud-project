@@ -709,6 +709,8 @@ spring:
     web:
       client:
         enabled: true
+      servlet:
+        enabled: true
     sampler:
       probability: 1.0
       refresh:
@@ -723,12 +725,11 @@ spring:
       name: ${spring.application.name}
     compression:
       enabled: true
-    encoder: proto3
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     #    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
     #    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:p6spy:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
     password: 123456
@@ -1361,7 +1362,8 @@ taotao:
         driverlist: com.mysql.cj.jdbc.Driver
         database-dialect-date-format: yyyy-MM-dd HH:mm:ss
         appender: com.taotao.cloud.data.p6spy.logger.KafkaLogger
-        logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
+        logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.logp6spy
+        remoteServiceName: p6spy-${spring.application.name}
     oss:
       enabled: false
     springdoc:
@@ -1396,7 +1398,7 @@ taotao:
           #addresses: http://127.0.0.1:8080/xxl-job-admin
         executor:
           appname: ${spring.application.name}
-          title: ${spring.application.name}-executor
+          title: 系统管理执行器
           #address: 127.0.0.1:9999
           #ip: 127.0.0.1
           port: 9999

@@ -39,6 +39,11 @@ import com.taotao.cloud.web.validation.converter.String2LocalDateConverter;
 import com.taotao.cloud.web.validation.converter.String2LocalDateTimeConverter;
 import com.taotao.cloud.web.validation.converter.String2LocalTimeConverter;
 import com.taotao.cloud.web.validation.converter.StringToEnumConverterFactory;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import okhttp3.OkHttpClient;
 import org.hibernate.validator.HibernateValidator;
 import org.springframework.beans.factory.InitializingBean;
@@ -72,12 +77,6 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.util.List;
-
 /**
  * 自定义mvc配置
  *
@@ -86,10 +85,7 @@ import java.util.List;
  * @since 2021-09-02 21:30:20
  */
 @AutoConfiguration
-@EnableConfigurationProperties({
-	FilterProperties.class,
-	InterceptorProperties.class,
-})
+@EnableConfigurationProperties({FilterProperties.class, InterceptorProperties.class,})
 @Import(CountTimeAop.class)
 public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBean {
 
@@ -316,17 +312,19 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer, InitializingBe
 		@Override
 		public boolean supportsParameter(MethodParameter parameter) {
 			boolean isHasEnableUserAnn = parameter.hasParameterAnnotation(LoginUser.class);
-			boolean isHasLoginUserParameter = parameter.getParameterType().isAssignableFrom(SecurityUser.class);
+			boolean isHasLoginUserParameter = parameter.getParameterType()
+				.isAssignableFrom(SecurityUser.class);
 			return isHasEnableUserAnn && isHasLoginUserParameter;
 		}
 
 		@Override
 		public Object resolveArgument(MethodParameter methodParameter,
-									  ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
-									  WebDataBinderFactory webDataBinderFactory) throws Exception {
+			ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
+			WebDataBinderFactory webDataBinderFactory) throws Exception {
 			LoginUser user = methodParameter.getParameterAnnotation(LoginUser.class);
 			boolean value = user.value();
-			HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
+			HttpServletRequest request = nativeWebRequest.getNativeRequest(
+				HttpServletRequest.class);
 			SecurityUser loginUser = SecurityUtils.getCurrentUser();
 
 			//根据value状态获取更多用户信息，待实现

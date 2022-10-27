@@ -20,6 +20,10 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.annotation.ConditionalOnFeignUseOkHttp;
 import com.taotao.cloud.feign.okhttp.OkHttpResponseInterceptor;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import okhttp3.ConnectionPool;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -31,11 +35,6 @@ import org.springframework.cloud.openfeign.support.FeignHttpClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Description: OkHttp 自动配置 </p>
@@ -63,7 +62,8 @@ public class OkHttpAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(ConnectionPool.class)
-	public ConnectionPool connectionPool(FeignHttpClientProperties feignHttpClientProperties, OkHttpClientConnectionPoolFactory connectionPoolFactory) {
+	public ConnectionPool connectionPool(FeignHttpClientProperties feignHttpClientProperties,
+		OkHttpClientConnectionPoolFactory connectionPoolFactory) {
 		int maxTotalConnections = feignHttpClientProperties.getMaxConnections();
 		long timeToLive = feignHttpClientProperties.getTimeToLive();
 		TimeUnit ttlUnit = feignHttpClientProperties.getTimeToLiveUnit();
@@ -71,15 +71,20 @@ public class OkHttpAutoConfiguration {
 	}
 
 	@Bean
-	public okhttp3.OkHttpClient okHttpClient(OkHttpClientFactory okHttpClientFactory, ConnectionPool connectionPool, FeignClientProperties feignClientProperties, FeignHttpClientProperties feignHttpClientProperties) {
-		FeignClientProperties.FeignClientConfiguration defaultConfig = feignClientProperties.getConfig().get("default");
+	public okhttp3.OkHttpClient okHttpClient(OkHttpClientFactory okHttpClientFactory,
+		ConnectionPool connectionPool, FeignClientProperties feignClientProperties,
+		FeignHttpClientProperties feignHttpClientProperties) {
+		FeignClientProperties.FeignClientConfiguration defaultConfig = feignClientProperties.getConfig()
+			.get("default");
 		int readTimeout = 5000;
 		if (Objects.nonNull(defaultConfig)) {
 			readTimeout = defaultConfig.getReadTimeout();
 		}
+
 		int connectTimeout = feignHttpClientProperties.getConnectionTimeout();
 		boolean disableSslValidation = feignHttpClientProperties.isDisableSslValidation();
 		boolean followRedirects = feignHttpClientProperties.isFollowRedirects();
+
 		this.okHttpClient = okHttpClientFactory.createBuilder(disableSslValidation)
 			.readTimeout(readTimeout, TimeUnit.MILLISECONDS)
 			.connectTimeout(connectTimeout, TimeUnit.MILLISECONDS)

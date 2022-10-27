@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * 方法耗时工具类
+ *
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-10-27 10:18:35
  */
 @Aspect
 @Component

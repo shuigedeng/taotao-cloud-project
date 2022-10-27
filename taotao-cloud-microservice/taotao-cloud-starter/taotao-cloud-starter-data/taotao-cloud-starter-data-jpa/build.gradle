@@ -20,6 +20,8 @@ dependencies {
     //https://search.maven.org/artifact/mysql/mysql-connector-java
     api "mysql:mysql-connector-java"
 
+    api 'io.zipkin.brave:brave-instrumentation-mysql8:5.14.1'
+
     compileOnly "org.springframework.security:spring-security-oauth2-core"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"

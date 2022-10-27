@@ -18,15 +18,14 @@ package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.servlet.filter.TenantFilter;
 import com.taotao.cloud.web.servlet.filter.TraceFilter;
 import com.taotao.cloud.web.servlet.filter.VersionFilter;
 import com.taotao.cloud.web.servlet.filter.WebContextFilter;
-import com.taotao.cloud.web.properties.FilterProperties;
-import com.taotao.cloud.web.servlet.listener.MyListener;
-import com.taotao.cloud.web.servlet.servlet.MyAsyncServlet;
-import com.taotao.cloud.web.servlet.servlet.MyServlet;
-
+import com.taotao.cloud.web.servlet.listener.StandardServletContextListener;
+import com.taotao.cloud.web.servlet.servlet.StandardAsyncServlet;
+import com.taotao.cloud.web.servlet.servlet.StandardServlet;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -50,6 +49,7 @@ import org.springframework.web.WebApplicationInitializer;
  */
 @AutoConfiguration
 public class ServletAutoConfiguration implements WebApplicationInitializer, InitializingBean {
+
 	/**
 	 * filterProperties
 	 */
@@ -88,30 +88,31 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 
 	//注册 Servlet 到容器中
 	@Bean
-	public ServletRegistrationBean<MyServlet> myServlet(){
-		ServletRegistrationBean<MyServlet> servletRegistrationBean = new ServletRegistrationBean<>();
-		servletRegistrationBean.setServlet(new MyServlet());
+	public ServletRegistrationBean<StandardServlet> standardServlet() {
+		ServletRegistrationBean<StandardServlet> servletRegistrationBean = new ServletRegistrationBean<>();
+		servletRegistrationBean.setServlet(new StandardServlet());
 		servletRegistrationBean.setLoadOnStartup(1);
 		servletRegistrationBean.setAsyncSupported(true);
-		servletRegistrationBean.setUrlMappings(List.of("/myServlet"));
-		LogUtils.info("注册servlet成功，名称: {}", MyServlet.class.getName());
-		return servletRegistrationBean;
-	}
-	@Bean
-	public ServletRegistrationBean<MyAsyncServlet> myAsyncServlet(){
-		ServletRegistrationBean<MyAsyncServlet> servletRegistrationBean = new ServletRegistrationBean<>();
-		servletRegistrationBean.setServlet(new MyAsyncServlet());
-		servletRegistrationBean.setLoadOnStartup(1);
-		servletRegistrationBean.setAsyncSupported(true);
-		servletRegistrationBean.setUrlMappings(List.of("/my/asyncServlet"));
-		LogUtils.info("注册servlet成功，名称: {}", MyAsyncServlet.class.getName());
+		servletRegistrationBean.setUrlMappings(List.of("/standardServlet"));
+		LogUtils.info("注册servlet成功，名称: {}", StandardServlet.class.getName());
 		return servletRegistrationBean;
 	}
 
 	@Bean
-	public ServletListenerRegistrationBean<MyListener> listenerServletListenerRegistrationBean() {
-		ServletListenerRegistrationBean<MyListener> bean = new ServletListenerRegistrationBean<>();
-		bean.setListener(new MyListener());
+	public ServletRegistrationBean<StandardAsyncServlet> standardAsyncServlet() {
+		ServletRegistrationBean<StandardAsyncServlet> servletRegistrationBean = new ServletRegistrationBean<>();
+		servletRegistrationBean.setServlet(new StandardAsyncServlet());
+		servletRegistrationBean.setLoadOnStartup(1);
+		servletRegistrationBean.setAsyncSupported(true);
+		servletRegistrationBean.setUrlMappings(List.of("/standardAsyncServlet"));
+		LogUtils.info("注册servlet成功，名称: {}", StandardAsyncServlet.class.getName());
+		return servletRegistrationBean;
+	}
+
+	@Bean
+	public ServletListenerRegistrationBean<StandardServletContextListener> listenerServletListenerRegistrationBean() {
+		ServletListenerRegistrationBean<StandardServletContextListener> bean = new ServletListenerRegistrationBean<>();
+		bean.setListener(new StandardServletContextListener());
 		return bean;
 	}
 
@@ -157,9 +158,6 @@ public class ServletAutoConfiguration implements WebApplicationInitializer, Init
 		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 3);
 		return registrationBean;
 	}
-
-
-
 
 
 }
