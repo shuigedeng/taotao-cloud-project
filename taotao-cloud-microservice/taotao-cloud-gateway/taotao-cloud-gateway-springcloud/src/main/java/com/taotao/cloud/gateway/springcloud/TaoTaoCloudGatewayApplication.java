@@ -24,6 +24,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * TaoTaoCloudGatewayApplication
  *
+ * <p>http://127.0.0.1:33333/swagger-ui.html</p>
+ * <p>http://127.0.0.1:33333/doc.html</p>
+ *
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/10/10 09:06
