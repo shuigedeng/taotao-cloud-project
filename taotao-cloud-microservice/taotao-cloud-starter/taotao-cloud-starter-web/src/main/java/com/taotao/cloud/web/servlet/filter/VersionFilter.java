@@ -26,8 +26,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.filter.OncePerRequestFilter;
+
 /**
  * 负载均衡隔离规则过滤器
  *
@@ -37,10 +37,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 @WebFilter(filterName = "VersionFilter", urlPatterns = "/*", asyncSupported = true)
 public class VersionFilter extends OncePerRequestFilter {
+	
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 		return RequestUtils.excludeActuator(request);
 	}
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws IOException, ServletException {

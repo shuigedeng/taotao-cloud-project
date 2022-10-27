@@ -1,3 +1,4 @@
 dubboTraceFilter=com.taotao.cloud.dubbo.filter.DubboTraceFilter
 dubboValidationFilter=com.taotao.cloud.dubbo.filter.DubboValidationFilter
 dubboRequestFilter=com.taotao.cloud.dubbo.filter.DubboRequestFilter
+dubboExceptionFilter=com.taotao.cloud.dubbo.filter.DubboExceptionFilter

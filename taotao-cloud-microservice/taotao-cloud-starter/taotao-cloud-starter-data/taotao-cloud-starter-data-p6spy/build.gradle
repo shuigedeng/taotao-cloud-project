@@ -6,5 +6,6 @@ dependencies {
 
     compileOnly "org.springframework.kafka:spring-kafka"
 
+    api 'io.zipkin.brave:brave-instrumentation-p6spy:5.14.1'
 }
 

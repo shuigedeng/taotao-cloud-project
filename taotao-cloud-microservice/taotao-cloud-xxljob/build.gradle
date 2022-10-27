@@ -16,6 +16,8 @@ dependencies {
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2"
     implementation "mysql:mysql-connector-java"
     implementation "com.xuxueli:xxl-job-core"
+
+    implementation 'io.zipkin.brave:brave-instrumentation-mysql8:5.14.1'
 }
 
 mainClassName = "com.taotao.cloud.xxljob.TaoTaoCloudXxlJobApplication"

@@ -26,7 +26,7 @@ public class P6spyProperties implements EnvironmentAware {
 	private String appender = "com.taotao.cloud.data.p6spy.logger.P6spyLogger";
 	private String excludecategories;
 	private String sqlexpression;
-	private String modulelist = "com.p6spy.engine.spy.P6SpyFactory,com.p6spy.engine.logging.P6LogFactory,com.p6spy.engine.outage.P6OutageFactory";
+	private String modulelist = "com.p6spy.engine.spy.P6SpyFactory,com.p6spy.engine.logging.P6LogFactory,com.p6spy.engine.outage.P6OutageFactory,brave.p6spy.TracingP6Factory";
 	private String include;
 	private String executionThreshold;
 	private String reloadpropertiesinterval;
@@ -46,8 +46,37 @@ public class P6spyProperties implements EnvironmentAware {
 	private String logfile;
 	//private String logfile = "${user.home}/logs/${spring.application.name}/p6spy/spy.log";
 	private String databaseDialectDateFormat = "yyyy-MM-dd HH:mm:ss";
-	private String excludebinary;
+	private String excludebinary = "true";
 	private String realdatasourceclass;
+
+	private String remoteServiceName;
+	private String includeParameterValues = "true";
+	private String includeAffectedRowsCount = "true";
+
+
+	public String getRemoteServiceName() {
+		return remoteServiceName;
+	}
+
+	public void setRemoteServiceName(String remoteServiceName) {
+		this.remoteServiceName = remoteServiceName;
+	}
+
+	public String getIncludeParameterValues() {
+		return includeParameterValues;
+	}
+
+	public void setIncludeParameterValues(String includeParameterValues) {
+		this.includeParameterValues = includeParameterValues;
+	}
+
+	public String getIncludeAffectedRowsCount() {
+		return includeAffectedRowsCount;
+	}
+
+	public void setIncludeAffectedRowsCount(String includeAffectedRowsCount) {
+		this.includeAffectedRowsCount = includeAffectedRowsCount;
+	}
 
 	public String getRealdatasourceproperties() {
 		return realdatasourceproperties;

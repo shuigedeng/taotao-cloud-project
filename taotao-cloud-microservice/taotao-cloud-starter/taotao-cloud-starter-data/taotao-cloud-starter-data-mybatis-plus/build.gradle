@@ -27,6 +27,8 @@ dependencies {
     //https://search.maven.org/artifact/com.github.pagehelper/pagehelper-spring-boot-starter
     api "com.github.pagehelper:pagehelper-spring-boot-starter:1.4.5"
 
+    api 'io.zipkin.brave:brave-instrumentation-mysql8:5.14.1'
+
     // 这tm的要付钱  Caused by: mybatis.mate.O000000o.O000000o: please purchase activation code, thank you for your support!
     // api "com.baomidou:mybatis-mate-starter:1.2.4"
 }
