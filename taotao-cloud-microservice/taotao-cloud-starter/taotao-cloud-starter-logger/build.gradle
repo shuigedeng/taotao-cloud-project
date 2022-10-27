@@ -23,7 +23,7 @@ dependencies {
 
     //https://github.com/akkinoc/logback-access-spring-boot-starter
     //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
-    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.4.0"
+    api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.4.1"
 
     // https://github.com/qqxx6661/logRecord
     //https://search.maven.org/artifact/cn.monitor4all/log-record-starter
