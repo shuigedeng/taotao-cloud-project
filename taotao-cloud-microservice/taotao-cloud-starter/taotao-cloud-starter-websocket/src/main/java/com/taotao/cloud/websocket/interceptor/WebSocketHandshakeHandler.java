@@ -17,16 +17,17 @@ package com.taotao.cloud.websocket.interceptor;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.websocket.domain.WebSocketPrincipal;
-import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
-import java.security.Principal;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import com.taotao.cloud.websocket.properties.WebSocketProperties;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+import java.util.Map;
 
 /**
  * 设置认证用户信息
@@ -37,53 +38,51 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
  */
 public class WebSocketHandshakeHandler extends DefaultHandshakeHandler {
 
-	private CustomWebSocketProperties customWebSocketProperties;
+	private WebSocketProperties webSocketProperties;
 
-	public void setWebSocketProperties(CustomWebSocketProperties customWebSocketProperties) {
-		this.customWebSocketProperties = customWebSocketProperties;
+	public void setWebSocketProperties(WebSocketProperties webSocketProperties) {
+		this.webSocketProperties = webSocketProperties;
 	}
 
 	@Override
 	protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler,
-		Map<String, Object> attributes) {
-
+									  Map<String, Object> attributes) {
 		Principal principal = request.getPrincipal();
 		if (ObjectUtils.isNotEmpty(principal)) {
-			LogUtils.info("Get user principal from request, value is  [{}].",
-				principal.getName());
+			LogUtils.info("Get user principal from request, value is  [{}].", principal.getName());
 			return principal;
 		}
 
 		Object user = null;
 		HttpServletRequest httpServletRequest = getHttpServletRequest(request);
 		if (ObjectUtils.isNotEmpty(httpServletRequest)) {
-			user = httpServletRequest.getAttribute(customWebSocketProperties.getPrincipalAttribute());
+			user = httpServletRequest.getAttribute(webSocketProperties.getPrincipalAttribute());
 			if (ObjectUtils.isEmpty(user)) {
-				user = httpServletRequest.getParameter(customWebSocketProperties.getPrincipalAttribute());
+				user = httpServletRequest.getParameter(webSocketProperties.getPrincipalAttribute());
 				if (ObjectUtils.isEmpty(user)) {
 					user = httpServletRequest.getHeader("X-taotao-Session");
 				} else {
 					LogUtils.info(
 						"Get user principal [{}] from request parameter, use parameter  [{}]..",
-						user, customWebSocketProperties.getPrincipalAttribute());
+						user, webSocketProperties.getPrincipalAttribute());
 				}
 			} else {
 				LogUtils.info(
 					"Get user principal [{}] from request attribute, use attribute  [{}]..",
-					user, customWebSocketProperties.getPrincipalAttribute());
+					user, webSocketProperties.getPrincipalAttribute());
 			}
 		}
 
 		if (ObjectUtils.isEmpty(user)) {
 			HttpSession httpSession = getSession(request);
 			if (ObjectUtils.isNotEmpty(httpSession)) {
-				user = httpSession.getAttribute(customWebSocketProperties.getPrincipalAttribute());
+				user = httpSession.getAttribute(webSocketProperties.getPrincipalAttribute());
 				if (ObjectUtils.isEmpty(user)) {
 					user = httpSession.getId();
 				} else {
 					LogUtils.info(
 						"Get user principal [{}] from httpsession, use attribute  [{}].",
-						user, customWebSocketProperties.getPrincipalAttribute());
+						user, webSocketProperties.getPrincipalAttribute());
 				}
 			} else {
 				LogUtils.error("Cannot find session from websocket request.");
@@ -99,8 +98,7 @@ public class WebSocketHandshakeHandler extends DefaultHandshakeHandler {
 	}
 
 	private HttpServletRequest getHttpServletRequest(ServerHttpRequest request) {
-		if (request instanceof ServletServerHttpRequest) {
-			ServletServerHttpRequest serverRequest = (ServletServerHttpRequest) request;
+		if (request instanceof ServletServerHttpRequest serverRequest) {
 			return serverRequest.getServletRequest();
 		}
 

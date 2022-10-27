@@ -25,6 +25,17 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springdoc.core.AbstractSwaggerUiConfigProperties.SwaggerUrl;
+import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.SwaggerUiConfigParameters;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import springfox.documentation.oas.annotations.EnableOpenApi;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,18 +43,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import org.springdoc.core.AbstractSwaggerUiConfigProperties.SwaggerUrl;
-import org.springdoc.core.GroupedOpenApi;
-import org.springdoc.core.SwaggerUiConfigParameters;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.cloud.gateway.route.RouteDefinition;
-import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * OpenApiConfig
@@ -63,7 +62,7 @@ public class OpenApiConfiguration {
 
 	@Bean
 	public List<GroupedOpenApi> apis(SwaggerUiConfigParameters swaggerUiConfigParameters,
-		RouteDefinitionLocator locator) {
+									 RouteDefinitionLocator locator) {
 		List<GroupedOpenApi> groups = new ArrayList<>();
 		List<RouteDefinition> definitions = locator.getRouteDefinitions().collectList().block();
 
@@ -108,7 +107,7 @@ public class OpenApiConfiguration {
 	}
 
 	@Bean
-	public OpenAPI customOpenAPI() {
+	public OpenAPI openAPI() {
 		return new OpenAPI()
 			.tags(new ArrayList<>())
 			.extensions(new HashMap<>())

@@ -59,7 +59,7 @@ public class DynamicRouteConfiguration {
 
 	@Configuration
 	@ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "type", havingValue = "nacos", matchIfMissing = false)
-	public class NacosDynamicRoute {
+	public static class NacosDynamicRoute {
 
 		@Bean
 		@ConditionalOnBean
@@ -165,16 +165,11 @@ public class DynamicRouteConfiguration {
 		private RouteDefinitionWriter routeDefinitionWriter;
 		@Autowired
 		private RouteDefinitionLocator routeDefinitionLocator;
-
-		/**
-		 * 发布事件
-		 */
 		@Autowired
 		private ApplicationEventPublisher publisher;
 
 		@Override
-		public void setApplicationEventPublisher(
-			ApplicationEventPublisher applicationEventPublisher) {
+		public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
 			this.publisher = applicationEventPublisher;
 		}
 
@@ -210,9 +205,7 @@ public class DynamicRouteConfiguration {
 					delete(routeDefinition.getId());
 				});
 			}
-			definitions.forEach(definition -> {
-				updateById(definition);
-			});
+			definitions.forEach(this::updateById);
 			return "success";
 		}
 
@@ -228,6 +221,7 @@ public class DynamicRouteConfiguration {
 			} catch (Exception e) {
 				return "update fail,not find route  routeId: " + definition.getId();
 			}
+
 			try {
 				routeDefinitionWriter.save(Mono.just(definition)).subscribe();
 				this.publisher.publishEvent(new RefreshRoutesEvent(this));

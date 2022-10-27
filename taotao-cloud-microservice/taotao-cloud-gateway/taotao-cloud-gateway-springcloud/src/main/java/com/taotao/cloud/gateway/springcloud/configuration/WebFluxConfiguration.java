@@ -52,7 +52,7 @@ import java.util.Objects;
 	HttpsProperties.class,
 	NacosConfigProperties.class
 })
-public class WebConfiguration {
+public class WebFluxConfiguration {
 
 	@Bean(name = "userKeyResolver")
 	public KeyResolver userKeyResolver() {

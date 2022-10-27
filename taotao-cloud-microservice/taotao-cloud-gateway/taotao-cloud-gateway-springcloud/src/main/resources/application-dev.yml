@@ -17,7 +17,7 @@ redisson:
   #锁的模式.如果不设置, REENTRANT(可重入锁),FAIR(公平锁),MULTIPLE(联锁),REDLOCK(红锁),READ(读锁), WRITE(写锁)
   lock-model: auto
   #集群模式:SINGLE(单例),SENTINEL(哨兵),MASTERSLAVE(主从),CLUSTER(集群),REPLICATED(云托管)
-  model: cluster
+  model: single
   #Redisson的对象编码类是用于将对象进行序列化和反序列化，以实现对该对象在Redis里的读取和存储
   codec: "com.zengtengpeng.codec.MyJsonJacksonCodec"
   #这个线程池数量被所有RTopic对象监听器，RRemoteService调用者和RExecutorService任务共同共享。
