@@ -13,7 +13,7 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/com.alibaba/druid-spring-boot-starter
-    compileOnly 'com.alibaba:druid-spring-boot-starter:1.2.13'
+    compileOnly 'com.alibaba:druid-spring-boot-starter:1.2.14'
     api "com.alibaba:druid:1.2.12"
 
     api "mysql:mysql-connector-java"
