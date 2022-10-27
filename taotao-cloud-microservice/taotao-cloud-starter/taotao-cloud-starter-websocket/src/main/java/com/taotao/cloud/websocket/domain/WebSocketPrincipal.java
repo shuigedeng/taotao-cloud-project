@@ -16,6 +16,7 @@
 package com.taotao.cloud.websocket.domain;
 
 import com.google.common.base.MoreObjects;
+
 import java.security.Principal;
 
 /**
@@ -29,7 +30,7 @@ import java.security.Principal;
  */
 public class WebSocketPrincipal implements Principal {
 
-	private String token;
+	private final String token;
 
 	public WebSocketPrincipal(String token) {
 		this.token = token;

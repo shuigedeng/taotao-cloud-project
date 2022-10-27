@@ -24,11 +24,6 @@ package com.taotao.cloud.gateway.springcloud.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.model.Result;
-import java.nio.CharBuffer;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpHeaders;
@@ -42,6 +37,12 @@ import org.springframework.web.reactive.resource.ResourceUrlProvider;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * WebFluxUtil
@@ -111,7 +112,7 @@ public class WebFluxUtil {
 
 	public static boolean isJsonMediaType(String contentType) {
 		return MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(contentType)
-			|| MediaType.APPLICATION_JSON_UTF8.getType().equalsIgnoreCase(contentType);
+			|| MediaType.APPLICATION_JSON.getType().equalsIgnoreCase(contentType);
 	}
 
 	/**

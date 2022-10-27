@@ -17,14 +17,15 @@ package com.taotao.cloud.websocket.interceptor;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.websocket.domain.WebSocketPrincipal;
-import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
-import javax.servlet.http.HttpSession;
+import com.taotao.cloud.websocket.properties.WebSocketProperties;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.MessageHeaderAccessor;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Websocket消息监听
@@ -37,10 +38,10 @@ import org.springframework.messaging.support.MessageHeaderAccessor;
  */
 public class WebSocketChannelInterceptor implements ChannelInterceptor {
 
-	private CustomWebSocketProperties customWebSocketProperties;
+	private WebSocketProperties webSocketProperties;
 
-	public void setWebSocketProperties(CustomWebSocketProperties customWebSocketProperties) {
-		this.customWebSocketProperties = customWebSocketProperties;
+	public void setWebSocketProperties(WebSocketProperties webSocketProperties) {
+		this.webSocketProperties = webSocketProperties;
 	}
 
 	/**
@@ -67,8 +68,7 @@ public class WebSocketChannelInterceptor implements ChannelInterceptor {
 			 * 3. header参数的key可以一样，取出来就是list
 			 * 4. 样例代码header中只有一个token，所以直接取0位
 			 */
-			String token = accessor.getNativeHeader(customWebSocketProperties.getPrincipalAttribute())
-				.get(0);
+			String token = accessor.getNativeHeader(webSocketProperties.getPrincipalAttribute()).get(0);
 
 			/*
 			 * 1. 这里直接封装到StompHeaderAccessor 中，可以根据自身业务进行改变
@@ -116,7 +116,7 @@ public class WebSocketChannelInterceptor implements ChannelInterceptor {
 	 */
 	@Override
 	public void afterSendCompletion(Message<?> message, MessageChannel channel, boolean sent,
-		Exception ex) {
+									Exception ex) {
 
 	}
 

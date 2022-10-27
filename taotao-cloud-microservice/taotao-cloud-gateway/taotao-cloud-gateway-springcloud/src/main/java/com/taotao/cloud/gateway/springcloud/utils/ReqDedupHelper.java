@@ -2,11 +2,12 @@ package com.taotao.cloud.gateway.springcloud.utils;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.common.utils.log.LogUtils;
+
+import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
-import javax.xml.bind.DatatypeConverter;
 
 public class ReqDedupHelper {
 
@@ -28,10 +29,10 @@ public class ReqDedupHelper {
 			}
 		}
 
-		String paramTreeMapJSON = JSON.toJSONString(paramTreeMap);
-		String md5deDupParam = jdkMD5(paramTreeMapJSON);
+		String paramTreeMapJson = JSON.toJSONString(paramTreeMap);
+		String md5deDupParam = jdkMD5(paramTreeMapJson);
 		LogUtils.debug("md5deDupParam = {}, excludeKeys = {} {}", md5deDupParam,
-			Arrays.deepToString(excludeKeys), paramTreeMapJSON);
+			Arrays.deepToString(excludeKeys), paramTreeMapJson);
 		return md5deDupParam;
 	}
 

@@ -20,9 +20,9 @@ import com.p6spy.engine.spy.appender.FormattedLogger;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import java.util.Objects;
 import org.springframework.kafka.core.KafkaTemplate;
+
+import java.util.Objects;
 
 /**
  * P6spy日志实现
@@ -33,12 +33,13 @@ import org.springframework.kafka.core.KafkaTemplate;
  */
 public class KafkaLogger extends FormattedLogger {
 
-	private KafkaTemplate kafkaTemplate;
-	private String applicationName;
+	private final KafkaTemplate<String, String> kafkaTemplate;
+	private final String applicationName;
 
+	@SuppressWarnings("unchecked")
 	public KafkaLogger() throws ClassNotFoundException {
 		try {
-			KafkaTemplate kafkaTemplate = ContextUtils.getBean(KafkaTemplate.class, true);
+			KafkaTemplate<String, String> kafkaTemplate = ContextUtils.getBean(KafkaTemplate.class);
 			String applicationName = PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY);
 
 			this.kafkaTemplate = kafkaTemplate;

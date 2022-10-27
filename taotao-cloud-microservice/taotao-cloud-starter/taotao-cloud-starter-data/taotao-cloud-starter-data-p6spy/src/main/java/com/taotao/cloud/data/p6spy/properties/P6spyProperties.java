@@ -49,6 +49,7 @@ public class P6spyProperties implements EnvironmentAware {
 	private String excludebinary = "true";
 	private String realdatasourceclass;
 
+	//以下3个主要用于zipkin监控
 	private String remoteServiceName;
 	private String includeParameterValues = "true";
 	private String includeAffectedRowsCount = "true";

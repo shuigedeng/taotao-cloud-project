@@ -19,11 +19,12 @@ import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterRegistry;
-import java.time.Duration;
 import org.springframework.cloud.circuitbreaker.resilience4j.ReactiveResilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.Duration;
 
 /**
  * GatewayCircuitBreakerConfiguration
@@ -33,7 +34,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021/11/23 14:28
  */
 @Configuration
-public class GatewayCircuitBreakerConfiguration {
+public class CircuitBreakerConfiguration {
 
 	@Bean
 	public ReactiveResilience4JCircuitBreakerFactory reactiveResilience4JCircuitBreakerFactory(

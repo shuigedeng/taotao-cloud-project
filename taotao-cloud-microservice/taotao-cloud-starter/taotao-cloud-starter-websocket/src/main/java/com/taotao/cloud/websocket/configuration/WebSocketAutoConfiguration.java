@@ -20,9 +20,7 @@ import com.taotao.cloud.websocket.interceptor.WebSocketChannelInterceptor;
 import com.taotao.cloud.websocket.interceptor.WebSocketHandshakeHandler;
 import com.taotao.cloud.websocket.processor.WebSocketClusterProcessor;
 import com.taotao.cloud.websocket.processor.WebSocketMessageSender;
-import com.taotao.cloud.websocket.properties.CustomWebSocketProperties;
-import java.util.List;
-import javax.annotation.PostConstruct;
+import com.taotao.cloud.websocket.properties.WebSocketProperties;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RedissonClient;
@@ -44,6 +42,9 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
+
 /**
  * <p>Description: Web Socket 核心配置 </p>
  *
@@ -54,12 +55,12 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 @AutoConfiguration(after = DelegatingWebSocketMessageBrokerConfiguration.class)
 @EnableWebSocketMessageBroker
 @ConditionalOnBean({RedissonClient.class})
-@EnableConfigurationProperties({CustomWebSocketProperties.class})
-@ConditionalOnProperty(prefix = CustomWebSocketProperties.PREFIX, name = "enabled", havingValue = "true")
+@EnableConfigurationProperties({WebSocketProperties.class})
+@ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true")
 public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigurer {
 
 	@Autowired
-	private CustomWebSocketProperties customWebSocketProperties;
+	private WebSocketProperties webSocketProperties;
 	@Autowired
 	private SimpUserRegistry simpUserRegistry;
 	@Autowired
@@ -73,7 +74,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	@Bean
 	public WebSocketChannelInterceptor webSocketChannelInterceptor() {
 		WebSocketChannelInterceptor webSocketChannelInterceptor = new WebSocketChannelInterceptor();
-		webSocketChannelInterceptor.setWebSocketProperties(customWebSocketProperties);
+		webSocketChannelInterceptor.setWebSocketProperties(webSocketProperties);
 		LogUtils.info("Bean [Web Socket Inbound Channel Interceptor] Auto Configure.");
 		return webSocketChannelInterceptor;
 	}
@@ -81,7 +82,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	@Bean
 	public WebSocketHandshakeHandler webSocketHandshakeHandler() {
 		WebSocketHandshakeHandler webSocketHandshakeHandler = new WebSocketHandshakeHandler();
-		webSocketHandshakeHandler.setWebSocketProperties(customWebSocketProperties);
+		webSocketHandshakeHandler.setWebSocketProperties(webSocketProperties);
 		LogUtils.info("Bean [Web Socket Handshake Handler] Auto Configure.");
 		return webSocketHandshakeHandler;
 	}
@@ -91,16 +92,15 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 		WebSocketMessageSender webSocketMessageSender = new WebSocketMessageSender();
 		webSocketMessageSender.setSimpMessagingTemplate(simpMessagingTemplate);
 		webSocketMessageSender.setSimpUserRegistry(simpUserRegistry);
-		webSocketMessageSender.setWebSocketProperties(customWebSocketProperties);
+		webSocketMessageSender.setWebSocketProperties(webSocketProperties);
 		LogUtils.info("Bean [Web Socket Message Sender] Auto Configure.");
 		return webSocketMessageSender;
 	}
 
 	@Bean
-	public WebSocketClusterProcessor webSocketClusterProcessor(
-		WebSocketMessageSender webSocketMessageSender) {
+	public WebSocketClusterProcessor webSocketClusterProcessor(WebSocketMessageSender webSocketMessageSender) {
 		WebSocketClusterProcessor webSocketClusterProcessor = new WebSocketClusterProcessor();
-		webSocketClusterProcessor.setWebSocketProperties(customWebSocketProperties);
+		webSocketClusterProcessor.setWebSocketProperties(webSocketProperties);
 		webSocketClusterProcessor.setWebSocketMessageSender(webSocketMessageSender);
 		webSocketClusterProcessor.setRedissonClient(redissonClient);
 		LogUtils.info("Bean [Web Socket Cluster Processor] Auto Configure.");
@@ -121,7 +121,7 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 		 * 3. withSockJS()表示支持socktJS访问
 		 * 4. 添加自定义拦截器，这个拦截器是上一个demo自己定义的获取httpsession的拦截器
 		 */
-		registry.addEndpoint(customWebSocketProperties.getEndpoint())
+		registry.addEndpoint(webSocketProperties.getEndpoint())
 			.setAllowedOriginPatterns("*")
 			.setHandshakeHandler(webSocketHandshakeHandler())
 			.withSockJS();
@@ -169,15 +169,15 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 //        registry.enableSimpleBroker(webSocketProperties.getBroadcast(), webSocketProperties.getPeerToPeer())
 //                .setHeartbeatValue(new long[]{10000, 10000})
 //                .setTaskScheduler(taskScheduler);
-		registry.enableSimpleBroker(customWebSocketProperties.getBroadcast(),
-			customWebSocketProperties.getPeerToPeer());
+		registry.enableSimpleBroker(webSocketProperties.getBroadcast(),
+			webSocketProperties.getPeerToPeer());
 
 		/*
 		 * 全局使用的消息前缀（客户端订阅路径上会体现出来）
 		 * "/app" 为配置应用服务器的地址前缀，表示所有以/app 开头的客户端消息或请求
 		 *  都会路由到带有@MessageMapping 注解的方法中
 		 */
-		String[] applicationDestinationPrefixes = customWebSocketProperties.getApplicationPrefixes();
+		String[] applicationDestinationPrefixes = webSocketProperties.getApplicationPrefixes();
 		if (ArrayUtils.isNotEmpty(applicationDestinationPrefixes)) {
 			registry.setApplicationDestinationPrefixes(applicationDestinationPrefixes);
 		}
@@ -190,8 +190,8 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 		 *    而不是 AnnotationMethodMessageHandler 或  SimpleBrokerMessageHandler
 		 *    or StompBrokerRelayMessageHandler，是在@SendToUser的URL前加“user+sessionId"组成
 		 */
-		if (StringUtils.isNotBlank(customWebSocketProperties.getUserDestinationPrefix())) {
-			registry.setUserDestinationPrefix(customWebSocketProperties.getUserDestinationPrefix());
+		if (StringUtils.isNotBlank(webSocketProperties.getUserDestinationPrefix())) {
+			registry.setUserDestinationPrefix(webSocketProperties.getUserDestinationPrefix());
 		}
 
 		/*
