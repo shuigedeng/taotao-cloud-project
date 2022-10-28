@@ -3,6 +3,17 @@ dependencies {
 
     api "org.springframework.cloud:spring-cloud-starter-sleuth"
     api "org.springframework.cloud:spring-cloud-sleuth-zipkin"
+
+    api 'io.zipkin.brave:brave-instrumentation-dubbo'
+    api 'io.zipkin.brave:brave-instrumentation-mysql8'
+    api 'io.zipkin.brave:brave-instrumentation-mongodb'
+    api 'io.zipkin.brave:brave-instrumentation-p6psy'
+
+    api('io.opentracing.brave:brave-opentracing') {
+        exclude group: 'io.opentracing', module: 'opentracing-api'
+    }
+    api 'io.opentracing.contrib:opentracing-redis-redisson'
+    api 'io.opentracing.contrib:opentracing-redis-spring-data2'
 }
 
 
