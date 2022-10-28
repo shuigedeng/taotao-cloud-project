@@ -1,13 +1,14 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
+
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-kafka")
 
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-aop"
 
-    compileOnly "com.baomidou:mybatis-plus-extension"
-    compileOnly "org.springframework.kafka:spring-kafka"
+//    compileOnly "com.baomidou:mybatis-plus-extension"
 
     //api "com.github.danielwegener:logback-kafka-appender"
     //https://search.maven.org/artifact/com.github.rahulsinghai/logback-kafka-appender
@@ -21,10 +22,11 @@ dependencies {
     //https://search.maven.org/artifact/dev.akkinoc.spring.boot/logback-access-spring-boot-starter
     api "dev.akkinoc.spring.boot:logback-access-spring-boot-starter:3.4.1"
 
-    // https://github.com/qqxx6661/logRecord
+    //https://github.com/qqxx6661/logRecord
     //https://search.maven.org/artifact/cn.monitor4all/log-record-starter
     api("cn.monitor4all:log-record-starter:1.2.4") {
         exclude group: "org.projectlombok", module: "lombok"
+        exclude group: "org.apache.commons", module: "commons-text"
     }
 
     //https://search.maven.org/artifact/io.github.mouzt/bizlog-sdk

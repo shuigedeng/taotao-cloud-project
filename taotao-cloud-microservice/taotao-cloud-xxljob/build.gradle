@@ -5,6 +5,7 @@ dependencies {
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-skywalking")
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-freemarker"
@@ -16,8 +17,6 @@ dependencies {
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2"
     implementation "mysql:mysql-connector-java"
     implementation "com.xuxueli:xxl-job-core"
-
-    implementation 'io.zipkin.brave:brave-instrumentation-mysql8:5.14.1'
 }
 
 mainClassName = "com.taotao.cloud.xxljob.TaoTaoCloudXxlJobApplication"

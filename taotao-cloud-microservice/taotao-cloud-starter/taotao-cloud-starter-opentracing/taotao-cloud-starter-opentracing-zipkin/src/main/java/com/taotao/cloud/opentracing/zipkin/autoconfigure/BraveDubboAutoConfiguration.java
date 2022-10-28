@@ -1,8 +1,7 @@
 package com.taotao.cloud.opentracing.zipkin.autoconfigure;
 
 import brave.dubbo.TracingFilter;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.config.ConsumerConfig;
 import org.apache.dubbo.config.ProviderConfig;
 import org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration;
@@ -15,33 +14,28 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 自定义 Brave TraceFilter 自动装配
- *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
  */
-@ConditionalOnProperty(
-	prefix = "dubbo",
-	name = {"enabled"},
-	matchIfMissing = true
-)
+@ConditionalOnProperty(prefix = "dubbo", name = {"enabled"}, matchIfMissing = true)
 @AutoConfigureAfter(DubboAutoConfiguration.class)
 @ConditionalOnClass(TracingFilter.class)
 @ConditionalOnBean({ProviderConfig.class, ConsumerConfig.class})
-@RequiredArgsConstructor
-@Slf4j
 @Configuration(proxyBeanMethods = false)
-public class BraveTraceFilterAutoConfiguration implements InitializingBean {
+public class BraveDubboAutoConfiguration implements InitializingBean {
 
 	public static final String TRACING = "tracing";
 	public static final String ADD_TRACING_FILTER = "Initializing providerConfig and consumerConfig add tracing filter";
 
 	private final ProviderConfig providerConfig;
-
 	private final ConsumerConfig consumerConfig;
+
+	public BraveDubboAutoConfiguration(ProviderConfig providerConfig, ConsumerConfig consumerConfig) {
+		this.providerConfig = providerConfig;
+		this.consumerConfig = consumerConfig;
+	}
 
 	@Override
 	public void afterPropertiesSet() {
-		log.debug(ADD_TRACING_FILTER);
+		LogUtils.debug(ADD_TRACING_FILTER);
 		providerConfig.setFilter(TRACING);
 		consumerConfig.setFilter(TRACING);
 	}

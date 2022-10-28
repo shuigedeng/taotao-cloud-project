@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.data.common.exception;
+package com.taotao.cloud.opentracing.common.exception;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
@@ -30,49 +30,49 @@ import static com.taotao.cloud.common.enums.ResultEnum.NOT_FOUND;
  * @version 2021.9
  * @since 2021-09-02 20:09:13
  */
-public class DataCommonException extends BaseException {
+public class OpentracingCommonException extends BaseException {
 
 	@Serial
 	private static final long serialVersionUID = 6610083281801529147L;
 
-	public DataCommonException(String message) {
+	public OpentracingCommonException(String message) {
 		super(message);
 	}
 
-	public DataCommonException(Integer code, String message) {
+	public OpentracingCommonException(Integer code, String message) {
 		super(code, message);
 	}
 
-	public DataCommonException(String message, Throwable e) {
+	public OpentracingCommonException(String message, Throwable e) {
 		super(message, e);
 	}
 
-	public DataCommonException(Throwable e) {
+	public OpentracingCommonException(Throwable e) {
 		super(e);
 	}
 
-	public DataCommonException(Integer code, String message, Throwable e) {
+	public OpentracingCommonException(Integer code, String message, Throwable e) {
 		super(code, message, e);
 	}
 
-	public DataCommonException(ResultEnum result) {
+	public OpentracingCommonException(ResultEnum result) {
 		super(result);
 	}
 
-	public DataCommonException(ResultEnum result, Throwable e) {
+	public OpentracingCommonException(ResultEnum result, Throwable e) {
 		super(result, e);
 	}
 
 
-	public static Supplier<DataCommonException> businessException(String msg) {
-		return () -> new DataCommonException(msg);
+	public static Supplier<OpentracingCommonException> businessException(String msg) {
+		return () -> new OpentracingCommonException(msg);
 	}
 
-	public static Supplier<DataCommonException> notFound() {
-		return () -> new DataCommonException(NOT_FOUND);
+	public static Supplier<OpentracingCommonException> notFound() {
+		return () -> new OpentracingCommonException(NOT_FOUND);
 	}
 
-	public static DataCommonException notFoundException() {
-		return new DataCommonException(NOT_FOUND);
+	public static OpentracingCommonException notFoundException() {
+		return new OpentracingCommonException(NOT_FOUND);
 	}
 }
