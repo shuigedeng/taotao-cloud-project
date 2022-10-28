@@ -3,8 +3,6 @@ dependencies {
 
     api "org.springframework.cloud:spring-cloud-starter-bootstrap"
     api "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-    api "org.springframework.cloud:spring-cloud-starter-sleuth"
-    api "org.springframework.cloud:spring-cloud-sleuth-zipkin"
 
     api "com.taobao.arthas:arthas-spring-boot-starter"
     //api "org.springframework.cloud:spring-cloud-starter-kubernetes"
