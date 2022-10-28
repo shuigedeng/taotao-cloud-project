@@ -1,0 +1,10 @@
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-common")
+
+    //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-logback-1.x
+    api "org.apache.skywalking:apm-toolkit-logback-1.x:8.12.0"
+    //https://search.maven.org/artifact/org.apache.skywalking/apm-toolkit-trace
+    api "org.apache.skywalking:apm-toolkit-trace:8.12.0"
+}
+
+
