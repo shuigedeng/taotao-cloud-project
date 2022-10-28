@@ -16,7 +16,6 @@
 package com.taotao.cloud.logger.logback.layout;
 
 import ch.qos.logback.classic.PatternLayout;
-import org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackSkyWalkingContextPatternConverter;
 
 /**
  * TraceIdPatternLogbackLayout

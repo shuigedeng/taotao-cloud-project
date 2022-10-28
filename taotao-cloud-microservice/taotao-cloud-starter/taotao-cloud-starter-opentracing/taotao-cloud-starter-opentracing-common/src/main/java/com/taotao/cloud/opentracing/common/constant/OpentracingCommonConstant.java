@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.data.common.enums;
+package com.taotao.cloud.opentracing.common.constant;
 
 /**
- * AlibabaEnum
+ * 全局公共常量
  *
  * @author shuigedeng
- * @version 2022.09
- * @since 2022-10-23 15:41
+ * @version 2021.9
+ * @since 2021-09-02 19:35:37
  */
-public class DataCommonEnum {
+public final class OpentracingCommonConstant {
+
+	private OpentracingCommonConstant() {
+	}
+
+	public static String SPRING_APP_NAME_KEY = "spring.application.name";
 
 }

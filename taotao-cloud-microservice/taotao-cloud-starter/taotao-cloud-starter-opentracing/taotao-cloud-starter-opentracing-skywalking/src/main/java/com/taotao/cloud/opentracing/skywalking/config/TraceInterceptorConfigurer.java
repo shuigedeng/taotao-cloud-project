@@ -1,28 +1,24 @@
 package com.taotao.cloud.opentracing.skywalking.config;
 
-import groop.idealworld.dew.core.cluster.spi.skywalking.interceptor.TraceInterceptor;
-import group.idealworld.dew.core.cluster.ClusterTrace;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.opentracing.skywalking.ClusterTrace;
+import com.taotao.cloud.opentracing.skywalking.interceptor.TraceInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * @author yiye
- **/
-@Slf4j
 @ConditionalOnWebApplication
 public class TraceInterceptorConfigurer implements WebMvcConfigurer {
 
-    private final ClusterTrace clusterTrace;
+	private final ClusterTrace clusterTrace;
 
-    public TraceInterceptorConfigurer(ClusterTrace clusterTrace) {
-        this.clusterTrace = clusterTrace;
-    }
+	public TraceInterceptorConfigurer(ClusterTrace clusterTrace) {
+		this.clusterTrace = clusterTrace;
+	}
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        log.info("Enabled SkyWalking Tracing...");
-        registry.addInterceptor(new TraceInterceptor(clusterTrace)).addPathPatterns("/**").order(1);
-    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		LogUtils.info("Enabled SkyWalking Tracing...");
+		registry.addInterceptor(new TraceInterceptor(clusterTrace)).addPathPatterns("/**").order(1);
+	}
 }

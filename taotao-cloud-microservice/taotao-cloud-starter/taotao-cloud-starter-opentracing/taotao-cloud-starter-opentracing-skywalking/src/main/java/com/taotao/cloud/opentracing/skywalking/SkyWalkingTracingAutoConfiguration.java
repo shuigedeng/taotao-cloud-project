@@ -1,35 +1,29 @@
 package com.taotao.cloud.opentracing.skywalking;
 
-import groop.idealworld.dew.core.cluster.spi.skywalking.config.TraceInterceptorConfigurer;
-import group.idealworld.dew.core.cluster.ClusterTrace;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.opentracing.skywalking.config.TraceInterceptorConfigurer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
-/**
- * Created on 2022/9/25.
- *
- * @author 迹_Jason
- */
-@Slf4j
-@Configuration
+@AutoConfiguration
 public class SkyWalkingTracingAutoConfiguration {
 
-    @PostConstruct
-    public void init() {
-        log.info("Load Auto Configuration : {}", this.getClass().getName());
-    }
+	@PostConstruct
+	public void init() {
+		LogUtils.info("Load Auto Configuration : {}", this.getClass().getName());
+	}
 
-    @Bean
-    public ClusterTrace skyWalkingClusterTrace() {
-        return new SkyWalkingClusterTrace();
-    }
+	@Bean
+	public ClusterTrace skyWalkingClusterTrace() {
+		return new SkyWalkingClusterTrace();
+	}
 
-    @Bean
-    public TraceInterceptorConfigurer traceInterceptorConfigurer(ClusterTrace clusterTrace) {
-        return new TraceInterceptorConfigurer(clusterTrace);
-    }
+
+	@Bean
+	public TraceInterceptorConfigurer traceInterceptorConfigurer(ClusterTrace clusterTrace) {
+		return new TraceInterceptorConfigurer(clusterTrace);
+	}
 
 }

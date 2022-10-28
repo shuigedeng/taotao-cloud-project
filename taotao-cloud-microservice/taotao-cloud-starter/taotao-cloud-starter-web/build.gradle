@@ -24,7 +24,7 @@ dependencies {
 
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-caffeine")
-    
+
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-jpa")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-mybatis-plus")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
@@ -33,6 +33,8 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-sentinel")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
 
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-zipkin")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-skywalking")
 
     api "org.springframework.boot:spring-boot-starter-webflux"
     api("org.springframework.boot:spring-boot-starter-web") {

@@ -26,7 +26,7 @@ public class P6spyProperties implements EnvironmentAware {
 	private String appender = "com.taotao.cloud.data.p6spy.logger.P6spyLogger";
 	private String excludecategories;
 	private String sqlexpression;
-	private String modulelist = "com.p6spy.engine.spy.P6SpyFactory,com.p6spy.engine.logging.P6LogFactory,com.p6spy.engine.outage.P6OutageFactory,brave.p6spy.TracingP6Factory";
+	private String modulelist = "com.p6spy.engine.spy.P6SpyFactory,com.p6spy.engine.logging.P6LogFactory,com.p6spy.engine.outage.P6OutageFactory";
 	private String include;
 	private String executionThreshold;
 	private String reloadpropertiesinterval;

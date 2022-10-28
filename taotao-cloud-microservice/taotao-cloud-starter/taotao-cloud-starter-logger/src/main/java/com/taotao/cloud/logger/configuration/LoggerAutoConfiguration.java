@@ -18,6 +18,7 @@ package com.taotao.cloud.logger.configuration;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.logger.annotation.ConditionalOnRequestLoggerType;
 import com.taotao.cloud.logger.aspect.RequestLoggerAspect;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
 import com.taotao.cloud.logger.listener.RequestLoggerListener;
@@ -28,15 +29,15 @@ import com.taotao.cloud.logger.service.impl.KafkaRequestLoggerServiceImpl;
 import com.taotao.cloud.logger.service.impl.LoggerRequestLoggerServiceImpl;
 import com.taotao.cloud.logger.service.impl.RedisRequestLoggerServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,14 +73,27 @@ public class LoggerAutoConfiguration implements InitializingBean {
 			LogUtils.started(RequestLoggerConfiguration.class, StarterName.LOG_STARTER);
 		}
 
-		@Autowired
-		private RequestLoggerProperties properties;
+		@Bean
+		@ConditionalOnRequestLoggerType(logType = RequestLoggerTypeEnum.LOGGER)
+		public IRequestLoggerService loggerRequestLoggerService() {
+			return new LoggerRequestLoggerServiceImpl();
+		}
 
-		@Autowired(required = false)
-		private KafkaTemplate<String, String> kafkaTemplate;
+		@Bean
+		@ConditionalOnClass(RedisRepository.class)
+		@ConditionalOnBean(RedisRepository.class)
+		@ConditionalOnRequestLoggerType(logType = RequestLoggerTypeEnum.REDIS)
+		public IRequestLoggerService redisRequestLoggerService(RedisRepository redisRepository) {
+			return new RedisRequestLoggerServiceImpl(redisRepository);
+		}
 
-		@Autowired(required = false)
-		private RedisRepository redisRepository;
+		@Bean
+		@ConditionalOnClass(KafkaTemplate.class)
+		@ConditionalOnBean(KafkaTemplate.class)
+		@ConditionalOnRequestLoggerType(logType = RequestLoggerTypeEnum.KAFKA)
+		public IRequestLoggerService kafkaRequestLoggerService(KafkaTemplate<String, String> kafkaTemplate) {
+			return new KafkaRequestLoggerServiceImpl(kafkaTemplate);
+		}
 
 		@Bean
 		public RequestLoggerListener requestLoggerListener(List<IRequestLoggerService> requestLoggerServices) {
@@ -91,24 +105,26 @@ public class LoggerAutoConfiguration implements InitializingBean {
 			return new RequestLoggerAspect();
 		}
 
-		@Bean
-		public List<IRequestLoggerService> requestLoggerServices() {
-			List<IRequestLoggerService> requestLoggerServices = new ArrayList<>();
-			RequestLoggerTypeEnum[] types = properties.getTypes();
-			for (RequestLoggerTypeEnum type : types) {
-				if (RequestLoggerTypeEnum.LOGGER.equals(type)) {
-					requestLoggerServices.add(new LoggerRequestLoggerServiceImpl());
-				}
-				if (RequestLoggerTypeEnum.REDIS.equals(type)) {
-					requestLoggerServices.add(new RedisRequestLoggerServiceImpl(redisRepository));
-				}
-				if (RequestLoggerTypeEnum.KAFKA.equals(type)) {
-					requestLoggerServices.add(new KafkaRequestLoggerServiceImpl(kafkaTemplate));
-				}
-			}
-
-			return requestLoggerServices;
-		}
+		// @Bean
+		// public List<IRequestLoggerService> requestLoggerServices() {
+		// 	List<IRequestLoggerService> requestLoggerServices = new ArrayList<>();
+		// 	RequestLoggerTypeEnum[] types = properties.getTypes();
+		// 	for (RequestLoggerTypeEnum type : types) {
+		// 		if (RequestLoggerTypeEnum.LOGGER.equals(type)) {
+		// 			requestLoggerServices.add(new LoggerRequestLoggerServiceImpl());
+		// 		}
+		// 		if (RequestLoggerTypeEnum.REDIS.equals(type)) {
+		// 			requestLoggerServices.add(new RedisRequestLoggerServiceImpl(redisRepository));
+		// 		}
+		// 		if (RequestLoggerTypeEnum.KAFKA.equals(type)) {
+		// 			requestLoggerServices.add(new KafkaRequestLoggerServiceImpl(kafkaTemplate));
+		// 		}
+		// 	}
+		//
+		// 	return requestLoggerServices;
+		// }
 	}
+
+
 }
 
