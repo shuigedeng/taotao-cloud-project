@@ -355,8 +355,13 @@ taotao:
           tokenId: ${DINGDING_TOKEN_ID:xxx}
           secret: ${DINGDING_SECRET:xxxx}
     logger:
+      enabled: true
       request:
-        enabled: false
+        enabled: true
+        types:
+          - redis
+          - logger
+          - kafka
 
 management:
   server:
