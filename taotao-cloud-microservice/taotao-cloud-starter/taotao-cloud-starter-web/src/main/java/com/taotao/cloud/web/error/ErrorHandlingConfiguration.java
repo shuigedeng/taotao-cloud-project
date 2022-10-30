@@ -10,14 +10,12 @@ import com.taotao.cloud.web.error.mapper.ErrorCodeMapper;
 import com.taotao.cloud.web.error.mapper.ErrorMessageMapper;
 import com.taotao.cloud.web.error.mapper.HttpStatusMapper;
 import java.util.List;
-
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -40,8 +38,7 @@ public class ErrorHandlingConfiguration {
 		List<ApiExceptionHandler> handlers,
 		FallbackApiExceptionHandler fallbackApiExceptionHandler) {
 		return new ErrorHandlingControllerAdvice(properties,
-			handlers,
-			fallbackApiExceptionHandler);
+			handlers, fallbackApiExceptionHandler);
 	}
 
 	@Bean

@@ -20,6 +20,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mail.template.JavaMailTemplate;
 import com.taotao.cloud.mail.template.MailTemplate;
+import com.taotao.cloud.mail.util.MailUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -56,19 +57,27 @@ public class MailAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public MailAccount mailAccount(com.taotao.cloud.mail.properties.MailProperties mailProperties) {
+	@ConditionalOnBean
+	public MailAccount mailAccount(MailProperties mailProperties) {
 		MailAccount account = new MailAccount();
 		account.setHost(mailProperties.getHost());
 		account.setPort(mailProperties.getPort());
-		account.setAuth(mailProperties.getAuth());
-		account.setFrom(mailProperties.getFrom());
-		account.setUser(mailProperties.getUser());
-		account.setPass(mailProperties.getPass());
+		account.setAuth(mailProperties.getPassword() != null);
+		//account.setFrom(mailProperties.getFrom());
+		//account.setUser(mailProperties.getUser());
+		account.setPass(mailProperties.getPassword());
 		account.setSocketFactoryPort(mailProperties.getPort());
-		account.setStarttlsEnable(mailProperties.getStarttlsEnable());
-		account.setSslEnable(mailProperties.getSslEnable());
-		account.setTimeout(mailProperties.getTimeout());
-		account.setConnectionTimeout(mailProperties.getConnectionTimeout());
+
+		account.setStarttlsEnable(true);
+		account.setSslEnable(true);
+		//account.setTimeout(mailProperties.getTimeout());
+		//account.setConnectionTimeout(mailProperties.getConnectionTimeout());
 		return account;
+	}
+
+	@Bean
+	@ConditionalOnBean
+	public MailUtils mailUtils(MailAccount mailAccount) {
+		return new MailUtils(mailAccount);
 	}
 }
