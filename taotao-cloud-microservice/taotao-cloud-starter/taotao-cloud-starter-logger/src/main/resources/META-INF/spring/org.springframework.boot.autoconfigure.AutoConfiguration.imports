@@ -1,3 +1,7 @@
 com.taotao.cloud.logger.configuration.LoggerAutoConfiguration
 com.taotao.cloud.logger.configuration.LogbackAccessAutoConfiguration
 com.taotao.cloud.logger.configuration.TlogAutoConfiguration
+com.taotao.cloud.logger.configuration.request.RequestLoggerConfiguration
+com.taotao.cloud.logger.configuration.request.RedisRequestLoggerConfiguration
+com.taotao.cloud.logger.configuration.request.KafkaRequestLoggerConfiguration
+com.taotao.cloud.logger.configuration.request.LoggerRequestLoggerConfiguration

@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.logger.enums;
 
-import com.taotao.cloud.common.enums.BaseEnum;
-
 /**
  * 日志类型
  *
@@ -24,45 +22,18 @@ import com.taotao.cloud.common.enums.BaseEnum;
  * @version 2021.9
  * @since 2021-09-02 20:22:52
  */
-public enum RequestLoggerTypeEnum implements BaseEnum {
+public enum RequestLoggerTypeEnum {
 	/**
 	 * logger
 	 */
-	LOGGER(1, "logger"),
+	LOGGER,
 	/**
 	 * redis
 	 */
-	REDIS(2, "redis"),
+	REDIS,
 	/**
 	 * kafka
 	 */
-	KAFKA(3, "kafka");
+	KAFKA;
 
-	private final int code;
-	private final String desc;
-
-	RequestLoggerTypeEnum(int code, String desc) {
-		this.code = code;
-		this.desc = desc;
-	}
-
-	@Override
-	public String getDesc() {
-		return desc;
-	}
-
-	@Override
-	public String getNameByCode(int code) {
-		for (RequestLoggerTypeEnum result : RequestLoggerTypeEnum.values()) {
-			if (result.getCode() == code) {
-				return result.name().toLowerCase();
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public int getCode() {
-		return code;
-	}
 }
