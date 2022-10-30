@@ -1,6 +1,4 @@
 dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
-
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-common")
 
     api "org.springframework.boot:spring-boot-starter-data-elasticsearch"
