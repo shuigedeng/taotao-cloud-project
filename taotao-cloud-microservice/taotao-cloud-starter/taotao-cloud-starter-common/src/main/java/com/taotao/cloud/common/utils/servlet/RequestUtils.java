@@ -22,6 +22,22 @@ import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import org.springframework.boot.web.context.ConfigurableWebServerApplicationContext;
+import org.springframework.boot.web.server.WebServer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.ResolvableType;
+import org.springframework.core.codec.ByteArrayDecoder;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.codec.DecoderHttpMessageReader;
+import org.springframework.http.codec.HttpMessageReader;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import reactor.core.publisher.Mono;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,21 +53,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.boot.web.context.ConfigurableWebServerApplicationContext;
-import org.springframework.boot.web.server.WebServer;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.ResolvableType;
-import org.springframework.core.codec.ByteArrayDecoder;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.codec.DecoderHttpMessageReader;
-import org.springframework.http.codec.HttpMessageReader;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import reactor.core.publisher.Mono;
 
 /**
  * RequestUtil
@@ -101,7 +102,18 @@ public class RequestUtils {
 	 */
 	public static HttpServletRequest getRequest() {
 		WebContext webContext = getContext();
-		return webContext == null ? null : webContext.request;
+		if (webContext == null) {
+			RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+			if (requestAttributes != null) {
+				ServletRequestAttributes attributes = (ServletRequestAttributes) requestAttributes;
+				//RequestContextHolder.setRequestAttributes(attributes, true);
+				return attributes.getRequest();
+			}
+		} else {
+			return webContext.request;
+		}
+
+		return null;
 	}
 
 	/**
@@ -112,7 +124,17 @@ public class RequestUtils {
 	 */
 	public static HttpServletResponse getResponse() {
 		WebContext webContext = getContext();
-		return webContext == null ? null : webContext.response;
+		if (webContext == null) {
+			RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+			if (requestAttributes != null) {
+				ServletRequestAttributes attributes = (ServletRequestAttributes) requestAttributes;
+				//RequestContextHolder.setRequestAttributes(attributes, true);
+				return attributes.getResponse();
+			}
+		} else {
+			return webContext.response;
+		}
+		return null;
 	}
 
 	/**
@@ -652,7 +674,7 @@ public class RequestUtils {
 		return ip;
 	}
 
-	public static boolean excludeActuator(HttpServletRequest request){
+	public static boolean excludeActuator(HttpServletRequest request) {
 		return request.getRequestURI().startsWith("/actuator");
 	}
 }
