@@ -9,6 +9,9 @@ import com.taotao.cloud.web.exception.ExceptionHandleProperties;
 import com.taotao.cloud.web.exception.GlobalExceptionHandler;
 import com.taotao.cloud.web.exception.domain.ExceptionMessage;
 import com.taotao.cloud.web.exception.domain.ExceptionNoticeResponse;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Map;
@@ -16,19 +19,20 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author lingting 2020-09-03 20:09
  */
 public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
-	implements GlobalExceptionHandler, InitializingBean {
+	implements GlobalExceptionHandler, InitializingBean, DisposableBean {
 
 	private final BlockingQueue<Throwable> queue = new LinkedBlockingQueue<>();
 
 	private static final String NULL_MESSAGE_KEY = "";
 
 	protected final ExceptionHandleProperties config;
+
+	private volatile boolean flag = true;
 
 	/**
 	 * 通知消息存放 e.message 堆栈信息
@@ -58,7 +62,7 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 	private final String applicationName;
 
 	protected AbstractNoticeGlobalExceptionHandler(ExceptionHandleProperties config,
-		String applicationName) {
+												   String applicationName) {
 		this.config = config;
 		messages = new ConcurrentHashMap<>(config.getMax() * 2);
 		this.applicationName = applicationName;
@@ -85,7 +89,7 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 		TimeInterval interval = new TimeInterval();
 		long threadId = Thread.currentThread().getId();
 		// 未被中断则一直运行
-		while (!isInterrupted()) {
+		while (flag) {
 			int i = 0;
 			while (i < config.getMax() && interval.intervalSecond() < config.getTime()) {
 				Throwable t = null;
@@ -95,6 +99,7 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 				} catch (InterruptedException e) {
 					interrupt();
 				}
+
 				if (t != null) {
 					key = t.getMessage() == null ? NULL_MESSAGE_KEY : t.getMessage();
 					// i++
@@ -117,6 +122,7 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 					}
 				}
 			}
+
 			// 一次处理结束
 			if (messages.size() > 0) {
 				// 如果需要发送的消息不为空
@@ -197,4 +203,9 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 		this.start();
 	}
 
+	@Override
+	public void destroy() throws Exception {
+		this.flag = false;
+		this.interrupt();
+	}
 }
