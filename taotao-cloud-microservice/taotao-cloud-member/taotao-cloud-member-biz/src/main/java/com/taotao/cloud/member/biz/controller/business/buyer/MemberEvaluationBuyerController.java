@@ -5,7 +5,7 @@ import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.EvaluationNumberVO;

@@ -6,7 +6,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.web.vo.StoreGoodsLabelVO;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.store.api.web.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.web.dto.StoreCompanyDTO;
 import com.taotao.cloud.store.api.web.dto.StoreOtherInfoDTO;

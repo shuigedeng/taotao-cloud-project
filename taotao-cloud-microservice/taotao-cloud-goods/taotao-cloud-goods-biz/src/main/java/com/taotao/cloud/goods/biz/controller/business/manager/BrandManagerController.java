@@ -10,7 +10,7 @@ import com.taotao.cloud.goods.api.model.vo.BrandVO;
 import com.taotao.cloud.goods.biz.model.convert.BrandConvert;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 import com.taotao.cloud.goods.biz.service.business.IBrandService;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.listener;
+package com.taotao.cloud.web.request.listener;
 
-import com.taotao.cloud.logger.event.RequestLoggerEvent;
-import com.taotao.cloud.logger.model.RequestLogger;
-import com.taotao.cloud.logger.service.IRequestLoggerService;
-import java.util.List;
-import java.util.Objects;
+import com.taotao.cloud.web.request.event.RequestLoggerEvent;
+import com.taotao.cloud.web.request.model.RequestLog;
+import com.taotao.cloud.web.request.service.IRequestLoggerService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 注解形式的监听 异步监听日志事件
@@ -41,10 +42,10 @@ public class RequestLoggerListener {
 	@Async
 	@EventListener(RequestLoggerEvent.class)
 	public void saveRequestLog(RequestLoggerEvent event) {
-		RequestLogger requestLogger = (RequestLogger) event.getSource();
+		RequestLog requestLog = (RequestLog) event.getSource();
 
 		if (Objects.nonNull(requestLoggerService) && !requestLoggerService.isEmpty()) {
-			requestLoggerService.forEach(service -> service.save(requestLogger));
+			requestLoggerService.forEach(service -> service.save(requestLog));
 		}
 	}
 }

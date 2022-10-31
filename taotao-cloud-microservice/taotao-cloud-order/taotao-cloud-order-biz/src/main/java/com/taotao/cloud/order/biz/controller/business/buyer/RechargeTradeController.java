@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.feign.FeignMemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import io.swagger.v3.oas.annotations.Operation;

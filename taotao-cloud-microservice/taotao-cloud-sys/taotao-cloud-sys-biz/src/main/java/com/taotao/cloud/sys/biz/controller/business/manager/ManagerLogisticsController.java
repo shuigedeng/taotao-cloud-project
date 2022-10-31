@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.biz.model.convert.LogisticsConvert;
 import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;

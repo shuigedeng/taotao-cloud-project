@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.web.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
 import com.taotao.cloud.distribution.biz.service.DistributionCashService;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

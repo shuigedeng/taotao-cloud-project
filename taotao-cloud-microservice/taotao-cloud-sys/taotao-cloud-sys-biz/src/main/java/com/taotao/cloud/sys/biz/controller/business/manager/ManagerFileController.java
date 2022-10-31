@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.vo.file.FileVO;
 import com.taotao.cloud.sys.api.model.vo.file.UploadFileVO;
 import com.taotao.cloud.sys.biz.model.convert.FileConvert;

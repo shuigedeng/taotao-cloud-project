@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.controller.business.seller;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.convert.MemberConvert;
 import com.taotao.cloud.member.biz.model.entity.Member;

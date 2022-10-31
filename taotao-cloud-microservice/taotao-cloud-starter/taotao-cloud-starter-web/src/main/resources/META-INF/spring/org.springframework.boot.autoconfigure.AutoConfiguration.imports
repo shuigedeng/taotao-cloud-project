@@ -6,3 +6,7 @@ com.taotao.cloud.web.configuration.ServletAutoConfiguration
 com.taotao.cloud.web.configuration.StrategyAutoConfiguration
 com.taotao.cloud.web.configuration.UndertowHttp2AutoConfiguration
 com.taotao.cloud.web.configuration.WebMvcAutoConfiguration
+com.taotao.cloud.web.request.request.RequestLoggerConfiguration
+com.taotao.cloud.web.request.request.RedisRequestLoggerConfiguration
+com.taotao.cloud.web.request.request.KafkaRequestLoggerConfiguration
+com.taotao.cloud.web.request.request.LoggerRequestLoggerConfiguration

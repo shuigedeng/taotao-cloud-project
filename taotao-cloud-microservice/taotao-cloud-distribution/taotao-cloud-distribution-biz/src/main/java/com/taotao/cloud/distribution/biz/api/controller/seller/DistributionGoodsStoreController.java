@@ -10,7 +10,7 @@ import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsService;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;

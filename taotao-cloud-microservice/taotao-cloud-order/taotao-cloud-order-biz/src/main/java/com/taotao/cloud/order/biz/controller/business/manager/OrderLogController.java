@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.controller.business.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.query.order.OrderLogPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderLogVO;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;

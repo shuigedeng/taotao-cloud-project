@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.model;
+package com.taotao.cloud.web.request.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * 日志
@@ -27,7 +27,7 @@ import java.util.Objects;
  * @version 2022.03
  * @since 2020/6/15 11:00
  */
-public class RequestLogger implements Serializable {
+public class RequestLog implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -749360940290141180L;

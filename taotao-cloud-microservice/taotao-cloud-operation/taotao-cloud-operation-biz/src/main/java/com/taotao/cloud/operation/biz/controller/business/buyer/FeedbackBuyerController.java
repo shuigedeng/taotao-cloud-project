@@ -1,7 +1,7 @@
 package com.taotao.cloud.operation.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.operation.biz.model.entity.Feedback;
 import com.taotao.cloud.operation.biz.service.business.FeedbackService;
 import io.swagger.v3.oas.annotations.Operation;

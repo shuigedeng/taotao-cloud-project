@@ -356,12 +356,6 @@ taotao:
           secret: ${DINGDING_SECRET:xxxx}
     logger:
       enabled: true
-      request:
-        enabled: true
-        types:
-          - redis
-          - logger
-          - kafka
 
 management:
   server:

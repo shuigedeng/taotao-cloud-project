@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.service.impl;
+package com.taotao.cloud.web.request.service.impl;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.DatePattern;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.logger.model.RequestLogger;
-import com.taotao.cloud.logger.service.IRequestLoggerService;
+import com.taotao.cloud.web.request.model.RequestLog;
+import com.taotao.cloud.web.request.service.IRequestLoggerService;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -47,13 +47,13 @@ public class RedisRequestLoggerServiceImpl implements IRequestLoggerService {
 	}
 
 	@Override
-	public void save(RequestLogger requestLogger) {
+	public void save(RequestLog requestLog) {
 		String date = DateUtils.format(LocalDate.now(), DatePattern.COLON_DATE_PATTERN);
 
 		if (Objects.nonNull(redisRepository)) {
-			redisRepository.send(RedisConstant.REQUEST_LOG_TOPIC, requestLogger);
+			redisRepository.send(RedisConstant.REQUEST_LOG_TOPIC, requestLog);
 
-			Long index = redisRepository.leftPush(RedisConstant.REQUEST_LOG + date, requestLogger);
+			Long index = redisRepository.leftPush(RedisConstant.REQUEST_LOG + date, requestLog);
 			if (index > 0) {
 				long andIncrement = sendSuccessNum.getAndIncrement();
 				if (andIncrement > 0 && andIncrement % THRESHOLD == 0) {

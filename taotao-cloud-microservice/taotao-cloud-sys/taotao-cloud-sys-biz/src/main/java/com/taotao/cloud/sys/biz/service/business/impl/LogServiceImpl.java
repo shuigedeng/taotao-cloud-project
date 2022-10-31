@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.dto.log.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.system.Log;
 import com.taotao.cloud.sys.biz.mapper.ILogMapper;

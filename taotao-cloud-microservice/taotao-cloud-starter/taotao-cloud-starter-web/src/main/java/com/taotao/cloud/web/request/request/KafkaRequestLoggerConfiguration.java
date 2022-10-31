@@ -1,12 +1,12 @@
-package com.taotao.cloud.logger.configuration.request;
+package com.taotao.cloud.web.request.request;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.logger.annotation.ConditionalOnRequestLoggerType;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
-import com.taotao.cloud.logger.properties.RequestLoggerProperties;
-import com.taotao.cloud.logger.service.IRequestLoggerService;
-import com.taotao.cloud.logger.service.impl.KafkaRequestLoggerServiceImpl;
+import com.taotao.cloud.web.request.annotation.ConditionalOnRequestLogger;
+import com.taotao.cloud.web.request.properties.RequestLoggerProperties;
+import com.taotao.cloud.web.request.service.IRequestLoggerService;
+import com.taotao.cloud.web.request.service.impl.KafkaRequestLoggerServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -34,7 +34,7 @@ public class KafkaRequestLoggerConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnRequestLoggerType(logType = RequestLoggerTypeEnum.KAFKA)
+	@ConditionalOnRequestLogger(logType = RequestLoggerTypeEnum.KAFKA)
 	public IRequestLoggerService kafkaRequestLoggerServiceImpl(
 		KafkaTemplate<String, String> kafkaTemplate) {
 		return new KafkaRequestLoggerServiceImpl(kafkaTemplate);

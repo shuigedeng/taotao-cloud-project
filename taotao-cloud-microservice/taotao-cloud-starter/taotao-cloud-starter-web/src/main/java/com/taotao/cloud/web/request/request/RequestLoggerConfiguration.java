@@ -1,17 +1,18 @@
-package com.taotao.cloud.logger.configuration.request;
+package com.taotao.cloud.web.request.request;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.logger.aspect.RequestLoggerAspect;
-import com.taotao.cloud.logger.listener.RequestLoggerListener;
-import com.taotao.cloud.logger.properties.RequestLoggerProperties;
-import com.taotao.cloud.logger.service.IRequestLoggerService;
-import java.util.List;
+import com.taotao.cloud.web.request.aspect.RequestLoggerAspect;
+import com.taotao.cloud.web.request.listener.RequestLoggerListener;
+import com.taotao.cloud.web.request.properties.RequestLoggerProperties;
+import com.taotao.cloud.web.request.service.IRequestLoggerService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 /**
  * 当web项目引入此依赖时，自动配置对应的内容 初始化log的事件监听与切面配置

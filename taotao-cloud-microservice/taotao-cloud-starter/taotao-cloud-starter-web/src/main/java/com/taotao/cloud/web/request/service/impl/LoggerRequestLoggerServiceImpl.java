@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.service.impl;
+package com.taotao.cloud.web.request.service.impl;
 
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.logger.model.RequestLogger;
-import com.taotao.cloud.logger.service.IRequestLoggerService;
+import com.taotao.cloud.web.request.model.RequestLog;
+import com.taotao.cloud.web.request.service.IRequestLoggerService;
 
 /**
  * 审计日志实现类-logger
@@ -30,7 +30,7 @@ import com.taotao.cloud.logger.service.IRequestLoggerService;
 public class LoggerRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	@Override
-	public void save(RequestLogger requestLogger) {
-		LogUtils.info("本地日志记录成功：{}", JsonUtils.toJSONString(requestLogger));
+	public void save(RequestLog requestLog) {
+		LogUtils.info("本地日志记录成功：{}", JsonUtils.toJSONString(requestLog));
 	}
 }

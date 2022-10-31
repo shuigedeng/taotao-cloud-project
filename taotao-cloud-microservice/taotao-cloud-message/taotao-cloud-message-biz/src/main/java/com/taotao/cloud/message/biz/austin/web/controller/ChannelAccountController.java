@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.web.controller;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
 import com.taotao.cloud.message.biz.austin.web.service.ChannelAccountService;

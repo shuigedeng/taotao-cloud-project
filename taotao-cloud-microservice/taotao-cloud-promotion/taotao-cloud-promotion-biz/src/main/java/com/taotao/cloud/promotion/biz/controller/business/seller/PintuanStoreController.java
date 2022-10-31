@@ -6,7 +6,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.model.query.PintuanPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
 import com.taotao.cloud.promotion.biz.model.entity.Pintuan;

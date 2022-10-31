@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.service.impl;
+package com.taotao.cloud.web.request.service.impl;
 
 import com.google.common.base.Stopwatch;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.logger.model.RequestLogger;
-import com.taotao.cloud.logger.service.IRequestLoggerService;
+import com.taotao.cloud.web.request.model.RequestLog;
+import com.taotao.cloud.web.request.service.IRequestLoggerService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -58,16 +59,16 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 	}
 
 	@Override
-	public void save(RequestLogger requestLogger) {
+	public void save(RequestLog requestLog) {
 		if (Objects.nonNull(kafkaTemplate)) {
-			String request = JsonUtils.toJSONString(requestLogger);
+			String request = JsonUtils.toJSONString(requestLog);
 
 			ListenableFuture<SendResult<String, String>> future = kafkaTemplate
 				.send(REQUEST_LOG_TOPIC + PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY), request);
 
 			future.addCallback(new ListenableFutureCallback<>() {
 				@Override
-				public void onFailure(Throwable throwable) {
+				public void onFailure(@NotNull Throwable throwable) {
 					long errorNum = sendErrorsNum.getAndIncrement();
 					if (errorNum > 0 && errorNum % THRESHOLD == 0) {
 						errorLog(errorNum);

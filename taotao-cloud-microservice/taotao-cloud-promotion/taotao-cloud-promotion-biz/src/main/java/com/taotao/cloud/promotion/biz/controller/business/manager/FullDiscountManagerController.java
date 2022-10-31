@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.controller.business.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.vo.cart.FullDiscountVO;
 import com.taotao.cloud.promotion.api.model.query.FullDiscountPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;

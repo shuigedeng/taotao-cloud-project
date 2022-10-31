@@ -7,7 +7,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.web.query.BillPageQuery;

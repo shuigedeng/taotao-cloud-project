@@ -1,6 +1,5 @@
 package com.taotao.cloud.auth.biz.controller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.auth.biz.service.QrCodeService;
