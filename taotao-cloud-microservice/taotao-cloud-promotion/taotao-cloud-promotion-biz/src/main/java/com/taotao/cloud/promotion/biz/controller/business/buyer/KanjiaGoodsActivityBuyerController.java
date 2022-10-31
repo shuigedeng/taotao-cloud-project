@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.controller.business.buyer;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.model.query.KanJiaActivityLogPageQuery;
 import com.taotao.cloud.promotion.api.model.query.KanjiaActivityPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;

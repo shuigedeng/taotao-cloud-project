@@ -13,24 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.service;
+package com.taotao.cloud.web.request.event;
 
-import com.taotao.cloud.logger.model.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
+import org.springframework.context.ApplicationEvent;
 
 /**
- * 日志接口
+ * 系统日志事件
  *
  * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-27 17:31:26
+ * @version 2022.03
+ * @since 2020/6/3 13:33
  */
-public interface IRequestLoggerService {
+public class RequestLoggerEvent extends ApplicationEvent {
 
-	/**
-	 * 添加日志
-	 *
-	 * @param requestLogger sysLog
-	 * @since 2022-04-27 17:31:26
-	 */
-	void save(RequestLogger requestLogger);
+	public RequestLoggerEvent(RequestLogger requestLogger) {
+		super(requestLogger);
+	}
 }

@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.controller.manger;
 import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import io.swagger.v3.oas.annotations.Operation;

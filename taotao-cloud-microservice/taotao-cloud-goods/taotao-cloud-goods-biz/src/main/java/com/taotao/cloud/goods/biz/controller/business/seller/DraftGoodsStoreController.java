@@ -12,7 +12,7 @@ import com.taotao.cloud.goods.api.model.vo.DraftGoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.model.vo.DraftGoodsVO;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.service.business.IDraftGoodsService;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

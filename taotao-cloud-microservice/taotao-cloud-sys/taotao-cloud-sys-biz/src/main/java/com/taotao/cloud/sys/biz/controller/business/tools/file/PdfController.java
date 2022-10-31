@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.controller.business.tools.file;
 
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.biz.utils.FileUploaderUtils;
 import com.taotao.cloud.sys.biz.utils.PdfUtils;
 import io.swagger.v3.oas.annotations.Operation;

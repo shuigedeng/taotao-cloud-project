@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.tree.ForestNodeMerger;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.dto.dept.DeptSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.dept.DeptUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.dept.DeptQueryVO;

@@ -25,7 +25,7 @@ import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoo
 import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.limit.annotation.GuavaLimit;
 import com.taotao.cloud.limit.annotation.Limit;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.feign.IFeignDictApi;
 import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;

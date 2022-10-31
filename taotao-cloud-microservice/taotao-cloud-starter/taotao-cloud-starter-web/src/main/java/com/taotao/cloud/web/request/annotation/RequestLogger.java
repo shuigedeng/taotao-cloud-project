@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.annotation;
+package com.taotao.cloud.web.request.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

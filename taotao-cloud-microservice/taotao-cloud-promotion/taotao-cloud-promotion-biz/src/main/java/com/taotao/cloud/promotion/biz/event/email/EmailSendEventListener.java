@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.promotion.biz.event.email;
 
-import com.taotao.cloud.logger.model.RequestLogger;
+import com.taotao.cloud.web.request.model.RequestLog;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class EmailSendEventListener {
 	@Async
 	@EventListener(EmailSendEvent.class)
 	public void saveRequestLog(EmailSendEvent event) {
-		RequestLogger requestLogger = (RequestLogger) event.getSource();
+		RequestLog requestLog = (RequestLog) event.getSource();
 
 	}
 }

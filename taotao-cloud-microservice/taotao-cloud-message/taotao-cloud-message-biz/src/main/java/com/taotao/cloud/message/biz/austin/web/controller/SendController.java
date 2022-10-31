@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.message.biz.austin.api.domain.SendRequest;
 import com.taotao.cloud.message.biz.austin.api.domain.SendResponse;
 import com.taotao.cloud.message.biz.austin.api.service.SendService;

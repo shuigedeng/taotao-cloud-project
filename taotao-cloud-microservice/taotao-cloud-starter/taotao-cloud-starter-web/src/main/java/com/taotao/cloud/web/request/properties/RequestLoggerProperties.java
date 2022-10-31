@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.properties;
+package com.taotao.cloud.web.request.properties;
 
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,7 +30,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = RequestLoggerProperties.PREFIX)
 public class RequestLoggerProperties {
 
-	public static final String PREFIX = "taotao.cloud.logger.request";
+	public static final String PREFIX = "taotao.cloud.web.request";
 
 	/**
 	 * 是否开启请求日志

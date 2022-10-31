@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.cron.handler.RefreshDingDingAccessTokenHandler;

@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.controller.business.seller;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import com.taotao.cloud.message.biz.service.business.StoreMessageService;
 import io.swagger.v3.oas.annotations.Operation;

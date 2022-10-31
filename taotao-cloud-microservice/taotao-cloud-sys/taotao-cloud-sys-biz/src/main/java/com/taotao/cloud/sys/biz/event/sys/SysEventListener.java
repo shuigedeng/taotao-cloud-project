@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.event.sys;
 
-import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.logger.model.RequestLogger;
+import com.taotao.cloud.web.request.model.RequestLog;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -34,6 +33,6 @@ public class SysEventListener {
 	@Async
 	@EventListener(SysEvent.class)
 	public void saveRequestLog(SysEvent event) {
-		RequestLogger requestLogger = (RequestLogger) event.getSource();
+		RequestLog requestLog = (RequestLog) event.getSource();
 	}
 }

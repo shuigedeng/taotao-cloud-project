@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.message.api.feign.IFeignStoreMessageApi;
 import com.taotao.cloud.message.api.model.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.api.model.vo.StoreMessageVO;

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.store.api.web.dto.StoreEditDTO;
 import com.taotao.cloud.store.api.web.query.StorePageQuery;

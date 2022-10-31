@@ -1287,6 +1287,12 @@ taotao:
     sign:
       enabled: true
     web:
+      request:
+        enabled: true
+        types:
+          - kafka
+          - redis
+          - logger
       interceptor:
         doubt-api: true
         header: true
@@ -1381,12 +1387,7 @@ taotao:
         enabled: false
     logger:
       enabled: true
-      request:
-        enabled: true
-        types:
-          - kafka
-          - redis
-          - logger
+
     laytpl:
       enabled: false
     job:

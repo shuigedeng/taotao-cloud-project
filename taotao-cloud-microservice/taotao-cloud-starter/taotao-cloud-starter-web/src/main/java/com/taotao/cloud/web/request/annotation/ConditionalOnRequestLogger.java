@@ -13,11 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.annotation;
+package com.taotao.cloud.web.request.annotation;
 
-import com.taotao.cloud.logger.annotation.ConditionalOnRequestLoggerType.RequestLogTypeCondition;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
-import com.taotao.cloud.logger.properties.RequestLoggerProperties;
+import com.taotao.cloud.web.request.annotation.ConditionalOnRequestLogger.RequestLogTypeCondition;
+import com.taotao.cloud.web.request.properties.RequestLoggerProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
+import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -25,11 +31,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Arrays;
 import java.util.Map;
-import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
-import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
-import org.springframework.context.annotation.ConditionContext;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.core.type.AnnotatedTypeMetadata;
+import java.util.Objects;
 
 /**
  * 系统操作记录
@@ -42,7 +44,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Documented
 @Conditional(RequestLogTypeCondition.class)
-public @interface ConditionalOnRequestLoggerType {
+public @interface ConditionalOnRequestLogger {
 
 	RequestLoggerTypeEnum logType() default RequestLoggerTypeEnum.LOGGER;
 
@@ -50,11 +52,11 @@ public @interface ConditionalOnRequestLoggerType {
 
 		@Override
 		public ConditionOutcome getMatchOutcome(ConditionContext context,
-			AnnotatedTypeMetadata metadata) {
-			RequestLoggerProperties properties = context.getBeanFactory()
+												AnnotatedTypeMetadata metadata) {
+			RequestLoggerProperties properties = Objects.requireNonNull(context.getBeanFactory())
 				.getBean(RequestLoggerProperties.class);
 			Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(
-				ConditionalOnRequestLoggerType.class.getName());
+				ConditionalOnRequestLogger.class.getName());
 
 			assert annotationAttributes != null;
 			RequestLoggerTypeEnum requestLoggerTypeEnum = (RequestLoggerTypeEnum) annotationAttributes.get(

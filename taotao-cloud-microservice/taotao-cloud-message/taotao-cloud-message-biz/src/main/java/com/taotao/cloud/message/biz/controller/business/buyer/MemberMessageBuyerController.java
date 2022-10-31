@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import com.taotao.cloud.message.biz.service.business.MemberMessageService;
 import io.swagger.v3.oas.annotations.Operation;
