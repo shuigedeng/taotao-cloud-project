@@ -21,7 +21,6 @@ env:
   TAOTAO_CLOUD_REGISTRY_USERNAME: ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}}
   TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD}}
 
-
 # gradle publishMavenJavaPublicationToGitHubRepository
 
 jobs:
@@ -61,7 +60,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}/taotao-cloud-dependencies
           gradle publishToMavenLocal 
-          gradle publishMavenJavaPublicationToGitHubRepository
+          gradle publishAllPublicationsToSonatypeRepository
 
       - name: Build And Publish Starter
         run: |
@@ -80,7 +79,7 @@ jobs:
                   if [ -d "$starter_inner_dir/$two_starter" ];then
                     cd "$starter_inner_dir/$two_starter"
                     gradle  --parallel --continue clean build -x test -x checkstyleMain -x checkstyleTest
-                    gradle publishMavenJavaPublicationToGitHubRepository
+                    gradle publishAllPublicationsToSonatypeRepository
                   fi
                 done
               fi
