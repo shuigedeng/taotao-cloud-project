@@ -25,10 +25,6 @@ import com.taotao.cloud.xxljob.core.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.core.model.XxlJobLog;
 import com.xxl.job.core.biz.model.ReturnT;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
-import javax.mail.internet.MimeMessage;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
@@ -36,6 +32,11 @@ import org.springframework.context.event.EventListener;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+
+import javax.mail.internet.MimeMessage;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 进程触发事件
@@ -118,16 +119,12 @@ public class processTriggerListener {
 			+
 			"   <thead style=\"font-weight: bold;color: #ffffff;background-color: #ff8c00;\" >" +
 			"      <tr>\n" +
-			"         <td width=\"20%\" >" + "执行器名称"
-			+ "</td>\n" +
+			"         <td width=\"20%\" >" + "执行器名称" + "</td>\n" +
 			"         <td width=\"10%\" >" + "任务ID" + "</td>\n" +
-			"         <td width=\"10%\" >" + "任务描述" + "</td>\n"
-			+
+			"         <td width=\"10%\" >" + "任务描述" + "</td>\n" +
 			"         <td width=\"10%\" >" + "执行时间(毫秒)" + "</td>\n" +
-			"         <td width=\"10%\" >" + "执行状态"
-			+ "</td>\n" +
-			"         <td width=\"40%\" >" + "执行详细信息"
-			+ "</td>\n" +
+			"         <td width=\"10%\" >" + "执行状态" + "</td>\n" +
+			"         <td width=\"40%\" >" + "执行详细信息" + "</td>\n" +
 			"      </tr>\n" +
 			"   </thead>\n" +
 			"   <tbody>\n" +

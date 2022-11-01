@@ -42,7 +42,7 @@ public class TraceLogFilter implements GlobalFilter, Ordered {
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		String traceId = IdGeneratorUtils.getIdStr();
-		TraceUtils.mdcTraceId(traceId);
+		TraceUtils.setMdcTraceId(traceId);
 		ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
 			.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId))
 			.build();

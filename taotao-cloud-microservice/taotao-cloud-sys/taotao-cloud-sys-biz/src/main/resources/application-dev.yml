@@ -814,6 +814,23 @@ spring:
     #        missing_cache_strategy: create
     #    temp:
     #      use_jdbc_metadata_defaults: false
+  mail:
+    host: smtp.qq.com
+    port: 465
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:xxx}
+    username: 981376577@qq.com
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          port: ${spring.mail.port}
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
   redis:
     host: 192.168.10.210
     port: 6379
@@ -1263,6 +1280,17 @@ spring:
               txCommitRecovered: true
 taotao:
   cloud:
+    dinger:
+      enabled: true
+      httpclient:
+        enabled: true
+      threadpool:
+        enabled: true
+      project-id: ${spring.application.name}
+      dingers:
+        dingtalk:
+          tokenId: ${DINGDING_TOKEN_ID:xxx}
+          secret: ${DINGDING_SECRET:xxxx}
     zookeeper:
       enabled: true
       connectString: 192.168.10.210:2181
@@ -1303,6 +1331,14 @@ taotao:
         web-context: true
         report: true
         ping: true
+      global-exception:
+        enabled: true
+        types:
+          - DING_TALK
+          - LOGGER
+          - MAIL
+        receive-emails:
+          - 981376577@qq.com
     alibaba:
       nacos:
         enabled: true
@@ -1440,7 +1476,7 @@ taotao:
     captcha:
       enabled: false
     mail:
-      enabled: false
+      enabled: true
     websocket:
       enabled: true
       netty:
@@ -1550,6 +1586,8 @@ management:
     tags:
       application: ${spring.application.name}
   health:
+    mail:
+      enabled: false
     elasticsearch:
       enabled: true
     rabbit:

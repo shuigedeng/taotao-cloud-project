@@ -22,14 +22,14 @@ import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.web.properties.FilterProperties;
-import java.io.IOException;
+import org.springframework.web.filter.OncePerRequestFilter;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
 
 /**
  * 日志链路追踪过滤器
@@ -62,22 +62,22 @@ public class TraceFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-		FilterChain filterChain) throws ServletException, IOException {
+									FilterChain filterChain) throws ServletException, IOException {
 		try {
 			String traceId = TraceUtils.getTraceId(request);
-			if(StringUtils.isBlank(traceId)){
+			if (StringUtils.isBlank(traceId)) {
 				traceId = IdGeneratorUtils.getIdStr();
 			}
 			TraceContextHolder.setTraceId(traceId);
 
-			TraceUtils.mdcTraceId(traceId);
+			TraceUtils.setMdcTraceId(traceId);
 			TraceUtils.mdcZipkinTraceId(request);
 			TraceUtils.mdcZipkinSpanId(request);
 
 			filterChain.doFilter(request, response);
 		} finally {
 			TraceContextHolder.clear();
-			TraceUtils.mdcRemoveTraceId();
+			TraceUtils.removeMdcTraceId();
 			TraceUtils.mdcRemoveZipkinTraceId();
 			TraceUtils.mdcRemoveZipkinSpanId();
 		}
