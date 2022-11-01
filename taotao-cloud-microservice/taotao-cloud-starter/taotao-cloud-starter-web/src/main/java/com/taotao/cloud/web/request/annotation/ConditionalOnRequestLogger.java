@@ -18,12 +18,6 @@ package com.taotao.cloud.web.request.annotation;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
 import com.taotao.cloud.web.request.annotation.ConditionalOnRequestLogger.RequestLogTypeCondition;
 import com.taotao.cloud.web.request.properties.RequestLoggerProperties;
-import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
-import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
-import org.springframework.context.annotation.ConditionContext;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.core.type.AnnotatedTypeMetadata;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -32,9 +26,15 @@ import java.lang.annotation.Target;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
+import org.springframework.beans.BeansException;
+import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
+import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
- * 系统操作记录
+ * 此处条件判断有问题
  *
  * @author shuigedeng
  * @version 2022.03
@@ -52,9 +52,15 @@ public @interface ConditionalOnRequestLogger {
 
 		@Override
 		public ConditionOutcome getMatchOutcome(ConditionContext context,
-												AnnotatedTypeMetadata metadata) {
-			RequestLoggerProperties properties = Objects.requireNonNull(context.getBeanFactory())
-				.getBean(RequestLoggerProperties.class);
+			AnnotatedTypeMetadata metadata) {
+			RequestLoggerProperties properties;
+			try {
+				properties = Objects.requireNonNull(context.getBeanFactory())
+					.getBean(RequestLoggerProperties.class);
+			} catch (BeansException e) {
+				return new ConditionOutcome(false, "");
+			}
+
 			Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(
 				ConditionalOnRequestLogger.class.getName());
 
@@ -65,7 +71,7 @@ public @interface ConditionalOnRequestLogger {
 			RequestLoggerTypeEnum[] types = properties.getTypes();
 			boolean b = Arrays.stream(types)
 				.anyMatch(type -> type.name().equals(requestLoggerTypeEnum.name()));
-			return new ConditionOutcome(b, "111");
+			return new ConditionOutcome(b, "");
 		}
 	}
 

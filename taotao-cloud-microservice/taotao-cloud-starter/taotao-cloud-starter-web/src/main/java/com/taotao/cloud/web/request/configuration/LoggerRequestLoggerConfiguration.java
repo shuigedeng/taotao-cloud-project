@@ -1,15 +1,15 @@
-package com.taotao.cloud.web.request.request;
+package com.taotao.cloud.web.request.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
-import com.taotao.cloud.web.request.annotation.ConditionalOnRequestLogger;
 import com.taotao.cloud.web.request.properties.RequestLoggerProperties;
 import com.taotao.cloud.web.request.service.IRequestLoggerService;
 import com.taotao.cloud.web.request.service.impl.LoggerRequestLoggerServiceImpl;
+import java.util.Arrays;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -18,8 +18,10 @@ import org.springframework.context.annotation.Bean;
  * @since 2020/4/30 10:21
  */
 @AutoConfiguration
-@ConditionalOnProperty(prefix = RequestLoggerProperties.PREFIX, name = "enabled", havingValue = "true")
 public class LoggerRequestLoggerConfiguration implements InitializingBean {
+
+	@Autowired
+	private RequestLoggerProperties requestLoggerProperties;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -27,9 +29,12 @@ public class LoggerRequestLoggerConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnRequestLogger(logType = RequestLoggerTypeEnum.LOGGER)
 	public IRequestLoggerService loggerRequestLoggerService() {
-		return new LoggerRequestLoggerServiceImpl();
+		if (Arrays.stream(requestLoggerProperties.getTypes())
+			.anyMatch(e -> e.name().equals(RequestLoggerTypeEnum.LOGGER.name()))) {
+			return new LoggerRequestLoggerServiceImpl();
+		}
+		return null;
 	}
 
 }

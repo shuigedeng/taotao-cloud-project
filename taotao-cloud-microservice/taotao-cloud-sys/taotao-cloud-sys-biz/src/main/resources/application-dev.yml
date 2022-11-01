@@ -185,7 +185,7 @@ redisson:
   #  scanInterval: 1000
 
 elasticjob:
-  enabled: true
+  enabled: false
   #dump:
   #  port: 9888
   #tracing:
@@ -1290,7 +1290,6 @@ taotao:
       request:
         enabled: true
         types:
-          - kafka
           - redis
           - logger
       interceptor:

@@ -1,18 +1,18 @@
-package com.taotao.cloud.web.request.request;
+package com.taotao.cloud.web.request.configuration;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
-import com.taotao.cloud.web.request.annotation.ConditionalOnRequestLogger;
 import com.taotao.cloud.web.request.properties.RequestLoggerProperties;
 import com.taotao.cloud.web.request.service.IRequestLoggerService;
 import com.taotao.cloud.web.request.service.impl.RedisRequestLoggerServiceImpl;
+import java.util.Arrays;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -23,8 +23,10 @@ import org.springframework.context.annotation.Bean;
 @AutoConfiguration
 @ConditionalOnClass(RedisRepository.class)
 @ConditionalOnBean(RedisRepository.class)
-@ConditionalOnProperty(prefix = RequestLoggerProperties.PREFIX, name = "enabled", havingValue = "true")
 public class RedisRequestLoggerConfiguration implements InitializingBean {
+
+	@Autowired
+	private RequestLoggerProperties requestLoggerProperties;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -32,9 +34,12 @@ public class RedisRequestLoggerConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnRequestLogger(logType = RequestLoggerTypeEnum.REDIS)
 	public IRequestLoggerService redisRequestLoggerService(RedisRepository redisRepository) {
-		return new RedisRequestLoggerServiceImpl(redisRepository);
+		if (Arrays.stream(requestLoggerProperties.getTypes())
+			.anyMatch(e -> e.name().equals(RequestLoggerTypeEnum.REDIS.name()))) {
+			return new RedisRequestLoggerServiceImpl(redisRepository);
+		}
+		return null;
 	}
 
 }
