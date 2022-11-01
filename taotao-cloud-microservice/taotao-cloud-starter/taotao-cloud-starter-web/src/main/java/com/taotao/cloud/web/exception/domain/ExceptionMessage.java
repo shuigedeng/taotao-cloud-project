@@ -3,15 +3,13 @@ package com.taotao.cloud.web.exception.domain;
 
 /**
  * 异常通知消息
- *
- * @author lingting 2020/6/12 16:07
  */
 public class ExceptionMessage {
 
 	/**
 	 * 用于筛选重复异常
 	 */
-	private String key;
+	private String traceId;
 
 	/**
 	 * 消息
@@ -71,12 +69,12 @@ public class ExceptionMessage {
 		return this;
 	}
 
-	public String getKey() {
-		return key;
+	public String getTraceId() {
+		return traceId;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setTraceId(String traceId) {
+		this.traceId = traceId;
 	}
 
 	public String getMessage() {

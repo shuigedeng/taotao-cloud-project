@@ -17,8 +17,9 @@ package com.taotao.cloud.common.utils.servlet;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 链路追踪工具类
@@ -67,13 +68,13 @@ public class TraceUtils {
 	 * @param traceId 　跟踪ID
 	 * @since 2021-09-02 14:48:47
 	 */
-	public static void mdcTraceId(String traceId) {
+	public static void setMdcTraceId(String traceId) {
 		if (StrUtil.isNotBlank(traceId)) {
 			MDC.put(CommonConstant.TAOTAO_CLOUD_TRACE_ID, traceId);
 		}
 	}
 
-	public static void mdcRemoveTraceId() {
+	public static void removeMdcTraceId() {
 		MDC.remove(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
 	}
 

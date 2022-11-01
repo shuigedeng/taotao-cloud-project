@@ -52,10 +52,10 @@ public class DubboTraceFilter implements Filter {
 			if (StringUtils.isEmpty(traceId)) {
 				traceId = IdGeneratorUtils.getIdStr();
 				TraceContextHolder.setTraceId(traceId);
-				TraceUtils.mdcTraceId(traceId);
+				TraceUtils.setMdcTraceId(traceId);
 			} else {
 				TraceContextHolder.setTraceId(traceId);
-				TraceUtils.mdcTraceId(traceId);
+				TraceUtils.setMdcTraceId(traceId);
 			}
 		} else {
 			//服务消费者逻辑

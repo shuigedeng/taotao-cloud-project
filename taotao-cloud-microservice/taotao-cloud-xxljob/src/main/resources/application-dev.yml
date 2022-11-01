@@ -277,7 +277,7 @@ spring:
   mail:
     host: smtp.qq.com
     port: 465
-    password: xxxxx
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:xxx}
     username: 981376577@qq.com
     properties:
       mail:

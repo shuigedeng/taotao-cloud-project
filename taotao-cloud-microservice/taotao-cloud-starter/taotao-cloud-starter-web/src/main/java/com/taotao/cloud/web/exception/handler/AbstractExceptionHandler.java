@@ -5,12 +5,12 @@ import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.web.exception.ExceptionHandleProperties;
-import com.taotao.cloud.web.exception.GlobalExceptionHandler;
 import com.taotao.cloud.web.exception.domain.ExceptionMessage;
 import com.taotao.cloud.web.exception.domain.ExceptionNoticeResponse;
+import com.taotao.cloud.web.exception.properties.ExceptionHandleProperties;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -20,13 +20,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author lingting 2020-09-03 20:09
- */
-public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
-	implements GlobalExceptionHandler, InitializingBean, DisposableBean {
+public abstract class AbstractExceptionHandler extends Thread
+	implements ExceptionHandler, InitializingBean, DisposableBean {
 
-	private final BlockingQueue<Throwable> queue = new LinkedBlockingQueue<>();
+	private final BlockingQueue<QueueMessage> queue = new LinkedBlockingQueue<>();
 
 	private static final String NULL_MESSAGE_KEY = "";
 
@@ -54,15 +51,10 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 	 */
 	private String ip;
 
-	/**
-	 * 请求地址
-	 */
-	private String requestUri;
-
 	private final String applicationName;
 
-	protected AbstractNoticeGlobalExceptionHandler(ExceptionHandleProperties config,
-												   String applicationName) {
+	protected AbstractExceptionHandler(ExceptionHandleProperties config,
+									   String applicationName) {
 		this.config = config;
 		messages = new ConcurrentHashMap<>(config.getMax() * 2);
 		this.applicationName = applicationName;
@@ -92,30 +84,29 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 		while (flag) {
 			int i = 0;
 			while (i < config.getMax() && interval.intervalSecond() < config.getTime()) {
-				Throwable t = null;
+				QueueMessage queueMessage = null;
 				try {
 					// 如果 i=0,即 当前未处理异常，则等待超时时间为 1 小时， 否则为 10 秒
-					t = queue.poll(i == 0 ? TimeUnit.HOURS.toSeconds(1) : 10, TimeUnit.SECONDS);
+					queueMessage = queue.poll(i == 0 ? TimeUnit.HOURS.toSeconds(1) : 10, TimeUnit.SECONDS);
 				} catch (InterruptedException e) {
 					interrupt();
 				}
 
-				if (t != null) {
-					key = t.getMessage() == null ? NULL_MESSAGE_KEY : t.getMessage();
+				if (queueMessage != null) {
+					// key = t.getMessage() == null ? NULL_MESSAGE_KEY : t.getMessage();
+					key = queueMessage.getTraceId();
 					// i++
 					if (i++ == 0) {
 						// 第一次收到数据, 重置计时
 						interval.restart();
-						ExceptionMessage message = toMessage(t);
-						message.setKey(key);
+						ExceptionMessage message = toMessage(queueMessage);
 						message.setThreadId(threadId);
 						messages.put(key, message);
 					} else {
 						if (messages.containsKey(key)) {
 							messages.put(key, messages.get(key).increment());
 						} else {
-							ExceptionMessage message = toMessage(t);
-							message.setKey(key);
+							ExceptionMessage message = toMessage(queueMessage);
 							message.setThreadId(threadId);
 							messages.put(key, message);
 						}
@@ -142,17 +133,18 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 		}
 	}
 
-	public ExceptionMessage toMessage(Throwable t) {
+	public ExceptionMessage toMessage(QueueMessage queueMessage) {
 		ExceptionMessage message = new ExceptionMessage();
+		message.setTraceId(queueMessage.getTraceId());
 		message.setNumber(1);
 		message.setMac(mac);
 		message.setApplicationName(applicationName);
 		message.setHostname(hostname);
 		message.setIp(ip);
-		message.setRequestUri(requestUri);
+		message.setRequestUri(queueMessage.getRequestUri());
 		message.setTime(DateUtil.now());
 		message.setStack(
-			ExceptionUtil.stacktraceToString(t, config.getLength()).replace("\\r", ""));
+			ExceptionUtil.stacktraceToString(queueMessage.getThrowable(), config.getLength()).replace("\\r", ""));
 		return message;
 	}
 
@@ -165,9 +157,10 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 	public abstract ExceptionNoticeResponse send(ExceptionMessage sendMessage);
 
 	@Override
-	public void handle(Throwable throwable) {
+	public void handle(NativeWebRequest req, Throwable throwable, String traceId) {
 		try {
-			this.requestUri = RequestUtils.getRequest().getRequestURI();
+			String requestUri = RequestUtils.getRequest() == null ? "uri not found" : RequestUtils.getRequest().getRequestURI();
+
 			// 是否忽略该异常
 			boolean ignore = false;
 
@@ -186,9 +179,10 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 				}
 			}
 
+			QueueMessage message = new QueueMessage(throwable, traceId, requestUri);
 			// 不忽略则插入队列
 			if (!ignore) {
-				queue.put(throwable);
+				queue.put(message);
 			}
 		} catch (InterruptedException e) {
 			interrupt();
@@ -199,6 +193,10 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 
 	@Override
 	public void afterPropertiesSet() {
+		initThread();
+	}
+
+	protected void initThread() {
 		this.setName("exception-notice");
 		this.start();
 	}
@@ -208,4 +206,42 @@ public abstract class AbstractNoticeGlobalExceptionHandler extends Thread
 		this.flag = false;
 		this.interrupt();
 	}
+
+
+	private static class QueueMessage {
+		private Throwable throwable;
+		private String traceId;
+		private String requestUri;
+
+		public QueueMessage(Throwable throwable, String traceId, String requestUri) {
+			this.throwable = throwable;
+			this.traceId = traceId;
+			this.requestUri = requestUri;
+		}
+
+		public Throwable getThrowable() {
+			return throwable;
+		}
+
+		public void setThrowable(Throwable throwable) {
+			this.throwable = throwable;
+		}
+
+		public String getTraceId() {
+			return traceId;
+		}
+
+		public void setTraceId(String traceId) {
+			this.traceId = traceId;
+		}
+
+		public String getRequestUri() {
+			return requestUri;
+		}
+
+		public void setRequestUri(String requestUri) {
+			this.requestUri = requestUri;
+		}
+	}
+
 }

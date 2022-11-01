@@ -3,8 +3,6 @@ package com.taotao.cloud.web.exception.domain;
 
 /**
  * 异常消息通知响应
- *
- * @author lingting 2020/6/12 19:07
  */
 public class ExceptionNoticeResponse {
 

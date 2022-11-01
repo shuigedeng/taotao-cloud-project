@@ -1,34 +1,29 @@
-package com.taotao.cloud.web.exception;
+package com.taotao.cloud.web.exception.properties;
 
 import com.taotao.cloud.web.exception.enums.ExceptionHandleTypeEnum;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author lingting 2020/6/12 0:15
- */
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @ConfigurationProperties(prefix = ExceptionHandleProperties.PREFIX)
 public class ExceptionHandleProperties {
 
-	public static final String PREFIX = "ballcat.exception";
+	public static final String PREFIX = "taotao.cloud.web.global-exception";
 
 	/**
-	 * 处理类型, 新版不需要指定异常处理类型了, 但是已经指定的旧配置依然按照旧配置的逻辑运行.
-	 *
-	 * @deprecated 下版本删除
+	 * 处理类型
 	 */
-	@Deprecated
-	private ExceptionHandleTypeEnum type = null;
+	private ExceptionHandleTypeEnum[] types = new ExceptionHandleTypeEnum[]{
+		ExceptionHandleTypeEnum.LOGGER};
 
 	/**
 	 * 是否开启异常通知
 	 */
-	private Boolean enabled = false;
+	private Boolean enabled = true;
 
 	/**
 	 * 是否同时忽略 配置的忽略异常类的子类, 默认忽略子类
@@ -60,79 +55,12 @@ public class ExceptionHandleProperties {
 	 */
 	private Set<String> receiveEmails = new HashSet<>(0);
 
-	/**
-	 * 接收异常的钉钉配置
-	 */
-	private DingTalkProperties dingTalk;
-
-	/**
-	 * 异常通知 钉钉配置
-	 */
-	public static class DingTalkProperties {
-
-		/**
-		 * 是否艾特所有人
-		 */
-		private Boolean atAll = false;
-
-		/**
-		 * 发送配置
-		 */
-		private List<Sender> senders;
-
-		public static class Sender {
-
-			/**
-			 * Web hook 地址
-			 */
-			private String url;
-
-			/**
-			 * 密钥
-			 */
-			private String secret;
-
-			public String getUrl() {
-				return url;
-			}
-
-			public void setUrl(String url) {
-				this.url = url;
-			}
-
-			public String getSecret() {
-				return secret;
-			}
-
-			public void setSecret(String secret) {
-				this.secret = secret;
-			}
-		}
-
-		public Boolean getAtAll() {
-			return atAll;
-		}
-
-		public void setAtAll(Boolean atAll) {
-			this.atAll = atAll;
-		}
-
-		public List<Sender> getSenders() {
-			return senders;
-		}
-
-		public void setSenders(
-			List<Sender> senders) {
-			this.senders = senders;
-		}
+	public ExceptionHandleTypeEnum[] getTypes() {
+		return types;
 	}
 
-	public ExceptionHandleTypeEnum getType() {
-		return type;
-	}
-
-	public void setType(ExceptionHandleTypeEnum type) {
-		this.type = type;
+	public void setTypes(ExceptionHandleTypeEnum[] types) {
+		this.types = types;
 	}
 
 	public Boolean getEnabled() {
@@ -190,14 +118,5 @@ public class ExceptionHandleProperties {
 
 	public void setReceiveEmails(Set<String> receiveEmails) {
 		this.receiveEmails = receiveEmails;
-	}
-
-	public DingTalkProperties getDingTalk() {
-		return dingTalk;
-	}
-
-	public void setDingTalk(
-		DingTalkProperties dingTalk) {
-		this.dingTalk = dingTalk;
 	}
 }
