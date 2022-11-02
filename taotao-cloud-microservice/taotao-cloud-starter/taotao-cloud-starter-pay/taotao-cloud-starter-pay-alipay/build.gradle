@@ -1,6 +1,9 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pay:taotao-cloud-starter-pay-common")
 
+    api('com.alipay.sdk:alipay-sdk-java:4.34.39.ALL') {
+        exclude group: 'dom4j', module: 'dom4j'
+    }
 }
 
 
