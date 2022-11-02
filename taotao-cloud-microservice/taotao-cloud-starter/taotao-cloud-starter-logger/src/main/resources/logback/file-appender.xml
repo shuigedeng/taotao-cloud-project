@@ -119,11 +119,11 @@
 			<totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
 			<cleanHistoryOnStart>${CLEAN_HISTORY_ON_START}</cleanHistoryOnStart>
 		</rollingPolicy>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>ERROR</level>
-			<onMatch>ACCEPT</onMatch>
-			<onMismatch>DENY</onMismatch>
-		</filter>
+		<!--		<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+		<!--			<level>DEBUG</level>-->
+		<!--			<onMatch>ACCEPT</onMatch>-->
+		<!--			<onMismatch>DENY</onMismatch>-->
+		<!--		</filter>-->
 	</appender>
 
 	<appender name="FILE_ALL_ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">

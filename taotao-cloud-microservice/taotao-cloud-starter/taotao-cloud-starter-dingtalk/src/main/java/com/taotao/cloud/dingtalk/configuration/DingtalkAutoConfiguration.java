@@ -22,6 +22,7 @@ import com.taotao.cloud.dingtalk.exception.ConfigurationException;
 import com.taotao.cloud.dingtalk.model.DingerConfigurerAdapter;
 import com.taotao.cloud.dingtalk.model.DingerManagerBuilder;
 import com.taotao.cloud.dingtalk.model.DingerRobot;
+import com.taotao.cloud.dingtalk.model.DingerSender;
 import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.session.DingerSessionFactory;
 import com.taotao.cloud.dingtalk.session.SessionConfiguration;
@@ -54,7 +55,8 @@ import org.springframework.web.client.RestTemplate;
  * @version 2022.07
  * @since 2022-07-06 15:16:49
  */
-@AutoConfiguration(after = {BeanAutoConfiguration.class, HttpClientAutoConfiguration.class, ThreadPoolAutoConfiguration.class})
+@AutoConfiguration(after = {BeanAutoConfiguration.class, HttpClientAutoConfiguration.class,
+	ThreadPoolAutoConfiguration.class})
 @EnableConfigurationProperties({DingerProperties.class})
 @ConditionalOnProperty(prefix = DingerProperties.PREFIX, value = "enabled", havingValue = "true")
 public class DingtalkAutoConfiguration implements InitializingBean {
@@ -62,7 +64,8 @@ public class DingtalkAutoConfiguration implements InitializingBean {
 	private final DingerProperties properties;
 	private final ResourceLoader resourceLoader;
 
-	public DingtalkAutoConfiguration(DingerProperties dingerProperties, ResourceLoader resourceLoader) {
+	public DingtalkAutoConfiguration(DingerProperties dingerProperties,
+		ResourceLoader resourceLoader) {
 		this.properties = dingerProperties;
 		this.resourceLoader = resourceLoader;
 	}
@@ -98,7 +101,7 @@ public class DingtalkAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public DingerRobot dingerSender(DingerConfigurerAdapter dingerConfigurerAdapter,
+	public DingerSender dingerSender(DingerConfigurerAdapter dingerConfigurerAdapter,
 		DingerManagerBuilder dingerManagerBuilder) {
 		try {
 			dingerConfigurerAdapter.configure(dingerManagerBuilder);

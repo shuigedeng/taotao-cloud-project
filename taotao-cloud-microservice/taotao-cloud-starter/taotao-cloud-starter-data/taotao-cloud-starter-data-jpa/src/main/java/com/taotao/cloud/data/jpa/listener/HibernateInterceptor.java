@@ -126,8 +126,8 @@ public class HibernateInterceptor extends EmptyInterceptor {
 
 	@Override
 	public String onPrepareStatement(String sql) {
-		LogUtils.info("HibernateInterceptor >>>>>>>>>>>>>>>>>>>>>>>>> onPrepareStatement");
-		LogUtils.info(SqlFormatter.format(sql));
+		LogUtils.info("HibernateInterceptor >>>>>>>>>>>>>>>>>>>>>>>>> onPrepareStatement: {}",
+			SqlFormatter.format(sql));
 
 		return super.onPrepareStatement(sql);
 	}

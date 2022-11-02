@@ -23,7 +23,6 @@ import com.taotao.cloud.monitor.annotation.FieldReport;
 import com.taotao.cloud.monitor.collect.AbstractCollectTask;
 import com.taotao.cloud.monitor.collect.CollectInfo;
 import com.taotao.cloud.monitor.properties.CollectTaskProperties;
-
 import java.lang.reflect.Field;
 import javax.sql.DataSource;
 
@@ -69,65 +68,108 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			DataSourceInfo info = new DataSourceInfo();
-			String[] names = ContextUtils.getApplicationContext().getBeanNamesForType(DataSource.class);
+			String[] names = ContextUtils.getApplicationContext()
+				.getBeanNamesForType(DataSource.class);
 
 			int index = 0;
 			for (String name : names) {
-				DataSource dataSource = ContextUtils.getApplicationContext().getBean(name, DataSource.class);
+				if ("tracingDataSource".equals(name)) {
+					continue;
+				}
+				
+				DataSource dataSource = ContextUtils.getApplicationContext()
+					.getBean(name, DataSource.class);
 
-				Class druidCls = ReflectionUtils.tryClassForName("com.alibaba.druid.pool.DruidDataSource");
+				Class druidCls = ReflectionUtils.tryClassForName(
+					"com.alibaba.druid.pool.DruidDataSource");
 				if (druidCls != null && druidCls.isAssignableFrom(dataSource.getClass())) {
 					Field field = ReflectionUtils.findField(info.getClass(), "druid" + index++);
 					if (field != null) {
 						DruidDataSourceInfo druid = new DruidDataSourceInfo();
-						druid.active = (Integer) ReflectionUtils.callMethod(dataSource, "getActiveCount", null);
-						druid.connect = (Long) ReflectionUtils.callMethod(dataSource, "getConnectCount", null);
-						druid.poolingCount = (Integer) ReflectionUtils.callMethod(dataSource, "getPoolingCount", null);
-						druid.lockQueueLength = (Integer) ReflectionUtils.callMethod(dataSource, "getLockQueueLength", null);
-						druid.waitThreadCount = (Integer) ReflectionUtils.callMethod(dataSource, "getWaitThreadCount", null);
-						druid.initialSize = (Integer) ReflectionUtils.callMethod(dataSource, "getInitialSize", null);
-						druid.maxActive = (Integer) ReflectionUtils.callMethod(dataSource, "getMaxActive", null);
-						druid.minIdle = (Integer) ReflectionUtils.callMethod(dataSource, "getMinIdle", null);
-						druid.connectErrorCount = (Long) ReflectionUtils.callMethod(dataSource, "getConnectErrorCount", null);
-						druid.createTimeSpan = (Long) ReflectionUtils.callMethod(dataSource, "getCreateTimespanMillis", null);
-						druid.closeCount = (Long) ReflectionUtils.callMethod(dataSource, "getCloseCount", null);
-						druid.createCount = (Long) ReflectionUtils.callMethod(dataSource, "getCreateCount", null);
-						druid.destroyCount = (Long) ReflectionUtils.callMethod(dataSource, "getDestroyCount", null);
-						druid.isSharePreparedStatements = ReflectionUtils.callMethod(dataSource, "isSharePreparedStatements", null).toString();
-						druid.isRemoveAbandoned = ReflectionUtils.callMethod(dataSource, "isRemoveAbandoned", null).toString();
-						druid.removeAbandonedTimeout = (Integer) ReflectionUtils.callMethod(dataSource, "getRemoveAbandonedTimeout", null);
-						druid.removeAbandonedCount = (Long) ReflectionUtils.callMethod(dataSource, "getRemoveAbandonedCount", null);
-						druid.rollbackCount = (Long) ReflectionUtils.callMethod(dataSource, "getRollbackCount", null);
-						druid.commitCount = (Long) ReflectionUtils.callMethod(dataSource, "getCommitCount", null);
-						druid.startTransactionCount = (Long) ReflectionUtils.callMethod(dataSource, "getStartTransactionCount", null);
+						druid.active = (Integer) ReflectionUtils.callMethod(dataSource,
+							"getActiveCount", null);
+						druid.connect = (Long) ReflectionUtils.callMethod(dataSource,
+							"getConnectCount", null);
+						druid.poolingCount = (Integer) ReflectionUtils.callMethod(dataSource,
+							"getPoolingCount", null);
+						druid.lockQueueLength = (Integer) ReflectionUtils.callMethod(dataSource,
+							"getLockQueueLength", null);
+						druid.waitThreadCount = (Integer) ReflectionUtils.callMethod(dataSource,
+							"getWaitThreadCount", null);
+						druid.initialSize = (Integer) ReflectionUtils.callMethod(dataSource,
+							"getInitialSize", null);
+						druid.maxActive = (Integer) ReflectionUtils.callMethod(dataSource,
+							"getMaxActive", null);
+						druid.minIdle = (Integer) ReflectionUtils.callMethod(dataSource,
+							"getMinIdle", null);
+						druid.connectErrorCount = (Long) ReflectionUtils.callMethod(dataSource,
+							"getConnectErrorCount", null);
+						druid.createTimeSpan = (Long) ReflectionUtils.callMethod(dataSource,
+							"getCreateTimespanMillis", null);
+						druid.closeCount = (Long) ReflectionUtils.callMethod(dataSource,
+							"getCloseCount", null);
+						druid.createCount = (Long) ReflectionUtils.callMethod(dataSource,
+							"getCreateCount", null);
+						druid.destroyCount = (Long) ReflectionUtils.callMethod(dataSource,
+							"getDestroyCount", null);
+						druid.isSharePreparedStatements = ReflectionUtils.callMethod(dataSource,
+							"isSharePreparedStatements", null).toString();
+						druid.isRemoveAbandoned = ReflectionUtils.callMethod(dataSource,
+							"isRemoveAbandoned", null).toString();
+						druid.removeAbandonedTimeout = (Integer) ReflectionUtils.callMethod(
+							dataSource, "getRemoveAbandonedTimeout", null);
+						druid.removeAbandonedCount = (Long) ReflectionUtils.callMethod(dataSource,
+							"getRemoveAbandonedCount", null);
+						druid.rollbackCount = (Long) ReflectionUtils.callMethod(dataSource,
+							"getRollbackCount", null);
+						druid.commitCount = (Long) ReflectionUtils.callMethod(dataSource,
+							"getCommitCount", null);
+						druid.startTransactionCount = (Long) ReflectionUtils.callMethod(dataSource,
+							"getStartTransactionCount", null);
 
 						field.setAccessible(true);
 						ReflectionUtils.setFieldValue(field, info, druid);
 					}
 				}
 
-				Class hikariCls = ReflectionUtils.tryClassForName("com.zaxxer.hikari.HikariDataSource");
+				Class hikariCls = ReflectionUtils.tryClassForName(
+					"com.zaxxer.hikari.HikariDataSource");
 				if (hikariCls != null && hikariCls.isAssignableFrom(dataSource.getClass())) {
-					Field field = ReflectionUtils.findField(info.getClass(), "hikari"+ index++);
+					Field field = ReflectionUtils.findField(info.getClass(), "hikari" + index++);
 					if (field != null) {
 						HikariDataSourceInfo hikari = new HikariDataSourceInfo();
-						Object hikariPoolMXBean = ReflectionUtils.callMethod(dataSource, "getHikariPoolMXBean", null);
-						Object hikariConfigMXBean = ReflectionUtils.callMethod(dataSource, "getHikariConfigMXBean", null);
+						Object hikariPoolMXBean = ReflectionUtils.callMethod(dataSource,
+							"getHikariPoolMXBean", null);
+						Object hikariConfigMXBean = ReflectionUtils.callMethod(dataSource,
+							"getHikariConfigMXBean", null);
 
-						hikari.activeConnections = (Integer) ReflectionUtils.callMethod(hikariPoolMXBean, "getActiveConnections", null);
-						hikari.idleConnections = (Integer) ReflectionUtils.callMethod(hikariPoolMXBean, "getIdleConnections", null);
-						hikari.threadsAwaitingConnection = (Integer) ReflectionUtils.callMethod(hikariPoolMXBean, "getThreadsAwaitingConnection", null);
-						hikari.totalConnections = (Integer) ReflectionUtils.callMethod(hikariPoolMXBean, "getTotalConnections", null);
+						hikari.activeConnections = (Integer) ReflectionUtils.callMethod(
+							hikariPoolMXBean, "getActiveConnections", null);
+						hikari.idleConnections = (Integer) ReflectionUtils.callMethod(
+							hikariPoolMXBean, "getIdleConnections", null);
+						hikari.threadsAwaitingConnection = (Integer) ReflectionUtils.callMethod(
+							hikariPoolMXBean, "getThreadsAwaitingConnection", null);
+						hikari.totalConnections = (Integer) ReflectionUtils.callMethod(
+							hikariPoolMXBean, "getTotalConnections", null);
 
-						hikari.catalog = (String) ReflectionUtils.callMethod(hikariConfigMXBean, "getCatalog", null);
-						hikari.connectionTimeout = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getConnectionTimeout", null);
-						hikari.idleTimeout = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getIdleTimeout", null);
-						hikari.maxLifetime = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getMaxLifetime", null);
-						hikari.validationTimeout = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getValidationTimeout", null);
-						hikari.leakDetectionThreshold = (Long) ReflectionUtils.callMethod(hikariConfigMXBean, "getLeakDetectionThreshold", null);
-						hikari.maximumPoolSize = (Integer) ReflectionUtils.callMethod(hikariConfigMXBean, "getMaximumPoolSize", null);
-						hikari.minimumIdle = (Integer) ReflectionUtils.callMethod(hikariConfigMXBean, "getMinimumIdle", null);
-						hikari.poolName = (String) ReflectionUtils.callMethod(hikariConfigMXBean, "getPoolName", null);
+						hikari.catalog = (String) ReflectionUtils.callMethod(hikariConfigMXBean,
+							"getCatalog", null);
+						hikari.connectionTimeout = (Long) ReflectionUtils.callMethod(
+							hikariConfigMXBean, "getConnectionTimeout", null);
+						hikari.idleTimeout = (Long) ReflectionUtils.callMethod(hikariConfigMXBean,
+							"getIdleTimeout", null);
+						hikari.maxLifetime = (Long) ReflectionUtils.callMethod(hikariConfigMXBean,
+							"getMaxLifetime", null);
+						hikari.validationTimeout = (Long) ReflectionUtils.callMethod(
+							hikariConfigMXBean, "getValidationTimeout", null);
+						hikari.leakDetectionThreshold = (Long) ReflectionUtils.callMethod(
+							hikariConfigMXBean, "getLeakDetectionThreshold", null);
+						hikari.maximumPoolSize = (Integer) ReflectionUtils.callMethod(
+							hikariConfigMXBean, "getMaximumPoolSize", null);
+						hikari.minimumIdle = (Integer) ReflectionUtils.callMethod(
+							hikariConfigMXBean, "getMinimumIdle", null);
+						hikari.poolName = (String) ReflectionUtils.callMethod(hikariConfigMXBean,
+							"getPoolName", null);
 
 						field.setAccessible(true);
 						ReflectionUtils.setFieldValue(field, info, hikari);
@@ -136,37 +178,49 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 			}
 			return info;
 		} catch (Exception e) {
-			if(LogUtils.isErrorEnabled()){
+			if (LogUtils.isErrorEnabled()) {
 				LogUtils.error(e);
 			}
 		}
 		return null;
 	}
 
-	private static class HikariDataSourceInfo implements CollectInfo{
-		@FieldReport(name = TASK_NAME + ".hikari.pool.active.connections", desc = "hikari当前活动连接的数量。")
+	private static class HikariDataSourceInfo implements CollectInfo {
+
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.active.connections", desc = "hikari当前活动连接的数量。")
 		private Integer activeConnections = 0;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.idle.connections", desc = "hikari当前空闲的连接数。")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.idle.connections", desc = "hikari当前空闲的连接数。")
 		private Integer idleConnections = 0;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.threads.awaiting.connection", desc = "hikari等待连接的线程数")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.threads.awaiting.connection", desc = "hikari等待连接的线程数")
 		private Integer threadsAwaitingConnection = 0;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.total.connections", desc = "hikari连接池中的连接总数")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.total.connections", desc = "hikari连接池中的连接总数")
 		private Integer totalConnections = 0;
 		@FieldReport(name = TASK_NAME + ".hikari.pool.catalog", desc = "hikari设置的默认目录名称")
 		private String catalog = "";
-		@FieldReport(name = TASK_NAME + ".hikari.pool.connection.timeout", desc = "hikari等待池中连接的最大毫秒数")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.connection.timeout", desc = "hikari等待池中连接的最大毫秒数")
 		private Long connectionTimeout = 0L;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.idle.timeout", desc = "hikari允许连接停留的最长时间（以毫秒为单位)")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.idle.timeout", desc = "hikari允许连接停留的最长时间（以毫秒为单位)")
 		private Long idleTimeout = 0L;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.max.lifetime", desc = "hikari连接池中连接的最长生命周期")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.max.lifetime", desc = "hikari连接池中连接的最长生命周期")
 		private Long maxLifetime = 0L;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.validation.timeout", desc = "hikari等待连接被验证为的最大毫秒数")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.validation.timeout", desc = "hikari等待连接被验证为的最大毫秒数")
 		private Long validationTimeout = 0L;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.leak.detection.threshold", desc = "hikari消息发送之前连接可以离开池的时间量.记录表明可能的连接泄漏")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.leak.detection.threshold", desc = "hikari消息发送之前连接可以离开池的时间量.记录表明可能的连接泄漏")
 		private Long leakDetectionThreshold = 0L;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.maximum.pool.size", desc = "hikari HikariCP 将保留在池中的最大连接数，包括空闲和使用中的连接。")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.maximum.pool.size", desc = "hikari HikariCP 将保留在池中的最大连接数，包括空闲和使用中的连接。")
 		private Integer maximumPoolSize = 0;
-		@FieldReport(name = TASK_NAME + ".hikari.pool.minimum.idle", desc = "hikari尝试在池中维护的最小空闲连接数。包括空闲和使用中的连接")
+		@FieldReport(name = TASK_NAME
+			+ ".hikari.pool.minimum.idle", desc = "hikari尝试在池中维护的最小空闲连接数。包括空闲和使用中的连接")
 		private Integer minimumIdle = 0;
 		@FieldReport(name = TASK_NAME + ".hikari.pool.name", desc = "hikari线程池名称")
 		private String poolName = "";
@@ -214,19 +268,24 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 
 	private static class DruidDataSourceInfo implements CollectInfo {
 
-		@FieldReport(name = TASK_NAME + ".druid.pool.startTransaction.count", desc = "druid sql 开启事务次数")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.startTransaction.count", desc = "druid sql 开启事务次数")
 		private Long startTransactionCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.commit.count", desc = "druid sql commit次数")
 		private Long commitCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.rollback.count", desc = "druid sql回滚次数")
 		private Long rollbackCount = 0L;
-		@FieldReport(name = TASK_NAME + ".druid.pool.removeAbandoned.count", desc = "druid 连接超时回收次数")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.removeAbandoned.count", desc = "druid 连接超时回收次数")
 		private Long removeAbandonedCount = 0L;
-		@FieldReport(name = TASK_NAME + ".druid.pool.removeAbandoned.timeout", desc = "druid 连接超时回收周期（秒）")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.removeAbandoned.timeout", desc = "druid 连接超时回收周期（秒）")
 		private Integer removeAbandonedTimeout = 0;
-		@FieldReport(name = TASK_NAME + ".druid.pool.isRemoveAbandoned", desc = "druid 是否开启连接超时回收")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.isRemoveAbandoned", desc = "druid 是否开启连接超时回收")
 		private String isRemoveAbandoned = "";
-		@FieldReport(name = TASK_NAME + ".druid.pool.isSharePreparedStatements", desc = "druid preparedStatement是否缓存")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.isSharePreparedStatements", desc = "druid preparedStatement是否缓存")
 		private String isSharePreparedStatements = "";
 		@FieldReport(name = TASK_NAME + ".druid.pool.destroy.count", desc = "druid销毁连接次数")
 		private Long destroyCount = 0L;
@@ -234,9 +293,11 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 		private Long createCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.close.count", desc = "druid关闭连接次数")
 		private Long closeCount = 0L;
-		@FieldReport(name = TASK_NAME + ".druid.pool.create.timeSpan", desc = "druid物理连接创建耗时(毫秒)")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.create.timeSpan", desc = "druid物理连接创建耗时(毫秒)")
 		private Long createTimeSpan = 0L;
-		@FieldReport(name = TASK_NAME + ".druid.pool.connect.errorCount", desc = "druid物理连接错误数")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.connect.errorCount", desc = "druid物理连接错误数")
 		private Long connectErrorCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.idle.min", desc = "druid连接池最小值")
 		private Integer minIdle = 0;
@@ -244,9 +305,11 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 		private Integer maxActive = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.initial.size", desc = "druid连接池初始化长度")
 		private Integer initialSize = 0;
-		@FieldReport(name = TASK_NAME + ".druid.pool.waitThread.count", desc = "druid获取连接时等待线程数")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.waitThread.count", desc = "druid获取连接时等待线程数")
 		private Integer waitThreadCount = 0;
-		@FieldReport(name = TASK_NAME + ".druid.pool.lockQueue.length", desc = "druid获取连接等待队列长度")
+		@FieldReport(name = TASK_NAME
+			+ ".druid.pool.lockQueue.length", desc = "druid获取连接等待队列长度")
 		private Integer lockQueueLength = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.active", desc = "druid正在打开的连接数")
 		private Integer active = 0;

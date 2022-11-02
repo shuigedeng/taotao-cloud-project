@@ -15,14 +15,13 @@
  */
 package com.taotao.cloud.data.jpa.properties;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.taotao.cloud.data.jpa.listener.HibernateInspector;
+import com.taotao.cloud.data.jpa.listener.HibernateInterceptor;
 import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.dialect.MySQL8Dialect;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
-import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.orm.jpa.vendor.Database;
 
@@ -56,8 +55,8 @@ public class HibernateProperties {
 	private String physicalNamingStrategy = CamelCaseToUnderscoresNamingStrategy.class.getName();
 	private String dialect = MySQL8Dialect.class.getName();
 	private String timeZone = "Asia/Shanghai";
-	private String statementInspector = "com.taotao.cloud.data.jpa.listener.HibernateInspector";
-	private String interceptor = "com.taotao.cloud.data.jpa.listener.HibernateInterceptor";
+	private String statementInspector = HibernateInspector.class.getName();
+	private String interceptor = HibernateInterceptor.class.getName();
 	private String persistenceUnitName = "default";
 
 

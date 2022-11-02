@@ -1,6 +1,10 @@
 package com.taotao.cloud.web.base.repository;
 
 import com.taotao.cloud.web.base.entity.SuperEntity;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+import javax.persistence.QueryHint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -10,11 +14,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.QueryHint;
-import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * <p> Description : 基础Repository </p>
@@ -143,7 +142,7 @@ public interface BaseInterfaceSuperRepository<T extends SuperEntity<T, I>, I ext
 	 * @param id id
 	 * @since 2022-10-21 11:36:54
 	 */
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	void deleteById(I id);
 }

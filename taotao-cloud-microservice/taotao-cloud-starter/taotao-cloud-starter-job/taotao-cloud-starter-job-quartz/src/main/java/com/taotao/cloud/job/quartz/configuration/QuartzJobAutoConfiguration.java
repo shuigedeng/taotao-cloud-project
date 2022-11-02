@@ -116,4 +116,74 @@ public class QuartzJobAutoConfiguration implements ApplicationContextAware {
 	public DefaultQuartzEventListener defaultQuartzLogEventListener() {
 		return new DefaultQuartzEventListener();
 	}
+
+	///**
+	// * 主要解决 @ConditionalOnSingleCandidate(DataSource.class)
+	// * <p>
+	// * 此处从 QuartzAutoConfiguration copy  如elastic改进之后可以删除此段代码
+	// * <p>
+	// * 集成了job-elastic模块之后 会产生2个datasource * dataSource * tracingDataSource
+	// * <p>
+	// * 主要解决 这个冲突的问题
+	// */
+	//@Configuration(proxyBeanMethods = false)
+	//@ConditionalOnProperty(prefix = "spring.quartz", name = "job-store-type", havingValue = "jdbc")
+	//@Import(DatabaseInitializationDependencyConfigurer.class)
+	//protected static class JdbcStoreTypeConfiguration {
+	//
+	//	@Bean
+	//	@Order(0)
+	//	public SchedulerFactoryBeanCustomizer dataSourceCustomizer(
+	//		org.springframework.boot.autoconfigure.quartz.QuartzProperties properties,
+	//		@Qualifier("dataSource") DataSource dataSource,
+	//		@QuartzDataSource ObjectProvider<DataSource> quartzDataSource,
+	//		ObjectProvider<PlatformTransactionManager> transactionManager,
+	//		@QuartzTransactionManager ObjectProvider<PlatformTransactionManager> quartzTransactionManager) {
+	//		return (schedulerFactoryBean) -> {
+	//			DataSource dataSourceToUse = getDataSource(dataSource, quartzDataSource);
+	//			schedulerFactoryBean.setDataSource(dataSourceToUse);
+	//			PlatformTransactionManager txManager = getTransactionManager(transactionManager,
+	//				quartzTransactionManager);
+	//			if (txManager != null) {
+	//				schedulerFactoryBean.setTransactionManager(txManager);
+	//			}
+	//		};
+	//	}
+	//
+	//	private DataSource getDataSource(DataSource dataSource,
+	//		ObjectProvider<DataSource> quartzDataSource) {
+	//		DataSource dataSourceIfAvailable = quartzDataSource.getIfAvailable();
+	//		return (dataSourceIfAvailable != null) ? dataSourceIfAvailable : dataSource;
+	//	}
+	//
+	//	private PlatformTransactionManager getTransactionManager(
+	//		ObjectProvider<PlatformTransactionManager> transactionManager,
+	//		ObjectProvider<PlatformTransactionManager> quartzTransactionManager) {
+	//		PlatformTransactionManager transactionManagerIfAvailable = quartzTransactionManager.getIfAvailable();
+	//		return (transactionManagerIfAvailable != null) ? transactionManagerIfAvailable
+	//			: transactionManager.getIfUnique();
+	//	}
+	//
+	//	@Bean
+	//	@SuppressWarnings("deprecation")
+	//	@ConditionalOnMissingBean({QuartzDataSourceScriptDatabaseInitializer.class,
+	//		QuartzDataSourceInitializer.class})
+	//	@Conditional(OnQuartzDatasourceInitializationCondition.class)
+	//	public QuartzDataSourceScriptDatabaseInitializer quartzDataSourceScriptDatabaseInitializer(
+	//		DataSource dataSource, @QuartzDataSource ObjectProvider<DataSource> quartzDataSource,
+	//		org.springframework.boot.autoconfigure.quartz.QuartzProperties properties) {
+	//		DataSource dataSourceToUse = getDataSource(dataSource, quartzDataSource);
+	//		return new QuartzDataSourceScriptDatabaseInitializer(dataSourceToUse, properties);
+	//	}
+	//
+	//	static class OnQuartzDatasourceInitializationCondition extends
+	//		OnDatabaseInitializationCondition {
+	//
+	//		OnQuartzDatasourceInitializationCondition() {
+	//			super("Quartz", "spring.quartz.jdbc.initialize-schema");
+	//		}
+	//
+	//	}
+	//
+	//}
 }

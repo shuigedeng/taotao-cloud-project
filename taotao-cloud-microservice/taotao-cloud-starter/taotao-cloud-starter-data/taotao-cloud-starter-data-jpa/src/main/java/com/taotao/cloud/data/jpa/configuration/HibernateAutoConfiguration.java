@@ -34,6 +34,7 @@ import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
 import com.taotao.cloud.data.jpa.listener.HibernateInspector;
+import com.taotao.cloud.data.jpa.listener.HibernateInspector.SaveOrUpdateListener;
 import com.taotao.cloud.data.jpa.properties.HibernateProperties;
 import com.taotao.cloud.data.jpa.properties.TenantProperties;
 import java.util.HashMap;
@@ -49,7 +50,6 @@ import org.hibernate.event.spi.EventType;
 import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -57,6 +57,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -71,7 +72,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @AutoConfiguration
 @EnableJpaAuditing
 @EnableJpaRepositories(basePackages = {"com.taotao.cloud.*.biz.repository.inf"})
-@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class, JpaProperties.class})
+@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class,
+	JpaProperties.class})
 @ConditionalOnProperty(prefix = HibernateProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class HibernateAutoConfiguration implements InitializingBean {
 
@@ -95,7 +97,6 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean
 	public MultiTenantConnectionProvider tenantConnectionProvider(DataSource dataSource) {
 		return new TenantConnectionProvider(dataSource);
 	}
@@ -121,7 +122,6 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	//}
 
 	@Bean
-	@ConditionalOnBean
 	LocalContainerEntityManagerFactoryBean entityManagerFactory(
 		final DataSource dataSource,
 		final JpaVendorAdapter jpaVendorAdapter,
@@ -162,8 +162,10 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		return entityManagerFactoryBean;
 	}
 
+
 	@Configuration
 	public static class HibernateListener implements InitializingBean {
+
 		@Override
 		public void afterPropertiesSet() throws Exception {
 			LogUtils.started(HibernateListener.class, StarterName.JPA_STARTER);
@@ -179,13 +181,38 @@ public class HibernateAutoConfiguration implements InitializingBean {
 					SessionFactoryImpl.class);
 				EventListenerRegistry registry = sessionFactory.getServiceRegistry()
 					.getService(EventListenerRegistry.class);
+
+				SaveOrUpdateListener saveOrUpdateListener = new SaveOrUpdateListener();
 				registry.getEventListenerGroup(EventType.SAVE_UPDATE)
-					.appendListener(new HibernateInspector.SaveOrUpdateListener());
+					.appendListener(saveOrUpdateListener);
+				registry.getEventListenerGroup(EventType.SAVE)
+					.appendListener(saveOrUpdateListener);
+				registry.getEventListenerGroup(EventType.UPDATE)
+					.appendListener(saveOrUpdateListener);
+
+				registry.getEventListenerGroup(EventType.PERSIST)
+					.appendListener(new HibernateInspector.PersistEventListener());
+
+				registry.getEventListenerGroup(EventType.REFRESH)
+					.appendListener(new HibernateInspector.RefreshEventListener());
+
 				registry.getEventListenerGroup(EventType.DELETE)
 					.appendListener(new HibernateInspector.DeleteListener());
+
 				registry.getEventListenerGroup(EventType.LOAD)
 					.appendListener(new HibernateInspector.LoadListener());
 			}
+		}
+
+		@Bean
+		public HibernateDaoSupport hibernateDaoSupport() {
+			StandardHibernateDaoSupport daoSupport = new StandardHibernateDaoSupport();
+			daoSupport.setSessionFactory(entityManagerFactory.unwrap(SessionFactoryImpl.class));
+			return daoSupport;
+		}
+
+		public static class StandardHibernateDaoSupport extends HibernateDaoSupport {
+
 		}
 	}
 }

@@ -7,6 +7,7 @@ import com.taotao.cloud.web.exception.enums.ExceptionHandleTypeEnum;
 import com.taotao.cloud.web.exception.handler.DingTalkExceptionHandler;
 import com.taotao.cloud.web.exception.handler.ExceptionHandler;
 import com.taotao.cloud.web.exception.properties.ExceptionHandleProperties;
+import java.util.Arrays;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +16,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Arrays;
 
 /**
  * 当web项目引入此依赖时，自动配置对应的内容 初始化log的事件监听与切面配置
@@ -46,7 +45,8 @@ public class DingTalkExceptionHandlerAutoConfiguration implements InitializingBe
 	public ExceptionHandler dingTalkGlobalExceptionHandler(DingerSender dingerSender) {
 		if (Arrays.stream(exceptionHandleProperties.getTypes())
 			.anyMatch(e -> e.name().equals(ExceptionHandleTypeEnum.DING_TALK.name()))) {
-			return new DingTalkExceptionHandler(exceptionHandleProperties, dingerSender, applicationName);
+			return new DingTalkExceptionHandler(exceptionHandleProperties, dingerSender,
+				applicationName);
 		}
 		return null;
 	}
