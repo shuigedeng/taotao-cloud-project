@@ -1,9 +1,7 @@
 package com.taotao.cloud.sys.biz.config.sensitive;
 
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import org.quartz.JobExecutionContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 
@@ -12,9 +10,9 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
  */
 public class SensitiveWordsJob extends QuartzJobBean {
 
-	@Autowired
-	private RedisRepository redisRepository;
-	private static volatile Integer code = 0;
+	//@Autowired
+	//private RedisRepository redisRepository;
+	//private static volatile Integer code = 0;
 
 	@Override
 	@SuppressWarnings("unchecked")

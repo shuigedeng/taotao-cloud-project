@@ -139,17 +139,17 @@
 	<logger name="org.I0Itec.zkclient" level="INFO"/>
 	<logger name="kafka.admin.AdminClient.AdminConfig" level="INFO"/>
 
-	<!-- 输出SQL到控制台和文件-->
-	<logger name="org.hibernate.SQL" additivity="false">
-		<level value="DEBUG"/>
-		<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>
-	</logger>
+	<!--		&lt;!&ndash; 输出SQL到控制台和文件&ndash;&gt;-->
+	<!--		<logger name="org.hibernate.SQL" additivity="false">-->
+	<!--			<level value="DEBUG"/>-->
+	<!--			<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>-->
+	<!--		</logger>-->
 
-	<!-- 输出SQL的参数到控制台和文件-->
-	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false" level="TRACE">
-		<level value="TRACE"/>
-		<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>
-	</logger>
+	<!--		&lt;!&ndash; 输出SQL的参数到控制台和文件&ndash;&gt;-->
+	<!--		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false" level="TRACE">-->
+	<!--			<level value="TRACE"/>-->
+	<!--			<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>-->
+	<!--		</logger>-->
 
 	<!-- 日志输出级别，OFF level > FATAL > ERROR > WARN > INFO > DEBUG > ALL level -->
 	<!--	<root level="INFO">-->
@@ -165,6 +165,17 @@
 	<!--	</root>-->
 
 	<springProfile name="dev">
+		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false"
+			level="TRACE">
+			<level value="TRACE"/>
+			<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>
+		</logger>
+
+		<logger name="org.hibernate.SQL" additivity="false" level="DEBUG">
+			<level value="DEBUG"/>
+			<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>
+		</logger>
+
 		<root level="INFO">
 			<appender-ref ref="CONSOLE_ASYNC_APPENDER"/>
 			<appender-ref ref="FILE_ALL_ASYNC_APPENDER"/>

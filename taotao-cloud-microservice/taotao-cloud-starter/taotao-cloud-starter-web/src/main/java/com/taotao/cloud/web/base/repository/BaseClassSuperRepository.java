@@ -24,6 +24,9 @@ import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.taotao.cloud.web.base.entity.SuperEntity;
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
@@ -32,10 +35,6 @@ import org.springframework.data.jpa.repository.support.QuerydslJpaPredicateExecu
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.querydsl.SimpleEntityPathResolver;
 import org.springframework.data.support.PageableExecutionUtils;
-
-import javax.persistence.EntityManager;
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * 基础jpa Repository
@@ -58,6 +57,7 @@ public abstract class BaseClassSuperRepository<T extends SuperEntity<T, I>, I ex
 	public BaseClassSuperRepository(Class<T> domainClass, EntityManager em) {
 		super(domainClass, em);
 		this.em = em;
+
 		this.jpaPredicateExecutor = new QuerydslJpaPredicateExecutor<>(
 			JpaEntityInformationSupport.getEntityInformation(domainClass, em), em,
 			SimpleEntityPathResolver.INSTANCE, getRepositoryMethodMetadata());
@@ -76,7 +76,7 @@ public abstract class BaseClassSuperRepository<T extends SuperEntity<T, I>, I ex
 	 * @since 2021-10-09 20:29:49
 	 */
 	public Page<T> findPageable(Predicate predicate, Pageable pageable,
-								OrderSpecifier<?>... orders) {
+		OrderSpecifier<?>... orders) {
 		final JPAQuery<T> countQuery = jpaQueryFactory.selectFrom(path);
 		countQuery.where(predicate);
 		JPQLQuery<T> query = querydsl.applyPagination(pageable, countQuery);

@@ -40,5 +40,16 @@ public class ElasticJobAutoConfiguration implements InitializingBean {
 		LogUtils.started(ElasticJobAutoConfiguration.class, StarterName.JOB_ELASTIC_STARTER);
 	}
 
-
+	//@Primary
+	//@Bean
+	//@ConditionalOnBean(DataSource.class)
+	//@ConditionalOnProperty(name = "elasticjob.tracing.type", havingValue = "RDB")
+	//public TracingConfiguration<DataSource> tracingConfiguration(final DataSource dataSource,
+	//	@Qualifier("tracingDataSource") final DataSource tracingDataSource) {
+	//	DataSource ds = tracingDataSource;
+	//	if (ds == null) {
+	//		ds = dataSource;
+	//	}
+	//	return new TracingConfiguration<>("RDB", ds);
+	//}
 }

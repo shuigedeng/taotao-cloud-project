@@ -17,10 +17,13 @@ package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
-import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
 import java.util.Optional;
+import javax.persistence.EntityManager;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Repository;
 
 /**
  * CompanyMapper
@@ -37,8 +40,12 @@ public class DictRepository extends BaseClassSuperRepository<Dict, Long> {
 	}
 
 	public Optional<Dict> findByCode(String code) {
-		//this.fetchOne();
-		//Optional<Dict> optional = this.findOne(spec->spec.eq("code", code));
-		return null;
+		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+			.withMatcher("dictCode", GenericPropertyMatcher::exact);
+		Optional<Dict> one = findOne(
+			Example.of(Dict.builder().dictCode(code).build(), exampleMatcher));
+
+		return findOne((Specification<Dict>) (root, query, builder) -> query.where(
+			builder.equal(root.get("dictCode"), code)).getRestriction());
 	}
 }

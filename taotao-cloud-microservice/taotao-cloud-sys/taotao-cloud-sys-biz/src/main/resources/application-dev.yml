@@ -188,8 +188,35 @@ elasticjob:
   enabled: false
   #dump:
   #  port: 9888
-  #tracing:
-  #  type: RDB
+  tracing:
+    type: RDB
+    data-source:
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:mysql://192.168.10.210:13306/taotao-cloud-elasticjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      hikari:
+        # 从池返回的连接的默认自动提交行为 默认true
+        auto-commit: true
+        # 客户端等待连接池的最大毫秒数
+        connection-timeout: 350000
+        # 允许连接在连接池中空闲的最大时间（毫秒）
+        idle-timeout: 180000
+        login-timeout: 5
+        # 连接测试活动的最大时间量
+        validation-timeout: 3000
+        # 池中关闭连接后的最长生命周期
+        max-lifetime: 1800000
+        read-only: false
+        connection-test-query: SELECT 1
+        maximum-pool-size: 200
+        minimum-idle: 10
+        pool-name: DatebookHikariCP
+        register-mbeans: true
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
   reg-center:
     server-lists: 192.168.10.210:2181
     namespace: taotao-cloud-elasticjob
@@ -792,6 +819,7 @@ spring:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     properties:
       hibernate:
+        format_sql: true
         hbm2ddl.auto: update
         dialect: org.hibernate.dialect.MySQL8Dialect
     #properties:
@@ -1320,10 +1348,10 @@ taotao:
         types:
           - redis
           - logger
+          - kafka
       interceptor:
         doubt-api: true
         header: true
-        prometheus: true
       filter:
         version: true
         tenant: true
@@ -1442,7 +1470,7 @@ taotao:
           log-path: ${user.home}/logs/${spring.application.name}/xxl-job
           log-retention-days: 30
       elastic:
-        enabled: false
+        enabled: true
       quartz:
         enabled: true
       scheduled:
@@ -1606,6 +1634,19 @@ logging:
     root: INFO
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.sys.api.feign: debug
+    # hibernate log
+    #org.hibernate.SQL: debug
+    #org.hibernate.type: info
+    #org.hibernate.type.descriptor.sql.BasicBinder: trace
+    #org.hibernate.type.descriptor.sql.BasicExtractor: debug
+    #org.hibernate.engine.QueryParameters: debug
+    #org.hibernate.engine.query.HQLQueryPlan: debug
+    # mybatis log
+    #com.apache.ibatis: trace
+    #java.sql.Connection: debug
+    #java.sql.Statement: debug
+    #java.sql.PreparedStatement: debug
+
     #kafka.server.KafkaConfig: info
     #org.I0Itec.zkclient: info
     #kafka.admin.AdminClient.AdminConfig: info

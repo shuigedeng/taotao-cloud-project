@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.RandomUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -29,6 +30,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.Future;
 import lombok.AllArgsConstructor;
 import org.slf4j.MDC;
@@ -128,13 +130,16 @@ public class DictServiceImpl extends
 
 	@Override
 	public Dict findByCode(String code) {
-		//Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
-		//return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
-		return Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now())
-			.dictCode("123123123").dictName("lsdfjaslf")
-			.remark("sdfasfd")
-			.description("sdflasjdfl")
-			.build();
+		List<Dict> all = ir().findAll();
+		List<Dict> all1 = cr().findAll();
+
+		Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
+		return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
+		//return Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now())
+		//	.dictCode("123123123").dictName("lsdfjaslf")
+		//	.remark("sdfasfd")
+		//	.description("sdflasjdfl")
+		//	.build();
 	}
 
 	@Override
@@ -185,7 +190,7 @@ public class DictServiceImpl extends
 	}
 
 	@Override
-	@GlobalTransactional(name = "sys-dict-global-transactional-2", rollbackFor = Exception.class)
+	//@GlobalTransactional(name = "sys-dict-global-transactional-2", rollbackFor = Exception.class)
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean add1() {
 
@@ -198,13 +203,21 @@ public class DictServiceImpl extends
 
 		List<Dict> dicts = cr().saveAll(List.of(d1, d2));
 
+		String s5 = RandomUtils.randomChar(6);
+		Dict d5 = Dict.builder().dictCode(s5).dictName("sldf").sortNum(3).build();
+		Dict save = cr().save(d5);
+
 		String s3 = RandomUtils.randomChar(6);
 		String s4 = RandomUtils.randomChar(6);
 		Dict d3 = Dict.builder().dictCode(s3).dictName("sldf").sortNum(3).build();
 		Dict d4 = Dict.builder().dictCode(s4).dictName("sldf222").sortNum(5).build();
 
+		String s6 = RandomUtils.randomChar(6);
+		Dict d6 = Dict.builder().dictCode(s6).dictName("sldf222").sortNum(5).build();
+		Dict save1 = ir().save(d6);
+
 		List<Dict> dicts1 = ir().saveAllAndFlush(List.of(d3, d4));
-		
+
 		return true;
 	}
 }
