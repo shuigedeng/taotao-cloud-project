@@ -19,9 +19,6 @@ import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import java.util.Optional;
 import javax.persistence.EntityManager;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
@@ -40,10 +37,10 @@ public class DictRepository extends BaseClassSuperRepository<Dict, Long> {
 	}
 
 	public Optional<Dict> findByCode(String code) {
-		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-			.withMatcher("dictCode", GenericPropertyMatcher::exact);
-		Optional<Dict> one = findOne(
-			Example.of(Dict.builder().dictCode(code).build(), exampleMatcher));
+		//ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+		//	.withMatcher("dictCode", GenericPropertyMatcher::exact);
+		//Optional<Dict> one = findOne(
+		//	Example.of(Dict.builder().dictCode(code).build(), exampleMatcher));
 
 		return findOne((Specification<Dict>) (root, query, builder) -> query.where(
 			builder.equal(root.get("dictCode"), code)).getRestriction());

@@ -19,15 +19,19 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.pulsar.example.producer.ProducerService;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.sql.SQLIntegrityConstraintViolationException;
+import org.apache.pulsar.client.api.PulsarClientException;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -42,6 +46,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/buyer/dict")
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
 public class BuyerDictController extends BaseBusinessController<IDictService, Dict, Long> {
+
+	@Autowired
+	private ProducerService producerService;
 
 	@NotAuth
 	@GetMapping("/add/{type}")
@@ -60,9 +67,16 @@ public class BuyerDictController extends BaseBusinessController<IDictService, Di
 		return success(result);
 	}
 
-	@GetMapping("/test/{code}")
+	@GetMapping("/test/code")
 	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
-	public Result<Boolean> testCode(@PathVariable("code") String code) {
+	public Result<Boolean> testCode(@RequestParam String code) {
+		try {
+			producerService.sendStringMsg();
+			producerService.sendClassMsg();
+		} catch (PulsarClientException e) {
+			e.printStackTrace();
+		}
+
 		Dict byCode = service().findByCode(code);
 		LogUtils.info(String.valueOf(byCode));
 		return Result.success(true);
