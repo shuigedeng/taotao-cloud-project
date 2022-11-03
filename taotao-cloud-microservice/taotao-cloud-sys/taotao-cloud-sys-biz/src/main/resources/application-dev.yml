@@ -46,6 +46,25 @@ jetcache:
 
 pulsar:
   service-url: pulsar://192.168.10.210:6650
+  io-threads: 10
+  listener-threads: 10
+  enable-tcp-no-delay: false
+  keep-alive-interval-sec: 20
+  connection-timeout-sec: 10
+  operation-timeout-sec: 15
+  starting-backoff-interval-ms: 100
+  max-backoff-interval-sec: 10
+  consumer-name-delimiter:
+  namespace: default
+  tenant: public
+  auto-start: true
+  allow-interceptor: true
+  token-auth-value: 43th4398gh340gf34gj349gh304ghryj34fh
+  consumer:
+    default:
+      dead-letter-policy-max-redeliver-count: -1
+      ack-timeout-ms: 3000
+      subscription-type: Exclusive
 
 easy-es:
   enable: true
