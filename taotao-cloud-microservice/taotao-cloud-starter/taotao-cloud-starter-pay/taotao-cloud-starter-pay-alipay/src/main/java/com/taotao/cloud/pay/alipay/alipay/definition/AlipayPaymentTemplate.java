@@ -25,25 +25,24 @@
 
 package com.taotao.cloud.pay.alipay.alipay.definition;
 
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.SymbolConstants;
+import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.pay.alipay.alipay.properties.AlipayProperties;
-import com.taotao.cloud.pay.common.constants.PayConstants;
 import com.taotao.cloud.pay.common.exception.PaymentProfileIdIncorrectException;
 import com.taotao.cloud.pay.common.exception.PaymentProfileNotFoundException;
 import com.taotao.cloud.pay.common.exception.PaymentSignatureCheckErrorException;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * <p>Description: 支付宝支付基础类 </p>
@@ -55,8 +54,10 @@ public class AlipayPaymentTemplate {
 
 	private static final Logger log = LoggerFactory.getLogger(AlipayPaymentTemplate.class);
 
-	@CreateCache(name = PayConstants.CACHE_NAME_TOKEN_PAY, cacheType = CacheType.BOTH)
-	private Cache<String, String> cache;
+	// @CreateCache(name = PayConstants.CACHE_NAME_TOKEN_PAY, cacheType = CacheType.BOTH)
+	// private Cache<String, String> cache;
+
+	private RedisRepository cache;
 
 	private final AlipayProfileStorage alipayProfileStorage;
 	private final AlipayProperties alipayProperties;
@@ -84,12 +85,13 @@ public class AlipayPaymentTemplate {
 	}
 
 	public AlipayPaymentTemplate(AlipayProfileStorage alipayProfileStorage,
-		AlipayProperties alipayProperties) {
+								 AlipayProperties alipayProperties) {
 		this.alipayProfileStorage = alipayProfileStorage;
 		this.alipayProperties = alipayProperties;
-		this.serviceId = ServiceContext.getInstance().getApplicationName();
-		this.monocoque = ServiceContext.getInstance().isDistributedArchitecture();
-		this.applicationContext = ServiceContext.getInstance().getApplicationContext();
+		this.serviceId = ContextUtils.getApplicationName();
+		// this.monocoque = ContextUtils.isDistributedArchitecture();
+		this.applicationContext = ContextUtils.getApplicationContext();
+		this.cache = ContextUtils.getBean(RedisRepository.class, true);
 	}
 
 	private AlipayProfileStorage getAlipayProfileStorage() {
@@ -111,7 +113,7 @@ public class AlipayPaymentTemplate {
 	}
 
 	private AlipayPaymentExecuter getProcessor(Boolean sandbox, Boolean certMode,
-		AlipayProfile aliPayProfile) {
+											   AlipayProfile aliPayProfile) {
 
 		AlipayClient alipayClient = AlipayClientBuilder.mode(sandbox, certMode)
 			.setAppId(aliPayProfile.getAppId())
@@ -127,7 +129,7 @@ public class AlipayPaymentTemplate {
 		return AlipayPaymentExecuter.create(alipayClient, certMode);
 	}
 
-	private Cache<String, String> getCache() {
+	private RedisRepository getCache() {
 		return cache;
 	}
 
@@ -137,17 +139,17 @@ public class AlipayPaymentTemplate {
 
 	private void addCache(String key, String value, Feedback feedback) {
 		String area = getArea(key, feedback);
-		getCache().put(area, value);
+		getCache().set(area, value);
 	}
 
 	private void deleteCache(String key, Feedback feedback) {
 		String area = getArea(key, feedback);
-		getCache().remove(area);
+		getCache().del(area);
 	}
 
 	private String getCache(String key, Feedback feedback) {
 		String area = getArea(key, feedback);
-		return getCache().get(area);
+		return (String) getCache().get(area);
 	}
 
 	public AlipayPaymentExecuter getProcessor(String tradeNo, String identity) {
@@ -217,15 +219,15 @@ public class AlipayPaymentTemplate {
 	 * @param params 支付宝 notify_url中返回的参数
 	 */
 	public void publishNotifyEvent(Map<String, String> params) {
-		if (monocoque) {
-			applicationContext.publishEvent(new LocalPaymentNotifyEvent(params));
-		} else {
-			if (StringUtils.isNotBlank(getAlipayProperties().getDestination())) {
-				applicationContext.publishEvent(
-					new RemotePaymentNotifyEvent(JacksonUtils.toJson(params), serviceId,
-						getAlipayProperties().getDestination()));
-			}
-		}
+		// if (monocoque) {
+		// 	applicationContext.publishEvent(new LocalPaymentNotifyEvent(params));
+		// } else {
+		// 	if (StringUtils.isNotBlank(getAlipayProperties().getDestination())) {
+		// 		applicationContext.publishEvent(
+		// 			new RemotePaymentNotifyEvent(JacksonUtils.toJson(params), serviceId,
+		// 				getAlipayProperties().getDestination()));
+		// 	}
+		// }
 	}
 
 	/**
@@ -234,15 +236,15 @@ public class AlipayPaymentTemplate {
 	 * @param params 支付宝 return_url中返回的参数
 	 */
 	public void publishReturnEvent(Map<String, String> params) {
-		if (monocoque) {
-			applicationContext.publishEvent(new LocalPaymentReturnEvent(params));
-		} else {
-			if (StringUtils.isNotBlank(getAlipayProperties().getDestination())) {
-				applicationContext.publishEvent(
-					new RemotePaymentReturnEvent(JacksonUtils.toJson(params), serviceId,
-						getAlipayProperties().getDestination()));
-			}
-		}
+		// if (monocoque) {
+		// 	applicationContext.publishEvent(new LocalPaymentReturnEvent(params));
+		// } else {
+		// 	if (StringUtils.isNotBlank(getAlipayProperties().getDestination())) {
+		// 		applicationContext.publishEvent(
+		// 			new RemotePaymentReturnEvent(JacksonUtils.toJson(params), serviceId,
+		// 				getAlipayProperties().getDestination()));
+		// 	}
+		// }
 	}
 
 	/**

@@ -12,7 +12,7 @@ dependencies {
     api 'com.pig4cloud.excel:excel-spring-boot-starter:1.2.7'
 
     //https://search.maven.org/artifact/com.alibaba/easyexcel
-    api("com.alibaba:easyexcel:3.1.1") {
+    api("com.alibaba:easyexcel:3.1.2") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
@@ -25,7 +25,7 @@ dependencies {
     //https://gitee.com/dromara/x-easypdf
     //https://search.maven.org/artifact/wiki.xsx/x-easypdf
     api "wiki.xsx:x-easypdf:2.10.1"
-    api "wiki.xsx:x-easypdf-fop:2.10.1"
+    api "wiki.xsx:x-easypdf-fop:2.10.2"
 
     //https://gitee.com/PasseRR/docx4j-wisewe
     //https://search.maven.org/artifact/cn.wisewe/docx4j-wisewe

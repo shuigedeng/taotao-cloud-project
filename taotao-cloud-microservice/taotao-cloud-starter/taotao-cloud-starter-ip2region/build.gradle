@@ -3,7 +3,7 @@ dependencies {
 
     //https://github.com/maxmind/GeoIP2-java
     //https://search.maven.org/artifact/com.maxmind.geoip2/geoip2
-    api "com.maxmind.geoip2:geoip2:3.0.1"
+    api "com.maxmind.geoip2:geoip2:3.0.2"
 
     //https://gitee.com/lionsoul/ip2region.git
     //https://search.maven.org/artifact/org.lionsoul/ip2region

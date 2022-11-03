@@ -4,7 +4,7 @@ dependencies {
 
     //minio存储
     //https://search.maven.org/artifact/io.minio/minio
-    api "io.minio:minio:8.4.4"
+    api "io.minio:minio:8.4.5"
 
     //https://search.maven.org/artifact/com.squareup.okhttp3/okhttp
     api "com.squareup.okhttp3:okhttp:4.10.0"

@@ -2,7 +2,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/org.apache.curator/curator-recipes
-    api("org.apache.curator:curator-recipes:5.3.0") {
+    api("org.apache.curator:curator-recipes:5.4.0") {
         exclude group: "org.slf4j", module: "slf4j-log4j12"
     }
 }

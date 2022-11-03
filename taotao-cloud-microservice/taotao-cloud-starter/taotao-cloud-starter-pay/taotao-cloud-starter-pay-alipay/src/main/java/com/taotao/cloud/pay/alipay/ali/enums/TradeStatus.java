@@ -2,15 +2,10 @@ package com.taotao.cloud.pay.alipay.ali.enums;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.var;
 
 /**
  * 交易状态
  */
-@Getter
-@AllArgsConstructor
 public enum TradeStatus {
 
 	/**
@@ -53,4 +48,11 @@ public enum TradeStatus {
 		return ERROR;
 	}
 
+	TradeStatus(String str) {
+		this.str = str;
+	}
+
+	public String getStr() {
+		return str;
+	}
 }

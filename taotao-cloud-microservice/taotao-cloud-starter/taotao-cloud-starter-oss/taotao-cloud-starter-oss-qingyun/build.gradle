@@ -5,6 +5,7 @@ dependencies {
     //青云
     //https://search.maven.org/artifact/com.yunify/qingstor.sdk.java
     api "com.yunify:qingstor.sdk.java:2.6.0"
+
     testImplementation project(path: ":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common", configuration: 'tests')
 
 }

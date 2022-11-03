@@ -2,6 +2,6 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-common")
 
     //https://search.maven.org/artifact/com.tencentcloudapi/tencentcloud-sdk-java-sms
-    api "com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.590"
+    api "com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.621"
 
 }

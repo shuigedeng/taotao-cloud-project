@@ -28,7 +28,7 @@ buildscript {
         //https://search.maven.org/artifact/org.springframework/spring
         springVersion = '5.3.23'
         //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
-        springBootVersion = '2.7.4'
+        springBootVersion = '2.7.5'
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
         springCloudVersion = '2021.0.4'
         //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies
@@ -37,7 +37,7 @@ buildscript {
         //https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
         testContainersVersion = "1.17.5"
         //https://search.maven.org/artifact/de.codecentric/spring-boot-admin-starter-server
-        springBootAdminVersion = "2.7.6"
+        springBootAdminVersion = "2.7.7"
 
         //https://search.maven.org/artifact/org.projectlombok/lombok
         lombokVersion = "1.18.24"
@@ -51,7 +51,7 @@ buildscript {
         querydslAptVersion = "5.0.0"
 
         //https://search.maven.org/artifact/org.springframework.security/spring-security-core
-        springSecurityVersion = '5.7.4'
+        springSecurityVersion = '5.7.5'
         //https://search.maven.org/artifact/org.springframework.data/spring-data-commons
         springDataCommonsVersion = '2.7.5'
         //https://search.maven.org/artifact/org.springframework.kafka/spring-kafka
@@ -98,7 +98,7 @@ buildscript {
         //https://search.maven.org/artifact/com.aliyun.oss/aliyun-sdk-oss
         aliyunSdkOssVersion = '3.15.2'
         //https://search.maven.org/artifact/com.qiniu/qiniu-java-sdk
-        qiniuJavaSdkVersion = '7.11.0'
+        qiniuJavaSdkVersion = '7.12.0'
         //https://search.maven.org/artifact/com.google.code.gson/gson
         gsonVersion = '2.9.1'
         //https://search.maven.org/artifact/com.google.guava/guava
@@ -141,7 +141,7 @@ buildscript {
         //https://search.maven.org/artifact/io.springfox/springfox-swagger2
         swaggerVersion = '3.0.0'
         //https://search.maven.org/artifact/io.swagger.core.v3/swagger-models
-        swaggerModelsVersion = '2.2.4'
+        swaggerModelsVersion = '2.2.6'
         //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-spring-ui
         knife4jVersion = '3.0.3'
 
@@ -154,7 +154,7 @@ buildscript {
         //https://search.maven.org/artifact/org.mapstruct/mapstruct
         mapstructVersion = "1.5.3.Final"
         //https://search.maven.org/artifact/com.alibaba.fastjson2/fastjson2
-        fastjson2Version = "2.0.16"
+        fastjson2Version = "2.0.17"
         //https://search.maven.org/artifact/com.caucho/hessian
         hessianVersion = "4.0.66"
         //https://search.maven.org/artifact/com.esotericsoftware/kryo
@@ -162,7 +162,7 @@ buildscript {
         //https://search.maven.org/artifact/org.openjdk.nashorn/nashorn-core
         nashornVersion = "15.4"
         //https://search.maven.org/artifact/com.google.zxing/javase
-        zxingJavaseVersion = "3.5.0"
+        zxingJavaseVersion = "3.5.1"
         //https://search.maven.org/artifact/org.jsoup/jsoup
         jsoupVersion = "1.15.3"
         //https://search.maven.org/artifact/com.thoughtworks.xstream/xstream
@@ -184,7 +184,7 @@ buildscript {
         //https://search.maven.org/artifact/io.github.lyh200/dynamic-tp-spring-cloud-starter-nacos
         dynamicTpVersion = "1.0.7"
         //https://search.maven.org/artifact/joda-time/joda-time
-        jodaTimeVersion = "2.12.0"
+        jodaTimeVersion = "2.12.1"
         //https://search.maven.org/artifact/org.anarres.lzo/lzo-core
         lzoVersion = "1.0.6"
         //https://search.maven.org/artifact/net.jpountz.lz4/lz4
@@ -268,7 +268,7 @@ plugins {
     // *******************************************第三方插件************************************************************
     //google出品的一个插件，可以直接将SpringBoot构建推送到Docker仓库
     //https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
-    id "com.google.cloud.tools.jib" version "3.3.0"
+    id "com.google.cloud.tools.jib" version "3.3.1"
 
     //用于创建和管理外部进程的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.processes
@@ -280,7 +280,7 @@ plugins {
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.github.shalousun.smart-doc
-    id "com.github.shalousun.smart-doc" version "2.6.0-release"
+    id "com.github.shalousun.smart-doc" version "2.6.2"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
@@ -296,7 +296,7 @@ plugins {
 
     //用于运行 SonarQube 分析的 Gradle 插件。
     //https://plugins.gradle.org/plugin/org.sonarqube
-    id "org.sonarqube" version "3.4.0.2513"
+    id "org.sonarqube" version "3.5.0.2730"
 
     //Spring Boot 可以轻松创建独立的、生产级的基于 Spring 的应用程序，您可以“直接运行”
     // 我们对 Spring 平台和第三方库持固执己见的看法，

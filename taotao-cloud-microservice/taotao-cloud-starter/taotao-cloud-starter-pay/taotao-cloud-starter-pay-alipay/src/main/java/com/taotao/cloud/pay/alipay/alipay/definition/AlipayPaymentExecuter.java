@@ -165,13 +165,15 @@ import com.alipay.api.response.ZolozAuthenticationCustomerFtokenQueryResponse;
 import com.alipay.api.response.ZolozAuthenticationSmilepayInitializeResponse;
 import com.alipay.api.response.ZolozIdentificationUserWebInitializeResponse;
 import com.alipay.api.response.ZolozIdentificationUserWebQueryResponse;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import com.taotao.cloud.pay.common.exception.PaymentRuntimeErrorException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * <p>Description: 支付宝支付执行器 </p>
@@ -210,7 +212,7 @@ public class AlipayPaymentExecuter {
 	}
 
 	public <T extends AlipayResponse> T execute(AlipayRequest<T> request, String accessToken,
-		String appAuthToken, String targetAppId) {
+												String appAuthToken, String targetAppId) {
 		try {
 			return getAlipayClient().execute(request, accessToken, appAuthToken, targetAppId);
 		} catch (AlipayApiException e) {
@@ -220,7 +222,7 @@ public class AlipayPaymentExecuter {
 	}
 
 	public <T extends AlipayResponse> T execute(AlipayRequest<T> request, String accessToken,
-		String appAuthToken) {
+												String appAuthToken) {
 		try {
 			return getAlipayClient().execute(request, accessToken, appAuthToken);
 		} catch (AlipayApiException e) {
@@ -248,7 +250,7 @@ public class AlipayPaymentExecuter {
 	}
 
 	public <T extends AlipayResponse> T certificateExecute(AlipayRequest<T> request,
-		String accessToken, String appAuthToken, String targetAppId) {
+														   String accessToken, String appAuthToken, String targetAppId) {
 		try {
 			return getAlipayClient().certificateExecute(request, accessToken, appAuthToken,
 				targetAppId);
@@ -259,7 +261,7 @@ public class AlipayPaymentExecuter {
 	}
 
 	public <T extends AlipayResponse> T certificateExecute(AlipayRequest<T> request,
-		String accessToken, String appAuthToken) {
+														   String accessToken, String appAuthToken) {
 		try {
 			return getAlipayClient().certificateExecute(request, accessToken, appAuthToken);
 		} catch (AlipayApiException e) {
@@ -269,7 +271,7 @@ public class AlipayPaymentExecuter {
 	}
 
 	public <T extends AlipayResponse> T certificateExecute(AlipayRequest<T> request,
-		String authToken) {
+														   String authToken) {
 		try {
 			return getAlipayClient().certificateExecute(request, authToken);
 		} catch (AlipayApiException e) {
@@ -315,7 +317,7 @@ public class AlipayPaymentExecuter {
 	}
 
 	public <T extends AlipayResponse> T doExecute(AlipayRequest<T> request, String accessToken,
-		String appAuthToken, String targetAppId) {
+												  String appAuthToken, String targetAppId) {
 		if (getCertMode()) {
 			return certificateExecute(request, accessToken, appAuthToken, targetAppId);
 		} else {
@@ -324,7 +326,7 @@ public class AlipayPaymentExecuter {
 	}
 
 	public <T extends AlipayResponse> T doExecute(AlipayRequest<T> request, String accessToken,
-		String appAuthToken) {
+												  String appAuthToken) {
 		if (getCertMode()) {
 			return certificateExecute(request, accessToken, appAuthToken);
 		} else {
@@ -365,7 +367,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradeAppPayResponse}
 	 */
 	public AlipayTradeAppPayResponse appPay(AlipayTradeAppPayModel model, String notifyUrl,
-		String appAuthToken) {
+											String appAuthToken) {
 		AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
 		request.setBizModel(model);
 		request.setNotifyUrl(notifyUrl);
@@ -398,7 +400,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradeWapPayResponse}
 	 */
 	public AlipayTradeWapPayResponse wapPay(AlipayTradeWapPayModel model, String returnUrl,
-		String notifyUrl, String appAuthToken, HttpMethod method) {
+											String notifyUrl, String appAuthToken, HttpMethod method) {
 		AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
 		request.setBizModel(model);
 		request.setReturnUrl(returnUrl);
@@ -421,7 +423,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradeWapPayResponse}
 	 */
 	public AlipayTradeWapPayResponse wapPay(AlipayTradeWapPayModel model, String returnUrl,
-		String notifyUrl, String appAuthToken) {
+											String notifyUrl, String appAuthToken) {
 		return wapPay(model, returnUrl, notifyUrl, appAuthToken, null);
 	}
 
@@ -435,7 +437,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradeWapPayResponse}
 	 */
 	public AlipayTradeWapPayResponse wapPay(AlipayTradeWapPayModel model, String returnUrl,
-		String notifyUrl, HttpMethod method) {
+											String notifyUrl, HttpMethod method) {
 		return wapPay(model, returnUrl, notifyUrl, null, method);
 	}
 
@@ -448,7 +450,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradeWapPayResponse}
 	 */
 	public AlipayTradeWapPayResponse wapPay(AlipayTradeWapPayModel model, String returnUrl,
-		String notifyUrl) {
+											String notifyUrl) {
 		return wapPay(model, returnUrl, notifyUrl, null, null);
 	}
 
@@ -462,7 +464,7 @@ public class AlipayPaymentExecuter {
 	 * @return {AlipayTradePayResponse}
 	 */
 	public AlipayTradePayResponse paymentCodePay(AlipayTradePayModel model, String notifyUrl,
-		String appAuthToken) {
+												 String appAuthToken) {
 		AlipayTradePayRequest request = new AlipayTradePayRequest();
 		request.setBizModel(model);
 		request.setNotifyUrl(notifyUrl);
@@ -492,7 +494,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradePrecreateResponse}
 	 */
 	public AlipayTradePrecreateResponse scanCodePay(AlipayTradePrecreateModel model,
-		String notifyUrl, String appAuthToken) {
+													String notifyUrl, String appAuthToken) {
 		AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
 		request.setBizModel(model);
 		request.setNotifyUrl(notifyUrl);
@@ -511,7 +513,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradePrecreateResponse}
 	 */
 	public AlipayTradePrecreateResponse scanCodePay(AlipayTradePrecreateModel model,
-		String notifyUrl) {
+													String notifyUrl) {
 		return scanCodePay(model, notifyUrl, null);
 	}
 
@@ -526,7 +528,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradePagePayResponse}
 	 */
 	public AlipayTradePagePayResponse pagePay(AlipayTradePagePayModel model, String notifyUrl,
-		String returnUrl, String appAuthToken, HttpMethod method) {
+											  String returnUrl, String appAuthToken, HttpMethod method) {
 		AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
 		request.setBizModel(model);
 		request.setNotifyUrl(notifyUrl);
@@ -549,7 +551,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradePagePayResponse}
 	 */
 	public AlipayTradePagePayResponse pagePay(AlipayTradePagePayModel model, String notifyUrl,
-		String returnUrl, HttpMethod method) {
+											  String returnUrl, HttpMethod method) {
 		return pagePay(model, notifyUrl, returnUrl, null, method);
 	}
 
@@ -563,7 +565,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradePagePayResponse}
 	 */
 	public AlipayTradePagePayResponse pagePay(AlipayTradePagePayModel model, String notifyUrl,
-		String returnUrl, String appAuthToken) {
+											  String returnUrl, String appAuthToken) {
 		return pagePay(model, notifyUrl, returnUrl, appAuthToken, null);
 	}
 
@@ -576,7 +578,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradePagePayResponse}
 	 */
 	public AlipayTradePagePayResponse pagePay(AlipayTradePagePayModel model, String notifyUrl,
-		String returnUrl) {
+											  String returnUrl) {
 		return pagePay(model, notifyUrl, returnUrl, null, null);
 	}
 
@@ -589,7 +591,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradeCreateResponse}
 	 */
 	public AlipayTradeCreateResponse jsapiPay(AlipayTradeCreateModel model, String notifyUrl,
-		String appAuthToken) {
+											  String appAuthToken) {
 		AlipayTradeCreateRequest request = new AlipayTradeCreateRequest();
 		request.setBizModel(model);
 		request.setNotifyUrl(notifyUrl);
@@ -644,7 +646,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayFundTransUniTransferResponse}
 	 */
 	public AlipayFundTransUniTransferResponse unifiedTransfer(AlipayFundTransUniTransferModel model,
-		String appAuthToken) {
+															  String appAuthToken) {
 		AlipayFundTransUniTransferRequest request = new AlipayFundTransUniTransferRequest();
 		request.setBizModel(model);
 		if (StringUtils.isNotBlank(appAuthToken)) {
@@ -679,7 +681,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayFundAccountQueryResponse}
 	 */
 	public AlipayFundAccountQueryResponse accountQuery(AlipayFundAccountQueryModel model,
-		String appAuthToken) {
+													   String appAuthToken) {
 		AlipayFundAccountQueryRequest request = new AlipayFundAccountQueryRequest();
 		request.setBizModel(model);
 
@@ -853,7 +855,7 @@ public class AlipayPaymentExecuter {
 	 * @return {@link AlipayTradeOrderSettleResponse}
 	 */
 	public AlipayTradeOrderSettleResponse orderSettle(AlipayTradeOrderSettleModel model,
-		String appAuthToken) {
+													  String appAuthToken) {
 		AlipayTradeOrderSettleRequest request = new AlipayTradeOrderSettleRequest();
 		request.setBizModel(model);
 		return execute(request, null, appAuthToken);
