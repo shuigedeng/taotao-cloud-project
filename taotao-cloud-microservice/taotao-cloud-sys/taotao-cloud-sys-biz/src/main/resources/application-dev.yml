@@ -55,11 +55,11 @@ pulsar:
   starting-backoff-interval-ms: 100
   max-backoff-interval-sec: 10
   consumer-name-delimiter:
-  namespace: default
-  tenant: public
+  namespace: taotao-cloud-namespace
+  tenant: taotao-cloud-tenant
   auto-start: true
   allow-interceptor: true
-  token-auth-value: 43th4398gh340gf34gj349gh304ghryj34fh
+  #token-auth-value: 43th4398gh340gf34gj349gh304ghryj34fh
   consumer:
     default:
       dead-letter-policy-max-redeliver-count: -1

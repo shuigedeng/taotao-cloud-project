@@ -130,8 +130,8 @@ public class DictServiceImpl extends
 
 	@Override
 	public Dict findByCode(String code) {
-		List<Dict> all = ir().findAll();
-		List<Dict> all1 = cr().findAll();
+		//List<Dict> all = ir().findAll();
+		//List<Dict> all1 = cr().findAll();
 
 		Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
 		return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
