@@ -606,6 +606,53 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.48
 
+  pulsar-standalone:
+    image: "apachepulsar/pulsar:2.10.2"
+    restart: always
+    container_name: pulsar-standalone
+    environment:
+      - BOOKIE_MEM=" -Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g"
+    volumes:
+      - /root/compose/pulsar/data:/pulsar/data:rw
+      - /root/compose/pulsar/conf:/pulsar/conf:rw
+    ports:
+      - "8086:8080"
+      - "6650:6650"
+    command: >
+      /bin/bash -c
+      "bin/apply-config-from-env.py conf/standalone.conf
+      && bin/pulsar standalone --advertised-address pulsar-standalone"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.49
+  pulsar-dashboard:
+    image: "apachepulsar/pulsar-dashboard:2.8.1"
+    restart: always
+    container_name: pulsar-dashboard
+    ports:
+      - "8087:80"
+    environment:
+      - SERVICE_URL=http://172.11.0.49:8080
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.50
+  pulsar-manager:
+    image: "apachepulsar/pulsar-manager:v0.3.0"
+    restart: always
+    container_name: pulsar-manager
+    ports:
+      - "9527:9527"
+      - "7750:7750"
+    depends_on:
+      - pulsar-standalone
+    links:
+      - pulsar-standalone
+    environment:
+      - SPRING_CONFIGURATION_FILE=/pulsar-manager/pulsar-manager/application.properties
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.51
+
 networks:
   taotao-cluster-network:
     external: true

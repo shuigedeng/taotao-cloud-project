@@ -789,6 +789,7 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.52
 
+
 networks:
   taotao-cluster-network:
     external:

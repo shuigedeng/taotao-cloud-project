@@ -44,8 +44,11 @@ jetcache:
   #    host: 127.0.0.1
   #    port: 6379
 
+pulsar:
+  service-url: pulsar://192.168.10.210:6650
+
 easy-es:
-  enable: false
+  enable: true
   # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
   address: 192.168.10.210:9200
   # 默认为http
@@ -524,6 +527,9 @@ rocketmq:
     #secret-key:
 
 spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.actuate.autoconfigure.elasticsearch.ElasticSearchReactiveHealthContributorAutoConfiguration
   #  dynamic:
   #    tp:
   #      enabled: true
@@ -1441,18 +1447,17 @@ taotao:
       version: ${taotaoCloudVersion}
       title: 系统管理模块
     metrics:
-      enabled: false
+      enabled: true
       druid:
         enabled: false
       sentinel:
-        enabled: false
+        enabled: true
       undertow:
-        enabled: false
+        enabled: true
     logger:
       enabled: true
-
     laytpl:
-      enabled: false
+      enabled: true
     job:
       xxl:
         enabled: true
@@ -1520,7 +1525,7 @@ mybatis-plus:
   mapperLocations: classpath:mapper/*.xml
   global-config:
     # 关闭mp3.0自带的banner
-    banner: false
+    banner: true
     db-config:
       #主键类型
       id-type: auto
