@@ -207,6 +207,7 @@ redisson:
   #  scanInterval: 1000
 
 elasticjob:
+  # 此处开启会通过 ElasticJobTracingConfiguration 注入一个tracingDataSource的bean 会和QuartzAutoConfiguration自动配置的的@ConditionalOnSingleCandidate(DataSource.class)冲突 启动会报错
   enabled: false
   #dump:
   #  port: 9888
