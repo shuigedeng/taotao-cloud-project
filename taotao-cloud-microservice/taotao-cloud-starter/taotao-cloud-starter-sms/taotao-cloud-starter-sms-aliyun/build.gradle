@@ -7,7 +7,9 @@ dependencies {
 //    //https://search.maven.org/artifact/com.aliyun/aliyun-java-sdk-dysmsapi
 //    api "com.aliyun:aliyun-java-sdk-dysmsapi:2.2.1"
 
-    api 'com.aliyun:dysmsapi20170525:2.0.18'
-    api 'com.aliyun:alibabacloud-dysmsapi20170525:1.0.1'
+    //https://search.maven.org/artifact/com.aliyun/dysmsapi20170525
+    api 'com.aliyun:dysmsapi20170525:2.0.22'
+    //https://search.maven.org/artifact/com.aliyun/alibabacloud-dysmsapi20170525
+    api 'com.aliyun:alibabacloud-dysmsapi20170525:2.0.22'
 }
 

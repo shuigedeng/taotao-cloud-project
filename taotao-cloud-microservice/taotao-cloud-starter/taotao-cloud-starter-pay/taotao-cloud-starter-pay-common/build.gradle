@@ -13,8 +13,8 @@ dependencies {
 
     api "org.springframework.boot:spring-boot-starter-data-jdbc"
 
-    api group: 'com.egzosn', name: 'pay-spring-boot-starter', version: '1.0.3'
-
+    //https://search.maven.org/artifact/com.egzosn/pay-spring-boot-starter
+    api "com.egzosn:pay-spring-boot-starter:1.0.3"
 
 }
 

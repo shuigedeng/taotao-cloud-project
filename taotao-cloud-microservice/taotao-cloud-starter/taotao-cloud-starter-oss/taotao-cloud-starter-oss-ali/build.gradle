@@ -4,7 +4,8 @@ dependencies {
 
     //阿里OSS对象存储依赖
     //https://search.maven.org/artifact/com.aliyun.oss/aliyun-sdk-oss
-    api "com.aliyun.oss:aliyun-sdk-oss:3.15.1"
+    api "com.aliyun.oss:aliyun-sdk-oss:3.15.2"
+
     testImplementation project(path: ":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common", configuration: 'tests')
 
 }

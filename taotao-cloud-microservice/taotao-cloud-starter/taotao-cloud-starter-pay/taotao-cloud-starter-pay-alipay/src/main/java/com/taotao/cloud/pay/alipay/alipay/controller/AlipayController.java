@@ -27,7 +27,9 @@ package com.taotao.cloud.pay.alipay.alipay.controller;
 
 import com.alipay.api.domain.AlipayTradePagePayModel;
 import com.alipay.api.response.AlipayTradePagePayResponse;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.pay.alipay.alipay.definition.AlipayPaymentTemplate;
+import com.taotao.cloud.pay.alipay.alipay.domain.PagePayDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -100,9 +102,11 @@ public class AlipayController {
 		}
 
 		if (ObjectUtils.isNotEmpty(response) && response.isSuccess()) {
-			return Result.success("调用支付宝电脑网站支付成功！", response.getBody());
+			// return Result.success("调用支付宝电脑网站支付成功！", response.getBody());
+			return null;
 		} else {
-			return Result.failure("调用支付宝电脑网站支付失败！");
+			// return Result.failure("调用支付宝电脑网站支付失败！");
+			return null;
 		}
 	}
 }

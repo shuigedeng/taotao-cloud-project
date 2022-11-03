@@ -31,7 +31,6 @@ import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.DefaultAlipayClient;
 import com.taotao.cloud.pay.common.exception.PaymentClientUninitializedException;
 import org.apache.commons.lang3.ObjectUtils;
-import org.codehaus.commons.compiler.Sandbox;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,8 +113,9 @@ public class AlipayClientBuilder {
 	 * @return AliPayApiConfig 支付宝配置
 	 */
 	private AlipayClient create(boolean sandbox) {
-		return new DefaultAlipayClient(Sandbox.getAliPayServerUrl(sandbox), getAppId(),
-			getAppPrivateKey(), FORMAT, getCharset(), getAlipayPublicKey(), getSignType());
+		// return new DefaultAlipayClient(Sandbox.getAliPayServerUrl(sandbox), getAppId(),
+		// 	getAppPrivateKey(), FORMAT, getCharset(), getAlipayPublicKey(), getSignType());
+		return null;
 	}
 
 	private AlipayClient createByPath(boolean sandbox) {
@@ -150,9 +150,9 @@ public class AlipayClientBuilder {
 
 	@NotNull
 	private CertAlipayRequest createCommon(boolean sandbox, String appId, String appPrivateKey,
-		String charset, String signType) {
+										   String charset, String signType) {
 		CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
-		certAlipayRequest.setServerUrl(Sandbox.getAliPayServerUrl(sandbox));
+		// certAlipayRequest.setServerUrl(Sandbox.getAliPayServerUrl(sandbox));
 		certAlipayRequest.setAppId(appId);
 		certAlipayRequest.setPrivateKey(appPrivateKey);
 		certAlipayRequest.setFormat(FORMAT);

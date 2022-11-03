@@ -6,6 +6,7 @@ dependencies {
 //        exclude group: "org.json", module: "json"
 //    }
 
+    //https://search.maven.org/artifact/com.github.qcloudsms/qcloudsms
     api "com.github.qcloudsms:qcloudsms:1.0.6"
 }
 
