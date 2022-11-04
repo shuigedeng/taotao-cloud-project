@@ -17,29 +17,43 @@ package com.taotao.cloud.auth.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import java.io.File;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.io.File;
-
 /**
  * TaoTaoCloudAuthBizApplication 默认url 作用
  * <p>
- * /oauth/authorize 授权端点 /oauth/token 令牌端点 /oauth/confirm_access 用户批准授权的端点 /oauth/error 用于渲染授权服务器的错误
- * /oauth/check_token 资源服务器解码access token /oauth/check_token
+ * /oauth/authorize 授权端点
  * <p>
- * 当使用JWT的时候，暴露公钥的端点
+ * /oauth/token 令牌端点
  * <p>
- * 抑制java9 module 报错 --add-opens java.base/java.lang=ALL-UNNAMED --add-opens
- * java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED
- * --add-opens java.base/java.util=ALL-UNNAMED --add-opens
- * jdk.management/com.sun.management.internal=ALL-UNNAMED --add-opens
- * java.base/java.math=ALL-UNNAMED --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED
- * --add-exports java.desktop/sun.awt=ALL-UNNAMED --add-exports java.desktop/sun.font=ALL-UNNAMED
- * --add-opens java.desktop/sun.awt=ALL-UNNAMED --add-opens java.desktop/sun.font=ALL-UNNAMED
+ * /oauth/confirm_access 用户批准授权的端点
+ * <p>
+ * /oauth/error 用于渲染授权服务器的错误
+ * <p>
+ * /oauth/check_token 资源服务器解码access token
+ * <p>
+ * /oauth/check_token 当使用JWT的时候，暴露公钥的端点
+ * <p>
+ * <pre class="code">
+ * --add-opens java.base/java.lang=ALL-UNNAMED
+ * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+ * --add-opens java.base/java.lang.invoke=ALL-UNNAMED
+ * --add-opens java.base/java.util=ALL-UNNAMED
+ * --add-opens java.base/sun.net=ALL-UNNAMED
+ * --add-opens java.base/java.math=ALL-UNNAMED
+ * --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED
+ * --add-opens java.base/sun.net=ALL-UNNAMED
+ * --add-opens java.desktop/sun.awt=ALL-UNNAMED
+ * --add-opens java.desktop/sun.font=ALL-UNNAMED
+ * --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+ * --add-exports java.desktop/sun.awt=ALL-UNNAMED
+ * --add-exports java.desktop/sun.font=ALL-UNNAMED
+ * </pre>
  *
  * @author shuigedeng
  * @version 2022.03

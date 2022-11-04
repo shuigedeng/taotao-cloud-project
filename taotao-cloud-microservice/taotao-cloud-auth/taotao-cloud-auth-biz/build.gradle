@@ -57,6 +57,8 @@ dependencies {
 
     implementation "org.apache.commons:commons-collections4"
 
+    implementation "com.baomidou:mybatis-plus-core"
+
     implementation "org.springframework:spring-webflux"
     implementation "io.projectreactor.netty:reactor-netty-http"
     implementation "io.projectreactor.netty:reactor-netty"

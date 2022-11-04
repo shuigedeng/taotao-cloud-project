@@ -6,7 +6,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 /**
  * @author felord
  */
-public interface CaptchaUserDetailsService {
+public interface PhoneUserDetailsService {
+
 	/**
 	 * load user by phone
 	 *

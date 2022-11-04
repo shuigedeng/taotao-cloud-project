@@ -120,28 +120,28 @@ public class ConvertUtils {
 		}
 	}
 
-	public static Integer[] getInts(String[] s) {
-		Integer[] integer = new Integer[s.length];
-		if (s == null) {
-			return null;
-		}
-		for (int i = 0; i < s.length; i++) {
-			integer[i] = Integer.parseInt(s[i]);
-		}
-		return integer;
-
-	}
-
-	public static double getDouble(String s, double defval) {
-		if (s == null || s == "") {
-			return (defval);
-		}
-		try {
-			return (Double.parseDouble(s));
-		} catch (NumberFormatException e) {
-			return (defval);
-		}
-	}
+	//public static Integer[] getInts(String[] s) {
+	//	Integer[] integer = new Integer[s.length];
+	//	if (s == null) {
+	//		return null;
+	//	}
+	//	for (int i = 0; i < s.length; i++) {
+	//		integer[i] = Integer.parseInt(s[i]);
+	//	}
+	//	return integer;
+	//
+	//}
+	//
+	//public static double getDouble(String s, double defval) {
+	//	if (s == null || s == "") {
+	//		return (defval);
+	//	}
+	//	try {
+	//		return (Double.parseDouble(s));
+	//	} catch (NumberFormatException e) {
+	//		return (defval);
+	//	}
+	//}
 
 	public static double getDou(Double s, double defval) {
 		if (s == null) {
@@ -187,18 +187,18 @@ public class ConvertUtils {
 		return s.intValue();
 	}
 
-	public static Integer[] getIntegerArry(String[] object) {
-		int len = object.length;
-		Integer[] result = new Integer[len];
-		try {
-			for (int i = 0; i < len; i++) {
-				result[i] = new Integer(object[i].trim());
-			}
-			return result;
-		} catch (NumberFormatException e) {
-			return null;
-		}
-	}
+	//public static Integer[] getIntegerArry(String[] object) {
+	//	int len = object.length;
+	//	Integer[] result = new Integer[len];
+	//	try {
+	//		for (int i = 0; i < len; i++) {
+	//			result[i] = new Integer(object[i].trim());
+	//		}
+	//		return result;
+	//	} catch (NumberFormatException e) {
+	//		return null;
+	//	}
+	//}
 
 	public static String getString(String s) {
 		return (getString(s, ""));
@@ -242,14 +242,14 @@ public class ConvertUtils {
 		return (s.toString().trim());
 	}
 
-	public static long stringToLong(String str) {
-		Long test = new Long(0);
-		try {
-			test = Long.valueOf(str);
-		} catch (Exception e) {
-		}
-		return test.longValue();
-	}
+	//public static long stringToLong(String str) {
+	//	Long test = new Long(0);
+	//	try {
+	//		test = Long.valueOf(str);
+	//	} catch (Exception e) {
+	//	}
+	//	return test.longValue();
+	//}
 
 	/**
 	 * 获取本机IP
@@ -635,9 +635,9 @@ public class ConvertUtils {
 		try {
 			model = modelClass.newInstance();
 		} catch (InstantiationException e) {
-			LogUtils.error("entityToModel : 实例化异常" , e);
+			LogUtils.error("entityToModel : 实例化异常", e);
 		} catch (IllegalAccessException e) {
-			LogUtils.error("entityToModel : 安全权限异常" , e);
+			LogUtils.error("entityToModel : 安全权限异常", e);
 		}
 		BeanUtils.copyProperties(entity, model);
 		return (T) model;
@@ -674,7 +674,7 @@ public class ConvertUtils {
 		try {
 			//换个写法，解决springboot读取jar包中文件的问题
 			InputStream stream = ConvertUtils.class.getClassLoader()
-				.getResourceAsStream(url.replace("classpath:" , ""));
+				.getResourceAsStream(url.replace("classpath:", ""));
 			json = IOUtils.toString(stream, "UTF-8");
 		} catch (IOException e) {
 			LogUtils.error(e.getMessage(), e);

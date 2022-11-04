@@ -3,7 +3,7 @@ package com.taotao.cloud.auth.biz.authentication.captcha.service;
 /**
  * @author n1
  */
-public interface CaptchaService {
+public interface PhoneService {
 
 	/**
 	 * verify captcha

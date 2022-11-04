@@ -13,6 +13,7 @@ import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
@@ -261,15 +262,28 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 				// 验证码校验 1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 				captchaLoginConfigurer
 					.captchaService((phone, rawCode) -> {
-						return phone.equals(rawCode);
+						System.out.println(phone);
+						System.out.println(rawCode);
+
+						return true;
 					})
 					// 根据手机号查询用户UserDetials  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 					.captchaUserDetailsService(phone -> {
-						return User.withUsername(phone)
-							// 密码
-							.password("password")
-							// 权限集
-							.authorities("ROLE_USER", "ROLE_ADMIN").build();
+						return SecurityUser.builder()
+							.account("admin")
+							.userId(1L)
+							.username("admin")
+							.nickname("admin")
+							.password(
+								"$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")
+							.phone("15730445331")
+							.mobile("15730445331")
+							.email("981376578@qq.com")
+							.sex(1)
+							.status(1)
+							.type(2)
+							.permissions(Set.of("xxx", "sldfl"))
+							.build();
 					})
 					// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 					.jwtTokenGenerator(this::tokenResponseMock)
@@ -299,42 +313,43 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			// 微信网页授权  下面的参数是假的
 			.wechatWebclient("wxdf90xxx8e7f", "bf1306baaaxxxxx15eb02d68df5")
 			// 企业微信登录 下面的参数是假的
-			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8", "1000005")
+			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8",
+				"1000005")
 			// 微信扫码登录 下面的参数是假的
 			.wechatWebLoginclient("wxafd62c05779e50bd", "ab24fce07ea84228dc4e64720f8bdefd")
 			.oAuth2LoginConfigurerConsumer(oauth2LoginConfigurer ->
-				oauth2LoginConfigurer
-					//.loginPage("/user/login").failureUrl("/login-error").permitAll()
-					//.loginPage("/login.html").permitAll()
-					//.loginProcessingUrl("/login").permitAll()
-					//.loginProcessingUrl("/form/login/process").permitAll()
-					// 认证成功后的处理器
-					// 登录请求url
-					// .loginProcessingUrl(DEFAULT_FILTER_PROCESSES_URI)
-					//.loginPage("/login")
-					.successHandler((request, response, authentication) -> {
-						LogUtils.info("oAuth2Login用户认证成功");
-					})
-					// 认证失败后的处理器
-					.failureHandler((request, response, exception) -> {
-						LogUtils.info("oAuth2Login用户认证失败");
-					})
-					// // 配置授权服务器端点信息
-					// .authorizationEndpoint(authorizationEndpointCustomizer ->
-					// 	authorizationEndpointCustomizer
-					// 		// 授权端点的前缀基础url
-					// 		.baseUri(DEFAULT_AUTHORIZATION_REQUEST_BASE_URI)
-					// )
-					// // 配置获取access_token的端点信息
-					// .tokenEndpoint(tokenEndpointCustomizer ->
-					// 	tokenEndpointCustomizer
-					// 		.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
-					// )
-					// //配置获取userInfo的端点信息
-					// .userInfoEndpoint(userInfoEndpointCustomizer ->
-					// 	userInfoEndpointCustomizer
-					// 		.userService(new QQOauth2UserService())
-					// ));
+					oauth2LoginConfigurer
+						//.loginPage("/user/login").failureUrl("/login-error").permitAll()
+						//.loginPage("/login.html").permitAll()
+						//.loginProcessingUrl("/login").permitAll()
+						//.loginProcessingUrl("/form/login/process").permitAll()
+						// 认证成功后的处理器
+						// 登录请求url
+						// .loginProcessingUrl(DEFAULT_FILTER_PROCESSES_URI)
+						//.loginPage("/login")
+						.successHandler((request, response, authentication) -> {
+							LogUtils.info("oAuth2Login用户认证成功");
+						})
+						// 认证失败后的处理器
+						.failureHandler((request, response, exception) -> {
+							LogUtils.info("oAuth2Login用户认证失败");
+						})
+				// // 配置授权服务器端点信息
+				// .authorizationEndpoint(authorizationEndpointCustomizer ->
+				// 	authorizationEndpointCustomizer
+				// 		// 授权端点的前缀基础url
+				// 		.baseUri(DEFAULT_AUTHORIZATION_REQUEST_BASE_URI)
+				// )
+				// // 配置获取access_token的端点信息
+				// .tokenEndpoint(tokenEndpointCustomizer ->
+				// 	tokenEndpointCustomizer
+				// 		.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
+				// )
+				// //配置获取userInfo的端点信息
+				// .userInfoEndpoint(userInfoEndpointCustomizer ->
+				// 	userInfoEndpointCustomizer
+				// 		.userService(new QQOauth2UserService())
+				// ));
 
 			);
 		return http.build();
@@ -377,7 +392,8 @@ public class DefaultSecurityConfiguration implements EnvironmentAware {
 			.build();
 
 		JWKSource jwkSource = ContextUtils.getBean(JWKSource.class, false);
-		Jwt jwt = new NimbusJwtEncoder(jwkSource).encode(JwtEncoderParameters.from(jwsHeader, claimsSet));
+		Jwt jwt = new NimbusJwtEncoder(jwkSource).encode(
+			JwtEncoderParameters.from(jwsHeader, claimsSet));
 		return OAuth2AccessTokenResponse.withToken(jwt.getTokenValue())
 			.tokenType(OAuth2AccessToken.TokenType.BEARER)
 			.expiresIn(expiresAt.getEpochSecond())

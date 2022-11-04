@@ -19,6 +19,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.message.api.feign.fallback.FeignNoticeMessageApiFallback;
 import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 远程调用售后模块
@@ -26,11 +27,13 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignNoticeMessageApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MESSAGE_CENTER, fallbackFactory = FeignNoticeMessageApiFallback.class)
 public interface IFeignNoticeMessageApi {
 
+	@GetMapping(value = "/noticeMessage/sms")
 	void noticeMessage(NoticeMessageDTO noticeMessageDTO);
 
+	@GetMapping(value = "/message/sms")
 	boolean sendSms();
 
 	/**
@@ -38,14 +41,19 @@ public interface IFeignNoticeMessageApi {
 	 *
 	 * @return
 	 */
+	@GetMapping(value = "/message/message")
 	boolean sendMessage();
 
+	@GetMapping(value = "/message/dingtalk")
 	boolean sendDingtalk();
 
+	@GetMapping(value = "/message/wechat")
 	boolean sendWechat();
 
+	@GetMapping(value = "/message/email")
 	boolean sendEmail();
 
+	@GetMapping(value = "/message/store")
 	boolean sendStoreMessage();
 
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication;
 
 
-import com.taotao.cloud.auth.biz.authentication.captcha.CaptchaLoginFilterConfigurer;
+import com.taotao.cloud.auth.biz.authentication.captcha.PhoneLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppLoginFilterConfigurer;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -14,81 +14,86 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
  *
  * @param <H> the type parameter
  */
-public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, H> {
-    private CaptchaLoginFilterConfigurer<H> captchaLoginFilterConfigurer;
-    private MiniAppLoginFilterConfigurer<H> miniAppLoginFilterConfigurer;
+public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> extends
+	SecurityConfigurerAdapter<DefaultSecurityFilterChain, H> {
 
-    /**
-     * Captcha login captcha login filter configurer.
-     *
-     * @return the captcha login filter configurer
-     */
-    public CaptchaLoginFilterConfigurer<H> captchaLogin() {
-        return lazyInitCaptchaLoginFilterConfigurer();
-    }
+	private PhoneLoginFilterConfigurer<H> phoneLoginFilterConfigurer;
+	private MiniAppLoginFilterConfigurer<H> miniAppLoginFilterConfigurer;
 
-    /**
-     * Captcha login login filter security configurer.
-     *
-     * @param captchaLoginFilterConfigurerCustomizer the captcha login filter configurer customizer
-     * @return the login filter security configurer
-     */
-    public LoginFilterSecurityConfigurer<H> captchaLogin(Customizer<CaptchaLoginFilterConfigurer<H>> captchaLoginFilterConfigurerCustomizer) {
-        captchaLoginFilterConfigurerCustomizer.customize(lazyInitCaptchaLoginFilterConfigurer());
-        return this;
-    }
+	/**
+	 * Captcha login captcha login filter configurer.
+	 *
+	 * @return the captcha login filter configurer
+	 */
+	public PhoneLoginFilterConfigurer<H> captchaLogin() {
+		return lazyInitCaptchaLoginFilterConfigurer();
+	}
 
-    /**
-     * Mini app login mini app login filter configurer.
-     *
-     * @return the mini app login filter configurer
-     */
-    public MiniAppLoginFilterConfigurer<H> miniAppLogin() {
-        return lazyInitMiniAppLoginFilterConfigurer();
-    }
+	/**
+	 * Captcha login login filter security configurer.
+	 *
+	 * @param captchaLoginFilterConfigurerCustomizer the captcha login filter configurer customizer
+	 * @return the login filter security configurer
+	 */
+	public LoginFilterSecurityConfigurer<H> captchaLogin(
+		Customizer<PhoneLoginFilterConfigurer<H>> captchaLoginFilterConfigurerCustomizer) {
+		captchaLoginFilterConfigurerCustomizer.customize(lazyInitCaptchaLoginFilterConfigurer());
+		return this;
+	}
 
-    /**
-     * Mini app login login filter security configurer.
-     *
-     * @param miniAppLoginFilterConfigurerCustomizer the mini app login filter configurer customizer
-     * @return the login filter security configurer
-     */
-    public LoginFilterSecurityConfigurer<H> miniAppLogin(Customizer<MiniAppLoginFilterConfigurer<H>> miniAppLoginFilterConfigurerCustomizer) {
-        miniAppLoginFilterConfigurerCustomizer.customize(lazyInitMiniAppLoginFilterConfigurer());
-        return this;
-    }
+	/**
+	 * Mini app login mini app login filter configurer.
+	 *
+	 * @return the mini app login filter configurer
+	 */
+	public MiniAppLoginFilterConfigurer<H> miniAppLogin() {
+		return lazyInitMiniAppLoginFilterConfigurer();
+	}
 
-    @Override
-    public void init(H builder) throws Exception {
-        if (captchaLoginFilterConfigurer != null) {
-            captchaLoginFilterConfigurer.init(builder);
-        }
-        if (miniAppLoginFilterConfigurer != null) {
-            miniAppLoginFilterConfigurer.init(builder);
-        }
-    }
+	/**
+	 * Mini app login login filter security configurer.
+	 *
+	 * @param miniAppLoginFilterConfigurerCustomizer the mini app login filter configurer
+	 *                                               customizer
+	 * @return the login filter security configurer
+	 */
+	public LoginFilterSecurityConfigurer<H> miniAppLogin(
+		Customizer<MiniAppLoginFilterConfigurer<H>> miniAppLoginFilterConfigurerCustomizer) {
+		miniAppLoginFilterConfigurerCustomizer.customize(lazyInitMiniAppLoginFilterConfigurer());
+		return this;
+	}
 
-    @Override
-    public void configure(H builder) throws Exception {
-        if (captchaLoginFilterConfigurer != null) {
-            captchaLoginFilterConfigurer.configure(builder);
-        }
-        if (miniAppLoginFilterConfigurer != null) {
-            miniAppLoginFilterConfigurer.configure(builder);
-        }
-    }
+	@Override
+	public void init(H builder) throws Exception {
+		if (phoneLoginFilterConfigurer != null) {
+			phoneLoginFilterConfigurer.init(builder);
+		}
+		if (miniAppLoginFilterConfigurer != null) {
+			miniAppLoginFilterConfigurer.init(builder);
+		}
+	}
 
-    private CaptchaLoginFilterConfigurer<H> lazyInitCaptchaLoginFilterConfigurer() {
-        if (captchaLoginFilterConfigurer == null) {
-            this.captchaLoginFilterConfigurer = new CaptchaLoginFilterConfigurer<>(this);
-        }
-        return captchaLoginFilterConfigurer;
-    }
+	@Override
+	public void configure(H builder) throws Exception {
+		if (phoneLoginFilterConfigurer != null) {
+			phoneLoginFilterConfigurer.configure(builder);
+		}
+		if (miniAppLoginFilterConfigurer != null) {
+			miniAppLoginFilterConfigurer.configure(builder);
+		}
+	}
 
-    private MiniAppLoginFilterConfigurer<H> lazyInitMiniAppLoginFilterConfigurer() {
-        if (miniAppLoginFilterConfigurer == null) {
-            this.miniAppLoginFilterConfigurer = new MiniAppLoginFilterConfigurer<>(this);
-        }
-        return miniAppLoginFilterConfigurer;
-    }
+	private PhoneLoginFilterConfigurer<H> lazyInitCaptchaLoginFilterConfigurer() {
+		if (phoneLoginFilterConfigurer == null) {
+			this.phoneLoginFilterConfigurer = new PhoneLoginFilterConfigurer<>(this);
+		}
+		return phoneLoginFilterConfigurer;
+	}
+
+	private MiniAppLoginFilterConfigurer<H> lazyInitMiniAppLoginFilterConfigurer() {
+		if (miniAppLoginFilterConfigurer == null) {
+			this.miniAppLoginFilterConfigurer = new MiniAppLoginFilterConfigurer<>(this);
+		}
+		return miniAppLoginFilterConfigurer;
+	}
 }
