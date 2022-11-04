@@ -17,12 +17,13 @@ package com.taotao.cloud.auth.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import java.io.File;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import java.io.File;
 
 /**
  * TaoTaoCloudAuthBizApplication 默认url 作用
@@ -44,8 +45,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 2022.03
  * @since 2020/4/29 15:13
  */
-@EnableJpaRepositories(basePackages = {"com.taotao.cloud.auth.biz.repository",
-	"com.taotao.cloud.auth.biz.idserver.repository"})
+@EnableJpaRepositories(basePackages = {"com.taotao.cloud.auth.biz.repository"})
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableEncryptableProperties
 @EnableDiscoveryClient
@@ -80,6 +80,6 @@ public class TaoTaoCloudAuthApplication {
 			userHome + File.separator + "logs" + File.separator + "taotao-cloud-auth");
 		System.setProperty("JM.SNAPSHOT.PATH",
 			userHome + File.separator + "logs" + File.separator + "taotao-cloud-auth");
-		System.setProperty("nacos.logging.default.config.enabled", "false");
+		System.setProperty("nacos.logging.default.config.enabled", "true");
 	}
 }

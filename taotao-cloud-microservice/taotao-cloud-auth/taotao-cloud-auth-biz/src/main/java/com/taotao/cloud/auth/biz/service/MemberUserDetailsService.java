@@ -40,26 +40,25 @@ public class MemberUserDetailsService implements UserDetailsService {
 		roles.add("admin");
 		roles.add("super_admin");
 
-		SecurityUser user = SecurityUser.builder()
-			.account("taotao")
-			.userId(1L)
-			.username("taotao")
-			.nickname("taotao")
-			// 123456
-			.password("$2a$10$FefUzIWJ4ukySUBNtSiw1ezdAutiHihXm4/xgrkhogr1.P0rJ18v2")
-			.phone("15730445331")
-			.mobile("15730445331")
-			.deptId("1")
-			.jobId("1")
-			.email("981376578@qq.com")
-			.sex(1)
-			.status(1)
-			.type(2)
-			.permissions(permissions)
-			.roles(roles)
-			.build();
+		// SecurityUser user = SecurityUser.builder()
+		// 	.userId(1L)
+		// 	.username("taotao")
+		// 	.nickname("taotao")
+		// 	// 123456
+		// 	.password("$2a$10$FefUzIWJ4ukySUBNtSiw1ezdAutiHihXm4/xgrkhogr1.P0rJ18v2")
+		// 	.phone("15730445331")
+		// 	.mobile("15730445331")
+		// 	.deptId("1")
+		// 	.jobId("1")
+		// 	.email("981376578@qq.com")
+		// 	.sex(1)
+		// 	.status(1)
+		// 	.type(2)
+		// 	.permissions(permissions)
+		// 	.roles(roles)
+		// 	.build();
 
-		return user;
+		return new SecurityUser();
 		//return memberSecurityUser.data();
 
 	}

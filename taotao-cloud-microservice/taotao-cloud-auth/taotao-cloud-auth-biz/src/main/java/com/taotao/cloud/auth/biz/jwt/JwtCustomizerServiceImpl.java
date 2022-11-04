@@ -1,8 +1,8 @@
 package com.taotao.cloud.auth.biz.jwt;
 
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
-import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.mobile.MobileAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.password.PasswordAuthenticationToken;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -63,8 +63,8 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
 						);
 					}
 
-					if (authentication instanceof OAuth2ResourceOwnerPasswordAuthenticationToken
-						|| authentication instanceof OAuth2ResourceOwnerMobileAuthenticationToken) {
+					if (authentication instanceof PasswordAuthenticationToken
+						|| authentication instanceof MobileAuthenticationToken) {
 						SecurityUser user = (SecurityUser) authentication.getPrincipal();
 						user.eraseCredentials();
 

@@ -48,14 +48,11 @@ public class SysUserDetailsService implements UserDetailsService {
 			.password("$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")
 			.phone("15730445331")
 			.mobile("15730445331")
-			.deptId("1")
-			.jobId("1")
 			.email("981376578@qq.com")
 			.sex(1)
 			.status(1)
 			.type(2)
 			.permissions(permissions)
-			.roles(roles)
 			.build();
 
 		return user;

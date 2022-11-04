@@ -1,7 +1,7 @@
 package com.taotao.cloud.auth.biz.utils;
 
-import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
-import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.mobile.MobileAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.password.PasswordAuthenticationToken;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
@@ -55,7 +55,7 @@ public class OAuth2EndpointUtils {
 	public static OAuth2ClientAuthenticationToken getAuthenticatedClientElseThrowInvalidClient(
 		Authentication authentication) {
 		if (Objects.nonNull(authentication)) {
-			if (authentication instanceof OAuth2ResourceOwnerPasswordAuthenticationToken passwordAuthentication) {
+			if (authentication instanceof PasswordAuthenticationToken passwordAuthentication) {
 
 				OAuth2ClientAuthenticationToken clientPrincipal = null;
 
@@ -69,7 +69,7 @@ public class OAuth2EndpointUtils {
 				}
 			}
 
-			if (authentication instanceof OAuth2ResourceOwnerMobileAuthenticationToken mobileAuthenticationToken) {
+			if (authentication instanceof MobileAuthenticationToken mobileAuthenticationToken) {
 
 				OAuth2ClientAuthenticationToken clientPrincipal = null;
 

@@ -1,10 +1,28 @@
 server:
   port: 33336
+  shutdown: graceful
   http2:
     enabled: true
   undertow:
     buffer-size: 2048
     direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
+    accesslog:
+      dir: ${user.home}/logs/${spring.application.name}/undertow
+      enabled: true
+  servlet:
+    application-display-name: ${spring.application.name}
+    #context-path: sys
+
+jasypt:
+  encryptor:
+    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    property:
+      prefix: "ENC@["
+      suffix: "]"
 
 redisson:
   #在Redis节点里显示的客户端名称。
@@ -14,7 +32,7 @@ redisson:
   #锁的模式.如果不设置, REENTRANT(可重入锁),FAIR(公平锁),MULTIPLE(联锁),REDLOCK(红锁),READ(读锁), WRITE(写锁)
   lock-model: auto
   #集群模式:SINGLE(单例),SENTINEL(哨兵),MASTERSLAVE(主从),CLUSTER(集群),REPLICATED(云托管)
-  model: cluster
+  model: single
   #Redisson的对象编码类是用于将对象进行序列化和反序列化，以实现对该对象在Redis里的读取和存储
   codec: "com.zengtengpeng.codec.MyJsonJacksonCodec"
   #这个线程池数量被所有RTopic对象监听器，RRemoteService调用者和RExecutorService任务共同共享。
@@ -38,7 +56,7 @@ redisson:
   #开启SSL终端识别能力。
   sslEnableEndpointIdentification: true
   #确定采用哪种方式（JDK或OPENSSL）来实现SSL连接。
-  sslProvider: jdk
+  ssl-provider: jdk
   ssl-truststore:
   ssl-truststore-password:
   ssl-keystore:
@@ -57,119 +75,63 @@ redisson:
   #等待获取锁超时时间,-1则是一直等待
   attemptTimeout: 10000
   dataValidTime: 1800000
-  #single_server_config:
-  #  #服务器地址,必填ip:port
-  #  address: "192.168.10.200:6379"
-  #  #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
-  #  subscription_connection_minimum_idle_size: 1
-  #  #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
-  #  subscription_connection_pool_size: 50
-  #  #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
-  #  connection_minimum_idle_size: 24
-  #  #连接池最大容量。连接池的连接数量自动弹性伸缩。
-  #  connection_pool_size: 64
-  #  #尝试连接的数据库编号。
-  #  database: 3
-  #  #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
-  #  dns_monitoring_interval: 5000
-  multiple-server-config:
-    #在多Redis服务节点的环境里，可以选用以下几种负载均衡方式选择一个节点：
-    #org.redisson.connection.balancer.WeightedRoundRobinBalancer - 权重轮询调度算法
-    #org.redisson.connection.balancer.RoundRobinLoadBalancer - 轮询调度算法
-    #org.redisson.connection.balancer.RandomLoadBalancer - 随机调度算法
-    loadBalancer: "org.redisson.connection.balancer.RoundRobinLoadBalancer"
-    #多从节点的环境里，每个 从服务节点里用于普通操作（非 发布和订阅）的最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时读取反映速度。
-    slaveConnectionMinimumIdleSize: 32
-    #多从节点的环境里，每个 从服务节点里用于普通操作（非 发布和订阅）连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
-    slaveConnectionPoolSize: 64
-    failedSlaveReconnectionInterval: 3000
-    failedSlaveCheckInterval: 180000
-    #多节点的环境里，每个 主节点的最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
-    masterConnectionMinimumIdleSize: 32
-    #多主节点的环境里，每个 主节点的连接池最大容量。连接池的连接数量自动弹性伸缩。
-    masterConnectionPoolSize: 64
-    #设置读取操作选择节点的模式。 可用值为： SLAVE - 只在从服务节点里读取。 MASTER - 只在主服务节点里读取。 MASTER_SLAVE - 在主从服务节点里都可以读取。
-    readMode: slave
-    #设置订阅操作选择节点的模式。 可用值为： SLAVE - 只在从服务节点里订阅。 MASTER - 只在主服务节点里订阅。
-    subscriptionMode: slave
-    #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。 redisson.multiple-server-config.subscriptionConnectionPoolSize
-    subscriptionConnectionMinimumIdleSize: 1
-    subscriptionConnectionPoolSize: 50
-    #监测DNS的变化情况的时间间隔。
-    dnsMonitoringInterval: 5000
-    #服务器节点地址.必填
-    #redisson.multiple-server-config.node-addresses[0]=127.0.0.1:6379
-    #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
-    #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
-    nodeAddresses:
-      - "192.168.10.200:6381"
-      - "192.168.10.200:6382"
-      - "192.168.10.200:6383"
-      - "192.168.10.200:6384"
-      - "192.168.10.200:6385"
-      - "192.168.10.200:6386"
-    #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
-    database: 1
-    #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
-    masterName:
-    #(集群,哨兵,云托管模特特有) 对Redis集群节点状态扫描的时间间隔。单位是毫秒。
-    scanInterval: 1000
-
-dubbo:
-  scan:
-    base-packages: com.taotao.cloud.auth.biz.service
-  application:
-    id: ${spring.application.name}
-    name: ${spring.application.name}
-    version: ${taotaoCloudVersion}
-    owner: 981376577
-    architecture: china
-    organization: taotao-cloud
-    metadata-type: local
-    environment: develop
-    qos-port: 20880
-    qos-enable: false
-    qos-accept-foreign-ip: false
-    logger: slf4j
-  cloud:
-    subscribed-services: taotao-cloud-sys
-    registry-type: spring-cloud
-  registry:
-    address: nacos://192.168.10.200:8848?group=DUBBO_REGISTRY_GROUP&namespace=343852d5-6e0d-4e27-8719-7866452e5ab0
-    timeout: 15000
-    username: nacos
-    password: nacos
-    protocol:
-    version: ${taotaoCloudVersion}
-    check: false
-    register: true
-    weight: 10
-  protocol:
-    name: dubbo
-    port: 20882
-    ssl-enabled: false
-    threads: 200
-    accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
-    serialization: kryo
-    status: server
-    payload: 83886080
-  provider:
-    timeout: 300000
-    loadbalance: roundrobin
-    version: ${taotaoCloudVersion}
-  consumer:
-    check: false
-    timeout: 300000
-    loadbalance: roundrobin
-    version: ${taotaoCloudVersion}
-  #module:
-  #  name: ${spring.application.name}
-  #monitor:
-  #  id: ${spring.application.name}
-  #metadata-report:
-  #  id: ${spring.application.name}
-  config-center:
-    check: false
+  single_server_config:
+    #服务器地址,必填ip:port
+    address: "192.168.10.210:6379"
+    #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
+    subscription_connection_minimum_idle_size: 1
+    #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
+    subscription_connection_pool_size: 50
+    #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
+    connection_minimum_idle_size: 24
+    #连接池最大容量。连接池的连接数量自动弹性伸缩。
+    connection_pool_size: 64
+    #尝试连接的数据库编号。
+    database: 3
+    #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
+    dns_monitoring_interval: 5000
+  #multiple-server-config:
+  #  #在多Redis服务节点的环境里，可以选用以下几种负载均衡方式选择一个节点：
+  #  #org.redisson.connection.balancer.WeightedRoundRobinBalancer - 权重轮询调度算法
+  #  #org.redisson.connection.balancer.RoundRobinLoadBalancer - 轮询调度算法
+  #  #org.redisson.connection.balancer.RandomLoadBalancer - 随机调度算法
+  #  loadBalancer: "org.redisson.connection.balancer.RoundRobinLoadBalancer"
+  #  #多从节点的环境里，每个 从服务节点里用于普通操作（非 发布和订阅）的最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时读取反映速度。
+  #  slaveConnectionMinimumIdleSize: 32
+  #  #多从节点的环境里，每个 从服务节点里用于普通操作（非 发布和订阅）连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
+  #  slaveConnectionPoolSize: 64
+  #  failedSlaveReconnectionInterval: 3000
+  #  failedSlaveCheckInterval: 180000
+  #  #多节点的环境里，每个 主节点的最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
+  #  masterConnectionMinimumIdleSize: 32
+  #  #多主节点的环境里，每个 主节点的连接池最大容量。连接池的连接数量自动弹性伸缩。
+  #  masterConnectionPoolSize: 64
+  #  #设置读取操作选择节点的模式。 可用值为： SLAVE - 只在从服务节点里读取。 MASTER - 只在主服务节点里读取。 MASTER_SLAVE - 在主从服务节点里都可以读取。
+  #  readMode: slave
+  #  #设置订阅操作选择节点的模式。 可用值为： SLAVE - 只在从服务节点里订阅。 MASTER - 只在主服务节点里订阅。
+  #  subscriptionMode: slave
+  #  #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。 redisson.multiple-server-config.subscriptionConnectionPoolSize
+  #  subscriptionConnectionMinimumIdleSize: 1
+  #  subscriptionConnectionPoolSize: 50
+  #  #监测DNS的变化情况的时间间隔。
+  #  dnsMonitoringInterval: 5000
+  #  #服务器节点地址.必填
+  #  #redisson.multiple-server-config.node-addresses[0]=127.0.0.1:6379
+  #  #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
+  #  #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
+  #  nodeAddresses:
+  #    - "192.168.10.210:6381"
+  #    - "192.168.10.210:6382"
+  #    - "192.168.10.210:6383"
+  #    - "192.168.10.210:6384"
+  #    - "192.168.10.210:6385"
+  #    - "192.168.10.210:6386"
+  #  #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
+  #  database: 1
+  #  #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
+  #  masterName:
+  #  #(集群,哨兵,云托管模特特有) 对Redis集群节点状态扫描的时间间隔。单位是毫秒。
+  #  scanInterval: 1000
 
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
@@ -183,31 +145,199 @@ arthas:
   app-name: ${spring.application.name}
   tunnel-server: ws://192.168.10.200:7777/ws
 
+dubbo:
+  enabled: false
+  scan:
+    base-packages: com.taotao.cloud.auth.biz.service.dubbo
+  application:
+    #当前应用名称
+    name: ${spring.application.name}
+    #Java字节码编译器，用于动态类的生成，可选：jdk或javassist
+    compiler: javassist
+    version: ${taotaoCloudVersion}
+    owner: 981376577
+    architecture: china
+    organization: taotao-cloud
+    metadata-type: local
+    environment: develop
+    #禁用qos同一台集群可能会有端口冲突现象
+    qos-port: 20880
+    qos-enable: false
+    qos-accept-foreign-ip: true
+    logger: slf4j
+    shutwait: 3000
+    dump-directory: ${user.home}/logs/${spring.application.name}/dubbo/
+  registry:
+    address: nacos://192.168.10.210:8848
+    group: DUBBO_REGISTRY_GROUP
+    cluster: CQ
+    parameters:
+      namespace: taotao-cloud-dubbo
+      cluster-name: CQ
+    timeout: 15000
+    username: nacos
+    password: nacos
+    protocol: dubbo
+    version: ${taotaoCloudVersion}
+    check: false
+    register: true
+    weight: 10
+    subscribe: true
+    use-as-config-center: false
+    use-as-metadata-center: false
+  protocol:
+    name: dubbo
+    port: 20883
+    ssl-enabled: false
+    accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
+    #serialization: kryo
+    status: server
+    payload: 83886080
+    threadpool: fixed
+    threadname: taotao-cloud-sys-dubbo-protocol-executor
+    threads: 200
+  provider:
+    timeout: 3000
+    version: ${taotaoCloudVersion}
+    threads: 500
+    group: taotao-cloud-sys-dev
+    #延时注册服务（毫秒）
+    #delay: 3000
+    protocol: dubbo
+    retries: 3
+    loadbalance: shortestresponse
+    async: true
+    accesslog: ${user.home}/logs/${spring.application.name}/dubbo/provider.log
+    owner: 981376577
+    threadpool: fixed
+    threadname: taotao-cloud-sys-dubbo-provider-executor
+  consumer:
+    check: false
+    timeout: 3000
+    loadbalance: shortestresponse
+    version: ${taotaoCloudVersion}
+    threads: 100
+    retries: 3
+    async: true
+    connections: 200
+    owner: 981376577
+    actives: 10
+    cluster: failover
+    validation: true
+    protocol: dubbo
+    group: taotao-cloud-dev
+  module:
+    name: ${spring.application.name}
+    version: ${taotaoCloudVersion}
+    owner: 981376577
+    organization: taotao-cloud
+    background: false
+    refer-async: true
+    export-async: true
+  monitor:
+    id: ${spring.application.name}
+    address: 192.168.10.210:18080
+    username: admin
+    password: 123456
+    group: taotao-cloud-dev
+    version: ${taotaoCloudVersion}
+  metadata-report:
+    id: ${spring.application.name}
+    address: nacos://192.168.10.210:8848
+    username: nacos
+    password: nacos
+    group: DUBBO_REGISTRY_GROUP
+    parameters:
+      namespace: taotao-cloud-dubbo
+      cluster-name: CQ
+  config-center:
+    id: ${spring.application.name}
+    address: nacos://192.168.10.210:8848
+    username: nacos
+    password: nacos
+    group: DUBBO_REGISTRY_GROUP
+    parameters:
+      namespace: taotao-cloud-dubbo
+    check: false
+  metrics:
+    default: true
+    id: ${spring.application.name}
+    port: 9091
+    enable-jvm-metrics: true
+    protocol: prometheus
+    aggregation:
+      enabled: true
+      bucketNum: 100
+      timeWindowSeconds: 30
+    prometheus:
+      exporter:
+        enabled: true
+        enableHttpServiceDiscovery: true
+        metricsPort: 18081
+        metricsPath: /test
+      pushgateway:
+        enabled: false
+
 spring:
   main:
+    allow-circular-references: true
     allow-bean-definition-overriding: true
     banner-mode: off
-    allow-circular-references: true
+    register-shutdown-hook: true
+    cloud-platform: kubernetes
+    web-application-type: servlet
   application:
     name: taotao-cloud-auth
+    admin:
+      enabled: true
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  mvc:
+    servlet:
+      load-on-startup: 1
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+      date: yyyy-MM-dd
+      time: HH:mm:ss
+    dispatch-trace-request: true
+    dispatch-options-request: true
+    log-request-details: true
+    log-resolved-exception: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
   sleuth:
     enabled: true
     web:
       client:
         enabled: true
+      servlet:
+        enabled: true
     sampler:
       probability: 1.0
+      refresh:
+        enabled: true
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.200}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://192.168.10.210:9411/
     discoveryClientEnabled: false
     sender:
       type: WEB
+    service:
+      name: ${spring.application.name}
+    compression:
+      enabled: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-    password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+    url: jdbc:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       auto-commit: true
@@ -226,80 +356,97 @@ spring:
         prepStmtCacheSize: 250
   jpa:
     database: mysql
+    database-platform: mysql
     show-sql: true
-    open-in-view: false
+    open-in-view: true
+    generate-ddl: true
     hibernate:
       ddl-auto: update
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     properties:
       hibernate:
+        format_sql: true
+        hbm2ddl.auto: update
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
-    #host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
-    #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
-    #database: 1
-    password: taotao-cloud
-    connect-timeout: 60000
-    cluster:
-      nodes: 192.168.10.200:6381,192.168.10.200:6382,192.168.10.200:6383,192.168.10.200:6384,192.168.10.200:6385,192.168.10.200:6386
-      max-redirects: 3
+    host: 192.168.10.210
+    port: 6379
     #sentinel:
     #  master:
     #  nodes:
+    database: 1
+    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+    connect-timeout: 60000
+    #cluster:
+    #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
+    #  max-redirects: 3
     client-type: lettuce
     lettuce:
       pool:
         max-active: 1500
-        max-wait: 5000
+        max-wait: 60000
         max-idle: 500
         min-idle: 100
     redisson:
       config: |
-        clusterServersConfig:
+        singleServerConfig:
+          # 连接空闲超时，单位：毫秒
           idleConnectionTimeout: 10000
+          # 连接超时，单位：毫秒
           connectTimeout: 10000
+          # 命令等待超时，单位：毫秒
           timeout: 3000
+          # 命令失败重试次数,如果尝试达到 retryAttempts（命令失败重试次数） 仍然不能将命令发送至某个指定的节点时，将抛出错误。
+          # 如果尝试在此限制之内发送成功，则开始启用 timeout（命令等待超时） 计时。
           retryAttempts: 3
+          # 命令重试发送时间间隔，单位：毫秒
           retryInterval: 1500
-          failedSlaveReconnectionInterval: 3000
-          failedSlaveCheckInterval: 60000
+          # 密码，没有设置密码时，需要注释掉，否则会报错
           password: taotao-cloud
+          # 单个连接最大订阅数量
           subscriptionsPerConnection: 5
-          clientName: null
-          loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+          # 客户端名称
+          clientName: "taotao-cloud-redis-client"
+          # 节点地址
+          address: "redis://192.168.10.210:6379"
+          # 发布和订阅连接的最小空闲连接数
           subscriptionConnectionMinimumIdleSize: 1
+          # 发布和订阅连接池大小
           subscriptionConnectionPoolSize: 50
-          slaveConnectionMinimumIdleSize: 24
-          slaveConnectionPoolSize: 64
-          masterConnectionMinimumIdleSize: 24
-          masterConnectionPoolSize: 64
-          readMode: "SLAVE"
-          subscriptionMode: "SLAVE"
-          nodeAddresses:
-          - "redis://192.168.10.200:6381"
-          - "redis://192.168.10.200:6382"
-          - "redis://192.168.10.200:6383"
-          - "redis://192.168.10.200:6384"
-          - "redis://192.168.10.200:6385"
-          - "redis://192.168.10.200:6386"
-          scanInterval: 1000
-          pingConnectionInterval: 0
-          keepAlive: false
-          tcpNoDelay: false
-        threads: 16
-        nettyThreads: 32
-        codec: !<org.redisson.codec.MarshallingCodec> {}
-        transportMode: "NIO"
+          # 最小空闲连接数
+          connectionMinimumIdleSize: 32
+          # 连接池大小
+          connectionPoolSize: 64
+          # 数据库编号
+          database: 1
+          # DNS监测时间间隔，单位：毫秒
+          dnsMonitoringInterval: 5000
+        # 线程池数量,默认值: 当前处理核数量 * 2
+        threads: 0
+        # Netty线程池数量,默认值: 当前处理核数量 * 2
+        nettyThreads: 0
+        # 编码
+        codec: !<org.redisson.codec.JsonJacksonCodec> {}
+        # 传输模式
+        transportMode : "NIO"
+        # 配置看门狗的默认超时时间为30s，这里改为 10s
+        lockWatchdogTimeout: 10000
   kafka:
-    bootstrap-servers: 192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094
+    enabled: true
+    bootstrap-servers: 192.168.10.210:9092
     producer:
       retries: 1
       batch-size: 16384
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: com.taotao.cloud.logger.serialization.ObjectSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
       acks: 0
+      compression-type: gzip
       properties:
         linger.ms: 100
+        partitioner.class: org.apache.kafka.clients.producer.RoundRobinPartitioner
     consumer:
       auto-commit-interval: 1S
       auto-offset-reset: earliest
@@ -375,70 +522,18 @@ spring:
       enabled: false
     loadbalancer:
       enabled: true
-    stream:
-      bindings:
-        sms-output:
-          destination: sms-topic
-          binder: rabbit
-        sms-input:
-          destination: sms-topic
-          group: sms-group
-          binder: rabbit
-        email-output:
-          destination: email-topic
-          #content-type: application/json
-          binder: rocketmq
-        email-input:
-          destination: email-topic
-          group: email-group
-          binder: rocketmq
-        order-output:
-          destination: order-topic
-          #content-type: application/json
-          binder: kafka
-        order-input:
-          destination: order-topic
-          group: order-group
-          binder: kafka
-      rocketmq:
-        binder:
-          name-server: 192.168.10.200:9876
-      rabbit:
-        bindings:
-          sms-output:
-            producer:
-              #routing-key-expression: headers.routingKey   # 发送端路由key
-              delayed-exchange: false    # 开启延时队列
-          sms-input:
-            consumer:
-              #binding-routing-key: login.user.succeed   # 生产监听路由表达式
-              delayed-exchange: false    # 开启延时队列
-              #auto-bind-dlq: true   # 绑定死信队列
-              #republish-to-dlq: true  # 重投到死信队列并带有报错信息
-        binder:
-          admin-addresses: 192.168.10.200:5672
-      kafka:
-        binder:
-          brokers: 192.168.10.200:9092
-          auto-create-topics: true
-        bindings:
-          order-output:
-            producer:
-              sync: true
-              bufferSize: 16384
-          order-input:
-            consumer:
-              txCommitRecovered: true
+
 taotao:
   cloud:
-    p6spy:
-      enabled: true
-      dateformat: yyyy-MM-dd HH:mm:ss
-      driverlist: com.mysql.cj.jdbc.Driver
-      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.p6spy.logger.P6spyLogger
-      log-message-format: com.taotao.cloud.p6spy.logger.format.P6spyLogFormat
     data:
+      p6spy:
+        enabled: true
+        dateformat: yyyy-MM-dd HH:mm:ss
+        driverlist: com.mysql.cj.jdbc.Driver
+        database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+        appender: com.taotao.cloud.data.p6spy.logger.KafkaLogger
+        logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.logp6spy
+        remoteServiceName: p6spy-${spring.application.name}
       jpa:
         enabled: true
         packages: com.taotao.cloud.auth.biz.models
@@ -446,36 +541,29 @@ taotao:
           enabled: false
     logger:
       enabled: true
-    kafka:
-      enabled: true
+    mq:
+      kafka:
+        enabled: true
     feign:
       enabled: true
       loadbalancer:
         enabled: true
-    redis:
-      cache:
+    cache:
+      redis:
         enabled: true
-    sentinel:
-      enabled: true
+        cache-manager:
+          enabled: true
+          type: redis
+    alibaba:
+      nacos:
+        enabled: true
+      sentinel:
+        enabled: true
     core:
-      env: dev
+      enabled: true
     dubbo:
       enabled: true
-    sms:
-      enabled: true
-      type: aliyun
-      aliyun:
-        sign-name: ""
-        access-key-id: asf23r
-        access-key-secret: sldflasdf
-        templates:
-          other: "niaho${{asdf}}$sdfasdfl"
-        params-orders:
-          other:
-            - asdf
-            - asdf23
-            - asdf233
-    openapi:
+    springdoc:
       enabled: true
       group: ${spring.application.name}
       version: ${taotaoCloudVersion}
@@ -484,25 +572,19 @@ taotao:
         - com.taotao.cloud.auth.biz.controller
 
 feign:
-  circuitbreaker:
-    enabled: true
-    #alphanumeric-ids:
-    #  enabled: true
-    #group:
-    #  enabled: true
   sentinel:
     enabled: true
   okhttp:
     enabled: true
   httpclient:
     enabled: false
-    max-connections: 10000
-    max-connections-per-route: 1000
+    max-connections: 1000
+    max-connections-per-route: 100
   client:
     config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
+      feignName:
+        connectTimeout: 30000
+        readTimeout: 30000
   compression:
     request:
       enabled: true
