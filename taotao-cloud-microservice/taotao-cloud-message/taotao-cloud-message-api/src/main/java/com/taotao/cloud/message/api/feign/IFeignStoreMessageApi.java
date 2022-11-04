@@ -18,10 +18,10 @@ package com.taotao.cloud.message.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.message.api.feign.fallback.FeignNoticeMessageApiFallback;
-import com.taotao.cloud.message.api.model.vo.StoreMessageQueryVO;
+import com.taotao.cloud.message.api.feign.fallback.FeignStoreMessageApiFallback;
 import com.taotao.cloud.message.api.model.vo.StoreMessageVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 远程调用售后模块
@@ -29,10 +29,10 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignNoticeMessageApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MESSAGE_CENTER, fallbackFactory = FeignStoreMessageApiFallback.class)
 public interface IFeignStoreMessageApi {
 
-	PageResult<StoreMessageVO> getPage(StoreMessageQueryVO storeMessageQueryVO,
-		PageParam pageParam);
+	@GetMapping(value = "/message/getPage")
+	PageResult<StoreMessageVO> getPage(PageParam pageParam);
 }
 

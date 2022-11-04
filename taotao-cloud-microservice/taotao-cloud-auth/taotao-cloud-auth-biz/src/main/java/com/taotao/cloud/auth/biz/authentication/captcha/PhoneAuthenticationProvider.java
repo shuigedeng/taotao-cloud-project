@@ -1,7 +1,8 @@
 package com.taotao.cloud.auth.biz.authentication.captcha;
 
-import com.taotao.cloud.auth.biz.authentication.captcha.service.CaptchaService;
-import com.taotao.cloud.auth.biz.authentication.captcha.service.CaptchaUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.captcha.service.PhoneService;
+import com.taotao.cloud.auth.biz.authentication.captcha.service.PhoneUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -17,33 +18,34 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-
 /**
  * 验证码认证器
  *
  * @author n1
  */
-public class CaptchaAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+public class PhoneAuthenticationProvider implements AuthenticationProvider, InitializingBean,
+	MessageSourceAware {
 
 	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-	private final CaptchaUserDetailsService captchaUserDetailsService;
-	private final CaptchaService captchaService;
+	private final PhoneUserDetailsService captchaUserDetailsService;
+	private final PhoneService captchaService;
 	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	public CaptchaAuthenticationProvider(CaptchaUserDetailsService captchaUserDetailsService, CaptchaService captchaService) {
+	public PhoneAuthenticationProvider(PhoneUserDetailsService captchaUserDetailsService,
+		PhoneService captchaService) {
 		this.captchaUserDetailsService = captchaUserDetailsService;
 		this.captchaService = captchaService;
 	}
 
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		Assert.isInstanceOf(CaptchaAuthenticationToken.class, authentication,
+	public Authentication authenticate(Authentication authentication)
+		throws AuthenticationException {
+		Assert.isInstanceOf(PhoneAuthenticationToken.class, authentication,
 			() -> messages.getMessage(
 				"CaptchaAuthenticationProvider.onlySupports",
 				"Only CaptchaAuthenticationToken is supported"));
 
-		CaptchaAuthenticationToken unAuthenticationToken = (CaptchaAuthenticationToken) authentication;
+		PhoneAuthenticationToken unAuthenticationToken = (PhoneAuthenticationToken) authentication;
 
 		String phone = unAuthenticationToken.getName();
 		String rawCode = (String) unAuthenticationToken.getCredentials();
@@ -59,7 +61,7 @@ public class CaptchaAuthenticationProvider implements AuthenticationProvider, In
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		return CaptchaAuthenticationToken.class.isAssignableFrom(authentication);
+		return PhoneAuthenticationToken.class.isAssignableFrom(authentication);
 	}
 
 	@Override
@@ -74,17 +76,19 @@ public class CaptchaAuthenticationProvider implements AuthenticationProvider, In
 	}
 
 	/**
-	 * 认证成功将非授信凭据转为授信凭据.
-	 * 封装用户信息 角色信息。
+	 * 认证成功将非授信凭据转为授信凭据. 封装用户信息 角色信息。
 	 *
 	 * @param authentication the authentication
 	 * @param user           the user
 	 * @return the authentication
 	 */
-	protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
+	protected Authentication createSuccessAuthentication(Authentication authentication,
+		UserDetails user) {
 
-		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
-		CaptchaAuthenticationToken authenticationToken = new CaptchaAuthenticationToken(user, null, authorities);
+		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(
+			user.getAuthorities());
+		PhoneAuthenticationToken authenticationToken = new PhoneAuthenticationToken(user, null,
+			authorities);
 		authenticationToken.setDetails(authentication.getDetails());
 
 		return authenticationToken;

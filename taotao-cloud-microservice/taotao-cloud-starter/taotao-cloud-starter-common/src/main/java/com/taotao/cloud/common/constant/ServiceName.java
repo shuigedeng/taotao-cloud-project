@@ -48,4 +48,6 @@ public final class ServiceName {
 	public static final String TAOTAO_CLOUD_MAIL_CENTER = "taotao-cloud-mail";
 
 	public static final String TAOTAO_CLOUD_PAY_CENTER = "taotao-cloud-pay";
+
+	public static final String TAOTAO_CLOUD_MESSAGE_CENTER = "taotao-cloud-message";
 }

@@ -1,2 +1,3 @@
-#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#com.taotao.cloud.operation.api.feign.fallback.FeignArticleServiceFallback
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.taotao.cloud.message.api.feign.fallback.FeignNoticeMessageApiFallback, \
+com.taotao.cloud.message.api.feign.fallback.FeignStoreMessageApiFallback
