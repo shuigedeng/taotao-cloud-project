@@ -6,17 +6,17 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-sentinel")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-jpa")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
-    
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-aliyun")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
 
     //https://search.maven.org/artifact/org.webjars/jquery
     implementation "org.webjars:jquery:3.6.1"
