@@ -6,6 +6,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-goods:taotao-cloud-goods-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-store:taotao-cloud-store-api")
 }
 
 mainClassName = "com.taotao.cloud.customer.biz.TaoTaoCloudCustomerApplication"
