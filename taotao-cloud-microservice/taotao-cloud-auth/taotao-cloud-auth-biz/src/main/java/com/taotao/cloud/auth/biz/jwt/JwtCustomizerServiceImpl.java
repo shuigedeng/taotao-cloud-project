@@ -1,12 +1,6 @@
 package com.taotao.cloud.auth.biz.jwt;
 
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.auth.biz.authentication.mobile.MobileAuthenticationToken;
-import com.taotao.cloud.auth.biz.authentication.password.PasswordAuthenticationToken;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +12,11 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.util.CollectionUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class JwtCustomizerServiceImpl implements JwtCustomizer {
@@ -63,26 +62,26 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
 						);
 					}
 
-					if (authentication instanceof PasswordAuthenticationToken
-						|| authentication instanceof MobileAuthenticationToken) {
-						SecurityUser user = (SecurityUser) authentication.getPrincipal();
-						user.eraseCredentials();
-
-						Set<String> authorities = user
-							.getAuthorities()
-							.stream()
-							.map(GrantedAuthority::getAuthority)
-							.collect(Collectors.toSet());
-
-						Map<String, Object> userAttributes = new HashMap<>();
-
-						JwtClaimsSet.Builder jwtClaimSetBuilder = context.getClaims();
-						jwtClaimSetBuilder.claim(OAuth2ParameterNames.SCOPE, authorities);
-						jwtClaimSetBuilder.claim("user", user);
-						jwtClaimSetBuilder.claims(claims ->
-							claims.putAll(userAttributes)
-						);
-					}
+					// if (authentication instanceof PasswordAuthenticationToken
+					// 	|| authentication instanceof MobileAuthenticationToken) {
+					// 	SecurityUser user = (SecurityUser) authentication.getPrincipal();
+					// 	user.eraseCredentials();
+					//
+					// 	Set<String> authorities = user
+					// 		.getAuthorities()
+					// 		.stream()
+					// 		.map(GrantedAuthority::getAuthority)
+					// 		.collect(Collectors.toSet());
+					//
+					// 	Map<String, Object> userAttributes = new HashMap<>();
+					//
+					// 	JwtClaimsSet.Builder jwtClaimSetBuilder = context.getClaims();
+					// 	jwtClaimSetBuilder.claim(OAuth2ParameterNames.SCOPE, authorities);
+					// 	jwtClaimSetBuilder.claim("user", user);
+					// 	jwtClaimSetBuilder.claims(claims ->
+					// 		claims.putAll(userAttributes)
+					// 	);
+					// }
 
 					if (authentication instanceof OAuth2ClientAuthenticationToken) {
 						OAuth2ClientAuthenticationToken OAuth2ClientAuthenticationToken = (OAuth2ClientAuthenticationToken) authentication;
