@@ -11,11 +11,10 @@ import org.springframework.core.log.LogMessage;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-public class CustomJwtGrantedAuthoritiesConverter implements
+public class JwtGrantedAuthoritiesConverter implements
 	Converter<Jwt, Collection<GrantedAuthority>> {
 
 	private final Log logger = LogFactory.getLog(getClass());
@@ -58,7 +57,8 @@ public class CustomJwtGrantedAuthoritiesConverter implements
 
 	/**
 	 * Sets the name of token claim to use for mapping {@link GrantedAuthority authorities} by this
-	 * converter. Defaults to {@link JwtGrantedAuthoritiesConverter#WELL_KNOWN_AUTHORITIES_CLAIM_NAMES}.
+	 * converter. Defaults to
+	 * {@link JwtGrantedAuthoritiesConverter#WELL_KNOWN_AUTHORITIES_CLAIM_NAMES}.
 	 *
 	 * @param authoritiesClaimName The token claim name to map authorities
 	 * @since 5.2

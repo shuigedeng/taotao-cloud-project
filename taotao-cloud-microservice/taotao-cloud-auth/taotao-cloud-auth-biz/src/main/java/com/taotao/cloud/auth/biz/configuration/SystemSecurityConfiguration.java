@@ -11,7 +11,7 @@ import com.taotao.cloud.auth.biz.authentication.oauth2.DelegateClientRegistratio
 import com.taotao.cloud.auth.biz.authentication.oauth2.OAuth2ProviderConfigurer;
 import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeService;
 import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeUserDetailsService;
-import com.taotao.cloud.auth.biz.models.CustomJwtGrantedAuthoritiesConverter;
+import com.taotao.cloud.auth.biz.models.JwtGrantedAuthoritiesConverter;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
@@ -20,6 +20,15 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -65,16 +74,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 /**
@@ -215,7 +214,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 
 	@Bean
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,
-														  DelegateClientRegistrationRepository delegateClientRegistrationRepository)
+		DelegateClientRegistrationRepository delegateClientRegistrationRepository)
 		throws Exception {
 		http
 			.formLogin(formLoginConfigurer -> {
@@ -295,7 +294,8 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 					}
 				}).accountUserDetailsService(new QrcodeUserDetailsService() {
 					@Override
-					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
+					public UserDetails loadUserByPhone(String phone)
+						throws UsernameNotFoundException {
 						return null;
 					}
 				}).jwtTokenGenerator(this::tokenResponse);
@@ -439,7 +439,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 	}
 
 	JwtAuthenticationConverter jwtAuthenticationConverter() {
-		CustomJwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new CustomJwtGrantedAuthoritiesConverter();
+		JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 		grantedAuthoritiesConverter.setAuthorityPrefix("");
 
 		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();

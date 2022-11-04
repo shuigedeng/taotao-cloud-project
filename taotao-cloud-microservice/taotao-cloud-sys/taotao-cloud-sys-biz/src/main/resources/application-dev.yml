@@ -16,6 +16,23 @@ server:
     application-display-name: ${spring.application.name}
     #context-path: sys
 
+decorator:
+  datasource:
+    datasource-proxy:
+      logging: slf4j
+      query:
+        enable-logging: true
+        log-level: debug
+        logger-name: xxx
+      slow-query:
+        enable-logging: true
+        log-level: warn
+        logger-name: qqqq
+        threshold: 300
+      multiline: true
+      json-format: false
+      count-query: false
+
 jasypt:
   encryptor:
     password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
@@ -1659,6 +1676,7 @@ logging:
     root: INFO
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.sys.api.feign: debug
+    net.ttddyy.dsproxy.listener: debug
     # hibernate log
     #org.hibernate.SQL: debug
     #org.hibernate.type: info
@@ -1671,7 +1689,6 @@ logging:
     #java.sql.Connection: debug
     #java.sql.Statement: debug
     #java.sql.PreparedStatement: debug
-
     #kafka.server.KafkaConfig: info
     #org.I0Itec.zkclient: info
     #kafka.admin.AdminClient.AdminConfig: info

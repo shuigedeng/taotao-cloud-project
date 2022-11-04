@@ -16,13 +16,14 @@ package com.taotao.cloud.auth.biz.models;
 import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import lombok.Builder;
 
 /**
  * Client
  *
  * @author shuigedeng
- * @since 2020/5/2 11:17
  * @version 2022.03
+ * @since 2020/5/2 11:17
  */
 @Table(name = "oauth_client_details")
 @org.hibernate.annotations.Table(appliesTo = "oauth_client_details", comment = "客户端表")
@@ -96,7 +97,8 @@ public class Client extends JpaSuperEntity {
 	@Column(name = "additional_information", columnDefinition = "varchar(4096) NULL DEFAULT '{}' COMMENT '{}'")
 	private String additionalInformation = "{}";
 	/**
-	 * 是否自动放行 默认false,适用于authorization_code模式,设置用户是否自动approval操作,设置true跳过用户确认授权操作页面，直接跳到redirect_uri
+	 * 是否自动放行
+	 * 默认false,适用于authorization_code模式,设置用户是否自动approval操作,设置true跳过用户确认授权操作页面，直接跳到redirect_uri
 	 */
 	@Builder.Default
 	@Column(name = "autoapprove", columnDefinition = "char(5) NULL DEFAULT 'true' COMMENT '是否自动授权 是-true'")
