@@ -480,7 +480,19 @@ taotao:
       xss:
         enabled: true
     sms:
-      enabled: false
+      enabled: true
+      type: aliyun
+      aliyun:
+        sign-name: ""
+        access-key-id: asf23r
+        access-key-secret: sldflasdf
+        templates:
+          other: "niaho${{asdf}}$sdfasdfl"
+        params-orders:
+          other:
+            - asdf
+            - asdf23
+            - asdf233
     shardingsphere:
       enabled: false
     sentinel:

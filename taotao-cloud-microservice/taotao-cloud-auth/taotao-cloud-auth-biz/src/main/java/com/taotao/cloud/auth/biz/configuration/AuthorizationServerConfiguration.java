@@ -1,11 +1,11 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter;
-import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationProvider;
-import com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
-import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter;
-import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
-import com.taotao.cloud.auth.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.mobile.MobileAuthenticationConverter;
+import com.taotao.cloud.auth.biz.authentication.mobile.MobileAuthenticationProvider;
+import com.taotao.cloud.auth.biz.authentication.mobile.MobileAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.password.PasswordAuthenticationConverter;
+import com.taotao.cloud.auth.biz.authentication.password.PasswordAuthenticationProvider;
+import com.taotao.cloud.auth.biz.authentication.password.PasswordAuthenticationToken;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.UserTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -46,7 +46,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import java.util.Arrays;
 import java.util.Map;
 
-import static com.taotao.cloud.auth.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
+import static com.taotao.cloud.auth.biz.authentication.mobile.MobileAuthenticationConverter.MOBILE;
 import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_MOBILE;
 import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PARAM_TYPE;
 import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
@@ -94,8 +94,8 @@ public class AuthorizationServerConfiguration {
 							new OAuth2AuthorizationCodeAuthenticationConverter(),
 							new OAuth2RefreshTokenAuthenticationConverter(),
 							new OAuth2ClientCredentialsAuthenticationConverter(),
-							new OAuth2ResourceOwnerMobileAuthenticationConverter(),
-							new OAuth2ResourceOwnerPasswordAuthenticationConverter()))
+							new MobileAuthenticationConverter(),
+							new PasswordAuthenticationConverter()))
 					)
 					.errorResponseHandler((request, response, authException) -> {
 						LogUtils.error("用户认证失败", authException);
@@ -130,9 +130,9 @@ public class AuthorizationServerConfiguration {
 
 		SecurityFilterChain securityFilterChain = http.formLogin(Customizer.withDefaults()).build();
 
-		addCustomOAuth2ResourceOwnerPasswordAuthenticationProvider(http);
-
-		addCustomOAuth2ResourceOwnerMobileAuthenticationProvider(http);
+		// addCustomOAuth2ResourceOwnerPasswordAuthenticationProvider(http);
+		//
+		// addCustomOAuth2ResourceOwnerMobileAuthenticationProvider(http);
 
 		return securityFilterChain;
 	}
@@ -192,8 +192,8 @@ public class AuthorizationServerConfiguration {
 		OAuth2TokenCustomizer jwtCustomizer = http.getSharedObject(OAuth2TokenCustomizer.class);
 		//OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = buildCustomizer();
 
-		OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
-			new OAuth2ResourceOwnerPasswordAuthenticationProvider(
+		PasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
+			new PasswordAuthenticationProvider(
 				userNameAuthenticationManager(),
 				authorizationService,
 				jwtEncoder);
@@ -209,7 +209,7 @@ public class AuthorizationServerConfiguration {
 
 	private AuthenticationManager userNameAuthenticationManager() {
 		return authentication -> {
-			OAuth2ResourceOwnerPasswordAuthenticationToken authenticationToken = (OAuth2ResourceOwnerPasswordAuthenticationToken) authentication;
+			PasswordAuthenticationToken authenticationToken = (PasswordAuthenticationToken) authentication;
 			Map<String, Object> additionalParameters = authenticationToken.getAdditionalParameters();
 			// 账号
 			String username = (String) additionalParameters.get(OAuth2ParameterNames.USERNAME);
@@ -241,7 +241,7 @@ public class AuthorizationServerConfiguration {
 				throw new BadCredentialsException("用户密码不匹配");
 			}
 
-			OAuth2ResourceOwnerPasswordAuthenticationToken authenticationResult = new OAuth2ResourceOwnerPasswordAuthenticationToken(
+			PasswordAuthenticationToken authenticationResult = new PasswordAuthenticationToken(
 				AuthorizationGrantType.PASSWORD,
 				clientPrincipal,
 				authenticationToken.getScopes(),
@@ -263,8 +263,8 @@ public class AuthorizationServerConfiguration {
 		OAuth2TokenCustomizer jwtCustomizer = http.getSharedObject(OAuth2TokenCustomizer.class);
 		//OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = buildCustomizer();
 
-		OAuth2ResourceOwnerMobileAuthenticationProvider resourceOwnerMobileAuthenticationProvider =
-			new OAuth2ResourceOwnerMobileAuthenticationProvider(
+		MobileAuthenticationProvider resourceOwnerMobileAuthenticationProvider =
+			new MobileAuthenticationProvider(
 				mobileAuthenticationManager(),
 				authorizationService,
 				jwtEncoder);
@@ -280,7 +280,7 @@ public class AuthorizationServerConfiguration {
 
 	private AuthenticationManager mobileAuthenticationManager() {
 		return authentication -> {
-			OAuth2ResourceOwnerMobileAuthenticationToken authenticationToken = (OAuth2ResourceOwnerMobileAuthenticationToken) authentication;
+			MobileAuthenticationToken authenticationToken = (MobileAuthenticationToken) authentication;
 			Authentication clientPrincipal = authenticationToken.getClientPrincipal();
 
 			Map<String, Object> additionalParameters = authenticationToken.getAdditionalParameters();
@@ -305,7 +305,7 @@ public class AuthorizationServerConfiguration {
 				userDetails = sysUserDetailsService.loadUserByUsername(mobile);
 			}
 
-			OAuth2ResourceOwnerMobileAuthenticationToken authenticationResult = new OAuth2ResourceOwnerMobileAuthenticationToken(
+			MobileAuthenticationToken authenticationResult = new MobileAuthenticationToken(
 				MOBILE,
 				clientPrincipal,
 				authenticationToken.getScopes(),

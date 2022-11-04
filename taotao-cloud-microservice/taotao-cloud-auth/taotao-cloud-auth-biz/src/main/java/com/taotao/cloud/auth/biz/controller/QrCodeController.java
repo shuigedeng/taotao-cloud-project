@@ -1,8 +1,7 @@
 package com.taotao.cloud.auth.biz.controller;
 
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.auth.biz.service.QrCodeService;
+import com.taotao.cloud.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class QrCodeController {
 	private QrCodeService qrCodeService;
 
 	@Operation(summary = "获取二维码", description = "获取二维码")
-	@RequestLogger
+	// @RequestLogger
 	@GetMapping("/code")
 	public Result<String> qrcode() {
 		return Result.success(qrCodeService.qrcode());

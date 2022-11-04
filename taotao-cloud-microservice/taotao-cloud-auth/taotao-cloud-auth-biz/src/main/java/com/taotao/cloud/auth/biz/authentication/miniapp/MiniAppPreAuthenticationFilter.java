@@ -2,13 +2,6 @@ package com.taotao.cloud.auth.biz.authentication.miniapp;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-import java.net.URI;
-import java.util.Objects;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -18,6 +11,14 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Objects;
 
 /**
  * 小程序预授权
@@ -29,9 +30,8 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 	private static final String JS_CODE_KEY = "jsCode";
 	private static final String ATTRIBUTE_KEY = "miniappAuth";
 	private final RequestMatcher requiresAuthenticationRequestMatcher = new AntPathRequestMatcher(
-		"/miniapp/preauth",
-		"POST");
-	//private final PreAuthResponseWriter preAuthResponseWriter = new PreAuthResponseWriter();
+		"/miniapp/preauth", "POST");
+	// private final PreAuthResponseWriter preAuthResponseWriter = new PreAuthResponseWriter();
 	private final ObjectMapper om = new ObjectMapper();
 	private final MiniAppClientService miniAppClientService;
 	private final MiniAppSessionKeyCache miniAppSessionKeyCache;
@@ -45,7 +45,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 	 * @param miniAppSessionKeyCache the mini app session key cache
 	 */
 	public MiniAppPreAuthenticationFilter(MiniAppClientService miniAppClientService,
-		MiniAppSessionKeyCache miniAppSessionKeyCache) {
+										  MiniAppSessionKeyCache miniAppSessionKeyCache) {
 		this.miniAppClientService = miniAppClientService;
 		this.miniAppSessionKeyCache = miniAppSessionKeyCache;
 		this.restOperations = new RestTemplate();
@@ -53,7 +53,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-		FilterChain filterChain) throws ServletException, IOException {
+									FilterChain filterChain) throws ServletException, IOException {
 
 		if (response.isCommitted()) {
 			return;
@@ -70,24 +70,24 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 			responseEntity.setSessionKey(null);
 			request.setAttribute(ATTRIBUTE_KEY, responseEntity);
 
-			//preAuthResponseWriter.write(request, response);
+			// preAuthResponseWriter.write(request, response);
 			return;
 		}
 		filterChain.doFilter(request, response);
 	}
 
-	//private static class PreAuthResponseWriter extends ResponseWriter {
+	// private static class PreAuthResponseWriter extends ResponseWriter {
 	//
-	//    @Override
-	//    protected Map<String, Object> body(HttpServletRequest request) {
-	//        WechatLoginResponse miniAuth = (WechatLoginResponse) request.getAttribute(ATTRIBUTE_KEY);
-	//        Map<String, Object> map = new HashMap<>(3);
-	//        map.put("code", HttpStatus.OK.value());
-	//        map.put("data", miniAuth);
-	//        map.put("message", HttpStatus.OK.getReasonPhrase());
-	//        return map;
-	//    }
-	//}
+	// 	@Override
+	// 	protected Map<String, Object> body(HttpServletRequest request) {
+	// 		WechatLoginResponse miniAuth = (WechatLoginResponse) request.getAttribute(ATTRIBUTE_KEY);
+	// 		Map<String, Object> map = new HashMap<>(3);
+	// 		map.put("code", HttpStatus.OK.value());
+	// 		map.put("data", miniAuth);
+	// 		map.put("message", HttpStatus.OK.getReasonPhrase());
+	// 		return map;
+	// 	}
+	// }
 
 
 	/**

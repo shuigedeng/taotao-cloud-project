@@ -12,6 +12,10 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-jpa")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-kafka")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-zipkin")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-skywalking")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
@@ -42,6 +46,9 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server
     implementation "org.springframework.security:spring-security-oauth2-authorization-server:0.3.1"
+
+    //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     implementation "com.nimbusds:nimbus-jose-jwt:9.25.1"

@@ -20,7 +20,6 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,7 @@ public class Oauth2Controller {
 	 * @return OAuth2用户信息
 	 */
 	@Operation(summary = "获取当前认证的OAuth2用户信息", description = "获取当前认证的OAuth2用户信息")
-	@RequestLogger
+	// @RequestLogger
 	@PreAuthorize("hasAuthority('express:company:info:id')")
 	@GetMapping("/user")
 	public Result<OAuth2User> user(@AuthenticationPrincipal OAuth2User user) {
@@ -78,7 +77,7 @@ public class Oauth2Controller {
 	 * @return OAuth2客户端信息
 	 */
 	@Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
-	@RequestLogger
+	// @RequestLogger
 	@PreAuthorize("hasAuthority('express:company:info:id')")
 	@GetMapping("/client")
 	public Result<OAuth2AuthorizedClient> user(
@@ -87,7 +86,7 @@ public class Oauth2Controller {
 	}
 
 	@Operation(summary = "退出系统", description = "退出系统")
-	@RequestLogger
+	// @RequestLogger
 	@PostMapping("/logout")
 	public Result<Boolean> logout() {
 		Authentication authentication = SecurityUtils.getAuthentication();

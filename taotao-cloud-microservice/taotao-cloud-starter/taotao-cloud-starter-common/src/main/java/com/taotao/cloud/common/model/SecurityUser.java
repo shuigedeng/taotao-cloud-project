@@ -419,6 +419,7 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 	public boolean isAdmin() {
 		return admin;
 	}
+
 	public boolean getAdmin() {
 		return admin;
 	}
@@ -478,117 +479,135 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		private Set<String> permissions;
 		private Set<String> roleIds;
 		private Set<String> roleCodes;
+		private String tenant;
+		private boolean superAdmin;
+		private boolean admin;
 
 		private SecurityUserBuilder() {
 		}
 
-		public SecurityUserBuilder withUserId(Long userId) {
+		public SecurityUserBuilder userId(Long userId) {
 			this.userId = userId;
 			return this;
 		}
 
-		public SecurityUserBuilder withAccount(String account) {
+		public SecurityUserBuilder account(String account) {
 			this.account = account;
 			return this;
 		}
 
-		public SecurityUserBuilder withUsername(String username) {
+		public SecurityUserBuilder username(String username) {
 			this.username = username;
 			return this;
 		}
 
-		public SecurityUserBuilder withNickname(String nickname) {
+		public SecurityUserBuilder nickname(String nickname) {
 			this.nickname = nickname;
 			return this;
 		}
 
-		public SecurityUserBuilder withPassword(String password) {
+		public SecurityUserBuilder password(String password) {
 			this.password = password;
 			return this;
 		}
 
-		public SecurityUserBuilder withPhone(String phone) {
+		public SecurityUserBuilder phone(String phone) {
 			this.phone = phone;
 			return this;
 		}
 
-		public SecurityUserBuilder withMobile(String mobile) {
+		public SecurityUserBuilder mobile(String mobile) {
 			this.mobile = mobile;
 			return this;
 		}
 
-		public SecurityUserBuilder withEmail(String email) {
+		public SecurityUserBuilder email(String email) {
 			this.email = email;
 			return this;
 		}
 
-		public SecurityUserBuilder withSex(Integer sex) {
+		public SecurityUserBuilder sex(Integer sex) {
 			this.sex = sex;
 			return this;
 		}
 
-		public SecurityUserBuilder withBirthday(String birthday) {
+		public SecurityUserBuilder birthday(String birthday) {
 			this.birthday = birthday;
 			return this;
 		}
 
-		public SecurityUserBuilder withAvatar(String avatar) {
+		public SecurityUserBuilder avatar(String avatar) {
 			this.avatar = avatar;
 			return this;
 		}
 
-		public SecurityUserBuilder withStatus(Integer status) {
+		public SecurityUserBuilder status(Integer status) {
 			this.status = status;
 			return this;
 		}
 
-		public SecurityUserBuilder withLockFlag(String lockFlag) {
+		public SecurityUserBuilder lockFlag(String lockFlag) {
 			this.lockFlag = lockFlag;
 			return this;
 		}
 
-		public SecurityUserBuilder withDelFlag(String delFlag) {
+		public SecurityUserBuilder delFlag(String delFlag) {
 			this.delFlag = delFlag;
 			return this;
 		}
 
-		public SecurityUserBuilder withType(Integer type) {
+		public SecurityUserBuilder type(Integer type) {
 			this.type = type;
 			return this;
 		}
 
-		public SecurityUserBuilder withStoreId(Long storeId) {
+		public SecurityUserBuilder storeId(Long storeId) {
 			this.storeId = storeId;
 			return this;
 		}
 
-		public SecurityUserBuilder withCompanyIds(List<String> companyIds) {
+		public SecurityUserBuilder companyIds(List<String> companyIds) {
 			this.companyIds = companyIds;
 			return this;
 		}
 
-		public SecurityUserBuilder withDeptIds(List<String> deptIds) {
+		public SecurityUserBuilder deptIds(List<String> deptIds) {
 			this.deptIds = deptIds;
 			return this;
 		}
 
-		public SecurityUserBuilder withJobIds(List<String> jobIds) {
+		public SecurityUserBuilder jobIds(List<String> jobIds) {
 			this.jobIds = jobIds;
 			return this;
 		}
 
-		public SecurityUserBuilder withPermissions(Set<String> permissions) {
+		public SecurityUserBuilder permissions(Set<String> permissions) {
 			this.permissions = permissions;
 			return this;
 		}
 
-		public SecurityUserBuilder withRoleIds(Set<String> roleIds) {
+		public SecurityUserBuilder roleIds(Set<String> roleIds) {
 			this.roleIds = roleIds;
 			return this;
 		}
 
-		public SecurityUserBuilder withRoleCodes(Set<String> roleCodes) {
+		public SecurityUserBuilder roleCodes(Set<String> roleCodes) {
 			this.roleCodes = roleCodes;
+			return this;
+		}
+
+		public SecurityUserBuilder tenant(String tenant) {
+			this.tenant = tenant;
+			return this;
+		}
+
+		public SecurityUserBuilder superAdmin(boolean superAdmin) {
+			this.superAdmin = superAdmin;
+			return this;
+		}
+
+		public SecurityUserBuilder admin(boolean admin) {
+			this.admin = admin;
 			return this;
 		}
 
@@ -616,6 +635,9 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 			securityUser.setPermissions(permissions);
 			securityUser.setRoleIds(roleIds);
 			securityUser.setRoleCodes(roleCodes);
+			securityUser.setTenant(tenant);
+			securityUser.setSuperAdmin(superAdmin);
+			securityUser.setAdmin(admin);
 			return securityUser;
 		}
 	}

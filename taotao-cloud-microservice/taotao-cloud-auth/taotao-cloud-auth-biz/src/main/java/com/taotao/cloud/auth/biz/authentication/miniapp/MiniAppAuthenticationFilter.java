@@ -1,11 +1,6 @@
 package com.taotao.cloud.auth.biz.authentication.miniapp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.BufferedReader;
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +12,16 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class MiniAppAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
-		"/login/miniapp",
-		"POST");
+		"/login/miniapp", "POST");
 	private final ObjectMapper om = new ObjectMapper();
 	private Converter<HttpServletRequest, MiniAppAuthenticationToken> miniAppAuthenticationTokenConverter;
 	private boolean postOnly = true;
@@ -38,14 +38,14 @@ public class MiniAppAuthenticationFilter extends AbstractAuthenticationProcessin
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-		HttpServletResponse response)
+												HttpServletResponse response)
 		throws AuthenticationException, IOException, ServletException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
 				"Authentication method not supported: " + request.getMethod());
 		}
-		MiniAppAuthenticationToken authRequest = miniAppAuthenticationTokenConverter.convert(
-			request);
+
+		MiniAppAuthenticationToken authRequest = miniAppAuthenticationTokenConverter.convert(request);
 		if (authRequest == null) {
 			throw new BadCredentialsException(
 				"fail to extract miniapp authentication request params");
