@@ -5,11 +5,11 @@ dependencies {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
 
-    api 'com.alibaba.csp:sentinel-apache-dubbo3-adapter:1.8.5'
-    api 'com.alibaba.csp:sentinel-apache-httpclient-adapter:1.8.5'
-    api 'com.alibaba.csp:sentinel-okhttp-adapter:1.8.5'
-    api 'com.alibaba.csp:sentinel-reactor-adapter:1.8.5'
-    api 'com.alibaba.csp:sentinel-web-servlet:1.8.5'
+    api 'com.alibaba.csp:sentinel-apache-dubbo3-adapter:1.8.6'
+    api 'com.alibaba.csp:sentinel-apache-httpclient-adapter:1.8.6'
+    api 'com.alibaba.csp:sentinel-okhttp-adapter:1.8.6'
+    api 'com.alibaba.csp:sentinel-reactor-adapter:1.8.6'
+    api 'com.alibaba.csp:sentinel-web-servlet:1.8.6'
 
     compileOnly "org.springframework.cloud:spring-cloud-starter-openfeign"
 

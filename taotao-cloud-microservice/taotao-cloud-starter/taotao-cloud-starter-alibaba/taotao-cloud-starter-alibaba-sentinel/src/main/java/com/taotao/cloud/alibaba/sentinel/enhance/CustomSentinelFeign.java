@@ -38,9 +38,6 @@ import org.springframework.util.StringUtils;
 
 /**
  * <p>Description: 复制原有代码，扩展支持自定义 SentinelInvocationHandler </p>
- *
- * @author : gengwei.zheng
- * @date : 2022/5/30 16:06
  */
 public class CustomSentinelFeign {
 

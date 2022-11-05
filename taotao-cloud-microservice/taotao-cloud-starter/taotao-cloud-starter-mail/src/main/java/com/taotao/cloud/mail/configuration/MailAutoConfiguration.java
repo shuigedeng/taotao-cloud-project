@@ -57,7 +57,6 @@ public class MailAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean
 	public MailAccount mailAccount(MailProperties mailProperties) {
 		MailAccount account = new MailAccount();
 		account.setHost(mailProperties.getHost());
@@ -76,7 +75,6 @@ public class MailAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean
 	public MailUtils mailUtils(MailAccount mailAccount) {
 		return new MailUtils(mailAccount);
 	}

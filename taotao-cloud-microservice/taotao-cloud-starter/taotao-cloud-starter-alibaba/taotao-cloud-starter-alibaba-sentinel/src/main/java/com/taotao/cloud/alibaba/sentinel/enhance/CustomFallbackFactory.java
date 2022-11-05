@@ -22,9 +22,6 @@ import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
  * <p>Description: Feign 统一 Fallback 工厂 </p>
- *
- * @author : gengwei.zheng
- * @date : 2022/5/30 15:09
  */
 public class CustomFallbackFactory<T> implements FallbackFactory {
 
