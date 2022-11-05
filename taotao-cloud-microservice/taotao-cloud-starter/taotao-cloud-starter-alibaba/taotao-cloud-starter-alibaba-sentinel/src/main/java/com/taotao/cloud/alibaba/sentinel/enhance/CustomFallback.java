@@ -25,9 +25,6 @@ import org.springframework.cglib.proxy.MethodProxy;
 
 /**
  * <p>Description: 统一 fallback 实体 </p>
- *
- * @author : gengwei.zheng
- * @date : 2022/5/30 15:12
  */
 public class CustomFallback<T> implements MethodInterceptor {
 

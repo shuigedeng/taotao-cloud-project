@@ -41,25 +41,25 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 
-jetcache:
-  statIntervalMinutes: 1
-  areaInCacheName: false
-  local:
-    default:
-      type: linkedhashmap
-      keyConvertor: jacksonKeyConvertor
-  #remote:
-  #  default:
-  #    type: redis
-  #    keyConvertor: jacksonKeyConvertor
-  #    valueEncoder: jacksonValueEncoder
-  #    valueDecoder: jacksonValueDecoder
-  #    poolConfig:
-  #      minIdle: 5
-  #      maxIdle: 20
-  #      maxTotal: 50
-  #    host: 127.0.0.1
-  #    port: 6379
+#jetcache:
+#  statIntervalMinutes: 1
+#  areaInCacheName: false
+#  local:
+#    default:
+#      type: linkedhashmap
+#      keyConvertor: jacksonKeyConvertor
+#  remote:
+#    default:
+#      type: redis
+#      keyConvertor: jacksonKeyConvertor
+#      valueEncoder: jacksonValueEncoder
+#      valueDecoder: jacksonValueDecoder
+#      poolConfig:
+#        minIdle: 5
+#        maxIdle: 20
+#        maxTotal: 50
+#      host: 127.0.0.1
+#      port: 6379
 
 pulsar:
   service-url: pulsar://192.168.10.210:6650
@@ -85,6 +85,7 @@ pulsar:
 
 easy-es:
   enable: true
+  banner: true
   # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
   address: 192.168.10.210:9200
   # 默认为http
@@ -98,7 +99,7 @@ easy-es:
   # 通信超时时间 单位:ms
   socketTimeout: 5000
   # 请求超时时间 单位:ms
-  requestTimeout: 5000
+  keepAliveMillis: 5000
   # 连接请求超时时间 单位:ms
   connectionRequestTimeout: 5000
   # 最大连接数 单位:个
@@ -106,6 +107,12 @@ easy-es:
   # 最大连接路由数 单位:个
   maxConnPerRoute: 100
   global-config:
+    printDsl: true
+    process-index-mode: SMOOTHLY
+    async-process-index-blocking: true
+    distributed: true
+    activeReleaseIndexMaxRetry: 60
+    activeReleaseIndexFixedDelay: 180
     db-config:
       # 索引前缀,可用于区分环境  默认为空
       table-prefix: tt_
@@ -113,6 +120,12 @@ easy-es:
       id-type: none
       # 字段更新策略 默认为not_null
       field-strategy: IGNORED
+      mapUnderscoreToCamelCase: false
+      idType: NONE
+      enableTrackTotalHits: true
+      refreshPolicy: NONE
+      enableMust2Filter: false
+      batchUpdateThreshold: 10000
 
 redisson:
   #在Redis节点里显示的客户端名称。
@@ -662,7 +675,6 @@ spring:
       #局部异常是否打断主流程
       task-interrupt: true
       transaction: true
-
   quartz:
     scheduler-name: taotaoCloudQuartzScheduler
     # 将任务等保存化到数据库
@@ -905,12 +917,12 @@ spring:
   redis:
     host: 192.168.10.210
     port: 6379
-    #sentinel:
-    #  master:
-    #  nodes:
     database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
+    #sentinel:
+    #  master:
+    #  nodes:
     #cluster:
     #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
     #  max-redirects: 3
@@ -969,6 +981,9 @@ spring:
     uris: http://192.168.10.210:9200
     password:
     username:
+    connectionTimeout: 2
+    socketTimeout: 30
+    path-prefix: tt_
   data:
     elasticsearch:
       repositories:
@@ -1349,6 +1364,7 @@ spring:
           order-input:
             consumer:
               txCommitRecovered: true
+
 taotao:
   cloud:
     dinger:
@@ -1477,7 +1493,31 @@ taotao:
         logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.logp6spy
         remoteServiceName: p6spy-${spring.application.name}
     oss:
-      enabled: false
+      enabled: true
+      type: minio
+      miniooss:
+        endpoint:
+        access-key: xxxx
+        secret-key: xxxx
+        bucket-name: xstest
+        #base-path: taotao-cloud-dev
+        slice-config:
+          task-num: 8
+          part-size: 104857600
+        client-config:
+          connect-timeout: 5000
+        #oss-config:
+        #  minio1:
+        #    endpoint: https://play.min.io
+        #    access-key: Q3AM3UQ867SPQQA43P2F
+        #    secret-key: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
+        #    bucket-name: asiatrip
+        #    base-path: /test
+        #    slice-config:
+        #      task-num: 8
+        #      part-size: 104857600
+        #    client-config:
+        #      connect-timeout: 5000
     springdoc:
       enabled: true
       group: ${spring.applicaion.name}
@@ -1554,6 +1594,7 @@ taotao:
     security:
       ignore-url:
         - /sys/buyer/dict/test/{code}
+        - /sys/manager/dept/tree
 
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割
@@ -1701,6 +1742,7 @@ logging:
     #org.apache.kafka: off
 
 springdoc:
+  showActuator: true
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
     - com.taotao.cloud.captcha.controller

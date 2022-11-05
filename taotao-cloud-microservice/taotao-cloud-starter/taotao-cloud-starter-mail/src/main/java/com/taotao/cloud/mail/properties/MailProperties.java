@@ -37,6 +37,14 @@ public class MailProperties {
 	 */
 	private Boolean enabled;
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	///**
 	// * SMTP服务器域名
 	// */

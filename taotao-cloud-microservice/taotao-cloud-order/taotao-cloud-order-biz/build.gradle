@@ -5,7 +5,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-stream")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-stream")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-pulsar")
-    
+
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-xxl")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api")
@@ -69,7 +69,7 @@ smartdoc {
 //		resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 //
 //		resolutionStrategy {
-//			force "com.alibaba.csp:sentinel-core:1.8.1"
+//			force "com.alibaba.csp:sentinel-core:1.8.6"
 //		}
 //
 //		exclude group: "log4j", module: "log4j"

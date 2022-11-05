@@ -41,9 +41,6 @@ import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
  * <p>Description: 复制原有代码，扩展支持统一 fallback 工厂 </p>
- *
- * @author : gengwei.zheng
- * @date : 2022/5/30 15:03
  */
 public class CustomSentinelInvocationHandler implements InvocationHandler {
 
