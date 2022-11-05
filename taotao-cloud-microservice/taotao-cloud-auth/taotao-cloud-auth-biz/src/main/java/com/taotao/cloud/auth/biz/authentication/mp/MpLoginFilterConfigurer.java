@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 public class MpLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	AbstractLoginFilterConfigurer<H, MpLoginFilterConfigurer<H>, MpAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
-	private MpUserDetailsService accountUserDetailsService;
+	private MpUserDetailsService mpUserDetailsService;
 
 	private JwtTokenGenerator jwtTokenGenerator;
 
@@ -23,8 +23,9 @@ public class MpLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 		super(securityConfigurer, new MpAuthenticationFilter(), "/login/captcha");
 	}
 
-	public MpLoginFilterConfigurer<H> accountUserDetailsService(MpUserDetailsService accountUserDetailsService) {
-		this.accountUserDetailsService = accountUserDetailsService;
+	public MpLoginFilterConfigurer<H> mpUserDetailsService(
+		MpUserDetailsService mpUserDetailsService) {
+		this.mpUserDetailsService = mpUserDetailsService;
 		return this;
 	}
 
@@ -41,11 +42,13 @@ public class MpLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	@Override
 	protected AuthenticationProvider authenticationProvider(H http) {
 		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-		MpUserDetailsService captchaUserDetailsService =
-			this.accountUserDetailsService != null ? this.accountUserDetailsService
+
+		MpUserDetailsService mpUserDetailsService =
+			this.mpUserDetailsService != null ? this.mpUserDetailsService
 				: getBeanOrNull(applicationContext, MpUserDetailsService.class);
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
-		return new MpAuthenticationProvider(accountUserDetailsService);
+		Assert.notNull(mpUserDetailsService, "mpUserDetailsService is required");
+
+		return new MpAuthenticationProvider(mpUserDetailsService);
 	}
 
 	@Override

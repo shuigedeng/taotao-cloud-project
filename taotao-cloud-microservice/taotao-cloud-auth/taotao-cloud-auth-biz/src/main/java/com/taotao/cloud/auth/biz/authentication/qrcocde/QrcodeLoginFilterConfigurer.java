@@ -16,7 +16,7 @@ import org.springframework.util.Assert;
 public class QrcodeLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	AbstractLoginFilterConfigurer<H, QrcodeLoginFilterConfigurer<H>, QrcodeAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
-	private QrcodeUserDetailsService accountUserDetailsService;
+	private QrcodeUserDetailsService qrcodeUserDetailsService;
 	private QrcodeService qrcodeService;
 	private JwtTokenGenerator jwtTokenGenerator;
 
@@ -24,8 +24,9 @@ public class QrcodeLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exten
 		super(securityConfigurer, new QrcodeAuthenticationFilter(), "/login/captcha");
 	}
 
-	public QrcodeLoginFilterConfigurer<H> accountUserDetailsService(QrcodeUserDetailsService accountUserDetailsService) {
-		this.accountUserDetailsService = accountUserDetailsService;
+	public QrcodeLoginFilterConfigurer<H> accountUserDetailsService(
+		QrcodeUserDetailsService qrcodeUserDetailsService) {
+		this.qrcodeUserDetailsService = qrcodeUserDetailsService;
 		return this;
 	}
 
@@ -47,15 +48,17 @@ public class QrcodeLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exten
 	@Override
 	protected AuthenticationProvider authenticationProvider(H http) {
 		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-		QrcodeUserDetailsService captchaUserDetailsService =
-			this.accountUserDetailsService != null ? this.accountUserDetailsService
+		QrcodeUserDetailsService qrcodeUserDetailsService =
+			this.qrcodeUserDetailsService != null ? this.qrcodeUserDetailsService
 				: getBeanOrNull(applicationContext, QrcodeUserDetailsService.class);
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
+		Assert.notNull(qrcodeUserDetailsService, "qrcodeUserDetailsService is required");
+
 		QrcodeService qrcodeService =
 			this.qrcodeService != null ? this.qrcodeService
 				: getBeanOrNull(applicationContext, QrcodeService.class);
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
-		return new QrcodeAuthenticationProvider(qrcodeService, accountUserDetailsService);
+		Assert.notNull(qrcodeService, "captchaUserDetailsService is required");
+
+		return new QrcodeAuthenticationProvider(qrcodeService, qrcodeUserDetailsService);
 	}
 
 	@Override

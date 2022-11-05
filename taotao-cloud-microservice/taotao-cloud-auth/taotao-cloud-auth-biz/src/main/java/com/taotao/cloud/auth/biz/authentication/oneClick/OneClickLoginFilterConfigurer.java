@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	AbstractLoginFilterConfigurer<H, OneClickLoginFilterConfigurer<H>, OneClickAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
-	private OneClickUserDetailsService accountUserDetailsService;
+	private OneClickUserDetailsService oneClickUserDetailsService;
 
 	private JwtTokenGenerator jwtTokenGenerator;
 
@@ -23,8 +23,9 @@ public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 		super(securityConfigurer, new OneClickAuthenticationFilter(), "/login/captcha");
 	}
 
-	public OneClickLoginFilterConfigurer<H> accountUserDetailsService(OneClickUserDetailsService accountUserDetailsService) {
-		this.accountUserDetailsService = accountUserDetailsService;
+	public OneClickLoginFilterConfigurer<H> oneClickUserDetailsService(
+		OneClickUserDetailsService oneClickUserDetailsService) {
+		this.oneClickUserDetailsService = oneClickUserDetailsService;
 		return this;
 	}
 
@@ -41,11 +42,13 @@ public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 	@Override
 	protected AuthenticationProvider authenticationProvider(H http) {
 		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-		OneClickUserDetailsService captchaUserDetailsService =
-			this.accountUserDetailsService != null ? this.accountUserDetailsService
+
+		OneClickUserDetailsService oneClickUserDetailsService =
+			this.oneClickUserDetailsService != null ? this.oneClickUserDetailsService
 				: getBeanOrNull(applicationContext, OneClickUserDetailsService.class);
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
-		return new OneClickAuthenticationProvider(accountUserDetailsService);
+		Assert.notNull(oneClickUserDetailsService, "oneClickUserDetailsService is required");
+		
+		return new OneClickAuthenticationProvider(oneClickUserDetailsService);
 	}
 
 	@Override

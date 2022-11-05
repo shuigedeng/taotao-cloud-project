@@ -1,5 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication.qrcocde;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,43 +12,40 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
 	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
-		"/login/account", "POST");
+		"/login/qrcode", "POST");
 
 	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
 	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 
-	private Converter<HttpServletRequest, QrcodeAuthenticationToken> accountVerificationAuthenticationTokenConverter;
+	private Converter<HttpServletRequest, QrcodeAuthenticationToken> qrcodeAuthenticationTokenConverter;
 
 	private boolean postOnly = true;
 
 	public QrcodeAuthenticationFilter() {
 		super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
-		this.accountVerificationAuthenticationTokenConverter = defaultConverter();
+		this.qrcodeAuthenticationTokenConverter = defaultConverter();
 	}
 
 	public QrcodeAuthenticationFilter(AuthenticationManager authenticationManager) {
 		super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
-		this.accountVerificationAuthenticationTokenConverter = defaultConverter();
+		this.qrcodeAuthenticationTokenConverter = defaultConverter();
 	}
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-												HttpServletResponse response) throws AuthenticationException {
+		HttpServletResponse response) throws AuthenticationException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
 				"Authentication method not supported: " + request.getMethod());
 		}
 
-		QrcodeAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(request);
+		QrcodeAuthenticationToken authRequest = qrcodeAuthenticationTokenConverter.convert(request);
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
 		return this.getAuthenticationManager().authenticate(authRequest);
@@ -82,7 +81,7 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
 
 	public void setConverter(Converter<HttpServletRequest, QrcodeAuthenticationToken> converter) {
 		Assert.notNull(converter, "Converter must not be null");
-		this.accountVerificationAuthenticationTokenConverter = converter;
+		this.qrcodeAuthenticationTokenConverter = converter;
 	}
 
 	public void setPostOnly(boolean postOnly) {
