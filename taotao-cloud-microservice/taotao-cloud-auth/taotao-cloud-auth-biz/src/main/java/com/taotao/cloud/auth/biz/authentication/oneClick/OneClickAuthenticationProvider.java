@@ -1,6 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication.oneClick;
 
 import com.taotao.cloud.auth.biz.authentication.oneClick.service.OneClickUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -15,8 +16,6 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-
 /**
  * 用户+密码登录
  */
@@ -24,11 +23,11 @@ public class OneClickAuthenticationProvider implements AuthenticationProvider, I
 	MessageSourceAware {
 
 	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-	private final OneClickUserDetailsService accountUserDetailsService;
+	private final OneClickUserDetailsService oneClickUserDetailsService;
 	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	public OneClickAuthenticationProvider(OneClickUserDetailsService accountUserDetailsService) {
-		this.accountUserDetailsService = accountUserDetailsService;
+	public OneClickAuthenticationProvider(OneClickUserDetailsService oneClickUserDetailsService) {
+		this.oneClickUserDetailsService = oneClickUserDetailsService;
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class OneClickAuthenticationProvider implements AuthenticationProvider, I
 		String passowrd = (String) unAuthenticationToken.getCredentials();
 
 		// 验证码校验
-		UserDetails userDetails = accountUserDetailsService.loadUserByPhone(username);
+		UserDetails userDetails = oneClickUserDetailsService.loadUserByPhone(username);
 		// 校验密码
 		//TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
 		return createSuccessAuthentication(authentication, userDetails);
@@ -58,7 +57,7 @@ public class OneClickAuthenticationProvider implements AuthenticationProvider, I
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(accountUserDetailsService, "accountUserDetailsService must not be null");
+		Assert.notNull(oneClickUserDetailsService, "oneClickUserDetailsService must not be null");
 	}
 
 	@Override
@@ -74,11 +73,12 @@ public class OneClickAuthenticationProvider implements AuthenticationProvider, I
 	 * @return the authentication
 	 */
 	protected Authentication createSuccessAuthentication(Authentication authentication,
-														 UserDetails user) {
+		UserDetails user) {
 
 		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(
 			user.getAuthorities());
-		OneClickAuthenticationToken authenticationToken = new OneClickAuthenticationToken(user, null, authorities);
+		OneClickAuthenticationToken authenticationToken = new OneClickAuthenticationToken(user,
+			null, authorities);
 		authenticationToken.setDetails(authentication.getDetails());
 
 		return authenticationToken;

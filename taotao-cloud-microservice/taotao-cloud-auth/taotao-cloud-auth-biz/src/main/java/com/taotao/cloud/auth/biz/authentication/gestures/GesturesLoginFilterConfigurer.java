@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 public class GesturesLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	AbstractLoginFilterConfigurer<H, GesturesLoginFilterConfigurer<H>, GesturesAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
-	private GesturesUserDetailsService accountUserDetailsService;
+	private GesturesUserDetailsService gesturesUserDetailsService;
 
 	private JwtTokenGenerator jwtTokenGenerator;
 
@@ -23,8 +23,9 @@ public class GesturesLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 		super(securityConfigurer, new GesturesAuthenticationFilter(), "/login/captcha");
 	}
 
-	public GesturesLoginFilterConfigurer<H> accountUserDetailsService(GesturesUserDetailsService accountUserDetailsService) {
-		this.accountUserDetailsService = accountUserDetailsService;
+	public GesturesLoginFilterConfigurer<H> gesturesUserDetailsService(
+		GesturesUserDetailsService gesturesUserDetailsService) {
+		this.gesturesUserDetailsService = gesturesUserDetailsService;
 		return this;
 	}
 
@@ -41,11 +42,13 @@ public class GesturesLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 	@Override
 	protected AuthenticationProvider authenticationProvider(H http) {
 		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-		GesturesUserDetailsService captchaUserDetailsService =
-			this.accountUserDetailsService != null ? this.accountUserDetailsService
+
+		GesturesUserDetailsService gesturesUserDetailsService =
+			this.gesturesUserDetailsService != null ? this.gesturesUserDetailsService
 				: getBeanOrNull(applicationContext, GesturesUserDetailsService.class);
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
-		return new GesturesAuthenticationProvider(accountUserDetailsService);
+		Assert.notNull(gesturesUserDetailsService, "gesturesUserDetailsService is required");
+
+		return new GesturesAuthenticationProvider(gesturesUserDetailsService);
 	}
 
 	@Override

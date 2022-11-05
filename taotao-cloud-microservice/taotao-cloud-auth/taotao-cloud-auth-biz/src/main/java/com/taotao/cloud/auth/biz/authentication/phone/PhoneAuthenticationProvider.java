@@ -2,6 +2,7 @@ package com.taotao.cloud.auth.biz.authentication.phone;
 
 import com.taotao.cloud.auth.biz.authentication.phone.service.PhoneService;
 import com.taotao.cloud.auth.biz.authentication.phone.service.PhoneUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -17,8 +18,6 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-
 /**
  * 手机号码+短信登录
  */
@@ -26,14 +25,14 @@ public class PhoneAuthenticationProvider implements AuthenticationProvider, Init
 	MessageSourceAware {
 
 	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-	private final PhoneUserDetailsService captchaUserDetailsService;
-	private final PhoneService captchaService;
+	private final PhoneUserDetailsService phoneUserDetailsService;
+	private final PhoneService phoneService;
 	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	public PhoneAuthenticationProvider(PhoneUserDetailsService captchaUserDetailsService,
-									   PhoneService captchaService) {
-		this.captchaUserDetailsService = captchaUserDetailsService;
-		this.captchaService = captchaService;
+	public PhoneAuthenticationProvider(PhoneUserDetailsService phoneUserDetailsService,
+		PhoneService phoneService) {
+		this.phoneUserDetailsService = phoneUserDetailsService;
+		this.phoneService = phoneService;
 	}
 
 	@Override
@@ -49,8 +48,8 @@ public class PhoneAuthenticationProvider implements AuthenticationProvider, Init
 		String phone = unAuthenticationToken.getName();
 		String rawCode = (String) unAuthenticationToken.getCredentials();
 		// 验证码校验
-		if (captchaService.verifyCaptcha(phone, rawCode)) {
-			UserDetails userDetails = captchaUserDetailsService.loadUserByPhone(phone);
+		if (phoneService.verifyCaptcha(phone, rawCode)) {
+			UserDetails userDetails = phoneUserDetailsService.loadUserByPhone(phone);
 			//TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
 			return createSuccessAuthentication(authentication, userDetails);
 		} else {
@@ -65,8 +64,8 @@ public class PhoneAuthenticationProvider implements AuthenticationProvider, Init
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService must not be null");
-		Assert.notNull(captchaService, "captchaService must not be null");
+		Assert.notNull(phoneUserDetailsService, "phoneUserDetailsService must not be null");
+		Assert.notNull(phoneService, "phoneService must not be null");
 	}
 
 	@Override
@@ -81,7 +80,8 @@ public class PhoneAuthenticationProvider implements AuthenticationProvider, Init
 	 * @param user           the user
 	 * @return the authentication
 	 */
-	protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
+	protected Authentication createSuccessAuthentication(Authentication authentication,
+		UserDetails user) {
 
 		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(
 			user.getAuthorities());

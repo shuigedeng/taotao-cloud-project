@@ -2,6 +2,7 @@ package com.taotao.cloud.auth.biz.authentication.qrcocde;
 
 import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeService;
 import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -16,8 +17,6 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-
 /**
  * 用户+密码登录
  */
@@ -25,13 +24,14 @@ public class QrcodeAuthenticationProvider implements AuthenticationProvider, Ini
 	MessageSourceAware {
 
 	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-	private final QrcodeUserDetailsService accountUserDetailsService;
+	private final QrcodeUserDetailsService qrcodeUserDetailsService;
 	private final QrcodeService qrcodeService;
 	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	public QrcodeAuthenticationProvider(QrcodeService qrcodeService, QrcodeUserDetailsService accountUserDetailsService) {
+	public QrcodeAuthenticationProvider(QrcodeService qrcodeService,
+		QrcodeUserDetailsService qrcodeUserDetailsService) {
 		this.qrcodeService = qrcodeService;
-		this.accountUserDetailsService = accountUserDetailsService;
+		this.qrcodeUserDetailsService = qrcodeUserDetailsService;
 	}
 
 	@Override
@@ -47,11 +47,10 @@ public class QrcodeAuthenticationProvider implements AuthenticationProvider, Ini
 		String username = unAuthenticationToken.getName();
 		String passowrd = (String) unAuthenticationToken.getCredentials();
 
-
 		qrcodeService.verifyQrcode("qrocde");
 
 		// 验证码校验
-		UserDetails userDetails = accountUserDetailsService.loadUserByPhone(username);
+		UserDetails userDetails = qrcodeUserDetailsService.loadUserByPhone(username);
 		// 校验密码
 		//TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
 		return createSuccessAuthentication(authentication, userDetails);
@@ -64,7 +63,8 @@ public class QrcodeAuthenticationProvider implements AuthenticationProvider, Ini
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(accountUserDetailsService, "accountUserDetailsService must not be null");
+		Assert.notNull(qrcodeUserDetailsService, "qrcodeUserDetailsService must not be null");
+		Assert.notNull(qrcodeService, "qrcodeService must not be null");
 	}
 
 	@Override
@@ -80,11 +80,12 @@ public class QrcodeAuthenticationProvider implements AuthenticationProvider, Ini
 	 * @return the authentication
 	 */
 	protected Authentication createSuccessAuthentication(Authentication authentication,
-														 UserDetails user) {
+		UserDetails user) {
 
 		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(
 			user.getAuthorities());
-		QrcodeAuthenticationToken authenticationToken = new QrcodeAuthenticationToken(user, null, authorities);
+		QrcodeAuthenticationToken authenticationToken = new QrcodeAuthenticationToken(user, null,
+			authorities);
 		authenticationToken.setDetails(authentication.getDetails());
 
 		return authenticationToken;

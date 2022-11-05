@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 public class FaceLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	AbstractLoginFilterConfigurer<H, FaceLoginFilterConfigurer<H>, FaceAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
-	private FaceUserDetailsService accountUserDetailsService;
+	private FaceUserDetailsService faceUserDetailsService;
 
 	private JwtTokenGenerator jwtTokenGenerator;
 
@@ -23,8 +23,9 @@ public class FaceLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 		super(securityConfigurer, new FaceAuthenticationFilter(), "/login/captcha");
 	}
 
-	public FaceLoginFilterConfigurer<H> accountUserDetailsService(FaceUserDetailsService accountUserDetailsService) {
-		this.accountUserDetailsService = accountUserDetailsService;
+	public FaceLoginFilterConfigurer<H> faceUserDetailsService(
+		FaceUserDetailsService faceUserDetailsService) {
+		this.faceUserDetailsService = faceUserDetailsService;
 		return this;
 	}
 
@@ -41,11 +42,13 @@ public class FaceLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	@Override
 	protected AuthenticationProvider authenticationProvider(H http) {
 		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+
 		FaceUserDetailsService captchaUserDetailsService =
-			this.accountUserDetailsService != null ? this.accountUserDetailsService
+			this.faceUserDetailsService != null ? this.faceUserDetailsService
 				: getBeanOrNull(applicationContext, FaceUserDetailsService.class);
 		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
-		return new FaceAuthenticationProvider(accountUserDetailsService);
+
+		return new FaceAuthenticationProvider(faceUserDetailsService);
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 public class FingerprintLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	AbstractLoginFilterConfigurer<H, FingerprintLoginFilterConfigurer<H>, FingerprintAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
-	private FingerprintUserDetailsService accountUserDetailsService;
+	private FingerprintUserDetailsService fingerprintUserDetailsService;
 
 	private JwtTokenGenerator jwtTokenGenerator;
 
@@ -23,12 +23,14 @@ public class FingerprintLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> 
 		super(securityConfigurer, new FingerprintAuthenticationFilter(), "/login/captcha");
 	}
 
-	public FingerprintLoginFilterConfigurer<H> accountUserDetailsService(FingerprintUserDetailsService accountUserDetailsService) {
-		this.accountUserDetailsService = accountUserDetailsService;
+	public FingerprintLoginFilterConfigurer<H> fingerprintUserDetailsService(
+		FingerprintUserDetailsService fingerprintUserDetailsService) {
+		this.fingerprintUserDetailsService = fingerprintUserDetailsService;
 		return this;
 	}
 
-	public FingerprintLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
+	public FingerprintLoginFilterConfigurer<H> jwtTokenGenerator(
+		JwtTokenGenerator jwtTokenGenerator) {
 		this.jwtTokenGenerator = jwtTokenGenerator;
 		return this;
 	}
@@ -41,11 +43,13 @@ public class FingerprintLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> 
 	@Override
 	protected AuthenticationProvider authenticationProvider(H http) {
 		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-		FingerprintUserDetailsService captchaUserDetailsService =
-			this.accountUserDetailsService != null ? this.accountUserDetailsService
+
+		FingerprintUserDetailsService fingerprintUserDetailsService =
+			this.fingerprintUserDetailsService != null ? this.fingerprintUserDetailsService
 				: getBeanOrNull(applicationContext, FingerprintUserDetailsService.class);
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
-		return new FingerprintAuthenticationProvider(accountUserDetailsService);
+		Assert.notNull(fingerprintUserDetailsService, "fingerprintUserDetailsService is required");
+		
+		return new FingerprintAuthenticationProvider(fingerprintUserDetailsService);
 	}
 
 	@Override
