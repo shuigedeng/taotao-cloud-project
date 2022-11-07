@@ -483,6 +483,7 @@ spring:
             client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
             client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
             authorization-grant-type: authorization_code
+            #'{baseUrl}/login/oauth2/code/{registrationId}'
             redirect-uri: http://1fe9ccce.cpolar.cn/login/oauth2/code/gitee
             scope:
               - user_info
