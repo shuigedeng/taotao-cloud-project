@@ -69,7 +69,8 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> ext
 	/**
 	 * Captcha login login filter security configurer.
 	 *
-	 * @param oneClickLoginFilterConfigurerCustomizer the captcha login filter configurer customizer
+	 * @param oneClickLoginFilterConfigurerCustomizer the captcha login filter configurer
+	 *                                                customizer
 	 * @return the login filter security configurer
 	 */
 	public LoginFilterSecurityConfigurer<H> oneClickLogin(
@@ -112,7 +113,8 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> ext
 	/**
 	 * Captcha login login filter security configurer.
 	 *
-	 * @param gesturesLoginFilterConfigurerCustomizer the captcha login filter configurer customizer
+	 * @param gesturesLoginFilterConfigurerCustomizer the captcha login filter configurer
+	 *                                                customizer
 	 * @return the login filter security configurer
 	 */
 	public LoginFilterSecurityConfigurer<H> gesturesLogin(
@@ -133,12 +135,14 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> ext
 	/**
 	 * Captcha login login filter security configurer.
 	 *
-	 * @param fingerprintLoginFilterConfigurerCustomizer the captcha login filter configurer customizer
+	 * @param fingerprintLoginFilterConfigurerCustomizer the captcha login filter configurer
+	 *                                                   customizer
 	 * @return the login filter security configurer
 	 */
 	public LoginFilterSecurityConfigurer<H> fingerprintLogin(
 		Customizer<FingerprintLoginFilterConfigurer<H>> fingerprintLoginFilterConfigurerCustomizer) {
-		fingerprintLoginFilterConfigurerCustomizer.customize(lazyInitFingerprintLoginFilterConfigurer());
+		fingerprintLoginFilterConfigurerCustomizer.customize(
+			lazyInitFingerprintLoginFilterConfigurer());
 		return this;
 	}
 
@@ -196,12 +200,14 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> ext
 	/**
 	 * Captcha login login filter security configurer.
 	 *
-	 * @param accountVerificationLoginFilterConfigurerCustomizer the captcha login filter configurer customizer
+	 * @param accountVerificationLoginFilterConfigurerCustomizer the captcha login filter configurer
+	 *                                                           customizer
 	 * @return the login filter security configurer
 	 */
 	public LoginFilterSecurityConfigurer<H> accountVerificationLogin(
 		Customizer<AccountVerificationLoginFilterConfigurer<H>> accountVerificationLoginFilterConfigurerCustomizer) {
-		accountVerificationLoginFilterConfigurerCustomizer.customize(lazyInitAccountVerificationLoginFilterConfigurer());
+		accountVerificationLoginFilterConfigurerCustomizer.customize(
+			lazyInitAccountVerificationLoginFilterConfigurer());
 		return this;
 	}
 
@@ -250,6 +256,30 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> ext
 
 	@Override
 	public void init(H builder) throws Exception {
+		if (accountLoginFilterConfigurer != null) {
+			accountLoginFilterConfigurer.init(builder);
+		}
+		if (accountVerificationLoginFilterConfigurer != null) {
+			accountVerificationLoginFilterConfigurer.init(builder);
+		}
+		if (faceLoginFilterConfigurer != null) {
+			faceLoginFilterConfigurer.init(builder);
+		}
+		if (fingerprintLoginFilterConfigurer != null) {
+			fingerprintLoginFilterConfigurer.init(builder);
+		}
+		if (gesturesLoginFilterConfigurer != null) {
+			gesturesLoginFilterConfigurer.init(builder);
+		}
+		if (mpLoginFilterConfigurer != null) {
+			mpLoginFilterConfigurer.init(builder);
+		}
+		if (oneClickLoginFilterConfigurer != null) {
+			oneClickLoginFilterConfigurer.init(builder);
+		}
+		if (qrcodeLoginFilterConfigurer != null) {
+			qrcodeLoginFilterConfigurer.init(builder);
+		}
 		if (phoneLoginFilterConfigurer != null) {
 			phoneLoginFilterConfigurer.init(builder);
 		}
@@ -260,6 +290,30 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> ext
 
 	@Override
 	public void configure(H builder) throws Exception {
+		if (accountLoginFilterConfigurer != null) {
+			accountLoginFilterConfigurer.init(builder);
+		}
+		if (accountVerificationLoginFilterConfigurer != null) {
+			accountVerificationLoginFilterConfigurer.init(builder);
+		}
+		if (faceLoginFilterConfigurer != null) {
+			faceLoginFilterConfigurer.init(builder);
+		}
+		if (fingerprintLoginFilterConfigurer != null) {
+			fingerprintLoginFilterConfigurer.init(builder);
+		}
+		if (gesturesLoginFilterConfigurer != null) {
+			gesturesLoginFilterConfigurer.init(builder);
+		}
+		if (mpLoginFilterConfigurer != null) {
+			mpLoginFilterConfigurer.init(builder);
+		}
+		if (oneClickLoginFilterConfigurer != null) {
+			oneClickLoginFilterConfigurer.init(builder);
+		}
+		if (qrcodeLoginFilterConfigurer != null) {
+			qrcodeLoginFilterConfigurer.init(builder);
+		}
 		if (phoneLoginFilterConfigurer != null) {
 			phoneLoginFilterConfigurer.configure(builder);
 		}
@@ -284,7 +338,8 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> ext
 
 	private AccountVerificationLoginFilterConfigurer<H> lazyInitAccountVerificationLoginFilterConfigurer() {
 		if (accountVerificationLoginFilterConfigurer == null) {
-			this.accountVerificationLoginFilterConfigurer = new AccountVerificationLoginFilterConfigurer<>(this);
+			this.accountVerificationLoginFilterConfigurer = new AccountVerificationLoginFilterConfigurer<>(
+				this);
 		}
 		return accountVerificationLoginFilterConfigurer;
 	}
