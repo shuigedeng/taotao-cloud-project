@@ -7,11 +7,14 @@ dependencies {
         exclude group: "org.projectlombok", module: "lombok"
     }
     api 'cn.dynamictp:dynamic-tp-extension-skywalking:1.0.9'
+
     api 'cn.dynamictp:dynamic-tp-spring-boot-starter-extension-limiter-redis:1.0.9'
+    api 'cn.dynamictp:dynamic-tp-spring-boot-starter-extension-notify-email:1.0.9'
 
     api 'cn.dynamictp:dynamic-tp-spring-boot-starter-adapter-webserver:1.0.9'
     api 'cn.dynamictp:dynamic-tp-spring-boot-starter-adapter-dubbo:1.0.9'
     api 'cn.dynamictp:dynamic-tp-spring-boot-starter-adapter-rocketmq:1.0.9'
+    api 'cn.dynamictp:dynamic-tp-spring-boot-starter-adapter-grpc:1.0.9'
 
     ////https://gitee.com/mabaiwancn/hippo4j
     ////https://search.maven.org/artifact/cn.hippo4j/hippo4j-spring-boot-starter-adapter

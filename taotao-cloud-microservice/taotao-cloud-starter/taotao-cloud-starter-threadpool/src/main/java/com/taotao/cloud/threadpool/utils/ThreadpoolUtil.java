@@ -6,6 +6,6 @@ import com.dtp.core.thread.DtpExecutor;
 public class ThreadpoolUtil {
 
 	public static DtpExecutor dtpExecutor() {
-		return ThreadPoolCreator.createDynamicFast("dynamic-tp-test");
+		return ThreadPoolCreator.createDynamicFast("commonExecutor");
 	}
 }

@@ -27,7 +27,7 @@ dependencies {
     //企业微信第三方SDK
     implementation "com.github.binarywang:weixin-java-cp:4.1.0"
     //动态线程池引入
-    implementation "io.github.lyh200:dynamic-tp-spring-boot-starter-apollo:1.0.2"
+    implementation "cn.dynamictp:dynamic-tp-spring-boot-starter-nacos:1.0.9"
     //微信服务号第三方SDK
     implementation "com.github.binarywang:weixin-java-mp:4.1.0"
     //kafkaFlink连接器

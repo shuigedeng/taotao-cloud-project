@@ -31,7 +31,6 @@ public class MailProperties {
 
 	public static final String PREFIX = "taotao.cloud.mail";
 
-
 	/**
 	 * 过滤开关
 	 */
