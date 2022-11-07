@@ -628,8 +628,8 @@ logging:
   level:
     root: INFO
     org.springframework.web: off
-    org.springframework.security: debug
-    org.springframework.security.oauth2: debug
+    org.springframework.security: info
+    org.springframework.security.oauth2: info
     org.springframework.boot.autoconfigure: off
 
 oauth2:

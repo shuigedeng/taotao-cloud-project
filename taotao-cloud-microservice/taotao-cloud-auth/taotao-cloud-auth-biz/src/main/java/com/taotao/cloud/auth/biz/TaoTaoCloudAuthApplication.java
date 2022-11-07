@@ -37,7 +37,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * <p>
  * /oauth/check_token 资源服务器解码access token
  * <p>
- * /oauth/check_token 当使用JWT的时候，暴露公钥的端点
+ * /oauth/jwks 当使用JWT的时候，暴露公钥的端点
  * <p>
  * <pre class="code">
  * --add-opens java.base/java.lang=ALL-UNNAMED

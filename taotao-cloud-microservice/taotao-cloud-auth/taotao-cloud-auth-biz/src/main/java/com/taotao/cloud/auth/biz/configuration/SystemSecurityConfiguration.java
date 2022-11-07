@@ -1,25 +1,35 @@
 package com.taotao.cloud.auth.biz.configuration;
 
-import com.nimbusds.jose.jwk.source.JWKSource;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.account.service.AccountUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.accountVerification.service.AccountVerificationService;
+import com.taotao.cloud.auth.biz.authentication.accountVerification.service.AccountVerificationUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.face.service.FaceUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.fingerprint.service.FingerprintUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppClient;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppClientService;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppRequest;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppSessionKeyCache;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.mp.service.MpUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.oauth2.DelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.oauth2.OAuth2ProviderConfigurer;
+import com.taotao.cloud.auth.biz.authentication.oneClick.service.OneClickUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeService;
 import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeUserDetailsService;
+import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.models.JwtGrantedAuthoritiesConverter;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -40,7 +50,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -48,16 +57,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
-import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
-import org.springframework.security.oauth2.jwt.JwsHeader;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -65,16 +65,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 /**
@@ -102,9 +92,6 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 		"/actuator/**",
 		"/index",
 		"/index.html",
-		// "/auth/captcha/code",
-		"/auth/qrcode/code",
-		"/auth/sms/phone",
 		"/doc.html",
 		"/*.js",
 		"/*.css",
@@ -117,7 +104,8 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 		"/**.min.js",
 		"/**.min.css",
 		"/component/**",
-		"/actuator/health",
+		"/login/**",
+		"/actuator/**",
 		"/h2-console/**",
 		"/pear.config.json",
 		"/pear.config.yml",
@@ -125,7 +113,6 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 		"/admin/fonts/**",
 		"/admin/js/**",
 		"/admin/images/**",
-		"/api/test/**",
 		"/health/**"};
 
 	private Environment environment;
@@ -158,13 +145,8 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 	@Value("${jwk.set.uri}")
 	private String jwkSetUri;
 
-	@Bean
-	public JwtDecoder jwtDecoder() {
-		return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-	}
-
 	private String exceptionMessage(AuthenticationException exception) {
-		String msg = "访问未授权";
+		String msg = "用户未认证";
 		if (exception instanceof AccountExpiredException) {
 			msg = "账户过期";
 		} else if (exception instanceof AuthenticationCredentialsNotFoundException) {
@@ -178,11 +160,11 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 		return msg;
 	}
 
-	//@Autowired
-	//private JwtTokenGenerator jwtTokenGenerator;
+	@Autowired
+	private JwtTokenGenerator jwtTokenGenerator;
 
 	AuthenticationEntryPoint authenticationEntryPoint = (request, response, authException) -> {
-		LogUtils.error("用户认证失败", authException);
+		LogUtils.error("用户未认证", authException);
 		authException.printStackTrace();
 		ResponseUtils.fail(response, exceptionMessage(authException));
 	};
@@ -197,7 +179,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 	AuthenticationSuccessHandler authenticationSuccessHandler = (request, response, authentication) -> {
 		LogUtils.error("用户认证成功", authentication);
 		ResponseUtils.success(response,
-			tokenResponse((UserDetails) authentication.getPrincipal()));
+			jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
 	};
 
 	@Bean
@@ -215,7 +197,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 
 	@Bean
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,
-														  DelegateClientRegistrationRepository delegateClientRegistrationRepository)
+		DelegateClientRegistrationRepository delegateClientRegistrationRepository)
 		throws Exception {
 		http
 			.formLogin(formLoginConfigurer -> {
@@ -258,7 +240,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 					})
 					.jwt(jwtCustomizer ->
 						jwtCustomizer
-							.decoder(jwtDecoder())
+							.decoder(NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build())
 							.jwtAuthenticationConverter(jwtAuthenticationConverter())
 					)
 			)
@@ -266,27 +248,79 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			.apply(new LoginFilterSecurityConfigurer<>())
 			// 用户+密码登录
 			.accountLogin(accountLoginConfigurer -> {
-
+				accountLoginConfigurer
+					.accountUserDetailsService(new AccountUserDetailsService() {
+						@Override
+						public UserDetails loadUserByPhone(String phone)
+							throws UsernameNotFoundException {
+							return null;
+						}
+					});
 			})
 			//用户+密码+验证码登录
 			.accountVerificationLogin(accountVerificationLoginConfigurer -> {
-
+				accountVerificationLoginConfigurer
+					.accountVerificationUserDetailsService(
+						new AccountVerificationUserDetailsService() {
+							@Override
+							public UserDetails loadUserByPhone(String phone)
+								throws UsernameNotFoundException {
+								return null;
+							}
+						})
+					.accountVerificationService(new AccountVerificationService() {
+						@Override
+						public boolean verifyCaptcha(String verificationCode) {
+							return false;
+						}
+					});
 			})
 			// 面部识别登录
 			.faceLogin(faceLoginLoginConfigurer -> {
+				faceLoginLoginConfigurer
+					.faceUserDetailsService(new FaceUserDetailsService() {
+						@Override
+						public UserDetails loadUserByPhone(String phone)
+							throws UsernameNotFoundException {
 
+							return null;
+						}
+					});
 			})
 			//指纹登录
 			.fingerprintLogin(fingerprintLoginConfigurer -> {
-
+				fingerprintLoginConfigurer
+					.fingerprintUserDetailsService(
+						new FingerprintUserDetailsService() {
+							@Override
+							public UserDetails loadUserByPhone(String phone)
+								throws UsernameNotFoundException {
+								return null;
+							}
+						});
 			})
 			//手势登录
 			.gesturesLogin(fingerprintLoginConfigurer -> {
-
+				fingerprintLoginConfigurer
+					.gesturesUserDetailsService(
+						new GesturesUserDetailsService() {
+							@Override
+							public UserDetails loadUserByPhone(String phone)
+								throws UsernameNotFoundException {
+								return null;
+							}
+						});
 			})
 			//本机号码一键登录
 			.oneClickLogin(oneClickLoginConfigurer -> {
-
+				oneClickLoginConfigurer
+					.oneClickUserDetailsService(new OneClickUserDetailsService() {
+						@Override
+						public UserDetails loadUserByPhone(String phone)
+							throws UsernameNotFoundException {
+							return null;
+						}
+					});
 			})
 			//手机扫码登录
 			.qrcodeLogin(qrcodeLoginConfigurer -> {
@@ -303,8 +337,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 							throws UsernameNotFoundException {
 							return null;
 						}
-					})
-					.jwtTokenGenerator(this::tokenResponse);
+					});
 			})
 			// 手机号码+短信登录
 			.phoneLogin(phoneLoginConfigurer ->
@@ -335,7 +368,6 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 							.build();
 					})
 					// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
-					.jwtTokenGenerator(this::tokenResponse)
 					// 两个登录保持一致
 					.successHandler(authenticationSuccessHandler)
 					// 两个登录保持一致
@@ -343,7 +375,14 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			)
 			//微信公众号登录
 			.mpLogin(mpLoginConfigurer -> {
-
+				mpLoginConfigurer
+					.mpUserDetailsService(new MpUserDetailsService() {
+						@Override
+						public UserDetails loadUserByPhone(String phone)
+							throws UsernameNotFoundException {
+							return null;
+						}
+					});
 			})
 			// 小程序登录 同时支持多个小程序
 			.miniAppLogin(miniAppLoginConfigurer -> miniAppLoginConfigurer
@@ -391,13 +430,13 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 					}
 				})
 				// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
-				.jwtTokenGenerator(this::tokenResponse)
 				// 两个登录保持一致
 				.successHandler(authenticationSuccessHandler)
 				// 两个登录保持一致
 				.failureHandler(authenticationFailureHandler)
 			)
 			.and()
+			// **************************************oauth2登录配置***********************************************
 			.apply(new OAuth2ProviderConfigurer(delegateClientRegistrationRepository))
 			// 微信网页授权  下面的参数是假的
 			.wechatWebclient("wxdf90xxx8e7f", "bf1306baaaxxxxx15eb02d68df5")
@@ -406,7 +445,6 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 				"1000005")
 			// 微信扫码登录 下面的参数是假的
 			.wechatWebLoginclient("wxafd62c05779e50bd", "ab24fce07ea84228dc4e64720f8bdefd")
-			// **************************************oauth2登录配置***********************************************
 			.oAuth2LoginConfigurerConsumer(oauth2LoginConfigurer ->
 					oauth2LoginConfigurer
 						//.loginPage("/user/login").failureUrl("/login-error").permitAll()
@@ -454,38 +492,6 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 	@Override
 	public void setEnvironment(Environment environment) {
 		this.environment = environment;
-	}
-
-	public OAuth2AccessTokenResponse tokenResponse(UserDetails userDetails) {
-		JwsHeader jwsHeader = JwsHeader.with(SignatureAlgorithm.RS256)
-			.type("JWT")
-			.build();
-
-		Instant issuedAt = Clock.system(ZoneId.of("Asia/Shanghai")).instant();
-		Set<String> scopes = userDetails.getAuthorities()
-			.stream()
-			.map(GrantedAuthority::getAuthority)
-			.collect(Collectors.toSet());
-
-		Instant expiresAt = issuedAt.plusSeconds(5 * 60);
-		JwtClaimsSet claimsSet = JwtClaimsSet.builder()
-			.issuer("https://felord.cn")
-			.subject(userDetails.getUsername())
-			.expiresAt(expiresAt)
-			.audience(Arrays.asList("client1", "client2"))
-			.issuedAt(issuedAt)
-			.claim("scope", scopes)
-			.build();
-
-		JWKSource jwkSource = ContextUtils.getBean(JWKSource.class, false);
-		Jwt jwt = new NimbusJwtEncoder(jwkSource).encode(
-			JwtEncoderParameters.from(jwsHeader, claimsSet));
-		return OAuth2AccessTokenResponse.withToken(jwt.getTokenValue())
-			.tokenType(OAuth2AccessToken.TokenType.BEARER)
-			.expiresIn(expiresAt.getEpochSecond())
-			.scopes(scopes)
-			.refreshToken(UUID.randomUUID().toString())
-			.build();
 	}
 
 

@@ -291,28 +291,28 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>> ext
 	@Override
 	public void configure(H builder) throws Exception {
 		if (accountLoginFilterConfigurer != null) {
-			accountLoginFilterConfigurer.init(builder);
+			accountLoginFilterConfigurer.configure(builder);
 		}
 		if (accountVerificationLoginFilterConfigurer != null) {
-			accountVerificationLoginFilterConfigurer.init(builder);
+			accountVerificationLoginFilterConfigurer.configure(builder);
 		}
 		if (faceLoginFilterConfigurer != null) {
-			faceLoginFilterConfigurer.init(builder);
+			faceLoginFilterConfigurer.configure(builder);
 		}
 		if (fingerprintLoginFilterConfigurer != null) {
-			fingerprintLoginFilterConfigurer.init(builder);
+			fingerprintLoginFilterConfigurer.configure(builder);
 		}
 		if (gesturesLoginFilterConfigurer != null) {
-			gesturesLoginFilterConfigurer.init(builder);
+			gesturesLoginFilterConfigurer.configure(builder);
 		}
 		if (mpLoginFilterConfigurer != null) {
-			mpLoginFilterConfigurer.init(builder);
+			mpLoginFilterConfigurer.configure(builder);
 		}
 		if (oneClickLoginFilterConfigurer != null) {
-			oneClickLoginFilterConfigurer.init(builder);
+			oneClickLoginFilterConfigurer.configure(builder);
 		}
 		if (qrcodeLoginFilterConfigurer != null) {
-			qrcodeLoginFilterConfigurer.init(builder);
+			qrcodeLoginFilterConfigurer.configure(builder);
 		}
 		if (phoneLoginFilterConfigurer != null) {
 			phoneLoginFilterConfigurer.configure(builder);

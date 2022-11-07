@@ -4,6 +4,7 @@ package com.taotao.cloud.auth.biz.authentication.miniapp;
 import com.taotao.cloud.auth.biz.authentication.AbstractLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -15,72 +16,82 @@ import org.springframework.util.Assert;
 
 public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	AbstractLoginFilterConfigurer<H, MiniAppLoginFilterConfigurer<H>, MiniAppAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
-    private MiniAppUserDetailsService miniAppUserDetailsService;
 
-    private JwtTokenGenerator jwtTokenGenerator;
+	private MiniAppUserDetailsService miniAppUserDetailsService;
 
-    private MiniAppClientService miniAppClientService;
+	private JwtTokenGenerator jwtTokenGenerator;
 
-    private MiniAppSessionKeyCache miniAppSessionKeyCache;
+	private MiniAppClientService miniAppClientService;
 
-    public MiniAppLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-        super(securityConfigurer, new MiniAppAuthenticationFilter(), "/login/miniapp");
-    }
+	private MiniAppSessionKeyCache miniAppSessionKeyCache;
 
-    public MiniAppLoginFilterConfigurer<H> miniAppUserDetailsService(MiniAppUserDetailsService miniAppUserDetailsService) {
-        this.miniAppUserDetailsService = miniAppUserDetailsService;
-        return this;
-    }
+	public MiniAppLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
+		super(securityConfigurer, new MiniAppAuthenticationFilter(), "/login/miniapp");
+	}
 
-    public MiniAppLoginFilterConfigurer<H> miniAppClientService(MiniAppClientService miniAppClientService) {
-        this.miniAppClientService = miniAppClientService;
-        return this;
-    }
+	public MiniAppLoginFilterConfigurer<H> miniAppUserDetailsService(
+		MiniAppUserDetailsService miniAppUserDetailsService) {
+		this.miniAppUserDetailsService = miniAppUserDetailsService;
+		return this;
+	}
 
-    public MiniAppLoginFilterConfigurer<H> miniAppSessionKeyCache(MiniAppSessionKeyCache miniAppSessionKeyCache) {
-        this.miniAppSessionKeyCache = miniAppSessionKeyCache;
-        return this;
-    }
+	public MiniAppLoginFilterConfigurer<H> miniAppClientService(
+		MiniAppClientService miniAppClientService) {
+		this.miniAppClientService = miniAppClientService;
+		return this;
+	}
 
-    public MiniAppLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
-        this.jwtTokenGenerator = jwtTokenGenerator;
-        return this;
-    }
+	public MiniAppLoginFilterConfigurer<H> miniAppSessionKeyCache(
+		MiniAppSessionKeyCache miniAppSessionKeyCache) {
+		this.miniAppSessionKeyCache = miniAppSessionKeyCache;
+		return this;
+	}
 
-    @Override
-    public void configure(H http) throws Exception {
-        super.configure(http);
-        initPreAuthenticationFilter(http);
-    }
+	public MiniAppLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
+		this.jwtTokenGenerator = jwtTokenGenerator;
+		return this;
+	}
 
-    private void initPreAuthenticationFilter(H http) {
-        ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-        MiniAppClientService miniAppClientService = this.miniAppClientService != null ? this.miniAppClientService : getBeanOrNull(applicationContext, MiniAppClientService.class);
-        MiniAppSessionKeyCache miniAppSessionKeyCache = this.miniAppSessionKeyCache != null ? this.miniAppSessionKeyCache : getBeanOrNull(applicationContext, MiniAppSessionKeyCache.class);
-        MiniAppPreAuthenticationFilter miniAppPreAuthenticationFilter = new MiniAppPreAuthenticationFilter(miniAppClientService, miniAppSessionKeyCache);
-        http.addFilterBefore(postProcess(miniAppPreAuthenticationFilter), LogoutFilter.class);
-    }
+	@Override
+	public void configure(H http) throws Exception {
+		super.configure(http);
+		initPreAuthenticationFilter(http);
+	}
 
-    @Override
-    protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
-        return new AntPathRequestMatcher(loginProcessingUrl, "POST");
-    }
+	private void initPreAuthenticationFilter(H http) {
+		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+		MiniAppClientService miniAppClientService =
+			this.miniAppClientService != null ? this.miniAppClientService
+				: getBeanOrNull(applicationContext, MiniAppClientService.class);
+		MiniAppSessionKeyCache miniAppSessionKeyCache =
+			this.miniAppSessionKeyCache != null ? this.miniAppSessionKeyCache
+				: getBeanOrNull(applicationContext, MiniAppSessionKeyCache.class);
+		MiniAppPreAuthenticationFilter miniAppPreAuthenticationFilter = new MiniAppPreAuthenticationFilter(
+			miniAppClientService, miniAppSessionKeyCache);
+		http.addFilterBefore(postProcess(miniAppPreAuthenticationFilter), LogoutFilter.class);
+	}
 
-    @Override
-    protected AuthenticationProvider authenticationProvider(H http) {
-        ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-        MiniAppUserDetailsService miniAppUserDetailsService = this.miniAppUserDetailsService != null ? this.miniAppUserDetailsService : getBeanOrNull(applicationContext, MiniAppUserDetailsService.class);
-        return new MiniAppAuthenticationProvider(miniAppUserDetailsService);
-    }
+	@Override
+	protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
+		return new AntPathRequestMatcher(loginProcessingUrl, "POST");
+	}
 
-    @Override
-    protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
-        if (this.jwtTokenGenerator == null) {
-            ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-            jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
-        }
-        Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-        //return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-	    return null;
-    }
+	@Override
+	protected AuthenticationProvider authenticationProvider(H http) {
+		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+		MiniAppUserDetailsService miniAppUserDetailsService =
+			this.miniAppUserDetailsService != null ? this.miniAppUserDetailsService
+				: getBeanOrNull(applicationContext, MiniAppUserDetailsService.class);
+		return new MiniAppAuthenticationProvider(miniAppUserDetailsService);
+	}
+
+	@Override
+	protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
+		if (this.jwtTokenGenerator == null) {
+			ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
+		}
+		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
+	}
 }

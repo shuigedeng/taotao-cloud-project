@@ -4,6 +4,7 @@ import com.taotao.cloud.auth.biz.authentication.AbstractLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.mp.service.MpUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -20,7 +21,7 @@ public class MpLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 	private JwtTokenGenerator jwtTokenGenerator;
 
 	public MpLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new MpAuthenticationFilter(), "/login/captcha");
+		super(securityConfigurer, new MpAuthenticationFilter(), "/login/mp");
 	}
 
 	public MpLoginFilterConfigurer<H> mpUserDetailsService(
@@ -58,7 +59,6 @@ public class MpLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extends
 			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
 		}
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		//return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-		return null;
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 }

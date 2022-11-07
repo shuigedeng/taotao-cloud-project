@@ -14,13 +14,8 @@
 package com.taotao.cloud.auth.biz.controller;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.sys.api.dubbo.IDubboDictService;
-import com.taotao.cloud.sys.api.feign.IFeignDictApi;
-import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,11 +34,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/test")
 public class MessagesController {
 
-	@Autowired
-	private IFeignDictApi feignDictService;
-
-	@DubboReference(check = false)
-	private IDubboDictService dubboDictService;
+	//@Autowired
+	//private IFeignDictApi feignDictService;
+	//
+	//@DubboReference(check = false)
+	//private IDubboDictService dubboDictService;
 
 	@Operation(summary = "测试消息", description = "测试消息")
 	@GetMapping("/messages")
@@ -51,13 +46,12 @@ public class MessagesController {
 		LogUtils.info("slfdlaskdf;lasjdf;lj");
 		//DubboDictRes dubboDictRes = dubboDictService.findByCode(1);
 
-		try {
-			FeignDictResponse feignDictResponse = feignDictService.findByCode("sd");
-		} catch (Exception e) {
-			LogUtils.error(e);
-			throw new RuntimeException(e);
-		}
-
+		//try {
+		//	FeignDictResponse feignDictResponse = feignDictService.findByCode("sd");
+		//} catch (Exception e) {
+		//	LogUtils.error(e);
+		//	throw new RuntimeException(e);
+		//}
 
 		return new String[]{"Message 1", "Message 2", "Message 3"};
 	}

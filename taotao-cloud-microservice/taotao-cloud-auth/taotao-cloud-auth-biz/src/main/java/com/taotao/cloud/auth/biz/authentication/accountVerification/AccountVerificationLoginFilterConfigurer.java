@@ -5,6 +5,7 @@ import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.accountVerification.service.AccountVerificationService;
 import com.taotao.cloud.auth.biz.authentication.accountVerification.service.AccountVerificationUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -22,8 +23,10 @@ public class AccountVerificationLoginFilterConfigurer<H extends HttpSecurityBuil
 
 	private JwtTokenGenerator jwtTokenGenerator;
 
-	public AccountVerificationLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new AccountVerificationAuthenticationFilter(), "/login/captcha");
+	public AccountVerificationLoginFilterConfigurer(
+		LoginFilterSecurityConfigurer<H> securityConfigurer) {
+		super(securityConfigurer, new AccountVerificationAuthenticationFilter(),
+			"/login/account/verification");
 	}
 
 	public AccountVerificationLoginFilterConfigurer<H> accountVerificationUserDetailsService(
@@ -32,12 +35,14 @@ public class AccountVerificationLoginFilterConfigurer<H extends HttpSecurityBuil
 		return this;
 	}
 
-	public AccountVerificationLoginFilterConfigurer<H> accountVerificationService(AccountVerificationService accountVerificationService) {
+	public AccountVerificationLoginFilterConfigurer<H> accountVerificationService(
+		AccountVerificationService accountVerificationService) {
 		this.accountVerificationService = accountVerificationService;
 		return this;
 	}
 
-	public AccountVerificationLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
+	public AccountVerificationLoginFilterConfigurer<H> jwtTokenGenerator(
+		JwtTokenGenerator jwtTokenGenerator) {
 		this.jwtTokenGenerator = jwtTokenGenerator;
 		return this;
 	}
@@ -51,13 +56,16 @@ public class AccountVerificationLoginFilterConfigurer<H extends HttpSecurityBuil
 	protected AuthenticationProvider authenticationProvider(H http) {
 		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 		AccountVerificationUserDetailsService captchaUserDetailsService =
-			this.accountVerificationUserDetailsService != null ? this.accountVerificationUserDetailsService
+			this.accountVerificationUserDetailsService != null
+				? this.accountVerificationUserDetailsService
 				: getBeanOrNull(applicationContext, AccountVerificationUserDetailsService.class);
 		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
-		AccountVerificationService captchaService = this.accountVerificationService != null ? this.accountVerificationService
-			: getBeanOrNull(applicationContext, AccountVerificationService.class);
+		AccountVerificationService captchaService =
+			this.accountVerificationService != null ? this.accountVerificationService
+				: getBeanOrNull(applicationContext, AccountVerificationService.class);
 		Assert.notNull(captchaService, "captchaService is required");
-		return new AccountVerificationAuthenticationProvider(captchaUserDetailsService, captchaService);
+		return new AccountVerificationAuthenticationProvider(captchaUserDetailsService,
+			captchaService);
 	}
 
 	@Override
@@ -67,7 +75,6 @@ public class AccountVerificationLoginFilterConfigurer<H extends HttpSecurityBuil
 			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
 		}
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		//return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-		return null;
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 }

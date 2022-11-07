@@ -1,14 +1,12 @@
 package com.taotao.cloud.auth.biz.authentication.oauth2;
 
-import java.io.UnsupportedEncodingException;
+import com.taotao.cloud.auth.biz.authentication.oauth2.wechat.WechatParameterNames;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.function.Consumer;
-
-import com.taotao.cloud.auth.biz.authentication.oauth2.wechat.WechatParameterNames;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -208,12 +206,7 @@ public enum ClientProviders {
 	}
 
 	private static String encodeClientCredential(String clientCredential) {
-		try {
-			return URLEncoder.encode(clientCredential, StandardCharsets.UTF_8.toString());
-		} catch (UnsupportedEncodingException ex) {
-			// Will not happen since UTF-8 is a standard charset
-			throw new IllegalArgumentException(ex);
-		}
+		return URLEncoder.encode(clientCredential, StandardCharsets.UTF_8);
 	}
 
 	/**

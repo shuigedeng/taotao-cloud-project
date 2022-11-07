@@ -5,6 +5,7 @@ import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeService;
 import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -21,7 +22,7 @@ public class QrcodeLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exten
 	private JwtTokenGenerator jwtTokenGenerator;
 
 	public QrcodeLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new QrcodeAuthenticationFilter(), "/login/captcha");
+		super(securityConfigurer, new QrcodeAuthenticationFilter(), "/login/qrcode");
 	}
 
 	public QrcodeLoginFilterConfigurer<H> accountUserDetailsService(
@@ -68,7 +69,6 @@ public class QrcodeLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exten
 			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
 		}
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		//return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-		return null;
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 }
