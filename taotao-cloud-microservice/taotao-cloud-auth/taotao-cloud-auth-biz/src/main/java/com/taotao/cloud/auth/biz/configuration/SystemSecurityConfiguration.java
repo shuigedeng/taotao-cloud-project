@@ -20,15 +20,6 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -74,6 +65,16 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 /**
@@ -214,7 +215,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 
 	@Bean
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,
-		DelegateClientRegistrationRepository delegateClientRegistrationRepository)
+														  DelegateClientRegistrationRepository delegateClientRegistrationRepository)
 		throws Exception {
 		http
 			.formLogin(formLoginConfigurer -> {
@@ -244,6 +245,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 					.mvcMatchers("/messages/**").access("hasAuthority('ADMIN')")
 					.anyRequest().authenticated()
 			)
+			// **************************************资源服务器配置***********************************************
 			.oauth2ResourceServer(oauth2ResourceServerCustomizer ->
 				oauth2ResourceServerCustomizer
 					.accessDeniedHandler(accessDeniedHandler)
@@ -260,6 +262,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 							.jwtAuthenticationConverter(jwtAuthenticationConverter())
 					)
 			)
+			// **************************************自定义登录配置***********************************************
 			.apply(new LoginFilterSecurityConfigurer<>())
 			// 用户+密码登录
 			.accountLogin(accountLoginConfigurer -> {
@@ -287,18 +290,21 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			})
 			//手机扫码登录
 			.qrcodeLogin(qrcodeLoginConfigurer -> {
-				qrcodeLoginConfigurer.qrcodeService(new QrcodeService() {
-					@Override
-					public boolean verifyQrcode(String qrcode) {
-						return false;
-					}
-				}).accountUserDetailsService(new QrcodeUserDetailsService() {
-					@Override
-					public UserDetails loadUserByPhone(String phone)
-						throws UsernameNotFoundException {
-						return null;
-					}
-				}).jwtTokenGenerator(this::tokenResponse);
+				qrcodeLoginConfigurer
+					.qrcodeService(new QrcodeService() {
+						@Override
+						public boolean verifyQrcode(String qrcode) {
+							return false;
+						}
+					})
+					.accountUserDetailsService(new QrcodeUserDetailsService() {
+						@Override
+						public UserDetails loadUserByPhone(String phone)
+							throws UsernameNotFoundException {
+							return null;
+						}
+					})
+					.jwtTokenGenerator(this::tokenResponse);
 			})
 			// 手机号码+短信登录
 			.phoneLogin(phoneLoginConfigurer ->
@@ -400,6 +406,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 				"1000005")
 			// 微信扫码登录 下面的参数是假的
 			.wechatWebLoginclient("wxafd62c05779e50bd", "ab24fce07ea84228dc4e64720f8bdefd")
+			// **************************************oauth2登录配置***********************************************
 			.oAuth2LoginConfigurerConsumer(oauth2LoginConfigurer ->
 					oauth2LoginConfigurer
 						//.loginPage("/user/login").failureUrl("/login-error").permitAll()
@@ -410,13 +417,9 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 						// 登录请求url
 						// .loginProcessingUrl(DEFAULT_FILTER_PROCESSES_URI)
 						//.loginPage("/login")
-						.successHandler((request, response, authentication) -> {
-							LogUtils.info("oAuth2Login用户认证成功");
-						})
+						.successHandler(authenticationSuccessHandler)
 						// 认证失败后的处理器
-						.failureHandler((request, response, exception) -> {
-							LogUtils.info("oAuth2Login用户认证失败");
-						})
+						.failureHandler(authenticationFailureHandler)
 				// // 配置授权服务器端点信息
 				// .authorizationEndpoint(authorizationEndpointCustomizer ->
 				// 	authorizationEndpointCustomizer

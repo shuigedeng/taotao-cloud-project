@@ -15,13 +15,14 @@
  */
 package com.taotao.cloud.auth.biz.service;
 
-import java.security.Principal;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+
+import java.security.Principal;
 
 /**
  * CloudJdbcOAuth2AuthorizationConsentService
@@ -34,8 +35,7 @@ public class CloudJdbcOAuth2AuthorizationConsentService extends
 	JdbcOAuth2AuthorizationConsentService {
 
 	public CloudJdbcOAuth2AuthorizationConsentService(
-		JdbcTemplate jdbcTemplate,
-		RegisteredClientRepository registeredClientRepository) {
+		JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
 		super(jdbcTemplate, registeredClientRepository);
 	}
 
