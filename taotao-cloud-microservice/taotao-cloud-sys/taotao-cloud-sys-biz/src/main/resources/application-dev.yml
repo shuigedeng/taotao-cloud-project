@@ -95,37 +95,35 @@ easy-es:
   #如果无账号密码则可不配置此行
   password:
   # 连接超时时间 单位:ms
-  connectTimeout: 5000
+  connect-timeout: 5000
   # 通信超时时间 单位:ms
-  socketTimeout: 5000
+  socket-timeout: 5000
   # 请求超时时间 单位:ms
-  keepAliveMillis: 5000
+  keep-alive-millis: 5000
   # 连接请求超时时间 单位:ms
-  connectionRequestTimeout: 5000
+  connection-request-timeout: 5000
   # 最大连接数 单位:个
-  maxConnTotal: 100
+  max-conn-total: 100
   # 最大连接路由数 单位:个
-  maxConnPerRoute: 100
+  max-conn-per-route: 100
   global-config:
-    printDsl: true
     process-index-mode: SMOOTHLY
     async-process-index-blocking: true
     distributed: true
-    activeReleaseIndexMaxRetry: 60
-    activeReleaseIndexFixedDelay: 180
     db-config:
       # 索引前缀,可用于区分环境  默认为空
       table-prefix: tt_
-      # id生成策略 默认为auto
-      id-type: none
       # 字段更新策略 默认为not_null
       field-strategy: IGNORED
-      mapUnderscoreToCamelCase: false
-      idType: NONE
-      enableTrackTotalHits: true
-      refreshPolicy: NONE
-      enableMust2Filter: false
-      batchUpdateThreshold: 10000
+      map-underscore-to-camel-case: false
+      id-type: NONE
+      enable-track-total-hits: true
+      refresh-policy: NONE
+      enable-must2-filter: false
+      batch-update-threshold: 10000
+    print-dsl: true
+    active-release-index-max-retry: 60
+    active-release-index-fixed-delay: 180
 
 redisson:
   #在Redis节点里显示的客户端名称。
@@ -145,19 +143,19 @@ redisson:
   #TransportMode.NIO,TransportMode.EPOLL - 需要依赖里有netty-transport-native-epoll包（Linux） TransportMode.KQUEUE - 需要依赖里有 netty-transport-native-kqueue包（macOS）
   transport_mode: nio
   #如果当前连接池里的连接数量超过了最小空闲连接数，而同时有连接空闲时间超过了该数值，那么这些连接将会自动被关闭，并从连接池里去掉。时间单位是毫秒
-  idleConnectionTimeout: 1000
+  idle-connection-timeout: 1000
   #同任何节点建立连接时的等待超时。时间单位是毫秒
-  connectTimeout: 1000
+  connect-timeout: 1000
   #等待节点回复命令的时间。该时间从命令发送成功时开始计时。
   timeout: 3000
   #如果尝试达到 retryAttempts（命令失败重试次数） 仍然不能将命令发送至某个指定的节点时，将抛出错误。如果尝试在此限制之内发送成功，则开始启用 timeout（命令等待超时） 计时。
-  retryAttempts: 3
+  retry-attempts: 3
   #在一条命令发送失败以后，等待重试发送的时间间隔。时间单位是毫秒。
-  retryInterval: 1500
+  retry-interval: 1500
   #	每个连接的最大订阅数量。
-  subscriptionsPerConnection: 5
+  subscriptions-per-connection: 5
   #开启SSL终端识别能力。
-  sslEnableEndpointIdentification: true
+  ssl-enable-endpoint-identification: true
   #确定采用哪种方式（JDK或OPENSSL）来实现SSL连接。
   ssl-provider: jdk
   ssl-truststore:
@@ -165,11 +163,11 @@ redisson:
   ssl-keystore:
   ssl-keystore-password:
   #监控锁的看门狗超时时间单位为毫秒。该参数只适用于分布式锁的加锁请求中未明确使用leaseTimeout参数的情况。如果该看门口未使用lockWatchdogTimeout去重新调整一个分布式锁的lockWatchdogTimeout超时，那么这个锁将变为失效状态。这个参数可以用来避免由Redisson客户端节点宕机或其他原因造成死锁的情况。
-  lockWatchdogTimeout: 30000
+  lock-watchdog-timeout: 30000
   #通过该参数来修改是否按订阅发布消息的接收顺序出来消息，如果选否将对消息实行并行处理，该参数只适用于订阅发布消息的情况。
-  keepPubSubOrder: true
-  pingConnectionInterval: 30000
-  keepAlive: false
+  keep-pub-sub-order: true
+  ping-connection-interval: 30000
+  keep-alive: false
   tcpNoDelay: false
   referenceEnabled: true
   useScriptCache: false
@@ -580,88 +578,155 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.actuate.autoconfigure.elasticsearch.ElasticSearchReactiveHealthContributorAutoConfiguration
-  #  dynamic:
-  #    tp:
-  #      enabled: true
-  #      enabledBanner: true           # 是否开启banner打印，默认true
-  #      enabledCollect: true          # 是否开启监控指标采集，默认false
-  #      collectorTypes: micrometer,logging     # 监控数据采集器类型（logging | micrometer | internal_logging），默认micrometer
-  #      logPath: ${user.home}/logs/${spring.application.name}/dynamic-tp/access.log          # 监控日志数据路径，默认 ${user.home}/logs
-  #      monitorInterval: 5            # 监控时间间隔（报警判断、指标采集），默认5s
-  #      platforms: # 通知报警平台配置
-  #        - platform: wechat
-  #          urlKey: 3a7500-1287-4bd-a798-c5c3d8b69c  # 替换
-  #          receivers: test1,test2                   # 接受人企微名称
-  #        - platform: ding
-  #          urlKey: f80dad441fcd655438f4a08dcd6a     # 替换
-  #          secret: SECb5441fa6f375d5b9d21           # 替换，非sign模式可以没有此值
-  #          receivers: 15810119805                   # 钉钉账号手机号
-  #        - platform: lark
-  #          urlKey: 0d944ae7-b24a-40                 # 替换
-  #          receivers: test1,test2                   # 接受人飞书名称/openid
-  #      tomcatTp: # tomcat web server线程池配置
-  #        corePoolSize: 100
-  #        maximumPoolSize: 400
-  #        keepAliveTime: 60
-  #      jettyTp: # jetty web server线程池配置
-  #        corePoolSize: 100
-  #        maximumPoolSize: 400
-  #      undertowTp: # undertow web server线程池配置
-  #        corePoolSize: 100
-  #        maximumPoolSize: 400
-  #        keepAliveTime: 60
-  #      hystrixTp: # hystrix 线程池配置
-  #        - threadPoolName: hystrix1
-  #          corePoolSize: 100
-  #          maximumPoolSize: 400
-  #          keepAliveTime: 60
-  #      dubboTp: # dubbo 线程池配置
-  #        - threadPoolName: dubboTp#20880
-  #          corePoolSize: 100
-  #          maximumPoolSize: 400
-  #          keepAliveTime: 60
-  #      rocketMqTp: # rocketmq 线程池配置
-  #        - threadPoolName: group1#topic1
-  #          corePoolSize: 200
-  #          maximumPoolSize: 400
-  #          keepAliveTime: 60
-  #      executors: # 动态线程池配置，都有默认值，采用默认值的可以不配置该项，减少配置量
-  #        - threadPoolName: dtpExecutor1
-  #          executorType: common                     # 线程池类型common、eager：适用于io密集型
-  #          corePoolSize: 6
-  #          maximumPoolSize: 8
-  #          queueCapacity: 200
-  #          queueType: VariableLinkedBlockingQueue   # 任务队列，查看源码QueueTypeEnum枚举类
-  #          rejectedHandlerType: CallerRunsPolicy    # 拒绝策略，查看RejectedTypeEnum枚举类
-  #          keepAliveTime: 50
-  #          allowCoreThreadTimeOut: false                  # 是否允许核心线程池超时
-  #          threadNamePrefix: test                         # 线程名前缀
-  #          waitForTasksToCompleteOnShutdown: false        # 参考spring线程池设计，优雅关闭线程池
-  #          awaitTerminationSeconds: 5                     # 单位（s）
-  #          preStartAllCoreThreads: false                  # 是否预热所有核心线程，默认false
-  #          runTimeout: 200                                # 任务执行超时阈值，目前只做告警用，单位（ms）
-  #          queueTimeout: 100                              # 任务在队列等待超时阈值，目前只做告警用，单位（ms）
-  #          taskWrapperNames: [ "ttl" ]                          # 任务包装器名称，集成TaskWrapper接口
-  #          notifyItems: # 报警项，不配置自动会按默认值配置（变更通知、容量报警、活性报警、拒绝报警、任务超时报警）
-  #            - type: capacity               # 报警项类型，查看源码 NotifyTypeEnum枚举类
-  #              enabled: true
-  #              threshold: 80                # 报警阈值
-  #              platforms: [ ding,wechat ]     # 可选配置，不配置默认拿上层platforms配置的所以平台
-  #              interval: 120                # 报警间隔（单位：s）
-  #            - type: change
-  #              enabled: true
-  #            - type: liveness
-  #              enabled: true
-  #              threshold: 80
-  #            - type: reject
-  #              enabled: true
-  #              threshold: 1
-  #            - type: run_timeout
-  #              enabled: true
-  #              threshold: 1
-  #            - type: queue_timeout
-  #              enabled: true
-  #              threshold: 1
+  dynamic:
+    tp:
+      enabled: true
+      enabledBanner: true           # 是否开启banner打印，默认true
+      enabledCollect: true          # 是否开启监控指标采集，默认false
+      collectorTypes: micrometer,logging     # 监控数据采集器类型（logging | micrometer | internal_logging），默认micrometer
+      logPath: /home/logs           # 监控日志数据路径，默认 ${user.home}/logs，采集类型非logging不用配置
+      monitorInterval: 5            # 监控时间间隔（报警判断、指标采集），默认5s
+      configType: yml               # 配置文件类型，非cloud nacos 和 apollo需配置，其他不用配
+      nacos: # nacos配置，不配置有默认值（规则appname-dev.yml这样），cloud应用不需要配置
+        dataId: taotao-cloud-sys-dev.yml
+        group: SYS_GROUP
+        namespace: taotao-cloud-dev
+      apollo: # apollo配置，不配置默认拿apollo配置第一个namespace
+        namespace: dynamic-tp-demo-dev.yml
+      platforms: # 通知报警平台配置
+        - platform: wechat
+          urlKey: 3a700-127-4bd-a798-c53d8b69c     # 替换
+          receivers: test1,test2                   # 接受人企微名称
+        - platform: ding
+          urlKey: f80dad441fcd655438f4a08dcd6a     # 替换
+          secret: SECb5441fa6f375d5b9d21           # 替换，非sign模式可以没有此值
+          receivers: 18888888888                   # 钉钉账号手机号
+        - platform: lark
+          urlKey: 0d944ae7-b24a-40                 # 替换
+          receivers: test1,test2                   # 接受人飞书名称/openid
+        - platform: email
+          receivers: "981376577@qq.com"            # 接受人邮箱 多个逗号连接
+      tomcatTp: # tomcat webserver线程池配置
+        threadPoolName: taotao-cloud-sys-tomcat-executor
+        threadPoolAliasName: tomcat线程池
+        corePoolSize: 100
+        maximumPoolSize: 200
+        keepAliveTime: 60
+      jettyTp: # jetty weberver线程池配置
+        threadPoolName: taotao-cloud-sys-jetty-executor
+        threadPoolAliasName: jetty线程池
+        corePoolSize: 100
+        maximumPoolSize: 200
+        keepAliveTime: 60
+      undertowTp: # undertow webserver线程池配置
+        threadPoolName: taotao-cloud-sys-undertow-executor
+        threadPoolAliasName: undertow线程池
+        corePoolSize: 100
+        maximumPoolSize: 200
+        keepAliveTime: 60
+        notifyItems: # 报警项，不配置自动会按默认值配置（变更通知、容量报警、活性报警）
+          - type: capacity                       # 报警项类型，查看源码 NotifyTypeEnum枚举类
+            enabled: true
+            threshold: 80                        # 报警阈值
+            platforms: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
+            interval: 120                        # 报警间隔（单位：s）
+      dubboTp: # dubbo 线程池配置
+        - threadPoolName: dubboTp#20883            # 名称规则：dubboTp + "#" + 协议端口
+          threadPoolAliasName: 测试线程池             # dubbo线程池
+          corePoolSize: 100
+          maximumPoolSize: 200
+          keepAliveTime: 60
+          notifyItems: # 报警项，不配置自动会按默认值配置（变更通知、容量报警、活性报警）
+            - type: capacity                       # 报警项类型，查看源码 NotifyTypeEnum枚举类
+              enabled: true
+              threshold: 80                        # 报警阈值
+              platforms: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
+              interval: 120                        # 报警间隔（单位：s）
+      rocketMqTp: # rocketmq 线程池配置
+        - threadPoolName: group1#topic1            # 名称规则：group + "#" + topic
+          corePoolSize: 200
+          maximumPoolSize: 200
+          keepAliveTime: 60
+          notifyItems: # 报警项，不配置自动会按默认值配置（变更通知、容量报警、活性报警）
+            - type: capacity                       # 报警项类型，查看源码 NotifyTypeEnum枚举类
+              enabled: true
+              threshold: 80                        # 报警阈值
+              platforms: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
+              interval: 120                        # 报警间隔（单位：s）
+      executors: # 动态线程池配置，都有默认值，采用默认值的可以不配置该项，减少配置量
+        - threadPoolName: taotao-cloud-sys-executor
+          threadNamePrefix: taotao-cloud-sys-executor  # 线程名前缀
+          threadPoolAliasName: 测试线程池             # 线程池别名
+          executorType: common                     # 线程池类型common、eager：适用于io密集型
+          corePoolSize: 6
+          maximumPoolSize: 8
+          queueCapacity: 200
+          queueType: VariableLinkedBlockingQueue   # 任务队列，查看源码QueueTypeEnum枚举类
+          rejectedHandlerType: CallerRunsPolicy    # 拒绝策略，查看RejectedTypeEnum枚举类
+          keepAliveTime: 50
+          allowCoreThreadTimeOut: false                  # 是否允许核心线程池超时
+          waitForTasksToCompleteOnShutdown: false        # 参考spring线程池设计，优雅关闭线程池
+          awaitTerminationSeconds: 5                     # 单位（s）
+          preStartAllCoreThreads: false                  # 是否预热所有核心线程，默认false
+          runTimeout: 200                                # 任务执行超时阈值，目前只做告警用，单位（ms）
+          queueTimeout: 100                              # 任务在队列等待超时阈值，目前只做告警用，单位（ms）
+          taskWrapperNames: [ "ttl", "mdc", "swTrace" ]                      # 任务包装器名称，集成TaskWrapper接口
+          notifyItems: # 报警项，不配置自动会按默认值配置（变更通知、容量报警、活性报警、拒绝报警、任务超时报警）
+            - type: capacity               # 报警项类型，查看源码 NotifyTypeEnum枚举类
+              enabled: true
+              threshold: 80                # 报警阈值
+              platforms:
+                - ding
+                - wechat
+                - email
+              interval: 120                # 报警间隔（单位：s）
+              clusterLimit: 1
+            - type: change
+              enabled: true
+              threshold: 80                # 报警阈值
+              platforms:
+                - ding
+                - wechat
+                - email
+              interval: 120                # 报警间隔（单位：s）
+              clusterLimit: 1
+            - type: liveness
+              enabled: true
+              threshold: 80                # 报警阈值
+              platforms:
+                - ding
+                - wechat
+                - email
+              interval: 120                # 报警间隔（单位：s）
+              clusterLimit: 1
+            - type: reject
+              enabled: true
+              threshold: 1                # 报警阈值
+              platforms:
+                - ding
+                - wechat
+                - email
+              interval: 120                # 报警间隔（单位：s）
+              clusterLimit: 1
+            - type: run_timeout
+              enabled: true
+              threshold: 1                # 报警阈值
+              platforms:
+                - ding
+                - wechat
+                - email
+              interval: 120                # 报警间隔（单位：s）
+              clusterLimit: 1
+            - type: queue_timeout
+              enabled: true
+              threshold: 1                # 报警阈值
+              platforms:
+                - ding
+                - wechat
+                - email
+              interval: 120                # 报警间隔（单位：s）
+              clusterLimit: 1
+
   gobrs:
     async:
       enable: true
@@ -849,7 +914,6 @@ spring:
             is-auto-commit: true
             connection-timeout: 30000
             idle-timeout: 25000
-            login-timeout: 5
             validation-timeout: 3000
             max-lifetime: 50000
             is-read-only: false
@@ -858,9 +922,6 @@ spring:
             min-idle: 10
             pool-name: DatebookHikariCP
             register-mbeans: true
-            data-source-properties:
-              cachePrepStmts: true
-              prepStmtCacheSize: 250
   jpa:
     database: mysql
     database-platform: mysql
@@ -898,6 +959,7 @@ spring:
     #    temp:
     #      use_jdbc_metadata_defaults: false
   mail:
+    title: ThreadPool Notify
     host: smtp.qq.com
     port: 465
     password: ${TAOTAO_CLOUD_MAIL_PASSWORD:xxx}

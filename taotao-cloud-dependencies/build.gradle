@@ -117,7 +117,7 @@ dependencies {
         api "de.codecentric:spring-boot-admin-starter-server:${springBootAdminVersion}"
         api "de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}"
         api "com.github.ulisesbocchio:jasypt-spring-boot-starter:${jasyptVersion}"
-        api "io.github.lyh200:dynamic-tp-spring-cloud-starter-nacos:${dynamicTpVersion}"
+        api "cn.dynamictp:dynamic-tp-spring-cloud-starter-nacos:${dynamicTpVersion}"
         api "joda-time:joda-time:${jodaTimeVersion}"
         api "org.anarres.lzo:lzo-core:${lzoVersion}"
         api "net.jpountz.lz4:lz4:${lz4Version}"
