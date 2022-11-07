@@ -4,6 +4,7 @@ import com.taotao.cloud.auth.biz.authentication.AbstractLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.oneClick.service.OneClickUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -20,7 +21,7 @@ public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 	private JwtTokenGenerator jwtTokenGenerator;
 
 	public OneClickLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new OneClickAuthenticationFilter(), "/login/captcha");
+		super(securityConfigurer, new OneClickAuthenticationFilter(), "/login/oneclick");
 	}
 
 	public OneClickLoginFilterConfigurer<H> oneClickUserDetailsService(
@@ -47,7 +48,7 @@ public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 			this.oneClickUserDetailsService != null ? this.oneClickUserDetailsService
 				: getBeanOrNull(applicationContext, OneClickUserDetailsService.class);
 		Assert.notNull(oneClickUserDetailsService, "oneClickUserDetailsService is required");
-		
+
 		return new OneClickAuthenticationProvider(oneClickUserDetailsService);
 	}
 
@@ -58,7 +59,6 @@ public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
 		}
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		//return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-		return null;
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 }

@@ -7,6 +7,8 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.jwt.Jwks;
 import com.taotao.cloud.auth.biz.jwt.JwtCustomizer;
 import com.taotao.cloud.auth.biz.jwt.JwtCustomizerServiceImpl;
+import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.jwt.JwtTokenGeneratorImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
@@ -40,6 +42,11 @@ public class JwtConfiguration {
 	@Bean
 	public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
 		return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+	}
+
+	@Bean
+	public JwtTokenGenerator jwtTokenGenerator() {
+		return new JwtTokenGeneratorImpl();
 	}
 
 	///**

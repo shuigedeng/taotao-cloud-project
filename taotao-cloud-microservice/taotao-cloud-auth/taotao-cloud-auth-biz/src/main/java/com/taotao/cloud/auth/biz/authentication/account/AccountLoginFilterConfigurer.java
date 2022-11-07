@@ -4,6 +4,7 @@ import com.taotao.cloud.auth.biz.authentication.AbstractLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.account.service.AccountUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -20,10 +21,11 @@ public class AccountLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 	private JwtTokenGenerator jwtTokenGenerator;
 
 	public AccountLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new AccountAuthenticationFilter(), "/login/captcha");
+		super(securityConfigurer, new AccountAuthenticationFilter(), "/login/account");
 	}
 
-	public AccountLoginFilterConfigurer<H> accountUserDetailsService(AccountUserDetailsService accountUserDetailsService) {
+	public AccountLoginFilterConfigurer<H> accountUserDetailsService(
+		AccountUserDetailsService accountUserDetailsService) {
 		this.accountUserDetailsService = accountUserDetailsService;
 		return this;
 	}
@@ -41,10 +43,10 @@ public class AccountLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 	@Override
 	protected AuthenticationProvider authenticationProvider(H http) {
 		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-		AccountUserDetailsService captchaUserDetailsService =
+		AccountUserDetailsService accountUserDetailsService =
 			this.accountUserDetailsService != null ? this.accountUserDetailsService
 				: getBeanOrNull(applicationContext, AccountUserDetailsService.class);
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
+		Assert.notNull(accountUserDetailsService, "accountUserDetailsService is required");
 		return new AccountAuthenticationProvider(accountUserDetailsService);
 	}
 
@@ -55,7 +57,7 @@ public class AccountLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
 		}
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		//return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-		return null;
+
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 }

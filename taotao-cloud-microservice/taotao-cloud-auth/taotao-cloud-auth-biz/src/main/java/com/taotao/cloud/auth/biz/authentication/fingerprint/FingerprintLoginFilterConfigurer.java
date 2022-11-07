@@ -4,6 +4,7 @@ import com.taotao.cloud.auth.biz.authentication.AbstractLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -20,7 +21,7 @@ public class FingerprintLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> 
 	private JwtTokenGenerator jwtTokenGenerator;
 
 	public FingerprintLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new FingerprintAuthenticationFilter(), "/login/captcha");
+		super(securityConfigurer, new FingerprintAuthenticationFilter(), "/login/fingerprint");
 	}
 
 	public FingerprintLoginFilterConfigurer<H> fingerprintUserDetailsService(
@@ -48,7 +49,7 @@ public class FingerprintLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> 
 			this.fingerprintUserDetailsService != null ? this.fingerprintUserDetailsService
 				: getBeanOrNull(applicationContext, FingerprintUserDetailsService.class);
 		Assert.notNull(fingerprintUserDetailsService, "fingerprintUserDetailsService is required");
-		
+
 		return new FingerprintAuthenticationProvider(fingerprintUserDetailsService);
 	}
 
@@ -59,7 +60,6 @@ public class FingerprintLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> 
 			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
 		}
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		//return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-		return null;
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 }

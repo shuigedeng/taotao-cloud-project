@@ -5,6 +5,7 @@ import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.phone.service.PhoneService;
 import com.taotao.cloud.auth.biz.authentication.phone.service.PhoneUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -23,10 +24,11 @@ public class PhoneLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extend
 	private JwtTokenGenerator jwtTokenGenerator;
 
 	public PhoneLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new PhoneAuthenticationFilter(), "/login/captcha");
+		super(securityConfigurer, new PhoneAuthenticationFilter(), "/login/phone");
 	}
 
-	public PhoneLoginFilterConfigurer<H> phoneUserDetailsService(PhoneUserDetailsService phoneUserDetailsService) {
+	public PhoneLoginFilterConfigurer<H> phoneUserDetailsService(
+		PhoneUserDetailsService phoneUserDetailsService) {
 		this.phoneUserDetailsService = phoneUserDetailsService;
 		return this;
 	}
@@ -69,7 +71,6 @@ public class PhoneLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> extend
 			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
 		}
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		//return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-		return null;
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 }

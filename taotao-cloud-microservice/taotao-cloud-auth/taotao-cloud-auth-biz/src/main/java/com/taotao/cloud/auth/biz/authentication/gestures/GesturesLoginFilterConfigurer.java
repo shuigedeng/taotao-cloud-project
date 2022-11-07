@@ -4,6 +4,7 @@ import com.taotao.cloud.auth.biz.authentication.AbstractLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -20,7 +21,7 @@ public class GesturesLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 	private JwtTokenGenerator jwtTokenGenerator;
 
 	public GesturesLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new GesturesAuthenticationFilter(), "/login/captcha");
+		super(securityConfigurer, new GesturesAuthenticationFilter(), "/login/gestures");
 	}
 
 	public GesturesLoginFilterConfigurer<H> gesturesUserDetailsService(
@@ -58,7 +59,6 @@ public class GesturesLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> ext
 			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
 		}
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		//return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-		return null;
+		return new LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 }
