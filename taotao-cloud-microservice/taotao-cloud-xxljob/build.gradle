@@ -2,8 +2,10 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
+
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-skywalking")
@@ -11,7 +13,6 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-freemarker"
-    implementation "org.springframework.boot:spring-boot-starter-mail"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-undertow"
 

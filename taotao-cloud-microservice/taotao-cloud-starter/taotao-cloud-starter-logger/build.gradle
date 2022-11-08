@@ -1,6 +1,5 @@
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
 
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-aop"

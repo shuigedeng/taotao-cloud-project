@@ -1,8 +1,6 @@
 {
   "serverUrl": "http://127.0.0.1",
   //服务器地址,非必须。导出postman建议设置成http://{{server}}方便直接在postman直接设置环境变量
-  "serverEnv": "http://{{server}}",
-  //导出postman时系统的公共url全局变量设置 @since 2.4.8,解决导出postman需要修改serverUrl问题
   "pathPrefix": "",
   //设置path前缀,非必须。如配置Servlet ContextPath 。@since 2.2.3
   "isStrict": false,
@@ -14,7 +12,7 @@
   "coverOld": true,
   //是否覆盖旧的文件，主要用于mardown文件覆盖
   "createDebugPage": true,
-  //@since 2.0.0 创建一个类似swagger的可调试接口的文档页面，仅在AllInOne模式中起作用。
+  //@since 2.0.0 smart-doc支持创建可以测试的html页面，仅在AllInOne模式中起作用。
   "packageFilters": "",
   //controller包过滤，多个包用英文逗号隔开，2.2.2开始需要采用正则：com.test.controller.*
   "md5EncryptedHtmlName": false,
@@ -22,9 +20,7 @@
   "style": "xt256",
   //基于highlight.js的代码高设置,可选值很多可查看码云wiki，喜欢配色统一简洁的同学可以不设置
   "projectName": "smart-doc",
-  //配置自己的项目名称，不设置则插件自动获取pom中的projectName
-  "framework": "spring",
-  //smart-doc默认支持spring和dubbo框架的文档，使用默认框架不用配置，当前支持spring、dubbo、JAX-RS、solon
+  //配置自己的项目名称
   "skipTransientField": true,
   //目前未实现
   "sortByTitle": false,
@@ -45,18 +41,16 @@
   //是否将请求示例展示在文档中，默认true，@since 1.9.0
   "responseExample": "true",
   //是否将响应示例展示在文档中，默认为true，@since 1.9.0
-  "requestParamsTable": true,
-  //@since 2.2.5,是否在文档中显示请求参数表，默认值为 true。
-  "responseParamsTable": true,
-  //@since 2.2.5,是否在文档中显示返回参数表，默认值为 true。
   "urlSuffix": ".do",
   //支持SpringMVC旧项目的url后缀,@since 2.1.0
   "displayActualType": false,
-  //配置true会在注释栏自动显示泛型的真实类型短类名，
+  //配置true会在注释栏自动显示泛型的真实类型短类名，@since 1.9.6
+  "appKey": "20201216788835306945118208",
+  // torna平台对接appKey,, @since 2.0.9
   "appToken": "c16931fa6590483fb7a4e85340fcbfef",
   //torna平台appToken,@since 2.0.9
-  "isReplace": true,
-  //torna 是否覆盖历史推送 @since 2.2.4
+  "secret": "W.ZyGMOB9Q0UqujVxnfi@.I#V&tUUYZR",
+  //torna平台secret，@since 2.0.9
   "openUrl": "http://localhost:7700/api",
   //torna平台地址，填写自己的私有化部署地址@since 2.0.9
   "debugEnvName": "测试环境",
@@ -80,15 +74,6 @@
       //数据字典字典码对应的字段名称
       "descField": "message"
       //数据字典对象的描述信息字典
-    },
-    {
-      // @since 2.4.6开始可以配置枚举实现的接口， 当配置接口时title将使用实现枚举的类描述
-      // 如果有已经实现的枚举需要忽略的话，可以在实现枚举类上增加@ignore进行忽略
-      "enumClassName": "com.xx.IEnum",
-      "codeField": "code",
-      //数据字典字典码对应的字段名称
-      "descField": "message"
-      //数据字典对象的描述信息字典
     }
   ],
   "errorCodeDictionaries": [
@@ -99,19 +84,8 @@
       //错误码枚举类
       "codeField": "code",
       //错误码的code码字段名称
-      "descField": "message",
-      //错误码的描述信息对应的字段名，
-      //自定义错误码解析器，使用枚举定义错误码的忽略此项。https://smart-doc-group.github.io/#/zh-cn/diy/advancedFeatures?id=
-      "valuesResolverClass": ""
-    },
-    {
-      // @since 2.4.6开始可以配置枚举实现的接口， 当配置接口时title将使用实现枚举的类描述
-      // 如果有已经实现的枚举需要忽略的话，可以在实现枚举类上增加@ignore进行忽略
-      "enumClassName": "com.xx.IEnum",
-      "codeField": "code",
-      //数据字典字典码对应的字段名称
       "descField": "message"
-      //数据字典对象的描述信息字典
+      //错误码的描述信息对应的字段名
     }
   ],
   "revisionLogs": [
@@ -177,9 +151,9 @@
       "since": "-",
       //什么版本添加的改请求头
       "pathPatterns": "/app/test/**",
-      //请看https://smart-doc-group.github.io/#/zh-cn/diy/advancedFeatures?id=公共请求头
+      //请看https://gitee.com/smart-doc-team/smart-doc/wikis/请求头高级配置?sort_id=4178978
       "excludePathPatterns": "/app/page/**"
-      //请看https://smart-doc-group.github.io/#/zh-cn/diy/advancedFeatures?id=公共请求头
+      //请看https://gitee.com/smart-doc-team/smart-doc/wikis/请求头高级配置?sort_id=4178978
     },
     {
       "name": "appkey",
@@ -196,46 +170,6 @@
       //正则表达式过滤请求头,url匹配上才会添加该请求头，多个正则用分号隔开
       "since": "-"
       //什么版本添加的改请求头
-    }
-  ],
-  "requestParams": [
-    //公共请求参数(通过拦截器处理的场景)，@since 2.2.3,没有需求请不要设置
-    {
-      "name": "configPathParam",
-      //请求参数名称
-      "type": "string",
-      //请求参数类型
-      "desc": "desc",
-      //请求参数描述信息
-      "paramIn": "path",
-      "value": "testPath",
-      //不设置默认null
-      "required": false,
-      //是否必须
-      "since": "-",
-      //什么版本添加的改请求参数
-      "pathPatterns": "**",
-      //正则表达式过滤请求参数
-      "excludePathPatterns": "/app/page/**"
-      //参考请求头中的用法
-    },
-    {
-      "name": "configQueryParam",
-      //请求参数名称
-      "type": "string",
-      //请求参数类型
-      "desc": "desc",
-      //请求参数描述信息
-      "paramIn": "query",
-      "value": "testQuery",
-      //不设置默认null
-      "required": false,
-      //是否必须
-      "since": "-",
-      //什么版本添加的改请求参数
-      "pathPatterns": "**",
-      //正则表达式过滤请求参数
-      "excludePathPatterns": "/app/page/**"
     }
   ],
   "rpcApiDependencies": [
@@ -258,7 +192,7 @@
   ],
   "apiConstants": [
     {
-      //smart-doc在解析到常量时自动替换为具体的值，非必须，2.4.2开始不用配置，smart-doc支持自动解析常用
+      //从1.8.9开始配置自己的常量类，smart-doc在解析到常量时自动替换为具体的值，非必须
       "constantsClassName": "com.power.doc.constants.RequestParamConstant"
     }
   ],
@@ -270,16 +204,5 @@
   "requestBodyAdvice": {
     ////自smart-doc 2.1.4 起，支持设置RequestBodyAdvice统一请求包装类，非必须
     "className": "com.power.common.model.CommonResult"
-  },
-  "groups": [
-    // @since 2.2.5, 对不同的controller进行分组
-    {
-      "name": "测试分组",
-      "apis": "com.power.doc.controller.app.*"
-    }
-  ],
-  "requestParamsTable": true,
-  // 是否将请求参数表展示在文档中，默认true，@since 2.2.5
-  "responseParamsTable": true
-  //是否将响应参数表展示在文档中, 默认true，@since 2.2.5
+  }
 }
