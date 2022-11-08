@@ -854,6 +854,7 @@ spring:
       max-request-size: 215MB
   sleuth:
     jdbc:
+      # 为false时 datasource-proxy-spring-boot-starter会生效 程序启动时会卡着不动
       enabled: true
     enabled: true
     web:

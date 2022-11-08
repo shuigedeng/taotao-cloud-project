@@ -2,6 +2,7 @@ apply plugin: "com.github.shalousun.smart-doc"
 
 smartdoc {
     configFile = file("src/main/resources/smart-doc.json")
+
     //exclude artifact
     //exclude "org.springframework.boot:xx"
     //exclude "org.springframework.boot:ddd"
