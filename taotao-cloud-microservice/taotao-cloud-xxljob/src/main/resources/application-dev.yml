@@ -8,6 +8,24 @@ server:
   #servlet:
   #  context-path: /xxl-job-admin
 
+decorator:
+  datasource:
+    enabled: true
+    datasource-proxy:
+      logging: slf4j
+      query:
+        enable-logging: true
+        log-level: debug
+        logger-name: net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener
+      slow-query:
+        enable-logging: true
+        log-level: warn
+        logger-name: net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener
+        threshold: 300
+      multiline: true
+      json-format: false
+      count-query: false
+
 jasypt:
   encryptor:
     password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
@@ -145,6 +163,8 @@ spring:
     name: taotao-cloud-xxljob
   sleuth:
     enabled: true
+    jdbc:
+      enabled: true
     web:
       client:
         enabled: true
@@ -396,3 +416,5 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
+    net.ttddyy.dsproxy.listener: debug
+    net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug

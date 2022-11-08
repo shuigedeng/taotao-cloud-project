@@ -18,16 +18,17 @@ server:
 
 decorator:
   datasource:
+    enabled: true
     datasource-proxy:
       logging: slf4j
       query:
         enable-logging: true
         log-level: debug
-        logger-name: xxx
+        logger-name: net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener
       slow-query:
         enable-logging: true
         log-level: warn
-        logger-name: qqqq
+        logger-name: net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener
         threshold: 300
       multiline: true
       json-format: false
@@ -852,6 +853,8 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
   sleuth:
+    jdbc:
+      enabled: true
     enabled: true
     web:
       client:
@@ -874,10 +877,12 @@ spring:
       enabled: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
+    #    url: jdbc:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
     #    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:p6spy:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
-    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    #    url: jdbc:p6spy:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    #    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
     hikari:
@@ -1780,6 +1785,7 @@ logging:
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.sys.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
+    net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
     # hibernate log
     #org.hibernate.SQL: debug
     #org.hibernate.type: info
@@ -1792,16 +1798,18 @@ logging:
     #java.sql.Connection: debug
     #java.sql.Statement: debug
     #java.sql.PreparedStatement: debug
+    # kafka log
     #kafka.server.KafkaConfig: info
-    #org.I0Itec.zkclient: info
     #kafka.admin.AdminClient.AdminConfig: info
+    #org.apache.kafka: off
+    #org.I0Itec.zkclient: info
+    # springframework log
     #org.springframework.cloud.openfeign: debug
     #org.springframework.web: off
     #org.springframework.security: off
     #org.springframework.security.oauth2: off
     #org.springframework.boot.autoconfigure: off
     #org.elasticsearch.client: debug
-    #org.apache.kafka: off
 
 springdoc:
   showActuator: true
