@@ -5,13 +5,17 @@ dependencies {
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
+
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-skywalking")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-zipkin")
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-freemarker"
     implementation "org.springframework.boot:spring-boot-starter-mail"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-undertow"
+
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.8.1'
 
     //https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2"

@@ -124,20 +124,20 @@
 	<!--<logger name="org.apache.zookeeper.ZooKeeper" level="ERROR"/>-->
 
 	<!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
-	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
-	<logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG"/>
-	<logger name="org.hibernate.SQL" level="DEBUG"/>
-	<logger name="org.hibernate.engine.QueryParameters" level="DEBUG"/>
-	<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>
+	<!--	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>-->
+	<!--	<logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG"/>-->
+	<!--	<logger name="org.hibernate.SQL" level="DEBUG"/>-->
+	<!--	<logger name="org.hibernate.engine.QueryParameters" level="DEBUG"/>-->
+	<!--	<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>-->
 
 	<!--myibatis log configure-->
-	<logger name="com.apache.ibatis" level="TRACE"/>
-	<logger name="java.sql.Connection" level="DEBUG"/>
-	<logger name="java.sql.Statement" level="DEBUG"/>
-	<logger name="java.sql.PreparedStatement" level="DEBUG"/>
-	<logger name="kafka.server.KafkaConfig" level="INFO"/>
-	<logger name="org.I0Itec.zkclient" level="INFO"/>
-	<logger name="kafka.admin.AdminClient.AdminConfig" level="INFO"/>
+	<!--	<logger name="com.apache.ibatis" level="TRACE"/>-->
+	<!--	<logger name="java.sql.Connection" level="DEBUG"/>-->
+	<!--	<logger name="java.sql.Statement" level="DEBUG"/>-->
+	<!--	<logger name="java.sql.PreparedStatement" level="DEBUG"/>-->
+	<!--	<logger name="kafka.server.KafkaConfig" level="INFO"/>-->
+	<!--	<logger name="org.I0Itec.zkclient" level="INFO"/>-->
+	<!--	<logger name="kafka.admin.AdminClient.AdminConfig" level="INFO"/>-->
 
 	<!--		&lt;!&ndash; 输出SQL到控制台和文件&ndash;&gt;-->
 	<!--		<logger name="org.hibernate.SQL" additivity="false">-->
@@ -165,16 +165,16 @@
 	<!--	</root>-->
 
 	<springProfile name="dev">
-		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false"
-			level="TRACE">
-			<level value="TRACE"/>
-			<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>
-		</logger>
+		<!--		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false"-->
+		<!--			level="TRACE">-->
+		<!--			<level value="TRACE"/>-->
+		<!--			<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>-->
+		<!--		</logger>-->
 
-		<logger name="org.hibernate.SQL" additivity="false" level="DEBUG">
-			<level value="DEBUG"/>
-			<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>
-		</logger>
+		<!--		<logger name="org.hibernate.SQL" additivity="false" level="DEBUG">-->
+		<!--			<level value="DEBUG"/>-->
+		<!--			<appender-ref ref="FILE_SQL_ASYNC_APPENDER"/>-->
+		<!--		</logger>-->
 
 		<root level="INFO">
 			<appender-ref ref="CONSOLE_ASYNC_APPENDER"/>
