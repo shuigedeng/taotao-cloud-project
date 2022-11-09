@@ -4,11 +4,12 @@ import cn.hutool.core.date.DateTime;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberRechargeApiFallback;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
-import java.math.BigDecimal;
-import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 远程调用会员用户模块
@@ -18,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2022-04-25 16:37:54
  */
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberRechargeApiFallback.class)
-public interface FeignMemberRechargeApi {
+public interface IFeignMemberRechargeApi {
 
 	@GetMapping(value = "/member/recharge/paySuccess")
 	Boolean paySuccess(@RequestParam String sn, @RequestParam String receivableNo,
-		@RequestParam String paymentMethod);
+					   @RequestParam String paymentMethod);
 
 	@GetMapping(value = "/member/recharge/getRecharge")
 	MemberRechargeVO getRecharge(@RequestParam String sn);

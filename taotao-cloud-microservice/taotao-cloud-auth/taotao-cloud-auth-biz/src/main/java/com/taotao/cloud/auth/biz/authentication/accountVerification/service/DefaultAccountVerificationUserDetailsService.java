@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.authentication.account.service;
+package com.taotao.cloud.auth.biz.authentication.accountVerification.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.enums.LoginTypeEnum;
@@ -13,16 +13,14 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class DefaultAccountUserDetailsService implements AccountUserDetailsService {
-
+public class DefaultAccountVerificationUserDetailsService implements AccountVerificationUserDetailsService {
 	@Autowired
 	private IFeignUserApi feignUserApi;
 	@Autowired
 	private IFeignMemberApi feignMemberApi;
 
 	@Override
-	public UserDetails loadUserByUsername(String username, String password, String type)
-		throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username, String password, String type) throws UsernameNotFoundException {
 		// 校验密码
 		//TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
 
@@ -30,15 +28,11 @@ public class DefaultAccountUserDetailsService implements AccountUserDetailsServi
 			throw new IllegalArgumentException("参数错误");
 		}
 
-		if (LoginTypeEnum.B_PC_ACCOUNT.getType().equals(type)) {
+		if (LoginTypeEnum.B_PC_ACCOUNT_VERIFICATION.getType().equals(type)) {
 
 		}
 
-		if (LoginTypeEnum.C_PC_ACCOUNT.getType().equals(type)) {
-
-		}
-
-		if (LoginTypeEnum.C_APP_ACCOUNT.getType().equals(type)) {
+		if (LoginTypeEnum.C_PC_ACCOUNT_VERIFICATION.getType().equals(type)) {
 
 		}
 

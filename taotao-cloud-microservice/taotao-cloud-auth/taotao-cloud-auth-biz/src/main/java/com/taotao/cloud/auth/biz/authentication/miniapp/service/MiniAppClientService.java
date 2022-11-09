@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.authentication.miniapp;
+package com.taotao.cloud.auth.biz.authentication.miniapp.service;
 
 @FunctionalInterface
 public interface MiniAppClientService {

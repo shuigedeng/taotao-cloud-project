@@ -3,6 +3,9 @@ package com.taotao.cloud.auth.biz.authentication.miniapp;
 
 import com.taotao.cloud.auth.biz.authentication.AbstractLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppClientService;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppSessionKeyCacheService;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.models.LoginAuthenticationSuccessHandler;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +26,7 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 
 	private MiniAppClientService miniAppClientService;
 
-	private MiniAppSessionKeyCache miniAppSessionKeyCache;
+	private MiniAppSessionKeyCacheService miniAppSessionKeyCacheService;
 
 	public MiniAppLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
 		super(securityConfigurer, new MiniAppAuthenticationFilter(), "/login/miniapp");
@@ -41,9 +44,9 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 		return this;
 	}
 
-	public MiniAppLoginFilterConfigurer<H> miniAppSessionKeyCache(
-		MiniAppSessionKeyCache miniAppSessionKeyCache) {
-		this.miniAppSessionKeyCache = miniAppSessionKeyCache;
+	public MiniAppLoginFilterConfigurer<H> miniAppSessionKeyCacheService(
+		MiniAppSessionKeyCacheService miniAppSessionKeyCacheService) {
+		this.miniAppSessionKeyCacheService = miniAppSessionKeyCacheService;
 		return this;
 	}
 
@@ -63,12 +66,13 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 		MiniAppClientService miniAppClientService =
 			this.miniAppClientService != null ? this.miniAppClientService
 				: getBeanOrNull(applicationContext, MiniAppClientService.class);
-		MiniAppSessionKeyCache miniAppSessionKeyCache =
-			this.miniAppSessionKeyCache != null ? this.miniAppSessionKeyCache
-				: getBeanOrNull(applicationContext, MiniAppSessionKeyCache.class);
+		
+		MiniAppSessionKeyCacheService miniAppSessionKeyCacheService =
+			this.miniAppSessionKeyCacheService != null ? this.miniAppSessionKeyCacheService
+				: getBeanOrNull(applicationContext, MiniAppSessionKeyCacheService.class);
 
 		MiniAppPreAuthenticationFilter miniAppPreAuthenticationFilter = new MiniAppPreAuthenticationFilter(
-			miniAppClientService, miniAppSessionKeyCache);
+			miniAppClientService, miniAppSessionKeyCacheService);
 		http.addFilterBefore(postProcess(miniAppPreAuthenticationFilter), LogoutFilter.class);
 	}
 
@@ -84,11 +88,11 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 			this.miniAppUserDetailsService != null ? this.miniAppUserDetailsService
 				: getBeanOrNull(applicationContext, MiniAppUserDetailsService.class);
 
-		MiniAppSessionKeyCache miniAppSessionKeyCache =
-			this.miniAppSessionKeyCache != null ? this.miniAppSessionKeyCache
-				: getBeanOrNull(applicationContext, MiniAppSessionKeyCache.class);
+		MiniAppSessionKeyCacheService miniAppSessionKeyCacheService =
+			this.miniAppSessionKeyCacheService != null ? this.miniAppSessionKeyCacheService
+				: getBeanOrNull(applicationContext, MiniAppSessionKeyCacheService.class);
 
-		return new MiniAppAuthenticationProvider(miniAppUserDetailsService, miniAppSessionKeyCache);
+		return new MiniAppAuthenticationProvider(miniAppUserDetailsService, miniAppSessionKeyCacheService);
 	}
 
 	@Override

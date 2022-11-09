@@ -47,12 +47,13 @@ public class AccountVerificationAuthenticationProvider implements Authentication
 		AccountVerificationAuthenticationToken unAuthenticationToken = (AccountVerificationAuthenticationToken) authentication;
 
 		String username = unAuthenticationToken.getName();
-		String passowrd = (String) unAuthenticationToken.getCredentials();
+		String password = (String) unAuthenticationToken.getCredentials();
 		String verificationCode = unAuthenticationToken.getVerificationCode();
+		String type = unAuthenticationToken.getType();
 
 		// 验证码校验
 		if (accountVerificationService.verifyCaptcha(verificationCode)) {
-			UserDetails userDetails = accountVerificationUserDetailsService.loadUserByPhone(username);
+			UserDetails userDetails = accountVerificationUserDetailsService.loadUserByUsername(username, password, type);
 			// 校验密码
 			//TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
 			return createSuccessAuthentication(authentication, userDetails);
@@ -89,7 +90,15 @@ public class AccountVerificationAuthenticationProvider implements Authentication
 
 		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(
 			user.getAuthorities());
-		AccountVerificationAuthenticationToken authenticationToken = new AccountVerificationAuthenticationToken(user, null, null,
+
+		String type = "";
+		String verificationCode = "";
+		if (authentication instanceof AccountVerificationAuthenticationToken accountVerificationAuthenticationToken) {
+			type = accountVerificationAuthenticationToken.getType();
+			verificationCode = accountVerificationAuthenticationToken.getVerificationCode();
+		}
+
+		AccountVerificationAuthenticationToken authenticationToken = new AccountVerificationAuthenticationToken(user, null, verificationCode, type,
 			authorities);
 		authenticationToken.setDetails(authentication.getDetails());
 

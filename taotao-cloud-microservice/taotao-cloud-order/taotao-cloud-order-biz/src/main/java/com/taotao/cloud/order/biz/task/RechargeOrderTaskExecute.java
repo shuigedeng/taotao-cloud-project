@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.task;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;
-import com.taotao.cloud.member.api.feign.FeignMemberRechargeApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
@@ -27,7 +27,7 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 	 * 充值
 	 */
 	@Autowired
-	private FeignMemberRechargeApi rechargeService;
+	private IFeignMemberRechargeApi rechargeService;
 	/**
 	 * 设置
 	 */

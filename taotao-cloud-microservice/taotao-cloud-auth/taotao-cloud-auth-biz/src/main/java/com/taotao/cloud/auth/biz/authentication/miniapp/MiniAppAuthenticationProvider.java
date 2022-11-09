@@ -1,7 +1,8 @@
 package com.taotao.cloud.auth.biz.authentication.miniapp;
 
-import java.util.Collection;
-import java.util.Objects;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppRequest;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppSessionKeyCacheService;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppUserDetailsService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -15,17 +16,20 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
+import java.util.Collection;
+import java.util.Objects;
+
 public class MiniAppAuthenticationProvider implements AuthenticationProvider, MessageSourceAware {
 
 	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 	private final MiniAppUserDetailsService miniAppUserDetailsService;
-	private MiniAppSessionKeyCache miniAppSessionKeyCache;
+	private MiniAppSessionKeyCacheService miniAppSessionKeyCacheService;
 	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
 	public MiniAppAuthenticationProvider(MiniAppUserDetailsService miniAppUserDetailsService,
-		MiniAppSessionKeyCache miniAppSessionKeyCache) {
+										 MiniAppSessionKeyCacheService miniAppSessionKeyCacheService) {
 		this.miniAppUserDetailsService = miniAppUserDetailsService;
-		this.miniAppSessionKeyCache = miniAppSessionKeyCache;
+		this.miniAppSessionKeyCacheService = miniAppSessionKeyCacheService;
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class MiniAppAuthenticationProvider implements AuthenticationProvider, Me
 		UserDetails userDetails = miniAppUserDetailsService.loadByOpenId(clientId, openId);
 		if (Objects.isNull(userDetails)) {
 			userDetails = miniAppUserDetailsService.register(credentials,
-				miniAppSessionKeyCache.get(clientId + "::" + openId));
+				miniAppSessionKeyCacheService.get(clientId + "::" + openId));
 		}
 		return createSuccessAuthentication(authentication, userDetails);
 	}
@@ -68,7 +72,7 @@ public class MiniAppAuthenticationProvider implements AuthenticationProvider, Me
 	 * @return the authentication
 	 */
 	protected Authentication createSuccessAuthentication(Authentication authentication,
-		UserDetails user) {
+														 UserDetails user) {
 
 		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(
 			user.getAuthorities());

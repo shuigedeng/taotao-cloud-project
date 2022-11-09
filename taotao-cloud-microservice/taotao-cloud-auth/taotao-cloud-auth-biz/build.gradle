@@ -62,6 +62,12 @@ dependencies {
     implementation "org.springframework:spring-webflux"
     implementation "io.projectreactor.netty:reactor-netty-http"
     implementation "io.projectreactor.netty:reactor-netty"
+
+    implementation("com.baidu.aip:java-sdk:4.16.11") {
+        exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "org.slf4j", module: "slf4j-simple"
+        exclude group: "org.slf4j", module: "slf4j-api"
+    }
 }
 
 mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"

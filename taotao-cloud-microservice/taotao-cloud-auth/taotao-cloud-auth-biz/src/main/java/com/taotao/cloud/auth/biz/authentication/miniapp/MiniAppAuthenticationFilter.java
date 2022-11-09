@@ -1,6 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication.miniapp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppRequest;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;

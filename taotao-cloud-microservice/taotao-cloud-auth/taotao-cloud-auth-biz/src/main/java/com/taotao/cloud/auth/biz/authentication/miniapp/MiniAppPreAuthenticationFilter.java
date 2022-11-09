@@ -2,15 +2,12 @@ package com.taotao.cloud.auth.biz.authentication.miniapp;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppClient;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppClientService;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppSessionKeyCacheService;
+import com.taotao.cloud.auth.biz.authentication.miniapp.service.WechatLoginResponse;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import java.io.IOException;
-import java.net.URI;
-import java.util.Objects;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -20,6 +17,14 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Objects;
 
 /**
  * 小程序预授权
@@ -33,25 +38,25 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 		"/login/miniapp/preauth", "GET");
 	private final ObjectMapper om = new ObjectMapper();
 	private final MiniAppClientService miniAppClientService;
-	private final MiniAppSessionKeyCache miniAppSessionKeyCache;
+	private final MiniAppSessionKeyCacheService miniAppSessionKeyCacheService;
 	private final RestOperations restOperations;
 
 	/**
 	 * Instantiates a new Mini app pre authentication filter.
 	 *
-	 * @param miniAppClientService   the mini app client service
-	 * @param miniAppSessionKeyCache the mini app session key cache
+	 * @param miniAppClientService          the mini app client service
+	 * @param miniAppSessionKeyCacheService the mini app session key cache
 	 */
 	public MiniAppPreAuthenticationFilter(MiniAppClientService miniAppClientService,
-		MiniAppSessionKeyCache miniAppSessionKeyCache) {
+										  MiniAppSessionKeyCacheService miniAppSessionKeyCacheService) {
 		this.miniAppClientService = miniAppClientService;
-		this.miniAppSessionKeyCache = miniAppSessionKeyCache;
+		this.miniAppSessionKeyCacheService = miniAppSessionKeyCacheService;
 		this.restOperations = new RestTemplate();
 	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-		FilterChain filterChain) throws ServletException, IOException {
+									FilterChain filterChain) throws ServletException, IOException {
 
 		if (response.isCommitted()) {
 			return;
@@ -65,7 +70,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 
 			String openId = responseEntity.getOpenid();
 			String sessionKey = responseEntity.getSessionKey();
-			miniAppSessionKeyCache.put(clientId + "::" + openId, sessionKey);
+			miniAppSessionKeyCacheService.put(clientId + "::" + openId, sessionKey);
 			responseEntity.setSessionKey(null);
 			ResponseUtils.success(response, Result.success(responseEntity));
 			return;

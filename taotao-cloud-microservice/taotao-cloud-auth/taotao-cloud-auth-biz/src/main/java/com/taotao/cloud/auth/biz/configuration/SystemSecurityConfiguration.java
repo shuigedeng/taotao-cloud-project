@@ -1,17 +1,8 @@
 package com.taotao.cloud.auth.biz.configuration;
 
 import com.taotao.cloud.auth.biz.authentication.LoginFilterSecurityConfigurer;
-import com.taotao.cloud.auth.biz.authentication.account.service.AccountUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.accountVerification.service.AccountVerificationService;
-import com.taotao.cloud.auth.biz.authentication.accountVerification.service.AccountVerificationUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.face.service.FaceUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.gestures.service.GesturesUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppClient;
-import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppRequest;
-import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppSessionKeyCache;
-import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppUserInfo;
 import com.taotao.cloud.auth.biz.authentication.mp.service.MpUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.oauth2.DelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.oauth2.OAuth2ProviderConfigurer;
@@ -23,18 +14,10 @@ import com.taotao.cloud.auth.biz.models.JwtGrantedAuthoritiesConverter;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
-import com.taotao.cloud.auth.biz.utils.WxUtils;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -69,6 +52,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -202,7 +191,7 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 
 	@Bean
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,
-		DelegateClientRegistrationRepository delegateClientRegistrationRepository)
+														  DelegateClientRegistrationRepository delegateClientRegistrationRepository)
 		throws Exception {
 		http
 			.formLogin(formLoginConfigurer -> {
@@ -252,45 +241,25 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			// **************************************自定义登录配置***********************************************
 			.apply(new LoginFilterSecurityConfigurer<>())
 			// 用户+密码登录
-			.accountLogin(accountLoginConfigurer -> {
-				accountLoginConfigurer
-					.accountUserDetailsService(new AccountUserDetailsService() {
-						@Override
-						public UserDetails loadUserByPhone(String phone)
-							throws UsernameNotFoundException {
-							return null;
-						}
-					});
+			.accountLogin(accountLoginFilterConfigurerCustomizer -> {
+				accountLoginFilterConfigurerCustomizer
+					.successHandler(authenticationSuccessHandler)
+					// 两个登录保持一致
+					.failureHandler(authenticationFailureHandler);
 			})
 			//用户+密码+验证码登录
-			.accountVerificationLogin(accountVerificationLoginConfigurer -> {
-				accountVerificationLoginConfigurer
-					.accountVerificationUserDetailsService(
-						new AccountVerificationUserDetailsService() {
-							@Override
-							public UserDetails loadUserByPhone(String phone)
-								throws UsernameNotFoundException {
-								return null;
-							}
-						})
-					.accountVerificationService(new AccountVerificationService() {
-						@Override
-						public boolean verifyCaptcha(String verificationCode) {
-							return false;
-						}
-					});
+			.accountVerificationLogin(accountVerificationLoginFilterConfigurerCustomizer -> {
+				accountVerificationLoginFilterConfigurerCustomizer
+					.successHandler(authenticationSuccessHandler)
+					// 两个登录保持一致
+					.failureHandler(authenticationFailureHandler);
 			})
 			// 面部识别登录
-			.faceLogin(faceLoginLoginConfigurer -> {
-				faceLoginLoginConfigurer
-					.faceUserDetailsService(new FaceUserDetailsService() {
-						@Override
-						public UserDetails loadUserByPhone(String phone)
-							throws UsernameNotFoundException {
-
-							return null;
-						}
-					});
+			.faceLogin(faceLoginFilterConfigurerCustomizer -> {
+				faceLoginFilterConfigurerCustomizer
+					.successHandler(authenticationSuccessHandler)
+					// 两个登录保持一致
+					.failureHandler(authenticationFailureHandler);
 			})
 			//指纹登录
 			.fingerprintLogin(fingerprintLoginConfigurer -> {
@@ -391,81 +360,6 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			})
 			// 小程序登录 同时支持多个小程序
 			.miniAppLogin(miniAppLoginConfigurer -> miniAppLoginConfigurer
-				// 实现小程序多租户
-				// 根据请求携带的clientid 查询小程序的appid和secret 1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
-				.miniAppClientService(clientId -> {
-					MiniAppClient miniAppClient = new MiniAppClient();
-					miniAppClient.setClientId(clientId);
-					miniAppClient.setAppId("wxcd395c35c45eb823");
-					miniAppClient.setSecret("75f9a12c82bd24ecac0d37bf1156c749");
-					return miniAppClient;
-				})
-				// 小程序用户 自动注册和检索  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
-				.miniAppUserDetailsService(new MiniAppUserDetailsService() {
-					@Override
-					public UserDetails register(MiniAppRequest request, String sessionKey) {
-						System.out.println(request);
-
-						String signature = DigestUtils.sha1Hex(request.getRawData() + sessionKey);
-						if (!request.getSignature().equals(signature)) {
-							throw new RuntimeException("数字签名验证失败");
-						}
-
-						String encryptedData = request.getEncryptedData();
-						String iv = request.getIv();
-
-						// 解密encryptedData数据
-						String decrypt = WxUtils.decrypt(sessionKey, iv, encryptedData);
-						MiniAppUserInfo miniAppUserInfo = JsonUtils.toObject(decrypt,
-							MiniAppUserInfo.class);
-						miniAppUserInfo.setSessionKey(sessionKey);
-
-						System.out.println(miniAppUserInfo);
-
-						// 调用数据库 微信小程序用户注册
-
-						//模拟
-						return SecurityUser.builder()
-							.account("admin")
-							.userId(1L)
-							.username("admin")
-							.nickname("admin")
-							.password(
-								"$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")
-							.phone("15730445331")
-							.mobile("15730445331")
-							.email("981376578@qq.com")
-							.sex(1)
-							.status(1)
-							.type(2)
-							.permissions(Set.of("xxx", "sldfl"))
-							.build();
-					}
-
-					@Override
-					public UserDetails loadByOpenId(String clientId, String openId) {
-						System.out.println(clientId);
-						System.out.println(openId);
-
-						// 模拟 根据openid 查询 小程序用户信息
-						return null;
-					}
-				})
-				// 小程序sessionkey缓存 过期时间应该小于微信官方文档的声明   1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
-				.miniAppSessionKeyCache(new MiniAppSessionKeyCache() {
-					@Override
-					public String put(String cacheKey, String sessionKey) {
-						// 应该小于 微信默认5分钟过期
-						cache.put(cacheKey, sessionKey);
-						return sessionKey;
-					}
-
-					@Override
-					public String get(String cacheKey) {
-						// 模拟 sessionkey 缓存
-						return cache.get(cacheKey);
-					}
-				})
 				// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 				// 两个登录保持一致
 				.successHandler(authenticationSuccessHandler)

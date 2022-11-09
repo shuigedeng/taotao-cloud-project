@@ -1,4 +1,4 @@
-package com.taotao.cloud.auth.biz.authentication.miniapp;
+package com.taotao.cloud.auth.biz.authentication.miniapp.service;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

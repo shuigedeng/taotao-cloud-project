@@ -11,18 +11,15 @@ public class FaceAuthenticationToken extends AbstractAuthenticationToken {
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
 	private final Object principal;
-	private String password;
 
 	/**
 	 * 此构造函数用来初始化未授信凭据.
 	 *
 	 * @param principal the principal
-	 * @param password  the captcha
 	 */
-	public FaceAuthenticationToken(Object principal, String password) {
+	public FaceAuthenticationToken(Object principal) {
 		super(null);
 		this.principal = principal;
-		this.password = password;
 		setAuthenticated(false);
 	}
 
@@ -30,20 +27,18 @@ public class FaceAuthenticationToken extends AbstractAuthenticationToken {
 	 * 此构造函数用来初始化授信凭据.
 	 *
 	 * @param principal   the principal
-	 * @param password    the captcha
 	 * @param authorities the authorities
 	 */
-	public FaceAuthenticationToken(Object principal, String password, Collection<? extends GrantedAuthority> authorities) {
+	public FaceAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
-		this.password = password;
 		// must use super, as we override
 		super.setAuthenticated(true);
 	}
 
 	@Override
 	public Object getCredentials() {
-		return this.password;
+		return null;
 	}
 
 	@Override
@@ -64,6 +59,5 @@ public class FaceAuthenticationToken extends AbstractAuthenticationToken {
 	@Override
 	public void eraseCredentials() {
 		super.eraseCredentials();
-		password = null;
 	}
 }

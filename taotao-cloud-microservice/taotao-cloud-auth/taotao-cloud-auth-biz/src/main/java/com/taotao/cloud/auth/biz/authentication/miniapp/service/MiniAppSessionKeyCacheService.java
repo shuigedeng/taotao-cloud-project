@@ -1,9 +1,9 @@
-package com.taotao.cloud.auth.biz.authentication.miniapp;
+package com.taotao.cloud.auth.biz.authentication.miniapp.service;
 
 /**
  * 缓存sessionKey
  */
-public interface MiniAppSessionKeyCache {
+public interface MiniAppSessionKeyCacheService {
 
 	/**
 	 * Put sessionKey.

@@ -1,5 +1,6 @@
 package com.taotao.cloud.auth.biz.authentication.accountVerification;
 
+import com.taotao.cloud.common.enums.LoginTypeEnum;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,7 @@ public class AccountVerificationAuthenticationFilter extends AbstractAuthenticat
 	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
 	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
 	public static final String SPRING_SECURITY_FORM_VERIFICATION_CODE_KEY = "verification_code";
+	public static final String SPRING_SECURITY_FORM_TYPE_KEY = "type";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
 		"/login/account/verification", "POST");
@@ -25,6 +27,10 @@ public class AccountVerificationAuthenticationFilter extends AbstractAuthenticat
 	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
 	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 	private String verificationCodeParameter = SPRING_SECURITY_FORM_VERIFICATION_CODE_KEY;
+	/**
+	 * @see LoginTypeEnum B_PC_ACCOUNT / C_PC_ACCOUNT
+	 */
+	private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
 	private Converter<HttpServletRequest, AccountVerificationAuthenticationToken> accountVerificationAuthenticationTokenConverter;
 
@@ -66,7 +72,10 @@ public class AccountVerificationAuthenticationFilter extends AbstractAuthenticat
 			String verificationCode = request.getParameter(this.verificationCodeParameter);
 			verificationCode = (verificationCode != null) ? verificationCode.trim() : "";
 
-			return new AccountVerificationAuthenticationToken(username, passord, verificationCode);
+			String type = request.getParameter(this.typeParameter);
+			type = (type != null) ? type.trim() : "";
+
+			return new AccountVerificationAuthenticationToken(username, passord, verificationCode, type);
 		};
 	}
 
