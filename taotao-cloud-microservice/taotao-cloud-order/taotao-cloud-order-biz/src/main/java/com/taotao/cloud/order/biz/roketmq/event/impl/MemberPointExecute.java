@@ -4,7 +4,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
@@ -17,10 +17,9 @@ import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 /**
  * 会员积分
@@ -41,7 +40,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 	 * 会员
 	 */
 	@Autowired
-	private FeignMemberApi memberService;
+	private IFeignMemberApi memberService;
 	/**
 	 * 订单
 	 */
@@ -84,7 +83,8 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 					return;
 				}
 				//计算赠送积分数量
-				BigDecimal point = CurrencyUtils.mul(pointSetting.getConsumer(), order.getFlowPrice(),
+				BigDecimal point = CurrencyUtils.mul(pointSetting.getConsumer(),
+					order.getFlowPrice(),
 					0);
 				//赠送会员积分
 				memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(),

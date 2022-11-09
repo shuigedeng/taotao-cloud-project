@@ -19,10 +19,13 @@ public class MiniAppAuthenticationProvider implements AuthenticationProvider, Me
 
 	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 	private final MiniAppUserDetailsService miniAppUserDetailsService;
+	private MiniAppSessionKeyCache miniAppSessionKeyCache;
 	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	public MiniAppAuthenticationProvider(MiniAppUserDetailsService miniAppUserDetailsService) {
+	public MiniAppAuthenticationProvider(MiniAppUserDetailsService miniAppUserDetailsService,
+		MiniAppSessionKeyCache miniAppSessionKeyCache) {
 		this.miniAppUserDetailsService = miniAppUserDetailsService;
+		this.miniAppSessionKeyCache = miniAppSessionKeyCache;
 	}
 
 	@Override
@@ -35,10 +38,14 @@ public class MiniAppAuthenticationProvider implements AuthenticationProvider, Me
 
 		MiniAppAuthenticationToken unAuthenticationToken = (MiniAppAuthenticationToken) authentication;
 		MiniAppRequest credentials = (MiniAppRequest) unAuthenticationToken.getCredentials();
-		UserDetails userDetails = miniAppUserDetailsService.loadByOpenId(credentials.getClientId(),
-			credentials.getOpenId());
+
+		String clientId = credentials.getClientId();
+		String openId = credentials.getOpenId();
+
+		UserDetails userDetails = miniAppUserDetailsService.loadByOpenId(clientId, openId);
 		if (Objects.isNull(userDetails)) {
-			userDetails = miniAppUserDetailsService.register(credentials);
+			userDetails = miniAppUserDetailsService.register(credentials,
+				miniAppSessionKeyCache.get(clientId + "::" + openId));
 		}
 		return createSuccessAuthentication(authentication, userDetails);
 	}

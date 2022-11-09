@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberAddressApiFallback.class)
-public interface FeignMemberAddressApi {
+public interface IFeignMemberAddressApi {
 
 	@GetMapping(value = "/member/address/shippingAddressId")
 	MemberAddressVO getById(@RequestParam String shippingAddressId);

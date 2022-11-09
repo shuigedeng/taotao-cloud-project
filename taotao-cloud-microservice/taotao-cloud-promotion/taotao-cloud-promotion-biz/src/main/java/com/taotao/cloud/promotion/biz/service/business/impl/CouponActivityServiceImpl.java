@@ -6,7 +6,7 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;
@@ -24,15 +24,14 @@ import com.taotao.cloud.promotion.biz.service.business.CouponActivityItemService
 import com.taotao.cloud.promotion.biz.service.business.CouponActivityService;
 import com.taotao.cloud.promotion.biz.service.business.CouponService;
 import com.taotao.cloud.promotion.biz.service.business.MemberCouponService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 优惠券活动业务层实现
@@ -43,7 +42,8 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<CouponActivityMapper, CouponActivity> implements
+public class CouponActivityServiceImpl extends
+	AbstractPromotionsServiceImpl<CouponActivityMapper, CouponActivity> implements
 	CouponActivityService {
 
 	@Autowired
@@ -53,14 +53,15 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 	@Autowired
 	private CouponActivityItemService couponActivityItemService;
 	@Autowired
-	private FeignMemberApi memberService;
+	private IFeignMemberApi memberService;
 
 	@Override
 	public CouponActivityVO getCouponActivityVO(String couponActivityId) {
 		CouponActivity couponActivity = this.getById(couponActivityId);
 		CouponActivityVO couponActivityVO = new CouponActivityVO();
 		BeanUtils.copyProperties(couponActivity, couponActivityVO);
-		couponActivityVO.setCouponActivityItems(couponActivityItemService.getCouponActivityItemListVO(couponActivityId));
+		couponActivityVO.setCouponActivityItems(
+			couponActivityItemService.getCouponActivityItemListVO(couponActivityId));
 		return couponActivityVO;
 	}
 
@@ -81,7 +82,8 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 		}
 
 		//优惠优惠券活动的优惠券列表
-		List<CouponActivityItem> couponActivityItems = couponActivityItemService.getCouponActivityList(couponActivity.getId());
+		List<CouponActivityItem> couponActivityItems = couponActivityItemService.getCouponActivityList(
+			couponActivity.getId());
 		//发送优惠券
 		for (List<Map<String, Object>> memberList : memberGroup) {
 			sendCoupon(memberList, couponActivityItems);
@@ -99,7 +101,8 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 			memberList.add(map);
 
 			//优惠优惠券活动的优惠券列表
-			List<CouponActivityItem> couponActivityItems = couponActivityItemService.getCouponActivityList(couponActivity.getId());
+			List<CouponActivityItem> couponActivityItems = couponActivityItemService.getCouponActivityList(
+				couponActivity.getId());
 
 			//发送优惠券
 			sendCoupon(memberList, couponActivityItems);
@@ -118,8 +121,10 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 		if (promotions instanceof CouponActivityDTO) {
 			CouponActivityDTO couponActivityDTO = (CouponActivityDTO) promotions;
 			//如果有会员，则写入会员信息
-			if (couponActivityDTO.getMemberDTOS() != null && !couponActivityDTO.getMemberDTOS().isEmpty()) {
-				couponActivityDTO.setActivityScopeInfo(JSONUtil.toJsonStr(couponActivityDTO.getMemberDTOS()));
+			if (couponActivityDTO.getMemberDTOS() != null && !couponActivityDTO.getMemberDTOS()
+				.isEmpty()) {
+				couponActivityDTO.setActivityScopeInfo(
+					JSONUtil.toJsonStr(couponActivityDTO.getMemberDTOS()));
 			}
 		}
 	}
@@ -136,7 +141,9 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 		if (couponActivity instanceof CouponActivityDTO) {
 			CouponActivityDTO couponActivityDTO = (CouponActivityDTO) couponActivity;
 			//指定会员判定
-			if (couponActivity.getActivityScope().equals(CouponActivitySendTypeEnum.DESIGNATED.name()) && couponActivityDTO.getMemberDTOS().isEmpty()) {
+			if (couponActivity.getActivityScope()
+				.equals(CouponActivitySendTypeEnum.DESIGNATED.name())
+				&& couponActivityDTO.getMemberDTOS().isEmpty()) {
 				throw new BusinessException(ResultEnum.COUPON_ACTIVITY_MEMBER_ERROR);
 			}
 			// 检查优惠券
@@ -175,7 +182,8 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 	@Override
 	public void updateEsGoodsIndex(CouponActivity couponActivity) {
 		//如果是精准发券，进行发送优惠券
-		if (!PromotionsStatusEnum.CLOSE.name().equals(couponActivity.getPromotionStatus()) && couponActivity.getCouponActivityType().equals(
+		if (!PromotionsStatusEnum.CLOSE.name().equals(couponActivity.getPromotionStatus())
+			&& couponActivity.getCouponActivityType().equals(
 			CouponActivityTypeEnum.SPECIFY.name())) {
 			this.specify(couponActivity.getId());
 		}
@@ -192,16 +200,13 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 	}
 
 	/**
-	 * 发送优惠券
-	 * 1.循环优惠券列表
-	 * 2.判断优惠券每个会员发送数量
-	 * 3.循环会员列表，发送优惠券
-	 * 4.记录优惠券发送数量
+	 * 发送优惠券 1.循环优惠券列表 2.判断优惠券每个会员发送数量 3.循环会员列表，发送优惠券 4.记录优惠券发送数量
 	 *
 	 * @param memberList          用户列表
 	 * @param couponActivityItems 优惠券列表
 	 */
-	private void sendCoupon(List<Map<String, Object>> memberList, List<CouponActivityItem> couponActivityItems) {
+	private void sendCoupon(List<Map<String, Object>> memberList,
+		List<CouponActivityItem> couponActivityItems) {
 
 		for (CouponActivityItem couponActivityItem : couponActivityItems) {
 			//获取优惠券
@@ -225,7 +230,8 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 				//批量添加优惠券
 				memberCouponService.saveBatch(memberCouponList);
 				//添加优惠券已领取数量
-				couponService.receiveCoupon(couponActivityItem.getCouponId(), memberCouponList.size() * couponActivityItem.getNum());
+				couponService.receiveCoupon(couponActivityItem.getCouponId(),
+					memberCouponList.size() * couponActivityItem.getNum());
 			} else {
 				log.error("赠送优惠券失败,当前优惠券不存在:" + couponActivityItem.getCouponId());
 			}
@@ -234,8 +240,7 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 	}
 
 	/**
-	 * 获取优惠券的范围范围
-	 * 此方法用于精准发券
+	 * 获取优惠券的范围范围 此方法用于精准发券
 	 *
 	 * @param couponActivity 优惠券活动
 	 * @return 获取优惠券的会员列表
@@ -248,7 +253,8 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
 			List<String> ids = new ArrayList<>();
 			if (JSONUtil.isJsonArray(couponActivity.getActivityScopeInfo())) {
 				JSONArray array = JSONUtil.parseArray(couponActivity.getActivityScopeInfo());
-				ids = array.toList(Map.class).stream().map(i -> i.get("id").toString()).collect(Collectors.toList());
+				ids = array.toList(Map.class).stream().map(i -> i.get("id").toString())
+					.collect(Collectors.toList());
 			}
 			return memberService.listFieldsByMemberIds("id,nick_name", ids);
 		}

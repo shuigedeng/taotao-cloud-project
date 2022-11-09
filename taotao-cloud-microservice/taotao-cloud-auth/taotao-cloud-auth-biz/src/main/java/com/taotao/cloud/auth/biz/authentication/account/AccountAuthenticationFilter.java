@@ -1,5 +1,8 @@
 package com.taotao.cloud.auth.biz.authentication.account;
 
+import com.taotao.cloud.common.enums.LoginTypeEnum;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,19 +13,22 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class AccountAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
 	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
+	public static final String SPRING_SECURITY_FORM_TYPE_KEY = "type";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
 		"/login/account", "POST");
 
 	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
 	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
+
+	/**
+	 * @see LoginTypeEnum B_PC_ACCOUNT / C_PC_ACCOUNT
+	 */
+	private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
 	private Converter<HttpServletRequest, AccountAuthenticationToken> accountVerificationAuthenticationTokenConverter;
 
@@ -40,13 +46,14 @@ public class AccountAuthenticationFilter extends AbstractAuthenticationProcessin
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-												HttpServletResponse response) throws AuthenticationException {
+		HttpServletResponse response) throws AuthenticationException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
 				"Authentication method not supported: " + request.getMethod());
 		}
 
-		AccountAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(request);
+		AccountAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(
+			request);
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
 		return this.getAuthenticationManager().authenticate(authRequest);
@@ -61,7 +68,10 @@ public class AccountAuthenticationFilter extends AbstractAuthenticationProcessin
 			String passord = request.getParameter(this.passwordParameter);
 			passord = (passord != null) ? passord.trim() : "";
 
-			return new AccountAuthenticationToken(username, passord);
+			String type = request.getParameter(this.typeParameter);
+			type = (type != null) ? type.trim() : "";
+
+			return new AccountAuthenticationToken(username, passord, type);
 		};
 	}
 

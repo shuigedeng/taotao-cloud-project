@@ -1,10 +1,9 @@
 package com.taotao.cloud.auth.biz.authentication.account;
 
+import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-
-import java.util.Collection;
 
 public class AccountAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -12,6 +11,7 @@ public class AccountAuthenticationToken extends AbstractAuthenticationToken {
 
 	private final Object principal;
 	private String password;
+	private String type;
 
 	/**
 	 * 此构造函数用来初始化未授信凭据.
@@ -19,10 +19,11 @@ public class AccountAuthenticationToken extends AbstractAuthenticationToken {
 	 * @param principal the principal
 	 * @param password  the captcha
 	 */
-	public AccountAuthenticationToken(Object principal, String password) {
+	public AccountAuthenticationToken(Object principal, String password, String type) {
 		super(null);
 		this.principal = principal;
 		this.password = password;
+		this.type = type;
 		setAuthenticated(false);
 	}
 
@@ -33,10 +34,12 @@ public class AccountAuthenticationToken extends AbstractAuthenticationToken {
 	 * @param password    the captcha
 	 * @param authorities the authorities
 	 */
-	public AccountAuthenticationToken(Object principal, String password, Collection<? extends GrantedAuthority> authorities) {
+	public AccountAuthenticationToken(Object principal, String password, String type,
+		Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
 		this.password = password;
+		this.type = type;
 		// must use super, as we override
 		super.setAuthenticated(true);
 	}
@@ -65,5 +68,9 @@ public class AccountAuthenticationToken extends AbstractAuthenticationToken {
 	public void eraseCredentials() {
 		super.eraseCredentials();
 		password = null;
+	}
+
+	public String getType() {
+		return type;
 	}
 }

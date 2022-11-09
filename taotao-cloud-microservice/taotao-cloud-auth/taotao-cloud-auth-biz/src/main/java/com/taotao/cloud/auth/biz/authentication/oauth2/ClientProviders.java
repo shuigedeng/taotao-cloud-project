@@ -65,19 +65,20 @@ public enum ClientProviders {
 
 			OAuth2AuthorizationExchange authorizationExchange = authorizationCodeGrantRequest.getAuthorizationExchange();
 			MultiValueMap<String, String> queryParameters = new LinkedMultiValueMap<>();
+			//appid
+			queryParameters.add(WechatParameterNames.APP_ID, clientRegistration.getClientId());
+			// 如果有redirect-uri
+			String redirectUri = authorizationExchange.getAuthorizationRequest().getRedirectUri();
+			if (redirectUri != null) {
+				queryParameters.add(OAuth2ParameterNames.REDIRECT_URI, redirectUri);
+			}
+
 			// grant_type
 			queryParameters.add(OAuth2ParameterNames.GRANT_TYPE,
 				authorizationCodeGrantRequest.getGrantType().getValue());
 			// code
 			queryParameters.add(OAuth2ParameterNames.CODE,
 				authorizationExchange.getAuthorizationResponse().getCode());
-			// 如果有redirect-uri
-			String redirectUri = authorizationExchange.getAuthorizationRequest().getRedirectUri();
-			if (redirectUri != null) {
-				queryParameters.add(OAuth2ParameterNames.REDIRECT_URI, redirectUri);
-			}
-			//appid
-			queryParameters.add(WechatParameterNames.APP_ID, clientRegistration.getClientId());
 			//secret
 			queryParameters.add(WechatParameterNames.SECRET, clientRegistration.getClientSecret());
 
@@ -194,6 +195,7 @@ public enum ClientProviders {
 		final MediaType contentType = MediaType.valueOf(
 			MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 		headers.setContentType(contentType);
+
 		if (ClientAuthenticationMethod.CLIENT_SECRET_BASIC.equals(
 			clientRegistration.getClientAuthenticationMethod())
 			|| ClientAuthenticationMethod.BASIC.equals(
@@ -225,6 +227,7 @@ public enum ClientProviders {
 			builder.parameters(parameters -> {
 				//   client_id replace into appid here
 				LinkedHashMap<String, Object> linkedParameters = new LinkedHashMap<>();
+
 				//  k v  must be ordered
 				parameters.forEach((k, v) -> {
 					if (OAuth2ParameterNames.CLIENT_ID.equals(k)) {
@@ -236,6 +239,7 @@ public enum ClientProviders {
 
 				parameters.clear();
 				parameters.putAll(linkedParameters);
+
 				builder.authorizationRequestUri(uriBuilder ->
 					uriBuilder.fragment(WechatParameterNames.WECHAT_REDIRECT)
 						.build());

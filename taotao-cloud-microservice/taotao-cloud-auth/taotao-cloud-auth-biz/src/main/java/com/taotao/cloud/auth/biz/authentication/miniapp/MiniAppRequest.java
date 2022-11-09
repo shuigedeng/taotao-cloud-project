@@ -8,6 +8,10 @@ public class MiniAppRequest {
 	private String iv;
 	private String encryptedData;
 
+	private String signature;
+	private String rawData;
+
+
 	public String getClientId() {
 		return clientId;
 	}
@@ -46,5 +50,21 @@ public class MiniAppRequest {
 
 	public void setEncryptedData(String encryptedData) {
 		this.encryptedData = encryptedData;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+
+	public String getRawData() {
+		return rawData;
+	}
+
+	public void setRawData(String rawData) {
+		this.rawData = rawData;
 	}
 }

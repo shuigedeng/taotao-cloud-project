@@ -1,12 +1,11 @@
 package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
-import org.springframework.cloud.openfeign.FallbackFactory;
-
 import java.util.List;
 import java.util.Map;
+import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
  * RemoteMemberFallbackImpl
@@ -15,10 +14,11 @@ import java.util.Map;
  * @version 2022.03
  * @since 2020/11/20 下午4:10
  */
-public class FeignMemberApiFallback implements FallbackFactory<FeignMemberApi> {
+public class FeignMemberApiFallback implements FallbackFactory<IFeignMemberApi> {
+
 	@Override
-	public FeignMemberApi create(Throwable throwable) {
-		return new FeignMemberApi() {
+	public IFeignMemberApi create(Throwable throwable) {
+		return new IFeignMemberApi() {
 
 			@Override
 			public SecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {

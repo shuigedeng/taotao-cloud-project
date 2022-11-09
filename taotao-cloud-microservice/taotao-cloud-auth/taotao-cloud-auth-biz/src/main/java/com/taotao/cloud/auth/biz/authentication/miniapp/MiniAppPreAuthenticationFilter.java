@@ -2,6 +2,15 @@ package com.taotao.cloud.auth.biz.authentication.miniapp;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Objects;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -12,14 +21,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.net.URI;
-import java.util.Objects;
-
 /**
  * 小程序预授权
  */
@@ -28,15 +29,12 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 	private static final String ENDPOINT = "https://api.weixin.qq.com/sns/jscode2session";
 	private static final String MINI_CLIENT_KEY = "clientId";
 	private static final String JS_CODE_KEY = "jsCode";
-	private static final String ATTRIBUTE_KEY = "miniappAuth";
 	private final RequestMatcher requiresAuthenticationRequestMatcher = new AntPathRequestMatcher(
-		"/miniapp/preauth", "POST");
-	// private final PreAuthResponseWriter preAuthResponseWriter = new PreAuthResponseWriter();
+		"/login/miniapp/preauth", "GET");
 	private final ObjectMapper om = new ObjectMapper();
 	private final MiniAppClientService miniAppClientService;
 	private final MiniAppSessionKeyCache miniAppSessionKeyCache;
 	private final RestOperations restOperations;
-
 
 	/**
 	 * Instantiates a new Mini app pre authentication filter.
@@ -45,7 +43,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 	 * @param miniAppSessionKeyCache the mini app session key cache
 	 */
 	public MiniAppPreAuthenticationFilter(MiniAppClientService miniAppClientService,
-										  MiniAppSessionKeyCache miniAppSessionKeyCache) {
+		MiniAppSessionKeyCache miniAppSessionKeyCache) {
 		this.miniAppClientService = miniAppClientService;
 		this.miniAppSessionKeyCache = miniAppSessionKeyCache;
 		this.restOperations = new RestTemplate();
@@ -53,11 +51,12 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-									FilterChain filterChain) throws ServletException, IOException {
+		FilterChain filterChain) throws ServletException, IOException {
 
 		if (response.isCommitted()) {
 			return;
 		}
+
 		if (requiresAuthenticationRequestMatcher.matches(request)) {
 			String clientId = request.getParameter(MINI_CLIENT_KEY);
 			String jsCode = request.getParameter(JS_CODE_KEY);
@@ -68,9 +67,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 			String sessionKey = responseEntity.getSessionKey();
 			miniAppSessionKeyCache.put(clientId + "::" + openId, sessionKey);
 			responseEntity.setSessionKey(null);
-			request.setAttribute(ATTRIBUTE_KEY, responseEntity);
-
-			// preAuthResponseWriter.write(request, response);
+			ResponseUtils.success(response, Result.success(responseEntity));
 			return;
 		}
 		filterChain.doFilter(request, response);

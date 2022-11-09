@@ -11,7 +11,7 @@ import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
@@ -36,12 +36,11 @@ import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponApi;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 订单状态处理类
@@ -57,7 +56,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	private RedisRepository redisRepository;
 
 	@Autowired
-	private FeignMemberApi memberService;
+	private IFeignMemberApi memberService;
 
 	@Autowired
 	private IOrderService orderService;
@@ -205,7 +204,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	 * @since 2022-05-16 17:35:18
 	 */
 	private void giftOrderHandler(List<GoodsSkuSpecGalleryVO> skuList, Order originOrder,
-								  OrderTypeEnum orderTypeEnum) {
+		OrderTypeEnum orderTypeEnum) {
 		//初始化订单对象/订单日志/自订单
 		Order order = new Order();
 		List<OrderItem> orderItems = new ArrayList<>();

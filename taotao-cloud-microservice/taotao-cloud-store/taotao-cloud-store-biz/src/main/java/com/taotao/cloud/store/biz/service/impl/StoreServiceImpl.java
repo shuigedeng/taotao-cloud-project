@@ -12,7 +12,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
@@ -28,11 +28,10 @@ import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.store.biz.service.StoreService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 /**
  * 店铺业务层实现
@@ -47,7 +46,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	 * 会员
 	 */
 	@Autowired
-	private FeignMemberApi memberService;
+	private IFeignMemberApi memberService;
 	/**
 	 * 商品
 	 */
@@ -61,7 +60,8 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 
 	@Override
 	public IPage<StoreVO> findByConditionPage(StorePageQuery storePageQuery) {
-		return this.baseMapper.getStoreList(storePageQuery.buildMpPage(), storePageQuery.queryWrapper());
+		return this.baseMapper.getStoreList(storePageQuery.buildMpPage(),
+			storePageQuery.queryWrapper());
 	}
 
 	@Override
@@ -110,7 +110,8 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	public Store edit(StoreEditDTO storeEditDTO) {
 		if (storeEditDTO != null) {
 			//判断店铺名是否唯一
-			Store storeTmp = getOne(new QueryWrapper<Store>().eq("store_name", storeEditDTO.getStoreName()));
+			Store storeTmp = getOne(
+				new QueryWrapper<Store>().eq("store_name", storeEditDTO.getStoreName()));
 			if (storeTmp != null && !storeTmp.getId().equals(storeEditDTO.getStoreId())) {
 				throw new BusinessException(ResultEnum.STORE_NAME_EXIST_ERROR);
 			}
@@ -149,7 +150,8 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	private void updateStoreDetail(StoreEditDTO storeEditDTO) {
 		StoreDetail storeDetail = new StoreDetail();
 		BeanUtils.copyProperties(storeEditDTO, storeDetail);
-		storeDetailService.update(storeDetail, new QueryWrapper<StoreDetail>().eq("store_id", storeEditDTO.getStoreId()));
+		storeDetailService.update(storeDetail,
+			new QueryWrapper<StoreDetail>().eq("store_id", storeEditDTO.getStoreId()));
 	}
 
 	@Override

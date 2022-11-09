@@ -8,9 +8,10 @@ public interface AccountUserDetailsService {
 	/**
 	 * load user by phone
 	 *
-	 * @param phone phone
+	 * @param username username
 	 * @return userDetails
 	 * @throws UsernameNotFoundException not found user
 	 */
-	UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException;
+	UserDetails loadUserByUsername(String username, String password, String type)
+		throws UsernameNotFoundException;
 }

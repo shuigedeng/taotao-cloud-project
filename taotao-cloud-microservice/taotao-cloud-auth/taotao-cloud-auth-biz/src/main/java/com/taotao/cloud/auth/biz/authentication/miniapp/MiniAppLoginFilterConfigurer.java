@@ -66,6 +66,7 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 		MiniAppSessionKeyCache miniAppSessionKeyCache =
 			this.miniAppSessionKeyCache != null ? this.miniAppSessionKeyCache
 				: getBeanOrNull(applicationContext, MiniAppSessionKeyCache.class);
+
 		MiniAppPreAuthenticationFilter miniAppPreAuthenticationFilter = new MiniAppPreAuthenticationFilter(
 			miniAppClientService, miniAppSessionKeyCache);
 		http.addFilterBefore(postProcess(miniAppPreAuthenticationFilter), LogoutFilter.class);
@@ -82,7 +83,12 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>> exte
 		MiniAppUserDetailsService miniAppUserDetailsService =
 			this.miniAppUserDetailsService != null ? this.miniAppUserDetailsService
 				: getBeanOrNull(applicationContext, MiniAppUserDetailsService.class);
-		return new MiniAppAuthenticationProvider(miniAppUserDetailsService);
+
+		MiniAppSessionKeyCache miniAppSessionKeyCache =
+			this.miniAppSessionKeyCache != null ? this.miniAppSessionKeyCache
+				: getBeanOrNull(applicationContext, MiniAppSessionKeyCache.class);
+
+		return new MiniAppAuthenticationProvider(miniAppUserDetailsService, miniAppSessionKeyCache);
 	}
 
 	@Override

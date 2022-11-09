@@ -8,32 +8,31 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.model.vo.PintuanShareVO;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.mapper.PintuanMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.business.PintuanService;
 import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 拼团业务层实现
@@ -44,7 +43,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMapper, Pintuan> implements
+public class PintuanServiceImpl extends
+	AbstractPromotionsServiceImpl<PintuanMapper, Pintuan> implements
 	PintuanService {
 
 	/**
@@ -61,7 +61,7 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 	 * 会员
 	 */
 	@Autowired
-	private FeignMemberApi memberService;
+	private IFeignMemberApi memberService;
 	/**
 	 * 订单
 	 */
@@ -133,19 +133,21 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 		PintuanShareVO pintuanShareVO = new PintuanShareVO();
 		pintuanShareVO.setPintuanMemberVOS(new ArrayList<>());
 		//查找团长订单和已和当前拼团订单拼团的订单
-		List<Order> orders = orderService.queryListByPromotion(PromotionTypeEnum.PINTUAN.name(), PayStatusEnum.PAID.name(), parentOrderSn, parentOrderSn);
+		List<Order> orders = orderService.queryListByPromotion(PromotionTypeEnum.PINTUAN.name(),
+			PayStatusEnum.PAID.name(), parentOrderSn, parentOrderSn);
 		this.setPintuanOrderInfo(orders, pintuanShareVO, skuId);
 		//如果为根据团员订单sn查询拼团订单信息时，找到团长订单sn，然后找到所有参与到同一拼团的订单信息
 		if (!orders.isEmpty() && pintuanShareVO.getPromotionGoods() == null) {
-			List<Order> parentOrders = orderService.queryListByPromotion(PromotionTypeEnum.PINTUAN.name(), PayStatusEnum.PAID.name(), orders.get(0).getParentOrderSn(), orders.get(0).getParentOrderSn());
+			List<Order> parentOrders = orderService.queryListByPromotion(
+				PromotionTypeEnum.PINTUAN.name(), PayStatusEnum.PAID.name(),
+				orders.get(0).getParentOrderSn(), orders.get(0).getParentOrderSn());
 			this.setPintuanOrderInfo(parentOrders, pintuanShareVO, skuId);
 		}
 		return pintuanShareVO;
 	}
 
 	/**
-	 * 更新促销状态
-	 * 如果要更新促销状态为关闭，startTime和endTime置为空即可
+	 * 更新促销状态 如果要更新促销状态为关闭，startTime和endTime置为空即可
 	 *
 	 * @param ids       促销id集合
 	 * @param startTime 开始时间
@@ -157,7 +159,9 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 		if (startTime != null && endTime != null) {
 			for (String id : ids) {
 				Pintuan pintuan = this.getById(id);
-				QueryWrapper<Pintuan> queryWrapper = PromotionTools.checkActiveTime(new Date(startTime), new Date(endTime), PromotionTypeEnum.PINTUAN, pintuan.getStoreId(), id);
+				QueryWrapper<Pintuan> queryWrapper = PromotionTools.checkActiveTime(
+					new Date(startTime), new Date(endTime), PromotionTypeEnum.PINTUAN,
+					pintuan.getStoreId(), id);
 				long sameNum = this.count(queryWrapper);
 				//当前时间段是否存在同类活动
 				if (sameNum > 0) {
@@ -176,7 +180,9 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 	 */
 	@Override
 	public void checkPromotions(Pintuan promotions) {
-		QueryWrapper<Pintuan> queryWrapper = PromotionTools.checkActiveTime(promotions.getStartTime(), promotions.getEndTime(), PromotionTypeEnum.PINTUAN, promotions.getStoreId(), promotions.getId());
+		QueryWrapper<Pintuan> queryWrapper = PromotionTools.checkActiveTime(
+			promotions.getStartTime(), promotions.getEndTime(), PromotionTypeEnum.PINTUAN,
+			promotions.getStoreId(), promotions.getId());
 		long sameNum = this.count(queryWrapper);
 		//当前时间段是否存在同类活动
 		if (sameNum > 0) {
@@ -236,7 +242,8 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 	 * @param pintuanShareVO 拼团信息
 	 * @param skuId          商品skuId（用于获取拼团商品信息）
 	 */
-	private void setPintuanOrderInfo(List<Order> orders, PintuanShareVO pintuanShareVO, String skuId) {
+	private void setPintuanOrderInfo(List<Order> orders, PintuanShareVO pintuanShareVO,
+		String skuId) {
 		for (Order order : orders) {
 			Member member = memberService.getById(order.getMemberId());
 			PintuanMemberVO memberVO = new PintuanMemberVO(member);
@@ -246,7 +253,8 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 				searchParams.setPromotionStatus(PromotionTypeEnum.PINTUAN.name());
 				searchParams.setPromotionId(order.getPromotionId());
 				searchParams.setSkuId(skuId);
-				PromotionGoods promotionGoods = promotionGoodsService.getPromotionsGoods(searchParams);
+				PromotionGoods promotionGoods = promotionGoodsService.getPromotionsGoods(
+					searchParams);
 				if (promotionGoods == null) {
 					throw new BusinessException(ResultEnum.PINTUAN_GOODS_NOT_EXIST_ERROR);
 				}
@@ -260,7 +268,8 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 	}
 
 	private void setMemberVONum(PintuanMemberVO memberVO, Integer requiredNum, String orderSn) {
-		long count = this.orderService.queryCountByPromotion(PromotionTypeEnum.PINTUAN.name(), PayStatusEnum.PAID.name(), orderSn, orderSn);
+		long count = this.orderService.queryCountByPromotion(PromotionTypeEnum.PINTUAN.name(),
+			PayStatusEnum.PAID.name(), orderSn, orderSn);
 		//获取待参团人数
 		long toBoGrouped = requiredNum - count;
 		memberVO.setGroupNum(requiredNum);
@@ -280,7 +289,8 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 
 		for (Map.Entry<String, List<Order>> entry : collect.entrySet()) {
 			//是否开启虚拟成团
-			if (Boolean.FALSE.equals(pintuan.getFictitious()) && entry.getValue().size() < requiredNum) {
+			if (Boolean.FALSE.equals(pintuan.getFictitious())
+				&& entry.getValue().size() < requiredNum) {
 				//如果未开启虚拟成团且已参团人数小于成团人数，则自动取消订单
 				String reason = "拼团活动结束订单未付款，系统自动取消订单";
 				if (CharSequenceUtil.isNotEmpty(entry.getKey())) {
@@ -303,13 +313,15 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 	 * @param requiredNum 必须参团人数
 	 */
 	private void fictitiousPintuan(Map.Entry<String, List<Order>> entry, Integer requiredNum) {
-		Map<String, List<Order>> listMap = entry.getValue().stream().collect(Collectors.groupingBy(Order::getPayStatus));
+		Map<String, List<Order>> listMap = entry.getValue().stream()
+			.collect(Collectors.groupingBy(Order::getPayStatus));
 		//未付款订单
 		List<Order> unpaidOrders = listMap.get(PayStatusEnum.UNPAID.name());
 		//未付款订单自动取消
 		if (unpaidOrders != null && !unpaidOrders.isEmpty()) {
 			for (Order unpaidOrder : unpaidOrders) {
-				orderService.systemCancel(unpaidOrder.getSn(), "拼团活动结束订单未付款，系统自动取消订单");
+				orderService.systemCancel(unpaidOrder.getSn(),
+					"拼团活动结束订单未付款，系统自动取消订单");
 			}
 		}
 		List<Order> paidOrders = listMap.get(PayStatusEnum.PAID.name());
@@ -341,19 +353,27 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
 	private void updatePintuanPromotionGoods(PintuanVO pintuan) {
 
 		if (pintuan.getPromotionGoodsList() != null && !pintuan.getPromotionGoodsList().isEmpty()) {
-			List<PromotionGoods> promotionGoods = PromotionTools.promotionGoodsInit(pintuan.getPromotionGoodsList(), pintuan, PromotionTypeEnum.PINTUAN);
+			List<PromotionGoods> promotionGoods = PromotionTools.promotionGoodsInit(
+				pintuan.getPromotionGoodsList(), pintuan, PromotionTypeEnum.PINTUAN);
 			for (PromotionGoods promotionGood : promotionGoods) {
 				if (goodsSkuService.getGoodsSkuByIdFromCache(promotionGood.getSkuId()) == null) {
-					log.error("商品[" + promotionGood.getGoodsName() + "]不存在或处于不可售卖状态！");
+					log.error(
+						"商品[" + promotionGood.getGoodsName() + "]不存在或处于不可售卖状态！");
 					throw new BusinessException();
 				}
 				//查询是否在同一时间段参与了拼团活动
-				Integer count = promotionGoodsService.findInnerOverlapPromotionGoods(PromotionTypeEnum.SECKILL.name(), promotionGood.getSkuId(), pintuan.getStartTime(), pintuan.getEndTime(), pintuan.getId());
+				Integer count = promotionGoodsService.findInnerOverlapPromotionGoods(
+					PromotionTypeEnum.SECKILL.name(), promotionGood.getSkuId(),
+					pintuan.getStartTime(), pintuan.getEndTime(), pintuan.getId());
 				//查询是否在同一时间段参与了限时抢购活动
-				count += promotionGoodsService.findInnerOverlapPromotionGoods(PromotionTypeEnum.PINTUAN.name(), promotionGood.getSkuId(), pintuan.getStartTime(), pintuan.getEndTime(), pintuan.getId());
+				count += promotionGoodsService.findInnerOverlapPromotionGoods(
+					PromotionTypeEnum.PINTUAN.name(), promotionGood.getSkuId(),
+					pintuan.getStartTime(), pintuan.getEndTime(), pintuan.getId());
 				if (count > 0) {
-					log.error("商品[" + promotionGood.getGoodsName() + "]已经在重叠的时间段参加了秒杀活动或拼团活动，不能参加拼团活动");
-					throw new BusinessException("商品[" + promotionGood.getGoodsName() + "]已经在重叠的时间段参加了秒杀活动或拼团活动，不能参加拼团活动");
+					log.error("商品[" + promotionGood.getGoodsName()
+						+ "]已经在重叠的时间段参加了秒杀活动或拼团活动，不能参加拼团活动");
+					throw new BusinessException("商品[" + promotionGood.getGoodsName()
+						+ "]已经在重叠的时间段参加了秒杀活动或拼团活动，不能参加拼团活动");
 				}
 			}
 			PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
