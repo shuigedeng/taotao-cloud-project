@@ -87,7 +87,7 @@ public class OAuth2ProviderConfigurer extends
 			.authorizationUri("https://open.weixin.qq.com/connect/qrconnect")
 			.tokenUri("https://api.weixin.qq.com/sns/oauth2/access_token")
 			.userInfoUri("https://api.weixin.qq.com/sns/userinfo")
-			.clientName("微信")
+			.clientName("微信扫码")
 			.build();
 		this.delegateClientRegistrationRepository.addClientRegistration(clientRegistration);
 		return this;

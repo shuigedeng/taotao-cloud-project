@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.model.message.OrderMessage;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
@@ -12,10 +12,9 @@ import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.ExperienceSettingVO;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 /**
  * 会员经验值
@@ -36,7 +35,7 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 	 * 会员
 	 */
 	@Autowired
-	private FeignMemberApi memberService;
+	private IFeignMemberApi memberService;
 	/**
 	 * 订单
 	 */
@@ -56,9 +55,11 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 			//获取订单信息
 			Order order = orderService.getBySn(orderMessage.orderSn());
 			//计算赠送经验值数量
-			BigDecimal point = CurrencyUtils.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
+			BigDecimal point = CurrencyUtils.mul(experienceSetting.getMoney(), order.getFlowPrice(),
+				0);
 			//赠送会员经验值
-			memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(), order.getMemberId(), "会员下单，赠送经验值" + point + "分");
+			memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(),
+				order.getMemberId(), "会员下单，赠送经验值" + point + "分");
 		}
 	}
 
@@ -69,6 +70,7 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 	 * @since 2022-05-16 17:35:40
 	 */
 	private ExperienceSettingVO getExperienceSetting() {
-		return settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name()).data();
+		return settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name())
+			.data();
 	}
 }

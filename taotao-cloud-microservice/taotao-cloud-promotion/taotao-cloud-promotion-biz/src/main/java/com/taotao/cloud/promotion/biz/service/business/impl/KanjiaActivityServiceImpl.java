@@ -12,7 +12,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityDTO;
@@ -26,14 +26,13 @@ import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
 import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityGoodsService;
 import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityLogService;
 import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityService;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Objects;
 
 
 /**
@@ -45,7 +44,8 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper, KanjiaActivity> implements
+public class KanjiaActivityServiceImpl extends
+	ServiceImpl<KanJiaActivityMapper, KanjiaActivity> implements
 	KanjiaActivityService {
 
 	@Autowired
@@ -53,7 +53,7 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 	@Autowired
 	private KanjiaActivityLogService kanjiaActivityLogService;
 	@Autowired
-	private FeignMemberApi memberService;
+	private IFeignMemberApi memberService;
 	@Autowired
 	private IFeignGoodsSkuApi goodsSkuService;
 
@@ -63,7 +63,8 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 	}
 
 	@Override
-	public KanjiaActivityVO getKanjiaActivityVO(KanjiaActivitySearchQuery kanJiaActivitySearchParams) {
+	public KanjiaActivityVO getKanjiaActivityVO(
+		KanjiaActivitySearchQuery kanJiaActivitySearchParams) {
 		AuthUser authUser = Objects.requireNonNull(UserContext.getCurrentUser());
 		KanjiaActivity kanjiaActivity = this.getKanjiaActivity(kanJiaActivitySearchParams);
 		KanjiaActivityVO kanjiaActivityVO = new KanjiaActivityVO();
@@ -76,9 +77,10 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 		//判断是否发起了砍价活动,如果发起可参与活动
 		kanjiaActivityVO.setLaunch(true);
 		//如果已发起砍价判断用户是否可以砍价
-		KanjiaActivityLog kanjiaActivityLog = kanjiaActivityLogService.getOne(new LambdaQueryWrapper<KanjiaActivityLog>()
-			.eq(KanjiaActivityLog::getKanjiaActivityId, kanjiaActivity.getId())
-			.eq(KanjiaActivityLog::getKanjiaMemberId, authUser.getId()));
+		KanjiaActivityLog kanjiaActivityLog = kanjiaActivityLogService.getOne(
+			new LambdaQueryWrapper<KanjiaActivityLog>()
+				.eq(KanjiaActivityLog::getKanjiaActivityId, kanjiaActivity.getId())
+				.eq(KanjiaActivityLog::getKanjiaMemberId, authUser.getId()));
 		if (kanjiaActivityLog == null) {
 			kanjiaActivityVO.setHelp(true);
 		}
@@ -112,7 +114,8 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 		}
 		KanjiaActivity kanJiaActivity = new KanjiaActivity();
 		//获取商品信息
-		GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(kanJiaActivityGoods.getSkuId());
+		GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
+			kanJiaActivityGoods.getSkuId());
 		if (goodsSku != null) {
 			kanJiaActivity.setSkuId(kanJiaActivityGoods.getSkuId());
 			kanJiaActivity.setGoodsName(goodsSku.getGoodsName());
@@ -145,13 +148,15 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 		//根据砍价发起活动id查询砍价活动信息
 		KanjiaActivity kanjiaActivity = this.getById(kanjiaActivityId);
 		//判断活动非空或非正在进行中的活动
-		if (kanjiaActivity == null || !kanjiaActivity.getStatus().equals(PromotionsStatusEnum.START.name())) {
+		if (kanjiaActivity == null || !kanjiaActivity.getStatus()
+			.equals(PromotionsStatusEnum.START.name())) {
 			throw new BusinessException(ResultEnum.PROMOTION_STATUS_END);
 		} else if (member == null) {
 			throw new BusinessException(ResultEnum.USER_NOT_EXIST);
 		}
 		//根据skuId查询当前sku是否参与活动并且是在活动进行中
-		KanjiaActivityGoods kanJiaActivityGoods = kanjiaActivityGoodsService.getById(kanjiaActivity.getKanjiaActivityGoodsId());
+		KanjiaActivityGoods kanJiaActivityGoods = kanjiaActivityGoodsService.getById(
+			kanjiaActivity.getKanjiaActivityGoodsId());
 		if (kanJiaActivityGoods == null) {
 			throw new BusinessException(ResultEnum.PROMOTION_STATUS_END);
 		}
@@ -168,17 +173,21 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 		kanjiaActivityDTO.setKanjiaActivityGoodsId(kanjiaActivity.getKanjiaActivityGoodsId());
 		kanjiaActivityDTO.setKanjiaActivityId(kanjiaActivityId);
 		//获取砍价金额
-		BigDecimal price = this.getKanjiaPrice(kanJiaActivityGoods, kanjiaActivity.getSurplusPrice());
+		BigDecimal price = this.getKanjiaPrice(kanJiaActivityGoods,
+			kanjiaActivity.getSurplusPrice());
 		kanjiaActivityDTO.setKanjiaPrice(price);
 		//计算剩余金额
-		kanjiaActivityDTO.setSurplusPrice(CurrencyUtils.sub(kanjiaActivity.getSurplusPrice(), price));
+		kanjiaActivityDTO.setSurplusPrice(
+			CurrencyUtils.sub(kanjiaActivity.getSurplusPrice(), price));
 		kanjiaActivityDTO.setKanjiaMemberId(member.getId());
 		kanjiaActivityDTO.setKanjiaMemberName(member.getUsername());
 		kanjiaActivityDTO.setKanjiaMemberFace(member.getFace());
-		KanjiaActivityLog kanjiaActivityLog = kanjiaActivityLogService.addKanJiaActivityLog(kanjiaActivityDTO);
+		KanjiaActivityLog kanjiaActivityLog = kanjiaActivityLogService.addKanJiaActivityLog(
+			kanjiaActivityDTO);
 
 		//如果可砍金额为0的话说明活动成功了
-		if (BigDecimal.BigDecimalToLongBits(kanjiaActivityDTO.getSurplusPrice()) == BigDecimal.BigDecimalToLongBits(0D)) {
+		if (BigDecimal.BigDecimalToLongBits(kanjiaActivityDTO.getSurplusPrice())
+			== BigDecimal.BigDecimalToLongBits(0D)) {
 			kanjiaActivity.setStatus(KanJiaStatusEnum.SUCCESS.name());
 		}
 		kanjiaActivity.setSurplusPrice(kanjiaActivityLog.getSurplusPrice());
@@ -194,7 +203,8 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 	 * @param surplusPrice        剩余可砍金额
 	 * @return 砍一刀价格
 	 */
-	private BigDecimal getKanjiaPrice(KanjiaActivityGoods kanjiaActivityGoods, BigDecimal surplusPrice) {
+	private BigDecimal getKanjiaPrice(KanjiaActivityGoods kanjiaActivityGoods,
+		BigDecimal surplusPrice) {
 
 		//如果剩余砍价金额小于最低砍价金额则返回0
 		if (kanjiaActivityGoods.getLowestPrice() > surplusPrice) {
@@ -206,7 +216,8 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 			return kanjiaActivityGoods.getLowestPrice();
 		}
 		//获取随机砍价金额
-		BigDecimal bigDecimal = RandomUtil.randomBigDecimal(Convert.toBigDecimal(kanjiaActivityGoods.getLowestPrice()),
+		BigDecimal bigDecimal = RandomUtil.randomBigDecimal(
+			Convert.toBigDecimal(kanjiaActivityGoods.getLowestPrice()),
 			Convert.toBigDecimal(kanjiaActivityGoods.getHighestPrice()));
 		return bigDecimal.setScale(2, RoundingMode.UP).BigDecimalValue();
 
@@ -214,7 +225,8 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
 
 
 	@Override
-	public IPage<KanjiaActivity> getForPage(KanjiaActivityPageQuery kanjiaActivityPageQuery, PageVO page) {
+	public IPage<KanjiaActivity> getForPage(KanjiaActivityPageQuery kanjiaActivityPageQuery,
+		PageVO page) {
 		QueryWrapper<KanjiaActivity> queryWrapper = kanjiaActivityPageQuery.wrapper();
 		return this.page(PageUtil.initPage(page), queryWrapper);
 	}

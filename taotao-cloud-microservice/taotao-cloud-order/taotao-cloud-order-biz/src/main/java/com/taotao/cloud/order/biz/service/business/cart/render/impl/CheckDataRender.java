@@ -7,7 +7,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
-import com.taotao.cloud.member.api.feign.FeignMemberApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
@@ -45,7 +45,7 @@ public class CheckDataRender implements ICartRenderStep {
 
 	private final IFeignPintuanApi pintuanService;
 
-	private final FeignMemberApi memberService;
+	private final IFeignMemberApi memberService;
 
 	private final PointsGoodsService pointsGoodsService;
 

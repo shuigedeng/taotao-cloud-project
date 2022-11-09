@@ -8,10 +8,10 @@ import com.taotao.cloud.auth.biz.authentication.face.service.FaceUserDetailsServ
 import com.taotao.cloud.auth.biz.authentication.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppClient;
-import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppClientService;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppRequest;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppSessionKeyCache;
 import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.miniapp.MiniAppUserInfo;
 import com.taotao.cloud.auth.biz.authentication.mp.service.MpUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.oauth2.DelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.oauth2.OAuth2ProviderConfigurer;
@@ -23,13 +23,18 @@ import com.taotao.cloud.auth.biz.models.JwtGrantedAuthoritiesConverter;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
+import com.taotao.cloud.auth.biz.utils.WxUtils;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -50,7 +55,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -77,11 +81,12 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableGlobalMethodSecurity(
 	prePostEnabled = true,
 	order = 0,
-	mode = AdviceMode.PROXY,
-	proxyTargetClass = false
+	mode = AdviceMode.PROXY
 )
 @EnableWebSecurity
 public class SystemSecurityConfiguration implements EnvironmentAware {
+
+	private static Map<String, String> cache = new HashMap<>();
 
 	public static final String[] permitAllUrls = new String[]{
 		"/swagger-ui.html",
@@ -388,45 +393,77 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			.miniAppLogin(miniAppLoginConfigurer -> miniAppLoginConfigurer
 				// 实现小程序多租户
 				// 根据请求携带的clientid 查询小程序的appid和secret 1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
-				.miniAppClientService(new MiniAppClientService() {
-					@Override
-					public MiniAppClient get(String clientId) {
-						MiniAppClient miniAppClient = new MiniAppClient();
-						miniAppClient.setClientId(clientId);
-						miniAppClient.setAppId("wx234234324");
-						miniAppClient.setSecret("x34431dssf234442231432");
-						return miniAppClient;
-					}
+				.miniAppClientService(clientId -> {
+					MiniAppClient miniAppClient = new MiniAppClient();
+					miniAppClient.setClientId(clientId);
+					miniAppClient.setAppId("wxcd395c35c45eb823");
+					miniAppClient.setSecret("75f9a12c82bd24ecac0d37bf1156c749");
+					return miniAppClient;
 				})
 				// 小程序用户 自动注册和检索  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 				.miniAppUserDetailsService(new MiniAppUserDetailsService() {
 					@Override
-					public UserDetails register(MiniAppRequest request) {
-						return // 模拟 微信小程序用户注册
-							User.withUsername(request.getOpenId())
-								.password("password")
-								.authorities("ROLE_USER", "ROLE_ADMIN").build();
+					public UserDetails register(MiniAppRequest request, String sessionKey) {
+						System.out.println(request);
+
+						String signature = DigestUtils.sha1Hex(request.getRawData() + sessionKey);
+						if (!request.getSignature().equals(signature)) {
+							throw new RuntimeException("数字签名验证失败");
+						}
+
+						String encryptedData = request.getEncryptedData();
+						String iv = request.getIv();
+
+						// 解密encryptedData数据
+						String decrypt = WxUtils.decrypt(sessionKey, iv, encryptedData);
+						MiniAppUserInfo miniAppUserInfo = JsonUtils.toObject(decrypt,
+							MiniAppUserInfo.class);
+						miniAppUserInfo.setSessionKey(sessionKey);
+
+						System.out.println(miniAppUserInfo);
+
+						// 调用数据库 微信小程序用户注册
+
+						//模拟
+						return SecurityUser.builder()
+							.account("admin")
+							.userId(1L)
+							.username("admin")
+							.nickname("admin")
+							.password(
+								"$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")
+							.phone("15730445331")
+							.mobile("15730445331")
+							.email("981376578@qq.com")
+							.sex(1)
+							.status(1)
+							.type(2)
+							.permissions(Set.of("xxx", "sldfl"))
+							.build();
 					}
 
 					@Override
 					public UserDetails loadByOpenId(String clientId, String openId) {
-						return // 模拟 根据openid 查询 小程序用户信息
-							User.withUsername(openId)
-								.password("password")
-								.authorities("ROLE_USER", "ROLE_ADMIN").build();
+						System.out.println(clientId);
+						System.out.println(openId);
+
+						// 模拟 根据openid 查询 小程序用户信息
+						return null;
 					}
 				})
 				// 小程序sessionkey缓存 过期时间应该小于微信官方文档的声明   1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 				.miniAppSessionKeyCache(new MiniAppSessionKeyCache() {
 					@Override
 					public String put(String cacheKey, String sessionKey) {
+						// 应该小于 微信默认5分钟过期
+						cache.put(cacheKey, sessionKey);
 						return sessionKey;
 					}
 
 					@Override
 					public String get(String cacheKey) {
 						// 模拟 sessionkey 缓存
-						return "xxxxxxxxxx";
+						return cache.get(cacheKey);
 					}
 				})
 				// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
@@ -438,13 +475,13 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			.and()
 			// **************************************oauth2登录配置***********************************************
 			.apply(new OAuth2ProviderConfigurer(delegateClientRegistrationRepository))
-			// 微信网页授权  下面的参数是假的
-			.wechatWebclient("wxdf90xxx8e7f", "bf1306baaaxxxxx15eb02d68df5")
-			// 企业微信登录 下面的参数是假的
+			// 微信网页授权
+			.wechatWebclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
+			// 企业微信登录
 			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8",
 				"1000005")
-			// 微信扫码登录 下面的参数是假的
-			.wechatWebLoginclient("wxafd62c05779e50bd", "ab24fce07ea84228dc4e64720f8bdefd")
+			// 微信扫码登录
+			.wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
 			.oAuth2LoginConfigurerConsumer(oauth2LoginConfigurer ->
 					oauth2LoginConfigurer
 						//.loginPage("/user/login").failureUrl("/login-error").permitAll()

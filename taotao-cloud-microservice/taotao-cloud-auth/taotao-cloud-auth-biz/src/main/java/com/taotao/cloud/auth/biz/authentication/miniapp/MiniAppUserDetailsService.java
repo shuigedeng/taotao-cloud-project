@@ -13,7 +13,7 @@ public interface MiniAppUserDetailsService {
 	 * @param request the request
 	 * @return the user details
 	 */
-	UserDetails register(MiniAppRequest request);
+	UserDetails register(MiniAppRequest request, String sessionKey);
 
 	/**
 	 * openid登录

@@ -1,6 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication.account;
 
 import com.taotao.cloud.auth.biz.authentication.account.service.AccountUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -14,8 +15,6 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
-
-import java.util.Collection;
 
 /**
  * 用户+密码登录
@@ -43,11 +42,11 @@ public class AccountAuthenticationProvider implements AuthenticationProvider, In
 
 		String username = unAuthenticationToken.getName();
 		String passowrd = (String) unAuthenticationToken.getCredentials();
+		String type = unAuthenticationToken.getType();
 
 		// 验证码校验
-		UserDetails userDetails = accountUserDetailsService.loadUserByPhone(username);
-		// 校验密码
-		//TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
+		UserDetails userDetails = accountUserDetailsService.loadUserByUsername(username, passowrd,
+			type);
 		return createSuccessAuthentication(authentication, userDetails);
 	}
 
@@ -70,15 +69,21 @@ public class AccountAuthenticationProvider implements AuthenticationProvider, In
 	 * 认证成功将非授信凭据转为授信凭据. 封装用户信息 角色信息。
 	 *
 	 * @param authentication the authentication
-	 * @param user           the user
+	 * @param userDetails    the user
 	 * @return the authentication
 	 */
 	protected Authentication createSuccessAuthentication(Authentication authentication,
-														 UserDetails user) {
-
+		UserDetails userDetails) {
 		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(
-			user.getAuthorities());
-		AccountAuthenticationToken authenticationToken = new AccountAuthenticationToken(user, null, authorities);
+			userDetails.getAuthorities());
+
+		String type = "";
+		if (authentication instanceof AccountAuthenticationToken accountAuthenticationToken) {
+			type = accountAuthenticationToken.getType();
+		}
+
+		AccountAuthenticationToken authenticationToken = new AccountAuthenticationToken(userDetails,
+			null, type, authorities);
 		authenticationToken.setDetails(authentication.getDetails());
 
 		return authenticationToken;
