@@ -6,11 +6,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public interface FaceUserDetailsService {
 
 	/**
-	 * load user by phone
+	 * load user by imgBase64
 	 *
-	 * @param phone phone
+	 * @param imgBase64 imgBase64
 	 * @return userDetails
 	 * @throws UsernameNotFoundException not found user
 	 */
-	UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException;
+	UserDetails loadUserByImgBase64(String imgBase64) throws UsernameNotFoundException;
 }

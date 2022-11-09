@@ -9,7 +9,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.member.api.feign.FeignMemberEvaluationApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -63,7 +63,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 * 会员评价
 	 */
 	@Autowired
-	private FeignMemberEvaluationApi memberEvaluationService;
+	private IFeignMemberEvaluationApi memberEvaluationService;
 
 	@Autowired
 	private IAfterSaleService afterSaleService;

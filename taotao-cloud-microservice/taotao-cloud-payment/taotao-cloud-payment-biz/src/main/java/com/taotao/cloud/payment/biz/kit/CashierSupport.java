@@ -6,7 +6,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.member.api.feign.FeignMemberWalletApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
 import com.taotao.cloud.payment.api.enums.PaymentClientEnum;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
@@ -42,7 +42,7 @@ public class CashierSupport {
 	 * 预存款
 	 */
 	@Autowired
-	private FeignMemberWalletApi memberWalletService;
+	private IFeignMemberWalletApi memberWalletService;
 	/**
 	 * 配置
 	 */

@@ -9,11 +9,12 @@ import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
-import java.util.List;
-import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 远程调用会员用户模块
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2022-04-25 16:37:49
  */
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberEvaluationApiFallback.class)
-public interface FeignMemberEvaluationApi {
+public interface IFeignMemberEvaluationApi {
 
 
 	/**
@@ -61,7 +62,7 @@ public interface FeignMemberEvaluationApi {
 
 	@GetMapping(value = "/member/memberEvaluationDTO")
 	Boolean addMemberEvaluation(@RequestParam MemberEvaluationDTO memberEvaluationDTO,
-		@RequestParam boolean b);
+								@RequestParam boolean b);
 
 	/**
 	 * LambdaQueryWrapper<MemberEvaluation> lambdaQueryWrapper = Wrappers.lambdaQuery();
@@ -80,7 +81,7 @@ public interface FeignMemberEvaluationApi {
 
 	@GetMapping(value = "/member/evaluation/reply")
 	boolean reply(@RequestParam Long id, @RequestParam String reply,
-		@RequestParam String replyImage);
+				  @RequestParam String replyImage);
 
 	@GetMapping(value = "/member/evaluation/queryPage")
 	PageResult<MemberEvaluationListVO> queryPage(

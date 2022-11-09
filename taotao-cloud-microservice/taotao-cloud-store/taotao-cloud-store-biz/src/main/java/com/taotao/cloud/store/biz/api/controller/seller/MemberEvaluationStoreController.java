@@ -5,11 +5,11 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.member.api.feign.FeignMemberEvaluationApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberEvaluationStoreController {
 
 	@Autowired
-	private FeignMemberEvaluationApi memberEvaluationService;
+	private IFeignMemberEvaluationApi memberEvaluationService;
 
 	@Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表")
 	@RequestLogger

@@ -1,11 +1,12 @@
 package com.taotao.cloud.member.api.feign.fallback;
 
 import cn.hutool.core.date.DateTime;
-import com.taotao.cloud.member.api.feign.FeignMemberRechargeApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
+import org.springframework.cloud.openfeign.FallbackFactory;
+
 import java.math.BigDecimal;
 import java.util.List;
-import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
  * RemoteMemberFallbackImpl
@@ -14,11 +15,11 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @version 2022.03
  * @since 2020/11/20 下午4:10
  */
-public class FeignMemberRechargeApiFallback implements FallbackFactory<FeignMemberRechargeApi> {
+public class FeignMemberRechargeApiFallback implements FallbackFactory<IFeignMemberRechargeApi> {
 
 	@Override
-	public FeignMemberRechargeApi create(Throwable throwable) {
-		return new FeignMemberRechargeApi() {
+	public IFeignMemberRechargeApi create(Throwable throwable) {
+		return new IFeignMemberRechargeApi() {
 			@Override
 			public Boolean paySuccess(String sn, String receivableNo, String paymentMethod) {
 				return null;

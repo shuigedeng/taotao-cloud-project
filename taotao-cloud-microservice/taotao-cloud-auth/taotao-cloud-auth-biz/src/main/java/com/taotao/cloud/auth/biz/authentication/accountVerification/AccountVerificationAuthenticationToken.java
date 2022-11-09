@@ -12,7 +12,8 @@ public class AccountVerificationAuthenticationToken extends AbstractAuthenticati
 
 	private final Object principal;
 	private String password;
-	private String verificationCode;
+	private final String verificationCode;
+	private final String type;
 
 	/**
 	 * 此构造函数用来初始化未授信凭据.
@@ -20,11 +21,12 @@ public class AccountVerificationAuthenticationToken extends AbstractAuthenticati
 	 * @param principal the principal
 	 * @param password  the captcha
 	 */
-	public AccountVerificationAuthenticationToken(Object principal, String password, String verificationCode) {
+	public AccountVerificationAuthenticationToken(Object principal, String password, String verificationCode, String type) {
 		super(null);
 		this.principal = principal;
 		this.password = password;
 		this.verificationCode = verificationCode;
+		this.type = type;
 		setAuthenticated(false);
 	}
 
@@ -37,11 +39,12 @@ public class AccountVerificationAuthenticationToken extends AbstractAuthenticati
 	 * @param authorities      the authorities
 	 */
 	public AccountVerificationAuthenticationToken(Object principal, String password
-		, String verificationCode, Collection<? extends GrantedAuthority> authorities) {
+		, String verificationCode, String type, Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
 		this.password = password;
 		this.verificationCode = verificationCode;
+		this.type = type;
 		// must use super, as we override
 		super.setAuthenticated(true);
 	}
@@ -76,7 +79,7 @@ public class AccountVerificationAuthenticationToken extends AbstractAuthenticati
 		return verificationCode;
 	}
 
-	public void setVerificationCode(String verificationCode) {
-		this.verificationCode = verificationCode;
+	public String getType() {
+		return type;
 	}
 }

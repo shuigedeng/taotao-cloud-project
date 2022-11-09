@@ -6,11 +6,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public interface AccountVerificationUserDetailsService {
 
 	/**
-	 * load user by phone
+	 * load user by username
 	 *
-	 * @param phone phone
+	 * @param username username
 	 * @return userDetails
 	 * @throws UsernameNotFoundException not found user
 	 */
-	UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException;
+	UserDetails loadUserByUsername(String username, String password, String type) throws UsernameNotFoundException;
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.member.api.feign.FeignMemberEvaluationApi;
+import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
@@ -19,10 +19,10 @@ import java.util.Map;
  * @version 2022.03
  * @since 2020/11/20 下午4:10
  */
-public class FeignMemberEvaluationApiFallback implements FallbackFactory<FeignMemberEvaluationApi> {
+public class FeignMemberEvaluationApiFallback implements FallbackFactory<IFeignMemberEvaluationApi> {
 	@Override
-	public FeignMemberEvaluationApi create(Throwable throwable) {
-		return new FeignMemberEvaluationApi() {
+	public IFeignMemberEvaluationApi create(Throwable throwable) {
+		return new IFeignMemberEvaluationApi() {
 
 			@Override
 			public Long count(Long goodsId, String name) {
