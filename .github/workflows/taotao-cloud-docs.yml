@@ -1,0 +1,24 @@
+name: assemble taro mall h5
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+    branches: [ master ]
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout project
+        uses: actions/checkout@v3
+
+      - name: deploy to server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "docs/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_DOCS_TARGET }}
