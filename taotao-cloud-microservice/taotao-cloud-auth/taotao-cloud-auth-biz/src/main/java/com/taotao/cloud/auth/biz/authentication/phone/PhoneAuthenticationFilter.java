@@ -1,9 +1,5 @@
 package com.taotao.cloud.auth.biz.authentication.phone;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.taotao.cloud.auth.biz.authentication.phone.PhoneAuthenticationToken;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,19 +10,24 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public class PhoneAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "phone";
+	public static final String SPRING_SECURITY_FORM_PHONE_KEY = "phone";
 
 	public static final String SPRING_SECURITY_FORM_CAPTCHA_KEY = "captcha";
+
+	public static final String SPRING_SECURITY_FORM_TYPE_KEY = "type";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
 		"/login/phone",
 		"POST");
 
-	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-
+	private String phoneParameter = SPRING_SECURITY_FORM_PHONE_KEY;
 	private String captchaParameter = SPRING_SECURITY_FORM_CAPTCHA_KEY;
+	private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
 	private Converter<HttpServletRequest, PhoneAuthenticationToken> captchaAuthenticationTokenConverter;
 
@@ -45,7 +46,7 @@ public class PhoneAuthenticationFilter extends AbstractAuthenticationProcessingF
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-		HttpServletResponse response) throws AuthenticationException {
+												HttpServletResponse response) throws AuthenticationException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
 				"Authentication method not supported: " + request.getMethod());
@@ -60,11 +61,16 @@ public class PhoneAuthenticationFilter extends AbstractAuthenticationProcessingF
 
 	private Converter<HttpServletRequest, PhoneAuthenticationToken> defaultConverter() {
 		return request -> {
-			String username = request.getParameter(this.usernameParameter);
-			username = (username != null) ? username.trim() : "";
+			String phone = request.getParameter(this.phoneParameter);
+			phone = (phone != null) ? phone.trim() : "";
+
 			String captcha = request.getParameter(this.captchaParameter);
 			captcha = (captcha != null) ? captcha.trim() : "";
-			return new PhoneAuthenticationToken(username, captcha);
+
+			String type = request.getParameter(this.typeParameter);
+			type = (type != null) ? type.trim() : "";
+
+			return new PhoneAuthenticationToken(phone, captcha, type);
 		};
 	}
 
@@ -73,9 +79,9 @@ public class PhoneAuthenticationFilter extends AbstractAuthenticationProcessingF
 		authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
 	}
 
-	public void setUsernameParameter(String usernameParameter) {
-		Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
-		this.usernameParameter = usernameParameter;
+	public void setPhoneParameter(String phoneParameter) {
+		Assert.hasText(phoneParameter, "phoneParameter must not be empty or null");
+		this.phoneParameter = phoneParameter;
 	}
 
 	public void setCaptchaParameter(String captchaParameter) {
@@ -92,8 +98,8 @@ public class PhoneAuthenticationFilter extends AbstractAuthenticationProcessingF
 		this.postOnly = postOnly;
 	}
 
-	public final String getUsernameParameter() {
-		return this.usernameParameter;
+	public final String getPhoneParameter() {
+		return this.phoneParameter;
 	}
 
 	public final String getCaptchaParameter() {

@@ -1,9 +1,9 @@
 package com.taotao.cloud.auth.biz.authentication.qrcocde;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -12,16 +12,17 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
-	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
+	public static final String SPRING_SECURITY_FORM_UUID_KEY = "uuid";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
 		"/login/qrcode", "POST");
 
-	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
+	private String uuidParameter = SPRING_SECURITY_FORM_UUID_KEY;
 
 	private Converter<HttpServletRequest, QrcodeAuthenticationToken> qrcodeAuthenticationTokenConverter;
 
@@ -39,7 +40,7 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-		HttpServletResponse response) throws AuthenticationException {
+												HttpServletResponse response) throws AuthenticationException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
 				"Authentication method not supported: " + request.getMethod());
@@ -54,13 +55,16 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
 
 	private Converter<HttpServletRequest, QrcodeAuthenticationToken> defaultConverter() {
 		return request -> {
-			String username = request.getParameter(this.usernameParameter);
+			String username = request.getParameter(this.uuidParameter);
 			username = (username != null) ? username.trim() : "";
 
-			String passord = request.getParameter(this.passwordParameter);
-			passord = (passord != null) ? passord.trim() : "";
+			String authorization = request.getHeader("Authorization");
+			if (StrUtil.isBlank(authorization)) {
+				throw new AuthenticationCredentialsNotFoundException("");
+			}
 
-			return new QrcodeAuthenticationToken(username, passord);
+
+			return new QrcodeAuthenticationToken(username, "");
 		};
 	}
 
@@ -71,12 +75,12 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
 
 	public void setUsernameParameter(String usernameParameter) {
 		Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
-		this.usernameParameter = usernameParameter;
+		// this.usernameParameter = usernameParameter;
 	}
 
 	public void setPasswordParameter(String passwordParameter) {
 		Assert.hasText(passwordParameter, "Password parameter must not be empty or null");
-		this.passwordParameter = passwordParameter;
+		// this.passwordParameter = passwordParameter;
 	}
 
 	public void setConverter(Converter<HttpServletRequest, QrcodeAuthenticationToken> converter) {
@@ -86,14 +90,6 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
 
 	public void setPostOnly(boolean postOnly) {
 		this.postOnly = postOnly;
-	}
-
-	public final String getUsernameParameter() {
-		return this.usernameParameter;
-	}
-
-	public String getPasswordParameter() {
-		return passwordParameter;
 	}
 
 }

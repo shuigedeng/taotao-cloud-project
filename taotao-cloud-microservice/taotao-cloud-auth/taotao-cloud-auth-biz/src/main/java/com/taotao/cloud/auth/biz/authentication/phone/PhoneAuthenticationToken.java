@@ -1,9 +1,10 @@
 package com.taotao.cloud.auth.biz.authentication.phone;
 
-import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
+
+import java.util.Collection;
 
 public class PhoneAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -11,6 +12,7 @@ public class PhoneAuthenticationToken extends AbstractAuthenticationToken {
 
 	private final Object principal;
 	private String captcha;
+	private String type;
 
 	/**
 	 * 此构造函数用来初始化未授信凭据.
@@ -18,10 +20,11 @@ public class PhoneAuthenticationToken extends AbstractAuthenticationToken {
 	 * @param principal the principal
 	 * @param captcha   the captcha
 	 */
-	public PhoneAuthenticationToken(Object principal, String captcha) {
+	public PhoneAuthenticationToken(Object principal, String captcha, String type) {
 		super(null);
 		this.principal = principal;
 		this.captcha = captcha;
+		this.type = type;
 		setAuthenticated(false);
 	}
 
@@ -32,11 +35,12 @@ public class PhoneAuthenticationToken extends AbstractAuthenticationToken {
 	 * @param captcha     the captcha
 	 * @param authorities the authorities
 	 */
-	public PhoneAuthenticationToken(Object principal, String captcha,
-		Collection<? extends GrantedAuthority> authorities) {
+	public PhoneAuthenticationToken(Object principal, String captcha, String type,
+									Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
 		this.captcha = captcha;
+		this.type = type;
 		// must use super, as we override
 		super.setAuthenticated(true);
 	}
@@ -65,5 +69,9 @@ public class PhoneAuthenticationToken extends AbstractAuthenticationToken {
 	public void eraseCredentials() {
 		super.eraseCredentials();
 		captcha = null;
+	}
+
+	public String getType() {
+		return type;
 	}
 }

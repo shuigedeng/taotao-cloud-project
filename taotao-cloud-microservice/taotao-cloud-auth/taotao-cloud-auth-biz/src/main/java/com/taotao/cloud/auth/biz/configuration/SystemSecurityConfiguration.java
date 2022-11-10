@@ -7,15 +7,12 @@ import com.taotao.cloud.auth.biz.authentication.mp.service.MpUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.oauth2.DelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.oauth2.OAuth2ProviderConfigurer;
 import com.taotao.cloud.auth.biz.authentication.oneClick.service.OneClickUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeService;
-import com.taotao.cloud.auth.biz.authentication.qrcocde.service.QrcodeUserDetailsService;
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.models.JwtGrantedAuthoritiesConverter;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +54,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 /**
@@ -299,48 +295,14 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			//手机扫码登录
 			.qrcodeLogin(qrcodeLoginConfigurer -> {
 				qrcodeLoginConfigurer
-					.qrcodeService(new QrcodeService() {
-						@Override
-						public boolean verifyQrcode(String qrcode) {
-							return false;
-						}
-					})
-					.accountUserDetailsService(new QrcodeUserDetailsService() {
-						@Override
-						public UserDetails loadUserByPhone(String phone)
-							throws UsernameNotFoundException {
-							return null;
-						}
-					});
+					.successHandler(authenticationSuccessHandler)
+					// 两个登录保持一致
+					.failureHandler(authenticationFailureHandler);
 			})
 			// 手机号码+短信登录
 			.phoneLogin(phoneLoginConfigurer ->
 				// 验证码校验 1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 				phoneLoginConfigurer
-					.phoneService((phone, rawCode) -> {
-						System.out.println(phone);
-						System.out.println(rawCode);
-
-						return true;
-					})
-					// 根据手机号查询用户UserDetials  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
-					.phoneUserDetailsService(phone -> {
-						return SecurityUser.builder()
-							.account("admin")
-							.userId(1L)
-							.username("admin")
-							.nickname("admin")
-							.password(
-								"$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")
-							.phone("15730445331")
-							.mobile("15730445331")
-							.email("981376578@qq.com")
-							.sex(1)
-							.status(1)
-							.type(2)
-							.permissions(Set.of("xxx", "sldfl"))
-							.build();
-					})
 					// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 					// 两个登录保持一致
 					.successHandler(authenticationSuccessHandler)
