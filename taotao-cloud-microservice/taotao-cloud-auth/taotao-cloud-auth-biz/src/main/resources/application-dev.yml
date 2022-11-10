@@ -639,3 +639,11 @@ oauth2:
 jwk:
   set:
     uri: http://127.0.0.1:33336/oauth2/jwks
+
+auth:
+  baidu:
+    face:
+      api-key: xx
+      app-id: xx
+      group-id: xx
+      secret-key: xx

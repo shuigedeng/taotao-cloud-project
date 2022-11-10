@@ -12,5 +12,5 @@ public interface PhoneUserDetailsService {
 	 * @return userDetails
 	 * @throws UsernameNotFoundException not found user
 	 */
-	UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException;
+	UserDetails loadUserByPhone(String phone, String type) throws UsernameNotFoundException;
 }
