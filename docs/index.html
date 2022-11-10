@@ -1,42 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content="Description">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <!--  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"> -->
-    <link rel="stylesheet"
-          href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <!--  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"> -->
+  <link rel="stylesheet"
+        href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
 </head>
 <body>
 <nav>
-    <a href="#/">EN</a>
-    <a href="#/zh-cn/">中文</a>
+  <a href="#/">EN</a>
+  <a href="#/zh-cn/">中文</a>
 </nav>
 <div id="app"></div>
 <script>
-    window.$docsify = {
-        name: 'taotao cloud',
-        repo: 'https://github.com/shuigedeng/taotao-cloud-poject',
-        coverpage: true,
-        loadNavbar: true,
-        // 加载 _sidebar.md
-        loadSidebar: true,
-        // 加载 summary.md
-        //loadSidebar: 'summary.md',
-        alias: {
-            '/.*/_sidebar.md': '/_sidebar.md'
-        },
-        maxLevel: 2,
-        subMaxLevel: 4,
-        search: {
-            placeholder: '搜索',
-            noData: '找不到结果!',
-            depth: 3
-        },
-    }
+  window.$docsify = {
+    name: 'taotao cloud',
+    repo: 'https://github.com/shuigedeng',
+    coverpage: true,
+    loadNavbar: true,
+    // 加载 _sidebar.md
+    loadSidebar: true,
+    // 加载 summary.md
+    //loadSidebar: 'summary.md',
+    alias: {
+      '/.*/_sidebar.md': '/_sidebar.md'
+    },
+    maxLevel: 2,
+    subMaxLevel: 4,
+    search: {
+      placeholder: '搜索',
+      noData: '找不到结果!',
+      depth: 3
+    },
+    share: {
+      reddit: true,
+      linkedin: true,
+      facebook: true,
+      twitter: true,
+      whatsapp: true,
+      telegram: true,
+    },
+    count: {
+      countable: true,
+      position: 'top',
+      margin: '10px',
+      float: 'right',
+      fontsize: '0.9em',
+      color: 'rgb(90,90,90)',
+      language: 'chinese',
+      localization: {
+        words: "",
+        minute: ""
+      },
+      isExpected: true
+    },
+    //rtl: {
+    //  body: "rtl",
+    //  side: "ltr",
+    //  bdo: "ltr"
+    //},
+    pagination: {
+      previousText: '上一章节',
+      // or
+      nextText: {
+        '/en/': 'NEXT',
+        '/': '下一章节'
+      },
+      crossChapter: true,
+      crossChapterText: true,
+    },
+    ga: 'UA-XXXXX-Y',
+    disqus: 'shortname',
+
+  }
+
+  const gitalk = new Gitalk({
+    clientID: 'Github Application Client ID',
+    clientSecret: 'Github Application Client Secret',
+    repo: 'Github repo',
+    owner: 'Github repo owner',
+    admin: ['Github repo collaborators, only these guys can initialize github issues'],
+    // facebook-like distraction free mode
+    distractionFreeMode: false
+  })
 </script>
 <!-- Docsify v4 -->
 <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
@@ -52,5 +103,25 @@
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-xml.min.js"></script>
 <!-- 一键复制代码插件 -->
 <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+<!-- 一个简单的分享button插件 -->
+<script src="//unpkg.com/docsify-share/build/index.min.js"></script>
+<!-- 字数统计插件 -->
+<script src="//unpkg.com/docsify-count/dist/countable.min.js"></script>
+<!-- 为docsify添加rtl和bidi支持插件 -->
+<!--  <script src="//unpkg.com/docsify-rtl/build/index.min.js"></script> -->
+<!-- 分页插件 -->
+<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+<!-- google统计插件 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/ga.min.js"></script>
+<!-- 外链脚本插件 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+<!-- 图片缩放插件 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+<!-- Disqus评论系统 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/disqus.min.js"></script>
+<!-- Gitalk，一个现代化的，基于Preact和Github Issue的评论系统。 -->
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
 </body>
 </html>

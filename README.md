@@ -137,6 +137,7 @@ Github: [https://github.com/shuigedeng/taotao-cloud-project](https://github.com/
 
 Gitee: [https://gitee.com/dtbox/taotao-cloud-project](https://gitee.com/dtbox/taotao-cloud-project)
 
+* 文档地址：[https://docs.taotaocloud.top](https://docs.taotaocloud.top)
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top)
   源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
 * 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限,
