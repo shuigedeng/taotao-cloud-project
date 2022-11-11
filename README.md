@@ -107,39 +107,30 @@ Maven:
 
 ## 5. 核心依赖
 
- 依赖                   | 版本            
+依赖                   | 版本
 ----------------------|---------------
- Spring               | 5.3.22        
- Spring Boot          | 2.7.3         
- Spring Cloud         | 2021.0.4      
- Spring Cloud alibaba | 2021.0.4.0    
- Spring Security      | 5.7.3         
- Mybatis Plus         | 3.5.2         
- Hutool               | 5.5.9         
- Mysql                | 8.0.30        
- Querydsl             | 5.0.0         
- Swagger              | 3.3.0         
- Knife4j              | 3.0.2         
- Redisson             | 3.15.0        
- Lettuce              | 6.0.2.RELEASE 
- Elasticsearch        | 7.1.2         
- Xxl-job              | 2.2.0         
- EasyCaptcha          | 1.6.2         
- Guava                | 29.0-jre      
+Spring               | 5.3.22
+Spring Boot          | 2.7.3
+Spring Cloud         | 2021.0.4
+Spring Cloud alibaba | 2021.0.4.0
+Spring Security      | 5.7.3
+Mybatis Plus         | 3.5.2
+Hutool               | 5.5.9
+Mysql                | 8.0.30
+Querydsl             | 5.0.0
+Swagger              | 3.3.0
+Knife4j              | 3.0.2
+Redisson             | 3.15.0
+Lettuce              | 6.0.2.RELEASE
+Elasticsearch        | 7.1.2
+Xxl-job              | 2.2.0
+EasyCaptcha          | 1.6.2
+Guava                | 29.0-jre
 
 ## 6. 演示地址
 
-*
-
-Github: [https://github.com/shuigedeng/taotao-cloud-project](https://github.com/shuigedeng/taotao-cloud-project)
-
-*
-
-Gitee: [https://gitee.com/dtbox/taotao-cloud-project](https://gitee.com/dtbox/taotao-cloud-project)
-
 * 文档地址：[https://docs.taotaocloud.top](https://docs.taotaocloud.top)
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top)
-  源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
 * 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限,
   需多刷新几次)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top)
