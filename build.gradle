@@ -30,7 +30,7 @@ buildscript {
         //https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies
         springBootVersion = '2.7.5'
         //https://search.maven.org/artifact/org.springframework.cloud/spring-cloud-dependencies
-        springCloudVersion = '2021.0.4'
+        springCloudVersion = '2021.0.5'
         //https://search.maven.org/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies
         springCloudAlibabaVersion = '2021.0.4.0'
 
@@ -132,7 +132,7 @@ buildscript {
         //https://search.maven.org/artifact/io.lettuce/lettuce-core
         lettuceVersion = '6.2.1.RELEASE'
         //https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter
-        redissonVersion = "3.17.7"
+        redissonVersion = "3.18.0"
         //https://search.maven.org/artifact/io.seata/seata-all
         seataVersion = "1.5.2"
         //https://search.maven.org/artifact/org.apache.shardingsphere/sharding-jdbc-spring-namespace
