@@ -4,10 +4,17 @@ dependencies {
     implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha"))
     implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger"))
 
-    implementation "org.springframework.security:spring-security-core:5.7.3"
-    implementation "org.springframework.security:spring-security-config"
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-sentinel")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-zipkin")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-skywalking")
+
+//    implementation "org.springframework.security:spring-security-core:5.7.3"
+//    implementation "org.springframework.security:spring-security-config"
+    implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-    implementation "org.springframework.security:spring-security-oauth2-resource-server"
+//    implementation "org.springframework.security:spring-security-oauth2-resource-server"
     implementation "org.springframework.security:spring-security-oauth2-jose"
     implementation "com.nimbusds:nimbus-jose-jwt:9.24.3"
 
@@ -18,13 +25,11 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-webflux"
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
 
-    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+    implementation "com.alibaba.csp:sentinel-datasource-nacos"
     implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway"
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
-    implementation "com.alibaba.csp:sentinel-datasource-nacos"
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
 
