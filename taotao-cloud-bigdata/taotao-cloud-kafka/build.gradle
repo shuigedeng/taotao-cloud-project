@@ -2,5 +2,5 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-test"
     implementation "org.springframework.kafka:spring-kafka:2.9.0"
-    implementation "org.springframework.boot:spring-boot-autoconfigure:2.7.3"
+    implementation "org.springframework.boot:spring-boot-autoconfigure:2.7.5"
 }
