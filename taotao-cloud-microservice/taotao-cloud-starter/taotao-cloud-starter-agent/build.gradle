@@ -14,12 +14,12 @@ dependencies {
     implementation "org.javassist:javassist:3.29.2-GA"
 
     //https://search.maven.org/artifact/io.opentelemetry/opentelemetry-api
-    implementation "io.opentelemetry:opentelemetry-api:1.19.0"
+    implementation "io.opentelemetry:opentelemetry-api:1.20.0"
     //https://search.maven.org/artifact/io.opentelemetry/opentelemetry-sdk
-    implementation "io.opentelemetry:opentelemetry-sdk:1.19.0"
+    implementation "io.opentelemetry:opentelemetry-sdk:1.20.0"
 
     //https://search.maven.org/artifact/org.apache.tomcat.embed/tomcat-embed-core
-    compileOnly "org.apache.tomcat.embed:tomcat-embed-core:10.1.1"
+    compileOnly "org.apache.tomcat.embed:tomcat-embed-core:10.1.2"
 
 }
 
