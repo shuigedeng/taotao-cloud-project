@@ -5,6 +5,6 @@ dependencies {
     //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
     api "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4"
 
-    api "org.bouncycastle:bcprov-jdk15to18:1.71"
+    api "org.bouncycastle:bcprov-jdk15to18:1.72"
 
 }
