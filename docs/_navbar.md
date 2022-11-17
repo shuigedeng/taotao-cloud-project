@@ -1,13 +1,16 @@
-* 演示
-    * [后台管理](http://www.macrozheng.com/admin/index.html)
-    * [移动端](http://www.macrozheng.com/app/mainpage.html)
+<!-- _navbar.md -->
 
-* 项目地址
-    * [后台项目](https://github.com/macrozheng/mall)
-    * [前端项目](https://github.com/macrozheng/mall-admin-web)
-    * [学习教程](https://github.com/macrozheng/mall-learning)
-    * [项目骨架](https://github.com/macrozheng/mall-tiny)
+* 链接到我
+    * [博客园地址](https://www.cnblogs.com/YushinFukuhara/)
+    * [Github地址](https://github.com/shiming-git)
+    * [Gitee地址](https://gitee.com/librarycodes)
 
-* SpringCloud
-    * [SpringCloud版本](https://github.com/macrozheng/mall-swarm)
-    * [SpringCloud教程](https://github.com/macrozheng/springcloud-learning)
+* 友情链接
+    * [Docsify](https://docsify.js.org/#/)
+    * [博客园](https://www.cnblogs.com)
+    * [CDN](https://www.jsdelivr.com/)
+
+* 语言
+    * [中文](/)
+    * [En](/zh-en/)
+

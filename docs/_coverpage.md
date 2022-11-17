@@ -1,12 +1,17 @@
-![logo](images/logo.jpg)
+<!-- _coverpage.md -->
+![logo](https://docsify.js.org/_media/icon.svg)
 
-# taotao-cloud-learning
+# 轻量级开源低成本在线文档 
 
-> mall学习教程，架构、业务、技术要点全方位解析。
+> 💪Docsify使用指南，使用Typora+Docsify打造最强、最轻量级的个人&团队文档。
 
-mall项目（50k+star）是一套电商系统，使用现阶段主流技术实现。  
-涵盖了SpringBoot、MyBatis、Elasticsearch、RabbitMQ、
-Redis、MongoDB、Mysql等技术，采用Docker容器化部署。
+ 简单、轻便、快捷、低成本
+- 无需生成 html 文件
+- 开箱即用框架
+- 众多主题
 
-[GitHub](https://github.com/shuigedeng/taotao-cloud-project)
-[Get Started](README.md)
+
+[Gitee](https://gitee.com/librarycodes/docsify-plus)
+[GitHub](https://github.com/shiming-git/docsify-plus)
+[Docsify官网](https://docsify.js.org/#/)
+[快速开始](README.md)
