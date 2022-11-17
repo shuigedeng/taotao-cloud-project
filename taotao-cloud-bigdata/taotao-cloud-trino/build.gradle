@@ -1,14 +1,14 @@
 dependencies {
-    implementation "io.trino:trino-jdbc:395"
-    implementation "io.trino:trino-spi:395"
-    implementation "io.trino:trino-main:395"
+    implementation "io.trino:trino-jdbc:402"
+    implementation "io.trino:trino-spi:402"
+    implementation "io.trino:trino-main:402"
 
-    implementation "io.airlift:slice:0.42"
-    implementation "io.airlift:units:1.6"
+    implementation "io.airlift:slice:0.44"
+    implementation "io.airlift:units:1.8"
     implementation "com.google.guava:guava:31.1-jre"
     implementation "junit:junit:4.13.2"
 
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:2.13.4"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.14.0"
 //    implementation "org.openjdk.jol:jol-core:0.11"
 }

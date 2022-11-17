@@ -14,9 +14,9 @@ dependencies {
     implementation "commons-lang:commons-lang:2.6"
     implementation "net.sf.barcode4j:barcode4j:2.1"
     implementation "org.jsoup:jsoup:1.15.3"
-    implementation "io.netty:netty-all:4.1.82.Final"
+    implementation 'io.netty:netty-all:4.1.85.Final'
     implementation "org.apache.commons:commons-lang3:3.12.0"
-    implementation "redis.clients:jedis:4.2.3"
+    implementation 'redis.clients:jedis:4.3.1'
 
     //需要在自己本地安装jar包
     //compile "org.wltea.ik-analyzer:ik-analyzer:4.10.2"

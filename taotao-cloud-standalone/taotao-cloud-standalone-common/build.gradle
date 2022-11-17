@@ -36,11 +36,11 @@ dependencies {
 
     api "org.apache.velocity:velocity-engine-core:2.3"
 
-    api "cn.hutool:hutool-all:5.8.6"
-    api "com.alibaba.fastjson2:fastjson2:2.0.13"
+    api 'cn.hutool:hutool-all:5.8.9'
+    api 'com.alibaba.fastjson2:fastjson2:2.0.19'
 
     api "io.jsonwebtoken:jjwt:0.9.1"
-    api "joda-time:joda-time:2.11.1"
+    api 'joda-time:joda-time:2.12.1'
 
 }
 

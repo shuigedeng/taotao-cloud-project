@@ -5,7 +5,7 @@ dependencies {
 
     implementation "com.mchange:c3p0:0.9.5.5"
     implementation "org.apache.commons:commons-dbcp2:2.9.0"
-    implementation "com.alibaba:druid:1.2.12"
+    implementation "com.alibaba:druid:1.2.15"
 
     implementation "org.springframework:spring-web"
     implementation "org.springframework:spring-webmvc"
