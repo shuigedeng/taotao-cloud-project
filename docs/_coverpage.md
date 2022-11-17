@@ -1,17 +1,21 @@
 <!-- _coverpage.md -->
 ![logo](https://docsify.js.org/_media/icon.svg)
 
-# 轻量级开源低成本在线文档 
+# 基于spirng cloud微服务脚手架
 
-> 💪Docsify使用指南，使用Typora+Docsify打造最强、最轻量级的个人&团队文档。
+> 💪taotao-cloud使用指南，基于spring cloud alibaba的微服务架构 spark hive hudi flink
 
- 简单、轻便、快捷、低成本
-- 无需生成 html 文件
-- 开箱即用框架
-- 众多主题
+> 等大数据处理实践。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务。
 
+工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码**
 
-[Gitee](https://gitee.com/librarycodes/docsify-plus)
+- 大数据模块
+- 微服务模块
+- 商城模块
+- 前端模块
+- python模块
+
+[Gitee](https://gitee.com/dtbox/taotao-cloud-project)
 [GitHub](https://github.com/shiming-git/docsify-plus)
 [Docsify官网](https://docsify.js.org/#/)
 [快速开始](README.md)
