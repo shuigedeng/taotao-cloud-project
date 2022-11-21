@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.office.utils;
+package com.taotao.cloud.office.utils.easypoi;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
@@ -40,9 +40,9 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 2021.9
  * @since 2021-09-02 16:48:42
  */
-public final class ExcelUtil {
+public final class EasyPoiUtils {
 
-	private ExcelUtil() {
+	private EasyPoiUtils() {
 	}
 
 	/**

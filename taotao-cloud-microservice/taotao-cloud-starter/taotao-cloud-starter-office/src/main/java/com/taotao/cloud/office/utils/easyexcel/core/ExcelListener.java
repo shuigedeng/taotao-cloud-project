@@ -1,4 +1,4 @@
-package com.taotao.cloud.office.excel.core;
+package com.taotao.cloud.office.utils.easyexcel.core;
 
 import com.alibaba.excel.read.listener.ReadListener;
 
@@ -11,6 +11,6 @@ import com.alibaba.excel.read.listener.ReadListener;
  */
 public interface ExcelListener<T> extends ReadListener<T> {
 
-    ExcelResult<T> getExcelResult();
+	ExcelResult<T> getExcelResult();
 
 }

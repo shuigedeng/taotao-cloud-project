@@ -1,7 +1,5 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
@@ -13,8 +11,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket-netty")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-third-client")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-threadpool")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-elastic")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-xxl")
@@ -24,7 +20,6 @@ dependencies {
     //implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-shardingsphere")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-elasticsearch")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-mongodb")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-elasticsearch")
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-pulsar")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-rocketmq")

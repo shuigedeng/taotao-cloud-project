@@ -1,9 +1,12 @@
-package com.taotao.cloud.office.excel.annotation;
+package com.taotao.cloud.office.utils.easyexcel.annotation;
 
 
-
-import com.taotao.cloud.office.excel.core.CellMergeStrategy;
-import java.lang.annotation.*;
+import com.taotao.cloud.office.utils.easyexcel.core.CellMergeStrategy;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * excel 列单元格合并(合并列相同项)

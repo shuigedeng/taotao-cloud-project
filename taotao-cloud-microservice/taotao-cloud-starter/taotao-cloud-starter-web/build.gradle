@@ -22,6 +22,10 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-prometheus")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pinyin")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-threadpool")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
 
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-caffeine")
@@ -56,9 +60,9 @@ dependencies {
     api 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 
     //https://search.maven.org/artifact/cn.afterturn/easypoi
-    api "cn.afterturn:easypoi-base:4.4.0"
-    api "cn.afterturn:easypoi-web:4.4.0"
-    api "cn.afterturn:easypoi-annotation:4.4.0"
+    //api "cn.afterturn:easypoi-base:4.4.0"
+    //api "cn.afterturn:easypoi-web:4.4.0"
+    //api "cn.afterturn:easypoi-annotation:4.4.0"
 
     annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
