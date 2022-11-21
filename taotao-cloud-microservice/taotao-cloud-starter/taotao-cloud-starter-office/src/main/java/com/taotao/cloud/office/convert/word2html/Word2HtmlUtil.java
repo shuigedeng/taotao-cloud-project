@@ -4,6 +4,23 @@ import com.aspose.words.SaveFormat;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.office.convert.config.Constants;
 import com.taotao.cloud.office.convert.util.MyFileUtil;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.UUID;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.converter.PicturesManager;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
@@ -16,24 +33,6 @@ import org.apache.poi.xwpf.converter.xhtml.XHTMLOptions;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.util.CollectionUtils;
 import org.w3c.dom.Document;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * <p>
@@ -55,8 +54,10 @@ public class Word2HtmlUtil {
 	public static byte[] wordBytes2HtmlBytes(byte[] wordBytes) throws Exception {
 		// 创建临时word转html后生成的html文件
 		String tmpHtmlFilePath =
-			Constants.DEFAULT_FOLDER_TMP_GENERATE + "/" + System.currentTimeMillis() + "-" + getUUID32() + ".html";
-		com.aspose.words.Document doc = new com.aspose.words.Document(new ByteArrayInputStream(wordBytes));
+			Constants.DEFAULT_FOLDER_TMP_GENERATE + "/" + System.currentTimeMillis() + "-"
+				+ getUUID32() + ".html";
+		com.aspose.words.Document doc = new com.aspose.words.Document(
+			new ByteArrayInputStream(wordBytes));
 		doc.save(tmpHtmlFilePath, SaveFormat.HTML);
 		byte[] htmlBytes = MyFileUtil.readBytes(tmpHtmlFilePath);
 		// 删除临时word文件
@@ -74,7 +75,8 @@ public class Word2HtmlUtil {
 	 */
 	public static File wordBytes2HtmlFile(byte[] wordBytes, String htmlFilePath) throws Exception {
 		// Load word document from disk.
-		com.aspose.words.Document doc = new com.aspose.words.Document(new ByteArrayInputStream(wordBytes));
+		com.aspose.words.Document doc = new com.aspose.words.Document(
+			new ByteArrayInputStream(wordBytes));
 		// Save the document into MHTML.
 		doc.save(htmlFilePath, SaveFormat.HTML);
 		return new File(htmlFilePath);
@@ -101,7 +103,8 @@ public class Word2HtmlUtil {
 	 * @return 返回html内容
 	 * @since 2020/7/29 20:48
 	 */
-	public static String word2Html(String fileRootPath, String wordFileName, String imagePath) throws IOException, ParserConfigurationException, TransformerException {
+	public static String word2Html(String fileRootPath, String wordFileName, String imagePath)
+		throws IOException, ParserConfigurationException, TransformerException {
 		// word 文件路径
 		final String wordFilePath = fileRootPath + "/" + wordFileName;
 		// 文件后缀名
@@ -142,13 +145,15 @@ public class Word2HtmlUtil {
 			// WordToHtmlUtils.loadDoc(new FileInputStream(inputFile));
 			HWPFDocument wordDocument = new HWPFDocument(new FileInputStream(wordFilePath));
 			WordToHtmlConverter wordToHtmlConverter =
-				new WordToHtmlConverter(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
+				new WordToHtmlConverter(
+					DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
 
 			// 设置图片存储位置，并保存
 			wordToHtmlConverter.setPicturesManager(new PicturesManager() {
 				@Override
-				public String savePicture(byte[] content, PictureType pictureType, String suggestedName,
-										  float widthInches, float heightInches) {
+				public String savePicture(byte[] content, PictureType pictureType,
+					String suggestedName,
+					float widthInches, float heightInches) {
 					// 首先要判断图片是否能识别
 					if (pictureType.equals(PictureType.UNKNOWN)) {
 						return "";
@@ -197,7 +202,7 @@ public class Word2HtmlUtil {
 		out.close();
 
 		// 返回html文件内容
-		return new String(out.toByteArray());
+		return out.toString();
 	}
 
 	/**
@@ -209,10 +214,12 @@ public class Word2HtmlUtil {
 	 * @return 生成的html文件信息
 	 * @since 2020/11/23 16:21
 	 */
-	public static File word2HtmlFile(String fileRootPath, String wordFileName, String htmlFileName) throws IOException, ParserConfigurationException, TransformerException {
+	public static File word2HtmlFile(String fileRootPath, String wordFileName, String htmlFileName)
+		throws IOException, ParserConfigurationException, TransformerException {
 		final String htmlFilePath = fileRootPath + "/" + htmlFileName;
 		// 获取word转html文件内容
-		String htmlContent = Word2HtmlUtil.word2HtmlContent(fileRootPath, wordFileName, htmlFileName);
+		String htmlContent = Word2HtmlUtil.word2HtmlContent(fileRootPath, wordFileName,
+			htmlFileName);
 		// 生成html文件
 		File htmlFile = MyFileUtil.writeFileContent(htmlContent, htmlFilePath);
 		LogUtils.debug("word转html成功!  生成html文件路径:【{}】", htmlFilePath);
@@ -228,7 +235,9 @@ public class Word2HtmlUtil {
 	 * @return 生成的html文件信息
 	 * @since 2020/11/23 16:21
 	 */
-	public static String word2HtmlContent(String fileRootPath, String wordFileName, String htmlFileName) throws IOException, ParserConfigurationException, TransformerException {
+	public static String word2HtmlContent(String fileRootPath, String wordFileName,
+		String htmlFileName)
+		throws IOException, ParserConfigurationException, TransformerException {
 		final String imagePath = fileRootPath + "/image";
 		final String htmlFilePath = fileRootPath + "/" + htmlFileName;
 		// 返回word转html文件内容

@@ -229,7 +229,8 @@ public class Validator {
 		} else if (param instanceof LocalDate || param instanceof LocalDateTime) {
 			date = DateUtil.formatLocalDateTime((LocalDateTime) param);
 		} else {
-			throw new BusinessException(StrUtil.format("参数 {} 未知类型，不支持生日校验", paramName));
+			throw new BusinessException(
+				StrUtil.format("参数 {} 未知类型，不支持生日校验", paramName));
 		}
 
 		cn.hutool.core.lang.Validator.validateBirthday(date,
@@ -383,7 +384,7 @@ public class Validator {
 	 * @return Validator
 	 */
 	public Validator creditCode(String paramName) {
-		if (cn.hutool.core.lang.Validator.isCreditCode((CharSequence) param) == false) {
+		if (!cn.hutool.core.lang.Validator.isCreditCode((CharSequence) param)) {
 			throw new ValidateException(CREDIT_CODE_HINT_MSG, paramName);
 		}
 

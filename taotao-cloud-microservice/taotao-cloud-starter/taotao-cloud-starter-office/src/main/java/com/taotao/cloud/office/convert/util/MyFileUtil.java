@@ -3,20 +3,20 @@ package com.taotao.cloud.office.convert.util;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ZipUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import org.apache.commons.io.FileUtils;
 
 /**
  * <p>
  * 文件工具类
  * </p>
  *
- * @description
- * @since 2020/8/27 19:21
+ * @author shuigedeng
+ * @version 2022.09
+ * @since 2022-11-21 14:10:12
  */
 public class MyFileUtil {
 
@@ -30,12 +30,15 @@ public class MyFileUtil {
 	 * @return java.lang.String
 	 * @since 2020/8/27 19:25
 	 */
-	public static File zip(String srcPath, String zipPath, boolean isWithSrcDir, boolean isDeleteSrcZip) {
-		LogUtils.debug("【压缩文件】 源目录路径: 【{}】 打包后的路径+文件后缀名: 【{}】", srcPath, zipPath);
+	public static File zip(String srcPath, String zipPath, boolean isWithSrcDir,
+		boolean isDeleteSrcZip) {
+		LogUtils.debug("【压缩文件】 源目录路径: 【{}】 打包后的路径+文件后缀名: 【{}】", srcPath,
+			zipPath);
 		File zipFile = ZipUtil.zip(srcPath, zipPath, isWithSrcDir);
 		// 删除目录 -> 保证下次生成文件的时候不会累计上次留下的文件
 		if (isDeleteSrcZip) {
-			MyFileUtil.deleteFileOrFolder(srcPath);
+			boolean result = deleteFileOrFolder(srcPath);
+			LogUtils.info("删除成功", result);
 		}
 		return zipFile;
 	}
@@ -72,8 +75,10 @@ public class MyFileUtil {
 	 * @return 解压后的文件File信息
 	 * @since 2020/9/5 20:50
 	 */
-	public static File unzip(InputStream inputStream, String zipFilePath, String outFileDir, boolean isDeleteZip) throws IOException {
-		LogUtils.debug("【解压文件】 zip文件路径: 【{}】 解压后的目录路径: 【{}】", zipFilePath, outFileDir);
+	public static File unzip(InputStream inputStream, String zipFilePath, String outFileDir,
+		boolean isDeleteZip) throws IOException {
+		LogUtils.debug("【解压文件】 zip文件路径: 【{}】 解压后的目录路径: 【{}】", zipFilePath,
+			outFileDir);
 		// zip压缩文件
 		File zipFile = FileUtil.newFile(zipFilePath);
 		// 写入文件
@@ -82,7 +87,7 @@ public class MyFileUtil {
 		File outFile = ZipUtil.unzip(zipFilePath, outFileDir, Charset.forName("GBK"));
 		// 删除zip -> 保证下次解压后的文件数据不会累计上次解压留下的文件
 		if (isDeleteZip) {
-			MyFileUtil.deleteFileOrFolder(zipFilePath);
+			deleteFileOrFolder(zipFilePath);
 		}
 		return outFile;
 	}
@@ -144,21 +149,21 @@ public class MyFileUtil {
 		return FileUtil.writeBytes(data, filePath);
 	}
 
-	public static void main(String[] args) {
-		try {
-			String filePath = "E:\\IT_zhengqing\\code\\me-workspace\\最新代码生成器\\code-api\\document\\import\\bLogUtils.zip";
-			String filePathX = "E:\\IT_zhengqing\\code\\me-workspace\\最新代码生成器\\code-api\\document\\import";
-			// File file =
-			// FileUtil.newFile(filePath);
-			// InputStream fileInputStream = new FileInputStream(file);
-			File unzip = ZipUtil.unzip(filePath, filePathX);
-			System.out.println(unzip);
-
-			String fileContent = FileUtil.readUtf8String(filePath);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
+	//public static void main(String[] args) {
+	//	try {
+	//		String filePath = "E:\\IT_zhengqing\\code\\me-workspace\\最新代码生成器\\code-api\\document\\import\\bLogUtils.zip";
+	//		String filePathX = "E:\\IT_zhengqing\\code\\me-workspace\\最新代码生成器\\code-api\\document\\import";
+	//		// File file =
+	//		// FileUtil.newFile(filePath);
+	//		// InputStream fileInputStream = new FileInputStream(file);
+	//		File unzip = ZipUtil.unzip(filePath, filePathX);
+	//		System.out.println(unzip);
+	//
+	//		String fileContent = FileUtil.readUtf8String(filePath);
+	//	} catch (Exception e) {
+	//		e.printStackTrace();
+	//	}
+	//
+	//}
 
 }

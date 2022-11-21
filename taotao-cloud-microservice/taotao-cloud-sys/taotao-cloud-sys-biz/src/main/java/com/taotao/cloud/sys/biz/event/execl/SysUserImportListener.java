@@ -4,13 +4,12 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.office.excel.core.ExcelListener;
-import com.taotao.cloud.office.excel.core.ExcelResult;
+import com.taotao.cloud.office.utils.easyexcel.core.ExcelListener;
+import com.taotao.cloud.office.utils.easyexcel.core.ExcelResult;
 import com.taotao.cloud.sys.api.model.excel.imports.UserImport;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 系统用户自定义导入
