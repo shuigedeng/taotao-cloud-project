@@ -1,11 +1,23 @@
 package com.taotao.cloud.office.utils.easyexcel.core;
 
+import com.alibaba.excel.metadata.Head;
+import com.alibaba.excel.metadata.data.WriteCellData;
+import com.alibaba.excel.write.handler.CellWriteHandler;
+import com.alibaba.excel.write.metadata.holder.WriteSheetHolder;
+import com.alibaba.excel.write.metadata.holder.WriteTableHolder;
+import java.util.List;
+import org.apache.poi.common.usermodel.HyperlinkType;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Hyperlink;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+
 /**
  * 实现CellWriteHandler接口, 实现对单元格样式的精确控制
- *
- * @author sec
- * @version 1.0
- * @date 2022/7/31
  **/
 public class CustomCellWriteHandler implements CellWriteHandler {
 
@@ -34,9 +46,11 @@ public class CustomCellWriteHandler implements CellWriteHandler {
 	 */
 	@Override
 	public void afterCellDataConverted(WriteSheetHolder writeSheetHolder,
-		WriteTableHolder writeTableHolder,
-		CellData cellData, Cell cell, Head head, Integer integer, Boolean aBoolean) {
+		WriteTableHolder writeTableHolder, WriteCellData<?> cellData, Cell cell, Head head,
+		Integer relativeRowIndex, Boolean isHead) {
 
+		CellWriteHandler.super.afterCellDataConverted(writeSheetHolder, writeTableHolder, cellData,
+			cell, head, relativeRowIndex, isHead);
 	}
 
 	/**
@@ -44,8 +58,8 @@ public class CustomCellWriteHandler implements CellWriteHandler {
 	 */
 	@Override
 	public void afterCellDispose(WriteSheetHolder writeSheetHolder,
-		WriteTableHolder writeTableHolder,
-		List<CellData> list, Cell cell, Head head, Integer integer, Boolean isHead) {
+		WriteTableHolder writeTableHolder, List<WriteCellData<?>> cellDataList, Cell cell,
+		Head head, Integer relativeRowIndex, Boolean isHead) {
 
 		// 设置超链接
 		if (isHead && cell.getRowIndex() == 0 && cell.getColumnIndex() == 0) {
@@ -70,4 +84,6 @@ public class CustomCellWriteHandler implements CellWriteHandler {
 			cell.setCellStyle(cellStyle);
 		}
 	}
+
+
 }
