@@ -1280,6 +1280,19 @@ spring:
               write-data-source-name: ds-master-1
               read-data-source-names: ds-slave-1-1,ds-slave-1-2
       sharding:
+        #BoundaryBasedRangeShardingAlgorithm	     基于分片边界的范围分片算法    BOUNDARY_RANGE
+        #VolumeBasedRangeShardingAlgorithm	     基于分片容量的范围分片算法    VOLUME_RANGE
+        #ComplexInlineShardingAlgorithm	         基于行表达式的复合分片算法    COMPLEX_INLINE
+        #AutoIntervalShardingAlgorithm	         基于可变时间范围的分片算法    AUTO_INTERVAL
+        #ClassBasedShardingAlgorithm	             基于自定义类的分片算法        CLASS_BASED
+        #HintInlineShardingAlgorithm	             基于行表达式的 Hint 分片算法  HINT_INLINE
+        #IntervalShardingAlgorithm	             基于固定时间范围的分片算法     INTERVAL
+        #HashModShardingAlgorithm	             基于哈希取模的分片算法        HASH_MOD
+        #InlineShardingAlgorithm	                 基于行表达式的分片算法        INLINE
+        #ModShardingAlgorithm	                 基于取模的分片算法            MOD
+        #CosIdModShardingAlgorithm	             基于 CosId 的取模分片算法     COSID_MOD
+        #CosIdIntervalShardingAlgorithm	         基于 CosId 的固定时间范围的分片算法 COSID_INTERVAL
+        #CosIdSnowflakeIntervalShardingAlgorithm  基于 CosId 的雪花ID固定时间范围的分片算法 COSID_INTERVAL_SNOWFLAKE
         sharding-algorithms:
           database-inline:
             type: INLINE
