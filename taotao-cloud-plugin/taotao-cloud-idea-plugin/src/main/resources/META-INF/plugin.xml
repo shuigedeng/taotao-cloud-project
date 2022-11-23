@@ -1,54 +1,60 @@
 <idea-plugin>
-    <id>com.taotao.cloud.idea.plugin</id>
-    <name>TaoTaoCloudIdeaPlugin</name>
-    <vendor
+	<id>com.taotao.cloud.idea.plugin</id>
+	<name>TaoTaoCloudIdeaPlugin</name>
+	<vendor
 		email="981376577@qq.com"
 		url="https://taotaocloud.top">
 		taotao cloud
 	</vendor>
 
-    <description><![CDATA[
-      <h3>程序员常用的工具集</h3>
-    <ul>
-        <li>SQL转elasticSearch语句</li>
-        <li>日期转时间戳</li>
-        <li>时间戳转日期</li>
-        <li>JSON格式化</li>
-        <li>URL编码</li>
-        <li>URL解码</li>
-        <li>base64编码</li>
-        <li>base64解码</li>
-        <li>手机号归属地</li>
-        <li>IP归属地</li>
-        <li>MD5加密</li>
-        <li>SHA1加密</li>
-        <li>SHA224加密</li>
-        <li>SHA256加密</li>
-        <li>SHA384加密</li>
-        <li>SHA512加密</li>
-        <li>UUID随机值</li>
-        <li>正则表达式</li>
-        <li>生成二维码</li>
-    </ul>
-    ]]></description>
+	<!--	<description>-->
+	<!--		<![CDATA[-->
+	<!--      	<h3>程序员常用的工具集</h3>-->
+	<!--		<ul>-->
+	<!--			<li>SQL转elasticSearch语句</li>-->
+	<!--			<li>日期转时间戳</li>-->
+	<!--			<li>时间戳转日期</li>-->
+	<!--			<li>JSON格式化</li>-->
+	<!--			<li>URL编码</li>-->
+	<!--			<li>URL解码</li>-->
+	<!--			<li>base64编码</li>-->
+	<!--			<li>base64解码</li>-->
+	<!--			<li>手机号归属地</li>-->
+	<!--			<li>IP归属地</li>-->
+	<!--			<li>MD5加密</li>-->
+	<!--			<li>SHA1加密</li>-->
+	<!--			<li>SHA224加密</li>-->
+	<!--			<li>SHA256加密</li>-->
+	<!--			<li>SHA384加密</li>-->
+	<!--			<li>SHA512加密</li>-->
+	<!--			<li>UUID随机值</li>-->
+	<!--			<li>正则表达式</li>-->
+	<!--			<li>生成二维码</li>-->
+	<!--		</ul>-->
+	<!--    	]]>-->
+	<!--	</description>-->
+	<description>
+		sql to es base64 sha taotao cloud idea plugin
+	</description>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
+	<!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+		 on how to target different products -->
+	<!-- uncomment to enable plugin in all products
+	<depends>com.intellij.modules.lang</depends>
+	-->
+	<depends>com.intellij.modules.lang</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<applicationService serviceInterface="com.taotao.cloud.idea.plugin.service.CacheService"
 			serviceImplementation="com.taotao.cloud.idea.plugin.service.impl.CacheServiceImpl"/>'
-		<applicationService serviceInterface="com.taotao.cloud.idea.plugin.service.ToolkitCommandService"
-			serviceImplementation="com.taotao.cloud.idea.plugin.service.impl.ToolkitCommandServiceImpl"/>'
-
+		<applicationService
+			serviceInterface="com.taotao.cloud.idea.plugin.service.ToolkitCommandService"
+			serviceImplementation="com.taotao.cloud.idea.plugin.service.impl.ToolkitCommandServiceImpl"/>
 		<runAnything.executionProvider id="runAnythingExecutionProvider"
 			implementation="com.taotao.cloud.idea.plugin.extensions.runanything.RunAnythingToolkitProvider"/>
 	</extensions>
 
-    <actions>
-        <!-- Add your actions here -->
-    </actions>
+	<actions>
+		<!-- Add your actions here -->
+	</actions>
 </idea-plugin>

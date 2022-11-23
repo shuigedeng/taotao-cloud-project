@@ -387,7 +387,9 @@ allprojects {
     }
 }
 
-configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { project ->
+
+def exclueSubProjects = ['taotao-cloud-dependencies', 'taotao-cloud-maven-plugin']
+configure(subprojects.findAll { (!exclueSubProjects.contains(it.name)) }) { project ->
     apply plugin: 'java'
     apply plugin: 'java-library'
     apply plugin: 'idea'

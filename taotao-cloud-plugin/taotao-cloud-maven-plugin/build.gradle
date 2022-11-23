@@ -1,0 +1,87 @@
+plugins {
+    id "java-library"
+
+    //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
+    //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
+    id "io.freefair.maven-plugin" version "6.6-rc1"
+
+//    //https://github.com/britter/maven-plugin-development/blob/main/sample/gradle-producer-build
+//    //https://plugins.gradle.org/plugin/de.benediktritter.maven-plugin-development
+//    id "de.benediktritter.maven-plugin-development" version "0.4.0"
+//    id "maven-publish"
+
+//    //https://plugins.gradle.org/plugin/com.liferay.maven.plugin.builder
+//    //https://github.com/liferay/liferay-portal/blob/master/modules/sdk/gradle-plugins-maven-plugin-builder
+//    id "com.liferay.maven.plugin.builder" version "2.0.0"
+}
+
+apply plugin: "io.freefair.maven-plugin"
+
+dependencies {
+    implementation 'org.apache.maven:maven-core:3.8.6'
+    implementation 'org.apache.maven:maven-model:3.8.6'
+    implementation 'org.apache.maven:maven-plugin-api:3.8.6'
+
+    implementation "com.google.guava:guava:31.1-jre"
+
+    compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.7.0'
+}
+
+//apply plugin: "de.benediktritter.maven-plugin-development"
+//mavenPlugin {
+//    helpMojoPackage = 'org.example.help'
+//    mojos {
+//        touch {
+//            implementation = "com.example.MyMojo"
+//            description = "A super fancy mojo defined in my build.gradle"
+//            parameters {
+//                parameter("outputDir", File) {
+//                    defaultValue = "\${project.build.outputDirectory}/myMojoOutput"
+//                    required = false
+//                }
+//            }
+//        }
+//    }
+//}
+//publishing {
+//    publications {
+//        // create a publication so that the plugin can be published to the local Maven repository
+//        create<MavenPublication>("mavenPlugin") {
+//            from(components["java"])
+//        }
+//    }
+//    // setup an additional repository for publishing
+//    // this repository is located in the build folder
+//    // change name and URL to a real remote repository in order to publish the plugin
+//    repositories {
+//        maven {
+//            name = "buildFolder"
+//            url = uri("$buildDir/repository")
+//        }
+//    }
+//}
+
+//apply plugin: "com.liferay.maven.plugin.builder"
+//runGradleTest {
+//    dependsOn buildPluginDescriptor
+//
+//    doLast {
+//        String[] fileNames = [
+//                "src/main/resources/META-INF/maven/plugin.xml",
+//                "src/main/resources/META-INF/maven/com.example/com.example.hello-world/plugin-help.xml"
+//        ]
+//
+//        for (String fileName in fileNames) {
+//            File generatedFile = file(fileName)
+//
+//            assert generatedFile.exists()
+//        }
+//    }
+//}
+//
+//repositories {
+//    mavenCentral()
+//    maven {
+//        url "https://repository-cdn.liferay.com/nexus/content/groups/public"
+//    }
+//}
