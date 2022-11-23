@@ -1,14 +1,11 @@
 plugins {
     id "groovy"
     id "java"
-    id "maven-publish"
     id "java-gradle-plugin"
+    //https://plugins.gradle.org/plugin/com.gradle.plugin-publish
+    //https://plugins.gradle.org/docs/publish-plugin
+    id "com.gradle.plugin-publish" version "1.1.0"
 }
-
-//shadowJar {
-//    zip64 true
-//    mergeServiceFiles()
-//}
 
 dependencies {
     //添加gradle对应api
@@ -16,55 +13,41 @@ dependencies {
     implementation localGroovy()
 }
 
+//发布到 https://plugins.gradle.org
+apply plugin: "com.gradle.plugin-publish"
+
 gradlePlugin {
     plugins {
-        simplePlugin {
-            id = "first-plugin"
-            implementationClass = "com.huangyuanlove.plugin.FirstPlugin"
+        greetingsPlugin {
+            id = 'io.github.shuigedeng'
+            implementationClass = 'com.taotao.cloud.gradle.plugin.MyPlugin'
+            displayName = "taotao-cloud-plugin gradle plugin"
+            description = 'taotao-cloud-plugin gradle plugin Please use!'
         }
+//        simplePlugin {
+//            id = "first-plugin"
+//            implementationClass = "com.huangyuanlove.plugin.FirstPlugin"
+//        }
+//        goodbyePlugin {
+//            id = 'io.github.johndoe.goodbye'
+//            implementationClass = 'io.github.johndoe.gradle.GoodbyePlugin'
+//            displayName = 'Gradle Goodbye plugin'
+//            description = 'Gradle plugin to say goodbye!'
+//        }
     }
 }
 
-
-//publications {
-//    mavenJava(MavenPublication) {
-//        //artifact bootJar
-//        groupId project.group
-//        artifactId project.name
-//        version "1.0.2"
-//
-//        //打包类型 war: components.web jar: components.java
-//        //from components.java
-//
-//        pom {
-//            name = "TaoTaoCloudGradlePlugin"
-//            description = "TaoTaoCloudGradlePlugin"
-//            url = "https://taotaocloud.top"
-//            properties = [
-//                    myProp: "value",
-//                    "prop.with.dots": "anotherValue"
-//            ]
-//            licenses {
-//                license {
-//                    name = "The Apache License, Version 2.0"
-//                    url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-//                }
-//            }
-//            developers {
-//                developer {
-//                    id = "taotao"
-//                    name = "taotao"
-//                    email = "981376577@qq.com"
-//                }
-//            }
-//            scm {
-//                connection = "scm:git:git://example.com/my-library.git"
-//                developerConnection = "scm:git:ssh://example.com/my-library.git"
-//                url = "http://example.com/my-library/"
-//            }
-//        }
-//    }
-//}
+pluginBundle {
+    website = 'https://github.com/shuigedeng/taotao-cloud-project'
+    vcsUrl = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+    description = 'taotao-cloud-gradle-plugin'
+//    tags = ['individual', 'tags', 'plugin']
+    tags = ['individual']
+    pluginTags = [
+            greetingsPlugin: ['individual', 'tags', 'per'],
+            //someOtherPlugin: ['some', 'other', 'tags']
+    ]
+}
 
 //uploadArchives{ //当前项目可以发布到本地文件夹中
 //    repositories {

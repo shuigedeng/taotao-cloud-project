@@ -1,20 +1,21 @@
 plugins {
     id "java"
+    //https://plugins.gradle.org/plugin/org.jetbrains.intellij
     id "org.jetbrains.intellij" version "1.9.0"
 }
 
 dependencies {
     testImplementation "junit:junit:4.13.2"
 
-    implementation "cn.hutool:hutool-http:5.8.6"
-    implementation "com.google.zxing:core:3.5.0"
-    implementation "com.google.zxing:javase:3.5.0"
+    implementation "cn.hutool:hutool-http:5.8.10"
+    implementation "com.google.zxing:core:3.5.1"
+    implementation "com.google.zxing:javase:3.5.1"
 }
 
 // https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
     // 插件名称
-    pluginName = "toolkit"
+    pluginName = "TaoTaoCloudIdeaPlugin"
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
     sandboxDir = "${rootProject.rootDir}/idea-sandbox"
     // 开发环境运行时使用的版本
@@ -32,14 +33,22 @@ patchPluginXml {
     changeNotes = """
                   TaoTaoCloudIdeaPlugin-1.0.1
                   """
+    //最低支持的版本
+    //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
     sinceBuild.set("213")
+
+    //最高支持的版本，不能不设置，不设置是默认为 project.version
     untilBuild.set("223.*")
 }
 
-signPlugin {
-    certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-    privateKey.set(System.getenv("PRIVATE_KEY"))
-    password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
-}
+// https://plugins.jetbrains.com/docs/intellij/plugin-signing.html
+//signPlugin {
+//    certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+//    privateKey.set(System.getenv("PRIVATE_KEY"))
+//    password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+//}
 
-publishPlugin { token.set(System.getenv("PUBLISH_TOKEN")) }
+//https://plugins.jetbrains.com/author/me
+//https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html
+//https://plugins.jetbrains.com/plugin/20506-taotaocloudideaplugin
+publishPlugin { token.set(System.getenv("IEDA_PLUGIN_PUBLISH_TOKEN")) }

@@ -28,7 +28,13 @@ public class MyPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		System.out.println(project.getName());
-		System.out.println("33333333333333");
+		startApply();
+		project.getTasks().register("hello", SayHelloTask.class);
+	}
+
+	private void startApply() {
+		System.out.println("------------------------");
+		System.out.println("apply HelloGradlePlugin");
+		System.out.println("------------------------");
 	}
 }
