@@ -18,41 +18,39 @@ package com.taotao.cloud.bigdata.spark
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
-*
-1.本地运行 本地数据参数
-*   <p>
-*   ----	 /Users/shuigedeng/spark/input /Users/shuigedeng/spark/input
-*   <p>
-*   2.本地运行 hadoop数据参数
-*   <p>
-*   ----  hadoop://127.0.0.1:9000/spark/input hadoop://127.0.0.1:9000/spark/input
-*   <p>
-*   3.上传jar包提交集群运行
-*   <p>
-./bin/spark-submit \
---class com.taotao.cloud.bigdata.spark.ScalaWordCount \
---master spark://192.168.10.200:7077 \
---deploy-mode client \
---driver-memory 2g \
---executor-memory 1g \
---executor-cores 2 \
---queue default \
-/opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2022.11.jar \
-/opt/spark/input /opt/spark/output
-*   <p>
-*
-*
-*
-* @author shuigedeng
-* @version 2022.11
-* @since 2022 -07-21 10:45:19
-*/
+ *
+ * 1.本地运行 本地数据参数
+ * <p>
+ * ----	 /Users/shuigedeng/spark/input /Users/shuigedeng/spark/input
+ * <p>
+ * 2.本地运行 hadoop数据参数
+ * <p>
+ * ----  hadoop://127.0.0.1:9000/spark/input hadoop://127.0.0.1:9000/spark/input
+ * <p>
+ * 3.上传jar包提交集群运行
+ * <p>
+ * ./bin/spark-submit \
+ * --class com.taotao.cloud.bigdata.spark.ScalaWordCount \
+ * --master spark://192.168.10.200:7077 \
+ * --deploy-mode client \
+ * --driver-memory 2g \
+ * --executor-memory 1g \
+ * --executor-cores 2 \
+ * --queue default \
+ * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2022.12.jar \
+ * /opt/spark/input /opt/spark/output
+ * <p>
+ *
+ * @author shuigedeng
+ * @version 2022.12
+ * @since 2022 -07-21 10:45:19
+ */
 object ScalaWordCount {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf()
       .setAppName("WordCountApp")
-//      .setMaster("local[1]")
+    //      .setMaster("local[1]")
 
     val context = new SparkContext(conf)
 

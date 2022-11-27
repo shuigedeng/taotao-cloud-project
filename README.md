@@ -65,7 +65,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 17 (推荐使用amazon-corretto-17)
-GRALE_VERSION >= 7.5.1
+GRALE_VERSION >= 7.6
 IDEA_VERSION >= 2022.2
 ```
 
@@ -74,7 +74,7 @@ Gradle:
 ```
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2022.11"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2022.12"
   }
 }
 
@@ -89,7 +89,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2022.11</version>
+      <version>2022.12</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -110,8 +110,8 @@ Maven:
 依赖                   | 版本
 ----------------------|---------------
 Spring               | 5.3.22
-Spring Boot          | 2.7.3
-Spring Cloud         | 2021.0.4
+Spring Boot          | 2.7.6
+Spring Cloud         | 2021.0.5
 Spring Cloud alibaba | 2021.0.4.0
 Spring Security      | 5.7.3
 Mybatis Plus         | 3.5.2
