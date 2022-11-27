@@ -15,7 +15,7 @@ defaults:
     working-directory: ./taotao-cloud-ui/taotao-cloud-vue3-open
 
 env:
-  TAOTAO_CLOUD_VERSION: 2022.11
+  TAOTAO_CLOUD_VERSION: 2022.12
 
 jobs:
   assemble:
