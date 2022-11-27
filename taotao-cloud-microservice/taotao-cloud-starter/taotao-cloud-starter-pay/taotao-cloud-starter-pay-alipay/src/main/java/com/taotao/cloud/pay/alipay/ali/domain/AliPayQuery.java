@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 
 /**
  * 简化查询结果
- *
- * @author lingting 2021/1/26 10:34
  */
 public class AliPayQuery {
 
@@ -38,14 +36,19 @@ public class AliPayQuery {
 		}
 
 		// 信息
-		query.setCode(raw.getCode()).setMsg(raw.getMsg()).setSubCode(raw.getSubCode())
-			.setSubMsg(raw.getSubMsg());
+		query.setCode(raw.getCode());
+		query.setMsg(raw.getMsg());
+		query.setSubCode(raw.getSubCode());
+		query.setSubMsg(raw.getSubMsg());
 
 		// 基础数据
-		return query.setTradeNo(raw.getTradeNo()).setSn(raw.getOutTradeNo())
-			.setId(raw.getBuyerLogonId())
-			.setUserId(raw.getBuyerUserId()).setUserName(raw.getBuyerUserName())
-			.setUserType(raw.getBuyerUserType());
+		query.setTradeNo(raw.getTradeNo());
+		query.setSn(raw.getOutTradeNo());
+		query.setId(raw.getBuyerLogonId());
+		query.setUserId(raw.getBuyerUserId());
+		query.setUserName(raw.getBuyerUserName());
+		query.setUserType(raw.getBuyerUserType());
+		return query;
 	}
 
 	/**
