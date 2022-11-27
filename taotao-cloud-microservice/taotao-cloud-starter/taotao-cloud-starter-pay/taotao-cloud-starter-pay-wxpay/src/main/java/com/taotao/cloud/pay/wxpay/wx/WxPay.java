@@ -9,6 +9,7 @@ import com.taotao.cloud.pay.wxpay.wx.domain.DefaultWxDomain;
 import com.taotao.cloud.pay.wxpay.wx.domain.WxDomain;
 import com.taotao.cloud.pay.wxpay.wx.enums.RequestSuffix;
 import com.taotao.cloud.pay.wxpay.wx.enums.SignType;
+import com.taotao.cloud.pay.wxpay.wx.enums.TradeType;
 import com.taotao.cloud.pay.wxpay.wx.response.WxPayCallback;
 import com.taotao.cloud.pay.wxpay.wx.response.WxPayOrderQueryResponse;
 import com.taotao.cloud.pay.wxpay.wx.response.WxPayResponse;

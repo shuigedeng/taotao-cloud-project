@@ -19,6 +19,7 @@ import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import java.io.File;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.context.ApplicationPidFileWriter;
 
 /**
  * TaoTaoCloudSysApplication 抑制java9 module 报错
@@ -51,6 +52,7 @@ public class TaoTaoCloudSysApplication {
 	}
 
 	public static void setNacosProperty() {
+		ApplicationPidFileWriter
 		/**
 		 * 设置nacos客户端日志和快照目录
 		 *

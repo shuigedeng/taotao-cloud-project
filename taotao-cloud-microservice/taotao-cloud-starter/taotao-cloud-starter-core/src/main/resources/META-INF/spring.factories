@@ -1,3 +1,6 @@
 org.springframework.context.ApplicationContextInitializer=\
 com.taotao.cloud.core.initializer.CoreApplicationContextInitializer, \
 com.taotao.cloud.core.initializer.BannerInitializer
+org.springframework.context.ApplicationListener=\
+org.springframework.boot.context.ApplicationPidFileWriter, \
+org.springframework.boot.web.context.WebServerPortFileWriter
