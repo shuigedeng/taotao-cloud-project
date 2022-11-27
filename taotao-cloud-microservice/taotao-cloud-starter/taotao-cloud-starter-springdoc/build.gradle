@@ -2,9 +2,9 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
 
     //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-webmvc-core
-    api "org.springdoc:springdoc-openapi-webmvc-core:1.6.12"
+    api "org.springdoc:springdoc-openapi-webmvc-core:1.6.13"
     //https://search.maven.org/artifact/org.springdoc/springdoc-openapi-common
-    api "org.springdoc:springdoc-openapi-common:1.6.12"
+    api "org.springdoc:springdoc-openapi-common:1.6.13"
 
 
 }
