@@ -1,0 +1,23 @@
+taotao:
+  cloud:
+    redis:
+      enabled: false
+      cache:
+        enabled: false
+    sms:
+      verification-code:
+        repository: memory
+      enabled: true
+      type: aliyun
+      aliyun:
+        sign-name: ljsdflk
+        access-key-secret: asdf
+        access-key-id: aaa
+        templates:
+          template1: SMS_12837234921378
+        params-orders:
+          template1:
+            - region
+            - time
+            - date
+        weight: 10
