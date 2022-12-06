@@ -1,8 +1,0 @@
-version: "3.1"
-services:
-  testci:
-    build: docker
-    restart: always
-    container_name: testci
-    ports:
-      - 8080:8080
