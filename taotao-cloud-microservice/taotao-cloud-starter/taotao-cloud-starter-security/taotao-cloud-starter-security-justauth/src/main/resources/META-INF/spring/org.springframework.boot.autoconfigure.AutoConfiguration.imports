@@ -1,0 +1,2 @@
+com.taotao.cloud.security.justauth.configuration.JustAuthAutoConfiguration
+com.taotao.cloud.security.justauth.configuration.JustAuthStateCacheConfiguration

@@ -1,0 +1,17 @@
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security:taotao-cloud-starter-security-common")
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
+
+    //Sa-Token 权限认证，在线文档：https://sa-token.cc
+    api 'cn.dev33:sa-token-spring-boot-starter:1.33.0'
+    //Sa-Token 整合Redis (使用jackson序列化方式)
+    api 'cn.dev33:sa-token-dao-redis-jackson:1.33.0'
+    //Sa-Token插件：权限缓存与业务缓存分离
+    api "cn.dev33:sa-token-alone-redis:1.33.0"
+    //Sa-Token 整合 Dubbo
+    api "cn.dev33:sa-token-context-dubbo:1.33.0"
+    //Sa-Token 整合 jwt
+    api "cn.dev33:sa-token-jwt:1.33.0"
+
+}
+

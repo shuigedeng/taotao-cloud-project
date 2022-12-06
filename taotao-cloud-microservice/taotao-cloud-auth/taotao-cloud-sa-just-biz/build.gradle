@@ -1,0 +1,39 @@
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-sentinel")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-jpa")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-kafka")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-micrometer")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
+
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security:taotao-cloud-starter-security-satoken")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security:taotao-cloud-starter-security-justauth")
+
+    // Sa-Token-OAuth2.0 模块
+    implementation "cn.dev33:sa-token-oauth2:1.33.0"
+    //Sa-Token 插件：整合SSO
+    implementation "cn.dev33:sa-token-sso:1.33.0"
+
+}
+
+description = "认证模块api"
