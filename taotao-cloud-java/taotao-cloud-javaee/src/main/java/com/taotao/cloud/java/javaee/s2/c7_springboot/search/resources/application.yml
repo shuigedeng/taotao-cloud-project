@@ -1,4 +1,0 @@
-# es的连接信息
-elasticsearch:
-  host: 192.168.199.109
-  port: 9200
