@@ -1,0 +1,27 @@
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-common")
+
+    api "org.springframework.cloud:spring-cloud-starter-sleuth"
+    api "org.springframework.cloud:spring-cloud-sleuth-zipkin"
+
+    api 'io.zipkin.brave:brave-instrumentation-dubbo:5.14.1'
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
+
+    api 'io.zipkin.brave:brave-instrumentation-mongodb:5.14.1'
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-mongodb")
+
+    api 'io.zipkin.brave:brave-instrumentation-mysql8:5.14.1'
+
+    api 'io.zipkin.brave:brave-instrumentation-p6spy:5.14.1'
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
+
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
+//    api('io.opentracing.brave:brave-opentracing:1.0.0') {
+//        exclude group: 'io.opentracing', module: 'opentracing-api'
+//    }
+//    api 'io.opentracing.contrib:opentracing-redis-redisson:0.1.16'
+//    api 'io.opentracing.contrib:opentracing-redis-spring-data2:0.1.16'
+
+}
+
+
