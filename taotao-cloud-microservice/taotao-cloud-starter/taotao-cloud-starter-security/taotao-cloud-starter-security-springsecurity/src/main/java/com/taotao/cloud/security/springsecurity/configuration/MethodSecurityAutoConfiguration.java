@@ -19,9 +19,6 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import jakarta.servlet.http.HttpServletRequest;
-import java.io.Serializable;
-import java.util.Collection;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -34,6 +31,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * MethodSecurityConfig
@@ -77,7 +78,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 
 		//@PreAuthorize("@pms.hasPermission(#request, authentication, 'export')")
 		public boolean hasPermission(HttpServletRequest req, Authentication authentication,
-			String permission) {
+									 String permission) {
 			return false;
 		}
 
@@ -115,7 +116,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 		//普通的targetDomainObject判断 @PreAuthorize("hasPermission(#batchDTO, 'batch')")
 		@Override
 		public boolean hasPermission(Authentication auth, Object targetDomainObject,
-			Object permission) {
+									 Object permission) {
 			if ((auth == null) || (targetDomainObject == null) || !(permission instanceof String)) {
 				return false;
 			}
@@ -126,7 +127,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 		//用于ACL的访问控制 @PreAuthorize("hasPermission(1, #batchDTO, 'batch')")
 		@Override
 		public boolean hasPermission(Authentication auth, Serializable targetId, String targetType,
-			Object permission) {
+									 Object permission) {
 
 			if ((auth == null) || (targetType == null) || !(permission instanceof String)) {
 				return false;

@@ -3,7 +3,7 @@ dependencies {
 
     //https://github.com/liaochong/myexcel
     //https://search.maven.org/artifact/com.github.liaochong/myexcel
-    api("com.github.liaochong:myexcel:4.2.2") {
+    api("com.github.liaochong:myexcel:4.3.0.RC2") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 
@@ -12,7 +12,7 @@ dependencies {
     api 'com.pig4cloud.excel:excel-spring-boot-starter:1.2.7'
 
     //https://search.maven.org/artifact/com.alibaba/easyexcel
-    api("com.alibaba:easyexcel:3.1.2") {
+    api("com.alibaba:easyexcel:3.1.3") {
         exclude group: "org.projectlombok", module: "lombok"
     }
 

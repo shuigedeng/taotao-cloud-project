@@ -18,12 +18,13 @@ package com.taotao.cloud.security.springsecurity.handler;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Oauth2AuthenticationFailureHandler
@@ -36,7 +37,7 @@ public class Oauth2AuthenticationFailureHandler implements AuthenticationFailure
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-		AuthenticationException exception) throws IOException, ServletException {
+										AuthenticationException exception) throws IOException, ServletException {
 
 		LogUtils.error("用户认证失败", exception);
 		ResponseUtils.fail(response, ResultEnum.USER_UNAUTHORIZED_ERROR);

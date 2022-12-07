@@ -3,12 +3,11 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.security.annotation.NotAuth;
+import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
 import com.taotao.cloud.sys.biz.service.business.ISettingService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * CronController
@@ -37,7 +38,7 @@ public class SettingController {
 	@NotAuth
 	public Result<SettingVO> getByKey(@RequestParam String key) {
 		Setting setting = settingService.get(key);
-		return Result.success(BeanUtils.copy(setting,SettingVO.class));
+		return Result.success(BeanUtils.copy(setting, SettingVO.class));
 	}
 
 	@NotAuth

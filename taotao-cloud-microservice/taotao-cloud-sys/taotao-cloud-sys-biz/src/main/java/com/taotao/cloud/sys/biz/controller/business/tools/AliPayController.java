@@ -3,19 +3,15 @@ package com.taotao.cloud.sys.biz.controller.business.tools;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.AliPayStatusEnum;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.security.annotation.NotAuth;
+import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.vo.alipay.TradeVO;
 import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.service.business.IAlipayConfigService;
 import com.taotao.cloud.sys.biz.utils.AlipayUtils;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +21,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * AliPayController
@@ -43,7 +44,7 @@ public class AliPayController {
 	private final AlipayUtils alipayUtils;
 	private final IAlipayConfigService alipayService;
 
-	@Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息",method = CommonConstant.GET)
+	@Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息", method = CommonConstant.GET)
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
@@ -79,7 +80,7 @@ public class AliPayController {
 	@RequestLogger
 	@GetMapping("/return")
 	public Result<Boolean> returnPage(HttpServletRequest request,
-		HttpServletResponse response) {
+									  HttpServletResponse response) {
 		AlipayConfig alipay = alipayService.find();
 		response.setContentType("text/html;charset=" + alipay.getCharset());
 		//内容验签，防止黑客篡改参数

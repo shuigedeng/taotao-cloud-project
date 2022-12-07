@@ -16,15 +16,12 @@
 package com.taotao.cloud.web.annotation;
 
 import com.taotao.cloud.common.utils.context.EnableContextUtils;
-import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOauth2Resource;
+import com.taotao.cloud.security.springsecurity.annotation.EnableTaoTaoCloudOauth2Resource;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

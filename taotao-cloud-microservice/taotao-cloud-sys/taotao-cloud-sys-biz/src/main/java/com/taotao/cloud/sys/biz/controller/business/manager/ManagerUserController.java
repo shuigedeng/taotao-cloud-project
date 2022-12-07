@@ -21,8 +21,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.security.annotation.NotAuth;
+import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.api.model.dto.user.UserSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.user.UserUpdateDTO;
@@ -31,15 +30,10 @@ import com.taotao.cloud.sys.biz.model.convert.UserConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import com.taotao.cloud.web.base.controller.BaseSuperController;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +43,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * 平台管理端-用户管理API
@@ -62,7 +63,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/user")
 @Tag(name = "平台管理端-用户管理API", description = "平台管理端-用户管理API")
 public class ManagerUserController extends
-        BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
+	BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
 	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
 	@RequestLogger

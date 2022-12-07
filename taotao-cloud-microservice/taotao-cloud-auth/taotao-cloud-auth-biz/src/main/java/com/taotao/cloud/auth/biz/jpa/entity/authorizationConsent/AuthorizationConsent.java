@@ -15,14 +15,13 @@
  */
 package com.taotao.cloud.auth.biz.jpa.entity.authorizationConsent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "`authorizationConsent`")
@@ -85,8 +84,12 @@ public class AuthorizationConsent {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
 			AuthorizationConsentId that = (AuthorizationConsentId) o;
 			return registeredClientId.equals(that.registeredClientId) && principalName.equals(that.principalName);
 		}
