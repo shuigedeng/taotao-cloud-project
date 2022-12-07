@@ -16,10 +16,6 @@
 package com.taotao.cloud.security.springsecurity.login;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -27,6 +23,11 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 登录成功,返回 Token
@@ -42,7 +43,7 @@ public class CustomOAuth2AuthenticationSuccessHandler implements AuthenticationS
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-		Authentication authentication) throws IOException, ServletException {
+										Authentication authentication) throws IOException, ServletException {
 		LogUtils.info("用户登录成功 {}", authentication);
 
 		OAuth2AuthenticationToken oauth2Authentication = (OAuth2AuthenticationToken) authentication;

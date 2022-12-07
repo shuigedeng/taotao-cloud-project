@@ -2,9 +2,10 @@ package com.taotao.cloud.tracing.skywalking;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.tracing.skywalking.config.TraceInterceptorConfigurer;
-import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+
+import javax.annotation.PostConstruct;
 
 @AutoConfiguration
 public class SkyWalkingTracingAutoConfiguration {

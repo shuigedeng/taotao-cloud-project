@@ -18,11 +18,12 @@ package com.taotao.cloud.security.springsecurity.handler;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 用户权限不足
@@ -35,7 +36,7 @@ public class CustomizedAccessDeniedHandler implements AccessDeniedHandler {
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
-		AccessDeniedException accessDeniedException) throws IOException {
+					   AccessDeniedException accessDeniedException) throws IOException {
 
 		LogUtils.error("用户权限不足", accessDeniedException);
 		ResponseUtils.fail(response, ResultEnum.FORBIDDEN);

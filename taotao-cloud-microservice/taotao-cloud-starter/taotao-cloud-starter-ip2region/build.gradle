@@ -7,6 +7,6 @@ dependencies {
 
     //https://gitee.com/lionsoul/ip2region.git
     //https://search.maven.org/artifact/org.lionsoul/ip2region
-    api "org.lionsoul:ip2region:2.6.5"
+    api "org.lionsoul:ip2region:2.6.6"
 
 }

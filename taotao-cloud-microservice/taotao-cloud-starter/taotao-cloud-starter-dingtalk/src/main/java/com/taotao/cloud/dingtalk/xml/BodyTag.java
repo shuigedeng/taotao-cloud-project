@@ -18,7 +18,8 @@ package com.taotao.cloud.dingtalk.xml;
 
 import com.taotao.cloud.dingtalk.annatations.PriorityColumn;
 import com.taotao.cloud.dingtalk.enums.MessageSubType;
-import jakarta.xml.bind.annotation.XmlRootElement;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**

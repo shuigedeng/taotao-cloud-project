@@ -18,8 +18,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.tree.ForestNodeMerger;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.security.annotation.NotAuth;
+import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.dto.region.RegionSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.region.RegionUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.region.RegionParentVO;
@@ -28,17 +27,19 @@ import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
 import com.taotao.cloud.web.base.controller.BaseSuperController;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
-import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 平台管理端-地区管理API
@@ -51,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/region")
 @Tag(name = "平台管理端-地区管理API", description = "平台管理端-地区管理API")
 public class ManagerRegionController extends
-        BaseSuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
+	BaseSuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger

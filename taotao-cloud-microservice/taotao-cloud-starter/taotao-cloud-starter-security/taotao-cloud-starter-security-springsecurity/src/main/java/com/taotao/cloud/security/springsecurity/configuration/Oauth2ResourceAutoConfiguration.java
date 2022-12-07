@@ -33,16 +33,6 @@ import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.security.springsecurity.perm.VipAccessDecisionManager;
 import com.taotao.cloud.security.springsecurity.perm.VipSecurityOauthService;
 import com.taotao.cloud.security.springsecurity.properties.SecurityProperties;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -79,6 +69,17 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.util.pattern.PathPattern;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Oauth2ResourceSecurityConfigurer
@@ -159,10 +160,10 @@ public class Oauth2ResourceAutoConfiguration {
 
 	@Bean
 	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http
-		//VipSecurityOauthService vipSecurityOauthService,
-		//VipAccessDecisionManager vipAccessDecisionManager,
-		//RoleBasedVoter roleBasedVoter,
-		//UrlSecurityPermsLoad urlSecurityPermsLoad
+																 //VipSecurityOauthService vipSecurityOauthService,
+																 //VipAccessDecisionManager vipAccessDecisionManager,
+																 //RoleBasedVoter roleBasedVoter,
+																 //UrlSecurityPermsLoad urlSecurityPermsLoad
 	) throws Exception {
 		HttpSecurity httpSecurity = http
 			.sessionManagement()
@@ -256,7 +257,7 @@ public class Oauth2ResourceAutoConfiguration {
 				}));
 		});
 
-		permitAllUrls.forEach(url -> registry.requestMatchers(url).permitAll());
+		permitAllUrls.forEach(url -> registry.antMatchers(url).permitAll());
 
 		LogUtils.info("permit all urls: {}", permitAllUrls.toString());
 	}

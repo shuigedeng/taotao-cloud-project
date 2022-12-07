@@ -16,11 +16,12 @@
 package com.taotao.cloud.security.springsecurity.handler;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Oauth2AuthenticationSuccessHandler
@@ -33,7 +34,7 @@ public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-		Authentication authentication) throws IOException {
+										Authentication authentication) throws IOException {
 
 		LogUtils.info("用户认证成功");
 	}

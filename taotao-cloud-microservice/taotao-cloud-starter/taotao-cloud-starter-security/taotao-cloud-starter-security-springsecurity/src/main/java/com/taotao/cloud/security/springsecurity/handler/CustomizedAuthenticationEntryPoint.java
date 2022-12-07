@@ -18,11 +18,12 @@ package com.taotao.cloud.security.springsecurity.handler;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 用户未认证 接口需要特定的权限，但是当前用户是匿名用户或者是记住我的用户
@@ -35,7 +36,7 @@ public class CustomizedAuthenticationEntryPoint implements AuthenticationEntryPo
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
-		AuthenticationException authException) throws IOException {
+						 AuthenticationException authException) throws IOException {
 		LogUtils.error("用户未认证", authException);
 		ResponseUtils.fail(response, ResultEnum.UNAUTHORIZED);
 	}

@@ -2,8 +2,6 @@ package com.taotao.cloud.tracing.skywalking.interceptor;
 
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.tracing.skywalking.ClusterTrace;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +9,9 @@ import org.slf4j.MDC;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class TraceInterceptor implements HandlerInterceptor {
 
@@ -31,10 +32,10 @@ public class TraceInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object handler) throws Exception {
+							 Object handler) throws Exception {
 		String traceId =
-				response.getHeader(TRACE_ID_HEADER) != null ? response.getHeader(TRACE_ID_HEADER)
-						: "";
+			response.getHeader(TRACE_ID_HEADER) != null ? response.getHeader(TRACE_ID_HEADER)
+				: "";
 		if (!StringUtils.hasLength(traceId)) {
 			traceId = TraceContext.traceId();
 		}
@@ -55,7 +56,7 @@ public class TraceInterceptor implements HandlerInterceptor {
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-			Object handler, @Nullable Exception ex) throws Exception {
+								Object handler, @Nullable Exception ex) throws Exception {
 		MDC.remove("tid");
 		clusterTrace.removeTraceId();
 	}
