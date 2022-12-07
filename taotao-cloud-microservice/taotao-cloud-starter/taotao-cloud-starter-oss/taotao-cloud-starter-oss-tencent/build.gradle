@@ -4,7 +4,7 @@ dependencies {
 
     //腾讯云存储
     //https://search.maven.org/artifact/com.qcloud/cos_api
-    api "com.qcloud:cos_api:5.6.109"
+    api "com.qcloud:cos_api:5.6.115"
 
     testImplementation project(path: ":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss:taotao-cloud-starter-oss-common", configuration: 'tests')
 
