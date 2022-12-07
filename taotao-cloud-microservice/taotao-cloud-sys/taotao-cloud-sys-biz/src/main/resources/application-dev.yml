@@ -575,11 +575,8 @@ rocketmq:
     #access-key:
     #secret-key:
 
-portfile: ${user.home}/logs/${spring.application.name}/${spring.application.name}.port
 
 spring:
-  pid:
-    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   autoconfigure:
     exclude:
       - org.springframework.boot.actuate.autoconfigure.elasticsearch.ElasticSearchReactiveHealthContributorAutoConfiguration
