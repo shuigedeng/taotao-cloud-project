@@ -12,28 +12,33 @@ dependencies {
     implementation "com.google.zxing:javase:3.5.1"
 }
 
+version "3.2022.15"
+
 // https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
     // 插件名称
-    pluginName = "TaoTaoCloudIdeaPlugin"
+    pluginName = "TaoTaoToolKit"
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
-    sandboxDir = "${rootProject.rootDir}/idea-sandbox"
-    // 开发环境运行时使用的版本
+    //sandboxDir = "${rootProject.rootDir}/idea-sandbox"
+    //这里指定支持的IDE最小版本
     version = "2021.3"
     type = "IC"
 
     // 各种版本去这里找
     // https://www.jetbrains.com/intellij-repository/releases
     //Disables updating since-build attribute in plugin.xml
+    // 配合这个参数，屏蔽插件安装时报的错：Plugin is not compatible with the current version of the IDE
+    // updateSinceUntilBuild也可以在plugin.xml配置 <idea-version since-build="191.0"/>
+    // 其中191.0表示2019.1月发布的版本，0表示无限大的版本
     updateSinceUntilBuild = false
     downloadSources = true
 }
 
 patchPluginXml {
-    changeNotes = """
-                  TaoTaoCloudIdeaPlugin-1.0.1
-                  """
-    //最低支持的版本
+    //changeNotes = """
+    //              TaoTaoToolKit-1.0.1
+    //              """
+    //最低支持的版本 当前插件的起止 IDE 版本支持
     //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
     sinceBuild.set("213")
 
