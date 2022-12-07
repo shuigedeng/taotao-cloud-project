@@ -1,0 +1,50 @@
+plugins {
+    id 'org.graalvm.buildtools.native' version '0.9.18'
+}
+
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
+
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-kafka")
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
+
+//    implementation "org.springframework.boot:spring-boot-starter-security"
+    //implementation "org.springframework.boot:spring-boot-starter-mail"
+
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+
+//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.springframework.boot:spring-boot-starter-json"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
+
+    implementation "mysql:mysql-connector-java"
+//    implementation "com.baomidou:mybatis-plus-boot-starter"
+
+//    implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
+//    implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
+//    implementation "org.antlr:antlr4-runtime:4.11.1"
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
+}
+
+mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
+description = "数据同步模块"
+archivesBaseName = 'taotao-cloud-sync'
+

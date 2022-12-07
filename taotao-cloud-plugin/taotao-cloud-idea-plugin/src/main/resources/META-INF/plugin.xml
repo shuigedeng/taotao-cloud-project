@@ -1,49 +1,67 @@
+<!--https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html?from=jetbrains.org-->
 <idea-plugin>
+
 	<id>com.taotao.cloud.idea.plugin</id>
-	<name>TaoTaoCloudIdeaPlugin</name>
+	<name>TaoTaoToolKit</name>
 	<vendor
 		email="981376577@qq.com"
 		url="https://taotaocloud.top">
 		taotao cloud
 	</vendor>
 
+	<description><![CDATA[
+		<h3>Tool sets commonly used by programmers</h3>
+		<ul>
+			<li>SQL to elasticSearch</li>
+			<li>Date to timestamp</li>
+			<li>Timestamp to date</li>
+			<li>JSON formatting</li>
+			<li>URL encoding</li>
+			<li>URL decoding</li>
+			<li>base64 encoding</li>
+			<li>base64 decoding</li>
+			<li>Mobile phone number home</li>
+			<li>IP home</li>
+			<li>MD5 encryption</li>
+			<li>SHA1 encryption</li>
+			<li>SHA224 encryption</li>
+			<li>SHA256 encryption</li>
+			<li>SHA384 encryption</li>
+			<li>SHA512 encryption</li>
+			<li>UUID random value</li>
+			<li>Regular expression</li>
+			<li>Generate qrccode</li>
+		</ul>
+	]]></description>
+
+	<change-notes><![CDATA[
+		<h2>New plugin</h2>
+		<ul>
+		  <li>inlined during build from CHANGELOG.md</li>
+		  <li>inlined during build from README.md</li>
+		</ul>
+		<h2>Bug Fixes</h2>
+		<ul>
+		  <li>Fixed issue 1</li>
+		  <li>Fixed issue 2</li>
+		</ul>
+	]]></change-notes>
+
 	<!--	<description>-->
-	<!--		<![CDATA[-->
-	<!--      	<h3>程序员常用的工具集</h3>-->
-	<!--		<ul>-->
-	<!--			<li>SQL转elasticSearch语句</li>-->
-	<!--			<li>日期转时间戳</li>-->
-	<!--			<li>时间戳转日期</li>-->
-	<!--			<li>JSON格式化</li>-->
-	<!--			<li>URL编码</li>-->
-	<!--			<li>URL解码</li>-->
-	<!--			<li>base64编码</li>-->
-	<!--			<li>base64解码</li>-->
-	<!--			<li>手机号归属地</li>-->
-	<!--			<li>IP归属地</li>-->
-	<!--			<li>MD5加密</li>-->
-	<!--			<li>SHA1加密</li>-->
-	<!--			<li>SHA224加密</li>-->
-	<!--			<li>SHA256加密</li>-->
-	<!--			<li>SHA384加密</li>-->
-	<!--			<li>SHA512加密</li>-->
-	<!--			<li>UUID随机值</li>-->
-	<!--			<li>正则表达式</li>-->
-	<!--			<li>生成二维码</li>-->
-	<!--		</ul>-->
-	<!--    	]]>-->
+	<!--		sql to es base64 sha taotao cloud idea plugin-->
 	<!--	</description>-->
-	<description>
-		sql to es base64 sha taotao cloud idea plugin
-	</description>
 
 	<!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
 		 on how to target different products -->
-	<!-- uncomment to enable plugin in all products
+	<!--	当前插件依赖的其他插件的id-->
 	<depends>com.intellij.modules.lang</depends>
-	-->
-	<depends>com.intellij.modules.lang</depends>
+	<depends>com.intellij.modules.platform</depends>
+	<!--	<depends>com.intellij.modules.java</depends>-->
+	<!--	<depends>com.intellij.properties</depends>-->
+	<!--	<depends>org.jetbrains.plugins.yaml</depends>-->
+	<!--	<depends>org.intellij.intelliLang</depends>-->
 
+	<!--	可以配置侧边的工具栏，例如maven所在的侧边栏 。-->
 	<extensions defaultExtensionNs="com.intellij">
 		<applicationService serviceInterface="com.taotao.cloud.idea.plugin.service.CacheService"
 			serviceImplementation="com.taotao.cloud.idea.plugin.service.impl.CacheServiceImpl"/>'
@@ -54,7 +72,24 @@
 			implementation="com.taotao.cloud.idea.plugin.extensions.runanything.RunAnythingToolkitProvider"/>
 	</extensions>
 
-	<actions>
-		<!-- Add your actions here -->
-	</actions>
+	<!-- 配置动作(事件），每次点击都会重新初始化 -->
+	<!--	<actions>-->
+	<!--		&lt;!&ndash; 配置动作触发类，触发这个类时，在构造器里新建一个javax.swing.JPanel窗口，这样就完成一次idea和窗口的交互 &ndash;&gt;-->
+	<!--		<action id="Code2TemplateAction" class="com.idea.plugin.action.InitAction"-->
+	<!--			text="Code2Template" description="Code to Template">-->
+	<!--			&lt;!&ndash; 配置菜单类别，ProjectViewPopupMenu：鼠标右键点击项目任意文件，触发窗口弹出 &ndash;&gt;-->
+	<!--			<add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>-->
+	<!--		</action>-->
+	<!--		<action id="Code2TemplatePopupAction" class="com.idea.plugin.action.PopupAction" text="Code2Template"-->
+	<!--			description="Code to Template">-->
+	<!--			&lt;!&ndash; 配置菜单类别，EditorPopupMenu：鼠标右键点击任意文件内容，触发窗口弹出 &ndash;&gt;-->
+	<!--			<add-to-group group-id="EditorPopupMenu" anchor="last"/>-->
+	<!--		</action>-->
+	<!--	</actions>-->
+
+	<!--	扩展点，即定义当前插件某功能可扩展的点，便于被其他插件依赖，并扩展当前插件不完善的功能-->
+	<!--	<extensionPoints>-->
+	<!--		<extensionPoint name="testExtensionPoint" beanClass="com.foo.impl.MyExtensionBean"/>-->
+	<!--	</extensionPoints>-->
+
 </idea-plugin>
