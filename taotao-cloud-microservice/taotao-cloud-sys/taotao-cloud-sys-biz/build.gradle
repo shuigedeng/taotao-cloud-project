@@ -95,6 +95,8 @@ dependencies {
     //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
+
+    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security:taotao-cloud-starter-security-satoken")
 }
 
 mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"

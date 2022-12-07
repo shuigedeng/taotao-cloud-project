@@ -7,8 +7,8 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-sentinel")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-zipkin")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-opentracing:taotao-cloud-starter-opentracing-skywalking")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-micrometer")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
 
 //    implementation "org.springframework.security:spring-security-core:5.7.3"
 //    implementation "org.springframework.security:spring-security-config"
