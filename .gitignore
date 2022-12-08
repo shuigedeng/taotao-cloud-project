@@ -33,6 +33,7 @@ dist/
 nbdist/
 .nb-gradle/
 vendor/
+buildSrc/.gradle
 
 .iml
 mvnw
