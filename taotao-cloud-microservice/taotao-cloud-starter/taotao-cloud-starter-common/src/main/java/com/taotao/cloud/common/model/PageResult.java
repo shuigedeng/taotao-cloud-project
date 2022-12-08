@@ -101,6 +101,27 @@ public class PageResult<R> implements Serializable {
 		);
 	}
 
+
+	public static <R, T> PageResult<R> convertMybatisPage(IPage<T> page, List<R> collect) {
+		return of(
+			page.getTotal(),
+			(int) page.getPages(),
+			(int) page.getCurrent(),
+			(int) page.getSize(),
+			collect
+		);
+	}
+
+	public static <T> PageResult<T> convertMybatisPage(IPage<T> page) {
+		return of(
+			page.getTotal(),
+			(int) page.getPages(),
+			(int) page.getCurrent(),
+			(int) page.getSize(),
+			page.getRecords()
+		);
+	}
+
 	/**
 	 * convertMybatisPage
 	 *
@@ -123,6 +144,43 @@ public class PageResult<R> implements Serializable {
 			(int) page.getSize(),
 			collect
 		);
+	}
+
+	public static <R> PageResult<R> of(
+		int currentPage,
+		int pageSize,
+		List<R> data) {
+		return of(data.size(),
+			getPages(data.size(), pageSize),
+			currentPage, pageSize, data);
+	}
+
+	public static <R> PageResult<R> of(
+		PageParam pageParam,
+		List<R> data) {
+		return of(data.size(),
+			getPages(data.size(), pageParam.getPageSize()),
+			pageParam.getCurrentPage(), pageParam.getPageSize(), data);
+	}
+
+	/**
+	 * 从mybatis分页源码copy
+	 *
+	 * @param totalSize
+	 * @param pageSize
+	 * @return
+	 */
+	public static int getPages(long totalSize, int pageSize) {
+		if (totalSize == 0L) {
+			return 0;
+		} else {
+			int pages = (int) (totalSize / pageSize);
+			if (totalSize % pageSize != 0L) {
+				++pages;
+			}
+
+			return pages;
+		}
 	}
 
 	/**

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class PageParam implements Serializable {
 	/**
 	 * 当前第几页
 	 */
-	@Schema(description = "当前第几页，默认1", example = "1", required = true)
+	@Schema(description = "当前第几页，默认1", example = "1", requiredMode = RequiredMode.REQUIRED)
 	@NotNull(message = "当前页显示数量不能为空")
 	@Min(value = 0, message = "当前页数不能小于0")
 	@Max(value = Integer.MAX_VALUE)
@@ -40,7 +41,7 @@ public class PageParam implements Serializable {
 	/**
 	 * 每页显示条数
 	 */
-	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
+	@Schema(description = "每页显示条数，默认10", example = "10", requiredMode = RequiredMode.REQUIRED)
 	@NotNull(message = "每页数据显示数量不能为空")
 	@Min(value = 5, message = "每页显示条数最小为5条")
 	@Max(value = 100, message = "每页显示条数最大为100条")

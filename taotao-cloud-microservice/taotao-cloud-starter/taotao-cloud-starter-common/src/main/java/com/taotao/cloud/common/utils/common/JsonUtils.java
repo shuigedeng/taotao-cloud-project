@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils.common;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson2.JSON;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -178,6 +179,10 @@ public final class JsonUtils {
 		}
 	}
 
+	public static <T> T toObject(Object dto, Class<T> clazz) {
+		return JSON.parseObject(toJSONString(dto), clazz);
+	}
+
 	/**
 	 * 字符串转换为指定对象，并增加泛型转义 例如：List<Integer> test = toObject(jsonStr, List.class, Integer.class);
 	 *
@@ -293,6 +298,7 @@ public final class JsonUtils {
 			throw new BaseException(e.getMessage());
 		}
 	}
+
 
 	/**
 	 * 将对象序列化成json字符串
