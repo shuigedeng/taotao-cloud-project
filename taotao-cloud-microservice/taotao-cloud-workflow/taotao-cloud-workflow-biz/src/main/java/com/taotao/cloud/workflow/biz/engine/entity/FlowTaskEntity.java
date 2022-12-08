@@ -13,207 +13,208 @@ import lombok.Data;
 @Data
 @TableName("flow_task")
 public class FlowTaskEntity {
-    /**
-     * 任务主键
-     */
-    @TableId("F_ID")
-    private String id;
 
-    /**
-     * 实例进程
-     */
-    @TableField("F_PROCESSID")
-    private String processId;
+	/**
+	 * 任务主键
+	 */
+	@TableId("F_ID")
+	private String id;
 
-    /**
-     * 任务编码
-     */
-    @TableField("F_ENCODE")
-    private String enCode;
+	/**
+	 * 实例进程
+	 */
+	@TableField("F_PROCESSID")
+	private String processId;
 
-    /**
-     * 任务标题
-     */
-    @TableField("F_FULLNAME")
-    private String fullName;
+	/**
+	 * 任务编码
+	 */
+	@TableField("F_ENCODE")
+	private String enCode;
 
-    /**
-     * 紧急程度
-     */
-    @TableField("F_FLOWURGENT")
-    private Integer flowUrgent;
+	/**
+	 * 任务标题
+	 */
+	@TableField("F_FULLNAME")
+	private String fullName;
 
-    /**
-     * 流程主键
-     */
-    @TableField("F_FLOWID")
-    private String flowId;
+	/**
+	 * 紧急程度
+	 */
+	@TableField("F_FLOWURGENT")
+	private Integer flowUrgent;
 
-    /**
-     * 流程编码
-     */
-    @TableField("F_FLOWCODE")
-    private String flowCode;
+	/**
+	 * 流程主键
+	 */
+	@TableField("F_FLOWID")
+	private String flowId;
 
-    /**
-     * 流程名称
-     */
-    @TableField("F_FLOWNAME")
-    private String flowName;
+	/**
+	 * 流程编码
+	 */
+	@TableField("F_FLOWCODE")
+	private String flowCode;
 
-    /**
-     * 流程类型
-     */
-    @TableField("F_FLOWTYPE")
-    private Integer flowType;
+	/**
+	 * 流程名称
+	 */
+	@TableField("F_FLOWNAME")
+	private String flowName;
 
-    /**
-     * 流程分类
-     */
-    @TableField("F_FLOWCATEGORY")
-    private String flowCategory;
+	/**
+	 * 流程类型
+	 */
+	@TableField("F_FLOWTYPE")
+	private Integer flowType;
 
-    /**
-     * 流程表单
-     */
-    @TableField("F_FLOWFORM")
-    private String flowForm;
+	/**
+	 * 流程分类
+	 */
+	@TableField("F_FLOWCATEGORY")
+	private String flowCategory;
 
-    /**
-     * 表单内容
-     */
-    @TableField("F_FLOWFORMCONTENTJSON")
-    private String flowFormContentJson;
+	/**
+	 * 流程表单
+	 */
+	@TableField("F_FLOWFORM")
+	private String flowForm;
 
-    /**
-     * 流程模板
-     */
-    @TableField("F_FLOWTEMPLATEJSON")
-    private String flowTemplateJson;
+	/**
+	 * 表单内容
+	 */
+	@TableField("F_FLOWFORMCONTENTJSON")
+	private String flowFormContentJson;
 
-    /**
-     * 流程版本
-     */
-    @TableField("F_FLOWVERSION")
-    private String flowVersion;
+	/**
+	 * 流程模板
+	 */
+	@TableField("F_FLOWTEMPLATEJSON")
+	private String flowTemplateJson;
 
-    /**
-     * 开始时间
-     */
-    @TableField(value = "F_STARTTIME")
-    private Date startTime;
+	/**
+	 * 流程版本
+	 */
+	@TableField("F_FLOWVERSION")
+	private String flowVersion;
 
-    /**
-     * 结束时间
-     */
-    @TableField(value = "F_ENDTIME")
-    private Date endTime;
+	/**
+	 * 开始时间
+	 */
+	@TableField(value = "F_STARTTIME")
+	private Date startTime;
 
-    /**
-     * 当前步骤
-     */
-    @TableField("F_THISSTEP")
-    private String thisStep;
+	/**
+	 * 结束时间
+	 */
+	@TableField(value = "F_ENDTIME")
+	private Date endTime;
 
-    /**
-     * 当前步骤Id
-     */
-    @TableField(value = "F_THISSTEPID")
-    private String thisStepId;
+	/**
+	 * 当前步骤
+	 */
+	@TableField("F_THISSTEP")
+	private String thisStep;
 
-    /**
-     * 重要等级
-     */
-    @TableField("F_GRADE")
-    private String grade;
+	/**
+	 * 当前步骤Id
+	 */
+	@TableField(value = "F_THISSTEPID")
+	private String thisStepId;
 
-    /**
-     * 任务状态 0-草稿、1-处理、2-通过、3-驳回、4-撤销、5-终止
-     */
-    @TableField("F_STATUS")
-    private Integer status;
+	/**
+	 * 重要等级
+	 */
+	@TableField("F_GRADE")
+	private String grade;
 
-    /**
-     * 完成情况
-     */
-    @TableField("F_COMPLETION")
-    private Integer completion;
+	/**
+	 * 任务状态 0-草稿、1-处理、2-通过、3-驳回、4-撤销、5-终止
+	 */
+	@TableField("F_STATUS")
+	private Integer status;
 
-    /**
-     * 描述
-     */
-    @TableField("F_DESCRIPTION")
-    private String description;
+	/**
+	 * 完成情况
+	 */
+	@TableField("F_COMPLETION")
+	private Integer completion;
 
-    /**
-     * 父节点id
-     */
-    @TableField("F_PARENTID")
-    private String parentId;
+	/**
+	 * 描述
+	 */
+	@TableField("F_DESCRIPTION")
+	private String description;
 
-    /**
-     * 是否批量（0：否，1：是）
-     */
-    @TableField("F_ISBATCH")
-    private Integer isBatch;
+	/**
+	 * 父节点id
+	 */
+	@TableField("F_PARENTID")
+	private String parentId;
 
-    /**
-     * 排序码
-     */
-    @TableField("F_SORTCODE")
-    private Long sortCode;
+	/**
+	 * 是否批量（0：否，1：是）
+	 */
+	@TableField("F_ISBATCH")
+	private Integer isBatch;
 
-    /**
-     * 有效标志
-     */
-    @TableField("F_ENABLEDMARK")
-    private Integer enabledMark;
+	/**
+	 * 排序码
+	 */
+	@TableField("F_SORTCODE")
+	private Long sortCode;
 
-    /**
-     * 同步异步（0：同步，1：异步）
-     */
-    @TableField(value = "F_ISASYNC")
-    private Integer isAsync;
+	/**
+	 * 有效标志
+	 */
+	@TableField("F_ENABLEDMARK")
+	private Integer enabledMark;
 
-    /**
-     * 创建时间
-     */
-    @TableField(value = "F_CREATORTIME", fill = FieldFill.INSERT)
-    private Date creatorTime;
+	/**
+	 * 同步异步（0：同步，1：异步）
+	 */
+	@TableField(value = "F_ISASYNC")
+	private Integer isAsync;
 
-    /**
-     * 创建用户
-     */
-    @TableField(value = "F_CREATORUSERID", fill = FieldFill.INSERT)
-    private String creatorUserId;
+	/**
+	 * 创建时间
+	 */
+	@TableField(value = "F_CREATORTIME", fill = FieldFill.INSERT)
+	private Date creatorTime;
 
-    /**
-     * 修改时间
-     */
-    @TableField(value = "F_LASTMODIFYTIME", fill = FieldFill.UPDATE)
-    private Date lastModifyTime;
+	/**
+	 * 创建用户
+	 */
+	@TableField(value = "F_CREATORUSERID", fill = FieldFill.INSERT)
+	private Long creatorUserId;
 
-    /**
-     * 修改用户
-     */
-    @TableField(value = "F_LASTMODIFYUSERID", fill = FieldFill.UPDATE)
-    private String lastModifyUserId;
+	/**
+	 * 修改时间
+	 */
+	@TableField(value = "F_LASTMODIFYTIME", fill = FieldFill.UPDATE)
+	private Date lastModifyTime;
 
-    /**
-     * 删除标志
-     */
-    @TableField("F_DELETEMARK")
-    private Integer deleteMark;
+	/**
+	 * 修改用户
+	 */
+	@TableField(value = "F_LASTMODIFYUSERID", fill = FieldFill.UPDATE)
+	private String lastModifyUserId;
 
-    /**
-     * 删除时间
-     */
-    @TableField("F_DELETETIME")
-    private Date deleteTime;
+	/**
+	 * 删除标志
+	 */
+	@TableField("F_DELETEMARK")
+	private Integer deleteMark;
 
-    /**
-     * 删除用户
-     */
-    @TableField("F_DELETEUSERID")
-    private String deleteUserId;
+	/**
+	 * 删除时间
+	 */
+	@TableField("F_DELETETIME")
+	private Date deleteTime;
+
+	/**
+	 * 删除用户
+	 */
+	@TableField("F_DELETEUSERID")
+	private String deleteUserId;
 }

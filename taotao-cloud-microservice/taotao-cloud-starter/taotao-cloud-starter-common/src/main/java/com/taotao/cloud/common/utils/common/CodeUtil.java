@@ -33,13 +33,9 @@ public class CodeUtil {
 			newcode = zimu + num;
 		} else {
 			String beforeCode = code.substring(0, code.length() - 1 - NUM_LENGTH);
-			String afterCode = code.substring(code.length() - 1 - NUM_LENGTH, code.length());
+			String afterCode = code.substring(code.length() - 1 - NUM_LENGTH);
 			char afterCodeZimu = afterCode.substring(0, 1).charAt(0);
 			Integer afterCodeNum = Integer.parseInt(afterCode.substring(1));
-//			org.jeecgframework.core.util.LogUtil.info(after_code);
-//			org.jeecgframework.core.util.LogUtil.info(after_code_zimu);
-//			org.jeecgframework.core.util.LogUtil.info(after_code_num);
-
 			String nextNum = "";
 			char nextZimu = 'A';
 			// 先判断数字等于999*，则计数从1重新开始，递增
@@ -105,8 +101,7 @@ public class CodeUtil {
 	 * @return
 	 */
 	private static String getStrNum(int num) {
-		String s = String.format("%0" + NUM_LENGTH + "d" , num);
-		return s;
+		return String.format("%0" + NUM_LENGTH + "d", num);
 	}
 
 	/**
@@ -144,9 +139,7 @@ public class CodeUtil {
 			return 0;
 		}
 		StringBuilder maxNum = new StringBuilder();
-		for (int i = 0; i < length; i++) {
-			maxNum.append("9");
-		}
+		maxNum.append("9".repeat(Math.max(0, length)));
 		return Integer.parseInt(maxNum.toString());
 	}
 
@@ -162,8 +155,8 @@ public class CodeUtil {
 			}
 			return cutcode;
 		}
-
 	}
+
 //	public static void main(String[] args) {
 //		// org.jeecgframework.core.util.LogUtil.info(getNextZiMu('C'));
 //		// org.jeecgframework.core.util.LogUtil.info(getNextNum(8));

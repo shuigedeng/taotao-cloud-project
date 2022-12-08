@@ -1,7 +1,15 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.workflow.api.vo.UserEntity;
+import com.taotao.cloud.workflow.biz.covert.FlowTaskConvert;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
@@ -16,6 +24,7 @@ import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowSummary;
 import com.taotao.cloud.workflow.biz.engine.model.flowcandidate.FlowCandidateUserModel;
 import com.taotao.cloud.workflow.biz.engine.model.flowcandidate.FlowCandidateVO;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.childnode.ChildNode;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ChildNodeList;
 import com.taotao.cloud.workflow.biz.engine.model.flowengine.shuntjson.nodejson.ConditionList;
 import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskListModel;
@@ -29,15 +38,16 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.FlowJsonUtil;
 import com.taotao.cloud.workflow.biz.engine.util.FlowNature;
 import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
-
+import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,388 +57,310 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 待我审核
- *
  */
-@Tag(tags = "待我审核", value = "FlowBefore")
+@Validated
+@Tag(name = "工作流程-待我审核", description = "工作流程-待我审核")
 @RestController
-@RequestMapping("/api/workflow/Engine/FlowBefore")
+@RequestMapping("/api/workflow/engine/flow-before")
 public class FlowBeforeController {
 
 
-    @Autowired
-    private ServiceAllUtil serviceUtil;
-    @Autowired
-    private UserProvider userProvider;
-    @Autowired
-    private RedisUtil redisUtil;
-    @Autowired
-    private FlowTaskService flowTaskService;
-    @Autowired
-    private FlowTaskOperatorService flowTaskOperatorService;
-    @Autowired
-    private FlowTaskOperatorRecordService flowTaskOperatorRecordService;
-    @Autowired
-    private FlowTaskNodeService flowTaskNodeService;
-    @Autowired
-    private FlowEngineService flowEngineService;
-    @Autowired
-    private FlowTaskNewService flowTaskNewService;
+	@Autowired
+	private ServiceAllUtil serviceUtil;
+	@Autowired
+	private RedisRepository redisRepository;
+	@Autowired
+	private FlowTaskService flowTaskService;
+	@Autowired
+	private FlowTaskOperatorService flowTaskOperatorService;
+	@Autowired
+	private FlowTaskOperatorRecordService flowTaskOperatorRecordService;
+	@Autowired
+	private FlowTaskNodeService flowTaskNodeService;
+	@Autowired
+	private FlowEngineService flowEngineService;
+	@Autowired
+	private FlowTaskNewService flowTaskNewService;
 
-    /**
-     * 获取待我审核列表
-     *
-     * @param category           分类
-     * @param paginationFlowTask
-     * @return
-     */
-    @Operation("获取待我审核列表(有带分页)，1-待办事宜，2-已办事宜，3-抄送事宜,4-批量审批")
-    @GetMapping("/List/{category}")
-    public Result list(@PathVariable("category") String category, PaginationFlowTask paginationFlowTask) {
-        List<FlowTaskListModel> data = new ArrayList<>();
-        if (FlowNature.WAIT.equals(category)) {
-            data = flowTaskService.getWaitList(paginationFlowTask);
-        } else if (FlowNature.TRIAL.equals(category)) {
-            data = flowTaskService.getTrialList(paginationFlowTask);
-        } else if (FlowNature.CIRCULATE.equals(category)) {
-            data = flowTaskService.getCirculateList(paginationFlowTask);
-        } else if (FlowNature.BATCH.equals(category)) {
-            data = flowTaskService.getBatchWaitList(paginationFlowTask);
-        }
-        boolean isBatch = FlowNature.BATCH.equals(category);
-        List<FlowBeforeListVO> listVO = new LinkedList<>();
-        List<UserEntity> userList = serviceUtil.getUserName(data.stream().map(t -> t.getCreatorUserId()).collect(Collectors.toList()));
-        List<FlowEngineEntity> engineList = flowEngineService.getFlowList(data.stream().map(t -> t.getFlowId()).collect(Collectors.toList()));
-        if (data.size() > 0) {
-            for (FlowTaskListModel task : data) {
-                FlowBeforeListVO vo = JsonUtils.getJsonToBean(task, FlowBeforeListVO.class);
-                //用户名称赋值
-                UserEntity user = userList.stream().filter(t -> t.getId().equals(vo.getCreatorUserId())).findFirst().orElse(null);
-                vo.setUserName(user != null ? user.getRealName() + "/" + user.getAccount() : "");
-                FlowEngineEntity engine = engineList.stream().filter(t -> t.getId().equals(vo.getFlowId())).findFirst().orElse(null);
-                if (engine != null) {
-                    vo.setFormType(engine.getFormType());
-                }
-                if (isBatch) {
-                    ChildNodeList childNode = JsonUtils.getJsonToBean(vo.getApproversProperties(), ChildNodeList.class);
-                    vo.setApproversProperties(JsonUtils.getObjectToString(childNode.getProperties()));
-                }
-                vo.setFlowVersion(StringUtil.isEmpty(vo.getFlowVersion()) ? "" : "v" + vo.getFlowVersion());
-                listVO.add(vo);
-            }
-        }
-        PaginationVO paginationVO = JsonUtils.getJsonToBean(paginationFlowTask, PaginationVO.class);
-        return Result.page(listVO, paginationVO);
-    }
+	@Operation(summary = "获取待我审核列表(有带分页)，1-待办事宜，2-已办事宜，3-抄送事宜,4-批量审批",
+		description = "获取待我审核列表(有带分页)，1-待办事宜，2-已办事宜，3-抄送事宜,4-批量审批")
+	@GetMapping("/category/{category}")
+	public Result<PageResult<FlowBeforeListVO>> list(@PathVariable("category") String category,
+		PaginationFlowTask paginationFlowTask) {
+		IPage<FlowTaskListModel> data = MpUtils.toPage(paginationFlowTask);
+		if (FlowNature.WAIT.equals(category)) {
+			data = flowTaskService.getWaitList(paginationFlowTask);
+		} else if (FlowNature.TRIAL.equals(category)) {
+			data = flowTaskService.getTrialList(paginationFlowTask);
+		} else if (FlowNature.CIRCULATE.equals(category)) {
+			data = flowTaskService.getCirculateList(paginationFlowTask);
+		} else if (FlowNature.BATCH.equals(category)) {
+			data = flowTaskService.getBatchWaitList(paginationFlowTask);
+		}
+		boolean isBatch = FlowNature.BATCH.equals(category);
 
-    /**
-     * 获取待我审批信息
-     *
-     * @param id 主键值
-     * @return
-     */
-    @Operation("获取待我审批信息")
-    @GetMapping("/{id}")
-    public Result info(@PathVariable("id") String id, String taskNodeId, String taskOperatorId) throws WorkFlowException {
-        FlowBeforeInfoVO vo = flowTaskNewService.getBeforeInfo(id, taskNodeId, taskOperatorId);
-        return Result.success(vo);
-    }
+		List<FlowBeforeListVO> listVO = new LinkedList<>();
+		List<FlowTaskListModel> records = data.getRecords();
+		List<UserEntity> userList = serviceUtil.getUserName(
+			records.stream().map(FlowTaskListModel::getCreatorUserId).collect(Collectors.toList()));
+		List<FlowEngineEntity> engineList = flowEngineService.getFlowList(
+			records.stream().map(FlowTaskListModel::getFlowId).collect(Collectors.toList()));
 
-    /**
-     * 待我审核审核
-     *
-     * @param id              待办主键值
-     * @param flowHandleModel 流程经办
-     * @return
-     */
-    @Operation("待我审核审核")
-    @PostMapping("/Audit/{id}")
-    public Result audit(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
-        if (operator == null) {
-            return Result.fail("审批失败");
-        } else {
-            FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
-            flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator, "");
-            if (FlowNature.ProcessCompletion.equals(operator.getCompletion())) {
-                FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
-                UserInfo userInfo = userProvider.get();
-                String rejecttKey = userInfo.getTenantId() + id;
-                if (redisUtil.exists(rejecttKey)) {
-                    throw new WorkFlowException(MsgCode.WF005.get());
-                }
-                redisUtil.insert(rejecttKey, id, 10);
-                flowTaskNewService.audit(flowTask, operator, flowModel);
-                return Result.success("审核成功");
-            } else {
-                return Result.fail("已审核完成");
-            }
-        }
-    }
+		if (records.size() > 0) {
+			for (FlowTaskListModel task : records) {
+				FlowBeforeListVO vo = FlowTaskConvert.INSTANCE.convert(task);
 
-    /**
-     * 保存草稿
-     *
-     * @param id              待办主键值
-     * @param flowHandleModel 流程经办
-     * @return
-     */
-    @Operation("保存草稿")
-    @PostMapping("/SaveAudit/{id}")
-    public Result saveAudit(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        FlowTaskOperatorEntity flowTaskOperatorEntity = flowTaskOperatorService.getInfo(id);
-        if (flowTaskOperatorEntity != null) {
-            FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(flowTaskOperatorEntity.getTaskId());
-            FlowEngineEntity engine = flowEngineService.getInfo(flowTaskEntity.getFlowId());
-            Map<String, Object> formDataAll = flowHandleModel.getFormData();
-            if (FlowNature.CUSTOM.equals(engine.getFormType())) {
-                Object data = formDataAll.get("data");
-                if (data != null) {
-                    formDataAll = JsonUtils.stringToMap(String.valueOf(data));
-                }
-            }
-            flowTaskOperatorEntity.setDraftData(JsonUtils.getObjectToString(formDataAll));
-            flowTaskOperatorService.updateById(flowTaskOperatorEntity);
-            return Result.success(MsgCode.SU002.get());
-        }
-        return Result.fail(MsgCode.FA001.get());
-    }
+				//用户名称赋值
+				UserEntity user = userList.stream()
+					.filter(t -> t.getId().equals(vo.getCreatorUserId())).findFirst().orElse(null);
+				vo.setUserName(user != null ? user.getRealName() + "/" + user.getAccount() : "");
 
-    /**
-     * 审批汇总
-     *
-     * @param id       待办主键值
-     * @param category 类型
-     * @return
-     */
-    @Operation("审批汇总")
-    @GetMapping("/RecordList/{id}")
-    public Result recordList(@PathVariable("id") String id, String category, String type) {
-        List<FlowSummary> flowSummaries = flowTaskNewService.recordList(id, category, type);
-        return Result.success(flowSummaries);
-    }
+				engineList.stream()
+					.filter(t -> t.getId().equals(vo.getFlowId())).findFirst()
+					.ifPresent(engine -> vo.setFormType(engine.getFormType()));
 
-    /**
-     * 待我审核驳回
-     *
-     * @param id              待办主键值
-     * @param flowHandleModel 经办信息
-     * @return
-     */
-    @Operation("待我审核驳回")
-    @PostMapping("/Reject/{id}")
-    public Result reject(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
-        if (operator == null) {
-            return Result.fail("驳回失败");
-        } else {
-            FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
-            flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator, "");
-            if (FlowNature.ProcessCompletion.equals(operator.getCompletion())) {
-                FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
-                UserInfo userInfo = userProvider.get();
-                String rejecttKey = userInfo.getTenantId() + id;
-                if (redisUtil.exists(rejecttKey)) {
-                    throw new WorkFlowException(MsgCode.WF112.get());
-                }
-                redisUtil.insert(rejecttKey, id, 10);
-                flowTaskNewService.reject(flowTask, operator, flowModel);
-                return Result.success("驳回成功");
-            } else {
-                return Result.fail("已审核完成");
-            }
-        }
-    }
+				if (isBatch) {
+					ChildNodeList childNode = JsonUtils.toObject(vo.getApproversProperties(),
+						ChildNodeList.class);
+					assert childNode != null;
+					vo.setApproversProperties(
+						JsonUtils.toJSONString(childNode.getProperties()));
+				}
 
-    /**
-     * 待我审核转办
-     *
-     * @param id              主键值
-     * @param flowHandleModel 经办信息
-     * @return
-     */
-    @Operation("待我审核转办")
-    @PostMapping("/Transfer/{id}")
-    public Result transfer(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
-        if (operator == null) {
-            return Result.fail("转办失败");
-        } else {
-            FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
-            flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator, "");
-            operator.setHandleId(flowHandleModel.getFreeApproverUserId());
-            flowTaskNewService.transfer(operator);
-            return Result.success("转办成功");
-        }
-    }
+				vo.setFlowVersion(
+					StringUtils.isEmpty(vo.getFlowVersion()) ? "" : "v" + vo.getFlowVersion());
+				listVO.add(vo);
+			}
+		}
+		return Result.success(PageResult.convertMybatisPage(data, listVO));
+	}
 
-    /**
-     * 待我审核撤回审核
-     * 注意：在撤销流程时要保证你的下一节点没有处理这条记录；如已处理则无法撤销流程。
-     *
-     * @param id              主键值
-     * @param flowHandleModel 实体对象
-     * @return
-     */
-    @Operation("待我审核撤回审核")
-    @PostMapping("/Recall/{id}")
-    public Result recall(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        FlowTaskOperatorRecordEntity operatorRecord = flowTaskOperatorRecordService.getInfo(id);
-        List<FlowTaskNodeEntity> nodeList = flowTaskNodeService.getList(operatorRecord.getTaskId()).stream().filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState())).collect(Collectors.toList());
-        FlowTaskNodeEntity taskNode = nodeList.stream().filter(t -> t.getId().equals(operatorRecord.getTaskNodeId())).findFirst().orElse(null);
-        if (taskNode != null) {
-            FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
-            flowTaskNewService.recall(id, operatorRecord, flowModel);
-            return Result.success("撤回成功");
-        }
-        return Result.fail("撤回失败");
-    }
+	@Operation(summary = "获取待我审批信息", description = "获取待我审批信息")
+	@GetMapping("/{id}")
+	public Result<FlowBeforeInfoVO> info(@PathVariable("id") String id, String taskNodeId,
+		String taskOperatorId)
+		throws WorkFlowException {
+		FlowBeforeInfoVO vo = flowTaskNewService.getBeforeInfo(id, taskNodeId, taskOperatorId);
+		return Result.success(vo);
+	}
 
-    /**
-     * 待我审核终止审核
-     *
-     * @param id              主键值
-     * @param flowHandleModel 流程经办
-     * @return
-     */
-    @Operation("待我审核终止审核")
-    @PostMapping("/Cancel/{id}")
-    public Result cancel(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) {
-        FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(id);
-        if (flowTaskEntity != null) {
-            FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
-            flowTaskNewService.cancel(flowTaskEntity, flowModel);
-            return Result.success(MsgCode.SU009.get());
-        }
-        return Result.fail(MsgCode.FA009.get());
-    }
+	@Operation(summary = "待我审核审核", description = "待我审核审核")
+	@PostMapping("/actions/audit/{id}")
+	public Result<Boolean> audit(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel)
+		throws WorkFlowException {
+		FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
+		if (operator == null) {
+			return Result.fail("审批失败");
+		} else {
+			FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
+			flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator,
+				"");
+			if (FlowNature.ProcessCompletion.equals(operator.getCompletion())) {
+				FlowModel flowModel = FlowTaskConvert.INSTANCE.convert(flowHandleModel);
+				String rejecttKey = SecurityUtils.getTenant() + id;
+				if (redisRepository.exists(rejecttKey)) {
+					throw new WorkFlowException(MsgCode.WF005.get());
+				}
+				redisRepository.setExpire(rejecttKey, id, 10);
+				flowTaskNewService.audit(flowTask, operator, flowModel);
+				return Result.success(true);
+			} else {
+				return Result.fail("已审核完成");
+			}
+		}
+	}
 
-    /**
-     * 指派人
-     *
-     * @param id              主键值
-     * @param flowHandleModel 流程经办
-     * @return
-     */
-    @Operation("指派人")
-    @PostMapping("/Assign/{id}")
-    public Result assign(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        FlowModel flowModel = JsonUtils.getJsonToBean(flowHandleModel, FlowModel.class);
-        boolean isOk = flowTaskNewService.assign(id, flowModel);
-        return isOk ? Result.success("指派成功") : Result.fail("指派失败");
-    }
+	@Operation(summary = "保存草稿", description = "保存草稿")
+	@PostMapping("/actions/audit/{id}")
+	public Result<Boolean> saveAudit(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
+		FlowTaskOperatorEntity flowTaskOperatorEntity = flowTaskOperatorService.getInfo(id);
+		if (flowTaskOperatorEntity != null) {
+			FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(
+				flowTaskOperatorEntity.getTaskId());
+			FlowEngineEntity engine = flowEngineService.getInfo(flowTaskEntity.getFlowId());
+			Map<String, Object> formDataAll = flowHandleModel.getFormData();
+			if (FlowNature.CUSTOM.equals(engine.getFormType())) {
+				Object data = formDataAll.get("data");
+				if (data != null) {
+					formDataAll = JsonUtils.toMap(String.valueOf(data));
+				}
+			}
+			flowTaskOperatorEntity.setDraftData(JsonUtils.toJSONString(formDataAll));
+			flowTaskOperatorService.updateById(flowTaskOperatorEntity);
+			return Result.success(true);
+		}
+		return Result.fail(MsgCode.FA001.get());
+	}
 
-    /**
-     * 获取候选人
-     *
-     * @param flowHandleModel 数据
-     * @return
-     */
-    @Operation("获取候选人节点")
-    @PostMapping("/Candidates/{id}")
-    public Result candidates(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        List<FlowCandidateVO> candidate = flowTaskNewService.candidates(id, flowHandleModel);
-        return Result.success(candidate);
-    }
+	@Operation(summary = "审批汇总", description = "审批汇总")
+	@GetMapping("/records/{id}")
+	public Result<List<FlowSummary>> recordList(@PathVariable("id") String id, String category,
+		String type) {
+		List<FlowSummary> flowSummaries = flowTaskNewService.recordList(id, category, type);
+		return Result.success(flowSummaries);
+	}
 
-    /**
-     * 获取候选人
-     *
-     * @param flowHandleModel 数据
-     * @return
-     */
-    @Operation("获取候选人")
-    @PostMapping("/CandidateUser/{id}")
-    public Result candidateUser(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        List<FlowCandidateUserModel> candidate = flowTaskNewService.candidateUser(id, flowHandleModel);
-        PaginationVO paginationVO = JsonUtils.getJsonToBean(flowHandleModel, PaginationVO.class);
-        return Result.page(candidate, paginationVO);
-    }
+	@Operation(summary = "待我审核驳回", description = "待我审核驳回")
+	@PostMapping("/actions/reject/{id}")
+	public Result<Boolean> reject(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
+		FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
+		if (operator == null) {
+			return Result.fail("驳回失败");
+		} else {
+			FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
+			flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator,
+				"");
+			if (FlowNature.ProcessCompletion.equals(operator.getCompletion())) {
+				FlowModel flowModel = FlowTaskConvert.INSTANCE.convert(flowHandleModel);
+				String rejecttKey = SecurityUtils.getTenant() + id;
+				if (redisRepository.exists(rejecttKey)) {
+					throw new WorkFlowException(MsgCode.WF112.get());
+				}
+				redisRepository.setExpire(rejecttKey, id, 10);
+				flowTaskNewService.reject(flowTask, operator, flowModel);
+				return Result.success(true);
+			} else {
+				return Result.fail("已审核完成");
+			}
+		}
+	}
 
-    /**
-     * 批量审批引擎
-     *
-     * @return
-     */
-    @Operation("批量审批引擎")
-    @GetMapping("/BatchFlowSelector")
-    public Result batchFlowSelector() {
-        List<FlowBatchModel> batchFlowList = flowTaskService.batchFlowSelector();
-        return Result.success(batchFlowList);
-    }
+	@Operation(summary = "待我审核转办", description = "待我审核转办")
+	@PostMapping("/actions/transfer/{id}")
+	public Result<Boolean> transfer(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
+		FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
+		if (operator == null) {
+			return Result.fail("转办失败");
+		} else {
+			FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
+			flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator,
+				"");
+			operator.setHandleId(flowHandleModel.getFreeApproverUserId());
+			flowTaskNewService.transfer(operator);
+			return Result.success(true);
+		}
+	}
 
-    /**
-     * 引擎节点
-     *
-     * @param id 主键值
-     * @return
-     * @throws WorkFlowException
-     */
-    @Operation("引擎节点")
-    @GetMapping("/NodeSelector/{id}")
-    public Result nodeSelector(@PathVariable("id") String id) throws WorkFlowException {
-        FlowEngineEntity engine = flowEngineService.getInfo(id);
-        List<FlowBatchModel> batchList = new ArrayList<>();
-        ChildNode childNodeAll = JsonUtils.getJsonToBean(engine.getFlowTemplateJson(), ChildNode.class);
-        //获取流程节点
-        List<ChildNodeList> nodeListAll = new ArrayList<>();
-        List<ConditionList> conditionListAll = new ArrayList<>();
-        //递归获取条件数据和节点数据
-        FlowJsonUtil.getTemplateAll(childNodeAll, nodeListAll, conditionListAll);
-        for (ChildNodeList childNodeList : nodeListAll) {
-            FlowBatchModel batchModel = new FlowBatchModel();
-            batchModel.setFullName(childNodeList.getProperties().getTitle());
-            batchModel.setId(childNodeList.getCustom().getNodeId());
-            batchList.add(batchModel);
-        }
-        return Result.success(batchList);
-    }
+	@Operation(summary = "待我审核撤回审核", description = "注意：在撤销流程时要保证你的下一节点没有处理这条记录；如已处理则无法撤销流程。")
+	@PostMapping("/actions/recall/{id}")
+	public Result<Boolean> recall(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
+		FlowTaskOperatorRecordEntity operatorRecord = flowTaskOperatorRecordService.getInfo(id);
+		List<FlowTaskNodeEntity> nodeList = flowTaskNodeService.getList(operatorRecord.getTaskId())
+			.stream().filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
+			.collect(Collectors.toList());
+		FlowTaskNodeEntity taskNode = nodeList.stream()
+			.filter(t -> t.getId().equals(operatorRecord.getTaskNodeId())).findFirst().orElse(null);
+		if (taskNode != null) {
+			FlowModel flowModel = FlowTaskConvert.INSTANCE.convert(flowHandleModel);
+			flowTaskNewService.recall(id, operatorRecord, flowModel);
+			return Result.success(true);
+		}
+		return Result.fail("撤回失败");
+	}
 
-    /**
-     * 批量审批
-     *
-     * @param flowHandleModel 数据
-     * @return
-     * @throws WorkFlowException
-     */
-    @Operation("批量审批")
-    @PostMapping("/BatchOperation")
-    public Result batchOperation(@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
-        flowTaskNewService.batch(flowHandleModel);
-        return Result.success("批量操作完成");
-    }
+	@Operation(summary = "待我审核终止审核", description = "待我审核终止审核")
+	@PostMapping("/actions/cancel/{id}")
+	public Result<Boolean> cancel(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel) {
+		FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(id);
+		if (flowTaskEntity != null) {
+			FlowModel flowModel = FlowTaskConvert.INSTANCE.convert(flowHandleModel);
+			flowTaskNewService.cancel(flowTaskEntity, flowModel);
+			return Result.success(true);
+		}
+		return Result.fail(MsgCode.FA009.get());
+	}
 
-    /**
-     * 批量获取候选人
-     *
-     * @param taskOperatorId 代办数据
-     * @return
-     * @throws WorkFlowException
-     */
-    @Operation("批量获取候选人")
-    @GetMapping("/BatchCandidate")
-    public Result batchCandidate(String flowId, String taskOperatorId) throws WorkFlowException {
-        List<FlowCandidateVO> candidate = flowTaskNewService.batchCandidates(flowId, taskOperatorId);
-        return Result.success(candidate);
-    }
+	@Operation(summary = "指派人", description = "指派人")
+	@PostMapping("/actions/assign/{id}")
+	public Result<Boolean> assign(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
+		FlowModel flowModel = FlowTaskConvert.INSTANCE.convert(flowHandleModel);
+		boolean isOk = flowTaskNewService.assign(id, flowModel);
+		return isOk ? Result.success(true) : Result.fail("指派失败");
+	}
 
-    /**
-     * 消息跳转工作流
-     *
-     * @param id 代办id
-     * @return
-     * @throws WorkFlowException
-     */
-    @Operation("消息跳转工作流")
-    @GetMapping("/{id}/Info")
-    public Result taskOperatorId(@PathVariable("id") String id) throws WorkFlowException {
-        FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
-        if (operator == null) {
-            throw new WorkFlowException(MsgCode.WF123.get());
-        }
-        FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
-        flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator, "");
-        return Result.success();
-    }
+	@Operation(summary = "获取候选人节点", description = "获取候选人节点")
+	@PostMapping("/actions/candidates/{id}")
+	public Result<List<FlowCandidateVO>> candidates(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
+		List<FlowCandidateVO> candidate = flowTaskNewService.candidates(id, flowHandleModel);
+		return Result.success(candidate);
+	}
+
+	@Operation(summary = "获取候选人", description = "获取候选人")
+	@PostMapping("/CandidateUser/{id}")
+	public Result<PageResult<FlowCandidateUserModel>> candidateUser(@PathVariable("id") String id,
+		@RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
+		List<FlowCandidateUserModel> candidate = flowTaskNewService.candidateUser(id,
+			flowHandleModel);
+		PaginationVO paginationVO = JsonUtils.getJsonToBean(flowHandleModel, PaginationVO.class);
+		return Result.page(candidate, paginationVO);
+	}
+
+	@Operation(summary = "批量审批引擎", description = "批量审批引擎")
+	@GetMapping("/batch")
+	public Result<List<FlowBatchModel>> batchFlowSelector() {
+		List<FlowBatchModel> batchFlowList = flowTaskService.batchFlowSelector();
+		return Result.success(batchFlowList);
+	}
+
+	@Operation(summary = "引擎节点", description = "引擎节点")
+	@GetMapping("/node/{id}")
+	public Result<List<FlowBatchModel>> nodeSelector(@PathVariable("id") String id)
+		throws WorkFlowException {
+		FlowEngineEntity engine = flowEngineService.getInfo(id);
+		List<FlowBatchModel> batchList = new ArrayList<>();
+		ChildNode childNodeAll = JsonUtils.toObject(engine.getFlowTemplateJson(),
+			ChildNode.class);
+		//获取流程节点
+		List<ChildNodeList> nodeListAll = new ArrayList<>();
+		List<ConditionList> conditionListAll = new ArrayList<>();
+		//递归获取条件数据和节点数据
+		FlowJsonUtil.getTemplateAll(childNodeAll, nodeListAll, conditionListAll);
+		for (ChildNodeList childNodeList : nodeListAll) {
+			FlowBatchModel batchModel = new FlowBatchModel();
+			batchModel.setFullName(childNodeList.getProperties().getTitle());
+			batchModel.setId(childNodeList.getCustom().getNodeId());
+			batchList.add(batchModel);
+		}
+		return Result.success(batchList);
+	}
+
+	@Operation(summary = "批量审批", description = "批量审批")
+	@PostMapping("/batch")
+	public Result<Boolean> batchOperation(@RequestBody FlowHandleModel flowHandleModel)
+		throws WorkFlowException {
+		flowTaskNewService.batch(flowHandleModel);
+		return Result.success(true);
+	}
+
+	@Operation(summary = "批量获取候选人", description = "批量获取候选人")
+	@GetMapping("/batch/candidate")
+	public Result<List<FlowCandidateVO>> batchCandidate(String flowId, String taskOperatorId)
+		throws WorkFlowException {
+		List<FlowCandidateVO> candidate = flowTaskNewService.batchCandidates(flowId,
+			taskOperatorId);
+		return Result.success(candidate);
+	}
+
+	@Operation(summary = "消息跳转工作流", description = "消息跳转工作流")
+	@GetMapping("/info/{id}")
+	public Result<FlowTaskEntity> taskOperatorId(@PathVariable("id") String id)
+		throws WorkFlowException {
+		FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(id);
+		if (operator == null) {
+			throw new WorkFlowException(MsgCode.WF123.get());
+		}
+		FlowTaskEntity flowTask = flowTaskService.getInfo(operator.getTaskId());
+		flowTaskNewService.permissions(operator.getHandleId(), flowTask.getFlowId(), operator, "");
+		return Result.success(flowTask);
+	}
 
 
 }

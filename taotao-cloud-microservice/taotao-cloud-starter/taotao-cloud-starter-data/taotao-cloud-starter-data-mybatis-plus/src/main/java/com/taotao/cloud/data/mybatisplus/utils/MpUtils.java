@@ -16,17 +16,20 @@
 package com.taotao.cloud.data.mybatisplus.utils;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
-import net.sf.jsqlparser.expression.Alias;
-import net.sf.jsqlparser.schema.Column;
-import net.sf.jsqlparser.schema.Table;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiFunction;
+import net.sf.jsqlparser.expression.Alias;
+import net.sf.jsqlparser.schema.Column;
+import net.sf.jsqlparser.schema.Table;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -54,7 +57,7 @@ public class MpUtils {
 	 * @return 影响的总行数
 	 * @since 2022-03-24 14:29:12
 	 */
-	public static  <T, M, R> int batchUpdateOrInsert(List<T> data, Class<M> mapperClass,
+	public static <T, M, R> int batchUpdateOrInsert(List<T> data, Class<M> mapperClass,
 		BiFunction<T, M, R> function) {
 		int i = 1;
 		SqlSessionFactory sqlSessionFactory = ContextUtils.getBean(SqlSessionFactory.class, true);
@@ -82,8 +85,6 @@ public class MpUtils {
 
 		return i - 1;
 	}
-
-
 
 	///**
 	// * mp page转换为 PageResult 同时进行dto转换
@@ -201,11 +202,13 @@ public class MpUtils {
 
 	/**
 	 * 将拦截器添加到链中
+	 *
 	 * @param interceptor 链
-	 * @param inner 拦截器
-	 * @param index 位置
+	 * @param inner       拦截器
+	 * @param index       位置
 	 */
-	public static void addInterceptor(MybatisPlusInterceptor interceptor, InnerInterceptor inner, int index) {
+	public static void addInterceptor(MybatisPlusInterceptor interceptor, InnerInterceptor inner,
+		int index) {
 		List<InnerInterceptor> inners = new ArrayList<>(interceptor.getInterceptors());
 		inners.add(index, inner);
 		interceptor.setInterceptors(inners);
@@ -215,12 +218,14 @@ public class MpUtils {
 	 * 获得 Table 对应的表名
 	 * <p>
 	 * 兼容 MySQL 转义表名 `t_xxx`
+	 *
 	 * @param table 表
 	 * @return 去除转移字符后的表名
 	 */
 	public static String getTableName(Table table) {
 		String tableName = table.getName();
-		if (tableName.startsWith(MYSQL_ESCAPE_CHARACTER) && tableName.endsWith(MYSQL_ESCAPE_CHARACTER)) {
+		if (tableName.startsWith(MYSQL_ESCAPE_CHARACTER) && tableName.endsWith(
+			MYSQL_ESCAPE_CHARACTER)) {
 			tableName = tableName.substring(1, tableName.length() - 1);
 		}
 		return tableName;
@@ -228,12 +233,35 @@ public class MpUtils {
 
 	/**
 	 * 构建 Column 对象
-	 * @param tableName 表名
+	 *
+	 * @param tableName  表名
 	 * @param tableAlias 别名
-	 * @param column 字段名
+	 * @param column     字段名
 	 * @return Column 对象
 	 */
 	public static Column buildColumn(String tableName, Alias tableAlias, String column) {
 		return new Column(tableAlias != null ? tableAlias.getName() + "." + column : column);
+	}
+
+	public static <T> IPage<T> toPage(long current, long size) {
+		return new Page<T>(current, size, 0);
+	}
+
+	public static <T> IPage<T> toPage(PageParam pageParam) {
+		return new Page<T>(pageParam.getCurrentPage(),
+			pageParam.getPageSize(), 0);
+	}
+
+	public static <T> IPage<T> toPage(long current, long size, List<T> records) {
+		Page<T> page = new Page<T>(current, size, records.size());
+		page.setRecords(records);
+		return page;
+	}
+
+	public static <T> IPage<T> toPage(PageParam pageParam, List<T> records) {
+		Page<T> page = new Page<T>(pageParam.getCurrentPage(),
+			pageParam.getPageSize(), records.size());
+		page.setRecords(records);
+		return page;
 	}
 }

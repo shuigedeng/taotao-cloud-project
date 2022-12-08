@@ -22,6 +22,7 @@ import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.pulsar.example.producer.ProducerService;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.controller.BaseBusinessController;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class BuyerDictController extends BaseBusinessController<IDictService, Di
 
 	@NotAuth
 	@GetMapping("/add/{type}")
-	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+	@Operation(summary = "通过code查询所有字典列表", description = "通过code查询所有字典列表")
 	public Result<Boolean> add(@PathVariable String type)
 		throws SQLIntegrityConstraintViolationException {
 		Boolean result = service().add(type);
@@ -61,14 +62,14 @@ public class BuyerDictController extends BaseBusinessController<IDictService, Di
 
 	@NotAuth
 	@GetMapping("/add1")
-	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+	@Operation(summary = "通过code查询所有字典列表", description = "通过code查询所有字典列表")
 	public Result<Boolean> add1() {
 		Boolean result = service().add1();
 		return success(result);
 	}
 
 	@GetMapping("/test/codexxxxx")
-	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+	@Operation(summary = "通过code查询所有字典列表", description = "通过code查询所有字典列表")
 	public Result<Boolean> testCode(@RequestParam String code) {
 		//try {
 		//	producerService.sendStringMsg();
