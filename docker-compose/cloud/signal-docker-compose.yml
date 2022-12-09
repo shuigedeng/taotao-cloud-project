@@ -653,6 +653,20 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.51
 
+  powerjob-server:
+    image: "tjqq/powerjob-server:latest"
+    restart: always
+    container_name: powerjob-server
+    ports:
+      - "7700:7700"
+      - "10086:10086"
+    environment:
+      TZ: "Asia/Shanghai"
+      PARAMS: "--spring.profiles.active=product --spring.datasource.core.jdbc-url=jdbc:mysql://172.11.0.10:13306/powerjob-product?useUnicode=true&characterEncoding=UTF-8 --spring.datasource.core.username=root --spring.datasource.core.password=123456"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.52
+
 networks:
   taotao-cluster-network:
     external: true
