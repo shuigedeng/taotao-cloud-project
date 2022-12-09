@@ -2,7 +2,6 @@ package com.taotao.cloud.security.satoken.configuration;
 
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.filter.SaServletFilter;
-import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
 import cn.dev33.satoken.router.SaRouter;
@@ -73,8 +72,6 @@ public class SaTokenConfiguration implements WebMvcConfigurer {
 			SaRouter.match("/**", "/login", new IgnoreSaRouteFunction(handle));
 
 		})).addPathPatterns("/**");
-
-		registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns("/**");
 	}
 
 	/**
