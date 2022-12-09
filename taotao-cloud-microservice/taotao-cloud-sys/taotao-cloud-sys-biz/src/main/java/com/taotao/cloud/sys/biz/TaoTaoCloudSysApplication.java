@@ -17,9 +17,8 @@ package com.taotao.cloud.sys.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
-import org.springframework.boot.SpringApplication;
-
 import java.io.File;
+import org.springframework.boot.SpringApplication;
 
 /**
  * TaoTaoCloudSysApplication 抑制java9 module 报错
@@ -48,7 +47,11 @@ public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
 		setNacosProperty();
-		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
+		try {
+			SpringApplication.run(TaoTaoCloudSysApplication.class, args);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static void setNacosProperty() {

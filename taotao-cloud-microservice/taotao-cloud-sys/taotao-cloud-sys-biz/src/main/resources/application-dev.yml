@@ -1862,3 +1862,38 @@ kylin:
     #  base-sleep-time-ms: 5000   #初始sleep时间，默认值5000 单位：毫秒
     #  max-retries: 3             #最大失败重试次数
     #  namespace: curator/kylin/lock #命名空间
+
+# Sa-Token配置
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: satoken
+  # token前缀
+  token-prefix: Bearer
+  # token有效期，单位秒，-1代表永不过期
+  timeout: 2592000
+  # token临时有效期 (指定时间内无操作就视为token过期)，单位秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录 (为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为false时每次登录新建一个token)
+  is-share: false
+  # token风格
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: false
+  # 是否从cookie中读取token
+  is-read-cookie: false
+  # 是否从head中读取token
+  is-read-head: true
+  # 配置Sa-Token单独使用的Redis连接
+  # jwt秘钥
+  jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjk
+
+powerjob:
+  worker:
+    akka-port: 27777
+    app-name: ${spring.application.name}
+    server-address: 192.168.10.210:7700
+    store-strategy: memory
+    max-appended-wf-context-length: 8192
+    max-result-length: 8192

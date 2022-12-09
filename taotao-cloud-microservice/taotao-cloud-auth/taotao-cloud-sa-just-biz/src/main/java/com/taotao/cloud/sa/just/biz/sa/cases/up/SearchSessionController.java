@@ -3,7 +3,7 @@ package com.taotao.cloud.sa.just.biz.sa.cases.up;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
-import com.pj.model.SysUser;
+import com.taotao.cloud.security.satoken.model.SysUser;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
