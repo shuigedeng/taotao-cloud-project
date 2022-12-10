@@ -110,10 +110,11 @@ configurations {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
-        //resolutionStrategy {
-        //    //force "org.codehaus.groovy:groovy:4.0.0"
-        //    force "com.alibaba.nacos:nacos-client:2.1.0"
-        //}
+        resolutionStrategy {
+            //    //force "org.codehaus.groovy:groovy:4.0.0"
+            //    force "com.alibaba.nacos:nacos-client:2.1.0"
+            force "com.h2database:h2:1.4.200"
+        }
 
         //exclude group: "org.codehaus.groovy", module: "groovy"
         //exclude group: "org.projectlombok", module: "lombok"
@@ -126,23 +127,3 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
 }
-
-
-//import org.springframework.aot.gradle.dsl.AotMode
-//
-//plugins {
-//    id "org.springframework.experimental.aot" version "0.12.1"
-//}
-//bootRun {
-//    systemProperty "springAot", "true"
-//}
-//
-//springAot {
-//    mode = AotMode.NATIVE
-//    debugVerify = false
-//    removeXmlSupport = true
-//    removeSpelSupport = false
-//    removeYamlSupport = false
-//    removeJmxSupport = true
-//    verify = true
-//}
