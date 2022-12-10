@@ -48,14 +48,3 @@ pluginBundle {
             //someOtherPlugin: ['some', 'other', 'tags']
     ]
 }
-
-//uploadArchives{ //当前项目可以发布到本地文件夹中
-//    repositories {
-//        mavenDeployer {
-//            repository(url: uri("/Users/huangyuan/maven_repo")) //定义本地maven仓库的地址
-//            pom.groupId = "com.example.mygradleplugin"   //groupId
-//            pom.artifactId = "myplugin"  //artifactId
-//            pom.version = "1.0.2" //版本号
-//        }
-//    }
-//}
