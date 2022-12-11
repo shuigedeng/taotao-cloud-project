@@ -1,13 +1,12 @@
 package com.taotao.cloud.sys.biz.gobrs.config;
 
-import com.gobrs.async.threadpool.GobrsAsyncThreadPoolFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
+import com.gobrs.async.core.threadpool.GobrsAsyncThreadPoolFactory;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class GobrsThreadPoolConfig {
@@ -17,7 +16,8 @@ public class GobrsThreadPoolConfig {
 
 	@PostConstruct
 	public void gobrsThreadPoolExecutor() {
-		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(300, 500, 30, TimeUnit.SECONDS,
+		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(300, 500, 30,
+			TimeUnit.SECONDS,
 			new LinkedBlockingQueue<>(), r -> {
 			Thread t = new Thread(r);
 			t.setName("taotao-cloud-gobrs-threadpool");

@@ -1,17 +1,16 @@
 package com.taotao.cloud.sys.biz.gobrs.controller;
 
-import com.gobrs.async.GobrsAsync;
-import com.gobrs.async.domain.AsyncResult;
+import com.gobrs.async.core.GobrsAsync;
+import com.gobrs.async.core.common.domain.AsyncResult;
 import com.taotao.cloud.sys.biz.gobrs.service.GobrsService;
 import com.taotao.cloud.sys.biz.gobrs.task.AService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Gobrs controller.

@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.gobrs.config;
 
-import com.gobrs.async.callback.AsyncTaskExceptionInterceptor;
-import com.gobrs.async.callback.ErrorCallback;
+import com.gobrs.async.core.callback.AsyncTaskExceptionInterceptor;
+import com.gobrs.async.core.callback.ErrorCallback;
 import org.springframework.stereotype.Component;
 
 /**

@@ -1,10 +1,9 @@
 package com.taotao.cloud.sys.biz.gobrs.task;
 
-import com.gobrs.async.TaskSupport;
-import com.gobrs.async.domain.TaskResult;
-import com.gobrs.async.task.AsyncTask;
+import com.gobrs.async.core.TaskSupport;
+import com.gobrs.async.core.common.domain.TaskResult;
+import com.gobrs.async.core.task.AsyncTask;
 import org.springframework.stereotype.Component;
-
 
 /**
  * The type C service.
@@ -50,11 +49,6 @@ public class CService extends AsyncTask<String, Integer> {
 		return null;
 	}
 
-	@Override
-	public boolean nessary(String o, TaskSupport support) {
-		return true;
-	}
-
 
 	@Override
 	public void onSuccess(TaskSupport support) {
@@ -66,6 +60,12 @@ public class CService extends AsyncTask<String, Integer> {
 	}
 
 	@Override
-	public void onFail(TaskSupport support) {
+	public void onFailureTrace(TaskSupport support, Exception exception) {
 	}
+
+
+	@Override
+	public void onFail(TaskSupport support, Exception exception) {
+	}
+
 }

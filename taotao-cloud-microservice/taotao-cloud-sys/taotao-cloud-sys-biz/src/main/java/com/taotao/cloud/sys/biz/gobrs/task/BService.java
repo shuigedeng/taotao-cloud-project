@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.gobrs.task;
 
-import com.gobrs.async.TaskSupport;
-import com.gobrs.async.anno.Task;
-import com.gobrs.async.task.AsyncTask;
+import com.gobrs.async.core.TaskSupport;
+import com.gobrs.async.core.anno.Task;
+import com.gobrs.async.core.task.AsyncTask;
 import org.springframework.stereotype.Component;
 
 /**
@@ -45,8 +45,18 @@ public class BService extends AsyncTask<Object, Object> {
 		return null;
 	}
 
+
 	@Override
-	public boolean nessary(Object params, TaskSupport support) {
+	public void onSuccess(TaskSupport support) {
+
+	}
+
+	@Override
+	public void onFailureTrace(TaskSupport support, Exception exception) {
+	}
+
+	@Override
+	public boolean necessary(Object params, TaskSupport support) {
 		// 假如参数是cancel 则不执行当前任务
 		if ("cancel".equals(params)) {
 			return false;
@@ -55,12 +65,11 @@ public class BService extends AsyncTask<Object, Object> {
 	}
 
 	@Override
-	public void onSuccess(TaskSupport support) {
-
+	public void onFail(TaskSupport support, Exception exception) {
 	}
 
 	@Override
-	public void onFail(TaskSupport support) {
-
+	public void rollback(Object o) {
+		super.rollback(o);
 	}
 }

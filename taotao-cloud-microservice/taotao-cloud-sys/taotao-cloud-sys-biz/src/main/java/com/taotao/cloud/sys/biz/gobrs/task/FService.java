@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.gobrs.task;
 
-import com.gobrs.async.TaskSupport;
-import com.gobrs.async.task.AsyncTask;
+import com.gobrs.async.core.TaskSupport;
+import com.gobrs.async.core.task.AsyncTask;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FService extends AsyncTask<Object, Object> {
+
 	/**
 	 * The .
 	 */
@@ -40,10 +41,6 @@ public class FService extends AsyncTask<Object, Object> {
 		return null;
 	}
 
-	@Override
-	public boolean nessary(Object o, TaskSupport support) {
-		return true;
-	}
 
 	@Override
 	public void onSuccess(TaskSupport support) {
@@ -51,7 +48,20 @@ public class FService extends AsyncTask<Object, Object> {
 	}
 
 	@Override
-	public void onFail(TaskSupport support) {
+	public void onFailureTrace(TaskSupport support, Exception exception) {
+	}
 
+	@Override
+	public boolean necessary(Object o, TaskSupport support) {
+		return super.necessary(o, support);
+	}
+
+	@Override
+	public void onFail(TaskSupport support, Exception exception) {
+	}
+
+	@Override
+	public void rollback(Object o) {
+		super.rollback(o);
 	}
 }

@@ -51,7 +51,7 @@ dependencies {
     implementation "io.protostuff:protostuff-runtime:1.8.0"
 
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
-    implementation "io.github.memorydoc:gobrs-async-starter:1.2.1-RELEASE"
+    implementation "io.github.memorydoc:gobrs-async-starter:1.2.7-RELEASE"
 
     //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
     implementation "io.soabase.record-builder:record-builder-core"

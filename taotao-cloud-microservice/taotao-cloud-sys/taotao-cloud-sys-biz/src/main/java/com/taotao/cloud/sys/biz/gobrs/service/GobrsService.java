@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.gobrs.service;
 
-import com.gobrs.async.GobrsAsync;
-import com.gobrs.async.domain.AsyncResult;
+import com.gobrs.async.core.GobrsAsync;
+import com.gobrs.async.core.common.domain.AsyncResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,18 +27,16 @@ public class GobrsService {
 	 */
 	public void gobrsAsync() {
 		AsyncResult asyncResult = gobrsAsync.go("test", Object::new);
-		if (asyncResult.getExpCode().equals(100)) {
+		if (asyncResult.getExecuteCode().equals(100)) {
 			// 业务一
-		} else if (asyncResult.getExpCode().equals(200)) {
+		} else if (asyncResult.getExecuteCode().equals(200)) {
 			// 业务二
 		}
 	}
 
-
 	/**
 	 * Future.
 	 */
-
 
 	/**
 	 * Update rule.
