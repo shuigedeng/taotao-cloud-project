@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.gobrs.inteceptor;
 
-import com.gobrs.async.callback.AsyncTaskExceptionInterceptor;
-import com.gobrs.async.callback.ErrorCallback;
-import com.gobrs.async.util.JsonUtil;
+import com.gobrs.async.core.callback.AsyncTaskExceptionInterceptor;
+import com.gobrs.async.core.callback.ErrorCallback;
+import com.gobrs.async.core.common.util.JsonUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -25,6 +25,7 @@ public class GobrsInterceptor implements AsyncTaskExceptionInterceptor {
 	@Override
 	public void exception(ErrorCallback errorCallback) {
 
-		log.error("Execute global interceptor  error{}", JsonUtil.obj2String(errorCallback.getThrowable()));
+		log.error("Execute global interceptor  error{}",
+			JsonUtil.obj2String(errorCallback.getThrowable()));
 	}
 }

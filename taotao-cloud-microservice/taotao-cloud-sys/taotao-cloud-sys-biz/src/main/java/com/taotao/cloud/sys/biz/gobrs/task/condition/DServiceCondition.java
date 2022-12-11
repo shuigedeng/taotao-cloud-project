@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.gobrs.task.condition;
 
-import com.gobrs.async.TaskSupport;
-import com.gobrs.async.task.AsyncTask;
+import com.gobrs.async.core.TaskSupport;
+import com.gobrs.async.core.task.AsyncTask;
 import org.springframework.stereotype.Component;
 
 /**
@@ -43,10 +43,10 @@ public class DServiceCondition extends AsyncTask<Object, Boolean> {
 		return true;
 	}
 
-	@Override
-	public boolean nessary(Object o, TaskSupport support) {
-		return true;
-	}
+	//@Override
+	//public boolean nessary(Object o, TaskSupport support) {
+	//	return true;
+	//}
 
 
 	@Override
@@ -54,8 +54,8 @@ public class DServiceCondition extends AsyncTask<Object, Boolean> {
 
 	}
 
-	@Override
-	public void onFail(TaskSupport support) {
-
-	}
+	//@Override
+	//public void onFail(TaskSupport support) {
+	//
+	//}
 }

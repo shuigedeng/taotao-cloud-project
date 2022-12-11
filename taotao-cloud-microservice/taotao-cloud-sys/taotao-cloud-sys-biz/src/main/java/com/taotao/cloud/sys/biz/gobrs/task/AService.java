@@ -1,9 +1,9 @@
 package com.taotao.cloud.sys.biz.gobrs.task;
 
-import com.gobrs.async.TaskSupport;
-import com.gobrs.async.anno.Task;
-import com.gobrs.async.domain.TaskResult;
-import com.gobrs.async.task.AsyncTask;
+import com.gobrs.async.core.TaskSupport;
+import com.gobrs.async.core.anno.Task;
+import com.gobrs.async.core.common.domain.TaskResult;
+import com.gobrs.async.core.task.AsyncTask;
 import com.taotao.cloud.common.exception.BusinessException;
 import org.springframework.stereotype.Component;
 
@@ -69,10 +69,6 @@ public class AService extends AsyncTask<Object, String> {
 	//Gobrs-Async 会根据 nessary 的返回结果，判断当前task 是否需要执行 如果返回true 则需要被执行，否则返之。
 	//
 	// 例如： 当参数为 cancel 时， 任务不执行。
-	@Override
-	public boolean nessary(Object o, TaskSupport support) {
-		return true;
-	}
 
 
 	//如果你想在任务执行完成后做一些额外的操作。例如打印日志、发送邮件、发送MQ、记录信息等。 Gobrs-Async 同样也为你考虑到了。
@@ -84,9 +80,14 @@ public class AService extends AsyncTask<Object, String> {
 
 	//在任务异常时发送告警信息
 	@Override
-	public void onFail(TaskSupport support) {
-
+	public boolean necessary(Object o, TaskSupport support) {
+		return super.necessary(o, support);
 	}
+
+	@Override
+	public void onFail(TaskSupport support, Exception exception) {
+	}
+
 
 	//事务回滚 具体回滚业务需要自己实现 该方法是一个默认方法 需要自己手动重写
 	@Override
