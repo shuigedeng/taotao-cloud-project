@@ -36,18 +36,15 @@ public class WechatMessageExecute implements OrderStatusChangeEvent, TradeEvent 
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
 		switch (orderMessage.newStatus()) {
-			case PAID:
-			case UNDELIVERED:
-			case DELIVERED:
-			case COMPLETED:
+			case PAID, UNDELIVERED, DELIVERED, COMPLETED -> {
 				try {
 					wechatMessageUtil.sendWechatMessage(orderMessage.getOrderSn());
 				} catch (Exception e) {
 					LogUtils.error("微信消息发送失败", e);
 				}
-				break;
-			default:
-				break;
+			}
+			default -> {
+			}
 		}
 
 	}

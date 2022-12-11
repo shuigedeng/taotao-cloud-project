@@ -19,12 +19,10 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.model.Collector;
-import com.taotao.cloud.data.mybatisplus.datascope.DataScopeInterceptor;
 import com.taotao.cloud.data.mybatisplus.handler.objecthandler.AutoFieldMetaObjectHandler;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.like.FullLikeTypeHandler;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.like.LeftLikeTypeHandler;
@@ -36,6 +34,9 @@ import com.taotao.cloud.data.mybatisplus.interceptor.SqlLogInterceptor;
 import com.taotao.cloud.data.mybatisplus.properties.MybatisPlusAutoFillProperties;
 import com.taotao.cloud.data.mybatisplus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatisplus.properties.TenantProperties;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Properties;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.apache.ibatis.type.EnumTypeHandler;
@@ -49,10 +50,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Properties;
-
 /**
  * MybatisPlusAutoConfiguration
  *
@@ -62,8 +59,9 @@ import java.util.Properties;
  */
 @MapperScan(basePackages = {"com.taotao.cloud.*.biz.mapper"})
 @EnableTransactionManagement
-@AutoConfiguration(after = TenantAutoConfiguration.class)
-@EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class, TenantProperties.class})
+@AutoConfiguration(after = {TenantAutoConfiguration.class, MpInterceptorConfiguration.class})
+@EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class,
+		TenantProperties.class})
 @ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class MybatisPlusAutoConfiguration implements InitializingBean {
 
@@ -76,9 +74,9 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 
 	public MybatisPlusAutoConfiguration(
-		TenantProperties tenantProperties,
-		MybatisPlusAutoFillProperties autoFillProperties,
-		MybatisPlusProperties mybatisPlusProperties) {
+			TenantProperties tenantProperties,
+			MybatisPlusAutoFillProperties autoFillProperties,
+			MybatisPlusProperties mybatisPlusProperties) {
 		this.tenantProperties = tenantProperties;
 		this.autoFillProperties = autoFillProperties;
 		this.mybatisPlusProperties = mybatisPlusProperties;
@@ -117,14 +115,11 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * 新的分页插件,一缓和二缓遵循mybatis的规则,需要设置 MybatisConfiguration#useDeprecatedExecutor = false 避免缓存出现问题(该属性会在旧插件移除后一同移除)
+	 * 新的分页插件,一缓和二缓遵循mybatis的规则,需要设置 MybatisConfiguration#useDeprecatedExecutor = false
+	 * 避免缓存出现问题(该属性会在旧插件移除后一同移除)
 	 * <p>
-	 * 注意:
-	 * 如果内部插件都是使用,需要注意顺序关系,建议使用如下顺序
-	 * 多租户插件,动态表名插件
-	 * 分页插件,乐观锁插件
-	 * sql性能规范插件,防止全表更新与删除插件
-	 * 总结: 对sql进行单次改造的优先放入,不对sql进行改造的最后放入
+	 * 注意: 如果内部插件都是使用,需要注意顺序关系,建议使用如下顺序 多租户插件,动态表名插件 分页插件,乐观锁插件 sql性能规范插件,防止全表更新与删除插件 总结:
+	 * 对sql进行单次改造的优先放入,不对sql进行改造的最后放入
 	 * <p>
 	 * 参考：
 	 * https://mybatis.plus/guide/interceptor.html#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F-%E4%BB%A5%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6%E4%B8%BE%E4%BE%8B
@@ -134,23 +129,9 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 
 		interceptors.stream()
-			.sorted(Comparator.comparing(MpInterceptor::getSortNo))
-			.map(MpInterceptor::getInnerInterceptor)
-			.forEach(interceptor::addInnerInterceptor);
-
-		// //5.多租户插件
-		// interceptor.addInnerInterceptor(getTenantInnerInterceptor());
-		//
-		// //6.数据权限插件
-		// if (tenantProperties.getDataScope()) {
-		// 	interceptor.addInnerInterceptor(getDataScopeInnerInterceptor());
-		// }
-
-		// if (tenantProperties.getEnabled() && Objects.nonNull(tenantLineInnerInterceptor)) {
-		// 	// 多租户插件
-		// 	interceptor.addInnerInterceptor(tenantLineInnerInterceptor);
-		// }
-
+				.sorted(Comparator.comparing(MpInterceptor::getSortNo))
+				.map(MpInterceptor::getInnerInterceptor)
+				.forEach(interceptor::addInnerInterceptor);
 		return interceptor;
 	}
 
@@ -192,11 +173,9 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * Mybatis 自定义的类型处理器： 处理XML中  #{name,typeHandler=leftLike} 类型的参数
-	 * 用于左模糊查询时使用
+	 * Mybatis 自定义的类型处理器： 处理XML中  #{name,typeHandler=leftLike} 类型的参数 用于左模糊查询时使用
 	 * <p>
-	 * eg：
-	 * and name like #{name,typeHandler=leftLike}
+	 * eg： and name like #{name,typeHandler=leftLike}
 	 *
 	 * @return 左模糊处理器
 	 */
@@ -206,11 +185,9 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * Mybatis 自定义的类型处理器： 处理XML中  #{name,typeHandler=rightLike} 类型的参数
-	 * 用于右模糊查询时使用
+	 * Mybatis 自定义的类型处理器： 处理XML中  #{name,typeHandler=rightLike} 类型的参数 用于右模糊查询时使用
 	 * <p>
-	 * eg：
-	 * and name like #{name,typeHandler=rightLike}
+	 * eg： and name like #{name,typeHandler=rightLike}
 	 *
 	 * @return 右模糊处理器
 	 */
@@ -220,60 +197,15 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * Mybatis 自定义的类型处理器： 处理XML中  #{name,typeHandler=fullLike} 类型的参数
-	 * 用于全模糊查询时使用
+	 * Mybatis 自定义的类型处理器： 处理XML中  #{name,typeHandler=fullLike} 类型的参数 用于全模糊查询时使用
 	 * <p>
-	 * eg：
-	 * and name like #{name,typeHandler=fullLike}
+	 * eg： and name like #{name,typeHandler=fullLike}
 	 *
 	 * @return 全模糊处理器
 	 */
 	@Bean
 	public FullLikeTypeHandler getFullLikeTypeHandler() {
 		return new FullLikeTypeHandler();
-	}
-
-
-	public InnerInterceptor getTenantInnerInterceptor() {
-		// LogUtils.info("检测到 lamp.database.multiTenantType={}，已启用 {} 模式", databaseProperties.getMultiTenantType().name(), databaseProperties.getMultiTenantType().getDescribe());
-		// if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
-		// 	MultiTenantType.SCHEMA.name(), MultiTenantType.SCHEMA_COLUMN.name())) {
-		// 	ArgumentAssert.notNull(databaseProperties.getDbType(), "SCHEMA 模式请在mysql.yml、oracle.yml、sqlserver.yml中配置: {}.dbType", DatabaseProperties.PREFIX);
-		//
-		// 	// SCHEMA 动态表名插件
-		// 	SchemaInterceptor schemaInterceptor = new SchemaInterceptor(databaseProperties.getTenantDatabasePrefix(), databaseProperties.getOwner(), databaseProperties.getDbType());
-		// 	interceptor.addInnerInterceptor(schemaInterceptor);
-		// }
-		//
-		// if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
-		// 	MultiTenantType.COLUMN.name(), MultiTenantType.SCHEMA_COLUMN.name(), MultiTenantType.DATASOURCE_COLUMN.name())) {
-		// 	// COLUMN 模式 多租户插件
-		// 	TenantLineInnerInterceptor tli = new TenantLineInnerInterceptor();
-		// 	tli.setTenantLineHandler(new TenantLineHandler() {
-		// 		@Override
-		// 		public String getTenantIdColumn() {
-		// 			return databaseProperties.getTenantIdColumn();
-		// 		}
-		//
-		// 		@Override
-		// 		public boolean ignoreTable(String tableName) {
-		// 			return databaseProperties.getIgnoreTables() != null && databaseProperties.getIgnoreTables().contains(tableName);
-		// 		}
-		//
-		// 		@Override
-		// 		public Expression getTenantId() {
-		// 			return MultiTenantType.COLUMN.eq(databaseProperties.getMultiTenantType()) ?
-		// 				new StringValue(ContextUtil.getTenant()) :
-		// 				new StringValue(ContextUtil.getSubTenant());
-		// 		}
-		// 	});
-		// 	interceptor.addInnerInterceptor(tli);
-		// }
-		return null;
-	}
-
-	public DataScopeInterceptor getDataScopeInnerInterceptor() {
-		return new DataScopeInterceptor();
 	}
 
 

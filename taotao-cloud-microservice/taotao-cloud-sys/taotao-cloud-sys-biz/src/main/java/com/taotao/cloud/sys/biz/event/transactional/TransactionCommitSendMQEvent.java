@@ -6,10 +6,8 @@ import org.springframework.context.ApplicationEvent;
 /**
  * 事务提交后发生mq事件
  *
- * <pre>
- *     {@code
+ * <pre class="code">
  *      applicationEventPublisher.publishEvent(new TransactionCommitSendMQEvent("删除店铺商品", rocketmqCustomProperties.getGoodsTopic(), GoodsTagsEnum.STORE_GOODS_DELETE.name(), storeId));
- *     }
  * </pre>
  **/
 public class TransactionCommitSendMQEvent extends ApplicationEvent {
