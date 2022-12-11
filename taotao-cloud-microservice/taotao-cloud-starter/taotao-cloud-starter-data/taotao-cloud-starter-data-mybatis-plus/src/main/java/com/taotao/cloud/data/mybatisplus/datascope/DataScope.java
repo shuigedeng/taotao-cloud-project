@@ -22,23 +22,23 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 数据权限查询参数 
+ * 数据权限查询参数
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-04 07:40:14
  */
-public class DataScope extends HashMap {
+public class DataScope<K, V> extends HashMap<K, V> {
 
-    /**
-     * 限制范围的字段名称
-     */
-    private String scopeFiledName = "dept_id";
+	/**
+	 * 限制范围的字段名称
+	 */
+	private String scopeFiledName = "dept_id";
 
-    /**
-     * 具体的数据范围
-     */
-    private List<Integer> deptIds = new ArrayList<>();
+	/**
+	 * 具体的数据范围
+	 */
+	private List<Integer> deptIds = new ArrayList<>();
 
 	/**
 	 * 限制范围的字段名称 （除个人外）
@@ -91,14 +91,14 @@ public class DataScope extends HashMap {
 	}
 
 	public DataScope(int initialCapacity, float loadFactor, String scopeFiledName,
-		List<Integer> deptIds) {
+			List<Integer> deptIds) {
 		super(initialCapacity, loadFactor);
 		this.scopeFiledName = scopeFiledName;
 		this.deptIds = deptIds;
 	}
 
 	public DataScope(int initialCapacity, String scopeFiledName,
-		List<Integer> deptIds) {
+			List<Integer> deptIds) {
 		super(initialCapacity);
 		this.scopeFiledName = scopeFiledName;
 		this.deptIds = deptIds;
@@ -109,7 +109,8 @@ public class DataScope extends HashMap {
 		this.deptIds = deptIds;
 	}
 
-	public DataScope(Map<?, ?> m, String scopeFiledName, List<Integer> deptIds) {
+	public DataScope(Map<? extends K, ? extends V> m, String scopeFiledName,
+			List<Integer> deptIds) {
 		super(m);
 		this.scopeFiledName = scopeFiledName;
 		this.deptIds = deptIds;
@@ -118,9 +119,9 @@ public class DataScope extends HashMap {
 	@Override
 	public String toString() {
 		return "DataScope{" +
-			"scopeFiledName='" + scopeFiledName + '\'' +
-			", deptIds=" + deptIds +
-			"} " + super.toString();
+				"scopeFiledName='" + scopeFiledName + '\'' +
+				", deptIds=" + deptIds +
+				"} " + super.toString();
 	}
 
 	@Override
@@ -136,7 +137,7 @@ public class DataScope extends HashMap {
 		}
 		DataScope dataScope = (DataScope) o;
 		return Objects.equals(scopeFiledName, dataScope.scopeFiledName)
-			&& Objects.equals(deptIds, dataScope.deptIds);
+				&& Objects.equals(deptIds, dataScope.deptIds);
 	}
 
 	@Override
