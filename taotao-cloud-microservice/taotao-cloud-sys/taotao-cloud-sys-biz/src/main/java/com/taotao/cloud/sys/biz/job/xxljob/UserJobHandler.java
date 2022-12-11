@@ -16,6 +16,7 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Component;
@@ -164,11 +165,7 @@ public class UserJobHandler {
 
 
 	/**
-	 * 4、跨平台Http任务
-	 * 参数示例：
-	 * "url: http://www.baidu.com\n" +
-	 * "method: get\n" +
-	 * "data: content\n";
+	 * 4、跨平台Http任务 参数示例： "url: http://www.baidu.com\n" + "method: get\n" + "data: content\n";
 	 */
 	@XxlJob("httpJobHandler")
 	public void httpJobHandler() throws Exception {
@@ -239,7 +236,7 @@ public class UserJobHandler {
 			if (isPostMethod && data != null && data.trim().length() > 0) {
 				DataOutputStream dataOutputStream = new DataOutputStream(
 					connection.getOutputStream());
-				dataOutputStream.write(data.getBytes("UTF-8"));
+				dataOutputStream.write(data.getBytes(StandardCharsets.UTF_8));
 				dataOutputStream.flush();
 				dataOutputStream.close();
 			}
@@ -252,7 +249,7 @@ public class UserJobHandler {
 
 			// result
 			bufferedReader = new BufferedReader(
-				new InputStreamReader(connection.getInputStream(), "UTF-8"));
+				new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
 			StringBuilder result = new StringBuilder();
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {

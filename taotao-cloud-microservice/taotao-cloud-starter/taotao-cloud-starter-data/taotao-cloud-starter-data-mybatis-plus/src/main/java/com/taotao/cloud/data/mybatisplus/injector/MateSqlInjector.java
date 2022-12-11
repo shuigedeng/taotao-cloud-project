@@ -19,45 +19,40 @@ package com.taotao.cloud.data.mybatisplus.injector;
 import cn.hutool.core.util.ArrayUtil;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
-import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn;
-import com.taotao.cloud.data.mybatisplus.injector.methods.InsertBatch;
-import com.taotao.cloud.data.mybatisplus.injector.methods.InsertIgnore;
-import com.taotao.cloud.data.mybatisplus.injector.methods.InsertIgnoreBatch;
-import com.taotao.cloud.data.mybatisplus.injector.methods.Replace;
-import com.taotao.cloud.data.mybatisplus.injector.methods.ReplaceBatch;
+import com.github.yulichang.injector.MPJSqlInjector;
 import com.taotao.cloud.data.mybatisplus.injector.methods.UpdateAllById;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 /**
- * 自定义的 sql 注入 
+ * 自定义的 sql 注入
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-04 07:44:06
  */
-public class MateSqlInjector extends DefaultSqlInjector {
+public class MateSqlInjector extends MPJSqlInjector {
 
 	@Override
 	public List<AbstractMethod> getMethodList(Class<?> mapperClass, TableInfo tableInfo) {
-		List<AbstractMethod> methodList = new ArrayList<>();
-		methodList.add(new InsertBatch());
-		methodList.add(new InsertIgnore());
-		methodList.add(new InsertIgnoreBatch());
-		methodList.add(new Replace());
-		methodList.add(new ReplaceBatch());
-		methodList.addAll(super.getMethodList(mapperClass, tableInfo));
+		//methodList.add(new InsertBatch());
+		//methodList.add(new InsertIgnore());
+		//methodList.add(new InsertIgnoreBatch());
+		//methodList.add(new Replace());
+		//methodList.add(new ReplaceBatch());
+		//methodList.add(new UpdateBatchMethod());
 
-		//增加自定义方法
+		List<AbstractMethod> methodList = new ArrayList<>(
+			super.getMethodList(mapperClass, tableInfo));
+
+		// 对于只在更新时进行填充的字段不做插入处理
 		methodList.add(new InsertBatchSomeColumn(i -> i.getFieldFill() != FieldFill.UPDATE));
 		methodList.add(new UpdateAllById(field -> !ArrayUtil.containsAny(new String[]{
 			"create_time", "created_by"
 		}, field.getColumn())));
-
-		//methodList.add(new UpdateBatchMethod());
 
 		return Collections.unmodifiableList(methodList);
 	}
