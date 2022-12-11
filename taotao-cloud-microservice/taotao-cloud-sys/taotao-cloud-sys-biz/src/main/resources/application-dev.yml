@@ -1678,6 +1678,10 @@ taotao:
         - /sys/buyer/dict/test/{code}
         - /sys/manager/dept/tree
 
+mybatis-plus-join:
+  banner: true
+  sub-table-logic: true
+
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割
   typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity
