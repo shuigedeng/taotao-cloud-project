@@ -3,7 +3,12 @@ package com.taotao.cloud.sys.biz.gobrs.task;
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * The type B service.
@@ -14,62 +19,39 @@ import org.springframework.stereotype.Component;
  * @author: sizegang
  * @create: 2022 -03-20
  */
-@Component
-@Task
-public class BService extends AsyncTask<Object, Object> {
+@Slf4j
+@Task(failSubExec = true)
+public class BService extends AsyncTask {
 
 
-	/**
-	 * The .
-	 */
-	int i = 10000;
+    /**
+     * The .
+     */
+    int i = 10000;
 
-	@Override
-	public void prepare(Object o) {
+    @Override
+    public void prepare(Object o) {
+        log.info(this.getName() + " 使用线程---" + Thread.currentThread().getName());
+    }
 
-	}
+    @Override
+    public Object task(Object o, TaskSupport support) {
+        System.out.println("BService Begin");
+        for (int i1 = 0; i1 < i; i1++) {
+            i1 += i1;
+        }
+//        System.out.println(1 / 0);
+        System.out.println("BService Finish");
+        return null;
+    }
 
-	@Override
-	public Object task(Object o, TaskSupport support) {
-		System.out.println("BService Begin");
-		for (int i1 = 0; i1 < i; i1++) {
-			i1 += i1;
-		}
-		System.out.println(1 / 0);
-		System.out.println("BService Finish");
+    @Override
+    public boolean necessary(Object o, TaskSupport support) {
+        return true;
+    }
 
-		String result = getResult(support, AService.class, String.class);
-		System.out.println("拿到的结果" + result);
-		System.out.println("执行BService");
+    @Override
+    public void onSuccess(TaskSupport support) {
 
-		return null;
-	}
-
-
-	@Override
-	public void onSuccess(TaskSupport support) {
-
-	}
-
-	@Override
-	public void onFailureTrace(TaskSupport support, Exception exception) {
-	}
-
-	@Override
-	public boolean necessary(Object params, TaskSupport support) {
-		// 假如参数是cancel 则不执行当前任务
-		if ("cancel".equals(params)) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public void onFail(TaskSupport support, Exception exception) {
-	}
-
-	@Override
-	public void rollback(Object o) {
-		super.rollback(o);
-	}
+    }
 }

@@ -1,7 +1,9 @@
 package com.taotao.cloud.sys.biz.gobrs.task;
 
 import com.gobrs.async.core.TaskSupport;
+import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,55 +15,40 @@ import org.springframework.stereotype.Component;
  * @author: sizegang
  * @create: 2022 -03-20
  */
-@Component
+@Slf4j
+@Task
 public class FService extends AsyncTask<Object, Object> {
+    /**
+     * The .
+     */
+    int i = 10000;
+    @Override
+    public void prepare(Object o) {
+        log.info(this.getName() + " 使用线程---" + Thread.currentThread().getName());
+    }
 
-	/**
-	 * The .
-	 */
-	int i = 10000;
+    @Override
+    public Object task(Object o, TaskSupport support) {
+        try {
+            System.out.println("FService Begin");
+            Thread.sleep(2000);
+            for (int i1 = 0; i1 < i; i1++) {
+                i1 += i1;
+            }
+            System.out.println("FService Finish");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	@Override
-	public void prepare(Object o) {
+    @Override
+    public boolean necessary(Object o, TaskSupport support) {
+        return true;
+    }
 
-	}
+    @Override
+    public void onSuccess(TaskSupport support) {
 
-	@Override
-	public Object task(Object o, TaskSupport support) {
-		try {
-			System.out.println("FService Begin");
-			Thread.sleep(2000);
-			for (int i1 = 0; i1 < i; i1++) {
-				i1 += i1;
-			}
-			System.out.println("FService Finish");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-
-	@Override
-	public void onSuccess(TaskSupport support) {
-
-	}
-
-	@Override
-	public void onFailureTrace(TaskSupport support, Exception exception) {
-	}
-
-	@Override
-	public boolean necessary(Object o, TaskSupport support) {
-		return super.necessary(o, support);
-	}
-
-	@Override
-	public void onFail(TaskSupport support, Exception exception) {
-	}
-
-	@Override
-	public void rollback(Object o) {
-		super.rollback(o);
-	}
+    }
 }

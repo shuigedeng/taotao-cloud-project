@@ -1,23 +1,22 @@
-package com.taotao.cloud.sys.biz.gobrs.task;
+package com.taotao.cloud.sys.biz.gobrs.task.timeout;
 
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 /**
- * The type D service.
+ * The type A service.
  *
  * @program: gobrs -async-starter
- * @ClassName DService
  * @description:
  * @author: sizegang
  * @create: 2022 -03-20
  */
 @Slf4j
-@Task
-public class DService extends AsyncTask<Object, Object> {
+@Task(failSubExec = true, timeoutInMilliseconds = 300)
+public class CaseTimeoutTaskA extends AsyncTask {
 
     /**
      * The .
@@ -29,19 +28,17 @@ public class DService extends AsyncTask<Object, Object> {
         log.info(this.getName() + " 使用线程---" + Thread.currentThread().getName());
     }
 
+    @SneakyThrows
     @Override
-    public Object task(Object o, TaskSupport support) {
-        try {
-            System.out.println("DService Begin");
-            Thread.sleep(200);
-            for (int i1 = 0; i1 < i; i1++) {
-                i1 += i1;
-            }
-            System.out.println("DService Finish");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public String task(Object o, TaskSupport support) {
+
+        System.out.println("CaseTimeoutTaskA Begin");
+        Thread.sleep(400);
+        for (int i1 = 0; i1 < i; i1++) {
+            i1 += i1;
         }
-        return null;
+        System.out.println("CaseTimeoutTaskA Finish");
+        return "result";
     }
 
     @Override
