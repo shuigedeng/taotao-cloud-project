@@ -23,9 +23,6 @@ import java.time.Duration;
  * <p>
  * 缓存配置类
  * </p>
- *
- * @author yangkai.shen
- * @date Created in 2019/8/31 10:18
  */
 public class CacheProperties {
 
