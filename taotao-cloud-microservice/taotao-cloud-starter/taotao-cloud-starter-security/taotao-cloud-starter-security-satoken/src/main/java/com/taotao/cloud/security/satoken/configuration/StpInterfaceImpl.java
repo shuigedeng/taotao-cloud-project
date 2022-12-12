@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 自定义权限认证接口扩展，Sa-Token 将从此实现类获取每个账号拥有的权限码
- *
- * @author kong
- * @since 2022-10-13
+ * 自定义权限认证接口扩展，Sa-Token 将从此实现类获取每个账号拥有的权限码 //@Component    //
+ * 打开此注解，保证此类被springboot扫描，即可完成sa-token的自定义权限验证扩展
  */
-//@Component    // 打开此注解，保证此类被springboot扫描，即可完成sa-token的自定义权限验证扩展
 public class StpInterfaceImpl implements StpInterface {
 
 	/**

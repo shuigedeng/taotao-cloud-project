@@ -11,8 +11,6 @@ import org.springframework.core.annotation.AliasFor;
 /**
  * 角色认证(User版)：必须具有指定角色标识才能进入该方法
  * <p> 可标注在函数、类上（效果等同于标注在此类的所有方法上）
- *
- * @author kong
  */
 @SaCheckRole(type = StpUserUtil.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

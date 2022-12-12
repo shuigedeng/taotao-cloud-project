@@ -10,11 +10,8 @@ import cn.dev33.satoken.stp.StpLogic;
 import java.util.List;
 
 /**
- * Sa-Token 权限认证工具类 （User版）
- *
- * @author kong
+ * Sa-Token 权限认证工具类 （User版） //@Component
  */
-//@Component
 public class StpUserUtil {
 
 	private StpUserUtil() {

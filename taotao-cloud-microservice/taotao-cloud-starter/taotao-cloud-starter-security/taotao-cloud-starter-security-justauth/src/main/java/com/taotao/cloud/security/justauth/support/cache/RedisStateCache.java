@@ -26,9 +26,6 @@ import org.springframework.data.redis.core.RedisTemplate;
  * <p>
  * Redis作为JustAuth的State的缓存
  * </p>
- *
- * @author yangkai.shen
- * @date Created in 2019-08-02 15:10
  */
 public class RedisStateCache implements AuthStateCache {
 

@@ -10,8 +10,6 @@ import java.util.List;
 
 /**
  * Sa-Token 权限认证工具类 (User版)
- *
- * @author kong
  */
 public class StpUserUtil {
 
