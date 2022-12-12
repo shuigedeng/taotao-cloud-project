@@ -1,24 +1,21 @@
-package com.taotao.cloud.sys.biz.gobrs.task;
+package com.taotao.cloud.sys.biz.gobrs.task.timeout;
 
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 /**
- * The type D service.
+ * The type F service.
  *
  * @program: gobrs -async-starter
- * @ClassName DService
  * @description:
  * @author: sizegang
  * @create: 2022 -03-20
  */
 @Slf4j
 @Task
-public class DService extends AsyncTask<Object, Object> {
-
+public class CaseTimeoutTaskC extends AsyncTask<Object, Object> {
     /**
      * The .
      */
@@ -32,12 +29,12 @@ public class DService extends AsyncTask<Object, Object> {
     @Override
     public Object task(Object o, TaskSupport support) {
         try {
-            System.out.println("DService Begin");
-            Thread.sleep(200);
+            System.out.println("CaseTimeoutTaskC Begin");
+            Thread.sleep(2000);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            System.out.println("DService Finish");
+            System.out.println("CaseTimeoutTaskC Finish");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -49,10 +46,8 @@ public class DService extends AsyncTask<Object, Object> {
         return true;
     }
 
-
     @Override
     public void onSuccess(TaskSupport support) {
 
     }
-
 }

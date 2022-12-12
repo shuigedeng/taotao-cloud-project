@@ -48,6 +48,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -61,7 +62,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @AutoConfiguration(after = {TenantAutoConfiguration.class, MpInterceptorConfiguration.class})
 @EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class,
-		TenantProperties.class})
+	TenantProperties.class})
 @ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class MybatisPlusAutoConfiguration implements InitializingBean {
 
@@ -74,9 +75,9 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 
 	public MybatisPlusAutoConfiguration(
-			TenantProperties tenantProperties,
-			MybatisPlusAutoFillProperties autoFillProperties,
-			MybatisPlusProperties mybatisPlusProperties) {
+		TenantProperties tenantProperties,
+		MybatisPlusAutoFillProperties autoFillProperties,
+		MybatisPlusProperties mybatisPlusProperties) {
 		this.tenantProperties = tenantProperties;
 		this.autoFillProperties = autoFillProperties;
 		this.mybatisPlusProperties = mybatisPlusProperties;
@@ -91,6 +92,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 * sql 注入配置
 	 */
 	@Bean
+	@Primary
 	public ISqlInjector sqlInjector() {
 		return new MateSqlInjector();
 	}
@@ -129,9 +131,9 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 
 		interceptors.stream()
-				.sorted(Comparator.comparing(MpInterceptor::getSortNo))
-				.map(MpInterceptor::getInnerInterceptor)
-				.forEach(interceptor::addInnerInterceptor);
+			.sorted(Comparator.comparing(MpInterceptor::getSortNo))
+			.map(MpInterceptor::getInnerInterceptor)
+			.forEach(interceptor::addInnerInterceptor);
 		return interceptor;
 	}
 

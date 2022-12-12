@@ -1,13 +1,6 @@
 package com.taotao.cloud.sys.biz.gobrs.controller;
 
-import com.gobrs.async.core.GobrsAsync;
-import com.gobrs.async.core.common.domain.AsyncResult;
 import com.taotao.cloud.sys.biz.gobrs.service.GobrsService;
-import com.taotao.cloud.sys.biz.gobrs.task.AService;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,9 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("gobrs")
 public class GobrsController {
 
-	@Autowired(required = false)
-	private GobrsAsync gobrsAsync;
-
 	@Autowired
 	private GobrsService gobrsService;
 
@@ -38,24 +28,22 @@ public class GobrsController {
 	 */
 	@RequestMapping("testGobrs")
 	public String gobrsTest() {
-		Map<Class, Object> params = new HashMap<>();
-		params.put(AService.class, "A的参数");
-		Set<String> objects = new HashSet<>();
-		objects.add("FService");
-		objects.add("DService");
-		objects.add("GService");
-		objects.add("EService");
-		AsyncResult test = gobrsAsync.go("test", () -> params);
+		gobrsService.gobrsTest();
 		return "success";
 	}
 
+
+	@RequestMapping("updateRule")
+	public String updateRule() {
+		gobrsService.updateRule();
+		return "success";
+	}
 
 	/**
 	 * Future.
 	 */
 	@RequestMapping("future")
 	public void future() {
-
 	}
 
 

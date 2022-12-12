@@ -1,10 +1,8 @@
-package com.taotao.cloud.sys.biz.gobrs.task;
+package com.taotao.cloud.sys.biz.gobrs.task.future;
 
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * The type A service.
@@ -15,9 +13,8 @@ import lombok.extern.slf4j.Slf4j;
  * @author: sizegang
  * @create: 2022 -03-20
  */
-@Slf4j
-@Task(failSubExec = true, timeoutInMilliseconds = 300)
-public class AService extends AsyncTask {
+@Task
+public class FutureTaskB extends AsyncTask {
 
 	/**
 	 * The .
@@ -26,19 +23,22 @@ public class AService extends AsyncTask {
 
 	@Override
 	public void prepare(Object o) {
-		log.info(this.getName() + " 使用线程---" + Thread.currentThread().getName());
+
 	}
 
-	@SneakyThrows
 	@Override
 	public String task(Object o, TaskSupport support) {
 
-		System.out.println("AService Begin");
-		Thread.sleep(300);
-		for (int i1 = 0; i1 < i; i1++) {
-			i1 += i1;
+		try {
+			System.out.println("FutureTaskB Begin");
+			Thread.sleep(300);
+			for (int i1 = 0; i1 < i; i1++) {
+				i1 += i1;
+			}
+			System.out.println("FutureTaskB Finish");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		System.out.println("AService Finish");
 		return "result";
 	}
 
