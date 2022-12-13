@@ -1,6 +1,6 @@
 dependencies {
     api "org.lionsoul:ip2region:2.6.6"
-    api "org.springframework.security:spring-security-core:5.7.3"
+    api "org.springframework.security:spring-security-core:5.8.0"
 
     api "org.springframework:spring-test:5.3.23"
     api "commons-collections:commons-collections:3.2.2"
