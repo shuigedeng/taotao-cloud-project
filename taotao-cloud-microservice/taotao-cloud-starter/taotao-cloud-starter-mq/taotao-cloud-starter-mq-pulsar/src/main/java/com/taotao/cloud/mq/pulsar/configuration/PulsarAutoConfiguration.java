@@ -37,7 +37,7 @@ public class PulsarAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(PulsarAutoConfiguration.class, StarterName.PULSAR_STARTER);
+		LogUtils.started(PulsarAutoConfiguration.class, StarterName.MQ_PULSAR_STARTER);
 	}
 
 }

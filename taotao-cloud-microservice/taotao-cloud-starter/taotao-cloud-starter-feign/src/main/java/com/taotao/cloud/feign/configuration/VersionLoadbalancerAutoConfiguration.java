@@ -2,6 +2,7 @@ package com.taotao.cloud.feign.configuration;
 
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.configuration.VersionLoadbalancerAutoConfiguration.VersionLoadBalancerClients;
@@ -10,7 +11,9 @@ import com.taotao.cloud.feign.loadbalancer.VersionLoadBalancer;
 import com.taotao.cloud.feign.loadbalancer.chooser.IRuleChooser;
 import com.taotao.cloud.feign.loadbalancer.chooser.RoundRuleChooser;
 import com.taotao.cloud.feign.properties.LoadbalancerProperties;
+import java.lang.reflect.InvocationTargetException;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -26,8 +29,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.util.ClassUtils;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * 版本隔离配置
  *
@@ -37,9 +38,16 @@ import java.lang.reflect.InvocationTargetException;
  */
 @AutoConfiguration
 @LoadBalancerClients(defaultConfiguration = VersionLoadBalancerClients.class)
-@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX + ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX
+	+ ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
 @Import({VersionLoadbalancerRegisterBeanPostProcessor.class})
-public class VersionLoadbalancerAutoConfiguration {
+public class VersionLoadbalancerAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(VersionLoadbalancerAutoConfiguration.class, StarterName.FEIGN_STARTER);
+	}
+
 
 	/**
 	 * 将版本注册到注册中心的组件
@@ -52,9 +60,11 @@ public class VersionLoadbalancerAutoConfiguration {
 		@Override
 		public Object postProcessBeforeInitialization(Object bean, String beanName)
 			throws BeansException {
-			if (bean instanceof NacosDiscoveryProperties && StringUtils.isNotBlank(properties.getVersion())) {
+			if (bean instanceof NacosDiscoveryProperties && StringUtils.isNotBlank(
+				properties.getVersion())) {
 				NacosDiscoveryProperties nacosDiscoveryProperties = (NacosDiscoveryProperties) bean;
-				nacosDiscoveryProperties.getMetadata().putIfAbsent(CommonConstant.METADATA_VERSION, properties.getVersion());
+				nacosDiscoveryProperties.getMetadata()
+					.putIfAbsent(CommonConstant.METADATA_VERSION, properties.getVersion());
 			}
 			return bean;
 		}
@@ -74,18 +84,20 @@ public class VersionLoadbalancerAutoConfiguration {
 
 		@Bean
 		@ConditionalOnMissingBean(IRuleChooser.class)
-		@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX + ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
+		@ConditionalOnProperty(prefix = LoadbalancerProperties.PREFIX
+			+ ".isolation", name = "enabled", havingValue = "true", matchIfMissing = true)
 		public IRuleChooser ruleChooser(ApplicationContext context) {
 			IRuleChooser chooser = new RoundRuleChooser();
 
 			if (org.apache.commons.lang3.StringUtils.isNotBlank(properties.getChooser())) {
 				try {
-					Class<?> ruleClass = ClassUtils.forName(properties.getChooser(), context.getClassLoader());
+					Class<?> ruleClass = ClassUtils.forName(properties.getChooser(),
+						context.getClassLoader());
 					chooser = (IRuleChooser) ruleClass.getDeclaredConstructor().newInstance();
 				} catch (ClassNotFoundException e) {
 					LogUtils.error("没有找到定义的选择器，将使用内置的选择器", e);
 				} catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
-						 InvocationTargetException e) {
+				         InvocationTargetException e) {
 					LogUtils.error("没法创建定义的选择器，将使用内置的选择器", e);
 				}
 			}

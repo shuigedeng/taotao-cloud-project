@@ -1,5 +1,7 @@
 package com.taotao.cloud.tracing.micrometer.autoconfigure;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.EnvironmentAware;
@@ -16,6 +18,9 @@ public class SleuthDataSourceAutoConfiguration implements InitializingBean, Envi
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(SleuthDataSourceAutoConfiguration.class,
+			StarterName.TRACING_MICROMETER_STARTER);
+
 		String jdbcUrl = environment.getProperty("spring.datasource.url");
 		jdbcUrl = jdbcUrl
 			+ "&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor";

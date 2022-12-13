@@ -6,6 +6,7 @@ import com.taotao.cloud.web.exception.enums.ExceptionHandleTypeEnum;
 import com.taotao.cloud.web.exception.handler.ExceptionHandler;
 import com.taotao.cloud.web.exception.handler.MailExceptionHandler;
 import com.taotao.cloud.web.exception.properties.ExceptionHandleProperties;
+import java.util.Arrays;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +17,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
-
-import java.util.Arrays;
 
 /**
  * 当web项目引入此依赖时，自动配置对应的内容 初始化log的事件监听与切面配置
@@ -42,14 +41,15 @@ public class MailExceptionHandlerAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(MailExceptionHandlerAutoConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(MailExceptionHandlerAutoConfiguration.class, StarterName.MAIL_STARTER);
 	}
 
 	@Bean
 	public ExceptionHandler mailGlobalExceptionHandler(JavaMailSender mailSender) {
 		if (Arrays.stream(exceptionHandleProperties.getTypes())
 			.anyMatch(e -> e.name().equals(ExceptionHandleTypeEnum.MAIL.name()))) {
-			return new MailExceptionHandler(mailProperties, exceptionHandleProperties, mailSender, applicationName);
+			return new MailExceptionHandler(mailProperties, exceptionHandleProperties, mailSender,
+				applicationName);
 		}
 		return null;
 	}

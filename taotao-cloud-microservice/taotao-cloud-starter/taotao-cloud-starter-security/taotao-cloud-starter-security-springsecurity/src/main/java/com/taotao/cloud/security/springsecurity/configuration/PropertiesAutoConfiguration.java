@@ -15,7 +15,10 @@
  */
 package com.taotao.cloud.security.springsecurity.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.springsecurity.properties.SecurityProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -28,6 +31,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  */
 @AutoConfiguration
 @EnableConfigurationProperties(SecurityProperties.class)
-public class PropertiesAutoConfiguration {
+public class PropertiesAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(PropertiesAutoConfiguration.class,
+			StarterName.SECURITY_SPRINGSECURITY_STARTER);
+	}
 
 }

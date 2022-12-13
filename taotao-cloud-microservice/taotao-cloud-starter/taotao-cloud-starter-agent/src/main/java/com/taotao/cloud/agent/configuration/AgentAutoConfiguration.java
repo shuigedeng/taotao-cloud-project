@@ -13,31 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.configuration;
+package com.taotao.cloud.agent.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.yomahub.tlog.springboot.lifecircle.TLogPropertyConfiguration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.PropertySource;
 
 /**
- * LogbackAccessConfiguration
+ * CanalClientConfiguration
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/4/30 10:21
+ * @version 2021.9
+ * @since 2021-09-04 07:28:42
  */
-@AutoConfiguration(before = TLogPropertyConfiguration.class)
-@PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:tlog.yml")
-public class TlogAutoConfiguration implements InitializingBean {
+@AutoConfiguration
+public class AgentAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(TlogAutoConfiguration.class, StarterName.LOGGER_STARTER);
+		LogUtils.started(AgentAutoConfiguration.class, StarterName.AGENT_STARTER);
 	}
 
 }
-

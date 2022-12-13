@@ -13,6 +13,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -21,8 +22,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Map;
 
 /**
  * 王毅oss配置
@@ -40,49 +39,50 @@ public class WangYiOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(WangYiOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(WangYiOssConfiguration.class, StarterName.OSS_WANGYI_STARTER);
 	}
 
-    public static final String DEFAULT_BEAN_NAME = "wangYiOssClient";
+	public static final String DEFAULT_BEAN_NAME = "wangYiOssClient";
 
-    @Autowired
-    private WangYiOssProperties wangYiOssProperties;
+	@Autowired
+	private WangYiOssProperties wangYiOssProperties;
 
-    @Bean
+	@Bean
 	@ConditionalOnMissingBean
-    public StandardOssClient wangYiOssClient() {
-        Map<String, WangYiOssConfig> wangYiOssConfigMap = wangYiOssProperties.getOssConfig();
-        if (wangYiOssConfigMap.isEmpty()) {
-            SpringUtil.registerBean(DEFAULT_BEAN_NAME, wangYiOssClient(wangYiOssProperties));
-        } else {
-            String endPoint = wangYiOssProperties.getEndpoint();
-            String accessKey = wangYiOssProperties.getAccessKey();
-            String secretKey = wangYiOssProperties.getSecretKey();
-            wangYiOssConfigMap.forEach((name, wangYiOssConfig) -> {
-                if (ObjectUtil.isEmpty(wangYiOssConfig.getEndpoint())) {
-                    wangYiOssConfig.setEndpoint(endPoint);
-                }
-                if (ObjectUtil.isEmpty(wangYiOssConfig.getAccessKey())) {
-                    wangYiOssConfig.setAccessKey(accessKey);
-                }
-                if (ObjectUtil.isEmpty(wangYiOssConfig.getSecretKey())) {
-                    wangYiOssConfig.setSecretKey(secretKey);
-                }
-                SpringUtil.registerBean(name, wangYiOssClient(wangYiOssConfig));
-            });
-        }
-        return null;
-    }
+	public StandardOssClient wangYiOssClient() {
+		Map<String, WangYiOssConfig> wangYiOssConfigMap = wangYiOssProperties.getOssConfig();
+		if (wangYiOssConfigMap.isEmpty()) {
+			SpringUtil.registerBean(DEFAULT_BEAN_NAME, wangYiOssClient(wangYiOssProperties));
+		} else {
+			String endPoint = wangYiOssProperties.getEndpoint();
+			String accessKey = wangYiOssProperties.getAccessKey();
+			String secretKey = wangYiOssProperties.getSecretKey();
+			wangYiOssConfigMap.forEach((name, wangYiOssConfig) -> {
+				if (ObjectUtil.isEmpty(wangYiOssConfig.getEndpoint())) {
+					wangYiOssConfig.setEndpoint(endPoint);
+				}
+				if (ObjectUtil.isEmpty(wangYiOssConfig.getAccessKey())) {
+					wangYiOssConfig.setAccessKey(accessKey);
+				}
+				if (ObjectUtil.isEmpty(wangYiOssConfig.getSecretKey())) {
+					wangYiOssConfig.setSecretKey(secretKey);
+				}
+				SpringUtil.registerBean(name, wangYiOssClient(wangYiOssConfig));
+			});
+		}
+		return null;
+	}
 
-    public StandardOssClient wangYiOssClient(WangYiOssConfig ossConfig) {
-        return new WangYiOssClient(nosClient(ossConfig), ossConfig);
-    }
+	public StandardOssClient wangYiOssClient(WangYiOssConfig ossConfig) {
+		return new WangYiOssClient(nosClient(ossConfig), ossConfig);
+	}
 
-    public NosClient nosClient(WangYiOssConfig ossConfig) {
-        Credentials credentials = new BasicCredentials(ossConfig.getAccessKey(), ossConfig.getSecretKey());
-        NosClient nosClient = new NosClient(credentials);
-        nosClient.setEndpoint(ossConfig.getEndpoint());
-        nosClient.setConfiguration(ossConfig.getClientConfig());
-        return nosClient;
-    }
+	public NosClient nosClient(WangYiOssConfig ossConfig) {
+		Credentials credentials = new BasicCredentials(ossConfig.getAccessKey(),
+			ossConfig.getSecretKey());
+		NosClient nosClient = new NosClient(credentials);
+		nosClient.setEndpoint(ossConfig.getEndpoint());
+		nosClient.setConfiguration(ossConfig.getClientConfig());
+		return nosClient;
+	}
 }

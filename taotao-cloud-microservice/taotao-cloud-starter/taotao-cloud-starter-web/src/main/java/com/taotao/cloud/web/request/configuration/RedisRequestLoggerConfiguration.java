@@ -30,7 +30,7 @@ public class RedisRequestLoggerConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RedisRequestLoggerConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(RedisRequestLoggerConfiguration.class, StarterName.CACHE_REDIS_STARTER);
 	}
 
 	@Bean

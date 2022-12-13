@@ -23,7 +23,7 @@ public class TimeTaskAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(TimeTaskAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(TimeTaskAutoConfiguration.class, StarterName.JOB_XXL_STARTER);
 	}
 
 }

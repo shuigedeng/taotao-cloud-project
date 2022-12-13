@@ -38,7 +38,7 @@ public class KafkaAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(KafkaAutoConfiguration.class, StarterName.KAFKA_STARTER);
+		LogUtils.started(KafkaAutoConfiguration.class, StarterName.MQ_KAFKA_STARTER);
 	}
 
 

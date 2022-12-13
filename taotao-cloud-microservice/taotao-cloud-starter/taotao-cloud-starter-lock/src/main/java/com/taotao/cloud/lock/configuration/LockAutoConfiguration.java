@@ -47,7 +47,7 @@ public class LockAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(LockAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(LockAutoConfiguration.class, StarterName.LOCK_STARTER);
 	}
 
 	@Configuration
@@ -57,7 +57,7 @@ public class LockAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtils.started(RedisLockAutoConfiguration.class, StarterName.REDIS_STARTER);
+			LogUtils.started(RedisLockAutoConfiguration.class, StarterName.LOCK_STARTER);
 		}
 
 		@Bean
@@ -75,7 +75,7 @@ public class LockAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtils.started(ZookeeperLockAutoConfiguration.class, StarterName.REDIS_STARTER);
+			LogUtils.started(ZookeeperLockAutoConfiguration.class, StarterName.LOCK_STARTER);
 		}
 
 		@Bean
@@ -86,7 +86,7 @@ public class LockAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public LockAop lockAop(){
+	public LockAop lockAop() {
 		return new LockAop();
 	}
 

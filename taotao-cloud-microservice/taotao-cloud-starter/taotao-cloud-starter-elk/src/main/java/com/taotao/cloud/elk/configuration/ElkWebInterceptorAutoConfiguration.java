@@ -15,10 +15,13 @@
  */
 package com.taotao.cloud.elk.configuration;
 
-import com.taotao.cloud.elk.interceptor.ElkWebInterceptor;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.elk.aspect.WebControllerAspect;
+import com.taotao.cloud.elk.interceptor.ElkWebInterceptor;
 import com.taotao.cloud.elk.properties.ElkWebAspectProperties;
 import com.taotao.cloud.elk.properties.ElkWebProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -35,7 +38,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @AutoConfiguration
 @ConditionalOnProperty(prefix = ElkWebProperties.PREFIX, name = "enabled", havingValue = "true")
-public class ElkWebInterceptorAutoConfiguration implements WebMvcConfigurer {
+public class ElkWebInterceptorAutoConfiguration implements WebMvcConfigurer, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(ElkWebInterceptorAutoConfiguration.class, StarterName.ELK_STARTER);
+	}
 
 	@Bean
 	public ElkWebInterceptor elkWebInterceptor() {

@@ -1,6 +1,7 @@
 package com.taotao.cloud.tracing.micrometer.autoconfigure;
 
 import brave.dubbo.TracingFilter;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.dubbo.config.ConsumerConfig;
 import org.apache.dubbo.config.ProviderConfig;
@@ -28,14 +29,16 @@ public class BraveDubboAutoConfiguration implements InitializingBean {
 	private final ProviderConfig providerConfig;
 	private final ConsumerConfig consumerConfig;
 
-	public BraveDubboAutoConfiguration(ProviderConfig providerConfig, ConsumerConfig consumerConfig) {
+	public BraveDubboAutoConfiguration(ProviderConfig providerConfig,
+		ConsumerConfig consumerConfig) {
 		this.providerConfig = providerConfig;
 		this.consumerConfig = consumerConfig;
 	}
 
 	@Override
 	public void afterPropertiesSet() {
-		LogUtils.debug(ADD_TRACING_FILTER);
+		LogUtils.started(BraveDubboAutoConfiguration.class,
+			StarterName.TRACING_MICROMETER_STARTER);
 		providerConfig.setFilter(TRACING);
 		consumerConfig.setFilter(TRACING);
 	}

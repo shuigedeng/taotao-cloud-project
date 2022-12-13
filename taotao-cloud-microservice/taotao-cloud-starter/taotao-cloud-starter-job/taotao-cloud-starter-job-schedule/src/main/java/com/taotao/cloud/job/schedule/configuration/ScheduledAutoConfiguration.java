@@ -1,7 +1,9 @@
 package com.taotao.cloud.job.schedule.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.schedule.properties.ScheduledProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,7 +23,13 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 @EnableScheduling
 @ConditionalOnProperty(prefix = ScheduledProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(value = {ScheduledProperties.class})
-public class ScheduledAutoConfiguration implements SchedulingConfigurer {
+public class ScheduledAutoConfiguration implements SchedulingConfigurer, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(ScheduledAutoConfiguration.class, StarterName.JOB_SCHEDULE_STARTER);
+	}
+
 
 	@Override
 	public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {

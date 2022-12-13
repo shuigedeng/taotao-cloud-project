@@ -15,6 +15,9 @@
  */
 package com.taotao.cloud.pay.wxpay.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
@@ -25,6 +28,12 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
  * @since 2021/06/17 17:21
  */
 @AutoConfiguration
-public class WxpayAutoConfiguration {
+public class WxpayAutoConfiguration implements InitializingBean {
+
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(WxpayAutoConfiguration.class, StarterName.PAY_WXPAY_STARTER);
+	}
 
 }

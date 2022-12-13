@@ -15,10 +15,19 @@
  */
 package com.taotao.cloud.security.springsecurity.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.AuthenticationException;
@@ -28,14 +37,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * SecurityHandlerComponent
  *
@@ -44,7 +45,13 @@ import java.util.Set;
  * @since 2020/4/30 09:05
  */
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-public class SecurityAutoConfiguration {
+public class SecurityAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(SecurityAutoConfiguration.class,
+			StarterName.SECURITY_SPRINGSECURITY_STARTER);
+	}
 
 	/**
 	 * AuthenticationEntryPoint 用来解决匿名用户访问无权限资源时的异常
@@ -93,7 +100,7 @@ public class SecurityAutoConfiguration {
 
 		@Override
 		public void commence(HttpServletRequest request, HttpServletResponse response,
-							 AuthenticationException authException) throws IOException, ServletException {
+			AuthenticationException authException) throws IOException, ServletException {
 			LogUtils.error("认证失败", authException);
 			// 触发重定向到登陆页面
 			if (authorizationCodeGrantRequestMatcher.matches(request)) {

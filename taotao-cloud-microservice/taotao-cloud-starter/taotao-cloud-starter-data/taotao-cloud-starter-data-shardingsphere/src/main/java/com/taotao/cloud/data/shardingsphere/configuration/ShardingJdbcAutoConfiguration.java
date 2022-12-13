@@ -43,7 +43,8 @@ public class ShardingJdbcAutoConfiguration implements
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(ShardingJdbcAutoConfiguration.class, StarterName.SHARDINGSPHERE_STARTER);
+		LogUtils.started(ShardingJdbcAutoConfiguration.class,
+			StarterName.DATA_SHARDINGSPHERE_STARTER);
 	}
 
 	@Override

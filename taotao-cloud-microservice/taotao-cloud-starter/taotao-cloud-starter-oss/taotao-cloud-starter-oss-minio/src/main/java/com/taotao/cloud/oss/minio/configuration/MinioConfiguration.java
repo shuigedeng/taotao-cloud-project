@@ -45,7 +45,7 @@ public class MinioConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(MinioConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(MinioConfiguration.class, StarterName.OSS_MINIO_STARTER);
 	}
 
 	private final MinioProperties properties;

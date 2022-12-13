@@ -31,7 +31,7 @@ public class RedissonDelayAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RedissonDelayAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedissonDelayAutoConfiguration.class, StarterName.CACHE_REDIS_STARTER);
 	}
 
 	@Scope(BeanDefinition.SCOPE_SINGLETON)

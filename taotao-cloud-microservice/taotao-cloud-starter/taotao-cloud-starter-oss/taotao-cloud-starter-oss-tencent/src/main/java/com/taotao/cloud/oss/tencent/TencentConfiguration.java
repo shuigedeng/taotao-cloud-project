@@ -40,7 +40,7 @@ public class TencentConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(TencentConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(TencentConfiguration.class, StarterName.OSS_TENCENT_STARTER);
 	}
 
 	private final TencentProperties properties;

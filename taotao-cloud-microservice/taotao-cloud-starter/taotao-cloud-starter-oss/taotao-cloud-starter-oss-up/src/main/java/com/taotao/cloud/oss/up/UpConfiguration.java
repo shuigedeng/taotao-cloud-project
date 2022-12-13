@@ -43,7 +43,7 @@ public class UpConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(UpConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(UpConfiguration.class, StarterName.OSS_UP_STARTER);
 	}
 
 	private final UpProperties properties;

@@ -45,7 +45,7 @@ public class IdGeneratorAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(IdGeneratorAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(IdGeneratorAutoConfiguration.class, StarterName.IDGENERATOR_STARTER);
 	}
 
 	@Bean
@@ -59,7 +59,7 @@ public class IdGeneratorAutoConfiguration implements InitializingBean {
 	@ConditionalOnBean({RedisRepository.class, DistributedLock.class})
 	@ConditionalOnProperty(prefix = IdGeneratorProperties.PREFIX, name = "type", havingValue = "redis_lock")
 	public RedisLockIdGenerator redisLockIdGenerator(RedisRepository redisRepository,
-													 DistributedLock distributedLock) {
+		DistributedLock distributedLock) {
 		return new RedisLockIdGenerator(redisRepository, distributedLock);
 	}
 

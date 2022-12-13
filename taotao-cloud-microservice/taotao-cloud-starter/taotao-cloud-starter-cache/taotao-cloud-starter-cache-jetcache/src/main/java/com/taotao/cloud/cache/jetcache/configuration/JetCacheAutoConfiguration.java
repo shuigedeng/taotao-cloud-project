@@ -18,9 +18,10 @@ package com.taotao.cloud.cache.jetcache.configuration;
 import com.alicp.jetcache.CacheManager;
 import com.taotao.cloud.cache.jetcache.enhance.HerodotusCacheManager;
 import com.taotao.cloud.cache.jetcache.enhance.JetCacheCreateCacheFactory;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.cache.jetcache.properties.JetCacheProperties;
 import com.taotao.cloud.cache.jetcache.utils.JetCacheUtils;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -46,7 +47,7 @@ public class JetCacheAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-
+		LogUtils.started(JetCacheAutoConfiguration.class, StarterName.CACHE_JETCACHE_STARTER);
 	}
 
 	@Bean

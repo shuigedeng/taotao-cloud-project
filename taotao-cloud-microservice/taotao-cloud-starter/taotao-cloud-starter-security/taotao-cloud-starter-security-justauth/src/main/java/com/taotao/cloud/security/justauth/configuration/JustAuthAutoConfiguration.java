@@ -41,7 +41,7 @@ public class JustAuthAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(JustAuthAutoConfiguration.class, StarterName.JUSTAUTH_STARTER);
+		LogUtils.started(JustAuthAutoConfiguration.class, StarterName.SECURITY_JUSTAUTH_STARTER);
 	}
 
 	@Bean

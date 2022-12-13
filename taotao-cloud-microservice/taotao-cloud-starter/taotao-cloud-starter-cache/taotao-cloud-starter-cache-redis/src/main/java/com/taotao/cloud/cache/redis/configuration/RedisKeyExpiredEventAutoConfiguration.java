@@ -30,7 +30,8 @@ public class RedisKeyExpiredEventAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RedisKeyExpiredEventAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisKeyExpiredEventAutoConfiguration.class,
+			StarterName.CACHE_REDIS_STARTER);
 	}
 
 	@Bean

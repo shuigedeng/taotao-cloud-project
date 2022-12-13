@@ -38,7 +38,8 @@ public class DingTalkExceptionHandlerAutoConfiguration implements InitializingBe
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(DingTalkExceptionHandlerAutoConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(DingTalkExceptionHandlerAutoConfiguration.class,
+			StarterName.DINGTALK_STARTER);
 	}
 
 	@Bean

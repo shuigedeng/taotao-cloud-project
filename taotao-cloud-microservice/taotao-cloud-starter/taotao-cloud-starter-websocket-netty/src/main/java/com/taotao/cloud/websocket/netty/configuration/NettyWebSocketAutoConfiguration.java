@@ -24,7 +24,8 @@ public class NettyWebSocketAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(NettyWebSocketAutoConfiguration.class, StarterName.NETTY_WEBSOCKET_STARTER);
+		LogUtils.started(NettyWebSocketAutoConfiguration.class,
+			StarterName.WEBSOCKET_NETTY_STARTER);
 	}
 
 	// @Bean

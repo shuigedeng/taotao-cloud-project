@@ -39,8 +39,9 @@ public class FtpConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(FtpConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(FtpConfiguration.class, StarterName.OSS_FTP_STARTER);
 	}
+
 	private final FtpProperties properties;
 
 	public FtpConfiguration(FtpProperties properties) {

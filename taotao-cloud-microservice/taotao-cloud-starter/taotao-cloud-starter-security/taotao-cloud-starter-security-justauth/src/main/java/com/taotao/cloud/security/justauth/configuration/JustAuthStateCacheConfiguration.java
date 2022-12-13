@@ -17,6 +17,7 @@
 
 package com.taotao.cloud.security.justauth.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.justauth.properties.JustAuthProperties;
 import com.taotao.cloud.security.justauth.support.cache.RedisStateCache;
@@ -52,7 +53,9 @@ public class JustAuthStateCacheConfiguration {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtils.debug("JustAuth 使用 Redis 缓存存储 state 数据");
+			LogUtils.started(JustAuthAutoConfiguration.class,
+				StarterName.SECURITY_JUSTAUTH_STARTER);
+			LogUtils.info("JustAuth 使用 Redis 缓存存储 state 数据");
 		}
 
 		@Bean(name = "justAuthRedisCacheTemplate")
@@ -82,7 +85,9 @@ public class JustAuthStateCacheConfiguration {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtils.debug("JustAuth 使用 默认缓存存储 state 数据");
+			LogUtils.started(JustAuthAutoConfiguration.class,
+				StarterName.SECURITY_JUSTAUTH_STARTER);
+			LogUtils.info("JustAuth 使用 默认缓存存储 state 数据");
 		}
 
 		@Bean
@@ -99,7 +104,9 @@ public class JustAuthStateCacheConfiguration {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtils.debug("JustAuth 使用 自定义缓存存储 state 数据");
+			LogUtils.started(JustAuthAutoConfiguration.class,
+				StarterName.SECURITY_JUSTAUTH_STARTER);
+			LogUtils.info("JustAuth 使用 自定义缓存存储 state 数据");
 		}
 
 		@Bean

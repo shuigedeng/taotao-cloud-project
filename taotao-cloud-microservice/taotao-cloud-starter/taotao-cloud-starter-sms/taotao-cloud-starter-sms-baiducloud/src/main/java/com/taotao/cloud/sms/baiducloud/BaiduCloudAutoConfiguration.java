@@ -12,10 +12,13 @@
  */
 package com.taotao.cloud.sms.baiducloud;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,7 +40,12 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @ConditionalOnSmsEnabled
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "BAIDUCLOUD")
 @EnableConfigurationProperties(BaiduCloudProperties.class)
-public class BaiduCloudAutoConfiguration {
+public class BaiduCloudAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(BaiduCloudAutoConfiguration.class, StarterName.SMS_BAIDUCLOUD_STARTER);
+	}
 
 	/**
 	 * 构造百度云发送处理

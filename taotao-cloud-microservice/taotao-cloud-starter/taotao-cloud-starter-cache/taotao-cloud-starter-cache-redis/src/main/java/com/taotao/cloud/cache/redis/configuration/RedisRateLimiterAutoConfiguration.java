@@ -1,9 +1,10 @@
 package com.taotao.cloud.cache.redis.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.cache.redis.ratelimiter.RedisRateLimiterAspect;
 import com.taotao.cloud.cache.redis.ratelimiter.RedisRateLimiterClient;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import java.util.List;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -17,8 +18,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
-
-import java.util.List;
 
 /**
  * 速度限制器自动配置
@@ -34,7 +33,7 @@ public class RedisRateLimiterAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RedisRateLimiterAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisRateLimiterAutoConfiguration.class, StarterName.CACHE_REDIS_STARTER);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -49,7 +48,7 @@ public class RedisRateLimiterAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean
 	public RedisRateLimiterClient redisRateLimiter(StringRedisTemplate redisTemplate,
-												   Environment environment) {
+		Environment environment) {
 		RedisScript<List<Long>> redisRateLimiterScript = redisRateLimiterScript();
 		return new RedisRateLimiterClient(redisTemplate, redisRateLimiterScript, environment);
 	}

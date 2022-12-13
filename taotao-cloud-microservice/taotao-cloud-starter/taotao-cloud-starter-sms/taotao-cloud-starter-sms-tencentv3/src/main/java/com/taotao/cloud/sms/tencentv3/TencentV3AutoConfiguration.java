@@ -12,10 +12,13 @@
  */
 package com.taotao.cloud.sms.tencentv3;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,7 +40,12 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @ConditionalOnSmsEnabled
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "QCLOUDV3")
 @EnableConfigurationProperties(TencentV3Properties.class)
-public class TencentV3AutoConfiguration {
+public class TencentV3AutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(TencentV3AutoConfiguration.class, StarterName.SMS_TENCENTV3_STARTER);
+	}
 
 	/**
 	 * 构造腾讯云V3发送处理
@@ -50,8 +58,8 @@ public class TencentV3AutoConfiguration {
 	@Bean
 	@ConditionalOnBean(SmsSenderLoadBalancer.class)
 	public TencentV3SendHandler qcloudV3SendHandler(TencentV3Properties properties,
-													SmsSenderLoadBalancer loadbalancer,
-													ApplicationEventPublisher eventPublisher) {
+		SmsSenderLoadBalancer loadbalancer,
+		ApplicationEventPublisher eventPublisher) {
 		TencentV3SendHandler handler = new TencentV3SendHandler(properties, eventPublisher);
 		loadbalancer.addTarget(handler, true);
 		loadbalancer.setWeight(handler, properties.getWeight());

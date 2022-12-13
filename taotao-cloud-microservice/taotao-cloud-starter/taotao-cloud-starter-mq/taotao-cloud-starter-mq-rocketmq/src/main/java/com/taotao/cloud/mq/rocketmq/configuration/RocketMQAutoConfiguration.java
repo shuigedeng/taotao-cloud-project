@@ -15,8 +15,11 @@
  */
 package com.taotao.cloud.mq.rocketmq.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mq.rocketmq.properties.RocketmqProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -33,6 +36,11 @@ import org.springframework.context.annotation.PropertySource;
 @EnableConfigurationProperties({RocketmqProperties.class})
 @ConditionalOnProperty(prefix = RocketmqProperties.PREFIX, name = "enabled", havingValue = "true")
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:rocketmq.yml")
-public class RocketMQAutoConfiguration {
+public class RocketMQAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(RocketMQAutoConfiguration.class, StarterName.MQ_ROCKETMQ_STARTER);
+	}
 
 }

@@ -21,6 +21,7 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dozer.helper.DozerHelper;
 import com.taotao.cloud.dozer.properties.DozerProperties;
+import java.io.IOException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -28,8 +29,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.io.IOException;
 
 /**
  * DozerConfiguration
@@ -49,7 +48,7 @@ public class DozerAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(DozerAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(DozerAutoConfiguration.class, StarterName.DOZER_STARTER);
 	}
 
 	@Bean

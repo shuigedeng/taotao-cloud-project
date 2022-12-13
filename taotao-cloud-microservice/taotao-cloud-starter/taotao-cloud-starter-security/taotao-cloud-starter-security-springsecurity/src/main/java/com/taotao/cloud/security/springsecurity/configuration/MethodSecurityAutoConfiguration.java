@@ -17,9 +17,15 @@ package com.taotao.cloud.security.springsecurity.configuration;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import java.io.Serializable;
+import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -32,10 +38,6 @@ import org.springframework.security.config.annotation.method.configuration.Globa
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
-import java.util.Collection;
-
 /**
  * MethodSecurityConfig
  *
@@ -45,7 +47,13 @@ import java.util.Collection;
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfiguration implements
-	ApplicationContextAware {
+	ApplicationContextAware, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(MethodSecurityAutoConfiguration.class,
+			StarterName.SECURITY_SPRINGSECURITY_STARTER);
+	}
 
 	private ApplicationContext applicationContext;
 
@@ -78,7 +86,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 
 		//@PreAuthorize("@pms.hasPermission(#request, authentication, 'export')")
 		public boolean hasPermission(HttpServletRequest req, Authentication authentication,
-									 String permission) {
+			String permission) {
 			return false;
 		}
 
@@ -116,7 +124,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 		//普通的targetDomainObject判断 @PreAuthorize("hasPermission(#batchDTO, 'batch')")
 		@Override
 		public boolean hasPermission(Authentication auth, Object targetDomainObject,
-									 Object permission) {
+			Object permission) {
 			if ((auth == null) || (targetDomainObject == null) || !(permission instanceof String)) {
 				return false;
 			}
@@ -127,7 +135,7 @@ public class MethodSecurityAutoConfiguration extends GlobalMethodSecurityConfigu
 		//用于ACL的访问控制 @PreAuthorize("hasPermission(1, #batchDTO, 'batch')")
 		@Override
 		public boolean hasPermission(Authentication auth, Serializable targetId, String targetType,
-									 Object permission) {
+			Object permission) {
 
 			if ((auth == null) || (targetType == null) || !(permission instanceof String)) {
 				return false;

@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import okhttp3.ConnectionPool;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.commons.httpclient.OkHttpClientConnectionPoolFactory;
@@ -51,7 +52,12 @@ import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
  */
 @AutoConfiguration(before = FeignLoadBalancerAutoConfiguration.class)
 @ConditionalOnFeignUseOkHttp
-public class OkHttpAutoConfiguration {
+public class OkHttpAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(OkHttpAutoConfiguration.class, StarterName.FEIGN_STARTER);
+	}
 
 	private okhttp3.OkHttpClient okHttpClient;
 

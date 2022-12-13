@@ -44,18 +44,17 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnBean(DataSource.class)
 @AutoConfigureAfter(value = DataSourceAutoConfiguration.class)
 @ConditionalOnProperty(prefix = P6spyProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-public class P6spyAutoConfiguration implements   InitializingBean {
+public class P6spyAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(P6spyAutoConfiguration.class, StarterName.P6SPY_STARTER);
+		LogUtils.started(P6spyAutoConfiguration.class, StarterName.DATA_P6SPY_STARTER);
 	}
 
 	@Bean
 	public static P6spyConfigLoaderBeanPostProcessor cusP6spyConfigLoaderBeanPostProcessor() {
 		return new P6spyConfigLoaderBeanPostProcessor();
 	}
-
 
 	//@Autowired
 	//private P6spyProperties p6spyProperties;

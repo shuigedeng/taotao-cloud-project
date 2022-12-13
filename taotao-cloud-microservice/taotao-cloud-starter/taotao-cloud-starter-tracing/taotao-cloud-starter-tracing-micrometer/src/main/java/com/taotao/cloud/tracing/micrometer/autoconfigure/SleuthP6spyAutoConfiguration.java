@@ -1,10 +1,13 @@
 package com.taotao.cloud.tracing.micrometer.autoconfigure;
 
 import com.p6spy.engine.spy.P6ModuleManager;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.data.p6spy.properties.P6spyProperties;
 import java.lang.reflect.Field;
 import javax.sql.DataSource;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +19,9 @@ import org.springframework.util.ReflectionUtils;
  * Sleuth p6spy 自动装配
  */
 @AutoConfiguration
-public class SleuthP6spyAutoConfiguration implements BeanPostProcessor, Ordered, ApplicationContextAware {
+public class SleuthP6spyAutoConfiguration implements BeanPostProcessor, Ordered,
+	ApplicationContextAware,
+	InitializingBean {
 
 	boolean isLoad = false;
 
@@ -25,7 +30,14 @@ public class SleuthP6spyAutoConfiguration implements BeanPostProcessor, Ordered,
 	private ApplicationContext applicationContext;
 
 	@Override
-	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(SleuthP6spyAutoConfiguration.class,
+			StarterName.TRACING_MICROMETER_STARTER);
+	}
+
+	@Override
+	public Object postProcessAfterInitialization(Object bean, String beanName)
+		throws BeansException {
 		try {
 			if (bean instanceof DataSource && !isLoad) {
 				p6spyProperties = getP6spyProperties();

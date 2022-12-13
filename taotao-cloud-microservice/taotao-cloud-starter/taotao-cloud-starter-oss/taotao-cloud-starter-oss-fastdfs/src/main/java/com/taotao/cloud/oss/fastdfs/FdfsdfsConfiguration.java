@@ -45,7 +45,7 @@ public class FdfsdfsConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(FdfsdfsConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(FdfsdfsConfiguration.class, StarterName.OSS_FASTDFS_STARTER);
 	}
 
 	private final FastdfsProperties properties;
@@ -70,7 +70,7 @@ public class FdfsdfsConfiguration implements InitializingBean {
 
 	@Bean
 	public FdfsConnectionPool fdfsConnectionPool(PooledConnectionFactory pooledConnectionFactory,
-												 ConnectionPoolConfig connectionPoolConfig) {
+		ConnectionPoolConfig connectionPoolConfig) {
 		return new FdfsConnectionPool(pooledConnectionFactory, connectionPoolConfig);
 	}
 

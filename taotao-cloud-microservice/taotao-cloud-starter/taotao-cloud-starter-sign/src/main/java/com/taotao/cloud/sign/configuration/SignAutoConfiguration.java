@@ -1,11 +1,19 @@
 package com.taotao.cloud.sign.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sign.advice.DecryptRequestBodyAdvice;
 import com.taotao.cloud.sign.advice.EncryptResponseBodyAdvice;
 import com.taotao.cloud.sign.advice.SignAspect;
 import com.taotao.cloud.sign.properties.EncryptBodyProperties;
 import com.taotao.cloud.sign.properties.EncryptProperties;
 import com.taotao.cloud.sign.properties.SignProperties;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.charset.Charset;
+import java.util.LinkedList;
+import java.util.List;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -17,12 +25,6 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * SignConfiguration
@@ -41,7 +43,12 @@ import java.util.List;
 	EncryptBodyProperties.class,
 	EncryptProperties.class,
 	SignProperties.class,})
-public class SignAutoConfiguration implements WebMvcConfigurer {
+public class SignAutoConfiguration implements WebMvcConfigurer, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(SignAutoConfiguration.class, StarterName.SIGN_STARTER);
+	}
 
 	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
 		return new MappingJackson2HttpMessageConverter() {

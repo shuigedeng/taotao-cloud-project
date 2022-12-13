@@ -6,6 +6,7 @@ import com.taotao.cloud.web.exception.enums.ExceptionHandleTypeEnum;
 import com.taotao.cloud.web.exception.handler.ExceptionHandler;
 import com.taotao.cloud.web.exception.handler.LoggerExceptionHandler;
 import com.taotao.cloud.web.exception.properties.ExceptionHandleProperties;
+import java.util.Arrays;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,8 +14,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-
-import java.util.Arrays;
 
 /**
  * 当web项目引入此依赖时，自动配置对应的内容 初始化log的事件监听与切面配置
@@ -36,7 +35,7 @@ public class LoggerExceptionHandlerAutoConfiguration implements InitializingBean
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(LoggerExceptionHandlerAutoConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(LoggerExceptionHandlerAutoConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean

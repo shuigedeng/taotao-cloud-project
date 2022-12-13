@@ -44,7 +44,7 @@ public class AliyunOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(AliyunOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(AliyunOssConfiguration.class, StarterName.OSS_ALI_STARTER);
 	}
 
 	private final AliyunOssProperties properties;

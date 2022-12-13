@@ -37,7 +37,7 @@ public class TenantAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(TenantAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
+		LogUtils.started(TenantAutoConfiguration.class, StarterName.DATA_MYBATIS_PLUS_STARTER);
 	}
 
 	private final TenantProperties tenantProperties;

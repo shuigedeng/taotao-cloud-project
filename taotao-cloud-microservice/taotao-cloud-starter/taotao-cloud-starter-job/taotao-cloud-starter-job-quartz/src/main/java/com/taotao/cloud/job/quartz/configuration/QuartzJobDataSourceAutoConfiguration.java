@@ -1,23 +1,31 @@
 package com.taotao.cloud.job.quartz.configuration;
 
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.zaxxer.hikari.HikariDataSource;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.quartz.QuartzDataSource;
 import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionManager;
 
-import javax.sql.DataSource;
-
 /**
- * 为Quartz单独配置数据源
- * 有时候我们会希望将quartz的相关表保存在单独的一个数据库中，从而与业务相关的表分开。
+ * 为Quartz单独配置数据源 有时候我们会希望将quartz的相关表保存在单独的一个数据库中，从而与业务相关的表分开。
  */
-@Configuration
-public class QuartzJobDataSourceAutoConfiguration {
+@AutoConfiguration
+public class QuartzJobDataSourceAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(QuartzJobDataSourceAutoConfiguration.class,
+			StarterName.JOB_QUARTZ_STARTER);
+	}
+
 	/**
 	 * 为quartz的任务和触发器单独配置一个数据源  @QuartzDataSource注解用于声明quartz使用这个数据源
 	 */
@@ -28,7 +36,8 @@ public class QuartzJobDataSourceAutoConfiguration {
 		hikariDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		hikariDataSource.setUsername("root");
 		hikariDataSource.setPassword("123456");
-		hikariDataSource.setJdbcUrl("jdbc:mysql://192.168.253.202:3306/db_quartz?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true");
+		hikariDataSource.setJdbcUrl(
+			"jdbc:mysql://192.168.253.202:3306/db_quartz?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true");
 		return hikariDataSource;
 	}
 
@@ -39,7 +48,8 @@ public class QuartzJobDataSourceAutoConfiguration {
 	 */
 	@Bean
 	@QuartzTransactionManager
-	public TransactionManager quartzTransactionManager(@Qualifier("quartzDataSource") DataSource quartzDataSource) {
+	public TransactionManager quartzTransactionManager(
+		@Qualifier("quartzDataSource") DataSource quartzDataSource) {
 		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
 		transactionManager.setDataSource(quartzDataSource);
 		return transactionManager;

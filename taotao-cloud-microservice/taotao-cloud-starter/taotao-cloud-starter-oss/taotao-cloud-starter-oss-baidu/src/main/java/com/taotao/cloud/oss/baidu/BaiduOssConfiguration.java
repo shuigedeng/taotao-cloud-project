@@ -10,6 +10,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -17,8 +18,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Map;
 
 /**
  * 百度oss配置
@@ -35,7 +34,7 @@ public class BaiduOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(BaiduOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(BaiduOssConfiguration.class, StarterName.OSS_BAIDU_STARTER);
 	}
 
 	public static final String DEFAULT_BEAN_NAME = "baiduOssClient";
@@ -70,12 +69,14 @@ public class BaiduOssConfiguration implements InitializingBean {
 	}
 
 	public StandardOssClient baiduOssClient(BaiduOssConfig baiduOssConfig) {
-		return new BaiduOssClient(bosClient(bosClientConfiguration(baiduOssConfig)), baiduOssConfig);
+		return new BaiduOssClient(bosClient(bosClientConfiguration(baiduOssConfig)),
+			baiduOssConfig);
 	}
 
 	public BosClientConfiguration bosClientConfiguration(BaiduOssConfig baiduOssConfig) {
 		BosClientConfiguration clientConfig = baiduOssConfig.getClientConfig();
-		clientConfig.setCredentials(new DefaultBceCredentials(baiduOssConfig.getAccessKeyId(), baiduOssConfig.getSecretAccessKey()));
+		clientConfig.setCredentials(new DefaultBceCredentials(baiduOssConfig.getAccessKeyId(),
+			baiduOssConfig.getSecretAccessKey()));
 		return clientConfig;
 	}
 

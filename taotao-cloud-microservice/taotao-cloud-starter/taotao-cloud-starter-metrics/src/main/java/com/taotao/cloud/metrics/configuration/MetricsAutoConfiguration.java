@@ -64,7 +64,7 @@ public class MetricsAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(MetricsAutoConfiguration.class, StarterName.PULSAR_STARTER);
+		LogUtils.started(MetricsAutoConfiguration.class, StarterName.METRICS_STARTER);
 	}
 
 	@Configuration
@@ -95,7 +95,8 @@ public class MetricsAutoConfiguration implements InitializingBean {
 		@Bean
 		public DruidMetrics druidMetrics(
 			ObjectProvider<Map<String, DataSource>> dataSourcesProvider) {
-			Map<String, DataSource> dataSourceMap = dataSourcesProvider.getIfAvailable(HashMap::new);
+			Map<String, DataSource> dataSourceMap = dataSourcesProvider.getIfAvailable(
+				HashMap::new);
 			Map<String, DruidDataSource> druidDataSourceMap = new HashMap<>(2);
 			dataSourceMap.forEach((name, dataSource) -> {
 				// 保证连接池数据和 DataSourcePoolMetadataProvider 的一致

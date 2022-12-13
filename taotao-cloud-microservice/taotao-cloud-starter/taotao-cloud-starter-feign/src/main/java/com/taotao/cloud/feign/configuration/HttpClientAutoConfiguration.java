@@ -19,11 +19,18 @@ package com.taotao.cloud.feign.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.feign.annotation.ConditionalOnFeignUseHttpClient;
+import java.io.IOException;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -34,13 +41,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.io.IOException;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
-
 /**
  * <p>Description: HttpClient 自动配置 </p>
  *
@@ -50,14 +50,20 @@ import java.util.concurrent.TimeUnit;
  */
 @AutoConfiguration
 @ConditionalOnFeignUseHttpClient
-public class HttpClientAutoConfiguration {
+public class HttpClientAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(HttpClientAutoConfiguration.class, StarterName.FEIGN_STARTER);
+	}
 
 	@PostConstruct
 	public void postConstruct() {
 		LogUtils.started(HttpClientAutoConfiguration.class, StarterName.FEIGN_STARTER);
 	}
 
-	private final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1, new ThreadFactory() {
+	private final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(
+		1, new ThreadFactory() {
 		@Override
 		public Thread newThread(@NotNull Runnable r) {
 			Thread thread = new Thread(Thread.currentThread().getThreadGroup(), r,
@@ -85,15 +91,17 @@ public class HttpClientAutoConfiguration {
 			feignHttpClientProperties.getTimeToLive(),
 			feignHttpClientProperties.getTimeToLiveUnit(), this.registryBuilder);
 
-		scheduledThreadPoolExecutor.scheduleWithFixedDelay(connectionManager::closeExpiredConnections, 30000, feignHttpClientProperties.getConnectionTimerRepeat(), TimeUnit.MILLISECONDS);
+		scheduledThreadPoolExecutor.scheduleWithFixedDelay(
+			connectionManager::closeExpiredConnections, 30000,
+			feignHttpClientProperties.getConnectionTimerRepeat(), TimeUnit.MILLISECONDS);
 
 		return connectionManager;
 	}
 
 	@Bean
 	public CloseableHttpClient httpClient(ApacheHttpClientFactory httpClientFactory,
-										  HttpClientConnectionManager httpClientConnectionManager,
-										  FeignHttpClientProperties feignHttpClientProperties) {
+		HttpClientConnectionManager httpClientConnectionManager,
+		FeignHttpClientProperties feignHttpClientProperties) {
 		RequestConfig defaultRequestConfig = RequestConfig.custom()
 			.setConnectTimeout(feignHttpClientProperties.getConnectionTimeout())
 			.setRedirectsEnabled(feignHttpClientProperties.isFollowRedirects()).build();

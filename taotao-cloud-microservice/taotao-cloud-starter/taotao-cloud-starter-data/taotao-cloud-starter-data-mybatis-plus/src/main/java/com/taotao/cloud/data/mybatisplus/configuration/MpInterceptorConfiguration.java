@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.data.mybatisplus.datascope.DataScopeInterceptor;
 import com.taotao.cloud.data.mybatisplus.interceptor.MpInterceptor;
 import com.taotao.cloud.data.mybatisplus.interceptor.SqlPaginationInnerInterceptor;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
@@ -14,7 +17,12 @@ import org.springframework.context.annotation.Bean;
  * 插件容器
  */
 @AutoConfiguration
-public class MpInterceptorConfiguration {
+public class MpInterceptorConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(MpInterceptorConfiguration.class, StarterName.DATA_MYBATIS_PLUS_STARTER);
+	}
 
 	/**
 	 * 单页分页条数限制(默认无限制,参见 插件#handlerLimit 方法)

@@ -37,7 +37,7 @@ public class LoggerAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(LoggerAutoConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(LoggerAutoConfiguration.class, StarterName.LOGGER_STARTER);
 	}
 
 

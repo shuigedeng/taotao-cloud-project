@@ -43,6 +43,6 @@ public class ForestAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(ForestAutoConfiguration.class, StarterName.LAYTPL_STARTER);
+		LogUtils.started(ForestAutoConfiguration.class, StarterName.THIRD_CLIEN_STARTER);
 	}
 }

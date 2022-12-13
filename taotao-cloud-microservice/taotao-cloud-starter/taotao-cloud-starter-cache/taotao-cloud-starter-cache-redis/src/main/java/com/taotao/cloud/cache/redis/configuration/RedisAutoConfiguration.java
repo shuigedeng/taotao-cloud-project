@@ -52,12 +52,13 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @AutoConfiguration
 @ConditionalOnProperty(prefix = com.taotao.cloud.cache.redis.properties.RedisProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-@EnableConfigurationProperties({RedisProperties.class, CacheManagerProperties.class, com.taotao.cloud.cache.redis.properties.RedisProperties.class})
+@EnableConfigurationProperties({RedisProperties.class, CacheManagerProperties.class,
+	com.taotao.cloud.cache.redis.properties.RedisProperties.class})
 public class RedisAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RedisAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisAutoConfiguration.class, StarterName.CACHE_REDIS_STARTER);
 	}
 
 	//@Bean
@@ -68,7 +69,7 @@ public class RedisAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean(RedisSerializer.class)
 	public RedisSerializer<Object> redisSerializer(CacheManagerProperties properties,
-												   ObjectProvider<ObjectMapper> objectProvider) {
+		ObjectProvider<ObjectMapper> objectProvider) {
 		SerializerType serializerType = properties.getSerializerType();
 
 		if (SerializerType.JDK == serializerType) {
@@ -97,7 +98,7 @@ public class RedisAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnClass(RedisOperations.class)
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory,
-													   RedisSerializer<Object> redisSerializer) {
+		RedisSerializer<Object> redisSerializer) {
 		RedisTemplate<String, Object> template = new RedisTemplate<>();
 		template.setConnectionFactory(factory);
 

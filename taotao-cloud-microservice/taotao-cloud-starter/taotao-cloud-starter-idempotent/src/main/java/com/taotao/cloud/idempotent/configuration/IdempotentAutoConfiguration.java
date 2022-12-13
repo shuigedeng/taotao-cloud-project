@@ -41,7 +41,7 @@ public class IdempotentAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(IdempotentAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(IdempotentAutoConfiguration.class, StarterName.IDEMPOTENT_STARTER);
 	}
 
 	@Bean

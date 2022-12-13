@@ -22,8 +22,11 @@ import com.github.benmanes.caffeine.cache.CaffeineSpec;
 import com.taotao.cloud.cache.caffeine.manager.CaffeineAutoCacheManager;
 import com.taotao.cloud.cache.caffeine.properties.CaffeineProperties;
 import com.taotao.cloud.cache.caffeine.repository.CaffeineRepository;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
@@ -53,9 +56,15 @@ import org.springframework.util.StringUtils;
 @EnableCaching
 @ConditionalOnClass({Caffeine.class, CaffeineCacheManager.class})
 @AutoConfiguration(before = CacheAutoConfiguration.class)
-@EnableConfigurationProperties({RedisProperties.class, CaffeineProperties.class ,CacheProperties.class})
+@EnableConfigurationProperties({RedisProperties.class, CaffeineProperties.class,
+	CacheProperties.class})
 @ConditionalOnProperty(prefix = CaffeineProperties.PREFIX, name = "enabled", havingValue = "true")
-public class CaffeineCacheAutoConfiguration {
+public class CaffeineCacheAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(CaffeineCacheAutoConfiguration.class, StarterName.CACHE_CAFFEINE_STARTER);
+	}
 
 	@Bean
 	public CaffeineRepository caffeineRepository() {
@@ -64,7 +73,8 @@ public class CaffeineCacheAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public CacheManagerCustomizers cacheManagerCustomizers(ObjectProvider<CacheManagerCustomizer<?>> customizers) {
+	public CacheManagerCustomizers cacheManagerCustomizers(
+		ObjectProvider<CacheManagerCustomizer<?>> customizers) {
 		return new CacheManagerCustomizers(
 			customizers.orderedStream().collect(Collectors.toList()));
 	}
@@ -76,7 +86,8 @@ public class CaffeineCacheAutoConfiguration {
 		ObjectProvider<Caffeine<Object, Object>> caffeine,
 		ObjectProvider<CaffeineSpec> caffeineSpec,
 		ObjectProvider<CacheLoader<Object, Object>> cacheLoader) {
-		CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine, caffeineSpec, cacheLoader);
+		CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine,
+			caffeineSpec, cacheLoader);
 		List<String> cacheNames = cacheProperties.getCacheNames();
 		if (!CollectionUtils.isEmpty(cacheNames)) {
 			cacheManager.setCacheNames(cacheNames);
