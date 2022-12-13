@@ -51,15 +51,15 @@ public class SmsAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(SmsAutoConfiguration.class, StarterName.SMS_STARTER);
+		LogUtils.started(SmsAutoConfiguration.class, StarterName.SMS_COMMON_STARTER);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public NoticeService noticeService(SmsProperties properties,
-									   SmsAsyncProperties asyncProperties,
-									   ILoadBalancer<SendHandler, NoticeData> smsSenderLoadbalancer,
-									   ObjectProvider<SendAsyncThreadPoolExecutor> executorProvider) {
+		SmsAsyncProperties asyncProperties,
+		ILoadBalancer<SendHandler, NoticeData> smsSenderLoadbalancer,
+		ObjectProvider<SendAsyncThreadPoolExecutor> executorProvider) {
 		return new DefaultNoticeService(properties, asyncProperties, smsSenderLoadbalancer,
 			executorProvider.getIfUnique());
 	}
