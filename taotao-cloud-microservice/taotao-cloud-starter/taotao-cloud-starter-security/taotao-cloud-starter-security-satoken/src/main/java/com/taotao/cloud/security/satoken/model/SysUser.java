@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 /**
  * User 实体类
- *
- * @author kong
- * @since 2022-10-15
  */
 public class SysUser implements Serializable {
 

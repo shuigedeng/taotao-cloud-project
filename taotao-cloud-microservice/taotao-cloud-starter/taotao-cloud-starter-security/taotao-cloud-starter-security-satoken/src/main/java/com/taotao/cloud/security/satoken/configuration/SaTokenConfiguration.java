@@ -26,8 +26,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * [Sa-Token 权限认证] 配置类
- *
- * @author kong
  */
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @Configuration
@@ -89,7 +87,8 @@ public class SaTokenConfiguration implements WebMvcConfigurer, InitializingBean 
 		return new SaServletFilter()
 
 			// 指定 [拦截路由] 与 [放行路由]
-			.addInclude("/**")// .addExclude("/favicon.ico")
+			.addInclude("/**")
+			.addExclude("/favicon.ico")
 
 			// 认证函数: 每次请求执行
 			.setAuth(obj -> {

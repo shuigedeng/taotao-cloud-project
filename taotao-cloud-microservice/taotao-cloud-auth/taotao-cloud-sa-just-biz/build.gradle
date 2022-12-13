@@ -25,7 +25,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security:taotao-cloud-starter-security-satoken")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security:taotao-cloud-starter-security-justauth")
 
@@ -33,7 +32,6 @@ dependencies {
     implementation "cn.dev33:sa-token-oauth2:1.33.0"
     //Sa-Token 插件：整合SSO
     implementation "cn.dev33:sa-token-sso:1.33.0"
-
 }
 
 description = "认证模块api"

@@ -6,9 +6,6 @@ import me.zhyd.oauth.cache.AuthStateCache;
  * <p>
  * 自定义缓存实现
  * </p>
- *
- * @author yangkai.shen
- * @date Created in 2019/8/31 12:53
  */
 public class MyAuthStateCache implements AuthStateCache {
 
