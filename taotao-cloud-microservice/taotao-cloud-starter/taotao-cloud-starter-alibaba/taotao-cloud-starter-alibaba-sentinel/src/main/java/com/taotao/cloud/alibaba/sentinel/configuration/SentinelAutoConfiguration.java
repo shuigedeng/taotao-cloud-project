@@ -101,7 +101,7 @@ public class SentinelAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(SentinelAutoConfiguration.class, StarterName.SENTINEL_STARTER);
+		LogUtils.started(SentinelAutoConfiguration.class, StarterName.ALIBABA_SENTINEL_STARTER);
 	}
 
 	/**

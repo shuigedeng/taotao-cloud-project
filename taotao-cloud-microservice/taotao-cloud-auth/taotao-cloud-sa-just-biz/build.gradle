@@ -17,10 +17,10 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-micrometer")
     implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
