@@ -51,7 +51,7 @@ buildscript {
         querydslAptVersion = "5.0.0"
 
         //https://search.maven.org/artifact/org.springframework.security/spring-security-core
-        springSecurityVersion = '5.7.5'
+        springSecurityVersion = '5.8.0'
         //https://search.maven.org/artifact/org.springframework.data/spring-data-commons
         springDataCommonsVersion = '2.7.6'
         //https://search.maven.org/artifact/org.springframework.kafka/spring-kafka
@@ -276,11 +276,11 @@ plugins {
 
     //此插件在构建期间生成 json OpenAPI 描述
     // https://plugins.gradle.org/plugin/org.springdoc.openapi-gradle-plugin
-    id "org.springdoc.openapi-gradle-plugin" version "1.4.0"
+    id "org.springdoc.openapi-gradle-plugin" version "1.5.0"
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.github.shalousun.smart-doc
-    id "com.github.shalousun.smart-doc" version "2.6.2"
+    id "com.github.shalousun.smart-doc" version "2.6.3"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
@@ -288,7 +288,7 @@ plugins {
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
-    id "com.bmuschko.docker-spring-boot-application" version "8.1.0"
+    id "com.bmuschko.docker-spring-boot-application" version "9.0.1"
 
     //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
