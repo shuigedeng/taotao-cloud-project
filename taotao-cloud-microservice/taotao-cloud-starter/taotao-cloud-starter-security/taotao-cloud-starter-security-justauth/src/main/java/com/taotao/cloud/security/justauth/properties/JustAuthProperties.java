@@ -28,9 +28,6 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * <p>
  * JustAuth自动装配配置类
  * </p>
- *
- * @author yangkai.shen
- * @date Created in 2019-07-22 10:59
  */
 @ConfigurationProperties(prefix = "justauth")
 public class JustAuthProperties {

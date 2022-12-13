@@ -27,9 +27,6 @@ import me.zhyd.oauth.request.AuthRequest;
  * <p>
  * 扩展配置
  * </p>
- *
- * @author yangkai.shen
- * @date Created in 2019/10/9 11:21
  */
 public class ExtendProperties {
 

@@ -85,9 +85,6 @@ import org.springframework.util.CollectionUtils;
  * <p>
  * AuthRequest工厂类
  * </p>
- *
- * @author yangkai.shen
- * @date Created in 2019-07-22 14:21
  */
 public class AuthRequestFactory {
 
@@ -118,8 +115,8 @@ public class AuthRequestFactory {
 			extendList = extend.getConfig()
 				.keySet()
 				.stream()
-				.filter(x -> names.contains(x.toUpperCase()))
 				.map(String::toUpperCase)
+				.filter(names::contains)
 				.collect(Collectors.toList());
 		}
 
@@ -221,92 +218,51 @@ public class AuthRequestFactory {
 		// 配置 http config
 		configureHttpConfig(authDefaultSource.name(), config, properties.getHttpConfig());
 
-		switch (authDefaultSource) {
-			case GITHUB:
-				return new AuthGithubRequest(config, authStateCache);
-			case WEIBO:
-				return new AuthWeiboRequest(config, authStateCache);
-			case GITEE:
-				return new AuthGiteeRequest(config, authStateCache);
-			case DINGTALK:
-				return new AuthDingTalkRequest(config, authStateCache);
-			case DINGTALK_ACCOUNT:
-				return new AuthDingTalkAccountRequest(config, authStateCache);
-			case BAIDU:
-				return new AuthBaiduRequest(config, authStateCache);
-			case CSDN:
-				return new AuthCsdnRequest(config, authStateCache);
-			case CODING:
-				return new AuthCodingRequest(config, authStateCache);
-			case OSCHINA:
-				return new AuthOschinaRequest(config, authStateCache);
-			case ALIPAY:
-				return new AuthAlipayRequest(config, authStateCache);
-			case QQ:
-				return new AuthQqRequest(config, authStateCache);
-			case WECHAT_OPEN:
-				return new AuthWeChatOpenRequest(config, authStateCache);
-			case WECHAT_MP:
-				return new AuthWeChatMpRequest(config, authStateCache);
-			case WECHAT_ENTERPRISE:
-				return new AuthWeChatEnterpriseQrcodeRequest(config, authStateCache);
-			case WECHAT_ENTERPRISE_WEB:
-				return new AuthWeChatEnterpriseWebRequest(config, authStateCache);
-			case TAOBAO:
-				return new AuthTaobaoRequest(config, authStateCache);
-			case GOOGLE:
-				return new AuthGoogleRequest(config, authStateCache);
-			case FACEBOOK:
-				return new AuthFacebookRequest(config, authStateCache);
-			case DOUYIN:
-				return new AuthDouyinRequest(config, authStateCache);
-			case LINKEDIN:
-				return new AuthLinkedinRequest(config, authStateCache);
-			case MICROSOFT:
-				return new AuthMicrosoftRequest(config, authStateCache);
-			case MI:
-				return new AuthMiRequest(config, authStateCache);
-			case TOUTIAO:
-				return new AuthToutiaoRequest(config, authStateCache);
-			case TEAMBITION:
-				return new AuthTeambitionRequest(config, authStateCache);
-			case RENREN:
-				return new AuthRenrenRequest(config, authStateCache);
-			case PINTEREST:
-				return new AuthPinterestRequest(config, authStateCache);
-			case STACK_OVERFLOW:
-				return new AuthStackOverflowRequest(config, authStateCache);
-			case HUAWEI:
-				return new AuthHuaweiRequest(config, authStateCache);
-			case GITLAB:
-				return new AuthGitlabRequest(config, authStateCache);
-			case KUJIALE:
-				return new AuthKujialeRequest(config, authStateCache);
-			case ELEME:
-				return new AuthElemeRequest(config, authStateCache);
-			case MEITUAN:
-				return new AuthMeituanRequest(config, authStateCache);
-			case TWITTER:
-				return new AuthTwitterRequest(config, authStateCache);
-			case FEISHU:
-				return new AuthFeishuRequest(config, authStateCache);
-			case JD:
-				return new AuthJdRequest(config, authStateCache);
-			case ALIYUN:
-				return new AuthAliyunRequest(config, authStateCache);
-			case XMLY:
-				return new AuthXmlyRequest(config, authStateCache);
-			case AMAZON:
-				return new AuthAmazonRequest(config, authStateCache);
-			case SLACK:
-				return new AuthSlackRequest(config, authStateCache);
-			case LINE:
-				return new AuthLineRequest(config, authStateCache);
-			case OKTA:
-				return new AuthOktaRequest(config, authStateCache);
-			default:
-				return null;
-		}
+		return switch (authDefaultSource) {
+			case GITHUB -> new AuthGithubRequest(config, authStateCache);
+			case WEIBO -> new AuthWeiboRequest(config, authStateCache);
+			case GITEE -> new AuthGiteeRequest(config, authStateCache);
+			case DINGTALK -> new AuthDingTalkRequest(config, authStateCache);
+			case DINGTALK_ACCOUNT -> new AuthDingTalkAccountRequest(config, authStateCache);
+			case BAIDU -> new AuthBaiduRequest(config, authStateCache);
+			case CSDN -> new AuthCsdnRequest(config, authStateCache);
+			case CODING -> new AuthCodingRequest(config, authStateCache);
+			case OSCHINA -> new AuthOschinaRequest(config, authStateCache);
+			case ALIPAY -> new AuthAlipayRequest(config, "", authStateCache);
+			case QQ -> new AuthQqRequest(config, authStateCache);
+			case WECHAT_OPEN -> new AuthWeChatOpenRequest(config, authStateCache);
+			case WECHAT_MP -> new AuthWeChatMpRequest(config, authStateCache);
+			case WECHAT_ENTERPRISE -> new AuthWeChatEnterpriseQrcodeRequest(config, authStateCache);
+			case WECHAT_ENTERPRISE_WEB ->
+				new AuthWeChatEnterpriseWebRequest(config, authStateCache);
+			case TAOBAO -> new AuthTaobaoRequest(config, authStateCache);
+			case GOOGLE -> new AuthGoogleRequest(config, authStateCache);
+			case FACEBOOK -> new AuthFacebookRequest(config, authStateCache);
+			case DOUYIN -> new AuthDouyinRequest(config, authStateCache);
+			case LINKEDIN -> new AuthLinkedinRequest(config, authStateCache);
+			case MICROSOFT -> new AuthMicrosoftRequest(config, authStateCache);
+			case MI -> new AuthMiRequest(config, authStateCache);
+			case TOUTIAO -> new AuthToutiaoRequest(config, authStateCache);
+			case TEAMBITION -> new AuthTeambitionRequest(config, authStateCache);
+			case RENREN -> new AuthRenrenRequest(config, authStateCache);
+			case PINTEREST -> new AuthPinterestRequest(config, authStateCache);
+			case STACK_OVERFLOW -> new AuthStackOverflowRequest(config, authStateCache);
+			case HUAWEI -> new AuthHuaweiRequest(config, authStateCache);
+			case GITLAB -> new AuthGitlabRequest(config, authStateCache);
+			case KUJIALE -> new AuthKujialeRequest(config, authStateCache);
+			case ELEME -> new AuthElemeRequest(config, authStateCache);
+			case MEITUAN -> new AuthMeituanRequest(config, authStateCache);
+			case TWITTER -> new AuthTwitterRequest(config, authStateCache);
+			case FEISHU -> new AuthFeishuRequest(config, authStateCache);
+			case JD -> new AuthJdRequest(config, authStateCache);
+			case ALIYUN -> new AuthAliyunRequest(config, authStateCache);
+			case XMLY -> new AuthXmlyRequest(config, authStateCache);
+			case AMAZON -> new AuthAmazonRequest(config, authStateCache);
+			case SLACK -> new AuthSlackRequest(config, authStateCache);
+			case LINE -> new AuthLineRequest(config, authStateCache);
+			case OKTA -> new AuthOktaRequest(config, authStateCache);
+			default -> null;
+		};
 	}
 
 	/**

@@ -5,12 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 将 Sa-Token log 信息转接到 Slf4j
- *
- * @author kong
- * @since 2022-11-2
+ * 将 Sa-Token log 信息转接到 Slf4j //@Component
  */
-//@Component
+
 public class SaLogForSlf4j implements SaLog {
 
 	Logger log = LoggerFactory.getLogger(SaLogForSlf4j.class);

@@ -34,9 +34,6 @@ import org.springframework.context.annotation.Import;
  * <p>
  * JustAuth 自动装配类
  * </p>
- *
- * @author yangkai.shen
- * @date Created in 2019-07-22 10:52
  */
 @AutoConfiguration
 @EnableConfigurationProperties(JustAuthProperties.class)
