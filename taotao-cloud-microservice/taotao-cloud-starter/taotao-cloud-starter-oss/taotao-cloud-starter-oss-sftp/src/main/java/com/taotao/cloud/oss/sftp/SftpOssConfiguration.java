@@ -8,6 +8,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -16,8 +17,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Map;
 
 /**
  * sftp oss配置
@@ -35,32 +34,33 @@ public class SftpOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(SftpOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(SftpOssConfiguration.class, StarterName.OSS_SFTP_STARTER);
 	}
 
 	public static final String DEFAULT_BEAN_NAME = "sftpOssClient";
 
-    @Autowired
-    private SftpOssProperties sftpOssProperties;
+	@Autowired
+	private SftpOssProperties sftpOssProperties;
 
-    @Bean
+	@Bean
 	@ConditionalOnMissingBean
-    public StandardOssClient sftpOssClient() {
-        Map<String, SftpOssConfig> sftpOssConfigMap = sftpOssProperties.getOssConfig();
-        if (sftpOssConfigMap.isEmpty()) {
-            SpringUtil.registerBean(DEFAULT_BEAN_NAME, sftpOssClient(sftpOssProperties));
-        } else {
-            sftpOssConfigMap.forEach((name, sftpOssConfig) -> SpringUtil.registerBean(name, sftpOssClient(sftpOssConfig)));
-        }
-        return null;
-    }
+	public StandardOssClient sftpOssClient() {
+		Map<String, SftpOssConfig> sftpOssConfigMap = sftpOssProperties.getOssConfig();
+		if (sftpOssConfigMap.isEmpty()) {
+			SpringUtil.registerBean(DEFAULT_BEAN_NAME, sftpOssClient(sftpOssProperties));
+		} else {
+			sftpOssConfigMap.forEach((name, sftpOssConfig) -> SpringUtil.registerBean(name,
+				sftpOssClient(sftpOssConfig)));
+		}
+		return null;
+	}
 
-    public StandardOssClient sftpOssClient(SftpOssConfig sftpOssConfig) {
-        return new SftpOssClient(sftp(sftpOssConfig), sftpOssConfig);
-    }
+	public StandardOssClient sftpOssClient(SftpOssConfig sftpOssConfig) {
+		return new SftpOssClient(sftp(sftpOssConfig), sftpOssConfig);
+	}
 
-    public Sftp sftp(SftpOssConfig sftpOssConfig) {
-        return new Sftp(sftpOssConfig);
-    }
+	public Sftp sftp(SftpOssConfig sftpOssConfig) {
+		return new Sftp(sftpOssConfig);
+	}
 
 }

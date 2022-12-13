@@ -22,6 +22,7 @@ import com.alibaba.cloud.nacos.NacosServiceManager;
 import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.support.function.FuncUtil;
 import com.taotao.cloud.common.utils.context.ContextUtils;
@@ -33,6 +34,16 @@ import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.security.springsecurity.perm.VipAccessDecisionManager;
 import com.taotao.cloud.security.springsecurity.perm.VipSecurityOauthService;
 import com.taotao.cloud.security.springsecurity.properties.SecurityProperties;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -70,17 +81,6 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.util.pattern.PathPattern;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-
 /**
  * Oauth2ResourceSecurityConfigurer
  *
@@ -89,7 +89,13 @@ import java.util.Set;
  * @since 2021/8/25 09:57
  */
 @AutoConfiguration
-public class Oauth2ResourceAutoConfiguration {
+public class Oauth2ResourceAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(Oauth2ResourceAutoConfiguration.class,
+			StarterName.SECURITY_SPRINGSECURITY_STARTER);
+	}
 
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
@@ -160,10 +166,10 @@ public class Oauth2ResourceAutoConfiguration {
 
 	@Bean
 	public SecurityFilterChain oauth2ResourceSecurityFilterChain(HttpSecurity http
-																 //VipSecurityOauthService vipSecurityOauthService,
-																 //VipAccessDecisionManager vipAccessDecisionManager,
-																 //RoleBasedVoter roleBasedVoter,
-																 //UrlSecurityPermsLoad urlSecurityPermsLoad
+		//VipSecurityOauthService vipSecurityOauthService,
+		//VipAccessDecisionManager vipAccessDecisionManager,
+		//RoleBasedVoter roleBasedVoter,
+		//UrlSecurityPermsLoad urlSecurityPermsLoad
 	) throws Exception {
 		HttpSecurity httpSecurity = http
 			.sessionManagement()

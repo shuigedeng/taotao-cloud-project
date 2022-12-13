@@ -10,6 +10,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -17,8 +18,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Map;
 
 /**
  * 清云操作系统配置
@@ -35,64 +34,66 @@ public class QingYunOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(QingYunOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(QingYunOssConfiguration.class, StarterName.OSS_QINGYUN_STARTER);
 	}
 
-    public static final String DEFAULT_BEAN_NAME = "qingYunOssClient";
+	public static final String DEFAULT_BEAN_NAME = "qingYunOssClient";
 
-    @Autowired
-    private QingYunOssProperties qingYunOssProperties;
+	@Autowired
+	private QingYunOssProperties qingYunOssProperties;
 
-    @Bean
+	@Bean
 	@ConditionalOnMissingBean
-    public StandardOssClient qingYunOssClient() {
-        Map<String, QingYunOssConfig> ossConfigMap = qingYunOssProperties.getOssConfig();
-        if (ossConfigMap.isEmpty()) {
-            SpringUtil.registerBean(DEFAULT_BEAN_NAME, qingYunOssClient(qingYunOssProperties));
-        } else {
-            String endpoint = qingYunOssProperties.getEndpoint();
-            String accessKey = qingYunOssProperties.getAccessKey();
-            String accessSecret = qingYunOssProperties.getAccessSecret();
-            String zone = qingYunOssProperties.getZone();
-            EnvContext.HttpConfig clientConfig = qingYunOssProperties.getClientConfig();
-            ossConfigMap.forEach((name, ossConfig) -> {
-                if (ObjectUtil.isEmpty(ossConfig.getEndpoint())) {
-                    ossConfig.setEndpoint(endpoint);
-                }
-                if (ObjectUtil.isEmpty(ossConfig.getAccessKey())) {
-                    ossConfig.setAccessKey(accessKey);
-                }
-                if (ObjectUtil.isEmpty(ossConfig.getAccessSecret())) {
-                    ossConfig.setAccessSecret(accessSecret);
-                }
-                if (ObjectUtil.isEmpty(ossConfig.getZone())) {
-                    ossConfig.setZone(zone);
-                }
-                if (ObjectUtil.isEmpty(ossConfig.getClientConfig())) {
-                    ossConfig.setClientConfig(clientConfig);
-                }
-                SpringUtil.registerBean(name, qingYunOssClient(ossConfig));
-            });
-        }
-        return null;
-    }
+	public StandardOssClient qingYunOssClient() {
+		Map<String, QingYunOssConfig> ossConfigMap = qingYunOssProperties.getOssConfig();
+		if (ossConfigMap.isEmpty()) {
+			SpringUtil.registerBean(DEFAULT_BEAN_NAME, qingYunOssClient(qingYunOssProperties));
+		} else {
+			String endpoint = qingYunOssProperties.getEndpoint();
+			String accessKey = qingYunOssProperties.getAccessKey();
+			String accessSecret = qingYunOssProperties.getAccessSecret();
+			String zone = qingYunOssProperties.getZone();
+			EnvContext.HttpConfig clientConfig = qingYunOssProperties.getClientConfig();
+			ossConfigMap.forEach((name, ossConfig) -> {
+				if (ObjectUtil.isEmpty(ossConfig.getEndpoint())) {
+					ossConfig.setEndpoint(endpoint);
+				}
+				if (ObjectUtil.isEmpty(ossConfig.getAccessKey())) {
+					ossConfig.setAccessKey(accessKey);
+				}
+				if (ObjectUtil.isEmpty(ossConfig.getAccessSecret())) {
+					ossConfig.setAccessSecret(accessSecret);
+				}
+				if (ObjectUtil.isEmpty(ossConfig.getZone())) {
+					ossConfig.setZone(zone);
+				}
+				if (ObjectUtil.isEmpty(ossConfig.getClientConfig())) {
+					ossConfig.setClientConfig(clientConfig);
+				}
+				SpringUtil.registerBean(name, qingYunOssClient(ossConfig));
+			});
+		}
+		return null;
+	}
 
-    public StandardOssClient qingYunOssClient(QingYunOssConfig qingYunOssConfig) {
-        QingStor qingStor = qingStor(qingYunOssConfig);
-        Bucket bucket = qingStor.getBucket(qingYunOssConfig.getBucketName(), qingYunOssConfig.getZone());
-        return new QingYunOssClient(qingStor, bucket, qingYunOssConfig);
-    }
+	public StandardOssClient qingYunOssClient(QingYunOssConfig qingYunOssConfig) {
+		QingStor qingStor = qingStor(qingYunOssConfig);
+		Bucket bucket = qingStor.getBucket(qingYunOssConfig.getBucketName(),
+			qingYunOssConfig.getZone());
+		return new QingYunOssClient(qingStor, bucket, qingYunOssConfig);
+	}
 
-    public QingStor qingStor(QingYunOssConfig qingYunOssConfig) {
-        EnvContext env = new EnvContext(qingYunOssConfig.getAccessKey(), qingYunOssConfig.getAccessSecret());
-        env.setHttpConfig(qingYunOssConfig.getClientConfig());
-        String endpoint = qingYunOssConfig.getEndpoint();
-        if (ObjectUtil.isNotEmpty(endpoint)) {
-            env.setEndpoint(endpoint);
-        }
-        env.setCnameSupport(qingYunOssConfig.getCnameSupport());
-        env.setAdditionalUserAgent(qingYunOssConfig.getAdditionalUserAgent());
-        env.setVirtualHostEnabled(qingYunOssConfig.getVirtualHostEnabled());
-        return new QingStor(env);
-    }
+	public QingStor qingStor(QingYunOssConfig qingYunOssConfig) {
+		EnvContext env = new EnvContext(qingYunOssConfig.getAccessKey(),
+			qingYunOssConfig.getAccessSecret());
+		env.setHttpConfig(qingYunOssConfig.getClientConfig());
+		String endpoint = qingYunOssConfig.getEndpoint();
+		if (ObjectUtil.isNotEmpty(endpoint)) {
+			env.setEndpoint(endpoint);
+		}
+		env.setCnameSupport(qingYunOssConfig.getCnameSupport());
+		env.setAdditionalUserAgent(qingYunOssConfig.getAdditionalUserAgent());
+		env.setVirtualHostEnabled(qingYunOssConfig.getVirtualHostEnabled());
+		return new QingStor(env);
+	}
 }

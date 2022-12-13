@@ -17,7 +17,7 @@ public class ExcelAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(ExcelAutoConfiguration.class, StarterName.EXCEL_STARTER);
+		LogUtils.started(ExcelAutoConfiguration.class, StarterName.OFFICE_STARTER);
 	}
 
 }

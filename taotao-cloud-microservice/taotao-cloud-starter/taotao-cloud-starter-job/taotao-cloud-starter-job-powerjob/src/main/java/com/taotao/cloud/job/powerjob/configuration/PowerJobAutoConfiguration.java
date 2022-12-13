@@ -13,31 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logger.configuration;
+package com.taotao.cloud.job.powerjob.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.yomahub.tlog.springboot.lifecircle.TLogPropertyConfiguration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.PropertySource;
 
 /**
- * LogbackAccessConfiguration
+ * JobParserConfiguration
  *
  * @author shuigedeng
  * @version 2022.03
- * @since 2020/4/30 10:21
+ * @since 2021/8/30 20:41
  */
-@AutoConfiguration(before = TLogPropertyConfiguration.class)
-@PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:tlog.yml")
-public class TlogAutoConfiguration implements InitializingBean {
+@AutoConfiguration
+public class PowerJobAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(TlogAutoConfiguration.class, StarterName.LOGGER_STARTER);
+		LogUtils.started(PowerJobAutoConfiguration.class, StarterName.JOB_POWERJOB_STARTER);
 	}
 
 }
-

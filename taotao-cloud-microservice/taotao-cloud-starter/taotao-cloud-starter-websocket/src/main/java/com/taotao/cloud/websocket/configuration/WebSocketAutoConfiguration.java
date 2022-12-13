@@ -15,15 +15,19 @@
  */
 package com.taotao.cloud.websocket.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.websocket.interceptor.WebSocketChannelInterceptor;
 import com.taotao.cloud.websocket.interceptor.WebSocketHandshakeHandler;
 import com.taotao.cloud.websocket.processor.WebSocketClusterProcessor;
 import com.taotao.cloud.websocket.processor.WebSocketMessageSender;
 import com.taotao.cloud.websocket.properties.WebSocketProperties;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -42,9 +46,6 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 
-import javax.annotation.PostConstruct;
-import java.util.List;
-
 /**
  * <p>Description: Web Socket 核心配置 </p>
  *
@@ -57,7 +58,13 @@ import java.util.List;
 @ConditionalOnBean({RedissonClient.class})
 @EnableConfigurationProperties({WebSocketProperties.class})
 @ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true")
-public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigurer {
+public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigurer,
+	InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(WebSocketAutoConfiguration.class, StarterName.WEBSOCKET_STARTER);
+	}
 
 	@Autowired
 	private WebSocketProperties webSocketProperties;
@@ -88,7 +95,8 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	}
 
 	@Bean
-	public WebSocketMessageSender webSocketMessageSender(SimpMessagingTemplate simpMessagingTemplate) {
+	public WebSocketMessageSender webSocketMessageSender(
+		SimpMessagingTemplate simpMessagingTemplate) {
 		WebSocketMessageSender webSocketMessageSender = new WebSocketMessageSender();
 		webSocketMessageSender.setSimpMessagingTemplate(simpMessagingTemplate);
 		webSocketMessageSender.setSimpUserRegistry(simpUserRegistry);
@@ -98,7 +106,8 @@ public class WebSocketAutoConfiguration implements WebSocketMessageBrokerConfigu
 	}
 
 	@Bean
-	public WebSocketClusterProcessor webSocketClusterProcessor(WebSocketMessageSender webSocketMessageSender) {
+	public WebSocketClusterProcessor webSocketClusterProcessor(
+		WebSocketMessageSender webSocketMessageSender) {
 		WebSocketClusterProcessor webSocketClusterProcessor = new WebSocketClusterProcessor();
 		webSocketClusterProcessor.setWebSocketProperties(webSocketProperties);
 		webSocketClusterProcessor.setWebSocketMessageSender(webSocketMessageSender);

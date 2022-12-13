@@ -35,7 +35,7 @@ public class SaTokenConfiguration implements WebMvcConfigurer, InitializingBean 
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(SaTokenConfiguration.class, StarterName.SATOKEN_STARTER);
+		LogUtils.started(SaTokenConfiguration.class, StarterName.SECURITY_SATOKEN_STARTER);
 	}
 
 	/**

@@ -15,6 +15,9 @@
  */
 package com.taotao.cloud.pay.alipay.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
@@ -25,6 +28,12 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
  * @since 2021/06/17 17:21
  */
 @AutoConfiguration
-public class AlipayAutoConfiguration {
+public class AlipayAutoConfiguration implements InitializingBean {
+
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(AlipayAutoConfiguration.class, StarterName.PAY_ALIPAY_STARTER);
+	}
 
 }

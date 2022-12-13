@@ -43,7 +43,7 @@ public class LimitAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(LimitAutoConfiguration.class, StarterName.WEB_STARTER);
+		LogUtils.started(LimitAutoConfiguration.class, StarterName.LIMIT_STARTER);
 	}
 
 	@Bean

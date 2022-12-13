@@ -12,10 +12,13 @@
  */
 package com.taotao.cloud.sms.jdcloud;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,7 +40,12 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @ConditionalOnSmsEnabled
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "JDCLOUD")
 @EnableConfigurationProperties(JdCloudProperties.class)
-public class JdCloudAutoConfiguration {
+public class JdCloudAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(JdCloudAutoConfiguration.class, StarterName.SMS_JDCLOUD_STARTER);
+	}
 
 	/**
 	 * 构造京东云发送处理
@@ -50,8 +58,8 @@ public class JdCloudAutoConfiguration {
 	@Bean
 	@ConditionalOnBean(SmsSenderLoadBalancer.class)
 	public JdCloudSendHandler jdCloudSendHandler(JdCloudProperties properties,
-                                                 SmsSenderLoadBalancer loadbalancer,
-                                                 ApplicationEventPublisher eventPublisher) {
+		SmsSenderLoadBalancer loadbalancer,
+		ApplicationEventPublisher eventPublisher) {
 		JdCloudSendHandler handler = new JdCloudSendHandler(properties, eventPublisher);
 		loadbalancer.addTarget(handler, true);
 		loadbalancer.setWeight(handler, properties.getWeight());

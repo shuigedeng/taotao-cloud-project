@@ -43,6 +43,6 @@ public class RetrofitAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RetrofitAutoConfiguration.class, StarterName.LAYTPL_STARTER);
+		LogUtils.started(RetrofitAutoConfiguration.class, StarterName.THIRD_CLIEN_STARTER);
 	}
 }

@@ -40,7 +40,7 @@ public class RedisDelayQueueAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RedisDelayQueueAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisDelayQueueAutoConfiguration.class, StarterName.CACHE_REDIS_STARTER);
 	}
 
 	@Bean

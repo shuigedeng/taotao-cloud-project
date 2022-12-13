@@ -13,10 +13,13 @@
 package com.taotao.cloud.sms.netease;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,7 +43,12 @@ import org.springframework.web.client.RestTemplate;
 @ConditionalOnSmsEnabled
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "NETEASE")
 @EnableConfigurationProperties(NeteaseCloudProperties.class)
-public class NeteaseCloudAutoConfiguration {
+public class NeteaseCloudAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(NeteaseCloudAutoConfiguration.class, StarterName.SMS_NETEASE_STARTER);
+	}
 
 	/**
 	 * 构造网易云信发送处理
@@ -56,10 +64,10 @@ public class NeteaseCloudAutoConfiguration {
 	@Conditional(NeteaseCloudSendHandlerCondition.class)
 	@ConditionalOnBean(SmsSenderLoadBalancer.class)
 	public NeteaseCloudSendHandler neteaseCloudSendHandler(NeteaseCloudProperties properties,
-                                                           ObjectMapper objectMapper,
-                                                           SmsSenderLoadBalancer loadbalancer,
-                                                           ApplicationEventPublisher eventPublisher,
-                                                           RestTemplate restTemplate) {
+		ObjectMapper objectMapper,
+		SmsSenderLoadBalancer loadbalancer,
+		ApplicationEventPublisher eventPublisher,
+		RestTemplate restTemplate) {
 		NeteaseCloudSendHandler handler = new NeteaseCloudSendHandler(properties, eventPublisher,
 			objectMapper,
 			restTemplate);

@@ -10,6 +10,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -17,8 +18,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Map;
 
 /**
  * 气妞妞oss配置
@@ -35,63 +34,64 @@ public class QiNiuOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(QiNiuOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(QiNiuOssConfiguration.class, StarterName.OSS_QINIU_STARTER);
 	}
 
-    public static final String DEFAULT_BEAN_NAME = "qiNiuOssClient";
+	public static final String DEFAULT_BEAN_NAME = "qiNiuOssClient";
 
-    @Autowired
-    private QiNiuOssProperties qiNiuOssProperties;
+	@Autowired
+	private QiNiuOssProperties qiNiuOssProperties;
 
-    @Bean
+	@Bean
 	@ConditionalOnMissingBean
-    public StandardOssClient qiNiuOssClient() {
-        Map<String, QiNiuOssConfig> qiNiuOssConfigMap = qiNiuOssProperties.getOssConfig();
-        if (qiNiuOssConfigMap.isEmpty()) {
-            SpringUtil.registerBean(DEFAULT_BEAN_NAME, qiNiuOssClient(qiNiuOssProperties));
-        } else {
-            String accessKey = qiNiuOssProperties.getAccessKey();
-            String secretKey = qiNiuOssProperties.getSecretKey();
-            qiNiuOssConfigMap.forEach((name, qiNiuOssConfig) -> {
-                if (ObjectUtil.isEmpty(qiNiuOssConfig.getAccessKey())) {
-                    qiNiuOssConfig.setAccessKey(accessKey);
-                }
-                if (ObjectUtil.isEmpty(qiNiuOssConfig.getSecretKey())) {
-                    qiNiuOssConfig.setSecretKey(secretKey);
-                }
-                SpringUtil.registerBean(name, qiNiuOssClient(qiNiuOssConfig));
-            });
-        }
-        return null;
-    }
+	public StandardOssClient qiNiuOssClient() {
+		Map<String, QiNiuOssConfig> qiNiuOssConfigMap = qiNiuOssProperties.getOssConfig();
+		if (qiNiuOssConfigMap.isEmpty()) {
+			SpringUtil.registerBean(DEFAULT_BEAN_NAME, qiNiuOssClient(qiNiuOssProperties));
+		} else {
+			String accessKey = qiNiuOssProperties.getAccessKey();
+			String secretKey = qiNiuOssProperties.getSecretKey();
+			qiNiuOssConfigMap.forEach((name, qiNiuOssConfig) -> {
+				if (ObjectUtil.isEmpty(qiNiuOssConfig.getAccessKey())) {
+					qiNiuOssConfig.setAccessKey(accessKey);
+				}
+				if (ObjectUtil.isEmpty(qiNiuOssConfig.getSecretKey())) {
+					qiNiuOssConfig.setSecretKey(secretKey);
+				}
+				SpringUtil.registerBean(name, qiNiuOssClient(qiNiuOssConfig));
+			});
+		}
+		return null;
+	}
 
-    private StandardOssClient qiNiuOssClient(QiNiuOssConfig qiNiuOssConfig) {
-        Auth auth = auth(qiNiuOssConfig);
-        com.qiniu.storage.Configuration configuration = configuration(qiNiuOssConfig);
-        UploadManager uploadManager = uploadManager(configuration);
-        BucketManager bucketManager = bucketManager(auth, configuration);
-        return qiNiuOssClient(auth, uploadManager, bucketManager, qiNiuOssConfig);
-    }
+	private StandardOssClient qiNiuOssClient(QiNiuOssConfig qiNiuOssConfig) {
+		Auth auth = auth(qiNiuOssConfig);
+		com.qiniu.storage.Configuration configuration = configuration(qiNiuOssConfig);
+		UploadManager uploadManager = uploadManager(configuration);
+		BucketManager bucketManager = bucketManager(auth, configuration);
+		return qiNiuOssClient(auth, uploadManager, bucketManager, qiNiuOssConfig);
+	}
 
-    public StandardOssClient qiNiuOssClient(Auth auth, UploadManager uploadManager, BucketManager bucketManager, QiNiuOssConfig qiNiuOssConfig) {
-        return new QiNiuOssClient(auth, uploadManager, bucketManager, qiNiuOssConfig);
-    }
+	public StandardOssClient qiNiuOssClient(Auth auth, UploadManager uploadManager,
+		BucketManager bucketManager, QiNiuOssConfig qiNiuOssConfig) {
+		return new QiNiuOssClient(auth, uploadManager, bucketManager, qiNiuOssConfig);
+	}
 
-    public Auth auth(QiNiuOssConfig qiNiuOssConfig) {
-        return Auth.create(qiNiuOssConfig.getAccessKey(), qiNiuOssConfig.getSecretKey());
-    }
+	public Auth auth(QiNiuOssConfig qiNiuOssConfig) {
+		return Auth.create(qiNiuOssConfig.getAccessKey(), qiNiuOssConfig.getSecretKey());
+	}
 
-    public UploadManager uploadManager(com.qiniu.storage.Configuration configuration) {
-        return new UploadManager(configuration);
-    }
+	public UploadManager uploadManager(com.qiniu.storage.Configuration configuration) {
+		return new UploadManager(configuration);
+	}
 
-    public BucketManager bucketManager(Auth auth, com.qiniu.storage.Configuration configuration) {
-        return new BucketManager(auth, configuration);
-    }
+	public BucketManager bucketManager(Auth auth, com.qiniu.storage.Configuration configuration) {
+		return new BucketManager(auth, configuration);
+	}
 
-    public com.qiniu.storage.Configuration configuration(QiNiuOssConfig qiNiuOssConfig) {
-        return new com.qiniu.storage.Configuration(qiNiuOssConfig.getRegion().buildRegion());
-    }
+	public com.qiniu.storage.Configuration configuration(QiNiuOssConfig qiNiuOssConfig) {
+		return new com.qiniu.storage.Configuration(qiNiuOssConfig.getRegion().buildRegion());
+	}
 
 
 }

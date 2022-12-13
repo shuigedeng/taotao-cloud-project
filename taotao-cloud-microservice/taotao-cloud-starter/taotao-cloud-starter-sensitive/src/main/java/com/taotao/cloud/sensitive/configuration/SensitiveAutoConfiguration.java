@@ -39,7 +39,7 @@ public class SensitiveAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(SensitiveAutoConfiguration.class, StarterName.ELK_STARTER);
+		LogUtils.started(SensitiveAutoConfiguration.class, StarterName.SENSITIVE_STARTER);
 	}
 
 	@Bean

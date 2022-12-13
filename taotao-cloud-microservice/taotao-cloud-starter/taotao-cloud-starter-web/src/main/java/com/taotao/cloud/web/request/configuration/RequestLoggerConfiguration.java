@@ -30,7 +30,7 @@ public class RequestLoggerConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RequestLoggerConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(RequestLoggerConfiguration.class, StarterName.LOGGER_STARTER);
 	}
 
 	@Bean

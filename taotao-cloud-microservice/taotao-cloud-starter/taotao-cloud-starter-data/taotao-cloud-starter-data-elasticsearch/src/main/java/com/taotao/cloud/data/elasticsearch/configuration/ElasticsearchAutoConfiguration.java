@@ -61,7 +61,8 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(ElasticsearchAutoConfiguration.class, StarterName.ELASTICSEARCH_STARTER);
+		LogUtils.started(ElasticsearchAutoConfiguration.class,
+			StarterName.DATA_ELASTICSEARCH_STARTER);
 	}
 
 	@Configuration
@@ -70,7 +71,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtils.started(ElasticsearchConfig.class, StarterName.ELASTICSEARCH_STARTER);
+			LogUtils.started(ElasticsearchConfig.class, StarterName.DATA_ELASTICSEARCH_STARTER);
 		}
 
 		@Autowired
@@ -137,7 +138,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	 * @since 2021/2/26 08:53
 	 */
 	private void setRequestConfig(RestClientBuilder builder,
-								  RestClientPoolProperties poolProperties) {
+		RestClientPoolProperties poolProperties) {
 		builder.setRequestConfigCallback(requestConfigBuilder -> {
 			requestConfigBuilder
 				.setConnectTimeout(poolProperties.getConnectTimeOut())
@@ -156,8 +157,8 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	 * @since 2021/2/26 08:53
 	 */
 	private void setHttpClientConfig(RestClientBuilder builder,
-									 RestClientPoolProperties poolProperties,
-									 ElasticsearchRestClientProperties restProperties) {
+		RestClientPoolProperties poolProperties,
+		ElasticsearchRestClientProperties restProperties) {
 		builder.setHttpClientConfigCallback(httpClientBuilder -> {
 			httpClientBuilder
 				.setMaxConnTotal(poolProperties.getMaxConnectNum())

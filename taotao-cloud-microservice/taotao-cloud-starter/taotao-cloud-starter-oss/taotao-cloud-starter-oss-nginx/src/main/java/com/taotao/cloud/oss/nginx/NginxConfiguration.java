@@ -40,7 +40,7 @@ public class NginxConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(NginxConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(NginxConfiguration.class, StarterName.OSS_NGINX_STARTER);
 	}
 
 	@Bean

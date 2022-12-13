@@ -16,7 +16,9 @@
 package com.taotao.cloud.job.quartz.configuration;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.quartz.event.DefaultQuartzEventListener;
 import com.taotao.cloud.job.quartz.event.RedisQuartzEventListener;
 import com.taotao.cloud.job.quartz.listener.QuartzListenerRegister;
@@ -26,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.quartz.Scheduler;
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -50,7 +53,12 @@ import org.springframework.stereotype.Component;
 @AutoConfiguration
 @ConditionalOnProperty(prefix = QuartzProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(value = {QuartzProperties.class})
-public class QuartzJobAutoConfiguration implements ApplicationContextAware {
+public class QuartzJobAutoConfiguration implements ApplicationContextAware, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(QuartzJobAutoConfiguration.class, StarterName.JOB_QUARTZ_STARTER);
+	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

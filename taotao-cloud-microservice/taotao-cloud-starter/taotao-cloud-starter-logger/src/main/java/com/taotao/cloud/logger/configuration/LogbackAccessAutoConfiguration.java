@@ -36,7 +36,7 @@ public class LogbackAccessAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(LogbackAccessAutoConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(LogbackAccessAutoConfiguration.class, StarterName.LOGGER_STARTER);
 	}
 
 }

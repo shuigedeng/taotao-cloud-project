@@ -12,10 +12,13 @@
  */
 package com.taotao.cloud.sms.yunpian;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,7 +40,12 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @ConditionalOnSmsEnabled
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "YUNPIAN")
 @EnableConfigurationProperties(YunPianProperties.class)
-public class YunPianAutoConfiguration {
+public class YunPianAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(YunPianAutoConfiguration.class, StarterName.SMS_YUNPIAN_STARTER);
+	}
 
 	/**
 	 * 构造云片网发送处理
@@ -50,8 +58,8 @@ public class YunPianAutoConfiguration {
 	@Bean
 	@ConditionalOnBean(SmsSenderLoadBalancer.class)
 	public YunPianSendHandler yunPianSendHandler(YunPianProperties properties,
-												 SmsSenderLoadBalancer loadbalancer,
-												 ApplicationEventPublisher eventPublisher) {
+		SmsSenderLoadBalancer loadbalancer,
+		ApplicationEventPublisher eventPublisher) {
 		YunPianSendHandler handler = new YunPianSendHandler(properties, eventPublisher);
 		loadbalancer.addTarget(handler, true);
 		loadbalancer.setWeight(handler, properties.getWeight());

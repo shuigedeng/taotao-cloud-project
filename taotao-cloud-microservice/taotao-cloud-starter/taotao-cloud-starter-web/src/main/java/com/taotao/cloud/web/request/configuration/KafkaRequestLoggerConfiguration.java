@@ -32,7 +32,7 @@ public class KafkaRequestLoggerConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(KafkaRequestLoggerConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(KafkaRequestLoggerConfiguration.class, StarterName.LOGGER_STARTER);
 	}
 
 	@Bean

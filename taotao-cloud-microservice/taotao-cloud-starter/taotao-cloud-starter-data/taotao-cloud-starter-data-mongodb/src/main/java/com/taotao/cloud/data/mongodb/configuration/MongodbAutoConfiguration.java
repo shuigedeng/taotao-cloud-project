@@ -60,7 +60,7 @@ public class MongodbAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(MongodbAutoConfiguration.class, StarterName.MONGODB_STARTER);
+		LogUtils.started(MongodbAutoConfiguration.class, StarterName.DATA_MONGODB_STARTER);
 	}
 
 	@Primary

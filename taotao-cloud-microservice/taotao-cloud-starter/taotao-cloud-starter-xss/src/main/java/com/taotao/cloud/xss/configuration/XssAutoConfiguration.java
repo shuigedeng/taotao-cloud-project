@@ -16,7 +16,12 @@
 
 package com.taotao.cloud.xss.configuration;
 
+import static com.taotao.cloud.xss.filter.XssFilter.IGNORE_PARAM_VALUE;
+import static com.taotao.cloud.xss.filter.XssFilter.IGNORE_PATH;
+
 import cn.hutool.core.collection.CollUtil;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.xss.filter.XssFilter;
 import com.taotao.cloud.xss.filter.XssHttpServletFilter;
 import com.taotao.cloud.xss.interceptor.XssCleanInterceptor;
@@ -26,6 +31,10 @@ import com.taotao.cloud.xss.support.FormXssClean;
 import com.taotao.cloud.xss.support.JacksonXssClean;
 import com.taotao.cloud.xss.support.XssCleaner;
 import com.taotao.cloud.xss.support.XssStringJsonDeserializer;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -35,13 +44,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static com.taotao.cloud.xss.filter.XssFilter.IGNORE_PARAM_VALUE;
-import static com.taotao.cloud.xss.filter.XssFilter.IGNORE_PATH;
 
 /**
  * jackson xss 配置
@@ -53,7 +55,12 @@ import static com.taotao.cloud.xss.filter.XssFilter.IGNORE_PATH;
 @AutoConfiguration
 @EnableConfigurationProperties({XssProperties.class})
 @ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true")
-public class XssAutoConfiguration implements WebMvcConfigurer {
+public class XssAutoConfiguration implements WebMvcConfigurer, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(XssAutoConfiguration.class, StarterName.XSS_STARTER);
+	}
 
 	private final XssProperties xssProperties;
 
@@ -73,7 +80,8 @@ public class XssAutoConfiguration implements WebMvcConfigurer {
 
 	// 配置跨站攻击 反序列化处理器
 	@Bean
-	public Jackson2ObjectMapperBuilderCustomizer xssJacksonCustomizer(XssProperties properties, XssCleaner xssCleaner) {
+	public Jackson2ObjectMapperBuilderCustomizer xssJacksonCustomizer(XssProperties properties,
+		XssCleaner xssCleaner) {
 		JacksonXssClean xssClean = new JacksonXssClean(properties, xssCleaner);
 		return builder -> {
 			builder.deserializerByType(String.class, xssClean);
@@ -114,7 +122,8 @@ public class XssAutoConfiguration implements WebMvcConfigurer {
 
 		Map<String, String> initParameters = new HashMap<>(4);
 		initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
-		initParameters.put(IGNORE_PARAM_VALUE, CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
+		initParameters.put(IGNORE_PARAM_VALUE,
+			CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
 		filterRegistration.setInitParameters(initParameters);
 		return filterRegistration;
 	}

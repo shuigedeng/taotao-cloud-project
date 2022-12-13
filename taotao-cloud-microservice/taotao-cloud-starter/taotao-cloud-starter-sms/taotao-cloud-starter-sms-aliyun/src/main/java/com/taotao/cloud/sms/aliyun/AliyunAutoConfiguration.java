@@ -13,10 +13,13 @@
 package com.taotao.cloud.sms.aliyun;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -38,7 +41,12 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @ConditionalOnSmsEnabled
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "aliyun")
 @EnableConfigurationProperties(AliyunProperties.class)
-public class AliyunAutoConfiguration {
+public class AliyunAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(AliyunAutoConfiguration.class, StarterName.SMS_ALIYUN_STARTER);
+	}
 
 	/**
 	 * 构造阿里云发送处理
@@ -52,9 +60,9 @@ public class AliyunAutoConfiguration {
 	@Bean
 	@ConditionalOnBean(SmsSenderLoadBalancer.class)
 	public AliyunSendHandler aliyunSendHandler(AliyunProperties properties,
-											   ObjectMapper objectMapper,
-											   SmsSenderLoadBalancer loadbalancer,
-											   ApplicationEventPublisher eventPublisher) throws Exception {
+		ObjectMapper objectMapper,
+		SmsSenderLoadBalancer loadbalancer,
+		ApplicationEventPublisher eventPublisher) throws Exception {
 		AliyunSendHandler handler = new AliyunSendHandler(properties, eventPublisher, objectMapper);
 		loadbalancer.addTarget(handler, true);
 		loadbalancer.setWeight(handler, properties.getWeight());

@@ -66,6 +66,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class MybatisPlusAutoConfiguration implements InitializingBean {
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(MybatisPlusAutoConfiguration.class, StarterName.DATA_MYBATIS_PLUS_STARTER);
+	}
+
 	private final TenantProperties tenantProperties;
 	private final MybatisPlusAutoFillProperties autoFillProperties;
 	private final MybatisPlusProperties mybatisPlusProperties;
@@ -83,10 +88,6 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		this.mybatisPlusProperties = mybatisPlusProperties;
 	}
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(MybatisPlusAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
-	}
 
 	/**
 	 * sql 注入配置

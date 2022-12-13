@@ -40,7 +40,7 @@ public class LocalConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(LocalConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(LocalConfiguration.class, StarterName.OSS_LOCAL_STARTER);
 	}
 
 	@Bean

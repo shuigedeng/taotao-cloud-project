@@ -25,7 +25,7 @@ public class LoggerRequestLoggerConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(LoggerRequestLoggerConfiguration.class, StarterName.LOG_STARTER);
+		LogUtils.started(LoggerRequestLoggerConfiguration.class, StarterName.LOGGER_STARTER);
 	}
 
 	@Bean

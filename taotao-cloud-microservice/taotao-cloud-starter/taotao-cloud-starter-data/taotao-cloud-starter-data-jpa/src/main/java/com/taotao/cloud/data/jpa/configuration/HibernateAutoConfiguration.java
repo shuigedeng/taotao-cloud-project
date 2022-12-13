@@ -79,7 +79,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(HibernateAutoConfiguration.class, StarterName.JPA_STARTER);
+		LogUtils.started(HibernateAutoConfiguration.class, StarterName.DATA_JPA_STARTER);
 	}
 
 	private final JpaProperties jpaProperties;
@@ -168,7 +168,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtils.started(HibernateListener.class, StarterName.JPA_STARTER);
+			LogUtils.started(HibernateListener.class, StarterName.DATA_JPA_STARTER);
 		}
 
 		@PersistenceUnit

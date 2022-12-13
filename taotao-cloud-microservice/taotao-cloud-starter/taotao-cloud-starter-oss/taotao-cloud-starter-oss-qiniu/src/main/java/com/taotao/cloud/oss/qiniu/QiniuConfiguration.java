@@ -45,7 +45,7 @@ public class QiniuConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(QiniuConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(QiniuConfiguration.class, StarterName.SMS_QINIU_STARTER);
 	}
 
 	private final QiniuProperties properties;
@@ -111,7 +111,7 @@ public class QiniuConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean
 	public UploadFileService fileUpload(UploadManager uploadManager, BucketManager bucketManager,
-										Auth auth) {
+		Auth auth) {
 		return new QiniuUploadFileServiceImpl(uploadManager, bucketManager, auth, properties);
 	}
 

@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.openapi.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.openapi.properties.OpenApiProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -36,6 +38,6 @@ public class OpenAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-
+		LogUtils.started(OpenAutoConfiguration.class, StarterName.OPENAPI_STARTER);
 	}
 }

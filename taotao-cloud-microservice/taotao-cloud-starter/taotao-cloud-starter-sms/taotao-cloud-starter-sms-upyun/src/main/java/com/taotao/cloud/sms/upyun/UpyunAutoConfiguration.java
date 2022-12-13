@@ -13,10 +13,13 @@
 package com.taotao.cloud.sms.upyun;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.condition.ConditionalOnSmsEnabled;
 import com.taotao.cloud.sms.common.configuration.SmsAutoConfiguration;
 import com.taotao.cloud.sms.common.loadbalancer.SmsSenderLoadBalancer;
 import com.taotao.cloud.sms.common.properties.SmsProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -39,7 +42,12 @@ import org.springframework.web.client.RestTemplate;
 @ConditionalOnSmsEnabled
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "UPYUN")
 @EnableConfigurationProperties(UpyunProperties.class)
-public class UpyunAutoConfiguration {
+public class UpyunAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(UpyunAutoConfiguration.class, StarterName.SMS_UPYUN_STARTER);
+	}
 
 	/**
 	 * 构造又拍云发送处理
@@ -54,8 +62,8 @@ public class UpyunAutoConfiguration {
 	@Bean
 	@ConditionalOnBean(SmsSenderLoadBalancer.class)
 	public UpyunSendHandler upyunSendHandler(UpyunProperties properties, ObjectMapper objectMapper,
-                                             SmsSenderLoadBalancer loadbalancer, ApplicationEventPublisher eventPublisher,
-                                             RestTemplate restTemplate) {
+		SmsSenderLoadBalancer loadbalancer, ApplicationEventPublisher eventPublisher,
+		RestTemplate restTemplate) {
 		UpyunSendHandler handler = new UpyunSendHandler(properties, eventPublisher, objectMapper,
 			restTemplate);
 		loadbalancer.addTarget(handler, true);

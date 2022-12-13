@@ -45,19 +45,19 @@ public class RabbitMQAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RabbitMQAutoConfiguration.class, StarterName.RABBITMQ_STARTER);
+		LogUtils.started(RabbitMQAutoConfiguration.class, StarterName.MQ_RABBITMQ_STARTER);
 	}
 
 	@Bean
 	public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-		LogUtils.started(RabbitTemplate.class, StarterName.RABBITMQ_STARTER);
+		LogUtils.started(RabbitTemplate.class, StarterName.MQ_RABBITMQ_STARTER);
 		return new RabbitTemplate(connectionFactory);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public ConnectionFactory connectionFactory(RabbitMQProperties rabbitMqProperties) {
-		LogUtils.started(ConnectionFactory.class, StarterName.RABBITMQ_STARTER);
+		LogUtils.started(ConnectionFactory.class, StarterName.MQ_RABBITMQ_STARTER);
 		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
 		connectionFactory.setAddresses(rabbitMqProperties.getAddresses());
 		connectionFactory.setUsername(rabbitMqProperties.getUsername());
@@ -70,7 +70,7 @@ public class RabbitMQAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean
 	public FastBuildRabbitMqProducer fastRabbitMqProducer(ConnectionFactory connectionFactory) {
-		LogUtils.started(FastBuildRabbitMqProducer.class, StarterName.RABBITMQ_STARTER);
+		LogUtils.started(FastBuildRabbitMqProducer.class, StarterName.MQ_RABBITMQ_STARTER);
 		return new FastBuildRabbitMqProducer(connectionFactory);
 	}
 }

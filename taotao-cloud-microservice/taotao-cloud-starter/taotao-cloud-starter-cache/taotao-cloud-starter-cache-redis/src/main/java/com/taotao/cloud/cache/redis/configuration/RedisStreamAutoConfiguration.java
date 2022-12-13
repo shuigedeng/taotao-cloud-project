@@ -26,6 +26,7 @@ import com.taotao.cloud.common.model.CharPool;
 import com.taotao.cloud.common.utils.io.NetUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import java.time.Duration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -42,8 +43,6 @@ import org.springframework.data.redis.stream.StreamMessageListenerContainer;
 import org.springframework.data.redis.stream.StreamMessageListenerContainer.StreamMessageListenerContainerOptions;
 import org.springframework.util.ErrorHandler;
 
-import java.time.Duration;
-
 /**
  * redis Stream 配置
  *
@@ -57,7 +56,7 @@ public class RedisStreamAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(RedisStreamAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtils.started(RedisStreamAutoConfiguration.class, StarterName.CACHE_REDIS_STARTER);
 	}
 
 	@Bean

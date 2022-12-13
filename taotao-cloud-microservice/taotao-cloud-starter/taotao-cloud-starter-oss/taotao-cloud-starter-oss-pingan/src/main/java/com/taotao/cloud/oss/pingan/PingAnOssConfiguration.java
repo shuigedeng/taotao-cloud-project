@@ -11,6 +11,7 @@ import com.taotao.cloud.oss.common.condition.ConditionalOnOssEnabled;
 import com.taotao.cloud.oss.common.exception.OssException;
 import com.taotao.cloud.oss.common.propeties.OssProperties;
 import com.taotao.cloud.oss.common.service.StandardOssClient;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -18,8 +19,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Map;
 
 /**
  * 平安oss配置
@@ -36,81 +35,89 @@ public class PingAnOssConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(PingAnOssConfiguration.class, StarterName.OSS_STARTER);
+		LogUtils.started(PingAnOssConfiguration.class, StarterName.OSS_PINGAN_STARTER);
 	}
 
-    public static final String DEFAULT_BEAN_NAME = "pingAnOssClient";
+	public static final String DEFAULT_BEAN_NAME = "pingAnOssClient";
 
-    @Autowired
-    private PingAnOssProperties pingAnOssProperties;
+	@Autowired
+	private PingAnOssProperties pingAnOssProperties;
 
-    @Bean
+	@Bean
 	@ConditionalOnMissingBean
-    public StandardOssClient pingAnOssClient() {
-        Map<String, PingAnOssConfig> ossConfigMap = pingAnOssProperties.getOssConfig();
-        if (ossConfigMap.isEmpty()) {
-            SpringUtil.registerBean(DEFAULT_BEAN_NAME, pingAnOssClient(pingAnOssProperties));
-        } else {
-            String userAgent = pingAnOssProperties.getUserAgent();
-            String obsUrl = pingAnOssProperties.getObsUrl();
-            String obsAccessKey = pingAnOssProperties.getObsAccessKey();
-            String obsSecret = pingAnOssProperties.getObsSecret();
-            String domainName = pingAnOssProperties.getDomainName();
-            ossConfigMap.forEach((name, ossConfig) -> {
-                if (ObjectUtil.isEmpty(ossConfig.getUserAgent())) {
-                    ossConfig.setUserAgent(userAgent);
-                }
-                if (ObjectUtil.isEmpty(ossConfig.getObsUrl())) {
-                    ossConfig.setObsUrl(obsUrl);
-                }
-                if (ObjectUtil.isEmpty(ossConfig.getObsAccessKey())) {
-                    ossConfig.setObsAccessKey(obsAccessKey);
-                }
-                if (ObjectUtil.isEmpty(ossConfig.getObsSecret())) {
-                    ossConfig.setObsSecret(obsSecret);
-                }
-                if (ObjectUtil.isEmpty(ossConfig.getDomainName())) {
-                    ossConfig.setDomainName(domainName);
-                }
-                SpringUtil.registerBean(name, pingAnOssClient(ossConfig));
-            });
-        }
-        return null;
-    }
+	public StandardOssClient pingAnOssClient() {
+		Map<String, PingAnOssConfig> ossConfigMap = pingAnOssProperties.getOssConfig();
+		if (ossConfigMap.isEmpty()) {
+			SpringUtil.registerBean(DEFAULT_BEAN_NAME, pingAnOssClient(pingAnOssProperties));
+		} else {
+			String userAgent = pingAnOssProperties.getUserAgent();
+			String obsUrl = pingAnOssProperties.getObsUrl();
+			String obsAccessKey = pingAnOssProperties.getObsAccessKey();
+			String obsSecret = pingAnOssProperties.getObsSecret();
+			String domainName = pingAnOssProperties.getDomainName();
+			ossConfigMap.forEach((name, ossConfig) -> {
+				if (ObjectUtil.isEmpty(ossConfig.getUserAgent())) {
+					ossConfig.setUserAgent(userAgent);
+				}
+				if (ObjectUtil.isEmpty(ossConfig.getObsUrl())) {
+					ossConfig.setObsUrl(obsUrl);
+				}
+				if (ObjectUtil.isEmpty(ossConfig.getObsAccessKey())) {
+					ossConfig.setObsAccessKey(obsAccessKey);
+				}
+				if (ObjectUtil.isEmpty(ossConfig.getObsSecret())) {
+					ossConfig.setObsSecret(obsSecret);
+				}
+				if (ObjectUtil.isEmpty(ossConfig.getDomainName())) {
+					ossConfig.setDomainName(domainName);
+				}
+				SpringUtil.registerBean(name, pingAnOssClient(ossConfig));
+			});
+		}
+		return null;
+	}
 
-    public StandardOssClient pingAnOssClient(PingAnOssConfig pingAnOssConfig) {
-        return new PingAnOssClient(pingAnOssConfig, radosgwService(pingAnOssConfig));
-    }
+	public StandardOssClient pingAnOssClient(PingAnOssConfig pingAnOssConfig) {
+		return new PingAnOssClient(pingAnOssConfig, radosgwService(pingAnOssConfig));
+	}
 
-    public RadosgwService radosgwService(PingAnOssConfig pingAnOssConfig) {
-        ObsClientConfig oc = new ObsClientConfig() {
-            public String getUserAgent() {
-                return pingAnOssConfig.getUserAgent();
-            }
-            public String getObsUrl() {
-                return pingAnOssConfig.getObsUrl();
-            }
-            public String getObsAccessKey() {
-                return pingAnOssConfig.getObsAccessKey();
-            }
-            public String getObsSecret() {
-                return pingAnOssConfig.getObsSecret();
-            }
-            @Override
-            public boolean isRepresentPathInKey() {
-                return pingAnOssConfig.getRepresentPathInKey();
-            }
-        };
+	public RadosgwService radosgwService(PingAnOssConfig pingAnOssConfig) {
+		ObsClientConfig oc = new ObsClientConfig() {
+			@Override
+			public String getUserAgent() {
+				return pingAnOssConfig.getUserAgent();
+			}
 
-        try {
-            String domainName = pingAnOssConfig.getDomainName();
-            if (ObjectUtil.isEmpty(domainName)) {
-                return RadosgwServiceFactory.getFromConfigObject(oc);
-            } else {
-                return RadosgwServiceFactory.getFromConfigObject(oc, domainName);
-            }
-        } catch (Exception e) {
-            throw new OssException(e);
-        }
-    }
+			@Override
+			public String getObsUrl() {
+				return pingAnOssConfig.getObsUrl();
+			}
+
+			@Override
+			public String getObsAccessKey() {
+				return pingAnOssConfig.getObsAccessKey();
+			}
+
+			@Override
+			public String getObsSecret() {
+				return pingAnOssConfig.getObsSecret();
+			}
+
+			@Override
+			public boolean isRepresentPathInKey() {
+				return pingAnOssConfig.getRepresentPathInKey();
+			}
+		};
+
+		try {
+			String domainName = pingAnOssConfig.getDomainName();
+			if (ObjectUtil.isEmpty(domainName)) {
+				return RadosgwServiceFactory.getFromConfigObject(oc);
+			} else {
+				return RadosgwServiceFactory.getFromConfigObject(oc, domainName);
+			}
+		} catch (Exception e) {
+			throw new OssException(e);
+		}
+	}
 }
