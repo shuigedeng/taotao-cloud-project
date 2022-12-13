@@ -22,6 +22,7 @@ import com.taotao.cloud.security.justauth.properties.JustAuthProperties;
 import com.taotao.cloud.security.justauth.support.cache.RedisStateCache;
 import me.zhyd.oauth.cache.AuthDefaultStateCache;
 import me.zhyd.oauth.cache.AuthStateCache;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -37,11 +38,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * <p>
  * JustAuth 缓存装配类，{@link JustAuthAutoConfiguration.AuthStateCacheAutoConfiguration}
  * </p>
- *
- * @author yangkai.shen
- * @date Created in 2019/8/31 12:00
  */
-abstract class JustAuthStateCacheConfiguration {
+public class JustAuthStateCacheConfiguration {
 
 	/**
 	 * Redis 缓存
@@ -50,9 +48,10 @@ abstract class JustAuthStateCacheConfiguration {
 	@ConditionalOnMissingBean(AuthStateCache.class)
 	@AutoConfigureBefore(RedisAutoConfiguration.class)
 	@ConditionalOnProperty(name = "justauth.cache.type", havingValue = "redis", matchIfMissing = true)
-	static class Redis {
+	public static class Redis implements InitializingBean {
 
-		static {
+		@Override
+		public void afterPropertiesSet() throws Exception {
 			LogUtils.debug("JustAuth 使用 Redis 缓存存储 state 数据");
 		}
 
@@ -79,9 +78,10 @@ abstract class JustAuthStateCacheConfiguration {
 	 */
 	@ConditionalOnMissingBean(AuthStateCache.class)
 	@ConditionalOnProperty(name = "justauth.cache.type", havingValue = "default", matchIfMissing = true)
-	static class Default {
+	public static class Default implements InitializingBean {
 
-		static {
+		@Override
+		public void afterPropertiesSet() throws Exception {
 			LogUtils.debug("JustAuth 使用 默认缓存存储 state 数据");
 		}
 
@@ -95,9 +95,10 @@ abstract class JustAuthStateCacheConfiguration {
 	 * 默认缓存
 	 */
 	@ConditionalOnProperty(name = "justauth.cache.type", havingValue = "custom")
-	static class Custom {
+	public static class Custom implements InitializingBean {
 
-		static {
+		@Override
+		public void afterPropertiesSet() throws Exception {
 			LogUtils.debug("JustAuth 使用 自定义缓存存储 state 数据");
 		}
 

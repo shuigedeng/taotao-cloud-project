@@ -18,6 +18,9 @@ package com.taotao.cloud.alibaba.nacos.configuration;
 import com.taotao.cloud.alibaba.nacos.listener.NacosConfigListener;
 import com.taotao.cloud.alibaba.nacos.listener.NacosServiceListener;
 import com.taotao.cloud.alibaba.nacos.properties.NacosProperties;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -34,6 +37,11 @@ import org.springframework.context.annotation.Import;
 @Import({NacosConfigListener.class, NacosServiceListener.class})
 @EnableConfigurationProperties({NacosProperties.class})
 @ConditionalOnProperty(prefix = NacosProperties.PREFIX, name = "enabled", havingValue = "true")
-public class NacosListenerAutoConfiguration {
+public class NacosListenerAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(NacosListenerAutoConfiguration.class, StarterName.ALIBABA_NACOS_STARTER);
+	}
 
 }

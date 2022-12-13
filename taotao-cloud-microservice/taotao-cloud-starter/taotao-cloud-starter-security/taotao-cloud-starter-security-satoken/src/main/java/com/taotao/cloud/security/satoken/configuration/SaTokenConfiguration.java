@@ -10,7 +10,10 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.strategy.SaStrategy;
 import cn.dev33.satoken.util.SaFoxUtil;
 import cn.dev33.satoken.util.SaResult;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.satoken.ignore.router.IgnoreSaRouteFunction;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
@@ -21,7 +24,6 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 /**
  * [Sa-Token 权限认证] 配置类
  *
@@ -31,7 +33,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @Import({MySaTokenListener.class, SaLogForSlf4j.class, StpInterfaceImpl.class, StpUserUtil.class})
 //GlobalException.class, NotFoundHandle.class})
-public class SaTokenConfiguration implements WebMvcConfigurer {
+public class SaTokenConfiguration implements WebMvcConfigurer, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtils.started(SaTokenConfiguration.class, StarterName.SATOKEN_STARTER);
+	}
 
 	/**
 	 * 注册 Sa-Token 拦截器打开注解鉴权功能

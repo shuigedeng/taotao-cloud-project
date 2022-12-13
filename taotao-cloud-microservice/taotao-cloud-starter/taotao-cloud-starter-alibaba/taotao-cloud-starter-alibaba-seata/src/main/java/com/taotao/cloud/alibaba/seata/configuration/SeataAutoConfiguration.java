@@ -56,7 +56,7 @@ public class SeataAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtils.started(SeataAutoConfiguration.class, StarterName.SEATA_STARTER);
+		LogUtils.started(SeataAutoConfiguration.class, StarterName.ALIBABA_SEATA_STARTER);
 	}
 
 	@Bean

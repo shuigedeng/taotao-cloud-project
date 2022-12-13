@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.constant;
 
 /**
- * starter 名称常量 
+ * starter 名称常量
  *
  * @author shuigedeng
  * @version 2021.9
@@ -44,6 +44,9 @@ public final class StarterName {
 	public static final String ELASTICSEARCH_STARTER = "taotao-cloud-starter-elasticsearch";
 	public static final String ELK_STARTER = "taotao-cloud-starter-elk";
 	public static final String FEIGN_STARTER = "taotao-cloud-starter-feign";
+	public static final String IP2REGION_STARTER = "taotao-cloud-starter-ip2region";
+	public static final String JUSTAUTH_STARTER = "taotao-cloud-starter-justauth";
+	public static final String SATOKEN_STARTER = "taotao-cloud-starter-satoken";
 	public static final String ENCRYPT_STARTER = "taotao-cloud-starter-encrypt";
 	public static final String OSS_STARTER = "taotao-cloud-starter-oss";
 	public static final String MONITOR_STARTER = "taotao-cloud-starter-monitor";
@@ -64,9 +67,12 @@ public final class StarterName {
 	public static final String REDIS_STARTER = "taotao-cloud-starter-redis";
 	public static final String ROCKETMQ_STARTER = "taotao-cloud-starter-rocketmq";
 	public static final String RXJAVA_STARTER = "taotao-cloud-starter-rxjava";
-	public static final String SEATA_STARTER = "taotao-cloud-starter-seata";
+
+	public static final String ALIBABA_NACOS_STARTER = "taotao-cloud-starter-alibaba-nacos";
+	public static final String ALIBABA_SEATA_STARTER = "taotao-cloud-starter-alibaba-seata";
+	public static final String ALIBABA_SENTINEL_STARTER = "taotao-cloud-starter-alibaba-sentinel";
+
 	public static final String SECURITY_STARTER = "taotao-cloud-starter-security";
-	public static final String SENTINEL_STARTER = "taotao-cloud-starter-sentinel";
 	public static final String SHARDINGSPHERE_STARTER = "taotao-cloud-starter-shardingsphere";
 	public static final String SMS_STARTER = "taotao-cloud-starter-sms";
 	public static final String WEB_STARTER = "taotao-cloud-starter-web";
