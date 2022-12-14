@@ -4,7 +4,7 @@ on:
   push:
     #paths:
     #  - 'taotao-cloud-microservice/**'
-    branches: [ dev ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -41,63 +41,6 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: show secrets1
-        run: echo ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}} | base64
-      #      - name: show secrets2
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets3
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets4
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets5
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets6
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets7
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets8
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets9
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets10
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets11
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets12
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets13
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-      #      - name: show secrets
-      #        run: echo ${{secrets.ACCESS_TOKEN}} | base64
-
-
-
       - name: Show Github
         run: echo "$GITHUB_CONTEXT"
         env:
@@ -113,10 +56,10 @@ jobs:
           echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
           echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
-      - name: Build And Publish Dependencies To Local
-        run: |
-          cd ${{ github.workspace }}/taotao-cloud-dependencies
-          gradle publishToMavenLocal 
+      #- name: Build And Publish Dependencies To Local
+      #  run: |
+      #    cd ${{ github.workspace }}/taotao-cloud-dependencies
+      #    gradle publishToMavenLocal
 
       - name: Gradle BootJar taotao-cloud-monitor
         uses: gradle/gradle-build-action@v2
