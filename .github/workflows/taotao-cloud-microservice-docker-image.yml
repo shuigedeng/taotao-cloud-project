@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'taotao-cloud-microservice/**'
-    branches: [ master ]
+    branches: [ dev ]
   pull_request:
     branches: [ master ]
 
@@ -22,7 +22,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
+    #if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -40,6 +40,11 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+
+      - name: show secrets
+        run: echo "SECRETS_CONTEXT"
+        env:
+          SECRETS_CONTEXT: ${{ toJSON(secrets) }}
 
       - name: Show Github
         run: echo "$GITHUB_CONTEXT"
