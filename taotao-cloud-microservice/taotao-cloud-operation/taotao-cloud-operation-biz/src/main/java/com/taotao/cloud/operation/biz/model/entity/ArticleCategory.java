@@ -3,6 +3,10 @@ package com.taotao.cloud.operation.biz.model.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.operation.api.enums.ArticleCategoryEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,11 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
 
 /**
  * 文章分类

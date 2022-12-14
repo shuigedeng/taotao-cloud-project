@@ -9,17 +9,17 @@ import cn.binarywang.wx.miniapp.message.WxMaMessageHandler;
 import cn.binarywang.wx.miniapp.message.WxMaMessageRouter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import jakarta.annotation.PostConstruct;
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import javax.annotation.PostConstruct;
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableConfigurationProperties(WxMaProperties.class)
 public class WxMaConfiguration {
+
 	private final WxMaProperties properties;
 
 	private static final Map<String, WxMaMessageRouter> routers = Maps.newHashMap();
@@ -41,7 +42,8 @@ public class WxMaConfiguration {
 	public static WxMaService getMaService(String appId) {
 		WxMaService wxService = maServices.get(appId);
 		if (wxService == null) {
-			throw new IllegalArgumentException(String.format("未找到对应appId=[%s]的配置，请核实！", appId));
+			throw new IllegalArgumentException(
+					String.format("未找到对应appId=[%s]的配置，请核实！", appId));
 		}
 
 		return wxService;
@@ -55,7 +57,8 @@ public class WxMaConfiguration {
 	public void init() {
 		List<WxMaProperties.Config> configs = this.properties.getConfigs();
 		if (configs == null) {
-			throw new RuntimeException("大哥，拜托先看下项目首页的说明（readme文件），添加下相关配置，注意别配错了！");
+			throw new RuntimeException(
+					"大哥，拜托先看下项目首页的说明（readme文件），添加下相关配置，注意别配错了！");
 		}
 
 		maServices = configs.stream()
@@ -98,8 +101,9 @@ public class WxMaConfiguration {
 
 	private final WxMaMessageHandler logHandler = (wxMessage, context, service, sessionManager) -> {
 		log.info("收到消息：" + wxMessage.toString());
-		service.getMsgService().sendKefuMsg(WxMaKefuMessage.newTextBuilder().content("收到信息为：" + wxMessage.toJson())
-				.toUser(wxMessage.getFromUser()).build());
+		service.getMsgService().sendKefuMsg(
+				WxMaKefuMessage.newTextBuilder().content("收到信息为：" + wxMessage.toJson())
+						.toUser(wxMessage.getFromUser()).build());
 		return null;
 	};
 

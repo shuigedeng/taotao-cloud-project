@@ -14,9 +14,9 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import org.springframework.beans.BeanUtils;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

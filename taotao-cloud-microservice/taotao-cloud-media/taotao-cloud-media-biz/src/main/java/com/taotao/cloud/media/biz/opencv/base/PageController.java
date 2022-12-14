@@ -5,7 +5,7 @@ import com.taotao.cloud.media.biz.opencv.common.utils.Constants;
 import com.taotao.cloud.media.biz.opencv.common.utils.OpenCVUtil;
 import java.io.File;
 import java.util.Vector;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.opencv.core.Core;
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController extends BaseController {
 
 	private static final Logger logger = LoggerFactory.getLogger(
-		PageController.class);
+			PageController.class);
 
 	/**
 	 * 答题卡识别优化 创建者 Songer 创建时间	2018年3月23日
@@ -127,7 +127,7 @@ public class PageController extends BaseController {
 			if (contArea > 1200) {// 此处是根据轮廓面积
 				// 红线画出识别的轮廓
 				Core.rectangle(image, new Point(r.x, r.y), new Point(r.x + r.width, r.y
-					+ r.height), new Scalar(0, 0, 255), 2);
+						+ r.height), new Scalar(0, 0, 255), 2);
 				pageSize++;
 			}
 		}
@@ -168,8 +168,8 @@ public class PageController extends BaseController {
 		MinMaxLocResult minmaxLoc = Core.minMaxLoc(destination);
 		Point matchLoc = minmaxLoc.maxLoc;
 		Core.rectangle(pageimage, matchLoc,
-			new Point(matchLoc.x + matchtemp.cols(), matchLoc.y + matchtemp.rows()),
-			new Scalar(0), 2);
+				new Point(matchLoc.x + matchtemp.cols(), matchLoc.y + matchtemp.rows()),
+				new Scalar(0), 2);
 		System.out.println(matchLoc.x + "   " + matchLoc.y);
 		pageSize = getPage(matchLoc.x) + "";
 		String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "page1.png";
@@ -211,7 +211,7 @@ public class PageController extends BaseController {
 		Vector<MatOfPoint> contours = new Vector<MatOfPoint>();
 		Mat rsmat = new Mat();
 		Imgproc.findContours(markmat, contours, rsmat, Imgproc.RETR_TREE,
-			Imgproc.CHAIN_APPROX_SIMPLE, new Point());
+				Imgproc.CHAIN_APPROX_SIMPLE, new Point());
 		MatOfPoint markMop = new MatOfPoint();
 		Mat result = new Mat(markmat.size(), CvType.CV_8U, new Scalar(255));
 		Imgproc.drawContours(result, contours, 0, new Scalar(0), 1);

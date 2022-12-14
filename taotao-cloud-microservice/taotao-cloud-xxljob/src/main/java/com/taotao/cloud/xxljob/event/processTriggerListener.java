@@ -25,6 +25,10 @@ import com.taotao.cloud.xxljob.core.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.core.model.XxlJobLog;
 import com.xxl.job.core.biz.model.ReturnT;
+import jakarta.mail.internet.MimeMessage;
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
@@ -32,11 +36,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-
-import javax.mail.internet.MimeMessage;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 进程触发事件

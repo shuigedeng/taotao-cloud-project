@@ -2,8 +2,8 @@ package com.taotao.cloud.workflow.biz.form.model.finishedproduct;
 
 
 import java.util.List;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**

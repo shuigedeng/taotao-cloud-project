@@ -3,6 +3,9 @@ package com.taotao.cloud.sa.just.biz.just;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.security.justauth.factory.AuthRequestFactory;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthCallback;
@@ -14,10 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 @Slf4j
 @RestController

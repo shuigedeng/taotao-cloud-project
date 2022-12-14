@@ -155,6 +155,9 @@ allprojects {
     /* java编译的时候缺省状态下会因为中文字符而失败 */
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
+    compileJava.options.compilerArgs.add '-parameters'
+    compileTestJava.options.compilerArgs.add '-parameters'
+
     repositories {
         mavenLocal()
         mavenCentral()

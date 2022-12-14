@@ -16,32 +16,34 @@
 package com.taotao.cloud.payment.biz.jeepay.pay.service;
 
 import com.taotao.cloud.payment.biz.jeepay.core.exception.BizException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
-import java.util.Set;
-
 /*
-* 通用 Validator
-*
-* @author terrfly
-* @site https://www.jeequan.com
-* @date 2021/6/8 17:47
-*/
+ * 通用 Validator
+ *
+ * @author terrfly
+ * @site https://www.jeequan.com
+ * @date 2021/6/8 17:47
+ */
 @Service
 public class ValidateService {
 
-    @Autowired private Validator validator;
+	@Autowired
+	private Validator validator;
 
-    public void validate(Object obj){
+	public void validate(Object obj) {
 
-        Set<ConstraintViolation<Object>> resultSet = validator.validate(obj);
-        if(resultSet == null || resultSet.isEmpty()){
-            return ;
-        }
-        resultSet.stream().forEach(item -> {throw new BizException(item.getMessage());});
-    }
+		Set<ConstraintViolation<Object>> resultSet = validator.validate(obj);
+		if (resultSet == null || resultSet.isEmpty()) {
+			return;
+		}
+		resultSet.stream().forEach(item -> {
+			throw new BizException(item.getMessage());
+		});
+	}
 
 }

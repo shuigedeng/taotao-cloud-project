@@ -1,4 +1,4 @@
-//
+package com.taotao.cloud.auth.api.compliance.definition;//
 // package com.taotao.cloud.auth.api.compliance.definition;
 //
 // import cn.herodotus.engine.web.core.definition.ApplicationStrategyEvent;

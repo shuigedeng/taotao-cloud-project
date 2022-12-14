@@ -1,4 +1,4 @@
-// package com.taotao.cloud.sys.biz.controller;
+package com.taotao.cloud.member.biz.connect;// package com.taotao.cloud.sys.biz.controller;
 //
 // import com.taotao.cloud.common.model.PageResult;
 // import com.taotao.cloud.common.model.Result;

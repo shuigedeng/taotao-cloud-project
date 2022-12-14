@@ -11,7 +11,7 @@ import com.taotao.cloud.payment.biz.entity.RefundLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 退款支持

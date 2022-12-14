@@ -6,11 +6,7 @@ server:
     buffer-size: 2048
     direct-buffers: true
 
-portfile: ${user.home}/logs/${spring.application.name}/${spring.application.name}.port
-
 spring:
-  pid:
-    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true

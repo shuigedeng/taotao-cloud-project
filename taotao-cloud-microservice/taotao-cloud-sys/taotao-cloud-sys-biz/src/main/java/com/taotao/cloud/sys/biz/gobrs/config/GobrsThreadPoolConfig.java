@@ -1,27 +1,32 @@
 package com.taotao.cloud.sys.biz.gobrs.config;
 
-import com.gobrs.async.core.threadpool.GobrsAsyncThreadPoolFactory;
-import com.gobrs.async.core.threadpool.GobrsThreadPoolConfiguration;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.gobrs.async.threadpool.GobrsAsyncThreadPoolFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import jakarta.annotation.PostConstruct;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 @Configuration
-public class GobrsThreadPoolConfig extends GobrsThreadPoolConfiguration {
+public class GobrsThreadPoolConfig {
 
-	@Override
-	protected void doInitialize(GobrsAsyncThreadPoolFactory factory) {
-		/**
-		 * 自定义线程池
-		 */
-//        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(300, 500, 30, TimeUnit.SECONDS,
-//                new LinkedBlockingQueue());
+	@Autowired
+	private GobrsAsyncThreadPoolFactory factory;
 
-		ExecutorService executorService = Executors.newCachedThreadPool();
-		factory.setThreadPoolExecutor(executorService);
+	@PostConstruct
+	public void gobrsThreadPoolExecutor() {
+		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(300, 500, 30, TimeUnit.SECONDS,
+			new LinkedBlockingQueue<>(), r -> {
+			Thread t = new Thread(r);
+			t.setName("taotao-cloud-gobrs-threadpool");
+			return t;
+		});
+		factory.setThreadPoolExecutor(threadPoolExecutor);
 	}
 
-//*******************************************实时更新线程池************************************
+	//*******************************************实时更新线程池************************************
 	// @Resource
 	// private NacosConfigService nacosConfigService;
 	//

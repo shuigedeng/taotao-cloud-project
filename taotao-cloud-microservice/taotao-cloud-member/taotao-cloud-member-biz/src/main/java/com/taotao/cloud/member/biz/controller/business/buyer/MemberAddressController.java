@@ -20,14 +20,16 @@ import com.taotao.cloud.common.model.PageParam;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.model.convert.MemberAddressConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
 import com.taotao.cloud.member.biz.service.business.IMemberAddressService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -38,9 +40,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 
 /**
@@ -64,8 +63,10 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<PageResult<MemberAddressVO>> page(@Validated PageParam page) {
-		IPage<MemberAddress> memberAddressPage = memberAddressService.getAddressByMember(page, SecurityUtils.getUserId());
-		return Result.success(PageResult.convertMybatisPage(memberAddressPage, MemberAddressVO.class));
+		IPage<MemberAddress> memberAddressPage = memberAddressService.getAddressByMember(page,
+				SecurityUtils.getUserId());
+		return Result.success(
+				PageResult.convertMybatisPage(memberAddressPage, MemberAddressVO.class));
 	}
 
 	@Operation(summary = "根据ID获取会员收件地址", description = "根据ID获取会员收件地址")
@@ -73,8 +74,8 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberAddressVO> getShippingAddress(
-		@Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空")
-		@PathVariable(value = "id") Long id) {
+			@Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空")
+			@PathVariable(value = "id") Long id) {
 		MemberAddress memberAddress = memberAddressService.getMemberAddress(id);
 		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddress));
 	}
@@ -114,8 +115,8 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delShippingAddressById(
-		@Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空")
-		@PathVariable(value = "id") Long id) {
+			@Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空")
+			@PathVariable(value = "id") Long id) {
 		return Result.success(memberAddressService.removeMemberAddress(id));
 	}
 

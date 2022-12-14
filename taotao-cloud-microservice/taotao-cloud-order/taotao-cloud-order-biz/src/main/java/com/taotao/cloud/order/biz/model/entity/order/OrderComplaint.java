@@ -3,6 +3,13 @@ package com.taotao.cloud.order.biz.model.entity.order;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.io.Serial;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,14 +17,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.io.Serial;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 订单交易投诉表

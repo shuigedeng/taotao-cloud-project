@@ -1,4 +1,4 @@
-//package com.taotao.cloud.member.biz.controller.buyer;
+package com.taotao.cloud.member.biz.controller.business.buyer;//package com.taotao.cloud.member.biz.controller.buyer;
 //
 //import com.taotao.cloud.common.model.Result;
 //import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -9,8 +9,8 @@
 //import com.taotao.cloud.member.biz.service.business.IMemberService;
 //import io.swagger.v3.oas.annotations.tags.Tag;
 //import java.util.Objects;
-//import javax.validation.constraints.NotBlank;
-//import javax.validation.constraints.NotNull;
+//import jakarta.validation.constraints.NotBlank;
+//import jakarta.validation.constraints.NotNull;
 //import lombok.AllArgsConstructor;
 //import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.validation.annotation.Validated;

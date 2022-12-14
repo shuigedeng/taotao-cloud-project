@@ -3,6 +3,11 @@ package com.taotao.cloud.store.biz.model.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.JpaEntityListener;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,12 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
-import java.util.Objects;
 
 /**
  * 店铺自提点

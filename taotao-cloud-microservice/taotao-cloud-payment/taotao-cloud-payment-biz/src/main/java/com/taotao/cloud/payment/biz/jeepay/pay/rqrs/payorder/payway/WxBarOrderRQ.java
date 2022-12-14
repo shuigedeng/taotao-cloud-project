@@ -16,9 +16,8 @@
 package com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.payway;
 
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.UnifiedOrderRQ;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 /*
  * 支付方式： WX_BAR
@@ -30,13 +29,17 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class WxBarOrderRQ extends UnifiedOrderRQ {
 
-    /** 用户 支付条码 **/
-    @NotBlank(message = "支付条码不能为空")
-    private String authCode;
+	/**
+	 * 用户 支付条码
+	 **/
+	@NotBlank(message = "支付条码不能为空")
+	private String authCode;
 
-    /** 构造函数 **/
-    public WxBarOrderRQ(){
-        this.setWayCode(CS.PAY_WAY_CODE.WX_BAR); //默认 wx_bar, 避免validate出现问题
-    }
+	/**
+	 * 构造函数
+	 **/
+	public WxBarOrderRQ() {
+		this.setWayCode(CS.PAY_WAY_CODE.WX_BAR); //默认 wx_bar, 避免validate出现问题
+	}
 
 }

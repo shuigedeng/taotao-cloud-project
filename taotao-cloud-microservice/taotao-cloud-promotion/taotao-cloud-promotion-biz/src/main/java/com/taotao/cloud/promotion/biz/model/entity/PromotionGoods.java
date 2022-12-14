@@ -4,9 +4,15 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
+import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,13 +20,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 促销活动商品实体类
@@ -90,6 +89,7 @@ public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
 
 	/**
 	 * 促销工具类型
+	 *
 	 * @see PromotionTypeEnum
 	 */
 	@Column(name = "promotion_type", columnDefinition = "varchar(255) not null  comment '促销工具类型'")
@@ -97,6 +97,7 @@ public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
 
 	/**
 	 * 商品类型
+	 *
 	 * @see GoodsTypeEnum
 	 */
 	@Column(name = "goods_type", columnDefinition = "varchar(255) not null  comment '商品类型'")
@@ -144,6 +145,7 @@ public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
 
 	/**
 	 * 关联范围类型
+	 *
 	 * @see PromotionsScopeTypeEnum
 	 */
 	@Column(name = "scope_type", columnDefinition = "varchar(255) not null  comment '关联范围类型'")
@@ -179,13 +181,14 @@ public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
 			BeanUtil.copyProperties(kanjiaActivityGoodsDTO.getGoodsSku(), this, "id");
 		}
 	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-			o)) {
+				o)) {
 			return false;
 		}
 		PromotionGoods promotionGoods = (PromotionGoods) o;

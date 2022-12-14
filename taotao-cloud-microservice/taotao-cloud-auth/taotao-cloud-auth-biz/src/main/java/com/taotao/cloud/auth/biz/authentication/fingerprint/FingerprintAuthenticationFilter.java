@@ -1,7 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication.fingerprint;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +18,7 @@ public class FingerprintAuthenticationFilter extends AbstractAuthenticationProce
 	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
-		"/login/fingerprint", "POST");
+			"/login/fingerprint", "POST");
 
 	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
 	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
@@ -39,14 +39,14 @@ public class FingerprintAuthenticationFilter extends AbstractAuthenticationProce
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-		HttpServletResponse response) throws AuthenticationException {
+			HttpServletResponse response) throws AuthenticationException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
-				"Authentication method not supported: " + request.getMethod());
+					"Authentication method not supported: " + request.getMethod());
 		}
 
 		FingerprintAuthenticationToken authRequest = fingerprintAuthenticationTokenConverter.convert(
-			request);
+				request);
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
 		return this.getAuthenticationManager().authenticate(authRequest);
@@ -67,7 +67,7 @@ public class FingerprintAuthenticationFilter extends AbstractAuthenticationProce
 
 
 	protected void setDetails(HttpServletRequest request,
-		FingerprintAuthenticationToken authRequest) {
+			FingerprintAuthenticationToken authRequest) {
 		authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
 	}
 
@@ -82,7 +82,7 @@ public class FingerprintAuthenticationFilter extends AbstractAuthenticationProce
 	}
 
 	public void setConverter(
-		Converter<HttpServletRequest, FingerprintAuthenticationToken> converter) {
+			Converter<HttpServletRequest, FingerprintAuthenticationToken> converter) {
 		Assert.notNull(converter, "Converter must not be null");
 		this.fingerprintAuthenticationTokenConverter = converter;
 	}

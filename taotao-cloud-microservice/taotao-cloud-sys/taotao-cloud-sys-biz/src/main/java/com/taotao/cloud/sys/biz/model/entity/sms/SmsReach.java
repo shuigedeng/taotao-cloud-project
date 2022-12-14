@@ -2,7 +2,11 @@ package com.taotao.cloud.sys.biz.model.entity.sms;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,11 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
 
 
 /**
@@ -50,11 +49,12 @@ public class SmsReach extends BaseSuperEntity<SmsReach, Long> {
 
 	@Column(name = "num", columnDefinition = "varchar(2000) not null comment '预计发送条数'")
 	private String num;
+
 	@Builder
 	public SmsReach(Long id, LocalDateTime createTime, Long createBy,
-		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-		String signName, String smsName, String messageCode, String context, String smsRange,
-		String num) {
+			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+			String signName, String smsName, String messageCode, String context, String smsRange,
+			String num) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.signName = signName;
 		this.smsName = smsName;
@@ -66,7 +66,7 @@ public class SmsReach extends BaseSuperEntity<SmsReach, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

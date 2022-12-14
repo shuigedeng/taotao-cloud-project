@@ -3,21 +3,21 @@ package com.taotao.cloud.wechat.biz.niefy.modules.wx.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import lombok.Data;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 
-import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
-
 /**
  * 公众号账号
- * 
+ *
  * @author niefy
  * @date 2020-06-17 13:56:51
  */
 @Data
 @TableName("wx_account")
 public class WxAccount implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -53,7 +53,7 @@ public class WxAccount implements Serializable {
 	 */
 	private String aesKey;
 
-	public WxMpDefaultConfigImpl toWxMpConfigStorage(){
+	public WxMpDefaultConfigImpl toWxMpConfigStorage() {
 		WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
 		configStorage.setAppId(appid);
 		configStorage.setSecret(secret);

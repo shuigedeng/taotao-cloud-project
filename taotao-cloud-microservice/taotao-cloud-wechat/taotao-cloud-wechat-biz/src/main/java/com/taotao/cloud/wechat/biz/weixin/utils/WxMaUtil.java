@@ -2,7 +2,7 @@ package com.taotao.cloud.wechat.biz.weixin.utils;
 
 import com.joolun.weixin.constant.ConfigConstant;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author www.joolun.com

@@ -10,63 +10,63 @@ import com.platform.modules.topic.domain.ChatTopicReply;
 import com.platform.modules.topic.enums.TopicReplyTypeEnum;
 import com.platform.modules.topic.service.ChatTopicReplyService;
 import com.platform.modules.topic.vo.TopicVo06;
+import java.util.List;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
-import java.util.List;
-
 /**
  * <p>
- * 帖子回复表 服务层实现
- * q3z3
+ * 帖子回复表 服务层实现 q3z3
  * </p>
  */
 @Service("chatTopicReplyService")
-public class ChatTopicReplyServiceImpl extends BaseServiceImpl<ChatTopicReply> implements ChatTopicReplyService {
+public class ChatTopicReplyServiceImpl extends BaseServiceImpl<ChatTopicReply> implements
+		ChatTopicReplyService {
 
-    @Resource
-    private ChatTopicReplyDao chatTopicReplyDao;
+	@Resource
+	private ChatTopicReplyDao chatTopicReplyDao;
 
-    @Autowired
-    public void setBaseDao() {
-        super.setBaseDao(chatTopicReplyDao);
-    }
+	@Autowired
+	public void setBaseDao() {
+		super.setBaseDao(chatTopicReplyDao);
+	}
 
-    @Override
-    public List<ChatTopicReply> queryList(ChatTopicReply t) {
-        List<ChatTopicReply> dataList = chatTopicReplyDao.queryList(t);
-        return dataList;
-    }
+	@Override
+	public List<ChatTopicReply> queryList(ChatTopicReply t) {
+		List<ChatTopicReply> dataList = chatTopicReplyDao.queryList(t);
+		return dataList;
+	}
 
-    @Override
-    public void delByTopic(Long topicId) {
-        chatTopicReplyDao.delete(new QueryWrapper(new ChatTopicReply().setTopicId(topicId)));
-    }
+	@Override
+	public void delByTopic(Long topicId) {
+		chatTopicReplyDao.delete(new QueryWrapper(new ChatTopicReply().setTopicId(topicId)));
+	}
 
-    @Override
-    public List<TopicVo06> queryReplyList(Long topicId) {
-        Long userId = ShiroUtils.getUserId();
-        List<TopicVo06> dataList = chatTopicReplyDao.queryReplyList(userId, topicId);
-        dataList.forEach(e -> {
-            // 是否可以删除
-            e.setCanDeleted(userId.equals(e.getUserId()) ? YesOrNoEnum.YES : YesOrNoEnum.NO);
-            // 纠正注销用户
-            if (StringUtils.isEmpty(e.getPortrait())) {
-                ChatUser chatUser = ChatUser.initUser(null);
-                e.setUserId(chatUser.getUserId());
-                e.setNickName(chatUser.getNickName());
-                e.setPortrait(chatUser.getPortrait());
-            }
-            // 纠正注销用户
-            if (TopicReplyTypeEnum.USER.equals(e.getReplyType()) && StringUtils.isEmpty(e.getToPortrait())) {
-                ChatUser chatUser = ChatUser.initUser(null);
-                e.setToNickName(chatUser.getNickName());
-                e.setToPortrait(chatUser.getPortrait());
-            }
-        });
-        return dataList;
-    }
+	@Override
+	public List<TopicVo06> queryReplyList(Long topicId) {
+		Long userId = ShiroUtils.getUserId();
+		List<TopicVo06> dataList = chatTopicReplyDao.queryReplyList(userId, topicId);
+		dataList.forEach(e -> {
+			// 是否可以删除
+			e.setCanDeleted(userId.equals(e.getUserId()) ? YesOrNoEnum.YES : YesOrNoEnum.NO);
+			// 纠正注销用户
+			if (StringUtils.isEmpty(e.getPortrait())) {
+				ChatUser chatUser = ChatUser.initUser(null);
+				e.setUserId(chatUser.getUserId());
+				e.setNickName(chatUser.getNickName());
+				e.setPortrait(chatUser.getPortrait());
+			}
+			// 纠正注销用户
+			if (TopicReplyTypeEnum.USER.equals(e.getReplyType()) && StringUtils.isEmpty(
+					e.getToPortrait())) {
+				ChatUser chatUser = ChatUser.initUser(null);
+				e.setToNickName(chatUser.getNickName());
+				e.setToPortrait(chatUser.getPortrait());
+			}
+		});
+		return dataList;
+	}
 
 }

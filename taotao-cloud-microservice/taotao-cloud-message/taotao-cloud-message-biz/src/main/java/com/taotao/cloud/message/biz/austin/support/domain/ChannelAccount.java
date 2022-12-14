@@ -1,18 +1,16 @@
 package com.taotao.cloud.message.biz.austin.support.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 /**
- * @author 3y
- * 渠道账号信息
+ * @author 3y 渠道账号信息
  */
 @Data
 @Builder
@@ -31,8 +29,7 @@ public class ChannelAccount {
 	private String name;
 
 	/**
-	 * 发送渠道
-	 * 枚举值：com.taotao.cloud.message.biz.austin.common.enums.ChannelType
+	 * 发送渠道 枚举值：com.taotao.cloud.message.biz.austin.common.enums.ChannelType
 	 */
 	private Integer sendChannel;
 
@@ -42,9 +39,7 @@ public class ChannelAccount {
 	private String accountConfig;
 
 	/**
-	 * 是否删除
-	 * 0：未删除
-	 * 1：已删除
+	 * 是否删除 0：未删除 1：已删除
 	 */
 	private Integer isDeleted;
 

@@ -6,6 +6,16 @@ import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.JpaEntityListener;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,17 +24,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 店铺详细

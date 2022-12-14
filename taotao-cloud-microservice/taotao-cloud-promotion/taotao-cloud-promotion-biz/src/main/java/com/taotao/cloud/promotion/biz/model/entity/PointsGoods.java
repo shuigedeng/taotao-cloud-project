@@ -1,6 +1,11 @@
 package com.taotao.cloud.promotion.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,12 +13,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 
 /**
@@ -86,13 +85,14 @@ public class PointsGoods extends BasePromotions<PointsGoods, Long> {
 	 */
 	@Column(name = "points", columnDefinition = "bigint not null  comment '兑换积分'")
 	private Long points;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-			o)) {
+				o)) {
 			return false;
 		}
 		PointsGoods pointsGoods = (PointsGoods) o;

@@ -1,5 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication.face;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,15 +12,12 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class FaceAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 	public static final String SPRING_SECURITY_FORM_IMAGE_BASE_64_KEY = "imgBase64";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
-		"/login/face", "POST");
+			"/login/face", "POST");
 
 	private final String imgBase64Parameter = SPRING_SECURITY_FORM_IMAGE_BASE_64_KEY;
 
@@ -38,14 +37,14 @@ public class FaceAuthenticationFilter extends AbstractAuthenticationProcessingFi
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-												HttpServletResponse response) throws AuthenticationException {
+			HttpServletResponse response) throws AuthenticationException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
-				"Authentication method not supported: " + request.getMethod());
+					"Authentication method not supported: " + request.getMethod());
 		}
 
 		FaceAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(
-			request);
+				request);
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
 		return this.getAuthenticationManager().authenticate(authRequest);
@@ -56,7 +55,6 @@ public class FaceAuthenticationFilter extends AbstractAuthenticationProcessingFi
 		return request -> {
 			String imgBase64 = request.getParameter(this.imgBase64Parameter);
 			imgBase64 = (imgBase64 != null) ? imgBase64.trim() : "";
-
 
 			return new FaceAuthenticationToken(imgBase64);
 		};

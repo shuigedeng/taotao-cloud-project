@@ -3,7 +3,6 @@ package com.taotao.cloud.member.biz.controller.business.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.model.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.model.query.MemberSearchPageQuery;
@@ -12,8 +11,11 @@ import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.convert.MemberConvert;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -24,9 +26,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * 管理端,会员API
@@ -81,7 +80,7 @@ public class MemberController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping("/status")
 	public Result<Boolean> updateMemberStatus(@RequestParam List<Long> memberIds,
-											  @RequestParam Boolean disabled) {
+			@RequestParam Boolean disabled) {
 		return Result.success(memberService.updateMemberStatus(memberIds, disabled));
 	}
 

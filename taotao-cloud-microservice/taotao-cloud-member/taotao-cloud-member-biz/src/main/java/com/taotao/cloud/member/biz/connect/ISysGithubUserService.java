@@ -1,4 +1,4 @@
-// package com.taotao.cloud.sys.biz.service;
+package com.taotao.cloud.member.biz.connect;// package com.taotao.cloud.sys.biz.service;
 //
 // import com.taotao.cloud.common.model.PageResult;
 // import com.taotao.cloud.sys.biz.entity.SysGithubUser;

@@ -2,14 +2,13 @@ package com.taotao.cloud.auth.biz.qrcoce;
 
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Validated
 @Tag(name = "二维码扫码登录API", description = "二维码扫码登录API")

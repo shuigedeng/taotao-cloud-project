@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.biz;
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import java.io.File;
+import java.util.Currency;
+import java.util.Locale;
 import org.springframework.boot.SpringApplication;
 
 /**
@@ -47,11 +49,7 @@ public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
 		setNacosProperty();
-		try {
-			SpringApplication.run(TaoTaoCloudSysApplication.class, args);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 	}
 
 	public static void setNacosProperty() {
@@ -66,6 +64,10 @@ public class TaoTaoCloudSysApplication {
 		System.setProperty("JM.SNAPSHOT.PATH",
 			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
 		System.setProperty("nacos.logging.default.config.enabled", "true");
+
+		System.out.println("人民币：" + Currency.getInstance("CNY").getSymbol(Locale.CHINA));
+		System.out.println("美元：" + Currency.getInstance("USD").getSymbol(Locale.US));
+		System.out.println("英镑：" + Currency.getInstance("GBP").getSymbol(Locale.UK));
 	}
 
 }

@@ -16,12 +16,15 @@
 package com.taotao.cloud.sys.api.model.dto.dict;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 字典添加对象
@@ -40,7 +43,7 @@ public class DictSaveDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
-	
+
 	@Schema(description = "字典名称", required = true)
 	@NotBlank(message = "字典名称不能为空")
 	@Size(max = 10, message = "字典名称不能超过10个字符")

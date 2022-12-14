@@ -1,4 +1,4 @@
-//package com.taotao.cloud.oauth2.biz.repository;
+package com.taotao.cloud.auth.biz.repository;//package com.taotao.cloud.oauth2.biz.repository;
 //
 //import com.taotao.cloud.oauth2.biz.models.CloudRegisteredClient;
 //import org.springframework.data.jpa.repository.JpaRepository;

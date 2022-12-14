@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.gobrs.config;
 
-import com.gobrs.async.core.callback.AsyncTaskPreInterceptor;
+import com.gobrs.async.callback.AsyncTaskPreInterceptor;
 import org.springframework.stereotype.Component;
 
 /**

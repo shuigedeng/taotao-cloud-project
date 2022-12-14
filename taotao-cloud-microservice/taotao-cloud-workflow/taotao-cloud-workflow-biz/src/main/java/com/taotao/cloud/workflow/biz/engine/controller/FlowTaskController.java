@@ -7,14 +7,11 @@ import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskForm;
 import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskInfoVO;
 import com.taotao.cloud.workflow.biz.engine.service.FlowDynamicService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
-import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.Map;
-import javax.validation.constraints.NotNull;
+
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,61 +20,79 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Validated
-@Tag(name = "工作流程-流程引擎", description = "工作流程-流程引擎")
+/**
+ * 流程引擎
+ */
+@Tag(tags = "流程引擎", value = "FlowTask")
 @RestController
-@RequestMapping("/api/workflow/engine/flow-task")
+@RequestMapping("/api/workflow/Engine/FlowTask")
 public class FlowTaskController {
 
-	@Autowired
-	private FlowDynamicService flowDynamicService;
-	@Autowired
-	private FlowTaskService flowTaskService;
+    @Autowired
+    private FlowDynamicService flowDynamicService;
+    @Autowired
+    private FlowTaskService flowTaskService;
 
-	@Operation(summary = "动态表单信息", description = "动态表单信息")
-	@GetMapping("/{id}")
-	public Result<FlowTaskInfoVO> dataInfo(@PathVariable("id") String id, String taskOperatorId)
-		throws WorkFlowException {
-		FlowTaskEntity entity = flowTaskService.getInfo(id);
-		FlowTaskInfoVO vo = flowDynamicService.info(entity, taskOperatorId);
-		return Result.success(vo);
-	}
+    /**
+     * 动态表单信息
+     *
+     * @param id 主键值
+     * @return
+     */
+    @Operation("动态表单信息")
+    @GetMapping("/{id}")
+    public Result<FlowTaskInfoVO> dataInfo(@PathVariable("id") String id, String taskOperatorId) throws WorkFlowException {
+        FlowTaskEntity entity = flowTaskService.getInfo(id);
+        FlowTaskInfoVO vo = flowDynamicService.info(entity,taskOperatorId);
+        return Result.success(vo);
+    }
 
-	@Operation(summary = "保存动态表单", description = "保存动态表单")
-	@PostMapping
-	public Result<Boolean> save(@RequestBody FlowTaskForm flowTaskForm) throws WorkFlowException {
-		if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
-			flowDynamicService.save(null, flowTaskForm);
-			return Result.success(true);
-		}
+    /**
+     * 保存
+     *
+     * @param flowTaskForm 动态表单
+     * @return
+     */
+    @Operation("保存")
+    @PostMapping
+    public Result save(@RequestBody FlowTaskForm flowTaskForm) throws WorkFlowException {
+        if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
+            flowDynamicService.save(null, flowTaskForm);
+            return Result.success(MsgCode.SU002.get());
+        }
+        flowDynamicService.submit(null, flowTaskForm);
+        return Result.success(MsgCode.SU006.get());
+    }
 
-		flowDynamicService.submit(null, flowTaskForm);
-		return Result.success(true);
-	}
+    /**
+     * 提交
+     *
+     * @param flowTaskForm 动态表单
+     * @return
+     */
+    @Operation("提交")
+    @PutMapping("/{id}")
+    public Result submit(@RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id) throws WorkFlowException {
+        if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
+            flowDynamicService.save(id, flowTaskForm);
+            return Result.success(MsgCode.SU002.get());
+        }
+        flowDynamicService.submit(id, flowTaskForm);
+        return Result.success(MsgCode.SU006.get());
+    }
 
-	@Operation(summary = "更新动态表单", description = "更新动态表单")
-	@PutMapping("/{id}")
-	public Result<Boolean> submit(@RequestBody FlowTaskForm flowTaskForm,
-		@PathVariable("id") String id)
-		throws WorkFlowException {
-		if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
-			flowDynamicService.save(id, flowTaskForm);
-			return Result.success(true);
-		}
-
-		flowDynamicService.submit(id, flowTaskForm);
-		return Result.success(true);
-	}
-
-	@Operation(summary = "动态表单详情", description = "动态表单详情")
-	@GetMapping("/{flowId}/{id}")
-	public Result<Map<String, Object>> info(
-		@Parameter(description = "引擎主键值") @NotNull(message = "引擎主键值不能为空")
-		@PathVariable("flowId") String flowId,
-		@Parameter(description = "id") @NotNull(message = "主键值不能为空")
-		@PathVariable("id") String id) throws WorkFlowException {
-		Map<String, Object> data = flowDynamicService.getData(flowId, id);
-		return Result.success(data);
-	}
+    /**
+     * 动态表单详情
+     *
+     * @param flowId 引擎主键值
+     * @param id     主键值
+     * @return
+     */
+    @Operation("动态表单信息")
+    @GetMapping("/{flowId}/{id}")
+    public Result<Map<String, Object>> info(@PathVariable("flowId") String flowId, @PathVariable("id") String id) throws WorkFlowException {
+        Map<String, Object> data = flowDynamicService.getData(flowId, id);
+        return Result.success(data);
+    }
 
 }

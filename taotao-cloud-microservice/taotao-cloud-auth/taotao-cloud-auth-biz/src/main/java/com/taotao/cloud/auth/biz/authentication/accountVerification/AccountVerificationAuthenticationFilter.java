@@ -1,6 +1,8 @@
 package com.taotao.cloud.auth.biz.authentication.accountVerification;
 
 import com.taotao.cloud.common.enums.LoginTypeEnum;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,10 +13,8 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-public class AccountVerificationAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public class AccountVerificationAuthenticationFilter extends
+		AbstractAuthenticationProcessingFilter {
 
 	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
 	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
@@ -22,7 +22,7 @@ public class AccountVerificationAuthenticationFilter extends AbstractAuthenticat
 	public static final String SPRING_SECURITY_FORM_TYPE_KEY = "type";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
-		"/login/account/verification", "POST");
+			"/login/account/verification", "POST");
 
 	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
 	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
@@ -48,13 +48,14 @@ public class AccountVerificationAuthenticationFilter extends AbstractAuthenticat
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-												HttpServletResponse response) throws AuthenticationException {
+			HttpServletResponse response) throws AuthenticationException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
-				"Authentication method not supported: " + request.getMethod());
+					"Authentication method not supported: " + request.getMethod());
 		}
 
-		AccountVerificationAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(request);
+		AccountVerificationAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(
+				request);
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
 		return this.getAuthenticationManager().authenticate(authRequest);
@@ -75,12 +76,14 @@ public class AccountVerificationAuthenticationFilter extends AbstractAuthenticat
 			String type = request.getParameter(this.typeParameter);
 			type = (type != null) ? type.trim() : "";
 
-			return new AccountVerificationAuthenticationToken(username, passord, verificationCode, type);
+			return new AccountVerificationAuthenticationToken(username, passord, verificationCode,
+					type);
 		};
 	}
 
 
-	protected void setDetails(HttpServletRequest request, AccountVerificationAuthenticationToken authRequest) {
+	protected void setDetails(HttpServletRequest request,
+			AccountVerificationAuthenticationToken authRequest) {
 		authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
 	}
 
@@ -95,11 +98,13 @@ public class AccountVerificationAuthenticationFilter extends AbstractAuthenticat
 	}
 
 	public void setVerificationCodeParameter(String verificationCodeParameter) {
-		Assert.hasText(verificationCodeParameter, "verificationCode parameter must not be empty or null");
+		Assert.hasText(verificationCodeParameter,
+				"verificationCode parameter must not be empty or null");
 		this.verificationCodeParameter = verificationCodeParameter;
 	}
 
-	public void setConverter(Converter<HttpServletRequest, AccountVerificationAuthenticationToken> converter) {
+	public void setConverter(
+			Converter<HttpServletRequest, AccountVerificationAuthenticationToken> converter) {
 		Assert.notNull(converter, "Converter must not be null");
 		this.accountVerificationAuthenticationTokenConverter = converter;
 	}

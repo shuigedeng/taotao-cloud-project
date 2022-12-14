@@ -19,10 +19,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 
 public interface IQuartzJobService extends IService<QuartzJob> {

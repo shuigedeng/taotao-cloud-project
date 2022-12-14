@@ -7,16 +7,14 @@ import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationHo
 import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
 import com.taotao.cloud.message.biz.austin.handler.deduplication.limit.LimitService;
 import com.taotao.cloud.message.biz.austin.support.utils.LogUtils;
+import jakarta.annotation.PostConstruct;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
-import java.util.Set;
-
 /**
  * @author 3y
- * @date 2021/12/9
- * 去重服务
+ * @date 2021/12/9 去重服务
  */
 @Slf4j
 public abstract class AbstractDeduplicationService implements DeduplicationService {
@@ -46,7 +44,9 @@ public abstract class AbstractDeduplicationService implements DeduplicationServi
 		// 剔除符合去重条件的用户
 		if (CollUtil.isNotEmpty(filterReceiver)) {
 			taskInfo.getReceiver().removeAll(filterReceiver);
-			logUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(filterReceiver).state(param.getAnchorState().getCode()).build());
+			logUtils.print(
+					AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(filterReceiver)
+							.state(param.getAnchorState().getCode()).build());
 		}
 	}
 

@@ -17,11 +17,14 @@ package com.taotao.cloud.sys.api.model.dto.company;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Pattern;
 import java.io.Serial;
 import java.io.Serializable;
-import javax.validation.constraints.Pattern;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 公司更新对象
@@ -40,7 +43,7 @@ public class CompanyUpdateDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
-	
+
 	@Schema(description = "租户id")
 	private String tenantId;
 

@@ -1,4 +1,4 @@
-//package com.taotao.cloud.auth.biz.controller;
+package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz.controller;
 //
 //import cn.hutool.core.util.IdUtil;
 //import cn.hutool.crypto.asymmetric.KeyType;
@@ -8,7 +8,7 @@
 //import java.util.HashMap;
 //import java.util.Map;
 //import java.util.concurrent.TimeUnit;
-//import javax.servlet.http.HttpServletRequest;
+//import jakarta.servlet.http.HttpServletRequest;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.boot.autoconfigure.security.SecurityProperties;
 //import org.springframework.http.HttpStatus;

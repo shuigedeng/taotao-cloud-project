@@ -1,4 +1,4 @@
-//package com.taotao.cloud.wechat.biz.service;
+package com.taotao.cloud.im.biz.service;//package com.taotao.cloud.wechat.biz.service;
 //
 //import com.baomidou.mybatisplus.extension.service.IService;
 //

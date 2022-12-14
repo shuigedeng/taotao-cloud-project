@@ -1,10 +1,10 @@
-//package com.taotao.cloud.member.biz.repository;
+package com.taotao.cloud.member.biz.repository;//package com.taotao.cloud.member.biz.repository;
 //
 //import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
 //import com.taotao.cloud.member.biz.entity.MemberConnect;
 //import org.springframework.stereotype.Repository;
 //
-//import javax.persistence.EntityManager;
+//import jakarta.persistence.EntityManager;
 //
 ///**
 // * 第三方登录信息Repository

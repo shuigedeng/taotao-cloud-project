@@ -23,6 +23,7 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
 import com.alibaba.excel.write.metadata.WriteWorkbook;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -38,7 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 /**
@@ -91,13 +91,15 @@ public class ExcelTest {
 				Integer writeDataRows = 20 * 10000;
 				//计算需要的Sheet数量
 				int sheetNum = totalCount % sheetDataRows == 0 ? (totalCount / sheetDataRows)
-					: (totalCount / sheetDataRows + 1);
+						: (totalCount / sheetDataRows + 1);
 				//计算一般情况下每一个Sheet需要写入的次数(一般情况不包含最后一个sheet,因为最后一个sheet不确定会写入多少条数据)
 				int oneSheetWriteCount = sheetDataRows / writeDataRows;
 				//计算最后一个sheet需要写入的次数
 				int lastSheetWriteCount = totalCount % sheetDataRows == 0 ? oneSheetWriteCount
-					: (totalCount % sheetDataRows % writeDataRows == 0 ? (totalCount / sheetDataRows
-						/ writeDataRows) : (totalCount / sheetDataRows / writeDataRows + 1));
+						: (totalCount % sheetDataRows % writeDataRows == 0 ? (totalCount
+								/ sheetDataRows
+								/ writeDataRows)
+								: (totalCount / sheetDataRows / writeDataRows + 1));
 
 				//开始分批查询分次写入
 				//注意这次的循环就需要进行嵌套循环了,外层循环是Sheet数目,内层循环是写入次数
@@ -110,7 +112,8 @@ public class ExcelTest {
 
 					//循环写入次数: j的自增条件是当不是最后一个Sheet的时候写入次数为正常的每个Sheet写入的次数,如果是最后一个就需要使用计算的次数lastSheetWriteCount
 					for (int j = 0;
-						j < (i != sheetNum - 1 ? oneSheetWriteCount : lastSheetWriteCount); j++) {
+							j < (i != sheetNum - 1 ? oneSheetWriteCount : lastSheetWriteCount);
+							j++) {
 						//集合复用,便于GC清理
 						dataList.clear();
 						//分页查询一次20w
@@ -135,8 +138,9 @@ public class ExcelTest {
 
 				// 下载EXCEL
 				response.setHeader("Content-Disposition",
-					"attachment;filename=" + new String((fileName).getBytes("gb2312"), "ISO-8859-1")
-						+ ".xlsx");
+						"attachment;filename=" + new String((fileName).getBytes("gb2312"),
+								"ISO-8859-1")
+								+ ".xlsx");
 				response.setContentType("multipart/form-data");
 				response.setCharacterEncoding("utf-8");
 				writer.finish();
@@ -167,18 +171,18 @@ public class ExcelTest {
 		//记录开始读取Excel时间,也是导入程序开始时间
 		long startReadTime = System.currentTimeMillis();
 		System.out.println(
-			"------开始读取Excel的Sheet时间(包括导入数据过程):" + startReadTime + "ms------");
+				"------开始读取Excel的Sheet时间(包括导入数据过程):" + startReadTime + "ms------");
 		//读取所有Sheet的数据.每次读完一个Sheet就会调用这个方法
 		//EasyExcel.read(fileName, new EasyExceGeneralDatalListener(actResultLogService2))
 		//	.doReadAll();
 		long endReadTime = System.currentTimeMillis();
 		System.out.println(
-			"------结束读取Excel的Sheet时间(包括导入数据过程):" + endReadTime + "ms------");
+				"------结束读取Excel的Sheet时间(包括导入数据过程):" + endReadTime + "ms------");
 	}
 
 	// 事件监听
 	public static class EasyExceGeneralDatalListener extends
-		AnalysisEventListener<Map<Integer, String>> {
+			AnalysisEventListener<Map<Integer, String>> {
 
 		/**
 		 * 处理业务逻辑的Service,也可以是Mapper
@@ -251,7 +255,8 @@ public class ExcelTest {
 			try {
 				//获取数据库连接池对象
 				pro.load(
-					JDBCDruidUtils.class.getClassLoader().getResourceAsStream("druid.properties"));
+						JDBCDruidUtils.class.getClassLoader()
+								.getResourceAsStream("druid.properties"));
 				dataSource = DruidDataSourceFactory.createDataSource(pro);
 			} catch (Exception e) {
 				e.printStackTrace();

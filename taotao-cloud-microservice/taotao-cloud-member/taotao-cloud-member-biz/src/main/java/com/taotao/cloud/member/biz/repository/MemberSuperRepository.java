@@ -1,4 +1,4 @@
-///*
+package com.taotao.cloud.member.biz.repository;///*
 // * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
 // *
 // * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@
 //import com.taotao.cloud.member.biz.entity.MemberBack;
 //import org.springframework.stereotype.Repository;
 //
-//import javax.persistence.EntityManager;
+//import jakarta.persistence.EntityManager;
 //
 ///**
 // * @author shuigedeng

@@ -13,6 +13,9 @@ import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsServic
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.Objects;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,10 +27,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 /**
  * 店铺端,分销商品接口
@@ -55,7 +54,7 @@ public class DistributionGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<IPage<DistributionGoodsVO>> distributionGoods(
-		DistributionGoodsPageQuery distributionGoodsPageQuery) {
+			DistributionGoodsPageQuery distributionGoodsPageQuery) {
 		return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
 	}
 
@@ -64,8 +63,9 @@ public class DistributionGoodsStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	@PutMapping(value = "/checked/{skuId}")
-	public Result<DistributionGoods> distributionCheckGoods(@NotNull(message = "规格ID不能为空") @PathVariable String skuId,
-															@NotNull(message = "佣金金额不能为空") @RequestParam BigDecimal commission) {
+	public Result<DistributionGoods> distributionCheckGoods(
+			@NotNull(message = "规格ID不能为空") @PathVariable String skuId,
+			@NotNull(message = "佣金金额不能为空") @RequestParam BigDecimal commission) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		return Result.success(distributionGoodsService.checked(skuId, commission, storeId));
 	}
@@ -78,7 +78,8 @@ public class DistributionGoodsStoreController {
 	public Result<Object> cancel(@NotNull @PathVariable String id) {
 		OperationalJudgment.judgment(distributionGoodsService.getById(id));
 		//清除分销商已选择分销商品
-		distributionSelectedGoodsService.remove(new QueryWrapper<DistributionSelectedGoods>().eq("distribution_goods_id", id));
+		distributionSelectedGoodsService.remove(
+				new QueryWrapper<DistributionSelectedGoods>().eq("distribution_goods_id", id));
 		//清除分销商品
 		distributionGoodsService.removeById(id);
 		return Result.success();

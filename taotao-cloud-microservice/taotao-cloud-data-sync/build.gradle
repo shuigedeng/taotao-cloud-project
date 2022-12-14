@@ -1,10 +1,14 @@
+plugins {
+    id 'org.graalvm.buildtools.native' version '0.9.18'
+}
+
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-common"
     implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
 
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-mq:taotao-cloud-starter-mq-kafka")
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
 

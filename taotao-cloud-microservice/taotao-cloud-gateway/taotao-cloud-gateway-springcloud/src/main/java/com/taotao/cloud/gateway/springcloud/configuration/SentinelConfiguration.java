@@ -25,7 +25,7 @@ import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.reactive.result.view.ViewResolver;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;

@@ -6,7 +6,7 @@ import com.taotao.cloud.media.biz.opencv.common.utils.OpenCVUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import org.opencv.core.Core;
 import org.opencv.core.Core.MinMaxLocResult;
 import org.opencv.core.CvType;
@@ -33,13 +33,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "rect")
 public class RectificationController extends BaseController {
+
 	private static final Logger logger = LoggerFactory.getLogger(
 			RectificationController.class);
 
 	/**
-	 * 图像矫正透视变换
-	 * 创建者 Songer
-	 * 创建时间	2018年4月10日
+	 * 图像矫正透视变换 创建者 Songer 创建时间	2018年4月10日
 	 */
 	@RequestMapping(value = "rectification")
 	public void rectification(HttpServletResponse response, String imagefile, Integer markType) {
@@ -99,14 +98,15 @@ public class RectificationController extends BaseController {
 	}
 
 	/**
-	 * 获得锚点(定位点)
-	 * 方法1，通过模板匹配圆心，应该换成正方形也可以，之前模板匹配不行是因为模板图形不是最小的
+	 * 获得锚点(定位点) 方法1，通过模板匹配圆心，应该换成正方形也可以，之前模板匹配不行是因为模板图形不是最小的
+	 *
 	 * @param anchor01
 	 * @param anchor02
 	 * @param anchor03
 	 * @param anchor04 void
 	 */
-	public static void fetchAnchorPoints1(String sourcePath, String matchPath, Point anchor01, Point anchor02,
+	public static void fetchAnchorPoints1(String sourcePath, String matchPath, Point anchor01,
+			Point anchor02,
 			Point anchor03,
 			Point anchor04) {
 		Mat imagematch = new Mat();
@@ -170,15 +170,16 @@ public class RectificationController extends BaseController {
 	}
 
 	/**
-	 * 获得锚点(定位点)
-	 * 方法2，霍夫曼圆变换查找定位点
+	 * 获得锚点(定位点) 方法2，霍夫曼圆变换查找定位点
+	 *
 	 * @param anchor01
 	 * @param anchor02
 	 * @param anchor03
 	 * @param anchor04 void
 	 * @Date 2018年2月7日
 	 */
-	public static void fetchAnchorPoints2(String sourcePath, Point anchor01, Point anchor02, Point anchor03,
+	public static void fetchAnchorPoints2(String sourcePath, Point anchor01, Point anchor02,
+			Point anchor03,
 			Point anchor04) {
 		Mat src = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
 		Mat colorimage = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_COLOR);
@@ -196,7 +197,8 @@ public class RectificationController extends BaseController {
 
 		// Mat rrr = OpenCVUtil.imageBinary(src01);
 		Mat circles = new Mat();// 声明一个向量，保存检测出的圆的圆心坐标和半径
-		Imgproc.HoughCircles(source1, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10, 50);// 霍夫变换检测圆
+		Imgproc.HoughCircles(source1, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10,
+				50);// 霍夫变换检测圆
 		System.out.println("图片高 宽：" + src.rows() + "		" + src.cols());
 		System.out.println(circles.cols());
 		int cols = circles.cols();
@@ -215,7 +217,8 @@ public class RectificationController extends BaseController {
 		String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_cc1.png";
 		Highgui.imwrite(destPath, src01);
 
-		Imgproc.HoughCircles(source2, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10, 50);// 霍夫变换检测圆
+		Imgproc.HoughCircles(source2, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10,
+				50);// 霍夫变换检测圆
 		System.out.println(circles.cols());
 		if (circles.cols() > 0) {
 			for (int i = 0; i < circles.cols(); i++) {
@@ -231,7 +234,8 @@ public class RectificationController extends BaseController {
 		destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_cc2.png";
 		Highgui.imwrite(destPath, src02);
 
-		Imgproc.HoughCircles(source3, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10, 50);// 霍夫变换检测圆
+		Imgproc.HoughCircles(source3, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10,
+				50);// 霍夫变换检测圆
 		System.out.println(circles.cols());
 		if (circles.cols() > 0) {
 			for (int i = 0; i < circles.cols(); i++) {
@@ -247,7 +251,8 @@ public class RectificationController extends BaseController {
 		destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_cc3.png";
 		Highgui.imwrite(destPath, src03);
 
-		Imgproc.HoughCircles(source4, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10, 50);// 霍夫变换检测圆
+		Imgproc.HoughCircles(source4, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10,
+				50);// 霍夫变换检测圆
 		System.out.println(circles.cols());
 		if (circles.cols() > 0) {
 			for (int i = 0; i < circles.cols(); i++) {

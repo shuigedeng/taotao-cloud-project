@@ -18,6 +18,20 @@ package com.taotao.cloud.sys.biz.model.entity.dict;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.annotation.PreDestroy;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.PostPersist;
+import jakarta.persistence.PostRemove;
+import jakarta.persistence.PostUpdate;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreRemove;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,21 +39,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.annotation.PreDestroy;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.PostLoad;
-import javax.persistence.PostPersist;
-import javax.persistence.PostRemove;
-import javax.persistence.PostUpdate;
-import javax.persistence.PrePersist;
-import javax.persistence.PreRemove;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * SysDict
@@ -94,8 +93,8 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
 
 	@Builder
 	public Dict(Long id, LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
-				Long updateBy, Integer version, Boolean delFlag, String dictName, String dictCode,
-				String description, Integer sortNum, String remark) {
+		Long updateBy, Integer version, Boolean delFlag, String dictName, String dictCode,
+		String description, Integer sortNum, String remark) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.dictName = dictName;
 		this.dictCode = dictCode;

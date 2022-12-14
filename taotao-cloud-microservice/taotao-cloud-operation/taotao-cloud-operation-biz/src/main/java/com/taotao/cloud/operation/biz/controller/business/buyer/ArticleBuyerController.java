@@ -2,17 +2,17 @@ package com.taotao.cloud.operation.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.operation.api.model.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.model.vo.ArticleCategoryVO;
 import com.taotao.cloud.operation.api.model.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.model.entity.Article;
 import com.taotao.cloud.operation.biz.service.business.ArticleCategoryService;
 import com.taotao.cloud.operation.biz.service.business.ArticleService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +39,7 @@ public class ArticleBuyerController {
 	 */
 	@Autowired
 	private ArticleCategoryService articleCategoryService;
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "获取文章分类列表")
@@ -46,6 +47,7 @@ public class ArticleBuyerController {
 	public Result<List<ArticleCategoryVO>> getArticleCategoryList() {
 		return Result.success(articleCategoryService.allChildren());
 	}
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "分页获取")
@@ -53,6 +55,7 @@ public class ArticleBuyerController {
 	public Result<IPage<ArticleVO>> getByPage(ArticlePageQuery articlePageQuery) {
 		return Result.success(articleService.articlePage(articlePageQuery));
 	}
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "通过id获取文章")
@@ -60,11 +63,13 @@ public class ArticleBuyerController {
 	public Result<Article> get(@NotNull(message = "文章ID") @PathVariable("id") String id) {
 		return Result.success(articleService.customGet(id));
 	}
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "通过类型获取文章")
 	@GetMapping(value = "/type/{type}")
-	public Result<Article> getByType(@NotNull(message = "文章类型") @PathVariable("type") String type) {
+	public Result<Article> getByType(
+			@NotNull(message = "文章类型") @PathVariable("type") String type) {
 		return Result.success(articleService.customGetByType(type));
 	}
 }

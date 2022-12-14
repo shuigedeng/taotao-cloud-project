@@ -17,11 +17,11 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -100,8 +100,8 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 
 	@Builder
 	public Dept(Long id, LocalDateTime createTime, Long createBy,
-		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-		String name, Long parentId, String remark, Integer sortNum, String tenantId) {
+			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+			String name, Long parentId, String remark, Integer sortNum, String tenantId) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.name = name;
 		this.parentId = parentId;
@@ -116,7 +116,7 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-			o)) {
+				o)) {
 			return false;
 		}
 		Dept dept = (Dept) o;

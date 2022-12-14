@@ -6,7 +6,7 @@ import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
 import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlFactory;
 import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlParam;
 import com.taotao.cloud.message.biz.austin.support.utils.LogUtils;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
