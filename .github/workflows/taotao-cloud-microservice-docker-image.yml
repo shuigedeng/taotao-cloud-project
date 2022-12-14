@@ -42,9 +42,30 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Show sec
-        run: echo ${TAOTAO_CLOUD_SIGNING_PASSWORD} | base64
+        run: |
+          echo ${TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE} | base64
+          echo ${TAOTAO_CLOUD_SIGNING_PASSWORD} | base64
+          echo ${TAOTAO_CLOUD_SIGNING_KEY_ID} | base64
+          echo ${TAOTAO_CLOUD_REGISTRY_USERNAME} | base64
+          echo ${TAOTAO_CLOUD_REGISTRY_PASSWORD} | base64
+          echo ${TAOTAO_CLOUD_OSSRH_USERNAME} | base64
+          echo ${TAOTAO_CLOUD_OSSRH_PASSWORD} | base64
+          echo ${TAOTAO_CLOUD_MAVEN_USERNAME} | base64
+          echo ${TAOTAO_CLOUD_MAVEN_PASSWORD} | base64
+          echo ${TAOTAO_CLOUD_GITHUB_USERNAME} | base64
+          echo ${TAOTAO_CLOUD_GITHUB_TOKEN} | base64
         env:
+          TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE }}
           TAOTAO_CLOUD_SIGNING_PASSWORD: ${{ secrets.TAOTAO_CLOUD_SIGNING_PASSWORD }}
+          TAOTAO_CLOUD_SIGNING_KEY_ID: ${{ secrets.TAOTAO_CLOUD_SIGNING_KEY_ID }}
+          TAOTAO_CLOUD_REGISTRY_USERNAME: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+          TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+          TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
+          TAOTAO_CLOUD_OSSRH_PASSWORD: ${{ secrets.TAOTAO_CLOUD_OSSRH_PASSWORD }}
+          TAOTAO_CLOUD_MAVEN_USERNAME: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME }}
+          TAOTAO_CLOUD_MAVEN_PASSWORD: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD }}
+          TAOTAO_CLOUD_GITHUB_USERNAME: ${{ secrets.TAOTAO_CLOUD_GITHUB_USERNAME }}
+          TAOTAO_CLOUD_GITHUB_TOKEN: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
 
       - name: Show Github
         run: echo "$GITHUB_CONTEXT"
