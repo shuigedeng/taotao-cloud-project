@@ -1,9 +1,9 @@
 dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+    api "io.github.shuigedeng:taotao-cloud-starter-common"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-stream")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-elasticsearch")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
@@ -29,19 +29,19 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-square-retrofit:0.4.1"
     implementation "org.springframework.cloud:spring-cloud-square-okhttp:0.4.1"
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
+    annotationProcessor "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding"
+    annotationProcessor "org.mapstruct:mapstruct-processor"
     annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+    annotationProcessor "io.soabase.record-builder:record-builder-processor"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     api "org.projectlombok:lombok"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok"
 
     api "io.soabase.record-builder:record-builder-core"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+    annotationProcessor "io.soabase.record-builder:record-builder-processor"
 }
 
 mainClassName = "com.taotao.cloud.open.biz.TaoTaoCloudOpenApplication"

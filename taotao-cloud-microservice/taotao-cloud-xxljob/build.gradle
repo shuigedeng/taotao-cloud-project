@@ -1,15 +1,15 @@
 dependencies {
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-core"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mail"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-nacos"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-micrometer")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-freemarker"

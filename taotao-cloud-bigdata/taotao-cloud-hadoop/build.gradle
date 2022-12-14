@@ -7,7 +7,7 @@ dependencies {
     implementation "junit:junit:4.13.2"
 
 
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-common")
 //
 //    implementation("org.springframework.boot:spring-boot-starter-web") {
 //        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"

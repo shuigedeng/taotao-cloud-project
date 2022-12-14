@@ -1,5 +1,5 @@
 dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
+    api "io.github.shuigedeng:taotao-cloud-starter-feign"
 }
 
 description = "商店模块api"

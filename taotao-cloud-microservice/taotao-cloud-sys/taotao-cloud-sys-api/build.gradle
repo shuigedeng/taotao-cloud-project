@@ -1,7 +1,7 @@
 dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign")
+    api "io.github.shuigedeng:taotao-cloud-starter-feign"
 
-    compileOnly project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-office")
+    compileOnly "io.github.shuigedeng:taotao-cloud-starter-office"
     compileOnly "io.seata:seata-all:1.5.1"
 }
 

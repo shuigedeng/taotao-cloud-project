@@ -1,12 +1,12 @@
 dependencies {
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-common"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
 
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-kafka")
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger")
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-mq:taotao-cloud-starter-mq-kafka")
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
 
 //    implementation "org.springframework.boot:spring-boot-starter-security"
     //implementation "org.springframework.boot:spring-boot-starter-mail"
@@ -37,7 +37,7 @@ dependencies {
 //    implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
 //    implementation "org.antlr:antlr4-runtime:4.11.1"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
 }
 
 mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"

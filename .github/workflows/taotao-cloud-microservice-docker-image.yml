@@ -5,7 +5,7 @@ on:
     paths:
       - 'taotao-cloud-microservice/**'
     #branches: [ docker ]
-    branches: [ master ]
+    branches: [ aaaa ]
   pull_request:
     branches: [ docker ]
     #branches: [ master ]

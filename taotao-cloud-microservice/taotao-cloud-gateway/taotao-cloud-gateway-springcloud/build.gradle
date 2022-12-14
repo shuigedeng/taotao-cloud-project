@@ -1,14 +1,14 @@
 dependencies {
-    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core"))
-    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-monitor"))
-    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha"))
-    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger"))
+    implementation "io.github.shuigedeng:taotao-cloud-starter-core"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-monitor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-sentinel")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-nacos")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-nacos"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-micrometer")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-skywalking")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
 //    implementation "org.springframework.security:spring-security-core:5.7.3"
 //    implementation "org.springframework.security:spring-security-config"
