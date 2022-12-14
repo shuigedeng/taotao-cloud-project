@@ -22,11 +22,15 @@
 */
 buildscript {
     ext {
-        taotaoCloudVersion = "2022.12"
+        taotaoCloudVersion = "2022.13"
         taotaoCloudGroup = "io.github.shuigedeng"
         springBootVersion = "2.7.6"
         querydslAptVersion = "5.0.0"
 
+        mapstructProcessorVersion = "1.5.3.Final"
+        lombokMapstructBindingVersion = "0.2.0"
+        lombokVersion = "1.18.24"
+        recordBuilderVersion = "34"
         //如果url不指定的话
         //Mac默认：url = https://index.docker.io/v1/
         //Unix默认: url = unix:///var/run/docker.sock
