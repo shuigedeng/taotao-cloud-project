@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.auth.biz.jpa.repository.authorizationConsent;
 
-import com.taotao.cloud.auth.biz.jpa.entity.authorizationConsent.AuthorizationConsent;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

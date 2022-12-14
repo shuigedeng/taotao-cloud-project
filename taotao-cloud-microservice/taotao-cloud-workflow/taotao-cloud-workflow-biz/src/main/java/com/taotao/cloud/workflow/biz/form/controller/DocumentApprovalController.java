@@ -9,7 +9,7 @@ import com.taotao.cloud.workflow.biz.form.model.documentapproval.DocumentApprova
 import com.taotao.cloud.workflow.biz.form.model.documentapproval.DocumentApprovalInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.DocumentApprovalService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

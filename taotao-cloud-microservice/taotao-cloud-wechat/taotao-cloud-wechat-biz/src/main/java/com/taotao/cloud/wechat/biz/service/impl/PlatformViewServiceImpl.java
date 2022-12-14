@@ -1,4 +1,4 @@
-//package com.taotao.cloud.wechat.biz.service.impl;
+package com.taotao.cloud.wechat.biz.service.impl;//package com.taotao.cloud.wechat.biz.service.impl;
 //
 //import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 //import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -18,7 +18,7 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //
-//import javax.annotation.Resource;
+//import jakarta.annotation.Resource;
 //import java.util.ArrayList;
 //import java.util.Calendar;
 //import java.util.Date;

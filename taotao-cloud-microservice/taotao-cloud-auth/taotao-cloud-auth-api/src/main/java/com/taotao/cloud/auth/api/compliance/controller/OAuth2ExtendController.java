@@ -1,4 +1,4 @@
-//
+package com.taotao.cloud.auth.api.compliance.controller;//
 // package com.taotao.cloud.auth.api.compliance.controller;
 //
 // import cn.herodotus.engine.assistant.core.domain.Result;
@@ -22,8 +22,8 @@
 // import org.springframework.web.bind.annotation.RequestParam;
 // import org.springframework.web.bind.annotation.RestController;
 //
-// import javax.servlet.http.HttpServletRequest;
-// import javax.validation.constraints.NotBlank;
+// import jakarta.servlet.http.HttpServletRequest;
+// import jakarta.validation.constraints.NotBlank;
 //
 // /**
 //  * <p>Description: OAuth2 扩展 接口 </p>

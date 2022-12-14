@@ -17,15 +17,14 @@ package com.taotao.cloud.order.api.feign.request;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Pattern;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.Pattern;
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * 公司查询对象

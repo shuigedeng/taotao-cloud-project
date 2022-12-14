@@ -7,6 +7,11 @@ import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,12 +19,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 
 /**
@@ -67,8 +66,7 @@ public class Coupon extends BasePromotions<Coupon, Long> {
 	private BigDecimal couponDiscount;
 
 	/**
-	 * @see CouponGetEnum
-	 * 优惠券类型，分为免费领取和活动赠送
+	 * @see CouponGetEnum 优惠券类型，分为免费领取和活动赠送
 	 */
 	@Column(name = "get_type", columnDefinition = "varchar(255) not null comment '优惠券类型，分为免费领取和活动赠送'")
 	private String getType;
@@ -116,8 +114,7 @@ public class Coupon extends BasePromotions<Coupon, Long> {
 	private BigDecimal consumeThreshold;
 
 	/**
-	 * @see CouponRangeDayEnum
-	 * 时间范围类型
+	 * @see CouponRangeDayEnum 时间范围类型
 	 */
 	@Column(name = "range_day_type", columnDefinition = "varchar(255) not null comment '时间范围类型'")
 	private String rangeDayType;
@@ -135,9 +132,9 @@ public class Coupon extends BasePromotions<Coupon, Long> {
 	@Override
 	public String getPromotionStatus() {
 		if (this.rangeDayType != null && this.rangeDayType.equals(
-			CouponRangeDayEnum.DYNAMICTIME.name())
-			&& (this.effectiveDays != null && this.effectiveDays > 0
-			&& this.effectiveDays <= 365)) {
+				CouponRangeDayEnum.DYNAMICTIME.name())
+				&& (this.effectiveDays != null && this.effectiveDays > 0
+				&& this.effectiveDays <= 365)) {
 			return PromotionsStatusEnum.START.name();
 		}
 		return super.getPromotionStatus();

@@ -1,4 +1,4 @@
-//
+package com.taotao.cloud.auth.api.compliance.repository;//
 // package com.taotao.cloud.auth.api.compliance.repository;
 //
 // import cn.herodotus.engine.data.core.repository.BaseRepository;

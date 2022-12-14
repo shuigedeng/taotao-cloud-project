@@ -1,4 +1,4 @@
-// package com.taotao.cloud.message.biz.austin.web.config;
+package com.taotao.cloud.message.biz.austin.web.config;// package com.taotao.cloud.message.biz.austin.web.config;
 //
 // import io.swagger.annotations.ApiModel;
 // import org.springframework.context.annotation.Bean;

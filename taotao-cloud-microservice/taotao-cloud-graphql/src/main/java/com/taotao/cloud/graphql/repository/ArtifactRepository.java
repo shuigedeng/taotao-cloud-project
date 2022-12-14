@@ -1,7 +1,7 @@
-// package com.taotao.cloud.backend.graphql.repository;
+package com.taotao.cloud.graphql.repository;// package com.taotao.cloud.backend.graphql.repository;
 //
-// import javax.persistence.Entity;
-// import javax.persistence.Id;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.Id;
 //
 // @Entity
 // public class ArtifactRepository {

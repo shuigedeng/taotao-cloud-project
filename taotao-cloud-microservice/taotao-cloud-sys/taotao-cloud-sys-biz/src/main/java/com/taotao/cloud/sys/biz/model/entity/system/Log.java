@@ -17,18 +17,16 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
 
 
 /**
@@ -218,7 +216,7 @@ public class Log extends BaseSuperEntity<Log, Long> {
 	 */
 	@Column(name = "os", columnDefinition = "text null comment '操作系统'")
 	private String os;
-	
+
 	/**
 	 * 浏览器
 	 */

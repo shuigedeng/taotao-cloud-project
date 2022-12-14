@@ -10,6 +10,10 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -21,11 +25,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * 管理端,商品计量单位接口
@@ -76,7 +75,7 @@ public class GoodsUnitManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@NotNull @PathVariable Long id,
-								  @Valid @RequestBody GoodsUnit goodsUnit) {
+			@Valid @RequestBody GoodsUnit goodsUnit) {
 		goodsUnit.setId(Long.valueOf(id));
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}

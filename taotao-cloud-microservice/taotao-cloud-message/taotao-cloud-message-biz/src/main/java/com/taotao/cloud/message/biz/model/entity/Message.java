@@ -5,16 +5,15 @@ import com.taotao.cloud.message.api.enums.MessageSendClientEnum;
 import com.taotao.cloud.message.api.enums.RangeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.JpaEntityListener;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
 
 
 /**

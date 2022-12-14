@@ -17,7 +17,11 @@ package com.taotao.cloud.sys.biz.model.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,15 +30,9 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
-
 /**
- * 字典项表
- * // @SQLDelete(sql = "update sys_dict_item set del_flag = 1 where id = ?")
- * // @Where(clause ="del_flag = 1")
+ * 字典项表 // @SQLDelete(sql = "update sys_dict_item set del_flag = 1 where id = ?") // @Where(clause
+ * ="del_flag = 1")
  *
  * @author shuigedeng
  * @version 2021.10
@@ -49,7 +47,7 @@ import java.util.Objects;
 @Table(name = DictItem.TABLE_NAME)
 @TableName(DictItem.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = DictItem.TABLE_NAME, comment = "字典项表")
-public class DictItem extends BaseSuperEntity<DictItem,Long> {
+public class DictItem extends BaseSuperEntity<DictItem, Long> {
 
 	public static final String TABLE_NAME = "tt_dict_item";
 
@@ -89,13 +87,13 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 	 * 排序值
 	 */
 	@Column(name = "sort_num", columnDefinition = "int not null default 1 comment '排序值'")
-	private Integer sortNum ;
+	private Integer sortNum;
 
 	@Builder
 	public DictItem(Long id, LocalDateTime createTime, Long createBy,
-		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-		Long dictId, String itemText, String itemValue, String description, Integer status,
-		Integer sortNum) {
+			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+			Long dictId, String itemText, String itemValue, String description, Integer status,
+			Integer sortNum) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.dictId = dictId;
 		this.itemText = itemText;
@@ -107,7 +105,7 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

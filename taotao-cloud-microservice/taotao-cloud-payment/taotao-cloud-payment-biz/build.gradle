@@ -34,6 +34,8 @@ dependencies {
     implementation "com.paypal.sdk:checkout-sdk:1.0.5"
 
     implementation "com.yungouos.pay:yungouos-pay-sdk:2.0.26"
+
+    implementation 'jakarta.jms:jakarta.jms-api:3.1.0'
 }
 
 mainClassName = "com.taotao.cloud.payment.biz.TaoTaoCloudPayApplication"

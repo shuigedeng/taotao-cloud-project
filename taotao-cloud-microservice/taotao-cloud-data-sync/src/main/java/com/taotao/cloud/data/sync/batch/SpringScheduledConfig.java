@@ -1,4 +1,4 @@
-//package com.taotao.cloud.data.sync.batch;
+package com.taotao.cloud.data.sync.batch;//package com.taotao.cloud.data.sync.batch;
 //
 //import org.springframework.batch.core.Job;
 //import org.springframework.batch.core.JobParameters;

@@ -33,10 +33,14 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface IResourceMapper extends BaseSuperMapper<Resource, Long> {
 
-	@Select("select * from tt_resource where id in #{roleIds}")
+	@Select("""
+		select * from tt_resource where id in #{roleIds}
+		""")
 	List<Resource> findMenuByRoleIds(Set<Long> roleIds);
 
-	@Select("")
+	@Select("""
+		select id from tt_resource where parent_id in #{roleIds}
+		""")
 	List<Long> selectIdList(List<Long> pidList);
 
 	/**
@@ -44,8 +48,8 @@ public interface IResourceMapper extends BaseSuperMapper<Resource, Long> {
 	 */
 	default IPage<Resource> selectResourceList(Resource resource, PageParam pageParam) {
 		return this.selectPage(new LambdaQueryWrapperX<Resource>()
-			.likeIfPresent(Resource::getName,resource.getName())
-			.eqIfPresent(Resource::getParentId,resource.getParentId()),
+				.likeIfPresent(Resource::getName, resource.getName())
+				.eqIfPresent(Resource::getParentId, resource.getParentId()),
 			pageParam
 		);
 	}

@@ -11,6 +11,7 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * 管理端,分销员管理接口
@@ -38,7 +37,8 @@ public class DistributionManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getByPage")
-	public Result<IPage<Distribution>> getByPage(DistributionPageQuery distributionPageQuery, PageVO page) {
+	public Result<IPage<Distribution>> getByPage(DistributionPageQuery distributionPageQuery,
+			PageVO page) {
 		return Result.success(distributionService.distributionPage(distributionPageQuery, page));
 	}
 
@@ -76,7 +76,8 @@ public class DistributionManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PreventDuplicateSubmissions
 	@PutMapping(value = "/audit/{id}")
-	public Result<Object> audit(@NotNull @PathVariable String id, @Parameter(description = "审核结果，PASS 通过  REFUSE 拒绝") @NotNull String status) {
+	public Result<Object> audit(@NotNull @PathVariable String id,
+			@Parameter(description = "审核结果，PASS 通过  REFUSE 拒绝") @NotNull String status) {
 		if (distributionService.audit(id, status)) {
 			return Result.success();
 		} else {

@@ -18,7 +18,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
 
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-shardingsphere")
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-data:taotao-cloud-starter-shardingsphere")
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
 
@@ -36,14 +36,14 @@ dependencies {
     //https://code.google.com/p/aviator/
     //http://code.google.com/p/aviator/wiki/User_Guide_zh
     //https://search.maven.org/artifact/com.googlecode.aviator/aviator
-    implementation "com.googlecode.aviator:aviator:5.3.2"
+    implementation "com.googlecode.aviator:aviator:5.3.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:3.21.5"
+    implementation "com.google.protobuf:protobuf-java:3.21.9"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:3.21.5"
+    implementation "com.google.protobuf:protobuf-java-util:3.21.9"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
-    implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
+    //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 
     //https://search.maven.org/artifact/io.protostuff/protostuff-core
     implementation "io.protostuff:protostuff-core:1.8.0"
@@ -97,24 +97,22 @@ dependencies {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
+    compileOnly "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
 }
 
 mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
 description = "系统模块"
 archivesBaseName = 'taotao-cloud-sys'
 
-
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
-        resolutionStrategy {
-            //    //force "org.codehaus.groovy:groovy:4.0.0"
-            //    force "com.alibaba.nacos:nacos-client:2.1.0"
-            force "com.h2database:h2:1.4.200"
-        }
+        //resolutionStrategy {
+        //    //force "org.codehaus.groovy:groovy:4.0.0"
+        //    force "com.alibaba.nacos:nacos-client:2.1.0"
+        //}
 
         //exclude group: "org.codehaus.groovy", module: "groovy"
         //exclude group: "org.projectlombok", module: "lombok"
@@ -127,3 +125,4 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
 }
+

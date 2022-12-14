@@ -23,8 +23,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +45,7 @@ public class IndexController {
 
 	@RequestMapping("")
 	public String index(HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
+			throws IOException {
 		String token = CookieUtil.getUid(request, Constants.COOKIE_MEMBER_TOKEN);
 		System.out.println(">>>>>>>>>>>>>>> index token: " + token);
 
@@ -74,14 +74,14 @@ public class IndexController {
 
 	@RequestMapping("/login.html")
 	public String login(HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
+			throws IOException {
 		return "login";
 	}
 
 	@GetMapping("/code")
 	@ResponseBody
 	public Map<String, Object> code(HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
+			throws IOException {
 		ArithmeticCaptcha captcha = CaptchaUtil.getArithmeticCaptcha();
 		Map<String, Object> res = new HashMap<>();
 		res.put("code", 200);

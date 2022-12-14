@@ -2,6 +2,10 @@ package com.taotao.cloud.promotion.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,11 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
 
 /**
  * 优惠券活动实体类
@@ -57,7 +56,7 @@ public class CouponActivityItem extends BaseSuperEntity<CouponActivityItem, Long
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-			o)) {
+				o)) {
 			return false;
 		}
 		CouponActivityItem couponActivityItem = (CouponActivityItem) o;

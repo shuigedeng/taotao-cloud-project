@@ -16,8 +16,8 @@
 package com.taotao.cloud.sys.api.model.dto;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * EmailDTO
@@ -29,32 +29,32 @@ import javax.validation.constraints.NotBlank;
 @RecordBuilder
 public record EmailDTO(
 
-	/**
-	 * 收件人
-	 */
-	@NotBlank(message = "收件人不能为空")
-	String fromUser,
+		/**
+		 * 收件人
+		 */
+		@NotBlank(message = "收件人不能为空")
+		String fromUser,
 
-	/**
-	 * 邮件服务器SMTP地址
-	 */
-	String host,
+		/**
+		 * 邮件服务器SMTP地址
+		 */
+		String host,
 
-	/**
-	 * 密码
-	 */
-	String pass,
+		/**
+		 * 密码
+		 */
+		String pass,
 
-	/**
-	 * 端口
-	 */
-	@Max(value = 200, message = "端口不能大于200")
-	Integer port,
+		/**
+		 * 端口
+		 */
+		@Max(value = 200, message = "端口不能大于200")
+		Integer port,
 
-	/**
-	 * 发件者用户名
-	 */
-	String user
+		/**
+		 * 发件者用户名
+		 */
+		String user
 ) {
 
 }

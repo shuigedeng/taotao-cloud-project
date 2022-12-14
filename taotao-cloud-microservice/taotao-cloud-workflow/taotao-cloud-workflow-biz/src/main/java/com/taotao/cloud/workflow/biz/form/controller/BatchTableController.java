@@ -9,7 +9,7 @@ import com.taotao.cloud.workflow.biz.form.model.batchtable.BatchTableForm;
 import com.taotao.cloud.workflow.biz.form.model.batchtable.BatchTableInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.BatchTableService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;

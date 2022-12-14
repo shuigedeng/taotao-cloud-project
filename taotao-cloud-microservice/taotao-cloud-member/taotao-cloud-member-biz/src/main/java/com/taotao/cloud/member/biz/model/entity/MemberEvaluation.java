@@ -8,15 +8,14 @@ import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * 会员商品评价表
@@ -170,7 +169,8 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 	@Column(name = "description_score", columnDefinition = "int default 0 comment '描述评分'")
 	private Integer descriptionScore;
 
-	public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSkuSpecGalleryVO goodsSku, Member member, OrderVO order) {
+	public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSkuSpecGalleryVO goodsSku,
+			Member member, OrderVO order) {
 		//复制评价信息
 		BeanUtils.copyProperties(memberEvaluationDTO, this);
 

@@ -8,9 +8,7 @@ import com.taotao.cloud.workflow.biz.form.entity.BatchPackEntity;
 import com.taotao.cloud.workflow.biz.form.model.batchpack.BatchPackForm;
 import com.taotao.cloud.workflow.biz.form.model.batchpack.BatchPackInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.BatchPackService;
-
-import javax.validation.Valid;
-
+import jakarta.validation.Valid;
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,78 +27,84 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/BatchPack")
 public class BatchPackController {
 
-    @Autowired
-    private BatchPackService batchPackService;
-    @Autowired
-    private FlowTaskOperatorService flowTaskOperatorService;
+	@Autowired
+	private BatchPackService batchPackService;
+	@Autowired
+	private FlowTaskOperatorService flowTaskOperatorService;
 
-    /**
-     * 获取批包装指令信息
-     *
-     * @param id 主键值
-     * @return
-     */
-    @Operation("获取批包装指令信息")
-    @GetMapping("/{id}")
-    public Result<BatchPackInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
-        BatchPackInfoVO vo = null;
-        boolean isData = true;
-        if (StringUtil.isNotEmpty(taskOperatorId)) {
-            FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
-            if (operator != null) {
-                if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), BatchPackInfoVO.class);
-                    isData = false;
-                }
-            }
-        }
-        if (isData) {
-            BatchPackEntity entity = batchPackService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, BatchPackInfoVO.class);
-        }
-        return Result.success(vo);
-    }
+	/**
+	 * 获取批包装指令信息
+	 *
+	 * @param id 主键值
+	 * @return
+	 */
+	@Operation("获取批包装指令信息")
+	@GetMapping("/{id}")
+	public Result<BatchPackInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
+			throws DataException {
+		BatchPackInfoVO vo = null;
+		boolean isData = true;
+		if (StringUtil.isNotEmpty(taskOperatorId)) {
+			FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
+			if (operator != null) {
+				if (StringUtil.isNotEmpty(operator.getDraftData())) {
+					vo = JsonUtils.getJsonToBean(operator.getDraftData(), BatchPackInfoVO.class);
+					isData = false;
+				}
+			}
+		}
+		if (isData) {
+			BatchPackEntity entity = batchPackService.getInfo(id);
+			vo = JsonUtils.getJsonToBean(entity, BatchPackInfoVO.class);
+		}
+		return Result.success(vo);
+	}
 
-    /**
-     * 新建批包装指令
-     *
-     * @param batchPackForm 表单对象
-     * @return
-     */
-    @Operation("新建批包装指令")
-    @PostMapping
-    public Result create(@RequestBody @Valid BatchPackForm batchPackForm) throws WorkFlowException {
-        if (batchPackForm.getProductionQuty() != null && StringUtil.isNotEmpty(batchPackForm.getProductionQuty()) && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
-            return Result.fail("批产数量只能输入正整数");
-        }
-        BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
-        if (FlowStatusEnum.save.getMessage().equals(batchPackForm.getStatus())) {
-            batchPackService.save(entity.getId(), entity);
-            return Result.success(MsgCode.SU002.get());
-        }
-        batchPackService.submit(entity.getId(), entity, batchPackForm.getCandidateList());
-        return Result.success(MsgCode.SU006.get());
-    }
+	/**
+	 * 新建批包装指令
+	 *
+	 * @param batchPackForm 表单对象
+	 * @return
+	 */
+	@Operation("新建批包装指令")
+	@PostMapping
+	public Result create(@RequestBody @Valid BatchPackForm batchPackForm) throws WorkFlowException {
+		if (batchPackForm.getProductionQuty() != null && StringUtil.isNotEmpty(
+				batchPackForm.getProductionQuty()) && !RegexUtils.checkDigit2(
+				batchPackForm.getProductionQuty())) {
+			return Result.fail("批产数量只能输入正整数");
+		}
+		BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
+		if (FlowStatusEnum.save.getMessage().equals(batchPackForm.getStatus())) {
+			batchPackService.save(entity.getId(), entity);
+			return Result.success(MsgCode.SU002.get());
+		}
+		batchPackService.submit(entity.getId(), entity, batchPackForm.getCandidateList());
+		return Result.success(MsgCode.SU006.get());
+	}
 
-    /**
-     * 修改批包装指令
-     *
-     * @param batchPackForm 表单对象
-     * @param id            主键
-     * @return
-     */
-    @Operation("修改批包装指令")
-    @PutMapping("/{id}")
-    public Result update(@RequestBody @Valid BatchPackForm batchPackForm, @PathVariable("id") String id) throws WorkFlowException {
-        if (batchPackForm.getProductionQuty() != null && StringUtil.isNotEmpty(batchPackForm.getProductionQuty()) && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
-            return Result.fail("批产数量只能输入正整数");
-        }
-        BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
-        if (FlowStatusEnum.save.getMessage().equals(batchPackForm.getStatus())) {
-            batchPackService.save(id, entity);
-            return Result.success(MsgCode.SU002.get());
-        }
-        batchPackService.submit(id, entity, batchPackForm.getCandidateList());
-        return Result.success(MsgCode.SU006.get());
-    }
+	/**
+	 * 修改批包装指令
+	 *
+	 * @param batchPackForm 表单对象
+	 * @param id            主键
+	 * @return
+	 */
+	@Operation("修改批包装指令")
+	@PutMapping("/{id}")
+	public Result update(@RequestBody @Valid BatchPackForm batchPackForm,
+			@PathVariable("id") String id) throws WorkFlowException {
+		if (batchPackForm.getProductionQuty() != null && StringUtil.isNotEmpty(
+				batchPackForm.getProductionQuty()) && !RegexUtils.checkDigit2(
+				batchPackForm.getProductionQuty())) {
+			return Result.fail("批产数量只能输入正整数");
+		}
+		BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
+		if (FlowStatusEnum.save.getMessage().equals(batchPackForm.getStatus())) {
+			batchPackService.save(id, entity);
+			return Result.success(MsgCode.SU002.get());
+		}
+		batchPackService.submit(id, entity, batchPackForm.getCandidateList());
+		return Result.success(MsgCode.SU006.get());
+	}
 }

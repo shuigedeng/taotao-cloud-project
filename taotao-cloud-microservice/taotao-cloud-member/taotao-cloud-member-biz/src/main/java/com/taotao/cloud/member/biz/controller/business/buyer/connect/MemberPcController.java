@@ -1,4 +1,4 @@
-// package com.taotao.cloud.member.biz.controller.buyer.connect;
+package com.taotao.cloud.member.biz.controller.business.buyer.connect;// package com.taotao.cloud.member.biz.controller.buyer.connect;
 //
 // import com.taotao.cloud.common.constant.CommonConstant;
 // import com.taotao.cloud.common.enums.ResultEnum;
@@ -11,7 +11,7 @@
 // import com.taotao.cloud.member.biz.service.business.MemberService;
 // import io.swagger.v3.oas.annotations.Operation;
 // import io.swagger.v3.oas.annotations.tags.Tag;
-// import javax.validation.constraints.NotNull;
+// import jakarta.validation.constraints.NotNull;
 // import lombok.AllArgsConstructor;
 // import org.springframework.security.access.prepost.PreAuthorize;
 // import org.springframework.validation.annotation.Validated;

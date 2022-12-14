@@ -27,6 +27,17 @@ import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -45,18 +56,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * 全局统一返回值 包装器
@@ -107,7 +106,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({IllegalArgumentException.class})
 	public Result<String> illegalArgumentException(NativeWebRequest req,
-												   IllegalArgumentException e) {
+		IllegalArgumentException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ILLEGAL_ARGUMENT_ERROR);
 	}
@@ -126,21 +125,21 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({UsernameNotFoundException.class})
 	public Result<String> badUsernameNotFoundException(NativeWebRequest req,
-													   UsernameNotFoundException e) {
+		UsernameNotFoundException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
 	}
 
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
 	public Result<String> handleHttpRequestMethodNotSupportedException(NativeWebRequest req,
-																	   HttpRequestMethodNotSupportedException e) {
+		HttpRequestMethodNotSupportedException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.METHOD_NOT_SUPPORTED_ERROR);
 	}
 
 	@ExceptionHandler({HttpMediaTypeNotSupportedException.class})
 	public Result<String> handleHttpMediaTypeNotSupportedException(NativeWebRequest req,
-																   HttpMediaTypeNotSupportedException e) {
+		HttpMediaTypeNotSupportedException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.MEDIA_TYPE_NOT_SUPPORTED_ERROR);
 	}
@@ -153,7 +152,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({SQLIntegrityConstraintViolationException.class})
 	public Result<String> handleSqlException(NativeWebRequest req,
-											 SQLIntegrityConstraintViolationException e) {
+		SQLIntegrityConstraintViolationException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}
@@ -166,7 +165,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({DataIntegrityViolationException.class})
 	public Result<String> handleDataIntegrityViolationException(NativeWebRequest req,
-																DataIntegrityViolationException e) {
+		DataIntegrityViolationException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}
@@ -186,7 +185,7 @@ public class ExceptionConfiguration implements InitializingBean {
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Result<Map<String, String>> handleMethodArgumentNotValidException(NativeWebRequest req,
-																			 MethodArgumentNotValidException e) {
+		MethodArgumentNotValidException e) {
 		printLog(req, e);
 		BindingResult bindingResult = e.getBindingResult();
 		return Result.fail(getErrors(bindingResult));
@@ -194,21 +193,21 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({MethodArgumentTypeMismatchException.class})
 	public Result<String> requestTypeMismatch(NativeWebRequest req,
-											  MethodArgumentTypeMismatchException e) {
+		MethodArgumentTypeMismatchException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.METHOD_ARGUMENTS_TYPE_MISMATCH);
 	}
 
 	@ExceptionHandler({MissingServletRequestParameterException.class})
 	public Result<String> requestMissingServletRequest(NativeWebRequest req,
-													   MissingServletRequestParameterException e) {
+		MissingServletRequestParameterException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER);
 	}
 
 	@ExceptionHandler({HttpMessageNotReadableException.class})
 	public Result<String> httpMessageNotReadableException(NativeWebRequest req,
-														  HttpMessageNotReadableException e) {
+		HttpMessageNotReadableException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.HTTP_MESSAGE_NOT_READABLE);
 	}
@@ -220,11 +219,11 @@ public class ExceptionConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * RequestParam上validate失败后抛出的异常是javax.validation.ConstraintViolationException
+	 * RequestParam上validate失败后抛出的异常是jakarta.validation.ConstraintViolationException
 	 */
 	@ExceptionHandler(ConstraintViolationException.class)
 	public Result<Map<String, String>> handleException(NativeWebRequest req,
-													   ConstraintViolationException e) {
+		ConstraintViolationException e) {
 		printLog(req, e);
 		return Result.fail(getErrors(e));
 	}

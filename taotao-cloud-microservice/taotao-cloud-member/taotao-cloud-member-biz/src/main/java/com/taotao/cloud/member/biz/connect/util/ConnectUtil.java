@@ -27,14 +27,13 @@ import com.taotao.cloud.sys.api.model.vo.setting.QQConnectSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.QQConnectSettingVO;
 import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.WechatConnectSettingVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 联合登陆工具类
@@ -75,7 +74,8 @@ public class ConnectUtil {
 	 * @param httpServletRequest
 	 * @throws IOException
 	 */
-	public void callback(String type, AuthCallback callback, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
+	public void callback(String type, AuthCallback callback, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) throws IOException {
 		AuthRequest authRequest = this.getAuthRequest(type);
 		AuthResponse<ConnectAuthUser> response = authRequest.login(callback);
 		Result<Token> result;
@@ -95,12 +95,13 @@ public class ConnectUtil {
 			throw new BusinessException(ResultEnum.ERROR.getCode(), response.getMsg());
 		}
 		//缓存写入登录结果，300秒有效
-		redisRepository.setExpire(CachePrefix.CONNECT_RESULT.getPrefix() + callback.getCode(), result, 300L);
+		redisRepository.setExpire(CachePrefix.CONNECT_RESULT.getPrefix() + callback.getCode(),
+				result, 300L);
 
 		//跳转地址
 		String url = this.check(httpServletRequest.getHeader("user-agent")) ?
-			domainProperties.getWap() + "/pages/passport/login?state=" + callback.getCode() :
-			domainProperties.getPc() + "/login?state=" + callback.getCode();
+				domainProperties.getWap() + "/pages/passport/login?state=" + callback.getCode() :
+				domainProperties.getPc() + "/login?state=" + callback.getCode();
 
 		try {
 			httpServletResponse.sendRedirect(url);
@@ -140,29 +141,31 @@ public class ConnectUtil {
 		switch (authInterface) {
 			case WECHAT: {
 				//寻找配置
-				WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingCategoryEnum.WECHAT_CONNECT.name()).data();
+				WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(
+						SettingCategoryEnum.WECHAT_CONNECT.name()).data();
 
 				for (WechatConnectSettingItemVO wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItemVOS()) {
 					if (wechatConnectSettingItem.getClientType().equals(ClientTypeEnum.H5.name())) {
 						authRequest = new BaseAuthWeChatRequest(AuthConfig.builder()
-							.clientId(wechatConnectSettingItem.getAppId())
-							.clientSecret(wechatConnectSettingItem.getAppSecret())
-							.redirectUri(getRedirectUri(authInterface))
-							.build(), redisRepository);
+								.clientId(wechatConnectSettingItem.getAppId())
+								.clientSecret(wechatConnectSettingItem.getAppSecret())
+								.redirectUri(getRedirectUri(authInterface))
+								.build(), redisRepository);
 					}
 				}
 				break;
 			}
 			case WECHAT_PC: {
 				//寻找配置
-				WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(SettingCategoryEnum.WECHAT_CONNECT.name()).data();
+				WechatConnectSettingVO wechatConnectSetting = settingService.getWechatConnectSetting(
+						SettingCategoryEnum.WECHAT_CONNECT.name()).data();
 				for (WechatConnectSettingItemVO wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItemVOS()) {
 					if (wechatConnectSettingItem.getClientType().equals(ClientTypeEnum.PC.name())) {
 						authRequest = new BaseAuthWeChatPCRequest(AuthConfig.builder()
-							.clientId(wechatConnectSettingItem.getAppId())
-							.clientSecret(wechatConnectSettingItem.getAppSecret())
-							.redirectUri(getRedirectUri(authInterface))
-							.build(), redisRepository);
+								.clientId(wechatConnectSettingItem.getAppId())
+								.clientSecret(wechatConnectSettingItem.getAppSecret())
+								.redirectUri(getRedirectUri(authInterface))
+								.build(), redisRepository);
 					}
 				}
 
@@ -170,16 +173,17 @@ public class ConnectUtil {
 			}
 			case QQ:
 				//寻找配置
-				QQConnectSettingVO qqConnectSetting = settingService.getQQConnectSetting(SettingCategoryEnum.QQ_CONNECT.name()).data();
+				QQConnectSettingVO qqConnectSetting = settingService.getQQConnectSetting(
+						SettingCategoryEnum.QQ_CONNECT.name()).data();
 				for (QQConnectSettingItemVO qqConnectSettingItem : qqConnectSetting.getQqConnectSettingItemList()) {
 					if (qqConnectSettingItem.getClientType().equals(ClientTypeEnum.PC.name())) {
 						authRequest = new BaseAuthQQRequest(AuthConfig.builder()
-							.clientId(qqConnectSettingItem.getAppId())
-							.clientSecret(qqConnectSettingItem.getAppKey())
-							.redirectUri(getRedirectUri(authInterface))
-							//这里qq获取unionid 需要配置为true，详情可以查阅属性说明，内部有帮助文档
-							.unionId(true)
-							.build(), redisRepository);
+								.clientId(qqConnectSettingItem.getAppId())
+								.clientSecret(qqConnectSettingItem.getAppKey())
+								.redirectUri(getRedirectUri(authInterface))
+								//这里qq获取unionid 需要配置为true，详情可以查阅属性说明，内部有帮助文档
+								.unionId(true)
+								.build(), redisRepository);
 					}
 				}
 				break;
@@ -193,17 +197,16 @@ public class ConnectUtil {
 	}
 
 	/**
-	 * \b 是单词边界(连着的两个(字母字符 与 非字母字符) 之间的逻辑上的间隔),
-	 * 字符串在编译时会被转码一次,所以是 "\\b"
-	 * \B 是单词内部逻辑间隔(连着的两个字母字符之间的逻辑上的间隔)
+	 * \b 是单词边界(连着的两个(字母字符 与 非字母字符) 之间的逻辑上的间隔), 字符串在编译时会被转码一次,所以是 "\\b" \B
+	 * 是单词内部逻辑间隔(连着的两个字母字符之间的逻辑上的间隔)
 	 */
 	static String phoneReg = "\\b(ip(hone|od)|android|opera m(ob|in)i"
-		+ "|windows (phone|ce)|blackberry"
-		+ "|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp"
-		+ "|laystation portable)|nokia|fennec|htc[-_]"
-		+ "|mobile|up.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
+			+ "|windows (phone|ce)|blackberry"
+			+ "|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp"
+			+ "|laystation portable)|nokia|fennec|htc[-_]"
+			+ "|mobile|up.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
 	static String tableReg = "\\b(ipad|tablet|(Nexus 7)|up.browser"
-		+ "|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
+			+ "|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
 
 	/**
 	 * 移动设备正则匹配：手机端、平板

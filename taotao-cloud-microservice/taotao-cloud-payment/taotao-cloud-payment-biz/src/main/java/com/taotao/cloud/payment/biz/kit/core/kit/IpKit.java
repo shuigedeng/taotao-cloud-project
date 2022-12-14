@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.kit.core.kit;
 //Source code recreated from a .class file by IntelliJ IDEA
 //(powered by Fernflower decompiler)
 //
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class IpKit {
     public IpKit() {

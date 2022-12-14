@@ -8,6 +8,13 @@ import com.taotao.cloud.auth.biz.authentication.miniapp.service.MiniAppSessionKe
 import com.taotao.cloud.auth.biz.authentication.miniapp.service.WechatLoginResponse;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Objects;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -18,14 +25,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.net.URI;
-import java.util.Objects;
-
 /**
  * 小程序预授权
  */
@@ -35,7 +34,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 	private static final String MINI_CLIENT_KEY = "clientId";
 	private static final String JS_CODE_KEY = "jsCode";
 	private final RequestMatcher requiresAuthenticationRequestMatcher = new AntPathRequestMatcher(
-		"/login/miniapp/preauth", "GET");
+			"/login/miniapp/preauth", "GET");
 	private final ObjectMapper om = new ObjectMapper();
 	private final MiniAppClientService miniAppClientService;
 	private final MiniAppSessionKeyCacheService miniAppSessionKeyCacheService;
@@ -48,7 +47,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 	 * @param miniAppSessionKeyCacheService the mini app session key cache
 	 */
 	public MiniAppPreAuthenticationFilter(MiniAppClientService miniAppClientService,
-										  MiniAppSessionKeyCacheService miniAppSessionKeyCacheService) {
+			MiniAppSessionKeyCacheService miniAppSessionKeyCacheService) {
 		this.miniAppClientService = miniAppClientService;
 		this.miniAppSessionKeyCacheService = miniAppSessionKeyCacheService;
 		this.restOperations = new RestTemplate();
@@ -56,7 +55,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-									FilterChain filterChain) throws ServletException, IOException {
+			FilterChain filterChain) throws ServletException, IOException {
 
 		if (response.isCommitted()) {
 			return;
@@ -100,7 +99,7 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 	 * @return ObjectNode
 	 */
 	private WechatLoginResponse getResponse(MiniAppClient miniAppClient, String jsCode)
-		throws JsonProcessingException {
+			throws JsonProcessingException {
 		MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
 		queryParams.add("appid", miniAppClient.getAppId());
 		queryParams.add("secret", miniAppClient.getSecret());
@@ -108,9 +107,9 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 		queryParams.add("grant_type", "authorization_code");
 
 		URI uri = UriComponentsBuilder.fromHttpUrl(ENDPOINT)
-			.queryParams(queryParams)
-			.build()
-			.toUri();
+				.queryParams(queryParams)
+				.build()
+				.toUri();
 		String response = restOperations.getForObject(uri, String.class);
 
 		if (Objects.isNull(response)) {

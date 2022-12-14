@@ -1,4 +1,4 @@
-//package com.taotao.cloud.auth.biz.controller;
+package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz.controller;
 //
 //import java.security.Principal;
 //import java.util.Collections;

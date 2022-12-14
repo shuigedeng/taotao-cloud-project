@@ -1,10 +1,9 @@
 package com.taotao.cloud.stock.biz.interfaces.command;
 
 import io.swagger.annotations.ApiModel;
-import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import java.util.List;
+import lombok.Data;
 
 /**
  * 角色Command

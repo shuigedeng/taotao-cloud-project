@@ -1,14 +1,14 @@
 dependencies {
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-common")
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-common"
 //
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-security")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-data:taotao-cloud-starter-data-jpa")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-data:taotao-cloud-starter-data-p6spy")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-feign")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-seata")
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba:taotao-cloud-starter-alibaba-sentinel")
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-security"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
+//    implementation "io.github.shuigedeng::taotao-cloud-starter-data-p6spy"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-feign"
+//    implementation "io.github.shuigedeng::taotao-cloud-starter-alibaba-seata"
+//    implementation "io.github.shuigedeng::taotao-cloud-starter-alibaba-sentinel"
 //
 //    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
 //    implementation project(":taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api")
@@ -21,7 +21,6 @@ dependencies {
 //    }
 //    implementation "io.seata:seata-spring-boot-starter:1.3.0"
 
-    //    implementation "org.springframework.cloud:spring-cloud-starter-zipkin"
 //    implementation "io.micrometer:micrometer-registry-prometheus"
 
 //    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
@@ -39,7 +38,7 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-context"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
-    implementation "javax.servlet:javax.servlet-api"
+    implementation "jakarta.servlet:jakarta.servlet-api"
 
     developmentOnly "org.springframework.boot:spring-boot-devtools"
     runtimeOnly "com.h2database:h2"

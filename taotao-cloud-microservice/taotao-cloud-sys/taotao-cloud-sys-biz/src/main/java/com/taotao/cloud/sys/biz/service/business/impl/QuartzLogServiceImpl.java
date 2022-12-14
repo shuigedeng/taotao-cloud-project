@@ -22,8 +22,8 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzLogDto;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzLogQueryCriteria;
-import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzLog;
 import com.taotao.cloud.sys.biz.mapper.IQuartzLogMapper;
+import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzLog;
 import com.taotao.cloud.sys.biz.service.business.IQuartzLogService;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -47,7 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
 //@CacheConfig(cacheNames = "quartzLog")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class QuartzLogServiceImpl extends ServiceImpl<IQuartzLogMapper, QuartzLog> implements
-	IQuartzLogService {
+		IQuartzLogService {
 
 	@Override
 	//@Cacheable
@@ -72,7 +72,7 @@ public class QuartzLogServiceImpl extends ServiceImpl<IQuartzLogMapper, QuartzLo
 	//@Cacheable
 	public List<QuartzLog> queryAll(QuartzLogQueryCriteria criteria) {
 		LambdaQueryWrapper<QuartzLog> query = Wrappers.<QuartzLog>lambdaQuery()
-			.eq(QuartzLog::getId, "1");
+				.eq(QuartzLog::getId, "1");
 
 		return baseMapper.selectList(query);
 	}

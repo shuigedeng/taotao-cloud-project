@@ -1,4 +1,4 @@
-//package com.taotao.cloud.wechat.biz.mapper;
+package com.taotao.cloud.wechat.biz.mapper;//package com.taotao.cloud.wechat.biz.mapper;
 //
 //import com.baomidou.mybatisplus.core.conditions.Wrapper;
 //import com.baomidou.mybatisplus.core.mapper.BaseMapper;

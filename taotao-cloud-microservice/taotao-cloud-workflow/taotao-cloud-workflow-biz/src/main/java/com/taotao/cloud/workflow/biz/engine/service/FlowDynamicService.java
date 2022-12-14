@@ -4,7 +4,6 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskForm;
 import com.taotao.cloud.workflow.biz.engine.model.flowtask.FlowTaskInfoVO;
 
-import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.util.Map;
 
 /**

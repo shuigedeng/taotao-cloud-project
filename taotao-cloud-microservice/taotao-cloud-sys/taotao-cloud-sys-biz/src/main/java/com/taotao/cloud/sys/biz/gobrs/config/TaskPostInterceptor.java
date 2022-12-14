@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.gobrs.config;
 
-import com.gobrs.async.core.callback.AsyncTaskPostInterceptor;
+import com.gobrs.async.callback.AsyncTaskPostInterceptor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class TaskPostInterceptor implements AsyncTaskPostInterceptor {
-
 	/**
 	 * @param result   任务结果
 	 * @param taskName 任务名称

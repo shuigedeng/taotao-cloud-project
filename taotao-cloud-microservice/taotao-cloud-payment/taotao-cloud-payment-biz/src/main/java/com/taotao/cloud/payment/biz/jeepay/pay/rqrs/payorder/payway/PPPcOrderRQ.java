@@ -1,9 +1,8 @@
 package com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.payway;
 
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.CommonPayDataRQ;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 /**
  * none.
@@ -15,13 +14,13 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class PPPcOrderRQ extends CommonPayDataRQ {
 
-    /**
-     * 商品描述信息
-     **/
-    @NotBlank(message = "取消支付返回站点")
-    private String cancelUrl;
+	/**
+	 * 商品描述信息
+	 **/
+	@NotBlank(message = "取消支付返回站点")
+	private String cancelUrl;
 
-    public PPPcOrderRQ() {
-        this.setWayCode(CS.PAY_WAY_CODE.PP_PC);
-    }
+	public PPPcOrderRQ() {
+		this.setWayCode(CS.PAY_WAY_CODE.PP_PC);
+	}
 }
