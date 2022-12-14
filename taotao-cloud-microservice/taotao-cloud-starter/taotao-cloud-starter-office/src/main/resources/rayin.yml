@@ -1,9 +1,0 @@
-rayin:
-  # 字体路径 本地绝对路径
-  #font-path: /font_dir
-  # 最大空闲
-  max-idle: 5
-  # 最大线程总数
-  max-total: 10
-  # 最小线程
-  min-idle: 3

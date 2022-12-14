@@ -1,7 +1,0 @@
-dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-tracing:taotao-cloud-starter-tracing-common")
-
-//    api 'io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:3.3.1'
-}
-
-

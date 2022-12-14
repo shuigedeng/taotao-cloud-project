@@ -1,7 +1,0 @@
-com.taotao.cloud.cache.redis.configuration.CacheManagerAutoConfiguration
-com.taotao.cloud.cache.redis.configuration.RedisAutoConfiguration
-com.taotao.cloud.cache.redis.configuration.RedisDelayQueueAutoConfiguration
-com.taotao.cloud.cache.redis.configuration.RedisKeyExpiredEventAutoConfiguration
-com.taotao.cloud.cache.redis.configuration.RedisRateLimiterAutoConfiguration
-com.taotao.cloud.cache.redis.configuration.RedissonDelayAutoConfiguration
-com.taotao.cloud.cache.redis.configuration.RedisStreamAutoConfiguration

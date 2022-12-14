@@ -1,3 +1,0 @@
-com.taotao.cloud.logger.configuration.LoggerAutoConfiguration
-com.taotao.cloud.logger.configuration.LogbackAccessAutoConfiguration
-com.taotao.cloud.logger.configuration.TlogAutoConfiguration

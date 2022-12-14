@@ -1,4 +1,0 @@
-com.taotao.cloud.data.mybatisplus.configuration.MybatisPlusAutoConfiguration
-com.taotao.cloud.data.mybatisplus.configuration.DynamicDataSourceAutoConfiguration
-com.taotao.cloud.data.mybatisplus.configuration.TenantAutoConfiguration
-com.taotao.cloud.data.mybatisplus.configuration.MpInterceptorConfiguration

@@ -1,3 +1,0 @@
-com.taotao.cloud.job.xxl.configuration.XxlJobAutoConfiguration
-com.taotao.cloud.job.xxl.configuration.TimeTaskAutoConfiguration
-com.taotao.cloud.job.xxl.executor.config.XxlJobAutoRegisterConfiguration
