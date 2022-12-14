@@ -1,9 +1,0 @@
-dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms:taotao-cloud-starter-sms-common")
-
-    //https://search.maven.org/artifact/com.qiniu/qiniu-java-sdk
-    api("com.qiniu:qiniu-java-sdk:7.12.0") {
-        exclude group: "org.projectlombok", module: "lombok"
-    }
-}
-

@@ -1,4 +1,0 @@
-com.taotao.cloud.dingtalk.configuration.BeanAutoConfiguration
-com.taotao.cloud.dingtalk.configuration.DingtalkAutoConfiguration
-com.taotao.cloud.dingtalk.configuration.HttpClientAutoConfiguration
-com.taotao.cloud.dingtalk.configuration.ThreadPoolAutoConfiguration

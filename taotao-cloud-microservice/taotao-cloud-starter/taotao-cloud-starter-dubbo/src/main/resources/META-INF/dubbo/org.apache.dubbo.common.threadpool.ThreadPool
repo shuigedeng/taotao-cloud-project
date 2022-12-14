@@ -1,2 +1,0 @@
-dubboThreadPool=com.taotao.cloud.dubbo.treadpool.DubboThreadPool
-dubboWatchingPool=com.taotao.cloud.dubbo.treadpool.DubboWatchingPool

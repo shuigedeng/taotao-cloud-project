@@ -1,5 +1,0 @@
-com.taotao.cloud.feign.configuration.StandardFeignAutoConfiguration
-com.taotao.cloud.feign.configuration.FeignInterceptorAutoConfiguration
-com.taotao.cloud.feign.configuration.VersionLoadbalancerAutoConfiguration
-com.taotao.cloud.feign.configuration.HttpClientAutoConfiguration
-com.taotao.cloud.feign.configuration.OkHttpAutoConfiguration

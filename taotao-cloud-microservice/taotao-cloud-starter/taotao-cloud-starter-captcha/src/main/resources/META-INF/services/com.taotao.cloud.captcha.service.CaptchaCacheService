@@ -1,2 +1,0 @@
-com.taotao.cloud.captcha.service.impl.CaptchaCacheServiceMemImpl
-com.taotao.cloud.captcha.service.impl.CaptchaCacheServiceRedisImpl

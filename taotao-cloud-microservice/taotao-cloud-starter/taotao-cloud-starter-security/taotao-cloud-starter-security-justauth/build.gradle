@@ -1,7 +1,0 @@
-dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security:taotao-cloud-starter-security-common")
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cache:taotao-cloud-starter-cache-redis")
-
-    api 'me.zhyd.oauth:JustAuth:1.16.5'
-}
-

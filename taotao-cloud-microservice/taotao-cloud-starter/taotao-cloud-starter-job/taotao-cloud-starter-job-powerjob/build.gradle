@@ -1,9 +1,0 @@
-dependencies {
-    api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-common")
-
-    api "tech.powerjob:powerjob-worker-spring-boot-starter:4.2.0"
-    api "tech.powerjob:powerjob-official-processors:1.2.2"
-    api "tech.powerjob:powerjob-client:4.2.0"
-}
-
-
