@@ -1,11 +1,11 @@
 dependencies {
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dubbo")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-rocketmq")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mq:taotao-cloud-starter-mq-stream")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job:taotao-cloud-starter-job-xxl")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
 }

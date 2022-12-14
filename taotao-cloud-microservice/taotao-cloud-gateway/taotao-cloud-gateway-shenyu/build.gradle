@@ -1,8 +1,8 @@
 dependencies {
-    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core"))
-    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-monitor"))
-    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha"))
-    implementation(project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger"))
+    implementation "io.github.shuigedeng:taotao-cloud-starter-core"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-monitor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
 
     api "org.springframework.boot:spring-boot-starter-webflux"
     api "org.springframework.boot:spring-boot-starter-actuator"

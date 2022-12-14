@@ -1,5 +1,6 @@
 dependencies {
-    implementation project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web")
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+
     implementation project(":taotao-cloud-microservice:taotao-cloud-recommend:taotao-cloud-recommend-api")
 
 }

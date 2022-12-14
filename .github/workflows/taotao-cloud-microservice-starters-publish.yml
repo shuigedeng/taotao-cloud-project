@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - 'taotao-cloud-microservice/taotao-cloud-starter/**'
-    branches: [ master ]
+    branches: [ aaaa ]
   release:
     types: [ created ]
 

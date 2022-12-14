@@ -5,17 +5,18 @@ configurations {
 }
 
 dependencies {
-	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper")
-	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal")
+	api "io.github.shuigedeng:taotao-cloud-starter-zookeeper"
+
+	api "io.github.shuigedeng:taotao-cloud-starter-canal"
 	api("org.springframework.boot:spring-boot-starter-data-redis"){
 		exclude group: "org.yaml", module: "snakeyaml"
 	}
-	//	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk")
-//	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-disruptor")
-	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rxjava")
-	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss")
-	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-websocket-netty")
-	api project(":taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-ip2region")
+	//	api "io.github.shuigedeng:taotao-cloud-starter-dingtalk")
+//	api "io.github.shuigedeng:taotao-cloud-starter-disruptor")
+	api "io.github.shuigedeng:taotao-cloud-starter-rxjava"
+	api "io.github.shuigedeng:taotao-cloud-starter-oss"
+	api "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
+	api "io.github.shuigedeng:taotao-cloud-starter-ip2region"
 
 //	api "com.ctrip.framework.apollo:apollo-client:1.9.1"
 	api "mysql:mysql-connector-java"
