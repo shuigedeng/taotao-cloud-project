@@ -2,22 +2,22 @@ name: Microservice Docker Image
 
 on:
   push:
-    #paths:
-    #  - 'taotao-cloud-microservice/**'
-    branches: [ dev ]
+    paths:
+      - 'taotao-cloud-microservice/**'
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
-#env:
-#  TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
-#  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{secrets.TAOTAO_CLOUD_OSSRH_PASSWORD}}
-#  TAOTAO_CLOUD_MAVEN_USERNAME: ${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME}}
-#  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD}}
-#  TAOTAO_CLOUD_GITHUB_USERNAME: ${{secrets.TAOTAO_CLOUD_GITHUB_USERNAME}}
-#  TAOTAO_CLOUD_GITHUB_TOKEN: ${{secrets.TAOTAO_CLOUD_GITHUB_TOKEN}}
-#  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}}
-#  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD}}
-#  TAOTAO_CLOUD_VERSION: 2022.12
+env:
+  TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
+  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{secrets.TAOTAO_CLOUD_OSSRH_PASSWORD}}
+  TAOTAO_CLOUD_MAVEN_USERNAME: ${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME}}
+  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD}}
+  TAOTAO_CLOUD_GITHUB_USERNAME: ${{secrets.TAOTAO_CLOUD_GITHUB_USERNAME}}
+  TAOTAO_CLOUD_GITHUB_TOKEN: ${{secrets.TAOTAO_CLOUD_GITHUB_TOKEN}}
+  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}}
+  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD}}
+  TAOTAO_CLOUD_VERSION: 2022.12
 
 jobs:
   build:
@@ -40,87 +40,6 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-
-      - name: Show sec
-        run: |
-          echo ${TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE} | base64
-          echo "--------------------------1"
-          echo ${TAOTAO_CLOUD_SIGNING_PASSWORD} | base64
-          echo "--------------------------2"
-          echo ${TAOTAO_CLOUD_SIGNING_KEY_ID} | base64
-          echo "--------------------------3"
-          echo ${TAOTAO_CLOUD_REGISTRY_USERNAME} | base64
-          echo "--------------------------4"
-          echo ${TAOTAO_CLOUD_REGISTRY_PASSWORD} | base64
-          echo "--------------------------5"
-          echo ${TAOTAO_CLOUD_OSSRH_USERNAME} | base64
-          echo "--------------------------6"
-          echo ${TAOTAO_CLOUD_OSSRH_PASSWORD} | base64
-          echo "--------------------------7"
-          echo ${TAOTAO_CLOUD_MAVEN_USERNAME} | base64
-          echo "--------------------------8"
-          echo ${TAOTAO_CLOUD_MAVEN_PASSWORD} | base64
-          echo "--------------------------9"
-          echo ${TAOTAO_CLOUD_GITHUB_USERNAME} | base64
-          echo "--------------------------10"
-          echo ${TAOTAO_CLOUD_GITHUB_TOKEN} | base64
-        env:
-          TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE }}
-          TAOTAO_CLOUD_SIGNING_PASSWORD: ${{ secrets.TAOTAO_CLOUD_SIGNING_PASSWORD }}
-          TAOTAO_CLOUD_SIGNING_KEY_ID: ${{ secrets.TAOTAO_CLOUD_SIGNING_KEY_ID }}
-          TAOTAO_CLOUD_REGISTRY_USERNAME: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
-          TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
-          TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
-          TAOTAO_CLOUD_OSSRH_PASSWORD: ${{ secrets.TAOTAO_CLOUD_OSSRH_PASSWORD }}
-          TAOTAO_CLOUD_MAVEN_USERNAME: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME }}
-          TAOTAO_CLOUD_MAVEN_PASSWORD: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD }}
-          TAOTAO_CLOUD_GITHUB_USERNAME: ${{ secrets.TAOTAO_CLOUD_GITHUB_USERNAME }}
-          TAOTAO_CLOUD_GITHUB_TOKEN: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
-
-      - name: Show sec11111
-        run: |
-          echo ${SERVER_SSH_KEY} | base64
-          echo "--------------------------11"
-          echo ${REMOTE_USER} | base64
-          echo "--------------------------22"
-          echo ${REMOTE_QODANA_TARGET} | base64
-          echo "--------------------------33"
-          echo ${REMOTE_OPEN_TARGET} | base64
-          echo "--------------------------44"
-          echo ${REMOTE_MERCHANT_TARGET} | base64
-          echo "--------------------------55"
-          echo ${REMOTE_MANAGER_TARGET} | base64
-          echo "--------------------------66"
-          echo ${REMOTE_MALL_TARGET} | base64
-          echo "--------------------------77"
-          echo ${REMOTE_HOST} | base64
-          echo "--------------------------88"
-          echo ${REMOTE_FRONT_TARGET} | base64
-          echo "--------------------------99"
-          echo ${REMOTE_DOCS_TARGET} | base64
-          echo "--------------------------100"
-          echo ${REMOTE_DATAV_TARGET} | base64
-          echo "--------------------------1001"
-          echo ${DING_TOKEN} | base64
-          echo "--------------------------1002"
-          echo ${DING_SECRET} | base64
-          echo "--------------------------1002"
-          echo ${ACCESS_TOKEN} | base64
-        env:
-          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_QODANA_TARGET: ${{ secrets.REMOTE_QODANA_TARGET }}
-          REMOTE_OPEN_TARGET: ${{ secrets.REMOTE_OPEN_TARGET }}
-          REMOTE_MERCHANT_TARGET: ${{ secrets.REMOTE_MERCHANT_TARGET }}
-          REMOTE_MANAGER_TARGET: ${{ secrets.REMOTE_MANAGER_TARGET }}
-          REMOTE_MALL_TARGET: ${{ secrets.REMOTE_MALL_TARGET }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_FRONT_TARGET: ${{ secrets.REMOTE_FRONT_TARGET }}
-          REMOTE_DOCS_TARGET: ${{ secrets.REMOTE_DOCS_TARGET }}
-          REMOTE_DATAV_TARGET: ${{ secrets.REMOTE_DATAV_TARGET }}
-          DING_TOKEN: ${{ secrets.DING_TOKEN }}
-          DING_SECRET: ${{ secrets.DING_SECRET }}
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Show Github
         run: echo "$GITHUB_CONTEXT"
