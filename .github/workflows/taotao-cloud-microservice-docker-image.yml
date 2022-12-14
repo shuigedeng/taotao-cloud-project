@@ -4,7 +4,7 @@ on:
   push:
     #paths:
     #  - 'taotao-cloud-microservice/**'
-    branches: [ master ]
+    branches: [ dev ]
   pull_request:
     branches: [ master ]
 
@@ -40,6 +40,11 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+
+      - name: Show sec
+        run: echo ${TAOTAO_CLOUD_SIGNING_PASSWORD} | base64
+        env:
+          TAOTAO_CLOUD_SIGNING_PASSWORD: ${{ secrets.TAOTAO_CLOUD_SIGNING_PASSWORD }}
 
       - name: Show Github
         run: echo "$GITHUB_CONTEXT"
