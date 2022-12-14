@@ -44,15 +44,25 @@ jobs:
       - name: Show sec
         run: |
           echo ${TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE} | base64
+          echo "--------------------------1"
           echo ${TAOTAO_CLOUD_SIGNING_PASSWORD} | base64
+          echo "--------------------------2"
           echo ${TAOTAO_CLOUD_SIGNING_KEY_ID} | base64
+          echo "--------------------------3"
           echo ${TAOTAO_CLOUD_REGISTRY_USERNAME} | base64
+          echo "--------------------------4"
           echo ${TAOTAO_CLOUD_REGISTRY_PASSWORD} | base64
+          echo "--------------------------5"
           echo ${TAOTAO_CLOUD_OSSRH_USERNAME} | base64
+          echo "--------------------------6"
           echo ${TAOTAO_CLOUD_OSSRH_PASSWORD} | base64
+          echo "--------------------------7"
           echo ${TAOTAO_CLOUD_MAVEN_USERNAME} | base64
+          echo "--------------------------8"
           echo ${TAOTAO_CLOUD_MAVEN_PASSWORD} | base64
+          echo "--------------------------9"
           echo ${TAOTAO_CLOUD_GITHUB_USERNAME} | base64
+          echo "--------------------------10"
           echo ${TAOTAO_CLOUD_GITHUB_TOKEN} | base64
         env:
           TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE }}
