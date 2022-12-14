@@ -2,8 +2,8 @@ name: Microservice Docker Image
 
 on:
   push:
-    paths:
-      - 'taotao-cloud-microservice/**'
+    #paths:
+    #  - 'taotao-cloud-microservice/**'
     branches: [ dev ]
   pull_request:
     branches: [ master ]
@@ -42,9 +42,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: show secrets
-        run: echo "SECRETS_CONTEXT"
-        env:
-          SECRETS_CONTEXT: ${{ toJSON(secrets) }}
+        run: echo ${{secrets.ACCESS_TOKEN}} | base64
 
       - name: Show Github
         run: echo "$GITHUB_CONTEXT"
