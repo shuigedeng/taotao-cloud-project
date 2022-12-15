@@ -4,8 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - quality
-      #- master
+      - master
       - 'releases/*'
 
 jobs:
