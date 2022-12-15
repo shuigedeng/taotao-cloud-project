@@ -64,9 +64,9 @@
 Requires:
 
 ```
-JAVA_VERSION >= 17 (推荐使用amazon-corretto-17)
+JAVA_VERSION >= 17 (推荐使用graalvm)
 GRALE_VERSION >= 7.6
-IDEA_VERSION >= 2022.2
+IDEA_VERSION >= 2022.3
 ```
 
 Gradle:
@@ -109,13 +109,13 @@ Maven:
 
 依赖                   | 版本
 ----------------------|---------------
-Spring               | 5.3.22
+Spring               | 5.3.24
 Spring Boot          | 2.7.6
 Spring Cloud         | 2021.0.5
 Spring Cloud alibaba | 2021.0.4.0
-Spring Security      | 5.7.3
+Spring Security      | 5.8.0
 Mybatis Plus         | 3.5.2
-Hutool               | 5.5.9
+Hutool               | 5.5.10
 Mysql                | 8.0.30
 Querydsl             | 5.0.0
 Swagger              | 3.3.0
@@ -134,20 +134,20 @@ Guava                | 29.0-jre
 * 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限,
   需多刷新几次)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top)
-  源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-microservice/taotao-cloud-front)
+  源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-front)
 * 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top)
-  源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-datav)
+  源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-datav)
 * 平台管理地址(进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (
   admin/123456)
-  源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-manager)
+  源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-manager)
 * 商户管理地址(进度5%): [https://merchant.taotaocloud.top](https://merchant.taotaocloud.top) (
   taotao/123456)
-  源码地址: [taotao-cloud-merchant](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-merchant)
+  源码地址: [taotao-cloud-merchant](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-merchant)
 * 开放平台地址(进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (
   taotao/123456)
-  源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-ui/taotao-cloud-open)
+  源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-open)
 * 移动端在线预览(进度5%)
-  源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-mall)
+  源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-taro-mall)
 
 | <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                         | <center>小程序</center>     | <center>H5</center>                               |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|---------------------------------------------------|
@@ -157,8 +157,8 @@ Guava                | 29.0-jre
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**
   非功能性需求**
-* **主体框架**：采用最新的Spring Boot 2.7.1、Spring Cloud 2021.0.2、Spring Cloud Alibaba
-  2021.0.1.0版本进行设计
+* **主体框架**：采用最新的Spring Boot 2.7.6、Spring Cloud 2021.0.5、Spring Cloud Alibaba
+  2021.0.4.0版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
@@ -187,11 +187,10 @@ Guava                | 29.0-jre
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
 │  ├─taotao-cloud-container -- 容器模块
-│  ├─taotao-cloud-dependencies -- 全局公共依赖模块
 │  ├─taotao-cloud-go -- go模块
-│  ├─taotao-cloud-java -- java模块
 │  ├─taotao-cloud-microservice -- 微服务业务模块
 │  │  ├─taotao-cloud-monitor  -- 监控模块
+│  │  ├─taotao-cloud-data-sync  -- 数据同步模块
 │  │  ├─taotao-cloud-auth  -- oauth2认证中心模块
 │  │  ├─taotao-cloud-customer  -- 客服模块
 │  │  ├─taotao-cloud-distribution  -- 营销/分销模块
@@ -208,7 +207,6 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-promotion  -- 促销模块
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
 │  │  ├─taotao-cloud-report  -- 报表模块
-│  │  ├─taotao-cloud-starter  -- starter组件模块
 │  │  ├─taotao-cloud-stock  -- 库存模块
 │  │  ├─taotao-cloud-store  -- 店铺模块
 │  │  ├─taotao-cloud-sys  -- 系统模块
@@ -217,10 +215,8 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-nod -- node模块
 │  ├─taotao-cloud-plugin -- 插件模块
 │  ├─taotao-cloud-python -- python模块
-│  ├─taotao-cloud-reactive -- spring web响应式模块
 │  ├─taotao-cloud-rpc -- rpc模块
 │  ├─taotao-cloud-scala -- scala模块
-│  ├─taotao-cloud-spring-native -- spring模块
 │  ├─taotao-cloud-standlone -- 单项目模块
 │  ├─taotao-cloud-warehouse -- 数仓模块
 │  │  ├─taotao-cloud-offline-warehouse  -- 离线仓库模块
@@ -229,13 +225,6 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-realtime-mall -- 商城日志分析模块
 │  │  ├─taotao-cloud-realtime-recommend -- 实时推荐模块
 │  │  ├─taotao-cloud-realtime-travel -- 实时旅游模块
-│  ├─taotao-cloud-ui -- 前端模块
-│  │  ├─taotao-cloud-datav -- 大屏PC端展示模块
-│  │  ├─taotao-cloud-front -- 商城PC端模块
-│  │  ├─taotao-cloud-mall  -- 商城移动端模块
-│  │  ├─taotao-cloud-manager  -- 平台管理端模块
-│  │  ├─taotao-cloud-merchant  -- 商户管理端模块
-│  │  ├─taotao-cloud-open -- 开放平台PC端模块
 ```
 
 ## 9.开源共建
