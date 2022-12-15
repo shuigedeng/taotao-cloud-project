@@ -111,9 +111,9 @@ configurations {
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
         resolutionStrategy {
-            //    //force "org.codehaus.groovy:groovy:4.0.0"
+            //    force "org.codehaus.groovy:groovy:4.0.0"
             //    force "com.alibaba.nacos:nacos-client:2.1.0"
-            force "com.h2database:h2:1.4.200"
+            //    force "com.h2database:h2:1.4.200"
         }
 
         //exclude group: "org.codehaus.groovy", module: "groovy"
