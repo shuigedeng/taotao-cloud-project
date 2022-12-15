@@ -112,12 +112,12 @@ public class Region extends BaseSuperEntity<Region, Long> {
 	 * @Select("SELECT * FROM person WHERE id=#{id}")
 	 * Person selectOneById(int id);
 	 */
-	@Type(type="json")
+	//@Type(type="json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "id_tree", columnDefinition = "json null comment 'id树'")
 	private List<Long> idTree;
 
-	@Type(type="json")
+	//@Type(type="json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "code_tree", columnDefinition = "json null comment 'id树'")
 	private List<String> codeTree;

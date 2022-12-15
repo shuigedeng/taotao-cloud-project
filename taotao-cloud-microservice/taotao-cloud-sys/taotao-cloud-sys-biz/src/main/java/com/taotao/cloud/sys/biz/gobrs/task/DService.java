@@ -1,7 +1,9 @@
 package com.taotao.cloud.sys.biz.gobrs.task;
 
-import com.gobrs.async.TaskSupport;
-import com.gobrs.async.task.AsyncTask;
+import com.gobrs.async.core.TaskSupport;
+import com.gobrs.async.core.anno.Task;
+import com.gobrs.async.core.task.AsyncTask;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,47 +15,44 @@ import org.springframework.stereotype.Component;
  * @author: sizegang
  * @create: 2022 -03-20
  */
-@Component
+@Slf4j
+@Task
 public class DService extends AsyncTask<Object, Object> {
 
-	/**
-	 * The .
-	 */
-	int i = 10000;
+    /**
+     * The .
+     */
+    int i = 10000;
 
-	@Override
-	public void prepare(Object o) {
+    @Override
+    public void prepare(Object o) {
+        log.info(this.getName() + " 使用线程---" + Thread.currentThread().getName());
+    }
 
-	}
+    @Override
+    public Object task(Object o, TaskSupport support) {
+        try {
+            System.out.println("DService Begin");
+            Thread.sleep(200);
+            for (int i1 = 0; i1 < i; i1++) {
+                i1 += i1;
+            }
+            System.out.println("DService Finish");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	@Override
-	public Object task(Object o, TaskSupport support) {
-		try {
-			System.out.println("DService Begin");
-			Thread.sleep(200);
-			for (int i1 = 0; i1 < i; i1++) {
-				i1 += i1;
-			}
-			System.out.println("DService Finish");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public boolean nessary(Object o, TaskSupport support) {
-		return true;
-	}
+    @Override
+    public boolean necessary(Object o, TaskSupport support) {
+        return true;
+    }
 
 
-	@Override
-	public void onSuccess(TaskSupport support) {
+    @Override
+    public void onSuccess(TaskSupport support) {
 
-	}
+    }
 
-	@Override
-	public void onFail(TaskSupport support) {
-
-	}
 }
