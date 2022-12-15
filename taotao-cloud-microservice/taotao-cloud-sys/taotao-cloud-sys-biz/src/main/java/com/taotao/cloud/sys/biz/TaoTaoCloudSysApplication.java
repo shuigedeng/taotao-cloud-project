@@ -19,6 +19,7 @@ import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import java.io.File;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.web.context.WebServerPortFileWriter;
 
 /**
  * TaoTaoCloudSysApplication 抑制java9 module 报错
@@ -64,6 +65,9 @@ public class TaoTaoCloudSysApplication {
 			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
 		System.setProperty("nacos.logging.default.config.enabled", "true");
 
+		/**
+		 * @see WebServerPortFileWriter
+		 */
 		System.setProperty("portfile",
 			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys"
 				+ File.separator + "taotao-cloud-sys.port");
