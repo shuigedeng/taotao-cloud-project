@@ -17,12 +17,10 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.QUser;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
@@ -53,7 +51,7 @@ public class UserServiceImpl extends
 	BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
 	implements IUserService {
 
-	private final static QUser USER = QUser.user;
+	//private final static QUser USER = QUser.user;
 
 	private final static String DEFAULT_PASSWORD = "123456";
 	private final static String DEFAULT_USERNAME = "admin";
@@ -140,14 +138,16 @@ public class UserServiceImpl extends
 
 	@Override
 	public Boolean existsByPhone(String phone) {
-		BooleanExpression phonePredicate = USER.phone.eq(phone);
-		return cr().exists(phonePredicate);
+		//BooleanExpression phonePredicate = USER.phone.eq(phone);
+		//return cr().exists(phonePredicate);
+		return true;
 	}
 
 	@Override
 	public Boolean existsById(Long id) {
-		BooleanExpression phonePredicate = USER.id.eq(id);
-		return cr().exists(phonePredicate);
+		//BooleanExpression phonePredicate = USER.id.eq(id);
+		//return cr().exists(phonePredicate);
+		return true;
 	}
 
 	@Override

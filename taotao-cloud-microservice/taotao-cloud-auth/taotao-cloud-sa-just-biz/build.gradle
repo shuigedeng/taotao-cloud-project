@@ -25,7 +25,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
     implementation "io.github.shuigedeng:taotao-cloud-starter-security-justauth"
 

@@ -19,7 +19,6 @@ import com.taotao.cloud.sys.api.dubbo.IDubboResourceService;
 import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
 import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
-import com.taotao.cloud.sys.biz.model.entity.system.QResource;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
@@ -47,7 +46,7 @@ public class DubboResourceServiceImpl extends
 	@Autowired
 	private IRoleService sysRoleService;
 
-	private final static QResource RESOURCE = QResource.resource;
+	//private final static QResource RESOURCE = QResource.resource;
 
 	@Override
 	public List<DubboMenuQueryRequest> queryAllById(Long id) {

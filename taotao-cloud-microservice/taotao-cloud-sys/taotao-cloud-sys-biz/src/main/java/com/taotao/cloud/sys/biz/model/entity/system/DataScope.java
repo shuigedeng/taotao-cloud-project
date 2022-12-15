@@ -81,7 +81,7 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	/**
 	 * 公司id
 	 */
-	@Type(type = "json")
+	//@Type(type = "json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "company_ids", columnDefinition = "json null comment '公司id列表'")
 	private List<Long> companyIds;
@@ -89,7 +89,7 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	/**
 	 * 部门id
 	 */
-	@Type(type = "json")
+	//@Type(type = "json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "dept_ids", columnDefinition = "json null comment '部门id列表'")
 	private List<Long> deptIds;
@@ -97,7 +97,7 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	/**
 	 * 用户id
 	 */
-	@Type(type = "json")
+	//@Type(type = "json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "user_ids", columnDefinition = "json null comment '用户id列表'")
 	private List<Long> userIds;

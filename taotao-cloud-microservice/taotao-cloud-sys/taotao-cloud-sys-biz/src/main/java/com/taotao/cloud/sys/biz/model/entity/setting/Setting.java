@@ -51,7 +51,7 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
 	@Column(name = "en_code", unique = true, columnDefinition = "varchar(255) not null comment '编码'")
 	private String enCode;
 
-	@Type(type = "json")
+	//@Type(type = "json")
 	@TableField(typeHandler = JacksonTypeHandler.class)
 	@Column(name = "value", columnDefinition = "json not null comment 'json数据'")
 	private Map<String, String> value;
