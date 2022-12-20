@@ -19,7 +19,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-schedule"
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
 
     //implementation "io.github.shuigedeng:taotao-cloud-starter-shardingsphere")
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
@@ -100,7 +100,7 @@ dependencies {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
 }
 
 mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
