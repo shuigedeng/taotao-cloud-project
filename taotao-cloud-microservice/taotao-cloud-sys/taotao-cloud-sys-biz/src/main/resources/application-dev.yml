@@ -575,7 +575,6 @@ rocketmq:
     #access-key:
     #secret-key:
 
-
 spring:
   autoconfigure:
     exclude:
@@ -838,7 +837,7 @@ spring:
       enabled: true
       file-size-threshold: 2KB
       max-file-size: 200MB
-      max-request-size: 215MB
+      max-request-size: 200MB
   sleuth:
     jdbc:
       # 为false时 datasource-proxy-spring-boot-starter会生效 程序启动时会卡着不动
@@ -1814,12 +1813,6 @@ logging:
     #org.springframework.boot.autoconfigure: off
     #org.elasticsearch.client: debug
 
-springdoc:
-  showActuator: true
-  packages-to-exclude:
-    - cn.afterturn.easypoi.wps.controller
-    - com.taotao.cloud.captcha.controller
-
 test:
   baseUrl: https://www.baidu.com
 
@@ -1939,3 +1932,32 @@ gobrs:
         - name: "futureTaskRule"
           content: "futureTaskA->futureTaskB;futureTaskC->futureTaskD"
           task-interrupt: true # 局部异常是否打断主流程 默认 false
+
+springdoc:
+  showActuator: true
+  packages-to-exclude:
+    - cn.afterturn.easypoi.wps.controller
+    - com.taotao.cloud.captcha.controller
+  #swagger-ui:
+  #  path: /swagger-ui.html
+  #  tags-sorter: alpha
+  #  operations-sorter: alpha
+  #api-docs:
+  #  path: /v3/api-docs
+  #group-configs:
+  #  - group: 'default'
+  #    paths-to-match: '/**'
+  #    packages-to-scan: com.xiaominfo.knife4j.demo.web
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    swagger-model-name: 实体类列表
+  documents:
+    - name: 标题1
+      locations: classpath:markdown/*
+      group: default
+    - name: 标题2
+      locations: classpath:markdown1/*
+      group: 用户模块
