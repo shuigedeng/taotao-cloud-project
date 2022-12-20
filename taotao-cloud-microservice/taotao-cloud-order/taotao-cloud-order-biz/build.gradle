@@ -21,7 +21,7 @@ dependencies {
     //implementation project(":taotao-cloud-microservice:taotao-cloud-stock:taotao-cloud-stock-api")
 
     //https://search.maven.org/artifact/org.springframework.amqp/spring-amqp
-    implementation "org.springframework.amqp:spring-amqp:2.4.6"
+    implementation "org.springframework.amqp:spring-amqp:3.0.0"
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
