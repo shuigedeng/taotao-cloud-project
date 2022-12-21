@@ -5,6 +5,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-tencent"
+    implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
+    implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
 
     //implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-nacos"
