@@ -44,7 +44,7 @@ spring:
           series: server_error
           statuses: gateway_timeout, bad_gateway, service_unavailable
     polaris:
-      address: grpc://192.168.10.210:8091
+      address: grpc://192.168.10.210:8094 #8091
       namespace: default
       enabled: true
       ratelimit:
@@ -57,7 +57,7 @@ spring:
         enabled: true
         port: 28081
       config:
-        address: grpc://192.168.10.210:8093 # the address of polaris config server
+        address: grpc://192.168.10.210:8095 # 8093 the address of polaris config server
         auto-refresh: true # auto refresh when config file changed
         groups:
           - name: ${spring.application.name} # group name
