@@ -21,6 +21,12 @@ server:
 
 spring:
   datasource:
+    doris: # doris配置
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: 数据库地址
+      username: 账号
+      password: 密码
+
     presto:
       name: presto
       type: org.apache.tomcat.jdbc.pool.DataSource

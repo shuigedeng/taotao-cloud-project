@@ -4,14 +4,26 @@ server:
   http2:
     enabled: true
   undertow:
+    #HTTP POST请求最大的大小
+    max-http-post-size: 0
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统线程执行任务的阻塞系数，默认值是IO线程数*8
     buffer-size: 2048
+    # 每个区分配的buffer数量 , 所以pool的大小是buffer-size * buffers-per-region
+    buffers-per-region: 1024
+    # 是否分配的直接内存
     direct-buffers: true
     threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程。
+      #该值不要设置过大，如果过大，启动项目会报错：打开文件数过多
       io: 16
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统线程执行任务的阻塞系数，默认值是IO线程数*8
       worker: 256
     accesslog:
       dir: ${user.home}/logs/${spring.application.name}/undertow
       enabled: true
+      pattern: common
+      prefix: access_log
+      suffix: log
   servlet:
     application-display-name: ${spring.application.name}
     #context-path: sys
@@ -1736,7 +1748,10 @@ management:
       enabled: true
   endpoints:
     web:
+      base-path: "/actuator" #默认的访问路径
       exposure:
+        #include: ["health","info"]
+        #exclude: "env,beans"
         include: '*'
   endpoint:
     metrics:
