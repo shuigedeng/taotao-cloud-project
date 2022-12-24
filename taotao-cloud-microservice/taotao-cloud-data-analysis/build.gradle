@@ -1,0 +1,97 @@
+dependencies {
+    implementation "io.github.shuigedeng:taotao-cloud-starter-common"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
+
+//    implementation "org.springframework.boot:spring-boot-starter-security"
+    //implementation "org.springframework.boot:spring-boot-starter-mail"
+
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+
+//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.springframework.boot:spring-boot-starter-json"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
+
+    implementation "mysql:mysql-connector-java"
+//    implementation "com.baomidou:mybatis-plus-boot-starter"
+
+//    implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
+//    implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
+//    implementation "org.antlr:antlr4-runtime:4.11.1"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+
+    //-----------
+    implementation "ru.yandex.clickhouse:clickhouse-jdbc:0.3.2"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+
+    implementation 'com.alibaba:druid-spring-boot-starter:1.2.15'
+    implementation "com.baomidou:mybatis-plus-boot-starter:3.5.2"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.springframework.boot:spring-boot-starter-test"
+
+    //----
+    implementation "io.trino:trino-jdbc:402"
+    implementation "io.trino:trino-spi:402"
+    implementation "io.trino:trino-main:402"
+
+    implementation "io.airlift:slice:0.44"
+    implementation "io.airlift:units:1.8"
+    implementation "com.google.guava:guava:31.1-jre"
+    implementation "junit:junit:4.13.2"
+
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.14.0"
+
+    //---
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-test"
+    implementation "org.springframework.kafka:spring-kafka:2.9.0"
+    implementation "org.springframework.boot:spring-boot-autoconfigure:2.7.5"
+
+    //---
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-test"
+
+    implementation "org.springframework.cloud:spring-cloud-context"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    implementation "org.apache.hbase:hbase-client:2.4.13"
+
+ 
+}
+
+configurations {
+    compile.exclude group: "org.springframework.security.oauth", module: "spring-security-oauth2"
+    compile.exclude group: "org.slf4j", module: "slf4j-log4j12"
+    compile.exclude group: "org.springframework.security", module: "spring-security-core"
+}
+
+mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
+description = "数据同步模块"
+archivesBaseName = 'taotao-cloud-sync'
+
