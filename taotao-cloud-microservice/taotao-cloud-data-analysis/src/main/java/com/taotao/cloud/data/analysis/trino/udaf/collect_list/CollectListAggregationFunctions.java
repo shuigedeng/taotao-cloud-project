@@ -40,9 +40,9 @@ public class CollectListAggregationFunctions {
 	)
 	public interface CollectState extends AccumulatorState {
 
-		com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats get();
+		CollectListStats get();
 
-		void set(com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats value);
+		void set(CollectListStats value);
 	}
 
 
@@ -51,9 +51,9 @@ public class CollectListAggregationFunctions {
 		@SqlType(StandardTypes.VARCHAR) Slice id,
 		@SqlType(StandardTypes.VARCHAR) Slice key) {
 		try {
-			com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats stats = state.get();
+		CollectListStats stats = state.get();
 			if (stats == null) {
-				stats = new com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats();
+				stats = new CollectListStats();
 				state.set(stats);
 			}
 			int inputId = Integer.parseInt(id.toStringUtf8());
@@ -67,8 +67,8 @@ public class CollectListAggregationFunctions {
 	@CombineFunction
 	public static void combine(@AggregationState CollectState state, CollectState otherState) {
 		try {
-			com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats collectListStats = state.get();
-			com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats oCollectListStats = otherState.get();
+			CollectListStats collectListStats = state.get();
+			CollectListStats oCollectListStats = otherState.get();
 			if (collectListStats == null) {
 				state.set(oCollectListStats);
 			} else {

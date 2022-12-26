@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.auth.biz.jpa.service.authorizationConsent;
 
+import com.taotao.cloud.auth.biz.jpa.entity.authorizationConsent.AuthorizationConsent;
+import com.taotao.cloud.auth.biz.jpa.repository.authorizationConsent.AuthorizationConsentRepository;
 import java.util.HashSet;
 import java.util.Set;
 
-import sample.jpa.entity.authorizationConsent.AuthorizationConsent;
-import sample.jpa.repository.authorizationConsent.AuthorizationConsentRepository;
 
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,7 +37,8 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
 	private final AuthorizationConsentRepository authorizationConsentRepository;
 	private final RegisteredClientRepository registeredClientRepository;
 
-	public JpaOAuth2AuthorizationConsentService(AuthorizationConsentRepository authorizationConsentRepository, RegisteredClientRepository registeredClientRepository) {
+	public JpaOAuth2AuthorizationConsentService(
+		AuthorizationConsentRepository authorizationConsentRepository, RegisteredClientRepository registeredClientRepository) {
 		Assert.notNull(authorizationConsentRepository, "authorizationConsentRepository cannot be null");
 		Assert.notNull(registeredClientRepository, "registeredClientRepository cannot be null");
 		this.authorizationConsentRepository = authorizationConsentRepository;

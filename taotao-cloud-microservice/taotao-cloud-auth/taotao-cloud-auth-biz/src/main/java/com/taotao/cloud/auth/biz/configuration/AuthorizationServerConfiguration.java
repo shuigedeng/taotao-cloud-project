@@ -18,7 +18,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.jackson2.SecurityJackson2Modules;
@@ -28,9 +27,10 @@ import org.springframework.security.oauth2.server.authorization.JdbcOAuth2Author
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
-import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.jackson2.OAuth2AuthorizationServerJackson2Module;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
@@ -75,7 +75,7 @@ public class AuthorizationServerConfiguration {
 	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
 		throws Exception {
 
-		OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
+		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
 
 		http.apply(authorizationServerConfigurer
 			.tokenEndpoint(tokenEndpointCustomizer ->
@@ -110,8 +110,8 @@ public class AuthorizationServerConfiguration {
 		RequestMatcher authorizationServerConfigurerEndpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
 		http
-			.requestMatcher(authorizationServerConfigurerEndpointsMatcher)
-			.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+			.securityMatcher(authorizationServerConfigurerEndpointsMatcher)
+			.authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
 			.csrf(
 				csrf -> csrf.ignoringRequestMatchers(authorizationServerConfigurerEndpointsMatcher))
 			.formLogin()
@@ -172,8 +172,8 @@ public class AuthorizationServerConfiguration {
 	}
 
 	@Bean
-	public ProviderSettings providerSettings() {
-		return ProviderSettings.builder().issuer(tokenIssuer).build();
+	public AuthorizationServerSettings providerSettings() {
+		return AuthorizationServerSettings.builder().issuer(tokenIssuer).build();
 	}
 
 }

@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.front.controller;
 
-import com.taotao.cloud.portal.util.CaptchaUtil;
-import com.taotao.cloud.portal.util.Constants;
-import com.taotao.cloud.portal.util.CookieUtil;
+import com.taotao.cloud.front.util.CaptchaUtil;
+import com.taotao.cloud.front.util.Constants;
+import com.taotao.cloud.front.util.CookieUtil;
 import com.wf.captcha.ArithmeticCaptcha;
 import java.io.IOException;
 import java.time.LocalDateTime;

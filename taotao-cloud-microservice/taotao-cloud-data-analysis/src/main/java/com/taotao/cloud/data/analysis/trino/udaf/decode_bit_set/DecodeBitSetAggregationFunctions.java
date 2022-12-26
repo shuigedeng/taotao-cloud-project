@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.data.analysis.trino.udaf.decode_bit_set;
 
-import com.taotao.cloud.data.sync.trino.udaf.decode_bit_set.RouteUserAggregationBase;
 import io.airlift.slice.Slice;
 import io.airlift.slice.Slices;
 import io.trino.spi.block.BlockBuilder;
@@ -39,7 +38,7 @@ public class DecodeBitSetAggregationFunctions {
 
 	@InputFunction
 	public static void input(
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.decode_bit_set.RouteUserAggregationBase.SliceState state,
+		@AggregationState RouteUserAggregationBase.SliceState state,
 		@SqlType(StandardTypes.BIGINT) long mask,
 		@SqlType(StandardTypes.BIGINT) long value) {
 		if (state.getSlice() == null) {
@@ -62,8 +61,8 @@ public class DecodeBitSetAggregationFunctions {
 
 	@CombineFunction
 	public static void combine(
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.decode_bit_set.RouteUserAggregationBase.SliceState state,
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.decode_bit_set.RouteUserAggregationBase.SliceState otherState) {
+		@AggregationState RouteUserAggregationBase.SliceState state,
+		@AggregationState RouteUserAggregationBase.SliceState otherState) {
 		Slice otherSlice = otherState.getSlice();
 		Slice slice = state.getSlice();
 

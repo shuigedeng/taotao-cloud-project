@@ -53,16 +53,16 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class WebFluxUtil {
 
-	private static final PathMatcher pathMatcher = new AntPathMatcher();
+	private static final PathMatcher PATH_MATCHER = new AntPathMatcher();
 
-	private static final ResourceUrlProvider resourceUrlProvider = new ResourceUrlProvider();
+	private static final ResourceUrlProvider RESOURCE_URL_PROVIDER = new ResourceUrlProvider();
 
 	public static PathMatcher getPathMatcher() {
-		return pathMatcher;
+		return PATH_MATCHER;
 	}
 
 	public static ResourceUrlProvider getResourceUrlProvider() {
-		return resourceUrlProvider;
+		return RESOURCE_URL_PROVIDER;
 	}
 
 	public static Mono<Boolean> isStaticResources(String uri, ServerWebExchange exchange) {
@@ -125,7 +125,7 @@ public class WebFluxUtil {
 		Flux<DataBuffer> body = serverHttpRequest.getBody();
 		AtomicReference<String> bodyReference = new AtomicReference<>();
 		body.subscribe(buffer -> {
-			CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.asByteBuffer());
+			CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.toByteBuffer());
 			DataBufferUtils.release(buffer);
 			bodyReference.set(charBuffer.toString());
 		});

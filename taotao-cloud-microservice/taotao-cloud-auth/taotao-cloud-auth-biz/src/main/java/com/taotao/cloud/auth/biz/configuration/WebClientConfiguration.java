@@ -56,7 +56,6 @@ public class WebClientConfiguration {
 						.authorizationCode()
 						.refreshToken()
 						.clientCredentials()
-						.password()
 						.build();
 
 		DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(
@@ -91,13 +90,11 @@ public class WebClientConfiguration {
 
 			if (!StringUtils.hasText(username) && !StringUtils.hasText(password)) {
 				Authentication authentication = authorizeRequest.getPrincipal();
-				if (authentication instanceof UsernamePasswordAuthenticationToken) {
-					UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+				if (authentication instanceof UsernamePasswordAuthenticationToken token) {
 					Object principal = token.getPrincipal();
 					username = token.getName();
 					password = (String) token.getCredentials();
-					if (principal instanceof User) {
-						User user = (User) principal;
+					if (principal instanceof User user) {
 						username = user.getUsername();
 					}
 				}

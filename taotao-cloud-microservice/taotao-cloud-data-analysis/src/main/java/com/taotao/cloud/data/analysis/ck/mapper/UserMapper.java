@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.data.analysis.ck.mapper;
 
+import com.taotao.cloud.data.analysis.ck.model.User;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 

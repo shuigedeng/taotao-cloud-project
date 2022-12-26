@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.auth.biz.jpa.service.client;
 
+import com.taotao.cloud.auth.biz.jpa.entity.client.Client;
+import com.taotao.cloud.auth.biz.jpa.repository.client.ClientRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +25,6 @@ import java.util.Set;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import sample.jpa.entity.client.Client;
-import sample.jpa.repository.client.ClientRepository;
 
 import org.springframework.security.jackson2.SecurityJackson2Modules;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;

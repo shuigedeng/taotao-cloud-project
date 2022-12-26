@@ -1,32 +1,27 @@
-spring:
-  datasource:
-  type: com.alibaba.druid.pool.DruidDataSource
-clickhouse:
-  driverClassName: ru.yandex.clickhouse.ClickHouseDriver
-  url: jdbc:clickhouse://106.55.55.249:8123/default
-  password: ck的密码
-  initialSize: 10
-  maxActive: 100
-  minIdle: 10
-  maxWait: 6000
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.wyu.tt16clickhouse.entity
 
-server:
-  port: 8090
-
-
-
-
 spring:
   datasource:
+    clickhouse:
+      driverClassName: ru.yandex.clickhouse.ClickHouseDriver
+      url: jdbc:clickhouse://106.55.55.249:8123/default
+      password: ck的密码
+      initialSize: 10
+      maxActive: 100
+      minIdle: 10
+      maxWait: 6000
+    hbase:
+      quorum: localhost
+      port: 2181
+      znode: /hbase
+      maxsize: 1572864000
     doris: # doris配置
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: 数据库地址
       username: 账号
       password: 密码
-
     presto:
       name: presto
       type: org.apache.tomcat.jdbc.pool.DataSource
@@ -34,6 +29,7 @@ spring:
       jdbc-url: jdbc:presto://127.0.0.1:8889/hive/test
       username: root
     commonConfig: #连接池统一配置，应用到所有的数据源
+      type: com.alibaba.druid.pool.DruidDataSource
       initialSize: 1
       minIdle: 1
       maxIdle: 5
@@ -49,12 +45,9 @@ spring:
       maxOpenPreparedStatements: 20
       filters: stat
 
-
-spring:
   kafka:
     bootstrap-servers:
       - host:9092
-
     producer:
       retries: 0
       batch-size: 1073741824
@@ -63,7 +56,6 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       properties:
         linger.ms: 2
-
     consumer:
       # 消费组
       group-id: myGroup
@@ -77,15 +69,4 @@ spring:
 logging:
   level:
     root: debug
-
-
-server:
-  port: 8088
-
-spring:
-  hbase:
-    quorum: localhost
-    port: 2181
-    znode: /hbase
-    maxsize: 1572864000
 
