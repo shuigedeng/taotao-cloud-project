@@ -8,7 +8,9 @@ import com.taotao.cloud.workflow.biz.form.entity.ConBillingEntity;
 import com.taotao.cloud.workflow.biz.form.model.conbilling.ConBillingForm;
 import com.taotao.cloud.workflow.biz.form.model.conbilling.ConBillingInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ConBillingService;
-import jakarta.validation.Valid;
+
+import javax.validation.Valid;
+
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,93 +29,84 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ConBilling")
 public class ConBillingController {
 
-	@Autowired
-	private ConBillingService conBillingService;
-	@Autowired
-	private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ConBillingService conBillingService;
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
-	/**
-	 * 获取合同开票流程信息
-	 *
-	 * @param id 主键值
-	 * @return
-	 */
-	@Operation("获取合同开票流程信息")
-	@GetMapping("/{id}")
-	public Result<ConBillingInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-			throws DataException {
-		ConBillingInfoVO vo = null;
-		boolean isData = true;
-		if (StringUtil.isNotEmpty(taskOperatorId)) {
-			FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
-			if (operator != null) {
-				if (StringUtil.isNotEmpty(operator.getDraftData())) {
-					vo = JsonUtils.getJsonToBean(operator.getDraftData(), ConBillingInfoVO.class);
-					isData = false;
-				}
-			}
-		}
-		if (isData) {
-			ConBillingEntity entity = conBillingService.getInfo(id);
-			vo = JsonUtils.getJsonToBean(entity, ConBillingInfoVO.class);
-		}
-		return Result.success(vo);
-	}
+    /**
+     * 获取合同开票流程信息
+     *
+     * @param id 主键值
+     * @return
+     */
+    @Operation("获取合同开票流程信息")
+    @GetMapping("/{id}")
+    public Result<ConBillingInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+        ConBillingInfoVO vo = null;
+        boolean isData = true;
+        if (StringUtil.isNotEmpty(taskOperatorId)) {
+            FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
+            if (operator != null) {
+                if (StringUtil.isNotEmpty(operator.getDraftData())) {
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ConBillingInfoVO.class);
+                    isData = false;
+                }
+            }
+        }
+        if (isData) {
+            ConBillingEntity entity = conBillingService.getInfo(id);
+            vo = JsonUtils.getJsonToBean(entity, ConBillingInfoVO.class);
+        }
+        return Result.success(vo);
+    }
 
-	/**
-	 * 新建合同开票流程
-	 *
-	 * @param conBillingForm 表单对象
-	 * @return
-	 */
-	@Operation("新建合同开票流程")
-	@PostMapping
-	public Result create(@RequestBody @Valid ConBillingForm conBillingForm)
-			throws WorkFlowException {
-		if (conBillingForm.getBillAmount() != null && !"".equals(
-				String.valueOf(conBillingForm.getBillAmount())) && !RegexUtils.checkDecimals2(
-				String.valueOf(conBillingForm.getBillAmount()))) {
-			return Result.fail("开票金额必须大于0，最多可以精确到小数点后两位");
-		}
-		if (conBillingForm.getPayAmount() != null && !"".equals(
-				String.valueOf(conBillingForm.getPayAmount())) && !RegexUtils.checkDecimals2(
-				String.valueOf(conBillingForm.getPayAmount()))) {
-			return Result.fail("付款金额必须大于0，最多可以精确到小数点后两位");
-		}
-		ConBillingEntity entity = JsonUtils.getJsonToBean(conBillingForm, ConBillingEntity.class);
-		if (FlowStatusEnum.save.getMessage().equals(conBillingForm.getStatus())) {
-			conBillingService.save(entity.getId(), entity);
-			return Result.success(MsgCode.SU002.get());
-		}
-		conBillingService.submit(entity.getId(), entity, conBillingForm.getCandidateList());
-		return Result.success(MsgCode.SU006.get());
-	}
+    /**
+     * 新建合同开票流程
+     *
+     * @param conBillingForm 表单对象
+     * @return
+     */
+    @Operation("新建合同开票流程")
+    @PostMapping
+    public Result create(@RequestBody @Valid ConBillingForm conBillingForm) throws WorkFlowException {
+        if (conBillingForm.getBillAmount() != null && !"".equals(String.valueOf(conBillingForm.getBillAmount())) && !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getBillAmount()))) {
+            return Result.fail("开票金额必须大于0，最多可以精确到小数点后两位");
+        }
+        if (conBillingForm.getPayAmount() != null && !"".equals(String.valueOf(conBillingForm.getPayAmount())) && !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getPayAmount()))) {
+            return Result.fail("付款金额必须大于0，最多可以精确到小数点后两位");
+        }
+        ConBillingEntity entity = JsonUtils.getJsonToBean(conBillingForm, ConBillingEntity.class);
+        if (FlowStatusEnum.save.getMessage().equals(conBillingForm.getStatus())) {
+            conBillingService.save(entity.getId(), entity);
+            return Result.success(MsgCode.SU002.get());
+        }
+        conBillingService.submit(entity.getId(), entity, conBillingForm.getCandidateList());
+        return Result.success(MsgCode.SU006.get());
+    }
 
-	/**
-	 * 修改合同开票流程
-	 *
-	 * @param conBillingForm 表单对象
-	 * @param id             主键
-	 * @return
-	 */
-	@Operation("修改合同开票流程")
-	@PutMapping("/{id}")
-	public Result update(@RequestBody @Valid ConBillingForm conBillingForm,
-			@PathVariable("id") String id) throws WorkFlowException {
-		if (conBillingForm.getBillAmount() != null && !"".equals(conBillingForm.getBillAmount())
-				&& !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getBillAmount()))) {
-			return Result.fail("开票金额必须大于0，最多可以精确到小数点后两位");
-		}
-		if (conBillingForm.getPayAmount() != null && !"".equals(conBillingForm.getPayAmount())
-				&& !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getPayAmount()))) {
-			return Result.fail("付款金额必须大于0，最多可以精确到小数点后两位");
-		}
-		ConBillingEntity entity = JsonUtils.getJsonToBean(conBillingForm, ConBillingEntity.class);
-		if (FlowStatusEnum.save.getMessage().equals(conBillingForm.getStatus())) {
-			conBillingService.save(id, entity);
-			return Result.success(MsgCode.SU002.get());
-		}
-		conBillingService.submit(id, entity, conBillingForm.getCandidateList());
-		return Result.success(MsgCode.SU006.get());
-	}
+    /**
+     * 修改合同开票流程
+     *
+     * @param conBillingForm 表单对象
+     * @param id             主键
+     * @return
+     */
+    @Operation("修改合同开票流程")
+    @PutMapping("/{id}")
+    public Result update(@RequestBody @Valid ConBillingForm conBillingForm, @PathVariable("id") String id) throws WorkFlowException {
+        if (conBillingForm.getBillAmount() != null && !"".equals(conBillingForm.getBillAmount()) && !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getBillAmount()))) {
+            return Result.fail("开票金额必须大于0，最多可以精确到小数点后两位");
+        }
+        if (conBillingForm.getPayAmount() != null && !"".equals(conBillingForm.getPayAmount()) && !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getPayAmount()))) {
+            return Result.fail("付款金额必须大于0，最多可以精确到小数点后两位");
+        }
+        ConBillingEntity entity = JsonUtils.getJsonToBean(conBillingForm, ConBillingEntity.class);
+        if (FlowStatusEnum.save.getMessage().equals(conBillingForm.getStatus())) {
+            conBillingService.save(id, entity);
+            return Result.success(MsgCode.SU002.get());
+        }
+        conBillingService.submit(id, entity, conBillingForm.getCandidateList());
+        return Result.success(MsgCode.SU006.get());
+    }
 }

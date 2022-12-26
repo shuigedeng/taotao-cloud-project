@@ -14,112 +14,113 @@ import lombok.Data;
 @Data
 @TableName("flow_delegate")
 public class FlowDelegateEntity {
-    /**
-     * 委托主键
-     */
-    @TableId("F_ID")
-    private String id;
 
-    /**
-     * 被委托人
-     */
-    @TableField("F_TOUSERID")
-    @JSONField(name = "toUserId")
-    private String fTouserid;
+	/**
+	 * 委托主键
+	 */
+	@TableId("F_ID")
+	private String id;
 
-    /**
-     * 被委托人
-     */
-    @TableField("F_TOUSERNAME")
-    private String toUserName;
+	/**
+	 * 被委托人
+	 */
+	@TableField("F_TOUSERID")
+	@JSONField(name = "toUserId")
+	private Long fTouserid;
 
-    /**
-     * 委托流程
-     */
-    @TableField("F_FLOWID")
-    private String flowId;
+	/**
+	 * 被委托人
+	 */
+	@TableField("F_TOUSERNAME")
+	private String toUserName;
 
-    /**
-     * 委托流程
-     */
-    @TableField("F_FLOWNAME")
-    private String flowName;
+	/**
+	 * 委托流程
+	 */
+	@TableField("F_FLOWID")
+	private String flowId;
 
-    /**
-     * 流程分类
-     */
-    @TableField("F_FLOWCATEGORY")
-    private String flowCategory;
+	/**
+	 * 委托流程
+	 */
+	@TableField("F_FLOWNAME")
+	private String flowName;
 
-    /**
-     * 开始时间
-     */
-    @TableField("F_STARTTIME")
-    private Date startTime;
+	/**
+	 * 流程分类
+	 */
+	@TableField("F_FLOWCATEGORY")
+	private String flowCategory;
 
-    /**
-     * 结束时间
-     */
-    @TableField("F_ENDTIME")
-    private Date endTime;
+	/**
+	 * 开始时间
+	 */
+	@TableField("F_STARTTIME")
+	private Date startTime;
 
-    /**
-     * 描述
-     */
-    @TableField("F_DESCRIPTION")
-    private String description;
+	/**
+	 * 结束时间
+	 */
+	@TableField("F_ENDTIME")
+	private Date endTime;
 
-    /**
-     * 排序码
-     */
-    @TableField("F_SORTCODE")
-    private Long fSortCode;
+	/**
+	 * 描述
+	 */
+	@TableField("F_DESCRIPTION")
+	private String description;
 
-    /**
-     * 有效标志
-     */
-    @TableField("F_ENABLEDMARK")
-    private Integer enabledMark;
+	/**
+	 * 排序码
+	 */
+	@TableField("F_SORTCODE")
+	private Long fSortCode;
 
-    /**
-     * 创建时间
-     */
-    @TableField(value = "F_CREATORTIME",fill = FieldFill.INSERT)
-    private Date creatorTime;
+	/**
+	 * 有效标志
+	 */
+	@TableField("F_ENABLEDMARK")
+	private Integer enabledMark;
 
-    /**
-     * 创建用户
-     */
-    @TableField(value = "F_CREATORUSERID",fill = FieldFill.INSERT)
-    private String creatorUserId;
+	/**
+	 * 创建时间
+	 */
+	@TableField(value = "F_CREATORTIME", fill = FieldFill.INSERT)
+	private Date creatorTime;
 
-    /**
-     * 修改时间
-     */
-    @TableField(value = "F_LASTMODIFYTIME",fill = FieldFill.UPDATE)
-    private Date lastModifyTime;
+	/**
+	 * 创建用户
+	 */
+	@TableField(value = "F_CREATORUSERID", fill = FieldFill.INSERT)
+	private Long creatorUserId;
 
-    /**
-     * 修改用户
-     */
-    @TableField(value = "F_LASTMODIFYUSERID",fill = FieldFill.UPDATE)
-    private String lastModifyUserId;
+	/**
+	 * 修改时间
+	 */
+	@TableField(value = "F_LASTMODIFYTIME", fill = FieldFill.UPDATE)
+	private Date lastModifyTime;
 
-    /**
-     * 删除标志
-     */
-    @TableField("F_DELETEMARK")
-    private Integer deleteMark;
+	/**
+	 * 修改用户
+	 */
+	@TableField(value = "F_LASTMODIFYUSERID", fill = FieldFill.UPDATE)
+	private Long lastModifyUserId;
 
-    /**
-     * 删除时间
-     */
-    @TableField("F_DELETETIME")
-    private Date deleteTime;
+	/**
+	 * 删除标志
+	 */
+	@TableField("F_DELETEMARK")
+	private Integer deleteMark;
 
-    /**
-     * 删除用户
-     */
-    @TableField("F_DELETEUSERID")
-    private String deleteUserId;
+	/**
+	 * 删除时间
+	 */
+	@TableField("F_DELETETIME")
+	private Date deleteTime;
+
+	/**
+	 * 删除用户
+	 */
+	@TableField("F_DELETEUSERID")
+	private String deleteUserId;
 }
