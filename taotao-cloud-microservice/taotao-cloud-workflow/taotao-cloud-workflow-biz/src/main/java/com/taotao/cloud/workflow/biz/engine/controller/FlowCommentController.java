@@ -1,15 +1,26 @@
 package com.taotao.cloud.workflow.biz.engine.controller;
 
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.workflow.api.vo.UserEntity;
+import com.taotao.cloud.workflow.biz.covert.FlowTaskConvert;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
+import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentForm;
+import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentInfoVO;
 import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentListVO;
 import com.taotao.cloud.workflow.biz.engine.model.flowcomment.FlowCommentPagination;
 import com.taotao.cloud.workflow.biz.engine.service.FlowCommentService;
 import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
-import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,109 +33,78 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 流程评论
  */
-@Tag(tags = "流程评论", value = "Comment")
+@Validated
+@Tag(name = "工作流程-流程评论", description = "工作流程-流程评论")
 @RestController
-@RequestMapping("/api/workflow/Engine/FlowComment")
+@RequestMapping("/api/workflow/engine/flow-comment")
 public class FlowCommentController {
 
 
 	@Autowired
 	private ServiceAllUtil serviceUtil;
 	@Autowired
-	private UserProvider userProvider;
-	@Autowired
 	private FlowCommentService flowCommentService;
 
-	/**
-	 * 获取流程评论列表
-	 *
-	 * @param pagination
-	 * @return
-	 */
-	@Operation("获取流程评论列表")
-	@GetMapping
-	public Result list(FlowCommentPagination pagination) {
+	@Operation(summary = "分页获取流程评论列表", description = "分页获取流程评论列表")
+	@GetMapping("/page")
+	public Result<PageResult<FlowCommentListVO>> list(FlowCommentPagination pagination) {
 		List<FlowCommentEntity> list = flowCommentService.getlist(pagination);
-		List<FlowCommentListVO> listVO = JsonUtils.getJsonToList(list, FlowCommentListVO.class);
-		List<String> userId = list.stream().map(t -> t.getCreatorUserId())
-				.collect(Collectors.toList());
-		UserInfo userInfo = userProvider.get();
+		List<FlowCommentListVO> listVO = FlowTaskConvert.INSTANCE.convertComment(list);
+
+		List<String> userId = list.stream().map(FlowCommentEntity::getCreatorUserId)
+			.collect(Collectors.toList());
 		List<UserEntity> userName = serviceUtil.getUserName(userId);
 		for (FlowCommentListVO commentModel : listVO) {
 			UserEntity userEntity = userName.stream()
-					.filter(t -> t.getId().equals(commentModel.getCreatorUserId())).findFirst()
-					.orElse(null);
-			commentModel.setIsDel(commentModel.getCreatorUserId().equals(userInfo.getUserId()));
+				.filter(t -> t.getId().equals(commentModel.getCreatorUserId())).findFirst()
+				.orElse(null);
+			commentModel.setIsDel(
+				commentModel.getCreatorUserId().equals(SecurityUtils.getUserId()));
 			commentModel.setCreatorUserName(userEntity != null ? userEntity.getRealName() : "");
-			commentModel.setCreatorUserId(userEntity != null ? userEntity.getAccount() : "");
+			commentModel.setCreatorUserId(userEntity != null ? userEntity.getId() : 0L);
 			if (userEntity != null) {
 				commentModel.setCreatorUserHeadIcon(
-						UploaderUtil.uploaderImg(userEntity.getHeadIcon()));
+					UploaderUtil.uploaderImg(userEntity.getHeadIcon()));
 			}
 		}
 		PaginationVO vo = JsonUtils.getJsonToBean(pagination, PaginationVO.class);
-		return Result.page(listVO, vo);
+		return Result.success(null);
 	}
 
-	/**
-	 * 获取流程评论信息
-	 *
-	 * @param id 主键值
-	 * @return
-	 */
-	@Operation("获取流程评论信息")
+	@Operation(summary = "获取流程评论信息", description = "获取流程评论信息")
 	@GetMapping("/{id}")
-	public Result info(@PathVariable("id") String id) {
+	public Result<FlowCommentInfoVO> info(@PathVariable("id") String id) {
 		FlowCommentEntity entity = flowCommentService.getInfo(id);
-		FlowCommentInfoVO vo = JsonUtils.getJsonToBean(entity, FlowCommentInfoVO.class);
-		return Result.success(vo);
+		return Result.success(FlowTaskConvert.INSTANCE.convert(entity));
 	}
 
-	/**
-	 * 新建流程评论
-	 *
-	 * @param commentForm 实体对象
-	 * @return
-	 */
-	@Operation("新建流程评论")
+	@Operation(summary = "新建流程评论", description = "新建流程评论")
 	@PostMapping
-	public Result create(@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
-		FlowCommentEntity entity = JsonUtils.getJsonToBean(commentForm, FlowCommentEntity.class);
+	public Result<Boolean> create(@RequestBody @Valid FlowCommentForm commentForm)
+		throws DataException {
+		FlowCommentEntity entity = FlowTaskConvert.INSTANCE.convert(commentForm);
 		flowCommentService.create(entity);
 		return Result.success(MsgCode.SU002.get());
 	}
 
-	/**
-	 * 更新流程评论
-	 *
-	 * @param id 主键值
-	 * @return
-	 */
-	@Operation("更新流程评论")
+	@Operation(summary = "更新流程评论", description = "更新流程评论")
 	@PutMapping("/{id}")
-	public Result update(@PathVariable("id") String id,
-			@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
+	public Result<Boolean> update(@PathVariable("id") String id,
+		@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
 		FlowCommentEntity info = flowCommentService.getInfo(id);
 		if (info != null) {
-			FlowCommentEntity entity = JsonUtils.getJsonToBean(commentForm,
-					FlowCommentEntity.class);
+			FlowCommentEntity entity = FlowTaskConvert.INSTANCE.convert(commentForm);
 			flowCommentService.update(id, entity);
 			return Result.success(MsgCode.SU004.get());
 		}
 		return Result.fail(MsgCode.FA002.get());
 	}
 
-	/**
-	 * 删除流程评论
-	 *
-	 * @param id 主键值
-	 * @return
-	 */
-	@Operation("删除流程评论")
+	@Operation(summary = "删除流程评论", description = "删除流程评论")
 	@DeleteMapping("/{id}")
-	public Result delete(@PathVariable("id") String id) {
+	public Result<Boolean> delete(@PathVariable("id") String id) {
 		FlowCommentEntity entity = flowCommentService.getInfo(id);
-		if (entity.getCreatorUserId().equals(userProvider.get().getUserId())) {
+		if (entity.getCreatorUserId().equals(SecurityUtils.getUserId())) {
 			flowCommentService.delete(entity);
 			return Result.success(MsgCode.SU003.get());
 		}

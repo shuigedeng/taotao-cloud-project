@@ -9,7 +9,7 @@ import com.taotao.cloud.workflow.biz.form.model.archivalborrow.ArchivalBorrowFor
 import com.taotao.cloud.workflow.biz.form.model.archivalborrow.ArchivalBorrowInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ArchivalBorrowService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -10,8 +10,10 @@ import com.taotao.cloud.workflow.biz.form.model.applydelivergoods.ApplyDeliverGo
 import com.taotao.cloud.workflow.biz.form.model.applydelivergoods.ApplyDeliverGoodsForm;
 import com.taotao.cloud.workflow.biz.form.model.applydelivergoods.ApplyDeliverGoodsInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ApplyDeliverGoodsService;
-import jakarta.validation.Valid;
+
 import java.util.List;
+import javax.validation.Valid;
+
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,90 +32,78 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ApplyDeliverGoods")
 public class ApplyDeliverGoodsController {
 
-	@Autowired
-	private ApplyDeliverGoodsService applyDeliverGoodsService;
-	@Autowired
-	private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ApplyDeliverGoodsService applyDeliverGoodsService;
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
-	/**
-	 * 获取发货申请单信息
-	 *
-	 * @param id 主键值
-	 * @return
-	 */
-	@Operation("获取发货申请单信息")
-	@GetMapping("/{id}")
-	public Result<ApplyDeliverGoodsInfoVO> info(@PathVariable("id") String id,
-			String taskOperatorId) throws DataException {
-		ApplyDeliverGoodsInfoVO vo = null;
-		boolean isData = true;
-		if (StringUtil.isNotEmpty(taskOperatorId)) {
-			FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
-			if (operator != null) {
-				if (StringUtil.isNotEmpty(operator.getDraftData())) {
-					vo = JsonUtils.getJsonToBean(operator.getDraftData(),
-							ApplyDeliverGoodsInfoVO.class);
-					isData = false;
-				}
-			}
-		}
-		if (isData) {
-			ApplyDeliverGoodsEntity entity = applyDeliverGoodsService.getInfo(id);
-			List<ApplyDeliverGoodsEntryEntity> entityList = applyDeliverGoodsService.getDeliverEntryList(
-					id);
-			vo = JsonUtils.getJsonToBean(entity, ApplyDeliverGoodsInfoVO.class);
-			vo.setEntryList(
-					JsonUtils.getJsonToList(entityList, ApplyDeliverGoodsEntryInfoModel.class));
-		}
-		return Result.success(vo);
-	}
+    /**
+     * 获取发货申请单信息
+     *
+     * @param id 主键值
+     * @return
+     */
+    @Operation("获取发货申请单信息")
+    @GetMapping("/{id}")
+    public Result<ApplyDeliverGoodsInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+        ApplyDeliverGoodsInfoVO vo = null;
+        boolean isData = true;
+        if (StringUtil.isNotEmpty(taskOperatorId)) {
+            FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
+            if (operator != null) {
+                if (StringUtil.isNotEmpty(operator.getDraftData())) {
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ApplyDeliverGoodsInfoVO.class);
+                    isData = false;
+                }
+            }
+        }
+        if (isData) {
+            ApplyDeliverGoodsEntity entity = applyDeliverGoodsService.getInfo(id);
+            List<ApplyDeliverGoodsEntryEntity> entityList = applyDeliverGoodsService.getDeliverEntryList(id);
+            vo = JsonUtils.getJsonToBean(entity, ApplyDeliverGoodsInfoVO.class);
+            vo.setEntryList(JsonUtils.getJsonToList(entityList, ApplyDeliverGoodsEntryInfoModel.class));
+        }
+        return Result.success(vo);
+    }
 
-	/**
-	 * 新建发货申请单
-	 *
-	 * @param applyDeliverGoodsForm 表单对象
-	 * @return
-	 * @throws WorkFlowException
-	 */
-	@Operation("新建发货申请单")
-	@PostMapping
-	public Result create(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm)
-			throws WorkFlowException {
-		ApplyDeliverGoodsEntity deliver = JsonUtils.getJsonToBean(applyDeliverGoodsForm,
-				ApplyDeliverGoodsEntity.class);
-		List<ApplyDeliverGoodsEntryEntity> deliverEntryList = JsonUtils.getJsonToList(
-				applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
-		if (FlowStatusEnum.save.getMessage().equals(applyDeliverGoodsForm.getStatus())) {
-			applyDeliverGoodsService.save(deliver.getId(), deliver, deliverEntryList);
-			return Result.success(MsgCode.SU002.get());
-		}
-		applyDeliverGoodsService.submit(deliver.getId(), deliver, deliverEntryList,
-				applyDeliverGoodsForm.getCandidateList());
-		return Result.success(MsgCode.SU006.get());
-	}
+    /**
+     * 新建发货申请单
+     *
+     * @param applyDeliverGoodsForm 表单对象
+     * @return
+     * @throws WorkFlowException
+     */
+    @Operation("新建发货申请单")
+    @PostMapping
+    public Result create(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm) throws WorkFlowException {
+        ApplyDeliverGoodsEntity deliver = JsonUtils.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
+        List<ApplyDeliverGoodsEntryEntity> deliverEntryList = JsonUtils.getJsonToList(applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
+        if (FlowStatusEnum.save.getMessage().equals(applyDeliverGoodsForm.getStatus())) {
+            applyDeliverGoodsService.save(deliver.getId(), deliver, deliverEntryList);
+            return Result.success(MsgCode.SU002.get());
+        }
+        applyDeliverGoodsService.submit(deliver.getId(), deliver, deliverEntryList, applyDeliverGoodsForm.getCandidateList());
+        return Result.success(MsgCode.SU006.get());
+    }
 
-	/**
-	 * 修改发货申请单
-	 *
-	 * @param applyDeliverGoodsForm 表单对象
-	 * @param id                    主键
-	 * @return
-	 * @throws WorkFlowException
-	 */
-	@Operation("修改发货申请单")
-	@PutMapping("/{id}")
-	public Result update(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm,
-			@PathVariable("id") String id) throws WorkFlowException {
-		ApplyDeliverGoodsEntity deliver = JsonUtils.getJsonToBean(applyDeliverGoodsForm,
-				ApplyDeliverGoodsEntity.class);
-		List<ApplyDeliverGoodsEntryEntity> deliverEntryList = JsonUtils.getJsonToList(
-				applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
-		if (FlowStatusEnum.save.getMessage().equals(applyDeliverGoodsForm.getStatus())) {
-			applyDeliverGoodsService.save(id, deliver, deliverEntryList);
-			return Result.success(MsgCode.SU002.get());
-		}
-		applyDeliverGoodsService.submit(id, deliver, deliverEntryList,
-				applyDeliverGoodsForm.getCandidateList());
-		return Result.success(MsgCode.SU006.get());
-	}
+    /**
+     * 修改发货申请单
+     *
+     * @param applyDeliverGoodsForm 表单对象
+     * @param id                    主键
+     * @return
+     * @throws WorkFlowException
+     */
+    @Operation("修改发货申请单")
+    @PutMapping("/{id}")
+    public Result update(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm, @PathVariable("id") String id) throws WorkFlowException {
+        ApplyDeliverGoodsEntity deliver = JsonUtils.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
+        List<ApplyDeliverGoodsEntryEntity> deliverEntryList = JsonUtils.getJsonToList(applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
+        if (FlowStatusEnum.save.getMessage().equals(applyDeliverGoodsForm.getStatus())) {
+            applyDeliverGoodsService.save(id, deliver, deliverEntryList);
+            return Result.success(MsgCode.SU002.get());
+        }
+        applyDeliverGoodsService.submit(id, deliver, deliverEntryList, applyDeliverGoodsForm.getCandidateList());
+        return Result.success(MsgCode.SU006.get());
+    }
 }

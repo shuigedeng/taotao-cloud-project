@@ -9,7 +9,7 @@ import com.taotao.cloud.workflow.biz.form.model.letterservice.LetterServiceForm;
 import com.taotao.cloud.workflow.biz.form.model.letterservice.LetterServiceInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.LetterServiceService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
