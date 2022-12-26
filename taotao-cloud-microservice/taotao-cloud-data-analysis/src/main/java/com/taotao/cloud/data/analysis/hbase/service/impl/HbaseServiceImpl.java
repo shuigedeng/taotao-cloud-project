@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.data.analysis.hbase.service.impl;
 
-import com.taotao.cloud.bigdata.hbase.service.HbaseService;
+import com.taotao.cloud.data.analysis.hbase.service.HbaseService;
 import org.springframework.stereotype.Service;
 
 /**

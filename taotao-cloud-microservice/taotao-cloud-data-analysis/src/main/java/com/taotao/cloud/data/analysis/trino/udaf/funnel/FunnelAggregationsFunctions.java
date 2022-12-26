@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.data.analysis.trino.udaf.funnel;
 
-import com.taotao.cloud.data.sync.trino.udaf.funnel.FunnelSliceState;
 import io.airlift.slice.Slice;
 import io.airlift.slice.Slices;
 import io.trino.spi.block.BlockBuilder;
@@ -52,7 +51,7 @@ public class FunnelAggregationsFunctions extends FunnelBase {
 
 	@InputFunction
 	public static void input(
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.funnel.FunnelSliceState state,
+		@AggregationState FunnelSliceState state,
 		//事件发生时间
 		@SqlType(StandardTypes.BIGINT) long ctime,
 		//窗口期
@@ -89,8 +88,8 @@ public class FunnelAggregationsFunctions extends FunnelBase {
 
 	@CombineFunction
 	public static void combine(
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.funnel.FunnelSliceState state1,
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.funnel.FunnelSliceState state2) {
+		@AggregationState FunnelSliceState state1,
+		@AggregationState FunnelSliceState state2) {
 		Slice slice1 = state1.getSlice();
 		Slice slice2 = state2.getSlice();
 		if (null == slice1) {

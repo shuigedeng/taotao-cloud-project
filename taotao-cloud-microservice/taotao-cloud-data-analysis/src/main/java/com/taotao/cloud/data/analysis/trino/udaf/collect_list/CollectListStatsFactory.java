@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.data.analysis.trino.udaf.collect_list;
 
-import com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats;
 import io.trino.array.ObjectBigArray;
 import io.trino.spi.function.AccumulatorStateFactory;
 import io.trino.spi.function.GroupedAccumulatorState;
@@ -35,7 +34,7 @@ public class CollectListStatsFactory implements
 		return new SingleState();
 	}
 
-	@Override
+	//@Override
 	public Class<? extends CollectListAggregationFunctions.CollectState> getSingleStateClass() {
 		return SingleState.class;
 	}
@@ -45,7 +44,7 @@ public class CollectListStatsFactory implements
 		return new GroupState();
 	}
 
-	@Override
+	//@Override
 	public Class<? extends CollectListAggregationFunctions.CollectState> getGroupedStateClass() {
 		return GroupState.class;
 	}
@@ -53,7 +52,7 @@ public class CollectListStatsFactory implements
 	public static class GroupState implements GroupedAccumulatorState,
 		CollectListAggregationFunctions.CollectState {
 
-		private final ObjectBigArray<com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats> collectStatsList = new ObjectBigArray<>();
+		private final ObjectBigArray<CollectListStats> collectStatsList = new ObjectBigArray<>();
 		private long size;
 		private long groupId;
 
@@ -68,13 +67,13 @@ public class CollectListStatsFactory implements
 		}
 
 		@Override
-		public com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats get() {
+		public CollectListStats get() {
 			return collectStatsList.get(groupId);
 		}
 
 		@Override
-		public void set(com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats value) {
-			com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats previous = get();
+		public void set(CollectListStats value) {
+			CollectListStats previous = get();
 			if (previous != null) {
 				size -= previous.estimatedInMemorySize();
 			}
@@ -90,10 +89,10 @@ public class CollectListStatsFactory implements
 
 	public static class SingleState implements CollectListAggregationFunctions.CollectState {
 
-		private com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats stats;
+		private CollectListStats stats;
 
 		@Override
-		public com.taotao.cloud.data.sync.trino.udaf.collect_list.CollectListStats get() {
+		public CollectListStats get() {
 			return stats;
 		}
 

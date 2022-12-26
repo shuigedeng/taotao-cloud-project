@@ -40,7 +40,7 @@ public class AvgAggregationFunctions {
 
 	@InputFunction
 	public static void input(
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.avg.LongAndDoubleState state,
+		@AggregationState LongAndDoubleState state,
 		@SqlType(StandardTypes.BIGINT) long value) {
 		state.setLong(state.getLong() + 1);
 		state.setDouble(state.getDouble() + value);
@@ -48,7 +48,7 @@ public class AvgAggregationFunctions {
 
 	@InputFunction
 	public static void input(
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.avg.LongAndDoubleState state,
+		@AggregationState LongAndDoubleState state,
 		@SqlType(StandardTypes.DOUBLE) double value) {
 		state.setLong(state.getLong() + 1);
 		state.setDouble(state.getDouble() + value);
@@ -56,8 +56,8 @@ public class AvgAggregationFunctions {
 
 	@CombineFunction
 	public static void combine(
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.avg.LongAndDoubleState state,
-		@AggregationState com.taotao.cloud.data.sync.trino.udaf.avg.LongAndDoubleState otherState) {
+		@AggregationState LongAndDoubleState state,
+		@AggregationState LongAndDoubleState otherState) {
 		state.setLong(state.getLong() + otherState.getLong());
 		state.setDouble(state.getDouble() + otherState.getDouble());
 	}

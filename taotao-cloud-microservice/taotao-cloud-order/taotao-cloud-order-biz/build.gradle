@@ -30,6 +30,11 @@ dependencies {
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
+    api "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
+    api "cn.afterturn:easypoi-base:4.4.0"
+    api "cn.afterturn:easypoi-annotation:4.4.0"
 }
 
 mainClassName = "com.taotao.cloud.order.biz.TaoTaoCloudOrderApplication"

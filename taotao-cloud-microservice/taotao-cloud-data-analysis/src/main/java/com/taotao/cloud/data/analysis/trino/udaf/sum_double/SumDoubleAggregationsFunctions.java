@@ -47,7 +47,7 @@ public class SumDoubleAggregationsFunctions {
 		@SqlType(StandardTypes.DOUBLE) double input) {
 
 		state.setNull(false);
-		state.setDouble(state.getDouble() + input);
+		state.setValue(state.getValue() + input);
 	}
 
 	//聚合函数
@@ -60,11 +60,11 @@ public class SumDoubleAggregationsFunctions {
 
 		if (state1.isNull()) {
 			state1.setNull(false);
-			state1.setDouble(state2.getDouble());
+			state1.setValue(state2.getValue());
 			return;
 		}
 
-		state1.setDouble(state1.getDouble() + state2.getDouble());
+		state1.setValue(state1.getValue() + state2.getValue());
 	}
 
 	//输出函数

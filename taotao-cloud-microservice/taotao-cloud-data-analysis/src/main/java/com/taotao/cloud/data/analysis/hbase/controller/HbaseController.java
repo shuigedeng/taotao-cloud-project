@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.data.analysis.hbase.controller;
 
-import com.taotao.cloud.bigdata.hbase.service.HbaseService;
+import com.taotao.cloud.data.analysis.hbase.service.HbaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

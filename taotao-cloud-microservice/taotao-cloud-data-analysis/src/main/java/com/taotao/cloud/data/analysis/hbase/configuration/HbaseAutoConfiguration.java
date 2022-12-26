@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.data.analysis.hbase.configuration;
 
-import com.taotao.cloud.bigdata.hbase.properties.HbaseProperties;
+import com.taotao.cloud.data.analysis.hbase.properties.HbaseProperties;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.data.analysis.hbase.client;
 
-import com.taotao.cloud.bigdata.hbase.configuration.HbaseAutoConfiguration;
+import com.taotao.cloud.data.analysis.hbase.configuration.HbaseAutoConfiguration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

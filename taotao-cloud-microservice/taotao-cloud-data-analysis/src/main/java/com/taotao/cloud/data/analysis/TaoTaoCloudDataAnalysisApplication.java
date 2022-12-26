@@ -28,11 +28,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2020/11/26 下午7:55
  */
 @SpringBootApplication
-public class TaoTaoCloudDataSyncApplication {
+public class TaoTaoCloudDataAnalysisApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(TaoTaoCloudDataSyncApplication.class, args);
+		SpringApplication.run(TaoTaoCloudDataAnalysisApplication.class, args);
 	}
 
 }

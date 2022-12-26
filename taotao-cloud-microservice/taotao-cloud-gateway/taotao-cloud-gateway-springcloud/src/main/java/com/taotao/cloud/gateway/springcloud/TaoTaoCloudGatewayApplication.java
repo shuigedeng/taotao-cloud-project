@@ -37,7 +37,11 @@ public class TaoTaoCloudGatewayApplication {
 
 	public static void main(String[] args) {
 		setNacosProperty();
-		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
+		try {
+			SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static void setNacosProperty() {
