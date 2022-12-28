@@ -62,48 +62,48 @@ spring:
         groups:
           - name: ${spring.application.name} # group name
             files: [ "config/application.properties", "config/bootstrap.yml" ] # config/application.properties takes precedence over config/bootstrap.yml
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          'predicates[0]':
-            name: Path
-            args:
-              patterns: '''/'' + serviceId + ''/**'''
-          'filters[0]':
-            name: RewritePath
-            args:
-              regexp: '''/'' + serviceId + ''/(?<remaining>.*)'''
-              replacement: '''/$\{remaining}'''
-          'filters[1]':
-            name: Retry
-            args:
-              retries: 3
-              exceptions:
-                '[0]': '''java.net.ConnectException'''
-                '[1]': '''java.io.IOException'''
-              statuses:
-                '[0]': '''BAD_GATEWAY'''
-                '[1]': '''SERVICE_UNAVAILABLE'''
-              series:
-                '[0]': '''CLIENT_ERROR'''
-              methods:
-                '[0]': '''GET'''
-                '[1]': '''POST'''
-                '[2]': '''PUT'''
-                '[3]': '''DELETE'''
-              backoff:
-                firstBackoff: '''100ms'''
-                maxBackoff: '''500ms'''
-                factor: 2
-                basedOnPreviousValue: false
-      routes:
-        - id: GatewayCalleeService
-          uri: lb://GatewayCalleeService
-          predicates:
-            - Path=/GatewayCalleeService/**
-          filters:
-            - StripPrefix=1
+    #    gateway:
+    #      discovery:
+    #        locator:
+    #          enabled: true
+    #          'predicates[0]':
+    #            name: Path
+    #            args:
+    #              patterns: '''/'' + serviceId + ''/**'''
+    #          'filters[0]':
+    #            name: RewritePath
+    #            args:
+    #              regexp: '''/'' + serviceId + ''/(?<remaining>.*)'''
+    #              replacement: '''/$\{remaining}'''
+    #          'filters[1]':
+    #            name: Retry
+    #            args:
+    #              retries: 3
+    #              exceptions:
+    #                '[0]': '''java.net.ConnectException'''
+    #                '[1]': '''java.io.IOException'''
+    #              statuses:
+    #                '[0]': '''BAD_GATEWAY'''
+    #                '[1]': '''SERVICE_UNAVAILABLE'''
+    #              series:
+    #                '[0]': '''CLIENT_ERROR'''
+    #              methods:
+    #                '[0]': '''GET'''
+    #                '[1]': '''POST'''
+    #                '[2]': '''PUT'''
+    #                '[3]': '''DELETE'''
+    #              backoff:
+    #                firstBackoff: '''100ms'''
+    #                maxBackoff: '''500ms'''
+    #                factor: 2
+    #                basedOnPreviousValue: false
+    #      routes:
+    #        - id: GatewayCalleeService
+    #          uri: lb://GatewayCalleeService
+    #          predicates:
+    #            - Path=/GatewayCalleeService/**
+    #          filters:
+    #            - StripPrefix=1
     #------------------------------------------
     nacos:
       discovery:
