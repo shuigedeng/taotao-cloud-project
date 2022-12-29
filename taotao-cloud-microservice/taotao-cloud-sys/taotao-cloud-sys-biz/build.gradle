@@ -1,3 +1,6 @@
+plugins {
+    id "ca.cutterslade.analyze" version "1.9.0"
+}
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
@@ -16,7 +19,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-schedule"
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
 
     //implementation "io.github.shuigedeng:taotao-cloud-starter-shardingsphere")
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
@@ -51,7 +54,7 @@ dependencies {
     implementation "io.protostuff:protostuff-runtime:1.8.0"
 
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
-    implementation "io.github.memorydoc:gobrs-async-starter:1.2.7-RELEASE"
+    implementation "io.github.memorydoc:gobrs-async-starter:1.2.8-RELEASE"
 
     //https://search.maven.org/artifact/io.soabase.record-builder/record-builder-core
     implementation "io.soabase.record-builder:record-builder-core"
@@ -97,7 +100,7 @@ dependencies {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
 }
 
 mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"

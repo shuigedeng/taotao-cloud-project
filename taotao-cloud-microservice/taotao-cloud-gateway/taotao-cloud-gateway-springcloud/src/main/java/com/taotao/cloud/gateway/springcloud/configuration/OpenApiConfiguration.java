@@ -41,7 +41,6 @@ import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * OpenApiConfig
@@ -52,7 +51,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
  */
 @Profile(value = {"dev"})
 @EnableKnife4j
-@EnableOpenApi
+//@EnableOpenApi
 @Configuration
 public class OpenApiConfiguration {
 

@@ -1,7 +1,7 @@
 plugins {
     id "java"
     //https://plugins.gradle.org/plugin/org.jetbrains.intellij
-    id "org.jetbrains.intellij" version "1.10.1"
+    id "org.jetbrains.intellij" version "1.11.0"
 }
 
 dependencies {
