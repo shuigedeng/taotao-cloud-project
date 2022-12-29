@@ -10,6 +10,8 @@ server:
     key-store-password: 1234
 
 spring:
+  pid:
+    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   main:
     allow-bean-definition-overriding: true
     web-application-type: reactive
@@ -62,6 +64,7 @@ spring:
         groups:
           - name: ${spring.application.name} # group name
             files: [ "config/application.properties", "config/bootstrap.yml" ] # config/application.properties takes precedence over config/bootstrap.yml
+        local-file-root-path: ${user.home}/logs/${spring.application.name}/polaris/backup/config
     #    gateway:
     #      discovery:
     #        locator:
