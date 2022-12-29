@@ -5,7 +5,7 @@ current_dir=`dirname $(pwd)`
 #JAVA_HOME="/opt/common/jdk-17"
 JAVA_HOME="/Users/dengtao/software/jdk-17.jdk/Contents/Home"
 
-VERSION=2022.12
+VERSION=2023.3.01
 
 function build_dockerfile() {
 	microservice_dir=$current_dir/taotao-cloud-microservice

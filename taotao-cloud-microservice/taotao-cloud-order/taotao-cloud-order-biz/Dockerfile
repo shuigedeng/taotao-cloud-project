@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-order-biz-3.2022.12.jar ./
+ADD ./build/libs/taotao-cloud-order-biz-2023.3.01.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-order-biz-3.2022.12.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-order-biz-2023.3.01.jar extract
 
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
@@ -13,7 +13,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalk
 ARG BACKEND_SERVICE=192.168.10.200:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-order
-ARG APP_VERSION=3.2022.12
+ARG APP_VERSION=2023.3.01
 ARG JAR=${APP_NAME}-${VERSION}
 ARG JAR_NAME=${JAR}.jar
 ARG APP_PORT=33338

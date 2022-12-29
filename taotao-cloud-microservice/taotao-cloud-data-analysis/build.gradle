@@ -28,7 +28,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
 
     implementation "mysql:mysql-connector-java"
-    implementation "com.baomidou:mybatis-plus-boot-starter:3.5.2"
+    implementation "com.baomidou:mybatis-plus-boot-starter:3.5.3"
     implementation 'com.alibaba:druid-spring-boot-starter:1.2.15'
 
 //    implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
