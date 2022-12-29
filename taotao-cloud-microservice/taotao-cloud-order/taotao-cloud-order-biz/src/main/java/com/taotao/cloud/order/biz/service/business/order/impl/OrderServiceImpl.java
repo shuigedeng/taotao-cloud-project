@@ -20,6 +20,7 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
@@ -55,6 +56,8 @@ import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
 import com.taotao.cloud.order.biz.service.business.order.IStoreFlowService;
 import com.taotao.cloud.order.biz.service.business.order.ITradeService;
+import com.taotao.cloud.order.biz.service.business.order.check.CheckService;
+import com.taotao.cloud.order.biz.service.business.order.check.ProductVO;
 import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanApi;
@@ -148,10 +151,15 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 */
 	private final ITradeService tradeService;
 
+	private final CheckService checkService;
+
 	@Override
 	public Boolean intoDB(TradeDTO tradeDTO) {
 		//检查TradeDTO信息
 		checkTradeDTO(tradeDTO);
+
+		Result result = checkService.paramCheckChain(new ProductVO());
+
 		//存放购物车，即业务中的订单
 		List<Order> orders = new ArrayList<>(tradeDTO.getCartList().size());
 		//存放自订单
