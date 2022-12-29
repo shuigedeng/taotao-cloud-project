@@ -4,11 +4,9 @@ on:
   push:
     paths:
       - 'taotao-cloud-microservice/**'
-    #branches: [ docker ]
-    branches: [ aaaa ]
+    branches: [ master ]
   pull_request:
-    branches: [ docker ]
-    #branches: [ master ]
+    branches: [ master ]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
@@ -24,7 +22,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
+    #if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -58,16 +56,16 @@ jobs:
           echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
           echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
-      - name: Build And Publish Dependencies To Local
-        run: |
-          cd ${{ github.workspace }}/taotao-cloud-dependencies
-          gradle publishToMavenLocal 
+      #- name: Build And Publish Dependencies To Local
+      #  run: |
+      #    cd ${{ github.workspace }}/taotao-cloud-dependencies
+      #    gradle publishToMavenLocal
 
       - name: Gradle BootJar taotao-cloud-monitor
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
         with:
-          gradle-version: 7.5.1
+          gradle-version: 7.6
           arguments: clean bootJar
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
 
@@ -87,7 +85,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway-springcloud') }}
         with:
-          gradle-version: 7.5.1
+          gradle-version: 7.6
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway/taotao-cloud-gateway-springcloud
 
@@ -107,7 +105,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-auth') }}
         with:
-          gradle-version: 7.5.1
+          gradle-version: 7.6
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
 
@@ -127,7 +125,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxljob') }}
         with:
-          gradle-version: 7.5.1
+          gradle-version: 7.6
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-xxljob
 
@@ -147,7 +145,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order') }}
         with:
-          gradle-version: 7.5.1
+          gradle-version: 7.6
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
 
@@ -167,7 +165,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
         with:
-          gradle-version: 7.5.1
+          gradle-version: 7.6
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
 
