@@ -1,4 +1,4 @@
-edition: 2022.12
+edition: 2023.2.01
 name: taotao-cloud-mall
 access: default
 vars:
