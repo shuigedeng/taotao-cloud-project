@@ -38,16 +38,17 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
+import com.taotao.cloud.goods.biz.util.QueryUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -298,7 +299,7 @@ public class GoodsSkuServiceImpl extends
 				searchParams.setSkuId(String.valueOf(skuId));
 				searchParams.setPromotionId(jsonObject.getLong("id"));
 				PromotionGoodsVO promotionsGoods = promotionGoodsService.getPromotionsGoods(
-					searchParams).data();
+					searchParams);
 				if (promotionsGoods != null && promotionsGoods.getPrice() != null) {
 					goodsSkuDetail.setPromotionFlag(true);
 					goodsSkuDetail.setPromotionPrice(promotionsGoods.getPrice());
@@ -436,12 +437,12 @@ public class GoodsSkuServiceImpl extends
 	@Override
 	public IPage<GoodsSku> getGoodsSkuByPage(GoodsPageQuery searchParams) {
 		return this.page(searchParams.buildMpPage(),
-			searchParams.queryWrapper());
+			QueryUtil.goodsQueryWrapper(searchParams));
 	}
 
 	@Override
 	public List<GoodsSku> getGoodsSkuByList(GoodsPageQuery searchParams) {
-		return this.list(searchParams.queryWrapper());
+		return this.list(QueryUtil.goodsQueryWrapper(searchParams));
 	}
 
 	@Override
@@ -531,7 +532,7 @@ public class GoodsSkuServiceImpl extends
 		queryParams.setGrade(EvaluationGradeEnum.GOOD.name());
 		queryParams.setSkuId(goodsSku.getId());
 		//好评数量
-		long highPraiseNum = memberEvaluationService.getEvaluationCount(queryParams).data();
+		long highPraiseNum = memberEvaluationService.getEvaluationCount(queryParams);
 
 		//更新商品评价数量
 		goodsSku.setCommentNum(goodsSku.getCommentNum() != null ? goodsSku.getCommentNum() + 1 : 1);

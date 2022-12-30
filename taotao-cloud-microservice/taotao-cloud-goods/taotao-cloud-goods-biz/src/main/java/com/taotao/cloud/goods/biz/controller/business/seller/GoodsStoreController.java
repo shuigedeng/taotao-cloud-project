@@ -97,7 +97,7 @@ public class GoodsStoreController {
 	public Result<StockWarningVO> getWarningStockByPage(GoodsPageQuery goodsPageQuery) {
 		//当前登录商家账号
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
-		StoreDetailVO storeDetail = storeDetailService.getStoreDetailVO(storeId).data();
+		StoreDetailVO storeDetail = storeDetailService.getStoreDetailVO(storeId);
 		//库存预警数量
 		Integer stockWarnNum = storeDetail.getStockWarning();
 		goodsPageQuery.setStoreId(storeId);

@@ -23,9 +23,10 @@ public class FeignEsGoodsIndexApiFallback implements FallbackFactory<IFeignEsGoo
 			}
 
 			@Override
-			public Result<Boolean> cleanInvalidPromotion() {
+			public Boolean cleanInvalidPromotion() {
 				return null;
 			}
+
 		};
 	}
 }

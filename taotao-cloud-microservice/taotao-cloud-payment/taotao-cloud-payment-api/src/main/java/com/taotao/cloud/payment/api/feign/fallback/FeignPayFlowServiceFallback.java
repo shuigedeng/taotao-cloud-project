@@ -18,9 +18,8 @@ public class FeignPayFlowServiceFallback implements FallbackFactory<IFeignPayFlo
 		return new IFeignPayFlowService() {
 
 			@Override
-			public Result<PayFlowVO> findPayFlowById(Long id) {
-				LogUtils.error("调用findPayFlowById异常：{}", throwable, id);
-				return Result.fail(null, 500);
+			public PayFlowVO findPayFlowById(Long id) {
+				return null;
 			}
 		};
 	}

@@ -62,9 +62,8 @@ public class GoodsGalleryServiceImpl extends
 	public GoodsGallery getGoodsGallery(String origin) {
 		GoodsGallery goodsGallery = new GoodsGallery();
 		//获取商品系统配置决定是否审核
-		Result<GoodsSettingVO> setting = settingService.getGoodsSetting(
+		GoodsSettingVO goodsSetting = settingService.getGoodsSetting(
 			SettingCategoryEnum.GOODS_SETTING.name());
-		GoodsSettingVO goodsSetting = setting.data();
 		//缩略图
 		String thumbnail = FileUtils.getUrl(origin, goodsSetting.getAbbreviationPictureWidth(),
 			goodsSetting.getAbbreviationPictureHeight());

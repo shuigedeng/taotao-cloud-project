@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.member.biz.event.point;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -27,7 +26,11 @@ import org.springframework.context.ApplicationEvent;
  */
 public class PointEvent extends ApplicationEvent {
 
-	public PointEvent(OrderLog orderLog) {
-		super(orderLog);
+	public PointEvent(Object source) {
+		super(source);
 	}
+
+	//public PointEvent(OrderLog orderLog) {
+	//	super(orderLog);
+	//}
 }

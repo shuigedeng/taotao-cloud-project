@@ -44,26 +44,4 @@ public class StorePageQuery extends PageQuery {
 	@Schema(description = "结束时间")
 	private String endDate;
 
-	// public <T> QueryWrapper<T> queryWrapper() {
-	//     QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-	//     if (StringUtils.isNotEmpty(storeName)) {
-	//         queryWrapper.like("store_name", storeName);
-	//     }
-	//     if (StringUtils.isNotEmpty(memberName)) {
-	//         queryWrapper.like("member_name", memberName);
-	//     }
-	//     if (StringUtils.isNotEmpty(storeDisable)) {
-	//         queryWrapper.eq("store_disable", storeDisable);
-	//     } else {
-	//         queryWrapper.eq("store_disable", StoreStatusEnum.OPEN.name()).or().eq("store_disable", StoreStatusEnum.CLOSED.name());
-	//     }
-	//     //按时间查询
-	//     if (StringUtils.isNotEmpty(startDate)) {
-	//         queryWrapper.ge("create_time", DateUtils.parse(startDate));
-	//     }
-	//     if (StringUtils.isNotEmpty(endDate)) {
-	//         queryWrapper.le("create_time", DateUtils.parse(endDate));
-	//     }
-	//     return queryWrapper;
-	// }
 }

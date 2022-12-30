@@ -41,8 +41,8 @@ public class GoodsUnitStoreController {
 	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageResult<GoodsUnitVO>> getByPage(PageQuery PageQuery) {
-		IPage<GoodsUnit> page = goodsUnitService.page(PageQuery.buildMpPage());
+	public Result<PageResult<GoodsUnitVO>> getByPage(PageQuery pageQuery) {
+		IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
 		return Result.success(PageResult.convertMybatisPage(page, GoodsUnitVO.class));
 	}
 

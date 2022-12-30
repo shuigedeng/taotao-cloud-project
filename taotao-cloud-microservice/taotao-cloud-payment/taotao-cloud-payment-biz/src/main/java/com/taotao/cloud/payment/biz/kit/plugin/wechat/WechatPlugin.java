@@ -615,7 +615,7 @@ public class WechatPlugin implements Payment {
 	 */
 	private WechatPaymentSetting wechatPaymentSetting() {
 		try {
-			WechatPaymentSetting wechatPaymentSetting = settingService.getWechatPaymentSetting(SettingCategoryEnum.WECHAT_PAYMENT.name()).data();
+			WechatPaymentSetting wechatPaymentSetting = settingService.getWechatPaymentSetting(SettingCategoryEnum.WECHAT_PAYMENT.name());
 			return wechatPaymentSetting;
 		} catch (Exception e) {
 			LogUtils.error("微信支付暂不支持", e);

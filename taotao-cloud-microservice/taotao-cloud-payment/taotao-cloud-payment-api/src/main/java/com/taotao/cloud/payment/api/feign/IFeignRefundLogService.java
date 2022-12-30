@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface IFeignRefundLogService {
 
 	@GetMapping("/pay/flow/info/id/{id:[0-9]*}")
-	Result<PayFlowVO> findPayFlowById(@PathVariable(value = "id") Long id);
+	PayFlowVO findPayFlowById(@PathVariable(value = "id") Long id);
 
+	@GetMapping("/RefundLogVO")
 	RefundLogVO queryByAfterSaleSn(String sn);
 }
 

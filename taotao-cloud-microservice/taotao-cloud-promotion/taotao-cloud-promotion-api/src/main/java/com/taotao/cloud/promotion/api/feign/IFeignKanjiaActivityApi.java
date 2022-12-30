@@ -19,6 +19,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignKanjiaActivityApiFallback;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * IFeignKanjiaActivityService
@@ -29,6 +30,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  */
 @FeignClient(contextId = "IFeignKanjiaActivityService", value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignKanjiaActivityApiFallback.class)
 public interface IFeignKanjiaActivityApi {
-
+	@GetMapping(value = "/getById")
 	KanjiaActivityVO getById(Long promotionId);
 }

@@ -1,6 +1,10 @@
 package com.taotao.cloud.member.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,12 +12,19 @@ import java.io.Serializable;
 /**
  * 会员积分VO
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "会员积分VO")
-public record MemberPointsHistoryVO(@Schema(description = "当前会员积分") Long point,
-                                    @Schema(description = "累计获得积分") Long totalPoint) implements
-	Serializable {
+public class MemberPointsHistoryVO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
+	@Schema(description = "当前会员积分")
+	private Long point;
+
+	@Schema(description = "累计获得积分")
+	private Long totalPoint;
 }

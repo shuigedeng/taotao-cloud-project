@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * 远程调用售后模块
@@ -35,10 +36,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface IFeignPromotionGoodsApi {
 
 	@GetMapping(value = "/withdraw/info")
-	Result<PromotionGoodsVO> getPromotionsGoods(PromotionGoodsPageQuery searchParams);
-
-	void updateBatchById(List<PromotionGoodsVO> promotionGoods);
-
+	PromotionGoodsVO getPromotionsGoods(PromotionGoodsPageQuery searchParams);
+	@PostMapping(value = "/updateBatchById")
+	Boolean updateBatchById(List<PromotionGoodsVO> promotionGoods);
+	@GetMapping(value = "/getValidPromotionsGoodsPrice")
 	BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList);
 }
 

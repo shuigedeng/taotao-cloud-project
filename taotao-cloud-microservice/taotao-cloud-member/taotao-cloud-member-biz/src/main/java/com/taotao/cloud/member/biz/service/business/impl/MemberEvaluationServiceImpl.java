@@ -23,15 +23,16 @@ import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.service.business.IMemberEvaluationService;
 import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.utils.QueryUtil;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemApi;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
+import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
 import java.util.List;
 import java.util.Map;
 import jakarta.annotation.Resource;
@@ -89,13 +90,13 @@ public class MemberEvaluationServiceImpl extends
 	@Override
 	public IPage<MemberEvaluation> managerQuery(EvaluationPageQuery queryParams) {
 		//获取评价分页
-		return this.page(queryParams.buildMpPage(), queryParams.queryWrapper());
+		return this.page(queryParams.buildMpPage(), QueryUtil.evaluationQueryWrapper(queryParams));
 	}
 
 	@Override
 	public IPage<MemberEvaluation> queryPage(EvaluationPageQuery evaluationPageQuery) {
 		return IMemberEvaluationMapper.getMemberEvaluationList(
-				evaluationPageQuery.buildMpPage(), evaluationPageQuery.queryWrapper());
+				evaluationPageQuery.buildMpPage(), QueryUtil.evaluationQueryWrapper(evaluationPageQuery));
 	}
 
 	@Override
@@ -103,14 +104,14 @@ public class MemberEvaluationServiceImpl extends
 		//获取子订单信息
 		OrderItemVO orderItem = orderItemService.getBySn(memberEvaluationDTO.getOrderItemSn());
 		//获取订单信息
-		OrderVO order = orderService.getBySn(orderItem.orderSn()).data();
+		OrderVO order = orderService.getBySn(orderItem.orderSn());
 		//检测是否可以添加会员评价
 		checkMemberEvaluation(orderItem, order);
 		//获取用户信息
 		Member member = memberService.getUserInfo();
 		//获取商品信息
 		GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
-				memberEvaluationDTO.getSkuId()).data();
+				memberEvaluationDTO.getSkuId());
 		//新增用户评价
 		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,
 				member, order);

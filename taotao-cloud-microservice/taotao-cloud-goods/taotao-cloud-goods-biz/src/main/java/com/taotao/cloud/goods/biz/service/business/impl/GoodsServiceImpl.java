@@ -34,15 +34,16 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.util.QueryUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.store.api.feign.IFeignFreightTemplateService;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
 import com.taotao.cloud.store.api.web.vo.FreightTemplateVO;
 import com.taotao.cloud.store.api.web.vo.StoreVO;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
@@ -255,12 +256,12 @@ public class GoodsServiceImpl extends
 	@Override
 	public IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery) {
 		return this.page(goodsPageQuery.buildMpPage(),
-			goodsPageQuery.queryWrapper());
+			QueryUtil.goodsQueryWrapper(goodsPageQuery));
 	}
 
 	@Override
 	public List<Goods> queryListByParams(GoodsPageQuery goodsPageQuery) {
-		return this.list(goodsPageQuery.queryWrapper());
+		return this.list(QueryUtil.goodsQueryWrapper(goodsPageQuery));
 	}
 
 	@Override
@@ -375,7 +376,7 @@ public class GoodsServiceImpl extends
 	public Boolean freight(List<Long> goodsIds, Long templateId) {
 		SecurityUser authUser = this.checkStoreAuthority();
 
-		FreightTemplateVO freightTemplate = freightTemplateService.getById(templateId).data();
+		FreightTemplateVO freightTemplate = freightTemplateService.getById(templateId);
 		if (freightTemplate == null) {
 			throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
 		}
@@ -406,8 +407,7 @@ public class GoodsServiceImpl extends
 		goods.setCommentNum(goods.getCommentNum() + 1);
 
 		//好评数量
-		Long highPraiseNum = memberEvaluationService.count(goodsId, EvaluationGradeEnum.GOOD.name())
-			.data();
+		Long highPraiseNum = memberEvaluationService.count(goodsId, EvaluationGradeEnum.GOOD.name());
 
 		//好评率
 		BigDecimal grade = NumberUtil.mul(
@@ -485,18 +485,17 @@ public class GoodsServiceImpl extends
 	private void checkGoods(Goods goods) {
 		//判断商品类型
 		switch (goods.getGoodsType()) {
-			case "PHYSICAL_GOODS":
+			case "PHYSICAL_GOODS" -> {
 				if (Long.valueOf(0).equals(goods.getTemplateId())) {
 					throw new BusinessException(ResultEnum.PHYSICAL_GOODS_NEED_TEMP);
 				}
-				break;
-			case "VIRTUAL_GOODS":
+			}
+			case "VIRTUAL_GOODS" -> {
 				if (!Long.valueOf(0).equals(goods.getTemplateId())) {
 					throw new BusinessException(ResultEnum.VIRTUAL_GOODS_NOT_NEED_TEMP);
 				}
-				break;
-			default:
-				throw new BusinessException(ResultEnum.GOODS_TYPE_ERROR);
+			}
+			default -> throw new BusinessException(ResultEnum.GOODS_TYPE_ERROR);
 		}
 
 		//检查商品是否存在--修改商品时使用
@@ -515,14 +514,14 @@ public class GoodsServiceImpl extends
 
 		//获取商品系统配置决定是否审核
 		GoodsSettingVO goodsSetting = settingService.getGoodsSetting(
-			SettingCategoryEnum.GOODS_SETTING.name()).data();
+			SettingCategoryEnum.GOODS_SETTING.name());
 		//是否需要审核
 		goods.setIsAuth(
 			Boolean.TRUE.equals(goodsSetting.getGoodsCheck()) ? GoodsAuthEnum.TOBEAUDITED.name()
 				: GoodsAuthEnum.PASS.name());
 		//判断当前用户是否为店铺
-		if (SecurityUtils.getUser().getType().equals(UserEnum.STORE.getCode())) {
-			StoreVO storeDetail = storeService.getStoreDetail().data();
+		if (SecurityUtils.getCurrentUser().getType().equals(UserEnum.STORE.getCode())) {
+			StoreVO storeDetail = storeService.getStoreDetail();
 			if (storeDetail.getSelfOperated() != null) {
 				goods.setSelfOperated(storeDetail.getSelfOperated());
 			}
@@ -571,7 +570,7 @@ public class GoodsServiceImpl extends
 	 * @return 当前登录的店铺
 	 */
 	private SecurityUser checkStoreAuthority() {
-		SecurityUser currentUser = SecurityUtils.getUser();
+		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 		//如果当前会员不为空，且为店铺角色
 		if (currentUser != null && (currentUser.getType().equals(UserEnum.STORE.getCode())
 			&& currentUser.getStoreId() != null)) {
@@ -586,7 +585,7 @@ public class GoodsServiceImpl extends
 	 * @return 当前登录的店铺
 	 */
 	private SecurityUser checkManagerAuthority() {
-		SecurityUser currentUser = SecurityUtils.getUser();
+		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 		//如果当前会员不为空，且为店铺角色
 		if (currentUser != null && (currentUser.getType().equals(UserEnum.MANAGER.getCode()))) {
 			return currentUser;

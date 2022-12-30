@@ -18,10 +18,10 @@ public class FeignRefundLogServiceFallback implements FallbackFactory<IFeignRefu
 	public IFeignRefundLogService create(Throwable throwable) {
 		return new IFeignRefundLogService() {
 
+
 			@Override
-			public Result<PayFlowVO> findPayFlowById(Long id) {
-				LogUtils.error("调用findPayFlowById异常：{}", throwable, id);
-				return Result.fail(null, 500);
+			public PayFlowVO findPayFlowById(Long id) {
+				return null;
 			}
 
 			@Override

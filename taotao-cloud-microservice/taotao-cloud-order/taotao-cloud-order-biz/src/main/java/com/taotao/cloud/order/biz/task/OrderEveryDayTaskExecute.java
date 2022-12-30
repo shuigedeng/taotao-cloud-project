@@ -73,7 +73,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	@Override
 	public void execute() {
 		OrderSettingVO orderSetting = settingService.getOrderSetting(
-				SettingCategoryEnum.ORDER_SETTING.name()).data();
+				SettingCategoryEnum.ORDER_SETTING.name());
 		//订单设置
 		if (orderSetting == null) {
 			throw new BusinessException(ResultEnum.ORDER_SETTING_ERROR);

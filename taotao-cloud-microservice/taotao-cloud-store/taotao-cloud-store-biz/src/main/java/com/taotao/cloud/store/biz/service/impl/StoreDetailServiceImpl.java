@@ -172,7 +172,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 	public List<StoreManagementCategoryVO> goodsManagementCategory(String storeId) {
 
 		//获取顶部分类列表
-		List<CategoryTreeVO> categoryList = categoryService.firstCategory().data();
+		List<CategoryTreeVO> categoryList = categoryService.firstCategory();
 		//获取店铺信息
 		StoreDetail storeDetail = this.getOne(new LambdaQueryWrapper<StoreDetail>().eq(StoreDetail::getStoreId, storeId));
 		//获取店铺分类

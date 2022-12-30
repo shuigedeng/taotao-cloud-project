@@ -121,6 +121,6 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 	 * @return 积分设置
 	 */
 	private PointSettingVO getPointSetting() {
-		return settingService.getPointSetting(SettingCategoryEnum.POINT_SETTING.name()).data();
+		return settingService.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
 	}
 }

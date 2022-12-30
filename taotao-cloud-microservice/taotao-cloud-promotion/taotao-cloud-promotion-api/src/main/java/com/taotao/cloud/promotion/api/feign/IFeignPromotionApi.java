@@ -32,6 +32,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface IFeignPromotionApi {
 
 	@GetMapping(value = "/withdraw/info/}")
-	Result<Map<String, Object>> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId);
+	Map<String, Object> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId);
 }
 

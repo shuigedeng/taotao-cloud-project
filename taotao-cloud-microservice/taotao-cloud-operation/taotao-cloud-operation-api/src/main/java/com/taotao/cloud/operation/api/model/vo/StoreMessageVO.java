@@ -1,6 +1,5 @@
 package com.taotao.cloud.operation.api.model.vo;
 
-import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import lombok.Data;
 
 /**

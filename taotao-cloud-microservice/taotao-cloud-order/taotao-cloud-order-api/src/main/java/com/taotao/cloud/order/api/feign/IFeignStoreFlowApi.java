@@ -21,8 +21,10 @@ public interface IFeignStoreFlowApi {
 	@GetMapping(value = "/trade")
 	TradeVO getBySn(String sn);
 
+	@GetMapping(value = "/getStoreFlow")
 	PageResult<StoreFlowVO> getStoreFlow(String id, String flowType, PageQuery PageQuery);
 
+	@GetMapping(value = "/getDistributionFlow")
 	PageResult<StoreFlowVO> getDistributionFlow(String id, PageQuery PageQuery);
 }
 

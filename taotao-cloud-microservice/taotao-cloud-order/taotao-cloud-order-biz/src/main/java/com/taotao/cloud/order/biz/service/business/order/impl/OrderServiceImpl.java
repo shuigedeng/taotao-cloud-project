@@ -396,7 +396,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		if (order.getDeliverStatus().equals(DeliverStatusEnum.UNDELIVERED.name())
 				&& order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
 			//获取对应物流
-			LogisticsVO logistics = logisticsService.getById(logisticsId).data();
+			LogisticsVO logistics = logisticsService.getById(logisticsId);
 			if (logistics == null) {
 				throw new BusinessException(ResultEnum.ORDER_LOGISTICS_ERROR);
 			}

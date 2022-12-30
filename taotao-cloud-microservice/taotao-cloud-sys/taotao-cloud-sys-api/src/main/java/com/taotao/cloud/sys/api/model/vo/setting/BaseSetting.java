@@ -12,38 +12,35 @@ public class BaseSetting implements Serializable {
 
 	private static final long serialVersionUID = -3138023944444671722L;
 
-	/**
-	 * 站点名称
-	 */
+	private static final long serialVersionUID = -3138023944444671722L;
+
+	@ApiModelProperty(value = "站点名称")
 	private String siteName;
 
-	/**
-	 * icp
-	 */
+	@ApiModelProperty(value = "icp")
 	private String icp;
 
-	/**
-	 * 后端logo
-	 */
+	@ApiModelProperty(value = "后端logo")
 	private String domainLogo;
 
-	/**
-	 * 买家端logo
-	 */
+	@ApiModelProperty(value = "后端icon")
+	private String domainIcon;
+
+	@ApiModelProperty(value = "买家端logo")
 	private String buyerSideLogo;
 
-	/**
-	 * 商家端logo
-	 */
+	@ApiModelProperty(value = "买家端icon")
+	private String buyerSideIcon;
+
+	@ApiModelProperty(value = "商家端logo")
 	private String storeSideLogo;
 
-	/**
-	 * 站点地址
-	 */
+	@ApiModelProperty(value = "商家端icon")
+	private String storeSideIcon;
+
+	@ApiModelProperty(value = "站点地址")
 	private String staticPageAddress;
 
-	/**
-	 * wap站点地址
-	 */
+	@ApiModelProperty(value = "wap站点地址")
 	private String staticPageWapAddress;
 }

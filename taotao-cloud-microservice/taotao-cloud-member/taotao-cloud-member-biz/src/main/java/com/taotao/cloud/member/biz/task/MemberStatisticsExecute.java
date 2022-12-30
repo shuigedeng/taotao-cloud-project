@@ -40,10 +40,10 @@ public class MemberStatisticsExecute implements EveryDayExecute {
 			startTime = calendar.getTime();
 
 			MemberStatisticsDTO memberStatisticsData = new MemberStatisticsDTO();
-			memberStatisticsData.setMemberCount(memberStatisticsService.memberCount(endTime).data());
+			memberStatisticsData.setMemberCount(memberStatisticsService.memberCount(endTime));
 			memberStatisticsData.setCreateDate(startTime);
-			memberStatisticsData.setActiveQuantity(memberStatisticsService.activeQuantity(startTime).data());
-			memberStatisticsData.setNewlyAdded(memberStatisticsService.newlyAdded(startTime, endTime).data());
+			memberStatisticsData.setActiveQuantity(memberStatisticsService.activeQuantity(startTime));
+			memberStatisticsData.setNewlyAdded(memberStatisticsService.newlyAdded(startTime, endTime));
 			memberStatisticsService.saveMemberStatistics(memberStatisticsData);
 		} catch (Exception e) {
 			LogUtils.error("每日会员统计功能异常：", e);
