@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.dao;
 
 
-import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
+import com.java3y.austin.support.domain.SmsRecord;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.stream.utils;
 
-import com.taotao.cloud.message.biz.austin.stream.callback.RedisPipelineCallBack;
-import com.taotao.cloud.message.biz.austin.stream.constants.AustinFlinkConstant;
+import com.java3y.austin.stream.callback.RedisPipelineCallBack;
+import com.java3y.austin.stream.constants.AustinFlinkConstant;
 import io.lettuce.core.LettuceFutures;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisFuture;
