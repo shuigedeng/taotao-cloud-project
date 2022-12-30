@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.dao;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.entity.Wallet;
 import com.taotao.cloud.payment.biz.bootx.param.paymodel.wallet.WalletPayParam;
 import lombok.RequiredArgsConstructor;
@@ -89,9 +89,9 @@ public class WalletManager extends BaseManager<WalletMapper, Wallet> {
     /**
      * 分页查询
      */
-    public Page<Wallet> page(PageParam pageParam, WalletPayParam param){
+    public Page<Wallet> page(PageQuery PageQuery, WalletPayParam param){
 
-        Page<Wallet> mpPage = MpUtil.getMpPage(pageParam, Wallet.class);
+        Page<Wallet> mpPage = MpUtil.getMpPage(PageQuery, Wallet.class);
         return this.lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
                 .page(mpPage);
@@ -100,8 +100,8 @@ public class WalletManager extends BaseManager<WalletMapper, Wallet> {
     /**
      * 待开通钱包的用户列表
      */
-    public Page<UserInfo> pageByNotWallet(PageParam pageParam, UserInfoParam userInfoParam) {
-        Page<UserInfo> mpPage = MpUtil.getMpPage(pageParam, UserInfo.class);
+    public Page<UserInfo> pageByNotWallet(PageQuery PageQuery, UserInfoParam userInfoParam) {
+        Page<UserInfo> mpPage = MpUtil.getMpPage(PageQuery, UserInfo.class);
         QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
         wrapper.isNull("w.id")
                 .orderByDesc("w.id")

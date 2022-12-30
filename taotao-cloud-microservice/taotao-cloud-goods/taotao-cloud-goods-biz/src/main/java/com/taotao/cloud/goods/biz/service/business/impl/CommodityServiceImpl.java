@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
@@ -127,10 +127,10 @@ public class CommodityServiceImpl extends
 	}
 
 	@Override
-	public IPage<CommoditySkuVO> commodityList(PageParam pageParam, String name, String auditStatus) {
+	public IPage<CommoditySkuVO> commodityList(PageQuery PageQuery, String name, String auditStatus) {
 		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 
-		return this.baseMapper.commodityVOList(pageParam.buildMpPage(),
+		return this.baseMapper.commodityVOList(PageQuery.buildMpPage(),
 			new QueryWrapper<CommoditySkuVO>().like(name != null, "c.name", name)
 				.eq(auditStatus != null, "c.audit_status", auditStatus)
 				.eq(currentUser.getType().equals(UserEnum.STORE.getCode()), "c.store_id",

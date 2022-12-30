@@ -16,7 +16,7 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -62,7 +62,7 @@ public class MemberAddressController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageResult<MemberAddressVO>> page(@Validated PageParam page) {
+	public Result<PageResult<MemberAddressVO>> page(@Validated PageQuery page) {
 		IPage<MemberAddress> memberAddressPage = memberAddressService.getAddressByMember(page,
 				SecurityUtils.getUserId());
 		return Result.success(

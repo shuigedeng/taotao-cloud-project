@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 
@@ -27,22 +27,22 @@ public interface IMemberPointsHistoryService extends IService<MemberPointsHistor
 	/**
 	 * 通过页面
 	 *
-	 * @param pageParam 页面参数
+	 * @param PageQuery 页面参数
 	 * @return {@link IPage }<{@link MemberPointsHistory }>
 	 * @since 2022-05-31 14:16:22
 	 */
-	IPage<MemberPointsHistory> getByPage(PageParam pageParam);
+	IPage<MemberPointsHistory> getByPage(PageQuery PageQuery);
 
 	/**
 	 * 会员积分历史
 	 *
-	 * @param pageParam  分页
+	 * @param PageQuery  分页
 	 * @param memberId   会员ID
 	 * @param memberName 会员名称
 	 * @return {@link IPage }<{@link MemberPointsHistory }>
 	 * @since 2022-05-31 14:16:22
 	 */
-	IPage<MemberPointsHistory> memberPointsHistoryList(PageParam pageParam, Long memberId,
+	IPage<MemberPointsHistory> memberPointsHistoryList(PageQuery PageQuery, Long memberId,
 													   String memberName);
 
 }

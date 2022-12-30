@@ -71,24 +71,12 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	@Override
 	public IPage<OrderComplaint> getOrderComplainByPage(OrderComplaintPageQuery pageQuery) {
 		LambdaQueryWrapper<OrderComplaint> queryWrapper = new LambdaQueryWrapper<>();
-		if (StrUtil.isNotEmpty(pageQuery.getStatus())) {
-			queryWrapper.eq(OrderComplaint::getComplainStatus, pageQuery.getStatus());
-		}
-		if (StrUtil.isNotEmpty(pageQuery.getOrderSn())) {
-			queryWrapper.eq(OrderComplaint::getOrderSn, pageQuery.getOrderSn());
-		}
-		if (StrUtil.isNotEmpty(pageQuery.getStoreName())) {
-			queryWrapper.like(OrderComplaint::getStoreName, pageQuery.getStoreName());
-		}
-		if (StrUtil.isNotEmpty(pageQuery.getStoreId())) {
-			queryWrapper.eq(OrderComplaint::getStoreId, pageQuery.getStoreId());
-		}
-		if (StrUtil.isNotEmpty(pageQuery.getMemberName())) {
-			queryWrapper.like(OrderComplaint::getMemberName, pageQuery.getMemberName());
-		}
-		if (StrUtil.isNotEmpty(pageQuery.getMemberId())) {
-			queryWrapper.eq(OrderComplaint::getMemberId, pageQuery.getMemberId());
-		}
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStatus()),OrderComplaint::getComplainStatus, pageQuery.getStatus());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getOrderSn()),OrderComplaint::getOrderSn, pageQuery.getOrderSn());
+		queryWrapper.like(StrUtil.isNotEmpty(pageQuery.getStoreName()),OrderComplaint::getStoreName, pageQuery.getStoreName());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStoreId()),OrderComplaint::getStoreId, pageQuery.getStoreId());
+		queryWrapper.like(StrUtil.isNotEmpty(pageQuery.getMemberName()),OrderComplaint::getMemberName, pageQuery.getMemberName());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getMemberId()),OrderComplaint::getMemberId, pageQuery.getMemberId());
 		queryWrapper.eq(OrderComplaint::getDelFlag, false);
 		queryWrapper.orderByDesc(OrderComplaint::getCreateTime);
 

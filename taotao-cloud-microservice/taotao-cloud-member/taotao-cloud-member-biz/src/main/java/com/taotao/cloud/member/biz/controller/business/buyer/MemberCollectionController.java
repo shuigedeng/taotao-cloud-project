@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.model.vo.GoodsCollectionVO;
@@ -52,7 +52,7 @@ public class MemberCollectionController {
 	@GetMapping("/{type}")
 	public Result<PageResult<StoreCollectionVO>> goodsListPage(
 			@Parameter(description = "类型", required = true) @PathVariable String type,
-			@Validated PageParam page) {
+			@Validated PageQuery page) {
 		if (goods.equals(type)) {
 			IPage<GoodsCollectionVO> goodsCollectionPage = IMemberGoodsCollectionService.goodsCollection(
 					page);

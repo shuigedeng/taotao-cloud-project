@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -228,7 +228,7 @@ public class StudioServiceImpl extends
 	}
 
 	@Override
-	public IPage<Studio> studioList(PageParam pageParam, Integer recommend, String status) {
+	public IPage<Studio> studioList(PageQuery PageQuery, Integer recommend, String status) {
 		QueryWrapper<Studio> queryWrapper = new QueryWrapper<Studio>()
 			.eq(recommend != null, "recommend", true)
 			.eq(status != null, "status", status)
@@ -237,7 +237,7 @@ public class StudioServiceImpl extends
 		//	.equals(UserEnums.STORE)) {
 		//	queryWrapper.eq("store_id", UserContext.getCurrentUser().getStoreId());
 		//}
-		return this.page(pageParam.buildMpPage(), queryWrapper);
+		return this.page(PageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override

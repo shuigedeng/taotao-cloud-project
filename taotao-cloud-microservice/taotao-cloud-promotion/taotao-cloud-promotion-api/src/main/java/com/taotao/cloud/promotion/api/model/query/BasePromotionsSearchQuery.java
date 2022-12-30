@@ -1,6 +1,6 @@
 package com.taotao.cloud.promotion.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BasePromotionsSearchQuery extends PageParam implements Serializable {
+public class BasePromotionsSearchQuery extends PageQuery implements Serializable {
 
 	@Schema(description = "活动id")
 	private String id;

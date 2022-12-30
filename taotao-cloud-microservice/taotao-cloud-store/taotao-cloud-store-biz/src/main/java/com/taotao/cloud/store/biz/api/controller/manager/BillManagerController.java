@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
@@ -63,8 +63,8 @@ public class BillManagerController {
 	public Result<PageResult<StoreFlowVO>> getStoreFlow(
 			@Parameter(description = "结算单ID") @PathVariable String id,
 			@Parameter(description = "流水类型:PAY、REFUND") String flowType,
-			PageParam pageParam) {
-		IPage<StoreFlowVO> storeFlow = storeFlowService.getStoreFlow(id, flowType, pageParam);
+			PageQuery PageQuery) {
+		IPage<StoreFlowVO> storeFlow = storeFlowService.getStoreFlow(id, flowType, PageQuery);
 		return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
 	}
 

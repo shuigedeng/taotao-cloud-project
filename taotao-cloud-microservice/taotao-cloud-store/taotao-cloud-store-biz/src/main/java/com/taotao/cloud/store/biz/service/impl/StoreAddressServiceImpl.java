@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.store.biz.model.entity.StoreAddress;
 import com.taotao.cloud.store.biz.mapper.StoreAddressMapper;
 import com.taotao.cloud.store.biz.service.StoreAddressService;
@@ -23,11 +23,11 @@ public class StoreAddressServiceImpl extends ServiceImpl<StoreAddressMapper, Sto
 	StoreAddressService {
 
     @Override
-    public IPage<StoreAddress> getStoreAddress(String storeId, PageParam pageParam) {
+    public IPage<StoreAddress> getStoreAddress(String storeId, PageQuery PageQuery) {
         //获取当前登录商家账号
         LambdaQueryWrapper<StoreAddress> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.eq(StoreAddress::getStoreId, storeId);
-        return this.page(pageParam.buildMpPage(), lambdaQueryWrapper);
+        return this.page(PageQuery.buildMpPage(), lambdaQueryWrapper);
     }
 
     @Override

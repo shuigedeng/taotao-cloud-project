@@ -1,6 +1,6 @@
 package com.taotao.cloud.goods.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EsGoodsSearchQuery extends PageParam {
+public class EsGoodsSearchQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;

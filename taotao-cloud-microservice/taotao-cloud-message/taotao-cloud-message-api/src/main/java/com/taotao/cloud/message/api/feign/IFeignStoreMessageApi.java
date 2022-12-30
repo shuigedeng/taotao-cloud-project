@@ -16,7 +16,7 @@
 package com.taotao.cloud.message.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.message.api.feign.fallback.FeignStoreMessageApiFallback;
 import com.taotao.cloud.message.api.model.vo.StoreMessageVO;
@@ -33,6 +33,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface IFeignStoreMessageApi {
 
 	@GetMapping(value = "/message/getPage")
-	PageResult<StoreMessageVO> getPage(PageParam pageParam);
+	PageResult<StoreMessageVO> getPage(PageQuery PageQuery);
 }
 

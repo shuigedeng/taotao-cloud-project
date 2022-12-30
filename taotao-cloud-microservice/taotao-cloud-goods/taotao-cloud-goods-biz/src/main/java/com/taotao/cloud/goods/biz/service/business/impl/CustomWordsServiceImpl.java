@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.goods.api.model.vo.CustomWordsVO;
@@ -98,10 +98,10 @@ public class CustomWordsServiceImpl extends
 	}
 
 	@Override
-	public IPage<CustomWords> getCustomWordsByPage(String words, PageParam pageParam) {
+	public IPage<CustomWords> getCustomWordsByPage(String words, PageQuery PageQuery) {
 		LambdaQueryWrapper<CustomWords> queryWrapper = new LambdaQueryWrapper<CustomWords>().like(
 				CustomWords::getName, words);
-		return this.page(pageParam.buildMpPage(), queryWrapper);
+		return this.page(PageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override

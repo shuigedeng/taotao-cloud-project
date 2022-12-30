@@ -3,7 +3,7 @@ package com.taotao.cloud.wechat.biz.wechat.controller;
 import cn.bootx.common.core.rest.PageResult;
 import cn.bootx.common.core.rest.Res;
 import cn.bootx.common.core.rest.ResResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.starter.auth.util.SecurityUtil;
 import cn.bootx.starter.wechat.core.notice.service.WeChatTemplateService;
 import cn.bootx.starter.wechat.dto.notice.WeChatTemplateDto;
@@ -44,9 +44,9 @@ public class WeChatTemplateController {
 
 	@Operation(summary = "分页查询")
 	@GetMapping(value = "/page")
-	public ResResult<PageResult<WeChatTemplateDto>> page(PageParam pageParam,
+	public ResResult<PageResult<WeChatTemplateDto>> page(PageQuery PageQuery,
 		WeChatTemplateParam weChatTemplateParam) {
-		return Res.ok(weChatTemplateService.page(pageParam, weChatTemplateParam));
+		return Res.ok(weChatTemplateService.page(PageQuery, weChatTemplateParam));
 	}
 
 	@Operation(summary = "编码是否被使用(不包含自己)")

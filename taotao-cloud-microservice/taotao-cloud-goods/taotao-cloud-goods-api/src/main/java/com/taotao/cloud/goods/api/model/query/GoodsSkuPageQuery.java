@@ -14,7 +14,7 @@ import java.io.Serial;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class GoodsSkuSearchQuery extends GoodsPageQuery {
+public class GoodsSkuPageQuery extends GoodsPageQuery {
 
 	@Serial
 	private static final long serialVersionUID = -6235885068610635045L;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.goods.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 
@@ -19,7 +19,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "规格查询参数")
-public class SpecificationPageQuery extends PageParam {
+public class SpecificationPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = 8906820486037326039L;

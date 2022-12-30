@@ -2,7 +2,7 @@ package com.taotao.cloud.promotion.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 
 /**
@@ -49,7 +49,7 @@ public interface PointsGoodsCategoryService extends IService<PointsGoodsCategory
 	 * @return {@link IPage }<{@link PointsGoodsCategory }>
 	 * @since 2022-04-27 16:44:02
 	 */
-	IPage<PointsGoodsCategory> getCategoryByPage(String name, PageParam page);
+	IPage<PointsGoodsCategory> getCategoryByPage(String name, PageQuery page);
 
 	/**
 	 * 获取积分商品类型详情
