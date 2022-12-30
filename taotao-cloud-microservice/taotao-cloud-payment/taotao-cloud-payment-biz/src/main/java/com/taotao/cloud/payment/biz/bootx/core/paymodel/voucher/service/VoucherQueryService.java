@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.voucher.service;
 
 import cn.hutool.db.PageResult;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.voucher.dao.VoucherManager;
 import com.taotao.cloud.payment.biz.bootx.dto.paymodel.voucher.VoucherDto;
 import com.taotao.cloud.payment.biz.bootx.param.paymodel.voucher.VoucherParam;
@@ -23,8 +23,8 @@ public class VoucherQueryService {
     /**
      * 分页
      */
-    public PageResult<VoucherDto> page(PageParam pageParam, VoucherParam param){
-        return MpUtil.convert2DtoPageResult(voucherManager.page(pageParam,param));
+    public PageResult<VoucherDto> page(PageQuery PageQuery, VoucherParam param){
+        return MpUtil.convert2DtoPageResult(voucherManager.page(PageQuery,param));
     }
 
     /**

@@ -2,7 +2,7 @@ package com.taotao.cloud.store.biz.service;// package com.taotao.cloud.store.biz
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
 // import com.baomidou.mybatisplus.extension.service.IService;
-// import com.taotao.cloud.common.model.PageParam;
+// import com.taotao.cloud.common.model.PageQuery;
 // import com.taotao.cloud.store.api.vo.StoreCollectionVO;
 // import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
 //
@@ -13,10 +13,10 @@ package com.taotao.cloud.store.biz.service;// package com.taotao.cloud.store.biz
 //
 //     /**
 //      * 店铺收藏分页
-//      * @param pageParam 分页VO
+//      * @param PageQuery 分页VO
 //      * @return 店铺收藏分页列表
 //      */
-//     IPage<StoreCollectionVO> storeCollection(PageParam pageParam);
+//     IPage<StoreCollectionVO> storeCollection(PageQuery PageQuery);
 //
 //     /**
 //      * 是否收藏此店铺

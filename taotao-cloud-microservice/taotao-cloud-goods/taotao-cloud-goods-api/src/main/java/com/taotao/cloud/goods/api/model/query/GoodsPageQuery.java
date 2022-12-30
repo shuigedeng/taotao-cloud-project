@@ -1,6 +1,6 @@
 package com.taotao.cloud.goods.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
@@ -23,7 +23,7 @@ import java.io.Serial;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoodsPageQuery extends PageParam {
+public class GoodsPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = 2544015852728566887L;

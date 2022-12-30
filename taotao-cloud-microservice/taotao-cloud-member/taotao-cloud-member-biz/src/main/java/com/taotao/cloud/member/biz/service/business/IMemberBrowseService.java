@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.service.business;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
 
@@ -42,10 +42,10 @@ public interface IMemberBrowseService extends IService<MemberBrowse> {
 	/**
 	 * 获取会员浏览历史分页
 	 *
-	 * @param pageParam 分页
+	 * @param PageQuery 分页
 	 * @return 会员浏览历史列表
 	 */
-	List<EsGoodsIndexVO> footPrintPage(PageParam pageParam);
+	List<EsGoodsIndexVO> footPrintPage(PageQuery PageQuery);
 
 	/**
 	 * 获取当前会员的浏览记录数量

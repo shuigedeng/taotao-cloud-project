@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
 import com.taotao.cloud.message.biz.model.entity.NoticeMessage;
 
@@ -14,11 +14,11 @@ public interface NoticeMessageService extends IService<NoticeMessage> {
 	/**
 	 * 多条件分页获取
 	 *
-	 * @param PageParam 分页数据
+	 * @param PageQuery 分页数据
 	 * @param type      类型
 	 * @return
 	 */
-	IPage<NoticeMessage> getMessageTemplate(PageParam PageParam, String type);
+	IPage<NoticeMessage> getMessageTemplate(PageQuery PageQuery, String type);
 
 	/**
 	 * 根据模板编码获取消息模板

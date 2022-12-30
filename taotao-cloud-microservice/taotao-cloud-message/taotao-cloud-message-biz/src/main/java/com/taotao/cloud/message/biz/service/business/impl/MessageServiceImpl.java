@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.message.api.model.vo.MessageVO;
 import com.taotao.cloud.message.biz.mapper.MessageMapper;
 import com.taotao.cloud.message.biz.model.entity.Message;
@@ -29,7 +29,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
 
 
 	@Override
-	public IPage<Message> getPage(MessageVO messageVO, PageParam PageParam) {
+	public IPage<Message> getPage(MessageVO messageVO, PageQuery PageQuery) {
 		// LambdaQueryWrapper<Message> queryWrapper = new LambdaQueryWrapper<>();
 		// if (StrUtil.isNotEmpty(title)) {
 		// 	queryWrapper.like(Message::getTitle, title);
@@ -39,7 +39,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> impl
 		// }
 		// queryWrapper.orderByDesc(Message::getCreateTime);
 		//
-		// return this.page(PageUtil.initPage(PageParam), queryWrapper);
+		// return this.page(PageUtil.initPage(PageQuery), queryWrapper);
 		return null;
 	}
 

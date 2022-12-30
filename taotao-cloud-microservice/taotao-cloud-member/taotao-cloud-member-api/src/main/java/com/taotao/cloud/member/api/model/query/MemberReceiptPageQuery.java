@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.member.api.enums.MemberReceiptEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ import java.io.Serial;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员发票查询DTO")
-public class MemberReceiptPageQuery extends PageParam {
+public class MemberReceiptPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = -8210927982915677995L;

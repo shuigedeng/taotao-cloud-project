@@ -1,7 +1,7 @@
 package com.taotao.cloud.workflow.biz.engine.model.flowtask;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PaginationFlowTask extends PageParam {
+public class PaginationFlowTask extends PageQuery {
 
 	/**
 	 * 所属流程id

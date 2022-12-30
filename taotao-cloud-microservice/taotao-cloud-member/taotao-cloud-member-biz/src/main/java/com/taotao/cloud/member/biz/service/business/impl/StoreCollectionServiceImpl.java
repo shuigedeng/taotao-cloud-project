@@ -6,7 +6,7 @@ package com.taotao.cloud.member.biz.service.business.impl;// package com.taotao.
 // import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 // import com.taotao.cloud.common.enums.ResultEnum;
 // import com.taotao.cloud.common.exception.BusinessException;
-// import com.taotao.cloud.common.model.PageParam;
+// import com.taotao.cloud.common.model.PageQuery;
 // import com.taotao.cloud.common.utils.common.SecurityUtil;
 // import com.taotao.cloud.store.api.vo.StoreCollectionVO;
 // import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
@@ -29,12 +29,12 @@ package com.taotao.cloud.member.biz.service.business.impl;// package com.taotao.
 // 	private IFeignStoreService feignStoreService;
 //
 // 	@Override
-// 	public IPage<StoreCollectionVO> storeCollection(PageParam pageParam) {
+// 	public IPage<StoreCollectionVO> storeCollection(PageQuery PageQuery) {
 // 		QueryWrapper<StoreCollectionVO> queryWrapper = new QueryWrapper();
 // 		queryWrapper.eq("sc.member_id", SecurityUtil.getUserId());
 // 		queryWrapper.orderByDesc("sc.create_time");
 // 		return this.baseMapper.storeCollectionVOList(
-// 			pageParam.buildMpPage(), queryWrapper);
+// 			PageQuery.buildMpPage(), queryWrapper);
 // 	}
 //
 // 	@Override

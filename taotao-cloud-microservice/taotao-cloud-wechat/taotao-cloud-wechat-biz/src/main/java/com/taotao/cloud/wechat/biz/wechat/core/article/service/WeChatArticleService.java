@@ -1,7 +1,7 @@
 package com.taotao.cloud.wechat.biz.wechat.core.article.service;
 
 import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.starter.wechat.dto.article.WeChatArticleDto;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -30,16 +30,16 @@ public class WeChatArticleService {
      * @return
      */
     @SneakyThrows
-    public PageResult<WeChatArticleDto> page(PageParam pageParam){
+    public PageResult<WeChatArticleDto> page(PageQuery PageQuery){
         val freePublishService = wxMpService.getFreePublishService();
-        val result = freePublishService.getPublicationRecords(pageParam.start(), pageParam.getSize());
+        val result = freePublishService.getPublicationRecords(PageQuery.start(), PageQuery.getSize());
         val items = result.getItems().stream()
                 .map(WeChatArticleDto::init)
                 .collect(Collectors.toList());
         PageResult<WeChatArticleDto> pageResult = new PageResult<>();
-        pageResult.setCurrent(pageParam.getCurrent())
+        pageResult.setCurrent(PageQuery.getCurrent())
                 .setRecords(items)
-                .setSize(pageParam.getSize())
+                .setSize(PageQuery.getSize())
                 .setTotal(result.getTotalCount());
         return pageResult;
     }

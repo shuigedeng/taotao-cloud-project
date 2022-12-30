@@ -8,7 +8,7 @@ import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -55,7 +55,7 @@ public class DistributionServiceImpl extends
 
 	@Override
 	public IPage<Distribution> distributionPage(DistributionPageQuery distributionPageQuery,
-												PageParam page) {
+												PageQuery page) {
 		return this.page(page.buildMpPage(), distributionPageQuery.queryWrapper());
 	}
 

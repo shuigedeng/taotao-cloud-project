@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.dao;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.entity.WeChatPayConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -33,8 +33,8 @@ public class WeChatPayConfigManager extends BaseManager<WeChatPayConfigMapper, W
                 .set(WeChatPayConfig::getActivity,Boolean.FALSE);
     }
 
-    public Page<WeChatPayConfig> page(PageParam pageParam) {
-        Page<WeChatPayConfig> mpPage = MpUtil.getMpPage(pageParam, WeChatPayConfig.class);
+    public Page<WeChatPayConfig> page(PageQuery PageQuery) {
+        Page<WeChatPayConfig> mpPage = MpUtil.getMpPage(PageQuery, WeChatPayConfig.class);
         return lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
                 .page(mpPage);

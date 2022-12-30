@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.controller;
 
 import cn.hutool.db.PageResult;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.voucher.service.VoucherQueryService;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.voucher.service.VoucherService;
 import com.taotao.cloud.payment.biz.bootx.dto.paymodel.voucher.VoucherDto;
@@ -29,8 +29,8 @@ public class VoucherController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<VoucherDto>> page(PageParam pageParam, VoucherParam param){
-        return Res.ok(voucherQueryService.page(pageParam,param));
+    public ResResult<PageResult<VoucherDto>> page(PageQuery PageQuery, VoucherParam param){
+        return Res.ok(voucherQueryService.page(PageQuery,param));
     }
 
     @Operation(summary = "单条查询")

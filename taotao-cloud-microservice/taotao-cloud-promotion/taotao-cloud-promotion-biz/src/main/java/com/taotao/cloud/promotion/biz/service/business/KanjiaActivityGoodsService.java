@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsOperationDTO;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsListVO;
@@ -41,7 +41,7 @@ public interface KanjiaActivityGoodsService extends IService<KanjiaActivityGoods
 	 * @return {@link IPage }<{@link KanjiaActivityGoods }>
 	 * @since 2022-04-27 16:43:36
 	 */
-	IPage<KanjiaActivityGoods> getForPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageParam pageVO);
+	IPage<KanjiaActivityGoods> getForPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery pageVO);
 
 	/**
 	 * 查询砍价活动商品分页信息
@@ -51,7 +51,7 @@ public interface KanjiaActivityGoodsService extends IService<KanjiaActivityGoods
 	 * @return {@link IPage }<{@link KanjiaActivityGoodsListVO }>
 	 * @since 2022-04-27 16:43:36
 	 */
-	IPage<KanjiaActivityGoodsListVO> kanjiaGoodsVOPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageParam pageVO);
+	IPage<KanjiaActivityGoodsListVO> kanjiaGoodsVOPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery pageVO);
 
 	/**
 	 * 查询砍价活动商品

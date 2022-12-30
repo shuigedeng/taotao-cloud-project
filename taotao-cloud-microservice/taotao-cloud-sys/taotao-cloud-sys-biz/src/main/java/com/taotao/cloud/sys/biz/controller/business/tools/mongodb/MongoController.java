@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.controller.business.tools.mongodb;// package com.taotao.cloud.sys.biz.api.controller.tools.mongodb;
 //
 // import com.taotao.cloud.sys.biz.api.controller.tools.core.dtos.PageResponseDto;
-// import com.taotao.cloud.sys.biz.api.controller.tools.core.dtos.param.PageParam;
+// import com.taotao.cloud.sys.biz.api.controller.tools.core.dtos.param.PageQuery;
 // import com.taotao.cloud.sys.biz.api.controller.tools.mongodb.dtos.CollectionDto;
 // import com.taotao.cloud.sys.biz.api.controller.tools.mongodb.service.MongoQueryParam;
 // import com.taotao.cloud.sys.biz.api.controller.tools.mongodb.service.MongoService;
@@ -50,13 +50,13 @@ package com.taotao.cloud.sys.biz.controller.business.tools.mongodb;// package co
 //     /**
 //      * mongo 分页数据查询
 //      * @param mongoQueryParam mongo 查询参数
-//      * @param pageParam 分页参数
+//      * @param PageQuery 分页参数
 //      * @return
 //      * @throws IOException
 //      * @throws ClassNotFoundException
 //      */
 //     @GetMapping("/queryPage")
-//     public PageResponseDto<List<String>> queryPage(@Valid MongoQueryParam mongoQueryParam, PageParam pageParam) throws IOException, ClassNotFoundException {
-//         return mongoService.queryDataPage(mongoQueryParam,pageParam);
+//     public PageResponseDto<List<String>> queryPage(@Valid MongoQueryParam mongoQueryParam, PageQuery PageQuery) throws IOException, ClassNotFoundException {
+//         return mongoService.queryDataPage(mongoQueryParam,PageQuery);
 //     }
 // }

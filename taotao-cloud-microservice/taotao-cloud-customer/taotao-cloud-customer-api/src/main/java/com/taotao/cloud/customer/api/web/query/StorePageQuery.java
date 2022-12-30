@@ -1,6 +1,6 @@
 package com.taotao.cloud.customer.api.web.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ import java.io.Serial;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺搜索参数VO")
-public class StorePageQuery extends PageParam {
+public class StorePageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = 6916054310764833369L;

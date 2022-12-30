@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.goods.api.model.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 import com.taotao.cloud.web.base.service.BaseSuperService;
@@ -63,10 +63,10 @@ public interface ICustomWordsService extends BaseSuperService<CustomWords, Long>
 	 * 分页查询自定义分词
 	 *
 	 * @param words     分词
-	 * @param pageParam 分页信息
+	 * @param PageQuery 分页信息
 	 * @return {@link IPage }<{@link CustomWords }>
 	 * @since 2022-04-27 16:59:51
 	 */
-	IPage<CustomWords> getCustomWordsByPage(String words, PageParam pageParam);
+	IPage<CustomWords> getCustomWordsByPage(String words, PageQuery PageQuery);
 
 }

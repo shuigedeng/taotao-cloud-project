@@ -7,7 +7,7 @@ package com.taotao.cloud.sys.biz.controller.business.tools.versioncontrol;// pac
 //
 // import jakarta.validation.constraints.NotBlank;
 //
-// import com.taotao.cloud.common.model.PageParam;
+// import com.taotao.cloud.common.model.PageQuery;
 // import com.taotao.cloud.sys.biz.api.controller.tools.core.utils.OnlyPath;
 // import com.taotao.cloud.sys.biz.api.controller.tools.versioncontrol.dtos.ChoseCommits;
 // import com.taotao.cloud.sys.biz.api.controller.tools.versioncontrol.dtos.FilterBranchParam;
@@ -102,11 +102,11 @@ package com.taotao.cloud.sys.biz.controller.business.tools.versioncontrol;// pac
 //     /**
 //      * 分页查询分支信息
 //      * @param filterBranchParam
-//      * @param pageParam
+//      * @param PageQuery
 //      * @return
 //      */
 //     @GetMapping("/filterBranchesPage")
-//     public PageBranches filterBranchesPage(FilterBranchParam filterBranchParam, PageParam pageParam) throws IOException, GitAPIException {
+//     public PageBranches filterBranchesPage(FilterBranchParam filterBranchParam, PageQuery PageQuery) throws IOException, GitAPIException {
 //         final String group = filterBranchParam.getGroup();
 //         final String repository = filterBranchParam.getRepository();
 //
@@ -116,7 +116,7 @@ package com.taotao.cloud.sys.biz.controller.business.tools.versioncontrol;// pac
 //         final List<Branches.Branch> filterBranches = branches.stream()
 //                 .filter(branch -> branch.getBranchName().contains(filterBranchParam.getFilterValue()))
 //                 .collect(Collectors.toList());
-//         final List<Branches.Branch> collect = filterBranches.stream().limit(pageParam.getPageSize() * pageParam.getPageNo()).collect(Collectors.toList());
+//         final List<Branches.Branch> collect = filterBranches.stream().limit(PageQuery.getPageSize() * PageQuery.getPageNo()).collect(Collectors.toList());
 //         final String currentBranch = gitBranchService.currentBranch(group, repository);
 //         return new PageBranches(collect,filterBranches.size(),currentBranch);
 //     }

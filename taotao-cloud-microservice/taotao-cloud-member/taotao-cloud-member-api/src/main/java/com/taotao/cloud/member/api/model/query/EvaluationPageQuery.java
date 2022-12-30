@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +23,7 @@ import java.io.Serial;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "评价查询条件")
-public class EvaluationPageQuery extends PageParam {
+public class EvaluationPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;

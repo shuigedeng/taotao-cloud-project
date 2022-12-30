@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.member.biz.mapper.IMemberAddressMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
@@ -25,7 +25,7 @@ public class MemberAddressServiceImpl extends
 	ServiceImpl<IMemberAddressMapper, MemberAddress> implements IMemberAddressService {
 
 	@Override
-	public IPage<MemberAddress> getAddressByMember(PageParam page, Long memberId) {
+	public IPage<MemberAddress> getAddressByMember(PageQuery page, Long memberId) {
 		return this.page(page.buildMpPage(),
 			new LambdaQueryWrapper<MemberAddress>().eq(MemberAddress::getMemberId, memberId));
 	}

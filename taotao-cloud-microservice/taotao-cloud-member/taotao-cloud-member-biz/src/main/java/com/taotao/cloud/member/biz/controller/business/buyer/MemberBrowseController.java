@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.service.business.IMemberBrowseService;
@@ -40,8 +40,8 @@ public class MemberBrowseController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<List<EsGoodsIndexVO>> getByPage(PageParam pageParam) {
-		return Result.success(memberBrowseService.footPrintPage(pageParam));
+	public Result<List<EsGoodsIndexVO>> getByPage(PageQuery PageQuery) {
+		return Result.success(memberBrowseService.footPrintPage(PageQuery));
 	}
 
 	@Operation(summary = "根据id删除浏览历史", description = "根据id删除浏览历史")

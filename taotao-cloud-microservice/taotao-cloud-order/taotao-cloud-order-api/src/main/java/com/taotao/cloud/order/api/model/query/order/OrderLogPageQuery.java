@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.api.model.query.order;
 
 import com.taotao.cloud.common.enums.UserEnum;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +24,7 @@ import java.io.Serial;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单查询参数")
-public class OrderLogPageQuery extends PageParam {
+public class OrderLogPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = -6380573339089959194L;

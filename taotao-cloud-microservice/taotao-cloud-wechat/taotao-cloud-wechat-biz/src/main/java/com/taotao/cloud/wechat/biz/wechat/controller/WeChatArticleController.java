@@ -3,7 +3,7 @@ package com.taotao.cloud.wechat.biz.wechat.controller;
 import cn.bootx.common.core.rest.PageResult;
 import cn.bootx.common.core.rest.Res;
 import cn.bootx.common.core.rest.ResResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.starter.wechat.core.article.service.WeChatArticleService;
 import cn.bootx.starter.wechat.dto.article.WeChatArticleDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +27,7 @@ public class WeChatArticleController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<WeChatArticleDto>> page(PageParam pageParam){
-        return Res.ok(weChatArticleService.page(pageParam));
+    public ResResult<PageResult<WeChatArticleDto>> page(PageQuery PageQuery){
+        return Res.ok(weChatArticleService.page(PageQuery));
     }
 }

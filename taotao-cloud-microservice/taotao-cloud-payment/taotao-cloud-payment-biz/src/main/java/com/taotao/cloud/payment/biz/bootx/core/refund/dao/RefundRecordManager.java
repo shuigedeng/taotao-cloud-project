@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.bootx.core.refund.dao;
 
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
@@ -24,8 +24,8 @@ import java.util.Objects;
 public class RefundRecordManager extends BaseManager<RefundRecordMapper, RefundRecord> {
 
 
-    public Page<RefundRecord> page(PageParam pageParam, RefundRecordDto param){
-        Page<RefundRecord> mpPage = MpUtil.getMpPage(pageParam, RefundRecord.class);
+    public Page<RefundRecord> page(PageQuery PageQuery, RefundRecordDto param){
+        Page<RefundRecord> mpPage = MpUtil.getMpPage(PageQuery, RefundRecord.class);
         return lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
                 .like(Objects.nonNull(param.getPaymentId()), RefundRecord::getPaymentId,param.getPaymentId())

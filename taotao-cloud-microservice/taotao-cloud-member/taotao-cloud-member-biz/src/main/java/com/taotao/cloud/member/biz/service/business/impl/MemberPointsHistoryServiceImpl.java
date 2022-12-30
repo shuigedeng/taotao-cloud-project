@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
@@ -45,26 +45,26 @@ public class MemberPointsHistoryServiceImpl extends
 	}
 
 	@Override
-	public IPage<MemberPointsHistory> getByPage(PageParam pageParam) {
+	public IPage<MemberPointsHistory> getByPage(PageQuery PageQuery) {
 		LambdaQueryWrapper<MemberPointsHistory> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(MemberPointsHistory::getMemberId, SecurityUtils.getUserId());
 		queryWrapper.orderByDesc(MemberPointsHistory::getCreateTime);
-		return this.page(pageParam.buildMpPage(), queryWrapper);
+		return this.page(PageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override
-	public IPage<MemberPointsHistory> memberPointsHistoryList(PageParam pageParam,
+	public IPage<MemberPointsHistory> memberPointsHistoryList(PageQuery PageQuery,
 															  Long memberId, String memberName) {
 		LambdaQueryWrapper<MemberPointsHistory> lambdaQueryWrapper = new LambdaQueryWrapper<MemberPointsHistory>()
 			.eq(memberId != null, MemberPointsHistory::getMemberId, memberId)
 			.like(memberName != null, MemberPointsHistory::getMemberName, memberName);
 
 		//如果排序为空，则默认创建时间倒序
-		if (StringUtils.isNotBlank(pageParam.getSort())) {
-			pageParam.setSort("createTime");
-			pageParam.setOrder("desc");
+		if (StringUtils.isNotBlank(PageQuery.getSort())) {
+			PageQuery.setSort("createTime");
+			PageQuery.setOrder("desc");
 		}
-		return this.page(pageParam.buildMpPage(), lambdaQueryWrapper);
+		return this.page(PageQuery.buildMpPage(), lambdaQueryWrapper);
 	}
 
 }

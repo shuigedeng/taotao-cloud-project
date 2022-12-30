@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.bootx.core.refund.service;
 
 import cn.bootx.common.core.exception.DataNotExistException;
 import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.payment.core.refund.dao.RefundRecordManager;
 import cn.bootx.payment.core.refund.entity.RefundRecord;
@@ -26,8 +26,8 @@ public class RefundRecordService {
     /**
      * 分页查询
      */
-    public PageResult<RefundRecordDto> page(PageParam pageParam,RefundRecordDto param){
-        Page<RefundRecord> page = refundRecordManager.page(pageParam,param);
+    public PageResult<RefundRecordDto> page(PageQuery PageQuery,RefundRecordDto param){
+        Page<RefundRecord> page = refundRecordManager.page(PageQuery,param);
         return MpUtil.convert2DtoPageResult(page);
     }
 
