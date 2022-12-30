@@ -44,7 +44,7 @@ public class RefundSupport {
 	 * @param afterSale
 	 */
 	public void refund(AfterSaleVO afterSale) {
-		OrderVO order = orderService.getBySn(afterSale.orderSn()).data();
+		OrderVO order = orderService.getBySn(afterSale.orderSn());
 		RefundLog refundLog = RefundLog.builder()
 			.isRefund(false)
 			.totalAmount(afterSale.getActualRefundPrice())
@@ -85,7 +85,7 @@ public class RefundSupport {
 	 * 订单取消
 	 */
 	public void cancel(AfterSaleVO afterSale) {
-		OrderVO order = orderService.getBySn(afterSale.orderSn()).data();
+		OrderVO order = orderService.getBySn(afterSale.orderSn());
 		RefundLog refundLog = RefundLog.builder()
 			.isRefund(false)
 			.totalAmount(afterSale.getActualRefundPrice())

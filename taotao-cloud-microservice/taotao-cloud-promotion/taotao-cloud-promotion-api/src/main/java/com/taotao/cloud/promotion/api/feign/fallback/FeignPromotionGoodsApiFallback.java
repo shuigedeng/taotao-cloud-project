@@ -36,14 +36,14 @@ public class FeignPromotionGoodsApiFallback implements FallbackFactory<IFeignPro
 		return new IFeignPromotionGoodsApi() {
 
 			@Override
-			public Result<PromotionGoodsVO> getPromotionsGoods(
+			public PromotionGoodsVO getPromotionsGoods(
 				PromotionGoodsPageQuery searchParams) {
 				return null;
 			}
 
 			@Override
-			public void updateBatchById(List<PromotionGoodsVO> promotionGoods) {
-
+			public Boolean updateBatchById(List<PromotionGoodsVO> promotionGoods) {
+				return null;
 			}
 
 			@Override

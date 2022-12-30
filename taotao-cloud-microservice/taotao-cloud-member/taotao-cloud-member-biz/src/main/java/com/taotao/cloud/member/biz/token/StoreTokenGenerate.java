@@ -42,7 +42,7 @@ public class StoreTokenGenerate extends AbstractTokenGenerate<Member> {
 		if (Boolean.FALSE.equals(member.getHaveStore())) {
 			throw new BusinessException(ResultEnum.STORE_NOT_OPEN);
 		}
-		StoreVO store = storeService.findSotreByMemberId(member.getId()).data();
+		StoreVO store = storeService.findSotreByMemberId(member.getId());
 		// AuthUser authUser = new AuthUser(member.getUsername(), member.getId(), member.getNickname(), store.getStoreLogo(), UserEnum.STORE);
 		//
 		// authUser.setStoreId(store.getId());

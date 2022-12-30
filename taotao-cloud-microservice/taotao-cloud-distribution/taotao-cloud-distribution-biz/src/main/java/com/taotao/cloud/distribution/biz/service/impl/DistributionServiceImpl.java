@@ -160,7 +160,7 @@ public class DistributionServiceImpl extends
 			Result<SettingVO> settingResult = settingService.get(
 				SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 			DistributionSetting distributionSetting = JSONUtil.toBean(
-				settingResult.data().getSettingValue(),
+				settingResult.getSettingValue(),
 				DistributionSetting.class);
 
 			redisRepository.setExpire(
@@ -181,7 +181,7 @@ public class DistributionServiceImpl extends
 		Result<SettingVO> settingResult = settingService.get(
 			SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 		DistributionSetting distributionSetting = JSONUtil.toBean(
-			settingResult.data().getSettingValue(),
+			settingResult.getSettingValue(),
 			DistributionSetting.class);
 		if (Boolean.FALSE.equals(distributionSetting.getIsOpen())) {
 			throw new BusinessException(ResultEnum.DISTRIBUTION_CLOSE);

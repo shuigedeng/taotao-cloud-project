@@ -59,7 +59,7 @@ public class TradeCashier implements CashierExecute {
 			//订单信息获取
 			TradeVO trade = tradeService.getBySn(payParam.getSn());
 
-			List<OrderVO> orders = orderService.getByTradeSn(payParam.getSn()).data();
+			List<OrderVO> orders = orderService.getByTradeSn(payParam.getSn());
 
 			String orderSns = orders.stream().map(OrderVO::getSn).collect(Collectors.joining(", "));
 			cashierParam.setOrderSns(orderSns);
@@ -78,7 +78,7 @@ public class TradeCashier implements CashierExecute {
 			cashierParam.setPrice(trade.getFlowPrice());
 
 			try {
-				BaseSetting baseSetting = settingService.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name()).data();
+				BaseSetting baseSetting = settingService.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
 				cashierParam.setTitle(baseSetting.getSiteName());
 			} catch (Exception e) {
 				cashierParam.setTitle("多用户商城，在线支付");

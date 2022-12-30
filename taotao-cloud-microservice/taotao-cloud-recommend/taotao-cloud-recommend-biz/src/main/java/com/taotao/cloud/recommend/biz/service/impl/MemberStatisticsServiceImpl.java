@@ -4,8 +4,6 @@ import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.recommend.biz.entity.MemberStatisticsData;
-import com.taotao.cloud.recommend.biz.mapper.MemberStatisticsMapper;
 import com.taotao.cloud.recommend.biz.service.MemberStatisticsService;
 import com.taotao.cloud.recommend.biz.util.StatisticsDateUtil;
 import java.util.ArrayList;

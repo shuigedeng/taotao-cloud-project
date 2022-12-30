@@ -1,5 +1,6 @@
 package com.taotao.cloud.member.biz.service.business.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -15,14 +16,15 @@ import com.taotao.cloud.member.biz.mapper.IMemberSignMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.member.biz.service.business.IMemberSignService;
 import com.taotao.cloud.member.biz.service.business.MemberService;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,42 +63,42 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 	@Override
 	public Boolean memberSign() {
 		//获取当前会员信息
-		QueryWrapper<MemberSign> queryWrapper = new QueryWrapper<>();
-		queryWrapper.eq("member_id", SecurityUtils.getUserId());
-		queryWrapper.between("create_time", new Date(DateUtils.startOfTodDay() * 1000),
-			DateUtils.getCurrentDayEndTime());
+		AuthUser authUser = UserContext.getCurrentUser();
+		if (authUser != null) {
 
-		//校验今天是否已经签到
-		List<MemberSign> todaySigns = this.baseMapper.getTodayMemberSign(queryWrapper);
-		if (todaySigns.size() > 0) {
-			throw new BusinessException(ResultEnum.MEMBER_SIGN_REPEAT);
-		}
-		//当前签到天数的前一天日期
-		List<MemberSign> signs = this.baseMapper.getBeforeMemberSign(SecurityUtils.getUserId());
-		//构建参数
-		MemberSign memberSign = new MemberSign();
-		memberSign.setMemberId(SecurityUtils.getUserId());
-		memberSign.setMemberName(SecurityUtils.getUsername());
+			LambdaQueryWrapper<MemberSign> queryWrapper = new LambdaQueryWrapper<>();
+			queryWrapper.eq(MemberSign::getMemberId, authUser.getId());
+			List<MemberSign> signSize = this.baseMapper.getTodayMemberSign(queryWrapper);
+			if (signSize.size() > 0) {
+				throw new ServiceException(ResultCode.MEMBER_SIGN_REPEAT);
+			}
+			//当前签到天数的前一天日期
+			List<MemberSign> signs = this.baseMapper.getBeforeMemberSign(authUser.getId());
+			//构建参数
+			MemberSign memberSign = new MemberSign();
+			memberSign.setMemberId(authUser.getId());
+			memberSign.setMemberName(authUser.getUsername());
+			//如果size大于0 说明昨天已经签到过，获取昨天的签到数，反之新签到
+			if (!signs.isEmpty()) {
+				//截止目前为止 签到总天数 不带今天
+				Integer signDay = signs.get(0).getSignDay();
+				memberSign.setSignDay(CurrencyUtil.add(signDay, 1).intValue());
+			} else {
+				memberSign.setSignDay(1);
+			}
 
-		//如果size大于0 说明昨天已经签到过，获取昨天的签到数，反之新签到
-		if (signs.size() > 0) {
-			//截止目前为止 签到总天数 不带今天
-			Integer signDay = signs.get(0).getSignDay();
-			memberSign.setSignDay(CurrencyUtils.add(BigDecimal.valueOf(signDay), BigDecimal.ONE).intValue());
-		} else {
-			memberSign.setSignDay(1);
+			memberSign.setDay(DateUtil.getDayOfStart().intValue());
+			try {
+				this.baseMapper.insert(memberSign);
+				//签到成功后发送消息赠送积分
+				String destination = rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_SING.name();
+				rocketMQTemplate.asyncSend(destination, memberSign, RocketmqSendCallbackBuilder.commonCallback());
+				return true;
+			} catch (Exception e) {
+				throw new ServiceException(ResultCode.MEMBER_SIGN_REPEAT);
+			}
 		}
-
-		int result = this.baseMapper.insert(memberSign);
-		//签到成功后发送消息赠送积分
-		if (result > 0) {
-			String destination = rocketmqCustomProperties.getMemberTopic() + ":"
-				+ MemberTagsEnum.MEMBER_SING.name();
-			rocketMQTemplate.asyncSend(destination, memberSign,
-				RocketmqSendCallbackBuilder.commonCallback());
-			return true;
-		}
-		return false;
+		throw new ServiceException(ResultCode.USER_NOT_LOGIN);
 	}
 
 	@Override
@@ -110,7 +112,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 		try {
 			//获取签到积分赠送设置
 			PointSettingVO pointSetting = feignSettingService.getPointSetting(
-				SettingCategoryEnum.POINT_SETTING.name()).data();
+				SettingCategoryEnum.POINT_SETTING.name());
 			String content = "";
 			//赠送积分
 			Long point = null;

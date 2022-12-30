@@ -181,9 +181,9 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 		//设置会员头像
 		this.memberProfile = member.getFace();
 		//商品名称
-		this.goodsName = goodsSku.goodsSkuBase().goodsName();
+		this.goodsName = goodsSku.getGoodsName();
 		//商品图片
-		this.goodsImage = goodsSku.goodsSkuBase().thumbnail();
+		this.goodsImage = goodsSku.getThumbnail();
 		//设置店铺ID
 		this.storeId = order.orderBase().storeId();
 		//设置店铺名称

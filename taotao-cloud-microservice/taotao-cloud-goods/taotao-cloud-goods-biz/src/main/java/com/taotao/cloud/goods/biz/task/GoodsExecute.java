@@ -38,7 +38,7 @@ public class GoodsExecute implements EveryDayExecute {
 	@Override
 	public void execute() {
 		//查询上次统计到本次的评价数量
-		List<Map<String, Object>> list = memberEvaluationMapper.memberEvaluationNum().data();
+		List<Map<String, Object>> list = memberEvaluationMapper.memberEvaluationNum();
 
 		for (Map<String, Object> map : list) {
 			goodsMapper.addGoodsCommentNum(Convert.toInt(map.get("num").toString()),

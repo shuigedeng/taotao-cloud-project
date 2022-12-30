@@ -60,10 +60,7 @@ public class MemberCollectionController {
 					PageResult.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
 		}
 
-		IPage<StoreCollectionVO> storeCollectionVOPage = storeCollectionService.storeCollection(
-				page);
-		return Result.success(
-				PageResult.convertMybatisPage(storeCollectionVOPage, StoreCollectionVO.class));
+		return Result.success(storeCollectionService.storeCollection(page));
 	}
 
 	@Operation(summary = "添加会员收藏", description = "添加会员收藏")

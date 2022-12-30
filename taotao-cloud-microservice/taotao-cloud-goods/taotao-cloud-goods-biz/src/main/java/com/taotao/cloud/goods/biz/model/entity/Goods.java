@@ -234,32 +234,32 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
 
 	public Goods(GoodsOperationDTO goodsOperationDTO) {
 		this.goodsName = goodsOperationDTO.getGoodsName();
-		this.categoryPath = goodsOperationDTO.categoryPath();
-		this.storeCategoryPath = goodsOperationDTO.storeCategoryPath();
-		this.brandId = goodsOperationDTO.brandId();
-		this.templateId = goodsOperationDTO.templateId();
-		this.recommend = goodsOperationDTO.recommend();
-		this.sellingPoint = goodsOperationDTO.sellingPoint();
-		this.salesModel = goodsOperationDTO.salesModel();
-		this.goodsUnit = goodsOperationDTO.goodsUnit();
-		this.intro = goodsOperationDTO.intro();
-		this.mobileIntro = goodsOperationDTO.mobileIntro();
-		this.goodsVideo = goodsOperationDTO.goodsVideo();
-		this.price = goodsOperationDTO.price();
-		if (goodsOperationDTO.goodsParamsDTOList() != null
-				&& goodsOperationDTO.goodsParamsDTOList().isEmpty()) {
-			this.params = JSONUtil.toJsonStr(goodsOperationDTO.goodsParamsDTOList());
+		this.categoryPath = goodsOperationDTO.getCategoryPath();
+		this.storeCategoryPath = goodsOperationDTO.getStoreCategoryPath();
+		this.brandId = goodsOperationDTO.getBrandId();
+		this.templateId = goodsOperationDTO.getTemplateId();
+		this.recommend = goodsOperationDTO.getRecommend();
+		this.sellingPoint = goodsOperationDTO.getSellingPoint();
+		this.salesModel = goodsOperationDTO.getSalesModel();
+		this.goodsUnit = goodsOperationDTO.getGoodsUnit();
+		this.intro = goodsOperationDTO.getIntro();
+		this.mobileIntro = goodsOperationDTO.getMobileIntro();
+		this.goodsVideo = goodsOperationDTO.getGoodsVideo();
+		this.price = goodsOperationDTO.getPrice();
+		if (goodsOperationDTO.getGoodsParamsDTOList() != null
+				&& goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
+			this.params = JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList());
 		}
 
 		//如果立即上架则
 		this.marketEnable =
-				Boolean.TRUE.equals(goodsOperationDTO.release()) ? GoodsStatusEnum.UPPER.name()
+				Boolean.TRUE.equals(goodsOperationDTO.getRelease()) ? GoodsStatusEnum.UPPER.name()
 						: GoodsStatusEnum.DOWN.name();
-		this.goodsType = goodsOperationDTO.goodsType();
+		this.goodsType = goodsOperationDTO.getGoodsType();
 		this.grade = BigDecimal.valueOf(100);
 
 		//循环sku，判定sku是否有效
-		for (Map<String, Object> sku : goodsOperationDTO.skuList()) {
+		for (Map<String, Object> sku : goodsOperationDTO.getSkuList()) {
 			//判定参数不能为空
 			if (sku.get("sn") == null) {
 				throw new BusinessException(ResultEnum.GOODS_SKU_SN_ERROR);

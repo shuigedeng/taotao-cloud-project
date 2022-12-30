@@ -150,7 +150,7 @@ public class OrderController {
 	public void downLoadDeliverExcel() {
 		//获取店铺已经选择物流公司列表
 		List<String> logisticsName = storeLogisticsService.getStoreSelectedLogisticsName(
-				SecurityUtils.getCurrentUser().getStoreId()).data();
+				SecurityUtils.getCurrentUser().getStoreId());
 		//下载订单批量发货Excel
 		this.orderService.getBatchDeliverList(RequestUtils.getResponse(), logisticsName);
 	}

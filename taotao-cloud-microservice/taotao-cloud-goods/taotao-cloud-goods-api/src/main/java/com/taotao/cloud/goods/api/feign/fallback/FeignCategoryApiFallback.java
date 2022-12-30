@@ -20,7 +20,7 @@ public class FeignCategoryApiFallback implements FallbackFactory<IFeignCategoryA
 		return new IFeignCategoryApi() {
 
 			@Override
-			public Result<List<CategoryTreeVO>> firstCategory() {
+			public List<CategoryTreeVO> firstCategory() {
 				return null;
 			}
 		};

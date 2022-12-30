@@ -28,13 +28,13 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IStudioCommodityService;
 import com.taotao.cloud.goods.biz.service.business.IStudioService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
-import com.taotao.cloud.stream.framework.trigger.enums.DelayTypeEnums;
-import com.taotao.cloud.stream.framework.trigger.interfaces.TimeTrigger;
-import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;
-import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
-import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
-import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.mq.stream.framework.trigger.enums.DelayTypeEnums;
+import com.taotao.cloud.mq.stream.framework.trigger.interfaces.TimeTrigger;
+import com.taotao.cloud.mq.stream.framework.trigger.message.BroadcastMessage;
+import com.taotao.cloud.mq.stream.framework.trigger.model.TimeExecuteConstant;
+import com.taotao.cloud.mq.stream.framework.trigger.model.TimeTriggerMsg;
+import com.taotao.cloud.mq.stream.framework.trigger.util.DelayQueueTools;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +71,7 @@ public class StudioServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean create(Studio studio) {
-		studio.setStoreId(SecurityUtils.getUser().getStoreId());
+		studio.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
 		//创建小程序直播
 		Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
 		studio.setRoomId(Convert.toInt(roomMap.get("roomId")));

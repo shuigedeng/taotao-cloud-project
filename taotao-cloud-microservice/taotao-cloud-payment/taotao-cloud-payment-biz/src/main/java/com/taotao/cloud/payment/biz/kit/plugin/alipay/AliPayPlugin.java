@@ -338,7 +338,7 @@ public class AliPayPlugin implements Payment {
 	 */
 	private AlipayPaymentSetting alipayPaymentSetting() {
 		AlipayPaymentSetting setting = settingService.getAlipayPaymentSetting(
-				SettingCategoryEnum.ALIPAY_PAYMENT.name()).data();
+				SettingCategoryEnum.ALIPAY_PAYMENT.name());
 		if (setting != null) {
 			return setting;
 		}

@@ -41,14 +41,14 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsWordsService;
 import com.taotao.cloud.goods.biz.service.business.IStoreGoodsLabelService;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionApi;
 import com.taotao.cloud.promotion.api.model.vo.BasePromotionsVO;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.assertj.core.util.IterableUtil;
 import org.elasticsearch.action.ActionListener;
@@ -68,10 +68,10 @@ import org.elasticsearch.script.ScriptType;
 import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.client.erhlc.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchPage;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -655,7 +655,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 		//获取活动信息
 		Map<String, Object> goodsCurrentPromotionMap = feignPromotionService.getGoodsSkuPromotionMap(
-			index.getStoreId(), index.getId()).data();
+			index.getStoreId(), index.getId());
 
 		//写入促销信息
 		index.setPromotionMapJson(JSONUtil.toJsonStr(goodsCurrentPromotionMap));
@@ -846,7 +846,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 		//促销索引
 		Map<String, Object> goodsCurrentPromotionMap = feignPromotionService.getGoodsSkuPromotionMap(
-			index.getStoreId(), index.getId()).data();
+			index.getStoreId(), index.getId());
 		index.setPromotionMapJson(JSONUtil.toJsonStr(goodsCurrentPromotionMap));
 		return index;
 	}

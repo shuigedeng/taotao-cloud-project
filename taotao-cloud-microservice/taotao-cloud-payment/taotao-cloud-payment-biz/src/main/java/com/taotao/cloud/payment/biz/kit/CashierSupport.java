@@ -94,7 +94,7 @@ public class CashierSupport {
 		}
 
 		//支付方式 循环获取
-		SettingVO setting = settingService.get(SettingCategoryEnum.PAYMENT_SUPPORT.name()).data();
+		SettingVO setting = settingService.get(SettingCategoryEnum.PAYMENT_SUPPORT.name());
 		PaymentSupportSetting paymentSupportSetting = JSONUtil.toBean(setting.getSettingValue(),
 				PaymentSupportSetting.class);
 		for (PaymentSupportItem paymentSupportItem : paymentSupportSetting.getPaymentSupportItems()) {

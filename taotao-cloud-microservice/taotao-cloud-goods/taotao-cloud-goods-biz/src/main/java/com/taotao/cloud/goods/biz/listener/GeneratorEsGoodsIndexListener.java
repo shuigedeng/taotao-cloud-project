@@ -1,8 +1,8 @@
 package com.taotao.cloud.goods.biz.listener;
 
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

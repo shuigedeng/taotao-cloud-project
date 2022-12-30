@@ -19,19 +19,19 @@ import java.util.Date;
 @FeignClient(contextId = "RemoteProductService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignMemberStatisticsFallbackImpl.class)
 public interface IFeignMemberStatisticsService {
 	@PostMapping(value = "/order")
-	Result<MemberStatisticsVO> findMemberStatistics();
+	MemberStatisticsVO findMemberStatistics();
 
 	@PostMapping(value = "/order")
-	Result<Boolean> saveMemberStatistics(MemberStatisticsDTO memberStatisticsDTO);
+	Boolean saveMemberStatistics(MemberStatisticsDTO memberStatisticsDTO);
 
 	@PostMapping(value = "/order")
-	Result<Long> newlyAdded(Date startTime, Date endTime);
+	Long newlyAdded(Date startTime, Date endTime);
 
 	@PostMapping(value = "/order")
-	Result<Long> activeQuantity(Date startTime);
+	Long activeQuantity(Date startTime);
 
 	@PostMapping(value = "/order")
-	Result<Long> memberCount(Date endTime);
+	Long memberCount(Date endTime);
 
 }
 

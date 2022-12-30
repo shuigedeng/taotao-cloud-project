@@ -20,39 +20,36 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //阿里云 钉钉 SDK
+
+    implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.2'
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
-        exclude group: "log4j", module: "log4j"
+        exclude group: "com.sun.jmx", module: "jmxri"
     }
-    //企业微信第三方SDK
-    implementation "com.github.binarywang:weixin-java-cp:4.1.0"
-    //动态线程池引入
-    implementation "cn.dynamictp:dynamic-tp-spring-boot-starter-nacos:1.0.9"
-    //微信服务号第三方SDK
-    implementation "com.github.binarywang:weixin-java-mp:4.1.0"
-    //kafkaFlink连接器
+    implementation 'com.alipay.sdk:alipay-sdk-java:4.33.39.ALL'
+
+    implementation "com.github.binarywang:weixin-java-cp:4.3.0"
+    implementation 'io.github.lyh200:dynamic-tp-spring-boot-starter-apollo:1.0.2'
+    implementation "com.github.binarywang:weixin-java-miniapp:4.3.0"
+    implementation "com.github.binarywang:weixin-java-mp:4.3.0"
+
+    implementation 'org.apache.flink:flink-connector-rabbitmq:1.15.1'
     implementation "org.apache.flink:flink-connector-kafka_2.11:1.14.3"
-    //flink相关依赖
+    implementation "org.apache.flink:flink-clients_2.11:1.14.3"
+    implementation "org.apache.flink:flink-streaming-java_2.11:1.14.3"
     implementation "org.apache.flink:flink-walkthrough-common_2.11:1.14.3"
-    compileOnly "org.apache.flink:flink-streaming-java_2.11:1.14.3"
-    compileOnly "org.apache.flink:flink-clients_2.11:1.14.3"
-    //xxl-job分布式定时任务
-    implementation "com.xuxueli:xxl-job-core:2.3.0"
-    //graylog
-    implementation "de.siegmar:logback-gelf:3.0.0"
-    //邮件发送
-    implementation "com.sun.mail:javax.mail:1.6.2"
-    //注解打印日志
-    implementation "cn.monitor4all:log-record-starter:1.0.4.1"
-    //apollo
-    implementation "com.ctrip.framework.apollo:apollo-client-config-data:1.9.1"
-    //腾讯sdk(目前用在短信上)
-    implementation "com.tencentcloudapi:tencentcloud-sdk-java:3.1.390"
-
-
-    implementation 'com.alipay.sdk:alipay-sdk-java:4.22.32.ALL'
-    implementation 'com.github.binarywang:weixin-java-mp:4.4.0'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.4.0'
+    implementation "com.xuxueli:xxl-job-core:2.3.1"
+    implementation 'de.siegmar:logback-gelf:3.0.0'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+    implementation 'cn.monitor4all:log-record-starter:1.0.4.1'
+    implementation 'com.ctrip.framework.apollo:apollo-client-config-data:1.9.1'
+    implementation 'com.alibaba.boot:nacos-config-spring-boot-starter:0.2.12'
+    implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.1.510'
+    implementation 'com.alibaba:fastjson:1.2.83'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+    implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation 'cn.hutool:hutool-all:5.7.15'
+    implementation 'mysql:mysql-connector-java:5.1.35'
 }
 
 mainClassName = "com.taotao.cloud.message.biz.TaoTaoCloudMessageApplication"

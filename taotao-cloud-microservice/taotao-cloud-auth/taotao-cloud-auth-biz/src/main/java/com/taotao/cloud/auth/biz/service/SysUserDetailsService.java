@@ -26,11 +26,11 @@ public class SysUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		//Result<SecurityUser> memberSecurityUser = feignUserService.getSysSecurityUser(username);
-		//if (!memberSecurityUser.success() || memberSecurityUser.data() == null) {
+		//if (!memberSecurityUser.success() || memberSecurityUser == null) {
 		//	LogUtil.error("系统用户 [{}] not found.", username);
 		//	throw new UsernameNotFoundException(String.format("系统用户 [%s] 不存在", username));
 		//}
-		//return memberSecurityUser.data();
+		//return memberSecurityUser;
 
 		Set<String> permissions = new HashSet<>();
 		permissions.add("read");

@@ -245,8 +245,8 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 			throw new BusinessException(ResultEnum.AFTER_STATUS_ERROR);
 		}
 
-		afterSale.setLogisticsCode(logistics.data().getCode());
-		afterSale.setLogisticsName(logistics.data().getName());
+		afterSale.setLogisticsCode(logistics.getCode());
+		afterSale.setLogisticsName(logistics.getName());
 		afterSale.setLogisticsNo(logisticsNo);
 		afterSale.setDeliverTime(mDeliverTime);
 		//修改售后单状态
@@ -263,7 +263,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
 		return logisticsService.getLogistic(afterSale.getId(),
-			afterSale.getLogisticsNo()).data();
+			afterSale.getLogisticsNo());
 	}
 
 	@Override
@@ -359,7 +359,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	@Override
 	public StoreAfterSaleAddressVO getStoreAfterSaleAddressDTO(String sn) {
 		return storeDetailService.getStoreAfterSaleAddressDTO(
-			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId()).data();
+			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId());
 	}
 
 	/**

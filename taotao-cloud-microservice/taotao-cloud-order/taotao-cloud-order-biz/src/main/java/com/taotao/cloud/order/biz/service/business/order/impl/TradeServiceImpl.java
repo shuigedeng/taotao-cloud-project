@@ -195,7 +195,7 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
 				tradeDTO.getMemberId(),
 				"订单【" + orderSns + "】创建，积分扣减");
 
-			if (!result.data()) {
+			if (!result) {
 				throw new BusinessException(ResultEnum.PAY_POINT_ENOUGH);
 			}
 		}

@@ -25,8 +25,8 @@ import com.taotao.cloud.member.biz.roketmq.event.MemberPointChangeEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberWithdrawalEvent;
 import com.taotao.cloud.member.biz.service.business.IMemberSignService;
-import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
-import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
+import com.taotao.cloud.mq.stream.message.MemberWithdrawalMessage;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
@@ -74,7 +74,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 	public void onMessage(MessageExt messageExt) {
 		switch (MemberTagsEnum.valueOf(messageExt.getTags())) {
 			//会员注册
-			case MEMBER_REGISTER:
+			case MEMBER_REGISTER -> {
 				for (MemberRegisterEvent memberRegisterEvent : memberSignEvents) {
 					try {
 						Member member = JSONUtil.toBean(new String(messageExt.getBody()),
@@ -87,10 +87,8 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 							e);
 					}
 				}
-				break;
-
-			case MEMBER_LOGIN:
-
+			}
+			case MEMBER_LOGIN -> {
 				for (MemberLoginEvent memberLoginEvent : memberLoginEvents) {
 					try {
 						Member member = JSONUtil.toBean(new String(messageExt.getBody()),
@@ -103,16 +101,16 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 							e);
 					}
 				}
-				break;
+			}
 			//会员签到
-			case MEMBER_SING:
+			case MEMBER_SING -> {
 				MemberSign memberSign = JSONUtil.toBean(new String(messageExt.getBody()),
 					MemberSign.class);
 				memberSignService.memberSignSendPoint(memberSign.getMemberId(),
 					memberSign.getSignDay());
-				break;
+			}
 			//会员积分变动
-			case MEMBER_POINT_CHANGE:
+			case MEMBER_POINT_CHANGE -> {
 				for (MemberPointChangeEvent memberPointChangeEvent : memberPointChangeEvents) {
 					try {
 						MemberPointMessageDTO memberPointMessageDTO = JSONUtil.toBean(
@@ -125,9 +123,9 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 							e);
 					}
 				}
-				break;
+			}
 			//会员提现
-			case MEMBER_WITHDRAWAL:
+			case MEMBER_WITHDRAWAL -> {
 				for (MemberWithdrawalEvent memberWithdrawalEvent : memberWithdrawalEvents) {
 					try {
 						MemberWithdrawalMessage memberWithdrawalMessage = JSONUtil.toBean(
@@ -140,9 +138,9 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
 							e);
 					}
 				}
-				break;
-			default:
-				break;
+			}
+			default -> {
+			}
 		}
 	}
 }

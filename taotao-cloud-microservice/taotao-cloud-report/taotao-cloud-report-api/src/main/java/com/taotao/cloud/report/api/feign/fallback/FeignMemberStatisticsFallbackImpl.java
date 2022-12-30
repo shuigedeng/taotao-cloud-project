@@ -19,29 +19,28 @@ public class FeignMemberStatisticsFallbackImpl implements FallbackFactory<IFeign
 	@Override
 	public IFeignMemberStatisticsService create(Throwable throwable) {
 		return new IFeignMemberStatisticsService() {
-
 			@Override
-			public Result<MemberStatisticsVO> findMemberStatistics() {
+			public MemberStatisticsVO findMemberStatistics() {
 				return null;
 			}
 
 			@Override
-			public Result<Boolean> saveMemberStatistics(MemberStatisticsDTO memberStatisticsDTO) {
+			public Boolean saveMemberStatistics(MemberStatisticsDTO memberStatisticsDTO) {
 				return null;
 			}
 
 			@Override
-			public Result<Long> newlyAdded(Date startTime, Date endTime) {
+			public Long newlyAdded(Date startTime, Date endTime) {
 				return null;
 			}
 
 			@Override
-			public Result<Long> activeQuantity(Date startTime) {
+			public Long activeQuantity(Date startTime) {
 				return null;
 			}
 
 			@Override
-			public Result<Long> memberCount(Date endTime) {
+			public Long memberCount(Date endTime) {
 				return null;
 			}
 		};

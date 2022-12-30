@@ -1,5 +1,6 @@
 package com.taotao.cloud.store.biz.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -28,7 +29,10 @@ import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.store.biz.service.StoreService;
+import com.taotao.cloud.store.biz.utils.QueryUtil;
+import java.util.Objects;
 import java.util.Optional;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,7 +65,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	@Override
 	public IPage<StoreVO> findByConditionPage(StorePageQuery storePageQuery) {
 		return this.baseMapper.getStoreList(storePageQuery.buildMpPage(),
-			storePageQuery.queryWrapper());
+			QueryUtil.queryWrapper(storePageQuery));
 	}
 
 	@Override
@@ -206,24 +210,38 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	public boolean applyFirstStep(StoreCompanyDTO storeCompanyDTO) {
 		//获取当前操作的店铺
 		Store store = getStoreByMember();
-		//如果没有申请过店铺，新增店铺
-		if (!Optional.ofNullable(store).isPresent()) {
-			Long userId = SecurityUtils.getCurrentUser().getUserId();
-			MemberVO member = memberService.getById(userId);
+
+		//店铺为空，则新增店铺
+		if (store == null) {
+			AuthUser authUser = Objects.requireNonNull(UserContext.getCurrentUser());
+			Member member = memberService.getById(authUser.getId());
+			//根据会员创建店铺
 			store = new Store(member);
-			BeanUtils.copyProperties(storeCompanyDTO, store);
+			BeanUtil.copyProperties(storeCompanyDTO, store);
 			this.save(store);
 			StoreDetail storeDetail = new StoreDetail();
 			storeDetail.setStoreId(store.getId());
-			BeanUtils.copyProperties(storeCompanyDTO, storeDetail);
+			BeanUtil.copyProperties(storeCompanyDTO, storeDetail);
 			return storeDetailService.save(storeDetail);
 		} else {
-			BeanUtils.copyProperties(storeCompanyDTO, store);
+
+			//校验迪纳普状态
+			checkStoreStatus(store);
+			//复制参数 修改已存在店铺
+			BeanUtil.copyProperties(storeCompanyDTO, store);
 			this.updateById(store);
 			//判断是否存在店铺详情，如果没有则进行新建，如果存在则进行修改
 			StoreDetail storeDetail = storeDetailService.getStoreDetail(store.getId());
-			BeanUtils.copyProperties(storeCompanyDTO, storeDetail);
-			return storeDetailService.updateById(storeDetail);
+			//如果店铺详情为空，则new ，否则复制对象，然后保存即可。
+			if (storeDetail == null) {
+				storeDetail = new StoreDetail();
+				storeDetail.setStoreId(store.getId());
+				BeanUtil.copyProperties(storeCompanyDTO, storeDetail);
+				return storeDetailService.save(storeDetail);
+			} else {
+				BeanUtil.copyProperties(storeCompanyDTO, storeDetail);
+				return storeDetailService.updateById(storeDetail);
+			}
 		}
 	}
 
@@ -289,5 +307,19 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		}
 		return this.getOne(lambdaQueryWrapper, false);
 	}
+	/**
+	 * 申请店铺时 对店铺状态进行校验判定
+	 *
+	 * @param store 店铺
+	 */
+	private void checkStoreStatus(Store store) {
 
+		//如果店铺状态为申请中或者已申请，则正常走流程，否则抛出异常
+		if (store.getStoreDisable().equals(StoreStatusEnum.APPLY.name()) || store.getStoreDisable().equals(StoreStatusEnum.APPLYING.name())) {
+			return;
+		} else {
+			throw new ServiceException(ResultCode.STORE_STATUS_ERROR);
+		}
+
+	}
 }

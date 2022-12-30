@@ -250,7 +250,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_ERROR);
 		}
 		for (String id : split) {
-			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(Long.valueOf(id)).data();
+			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(Long.valueOf(id));
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 			}
