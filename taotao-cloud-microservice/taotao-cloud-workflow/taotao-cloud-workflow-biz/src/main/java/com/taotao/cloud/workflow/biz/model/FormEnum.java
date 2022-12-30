@@ -29,7 +29,7 @@ public enum FormEnum {
     //分割线
     divider("divider"),
     //文本
-    JNPFText("JNPFText"),
+    WORKFLOWText("WORKFLOWText"),
     //按钮
     button("button"),
     //关联表单属性
@@ -60,7 +60,7 @@ public enum FormEnum {
     private static List<String> isNodeList=new ArrayList<String>(){{
         add(FormEnum.groupTitle.getMessage());
         add(FormEnum.divider.getMessage());
-        add(FormEnum.JNPFText.getMessage());
+        add(FormEnum.WORKFLOWText.getMessage());
         add(FormEnum.button.getMessage());
 //        add(FormEnum.relationFormAttr.getMessage());
         add(FormEnum.BARCODE.getMessage());

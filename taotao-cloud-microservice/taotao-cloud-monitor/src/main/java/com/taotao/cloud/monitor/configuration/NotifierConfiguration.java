@@ -62,10 +62,9 @@ public class NotifierConfiguration {
 
 		@Override
 		protected boolean shouldNotify(InstanceEvent event, Instance instance) {
-			if (!(event instanceof InstanceStatusChangedEvent)) {
+			if (!(event instanceof InstanceStatusChangedEvent statusChange)) {
 				return false;
 			} else {
-				InstanceStatusChangedEvent statusChange = (InstanceStatusChangedEvent) event;
 				String from = this.getLastStatus(event.getInstance());
 				String to = statusChange.getStatusInfo().getStatus();
 				return Arrays.binarySearch(this.ignoreChanges, from + ":" + to) < 0
