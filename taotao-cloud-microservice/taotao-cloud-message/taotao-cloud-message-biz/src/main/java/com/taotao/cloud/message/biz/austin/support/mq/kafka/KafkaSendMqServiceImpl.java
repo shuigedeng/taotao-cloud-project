@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.austin.support.mq.kafka;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
-import com.taotao.cloud.message.biz.austin.support.mq.SendMqService;
+import com.java3y.austin.support.constans.MessageQueuePipeline;
+import com.java3y.austin.support.mq.SendMqService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.Header;

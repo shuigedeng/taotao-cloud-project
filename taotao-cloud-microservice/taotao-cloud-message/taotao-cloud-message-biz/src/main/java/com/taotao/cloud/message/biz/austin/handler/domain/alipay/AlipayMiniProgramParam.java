@@ -13,25 +13,25 @@ import java.util.Set;
 @Data
 @Builder
 public class AlipayMiniProgramParam {
-	/**
-	 * 业务Id
-	 */
-	private Long messageTemplateId;
+    /**
+     * 业务Id
+     */
+    private Long messageTemplateId;
 
-	/**
-	 * 发送账号
-	 */
-	private Integer sendAccount;
+    /**
+     * 发送账号
+     */
+    private Integer sendAccount;
 
-	/**
-	 * 接收者（用户）的 UserId
-	 */
-	private Set<String> toUserId;
+    /**
+     * 接收者（用户）的 UserId
+     */
+    private Set<String> toUserId;
 
-	/**
-	 * 模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
-	 */
-	private Map<String, String> data;
+    /**
+     * 模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
+     */
+    private Map<String, String> data;
 
 //    /**
 //     * 支付消息模板：需传入用户发生的交易行为的支付宝交易号 trade_no；

@@ -1,14 +1,18 @@
 package com.taotao.cloud.message.biz.austin.handler.receipt;
 
 
-import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
-import jakarta.annotation.PostConstruct;
+import com.google.common.base.Throwables;
+import com.java3y.austin.handler.receipt.stater.ReceiptMessageStater;
+import com.java3y.austin.support.config.SupportThreadPoolConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
+
 /**
- * 拉取短信回执信息
+ * 拉取回执信息 入口
  *
  * @author 3y
  */
@@ -16,25 +20,22 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MessageReceipt {
 
-	@Autowired
-	private TencentSmsReceipt tencentSmsReceipt;
+    @Autowired
+    private List<ReceiptMessageStater> receiptMessageStaterList;
 
-	@Autowired
-	private YunPianSmsReceipt yunPianSmsReceipt;
-
-	@PostConstruct
-	private void init() {
-		SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
-			while (true) {
-
-				// TODO 回执这里自行打开(免得报错)
-//                tencentSmsReceipt.pull();
-//                yunPianSmsReceipt.pull();
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-				}
-			}
-		});
-	}
+    @PostConstruct
+    private void init() {
+        SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
+            while (true) {
+                try {
+                    for (ReceiptMessageStater receiptMessageStater : receiptMessageStaterList) {
+                        receiptMessageStater.start();
+                    }
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    log.error("MessageReceipt#init fail:{}", Throwables.getStackTraceAsString(e));
+                }
+            }
+        });
+    }
 }

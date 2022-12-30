@@ -2,10 +2,10 @@ package com.taotao.cloud.message.biz.austin.support.mq.eventbus;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.eventbus.EventBus;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
-import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
-import com.taotao.cloud.message.biz.austin.support.mq.SendMqService;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.support.constans.MessageQueuePipeline;
+import com.java3y.austin.support.domain.MessageTemplate;
+import com.java3y.austin.support.mq.SendMqService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
