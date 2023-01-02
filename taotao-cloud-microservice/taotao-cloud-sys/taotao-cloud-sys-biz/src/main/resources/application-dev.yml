@@ -36,8 +36,12 @@ decorator:
 
 jasypt:
   encryptor:
+    # 指定加密密钥，生产环境请放到启动参数里面  -Djasypt.encryptor.password=your-secret
     password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
+    # 指定解密算法，需要和加密时使用的算法一致
     algorithm: PBEWITHHMACSHA512ANDAES_256
+    # 指定initialization vector类型
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
     property:
       prefix: "ENC@["
       suffix: "]"
