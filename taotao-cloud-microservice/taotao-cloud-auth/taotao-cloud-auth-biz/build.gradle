@@ -47,8 +47,7 @@ dependencies {
     //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server
     implementation 'org.springframework.security:spring-security-oauth2-authorization-server:1.0.0'
 
-    //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
-    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5"
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     implementation "com.nimbusds:nimbus-jose-jwt:9.26"

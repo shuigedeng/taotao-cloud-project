@@ -24,7 +24,7 @@ dependencies {
         exclude group: "org.yaml", module: "snakeyaml"
     }
 
-    api "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5"
+    api "com.github.ulisesbocchio:jasypt-spring-boot-starter"
     api "com.google.guava:guava:31.1-jre"
     api "com.github.whvcse:easy-captcha:1.6.2"
     api "commons-io:commons-io:2.11.0"

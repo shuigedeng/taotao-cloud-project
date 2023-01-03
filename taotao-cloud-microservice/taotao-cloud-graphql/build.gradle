@@ -31,7 +31,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-undertow"
 
-    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4"
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     implementation "org.springframework.boot:spring-boot-starter-graphql"
 

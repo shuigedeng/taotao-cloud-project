@@ -13,7 +13,7 @@ apply plugin: "idea"
 
 dependencies {
     implementation(
-            "io.netty:netty-all:4.1.86.Final",
+            "io.netty:netty-all",
             "com.google.protobuf:protobuf-java:3.21.12",
             "com.google.protobuf:protobuf-java-util:3.21.12",
             "org.apache.thrift:libthrift:0.17.0",
