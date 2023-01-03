@@ -252,7 +252,7 @@ public class FlowBeforeController {
 		FlowTaskOperatorRecordEntity operatorRecord = flowTaskOperatorRecordService.getInfo(id);
 		List<FlowTaskNodeEntity> nodeList = flowTaskNodeService.getList(operatorRecord.getTaskId())
 			.stream().filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
-			.collect(Collectors.toList());
+			.toList();
 		FlowTaskNodeEntity taskNode = nodeList.stream()
 			.filter(t -> t.getId().equals(operatorRecord.getTaskNodeId())).findFirst().orElse(null);
 		if (taskNode != null) {

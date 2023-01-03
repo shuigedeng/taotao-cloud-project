@@ -23,11 +23,11 @@ dependencies {
     implementation "io.protostuff:protostuff-core:1.8.0"
     implementation "io.protostuff:protostuff-runtime:1.8.0"
 
-    implementation "com.dtflys.forest:forest-spring-boot-starter:1.5.26"
-    implementation "com.github.lianjiatech:retrofit-spring-boot-starter:2.3.7"
+    implementation "com.dtflys.forest:forest-spring-boot-starter"
+    implementation "com.github.lianjiatech:retrofit-spring-boot-starter"
 
-    implementation "org.springframework.cloud:spring-cloud-square-retrofit:0.4.1"
-    implementation "org.springframework.cloud:spring-cloud-square-okhttp:0.4.1"
+    implementation "org.springframework.cloud:spring-cloud-square-retrofit"
+    implementation "org.springframework.cloud:spring-cloud-square-okhttp"
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"

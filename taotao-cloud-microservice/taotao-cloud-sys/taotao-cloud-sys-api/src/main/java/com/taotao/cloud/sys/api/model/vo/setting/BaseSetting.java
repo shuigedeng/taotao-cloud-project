@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.api.model.vo.setting;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,35 +13,34 @@ public class BaseSetting implements Serializable {
 
 	private static final long serialVersionUID = -3138023944444671722L;
 
-	private static final long serialVersionUID = -3138023944444671722L;
 
-	@ApiModelProperty(value = "站点名称")
+	@Schema(description = "站点名称")
 	private String siteName;
 
-	@ApiModelProperty(value = "icp")
+	@Schema(description = "icp")
 	private String icp;
 
-	@ApiModelProperty(value = "后端logo")
+	@Schema(description = "后端logo")
 	private String domainLogo;
 
-	@ApiModelProperty(value = "后端icon")
+	@Schema(description = "后端icon")
 	private String domainIcon;
 
-	@ApiModelProperty(value = "买家端logo")
+	@Schema(description = "买家端logo")
 	private String buyerSideLogo;
 
-	@ApiModelProperty(value = "买家端icon")
+	@Schema(description = "买家端icon")
 	private String buyerSideIcon;
 
-	@ApiModelProperty(value = "商家端logo")
+	@Schema(description = "商家端logo")
 	private String storeSideLogo;
 
-	@ApiModelProperty(value = "商家端icon")
+	@Schema(description = "商家端icon")
 	private String storeSideIcon;
 
-	@ApiModelProperty(value = "站点地址")
+	@Schema(description = "站点地址")
 	private String staticPageAddress;
 
-	@ApiModelProperty(value = "wap站点地址")
+	@Schema(description = "wap站点地址")
 	private String staticPageWapAddress;
 }

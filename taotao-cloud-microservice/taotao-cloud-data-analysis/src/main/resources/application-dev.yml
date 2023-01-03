@@ -231,32 +231,81 @@ spring:
   #      name: admin
   #      password: 123456
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://172.16.60.248:3306/silian_epidemic_db?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
-    password: Epidemic@123456
-    username: sl-ep
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      # 从池返回的连接的默认自动提交行为 默认true
-      auto-commit: true
-      # 客户端等待连接池的最大毫秒数
-      connection-timeout: 350000
-      # 允许连接在连接池中空闲的最大时间（毫秒）
-      idle-timeout: 180000
-      login-timeout: 5
-      # 连接测试活动的最大时间量
-      validation-timeout: 3000
-      # 池中关闭连接后的最长生命周期
-      max-lifetime: 1800000
-      read-only: false
-      connection-test-query: SELECT 1
-      maximum-pool-size: 200
-      minimum-idle: 10
-      pool-name: DatebookHikariCP
-      register-mbeans: true
-      data-source-properties:
-        cachePrepStmts: true
-        prepStmtCacheSize: 250
+    #mysql主数据源，可关联mybatis
+    mysql:
+      url: jdbc:mysql://127.0.0.1:3306/aip?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&rewriteBatchedStatements=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    # doris 支持mysql协议
+    clickhouse:
+      driverClassName: ru.yandex.clickhouse.ClickHouseDriver
+      url: jdbc:clickhouse://106.55.55.249:8123/default
+      username: ck的密码
+      password: 123456
+    # doris 支持mysql协议
+    doris:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.1.161:9030/wudl_db?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+    # tidb 支持mysql协议
+    tidb:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.1.161:9030/wudl_db?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+    trino:
+      driver-class-name: io.trino.jdbc.TrinoDriver
+      url: jdbc:presto://127.0.0.1:8889/hive/test
+      username: root
+      password: root
+    hive:
+      url: jdbc:hive2://127.0.0.1:31000
+      username: root
+      password: root
+      driver-class-name: org.apache.hive.jdbc.HiveDriver
+    commonConfig: #连接池统一配置，应用到所有的数据源
+      initialSize: 1
+      minIdle: 1
+      maxIdle: 5
+      maxActive: 50
+      maxWait: 10000
+      timeBetweenEvictionRunsMillis: 10000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+      filters: stat
+    #type: com.zaxxer.hikari.HikariDataSource
+    #url: jdbc:mysql://172.16.60.248:3306/silian_epidemic_db?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    #password: Epidemic@123456
+    #username: sl-ep
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    #hikari:
+    #  # 从池返回的连接的默认自动提交行为 默认true
+    #  auto-commit: true
+    #  # 客户端等待连接池的最大毫秒数
+    #  connection-timeout: 350000
+    #  # 允许连接在连接池中空闲的最大时间（毫秒）
+    #  idle-timeout: 180000
+    #  login-timeout: 5
+    #  # 连接测试活动的最大时间量
+    #  validation-timeout: 3000
+    #  # 池中关闭连接后的最长生命周期
+    #  max-lifetime: 1800000
+    #  read-only: false
+    #  connection-test-query: SELECT 1
+    #  maximum-pool-size: 200
+    #  minimum-idle: 10
+    #  pool-name: DatebookHikariCP
+    #  register-mbeans: true
+    #  data-source-properties:
+    #    cachePrepStmts: true
+    #    prepStmtCacheSize: 250
   jpa:
     database: mysql
     database-platform: mysql

@@ -42,11 +42,9 @@ dependencies {
     implementation "io.trino:trino-jdbc:402"
     implementation "io.trino:trino-spi:402"
     implementation "io.trino:trino-main:402"
-
     implementation "io.airlift:slice:0.44"
     implementation "io.airlift:units:1.8"
     implementation "com.google.guava:guava:31.1-jre"
-
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.14.0"
 
     //hbase
