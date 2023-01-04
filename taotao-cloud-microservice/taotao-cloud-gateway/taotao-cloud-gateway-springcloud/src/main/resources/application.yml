@@ -1,14 +1,14 @@
 spring:
   profiles:
     active: dev
-  config:
-    import:
-      - conf/route.yml
-      - conf/taotao-cloud.yml
-      - conf/knife4j.yml
-      - conf/springdoc.yml
-      - conf/logging.yml
-      - conf/management.yml
-      - conf/arthas.yml
+  #config:
+  #  import:
+  #    - conf/route.yml
+  #    - conf/taotao-cloud.yml
+  #    - conf/knife4j.yml
+  #    - conf/springdoc.yml
+  #    - conf/logging.yml
+  #    - conf/management.yml
+  #    - conf/arthas.yml
 #    activate:
 #      on-profile: dev

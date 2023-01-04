@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.xxljob;
 
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import java.io.File;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -36,21 +36,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class TaoTaoCloudXxlJobApplication {
 
 	public static void main(String[] args) {
-		setNacosProperty();
+		PropertyUtils.setDefaultProperty("taotao-cloud-xxljob");
 		SpringApplication.run(TaoTaoCloudXxlJobApplication.class, args);
 	}
-	
-	public static void setNacosProperty() {
-		/**
-		 * 设置nacos客户端日志和快照目录
-		 *
-		 * @see LocalConfigInfoProcessor
-		 */
-		String userHome = System.getProperty("user.home");
-		System.setProperty("JM.LOG.PATH",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
-		System.setProperty("JM.SNAPSHOT.PATH",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
-		System.setProperty("nacos.logging.default.config.enabled", "true");
-	}
+
 }

@@ -161,92 +161,70 @@ spring:
     banner-mode: off
   application:
     name: taotao-cloud-xxljob
-  sleuth:
-    enabled: true
-    jdbc:
-      enabled: true
-    web:
-      client:
-        enabled: true
-      servlet:
-        enabled: true
-    sampler:
-      probability: 1.0
-      refresh:
-        enabled: true
-  zipkin:
-    enabled: true
-    base-url: http://192.168.10.210:9411/
-    discoveryClientEnabled: false
-    sender:
-      type: WEB
-    service:
-      name: ${spring.application.name}
-    compression:
-      enabled: true
-  redis:
-    host: 192.168.10.210
-    port: 6379
-    #sentinel:
-    #  master:
-    #  nodes:
-    database: 1
-    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
-    connect-timeout: 60000
-    #cluster:
-    #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
-    #  max-redirects: 3
-    client-type: lettuce
-    lettuce:
-      pool:
-        max-active: 1500
-        max-wait: 60000
-        max-idle: 500
-        min-idle: 100
-    redisson:
-      config: |
-        singleServerConfig:
-          # 连接空闲超时，单位：毫秒
-          idleConnectionTimeout: 10000
-          # 连接超时，单位：毫秒
-          connectTimeout: 10000
-          # 命令等待超时，单位：毫秒
-          timeout: 3000
-          # 命令失败重试次数,如果尝试达到 retryAttempts（命令失败重试次数） 仍然不能将命令发送至某个指定的节点时，将抛出错误。
-          # 如果尝试在此限制之内发送成功，则开始启用 timeout（命令等待超时） 计时。
-          retryAttempts: 3
-          # 命令重试发送时间间隔，单位：毫秒
-          retryInterval: 1500
-          # 密码，没有设置密码时，需要注释掉，否则会报错
-          password: taotao-cloud
-          # 单个连接最大订阅数量
-          subscriptionsPerConnection: 5
-          # 客户端名称
-          clientName: "taotao-cloud-redis-client"
-          # 节点地址
-          address: "redis://192.168.10.210:6379"
-          # 发布和订阅连接的最小空闲连接数
-          subscriptionConnectionMinimumIdleSize: 1
-          # 发布和订阅连接池大小
-          subscriptionConnectionPoolSize: 50
-          # 最小空闲连接数
-          connectionMinimumIdleSize: 32
-          # 连接池大小
-          connectionPoolSize: 64
-          # 数据库编号
-          database: 1
-          # DNS监测时间间隔，单位：毫秒
-          dnsMonitoringInterval: 5000
-        # 线程池数量,默认值: 当前处理核数量 * 2
-        threads: 0
-        # Netty线程池数量,默认值: 当前处理核数量 * 2
-        nettyThreads: 0
-        # 编码
-        codec: !<org.redisson.codec.JsonJacksonCodec> {}
-        # 传输模式
-        transportMode : "NIO"
-        # 配置看门狗的默认超时时间为30s，这里改为 10s
-        lockWatchdogTimeout: 10000
+  data:
+    redis:
+      host: 192.168.10.210
+      port: 6379
+      #sentinel:
+      #  master:
+      #  nodes:
+      database: 1
+      password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+      connect-timeout: 60000
+      #cluster:
+      #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
+      #  max-redirects: 3
+      client-type: lettuce
+      lettuce:
+        pool:
+          max-active: 1500
+          max-wait: 60000
+          max-idle: 500
+          min-idle: 100
+      redisson:
+        config: |
+          singleServerConfig:
+            # 连接空闲超时，单位：毫秒
+            idleConnectionTimeout: 10000
+            # 连接超时，单位：毫秒
+            connectTimeout: 10000
+            # 命令等待超时，单位：毫秒
+            timeout: 3000
+            # 命令失败重试次数,如果尝试达到 retryAttempts（命令失败重试次数） 仍然不能将命令发送至某个指定的节点时，将抛出错误。
+            # 如果尝试在此限制之内发送成功，则开始启用 timeout（命令等待超时） 计时。
+            retryAttempts: 3
+            # 命令重试发送时间间隔，单位：毫秒
+            retryInterval: 1500
+            # 密码，没有设置密码时，需要注释掉，否则会报错
+            password: taotao-cloud
+            # 单个连接最大订阅数量
+            subscriptionsPerConnection: 5
+            # 客户端名称
+            clientName: "taotao-cloud-redis-client"
+            # 节点地址
+            address: "redis://192.168.10.210:6379"
+            # 发布和订阅连接的最小空闲连接数
+            subscriptionConnectionMinimumIdleSize: 1
+            # 发布和订阅连接池大小
+            subscriptionConnectionPoolSize: 50
+            # 最小空闲连接数
+            connectionMinimumIdleSize: 32
+            # 连接池大小
+            connectionPoolSize: 64
+            # 数据库编号
+            database: 1
+            # DNS监测时间间隔，单位：毫秒
+            dnsMonitoringInterval: 5000
+          # 线程池数量,默认值: 当前处理核数量 * 2
+          threads: 0
+          # Netty线程池数量,默认值: 当前处理核数量 * 2
+          nettyThreads: 0
+          # 编码
+          codec: !<org.redisson.codec.JsonJacksonCodec> {}
+          # 传输模式
+          transportMode : "NIO"
+          # 配置看门狗的默认超时时间为30s，这里改为 10s
+          lockWatchdogTimeout: 10000
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     #    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
@@ -294,11 +272,28 @@ spring:
       concurrency: 5
       ack-mode: manual_immediate
       missing-topics-fatal: false
+  #mail:
+  #  host: smtp.qq.com
+  #  port: 465
+  #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+  #  username: 981376577@qq.com
+  #  from: 981376577@qq.com
+  #  protocol: smtps
+  #  properties:
+  #    mail:
+  #      smtp:
+  #        auth: true
+  #        starttls:
+  #          enable: true
+  #          required: true
+  #        socketFactory:
+  #          class: javax.net.ssl.SSLSocketFactory
   mail:
     host: smtp.qq.com
     port: 465
     password: ${TAOTAO_CLOUD_MAIL_PASSWORD:xxx}
     username: 981376577@qq.com
+    from: 981376577@qq.com
     properties:
       mail:
         transport:
@@ -378,8 +373,11 @@ taotao:
       enabled: true
 
 management:
-  server:
-    base-path: /actuator
+  info:
+    java:
+      enabled: true
+    env:
+      enabled: true
   endpoints:
     web:
       exposure:
@@ -389,25 +387,33 @@ management:
       enabled: true
     prometheus:
       enabled: true
+    health:
+      show-details: ALWAYS
     shutdown:
       enabled: true
-    health:
-      probes:
-        enabled: true
-    env:
-      post:
-        enabled: true
   metrics:
-    export:
-      prometheus:
-        enabled: true
     tags:
       application: ${spring.application.name}
   health:
     mail:
       enabled: false
     elasticsearch:
-      enabled: false
+      enabled: true
+    rabbit:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  zipkin:
+    tracing:
+      connect-timeout: 1
+      read-timeout: 10
+      endpoint: http://localhost:9411/api/v2/spans
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
 
 logging:
   level:
