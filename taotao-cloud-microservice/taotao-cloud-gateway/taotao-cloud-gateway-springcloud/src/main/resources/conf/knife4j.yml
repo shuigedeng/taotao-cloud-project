@@ -1,8 +1,0 @@
-# 没啥作用
-knife4j:
-  production: true
-  enable: true
-  basic:
-    enable: true
-    username: admin
-    password: 123456
