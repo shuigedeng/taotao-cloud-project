@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.util.Date;
 import lombok.Data;
 
@@ -12,209 +13,209 @@ import lombok.Data;
  */
 @Data
 @TableName("flow_task")
-public class FlowTaskEntity {
+public class FlowTaskEntity extends SuperEntity<FlowTaskEntity, String> {
 
 	/**
 	 * 任务主键
 	 */
-	@TableId("F_ID")
+	@TableId("id")
 	private String id;
 
 	/**
 	 * 实例进程
 	 */
-	@TableField("F_PROCESSID")
+	@TableField("process_id")
 	private String processId;
 
 	/**
 	 * 任务编码
 	 */
-	@TableField("F_ENCODE")
+	@TableField("en_code")
 	private String enCode;
 
 	/**
 	 * 任务标题
 	 */
-	@TableField("F_FULLNAME")
+	@TableField("full_name")
 	private String fullName;
 
 	/**
 	 * 紧急程度
 	 */
-	@TableField("F_FLOWURGENT")
+	@TableField("flow_urgent")
 	private Integer flowUrgent;
 
 	/**
 	 * 流程主键
 	 */
-	@TableField("F_FLOWID")
+	@TableField("flow_id")
 	private String flowId;
 
 	/**
 	 * 流程编码
 	 */
-	@TableField("F_FLOWCODE")
+	@TableField("flow_code")
 	private String flowCode;
 
 	/**
 	 * 流程名称
 	 */
-	@TableField("F_FLOWNAME")
+	@TableField("flow_name")
 	private String flowName;
 
 	/**
 	 * 流程类型
 	 */
-	@TableField("F_FLOWTYPE")
+	@TableField("flow_type")
 	private Integer flowType;
 
 	/**
 	 * 流程分类
 	 */
-	@TableField("F_FLOWCATEGORY")
+	@TableField("flow_category")
 	private String flowCategory;
 
 	/**
 	 * 流程表单
 	 */
-	@TableField("F_FLOWFORM")
+	@TableField("flow_form")
 	private String flowForm;
 
 	/**
 	 * 表单内容
 	 */
-	@TableField("F_FLOWFORMCONTENTJSON")
+	@TableField("flow_form_content_json")
 	private String flowFormContentJson;
 
 	/**
 	 * 流程模板
 	 */
-	@TableField("F_FLOWTEMPLATEJSON")
+	@TableField("flow_template_json")
 	private String flowTemplateJson;
 
 	/**
 	 * 流程版本
 	 */
-	@TableField("F_FLOWVERSION")
+	@TableField("flow_version")
 	private String flowVersion;
 
 	/**
 	 * 开始时间
 	 */
-	@TableField(value = "F_STARTTIME")
+	@TableField(value = "start_time")
 	private Date startTime;
 
 	/**
 	 * 结束时间
 	 */
-	@TableField(value = "F_ENDTIME")
+	@TableField(value = "end_time")
 	private Date endTime;
 
 	/**
 	 * 当前步骤
 	 */
-	@TableField("F_THISSTEP")
+	@TableField("this_step")
 	private String thisStep;
 
 	/**
 	 * 当前步骤Id
 	 */
-	@TableField(value = "F_THISSTEPID")
+	@TableField(value = "this_stepid")
 	private String thisStepId;
 
 	/**
 	 * 重要等级
 	 */
-	@TableField("F_GRADE")
+	@TableField("grade")
 	private String grade;
 
 	/**
 	 * 任务状态 0-草稿、1-处理、2-通过、3-驳回、4-撤销、5-终止
 	 */
-	@TableField("F_STATUS")
+	@TableField("status")
 	private Integer status;
 
 	/**
 	 * 完成情况
 	 */
-	@TableField("F_COMPLETION")
+	@TableField("completion")
 	private Integer completion;
 
 	/**
 	 * 描述
 	 */
-	@TableField("F_DESCRIPTION")
+	@TableField("description")
 	private String description;
 
 	/**
 	 * 父节点id
 	 */
-	@TableField("F_PARENTID")
+	@TableField("parent_id")
 	private String parentId;
 
 	/**
 	 * 是否批量（0：否，1：是）
 	 */
-	@TableField("F_ISBATCH")
+	@TableField("is_batch")
 	private Integer isBatch;
 
 	/**
 	 * 排序码
 	 */
-	@TableField("F_SORTCODE")
+	@TableField("sort_code")
 	private Long sortCode;
 
 	/**
 	 * 有效标志
 	 */
-	@TableField("F_ENABLEDMARK")
+	@TableField("enabled_mark")
 	private Integer enabledMark;
 
 	/**
 	 * 同步异步（0：同步，1：异步）
 	 */
-	@TableField(value = "F_ISASYNC")
+	@TableField(value = "is_async")
 	private Integer isAsync;
 
 	/**
 	 * 创建时间
 	 */
-	@TableField(value = "F_CREATORTIME", fill = FieldFill.INSERT)
+	@TableField(value = "creator_time", fill = FieldFill.INSERT)
 	private Date creatorTime;
 
 	/**
 	 * 创建用户
 	 */
-	@TableField(value = "F_CREATORUSERID", fill = FieldFill.INSERT)
+	@TableField(value = "creator_user_id", fill = FieldFill.INSERT)
 	private Long creatorUserId;
 
 	/**
 	 * 修改时间
 	 */
-	@TableField(value = "F_LASTMODIFYTIME", fill = FieldFill.UPDATE)
+	@TableField(value = "lastmodify_time", fill = FieldFill.UPDATE)
 	private Date lastModifyTime;
 
 	/**
 	 * 修改用户
 	 */
-	@TableField(value = "F_LASTMODIFYUSERID", fill = FieldFill.UPDATE)
+	@TableField(value = "lastmodify_user_id", fill = FieldFill.UPDATE)
 	private String lastModifyUserId;
 
 	/**
 	 * 删除标志
 	 */
-	@TableField("F_DELETEMARK")
+	@TableField("delete_mark")
 	private Integer deleteMark;
 
 	/**
 	 * 删除时间
 	 */
-	@TableField("F_DELETETIME")
+	@TableField("delete_time")
 	private Date deleteTime;
 
 	/**
 	 * 删除用户
 	 */
-	@TableField("F_DELETEUSERID")
+	@TableField("delete_user_id")
 	private String deleteUserId;
 }

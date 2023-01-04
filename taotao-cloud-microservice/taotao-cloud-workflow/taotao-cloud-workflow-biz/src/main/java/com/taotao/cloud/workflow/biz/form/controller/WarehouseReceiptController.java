@@ -6,9 +6,9 @@ import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.WarehouseEntryEntity;
 import com.taotao.cloud.workflow.biz.form.entity.WarehouseReceiptEntity;
-import com.taotao.cloud.workflow.biz.form.model.warehousereceipt.WarehouseReceiptEntityInfoModel;
-import com.taotao.cloud.workflow.biz.form.model.warehousereceipt.WarehouseReceiptForm;
-import com.taotao.cloud.workflow.biz.form.model.warehousereceipt.WarehouseReceiptInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.warehousereceipt.WarehouseReceiptEntityInfoModel;
+import com.taotao.cloud.workflow.api.common.model.form.warehousereceipt.WarehouseReceiptForm;
+import com.taotao.cloud.workflow.api.common.model.form.warehousereceipt.WarehouseReceiptInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.WarehouseReceiptService;
 
 import java.util.List;

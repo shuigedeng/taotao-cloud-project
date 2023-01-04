@@ -7,6 +7,9 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
 
+    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-sms-aliyun"

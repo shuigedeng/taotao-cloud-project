@@ -5,11 +5,11 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.DocumentSigningEntity;
-import com.taotao.cloud.workflow.biz.form.model.documentsigning.DocumentSigningForm;
-import com.taotao.cloud.workflow.biz.form.model.documentsigning.DocumentSigningInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.documentsigning.DocumentSigningForm;
+import com.taotao.cloud.workflow.api.common.model.form.documentsigning.DocumentSigningInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.DocumentSigningService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.ViolationHandlingEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.ViolationHandlingMapper;
-import com.taotao.cloud.workflow.biz.form.model.violationhandling.ViolationHandlingForm;
+import com.taotao.cloud.workflow.api.common.model.form.violationhandling.ViolationHandlingForm;
 import com.taotao.cloud.workflow.biz.form.service.ViolationHandlingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
