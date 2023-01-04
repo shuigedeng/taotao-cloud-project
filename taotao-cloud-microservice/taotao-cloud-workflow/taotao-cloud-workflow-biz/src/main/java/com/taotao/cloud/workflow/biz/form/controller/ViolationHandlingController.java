@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.ViolationHandlingEntity;
-import com.taotao.cloud.workflow.biz.form.model.violationhandling.ViolationHandlingForm;
-import com.taotao.cloud.workflow.biz.form.model.violationhandling.ViolationHandlingInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.violationhandling.ViolationHandlingForm;
+import com.taotao.cloud.workflow.api.common.model.form.violationhandling.ViolationHandlingInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ViolationHandlingService;
 
 import io.swagger.v3.oas.annotations.Operation;

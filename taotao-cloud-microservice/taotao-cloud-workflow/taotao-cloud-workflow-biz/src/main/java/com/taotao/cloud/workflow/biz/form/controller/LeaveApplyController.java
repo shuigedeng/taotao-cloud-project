@@ -5,11 +5,11 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.LeaveApplyEntity;
-import com.taotao.cloud.workflow.biz.form.model.leaveapply.LeaveApplyForm;
-import com.taotao.cloud.workflow.biz.form.model.leaveapply.LeaveApplyInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.leaveapply.LeaveApplyForm;
+import com.taotao.cloud.workflow.api.common.model.form.leaveapply.LeaveApplyInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.LeaveApplyService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;

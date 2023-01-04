@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.TravelApplyEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.TravelApplyMapper;
-import com.taotao.cloud.workflow.biz.form.model.travelapply.TravelApplyForm;
+import com.taotao.cloud.workflow.api.common.model.form.travelapply.TravelApplyForm;
 import com.taotao.cloud.workflow.biz.form.service.TravelApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

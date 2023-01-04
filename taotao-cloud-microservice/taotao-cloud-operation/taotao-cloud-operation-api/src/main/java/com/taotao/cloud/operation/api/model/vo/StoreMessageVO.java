@@ -27,7 +27,7 @@ public class StoreMessageVO {
 	 *
 	 * @see MessageStatusEnum
 	 */
-	private String status = MessageStatusEnum.UN_READY.name();
+	//private String status = MessageStatusEnum.UN_READY.name();
 
 	/**
 	 * 消息标题

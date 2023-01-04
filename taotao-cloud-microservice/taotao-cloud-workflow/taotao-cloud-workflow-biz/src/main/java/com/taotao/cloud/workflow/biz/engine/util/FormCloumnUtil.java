@@ -1,15 +1,18 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
+import com.taotao.cloud.workflow.api.model.FormAllModel;
+import com.taotao.cloud.workflow.api.model.FormColumnModel;
+import com.taotao.cloud.workflow.api.model.FormColumnTableModel;
+import com.taotao.cloud.workflow.api.model.FormEnum;
+import com.taotao.cloud.workflow.api.model.FormMastTableModel;
+import com.taotao.cloud.workflow.api.model.FormModel;
+import com.taotao.cloud.workflow.api.model.visiual.RecursionForm;
+import com.taotao.cloud.workflow.api.model.visiual.TableFields;
+import com.taotao.cloud.workflow.api.model.visiual.fields.FieLdsModel;
 import com.taotao.cloud.workflow.api.model.visiual.fields.config.ConfigModel;
-import com.taotao.cloud.workflow.biz.model.FormAllModel;
-import com.taotao.cloud.workflow.biz.model.FormColumnModel;
-import com.taotao.cloud.workflow.biz.model.FormColumnTableModel;
-import com.taotao.cloud.workflow.biz.model.FormEnum;
-import com.taotao.cloud.workflow.biz.model.FormMastTableModel;
-import com.taotao.cloud.workflow.biz.model.FormModel;
-import com.taotao.cloud.workflow.biz.model.RecursionForm;
 
-import javax.swing.table.TableModel;
+import com.taotao.cloud.workflow.api.model.visiual.fields.props.PropsBeanModel;
+import com.taotao.cloud.workflow.api.model.visiual.fields.props.PropsModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

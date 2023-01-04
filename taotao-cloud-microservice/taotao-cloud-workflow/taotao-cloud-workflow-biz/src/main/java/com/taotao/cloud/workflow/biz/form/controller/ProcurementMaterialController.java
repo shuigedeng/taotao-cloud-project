@@ -6,9 +6,9 @@ import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.ProcurementEntryEntity;
 import com.taotao.cloud.workflow.biz.form.entity.ProcurementMaterialEntity;
-import com.taotao.cloud.workflow.biz.form.model.procurementmaterial.ProcurementEntryEntityInfoModel;
-import com.taotao.cloud.workflow.biz.form.model.procurementmaterial.ProcurementMaterialForm;
-import com.taotao.cloud.workflow.biz.form.model.procurementmaterial.ProcurementMaterialInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.procurementmaterial.ProcurementEntryEntityInfoModel;
+import com.taotao.cloud.workflow.api.common.model.form.procurementmaterial.ProcurementMaterialForm;
+import com.taotao.cloud.workflow.api.common.model.form.procurementmaterial.ProcurementMaterialInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ProcurementMaterialService;
 
 import java.util.List;

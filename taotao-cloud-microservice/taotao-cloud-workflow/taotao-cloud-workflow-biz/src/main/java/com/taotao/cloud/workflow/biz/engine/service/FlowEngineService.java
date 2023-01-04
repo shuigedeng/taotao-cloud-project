@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineVisibleEntity;
-import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowEngineListVO;
-import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowExportModel;
-import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowPagination;
-import com.taotao.cloud.workflow.biz.engine.model.flowengine.PaginationFlowEngine;
+import com.taotao.cloud.workflow.api.common.model.engine.flowengine.FlowEngineListVO;
+import com.taotao.cloud.workflow.api.common.model.engine.flowengine.FlowExportModel;
+import com.taotao.cloud.workflow.api.common.model.engine.flowengine.FlowPagination;
+import com.taotao.cloud.workflow.api.common.model.engine.flowengine.PaginationFlowEngine;
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.util.List;
 

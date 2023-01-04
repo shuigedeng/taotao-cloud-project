@@ -12,8 +12,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-elk"
     implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-third-client"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-elastic"
