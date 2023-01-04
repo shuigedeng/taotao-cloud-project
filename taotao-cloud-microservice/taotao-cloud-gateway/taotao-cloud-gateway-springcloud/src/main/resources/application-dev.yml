@@ -869,6 +869,30 @@ knife4j:
     enable: true
     username: admin
     password: 123456
+  cors: false
+  documents:
+    - group: 1.2.x
+      name: 测试自定义标题分组
+      locations: classpath:md/*
+  setting:
+    enableSwaggerModels: true
+    enableDocumentManage: true
+    enableHost: false
+    enableHostText: http://localhost:18568
+    enableRequestCache: true
+    enableFilterMultipartApis: false
+    enableFilterMultipartApiMethodType: POST
+    language: zh-CN
+    enableAfterScript: false
+    enableHomeCustom: true
+    homeCustomLocation: classpath:test/home.md
+    enableFooter: false
+    enableFooterCustom: true
+    footerCustomContent: 八一菜刀研究中心
+    enableSearch: true
+    enableDebug: true
+    enableOpenApi: true
+    enableGroup: true
 
 springdoc:
   api-docs:
