@@ -6,7 +6,9 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-nacos"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"

@@ -25,8 +25,7 @@
 
 package com.taotao.cloud.auth.biz.demo.authentication.customizer;
 
-import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
-import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.auth.biz.demo.core.definition.domain.HerodotusUser;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

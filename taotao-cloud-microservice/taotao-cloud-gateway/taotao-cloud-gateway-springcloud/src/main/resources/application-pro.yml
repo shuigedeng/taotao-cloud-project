@@ -119,6 +119,9 @@ redisson:
     scanInterval: 1000
 
 spring:
+  config:
+    activate:
+      on-profile: pro
   main:
     allow-bean-definition-overriding: true
     web-application-type: reactive

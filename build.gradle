@@ -218,7 +218,7 @@ allprojects {
             url "https://repository.aspose.com/repo/"
         }
         maven {
-            url "https://repo.e-iceblue.cn/repository/maven-public/"
+            url "https://repo.e-iceblue.com/nexus/content/groups/public/"
         }
     }
 }
