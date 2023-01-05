@@ -1,5 +1,5 @@
 dependencies {
-    api "io.github.shuigedeng:taotao-cloud-starter-feign"
+    api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 }
 
 description = "工作流模块api"

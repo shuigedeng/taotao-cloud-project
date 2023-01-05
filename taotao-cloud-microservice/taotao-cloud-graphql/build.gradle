@@ -6,7 +6,7 @@ dependencies {
 //    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
 //    implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
 //    implementation "io.github.shuigedeng::taotao-cloud-starter-data-p6spy"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-feign"
+//    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 //    implementation "io.github.shuigedeng::taotao-cloud-starter-alibaba-seata"
 //    implementation "io.github.shuigedeng::taotao-cloud-starter-alibaba-sentinel"
 //
