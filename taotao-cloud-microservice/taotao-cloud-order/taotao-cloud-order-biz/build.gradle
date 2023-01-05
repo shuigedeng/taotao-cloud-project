@@ -3,7 +3,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
@@ -32,10 +31,20 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
-    api "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
-    api "cn.afterturn:easypoi-base:4.4.0"
-    api "cn.afterturn:easypoi-annotation:4.4.0"
+    implementation "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
+    implementation "cn.afterturn:easypoi-base:4.4.0"
+    implementation "cn.afterturn:easypoi-annotation:4.4.0"
+
+    //spring状态机 依赖使用的是springboot2.7先不打开 https://github.com/spring-projects/spring-statemachine
+    //https://docs.spring.io/spring-statemachine/docs/3.2.0/reference/
+    //implementation('org.springframework.statemachine:spring-statemachine-starter')
 }
+
+//dependencyManagement {
+//    imports {
+//        mavenBom "org.springframework.statemachine:spring-statemachine-bom:3.2.0"
+//    }
+//}
 
 mainClassName = "com.taotao.cloud.order.biz.TaoTaoCloudOrderApplication"
 description = "订单模块"

@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-monitor-2023.3.01.jar ./
+ADD ./build/libs/taotao-cloud-monitor-2023.01.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2023.3.01.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2023.01.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
@@ -13,7 +13,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.210:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-monitor
-ARG APP_VERSION=2023.3.01
+ARG APP_VERSION=2023.01
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33334
 ARG APP_PRROFILES=dev

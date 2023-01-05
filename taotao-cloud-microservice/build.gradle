@@ -40,6 +40,8 @@ subprojects {
     dependencies {
         testImplementation "org.springframework.boot:spring-boot-starter-test"
         testImplementation "org.testcontainers:junit-jupiter"
+        testImplementation 'io.projectreactor:reactor-test'
+        testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
         testImplementation "org.springframework.boot:spring-boot-starter-web"
 
         //https://search.maven.org/artifact/org.jeasy/easy-random
