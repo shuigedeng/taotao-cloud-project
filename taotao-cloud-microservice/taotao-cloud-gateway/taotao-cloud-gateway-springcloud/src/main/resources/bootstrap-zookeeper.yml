@@ -25,6 +25,8 @@ spring:
     loadbalancer:
       enabled: true
     zookeeper:
+      connect-string: 192.168.10.210:2181
       discovery:
         instance-host: ${spring.cloud.client.ip-address}
         uri-spec: zookeeper://192.168.10.210:2181
+
