@@ -5,20 +5,23 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    implementation "com.alibaba.csp:sentinel-datasource-nacos"
+    implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway"
+    implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
+        exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
+    }
+    
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
+    //implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
+    //implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
 
-    implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
-    implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
-//    implementation "org.springframework.security:spring-security-core:5.7.3"
-//    implementation "org.springframework.security:spring-security-config"
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-//    implementation "org.springframework.security:spring-security-oauth2-resource-server"
     implementation "org.springframework.security:spring-security-oauth2-jose"
     implementation "com.nimbusds:nimbus-jose-jwt:9.24.3"
 
@@ -29,21 +32,14 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-webflux"
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
 
-    implementation "com.alibaba.csp:sentinel-datasource-nacos"
-    implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway"
-    implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
-        exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
-    }
-
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
 
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-api'
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
 
-    //https://search.maven.org/artifact/com.github.xiaoymin/knife4j-openapi3-ui
     implementation "com.github.xiaoymin:knife4j-openapi3-ui"
     implementation "com.github.xiaoymin:knife4j-openapi3-spring-boot-starter"
-    implementation "com.github.xiaoymin:knife4j-gateway-spring-boot-starter:4.0.0"
+    //implementation "com.github.xiaoymin:knife4j-gateway-spring-boot-starter:4.0.0"
 
     implementation "org.apache.commons:commons-pool2"
     implementation "org.apache.commons:commons-lang3"
@@ -53,10 +49,10 @@ dependencies {
     //网关限流 https://search.maven.org/artifact/com.eeeffff.limiter/ip-limiter-core-spring-gateway
     //implementation "com.eeeffff.limiter:ip-limiter-core-spring-gateway:1.1.3"
 
-    compileOnly("io.github.shuigedeng:taotao-cloud-starter-security-satoken") {
-        exclude group: "cn.dev33", module: "sa-token-spring-boot-starter"
-    }
-    compileOnly 'cn.dev33:sa-token-reactor-spring-boot-starter:1.33.0'
+    //compileOnly("io.github.shuigedeng:taotao-cloud-starter-security-satoken") {
+    //    exclude group: "cn.dev33", module: "sa-token-spring-boot-starter"
+    //}
+    //compileOnly 'cn.dev33:sa-token-reactor-spring-boot-starter:1.33.0'
 }
 
 configurations {
