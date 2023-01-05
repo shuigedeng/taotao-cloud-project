@@ -1,6 +1,11 @@
+server:
+  port: 33334
+
 spring:
 #  profiles:
 #    active: dev
   config:
     activate:
       on-profile: dev
+  application:
+    name: taotao-cloud-monitor
