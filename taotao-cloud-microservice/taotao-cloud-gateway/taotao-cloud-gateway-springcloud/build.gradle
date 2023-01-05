@@ -4,11 +4,12 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-tencent"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
+
     implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
     implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-nacos"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"

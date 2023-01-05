@@ -10,6 +10,9 @@ server:
     key-store-password: 1234
 
 spring:
+  config:
+    activate:
+      on-profile: tencent
   pid:
     file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   main:

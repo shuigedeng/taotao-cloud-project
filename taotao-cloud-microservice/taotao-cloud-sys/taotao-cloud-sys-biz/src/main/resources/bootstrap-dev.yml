@@ -7,6 +7,9 @@ server:
     direct-buffers: true
 
 spring:
+  config:
+    activate:
+      on-profile: dev
   pid:
     file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   main:

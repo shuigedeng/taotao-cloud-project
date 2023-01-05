@@ -570,6 +570,9 @@ rocketmq:
     #secret-key:
 
 spring:
+  config:
+    activate:
+      on-profile: dev
   #autoconfigure:
   #  exclude:
   #    - org.springframework.boot.actuate.autoconfigure.elasticsearch.ElasticSearchReactiveHealthContributorAutoConfiguration

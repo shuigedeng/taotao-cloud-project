@@ -12,7 +12,7 @@ server:
 spring:
   config:
     activate:
-      on-profile: alibaba
+      on-profile: pre
   pid:
     file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   main:

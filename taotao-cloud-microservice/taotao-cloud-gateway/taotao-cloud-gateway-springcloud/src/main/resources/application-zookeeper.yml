@@ -133,7 +133,7 @@ redisson:
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: zookeeper
   main:
     allow-bean-definition-overriding: true
     web-application-type: reactive
