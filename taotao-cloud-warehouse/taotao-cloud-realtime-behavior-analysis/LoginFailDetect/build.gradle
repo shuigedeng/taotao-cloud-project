@@ -9,6 +9,7 @@ dependencies {
     implementation "org.apache.flink:flink-streaming-scala_2.12:1.16.0"
 
     implementation "org.apache.flink:flink-clients_2.12:1.14.6"
+    implementation "org.apache.flink:flink-cep_2.12:1.14.6"
     implementation "org.apache.flink:flink-runtime-web_2.12:1.14.6"
     implementation "org.apache.flink:flink-streaming-java_2.12:1.14.6"
     implementation "org.apache.flink:flink-connector-kafka_2.12:1.14.6"
