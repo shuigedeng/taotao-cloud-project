@@ -1,6 +1,7 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-common"
     implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
 
 //    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
 //    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
@@ -21,7 +22,6 @@ dependencies {
 //    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
 //    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
-    implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-aop"
     implementation "org.springframework.boot:spring-boot-starter-json"
@@ -29,6 +29,17 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
+
+    implementation 'org.springframework.integration:spring-integration-core:6.0.1'
+    implementation 'org.springframework.integration:spring-integration-jdbc:6.0.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-task'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    //以下依赖使用的是springboot2.7先不打开 https://github.com/spring-projects/spring-batch-extensions
+    //implementation 'org.springframework.batch.extensions:spring-batch-excel:0.1.1'
+    //implementation 'org.springframework.batch.extensions:spring-batch-bigquery:0.1.0'
+    //implementation 'org.springframework.batch.extensions:spring-batch-neo4j:0.1.0'
+    //implementation 'org.springframework.batch.extensions:spring-batch-elasticsearch:0.1.0-SNAPSHOT'
+    //implementation 'org.springframework.batch.extensions:spring-batch-geode:0.1.0-SNAPSHOT'
 
     implementation "mysql:mysql-connector-java"
 //    implementation "com.baomidou:mybatis-plus-boot-starter"

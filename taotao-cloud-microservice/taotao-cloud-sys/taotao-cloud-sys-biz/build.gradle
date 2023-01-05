@@ -102,6 +102,8 @@ dependencies {
     //}
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
