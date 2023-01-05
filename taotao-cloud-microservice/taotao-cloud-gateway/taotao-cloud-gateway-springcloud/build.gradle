@@ -31,6 +31,7 @@ dependencies {
     }
     implementation "org.springframework.boot:spring-boot-starter-webflux"
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
+    implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
 

@@ -1,25 +1,8 @@
-subprojects {
-    dependencies {
-        testImplementation "org.springframework.boot:spring-boot-starter-test"
-        testImplementation "org.testcontainers:junit-jupiter"
-        testImplementation "org.springframework.boot:spring-boot-starter-web"
-
-        //https://search.maven.org/artifact/org.jeasy/easy-random
-        testImplementation 'org.jeasy:easy-random:5.0.0'
-        //https://search.maven.org/artifact/com.github.javafaker/javafaker
-        testImplementation('com.github.javafaker:javafaker:1.0.2') {
-            exclude group: "org.yaml", module: "snakeyaml"
-        }
-
-        api "io.soabase.record-builder:record-builder-core"
-        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-
-        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-    }
+plugins {
+    id 'org.graalvm.buildtools.native' version '0.9.18'
 }
 
-configure(subprojects.findAll { it -> (!it.name.startsWith("taotao-cloud-starter")) }) { project ->
-
+subprojects {
     apply from: rootProject.file('gradle/springboot.gradle')
     apply from: rootProject.file('gradle/smart-doc.gradle')
     apply from: rootProject.file('gradle/springdoc-openapi.gradle')
@@ -27,6 +10,8 @@ configure(subprojects.findAll { it -> (!it.name.startsWith("taotao-cloud-starter
     apply from: rootProject.file('gradle/google-tools-jib.gradle')
     //apply from: rootProject.file('gradle/sonar.gradle')
     apply from: rootProject.file('gradle/shadow.gradle')
+
+    apply plugin: "org.graalvm.buildtools.native"
 
     task createProperties(dependsOn: processResources) {
         doLast {
@@ -53,6 +38,20 @@ configure(subprojects.findAll { it -> (!it.name.startsWith("taotao-cloud-starter
     }
 
     dependencies {
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testImplementation "org.testcontainers:junit-jupiter"
+        testImplementation "org.springframework.boot:spring-boot-starter-web"
+
+        //https://search.maven.org/artifact/org.jeasy/easy-random
+        testImplementation 'org.jeasy:easy-random:5.0.0'
+        //https://search.maven.org/artifact/com.github.javafaker/javafaker
+        testImplementation('com.github.javafaker:javafaker:1.0.2') {
+            exclude group: "org.yaml", module: "snakeyaml"
+        }
+
+        api "io.soabase.record-builder:record-builder-core"
+        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+
         api "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
@@ -62,9 +61,6 @@ configure(subprojects.findAll { it -> (!it.name.startsWith("taotao-cloud-starter
 
         api "org.mapstruct:mapstruct"
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-
-//        annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-        annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
     }
