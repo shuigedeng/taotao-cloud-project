@@ -112,19 +112,6 @@ spring:
     banner-mode: off
   application:
     name: taotao-cloud-monitor
-  sleuth:
-    enabled: true
-    web:
-      client:
-        enabled: true
-    sampler:
-      probability: 1.0
-  zipkin:
-    enabled: true
-    base-url: http://192.168.10.210:9411
-    discoveryClientEnabled: false
-    sender:
-      type: WEB
   boot:
     admin:
       notify:
