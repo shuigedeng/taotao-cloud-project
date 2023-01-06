@@ -1,0 +1,46 @@
+#### https://github.com/marketplace?type=actions
+#### https://github.com/sdras/awesome-actions
+
+name: Microservice Docker Image
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
+  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{secrets.TAOTAO_CLOUD_OSSRH_PASSWORD}}
+  TAOTAO_CLOUD_MAVEN_USERNAME: ${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME}}
+  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD}}
+  TAOTAO_CLOUD_GITHUB_USERNAME: ${{secrets.TAOTAO_CLOUD_GITHUB_USERNAME}}
+  TAOTAO_CLOUD_GITHUB_TOKEN: ${{secrets.TAOTAO_CLOUD_GITHUB_TOKEN}}
+  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}}
+  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD}}
+  TAOTAO_CLOUD_VERSION: 2023.01
+
+jobs:
+  build:
+    name: demo graalvm on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest, ubuntu-latest ]
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: '22.3.0'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+
+      - name: Gradle BootJar taotao-cloud-monitor
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 7.6
+          arguments: nativeBuild
+          #build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
+
