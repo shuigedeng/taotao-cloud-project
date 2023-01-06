@@ -1,6 +1,6 @@
 apply plugin: 'application'
 
-//https://docs.spring.io/spring-boot/docs/2.7.3/gradle-plugin/reference/htmlsingle/
+//https://docs.spring.io/spring-boot/docs/3.0.1/gradle-plugin/reference/htmlsingle/
 apply plugin: 'org.springframework.boot'
 
 /* 依赖管理，用来传递spring的依赖 */
