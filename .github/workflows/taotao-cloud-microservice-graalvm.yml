@@ -34,7 +34,7 @@ jobs:
           version: '22.3.0'
           java-version: '17'
           components: 'native-image'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
           native-image-job-reports: 'true'
 
       - name: Gradle BootJar taotao-cloud-monitor
