@@ -25,7 +25,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
 
     //https://search.maven.org/artifact/org.webjars/jquery
-    implementation "org.webjars:jquery:3.6.1"
+    implementation "org.webjars:jquery:3.6.3"
     //https://search.maven.org/artifact/org.webjars/bootstrap
     implementation "org.webjars:bootstrap:5.2.3"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
@@ -52,7 +52,7 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:9.26"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.28"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
     implementation "com.nimbusds:oauth2-oidc-sdk:10.4"
 
