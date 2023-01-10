@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.gobrs.task.condition;
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.common.domain.AnyConditionResult;
+import com.gobrs.async.core.common.domain.AnyConditionResult.AnyConditionResultBuilder;
 import com.gobrs.async.core.common.domain.TaskResult;
 import com.gobrs.async.core.task.AsyncTask;
 import lombok.SneakyThrows;
@@ -35,7 +36,7 @@ public class CServiceCondition extends AsyncTask<String, AnyConditionResult<Stri
 	@SneakyThrows
 	@Override
 	public AnyConditionResult<String> task(String o, TaskSupport support) {
-		AnyConditionResult.Builder<String> condition = AnyConditionResult.builder();
+		AnyConditionResultBuilder<String> builder = AnyConditionResult.builder();
 
 		System.out.println("CServiceCondition Begin");
 		/**
@@ -57,9 +58,9 @@ public class CServiceCondition extends AsyncTask<String, AnyConditionResult<Stri
 		 *  设置任务返回结果
 		 */
 		if (taskResult != null) {
-			condition.setResult(taskResult.getResult());
+			builder.result(taskResult.getResult());
 		} else {
-			condition.setResult("Mock CServiceCondition Result ");
+			builder.result("Mock CServiceCondition Result ");
 		}
 
 		Thread.sleep(2000);
@@ -68,7 +69,7 @@ public class CServiceCondition extends AsyncTask<String, AnyConditionResult<Stri
 			i1 += i1;
 		}
 		System.out.println("CServiceCondition Finish");
-		return condition.build();
+		return builder.build();
 
 	}
 
