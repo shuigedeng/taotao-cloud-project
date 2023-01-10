@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.gobrs.task.condition;
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.common.domain.AnyConditionResult;
+import com.gobrs.async.core.common.domain.AnyConditionResult.AnyConditionResultBuilder;
 import com.gobrs.async.core.task.AsyncTask;
 
 /**
@@ -30,8 +31,8 @@ public class AServiceCondition extends AsyncTask {
 	int sums = 10000;
 
 	@Override
-	public AnyConditionResult<String> task(Object o, TaskSupport support) {
-		AnyConditionResult.Builder<String> builder = AnyConditionResult.builder();
+	public AnyConditionResult<Boolean> task(Object o, TaskSupport support) {
+		AnyConditionResultBuilder<Boolean> builder = AnyConditionResult.builder();
 		try {
 			System.out.println("AServiceCondition Begin");
 			Thread.sleep(300);
@@ -41,9 +42,9 @@ public class AServiceCondition extends AsyncTask {
 			System.out.println("AServiceCondition Finish");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-			return builder.setState(false).build();
+			return builder.result(false).build();
 		}
-		return builder.setState(true).build();
+		return builder.result(true).build();
 	}
 
 }

@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.gobrs.task.condition;
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.common.domain.AnyConditionResult;
+import com.gobrs.async.core.common.domain.AnyConditionResult.AnyConditionResultBuilder;
 import com.gobrs.async.core.task.AsyncTask;
 
 /**
@@ -27,15 +28,14 @@ public class BServiceCondition extends AsyncTask {
 	int i = 10000;
 
 	@Override
-	public AnyConditionResult<String> task(Object o, TaskSupport support) {
-		AnyConditionResult.Builder<String> builder = AnyConditionResult.builder();
+	public AnyConditionResult<Boolean> task(Object o, TaskSupport support) {
+		AnyConditionResultBuilder<Boolean> builder = AnyConditionResult.builder();
 		System.out.println("BServiceCondition Begin");
 		for (int i1 = 0; i1 < i; i1++) {
 			i1 += i1;
 		}
 //        System.out.println(1 / 0);
 		System.out.println("BServiceCondition Finish");
-		builder.setState(false);
-		return builder.build();
+		return builder.result(false).build();
 	}
 }
