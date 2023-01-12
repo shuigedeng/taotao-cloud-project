@@ -896,11 +896,11 @@ spring:
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
-    properties:
-      hibernate:
-        format_sql: true
-        hbm2ddl.auto: update
-        dialect: org.hibernate.dialect.MySQL8Dialect
+    #properties:
+    #  hibernate:
+    #    format_sql: true
+    #    hbm2ddl.auto: update
+    #    dialect: org.hibernate.dialect.MySQL8Dialect
     #properties:
     #  javax:
     #    persistence:
@@ -921,24 +921,24 @@ spring:
     #        missing_cache_strategy: create
     #    temp:
     #      use_jdbc_metadata_defaults: false
-  mail:
-    title: ThreadPool Notify
-    host: smtp.qq.com
-    port: 465
-    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:xxx}
-    username: 981376577@qq.com
-    properties:
-      mail:
-        transport:
-          protocol: smtp
-        smtp:
-          auth: true
-          port: ${spring.mail.port}
-          starttls:
-            enable: true
-            required: true
-          socketFactory:
-            class: javax.net.ssl.SSLSocketFactory
+  #mail:
+  #  title: ThreadPool Notify
+  #  host: smtp.qq.com
+  #  port: 465
+  #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:xxx}
+  #  username: 981376577@qq.com
+  #  properties:
+  #    mail:
+  #      transport:
+  #        protocol: smtp
+  #      smtp:
+  #        auth: true
+  #        port: ${spring.mail.port}
+  #        starttls:
+  #          enable: true
+  #          required: true
+  #        socketFactory:
+  #          class: javax.net.ssl.SSLSocketFactory
   elasticsearch:
     uris: http://192.168.10.210:9200
     password:
@@ -1302,6 +1302,8 @@ spring:
           min-request-size: 2048
         response:
           enabled: true
+      micrometer:
+        enabled: true
     compatibility-verifier:
       enabled: false
     loadbalancer:
@@ -1643,7 +1645,7 @@ taotao:
     captcha:
       enabled: false
     mail:
-      enabled: true
+      enabled: false
     websocket:
       enabled: true
       netty:

@@ -1,0 +1,6 @@
+com.taotao.cloud.sys.api.feign.fallback.FeignLogisticsApiFallback
+com.taotao.cloud.sys.api.feign.fallback.FeignMenuApiFallback
+com.taotao.cloud.sys.api.feign.fallback.FeignRoleApiFallback
+com.taotao.cloud.sys.api.feign.fallback.FeignSettingApiFallback
+com.taotao.cloud.sys.api.feign.fallback.FeignUserApiFallback
+com.taotao.cloud.sys.api.feign.fallback.FeignDictApiFallback

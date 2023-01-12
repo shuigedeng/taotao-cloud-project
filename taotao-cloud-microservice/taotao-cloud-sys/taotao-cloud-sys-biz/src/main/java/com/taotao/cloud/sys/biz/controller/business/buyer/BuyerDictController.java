@@ -19,13 +19,11 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.sys.biz.pulsar.example.producer.ProducerService;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.sql.SQLIntegrityConstraintViolationException;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +44,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
 public class BuyerDictController extends BaseBusinessController<IDictService, Dict, Long> {
 
-	@Autowired
-	private ProducerService producerService;
+	//@Autowired
+	//private ProducerService producerService;
 
 	@NotAuth
 	@GetMapping("/add/{type}")
