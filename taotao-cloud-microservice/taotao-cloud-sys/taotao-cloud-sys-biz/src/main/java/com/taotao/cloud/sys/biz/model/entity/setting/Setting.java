@@ -1,8 +1,6 @@
 package com.taotao.cloud.sys.biz.model.entity.setting;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Map;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.Type;
 
 
 /**
@@ -52,9 +48,9 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
 	private String enCode;
 
 	//@Type(type = "json")
-	@TableField(typeHandler = JacksonTypeHandler.class)
+	//@TableField(typeHandler = JacksonTypeHandler.class)
 	@Column(name = "value", columnDefinition = "json not null comment 'json数据'")
-	private Map<String, String> value;
+	private String value;
 
 	@Override
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,8 +60,8 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
 
 	@Builder
 	public Setting(Long id, LocalDateTime createTime, Long createBy, LocalDateTime updateTime,
-			Long updateBy, Integer version, Boolean delFlag, String name, String category,
-			String enCode, Map<String, String> value) {
+		Long updateBy, Integer version, Boolean delFlag, String name, String category,
+		String enCode, String value) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.name = name;
 		this.category = category;
