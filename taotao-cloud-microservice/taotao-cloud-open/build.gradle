@@ -14,7 +14,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
 
     implementation "org.apache.pdfbox:pdfbox:2.0.26"
-    implementation "io.soabase.record-builder:record-builder-core:34"
+    implementation "io.soabase.record-builder:record-builder-core:35"
 
     implementation "com.google.protobuf:protobuf-java:3.21.5"
     implementation "com.google.protobuf:protobuf-java-util:3.21.5"
