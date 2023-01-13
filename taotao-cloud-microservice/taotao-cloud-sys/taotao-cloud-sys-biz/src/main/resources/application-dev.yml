@@ -1284,6 +1284,9 @@ spring:
                 sharding-algorithm-name: tt-sys-user-inline
   cloud:
     openfeign:
+      micrometer:
+        enabled: true
+      lazy-attributes-resolution: true
       okhttp:
         enabled: true
       httpclient:
@@ -1302,9 +1305,6 @@ spring:
           min-request-size: 2048
         response:
           enabled: true
-      micrometer:
-        enabled: true
-      lazy-attributes-resolution: true
     compatibility-verifier:
       enabled: false
     loadbalancer:
