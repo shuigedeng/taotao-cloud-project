@@ -15,13 +15,10 @@
  */
 package com.taotao.cloud.sys.biz;
 
-import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
-import java.io.File;
-import java.util.Currency;
-import java.util.Locale;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * TaoTaoCloudSysApplication 抑制java9 module 报错
@@ -45,6 +42,7 @@ import org.springframework.boot.SpringApplication;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
+@ComponentScan(basePackages = {"com.taotao.cloud.sys.api.feign.fallback"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 
@@ -57,7 +55,6 @@ public class TaoTaoCloudSysApplication {
 			throw new RuntimeException(e);
 		}
 	}
-
 
 
 }
