@@ -1304,6 +1304,7 @@ spring:
           enabled: true
       micrometer:
         enabled: true
+      lazy-attributes-resolution: true
     compatibility-verifier:
       enabled: false
     loadbalancer:
