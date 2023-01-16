@@ -2,14 +2,13 @@ package com.taotao.cloud.xxljob.controller.interceptor;
 
 import com.taotao.cloud.xxljob.core.util.FtlUtil;
 import com.taotao.cloud.xxljob.core.util.I18nUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 
 /**
  * push cookies to model as cookieMap
@@ -24,7 +23,8 @@ public class CookieInterceptor implements AsyncHandlerInterceptor {
 			ModelAndView modelAndView) throws Exception {
 
 		// cookie
-		if (modelAndView!=null && request.getCookies()!=null && request.getCookies().length>0) {
+		if (modelAndView != null && request.getCookies() != null
+				&& request.getCookies().length > 0) {
 			HashMap<String, Cookie> cookieMap = new HashMap<String, Cookie>();
 			for (Cookie ck : request.getCookies()) {
 				cookieMap.put(ck.getName(), ck);
@@ -34,9 +34,10 @@ public class CookieInterceptor implements AsyncHandlerInterceptor {
 
 		// static method
 		if (modelAndView != null) {
-			modelAndView.addObject("I18nUtil", FtlUtil.generateStaticModel(I18nUtil.class.getName()));
+			modelAndView.addObject("I18nUtil",
+					FtlUtil.generateStaticModel(I18nUtil.class.getName()));
 		}
 
 	}
-	
+
 }

@@ -2,7 +2,11 @@ package com.taotao.cloud.sys.biz.model.entity.sms;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,11 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
 
 
 /**
@@ -49,18 +48,20 @@ public class SmsSign extends BaseSuperEntity<SmsSign, Long> {
 	private String license;
 
 	@Column(name = "sign_status", columnDefinition =
-		"int not null default 0 comment '签名审核状态  0：审核中。"
-			+ "     * 1：审核通过。"
-			+ "     * 2：审核失败，请在返回参数Reason中查看审核失败原因。'")
+			"int not null default 0 comment '签名审核状态  0：审核中。"
+					+ "     * 1：审核通过。"
+					+ "     * 2：审核失败，请在返回参数Reason中查看审核失败原因。'")
 	private Integer signStatus;
 
 	@Column(name = "reason", columnDefinition = "varchar(2000) not null comment '审核备注'")
 	private String reason;
+
 	@Builder
 	public SmsSign(Long id, LocalDateTime createTime, Long createBy,
-		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-		String signName, Integer signSource, String remark, String businessLicense, String license,
-		Integer signStatus, String reason) {
+			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+			String signName, Integer signSource, String remark, String businessLicense,
+			String license,
+			Integer signStatus, String reason) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.signName = signName;
 		this.signSource = signSource;
@@ -73,7 +74,7 @@ public class SmsSign extends BaseSuperEntity<SmsSign, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

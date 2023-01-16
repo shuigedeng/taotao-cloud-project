@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员搜索DTO")
-public class MemberSearchPageQuery extends PageParam {
+public class MemberSearchPageQuery extends PageQuery {
 
 	@Schema(description = "用户名")
 	private String username;

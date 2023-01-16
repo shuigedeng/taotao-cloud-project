@@ -49,7 +49,7 @@ public class OrderCashier implements CashierExecute {
 			//准备返回的数据
 			CashierParam cashierParam = new CashierParam();
 			//订单信息获取
-			OrderDetailVO order = orderService.queryDetail(payParam.getSn()).data();
+			OrderDetailVO order = orderService.queryDetail(payParam.getSn());
 
 			//如果订单已支付，则不能发器支付
 			if (order.order().payStatus().equals(PayStatusEnum.PAID.name())) {
@@ -62,7 +62,7 @@ public class OrderCashier implements CashierExecute {
 			cashierParam.setPrice(order.order().flowPrice());
 
 			try {
-				BaseSetting baseSetting = settingService.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name()).data();
+				BaseSetting baseSetting = settingService.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
 				cashierParam.setTitle(baseSetting.getSiteName());
 			} catch (Exception e) {
 				cashierParam.setTitle("多用户商城，在线支付");
@@ -100,7 +100,7 @@ public class OrderCashier implements CashierExecute {
 	@Override
 	public Boolean paymentResult(PayParam payParam) {
 		if (payParam.getOrderType().equals(CashierEnum.ORDER.name())) {
-			OrderVO order = orderService.getBySn(payParam.getSn()).data();
+			OrderVO order = orderService.getBySn(payParam.getSn());
 			if (order != null) {
 				return PayStatusEnum.PAID.name().equals(order.orderBase().payStatus());
 			} else {

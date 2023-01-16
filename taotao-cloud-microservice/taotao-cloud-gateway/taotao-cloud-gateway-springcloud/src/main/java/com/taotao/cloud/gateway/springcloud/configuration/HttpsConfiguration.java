@@ -16,15 +16,14 @@
 package com.taotao.cloud.gateway.springcloud.configuration;
 
 import com.taotao.cloud.gateway.springcloud.properties.HttpsProperties;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.reactive.HttpHandler;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 
 /**
  * 配置http服务，使其即支持http又支持https服务（https通过配置文件配置）
@@ -45,7 +44,8 @@ public class HttpsConfiguration {
 
 	@PostConstruct
 	public void start(HttpsProperties httpsProperties) {
-		NettyReactiveWebServerFactory factory = new NettyReactiveWebServerFactory(httpsProperties.getPort());
+		NettyReactiveWebServerFactory factory = new NettyReactiveWebServerFactory(
+				httpsProperties.getPort());
 		WebServer webServer = factory.getWebServer(httpHandler);
 		webServer.start();
 	}

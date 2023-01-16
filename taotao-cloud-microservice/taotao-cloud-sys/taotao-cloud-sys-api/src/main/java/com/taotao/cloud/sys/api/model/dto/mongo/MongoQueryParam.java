@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.api.model.dto.mongo;
 
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

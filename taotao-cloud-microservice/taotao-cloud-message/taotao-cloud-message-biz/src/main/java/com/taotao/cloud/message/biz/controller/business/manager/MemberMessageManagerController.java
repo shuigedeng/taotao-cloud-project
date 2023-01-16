@@ -1,4 +1,4 @@
-// package com.taotao.cloud.message.biz.controller.manager;
+package com.taotao.cloud.message.biz.controller.business.manager;// package com.taotao.cloud.message.biz.controller.manager;
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
 // import com.taotao.cloud.common.constant.CommonConstant;

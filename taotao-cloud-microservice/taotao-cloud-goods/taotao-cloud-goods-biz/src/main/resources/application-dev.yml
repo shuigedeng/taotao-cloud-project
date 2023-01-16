@@ -24,6 +24,7 @@ jasypt:
 
 easy-es:
   enable: true # 是否开启EE自动配置
+  banner: false # 默认为true 打印banner 若您不期望打印banner,可配置为false
   address: 192.168.10.200:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
   schema: http # 默认为http
   #如果无账号密码则可不配置此行
@@ -32,15 +33,25 @@ easy-es:
   password:
   connectTimeout: 5000 # 连接超时时间 单位:ms
   socketTimeout: 5000 # 通信超时时间 单位:ms
-  requestTimeout: 5000 # 请求超时时间 单位:ms
+  keepAliveMillis: 18000 # 心跳策略时间 单位:ms
   connectionRequestTimeout: 5000 # 连接请求超时时间 单位:ms
   maxConnTotal: 100 # 最大连接数 单位:个
   maxConnPerRoute: 100 # 最大连接路由数 单位:个
   global-config:
+    process_index_mode: smoothly #索引处理模式,smoothly:平滑模式,默认开启此模式, not_smoothly:非平滑模式, manual:手动模式
+    print-dsl: true # 开启控制台打印通过本框架生成的DSL语句,默认为开启,测试稳定后的生产环境建议关闭,以提升少量性能
+    distributed: false # 当前项目是否分布式项目,默认为true,在非手动托管索引模式下,若为分布式项目则会获取分布式锁,非分布式项目只需synchronized锁.
+    asyncProcessIndexBlocking: true # 异步处理索引是否阻塞主线程 默认阻塞 数据量过大时调整为非阻塞异步进行 项目启动更快
+    activeReleaseIndexMaxRetry: 60 # 分布式环境下,平滑模式,当前客户端激活最新索引最大重试次数若数据量过大,重建索引数据迁移时间超过60*(180/60)=180分钟时,可调大此参数值,此参数值决定最大重试次数,超出此次数后仍未成功,则终止重试并记录异常日志
+    activeReleaseIndexFixedDelay: 180 # 分布式环境下,平滑模式,当前客户端激活最新索引最大重试次数 若数据量过大,重建索引数据迁移时间超过60*(180/60)=180分钟时,可调大此参数值 此参数值决定多久重试一次 单位:秒
     db-config:
-      table-prefix: daily_ # 索引前缀,可用于区分环境  默认为空
-      id-type: auto # id生成策略 默认为auto
+      map-underscore-to-camel-case: false # 是否开启下划线转驼峰 默认为false
+      table-prefix: daily_ # 索引前缀,可用于区分环境  默认为空 用法和MP一样
+      id-type: customize # id生成策略 customize为自定义,id值由用户生成,比如取MySQL中的数据id,如缺省此项配置,则id默认策略为es自动生成
       field-strategy: not_empty # 字段更新策略 默认为not_null
+      enable-track-total-hits: true # 默认开启,查询若指定了size超过1w条时也会自动开启,开启后查询所有匹配数据,若不开启,会导致无法获取数据总条数,其它功能不受影响.
+      refresh-policy: immediate # 数据刷新策略,默认为不刷新
+      enable-must2-filter: false # 是否全局开启must查询类型转换为filter查询类型 默认为false不转换
 
 redisson:
   single_server_config:
@@ -512,6 +523,88 @@ spring:
     uris: ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:http://192.168.10.200}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
     password:
     username:
+    bboss:
+      elasticPassword: changeme
+      elasticUser: elastic
+      elasticsearch:
+        dateFormat: yyyy.MM.dd
+        discoverHost: false
+        rest:
+          hostNames: 192.168.137.1:9200
+        scrollBlockedWaitTimeout: 0
+        scrollThreadCount: 200
+        scrollThreadQueue: 200
+        showTemplate: false
+        sliceScrollBlockedWaitTimeout: 0
+        sliceScrollThreadCount: 100
+        sliceScrollThreadQueue: 100
+      default:
+        name: default
+        elasticPassword: changeme
+        elasticUser: elastic
+        elasticsearch:
+          dateFormat: yyyy.MM.dd
+          discoverHost: false
+          rest:
+            hostNames: 192.168.137.1:9200
+          scrollBlockedWaitTimeout: 0
+          scrollThreadCount: 200
+          scrollThreadQueue: 200
+          showTemplate: true
+          sliceScrollBlockedWaitTimeout: 0
+          sliceScrollThreadCount: 100
+          sliceScrollThreadQueue: 100
+          timeZone: Asia/Shanghai
+        http:
+          connectionRequestTimeout: 50000
+          customHttpRequestRetryHandler: org.frameworkset.spi.remote.http.ConnectionResetHttpRequestRetryHandler
+          defaultMaxPerRoute: 200
+          hostnameVerifier: ''
+          keyPassword: ''
+          keystore: ''
+          maxHeaderCount: 200
+          maxLineLength: -1
+          maxTotal: 400
+          retryTime: 1
+          retryInterval: 10000
+          staleConnectionCheckEnabled: false
+          timeoutConnection: 50000
+          timeoutSocket: 50000
+          validateAfterInactivity: 200000
+      dslfile:
+        refreshInterval: -1
+      logs:
+        name: logs
+        elasticPassword: changeme
+        elasticUser: elastic
+        elasticsearch:
+          dateFormat: yyyy.MM.dd
+          discoverHost: false
+          rest:
+            hostNames: 10.13.6.6:9200
+          scrollBlockedWaitTimeout: 0
+          scrollThreadCount: 200
+          scrollThreadQueue: 200
+          showTemplate: true
+          sliceScrollBlockedWaitTimeout: 0
+          sliceScrollThreadCount: 100
+          sliceScrollThreadQueue: 100
+          timeZone: Asia/Shanghai
+        http:
+          connectionRequestTimeout: 50000
+          customHttpRequestRetryHandler: org.frameworkset.spi.remote.http.ConnectionResetHttpRequestRetryHandler
+          defaultMaxPerRoute: 200
+          hostnameVerifier: ''
+          keyPassword: ''
+          keystore: ''
+          maxHeaderCount: 200
+          maxLineLength: -1
+          maxTotal: 400
+          retryTime: 1
+          staleConnectionCheckEnabled: false
+          timeoutConnection: 50000
+          timeoutSocket: 50000
+          validateAfterInactivity: 200000
   data:
     elasticsearch:
       repositories:

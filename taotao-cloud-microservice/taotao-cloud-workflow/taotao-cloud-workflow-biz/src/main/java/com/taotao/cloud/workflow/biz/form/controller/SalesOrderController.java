@@ -2,7 +2,7 @@ package com.taotao.cloud.workflow.biz.form.controller;
 
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
-import com.taotao.cloud.workflow.biz.form.model.salesorder.SalesOrderInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.salesorder.SalesOrderInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.SalesOrderService;
 
 import java.util.List;

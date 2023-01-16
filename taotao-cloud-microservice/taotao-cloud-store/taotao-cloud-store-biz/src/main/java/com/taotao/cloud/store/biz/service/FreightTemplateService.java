@@ -2,7 +2,7 @@ package com.taotao.cloud.store.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.store.api.web.vo.FreightTemplateInfoVO;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplate;
 
@@ -20,11 +20,11 @@ public interface FreightTemplateService extends IService<FreightTemplate> {
 	/**
 	 * 获取当前商家的运费模板列表
 	 *
-	 * @param pageParam 分页
+	 * @param PageQuery 分页
 	 * @return {@link IPage }<{@link FreightTemplate }>
 	 * @since 2022-06-01 14:59:37
 	 */
-	IPage<FreightTemplate> getFreightTemplate(PageParam pageParam);
+	IPage<FreightTemplate> getFreightTemplate(PageQuery PageQuery);
 
 	/**
 	 * 获取商家的运费模板

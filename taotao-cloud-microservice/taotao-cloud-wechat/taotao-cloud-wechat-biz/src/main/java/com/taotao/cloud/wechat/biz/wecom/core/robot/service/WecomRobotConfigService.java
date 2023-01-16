@@ -2,7 +2,7 @@ package com.taotao.cloud.wechat.biz.wecom.core.robot.service;
 
 import cn.bootx.common.core.exception.DataNotExistException;
 import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.core.util.ResultConvertUtil;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.starter.wecom.core.robot.dao.WecomRobotConfigManager;
@@ -49,8 +49,8 @@ public class WecomRobotConfigService {
     /**
      * 分页
      */
-    public PageResult<WecomRobotConfigDto> page(PageParam pageParam, WecomRobotConfigParam wecomRobotConfigParam){
-        return MpUtil.convert2DtoPageResult(robotConfigManager.page(pageParam,wecomRobotConfigParam));
+    public PageResult<WecomRobotConfigDto> page(PageQuery PageQuery, WecomRobotConfigParam wecomRobotConfigParam){
+        return MpUtil.convert2DtoPageResult(robotConfigManager.page(PageQuery,wecomRobotConfigParam));
     }
 
     /**

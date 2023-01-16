@@ -11,7 +11,7 @@ dependencies {
 
     //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
     implementation "com.github.whvcse:easy-captcha:1.6.2"
-    implementation "javax.servlet:javax.servlet-api"
+    implementation "jakarta.servlet:jakarta.servlet-api"
 
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 

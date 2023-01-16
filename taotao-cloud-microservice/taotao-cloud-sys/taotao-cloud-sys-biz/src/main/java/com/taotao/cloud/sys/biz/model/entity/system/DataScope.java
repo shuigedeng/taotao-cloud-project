@@ -19,11 +19,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.JacksonListTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,19 +69,19 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	 *
 	 * @see DataScopeEnum
 	 */
-	@Column(name = "type",  columnDefinition = "int not null comment '数据范围类型'")
+	@Column(name = "type", columnDefinition = "int not null comment '数据范围类型'")
 	private Integer type;
 
 	/**
 	 * 备注
 	 */
-	@Column(name = "备注",  columnDefinition = "varchar(1024) null comment '备注'")
+	@Column(name = "备注", columnDefinition = "varchar(1024) null comment '备注'")
 	private String remark;
 
 	/**
 	 * 公司id
 	 */
-	@Type(type="json")
+	//@Type(type = "json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "company_ids", columnDefinition = "json null comment '公司id列表'")
 	private List<Long> companyIds;
@@ -89,7 +89,7 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	/**
 	 * 部门id
 	 */
-	@Type(type="json")
+	//@Type(type = "json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "dept_ids", columnDefinition = "json null comment '部门id列表'")
 	private List<Long> deptIds;
@@ -97,7 +97,7 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	/**
 	 * 用户id
 	 */
-	@Type(type="json")
+	//@Type(type = "json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "user_ids", columnDefinition = "json null comment '用户id列表'")
 	private List<Long> userIds;
@@ -129,7 +129,7 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-			o)) {
+				o)) {
 			return false;
 		}
 		DataScope dept = (DataScope) o;

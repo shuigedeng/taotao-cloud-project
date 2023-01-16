@@ -8,10 +8,11 @@ import com.taotao.cloud.payment.api.vo.RefundLogVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = FeignRefundLogServiceFallback.class)
 public interface IFeignRefundSupportService {
 
-
+	@PostMapping("/refund")
 	void refund(String sn);
 }

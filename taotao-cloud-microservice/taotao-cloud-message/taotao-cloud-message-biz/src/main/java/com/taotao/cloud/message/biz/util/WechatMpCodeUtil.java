@@ -1,4 +1,4 @@
-// package com.taotao.cloud.message.biz.util;
+package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.biz.util;
 //
 // import com.alibaba.fastjson.JSON;
 // import com.taotao.cloud.common.enums.ClientTypeEnum;

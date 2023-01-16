@@ -3,8 +3,7 @@ package com.taotao.cloud.sys.biz.controller.business.tools.file;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.model.vo.file.UploadFileVO;
 import com.taotao.cloud.sys.biz.service.business.IFileService;
-
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +31,8 @@ public class FileController {
 	//private Cache cache;
 
 	@PostMapping(value = "/upload")
-	public Result<UploadFileVO> upload(@RequestParam("type") String type, @NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file) {
+	public Result<UploadFileVO> upload(@RequestParam("type") String type,
+			@NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file) {
 		return Result.success(fileService.uploadFile(type, file));
 	}
 

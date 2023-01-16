@@ -3,8 +3,7 @@ package com.taotao.cloud.order.biz.repository.cls.purchase;
 
 import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrder;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
-
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 /**
  * 采购单数据处理层

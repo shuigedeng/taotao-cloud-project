@@ -2,7 +2,7 @@ package com.taotao.cloud.wechat.biz.wechat.core.menu.service;
 
 import cn.bootx.common.core.exception.DataNotExistException;
 import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.core.util.ResultConvertUtil;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.starter.wechat.core.menu.dao.WeChatMenuManager;
@@ -58,8 +58,8 @@ public class WeChatMenuService {
     /**
      * 分页
      */
-    public PageResult<WeChatMenuDto> page(PageParam pageParam, WeChatMenuParam weChatMenuParam){
-        return MpUtil.convert2DtoPageResult(weChatMenuManager.page(pageParam,weChatMenuParam));
+    public PageResult<WeChatMenuDto> page(PageQuery PageQuery, WeChatMenuParam weChatMenuParam){
+        return MpUtil.convert2DtoPageResult(weChatMenuManager.page(PageQuery,weChatMenuParam));
     }
 
     /**

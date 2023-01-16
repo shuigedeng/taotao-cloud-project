@@ -5,6 +5,10 @@ import com.taotao.cloud.operation.api.enums.FeedbackTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.enums.SensitiveStrategy;
 import com.taotao.cloud.web.sensitive.desensitize.Sensitive;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,13 +18,9 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Objects;
-
 /**
  * 意见反馈
+ *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-21 16:59:38
@@ -72,7 +72,7 @@ public class Feedback extends BaseSuperEntity<Feedback, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.bootx.core.notify.service;
 
 import cn.hutool.db.PageResult;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.notify.dao.PayNotifyRecordManager;
 import com.taotao.cloud.payment.biz.bootx.core.notify.entity.PayNotifyRecord;
 import com.taotao.cloud.payment.biz.bootx.dto.notify.PayNotifyRecordDto;
@@ -24,8 +24,8 @@ public class PayNotifyRecordService {
     /**
      * 分页查询
      */
-    public PageResult<PayNotifyRecordDto> page(PageParam pageParam,PayNotifyRecordDto param){
-        Page<PayNotifyRecord> page = payNotifyRecordManager.page(pageParam,param);
+    public PageResult<PayNotifyRecordDto> page(PageQuery PageQuery,PayNotifyRecordDto param){
+        Page<PayNotifyRecord> page = payNotifyRecordManager.page(PageQuery,param);
         return MpUtil.convert2DtoPageResult(page);
     }
 

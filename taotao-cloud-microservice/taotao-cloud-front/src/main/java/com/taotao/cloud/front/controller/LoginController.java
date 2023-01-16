@@ -16,27 +16,26 @@
 package com.taotao.cloud.front.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.portal.util.Constants;
-import com.taotao.cloud.portal.util.CookieUtil;
-import com.taotao.cloud.portal.util.ResponseBase;
-import com.taotao.cloud.portal.util.User;
+import com.taotao.cloud.front.util.Constants;
+import com.taotao.cloud.front.util.CookieUtil;
+import com.taotao.cloud.front.util.ResponseBase;
+import com.taotao.cloud.front.util.User;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.UUID;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.UUID;
-
 /**
  * LoginController
  *
  * @author shuigedeng
- * @since 2021/1/18 下午4:56
  * @version 2022.03
+ * @since 2021/1/18 下午4:56
  */
 @Controller
 public class LoginController {
@@ -53,11 +52,12 @@ public class LoginController {
 	// private UserServiceFegin userServiceFegin;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String login(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		String token = CookieUtil.getUid(request, Constants.COOKIE_MEMBER_TOKEN);
 		System.out.println("++++++++++++++++++ login token: " + token);
 
-		if (StrUtil.isNotEmpty(token)){
+		if (StrUtil.isNotEmpty(token)) {
 			response.sendRedirect(INDEX);
 		}
 
@@ -65,7 +65,8 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String login(User user, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String login(User user, HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		// 1.调用登录接口
 		// ResponseBase login = userServiceFegin.login(user);
 
@@ -87,11 +88,11 @@ public class LoginController {
 			request.setAttribute("error", "token已经失效!");
 			return LOGIN;
 		}
-		CookieUtil.addCookie(response, Constants.COOKIE_MEMBER_TOKEN, token, Constants.COOKIE_TOKEN_MEMBER_TIME);
+		CookieUtil.addCookie(response, Constants.COOKIE_MEMBER_TOKEN, token,
+				Constants.COOKIE_TOKEN_MEMBER_TIME);
 		response.sendRedirect(INDEX);
 		return null;
 	}
-
 
 	// @GetMapping("/localQqLogin")
 	// public String localQqLogin(HttpServletRequest request) throws QQConnectException {
@@ -127,7 +128,6 @@ public class LoginController {
 	// 	CookieUtil.addCookie(response, Constants.COOKIE_MEMBER_TOKEN, token, Constants.COOKIE_TOKEN_MEMBER_TIME);
 	// 	return INDEX;
 	// }
-
 
 	// @PostMapping("/qqRelation")
 	// public String qqRelation(User user, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {

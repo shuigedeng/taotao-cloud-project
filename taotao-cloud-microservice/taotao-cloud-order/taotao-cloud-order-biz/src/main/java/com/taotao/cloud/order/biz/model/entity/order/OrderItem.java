@@ -13,6 +13,12 @@ import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.promotion.api.model.vo.PromotionSkuVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,13 +26,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * 子订单表
@@ -199,11 +198,14 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 		BeanUtils.copyProperties(cartSkuVO.getPriceDetailDTO(), this);
 		BeanUtils.copyProperties(cartSkuVO, this);
 		this.setId(oldId);
-		if (cartSkuVO.getPriceDetailDTO().getJoinPromotion() != null && !cartSkuVO.getPriceDetailDTO().getJoinPromotion().isEmpty()) {
+		if (cartSkuVO.getPriceDetailDTO().getJoinPromotion() != null
+				&& !cartSkuVO.getPriceDetailDTO().getJoinPromotion().isEmpty()) {
 			this.setPromotionType(
-				CollUtil.join(cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream().map(
-					PromotionSkuVO::getPromotionType).collect(Collectors.toList()), ","));
-			this.setPromotionId(CollUtil.join(cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream().map(PromotionSkuVO::getActivityId).collect(Collectors.toList()), ","));
+					CollUtil.join(cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream().map(
+							PromotionSkuVO::getPromotionType).collect(Collectors.toList()), ","));
+			this.setPromotionId(CollUtil.join(
+					cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
+							.map(PromotionSkuVO::getActivityId).collect(Collectors.toList()), ","));
 		}
 		this.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.NEW.name());
 		this.setCommentStatus(CommentStatusEnum.NEW.name());
@@ -215,7 +217,7 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 		this.setGoodsName(cartSkuVO.getGoodsSku().getGoodsName());
 		this.setSkuId(cartSkuVO.getGoodsSku().getId());
 		this.setCategoryId(cartSkuVO.getGoodsSku().getCategoryPath().substring(
-			cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1
+				cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1
 		));
 		this.setGoodsPrice(cartSkuVO.getGoodsSku().getPrice());
 		this.setUnitPrice(cartSkuVO.getPurchasePrice());

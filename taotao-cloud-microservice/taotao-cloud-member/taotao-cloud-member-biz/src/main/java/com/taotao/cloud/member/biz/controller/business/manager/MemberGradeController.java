@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.controller.business.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
@@ -51,8 +51,8 @@ public class MemberGradeController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<MemberGradeVO>> getByPage(PageParam pageParam) {
-		IPage<MemberGrade> memberGradePage = memberGradeService.getByPage(pageParam);
+	public Result<PageResult<MemberGradeVO>> getByPage(PageQuery PageQuery) {
+		IPage<MemberGrade> memberGradePage = memberGradeService.getByPage(PageQuery);
 		return Result.success(PageResult.convertMybatisPage(memberGradePage, MemberGradeVO.class));
 	}
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.operation.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArticlePageQuery extends PageParam {
+public class ArticlePageQuery extends PageQuery {
 
 	@Schema(description = "文章分类ID")
 	private String categoryId;

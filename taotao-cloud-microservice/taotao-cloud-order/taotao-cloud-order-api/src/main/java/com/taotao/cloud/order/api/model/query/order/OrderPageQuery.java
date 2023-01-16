@@ -1,7 +1,7 @@
 package com.taotao.cloud.order.api.model.query.order;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单查询参数")
-public class OrderPageQuery extends PageParam {
+public class OrderPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = -6380573339089959194L;

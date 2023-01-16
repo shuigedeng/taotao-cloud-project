@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taotao.cloud.bigdata.clickhouse.mapper.UserMapper">
+
+	<select id="queryUser" resultType="com.taotao.cloud.bigdata.clickhouse.model.User">
+		select userId, appId, version, regTime
+		from `default`.`user`
+	</select>
+
+	<insert id="insertUser" parameterType="com.taotao.cloud.bigdata.clickhouse.model.User">
+		INSERT INTO `default`.`user` (`userId`, `appId`, `version`, `regTime`)
+		VALUES (#{userId}, #{appId}, #{version}, #{regTime})
+	</insert>
+</mapper>

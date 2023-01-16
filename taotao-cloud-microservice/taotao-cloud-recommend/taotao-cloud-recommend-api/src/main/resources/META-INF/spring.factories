@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.recommend.api.feign.fallback.RemoteProductFallbackImpl
+com.taotao.cloud.recommend.api.feign.fallback.FeignRecommendFallback

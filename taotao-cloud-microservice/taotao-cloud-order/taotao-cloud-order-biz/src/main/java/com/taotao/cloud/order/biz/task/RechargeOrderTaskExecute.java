@@ -37,11 +37,11 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 
 	@Override
 	public void execute() {
-		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name()).data();
+		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name());
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//充值订单自动取消时间 = 当前时间 - 自动取消时间分钟数
 			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
-			List<MemberRechargeVO> list = rechargeService.list(cancelTime).data();
+			List<MemberRechargeVO> list = rechargeService.list(cancelTime);
 			List<String> cancelSnList = list.stream().map(MemberRechargeVO::getRechargeSn).toList();
 			for (String sn : cancelSnList) {
 				rechargeService.rechargeOrderCancel(sn);

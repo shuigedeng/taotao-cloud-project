@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.message.api.feign.fallback;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.message.api.feign.IFeignStoreMessageApi;
 import com.taotao.cloud.message.api.model.vo.StoreMessageVO;
@@ -35,7 +35,7 @@ public class FeignStoreMessageApiFallback implements
 		return new IFeignStoreMessageApi() {
 
 			@Override
-			public PageResult<StoreMessageVO> getPage(PageParam pageParam) {
+			public PageResult<StoreMessageVO> getPage(PageQuery PageQuery) {
 				return null;
 			}
 		};

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.core.notify.dao;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.notify.entity.PayNotifyRecord;
 import com.taotao.cloud.payment.biz.bootx.dto.notify.PayNotifyRecordDto;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class PayNotifyRecordManager extends BaseManager<PayNotifyRecordMapper, PayNotifyRecord> {
 
-    public Page<PayNotifyRecord> page(PageParam pageParam, PayNotifyRecordDto param){
-        Page<PayNotifyRecord> mpPage = MpUtil.getMpPage(pageParam, PayNotifyRecord.class);
+    public Page<PayNotifyRecord> page(PageQuery PageQuery, PayNotifyRecordDto param){
+        Page<PayNotifyRecord> mpPage = MpUtil.getMpPage(PageQuery, PayNotifyRecord.class);
         return lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
                 .like(Objects.nonNull(param.getPaymentId()),PayNotifyRecord::getPaymentId,param.getPaymentId())

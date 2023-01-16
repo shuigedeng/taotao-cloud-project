@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.common.enums;
 
 
-import com.taotao.cloud.message.biz.austin.common.dto.model.*;
+import com.java3y.austin.common.dto.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

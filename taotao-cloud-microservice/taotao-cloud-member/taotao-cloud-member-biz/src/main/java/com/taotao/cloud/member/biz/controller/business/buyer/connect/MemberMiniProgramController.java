@@ -1,4 +1,4 @@
-// package com.taotao.cloud.member.biz.controller.buyer.connect;
+package com.taotao.cloud.member.biz.controller.business.buyer.connect;// package com.taotao.cloud.member.biz.controller.buyer.connect;
 //
 // import com.taotao.cloud.common.constant.CommonConstant;
 // import com.taotao.cloud.common.model.Result;

@@ -16,6 +16,12 @@
 package com.taotao.cloud.order.biz.model.entity.cart;
 
 import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.io.Serial;
+import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,13 +29,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.io.Serial;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 /**
  * 购物车表

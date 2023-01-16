@@ -3,6 +3,12 @@ package com.taotao.cloud.order.biz.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,13 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 退款流水表
@@ -35,7 +34,7 @@ import java.util.Objects;
 @TableName(OrderRefundPaySeq.TABLE_NAME)
 @Table(name = OrderRefundPaySeq.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = OrderRefundPaySeq.TABLE_NAME, comment = "退款流水表")
-public class OrderRefundPaySeq  extends BaseSuperEntity<OrderRefundPaySeq,Long> {
+public class OrderRefundPaySeq extends BaseSuperEntity<OrderRefundPaySeq, Long> {
 
 	public static final String TABLE_NAME = "order_refund_pay_seq";
 
@@ -101,7 +100,7 @@ public class OrderRefundPaySeq  extends BaseSuperEntity<OrderRefundPaySeq,Long> 
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

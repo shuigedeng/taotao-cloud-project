@@ -3,7 +3,7 @@ package com.taotao.cloud.wechat.biz.wechat.controller;
 import cn.bootx.common.core.rest.PageResult;
 import cn.bootx.common.core.rest.Res;
 import cn.bootx.common.core.rest.ResResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.starter.wechat.core.media.service.WeChatMediaService;
 import cn.bootx.starter.wechat.dto.media.WeChatMediaDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,14 +28,14 @@ public class WeChatMediaController {
 
     @Operation(summary = "非图文素材分页")
     @GetMapping("/pageFile")
-    public ResResult<PageResult<WeChatMediaDto>> pageFile(PageParam pageParam, String type){
-        return Res.ok(weChatMediaService.pageFile(pageParam,type));
+    public ResResult<PageResult<WeChatMediaDto>> pageFile(PageQuery PageQuery, String type){
+        return Res.ok(weChatMediaService.pageFile(PageQuery,type));
     }
 
     @Operation(summary = "图文素材分页")
     @GetMapping("/pageNews")
-    public ResResult<PageResult<WxMaterialNewsBatchGetNewsItem>> pageNews(PageParam pageParam){
-        return Res.ok(weChatMediaService.pageNews(pageParam));
+    public ResResult<PageResult<WxMaterialNewsBatchGetNewsItem>> pageNews(PageQuery PageQuery){
+        return Res.ok(weChatMediaService.pageNews(PageQuery));
     }
 
     @Operation(summary = "删除素材")

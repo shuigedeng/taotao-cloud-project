@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
@@ -61,7 +61,7 @@ public interface PromotionGoodsService extends IService<PromotionGoods> {
 	 * @return {@link IPage }<{@link PromotionGoods }>
 	 * @since 2022-04-27 16:44:13
 	 */
-	IPage<PromotionGoods> pageFindAll(PromotionGoodsPageQuery searchParams, PageParam pageVo);
+	IPage<PromotionGoods> pageFindAll(PromotionGoodsPageQuery searchParams, PageQuery pageVo);
 
 	/**
 	 * 获取促销商品信息

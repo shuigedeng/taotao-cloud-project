@@ -18,6 +18,11 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.sys.api.enums.ResourceTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.time.LocalDateTime;
+import java.util.Objects;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,12 +30,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 菜单表
@@ -140,10 +139,11 @@ public class Resource extends BaseSuperEntity<Resource, Long> {
 
 	@Builder
 	public Resource(Long id, LocalDateTime createTime, Long createBy,
-					LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-					String name, String permission, String path, String component, Long parentId, String icon,
-					Integer sortNum, Boolean keepAlive, Integer type, Boolean hidden, String redirect,
-					String target, String tenantId) {
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String name, String permission, String path, String component, Long parentId,
+		String icon,
+		Integer sortNum, Boolean keepAlive, Integer type, Boolean hidden, String redirect,
+		String target, String tenantId) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.name = name;
 		this.permission = permission;

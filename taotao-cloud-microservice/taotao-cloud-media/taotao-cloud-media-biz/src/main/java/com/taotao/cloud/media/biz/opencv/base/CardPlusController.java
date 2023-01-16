@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.opencv.core.Core;
 import org.opencv.core.Core.MinMaxLocResult;
@@ -40,14 +40,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CardPlusController extends BaseController {
 
 	private static final Logger logger = LoggerFactory.getLogger(
-		CardPlusController.class);
+			CardPlusController.class);
 
 	/**
 	 * 答题卡识别优化 创建者 Songer 创建时间	2018年3月23日
 	 */
 	@RequestMapping(value = "answerSheet")
 	public void answerSheet(HttpServletResponse response, String imagefile, Integer binary_thresh,
-		String blue_red_thresh) {
+			String blue_red_thresh) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		logger.info("\n 完整答题卡识别");
 
@@ -65,7 +65,7 @@ public class CardPlusController extends BaseController {
 		logger.info("生成灰度图======" + destPath);
 		// 先膨胀 后腐蚀算法，开运算消除细小杂点
 		Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_RECT,
-			new Size(2 * 1 + 1, 2 * 1 + 1));
+				new Size(2 * 1 + 1, 2 * 1 + 1));
 		Imgproc.morphologyEx(sourceMat1, sourceMat1, Imgproc.MORPH_OPEN, element);
 		destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "dtk2.png";
 		Highgui.imwrite(destPath, sourceMat1);
@@ -73,7 +73,7 @@ public class CardPlusController extends BaseController {
 
 		// 切割右侧和底部标记位图片
 		Mat rightMark = new Mat(sourceMat1,
-			new Rect(sourceMat1.cols() - 100, 0, 100, sourceMat1.rows()));
+				new Rect(sourceMat1.cols() - 100, 0, 100, sourceMat1.rows()));
 
 		destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "dtk3.png";
 		Highgui.imwrite(destPath, rightMark);
@@ -93,7 +93,7 @@ public class CardPlusController extends BaseController {
 		List<Rect> listy = getBlockRect(matright, 1, 0);
 
 		Mat footMark = new Mat(sourceMat1,
-			new Rect(0, sourceMat1.rows() - 150, sourceMat1.cols(), 50));
+				new Rect(0, sourceMat1.rows() - 150, sourceMat1.cols(), 50));
 		destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "dtk6.png";
 		Highgui.imwrite(destPath, footMark);
 		logger.info("截取底部定位点图======" + destPath);
@@ -164,9 +164,9 @@ public class CardPlusController extends BaseController {
 			for (int an = 0; an < listy.size(); an++) {
 				Rect recty = listy.get(an);
 				Mat selectdst = new Mat(dstNoRed, new Range(recty.y, recty.y + recty.height),
-					new Range(rectx.x,
-						rectx.x
-							+ rectx.width));
+						new Range(rectx.x,
+								rectx.x
+										+ rectx.width));
 				// 本来是在每个区域内进行二值化，后来挪至了14步，整体进行二值化，因此注释掉此处2行
 				// Mat selectdst = new Mat(select.rows(), select.cols(), select.type());
 				// Imgproc.threshold(select, selectdst, 170, 255, Imgproc.THRESH_BINARY);
@@ -181,8 +181,8 @@ public class CardPlusController extends BaseController {
 
 				if (p100 >= Integer.valueOf(bluevalue)) {// 蓝色
 					Core.rectangle(sourceMat, new Point(rectx.x, recty.y),
-						new Point(rectx.x + rectx.width, recty.y
-							+ recty.height), new Scalar(255, 0, 0), 2);
+							new Point(rectx.x + rectx.width, recty.y
+									+ recty.height), new Scalar(255, 0, 0), 2);
 					// logger.info(que_answer + ":填涂");
 					if (StringUtils.isNotEmpty(resultMap.get(que))) {
 						resultMap.put(que, resultMap.get(que) + "," + answer);
@@ -190,10 +190,10 @@ public class CardPlusController extends BaseController {
 						resultMap.put(que, answer);
 					}
 				} else if (p100 > Integer.valueOf(redvalue) && p100 < Integer.valueOf(
-					bluevalue)) {// 红色
+						bluevalue)) {// 红色
 					Core.rectangle(sourceMat, new Point(rectx.x, recty.y),
-						new Point(rectx.x + rectx.width, recty.y
-							+ recty.height), new Scalar(0, 0, 255), 2);
+							new Point(rectx.x + rectx.width, recty.y
+									+ recty.height), new Scalar(0, 0, 255), 2);
 					// logger.info(que_answer + ":临界");
 					if (StringUtils.isNotEmpty(resultMap.get(que))) {
 						resultMap.put(que, resultMap.get(que) + ",(" + answer + ")");
@@ -202,8 +202,8 @@ public class CardPlusController extends BaseController {
 					}
 				} else {// 绿色
 					Core.rectangle(sourceMat, new Point(rectx.x, recty.y),
-						new Point(rectx.x + rectx.width, recty.y
-							+ recty.height), new Scalar(0, 255, 0), 1);
+							new Point(rectx.x + rectx.width, recty.y
+									+ recty.height), new Scalar(0, 255, 0), 1);
 					// logger.info(que_answer + ":未涂");
 				}
 			}
@@ -213,7 +213,7 @@ public class CardPlusController extends BaseController {
 		for (int i = 1; i <= 100; i++) {
 			// logger.info("key=" + result + " value=" + resultMap.get(result));
 			resultValue.append("  " + i + "=" + (StringUtils.isEmpty(resultMap.get(i)) ? "未填写"
-				: resultMap.get(i)));
+					: resultMap.get(i)));
 			if (i % 5 == 0) {
 				resultValue.append("<br>");
 			}
@@ -240,7 +240,7 @@ public class CardPlusController extends BaseController {
 		Mat histogramOfGray = new Mat(); // 输出直方图结果，共有256行，行数的相当于对应灰度值，每一行的值相当于该灰度值所占比例
 		MatOfFloat histRange = new MatOfFloat(0, 255);
 		Imgproc.calcHist(images, channels, new Mat(), histogramOfGray, histSize, histRange,
-			false); // 计算直方图
+				false); // 计算直方图
 		MinMaxLocResult minmaxLoc = Core.minMaxLoc(histogramOfGray);
 		// 按行归一化
 		// Core.normalize(histogramOfGray, histogramOfGray, 0, histogramOfGray.rows(), Core.NORM_MINMAX, -1, new Mat());
@@ -251,33 +251,33 @@ public class CardPlusController extends BaseController {
 		System.out.println("---------" + histSize.get(0, 0)[0]);
 		int colStep = (int) Math.floor(histImgCols / histSize.get(0, 0)[0]);// 舍去小数，不能四舍五入，有可能列宽不够
 		Mat histImg = new Mat(histImgRows, histImgCols, CvType.CV_8UC3,
-			new Scalar(255, 255, 255)); // 重新建一张图片，绘制直方图
+				new Scalar(255, 255, 255)); // 重新建一张图片，绘制直方图
 
 		int max = (int) minmaxLoc.maxVal;
 		System.out.println("--------" + max);
 		BigDecimal bin_u = (BigDecimal) (histImgRows - 20)
-			/ max; // max: 最高条的像素个数，则 bin_u 为单个像素的高度，因为画直方图的时候上移了20像素，要减去
+				/ max; // max: 最高条的像素个数，则 bin_u 为单个像素的高度，因为画直方图的时候上移了20像素，要减去
 		int kedu = 0;
 		for (int i = 1; kedu <= minmaxLoc.maxVal; i++) {
 			kedu = i * max / 10;
 			// 在图像中显示文本字符串
 			Core.putText(histImg, kedu + "", new Point(0, histImgRows - kedu * bin_u), 1, 1,
-				new Scalar(0, 0, 0));
+					new Scalar(0, 0, 0));
 		}
 
 		for (int i = 0; i < histSize.get(0, 0)[0]; i++) { // 画出每一个灰度级分量的比例，注意OpenCV将Mat最左上角的点作为坐标原点
 			// System.out.println(i + ":=====" + histogramOfGray.get(i, 0)[0]);
 			Core.rectangle(histImg, new Point(colStep * i, histImgRows - 20),
-				new Point(colStep * (i + 1), histImgRows
-					- bin_u * Math.round(histogramOfGray.get(i, 0)[0]) - 20),
-				new Scalar(0, 0, 0), 1, 8, 0);
+					new Point(colStep * (i + 1), histImgRows
+							- bin_u * Math.round(histogramOfGray.get(i, 0)[0]) - 20),
+					new Scalar(0, 0, 0), 1, 8, 0);
 			kedu = i * 10;
 			// 每隔10画一下刻度
 			Core.rectangle(histImg, new Point(colStep * kedu, histImgRows - 20),
-				new Point(colStep * (kedu + 1),
-					histImgRows - 20), new Scalar(255, 0, 0), 2, 8, 0);
+					new Point(colStep * (kedu + 1),
+							histImgRows - 20), new Scalar(255, 0, 0), 2, 8, 0);
 			Core.putText(histImg, kedu + "", new Point(colStep * kedu, histImgRows - 5), 1, 1,
-				new Scalar(255, 0, 0)); // 附上x轴刻度
+					new Scalar(255, 0, 0)); // 附上x轴刻度
 		}
 
 		return histImg;

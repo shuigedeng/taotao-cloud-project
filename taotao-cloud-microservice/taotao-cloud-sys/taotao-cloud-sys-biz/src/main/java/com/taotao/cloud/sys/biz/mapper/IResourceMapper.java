@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.data.mybatisplus.query.LambdaQueryWrapperX;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
@@ -33,20 +33,24 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface IResourceMapper extends BaseSuperMapper<Resource, Long> {
 
-	@Select("select * from tt_resource where id in #{roleIds}")
+	@Select("""
+		select * from tt_resource where id in #{roleIds}
+		""")
 	List<Resource> findMenuByRoleIds(Set<Long> roleIds);
 
-	@Select("")
+	@Select("""
+		select id from tt_resource where parent_id in #{roleIds}
+		""")
 	List<Long> selectIdList(List<Long> pidList);
 
 	/**
 	 * 查询资源列表
 	 */
-	default IPage<Resource> selectResourceList(Resource resource, PageParam pageParam) {
+	default IPage<Resource> selectResourceList(Resource resource, PageQuery PageQuery) {
 		return this.selectPage(new LambdaQueryWrapperX<Resource>()
-			.likeIfPresent(Resource::getName,resource.getName())
-			.eqIfPresent(Resource::getParentId,resource.getParentId()),
-			pageParam
+				.likeIfPresent(Resource::getName, resource.getName())
+				.eqIfPresent(Resource::getParentId, resource.getParentId()),
+			PageQuery
 		);
 	}
 

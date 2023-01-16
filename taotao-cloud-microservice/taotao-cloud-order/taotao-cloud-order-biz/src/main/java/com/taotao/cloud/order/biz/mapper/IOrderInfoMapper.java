@@ -1,4 +1,4 @@
-//package com.taotao.cloud.order.biz.mapper;
+package com.taotao.cloud.order.biz.mapper;//package com.taotao.cloud.order.biz.mapper;
 //
 //import com.taotao.cloud.order.biz.entity.order.OrderInfo;
 //import com.taotao.cloud.web.base.mapper.BaseSuperMapper;

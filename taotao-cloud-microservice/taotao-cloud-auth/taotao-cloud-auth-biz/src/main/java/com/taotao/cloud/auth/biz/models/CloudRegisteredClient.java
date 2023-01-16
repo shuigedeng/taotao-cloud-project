@@ -1,14 +1,14 @@
-// package com.taotao.cloud.oauth2.biz.models;
+package com.taotao.cloud.auth.biz.models;// package com.taotao.cloud.oauth2.biz.models;
 //
 // import java.time.Instant;
 // import java.util.Collections;
 // import java.util.List;
 // import java.util.Objects;
 // import java.util.stream.Collectors;
-// import javax.persistence.Entity;
-// import javax.persistence.GeneratedValue;
-// import javax.persistence.GenerationType;
-// import javax.persistence.Id;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
 // import org.springframework.security.oauth2.core.AuthorizationGrantType;
 // import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 //

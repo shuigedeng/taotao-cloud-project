@@ -2,11 +2,11 @@ package com.taotao.cloud.message.biz.austin.handler.pending;
 
 
 import cn.hutool.core.collection.CollUtil;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationRuleService;
-import com.taotao.cloud.message.biz.austin.handler.discard.DiscardMessageService;
-import com.taotao.cloud.message.biz.austin.handler.handler.HandlerHolder;
-import com.taotao.cloud.message.biz.austin.handler.shield.ShieldService;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.handler.deduplication.DeduplicationRuleService;
+import com.java3y.austin.handler.discard.DiscardMessageService;
+import com.java3y.austin.handler.handler.HandlerHolder;
+import com.java3y.austin.handler.shield.ShieldService;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;

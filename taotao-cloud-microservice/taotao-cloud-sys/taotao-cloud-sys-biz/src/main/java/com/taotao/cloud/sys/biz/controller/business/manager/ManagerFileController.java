@@ -2,20 +2,20 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.vo.file.FileVO;
 import com.taotao.cloud.sys.api.model.vo.file.UploadFileVO;
 import com.taotao.cloud.sys.biz.model.convert.FileConvert;
 import com.taotao.cloud.sys.biz.model.entity.file.File;
 import com.taotao.cloud.sys.biz.service.business.IFileService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
@@ -49,12 +49,12 @@ public class ManagerFileController {
 	@PreAuthorize("hasAuthority('file:upload')")
 	@PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
 	public Result<UploadFileVO> upload(
-		@Parameter(description = "文件对象", required = true) @NotNull(message = "文件对象不能为空")
-		@RequestPart("file") MultipartFile file) {
+			@Parameter(description = "文件对象", required = true) @NotNull(message = "文件对象不能为空")
+			@RequestPart("file") MultipartFile file) {
 
 		File upload = fileService.upload(file);
 		UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl())
-			.build();
+				.build();
 		return Result.success(result);
 	}
 
@@ -63,14 +63,14 @@ public class ManagerFileController {
 	@PreAuthorize("hasAuthority('file:multiple:upload')")
 	@PostMapping(value = "/multiple/upload", headers = "content-type=multipart/form-data")
 	public Result<List<UploadFileVO>> uploadMultipleFiles(
-		@RequestPart("files") MultipartFile[] files) {
+			@RequestPart("files") MultipartFile[] files) {
 		if (files.length == 0) {
 			throw new BusinessException("文件不能为空");
 		}
 
 		List<File> uploads = Arrays.stream(files)
-			.map(fileService::upload)
-			.collect(Collectors.toList());
+				.map(fileService::upload)
+				.collect(Collectors.toList());
 
 		if (!CollectionUtils.isEmpty(uploads)) {
 			//List<UploadFileVO> result = uploads.stream().map(

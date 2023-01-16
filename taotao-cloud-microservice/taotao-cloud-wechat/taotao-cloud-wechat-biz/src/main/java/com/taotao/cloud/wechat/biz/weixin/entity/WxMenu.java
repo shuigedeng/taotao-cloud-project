@@ -30,12 +30,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.joolun.framework.config.typehandler.JsonTypeHandler;
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.ibatis.type.JdbcType;
-
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 /**
  * 自定义菜单
@@ -47,13 +46,14 @@ import java.time.LocalDateTime;
 @TableName("wx_menu")
 @EqualsAndHashCode(callSuper = true)
 public class WxMenu extends Model<WxMenu> {
-private static final long serialVersionUID = 1L;
 
-    /**
-   * 菜单ID（click、scancode_push、scancode_waitmsg、pic_sysphoto、pic_photo_or_album、pic_weixin、location_select：保存key）
-   */
-    @TableId(type = IdType.ASSIGN_ID)
-    private String id;
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 菜单ID（click、scancode_push、scancode_waitmsg、pic_sysphoto、pic_photo_or_album、pic_weixin、location_select：保存key）
+	 */
+	@TableId(type = IdType.ASSIGN_ID)
+	private String id;
 	/**
 	 * 父菜单ID
 	 */
@@ -74,24 +74,24 @@ private static final long serialVersionUID = 1L;
 	 * 逻辑删除标记（0：显示；1：隐藏）
 	 */
 	private String delFlag;
-    /**
-   * 菜单类型click、view、miniprogram、scancode_push、scancode_waitmsg、pic_sysphoto、pic_photo_or_album、pic_weixin、location_select、media_id、view_limited等
-   */
+	/**
+	 * 菜单类型click、view、miniprogram、scancode_push、scancode_waitmsg、pic_sysphoto、pic_photo_or_album、pic_weixin、location_select、media_id、view_limited等
+	 */
 	@NotNull(message = "菜单类型不能为空")
-    private String type;
+	private String type;
 	/**
 	 * 菜单名
 	 */
 	@NotNull(message = "菜单名不能为空")
 	private String name;
-    /**
-   * View：保存链接到url
-   */
-    private String url;
-    /**
-   * Img、voice、News：保存mediaID
-   */
-    private String repMediaId;
+	/**
+	 * View：保存链接到url
+	 */
+	private String url;
+	/**
+	 * Img、voice、News：保存mediaID
+	 */
+	private String repMediaId;
 	/**
 	 * 回复消息类型（text：文本；image：图片；voice：语音；video：视频；music：音乐；news：图文）
 	 */
@@ -100,10 +100,10 @@ private static final long serialVersionUID = 1L;
 	 * 素材名、视频和音乐的标题
 	 */
 	private String repName;
-    /**
-   * Text:保存文字
-   */
-    private String repContent;
+	/**
+	 * Text:保存文字
+	 */
+	private String repContent;
 	/**
 	 * 小程序的appid
 	 */
@@ -135,6 +135,6 @@ private static final long serialVersionUID = 1L;
 	/**
 	 * 图文消息的内容
 	 */
-	@TableField(typeHandler = JsonTypeHandler.class, jdbcType= JdbcType.VARCHAR)
+	@TableField(typeHandler = JsonTypeHandler.class, jdbcType = JdbcType.VARCHAR)
 	private JSONObject content;
 }

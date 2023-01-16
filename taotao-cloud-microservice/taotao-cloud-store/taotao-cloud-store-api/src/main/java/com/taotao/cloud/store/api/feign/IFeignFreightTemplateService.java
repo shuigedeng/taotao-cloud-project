@@ -5,6 +5,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreServiceFallbackImpl;
 import com.taotao.cloud.store.api.web.vo.FreightTemplateInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 远程调用店铺模块
@@ -14,7 +15,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  */
 @FeignClient(contextId = "IFeignFreightTemplateService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignStoreServiceFallbackImpl.class)
 public interface IFeignFreightTemplateService {
-
-	Result<FreightTemplateInfoVO> getById(Long templateId);
+	@GetMapping(value = "/getById")
+	FreightTemplateInfoVO getById(Long templateId);
 }
 

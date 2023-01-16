@@ -4,6 +4,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreServiceFallbackImpl;
 import com.taotao.cloud.store.api.web.vo.BillVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 远程调用店铺模块
@@ -14,7 +15,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(contextId = "IFeignBillService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignStoreServiceFallbackImpl.class)
 public interface IFeignBillService {
 
-
+	@GetMapping(value = "/getById")
     BillVO getById(String id);
 }
 

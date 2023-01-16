@@ -23,7 +23,7 @@ public interface IFeignEsGoodsIndexApi {
 	List<EsGoodsIndexVO> getEsGoodsBySkuIds(List<String> skuIdList);
 
 	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<Boolean> cleanInvalidPromotion();
+	Boolean cleanInvalidPromotion();
 
 }
 

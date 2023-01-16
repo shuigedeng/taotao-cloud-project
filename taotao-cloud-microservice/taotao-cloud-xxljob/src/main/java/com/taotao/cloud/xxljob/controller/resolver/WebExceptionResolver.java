@@ -3,6 +3,9 @@ package com.taotao.cloud.xxljob.controller.resolver;
 import com.taotao.cloud.xxljob.core.exception.XxlJobException;
 import com.taotao.cloud.xxljob.core.util.JacksonUtil;
 import com.xxl.job.core.biz.model.ReturnT;
+import java.io.IOException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,10 +14,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 /**
  * common exception resolver
  *
@@ -22,6 +21,7 @@ import java.io.IOException;
  */
 @Component
 public class WebExceptionResolver implements HandlerExceptionResolver {
+
 	private static transient Logger logger = LoggerFactory.getLogger(WebExceptionResolver.class);
 
 	@Override
@@ -35,7 +35,7 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 		// if json
 		boolean isJson = false;
 		if (handler instanceof HandlerMethod) {
-			HandlerMethod method = (HandlerMethod)handler;
+			HandlerMethod method = (HandlerMethod) handler;
 			ResponseBody responseBody = method.getMethodAnnotation(ResponseBody.class);
 			if (responseBody != null) {
 				isJson = true;
@@ -43,7 +43,8 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 		}
 
 		// error result
-		ReturnT<String> errorResult = new ReturnT<String>(ReturnT.FAIL_CODE, ex.toString().replaceAll("\n", "<br/>"));
+		ReturnT<String> errorResult = new ReturnT<String>(ReturnT.FAIL_CODE,
+				ex.toString().replaceAll("\n", "<br/>"));
 
 		// response
 		ModelAndView mv = new ModelAndView();
@@ -62,5 +63,5 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 			return mv;
 		}
 	}
-	
+
 }

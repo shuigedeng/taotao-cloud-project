@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.util.Date;
 import lombok.Data;
 
@@ -12,52 +13,52 @@ import lombok.Data;
  */
 @Data
 @TableName("flow_taskcirculate")
-public class FlowTaskCirculateEntity {
+public class FlowTaskCirculateEntity extends SuperEntity<FlowTaskCirculateEntity, String> {
     /**
      * 传阅主键
      */
-    @TableId("F_ID")
+    @TableId("id")
     private String id;
 
     /**
      * 对象类型
      */
-    @TableField("F_OBJECTTYPE")
+    @TableField("object_type")
     private String objectType;
 
     /**
      * 对象主键
      */
-    @TableField("F_OBJECTID")
+    @TableField("object_id")
     private String objectId;
 
     /**
      * 节点编码
      */
-    @TableField("F_NODECODE")
+    @TableField("node_code")
     private String nodeCode;
 
     /**
      * 节点名称
      */
-    @TableField("F_NODENAME")
+    @TableField("node_name")
     private String nodeName;
 
     /**
      * 节点主键
      */
-    @TableField("F_TASKNODEID")
+    @TableField("task_node_id")
     private String taskNodeId;
 
     /**
      * 任务主键
      */
-    @TableField("F_TASKID")
+    @TableField("task_id")
     private String taskId;
 
     /**
      * 创建时间
      */
-    @TableField(value = "F_CREATORTIME",fill = FieldFill.INSERT)
+    @TableField(value = "creator_time",fill = FieldFill.INSERT)
     private Date creatorTime;
 }

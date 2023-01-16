@@ -42,7 +42,7 @@ public class CancelOrderTaskExecute implements EveryMinuteExecute {
 
 	@Override
 	public void execute() {
-		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name()).data();
+		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name());
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//订单自动取消时间 = 当前时间 - 自动取消时间分钟数
 			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());

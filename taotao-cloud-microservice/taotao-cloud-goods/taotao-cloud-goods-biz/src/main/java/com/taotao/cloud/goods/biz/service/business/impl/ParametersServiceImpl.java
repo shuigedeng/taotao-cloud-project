@@ -15,9 +15,9 @@ import com.taotao.cloud.goods.biz.repository.cls.ParametersRepository;
 import com.taotao.cloud.goods.biz.repository.inf.IParametersRepository;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IParametersService;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -99,7 +99,7 @@ public class ParametersServiceImpl extends
 			List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.getGoodsParamsItemDTOList()
 				.stream()
 				.filter(i -> i.getParamId() != null && i.getParamId().equals(parameters.getId()))
-				.collect(Collectors.toList());
+				.toList();
 			for (GoodsParamsItemDTO goodsParamsItemDTO : goodsParamsItemDTOList) {
 				this.setGoodsItemDTO(goodsParamsItemDTO, parameters);
 			}

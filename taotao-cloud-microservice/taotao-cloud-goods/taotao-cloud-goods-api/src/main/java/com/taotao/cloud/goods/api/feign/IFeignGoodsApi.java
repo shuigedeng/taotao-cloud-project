@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface IFeignGoodsApi {
 
 	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<Boolean> updateStoreDetail(Long id);
+	Boolean updateStoreDetail(Long id);
 
 	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<Boolean> underStoreGoods(String id);
+	Boolean underStoreGoods(String id);
 
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<Long> countStoreGoodsNum(Long storeId);
+	Long countStoreGoodsNum(Long storeId);
 }
 

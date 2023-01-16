@@ -1,15 +1,12 @@
 package com.taotao.cloud.auth.biz.controller.oauth2;
 
-// import com.taotao.cloud.auth.biz.idserver.entity.OAuth2Scope;
-// import com.taotao.cloud.auth.biz.idserver.service.OAuth2ScopeService;
-
 import lombok.AllArgsConstructor;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
-import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +28,7 @@ public class AuthorizationConsentController {
 	private final RegisteredClientRepository registeredClientRepository;
 	private final OAuth2AuthorizationConsentService authorizationConsentService;
 	// private final OAuth2ScopeService oAuth2ScopeService;
-	private final ProviderSettings providerSettings;
+	private final AuthorizationServerSettings authorizationServerSettings;
 
 
 	/**
@@ -74,7 +71,7 @@ public class AuthorizationConsentController {
 
 		String clientName = registeredClient.getClientName();
 
-		model.addAttribute("authorizationEndpoint", providerSettings.getAuthorizationEndpoint());
+		model.addAttribute("authorizationEndpoint", authorizationServerSettings.getAuthorizationEndpoint());
 		model.addAttribute("clientId", clientId);
 		model.addAttribute("clientName", clientName);
 		model.addAttribute("state", state);

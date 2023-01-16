@@ -1,4 +1,4 @@
-//
+package com.taotao.cloud.auth.api.compliance.controller;//
 // package com.taotao.cloud.auth.api.compliance.controller;
 //
 // import cn.herodotus.engine.assistant.core.domain.Result;

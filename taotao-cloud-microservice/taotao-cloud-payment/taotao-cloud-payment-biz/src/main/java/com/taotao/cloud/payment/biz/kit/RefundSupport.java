@@ -11,7 +11,7 @@ import com.taotao.cloud.payment.biz.entity.RefundLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 退款支持
@@ -44,7 +44,7 @@ public class RefundSupport {
 	 * @param afterSale
 	 */
 	public void refund(AfterSaleVO afterSale) {
-		OrderVO order = orderService.getBySn(afterSale.orderSn()).data();
+		OrderVO order = orderService.getBySn(afterSale.orderSn());
 		RefundLog refundLog = RefundLog.builder()
 			.isRefund(false)
 			.totalAmount(afterSale.getActualRefundPrice())
@@ -85,7 +85,7 @@ public class RefundSupport {
 	 * 订单取消
 	 */
 	public void cancel(AfterSaleVO afterSale) {
-		OrderVO order = orderService.getBySn(afterSale.orderSn()).data();
+		OrderVO order = orderService.getBySn(afterSale.orderSn());
 		RefundLog refundLog = RefundLog.builder()
 			.isRefund(false)
 			.totalAmount(afterSale.getActualRefundPrice())

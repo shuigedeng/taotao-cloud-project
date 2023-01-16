@@ -45,14 +45,14 @@ public class SecurityConfiguration {
 		successHandler.setTargetUrlParameter("redirectTo");
 		successHandler.setDefaultTargetUrl(adminContextPath + "/");
 
-		return http.authorizeRequests()
+		return http.authorizeHttpRequests()
 			//1.配置所有静态资源和登录页可以公开访问
-			.antMatchers(adminContextPath + "/assets/**").permitAll()
-			.antMatchers(adminContextPath + "/login").permitAll()
-			.antMatchers("/actuator/**").permitAll()
-			.antMatchers("/actuator").permitAll()
-			.antMatchers("/instances").permitAll()
-			.antMatchers("/instances/**").permitAll()
+			.requestMatchers(adminContextPath + "/assets/**").permitAll()
+			.requestMatchers(adminContextPath + "/login").permitAll()
+			.requestMatchers("/actuator/**").permitAll()
+			.requestMatchers("/actuator").permitAll()
+			.requestMatchers("/instances").permitAll()
+			.requestMatchers("/instances/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			//2.配置登录和登出路径
@@ -66,7 +66,7 @@ public class SecurityConfiguration {
 			//4.开启基于cookie的csrf保护
 			.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 			//5.忽略这些路径的csrf保护以便admin-client注册
-			.ignoringAntMatchers(adminContextPath + "/instances", adminContextPath + "/actuator/**")
+			.ignoringRequestMatchers(adminContextPath + "/instances", adminContextPath + "/actuator/**")
 			.and().build();
 	}
 

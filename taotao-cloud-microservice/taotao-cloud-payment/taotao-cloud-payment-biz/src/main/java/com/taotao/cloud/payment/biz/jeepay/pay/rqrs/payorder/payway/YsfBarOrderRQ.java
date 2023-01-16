@@ -18,7 +18,7 @@ package com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.payway;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.UnifiedOrderRQ;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /*
  * 支付方式： YSF_BAR

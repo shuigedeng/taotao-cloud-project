@@ -19,6 +19,8 @@ import com.taotao.cloud.auth.biz.jpa.entity.authorizationConsent.AuthorizationCo
 import com.taotao.cloud.auth.biz.jpa.repository.authorizationConsent.AuthorizationConsentRepository;
 import java.util.HashSet;
 import java.util.Set;
+
+
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,15 +34,12 @@ import org.springframework.util.StringUtils;
 
 @Component
 public class JpaOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {
-
 	private final AuthorizationConsentRepository authorizationConsentRepository;
 	private final RegisteredClientRepository registeredClientRepository;
 
 	public JpaOAuth2AuthorizationConsentService(
-		AuthorizationConsentRepository authorizationConsentRepository,
-		RegisteredClientRepository registeredClientRepository) {
-		Assert.notNull(authorizationConsentRepository,
-			"authorizationConsentRepository cannot be null");
+		AuthorizationConsentRepository authorizationConsentRepository, RegisteredClientRepository registeredClientRepository) {
+		Assert.notNull(authorizationConsentRepository, "authorizationConsentRepository cannot be null");
 		Assert.notNull(registeredClientRepository, "registeredClientRepository cannot be null");
 		this.authorizationConsentRepository = authorizationConsentRepository;
 		this.registeredClientRepository = registeredClientRepository;
@@ -56,7 +55,7 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
 	public void remove(OAuth2AuthorizationConsent authorizationConsent) {
 		Assert.notNull(authorizationConsent, "authorizationConsent cannot be null");
 		this.authorizationConsentRepository.deleteByRegisteredClientIdAndPrincipalName(
-			authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
+				authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
 	}
 
 	@Override
@@ -64,24 +63,21 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
 		Assert.hasText(registeredClientId, "registeredClientId cannot be empty");
 		Assert.hasText(principalName, "principalName cannot be empty");
 		return this.authorizationConsentRepository.findByRegisteredClientIdAndPrincipalName(
-			registeredClientId, principalName).map(this::toObject).orElse(null);
+				registeredClientId, principalName).map(this::toObject).orElse(null);
 	}
 
 	private OAuth2AuthorizationConsent toObject(AuthorizationConsent authorizationConsent) {
 		String registeredClientId = authorizationConsent.getRegisteredClientId();
-		RegisteredClient registeredClient = this.registeredClientRepository.findById(
-			registeredClientId);
+		RegisteredClient registeredClient = this.registeredClientRepository.findById(registeredClientId);
 		if (registeredClient == null) {
 			throw new DataRetrievalFailureException(
-				"The RegisteredClient with id '" + registeredClientId
-					+ "' was not found in the RegisteredClientRepository.");
+					"The RegisteredClient with id '" + registeredClientId + "' was not found in the RegisteredClientRepository.");
 		}
 
 		OAuth2AuthorizationConsent.Builder builder = OAuth2AuthorizationConsent.withId(
-			registeredClientId, authorizationConsent.getPrincipalName());
+				registeredClientId, authorizationConsent.getPrincipalName());
 		if (authorizationConsent.getAuthorities() != null) {
-			for (String authority : StringUtils.commaDelimitedListToSet(
-				authorizationConsent.getAuthorities())) {
+			for (String authority : StringUtils.commaDelimitedListToSet(authorizationConsent.getAuthorities())) {
 				builder.authority(new SimpleGrantedAuthority(authority));
 			}
 		}

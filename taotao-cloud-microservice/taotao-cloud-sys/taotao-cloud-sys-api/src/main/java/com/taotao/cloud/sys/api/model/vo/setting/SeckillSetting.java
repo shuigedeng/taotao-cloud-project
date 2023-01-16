@@ -1,9 +1,8 @@
 package com.taotao.cloud.sys.api.model.vo.setting;
 
-import lombok.Data;
-
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 秒杀活动设置

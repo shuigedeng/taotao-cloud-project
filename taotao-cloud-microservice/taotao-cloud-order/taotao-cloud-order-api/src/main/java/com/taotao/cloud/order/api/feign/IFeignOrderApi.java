@@ -25,19 +25,19 @@ public interface IFeignOrderApi {
 	@GetMapping(value = "/order/info/{code}")
 	OrderVO findOrderInfoByCode(@PathVariable("code") String code);
 
-	@PostMapping(value = "/order")
+	@PostMapping(value = "/saveOrder")
 	OrderVO saveOrder(@RequestBody OrderSaveDTO orderDTO);
 
-	@PostMapping(value = "/order/item")
+	@GetMapping(value = "/queryDetail")
 	OrderDetailVO queryDetail(String sn);
 
-	@PostMapping(value = "/order/item")
+	@PostMapping(value = "/payOrder")
 	Boolean payOrder(String sn, String paymentMethod, String receivableNo);
 
-	@PostMapping(value = "/order/item")
+	@GetMapping(value = "/getBySn")
 	OrderVO getBySn(String sn);
 
-	@PostMapping(value = "/order/item")
+	@GetMapping(value = "/getByTradeSn")
 	List<OrderVO> getByTradeSn(String sn);
 }
 

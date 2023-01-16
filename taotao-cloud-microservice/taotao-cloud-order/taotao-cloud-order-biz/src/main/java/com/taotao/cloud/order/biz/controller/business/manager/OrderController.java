@@ -2,7 +2,6 @@ package com.taotao.cloud.order.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.model.vo.cart.OrderExportVO;
@@ -11,8 +10,14 @@ import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.order.IOrderPriceService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -23,12 +28,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 管理端,订单API
@@ -66,7 +65,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/queryExportOrder")
 	public Result<List<OrderExportVO>> queryExportOrder(
-		OrderPageQuery orderPageQuery) {
+			OrderPageQuery orderPageQuery) {
 		return Result.success(orderService.queryExportOrder(orderPageQuery));
 	}
 
@@ -91,7 +90,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{orderSn}/consignee")
 	public Result<Order> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
-								   @Valid MemberAddressDTO memberAddressDTO) {
+			@Valid MemberAddressDTO memberAddressDTO) {
 		return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
 	}
 
@@ -99,7 +98,7 @@ public class OrderController {
 	@RequestLogger
 	@PutMapping(value = "/{orderSn}/price")
 	public Result<Boolean> updateOrderPrice(@PathVariable String orderSn,
-											@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
+			@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
 		return Result.success(orderPriceService.updatePrice(orderSn, price));
 	}
 
@@ -108,7 +107,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Order> cancel(@PathVariable String orderSn,
-								@RequestParam String reason) {
+			@RequestParam String reason) {
 		return Result.success(orderService.cancel(orderSn, reason));
 	}
 
@@ -117,7 +116,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
 	public Result<Object> getTraces(
-		@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
+			@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
 		return Result.success(orderService.getTraces(orderSn));
 	}
 }

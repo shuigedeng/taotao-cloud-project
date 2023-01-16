@@ -6,11 +6,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.biz.model.entity.gen.GenTable;
 import com.taotao.cloud.sys.biz.model.entity.gen.GenTableColumn;
 import com.taotao.cloud.sys.biz.service.business.IGenTableService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -22,12 +27,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 代码生成 操作处理
@@ -115,7 +114,8 @@ public class GenController {
 	@RequestLogger("预览代码")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/preview/{tableId}")
-	public Result<Map<String, String>> preview(@PathVariable("tableId") Long tableId) throws IOException {
+	public Result<Map<String, String>> preview(@PathVariable("tableId") Long tableId)
+			throws IOException {
 		Map<String, String> dataMap = genTableService.previewCode(tableId);
 		return Result.success(dataMap);
 	}
@@ -124,7 +124,8 @@ public class GenController {
 	@RequestLogger("生成代码（下载方式）")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/download/{tableName}")
-	public void download(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
+	public void download(HttpServletResponse response, @PathVariable("tableName") String tableName)
+			throws IOException {
 		byte[] data = genTableService.downloadCode(tableName);
 		genCode(response, data);
 	}

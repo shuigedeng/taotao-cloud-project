@@ -13,6 +13,7 @@ import com.taotao.cloud.goods.api.model.dto.HotWordsDTO;
 import com.taotao.cloud.goods.api.model.query.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
+import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.biz.elasticsearch.ParamOptions;
 import com.taotao.cloud.goods.biz.elasticsearch.SelectorOptions;
 import com.taotao.cloud.goods.biz.service.business.IEsGoodsIndexService;
@@ -38,16 +39,17 @@ import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.client.erhlc.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQuery;
+import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.SearchHitSupport;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.SearchPage;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Service;
 
@@ -478,7 +480,13 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 	 * @param filterBuilder 过滤构造器
 	 * @param searchDTO     查询参数
 	 */
-	private void commonSearch(BoolQueryBuilder filterBuilder, EsGoodsSearchQuery searchDTO) {
+	/**
+	 * 查询属性处理
+	 *
+	 * @param filterBuilder 过滤构造器
+	 * @param searchDTO     查询参数
+	 */
+	private void commonSearch(BoolQueryBuilder filterBuilder, EsGoodsSearchDTO searchDTO) {
 		//品牌判定
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getBrandId())) {
 			String[] brands = searchDTO.getBrandId().split("@");
@@ -489,19 +497,15 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 		}
 		//规格项判定
 		if (searchDTO.getNameIds() != null && !searchDTO.getNameIds().isEmpty()) {
-			filterBuilder.must(QueryBuilders.nestedQuery(ATTR_PATH,
-				QueryBuilders.termsQuery("attrList.nameId", searchDTO.getNameIds()),
-				ScoreMode.None));
+			filterBuilder.must(QueryBuilders.nestedQuery(ATTR_PATH, QueryBuilders.termsQuery("attrList.nameId", searchDTO.getNameIds()), ScoreMode.None));
 		}
 		//分类判定
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getCategoryId())) {
-			filterBuilder.must(
-				QueryBuilders.wildcardQuery("categoryPath", "*" + searchDTO.getCategoryId() + "*"));
+			filterBuilder.must(QueryBuilders.wildcardQuery("categoryPath", "*" + searchDTO.getCategoryId() + "*"));
 		}
 		//店铺分类判定
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getStoreCatId())) {
-			filterBuilder.must(QueryBuilders.wildcardQuery("storeCategoryPath",
-				"*" + searchDTO.getStoreCatId() + "*"));
+			filterBuilder.must(QueryBuilders.wildcardQuery("storeCategoryPath", "*" + searchDTO.getStoreCatId() + "*"));
 		}
 		//店铺判定
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getStoreId())) {
@@ -517,15 +521,22 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 			if (prices.length == 0) {
 				return;
 			}
-			BigDecimal min = Convert.toBigDecimal(prices[0], BigDecimal.ZERO);
-			BigDecimal max = BigDecimal.valueOf(Integer.MAX_VALUE);
+			double min = Convert.toDouble(prices[0], 0.0);
+			double max = Integer.MAX_VALUE;
 
 			if (prices.length == 2) {
-				max = Convert.toBigDecimal(prices[1], BigDecimal.valueOf(Integer.MAX_VALUE));
+				max = Convert.toDouble(prices[1], Double.MAX_VALUE);
 			}
-			filterBuilder.must(
-				QueryBuilders.rangeQuery("price").from(min).to(max).includeLower(true)
-					.includeUpper(true));
+			if (min > max) {
+				throw new ServiceException("价格区间错误");
+			}
+			if (min > Double.MAX_VALUE) {
+				min = Double.MAX_VALUE;
+			}
+			if (max > Double.MAX_VALUE) {
+				max = Double.MAX_VALUE;
+			}
+			filterBuilder.must(QueryBuilders.rangeQuery("price").from(min).to(max).includeLower(true).includeUpper(true));
 		}
 	}
 

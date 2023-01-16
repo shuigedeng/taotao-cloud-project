@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.flowcontrol;
 
 import com.google.common.util.concurrent.RateLimiter;
-import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
+import com.java3y.austin.handler.enums.RateLimitStrategy;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
