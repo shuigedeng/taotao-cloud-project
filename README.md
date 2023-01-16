@@ -65,7 +65,7 @@
 Requires:
 
 ```
-JAVA_VERSION >= 17 (推荐使用amazon-corretto-17)
+JAVA_VERSION >= 17 (推荐使用graalvm-22.3)
 GRALE_VERSION >= 7.6
 IDEA_VERSION >= 2022.3.2
 ```
