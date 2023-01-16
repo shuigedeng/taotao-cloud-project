@@ -6,7 +6,7 @@ dependencies {
     api "commons-collections:commons-collections:3.2.2"
     api "com.aliyun:aliyun-java-sdk-core:4.6.3"
 
-    api "com.github.binarywang:weixin-java-mp:4.4.7.B"
+    api "com.github.binarywang:weixin-java-mp:4.4.8.B"
 
     api "org.springframework.social:spring-social-security:1.1.6.RELEASE"
     api "org.springframework.social:spring-social-core:1.1.6.RELEASE"

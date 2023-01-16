@@ -183,25 +183,25 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
-  redis:
-    host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
-    port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
-    database: 1
-    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
-    lettuce:
-      pool:
-        max-active: 1500
-        max-wait: 5000
-        max-idle: 500
-        min-idle: 100
-    connect-timeout: 60000
-  elasticsearch:
-    rest:
-      uris:
-        - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:192.168.10.200}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
-      username:
-      password:
   data:
+    redis:
+      host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
+      port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
+      database: 1
+      password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+      lettuce:
+        pool:
+          max-active: 1500
+          max-wait: 5000
+          max-idle: 500
+          min-idle: 100
+      connect-timeout: 60000
+    elasticsearch:
+      rest:
+        uris:
+          - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:192.168.10.200}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+        username:
+        password:
     elasticsearch:
       repositories:
         enabled: true
@@ -514,20 +514,13 @@ taotao:
     mongodb:
       enabled: true
     disruptor:
-      enabled: false
+      enabled: true
       multi-producer: false
       ring-buffer-size: 1024
       ring-thread-numbers: 4
       #handler-definitions:
       # - /Event-DC-Output/TagA-Output/** = emailHandler
       # - /Event-DC-Output/TagB-Output/** = smsHandler
-    dinger:
-      enabled: false
-      project-id: ${spring.application.name}
-      dingers:
-        dingtalk:
-          tokenId: ${DINGDING_TOKEN_ID:xxxxx}
-          secret: ${DINGDING_SECRET:xxxx}
     health:
       enabled: true
       dump: true

@@ -1,21 +1,21 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-sms-aliyun"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-sms-aliyun"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
+
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
