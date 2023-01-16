@@ -1719,6 +1719,8 @@ feign:
 
 management:
   info:
+    git:
+      mode: simple
     java:
       enabled: true
     env:

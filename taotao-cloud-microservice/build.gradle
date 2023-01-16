@@ -1,5 +1,8 @@
 plugins {
     id 'org.graalvm.buildtools.native' version '0.9.18'
+
+    //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
+    id "com.gorylenko.gradle-git-properties" version "2.4.1"
 }
 
 subprojects {
@@ -12,6 +15,7 @@ subprojects {
     apply from: rootProject.file('gradle/shadow.gradle')
 
     apply plugin: "org.graalvm.buildtools.native"
+    apply plugin: "com.gorylenko.gradle-git-properties"
 
     task createProperties(dependsOn: processResources) {
         doLast {
@@ -65,5 +69,24 @@ subprojects {
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
 
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    }
+
+    gitProperties {
+        // 日期格式
+        dateFormat = "yyyy-MM-dd HH:mm:ss"
+        // 时区
+        dateFormatTimeZone = "GMT+8"
+        // 生成的 git.properties 文件位置
+        //gitPropertiesDir = new File("${project.dir}/build/resources/main/")
+        // git 文件所在目录
+        //gitRepositoryRoot = new File("${project.rootDir}/")
+        //自定义需要显示的信息
+        //keys = ['git.branch','git.commit.id','git.commit.time','git.commit.user.name','git.build.version']
+
+        customProperty 'project_version', { project.version }
+        //branch = System.getenv('GIT_BRANCH')
+        branch = "springboot3"
+        failOnNoGitDirectory = false
+        //dotGitDirectory = "${project.rootDir}/.git"
     }
 }
