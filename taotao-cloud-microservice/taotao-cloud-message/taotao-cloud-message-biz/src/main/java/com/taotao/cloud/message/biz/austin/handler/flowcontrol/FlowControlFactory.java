@@ -3,12 +3,13 @@ package com.taotao.cloud.message.biz.austin.handler.flowcontrol;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.util.concurrent.RateLimiter;
-import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
-import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
-import com.taotao.cloud.message.biz.austin.handler.flowcontrol.annotations.LocalRateLimit;
-import com.taotao.cloud.message.biz.austin.support.service.ConfigService;
+import com.java3y.austin.common.constant.AustinConstant;
+import com.java3y.austin.common.constant.CommonConstant;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.enums.ChannelType;
+import com.java3y.austin.handler.enums.RateLimitStrategy;
+import com.java3y.austin.handler.flowcontrol.annotations.LocalRateLimit;
+import com.java3y.austin.support.service.ConfigService;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,12 +72,12 @@ public class FlowControlFactory implements ApplicationContextAware {
      * <p>
      * apollo配置样例     key：flowControl value：{"flow_control_40":1}
      * <p>
-     * 渠道枚举可看：com.taotao.cloud.message.biz.austin.common.enums.ChannelType
+     * 渠道枚举可看：com.java3y.austin.common.enums.ChannelType
      *
      * @param channelCode
      */
     private Double getRateLimitConfig(Integer channelCode) {
-        String flowControlConfig = config.getProperty(FLOW_CONTROL_KEY, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_OBJECT);
+        String flowControlConfig = config.getProperty(FLOW_CONTROL_KEY, CommonConstant.EMPTY_JSON_OBJECT);
         JSONObject jsonObject = JSON.parseObject(flowControlConfig);
         if (jsonObject.getDouble(FLOW_CONTROL_PREFIX + channelCode) == null) {
             return null;

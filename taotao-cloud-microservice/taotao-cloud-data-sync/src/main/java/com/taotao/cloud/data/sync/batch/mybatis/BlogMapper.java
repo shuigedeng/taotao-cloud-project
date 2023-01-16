@@ -1,4 +1,4 @@
-//package com.taotao.cloud.data.sync.batch.mybatis;
+package com.taotao.cloud.data.sync.batch.mybatis;//package com.taotao.cloud.data.sync.batch.mybatis;
 //
 //import java.util.List;
 //import java.util.Map;

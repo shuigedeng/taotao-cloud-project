@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.model.query.KanjiaActivityPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivitySearchQuery;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityVO;
@@ -67,7 +67,7 @@ public interface KanjiaActivityService extends IService<KanjiaActivity> {
 	 * @return {@link IPage }<{@link KanjiaActivity }>
 	 * @since 2022-04-27 16:43:45
 	 */
-	IPage<KanjiaActivity> getForPage(KanjiaActivityPageQuery kanJiaActivityPageQuery, PageParam page);
+	IPage<KanjiaActivity> getForPage(KanjiaActivityPageQuery kanJiaActivityPageQuery, PageQuery page);
 
 
 }

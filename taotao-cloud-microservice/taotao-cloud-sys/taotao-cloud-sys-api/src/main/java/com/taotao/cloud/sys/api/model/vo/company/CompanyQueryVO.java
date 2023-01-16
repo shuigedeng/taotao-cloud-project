@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.api.model.vo.company;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.Pattern;
 
 import lombok.*;
 

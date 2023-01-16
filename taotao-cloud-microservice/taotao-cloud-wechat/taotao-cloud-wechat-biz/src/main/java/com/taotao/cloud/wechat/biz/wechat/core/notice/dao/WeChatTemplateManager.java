@@ -1,6 +1,6 @@
 package com.taotao.cloud.wechat.biz.wechat.core.notice.dao;
 
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.base.MpIdEntity;
 import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
@@ -24,8 +24,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WeChatTemplateManager extends BaseManager<WeChatTemplateMapper, WeChatTemplate> {
 
-    public Page<WeChatTemplate> page(PageParam pageParam, WeChatTemplateParam param) {
-        Page<WeChatTemplate> mpPage = MpUtil.getMpPage(pageParam, WeChatTemplate.class);
+    public Page<WeChatTemplate> page(PageQuery PageQuery, WeChatTemplateParam param) {
+        Page<WeChatTemplate> mpPage = MpUtil.getMpPage(PageQuery, WeChatTemplate.class);
         return this.lambdaQuery()
                 .select(WeChatTemplate.class, MpUtil::excludeBigField)
                 .like(StrUtil.isNotBlank(param.getTemplateId()), WeChatTemplate::getTemplateId,param.getTemplateId())

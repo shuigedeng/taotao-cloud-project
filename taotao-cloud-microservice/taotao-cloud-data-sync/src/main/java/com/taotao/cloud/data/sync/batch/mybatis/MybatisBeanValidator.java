@@ -1,13 +1,12 @@
 package com.taotao.cloud.data.sync.batch.mybatis;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidatorFactory;
+import java.util.Set;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.batch.item.validator.Validator;
 import org.springframework.beans.factory.InitializingBean;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-import java.util.Set;
 
 /**
  * @Author : JCccc
@@ -16,7 +15,7 @@ import java.util.Set;
  **/
 public class MybatisBeanValidator<T> implements Validator<T>, InitializingBean {
 
-	private javax.validation.Validator validator;
+	private jakarta.validation.Validator validator;
 
 	@Override
 	public void validate(T value) throws ValidationException {

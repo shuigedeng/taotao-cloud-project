@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
@@ -89,14 +89,14 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 
 
 	@Override
-	public IPage<KanjiaActivityGoods> getForPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageParam pageParam) {
-		return this.page(pageParam.buildMpPage(), kanJiaActivityGoodsParams.wrapper());
+	public IPage<KanjiaActivityGoods> getForPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery PageQuery) {
+		return this.page(PageQuery.buildMpPage(), kanJiaActivityGoodsParams.wrapper());
 
 	}
 
 	@Override
-	public IPage<KanjiaActivityGoodsListVO> kanjiaGoodsVOPage(KanjiaActivityGoodsParams kanjiaActivityGoodsParams, PageParam pageParam) {
-		return this.baseMapper.kanjiaActivityGoodsVOPage(pageParam.buildMpPage(), kanjiaActivityGoodsParams.wrapper());
+	public IPage<KanjiaActivityGoodsListVO> kanjiaGoodsVOPage(KanjiaActivityGoodsParams kanjiaActivityGoodsParams, PageQuery PageQuery) {
+		return this.baseMapper.kanjiaActivityGoodsVOPage(PageQuery.buildMpPage(), kanjiaActivityGoodsParams.wrapper());
 	}
 
 
@@ -107,7 +107,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 	 * @return 商品sku
 	 */
 	private GoodsSkuSpecGalleryVO checkSkuExist(Long skuId) {
-		GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId).data();
+		GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
 		if (goodsSku == null) {
 			log.error("商品ID为" + skuId + "的商品不存在！");
 			throw new BusinessException("商品ID为" + skuId + "的商品不存在！");

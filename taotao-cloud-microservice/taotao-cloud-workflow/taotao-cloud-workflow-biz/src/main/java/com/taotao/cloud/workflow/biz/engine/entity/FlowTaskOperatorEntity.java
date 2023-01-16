@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.util.Date;
 import lombok.Data;
 
@@ -13,100 +14,100 @@ import lombok.Data;
  */
 @Data
 @TableName("flow_taskoperator")
-public class FlowTaskOperatorEntity {
+public class FlowTaskOperatorEntity extends SuperEntity<FlowTaskOperatorEntity, String> {
     /**
      * 节点经办主键
      */
-    @TableId("F_ID")
+    @TableId("id")
     private String id;
 
     /**
      * 经办对象
      */
-    @TableField("F_HANDLETYPE")
+    @TableField("handle_type")
     private String handleType;
 
     /**
      * 节点类型
      */
-    @TableField("F_Type")
+    @TableField("type")
     private String type;
 
     /**
      * 经办主键
      */
-    @TableField("F_HANDLEID")
+    @TableField("handle_id")
     private String handleId;
 
     /**
      * 处理状态 0-拒绝、1-同意
      */
-    @TableField(value = "F_HANDLESTATUS",fill = FieldFill.UPDATE)
+    @TableField(value = "handle_status",fill = FieldFill.UPDATE)
     private Integer handleStatus;
 
     /**
      * 处理时间
      */
-    @TableField(value = "F_HANDLETIME",fill = FieldFill.UPDATE)
+    @TableField(value = "handle_time",fill = FieldFill.UPDATE)
     private Date handleTime;
 
     /**
      * 节点编码
      */
-    @TableField("F_NODECODE")
+    @TableField("node_code")
     private String nodeCode;
 
     /**
      * 节点名称
      */
-    @TableField("F_NODENAME")
+    @TableField("node_name")
     private String nodeName;
 
     /**
      * 是否完成
      */
-    @TableField("F_COMPLETION")
+    @TableField("completion")
     private Integer completion;
 
     /**
      * 描述
      */
-    @TableField("F_DESCRIPTION")
+    @TableField("description")
     private String description;
 
     /**
      * 创建时间
      */
-    @TableField(value = "F_CREATORTIME",fill = FieldFill.INSERT)
+    @TableField(value = "creator_time",fill = FieldFill.INSERT)
     private Date creatorTime;
 
     /**
      * 节点主键
      */
-    @TableField("F_TASKNODEID")
+    @TableField("task_node_id")
     private String taskNodeId;
 
     /**
      * 任务主键
      */
-    @TableField("F_TASKID")
+    @TableField("task_id")
     private String taskId;
 
     /**
      * 状态 0.新流程 -1.无用数据
      */
-    @TableField("F_STATE")
+    @TableField("state")
     private Integer state;
 
     /**
      * 父节点id
      */
-    @TableField("F_PARENTID")
+    @TableField("parent_id")
     private String parentId;
 
     /**
      * 草稿数据
      */
-    @TableField(value = "F_DRAFTDATA",fill = FieldFill.UPDATE)
+    @TableField(value = "draft_data",fill = FieldFill.UPDATE)
     private String draftData;
 }

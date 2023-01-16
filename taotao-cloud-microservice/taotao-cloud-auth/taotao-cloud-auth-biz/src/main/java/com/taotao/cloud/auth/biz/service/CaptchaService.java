@@ -22,11 +22,10 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.common.CaptchaUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.wf.captcha.ArithmeticCaptcha;
+import jakarta.servlet.http.HttpServletRequest;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * CaptchaService
@@ -57,7 +56,7 @@ public class CaptchaService {
 		String t = params.get(PARAM_T);
 
 		redisRepository
-			.setExpire(RedisConstant.CAPTCHA_KEY_PREFIX + t, text.toLowerCase(), 120);
+				.setExpire(RedisConstant.CAPTCHA_KEY_PREFIX + t, text.toLowerCase(), 120);
 
 		return captcha;
 	}

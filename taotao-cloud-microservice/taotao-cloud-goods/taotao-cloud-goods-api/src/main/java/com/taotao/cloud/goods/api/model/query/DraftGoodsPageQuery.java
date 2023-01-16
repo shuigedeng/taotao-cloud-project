@@ -31,12 +31,5 @@ public class DraftGoodsPageQuery extends GoodsPageQuery {
 	@Schema(description = "草稿商品保存类型")
 	private String saveType;
 
-	// @Override
-	// public <T> QueryWrapper<T> queryWrapper() {
-	// 	QueryWrapper<T> queryWrapper = super.queryWrapper();
-	// 	if (StrUtil.isNotEmpty(saveType)) {
-	// 		queryWrapper.eq("save_type", saveType);
-	// 	}
-	// 	return queryWrapper;
-	// }
+
 }

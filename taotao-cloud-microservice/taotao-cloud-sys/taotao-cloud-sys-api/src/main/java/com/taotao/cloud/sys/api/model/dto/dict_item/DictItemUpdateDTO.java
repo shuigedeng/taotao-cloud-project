@@ -18,11 +18,14 @@ package com.taotao.cloud.sys.api.model.dto.dict_item;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 字典项更新对象
@@ -41,7 +44,7 @@ public class DictItemUpdateDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
-	
+
 	@Schema(description = "字典id", required = true)
 	@NotNull(message = "字典id不能为空")
 	private Long dictId;

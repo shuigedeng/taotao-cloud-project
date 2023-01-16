@@ -54,7 +54,7 @@ public class CategoryStoreController {
 	public Result<List<CategoryTreeVO>> getListAll() {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		//获取店铺经营范围
-		String goodsManagementCategory = storeDetailService.getStoreDetailVO(storeId).data()
+		String goodsManagementCategory = storeDetailService.getStoreDetailVO(storeId)
 			.getGoodsManagementCategory();
 		return Result.success(
 			this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));

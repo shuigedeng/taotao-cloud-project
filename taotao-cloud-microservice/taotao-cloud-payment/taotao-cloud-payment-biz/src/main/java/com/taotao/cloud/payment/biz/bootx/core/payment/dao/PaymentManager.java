@@ -4,7 +4,7 @@ import cn.hutool.core.text.NamingCase;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.code.pay.PayStatusCode;
 import com.taotao.cloud.payment.biz.bootx.core.payment.entity.Payment;
 import com.taotao.cloud.payment.biz.bootx.param.payment.PaymentQuery;
@@ -52,8 +52,8 @@ public class PaymentManager extends BaseManager<PaymentMapper, Payment> {
     /**
      * 分页查询
      */
-    public Page<Payment> page(PageParam pageParam, PaymentQuery param, OrderParam orderParam) {
-        Page<Payment> mpPage = MpUtil.getMpPage(pageParam, Payment.class);
+    public Page<Payment> page(PageQuery PageQuery, PaymentQuery param, OrderParam orderParam) {
+        Page<Payment> mpPage = MpUtil.getMpPage(PageQuery, Payment.class);
         return query()
                 .orderBy(Objects.nonNull(orderParam.getSortField()),orderParam.isAsc(), StrUtil.toUnderlineCase(orderParam.getSortField()))
                 .like(Objects.nonNull(param.getPaymentId()), MpUtil.getColumnName(Payment::getId),param.getPaymentId())
@@ -64,9 +64,9 @@ public class PaymentManager extends BaseManager<PaymentMapper, Payment> {
     /**
      * 分页查询
      */
-    public Page<Payment> superPage(PageParam pageParam, QueryParams queryParams) {
+    public Page<Payment> superPage(PageQuery PageQuery, QueryParams queryParams) {
         QueryWrapper<Payment> wrapper = QueryGenerator.generator(queryParams);
-        Page<Payment> mpPage = MpUtil.getMpPage(pageParam, Payment.class);
+        Page<Payment> mpPage = MpUtil.getMpPage(PageQuery, Payment.class);
         return this.page(mpPage,wrapper);
     }
 

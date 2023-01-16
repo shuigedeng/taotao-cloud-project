@@ -16,6 +16,7 @@
 package com.taotao.cloud.auth.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import java.io.File;
 import org.springframework.boot.SpringApplication;
@@ -67,7 +68,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class TaoTaoCloudAuthApplication {
 
 	public static void main(String[] args) {
-		setNacosProperty();
+		PropertyUtils.setDefaultProperty("taotao-cloud-auth");
 
 		/**
 		 * @see LoginPlatformEnum
@@ -80,20 +81,5 @@ public class TaoTaoCloudAuthApplication {
 		String s3 = "c端用户之app -> 短信密码登录 本机号码一键登录(不需要密码) 手机号码+短信登录 指纹登录 面部识别登录 手势登录 第三方登录(qq登录 微信登录 支付宝登录)";
 
 		SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
-	}
-
-
-	public static void setNacosProperty() {
-		/**
-		 * 设置nacos客户端日志和快照目录
-		 *
-		 * @see LocalConfigInfoProcessor
-		 */
-		String userHome = System.getProperty("user.home");
-		System.setProperty("JM.LOG.PATH",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-auth");
-		System.setProperty("JM.SNAPSHOT.PATH",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-auth");
-		System.setProperty("nacos.logging.default.config.enabled", "true");
 	}
 }

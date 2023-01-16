@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.member.api.model.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;
 
@@ -18,10 +18,10 @@ public interface IMemberGoodsCollectionService extends IService<MemberGoodsColle
 	/**
 	 * 获取商品搜索分页
 	 *
-	 * @param pageParam 查询参数
+	 * @param PageQuery 查询参数
 	 * @return 商品搜索分页
 	 */
-	IPage<GoodsCollectionVO> goodsCollection(PageParam pageParam);
+	IPage<GoodsCollectionVO> goodsCollection(PageQuery PageQuery);
 
 	/**
 	 * 是否收藏商品

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.controller;
 
 import cn.hutool.db.PageResult;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.alipay.service.AlipayConfigService;
 import com.taotao.cloud.payment.biz.bootx.dto.paymodel.alipay.AlipayConfigDto;
 import com.taotao.cloud.payment.biz.bootx.param.paymodel.alipay.AlipayConfigParam;
@@ -52,8 +52,8 @@ public class AlipayConfigController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<AlipayConfigDto>> page(PageParam pageParam, AlipayConfigQuery param){
-        return Res.ok(alipayConfigService.page(pageParam,param));
+    public ResResult<PageResult<AlipayConfigDto>> page(PageQuery PageQuery, AlipayConfigQuery param){
+        return Res.ok(alipayConfigService.page(PageQuery,param));
     }
 
     @Operation(summary = "根据Id查询")

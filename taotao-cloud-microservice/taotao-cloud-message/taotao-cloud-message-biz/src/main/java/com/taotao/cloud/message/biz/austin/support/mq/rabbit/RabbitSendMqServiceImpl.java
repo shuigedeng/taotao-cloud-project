@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.mq.rabbit;
 
-import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
-import com.taotao.cloud.message.biz.austin.support.mq.SendMqService;
+import com.java3y.austin.support.constans.MessageQueuePipeline;
+import com.java3y.austin.support.mq.SendMqService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * @Autor xzcawl
+ * @author  xzcawl
  * @Date 2022/7/15 17:29
  */
 @Slf4j

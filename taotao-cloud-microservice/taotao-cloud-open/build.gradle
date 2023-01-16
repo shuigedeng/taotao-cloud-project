@@ -14,7 +14,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
 
     implementation "org.apache.pdfbox:pdfbox:2.0.26"
-    implementation "io.soabase.record-builder:record-builder-core:34"
+    implementation "io.soabase.record-builder:record-builder-core:35"
 
     implementation "com.google.protobuf:protobuf-java:3.21.5"
     implementation "com.google.protobuf:protobuf-java-util:3.21.5"
@@ -23,16 +23,16 @@ dependencies {
     implementation "io.protostuff:protostuff-core:1.8.0"
     implementation "io.protostuff:protostuff-runtime:1.8.0"
 
-    implementation "com.dtflys.forest:forest-spring-boot-starter:1.5.26"
-    implementation "com.github.lianjiatech:retrofit-spring-boot-starter:2.3.7"
+    implementation "com.dtflys.forest:forest-spring-boot-starter"
+    implementation "com.github.lianjiatech:retrofit-spring-boot-starter"
 
-    implementation "org.springframework.cloud:spring-cloud-square-retrofit:0.4.1"
-    implementation "org.springframework.cloud:spring-cloud-square-okhttp:0.4.1"
+    implementation "org.springframework.cloud:spring-cloud-square-retrofit"
+    implementation "org.springframework.cloud:spring-cloud-square-okhttp"
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
+//    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

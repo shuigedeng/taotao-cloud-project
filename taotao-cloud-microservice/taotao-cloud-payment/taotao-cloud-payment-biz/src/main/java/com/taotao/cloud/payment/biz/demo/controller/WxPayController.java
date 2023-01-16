@@ -1,20 +1,15 @@
 package com.taotao.cloud.payment.biz.demo.controller;
 
-import java.util.HashMap;
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSONObject;
+import com.yungouos.springboot.demo.common.ApiResponse;
+import com.yungouos.springboot.demo.service.wxpay.WxPayService;
+import jakarta.annotation.Resource;
 import java.util.Map;
-
-import javax.annotation.Resource;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alibaba.fastjson.JSONObject;
-import com.yungouos.springboot.demo.common.ApiResponse;
-import com.yungouos.springboot.demo.service.wxpay.WxPayService;
-
-import cn.hutool.core.util.StrUtil;
 
 @RestController
 @RequestMapping("/api/wxpay")

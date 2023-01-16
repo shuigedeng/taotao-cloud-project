@@ -9,11 +9,11 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import java.time.Instant;
 import java.util.Objects;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.oauth2.core.OAuth2TokenType;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
+import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 
 public class CloudOAuth2AuthorizationService extends JdbcOAuth2AuthorizationService {

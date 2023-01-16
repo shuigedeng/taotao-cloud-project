@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.api.web.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 /**
  * 店铺设置
  *
- * 
  * @since 2020/12/16 15:15
  */
 @Data

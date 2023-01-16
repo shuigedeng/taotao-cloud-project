@@ -1,21 +1,20 @@
 package com.taotao.cloud.im.biz.platform.modules.shake.vo;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 public class ShakeVo01 {
 
-    /**
-     * 经度
-     */
-    @NotNull(message = "经度不能为空")
-    private Double longitude;
-    /**
-     * 纬度
-     */
-    @NotNull(message = "纬度不能为空")
-    private Double latitude;
+	/**
+	 * 经度
+	 */
+	@NotNull(message = "经度不能为空")
+	private Double longitude;
+	/**
+	 * 纬度
+	 */
+	@NotNull(message = "纬度不能为空")
+	private Double latitude;
 
 }

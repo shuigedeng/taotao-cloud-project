@@ -5,11 +5,11 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.ApplyBanquetEntity;
-import com.taotao.cloud.workflow.biz.form.model.applybanquet.ApplyBanquetForm;
-import com.taotao.cloud.workflow.biz.form.model.applybanquet.ApplyBanquetInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.applybanquet.ApplyBanquetForm;
+import com.taotao.cloud.workflow.api.common.model.form.applybanquet.ApplyBanquetInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ApplyBanquetService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.taotao.cloud.xxljob.core.util;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Cookie.Util
@@ -15,17 +15,18 @@ public class CookieUtil {
 	private static final int COOKIE_MAX_AGE = Integer.MAX_VALUE;
 	// 保存路径,根路径
 	private static final String COOKIE_PATH = "/";
-	
+
 	/**
 	 * 保存
 	 *
 	 * @param response
 	 * @param key
 	 * @param value
-	 * @param ifRemember 
+	 * @param ifRemember
 	 */
-	public static void set(HttpServletResponse response, String key, String value, boolean ifRemember) {
-		int age = ifRemember?COOKIE_MAX_AGE:-1;
+	public static void set(HttpServletResponse response, String key, String value,
+			boolean ifRemember) {
+		int age = ifRemember ? COOKIE_MAX_AGE : -1;
 		set(response, key, value, null, COOKIE_PATH, age, true);
 	}
 
@@ -37,7 +38,8 @@ public class CookieUtil {
 	 * @param value
 	 * @param maxAge
 	 */
-	private static void set(HttpServletResponse response, String key, String value, String domain, String path, int maxAge, boolean isHttpOnly) {
+	private static void set(HttpServletResponse response, String key, String value, String domain,
+			String path, int maxAge, boolean isHttpOnly) {
 		Cookie cookie = new Cookie(key, value);
 		if (domain != null) {
 			cookie.setDomain(domain);
@@ -47,7 +49,7 @@ public class CookieUtil {
 		cookie.setHttpOnly(isHttpOnly);
 		response.addCookie(cookie);
 	}
-	
+
 	/**
 	 * 查询value
 	 *
@@ -80,7 +82,7 @@ public class CookieUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 删除Cookie
 	 *
@@ -88,7 +90,8 @@ public class CookieUtil {
 	 * @param response
 	 * @param key
 	 */
-	public static void remove(HttpServletRequest request, HttpServletResponse response, String key) {
+	public static void remove(HttpServletRequest request, HttpServletResponse response,
+			String key) {
 		Cookie cookie = get(request, key);
 		if (cookie != null) {
 			set(response, key, "", null, COOKIE_PATH, 0, true);

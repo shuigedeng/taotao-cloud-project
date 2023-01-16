@@ -21,6 +21,7 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.IDraftGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.util.QueryUtil;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -131,7 +132,7 @@ public class DraftGoodsServiceImpl extends
 
 	@Override
 	public IPage<DraftGoods> getDraftGoods(DraftGoodsPageQuery searchParams) {
-		return this.page(searchParams.buildMpPage(), searchParams.queryWrapper());
+		return this.page(searchParams.buildMpPage(), QueryUtil.draftGoodsQueryWrapper(searchParams));
 	}
 
 	/**

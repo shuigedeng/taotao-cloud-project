@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
@@ -10,6 +10,10 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -21,11 +25,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * 管理端,商品计量单位接口
@@ -50,8 +49,8 @@ public class GoodsUnitManagerController {
 	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<GoodsUnit>> getByPage(PageParam pageParam) {
-		IPage<GoodsUnit> page = goodsUnitService.page(pageParam.buildMpPage());
+	public Result<PageResult<GoodsUnit>> getByPage(PageQuery PageQuery) {
+		IPage<GoodsUnit> page = goodsUnitService.page(PageQuery.buildMpPage());
 		return Result.success(PageResult.convertMybatisPage(page, GoodsUnit.class));
 	}
 
@@ -76,7 +75,7 @@ public class GoodsUnitManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@NotNull @PathVariable Long id,
-								  @Valid @RequestBody GoodsUnit goodsUnit) {
+			@Valid @RequestBody GoodsUnit goodsUnit) {
 		goodsUnit.setId(Long.valueOf(id));
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}

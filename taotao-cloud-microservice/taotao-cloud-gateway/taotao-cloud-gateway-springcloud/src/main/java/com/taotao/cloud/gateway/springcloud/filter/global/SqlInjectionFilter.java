@@ -165,7 +165,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 		Flux<DataBuffer> body = serverHttpRequest.getBody();
 		AtomicReference<String> bodyRef = new AtomicReference<>();
 		body.subscribe(buffer -> {
-			CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.asByteBuffer());
+			CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.toByteBuffer());
 			DataBufferUtils.release(buffer);
 			bodyRef.set(charBuffer.toString());
 		});

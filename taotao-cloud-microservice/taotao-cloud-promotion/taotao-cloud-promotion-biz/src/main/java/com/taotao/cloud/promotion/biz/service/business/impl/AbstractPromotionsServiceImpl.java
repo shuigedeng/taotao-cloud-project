@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.model.query.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -139,7 +139,7 @@ public class AbstractPromotionsServiceImpl<M extends BaseSuperMapper<T>, T exten
 	}
 
 	@Override
-	public <S extends BasePromotionsSearchQuery> IPage<T> pageFindAll(S searchParams, PageParam page) {
+	public <S extends BasePromotionsSearchQuery> IPage<T> pageFindAll(S searchParams, PageQuery page) {
 		// page.setNotConvert(false);
 		return this.page(page.buildMpPage(), searchParams.queryWrapper());
 	}

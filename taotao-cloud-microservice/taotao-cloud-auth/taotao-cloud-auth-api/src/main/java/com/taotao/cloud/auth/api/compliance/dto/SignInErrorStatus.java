@@ -1,4 +1,4 @@
-//
+package com.taotao.cloud.auth.api.compliance.dto;//
 // package com.taotao.cloud.auth.api.compliance.dto;
 //
 // import cn.herodotus.engine.assistant.core.definition.domain.AbstractEntity;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.member.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,7 +39,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "MemberPointHistoryPageQuery", description = "会员query")
-public class MemberPointHistoryPageQuery extends PageParam implements Serializable {
+public class MemberPointHistoryPageQuery extends PageQuery implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;

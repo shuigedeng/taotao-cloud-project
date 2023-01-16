@@ -3,6 +3,11 @@ package com.taotao.cloud.promotion.biz.model.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,12 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 
 /**
@@ -81,17 +80,19 @@ public class KanjiaActivity extends BaseSuperEntity<KanjiaActivity, Long> {
 
 	/**
 	 * 砍价活动状态
+	 *
 	 * @see KanJiaStatusEnum
 	 */
 	@Column(name = "status", columnDefinition = "varchar(255) not null comment '砍价活动状态'")
 	private String status;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-			o)) {
+				o)) {
 			return false;
 		}
 		KanjiaActivity kanjiaActivity = (KanjiaActivity) o;

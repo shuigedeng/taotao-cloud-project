@@ -16,6 +16,7 @@
 package com.taotao.cloud.gateway.springcloud;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import java.io.File;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,21 +37,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudGatewayApplication {
 
 	public static void main(String[] args) {
-		setNacosProperty();
-		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
-	}
+		PropertyUtils.setDefaultProperty("taotao-cloud-gateway-springcloud");
 
-	public static void setNacosProperty() {
-		/**
-		 * 设置nacos客户端日志和快照目录
-		 *
-		 * @see LocalConfigInfoProcessor
-		 */
-		String userHome = System.getProperty("user.home");
-		System.setProperty("JM.LOG.PATH", userHome + File.separator + "logs" + File.separator
-			+ "taotao-cloud-gateway-springcloud");
-		System.setProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs" + File.separator
-			+ "taotao-cloud-gateway-springcloud");
-		System.setProperty("nacos.logging.default.config.enabled", "true");
+		try {
+			SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

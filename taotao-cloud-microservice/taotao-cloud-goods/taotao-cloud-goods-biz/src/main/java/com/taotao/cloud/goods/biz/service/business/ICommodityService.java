@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.goods.api.model.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
@@ -46,11 +46,11 @@ public interface ICommodityService extends BaseSuperService<Commodity, Long> {
 	/**
 	 * 查看直播商品分页
 	 *
-	 * @param pageParam   分页
+	 * @param PageQuery   分页
 	 * @param name        商品名称
 	 * @param auditStatus 审核状态
 	 * @return {@link IPage }<{@link CommoditySkuVO }>
 	 * @since 2022-04-27 16:59:47
 	 */
-	IPage<CommoditySkuVO> commodityList(PageParam pageParam, String name, String auditStatus);
+	IPage<CommoditySkuVO> commodityList(PageQuery PageQuery, String name, String auditStatus);
 }

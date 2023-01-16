@@ -1,20 +1,18 @@
-
 package com.taotao.cloud.promotion.biz.model.entity;
 
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
+import jakarta.persistence.Column;
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import javax.persistence.Column;
-import java.io.Serial;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * 促销活动基础类
@@ -29,7 +27,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable> extends
-	BaseSuperEntity<T, I> {
+		BaseSuperEntity<T, I> {
 
 	@Serial
 	private static final long serialVersionUID = 7814832369110695758L;
@@ -65,8 +63,7 @@ public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable>
 	private LocalDateTime endTime;
 
 	/**
-	 * @see PromotionsScopeTypeEnum
-	 * 关联范围类型
+	 * @see PromotionsScopeTypeEnum 关联范围类型
 	 */
 	@Column(name = "scope_type", columnDefinition = "varchar(255) not null comment '关联范围类型'")
 	private String scopeType = PromotionsScopeTypeEnum.PORTION_GOODS.name();
@@ -84,7 +81,7 @@ public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable>
 	public String getPromotionStatus() {
 		if (endTime == null) {
 			return startTime != null ? PromotionsStatusEnum.START.name()
-				: PromotionsStatusEnum.CLOSE.name();
+					: PromotionsStatusEnum.CLOSE.name();
 		}
 		LocalDateTime now = LocalDateTime.now();
 		if (now.isBefore(startTime)) {

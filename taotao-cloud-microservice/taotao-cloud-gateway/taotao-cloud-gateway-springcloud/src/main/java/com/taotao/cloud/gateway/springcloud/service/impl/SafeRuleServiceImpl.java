@@ -46,7 +46,7 @@ public class SafeRuleServiceImpl implements ISafeRuleService {
 		try {
 			URI originUri = getOriginRequestUri(exchange);
 			String requestIp = RequestUtils.getRemoteAddr(request);
-			String requestMethod = request.getMethodValue();
+			String requestMethod = request.getMethod().name();
 			AtomicBoolean forbid = new AtomicBoolean(false);
 			// 从缓存中获取黑名单信息
 			Set<Object> blackLists = ruleCacheService.getBlackList(requestIp);

@@ -5,7 +5,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.message.api.model.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.biz.mapper.StoreMessageMapper;
 import com.taotao.cloud.message.biz.model.entity.StoreMessage;
@@ -33,7 +33,7 @@ public class StoreMessageServiceImpl extends
 
 	@Override
 	public IPage<StoreMessage> getPage(StoreMessageQueryVO storeMessageQueryVO,
-		PageParam PageParam) {
+		PageQuery PageQuery) {
 
 		QueryWrapper<StoreMessage> queryWrapper = new QueryWrapper<>();
 		//消息id查询
@@ -49,7 +49,7 @@ public class StoreMessageServiceImpl extends
 			queryWrapper.eq("status", storeMessageQueryVO.getStatus());
 		}
 		queryWrapper.orderByDesc("status");
-		// return this.baseMapper.queryByParams(PageUtil.initPage(PageParam), queryWrapper);
+		// return this.baseMapper.queryByParams(PageUtil.initPage(PageQuery), queryWrapper);
 		return null;
 	}
 

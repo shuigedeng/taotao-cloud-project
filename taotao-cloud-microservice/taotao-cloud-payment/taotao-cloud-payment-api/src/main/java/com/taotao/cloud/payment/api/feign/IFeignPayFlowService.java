@@ -25,6 +25,6 @@ public interface IFeignPayFlowService {
 	 * @since 2020/11/20 上午10:45
 	 */
 	@GetMapping("/pay/flow/info/id/{id:[0-9]*}")
-	Result<PayFlowVO> findPayFlowById(@PathVariable(value = "id") Long id);
+	PayFlowVO findPayFlowById(@PathVariable(value = "id") Long id);
 }
 

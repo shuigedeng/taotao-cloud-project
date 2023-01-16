@@ -420,6 +420,9 @@ seata:
     enable-client-batch-send-request: true
 
 spring:
+  config:
+    activate:
+      on-profile: pro
   #  dynamic:
   #    tp:
   #      enabled: true

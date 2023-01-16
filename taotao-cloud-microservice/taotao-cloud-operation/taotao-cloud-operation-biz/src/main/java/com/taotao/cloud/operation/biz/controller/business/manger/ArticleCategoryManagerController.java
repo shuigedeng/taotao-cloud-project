@@ -1,15 +1,15 @@
 package com.taotao.cloud.operation.biz.controller.business.manger;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.operation.api.model.vo.ArticleCategoryVO;
 import com.taotao.cloud.operation.biz.model.entity.ArticleCategory;
 import com.taotao.cloud.operation.biz.service.business.ArticleCategoryService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,6 +34,7 @@ public class ArticleCategoryManagerController {
 	 */
 	@Autowired
 	private ArticleCategoryService articleCategoryService;
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "查询分类列表")
@@ -46,14 +47,16 @@ public class ArticleCategoryManagerController {
 		}
 		return null;
 	}
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "查看文章分类")
 	@GetMapping(value = "/{id}")
 	public Result<ArticleCategory> getArticleCategory(
-		@Parameter(description = "文章分类ID") @PathVariable String id) {
+			@Parameter(description = "文章分类ID") @PathVariable String id) {
 		return Result.success(this.articleCategoryService.getById(id));
 	}
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "保存文章分类")
@@ -68,12 +71,13 @@ public class ArticleCategoryManagerController {
 
 		return Result.success(articleCategoryService.saveArticleCategory(articleCategory));
 	}
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "修改文章分类")
 	@PutMapping("/update/{id}")
 	public Result<ArticleCategory> update(@Valid ArticleCategory articleCategory,
-		@Parameter(description = "文章分类ID") @PathVariable("id") String id) {
+			@Parameter(description = "文章分类ID") @PathVariable("id") String id) {
 
 		if (articleCategory.getLevel() == null) {
 			articleCategory.setLevel(0);
@@ -85,12 +89,13 @@ public class ArticleCategoryManagerController {
 		articleCategory.setId(id);
 		return Result.success(articleCategoryService.updateArticleCategory(articleCategory));
 	}
+
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "删除文章分类")
 	@DeleteMapping("/{id}")
 	public Result<ArticleCategory> deleteById(
-		@Parameter(description = "文章分类ID") @PathVariable String id) {
+			@Parameter(description = "文章分类ID") @PathVariable String id) {
 		articleCategoryService.deleteById(id);
 		return Result.success();
 	}

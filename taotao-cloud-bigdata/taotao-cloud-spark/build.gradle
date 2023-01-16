@@ -17,28 +17,28 @@ sourceSets {
 }
 
 dependencies {
-    implementation "org.apache.spark:spark-core_2.12:3.2.2"
-    implementation "org.apache.spark:spark-sql_2.12:3.2.2"
-    implementation "org.apache.spark:spark-hive_2.12:3.2.2"
-    implementation "org.apache.spark:spark-streaming_2.12:3.2.2"
-    implementation "org.apache.spark:spark-avro_2.12:3.2.2"
-    implementation "org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.2"
-    implementation "org.apache.spark:spark-streaming-kafka-0-10_2.12:3.2.1"
+    implementation "org.apache.spark:spark-core_2.12:3.3.1"
+    implementation "org.apache.spark:spark-sql_2.12:3.3.1"
+    implementation "org.apache.spark:spark-hive_2.12:3.3.1"
+    implementation "org.apache.spark:spark-streaming_2.12:3.3.1"
+    implementation "org.apache.spark:spark-avro_2.12:3.3.1"
+    implementation "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.1"
+    implementation "org.apache.spark:spark-streaming-kafka-0-10_2.12:3.3.1"
 
-    implementation "org.apache.hudi:hudi-spark3.1-bundle_2.12:0.12.0"
+    implementation "org.apache.hudi:hudi-spark3.1-bundle_2.12:0.12.2"
 
     implementation("net.heartsavior.spark:spark-sql-kafka-offset-committer_2.12:0.4.0-spark-3.0") {
         exclude group: "org.scala-lang", module: "scala-library"
     }
 
-    implementation "org.apache.hadoop:hadoop-common:3.3.2"
-    implementation "org.apache.hadoop:hadoop-mapreduce-client-core:3.3.2"
-    implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.3.2"
-    implementation "org.apache.hadoop:hadoop-hdfs:3.3.2"
+    implementation "org.apache.hadoop:hadoop-common:3.3.4"
+    implementation "org.apache.hadoop:hadoop-mapreduce-client-core:3.3.4"
+    implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.3.4"
+    implementation "org.apache.hadoop:hadoop-hdfs:3.3.4"
 
     implementation 'org.scala-lang:scala-library:2.13.10'
     implementation 'org.scala-lang:scala-reflect:2.13.10'
 
-    implementation 'org.slf4j:slf4j-api:2.0.3'
-    implementation 'org.slf4j:slf4j-log4j12:2.0.3'
+    implementation 'org.slf4j:slf4j-api:2.0.6'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.6'
 }

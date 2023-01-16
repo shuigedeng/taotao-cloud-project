@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.biz.controller.business.seller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.vo.GoodsUnitVO;
@@ -41,8 +41,8 @@ public class GoodsUnitStoreController {
 	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageResult<GoodsUnitVO>> getByPage(PageParam pageParam) {
-		IPage<GoodsUnit> page = goodsUnitService.page(pageParam.buildMpPage());
+	public Result<PageResult<GoodsUnitVO>> getByPage(PageQuery pageQuery) {
+		IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
 		return Result.success(PageResult.convertMybatisPage(page, GoodsUnitVO.class));
 	}
 

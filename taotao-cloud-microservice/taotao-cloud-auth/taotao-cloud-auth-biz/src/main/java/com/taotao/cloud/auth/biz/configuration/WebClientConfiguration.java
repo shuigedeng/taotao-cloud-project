@@ -1,5 +1,10 @@
 package com.taotao.cloud.auth.biz.configuration;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,14 +24,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
 /**
- * WebClientConfiguration 
+ * WebClientConfiguration
  *
  * @author shuigedeng
  * @version 2022.03
@@ -39,29 +38,28 @@ public class WebClientConfiguration {
 	WebClient webClient(OAuth2AuthorizedClientManager authorizedClientManager) {
 
 		ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2Client =
-			new ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
+				new ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
 
 		return WebClient
-			.builder()
-			.apply(oauth2Client.oauth2Configuration())
-			.build();
+				.builder()
+				.apply(oauth2Client.oauth2Configuration())
+				.build();
 	}
 
 	@Bean
 	OAuth2AuthorizedClientManager authorizedClientManager(
-		ClientRegistrationRepository clientRegistrationRepository,
-		OAuth2AuthorizedClientRepository authorizedClientRepository) {
+			ClientRegistrationRepository clientRegistrationRepository,
+			OAuth2AuthorizedClientRepository authorizedClientRepository) {
 
 		OAuth2AuthorizedClientProvider authorizedClientProvider =
-			OAuth2AuthorizedClientProviderBuilder.builder()
-				.authorizationCode()
-				.refreshToken()
-				.clientCredentials()
-				.password()
-				.build();
+				OAuth2AuthorizedClientProviderBuilder.builder()
+						.authorizationCode()
+						.refreshToken()
+						.clientCredentials()
+						.build();
 
 		DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(
-			clientRegistrationRepository, authorizedClientRepository);
+				clientRegistrationRepository, authorizedClientRepository);
 
 		authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
 
@@ -79,7 +77,7 @@ public class WebClientConfiguration {
 			Map<String, Object> contextAttributes = Collections.emptyMap();
 
 			HttpServletRequest servletRequest = authorizeRequest.getAttribute(
-				HttpServletRequest.class.getName());
+					HttpServletRequest.class.getName());
 
 			String username = servletRequest.getParameter(OAuth2ParameterNames.USERNAME);
 			String password = servletRequest.getParameter(OAuth2ParameterNames.PASSWORD);
@@ -87,18 +85,16 @@ public class WebClientConfiguration {
 			if (StringUtils.hasText(scope)) {
 				contextAttributes = new HashMap<>();
 				contextAttributes.put(OAuth2AuthorizationContext.REQUEST_SCOPE_ATTRIBUTE_NAME,
-					StringUtils.delimitedListToStringArray(scope, " "));
+						StringUtils.delimitedListToStringArray(scope, " "));
 			}
 
 			if (!StringUtils.hasText(username) && !StringUtils.hasText(password)) {
 				Authentication authentication = authorizeRequest.getPrincipal();
-				if (authentication instanceof UsernamePasswordAuthenticationToken) {
-					UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+				if (authentication instanceof UsernamePasswordAuthenticationToken token) {
 					Object principal = token.getPrincipal();
 					username = token.getName();
 					password = (String) token.getCredentials();
-					if (principal instanceof User) {
-						User user = (User) principal;
+					if (principal instanceof User user) {
 						username = user.getUsername();
 					}
 				}

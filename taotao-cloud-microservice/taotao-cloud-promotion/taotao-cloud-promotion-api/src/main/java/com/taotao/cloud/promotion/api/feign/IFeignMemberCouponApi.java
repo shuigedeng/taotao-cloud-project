@@ -4,6 +4,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignMemberCouponApiFallback;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 远程调用会员用户模块
@@ -14,9 +15,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberCouponApiFallback.class)
 public interface IFeignMemberCouponApi {
 
-
+	@GetMapping(value = "/used")
 	void used(List<String> ids);
-
+	@GetMapping(value = "/receiveCoupon")
 	void receiveCoupon(String couponId, Long memberId, String memberName);
 }
 

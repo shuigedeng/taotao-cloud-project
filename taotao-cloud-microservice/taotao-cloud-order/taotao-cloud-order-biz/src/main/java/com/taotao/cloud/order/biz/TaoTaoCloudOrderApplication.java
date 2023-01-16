@@ -1,12 +1,9 @@
 package com.taotao.cloud.order.biz;
 
-import com.taotao.cloud.rocketmq.channel.TaoTaoCloudSink;
-import com.taotao.cloud.rocketmq.channel.TaoTaoCloudSource;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -19,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 2022.04
  * @since 2022-04-28 08:48:21
  */
-@EnableBinding({TaoTaoCloudSink.class, TaoTaoCloudSource.class})
+//@EnableBinding({TaoTaoCloudSink.class, TaoTaoCloudSource.class})
 @TaoTaoCloudApplication
 public class TaoTaoCloudOrderApplication {
 

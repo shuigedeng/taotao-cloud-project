@@ -1,10 +1,10 @@
 package com.taotao.cloud.goods.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.goods.api.model.vo.StudioCommodityVO;
 import com.taotao.cloud.goods.biz.model.entity.Studio;
-import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;
+import com.taotao.cloud.mq.stream.framework.trigger.message.BroadcastMessage;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 /**
@@ -77,13 +77,13 @@ public interface IStudioService extends BaseSuperService<Studio, Long> {
 	/**
 	 * 获取直播间列表
 	 *
-	 * @param pageParam 分页
+	 * @param PageQuery 分页
 	 * @param recommend 是否推荐
 	 * @param status    直播间状态
 	 * @return {@link IPage }<{@link Studio }>
 	 * @since 2022-04-27 17:01:12
 	 */
-	IPage<Studio> studioList(PageParam pageParam, Integer recommend, String status);
+	IPage<Studio> studioList(PageQuery PageQuery, Integer recommend, String status);
 
 	/**
 	 * 修改直播间状态

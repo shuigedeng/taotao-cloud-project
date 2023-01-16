@@ -17,7 +17,6 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.dto.role.RoleSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.role.RoleUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.role.RoleQueryVO;
@@ -26,13 +25,14 @@ import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.controller.BaseSuperController;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,15 +55,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/role")
 @Tag(name = "平台管理端-角色管理API", description = "平台管理端-角色管理API")
 public class ManagerRoleController extends
-        BaseSuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
+		BaseSuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
 	@Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:role:info:userId')")
 	@GetMapping("/userId/{userId}")
 	public Result<List<RoleQueryVO>> findRoleByUserId(
-		@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
-		@PathVariable(name = "userId") Long userId) {
+			@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
+			@PathVariable(name = "userId") Long userId) {
 		List<RoleBO> roles = service().findRoleByUserIds(Set.of(userId));
 		List<RoleQueryVO> result = RoleConvert.INSTANCE.convertListVO(roles);
 		return success(result);
@@ -74,8 +74,8 @@ public class ManagerRoleController extends
 	@PreAuthorize("hasAuthority('sys:role:info:userIds')")
 	@GetMapping("/userId")
 	public Result<List<RoleQueryVO>> findRoleByUserIds(
-		@Parameter(description = "用户id列表", required = true) @NotEmpty(message = "用户id列表不能为空")
-		@RequestParam Set<Long> userIds) {
+			@Parameter(description = "用户id列表", required = true) @NotEmpty(message = "用户id列表不能为空")
+			@RequestParam Set<Long> userIds) {
 		List<RoleBO> roles = service().findRoleByUserIds(userIds);
 		List<RoleQueryVO> result = RoleConvert.INSTANCE.convertListVO(roles);
 		return success(result);
@@ -86,10 +86,10 @@ public class ManagerRoleController extends
 	@PreAuthorize("hasAuthority('sys:role:menu')")
 	@PutMapping("/resources/{roleId}")
 	public Result<Boolean> saveRoleMenus(
-		@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
-		@PathVariable(name = "roleId") Long roleId,
-		@Parameter(description = "菜单id列表", required = true) @NotEmpty(message = "菜单id列表不能为空")
-		@RequestBody Set<Long> menuIds) {
+			@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
+			@PathVariable(name = "roleId") Long roleId,
+			@Parameter(description = "菜单id列表", required = true) @NotEmpty(message = "菜单id列表不能为空")
+			@RequestBody Set<Long> menuIds) {
 		return success(service().saveRoleMenus(roleId, menuIds));
 	}
 }

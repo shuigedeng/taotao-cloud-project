@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.core.payment.service;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.payment.dao.PaymentManager;
 import com.taotao.cloud.payment.biz.bootx.dto.payment.PayChannelInfo;
 import com.taotao.cloud.payment.biz.bootx.dto.payment.PaymentDto;
@@ -88,14 +88,14 @@ public class PaymentQueryService {
     /**
      * 分页
      */
-    public PageResult<PaymentDto> page(PageParam pageParam, PaymentQuery param, OrderParam orderParam){
-        return MpUtil.convert2DtoPageResult(paymentManager.page(pageParam,param,orderParam));
+    public PageResult<PaymentDto> page(PageQuery PageQuery, PaymentQuery param, OrderParam orderParam){
+        return MpUtil.convert2DtoPageResult(paymentManager.page(PageQuery,param,orderParam));
     }
 
     /**
      * 超级查询
      */
-    public PageResult<PaymentDto> superPage(PageParam pageParam, QueryParams queryParams){
-        return MpUtil.convert2DtoPageResult(paymentManager.superPage(pageParam,queryParams));
+    public PageResult<PaymentDto> superPage(PageQuery PageQuery, QueryParams queryParams){
+        return MpUtil.convert2DtoPageResult(paymentManager.superPage(PageQuery,queryParams));
     }
 }

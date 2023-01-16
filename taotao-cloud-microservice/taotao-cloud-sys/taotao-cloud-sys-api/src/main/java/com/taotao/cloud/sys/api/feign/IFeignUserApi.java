@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserApiFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, contextId = "feignUserApi", fallbackFactory = FeignUserApiFallback.class)
 public interface IFeignUserApi {
 
 	/**
@@ -36,7 +36,8 @@ public interface IFeignUserApi {
 	 * @since 2020/4/29 17:47
 	 */
 	@GetMapping(value = "/user/info/social/{social}", headers = {"from=in"})
-	SecurityUser getUserInfoBySocial(@RequestParam("providerId") String providerId, @RequestParam("providerUserId") int providerUserId);
+	SecurityUser getUserInfoBySocial(@RequestParam("providerId") String providerId,
+		@RequestParam("providerUserId") int providerUserId);
 
 	/**
 	 * 通过用户名查询用户包括角色权限等

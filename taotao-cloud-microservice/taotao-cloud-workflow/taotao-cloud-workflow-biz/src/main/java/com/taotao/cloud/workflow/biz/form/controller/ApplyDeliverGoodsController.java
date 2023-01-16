@@ -6,13 +6,13 @@ import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.ApplyDeliverGoodsEntity;
 import com.taotao.cloud.workflow.biz.form.entity.ApplyDeliverGoodsEntryEntity;
-import com.taotao.cloud.workflow.biz.form.model.applydelivergoods.ApplyDeliverGoodsEntryInfoModel;
-import com.taotao.cloud.workflow.biz.form.model.applydelivergoods.ApplyDeliverGoodsForm;
-import com.taotao.cloud.workflow.biz.form.model.applydelivergoods.ApplyDeliverGoodsInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.applydelivergoods.ApplyDeliverGoodsEntryInfoModel;
+import com.taotao.cloud.workflow.api.common.model.form.applydelivergoods.ApplyDeliverGoodsForm;
+import com.taotao.cloud.workflow.api.common.model.form.applydelivergoods.ApplyDeliverGoodsInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ApplyDeliverGoodsService;
 
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;

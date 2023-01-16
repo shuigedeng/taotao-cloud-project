@@ -1,4 +1,4 @@
-// package com.taotao.cloud.backend.graphql.repository;
+package com.taotao.cloud.graphql.repository;// package com.taotao.cloud.backend.graphql.repository;
 //
 // import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 // import org.springframework.data.repository.CrudRepository;

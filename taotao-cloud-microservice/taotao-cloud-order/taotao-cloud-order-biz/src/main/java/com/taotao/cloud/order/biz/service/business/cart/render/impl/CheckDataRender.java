@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.biz.service.business.cart.render.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -73,8 +74,10 @@ public class CheckDataRender implements ICartRenderStep {
 	 * @since 2022-04-28 08:52:11
 	 */
 	private void checkData(TradeDTO tradeDTO) {
+		List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
+
 		//循环购物车中的商品
-		for (CartSkuVO cartSkuVO : tradeDTO.getSkuList()) {
+		for (CartSkuVO cartSkuVO : cartSkuVOS) {
 
 			//如果失效，确认sku为未选中状态
 			if (Boolean.TRUE.equals(cartSkuVO.getInvalid())) {
@@ -83,22 +86,22 @@ public class CheckDataRender implements ICartRenderStep {
 			}
 
 			//缓存中的商品信息
-			GoodsSku dataSku = goodsSkuService.getGoodsSkuByIdFromCache(
-				cartSkuVO.getGoodsSku().getId());
+			GoodsSku dataSku = goodsSkuService.getGoodsSkuByIdFromCache(cartSkuVO.getGoodsSku().getId());
+			Map<String, Object> promotionMap = promotionGoodsService.getCurrentGoodsPromotion(dataSku, tradeDTO.getCartTypeEnum().name());
 			//商品有效性判定
-			if (dataSku == null || dataSku.getUpdateTime()
-				.before(cartSkuVO.getGoodsSku().getUpdateTime())) {
-				//设置购物车未选中
-				cartSkuVO.setChecked(false);
-				//设置购物车此sku商品已失效
-				cartSkuVO.setInvalid(true);
-				//设置失效消息
-				cartSkuVO.setErrorMessage("商品信息发生变化,已失效");
+			if (dataSku == null || dataSku.getUpdateTime().after(cartSkuVO.getGoodsSku().getUpdateTime())) {
+				//商品失效,将商品移除并重新填充商品
+				cartSkuVOS.remove(cartSkuVO);
+				//设置新商品
+				CartSkuVO newCartSkuVO = new CartSkuVO(dataSku,promotionMap);
+				newCartSkuVO.setCartType(tradeDTO.getCartTypeEnum());
+				newCartSkuVO.setNum(cartSkuVO.getNum());
+				newCartSkuVO.setSubTotal(CurrencyUtil.mul(newCartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+				cartSkuVOS.add(newCartSkuVO);
 				continue;
 			}
 			//商品上架状态判定
-			if (!GoodsAuthEnum.PASS.name().equals(dataSku.getIsAuth())
-				|| !GoodsStatusEnum.UPPER.name().equals(dataSku.getMarketEnable())) {
+			if (!GoodsAuthEnum.PASS.name().equals(dataSku.getAuthFlag()) || !GoodsStatusEnum.UPPER.name().equals(dataSku.getMarketEnable())) {
 				//设置购物车未选中
 				cartSkuVO.setChecked(false);
 				//设置购物车此sku商品已失效
@@ -112,9 +115,19 @@ public class CheckDataRender implements ICartRenderStep {
 				//设置购物车未选中
 				cartSkuVO.setChecked(false);
 				//设置失效消息
-				cartSkuVO.setErrorMessage(
-					"商品库存不足,现有库存数量[" + dataSku.getQuantity() + "]");
+				cartSkuVO.setErrorMessage("商品库存不足,现有库存数量[" + dataSku.getQuantity() + "]");
 			}
+			//如果存在商品促销活动，则判定商品促销状态
+			if (!cartSkuVO.getCartType().equals(CartTypeEnum.POINTS) && (CollUtil.isNotEmpty(cartSkuVO.getNotFilterPromotionMap()) || Boolean.TRUE.equals(cartSkuVO.getGoodsSku().getPromotionFlag()))) {
+				//获取当前最新的促销信息
+				cartSkuVO.setPromotionMap(this.promotionGoodsService.getCurrentGoodsPromotion(cartSkuVO.getGoodsSku(), tradeDTO.getCartTypeEnum().name()));
+				//设定商品价格
+				Double goodsPrice = cartSkuVO.getGoodsSku().getPromotionFlag() != null && cartSkuVO.getGoodsSku().getPromotionFlag() ? cartSkuVO.getGoodsSku().getPromotionPrice() : cartSkuVO.getGoodsSku().getPrice();
+				cartSkuVO.setPurchasePrice(goodsPrice);
+				cartSkuVO.setUtilPrice(goodsPrice);
+				cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+			}
+
 		}
 	}
 

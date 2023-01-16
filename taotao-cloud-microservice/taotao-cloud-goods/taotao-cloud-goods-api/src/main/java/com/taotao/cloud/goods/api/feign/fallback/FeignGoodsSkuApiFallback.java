@@ -18,27 +18,27 @@ public class FeignGoodsSkuApiFallback implements FallbackFactory<IFeignGoodsSkuA
 	public IFeignGoodsSkuApi create(Throwable throwable) {
 		return new IFeignGoodsSkuApi() {
 			@Override
-			public Result<Boolean> updateGoodsStuck(List<GoodsSkuSpecGalleryVO> goodsSkus) {
+			public Boolean updateGoodsStuck(List<GoodsSkuSpecGalleryVO> goodsSkus) {
 				return null;
 			}
 
 			@Override
-			public Result<Boolean> updateBatchById(List<GoodsSkuSpecGalleryVO> goodsSkus) {
+			public Boolean updateBatchById(List<GoodsSkuSpecGalleryVO> goodsSkus) {
 				return null;
 			}
 
 			@Override
-			public Result<List<GoodsSkuSpecGalleryVO>> getGoodsSkuByIdFromCache(List<Long> skuIds) {
+			public List<GoodsSkuSpecGalleryVO> getGoodsSkuByIdFromCache(List<Long> skuIds) {
 				return null;
 			}
 
 			@Override
-			public Result<GoodsSkuSpecGalleryVO> getGoodsSkuByIdFromCache(Long skuId) {
+			public GoodsSkuSpecGalleryVO getGoodsSkuByIdFromCache(Long skuId) {
 				return null;
 			}
 
 			@Override
-			public Result<Integer> getStock(String skuId) {
+			public Integer getStock(String skuId) {
 				return null;
 			}
 		};

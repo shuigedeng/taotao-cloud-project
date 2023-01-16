@@ -1,6 +1,6 @@
 package com.taotao.cloud.goods.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -19,7 +19,7 @@ import java.io.Serial;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "商品品牌dto")
-public class BrandPageQuery extends PageParam {
+public class BrandPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = 8906820486037326039L;

@@ -1,4 +1,4 @@
-// package com.taotao.cloud.sys.biz.api.controller.tools.redis;
+package com.taotao.cloud.sys.biz.controller.business.tools.redis;// package com.taotao.cloud.sys.biz.api.controller.tools.redis;
 //
 // import com.taotao.cloud.sys.biz.api.controller.tools.redis.dtos.HashKeyScanResult;
 // import com.taotao.cloud.sys.biz.api.controller.tools.redis.dtos.KeyScanResult;

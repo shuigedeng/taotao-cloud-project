@@ -1,9 +1,9 @@
-// package com.taotao.cloud.sys.biz.api.controller.tools.elasticsearch;
+package com.taotao.cloud.sys.biz.controller.business.tools.elasticsearch;// package com.taotao.cloud.sys.biz.api.controller.tools.elasticsearch;
 //
 // import java.io.IOException;
 //
-// import javax.validation.constraints.NotBlank;
-// import javax.validation.constraints.NotNull;
+// import jakarta.validation.constraints.NotBlank;
+// import jakarta.validation.constraints.NotNull;
 //
 // import com.taotao.cloud.sys.biz.api.controller.tools.core.dtos.param.SimpleConnectParam;
 // import com.taotao.cloud.sys.biz.api.controller.tools.core.service.connect.ConnectService;

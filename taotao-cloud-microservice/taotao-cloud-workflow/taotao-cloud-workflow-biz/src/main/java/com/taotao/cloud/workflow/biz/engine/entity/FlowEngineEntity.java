@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
@@ -15,162 +16,162 @@ import lombok.Data;
 @Data
 @TableName("flow_engine")
 @Builder
-public class FlowEngineEntity {
+public class FlowEngineEntity extends SuperEntity<FlowEngineEntity, String> {
 
 	/**
 	 * 流程主键
 	 */
-	@TableId("F_ID")
+	@TableId("id")
 	private String id;
 
 	/**
 	 * 流程编码
 	 */
-	@TableField("F_ENCODE")
+	@TableField("en_code")
 	private String enCode;
 
 	/**
 	 * 流程名称
 	 */
-	@TableField("F_FULLNAME")
+	@TableField("full_name")
 	private String fullName;
 
 	/**
 	 * 流程类型(0.发起流程 1.功能流程)
 	 */
-	@TableField("F_TYPE")
+	@TableField("type")
 	private Integer type;
 
 	/**
 	 * 流程分类
 	 */
-	@TableField("F_CATEGORY")
+	@TableField("category")
 	private String category;
 
 	/**
 	 * 可见类型 0-全部可见、1-指定经办
 	 */
-	@TableField("F_VISIBLETYPE")
+	@TableField("visible_type")
 	private Integer visibleType;
 
 	/**
 	 * 图标
 	 */
-	@TableField("F_ICON")
+	@TableField("icon")
 	private String icon;
 
 	/**
 	 * 图标背景色
 	 */
-	@TableField("F_ICONBACKGROUND")
+	@TableField("icon_background")
 	private String iconBackground;
 
 	/**
 	 * 流程版本
 	 */
-	@TableField("F_VERSION")
+	@TableField("version")
 	private String version;
 
 	/**
 	 * 表单字段
 	 */
-	@TableField("F_FormTemplateJson")
+	@TableField("form_template_json")
 	private String formData;
 
 	/**
 	 * 表单分类(1.系统表单 2.自定义表单)
 	 */
-	@TableField("F_FORMTYPE")
+	@TableField("form_type")
 	private Integer formType;
 
 	/**
 	 * 流程引擎
 	 */
-	@TableField("F_FLOWTEMPLATEJSON")
+	@TableField("flow_template_json")
 	private String flowTemplateJson;
 
 	/**
 	 * 描述
 	 */
-	@TableField("F_DESCRIPTION")
+	@TableField("description")
 	private String description;
 
 	/**
 	 * 列表
 	 */
-	@TableField("F_TABLES")
+	@TableField("tables")
 	@JSONField(name = "tables")
 	private String flowTables;
 
 	/**
 	 * 数据连接
 	 */
-	@TableField("F_DBLINKID")
+	@TableField("db_link_id")
 	private String dbLinkId;
 
 	/**
 	 * app表单路径
 	 */
-	@TableField("F_APPFORMURL")
+	@TableField("app_formurl")
 	private String appFormUrl;
 
 	/**
 	 * pc表单路径
 	 */
-	@TableField("F_FORMURL")
+	@TableField("formurl")
 	private String formUrl;
 
 	/**
 	 * 排序码
 	 */
-	@TableField("F_SORTCODE")
+	@TableField("sort_code")
 	private Long sortCode;
 
 	/**
 	 * 有效标志
 	 */
-	@TableField("F_ENABLEDMARK")
+	@TableField("enabled_mark")
 	private Integer enabledMark;
 
 	/**
 	 * 创建时间
 	 */
-	@TableField(value = "F_CREATORTIME", fill = FieldFill.INSERT)
+	@TableField(value = "creator_time", fill = FieldFill.INSERT)
 	private Date creatorTime;
 
 	/**
 	 * 创建用户
 	 */
-	@TableField(value = "F_CREATORUSERID", fill = FieldFill.INSERT)
+	@TableField(value = "creator_user_id", fill = FieldFill.INSERT)
 	private Long creatorUser;
 
 	/**
 	 * 修改时间
 	 */
-	@TableField(value = "F_LASTMODIFYTIME", fill = FieldFill.UPDATE)
+	@TableField(value = "lastmodify_time", fill = FieldFill.UPDATE)
 	private Date lastModifyTime;
 
 	/**
 	 * 修改用户
 	 */
-	@TableField(value = "F_LASTMODIFYUSERID", fill = FieldFill.UPDATE)
+	@TableField(value = "lastmodify_user_id", fill = FieldFill.UPDATE)
 	private Long lastModifyUser;
 
 	/**
 	 * 删除标志
 	 */
-	@TableField("F_DELETEMARK")
+	@TableField("delete_mark")
 	private Integer deleteMark;
 
 	/**
 	 * 删除时间
 	 */
-	@TableField("F_DELETETIME")
+	@TableField("delete_time")
 	private Date deleteTime;
 
 	/**
 	 * 删除用户
 	 */
-	@TableField("F_DELETEUSERID")
+	@TableField("delete_user_id")
 	private String deleteUserId;
 }

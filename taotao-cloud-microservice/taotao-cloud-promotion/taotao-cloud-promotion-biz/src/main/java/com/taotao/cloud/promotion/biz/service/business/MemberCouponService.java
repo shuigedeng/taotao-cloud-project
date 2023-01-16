@@ -2,7 +2,7 @@ package com.taotao.cloud.promotion.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
@@ -56,7 +56,7 @@ public interface MemberCouponService extends IService<MemberCoupon> {
 	 * @return {@link IPage }<{@link MemberCoupon }>
 	 * @since 2022-04-27 16:43:53
 	 */
-	IPage<MemberCoupon> getMemberCoupons(CouponPageQuery param, PageParam pageVo);
+	IPage<MemberCoupon> getMemberCoupons(CouponPageQuery param, PageQuery pageVo);
 
 	/**
 	 * 获取会员所有优惠券
@@ -75,7 +75,7 @@ public interface MemberCouponService extends IService<MemberCoupon> {
 	 * @return {@link IPage }<{@link MemberCoupon }>
 	 * @since 2022-04-27 16:43:53
 	 */
-	IPage<MemberCoupon> getMemberCouponsByCanUse(CouponPageQuery param, BigDecimal totalPrice, PageParam pageVo);
+	IPage<MemberCoupon> getMemberCouponsByCanUse(CouponPageQuery param, BigDecimal totalPrice, PageQuery pageVo);
 
 	/**
 	 * 获取当前会员当前商品可用的会员优惠券
@@ -138,5 +138,18 @@ public interface MemberCouponService extends IService<MemberCoupon> {
 	 * @since 2022-04-27 16:43:53
 	 */
 	void closeMemberCoupon(List<String> couponIds);
+	/**
+	 * 恢复会员优惠券
+	 *
+	 * @param memberCouponIds 会员优惠券id列表
+	 * @return 是否恢复成功
+	 */
+	boolean recoveryMemberCoupon(List<String> memberCouponIds);
 
+	/**
+	 * 作废优惠券
+	 *
+	 * @param couponId 优惠券ID
+	 */
+	void voidCoupon(String couponId);
 }

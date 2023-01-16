@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.api.model.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +23,7 @@ import java.io.Serial;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "评价查询条件")
-public class EvaluationPageQuery extends PageParam {
+public class EvaluationPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
@@ -64,47 +64,5 @@ public class EvaluationPageQuery extends PageParam {
 	@Schema(description = "状态")
 	private String status;
 
-	// /**
-	//  * 构造查询条件
-	//  *
-	//  * @return 查询条件
-	//  * @author shuigedeng
-	//  * @since 2022/3/14 11:22
-	//  */
-	// public <T> QueryWrapper<T> queryWrapper() {
-	// 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-	// 	if (StringUtils.isNotEmpty(startTime) && StringUtils.isNotEmpty(endTime)) {
-	// 		queryWrapper.between("create_time", startTime, endTime);
-	// 	}
-	// 	if (StringUtils.isNotEmpty(grade)) {
-	// 		queryWrapper.eq("grade", grade);
-	// 	}
-	// 	if (StringUtils.isNotEmpty(goodsName)) {
-	// 		queryWrapper.like("goods_name", goodsName);
-	// 	}
-	// 	if (StringUtils.isNotEmpty(storeName)) {
-	// 		queryWrapper.like("store_name", storeName);
-	// 	}
-	// 	if (StringUtils.isNotEmpty(memberName)) {
-	// 		queryWrapper.like("member_name", memberName);
-	// 	}
-	// 	if (Objects.nonNull(goodsId)) {
-	// 		queryWrapper.eq("goods_id", goodsId);
-	// 	}
-	// 	if (Objects.nonNull(storeId)) {
-	// 		queryWrapper.eq("store_id", storeId);
-	// 	}
-	// 	if (Objects.nonNull(memberId)) {
-	// 		queryWrapper.eq("member_id", memberId);
-	// 	}
-	// 	if (StringUtils.isNotEmpty(haveImage)) {
-	// 		queryWrapper.eq("have_image", haveImage);
-	// 	}
-	// 	if (StringUtils.isNotEmpty(status)) {
-	// 		queryWrapper.eq("status", status);
-	// 	}
-	// 	queryWrapper.eq("delete_flag", false);
-	// 	queryWrapper.orderByDesc("create_time");
-	// 	return queryWrapper;
-	// }
+
 }

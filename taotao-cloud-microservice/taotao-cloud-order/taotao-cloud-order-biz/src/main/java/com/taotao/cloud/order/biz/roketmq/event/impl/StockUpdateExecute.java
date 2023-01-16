@@ -310,7 +310,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 					searchParams.setPromotionId(orderItem.getPromotionId());
 					searchParams.setSkuId(orderItem.getSkuId());
 					PromotionGoodsVO pGoods = promotionGoodsService.getPromotionsGoods(searchParams)
-						.data();
+						;
 					//记录需要更新的促销库存信息
 					promotionKey.add(
 						PromotionGoodsService.getPromotionGoodsStockCacheKey(

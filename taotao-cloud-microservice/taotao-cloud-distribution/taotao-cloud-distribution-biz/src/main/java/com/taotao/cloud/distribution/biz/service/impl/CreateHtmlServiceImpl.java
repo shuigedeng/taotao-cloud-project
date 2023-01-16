@@ -1,6 +1,7 @@
 package com.taotao.cloud.distribution.biz.service.impl;
 
 import com.taotao.cloud.distribution.biz.service.ICreateHtmlService;
+import io.seata.core.model.Result;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -15,6 +16,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,6 +32,7 @@ public class CreateHtmlServiceImpl implements ICreateHtmlService {
 	public Configuration configuration;
 	@Autowired
 	private SeckillRepository seckillRepository;
+
 	@Value("${spring.freemarker.html.path}")
 	private String path;
 

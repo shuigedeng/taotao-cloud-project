@@ -3,12 +3,11 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.sys.api.feign.fallback.FeignMenuApiFallback;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
+import java.util.List;
+import java.util.Set;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * 远程调用后台菜单模块
@@ -17,7 +16,7 @@ import java.util.Set;
  * @version 2022.03
  * @since 2022-03-25 14:09:10
  */
-@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignMenuApiFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, contextId = "feignMenuApi", fallbackFactory = FeignMenuApiFallback.class)
 public interface IFeignMenuApi {
 
 	/**

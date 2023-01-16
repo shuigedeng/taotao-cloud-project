@@ -55,7 +55,7 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	 * @return 经验值设置
 	 */
 	private ExperienceSettingVO getExperienceSetting() {
-		ExperienceSettingVO setting = settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name()).data();
+		ExperienceSettingVO setting = settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name());
 		return setting;
 	}
 }

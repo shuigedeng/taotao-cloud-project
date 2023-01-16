@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
@@ -109,7 +109,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 	}
 
 	@Override
-	public IPage<CouponVO> pageVOFindAll(CouponPageQuery searchParams, PageParam page) {
+	public IPage<CouponVO> pageVOFindAll(CouponPageQuery searchParams, PageQuery page) {
 		IPage<Coupon> couponIPage = super.pageFindAll(searchParams, page);
 		List<CouponVO> couponVOList = couponIPage.getRecords().stream().map(CouponVO::new).collect(Collectors.toList());
 		return PageUtil.convertPage(couponIPage, couponVOList);
@@ -250,7 +250,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_ERROR);
 		}
 		for (String id : split) {
-			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(Long.valueOf(id)).data();
+			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(Long.valueOf(id));
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 			}

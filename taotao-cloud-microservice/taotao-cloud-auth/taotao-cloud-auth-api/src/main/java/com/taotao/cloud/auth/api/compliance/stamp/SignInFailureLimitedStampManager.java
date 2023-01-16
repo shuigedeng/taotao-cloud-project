@@ -1,4 +1,4 @@
-//
+package com.taotao.cloud.auth.api.compliance.stamp;//
 // package com.taotao.cloud.auth.api.compliance.stamp;
 //
 // import cn.herodotus.engine.cache.jetcache.stamp.AbstractCountStampManager;

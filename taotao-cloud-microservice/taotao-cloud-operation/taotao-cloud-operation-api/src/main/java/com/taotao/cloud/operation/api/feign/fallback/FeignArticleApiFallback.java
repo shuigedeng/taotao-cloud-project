@@ -32,9 +32,8 @@ public class FeignArticleApiFallback implements FallbackFactory<IFeignArticleApi
 	public IFeignArticleApi create(Throwable throwable) {
 		return new IFeignArticleApi() {
 			@Override
-			public Result<ArticleVO> getMemberSecurityUser(Long id) {
-				LogUtils.error("调用getMemberSecurityUser异常：{}", throwable, id);
-				return Result.fail(null, 500);
+			public ArticleVO getMemberSecurityUser(Long id) {
+				return null;
 			}
 		};
 	}

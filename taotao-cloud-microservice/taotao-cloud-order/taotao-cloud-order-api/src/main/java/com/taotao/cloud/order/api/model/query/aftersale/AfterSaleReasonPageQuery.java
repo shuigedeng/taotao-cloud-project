@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.api.model.query.aftersale;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -15,7 +15,7 @@ import java.io.Serial;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "售后原因搜索参数")
-public class AfterSaleReasonPageQuery extends PageParam {
+public class AfterSaleReasonPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;

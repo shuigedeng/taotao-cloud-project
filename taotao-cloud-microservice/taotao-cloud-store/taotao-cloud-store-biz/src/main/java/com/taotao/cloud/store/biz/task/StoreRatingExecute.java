@@ -10,17 +10,17 @@ import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.service.StoreService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
+import jakarta.annotation.Resource;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * 店铺评分
  */
 @Component
 public class StoreRatingExecute implements EveryDayExecute {
+
 	/**
 	 * 店铺
 	 */
@@ -35,16 +35,20 @@ public class StoreRatingExecute implements EveryDayExecute {
 	@Override
 	public void execute() {
 		//获取所有开启的店铺
-		List<Store> storeList = storeService.list(new LambdaQueryWrapper<Store>().eq(Store::getStoreDisable, StoreStatusEnum.OPEN.name()));
+		List<Store> storeList = storeService.list(
+				new LambdaQueryWrapper<Store>().eq(Store::getStoreDisable,
+						StoreStatusEnum.OPEN.name()));
 		for (Store store : storeList) {
 			//店铺所有开启的评价
-			StoreRatingVO storeRatingVO = memberEvaluationService.getStoreRatingVO(store.getId(), SwitchEnum.OPEN.name());
+			StoreRatingVO storeRatingVO = memberEvaluationService.getStoreRatingVO(store.getId(),
+					SwitchEnum.OPEN.name());
 
 			if (storeRatingVO != null) {
 				//保存评分
 				LambdaUpdateWrapper<Store> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 				lambdaUpdateWrapper.eq(Store::getId, store.getId());
-				lambdaUpdateWrapper.set(Store::getDescriptionScore, storeRatingVO.getDescriptionScore());
+				lambdaUpdateWrapper.set(Store::getDescriptionScore,
+						storeRatingVO.getDescriptionScore());
 				lambdaUpdateWrapper.set(Store::getDeliveryScore, storeRatingVO.getDeliveryScore());
 				lambdaUpdateWrapper.set(Store::getServiceScore, storeRatingVO.getServiceScore());
 				storeService.update(lambdaUpdateWrapper);

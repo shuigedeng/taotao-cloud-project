@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.bootx.core.paymodel.alipay.dao;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.alipay.entity.AlipayConfig;
 import com.taotao.cloud.payment.biz.bootx.param.paymodel.alipay.AlipayConfigQuery;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,8 @@ public class AlipayConfigManager extends BaseManager<AlipayConfigMapper, AlipayC
         return findByField(AlipayConfig::getActivity,Boolean.TRUE);
     }
 
-    public Page<AlipayConfig> page(PageParam pageParam, AlipayConfigQuery param) {
-        Page<AlipayConfig> mpPage = MpUtil.getMpPage(pageParam, AlipayConfig.class);
+    public Page<AlipayConfig> page(PageQuery PageQuery, AlipayConfigQuery param) {
+        Page<AlipayConfig> mpPage = MpUtil.getMpPage(PageQuery, AlipayConfig.class);
         return lambdaQuery()
                 .select(AlipayConfig.class, MpBigFieldHandler::excludeBigField)
                 .like(StrUtil.isNotBlank(param.getName()),AlipayConfig::getName,param.getName())

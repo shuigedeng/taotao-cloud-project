@@ -37,6 +37,10 @@ import com.taotao.cloud.payment.biz.jeepay.pay.model.WxServiceWrapper;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.msg.ChannelRetMsg;
 import com.taotao.cloud.payment.biz.jeepay.pay.service.ConfigContextQueryService;
 import com.taotao.cloud.payment.biz.jeepay.service.impl.PayOrderService;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.FileInputStream;
+import java.math.BigDecimal;
+import java.security.PrivateKey;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -45,204 +49,217 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.FileInputStream;
-import java.math.BigDecimal;
-import java.security.PrivateKey;
-
 /*
-* 微信回调
-*
-* @author zhuxiao
-* @site https://www.jeequan.com
-* @date 2021/6/8 18:10
-*/
+ * 微信回调
+ *
+ * @author zhuxiao
+ * @site https://www.jeequan.com
+ * @date 2021/6/8 18:10
+ */
 @Service
 @Slf4j
 public class WxpayChannelNoticeService extends AbstractChannelNoticeService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+	@Autowired
+	private ConfigContextQueryService configContextQueryService;
 
-    @Autowired private PayOrderService payOrderService;
+	@Autowired
+	private PayOrderService payOrderService;
 
-    @Override
-    public String getIfCode() {
-        return CS.IF_CODE.WXPAY;
-    }
+	@Override
+	public String getIfCode() {
+		return CS.IF_CODE.WXPAY;
+	}
 
-    @Override
-    public MutablePair<String, Object> parseParams(HttpServletRequest request, String urlOrderId, NoticeTypeEnum noticeTypeEnum) {
+	@Override
+	public MutablePair<String, Object> parseParams(HttpServletRequest request, String urlOrderId,
+			NoticeTypeEnum noticeTypeEnum) {
 
-        try {
-            if(StringUtils.isNotBlank(urlOrderId)){     // V3接口回调
+		try {
+			if (StringUtils.isNotBlank(urlOrderId)) {     // V3接口回调
 
-                // 获取订单信息
-                PayOrder payOrder = payOrderService.getById(urlOrderId);
-                if(payOrder == null){
-                    throw new BizException("订单不存在");
-                }
+				// 获取订单信息
+				PayOrder payOrder = payOrderService.getById(urlOrderId);
+				if (payOrder == null) {
+					throw new BizException("订单不存在");
+				}
 
-                //获取支付参数 (缓存数据) 和 商户信息
-                MchAppConfigContext mchAppConfigContext = configContextQueryService.queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId());
-                if(mchAppConfigContext == null){
-                    throw new BizException("获取商户信息失败");
-                }
+				//获取支付参数 (缓存数据) 和 商户信息
+				MchAppConfigContext mchAppConfigContext = configContextQueryService.queryMchInfoAndAppInfo(
+						payOrder.getMchNo(), payOrder.getAppId());
+				if (mchAppConfigContext == null) {
+					throw new BizException("获取商户信息失败");
+				}
 
-                // 验签 && 获取订单回调数据
-                WxPayOrderNotifyV3Result.DecryptNotifyResult result = parseOrderNotifyV3Result(request, mchAppConfigContext);
+				// 验签 && 获取订单回调数据
+				WxPayOrderNotifyV3Result.DecryptNotifyResult result = parseOrderNotifyV3Result(
+						request, mchAppConfigContext);
 
-                return MutablePair.of(result.getOutTradeNo(), result);
+				return MutablePair.of(result.getOutTradeNo(), result);
 
-            } else {     // V2接口回调
-                String xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
-                if(StringUtils.isEmpty(xmlResult)) {
-                    return null;
-                }
+			} else {     // V2接口回调
+				String xmlResult = IOUtils.toString(request.getInputStream(),
+						request.getCharacterEncoding());
+				if (StringUtils.isEmpty(xmlResult)) {
+					return null;
+				}
 
-                WxPayOrderNotifyResult result = WxPayOrderNotifyResult.fromXML(xmlResult);
-                String payOrderId = result.getOutTradeNo();
-                return MutablePair.of(payOrderId, result);
-            }
-        } catch (Exception e) {
-            log.error("error", e);
-            throw ResponseException.buildText("ERROR");
-        }
-    }
+				WxPayOrderNotifyResult result = WxPayOrderNotifyResult.fromXML(xmlResult);
+				String payOrderId = result.getOutTradeNo();
+				return MutablePair.of(payOrderId, result);
+			}
+		} catch (Exception e) {
+			log.error("error", e);
+			throw ResponseException.buildText("ERROR");
+		}
+	}
 
-    @Override
-    public ChannelRetMsg doNotice(HttpServletRequest request, Object params, PayOrder payOrder, MchAppConfigContext mchAppConfigContext, NoticeTypeEnum noticeTypeEnum) {
-        try {
-            ChannelRetMsg channelResult = new ChannelRetMsg();
-            channelResult.setChannelState(ChannelRetMsg.ChannelState.WAITING); // 默认支付中
+	@Override
+	public ChannelRetMsg doNotice(HttpServletRequest request, Object params, PayOrder payOrder,
+			MchAppConfigContext mchAppConfigContext, NoticeTypeEnum noticeTypeEnum) {
+		try {
+			ChannelRetMsg channelResult = new ChannelRetMsg();
+			channelResult.setChannelState(ChannelRetMsg.ChannelState.WAITING); // 默认支付中
 
-            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+			WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(
+					mchAppConfigContext);
 
-            if (CS.PAY_IF_VERSION.WX_V2.equals(wxServiceWrapper.getApiVersion())) { // V2
-                // 获取回调参数
-                WxPayOrderNotifyResult result = (WxPayOrderNotifyResult) params;
+			if (CS.PAY_IF_VERSION.WX_V2.equals(wxServiceWrapper.getApiVersion())) { // V2
+				// 获取回调参数
+				WxPayOrderNotifyResult result = (WxPayOrderNotifyResult) params;
 
-                WxPayService wxPayService = wxServiceWrapper.getWxPayService();
+				WxPayService wxPayService = wxServiceWrapper.getWxPayService();
 
-                // 验证参数
-                verifyWxPayParams(wxPayService, result, payOrder);
+				// 验证参数
+				verifyWxPayParams(wxPayService, result, payOrder);
 
-                channelResult.setChannelOrderId(result.getTransactionId()); //渠道订单号
-                channelResult.setChannelUserId(result.getOpenid()); //支付用户ID
-                channelResult.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_SUCCESS);
-                channelResult.setResponseEntity(textResp(WxPayNotifyResponse.successResp("OK")));
+				channelResult.setChannelOrderId(result.getTransactionId()); //渠道订单号
+				channelResult.setChannelUserId(result.getOpenid()); //支付用户ID
+				channelResult.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_SUCCESS);
+				channelResult.setResponseEntity(textResp(WxPayNotifyResponse.successResp("OK")));
 
-            }else if (CS.PAY_IF_VERSION.WX_V3.equals(wxServiceWrapper.getApiVersion())) { // V3
-                // 获取回调参数
-                WxPayOrderNotifyV3Result.DecryptNotifyResult result = (WxPayOrderNotifyV3Result.DecryptNotifyResult) params;
+			} else if (CS.PAY_IF_VERSION.WX_V3.equals(wxServiceWrapper.getApiVersion())) { // V3
+				// 获取回调参数
+				WxPayOrderNotifyV3Result.DecryptNotifyResult result = (WxPayOrderNotifyV3Result.DecryptNotifyResult) params;
 
-                // 验证参数
-                verifyWxPayParams(result, payOrder);
+				// 验证参数
+				verifyWxPayParams(result, payOrder);
 
-                String channelState = result.getTradeState();
-                if ("SUCCESS".equals(channelState)) {
-                    channelResult.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_SUCCESS);
-                }else if("CLOSED".equals(channelState)
-                        || "REVOKED".equals(channelState)
-                        || "PAYERROR".equals(channelState)){  //CLOSED—已关闭， REVOKED—已撤销, PAYERROR--支付失败
-                    channelResult.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_FAIL); //支付失败
-                }
+				String channelState = result.getTradeState();
+				if ("SUCCESS".equals(channelState)) {
+					channelResult.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_SUCCESS);
+				} else if ("CLOSED".equals(channelState)
+						|| "REVOKED".equals(channelState)
+						|| "PAYERROR".equals(
+						channelState)) {  //CLOSED—已关闭， REVOKED—已撤销, PAYERROR--支付失败
+					channelResult.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_FAIL); //支付失败
+				}
 
-                channelResult.setChannelOrderId(result.getTransactionId()); //渠道订单号
-                WxPayOrderNotifyV3Result.Payer payer = result.getPayer();
-                if (payer != null) {
-                    channelResult.setChannelUserId(payer.getOpenid()); //支付用户ID
-                }
+				channelResult.setChannelOrderId(result.getTransactionId()); //渠道订单号
+				WxPayOrderNotifyV3Result.Payer payer = result.getPayer();
+				if (payer != null) {
+					channelResult.setChannelUserId(payer.getOpenid()); //支付用户ID
+				}
 
-                JSONObject resJSON = new JSONObject();
-                resJSON.put("code", "SUCCESS");
-                resJSON.put("message", "成功");
+				JSONObject resJSON = new JSONObject();
+				resJSON.put("code", "SUCCESS");
+				resJSON.put("message", "成功");
 
-                ResponseEntity okResponse = jsonResp(resJSON);
-                channelResult.setResponseEntity(okResponse); //响应数据
+				ResponseEntity okResponse = jsonResp(resJSON);
+				channelResult.setResponseEntity(okResponse); //响应数据
 
-            }else {
-                throw ResponseException.buildText("API_VERSION ERROR");
-            }
+			} else {
+				throw ResponseException.buildText("API_VERSION ERROR");
+			}
 
-            return channelResult;
+			return channelResult;
 
-        } catch (Exception e) {
-            log.error("error", e);
-            throw ResponseException.buildText("ERROR");
-        }
-    }
+		} catch (Exception e) {
+			log.error("error", e);
+			throw ResponseException.buildText("ERROR");
+		}
+	}
 
-    /**
-     * V2接口验证微信支付通知参数
-     * @return
-     */
-    public void verifyWxPayParams(WxPayService wxPayService, WxPayOrderNotifyResult result, PayOrder payOrder) {
+	/**
+	 * V2接口验证微信支付通知参数
+	 *
+	 * @return
+	 */
+	public void verifyWxPayParams(WxPayService wxPayService, WxPayOrderNotifyResult result,
+			PayOrder payOrder) {
 
-        try {
-            result.checkResult(wxPayService, WxPayConstants.SignType.MD5, true);
+		try {
+			result.checkResult(wxPayService, WxPayConstants.SignType.MD5, true);
 
-            // 核对金额
-            Integer total_fee = result.getTotalFee();   			// 总金额
-            long wxPayAmt = new BigDecimal(total_fee).longValue();
-            long dbPayAmt = payOrder.getAmount().longValue();
-            if (dbPayAmt != wxPayAmt) {
-                throw ResponseException.buildText("AMOUNT ERROR");
-            }
-        } catch (Exception e) {
-            throw ResponseException.buildText("ERROR");
-        }
-    }
+			// 核对金额
+			Integer total_fee = result.getTotalFee();            // 总金额
+			long wxPayAmt = new BigDecimal(total_fee).longValue();
+			long dbPayAmt = payOrder.getAmount().longValue();
+			if (dbPayAmt != wxPayAmt) {
+				throw ResponseException.buildText("AMOUNT ERROR");
+			}
+		} catch (Exception e) {
+			throw ResponseException.buildText("ERROR");
+		}
+	}
 
-    /**
-     * V3校验通知签名
-     * @param request 请求信息
-     * @param mchAppConfigContext 商户配置
-     * @return true:校验通过 false:校验不通过
-     */
-    private WxPayOrderNotifyV3Result.DecryptNotifyResult parseOrderNotifyV3Result(HttpServletRequest request, MchAppConfigContext mchAppConfigContext) throws Exception {
-        SignatureHeader header = new SignatureHeader();
-        header.setTimeStamp(request.getHeader("Wechatpay-Timestamp"));
-        header.setNonce(request.getHeader("Wechatpay-Nonce"));
-        header.setSerial(request.getHeader("Wechatpay-Serial"));
-        header.setSignature(request.getHeader("Wechatpay-Signature"));
+	/**
+	 * V3校验通知签名
+	 *
+	 * @param request             请求信息
+	 * @param mchAppConfigContext 商户配置
+	 * @return true:校验通过 false:校验不通过
+	 */
+	private WxPayOrderNotifyV3Result.DecryptNotifyResult parseOrderNotifyV3Result(
+			HttpServletRequest request, MchAppConfigContext mchAppConfigContext) throws Exception {
+		SignatureHeader header = new SignatureHeader();
+		header.setTimeStamp(request.getHeader("Wechatpay-Timestamp"));
+		header.setNonce(request.getHeader("Wechatpay-Nonce"));
+		header.setSerial(request.getHeader("Wechatpay-Serial"));
+		header.setSignature(request.getHeader("Wechatpay-Signature"));
 
-        // 获取加密信息
-        String params = getReqParamFromBody();
+		// 获取加密信息
+		String params = getReqParamFromBody();
 
-        log.info("\n【请求头信息】：{}\n【加密数据】：{}", header.toString(), params);
+		log.info("\n【请求头信息】：{}\n【加密数据】：{}", header.toString(), params);
 
-        WxPayService wxPayService = configContextQueryService.getWxServiceWrapper(mchAppConfigContext).getWxPayService();
-        WxPayConfig wxPayConfig = wxPayService.getConfig();
-        // 自动获取微信平台证书
-        PrivateKey privateKey = PemUtils.loadPrivateKey(new FileInputStream(wxPayConfig.getPrivateKeyPath()));
-        AutoUpdateCertificatesVerifier verifier = new AutoUpdateCertificatesVerifier(
-                new WxPayCredentials(wxPayConfig.getMchId(), new PrivateKeySigner(wxPayConfig.getCertSerialNo(), privateKey)),
-                wxPayConfig.getApiV3Key().getBytes("utf-8"));
-        wxPayConfig.setVerifier(verifier);
-        wxPayService.setConfig(wxPayConfig);
+		WxPayService wxPayService = configContextQueryService.getWxServiceWrapper(
+				mchAppConfigContext).getWxPayService();
+		WxPayConfig wxPayConfig = wxPayService.getConfig();
+		// 自动获取微信平台证书
+		PrivateKey privateKey = PemUtils.loadPrivateKey(
+				new FileInputStream(wxPayConfig.getPrivateKeyPath()));
+		AutoUpdateCertificatesVerifier verifier = new AutoUpdateCertificatesVerifier(
+				new WxPayCredentials(wxPayConfig.getMchId(),
+						new PrivateKeySigner(wxPayConfig.getCertSerialNo(), privateKey)),
+				wxPayConfig.getApiV3Key().getBytes("utf-8"));
+		wxPayConfig.setVerifier(verifier);
+		wxPayService.setConfig(wxPayConfig);
 
-        WxPayOrderNotifyV3Result result = wxPayService.parseOrderNotifyV3Result(params, header);
+		WxPayOrderNotifyV3Result result = wxPayService.parseOrderNotifyV3Result(params, header);
 
-        return result.getResult();
-    }
+		return result.getResult();
+	}
 
-    /**
-     * V3接口验证微信支付通知参数
-     * @return
-     */
-    public void verifyWxPayParams(WxPayOrderNotifyV3Result.DecryptNotifyResult result, PayOrder payOrder) {
+	/**
+	 * V3接口验证微信支付通知参数
+	 *
+	 * @return
+	 */
+	public void verifyWxPayParams(WxPayOrderNotifyV3Result.DecryptNotifyResult result,
+			PayOrder payOrder) {
 
-        try {
-            // 核对金额
-            Integer total_fee = result.getAmount().getTotal();   			// 总金额
-            long wxPayAmt = new BigDecimal(total_fee).longValue();
-            long dbPayAmt = payOrder.getAmount().longValue();
-            if (dbPayAmt != wxPayAmt) {
-                throw ResponseException.buildText("AMOUNT ERROR");
-            }
-        } catch (Exception e) {
-            throw ResponseException.buildText("ERROR");
-        }
-    }
+		try {
+			// 核对金额
+			Integer total_fee = result.getAmount().getTotal();            // 总金额
+			long wxPayAmt = new BigDecimal(total_fee).longValue();
+			long dbPayAmt = payOrder.getAmount().longValue();
+			if (dbPayAmt != wxPayAmt) {
+				throw ResponseException.buildText("AMOUNT ERROR");
+			}
+		} catch (Exception e) {
+			throw ResponseException.buildText("ERROR");
+		}
+	}
 
 }

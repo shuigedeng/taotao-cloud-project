@@ -1,4 +1,4 @@
-//package com.taotao.cloud.sys.biz.timetask.xxljob.view;
+package com.taotao.cloud.sys.biz.job.xxljob;//package com.taotao.cloud.sys.biz.timetask.xxljob.view;
 //
 //import cn.hutool.core.convert.Convert;
 //import com.taotao.cloud.web.timetask.EveryDayExecute;

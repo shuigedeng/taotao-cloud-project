@@ -1,6 +1,6 @@
 package com.taotao.cloud.wechat.biz.wecom.core.robot.dao;
 
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.base.MpIdEntity;
 import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
@@ -42,8 +42,8 @@ public class WecomRobotConfigManager extends BaseManager<WecomRobotConfigMapper,
     /**
     * 分页
     */
-    public Page<WecomRobotConfig> page(PageParam pageParam, WecomRobotConfigParam param) {
-        Page<WecomRobotConfig> mpPage = MpUtil.getMpPage(pageParam, WecomRobotConfig.class);
+    public Page<WecomRobotConfig> page(PageQuery PageQuery, WecomRobotConfigParam param) {
+        Page<WecomRobotConfig> mpPage = MpUtil.getMpPage(PageQuery, WecomRobotConfig.class);
         return lambdaQuery()
                 .like(StrUtil.isNotBlank(param.getCode()),WecomRobotConfig::getCode,param.getCode())
                 .like(StrUtil.isNotBlank(param.getName()),WecomRobotConfig::getCode,param.getName())

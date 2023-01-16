@@ -1,6 +1,0 @@
-com.taotao.cloud.sys.api.feign.IFeignLogisticsApi
-com.taotao.cloud.sys.api.feign.IFeignMenuApi
-com.taotao.cloud.sys.api.feign.IFeignRoleApi
-com.taotao.cloud.sys.api.feign.IFeignSettingApi
-com.taotao.cloud.sys.api.feign.IFeignUserApi
-com.taotao.cloud.sys.api.feign.IFeignDictApi

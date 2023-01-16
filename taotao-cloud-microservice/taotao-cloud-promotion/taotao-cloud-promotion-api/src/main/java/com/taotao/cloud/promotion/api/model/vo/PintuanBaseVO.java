@@ -1,16 +1,12 @@
 package com.taotao.cloud.promotion.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * 拼团活动实体类

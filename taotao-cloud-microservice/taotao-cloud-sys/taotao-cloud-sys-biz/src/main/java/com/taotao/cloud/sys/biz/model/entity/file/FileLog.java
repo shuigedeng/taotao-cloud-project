@@ -3,11 +3,11 @@ package com.taotao.cloud.sys.biz.model.entity.file;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -99,11 +99,12 @@ public class FileLog extends BaseSuperEntity<FileLog, Long> {
 	 */
 	@Column(name = "size", columnDefinition = "bigint not null comment '大小'")
 	private Long size;
+
 	@Builder
 	public FileLog(Long id, LocalDateTime createTime, Long createBy,
-		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-		Long bizId, String bizType, String dataType, String originalFileName, String url,
-		String fileMd5, String contextType, String filename, String ext, Long size) {
+			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+			Long bizId, String bizType, String dataType, String originalFileName, String url,
+			String fileMd5, String contextType, String filename, String ext, Long size) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.bizId = bizId;
 		this.bizType = bizType;
@@ -123,7 +124,7 @@ public class FileLog extends BaseSuperEntity<FileLog, Long> {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-			o)) {
+				o)) {
 			return false;
 		}
 		FileLog fileLog = (FileLog) o;

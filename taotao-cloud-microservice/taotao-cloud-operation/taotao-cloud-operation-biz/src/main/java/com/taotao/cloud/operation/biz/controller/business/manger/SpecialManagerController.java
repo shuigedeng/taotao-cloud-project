@@ -3,14 +3,14 @@ package com.taotao.cloud.operation.biz.controller.business.manger;
 import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.operation.biz.model.entity.Special;
 import com.taotao.cloud.operation.biz.service.business.SpecialService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,7 +45,7 @@ public class SpecialManagerController {
 	@Operation(summary = "修改专题活动")
 	@PutMapping("/updateSpecial")
 	public Result<Special> updateSpecial(@Parameter(description = "专题ID") @PathVariable Long id,
-		@Valid Special special) {
+			@Valid Special special) {
 		special.setId(id);
 		specialService.updateById(special);
 		return Result.success(special);
@@ -55,7 +55,8 @@ public class SpecialManagerController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@Operation(summary = "删除专题活动")
 	@DeleteMapping("/{id}")
-	public Result<Boolean> deleteSpecial(@Parameter(description = "专题ID") @PathVariable String id) {
+	public Result<Boolean> deleteSpecial(
+			@Parameter(description = "专题ID") @PathVariable String id) {
 		specialService.removeSpecial(id);
 		return Result.success(true);
 	}
@@ -81,7 +82,7 @@ public class SpecialManagerController {
 	@Operation(summary = "获取专题活动")
 	@GetMapping(value = "/{id}")
 	public Result<Special> getSpecialsList(
-		@Parameter(description = "专题ID", required = true) @PathVariable String id) {
+			@Parameter(description = "专题ID", required = true) @PathVariable String id) {
 		return Result.success(specialService.getById(id));
 	}
 

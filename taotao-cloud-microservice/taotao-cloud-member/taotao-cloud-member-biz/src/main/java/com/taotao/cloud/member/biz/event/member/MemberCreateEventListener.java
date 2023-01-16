@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.member.biz.event.member;
 
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -33,13 +31,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberCreateEventListener {
 
-	@Autowired
-	private IAfterSaleLogService afterSaleLogService;
+	//@Autowired
+	//private IAfterSaleLogService afterSaleLogService;
 
 	@Async
 	@EventListener(MemberCreateEvent.class)
 	public void saveAfterSaleLog(@NotNull MemberCreateEvent event) {
-		AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
-		afterSaleLogService.save(afterSaleLog);
+		//AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
+		//afterSaleLogService.save(afterSaleLog);
 	}
 }

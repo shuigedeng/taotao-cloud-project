@@ -2,6 +2,11 @@ package com.taotao.cloud.goods.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,12 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 
 /**
@@ -54,9 +53,9 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 	 * 3：显示折扣价（price字段为原价，price2字段为现价， price和price2必传
 	 */
 	@Column(name = "price_type", columnDefinition =
-		"int not null comment '1：一口价（只需要传入price，price2不传）"
-			+ "2：价格区间（price字段为左边界，price2字段为右边界，price和price2必传）"
-			+ "3：显示折扣价（price字段为原价，price2字段为现价， price和price2必传'")
+			"int not null comment '1：一口价（只需要传入price，price2不传）"
+					+ "2：价格区间（price字段为左边界，price2字段为右边界，price和price2必传）"
+					+ "3：显示折扣价（price字段为原价，price2字段为现价， price和price2必传'")
 	private Integer priceType;
 
 	/**
@@ -115,7 +114,7 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

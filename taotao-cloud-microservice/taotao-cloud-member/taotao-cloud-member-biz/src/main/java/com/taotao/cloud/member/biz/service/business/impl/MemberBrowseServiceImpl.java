@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.service.business.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
@@ -74,12 +74,12 @@ public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, Membe
 	}
 
 	@Override
-	public List<EsGoodsIndexVO> footPrintPage(PageParam pageParam) {
+	public List<EsGoodsIndexVO> footPrintPage(PageQuery PageQuery) {
 		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
 		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
 		lambdaQueryWrapper.eq(MemberBrowse::getDelFlag, false);
 		lambdaQueryWrapper.orderByDesc(MemberBrowse::getUpdateTime);
-		List<String> skuIdList = this.baseMapper.footprintSkuIdList(pageParam.buildMpPage(), lambdaQueryWrapper);
+		List<String> skuIdList = this.baseMapper.footprintSkuIdList(PageQuery.buildMpPage(), lambdaQueryWrapper);
 		if (!skuIdList.isEmpty()) {
 			List<EsGoodsIndexVO> list = esGoodsIndexService.getEsGoodsBySkuIds(skuIdList);
 			//去除为空的商品数据

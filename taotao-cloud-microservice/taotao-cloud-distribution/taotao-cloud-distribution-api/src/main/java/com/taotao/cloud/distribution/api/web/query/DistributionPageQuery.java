@@ -1,6 +1,6 @@
 package com.taotao.cloud.distribution.api.web.query;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销查询参数")
-public class DistributionPageQuery extends PageParam {
+public class DistributionPageQuery extends PageQuery {
 
 	@Schema(description = "会员名称")
 	private String memberName;

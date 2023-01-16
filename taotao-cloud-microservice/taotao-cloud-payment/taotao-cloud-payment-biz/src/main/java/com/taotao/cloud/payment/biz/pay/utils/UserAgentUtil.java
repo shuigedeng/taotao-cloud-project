@@ -25,10 +25,9 @@
 package com.taotao.cloud.payment.biz.pay.utils;
 
 import com.xhuicloud.common.core.constant.CommonConstants;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpHeaders;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @program: XHuiCloud
@@ -39,8 +38,8 @@ import javax.servlet.http.HttpServletRequest;
 @UtilityClass
 public class UserAgentUtil {
 
-    public Boolean isWeChat(HttpServletRequest request){
-        String UA = request.getHeader(HttpHeaders.USER_AGENT);
-        return UA.contains(CommonConstants.MICRO_MESSENGER);
-    }
+	public Boolean isWeChat(HttpServletRequest request) {
+		String UA = request.getHeader(HttpHeaders.USER_AGENT);
+		return UA.contains(CommonConstants.MICRO_MESSENGER);
+	}
 }

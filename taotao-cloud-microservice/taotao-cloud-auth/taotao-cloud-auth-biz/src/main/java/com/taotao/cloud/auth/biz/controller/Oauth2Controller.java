@@ -22,6 +22,8 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -36,9 +38,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 /**
  * Oath2Controller
@@ -57,7 +56,7 @@ public class Oauth2Controller {
 	private RedisRepository redisRepository;
 
 	/**
-	 * 获取当前认证的OAuth2用户信息，默认是保存在{@link javax.servlet.http.HttpSession}中的
+	 * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
 	 *
 	 * @param user OAuth2用户信息
 	 * @return OAuth2用户信息
@@ -71,7 +70,7 @@ public class Oauth2Controller {
 	}
 
 	/**
-	 * 获取当前认证的OAuth2客户端信息，默认是保存在{@link javax.servlet.http.HttpSession}中的
+	 * 获取当前认证的OAuth2客户端信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
 	 *
 	 * @param oAuth2AuthorizedClient OAuth2客户端信息
 	 * @return OAuth2客户端信息
@@ -81,7 +80,7 @@ public class Oauth2Controller {
 	@PreAuthorize("hasAuthority('express:company:info:id')")
 	@GetMapping("/client")
 	public Result<OAuth2AuthorizedClient> user(
-		@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+			@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
 		return Result.success(oAuth2AuthorizedClient);
 	}
 
@@ -99,7 +98,7 @@ public class Oauth2Controller {
 
 				// 标识jwt令牌失效
 				redisRepository.setEx(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid, "",
-					epochSecond - nowTime);
+						epochSecond - nowTime);
 
 				// 添加用户退出日志
 
