@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.common.domain;
 
-import com.taotao.cloud.message.biz.austin.common.dto.model.ContentModel;
+import com.java3y.austin.common.dto.model.ContentModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -18,6 +18,13 @@ import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,14 +32,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * 订单表
@@ -370,7 +369,7 @@ public class Order extends BaseSuperEntity<Order, Long> {
 		//平台优惠券判定
 		if (tradeDTO.getPlatformCoupon() != null) {
 			this.setUsePlatformMemberCouponId(
-				tradeDTO.getPlatformCoupon().getMemberCoupon().getId());
+					tradeDTO.getPlatformCoupon().getMemberCoupon().getId());
 		}
 		//店铺优惠券判定
 		if (tradeDTO.getStoreCoupons() != null && !tradeDTO.getStoreCoupons().isEmpty()) {
@@ -392,7 +391,7 @@ public class Order extends BaseSuperEntity<Order, Long> {
 	private void setTradeType(CartVO cartVO, TradeDTO tradeDTO) {
 		//判断是否为普通订单、促销订单
 		if (tradeDTO.getCartTypeEnum().equals(CartTypeEnum.CART) || tradeDTO.getCartTypeEnum()
-			.equals(CartTypeEnum.BUY_NOW)) {
+				.equals(CartTypeEnum.BUY_NOW)) {
 			this.setOrderType(OrderTypeEnum.NORMAL.name());
 		} else if (tradeDTO.getCartTypeEnum().equals(CartTypeEnum.VIRTUAL)) {
 			this.setOrderType(OrderTypeEnum.VIRTUAL.name());
@@ -400,7 +399,7 @@ public class Order extends BaseSuperEntity<Order, Long> {
 			//促销订单（拼团、积分）-判断购买的是虚拟商品还是实物商品
 			String goodsType = cartVO.getCheckedSkuList().get(0).getGoodsSku().getGoodsType();
 			if (StrUtil.isEmpty(goodsType) || goodsType.equals(
-				GoodsTypeEnum.PHYSICAL_GOODS.name())) {
+					GoodsTypeEnum.PHYSICAL_GOODS.name())) {
 				this.setOrderType(OrderTypeEnum.NORMAL.name());
 			} else {
 				this.setOrderType(OrderTypeEnum.VIRTUAL.name());
@@ -411,9 +410,9 @@ public class Order extends BaseSuperEntity<Order, Long> {
 			//判断是否为拼团订单，如果为拼团订单获取拼团ID，判断是否为主订单
 			if (tradeDTO.getCartTypeEnum().name().equals(PromotionTypeEnum.PINTUAN.name())) {
 				Optional<String> pintuanId = cartVO.getCheckedSkuList().get(0).getPromotions()
-					.stream()
-					.filter(i -> i.getPromotionType().equals(PromotionTypeEnum.PINTUAN.name()))
-					.map(PromotionGoods::getPromotionId).findFirst();
+						.stream()
+						.filter(i -> i.getPromotionType().equals(PromotionTypeEnum.PINTUAN.name()))
+						.map(PromotionGoods::getPromotionId).findFirst();
 				promotionId = pintuanId.get();
 			}
 		}

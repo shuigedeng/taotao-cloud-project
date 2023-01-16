@@ -69,30 +69,18 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Override
-	public IPage<OrderComplaint> getOrderComplainByPage(OrderComplaintPageQuery orderComplaintPageQuery) {
+	public IPage<OrderComplaint> getOrderComplainByPage(OrderComplaintPageQuery pageQuery) {
 		LambdaQueryWrapper<OrderComplaint> queryWrapper = new LambdaQueryWrapper<>();
-		if (StrUtil.isNotEmpty(orderComplaintPageQuery.getStatus())) {
-			queryWrapper.eq(OrderComplaint::getComplainStatus, orderComplaintPageQuery.getStatus());
-		}
-		if (StrUtil.isNotEmpty(orderComplaintPageQuery.getOrderSn())) {
-			queryWrapper.eq(OrderComplaint::getOrderSn, orderComplaintPageQuery.getOrderSn());
-		}
-		if (StrUtil.isNotEmpty(orderComplaintPageQuery.getStoreName())) {
-			queryWrapper.like(OrderComplaint::getStoreName, orderComplaintPageQuery.getStoreName());
-		}
-		if (StrUtil.isNotEmpty(orderComplaintPageQuery.getStoreId())) {
-			queryWrapper.eq(OrderComplaint::getStoreId, orderComplaintPageQuery.getStoreId());
-		}
-		if (StrUtil.isNotEmpty(orderComplaintPageQuery.getMemberName())) {
-			queryWrapper.like(OrderComplaint::getMemberName, orderComplaintPageQuery.getMemberName());
-		}
-		if (StrUtil.isNotEmpty(orderComplaintPageQuery.getMemberId())) {
-			queryWrapper.eq(OrderComplaint::getMemberId, orderComplaintPageQuery.getMemberId());
-		}
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStatus()),OrderComplaint::getComplainStatus, pageQuery.getStatus());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getOrderSn()),OrderComplaint::getOrderSn, pageQuery.getOrderSn());
+		queryWrapper.like(StrUtil.isNotEmpty(pageQuery.getStoreName()),OrderComplaint::getStoreName, pageQuery.getStoreName());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStoreId()),OrderComplaint::getStoreId, pageQuery.getStoreId());
+		queryWrapper.like(StrUtil.isNotEmpty(pageQuery.getMemberName()),OrderComplaint::getMemberName, pageQuery.getMemberName());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getMemberId()),OrderComplaint::getMemberId, pageQuery.getMemberId());
 		queryWrapper.eq(OrderComplaint::getDelFlag, false);
 		queryWrapper.orderByDesc(OrderComplaint::getCreateTime);
 
-		return this.page(orderComplaintPageQuery.buildMpPage(), queryWrapper);
+		return this.page(pageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override

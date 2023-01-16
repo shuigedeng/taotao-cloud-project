@@ -6,7 +6,6 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.request.AuthRequest;
@@ -14,9 +13,13 @@ import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.connect.util.ConnectUtil;
 import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.IOException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -25,10 +28,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * 买家端,web联合登录
@@ -49,8 +48,8 @@ public class ConnectWebBindController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/login/web/{type}")
 	public Result<String> webAuthorize(
-		@Parameter(name = "type", description = "登录方式:QQ,微信,微信_PC QQ,WECHAT,WECHAT_PC") @PathVariable String type,
-		HttpServletResponse response) throws IOException {
+			@Parameter(name = "type", description = "登录方式:QQ,微信,微信_PC QQ,WECHAT,WECHAT_PC") @PathVariable String type,
+			HttpServletResponse response) throws IOException {
 		AuthRequest authRequest = connectUtil.getAuthRequest(type);
 		String authorizeUrl = authRequest.authorize(UUID.fastUUID().toString());
 		response.sendRedirect(authorizeUrl);
@@ -62,8 +61,8 @@ public class ConnectWebBindController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/callback/{type}")
 	public void callBack(@PathVariable String type, AuthCallback callback,
-						 HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
-		throws IOException {
+			HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+			throws IOException {
 		connectUtil.callback(type, callback, httpServletRequest, httpServletResponse);
 	}
 
@@ -98,7 +97,7 @@ public class ConnectWebBindController {
 	//})
 	@GetMapping("/app/login")
 	public Result<Token> unionLogin(ConnectAuthUser authUser,
-									@RequestHeader("uuid") String uuid) {
+			@RequestHeader("uuid") String uuid) {
 		try {
 			return Result.success(connectService.appLoginCallback(authUser, uuid));
 		} catch (Exception e) {

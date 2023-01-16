@@ -17,9 +17,8 @@ package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
+import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
 
 /**
  * CompanyMapper

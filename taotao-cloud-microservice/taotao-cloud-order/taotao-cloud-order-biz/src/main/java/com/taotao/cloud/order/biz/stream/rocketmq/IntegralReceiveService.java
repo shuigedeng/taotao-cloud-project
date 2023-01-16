@@ -1,4 +1,4 @@
-///*
+package com.taotao.cloud.order.biz.stream.rocketmq;///*
 // * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
 // *
 // * Licensed under the Apache License, Version 2.0 (the "License");

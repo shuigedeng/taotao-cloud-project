@@ -3,6 +3,7 @@ package com.taotao.cloud.workflow.biz.engine.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import lombok.Data;
 
 
@@ -11,47 +12,47 @@ import lombok.Data;
  */
 @Data
 @TableName("flow_candidates")
-public class FlowCandidatesEntity {
+public class FlowCandidatesEntity extends SuperEntity<FlowCandidatesEntity, String> {
     /**
      * 主键
      */
-    @TableId("F_ID")
+    @TableId("id")
     private String id;
 
     /**
      * 节点主键
      */
-    @TableField("F_TASKNODEID")
+    @TableField("task_node_id")
     private String taskNodeId;
 
     /**
      * 任务主键
      */
-    @TableField("F_TASKID")
+    @TableField("task_id")
     private String taskId;
 
     /**
      * 代办主键
      */
-    @TableField("F_TASKOPERATORID")
+    @TableField("task_operator_id")
     private String operatorId;
 
     /**
      * 审批人主键
      */
-    @TableField("F_HANDLEID")
+    @TableField("handle_id")
     private String handleId;
 
     /**
      * 审批人账号
      */
-    @TableField("F_ACCOUNT")
+    @TableField("account")
     private String account;
 
     /**
      * 候选人
      */
-    @TableField("F_CANDIDATES")
+    @TableField("candidates")
     private String candidates;
 
 }

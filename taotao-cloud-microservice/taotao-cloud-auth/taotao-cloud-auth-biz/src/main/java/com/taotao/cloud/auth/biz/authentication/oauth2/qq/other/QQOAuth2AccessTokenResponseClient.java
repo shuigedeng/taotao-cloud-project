@@ -36,7 +36,7 @@ public class QQOAuth2AccessTokenResponseClient implements OAuth2AccessTokenRespo
         OAuth2AuthorizationExchange oAuth2AuthorizationExchange = authorizationGrantRequest.getAuthorizationExchange();
 
         // 根据API文档获取请求access_token参数
-        MultiValueMap<String, String> params = new LinkedMultiValueMap();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.set("client_id", clientRegistration.getClientId());
         params.set("client_secret", clientRegistration.getClientSecret());
         params.set("code", oAuth2AuthorizationExchange.getAuthorizationResponse().getCode());
@@ -49,7 +49,7 @@ public class QQOAuth2AccessTokenResponseClient implements OAuth2AccessTokenRespo
         //http://wiki.connect.qq.com/使用authorization_code获取access_token
         //access_token=FE04************************CCE2&expires_in=7776000&refresh_token=88E4************************BE14
         String accessToken = items[0].substring(items[0].lastIndexOf("=") + 1);
-        Long expiresIn = new Long(items[1].substring(items[1].lastIndexOf("=") + 1));
+        long expiresIn = Long.parseLong(items[1].substring(items[1].lastIndexOf("=") + 1));
 
         Set<String> scopes = new LinkedHashSet<>(oAuth2AuthorizationExchange.getAuthorizationRequest().getScopes());
         Map<String, Object> additionalParameters = new LinkedHashMap<>();

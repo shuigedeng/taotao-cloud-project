@@ -1,4 +1,4 @@
-//package com.taotao.cloud.oauth2.biz.models;
+package com.taotao.cloud.auth.biz.models;//package com.taotao.cloud.oauth2.biz.models;
 //
 //import com.fasterxml.jackson.core.JsonParseException;
 //import com.fasterxml.jackson.core.JsonParser;

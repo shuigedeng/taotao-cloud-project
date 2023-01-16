@@ -5,21 +5,20 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.sys.api.constant.GenConstants;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.validation.constraints.NotBlank;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.apache.commons.lang3.ArrayUtils;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -197,7 +196,8 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
 	}
 
 	public static boolean isSub(String tplCategory) {
-		return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_SUB, tplCategory);
+		return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(
+				GenConstants.TPL_SUB, tplCategory);
 	}
 
 	public boolean isTree() {
@@ -205,7 +205,8 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
 	}
 
 	public static boolean isTree(String tplCategory) {
-		return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_TREE, tplCategory);
+		return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(
+				GenConstants.TPL_TREE, tplCategory);
 	}
 
 	public boolean isCrud() {
@@ -213,7 +214,8 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
 	}
 
 	public static boolean isCrud(String tplCategory) {
-		return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_CRUD, tplCategory);
+		return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(
+				GenConstants.TPL_CRUD, tplCategory);
 	}
 
 	public boolean isSuperColumn(String javaField) {
@@ -223,8 +225,9 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
 	public static boolean isSuperColumn(String tplCategory, String javaField) {
 		if (isTree(tplCategory)) {
 			return org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase(javaField,
-				ArrayUtils.addAll(GenConstants.TREE_ENTITY, GenConstants.BASE_ENTITY));
+					ArrayUtils.addAll(GenConstants.TREE_ENTITY, GenConstants.BASE_ENTITY));
 		}
-		return org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase(javaField, GenConstants.BASE_ENTITY);
+		return org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase(javaField,
+				GenConstants.BASE_ENTITY);
 	}
 }

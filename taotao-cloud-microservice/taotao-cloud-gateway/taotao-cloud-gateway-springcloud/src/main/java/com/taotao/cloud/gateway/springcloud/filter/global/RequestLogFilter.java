@@ -44,7 +44,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 		List<Object> beforeReqArgs = new ArrayList<>();
 		beforeReqLog.append("\n\n================ TaoTao Cloud Request Start  ================\n");
 		beforeReqLog.append("===> requestMethod: {}, requestUrl: {}, traceId: {}\n");
-		String requestMethod = exchange.getRequest().getMethodValue();
+		String requestMethod = exchange.getRequest().getMethod().name();
 		beforeReqArgs.add(requestMethod);
 		beforeReqArgs.add(requestUrl);
 		beforeReqArgs.add(traceId);

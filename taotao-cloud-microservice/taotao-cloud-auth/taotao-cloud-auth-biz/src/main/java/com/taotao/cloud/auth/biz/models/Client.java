@@ -14,8 +14,8 @@ package com.taotao.cloud.auth.biz.models;
  */
 
 import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
-import javax.persistence.Column;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Builder;
 
 /**

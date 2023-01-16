@@ -2,9 +2,14 @@ package com.taotao.cloud.distribution.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.distribution.api.web.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
+import com.taotao.cloud.distribution.api.web.dto.DistributionApplyDTO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,12 +17,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 /**
  * 分销员表
@@ -40,12 +39,13 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
 
 	public static final String TABLE_NAME = "tt_distribution";
 
-	public Distribution(Long memberId, String memberName, DistributionApplyDTO distributionApplyDTO) {
-	   this.memberId = memberId;
-	   this.memberName = memberName;
-	   distributionOrderCount=0;
-	   this.distributionStatus = DistributionStatusEnum.APPLY.name();
-	   BeanUtils.copyProperties(distributionApplyDTO, this);
+	public Distribution(Long memberId, String memberName,
+			DistributionApplyDTO distributionApplyDTO) {
+		this.memberId = memberId;
+		this.memberName = memberName;
+		distributionOrderCount = 0;
+		this.distributionStatus = DistributionStatusEnum.APPLY.name();
+		BeanUtils.copyProperties(distributionApplyDTO, this);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.dao;
 
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
@@ -34,8 +34,8 @@ public class WalletLogManager extends BaseManager<WalletLogMapper,WalletLog> {
     /**
      * 分页查询指定用户的钱包日志
      */
-    public Page<WalletLog> pageByUserId(PageParam pageParam, WalletLogQueryParam param, Long userId) {
-        Page<WalletLog> mpPage = MpUtil.getMpPage(pageParam, WalletLog.class);
+    public Page<WalletLog> pageByUserId(PageQuery PageQuery, WalletLogQueryParam param, Long userId) {
+        Page<WalletLog> mpPage = MpUtil.getMpPage(PageQuery, WalletLog.class);
 
         return this.lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
@@ -46,8 +46,8 @@ public class WalletLogManager extends BaseManager<WalletLogMapper,WalletLog> {
     /**
      * 分页查询
      */
-    public Page<WalletLog> page(PageParam pageParam, WalletLogQueryParam param) {
-        Page<WalletLog> mpPage = MpUtil.getMpPage(pageParam, WalletLog.class);
+    public Page<WalletLog> page(PageQuery PageQuery, WalletLogQueryParam param) {
+        Page<WalletLog> mpPage = MpUtil.getMpPage(PageQuery, WalletLog.class);
         return this.lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
                 .page(mpPage);
@@ -55,8 +55,8 @@ public class WalletLogManager extends BaseManager<WalletLogMapper,WalletLog> {
     /**
      * 分页查询 根据钱包id
      */
-    public Page<WalletLog> pageByWalletId(PageParam pageParam, WalletLogQueryParam param) {
-        Page<WalletLog> mpPage = MpUtil.getMpPage(pageParam, WalletLog.class);
+    public Page<WalletLog> pageByWalletId(PageQuery PageQuery, WalletLogQueryParam param) {
+        Page<WalletLog> mpPage = MpUtil.getMpPage(PageQuery, WalletLog.class);
         return this.lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
                 .eq(WalletLog::getWalletId,param.getWalletId())

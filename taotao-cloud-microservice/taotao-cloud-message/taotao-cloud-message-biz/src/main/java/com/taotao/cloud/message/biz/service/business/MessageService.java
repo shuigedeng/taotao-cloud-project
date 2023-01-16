@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.message.api.model.vo.MessageVO;
 import com.taotao.cloud.message.biz.model.entity.Message;
 
@@ -15,10 +15,10 @@ public interface MessageService extends IService<Message> {
 	 * 多条件分页获取
 	 *
 	 * @param messageVO
-	 * @param PageParam
+	 * @param PageQuery
 	 * @return
 	 */
-	IPage<Message> getPage(MessageVO messageVO, PageParam PageParam);
+	IPage<Message> getPage(MessageVO messageVO, PageQuery PageQuery);
 
 	/**
 	 * 发送站内信

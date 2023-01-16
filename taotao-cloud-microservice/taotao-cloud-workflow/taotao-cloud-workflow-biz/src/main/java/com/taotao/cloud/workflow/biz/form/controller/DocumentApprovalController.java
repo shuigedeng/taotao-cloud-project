@@ -5,11 +5,11 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.DocumentApprovalEntity;
-import com.taotao.cloud.workflow.biz.form.model.documentapproval.DocumentApprovalForm;
-import com.taotao.cloud.workflow.biz.form.model.documentapproval.DocumentApprovalInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.documentapproval.DocumentApprovalForm;
+import com.taotao.cloud.workflow.api.common.model.form.documentapproval.DocumentApprovalInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.DocumentApprovalService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

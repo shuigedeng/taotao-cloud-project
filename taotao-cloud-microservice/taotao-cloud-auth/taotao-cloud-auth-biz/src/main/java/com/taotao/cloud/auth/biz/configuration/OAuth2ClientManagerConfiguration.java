@@ -67,7 +67,6 @@ public class OAuth2ClientManagerConfiguration {
 				.refreshToken((configurer) -> configurer.accessTokenResponseClient(
 					defaultRefreshTokenTokenResponseClient))
 				.clientCredentials()
-				.password()
 				.build());
 		return authorizedClientManager;
 	}

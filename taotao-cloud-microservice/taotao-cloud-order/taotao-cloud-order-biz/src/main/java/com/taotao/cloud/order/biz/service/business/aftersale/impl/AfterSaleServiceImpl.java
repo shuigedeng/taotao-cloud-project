@@ -18,6 +18,9 @@ import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.common.utils.number.NumberUtils;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
@@ -28,7 +31,7 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.model.query.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVOBuilder;
+import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVOBuilder;
 import com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint;
 import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleMapper;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
@@ -41,9 +44,6 @@ import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.api.feign.IFeignRefundSupportService;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
 import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsApi;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
@@ -238,15 +238,15 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		}
 
 		//查询会员回寄的物流公司信息
-		Result<LogisticsVO> logistics = logisticsService.getById(logisticsId);
+		LogisticsVO logistics = logisticsService.getById(logisticsId);
 
 		//判断物流公司是否为空
 		if (logistics == null) {
 			throw new BusinessException(ResultEnum.AFTER_STATUS_ERROR);
 		}
 
-		afterSale.setLogisticsCode(logistics.data().getCode());
-		afterSale.setLogisticsName(logistics.data().getName());
+		afterSale.setLogisticsCode(logistics.getCode());
+		afterSale.setLogisticsName(logistics.getName());
 		afterSale.setLogisticsNo(logisticsNo);
 		afterSale.setDeliverTime(mDeliverTime);
 		//修改售后单状态
@@ -263,7 +263,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
 		return logisticsService.getLogistic(afterSale.getId(),
-			afterSale.getLogisticsNo()).data();
+			afterSale.getLogisticsNo());
 	}
 
 	@Override
@@ -359,7 +359,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	@Override
 	public StoreAfterSaleAddressVO getStoreAfterSaleAddressDTO(String sn) {
 		return storeDetailService.getStoreAfterSaleAddressDTO(
-			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId()).data();
+			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId());
 	}
 
 	/**

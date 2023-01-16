@@ -1,6 +1,6 @@
 package com.taotao.cloud.wechat.biz.wechat.core.menu.dao;
 
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.base.MpIdEntity;
 import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
@@ -23,8 +23,8 @@ public class WeChatMenuManager extends BaseManager<WeChatMenuMapper, WeChatMenu>
     /**
     * 分页
     */
-    public Page<WeChatMenu> page(PageParam pageParam, WeChatMenuParam param) {
-        Page<WeChatMenu> mpPage = MpUtil.getMpPage(pageParam, WeChatMenu.class);
+    public Page<WeChatMenu> page(PageQuery PageQuery, WeChatMenuParam param) {
+        Page<WeChatMenu> mpPage = MpUtil.getMpPage(PageQuery, WeChatMenu.class);
         return lambdaQuery()
                 .select(this.getEntityClass(),MpUtil::excludeBigField)
                 .eq(StrUtil.isNotBlank(param.getName()),WeChatMenu::getName,param.getName())

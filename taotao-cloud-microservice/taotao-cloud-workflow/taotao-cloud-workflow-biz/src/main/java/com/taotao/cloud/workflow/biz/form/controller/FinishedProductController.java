@@ -6,13 +6,13 @@ import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.FinishedProductEntity;
 import com.taotao.cloud.workflow.biz.form.entity.FinishedProductEntryEntity;
-import com.taotao.cloud.workflow.biz.form.model.finishedproduct.FinishedProductEntryEntityInfoModel;
-import com.taotao.cloud.workflow.biz.form.model.finishedproduct.FinishedProductForm;
-import com.taotao.cloud.workflow.biz.form.model.finishedproduct.FinishedProductInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.finishedproduct.FinishedProductEntryEntityInfoModel;
+import com.taotao.cloud.workflow.api.common.model.form.finishedproduct.FinishedProductForm;
+import com.taotao.cloud.workflow.api.common.model.form.finishedproduct.FinishedProductInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.FinishedProductService;
 
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;

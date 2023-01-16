@@ -81,7 +81,7 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
 		this.remove(new QueryWrapper<>());
 
 		Result<SettingVO> settingResult = settingService.get(SettingCategoryEnum.SECKILL_SETTING.name());
-		SeckillSetting seckillSetting = new Gson().fromJson(settingResult.data().getSettingValue(), SeckillSetting.class);
+		SeckillSetting seckillSetting = new Gson().fromJson(settingResult.getSettingValue(), SeckillSetting.class);
 
 		for (int i = 1; i <= PRE_CREATION; i++) {
 			Seckill seckill = new Seckill(i, seckillSetting.getHours(), seckillSetting.getSeckillRule());

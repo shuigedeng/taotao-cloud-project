@@ -1,9 +1,9 @@
 dependencies {
-    implementation "org.apache.hadoop:hadoop-hdfs:3.3.3"
-    implementation "org.apache.hadoop:hadoop-client:3.3.3"
-    implementation "org.apache.hadoop:hadoop-hdfs-client:3.3.3"
+    implementation "org.apache.hadoop:hadoop-hdfs:3.3.4"
+    implementation "org.apache.hadoop:hadoop-client:3.3.4"
+    implementation "org.apache.hadoop:hadoop-hdfs-client:3.3.4"
 
-    implementation 'org.slf4j:slf4j-log4j12:2.0.3'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.6'
     implementation "junit:junit:4.13.2"
 
 

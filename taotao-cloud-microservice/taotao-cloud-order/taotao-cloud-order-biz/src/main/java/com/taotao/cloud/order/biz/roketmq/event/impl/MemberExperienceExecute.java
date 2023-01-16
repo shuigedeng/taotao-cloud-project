@@ -71,6 +71,6 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 	 */
 	private ExperienceSettingVO getExperienceSetting() {
 		return settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name())
-			.data();
+			;
 	}
 }

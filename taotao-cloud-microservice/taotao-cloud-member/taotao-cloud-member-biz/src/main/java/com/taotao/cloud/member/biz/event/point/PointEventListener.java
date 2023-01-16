@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.member.biz.event.point;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
-import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -32,13 +30,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class PointEventListener {
 
-	@Autowired
-	private IOrderLogService orderLogService;
+	//@Autowired
+	//private IOrderLogService orderLogService;
 
 	@Async
 	@EventListener(PointEvent.class)
 	public void saveOrderLog(PointEvent event) {
-		OrderLog orderLog = (OrderLog) event.getSource();
-		orderLogService.save(orderLog);
+		//OrderLog orderLog = (OrderLog) event.getSource();
+		//orderLogService.save(orderLog);
 	}
 }

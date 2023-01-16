@@ -1,4 +1,4 @@
-//package com.taotao.cloud.oauth2.biz.models;
+package com.taotao.cloud.auth.biz.models;//package com.taotao.cloud.oauth2.biz.models;
 //
 //import com.fasterxml.jackson.annotation.JsonAutoDetect;
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

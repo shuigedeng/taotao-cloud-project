@@ -19,21 +19,17 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.sys.biz.pulsar.example.producer.ProducerService;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.controller.BaseBusinessController;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.sql.SQLIntegrityConstraintViolationException;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * pc端-字典API
@@ -48,12 +44,12 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
 public class BuyerDictController extends BaseBusinessController<IDictService, Dict, Long> {
 
-	@Autowired
-	private ProducerService producerService;
+	//@Autowired
+	//private ProducerService producerService;
 
 	@NotAuth
 	@GetMapping("/add/{type}")
-	@Operation(summary = "通过code查询所有字典列表", description = "通过code查询所有字典列表")
+	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
 	public Result<Boolean> add(@PathVariable String type)
 		throws SQLIntegrityConstraintViolationException {
 		Boolean result = service().add(type);
@@ -62,14 +58,14 @@ public class BuyerDictController extends BaseBusinessController<IDictService, Di
 
 	@NotAuth
 	@GetMapping("/add1")
-	@Operation(summary = "通过code查询所有字典列表", description = "通过code查询所有字典列表")
+	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
 	public Result<Boolean> add1() {
 		Boolean result = service().add1();
 		return success(result);
 	}
 
 	@GetMapping("/test/codexxxxx")
-	@Operation(summary = "通过code查询所有字典列表", description = "通过code查询所有字典列表")
+	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
 	public Result<Boolean> testCode(@RequestParam String code) {
 		//try {
 		//	producerService.sendStringMsg();

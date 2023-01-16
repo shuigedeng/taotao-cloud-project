@@ -15,23 +15,22 @@
  */
 package com.taotao.cloud.front.controller;
 
-import com.taotao.cloud.portal.util.Constants;
-import com.taotao.cloud.portal.util.ResponseBase;
-import com.taotao.cloud.portal.util.User;
+import com.taotao.cloud.front.util.Constants;
+import com.taotao.cloud.front.util.ResponseBase;
+import com.taotao.cloud.front.util.User;
+import java.io.IOException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * RegisterController
  *
  * @author shuigedeng
- * @since 2021/1/18 下午4:56
  * @version 2022.03
+ * @since 2021/1/18 下午4:56
  */
 @Controller
 public class RegisterController {
@@ -48,7 +47,8 @@ public class RegisterController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(User user, HttpServletRequest reqest, HttpServletResponse response) throws IOException {
+	public String register(User user, HttpServletRequest reqest, HttpServletResponse response)
+			throws IOException {
 
 		// ResponseBase registerUser = userServiceFegin.registerUser(user);
 		ResponseBase responseBase = new ResponseBase();

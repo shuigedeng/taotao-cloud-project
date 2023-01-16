@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.ReceiptProcessingEntity;
-import com.taotao.cloud.workflow.biz.form.model.receiptprocessing.ReceiptProcessingForm;
-import com.taotao.cloud.workflow.biz.form.model.receiptprocessing.ReceiptProcessingInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.receiptprocessing.ReceiptProcessingForm;
+import com.taotao.cloud.workflow.api.common.model.form.receiptprocessing.ReceiptProcessingInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ReceiptProcessingService;
 
 import org.hibernate.exception.DataException;

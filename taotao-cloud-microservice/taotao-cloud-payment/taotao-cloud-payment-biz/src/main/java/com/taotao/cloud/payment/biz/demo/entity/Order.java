@@ -1,10 +1,9 @@
 package com.taotao.cloud.payment.biz.demo.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Table(name = "pay_order")
 public class Order implements Serializable {

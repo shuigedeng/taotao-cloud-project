@@ -9,10 +9,10 @@ import com.taotao.cloud.media.biz.media.mapper.CameraMapper;
 import com.taotao.cloud.media.biz.media.server.MediaServer;
 import com.taotao.cloud.media.biz.media.service.HlsService;
 import com.taotao.cloud.media.biz.media.service.MediaService;
+import jakarta.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import org.bytedeco.javacpp.Loader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,9 +22,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 启动流媒体
- * 
- * 
- *
  */
 @Component
 public class InitServer implements CommandLineRunner {
@@ -37,45 +34,45 @@ public class InitServer implements CommandLineRunner {
 
 	@Autowired
 	private MediaService mediaService;
-	
+
 	@Autowired
 	private HlsService hlsService;
 
 	@Autowired
 	private CameraMapper cameraMapper;
-	
+
 	@Autowired
 	private Environment env;
 
 	@Override
 	public void run(String... args) throws Exception {
 		initAutoPlay();
-		
-        String ip = InetAddress.getLocalHost().getHostAddress();
-        String httpPort = env.getProperty("server.port");
-        String path = env.getProperty("server.servlet.context-path");
-        if (StrUtil.isEmpty(path)) {
-            path = "";
-        }
+
+		String ip = InetAddress.getLocalHost().getHostAddress();
+		String httpPort = env.getProperty("server.port");
+		String path = env.getProperty("server.servlet.context-path");
+		if (StrUtil.isEmpty(path)) {
+			path = "";
+		}
 		LogUtils.info("\n--------------------------------------------------------- \n" +
-                "\t EasyMedia is running! Access address: \n" +
-                "\t media port at : \t {} \n" +
-                "\t http port at : \t {} \n" +
-                "\t web Local: \t http://localhost:{} \n" +
-                "\t web External: \t http://{}:{}{} \n" +
-                "\t httpflv: \t http://{}:{}/live?url={您的源地址} \n" +
-                "\t wsflv: \t ws://{}:{}/live?url={您的源地址} \n" +
-                "\t hls(m3u8): \t http://{}:{}/hls?url={您的源地址} \n" +
-                "\t h2-database: \t http://{}:{}/h2-console \n" +
-                "--------------------------------------------------------- \n", 
-                port, 
-                httpPort, 
-                httpPort, 
-                ip, httpPort, path, 
-                ip, port, 
-                ip, port, 
-                ip, httpPort,
-                ip, httpPort);
+						"\t EasyMedia is running! Access address: \n" +
+						"\t media port at : \t {} \n" +
+						"\t http port at : \t {} \n" +
+						"\t web Local: \t http://localhost:{} \n" +
+						"\t web External: \t http://{}:{}{} \n" +
+						"\t httpflv: \t http://{}:{}/live?url={您的源地址} \n" +
+						"\t wsflv: \t ws://{}:{}/live?url={您的源地址} \n" +
+						"\t hls(m3u8): \t http://{}:{}/hls?url={您的源地址} \n" +
+						"\t h2-database: \t http://{}:{}/h2-console \n" +
+						"--------------------------------------------------------- \n",
+				port,
+				httpPort,
+				httpPort,
+				ip, httpPort, path,
+				ip, port,
+				ip, port,
+				ip, httpPort,
+				ip, httpPort);
 		mediaServer.start(new InetSocketAddress("0.0.0.0", port));
 	}
 
@@ -86,7 +83,7 @@ public class InitServer implements CommandLineRunner {
 		List<Camera> selectList = cameraMapper.selectList(null);
 		if (null != selectList && !selectList.isEmpty()) {
 			LogUtils.info("已启动自动拉流！");
-			
+
 			for (Camera camera : selectList) {
 				//已启用的自动拉流，不启用的不自动拉
 				CameraDto cameraDto = new CameraDto();
@@ -96,8 +93,8 @@ public class InitServer implements CommandLineRunner {
 				cameraDto.setEnabledFlv(camera.getFlv() == 1 ? true : false);
 				cameraDto.setEnabledHls(camera.getHls() == 1 ? true : false);
 				cameraDto.setMediaKey(camera.getMediaKey());
-				
-				if(camera.getFlv() == 1) {
+
+				if (camera.getFlv() == 1) {
 					mediaService.playForApi(cameraDto);
 				}
 				if (camera.getHls() == 1) {

@@ -3,7 +3,7 @@ package com.taotao.cloud.wechat.biz.wecom.controller;
 import cn.bootx.common.core.rest.PageResult;
 import cn.bootx.common.core.rest.Res;
 import cn.bootx.common.core.rest.ResResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.starter.wecom.core.robot.service.WecomRobotConfigService;
 import cn.bootx.starter.wecom.dto.robot.WecomRobotConfigDto;
 import cn.bootx.starter.wecom.param.robot.WecomRobotConfigParam;
@@ -43,8 +43,8 @@ public class WecomRobotConfigController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<WecomRobotConfigDto>> page(PageParam pageParam,WecomRobotConfigParam param){
-        return Res.ok(robotConfigService.page(pageParam,param));
+    public ResResult<PageResult<WecomRobotConfigDto>> page(PageQuery PageQuery,WecomRobotConfigParam param){
+        return Res.ok(robotConfigService.page(PageQuery,param));
     }
 
     @Operation(summary = "查询全部")

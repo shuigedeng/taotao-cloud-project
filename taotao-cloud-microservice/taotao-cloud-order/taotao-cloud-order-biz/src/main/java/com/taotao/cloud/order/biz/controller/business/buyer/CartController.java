@@ -1,13 +1,15 @@
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.service.business.cart.ICartService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,9 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 /**
  * 买家端，购物车API
@@ -48,8 +47,8 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> add(@NotNull(message = "产品id不能为空") String skuId,
-							   @NotNull(message = "购买数量不能为空") @Min(value = 1, message = "加入购物车数量必须大于0") Integer num,
-							   String cartType) {
+			@NotNull(message = "购买数量不能为空") @Min(value = 1, message = "加入购物车数量必须大于0") Integer num,
+			String cartType) {
 		//读取选中的列表
 		return Result.success(cartService.add(skuId, num, cartType, false));
 	}
@@ -83,8 +82,8 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/sku/num/{skuId}")
 	public Result<Boolean> update(
-		@NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
-		Integer num) {
+			@NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
+			Integer num) {
 		return Result.success(cartService.add(skuId, num, CartTypeEnum.CART.name(), true));
 	}
 
@@ -93,8 +92,8 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/sku/checked/{skuId}")
 	public Result<Boolean> updateChecked(
-		@NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
-		boolean checked) {
+			@NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
+			boolean checked) {
 		return Result.success(cartService.checked(skuId, checked));
 	}
 
@@ -111,8 +110,8 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/store/{storeId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Result<Boolean> updateStoreAll(
-		@NotNull(message = "卖家id不能为空") @PathVariable(name = "storeId") String storeId,
-		boolean checked) {
+			@NotNull(message = "卖家id不能为空") @PathVariable(name = "storeId") String storeId,
+			boolean checked) {
 		return Result.success(cartService.checkedStore(storeId, checked));
 	}
 
@@ -136,7 +135,8 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/checked")
-	public Result<com.taotao.cloud.order.api.model.dto.cart.TradeDTO> cartChecked(@NotNull(message = "读取选中列表") String way) {
+	public Result<com.taotao.cloud.order.api.model.dto.cart.TradeDTO> cartChecked(
+			@NotNull(message = "读取选中列表") String way) {
 		//读取选中的列表
 		return Result.success(this.cartService.getCheckedTradeDTO(CartTypeEnum.valueOf(way)));
 	}
@@ -146,7 +146,7 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/shippingAddress")
 	public Result<Boolean> shippingAddress(
-		@NotNull(message = "收货地址ID不能为空") String shippingAddressId, String way) {
+			@NotNull(message = "收货地址ID不能为空") String shippingAddressId, String way) {
 		return Result.success(cartService.shippingAddress(shippingAddressId, way));
 	}
 
@@ -155,9 +155,9 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/shippingMethod")
 	public Result<Boolean> shippingMethod(
-		@NotNull(message = "配送方式不能为空") String shippingMethod,
-		String selleId,
-		String way) {
+			@NotNull(message = "配送方式不能为空") String shippingMethod,
+			String selleId,
+			String way) {
 		return Result.success(cartService.shippingMethod(selleId, shippingMethod, way));
 	}
 
@@ -174,7 +174,7 @@ public class CartController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/coupon")
 	public Result<Boolean> selectCoupon(String way,
-										@NotNull(message = "优惠券id不能为空") String memberCouponId, boolean used) {
+			@NotNull(message = "优惠券id不能为空") String memberCouponId, boolean used) {
 		return Result.success(this.cartService.selectCoupon(memberCouponId, way, used));
 	}
 

@@ -6,7 +6,6 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintCommunicationDTO;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintDTO;
@@ -17,8 +16,10 @@ import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,8 +30,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 /**
  * 买家端,交易投诉API
@@ -61,7 +60,8 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<OrderComplaintVO> get(@PathVariable Long id) {
-		OrderComplaintVO orderComplaintVO = OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id));
+		OrderComplaintVO orderComplaintVO = OperationalJudgment.judgment(
+				orderComplaintService.getOrderComplainById(id));
 		return Result.success(orderComplaintVO);
 	}
 
@@ -70,9 +70,12 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageResult<OrderComplaintBaseVO>> get(@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
-		IPage<OrderComplaint> orderComplainByPage = orderComplaintService.getOrderComplainByPage(orderComplaintPageQuery);
-		return Result.success(PageResult.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
+	public Result<PageResult<OrderComplaintBaseVO>> get(
+			@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
+		IPage<OrderComplaint> orderComplainByPage = orderComplaintService.getOrderComplainByPage(
+				orderComplaintPageQuery);
+		return Result.success(
+				PageResult.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
 	}
 
 	@Operation(summary = "添加交易投诉", description = "添加交易投诉")
@@ -88,17 +91,18 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(@PathVariable("complainId") Long complainId,
-											@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
+			@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
 		SecurityUser user = SecurityUtils.getCurrentUser();
 		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
-			.complainId(complainId)
-			.content(orderComplaintCommunicationDTO.content())
-			.owner(CommunicationOwnerEnum.BUYER.name())
-			.ownerName(user.getNickname())
-			.ownerId(user.getUserId())
-			.build();
+				.complainId(complainId)
+				.content(orderComplaintCommunicationDTO.content())
+				.owner(CommunicationOwnerEnum.BUYER.name())
+				.ownerName(user.getNickname())
+				.ownerId(user.getUserId())
+				.build();
 
-		return Result.success(orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
+		return Result.success(
+				orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
 	}
 
 	@Operation(summary = "取消售后", description = "取消售后")

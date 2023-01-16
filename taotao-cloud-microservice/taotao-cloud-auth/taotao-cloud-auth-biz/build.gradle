@@ -1,12 +1,14 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-core"
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-feign"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
     implementation "io.github.shuigedeng:taotao-cloud-starter-springdoc"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-nacos"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
@@ -23,13 +25,13 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
 
     //https://search.maven.org/artifact/org.webjars/jquery
-    implementation "org.webjars:jquery:3.6.1"
+    implementation "org.webjars:jquery:3.6.3"
     //https://search.maven.org/artifact/org.webjars/bootstrap
-    implementation "org.webjars:bootstrap:5.2.2"
+    implementation "org.webjars:bootstrap:5.2.3"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
     implementation "org.webjars:webjars-locator-core:0.52"
 
-    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5"
+    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.1.0.RELEASE"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     implementation("org.springframework.boot:spring-boot-starter-web") {
@@ -45,15 +47,14 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server
-    implementation "org.springframework.security:spring-security-oauth2-authorization-server:0.4.0"
+    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:1.0.0'
 
-    //https://search.maven.org/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
-    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4"
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:9.25.1"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.28"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation "com.nimbusds:oauth2-oidc-sdk:9.43.1"
+    implementation "com.nimbusds:oauth2-oidc-sdk:10.4"
 
     implementation "org.apache.commons:commons-collections4"
 
@@ -68,6 +69,7 @@ dependencies {
         exclude group: "org.slf4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-api"
     }
+
 }
 
 mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"

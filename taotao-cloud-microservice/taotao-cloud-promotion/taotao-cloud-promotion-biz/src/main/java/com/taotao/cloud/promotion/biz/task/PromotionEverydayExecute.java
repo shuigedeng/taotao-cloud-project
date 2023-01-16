@@ -50,7 +50,7 @@ public class PromotionEverydayExecute implements EveryDayExecute {
 	 * 添加30天后的秒杀活动
 	 */
 	private void addSeckill() {
-		SeckillSetting seckillSetting = settingService.getSeckillSetting(SettingCategoryEnum.SECKILL_SETTING.name()).data();
+		SeckillSetting seckillSetting = settingService.getSeckillSetting(SettingCategoryEnum.SECKILL_SETTING.name());
 		for (int i = 1; i <= SeckillService.PRE_CREATION; i++) {
 			Seckill seckill = new Seckill(i, seckillSetting.getHours(), seckillSetting.getSeckillRule());
 			seckillService.savePromotions(seckill);

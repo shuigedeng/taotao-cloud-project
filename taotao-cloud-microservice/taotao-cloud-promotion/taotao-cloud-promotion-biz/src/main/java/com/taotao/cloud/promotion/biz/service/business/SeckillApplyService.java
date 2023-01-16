@@ -2,7 +2,7 @@ package com.taotao.cloud.promotion.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.model.query.SeckillPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
@@ -46,7 +46,7 @@ public interface SeckillApplyService extends IService<SeckillApply> {
 	 * @return {@link IPage }<{@link SeckillApply }>
 	 * @since 2022-04-27 16:44:22
 	 */
-	IPage<SeckillApply> getSeckillApply(SeckillPageQuery queryParam, PageParam pageVo);
+	IPage<SeckillApply> getSeckillApply(SeckillPageQuery queryParam, PageQuery pageVo);
 
 	/**
 	 * 分页查询限时请购申请列表

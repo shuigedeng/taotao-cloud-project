@@ -1,10 +1,10 @@
 package com.taotao.cloud.goods.api.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
-import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

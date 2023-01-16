@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.member.biz.event.member;
 
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -27,7 +26,11 @@ import org.springframework.context.ApplicationEvent;
  */
 public class MemberCreateEvent extends ApplicationEvent {
 
-	public MemberCreateEvent(AfterSaleLog afterSaleLog) {
-		super(afterSaleLog);
+	public MemberCreateEvent(Object source) {
+		super(source);
 	}
+
+	//public MemberCreateEvent(AfterSaleLog afterSaleLog) {
+	//	super(afterSaleLog);
+	//}
 }

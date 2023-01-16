@@ -28,9 +28,9 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import org.hibernate.annotations.Type;
@@ -80,7 +80,7 @@ public class Company extends BaseSuperEntity<Company, Long> {
 	 * @Select("SELECT * FROM person WHERE id=#{id}")
 	 * Person selectOneById(int id);
 	 */
-	@Type(type="json")
+	//@Type(type="json")
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "id_tree", columnDefinition = "json null comment 'id树'")
 	private List<String> idTree;

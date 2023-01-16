@@ -3,12 +3,12 @@ package com.taotao.cloud.workflow.biz.engine.service;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
-import com.taotao.cloud.workflow.biz.engine.model.FlowHandleModel;
-import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowBeforeInfoVO;
-import com.taotao.cloud.workflow.biz.engine.model.flowbefore.FlowSummary;
-import com.taotao.cloud.workflow.biz.engine.model.flowcandidate.FlowCandidateUserModel;
-import com.taotao.cloud.workflow.biz.engine.model.flowcandidate.FlowCandidateVO;
-import com.taotao.cloud.workflow.biz.engine.model.flowengine.FlowModel;
+import com.taotao.cloud.workflow.api.common.model.engine.FlowHandleModel;
+import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowBeforeInfoVO;
+import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowSummary;
+import com.taotao.cloud.workflow.api.common.model.engine.flowcandidate.FlowCandidateUserModel;
+import com.taotao.cloud.workflow.api.common.model.engine.flowcandidate.FlowCandidateVO;
+import com.taotao.cloud.workflow.api.common.model.engine.flowengine.FlowModel;
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.util.List;
 

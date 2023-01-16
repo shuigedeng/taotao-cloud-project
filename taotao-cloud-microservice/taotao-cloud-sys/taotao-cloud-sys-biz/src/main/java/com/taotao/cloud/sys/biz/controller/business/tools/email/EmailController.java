@@ -1,5 +1,8 @@
 package com.taotao.cloud.sys.biz.controller.business.tools.email;
 
+import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
+import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
+
 import com.taotao.cloud.cache.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.cache.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.common.model.Result;
@@ -23,9 +26,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
-import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
 
 /**
  * EmailController

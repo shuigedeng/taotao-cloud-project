@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationHolder;
 import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -24,13 +24,13 @@ public abstract class AbstractDeduplicationBuilder implements Builder {
 	}
 
 	public DeduplicationParam getParamsFromConfig(Integer key, String duplicationConfig,
-		TaskInfo taskInfo) {
+			TaskInfo taskInfo) {
 		JSONObject object = JSONObject.parseObject(duplicationConfig);
 		if (object == null) {
 			return null;
 		}
 		DeduplicationParam deduplicationParam = JSONObject.parseObject(
-			object.getString(DEDUPLICATION_CONFIG_PRE + key), DeduplicationParam.class);
+				object.getString(DEDUPLICATION_CONFIG_PRE + key), DeduplicationParam.class);
 		if (deduplicationParam == null) {
 			return null;
 		}

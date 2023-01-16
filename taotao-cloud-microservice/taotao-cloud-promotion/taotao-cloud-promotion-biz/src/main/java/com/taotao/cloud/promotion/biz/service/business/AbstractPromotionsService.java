@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.service.business;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.model.query.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.biz.model.entity.BasePromotions;
 
@@ -74,7 +74,7 @@ public interface AbstractPromotionsService<T extends BasePromotions<T, Long>> ex
 	 * @return {@link IPage }<{@link T }>
 	 * @since 2022-04-27 16:42:25
 	 */
-	<S extends BasePromotionsSearchQuery> IPage<T> pageFindAll(S searchParams, PageParam page);
+	<S extends BasePromotionsSearchQuery> IPage<T> pageFindAll(S searchParams, PageQuery page);
 
 	/**
 	 * 列表查询促销信息

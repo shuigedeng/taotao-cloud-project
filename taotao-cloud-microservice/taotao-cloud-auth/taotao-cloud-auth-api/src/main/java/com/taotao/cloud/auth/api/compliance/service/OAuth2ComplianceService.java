@@ -1,4 +1,4 @@
-//
+package com.taotao.cloud.auth.api.compliance.service;//
 // package com.taotao.cloud.auth.api.compliance.service;
 //
 // import cn.herodotus.engine.data.core.repository.BaseRepository;
@@ -20,8 +20,8 @@
 // import org.springframework.data.jpa.domain.Specification;
 // import org.springframework.stereotype.Service;
 //
-// import javax.persistence.criteria.Predicate;
-// import javax.servlet.http.HttpServletRequest;
+// import jakarta.persistence.criteria.Predicate;
+// import jakarta.servlet.http.HttpServletRequest;
 // import java.util.ArrayList;
 // import java.util.List;
 //

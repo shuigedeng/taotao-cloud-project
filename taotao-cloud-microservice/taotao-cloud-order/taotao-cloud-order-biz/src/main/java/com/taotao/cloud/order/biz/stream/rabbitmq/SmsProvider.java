@@ -3,7 +3,7 @@ package com.taotao.cloud.order.biz.stream.rabbitmq;
 
 import com.taotao.cloud.rocketmq.channel.TaoTaoCloudSource;
 import java.util.UUID;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;

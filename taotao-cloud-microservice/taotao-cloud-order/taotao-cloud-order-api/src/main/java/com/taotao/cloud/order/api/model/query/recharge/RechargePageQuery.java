@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.api.model.query.recharge;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "预存款充值记录查询条件")
-public class RechargePageQuery extends PageParam implements Serializable {
+public class RechargePageQuery extends PageQuery implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 318396158590640917L;
 

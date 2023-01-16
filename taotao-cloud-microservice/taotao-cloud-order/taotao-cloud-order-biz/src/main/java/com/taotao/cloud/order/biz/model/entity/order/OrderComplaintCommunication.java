@@ -2,6 +2,11 @@ package com.taotao.cloud.order.biz.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.io.Serial;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,12 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.io.Serial;
-import java.util.Objects;
 
 
 /**
@@ -34,7 +33,8 @@ import java.util.Objects;
 @Table(name = OrderComplaintCommunication.TABLE_NAME)
 @TableName(OrderComplaintCommunication.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = OrderComplaintCommunication.TABLE_NAME, comment = "订单交易投诉通信表")
-public class OrderComplaintCommunication extends BaseSuperEntity<OrderComplaintCommunication, Long> {
+public class OrderComplaintCommunication extends
+		BaseSuperEntity<OrderComplaintCommunication, Long> {
 
 	public static final String TABLE_NAME = "tt_order_complaint_communication";
 

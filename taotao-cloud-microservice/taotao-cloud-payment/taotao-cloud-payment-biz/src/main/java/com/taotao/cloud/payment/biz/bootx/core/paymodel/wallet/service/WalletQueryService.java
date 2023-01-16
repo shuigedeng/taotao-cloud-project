@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.service;
 
 import cn.bootx.common.core.exception.DataNotExistException;
 import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.iam.core.user.service.UserAdminService;
 import cn.bootx.iam.dto.user.UserInfoDto;
@@ -60,15 +60,15 @@ public class WalletQueryService {
     /**
      * 查询用户 分页
      */
-    public PageResult<WalletDto> page(PageParam pageParam, WalletPayParam param){
-        return MpUtil.convert2DtoPageResult(walletManager.page(pageParam,param));
+    public PageResult<WalletDto> page(PageQuery PageQuery, WalletPayParam param){
+        return MpUtil.convert2DtoPageResult(walletManager.page(PageQuery,param));
     }
 
     /**
      * 待开通钱包的用户列表
      */
-    public PageResult<UserInfoDto> pageByNotWallet(PageParam pageParam, UserInfoParam userInfoParam){
-        return MpUtil.convert2DtoPageResult(walletManager.pageByNotWallet(pageParam,userInfoParam));
+    public PageResult<UserInfoDto> pageByNotWallet(PageQuery PageQuery, UserInfoParam userInfoParam){
+        return MpUtil.convert2DtoPageResult(walletManager.pageByNotWallet(PageQuery,userInfoParam));
     }
 
 }

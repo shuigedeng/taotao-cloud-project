@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.controller;
 
 import cn.hutool.db.PageResult;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.service.WalletQueryService;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.service.WalletService;
 import com.taotao.cloud.payment.biz.bootx.dto.paymodel.wallet.WalletDto;
@@ -66,14 +66,14 @@ public class WalletController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<WalletDto>> page(PageParam pageParam, WalletPayParam param){
-        return Res.ok(walletQueryService.page(pageParam,param));
+    public ResResult<PageResult<WalletDto>> page(PageQuery PageQuery, WalletPayParam param){
+        return Res.ok(walletQueryService.page(PageQuery,param));
     }
 
     @Operation(summary = "分页")
     @GetMapping("/pageByNotWallet")
-    public ResResult<PageResult<UserInfoDto>> pageByNotWallet(PageParam pageParam, UserInfoParam param){
-        return Res.ok(walletQueryService.pageByNotWallet(pageParam,param));
+    public ResResult<PageResult<UserInfoDto>> pageByNotWallet(PageQuery PageQuery, UserInfoParam param){
+        return Res.ok(walletQueryService.pageByNotWallet(PageQuery,param));
     }
 
     @Operation(summary = "根据用户查询钱包")

@@ -6,6 +6,8 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -14,9 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 /**
  * 管理端,分类品牌接口
@@ -42,7 +41,7 @@ public class CategoryBrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<CategoryBrandVO>> getCategoryBrand(
-		@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId) {
+			@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId) {
 		return Result.success(categoryBrandService.getCategoryBrandList(categoryId));
 	}
 
@@ -51,10 +50,10 @@ public class CategoryBrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}/{categoryBrands}")
 	public Result<Boolean> saveCategoryBrand(
-		@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId,
-		@NotBlank(message = "品牌id列表不能为空") @PathVariable(value = "categoryBrands") List<Long> categoryBrands) {
+			@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId,
+			@NotBlank(message = "品牌id列表不能为空") @PathVariable(value = "categoryBrands") List<Long> categoryBrands) {
 		return Result.success(
-			categoryBrandService.saveCategoryBrandList(categoryId, categoryBrands));
+				categoryBrandService.saveCategoryBrandList(categoryId, categoryBrands));
 	}
 
 }

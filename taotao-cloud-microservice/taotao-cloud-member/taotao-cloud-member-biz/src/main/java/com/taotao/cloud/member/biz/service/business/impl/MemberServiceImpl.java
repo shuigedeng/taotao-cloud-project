@@ -42,13 +42,13 @@ import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.service.business.MemberService;
 import com.taotao.cloud.member.biz.token.MemberTokenGenerate;
 import com.taotao.cloud.member.biz.token.StoreTokenGenerate;
+import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
 import com.taotao.cloud.store.api.web.vo.StoreVO;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import com.taotao.cloud.web.sensitive.word.SensitiveWordsFilter;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -156,8 +156,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 		}
 		//对店铺状态的判定处理
 		if (Boolean.TRUE.equals(member.getHaveStore())) {
-			Result<StoreVO> storeResult = feignStoreService.findSotreById(member.getStoreId());
-			StoreVO store = storeResult.data();
+			StoreVO store = feignStoreService.findSotreById(member.getStoreId());
 			if (!store.getStoreDisable().equals(StoreStatusEnum.OPEN.name())) {
 				throw new BusinessException(ResultEnum.STORE_CLOSE_ERROR);
 			}

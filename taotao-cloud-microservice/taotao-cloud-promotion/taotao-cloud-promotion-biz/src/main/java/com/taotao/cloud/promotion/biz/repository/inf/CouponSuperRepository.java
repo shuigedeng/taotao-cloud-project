@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.biz.repository.inf;///*
 //import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
 //import org.springframework.stereotype.Repository;
 //
-//import javax.persistence.EntityManager;
+//import jakarta.persistence.EntityManager;
 //
 ///**
 // * @author shuigedeng

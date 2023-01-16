@@ -2,17 +2,13 @@ package com.taotao.cloud.promotion.api.model.vo;
 
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.io.Serial;
-import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * 秒杀活动申请视图对象

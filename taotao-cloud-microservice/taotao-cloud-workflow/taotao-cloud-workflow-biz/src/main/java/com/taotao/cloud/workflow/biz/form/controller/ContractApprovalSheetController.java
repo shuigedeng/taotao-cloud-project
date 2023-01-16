@@ -5,10 +5,10 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.ContractApprovalSheetEntity;
-import com.taotao.cloud.workflow.biz.form.model.contractapprovalsheet.ContractApprovalSheetForm;
-import com.taotao.cloud.workflow.biz.form.model.contractapprovalsheet.ContractApprovalSheetInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.contractapprovalsheet.ContractApprovalSheetForm;
+import com.taotao.cloud.workflow.api.common.model.form.contractapprovalsheet.ContractApprovalSheetInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.ContractApprovalSheetService;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.hibernate.exception.DataException;

@@ -1,4 +1,4 @@
-//package com.taotao.cloud.wechat.biz.util;
+package com.taotao.cloud.wechat.biz.util;//package com.taotao.cloud.wechat.biz.util;
 //
 //
 //import com.taotao.cloud.common.enums.ResultEnum;

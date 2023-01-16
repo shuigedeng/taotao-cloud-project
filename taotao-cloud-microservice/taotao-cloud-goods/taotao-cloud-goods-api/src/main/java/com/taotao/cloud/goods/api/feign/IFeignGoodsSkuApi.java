@@ -20,18 +20,18 @@ import java.util.List;
 public interface IFeignGoodsSkuApi {
 
 	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<Boolean> updateGoodsStuck(List<GoodsSkuSpecGalleryVO> goodsSkus);
+	Boolean updateGoodsStuck(List<GoodsSkuSpecGalleryVO> goodsSkus);
 
 	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<Boolean> updateBatchById(List<GoodsSkuSpecGalleryVO> goodsSkus);
+	Boolean updateBatchById(List<GoodsSkuSpecGalleryVO> goodsSkus);
 
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<List<GoodsSkuSpecGalleryVO>> getGoodsSkuByIdFromCache(List<Long> skuIds);
+	List<GoodsSkuSpecGalleryVO> getGoodsSkuByIdFromCache(List<Long> skuIds);
 
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<GoodsSkuSpecGalleryVO> getGoodsSkuByIdFromCache(Long skuId);
+	GoodsSkuSpecGalleryVO getGoodsSkuByIdFromCache(Long skuId);
 
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<Integer> getStock(String skuId);
+	Integer getStock(String skuId);
 }
 

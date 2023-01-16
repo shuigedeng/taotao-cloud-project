@@ -1,6 +1,6 @@
 package com.taotao.cloud.wechat.biz.wechat.core.user.dao;
 
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.base.MpIdEntity;
 import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
@@ -24,8 +24,8 @@ public class WechatFansManager extends BaseManager<WechatFansMapper, WechatFans>
     /**
     * 分页
     */
-    public Page<WechatFans> page(PageParam pageParam, WechatFansParam param) {
-        Page<WechatFans> mpPage = MpUtil.getMpPage(pageParam, WechatFans.class);
+    public Page<WechatFans> page(PageQuery PageQuery, WechatFansParam param) {
+        Page<WechatFans> mpPage = MpUtil.getMpPage(PageQuery, WechatFans.class);
         return lambdaQuery().orderByDesc(MpIdEntity::getId).page(mpPage);
     }
 

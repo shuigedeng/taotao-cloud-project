@@ -1,4 +1,4 @@
-//
+package com.taotao.cloud.auth.api.compliance.configuration;//
 // package com.taotao.cloud.auth.api.compliance.configuration;
 //
 // import org.slf4j.Logger;
@@ -11,7 +11,7 @@
 // import org.springframework.context.annotation.Configuration;
 // import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //
-// import javax.annotation.PostConstruct;
+// import jakarta.annotation.PostConstruct;
 //
 // /**
 //  * <p>Description: OAuth2 应用安全合规配置 </p>

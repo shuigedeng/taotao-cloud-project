@@ -4,11 +4,10 @@ import cn.hutool.core.convert.Convert;
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
 import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Component;
 
 /**
  * 商品定时器
@@ -19,15 +18,14 @@ import java.util.Map;
  */
 @Component
 public class GoodsExecute implements EveryDayExecute {
+
 	/**
-	 * 成员评价映射器
-	 * 会员评价
+	 * 成员评价映射器 会员评价
 	 */
 	@Resource
 	private IFeignMemberEvaluationApi memberEvaluationMapper;
 	/**
-	 * 货物映射器
-	 * 商品
+	 * 货物映射器 商品
 	 */
 	@Resource
 	private IGoodsMapper goodsMapper;
@@ -40,10 +38,11 @@ public class GoodsExecute implements EveryDayExecute {
 	@Override
 	public void execute() {
 		//查询上次统计到本次的评价数量
-		List<Map<String, Object>> list = memberEvaluationMapper.memberEvaluationNum().data();
+		List<Map<String, Object>> list = memberEvaluationMapper.memberEvaluationNum();
 
 		for (Map<String, Object> map : list) {
-			goodsMapper.addGoodsCommentNum(Convert.toInt(map.get("num").toString()), Convert.toLong(map.get("goods_id")));
+			goodsMapper.addGoodsCommentNum(Convert.toInt(map.get("num").toString()),
+					Convert.toLong(map.get("goods_id")));
 		}
 
 	}

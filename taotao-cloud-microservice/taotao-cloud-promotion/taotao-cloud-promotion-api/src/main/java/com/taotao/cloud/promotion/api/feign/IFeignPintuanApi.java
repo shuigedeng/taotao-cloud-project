@@ -19,6 +19,8 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignPintuanApiFallback;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * 远程调用售后模块
@@ -28,7 +30,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  */
 @FeignClient(contextId = "IFeignPintuanService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignPintuanApiFallback.class)
 public interface IFeignPintuanApi {
-
+	@GetMapping(value = "/getById")
 	PintuanVO getById(Long pintuanId);
 
 }

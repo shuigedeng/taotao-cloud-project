@@ -1,12 +1,14 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-core"
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-feign"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
     implementation "io.github.shuigedeng:taotao-cloud-starter-springdoc"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-nacos"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
@@ -17,10 +19,10 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
-//    implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
@@ -32,6 +34,7 @@ dependencies {
     implementation "cn.dev33:sa-token-oauth2:1.33.0"
     //Sa-Token 插件：整合SSO
     implementation "cn.dev33:sa-token-sso:1.33.0"
+
 }
 
 description = "认证模块api"

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.util.Date;
 import lombok.Data;
 
@@ -13,88 +14,88 @@ import lombok.Data;
  */
 @Data
 @TableName("flow_tasknode")
-public class FlowTaskNodeEntity {
+public class FlowTaskNodeEntity extends SuperEntity<FlowTaskNodeEntity, String> {
     /**
      * 节点实例主键
      */
-    @TableId("F_ID")
+    @TableId("id")
     private String id;
 
     /**
      * 节点编码
      */
-    @TableField("F_NODECODE")
+    @TableField("node_code")
     private String nodeCode;
 
     /**
      * 节点名称
      */
-    @TableField("F_NODENAME")
+    @TableField("node_name")
     private String nodeName;
 
     /**
      * 节点类型
      */
-    @TableField("F_NODETYPE")
+    @TableField("node_type")
     private String nodeType;
 
     /**
      * 节点属性Json
      */
-    @TableField("F_NODEPROPERTYJSON")
+    @TableField("node_property_json")
     private String nodePropertyJson;
 
     /**
      * 上一节点 1.上一步骤 0.返回开始
      */
-    @TableField("F_NODEUP")
+    @TableField("node_up")
     private String nodeUp;
 
     /**
      * 下一节点
      */
-    @TableField("F_NODENEXT")
+    @TableField("node_next")
     private String nodeNext;
 
     /**
      * 是否完成
      */
-    @TableField("F_COMPLETION")
+    @TableField("completion")
     private Integer completion;
 
     /**
      * 描述
      */
-    @TableField("F_DESCRIPTION")
+    @TableField("description")
     private String description;
 
     /**
      * 排序码
      */
-    @TableField("F_SORTCODE")
+    @TableField("sort_code")
     private Long sortCode;
 
     /**
      * 创建时间
      */
-    @TableField(value = "F_CREATORTIME",fill = FieldFill.INSERT)
+    @TableField(value = "creator_time",fill = FieldFill.INSERT)
     private Date creatorTime;
 
     /**
      * 任务主键
      */
-    @TableField("F_TASKID")
+    @TableField("task_id")
     private String taskId;
 
     /**
      * 状态 0.新流程 -1.无用节点
      */
-    @TableField("F_State")
+    @TableField("state")
     private Integer state;
 
     /**
      * 候选人
      */
-    @TableField("F_CANDIDATES")
+    @TableField("candidates")
     private String candidates;
 }

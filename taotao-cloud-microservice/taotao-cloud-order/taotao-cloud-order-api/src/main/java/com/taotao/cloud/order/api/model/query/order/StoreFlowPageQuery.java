@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.api.model.query.order;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺流水查询DTO")
-public class StoreFlowPageQuery extends PageParam {
+public class StoreFlowPageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;

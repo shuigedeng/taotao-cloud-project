@@ -15,6 +15,7 @@ import com.taotao.cloud.auth.biz.utils.RedirectLoginAuthenticationSuccessHandler
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import java.util.function.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -23,17 +24,22 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2Clien
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authorization.AuthenticatedAuthorizationManager;
+import org.springframework.security.authorization.AuthorizationDecision;
+import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -47,6 +53,7 @@ import org.springframework.security.oauth2.server.resource.web.DefaultBearerToke
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -63,12 +70,12 @@ import java.util.Map;
  * @version 2021.10
  * @since 2021-12-21 10:20:47
  */
-@EnableGlobalMethodSecurity(
+@EnableMethodSecurity(
 	prePostEnabled = true,
-	order = 0,
 	mode = AdviceMode.PROXY
 )
 @EnableWebSecurity
+@Configuration
 public class SystemSecurityConfiguration implements EnvironmentAware {
 
 	private static Map<String, String> cache = new HashMap<>();
@@ -209,12 +216,16 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 			.and()
-			.authorizeRequests(authorizeRequests ->
+			.authorizeHttpRequests(authorizeRequests ->
 				authorizeRequests
 					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-					.antMatchers(permitAllUrls).permitAll()
-					.antMatchers("/webjars/**", "/user/login", "/login-error", "/index").permitAll()
-					.mvcMatchers("/messages/**").access("hasAuthority('ADMIN')")
+					.requestMatchers(permitAllUrls).permitAll()
+					.requestMatchers("/webjars/**", "/user/login", "/login-error", "/index").permitAll()
+					.requestMatchers("/messages/**")
+					.access((authentication, object) -> {
+						//.access("hasAuthority('ADMIN')")
+						return null;
+					})
 					.anyRequest().authenticated()
 			)
 			// **************************************资源服务器配置***********************************************

@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.demo.service.wxpay;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,7 @@ package com.taotao.cloud.wechat.biz.wechat.core.notice.service;
 
 import cn.bootx.common.core.exception.DataNotExistException;
 import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.core.util.ResultConvertUtil;
 import cn.bootx.common.mybatisplus.base.MpIdEntity;
 import cn.bootx.common.mybatisplus.util.MpUtil;
@@ -54,8 +54,8 @@ public class WeChatTemplateService {
     /**
      * 分页
      */
-    public PageResult<WeChatTemplateDto> page(PageParam pageParam, WeChatTemplateParam weChatTemplateParam){
-        return MpUtil.convert2DtoPageResult(weChatTemplateManager.page(pageParam,weChatTemplateParam));
+    public PageResult<WeChatTemplateDto> page(PageQuery PageQuery, WeChatTemplateParam weChatTemplateParam){
+        return MpUtil.convert2DtoPageResult(weChatTemplateManager.page(PageQuery,weChatTemplateParam));
     }
 
     /**

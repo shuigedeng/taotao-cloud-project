@@ -3,27 +3,27 @@ apply plugin: "idea"
 apply plugin: "java"
 
 dependencies {
-    implementation "org.apache.flink:flink-core:1.15.1"
-    implementation "org.apache.flink:flink-java:1.15.1"
-    implementation "org.apache.flink:flink-scala_2.12:1.15.1"
+    implementation "org.apache.flink:flink-core:1.16.0"
+    implementation "org.apache.flink:flink-java:1.16.0"
+    implementation "org.apache.flink:flink-scala_2.12:1.16.0"
+    implementation "org.apache.flink:flink-streaming-scala_2.12:1.16.0"
 
-    implementation "org.apache.flink:flink-clients_2.12:1.14.4"
-    implementation "org.apache.flink:flink-runtime-web_2.12:1.14.4"
-    implementation "org.apache.flink:flink-streaming-scala_2.12:1.15.1"
-    implementation "org.apache.flink:flink-streaming-java_2.12:1.14.4"
-
-    implementation "org.apache.flink:flink-connector-kafka_2.12:1.14.4"
+    implementation "org.apache.flink:flink-clients_2.12:1.14.6"
+    implementation "org.apache.flink:flink-runtime-web_2.12:1.14.6"
+    implementation "org.apache.flink:flink-streaming-java_2.12:1.14.6"
+    implementation "org.apache.flink:flink-connector-kafka_2.12:1.14.6"
     implementation 'org.apache.kafka:kafka_2.12:3.3.1'
 
-    implementation("org.apache.hudi:hudi-common:0.12.0")
-    implementation("org.apache.hudi:hudi-client:0.12.0")
-    implementation("org.apache.hudi:hudi-flink-client:0.12.0")
+    implementation("org.apache.hudi:hudi-common:0.12.2")
+    implementation("org.apache.hudi:hudi-client:0.12.2")
+    implementation("org.apache.hudi:hudi-flink-client:0.12.2")
 
-    implementation 'org.slf4j:slf4j-api:2.0.3'
-    implementation 'org.slf4j:slf4j-log4j12:2.0.3'
+    implementation 'org.slf4j:slf4j-api:2.0.6'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.6'
 
     implementation "org.apache.flink:flink-table-planner-blink_2.12:1.13.6"
 
+    implementation 'redis.clients:jedis:4.2.1'
 }
 
 repositories {

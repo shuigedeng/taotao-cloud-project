@@ -1,8 +1,8 @@
 package com.taotao.cloud.front.util;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Cookie工具类
@@ -22,7 +22,8 @@ public class CookieUtil {
 	 * @param value
 	 * @param maxAge
 	 */
-	public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
+	public static void addCookie(HttpServletResponse response, String name, String value,
+			int maxAge) {
 		Cookie cookie = new Cookie(name, value);
 		cookie.setPath("/");
 		if (maxAge > 0) {

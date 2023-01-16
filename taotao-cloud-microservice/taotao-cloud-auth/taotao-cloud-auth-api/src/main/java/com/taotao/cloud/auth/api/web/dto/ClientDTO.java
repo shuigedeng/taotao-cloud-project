@@ -17,7 +17,7 @@ package com.taotao.cloud.auth.api.web.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * 客户端对象DTO

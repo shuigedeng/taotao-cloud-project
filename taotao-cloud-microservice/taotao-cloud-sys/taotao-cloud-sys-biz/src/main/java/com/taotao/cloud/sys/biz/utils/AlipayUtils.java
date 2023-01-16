@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
 /**
@@ -69,7 +69,7 @@ public class AlipayUtils {
 			String valueStr = "";
 			for (int i = 0; i < values.length; i++) {
 				valueStr = (i == values.length - 1) ? valueStr + values[i]
-					: valueStr + values[i] + ",";
+						: valueStr + values[i] + ",";
 			}
 			params.put(name, valueStr);
 		}

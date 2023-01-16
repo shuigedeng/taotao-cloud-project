@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 
 /**
@@ -11,5 +11,5 @@ import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 public interface IMemberGradeService extends IService<MemberGrade> {
 
 
-	IPage<MemberGrade> getByPage(PageParam pageParam);
+	IPage<MemberGrade> getByPage(PageQuery PageQuery);
 }

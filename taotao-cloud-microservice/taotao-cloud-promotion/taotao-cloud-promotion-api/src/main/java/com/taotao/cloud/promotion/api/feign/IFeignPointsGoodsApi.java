@@ -19,6 +19,8 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignKanjiaActivityApiFallback;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * IFeignKanjiaActivityService
@@ -29,8 +31,8 @@ import org.springframework.cloud.openfeign.FeignClient;
  */
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignKanjiaActivityApiFallback.class)
 public interface IFeignPointsGoodsApi {
-
+	@PostMapping(value = "/updateById")
 	void updateById(PointsGoodsVO pointsGoodsVO);
-
+	@GetMapping(value = "/getPointsGoodsDetail")
 	PointsGoodsVO getPointsGoodsDetail(Long promotionId);
 }

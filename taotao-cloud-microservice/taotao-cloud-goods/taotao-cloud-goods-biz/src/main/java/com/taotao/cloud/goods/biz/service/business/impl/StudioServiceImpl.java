@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -28,19 +28,19 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IStudioCommodityService;
 import com.taotao.cloud.goods.biz.service.business.IStudioService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
-import com.taotao.cloud.stream.framework.trigger.enums.DelayTypeEnums;
-import com.taotao.cloud.stream.framework.trigger.interfaces.TimeTrigger;
-import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;
-import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
-import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
-import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.mq.stream.framework.trigger.enums.DelayTypeEnums;
+import com.taotao.cloud.mq.stream.framework.trigger.interfaces.TimeTrigger;
+import com.taotao.cloud.mq.stream.framework.trigger.message.BroadcastMessage;
+import com.taotao.cloud.mq.stream.framework.trigger.model.TimeExecuteConstant;
+import com.taotao.cloud.mq.stream.framework.trigger.model.TimeTriggerMsg;
+import com.taotao.cloud.mq.stream.framework.trigger.util.DelayQueueTools;
+import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -71,7 +71,7 @@ public class StudioServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean create(Studio studio) {
-		studio.setStoreId(SecurityUtils.getUser().getStoreId());
+		studio.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
 		//创建小程序直播
 		Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
 		studio.setRoomId(Convert.toInt(roomMap.get("roomId")));
@@ -228,7 +228,7 @@ public class StudioServiceImpl extends
 	}
 
 	@Override
-	public IPage<Studio> studioList(PageParam pageParam, Integer recommend, String status) {
+	public IPage<Studio> studioList(PageQuery PageQuery, Integer recommend, String status) {
 		QueryWrapper<Studio> queryWrapper = new QueryWrapper<Studio>()
 			.eq(recommend != null, "recommend", true)
 			.eq(status != null, "status", status)
@@ -237,7 +237,7 @@ public class StudioServiceImpl extends
 		//	.equals(UserEnums.STORE)) {
 		//	queryWrapper.eq("store_id", UserContext.getCurrentUser().getStoreId());
 		//}
-		return this.page(pageParam.buildMpPage(), queryWrapper);
+		return this.page(PageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override

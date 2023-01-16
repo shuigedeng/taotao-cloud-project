@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.api.model.query.aftersale;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "售后搜索参数")
-public class AfterSalePageQuery extends PageParam {
+public class AfterSalePageQuery extends PageQuery {
 
 	@Serial
 	private static final long serialVersionUID = 8808470688518188146L;

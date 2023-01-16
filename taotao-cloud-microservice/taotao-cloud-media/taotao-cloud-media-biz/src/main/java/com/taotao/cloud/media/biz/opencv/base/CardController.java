@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.Vector;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -36,14 +36,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "card")
 public class CardController extends BaseController {
+
 	private static final Logger logger = LoggerFactory.getLogger(
 			CardController.class);
 
 	/**
-	 * 答题卡识别
-	 * step1 高斯模糊
-	 * 创建者 Songer
-	 * 创建时间	2018年3月22日
+	 * 答题卡识别 step1 高斯模糊 创建者 Songer 创建时间	2018年3月22日
 	 */
 	@RequestMapping(value = "step1")
 	public void step1(HttpServletResponse response, String imagefile, Integer ksize) {
@@ -69,10 +67,7 @@ public class CardController extends BaseController {
 	}
 
 	/**
-	 * 答题卡识别
-	 * step2 二值化，反向二值化
-	 * 创建者 Songer
-	 * 创建时间	2018年3月22日
+	 * 答题卡识别 step2 二值化，反向二值化 创建者 Songer 创建时间	2018年3月22日
 	 */
 	@RequestMapping(value = "step2")
 	public void step2(HttpServletResponse response, String imagefile, BigDecimal thresh) {
@@ -100,10 +95,7 @@ public class CardController extends BaseController {
 	}
 
 	/**
-	 * 答题卡识别
-	 * step3 膨胀腐蚀闭运算(针对反向二值图是开运算)
-	 * 创建者 Songer
-	 * 创建时间	2018年3月22日
+	 * 答题卡识别 step3 膨胀腐蚀闭运算(针对反向二值图是开运算) 创建者 Songer 创建时间	2018年3月22日
 	 */
 	@RequestMapping(value = "step3")
 	public void step3(HttpServletResponse response, String imagefile, Integer ksize) {
@@ -117,7 +109,8 @@ public class CardController extends BaseController {
 		// 加载为灰度图显示
 		Mat source = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
 		Mat destination = new Mat(source.rows(), source.cols(), source.type());
-		Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2 * ksize + 1, 2 * ksize + 1));
+		Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_RECT,
+				new Size(2 * ksize + 1, 2 * ksize + 1));
 
 		Imgproc.morphologyEx(source, destination, Imgproc.MORPH_OPEN, element);
 		String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "card3.png";
@@ -132,10 +125,7 @@ public class CardController extends BaseController {
 	}
 
 	/**
-	 * 答题卡识别
-	 * step4 轮廓识别
-	 * 创建者 Songer
-	 * 创建时间	2018年3月22日
+	 * 答题卡识别 step4 轮廓识别 创建者 Songer 创建时间	2018年3月22日
 	 */
 	@RequestMapping(value = "step4")
 	public void step4(HttpServletResponse response, String imagefile) {
@@ -207,20 +197,21 @@ public class CardController extends BaseController {
 		chlist.add(ch25);
 
 		Mat hierarchy = new Mat();
-        TreeMap<Integer,String> listenAnswer = new TreeMap<Integer,String>();
-        for (int no=0;no<chlist.size();no++) {
-        	Vector<MatOfPoint> contours = new Vector<MatOfPoint>();
-        	Mat ch = chlist.get(no);
-			Imgproc.findContours(ch, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE, new Point());
+		TreeMap<Integer, String> listenAnswer = new TreeMap<Integer, String>();
+		for (int no = 0; no < chlist.size(); no++) {
+			Vector<MatOfPoint> contours = new Vector<MatOfPoint>();
+			Mat ch = chlist.get(no);
+			Imgproc.findContours(ch, contours, hierarchy, Imgproc.RETR_TREE,
+					Imgproc.CHAIN_APPROX_SIMPLE, new Point());
 
 			Vector<RectComp> rectCompList = new Vector<RectComp>();
-        	for(int i = 0;i<contours.size();i++){
-        		MatOfPoint mop= contours.get(i);
+			for (int i = 0; i < contours.size(); i++) {
+				MatOfPoint mop = contours.get(i);
 				// 获取轮廓外矩，即使用最小矩形将轮廓包裹
-        		Rect rm = Imgproc.boundingRect(mop);
+				Rect rm = Imgproc.boundingRect(mop);
 				RectComp rc = new RectComp(rm);
 				rectCompList.add(rc);
-        	}
+			}
 			// System.out.println(no+"size="+rectCompList.size());
 			Collections.sort(rectCompList);
 			// for(int t = 0;t<rectCompList.size();t++){
@@ -266,7 +257,7 @@ public class CardController extends BaseController {
 			}
 			Highgui.imwrite(destPath, result);
 			logger.info("生成目标图片==============" + result);
-        }
+		}
 		String resultValue = "最终结果：试题编号-答案<br> ";
 		for (Integer key : listenAnswer.keySet()) {
 			resultValue += "【" + (key + 1) + ":" + listenAnswer.get(key) + "】";

@@ -19,7 +19,6 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
-import sun.awt.SunHints;
 
 import java.net.URL;
 import java.sql.Timestamp;

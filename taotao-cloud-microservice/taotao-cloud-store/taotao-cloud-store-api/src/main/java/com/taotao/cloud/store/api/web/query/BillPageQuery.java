@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.api.web.query;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "结算单搜索参数")
-public class BillPageQuery extends PageParam {
+public class BillPageQuery extends PageQuery {
 
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

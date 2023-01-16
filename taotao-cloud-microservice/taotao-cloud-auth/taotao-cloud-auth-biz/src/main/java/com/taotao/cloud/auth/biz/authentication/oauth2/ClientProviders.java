@@ -197,8 +197,6 @@ public enum ClientProviders {
 		headers.setContentType(contentType);
 
 		if (ClientAuthenticationMethod.CLIENT_SECRET_BASIC.equals(
-			clientRegistration.getClientAuthenticationMethod())
-			|| ClientAuthenticationMethod.BASIC.equals(
 			clientRegistration.getClientAuthenticationMethod())) {
 			String clientId = encodeClientCredential(clientRegistration.getClientId());
 			String clientSecret = encodeClientCredential(clientRegistration.getClientSecret());

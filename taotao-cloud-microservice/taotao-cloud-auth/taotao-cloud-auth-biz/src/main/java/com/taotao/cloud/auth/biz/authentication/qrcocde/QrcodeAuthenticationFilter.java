@@ -1,6 +1,8 @@
 package com.taotao.cloud.auth.biz.authentication.qrcocde;
 
 import cn.hutool.core.util.StrUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -12,15 +14,12 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 	public static final String SPRING_SECURITY_FORM_UUID_KEY = "uuid";
 
 	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
-		"/login/qrcode", "POST");
+			"/login/qrcode", "POST");
 
 	private String uuidParameter = SPRING_SECURITY_FORM_UUID_KEY;
 
@@ -40,10 +39,10 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-												HttpServletResponse response) throws AuthenticationException {
+			HttpServletResponse response) throws AuthenticationException {
 		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
 			throw new AuthenticationServiceException(
-				"Authentication method not supported: " + request.getMethod());
+					"Authentication method not supported: " + request.getMethod());
 		}
 
 		QrcodeAuthenticationToken authRequest = qrcodeAuthenticationTokenConverter.convert(request);
@@ -62,7 +61,6 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
 			if (StrUtil.isBlank(authorization)) {
 				throw new AuthenticationCredentialsNotFoundException("");
 			}
-
 
 			return new QrcodeAuthenticationToken(username, "");
 		};

@@ -70,7 +70,7 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	 * @return 积分设置
 	 */
 	private PointSettingVO getPointSetting() {
-		PointSettingVO setting = settingService.getPointSetting(SettingCategoryEnum.POINT_SETTING.name()).data();
+		PointSettingVO setting = settingService.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
 		return setting;
 	}
 }

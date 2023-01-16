@@ -9,6 +9,7 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * 管理端,分销佣金管理接口
@@ -45,7 +44,7 @@ public class DistributionCashManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getByPage")
 	public Result<IPage<DistributionCash>> getByPage(
-		DistributionCashSearchVO distributionCashSearchVO) {
+			DistributionCashSearchVO distributionCashSearchVO) {
 		return Result.success(distributorCashService.getDistributionCash(distributionCashSearchVO));
 	}
 
@@ -55,7 +54,9 @@ public class DistributionCashManagerController {
 	@GetMapping("/tree")
 	@PreventDuplicateSubmissions
 	@PostMapping(value = "/audit/{id}")
-	public Result<DistributionCash> audit(@Parameter(description = "分销佣金ID") @PathVariable String id, @Parameter(description = "处理结果") @NotNull String result) {
+	public Result<DistributionCash> audit(
+			@Parameter(description = "分销佣金ID") @PathVariable String id,
+			@Parameter(description = "处理结果") @NotNull String result) {
 		return Result.success(distributorCashService.audit(id, result));
 	}
 }

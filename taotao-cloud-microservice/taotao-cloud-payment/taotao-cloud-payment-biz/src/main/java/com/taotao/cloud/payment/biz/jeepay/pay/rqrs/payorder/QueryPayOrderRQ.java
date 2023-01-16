@@ -18,7 +18,7 @@ package com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.AbstractMchAppRQ;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /*
 * 查询订单请求参数对象

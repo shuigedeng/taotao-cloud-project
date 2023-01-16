@@ -16,6 +16,7 @@
 package com.taotao.cloud.sa.just.biz;
 
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import java.io.File;
 import org.springframework.boot.SpringApplication;
@@ -65,23 +66,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudSaJustApplication {
 
 	public static void main(String[] args) {
-		setNacosProperty();
+		PropertyUtils.setDefaultProperty("taotao-cloud-sa-just");
 
 		SpringApplication.run(TaoTaoCloudSaJustApplication.class, args);
-	}
-
-
-	public static void setNacosProperty() {
-		/**
-		 * 设置nacos客户端日志和快照目录
-		 *
-		 * @see LocalConfigInfoProcessor
-		 */
-		String userHome = System.getProperty("user.home");
-		System.setProperty("JM.LOG.PATH",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-auth");
-		System.setProperty("JM.SNAPSHOT.PATH",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-auth");
-		System.setProperty("nacos.logging.default.config.enabled", "true");
 	}
 }

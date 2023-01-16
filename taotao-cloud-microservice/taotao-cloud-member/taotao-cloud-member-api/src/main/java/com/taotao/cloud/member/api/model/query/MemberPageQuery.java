@@ -16,15 +16,14 @@
 package com.taotao.cloud.member.api.model.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * 会员query
