@@ -1,6 +1,7 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
@@ -25,7 +26,6 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-//    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
