@@ -1,6 +1,7 @@
 package com.taotao.cloud.workflow.biz.engine.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.workflow.api.common.base.Pagination;
 import java.util.List;
 
 import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;

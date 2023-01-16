@@ -15,11 +15,10 @@
  */
 package com.taotao.cloud.sys.biz;
 
-import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
-import java.io.File;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.web.context.WebServerPortFileWriter;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * TaoTaoCloudSysApplication 抑制java9 module 报错
@@ -43,34 +42,18 @@ import org.springframework.boot.web.context.WebServerPortFileWriter;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
+@ComponentScan(basePackages = {"com.taotao.cloud.sys.api.feign.fallback"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
-		setProperty();
-		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
-	}
+		PropertyUtils.setDefaultProperty("taotao-cloud-sys");
 
-
-	public static void setProperty() {
-		/**
-		 * 设置nacos客户端日志和快照目录
-		 *
-		 * @see LocalConfigInfoProcessor
-		 */
-		String userHome = System.getProperty("user.home");
-		System.setProperty("JM.LOG.PATH",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
-		System.setProperty("JM.SNAPSHOT.PATH",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys");
-		System.setProperty("nacos.logging.default.config.enabled", "true");
-
-		/**
-		 * @see WebServerPortFileWriter
-		 */
-		System.setProperty("portfile",
-			userHome + File.separator + "logs" + File.separator + "taotao-cloud-sys"
-				+ File.separator + "taotao-cloud-sys.port");
+		try {
+			SpringApplication.run(TaoTaoCloudSysApplication.class, args);
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

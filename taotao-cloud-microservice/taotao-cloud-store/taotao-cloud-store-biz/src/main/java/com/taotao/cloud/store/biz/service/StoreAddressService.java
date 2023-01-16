@@ -2,7 +2,7 @@ package com.taotao.cloud.store.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.store.biz.model.entity.StoreAddress;
 
 /**
@@ -18,11 +18,11 @@ public interface StoreAddressService extends IService<StoreAddress> {
 	 * 获取当前商家的自提点列表
 	 *
 	 * @param storeId   存储id
-	 * @param pageParam 分页
+	 * @param PageQuery 分页
 	 * @return {@link IPage }<{@link StoreAddress }>
 	 * @since 2022-06-01 15:00:08
 	 */
-	IPage<StoreAddress> getStoreAddress(String storeId, PageParam pageParam);
+	IPage<StoreAddress> getStoreAddress(String storeId, PageQuery PageQuery);
 
 	/**
 	 * 添加商家自提点

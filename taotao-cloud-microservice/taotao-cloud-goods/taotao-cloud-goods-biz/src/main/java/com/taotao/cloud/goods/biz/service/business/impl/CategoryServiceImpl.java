@@ -49,8 +49,7 @@ import java.util.stream.Collectors;
 @CacheConfig(cacheNames = "{category}")
 public class CategoryServiceImpl extends
 	BaseSuperServiceImpl<ICategoryMapper, Category, CategorytRepository, ICategoryRepository, Long>
-	implements
-	ICategoryService {
+	implements ICategoryService {
 
 	private static final String DELETE_FLAG_COLUMN = "delete_flag";
 	/**

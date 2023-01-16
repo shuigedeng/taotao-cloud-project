@@ -40,6 +40,6 @@ public interface IFeignArticleApi {
 	 * @since 2020/11/20 上午9:50
 	 */
 	@GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
-	Result<ArticleVO> getMemberSecurityUser(@PathVariable(value = "id") Long id);
+	ArticleVO getMemberSecurityUser(@PathVariable(value = "id") Long id);
 }
 

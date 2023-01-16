@@ -5,11 +5,11 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.IncomeRecognitionEntity;
-import com.taotao.cloud.workflow.biz.form.model.incomerecognition.IncomeRecognitionForm;
-import com.taotao.cloud.workflow.biz.form.model.incomerecognition.IncomeRecognitionInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.incomerecognition.IncomeRecognitionForm;
+import com.taotao.cloud.workflow.api.common.model.form.incomerecognition.IncomeRecognitionInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.IncomeRecognitionService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,9 +3,9 @@ package com.taotao.cloud.stock.api.common.util.validator;
 
 import com.xtoon.boot.common.util.exception.XTException;
 import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 
 /**
  * hibernate-validator校验工具类

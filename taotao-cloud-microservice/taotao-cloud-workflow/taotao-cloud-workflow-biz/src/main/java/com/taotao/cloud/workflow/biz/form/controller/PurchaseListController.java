@@ -6,9 +6,9 @@ import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.PurchaseListEntity;
 import com.taotao.cloud.workflow.biz.form.entity.PurchaseListEntryEntity;
-import com.taotao.cloud.workflow.biz.form.model.purchaselist.PurchaseListEntryEntityInfoModel;
-import com.taotao.cloud.workflow.biz.form.model.purchaselist.PurchaseListForm;
-import com.taotao.cloud.workflow.biz.form.model.purchaselist.PurchaseListInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.purchaselist.PurchaseListEntryEntityInfoModel;
+import com.taotao.cloud.workflow.api.common.model.form.purchaselist.PurchaseListForm;
+import com.taotao.cloud.workflow.api.common.model.form.purchaselist.PurchaseListInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.PurchaseListService;
 
 import java.util.List;

@@ -8,25 +8,20 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
-import com.taotao.cloud.message.biz.austin.common.dto.account.YunPianSmsAccount;
-import com.taotao.cloud.message.biz.austin.common.enums.SmsStatus;
-import com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam;
-import com.taotao.cloud.message.biz.austin.handler.domain.sms.YunPianSendResult;
-import com.taotao.cloud.message.biz.austin.handler.script.BaseSmsScript;
-import com.taotao.cloud.message.biz.austin.handler.script.SmsScript;
-import com.taotao.cloud.message.biz.austin.handler.script.SmsScriptHandler;
-import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
-import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
+import com.java3y.austin.common.constant.CommonConstant;
+import com.java3y.austin.common.dto.account.sms.YunPianSmsAccount;
+import com.java3y.austin.common.enums.SmsStatus;
+import com.java3y.austin.handler.domain.sms.SmsParam;
+import com.java3y.austin.handler.domain.sms.YunPianSendResult;
+import com.java3y.austin.handler.script.SmsScript;
+import com.java3y.austin.support.domain.SmsRecord;
+import com.java3y.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 3y
@@ -34,8 +29,8 @@ import java.util.Map;
  * 发送短信接入文档：https://www.yunpian.com/official/document/sms/zh_CN/domestic_list
  */
 @Slf4j
-@SmsScriptHandler("YunPianSmsScript")
-public class YunPianSmsScript extends BaseSmsScript implements SmsScript {
+@Component("YunPianSmsScript")
+public class YunPianSmsScript implements SmsScript {
     @Autowired
     private AccountUtils accountUtils;
 
@@ -43,12 +38,12 @@ public class YunPianSmsScript extends BaseSmsScript implements SmsScript {
     public List<SmsRecord> send(SmsParam smsParam) {
 
         try {
-            YunPianSmsAccount account = accountUtils.getAccount(SendAccountConstant.YUN_PIAN_SMS_CODE, SendAccountConstant.SMS_ACCOUNT_KEY, SendAccountConstant.SMS_PREFIX, YunPianSmsAccount.class);
+            YunPianSmsAccount account = accountUtils.getSmsAccountByScriptName(smsParam.getScriptName(), YunPianSmsAccount.class);
             Map<String, Object> params = assembleParam(smsParam, account);
 
             String result = HttpRequest.post(account.getUrl())
-                    .header(Header.CONTENT_TYPE.getValue(), "application/x-www-form-urlencoded;charset=utf-8;")
-                    .header(Header.ACCEPT.getValue(), "application/json;charset=utf-8;")
+                    .header(Header.CONTENT_TYPE.getValue(), CommonConstant.CONTENT_TYPE_FORM_URL_ENCODE)
+                    .header(Header.ACCEPT.getValue(), CommonConstant.CONTENT_TYPE_JSON)
                     .form(params)
                     .timeout(2000)
                     .execute().body();
@@ -59,6 +54,13 @@ public class YunPianSmsScript extends BaseSmsScript implements SmsScript {
             return null;
         }
 
+    }
+
+    @Override
+    public List<SmsRecord> pull(String scriptName) {
+        YunPianSmsAccount account = accountUtils.getSmsAccountByScriptName(scriptName, YunPianSmsAccount.class);
+        // .....
+        return null;
     }
 
     /**
@@ -95,7 +97,7 @@ public class YunPianSmsScript extends BaseSmsScript implements SmsScript {
                     .msgContent(smsParam.getContent())
                     .seriesId(datum.getSid())
                     .chargingNum(Math.toIntExact(datum.getCount()))
-                    .status("0".equals(datum.getCode()) ? SmsStatus.SEND_SUCCESS.getCode() : SmsStatus.SEND_FAIL.getCode())
+                    .status(CommonConstant.ZERO.equals(datum.getCode()) ? SmsStatus.SEND_SUCCESS.getCode() : SmsStatus.SEND_FAIL.getCode())
                     .reportContent(datum.getMsg())
                     .created(Math.toIntExact(DateUtil.currentSeconds()))
                     .updated(Math.toIntExact(DateUtil.currentSeconds()))

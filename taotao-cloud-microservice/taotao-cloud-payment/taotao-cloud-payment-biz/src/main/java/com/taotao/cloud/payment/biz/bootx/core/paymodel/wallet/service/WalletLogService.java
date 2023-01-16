@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.service;
 
 import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.payment.core.paymodel.wallet.dao.WalletLogManager;
 import cn.bootx.payment.dto.paymodel.wallet.WalletLogDto;
@@ -26,22 +26,22 @@ public class WalletLogService {
     /**
      * 个人钱包日志分页
      */
-    public PageResult<WalletLogDto> pageByPersonal(PageParam pageParam, WalletLogQueryParam param){
+    public PageResult<WalletLogDto> pageByPersonal(PageQuery PageQuery, WalletLogQueryParam param){
         Long userId = SecurityUtil.getUserId();
-        return MpUtil.convert2DtoPageResult(walletLogManager.pageByUserId(pageParam,param,userId));
+        return MpUtil.convert2DtoPageResult(walletLogManager.pageByUserId(PageQuery,param,userId));
     }
 
     /**
      * 钱包日志分页
      */
-    public PageResult<WalletLogDto> page(PageParam pageParam, WalletLogQueryParam param){
-        return MpUtil.convert2DtoPageResult(walletLogManager.page(pageParam,param));
+    public PageResult<WalletLogDto> page(PageQuery PageQuery, WalletLogQueryParam param){
+        return MpUtil.convert2DtoPageResult(walletLogManager.page(PageQuery,param));
     }
 
     /**
      * 根据钱包id查询钱包日志(分页)
      */
-    public PageResult<WalletLogDto> pageByWalletId(PageParam pageParam, WalletLogQueryParam param) {
-        return MpUtil.convert2DtoPageResult(walletLogManager.pageByWalletId(pageParam,param));
+    public PageResult<WalletLogDto> pageByWalletId(PageQuery PageQuery, WalletLogQueryParam param) {
+        return MpUtil.convert2DtoPageResult(walletLogManager.pageByWalletId(PageQuery,param));
     }
 }

@@ -1,15 +1,14 @@
 package com.taotao.cloud.customer.biz.model.entity;
 
 import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * 机器人客服表

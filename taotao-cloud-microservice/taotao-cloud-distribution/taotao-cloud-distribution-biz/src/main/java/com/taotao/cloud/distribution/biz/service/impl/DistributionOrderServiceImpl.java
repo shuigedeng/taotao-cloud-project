@@ -99,7 +99,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 				//设置结算天数(解冻日期)
 				Result<SettingVO> settingResult = settingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 				DistributionSetting distributionSetting = JSONUtil.toBean(
-					settingResult.data().getSettingValue(), DistributionSetting.class);
+					settingResult.getSettingValue(), DistributionSetting.class);
 				//默认解冻1天
 				if (distributionSetting.getCashDay().equals(0)) {
 					distributionOrder.setSettleCycle(new DateTime());

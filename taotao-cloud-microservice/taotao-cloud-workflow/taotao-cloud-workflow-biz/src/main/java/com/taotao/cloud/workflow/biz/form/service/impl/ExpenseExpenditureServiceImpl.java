@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.ExpenseExpenditureEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.ExpenseExpenditureMapper;
-import com.taotao.cloud.workflow.biz.form.model.expenseexpenditure.ExpenseExpenditureForm;
+import com.taotao.cloud.workflow.api.common.model.form.expenseexpenditure.ExpenseExpenditureForm;
 import com.taotao.cloud.workflow.biz.form.service.ExpenseExpenditureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

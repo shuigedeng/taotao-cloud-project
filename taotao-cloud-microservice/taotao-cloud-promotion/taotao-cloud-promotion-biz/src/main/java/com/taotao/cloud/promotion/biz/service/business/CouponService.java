@@ -1,7 +1,7 @@
 package com.taotao.cloud.promotion.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
@@ -41,7 +41,7 @@ public interface CouponService extends AbstractPromotionsService<Coupon> {
 	 * @return {@link IPage }<{@link CouponVO }>
 	 * @since 2022-04-27 16:43:27
 	 */
-	IPage<CouponVO> pageVOFindAll(CouponPageQuery searchParams, PageParam page);
+	IPage<CouponVO> pageVOFindAll(CouponPageQuery searchParams, PageQuery page);
 
 	/**
 	 * 获取优惠券展示详情

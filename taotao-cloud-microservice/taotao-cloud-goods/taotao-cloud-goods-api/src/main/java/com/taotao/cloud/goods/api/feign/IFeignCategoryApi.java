@@ -19,7 +19,7 @@ import java.util.List;
 public interface IFeignCategoryApi {
 
 	@GetMapping(value = "/category/first/id/{id:[0-9]*}")
-	Result<List<CategoryTreeVO>> firstCategory();
+	List<CategoryTreeVO> firstCategory();
 
 }
 

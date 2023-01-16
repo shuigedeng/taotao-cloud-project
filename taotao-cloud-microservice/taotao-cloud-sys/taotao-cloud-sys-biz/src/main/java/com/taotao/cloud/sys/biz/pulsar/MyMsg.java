@@ -1,17 +1,17 @@
-// package com.taotao.cloud.sys.biz.pulsar;
+//package com.taotao.cloud.sys.biz.pulsar;
 //
-// public class MyMsg {
+//public class MyMsg {
 //
-// 	private String data;
+//	private String data;
 //
-// 	public MyMsg(String data) {
-// 		this.data = data;
-// 	}
+//	public MyMsg(String data) {
+//		this.data = data;
+//	}
 //
-// 	public MyMsg() {
-// 	}
+//	public MyMsg() {
+//	}
 //
-// 	public String getData() {
-// 		return data;
-// 	}
-// }
+//	public String getData() {
+//		return data;
+//	}
+//}

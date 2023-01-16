@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.SwitchEnum;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
 import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
@@ -31,14 +31,14 @@ public class NoticeMessageServiceImpl extends
 	private MemberMessageService memberMessageService;
 
 	@Override
-	public IPage<NoticeMessage> getMessageTemplate(PageParam PageParam, String type) {
+	public IPage<NoticeMessage> getMessageTemplate(PageQuery PageQuery, String type) {
 		//构建查询参数
 		QueryWrapper<NoticeMessage> messageTemplateQueryWrapper = new QueryWrapper<>();
 		//消息模板类型
 		messageTemplateQueryWrapper.eq(!CharSequenceUtil.isEmpty(type), "type", type);
 		messageTemplateQueryWrapper.orderByDesc("create_time");
 		//查询数据返回
-		// return this.page(PageUtil.initPage(PageParam), messageTemplateQueryWrapper);
+		// return this.page(PageUtil.initPage(PageQuery), messageTemplateQueryWrapper);
 		return null;
 	}
 

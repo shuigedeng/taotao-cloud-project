@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.PostBatchTabEntity;
-import com.taotao.cloud.workflow.biz.form.model.postbatchtab.PostBatchTabForm;
-import com.taotao.cloud.workflow.biz.form.model.postbatchtab.PostBatchTabInfoVO;
+import com.taotao.cloud.workflow.api.common.model.form.postbatchtab.PostBatchTabForm;
+import com.taotao.cloud.workflow.api.common.model.form.postbatchtab.PostBatchTabInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.PostBatchTabService;
 
 import org.hibernate.exception.DataException;

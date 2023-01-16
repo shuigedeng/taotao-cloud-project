@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.store.api.web.dto.StoreEditDTO;
 import com.taotao.cloud.store.api.web.query.StorePageQuery;
@@ -14,9 +13,12 @@ import com.taotao.cloud.store.api.web.vo.StoreVO;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.service.StoreDetailService;
 import com.taotao.cloud.store.biz.service.StoreService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,9 +28,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * 管理端,店铺管理接口
@@ -57,7 +56,8 @@ public class StoreManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
 	public Result<List<Store>> getAll() {
-		return Result.success(storeService.list(new QueryWrapper<Store>().eq("store_disable", "OPEN")));
+		return Result.success(
+				storeService.list(new QueryWrapper<Store>().eq("store_disable", "OPEN")));
 	}
 
 	@Operation(summary = "获取店铺分页列表", description = "获取店铺分页列表")
@@ -98,8 +98,9 @@ public class StoreManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/audit/{id}/{passed}")
-	public Result<Boolean> audit(@Parameter(description = "是否通过审核 0 通过 1 拒绝 编辑操作则不需传递") @PathVariable String id,
-								 @Parameter(description = "店铺id") @PathVariable Integer passed) {
+	public Result<Boolean> audit(
+			@Parameter(description = "是否通过审核 0 通过 1 拒绝 编辑操作则不需传递") @PathVariable String id,
+			@Parameter(description = "店铺id") @PathVariable Integer passed) {
 		return Result.success(storeService.audit(id, passed));
 	}
 

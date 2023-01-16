@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.monitor;
 
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,8 +34,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudMonitorApplication {
 
 	public static void main(String[] args) {
-
-		SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
+		PropertyUtils.setDefaultProperty("taotao-cloud-monitor");
+		try {
+			SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
+		}catch (Throwable e){
+			e.printStackTrace();
+		}
 	}
 
 }

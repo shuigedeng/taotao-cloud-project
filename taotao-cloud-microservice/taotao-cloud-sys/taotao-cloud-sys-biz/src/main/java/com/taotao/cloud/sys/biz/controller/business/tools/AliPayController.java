@@ -12,6 +12,10 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -21,11 +25,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 /**
  * AliPayController
@@ -80,7 +79,7 @@ public class AliPayController {
 	@RequestLogger
 	@GetMapping("/return")
 	public Result<Boolean> returnPage(HttpServletRequest request,
-									  HttpServletResponse response) {
+		HttpServletResponse response) {
 		AlipayConfig alipay = alipayService.find();
 		response.setContentType("text/html;charset=" + alipay.getCharset());
 		//内容验签，防止黑客篡改参数

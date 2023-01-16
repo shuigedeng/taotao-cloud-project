@@ -25,12 +25,11 @@ import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 每天订单任务执行
@@ -73,7 +72,8 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 */
 	@Override
 	public void execute() {
-		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name()).data();
+		OrderSettingVO orderSetting = settingService.getOrderSetting(
+				SettingCategoryEnum.ORDER_SETTING.name());
 		//订单设置
 		if (orderSetting == null) {
 			throw new BusinessException(ResultEnum.ORDER_SETTING_ERROR);
@@ -120,7 +120,8 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 */
 	private void memberEvaluation(OrderSettingVO orderSetting) {
 		//订单自动收货时间 = 当前时间 - 自动收货时间天数
-		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(), -orderSetting.getAutoEvaluation());
+		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(),
+				-orderSetting.getAutoEvaluation());
 
 		//订单完成时间 <= 订单自动好评时间
 		QueryWrapper<OrderSimpleVO> queryWrapper = new QueryWrapper<>();
@@ -154,7 +155,8 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 */
 	private void closeAfterSale(OrderSettingVO orderSetting) {
 		//订单关闭售后申请时间 = 当前时间 - 自动关闭售后申请天数
-		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(), -orderSetting.getAutoEvaluation());
+		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(),
+				-orderSetting.getAutoEvaluation());
 
 		//关闭售后订单=未售后订单+小于订单关闭售后申请时间
 		QueryWrapper<OrderSimpleVO> queryWrapper = new QueryWrapper<>();
@@ -166,12 +168,12 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 		if (!orderItems.isEmpty()) {
 			//获取订单货物ID
 			List<Long> orderItemIdList = orderItems.stream().map(OrderItem::getId)
-				.collect(Collectors.toList());
+					.collect(Collectors.toList());
 
 			//修改订单售后状态
 			LambdaUpdateWrapper<OrderItem> lambdaUpdateWrapper = new LambdaUpdateWrapper<OrderItem>()
-				.set(OrderItem::getAfterSaleStatus, OrderItemAfterSaleStatusEnum.EXPIRED.name())
-				.in(OrderItem::getId, orderItemIdList);
+					.set(OrderItem::getAfterSaleStatus, OrderItemAfterSaleStatusEnum.EXPIRED.name())
+					.in(OrderItem::getId, orderItemIdList);
 			orderItemService.update(lambdaUpdateWrapper);
 		}
 
@@ -184,7 +186,8 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 	 */
 	private void closeComplaint(OrderSettingVO orderSetting) {
 		//订单关闭交易投诉申请时间 = 当前时间 - 自动关闭交易投诉申请天数
-		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(), -orderSetting.getCloseComplaint());
+		DateTime receiveTime = DateUtil.offsetDay(DateUtil.date(),
+				-orderSetting.getCloseComplaint());
 
 		//关闭售后订单=未售后订单+小于订单关闭售后申请时间
 		QueryWrapper<OrderSimpleVO> queryWrapper = new QueryWrapper<>();
@@ -196,12 +199,12 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 		if (!orderItems.isEmpty()) {
 			//获取订单货物ID
 			List<Long> orderItemIdList = orderItems.stream().map(OrderItem::getId)
-				.collect(Collectors.toList());
+					.collect(Collectors.toList());
 
 			//修改订单投诉状态
 			LambdaUpdateWrapper<OrderItem> lambdaUpdateWrapper = new LambdaUpdateWrapper<OrderItem>()
-				.set(OrderItem::getComplainStatus, OrderItemAfterSaleStatusEnum.EXPIRED.name())
-				.in(OrderItem::getId, orderItemIdList);
+					.set(OrderItem::getComplainStatus, OrderItemAfterSaleStatusEnum.EXPIRED.name())
+					.in(OrderItem::getId, orderItemIdList);
 			orderItemService.update(lambdaUpdateWrapper);
 		}
 

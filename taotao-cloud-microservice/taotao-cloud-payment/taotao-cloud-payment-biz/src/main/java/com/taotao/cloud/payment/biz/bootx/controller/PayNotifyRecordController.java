@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.bootx.controller;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.notify.service.PayNotifyRecordService;
 import com.taotao.cloud.payment.biz.bootx.dto.notify.PayNotifyRecordDto;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,8 +24,8 @@ public class PayNotifyRecordController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<PayNotifyRecordDto>> page(PageParam pageParam,PayNotifyRecordDto param){
-        return Res.ok(notifyRecordService.page(pageParam,param));
+    public ResResult<PageResult<PayNotifyRecordDto>> page(PageQuery PageQuery,PayNotifyRecordDto param){
+        return Res.ok(notifyRecordService.page(PageQuery,param));
     }
 
     @Operation(summary = "根据id查询")

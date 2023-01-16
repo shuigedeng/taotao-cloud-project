@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.ConBillingEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.ConBillingMapper;
-import com.taotao.cloud.workflow.biz.form.model.conbilling.ConBillingForm;
+import com.taotao.cloud.workflow.api.common.model.form.conbilling.ConBillingForm;
 import com.taotao.cloud.workflow.biz.form.service.ConBillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

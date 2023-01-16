@@ -3,11 +3,10 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.sys.api.feign.fallback.FeignRoleApiFallback;
 import com.taotao.cloud.sys.api.model.vo.role.RoleQueryVO;
+import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 /**
  * 远程调用后台角色模块
@@ -16,7 +15,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2022-03-25 14:09:31
  */
-@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignRoleApiFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, contextId = "feignRoleApi", fallbackFactory = FeignRoleApiFallback.class)
 public interface IFeignRoleApi {
 
 	/**

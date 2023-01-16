@@ -1,8 +1,8 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
 
@@ -21,16 +21,30 @@ dependencies {
     //implementation project(":taotao-cloud-microservice:taotao-cloud-stock:taotao-cloud-stock-api")
 
     //https://search.maven.org/artifact/org.springframework.amqp/spring-amqp
-    implementation "org.springframework.amqp:spring-amqp:2.4.6"
+    implementation "org.springframework.amqp:spring-amqp:3.0.0"
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
+    implementation "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
+    implementation "cn.afterturn:easypoi-base:4.4.0"
+    implementation "cn.afterturn:easypoi-annotation:4.4.0"
+
+    //spring状态机 依赖使用的是springboot2.7先不打开 https://github.com/spring-projects/spring-statemachine
+    //https://docs.spring.io/spring-statemachine/docs/3.2.0/reference/
+    //implementation('org.springframework.statemachine:spring-statemachine-starter')
 }
+
+//dependencyManagement {
+//    imports {
+//        mavenBom "org.springframework.statemachine:spring-statemachine-bom:3.2.0"
+//    }
+//}
 
 mainClassName = "com.taotao.cloud.order.biz.TaoTaoCloudOrderApplication"
 description = "订单模块"

@@ -47,7 +47,7 @@ import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
-import org.springframework.security.oauth2.server.resource.web.server.ServerBearerTokenAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.web.server.authentication.ServerBearerTokenAuthenticationConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
@@ -184,7 +184,7 @@ public class GatewayResourceServerConfiguration {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			nacosServiceManager.getNamingService(properties.getNacosProperties())
+			nacosServiceManager.getNamingService()
 				.subscribe(ServiceName.TAOTAO_CLOUD_AUTH,
 					this.properties.getGroup(),
 					List.of(this.properties.getClusterName()),

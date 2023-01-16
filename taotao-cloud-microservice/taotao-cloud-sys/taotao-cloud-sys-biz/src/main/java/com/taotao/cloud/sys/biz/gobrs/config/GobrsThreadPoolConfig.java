@@ -18,7 +18,7 @@ public class GobrsThreadPoolConfig extends GobrsThreadPoolConfiguration {
 //                new LinkedBlockingQueue());
 
 		ExecutorService executorService = Executors.newCachedThreadPool();
-		factory.setThreadPoolExecutor(executorService);
+		factory.setThreadPoolExecutor("http",executorService);
 	}
 
 //*******************************************实时更新线程池************************************

@@ -8,6 +8,9 @@ import me.zhyd.oauth.request.AuthDefaultRequest;
  * <p>
  * 扩展的自定义 source
  * </p>
+ *
+ * @author yangkai.shen
+ * @date Created in 2019/10/9 14:14
  */
 public enum ExtendSource implements AuthSource {
 

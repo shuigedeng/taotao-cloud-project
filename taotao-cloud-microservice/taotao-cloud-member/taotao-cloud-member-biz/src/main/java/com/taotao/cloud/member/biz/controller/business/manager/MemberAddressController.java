@@ -1,16 +1,17 @@
 package com.taotao.cloud.member.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
 import com.taotao.cloud.member.biz.service.business.IMemberAddressService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -21,8 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 /**
  * 管理端,会员地址API
@@ -42,10 +41,12 @@ public class MemberAddressController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{memberId}")
-	public Result<PageResult<MemberAddressVO>> getByPage(@Validated PageParam page,
-														 @Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") Long memberId) {
-		IPage<MemberAddress> addressByMember = memberAddressService.getAddressByMember(page, memberId);
-		return Result.success(PageResult.convertMybatisPage(addressByMember, MemberAddressVO.class));
+	public Result<PageResult<MemberAddressVO>> getByPage(@Validated PageQuery page,
+			@Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") Long memberId) {
+		IPage<MemberAddress> addressByMember = memberAddressService.getAddressByMember(page,
+				memberId);
+		return Result.success(
+				PageResult.convertMybatisPage(addressByMember, MemberAddressVO.class));
 	}
 
 	@Operation(summary = "删除会员收件地址", description = "删除会员收件地址")
@@ -53,7 +54,7 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delShippingAddressById(
-		@Parameter(description = "会员地址ID", required = true) @PathVariable Long id) {
+			@Parameter(description = "会员地址ID", required = true) @PathVariable Long id) {
 		return Result.success(memberAddressService.removeMemberAddress(id));
 	}
 

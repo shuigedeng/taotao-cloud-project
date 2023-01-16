@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.austin.handler.utils;
 
 
-import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
-import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
-import com.taotao.cloud.message.biz.austin.common.enums.MessageType;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.enums.ChannelType;
+import com.java3y.austin.common.enums.MessageType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,6 @@ public class GroupIdMappingUtils {
 
     /**
      * 根据TaskInfo获取当前消息的groupId
-     *
      * @param taskInfo
      * @return
      */

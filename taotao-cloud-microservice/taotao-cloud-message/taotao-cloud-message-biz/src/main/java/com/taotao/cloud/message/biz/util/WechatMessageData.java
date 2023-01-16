@@ -1,4 +1,4 @@
-// package com.taotao.cloud.message.biz.util;
+package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.biz.util;
 //
 // import cn.hutool.json.JSONUtil;
 // import lombok.Data;

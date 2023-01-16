@@ -1,4 +1,4 @@
-// package com.taotao.cloud.member.biz.controller.seller;
+package com.taotao.cloud.member.biz.controller.business.seller;// package com.taotao.cloud.member.biz.controller.seller;
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
 // import com.taotao.cloud.common.model.Result;
@@ -10,7 +10,7 @@
 // import io.swagger.v3.oas.annotations.Parameter;
 // import io.swagger.v3.oas.annotations.tags.Tag;
 // import java.util.Objects;
-// import javax.servlet.http.HttpServletResponse;
+// import jakarta.servlet.http.HttpServletResponse;
 // import lombok.AllArgsConstructor;
 // import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 // import org.springframework.security.access.prepost.PreAuthorize;

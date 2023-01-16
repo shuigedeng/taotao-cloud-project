@@ -1,7 +1,7 @@
 package com.taotao.cloud.wechat.biz.wechat.core.media.service;
 
 import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.core.util.FileUtil;
 import cn.bootx.starter.wechat.dto.media.WeChatMediaDto;
 import cn.hutool.core.io.FileTypeUtil;
@@ -39,17 +39,17 @@ public class WeChatMediaService {
      * 分页查询
      */
     @SneakyThrows
-    public PageResult<WeChatMediaDto> pageFile(PageParam pageParam, String type){
+    public PageResult<WeChatMediaDto> pageFile(PageQuery PageQuery, String type){
         WxMpMaterialService materialService = wxMpService.getMaterialService();
-        val result = materialService.materialFileBatchGet(type, pageParam.start(), pageParam.getSize());
+        val result = materialService.materialFileBatchGet(type, PageQuery.start(), PageQuery.getSize());
 //        val result = new WxMpMaterialFileBatchGetResult();
         val items = result.getItems().stream()
                 .map(WeChatMediaDto::init)
                 .collect(Collectors.toList());
         PageResult<WeChatMediaDto> pageResult = new PageResult<>();
-        pageResult.setCurrent(pageParam.getCurrent())
+        pageResult.setCurrent(PageQuery.getCurrent())
                 .setRecords(items)
-                .setSize(pageParam.getSize())
+                .setSize(PageQuery.getSize())
                 .setTotal(result.getTotalCount());
         return pageResult;
     }
@@ -58,14 +58,14 @@ public class WeChatMediaService {
      * 分页查询(图文)
      */
     @SneakyThrows
-    public PageResult<WxMaterialNewsBatchGetNewsItem> pageNews(PageParam pageParam){
+    public PageResult<WxMaterialNewsBatchGetNewsItem> pageNews(PageQuery PageQuery){
         WxMpMaterialService materialService = wxMpService.getMaterialService();
-        val result = materialService.materialNewsBatchGet( pageParam.start(), pageParam.getSize());
+        val result = materialService.materialNewsBatchGet( PageQuery.start(), PageQuery.getSize());
         val items = result.getItems();
         PageResult<WxMaterialNewsBatchGetNewsItem> pageResult = new PageResult<>();
-        pageResult.setCurrent(pageParam.getCurrent())
+        pageResult.setCurrent(PageQuery.getCurrent())
                 .setRecords(items)
-                .setSize(pageParam.getSize())
+                .setSize(PageQuery.getSize())
                 .setTotal(result.getTotalCount());
         return pageResult;
     }

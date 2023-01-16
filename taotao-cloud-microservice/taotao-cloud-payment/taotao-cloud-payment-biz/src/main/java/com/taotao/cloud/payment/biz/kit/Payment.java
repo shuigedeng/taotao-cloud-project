@@ -7,8 +7,8 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * 支付接口
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2022-06-02 14:44:06
  */
 public interface Payment {
+
 	/**
 	 * 普通移动网页调用支付app
 	 *
@@ -27,9 +28,10 @@ public interface Payment {
 	 * @return {@link Result }<{@link Object }>
 	 * @since 2022-06-02 14:44:06
 	 */
-	default Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+	default Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response,
+			PayParam payParam) {
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 	/**
 	 * 公众号内部调用支付
@@ -40,8 +42,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 	/**
 	 * app支付
@@ -52,8 +54,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default Result<Object> appPay(HttpServletRequest request, PayParam payParam) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 	/**
 	 * 展示二维码扫描支付
@@ -64,8 +66,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default Result<Object> nativePay(HttpServletRequest request, PayParam payParam) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 	/**
 	 * 小程序支付
@@ -76,8 +78,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default Result<Object> mpPay(HttpServletRequest request, PayParam payParam) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 
 	/**
@@ -87,8 +89,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default void refund(RefundLog refundLog) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 
 	/**
@@ -98,8 +100,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default void cancel(RefundLog refundLog) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 
 	/**
@@ -109,8 +111,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default void callBack(HttpServletRequest request) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 	/**
 	 * 异步通知
@@ -119,8 +121,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default void notify(HttpServletRequest request) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 	/**
 	 * 退款异步通知
@@ -129,8 +131,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default void refundNotify(HttpServletRequest request) {
-        throw new BusinessException(ResultEnum.PAY_ERROR);
-    }
+		throw new BusinessException(ResultEnum.PAY_ERROR);
+	}
 
 	/**
 	 * 支付回调地址
@@ -141,8 +143,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default String callbackUrl(String api, PaymentMethodEnum paymentMethodEnum) {
-        return api + "/buyer/payment/cashier/callback/" + paymentMethodEnum.name();
-    }
+		return api + "/buyer/payment/cashier/callback/" + paymentMethodEnum.name();
+	}
 
 	/**
 	 * 支付异步通知地址
@@ -153,8 +155,8 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default String notifyUrl(String api, PaymentMethodEnum paymentMethodEnum) {
-        return api + "/buyer/payment/cashier/notify/" + paymentMethodEnum.name();
-    }
+		return api + "/buyer/payment/cashier/notify/" + paymentMethodEnum.name();
+	}
 
 	/**
 	 * 退款支付异步通知地址
@@ -165,7 +167,7 @@ public interface Payment {
 	 * @since 2022-06-02 14:44:06
 	 */
 	default String refundNotifyUrl(String api, PaymentMethodEnum paymentMethodEnum) {
-        return api + "/buyer/payment/cashierRefund/notify/" + paymentMethodEnum.name();
-    }
+		return api + "/buyer/payment/cashierRefund/notify/" + paymentMethodEnum.name();
+	}
 
 }

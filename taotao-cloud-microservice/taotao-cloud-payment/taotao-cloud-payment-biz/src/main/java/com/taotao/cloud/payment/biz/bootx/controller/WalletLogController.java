@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.bootx.controller;
 
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.service.WalletLogService;
 import com.taotao.cloud.payment.biz.bootx.dto.paymodel.wallet.WalletLogDto;
 import com.taotao.cloud.payment.biz.bootx.param.paymodel.wallet.WalletLogQueryParam;
@@ -28,20 +28,20 @@ public class WalletLogController {
 
     @Operation(summary = "个人钱包日志")
     @PostMapping("/pageByPersonal")
-    public ResResult<PageResult<WalletLogDto>> pageByPersonal(@ParameterObject PageParam pageParam,@ParameterObject WalletLogQueryParam param){
-        return Res.ok(walletLogService.pageByPersonal(pageParam,param));
+    public ResResult<PageResult<WalletLogDto>> pageByPersonal(@ParameterObject PageQuery PageQuery,@ParameterObject WalletLogQueryParam param){
+        return Res.ok(walletLogService.pageByPersonal(PageQuery,param));
     }
     
     @Operation(summary = "查询钱包日志(分页)")
     @GetMapping("/page")
-    public ResResult<PageResult<WalletLogDto>> page(@ParameterObject PageParam pageParam,@ParameterObject WalletLogQueryParam param) {
-        return Res.ok(walletLogService.page(pageParam,param));
+    public ResResult<PageResult<WalletLogDto>> page(@ParameterObject PageQuery PageQuery,@ParameterObject WalletLogQueryParam param) {
+        return Res.ok(walletLogService.page(PageQuery,param));
     }
 
     @Operation(summary = "根据钱包id查询钱包日志(分页)")
     @GetMapping("/pageByWalletId")
-    public ResResult<PageResult<WalletLogDto>> pageByWalletId(@ParameterObject PageParam pageParam,@ParameterObject WalletLogQueryParam param) {
-        return Res.ok(walletLogService.pageByWalletId(pageParam,param));
+    public ResResult<PageResult<WalletLogDto>> pageByWalletId(@ParameterObject PageQuery PageQuery,@ParameterObject WalletLogQueryParam param) {
+        return Res.ok(walletLogService.pageByWalletId(PageQuery,param));
     }
 
 }

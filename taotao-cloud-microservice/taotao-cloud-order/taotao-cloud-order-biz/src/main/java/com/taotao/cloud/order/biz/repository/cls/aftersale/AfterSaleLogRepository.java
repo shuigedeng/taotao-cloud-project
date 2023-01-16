@@ -2,8 +2,7 @@ package com.taotao.cloud.order.biz.repository.cls.aftersale;
 
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
-
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 /**
  * 售后日志数据处理层

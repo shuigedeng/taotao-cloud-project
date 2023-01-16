@@ -1,11 +1,14 @@
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.math.BigDecimal;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +16,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import java.math.BigDecimal;
 
 /**
  * 买家端,预存款充值记录API
@@ -40,7 +39,7 @@ public class RechargeTradeController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<MemberRechargeVO> create(
-		@Max(value = 10000, message = "充值金额单次最多允许充值10000元") @Min(value = 1, message = "充值金额单次最少充值金额为1元") BigDecimal price) {
+			@Max(value = 10000, message = "充值金额单次最多允许充值10000元") @Min(value = 1, message = "充值金额单次最少充值金额为1元") BigDecimal price) {
 		MemberRechargeVO recharge = this.rechargeService.recharge(price);
 		return Result.success(recharge);
 	}

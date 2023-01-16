@@ -13,5 +13,5 @@ import java.util.List;
 public interface IFeignStoreGoodsLabelApi {
 
 	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
-	Result<List<StoreGoodsLabelVO>> listByStoreId(String id);
+	List<StoreGoodsLabelVO> listByStoreId(String id);
 }

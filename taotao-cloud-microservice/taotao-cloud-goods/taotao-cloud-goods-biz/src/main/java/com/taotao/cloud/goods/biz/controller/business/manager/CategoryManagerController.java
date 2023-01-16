@@ -12,6 +12,9 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,10 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 /**
  * 管理端,商品分类接口
@@ -126,7 +125,7 @@ public class CategoryManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{id}")
 	public Result<Boolean> disable(@PathVariable Long id,
-								   @RequestParam Boolean enableOperations) {
+			@RequestParam Boolean enableOperations) {
 		Category category = categoryService.getById(id);
 		if (category == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

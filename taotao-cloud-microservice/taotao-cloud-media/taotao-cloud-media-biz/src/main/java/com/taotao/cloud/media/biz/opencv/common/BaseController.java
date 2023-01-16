@@ -5,11 +5,11 @@ package com.taotao.cloud.media.biz.opencv.common;
 
 import com.taotao.cloud.media.biz.opencv.common.mapper.JsonMapper;
 import com.taotao.cloud.media.biz.opencv.common.utils.Constants;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;

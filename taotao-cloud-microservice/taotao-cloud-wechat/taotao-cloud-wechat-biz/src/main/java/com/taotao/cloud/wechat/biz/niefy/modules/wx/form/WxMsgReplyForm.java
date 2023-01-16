@@ -2,7 +2,7 @@ package com.taotao.cloud.wechat.biz.niefy.modules.wx.form;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 @Data
 public class WxMsgReplyForm {

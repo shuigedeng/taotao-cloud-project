@@ -4,7 +4,7 @@ import cn.bootx.common.core.exception.BizException;
 import cn.bootx.common.core.exception.DataNotExistException;
 import cn.bootx.common.core.rest.PageResult;
 import cn.bootx.common.core.rest.dto.KeyValue;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.payment.code.paymodel.WeChatPayCode;
 import cn.bootx.payment.code.paymodel.WeChatPayWay;
@@ -66,8 +66,8 @@ public class WeChatPayConfigService {
     /**
      * 分页
      */
-    public PageResult<WeChatPayConfigDto> page(PageParam pageParam){
-        return MpUtil.convert2DtoPageResult(weChatPayConfigManager.page(pageParam));
+    public PageResult<WeChatPayConfigDto> page(PageQuery PageQuery){
+        return MpUtil.convert2DtoPageResult(weChatPayConfigManager.page(PageQuery));
     }
 
     /**

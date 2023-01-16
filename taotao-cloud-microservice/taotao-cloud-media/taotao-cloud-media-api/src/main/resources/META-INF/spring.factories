@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.media.api.feign.fallback.RemoteFileFallbackImpl
+com.taotao.cloud.media.api.feign.fallback.FeignMediaFallback

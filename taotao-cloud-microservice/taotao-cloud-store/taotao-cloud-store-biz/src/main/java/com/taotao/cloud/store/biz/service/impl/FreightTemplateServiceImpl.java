@@ -8,7 +8,7 @@ import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -80,10 +80,10 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
 	}
 
 	@Override
-	public IPage<FreightTemplate> getFreightTemplate(PageParam pageParam) {
+	public IPage<FreightTemplate> getFreightTemplate(PageQuery PageQuery) {
 		LambdaQueryWrapper<FreightTemplate> lambdaQueryWrapper = Wrappers.lambdaQuery();
 		lambdaQueryWrapper.eq(FreightTemplate::getStoreId, SecurityUtils.getCurrentUser().getStoreId());
-		return this.baseMapper.selectPage(pageParam.buildMpPage(), lambdaQueryWrapper);
+		return this.baseMapper.selectPage(PageQuery.buildMpPage(), lambdaQueryWrapper);
 	}
 
 	@Override

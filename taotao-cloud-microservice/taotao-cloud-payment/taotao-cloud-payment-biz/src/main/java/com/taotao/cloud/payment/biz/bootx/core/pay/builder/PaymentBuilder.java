@@ -17,7 +17,7 @@ import com.taotao.cloud.payment.biz.bootx.param.pay.PayParam;
 import lombok.experimental.UtilityClass;
 import org.springframework.beans.BeanUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;

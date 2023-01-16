@@ -1,10 +1,10 @@
-//package com.taotao.cloud.goods.biz.entity;
+package com.taotao.cloud.goods.biz.model.entity;//package com.taotao.cloud.goods.biz.entity;
 //
 //
 //import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 //
-//import javax.persistence.Column;
-//import javax.persistence.Table;
+//import jakarta.persistence.Column;
+//import jakarta.persistence.Table;
 //import java.math.BigDecimal;
 //import java.time.LocalDateTime;
 //import lombok.AllArgsConstructor;

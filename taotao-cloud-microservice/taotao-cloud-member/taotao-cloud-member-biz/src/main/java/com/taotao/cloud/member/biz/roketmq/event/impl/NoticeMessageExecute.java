@@ -24,7 +24,7 @@ import com.taotao.cloud.member.biz.roketmq.event.MemberWithdrawalEvent;
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
 import com.taotao.cloud.message.api.feign.IFeignNoticeMessageApi;
 import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
-import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
+import com.taotao.cloud.mq.stream.message.MemberWithdrawalMessage;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;

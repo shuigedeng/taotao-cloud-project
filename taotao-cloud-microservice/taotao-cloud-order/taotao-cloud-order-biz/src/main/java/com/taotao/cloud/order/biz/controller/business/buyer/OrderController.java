@@ -7,15 +7,17 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -26,9 +28,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * 买家端,订单API
@@ -61,7 +60,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
 	public Result<OrderDetailVO> detail(
-		@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
+			@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
 		OrderDetailVO orderDetailVO = orderService.queryDetail(orderSn);
 		OperationalJudgment.judgment(orderDetailVO.order());
 		return Result.success(orderDetailVO);
@@ -72,7 +71,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/receiving")
 	public Result<Boolean> receiving(
-		@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
+			@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
 		Order order = orderService.getBySn(orderSn);
 		if (order == null) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
@@ -90,7 +89,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderSn}/cancel")
 	public Result<Boolean> cancel(@PathVariable String orderSn,
-								  @RequestParam String reason) {
+			@RequestParam String reason) {
 		orderService.cancel(orderSn, reason);
 		return Result.success(true);
 	}
@@ -110,7 +109,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
 	public Result<Object> getTraces(
-		@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
+			@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		return Result.success(orderService.getTraces(orderSn));
 	}
@@ -120,7 +119,7 @@ public class OrderController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/receipt/{orderSn}")
 	public Result<Object> invoice(
-		@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
+			@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		return Result.success(orderService.invoice(orderSn));
 	}

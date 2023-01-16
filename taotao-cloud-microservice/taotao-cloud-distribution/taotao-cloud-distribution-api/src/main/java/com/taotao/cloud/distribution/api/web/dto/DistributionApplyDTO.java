@@ -1,14 +1,13 @@
 package com.taotao.cloud.distribution.api.web.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
+import java.io.Serial;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-
-import java.io.Serial;
 
 /**
  * 分销员申请DTO
@@ -19,6 +18,7 @@ import java.io.Serial;
 @NoArgsConstructor
 @Schema(description = "分销员申请DTO")
 public class DistributionApplyDTO {
+
 	@Serial
 	private static final long serialVersionUID = 7814832369110695758L;
 	@NotBlank(message = "姓名不能为空")

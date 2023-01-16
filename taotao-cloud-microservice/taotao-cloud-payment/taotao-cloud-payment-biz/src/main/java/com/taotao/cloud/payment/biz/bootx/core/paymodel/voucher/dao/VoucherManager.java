@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.voucher.dao;
 
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
@@ -29,8 +29,8 @@ public class VoucherManager extends BaseManager<VoucherMapper, Voucher> {
     /**
      * 分页
      */
-    public Page<Voucher> page(PageParam pageParam, VoucherParam param){
-        Page<Voucher> mpPage = MpUtil.getMpPage(pageParam, Voucher.class);
+    public Page<Voucher> page(PageQuery PageQuery, VoucherParam param){
+        Page<Voucher> mpPage = MpUtil.getMpPage(PageQuery, Voucher.class);
         return this.lambdaQuery()
                 .ge(Objects.nonNull(param.getStartTime()),Voucher::getStartTime,param.getStartTime())
                 .le(Objects.nonNull(param.getEndTime()),Voucher::getEndTime,param.getEndTime())

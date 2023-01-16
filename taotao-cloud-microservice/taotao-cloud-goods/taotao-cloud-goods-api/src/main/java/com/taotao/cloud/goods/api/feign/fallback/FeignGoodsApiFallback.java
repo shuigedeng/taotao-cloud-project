@@ -15,17 +15,17 @@ public class FeignGoodsApiFallback implements FallbackFactory<IFeignGoodsApi> {
 	public IFeignGoodsApi create(Throwable throwable) {
 		return new IFeignGoodsApi() {
 			@Override
-			public Result<Boolean> updateStoreDetail(Long id) {
+			public Boolean updateStoreDetail(Long id) {
 				return null;
 			}
 
 			@Override
-			public Result<Boolean> underStoreGoods(String id) {
+			public Boolean underStoreGoods(String id) {
 				return null;
 			}
 
 			@Override
-			public Result<Long> countStoreGoodsNum(Long storeId) {
+			public Long countStoreGoodsNum(Long storeId) {
 				return null;
 			}
 		};

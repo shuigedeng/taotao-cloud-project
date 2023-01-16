@@ -33,7 +33,7 @@ public class FeignPromotionApiFallback implements FallbackFactory<IFeignPromotio
 		return new IFeignPromotionApi() {
 
 			@Override
-			public Result<Map<String, Object>> getGoodsSkuPromotionMap(Long storeId,
+			public Map<String, Object> getGoodsSkuPromotionMap(Long storeId,
 				Long goodsIndexId) {
 				return null;
 			}

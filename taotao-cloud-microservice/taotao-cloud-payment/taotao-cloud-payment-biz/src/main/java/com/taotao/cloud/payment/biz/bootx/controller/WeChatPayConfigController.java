@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.bootx.controller;
 
 import cn.hutool.db.PageResult;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.service.WeChatPayConfigService;
 import com.taotao.cloud.payment.biz.bootx.dto.paymodel.wechat.WeChatPayConfigDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,8 +50,8 @@ public class WeChatPayConfigController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<WeChatPayConfigDto>> page(PageParam pageParam){
-        return Res.ok(weChatPayConfigService.page(pageParam));
+    public ResResult<PageResult<WeChatPayConfigDto>> page(PageQuery PageQuery){
+        return Res.ok(weChatPayConfigService.page(PageQuery));
     }
 
     @Operation(summary = "根据Id查询")

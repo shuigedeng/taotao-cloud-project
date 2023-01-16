@@ -1,4 +1,4 @@
-// package com.taotao.cloud.backend.graphql;
+package com.taotao.cloud.graphql;// package com.taotao.cloud.backend.graphql;
 //
 // import org.springframework.graphql.server.GraphQlRSocketHandler;
 // import org.springframework.stereotype.Controller;

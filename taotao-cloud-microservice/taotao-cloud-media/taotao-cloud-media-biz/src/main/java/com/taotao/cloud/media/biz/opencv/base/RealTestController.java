@@ -5,7 +5,7 @@ import com.taotao.cloud.media.biz.opencv.common.utils.Constants;
 import com.taotao.cloud.media.biz.opencv.common.utils.OpenCVUtil;
 import java.io.IOException;
 import java.util.Date;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import org.opencv.core.Core;
 import org.opencv.core.Core.MinMaxLocResult;
 import org.opencv.core.CvType;
@@ -26,13 +26,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "real")
 public class RealTestController extends BaseController {
+
 	private static final Logger logger = LoggerFactory.getLogger(
 			RealTestController.class);
 
 	/**
-	 * 图像矫正透视变换
-	 * 创建者 Songer
-	 * 创建时间	2018年4月10日
+	 * 图像矫正透视变换 创建者 Songer 创建时间	2018年4月10日
 	 */
 	@RequestMapping(value = "test")
 	public void rectification(HttpServletResponse response, String imagefile, Integer markType) {
@@ -92,8 +91,8 @@ public class RealTestController extends BaseController {
 	}
 
 	/**
-	 * 获得锚点(定位点)
-	 * 方法1，通过模板匹配圆心，应该换成正方形也可以，之前模板匹配不行是因为模板图形不是最小的
+	 * 获得锚点(定位点) 方法1，通过模板匹配圆心，应该换成正方形也可以，之前模板匹配不行是因为模板图形不是最小的
+	 *
 	 * @param mattmp
 	 * @param anchor01
 	 * @param anchor02
@@ -124,7 +123,7 @@ public class RealTestController extends BaseController {
 		// String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_c1.png";
 		// Highgui.imwrite(destPath, grayImage);
 		long t2 = new Date().getTime();
-		System.out.println("第1坐标耗时："+(t2-t1));
+		System.out.println("第1坐标耗时：" + (t2 - t1));
 		Imgproc.matchTemplate(mattmp, src02, imagematch, Imgproc.TM_CCOEFF_NORMED);
 		MinMaxLocResult minmaxLoc2 = Core.minMaxLoc(imagematch);
 		// System.out.println("minmaxLoc2.maxVal:" + minmaxLoc2.maxVal);
@@ -135,7 +134,7 @@ public class RealTestController extends BaseController {
 		// destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_c2.png";
 		// Highgui.imwrite(destPath, grayImage);
 		long t3 = new Date().getTime();
-		System.out.println("第2坐标耗时："+(t3-t2));
+		System.out.println("第2坐标耗时：" + (t3 - t2));
 		Imgproc.matchTemplate(mattmp, src03, imagematch, Imgproc.TM_CCOEFF_NORMED);
 		MinMaxLocResult minmaxLoc3 = Core.minMaxLoc(imagematch);
 		// System.out.println("minmaxLoc3.maxVal:" + minmaxLoc3.maxVal);
@@ -146,7 +145,7 @@ public class RealTestController extends BaseController {
 		// destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_c3.png";
 		// Highgui.imwrite(destPath, grayImage);
 		long t4 = new Date().getTime();
-		System.out.println("第3坐标耗时："+(t4-t3));
+		System.out.println("第3坐标耗时：" + (t4 - t3));
 		Imgproc.matchTemplate(mattmp, src04, imagematch, Imgproc.TM_CCOEFF_NORMED);
 		MinMaxLocResult minmaxLoc4 = Core.minMaxLoc(imagematch);
 		// System.out.println("minmaxLoc4.maxVal:" + minmaxLoc4.maxVal);
@@ -154,13 +153,12 @@ public class RealTestController extends BaseController {
 		anchor04.x = maxLoc04.x + srcCols / 2;
 		anchor04.y = maxLoc04.y + srcRows / 2;
 		long t5 = new Date().getTime();
-		System.out.println("第4坐标耗时："+(t5-t4));
+		System.out.println("第4坐标耗时：" + (t5 - t4));
 		// Core.circle(grayImage, anchor04, 3, new Scalar(0, 0, 255), 3);
 		// destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_c4.png";
 		// Highgui.imwrite(destPath, grayImage);
 
 	}
-
 
 
 }

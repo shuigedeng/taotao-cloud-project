@@ -3,9 +3,9 @@ package com.taotao.cloud.message.biz.austin.support.pipeline;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.support.exception.ProcessException;
+import com.java3y.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.common.vo.BasicResultVO;
+import com.java3y.austin.support.exception.ProcessException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.wechat.biz.wechat.core.user.service;
 
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.core.util.LocalDateTimeUtil;
 import cn.bootx.starter.wechat.core.user.entity.WechatFans;
 import cn.hutool.core.collection.CollUtil;
@@ -35,7 +35,7 @@ public class WeChatUserService {
     /**
      * 获取关注用户列表
      */
-    public void page(PageParam pageParam){
+    public void page(PageQuery PageQuery){
         WxMpUserService userService = wxMpService.getUserService();
         WxMpUserQuery userQuery = new WxMpUserQuery();
     }

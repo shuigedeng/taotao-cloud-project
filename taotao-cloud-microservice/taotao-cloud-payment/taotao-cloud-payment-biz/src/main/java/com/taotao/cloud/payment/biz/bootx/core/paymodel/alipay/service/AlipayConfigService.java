@@ -7,7 +7,7 @@ import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.db.PageResult;
 import com.ijpay.alipay.AliPayApiConfig;
 import com.ijpay.alipay.AliPayApiConfigKit;
-import com.taotao.cloud.common.model.PageParam;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.payment.biz.bootx.code.paymodel.AliPayCode;
 import com.taotao.cloud.payment.biz.bootx.code.paymodel.AliPayWay;
 import com.taotao.cloud.payment.biz.bootx.core.paymodel.alipay.dao.AlipayConfigManager;
@@ -105,8 +105,8 @@ public class AlipayConfigService {
     /**
      * 分页
      */
-    public PageResult<AlipayConfigDto> page(PageParam pageParam, AlipayConfigQuery param) {
-        return MpUtil.convert2DtoPageResult(alipayConfigManager.page(pageParam,param));
+    public PageResult<AlipayConfigDto> page(PageQuery PageQuery, AlipayConfigQuery param) {
+        return MpUtil.convert2DtoPageResult(alipayConfigManager.page(PageQuery,param));
     }
 
     /**

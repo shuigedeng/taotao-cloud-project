@@ -1,8 +1,13 @@
 package com.taotao.cloud.store.api.feign.fallback;
 
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.store.api.web.dto.CollectionDTO;
 import com.taotao.cloud.store.api.feign.IFeignStoreService;
+import com.taotao.cloud.store.api.web.dto.StoreBankDTO;
+import com.taotao.cloud.store.api.web.dto.StoreCompanyDTO;
+import com.taotao.cloud.store.api.web.dto.StoreOtherInfoDTO;
+import com.taotao.cloud.store.api.web.query.StorePageQuery;
 import com.taotao.cloud.store.api.web.vo.StoreVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -18,26 +23,44 @@ public class FeignStoreServiceFallbackImpl implements FallbackFactory<IFeignStor
 	public IFeignStoreService create(Throwable throwable) {
 		return new IFeignStoreService() {
 
-
 			@Override
-			public Result<StoreVO> findSotreById(Long id) {
+			public StoreVO findSotreById(Long id) {
 				return null;
 			}
 
 			@Override
-			public Result<Boolean> updateStoreCollectionNum(
-				CollectionDTO collectionDTO) {
+			public Boolean updateStoreCollectionNum(CollectionDTO collectionDTO) {
 				return null;
 			}
 
 			@Override
-			public Result<StoreVO> getStoreDetail() {
+			public StoreVO getStoreDetail() {
 				return null;
 			}
 
 			@Override
-			public Result<StoreVO> findSotreByMemberId(Long memberId) {
+			public StoreVO findSotreByMemberId(Long memberId) {
 				return null;
+			}
+
+			@Override
+			public PageResult<StoreVO> findByConditionPage(StorePageQuery storePageQuery) {
+				return null;
+			}
+
+			@Override
+			public boolean applyFirstStep(StoreCompanyDTO storeCompanyDTO) {
+				return false;
+			}
+
+			@Override
+			public boolean applySecondStep(StoreBankDTO storeBankDTO) {
+				return false;
+			}
+
+			@Override
+			public boolean applyThirdStep(StoreOtherInfoDTO storeOtherInfoDTO) {
+				return false;
 			}
 		};
 	}

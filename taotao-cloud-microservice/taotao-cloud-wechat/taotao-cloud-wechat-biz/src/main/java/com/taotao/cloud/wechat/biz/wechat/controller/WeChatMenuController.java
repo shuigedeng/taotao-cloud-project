@@ -3,7 +3,7 @@ package com.taotao.cloud.wechat.biz.wechat.controller;
 import cn.bootx.common.core.rest.PageResult;
 import cn.bootx.common.core.rest.Res;
 import cn.bootx.common.core.rest.ResResult;
-import cn.bootx.common.core.rest.param.PageParam;
+import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.starter.wechat.core.menu.service.WeChatMenuService;
 import cn.bootx.starter.wechat.dto.menu.WeChatMenuDto;
 import cn.bootx.starter.wechat.param.menu.WeChatMenuParam;
@@ -62,8 +62,8 @@ public class WeChatMenuController {
 
     @Operation( summary = "分页查询")
     @GetMapping(value = "/page")
-    public ResResult<PageResult<WeChatMenuDto>> page(PageParam pageParam, WeChatMenuParam weChatMenuParam){
-        return Res.ok(weChatMenuService.page(pageParam,weChatMenuParam));
+    public ResResult<PageResult<WeChatMenuDto>> page(PageQuery PageQuery, WeChatMenuParam weChatMenuParam){
+        return Res.ok(weChatMenuService.page(PageQuery,weChatMenuParam));
     }
 
     @Operation(summary = "发布菜单")

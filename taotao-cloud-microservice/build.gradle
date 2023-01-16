@@ -1,5 +1,11 @@
-configure(subprojects) { project ->
+plugins {
+    id 'org.graalvm.buildtools.native' version '0.9.18'
 
+    //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
+    id "com.gorylenko.gradle-git-properties" version "2.4.1"
+}
+
+subprojects {
     apply from: rootProject.file('gradle/springboot.gradle')
     apply from: rootProject.file('gradle/smart-doc.gradle')
     apply from: rootProject.file('gradle/springdoc-openapi.gradle')
@@ -7,6 +13,9 @@ configure(subprojects) { project ->
     apply from: rootProject.file('gradle/google-tools-jib.gradle')
     //apply from: rootProject.file('gradle/sonar.gradle')
     apply from: rootProject.file('gradle/shadow.gradle')
+
+    apply plugin: "org.graalvm.buildtools.native"
+    apply plugin: "com.gorylenko.gradle-git-properties"
 
     task createProperties(dependsOn: processResources) {
         doLast {
@@ -35,6 +44,8 @@ configure(subprojects) { project ->
     dependencies {
         testImplementation "org.springframework.boot:spring-boot-starter-test"
         testImplementation "org.testcontainers:junit-jupiter"
+        testImplementation 'io.projectreactor:reactor-test'
+        testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
         testImplementation "org.springframework.boot:spring-boot-starter-web"
 
         //https://search.maven.org/artifact/org.jeasy/easy-random
@@ -43,6 +54,9 @@ configure(subprojects) { project ->
         testImplementation('com.github.javafaker:javafaker:1.0.2') {
             exclude group: "org.yaml", module: "snakeyaml"
         }
+
+        api "io.soabase.record-builder:record-builder-core"
+        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 
         api "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -54,9 +68,25 @@ configure(subprojects) { project ->
         api "org.mapstruct:mapstruct"
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
 
-        annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-        annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    }
+
+    gitProperties {
+        // 日期格式
+        dateFormat = "yyyy-MM-dd HH:mm:ss"
+        // 时区
+        dateFormatTimeZone = "GMT+8"
+        // 生成的 git.properties 文件位置
+        //gitPropertiesDir = new File("${project.dir}/build/resources/main/")
+        // git 文件所在目录
+        //gitRepositoryRoot = new File("${project.rootDir}/")
+        //自定义需要显示的信息
+        //keys = ['git.branch','git.commit.id','git.commit.time','git.commit.user.name','git.build.version']
+
+        customProperty 'project_version', { project.version }
+        //branch = System.getenv('GIT_BRANCH')
+        branch = "springboot3"
+        failOnNoGitDirectory = false
+        //dotGitDirectory = "${project.rootDir}/.git"
     }
 }

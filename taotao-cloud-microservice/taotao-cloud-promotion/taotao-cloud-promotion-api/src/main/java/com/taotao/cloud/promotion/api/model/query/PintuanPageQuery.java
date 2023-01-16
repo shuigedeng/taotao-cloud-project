@@ -1,13 +1,12 @@
 package com.taotao.cloud.promotion.api.model.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.validation.constraints.NotEmpty;
 
 /**
  * 拼团查询通用类
@@ -28,7 +27,6 @@ public class PintuanPageQuery extends BasePromotionsSearchQuery {
 	@NotEmpty(message = "活动名称不能为空")
 	@Schema(description = "活动名称", required = true)
 	private String promotionName;
-
 
 	// @Override
 	// public <T> QueryWrapper<T> queryWrapper() {

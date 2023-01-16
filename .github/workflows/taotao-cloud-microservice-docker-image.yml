@@ -1,3 +1,5 @@
+#### https://github.com/marketplace?type=actions
+#### https://github.com/sdras/awesome-actions
 name: Microservice Docker Image
 
 on:
@@ -17,7 +19,7 @@ env:
   TAOTAO_CLOUD_GITHUB_TOKEN: ${{secrets.TAOTAO_CLOUD_GITHUB_TOKEN}}
   TAOTAO_CLOUD_REGISTRY_USERNAME: ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}}
   TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD}}
-  TAOTAO_CLOUD_VERSION: 2023.2.01
+  TAOTAO_CLOUD_VERSION: 2023.01
 
 jobs:
   build:

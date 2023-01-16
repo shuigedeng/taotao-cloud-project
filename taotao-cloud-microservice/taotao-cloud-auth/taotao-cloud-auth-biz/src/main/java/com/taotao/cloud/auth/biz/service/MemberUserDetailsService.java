@@ -26,7 +26,7 @@ public class MemberUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		//Result<SecurityUser> memberSecurityUser = feignMemberService.getMemberSecurityUser(
 		//	username);
-		//if (!memberSecurityUser.success() || memberSecurityUser.data() == null) {
+		//if (!memberSecurityUser.success() || memberSecurityUser == null) {
 		//	LogUtil.error("会员用户 [{}] not found.", username);
 		//	throw new UsernameNotFoundException(String.format("会员用户 [%s] 不存在", username));
 		//}
@@ -58,7 +58,7 @@ public class MemberUserDetailsService implements UserDetailsService {
 		// 	.build();
 
 		return new SecurityUser();
-		//return memberSecurityUser.data();
+		//return memberSecurityUser;
 
 	}
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.kafka;
 
-import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
-import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
+import com.java3y.austin.handler.utils.GroupIdMappingUtils;
+import com.java3y.austin.support.constans.MessageQueuePipeline;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.header.Header;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +80,6 @@ public class ReceiverStart {
     /**
      * 针对tag消息过滤
      * producer 将tag写进header里
-     *
      * @return
      */
     @Bean
