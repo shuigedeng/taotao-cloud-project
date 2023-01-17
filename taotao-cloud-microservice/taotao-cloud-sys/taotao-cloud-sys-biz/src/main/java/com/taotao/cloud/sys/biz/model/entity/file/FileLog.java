@@ -17,7 +17,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 /**
- * 文件表
+ * 文件日志表
  *
  * @author shuigedeng
  * @version 2022.03

@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.JacksonListTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,7 +37,7 @@ import java.util.Objects;
 import org.hibernate.annotations.Type;
 
 /**
- * 部门表
+ * 组织信息表
  *
  * @author shuigedeng
  * @version 2021.10
@@ -48,12 +49,12 @@ import org.hibernate.annotations.Type;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = Company.TABLE_NAME)
-@TableName(value = Company.TABLE_NAME, autoResultMap = true)
-@org.hibernate.annotations.Table(appliesTo = Company.TABLE_NAME, comment = "公司表")
-public class Company extends BaseSuperEntity<Company, Long> {
+@Table(name = Org.TABLE_NAME)
+@TableName(value = Org.TABLE_NAME, autoResultMap = true)
+@org.hibernate.annotations.Table(appliesTo = Org.TABLE_NAME, comment = "组织信息表")
+public class Org extends BaseSuperEntity<Org, Long> {
 
-	public static final String TABLE_NAME = "tt_company";
+	public static final String TABLE_NAME = "tt_org";
 
 	/**
 	 * 部门名称
@@ -80,7 +81,7 @@ public class Company extends BaseSuperEntity<Company, Long> {
 	 * @Select("SELECT * FROM person WHERE id=#{id}")
 	 * Person selectOneById(int id);
 	 */
-	//@Type(type="json")
+	@Type(value= JsonType.class)
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "id_tree", columnDefinition = "json null comment 'id树'")
 	private List<String> idTree;
@@ -104,7 +105,7 @@ public class Company extends BaseSuperEntity<Company, Long> {
 	private String tenantId;
 
 	@Builder
-	public Company(Long id, LocalDateTime createTime, Long createBy,
+	public Org(Long id, LocalDateTime createTime, Long createBy,
                    LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
                    String name, Long parentId, String remark, Integer sortNum, String tenantId) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
@@ -124,7 +125,7 @@ public class Company extends BaseSuperEntity<Company, Long> {
 			o)) {
 			return false;
 		}
-		Company dept = (Company) o;
+		Org dept = (Org) o;
 		return getId() != null && Objects.equals(getId(), dept.getId());
 	}
 

@@ -17,8 +17,10 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.enums.DataScopeEnum;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.JacksonListTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -53,6 +55,19 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	public static final String TABLE_NAME = "tt_data_scope";
 
 	/**
+	 * 部门范围限制的字段名称
+	 */
+	private String scopeDeptFiledName = "dept_id";
+	/**
+	 * 公司范围限制的字段名称
+	 */
+	private String scopeCompanyFiledName = "company_id";
+	/**
+	 * 个人范围限制的字段名称
+	 */
+	private String scopeSelfFiledName = "create_by";
+
+	/**
 	 * 编码
 	 */
 	@Column(name = "code", unique = true, columnDefinition = "varchar(255) not null comment '编码'")
@@ -79,17 +94,17 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	private String remark;
 
 	/**
-	 * 公司id
+	 * 组织id列表
 	 */
-	//@Type(type = "json")
+	@Type(value= JsonType.class)
 	@TableField(typeHandler = JacksonListTypeHandler.class)
-	@Column(name = "company_ids", columnDefinition = "json null comment '公司id列表'")
-	private List<Long> companyIds;
+	@Column(name = "org_ids", columnDefinition = "json null comment '组织id列表'")
+	private List<Long> orgIds;
 
 	/**
 	 * 部门id
 	 */
-	//@Type(type = "json")
+	@Type(value= JsonType.class)
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "dept_ids", columnDefinition = "json null comment '部门id列表'")
 	private List<Long> deptIds;
@@ -97,24 +112,10 @@ public class DataScope extends BaseSuperEntity<DataScope, Long> {
 	/**
 	 * 用户id
 	 */
-	//@Type(type = "json")
+	@Type(value= JsonType.class)
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "user_ids", columnDefinition = "json null comment '用户id列表'")
 	private List<Long> userIds;
-
-	/**
-	 * 部门范围限制的字段名称
-	 */
-	private String scopeDeptFiledName = "dept_id";
-	/**
-	 * 公司范围限制的字段名称
-	 */
-	private String scopeCompanyFiledName = "company_id";
-	/**
-	 * 个人范围限制的字段名称
-	 */
-	private String scopeSelfFiledName = "create_by";
-
 
 	/**
 	 * 租户id
