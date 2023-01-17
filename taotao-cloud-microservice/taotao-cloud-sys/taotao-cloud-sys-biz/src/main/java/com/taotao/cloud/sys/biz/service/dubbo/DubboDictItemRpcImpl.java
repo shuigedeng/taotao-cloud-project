@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.promotion.biz.service.dubbo;
+package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboDictItemRpc;
 import com.taotao.cloud.sys.biz.mapper.IDictItemMapper;
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @DubboService(interfaceClass = IDubboDictItemRpc.class, validation = "true")
-public class DubboDictItemServiceImpl extends
+public class DubboDictItemRpcImpl extends
 	BaseSuperServiceImpl<IDictItemMapper, DictItem, DictItemRepository, IDictItemRepository, Long>
 	implements IDubboDictItemRpc {
 

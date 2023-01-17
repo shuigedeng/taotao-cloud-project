@@ -15,14 +15,23 @@
  */
 package com.taotao.cloud.sys.api.dubbo;
 
+import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
 
 /**
- * ISysDictItemService
+ * ISysDictService
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2021-10-09 20:32:47
+ * @since 2021-10-09 20:32:36
  */
-public interface IDubboDictItemService {
+public interface IDubboDictRpc {
 
+	/**
+	 * 字典code查询
+	 *
+	 * @param code 代码
+	 * @return {@link DubboDictResponse }
+	 * @since 2022-06-29 21:45:44
+	 */
+	DubboDictResponse findByCode(Integer code);
 }
