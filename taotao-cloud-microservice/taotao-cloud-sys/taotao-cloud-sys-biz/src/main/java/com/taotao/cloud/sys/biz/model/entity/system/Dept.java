@@ -65,8 +65,8 @@ public class Dept extends BaseSuperEntity<Dept, Long> {
 	/**
 	 * 公司id
 	 */
-	@Column(name = "company_id", columnDefinition = "bigint not null comment '公司id'")
-	private Long companyId;
+	@Column(name = "org_id", columnDefinition = "bigint not null comment '组织id'")
+	private Long orgId;
 
 	/**
 	 * 备注

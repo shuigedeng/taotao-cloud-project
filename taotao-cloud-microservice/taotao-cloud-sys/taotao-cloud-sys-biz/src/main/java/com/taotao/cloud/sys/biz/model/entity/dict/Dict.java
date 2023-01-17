@@ -41,7 +41,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 /**
- * SysDict
+ * 字典表
  *
  * @author shuigedeng
  * @version 2021.10
