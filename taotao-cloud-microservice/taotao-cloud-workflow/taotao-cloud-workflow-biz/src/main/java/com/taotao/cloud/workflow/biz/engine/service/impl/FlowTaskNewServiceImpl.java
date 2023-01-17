@@ -10,19 +10,16 @@ import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.api.common.base.Pagination;
 import com.taotao.cloud.workflow.api.common.constant.MsgCode;
 import com.taotao.cloud.workflow.api.common.database.model.entity.DbLinkEntity;
+import com.taotao.cloud.workflow.api.common.model.FormAllModel;
+import com.taotao.cloud.workflow.api.common.model.FormEnum;
+import com.taotao.cloud.workflow.api.common.model.visiual.FormDataModel;
+import com.taotao.cloud.workflow.api.common.model.visiual.RecursionForm;
+import com.taotao.cloud.workflow.api.common.model.visiual.fields.FieLdsModel;
 import com.taotao.cloud.workflow.api.common.util.DateUtil;
 import com.taotao.cloud.workflow.api.common.util.RandomUtil;
 import com.taotao.cloud.workflow.api.common.util.UserProvider;
 import com.taotao.cloud.workflow.api.common.util.context.SpringContext;
 import com.taotao.cloud.workflow.api.common.util.wxutil.HttpUtil;
-import com.taotao.cloud.workflow.api.model.FormAllModel;
-import com.taotao.cloud.workflow.api.model.FormEnum;
-import com.taotao.cloud.workflow.api.model.visiual.FlowKeyConsts;
-import com.taotao.cloud.workflow.api.model.visiual.FormCloumnUtil;
-import com.taotao.cloud.workflow.api.model.visiual.FormDataModel;
-import com.taotao.cloud.workflow.api.model.visiual.RecursionForm;
-import com.taotao.cloud.workflow.api.model.visiual.TableModel;
-import com.taotao.cloud.workflow.api.model.visiual.fields.FieLdsModel;
 import com.taotao.cloud.workflow.api.vo.OrganizeEntity;
 import com.taotao.cloud.workflow.api.vo.PositionEntity;
 import com.taotao.cloud.workflow.api.vo.RoleEntity;
@@ -207,7 +204,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 		//获取下一个节点
 		Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
 			.filter(t -> FlowNature.NodeStart.equals(t.getNodeType())).findFirst();
-		if (!first.isPresent()) {
+		if (first.isEmpty()) {
 			throw new WorkFlowException(MsgCode.COD001.get());
 		}
 		FlowTaskNodeEntity startNode = first.get();
@@ -353,7 +350,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 		//当前节点
 		Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
 			.filter(m -> m.getId().equals(operator.getTaskNodeId())).findFirst();
-		if (!first.isPresent()) {
+		if (first.isEmpty()) {
 			throw new WorkFlowException(MsgCode.COD001.get());
 		}
 		FlowTaskNodeEntity taskNode = first.get();
@@ -502,7 +499,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 		//当前节点
 		Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
 			.filter(m -> m.getId().equals(operator.getTaskNodeId())).findFirst();
-		if (!first.isPresent()) {
+		if (first.isEmpty()) {
 			throw new WorkFlowException(MsgCode.COD001.get());
 		}
 		FlowTaskNodeEntity taskNode = first.get();
@@ -1165,10 +1162,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 			id, handleStatus);
 		List<String> userIdAll = new ArrayList<>();
 		List<String> userIdList = recordListAll.stream()
-			.map(FlowTaskOperatorRecordEntity::getHandleId).collect(Collectors.toList());
+			.map(FlowTaskOperatorRecordEntity::getHandleId).toList();
 		List<String> operatorId = recordListAll.stream()
-			.filter(t -> StrUtil.isNotEmpty(t.getOperatorId()))
-			.map(FlowTaskOperatorRecordEntity::getOperatorId).collect(Collectors.toList());
+			.map(FlowTaskOperatorRecordEntity::getOperatorId)
+			.filter(StrUtil::isNotEmpty).toList();
 		userIdAll.addAll(userIdList);
 		userIdAll.addAll(operatorId);
 		List<UserEntity> userList = serviceUtil.getUserName(userIdAll);
@@ -1508,7 +1505,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 				taskNodeList);
 			Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
 				.filter(t -> FlowNature.NodeStart.equals(t.getNodeType())).findFirst();
-			if (!first.isPresent()) {
+			if (first.isEmpty()) {
 				throw new WorkFlowException(MsgCode.COD001.get());
 			}
 			FlowTaskNodeEntity startNodes = first.get();

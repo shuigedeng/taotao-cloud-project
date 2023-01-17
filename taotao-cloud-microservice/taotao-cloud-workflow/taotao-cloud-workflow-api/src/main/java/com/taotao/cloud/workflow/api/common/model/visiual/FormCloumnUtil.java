@@ -1,7 +1,18 @@
 package com.taotao.cloud.workflow.api.common.model.visiual;
 
 import com.taotao.cloud.workflow.api.common.model.FormAllModel;
+import com.taotao.cloud.workflow.api.common.model.FormColumnModel;
+import com.taotao.cloud.workflow.api.common.model.FormColumnTableModel;
+import com.taotao.cloud.workflow.api.common.model.FormEnum;
+import com.taotao.cloud.workflow.api.common.model.FormMastTableModel;
+import com.taotao.cloud.workflow.api.common.model.FormModel;
+import com.taotao.cloud.workflow.api.common.model.visiual.fields.FieLdsModel;
 import com.taotao.cloud.workflow.api.common.model.visiual.fields.config.ConfigModel;
+import com.taotao.cloud.workflow.api.common.model.visiual.fields.props.PropsBeanModel;
+import com.taotao.cloud.workflow.api.common.model.visiual.fields.props.PropsModel;
+import com.taotao.cloud.workflow.api.common.util.JsonUtil;
+import com.taotao.cloud.workflow.api.common.util.RandomUtil;
+import com.taotao.cloud.workflow.api.common.util.StringUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -91,8 +102,8 @@ public class FormCloumnUtil {
                 String workflowkey = formModel.getFormColumnModel().getFieLdsModel().getConfig().getWorkflowKey();
                 if (FormEnum.relationFormAttr.getMessage().equals(workflowkey) || FormEnum.popupAttr.getMessage().equals(workflowkey)) {
                     List<FieLdsModel> partenList = new ArrayList<>();
-                    partenList.addAll(formAllModel.stream().filter(t -> t.getFormColumnModel() != null).map(t -> t.getFormColumnModel().getFieLdsModel()).collect(Collectors.toList()));
-                    partenList.addAll(formAllModel.stream().filter(t -> t.getFormMastTableModel() != null).map(t -> t.getFormMastTableModel().getMastTable().getFieLdsModel()).collect(Collectors.toList()));
+                    partenList.addAll(formAllModel.stream().filter(t -> t.getFormColumnModel() != null).map(t -> t.getFormColumnModel().getFieLdsModel()).toList());
+                    partenList.addAll(formAllModel.stream().filter(t -> t.getFormMastTableModel() != null).map(t -> t.getFormMastTableModel().getMastTable().getFieLdsModel()).toList());
                     String relationField = formModel.getFormColumnModel().getFieLdsModel().getRelationField().split("_workflowTable_")[0];
                     FieLdsModel parten = partenList.stream().filter(t -> relationField.equals(t.getVModel())).findFirst().orElse(null);
                     if (parten != null) {
@@ -136,6 +147,7 @@ public class FormCloumnUtil {
                     tableModel = first.get();
                 }
             }
+            assert tableModel != null;
             String type = tableModel.getTypeId();
             if ("1".equals(type)) {
                 mastModel.getFieLdsModel().getConfig().setTableName(tableModel.getTable());
@@ -258,11 +270,11 @@ public class FormCloumnUtil {
         List<TableModel> tableModelList = recursionForm.getTableModelList();
         recursionForm(recursionForm, formAllModel);
         if (tableModelList.size() > 0) {
-            List<FormAllModel> tables = formAllModel.stream().filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey())).collect(Collectors.toList());
-            List<FormAllModel> mastTable = formAllModel.stream().filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey())).collect(Collectors.toList());
-            List<String> tableList = tables.stream().map(t -> t.getChildList().getTableName()).collect(Collectors.toList());
-            List<String> mastTableList = mastTable.stream().map(t -> t.getFormMastTableModel().getTable()).collect(Collectors.toList());
-            flag = tableList.stream().filter(item -> mastTableList.contains(item)).count() > 0;
+            List<FormAllModel> tables = formAllModel.stream().filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey())).toList();
+            List<FormAllModel> mastTable = formAllModel.stream().filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey())).toList();
+            List<String> tableList = tables.stream().map(t -> t.getChildList().getTableName()).toList();
+            List<String> mastTableList = mastTable.stream().map(t -> t.getFormMastTableModel().getTable()).toList();
+            flag = tableList.stream().anyMatch(mastTableList::contains);
         }
         return flag;
     }

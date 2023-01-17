@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Validated
-@Tag(name = "工作流程-流程引擎", description = "工作流程-流程引擎")
+@Tag(name = "工作流程-流程任务", description = "工作流程-流程任务")
 @RestController
 @RequestMapping("/api/workflow/engine/flow-task")
 public class FlowTaskController {

@@ -4,10 +4,7 @@ package com.taotao.cloud.workflow.api.common.model.visiual;
 
 /**
  * workflowKey类型
- * @author lhr
- * @create 2018/1/9
  */
-
 public class WorkflowKeyConsts {
     /**
      * 单行
