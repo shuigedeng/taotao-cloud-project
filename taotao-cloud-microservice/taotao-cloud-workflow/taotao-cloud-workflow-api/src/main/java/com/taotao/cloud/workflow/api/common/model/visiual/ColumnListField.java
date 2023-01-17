@@ -3,9 +3,6 @@ package com.taotao.cloud.workflow.api.common.model.visiual;
 
 import lombok.Data;
 
-/**
- * @date 2021/3/16
- */
 @Data
 public class ColumnListField {
     /**

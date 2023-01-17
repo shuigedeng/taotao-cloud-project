@@ -2,6 +2,7 @@ package com.taotao.cloud.workflow.api.common.model.visiual.fields;
 
 
 import com.taotao.cloud.workflow.api.common.model.visiual.fields.config.ConfigModel;
+import com.taotao.cloud.workflow.api.common.model.visiual.fields.props.PropsModel;
 import com.taotao.cloud.workflow.api.common.model.visiual.fields.slot.SlotModel;
 import java.util.List;
 import lombok.Data;
