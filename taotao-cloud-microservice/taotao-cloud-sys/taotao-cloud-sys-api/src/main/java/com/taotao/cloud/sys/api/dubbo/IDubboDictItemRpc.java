@@ -15,14 +15,14 @@
  */
 package com.taotao.cloud.sys.api.dubbo;
 
+
 /**
- * IDubboRoleService 
+ * ISysDictItemService
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2022-03-25 14:22:32
+ * @version 2021.10
+ * @since 2021-10-09 20:32:47
  */
-public interface IDubboRoleService {
-
+public interface IDubboDictItemRpc {
 
 }

@@ -13,28 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.promotion.biz.service.dubbo;
+package com.taotao.cloud.sys.biz.service.dubbo;
 
-import com.taotao.cloud.sys.api.dubbo.IDubboDictItemRpc;
-import com.taotao.cloud.sys.biz.mapper.IDictItemMapper;
-import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
-import com.taotao.cloud.sys.biz.repository.cls.DictItemRepository;
-import com.taotao.cloud.sys.biz.repository.inf.IDictItemRepository;
+import com.taotao.cloud.sys.api.dubbo.IDubboDictRpc;
+import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import com.taotao.cloud.sys.biz.mapper.IDictMapper;
+import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
+import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
 /**
- * DictItemServiceImpl
+ * DictServiceImpl
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2021-10-09 20:34:52
+ * @since 2021-10-09 20:26:36
  */
 @Service
-@DubboService(interfaceClass = IDubboDictItemRpc.class, validation = "true")
-public class DubboDictItemServiceImpl extends
-	BaseSuperServiceImpl<IDictItemMapper, DictItem, DictItemRepository, IDictItemRepository, Long>
-	implements IDubboDictItemRpc {
+@AllArgsConstructor
+@DubboService(interfaceClass = IDubboDictRpc.class, validation = "true")
+public class DubboDictRpcImpl extends
+	BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
+	implements IDubboDictRpc {
 
+	@Override
+	public DubboDictResponse findByCode(Integer code) {
+		return new DubboDictResponse();
+	}
 }
