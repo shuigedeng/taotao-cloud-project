@@ -48,7 +48,7 @@ import java.util.Objects;
 @org.hibernate.annotations.Table(appliesTo = UserRelation.TABLE_NAME, comment = "用户-关系第三方表")
 public class UserRelation extends SuperEntity<UserRelation, Long> {
 
-	public static final String TABLE_NAME = "sys_user_relation";
+	public static final String TABLE_NAME = "tt_user_relation";
 
 	/**
 	 * 用户ID

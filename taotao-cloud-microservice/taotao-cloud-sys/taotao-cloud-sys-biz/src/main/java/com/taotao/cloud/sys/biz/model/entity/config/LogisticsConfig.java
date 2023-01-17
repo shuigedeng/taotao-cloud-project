@@ -25,7 +25,7 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = LogisticsConfig.TABLE_NAME, comment = "物流公司表")
 public class LogisticsConfig extends BaseSuperEntity<LogisticsConfig, Long> {
 
-	public static final String TABLE_NAME = "sys_logistics_config";
+	public static final String TABLE_NAME = "tt_logistics_config";
 
 	/**
 	 * 物流公司名称

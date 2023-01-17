@@ -31,7 +31,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 /**
- * 字典子项表 // @SQLDelete(sql = "update sys_dict_item set del_flag = 1 where id = ?") // @Where(clause
+ * 字典子项表 // @SQLDelete(sql = "update tt_dict_item set del_flag = 1 where id = ?") // @Where(clause
  * ="del_flag = 1")
  *
  * @author shuigedeng
@@ -49,7 +49,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = DictItem.TABLE_NAME, comment = "字典项表")
 public class DictItem extends BaseSuperEntity<DictItem, Long> {
 
-	public static final String TABLE_NAME = "sys_dict_item";
+	public static final String TABLE_NAME = "tt_dict_item";
 
 	/**
 	 * 字典id

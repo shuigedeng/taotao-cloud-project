@@ -13,6 +13,7 @@ import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.repository.cls.SpecificationRepository;
 import com.taotao.cloud.goods.biz.repository.inf.ISpecificationRepository;
+import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
@@ -41,7 +42,7 @@ public class SpecificationServiceImpl extends
 	/**
 	 * 分类服务
 	 */
-	private final CategoryServiceImpl categoryService;
+	private final ICategoryService categoryService;
 
 	@Override
 	public Boolean deleteSpecification(List<Long> ids) {

@@ -15,8 +15,8 @@ import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.biz.mapper.PointsGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
-import com.taotao.cloud.promotion.biz.service.business.PointsGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,21 +37,21 @@ import java.util.Map;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<PointsGoodsMapper, PointsGoods> implements
-	PointsGoodsService {
+		IPointsGoodsService {
 
 	/**
 	 * 促销商品
 	 */
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 	/**
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 
 	@Autowired
-	private IFeignEsGoodsIndexApi goodsIndexService;
+	private IFeignEsGoodsIndexApi feignEsGoodsIndexApi;
 
 
 	@Override
@@ -81,7 +81,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 			for (Map.Entry<String, Long> entry : skuPoints.entrySet()) {
 				Map<String, Object> query = MapUtil.builder(new HashMap<String, Object>()).put("id", entry.getKey()).build();
 				Map<String, Object> update = MapUtil.builder(new HashMap<String, Object>()).put("points", entry.getValue()).build();
-				this.goodsIndexService.updateIndex(query, update);
+				this.feignEsGoodsIndexApi.updateIndex(query, update);
 			}
 
 		}
@@ -204,7 +204,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 	public void updateEsGoodsIndex(PointsGoods promotions) {
 		Map<String, Object> query = MapUtil.builder(new HashMap<String, Object>()).put("id", promotions.getSkuId()).build();
 		Map<String, Object> update = MapUtil.builder(new HashMap<String, Object>()).put("points", promotions.getPoints()).build();
-		this.goodsIndexService.updateIndex(query, update);
+		this.feignEsGoodsIndexApi.updateIndex(query, update);
 	}
 
 
@@ -254,7 +254,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 	 * @return 商品sku
 	 */
 	private GoodsSku checkSkuExist(String skuId) {
-		GoodsSku goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+		GoodsSku goodsSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(skuId);
 		if (goodsSku == null) {
 			log.error("商品ID为" + skuId + "的商品不存在！");
 			throw new BusinessException();

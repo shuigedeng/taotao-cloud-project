@@ -33,7 +33,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, Membe
 	 * es商品业务层
 	 */
 	@Autowired
-	private IFeignEsGoodsIndexApi esGoodsIndexService;
+	private IFeignEsGoodsIndexApi feignEsGoodsIndexApi;
 
 	@Override
 	public MemberBrowse saveFootprint(MemberBrowse memberBrowse) {
@@ -81,7 +81,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, Membe
 		lambdaQueryWrapper.orderByDesc(MemberBrowse::getUpdateTime);
 		List<String> skuIdList = this.baseMapper.footprintSkuIdList(PageQuery.buildMpPage(), lambdaQueryWrapper);
 		if (!skuIdList.isEmpty()) {
-			List<EsGoodsIndexVO> list = esGoodsIndexService.getEsGoodsBySkuIds(skuIdList);
+			List<EsGoodsIndexVO> list = feignEsGoodsIndexApi.getEsGoodsBySkuIds(skuIdList);
 			//去除为空的商品数据
 			list.removeIf(Objects::isNull);
 			return list;

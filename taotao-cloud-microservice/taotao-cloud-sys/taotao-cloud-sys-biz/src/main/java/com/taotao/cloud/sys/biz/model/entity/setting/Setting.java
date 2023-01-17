@@ -40,7 +40,7 @@ import org.hibernate.annotations.Type;
 @org.hibernate.annotations.Table(appliesTo = Setting.TABLE_NAME, comment = "配置表")
 public class Setting extends BaseSuperEntity<Setting, Long> {
 
-	public static final String TABLE_NAME = "sys_setting";
+	public static final String TABLE_NAME = "tt_setting";
 
 	@Column(name = "name", columnDefinition = "varchar(255) not null comment '名称'")
 	private String name;

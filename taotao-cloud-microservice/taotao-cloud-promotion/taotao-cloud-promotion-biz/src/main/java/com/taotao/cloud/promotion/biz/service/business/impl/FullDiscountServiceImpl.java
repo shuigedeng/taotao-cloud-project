@@ -13,9 +13,9 @@ import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.mapper.FullDiscountMapper;
-import com.taotao.cloud.promotion.biz.service.business.CouponService;
-import com.taotao.cloud.promotion.biz.service.business.FullDiscountService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponService;
+import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import com.taotao.cloud.promotion.biz.model.pojo.PromotionTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,18 +37,18 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullDiscountMapper, FullDiscount> implements
-	FullDiscountService {
+        IFullDiscountService {
 
     /**
      * 优惠券
      */
     @Autowired
-    private CouponService couponService;
+    private ICouponService couponService;
     /**
      * 促销商品
      */
     @Autowired
-    private PromotionGoodsService promotionGoodsService;
+    private IPromotionGoodsService promotionGoodsService;
 
     @Override
     public List<FullDiscountVO> currentPromotion(List<String> storeId) {

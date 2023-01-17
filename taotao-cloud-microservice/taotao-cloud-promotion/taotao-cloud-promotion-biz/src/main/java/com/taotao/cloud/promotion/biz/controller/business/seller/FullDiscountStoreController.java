@@ -8,7 +8,7 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.vo.cart.FullDiscountVO;
 import com.taotao.cloud.promotion.api.model.query.FullDiscountPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
-import com.taotao.cloud.promotion.biz.service.business.FullDiscountService;
+import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FullDiscountStoreController {
 
 	@Autowired
-	private FullDiscountService fullDiscountService;
+	private IFullDiscountService fullDiscountService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

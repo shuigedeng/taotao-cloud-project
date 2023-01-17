@@ -49,7 +49,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = Resource.TABLE_NAME, comment = "资源表")
 public class Resource extends BaseSuperEntity<Resource, Long> {
 
-	public static final String TABLE_NAME = "sys_resource";
+	public static final String TABLE_NAME = "tt_resource";
 
 	/**
 	 * 菜单标题

@@ -7,8 +7,8 @@ import com.taotao.cloud.promotion.api.model.query.SeckillPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.SeckillVO;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
-import com.taotao.cloud.promotion.biz.service.business.SeckillApplyService;
-import com.taotao.cloud.promotion.biz.service.business.SeckillService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,9 +35,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class SeckillManagerController {
 
 	@Autowired
-	private SeckillService seckillService;
+	private ISeckillService seckillService;
 	@Autowired
-	private SeckillApplyService seckillApplyService;
+	private ISeckillApplyService seckillApplyService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

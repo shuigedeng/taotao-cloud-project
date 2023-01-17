@@ -9,7 +9,7 @@ import com.taotao.cloud.order.api.model.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.web.query.BillPageQuery;
 import com.taotao.cloud.store.api.web.vo.BillListVO;
 import com.taotao.cloud.store.biz.model.entity.Bill;
-import com.taotao.cloud.store.biz.service.BillService;
+import com.taotao.cloud.store.biz.service.IBillService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BillManagerController {
 
 	@Autowired
-	private BillService billService;
+	private IBillService billService;
 
 	@Autowired
 	private IFeignStoreFlowApi storeFlowService;

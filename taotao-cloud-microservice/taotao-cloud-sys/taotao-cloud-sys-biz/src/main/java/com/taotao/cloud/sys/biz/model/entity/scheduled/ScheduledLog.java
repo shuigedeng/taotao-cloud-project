@@ -49,7 +49,7 @@ import java.util.Objects;
 @org.hibernate.annotations.Table(appliesTo = ScheduledLog.TABLE_NAME, comment = "Scheduled日志表")
 public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> {
 
-	public static final String TABLE_NAME = "sys_scheduled_log";
+	public static final String TABLE_NAME = "tt_scheduled_log";
 
 	/**
 	 * 调度器名称

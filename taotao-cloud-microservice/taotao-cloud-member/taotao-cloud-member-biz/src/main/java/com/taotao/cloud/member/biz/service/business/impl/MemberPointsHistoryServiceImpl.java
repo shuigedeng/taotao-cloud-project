@@ -13,7 +13,7 @@ import com.taotao.cloud.member.biz.mapper.IMemberPointsHistoryMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 import com.taotao.cloud.member.biz.service.business.IMemberPointsHistoryService;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class MemberPointsHistoryServiceImpl extends
 
 
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 
 	@Override
 	public MemberPointsHistoryVO getMemberPointsHistoryVO(Long memberId) {

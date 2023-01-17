@@ -27,11 +27,10 @@ import com.taotao.cloud.store.api.web.vo.StoreVO;
 import com.taotao.cloud.store.biz.mapper.StoreMapper;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
-import com.taotao.cloud.store.biz.service.StoreDetailService;
-import com.taotao.cloud.store.biz.service.StoreService;
+import com.taotao.cloud.store.biz.service.IStoreDetailService;
+import com.taotao.cloud.store.biz.service.IStoreService;
 import com.taotao.cloud.store.biz.utils.QueryUtil;
 import java.util.Objects;
-import java.util.Optional;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,23 +43,23 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements StoreService {
+public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements IStoreService {
 
 	/**
 	 * 会员
 	 */
 	@Autowired
-	private IFeignMemberApi memberService;
+	private IFeignMemberApi feignMemberApi;
 	/**
 	 * 商品
 	 */
 	@Autowired
-	private IFeignGoodsApi goodsService;
+	private IFeignGoodsApi feignGoodsApi;
 	/**
 	 * 店铺详情
 	 */
 	@Autowired
-	private StoreDetailService storeDetailService;
+	private IStoreDetailService storeDetailService;
 
 	@Override
 	public IPage<StoreVO> findByConditionPage(StorePageQuery storePageQuery) {
@@ -85,7 +84,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 			throw new BusinessException(ResultEnum.STORE_NAME_EXIST_ERROR);
 		}
 
-		MemberVO member = memberService.getById(adminStoreApplyDTO.getMemberId());
+		MemberVO member = feignMemberApi.getById(adminStoreApplyDTO.getMemberId());
 		//判断用户是否存在
 		if (member == null) {
 			throw new BusinessException(ResultEnum.USER_NOT_EXIST);
@@ -105,7 +104,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		storeDetailService.save(storeDetail);
 
 		//设置会员-店铺信息
-		memberService.update(member.getId(), store.getId());
+		feignMemberApi.update(member.getId(), store.getId());
 		return store;
 
 	}
@@ -167,10 +166,10 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		if (passed == 0) {
 			store.setStoreDisable(StoreStatusEnum.OPEN.value());
 			//修改会员 表示已有店铺
-			MemberVO member = memberService.getById(store.getMemberId());
+			MemberVO member = feignMemberApi.getById(store.getMemberId());
 			member.setHaveStore(true);
 			member.setStoreId(id);
-			memberService.updateById(member);
+			feignMemberApi.updateById(member);
 			//设定商家的结算日
 			storeDetailService.update(new LambdaUpdateWrapper<StoreDetail>()
 				.eq(StoreDetail::getStoreId, id)
@@ -189,7 +188,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 			store.setStoreDisable(StoreStatusEnum.CLOSED.value());
 
 			//下架所有此店铺商品
-			goodsService.underStoreGoods(id);
+			feignGoodsApi.underStoreGoods(id);
 			return this.updateById(store);
 		}
 
@@ -214,7 +213,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		//店铺为空，则新增店铺
 		if (store == null) {
 			AuthUser authUser = Objects.requireNonNull(UserContext.getCurrentUser());
-			Member member = memberService.getById(authUser.getId());
+			Member member = feignMemberApi.getById(authUser.getId());
 			//根据会员创建店铺
 			store = new Store(member);
 			BeanUtil.copyProperties(storeCompanyDTO, store);
@@ -283,7 +282,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	@Override
 	public void updateStoreGoodsNum(Long storeId) {
 		//获取店铺已上架已审核通过商品数量
-		long goodsNum = goodsService.countStoreGoodsNum(storeId);
+		long goodsNum = feignGoodsApi.countStoreGoodsNum(storeId);
 		//修改店铺商品数量
 		this.update(new LambdaUpdateWrapper<Store>()
 			.set(Store::getGoodsNum, goodsNum)

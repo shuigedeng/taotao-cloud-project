@@ -16,7 +16,7 @@ import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.model.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.business.AbstractPromotionsService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
@@ -45,7 +45,7 @@ public class AbstractPromotionsServiceImpl<M extends BaseSuperMapper<T>, T exten
 	 * 促销商品
 	 */
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 
 	/**
 	 * rocketmq自定义属性
