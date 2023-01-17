@@ -31,9 +31,9 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-security-justauth"
 
     // Sa-Token-OAuth2.0 模块
-    implementation "cn.dev33:sa-token-oauth2:1.33.0"
+    implementation "cn.dev33:sa-token-oauth2:1.34.0"
     //Sa-Token 插件：整合SSO
-    implementation "cn.dev33:sa-token-sso:1.33.0"
+    implementation "cn.dev33:sa-token-sso:1.34.0"
 
 }
 
