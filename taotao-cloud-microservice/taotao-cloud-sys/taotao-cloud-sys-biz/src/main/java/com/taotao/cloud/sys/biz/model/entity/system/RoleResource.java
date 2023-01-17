@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = RoleResource.TABLE_NAME, comment = "角色-资源第三方表")
 public class RoleResource extends SuperEntity<RoleResource, Long> {
 
-	public static final String TABLE_NAME = "tt_role_resource";
+	public static final String TABLE_NAME = "sys_role_resource";
 
 	/**
 	 * 角色ID

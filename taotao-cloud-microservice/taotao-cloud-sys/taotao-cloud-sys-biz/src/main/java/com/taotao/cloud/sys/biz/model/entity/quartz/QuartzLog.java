@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = QuartzLog.TABLE_NAME, comment = "Quartz日志表")
 public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> {
 
-	public static final String TABLE_NAME = "tt_quartz_log";
+	public static final String TABLE_NAME = "sys_quartz_log";
 
 	/**
 	 * Spring Bean名称

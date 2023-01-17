@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = Dept.TABLE_NAME, comment = "后台部门表")
 public class Dept extends BaseSuperEntity<Dept, Long> {
 
-	public static final String TABLE_NAME = "tt_dept";
+	public static final String TABLE_NAME = "sys_dept";
 
 	/**
 	 * 部门名称

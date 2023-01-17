@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = ScheduledJob.TABLE_NAME, comment = "Scheduled任务表")
 public class ScheduledJob extends BaseSuperEntity<ScheduledJob, Long> {
 
-	public static final String TABLE_NAME = "tt_scheduled_job";
+	public static final String TABLE_NAME = "sys_scheduled_job";
 
 	/**
 	 * cron表达式

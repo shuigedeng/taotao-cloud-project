@@ -50,7 +50,7 @@ import java.util.Objects;
 @org.hibernate.annotations.Table(appliesTo = User.TABLE_NAME, comment = "用户表")
 public class User extends BaseSuperEntity<User,Long> {
 
-	public static final String TABLE_NAME = "tt_user";
+	public static final String TABLE_NAME = "sys_user";
 
 	/**
 	 * 账号

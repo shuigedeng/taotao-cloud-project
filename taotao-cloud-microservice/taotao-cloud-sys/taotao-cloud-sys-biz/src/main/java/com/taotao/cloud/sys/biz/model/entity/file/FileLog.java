@@ -34,7 +34,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = FileLog.TABLE_NAME, comment = "文件表")
 public class FileLog extends BaseSuperEntity<FileLog, Long> {
 
-	public static final String TABLE_NAME = "tt_file_log";
+	public static final String TABLE_NAME = "sys_file_log";
 
 	/**
 	 * 业务ID
