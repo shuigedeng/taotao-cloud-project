@@ -49,7 +49,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = DictItem.TABLE_NAME, comment = "字典项表")
 public class DictItem extends BaseSuperEntity<DictItem, Long> {
 
-	public static final String TABLE_NAME = "tt_dict_item";
+	public static final String TABLE_NAME = "sys_dict_item";
 
 	/**
 	 * 字典id

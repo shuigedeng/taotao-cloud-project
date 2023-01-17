@@ -31,7 +31,7 @@ import org.apache.commons.lang3.ArrayUtils;
 @org.hibernate.annotations.Table(appliesTo = GenTable.TABLE_NAME, comment = "业务表")
 public class GenTable extends BaseSuperEntity<GenTable, Long> {
 
-	public static final String TABLE_NAME = "tt_gen_table";
+	public static final String TABLE_NAME = "sys_gen_table";
 
 	/**
 	 * 表名称

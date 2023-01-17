@@ -49,7 +49,7 @@ import java.util.Objects;
 @org.hibernate.annotations.Table(appliesTo = Position.TABLE_NAME, comment = "岗位表")
 public class Position extends BaseSuperEntity<Position,Long> {
 
-	public static final String TABLE_NAME = "tt_position";
+	public static final String TABLE_NAME = "sys_position";
 
 	/**
 	 * 岗位名称

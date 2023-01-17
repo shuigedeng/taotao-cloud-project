@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = RequestPath.TABLE_NAME, comment = "权限资源表(url请求)")
 public class RequestPath extends BaseSuperEntity<RequestPath, Long> {
 
-	public static final String TABLE_NAME = "tt_request_path";
+	public static final String TABLE_NAME = "sys_request_path";
 
 	/**
 	 * 权限标识 (controller类#方法#请求方式)  ManagerUserController#page#post

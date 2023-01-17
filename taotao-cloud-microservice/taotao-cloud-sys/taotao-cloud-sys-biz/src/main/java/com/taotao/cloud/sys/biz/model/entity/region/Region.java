@@ -54,7 +54,7 @@ import org.hibernate.annotations.Type;
 @org.hibernate.annotations.Table(appliesTo = Region.TABLE_NAME, comment = "地区表")
 public class Region extends BaseSuperEntity<Region, Long> {
 
-	public static final String TABLE_NAME = "tt_region";
+	public static final String TABLE_NAME = "sys_region";
 
 	/**
 	 * 地区父节点

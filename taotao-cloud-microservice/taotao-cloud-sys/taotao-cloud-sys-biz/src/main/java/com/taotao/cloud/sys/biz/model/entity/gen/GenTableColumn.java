@@ -27,7 +27,7 @@ import jakarta.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = GenTableColumn.TABLE_NAME, comment = "代码生成业务字段表")
 public class GenTableColumn extends BaseSuperEntity<GenTableColumn, Long> {
 
-	public static final String TABLE_NAME = "tt_gen_table_column";
+	public static final String TABLE_NAME = "sys_gen_table_column";
 
 	/**
 	 * 归属表编号

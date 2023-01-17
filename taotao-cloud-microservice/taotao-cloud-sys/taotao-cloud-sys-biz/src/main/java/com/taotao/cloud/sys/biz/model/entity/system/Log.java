@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = Log.TABLE_NAME, comment = "日志表")
 public class Log extends BaseSuperEntity<Log, Long> {
 
-	public static final String TABLE_NAME = "tt_log";
+	public static final String TABLE_NAME = "sys_log";
 
 	/**
 	 * 请求日志id

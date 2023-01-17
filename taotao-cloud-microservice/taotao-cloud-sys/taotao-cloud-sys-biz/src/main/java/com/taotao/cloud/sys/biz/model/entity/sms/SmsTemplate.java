@@ -30,7 +30,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = SmsTemplate.TABLE_NAME, comment = "短信模板表")
 public class SmsTemplate extends BaseSuperEntity<SmsTemplate, Long> {
 
-	public static final String TABLE_NAME = "tt_sys_sms_template";
+	public static final String TABLE_NAME = "sys_sys_sms_template";
 
 	@Column(name = "template_name", columnDefinition = "varchar(2000) not null comment '模板名称'")
 	private String templateName;
