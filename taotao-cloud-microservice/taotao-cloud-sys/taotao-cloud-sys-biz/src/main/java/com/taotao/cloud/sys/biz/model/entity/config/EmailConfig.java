@@ -44,7 +44,7 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = EmailConfig.TABLE_NAME, comment = "邮件配置表")
 public class EmailConfig extends BaseSuperEntity<EmailConfig, Long> {
 
-	public static final String TABLE_NAME = "sys_email_config";
+	public static final String TABLE_NAME = "tt_email_config";
 
 
 	/**

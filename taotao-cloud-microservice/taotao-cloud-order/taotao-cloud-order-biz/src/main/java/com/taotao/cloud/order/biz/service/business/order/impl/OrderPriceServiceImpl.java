@@ -8,12 +8,12 @@ import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
-import com.taotao.cloud.order.biz.mapper.order.ITradeMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderPriceService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.ITradeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +44,7 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 	/**
 	 * 交易数据层
 	 */
-	private final ITradeMapper tradeMapper;
+	private final ITradeService tradeService;
 	/**
 	 * 订单
 	 */
@@ -58,7 +58,7 @@ public class OrderPriceServiceImpl implements IOrderPriceService {
 		Order order = updateOrderPrice(orderSn, orderPrice);
 
 		//修改交易金额
-		tradeMapper.updateTradePrice(order.getTradeSn());
+		tradeService.updateTradePrice(order.getTradeSn());
 		return true;
 	}
 

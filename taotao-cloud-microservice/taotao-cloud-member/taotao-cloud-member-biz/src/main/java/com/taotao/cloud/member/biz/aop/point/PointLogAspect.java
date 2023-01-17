@@ -20,7 +20,7 @@ import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 import com.taotao.cloud.member.biz.service.business.IMemberPointsHistoryService;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -42,7 +42,7 @@ public class PointLogAspect {
 	private IMemberPointsHistoryService memberPointsHistoryService;
 
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 
 	@After("@annotation(com.taotao.cloud.member.biz.aop.point.PointLogPoint)")
 	public void doAfter(JoinPoint pjp) {

@@ -12,7 +12,7 @@ import com.taotao.cloud.member.biz.connect.request.AuthRequest;
 import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.connect.util.ConnectUtil;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConnectWebBindController {
 
 	private final ConnectService connectService;
-	private final MemberService memberService;
+	private final IMemberService memberService;
 	private final ConnectUtil connectUtil;
 
 	@Operation(summary = "WEB信任登录授权", description = "WEB信任登录授权")

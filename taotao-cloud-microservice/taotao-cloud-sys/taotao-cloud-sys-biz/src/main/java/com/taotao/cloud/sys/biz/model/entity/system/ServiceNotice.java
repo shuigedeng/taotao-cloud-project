@@ -30,7 +30,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = ServiceNotice.TABLE_NAME, comment = "服务订阅消息表")
 public class ServiceNotice extends BaseSuperEntity<ServiceNotice, Long> {
 
-	public static final String TABLE_NAME = "sys_service_notice";
+	public static final String TABLE_NAME = "tt_service_notice";
 
 	@Column(name = "store_id", columnDefinition = "varchar(255) not null default '' comment '商家id，为-1时，代表是平台发布的消息'")
 	private String storeId;

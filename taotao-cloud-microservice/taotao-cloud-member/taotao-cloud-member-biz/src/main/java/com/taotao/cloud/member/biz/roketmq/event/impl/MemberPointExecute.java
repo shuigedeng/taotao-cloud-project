@@ -19,7 +19,7 @@ package com.taotao.cloud.member.biz.roketmq.event.impl;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
@@ -42,7 +42,7 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	 * 会员
 	 */
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 	/**
 	 * 订单
 	 */

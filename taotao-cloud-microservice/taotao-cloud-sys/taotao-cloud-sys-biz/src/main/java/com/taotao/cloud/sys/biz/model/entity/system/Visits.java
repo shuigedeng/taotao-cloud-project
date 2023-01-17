@@ -33,7 +33,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = Visits.TABLE_NAME, comment = "pv与ip统计")
 public class Visits extends BaseSuperEntity<Visits, Long> {
 
-	public static final String TABLE_NAME = "sys_visits";
+	public static final String TABLE_NAME = "tt_visits";
 
 	@Column(name = "date", columnDefinition = "varchar(64) not null comment '日期'")
 	private String date;

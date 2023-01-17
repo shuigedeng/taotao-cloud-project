@@ -26,8 +26,8 @@ import com.taotao.cloud.store.api.web.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.web.vo.StoreFlowRefundDownloadVO;
 import com.taotao.cloud.store.biz.mapper.BillMapper;
 import com.taotao.cloud.store.biz.model.entity.Bill;
-import com.taotao.cloud.store.biz.service.BillService;
-import com.taotao.cloud.store.biz.service.StoreDetailService;
+import com.taotao.cloud.store.biz.service.IBillService;
+import com.taotao.cloud.store.biz.service.IStoreDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
@@ -53,18 +53,18 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "bill")
 @Transactional(rollbackFor = Exception.class)
-public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements BillService {
+public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IBillService {
 
 	/**
 	 * 店铺详情
 	 */
 	@Autowired
-	private StoreDetailService storeDetailService;
+	private IStoreDetailService storeDetailService;
 	/**
 	 * 商家流水
 	 */
 	@Autowired
-	private IFeignStoreFlowApi storeFlowService;
+	private IFeignStoreFlowApi feignStoreFlowApi;
 
 	@Override
 	public void createBill(Long storeId, LocalDateTime startTime, LocalDateTime endTime) {
@@ -227,7 +227,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
 
 		StoreFlowQuery.BillDTO billDTO = new StoreFlowQuery.BillDTO();
 		BeanUtils.copyProperties(bill, billDTO);
-		List<StoreFlowPayDownloadVO> storeFlowList = storeFlowService.getStoreFlowPayDownloadVO(StoreFlowQuery.builder().type(FlowTypeEnum.PAY.name()).bill(billDTO).build());
+		List<StoreFlowPayDownloadVO> storeFlowList = feignStoreFlowApi.getStoreFlowPayDownloadVO(StoreFlowQuery.builder().type(FlowTypeEnum.PAY.name()).bill(billDTO).build());
 		writer.write(storeFlowList, true);
 
 		writer.setSheet("退款订单");
@@ -256,7 +256,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements Bi
 
 		StoreFlowQuery.BillDTO billDTO1 = new StoreFlowQuery.BillDTO();
 		BeanUtils.copyProperties(bill, billDTO1);
-		List<StoreFlowRefundDownloadVO> storeFlowRefundDownloadVOList = storeFlowService.getStoreFlowRefundDownloadVO(
+		List<StoreFlowRefundDownloadVO> storeFlowRefundDownloadVOList = feignStoreFlowApi.getStoreFlowRefundDownloadVO(
 			StoreFlowQuery.builder().type(FlowTypeEnum.REFUND.name()).bill(billDTO1).build()
 		);
 		writer.write(storeFlowRefundDownloadVOList, true);

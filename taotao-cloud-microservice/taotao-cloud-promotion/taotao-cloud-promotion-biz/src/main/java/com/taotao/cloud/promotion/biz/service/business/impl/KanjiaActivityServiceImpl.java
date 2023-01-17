@@ -23,9 +23,9 @@ import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityMapper;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityLogService;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityLogService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityService;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
@@ -46,16 +46,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class KanjiaActivityServiceImpl extends
 	ServiceImpl<KanJiaActivityMapper, KanjiaActivity> implements
-	KanjiaActivityService {
+		IKanjiaActivityService {
 
 	@Autowired
-	private KanjiaActivityGoodsService kanjiaActivityGoodsService;
+	private IKanjiaActivityGoodsService kanjiaActivityGoodsService;
 	@Autowired
-	private KanjiaActivityLogService kanjiaActivityLogService;
+	private IKanjiaActivityLogService kanjiaActivityLogService;
 	@Autowired
-	private IFeignMemberApi memberService;
+	private IFeignMemberApi feignMemberApi;
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 
 	@Override
 	public KanjiaActivity getKanjiaActivity(KanjiaActivitySearchQuery kanJiaActivitySearchParams) {
@@ -104,7 +104,7 @@ public class KanjiaActivityServiceImpl extends
 		}
 		KanjiaActivityLog kanjiaActivityLog = new KanjiaActivityLog();
 		//获取会员信息
-		Member member = memberService.getById(authUser.getId());
+		Member member = feignMemberApi.getById(authUser.getId());
 		//校验此活动是否已经发起过
 		QueryWrapper<KanjiaActivity> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("kanjia_activity_goods_id", kanJiaActivityGoods.getId());
@@ -114,7 +114,7 @@ public class KanjiaActivityServiceImpl extends
 		}
 		KanjiaActivity kanJiaActivity = new KanjiaActivity();
 		//获取商品信息
-		GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
+		GoodsSku goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(
 			kanJiaActivityGoods.getSkuId());
 		if (goodsSku != null) {
 			kanJiaActivity.setSkuId(kanJiaActivityGoods.getSkuId());
@@ -144,7 +144,7 @@ public class KanjiaActivityServiceImpl extends
 	public KanjiaActivityLog helpKanJia(String kanjiaActivityId) {
 		AuthUser authUser = Objects.requireNonNull(UserContext.getCurrentUser());
 		//获取会员信息
-		Member member = memberService.getById(authUser.getId());
+		Member member = feignMemberApi.getById(authUser.getId());
 		//根据砍价发起活动id查询砍价活动信息
 		KanjiaActivity kanjiaActivity = this.getById(kanjiaActivityId);
 		//判断活动非空或非正在进行中的活动

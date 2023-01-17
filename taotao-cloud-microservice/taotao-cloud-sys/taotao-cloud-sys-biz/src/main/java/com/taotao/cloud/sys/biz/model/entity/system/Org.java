@@ -54,7 +54,7 @@ import org.hibernate.annotations.Type;
 @org.hibernate.annotations.Table(appliesTo = Org.TABLE_NAME, comment = "组织信息表")
 public class Org extends BaseSuperEntity<Org, Long> {
 
-	public static final String TABLE_NAME = "sys_org";
+	public static final String TABLE_NAME = "tt_org";
 
 	/**
 	 * 部门名称

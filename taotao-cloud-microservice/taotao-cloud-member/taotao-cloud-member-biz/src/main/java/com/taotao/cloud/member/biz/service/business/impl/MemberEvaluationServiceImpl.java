@@ -22,7 +22,7 @@ import com.taotao.cloud.member.biz.mapper.IMemberEvaluationMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.service.business.IMemberEvaluationService;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import com.taotao.cloud.member.biz.utils.QueryUtil;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
@@ -60,22 +60,22 @@ public class MemberEvaluationServiceImpl extends
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderApi orderService;
+	private IFeignOrderApi feignOrderApi;
 	/**
 	 * 子订单
 	 */
 	@Autowired
-	private IFeignOrderItemApi orderItemService;
+	private IFeignOrderItemApi feignOrderItemApi;
 	/**
 	 * 会员
 	 */
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 	/**
 	 * 商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 	/**
 	 * rocketMq
 	 */
@@ -102,15 +102,15 @@ public class MemberEvaluationServiceImpl extends
 	@Override
 	public Boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO) {
 		//获取子订单信息
-		OrderItemVO orderItem = orderItemService.getBySn(memberEvaluationDTO.getOrderItemSn());
+		OrderItemVO orderItem = feignOrderItemApi.getBySn(memberEvaluationDTO.getOrderItemSn());
 		//获取订单信息
-		OrderVO order = orderService.getBySn(orderItem.orderSn());
+		OrderVO order = feignOrderApi.getBySn(orderItem.orderSn());
 		//检测是否可以添加会员评价
 		checkMemberEvaluation(orderItem, order);
 		//获取用户信息
 		Member member = memberService.getUserInfo();
 		//获取商品信息
-		GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(
+		GoodsSkuSpecGalleryVO goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(
 				memberEvaluationDTO.getSkuId());
 		//新增用户评价
 		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,
@@ -121,7 +121,7 @@ public class MemberEvaluationServiceImpl extends
 		this.save(memberEvaluation);
 
 		//修改订单货物评价状态为已评价
-		orderItemService.updateCommentStatus(orderItem.sn(), CommentStatusEnum.FINISHED);
+		feignOrderItemApi.updateCommentStatus(orderItem.sn(), CommentStatusEnum.FINISHED);
 		//发送商品评价消息
 		String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
 				+ GoodsTagsEnum.GOODS_COMMENT_COMPLETE.name();

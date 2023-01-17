@@ -4,7 +4,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;
-import com.taotao.cloud.promotion.biz.service.business.SeckillApplyService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -30,7 +30,7 @@ public class SeckillBuyerController {
 	 * 秒杀活动
 	 */
 	@Autowired
-	private SeckillApplyService seckillApplyService;
+	private ISeckillApplyService seckillApplyService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

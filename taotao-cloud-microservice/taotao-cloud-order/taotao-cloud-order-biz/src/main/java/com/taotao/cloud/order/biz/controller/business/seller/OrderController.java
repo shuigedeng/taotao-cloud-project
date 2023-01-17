@@ -13,7 +13,7 @@ import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.service.business.order.IOrderPriceService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.store.api.feign.IFeignStoreLogisticsService;
+import com.taotao.cloud.store.api.feign.IFeignStoreLogisticsApi;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -61,7 +61,7 @@ public class OrderController {
 	/**
 	 * 物流公司
 	 */
-	private final IFeignStoreLogisticsService storeLogisticsService;
+	private final IFeignStoreLogisticsApi storeLogisticsService;
 
 	@Operation(summary = "查询订单列表", description = "查询订单列表")
 	@RequestLogger

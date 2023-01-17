@@ -52,7 +52,7 @@ import org.hibernate.annotations.Type;
 @org.hibernate.annotations.Table(appliesTo = DataScope.TABLE_NAME, comment = "数据权限表")
 public class DataScope extends BaseSuperEntity<DataScope, Long> {
 
-	public static final String TABLE_NAME = "sys_data_scope";
+	public static final String TABLE_NAME = "tt_data_scope";
 
 	/**
 	 * 部门范围限制的字段名称

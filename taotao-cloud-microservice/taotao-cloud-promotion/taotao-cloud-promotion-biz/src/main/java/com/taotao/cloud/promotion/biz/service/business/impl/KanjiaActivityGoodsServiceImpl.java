@@ -23,8 +23,8 @@ import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsVO;
 import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,16 +43,16 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGoodsMapper, KanjiaActivityGoods> implements
-	KanjiaActivityGoodsService {
+		IKanjiaActivityGoodsService {
 
 	/**
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 
 	@Override
 	public Boolean add(KanjiaActivityGoodsOperationDTO kanJiaActivityGoodsOperationDTO) {
@@ -107,7 +107,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 	 * @return 商品sku
 	 */
 	private GoodsSkuSpecGalleryVO checkSkuExist(Long skuId) {
-		GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+		GoodsSkuSpecGalleryVO goodsSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(skuId);
 		if (goodsSku == null) {
 			log.error("商品ID为" + skuId + "的商品不存在！");
 			throw new BusinessException("商品ID为" + skuId + "的商品不存在！");
@@ -194,7 +194,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 		}
 		KanjiaActivityGoodsDTO kanjiaActivityGoodsDTO = new KanjiaActivityGoodsDTO();
 		BeanUtils.copyProperties(kanjiaActivityGoods, kanjiaActivityGoodsDTO);
-		GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(kanjiaActivityGoods.getSkuId());
+		GoodsSkuSpecGalleryVO goodsSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(kanjiaActivityGoods.getSkuId());
 		if (goodsSku != null) {
 			kanjiaActivityGoodsDTO.setGoodsSku(goodsSku);
 		}
@@ -216,7 +216,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 		//获取砍价商品
 		KanjiaActivityGoods kanJiaActivityGoods = this.getById(id);
 		//获取商品SKU
-		GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuService.getGoodsSkuByIdFromCache(kanJiaActivityGoods.getSkuId());
+		GoodsSkuSpecGalleryVO goodsSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(kanJiaActivityGoods.getSkuId());
 		//填写活动商品价格、剩余数量
 		kanJiaActivityGoodsVO.setGoodsSku(goodsSku);
 		kanJiaActivityGoodsVO.setStock(kanJiaActivityGoods.getStock());

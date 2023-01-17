@@ -20,10 +20,10 @@ import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivity;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivityItem;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
-import com.taotao.cloud.promotion.biz.service.business.CouponActivityItemService;
-import com.taotao.cloud.promotion.biz.service.business.CouponActivityService;
-import com.taotao.cloud.promotion.biz.service.business.CouponService;
-import com.taotao.cloud.promotion.biz.service.business.MemberCouponService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponActivityItemService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponActivityService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponService;
+import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -44,16 +44,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CouponActivityServiceImpl extends
 	AbstractPromotionsServiceImpl<CouponActivityMapper, CouponActivity> implements
-	CouponActivityService {
+		ICouponActivityService {
 
 	@Autowired
-	private CouponService couponService;
+	private ICouponService couponService;
 	@Autowired
-	private MemberCouponService memberCouponService;
+	private IMemberCouponService memberCouponService;
 	@Autowired
-	private CouponActivityItemService couponActivityItemService;
+	private ICouponActivityItemService couponActivityItemService;
 	@Autowired
-	private IFeignMemberApi memberService;
+	private IFeignMemberApi feignMemberApi;
 
 	@Override
 	public CouponActivityVO getCouponActivityVO(String couponActivityId) {
@@ -248,7 +248,7 @@ public class CouponActivityServiceImpl extends
 	private List<Map<String, Object>> getMemberList(CouponActivity couponActivity) {
 		//判断优惠券的发送范围，获取会员列表
 		if ("ALL".equals(couponActivity.getActivityScope())) {
-			return this.memberService.listFieldsByMemberIds("id,nick_name", null);
+			return this.feignMemberApi.listFieldsByMemberIds("id,nick_name", null);
 		} else {
 			List<String> ids = new ArrayList<>();
 			if (JSONUtil.isJsonArray(couponActivity.getActivityScopeInfo())) {
@@ -256,7 +256,7 @@ public class CouponActivityServiceImpl extends
 				ids = array.toList(Map.class).stream().map(i -> i.get("id").toString())
 					.collect(Collectors.toList());
 			}
-			return memberService.listFieldsByMemberIds("id,nick_name", ids);
+			return feignMemberApi.listFieldsByMemberIds("id,nick_name", ids);
 		}
 	}
 

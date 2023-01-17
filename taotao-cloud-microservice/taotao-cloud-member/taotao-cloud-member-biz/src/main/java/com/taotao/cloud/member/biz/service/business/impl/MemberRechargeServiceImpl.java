@@ -37,7 +37,7 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 	 * 会员预存款
 	 */
 	@Autowired
-	private IFeignMemberWalletApi memberWalletService;
+	private IFeignMemberWalletApi feignMemberWalletApi;
 
 	@Override
 	public MemberRecharge recharge(BigDecimal price) {
@@ -88,7 +88,7 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 			//执行保存操作
 			this.updateById(recharge);
 			//增加预存款余额
-			memberWalletService.increase(new MemberWalletUpdateDTO(recharge.getRechargeMoney(), recharge.getMemberId(), "会员余额充值，充值单号为：" + recharge.getRechargeSn(), DepositServiceTypeEnum.WALLET_RECHARGE.name()));
+			feignMemberWalletApi.increase(new MemberWalletUpdateDTO(recharge.getRechargeMoney(), recharge.getMemberId(), "会员余额充值，充值单号为：" + recharge.getRechargeSn(), DepositServiceTypeEnum.WALLET_RECHARGE.name()));
 		}
 	}
 

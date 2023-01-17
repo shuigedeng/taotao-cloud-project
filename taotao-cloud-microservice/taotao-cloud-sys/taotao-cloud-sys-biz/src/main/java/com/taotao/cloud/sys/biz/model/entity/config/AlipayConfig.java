@@ -44,7 +44,7 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = AlipayConfig.TABLE_NAME, comment = "支付宝配置表")
 public class AlipayConfig extends BaseSuperEntity<AlipayConfig, Long> {
 
-	public static final String TABLE_NAME = "sys_alipay_config";
+	public static final String TABLE_NAME = "tt_alipay_config";
 
 	/**
 	 * 应用ID
@@ -103,6 +103,6 @@ public class AlipayConfig extends BaseSuperEntity<AlipayConfig, Long> {
 	/**
 	 * 商户号
 	 */
-	@Column(name = "sys_service_provider_id", columnDefinition = "varchar(32) not null comment '商户号'")
-	private String sysServiceProviderId;
+	@Column(name = "service_provider_id", columnDefinition = "varchar(32) not null comment '商户号'")
+	private String serviceProviderId;
 }

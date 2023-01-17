@@ -11,8 +11,8 @@ import com.taotao.cloud.store.api.web.vo.StoreDetailVO;
 import com.taotao.cloud.store.api.web.vo.StoreManagementCategoryVO;
 import com.taotao.cloud.store.api.web.vo.StoreVO;
 import com.taotao.cloud.store.biz.model.entity.Store;
-import com.taotao.cloud.store.biz.service.StoreDetailService;
-import com.taotao.cloud.store.biz.service.StoreService;
+import com.taotao.cloud.store.biz.service.IStoreDetailService;
+import com.taotao.cloud.store.biz.service.IStoreService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,12 +44,12 @@ public class StoreManagerController {
 	 * 店铺
 	 */
 	@Autowired
-	private StoreService storeService;
+	private IStoreService storeService;
 	/**
 	 * 店铺详情
 	 */
 	@Autowired
-	private StoreDetailService storeDetailService;
+	private IStoreDetailService storeDetailService;
 
 	@Operation(summary = "获取店铺分页列表", description = "获取店铺分页列表")
 	@RequestLogger

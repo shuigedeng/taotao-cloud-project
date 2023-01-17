@@ -23,8 +23,8 @@ import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.mapper.PintuanMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
-import com.taotao.cloud.promotion.biz.service.business.PintuanService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPintuanService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,28 +45,28 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class PintuanServiceImpl extends
 	AbstractPromotionsServiceImpl<PintuanMapper, Pintuan> implements
-	PintuanService {
+		IPintuanService {
 
 	/**
 	 * 促销商品
 	 */
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 	/**
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 	/**
 	 * 会员
 	 */
 	@Autowired
-	private IFeignMemberApi memberService;
+	private IFeignMemberApi iFeignMemberApi;
 	/**
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderApi orderService;
+	private IFeignOrderApi feignOrderApi;
 
 	/**
 	 * 获取当前拼团的会员
@@ -88,10 +88,10 @@ public class PintuanServiceImpl extends
 		searchParams.setOrderPromotionType(PromotionTypeEnum.PINTUAN.name());
 		searchParams.setParentOrderSn("");
 		searchParams.setMemberId("");
-		List<Order> orders = orderService.queryListByParams(searchParams);
+		List<Order> orders = feignOrderApi.queryListByParams(searchParams);
 		//遍历订单状态为已支付，为团长的拼团订单
 		for (Order order : orders) {
-			Member member = memberService.getById(order.getMemberId());
+			Member member = iFeignMemberApi.getById(order.getMemberId());
 			PintuanMemberVO memberVO = new PintuanMemberVO(member);
 			//获取已参团人数
 			this.setMemberVONum(memberVO, pintuan.getRequiredNum(), order.getSn());
@@ -133,12 +133,12 @@ public class PintuanServiceImpl extends
 		PintuanShareVO pintuanShareVO = new PintuanShareVO();
 		pintuanShareVO.setPintuanMemberVOS(new ArrayList<>());
 		//查找团长订单和已和当前拼团订单拼团的订单
-		List<Order> orders = orderService.queryListByPromotion(PromotionTypeEnum.PINTUAN.name(),
+		List<Order> orders = feignOrderApi.queryListByPromotion(PromotionTypeEnum.PINTUAN.name(),
 			PayStatusEnum.PAID.name(), parentOrderSn, parentOrderSn);
 		this.setPintuanOrderInfo(orders, pintuanShareVO, skuId);
 		//如果为根据团员订单sn查询拼团订单信息时，找到团长订单sn，然后找到所有参与到同一拼团的订单信息
 		if (!orders.isEmpty() && pintuanShareVO.getPromotionGoods() == null) {
-			List<Order> parentOrders = orderService.queryListByPromotion(
+			List<Order> parentOrders = feignOrderApi.queryListByPromotion(
 				PromotionTypeEnum.PINTUAN.name(), PayStatusEnum.PAID.name(),
 				orders.get(0).getParentOrderSn(), orders.get(0).getParentOrderSn());
 			this.setPintuanOrderInfo(parentOrders, pintuanShareVO, skuId);
@@ -207,7 +207,7 @@ public class PintuanServiceImpl extends
 		}
 		if (promotions.getEndTime() == null && promotions.getStartTime() == null) {
 			//过滤父级拼团订单，根据父级拼团订单分组
-			Map<String, List<Order>> collect = orderService.queryListByPromotion(promotions.getId())
+			Map<String, List<Order>> collect = feignOrderApi.queryListByPromotion(promotions.getId())
 				.stream().filter(i -> CharSequenceUtil.isNotEmpty(i.getParentOrderSn()))
 				.collect(Collectors.groupingBy(Order::getParentOrderSn));
 			this.isOpenFictitiousPintuan(promotions, collect);
@@ -245,7 +245,7 @@ public class PintuanServiceImpl extends
 	private void setPintuanOrderInfo(List<Order> orders, PintuanShareVO pintuanShareVO,
 		String skuId) {
 		for (Order order : orders) {
-			Member member = memberService.getById(order.getMemberId());
+			Member member = iFeignMemberApi.getById(order.getMemberId());
 			PintuanMemberVO memberVO = new PintuanMemberVO(member);
 			if (CharSequenceUtil.isEmpty(order.getParentOrderSn())) {
 				memberVO.setOrderSn("");
@@ -268,7 +268,7 @@ public class PintuanServiceImpl extends
 	}
 
 	private void setMemberVONum(PintuanMemberVO memberVO, Integer requiredNum, String orderSn) {
-		long count = this.orderService.queryCountByPromotion(PromotionTypeEnum.PINTUAN.name(),
+		long count = this.feignOrderApi.queryCountByPromotion(PromotionTypeEnum.PINTUAN.name(),
 			PayStatusEnum.PAID.name(), orderSn, orderSn);
 		//获取待参团人数
 		long toBoGrouped = requiredNum - count;
@@ -294,10 +294,10 @@ public class PintuanServiceImpl extends
 				//如果未开启虚拟成团且已参团人数小于成团人数，则自动取消订单
 				String reason = "拼团活动结束订单未付款，系统自动取消订单";
 				if (CharSequenceUtil.isNotEmpty(entry.getKey())) {
-					this.orderService.systemCancel(entry.getKey(), reason);
+					this.feignOrderApi.systemCancel(entry.getKey(), reason);
 				} else {
 					for (Order order : entry.getValue()) {
-						this.orderService.systemCancel(order.getSn(), reason);
+						this.feignOrderApi.systemCancel(order.getSn(), reason);
 					}
 				}
 			} else if (Boolean.TRUE.equals(pintuan.getFictitious())) {
@@ -320,7 +320,7 @@ public class PintuanServiceImpl extends
 		//未付款订单自动取消
 		if (unpaidOrders != null && !unpaidOrders.isEmpty()) {
 			for (Order unpaidOrder : unpaidOrders) {
-				orderService.systemCancel(unpaidOrder.getSn(),
+				feignOrderApi.systemCancel(unpaidOrder.getSn(),
 					"拼团活动结束订单未付款，系统自动取消订单");
 			}
 		}
@@ -335,13 +335,13 @@ public class PintuanServiceImpl extends
 				BeanUtil.copyProperties(paidOrders.get(0), order);
 				order.setMemberId("-1");
 				order.setMemberName("参团人员");
-				orderService.save(order);
+				feignOrderApi.save(order);
 				paidOrders.add(order);
 			}
 			for (Order paidOrder : paidOrders) {
 				paidOrder.setOrderStatus(OrderStatusEnum.UNDELIVERED.name());
 			}
-			orderService.updateBatchById(paidOrders);
+			feignOrderApi.updateBatchById(paidOrders);
 		}
 	}
 
@@ -356,7 +356,7 @@ public class PintuanServiceImpl extends
 			List<PromotionGoods> promotionGoods = PromotionTools.promotionGoodsInit(
 				pintuan.getPromotionGoodsList(), pintuan, PromotionTypeEnum.PINTUAN);
 			for (PromotionGoods promotionGood : promotionGoods) {
-				if (goodsSkuService.getGoodsSkuByIdFromCache(promotionGood.getSkuId()) == null) {
+				if (feignGoodsSkuApi.getGoodsSkuByIdFromCache(promotionGood.getSkuId()) == null) {
 					log.error(
 						"商品[" + promotionGood.getGoodsName() + "]不存在或处于不可售卖状态！");
 					throw new BusinessException();

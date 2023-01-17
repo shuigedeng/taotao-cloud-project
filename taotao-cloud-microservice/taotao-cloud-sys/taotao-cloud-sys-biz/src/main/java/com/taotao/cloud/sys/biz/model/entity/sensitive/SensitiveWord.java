@@ -31,7 +31,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = SensitiveWord.TABLE_NAME, comment = "敏感词表")
 public class SensitiveWord extends BaseSuperEntity<SensitiveWord, Long> {
 
-	public static final String TABLE_NAME = "sys_sensitive_words";
+	public static final String TABLE_NAME = "tt_sensitive_words";
 
 	/**
 	 * 敏感词名称

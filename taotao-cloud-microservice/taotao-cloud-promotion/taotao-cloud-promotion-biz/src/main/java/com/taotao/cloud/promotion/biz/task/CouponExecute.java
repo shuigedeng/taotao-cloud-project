@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.biz.task;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
-import com.taotao.cloud.promotion.biz.service.business.MemberCouponService;
+import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class CouponExecute implements EveryDayExecute {
 	static final int EXPIRATION_DAY = 3;
 
 	@Autowired
-	private MemberCouponService memberCouponService;
+	private IMemberCouponService memberCouponService;
 
 	/**
 	 * 检测优惠券的使用时间，超期未使用则失效 此方法用于领取*天后失效优惠券使用

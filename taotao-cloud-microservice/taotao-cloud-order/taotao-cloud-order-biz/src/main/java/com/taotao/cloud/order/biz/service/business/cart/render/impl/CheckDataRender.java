@@ -40,13 +40,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckDataRender implements ICartRenderStep {
 
-	private final IFeignGoodsSkuApi goodsSkuService;
+	private final IFeignGoodsSkuApi feignGoodsSkuApi;
 
 	private final IOrderService orderService;
 
-	private final IFeignPintuanApi pintuanService;
+	private final IFeignPintuanApi feignPintuanApi;
 
-	private final IFeignMemberApi memberService;
+	private final IFeignMemberApi feignMemberApi;
 
 	private final PointsGoodsService pointsGoodsService;
 
@@ -86,7 +86,7 @@ public class CheckDataRender implements ICartRenderStep {
 			}
 
 			//缓存中的商品信息
-			GoodsSku dataSku = goodsSkuService.getGoodsSkuByIdFromCache(cartSkuVO.getGoodsSku().getId());
+			GoodsSku dataSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(cartSkuVO.getGoodsSku().getId());
 			Map<String, Object> promotionMap = promotionGoodsService.getCurrentGoodsPromotion(dataSku, tradeDTO.getCartTypeEnum().name());
 			//商品有效性判定
 			if (dataSku == null || dataSku.getUpdateTime().after(cartSkuVO.getGoodsSku().getUpdateTime())) {
@@ -181,7 +181,7 @@ public class CheckDataRender implements ICartRenderStep {
 				.filter(i -> i.getPromotionType().equals(PromotionTypeEnum.PINTUAN.name()))
 				.map(PromotionGoods::getPromotionId).findFirst();
 			if (pintuanId.isPresent()) {
-				Pintuan pintuan = pintuanService.getById(pintuanId.get());
+				Pintuan pintuan = feignPintuanApi.getById(pintuanId.get());
 				Integer limitNum = pintuan.getLimitNum();
 				for (CartSkuVO cartSkuVO : tradeDTO.getSkuList()) {
 					if (limitNum != 0 && cartSkuVO.getNum() > limitNum) {
@@ -197,7 +197,7 @@ public class CheckDataRender implements ICartRenderStep {
 			if (pointsGoodsVO == null) {
 				throw new BusinessException(ResultEnum.POINT_GOODS_ERROR);
 			}
-			Member member = memberService.getUserInfo();
+			Member member = feignMemberApi.getUserInfo();
 			if (member.getPoint() < pointsGoodsVO.getPoints()) {
 				throw new BusinessException(ResultEnum.USER_POINTS_ERROR);
 			}

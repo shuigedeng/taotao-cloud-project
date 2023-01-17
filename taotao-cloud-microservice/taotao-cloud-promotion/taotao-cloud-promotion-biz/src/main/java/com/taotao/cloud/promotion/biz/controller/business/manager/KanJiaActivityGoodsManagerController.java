@@ -10,7 +10,7 @@ import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsOperationDTO;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsParams;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class KanJiaActivityGoodsManagerController {
 
 	@Autowired
-	private KanjiaActivityGoodsService kanJiaActivityGoodsService;
+	private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

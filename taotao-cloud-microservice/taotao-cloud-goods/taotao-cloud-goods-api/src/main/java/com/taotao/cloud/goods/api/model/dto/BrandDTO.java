@@ -1,6 +1,8 @@
 package com.taotao.cloud.goods.api.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,9 +24,11 @@ public class BrandDTO {
 	private Long id;
 
 	@Schema(description = "名称")
+	@NotBlank(message = "名称不能为空")
 	private String name;
 
 	@Schema(description = "logo")
+	@NotBlank(message = "logo不能为空")
 	private String logo;
 
 }

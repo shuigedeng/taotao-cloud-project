@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.member.biz.aop.member;
 
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -35,7 +35,7 @@ public class MemberLogAspect {
 
 
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 
 	@After("@annotation(com.taotao.cloud.member.biz.aop.member.MemberLogPoint)")
 	public void doAfter(JoinPoint pjp) {

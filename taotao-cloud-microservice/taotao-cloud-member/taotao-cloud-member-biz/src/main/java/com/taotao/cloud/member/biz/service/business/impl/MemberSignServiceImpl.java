@@ -1,21 +1,16 @@
 package com.taotao.cloud.member.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.model.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.mapper.IMemberSignMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.member.biz.service.business.IMemberSignService;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
@@ -28,8 +23,6 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,12 +46,12 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingApi feignSettingService;
+	private IFeignSettingApi feignSettingApi;
 	/**
 	 * 会员
 	 */
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 
 	@Override
 	public Boolean memberSign() {
@@ -111,7 +104,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 	public void memberSignSendPoint(Long memberId, Integer day) {
 		try {
 			//获取签到积分赠送设置
-			PointSettingVO pointSetting = feignSettingService.getPointSetting(
+			PointSettingVO pointSetting = feignSettingApi.getPointSetting(
 				SettingCategoryEnum.POINT_SETTING.name());
 			String content = "";
 			//赠送积分

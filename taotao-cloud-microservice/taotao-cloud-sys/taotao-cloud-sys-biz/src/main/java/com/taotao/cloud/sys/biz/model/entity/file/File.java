@@ -34,7 +34,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = File.TABLE_NAME, comment = "文件表")
 public class File extends BaseSuperEntity<File, Long> {
 
-	public static final String TABLE_NAME = "sys_file";
+	public static final String TABLE_NAME = "tt_file";
 
 	/**
 	 * 创建人

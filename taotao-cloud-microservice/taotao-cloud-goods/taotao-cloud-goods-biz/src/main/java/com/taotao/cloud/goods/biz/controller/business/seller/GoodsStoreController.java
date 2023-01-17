@@ -19,7 +19,7 @@ import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
+import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 import com.taotao.cloud.store.api.web.vo.StoreDetailVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -64,7 +64,7 @@ public class GoodsStoreController {
 	/**
 	 * 店铺详情
 	 */
-	private final IFeignStoreDetailService storeDetailService;
+	private final IFeignStoreDetailApi storeDetailService;
 
 	@Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
 	@RequestLogger("分页获取商品列表")

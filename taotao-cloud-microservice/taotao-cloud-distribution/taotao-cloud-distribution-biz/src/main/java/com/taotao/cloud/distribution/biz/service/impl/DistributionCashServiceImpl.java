@@ -48,7 +48,7 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
 	 * 会员余额
 	 */
 	@Autowired
-	private IFeignMemberWalletApi memberWalletService;
+	private IFeignMemberWalletApi feignMemberWalletApi;
 	@Autowired
 	private RocketMQTemplate rocketMQTemplate;
 	@Autowired
@@ -131,7 +131,7 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
 					distributorCash.setDistributionCashStatus(WithdrawStatusEnum.VIA_AUDITING.name());
 					distributorCash.setPayTime(new Date());
 					//提现到余额
-					memberWalletService.increase(new MemberWalletUpdateDTO(distributorCash.getPrice(), distribution.getMemberId(), "分销[" + distributorCash.getSn() + "]佣金提现到余额[" + distributorCash.getPrice() + "]", DepositServiceTypeEnum.WALLET_COMMISSION.name()));
+					feignMemberWalletApi.increase(new MemberWalletUpdateDTO(distributorCash.getPrice(), distribution.getMemberId(), "分销[" + distributorCash.getSn() + "]佣金提现到余额[" + distributorCash.getPrice() + "]", DepositServiceTypeEnum.WALLET_COMMISSION.name()));
 				} else {
 					memberWithdrawalMessage.setStatus(WithdrawStatusEnum.FAIL_AUDITING.name());
 					//分销员可提现金额退回
