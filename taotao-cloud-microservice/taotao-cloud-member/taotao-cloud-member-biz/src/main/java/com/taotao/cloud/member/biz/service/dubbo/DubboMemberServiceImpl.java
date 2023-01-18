@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.member.biz.service.dubbo;
 
-import com.taotao.cloud.member.api.dubbo.IDubboMemberService;
+import com.taotao.cloud.member.api.dubbo.IDubboMemberRpc;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +27,8 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:34:52
  */
 @Service
-@DubboService(interfaceClass = IDubboMemberService.class, validation = "true")
+@DubboService(interfaceClass = IDubboMemberRpc.class, validation = "true")
 public class DubboMemberServiceImpl
-	implements IDubboMemberService {
+	implements IDubboMemberRpc {
 
 }
