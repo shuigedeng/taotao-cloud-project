@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.auth.api.feign.fallback;
+package com.taotao.cloud.auth.api.feign;
 
-import com.taotao.cloud.auth.api.feign.IFeignClientApi;
-import org.springframework.cloud.openfeign.FallbackFactory;
-import org.springframework.stereotype.Component;
+import com.taotao.cloud.auth.api.feign.fallback.FeignClientFallback;
+import com.taotao.cloud.common.constant.ServiceName;
+import org.springframework.cloud.openfeign.FeignClient;
 
 /**
- * RemoteClientFallbackImpl
+ * 远程调用客户端
  *
  * @author shuigedeng
- * @since 2020/4/29 21:43
+ * @since 2020/5/2 16:42
  * @version 2022.03
  */
-@Component
-public class FeignClientFallback implements FallbackFactory<IFeignClientApi> {
-    @Override
-    public IFeignClientApi create(Throwable throwable) {
-        return new IFeignClientApi() {
-
-        };
-    }
+@FeignClient(contextId = "remoteUserService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignClientFallback.class)
+public interface IFeignClientApi {
 }
+
