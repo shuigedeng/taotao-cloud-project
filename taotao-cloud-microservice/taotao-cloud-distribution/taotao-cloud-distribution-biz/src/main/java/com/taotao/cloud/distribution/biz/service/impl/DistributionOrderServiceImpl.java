@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
-import com.taotao.cloud.distribution.api.web.query.DistributionOrderPageQuery;
+import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.mapper.DistributionOrderMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;

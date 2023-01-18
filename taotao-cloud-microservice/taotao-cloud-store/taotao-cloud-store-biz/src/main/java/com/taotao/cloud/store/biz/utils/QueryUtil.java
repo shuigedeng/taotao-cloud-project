@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
-import com.taotao.cloud.store.api.web.query.StorePageQuery;
+import com.taotao.cloud.store.api.model.query.StorePageQuery;
 
 public class QueryUtil {
 

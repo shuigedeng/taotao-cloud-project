@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.task;
 
 import cn.hutool.core.date.DateUtil;
-import com.taotao.cloud.store.api.web.dto.StoreSettlementDay;
+import com.taotao.cloud.store.api.model.dto.StoreSettlementDay;
 import com.taotao.cloud.store.biz.service.IBillService;
 import com.taotao.cloud.store.biz.service.IStoreDetailService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;

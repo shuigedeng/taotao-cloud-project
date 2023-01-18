@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.distribution.api.web.query.DistributionOrderPageQuery;
+import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
 
 

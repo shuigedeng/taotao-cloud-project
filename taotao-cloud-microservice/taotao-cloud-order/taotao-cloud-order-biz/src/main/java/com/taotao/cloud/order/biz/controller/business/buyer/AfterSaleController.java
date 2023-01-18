@@ -20,7 +20,7 @@ import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonService;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
-import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
+import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

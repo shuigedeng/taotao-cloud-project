@@ -2,8 +2,8 @@ package com.taotao.cloud.distribution.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.distribution.api.web.query.DistributionGoodsPageQuery;
-import com.taotao.cloud.distribution.api.web.vo.DistributionGoodsVO;
+import com.taotao.cloud.distribution.api.model.query.DistributionGoodsPageQuery;
+import com.taotao.cloud.distribution.api.model.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;

@@ -9,7 +9,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
-import com.taotao.cloud.distribution.api.web.vo.DistributionCashSearchVO;
+import com.taotao.cloud.distribution.api.model.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.mapper.DistributionCashMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;

@@ -2,8 +2,8 @@ package com.taotao.cloud.member.biz.task;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
-import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsService;
-import com.taotao.cloud.report.api.web.dto.MemberStatisticsDTO;
+import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsApi;
+import com.taotao.cloud.report.api.model.dto.MemberStatisticsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class MemberStatisticsExecute implements EveryDayExecute {
 	 * 会员统计
 	 */
 	@Autowired
-	private IFeignMemberStatisticsService memberStatisticsService;
+	private IFeignMemberStatisticsApi memberStatisticsService;
 
 	@Override
 	public void execute() {

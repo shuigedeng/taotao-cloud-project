@@ -47,7 +47,7 @@ import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.feign.IFeignStoreApi;
-import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.api.model.vo.StoreVO;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

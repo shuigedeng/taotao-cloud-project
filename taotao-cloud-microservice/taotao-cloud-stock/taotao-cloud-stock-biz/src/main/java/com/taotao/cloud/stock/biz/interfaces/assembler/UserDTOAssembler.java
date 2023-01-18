@@ -1,7 +1,7 @@
 package com.taotao.cloud.stock.biz.interfaces.assembler;
 
 
-import com.taotao.cloud.stock.api.dto.UserDTO;
+import com.taotao.cloud.stock.api.model.dto.UserDTO;
 import com.taotao.cloud.stock.biz.domain.role.model.vo.RoleId;
 import com.taotao.cloud.stock.biz.domain.user.model.vo.UserId;
 import com.taotao.cloud.stock.biz.interfaces.command.UserCommand;

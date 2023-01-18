@@ -2,7 +2,7 @@ package com.taotao.cloud.store.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreApiFallback;
-import com.taotao.cloud.store.api.web.vo.FreightTemplateInfoVO;
+import com.taotao.cloud.store.api.model.vo.FreightTemplateInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

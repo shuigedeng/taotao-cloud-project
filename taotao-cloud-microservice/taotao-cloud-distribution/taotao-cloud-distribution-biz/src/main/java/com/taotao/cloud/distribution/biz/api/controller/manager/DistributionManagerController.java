@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.distribution.api.web.query.DistributionPageQuery;
+import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
