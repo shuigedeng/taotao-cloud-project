@@ -2,8 +2,8 @@ package com.taotao.cloud.store.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.store.api.web.query.BillPageQuery;
-import com.taotao.cloud.store.api.web.vo.BillListVO;
+import com.taotao.cloud.store.api.model.query.BillPageQuery;
+import com.taotao.cloud.store.api.model.vo.BillListVO;
 import com.taotao.cloud.store.biz.model.entity.Bill;
 import jakarta.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;

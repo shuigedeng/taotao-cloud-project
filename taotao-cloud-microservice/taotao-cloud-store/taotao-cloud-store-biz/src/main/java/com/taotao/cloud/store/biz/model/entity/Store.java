@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
-import com.taotao.cloud.store.api.web.dto.AdminStoreApplyDTO;
+import com.taotao.cloud.store.api.model.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.JpaEntityListener;
 import jakarta.persistence.Column;

@@ -1,13 +1,13 @@
 package com.taotao.cloud.store.api.feign.fallback;
 
 import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.store.api.web.dto.CollectionDTO;
+import com.taotao.cloud.store.api.model.dto.CollectionDTO;
 import com.taotao.cloud.store.api.feign.IFeignStoreApi;
-import com.taotao.cloud.store.api.web.dto.StoreBankDTO;
-import com.taotao.cloud.store.api.web.dto.StoreCompanyDTO;
-import com.taotao.cloud.store.api.web.dto.StoreOtherInfoDTO;
-import com.taotao.cloud.store.api.web.query.StorePageQuery;
-import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.api.model.dto.StoreBankDTO;
+import com.taotao.cloud.store.api.model.dto.StoreCompanyDTO;
+import com.taotao.cloud.store.api.model.dto.StoreOtherInfoDTO;
+import com.taotao.cloud.store.api.model.query.StorePageQuery;
+import com.taotao.cloud.store.api.model.vo.StoreVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

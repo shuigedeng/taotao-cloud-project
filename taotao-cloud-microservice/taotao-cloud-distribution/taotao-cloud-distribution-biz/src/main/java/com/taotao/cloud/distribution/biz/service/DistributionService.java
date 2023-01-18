@@ -3,8 +3,8 @@ package com.taotao.cloud.distribution.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.distribution.api.web.dto.DistributionApplyDTO;
-import com.taotao.cloud.distribution.api.web.query.DistributionPageQuery;
+import com.taotao.cloud.distribution.api.model.dto.DistributionApplyDTO;
+import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 
 

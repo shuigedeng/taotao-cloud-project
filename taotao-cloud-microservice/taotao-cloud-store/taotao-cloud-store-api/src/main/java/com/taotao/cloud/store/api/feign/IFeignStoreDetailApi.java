@@ -2,12 +2,12 @@ package com.taotao.cloud.store.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreApiFallback;
-import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
-import com.taotao.cloud.store.api.web.vo.StoreBasicInfoVO;
-import com.taotao.cloud.store.api.web.vo.StoreDetailInfoVO;
-import com.taotao.cloud.store.api.web.vo.StoreDetailVO;
-import com.taotao.cloud.store.api.web.vo.StoreOtherVO;
-import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
+import com.taotao.cloud.store.api.model.vo.StoreBasicInfoVO;
+import com.taotao.cloud.store.api.model.vo.StoreDetailInfoVO;
+import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
+import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
+import com.taotao.cloud.store.api.model.vo.StoreVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

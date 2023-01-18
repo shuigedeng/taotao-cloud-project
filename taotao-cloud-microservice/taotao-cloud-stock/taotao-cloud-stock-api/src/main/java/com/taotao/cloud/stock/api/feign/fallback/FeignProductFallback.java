@@ -1,8 +1,8 @@
 package com.taotao.cloud.stock.api.feign.fallback;
 
-import com.taotao.cloud.stock.api.dto.ProductDTO;
-import com.taotao.cloud.stock.api.feign.IFeignProductService;
-import com.taotao.cloud.stock.api.vo.ProductVO;
+import com.taotao.cloud.stock.api.model.dto.ProductDTO;
+import com.taotao.cloud.stock.api.feign.IFeignProductApi;
+import com.taotao.cloud.stock.api.model.vo.ProductVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -11,10 +11,10 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignProductFallback implements FallbackFactory<IFeignProductService> {
+public class FeignProductFallback implements FallbackFactory<IFeignProductApi> {
 	@Override
-	public IFeignProductService create(Throwable throwable) {
-		return new IFeignProductService() {
+	public IFeignProductApi create(Throwable throwable) {
+		return new IFeignProductApi() {
 
 			@Override
 			public ProductVO findProductInfoById(Long id) {

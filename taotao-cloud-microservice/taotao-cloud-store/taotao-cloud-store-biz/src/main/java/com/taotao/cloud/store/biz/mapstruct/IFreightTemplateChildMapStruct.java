@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.store.biz.mapstruct;
 
-import com.taotao.cloud.store.api.web.vo.FreightTemplateChildVO;
+import com.taotao.cloud.store.api.model.vo.FreightTemplateChildVO;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

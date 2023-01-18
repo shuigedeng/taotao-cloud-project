@@ -4,7 +4,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreApiFallback;
-import com.taotao.cloud.store.api.web.vo.StoreCollectionVO;
+import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

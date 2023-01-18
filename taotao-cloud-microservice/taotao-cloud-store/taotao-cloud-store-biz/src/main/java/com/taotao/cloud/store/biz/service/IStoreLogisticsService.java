@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.store.api.web.vo.StoreLogisticsVO;
+import com.taotao.cloud.store.api.model.vo.StoreLogisticsVO;
 import com.taotao.cloud.store.biz.model.entity.StoreLogistics;
 
 import java.util.List;

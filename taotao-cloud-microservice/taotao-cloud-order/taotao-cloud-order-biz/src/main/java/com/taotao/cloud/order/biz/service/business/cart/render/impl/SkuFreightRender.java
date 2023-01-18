@@ -6,8 +6,8 @@ import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
 import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
-import com.taotao.cloud.store.api.web.dto.FreightTemplateChildDTO;
-import com.taotao.cloud.store.api.web.vo.FreightTemplateInfoVO;
+import com.taotao.cloud.store.api.model.dto.FreightTemplateChildDTO;
+import com.taotao.cloud.store.api.model.vo.FreightTemplateInfoVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

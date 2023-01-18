@@ -20,7 +20,7 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
-import com.taotao.cloud.store.api.web.vo.StoreDetailVO;
+import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
