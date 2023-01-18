@@ -25,6 +25,6 @@ public interface IOrderLogService extends IService<OrderLog> {
 	 */
 	List<OrderLog> getOrderLog(String orderSn);
 
-	IPage<OrderLog> getByPage(OrderLogPageQuery orderLogPageQuery);
+	IPage<OrderLog> pageQuery(OrderLogPageQuery orderLogPageQuery);
 
 }

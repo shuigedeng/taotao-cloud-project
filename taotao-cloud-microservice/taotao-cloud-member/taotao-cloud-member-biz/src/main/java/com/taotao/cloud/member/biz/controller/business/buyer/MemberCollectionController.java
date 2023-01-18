@@ -40,11 +40,11 @@ public class MemberCollectionController {
 	/**
 	 * 会员店铺
 	 */
-	private final IFeignStoreCollectionApi storeCollectionService;
+	private final IFeignStoreCollectionApi feignStoreCollectionApi;
 	/**
 	 * 商品收藏关键字
 	 */
-	private static final String goods = "GOODS";
+	private static final String GOODS = "GOODS";
 
 	@Operation(summary = "查询会员收藏列表", description = "查询会员收藏列表")
 	@RequestLogger
@@ -60,7 +60,7 @@ public class MemberCollectionController {
 					PageResult.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
 		}
 
-		return Result.success(storeCollectionService.storeCollection(page));
+		return Result.success(feignStoreCollectionApi.storeCollection(page));
 	}
 
 	@Operation(summary = "添加会员收藏", description = "添加会员收藏")
@@ -73,7 +73,7 @@ public class MemberCollectionController {
 		if (goods.equals(type)) {
 			return Result.success(IMemberGoodsCollectionService.addGoodsCollection(id));
 		}
-		return Result.success(storeCollectionService.addStoreCollection(id));
+		return Result.success(feignStoreCollectionApi.addStoreCollection(id));
 	}
 
 	@Operation(summary = "删除会员收藏", description = "删除会员收藏")
@@ -86,7 +86,7 @@ public class MemberCollectionController {
 		if (goods.equals(type)) {
 			return Result.success(IMemberGoodsCollectionService.deleteGoodsCollection(id));
 		}
-		return Result.success(storeCollectionService.deleteStoreCollection(id));
+		return Result.success(feignStoreCollectionApi.deleteStoreCollection(id));
 	}
 
 	@Operation(summary = "查询会员是否收藏", description = "查询会员是否收藏")
@@ -99,6 +99,6 @@ public class MemberCollectionController {
 		if (goods.equals(type)) {
 			return Result.success(this.IMemberGoodsCollectionService.isCollection(id));
 		}
-		return Result.success(this.storeCollectionService.isCollection(id));
+		return Result.success(this.feignStoreCollectionApi.isCollection(id));
 	}
 }

@@ -37,8 +37,8 @@ public class MemberPointsHistoryController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
 	public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(MemberPointHistoryPageQuery pageQuery) {
-		IPage<MemberPointsHistory> memberPointsHistoryIPage = memberPointsHistoryService.memberPointsHistoryList(pageQuery.getPageParm(), pageQuery.getMemberId(), pageQuery.getMemberName());
-		return Result.success(PageResult.convertMybatisPage(memberPointsHistoryIPage, MemberPointsHistoryPageVO.class));
+		IPage<MemberPointsHistory> page = memberPointsHistoryService.memberPointsHistoryPageQuery(pageQuery.getPageParm(), pageQuery.getMemberId(), pageQuery.getMemberName());
+		return Result.success(PageResult.convertMybatisPage(page, MemberPointsHistoryPageVO.class));
 	}
 
 	@Operation(summary = "获取会员积分", description = "获取会员积分")

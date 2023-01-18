@@ -22,7 +22,7 @@ public interface IReceiptService extends IService<Receipt> {
 	 * @return {@link IPage }<{@link OrderReceiptDTO }>
 	 * @since 2022-04-28 08:54:50
 	 */
-	IPage<OrderReceiptDTO> getReceiptData(ReceiptPageQuery receiptPageQuery);
+	IPage<OrderReceiptDTO> pageQuery(ReceiptPageQuery receiptPageQuery);
 
 	/**
 	 * 根据订单编号获取发票信息

@@ -82,7 +82,4 @@ public class GoodsPageQuery extends PageQuery {
 	@Schema(description = "商品类型")
 	private String goodsType;
 
-
-
-
 }

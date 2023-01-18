@@ -43,8 +43,7 @@ public class ParameterManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Validated @RequestBody ParametersDTO parametersDTO) {
-		Parameters parameters = ParametersConvert.INSTANCE.convert(
-			parametersDTO);
+		Parameters parameters = ParametersConvert.INSTANCE.convert(parametersDTO);
 		return Result.success(parametersService.save(parameters));
 	}
 
@@ -54,8 +53,7 @@ public class ParameterManagerController {
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
 								  @PathVariable Long id) {
-		Parameters parameters = ParametersConvert.INSTANCE.convert(
-			parametersDTO);
+		Parameters parameters = ParametersConvert.INSTANCE.convert(parametersDTO);
 		parameters.setId(id);
 		return Result.success(parametersService.updateParameter(parameters));
 	}

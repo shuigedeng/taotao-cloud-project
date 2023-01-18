@@ -17,7 +17,7 @@ public interface IMemberAddressService extends IService<MemberAddress> {
 	 * @param memberId 会员ID
 	 * @return 会员地址分页列表
 	 */
-	IPage<MemberAddress> getAddressByMember(PageQuery page, Long memberId);
+	IPage<MemberAddress> queryPage(PageQuery page, Long memberId);
 
 	/**
 	 * 根据地址ID获取当前会员地址信息

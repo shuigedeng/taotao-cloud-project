@@ -69,8 +69,8 @@ public class BrandManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<BrandVO>> page(@Validated BrandPageQuery page) {
-		IPage<Brand> brandPage = brandService.getBrandsByPage(page);
+	public Result<PageResult<BrandVO>> brandsQueryPage(@Validated BrandPageQuery page) {
+		IPage<Brand> brandPage = brandService.brandsQueryPage(page);
 		return Result.success(PageResult.convertMybatisPage(brandPage, BrandVO.class));
 	}
 

@@ -25,7 +25,7 @@ public interface IOrderComplaintService extends IService<OrderComplaint> {
 	 * @return {@link IPage }<{@link OrderComplaint }>
 	 * @since 2022-04-28 08:54:36
 	 */
-	IPage<OrderComplaint> getOrderComplainByPage(OrderComplaintPageQuery orderComplaintPageQuery);
+	IPage<OrderComplaint> pageQuery(OrderComplaintPageQuery orderComplaintPageQuery);
 
 	/**
 	 * 获取交易投诉详情

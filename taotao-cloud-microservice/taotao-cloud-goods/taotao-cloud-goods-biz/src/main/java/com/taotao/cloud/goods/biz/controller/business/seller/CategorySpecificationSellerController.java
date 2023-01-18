@@ -30,7 +30,7 @@ import java.util.List;
 @RestController
 @Tag(name = "店铺端-商品分类规格API", description = "店铺端-商品分类规格API")
 @RequestMapping("/goods/seller/category/spec")
-public class CategorySpecificationStoreController {
+public class CategorySpecificationSellerController {
 
 	/**
 	 * 商品规格服务
@@ -41,8 +41,7 @@ public class CategorySpecificationStoreController {
 	@RequestLogger("查询某分类下绑定的规格信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
-	public Result<List<SpecificationVO>> getCategorySpec(
-		@PathVariable("categoryId") Long categoryId) {
+	public Result<List<SpecificationVO>> getCategorySpec(@PathVariable("categoryId") Long categoryId) {
 		List<Specification> categorySpecList = categorySpecificationService.getCategorySpecList(
 			categoryId);
 

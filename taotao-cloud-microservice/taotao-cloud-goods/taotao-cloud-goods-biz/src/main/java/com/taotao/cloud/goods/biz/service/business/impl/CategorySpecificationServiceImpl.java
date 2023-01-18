@@ -8,6 +8,7 @@ import com.taotao.cloud.goods.biz.repository.cls.CategorySpecificationRepository
 import com.taotao.cloud.goods.biz.repository.inf.ICategorySpecificationRepository;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +20,11 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:02:15
  */
+@AllArgsConstructor
 @Service
 public class CategorySpecificationServiceImpl extends
 	BaseSuperServiceImpl<ICategorySpecificationMapper, CategorySpecification, CategorySpecificationRepository, ICategorySpecificationRepository, Long>
-	implements
-	ICategorySpecificationService {
+	implements ICategorySpecificationService {
 
 	@Override
 	public List<Specification> getCategorySpecList(Long categoryId) {

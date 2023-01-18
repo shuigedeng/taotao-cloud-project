@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "店铺端-草稿商品API", description = "店铺端-草稿商品API")
 @RequestMapping("/goods/seller/draft/goods")
-public class DraftGoodsStoreController {
+public class DraftGoodsSellerController {
 
 	/**
 	 * 草稿商品服务
@@ -52,7 +52,7 @@ public class DraftGoodsStoreController {
 	public Result<PageResult<DraftGoodsVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		draftGoodsPageQuery.setStoreId(storeId);
-		IPage<DraftGoods> draftGoods = draftGoodsService.getDraftGoods(draftGoodsPageQuery);
+		IPage<DraftGoods> draftGoods = draftGoodsService.draftGoodsQueryPage(draftGoodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(draftGoods, DraftGoodsVO.class));
 	}
 

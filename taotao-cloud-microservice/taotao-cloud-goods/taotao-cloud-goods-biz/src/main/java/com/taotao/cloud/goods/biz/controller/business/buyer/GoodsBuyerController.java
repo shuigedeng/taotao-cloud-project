@@ -83,7 +83,7 @@ public class GoodsBuyerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<PageResult<GoodsVO>> getByPage(@Validated GoodsPageQuery goodsPageQuery) {
-		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
+		IPage<Goods> goodsPage = goodsService.goodsQueryPage(goodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 

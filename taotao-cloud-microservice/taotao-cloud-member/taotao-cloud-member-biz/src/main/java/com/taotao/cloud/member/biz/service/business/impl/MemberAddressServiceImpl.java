@@ -25,7 +25,7 @@ public class MemberAddressServiceImpl extends
 	ServiceImpl<IMemberAddressMapper, MemberAddress> implements IMemberAddressService {
 
 	@Override
-	public IPage<MemberAddress> getAddressByMember(PageQuery page, Long memberId) {
+	public IPage<MemberAddress> queryPage(PageQuery page, Long memberId) {
 		return this.page(page.buildMpPage(),
 			new LambdaQueryWrapper<MemberAddress>().eq(MemberAddress::getMemberId, memberId));
 	}

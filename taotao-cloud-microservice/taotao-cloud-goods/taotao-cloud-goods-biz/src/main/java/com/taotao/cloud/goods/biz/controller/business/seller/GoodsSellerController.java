@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
 @RestController
 @Tag(name = "店铺端-商品API", description = "店铺端-商品API")
 @RequestMapping("/goods/seller/goods")
-public class GoodsStoreController {
+public class GoodsSellerController {
 
 	/**
 	 * 商品
@@ -74,7 +74,7 @@ public class GoodsStoreController {
 		//当前登录商家账号
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
-		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
+		IPage<Goods> goodsPage = goodsService.goodsQueryPage(goodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 
@@ -86,7 +86,7 @@ public class GoodsStoreController {
 		//当前登录商家账号
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		goodsPageQuery.setStoreId(storeId);
-		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
+		IPage<GoodsSku> goodsSkuPage = goodsSkuService.goodsSkuQueryPage(goodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 	}
 
@@ -104,7 +104,7 @@ public class GoodsStoreController {
 		goodsPageQuery.setLeQuantity(stockWarnNum);
 		goodsPageQuery.setMarketEnable(GoodsStatusEnum.UPPER.name());
 		//商品SKU列表
-		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
+		IPage<GoodsSku> goodsSkuPage = goodsSkuService.goodsSkuQueryPage(goodsPageQuery);
 		StockWarningVO stockWarning = new StockWarningVO(stockWarnNum,
 			PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 		return Result.success(stockWarning);
@@ -190,7 +190,7 @@ public class GoodsStoreController {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		// 获取商品skuId集合
 		List<Long> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::getSkuId)
-			.collect(Collectors.toList());
+			.toList();
 		// 根据skuId集合查询商品信息
 		List<GoodsSku> goodsSkuList = goodsSkuService.list(
 			new LambdaQueryWrapper<GoodsSku>().in(GoodsSku::getId, goodsSkuIds)
@@ -198,7 +198,7 @@ public class GoodsStoreController {
 		// 过滤不符合当前店铺的商品
 		List<Long> filterGoodsSkuIds = goodsSkuList.stream().map(GoodsSku::getId).toList();
 		List<GoodsSkuStockDTO> collect = updateStockList.stream()
-			.filter(i -> filterGoodsSkuIds.contains(i.getSkuId())).collect(Collectors.toList());
+			.filter(i -> filterGoodsSkuIds.contains(i.getSkuId())).toList());
 		return Result.success(goodsSkuService.updateStocks(collect));
 	}
 

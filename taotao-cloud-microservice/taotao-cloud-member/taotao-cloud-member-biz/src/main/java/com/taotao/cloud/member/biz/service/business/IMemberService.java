@@ -153,7 +153,7 @@ public interface IMemberService extends IService<Member> {
 	 * @param memberSearchPageQuery 会员搜索VO
 	 * @return 会员分页
 	 */
-	IPage<Member> getMemberPage(MemberSearchPageQuery memberSearchPageQuery);
+	IPage<Member> pageQuery(MemberSearchPageQuery memberSearchPageQuery);
 
 	/**
 	 * 一键注册会员

@@ -32,7 +32,7 @@ import java.util.List;
 @RestController
 @Tag(name = "店铺端-商品分类API", description = "店铺端-商品分类API")
 @RequestMapping("/goods/seller/category/store")
-public class CategoryStoreController {
+public class CategorySellerController {
 
 	/**
 	 * 分类服务

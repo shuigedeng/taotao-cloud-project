@@ -46,7 +46,7 @@ public class AfterSaleReasonServiceImpl extends
 	}
 
 	@Override
-	public IPage<AfterSaleReason> getByPage(AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
+	public IPage<AfterSaleReason> pageQuery(AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
 		LambdaQueryWrapper<AfterSaleReason> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(AfterSaleReason::getServiceType, afterSaleReasonPageQuery.getServiceType());
 		return this.page(afterSaleReasonPageQuery.buildMpPage(), queryWrapper);

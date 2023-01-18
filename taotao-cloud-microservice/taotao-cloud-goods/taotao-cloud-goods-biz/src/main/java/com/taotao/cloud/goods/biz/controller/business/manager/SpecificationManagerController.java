@@ -52,8 +52,7 @@ public class SpecificationManagerController {
 	@GetMapping("/all")
 	public Result<List<SpecificationVO>> getAll() {
 		List<Specification> specifications = specificationService.list();
-		return Result.success(
-				SpecificationConvert.INSTANCE.convert(specifications));
+		return Result.success(SpecificationConvert.INSTANCE.convert(specifications));
 	}
 
 	@Operation(summary = "搜索规格", description = "搜索规格")

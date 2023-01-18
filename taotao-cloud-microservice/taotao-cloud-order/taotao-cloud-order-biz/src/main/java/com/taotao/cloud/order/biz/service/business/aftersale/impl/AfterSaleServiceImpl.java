@@ -97,18 +97,18 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	private final RocketMQTemplate rocketMQTemplate;
 
 	@Override
-	public IPage<AfterSale> getAfterSalePages(AfterSalePageQuery saleSearchParams) {
-		return baseMapper.queryByParams(saleSearchParams.buildMpPage(),
-			saleSearchParams.queryWrapper());
+	public IPage<AfterSale> pageQuery(AfterSalePageQuery salePageQuery) {
+		return baseMapper.queryByParams(salePageQuery.buildMpPage(),
+			salePageQuery.queryWrapper());
 	}
 
 	@Override
-	public List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery saleSearchParams) {
-		return this.list(saleSearchParams.queryWrapper());
+	public List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery) {
+		return this.list(afterSalePageQuery.queryWrapper());
 	}
 
 	@Override
-	public AfterSale getAfterSale(String sn) {
+	public AfterSale getAfterSaleBySn(String sn) {
 		LambdaQueryWrapper<AfterSale> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(AfterSale::getSn, sn);
 		return this.getOne(queryWrapper);
@@ -356,7 +356,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	}
 
 	@Override
-	public StoreAfterSaleAddressVO getStoreAfterSaleAddressDTO(String sn) {
+	public StoreAfterSaleAddressVO getStoreAfterSaleAddressVO(String sn) {
 		return feignStoreDetailApi.getStoreAfterSaleAddressDTO(
 			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId());
 	}

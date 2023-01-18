@@ -362,7 +362,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	}
 
 	@Override
-	public IPage<Member> getMemberPage(MemberSearchPageQuery memberSearchPageQuery) {
+	public IPage<Member> pageQuery(MemberSearchPageQuery memberSearchPageQuery) {
 		QueryWrapper<Member> queryWrapper = Wrappers.query();
 		//用户名查询
 		queryWrapper.like(CharSequenceUtil.isNotBlank(memberSearchPageQuery.getUsername()),

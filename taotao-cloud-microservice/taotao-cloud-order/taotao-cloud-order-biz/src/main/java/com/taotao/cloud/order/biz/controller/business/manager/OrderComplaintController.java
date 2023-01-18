@@ -69,9 +69,9 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageResult<OrderComplaintBaseVO>> get(@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
-		IPage<OrderComplaint> orderComplainByPage = orderComplaintService.getOrderComplainByPage(orderComplaintPageQuery);
-		return Result.success(PageResult.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
+	public Result<PageResult<OrderComplaintBaseVO>> pageQuery(@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
+		IPage<OrderComplaint> page = orderComplaintService.pageQuery(orderComplaintPageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, OrderComplaintBaseVO.class));
 	}
 
 	@Operation(summary = "更新数据", description = "更新数据")

@@ -131,7 +131,7 @@ public class DraftGoodsServiceImpl extends
 	}
 
 	@Override
-	public IPage<DraftGoods> getDraftGoods(DraftGoodsPageQuery searchParams) {
+	public IPage<DraftGoods> draftGoodsQueryPage(DraftGoodsPageQuery searchParams) {
 		return this.page(searchParams.buildMpPage(), QueryUtil.draftGoodsQueryWrapper(searchParams));
 	}
 

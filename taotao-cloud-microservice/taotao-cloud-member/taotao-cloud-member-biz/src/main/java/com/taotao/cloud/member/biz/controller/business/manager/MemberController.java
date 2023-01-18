@@ -45,8 +45,8 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageResult<MemberVO>> getByPage(MemberSearchPageQuery memberSearchPageQuery) {
-		IPage<Member> memberPage = memberService.getMemberPage(memberSearchPageQuery);
+	public Result<PageResult<MemberVO>> pageQuery(MemberSearchPageQuery memberSearchPageQuery) {
+		IPage<Member> memberPage = memberService.pageQuery(memberSearchPageQuery);
 		return Result.success(PageResult.convertMybatisPage(memberPage, MemberVO.class));
 	}
 
@@ -54,7 +54,7 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberVO> get(@PathVariable Long id) {
+	public Result<MemberVO> getById(@PathVariable Long id) {
 		Member member = memberService.getById(id);
 		return Result.success(MemberConvert.INSTANCE.convert(member));
 	}
@@ -63,7 +63,7 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public Result<Boolean> save(@Valid MemberAddDTO member) {
+	public Result<Boolean> addMember(@Valid MemberAddDTO member) {
 		return Result.success(memberService.addMember(member));
 	}
 
@@ -71,7 +71,7 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
-	public Result<Boolean> update(@Valid ManagerMemberEditDTO managerMemberEditDTO) {
+	public Result<Boolean> updateMember(@Valid ManagerMemberEditDTO managerMemberEditDTO) {
 		return Result.success(memberService.updateMember(managerMemberEditDTO));
 	}
 
@@ -88,7 +88,7 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/num")
-	public Result<Long> getByPage(MemberSearchVO memberSearchVO) {
+	public Result<Long> getMemberNum(MemberSearchVO memberSearchVO) {
 		return Result.success(memberService.getMemberNum(memberSearchVO));
 	}
 
