@@ -119,6 +119,7 @@ public class CartServiceImpl implements ICartService {
 		if (num <= 0) {
 			throw new BusinessException(ResultEnum.CART_NUM_ERROR);
 		}
+
 		CartTypeEnum cartTypeEnum = getCartType(cartType);
 		GoodsSku dataSku = checkGoods(skuId, cartType);
 		try {
@@ -189,8 +190,6 @@ public class CartServiceImpl implements ICartService {
 			tradeDTO.setStoreCoupons(null);
 			tradeDTO.setPlatformCoupon(null);
 			this.resetTradeDTO(tradeDTO);
-		} catch (Exception serviceException) {
-			throw serviceException;
 		} catch (Exception e) {
 			LogUtils.error("购物车渲染异常", e);
 			throw new BusinessException(errorMessage);

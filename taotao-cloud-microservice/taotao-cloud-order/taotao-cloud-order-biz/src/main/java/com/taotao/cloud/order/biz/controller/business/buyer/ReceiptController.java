@@ -49,8 +49,8 @@ public class ReceiptController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
 	public Result<PageResult<OrderReceiptDTO>> getPage(ReceiptPageQuery searchParams) {
-		IPage<OrderReceiptDTO> receiptData = this.receiptService.getReceiptData(searchParams);
-		return Result.success(PageResult.convertMybatisPage(receiptData, OrderReceiptDTO.class));
+		IPage<OrderReceiptDTO> page = this.receiptService.pageQuery(searchParams);
+		return Result.success(PageResult.convertMybatisPage(page, OrderReceiptDTO.class));
 	}
 
 	@Operation(summary = "保存发票信息", description = "保存发票信息")

@@ -32,7 +32,7 @@ import java.util.List;
 @RestController
 @Tag(name = "店铺端-规格API", description = "店铺端-规格API")
 @RequestMapping("/goods/seller/goods/specification")
-public class SpecificationStoreController {
+public class SpecificationSellerController {
 
 	/**
 	 * 商品规格服务

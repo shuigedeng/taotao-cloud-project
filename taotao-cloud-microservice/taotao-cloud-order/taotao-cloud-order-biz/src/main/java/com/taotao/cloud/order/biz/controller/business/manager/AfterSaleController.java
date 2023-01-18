@@ -49,17 +49,17 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<AfterSaleVO>> getByPage(AfterSalePageQuery searchParams) {
-		IPage<AfterSale> afterSalePages = afterSaleService.getAfterSalePages(searchParams);
-		return Result.success(PageResult.convertMybatisPage(afterSalePages, AfterSaleVO.class));
+	public Result<PageResult<AfterSaleVO>> pageQuery(AfterSalePageQuery searchParams) {
+		IPage<AfterSale> page = afterSaleService.pageQuery(searchParams);
+		return Result.success(PageResult.convertMybatisPage(page, AfterSaleVO.class));
 	}
 
 	@Operation(summary = "获取导出售后服务列表列表", description = "获取导出售后服务列表列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/exportAfterSaleOrder")
-	public Result<List<AfterSaleVO>> exportAfterSaleOrder(AfterSalePageQuery searchParams) {
-		List<AfterSale> afterSales = afterSaleService.exportAfterSaleOrder(searchParams);
+	public Result<List<AfterSaleVO>> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery) {
+		List<AfterSale> afterSales = afterSaleService.exportAfterSaleOrder(afterSalePageQuery);
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSales));
 	}
 
@@ -69,7 +69,7 @@ public class AfterSaleController {
 	@GetMapping(value = "/{sn}")
 	public Result<AfterSaleVO> get(
 			@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
-		AfterSale afterSale = afterSaleService.getAfterSale(sn);
+		AfterSale afterSale = afterSaleService.getAfterSaleBySn(sn);
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSale));
 	}
 
@@ -109,6 +109,6 @@ public class AfterSaleController {
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
 	public Result<StoreAfterSaleAddressVO> getStoreAfterSaleAddress(
 			@NotNull(message = "售后单号不能为空") @PathVariable("sn") String sn) {
-		return Result.success(afterSaleService.getStoreAfterSaleAddressDTO(sn));
+		return Result.success(afterSaleService.getStoreAfterSaleAddressVO(sn));
 	}
 }

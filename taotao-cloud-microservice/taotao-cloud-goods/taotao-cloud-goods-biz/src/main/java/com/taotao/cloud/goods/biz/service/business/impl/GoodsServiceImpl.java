@@ -254,9 +254,8 @@ public class GoodsServiceImpl extends
 	}
 
 	@Override
-	public IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery) {
-		return this.page(goodsPageQuery.buildMpPage(),
-			QueryUtil.goodsQueryWrapper(goodsPageQuery));
+	public IPage<Goods> goodsQueryPage(GoodsPageQuery goodsPageQuery) {
+		return this.page(goodsPageQuery.buildMpPage(), QueryUtil.goodsQueryWrapper(goodsPageQuery));
 	}
 
 	@Override

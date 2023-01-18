@@ -26,20 +26,20 @@ public interface IAfterSaleService extends IService<AfterSale> {
 	/**
 	 * 分页查询售后信息
 	 *
-	 * @param saleSearchParams 查询参数
+	 * @param salePageQuery 查询参数
 	 * @return {@link IPage }<{@link AfterSale }>
 	 * @since 2022-04-28 08:49:10
 	 */
-	IPage<AfterSale> getAfterSalePages(AfterSalePageQuery saleSearchParams);
+	IPage<AfterSale> pageQuery(AfterSalePageQuery salePageQuery);
 
 	/**
 	 * 查询导出售后信息
 	 *
-	 * @param saleSearchParams 查询参数
+	 * @param afterSalePageQuery 查询参数
 	 * @return {@link List }<{@link AfterSale }>
 	 * @since 2022-04-28 08:49:10
 	 */
-	List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery saleSearchParams);
+	List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery);
 
 	/**
 	 * 查询售后信息
@@ -48,7 +48,7 @@ public interface IAfterSaleService extends IService<AfterSale> {
 	 * @return {@link AfterSale }
 	 * @since 2022-04-28 08:49:10
 	 */
-	AfterSale getAfterSale(String sn);
+	AfterSale getAfterSaleBySn(String sn);
 
 	/**
 	 * 获取申请售后页面信息
@@ -148,6 +148,6 @@ public interface IAfterSaleService extends IService<AfterSale> {
 	 * @return {@link StoreAfterSaleAddressVO }
 	 * @since 2022-04-28 08:49:11
 	 */
-	StoreAfterSaleAddressVO getStoreAfterSaleAddressDTO(String sn);
+	StoreAfterSaleAddressVO getStoreAfterSaleAddressVO(String sn);
 
 }

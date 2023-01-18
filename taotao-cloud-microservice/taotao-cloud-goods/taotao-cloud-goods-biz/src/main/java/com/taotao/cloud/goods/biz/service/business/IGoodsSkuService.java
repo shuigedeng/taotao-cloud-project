@@ -153,7 +153,7 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * @return {@link IPage }<{@link GoodsSku }>
 	 * @since 2022-04-27 17:00:44
 	 */
-	IPage<GoodsSku> getGoodsSkuByPage(GoodsPageQuery searchParams);
+	IPage<GoodsSku> goodsSkuQueryPage(GoodsPageQuery searchParams);
 
 	/**
 	 * 列表查询商品sku信息

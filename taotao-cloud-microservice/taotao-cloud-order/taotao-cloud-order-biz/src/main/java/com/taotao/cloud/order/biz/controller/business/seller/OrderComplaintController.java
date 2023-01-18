@@ -61,7 +61,7 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<OrderComplaintVO> get(@PathVariable Long id) {
+	public Result<OrderComplaintVO> getOrderComplainById(@PathVariable Long id) {
 		return Result.success(
 			OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id)));
 	}
@@ -73,8 +73,8 @@ public class OrderComplaintController {
 	public Result<PageResult<OrderComplaintBaseVO>> get(OrderComplaintPageQuery orderComplaintPageQuery) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		orderComplaintPageQuery.setStoreId(storeId);
-		IPage<OrderComplaint> orderComplainPage = orderComplaintService.getOrderComplainByPage(orderComplaintPageQuery);
-		return Result.success(PageResult.convertMybatisPage(orderComplainPage, OrderComplaintBaseVO.class));
+		IPage<OrderComplaint> page = orderComplaintService.pageQuery(orderComplaintPageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, OrderComplaintBaseVO.class));
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话")

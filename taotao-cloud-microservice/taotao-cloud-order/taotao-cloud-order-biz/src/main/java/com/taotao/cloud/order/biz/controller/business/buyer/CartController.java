@@ -4,11 +4,13 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
+import com.taotao.cloud.order.biz.model.entity.order.Trade;
 import com.taotao.cloud.order.biz.service.business.cart.ICartService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -48,7 +50,7 @@ public class CartController {
 	@PostMapping
 	public Result<Boolean> add(@NotNull(message = "产品id不能为空") String skuId,
 			@NotNull(message = "购买数量不能为空") @Min(value = 1, message = "加入购物车数量必须大于0") Integer num,
-			String cartType) {
+			@NotBlank(message = "购物车类型") String cartType) {
 		//读取选中的列表
 		return Result.success(cartService.add(skuId, num, cartType, false));
 	}
@@ -57,7 +59,7 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/all")
-	public Result<com.taotao.cloud.order.api.model.dto.cart.TradeDTO> cartAll() {
+	public Result<TradeDTO> cartAll() {
 		return Result.success(this.cartService.getAllTradeDTO());
 	}
 
@@ -135,7 +137,7 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/checked")
-	public Result<com.taotao.cloud.order.api.model.dto.cart.TradeDTO> cartChecked(
+	public Result<TradeDTO> cartChecked(
 			@NotNull(message = "读取选中列表") String way) {
 		//读取选中的列表
 		return Result.success(this.cartService.getCheckedTradeDTO(CartTypeEnum.valueOf(way)));
@@ -156,8 +158,7 @@ public class CartController {
 	@GetMapping("/shippingMethod")
 	public Result<Boolean> shippingMethod(
 			@NotNull(message = "配送方式不能为空") String shippingMethod,
-			String selleId,
-			String way) {
+			String selleId, String way) {
 		return Result.success(cartService.shippingMethod(selleId, shippingMethod, way));
 	}
 
@@ -182,7 +183,7 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/trade", consumes = "application/json", produces = "application/json")
-	public Result<Object> crateTrade(@RequestBody TradeDTO tradeDTO) {
+	public Result<Trade> crateTrade(@RequestBody TradeDTO tradeDTO) {
 		//读取选中的列表
 		return Result.success(this.cartService.createTrade(tradeDTO));
 	}

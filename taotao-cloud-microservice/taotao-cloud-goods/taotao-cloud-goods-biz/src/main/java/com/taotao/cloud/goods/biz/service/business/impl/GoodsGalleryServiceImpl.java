@@ -30,7 +30,8 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class GoodsGalleryServiceImpl extends
-	BaseSuperServiceImpl<IGoodsGalleryMapper, GoodsGallery, GoodsGalleryRepository, IGoodsGalleryRepository, Long> implements IGoodsGalleryService {
+	BaseSuperServiceImpl<IGoodsGalleryMapper, GoodsGallery, GoodsGalleryRepository, IGoodsGalleryRepository, Long>
+	implements IGoodsGalleryService {
 
 	/**
 	 * 设置

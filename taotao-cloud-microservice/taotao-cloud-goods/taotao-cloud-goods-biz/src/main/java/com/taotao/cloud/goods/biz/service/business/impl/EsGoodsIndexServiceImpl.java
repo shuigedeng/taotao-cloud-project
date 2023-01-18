@@ -125,11 +125,9 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	private RocketMQTemplate rocketMQTemplate;
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;
-
 	@Autowired
 	@Qualifier("elasticsearchRestTemplate")
 	private ElasticsearchRestTemplate restTemplate;
-
 	@Autowired
 	private IFeignPromotionApi feignPromotionApi;
 

@@ -196,7 +196,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public IPage<OrderSimpleVO> queryByParams(OrderPageQuery orderPageQuery) {
+	public IPage<OrderSimpleVO> pageQuery(OrderPageQuery orderPageQuery) {
 		QueryWrapper<OrderSimpleVO> queryWrapper = orderPageQuery.queryWrapper();
 		queryWrapper.groupBy("o.id");
 		queryWrapper.orderByDesc("o.id");
@@ -564,7 +564,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public void getBatchDeliverList(HttpServletResponse response, List<String> logisticsName) {
+	public void downLoadDeliver(HttpServletResponse response, List<String> logisticsName) {
 		ExcelWriter writer = ExcelUtil.getWriter();
 		//Excel 头部
 		ArrayList<String> rows = new ArrayList<>();
@@ -597,7 +597,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public void batchDeliver(MultipartFile files) {
+	public Boolean batchDeliver(MultipartFile files) {
 		InputStream inputStream = null;
 		List<OrderBatchDeliverDTO> orderBatchDeliverDTOList = new ArrayList<>();
 		try {
@@ -624,6 +624,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 			this.delivery(orderBatchDeliverDTO.getOrderSn(), orderBatchDeliverDTO.getLogisticsNo(),
 					orderBatchDeliverDTO.getLogisticsId());
 		}
+		return true;
 	}
 
 

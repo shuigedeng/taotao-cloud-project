@@ -21,6 +21,7 @@ public class SpecificationVO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -4433579132929428572L;
 
+	@Schema(description = "id")
 	private Long id;
 
 	@Schema(description = "规格名称")

@@ -47,7 +47,7 @@ public class OrderLogController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageResult<OrderLogVO>> getByPage(OrderLogPageQuery orderLogPageQuery) {
-		IPage<OrderLog> orderLogPage = orderLogService.getByPage(orderLogPageQuery);
+		IPage<OrderLog> orderLogPage = orderLogService.pageQuery(orderLogPageQuery);
 		return Result.success(PageResult.convertMybatisPage(orderLogPage, OrderLogVO.class));
 	}
 

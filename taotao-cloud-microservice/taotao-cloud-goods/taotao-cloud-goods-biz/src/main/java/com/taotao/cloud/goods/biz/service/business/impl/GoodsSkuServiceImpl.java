@@ -79,8 +79,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 public class GoodsSkuServiceImpl extends
-	BaseSuperServiceImpl<IGoodsSkuMapper, GoodsSku, GoodsSkuRepository, IGoodsSkuRepository, Long> implements
-	IGoodsSkuService {
+	BaseSuperServiceImpl<IGoodsSkuMapper, GoodsSku, GoodsSkuRepository, IGoodsSkuRepository, Long>
+	implements IGoodsSkuService {
 
 	/**
 	 * 缓存服务
@@ -435,7 +435,7 @@ public class GoodsSkuServiceImpl extends
 	}
 
 	@Override
-	public IPage<GoodsSku> getGoodsSkuByPage(GoodsPageQuery searchParams) {
+	public IPage<GoodsSku> goodsSkuQueryPage(GoodsPageQuery searchParams) {
 		return this.page(searchParams.buildMpPage(),
 			QueryUtil.goodsQueryWrapper(searchParams));
 	}

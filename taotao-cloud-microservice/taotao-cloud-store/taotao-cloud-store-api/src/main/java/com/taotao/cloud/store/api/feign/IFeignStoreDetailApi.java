@@ -30,11 +30,14 @@ public interface IFeignStoreDetailApi {
 
 	@GetMapping(value = "/get/detail/{storeId}")
 	StoreDetailInfoVO getStoreDetailVO(@PathVariable Long storeId);
+
 	@GetMapping(value = "/getStoreBasicInfoDTO")
 	StoreBasicInfoVO getStoreBasicInfoDTO(String id);
+
 	@GetMapping(value = "/getStoreOtherVO")
 	StoreOtherVO getStoreOtherVO(String id);
 
+	@GetMapping(value = "/getStoreDetailVOByMemberId")
 	StoreDetailVO getStoreDetailVOByMemberId(Long userId);
 }
 

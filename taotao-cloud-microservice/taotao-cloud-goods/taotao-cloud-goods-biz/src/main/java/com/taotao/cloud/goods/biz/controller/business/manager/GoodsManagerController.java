@@ -57,7 +57,7 @@ public class GoodsManagerController {
 	@GetMapping(value = "/page")
 	public Result<PageResult<GoodsVO>> getByPage(
 			@Validated GoodsPageQuery goodsPageQuery) {
-		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
+		IPage<Goods> goodsPage = goodsService.goodsQueryPage(goodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 
@@ -67,7 +67,7 @@ public class GoodsManagerController {
 	@GetMapping(value = "/sku/page")
 	public Result<PageResult<GoodsSkuVO>> getSkuByPage(
 			@Validated GoodsPageQuery goodsPageQuery) {
-		IPage<GoodsSku> goodsSkuPage = goodsSkuService.getGoodsSkuByPage(goodsPageQuery);
+		IPage<GoodsSku> goodsSkuPage = goodsSkuService.goodsSkuQueryPage(goodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 	}
 
@@ -77,7 +77,7 @@ public class GoodsManagerController {
 	@GetMapping(value = "/auth/page")
 	public Result<PageResult<GoodsVO>> getAuthPage(@Validated GoodsPageQuery goodsPageQuery) {
 		goodsPageQuery.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
-		IPage<Goods> goodsPage = goodsService.queryByParams(goodsPageQuery);
+		IPage<Goods> goodsPage = goodsService.goodsQueryPage(goodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
 

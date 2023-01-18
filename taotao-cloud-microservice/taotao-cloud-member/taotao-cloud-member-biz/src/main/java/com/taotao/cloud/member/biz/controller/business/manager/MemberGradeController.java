@@ -42,7 +42,7 @@ public class MemberGradeController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberGradeVO> get(@PathVariable Long id) {
+	public Result<MemberGradeVO> getById(@PathVariable Long id) {
 		MemberGrade memberGrade = memberGradeService.getById(id);
 		return Result.success(MemberGradeConvert.INSTANCE.convert(memberGrade));
 	}
@@ -51,8 +51,8 @@ public class MemberGradeController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<MemberGradeVO>> getByPage(PageQuery PageQuery) {
-		IPage<MemberGrade> memberGradePage = memberGradeService.getByPage(PageQuery);
+	public Result<PageResult<MemberGradeVO>> queryPage(PageQuery pageQuery) {
+		IPage<MemberGrade> memberGradePage = memberGradeService.queryPage(pageQuery);
 		return Result.success(PageResult.convertMybatisPage(memberGradePage, MemberGradeVO.class));
 	}
 
@@ -60,7 +60,7 @@ public class MemberGradeController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public Result<Boolean> daa(@Validated MemberGrade memberGrade) {
+	public Result<Boolean> save(@Validated MemberGrade memberGrade) {
 		return Result.success(memberGradeService.save(memberGrade));
 	}
 
@@ -69,7 +69,7 @@ public class MemberGradeController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	@PutMapping(value = "/{id}")
-	public Result<Boolean> update(@PathVariable Long id, MemberGrade memberGrade) {
+	public Result<Boolean> updateById(@PathVariable Long id, MemberGrade memberGrade) {
 		return Result.success(memberGradeService.updateById(memberGrade));
 	}
 
@@ -77,7 +77,7 @@ public class MemberGradeController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{id}")
-	public Result<Boolean> delete(@PathVariable Long id) {
+	public Result<Boolean> removeById(@PathVariable Long id) {
 		if (memberGradeService.getById(id).getDefaulted()) {
 			throw new BusinessException(ResultEnum.USER_GRADE_IS_DEFAULT);
 		}

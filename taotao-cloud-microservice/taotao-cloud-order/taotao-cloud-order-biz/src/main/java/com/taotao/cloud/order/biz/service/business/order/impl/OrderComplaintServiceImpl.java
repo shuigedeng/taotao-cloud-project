@@ -69,7 +69,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Override
-	public IPage<OrderComplaint> getOrderComplainByPage(OrderComplaintPageQuery pageQuery) {
+	public IPage<OrderComplaint> pageQuery(OrderComplaintPageQuery pageQuery) {
 		LambdaQueryWrapper<OrderComplaint> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStatus()),OrderComplaint::getComplainStatus, pageQuery.getStatus());
 		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getOrderSn()),OrderComplaint::getOrderSn, pageQuery.getOrderSn());

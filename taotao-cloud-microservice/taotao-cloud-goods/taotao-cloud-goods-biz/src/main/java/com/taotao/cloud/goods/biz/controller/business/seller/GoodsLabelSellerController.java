@@ -38,7 +38,7 @@ import java.util.List;
 @RestController
 @Tag(name = "店铺端-店铺分类API", description = "店铺端-店铺分类API")
 @RequestMapping("/goods/seller/label")
-public class GoodsLabelStoreController {
+public class GoodsLabelSellerController {
 
 	/**
 	 * 店铺分类服务
@@ -60,10 +60,7 @@ public class GoodsLabelStoreController {
 	@GetMapping("/{id}")
 	public Result<StoreGoodsLabelInfoVO> getStoreGoodsLabel(@PathVariable Long id) {
 		StoreGoodsLabel storeGoodsLabel = storeGoodsLabelService.getById(id);
-		return Result.success(
-			GoodsLabelStoreConvert.INSTANCE.convert(
-				storeGoodsLabel
-			));
+		return Result.success(GoodsLabelStoreConvert.INSTANCE.convert(storeGoodsLabel));
 	}
 
 	@Operation(summary = "添加店铺商品分类", description = "添加店铺商品分类")
@@ -81,8 +78,7 @@ public class GoodsLabelStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> edit(@PathVariable Long id, @Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
-		StoreGoodsLabel storeGoodsLabel = GoodsLabelStoreConvert.INSTANCE.convert(
-			storeGoodsLabelDTO);
+		StoreGoodsLabel storeGoodsLabel = GoodsLabelStoreConvert.INSTANCE.convert(storeGoodsLabelDTO);
 		storeGoodsLabel.setId(id);
 		return Result.success(storeGoodsLabelService.editStoreGoodsLabel(storeGoodsLabel));
 	}

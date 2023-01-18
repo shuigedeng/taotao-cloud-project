@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "店铺端-商品计量单位API", description = "店铺端-商品计量单位API")
 @RequestMapping("/goods/seller/goods/unit")
-public class GoodsUnitStoreController {
+public class GoodsUnitSellerController {
 
 	/**
 	 * 商品计量单位服务
@@ -40,7 +40,7 @@ public class GoodsUnitStoreController {
 	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
 	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping
+	@GetMapping("/page")
 	public Result<PageResult<GoodsUnitVO>> getByPage(PageQuery pageQuery) {
 		IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
 		return Result.success(PageResult.convertMybatisPage(page, GoodsUnitVO.class));
