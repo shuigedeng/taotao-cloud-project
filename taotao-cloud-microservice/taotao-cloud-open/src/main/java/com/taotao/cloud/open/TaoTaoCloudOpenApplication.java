@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.open;
 
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -31,6 +32,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudOpenApplication {
 
 	public static void main(String[] args) {
+		PropertyUtils.setDefaultProperty("taotao-cloud-open");
 
 		SpringApplication.run(TaoTaoCloudOpenApplication.class, args);
 	}

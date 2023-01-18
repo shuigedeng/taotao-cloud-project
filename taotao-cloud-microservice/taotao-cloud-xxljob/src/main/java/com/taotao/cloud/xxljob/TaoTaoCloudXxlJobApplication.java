@@ -37,6 +37,7 @@ public class TaoTaoCloudXxlJobApplication {
 
 	public static void main(String[] args) {
 		PropertyUtils.setDefaultProperty("taotao-cloud-xxljob");
+
 		SpringApplication.run(TaoTaoCloudXxlJobApplication.class, args);
 	}
 
