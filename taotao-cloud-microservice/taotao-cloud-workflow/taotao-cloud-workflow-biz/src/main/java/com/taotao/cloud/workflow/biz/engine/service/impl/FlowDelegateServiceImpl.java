@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.workflow.api.common.base.Pagination;
-import com.taotao.cloud.workflow.api.common.util.DateUtil;
-import com.taotao.cloud.workflow.api.common.util.RandomUtil;
+import com.taotao.cloud.workflow.biz.common.base.Pagination;
+import com.taotao.cloud.workflow.biz.common.util.DateUtil;
+import com.taotao.cloud.workflow.biz.common.util.RandomUtil;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
 import com.taotao.cloud.workflow.biz.engine.mapper.FlowDelegateMapper;
 import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
@@ -29,7 +29,7 @@ public class FlowDelegateServiceImpl extends
 		boolean flag = false;
 		QueryWrapper<FlowDelegateEntity> queryWrapper = new QueryWrapper<>();
 		queryWrapper.lambda().eq(FlowDelegateEntity::getCreatorUserId, SecurityUtils.getUserId());
-		if (!StrUtils.isEmpty(pagination.getKeyword())) {
+		if (!StrUtil.isEmpty(pagination.getKeyword())) {
 			flag = true;
 			queryWrapper.lambda().and(
 				t -> t.like(FlowDelegateEntity::getFlowName, pagination.getKeyword())
@@ -87,7 +87,7 @@ public class FlowDelegateServiceImpl extends
 		queryWrapper.lambda().le(FlowDelegateEntity::getStartTime, thisTime)
 			.ge(FlowDelegateEntity::getEndTime, thisTime);
 		if (StrUtil.isNotEmpty(userId)) {
-			queryWrapper.lambda().eq(FlowDelegateEntity::getFTouserid, userId);
+			queryWrapper.lambda().eq(FlowDelegateEntity::getToUserid, userId);
 		}
 		if (StrUtil.isNotEmpty(flowId)) {
 			queryWrapper.lambda().eq(FlowDelegateEntity::getFlowId, flowId);

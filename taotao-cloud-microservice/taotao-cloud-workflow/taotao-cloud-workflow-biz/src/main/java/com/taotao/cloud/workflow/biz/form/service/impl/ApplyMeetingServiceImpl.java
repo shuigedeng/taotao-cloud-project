@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.ApplyMeetingEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.ApplyMeetingMapper;
-import com.taotao.cloud.workflow.api.common.model.form.applymeeting.ApplyMeetingForm;
+import com.taotao.cloud.workflow.biz.common.model.form.applymeeting.ApplyMeetingForm;
 import com.taotao.cloud.workflow.biz.form.service.ApplyMeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

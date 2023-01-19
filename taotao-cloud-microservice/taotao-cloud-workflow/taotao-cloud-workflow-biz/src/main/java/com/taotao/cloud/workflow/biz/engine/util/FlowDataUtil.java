@@ -3,31 +3,32 @@ package com.taotao.cloud.workflow.biz.engine.util;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.workflow.api.common.config.ConfigValueUtil;
-import com.taotao.cloud.workflow.api.common.constant.MsgCode;
-import com.taotao.cloud.workflow.api.common.database.model.dto.PreparedStatementDTO;
-import com.taotao.cloud.workflow.api.common.database.util.ConnUtil;
-import com.taotao.cloud.workflow.api.common.database.util.DataSourceUtil;
-import com.taotao.cloud.workflow.api.common.database.util.DbTypeUtil;
-import com.taotao.cloud.workflow.api.common.database.util.JdbcUtil;
-import com.taotao.cloud.workflow.api.common.model.FormAllModel;
-import com.taotao.cloud.workflow.api.common.model.FormColumnModel;
-import com.taotao.cloud.workflow.api.common.model.FormColumnTableModel;
-import com.taotao.cloud.workflow.api.common.model.FormEnum;
-import com.taotao.cloud.workflow.api.common.model.FormMastTableModel;
-import com.taotao.cloud.workflow.api.common.model.visiual.RecursionForm;
-import com.taotao.cloud.workflow.api.common.model.visiual.TableModel;
-import com.taotao.cloud.workflow.api.common.model.visiual.WorkflowKeyConsts;
-import com.taotao.cloud.workflow.api.common.model.visiual.fields.FieLdsModel;
-import com.taotao.cloud.workflow.api.common.model.visiual.fields.props.PropsBeanModel;
-import com.taotao.cloud.workflow.api.common.util.DateUtil;
-import com.taotao.cloud.workflow.api.common.util.RandomUtil;
-import com.taotao.cloud.workflow.api.common.util.UserProvider;
+import com.taotao.cloud.workflow.biz.common.base.UserInfo;
+import com.taotao.cloud.workflow.biz.common.config.ConfigValueUtil;
+import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
+import com.taotao.cloud.workflow.biz.common.database.model.dto.PreparedStatementDTO;
+import com.taotao.cloud.workflow.biz.common.database.util.ConnUtil;
+import com.taotao.cloud.workflow.biz.common.database.util.DataSourceUtil;
+import com.taotao.cloud.workflow.biz.common.database.util.DbTypeUtil;
+import com.taotao.cloud.workflow.biz.common.database.util.JdbcUtil;
+import com.taotao.cloud.workflow.biz.common.model.FormAllModel;
+import com.taotao.cloud.workflow.biz.common.model.FormColumnModel;
+import com.taotao.cloud.workflow.biz.common.model.FormColumnTableModel;
+import com.taotao.cloud.workflow.biz.common.model.FormEnum;
+import com.taotao.cloud.workflow.biz.common.model.FormMastTableModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.RecursionForm;
+import com.taotao.cloud.workflow.biz.common.model.visiual.TableModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.WorkflowKeyConsts;
+import com.taotao.cloud.workflow.biz.common.model.visiual.fields.FieLdsModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.fields.props.PropsBeanModel;
+import com.taotao.cloud.workflow.biz.common.util.DateUtil;
+import com.taotao.cloud.workflow.biz.common.util.RandomUtil;
+import com.taotao.cloud.workflow.biz.common.util.UserProvider;
 import com.taotao.cloud.workflow.api.vo.OrganizeEntity;
 import com.taotao.cloud.workflow.api.vo.PositionEntity;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
-import com.taotao.cloud.workflow.api.common.model.engine.DataModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.DataModel;
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -49,7 +50,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.taotao.cloud.workflow.api.common.database.model.entity.DbLinkEntity;
+import com.taotao.cloud.workflow.biz.common.database.model.entity.DbLinkEntity;
 @Component
 @Slf4j
 public class FlowDataUtil {
@@ -426,7 +427,7 @@ public class FlowDataUtil {
 			case WorkflowKeyConsts.CREATEUSER:
 			case WorkflowKeyConsts.MODIFYUSER:
 				if (ObjectUtil.isNotEmpty(value)) {
-					UserEntity userEntity = serviceUtil.getUserInfo(String.valueOf(value));
+					UserEntity userEntity = serviceUtil.getUserInfo(Long.valueOf((String) value));
 					if (userEntity != null) {
 						value = userEntity.getRealName();
 					}

@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.DebitBillEntity;
-import com.taotao.cloud.workflow.api.common.model.form.debitbill.DebitBillForm;
-import com.taotao.cloud.workflow.api.common.model.form.debitbill.DebitBillInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.debitbill.DebitBillForm;
+import com.taotao.cloud.workflow.biz.common.model.form.debitbill.DebitBillInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.DebitBillService;
 
 import jakarta.validation.Valid;

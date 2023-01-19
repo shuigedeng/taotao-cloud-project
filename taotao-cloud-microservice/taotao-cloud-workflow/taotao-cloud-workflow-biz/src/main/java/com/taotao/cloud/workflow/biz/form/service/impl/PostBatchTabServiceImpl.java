@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.PostBatchTabEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.PostBatchTabMapper;
-import com.taotao.cloud.workflow.api.common.model.form.postbatchtab.PostBatchTabForm;
+import com.taotao.cloud.workflow.biz.common.model.form.postbatchtab.PostBatchTabForm;
 import com.taotao.cloud.workflow.biz.form.service.PostBatchTabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.VehicleApplyEntity;
-import com.taotao.cloud.workflow.api.common.model.form.vehicleapply.VehicleApplyForm;
-import com.taotao.cloud.workflow.api.common.model.form.vehicleapply.VehicleApplyInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.vehicleapply.VehicleApplyForm;
+import com.taotao.cloud.workflow.biz.common.model.form.vehicleapply.VehicleApplyInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.VehicleApplyService;
 
 import io.swagger.v3.oas.annotations.Operation;

@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.QuotationApprovalEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.QuotationApprovalMapper;
-import com.taotao.cloud.workflow.api.common.model.form.quotationapproval.QuotationApprovalForm;
+import com.taotao.cloud.workflow.biz.common.model.form.quotationapproval.QuotationApprovalForm;
 import com.taotao.cloud.workflow.biz.form.service.QuotationApprovalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

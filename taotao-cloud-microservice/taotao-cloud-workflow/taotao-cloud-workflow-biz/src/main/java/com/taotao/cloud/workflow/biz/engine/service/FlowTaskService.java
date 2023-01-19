@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowBatchModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskListModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.PaginationFlowTask;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBatchModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.PaginationFlowTask;
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.util.List;
 

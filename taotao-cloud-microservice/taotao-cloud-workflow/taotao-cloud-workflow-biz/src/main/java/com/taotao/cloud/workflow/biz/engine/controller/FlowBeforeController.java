@@ -9,6 +9,8 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
+import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
+import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
 import com.taotao.cloud.workflow.biz.covert.FlowTaskConvert;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
@@ -16,19 +18,19 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
-import com.taotao.cloud.workflow.api.common.model.engine.FlowHandleModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowBatchModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowBeforeInfoVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowBeforeListVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowSummary;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcandidate.FlowCandidateUserModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcandidate.FlowCandidateVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.FlowModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.childnode.ChildNode;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.nodejson.ConditionList;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskListModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.PaginationFlowTask;
+import com.taotao.cloud.workflow.biz.common.model.engine.FlowHandleModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBatchModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBeforeInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBeforeListVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowSummary;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcandidate.FlowCandidateUserModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcandidate.FlowCandidateVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.childnode.ChildNode;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.ConditionList;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.PaginationFlowTask;
 import com.taotao.cloud.workflow.biz.engine.service.FlowEngineService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNewService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNodeService;
@@ -87,7 +89,7 @@ public class FlowBeforeController {
 	@GetMapping("/category/{category}")
 	public Result<PageResult<FlowBeforeListVO>> list(@PathVariable("category") String category,
 		PaginationFlowTask paginationFlowTask) {
-		IPage<FlowTaskListModel> data = MpUtils.toPage(paginationFlowTask);
+		IPage<FlowTaskListModel> data = paginationFlowTask.buildMpPage();
 		if (FlowNature.WAIT.equals(category)) {
 			data = flowTaskService.getWaitList(paginationFlowTask);
 		} else if (FlowNature.TRIAL.equals(category)) {
@@ -132,14 +134,13 @@ public class FlowBeforeController {
 				listVO.add(vo);
 			}
 		}
-		return Result.success(PageResult.convertMybatisPage(data, listVO));
+		return Result.success(PageResult.convertMybatisPage(data, FlowBeforeListVO.class));
 	}
 
 	@Operation(summary = "获取待我审批信息", description = "获取待我审批信息")
 	@GetMapping("/{id}")
 	public Result<FlowBeforeInfoVO> info(@PathVariable("id") String id, String taskNodeId,
-		String taskOperatorId)
-		throws WorkFlowException {
+		String taskOperatorId) throws WorkFlowException {
 		FlowBeforeInfoVO vo = flowTaskNewService.getBeforeInfo(id, taskNodeId, taskOperatorId);
 		return Result.success(vo);
 	}

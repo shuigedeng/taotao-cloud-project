@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.PayDistributionEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.PayDistributionMapper;
-import com.taotao.cloud.workflow.api.common.model.form.paydistribution.PayDistributionForm;
+import com.taotao.cloud.workflow.biz.common.model.form.paydistribution.PayDistributionForm;
 import com.taotao.cloud.workflow.biz.form.service.PayDistributionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

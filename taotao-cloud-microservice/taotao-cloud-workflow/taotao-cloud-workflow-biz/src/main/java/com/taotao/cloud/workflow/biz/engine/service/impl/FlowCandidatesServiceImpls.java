@@ -2,7 +2,7 @@ package com.taotao.cloud.workflow.biz.engine.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.workflow.api.common.util.RandomUtil;
+import com.taotao.cloud.workflow.biz.common.util.RandomUtil;
 import java.util.List;
 
 import com.taotao.cloud.workflow.biz.engine.entity.FlowCandidatesEntity;
