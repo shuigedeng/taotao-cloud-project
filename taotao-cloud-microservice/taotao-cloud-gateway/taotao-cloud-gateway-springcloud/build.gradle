@@ -20,6 +20,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
+    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin:8.14.0'
+
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     implementation "org.springframework.security:spring-security-oauth2-jose"
