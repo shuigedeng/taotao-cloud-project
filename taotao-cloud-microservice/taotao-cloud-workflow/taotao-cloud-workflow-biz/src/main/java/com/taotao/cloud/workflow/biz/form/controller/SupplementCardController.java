@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.SupplementCardEntity;
-import com.taotao.cloud.workflow.api.common.model.form.supplementcard.SupplementCardForm;
-import com.taotao.cloud.workflow.api.common.model.form.supplementcard.SupplementCardInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.supplementcard.SupplementCardForm;
+import com.taotao.cloud.workflow.biz.common.model.form.supplementcard.SupplementCardInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.SupplementCardService;
 
 import org.hibernate.exception.DataException;

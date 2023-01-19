@@ -1,6 +1,7 @@
 plugins {
     id "ca.cutterslade.analyze" version "1.9.0"
 }
+
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
@@ -134,7 +135,7 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-        exclude group: "org.apache.dubbo", module: "dubbo"
+        //exclude group: "org.apache.dubbo", module: "dubbo"
     }
 }
 

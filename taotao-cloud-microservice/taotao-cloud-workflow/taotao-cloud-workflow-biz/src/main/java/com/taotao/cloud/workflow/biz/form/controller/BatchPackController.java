@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.BatchPackEntity;
-import com.taotao.cloud.workflow.api.common.model.form.batchpack.BatchPackForm;
-import com.taotao.cloud.workflow.api.common.model.form.batchpack.BatchPackInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackForm;
+import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.BatchPackService;
 
 import jakarta.validation.Valid;

@@ -1,28 +1,27 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
-import com.taotao.cloud.workflow.api.common.model.FormAllModel;
-import com.taotao.cloud.workflow.api.common.model.FormColumnModel;
-import com.taotao.cloud.workflow.api.common.model.FormColumnTableModel;
-import com.taotao.cloud.workflow.api.common.model.FormEnum;
-import com.taotao.cloud.workflow.api.common.model.FormMastTableModel;
-import com.taotao.cloud.workflow.api.common.model.FormModel;
-import com.taotao.cloud.workflow.api.common.model.visiual.RecursionForm;
-import com.taotao.cloud.workflow.api.common.model.visiual.TableFields;
-import com.taotao.cloud.workflow.api.common.model.visiual.TableModel;
-import com.taotao.cloud.workflow.api.common.model.visiual.WorkflowKeyConsts;
-import com.taotao.cloud.workflow.api.common.model.visiual.fields.FieLdsModel;
-import com.taotao.cloud.workflow.api.common.model.visiual.fields.config.ConfigModel;
-import com.taotao.cloud.workflow.api.common.model.visiual.fields.props.PropsBeanModel;
-import com.taotao.cloud.workflow.api.common.model.visiual.fields.props.PropsModel;
-import com.taotao.cloud.workflow.api.common.util.JsonUtil;
-import com.taotao.cloud.workflow.api.common.util.RandomUtil;
-import com.taotao.cloud.workflow.api.common.util.StringUtil;
+import com.taotao.cloud.workflow.biz.common.model.FormAllModel;
+import com.taotao.cloud.workflow.biz.common.model.FormColumnModel;
+import com.taotao.cloud.workflow.biz.common.model.FormColumnTableModel;
+import com.taotao.cloud.workflow.biz.common.model.FormEnum;
+import com.taotao.cloud.workflow.biz.common.model.FormMastTableModel;
+import com.taotao.cloud.workflow.biz.common.model.FormModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.RecursionForm;
+import com.taotao.cloud.workflow.biz.common.model.visiual.TableFields;
+import com.taotao.cloud.workflow.biz.common.model.visiual.TableModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.WorkflowKeyConsts;
+import com.taotao.cloud.workflow.biz.common.model.visiual.fields.FieLdsModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.fields.config.ConfigModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.fields.props.PropsBeanModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.fields.props.PropsModel;
+import com.taotao.cloud.workflow.biz.common.util.JsonUtil;
+import com.taotao.cloud.workflow.biz.common.util.RandomUtil;
+import com.taotao.cloud.workflow.biz.common.util.StringUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * 在线工作流开发

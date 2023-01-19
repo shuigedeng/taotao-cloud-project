@@ -6,8 +6,8 @@ import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.OutboundEntryEntity;
 import com.taotao.cloud.workflow.biz.form.entity.OutboundOrderEntity;
-import com.taotao.cloud.workflow.api.common.model.form.outboundorder.OutboundEntryEntityInfoModel;
-import com.taotao.cloud.workflow.api.common.model.form.outboundorder.OutboundOrderInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.outboundorder.OutboundEntryEntityInfoModel;
+import com.taotao.cloud.workflow.biz.common.model.form.outboundorder.OutboundOrderInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.OutboundOrderService;
 
 import java.util.List;

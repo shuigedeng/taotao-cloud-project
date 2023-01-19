@@ -2,7 +2,7 @@ package com.taotao.cloud.workflow.biz.engine.mapper;
 
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskListModel;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;

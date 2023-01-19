@@ -4,14 +4,14 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.workflow.api.database.model.DbTableFieldModel;
-import com.taotao.cloud.workflow.api.model.FormAllModel;
-import com.taotao.cloud.workflow.api.model.FormColumnTableModel;
-import com.taotao.cloud.workflow.api.model.FormEnum;
-import com.taotao.cloud.workflow.api.model.visiual.TableFields;
-import com.taotao.cloud.workflow.api.model.visiual.TableModel;
-import com.taotao.cloud.workflow.api.model.visiual.fields.FieLdsModel;
-import com.taotao.cloud.workflow.api.visiual.FlowKeyConsts;
+import com.taotao.cloud.workflow.biz.common.database.model.DbTableFieldModel;
+import com.taotao.cloud.workflow.biz.common.model.FormAllModel;
+import com.taotao.cloud.workflow.biz.common.model.FormColumnTableModel;
+import com.taotao.cloud.workflow.biz.common.model.FormEnum;
+import com.taotao.cloud.workflow.biz.common.model.visiual.TableFields;
+import com.taotao.cloud.workflow.biz.common.model.visiual.TableModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.fields.FieLdsModel;
+import com.taotao.cloud.workflow.biz.common.util.RandomUtil;
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,8 +54,8 @@ public class VisualDevTableCre {
 				JSONArray children = jsonObject.getJSONObject("__config__")
 					.getJSONArray("children");
 				String tableModel = "";
-				for (int k = 0; k < children.size(); k++) {
-					JSONObject childrenObject = (JSONObject) children.get(k);
+				for (Object child : children) {
+					JSONObject childrenObject = (JSONObject) child;
 					this.fieldsModel(childrenObject, tableModels);
 					if (StrUtil.isEmpty(tableModel)) {
 						tableModel = childrenObject.getJSONObject("__config__")

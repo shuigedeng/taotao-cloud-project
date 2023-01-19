@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.LetterServiceEntity;
-import com.taotao.cloud.workflow.api.common.model.form.letterservice.LetterServiceForm;
-import com.taotao.cloud.workflow.api.common.model.form.letterservice.LetterServiceInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.letterservice.LetterServiceForm;
+import com.taotao.cloud.workflow.biz.common.model.form.letterservice.LetterServiceInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.LetterServiceService;
 
 import jakarta.validation.Valid;
