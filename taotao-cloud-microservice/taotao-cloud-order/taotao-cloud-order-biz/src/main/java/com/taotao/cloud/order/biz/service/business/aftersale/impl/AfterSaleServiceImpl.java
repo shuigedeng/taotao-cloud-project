@@ -10,7 +10,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
@@ -41,9 +40,9 @@ import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
-import com.taotao.cloud.payment.api.feign.IFeignRefundSupportService;
-import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
-import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
+import com.taotao.cloud.payment.api.feign.IFeignRefundSupportApi;
+import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
+import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsApi;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
@@ -79,15 +78,15 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 物流公司
 	 */
-	private final IFeignLogisticsApi logisticsService;
+	private final IFeignLogisticsApi feignLogisticsApi;
 	/**
 	 * 店铺详情
 	 */
-	private final IFeignStoreDetailService storeDetailService;
+	private final IFeignStoreDetailApi feignStoreDetailApi;
 	/**
 	 * 售后支持，这里用于退款操作
 	 */
-	private final IFeignRefundSupportService refundSupport;
+	private final IFeignRefundSupportApi feignRefundSupportApi;
 	/**
 	 * RocketMQ配置
 	 */
@@ -98,18 +97,18 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	private final RocketMQTemplate rocketMQTemplate;
 
 	@Override
-	public IPage<AfterSale> getAfterSalePages(AfterSalePageQuery saleSearchParams) {
-		return baseMapper.queryByParams(saleSearchParams.buildMpPage(),
-			saleSearchParams.queryWrapper());
+	public IPage<AfterSale> pageQuery(AfterSalePageQuery salePageQuery) {
+		return baseMapper.queryByParams(salePageQuery.buildMpPage(),
+			salePageQuery.queryWrapper());
 	}
 
 	@Override
-	public List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery saleSearchParams) {
-		return this.list(saleSearchParams.queryWrapper());
+	public List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery) {
+		return this.list(afterSalePageQuery.queryWrapper());
 	}
 
 	@Override
-	public AfterSale getAfterSale(String sn) {
+	public AfterSale getAfterSaleBySn(String sn) {
 		LambdaQueryWrapper<AfterSale> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(AfterSale::getSn, sn);
 		return this.getOne(queryWrapper);
@@ -199,7 +198,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 			if (afterSale.getServiceType().equals(AfterSaleTypeEnum.RETURN_MONEY.name())) {
 				if (afterSale.getRefundWay().equals(AfterSaleRefundWayEnum.ORIGINAL.name())) {
 					//如果为退款操作 && 在线支付 则直接进行退款
-					refundSupport.refund(afterSale.getSn());
+					feignRefundSupportApi.refund(afterSale.getSn());
 					afterSale.setRefundTime(LocalDateTime.now());
 					afterSaleStatusEnum = AfterSaleStatusEnum.COMPLETE;
 				} else {
@@ -238,7 +237,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		}
 
 		//查询会员回寄的物流公司信息
-		LogisticsVO logistics = logisticsService.getById(logisticsId);
+		LogisticsVO logistics = feignLogisticsApi.getById(logisticsId);
 
 		//判断物流公司是否为空
 		if (logistics == null) {
@@ -262,7 +261,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
-		return logisticsService.getLogistic(afterSale.getId(),
+		return feignLogisticsApi.getLogistic(afterSale.getId(),
 			afterSale.getLogisticsNo());
 	}
 
@@ -287,7 +286,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//在线支付 则直接进行退款
 		if (pass.equals(serviceStatus) &&
 			afterSale.getRefundWay().equals(AfterSaleRefundWayEnum.ORIGINAL.name())) {
-			refundSupport.refund(afterSale.getSn());
+			feignRefundSupportApi.refund(afterSale.getSn());
 			afterSaleStatusEnum = AfterSaleStatusEnum.COMPLETE;
 		} else if (pass.equals(serviceStatus)) {
 			afterSaleStatusEnum = AfterSaleStatusEnum.WAIT_REFUND;
@@ -317,7 +316,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//根据售后编号修改售后单
 		this.updateAfterSale(afterSaleSn, afterSale);
 		//退款
-		refundSupport.refund(afterSale.getSn());
+		feignRefundSupportApi.refund(afterSale.getSn());
 		//发送退款消息
 		this.sendAfterSaleMessage(afterSale);
 		return true;
@@ -357,8 +356,8 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	}
 
 	@Override
-	public StoreAfterSaleAddressVO getStoreAfterSaleAddressDTO(String sn) {
-		return storeDetailService.getStoreAfterSaleAddressDTO(
+	public StoreAfterSaleAddressVO getStoreAfterSaleAddressVO(String sn) {
+		return feignStoreDetailApi.getStoreAfterSaleAddressDTO(
 			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId());
 	}
 

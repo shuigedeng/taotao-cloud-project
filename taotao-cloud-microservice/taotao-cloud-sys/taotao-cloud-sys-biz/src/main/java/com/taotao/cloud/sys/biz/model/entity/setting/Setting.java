@@ -1,7 +1,10 @@
 package com.taotao.cloud.sys.biz.model.entity.setting;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Type;
 
 
 /**
@@ -47,8 +51,8 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
 	@Column(name = "en_code", unique = true, columnDefinition = "varchar(255) not null comment '编码'")
 	private String enCode;
 
-	//@Type(type = "json")
-	//@TableField(typeHandler = JacksonTypeHandler.class)
+	@Type(value= JsonType.class)
+	@TableField(typeHandler = JacksonTypeHandler.class)
 	@Column(name = "value", columnDefinition = "json not null comment 'json数据'")
 	private String value;
 

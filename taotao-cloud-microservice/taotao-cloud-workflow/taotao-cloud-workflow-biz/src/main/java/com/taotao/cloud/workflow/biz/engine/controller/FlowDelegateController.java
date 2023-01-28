@@ -4,12 +4,15 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.workflow.biz.common.base.Pagination;
+import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
+import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
 import com.taotao.cloud.workflow.biz.covert.FlowTaskConvert;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
-import com.taotao.cloud.workflow.api.common.model.engine.flowdelegate.FlowDelegatListVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowdelegate.FlowDelegateCrForm;
-import com.taotao.cloud.workflow.api.common.model.engine.flowdelegate.FlowDelegateInfoVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowdelegate.FlowDelegateUpForm;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowdelegate.FlowDelegatListVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowdelegate.FlowDelegateCrForm;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowdelegate.FlowDelegateInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowdelegate.FlowDelegateUpForm;
 import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 流程委托
  */
 @Validated
-@Tag(name = "流程委托", description = "流程委托")
+@Tag(name = "工作流程-流程委托", description = "工作流程-流程委托")
 @RestController
 @RequestMapping("/api/workflow/engine/flow-delegate")
 public class FlowDelegateController {
@@ -60,7 +63,7 @@ public class FlowDelegateController {
 	public Result<Boolean> create(@RequestBody @Valid FlowDelegateCrForm flowDelegateCrForm) {
 		FlowDelegateEntity entity = FlowTaskConvert.INSTANCE.convert(flowDelegateCrForm);
 		Long userId = SecurityUtils.getUserId();
-		if (userId.equals(entity.getFTouserid())) {
+		if (userId.equals(entity.getToUserid())) {
 			return Result.fail("委托人为自己，委托失败");
 		}
 		flowDelegateService.create(entity);
@@ -73,7 +76,7 @@ public class FlowDelegateController {
 		@RequestBody @Valid FlowDelegateUpForm flowDelegateUpForm) {
 		FlowDelegateEntity entity = FlowTaskConvert.INSTANCE.convert(flowDelegateUpForm);
 		Long userId = SecurityUtils.getUserId();
-		if (userId.equals(entity.getFTouserid())) {
+		if (userId.equals(entity.getToUserid())) {
 			return Result.fail("委托人为自己，委托失败");
 		}
 

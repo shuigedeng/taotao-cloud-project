@@ -1,7 +1,7 @@
 package com.taotao.cloud.stock.biz.application.service;
 
 
-import com.taotao.cloud.stock.api.dto.RoleDTO;
+import com.taotao.cloud.stock.api.model.dto.RoleDTO;
 
 import java.util.List;
 import java.util.Map;

@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
-import com.taotao.cloud.distribution.api.web.query.DistributionOrderPageQuery;
+import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.mapper.DistributionOrderMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
@@ -42,7 +42,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderApi orderService;
+	private IFeignOrderApi feignOrderApi;
 	/**
 	 * 店铺流水
 	 */
@@ -57,7 +57,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 	 * 系统设置
 	 */
 	@Autowired
-	private IFeignSettingService settingService;
+	private IFeignSettingService feignSettingService;
 
 	@Override
 	public IPage<DistributionOrder> getDistributionOrderPage(
@@ -78,7 +78,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 	public void calculationDistribution(String orderSn) {
 
 		//根据订单编号获取订单数据
-		Order order = orderService.getBySn(orderSn);
+		Order order = feignOrderApi.getBySn(orderSn);
 
 		//判断是否为分销订单，如果为分销订单则获取分销佣金
 		if (order.getDistributionId() != null) {
@@ -97,7 +97,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 				distributionOrder.setDistributionName(distribution.getMemberName());
 
 				//设置结算天数(解冻日期)
-				Result<SettingVO> settingResult = settingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
+				Result<SettingVO> settingResult = feignSettingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 				DistributionSetting distributionSetting = JSONUtil.toBean(
 					settingResult.getSettingValue(), DistributionSetting.class);
 				//默认解冻1天
@@ -145,7 +145,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 	@Transactional(rollbackFor = Exception.class)
 	public void cancelOrder(String orderSn) {
 		//根据订单编号获取订单数据
-		Order order = orderService.getBySn(orderSn);
+		Order order = feignOrderApi.getBySn(orderSn);
 
 		//判断是否为已付款的分销订单，则获取分销佣金
 		if (order.getDistributionId() != null && order.getPayStatus().equals(PayStatusEnum.PAID.name())) {

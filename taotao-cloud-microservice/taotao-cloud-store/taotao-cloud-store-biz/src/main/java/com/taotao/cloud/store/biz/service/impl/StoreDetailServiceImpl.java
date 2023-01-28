@@ -11,18 +11,18 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryApi;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
 import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
-import com.taotao.cloud.store.api.web.dto.StoreAfterSaleAddressDTO;
-import com.taotao.cloud.store.api.web.dto.StoreSettingDTO;
-import com.taotao.cloud.store.api.web.dto.StoreSettlementDay;
-import com.taotao.cloud.store.api.web.vo.StoreBasicInfoVO;
-import com.taotao.cloud.store.api.web.vo.StoreDetailInfoVO;
-import com.taotao.cloud.store.api.web.vo.StoreManagementCategoryVO;
-import com.taotao.cloud.store.api.web.vo.StoreOtherVO;
+import com.taotao.cloud.store.api.model.dto.StoreAfterSaleAddressDTO;
+import com.taotao.cloud.store.api.model.dto.StoreSettingDTO;
+import com.taotao.cloud.store.api.model.dto.StoreSettlementDay;
+import com.taotao.cloud.store.api.model.vo.StoreBasicInfoVO;
+import com.taotao.cloud.store.api.model.vo.StoreDetailInfoVO;
+import com.taotao.cloud.store.api.model.vo.StoreManagementCategoryVO;
+import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
 import com.taotao.cloud.store.biz.mapper.StoreDetailMapper;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
-import com.taotao.cloud.store.biz.service.StoreDetailService;
-import com.taotao.cloud.store.biz.service.StoreService;
+import com.taotao.cloud.store.biz.service.IStoreDetailService;
+import com.taotao.cloud.store.biz.service.IStoreService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
@@ -44,21 +44,21 @@ import java.util.Map;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, StoreDetail> implements
-	StoreDetailService {
+		IStoreDetailService {
 
 	/**
 	 * 店铺
 	 */
 	@Autowired
-	private StoreService storeService;
+	private IStoreService storeService;
 	/**
 	 * 分类
 	 */
 	@Autowired
-	private IFeignCategoryApi categoryService;
+	private IFeignCategoryApi feignCategoryApi;
 
 	@Autowired
-	private IFeignGoodsApi goodsService;
+	private IFeignGoodsApi feignGoodsApi;
 
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;
@@ -98,7 +98,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
 	@Override
 	public void updateStoreGoodsInfo(Store store) {
-		goodsService.updateStoreDetail(store.getId());
+		feignGoodsApi.updateStoreDetail(store.getId());
 
 		Map<String, Object> updateIndexFieldsMap = EsIndexUtil.getUpdateIndexFieldsMap(
 			MapUtil.builder().put("storeId", store.getId()).build(),
@@ -172,7 +172,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 	public List<StoreManagementCategoryVO> goodsManagementCategory(String storeId) {
 
 		//获取顶部分类列表
-		List<CategoryTreeVO> categoryList = categoryService.firstCategory();
+		List<CategoryTreeVO> categoryList = feignCategoryApi.firstCategory();
 		//获取店铺信息
 		StoreDetail storeDetail = this.getOne(new LambdaQueryWrapper<StoreDetail>().eq(StoreDetail::getStoreId, storeId));
 		//获取店铺分类

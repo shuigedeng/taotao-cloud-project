@@ -28,9 +28,9 @@ import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
 import com.taotao.cloud.promotion.biz.model.pojo.PromotionTools;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.SeckillApplyService;
-import com.taotao.cloud.promotion.biz.service.business.SeckillService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,7 +55,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, SeckillApply> implements
-	SeckillApplyService {
+		ISeckillApplyService {
 
 	/**
 	 * 缓存
@@ -66,17 +66,17 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 	/**
 	 * 促销商品
 	 */
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 	/**
 	 * 秒杀
 	 */
 	@Autowired
-	private SeckillService seckillService;
+	private ISeckillService seckillService;
 
 	@Override
 	public List<SeckillTimelineVO> getSeckillTimeline() {
@@ -155,7 +155,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 		List<PromotionGoods> promotionGoodsList = new ArrayList<>();
 		for (SeckillApplyVO seckillApply : seckillApplyList) {
 			//获取参与活动的商品信息
-			GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(seckillApply.getSkuId());
+			GoodsSku goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(seckillApply.getSkuId());
 			if (!goodsSku.getStoreId().equals(storeId)) {
 				continue;
 			}
@@ -306,7 +306,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 		if (!seckillApplyList.isEmpty()) {
 			List<SeckillApply> collect = seckillApplyList.stream().filter(i -> i.getTimeLine().equals(startTimeline) && i.getPromotionApplyStatus().equals(PromotionsApplyStatusEnum.PASS.name())).collect(Collectors.toList());
 			for (SeckillApply seckillApply : collect) {
-				GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(seckillApply.getSkuId());
+				GoodsSku goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(seckillApply.getSkuId());
 				if (goodsSku != null) {
 					SeckillGoodsVO goodsVO = new SeckillGoodsVO();
 					BeanUtil.copyProperties(seckillApply, goodsVO);

@@ -36,9 +36,9 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
-	public Result<PageResult<OrderReceiptDTO>> getPage(ReceiptPageQuery searchParams) {
-		IPage<OrderReceiptDTO> receiptData = this.receiptService.getReceiptData(searchParams);
-		return Result.success(PageResult.convertMybatisPage(receiptData, OrderReceiptDTO.class));
+	public Result<PageResult<OrderReceiptDTO>> getPage(ReceiptPageQuery receiptPageQuery) {
+		IPage<OrderReceiptDTO> page = this.receiptService.pageQuery(receiptPageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, OrderReceiptDTO.class));
 	}
 
 }

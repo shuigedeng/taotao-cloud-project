@@ -24,8 +24,6 @@ public class HotWordsEveryDayTaskExecute implements EveryDayExecute {
 
 	/**
 	 * 执行每日任务
-	 *
-	 * @since 2022-04-27 16:54:14
 	 */
 	@Override
 	public void execute() {

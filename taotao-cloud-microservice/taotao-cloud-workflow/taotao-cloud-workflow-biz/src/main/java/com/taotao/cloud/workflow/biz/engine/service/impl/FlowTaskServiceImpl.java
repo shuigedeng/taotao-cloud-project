@@ -11,9 +11,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
-import com.taotao.cloud.workflow.api.common.database.util.DataSourceUtil;
-import com.taotao.cloud.workflow.api.common.database.util.DbTypeUtil;
-import com.taotao.cloud.workflow.api.common.util.DateUtil;
+import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
+import com.taotao.cloud.workflow.biz.common.database.util.DataSourceUtil;
+import com.taotao.cloud.workflow.biz.common.database.util.DbTypeUtil;
+import com.taotao.cloud.workflow.biz.common.util.DateUtil;
 import com.taotao.cloud.workflow.api.vo.UserRelationEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskCirculateEntity;
@@ -23,9 +24,9 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowTaskStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.mapper.FlowTaskMapper;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowBatchModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskListModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.PaginationFlowTask;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBatchModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.PaginationFlowTask;
 import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskCirculateService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNodeService;
@@ -696,13 +697,13 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
 	public void delete(String[] ids) throws WorkFlowException {
 		if (ids.length > 0) {
 			List<FlowTaskEntity> flowTaskList = getOrderStaList(Arrays.asList(ids));
-			boolean isDel = flowTaskList.stream().filter(t -> t.getFlowType() == 1).count() > 0;
+			boolean isDel = flowTaskList.stream().anyMatch(t -> t.getFlowType() == 1);
 			if (isDel) {
 				throw new WorkFlowException(MsgCode.WF117.get());
 			}
-			isDel = flowTaskList.stream().filter(
-				t -> !FlowNature.ParentId.equals(t.getParentId()) && StrUtil.isNotEmpty(
-					t.getParentId())).count() > 0;
+			isDel = flowTaskList.stream()
+				.anyMatch(t -> !FlowNature.ParentId.equals(t.getParentId()) && StrUtil.isNotEmpty(
+					t.getParentId()));
 			if (isDel) {
 				throw new WorkFlowException(MsgCode.WF118.get());
 			}

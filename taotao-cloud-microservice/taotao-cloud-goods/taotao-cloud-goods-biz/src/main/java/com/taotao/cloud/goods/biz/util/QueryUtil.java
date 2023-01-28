@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.goods.api.model.query.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class QueryUtil {
@@ -13,7 +14,8 @@ public class QueryUtil {
 	 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
 	 	queryWrapper.eq(Objects.nonNull(goodsPageQuery.getGoodsId()), "goods_id", goodsPageQuery.getGoodsId());
 	 	queryWrapper.like(CharSequenceUtil.isNotEmpty(goodsPageQuery.getGoodsName()), "goods_name", goodsPageQuery.getGoodsName());
-	 	queryWrapper.in(CharSequenceUtil.isNotEmpty(goodsPageQuery.getId()), "id", Arrays.asList(goodsPageQuery.getId().split(",")));
+	 	queryWrapper.in(CharSequenceUtil.isNotEmpty(goodsPageQuery.getId()), "id",
+		    List.of(goodsPageQuery.getId().split(",")));
 	 	queryWrapper.eq(Objects.nonNull(goodsPageQuery.getStoreId()), "store_id", goodsPageQuery.getStoreId());
 	 	queryWrapper.like(CharSequenceUtil.isNotEmpty(goodsPageQuery.getStoreName()), "store_name", goodsPageQuery.getStoreName());
 	 	queryWrapper.like(CharSequenceUtil.isNotEmpty(goodsPageQuery.getCategoryPath()), "category_path", goodsPageQuery.getCategoryPath());

@@ -1,6 +1,6 @@
 package com.taotao.cloud.stock.biz.interfaces.assembler;
 
-import com.taotao.cloud.stock.api.dto.RoleDTO;
+import com.taotao.cloud.stock.api.model.dto.RoleDTO;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;

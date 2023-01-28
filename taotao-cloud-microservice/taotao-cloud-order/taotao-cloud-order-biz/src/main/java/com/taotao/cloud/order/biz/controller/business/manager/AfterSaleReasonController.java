@@ -47,7 +47,7 @@ public class AfterSaleReasonController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<AfterSaleReasonVO> get(@PathVariable String id) {
+	public Result<AfterSaleReasonVO> getById(@PathVariable String id) {
 		AfterSaleReason afterSaleReason = afterSaleReasonService.getById(id);
 		return Result.success(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReason));
 	}
@@ -57,8 +57,8 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageResult<AfterSaleReasonVO>> getByPage(@Validated AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
-		IPage<AfterSaleReason> afterSaleReasonPage = afterSaleReasonService.getByPage(afterSaleReasonPageQuery);
-		return Result.success(PageResult.convertMybatisPage(afterSaleReasonPage, AfterSaleReasonVO.class));
+		IPage<AfterSaleReason> page = afterSaleReasonService.pageQuery(afterSaleReasonPageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, AfterSaleReasonVO.class));
 	}
 
 	@Operation(summary = "添加售后原因", description = "添加售后原因")
@@ -66,8 +66,7 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO) {
-		afterSaleReasonService.save(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO));
-		return Result.success(true);
+		return Result.success(afterSaleReasonService.save(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO)));
 	}
 
 	@Operation(summary = "修改售后原因", description = "修改售后原因")
@@ -86,7 +85,6 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@DeleteMapping(value = "/{id}")
 	public Result<Boolean> delAllByIds(@PathVariable String id) {
-		afterSaleReasonService.removeById(id);
-		return Result.success(true);
+		return Result.success(afterSaleReasonService.removeById(id));
 	}
 }

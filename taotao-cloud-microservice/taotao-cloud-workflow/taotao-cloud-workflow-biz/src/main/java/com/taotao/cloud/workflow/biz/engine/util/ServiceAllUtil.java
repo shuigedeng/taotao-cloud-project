@@ -1,5 +1,9 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
+import com.taotao.cloud.workflow.biz.common.base.Pagination;
+import com.taotao.cloud.workflow.biz.common.database.model.entity.DbLinkEntity;
+import com.taotao.cloud.workflow.biz.common.util.StringUtil;
+import com.taotao.cloud.workflow.biz.common.util.enums.DictionaryDataEnum;
 import com.taotao.cloud.workflow.api.vo.OrganizeEntity;
 import com.taotao.cloud.workflow.api.vo.PositionEntity;
 import com.taotao.cloud.workflow.api.vo.RoleEntity;
@@ -42,8 +46,7 @@ public class ServiceAllUtil {
 
 	//--------------------------------数据连接------------------------------
 	public DbLinkEntity getDbLink(String dbLink) {
-		DbLinkEntity link = StringUtil.isNotEmpty(dbLink) ? dblinkService.getInfo(dbLink) : null;
-		return link;
+		return StringUtil.isNotEmpty(dbLink) ? dblinkService.getInfo(dbLink) : null;
 	}
 
 	public void createTable(DbTableCreate dbTable) throws DataException {
@@ -70,7 +73,7 @@ public class ServiceAllUtil {
 	}
 
 	//--------------------------------用户------------------------------
-	public List<UserEntity> getUserName(List<String> id) {
+	public List<UserEntity> getUserName(List<Long> id) {
 		return userService.getUserName(id);
 	}
 

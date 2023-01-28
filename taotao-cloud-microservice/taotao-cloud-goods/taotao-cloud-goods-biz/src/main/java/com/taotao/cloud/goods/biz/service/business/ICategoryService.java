@@ -23,7 +23,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @return {@link List }<{@link Category }>
 	 * @since 2022-04-27 16:59:28
 	 */
-	List<Category> dbList(Long parentId);
+	List<Category> childrenList(Long parentId);
 
 	/**
 	 * 获取分类

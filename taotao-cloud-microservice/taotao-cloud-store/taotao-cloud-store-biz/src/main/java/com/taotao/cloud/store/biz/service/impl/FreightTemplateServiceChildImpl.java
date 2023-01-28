@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
 import com.taotao.cloud.store.biz.mapper.FreightTemplateChildMapper;
-import com.taotao.cloud.store.biz.service.FreightTemplateChildService;
+import com.taotao.cloud.store.biz.service.IFreightTemplateChildService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class FreightTemplateServiceChildImpl extends ServiceImpl<FreightTemplateChildMapper, FreightTemplateChild> implements
-	FreightTemplateChildService {
+        IFreightTemplateChildService {
 
     @Override
     public List<FreightTemplateChild> getFreightTemplateChild(Long freightTemplateId) {

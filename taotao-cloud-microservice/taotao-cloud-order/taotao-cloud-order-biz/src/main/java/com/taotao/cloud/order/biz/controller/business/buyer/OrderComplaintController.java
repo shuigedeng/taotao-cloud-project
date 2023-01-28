@@ -72,7 +72,7 @@ public class OrderComplaintController {
 	@GetMapping("/page")
 	public Result<PageResult<OrderComplaintBaseVO>> get(
 			@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
-		IPage<OrderComplaint> orderComplainByPage = orderComplaintService.getOrderComplainByPage(
+		IPage<OrderComplaint> orderComplainByPage = orderComplaintService.pageQuery(
 				orderComplaintPageQuery);
 		return Result.success(
 				PageResult.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));

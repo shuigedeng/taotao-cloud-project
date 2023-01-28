@@ -15,9 +15,9 @@ import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
 import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityLogMapper;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityLogService;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityLogService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityService;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,13 +34,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class KanjiaActivityLogServiceImpl extends ServiceImpl<KanJiaActivityLogMapper, KanjiaActivityLog> implements
-	KanjiaActivityLogService {
+        IKanjiaActivityLogService {
 
     @Autowired
-    private KanjiaActivityGoodsService kanJiaActivityGoodsService;
+    private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
 
     @Autowired
-    private KanjiaActivityService kanJiaActivityService;
+    private IKanjiaActivityService kanJiaActivityService;
 
     @Override
     public IPage<KanjiaActivityLog> getForPage(KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageVO pageVO) {

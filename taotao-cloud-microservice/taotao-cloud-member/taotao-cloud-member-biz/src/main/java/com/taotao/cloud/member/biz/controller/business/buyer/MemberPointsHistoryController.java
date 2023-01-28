@@ -36,7 +36,7 @@ public class MemberPointsHistoryController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/page")
 	public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(PageQuery page) {
-		IPage<MemberPointsHistory> memberPointsHistoryPage = memberPointsHistoryService.getByPage(page);
+		IPage<MemberPointsHistory> memberPointsHistoryPage = memberPointsHistoryService.pageQuery(page);
 		return Result.success(PageResult.convertMybatisPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
 	}
 

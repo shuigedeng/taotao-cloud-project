@@ -8,7 +8,7 @@ import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
 import com.taotao.cloud.workflow.biz.engine.mapper.FlowTaskNodeMapper;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNodeService;
 import com.taotao.cloud.workflow.biz.engine.util.FlowNature;
 import java.util.ArrayList;

@@ -15,7 +15,9 @@
  */
 package com.taotao.cloud.order.biz.service.dubbo;
 
-import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
+import com.taotao.cloud.order.api.dubbo.IDubboOrderRpc;
+import com.taotao.cloud.sys.api.dubbo.IDubboUserRpc;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,11 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:34:52
  */
 @Service
-@DubboService(interfaceClass = IDubboOrderService.class, validation = "true")
-public class DubboOrderServiceImpl implements IDubboOrderService {
+@DubboService(interfaceClass = IDubboOrderRpc.class, validation = "true")
+public class DubboOrderServiceImpl implements IDubboOrderRpc {
+
+	@DubboReference
+	private IDubboUserRpc dubboUserRpc;
+
 
 }

@@ -8,8 +8,8 @@ import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
-import com.taotao.cloud.promotion.biz.service.business.CouponService;
-import com.taotao.cloud.promotion.biz.service.business.MemberCouponService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponService;
+import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,13 +36,13 @@ public class CouponBuyerController {
 	 * 优惠券
 	 */
 	@Autowired
-	private CouponService couponService;
+	private ICouponService couponService;
 
 	/**
 	 * 会员优惠券
 	 */
 	@Autowired
-	private MemberCouponService memberCouponService;
+	private IMemberCouponService memberCouponService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

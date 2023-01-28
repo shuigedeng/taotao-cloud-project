@@ -10,7 +10,7 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
-import com.taotao.cloud.promotion.biz.service.business.CouponService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CouponStoreController {
 
 	@Autowired
-	private CouponService couponService;
+	private ICouponService couponService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

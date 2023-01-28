@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.store.biz.model.entity.StoreAddress;
 import com.taotao.cloud.store.biz.mapper.StoreAddressMapper;
-import com.taotao.cloud.store.biz.service.StoreAddressService;
+import com.taotao.cloud.store.biz.service.IStoreAddressService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class StoreAddressServiceImpl extends ServiceImpl<StoreAddressMapper, StoreAddress> implements
-	StoreAddressService {
+        IStoreAddressService {
 
     @Override
     public IPage<StoreAddress> getStoreAddress(String storeId, PageQuery PageQuery) {

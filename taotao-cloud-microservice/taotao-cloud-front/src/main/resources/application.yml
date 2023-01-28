@@ -18,7 +18,7 @@ server:
 
 spring:
   application:
-    name: taotao-cloud-portal
+    name: taotao-cloud-front
   # 引擎模板配置
   thymeleaf:
     mode: HTML5 # 去除htm5严格校验

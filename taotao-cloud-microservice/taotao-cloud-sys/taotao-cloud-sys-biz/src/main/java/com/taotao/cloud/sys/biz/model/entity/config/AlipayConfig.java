@@ -103,6 +103,6 @@ public class AlipayConfig extends BaseSuperEntity<AlipayConfig, Long> {
 	/**
 	 * 商户号
 	 */
-	@Column(name = "sys_service_provider_id", columnDefinition = "varchar(32) not null comment '商户号'")
-	private String sysServiceProviderId;
+	@Column(name = "service_provider_id", columnDefinition = "varchar(32) not null comment '商户号'")
+	private String serviceProviderId;
 }

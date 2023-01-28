@@ -6,9 +6,9 @@ import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.MaterialEntryEntity;
 import com.taotao.cloud.workflow.biz.form.entity.MaterialRequisitionEntity;
-import com.taotao.cloud.workflow.api.common.model.form.materialrequisition.MaterialEntryEntityInfoModel;
-import com.taotao.cloud.workflow.api.common.model.form.materialrequisition.MaterialRequisitionForm;
-import com.taotao.cloud.workflow.api.common.model.form.materialrequisition.MaterialRequisitionInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.materialrequisition.MaterialEntryEntityInfoModel;
+import com.taotao.cloud.workflow.biz.common.model.form.materialrequisition.MaterialRequisitionForm;
+import com.taotao.cloud.workflow.biz.common.model.form.materialrequisition.MaterialRequisitionInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.MaterialRequisitionService;
 
 import java.util.List;

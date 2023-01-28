@@ -27,22 +27,22 @@ public interface IMemberPointsHistoryService extends IService<MemberPointsHistor
 	/**
 	 * 通过页面
 	 *
-	 * @param PageQuery 页面参数
+	 * @param pageQuery 页面参数
 	 * @return {@link IPage }<{@link MemberPointsHistory }>
 	 * @since 2022-05-31 14:16:22
 	 */
-	IPage<MemberPointsHistory> getByPage(PageQuery PageQuery);
+	IPage<MemberPointsHistory> pageQuery(PageQuery pageQuery);
 
 	/**
 	 * 会员积分历史
 	 *
-	 * @param PageQuery  分页
+	 * @param pageQuery  分页
 	 * @param memberId   会员ID
 	 * @param memberName 会员名称
 	 * @return {@link IPage }<{@link MemberPointsHistory }>
 	 * @since 2022-05-31 14:16:22
 	 */
-	IPage<MemberPointsHistory> memberPointsHistoryList(PageQuery PageQuery, Long memberId,
+	IPage<MemberPointsHistory> memberPointsHistoryPageQuery(PageQuery pageQuery, Long memberId,
 													   String memberName);
 
 }

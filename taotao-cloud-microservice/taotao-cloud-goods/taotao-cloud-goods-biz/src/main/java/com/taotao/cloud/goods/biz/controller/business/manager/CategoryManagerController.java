@@ -57,8 +57,8 @@ public class CategoryManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}/children/all")
-	public Result<List<CategoryVO>> list(@PathVariable Long parentId) {
-		List<Category> categories = this.categoryService.dbList(parentId);
+	public Result<List<CategoryVO>> childrenList(@PathVariable Long parentId) {
+		List<Category> categories = this.categoryService.childrenList(parentId);
 		return Result.success(CategoryConvert.INSTANCE.convert(categories));
 	}
 

@@ -1,6 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.member.api.feign.fallback.FeignMemberAddressApiFallback, \
-com.taotao.cloud.member.api.feign.fallback.FeignMemberApiFallback, \
-com.taotao.cloud.member.api.feign.fallback.FeignMemberEvaluationApiFallback, \
-com.taotao.cloud.member.api.feign.fallback.FeignMemberRechargeApiFallback, \
-com.taotao.cloud.member.api.feign.fallback.FeignMemberWalletApiFallback

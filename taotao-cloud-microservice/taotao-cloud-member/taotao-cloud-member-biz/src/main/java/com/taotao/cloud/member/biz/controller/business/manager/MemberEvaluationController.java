@@ -49,8 +49,7 @@ public class MemberEvaluationController {
 	@Operation(summary = "获取评价分页", description = "获取评价分页")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
-	public Result<PageResult<MemberEvaluationListVO>> getByPage(
-			EvaluationPageQuery evaluationPageQuery) {
+	public Result<PageResult<MemberEvaluationListVO>> queryPage(EvaluationPageQuery evaluationPageQuery) {
 		IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.queryPage(
 				evaluationPageQuery);
 		return Result.success(

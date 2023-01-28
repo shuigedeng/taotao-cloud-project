@@ -22,8 +22,8 @@ import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.connect.token.TokenUtil;
 import com.taotao.cloud.member.biz.connect.token.base.AbstractTokenGenerate;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.store.api.feign.IFeignStoreService;
-import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.api.feign.IFeignStoreApi;
+import com.taotao.cloud.store.api.model.vo.StoreVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StoreTokenGenerate extends AbstractTokenGenerate<Member> {
 	@Autowired
-	private IFeignStoreService storeService;
+	private IFeignStoreApi storeService;
 	@Autowired
 	private TokenUtil tokenUtil;
 

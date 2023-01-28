@@ -6,7 +6,7 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.convert.MemberConvert;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/member/seller/store/user")
 public class StoreUserController {
 
-	private final MemberService memberService;
+	private final IMemberService memberService;
 
 	@Operation(summary = "获取当前登录用户API", description = "获取当前登录用户API")
 	@RequestLogger

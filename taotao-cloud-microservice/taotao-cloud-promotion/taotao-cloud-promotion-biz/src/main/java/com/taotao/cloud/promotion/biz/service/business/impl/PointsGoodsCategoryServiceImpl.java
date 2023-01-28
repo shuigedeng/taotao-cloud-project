@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 import com.taotao.cloud.promotion.biz.mapper.PointsGoodsCategoryMapper;
-import com.taotao.cloud.promotion.biz.service.business.PointsGoodsCategoryService;
+import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsCategoryService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PointsGoodsCategoryServiceImpl extends ServiceImpl<PointsGoodsCategoryMapper, PointsGoodsCategory> implements
-	PointsGoodsCategoryService {
+        IPointsGoodsCategoryService {
 
     /**
      * 添加积分商品分类

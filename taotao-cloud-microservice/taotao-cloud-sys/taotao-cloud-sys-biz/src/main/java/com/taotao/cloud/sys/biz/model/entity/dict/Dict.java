@@ -38,10 +38,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 
 /**
- * SysDict
+ * 字典表
  *
  * @author shuigedeng
  * @version 2021.10

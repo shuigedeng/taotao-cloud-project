@@ -6,8 +6,8 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Map;
@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PromotionManagerController {
 
 	@Autowired
-	private PromotionService promotionService;
+	private IPromotionService promotionService;
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

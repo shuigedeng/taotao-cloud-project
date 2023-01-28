@@ -16,7 +16,7 @@ import com.taotao.cloud.member.biz.mapper.IMemberReceiptMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
 import com.taotao.cloud.member.biz.service.business.IMemberReceiptService;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<IMemberReceiptMapper, 
 	IMemberReceiptService {
 
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 
 	@Override
 	public IPage<MemberReceipt> getPage(MemberReceiptPageQuery memberReceiptPageQuery) {

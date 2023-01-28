@@ -59,19 +59,19 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
 	/**
 	 * 会员
 	 */
-	private final IFeignMemberApi memberService;
+	private final IFeignMemberApi feignMemberApi;
 	/**
 	 * 优惠券
 	 */
-	private final IFeignCouponApi couponService;
+	private final IFeignCouponApi feignCouponApi;
 	/**
 	 * 会员优惠券
 	 */
-	private final IFeignMemberCouponApi memberCouponService;
+	private final IFeignMemberCouponApi feignMemberCouponApi;
 	/**
 	 * 砍价
 	 */
-	private final IFeignKanjiaActivityApi kanjiaActivityService;
+	private final IFeignKanjiaActivityApi feignKanjiaActivityApi;
 	/**
 	 * RocketMQ
 	 */
@@ -171,9 +171,9 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
 		}
 		List<String> ids = memberCouponDTOList.stream().map(e -> e.getMemberCoupon().getId())
 			.collect(Collectors.toList());
-		memberCouponService.used(ids);
+		feignMemberCouponApi.used(ids);
 		memberCouponDTOList.forEach(
-			e -> couponService.usedCoupon(e.getMemberCoupon().getCouponId(), 1));
+			e -> feignCouponApi.usedCoupon(e.getMemberCoupon().getCouponId(), 1));
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
 			for (CartVO item : tradeDTO.getCartList()) {
 				orderSns.append(item.getSn());
 			}
-			Result<Boolean> result = memberService.updateMemberPoint(
+			Result<Boolean> result = feignMemberApi.updateMemberPoint(
 				tradeDTO.getPriceDetailDTO().getPayPoint(), PointTypeEnum.REDUCE.name(),
 				tradeDTO.getMemberId(),
 				"订单【" + orderSns + "】创建，积分扣减");
@@ -209,7 +209,7 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
 	private void kanjiaPretreatment(TradeDTO tradeDTO) {
 		if (tradeDTO.getCartTypeEnum().equals(CartTypeEnum.KANJIA)) {
 			String kanjiaId = tradeDTO.getSkuList().get(0).getKanjiaId();
-			kanjiaActivityService.update(new LambdaUpdateWrapper<KanjiaActivity>()
+			feignKanjiaActivityApi.update(new LambdaUpdateWrapper<KanjiaActivity>()
 				.eq(KanjiaActivity::getId, kanjiaId)
 				.set(KanjiaActivity::getStatus, KanJiaStatusEnum.END.name()));
 		}

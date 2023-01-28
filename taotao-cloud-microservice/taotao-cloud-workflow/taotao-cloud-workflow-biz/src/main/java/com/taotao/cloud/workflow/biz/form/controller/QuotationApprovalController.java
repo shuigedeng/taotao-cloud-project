@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.QuotationApprovalEntity;
-import com.taotao.cloud.workflow.api.common.model.form.quotationapproval.QuotationApprovalForm;
-import com.taotao.cloud.workflow.api.common.model.form.quotationapproval.QuotationApprovalInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.quotationapproval.QuotationApprovalForm;
+import com.taotao.cloud.workflow.biz.common.model.form.quotationapproval.QuotationApprovalInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.QuotationApprovalService;
 
 import org.hibernate.exception.DataException;

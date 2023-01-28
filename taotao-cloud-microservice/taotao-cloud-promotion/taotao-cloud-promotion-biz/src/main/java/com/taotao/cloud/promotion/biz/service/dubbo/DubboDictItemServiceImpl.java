@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.promotion.biz.service.dubbo;
 
-import com.taotao.cloud.sys.api.dubbo.IDubboDictItemService;
+import com.taotao.cloud.sys.api.dubbo.IDubboDictItemRpc;
 import com.taotao.cloud.sys.biz.mapper.IDictItemMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
 import com.taotao.cloud.sys.biz.repository.cls.DictItemRepository;
@@ -32,9 +32,9 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:34:52
  */
 @Service
-@DubboService(interfaceClass = IDubboDictItemService.class, validation = "true")
+@DubboService(interfaceClass = IDubboDictItemRpc.class, validation = "true")
 public class DubboDictItemServiceImpl extends
 	BaseSuperServiceImpl<IDictItemMapper, DictItem, DictItemRepository, IDictItemRepository, Long>
-	implements IDubboDictItemService {
+	implements IDubboDictItemRpc {
 
 }

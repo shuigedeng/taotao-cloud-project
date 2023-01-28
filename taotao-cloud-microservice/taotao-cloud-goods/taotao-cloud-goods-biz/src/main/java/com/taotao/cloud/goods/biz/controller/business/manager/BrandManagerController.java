@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 管理端,品牌接口
+ * 管理端-品牌接口
  *
  * @author shuigedeng
  * @version 2022.04
@@ -59,7 +59,7 @@ public class BrandManagerController {
 	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/all/available")
+	@GetMapping(value = "/all/availables")
 	public Result<List<BrandVO>> getAllAvailable() {
 		List<Brand> list = brandService.getAllAvailable();
 		return Result.success(BrandConvert.INSTANCE.convert(list));
@@ -69,8 +69,8 @@ public class BrandManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<BrandVO>> page(@Validated BrandPageQuery page) {
-		IPage<Brand> brandPage = brandService.getBrandsByPage(page);
+	public Result<PageResult<BrandVO>> brandsQueryPage(@Validated BrandPageQuery page) {
+		IPage<Brand> brandPage = brandService.brandsQueryPage(page);
 		return Result.success(PageResult.convertMybatisPage(brandPage, BrandVO.class));
 	}
 

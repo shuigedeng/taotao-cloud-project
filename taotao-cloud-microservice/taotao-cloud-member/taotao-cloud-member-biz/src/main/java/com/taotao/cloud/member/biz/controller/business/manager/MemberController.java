@@ -10,7 +10,7 @@ import com.taotao.cloud.member.api.model.vo.MemberSearchVO;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.convert.MemberConvert;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,14 +39,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-会员管理API", description = "管理端-会员管理API")
 public class MemberController {
 
-	private final MemberService memberService;
+	private final IMemberService memberService;
 
 	@Operation(summary = "会员分页列表", description = "会员分页列表")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageResult<MemberVO>> getByPage(MemberSearchPageQuery memberSearchPageQuery) {
-		IPage<Member> memberPage = memberService.getMemberPage(memberSearchPageQuery);
+	public Result<PageResult<MemberVO>> pageQuery(MemberSearchPageQuery memberSearchPageQuery) {
+		IPage<Member> memberPage = memberService.pageQuery(memberSearchPageQuery);
 		return Result.success(PageResult.convertMybatisPage(memberPage, MemberVO.class));
 	}
 
@@ -54,7 +54,7 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberVO> get(@PathVariable Long id) {
+	public Result<MemberVO> getById(@PathVariable Long id) {
 		Member member = memberService.getById(id);
 		return Result.success(MemberConvert.INSTANCE.convert(member));
 	}
@@ -63,7 +63,7 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public Result<Boolean> save(@Valid MemberAddDTO member) {
+	public Result<Boolean> addMember(@Valid MemberAddDTO member) {
 		return Result.success(memberService.addMember(member));
 	}
 
@@ -71,7 +71,7 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
-	public Result<Boolean> update(@Valid ManagerMemberEditDTO managerMemberEditDTO) {
+	public Result<Boolean> updateMember(@Valid ManagerMemberEditDTO managerMemberEditDTO) {
 		return Result.success(memberService.updateMember(managerMemberEditDTO));
 	}
 
@@ -88,7 +88,7 @@ public class MemberController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/num")
-	public Result<Long> getByPage(MemberSearchVO memberSearchVO) {
+	public Result<Long> getMemberNum(MemberSearchVO memberSearchVO) {
 		return Result.success(memberService.getMemberNum(memberSearchVO));
 	}
 

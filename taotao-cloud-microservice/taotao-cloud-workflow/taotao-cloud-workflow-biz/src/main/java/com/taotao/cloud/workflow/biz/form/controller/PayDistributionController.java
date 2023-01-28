@@ -4,7 +4,7 @@ import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.PayDistributionEntity;
-import com.taotao.cloud.workflow.api.common.model.form.paydistribution.PayDistributionInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.paydistribution.PayDistributionInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.PayDistributionService;
 
 import org.hibernate.exception.DataException;

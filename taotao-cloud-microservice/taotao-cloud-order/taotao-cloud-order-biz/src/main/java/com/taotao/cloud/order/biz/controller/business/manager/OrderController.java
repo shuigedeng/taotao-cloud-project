@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.model.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import zipkin2.storage.Traces;
 
 /**
  * 管理端,订单API
@@ -56,16 +58,16 @@ public class OrderController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
-	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
-		return Result.success(orderService.queryByParams(orderPageQuery));
+	public Result<PageResult<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
+		IPage<OrderSimpleVO> page = orderService.pageQuery(orderPageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, OrderSimpleVO.class));
 	}
 
 	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/queryExportOrder")
-	public Result<List<OrderExportVO>> queryExportOrder(
-			OrderPageQuery orderPageQuery) {
+	public Result<List<OrderExportVO>> queryExportOrder(OrderPageQuery orderPageQuery) {
 		return Result.success(orderService.queryExportOrder(orderPageQuery));
 	}
 
@@ -115,7 +117,7 @@ public class OrderController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
-	public Result<Object> getTraces(
+	public Result<Traces> getTraces(
 			@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
 		return Result.success(orderService.getTraces(orderSn));
 	}

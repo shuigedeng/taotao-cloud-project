@@ -1,7 +1,8 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.common.util.context.SpringContext;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNewService;
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.util.HashMap;

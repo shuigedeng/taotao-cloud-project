@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -32,7 +31,6 @@ public class EsGoodsIndexVO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -6856471777036048874L;
 
-	@Id
 	private Long id;
 
 	/**

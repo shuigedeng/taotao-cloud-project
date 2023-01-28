@@ -16,14 +16,14 @@ import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
-import com.taotao.cloud.promotion.biz.service.business.CouponService;
-import com.taotao.cloud.promotion.biz.service.business.FullDiscountService;
-import com.taotao.cloud.promotion.biz.service.business.PintuanService;
-import com.taotao.cloud.promotion.biz.service.business.PointsGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionService;
-import com.taotao.cloud.promotion.biz.service.business.SeckillApplyService;
-import com.taotao.cloud.promotion.biz.service.business.SeckillService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponService;
+import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
+import com.taotao.cloud.promotion.biz.service.business.IPintuanService;
+import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,45 +42,45 @@ import java.util.Map;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class PromotionServiceImpl implements PromotionService {
+public class PromotionServiceImpl implements IPromotionService {
 	/**
 	 * 秒杀
 	 */
 	@Autowired
-	private SeckillService seckillService;
+	private ISeckillService seckillService;
 	/**
 	 * 秒杀申请
 	 */
 	@Autowired
-	private SeckillApplyService seckillApplyService;
+	private ISeckillApplyService seckillApplyService;
 	/**
 	 * 满额活动
 	 */
 	@Autowired
-	private FullDiscountService fullDiscountService;
+	private IFullDiscountService fullDiscountService;
 	/**
 	 * 拼团
 	 */
 	@Autowired
-	private PintuanService pintuanService;
+	private IPintuanService pintuanService;
 	/**
 	 * 优惠券
 	 */
 	@Autowired
-	private CouponService couponService;
+	private ICouponService couponService;
 	/**
 	 * 促销商品
 	 */
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 	/**
 	 * 积分商品
 	 */
 	@Autowired
-	private PointsGoodsService pointsGoodsService;
+	private IPointsGoodsService pointsGoodsService;
 
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 
 
 	/**

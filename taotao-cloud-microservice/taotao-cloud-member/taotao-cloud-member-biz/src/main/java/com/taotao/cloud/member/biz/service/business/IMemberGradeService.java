@@ -11,5 +11,5 @@ import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 public interface IMemberGradeService extends IService<MemberGrade> {
 
 
-	IPage<MemberGrade> getByPage(PageQuery PageQuery);
+	IPage<MemberGrade> queryPage(PageQuery pageQuery);
 }

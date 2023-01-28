@@ -7,22 +7,20 @@ import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.workflow.api.common.base.Pagination;
-import com.taotao.cloud.workflow.api.common.constant.MsgCode;
-import com.taotao.cloud.workflow.api.common.database.model.entity.DbLinkEntity;
-import com.taotao.cloud.workflow.api.common.util.DateUtil;
-import com.taotao.cloud.workflow.api.common.util.RandomUtil;
-import com.taotao.cloud.workflow.api.common.util.UserProvider;
-import com.taotao.cloud.workflow.api.common.util.context.SpringContext;
-import com.taotao.cloud.workflow.api.common.util.wxutil.HttpUtil;
-import com.taotao.cloud.workflow.api.model.FormAllModel;
-import com.taotao.cloud.workflow.api.model.FormEnum;
-import com.taotao.cloud.workflow.api.model.visiual.FlowKeyConsts;
-import com.taotao.cloud.workflow.api.model.visiual.FormCloumnUtil;
-import com.taotao.cloud.workflow.api.model.visiual.FormDataModel;
-import com.taotao.cloud.workflow.api.model.visiual.RecursionForm;
-import com.taotao.cloud.workflow.api.model.visiual.TableModel;
-import com.taotao.cloud.workflow.api.model.visiual.fields.FieLdsModel;
+import com.taotao.cloud.workflow.biz.common.base.Pagination;
+import com.taotao.cloud.workflow.biz.common.base.UserInfo;
+import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
+import com.taotao.cloud.workflow.biz.common.database.model.entity.DbLinkEntity;
+import com.taotao.cloud.workflow.biz.common.model.FormAllModel;
+import com.taotao.cloud.workflow.biz.common.model.FormEnum;
+import com.taotao.cloud.workflow.biz.common.model.visiual.FormDataModel;
+import com.taotao.cloud.workflow.biz.common.model.visiual.RecursionForm;
+import com.taotao.cloud.workflow.biz.common.model.visiual.fields.FieLdsModel;
+import com.taotao.cloud.workflow.biz.common.util.DateUtil;
+import com.taotao.cloud.workflow.biz.common.util.RandomUtil;
+import com.taotao.cloud.workflow.biz.common.util.UserProvider;
+import com.taotao.cloud.workflow.biz.common.util.context.SpringContext;
+import com.taotao.cloud.workflow.biz.common.util.wxutil.HttpUtil;
 import com.taotao.cloud.workflow.api.vo.OrganizeEntity;
 import com.taotao.cloud.workflow.api.vo.PositionEntity;
 import com.taotao.cloud.workflow.api.vo.RoleEntity;
@@ -42,29 +40,29 @@ import com.taotao.cloud.workflow.biz.engine.enums.FlowRecordListEnum;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowTaskOperatorEnum;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowTaskStatusEnum;
-import com.taotao.cloud.workflow.api.common.model.engine.FlowHandleModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowBeforeInfoVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowSummary;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowTaskModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowTaskNodeModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowTaskOperatorModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowTaskOperatorRecordModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcandidate.FlowCandidateUserModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcandidate.FlowCandidateVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.FlowModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.FlowOperatordModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.childnode.ChildNode;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.childnode.FlowAssignModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.childnode.FormOperates;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.childnode.Properties;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.nodejson.ConditionList;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.nodejson.Custom;
-import com.taotao.cloud.workflow.api.common.model.engine.flowengine.shuntjson.nodejson.DateProperties;
-import com.taotao.cloud.workflow.api.common.model.engine.flowmessage.FlowMsgModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.method.TaskHandleIdStatus;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.method.TaskOperatoUser;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.method.TaskOperator;
+import com.taotao.cloud.workflow.biz.common.model.engine.FlowHandleModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBeforeInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowSummary;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowTaskModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowTaskNodeModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowTaskOperatorModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowTaskOperatorRecordModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcandidate.FlowCandidateUserModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcandidate.FlowCandidateVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowOperatordModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.childnode.ChildNode;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.childnode.FlowAssignModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.childnode.FormOperates;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.childnode.Properties;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.ConditionList;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.Custom;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.DateProperties;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowmessage.FlowMsgModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.method.TaskHandleIdStatus;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.method.TaskOperatoUser;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.method.TaskOperator;
 import com.taotao.cloud.workflow.biz.engine.service.FlowCandidatesService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowDelegateService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowEngineService;
@@ -207,7 +205,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 		//获取下一个节点
 		Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
 			.filter(t -> FlowNature.NodeStart.equals(t.getNodeType())).findFirst();
-		if (!first.isPresent()) {
+		if (first.isEmpty()) {
 			throw new WorkFlowException(MsgCode.COD001.get());
 		}
 		FlowTaskNodeEntity startNode = first.get();
@@ -353,7 +351,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 		//当前节点
 		Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
 			.filter(m -> m.getId().equals(operator.getTaskNodeId())).findFirst();
-		if (!first.isPresent()) {
+		if (first.isEmpty()) {
 			throw new WorkFlowException(MsgCode.COD001.get());
 		}
 		FlowTaskNodeEntity taskNode = first.get();
@@ -502,7 +500,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 		//当前节点
 		Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
 			.filter(m -> m.getId().equals(operator.getTaskNodeId())).findFirst();
-		if (!first.isPresent()) {
+		if (first.isEmpty()) {
 			throw new WorkFlowException(MsgCode.COD001.get());
 		}
 		FlowTaskNodeEntity taskNode = first.get();
@@ -1165,10 +1163,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 			id, handleStatus);
 		List<String> userIdAll = new ArrayList<>();
 		List<String> userIdList = recordListAll.stream()
-			.map(FlowTaskOperatorRecordEntity::getHandleId).collect(Collectors.toList());
+			.map(FlowTaskOperatorRecordEntity::getHandleId).toList();
 		List<String> operatorId = recordListAll.stream()
-			.filter(t -> StrUtil.isNotEmpty(t.getOperatorId()))
-			.map(FlowTaskOperatorRecordEntity::getOperatorId).collect(Collectors.toList());
+			.map(FlowTaskOperatorRecordEntity::getOperatorId)
+			.filter(StrUtil::isNotEmpty).toList();
 		userIdAll.addAll(userIdList);
 		userIdAll.addAll(operatorId);
 		List<UserEntity> userList = serviceUtil.getUserName(userIdAll);
@@ -1508,7 +1506,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 				taskNodeList);
 			Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
 				.filter(t -> FlowNature.NodeStart.equals(t.getNodeType())).findFirst();
-			if (!first.isPresent()) {
+			if (first.isEmpty()) {
 				throw new WorkFlowException(MsgCode.COD001.get());
 			}
 			FlowTaskNodeEntity startNodes = first.get();

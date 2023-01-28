@@ -74,7 +74,7 @@ public class CategorySpecificationManagerController {
 		if (categorySpecs != null && categorySpecs.length > 0) {
 			List<CategorySpecification> categorySpecifications = new ArrayList<>();
 			for (String categorySpec : categorySpecs) {
-				//categorySpecifications.add(new CategorySpecification(categoryId, categorySpec));
+				categorySpecifications.add(new CategorySpecification(categoryId, categorySpec));
 			}
 			categorySpecificationService.saveBatch(categorySpecifications);
 		}

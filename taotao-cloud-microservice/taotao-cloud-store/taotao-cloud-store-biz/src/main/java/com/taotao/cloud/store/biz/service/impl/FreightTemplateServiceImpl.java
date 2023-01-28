@@ -12,14 +12,14 @@ import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.store.api.web.vo.FreightTemplateChildVO;
-import com.taotao.cloud.store.api.web.vo.FreightTemplateInfoVO;
+import com.taotao.cloud.store.api.model.vo.FreightTemplateChildVO;
+import com.taotao.cloud.store.api.model.vo.FreightTemplateInfoVO;
 import com.taotao.cloud.store.biz.mapper.FreightTemplateMapper;
 import com.taotao.cloud.store.biz.mapstruct.IFreightTemplateChildMapStruct;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplate;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
-import com.taotao.cloud.store.biz.service.FreightTemplateChildService;
-import com.taotao.cloud.store.biz.service.FreightTemplateService;
+import com.taotao.cloud.store.biz.service.IFreightTemplateChildService;
+import com.taotao.cloud.store.biz.service.IFreightTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,12 +37,12 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMapper, FreightTemplate> implements
-	FreightTemplateService {
+		IFreightTemplateService {
 	/**
 	 * 配送子模板
 	 */
 	@Autowired
-	private FreightTemplateChildService freightTemplateChildService;
+	private IFreightTemplateChildService freightTemplateChildService;
 	/**
 	 * 缓存
 	 */

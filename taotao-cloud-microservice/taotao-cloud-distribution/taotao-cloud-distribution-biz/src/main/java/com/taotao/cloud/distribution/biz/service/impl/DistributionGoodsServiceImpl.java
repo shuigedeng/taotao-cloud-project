@@ -6,9 +6,10 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.distribution.api.web.query.DistributionGoodsPageQuery;
-import com.taotao.cloud.distribution.api.web.vo.DistributionGoodsVO;
+import com.taotao.cloud.distribution.api.model.query.DistributionGoodsPageQuery;
+import com.taotao.cloud.distribution.api.model.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.mapper.DistributionGoodsMapper;
+import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
@@ -37,7 +38,7 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 
 	@Override
 	public IPage<DistributionGoodsVO> goodsPage(DistributionGoodsPageQuery searchParams) {
@@ -121,7 +122,7 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
 		if (this.getOne(queryWrapper) != null) {
 			throw new BusinessException(ResultEnum.DISTRIBUTION_GOODS_BigDecimal);
 		}
-		GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+		GoodsSku goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(skuId);
 		if (!goodsSku.getStoreId().equals(storeId)) {
 			throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
 		}
