@@ -85,7 +85,7 @@ subprojects {
 
         customProperty 'project_version', { project.version }
         //branch = System.getenv('GIT_BRANCH')
-        branch = "springboot3"
+        branch = "dev"
         failOnNoGitDirectory = false
         //dotGitDirectory = "${project.rootDir}/.git"
     }
