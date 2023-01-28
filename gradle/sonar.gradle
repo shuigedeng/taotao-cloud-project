@@ -5,7 +5,6 @@ import groovy.json.JsonSlurper
 ext {
     APK_PACKAGE_NAME = 'asdfasdf'
     sonar = [
-
             //sonarqube 服务器地址
             host       : "http://10.1.120.7:9001",
             // todo 这里写上sonar后台自己生成的token

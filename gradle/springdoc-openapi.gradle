@@ -8,6 +8,6 @@ openApi {
 //    groupedApiMappings.set(["https://localhost:8080/v3/api-docs/groupA" to "swagger-groupA.json",
 //                            "https://localhost:8080/v3/api-docs/groupB" to "swagger-groupB.json"])
     customBootRun {
-        args.set(["--spring.profiles.active=special"])
+        args.set(["--spring.profiles.active=dev"])
     }
 }
