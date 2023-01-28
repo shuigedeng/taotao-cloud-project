@@ -21,6 +21,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
+import com.taotao.cloud.sys.biz.model.entity.system.QUser;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
@@ -51,7 +52,7 @@ public class UserServiceImpl extends
 	BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
 	implements IUserService {
 
-	//private final static QUser USER = QUser.user;
+	private final static QUser USER = QUser.user;
 
 	private final static String DEFAULT_PASSWORD = "123456";
 	private final static String DEFAULT_USERNAME = "admin";

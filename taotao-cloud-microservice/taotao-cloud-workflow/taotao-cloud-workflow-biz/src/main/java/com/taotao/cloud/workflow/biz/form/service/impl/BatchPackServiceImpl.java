@@ -11,7 +11,7 @@ import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.BatchPackEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.BatchPackMapper;
-import com.taotao.cloud.workflow.api.common.model.form.batchpack.BatchPackForm;
+import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackForm;
 import com.taotao.cloud.workflow.biz.form.service.BatchPackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

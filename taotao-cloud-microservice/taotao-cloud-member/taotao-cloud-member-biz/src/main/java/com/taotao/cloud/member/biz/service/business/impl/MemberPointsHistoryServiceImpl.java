@@ -13,7 +13,7 @@ import com.taotao.cloud.member.biz.mapper.IMemberPointsHistoryMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 import com.taotao.cloud.member.biz.service.business.IMemberPointsHistoryService;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class MemberPointsHistoryServiceImpl extends
 
 
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 
 	@Override
 	public MemberPointsHistoryVO getMemberPointsHistoryVO(Long memberId) {
@@ -45,26 +45,26 @@ public class MemberPointsHistoryServiceImpl extends
 	}
 
 	@Override
-	public IPage<MemberPointsHistory> getByPage(PageQuery PageQuery) {
+	public IPage<MemberPointsHistory> pageQuery(PageQuery pageQuery) {
 		LambdaQueryWrapper<MemberPointsHistory> queryWrapper = Wrappers.lambdaQuery();
 		queryWrapper.eq(MemberPointsHistory::getMemberId, SecurityUtils.getUserId());
 		queryWrapper.orderByDesc(MemberPointsHistory::getCreateTime);
-		return this.page(PageQuery.buildMpPage(), queryWrapper);
+		return this.page(pageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override
-	public IPage<MemberPointsHistory> memberPointsHistoryList(PageQuery PageQuery,
+	public IPage<MemberPointsHistory> memberPointsHistoryPageQuery(PageQuery pageQuery,
 															  Long memberId, String memberName) {
 		LambdaQueryWrapper<MemberPointsHistory> lambdaQueryWrapper = new LambdaQueryWrapper<MemberPointsHistory>()
 			.eq(memberId != null, MemberPointsHistory::getMemberId, memberId)
 			.like(memberName != null, MemberPointsHistory::getMemberName, memberName);
 
 		//如果排序为空，则默认创建时间倒序
-		if (StringUtils.isNotBlank(PageQuery.getSort())) {
-			PageQuery.setSort("createTime");
-			PageQuery.setOrder("desc");
+		if (StringUtils.isNotBlank(pageQuery.getSort())) {
+			pageQuery.setSort("createTime");
+			pageQuery.setOrder("desc");
 		}
-		return this.page(PageQuery.buildMpPage(), lambdaQueryWrapper);
+		return this.page(pageQuery.buildMpPage(), lambdaQueryWrapper);
 	}
 
 }

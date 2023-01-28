@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.IncomeRecognitionEntity;
-import com.taotao.cloud.workflow.api.common.model.form.incomerecognition.IncomeRecognitionForm;
-import com.taotao.cloud.workflow.api.common.model.form.incomerecognition.IncomeRecognitionInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.incomerecognition.IncomeRecognitionForm;
+import com.taotao.cloud.workflow.biz.common.model.form.incomerecognition.IncomeRecognitionInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.IncomeRecognitionService;
 
 import jakarta.validation.Valid;

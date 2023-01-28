@@ -3,6 +3,7 @@ package com.taotao.cloud.order.biz.controller.business.buyer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import zipkin2.storage.Traces;
 
 /**
  * 买家端,订单API
@@ -49,10 +51,11 @@ public class OrderController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
+	public Result<PageResult<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
 		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 		orderPageQuery.setMemberId(currentUser.getUserId());
-		return Result.success(orderService.queryByParams(orderPageQuery));
+		IPage<OrderSimpleVO> page = orderService.pageQuery(orderPageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, OrderSimpleVO.class));
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细")
@@ -108,7 +111,7 @@ public class OrderController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/traces/{orderSn}")
-	public Result<Object> getTraces(
+	public Result<Traces> getTraces(
 			@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		return Result.success(orderService.getTraces(orderSn));
@@ -118,7 +121,7 @@ public class OrderController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/receipt/{orderSn}")
-	public Result<Object> invoice(
+	public Result<Boolean> invoice(
 			@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		return Result.success(orderService.invoice(orderSn));

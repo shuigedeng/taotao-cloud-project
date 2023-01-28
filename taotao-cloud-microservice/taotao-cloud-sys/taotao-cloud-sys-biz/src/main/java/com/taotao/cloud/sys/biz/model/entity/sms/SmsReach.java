@@ -30,7 +30,7 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = SmsReach.TABLE_NAME, comment = "短信任务表")
 public class SmsReach extends BaseSuperEntity<SmsReach, Long> {
 
-	public static final String TABLE_NAME = "tt_sys_sms_reach";
+	public static final String TABLE_NAME = "tt_tt_sms_reach";
 
 	@Column(name = "sign_name", columnDefinition = "varchar(2000) not null comment '签名名称'")
 	private String signName;

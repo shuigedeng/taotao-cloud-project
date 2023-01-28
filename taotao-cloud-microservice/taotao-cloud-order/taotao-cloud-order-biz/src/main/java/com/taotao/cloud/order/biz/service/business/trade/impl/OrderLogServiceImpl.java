@@ -31,7 +31,7 @@ public class OrderLogServiceImpl extends ServiceImpl<IOrderLogMapper, OrderLog> 
 	}
 
 	@Override
-	public IPage<OrderLog> getByPage(OrderLogPageQuery orderLogPageQuery) {
+	public IPage<OrderLog> pageQuery(OrderLogPageQuery orderLogPageQuery) {
 		LambdaQueryWrapper<OrderLog> lambdaQueryWrapper = Wrappers.lambdaQuery();
 		//todo 需要设置条件
 

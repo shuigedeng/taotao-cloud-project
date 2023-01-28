@@ -3,7 +3,7 @@ package com.taotao.cloud.media.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.media.api.feign.fallback.FeignMediaFallback;
-import com.taotao.cloud.media.api.vo.FileVO;
+import com.taotao.cloud.media.api.model.vo.FileVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

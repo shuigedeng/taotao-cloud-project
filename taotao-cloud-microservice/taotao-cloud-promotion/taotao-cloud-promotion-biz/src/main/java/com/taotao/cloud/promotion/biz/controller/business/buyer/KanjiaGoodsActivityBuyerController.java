@@ -14,9 +14,9 @@ import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivitySearchQuery;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityVO;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityLogService;
-import com.taotao.cloud.promotion.biz.service.business.KanjiaActivityService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityLogService;
+import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,17 +41,17 @@ public class KanjiaGoodsActivityBuyerController {
 	 * 砍价活动商品
 	 */
 	@Autowired
-	private KanjiaActivityGoodsService kanJiaActivityGoodsService;
+	private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
 	/**
 	 * 帮砍记录
 	 */
 	@Autowired
-	private KanjiaActivityLogService kanJiaActivityLogService;
+	private IKanjiaActivityLogService kanJiaActivityLogService;
 	/**
 	 * 砍价活动
 	 */
 	@Autowired
-	private KanjiaActivityService kanJiaActivityService;
+	private IKanjiaActivityService kanJiaActivityService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

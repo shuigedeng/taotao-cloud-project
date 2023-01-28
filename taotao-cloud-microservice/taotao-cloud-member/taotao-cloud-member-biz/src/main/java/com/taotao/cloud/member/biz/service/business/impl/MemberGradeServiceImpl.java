@@ -18,7 +18,7 @@ public class MemberGradeServiceImpl extends ServiceImpl<IMemberGradeMapper, Memb
 	IMemberGradeService {
 
 	@Override
-	public IPage<MemberGrade> getByPage(PageQuery PageQuery) {
-		return this.page(PageQuery.buildMpPage());
+	public IPage<MemberGrade> queryPage(PageQuery pageQuery) {
+		return this.page(pageQuery.buildMpPage());
 	}
 }

@@ -8,8 +8,8 @@ import com.taotao.cloud.promotion.api.model.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.model.query.SeckillPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
-import com.taotao.cloud.promotion.biz.service.business.SeckillApplyService;
-import com.taotao.cloud.promotion.biz.service.business.SeckillService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,9 +33,9 @@ import java.util.Objects;
 @RequestMapping("/store/promotion/seckill")
 public class SeckillStoreController {
     @Autowired
-    private SeckillService seckillService;
+    private ISeckillService seckillService;
     @Autowired
-    private SeckillApplyService seckillApplyService;
+    private ISeckillApplyService seckillApplyService;
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping

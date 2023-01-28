@@ -31,6 +31,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import lombok.AllArgsConstructor;
 import org.slf4j.MDC;
@@ -149,7 +150,7 @@ public class DictServiceImpl extends
 
 		try {
 			Thread.sleep(3000);
-		} catch (InterruptedException e) {
+		} catch (InterruptedException ignored) {
 		}
 
 		Dict result = Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now())
@@ -162,7 +163,7 @@ public class DictServiceImpl extends
 
 		LogUtils.info("findAsyncByCode: {}", result);
 
-		return new AsyncResult<>(result);
+		return CompletableFuture.completedFuture(result);
 	}
 
 	@Override

@@ -92,7 +92,7 @@ public interface IGoodsService extends BaseSuperService<Goods, Long> {
 	 * @return {@link IPage }<{@link Goods }>
 	 * @since 2022-04-27 17:00:16
 	 */
-	IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery);
+	IPage<Goods> goodsQueryPage(GoodsPageQuery goodsPageQuery);
 
 	/**
 	 * 商品查询

@@ -1,9 +1,8 @@
 package com.taotao.cloud.report.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.report.api.web.dto.MemberStatisticsDTO;
-import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsService;
-import com.taotao.cloud.report.api.web.vo.MemberStatisticsVO;
+import com.taotao.cloud.report.api.model.dto.MemberStatisticsDTO;
+import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsApi;
+import com.taotao.cloud.report.api.model.vo.MemberStatisticsVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 import java.util.Date;
@@ -14,11 +13,11 @@ import java.util.Date;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignMemberStatisticsFallbackImpl implements FallbackFactory<IFeignMemberStatisticsService> {
+public class FeignMemberStatisticsFallbackImpl implements FallbackFactory<IFeignMemberStatisticsApi> {
 
 	@Override
-	public IFeignMemberStatisticsService create(Throwable throwable) {
-		return new IFeignMemberStatisticsService() {
+	public IFeignMemberStatisticsApi create(Throwable throwable) {
+		return new IFeignMemberStatisticsApi() {
 			@Override
 			public MemberStatisticsVO findMemberStatistics() {
 				return null;

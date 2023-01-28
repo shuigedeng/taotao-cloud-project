@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.auth.api.feign.fallback;
 
-import com.taotao.cloud.auth.api.feign.IFeignClientService;
+import com.taotao.cloud.auth.api.feign.IFeignClientApi;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -27,10 +27,10 @@ import org.springframework.stereotype.Component;
  * @version 2022.03
  */
 @Component
-public class FeignClientFallback implements FallbackFactory<IFeignClientService> {
+public class FeignClientFallback implements FallbackFactory<IFeignClientApi> {
     @Override
-    public IFeignClientService create(Throwable throwable) {
-        return new IFeignClientService() {
+    public IFeignClientApi create(Throwable throwable) {
+        return new IFeignClientApi() {
 
         };
     }

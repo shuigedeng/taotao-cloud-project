@@ -30,8 +30,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class CustomWordsServiceImpl extends
-		BaseSuperServiceImpl<ICustomWordsMapper, CustomWords, CustomWordsRepository, ICustomWordsRepository, Long> implements
-		ICustomWordsService {
+		BaseSuperServiceImpl<ICustomWordsMapper, CustomWords, CustomWordsRepository, ICustomWordsRepository, Long>
+	implements ICustomWordsService {
 
 	@Override
 	public String deploy() {
@@ -93,15 +93,14 @@ public class CustomWordsServiceImpl extends
 			throw new BusinessException(ResultEnum.CUSTOM_WORDS_NOT_EXIST_ERROR);
 		}
 
-		return this.updateById(
-				CustomWordsConvert.INSTANCE.convert(customWordsVO));
+		return this.updateById(CustomWordsConvert.INSTANCE.convert(customWordsVO));
 	}
 
 	@Override
-	public IPage<CustomWords> getCustomWordsByPage(String words, PageQuery PageQuery) {
+	public IPage<CustomWords> getCustomWordsByPage(String words, PageQuery pageQuery) {
 		LambdaQueryWrapper<CustomWords> queryWrapper = new LambdaQueryWrapper<CustomWords>().like(
 				CustomWords::getName, words);
-		return this.page(PageQuery.buildMpPage(), queryWrapper);
+		return this.page(pageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override

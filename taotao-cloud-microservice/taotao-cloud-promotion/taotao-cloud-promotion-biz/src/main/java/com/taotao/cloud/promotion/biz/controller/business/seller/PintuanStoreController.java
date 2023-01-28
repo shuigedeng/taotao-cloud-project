@@ -11,8 +11,8 @@ import com.taotao.cloud.promotion.api.model.query.PintuanPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
 import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
-import com.taotao.cloud.promotion.biz.service.business.PintuanService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPintuanService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Collections;
@@ -41,9 +41,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PintuanStoreController {
 
 	@Autowired
-	private PintuanService pintuanService;
+	private IPintuanService pintuanService;
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

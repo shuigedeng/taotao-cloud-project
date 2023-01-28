@@ -19,10 +19,11 @@ import com.taotao.cloud.promotion.api.model.vo.SeckillVO;
 import com.taotao.cloud.promotion.biz.mapper.SeckillMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
-import com.taotao.cloud.promotion.biz.service.business.SeckillApplyService;
-import com.taotao.cloud.promotion.biz.service.business.SeckillService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.model.vo.setting.SeckillSetting;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,21 +43,21 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMapper, Seckill> implements
-	SeckillService {
+		ISeckillService {
 
 	/**
 	 * 商品索引
 	 */
 	@Autowired
-	private IFeignEsGoodsIndexApi goodsIndexService;
+	private IFeignEsGoodsIndexApi feignEsGoodsIndexApi;
 	/**
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi feignSettingApi;
 
 	@Autowired
-	private SeckillApplyService seckillApplyService;
+	private ISeckillApplyService seckillApplyService;
 
 
 	@Override
@@ -76,11 +77,11 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
 		for (Seckill seckill : seckillList) {
 			seckill.setStartTime(null);
 			seckill.setEndTime(null);
-			this.goodsIndexService.updateEsGoodsIndexAllByList(seckill, PromotionTypeEnum.SECKILL.name() + "-" + seckill.getId());
+			this.feignEsGoodsIndexApi.updateEsGoodsIndexAllByList(seckill, PromotionTypeEnum.SECKILL.name() + "-" + seckill.getId());
 		}
 		this.remove(new QueryWrapper<>());
 
-		Result<SettingVO> settingResult = settingService.get(SettingCategoryEnum.SECKILL_SETTING.name());
+		Result<SettingVO> settingResult = feignSettingApi.get(SettingCategoryEnum.SECKILL_SETTING.name());
 		SeckillSetting seckillSetting = new Gson().fromJson(settingResult.getSettingValue(), SeckillSetting.class);
 
 		for (int i = 1; i <= PRE_CREATION; i++) {
@@ -126,7 +127,7 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
 					this.setSeckillApplyTime(seckill, seckillApply);
 					log.info("更新限时抢购商品状态:{}", seckill);
 					String promotionKey = PromotionTypeEnum.SECKILL.name() + "-" + seckillApply.getTimeLine();
-					this.goodsIndexService.updateEsGoodsIndexPromotions(seckillApply.getSkuId(), seckill, promotionKey, seckillApply.getPrice());
+					this.feignEsGoodsIndexApi.updateEsGoodsIndexPromotions(seckillApply.getSkuId(), seckill, promotionKey, seckillApply.getPrice());
 				}
 			}
 		}

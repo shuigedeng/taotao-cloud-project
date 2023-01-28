@@ -17,8 +17,8 @@ import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.mapper.MemberCouponMapper;
-import com.taotao.cloud.promotion.biz.service.business.CouponService;
-import com.taotao.cloud.promotion.biz.service.business.MemberCouponService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponService;
+import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,13 +40,13 @@ import java.util.Objects;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, MemberCoupon> implements
-	MemberCouponService {
+        IMemberCouponService {
 
     /**
      * 优惠券
      */
     @Autowired
-    private CouponService couponService;
+    private ICouponService couponService;
 
     @Override
     public void checkCouponLimit(String couponId, String memberId) {

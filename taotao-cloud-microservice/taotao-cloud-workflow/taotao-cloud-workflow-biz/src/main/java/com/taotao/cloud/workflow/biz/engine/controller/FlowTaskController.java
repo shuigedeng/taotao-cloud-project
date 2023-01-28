@@ -3,8 +3,8 @@ package com.taotao.cloud.workflow.biz.engine.controller;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskForm;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskForm;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskInfoVO;
 import com.taotao.cloud.workflow.biz.engine.service.FlowDynamicService;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Validated
-@Tag(name = "工作流程-流程引擎", description = "工作流程-流程引擎")
+@Tag(name = "工作流程-流程任务", description = "工作流程-流程任务")
 @RestController
 @RequestMapping("/api/workflow/engine/flow-task")
 public class FlowTaskController {

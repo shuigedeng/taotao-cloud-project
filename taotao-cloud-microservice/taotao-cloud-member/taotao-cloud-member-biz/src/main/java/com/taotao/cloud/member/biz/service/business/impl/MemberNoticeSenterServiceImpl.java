@@ -11,7 +11,7 @@ import com.taotao.cloud.member.biz.model.entity.MemberNotice;
 import com.taotao.cloud.member.biz.model.entity.MemberNoticeSenter;
 import com.taotao.cloud.member.biz.service.business.IMemberNoticeSenterService;
 import com.taotao.cloud.member.biz.service.business.IMemberNoticeService;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,7 +32,7 @@ public class MemberNoticeSenterServiceImpl extends ServiceImpl<IMemberNoticeSent
 	 * 会员
 	 */
 	@Autowired
-	private MemberService memberService;
+	private IMemberService memberService;
 	/**
 	 * 会员站内信
 	 */

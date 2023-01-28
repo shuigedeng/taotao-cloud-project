@@ -62,14 +62,14 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	/**
 	 * 商品规格
 	 */
-	private final IFeignGoodsSkuApi goodsSkuService;
+	private final IFeignGoodsSkuApi feignGoodsSkuApi;
 	/**
 	 * 交易投诉沟通
 	 */
 	private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 
 	@Override
-	public IPage<OrderComplaint> getOrderComplainByPage(OrderComplaintPageQuery pageQuery) {
+	public IPage<OrderComplaint> pageQuery(OrderComplaintPageQuery pageQuery) {
 		LambdaQueryWrapper<OrderComplaint> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStatus()),OrderComplaint::getComplainStatus, pageQuery.getStatus());
 		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getOrderSn()),OrderComplaint::getOrderSn, pageQuery.getOrderSn());
@@ -124,7 +124,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 			BeanUtils.copyProperties(orderComplaintDTO, orderComplaint);
 
 			//获取商品规格信息
-			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(orderItem.getSkuId());
+			GoodsSkuSpecGalleryVO goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(orderItem.getSkuId());
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.COMPLAINT_SKU_EMPTY_ERROR);
 			}

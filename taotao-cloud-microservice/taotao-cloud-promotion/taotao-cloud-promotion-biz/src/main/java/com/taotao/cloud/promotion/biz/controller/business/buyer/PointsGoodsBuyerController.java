@@ -7,8 +7,8 @@ import com.taotao.cloud.promotion.api.model.query.PointsGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
-import com.taotao.cloud.promotion.biz.service.business.PointsGoodsCategoryService;
-import com.taotao.cloud.promotion.biz.service.business.PointsGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsCategoryService;
+import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PointsGoodsBuyerController {
 
 	@Autowired
-	private PointsGoodsService pointsGoodsService;
+	private IPointsGoodsService pointsGoodsService;
 	@Autowired
-	private PointsGoodsCategoryService pointsGoodsCategoryService;
+	private IPointsGoodsCategoryService pointsGoodsCategoryService;
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")

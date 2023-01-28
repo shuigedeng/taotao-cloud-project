@@ -32,8 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/remote/mall/dict")
-@Tag(name = "移动端-字典API", description = "移动端-字典API")
+@RequestMapping("/feign/goods")
+@Tag(name = "内部服务-商品API", description = "内部服务-商品API")
 public class FeignGoodsController extends BaseBusinessController<IGoodsService, Goods, Long> {
 
 }

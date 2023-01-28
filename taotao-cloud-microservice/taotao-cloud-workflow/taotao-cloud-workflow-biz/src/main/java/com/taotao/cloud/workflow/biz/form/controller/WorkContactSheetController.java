@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.WorkContactSheetEntity;
-import com.taotao.cloud.workflow.api.common.model.form.workcontactsheet.WorkContactSheetForm;
-import com.taotao.cloud.workflow.api.common.model.form.workcontactsheet.WorkContactSheetInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.workcontactsheet.WorkContactSheetForm;
+import com.taotao.cloud.workflow.biz.common.model.form.workcontactsheet.WorkContactSheetInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.WorkContactSheetService;
 
 import org.hibernate.exception.DataException;

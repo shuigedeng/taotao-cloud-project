@@ -68,8 +68,8 @@ import org.elasticsearch.script.ScriptType;
 import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
 import org.springframework.data.elasticsearch.client.erhlc.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.stereotype.Service;
@@ -104,13 +104,11 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Autowired
 	private ElasticsearchProperties elasticsearchProperties;
 	@Autowired
-	private EsGoodsIndexRepository goodsIndexRepository;
+	private EsGoodsIndexRepository esGoodsIndexRepository;
 	@Autowired
 	private IEsGoodsSearchService goodsSearchService;
 	@Autowired
 	private IGoodsWordsService goodsWordsService;
-	@Autowired
-	private IFeignPromotionApi feignPromotionService;
 	@Autowired
 	private IGoodsSkuService goodsSkuService;
 	@Autowired
@@ -123,20 +121,15 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	private IStoreGoodsLabelService storeGoodsLabelService;
 	@Autowired
 	private RedisRepository redisRepository;
-	/**
-	 * rocketMq
-	 */
 	@Autowired
 	private RocketMQTemplate rocketMQTemplate;
-	/**
-	 * rocketMq配置
-	 */
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;
-
 	@Autowired
 	@Qualifier("elasticsearchRestTemplate")
 	private ElasticsearchRestTemplate restTemplate;
+	@Autowired
+	private IFeignPromotionApi feignPromotionApi;
 
 	@Override
 	public void init() {
@@ -227,7 +220,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 				wordsToDb(token.getTerm());
 			}
 			//生成索引
-			goodsIndexRepository.save(goods);
+			esGoodsIndexRepository.save(goods);
 		} catch (Exception e) {
 			LogUtils.error("为商品[" + goods.getGoodsName() + "]生成索引异常", e);
 		}
@@ -236,7 +229,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 	@Override
 	public Boolean updateIndex(EsGoodsIndex goods) {
-		goodsIndexRepository.save(goods);
+		esGoodsIndexRepository.save(goods);
 		return true;
 	}
 
@@ -256,7 +249,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 				ReflectUtil.setFieldValue(goodsIndex, entry.getValue(), fieldValue);
 			}
 		}
-		goodsIndexRepository.save(goodsIndex);
+		esGoodsIndexRepository.save(goodsIndex);
 		return true;
 	}
 
@@ -320,22 +313,23 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	public Boolean deleteIndex(EsGoodsIndex goods) {
 		if (ObjectUtil.isEmpty(goods)) {
 			//如果对象为空，则删除全量
-			goodsIndexRepository.deleteAll();
+			esGoodsIndexRepository.deleteAll();
 		}
-		goodsIndexRepository.delete(goods);
+		esGoodsIndexRepository.delete(goods);
 		return true;
 	}
 
 	@Override
 	public Boolean deleteIndexById(Long id) {
-		goodsIndexRepository.deleteById(id);
+		esGoodsIndexRepository.deleteById(id);
 		return true;
 	}
 
 	@Override
 	public Boolean deleteIndexByIds(List<Long> ids) {
-		NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-		queryBuilder.withQuery(QueryBuilders.termsQuery("id", ids.toArray()));
+		NativeQueryBuilder queryBuilder = new NativeQueryBuilder();
+		queryBuilder.withQuery(QueryBuilders.termsQuery("id", ids.toArray()).toQuery());
+
 		this.restTemplate.delete(queryBuilder.build(), EsGoodsIndex.class);
 		return true;
 	}
@@ -371,7 +365,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		resultMap.put(KEY_PROCESSED, 0);
 		redisRepository.set(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
 		if (!goodsIndexList.isEmpty()) {
-			goodsIndexRepository.deleteAll();
+			esGoodsIndexRepository.deleteAll();
 			for (EsGoodsIndex goodsIndex : goodsIndexList) {
 				try {
 					addIndex(goodsIndex);
@@ -459,7 +453,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 			}
 		} else {
 			//否则是平台活动
-			Iterable<EsGoodsIndex> all = goodsIndexRepository.findAll();
+			Iterable<EsGoodsIndex> all = esGoodsIndexRepository.findAll();
 			//查询出全部商品
 			goodsIndices = new ArrayList<>(IterableUtil.toCollection(all));
 		}
@@ -527,7 +521,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Override
 	public Boolean deleteEsGoodsPromotionByPromotionKey(String promotionsKey) {
 		BulkRequest bulkRequest = new BulkRequest();
-		for (EsGoodsIndex goodsIndex : this.goodsIndexRepository.findAll()) {
+		for (EsGoodsIndex goodsIndex : this.esGoodsIndexRepository.findAll()) {
 			UpdateRequest updateRequest = this.removePromotionByPromotionKey(goodsIndex,
 				promotionsKey);
 			if (updateRequest != null) {
@@ -563,7 +557,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 */
 	@Override
 	public Boolean cleanInvalidPromotion() {
-		Iterable<EsGoodsIndex> all = goodsIndexRepository.findAll();
+		Iterable<EsGoodsIndex> all = esGoodsIndexRepository.findAll();
 		for (EsGoodsIndex goodsIndex : all) {
 			Map<String, Object> promotionMap = goodsIndex.getPromotionMap();
 			//获取商品索引
@@ -579,13 +573,13 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 				});
 			}
 		}
-		goodsIndexRepository.saveAll(all);
+		esGoodsIndexRepository.saveAll(all);
 		return true;
 	}
 
 	@Override
 	public EsGoodsIndex findById(Long id) {
-		Optional<EsGoodsIndex> goodsIndex = goodsIndexRepository.findById(id);
+		Optional<EsGoodsIndex> goodsIndex = esGoodsIndexRepository.findById(id);
 		if (goodsIndex.isEmpty()) {
 			LogUtils.error("商品skuId为" + id + "的es索引不存在！");
 			return null;
@@ -654,7 +648,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		EsGoodsIndex index = new EsGoodsIndex(goodsSku, goodsParamDTOS);
 
 		//获取活动信息
-		Map<String, Object> goodsCurrentPromotionMap = feignPromotionService.getGoodsSkuPromotionMap(
+		Map<String, Object> goodsCurrentPromotionMap = feignPromotionApi.getGoodsSkuPromotionMap(
 			index.getStoreId(), index.getId());
 
 		//写入促销信息
@@ -845,7 +839,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		}
 
 		//促销索引
-		Map<String, Object> goodsCurrentPromotionMap = feignPromotionService.getGoodsSkuPromotionMap(
+		Map<String, Object> goodsCurrentPromotionMap = feignPromotionApi.getGoodsSkuPromotionMap(
 			index.getStoreId(), index.getId());
 		index.setPromotionMapJson(JSONUtil.toJsonStr(goodsCurrentPromotionMap));
 		return index;

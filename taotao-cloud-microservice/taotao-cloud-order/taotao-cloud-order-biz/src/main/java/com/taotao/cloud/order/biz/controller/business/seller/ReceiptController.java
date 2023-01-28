@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -43,9 +44,10 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<IPage<OrderReceiptDTO>> getByPage(ReceiptPageQuery receiptPageQuery) {
+	public Result<PageResult<OrderReceiptDTO>> getByPage(ReceiptPageQuery receiptPageQuery) {
 		receiptPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
-		return Result.success(receiptService.getReceiptData(receiptPageQuery));
+		IPage<OrderReceiptDTO> page = receiptService.pageQuery(receiptPageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, OrderReceiptDTO.class));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")

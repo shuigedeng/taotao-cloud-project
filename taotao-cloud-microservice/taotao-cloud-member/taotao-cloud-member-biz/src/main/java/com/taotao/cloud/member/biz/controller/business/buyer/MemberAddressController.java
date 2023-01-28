@@ -63,7 +63,7 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<PageResult<MemberAddressVO>> page(@Validated PageQuery page) {
-		IPage<MemberAddress> memberAddressPage = memberAddressService.getAddressByMember(page,
+		IPage<MemberAddress> memberAddressPage = memberAddressService.queryPage(page,
 				SecurityUtils.getUserId());
 		return Result.success(
 				PageResult.convertMybatisPage(memberAddressPage, MemberAddressVO.class));

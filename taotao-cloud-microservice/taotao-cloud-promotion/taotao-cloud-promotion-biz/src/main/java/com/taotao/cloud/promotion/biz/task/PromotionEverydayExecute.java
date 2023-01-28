@@ -2,7 +2,7 @@ package com.taotao.cloud.promotion.biz.task;
 
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
-import com.taotao.cloud.promotion.biz.service.business.SeckillService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.SeckillSetting;
@@ -31,7 +31,7 @@ public class PromotionEverydayExecute implements EveryDayExecute {
 	 * 秒杀活动
 	 */
 	@Autowired
-	private SeckillService seckillService;
+	private ISeckillService seckillService;
 
 	/**
 	 * 将已过期的促销活动置为结束
@@ -51,7 +51,7 @@ public class PromotionEverydayExecute implements EveryDayExecute {
 	 */
 	private void addSeckill() {
 		SeckillSetting seckillSetting = settingService.getSeckillSetting(SettingCategoryEnum.SECKILL_SETTING.name());
-		for (int i = 1; i <= SeckillService.PRE_CREATION; i++) {
+		for (int i = 1; i <= ISeckillService.PRE_CREATION; i++) {
 			Seckill seckill = new Seckill(i, seckillSetting.getHours(), seckillSetting.getSeckillRule());
 			seckillService.savePromotions(seckill);
 		}

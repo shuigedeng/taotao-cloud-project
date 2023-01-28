@@ -79,8 +79,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 public class GoodsSkuServiceImpl extends
-	BaseSuperServiceImpl<IGoodsSkuMapper, GoodsSku, GoodsSkuRepository, IGoodsSkuRepository, Long> implements
-	IGoodsSkuService {
+	BaseSuperServiceImpl<IGoodsSkuMapper, GoodsSku, GoodsSkuRepository, IGoodsSkuRepository, Long>
+	implements IGoodsSkuService {
 
 	/**
 	 * 缓存服务
@@ -105,7 +105,7 @@ public class GoodsSkuServiceImpl extends
 	/**
 	 * 会员评价服务
 	 */
-	private final IFeignMemberEvaluationApi memberEvaluationService;
+	private final IFeignMemberEvaluationApi feignMemberEvaluationApi;
 	/**
 	 * 商品服务
 	 */
@@ -117,7 +117,7 @@ public class GoodsSkuServiceImpl extends
 	/**
 	 * 促销活动商品服务
 	 */
-	private final IFeignPromotionGoodsApi promotionGoodsService;
+	private final IFeignPromotionGoodsApi feignPromotionGoodsApi;
 	/**
 	 * ApplicationEventPublisher
 	 */
@@ -298,7 +298,7 @@ public class GoodsSkuServiceImpl extends
 				PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 				searchParams.setSkuId(String.valueOf(skuId));
 				searchParams.setPromotionId(jsonObject.getLong("id"));
-				PromotionGoodsVO promotionsGoods = promotionGoodsService.getPromotionsGoods(
+				PromotionGoodsVO promotionsGoods = feignPromotionGoodsApi.getPromotionsGoods(
 					searchParams);
 				if (promotionsGoods != null && promotionsGoods.getPrice() != null) {
 					goodsSkuDetail.setPromotionFlag(true);
@@ -435,7 +435,7 @@ public class GoodsSkuServiceImpl extends
 	}
 
 	@Override
-	public IPage<GoodsSku> getGoodsSkuByPage(GoodsPageQuery searchParams) {
+	public IPage<GoodsSku> goodsSkuQueryPage(GoodsPageQuery searchParams) {
 		return this.page(searchParams.buildMpPage(),
 			QueryUtil.goodsQueryWrapper(searchParams));
 	}
@@ -532,7 +532,7 @@ public class GoodsSkuServiceImpl extends
 		queryParams.setGrade(EvaluationGradeEnum.GOOD.name());
 		queryParams.setSkuId(goodsSku.getId());
 		//好评数量
-		long highPraiseNum = memberEvaluationService.getEvaluationCount(queryParams);
+		long highPraiseNum = feignMemberEvaluationApi.getEvaluationCount(queryParams);
 
 		//更新商品评价数量
 		goodsSku.setCommentNum(goodsSku.getCommentNum() != null ? goodsSku.getCommentNum() + 1 : 1);

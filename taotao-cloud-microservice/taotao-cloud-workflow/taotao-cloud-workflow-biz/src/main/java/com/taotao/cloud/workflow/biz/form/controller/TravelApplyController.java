@@ -5,8 +5,8 @@ import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.TravelApplyEntity;
-import com.taotao.cloud.workflow.api.common.model.form.travelapply.TravelApplyForm;
-import com.taotao.cloud.workflow.api.common.model.form.travelapply.TravelApplyInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.form.travelapply.TravelApplyForm;
+import com.taotao.cloud.workflow.biz.common.model.form.travelapply.TravelApplyInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.TravelApplyService;
 
 import org.hibernate.exception.DataException;

@@ -10,7 +10,7 @@ import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.model.convert.AfterSaleConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
-import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
+import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,8 +48,8 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
-	public Result<AfterSaleVO> get(@PathVariable String sn) {
-		AfterSale afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
+	public Result<AfterSaleVO> getAfterSaleBySn(@PathVariable String sn) {
+		AfterSale afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSaleBySn(sn));
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSale));
 	}
 
@@ -60,8 +60,8 @@ public class AfterSaleController {
 	public Result<PageResult<AfterSaleVO>> getByPage(AfterSalePageQuery searchParams) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		searchParams.setStoreId(storeId);
-		IPage<AfterSale> afterSalePages = afterSaleService.getAfterSalePages(searchParams);
-		return Result.success(PageResult.convertMybatisPage(afterSalePages, AfterSaleVO.class));
+		IPage<AfterSale> page = afterSaleService.pageQuery(searchParams);
+		return Result.success(PageResult.convertMybatisPage(page, AfterSaleVO.class));
 	}
 
 	@Operation(summary = "获取导出售后服务列表列表", description = "获取导出售后服务列表列表")
@@ -115,7 +115,7 @@ public class AfterSaleController {
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
 	public Result<StoreAfterSaleAddressVO> getStoreAfterSaleAddress(
 			@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
-		return Result.success(afterSaleService.getStoreAfterSaleAddressDTO(sn));
+		return Result.success(afterSaleService.getStoreAfterSaleAddressVO(sn));
 	}
 
 }

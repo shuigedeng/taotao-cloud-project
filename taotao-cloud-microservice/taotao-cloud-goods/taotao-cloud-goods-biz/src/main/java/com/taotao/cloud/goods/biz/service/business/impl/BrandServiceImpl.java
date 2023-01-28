@@ -56,7 +56,7 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
 	private final IGoodsService goodsService;
 
 	@Override
-	public IPage<Brand> getBrandsByPage(BrandPageQuery page) {
+	public IPage<Brand> brandsQueryPage(BrandPageQuery page) {
 		LambdaQueryWrapper<Brand> queryWrapper = new LambdaQueryWrapper<>();
 		if (StringUtils.isNotBlank(page.getName())) {
 			queryWrapper.like(Brand::getName, page.getName());

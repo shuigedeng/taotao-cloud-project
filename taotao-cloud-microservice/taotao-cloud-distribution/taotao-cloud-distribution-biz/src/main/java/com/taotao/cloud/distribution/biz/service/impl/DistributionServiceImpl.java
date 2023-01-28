@@ -13,8 +13,8 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
-import com.taotao.cloud.distribution.api.web.dto.DistributionApplyDTO;
-import com.taotao.cloud.distribution.api.web.query.DistributionPageQuery;
+import com.taotao.cloud.distribution.api.model.dto.DistributionApplyDTO;
+import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.mapper.DistributionMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
@@ -41,7 +41,7 @@ public class DistributionServiceImpl extends
 	 * 会员
 	 */
 	@Autowired
-	private IFeignMemberService memberService;
+	private IFeignMemberService feignMemberService;
 	/**
 	 * 缓存
 	 */
@@ -51,7 +51,7 @@ public class DistributionServiceImpl extends
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingService settingService;
+	private IFeignSettingService feignSettingService;
 
 	@Override
 	public IPage<Distribution> distributionPage(DistributionPageQuery distributionPageQuery,
@@ -89,7 +89,7 @@ public class DistributionServiceImpl extends
 
 		//如果未申请分销员则新增进行申请
 		//获取当前登录用户
-		Member member = memberService.getUserInfo();
+		Member member = feignMemberService.getUserInfo();
 		//新建分销员
 		distribution = new Distribution(member.getId(), member.getNickName(), distributionApplyDTO);
 		//添加分销员
@@ -157,7 +157,7 @@ public class DistributionServiceImpl extends
 		//储存分销关系时间
 		Distribution distribution = this.getById(distributionId);
 		if (distribution != null) {
-			Result<SettingVO> settingResult = settingService.get(
+			Result<SettingVO> settingResult = feignSettingService.get(
 				SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 			DistributionSetting distributionSetting = JSONUtil.toBean(
 				settingResult.getSettingValue(),
@@ -178,7 +178,7 @@ public class DistributionServiceImpl extends
 	@Override
 	public void checkDistributionSetting() {
 		//获取分销是否开启
-		Result<SettingVO> settingResult = settingService.get(
+		Result<SettingVO> settingResult = feignSettingService.get(
 			SettingCategoryEnum.DISTRIBUTION_SETTING.name());
 		DistributionSetting distributionSetting = JSONUtil.toBean(
 			settingResult.getSettingValue(),

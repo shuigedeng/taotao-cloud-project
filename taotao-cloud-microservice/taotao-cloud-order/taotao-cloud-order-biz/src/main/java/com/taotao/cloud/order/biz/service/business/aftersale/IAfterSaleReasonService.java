@@ -41,6 +41,6 @@ public interface IAfterSaleReasonService extends IService<AfterSaleReason> {
 	 * @return {@link IPage }<{@link AfterSaleReason }>
 	 * @since 2022-04-28 08:49:03
 	 */
-	IPage<AfterSaleReason> getByPage(AfterSaleReasonPageQuery afterSaleReasonPageQuery);
+	IPage<AfterSaleReason> pageQuery(AfterSaleReasonPageQuery afterSaleReasonPageQuery);
 
 }

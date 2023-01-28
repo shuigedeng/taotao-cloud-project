@@ -1,22 +1,21 @@
 package com.taotao.cloud.customer.biz.api.controller.buyer;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
-import com.taotao.cloud.store.api.feign.IFeignStoreDetailService;
-import com.taotao.cloud.store.api.feign.IFeignStoreService;
+import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
+import com.taotao.cloud.store.api.feign.IFeignStoreApi;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.store.api.web.dto.StoreBankDTO;
-import com.taotao.cloud.store.api.web.dto.StoreCompanyDTO;
-import com.taotao.cloud.store.api.web.dto.StoreOtherInfoDTO;
-import com.taotao.cloud.store.api.web.query.StorePageQuery;
-import com.taotao.cloud.store.api.web.vo.StoreBasicInfoVO;
-import com.taotao.cloud.store.api.web.vo.StoreDetailVO;
-import com.taotao.cloud.store.api.web.vo.StoreOtherVO;
-import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.api.model.dto.StoreBankDTO;
+import com.taotao.cloud.store.api.model.dto.StoreCompanyDTO;
+import com.taotao.cloud.store.api.model.dto.StoreOtherInfoDTO;
+import com.taotao.cloud.store.api.model.query.StorePageQuery;
+import com.taotao.cloud.store.api.model.vo.StoreBasicInfoVO;
+import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
+import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
+import com.taotao.cloud.store.api.model.vo.StoreVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -46,7 +45,7 @@ public class StoreBuyerController {
 	 * 店铺
 	 */
 	@Autowired
-	private IFeignStoreService storeService;
+	private IFeignStoreApi storeService;
 	/**
 	 * 店铺商品分类
 	 */
@@ -56,7 +55,7 @@ public class StoreBuyerController {
 	 * 店铺详情
 	 */
 	@Autowired
-	private IFeignStoreDetailService storeDetailService;
+	private IFeignStoreDetailApi storeDetailService;
 
 	@Operation(summary = "获取店铺列表分页", description = "获取店铺列表分页")
 	@RequestLogger

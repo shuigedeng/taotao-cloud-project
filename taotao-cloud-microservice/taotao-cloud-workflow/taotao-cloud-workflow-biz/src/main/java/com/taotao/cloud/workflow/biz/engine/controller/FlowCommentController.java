@@ -5,12 +5,15 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
+import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
+import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
+import com.taotao.cloud.workflow.biz.common.util.UploaderUtil;
 import com.taotao.cloud.workflow.biz.covert.FlowTaskConvert;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcomment.FlowCommentForm;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcomment.FlowCommentInfoVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcomment.FlowCommentListVO;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcomment.FlowCommentPagination;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcomment.FlowCommentForm;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcomment.FlowCommentInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcomment.FlowCommentListVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcomment.FlowCommentPagination;
 import com.taotao.cloud.workflow.biz.engine.service.FlowCommentService;
 import com.taotao.cloud.workflow.biz.engine.util.ServiceAllUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,7 +54,7 @@ public class FlowCommentController {
 		List<FlowCommentEntity> list = flowCommentService.getlist(pagination);
 		List<FlowCommentListVO> listVO = FlowTaskConvert.INSTANCE.convertComment(list);
 
-		List<String> userId = list.stream().map(FlowCommentEntity::getCreatorUserId)
+		List<Long> userId = list.stream().map(FlowCommentEntity::getCreatorUserId)
 			.collect(Collectors.toList());
 		List<UserEntity> userName = serviceUtil.getUserName(userId);
 		for (FlowCommentListVO commentModel : listVO) {
@@ -80,7 +83,7 @@ public class FlowCommentController {
 
 	@Operation(summary = "新建流程评论", description = "新建流程评论")
 	@PostMapping
-	public Result<Boolean> create(@RequestBody @Valid FlowCommentForm commentForm)
+	public Result<String> create(@RequestBody @Valid FlowCommentForm commentForm)
 		throws DataException {
 		FlowCommentEntity entity = FlowTaskConvert.INSTANCE.convert(commentForm);
 		flowCommentService.create(entity);
@@ -89,7 +92,7 @@ public class FlowCommentController {
 
 	@Operation(summary = "更新流程评论", description = "更新流程评论")
 	@PutMapping("/{id}")
-	public Result<Boolean> update(@PathVariable("id") String id,
+	public Result<String> update(@PathVariable("id") String id,
 		@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
 		FlowCommentEntity info = flowCommentService.getInfo(id);
 		if (info != null) {
@@ -102,7 +105,7 @@ public class FlowCommentController {
 
 	@Operation(summary = "删除流程评论", description = "删除流程评论")
 	@DeleteMapping("/{id}")
-	public Result<Boolean> delete(@PathVariable("id") String id) {
+	public Result<String> delete(@PathVariable("id") String id) {
 		FlowCommentEntity entity = flowCommentService.getInfo(id);
 		if (entity.getCreatorUserId().equals(SecurityUtils.getUserId())) {
 			flowCommentService.delete(entity);

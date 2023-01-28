@@ -3,7 +3,7 @@ package com.taotao.cloud.customer.api.feign.fallback;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.customer.api.feign.IFeignChatbotService;
-import com.taotao.cloud.customer.api.web.vo.ChatbotVO;
+import com.taotao.cloud.customer.api.model.vo.ChatbotVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

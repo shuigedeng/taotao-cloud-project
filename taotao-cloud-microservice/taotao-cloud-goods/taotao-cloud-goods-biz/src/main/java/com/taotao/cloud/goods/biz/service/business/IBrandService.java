@@ -25,7 +25,7 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 * @return {@link IPage }<{@link Brand }>
 	 * @since 2022-04-27 16:59:15
 	 */
-	IPage<Brand> getBrandsByPage(BrandPageQuery brandPageQuery);
+	IPage<Brand> brandsQueryPage(BrandPageQuery brandPageQuery);
 
 	/**
 	 * 删除品牌

@@ -27,7 +27,7 @@ public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt> imp
 	IReceiptService {
 
 	@Override
-	public IPage<OrderReceiptDTO> getReceiptData(ReceiptPageQuery receiptPageQuery) {
+	public IPage<OrderReceiptDTO> pageQuery(ReceiptPageQuery receiptPageQuery) {
 		return this.baseMapper.getReceipt(receiptPageQuery.buildMpPage(), receiptPageQuery.wrapper());
 	}
 

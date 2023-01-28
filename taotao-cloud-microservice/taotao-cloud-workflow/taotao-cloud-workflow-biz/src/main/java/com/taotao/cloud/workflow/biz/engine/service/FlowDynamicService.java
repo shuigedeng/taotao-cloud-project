@@ -1,8 +1,8 @@
 package com.taotao.cloud.workflow.biz.engine.service;
 
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskForm;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskInfoVO;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskForm;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskInfoVO;
 
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.util.Map;

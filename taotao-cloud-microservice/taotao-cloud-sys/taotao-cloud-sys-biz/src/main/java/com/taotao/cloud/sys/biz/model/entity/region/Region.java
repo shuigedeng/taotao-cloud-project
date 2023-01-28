@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.JacksonListTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -112,12 +113,12 @@ public class Region extends BaseSuperEntity<Region, Long> {
 	 * @Select("SELECT * FROM person WHERE id=#{id}")
 	 * Person selectOneById(int id);
 	 */
-	//@Type(type="json")
+	@Type(value= JsonType.class)
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "id_tree", columnDefinition = "json null comment 'id树'")
 	private List<Long> idTree;
 
-	//@Type(type="json")
+	@Type(value= JsonType.class)
 	@TableField(typeHandler = JacksonListTypeHandler.class)
 	@Column(name = "code_tree", columnDefinition = "json null comment 'id树'")
 	private List<String> codeTree;

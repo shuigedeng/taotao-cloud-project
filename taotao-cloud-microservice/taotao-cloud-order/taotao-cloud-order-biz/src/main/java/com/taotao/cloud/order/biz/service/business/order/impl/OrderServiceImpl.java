@@ -44,7 +44,6 @@ import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.order.api.model.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
-import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
 import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
@@ -111,21 +110,17 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 */
 	private final TimeTrigger timeTrigger;
 	/**
-	 * 订单货物数据层
-	 */
-	private final IOrderItemMapper orderItemMapper;
-	/**
 	 * 发票
 	 */
 	private final IReceiptService receiptService;
 	/**
-	 * 订单货物
+	 * 订单货物 订单货物数据层
 	 */
 	private final IOrderItemService orderItemService;
 	/**
 	 * 物流公司
 	 */
-	private final IFeignLogisticsApi logisticsService;
+	private final IFeignLogisticsApi feignLogisticsApi;
 	/**
 	 * 订单日志
 	 */
@@ -145,7 +140,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	/**
 	 * 拼团
 	 */
-	private final IFeignPintuanApi pintuanService;
+	private final IFeignPintuanApi feignPintuanApi;
 	/**
 	 * 交易服务
 	 */
@@ -201,7 +196,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public IPage<OrderSimpleVO> queryByParams(OrderPageQuery orderPageQuery) {
+	public IPage<OrderSimpleVO> pageQuery(OrderPageQuery orderPageQuery) {
 		QueryWrapper<OrderSimpleVO> queryWrapper = orderPageQuery.queryWrapper();
 		queryWrapper.groupBy("o.id");
 		queryWrapper.orderByDesc("o.id");
@@ -396,7 +391,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		if (order.getDeliverStatus().equals(DeliverStatusEnum.UNDELIVERED.name())
 				&& order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
 			//获取对应物流
-			LogisticsVO logistics = logisticsService.getById(logisticsId);
+			LogisticsVO logistics = feignLogisticsApi.getById(logisticsId);
 			if (logistics == null) {
 				throw new BusinessException(ResultEnum.ORDER_LOGISTICS_ERROR);
 			}
@@ -429,7 +424,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		//获取订单信息
 		Order order = this.getBySn(orderSn);
 		//获取踪迹信息
-		return logisticsService.getLogistic(order.getId(), order.getLogisticsNo());
+		return feignLogisticsApi.getLogistic(order.getId(), order.getLogisticsNo());
 	}
 
 	@Override
@@ -554,7 +549,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	@Override
 	public void agglomeratePintuanOrder(Long pintuanId, String parentOrderSn) {
 		//获取拼团配置
-		PintuanVO pintuan = pintuanService.getById(pintuanId);
+		PintuanVO pintuan = feignPintuanApi.getById(pintuanId);
 
 		List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
 		if (Boolean.TRUE.equals(pintuan.getFictitious())
@@ -569,7 +564,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public void getBatchDeliverList(HttpServletResponse response, List<String> logisticsName) {
+	public void downLoadDeliver(HttpServletResponse response, List<String> logisticsName) {
 		ExcelWriter writer = ExcelUtil.getWriter();
 		//Excel 头部
 		ArrayList<String> rows = new ArrayList<>();
@@ -602,7 +597,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public void batchDeliver(MultipartFile files) {
+	public Boolean batchDeliver(MultipartFile files) {
 		InputStream inputStream = null;
 		List<OrderBatchDeliverDTO> orderBatchDeliverDTOList = new ArrayList<>();
 		try {
@@ -629,6 +624,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 			this.delivery(orderBatchDeliverDTO.getOrderSn(), orderBatchDeliverDTO.getLogisticsNo(),
 					orderBatchDeliverDTO.getLogisticsId());
 		}
+		return true;
 	}
 
 
@@ -654,7 +650,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 * @param list 待发货订单列表
 	 */
 	private void checkBatchDeliver(List<OrderBatchDeliverDTO> list) {
-		List<LogisticsVO> logistics = logisticsService.list();
+		List<LogisticsVO> logistics = feignLogisticsApi.list();
 		for (OrderBatchDeliverDTO orderBatchDeliverDTO : list) {
 			//查看订单号是否存在-是否是当前店铺的订单
 			Order order = this.getOne(new LambdaQueryWrapper<Order>()
@@ -716,7 +712,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 			return;
 		}
 		//获取拼团配置
-		PintuanVO pintuan = pintuanService.getById(pintuanId);
+		PintuanVO pintuan = feignPintuanApi.getById(pintuanId);
 		List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
 		int count = list.size();
 		if (count == 1) {
@@ -816,7 +812,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	private void checkOrder(Order order) {
 		//订单类型为拼团订单，检测购买数量是否超过了限购数量
 		if (OrderPromotionTypeEnum.PINTUAN.name().equals(order.getOrderType())) {
-			PintuanVO pintuan = pintuanService.getById(order.getPromotionId());
+			PintuanVO pintuan = feignPintuanApi.getById(order.getPromotionId());
 			Integer limitNum = pintuan.getLimitNum();
 			if (limitNum != 0 && order.getGoodsNum() > limitNum) {
 				throw new BusinessException(ResultEnum.PINTUAN_LIMIT_NUM_ERROR);

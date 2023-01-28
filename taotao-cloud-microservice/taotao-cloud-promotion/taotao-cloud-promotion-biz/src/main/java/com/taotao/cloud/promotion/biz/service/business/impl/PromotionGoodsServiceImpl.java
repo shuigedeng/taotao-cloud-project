@@ -24,10 +24,10 @@ import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
-import com.taotao.cloud.promotion.biz.service.business.CouponService;
-import com.taotao.cloud.promotion.biz.service.business.FullDiscountService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
-import com.taotao.cloud.promotion.biz.service.business.SeckillApplyService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponService;
+import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper, PromotionGoods> implements
-	PromotionGoodsService {
+		IPromotionGoodsService {
 
 	/**
 	 * Redis
@@ -59,23 +59,23 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 	 * 秒杀活动申请
 	 */
 	@Autowired
-	private SeckillApplyService seckillApplyService;
+	private ISeckillApplyService seckillApplyService;
 	/**
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 
 	@Autowired
-	private FullDiscountService fullDiscountService;
+	private IFullDiscountService fullDiscountService;
 
 	@Autowired
-	private CouponService couponService;
+	private ICouponService couponService;
 
 	@Override
 	public List<PromotionGoods> findNowSkuPromotion(String skuId) {
 
-		GoodsSku sku = goodsSkuService.getGoodsSkuByIdFromCache(skuId);
+		GoodsSku sku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(skuId);
 		if (sku == null) {
 			return new ArrayList<>();
 		}
@@ -203,7 +203,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 	 */
 	@Override
 	public Integer getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, String skuId) {
-		String promotionStockKey = PromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
+		String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
 		String promotionGoodsStock = stringRedisTemplate.opsForValue().get(promotionStockKey);
 
 		//库存如果不为空，则直接返回
@@ -263,7 +263,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 	 */
 	@Override
 	public void updatePromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, String skuId, Integer quantity) {
-		String promotionStockKey = PromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
+		String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
 		if (typeEnum.equals(PromotionTypeEnum.SECKILL)) {
 			LambdaQueryWrapper<SeckillApply> queryWrapper = new LambdaQueryWrapper<>();
 			queryWrapper.eq(SeckillApply::getSeckillId, promotionId).eq(SeckillApply::getSkuId, skuId);

@@ -19,19 +19,19 @@ import java.util.List;
 @FeignClient(contextId = "IFeignGoodsSkuService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignCategoryApiFallback.class)
 public interface IFeignGoodsSkuApi {
 
-	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
+	@PostMapping(value = "/product/updateGoodsStuck")
 	Boolean updateGoodsStuck(List<GoodsSkuSpecGalleryVO> goodsSkus);
 
-	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
+	@PostMapping(value = "/product/updateBatchById}")
 	Boolean updateBatchById(List<GoodsSkuSpecGalleryVO> goodsSkus);
 
-	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
+	@GetMapping(value = "/product/getGoodsSkuByIdFromCache")
 	List<GoodsSkuSpecGalleryVO> getGoodsSkuByIdFromCache(List<Long> skuIds);
 
-	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
+	@GetMapping(value = "/product/getGoodsSkuByIdFromCache}")
 	GoodsSkuSpecGalleryVO getGoodsSkuByIdFromCache(Long skuId);
 
-	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
+	@GetMapping(value = "/product/getStock")
 	Integer getStock(String skuId);
 }
 

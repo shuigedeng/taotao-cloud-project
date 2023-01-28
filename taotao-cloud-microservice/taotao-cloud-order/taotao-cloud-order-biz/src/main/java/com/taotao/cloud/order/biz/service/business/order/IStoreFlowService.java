@@ -7,8 +7,8 @@ import com.taotao.cloud.order.api.model.query.order.StoreFlowPageQuery;
 import com.taotao.cloud.order.api.model.query.store.StorePageQuery;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
-import com.taotao.cloud.store.api.web.vo.StoreFlowPayDownloadVO;
-import com.taotao.cloud.store.api.web.vo.StoreFlowRefundDownloadVO;
+import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
+import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
 
 import java.util.List;
 

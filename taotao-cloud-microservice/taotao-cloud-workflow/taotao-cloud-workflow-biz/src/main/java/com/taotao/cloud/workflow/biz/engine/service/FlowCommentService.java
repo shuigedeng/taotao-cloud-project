@@ -2,7 +2,7 @@ package com.taotao.cloud.workflow.biz.engine.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
-import com.taotao.cloud.workflow.api.common.model.engine.flowcomment.FlowCommentPagination;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowcomment.FlowCommentPagination;
 
 import java.util.List;
 

@@ -40,7 +40,7 @@ public class CategoryBrandManagerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
-	public Result<List<CategoryBrandVO>> getCategoryBrand(
+	public Result<List<CategoryBrandVO>> getCategoryBrandList(
 			@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId) {
 		return Result.success(categoryBrandService.getCategoryBrandList(categoryId));
 	}

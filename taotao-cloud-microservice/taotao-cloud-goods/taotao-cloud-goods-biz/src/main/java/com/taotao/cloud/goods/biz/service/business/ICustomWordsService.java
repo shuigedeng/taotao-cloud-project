@@ -63,10 +63,10 @@ public interface ICustomWordsService extends BaseSuperService<CustomWords, Long>
 	 * 分页查询自定义分词
 	 *
 	 * @param words     分词
-	 * @param PageQuery 分页信息
+	 * @param pageQuery 分页信息
 	 * @return {@link IPage }<{@link CustomWords }>
 	 * @since 2022-04-27 16:59:51
 	 */
-	IPage<CustomWords> getCustomWordsByPage(String words, PageQuery PageQuery);
+	IPage<CustomWords> getCustomWordsByPage(String words, PageQuery pageQuery);
 
 }

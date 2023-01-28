@@ -71,7 +71,7 @@ public class CategoryServiceImpl extends
 	private final ICategorySpecificationService categorySpecificationService;
 
 	@Override
-	public List<Category> dbList(Long parentId) {
+	public List<Category> childrenList(Long parentId) {
 		return this.list(new LambdaQueryWrapper<Category>().eq(Category::getParentId, parentId));
 	}
 

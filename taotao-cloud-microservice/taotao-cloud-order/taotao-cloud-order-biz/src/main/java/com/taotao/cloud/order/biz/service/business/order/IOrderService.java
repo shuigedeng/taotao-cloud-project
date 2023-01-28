@@ -53,7 +53,7 @@ public interface IOrderService extends IService<Order> {
 	 * @return {@link IPage }<{@link OrderSimpleVO }>
 	 * @since 2022-04-28 08:54:47
 	 */
-	IPage<OrderSimpleVO> queryByParams(OrderPageQuery orderPageQuery);
+	IPage<OrderSimpleVO> pageQuery(OrderPageQuery orderPageQuery);
 
 	/**
 	 * 订单信息
@@ -256,14 +256,15 @@ public interface IOrderService extends IService<Order> {
 	 * @param response      响应
 	 * @param logisticsName 店铺已选择物流公司列表
 	 */
-	void getBatchDeliverList(HttpServletResponse response, List<String> logisticsName);
+	void downLoadDeliver(HttpServletResponse response, List<String> logisticsName);
 
 	/**
 	 * 订单批量发货
 	 *
 	 * @param files 文件
+	 * @return
 	 */
-	void batchDeliver(MultipartFile files);
+	Boolean batchDeliver(MultipartFile files);
 
 	/**
 	 * 获取订单实际支付的总金额

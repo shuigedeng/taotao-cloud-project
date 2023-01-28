@@ -20,7 +20,7 @@ import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonService;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
-import com.taotao.cloud.store.api.web.vo.StoreAfterSaleAddressVO;
+import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -71,9 +71,8 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
-	public Result<AfterSaleVO> get(
-			@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
-		AfterSale afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
+	public Result<AfterSaleVO> getAfterSaleBySn(@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
+		AfterSale afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSaleBySn(sn));
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSale));
 	}
 
@@ -81,8 +80,8 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<AfterSaleVO>> page(@Validated AfterSalePageQuery afterSalePageQuery) {
-		IPage<AfterSale> afterSalePages = afterSaleService.getAfterSalePages(afterSalePageQuery);
+	public Result<PageResult<AfterSaleVO>> pageQuery(@Validated AfterSalePageQuery afterSalePageQuery) {
+		IPage<AfterSale> afterSalePages = afterSaleService.pageQuery(afterSalePageQuery);
 		return Result.success(PageResult.convertMybatisPage(afterSalePages, AfterSaleVO.class));
 	}
 
@@ -99,7 +98,7 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{orderItemSn}")
-	public Result<Boolean> save(
+	public Result<Boolean> saveAfterSale(
 			@NotBlank(message = "售后单号不能为空") @PathVariable String orderItemSn,
 			@Validated @RequestBody AfterSaleDTO afterSaleDTO) {
 		afterSaleDTO = AfterSaleDTOBuilder.builder(afterSaleDTO).orderItemSn(orderItemSn).build();
@@ -135,7 +134,7 @@ public class AfterSaleController {
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
 	public Result<StoreAfterSaleAddressVO> getStoreAfterSaleAddress(
 			@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
-		return Result.success(afterSaleService.getStoreAfterSaleAddressDTO(sn));
+		return Result.success(afterSaleService.getStoreAfterSaleAddressVO(sn));
 	}
 
 	@Operation(summary = "获取售后原因", description = "获取售后原因")

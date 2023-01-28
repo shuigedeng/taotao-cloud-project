@@ -40,10 +40,10 @@ import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
-import com.taotao.cloud.store.api.feign.IFeignFreightTemplateService;
-import com.taotao.cloud.store.api.feign.IFeignStoreService;
-import com.taotao.cloud.store.api.web.vo.FreightTemplateVO;
-import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.api.feign.IFeignFreightTemplateApi;
+import com.taotao.cloud.store.api.feign.IFeignStoreApi;
+import com.taotao.cloud.store.api.model.vo.FreightTemplateVO;
+import com.taotao.cloud.store.api.model.vo.StoreVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
@@ -78,7 +78,7 @@ public class GoodsServiceImpl extends
 	/**
 	 * 设置
 	 */
-	private final IFeignSettingApi settingService;
+	private final IFeignSettingApi feignSettingApi;
 	/**
 	 * 商品相册
 	 */
@@ -90,15 +90,15 @@ public class GoodsServiceImpl extends
 	/**
 	 * 店铺详情
 	 */
-	private final IFeignStoreService storeService;
+	private final IFeignStoreApi feignStoreApi;
 	/**
 	 * 运费模板
 	 */
-	private final IFeignFreightTemplateService freightTemplateService;
+	private final IFeignFreightTemplateApi feignFreightTemplateApi;
 	/**
 	 * 会员评价
 	 */
-	private final IFeignMemberEvaluationApi memberEvaluationService;
+	private final IFeignMemberEvaluationApi feignMemberEvaluationApi;
 	/**
 	 * rocketMq
 	 */
@@ -254,9 +254,8 @@ public class GoodsServiceImpl extends
 	}
 
 	@Override
-	public IPage<Goods> queryByParams(GoodsPageQuery goodsPageQuery) {
-		return this.page(goodsPageQuery.buildMpPage(),
-			QueryUtil.goodsQueryWrapper(goodsPageQuery));
+	public IPage<Goods> goodsQueryPage(GoodsPageQuery goodsPageQuery) {
+		return this.page(goodsPageQuery.buildMpPage(), QueryUtil.goodsQueryWrapper(goodsPageQuery));
 	}
 
 	@Override
@@ -376,7 +375,7 @@ public class GoodsServiceImpl extends
 	public Boolean freight(List<Long> goodsIds, Long templateId) {
 		SecurityUser authUser = this.checkStoreAuthority();
 
-		FreightTemplateVO freightTemplate = freightTemplateService.getById(templateId);
+		FreightTemplateVO freightTemplate = feignFreightTemplateApi.getById(templateId);
 		if (freightTemplate == null) {
 			throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
 		}
@@ -407,7 +406,7 @@ public class GoodsServiceImpl extends
 		goods.setCommentNum(goods.getCommentNum() + 1);
 
 		//好评数量
-		Long highPraiseNum = memberEvaluationService.count(goodsId, EvaluationGradeEnum.GOOD.name());
+		Long highPraiseNum = feignMemberEvaluationApi.count(goodsId, EvaluationGradeEnum.GOOD.name());
 
 		//好评率
 		BigDecimal grade = NumberUtil.mul(
@@ -513,7 +512,7 @@ public class GoodsServiceImpl extends
 		}
 
 		//获取商品系统配置决定是否审核
-		GoodsSettingVO goodsSetting = settingService.getGoodsSetting(
+		GoodsSettingVO goodsSetting = feignSettingApi.getGoodsSetting(
 			SettingCategoryEnum.GOODS_SETTING.name());
 		//是否需要审核
 		goods.setIsAuth(
@@ -521,7 +520,7 @@ public class GoodsServiceImpl extends
 				: GoodsAuthEnum.PASS.name());
 		//判断当前用户是否为店铺
 		if (SecurityUtils.getCurrentUser().getType().equals(UserEnum.STORE.getCode())) {
-			StoreVO storeDetail = storeService.getStoreDetail();
+			StoreVO storeDetail = feignStoreApi.getStoreDetail();
 			if (storeDetail.getSelfOperated() != null) {
 				goods.setSelfOperated(storeDetail.getSelfOperated());
 			}

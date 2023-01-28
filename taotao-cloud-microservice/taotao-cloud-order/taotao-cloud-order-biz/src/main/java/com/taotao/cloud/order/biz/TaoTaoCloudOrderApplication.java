@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.biz;
 
+import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.amqp.core.TopicExchange;
@@ -21,6 +22,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class TaoTaoCloudOrderApplication {
 
 	public static void main(String[] args) {
+		PropertyUtils.setDefaultProperty("taotao-cloud-order");
+
 		SpringApplication.run(TaoTaoCloudOrderApplication.class, args);
 	}
 

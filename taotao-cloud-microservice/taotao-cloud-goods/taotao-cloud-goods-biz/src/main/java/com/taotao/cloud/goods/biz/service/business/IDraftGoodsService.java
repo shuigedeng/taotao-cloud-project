@@ -68,6 +68,6 @@ public interface IDraftGoodsService extends BaseSuperService<DraftGoods, Long> {
 	 * @return {@link IPage }<{@link DraftGoods }>
 	 * @since 2022-04-27 16:59:57
 	 */
-	IPage<DraftGoods> getDraftGoods(DraftGoodsPageQuery searchParams);
+	IPage<DraftGoods> draftGoodsQueryPage(DraftGoodsPageQuery searchParams);
 
 }

@@ -88,10 +88,8 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 	@Autowired
 	@Qualifier("elasticsearchRestTemplate")
 	private ElasticsearchRestTemplate restTemplate;
-
 	@Autowired
 	private IEsGoodsIndexService esGoodsIndexService;
-
 	/**
 	 * 缓存
 	 */

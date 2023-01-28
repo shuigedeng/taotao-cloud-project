@@ -4,14 +4,18 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
-import com.taotao.cloud.workflow.api.common.model.engine.flowbefore.FlowBatchModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.FlowTaskListModel;
-import com.taotao.cloud.workflow.api.common.model.engine.flowtask.PaginationFlowTask;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBatchModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.PaginationFlowTask;
 import com.taotao.cloud.workflow.biz.exception.WorkFlowException;
 import java.util.List;
 
 /**
  * 流程任务
+ *
+ * @author shuigedeng
+ * @version 2023.01
+ * @since 2023-01-17 14:33:11
  */
 public interface FlowTaskService extends IService<FlowTaskEntity> {
 
@@ -19,7 +23,8 @@ public interface FlowTaskService extends IService<FlowTaskEntity> {
 	 * 列表（流程监控）
 	 *
 	 * @param paginationFlowTask
-	 * @return
+	 * @return {@link List }<{@link FlowTaskEntity }>
+	 * @since 2023-01-17 14:33:11
 	 */
 	List<FlowTaskEntity> getMonitorList(PaginationFlowTask paginationFlowTask);
 
@@ -27,7 +32,8 @@ public interface FlowTaskService extends IService<FlowTaskEntity> {
 	 * 列表（我发起的）
 	 *
 	 * @param paginationFlowTask
-	 * @return
+	 * @return {@link List }<{@link FlowTaskEntity }>
+	 * @since 2023-01-17 14:33:11
 	 */
 	List<FlowTaskEntity> getLaunchList(PaginationFlowTask paginationFlowTask);
 
@@ -35,7 +41,8 @@ public interface FlowTaskService extends IService<FlowTaskEntity> {
 	 * 列表（待我审批）
 	 *
 	 * @param paginationFlowTask
-	 * @return
+	 * @return {@link IPage }<{@link FlowTaskListModel }>
+	 * @since 2023-01-17 14:33:11
 	 */
 	IPage<FlowTaskListModel> getWaitList(PaginationFlowTask paginationFlowTask);
 
@@ -43,7 +50,8 @@ public interface FlowTaskService extends IService<FlowTaskEntity> {
 	 * 批量列表（待我审批）
 	 *
 	 * @param paginationFlowTask
-	 * @return
+	 * @return {@link IPage }<{@link FlowTaskListModel }>
+	 * @since 2023-01-17 14:33:11
 	 */
 	IPage<FlowTaskListModel> getBatchWaitList(PaginationFlowTask paginationFlowTask);
 

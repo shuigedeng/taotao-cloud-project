@@ -39,8 +39,7 @@ import java.util.Map;
 @Service
 public class CategoryParameterGroupServiceImpl extends
 	BaseSuperServiceImpl<ICategoryParameterGroupMapper, CategoryParameterGroup, CategoryParameterGroupRepository, ICategoryParameterGroupRepository, Long>
-	implements
-	ICategoryParameterGroupService {
+	implements ICategoryParameterGroupService {
 
 	/**
 	 * 商品参数服务

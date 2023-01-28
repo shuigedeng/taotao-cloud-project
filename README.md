@@ -75,7 +75,7 @@ Gradle:
 ```
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2023.01"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2023.02"
   }
 }
 
@@ -90,7 +90,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2023.01</version>
+      <version>2023.02</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>

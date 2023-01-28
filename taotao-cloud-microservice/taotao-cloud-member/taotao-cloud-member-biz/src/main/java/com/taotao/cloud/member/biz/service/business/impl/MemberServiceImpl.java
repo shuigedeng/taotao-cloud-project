@@ -15,7 +15,6 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
@@ -39,7 +38,7 @@ import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.mapper.IMemberMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.member.biz.service.business.MemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import com.taotao.cloud.member.biz.token.MemberTokenGenerate;
 import com.taotao.cloud.member.biz.token.StoreTokenGenerate;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -47,8 +46,8 @@ import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
-import com.taotao.cloud.store.api.feign.IFeignStoreService;
-import com.taotao.cloud.store.api.web.vo.StoreVO;
+import com.taotao.cloud.store.api.feign.IFeignStoreApi;
+import com.taotao.cloud.store.api.model.vo.StoreVO;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -64,7 +63,8 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implements MemberService {
+public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implements
+		IMemberService {
 
 	/**
 	 * 会员token
@@ -85,7 +85,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	 * 店铺
 	 */
 	@Autowired
-	private IFeignStoreService feignStoreService;
+	private IFeignStoreApi feignStoreApi;
 	/**
 	 * RocketMQ 配置
 	 */
@@ -156,7 +156,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 		}
 		//对店铺状态的判定处理
 		if (Boolean.TRUE.equals(member.getHaveStore())) {
-			StoreVO store = feignStoreService.findSotreById(member.getStoreId());
+			StoreVO store = feignStoreApi.findSotreById(member.getStoreId());
 			if (!store.getStoreDisable().equals(StoreStatusEnum.OPEN.name())) {
 				throw new BusinessException(ResultEnum.STORE_CLOSE_ERROR);
 			}
@@ -362,7 +362,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	}
 
 	@Override
-	public IPage<Member> getMemberPage(MemberSearchPageQuery memberSearchPageQuery) {
+	public IPage<Member> pageQuery(MemberSearchPageQuery memberSearchPageQuery) {
 		QueryWrapper<Member> queryWrapper = Wrappers.query();
 		//用户名查询
 		queryWrapper.like(CharSequenceUtil.isNotBlank(memberSearchPageQuery.getUsername()),

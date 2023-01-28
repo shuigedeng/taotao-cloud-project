@@ -49,8 +49,8 @@ public class GoodsUnitManagerController {
 	@RequestLogger("分页获取商品计量单位")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<GoodsUnit>> getByPage(PageQuery PageQuery) {
-		IPage<GoodsUnit> page = goodsUnitService.page(PageQuery.buildMpPage());
+	public Result<PageResult<GoodsUnit>> getByPage(PageQuery pageQuery) {
+		IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
 		return Result.success(PageResult.convertMybatisPage(page, GoodsUnit.class));
 	}
 
@@ -76,7 +76,7 @@ public class GoodsUnitManagerController {
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@NotNull @PathVariable Long id,
 			@Valid @RequestBody GoodsUnit goodsUnit) {
-		goodsUnit.setId(Long.valueOf(id));
+		goodsUnit.setId(id);
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}
 

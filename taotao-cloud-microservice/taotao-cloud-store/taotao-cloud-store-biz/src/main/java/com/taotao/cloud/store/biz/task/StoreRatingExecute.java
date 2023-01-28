@@ -8,7 +8,7 @@ import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.biz.model.entity.Store;
-import com.taotao.cloud.store.biz.service.StoreService;
+import com.taotao.cloud.store.biz.service.IStoreService;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import jakarta.annotation.Resource;
 import java.util.List;
@@ -25,7 +25,7 @@ public class StoreRatingExecute implements EveryDayExecute {
 	 * 店铺
 	 */
 	@Autowired
-	private StoreService storeService;
+	private IStoreService storeService;
 	/**
 	 * 会员评价
 	 */

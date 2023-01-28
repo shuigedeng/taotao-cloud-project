@@ -26,11 +26,11 @@ import com.taotao.cloud.promotion.biz.mapper.CouponMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
-import com.taotao.cloud.promotion.biz.service.business.CouponActivityItemService;
-import com.taotao.cloud.promotion.biz.service.business.CouponService;
-import com.taotao.cloud.promotion.biz.service.business.FullDiscountService;
-import com.taotao.cloud.promotion.biz.service.business.MemberCouponService;
-import com.taotao.cloud.promotion.biz.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponActivityItemService;
+import com.taotao.cloud.promotion.biz.service.business.ICouponService;
+import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
+import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
+import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,33 +49,33 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMapper, Coupon> implements
-	CouponService {
+		ICouponService {
 
 	/**
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi feignGoodsSkuApi;
 	/**
 	 * 促销商品
 	 */
 	@Autowired
-	private PromotionGoodsService promotionGoodsService;
+	private IPromotionGoodsService promotionGoodsService;
 	/**
 	 * 会员优惠券
 	 */
 	@Autowired
-	private MemberCouponService memberCouponService;
+	private IMemberCouponService memberCouponService;
 	/**
 	 * 满额活动
 	 */
 	@Autowired
-	private FullDiscountService fullDiscountService;
+	private IFullDiscountService fullDiscountService;
 	/**
 	 * 优惠券活动-优惠券关联
 	 */
 	@Autowired
-	private CouponActivityItemService couponActivityItemService;
+	private ICouponActivityItemService couponActivityItemService;
 
 	@Override
 	public void receiveCoupon(Long couponId, Integer receiveNum) {
@@ -250,7 +250,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_ERROR);
 		}
 		for (String id : split) {
-			GoodsSkuSpecGalleryVO goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(Long.valueOf(id));
+			GoodsSkuSpecGalleryVO goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(Long.valueOf(id));
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 			}

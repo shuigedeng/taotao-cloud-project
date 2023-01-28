@@ -3,7 +3,6 @@ package com.taotao.cloud.goods.biz.service.business.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.io.FileUtils;
 import com.taotao.cloud.goods.biz.mapper.IGoodsGalleryMapper;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
@@ -31,13 +30,14 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class GoodsGalleryServiceImpl extends
-	BaseSuperServiceImpl<IGoodsGalleryMapper, GoodsGallery, GoodsGalleryRepository, IGoodsGalleryRepository, Long> implements IGoodsGalleryService {
+	BaseSuperServiceImpl<IGoodsGalleryMapper, GoodsGallery, GoodsGalleryRepository, IGoodsGalleryRepository, Long>
+	implements IGoodsGalleryService {
 
 	/**
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi feignSettingApi;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -62,7 +62,7 @@ public class GoodsGalleryServiceImpl extends
 	public GoodsGallery getGoodsGallery(String origin) {
 		GoodsGallery goodsGallery = new GoodsGallery();
 		//获取商品系统配置决定是否审核
-		GoodsSettingVO goodsSetting = settingService.getGoodsSetting(
+		GoodsSettingVO goodsSetting = feignSettingApi.getGoodsSetting(
 			SettingCategoryEnum.GOODS_SETTING.name());
 		//缩略图
 		String thumbnail = FileUtils.getUrl(origin, goodsSetting.getAbbreviationPictureWidth(),

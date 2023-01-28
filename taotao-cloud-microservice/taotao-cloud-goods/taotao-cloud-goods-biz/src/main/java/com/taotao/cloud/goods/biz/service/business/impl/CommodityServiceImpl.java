@@ -42,8 +42,8 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class CommodityServiceImpl extends
-	BaseSuperServiceImpl<ICommodityMapper, Commodity, CommodityRepository, ICommodityRepository, Long> implements
-	ICommodityService {
+	BaseSuperServiceImpl<ICommodityMapper, Commodity, CommodityRepository, ICommodityRepository, Long>
+	implements ICommodityService {
 
 	private final WechatLivePlayerUtil wechatLivePlayerUtil;
 	private final IGoodsSkuService goodsSkuService;
