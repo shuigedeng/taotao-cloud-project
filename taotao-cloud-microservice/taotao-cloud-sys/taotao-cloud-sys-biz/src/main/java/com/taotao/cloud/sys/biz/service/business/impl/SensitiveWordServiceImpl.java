@@ -8,6 +8,7 @@ import com.taotao.cloud.sys.biz.repository.cls.SensitiveWordRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISensitiveWordRepository;
 import com.taotao.cloud.sys.biz.service.business.ISensitiveWordService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,12 @@ import java.util.stream.Collectors;
  * 敏感词业务层实现
  */
 @Service
+@AllArgsConstructor
 public class SensitiveWordServiceImpl extends
 	BaseSuperServiceImpl<ISensitiveWordMapper, SensitiveWord, SensitiveWordRepository, ISensitiveWordRepository, Long> implements
 	ISensitiveWordService {
 
-	@Autowired
-	private RedisRepository redisRepository;
+	private final RedisRepository redisRepository;
 
 	@Override
 	public void resetCache() {

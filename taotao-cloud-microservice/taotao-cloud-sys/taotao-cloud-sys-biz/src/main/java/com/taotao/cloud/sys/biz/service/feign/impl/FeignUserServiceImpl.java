@@ -13,40 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service.dubbo;
+package com.taotao.cloud.sys.biz.service.feign.impl;
 
-import com.taotao.cloud.sys.api.dubbo.IDubboUserRpc;
+import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.QUser;
+import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
+import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
+import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
-import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
+import com.taotao.cloud.sys.biz.service.business.IDictService;
+import com.taotao.cloud.sys.biz.service.business.IUserService;
+import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
+import com.taotao.cloud.sys.biz.service.feign.IFeignUserService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
-import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * UserServiceImpl
+ * DictServiceImpl
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2021-10-09 20:50:41
+ * @since 2021-10-09 20:26:36
  */
 @Service
 @AllArgsConstructor
-@DubboService(interfaceClass = IDubboUserRpc.class, validation = "true")
-public class DubboUserRpcImpl extends
-	BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
-	implements IDubboUserRpc {
+public class FeignUserServiceImpl extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
+	implements IFeignUserService {
 
-	private final static QUser USER = QUser.user;
+	private final IUserService userService;
 
-	private final static String DEFAULT_PASSWORD = "123456";
-	private final static String DEFAULT_USERNAME = "admin";
-
-	private final IUserRelationService userRoleService;
-
-
+	@Override
+	public <T> T test123(T t) {
+		return t;
+	}
 }

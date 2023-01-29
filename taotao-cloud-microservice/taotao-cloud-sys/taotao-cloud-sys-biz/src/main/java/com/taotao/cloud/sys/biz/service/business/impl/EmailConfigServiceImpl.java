@@ -20,6 +20,7 @@ import com.taotao.cloud.sys.api.model.vo.alipay.EmailVO;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.mapper.IEmailConfigMapper;
 import com.taotao.cloud.sys.biz.service.business.IEmailConfigService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@AllArgsConstructor
 //@CacheConfig(cacheNames = "emailConfig")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, EmailConfig> implements

@@ -25,6 +25,7 @@ import com.taotao.cloud.sys.biz.repository.inf.IRoleResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,7 @@ import java.util.Set;
  * @since 2020/10/21 09:48
  */
 @Service
+@AllArgsConstructor
 public class RoleResourceServiceImpl extends
 	BaseSuperServiceImpl<IRoleResourceMapper, RoleResource, RoleResourceRepository, IRoleResourceRepository, Long>
 	implements IRoleResourceService {

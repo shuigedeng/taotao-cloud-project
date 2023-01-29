@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboRoleRpc;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
+import com.taotao.cloud.sys.biz.model.entity.system.QRole;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
@@ -40,8 +41,8 @@ public class DubboRoleRpcImpl extends
 	BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
 	implements IDubboRoleRpc {
 
-	//private final static QRole SYS_ROLE = QRole.role;
+	private final static QRole ROLE = QRole.role;
 
-	private final IRoleResourceService sysRoleResourceService;
+	private final IRoleResourceService roleResourceService;
 
 }

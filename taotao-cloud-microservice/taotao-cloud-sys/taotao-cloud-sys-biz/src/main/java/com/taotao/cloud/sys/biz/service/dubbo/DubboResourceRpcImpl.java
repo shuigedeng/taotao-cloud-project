@@ -19,13 +19,14 @@ import com.taotao.cloud.sys.api.dubbo.IDubboResourceRpc;
 import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
 import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
+import com.taotao.cloud.sys.biz.model.entity.system.QResource;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,15 +39,15 @@ import java.util.List;
  * @since 2021-10-09 20:41:23
  */
 @Service
+@AllArgsConstructor
 @DubboService(interfaceClass = IDubboResourceRpc.class, validation = "true")
 public class DubboResourceRpcImpl extends
 	BaseSuperServiceImpl<IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
 	implements IDubboResourceRpc {
 
-	@Autowired
-	private IRoleService sysRoleService;
+	private final IRoleService roleService;
 
-	//private final static QResource RESOURCE = QResource.resource;
+	private final static QResource RESOURCE = QResource.resource;
 
 	@Override
 	public List<DubboMenuQueryRequest> queryAllById(Long id) {

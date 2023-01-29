@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.AllArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.data.domain.Pageable;
@@ -48,6 +49,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-02-15 08:55:37
  */
 @Service
+@AllArgsConstructor
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 		ILogService {

@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 @CacheConfig(cacheNames = "quartzJob")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class QuartzJobServiceImpl extends
@@ -52,10 +54,6 @@ public class QuartzJobServiceImpl extends
 	IQuartzJobService {
 
 	private final QuartzManager quartzManager;
-
-	public QuartzJobServiceImpl(QuartzManager quartzManager) {
-		this.quartzManager = quartzManager;
-	}
 
 	@Override
 	@Cacheable

@@ -24,6 +24,7 @@ import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,17 +40,14 @@ import java.util.Set;
  * @since 2021-10-09 20:46:26
  */
 @Service
+@AllArgsConstructor
 public class RoleServiceImpl extends
 	BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
 	implements IRoleService {
 
 	//private final static QRole SYS_ROLE = QRole.role;
 
-	private final IRoleResourceService sysRoleResourceService;
-
-	public RoleServiceImpl(IRoleResourceService sysRoleResourceService) {
-		this.sysRoleResourceService = sysRoleResourceService;
-	}
+	private final IRoleResourceService roleResourceService;
 
 	@Override
 	public Boolean existRoleByCode(String code) {
@@ -61,7 +59,7 @@ public class RoleServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean saveRoleMenus(Long roleId, Set<Long> menuIds) {
-		return sysRoleResourceService.saveRoleMenu(roleId, menuIds);
+		return roleResourceService.saveRoleMenu(roleId, menuIds);
 	}
 
 	@Override
