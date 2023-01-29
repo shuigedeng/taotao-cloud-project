@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-02-11 16:25:18
  */
 @Service
+@AllArgsConstructor
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implements
 		IVisitsService {
@@ -31,12 +33,6 @@ public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implem
 	private final ILogMapper ILogMapper;
 
 	private final IVisitsMapper IVisitsMapper;
-
-	public VisitsServiceImpl(ILogMapper ILogMapper, IVisitsMapper IVisitsMapper) {
-		this.ILogMapper = ILogMapper;
-		this.IVisitsMapper = IVisitsMapper;
-	}
-
 
 	@Override
 	public void save() {

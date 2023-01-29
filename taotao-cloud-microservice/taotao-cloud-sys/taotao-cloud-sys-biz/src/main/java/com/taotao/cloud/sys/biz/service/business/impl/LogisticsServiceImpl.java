@@ -23,6 +23,7 @@ import com.taotao.cloud.sys.biz.repository.cls.LogisticsRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ILogisticsRepository;
 import com.taotao.cloud.sys.biz.service.business.ILogisticsService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -33,6 +34,7 @@ import java.util.Optional;
  * @since 2020/11/13 10:00
  */
 @Service
+@AllArgsConstructor
 public class LogisticsServiceImpl extends
 	BaseSuperServiceImpl<ILogisticsMapper, LogisticsConfig, LogisticsRepository, ILogisticsRepository, Long>
 	implements ILogisticsService {

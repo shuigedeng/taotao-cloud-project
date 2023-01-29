@@ -32,7 +32,7 @@ import com.taotao.cloud.sys.biz.service.business.IResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.sys.biz.utils.TreeUtil;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,12 +49,12 @@ import java.util.Set;
  * @since 2021-10-09 20:41:23
  */
 @Service
+@AllArgsConstructor
 public class ResourceServiceImpl extends
 	BaseSuperServiceImpl<IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
 	implements IResourceService {
 
-	@Autowired
-	private IRoleService sysRoleService;
+	private final IRoleService roleService;
 
 	//private final IFeignOrderItemService IFeignOrderItemService;
 	//private final IFeignOrderService IFeignOrderService;
@@ -103,7 +103,7 @@ public class ResourceServiceImpl extends
 
 	@Override
 	public List<MenuBO> findMenuByCodes(Set<String> codes) {
-		List<RoleBO> sysRoles = sysRoleService.findRoleByCodes(codes);
+		List<RoleBO> sysRoles = roleService.findRoleByCodes(codes);
 		if (CollUtil.isEmpty(sysRoles)) {
 			throw new BusinessException("未查询到角色信息");
 		}

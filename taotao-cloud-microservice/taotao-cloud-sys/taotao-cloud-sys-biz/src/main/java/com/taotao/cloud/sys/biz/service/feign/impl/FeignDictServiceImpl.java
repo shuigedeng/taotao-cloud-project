@@ -37,8 +37,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class FeignDictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
 	implements IFeignDictService {
-	@Autowired
-	private IDictService dictService;
+
+	private final IDictService dictService;
 
 	@Override
 	public <T> T test123(T t) {

@@ -31,6 +31,7 @@ import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import com.taotao.cloud.sys.biz.model.convert.DictConvert;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
+import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
 import com.taotao.cloud.web.base.controller.BaseFeignController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.web.version.ApiInfo;
@@ -67,6 +68,8 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 @RequestMapping("/sys/feign/dict")
 public class FeignDictController extends BaseFeignController<IDictService, Dict, Long> implements IFeignDictApi {
 
+	@Autowired
+	private IFeignDictService feignDictService;
 	@Autowired
 	private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 

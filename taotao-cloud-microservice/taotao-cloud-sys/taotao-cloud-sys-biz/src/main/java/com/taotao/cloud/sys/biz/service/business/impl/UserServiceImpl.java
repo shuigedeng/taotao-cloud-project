@@ -29,6 +29,7 @@ import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
 import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +49,7 @@ import java.util.stream.Collectors;
  * @since 2021-10-09 20:50:41
  */
 @Service
+@AllArgsConstructor
 public class UserServiceImpl extends
 	BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
 	implements IUserService {
@@ -58,10 +60,6 @@ public class UserServiceImpl extends
 	private final static String DEFAULT_USERNAME = "admin";
 
 	private final IUserRelationService userRelationService;
-
-	public UserServiceImpl(IUserRelationService userRelationService) {
-		this.userRelationService = userRelationService;
-	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)

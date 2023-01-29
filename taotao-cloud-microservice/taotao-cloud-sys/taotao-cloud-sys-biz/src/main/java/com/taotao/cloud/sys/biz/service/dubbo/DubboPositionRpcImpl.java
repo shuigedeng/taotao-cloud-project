@@ -6,6 +6,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.Position;
 import com.taotao.cloud.sys.biz.repository.cls.JobRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IJobRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
+@AllArgsConstructor
 @DubboService(interfaceClass = IDubboPositionRpc.class, validation = "true")
 public class DubboPositionRpcImpl extends
 	BaseSuperServiceImpl<IPositionMapper, Position, JobRepository, IJobRepository, Long>

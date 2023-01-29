@@ -40,6 +40,7 @@ import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,15 +61,13 @@ import java.util.stream.Collectors;
  * @since 2021-10-09 20:37:52
  */
 @Service
+@AllArgsConstructor
 public class RegionServiceImpl extends
 	BaseSuperServiceImpl<IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
 	implements IRegionService {
 
-	@Autowired
-	private OkHttpService okHttpService;
-	@Autowired
-	private RedisRepository redisRepository;
-
+	private final OkHttpService okHttpService;
+	private final RedisRepository redisRepository;
 
 	private final static String AMAP_KEY = System.getenv("AMAP_KEY");
 	private final static String AMAP_SECURITY_KEY = System.getenv("AMAP_SECURITY_KEY");
@@ -277,7 +276,7 @@ public class RegionServiceImpl extends
 
 			if (StrUtil.isNotBlank(jsonString)) {
 				//清空数据
-				QueryWrapper<Region> queryWrapper = new QueryWrapper();
+				QueryWrapper<Region> queryWrapper = new QueryWrapper<>();
 				queryWrapper.eq("version", "1");
 				this.remove(queryWrapper);
 

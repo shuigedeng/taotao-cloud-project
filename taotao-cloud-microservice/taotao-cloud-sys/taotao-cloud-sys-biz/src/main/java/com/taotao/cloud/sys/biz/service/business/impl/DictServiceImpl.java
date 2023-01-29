@@ -36,7 +36,6 @@ import java.util.concurrent.Future;
 import lombok.AllArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,7 +52,7 @@ public class DictServiceImpl extends
 	BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
 	implements IDictService {
 
-	private final DictRepository sysDictRepository;
+	private final DictRepository dictRepository;
 
 	//private final IDictItemService sysDictItemService;
 	//
@@ -134,7 +133,7 @@ public class DictServiceImpl extends
 		//List<Dict> all = ir().findAll();
 		//List<Dict> all1 = cr().findAll();
 
-		Optional<Dict> optionalDict = sysDictRepository.findByCode(code);
+		Optional<Dict> optionalDict = dictRepository.findByCode(code);
 		return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
 		//return Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now())
 		//	.dictCode("123123123").dictName("lsdfjaslf")

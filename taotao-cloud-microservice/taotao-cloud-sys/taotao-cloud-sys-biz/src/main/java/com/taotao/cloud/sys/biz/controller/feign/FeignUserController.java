@@ -36,6 +36,7 @@ import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
+import com.taotao.cloud.sys.biz.service.feign.IFeignUserService;
 import com.taotao.cloud.web.base.controller.BaseFeignController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.web.version.ApiInfo;
@@ -51,6 +52,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,8 +71,11 @@ import org.springframework.web.context.request.async.WebAsyncTask;
  */
 @Validated
 @RestController
+@AllArgsConstructor
 public class FeignUserController extends BaseFeignController<IUserService, User, Long> implements
 	IFeignUserApi {
+
+	private final IFeignUserService feignUserService;
 
 	@Override
 	public UserQueryVO findUserInfoByUsername(String username) {

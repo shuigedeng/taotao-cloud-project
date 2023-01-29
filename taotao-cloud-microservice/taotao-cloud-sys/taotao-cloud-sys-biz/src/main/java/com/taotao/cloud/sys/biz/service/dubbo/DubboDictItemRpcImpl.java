@@ -21,6 +21,7 @@ import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
 import com.taotao.cloud.sys.biz.repository.cls.DictItemRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictItemRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:34:52
  */
 @Service
+@AllArgsConstructor
 @DubboService(interfaceClass = IDubboDictItemRpc.class, validation = "true")
 public class DubboDictItemRpcImpl extends
 	BaseSuperServiceImpl<IDictItemMapper, DictItem, DictItemRepository, IDictItemRepository, Long>
