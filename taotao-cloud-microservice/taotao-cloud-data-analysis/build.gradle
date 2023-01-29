@@ -39,16 +39,16 @@ dependencies {
     implementation "ru.yandex.clickhouse:clickhouse-jdbc:0.3.2"
 
     //trino
-    implementation "io.trino:trino-jdbc:402"
-    implementation "io.trino:trino-spi:402"
-    implementation "io.trino:trino-main:402"
+    implementation "io.trino:trino-jdbc:406"
+    implementation "io.trino:trino-spi:406"
+    implementation "io.trino:trino-main:406"
     implementation "io.airlift:slice:0.44"
     implementation "io.airlift:units:1.8"
     implementation "com.google.guava:guava:31.1-jre"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.14.0"
 
     //hbase
-    implementation "org.apache.hbase:hbase-client:2.4.13"
+    implementation "org.apache.hbase:hbase-client:2.5.2-hadoop3"
 
 }
 
