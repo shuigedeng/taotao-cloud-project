@@ -2,7 +2,7 @@ dependencies {
     implementation project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
     implementation project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
 
-    implementation "org.springframework:spring-context:6.0.3"
+    implementation "org.springframework:spring-context:6.0.4"
     implementation "org.apache.commons:commons-collections4:4.4"
     implementation "cglib:cglib:3.3.0"
 }

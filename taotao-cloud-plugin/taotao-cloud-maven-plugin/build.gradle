@@ -7,7 +7,7 @@ plugins {
 
 //    //https://github.com/britter/maven-plugin-development/blob/main/sample/gradle-producer-build
 //    //https://plugins.gradle.org/plugin/de.benediktritter.maven-plugin-development
-//    id "de.benediktritter.maven-plugin-development" version "0.4.0"
+//    id "de.benediktritter.maven-plugin-development" version "0.4.1"
 //    id "maven-publish"
 
 //    //https://plugins.gradle.org/plugin/com.liferay.maven.plugin.builder
