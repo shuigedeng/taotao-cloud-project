@@ -24,7 +24,7 @@ public interface IFeignUserApi {
 	 * @return 用户信息
 	 * @since 2020/10/21 15:06
 	 */
-	@GetMapping(value = "/user/info/username")
+	@GetMapping(value = "/sys/feign/user/info/username")
 	UserQueryVO findUserInfoByUsername(@RequestParam(value = "username") String username);
 
 	/**
@@ -35,7 +35,7 @@ public interface IFeignUserApi {
 	 * @return 系统用户信息
 	 * @since 2020/4/29 17:47
 	 */
-	@GetMapping(value = "/user/info/social/{social}", headers = {"from=in"})
+	@GetMapping(value = "/sys/feign/user/info/social/{social}", headers = {"from=in"})
 	SecurityUser getUserInfoBySocial(@RequestParam("providerId") String providerId,
 		@RequestParam("providerUserId") int providerUserId);
 
@@ -46,7 +46,7 @@ public interface IFeignUserApi {
 	 * @return 系统用户信息
 	 * @since 2020/4/29 17:48
 	 */
-	@GetMapping(value = "/sys/info/security")
+	@GetMapping(value = "/sys/feign/info/security")
 	SecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
 
 }

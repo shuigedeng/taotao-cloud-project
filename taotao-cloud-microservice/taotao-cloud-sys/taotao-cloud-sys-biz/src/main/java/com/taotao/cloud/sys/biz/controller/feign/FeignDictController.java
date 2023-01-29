@@ -65,14 +65,11 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 @Validated
 @RestController
 @RequestMapping("/sys/feign/dict")
-public class FeignDictController extends BaseFeignController<IDictService, Dict, Long> {
+public class FeignDictController extends BaseFeignController<IDictService, Dict, Long> implements IFeignDictApi {
 
 	@Autowired
 	private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
-	/**
-	 * 字典列表code查询 {@link IFeignDictApi#findByCode(String)}
-	 */
 	@ApiInfo(
 		create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
 		update = {
@@ -80,11 +77,11 @@ public class FeignDictController extends BaseFeignController<IDictService, Dict,
 			@ApiInfo.Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		}
 	)
+	@Override
 	@NotAuth
 	@Idempotent(perFix = "findByCode")
 	@Limit(key = "limitTest", period = 10, count = 3)
 	@SentinelResource("findByCode")
-	@GetMapping("/code")
 	public FeignDictResponse findByCode(@RequestParam(value = "code") String code) {
 		if ("sd".equals(code)) {
 			throw new BusinessException("我出错了");
