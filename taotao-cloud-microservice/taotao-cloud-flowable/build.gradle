@@ -1,0 +1,6 @@
+dependencies {
+    api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+
+}
+
+description = "客服模块api"
