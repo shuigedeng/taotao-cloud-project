@@ -114,7 +114,7 @@ plugins {
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.github.shalousun.smart-doc
-    id "com.github.shalousun.smart-doc" version "2.6.3"
+    id "com.github.shalousun.smart-doc" version "2.6.4"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck

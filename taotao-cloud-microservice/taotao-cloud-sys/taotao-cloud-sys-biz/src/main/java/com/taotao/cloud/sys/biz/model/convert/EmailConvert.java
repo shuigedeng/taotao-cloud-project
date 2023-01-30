@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.model.dto.EmailDTO;
+import com.taotao.cloud.sys.api.model.dto.email.EmailDTO;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
