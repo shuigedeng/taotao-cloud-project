@@ -17,7 +17,7 @@ import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.io.FileUtils;
-import com.taotao.cloud.common.utils.io.StreamUtils;
+import com.taotao.cloud.common.utils.lambda.StreamUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.constant.GenConstants;
