@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /**
- * 用户+密码登录
+ * 指纹 登录
  */
 public class FingerprintAuthenticationProvider implements AuthenticationProvider, InitializingBean,
 	MessageSourceAware {

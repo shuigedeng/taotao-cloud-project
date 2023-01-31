@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /**
- * 用户+密码登录
+ * 用户+密码+认证码 登录
  */
 public class QrcodeAuthenticationProvider implements AuthenticationProvider, InitializingBean,
 	MessageSourceAware {

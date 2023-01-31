@@ -12,8 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
  * https://juejin.cn/post/7081945118202134542
  * </p>
  *
- * @author: jacklin
- * @since: 2022/03/28 9:38
  **/
 public interface IOpenAPIService {
 
@@ -22,8 +20,6 @@ public interface IOpenAPIService {
 	 *
 	 * @param accessToken APP端SDK获取的登录token，必填
 	 * @param outId       外部流水号，非必填
-	 * @author: jacklin
-	 * @since: 2021/4/17 9:41
 	 **/
 	GetMobileResponse getMobile(String accessToken, String outId, HttpServletRequest request);
 
@@ -33,8 +29,6 @@ public interface IOpenAPIService {
 	 * @param accessCode  APP端SDK获取的登录token，必填
 	 * @param phoneNumber 手机号，必填
 	 * @param outId       外部流水号，非必填
-	 * @author: jacklin
-	 * @since: 2021/4/17 11:18
 	 **/
 	VerifyMobileResponse verifyMobile(String accessCode, String phoneNumber, String outId,
 		HttpServletRequest request);
@@ -44,8 +38,6 @@ public interface IOpenAPIService {
 	 *
 	 * @param configKey 参数键名
 	 * @return configValue  参数键值
-	 * @author: jacklin
-	 * @since: 2022/1/15 15:43
 	 **/
 	String selectConfigValueByKey(String configKey, HttpServletRequest request);
 

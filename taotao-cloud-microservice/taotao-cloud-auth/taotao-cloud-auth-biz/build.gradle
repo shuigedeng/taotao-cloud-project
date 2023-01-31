@@ -64,12 +64,14 @@ dependencies {
     implementation "io.projectreactor.netty:reactor-netty-http"
     implementation "io.projectreactor.netty:reactor-netty"
 
+    //百度人脸识别以及登录
     implementation("com.baidu.aip:java-sdk:4.16.11") {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-api"
     }
 
+    // 阿里云app手机一键登录
     implementation 'com.aliyun:dypnsapi20170525:1.0.8'
 
 }

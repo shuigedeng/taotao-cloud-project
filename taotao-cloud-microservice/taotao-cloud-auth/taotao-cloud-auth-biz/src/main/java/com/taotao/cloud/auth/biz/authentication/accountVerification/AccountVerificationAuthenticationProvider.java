@@ -20,7 +20,7 @@ import org.springframework.util.Assert;
 import java.util.Collection;
 
 /**
- * 手机号码+短信登录
+ * 用户名+短信+校验码 登录
  */
 public class AccountVerificationAuthenticationProvider implements AuthenticationProvider, InitializingBean,
 	MessageSourceAware {

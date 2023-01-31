@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
 import java.util.Collection;
 
 /**
- * 用户+密码登录
+ * 百度人脸识别登录
  */
 public class FaceAuthenticationProvider implements AuthenticationProvider, InitializingBean,
 	MessageSourceAware {

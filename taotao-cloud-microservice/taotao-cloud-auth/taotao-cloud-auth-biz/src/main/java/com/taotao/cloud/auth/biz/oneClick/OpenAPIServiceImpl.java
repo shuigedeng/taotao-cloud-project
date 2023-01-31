@@ -7,6 +7,7 @@ import com.aliyun.dypnsapi20170525.models.GetMobileResponse;
 import com.aliyun.dypnsapi20170525.models.VerifyMobileRequest;
 import com.aliyun.dypnsapi20170525.models.VerifyMobileResponse;
 import com.aliyun.teaopenapi.models.Config;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -20,9 +21,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 开放API接口 服务实现类
- *
- * @author: jacklin
- * @since: 2021/03/29 9:39
  **/
 @Slf4j
 @Service
@@ -31,7 +29,7 @@ public class OpenAPIServiceImpl implements IOpenAPIService {
 	@Autowired
 	private RedisUtil redisUtil;
 	@Resource
-	BaseCommonMapper baseCommonMapper;
+	private BaseCommonMapper baseCommonMapper;
 
 	/**
 	 * 使用AK&SK初始化账号Client
