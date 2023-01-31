@@ -19,6 +19,9 @@ import org.springframework.util.Assert;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * 微信小程序登录
+ */
 public class MiniAppAuthenticationProvider implements AuthenticationProvider, MessageSourceAware {
 
 	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();

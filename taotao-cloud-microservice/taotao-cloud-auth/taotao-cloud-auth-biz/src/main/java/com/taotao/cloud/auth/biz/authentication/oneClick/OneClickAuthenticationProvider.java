@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /**
- * 用户+密码登录
+ * 基于阿里云app手机号码一键登录
  */
 public class OneClickAuthenticationProvider implements AuthenticationProvider, InitializingBean,
 	MessageSourceAware {
