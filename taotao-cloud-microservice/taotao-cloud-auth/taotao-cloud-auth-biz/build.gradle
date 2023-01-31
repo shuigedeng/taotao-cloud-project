@@ -70,6 +70,8 @@ dependencies {
         exclude group: "org.slf4j", module: "slf4j-api"
     }
 
+    implementation 'com.aliyun:dypnsapi20170525:1.0.8'
+
 }
 
 mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
