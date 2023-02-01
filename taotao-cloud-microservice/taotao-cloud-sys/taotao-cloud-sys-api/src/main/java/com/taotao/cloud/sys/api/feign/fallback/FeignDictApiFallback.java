@@ -34,6 +34,11 @@ public class FeignDictApiFallback implements FallbackFactory<IFeignDictApi> {
 
 				return null;
 			}
+
+			@Override
+			public FeignDictResponse test(String id) {
+				return null;
+			}
 		};
 	}
 }
