@@ -15,12 +15,20 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
+import com.blazebit.persistence.CriteriaBuilderFactory;
+import com.blazebit.persistence.PagedList;
+import com.blazebit.persistence.querydsl.BlazeJPAQuery;
+import com.google.common.collect.Lists;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.RandomUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.data.jpa.model.SelectBooleanBuilder;
+import com.taotao.cloud.data.jpa.model.SelectBuilder;
 import com.taotao.cloud.sys.api.model.page.DictPageQuery;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -31,11 +39,14 @@ import com.taotao.cloud.sys.biz.service.business.IDictItemService;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import io.seata.spring.annotation.GlobalTransactional;
+import jakarta.validation.constraints.NotNull;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import lombok.AllArgsConstructor;
@@ -60,11 +71,11 @@ public class DictServiceImpl extends
 	implements IDictService {
 
 	private final IDictItemService dictItemService;
+	private final CriteriaBuilderFactory criteriaBuilderFactory;
 
-	private final QDict SYS_DICT = QDict.dict;
-	private final BooleanExpression PREDICATE = SYS_DICT.eq(SYS_DICT);
-	private final OrderSpecifier<Integer> SORT_DESC = SYS_DICT.sortNum.desc();
-	private final OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = SYS_DICT.createTime.desc();
+	private final QDict DICT = QDict.dict;
+	private final OrderSpecifier<Integer> SORT_DESC = DICT.sortNum.desc();
+	private final OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = DICT.createTime.desc();
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -83,15 +94,16 @@ public class DictServiceImpl extends
 
 	@Override
 	public Page<Dict> queryPage(Pageable page, DictPageQuery dictPageQuery) {
-		//Optional.ofNullable(dictPageQuery.getDictName())
-		//	.ifPresent(dictName -> PREDICATE.and(SYS_DICT.dictName.like(dictName)));
-		//Optional.ofNullable(dictPageQuery.getDictCode())
-		//	.ifPresent(dictCode -> PREDICATE.and(SYS_DICT.dictCode.eq(dictCode)));
-		//Optional.ofNullable(dictPageQuery.getDescription())
-		//	.ifPresent(description -> PREDICATE.and(SYS_DICT.description.like(description)));
-		//Optional.ofNullable(dictPageQuery.getRemark())
-		//	.ifPresent(remark -> PREDICATE.and(SYS_DICT.remark.like(remark)));
-		return cr().findPageable(PREDICATE, page, SORT_DESC, CREATE_TIME_DESC);
+		BooleanExpression predicate = DICT.delFlag.eq(false);
+		Optional.ofNullable(dictPageQuery.getDictName())
+			.ifPresent(dictName -> predicate.and(DICT.dictName.like(dictName)));
+		Optional.ofNullable(dictPageQuery.getDictCode())
+			.ifPresent(dictCode -> predicate.and(DICT.dictCode.eq(dictCode)));
+		Optional.ofNullable(dictPageQuery.getDescription())
+			.ifPresent(description -> predicate.and(DICT.description.like(description)));
+		Optional.ofNullable(dictPageQuery.getRemark())
+			.ifPresent(remark -> predicate.and(DICT.remark.like(remark)));
+		return cr().findPageable(predicate, page, SORT_DESC, CREATE_TIME_DESC);
 	}
 
 	@Override
@@ -219,4 +231,53 @@ public class DictServiceImpl extends
 
 		return true;
 	}
+
+	//****************************************************************
+
+	public void testDynamicQuery(List<String> names, Long id) {
+		BooleanBuilder builder = new BooleanBuilder();
+		for (String name : names) {
+			builder.or(DICT.dictName.equalsIgnoreCase(name));
+		}
+		if (id != null) {
+			builder.and(DICT.id.eq(id));
+		}
+		List<Dict> dicts = cr().jpaQueryFactory().selectFrom(DICT).where(builder).fetch();
+		System.out.println(dicts);
+
+	}
+
+	public PagedList<Dict> testBlazeQuery(
+		@NotNull Long deptId, Dict params, @NotNull Pageable page) {
+		//BooleanBuilder builder = SelectBuilder.booleanBuilder(params).getPredicate();
+		BooleanBuilder builder = SelectBuilder.booleanBuilder().getPredicate();
+		builder.and(DICT.id.eq(deptId));
+		return new BlazeJPAQuery<Dict>(cr().entityManager(), criteriaBuilderFactory)
+			.select(DICT)
+			.from(DICT)
+			.leftJoin(DICT)
+			.on(DICT.id.eq(DICT.id))
+			.where(builder)
+			.orderBy(DICT.id.desc())
+			.fetchPage((int) page.getOffset(), page.getPageSize());
+	}
+
+	public List<Dict> testBlazeQuery(Long projectId, Set<Long> ids, String name,
+		Long limit) {
+		if (Objects.isNull(projectId)) {
+			return Lists.newArrayList();
+		}
+		BooleanBuilder where =
+			SelectBooleanBuilder.booleanBuilder()
+				.and(DICT.id.eq(projectId))
+				.notEmptyIn(ids, DICT.id)
+				.notBlankContains(name, DICT.dictName)
+				.getPredicate();
+		JPAQuery<Dict> query = cr().jpaQueryFactory().selectFrom(DICT).where(where);
+		if (limit != null && limit > 0) {
+			query.limit(limit);
+		}
+		return query.fetch();
+	}
+
 }
