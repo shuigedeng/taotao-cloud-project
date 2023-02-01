@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
-import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
+import com.taotao.cloud.distribution.biz.service.IDistributionOrderService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionOrderManagerController {
 
 	@Autowired
-	private DistributionOrderService distributionOrderService;
+	private IDistributionOrderService distributionOrderService;
 
 	@Operation(summary = "通过id获取分销订单", description = "通过id获取分销订单")
 	@RequestLogger
@@ -43,6 +43,7 @@ public class DistributionOrderManagerController {
 	public Result<IPage<DistributionOrder>> getByPage(
 		DistributionOrderPageQuery distributionOrderPageQuery) {
 
-		return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
+		return Result.success(
+			distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
 	}
 }

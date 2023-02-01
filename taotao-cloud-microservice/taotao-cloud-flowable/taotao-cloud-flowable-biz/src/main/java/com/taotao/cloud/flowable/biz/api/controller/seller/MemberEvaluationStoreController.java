@@ -33,16 +33,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberEvaluationStoreController {
 
 	@Autowired
-	private IFeignMemberEvaluationApi memberEvaluationService;
+	private IFeignMemberEvaluationApi memberEvaluationApi;
 
 	@Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
-	public Result<PageResult<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
+	public Result<PageResult<MemberEvaluationListVO>> getByPage(
+		EvaluationPageQuery evaluationPageQuery) {
 		evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
-		IPage<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationService.queryPage(evaluationPageQuery);
-		return Result.success(PageResult.convertMybatisPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
+		IPage<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationApi.queryPage(
+			evaluationPageQuery);
+		return Result.success(PageResult.convertMybatisPage(memberEvaluationListVOIPage,
+			MemberEvaluationListVO.class));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
@@ -50,18 +53,20 @@ public class MemberEvaluationStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/get/{id}")
 	public Result<MemberEvaluationVO> get(@PathVariable Long id) {
-		return Result.success(OperationalJudgment.judgment(memberEvaluationService.queryById(id)));
+		return Result.success(OperationalJudgment.judgment(memberEvaluationApi.queryById(id)));
 	}
 
 	@Operation(summary = "回复评价", description = "回复评价")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/reply/{id}")
-	public Result<MemberEvaluationVO> reply(@Parameter(description = "评价ID") @PathVariable Long id,
-											@Parameter(description = "回复内容") @RequestParam String reply,
-											@Parameter(description = "回复图片") @RequestParam String replyImage) {
-		MemberEvaluationVO memberEvaluationVO = OperationalJudgment.judgment(memberEvaluationService.queryById(id));
-		memberEvaluationService.reply(id, reply, replyImage);
+	public Result<MemberEvaluationVO> reply(
+		@Parameter(description = "评价ID") @PathVariable Long id,
+		@Parameter(description = "回复内容") @RequestParam String reply,
+		@Parameter(description = "回复图片") @RequestParam String replyImage) {
+		MemberEvaluationVO memberEvaluationVO = OperationalJudgment.judgment(
+			memberEvaluationApi.queryById(id));
+		memberEvaluationApi.reply(id, reply, replyImage);
 		return Result.success(memberEvaluationVO);
 	}
 }

@@ -6,8 +6,8 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.model.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.model.vo.DistributionGoodsVO;
-import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
-import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsService;
+import com.taotao.cloud.distribution.biz.service.IDistributionGoodsService;
+import com.taotao.cloud.distribution.biz.service.IDistributionSelectedGoodsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,19 +34,19 @@ public class DistributionGoodsBuyerController {
 	 * 分销商品
 	 */
 	@Autowired
-	private DistributionGoodsService distributionGoodsService;
+	private IDistributionGoodsService distributionGoodsService;
 	/**
 	 * 选择分销商品
 	 */
 	@Autowired
-	private DistributionSelectedGoodsService distributionSelectedGoodsService;
+	private IDistributionSelectedGoodsService distributionSelectedGoodsService;
 
 	@Operation(summary = "获取分销商商品列表", description = "获取分销商商品列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<IPage<DistributionGoodsVO>> distributionGoods(
-			DistributionGoodsPageQuery distributionGoodsPageQuery) {
+		DistributionGoodsPageQuery distributionGoodsPageQuery) {
 		return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
 	}
 
@@ -57,8 +57,8 @@ public class DistributionGoodsBuyerController {
 	@PreventDuplicateSubmissions
 	@GetMapping(value = "/checked/{distributionGoodsId}")
 	public Result<Object> distributionCheckGoods(
-			@NotNull(message = "分销商品不能为空") @PathVariable("distributionGoodsId") String distributionGoodsId,
-			@Parameter(description = "是否选择") Boolean checked) {
+		@NotNull(message = "分销商品不能为空") @PathVariable("distributionGoodsId") String distributionGoodsId,
+		@Parameter(description = "是否选择") Boolean checked) {
 		boolean result = false;
 		if (checked) {
 			result = distributionSelectedGoodsService.add(distributionGoodsId);

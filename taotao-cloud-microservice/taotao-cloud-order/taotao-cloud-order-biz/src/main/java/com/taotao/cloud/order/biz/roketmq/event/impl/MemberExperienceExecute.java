@@ -30,12 +30,12 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 	/**
 	 * 会员
 	 */
 	@Autowired
-	private IFeignMemberApi memberService;
+	private IFeignMemberApi memberApi;
 	/**
 	 * 订单
 	 */
@@ -58,7 +58,7 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 			BigDecimal point = CurrencyUtils.mul(experienceSetting.getMoney(), order.getFlowPrice(),
 				0);
 			//赠送会员经验值
-			memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(),
+			memberApi.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(),
 				order.getMemberId(), "会员下单，赠送经验值" + point + "分");
 		}
 	}
@@ -70,7 +70,7 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
 	 * @since 2022-05-16 17:35:40
 	 */
 	private ExperienceSettingVO getExperienceSetting() {
-		return settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name())
+		return settingApi.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name())
 			;
 	}
 }

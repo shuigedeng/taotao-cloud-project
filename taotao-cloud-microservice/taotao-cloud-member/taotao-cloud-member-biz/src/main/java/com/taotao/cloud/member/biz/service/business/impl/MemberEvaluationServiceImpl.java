@@ -60,17 +60,17 @@ public class MemberEvaluationServiceImpl extends
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderApi feignOrderApi;
+	private IFeignOrderApi orderApi;
 	/**
 	 * 子订单
 	 */
 	@Autowired
-	private IFeignOrderItemApi feignOrderItemApi;
+	private IFeignOrderItemApi orderItemApi;
 	/**
 	 * 商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi feignGoodsSkuApi;
+	private IFeignGoodsSkuApi goodsSkuApi;
 	/**
 	 * rocketMq
 	 */
@@ -98,15 +98,15 @@ public class MemberEvaluationServiceImpl extends
 	@Override
 	public Boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO) {
 		//获取子订单信息
-		OrderItemVO orderItem = feignOrderItemApi.getBySn(memberEvaluationDTO.getOrderItemSn());
+		OrderItemVO orderItem = orderItemApi.getBySn(memberEvaluationDTO.getOrderItemSn());
 		//获取订单信息
-		OrderVO order = feignOrderApi.getBySn(orderItem.orderSn());
+		OrderVO order = orderApi.getBySn(orderItem.orderSn());
 		//检测是否可以添加会员评价
 		checkMemberEvaluation(orderItem, order);
 		//获取用户信息
 		Member member = memberService.getUserInfo();
 		//获取商品信息
-		GoodsSkuSpecGalleryVO goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(
+		GoodsSkuSpecGalleryVO goodsSku = goodsSkuApi.getGoodsSkuByIdFromCache(
 			memberEvaluationDTO.getSkuId());
 		//新增用户评价
 		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,
@@ -117,7 +117,7 @@ public class MemberEvaluationServiceImpl extends
 		this.save(memberEvaluation);
 
 		//修改订单货物评价状态为已评价
-		feignOrderItemApi.updateCommentStatus(orderItem.sn(), CommentStatusEnum.FINISHED);
+		orderItemApi.updateCommentStatus(orderItem.sn(), CommentStatusEnum.FINISHED);
 		//发送商品评价消息
 		String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
 			+ GoodsTagsEnum.GOODS_COMMENT_COMPLETE.name();

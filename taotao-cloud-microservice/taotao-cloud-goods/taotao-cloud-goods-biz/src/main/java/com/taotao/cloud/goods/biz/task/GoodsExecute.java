@@ -23,7 +23,7 @@ public class GoodsExecute implements EveryDayExecute {
 	 * 成员评价映射器 会员评价
 	 */
 	@Resource
-	private IFeignMemberEvaluationApi feignMemberEvaluationApi;
+	private IFeignMemberEvaluationApi memberEvaluationApi;
 	/**
 	 * 货物映射器 商品
 	 */
@@ -36,11 +36,11 @@ public class GoodsExecute implements EveryDayExecute {
 	@Override
 	public void execute() {
 		//查询上次统计到本次的评价数量
-		List<Map<String, Object>> list = feignMemberEvaluationApi.memberEvaluationNum();
+		List<Map<String, Object>> list = memberEvaluationApi.memberEvaluationNum();
 
 		for (Map<String, Object> map : list) {
 			goodsService.addGoodsCommentNum(Convert.toInt(map.get("num").toString()),
-					Convert.toLong(map.get("goods_id")));
+				Convert.toLong(map.get("goods_id")));
 		}
 
 	}

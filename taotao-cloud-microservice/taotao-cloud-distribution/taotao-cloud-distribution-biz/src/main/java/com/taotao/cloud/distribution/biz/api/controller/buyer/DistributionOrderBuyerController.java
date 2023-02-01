@@ -4,11 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
-import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
-import com.taotao.cloud.distribution.biz.service.DistributionService;
+import com.taotao.cloud.distribution.biz.service.IDistributionOrderService;
+import com.taotao.cloud.distribution.biz.service.IDistributionService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,27 +26,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/buyer/distribution/order")
 public class DistributionOrderBuyerController {
 
-    /**
-     * 分销订单
-     */
-    @Autowired
-    private DistributionOrderService distributionOrderService;
-    /**
-     * 分销员
-     */
-    @Autowired
-    private DistributionService distributionService;
+	/**
+	 * 分销订单
+	 */
+	@Autowired
+	private IDistributionOrderService distributionOrderService;
+	/**
+	 * 分销员
+	 */
+	@Autowired
+	private IDistributionService distributionService;
 
 	@Operation(summary = "分销员订单", description = "分销员订单")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping
-    public Result<IPage<DistributionOrder>> casHistory(
-	    DistributionOrderPageQuery distributionOrderPageQuery) {
-        //获取当前登录的分销员
-        distributionOrderPageQuery.setDistributionId(distributionService.getDistribution().getId());
-        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
-    }
+	@GetMapping
+	public Result<IPage<DistributionOrder>> casHistory(
+		DistributionOrderPageQuery distributionOrderPageQuery) {
+		//获取当前登录的分销员
+		distributionOrderPageQuery.setDistributionId(distributionService.getDistribution().getId());
+		return Result.success(
+			distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
+	}
 
 
 }

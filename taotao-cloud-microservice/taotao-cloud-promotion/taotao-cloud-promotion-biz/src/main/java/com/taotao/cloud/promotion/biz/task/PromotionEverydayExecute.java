@@ -21,12 +21,12 @@ public class PromotionEverydayExecute implements EveryDayExecute {
 	 * ES商品索引
 	 */
 	@Autowired
-	private IFeignEsGoodsIndexApi esGoodsIndexService;
+	private IFeignEsGoodsIndexApi esGoodsIndexApi;
 	/**
 	 * 系统设置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 	/**
 	 * 秒杀活动
 	 */
@@ -39,20 +39,20 @@ public class PromotionEverydayExecute implements EveryDayExecute {
 	@Override
 	public void execute() {
 		//清除所以商品索引的无效促销活动
-		this.esGoodsIndexService.cleanInvalidPromotion();
+		this.esGoodsIndexApi.cleanInvalidPromotion();
 		//定时创建活动
 		addSeckill();
 	}
 
 	/**
-	 * 添加秒杀活动
-	 * 从系统设置中获取秒杀活动的配置
-	 * 添加30天后的秒杀活动
+	 * 添加秒杀活动 从系统设置中获取秒杀活动的配置 添加30天后的秒杀活动
 	 */
 	private void addSeckill() {
-		SeckillSetting seckillSetting = settingService.getSeckillSetting(SettingCategoryEnum.SECKILL_SETTING.name());
+		SeckillSetting seckillSetting = settingApi.getSeckillSetting(
+			SettingCategoryEnum.SECKILL_SETTING.name());
 		for (int i = 1; i <= ISeckillService.PRE_CREATION; i++) {
-			Seckill seckill = new Seckill(i, seckillSetting.getHours(), seckillSetting.getSeckillRule());
+			Seckill seckill = new Seckill(i, seckillSetting.getHours(),
+				seckillSetting.getSeckillRule());
 			seckillService.savePromotions(seckill);
 		}
 	}

@@ -22,7 +22,7 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 	/**
 	 * 会员
 	 */
@@ -32,7 +32,7 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderApi orderService;
+	private IFeignOrderApi orderApi;
 
 	/**
 	 * 会员注册赠送经验值
@@ -55,7 +55,8 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 	 * @return 经验值设置
 	 */
 	private ExperienceSettingVO getExperienceSetting() {
-		ExperienceSettingVO setting = settingService.getExperienceSetting(SettingCategoryEnum.EXPERIENCE_SETTING.name());
+		ExperienceSettingVO setting = settingApi.getExperienceSetting(
+			SettingCategoryEnum.EXPERIENCE_SETTING.name());
 		return setting;
 	}
 }

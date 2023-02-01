@@ -10,14 +10,13 @@ import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.mapper.IFootprintMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
 import com.taotao.cloud.member.biz.service.business.IMemberBrowseService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 会员浏览历史业务层实现
@@ -33,7 +32,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, Membe
 	 * es商品业务层
 	 */
 	@Autowired
-	private IFeignEsGoodsIndexApi feignEsGoodsIndexApi;
+	private IFeignEsGoodsIndexApi esGoodsIndexApi;
 
 	@Override
 	public MemberBrowse saveFootprint(MemberBrowse memberBrowse) {
@@ -79,9 +78,10 @@ public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, Membe
 		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
 		lambdaQueryWrapper.eq(MemberBrowse::getDelFlag, false);
 		lambdaQueryWrapper.orderByDesc(MemberBrowse::getUpdateTime);
-		List<String> skuIdList = this.baseMapper.footprintSkuIdList(PageQuery.buildMpPage(), lambdaQueryWrapper);
+		List<String> skuIdList = this.baseMapper.footprintSkuIdList(PageQuery.buildMpPage(),
+			lambdaQueryWrapper);
 		if (!skuIdList.isEmpty()) {
-			List<EsGoodsIndexVO> list = feignEsGoodsIndexApi.getEsGoodsBySkuIds(skuIdList);
+			List<EsGoodsIndexVO> list = esGoodsIndexApi.getEsGoodsBySkuIds(skuIdList);
 			//去除为空的商品数据
 			list.removeIf(Objects::isNull);
 			return list;

@@ -37,7 +37,7 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 	/**
 	 * 会员
 	 */
@@ -47,7 +47,7 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderApi orderService;
+	private IFeignOrderApi orderApi;
 
 	/**
 	 * 会员注册赠送积分
@@ -70,7 +70,8 @@ public class MemberPointExecute implements MemberRegisterEvent {
 	 * @return 积分设置
 	 */
 	private PointSettingVO getPointSetting() {
-		PointSettingVO setting = settingService.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
+		PointSettingVO setting = settingApi.getPointSetting(
+			SettingCategoryEnum.POINT_SETTING.name());
 		return setting;
 	}
 }

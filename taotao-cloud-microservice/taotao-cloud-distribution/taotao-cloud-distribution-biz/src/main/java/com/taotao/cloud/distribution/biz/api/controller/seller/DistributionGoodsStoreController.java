@@ -8,8 +8,8 @@ import com.taotao.cloud.distribution.api.model.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.model.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
-import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
-import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsService;
+import com.taotao.cloud.distribution.biz.service.IDistributionGoodsService;
+import com.taotao.cloud.distribution.biz.service.IDistributionSelectedGoodsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,20 +41,20 @@ public class DistributionGoodsStoreController {
 	 * 分销商品
 	 */
 	@Autowired
-	private DistributionGoodsService distributionGoodsService;
+	private IDistributionGoodsService distributionGoodsService;
 
 	/**
 	 * 已选择分销商品
 	 */
 	@Autowired
-	private DistributionSelectedGoodsService distributionSelectedGoodsService;
+	private IDistributionSelectedGoodsService distributionSelectedGoodsService;
 
 	@Operation(summary = "获取分销商商品列表", description = "获取分销商商品列表")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping
 	public Result<IPage<DistributionGoodsVO>> distributionGoods(
-			DistributionGoodsPageQuery distributionGoodsPageQuery) {
+		DistributionGoodsPageQuery distributionGoodsPageQuery) {
 		return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
 	}
 
@@ -64,8 +64,8 @@ public class DistributionGoodsStoreController {
 	@GetMapping("/tree")
 	@PutMapping(value = "/checked/{skuId}")
 	public Result<DistributionGoods> distributionCheckGoods(
-			@NotNull(message = "规格ID不能为空") @PathVariable String skuId,
-			@NotNull(message = "佣金金额不能为空") @RequestParam BigDecimal commission) {
+		@NotNull(message = "规格ID不能为空") @PathVariable String skuId,
+		@NotNull(message = "佣金金额不能为空") @RequestParam BigDecimal commission) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
 		return Result.success(distributionGoodsService.checked(skuId, commission, storeId));
 	}
@@ -79,7 +79,7 @@ public class DistributionGoodsStoreController {
 		OperationalJudgment.judgment(distributionGoodsService.getById(id));
 		//清除分销商已选择分销商品
 		distributionSelectedGoodsService.remove(
-				new QueryWrapper<DistributionSelectedGoods>().eq("distribution_goods_id", id));
+			new QueryWrapper<DistributionSelectedGoods>().eq("distribution_goods_id", id));
 		//清除分销商品
 		distributionGoodsService.removeById(id);
 		return Result.success();

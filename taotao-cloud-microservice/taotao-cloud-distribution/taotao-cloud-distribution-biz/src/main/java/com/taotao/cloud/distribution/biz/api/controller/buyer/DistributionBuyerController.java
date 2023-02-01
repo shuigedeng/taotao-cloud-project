@@ -6,8 +6,8 @@ import com.taotao.cloud.distribution.api.model.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
-import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
-import com.taotao.cloud.distribution.biz.service.DistributionService;
+import com.taotao.cloud.distribution.biz.service.IDistributionOrderService;
+import com.taotao.cloud.distribution.biz.service.IDistributionService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,12 +34,12 @@ public class DistributionBuyerController {
 	 * 分销员
 	 */
 	@Autowired
-	private DistributionService distributionService;
+	private IDistributionService distributionService;
 	/**
 	 * 分销员订单
 	 */
 	@Autowired
-	private DistributionOrderService distributionOrderService;
+	private IDistributionOrderService distributionOrderService;
 
 	@Operation(summary = "申请分销员", description = "申请分销员")
 	@RequestLogger
@@ -56,7 +56,8 @@ public class DistributionBuyerController {
 	public Result<IPage<DistributionOrder>> distributionOrderPage(
 		DistributionOrderPageQuery distributionOrderPageQuery) {
 		distributionOrderPageQuery.setDistributionId(distributionService.getDistribution().getId());
-		return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
+		return Result.success(
+			distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
 	}
 
 	@Operation(summary = "获取当前会员的分销员信息,可根据分销员信息查询待提现金额以及冻结金额等信息", description = "获取当前会员的分销员信息,可根据分销员信息查询待提现金额以及冻结金额等信息")

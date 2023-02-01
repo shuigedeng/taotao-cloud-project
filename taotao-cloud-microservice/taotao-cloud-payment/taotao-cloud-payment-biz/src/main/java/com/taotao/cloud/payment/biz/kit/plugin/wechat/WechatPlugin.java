@@ -46,9 +46,6 @@ import com.taotao.cloud.payment.biz.service.RefundLogService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.payment.WechatPaymentSetting;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
@@ -57,6 +54,9 @@ import java.security.GeneralSecurityException;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.Objects;
+import org.hibernate.service.spi.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 微信支付
@@ -93,7 +93,7 @@ public class WechatPlugin implements Payment {
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 	/**
 	 * 联合登陆
 	 */
@@ -103,11 +103,12 @@ public class WechatPlugin implements Payment {
 	 * 联合登陆
 	 */
 	@Autowired
-	private IFeignOrderApi orderService;
+	private IFeignOrderApi orderApi;
 
 
 	@Override
-	public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response1, PayParam payParam) {
+	public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response1,
+		PayParam payParam) {
 
 		try {
 			CashierParam cashierParam = cashierSupport.cashierParam(payParam);
@@ -124,11 +125,12 @@ public class WechatPlugin implements Payment {
 			//第三方付款订单
 			String outOrderNo = IdGeneratorUtils.getIdStr();
 			//过期时间
-			String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
+			String timeExpire = DateTimeZoneUtil.dateToTimeZone(
+				System.currentTimeMillis() + 1000 * 60 * 3);
 
 			//回传数据
-			String attach = URLEncoder.createDefault().encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
-
+			String attach = URLEncoder.createDefault()
+				.encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
 
 			WechatPaymentSetting setting = wechatPaymentSetting();
 			String appid = setting.getServiceAppId();
@@ -169,7 +171,8 @@ public class WechatPlugin implements Payment {
 
 		try {
 			Connect connect = connectService.queryConnect(
-				ConnectQueryDTO.builder().userId(UserContext.getCurrentUser().getId()).unionType(ConnectEnum.WECHAT.name()).build()
+				ConnectQueryDTO.builder().userId(UserContext.getCurrentUser().getId())
+					.unionType(ConnectEnum.WECHAT.name()).build()
 			);
 			if (connect == null) {
 				return null;
@@ -185,9 +188,11 @@ public class WechatPlugin implements Payment {
 			//第三方付款订单
 			String outOrderNo = IdGeneratorUtils.getIdStr();
 			//过期时间
-			String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
+			String timeExpire = DateTimeZoneUtil.dateToTimeZone(
+				System.currentTimeMillis() + 1000 * 60 * 3);
 
-			String attach = URLEncoder.createDefault().encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
+			String attach = URLEncoder.createDefault()
+				.encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
 
 			WechatPaymentSetting setting = wechatPaymentSetting();
 			String appid = setting.getServiceAppId();
@@ -225,7 +230,8 @@ public class WechatPlugin implements Payment {
 				String body = response.getBody();
 				JSONObject jsonObject = JSONUtil.parseObj(body);
 				String prepayId = jsonObject.getStr("prepay_id");
-				Map<String, String> map = WxPayKit.jsApiCreateSign(appid, prepayId, setting.getApiclient_key());
+				Map<String, String> map = WxPayKit.jsApiCreateSign(appid, prepayId,
+					setting.getApiclient_key());
 				LogUtils.info("唤起支付参数:{}", map);
 
 				return Result.success(map);
@@ -250,9 +256,11 @@ public class WechatPlugin implements Payment {
 			//第三方付款订单
 			String outOrderNo = IdGeneratorUtils.getIdStr();
 			//过期时间
-			String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
+			String timeExpire = DateTimeZoneUtil.dateToTimeZone(
+				System.currentTimeMillis() + 1000 * 60 * 3);
 
-			String attach = URLEncoder.createDefault().encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
+			String attach = URLEncoder.createDefault()
+				.encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
 
 			WechatPaymentSetting setting = wechatPaymentSetting();
 			String appid = setting.getAppId();
@@ -268,7 +276,6 @@ public class WechatPlugin implements Payment {
 				.setAttach(attach)
 				.setNotify_url(notifyUrl(apiProperties.getBuyer(), PaymentMethodEnum.WECHAT))
 				.setAmount(new Amount().setTotal(fen));
-
 
 			LogUtils.info("统一下单参数 {}", JSONUtil.toJsonStr(unifiedOrderModel));
 			PaymentHttpResponse response = WechatApi.v3(
@@ -317,9 +324,11 @@ public class WechatPlugin implements Payment {
 			//第三方付款订单
 			String outOrderNo = IdGeneratorUtils.getIdStr();
 			//过期时间
-			String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
+			String timeExpire = DateTimeZoneUtil.dateToTimeZone(
+				System.currentTimeMillis() + 1000 * 60 * 3);
 
-			String attach = URLEncoder.createDefault().encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
+			String attach = URLEncoder.createDefault()
+				.encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
 
 			WechatPaymentSetting setting = wechatPaymentSetting();
 
@@ -374,7 +383,8 @@ public class WechatPlugin implements Payment {
 
 		try {
 			Connect connect = connectService.queryConnect(
-				ConnectQueryDTO.builder().userId(UserContext.getCurrentUser().getId()).unionType(ConnectEnum.WECHAT_MP_OPEN_ID.name()).build()
+				ConnectQueryDTO.builder().userId(UserContext.getCurrentUser().getId())
+					.unionType(ConnectEnum.WECHAT_MP_OPEN_ID.name()).build()
 			);
 			if (connect == null) {
 				return null;
@@ -390,7 +400,8 @@ public class WechatPlugin implements Payment {
 			//第三方付款订单
 			String outOrderNo = IdGeneratorUtils.getIdStr();
 			//过期时间
-			String timeExpire = DateTimeZoneUtil.dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
+			String timeExpire = DateTimeZoneUtil.dateToTimeZone(
+				System.currentTimeMillis() + 1000 * 60 * 3);
 
 			//微信小程序，appid 需要单独获取，这里读取了联合登陆配置的appid ，实际场景小程序自动登录，所以这个appid是最为保险的做法
 			//如果有2开需求，这里需要调整，修改这个appid的获取途径即可
@@ -398,7 +409,8 @@ public class WechatPlugin implements Payment {
 			if (StringUtils.isEmpty(appid)) {
 				throw new BusinessException(ResultEnum.WECHAT_PAYMENT_NOT_SETTING);
 			}
-			String attach = URLEncoder.createDefault().encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
+			String attach = URLEncoder.createDefault()
+				.encode(JSONUtil.toJsonStr(payParam), StandardCharsets.UTF_8);
 
 			WechatPaymentSetting setting = wechatPaymentSetting();
 			UnifiedOrderModel unifiedOrderModel = new UnifiedOrderModel()
@@ -432,7 +444,8 @@ public class WechatPlugin implements Payment {
 				String body = response.getBody();
 				JSONObject jsonObject = JSONUtil.parseObj(body);
 				String prepayId = jsonObject.getStr("prepay_id");
-				Map<String, String> map = WxPayKit.jsApiCreateSign(appid, prepayId, setting.getApiclient_key());
+				Map<String, String> map = WxPayKit.jsApiCreateSign(appid, prepayId,
+					setting.getApiclient_key());
 				LogUtils.info("唤起支付参数:{}", map);
 
 				return Result.success(map);
@@ -477,7 +490,8 @@ public class WechatPlugin implements Payment {
 		String serialNo = request.getHeader("Wechatpay-Serial");
 		String signature = request.getHeader("Wechatpay-Signature");
 
-		LogUtils.info("timestamp:{} nonce:{} serialNo:{} signature:{}", timestamp, nonce, serialNo, signature);
+		LogUtils.info("timestamp:{} nonce:{} serialNo:{} signature:{}", timestamp, nonce, serialNo,
+			signature);
 		String result = HttpKit.readData(request);
 		LogUtils.info("微信支付通知密文 {}", result);
 
@@ -494,9 +508,9 @@ public class WechatPlugin implements Payment {
 		String payParamJson = URLDecoder.decode(payParamStr, StandardCharsets.UTF_8);
 		PayParam payParam = JSONUtil.toBean(payParamJson, PayParam.class);
 
-
 		String tradeNo = jsonObject.getStr("transaction_id");
-		BigDecimal totalAmount = CurrencyUtils.reversalFen(jsonObject.getJSONObject("amount").getBigDecimal("total"));
+		BigDecimal totalAmount = CurrencyUtils.reversalFen(
+			jsonObject.getJSONObject("amount").getBigDecimal("total"));
 
 		PaymentSuccessParams paymentSuccessParams = new PaymentSuccessParams(
 			PaymentMethodEnum.WECHAT.name(),
@@ -515,7 +529,7 @@ public class WechatPlugin implements Payment {
 		try {
 
 			Amount amount = new Amount().setRefund(CurrencyUtils.fen(refundLog.getTotalAmount()))
-				.setTotal(CurrencyUtils.fen(orderService.getPaymentTotal(refundLog.getOrderSn())));
+				.setTotal(CurrencyUtils.fen(orderApi.getPaymentTotal(refundLog.getOrderSn())));
 
 			//退款参数准备
 			RefundModel refundModel = new RefundModel()
@@ -566,7 +580,8 @@ public class WechatPlugin implements Payment {
 		String serialNo = request.getHeader("Wechatpay-Serial");
 		String signature = request.getHeader("Wechatpay-Signature");
 
-		LogUtils.info("timestamp:{} nonce:{} serialNo:{} signature:{}", timestamp, nonce, serialNo, signature);
+		LogUtils.info("timestamp:{} nonce:{} serialNo:{} signature:{}", timestamp, nonce, serialNo,
+			signature);
 		String result = HttpKit.readData(request);
 		LogUtils.info("微信退款通知密文 {}", result);
 		JSONObject ciphertext = JSONUtil.parseObj(result);
@@ -583,7 +598,9 @@ public class WechatPlugin implements Payment {
 				String transactionId = jsonObject.getStr("transaction_id");
 				String refundId = jsonObject.getStr("refund_id");
 
-				RefundLog refundLog = refundLogService.getOne(new LambdaQueryWrapper<RefundLog>().eq(RefundLog::getPaymentReceivableNo, transactionId));
+				RefundLog refundLog = refundLogService.getOne(
+					new LambdaQueryWrapper<RefundLog>().eq(RefundLog::getPaymentReceivableNo,
+						transactionId));
 				if (refundLog != null) {
 					refundLog.setIsRefund(true);
 					refundLog.setReceivableNo(refundId);
@@ -596,7 +613,9 @@ public class WechatPlugin implements Payment {
 				String transactionId = jsonObject.getStr("transaction_id");
 				String refundId = jsonObject.getStr("refund_id");
 
-				RefundLog refundLog = refundLogService.getOne(new LambdaQueryWrapper<RefundLog>().eq(RefundLog::getPaymentReceivableNo, transactionId));
+				RefundLog refundLog = refundLogService.getOne(
+					new LambdaQueryWrapper<RefundLog>().eq(RefundLog::getPaymentReceivableNo,
+						transactionId));
 				if (refundLog != null) {
 					refundLog.setReceivableNo(refundId);
 					refundLog.setErrorMessage(ciphertext.getStr("summary"));
@@ -615,7 +634,8 @@ public class WechatPlugin implements Payment {
 	 */
 	private WechatPaymentSetting wechatPaymentSetting() {
 		try {
-			WechatPaymentSetting wechatPaymentSetting = settingService.getWechatPaymentSetting(SettingCategoryEnum.WECHAT_PAYMENT.name());
+			WechatPaymentSetting wechatPaymentSetting = settingApi.getWechatPaymentSetting(
+				SettingCategoryEnum.WECHAT_PAYMENT.name());
 			return wechatPaymentSetting;
 		} catch (Exception e) {
 			LogUtils.error("微信支付暂不支持", e);
@@ -630,7 +650,8 @@ public class WechatPlugin implements Payment {
 	 */
 	private X509Certificate getPlatformCert() {
 		//获取缓存中的平台公钥，如果有则直接返回，否则去微信请求
-		String publicCert = (String) redisRepository.get(CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix());
+		String publicCert = (String) redisRepository.get(
+			CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix());
 		if (!StringUtils.isEmpty(publicCert)) {
 			return PayKit.getCertificate(publicCert);
 		}
@@ -661,8 +682,10 @@ public class WechatPlugin implements Payment {
 				String cipherText = encryptCertificate.getStr("ciphertext");
 				String nonce = encryptCertificate.getStr("nonce");
 				publicCert = getPlatformCertStr(associatedData, nonce, cipherText);
-				long second = (PayKit.getCertificate(publicCert).getNotAfter().getTime() - System.currentTimeMillis()) / 1000;
-				redisRepository.set(CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix(), publicCert, second);
+				long second = (PayKit.getCertificate(publicCert).getNotAfter().getTime()
+					- System.currentTimeMillis()) / 1000;
+				redisRepository.set(CachePrefix.WECHAT_PLAT_FORM_CERT.getPrefix(), publicCert,
+					second);
 			} else {
 				LogUtils.error("证书获取失败：{}" + body);
 				throw new BusinessException(ResultEnum.WECHAT_CERT_ERROR);
@@ -675,8 +698,7 @@ public class WechatPlugin implements Payment {
 	}
 
 	/**
-	 * 获取平台证书缓存的字符串
-	 * 下列各个密钥参数
+	 * 获取平台证书缓存的字符串 下列各个密钥参数
 	 *
 	 * @param associatedData 密钥参数
 	 * @param nonce          密钥参数
@@ -684,10 +706,11 @@ public class WechatPlugin implements Payment {
 	 * @return platform key
 	 * @throws GeneralSecurityException 密钥获取异常
 	 */
-	private String getPlatformCertStr(String associatedData, String nonce, String cipherText) throws GeneralSecurityException {
+	private String getPlatformCertStr(String associatedData, String nonce, String cipherText)
+		throws GeneralSecurityException {
 
-
-		AesUtil aesUtil = new AesUtil(wechatPaymentSetting().getApiKey3().getBytes(StandardCharsets.UTF_8));
+		AesUtil aesUtil = new AesUtil(
+			wechatPaymentSetting().getApiKey3().getBytes(StandardCharsets.UTF_8));
 		//平台证书密文解密
 		//encrypt_certificate 中的  associated_data nonce  ciphertext
 		return aesUtil.decryptToString(

@@ -32,12 +32,11 @@ import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunic
 import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * 交易投诉业务层实现
@@ -48,7 +47,8 @@ import java.util.List;
  */
 @AllArgsConstructor
 @Service
-public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper, OrderComplaint> implements
+public class OrderComplaintServiceImpl extends
+	ServiceImpl<IOrderComplaintMapper, OrderComplaint> implements
 	IOrderComplaintService {
 
 	/**
@@ -62,7 +62,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	/**
 	 * 商品规格
 	 */
-	private final IFeignGoodsSkuApi feignGoodsSkuApi;
+	private final IFeignGoodsSkuApi goodsSkuApi;
 	/**
 	 * 交易投诉沟通
 	 */
@@ -71,12 +71,18 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	@Override
 	public IPage<OrderComplaint> pageQuery(OrderComplaintPageQuery pageQuery) {
 		LambdaQueryWrapper<OrderComplaint> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStatus()),OrderComplaint::getComplainStatus, pageQuery.getStatus());
-		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getOrderSn()),OrderComplaint::getOrderSn, pageQuery.getOrderSn());
-		queryWrapper.like(StrUtil.isNotEmpty(pageQuery.getStoreName()),OrderComplaint::getStoreName, pageQuery.getStoreName());
-		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStoreId()),OrderComplaint::getStoreId, pageQuery.getStoreId());
-		queryWrapper.like(StrUtil.isNotEmpty(pageQuery.getMemberName()),OrderComplaint::getMemberName, pageQuery.getMemberName());
-		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getMemberId()),OrderComplaint::getMemberId, pageQuery.getMemberId());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStatus()),
+			OrderComplaint::getComplainStatus, pageQuery.getStatus());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getOrderSn()), OrderComplaint::getOrderSn,
+			pageQuery.getOrderSn());
+		queryWrapper.like(StrUtil.isNotEmpty(pageQuery.getStoreName()),
+			OrderComplaint::getStoreName, pageQuery.getStoreName());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getStoreId()), OrderComplaint::getStoreId,
+			pageQuery.getStoreId());
+		queryWrapper.like(StrUtil.isNotEmpty(pageQuery.getMemberName()),
+			OrderComplaint::getMemberName, pageQuery.getMemberName());
+		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getMemberId()), OrderComplaint::getMemberId,
+			pageQuery.getMemberId());
 		queryWrapper.eq(OrderComplaint::getDelFlag, false);
 		queryWrapper.orderByDesc(OrderComplaint::getCreateTime);
 
@@ -88,7 +94,8 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 		OrderComplaint orderComplaint = this.checkOrderComplainExist(id);
 		LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(OrderComplaintCommunication::getComplainId, id);
-		List<OrderComplaintCommunication> list = orderComplaintCommunicationService.list(queryWrapper);
+		List<OrderComplaintCommunication> list = orderComplaintCommunicationService.list(
+			queryWrapper);
 		OrderComplaintVO orderComplainVO = new OrderComplaintVO(orderComplaint);
 		orderComplainVO.setOrderComplaintCommunications(list);
 		orderComplainVO.setOrderComplaintImages(orderComplaint.getImages().split(","));
@@ -100,7 +107,8 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 
 	@Override
 	public OrderComplaint getOrderComplainByStoreId(Long storeId) {
-		return this.getOne(new LambdaQueryWrapper<OrderComplaint>().eq(OrderComplaint::getStoreId, storeId));
+		return this.getOne(
+			new LambdaQueryWrapper<OrderComplaint>().eq(OrderComplaint::getStoreId, storeId));
 	}
 
 	@Override
@@ -124,7 +132,8 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 			BeanUtils.copyProperties(orderComplaintDTO, orderComplaint);
 
 			//获取商品规格信息
-			GoodsSkuSpecGalleryVO goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(orderItem.getSkuId());
+			GoodsSkuSpecGalleryVO goodsSku = goodsSkuApi.getGoodsSkuByIdFromCache(
+				orderItem.getSkuId());
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.COMPLAINT_SKU_EMPTY_ERROR);
 			}
@@ -137,12 +146,15 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 
 			//获取订单信息
 			orderComplaint.setOrderTime(orderDetailVO.getOrder().getcre());
-			orderComplaint.setOrderPrice(orderDetailVO.getOrder().getPriceDetailDTO().getBillPrice());
+			orderComplaint.setOrderPrice(
+				orderDetailVO.getOrder().getPriceDetailDTO().getBillPrice());
 			orderComplaint.setNum(orderDetailVO.getOrder().getGoodsNum());
-			orderComplaint.setFreightPrice(orderDetailVO.getOrder().getPriceDetailDTO().getFreightPrice());
+			orderComplaint.setFreightPrice(
+				orderDetailVO.getOrder().getPriceDetailDTO().getFreightPrice());
 			orderComplaint.setLogisticsNo(orderDetailVO.getOrder().getLogisticsNo());
 			orderComplaint.setConsigneeMobile(orderDetailVO.getOrder().getConsigneeMobile());
-			orderComplaint.setConsigneeAddressPath(orderDetailVO.getOrder().getConsigneeAddressPath());
+			orderComplaint.setConsigneeAddressPath(
+				orderDetailVO.getOrder().getConsigneeAddressPath());
 			orderComplaint.setConsigneeName(orderDetailVO.getOrder().getConsigneeName());
 
 			//获取商家信息
@@ -155,7 +167,9 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 			this.save(orderComplaint);
 
 			//更新订单投诉状态
-			orderItemService.updateOrderItemsComplainStatus(orderComplaint.getOrderSn(), orderComplaint.getSkuId(), orderComplaint.getId(), OrderComplaintStatusEnum.APPLYING);
+			orderItemService.updateOrderItemsComplainStatus(orderComplaint.getOrderSn(),
+				orderComplaint.getSkuId(), orderComplaint.getId(),
+				OrderComplaintStatusEnum.APPLYING);
 			return orderComplaint;
 		} catch (ServiceException e) {
 			throw e;
@@ -172,8 +186,10 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	}
 
 	@Override
-	public Boolean updateOrderComplainByStatus(OrderComplaintOperationDTO orderComplaintOperationDTO) {
-		OrderComplaint orderComplaint = OperationalJudgment.judgment(this.checkOrderComplainExist(orderComplaintOperationDTO.getComplainId()));
+	public Boolean updateOrderComplainByStatus(
+		OrderComplaintOperationDTO orderComplaintOperationDTO) {
+		OrderComplaint orderComplaint = OperationalJudgment.judgment(
+			this.checkOrderComplainExist(orderComplaintOperationDTO.getComplainId()));
 		this.checkOperationParams(orderComplaintOperationDTO, orderComplaint);
 		orderComplaint.setComplainStatus(orderComplaintOperationDTO.getComplainStatus());
 		this.updateById(orderComplaint);
@@ -184,7 +200,8 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 	public long waitComplainNum() {
 		QueryWrapper<OrderComplaint> queryWrapper = Wrappers.query();
 		queryWrapper.ne("complain_status", ComplaintStatusEnum.COMPLETE.name());
-		queryWrapper.eq(CharSequenceUtil.equals(UserContext.getCurrentUser().getRole().name(), UserEnums.STORE.name()),
+		queryWrapper.eq(CharSequenceUtil.equals(UserContext.getCurrentUser().getRole().name(),
+				UserEnums.STORE.name()),
 			"store_id", UserContext.getCurrentUser().getStoreId());
 		return this.count(queryWrapper);
 	}
@@ -198,14 +215,16 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 		}
 		LambdaUpdateWrapper<OrderComplaint> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
 		lambdaUpdateWrapper.eq(OrderComplaint::getId, id);
-		lambdaUpdateWrapper.set(OrderComplaint::getComplainStatus, ComplaintStatusEnum.CANCEL.name());
+		lambdaUpdateWrapper.set(OrderComplaint::getComplainStatus,
+			ComplaintStatusEnum.CANCEL.name());
 		return this.update(lambdaUpdateWrapper);
 	}
 
 	@Override
 	public Boolean appeal(StoreAppealDTO storeAppealDTO) {
 		//获取投诉信息
-		OrderComplaint orderComplaint = OperationalJudgment.judgment(this.checkOrderComplainExist(storeAppealDTO.getOrderComplaintId()));
+		OrderComplaint orderComplaint = OperationalJudgment.judgment(
+			this.checkOrderComplainExist(storeAppealDTO.getOrderComplaintId()));
 		orderComplaint.setAppealContent(storeAppealDTO.getAppealContent());
 		orderComplaint.setAppealImages(storeAppealDTO.getAppealImages());
 		orderComplaint.setAppealTime(LocalDateTime.now());
@@ -222,15 +241,18 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
 		return orderComplaint;
 	}
 
-	private void checkOperationParams(OrderComplaintOperationDTO orderComplaintOperationDTO, OrderComplaint orderComplaint) {
-		ComplaintStatusEnum complaintStatusEnum = ComplaintStatusEnum.valueOf(orderComplaintOperationDTO.getComplainStatus());
+	private void checkOperationParams(OrderComplaintOperationDTO orderComplaintOperationDTO,
+		OrderComplaint orderComplaint) {
+		ComplaintStatusEnum complaintStatusEnum = ComplaintStatusEnum.valueOf(
+			orderComplaintOperationDTO.getComplainStatus());
 		if (complaintStatusEnum == ComplaintStatusEnum.COMPLETE) {
 			if (CharSequenceUtil.isEmpty(orderComplaintOperationDTO.getArbitrationResult())) {
 				throw new BusinessException(ResultEnum.COMPLAINT_ARBITRATION_RESULT_ERROR);
 			}
 			orderComplaint.setArbitrationResult(orderComplaintOperationDTO.getArbitrationResult());
 		} else if (complaintStatusEnum == ComplaintStatusEnum.COMMUNICATION) {
-			if (CharSequenceUtil.isEmpty(orderComplaintOperationDTO.getAppealContent()) || orderComplaintOperationDTO.getImages() == null) {
+			if (CharSequenceUtil.isEmpty(orderComplaintOperationDTO.getAppealContent())
+				|| orderComplaintOperationDTO.getImages() == null) {
 				throw new BusinessException(ResultEnum.COMPLAINT_APPEAL_CONTENT_ERROR);
 			}
 			orderComplaint.setContent(orderComplaintOperationDTO.getAppealContent());

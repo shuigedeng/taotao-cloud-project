@@ -13,25 +13,24 @@ import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsOperationDTO;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsListVO;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsParams;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsVO;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 砍价业务层实现
@@ -42,14 +41,15 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGoodsMapper, KanjiaActivityGoods> implements
-		IKanjiaActivityGoodsService {
+public class KanjiaActivityGoodsServiceImpl extends
+	ServiceImpl<KanJiaActivityGoodsMapper, KanjiaActivityGoods> implements
+	IKanjiaActivityGoodsService {
 
 	/**
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi feignGoodsSkuApi;
+	private IFeignGoodsSkuApi goodsSkuApi;
 
 	@Autowired
 	private IPromotionGoodsService promotionGoodsService;
@@ -64,12 +64,14 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 			//参数检测
 			this.checkParam(kanJiaActivityGoodsDTO, goodsSku);
 			//检测同一时间段是否存在相同的商品
-			PromotionTools.checkPromotionTime(kanJiaActivityGoodsOperationDTO.getStartTime(), kanJiaActivityGoodsOperationDTO.getEndTime());
+			PromotionTools.checkPromotionTime(kanJiaActivityGoodsOperationDTO.getStartTime(),
+				kanJiaActivityGoodsOperationDTO.getEndTime());
 			kanJiaActivityGoodsDTO.setStartTime(kanJiaActivityGoodsOperationDTO.getStartTime());
 			kanJiaActivityGoodsDTO.setEndTime(kanJiaActivityGoodsOperationDTO.getEndTime());
 			//检测同一时间段不能允许添加相同的商品
 			if (this.checkSkuDuplicate(goodsSku.getId(), kanJiaActivityGoodsDTO) != null) {
-				throw new BusinessException("商品id为" + goodsSku.getId() + "的商品已参加砍价商品活动！");
+				throw new BusinessException(
+					"商品id为" + goodsSku.getId() + "的商品已参加砍价商品活动！");
 			}
 			kanJiaActivityGoodsDTO.setSkuId(kanJiaActivityGoodsDTO.getSkuId());
 			kanJiaActivityGoodsDTO.setThumbnail(goodsSku.getThumbnail());
@@ -89,14 +91,17 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 
 
 	@Override
-	public IPage<KanjiaActivityGoods> getForPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery PageQuery) {
+	public IPage<KanjiaActivityGoods> getForPage(
+		KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery PageQuery) {
 		return this.page(PageQuery.buildMpPage(), kanJiaActivityGoodsParams.wrapper());
 
 	}
 
 	@Override
-	public IPage<KanjiaActivityGoodsListVO> kanjiaGoodsVOPage(KanjiaActivityGoodsParams kanjiaActivityGoodsParams, PageQuery PageQuery) {
-		return this.baseMapper.kanjiaActivityGoodsVOPage(PageQuery.buildMpPage(), kanjiaActivityGoodsParams.wrapper());
+	public IPage<KanjiaActivityGoodsListVO> kanjiaGoodsVOPage(
+		KanjiaActivityGoodsParams kanjiaActivityGoodsParams, PageQuery PageQuery) {
+		return this.baseMapper.kanjiaActivityGoodsVOPage(PageQuery.buildMpPage(),
+			kanjiaActivityGoodsParams.wrapper());
 	}
 
 
@@ -107,7 +112,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 	 * @return 商品sku
 	 */
 	private GoodsSkuSpecGalleryVO checkSkuExist(Long skuId) {
-		GoodsSkuSpecGalleryVO goodsSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(skuId);
+		GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuApi.getGoodsSkuByIdFromCache(skuId);
 		if (goodsSku == null) {
 			log.error("商品ID为" + skuId + "的商品不存在！");
 			throw new BusinessException("商品ID为" + skuId + "的商品不存在！");
@@ -121,7 +126,8 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 	 * @param kanJiaActivityGoodsDTO 砍价商品信息
 	 * @param goodsSku               商品sku信息
 	 */
-	private void checkParam(KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO, GoodsSkuSpecGalleryVO goodsSku) {
+	private void checkParam(KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO,
+		GoodsSkuSpecGalleryVO goodsSku) {
 		//校验商品是否存在
 		if (goodsSku == null) {
 			throw new BusinessException(ResultEnum.PROMOTION_GOODS_NOT_EXIT);
@@ -143,11 +149,13 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 			throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_SETTLEMENT_PRICE_ERROR);
 		}
 		//校验最高砍价金额
-		if (kanJiaActivityGoodsDTO.getHighestPrice() > goodsSku.goodsSkuBase().price() || kanJiaActivityGoodsDTO.getHighestPrice() <= 0) {
+		if (kanJiaActivityGoodsDTO.getHighestPrice() > goodsSku.goodsSkuBase().price()
+			|| kanJiaActivityGoodsDTO.getHighestPrice() <= 0) {
 			throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_HIGHEST_PRICE_ERROR);
 		}
 		//校验最低砍价金额
-		if (kanJiaActivityGoodsDTO.getLowestPrice() > goodsSku.goodsSkuBase().price() || kanJiaActivityGoodsDTO.getLowestPrice() <= 0) {
+		if (kanJiaActivityGoodsDTO.getLowestPrice() > goodsSku.goodsSkuBase().price()
+			|| kanJiaActivityGoodsDTO.getLowestPrice() <= 0) {
 			throw new BusinessException(ResultEnum.KANJIA_GOODS_ACTIVE_LOWEST_PRICE_ERROR);
 		}
 		//校验最低砍价金额不能高与最低砍价金额
@@ -163,10 +171,12 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 	 * @param kanJiaActivityGoodsDTO 砍价商品
 	 * @return 积分商品信息
 	 */
-	private KanjiaActivityGoods checkSkuDuplicate(String skuId, KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
+	private KanjiaActivityGoods checkSkuDuplicate(String skuId,
+		KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
 		QueryWrapper<KanjiaActivityGoods> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("sku_id", skuId);
-		if (kanJiaActivityGoodsDTO != null && CharSequenceUtil.isNotEmpty(kanJiaActivityGoodsDTO.getId())) {
+		if (kanJiaActivityGoodsDTO != null && CharSequenceUtil.isNotEmpty(
+			kanJiaActivityGoodsDTO.getId())) {
 			queryWrapper.ne("id", kanJiaActivityGoodsDTO.getId());
 		}
 		queryWrapper.and(i -> i
@@ -194,7 +204,8 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 		}
 		KanjiaActivityGoodsDTO kanjiaActivityGoodsDTO = new KanjiaActivityGoodsDTO();
 		BeanUtils.copyProperties(kanjiaActivityGoods, kanjiaActivityGoodsDTO);
-		GoodsSkuSpecGalleryVO goodsSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(kanjiaActivityGoods.getSkuId());
+		GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuApi.getGoodsSkuByIdFromCache(
+			kanjiaActivityGoods.getSkuId());
 		if (goodsSku != null) {
 			kanjiaActivityGoodsDTO.setGoodsSku(goodsSku);
 		}
@@ -203,8 +214,10 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 
 	@Override
 	public KanjiaActivityGoods getKanjiaGoodsBySkuId(String skuId) {
-		KanjiaActivityGoods kanjiaActivityGoods = this.getOne(new QueryWrapper<KanjiaActivityGoods>().eq("sku_id", skuId), false);
-		if (kanjiaActivityGoods != null && PromotionsStatusEnum.START.name().equals(kanjiaActivityGoods.getPromotionStatus())) {
+		KanjiaActivityGoods kanjiaActivityGoods = this.getOne(
+			new QueryWrapper<KanjiaActivityGoods>().eq("sku_id", skuId), false);
+		if (kanjiaActivityGoods != null && PromotionsStatusEnum.START.name()
+			.equals(kanjiaActivityGoods.getPromotionStatus())) {
 			return kanjiaActivityGoods;
 		}
 		return null;
@@ -216,7 +229,8 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 		//获取砍价商品
 		KanjiaActivityGoods kanJiaActivityGoods = this.getById(id);
 		//获取商品SKU
-		GoodsSkuSpecGalleryVO goodsSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(kanJiaActivityGoods.getSkuId());
+		GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuApi.getGoodsSkuByIdFromCache(
+			kanJiaActivityGoods.getSkuId());
 		//填写活动商品价格、剩余数量
 		kanJiaActivityGoodsVO.setGoodsSku(goodsSku);
 		kanJiaActivityGoodsVO.setStock(kanJiaActivityGoods.getStock());
@@ -229,7 +243,8 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 	@Override
 	public boolean updateKanjiaActivityGoods(KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
 		//校验砍价商品是否存在
-		KanjiaActivityGoods dbKanJiaActivityGoods = this.getKanjiaGoodsDetail(kanJiaActivityGoodsDTO.getId());
+		KanjiaActivityGoods dbKanJiaActivityGoods = this.getKanjiaGoodsDetail(
+			kanJiaActivityGoodsDTO.getId());
 		//校验当前活动是否已经开始,只有新建的未开始的活动可以编辑
 		if (!dbKanJiaActivityGoods.getPromotionStatus().equals(PromotionsStatusEnum.NEW.name())) {
 			throw new BusinessException(ResultEnum.PROMOTION_UPDATE_ERROR);
@@ -243,10 +258,12 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 		//常规校验砍价商品参数
 		this.checkParam(kanJiaActivityGoodsDTO, goodsSku);
 		//检测开始结束时间是否正确
-		PromotionTools.checkPromotionTime(kanJiaActivityGoodsDTO.getStartTime(), kanJiaActivityGoodsDTO.getEndTime());
+		PromotionTools.checkPromotionTime(kanJiaActivityGoodsDTO.getStartTime(),
+			kanJiaActivityGoodsDTO.getEndTime());
 		//检测同一时间段不能允许添加相同的商品
 		if (this.checkSkuDuplicate(goodsSku.getId(), kanJiaActivityGoodsDTO) != null) {
-			throw new BusinessException("商品id为" + goodsSku.getId() + "的商品已参加砍价商品活动！");
+			throw new BusinessException(
+				"商品id为" + goodsSku.getId() + "的商品已参加砍价商品活动！");
 		}
 		//修改数据库
 		return this.updateById(kanJiaActivityGoodsDTO);

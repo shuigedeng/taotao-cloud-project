@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreUserController {
 
 	@Autowired
-	private IFeignMemberApi memberService;
+	private IFeignMemberApi memberApi;
 
 	@Operation(summary = "获取当前登录用户接口", description = "获取当前登录用户接口")
 	@RequestLogger
@@ -37,7 +37,7 @@ public class StoreUserController {
 	public Result<MemberVO> getUserInfo() {
 		SecurityUser tokenUser = SecurityUtils.getCurrentUser();
 		if (tokenUser != null) {
-			MemberVO member = memberService.findByUsername(tokenUser.getUsername());
+			MemberVO member = memberApi.findByUsername(tokenUser.getUsername());
 			// member.setPassword(null);
 			return Result.success(member);
 		}

@@ -40,13 +40,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckDataRender implements ICartRenderStep {
 
-	private final IFeignGoodsSkuApi feignGoodsSkuApi;
+	private final IFeignGoodsSkuApi goodsSkuApi;
 
 	private final IOrderService orderService;
 
-	private final IFeignPintuanApi feignPintuanApi;
+	private final IFeignPintuanApi pintuanApi;
 
-	private final IFeignMemberApi feignMemberApi;
+	private final IFeignMemberApi memberApi;
 
 	private final PointsGoodsService pointsGoodsService;
 
@@ -86,22 +86,27 @@ public class CheckDataRender implements ICartRenderStep {
 			}
 
 			//缓存中的商品信息
-			GoodsSku dataSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(cartSkuVO.getGoodsSku().getId());
-			Map<String, Object> promotionMap = promotionGoodsService.getCurrentGoodsPromotion(dataSku, tradeDTO.getCartTypeEnum().name());
+			GoodsSku dataSku = goodsSkuApi.getGoodsSkuByIdFromCache(
+				cartSkuVO.getGoodsSku().getId());
+			Map<String, Object> promotionMap = promotionGoodsService.getCurrentGoodsPromotion(
+				dataSku, tradeDTO.getCartTypeEnum().name());
 			//商品有效性判定
-			if (dataSku == null || dataSku.getUpdateTime().after(cartSkuVO.getGoodsSku().getUpdateTime())) {
+			if (dataSku == null || dataSku.getUpdateTime()
+				.after(cartSkuVO.getGoodsSku().getUpdateTime())) {
 				//商品失效,将商品移除并重新填充商品
 				cartSkuVOS.remove(cartSkuVO);
 				//设置新商品
-				CartSkuVO newCartSkuVO = new CartSkuVO(dataSku,promotionMap);
+				CartSkuVO newCartSkuVO = new CartSkuVO(dataSku, promotionMap);
 				newCartSkuVO.setCartType(tradeDTO.getCartTypeEnum());
 				newCartSkuVO.setNum(cartSkuVO.getNum());
-				newCartSkuVO.setSubTotal(CurrencyUtil.mul(newCartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+				newCartSkuVO.setSubTotal(
+					CurrencyUtil.mul(newCartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 				cartSkuVOS.add(newCartSkuVO);
 				continue;
 			}
 			//商品上架状态判定
-			if (!GoodsAuthEnum.PASS.name().equals(dataSku.getAuthFlag()) || !GoodsStatusEnum.UPPER.name().equals(dataSku.getMarketEnable())) {
+			if (!GoodsAuthEnum.PASS.name().equals(dataSku.getAuthFlag())
+				|| !GoodsStatusEnum.UPPER.name().equals(dataSku.getMarketEnable())) {
 				//设置购物车未选中
 				cartSkuVO.setChecked(false);
 				//设置购物车此sku商品已失效
@@ -115,17 +120,26 @@ public class CheckDataRender implements ICartRenderStep {
 				//设置购物车未选中
 				cartSkuVO.setChecked(false);
 				//设置失效消息
-				cartSkuVO.setErrorMessage("商品库存不足,现有库存数量[" + dataSku.getQuantity() + "]");
+				cartSkuVO.setErrorMessage(
+					"商品库存不足,现有库存数量[" + dataSku.getQuantity() + "]");
 			}
 			//如果存在商品促销活动，则判定商品促销状态
-			if (!cartSkuVO.getCartType().equals(CartTypeEnum.POINTS) && (CollUtil.isNotEmpty(cartSkuVO.getNotFilterPromotionMap()) || Boolean.TRUE.equals(cartSkuVO.getGoodsSku().getPromotionFlag()))) {
+			if (!cartSkuVO.getCartType().equals(CartTypeEnum.POINTS) && (
+				CollUtil.isNotEmpty(cartSkuVO.getNotFilterPromotionMap()) || Boolean.TRUE.equals(
+					cartSkuVO.getGoodsSku().getPromotionFlag()))) {
 				//获取当前最新的促销信息
-				cartSkuVO.setPromotionMap(this.promotionGoodsService.getCurrentGoodsPromotion(cartSkuVO.getGoodsSku(), tradeDTO.getCartTypeEnum().name()));
+				cartSkuVO.setPromotionMap(
+					this.promotionGoodsService.getCurrentGoodsPromotion(cartSkuVO.getGoodsSku(),
+						tradeDTO.getCartTypeEnum().name()));
 				//设定商品价格
-				Double goodsPrice = cartSkuVO.getGoodsSku().getPromotionFlag() != null && cartSkuVO.getGoodsSku().getPromotionFlag() ? cartSkuVO.getGoodsSku().getPromotionPrice() : cartSkuVO.getGoodsSku().getPrice();
+				Double goodsPrice =
+					cartSkuVO.getGoodsSku().getPromotionFlag() != null && cartSkuVO.getGoodsSku()
+						.getPromotionFlag() ? cartSkuVO.getGoodsSku().getPromotionPrice()
+						: cartSkuVO.getGoodsSku().getPrice();
 				cartSkuVO.setPurchasePrice(goodsPrice);
 				cartSkuVO.setUtilPrice(goodsPrice);
-				cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+				cartSkuVO.setSubTotal(
+					CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
 			}
 
 		}
@@ -181,7 +195,7 @@ public class CheckDataRender implements ICartRenderStep {
 				.filter(i -> i.getPromotionType().equals(PromotionTypeEnum.PINTUAN.name()))
 				.map(PromotionGoods::getPromotionId).findFirst();
 			if (pintuanId.isPresent()) {
-				Pintuan pintuan = feignPintuanApi.getById(pintuanId.get());
+				Pintuan pintuan = pintuanApi.getById(pintuanId.get());
 				Integer limitNum = pintuan.getLimitNum();
 				for (CartSkuVO cartSkuVO : tradeDTO.getSkuList()) {
 					if (limitNum != 0 && cartSkuVO.getNum() > limitNum) {
@@ -197,7 +211,7 @@ public class CheckDataRender implements ICartRenderStep {
 			if (pointsGoodsVO == null) {
 				throw new BusinessException(ResultEnum.POINT_GOODS_ERROR);
 			}
-			Member member = feignMemberApi.getUserInfo();
+			Member member = memberApi.getUserInfo();
 			if (member.getPoint() < pointsGoodsVO.getPoints()) {
 				throw new BusinessException(ResultEnum.USER_POINTS_ERROR);
 			}

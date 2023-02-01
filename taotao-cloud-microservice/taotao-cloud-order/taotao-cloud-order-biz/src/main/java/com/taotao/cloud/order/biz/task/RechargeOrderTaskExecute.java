@@ -8,10 +8,9 @@ import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * 充值订单自动取消（每分钟执行）
@@ -27,24 +26,26 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 	 * 充值
 	 */
 	@Autowired
-	private IFeignMemberRechargeApi rechargeService;
+	private IFeignMemberRechargeApi memberRechargeApi;
 	/**
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 
 
 	@Override
 	public void execute() {
-		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name());
+		OrderSettingVO orderSetting = settingApi.getOrderSetting(
+			SettingCategoryEnum.ORDER_SETTING.name());
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//充值订单自动取消时间 = 当前时间 - 自动取消时间分钟数
-			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
-			List<MemberRechargeVO> list = rechargeService.list(cancelTime);
+			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(),
+				-orderSetting.getAutoCancel());
+			List<MemberRechargeVO> list = memberRechargeApi.list(cancelTime);
 			List<String> cancelSnList = list.stream().map(MemberRechargeVO::getRechargeSn).toList();
 			for (String sn : cancelSnList) {
-				rechargeService.rechargeOrderCancel(sn);
+				memberRechargeApi.rechargeOrderCancel(sn);
 			}
 		}
 	}

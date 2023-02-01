@@ -6,7 +6,6 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.store.api.model.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.model.dto.StoreCompanyDTO;
 import com.taotao.cloud.store.api.model.dto.StoreOtherInfoDTO;
@@ -17,9 +16,12 @@ import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
 import com.taotao.cloud.store.biz.service.IStoreDetailService;
 import com.taotao.cloud.store.biz.service.IStoreService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -28,9 +30,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.validation.constraints.NotNull;
-import java.util.List;
 
 
 /**
@@ -51,7 +50,7 @@ public class StoreBuyerController {
 	 * 店铺商品分类
 	 */
 	@Autowired
-	private IFeignStoreGoodsLabelApi storeGoodsLabelService;
+	private IFeignStoreGoodsLabelApi storeGoodsLabelApi;
 	/**
 	 * 店铺详情
 	 */
@@ -79,7 +78,8 @@ public class StoreBuyerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/get/licencePhoto/{id}")
-	public Result<StoreOtherVO> licencePhoto(@Parameter(description = "店铺ID") @NotNull @PathVariable String id) {
+	public Result<StoreOtherVO> licencePhoto(
+		@Parameter(description = "店铺ID") @NotNull @PathVariable String id) {
 		return Result.success(storeDetailService.getStoreOtherVO(id));
 	}
 
@@ -87,8 +87,9 @@ public class StoreBuyerController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/label/get/{id}")
-	public Result<List<StoreGoodsLabelVO>> storeGoodsLabel(@Parameter(description = "店铺ID") @NotNull @PathVariable String id) {
-		return Result.success(storeGoodsLabelService.listByStoreId(id));
+	public Result<List<StoreGoodsLabelVO>> storeGoodsLabel(
+		@Parameter(description = "店铺ID") @NotNull @PathVariable String id) {
+		return Result.success(storeGoodsLabelApi.listByStoreId(id));
 	}
 
 	@Operation(summary = "申请店铺第一步-填写企业信息", description = "申请店铺第一步-填写企业信息")
@@ -120,6 +121,7 @@ public class StoreBuyerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/apply")
 	public Result<StoreDetailVO> apply() {
-		return Result.success(storeDetailService.getStoreDetailVOByMemberId(SecurityUtils.getUserId()));
+		return Result.success(
+			storeDetailService.getStoreDetailVOByMemberId(SecurityUtils.getUserId()));
 	}
 }

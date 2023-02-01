@@ -11,10 +11,9 @@ import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * 订单自动取消（每分钟执行）
@@ -35,17 +34,19 @@ public class CancelOrderTaskExecute implements EveryMinuteExecute {
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 
 	@Autowired
 	private DistributedLock distributedLock;
 
 	@Override
 	public void execute() {
-		OrderSettingVO orderSetting = settingService.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name());
+		OrderSettingVO orderSetting = settingApi.getOrderSetting(
+			SettingCategoryEnum.ORDER_SETTING.name());
 		if (orderSetting != null && orderSetting.getAutoCancel() != null) {
 			//订单自动取消时间 = 当前时间 - 自动取消时间分钟数
-			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
+			DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(),
+				-orderSetting.getAutoCancel());
 			LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 			queryWrapper.eq(Order::getOrderStatus, OrderStatusEnum.UNPAID.name());
 			//订单创建时间 <= 订单自动取消时间

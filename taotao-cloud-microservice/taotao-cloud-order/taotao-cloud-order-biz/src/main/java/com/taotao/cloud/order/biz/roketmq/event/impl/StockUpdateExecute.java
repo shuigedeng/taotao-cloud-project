@@ -22,13 +22,12 @@ import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityVO;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 库存扣减，他表示了订单状态是否出库成功
@@ -60,12 +59,12 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi goodsSkuApi;
 	/**
 	 * 促销商品
 	 */
 	@Autowired
-	private IFeignPromotionGoodsApi promotionGoodsService;
+	private IFeignPromotionGoodsApi promotionGoodsApi;
 	/**
 	 * 缓存
 	 */
@@ -73,11 +72,11 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 	private RedisRepository redisRepository;
 
 	@Autowired
-	private IFeignKanjiaActivityApi kanjiaActivityService;
+	private IFeignKanjiaActivityApi kanjiaActivityApi;
 	@Autowired
-	private IFeignKanjiaActivityGoodsApi kanjiaActivityGoodsService;
+	private IFeignKanjiaActivityGoodsApi kanjiaActivityGoodsApi;
 	@Autowired
-	private IFeignPointsGoodsApi pointsGoodsService;
+	private IFeignPointsGoodsApi pointsGoodsApi;
 
 	@Override
 	public void orderChange(OrderMessage orderMessage) {
@@ -172,7 +171,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 			//如果不存在
 			if (!redisRepository.hasKey(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()))) {
 				//内部会自动写入，这里不需要进行二次处理
-				goodsSkuService.getStock(orderItem.getSkuId());
+				goodsSkuApi.getStock(orderItem.getSkuId());
 			}
 		});
 	}
@@ -196,17 +195,17 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 					switch (promotionTypeEnum) {
 						case KANJIA -> {
 							redisRepository.set(cacheKey,
-								kanjiaActivityGoodsService.getKanjiaGoodsBySkuId(
+								kanjiaActivityGoodsApi.getKanjiaGoodsBySkuId(
 									orderItem.getSkuId()).getStock());
 						}
 						case POINTS_GOODS -> {
 							redisRepository.set(cacheKey,
-								pointsGoodsService.getPointsGoodsDetailBySkuId(orderItem.getSkuId())
+								pointsGoodsApi.getPointsGoodsDetailBySkuId(orderItem.getSkuId())
 									.getActiveStock());
 						}
 						case SECKILL, PINTUAN -> {
 							redisRepository.set(cacheKey,
-								promotionGoodsService.getPromotionGoodsStock(promotionTypeEnum,
+								promotionGoodsApi.getPromotionGoodsStock(promotionTypeEnum,
 									orderItem.getPromotionId(), orderItem.getSkuId()));
 						}
 						default -> {
@@ -284,9 +283,9 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 
 				//修改砍价商品库存
 				if (promotionTypeEnum.equals(PromotionTypeEnum.KANJIA)) {
-					KanjiaActivityVO kanjiaActivity = kanjiaActivityService.getById(
+					KanjiaActivityVO kanjiaActivity = kanjiaActivityApi.getById(
 						orderItem.getPromotionId());
-					KanjiaActivityGoodsDTO kanjiaActivityGoodsDTO = kanjiaActivityGoodsService.getKanjiaGoodsDetail(
+					KanjiaActivityGoodsDTO kanjiaActivityGoodsDTO = kanjiaActivityGoodsApi.getKanjiaGoodsDetail(
 						kanjiaActivity.getKanjiaActivityGoodsId());
 
 					Integer stock = Integer.parseInt(redisRepository.get(
@@ -294,23 +293,22 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 							orderItem.getPromotionId(), orderItem.getSkuId())).toString());
 					kanjiaActivityGoodsDTO.setStock(stock);
 
-					kanjiaActivityGoodsService.updateById(kanjiaActivityGoodsDTO);
+					kanjiaActivityGoodsApi.updateById(kanjiaActivityGoodsDTO);
 					//修改积分商品库存
 				} else if (promotionTypeEnum.equals(PromotionTypeEnum.POINTS_GOODS)) {
-					PointsGoodsVO pointsGoodsVO = pointsGoodsService.getPointsGoodsDetail(
+					PointsGoodsVO pointsGoodsVO = pointsGoodsApi.getPointsGoodsDetail(
 						orderItem.getPromotionId());
 					Integer stock = Integer.parseInt(redisRepository.get(
 						PromotionGoodsService.getPromotionGoodsStockCacheKey(promotionTypeEnum,
 							orderItem.getPromotionId(), orderItem.getSkuId())).toString());
 					pointsGoodsVO.setActiveStock(stock);
-					pointsGoodsService.updateById(pointsGoodsVO);
+					pointsGoodsApi.updateById(pointsGoodsVO);
 				} else {
 					PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 					searchParams.setPromotionType(promotionTypeEnum.name());
 					searchParams.setPromotionId(orderItem.getPromotionId());
 					searchParams.setSkuId(orderItem.getSkuId());
-					PromotionGoodsVO pGoods = promotionGoodsService.getPromotionsGoods(searchParams)
-						;
+					PromotionGoodsVO pGoods = promotionGoodsApi.getPromotionsGoods(searchParams);
 					//记录需要更新的促销库存信息
 					promotionKey.add(
 						PromotionGoodsService.getPromotionGoodsStockCacheKey(
@@ -333,7 +331,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 			goodsSkus.get(i).setQuantity(Convert.toInt(skuStocks.get(i).toString()));
 		}
 		//批量修改商品库存
-		goodsSkuService.updateBatchById(goodsSkus);
+		goodsSkuApi.updateBatchById(goodsSkus);
 
 		//促销库存处理
 		if (!promotionKey.isEmpty()) {
@@ -344,10 +342,10 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 				promotionGoods.get(i)
 					.setNum((num != null ? num : 0) + order.getOrder().getGoodsNum());
 			}
-			promotionGoodsService.updateBatchById(promotionGoods);
+			promotionGoodsApi.updateBatchById(promotionGoods);
 		}
 		//商品库存，包含sku库存集合，批量更新商品库存相关
-		goodsSkuService.updateGoodsStuck(goodsSkus);
+		goodsSkuApi.updateGoodsStuck(goodsSkus);
 
 		LogUtils.info("订单确认，库存同步：商品信息--{}；促销信息---{}", goodsSkus, promotionGoods);
 
@@ -379,8 +377,8 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
 		LogUtils.info("订单取消，库存还原：{}", goodsSkus);
 
 		//批量修改商品库存
-		goodsSkuService.updateBatchById(goodsSkus);
-		goodsSkuService.updateGoodsStuck(goodsSkus);
+		goodsSkuApi.updateBatchById(goodsSkus);
+		goodsSkuApi.updateGoodsStuck(goodsSkus);
 
 	}
 }

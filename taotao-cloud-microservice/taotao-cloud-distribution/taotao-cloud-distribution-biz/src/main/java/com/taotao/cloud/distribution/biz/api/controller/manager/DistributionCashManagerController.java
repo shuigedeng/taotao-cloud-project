@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.model.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
-import com.taotao.cloud.distribution.biz.service.DistributionCashService;
+import com.taotao.cloud.distribution.biz.service.IDistributionCashService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionCashManagerController {
 
 	@Autowired
-	private DistributionCashService distributorCashService;
+	private IDistributionCashService distributorCashService;
 
 	@Operation(summary = "通过id获取分销佣金详情", description = "通过id获取分销佣金详情")
 	@RequestLogger
@@ -44,7 +44,7 @@ public class DistributionCashManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getByPage")
 	public Result<IPage<DistributionCash>> getByPage(
-			DistributionCashSearchVO distributionCashSearchVO) {
+		DistributionCashSearchVO distributionCashSearchVO) {
 		return Result.success(distributorCashService.getDistributionCash(distributionCashSearchVO));
 	}
 
@@ -55,8 +55,8 @@ public class DistributionCashManagerController {
 	@PreventDuplicateSubmissions
 	@PostMapping(value = "/audit/{id}")
 	public Result<DistributionCash> audit(
-			@Parameter(description = "分销佣金ID") @PathVariable String id,
-			@Parameter(description = "处理结果") @NotNull String result) {
+		@Parameter(description = "分销佣金ID") @PathVariable String id,
+		@Parameter(description = "处理结果") @NotNull String result) {
 		return Result.success(distributorCashService.audit(id, result));
 	}
 }
