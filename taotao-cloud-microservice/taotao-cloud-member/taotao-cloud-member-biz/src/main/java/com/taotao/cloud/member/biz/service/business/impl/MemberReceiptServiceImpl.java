@@ -10,7 +10,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.member.api.model.query.MemberReceiptPageQuery;
+import com.taotao.cloud.member.api.model.page.MemberReceiptPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberReceiptAddVO;
 import com.taotao.cloud.member.biz.mapper.IMemberReceiptMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
@@ -25,6 +25,10 @@ import java.util.List;
 
 /**
  * 会员发票业务层实现
+ *
+ * @author shuigedeng
+ * @version 2023.01
+ * @since 2023-02-01 13:48:11
  */
 @Service
 public class MemberReceiptServiceImpl extends ServiceImpl<IMemberReceiptMapper, MemberReceipt> implements

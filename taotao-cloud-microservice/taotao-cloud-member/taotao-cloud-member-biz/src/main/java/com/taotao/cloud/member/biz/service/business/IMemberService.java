@@ -22,7 +22,7 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.member.api.model.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.model.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.model.dto.MemberEditDTO;
-import com.taotao.cloud.member.api.model.query.MemberSearchPageQuery;
+import com.taotao.cloud.member.api.model.page.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberSearchVO;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.token.Token;

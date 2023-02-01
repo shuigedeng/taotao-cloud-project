@@ -16,7 +16,7 @@ import com.taotao.cloud.member.biz.mapper.IMemberRechargeMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
 import com.taotao.cloud.member.biz.service.business.IMemberRechargeService;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.model.query.recharge.RechargePageQuery;
+import com.taotao.cloud.order.api.model.page.recharge.RechargePageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +27,9 @@ import java.util.Date;
 /**
  * 预存款业务层实现
  *
- * @author pikachu
- * @since 2020-02-25 14:10:16
+ * @author shuigedeng
+ * @version 2023.01
+ * @since 2023-02-01 13:48:28
  */
 @Service
 public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper, MemberRecharge> implements IMemberRechargeService {

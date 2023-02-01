@@ -15,13 +15,27 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.cloud.sys.api.model.dto.dictItem.DictItemDTO;
+import com.taotao.cloud.sys.api.model.page.DictItemPageQuery;
+import com.taotao.cloud.sys.api.model.query.DictItemQuery;
 import com.taotao.cloud.sys.biz.mapper.IDictItemMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
+import com.taotao.cloud.sys.biz.model.entity.dict.QDictItem;
 import com.taotao.cloud.sys.biz.repository.cls.DictItemRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictItemRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictItemService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * DictItemServiceImpl
@@ -35,76 +49,69 @@ public class DictItemServiceImpl extends
 	BaseSuperServiceImpl<IDictItemMapper, DictItem, DictItemRepository, IDictItemRepository, Long>
 	implements IDictItemService {
 
-	//private final static QDictItem SYS_DICT_ITEM = QDictItem.sysDictItem;
-	//private final static BooleanExpression PREDICATE = SYS_DICT_ITEM.delFlag.eq(false);
-	//private final static OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = SYS_DICT_ITEM.createTime.desc();
+	private final static QDictItem SYS_DICT_ITEM = QDictItem.dictItem;
+	private final static BooleanExpression PREDICATE = SYS_DICT_ITEM.delFlag.eq(false);
+	private final static OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = SYS_DICT_ITEM.createTime.desc();
 
-	//private final DictItemRepository dictItemRepository;
-	//
-	//public DictItemServiceImpl(
-	//	DictItemRepository dictItemRepository) {
-	//	this.dictItemRepository = dictItemRepository;
-	//}
-	//
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public Boolean deleteByDictId(Long dictId) {
-	//	return dictItemRepository.deleteByDictId(dictId);
-	//}
-	//
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public DictItem save(DictItemDTO dictItemDTO) {
-	//	//DictItem item = DictItem.builder().build();
-	//	//BeanUtil.copyIgnoredNull(dictItemDTO, item);
-	//	//return dictItemRepository.saveAndFlush(item);
-	//	return null;
-	//}
-	//
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public DictItem updateById(Long id, DictItemDTO dictItemDTO) {
-	//	Optional<DictItem> optionalDictItem = dictItemRepository.findById(id);
-	//	DictItem item = optionalDictItem.orElseThrow(() -> new BusinessException("字典项数据不存在"));
-	//	BeanUtil.copyIgnoredNull(dictItemDTO, item);
-	//	return dictItemRepository.saveAndFlush(item);
-	//}
-	//
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public Boolean deleteById(Long id) {
-	//
-	//	dictItemRepository.deleteById(id);
-	//	return true;
-	//}
-	//
-	//@Override
-	//public Page<DictItem> getPage(Pageable page, DictItemPageQuery dictItemPageQuery) {
-	//	Optional.ofNullable(dictItemPageQuery.getDictId())
-	//		.ifPresent(dictId -> PREDICATE.and(SYS_DICT_ITEM.dictId.eq(dictId)));
-	//	Optional.ofNullable(dictItemPageQuery.getItemText())
-	//		.ifPresent(itemText -> PREDICATE.and(SYS_DICT_ITEM.itemText.like(itemText)));
-	//	Optional.ofNullable(dictItemPageQuery.getItemValue())
-	//		.ifPresent(itemValue -> PREDICATE.and(SYS_DICT_ITEM.itemValue.like(itemValue)));
-	//	Optional.ofNullable(dictItemPageQuery.getDescription())
-	//		.ifPresent(description -> PREDICATE.and(SYS_DICT_ITEM.description.like(description)));
-	//	Optional.ofNullable(dictItemPageQuery.getStatus())
-	//		.ifPresent(status -> PREDICATE.and(SYS_DICT_ITEM.status.eq(status)));
-	//	return dictItemRepository.findPageable(PREDICATE, page, CREATE_TIME_DESC);
-	//}
-	//
-	//@Override
-	//public List<DictItem> getInfo(DictItemQuery dictItemQuery) {
-	//	Optional.ofNullable(dictItemQuery.getDictId())
-	//		.ifPresent(dictId -> PREDICATE.and(SYS_DICT_ITEM.dictId.eq(dictId)));
-	//	Optional.ofNullable(dictItemQuery.getItemText())
-	//		.ifPresent(itemText -> PREDICATE.and(SYS_DICT_ITEM.itemText.like(itemText)));
-	//	Optional.ofNullable(dictItemQuery.getItemValue())
-	//		.ifPresent(itemValue -> PREDICATE.and(SYS_DICT_ITEM.itemValue.like(itemValue)));
-	//	Optional.ofNullable(dictItemQuery.getDescription())
-	//		.ifPresent(description -> PREDICATE.and(SYS_DICT_ITEM.description.like(description)));
-	//	Optional.ofNullable(dictItemQuery.getStatus())
-	//		.ifPresent(status -> PREDICATE.and(SYS_DICT_ITEM.status.eq(status)));
-	//	return dictItemRepository.getInfo(PREDICATE);
-	//}
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Boolean deleteByDictId(Long dictId) {
+		cr().deleteById(dictId);
+		return true;
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public DictItem save(DictItemDTO dictItemDTO) {
+		DictItem item = DictItem.builder().build();
+		BeanUtils.copyIgnoredNull(dictItemDTO, item);
+		return cr().saveAndFlush(item);
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public DictItem updateById(Long id, DictItemDTO dictItemDTO) {
+		Optional<DictItem> optionalDictItem = cr().findById(id);
+		DictItem item = optionalDictItem.orElseThrow(
+			() -> new BusinessException("字典项数据不存在"));
+		BeanUtils.copyIgnoredNull(dictItemDTO, item);
+		return cr().saveAndFlush(item);
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Boolean deleteById(Long id) {
+		cr().deleteById(id);
+		return true;
+	}
+
+	@Override
+	public Page<DictItem> getPage(Pageable page, DictItemPageQuery dictItemPageQuery) {
+		//Optional.ofNullable(dictItemPageQuery.getDictId())
+		//	.ifPresent(dictId -> PREDICATE.and(SYS_DICT_ITEM.dictId.eq(dictId)));
+		//Optional.ofNullable(dictItemPageQuery.getItemText())
+		//	.ifPresent(itemText -> PREDICATE.and(SYS_DICT_ITEM.itemText.like(itemText)));
+		//Optional.ofNullable(dictItemPageQuery.getItemValue())
+		//	.ifPresent(itemValue -> PREDICATE.and(SYS_DICT_ITEM.itemValue.like(itemValue)));
+		//Optional.ofNullable(dictItemPageQuery.getDescription())
+		//	.ifPresent(description -> PREDICATE.and(SYS_DICT_ITEM.description.like(description)));
+		//Optional.ofNullable(dictItemPageQuery.getStatus())
+		//	.ifPresent(status -> PREDICATE.and(SYS_DICT_ITEM.status.eq(status)));
+		return cr().findPageable(PREDICATE, page, CREATE_TIME_DESC);
+	}
+
+	@Override
+	public List<DictItem> getInfo(DictItemQuery dictItemQuery) {
+		//Optional.ofNullable(dictItemQuery.getDictId())
+		//	.ifPresent(dictId -> PREDICATE.and(SYS_DICT_ITEM.dictId.eq(dictId)));
+		//Optional.ofNullable(dictItemQuery.getItemText())
+		//	.ifPresent(itemText -> PREDICATE.and(SYS_DICT_ITEM.itemText.like(itemText)));
+		//Optional.ofNullable(dictItemQuery.getItemValue())
+		//	.ifPresent(itemValue -> PREDICATE.and(SYS_DICT_ITEM.itemValue.like(itemValue)));
+		//Optional.ofNullable(dictItemQuery.getDescription())
+		//	.ifPresent(description -> PREDICATE.and(SYS_DICT_ITEM.description.like(description)));
+		//Optional.ofNullable(dictItemQuery.getStatus())
+		//	.ifPresent(status -> PREDICATE.and(SYS_DICT_ITEM.status.eq(status)));
+		return (List<DictItem>) cr().find(PREDICATE, null, null);
+	}
 }

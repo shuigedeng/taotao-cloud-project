@@ -10,7 +10,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
-import com.taotao.cloud.goods.api.model.query.BrandPageQuery;
+import com.taotao.cloud.goods.api.model.page.BrandPageQuery;
 import com.taotao.cloud.goods.biz.mapper.IBrandMapper;
 import com.taotao.cloud.goods.biz.model.convert.BrandConvert;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
@@ -38,8 +38,8 @@ import java.util.stream.Collectors;
  * @version 2022.04
  * @since 2022-04-27 17:01:19
  */
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, BrandRepository, IBrandRepository, Long> implements IBrandService {
 
 	/**

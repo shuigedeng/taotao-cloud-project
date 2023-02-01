@@ -15,9 +15,13 @@
  */
 package com.taotao.cloud.order.biz.controller.feign;
 
+import com.taotao.cloud.order.api.feign.IFeignOrderApi;
+import com.taotao.cloud.order.api.model.dto.order_info.OrderSaveDTO;
+import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
+import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,9 +33,37 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/remote/mall/dict")
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class FeignOrderController {
+public class FeignOrderController implements IFeignOrderApi {
 
+	@Override
+	public OrderVO findOrderInfoByCode(String code) {
+		return null;
+	}
+
+	@Override
+	public OrderVO saveOrder(OrderSaveDTO orderDTO) {
+		return null;
+	}
+
+	@Override
+	public OrderDetailVO queryDetail(String sn) {
+		return null;
+	}
+
+	@Override
+	public Boolean payOrder(String sn, String paymentMethod, String receivableNo) {
+		return null;
+	}
+
+	@Override
+	public OrderVO getBySn(String sn) {
+		return null;
+	}
+
+	@Override
+	public List<OrderVO> getByTradeSn(String sn) {
+		return null;
+	}
 }
 

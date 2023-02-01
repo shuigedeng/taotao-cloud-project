@@ -7,7 +7,7 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.model.dto.DraftGoodsSkuParamsDTO;
-import com.taotao.cloud.goods.api.model.query.DraftGoodsPageQuery;
+import com.taotao.cloud.goods.api.model.page.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.DraftGoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.model.vo.DraftGoodsVO;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;

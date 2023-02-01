@@ -20,7 +20,7 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsWordsTypeEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;
-import com.taotao.cloud.goods.api.model.query.EsGoodsSearchQuery;
+import com.taotao.cloud.goods.api.model.page.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.biz.elasticsearch.BaseElasticsearchService;
 import com.taotao.cloud.goods.biz.elasticsearch.ElasticsearchProperties;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsAttribute;

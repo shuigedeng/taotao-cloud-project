@@ -10,7 +10,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.dto.HotWordsDTO;
-import com.taotao.cloud.goods.api.model.query.EsGoodsSearchQuery;
+import com.taotao.cloud.goods.api.model.page.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.biz.elasticsearch.EsGoodsSearchDTO;
@@ -53,7 +53,6 @@ import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

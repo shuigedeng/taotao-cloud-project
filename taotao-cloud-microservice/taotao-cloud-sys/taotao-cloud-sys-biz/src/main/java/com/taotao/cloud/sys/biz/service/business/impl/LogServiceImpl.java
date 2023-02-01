@@ -52,7 +52,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
-		ILogService {
+	ILogService {
 
 	@Override
 	public Object findAllByPageable(String nickname, Pageable pageable) {
@@ -107,7 +107,7 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 
 		// 方法路径
 		String methodName =
-				joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
+			joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
 
 		StringBuilder params = new StringBuilder("{");
 		//参数值
@@ -153,7 +153,7 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 		//ValidationUtil.isNull(log.getId(), "Log", "id", id);
 		String details = log.getExDetail();
 		return Dict.create()
-				.set("exception", details);
+			.set("exception", details);
 	}
 
 	@Override
@@ -184,5 +184,10 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 	@Transactional(rollbackFor = Exception.class)
 	public void delAllByInfo() {
 		this.baseMapper.deleteByLogType("INFO");
+	}
+
+	@Override
+	public long findIp(String toString, String toString1) {
+		return 0;
 	}
 }

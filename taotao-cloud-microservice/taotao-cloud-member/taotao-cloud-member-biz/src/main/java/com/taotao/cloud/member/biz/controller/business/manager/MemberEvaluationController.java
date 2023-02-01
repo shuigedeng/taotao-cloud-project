@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.controller.business.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.biz.model.convert.MemberEvaluationConvert;

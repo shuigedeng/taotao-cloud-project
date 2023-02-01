@@ -21,7 +21,7 @@ import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintDTO;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintOperationDTO;
 import com.taotao.cloud.order.api.model.dto.order.StoreAppealDTO;
-import com.taotao.cloud.order.api.model.query.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.api.model.page.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;

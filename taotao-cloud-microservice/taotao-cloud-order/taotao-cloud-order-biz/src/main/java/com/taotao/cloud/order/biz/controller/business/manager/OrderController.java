@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.model.dto.MemberAddressDTO;
-import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
+import com.taotao.cloud.order.api.model.page.order.OrderPageQuery;
 import com.taotao.cloud.order.api.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;

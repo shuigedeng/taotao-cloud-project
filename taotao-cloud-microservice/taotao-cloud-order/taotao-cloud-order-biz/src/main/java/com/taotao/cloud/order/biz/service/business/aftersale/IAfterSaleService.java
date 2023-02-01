@@ -4,12 +4,11 @@ package com.taotao.cloud.order.biz.service.business.aftersale;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.api.model.query.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.api.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,11 +25,11 @@ public interface IAfterSaleService extends IService<AfterSale> {
 	/**
 	 * 分页查询售后信息
 	 *
-	 * @param salePageQuery 查询参数
+	 * @param afterSalePageQuery 查询参数
 	 * @return {@link IPage }<{@link AfterSale }>
 	 * @since 2022-04-28 08:49:10
 	 */
-	IPage<AfterSale> pageQuery(AfterSalePageQuery salePageQuery);
+	IPage<AfterSale> pageQuery(AfterSalePageQuery afterSalePageQuery);
 
 	/**
 	 * 查询导出售后信息
@@ -78,7 +77,8 @@ public interface IAfterSaleService extends IService<AfterSale> {
 	 * @return {@link Boolean }
 	 * @since 2022-04-28 08:49:10
 	 */
-	Boolean review(String afterSaleSn, String serviceStatus, String remark, BigDecimal actualRefundPrice);
+	Boolean review(String afterSaleSn, String serviceStatus, String remark,
+		BigDecimal actualRefundPrice);
 
 	/**
 	 * 买家退货,物流填写
@@ -90,7 +90,8 @@ public interface IAfterSaleService extends IService<AfterSale> {
 	 * @return {@link AfterSale }
 	 * @since 2022-04-28 08:49:10
 	 */
-	AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, Long logisticsId, LocalDateTime mDeliverTime);
+	AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, Long logisticsId,
+		LocalDateTime mDeliverTime);
 
 	/**
 	 * 获取买家退货物流踪迹

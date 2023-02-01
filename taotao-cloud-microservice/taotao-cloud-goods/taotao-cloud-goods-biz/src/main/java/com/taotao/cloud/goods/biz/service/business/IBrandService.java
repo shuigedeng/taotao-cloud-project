@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
-import com.taotao.cloud.goods.api.model.query.BrandPageQuery;
+import com.taotao.cloud.goods.api.model.page.BrandPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 

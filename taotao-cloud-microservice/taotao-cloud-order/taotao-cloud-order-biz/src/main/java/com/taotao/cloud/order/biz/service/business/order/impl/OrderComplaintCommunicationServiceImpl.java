@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.api.model.query.order.OrderComplaintCommunicationPageQuery;
+import com.taotao.cloud.order.api.model.page.order.OrderComplaintCommunicationPageQuery;
 import com.taotao.cloud.order.biz.mapper.order.IOrderComplainCommunicationMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;
@@ -18,9 +18,10 @@ import org.springframework.stereotype.Service;
  * @version 2022.04
  * @since 2022-04-28 08:55:00
  */
-@AllArgsConstructor
 @Service
-public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<IOrderComplainCommunicationMapper, OrderComplaintCommunication> implements
+@AllArgsConstructor
+public class OrderComplaintCommunicationServiceImpl extends
+	ServiceImpl<IOrderComplainCommunicationMapper, OrderComplaintCommunication> implements
 	IOrderComplaintCommunicationService {
 
 	@Override
@@ -29,7 +30,8 @@ public class OrderComplaintCommunicationServiceImpl extends ServiceImpl<IOrderCo
 	}
 
 	@Override
-	public IPage<OrderComplaintCommunication> getCommunication(OrderComplaintCommunicationPageQuery pageQuery) {
+	public IPage<OrderComplaintCommunication> getCommunication(
+		OrderComplaintCommunicationPageQuery pageQuery) {
 		LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(StrUtil.isNotEmpty(pageQuery.getComplainId()),
 			OrderComplaintCommunication::getComplainId, pageQuery.getComplainId());

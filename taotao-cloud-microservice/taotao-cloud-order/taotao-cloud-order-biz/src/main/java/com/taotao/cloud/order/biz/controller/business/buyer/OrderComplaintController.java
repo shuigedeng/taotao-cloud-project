@@ -9,7 +9,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintCommunicationDTO;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintDTO;
-import com.taotao.cloud.order.api.model.query.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.api.model.page.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderComplaintBaseVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;

@@ -43,6 +43,7 @@ public class PinyinServiceImpl implements IPinYinService {
 
 	/**
 	 * 初始化多音字中文字和拼音首字母大写的映射
+	 *
 	 * @since 2022-03-23 09:01:08
 	 */
 	public void init() {
@@ -153,7 +154,6 @@ public class PinyinServiceImpl implements IPinYinService {
 	 * @param chineseString 中文字符串
 	 * @param caseType      大小写类型
 	 * @return 首字母大小写
-	 * @date 2020/12/4 14:14
 	 */
 	private static String getFirstLetters(String chineseString, HanyuPinyinCaseType caseType) {
 

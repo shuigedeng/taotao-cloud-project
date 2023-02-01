@@ -8,7 +8,7 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.model.dto.GoodsSkuStockDTO;
-import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
@@ -37,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 店铺端,商品接口

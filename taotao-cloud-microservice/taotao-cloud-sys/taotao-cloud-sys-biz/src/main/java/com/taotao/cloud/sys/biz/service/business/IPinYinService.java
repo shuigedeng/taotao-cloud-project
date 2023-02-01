@@ -32,8 +32,8 @@ public interface IPinYinService {
 	 * 例如：张 -> Z 例如：单 -> S
 	 *
 	 * @param lastnameChines 中文姓氏
-	 * @return 姓氏的首字母大写
-	 * @since 2020/12/4 10:34
+	 * @return {@link String }
+	 * @since 2023-02-01 13:39:23
 	 */
 	String getLastnameFirstLetterUpper(String lastnameChines);
 

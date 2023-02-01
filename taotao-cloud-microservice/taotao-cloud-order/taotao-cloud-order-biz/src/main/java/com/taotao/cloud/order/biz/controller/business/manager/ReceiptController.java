@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.api.model.query.order.ReceiptPageQuery;
+import com.taotao.cloud.order.api.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

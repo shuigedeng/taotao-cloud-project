@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.order.biz.service.feign.impl;
 
-import com.taotao.cloud.sys.biz.mapper.IDictMapper;
-import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
-import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
-import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
+import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
+import com.taotao.cloud.order.biz.model.entity.order.Order;
+import com.taotao.cloud.order.biz.repository.cls.order.OrderRepository;
+import com.taotao.cloud.order.biz.repository.inf.order.IOrderRepository;
+import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.feign.IFeignOrderService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +35,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class FeignOrderServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
-	implements IFeignDictService {
+public class FeignOrderServiceImpl extends
+	BaseSuperServiceImpl<IOrderMapper, Order, OrderRepository, IOrderRepository, Long>
+	implements IFeignOrderService {
+
 	@Autowired
-	private IDictService dictService;
+	private IOrderService orderService;
 
 	@Override
 	public <T> T test123(T t) {

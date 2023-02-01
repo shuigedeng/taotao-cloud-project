@@ -58,8 +58,8 @@ import org.springframework.stereotype.Service;
  * @version 2022.04
  * @since 2022-04-28 08:49:47
  */
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class CartServiceImpl implements ICartService {
 
 	static String errorMessage = "购物车异常，请稍后重试";
@@ -740,7 +740,8 @@ public class CartServiceImpl implements ICartService {
 			cartSkuVO.setPurchasePrice(promotionGoods.getPrice());
 		} else {
 			//如果拼团活动被异常处理，则在这里安排mq重新写入商品索引
-			feignGoodsSkuApi.generateEs(feignGoodsApi.getById(cartSkuVO.getGoodsSku().getGoodsId()));
+			feignGoodsSkuApi.generateEs(
+				feignGoodsApi.getById(cartSkuVO.getGoodsSku().getGoodsId()));
 			throw new BusinessException(ResultEnum.CART_PINTUAN_NOT_EXIST_ERROR);
 		}
 		//检测拼团限购数量

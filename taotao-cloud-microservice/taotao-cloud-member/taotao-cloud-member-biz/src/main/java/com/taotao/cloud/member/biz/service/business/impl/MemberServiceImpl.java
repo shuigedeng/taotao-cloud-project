@@ -28,7 +28,7 @@ import com.taotao.cloud.member.api.model.dto.MemberAddDTO;
 import com.taotao.cloud.member.api.model.dto.MemberEditDTO;
 import com.taotao.cloud.member.api.model.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.api.model.query.ConnectQuery;
-import com.taotao.cloud.member.api.model.query.MemberSearchPageQuery;
+import com.taotao.cloud.member.api.model.page.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberSearchVO;
 import com.taotao.cloud.member.biz.aop.point.PointLogPoint;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;

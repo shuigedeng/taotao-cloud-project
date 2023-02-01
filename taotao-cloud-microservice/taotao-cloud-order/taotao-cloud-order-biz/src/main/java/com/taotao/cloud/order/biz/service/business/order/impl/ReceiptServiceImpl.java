@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.api.model.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.api.model.query.order.ReceiptPageQuery;
+import com.taotao.cloud.order.api.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.mapper.order.IReceiptMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.biz.service.business.order.IReceiptService;

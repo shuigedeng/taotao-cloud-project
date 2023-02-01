@@ -21,7 +21,7 @@ public interface IMemberGoodsCollectionService extends IService<MemberGoodsColle
 	 * @param PageQuery 查询参数
 	 * @return 商品搜索分页
 	 */
-	IPage<GoodsCollectionVO> goodsCollection(PageQuery PageQuery);
+	IPage<GoodsCollectionVO> goodsCollection(PageQuery pageQuery);
 
 	/**
 	 * 是否收藏商品

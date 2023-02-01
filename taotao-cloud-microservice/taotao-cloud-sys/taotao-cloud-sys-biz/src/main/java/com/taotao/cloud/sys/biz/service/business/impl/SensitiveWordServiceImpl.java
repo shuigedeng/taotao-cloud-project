@@ -8,12 +8,10 @@ import com.taotao.cloud.sys.biz.repository.cls.SensitiveWordRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISensitiveWordRepository;
 import com.taotao.cloud.sys.biz.service.business.ISensitiveWordService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 /**
  * 敏感词业务层实现
@@ -29,11 +27,9 @@ public class SensitiveWordServiceImpl extends
 	@Override
 	public void resetCache() {
 		List<SensitiveWord> sensitiveWordsList = this.list();
-
 		if (sensitiveWordsList == null || sensitiveWordsList.isEmpty()) {
 			return;
 		}
-
 		List<String> sensitiveWords = sensitiveWordsList.stream()
 			.map(SensitiveWord::getSensitiveWord).collect(Collectors.toList());
 

@@ -1,0 +1,29 @@
+package com.taotao.cloud.goods.api.model.page;
+
+import com.taotao.cloud.common.model.PageQuery;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+
+import java.io.Serial;
+
+/**
+ * 商品品牌dto
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:33:01
+ */
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Schema(description = "商品品牌dto")
+public class BrandPageQuery extends PageQuery {
+
+	@Serial
+	private static final long serialVersionUID = 8906820486037326039L;
+
+	@Schema(description = "品牌名称")
+	private String name;
+}

@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.goods.api.model.query.SpecificationPageQuery;
+import com.taotao.cloud.goods.api.model.page.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.mapper.ISpecificationMapper;
 import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.model.entity.Specification;

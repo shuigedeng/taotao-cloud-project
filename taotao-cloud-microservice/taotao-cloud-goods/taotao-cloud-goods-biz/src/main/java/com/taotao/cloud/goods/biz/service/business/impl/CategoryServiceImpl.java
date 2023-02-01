@@ -52,10 +52,11 @@ public class CategoryServiceImpl extends
 	implements ICategoryService {
 
 	private static final String DELETE_FLAG_COLUMN = "delete_flag";
-	/**
-	 * 缓存服务
-	 */
+
 	private final RedisRepository redisRepository;
+	/**
+	 * 商品品牌业务层
+	 */
 	private final IBrandService brandService;
 	/**
 	 * 分类品牌服务
@@ -72,7 +73,9 @@ public class CategoryServiceImpl extends
 
 	@Override
 	public List<Category> childrenList(Long parentId) {
-		return this.list(new LambdaQueryWrapper<Category>().eq(Category::getParentId, parentId));
+		LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+		wrapper.eq(Category::getParentId, parentId);
+		return this.list(wrapper);
 	}
 
 	@Override
@@ -83,8 +86,10 @@ public class CategoryServiceImpl extends
 
 	@Override
 	public List<Category> listByIdsOrderByLevel(List<Long> ids) {
-		return this.list(new LambdaQueryWrapper<Category>().in(Category::getId, ids)
-			.orderByAsc(Category::getLevel));
+		LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+		wrapper.in(Category::getId, ids);
+		wrapper.orderByAsc(Category::getLevel);
+		return this.list(wrapper);
 	}
 
 	@Override

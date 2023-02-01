@@ -18,7 +18,7 @@ import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;
-import com.taotao.cloud.order.api.model.query.order.StoreFlowPageQuery;
+import com.taotao.cloud.order.api.model.page.order.StoreFlowPageQuery;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;

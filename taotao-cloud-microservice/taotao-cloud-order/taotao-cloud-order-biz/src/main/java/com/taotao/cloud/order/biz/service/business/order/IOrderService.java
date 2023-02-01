@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.member.api.model.dto.MemberAddressDTO;
 import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.message.OrderMessage;
-import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
+import com.taotao.cloud.order.api.model.page.order.OrderPageQuery;
 import com.taotao.cloud.order.api.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;

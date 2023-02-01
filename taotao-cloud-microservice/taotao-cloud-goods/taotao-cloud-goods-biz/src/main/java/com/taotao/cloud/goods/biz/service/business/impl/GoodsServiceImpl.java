@@ -20,7 +20,7 @@ import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;
-import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
@@ -76,10 +76,6 @@ public class GoodsServiceImpl extends
 	 */
 	private final ICategoryService categoryService;
 	/**
-	 * 设置
-	 */
-	private final IFeignSettingApi feignSettingApi;
-	/**
 	 * 商品相册
 	 */
 	private final IGoodsGalleryService goodsGalleryService;
@@ -87,6 +83,11 @@ public class GoodsServiceImpl extends
 	 * 商品规格
 	 */
 	private final IGoodsSkuService goodsSkuService;
+
+	/**
+	 * 设置
+	 */
+	private final IFeignSettingApi feignSettingApi;
 	/**
 	 * 店铺详情
 	 */

@@ -18,7 +18,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsSkuStockDTO;
-import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecVO;
@@ -41,7 +41,7 @@ import com.taotao.cloud.goods.biz.util.EsIndexUtil;
 import com.taotao.cloud.goods.biz.util.QueryUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
-import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
@@ -114,6 +114,7 @@ public class GoodsSkuServiceImpl extends
 	 * 商品索引服务
 	 */
 	private final IEsGoodsIndexService goodsIndexService;
+
 	/**
 	 * 促销活动商品服务
 	 */

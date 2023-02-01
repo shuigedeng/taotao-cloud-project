@@ -32,14 +32,13 @@ import com.taotao.cloud.sys.biz.service.business.IResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.sys.biz.utils.TreeUtil;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 /**
  * MenuServiceImpl
@@ -55,20 +54,6 @@ public class ResourceServiceImpl extends
 	implements IResourceService {
 
 	private final IRoleService roleService;
-
-	//private final IFeignOrderItemService IFeignOrderItemService;
-	//private final IFeignOrderService IFeignOrderService;
-	//
-	//@DubboReference(validation = "true")
-	//private IDubboOrderService dubboOrderService;
-	//
-	//public MenuServiceImpl(IRoleService sysRoleService,
-	//	IFeignOrderItemService IFeignOrderItemService,
-	//	IFeignOrderService IFeignOrderService) {
-	//	this.IFeignOrderItemService = IFeignOrderItemService;
-	//	this.IFeignOrderService = IFeignOrderService;
-	//	this.sysRoleService = sysRoleService;
-	//}
 
 
 	@Override
@@ -151,7 +136,7 @@ public class ResourceServiceImpl extends
 
 	@Override
 	public List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> vos,
-													Long parentId) {
+		Long parentId) {
 		//List<MenuTreeVO> menuTreeList = vos.stream()
 		//	.filter(vo -> MenuTypeEnum.DIR.getCode() == vo.type())
 		//	.map(e -> MenuTreeVO.builder()
@@ -170,7 +155,6 @@ public class ResourceServiceImpl extends
 		return null;
 		//return ForestNodeMerger.merge(TreeUtil.buildTree(menus));
 	}
-
 
 	//@Override
 	//@Transactional(rollbackFor = Exception.class)

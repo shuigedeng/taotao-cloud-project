@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.model.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.api.model.query.order.ReceiptPageQuery;
+import com.taotao.cloud.order.api.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

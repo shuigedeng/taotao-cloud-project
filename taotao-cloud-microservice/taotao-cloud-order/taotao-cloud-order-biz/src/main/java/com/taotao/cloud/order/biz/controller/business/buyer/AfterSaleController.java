@@ -6,7 +6,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTOBuilder;
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.api.model.query.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.api.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleLogVO;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleReasonVO;

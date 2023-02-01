@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.order.api.model.query.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.api.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.model.convert.AfterSaleConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;

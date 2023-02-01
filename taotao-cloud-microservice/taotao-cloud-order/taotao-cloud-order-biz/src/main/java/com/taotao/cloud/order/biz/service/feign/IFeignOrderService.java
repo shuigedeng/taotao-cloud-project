@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.order.biz.service.feign;
 
-import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
+import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 
@@ -26,7 +26,7 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IFeignOrderService extends BaseSuperService<Dict, Long> {
+public interface IFeignOrderService extends BaseSuperService<Order, Long> {
 
 	<T> T test123(T t);
 

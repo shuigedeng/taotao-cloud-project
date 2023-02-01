@@ -16,14 +16,14 @@ import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
-import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.EvaluationNumberVO;
 import com.taotao.cloud.member.biz.mapper.IMemberEvaluationMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.service.business.IMemberEvaluationService;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
-import com.taotao.cloud.member.biz.utils.QueryUtil;
+import com.taotao.cloud.member.biz.utils.QueryUtils;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
@@ -35,7 +35,6 @@ import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
 import java.util.List;
 import java.util.Map;
-import jakarta.annotation.Resource;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,13 +48,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberEvaluationServiceImpl extends
-		ServiceImpl<IMemberEvaluationMapper, MemberEvaluation> implements IMemberEvaluationService {
+	ServiceImpl<IMemberEvaluationMapper, MemberEvaluation> implements IMemberEvaluationService {
 
 	/**
-	 * 会员评价数据层
+	 * 会员
 	 */
-	@Resource
-	private IMemberEvaluationMapper IMemberEvaluationMapper;
+	@Autowired
+	private IMemberService memberService;
+
 	/**
 	 * 订单
 	 */
@@ -66,11 +66,6 @@ public class MemberEvaluationServiceImpl extends
 	 */
 	@Autowired
 	private IFeignOrderItemApi feignOrderItemApi;
-	/**
-	 * 会员
-	 */
-	@Autowired
-	private IMemberService memberService;
 	/**
 	 * 商品
 	 */
@@ -90,13 +85,14 @@ public class MemberEvaluationServiceImpl extends
 	@Override
 	public IPage<MemberEvaluation> managerQuery(EvaluationPageQuery queryParams) {
 		//获取评价分页
-		return this.page(queryParams.buildMpPage(), QueryUtil.evaluationQueryWrapper(queryParams));
+		return this.page(queryParams.buildMpPage(), QueryUtils.evaluationQueryWrapper(queryParams));
 	}
 
 	@Override
 	public IPage<MemberEvaluation> queryPage(EvaluationPageQuery evaluationPageQuery) {
-		return IMemberEvaluationMapper.getMemberEvaluationList(
-				evaluationPageQuery.buildMpPage(), QueryUtil.evaluationQueryWrapper(evaluationPageQuery));
+		return this.baseMapper.getMemberEvaluationList(
+			evaluationPageQuery.buildMpPage(),
+			QueryUtils.evaluationQueryWrapper(evaluationPageQuery));
 	}
 
 	@Override
@@ -111,10 +107,10 @@ public class MemberEvaluationServiceImpl extends
 		Member member = memberService.getUserInfo();
 		//获取商品信息
 		GoodsSkuSpecGalleryVO goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(
-				memberEvaluationDTO.getSkuId());
+			memberEvaluationDTO.getSkuId());
 		//新增用户评价
 		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,
-				member, order);
+			member, order);
 		//过滤商品咨询敏感词
 		memberEvaluation.setContent(SensitiveWordsFilter.filter(memberEvaluation.getContent()));
 		//添加评价
@@ -124,9 +120,9 @@ public class MemberEvaluationServiceImpl extends
 		feignOrderItemApi.updateCommentStatus(orderItem.sn(), CommentStatusEnum.FINISHED);
 		//发送商品评价消息
 		String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
-				+ GoodsTagsEnum.GOODS_COMMENT_COMPLETE.name();
+			+ GoodsTagsEnum.GOODS_COMMENT_COMPLETE.name();
 		rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(memberEvaluation),
-				RocketmqSendCallbackBuilder.commonCallback());
+			RocketmqSendCallbackBuilder.commonCallback());
 		return true;
 	}
 
@@ -140,7 +136,7 @@ public class MemberEvaluationServiceImpl extends
 		UpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.update();
 		updateWrapper.eq("id", id);
 		updateWrapper.set("status", status.equals(SwitchEnum.OPEN.name()) ? SwitchEnum.OPEN.name()
-				: SwitchEnum.CLOSE.name());
+			: SwitchEnum.CLOSE.name());
 		return this.update(updateWrapper);
 	}
 
@@ -187,8 +183,8 @@ public class MemberEvaluationServiceImpl extends
 		evaluationNumberVO.setModerate(moderate);
 		evaluationNumberVO.setWorse(worse);
 		evaluationNumberVO.setHaveImage(this.count(new QueryWrapper<MemberEvaluation>()
-				.eq("have_image", 1)
-				.eq("goods_id", goodsId)));
+			.eq("have_image", 1)
+			.eq("goods_id", goodsId)));
 
 		return evaluationNumberVO;
 	}
