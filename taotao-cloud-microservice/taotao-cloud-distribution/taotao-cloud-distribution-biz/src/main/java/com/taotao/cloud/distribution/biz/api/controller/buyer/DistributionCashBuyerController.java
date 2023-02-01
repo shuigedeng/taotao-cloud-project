@@ -5,7 +5,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
-import com.taotao.cloud.distribution.biz.service.DistributionCashService;
+import com.taotao.cloud.distribution.biz.service.IDistributionCashService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,12 +36,12 @@ public class DistributionCashBuyerController {
 	 * 分销佣金
 	 */
 	@Autowired
-	private DistributionCashService distributionCashService;
+	private IDistributionCashService distributionCashService;
 	/**
 	 * 分销员提现
 	 */
 	@Autowired
-	private DistributionCashService distributorCashService;
+	private IDistributionCashService distributorCashService;
 
 	@Operation(summary = "分销员提现", description = "分销员提现")
 	@RequestLogger
@@ -49,9 +49,9 @@ public class DistributionCashBuyerController {
 	//@PreventDuplicateSubmissions
 	@PostMapping
 	public Result<Object> cash(
-			@Validated @Max(value = 9999, message = "提现金额单次最多允许提现9999元")
-			@Min(value = 1, message = "提现金额单次最少提现金额为1元")
-			@NotNull @ApiIgnore BigDecimal price) {
+		@Validated @Max(value = 9999, message = "提现金额单次最多允许提现9999元")
+		@Min(value = 1, message = "提现金额单次最少提现金额为1元")
+		@NotNull @ApiIgnore BigDecimal price) {
 		if (Boolean.TRUE.equals(distributionCashService.cash(price))) {
 			return Result.success();
 		}

@@ -44,7 +44,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CouponActivityServiceImpl extends
 	AbstractPromotionsServiceImpl<CouponActivityMapper, CouponActivity> implements
-		ICouponActivityService {
+	ICouponActivityService {
 
 	@Autowired
 	private ICouponService couponService;
@@ -53,7 +53,7 @@ public class CouponActivityServiceImpl extends
 	@Autowired
 	private ICouponActivityItemService couponActivityItemService;
 	@Autowired
-	private IFeignMemberApi feignMemberApi;
+	private IFeignMemberApi memberApi;
 
 	@Override
 	public CouponActivityVO getCouponActivityVO(String couponActivityId) {
@@ -248,7 +248,7 @@ public class CouponActivityServiceImpl extends
 	private List<Map<String, Object>> getMemberList(CouponActivity couponActivity) {
 		//判断优惠券的发送范围，获取会员列表
 		if ("ALL".equals(couponActivity.getActivityScope())) {
-			return this.feignMemberApi.listFieldsByMemberIds("id,nick_name", null);
+			return this.memberApi.listFieldsByMemberIds("id,nick_name", null);
 		} else {
 			List<String> ids = new ArrayList<>();
 			if (JSONUtil.isJsonArray(couponActivity.getActivityScopeInfo())) {
@@ -256,7 +256,7 @@ public class CouponActivityServiceImpl extends
 				ids = array.toList(Map.class).stream().map(i -> i.get("id").toString())
 					.collect(Collectors.toList());
 			}
-			return feignMemberApi.listFieldsByMemberIds("id,nick_name", ids);
+			return memberApi.listFieldsByMemberIds("id,nick_name", ids);
 		}
 	}
 

@@ -42,7 +42,7 @@ public class BillStoreController {
 	private IBillService billService;
 
 	@Autowired
-	private IFeignStoreFlowApi storeFlowService;
+	private IFeignStoreFlowApi storeFlowApi;
 
 	@Operation(summary = "获取结算单分页", description = "获取结算单分页")
 	@RequestLogger
@@ -67,9 +67,9 @@ public class BillStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getStoreFlow")
 	public Result<PageResult<StoreFlowVO>> getStoreFlow(@PathVariable String id,
-			@Parameter(description = "流水类型:PAY、REFUND") String flowType, PageQuery PageQuery) {
+		@Parameter(description = "流水类型:PAY、REFUND") String flowType, PageQuery PageQuery) {
 		OperationalJudgment.judgment(billService.getById(id));
-		IPage<StoreFlowVO> storeFlow = storeFlowService.getStoreFlow(id, flowType, PageQuery);
+		IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
 		return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
 	}
 
@@ -78,9 +78,9 @@ public class BillStoreController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getDistributionFlow")
 	public Result<PageResult<StoreFlowVO>> getDistributionFlow(@PathVariable String id,
-			PageQuery PageQuery) {
+		PageQuery PageQuery) {
 		OperationalJudgment.judgment(billService.getById(id));
-		IPage<StoreFlowVO> distributionFlow = storeFlowService.getDistributionFlow(id, PageQuery);
+		IPage<StoreFlowVO> distributionFlow = storeFlowApi.getDistributionFlow(id, PageQuery);
 		return Result.success(PageResult.convertMybatisPage(distributionFlow, StoreFlowVO.class));
 	}
 

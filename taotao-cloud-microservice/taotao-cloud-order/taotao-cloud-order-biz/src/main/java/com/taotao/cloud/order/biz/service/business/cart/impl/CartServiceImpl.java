@@ -71,43 +71,43 @@ public class CartServiceImpl implements ICartService {
 	/**
 	 * 会员优惠券
 	 */
-	private final IFeignMemberCouponApi feignMemberCouponApi;
+	private final IFeignMemberCouponApi memberCouponApi;
 	/**
 	 * 规格商品
 	 */
-	private final IFeignGoodsSkuApi feignGoodsSkuApi;
+	private final IFeignGoodsSkuApi goodsSkuApi;
 	/**
 	 * 促销商品
 	 */
-	private final IFeignPromotionGoodsApi feignPromotionGoodsApi;
+	private final IFeignPromotionGoodsApi promotionGoodsApi;
 	/**
 	 * 促销商品
 	 */
-	private final IFeignPointsGoodsApi feignPointsGoodsApi;
+	private final IFeignPointsGoodsApi pointsGoodsApi;
 	/**
 	 * 会员地址
 	 */
-	private final IFeignMemberAddressApi feignMemberAddressApi;
+	private final IFeignMemberAddressApi memberAddressApi;
 	/**
 	 * ES商品
 	 */
-	private final IFeignEsGoodsSearchApi feignEsGoodsSearchApi;
+	private final IFeignEsGoodsSearchApi esGoodsSearchApi;
 	/**
 	 * ES商品
 	 */
-	private final IFeignGoodsApi feignGoodsApi;
+	private final IFeignGoodsApi goodsApi;
 	/**
 	 * 拼团
 	 */
-	private final IFeignPintuanApi feignPintuanApi;
+	private final IFeignPintuanApi pintuanApi;
 	/**
 	 * 砍价活动
 	 */
-	private final IFeignKanjiaActivityApi feignKanjiaActivityApi;
+	private final IFeignKanjiaActivityApi kanjiaActivityApi;
 	/**
 	 * 砍价商品
 	 */
-	private final IFeignKanjiaActivityGoodsApi feignKanjiaActivityGoodsApi;
+	private final IFeignKanjiaActivityGoodsApi kanjiaActivityGoodsApi;
 	/**
 	 * 交易
 	 */
@@ -155,7 +155,7 @@ public class CartServiceImpl implements ICartService {
 					cartSkuVO = new CartSkuVO(dataSku);
 
 					cartSkuVO.setCartType(cartTypeEnum);
-					feignPromotionGoodsApi.updatePromotion(cartSkuVO);
+					promotionGoodsApi.updatePromotion(cartSkuVO);
 					//再设置加入购物车的数量
 					this.checkSetGoodsQuantity(cartSkuVO, skuId, num);
 					//计算购物车小计
@@ -176,7 +176,7 @@ public class CartServiceImpl implements ICartService {
 				//购物车中不存在此商品，则新建立一个
 				CartSkuVO cartSkuVO = new CartSkuVO(dataSku);
 				cartSkuVO.setCartType(cartTypeEnum);
-				feignPromotionGoodsApi.updatePromotion(cartSkuVO);
+				promotionGoodsApi.updatePromotion(cartSkuVO);
 				//检测购物车数据
 				checkCart(cartTypeEnum, cartSkuVO, skuId, num);
 				//计算购物车小计
@@ -223,7 +223,7 @@ public class CartServiceImpl implements ICartService {
 			tradeDTO.setMemberName(currentUser.getUsername());
 		}
 		if (tradeDTO.getMemberAddress() == null) {
-			tradeDTO.setMemberAddress(this.feignMemberAddressApi.getDefaultMemberAddress());
+			tradeDTO.setMemberAddress(this.memberAddressApi.getDefaultMemberAddress());
 		}
 		return tradeDTO;
 	}
@@ -344,7 +344,7 @@ public class CartServiceImpl implements ICartService {
 				.filter(i -> Boolean.TRUE.equals(i.getChecked())).map(i -> i.getGoodsSku().getId())
 				.collect(Collectors.toList());
 
-			List<EsGoodsIndex> esGoodsList = feignEsGoodsSearchApi.getEsGoodsBySkuIds(ids);
+			List<EsGoodsIndex> esGoodsList = esGoodsSearchApi.getEsGoodsBySkuIds(ids);
 			for (EsGoodsIndex esGoodsIndex : esGoodsList) {
 				if (esGoodsIndex != null) {
 					if (esGoodsIndex.getPromotionMap() != null) {
@@ -354,7 +354,7 @@ public class CartServiceImpl implements ICartService {
 							.map(i -> i.substring(i.lastIndexOf("-") + 1))
 							.collect(Collectors.toList());
 						if (!couponIds.isEmpty()) {
-							List<MemberCoupon> currentGoodsCanUse = feignMemberCouponApi.getCurrentGoodsCanUse(
+							List<MemberCoupon> currentGoodsCanUse = memberCouponApi.getCurrentGoodsCanUse(
 								tradeDTO.getMemberId(), couponIds, totalPrice);
 							count = currentGoodsCanUse.size();
 						}
@@ -370,7 +370,7 @@ public class CartServiceImpl implements ICartService {
 			}
 
 			//获取可操作的优惠券集合
-			List<MemberCoupon> allScopeMemberCoupon = feignMemberCouponApi.getAllScopeMemberCoupon(
+			List<MemberCoupon> allScopeMemberCoupon = memberCouponApi.getAllScopeMemberCoupon(
 				tradeDTO.getMemberId(), storeIds);
 			if (allScopeMemberCoupon != null && !allScopeMemberCoupon.isEmpty()) {
 				//过滤满足消费门槛
@@ -393,7 +393,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param cartType 购物车类型
 	 */
 	private GoodsSkuSpecGalleryVO checkGoods(Long skuId, String cartType) {
-		GoodsSkuSpecGalleryVO dataSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(skuId);
+		GoodsSkuSpecGalleryVO dataSku = this.goodsSkuApi.getGoodsSkuByIdFromCache(skuId);
 		if (dataSku == null) {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
@@ -408,7 +408,7 @@ public class CartServiceImpl implements ICartService {
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
 
-		BigDecimal validSeckillGoodsPrice = feignPromotionGoodsApi.getValidPromotionsGoodsPrice(
+		BigDecimal validSeckillGoodsPrice = promotionGoodsApi.getValidPromotionsGoodsPrice(
 			skuId,
 			Collections.singletonList(PromotionTypeEnum.SECKILL.name()));
 		if (validSeckillGoodsPrice != null) {
@@ -416,7 +416,7 @@ public class CartServiceImpl implements ICartService {
 			goodsSkuBaseVOBuilder.promotionPrice(validSeckillGoodsPrice);
 		}
 
-		BigDecimal validPintuanGoodsPrice = feignPromotionGoodsApi.getValidPromotionsGoodsPrice(
+		BigDecimal validPintuanGoodsPrice = promotionGoodsApi.getValidPromotionsGoodsPrice(
 			skuId,
 			Collections.singletonList(PromotionTypeEnum.PINTUAN.name()));
 		if (validPintuanGoodsPrice != null && CartTypeEnum.PINTUAN.name().equals(cartType)) {
@@ -434,7 +434,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param num       购买数量
 	 */
 	private CartSkuVO checkSetGoodsQuantity(CartSkuVO cartSkuVO, String skuId, Integer num) {
-		Integer enableStock = feignGoodsSkuApi.getStock(skuId);
+		Integer enableStock = goodsSkuApi.getStock(skuId);
 
 		//如果sku的可用库存小于等于0或者小于用户购买的数量，则不允许购买
 		if (enableStock <= 0 || enableStock < num) {
@@ -464,7 +464,7 @@ public class CartServiceImpl implements ICartService {
 		}
 
 		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
-		MemberAddressVO memberAddress = feignMemberAddressApi.getById(shippingAddressId);
+		MemberAddressVO memberAddress = memberAddressApi.getById(shippingAddressId);
 		tradeDTO.setMemberAddress(memberAddress);
 		this.resetTradeDTO(tradeDTO);
 		return true;
@@ -527,7 +527,7 @@ public class CartServiceImpl implements ICartService {
 		TradeDTO tradeDTO = this.readDTO(cartTypeEnum);
 
 		MemberCoupon memberCoupon =
-			feignMemberCouponApi.getOne(
+			memberCouponApi.getOne(
 				new LambdaQueryWrapper<MemberCoupon>()
 					.eq(MemberCoupon::getMemberCouponStatus, MemberCouponStatusEnum.NEW.name())
 					.eq(MemberCoupon::getMemberId, currentUser.getUserId())
@@ -740,12 +740,12 @@ public class CartServiceImpl implements ICartService {
 			cartSkuVO.setPurchasePrice(promotionGoods.getPrice());
 		} else {
 			//如果拼团活动被异常处理，则在这里安排mq重新写入商品索引
-			feignGoodsSkuApi.generateEs(
-				feignGoodsApi.getById(cartSkuVO.getGoodsSku().getGoodsId()));
+			goodsSkuApi.generateEs(
+				goodsApi.getById(cartSkuVO.getGoodsSku().getGoodsId()));
 			throw new BusinessException(ResultEnum.CART_PINTUAN_NOT_EXIST_ERROR);
 		}
 		//检测拼团限购数量
-		Pintuan pintuan = feignPintuanApi.getById(cartSkuVO.getPintuanId());
+		Pintuan pintuan = pintuanApi.getById(cartSkuVO.getPintuanId());
 		Integer limitNum = pintuan.getLimitNum();
 		if (limitNum != 0 && cartSkuVO.getNum() > limitNum) {
 			throw new BusinessException(ResultEnum.CART_PINTUAN_LIMIT_ERROR);
@@ -759,7 +759,7 @@ public class CartServiceImpl implements ICartService {
 	 */
 	private void checkKanjia(CartSkuVO cartSkuVO) {
 		//根据skuId获取砍价商品
-		KanjiaActivityGoods kanjiaActivityGoodsDTO = feignKanjiaActivityGoodsApi.getKanjiaGoodsBySkuId(
+		KanjiaActivityGoods kanjiaActivityGoodsDTO = kanjiaActivityGoodsApi.getKanjiaGoodsBySkuId(
 			cartSkuVO.getGoodsSku().getId());
 
 		//查找当前会员的砍价商品活动
@@ -767,7 +767,7 @@ public class CartServiceImpl implements ICartService {
 		kanjiaActivitySearchParams.setKanjiaActivityGoodsId(kanjiaActivityGoodsDTO.getId());
 		kanjiaActivitySearchParams.setMemberId(UserContext.getCurrentUser().getId());
 		kanjiaActivitySearchParams.setStatus(KanJiaStatusEnum.SUCCESS.name());
-		KanjiaActivity kanjiaActivity = feignKanjiaActivityApi.getKanjiaActivity(
+		KanjiaActivity kanjiaActivity = kanjiaActivityApi.getKanjiaActivity(
 			kanjiaActivitySearchParams);
 
 		//校验砍价活动是否满足条件
@@ -791,7 +791,7 @@ public class CartServiceImpl implements ICartService {
 	 * @param cartSkuVO 购物车信息
 	 */
 	private void checkPoint(CartSkuVO cartSkuVO) {
-		PointsGoodsVO pointsGoodsVO = feignPointsGoodsApi.getPointsGoodsDetailBySkuId(
+		PointsGoodsVO pointsGoodsVO = pointsGoodsApi.getPointsGoodsDetailBySkuId(
 			cartSkuVO.getGoodsSku().getId());
 
 		if (pointsGoodsVO != null) {

@@ -17,11 +17,11 @@ import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.query.FullDiscountPageQuery;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.mapper.CouponMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
@@ -31,13 +31,12 @@ import com.taotao.cloud.promotion.biz.service.business.ICouponService;
 import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
 import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 优惠券活动业务层实现
@@ -48,14 +47,15 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMapper, Coupon> implements
-		ICouponService {
+public class CouponServiceImpl extends
+	AbstractPromotionsServiceImpl<CouponMapper, Coupon> implements
+	ICouponService {
 
 	/**
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi feignGoodsSkuApi;
+	private IFeignGoodsSkuApi goodsSkuApi;
 	/**
 	 * 促销商品
 	 */
@@ -83,8 +83,9 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 		if (coupon == null) {
 			throw new BusinessException(ResultEnum.COUPON_NOT_EXIST);
 		}
-		this.update(new LambdaUpdateWrapper<Coupon>().eq(Coupon::getId, coupon.getId()).set(Coupon::getReceivedNum,
-			coupon.getReceivedNum() + receiveNum));
+		this.update(new LambdaUpdateWrapper<Coupon>().eq(Coupon::getId, coupon.getId())
+			.set(Coupon::getReceivedNum,
+				coupon.getReceivedNum() + receiveNum));
 	}
 
 	@Override
@@ -104,14 +105,16 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 			throw new BusinessException(ResultEnum.COUPON_NOT_EXIST);
 		}
 
-		this.update(new LambdaUpdateWrapper<Coupon>().eq(Coupon::getId, coupon.getId()).set(Coupon::getUsedNum,
-			coupon.getUsedNum() + usedNum));
+		this.update(new LambdaUpdateWrapper<Coupon>().eq(Coupon::getId, coupon.getId())
+			.set(Coupon::getUsedNum,
+				coupon.getUsedNum() + usedNum));
 	}
 
 	@Override
 	public IPage<CouponVO> pageVOFindAll(CouponPageQuery searchParams, PageQuery page) {
 		IPage<Coupon> couponIPage = super.pageFindAll(searchParams, page);
-		List<CouponVO> couponVOList = couponIPage.getRecords().stream().map(CouponVO::new).collect(Collectors.toList());
+		List<CouponVO> couponVOList = couponIPage.getRecords().stream().map(CouponVO::new)
+			.collect(Collectors.toList());
 		return PageUtil.convertPage(couponIPage, couponVOList);
 	}
 
@@ -120,7 +123,8 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 		CouponVO couponVO = new CouponVO(this.getById(couponId));
 		PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 		searchParams.setPromotionId(couponId);
-		List<PromotionGoods> promotionsByPromotionId = this.promotionGoodsService.listFindAll(searchParams);
+		List<PromotionGoods> promotionsByPromotionId = this.promotionGoodsService.listFindAll(
+			searchParams);
 		if (promotionsByPromotionId != null && !promotionsByPromotionId.isEmpty()) {
 			couponVO.setPromotionGoodsList(promotionsByPromotionId);
 		}
@@ -129,10 +133,12 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 
 	@Override
 	public boolean updateStatus(List<String> ids, Long startTime, Long endTime) {
-		List<Coupon> list = this.list(new LambdaQueryWrapper<Coupon>().in(Coupon::getId, ids).eq(Coupon::getRangeDayType, CouponRangeDayEnum.DYNAMICTIME.name()));
+		List<Coupon> list = this.list(new LambdaQueryWrapper<Coupon>().in(Coupon::getId, ids)
+			.eq(Coupon::getRangeDayType, CouponRangeDayEnum.DYNAMICTIME.name()));
 		if (!list.isEmpty()) {
 			LambdaUpdateWrapper<Coupon> updateWrapper = new LambdaUpdateWrapper<>();
-			updateWrapper.in(Coupon::getId, list.stream().map(Coupon::getId).collect(Collectors.toList()));
+			updateWrapper.in(Coupon::getId,
+				list.stream().map(Coupon::getId).collect(Collectors.toList()));
 			updateWrapper.set(Coupon::getEffectiveDays, 0);
 			this.update(updateWrapper);
 		}
@@ -156,7 +162,8 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 			throw new BusinessException(ResultEnum.COUPON_LIMIT_NUM_LESS_THAN_0);
 		}
 		//如果发行数量是0则判断领取限制数量
-		if (promotions.getPublishNum() != 0 && promotions.getCouponLimitNum() > promotions.getPublishNum()) {
+		if (promotions.getPublishNum() != 0
+			&& promotions.getCouponLimitNum() > promotions.getPublishNum()) {
 			throw new BusinessException(ResultEnum.COUPON_LIMIT_GREATER_THAN_PUBLISH);
 		}
 		//打折优惠券大于10折
@@ -167,14 +174,14 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 		}
 
 		//优惠券为固定时间类型
-		if (promotions.getRangeDayType() != null && promotions.getRangeDayType().equals(CouponRangeDayEnum.FIXEDTIME.name())) {
+		if (promotions.getRangeDayType() != null && promotions.getRangeDayType()
+			.equals(CouponRangeDayEnum.FIXEDTIME.name())) {
 			long nowTime = DateUtils.getDateline() * 1000;
 			//固定时间的优惠券不能小于当前时间
 			if (promotions.getEndTime().getTime() < nowTime) {
 				throw new BusinessException(ResultEnum.PROMOTION_END_TIME_ERROR);
 			}
 		}
-
 
 		this.checkCouponScope((CouponVO) promotions);
 	}
@@ -187,7 +194,9 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 		searchParams.setCouponId(promotions.getId());
 		List<FullDiscount> fullDiscounts = fullDiscountService.listFindAll(searchParams);
 		if (fullDiscounts != null && !fullDiscounts.isEmpty()) {
-			throw new BusinessException("当前优惠券参与了促销活动【" + fullDiscounts.get(0).getPromotionName() + "】不能进行编辑删除操作");
+			throw new BusinessException(
+				"当前优惠券参与了促销活动【" + fullDiscounts.get(0).getPromotionName()
+					+ "】不能进行编辑删除操作");
 		}
 	}
 
@@ -198,8 +207,10 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 			PromotionsScopeTypeEnum.PORTION_GOODS.name().equals(promotions.getScopeType()) &&
 			promotions instanceof CouponVO) {
 			CouponVO couponVO = (CouponVO) promotions;
-			this.promotionGoodsService.deletePromotionGoods(Collections.singletonList(promotions.getId()));
-			List<PromotionGoods> promotionGoodsList = PromotionTools.promotionGoodsInit(couponVO.getPromotionGoodsList(), couponVO, this.getPromotionType());
+			this.promotionGoodsService.deletePromotionGoods(
+				Collections.singletonList(promotions.getId()));
+			List<PromotionGoods> promotionGoodsList = PromotionTools.promotionGoodsInit(
+				couponVO.getPromotionGoodsList(), couponVO, this.getPromotionType());
 			//促销活动商品更新
 			this.promotionGoodsService.saveBatch(promotionGoodsList);
 		}
@@ -222,15 +233,22 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 	 * @param coupon 检查的优惠券对象
 	 */
 	private void checkCouponScope(CouponVO coupon) {
-		boolean portionGoodsScope = (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())
-			&& (coupon.getPromotionGoodsList() == null || coupon.getPromotionGoodsList().isEmpty()));
+		boolean portionGoodsScope = (
+			coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())
+				&& (coupon.getPromotionGoodsList() == null || coupon.getPromotionGoodsList()
+				.isEmpty()));
 		if (portionGoodsScope) {
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_TYPE_GOODS_ERROR);
-		} else if (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name()) && CharSequenceUtil.isEmpty(coupon.getScopeId())) {
+		} else if (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())
+			&& CharSequenceUtil.isEmpty(coupon.getScopeId())) {
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_TYPE_GOODS_ERROR);
-		} else if (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS_CATEGORY.name()) && CharSequenceUtil.isEmpty(coupon.getScopeId())) {
+		} else if (
+			coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS_CATEGORY.name())
+				&& CharSequenceUtil.isEmpty(coupon.getScopeId())) {
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_TYPE_CATEGORY_ERROR);
-		} else if (coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_SHOP_CATEGORY.name()) && CharSequenceUtil.isEmpty(coupon.getScopeId())) {
+		} else if (
+			coupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_SHOP_CATEGORY.name())
+				&& CharSequenceUtil.isEmpty(coupon.getScopeId())) {
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_TYPE_STORE_ERROR);
 		}
 
@@ -250,7 +268,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 			throw new BusinessException(ResultEnum.COUPON_SCOPE_ERROR);
 		}
 		for (String id : split) {
-			GoodsSkuSpecGalleryVO goodsSku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(Long.valueOf(id));
+			GoodsSkuSpecGalleryVO goodsSku = goodsSkuApi.getGoodsSkuByIdFromCache(Long.valueOf(id));
 			if (goodsSku == null) {
 				throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 			}

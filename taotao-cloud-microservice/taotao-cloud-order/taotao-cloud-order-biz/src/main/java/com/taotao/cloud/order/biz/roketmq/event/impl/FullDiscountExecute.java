@@ -56,7 +56,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	private RedisRepository redisRepository;
 
 	@Autowired
-	private IFeignMemberApi memberService;
+	private IFeignMemberApi memberApi;
 
 	@Autowired
 	private IOrderService orderService;
@@ -68,10 +68,10 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	private IOrderLogService orderLogService;
 
 	@Autowired
-	private IFeignMemberCouponApi memberCouponService;
+	private IFeignMemberCouponApi memberCouponApi;
 
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuService;
+	private IFeignGoodsSkuApi goodsSkuApi;
 
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;
@@ -123,7 +123,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		//赠送积分判定
 		try {
 			if (cartVO.giftPoint() != null && cartVO.giftPoint() > 0) {
-				memberService.updateMemberPoint(cartVO.giftPoint().longValue(),
+				memberApi.updateMemberPoint(cartVO.giftPoint().longValue(),
 					PointTypeEnum.INCREASE.name(),
 					order.getMemberId(), "订单满优惠赠送积分" + cartVO.giftPoint());
 			}
@@ -135,7 +135,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 			//优惠券判定
 			if (cartVO.giftCouponList() != null && !cartVO.giftCouponList().isEmpty()) {
 				cartVO.giftCouponList().forEach(
-					couponId -> memberCouponService.receiveCoupon(couponId, order.getMemberId(),
+					couponId -> memberCouponApi.receiveCoupon(couponId, order.getMemberId(),
 						order.getMemberName()));
 			}
 		} catch (Exception e) {
@@ -161,7 +161,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 	 */
 	private void generatorGiftOrder(List<String> skuIds, Order originOrder) {
 		//获取赠品列表
-		List<GoodsSkuSpecGalleryVO> goodsSkus = goodsSkuService.getGoodsSkuByIdFromCache(skuIds);
+		List<GoodsSkuSpecGalleryVO> goodsSkus = goodsSkuApi.getGoodsSkuByIdFromCache(skuIds);
 
 		//赠品判定
 		if (goodsSkus == null || goodsSkus.isEmpty()) {

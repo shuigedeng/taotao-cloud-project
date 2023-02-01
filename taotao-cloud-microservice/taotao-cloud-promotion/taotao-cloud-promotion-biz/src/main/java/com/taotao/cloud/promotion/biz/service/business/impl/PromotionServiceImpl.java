@@ -24,14 +24,13 @@ import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionService;
 import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
 import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 促销业务层实现
@@ -43,6 +42,7 @@ import java.util.Map;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PromotionServiceImpl implements IPromotionService {
+
 	/**
 	 * 秒杀
 	 */
@@ -80,7 +80,7 @@ public class PromotionServiceImpl implements IPromotionService {
 	private IPointsGoodsService pointsGoodsService;
 
 	@Autowired
-	private IFeignGoodsSkuApi feignGoodsSkuApi;
+	private IFeignGoodsSkuApi goodsSkuApi;
 
 
 	/**
@@ -104,7 +104,8 @@ public class PromotionServiceImpl implements IPromotionService {
 		FullDiscountPageQuery fullDiscountSearchParams = new FullDiscountPageQuery();
 		fullDiscountSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
 		//获取当前进行的满优惠活动
-		List<FullDiscount> fullDiscountList = fullDiscountService.listFindAll(fullDiscountSearchParams);
+		List<FullDiscount> fullDiscountList = fullDiscountService.listFindAll(
+			fullDiscountSearchParams);
 		if (fullDiscountList != null && !fullDiscountList.isEmpty()) {
 			for (FullDiscount fullDiscount : fullDiscountList) {
 				resultMap.put(PromotionTypeEnum.FULL_DISCOUNT.name(), fullDiscount);
@@ -134,10 +135,12 @@ public class PromotionServiceImpl implements IPromotionService {
 		FullDiscountPageQuery fullDiscountSearchParams = new FullDiscountPageQuery();
 		fullDiscountSearchParams.setScopeType(PromotionsScopeTypeEnum.ALL.name());
 		fullDiscountSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
-		List<FullDiscount> fullDiscountVOS = this.fullDiscountService.listFindAll(fullDiscountSearchParams);
+		List<FullDiscount> fullDiscountVOS = this.fullDiscountService.listFindAll(
+			fullDiscountSearchParams);
 		for (FullDiscount fullDiscount : fullDiscountVOS) {
 			if (index.getStoreId().equals(fullDiscount.getStoreId())) {
-				String fullDiscountKey = PromotionTypeEnum.FULL_DISCOUNT.name() + "-" + fullDiscount.getId();
+				String fullDiscountKey =
+					PromotionTypeEnum.FULL_DISCOUNT.name() + "-" + fullDiscount.getId();
 				promotionMap.put(fullDiscountKey, fullDiscount);
 			}
 		}
@@ -146,7 +149,8 @@ public class PromotionServiceImpl implements IPromotionService {
 		couponSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
 		List<Coupon> couponVOS = this.couponService.listFindAll(couponSearchParams);
 		for (Coupon coupon : couponVOS) {
-			if (("platform").equals(coupon.getStoreId()) || index.getStoreId().equals(coupon.getStoreId())) {
+			if (("platform").equals(coupon.getStoreId()) || index.getStoreId()
+				.equals(coupon.getStoreId())) {
 				String couponKey = PromotionTypeEnum.COUPON.name() + "-" + coupon.getId();
 				promotionMap.put(couponKey, coupon);
 			}
@@ -154,9 +158,11 @@ public class PromotionServiceImpl implements IPromotionService {
 		PromotionGoodsPageQuery promotionGoodsSearchParams = new PromotionGoodsPageQuery();
 		promotionGoodsSearchParams.setSkuId(index.getId());
 		promotionGoodsSearchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
-		List<PromotionGoods> promotionGoodsList = promotionGoodsService.listFindAll(promotionGoodsSearchParams);
+		List<PromotionGoods> promotionGoodsList = promotionGoodsService.listFindAll(
+			promotionGoodsSearchParams);
 		for (PromotionGoods promotionGoods : promotionGoodsList) {
-			String esPromotionKey = promotionGoods.getPromotionType() + "-" + promotionGoods.getPromotionId();
+			String esPromotionKey =
+				promotionGoods.getPromotionType() + "-" + promotionGoods.getPromotionId();
 			switch (PromotionTypeEnum.valueOf(promotionGoods.getPromotionType())) {
 				case COUPON:
 					Coupon coupon = couponService.getById(promotionGoods.getPromotionId());
@@ -168,14 +174,16 @@ public class PromotionServiceImpl implements IPromotionService {
 					index.setPromotionPrice(promotionGoods.getPrice());
 					break;
 				case FULL_DISCOUNT:
-					FullDiscount fullDiscount = fullDiscountService.getById(promotionGoods.getPromotionId());
+					FullDiscount fullDiscount = fullDiscountService.getById(
+						promotionGoods.getPromotionId());
 					promotionMap.put(esPromotionKey, fullDiscount);
 					break;
 				case SECKILL:
 					this.getGoodsCurrentSeckill(promotionGoods, promotionMap, index);
 					break;
 				case POINTS_GOODS:
-					PointsGoods pointsGoods = pointsGoodsService.getById(promotionGoods.getPromotionId());
+					PointsGoods pointsGoods = pointsGoodsService.getById(
+						promotionGoods.getPromotionId());
 					promotionMap.put(esPromotionKey, pointsGoods);
 					break;
 				default:
@@ -186,7 +194,8 @@ public class PromotionServiceImpl implements IPromotionService {
 	}
 
 
-	private void getGoodsCurrentSeckill(PromotionGoods promotionGoods, Map<String, Object> promotionMap, EsGoodsIndex index) {
+	private void getGoodsCurrentSeckill(PromotionGoods promotionGoods,
+		Map<String, Object> promotionMap, EsGoodsIndex index) {
 		Seckill seckill = seckillService.getById(promotionGoods.getPromotionId());
 		SeckillPageQuery searchParams = new SeckillPageQuery();
 		searchParams.setSeckillId(promotionGoods.getPromotionId());

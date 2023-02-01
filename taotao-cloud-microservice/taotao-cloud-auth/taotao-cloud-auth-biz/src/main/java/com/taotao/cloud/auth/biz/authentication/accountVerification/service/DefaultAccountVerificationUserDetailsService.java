@@ -5,22 +5,24 @@ import com.taotao.cloud.common.enums.LoginTypeEnum;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-
 @Service
-public class DefaultAccountVerificationUserDetailsService implements AccountVerificationUserDetailsService {
+public class DefaultAccountVerificationUserDetailsService implements
+	AccountVerificationUserDetailsService {
+
 	@Autowired
-	private IFeignUserApi feignUserApi;
+	private IFeignUserApi userApi;
 	@Autowired
-	private IFeignMemberApi feignMemberApi;
+	private IFeignMemberApi memberApi;
 
 	@Override
-	public UserDetails loadUserByUsername(String username, String password, String type) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username, String password, String type)
+		throws UsernameNotFoundException {
 		// 校验密码
 		//TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
 

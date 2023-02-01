@@ -22,16 +22,17 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RechargeCashier implements CashierExecute {
+
 	/**
 	 * 余额
 	 */
 	@Autowired
-	private IFeignMemberRechargeApi rechargeService;
+	private IFeignMemberRechargeApi memberRechargeApi;
 	/**
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 
 
 	@Override
@@ -43,8 +44,10 @@ public class RechargeCashier implements CashierExecute {
 	public void paymentSuccess(PaymentSuccessParams paymentSuccessParams) {
 		PayParam payParam = paymentSuccessParams.getPayParam();
 		if (payParam.getOrderType().equals(CashierEnum.RECHARGE.name())) {
-			rechargeService.paySuccess(payParam.getSn(), paymentSuccessParams.getReceivableNo(), paymentSuccessParams.getPaymentMethod());
-			LogUtils.info("会员充值-订单号{},第三方流水：{}", payParam.getSn(), paymentSuccessParams.getReceivableNo());
+			memberRechargeApi.paySuccess(payParam.getSn(), paymentSuccessParams.getReceivableNo(),
+				paymentSuccessParams.getPaymentMethod());
+			LogUtils.info("会员充值-订单号{},第三方流水：{}", payParam.getSn(),
+				paymentSuccessParams.getReceivableNo());
 		}
 	}
 
@@ -55,7 +58,7 @@ public class RechargeCashier implements CashierExecute {
 			//准备返回的数据
 			CashierParam cashierParam = new CashierParam();
 			//订单信息获取
-			MemberRechargeVO recharge = rechargeService.getRecharge(payParam.getSn());
+			MemberRechargeVO recharge = memberRechargeApi.getRecharge(payParam.getSn());
 
 			//如果订单已支付，则不能发器支付
 			if (recharge.getPayStatus().equals(PayStatusEnum.PAID.name())) {
@@ -65,7 +68,8 @@ public class RechargeCashier implements CashierExecute {
 			cashierParam.setPrice(recharge.getRechargeMoney());
 
 			try {
-				BaseSetting baseSetting = settingService.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
+				BaseSetting baseSetting = settingApi.getBaseSetting(
+					SettingCategoryEnum.BASE_SETTING.name());
 				cashierParam.setTitle(baseSetting.getSiteName());
 			} catch (Exception e) {
 				cashierParam.setTitle("多用户商城，在线充值");
@@ -81,7 +85,7 @@ public class RechargeCashier implements CashierExecute {
 	@Override
 	public Boolean paymentResult(PayParam payParam) {
 		if (payParam.getOrderType().equals(CashierEnum.RECHARGE.name())) {
-			MemberRechargeVO recharge = rechargeService.getRecharge(payParam.getSn());
+			MemberRechargeVO recharge = memberRechargeApi.getRecharge(payParam.getSn());
 			if (recharge != null) {
 				return recharge.getPayStatus().equals(PayStatusEnum.PAID.name());
 			} else {

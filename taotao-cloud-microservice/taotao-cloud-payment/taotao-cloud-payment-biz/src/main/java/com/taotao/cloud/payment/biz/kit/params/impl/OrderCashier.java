@@ -17,26 +17,26 @@ import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.BaseSetting;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * 订单支付信息获取
  */
 @Component
 public class OrderCashier implements CashierExecute {
+
 	/**
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderApi orderService;
+	private IFeignOrderApi orderApi;
 	/**
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 
 	@Override
 	public CashierEnum cashierEnum() {
@@ -49,7 +49,7 @@ public class OrderCashier implements CashierExecute {
 			//准备返回的数据
 			CashierParam cashierParam = new CashierParam();
 			//订单信息获取
-			OrderDetailVO order = orderService.queryDetail(payParam.getSn());
+			OrderDetailVO order = orderApi.queryDetail(payParam.getSn());
 
 			//如果订单已支付，则不能发器支付
 			if (order.order().payStatus().equals(PayStatusEnum.PAID.name())) {
@@ -62,7 +62,8 @@ public class OrderCashier implements CashierExecute {
 			cashierParam.setPrice(order.order().flowPrice());
 
 			try {
-				BaseSetting baseSetting = settingService.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
+				BaseSetting baseSetting = settingApi.getBaseSetting(
+					SettingCategoryEnum.BASE_SETTING.name());
 				cashierParam.setTitle(baseSetting.getSiteName());
 			} catch (Exception e) {
 				cashierParam.setTitle("多用户商城，在线支付");
@@ -88,7 +89,7 @@ public class OrderCashier implements CashierExecute {
 	public void paymentSuccess(PaymentSuccessParams paymentSuccessParams) {
 		PayParam payParam = paymentSuccessParams.getPayParam();
 		if (payParam.getOrderType().equals(CashierEnum.ORDER.name())) {
-			orderService.payOrder(payParam.getSn(),
+			orderApi.payOrder(payParam.getSn(),
 				paymentSuccessParams.getPaymentMethod(),
 				paymentSuccessParams.getReceivableNo());
 			LogUtils.info("订单{}支付成功,金额{},方式{}", payParam.getSn(),
@@ -100,7 +101,7 @@ public class OrderCashier implements CashierExecute {
 	@Override
 	public Boolean paymentResult(PayParam payParam) {
 		if (payParam.getOrderType().equals(CashierEnum.ORDER.name())) {
-			OrderVO order = orderService.getBySn(payParam.getSn());
+			OrderVO order = orderApi.getBySn(payParam.getSn());
 			if (order != null) {
 				return PayStatusEnum.PAID.name().equals(order.orderBase().payStatus());
 			} else {

@@ -49,12 +49,12 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	 * 会员
 	 */
 	@Autowired
-	private IFeignMemberApi feignMemberApi;
+	private IFeignMemberApi memberApi;
 	/**
 	 * 商品
 	 */
 	@Autowired
-	private IFeignGoodsApi feignGoodsApi;
+	private IFeignGoodsApi goodsApi;
 	/**
 	 * 店铺详情
 	 */
@@ -84,7 +84,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 			throw new BusinessException(ResultEnum.STORE_NAME_EXIST_ERROR);
 		}
 
-		MemberVO member = feignMemberApi.getById(adminStoreApplyDTO.getMemberId());
+		MemberVO member = memberApi.getById(adminStoreApplyDTO.getMemberId());
 		//判断用户是否存在
 		if (member == null) {
 			throw new BusinessException(ResultEnum.USER_NOT_EXIST);
@@ -104,7 +104,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		storeDetailService.save(storeDetail);
 
 		//设置会员-店铺信息
-		feignMemberApi.update(member.getId(), store.getId());
+		memberApi.update(member.getId(), store.getId());
 		return store;
 
 	}
@@ -166,10 +166,10 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		if (passed == 0) {
 			store.setStoreDisable(StoreStatusEnum.OPEN.value());
 			//修改会员 表示已有店铺
-			MemberVO member = feignMemberApi.getById(store.getMemberId());
+			MemberVO member = memberApi.getById(store.getMemberId());
 			member.setHaveStore(true);
 			member.setStoreId(id);
-			feignMemberApi.updateById(member);
+			memberApi.updateById(member);
 			//设定商家的结算日
 			storeDetailService.update(new LambdaUpdateWrapper<StoreDetail>()
 				.eq(StoreDetail::getStoreId, id)
@@ -188,7 +188,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 			store.setStoreDisable(StoreStatusEnum.CLOSED.value());
 
 			//下架所有此店铺商品
-			feignGoodsApi.underStoreGoods(id);
+			goodsApi.underStoreGoods(id);
 			return this.updateById(store);
 		}
 
@@ -213,7 +213,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		//店铺为空，则新增店铺
 		if (store == null) {
 			AuthUser authUser = Objects.requireNonNull(UserContext.getCurrentUser());
-			Member member = feignMemberApi.getById(authUser.getId());
+			Member member = memberApi.getById(authUser.getId());
 			//根据会员创建店铺
 			store = new Store(member);
 			BeanUtil.copyProperties(storeCompanyDTO, store);
@@ -282,7 +282,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	@Override
 	public void updateStoreGoodsNum(Long storeId) {
 		//获取店铺已上架已审核通过商品数量
-		long goodsNum = feignGoodsApi.countStoreGoodsNum(storeId);
+		long goodsNum = goodsApi.countStoreGoodsNum(storeId);
 		//修改店铺商品数量
 		this.update(new LambdaUpdateWrapper<Store>()
 			.set(Store::getGoodsNum, goodsNum)
@@ -306,6 +306,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 		}
 		return this.getOne(lambdaQueryWrapper, false);
 	}
+
 	/**
 	 * 申请店铺时 对店铺状态进行校验判定
 	 *
@@ -314,7 +315,8 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	private void checkStoreStatus(Store store) {
 
 		//如果店铺状态为申请中或者已申请，则正常走流程，否则抛出异常
-		if (store.getStoreDisable().equals(StoreStatusEnum.APPLY.name()) || store.getStoreDisable().equals(StoreStatusEnum.APPLYING.name())) {
+		if (store.getStoreDisable().equals(StoreStatusEnum.APPLY.name()) || store.getStoreDisable()
+			.equals(StoreStatusEnum.APPLYING.name())) {
 			return;
 		} else {
 			throw new ServiceException(ResultCode.STORE_STATUS_ERROR);

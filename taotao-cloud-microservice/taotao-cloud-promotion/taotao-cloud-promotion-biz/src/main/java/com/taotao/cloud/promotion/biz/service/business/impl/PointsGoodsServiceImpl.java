@@ -10,22 +10,21 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.mapper.PointsGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsService;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 积分商品业务层实现
@@ -36,8 +35,9 @@ import java.util.Map;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<PointsGoodsMapper, PointsGoods> implements
-		IPointsGoodsService {
+public class PointsGoodsServiceImpl extends
+	AbstractPromotionsServiceImpl<PointsGoodsMapper, PointsGoods> implements
+	IPointsGoodsService {
 
 	/**
 	 * 促销商品
@@ -48,10 +48,10 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi feignGoodsSkuApi;
+	private IFeignGoodsSkuApi goodsSkuApi;
 
 	@Autowired
-	private IFeignEsGoodsIndexApi feignEsGoodsIndexApi;
+	private IFeignEsGoodsIndexApi esGoodsIndexApi;
 
 
 	@Override
@@ -64,7 +64,8 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 			if (this.checkSkuDuplicate(pointsGoods.getSkuId(), null) == null) {
 				pointsGoods.setPromotionName("积分商品活动");
 			} else {
-				throw new BusinessException("商品id为" + pointsGoods.getSkuId() + "的商品已参加积分商品活动！");
+				throw new BusinessException(
+					"商品id为" + pointsGoods.getSkuId() + "的商品已参加积分商品活动！");
 			}
 			GoodsSku goodsSku = this.checkSkuExist(pointsGoods.getSkuId());
 			pointsGoods.setStoreId(goodsSku.getStoreId());
@@ -79,9 +80,11 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 		if (saveBatch) {
 			this.promotionGoodsService.saveOrUpdateBatch(promotionGoodsList);
 			for (Map.Entry<String, Long> entry : skuPoints.entrySet()) {
-				Map<String, Object> query = MapUtil.builder(new HashMap<String, Object>()).put("id", entry.getKey()).build();
-				Map<String, Object> update = MapUtil.builder(new HashMap<String, Object>()).put("points", entry.getValue()).build();
-				this.feignEsGoodsIndexApi.updateIndex(query, update);
+				Map<String, Object> query = MapUtil.builder(new HashMap<String, Object>())
+					.put("id", entry.getKey()).build();
+				Map<String, Object> update = MapUtil.builder(new HashMap<String, Object>())
+					.put("points", entry.getValue()).build();
+				this.esGoodsIndexApi.updateIndex(query, update);
 			}
 
 		}
@@ -149,7 +152,8 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 	 */
 	@Override
 	public PointsGoodsVO getPointsGoodsDetailBySkuId(String skuId) {
-		PointsGoods pointsGoods = this.getOne(new LambdaQueryWrapper<PointsGoods>().eq(PointsGoods::getSkuId, skuId), false);
+		PointsGoods pointsGoods = this.getOne(
+			new LambdaQueryWrapper<PointsGoods>().eq(PointsGoods::getSkuId, skuId), false);
 		if (pointsGoods == null) {
 			log.error("skuId为" + skuId + "的积分商品不存在！");
 			throw new BusinessException();
@@ -191,8 +195,11 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 	 */
 	@Override
 	public void updatePromotionsGoods(PointsGoods promotions) {
-		this.promotionGoodsService.remove(new LambdaQueryWrapper<PromotionGoods>().eq(PromotionGoods::getPromotionId, promotions.getId()));
-		this.promotionGoodsService.save(new PromotionGoods(promotions, this.checkSkuExist(promotions.getSkuId())));
+		this.promotionGoodsService.remove(
+			new LambdaQueryWrapper<PromotionGoods>().eq(PromotionGoods::getPromotionId,
+				promotions.getId()));
+		this.promotionGoodsService.save(
+			new PromotionGoods(promotions, this.checkSkuExist(promotions.getSkuId())));
 	}
 
 	/**
@@ -202,9 +209,11 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 	 */
 	@Override
 	public void updateEsGoodsIndex(PointsGoods promotions) {
-		Map<String, Object> query = MapUtil.builder(new HashMap<String, Object>()).put("id", promotions.getSkuId()).build();
-		Map<String, Object> update = MapUtil.builder(new HashMap<String, Object>()).put("points", promotions.getPoints()).build();
-		this.feignEsGoodsIndexApi.updateIndex(query, update);
+		Map<String, Object> query = MapUtil.builder(new HashMap<String, Object>())
+			.put("id", promotions.getSkuId()).build();
+		Map<String, Object> update = MapUtil.builder(new HashMap<String, Object>())
+			.put("points", promotions.getPoints()).build();
+		this.esGoodsIndexApi.updateIndex(query, update);
 	}
 
 
@@ -254,7 +263,7 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
 	 * @return 商品sku
 	 */
 	private GoodsSku checkSkuExist(String skuId) {
-		GoodsSku goodsSku = this.feignGoodsSkuApi.getGoodsSkuByIdFromCache(skuId);
+		GoodsSku goodsSku = this.goodsSkuApi.getGoodsSkuByIdFromCache(skuId);
 		if (goodsSku == null) {
 			log.error("商品ID为" + skuId + "的商品不存在！");
 			throw new BusinessException();

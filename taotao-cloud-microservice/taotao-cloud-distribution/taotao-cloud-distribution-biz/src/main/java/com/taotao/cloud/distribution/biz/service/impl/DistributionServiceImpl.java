@@ -17,17 +17,16 @@ import com.taotao.cloud.distribution.api.model.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.mapper.DistributionMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
-import com.taotao.cloud.distribution.biz.service.DistributionService;
+import com.taotao.cloud.distribution.biz.service.IDistributionService;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 分销员接口实现
@@ -35,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DistributionServiceImpl extends
 	ServiceImpl<DistributionMapper, Distribution> implements
-	DistributionService {
+	IDistributionService {
 
 	/**
 	 * 会员
@@ -55,7 +54,7 @@ public class DistributionServiceImpl extends
 
 	@Override
 	public IPage<Distribution> distributionPage(DistributionPageQuery distributionPageQuery,
-												PageQuery page) {
+		PageQuery page) {
 		return this.page(page.buildMpPage(), distributionPageQuery.queryWrapper());
 	}
 
@@ -79,7 +78,8 @@ public class DistributionServiceImpl extends
 		if (Optional.ofNullable(distribution).isPresent()) {
 			if (distribution.getDistributionStatus().equals(DistributionStatusEnum.APPLY.name())) {
 				throw new BusinessException(ResultEnum.DISTRIBUTION_IS_APPLY);
-			} else if (distribution.getDistributionStatus().equals(DistributionStatusEnum.REFUSE.name())) {
+			} else if (distribution.getDistributionStatus()
+				.equals(DistributionStatusEnum.REFUSE.name())) {
 				distribution.setDistributionStatus(DistributionStatusEnum.APPLY.name());
 				BeanUtils.copyProperties(distributionApplyDTO, distribution);
 				this.updateById(distribution);

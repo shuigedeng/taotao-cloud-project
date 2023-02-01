@@ -79,15 +79,15 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 物流公司
 	 */
-	private final IFeignLogisticsApi feignLogisticsApi;
+	private final IFeignLogisticsApi logisticsApi;
 	/**
 	 * 店铺详情
 	 */
-	private final IFeignStoreDetailApi feignStoreDetailApi;
+	private final IFeignStoreDetailApi storeDetailApi;
 	/**
 	 * 售后支持，这里用于退款操作
 	 */
-	private final IFeignRefundSupportApi feignRefundSupportApi;
+	private final IFeignRefundSupportApi refundSupportApi;
 	/**
 	 * RocketMQ配置
 	 */
@@ -199,7 +199,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 			if (afterSale.getServiceType().equals(AfterSaleTypeEnum.RETURN_MONEY.name())) {
 				if (afterSale.getRefundWay().equals(AfterSaleRefundWayEnum.ORIGINAL.name())) {
 					//如果为退款操作 && 在线支付 则直接进行退款
-					feignRefundSupportApi.refund(afterSale.getSn());
+					refundSupportApi.refund(afterSale.getSn());
 					afterSale.setRefundTime(LocalDateTime.now());
 					afterSaleStatusEnum = AfterSaleStatusEnum.COMPLETE;
 				} else {
@@ -238,7 +238,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		}
 
 		//查询会员回寄的物流公司信息
-		LogisticsVO logistics = feignLogisticsApi.getById(logisticsId);
+		LogisticsVO logistics = logisticsApi.getById(logisticsId);
 
 		//判断物流公司是否为空
 		if (logistics == null) {
@@ -262,7 +262,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
-		return feignLogisticsApi.getLogistic(afterSale.getId(),
+		return logisticsApi.getLogistic(afterSale.getId(),
 			afterSale.getLogisticsNo());
 	}
 
@@ -287,7 +287,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//在线支付 则直接进行退款
 		if (pass.equals(serviceStatus) &&
 			afterSale.getRefundWay().equals(AfterSaleRefundWayEnum.ORIGINAL.name())) {
-			feignRefundSupportApi.refund(afterSale.getSn());
+			refundSupportApi.refund(afterSale.getSn());
 			afterSaleStatusEnum = AfterSaleStatusEnum.COMPLETE;
 		} else if (pass.equals(serviceStatus)) {
 			afterSaleStatusEnum = AfterSaleStatusEnum.WAIT_REFUND;
@@ -317,7 +317,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		//根据售后编号修改售后单
 		this.updateAfterSale(afterSaleSn, afterSale);
 		//退款
-		feignRefundSupportApi.refund(afterSale.getSn());
+		refundSupportApi.refund(afterSale.getSn());
 		//发送退款消息
 		this.sendAfterSaleMessage(afterSale);
 		return true;
@@ -358,7 +358,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 
 	@Override
 	public StoreAfterSaleAddressVO getStoreAfterSaleAddressVO(String sn) {
-		return feignStoreDetailApi.getStoreAfterSaleAddressDTO(
+		return storeDetailApi.getStoreAfterSaleAddressDTO(
 			OperationalJudgment.judgment(this.getBySn(sn)).getStoreId());
 	}
 

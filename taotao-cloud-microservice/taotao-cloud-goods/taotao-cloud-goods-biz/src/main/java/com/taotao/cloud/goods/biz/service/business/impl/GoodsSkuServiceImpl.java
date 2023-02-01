@@ -50,12 +50,6 @@ import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,6 +62,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品sku业务层实现
@@ -105,7 +104,7 @@ public class GoodsSkuServiceImpl extends
 	/**
 	 * 会员评价服务
 	 */
-	private final IFeignMemberEvaluationApi feignMemberEvaluationApi;
+	private final IFeignMemberEvaluationApi memberEvaluationApi;
 	/**
 	 * 商品服务
 	 */
@@ -118,7 +117,7 @@ public class GoodsSkuServiceImpl extends
 	/**
 	 * 促销活动商品服务
 	 */
-	private final IFeignPromotionGoodsApi feignPromotionGoodsApi;
+	private final IFeignPromotionGoodsApi promotionGoodsApi;
 	/**
 	 * ApplicationEventPublisher
 	 */
@@ -147,7 +146,7 @@ public class GoodsSkuServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean update(List<Map<String, Object>> skuList, Goods goods,
-						  Boolean regeneratorSkuFlag) {
+		Boolean regeneratorSkuFlag) {
 		// 是否存在规格
 		if (skuList == null || skuList.isEmpty()) {
 			throw new BusinessException(ResultEnum.MUST_HAVE_GOODS_SKU);
@@ -299,7 +298,7 @@ public class GoodsSkuServiceImpl extends
 				PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 				searchParams.setSkuId(String.valueOf(skuId));
 				searchParams.setPromotionId(jsonObject.getLong("id"));
-				PromotionGoodsVO promotionsGoods = feignPromotionGoodsApi.getPromotionsGoods(
+				PromotionGoodsVO promotionsGoods = promotionGoodsApi.getPromotionsGoods(
 					searchParams);
 				if (promotionsGoods != null && promotionsGoods.getPrice() != null) {
 					goodsSkuDetail.setPromotionFlag(true);
@@ -533,7 +532,7 @@ public class GoodsSkuServiceImpl extends
 		queryParams.setGrade(EvaluationGradeEnum.GOOD.name());
 		queryParams.setSkuId(goodsSku.getId());
 		//好评数量
-		long highPraiseNum = feignMemberEvaluationApi.getEvaluationCount(queryParams);
+		long highPraiseNum = memberEvaluationApi.getEvaluationCount(queryParams);
 
 		//更新商品评价数量
 		goodsSku.setCommentNum(goodsSku.getCommentNum() != null ? goodsSku.getCommentNum() + 1 : 1);
@@ -681,7 +680,7 @@ public class GoodsSkuServiceImpl extends
 	 * @param esGoodsIndex 商品索引
 	 */
 	private void skuInfo(GoodsSku sku, Goods goods, Map<String, Object> map,
-						 EsGoodsIndex esGoodsIndex) {
+		EsGoodsIndex esGoodsIndex) {
 		//规格简短信息
 		StringBuilder simpleSpecs = new StringBuilder();
 		//商品名称

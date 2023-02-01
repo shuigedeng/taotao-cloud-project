@@ -35,12 +35,12 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 	/**
 	 * 会员
 	 */
 	@Autowired
-	private IFeignMemberApi memberService;
+	private IFeignMemberApi memberApi;
 	/**
 	 * 订单
 	 */
@@ -67,7 +67,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 				}
 				String content = "订单取消，积分返还：" + point + "分";
 				//赠送会员积分
-				memberService.updateMemberPoint(point, PointTypeEnum.INCREASE.name(),
+				memberApi.updateMemberPoint(point, PointTypeEnum.INCREASE.name(),
 					order.getMemberId(), content);
 			}
 			case COMPLETED -> {
@@ -87,7 +87,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 					order.getFlowPrice(),
 					0);
 				//赠送会员积分
-				memberService.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(),
+				memberApi.updateMemberPoint(point.longValue(), PointTypeEnum.INCREASE.name(),
 					order.getMemberId(), "会员下单，赠送积分" + point + "分");
 			}
 			default -> {
@@ -109,7 +109,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 			BigDecimal point = CurrencyUtils.mul(pointSetting.getMoney(),
 				afterSale.getActualRefundPrice(), 0);
 			//扣除会员积分
-			memberService.updateMemberPoint(point.longValue(), PointTypeEnum.REDUCE.name(),
+			memberApi.updateMemberPoint(point.longValue(), PointTypeEnum.REDUCE.name(),
 				afterSale.getMemberId(), "会员退款，回退积分" + point + "分");
 
 		}
@@ -121,6 +121,6 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 	 * @return 积分设置
 	 */
 	private PointSettingVO getPointSetting() {
-		return settingService.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
+		return settingApi.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
 	}
 }

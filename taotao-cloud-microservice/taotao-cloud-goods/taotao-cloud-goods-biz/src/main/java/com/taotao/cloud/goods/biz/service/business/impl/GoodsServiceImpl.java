@@ -48,16 +48,15 @@ import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品业务层实现
@@ -69,7 +68,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @Service
 public class GoodsServiceImpl extends
-	BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long> implements IGoodsService {
+	BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long> implements
+	IGoodsService {
 
 	/**
 	 * 分类
@@ -87,19 +87,19 @@ public class GoodsServiceImpl extends
 	/**
 	 * 设置
 	 */
-	private final IFeignSettingApi feignSettingApi;
+	private final IFeignSettingApi settingApi;
 	/**
 	 * 店铺详情
 	 */
-	private final IFeignStoreApi feignStoreApi;
+	private final IFeignStoreApi storeApi;
 	/**
 	 * 运费模板
 	 */
-	private final IFeignFreightTemplateApi feignFreightTemplateApi;
+	private final IFeignFreightTemplateApi freightTemplateApi;
 	/**
 	 * 会员评价
 	 */
-	private final IFeignMemberEvaluationApi feignMemberEvaluationApi;
+	private final IFeignMemberEvaluationApi memberEvaluationApi;
 	/**
 	 * rocketMq
 	 */
@@ -214,7 +214,8 @@ public class GoodsServiceImpl extends
 	@Override
 	public GoodsSkuParamsVO getGoodsVO(Long goodsId) {
 		//缓存获取，如果没有则读取缓存
-		GoodsSkuParamsVO goodsSkuParamsVO = (GoodsSkuParamsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
+		GoodsSkuParamsVO goodsSkuParamsVO = (GoodsSkuParamsVO) redisRepository.get(
+			CachePrefix.GOODS.getPrefix() + goodsId);
 		if (goodsSkuParamsVO != null) {
 			return goodsSkuParamsVO;
 		}
@@ -234,7 +235,8 @@ public class GoodsServiceImpl extends
 		goodsSkuParamsVO.setGoodsGalleryList(galleryList.stream().filter(Objects::nonNull)
 			.map(GoodsGallery::getOriginal).toList());
 		//商品sku赋值
-		List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
+		List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(
+			goodsId);
 		if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
 			goodsSkuParamsVO.setSkuList(goodsListByGoodsId);
 		}
@@ -247,7 +249,8 @@ public class GoodsServiceImpl extends
 
 		//参数非空则填写参数
 		if (StrUtil.isNotEmpty(goods.getParams())) {
-			goodsSkuParamsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
+			goodsSkuParamsVO.setGoodsParamsDTOList(
+				JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
 		}
 
 		redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsSkuParamsVO);
@@ -288,7 +291,7 @@ public class GoodsServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum,
-										 String underReason) {
+		String underReason) {
 		boolean result;
 
 		//如果商品为空，直接返回
@@ -319,7 +322,7 @@ public class GoodsServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean managerUpdateGoodsMarketAble(List<Long> goodsIds,
-												GoodsStatusEnum goodsStatusEnum, String underReason) {
+		GoodsStatusEnum goodsStatusEnum, String underReason) {
 		boolean result;
 
 		//如果商品为空，直接返回
@@ -376,7 +379,7 @@ public class GoodsServiceImpl extends
 	public Boolean freight(List<Long> goodsIds, Long templateId) {
 		SecurityUser authUser = this.checkStoreAuthority();
 
-		FreightTemplateVO freightTemplate = feignFreightTemplateApi.getById(templateId);
+		FreightTemplateVO freightTemplate = freightTemplateApi.getById(templateId);
 		if (freightTemplate == null) {
 			throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
 		}
@@ -407,7 +410,7 @@ public class GoodsServiceImpl extends
 		goods.setCommentNum(goods.getCommentNum() + 1);
 
 		//好评数量
-		Long highPraiseNum = feignMemberEvaluationApi.count(goodsId, EvaluationGradeEnum.GOOD.name());
+		Long highPraiseNum = memberEvaluationApi.count(goodsId, EvaluationGradeEnum.GOOD.name());
 
 		//好评率
 		BigDecimal grade = NumberUtil.mul(
@@ -513,7 +516,7 @@ public class GoodsServiceImpl extends
 		}
 
 		//获取商品系统配置决定是否审核
-		GoodsSettingVO goodsSetting = feignSettingApi.getGoodsSetting(
+		GoodsSettingVO goodsSetting = settingApi.getGoodsSetting(
 			SettingCategoryEnum.GOODS_SETTING.name());
 		//是否需要审核
 		goods.setIsAuth(
@@ -521,7 +524,7 @@ public class GoodsServiceImpl extends
 				: GoodsAuthEnum.PASS.name());
 		//判断当前用户是否为店铺
 		if (SecurityUtils.getCurrentUser().getType().equals(UserEnum.STORE.getCode())) {
-			StoreVO storeDetail = feignStoreApi.getStoreDetail();
+			StoreVO storeDetail = storeApi.getStoreDetail();
 			if (storeDetail.getSelfOperated() != null) {
 				goods.setSelfOperated(storeDetail.getSelfOperated());
 			}

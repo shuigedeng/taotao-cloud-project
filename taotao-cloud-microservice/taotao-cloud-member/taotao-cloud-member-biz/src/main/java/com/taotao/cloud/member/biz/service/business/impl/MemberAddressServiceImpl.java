@@ -10,6 +10,8 @@ import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.member.biz.mapper.IMemberAddressMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
 import com.taotao.cloud.member.biz.service.business.IMemberAddressService;
+import com.taotao.cloud.sys.api.dubbo.IDubboUserRpc;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MemberAddressServiceImpl extends
 	ServiceImpl<IMemberAddressMapper, MemberAddress> implements IMemberAddressService {
+
+	@DubboReference
+	private IDubboUserRpc userRpc;
 
 	@Override
 	public IPage<MemberAddress> queryPage(PageQuery page, Long memberId) {
@@ -60,7 +65,8 @@ public class MemberAddressServiceImpl extends
 		MemberAddress originalMemberAddress = this.getMemberAddress(
 			memberAddress.getId());
 
-		if (originalMemberAddress != null && originalMemberAddress.getMemberId().equals(SecurityUtils.getUserId())) {
+		if (originalMemberAddress != null && originalMemberAddress.getMemberId()
+			.equals(SecurityUtils.getUserId())) {
 			if (memberAddress.getDefaulted() == null) {
 				memberAddress.setDefaulted(false);
 			}

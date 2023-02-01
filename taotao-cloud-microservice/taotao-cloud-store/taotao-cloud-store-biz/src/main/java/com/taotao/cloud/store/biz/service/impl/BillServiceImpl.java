@@ -28,12 +28,6 @@ import com.taotao.cloud.store.biz.mapper.BillMapper;
 import com.taotao.cloud.store.biz.model.entity.Bill;
 import com.taotao.cloud.store.biz.service.IBillService;
 import com.taotao.cloud.store.biz.service.IStoreDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
@@ -42,6 +36,11 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 结算单业务层实现
@@ -64,7 +63,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
 	 * 商家流水
 	 */
 	@Autowired
-	private IFeignStoreFlowApi feignStoreFlowApi;
+	private IFeignStoreFlowApi storeFlowApi;
 
 	@Override
 	public void createBill(Long storeId, LocalDateTime startTime, LocalDateTime endTime) {
@@ -103,7 +102,8 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
 			bill.setPointSettlementPrice(orderBill.getPointSettlementPrice());
 			bill.setKanjiaSettlementPrice(orderBill.getKanjiaSettlementPrice());
 			//入账金额=订单金额+积分商品+砍价商品
-			orderPrice = CurrencyUtils.add(CurrencyUtils.add(orderBill.getBillPrice(), orderBill.getPointSettlementPrice()),
+			orderPrice = CurrencyUtils.add(
+				CurrencyUtils.add(orderBill.getBillPrice(), orderBill.getPointSettlementPrice()),
 				orderBill.getKanjiaSettlementPrice());
 		}
 
@@ -227,7 +227,8 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
 
 		StoreFlowQuery.BillDTO billDTO = new StoreFlowQuery.BillDTO();
 		BeanUtils.copyProperties(bill, billDTO);
-		List<StoreFlowPayDownloadVO> storeFlowList = feignStoreFlowApi.getStoreFlowPayDownloadVO(StoreFlowQuery.builder().type(FlowTypeEnum.PAY.name()).bill(billDTO).build());
+		List<StoreFlowPayDownloadVO> storeFlowList = storeFlowApi.getStoreFlowPayDownloadVO(
+			StoreFlowQuery.builder().type(FlowTypeEnum.PAY.name()).bill(billDTO).build());
 		writer.write(storeFlowList, true);
 
 		writer.setSheet("退款订单");
@@ -256,7 +257,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
 
 		StoreFlowQuery.BillDTO billDTO1 = new StoreFlowQuery.BillDTO();
 		BeanUtils.copyProperties(bill, billDTO1);
-		List<StoreFlowRefundDownloadVO> storeFlowRefundDownloadVOList = feignStoreFlowApi.getStoreFlowRefundDownloadVO(
+		List<StoreFlowRefundDownloadVO> storeFlowRefundDownloadVOList = storeFlowApi.getStoreFlowRefundDownloadVO(
 			StoreFlowQuery.builder().type(FlowTypeEnum.REFUND.name()).bill(billDTO1).build()
 		);
 		writer.write(storeFlowRefundDownloadVOList, true);
@@ -265,7 +266,9 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
 		try {
 			//设置公共属性，列表名称
 			response.setContentType("application/vnd.ms-excel;charset=utf-8");
-			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(bill.getStoreName() + "-" + bill.getSn(), StandardCharsets.UTF_8) + ".xls");
+			response.setHeader("Content-Disposition",
+				"attachment;filename=" + URLEncoder.encode(bill.getStoreName() + "-" + bill.getSn(),
+					StandardCharsets.UTF_8) + ".xls");
 			out = response.getOutputStream();
 			writer.flush(out, true);
 		} catch (Exception e) {

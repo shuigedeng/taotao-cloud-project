@@ -6,7 +6,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
-import com.taotao.cloud.distribution.biz.service.DistributionService;
+import com.taotao.cloud.distribution.biz.service.IDistributionService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,14 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionManagerController {
 
 	@Autowired
-	private DistributionService distributionService;
+	private IDistributionService distributionService;
 
 	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getByPage")
 	public Result<IPage<Distribution>> getByPage(DistributionPageQuery distributionPageQuery,
-			PageVO page) {
+		PageVO page) {
 		return Result.success(distributionService.distributionPage(distributionPageQuery, page));
 	}
 
@@ -77,7 +77,7 @@ public class DistributionManagerController {
 	@PreventDuplicateSubmissions
 	@PutMapping(value = "/audit/{id}")
 	public Result<Object> audit(@NotNull @PathVariable String id,
-			@Parameter(description = "审核结果，PASS 通过  REFUSE 拒绝") @NotNull String status) {
+		@Parameter(description = "审核结果，PASS 通过  REFUSE 拒绝") @NotNull String status) {
 		if (distributionService.audit(id, status)) {
 			return Result.success();
 		} else {

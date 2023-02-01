@@ -13,12 +13,11 @@ import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * 商品相册接口实现
@@ -37,7 +36,7 @@ public class GoodsGalleryServiceImpl extends
 	 * 设置
 	 */
 	@Autowired
-	private IFeignSettingApi feignSettingApi;
+	private IFeignSettingApi settingApi;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -62,7 +61,7 @@ public class GoodsGalleryServiceImpl extends
 	public GoodsGallery getGoodsGallery(String origin) {
 		GoodsGallery goodsGallery = new GoodsGallery();
 		//获取商品系统配置决定是否审核
-		GoodsSettingVO goodsSetting = feignSettingApi.getGoodsSetting(
+		GoodsSettingVO goodsSetting = settingApi.getGoodsSetting(
 			SettingCategoryEnum.GOODS_SETTING.name());
 		//缩略图
 		String thumbnail = FileUtils.getUrl(origin, goodsSetting.getAbbreviationPictureWidth(),

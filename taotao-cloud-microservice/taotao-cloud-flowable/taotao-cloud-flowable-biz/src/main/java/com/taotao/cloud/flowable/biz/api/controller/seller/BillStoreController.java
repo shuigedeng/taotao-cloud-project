@@ -7,16 +7,17 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.model.query.BillPageQuery;
 import com.taotao.cloud.store.api.model.vo.BillListVO;
 import com.taotao.cloud.store.biz.model.entity.Bill;
 import com.taotao.cloud.store.biz.service.BillService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -25,8 +26,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * 店铺端,结算单接口
@@ -43,7 +42,7 @@ public class BillStoreController {
 	private BillService billService;
 
 	@Autowired
-	private IFeignStoreFlowApi storeFlowService;
+	private IFeignStoreFlowApi storeFlowApi;
 
 	@Operation(summary = "获取结算单分页", description = "获取结算单分页")
 	@RequestLogger
@@ -67,9 +66,10 @@ public class BillStoreController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getStoreFlow")
-	public Result<PageResult<StoreFlowVO>> getStoreFlow(@PathVariable String id, @Parameter(description = "流水类型:PAY、REFUND") String flowType, PageQuery PageQuery) {
+	public Result<PageResult<StoreFlowVO>> getStoreFlow(@PathVariable String id,
+		@Parameter(description = "流水类型:PAY、REFUND") String flowType, PageQuery PageQuery) {
 		OperationalJudgment.judgment(billService.getById(id));
-		IPage<StoreFlowVO> storeFlow = storeFlowService.getStoreFlow(id, flowType, PageQuery);
+		IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
 		return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
 	}
 
@@ -77,9 +77,10 @@ public class BillStoreController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getDistributionFlow")
-	public Result<PageResult<StoreFlowVO>> getDistributionFlow(@PathVariable String id, PageQuery PageQuery) {
+	public Result<PageResult<StoreFlowVO>> getDistributionFlow(@PathVariable String id,
+		PageQuery PageQuery) {
 		OperationalJudgment.judgment(billService.getById(id));
-		IPage<StoreFlowVO> distributionFlow = storeFlowService.getDistributionFlow(id, PageQuery);
+		IPage<StoreFlowVO> distributionFlow = storeFlowApi.getDistributionFlow(id, PageQuery);
 		return Result.success(PageResult.convertMybatisPage(distributionFlow, StoreFlowVO.class));
 	}
 

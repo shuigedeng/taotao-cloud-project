@@ -26,15 +26,14 @@ import com.taotao.cloud.store.biz.service.IStoreService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 店铺详细业务层实现
@@ -44,7 +43,7 @@ import java.util.Map;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, StoreDetail> implements
-		IStoreDetailService {
+	IStoreDetailService {
 
 	/**
 	 * 店铺
@@ -55,10 +54,10 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 	 * 分类
 	 */
 	@Autowired
-	private IFeignCategoryApi feignCategoryApi;
+	private IFeignCategoryApi categoryApi;
 
 	@Autowired
-	private IFeignGoodsApi feignGoodsApi;
+	private IFeignGoodsApi goodsApi;
 
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;
@@ -98,14 +97,17 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
 	@Override
 	public void updateStoreGoodsInfo(Store store) {
-		feignGoodsApi.updateStoreDetail(store.getId());
+		goodsApi.updateStoreDetail(store.getId());
 
 		Map<String, Object> updateIndexFieldsMap = EsIndexUtil.getUpdateIndexFieldsMap(
 			MapUtil.builder().put("storeId", store.getId()).build(),
-			MapUtil.builder().put("storeName", store.getStoreName()).put("selfOperated", store.getSelfOperated()).build());
-		String destination = rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
+			MapUtil.builder().put("storeName", store.getStoreName())
+				.put("selfOperated", store.getSelfOperated()).build());
+		String destination = rocketmqCustomProperties.getGoodsTopic() + ":"
+			+ GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
 		//发送mq消息
-		rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(updateIndexFieldsMap), RocketmqSendCallbackBuilder.commonCallback());
+		rocketMQTemplate.asyncSend(destination, JSONUtil.toJsonStr(updateIndexFieldsMap),
+			RocketmqSendCallbackBuilder.commonCallback());
 	}
 
 	@Override
@@ -139,7 +141,8 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
 	@Override
 	public StoreAfterSaleAddressDTO getStoreAfterSaleAddressDTO(Long id) {
-		StoreAfterSaleAddressDTO storeAfterSaleAddressDTO = this.baseMapper.getStoreAfterSaleAddressDTO(id);
+		StoreAfterSaleAddressDTO storeAfterSaleAddressDTO = this.baseMapper.getStoreAfterSaleAddressDTO(
+			id);
 		if (storeAfterSaleAddressDTO == null) {
 			storeAfterSaleAddressDTO = new StoreAfterSaleAddressDTO();
 		}
@@ -150,11 +153,16 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 	public boolean editStoreAfterSaleAddressDTO(StoreAfterSaleAddressDTO storeAfterSaleAddressDTO) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		LambdaUpdateWrapper<StoreDetail> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeName, storeAfterSaleAddressDTO.getSalesConsigneeName());
-		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeAddressId, storeAfterSaleAddressDTO.getSalesConsigneeAddressId());
-		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeAddressPath, storeAfterSaleAddressDTO.getSalesConsigneeAddressPath());
-		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeDetail, storeAfterSaleAddressDTO.getSalesConsigneeDetail());
-		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeMobile, storeAfterSaleAddressDTO.getSalesConsigneeMobile());
+		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeName,
+			storeAfterSaleAddressDTO.getSalesConsigneeName());
+		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeAddressId,
+			storeAfterSaleAddressDTO.getSalesConsigneeAddressId());
+		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeAddressPath,
+			storeAfterSaleAddressDTO.getSalesConsigneeAddressPath());
+		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeDetail,
+			storeAfterSaleAddressDTO.getSalesConsigneeDetail());
+		lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeMobile,
+			storeAfterSaleAddressDTO.getSalesConsigneeMobile());
 		lambdaUpdateWrapper.eq(StoreDetail::getStoreId, storeId);
 		return this.update(lambdaUpdateWrapper);
 	}
@@ -172,9 +180,10 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 	public List<StoreManagementCategoryVO> goodsManagementCategory(String storeId) {
 
 		//获取顶部分类列表
-		List<CategoryTreeVO> categoryList = feignCategoryApi.firstCategory();
+		List<CategoryTreeVO> categoryList = categoryApi.firstCategory();
 		//获取店铺信息
-		StoreDetail storeDetail = this.getOne(new LambdaQueryWrapper<StoreDetail>().eq(StoreDetail::getStoreId, storeId));
+		StoreDetail storeDetail = this.getOne(
+			new LambdaQueryWrapper<StoreDetail>().eq(StoreDetail::getStoreId, storeId));
 		//获取店铺分类
 		String[] storeCategoryList = storeDetail.getGoodsManagementCategory().split(",");
 		List<StoreManagementCategoryVO> list = new ArrayList<>();

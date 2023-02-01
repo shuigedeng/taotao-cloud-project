@@ -41,12 +41,12 @@ public class CashierSupport {
 	 * 预存款
 	 */
 	@Autowired
-	private IFeignMemberWalletApi memberWalletService;
+	private IFeignMemberWalletApi memberWalletApi;
 	/**
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingApi settingService;
+	private IFeignSettingApi settingApi;
 
 	/**
 	 * 支付
@@ -56,9 +56,9 @@ public class CashierSupport {
 	 * @return 支付消息
 	 */
 	public Result<Object> payment(PaymentMethodEnum paymentMethodEnum,
-			PaymentClientEnum paymentClientEnum,
-			HttpServletRequest request, HttpServletResponse response,
-			PayParam payParam) {
+		PaymentClientEnum paymentClientEnum,
+		HttpServletRequest request, HttpServletResponse response,
+		PayParam payParam) {
 		if (paymentClientEnum == null || paymentMethodEnum == null) {
 			throw new BusinessException(ResultEnum.PAY_NOT_SUPPORT);
 		}
@@ -66,7 +66,7 @@ public class CashierSupport {
 		//获取支付插件
 		Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
 		LogUtils.info("支付请求：客户端：{},支付类型：{},请求：{}", paymentClientEnum.name(),
-				paymentMethodEnum.name(), payParam.toString());
+			paymentMethodEnum.name(), payParam.toString());
 
 		//支付方式调用
 		return switch (paymentClientEnum) {
@@ -94,9 +94,9 @@ public class CashierSupport {
 		}
 
 		//支付方式 循环获取
-		SettingVO setting = settingService.get(SettingCategoryEnum.PAYMENT_SUPPORT.name());
+		SettingVO setting = settingApi.get(SettingCategoryEnum.PAYMENT_SUPPORT.name());
 		PaymentSupportSetting paymentSupportSetting = JSONUtil.toBean(setting.getSettingValue(),
-				PaymentSupportSetting.class);
+			PaymentSupportSetting.class);
 		for (PaymentSupportItem paymentSupportItem : paymentSupportSetting.getPaymentSupportItems()) {
 			if (paymentSupportItem.getClient().equals(clientTypeEnum.name())) {
 				return paymentSupportItem.getSupports();
@@ -112,7 +112,7 @@ public class CashierSupport {
 	 * @return 回调消息
 	 */
 	public void callback(PaymentMethodEnum paymentMethodEnum,
-			HttpServletRequest request) {
+		HttpServletRequest request) {
 
 		LogUtils.info("支付回调：支付类型：{}", paymentMethodEnum.name());
 
@@ -127,7 +127,7 @@ public class CashierSupport {
 	 * @param paymentMethodEnum 支付渠道
 	 */
 	public void notify(PaymentMethodEnum paymentMethodEnum,
-			HttpServletRequest request) {
+		HttpServletRequest request) {
 
 		LogUtils.info("支付异步通知：支付类型：{}", paymentMethodEnum.name());
 
@@ -156,11 +156,11 @@ public class CashierSupport {
 			}
 
 			cashierParam.setSupport(support(payParam.getClientType()));
-			cashierParam.setWalletValue(memberWalletService.getMemberWallet(
-					UserContext.getCurrentUser().getId()).getMemberWallet());
+			cashierParam.setWalletValue(memberWalletApi.getMemberWallet(
+				UserContext.getCurrentUser().getId()).getMemberWallet());
 			OrderSettingVO orderSetting = JSONUtil.toBean(
-					settingService.get(SettingCategoryEnum.ORDER_SETTING.name()).getSettingValue(),
-					OrderSetting.class);
+				settingApi.get(SettingCategoryEnum.ORDER_SETTING.name()).getSettingValue(),
+				OrderSetting.class);
 			Integer minute = orderSetting.getAutoCancel();
 			cashierParam.setAutoCancel(cashierParam.getCreateTime().getTime() + minute * 1000 * 60);
 			return cashierParam;

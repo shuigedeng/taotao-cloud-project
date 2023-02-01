@@ -35,7 +35,7 @@ public class BillManagerController {
 	private BillService billService;
 
 	@Autowired
-	private IFeignStoreFlowApi storeFlowService;
+	private IFeignStoreFlowApi storeFlowApi;
 
 	@Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
 	@RequestLogger
@@ -59,10 +59,10 @@ public class BillManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}/getStoreFlow")
 	public Result<PageResult<StoreFlowVO>> getStoreFlow(
-			@Parameter(description = "结算单ID") @PathVariable String id,
-			@Parameter(description = "流水类型:PAY、REFUND") String flowType,
-			PageQuery PageQuery) {
-		IPage<StoreFlowVO> storeFlow = storeFlowService.getStoreFlow(id, flowType, PageQuery);
+		@Parameter(description = "结算单ID") @PathVariable String id,
+		@Parameter(description = "流水类型:PAY、REFUND") String flowType,
+		PageQuery PageQuery) {
+		IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
 		return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
 	}
 

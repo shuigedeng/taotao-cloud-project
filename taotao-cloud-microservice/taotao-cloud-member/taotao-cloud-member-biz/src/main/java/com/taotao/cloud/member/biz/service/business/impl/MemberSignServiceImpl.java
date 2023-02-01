@@ -9,8 +9,8 @@ import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.model.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.mapper.IMemberSignMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
-import com.taotao.cloud.member.biz.service.business.IMemberSignService;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
+import com.taotao.cloud.member.biz.service.business.IMemberSignService;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
@@ -18,12 +18,11 @@ import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
+import java.util.List;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * 会员签到业务层实现
@@ -46,7 +45,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 	 * 配置
 	 */
 	@Autowired
-	private IFeignSettingApi feignSettingApi;
+	private IFeignSettingApi settingApi;
 	/**
 	 * 会员
 	 */
@@ -84,8 +83,10 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 			try {
 				this.baseMapper.insert(memberSign);
 				//签到成功后发送消息赠送积分
-				String destination = rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_SING.name();
-				rocketMQTemplate.asyncSend(destination, memberSign, RocketmqSendCallbackBuilder.commonCallback());
+				String destination = rocketmqCustomProperties.getMemberTopic() + ":"
+					+ MemberTagsEnum.MEMBER_SING.name();
+				rocketMQTemplate.asyncSend(destination, memberSign,
+					RocketmqSendCallbackBuilder.commonCallback());
 				return true;
 			} catch (Exception e) {
 				throw new ServiceException(ResultCode.MEMBER_SIGN_REPEAT);
@@ -96,7 +97,8 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 
 	@Override
 	public List<MemberSignVO> getMonthSignDay(String time) {
-		List<MemberSign> monthMemberSign = this.baseMapper.getMonthMemberSign(SecurityUtils.getUserId(), time);
+		List<MemberSign> monthMemberSign = this.baseMapper.getMonthMemberSign(
+			SecurityUtils.getUserId(), time);
 		return BeanUtils.copy(monthMemberSign, MemberSignVO.class);
 	}
 
@@ -104,7 +106,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 	public void memberSignSendPoint(Long memberId, Integer day) {
 		try {
 			//获取签到积分赠送设置
-			PointSettingVO pointSetting = feignSettingApi.getPointSetting(
+			PointSettingVO pointSetting = settingApi.getPointSetting(
 				SettingCategoryEnum.POINT_SETTING.name());
 			String content = "";
 			//赠送积分

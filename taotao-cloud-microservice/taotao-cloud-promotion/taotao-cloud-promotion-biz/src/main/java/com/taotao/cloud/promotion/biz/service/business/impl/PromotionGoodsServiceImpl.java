@@ -16,9 +16,9 @@ import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.api.model.query.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.mapper.PromotionGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
@@ -28,15 +28,14 @@ import com.taotao.cloud.promotion.biz.service.business.ICouponService;
 import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 促销商品业务层实现
@@ -47,8 +46,9 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper, PromotionGoods> implements
-		IPromotionGoodsService {
+public class PromotionGoodsServiceImpl extends
+	ServiceImpl<PromotionGoodsMapper, PromotionGoods> implements
+	IPromotionGoodsService {
 
 	/**
 	 * Redis
@@ -64,7 +64,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi feignGoodsSkuApi;
+	private IFeignGoodsSkuApi goodsSkuApi;
 
 	@Autowired
 	private IFullDiscountService fullDiscountService;
@@ -75,7 +75,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 	@Override
 	public List<PromotionGoods> findNowSkuPromotion(String skuId) {
 
-		GoodsSku sku = feignGoodsSkuApi.getGoodsSkuByIdFromCache(skuId);
+		GoodsSku sku = goodsSkuApi.getGoodsSkuByIdFromCache(skuId);
 		if (sku == null) {
 			return new ArrayList<>();
 		}
@@ -85,7 +85,6 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 		queryWrapper.and(PromotionTools.queryPromotionStatus(PromotionsStatusEnum.START));
 
 		List<PromotionGoods> promotionGoods = this.list(queryWrapper);
-
 
 		BasePromotionsSearchQuery searchParams = new BasePromotionsSearchQuery();
 		searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
@@ -118,7 +117,8 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 		Date date = DateUtils.getCurrentDayEndTime();
 		//如果商品的促销更新时间在当前时间之前，则更新促销
 		if (cartSkuVO.getUpdatePromotionTime().before(date)) {
-			List<PromotionGoods> promotionGoods = this.findNowSkuPromotion(cartSkuVO.getGoodsSku().getId());
+			List<PromotionGoods> promotionGoods = this.findNowSkuPromotion(
+				cartSkuVO.getGoodsSku().getId());
 			cartSkuVO.setPromotions(promotionGoods);
 			//下一次更新时间
 			cartSkuVO.setUpdatePromotionTime(date);
@@ -185,11 +185,14 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 	}
 
 	@Override
-	public Integer findInnerOverlapPromotionGoods(String promotionType, String skuId, Date startTime, Date endTime, String promotionId) {
+	public Integer findInnerOverlapPromotionGoods(String promotionType, String skuId,
+		Date startTime, Date endTime, String promotionId) {
 		if (promotionId != null) {
-			return this.baseMapper.selectInnerOverlapPromotionGoodsWithout(promotionType, skuId, startTime, endTime, promotionId);
+			return this.baseMapper.selectInnerOverlapPromotionGoodsWithout(promotionType, skuId,
+				startTime, endTime, promotionId);
 		} else {
-			return this.baseMapper.selectInnerOverlapPromotionGoods(promotionType, skuId, startTime, endTime);
+			return this.baseMapper.selectInnerOverlapPromotionGoods(promotionType, skuId, startTime,
+				endTime);
 		}
 	}
 
@@ -202,8 +205,10 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 	 * @return 促销活动商品库存
 	 */
 	@Override
-	public Integer getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, String skuId) {
-		String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
+	public Integer getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId,
+		String skuId) {
+		String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum,
+			promotionId, skuId);
 		String promotionGoodsStock = stringRedisTemplate.opsForValue().get(promotionStockKey);
 
 		//库存如果不为空，则直接返回
@@ -222,13 +227,15 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 				return 0;
 			}
 			//否则写入新的促销商品库存
-			stringRedisTemplate.opsForValue().set(promotionStockKey, promotionGoods.getQuantity().toString());
+			stringRedisTemplate.opsForValue()
+				.set(promotionStockKey, promotionGoods.getQuantity().toString());
 			return promotionGoods.getQuantity();
 		}
 	}
 
 	@Override
-	public List<Integer> getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, List<String> skuId) {
+	public List<Integer> getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId,
+		List<String> skuId) {
 		PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
 		searchParams.setPromotionType(typeEnum.name());
 		searchParams.setPromotionId(promotionId);
@@ -262,22 +269,28 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
 	 * @param quantity    更新后的库存数量
 	 */
 	@Override
-	public void updatePromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, String skuId, Integer quantity) {
-		String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
+	public void updatePromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId,
+		String skuId, Integer quantity) {
+		String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum,
+			promotionId, skuId);
 		if (typeEnum.equals(PromotionTypeEnum.SECKILL)) {
 			LambdaQueryWrapper<SeckillApply> queryWrapper = new LambdaQueryWrapper<>();
-			queryWrapper.eq(SeckillApply::getSeckillId, promotionId).eq(SeckillApply::getSkuId, skuId);
+			queryWrapper.eq(SeckillApply::getSeckillId, promotionId)
+				.eq(SeckillApply::getSkuId, skuId);
 			SeckillApply seckillApply = this.seckillApplyService.getOne(queryWrapper, false);
 			if (seckillApply == null) {
 				throw new BusinessException(ResultEnum.SECKILL_NOT_EXIST_ERROR);
 			}
 			LambdaUpdateWrapper<SeckillApply> updateWrapper = new LambdaUpdateWrapper<>();
-			updateWrapper.eq(SeckillApply::getSeckillId, promotionId).eq(SeckillApply::getSkuId, skuId);
+			updateWrapper.eq(SeckillApply::getSeckillId, promotionId)
+				.eq(SeckillApply::getSkuId, skuId);
 			updateWrapper.set(SeckillApply::getQuantity, quantity);
 			seckillApplyService.update(updateWrapper);
 		} else {
 			LambdaUpdateWrapper<PromotionGoods> updateWrapper = new LambdaUpdateWrapper<>();
-			updateWrapper.eq(PromotionGoods::getPromotionType, typeEnum.name()).eq(PromotionGoods::getPromotionId, promotionId).eq(PromotionGoods::getSkuId, skuId);
+			updateWrapper.eq(PromotionGoods::getPromotionType, typeEnum.name())
+				.eq(PromotionGoods::getPromotionId, promotionId)
+				.eq(PromotionGoods::getSkuId, skuId);
 			updateWrapper.set(PromotionGoods::getQuantity, quantity);
 			this.update(updateWrapper);
 		}

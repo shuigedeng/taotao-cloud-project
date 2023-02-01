@@ -8,10 +8,9 @@ import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 退款支持
@@ -22,21 +21,22 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 @Component
 public class RefundSupport {
+
 	/**
 	 * 店铺流水
 	 */
 	@Autowired
-	private IFeignStoreFlowApi storeFlowService;
+	private IFeignStoreFlowApi storeFlowApi;
 	/**
 	 * 订单
 	 */
 	@Autowired
-	private IFeignOrderApi orderService;
+	private IFeignOrderApi orderApi;
 	/**
 	 * 子订单
 	 */
 	@Autowired
-	private IFeignOrderItemApi orderItemService;
+	private IFeignOrderItemApi orderItemApi;
 
 	/**
 	 * 售后退款
@@ -44,7 +44,7 @@ public class RefundSupport {
 	 * @param afterSale
 	 */
 	public void refund(AfterSaleVO afterSale) {
-		OrderVO order = orderService.getBySn(afterSale.orderSn());
+		OrderVO order = orderApi.getBySn(afterSale.orderSn());
 		RefundLog refundLog = RefundLog.builder()
 			.isRefund(false)
 			.totalAmount(afterSale.getActualRefundPrice())
@@ -58,14 +58,15 @@ public class RefundSupport {
 			.refundReason(afterSale.getReason())
 			.build();
 
-		PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.paymentNameOf(order.getPaymentMethod());
+		PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.paymentNameOf(
+			order.getPaymentMethod());
 		Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
 		payment.refund(refundLog);
 
 		this.updateReturnGoodsNumber(afterSale);
 
 		//记录退款流水
-		storeFlowService.refundOrder(afterSale);
+		storeFlowApi.refundOrder(afterSale);
 	}
 
 	/**
@@ -73,19 +74,20 @@ public class RefundSupport {
 	 */
 	private void updateReturnGoodsNumber(AfterSaleVO afterSale) {
 		//根据商品id及订单sn获取子订单
-		OrderItemVO orderItem = orderItemService.getByOrderSnAndSkuId(afterSale.orderSn(), afterSale.skuId());
+		OrderItemVO orderItem = orderItemApi.getByOrderSnAndSkuId(afterSale.orderSn(),
+			afterSale.skuId());
 
 		orderItem.setReturnGoodsNumber(afterSale.getNum() + orderItem.getReturnGoodsNumber());
 
 		//修改子订单订单中的退货数量
-		orderItemService.updateById(orderItem);
+		orderItemApi.updateById(orderItem);
 	}
 
 	/**
 	 * 订单取消
 	 */
 	public void cancel(AfterSaleVO afterSale) {
-		OrderVO order = orderService.getBySn(afterSale.orderSn());
+		OrderVO order = orderApi.getBySn(afterSale.orderSn());
 		RefundLog refundLog = RefundLog.builder()
 			.isRefund(false)
 			.totalAmount(afterSale.getActualRefundPrice())
@@ -98,7 +100,8 @@ public class RefundSupport {
 			.orderSn(afterSale.getOrderSn())
 			.refundReason(afterSale.getReason())
 			.build();
-		PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.paymentNameOf(order.getPaymentMethod());
+		PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.paymentNameOf(
+			order.getPaymentMethod());
 		Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
 		payment.refund(refundLog);
 	}
