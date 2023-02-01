@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.model.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.api.model.dto.MemberAddDTO;
-import com.taotao.cloud.member.api.model.query.MemberSearchPageQuery;
+import com.taotao.cloud.member.api.model.page.MemberSearchPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberSearchVO;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.convert.MemberConvert;

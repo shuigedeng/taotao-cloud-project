@@ -30,13 +30,13 @@ public class MemberGoodsCollectionServiceImpl extends
 	ServiceImpl<IGoodsCollectionMapper, MemberGoodsCollection> implements IMemberGoodsCollectionService {
 
 	@Override
-	public IPage<GoodsCollectionVO> goodsCollection(PageQuery PageQuery) {
+	public IPage<GoodsCollectionVO> goodsCollection(PageQuery pageQuery) {
 		QueryWrapper<GoodsCollectionVO> queryWrapper = Wrappers.query();
 		queryWrapper.eq("gc.member_id", SecurityUtils.getUserId());
 		queryWrapper.groupBy("gc.id");
 		queryWrapper.orderByDesc("gc.create_time");
 		return this.baseMapper.goodsCollectionVOList(
-			PageQuery.buildMpPage(), queryWrapper);
+			pageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
-import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.web.base.service.BaseSuperService;

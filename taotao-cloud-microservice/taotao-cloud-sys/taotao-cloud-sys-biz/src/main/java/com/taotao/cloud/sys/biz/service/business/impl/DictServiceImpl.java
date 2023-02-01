@@ -15,14 +15,19 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.RandomUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.sys.api.model.page.DictPageQuery;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.model.entity.dict.QDict;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
+import com.taotao.cloud.sys.biz.service.business.IDictItemService;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import io.seata.spring.annotation.GlobalTransactional;
@@ -35,6 +40,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import lombok.AllArgsConstructor;
 import org.slf4j.MDC;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,88 +59,80 @@ public class DictServiceImpl extends
 	BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
 	implements IDictService {
 
-	private final DictRepository dictRepository;
+	private final IDictItemService dictItemService;
 
-	//private final IDictItemService sysDictItemService;
-	//
-	//public DictServiceImpl(DictRepository sysDictRepository,
-	//	IDictItemService sysDictItemService) {
-	//	this.sysDictRepository = sysDictRepository;
-	//	this.sysDictItemService = sysDictItemService;
-	//}
-	//
-	//private final QDict SYS_DICT = QDict.sysDict;
-	//private final BooleanExpression PREDICATE = SYS_DICT.eq(SYS_DICT);
-	//private final OrderSpecifier<Integer> SORT_DESC = SYS_DICT.sortNum.desc();
-	//private final OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = SYS_DICT.createTime.desc();
-	//
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public Dict save(Dict sysDict) {
-	//	String dictCode = sysDict.getDictCode();
-	//	if (sysDictRepository.existsByDictCode(dictCode)) {
-	//		throw new BusinessException(ResultEnum.DICT_CODE_REPEAT_ERROR);
-	//	}
-	//	return sysDictRepository.saveAndFlush(sysDict);
-	//}
-	//
-	//@Override
-	//public List<Dict> getAll() {
-	//	return sysDictRepository.findAll();
-	//}
-	//
-	//@Override
-	//public Page<Dict> queryPage(Pageable page, DictPageQuery dictPageQuery) {
-	//	Optional.ofNullable(dictPageQuery.getDictName())
-	//		.ifPresent(dictName -> PREDICATE.and(SYS_DICT.dictName.like(dictName)));
-	//	Optional.ofNullable(dictPageQuery.getDictCode())
-	//		.ifPresent(dictCode -> PREDICATE.and(SYS_DICT.dictCode.eq(dictCode)));
-	//	Optional.ofNullable(dictPageQuery.getDescription())
-	//		.ifPresent(description -> PREDICATE.and(SYS_DICT.description.like(description)));
-	//	Optional.ofNullable(dictPageQuery.getRemark())
-	//		.ifPresent(remark -> PREDICATE.and(SYS_DICT.remark.like(remark)));
-	//	return sysDictRepository.findPageable(PREDICATE, page, SORT_DESC, CREATE_TIME_DESC);
-	//}
-	//
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public Boolean removeById(Long id) {
-	//	Optional<Dict> optionalDict = sysDictRepository.findById(id);
-	//	optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
-	//	sysDictRepository.deleteById(id);
-	//	sysDictItemService.deleteByDictId(id);
-	//	return true;
-	//}
-	//
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public Boolean deleteByCode(String code) {
-	//	Dict dict = findByCode(code);
-	//	sysDictRepository.delete(dict);
-	//
-	//	Long dictId = dict.getId();
-	//	sysDictItemService.deleteByDictId(dictId);
-	//	return true;
-	//}
-	//
-	//@Override
-	//public Dict findById(Long id) {
-	//	Optional<Dict> optionalDict = sysDictRepository.findById(id);
-	//	return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
-	//}
-	//
+	private final QDict SYS_DICT = QDict.dict;
+	private final BooleanExpression PREDICATE = SYS_DICT.eq(SYS_DICT);
+	private final OrderSpecifier<Integer> SORT_DESC = SYS_DICT.sortNum.desc();
+	private final OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = SYS_DICT.createTime.desc();
 
-	//@Override
-	//public Dict update(Dict dict) {
-	//	return sysDictRepository.saveAndFlush(dict);
-	//}
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Dict saveDict(Dict sysDict) {
+		String dictCode = sysDict.getDictCode();
+		if (cr().existsByDictCode(dictCode)) {
+			throw new BusinessException(ResultEnum.DICT_CODE_REPEAT_ERROR);
+		}
+		return cr().saveAndFlush(sysDict);
+	}
+
+	@Override
+	public List<Dict> getAll() {
+		return cr().findAll();
+	}
+
+	@Override
+	public Page<Dict> queryPage(Pageable page, DictPageQuery dictPageQuery) {
+		//Optional.ofNullable(dictPageQuery.getDictName())
+		//	.ifPresent(dictName -> PREDICATE.and(SYS_DICT.dictName.like(dictName)));
+		//Optional.ofNullable(dictPageQuery.getDictCode())
+		//	.ifPresent(dictCode -> PREDICATE.and(SYS_DICT.dictCode.eq(dictCode)));
+		//Optional.ofNullable(dictPageQuery.getDescription())
+		//	.ifPresent(description -> PREDICATE.and(SYS_DICT.description.like(description)));
+		//Optional.ofNullable(dictPageQuery.getRemark())
+		//	.ifPresent(remark -> PREDICATE.and(SYS_DICT.remark.like(remark)));
+		return cr().findPageable(PREDICATE, page, SORT_DESC, CREATE_TIME_DESC);
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Boolean removeById(Long id) {
+		Optional<Dict> optionalDict = cr().findById(id);
+		optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
+		cr().deleteById(id);
+		dictItemService.deleteByDictId(id);
+		return true;
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Boolean deleteByCode(String code) {
+		Dict dict = findByCode(code);
+		cr().delete(dict);
+
+		Long dictId = dict.getId();
+		dictItemService.deleteByDictId(dictId);
+		return true;
+	}
+
+	@Override
+	public Dict findById(Long id) {
+		Optional<Dict> optionalDict = cr().findById(id);
+		return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
+	}
+
+
+	@Override
+	public Dict update(Dict dict) {
+		return cr().saveAndFlush(dict);
+	}
 
 	@Override
 	public Dict findByCode(String code) {
 		//List<Dict> all = ir().findAll();
 		//List<Dict> all1 = cr().findAll();
 
-		Optional<Dict> optionalDict = dictRepository.findByCode(code);
+		Optional<Dict> optionalDict = cr().findByCode(code);
 		return optionalDict.orElseThrow(() -> new BusinessException(ResultEnum.DICT_NOT_EXIST));
 		//return Dict.builder().id(2L).createBy(2L).createTime(LocalDateTime.now())
 		//	.dictCode("123123123").dictName("lsdfjaslf")

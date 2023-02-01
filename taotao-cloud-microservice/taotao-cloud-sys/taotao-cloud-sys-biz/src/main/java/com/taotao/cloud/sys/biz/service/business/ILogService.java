@@ -107,4 +107,6 @@ public interface ILogService extends IService<Log> {
 	 * 删除所有INFO日志
 	 */
 	void delAllByInfo();
+
+	long findIp(String toString, String toString1);
 }

@@ -25,6 +25,7 @@ import com.taotao.cloud.sys.api.model.dto.quartz.QuartzLogQueryCriteria;
 import com.taotao.cloud.sys.biz.mapper.IQuartzLogMapper;
 import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzLog;
 import com.taotao.cloud.sys.biz.service.business.IQuartzLogService;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -32,27 +33,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-// 默认不使用缓存
-//import org.springframework.cache.annotation.CacheConfig;
-//import org.springframework.cache.annotation.CacheEvict;
-//import org.springframework.cache.annotation.Cacheable;
-
 @Service
 @AllArgsConstructor
-//@CacheConfig(cacheNames = "quartzLog")
+@CacheConfig(cacheNames = "quartzLog")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class QuartzLogServiceImpl extends ServiceImpl<IQuartzLogMapper, QuartzLog> implements
-		IQuartzLogService {
+	IQuartzLogService {
 
 	@Override
-	//@Cacheable
+	@Cacheable
 	public Map<String, Object> queryAll(QuartzLogQueryCriteria criteria, Pageable pageable) {
 		PageInfo<QuartzLog> page = new PageInfo<>(queryAll(criteria));
 		Map<String, Object> map = new LinkedHashMap<>(2);
@@ -71,10 +68,10 @@ public class QuartzLogServiceImpl extends ServiceImpl<IQuartzLogMapper, QuartzLo
 
 
 	@Override
-	//@Cacheable
+	@Cacheable
 	public List<QuartzLog> queryAll(QuartzLogQueryCriteria criteria) {
 		LambdaQueryWrapper<QuartzLog> query = Wrappers.<QuartzLog>lambdaQuery()
-				.eq(QuartzLog::getId, "1");
+			.eq(QuartzLog::getId, "1");
 
 		return baseMapper.selectList(query);
 	}

@@ -7,7 +7,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.api.model.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;
-import com.taotao.cloud.goods.api.model.query.DraftGoodsPageQuery;
+import com.taotao.cloud.goods.api.model.page.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.DraftGoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.mapper.IDraftGoodsMapper;
 import com.taotao.cloud.goods.biz.model.convert.DraftGoodsConvert;

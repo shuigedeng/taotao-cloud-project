@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
+import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsVO;

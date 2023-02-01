@@ -43,6 +43,10 @@ public class DictRepository extends BaseClassSuperRepository<Dict, Long> {
 		//	Example.of(Dict.builder().dictCode(code).build(), exampleMatcher));
 
 		return findOne((Specification<Dict>) (root, query, builder) -> query.where(
-				builder.equal(root.get("dictCode"), code)).getRestriction());
+			builder.equal(root.get("dictCode"), code)).getRestriction());
+	}
+
+	public boolean existsByDictCode(String dictCode) {
+		return false;
 	}
 }

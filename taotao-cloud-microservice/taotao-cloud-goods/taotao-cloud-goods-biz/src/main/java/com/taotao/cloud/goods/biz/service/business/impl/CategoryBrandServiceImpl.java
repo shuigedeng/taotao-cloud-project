@@ -34,15 +34,16 @@ public class CategoryBrandServiceImpl extends
 
 	@Override
 	public Boolean deleteByCategoryId(Long categoryId) {
-		return this.baseMapper.delete(
-			new LambdaUpdateWrapper<CategoryBrand>().eq(CategoryBrand::getCategoryId, categoryId))
-			> 0;
+		LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
+		wrapper.in(CategoryBrand::getCategoryId, categoryId);
+		return this.baseMapper.delete(wrapper) > 0;
 	}
 
 	@Override
 	public List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId) {
-		return this.list(
-			new LambdaQueryWrapper<CategoryBrand>().in(CategoryBrand::getBrandId, brandId));
+		LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
+		wrapper.in(CategoryBrand::getBrandId, brandId);
+		return this.list(wrapper);
 	}
 
 	@Override

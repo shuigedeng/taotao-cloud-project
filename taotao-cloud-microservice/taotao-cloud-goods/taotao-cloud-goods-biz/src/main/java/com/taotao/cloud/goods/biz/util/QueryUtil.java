@@ -3,9 +3,8 @@ package com.taotao.cloud.goods.biz.util;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.goods.api.model.query.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.api.model.query.GoodsPageQuery;
-import java.util.Arrays;
+import com.taotao.cloud.goods.api.model.page.DraftGoodsPageQuery;
+import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
 import java.util.List;
 import java.util.Objects;
 

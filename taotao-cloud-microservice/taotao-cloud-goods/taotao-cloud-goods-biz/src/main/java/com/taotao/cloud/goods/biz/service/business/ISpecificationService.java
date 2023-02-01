@@ -2,7 +2,7 @@ package com.taotao.cloud.goods.biz.service.business;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.goods.api.model.query.SpecificationPageQuery;
+import com.taotao.cloud.goods.api.model.page.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 

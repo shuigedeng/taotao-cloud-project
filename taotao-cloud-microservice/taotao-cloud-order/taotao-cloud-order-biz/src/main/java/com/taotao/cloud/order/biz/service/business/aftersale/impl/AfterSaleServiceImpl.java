@@ -28,7 +28,7 @@ import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.api.model.query.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.api.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVOBuilder;
 import com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint;
@@ -39,6 +39,7 @@ import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.utils.QueryUtils;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.api.feign.IFeignRefundSupportApi;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
@@ -46,14 +47,13 @@ import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.feign.IFeignLogisticsApi;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * 售后业务层实现
@@ -67,6 +67,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSale> implements
 	IAfterSaleService {
+
 	/**
 	 * 订单
 	 */
@@ -97,14 +98,14 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	private final RocketMQTemplate rocketMQTemplate;
 
 	@Override
-	public IPage<AfterSale> pageQuery(AfterSalePageQuery salePageQuery) {
-		return baseMapper.queryByParams(salePageQuery.buildMpPage(),
-			salePageQuery.queryWrapper());
+	public IPage<AfterSale> pageQuery(AfterSalePageQuery afterSalePageQuery) {
+		return baseMapper.queryByParams(afterSalePageQuery.buildMpPage(),
+			QueryUtils.queryWrapper(afterSalePageQuery));
 	}
 
 	@Override
 	public List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery) {
-		return this.list(afterSalePageQuery.queryWrapper());
+		return this.list(QueryUtils.queryWrapper(afterSalePageQuery));
 	}
 
 	@Override
@@ -176,7 +177,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	//@SystemLogPoint(description = "售后-审核售后", customerLog = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
 	@Override
 	public Boolean review(String afterSaleSn, String serviceStatus, String remark,
-						  BigDecimal actualRefundPrice) {
+		BigDecimal actualRefundPrice) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
@@ -227,7 +228,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	//@SystemLogPoint(description = "售后-买家退货,物流填写", customerLog = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
 	@Override
 	public AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, Long logisticsId,
-								   LocalDateTime mDeliverTime) {
+		LocalDateTime mDeliverTime) {
 		//根据售后单号获取售后单
 		AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 

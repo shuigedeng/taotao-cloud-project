@@ -37,7 +37,7 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.dto.order.OrderBatchDeliverDTO;
 import com.taotao.cloud.order.api.model.message.OrderMessage;
-import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
+import com.taotao.cloud.order.api.model.page.order.OrderPageQuery;
 import com.taotao.cloud.order.api.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;

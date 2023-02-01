@@ -25,8 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-04-28 08:55:40
  */
 @Service
-public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, PurchaseOrder> implements
+public class PurchaseOrderServiceImpl extends
+	ServiceImpl<IPurchaseOrderMapper, PurchaseOrder> implements
 	IPurchaseOrderService {
+
 	@Autowired
 	private IPurchaseOrderItemService purchaseOrderItemService;
 
@@ -40,7 +42,8 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, 
 		purchaseOrder.setMemberId(UserContext.getCurrentUser().getId());
 		this.save(purchaseOrder);
 		//添加采购单子内容
-		purchaseOrderItemService.addPurchaseOrderItem(purchaseOrder.getId(), purchaseOrderVO.getPurchaseOrderItems());
+		purchaseOrderItemService.addPurchaseOrderItem(purchaseOrder.getId(),
+			purchaseOrderVO.getPurchaseOrderItems());
 		return purchaseOrderVO;
 	}
 
@@ -53,7 +56,8 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, 
 
 		//获取采购单子内容
 		purchaseOrderVO.setPurchaseOrderItems(purchaseOrderItemService.list(
-			new LambdaQueryWrapper<PurchaseOrderItem>().eq(PurchaseOrderItem::getPurchaseOrderId, id)));
+			new LambdaQueryWrapper<PurchaseOrderItem>().eq(PurchaseOrderItem::getPurchaseOrderId,
+				id)));
 		return purchaseOrderVO;
 	}
 

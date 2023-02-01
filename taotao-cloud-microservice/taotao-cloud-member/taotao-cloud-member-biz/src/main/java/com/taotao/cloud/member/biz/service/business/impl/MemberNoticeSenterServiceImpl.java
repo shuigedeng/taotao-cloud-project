@@ -41,7 +41,6 @@ public class MemberNoticeSenterServiceImpl extends ServiceImpl<IMemberNoticeSent
 
 	@Override
 	public boolean customSave(MemberNoticeSenter memberNoticeSenter) {
-
 		if (this.saveOrUpdate(memberNoticeSenter)) {
 			List<MemberNotice> memberNotices = new ArrayList<>();
 			//如果是选中会员发送

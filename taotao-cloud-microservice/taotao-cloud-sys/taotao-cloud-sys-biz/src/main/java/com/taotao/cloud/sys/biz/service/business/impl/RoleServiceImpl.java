@@ -15,22 +15,23 @@
  */
 package com.taotao.cloud.sys.biz.service.business.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
 import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
+import com.taotao.cloud.sys.biz.model.entity.system.QRole;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * RoleServiceImpl
@@ -45,15 +46,14 @@ public class RoleServiceImpl extends
 	BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
 	implements IRoleService {
 
-	//private final static QRole SYS_ROLE = QRole.role;
+	private final static QRole SYS_ROLE = QRole.role;
 
 	private final IRoleResourceService roleResourceService;
 
 	@Override
 	public Boolean existRoleByCode(String code) {
-		//BooleanExpression predicate = SYS_ROLE.code.eq(code);
-		//return cr().exists(predicate);
-		return true;
+		BooleanExpression predicate = SYS_ROLE.code.eq(code);
+		return cr().exists(predicate);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.member.api.model.query.MemberPointHistoryPageQuery;
+import com.taotao.cloud.member.api.model.page.MemberPointHistoryPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;

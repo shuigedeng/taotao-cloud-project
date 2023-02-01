@@ -12,7 +12,7 @@ import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;
-import com.taotao.cloud.order.api.model.query.order.OrderPageQuery;
+import com.taotao.cloud.order.api.model.page.order.OrderPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;

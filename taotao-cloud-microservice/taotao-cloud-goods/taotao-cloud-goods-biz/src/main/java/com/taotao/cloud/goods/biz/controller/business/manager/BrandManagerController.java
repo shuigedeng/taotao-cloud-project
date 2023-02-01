@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
-import com.taotao.cloud.goods.api.model.query.BrandPageQuery;
+import com.taotao.cloud.goods.api.model.page.BrandPageQuery;
 import com.taotao.cloud.goods.api.model.vo.BrandVO;
 import com.taotao.cloud.goods.biz.model.convert.BrandConvert;
 import com.taotao.cloud.goods.biz.model.entity.Brand;

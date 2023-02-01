@@ -46,6 +46,7 @@ public class CommodityServiceImpl extends
 	implements ICommodityService {
 
 	private final WechatLivePlayerUtil wechatLivePlayerUtil;
+
 	private final IGoodsSkuService goodsSkuService;
 
 	@Override

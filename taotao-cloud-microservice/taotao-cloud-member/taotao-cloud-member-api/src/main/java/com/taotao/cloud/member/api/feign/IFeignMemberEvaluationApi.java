@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberEvaluationApiFallback;
 import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
-import com.taotao.cloud.member.api.model.query.EvaluationPageQuery;
+import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.api.model.vo.StoreRatingVO;

@@ -20,12 +20,13 @@ import org.springframework.stereotype.Service;
 /**
  * 会员积分历史业务层实现
  *
- * @since 2020-02-25 14:10:16
+ * @author shuigedeng
+ * @version 2023.01
+ * @since 2023-02-01 13:48:04
  */
 @Service
 public class MemberPointsHistoryServiceImpl extends
 	ServiceImpl<IMemberPointsHistoryMapper, MemberPointsHistory> implements IMemberPointsHistoryService {
-
 
 	@Autowired
 	private IMemberService memberService;
