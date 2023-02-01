@@ -2,6 +2,10 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.openfeign.api.ApiInfo;
+import com.taotao.cloud.openfeign.api.ApiInfo.Create;
+import com.taotao.cloud.openfeign.api.ApiInfo.Update;
+import com.taotao.cloud.openfeign.api.VersionEnum;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserApiFallback;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -24,6 +28,13 @@ public interface IFeignUserApi {
 	 * @return 用户信息
 	 * @since 2020/10/21 15:06
 	 */
+	@ApiInfo(
+		create = @Create(version = VersionEnum.V2022_07, date = "2022-07-01 17:11:55"),
+		update = {
+			@Update(version = VersionEnum.V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+			@Update(version = VersionEnum.V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
+		}
+	)
 	@GetMapping(value = "/sys/feign/user/info/username")
 	UserQueryVO findUserInfoByUsername(@RequestParam(value = "username") String username);
 
@@ -35,6 +46,13 @@ public interface IFeignUserApi {
 	 * @return 系统用户信息
 	 * @since 2020/4/29 17:47
 	 */
+	@ApiInfo(
+		create = @Create(version = VersionEnum.V2022_07, date = "2022-07-01 17:11:55"),
+		update = {
+			@Update(version = VersionEnum.V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+			@Update(version = VersionEnum.V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
+		}
+	)
 	@GetMapping(value = "/sys/feign/user/info/social/{social}", headers = {"from=in"})
 	SecurityUser getUserInfoBySocial(@RequestParam("providerId") String providerId,
 		@RequestParam("providerUserId") int providerUserId);
@@ -46,6 +64,13 @@ public interface IFeignUserApi {
 	 * @return 系统用户信息
 	 * @since 2020/4/29 17:48
 	 */
+	@ApiInfo(
+		create = @Create(version = VersionEnum.V2022_07, date = "2022-07-01 17:11:55"),
+		update = {
+			@Update(version = VersionEnum.V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+			@Update(version = VersionEnum.V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
+		}
+	)
 	@GetMapping(value = "/sys/feign/info/security")
 	SecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
 

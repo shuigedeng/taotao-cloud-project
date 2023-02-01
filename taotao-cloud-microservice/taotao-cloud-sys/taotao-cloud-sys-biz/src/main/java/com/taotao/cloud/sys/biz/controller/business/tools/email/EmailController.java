@@ -1,12 +1,15 @@
 package com.taotao.cloud.sys.biz.controller.business.tools.email;
 
-import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
-import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
+import static com.taotao.cloud.openfeign.api.VersionEnum.V2022_07;
+import static com.taotao.cloud.openfeign.api.VersionEnum.V2022_08;
 
 import com.taotao.cloud.cache.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.cache.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.job.quartz.utils.QuartzManager;
+import com.taotao.cloud.openfeign.api.ApiInfo;
+import com.taotao.cloud.openfeign.api.ApiInfo.Create;
+import com.taotao.cloud.openfeign.api.ApiInfo.Update;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.dto.email.EmailDTO;
 import com.taotao.cloud.sys.api.model.vo.alipay.EmailVO;
@@ -14,7 +17,6 @@ import com.taotao.cloud.sys.biz.model.convert.EmailConvert;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.service.business.IEmailConfigService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.web.version.ApiInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -47,10 +49,10 @@ public class EmailController {
 	// private final ScheduledManager scheduledManager;
 	private final IEmailConfigService emailService;
 
-	@ApiInfo(create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
+	@ApiInfo(create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
 		update = {
-			@ApiInfo.Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
-			@ApiInfo.Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
+			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		}
 	)
 	@Operation(summary = "查询邮件配置信息", description = "查询邮件配置信息")
@@ -61,7 +63,7 @@ public class EmailController {
 		return Result.success(emailService.find());
 	}
 
-	@ApiInfo(create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"))
+	@ApiInfo(create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"))
 	@Operation(summary = "配置邮件", description = "配置邮件")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")

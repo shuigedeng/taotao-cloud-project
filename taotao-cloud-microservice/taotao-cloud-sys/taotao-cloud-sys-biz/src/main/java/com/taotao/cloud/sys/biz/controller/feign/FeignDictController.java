@@ -15,16 +15,14 @@
  */
 package com.taotao.cloud.sys.biz.controller.feign;
 
-import static com.taotao.cloud.web.version.VersionEnum.V2022_07;
-import static com.taotao.cloud.web.version.VersionEnum.V2022_08;
-
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.limit.annotation.GuavaLimit;
 import com.taotao.cloud.limit.annotation.Limit;
+import com.taotao.cloud.openfeign.api.ApiInfo;
+import com.taotao.cloud.openfeign.api.VersionEnum;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.api.feign.IFeignDictApi;
 import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
@@ -34,7 +32,6 @@ import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
 import com.taotao.cloud.web.base.controller.BaseFeignController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
-import com.taotao.cloud.web.version.ApiInfo;
 import com.yomahub.tlog.core.annotation.TLogAspect;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.AsyncContext;
@@ -68,18 +65,7 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 @RequestMapping("/sys/feign/dict")
 public class FeignDictController extends BaseFeignController<IDictService, Dict, Long> implements IFeignDictApi {
 
-	@Autowired
-	private IFeignDictService feignDictService;
-	@Autowired
-	private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
-	@ApiInfo(
-		create = @ApiInfo.Create(version = V2022_07, date = "2022-07-01 17:11:55"),
-		update = {
-			@ApiInfo.Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
-			@ApiInfo.Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
-		}
-	)
 	@Override
 	@NotAuth
 	@Idempotent(perFix = "findByCode")
@@ -98,6 +84,7 @@ public class FeignDictController extends BaseFeignController<IDictService, Dict,
 		return DictConvert.INSTANCE.convert(dict);
 	}
 
+	@Override
 	@Operation(summary = "test", description = "test")
 	@RequestLogger
 	@NotAuth
@@ -107,11 +94,11 @@ public class FeignDictController extends BaseFeignController<IDictService, Dict,
 	@GuavaLimit
 	@SentinelResource("test")
 	@GetMapping("/test")
-	public Dict test(@RequestParam(value = "code") String code) {
+	public FeignDictResponse test(@RequestParam(value = "id") String id) {
 		LogUtils.info("sldfkslfdjalsdfkjalsfdjl");
-		Dict dict = service().findByCode(code);
+		Dict dict = service().findByCode(id);
 
-		Future<Dict> asyncByCode = service().findAsyncByCode(code);
+		Future<Dict> asyncByCode = service().findAsyncByCode(id);
 
 		Dict dict1;
 		try {
@@ -122,121 +109,9 @@ public class FeignDictController extends BaseFeignController<IDictService, Dict,
 
 		LogUtils.info("我在等待你");
 
-		return dict1;
+		return null;
 		//return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);
 	}
 
-	/**
-	 * @Async、WebAsyncTask、Callable、DeferredResult的区别 所在的包不同：
-	 * @Async：org.springframework.scheduling.annotation;
-	 * WebAsyncTask：org.springframework.web.context.request.async; Callable：java.util.concurrent；
-	 * DeferredResult：org.springframework.web.context.request.async;
-	 * 通过所在的包，我们应该隐隐约约感到一些区别，比如@Async是位于scheduling包中，而WebAsyncTask和DeferredResult是用于Web（Spring
-	 * MVC）的，而Callable是用于concurrent（并发）处理的。
-	 * <p>
-	 * 对于Callable，通常用于Controller方法的异步请求，当然也可以用于替换Runable的方式。在方法的返回上与正常的方法有所区别：
-	 * <p>
-	 * 而WebAsyncTask是对Callable的封装，提供了一些事件回调的处理，本质上区别不大。
-	 * <p>
-	 * DeferredResult使用方式与Callable类似，重点在于跨线程之间的通信。
-	 * @Async也是替换Runable的一种方式，可以代替我们自己创建线程。而且适用的范围更广，并不局限于Controller层，而可以是任何层的方法上。
-	 */
-	@RequestMapping("/asyncTask")
-	public void asyncTask(HttpServletRequest request,
-		HttpServletResponse response) throws Exception {
-		System.out.println("控制层线程:" + Thread.currentThread().getName());
-		AsyncContext asyncContext = request.startAsync();
-		asyncContext.addListener(new AsyncListener() {
-			@Override
-			public void onComplete(AsyncEvent asyncEvent) throws IOException {
-				// 异步执行完毕时
-				System.out.println("异步执行完毕");
-			}
-
-			@Override
-			public void onTimeout(AsyncEvent asyncEvent) throws IOException {
-				//异步线程执行超时
-				System.out.println("异步线程执行超时");
-			}
-
-			@Override
-			public void onError(AsyncEvent asyncEvent) throws IOException {
-				//异步线程出错时
-				System.out.println("异步线程出错");
-			}
-
-			@Override
-			public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
-				//异步线程开始时
-				System.out.println("异步线程开始");
-			}
-		});
-		asyncContext.setTimeout(3000);
-		asyncContext.start(() -> {
-			try {
-				System.out.println("异步执行线程:" + Thread.currentThread().getName());
-				//String str = piceaService.task2();
-				Thread.sleep(1000);
-				asyncContext.getResponse().setCharacterEncoding("UTF-8");
-				asyncContext.getResponse().setContentType("text/html;charset=UTF-8");
-				asyncContext.getResponse().getWriter().println("这是【异步】的请求返回: ");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			//异步请求完成通知，所有任务完成了，才执行
-			asyncContext.complete();
-		});
-
-	}
-
-	/*** 异步，不阻塞Tomcat的线程 ，提升Tomcat吞吐量***/
-	@RequestMapping("/async")
-	public DeferredResult<String> async() {
-		System.out.println(" 当前线程 外部 " + Thread.currentThread().getName());
-		DeferredResult<String> result = new DeferredResult<>();
-		CompletableFuture.supplyAsync(() -> service().async(), asyncThreadPoolTaskExecutor)
-			.whenCompleteAsync((res, throwable) -> result.setResult(res));
-		return result;
-	}
-
-	/*** 异步，不阻塞Tomcat的线程 ，提升Tomcat吞吐量***/
-	@RequestMapping("/async2")
-	public Callable<String> async2() {
-		System.out.println(" 当前线程 外部 " + Thread.currentThread().getName());
-		Callable<String> callable = () -> {
-			System.out.println(" 当前线程 内部 " + Thread.currentThread().getName());
-			return "success";
-		};
-		return callable;
-	}
-
-	@GetMapping("/webAsyncTask")
-	public WebAsyncTask<String> webAsyncTask() {
-		LogUtils.info("外部线程：" + Thread.currentThread().getName());
-		WebAsyncTask<String> result = new WebAsyncTask<>(60 * 1000L, () -> {
-			LogUtils.info("内部线程：" + Thread.currentThread().getName());
-			return "success";
-		});
-		result.onTimeout(() -> {
-			LogUtils.info("timeout callback");
-			return "timeout callback";
-		});
-		result.onCompletion(() -> LogUtils.info("finish callback"));
-		return result;
-	}
-
-	@GetMapping("/email")
-	public Callable<String> order() {
-		System.out.println("主线程开始：" + Thread.currentThread().getName());
-		Callable<String> result = () -> {
-			System.out.println("副线程开始：" + Thread.currentThread().getName());
-			Thread.sleep(1000);
-			System.out.println("副线程返回：" + Thread.currentThread().getName());
-			return "success";
-		};
-
-		System.out.println("主线程返回：" + Thread.currentThread().getName());
-		return result;
-	}
 
 }
