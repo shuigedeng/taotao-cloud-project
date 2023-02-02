@@ -1308,6 +1308,8 @@ spring:
     compatibility-verifier:
       enabled: false
     loadbalancer:
+      #nacos:
+      #  enabled: true
       enabled: true
     function:
       # functionName对应服务中的Bean
