@@ -6,7 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@MapperScan(basePackages = "com.taotao.cloud.store.biz.mapper")
+@MapperScan("com.user.demo.service.infrastructure.*.mapper")
 @EnableJpaRepositories(basePackages = "com.taotao.cloud.stock.biz.repository.inf")
 @TaoTaoCloudApplication
 public class TaoTaoCloudStockApplication {
