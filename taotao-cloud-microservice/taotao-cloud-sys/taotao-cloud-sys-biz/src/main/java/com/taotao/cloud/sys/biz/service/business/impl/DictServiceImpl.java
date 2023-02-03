@@ -30,9 +30,12 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.data.jpa.model.SelectBooleanBuilder;
 import com.taotao.cloud.data.jpa.model.SelectBuilder;
 import com.taotao.cloud.sys.api.model.page.DictPageQuery;
+import com.taotao.cloud.sys.api.model.query.DictQuery;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
+import com.taotao.cloud.sys.biz.model.bo.DictDeptBO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.model.entity.dict.QDict;
+import com.taotao.cloud.sys.biz.model.params.DictDeptParams;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictItemService;
@@ -230,6 +233,15 @@ public class DictServiceImpl extends
 		List<Dict> dicts1 = ir().saveAllAndFlush(List.of(d3, d4));
 
 		return true;
+	}
+
+	@Override
+	public Dict testMybatisQueryStructure(DictQuery dictQuery) {
+		DictDeptParams params = new DictDeptParams();
+		params.setIds(List.of(dictQuery.getDictId()));
+		List<DictDeptBO> dictDeptBOS = this.baseMapper.testMybatisQueryStructure(params);
+
+		return null;
 	}
 
 	//****************************************************************

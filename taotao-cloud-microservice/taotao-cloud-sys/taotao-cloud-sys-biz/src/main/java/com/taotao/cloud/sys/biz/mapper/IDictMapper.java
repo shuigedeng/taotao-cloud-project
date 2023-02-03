@@ -15,9 +15,13 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
+import com.taotao.cloud.sys.biz.model.bo.DictDeptBO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.model.params.DictDeptParams;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * CompanyMapper
@@ -29,4 +33,15 @@ import org.apache.ibatis.annotations.Mapper;
 
 public interface IDictMapper extends BaseSuperMapper<Dict, Long> {
 
+	@Select("""
+		select dict.id as id,
+		dict.description as description,
+		dict.itemValue as itemValue,
+		dict.itemText as itemText,
+		dept.id as deptId,
+		dept.parentId as parentId
+		from tt_dict dict left join tt_dept dept on dict.id = dept.id
+		where dict.id in #{params.ids}
+		""")
+	List<DictDeptBO> testMybatisQueryStructure(@Param("params") DictDeptParams params);
 }

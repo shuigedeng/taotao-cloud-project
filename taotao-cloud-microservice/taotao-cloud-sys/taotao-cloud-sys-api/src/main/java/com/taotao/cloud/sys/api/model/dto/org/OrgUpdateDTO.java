@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.model.dto.company;
+package com.taotao.cloud.sys.api.model.dto.org;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,7 +39,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "公司更新对象")
-public class CompanyUpdateDTO implements Serializable {
+public class OrgUpdateDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
