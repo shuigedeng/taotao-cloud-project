@@ -108,6 +108,13 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
                   -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
 
+#远程debug选项 只能在测试环境使用
+#1.使用容器部署时 ENTRYPOINT后面加上DEBUG_OPTIONS
+#2.使用jar部署时 java -XDebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889 -jar demo
+EXPOSE 8889
+ENV DEBUG_OPTIONS = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889 \
+                  -XDebug "
+
 USER root
 
 WORKDIR /root
