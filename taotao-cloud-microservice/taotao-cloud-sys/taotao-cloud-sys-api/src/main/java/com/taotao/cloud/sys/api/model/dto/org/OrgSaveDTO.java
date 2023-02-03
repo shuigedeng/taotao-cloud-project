@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.model.dto.company;
+package com.taotao.cloud.sys.api.model.dto.org;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,7 +27,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * 公司查询对象
+ * 公司新增对象
  *
  * @author shuigedeng
  * @version 2021.10
@@ -38,8 +38,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "公司查询对象")
-public class CompanyQueryDTO implements Serializable {
+@Schema(description = "公司新增对象")
+public class OrgSaveDTO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
@@ -83,4 +83,5 @@ public class CompanyQueryDTO implements Serializable {
 
 	@Schema(description = "公司类型")
 	private Integer type;
+
 }

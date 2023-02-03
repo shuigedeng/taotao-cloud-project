@@ -16,6 +16,7 @@
 package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.sys.api.model.page.DictPageQuery;
+import com.taotao.cloud.sys.api.model.query.DictQuery;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -107,4 +108,7 @@ public interface IDictService extends BaseSuperService<Dict, Long> {
 	Boolean add(String type) throws SQLIntegrityConstraintViolationException;
 
 	Boolean add1();
+
+	Dict testMybatisQueryStructure(DictQuery dictQuery);
+
 }
