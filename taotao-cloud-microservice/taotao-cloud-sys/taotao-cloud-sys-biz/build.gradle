@@ -69,6 +69,8 @@ dependencies {
     //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
     implementation 'org.apache.velocity:velocity-engine-core:2.3'
 
+    implementation 'org.freemarker:freemarker:2.3.32'
+
     //implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.8.1'
 
     //implementation "io.github.shuigedeng:taotao-cloud-starter-apt")
@@ -127,12 +129,9 @@ configurations {
 
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
-            //force "com.alibaba.nacos:nacos-client:2.1.0" 4.8
             force 'org.antlr:antlr4:4.10.1'
         }
 
-        //exclude group: "org.codehaus.groovy", module: "groovy"
-        //exclude group: "org.projectlombok", module: "lombok"
         //exclude group: "log4j", module: "log4j"
         //exclude group: "log4j", module: "slf4j-simple"
         //exclude group: "org.slf4j", module: "slf4j-log4j12"
@@ -140,7 +139,6 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-        //exclude group: "org.apache.dubbo", module: "dubbo"
     }
 }
 
