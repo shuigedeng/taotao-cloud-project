@@ -55,7 +55,7 @@ public class IpRule extends AbstractRule {
 			rExpirationTime.set(0L);
 			rExpirationTime.expire(Duration.ofMillis(expirationTime));
 		} else {
-			RMap rHitMap = redissonClient.getMap(RATELIMITER_HIT_CRAWLERSTRATEGY);
+			RMap<String, String> rHitMap = redissonClient.getMap(RATELIMITER_HIT_CRAWLERSTRATEGY);
 			if ((rRequestCount.incrementAndGet() > requestMaxSize) || rHitMap.containsKey(
 				ipAddress)) {
 				//触发爬虫策略 ，默认10天后可重新访问
@@ -95,7 +95,7 @@ public class IpRule extends AbstractRule {
 		/**
 		 * 清除记录
 		 */
-		RMap rHitMap = redissonClient.getMap(RATELIMITER_HIT_CRAWLERSTRATEGY);
+		RMap<String, String> rHitMap = redissonClient.getMap(RATELIMITER_HIT_CRAWLERSTRATEGY);
 		rHitMap.remove(ipAddress);
 	}
 

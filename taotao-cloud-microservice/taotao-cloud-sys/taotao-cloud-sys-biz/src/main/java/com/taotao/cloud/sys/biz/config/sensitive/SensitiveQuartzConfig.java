@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.biz.config.sensitive;
 
-import com.taotao.cloud.sensitive.word.SensitiveWordsRunner;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.SimpleScheduleBuilder;
@@ -17,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2022-03-25 15:01:33
  */
 @Configuration
-public class SensitiveQuartzAutoConfiguration {
+public class SensitiveQuartzConfig {
 
 	@Bean
 	public JobDetail sensitiveQuartzDetail() {

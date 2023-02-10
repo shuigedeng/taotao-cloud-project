@@ -24,8 +24,8 @@ import org.springframework.stereotype.Repository;
  * CompanyMapper
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2021/10/13 22:50
+ * @version 2023.01
+ * @since 2023-02-10 17:00:04
  */
 @Repository
 public class UserRepository extends BaseClassSuperRepository<User, Long> {
