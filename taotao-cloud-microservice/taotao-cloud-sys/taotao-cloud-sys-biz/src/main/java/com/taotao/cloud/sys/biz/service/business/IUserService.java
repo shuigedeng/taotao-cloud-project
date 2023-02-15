@@ -24,13 +24,27 @@ import java.util.Set;
  * ISysUserService
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-09 20:48:28
+ * @version 2023.01
+ * @since 2023-02-15 14:43:45
  */
 public interface IUserService extends BaseSuperService<User, Long> {
 
+	/**
+	 * 保存用户
+	 *
+	 * @param user 用户
+	 * @return {@link User }
+	 * @since 2023-02-15 14:43:47
+	 */
 	User saveUser(User user);
 
+	/**
+	 * 更新用户
+	 *
+	 * @param user 用户
+	 * @return {@link User }
+	 * @since 2023-02-15 14:43:50
+	 */
 	User updateUser(User user);
 
 	/**
