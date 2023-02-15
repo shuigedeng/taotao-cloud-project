@@ -17,7 +17,6 @@ package com.taotao.cloud.order.biz.model.params;
 
 
 import io.soabase.recordbuilder.core.RecordBuilder;
-
 import java.io.Serializable;
 
 /**
@@ -28,7 +27,7 @@ import java.io.Serializable;
  * @since 2021-10-19 20:47:05
  */
 @RecordBuilder
-public record CompanyParams(
+public record OrgParams(
 	/**
 	 * 租户id
 	 */

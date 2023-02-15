@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.model.dto.user.RestPasswordUserDTO;
+import com.taotao.cloud.sys.biz.manager.UserManager;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.QUser;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
@@ -29,17 +30,16 @@ import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
 import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * UserServiceImpl
@@ -60,6 +60,7 @@ public class UserServiceImpl extends
 	private final static String DEFAULT_USERNAME = "admin";
 
 	private final IUserRelationService userRelationService;
+	private final UserManager userManager;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -67,7 +68,8 @@ public class UserServiceImpl extends
 		if (Objects.nonNull(sysUser.getId())) {
 			throw new BusinessException("不允许存在id值");
 		}
-		Optional<User> byIdWithColumns = findByIdWithColumns(sysUser.getId(), User::getId, User::getUsername, User::getPhone);
+		Optional<User> byIdWithColumns = findByIdWithColumns(sysUser.getId(), User::getId,
+			User::getUsername, User::getPhone);
 
 		String phone = sysUser.getPhone();
 		Boolean isExists = existsByPhone(phone);
