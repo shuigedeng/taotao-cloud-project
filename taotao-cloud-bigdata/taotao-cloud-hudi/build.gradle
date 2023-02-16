@@ -79,7 +79,7 @@ configurations {
 
 shadowJar {
     mergeServiceFiles()
-    classifier = null
+    archiveClassifier = null
 
 //    transform(Log4j2PluginsCacheFileTransformer)
 //    version = 1.0
