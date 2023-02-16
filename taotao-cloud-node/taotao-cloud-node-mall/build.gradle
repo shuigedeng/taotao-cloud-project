@@ -6,7 +6,7 @@ buildscript {
 
     dependencies {
         //https://plugins.gradle.org/plugin/com.github.node-gradle.node
-        classpath "com.github.node-gradle:gradle-node-plugin:3.4.0"
+        classpath "com.github.node-gradle:gradle-node-plugin:3.5.1"
     }
 }
 
