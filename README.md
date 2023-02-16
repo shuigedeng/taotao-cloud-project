@@ -66,7 +66,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 17 (推荐使用graalvm-22.3)
-GRALE_VERSION >= 7.6
+GRALE_VERSION >= 8.0
 IDEA_VERSION >= 2022.3.2
 ```
 
@@ -108,26 +108,26 @@ Maven:
 
 ## 5. 核心依赖
 
-依赖                   | 版本
-----------------------|---------------
-Spring               | 6.0.4
-Spring Boot          | 3.0.1
-Spring Cloud         | 2022.0.0
-Spring Cloud Alibaba | 2022.0.0.0--RC1
-Spring Cloud Tencent | 1.8.2--2022.0.0
-Spring Security      | 6.0.1
-Mybatis Plus         | 3.5.3.1
-Hutool               | 5.8.11
-Mysql                | 8.0.31
-Querydsl             | 5.0.0
-Swagger              | 3.0.0
-Knife4j              | 4.0.0
-Redisson             | 3.19.1
-Lettuce              | 6.0.2.RELEASE
-Elasticsearch        | 8.5.3
-Xxl-job              | 2.3.1
-EasyCaptcha          | 1.6.2
-Guava                | 31.1-jre
+ 依赖                   | 版本              
+----------------------|-----------------
+ Spring               | 6.0.4           
+ Spring Boot          | 3.0.1           
+ Spring Cloud         | 2022.0.0        
+ Spring Cloud Alibaba | 2022.0.0.0--RC1 
+ Spring Cloud Tencent | 1.8.2--2022.0.0 
+ Spring Security      | 6.0.1           
+ Mybatis Plus         | 3.5.3.1         
+ Hutool               | 5.8.11          
+ Mysql                | 8.0.31          
+ Querydsl             | 5.0.0           
+ Swagger              | 3.0.0           
+ Knife4j              | 4.0.0           
+ Redisson             | 3.19.1          
+ Lettuce              | 6.0.2.RELEASE   
+ Elasticsearch        | 8.5.3           
+ Xxl-job              | 2.3.1           
+ EasyCaptcha          | 1.6.2           
+ Guava                | 31.1-jre        
 
 ## 6. 演示地址
 

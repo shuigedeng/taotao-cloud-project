@@ -52,7 +52,7 @@ tasks.withType(Jar) {
 
 jar {
     enabled = true
-    classifier = null
+    archiveClassifier = null
 
     manifest {
         attributes(

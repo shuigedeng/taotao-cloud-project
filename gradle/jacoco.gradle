@@ -3,7 +3,7 @@ apply plugin: 'jacoco'
 
 jacoco {
     toolVersion = "0.8.8"
-    reportsDir = file("$buildDir/customJacocoReportDir")
+    reportsDirectory = file("$buildDir/customJacocoReportDir")
 }
 /**
  * 添加jacoco测试覆盖率
@@ -12,9 +12,9 @@ jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
 
     reports {
-        xml.enabled true
-        csv.enabled true
-        html.enabled true
+        xml.required = true
+        csv.required = true
+        html.required = true
 
         xml.destination file("${buildDir}/jacoco/coverage-reports/jacoco.xml")
         csv.destination file("${buildDir}/jacoco/coverage-reports/jacoco.csv")
