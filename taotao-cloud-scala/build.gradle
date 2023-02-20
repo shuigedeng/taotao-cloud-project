@@ -11,7 +11,7 @@ dependencies {
 
     //implementation "org.scala-lang:scala-implementationr:2.12.8"
 
-    implementation 'com.typesafe.akka:akka-slf4j_2.13:2.8.0-M4'
-    implementation 'com.typesafe.akka:akka-actor_2.13:2.8.0-M4'
-    implementation 'com.typesafe.akka:akka-remote_2.13:2.8.0-M4'
+    implementation 'com.typesafe.akka:akka-slf4j_2.13:2.8.0-M5'
+    implementation 'com.typesafe.akka:akka-actor_2.13:2.8.0-M5'
+    implementation 'com.typesafe.akka:akka-remote_2.13:2.8.0-M5'
 }

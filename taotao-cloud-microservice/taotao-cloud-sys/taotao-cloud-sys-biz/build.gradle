@@ -49,9 +49,9 @@ dependencies {
     implementation "com.googlecode.aviator:aviator:5.3.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:3.21.12"
+    implementation "com.google.protobuf:protobuf-java:3.22.0"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:3.21.12"
+    implementation "com.google.protobuf:protobuf-java-util:3.22.0"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
     //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 
@@ -103,7 +103,7 @@ dependencies {
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
     //implementation "commons-dbutils:commons-dbutils:1.5"
     //implementation "com.github.jsqlparser:jsqlparser:0.9.5"
-    //implementation "com.alibaba:druid:1.2.11"
+    //implementation "com.alibaba:druid:1.2.16"
     //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}

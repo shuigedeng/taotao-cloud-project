@@ -1,8 +1,8 @@
 dependencies {
-    api "org.lionsoul:ip2region:2.6.6"
+    api "org.lionsoul:ip2region:2.7.0"
     api "org.springframework.security:spring-security-core:6.0.1"
 
-    api "org.springframework:spring-test:6.0.3"
+    api "org.springframework:spring-test:6.0.4"
     api "commons-collections:commons-collections:3.2.2"
     api "com.aliyun:aliyun-java-sdk-core:4.6.3"
 
@@ -31,13 +31,13 @@ dependencies {
 
     api "mysql:mysql-connector-java"
 
-    api "com.baomidou:mybatis-plus-boot-starter:3.5.3"
-    api "com.baomidou:mybatis-plus-generator:3.5.3"
+    api "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
+    api "com.baomidou:mybatis-plus-generator:3.5.3.1"
 
     api "org.apache.velocity:velocity-engine-core:2.3"
 
-    api 'cn.hutool:hutool-all:5.8.11'
-    api 'com.alibaba.fastjson2:fastjson2:2.0.21'
+    api 'cn.hutool:hutool-all:5.8.12'
+    api 'com.alibaba.fastjson2:fastjson2:2.0.24'
 
     api "io.jsonwebtoken:jjwt:0.9.1"
     api 'joda-time:joda-time:2.12.2'

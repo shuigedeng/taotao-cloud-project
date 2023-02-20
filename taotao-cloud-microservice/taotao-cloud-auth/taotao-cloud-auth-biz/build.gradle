@@ -31,7 +31,7 @@ dependencies {
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
     implementation "org.webjars:webjars-locator-core:0.52"
 
-    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.1.0.RELEASE"
+    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.1.1.RELEASE"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     implementation("org.springframework.boot:spring-boot-starter-web") {
@@ -54,7 +54,7 @@ dependencies {
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     implementation "com.nimbusds:nimbus-jose-jwt:9.30.2"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation "com.nimbusds:oauth2-oidc-sdk:10.6"
+    implementation "com.nimbusds:oauth2-oidc-sdk:10.7"
 
     implementation "org.apache.commons:commons-collections4"
 
@@ -65,7 +65,7 @@ dependencies {
     implementation "io.projectreactor.netty:reactor-netty"
 
     //百度人脸识别以及登录
-    implementation("com.baidu.aip:java-sdk:4.16.11") {
+    implementation("com.baidu.aip:java-sdk:4.16.14") {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-api"
