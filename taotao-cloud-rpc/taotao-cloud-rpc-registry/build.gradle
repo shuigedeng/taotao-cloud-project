@@ -1,5 +1,5 @@
 dependencies {
-    implementation("org.apache.zookeeper:zookeeper:3.8.0"){
+    implementation("org.apache.zookeeper:zookeeper:3.8.1") {
         exclude group: "javax.jms", module: "jms"
         exclude group: "jmxtools", module: "com.sun.jdmk"
         exclude group: "jmxri", module: "com.sun.jmx"

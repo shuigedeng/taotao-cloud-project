@@ -21,19 +21,19 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    implementation("com.alipay.sdk:alipay-sdk-java:4.22.32.ALL") {
+    implementation("com.alipay.sdk:alipay-sdk-java:4.35.45.ALL") {
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "xml-apis", module: "xml-apis"
     }
 
-    implementation "com.github.javen205:IJPay-All:2.8.1"
+    implementation "com.github.javen205:IJPay-All:2.9.6-17"
 
-    implementation "com.github.binarywang:weixin-java-pay:4.1.0"
-    implementation "com.github.binarywang:weixin-java-mp:4.1.0"
-    implementation "com.paypal.sdk:checkout-sdk:1.0.5"
+    implementation "com.github.binarywang:weixin-java-pay:4.4.8.B"
+    implementation "com.github.binarywang:weixin-java-mp:4.4.8.B"
+    implementation "com.paypal.sdk:checkout-sdk:2.0.0"
 
-    implementation "com.yungouos.pay:yungouos-pay-sdk:2.0.26"
+    implementation "com.yungouos.pay:yungouos-pay-sdk:2.0.29"
 
     implementation 'jakarta.jms:jakarta.jms-api:3.1.0'
 }

@@ -23,7 +23,7 @@ dependencies {
         exclude group: "org.eclipse.jetty.aggregate", module: "*"
     }
 
-    implementation 'com.alibaba:druid-spring-boot-starter:1.2.15'
+    implementation 'com.alibaba:druid-spring-boot-starter:1.2.16'
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
 
 }

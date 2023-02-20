@@ -28,8 +28,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
 
     implementation "mysql:mysql-connector-java"
-    implementation "com.baomidou:mybatis-plus-boot-starter:3.5.3"
-    implementation 'com.alibaba:druid-spring-boot-starter:1.2.15'
+    implementation "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
+    implementation 'com.alibaba:druid-spring-boot-starter:1.2.16'
 
 //    implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
 //    implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
@@ -39,16 +39,16 @@ dependencies {
     implementation "ru.yandex.clickhouse:clickhouse-jdbc:0.3.2"
 
     //trino
-    implementation "io.trino:trino-jdbc:406"
-    implementation "io.trino:trino-spi:406"
-    implementation "io.trino:trino-main:406"
+    implementation "io.trino:trino-jdbc:407"
+    implementation "io.trino:trino-spi:407"
+    implementation "io.trino:trino-main:407"
     implementation "io.airlift:slice:0.44"
     implementation "io.airlift:units:1.8"
     implementation "com.google.guava:guava:31.1-jre"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.14.0"
 
     //hbase
-    implementation "org.apache.hbase:hbase-client:2.5.2-hadoop3"
+    implementation "org.apache.hbase:hbase-client:2.5.3-hadoop3"
 
 }
 

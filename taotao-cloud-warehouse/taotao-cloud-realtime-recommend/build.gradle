@@ -6,9 +6,9 @@ dependencies {
     implementation "org.apache.mahout:mahout-examples:0.13.0"
     implementation "junit:junit:4.13.2"
 
-    implementation "org.springframework:spring-jdbc:6.0.3"
-    implementation "org.springframework:spring-core:6.0.3"
-    implementation "org.springframework:spring-context:6.0.3"
+    implementation "org.springframework:spring-jdbc:6.0.4"
+    implementation "org.springframework:spring-core:6.0.4"
+    implementation "org.springframework:spring-context:6.0.4"
 
     implementation "javassist:javassist:3.12.1.GA"
     implementation "javax.servlet:servlet-api:2.5"
@@ -17,7 +17,7 @@ dependencies {
     implementation "org.jsoup:jsoup:1.15.3"
     implementation 'io.netty:netty-all'
     implementation "org.apache.commons:commons-lang3:3.12.0"
-    implementation 'redis.clients:jedis:4.4.0-m1'
+    implementation 'redis.clients:jedis:4.4.0-m2'
 
     //需要在自己本地安装jar包
     //compile "org.wltea.ik-analyzer:ik-analyzer:4.10.2"
