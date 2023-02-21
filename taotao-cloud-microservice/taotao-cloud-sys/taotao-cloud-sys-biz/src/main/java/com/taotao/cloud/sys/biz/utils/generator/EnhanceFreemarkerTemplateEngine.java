@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import java.util.List;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,8 +14,8 @@ import org.springframework.stereotype.Component;
 public class EnhanceFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
 	@Override
-	protected void outputCustomFile(@NotNull List<CustomFile> customFiles,
-		@NotNull TableInfo tableInfo, @NotNull Map<String, Object> objectMap) {
+	protected void outputCustomFile(List<CustomFile> customFiles,
+		TableInfo tableInfo, Map<String, Object> objectMap) {
 		//String entityName = tableInfo.getEntityName();
 		//String otherPath = this.getPathInfo(OutputFile.other);
 		//customFile.forEach((key, value) -> {

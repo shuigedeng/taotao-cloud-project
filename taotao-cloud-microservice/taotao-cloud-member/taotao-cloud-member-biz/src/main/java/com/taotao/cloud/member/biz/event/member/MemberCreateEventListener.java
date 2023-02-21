@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.member.biz.event.member;
 
-import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -36,7 +34,7 @@ public class MemberCreateEventListener {
 
 	@Async
 	@EventListener(MemberCreateEvent.class)
-	public void saveAfterSaleLog(@NotNull MemberCreateEvent event) {
+	public void saveAfterSaleLog(MemberCreateEvent event) {
 		//AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
 		//afterSaleLogService.save(afterSaleLog);
 	}

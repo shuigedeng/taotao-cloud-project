@@ -9,43 +9,45 @@ import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.listener.action.CopyContentActionListener;
 import com.taotao.cloud.idea.plugin.listener.document.UrlEncodeAndDecodeDocumentListener;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class URLEncodeAndDecodeUI {
-    private JPanel panel;
-    private EditorTextField textField;
-    private JButton copy;
-    private EditorTextField resultTextField;
 
-    private Project project;
+	private JPanel panel;
+	private EditorTextField textField;
+	private JButton copy;
+	private EditorTextField resultTextField;
 
-    public URLEncodeAndDecodeUI(Project project, ToolkitCommand command) {
-        this.project = project;
-        copy.addActionListener(new CopyContentActionListener(this.resultTextField));
+	private Project project;
 
-        this.textField.addDocumentListener(new UrlEncodeAndDecodeDocumentListener(command, textField, resultTextField));
-    }
+	public URLEncodeAndDecodeUI(Project project, ToolkitCommand command) {
+		this.project = project;
+		copy.addActionListener(new CopyContentActionListener(this.resultTextField));
 
-    private void createUIComponents() {
-        this.textField = new EditorTextField(EditorFactory.getInstance().createDocument(""), project, FileTypes.PLAIN_TEXT, false, false);
-        this.textField.addSettingsProvider(getEditorSettingsProvider());
+		this.textField.addDocumentListener(
+			new UrlEncodeAndDecodeDocumentListener(command, textField, resultTextField));
+	}
 
-        this.resultTextField = new EditorTextField(EditorFactory.getInstance().createDocument(""), project, FileTypes.PLAIN_TEXT, true, false);
-        this.resultTextField.addSettingsProvider(getEditorSettingsProvider());
-    }
+	private void createUIComponents() {
+		this.textField = new EditorTextField(EditorFactory.getInstance().createDocument(""),
+			project, FileTypes.PLAIN_TEXT, false, false);
+		this.textField.addSettingsProvider(getEditorSettingsProvider());
 
-    @NotNull
-    private EditorSettingsProvider getEditorSettingsProvider() {
-        return editor -> {
-            EditorSettings settings = editor.getSettings();
-            settings.setUseSoftWraps(true);
-            settings.setLineNumbersShown(true);
-        };
-    }
+		this.resultTextField = new EditorTextField(EditorFactory.getInstance().createDocument(""),
+			project, FileTypes.PLAIN_TEXT, true, false);
+		this.resultTextField.addSettingsProvider(getEditorSettingsProvider());
+	}
 
-    public JPanel getPanel() {
-        return this.panel;
-    }
+	private EditorSettingsProvider getEditorSettingsProvider() {
+		return editor -> {
+			EditorSettings settings = editor.getSettings();
+			settings.setUseSoftWraps(true);
+			settings.setLineNumbersShown(true);
+		};
+	}
+
+	public JPanel getPanel() {
+		return this.panel;
+	}
 }

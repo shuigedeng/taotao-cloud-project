@@ -12,88 +12,87 @@ import com.intellij.ui.LanguageTextField;
 import com.taotao.cloud.idea.plugin.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.listener.action.CopyContentActionListener;
 import com.taotao.cloud.idea.plugin.listener.document.DateTimestampDocumentListener;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class DateTimestampUI {
-    private JPanel panel;
-    private EditorTextField textField;
-    private EditorTextField localTimeTextField;
-    private EditorTextField localDateTextField;
-    private EditorTextField secondTextField;
-    private EditorTextField millisTextField;
-    private EditorTextField utcTimeTextField;
 
-    private JButton localTimeCopy;
-    private JButton localDateCopy;
-    private JButton secondCopy;
-    private JButton millisCopy;
-    private JButton utcCopy;
+	private JPanel panel;
+	private EditorTextField textField;
+	private EditorTextField localTimeTextField;
+	private EditorTextField localDateTextField;
+	private EditorTextField secondTextField;
+	private EditorTextField millisTextField;
+	private EditorTextField utcTimeTextField;
 
-    private Project project;
+	private JButton localTimeCopy;
+	private JButton localDateCopy;
+	private JButton secondCopy;
+	private JButton millisCopy;
+	private JButton utcCopy;
 
-    public DateTimestampUI(Project project, ToolkitCommand command) {
-        this.project = project;
-        this.localTimeCopy.addActionListener(new CopyContentActionListener(localTimeTextField));
-        this.localDateCopy.addActionListener(new CopyContentActionListener(localDateTextField));
-        this.secondCopy.addActionListener(new CopyContentActionListener(secondTextField));
-        this.millisCopy.addActionListener(new CopyContentActionListener(millisTextField));
-        this.utcCopy.addActionListener(new CopyContentActionListener(utcTimeTextField));
+	private Project project;
 
-        this.textField.addDocumentListener(new DateTimestampDocumentListener(command,
-                this.textField, this.localTimeTextField,
-                this.localDateTextField, this.secondTextField,
-                this.millisTextField, this.utcTimeTextField));
+	public DateTimestampUI(Project project, ToolkitCommand command) {
+		this.project = project;
+		this.localTimeCopy.addActionListener(new CopyContentActionListener(localTimeTextField));
+		this.localDateCopy.addActionListener(new CopyContentActionListener(localDateTextField));
+		this.secondCopy.addActionListener(new CopyContentActionListener(secondTextField));
+		this.millisCopy.addActionListener(new CopyContentActionListener(millisTextField));
+		this.utcCopy.addActionListener(new CopyContentActionListener(utcTimeTextField));
 
-        initTextField(command);
-    }
+		this.textField.addDocumentListener(new DateTimestampDocumentListener(command,
+			this.textField, this.localTimeTextField,
+			this.localDateTextField, this.secondTextField,
+			this.millisTextField, this.utcTimeTextField));
 
-    private void initTextField(ToolkitCommand command) {
-        if (ToolkitCommand.Date.equals(command)) {
-            this.textField.setText(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
-        } else if (ToolkitCommand.Timestamp.equals(command)) {
-            this.textField.setText(String.valueOf(DateTime.now().getTime()));
-        }
-    }
+		initTextField(command);
+	}
 
-    public JPanel getPanel() {
-        return panel;
-    }
+	private void initTextField(ToolkitCommand command) {
+		if (ToolkitCommand.Date.equals(command)) {
+			this.textField.setText(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+		} else if (ToolkitCommand.Timestamp.equals(command)) {
+			this.textField.setText(String.valueOf(DateTime.now().getTime()));
+		}
+	}
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        this.textField = new LanguageTextField(PlainTextLanguage.INSTANCE, project, "", true);
-        this.textField.setPlaceholder("yyyy-MM-dd HH:mm:ss");
-        this.textField.addSettingsProvider(getEditorSettingsProvider());
+	public JPanel getPanel() {
+		return panel;
+	}
 
-        this.localTimeTextField = createPlainTextEditor();
-        this.localTimeTextField.addSettingsProvider(getEditorSettingsProvider());
+	private void createUIComponents() {
+		// TODO: place custom component creation code here
+		this.textField = new LanguageTextField(PlainTextLanguage.INSTANCE, project, "", true);
+		this.textField.setPlaceholder("yyyy-MM-dd HH:mm:ss");
+		this.textField.addSettingsProvider(getEditorSettingsProvider());
 
-        this.localDateTextField = createPlainTextEditor();
-        this.localDateTextField.addSettingsProvider(getEditorSettingsProvider());
+		this.localTimeTextField = createPlainTextEditor();
+		this.localTimeTextField.addSettingsProvider(getEditorSettingsProvider());
 
-        this.secondTextField = createPlainTextEditor();
-        this.secondTextField.addSettingsProvider(getEditorSettingsProvider());
+		this.localDateTextField = createPlainTextEditor();
+		this.localDateTextField.addSettingsProvider(getEditorSettingsProvider());
 
-        this.millisTextField = createPlainTextEditor();
-        this.millisTextField.addSettingsProvider(getEditorSettingsProvider());
+		this.secondTextField = createPlainTextEditor();
+		this.secondTextField.addSettingsProvider(getEditorSettingsProvider());
 
-        this.utcTimeTextField = createPlainTextEditor();
-        this.utcTimeTextField.addSettingsProvider(getEditorSettingsProvider());
-    }
+		this.millisTextField = createPlainTextEditor();
+		this.millisTextField.addSettingsProvider(getEditorSettingsProvider());
 
-    @NotNull
-    private EditorTextField createPlainTextEditor() {
-        return new EditorTextField(EditorFactory.getInstance().createDocument(""), project, FileTypes.PLAIN_TEXT, true, true);
-    }
+		this.utcTimeTextField = createPlainTextEditor();
+		this.utcTimeTextField.addSettingsProvider(getEditorSettingsProvider());
+	}
 
-    @NotNull
-    private EditorSettingsProvider getEditorSettingsProvider() {
-        return editor -> {
-            EditorSettings settings = editor.getSettings();
-            settings.setIndentGuidesShown(true);
-            settings.setWheelFontChangeEnabled(true);
-        };
-    }
+	private EditorTextField createPlainTextEditor() {
+		return new EditorTextField(EditorFactory.getInstance().createDocument(""), project,
+			FileTypes.PLAIN_TEXT, true, true);
+	}
+
+	private EditorSettingsProvider getEditorSettingsProvider() {
+		return editor -> {
+			EditorSettings settings = editor.getSettings();
+			settings.setIndentGuidesShown(true);
+			settings.setWheelFontChangeEnabled(true);
+		};
+	}
 }

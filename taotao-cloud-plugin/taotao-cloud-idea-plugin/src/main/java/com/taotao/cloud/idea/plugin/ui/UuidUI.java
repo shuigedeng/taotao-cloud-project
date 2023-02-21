@@ -8,65 +8,65 @@ import com.intellij.ui.EditorSettingsProvider;
 import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.listener.action.CopyContentActionListener;
 import com.taotao.cloud.idea.plugin.listener.action.GenerateUUIDActionListener;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class UuidUI {
-    private JPanel panel;
-    private JButton lowerCaseCopy;
-    private JButton lowerCaseExtCopy;
-    private JButton upperCaseExtCopy;
-    private JButton upperCaseCopy;
-    private EditorTextField lowerCaseTextField;
-    private EditorTextField upperCaseTextField;
-    private EditorTextField lowerCaseExt;
-    private EditorTextField upperCaseExt;
-    private JButton generate;
 
-    private Project project;
+	private JPanel panel;
+	private JButton lowerCaseCopy;
+	private JButton lowerCaseExtCopy;
+	private JButton upperCaseExtCopy;
+	private JButton upperCaseCopy;
+	private EditorTextField lowerCaseTextField;
+	private EditorTextField upperCaseTextField;
+	private EditorTextField lowerCaseExt;
+	private EditorTextField upperCaseExt;
+	private JButton generate;
 
-    public UuidUI(Project project) {
-        this.project = project;
-        this.lowerCaseCopy.addActionListener(new CopyContentActionListener(lowerCaseTextField));
-        this.upperCaseCopy.addActionListener(new CopyContentActionListener(upperCaseTextField));
-        this.lowerCaseExtCopy.addActionListener(new CopyContentActionListener(lowerCaseExt));
-        this.upperCaseExtCopy.addActionListener(new CopyContentActionListener(upperCaseExt));
-        this.generate.addActionListener(new GenerateUUIDActionListener(this.lowerCaseTextField, this.upperCaseTextField,
-                this.lowerCaseExt, this.upperCaseExt));
-        this.generate.doClick();
-    }
+	private Project project;
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        this.lowerCaseTextField = createPlainTextEditor();
-        this.lowerCaseTextField.addSettingsProvider(getEditorSettingsProvider());
+	public UuidUI(Project project) {
+		this.project = project;
+		this.lowerCaseCopy.addActionListener(new CopyContentActionListener(lowerCaseTextField));
+		this.upperCaseCopy.addActionListener(new CopyContentActionListener(upperCaseTextField));
+		this.lowerCaseExtCopy.addActionListener(new CopyContentActionListener(lowerCaseExt));
+		this.upperCaseExtCopy.addActionListener(new CopyContentActionListener(upperCaseExt));
+		this.generate.addActionListener(
+			new GenerateUUIDActionListener(this.lowerCaseTextField, this.upperCaseTextField,
+				this.lowerCaseExt, this.upperCaseExt));
+		this.generate.doClick();
+	}
 
-        this.upperCaseTextField = createPlainTextEditor();
-        this.upperCaseTextField.addSettingsProvider(getEditorSettingsProvider());
+	private void createUIComponents() {
+		// TODO: place custom component creation code here
+		this.lowerCaseTextField = createPlainTextEditor();
+		this.lowerCaseTextField.addSettingsProvider(getEditorSettingsProvider());
 
-        this.lowerCaseExt = createPlainTextEditor();
-        this.lowerCaseExt.addSettingsProvider(getEditorSettingsProvider());
+		this.upperCaseTextField = createPlainTextEditor();
+		this.upperCaseTextField.addSettingsProvider(getEditorSettingsProvider());
 
-        this.upperCaseExt = createPlainTextEditor();
-        this.upperCaseExt.addSettingsProvider(getEditorSettingsProvider());
-    }
+		this.lowerCaseExt = createPlainTextEditor();
+		this.lowerCaseExt.addSettingsProvider(getEditorSettingsProvider());
 
-    @NotNull
-    private EditorTextField createPlainTextEditor() {
-        return new EditorTextField(EditorFactory.getInstance().createDocument(""), project, FileTypes.PLAIN_TEXT, true, true);
-    }
+		this.upperCaseExt = createPlainTextEditor();
+		this.upperCaseExt.addSettingsProvider(getEditorSettingsProvider());
+	}
 
-    @NotNull
-    private EditorSettingsProvider getEditorSettingsProvider() {
-        return editor -> {
-            EditorSettings settings = editor.getSettings();
-            settings.setIndentGuidesShown(true);
-            settings.setWheelFontChangeEnabled(true);
-        };
-    }
+	private EditorTextField createPlainTextEditor() {
+		return new EditorTextField(EditorFactory.getInstance().createDocument(""), project,
+			FileTypes.PLAIN_TEXT, true, true);
+	}
 
-    public JPanel getPanel() {
-        return panel;
-    }
+	private EditorSettingsProvider getEditorSettingsProvider() {
+		return editor -> {
+			EditorSettings settings = editor.getSettings();
+			settings.setIndentGuidesShown(true);
+			settings.setWheelFontChangeEnabled(true);
+		};
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
 }

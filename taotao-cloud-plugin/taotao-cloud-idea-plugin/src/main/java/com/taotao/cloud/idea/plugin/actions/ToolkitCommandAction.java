@@ -7,30 +7,29 @@ import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.components.ServiceManager;
 import com.taotao.cloud.idea.plugin.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.service.ToolkitCommandService;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ToolkitCommandAction extends AnAction {
-    private ToolkitCommandService toolkitCommandService;
-    private ToolkitCommand command;
 
-    public ToolkitCommandAction(ToolkitCommand command) {
-        this.command = command;
-        this.toolkitCommandService = ServiceManager.getService(ToolkitCommandService.class);
+	private ToolkitCommandService toolkitCommandService;
+	private ToolkitCommand command;
 
-        Presentation presentation = getTemplatePresentation();
-        presentation.setText(command.getCommand(), false);
-        presentation.setIcon(AllIcons.General.ExternalTools);
-        presentation.setDescription(command.getDescription());
-    }
+	public ToolkitCommandAction(ToolkitCommand command) {
+		this.command = command;
+		this.toolkitCommandService = ServiceManager.getService(ToolkitCommandService.class);
 
-    @Override
-    public void actionPerformed(@NotNull AnActionEvent e) {
-        toolkitCommandService.execute(this.command, e.getDataContext());
-    }
+		Presentation presentation = getTemplatePresentation();
+		presentation.setText(command.getCommand(), false);
+		presentation.setIcon(AllIcons.General.ExternalTools);
+		presentation.setDescription(command.getDescription());
+	}
 
-    @Nullable
-    public String getTemplateText() {
-        return this.command.getCommand();
-    }
+	@Override
+	public void actionPerformed(AnActionEvent e) {
+		toolkitCommandService.execute(this.command, e.getDataContext());
+	}
+
+	@Override
+	public String getTemplateText() {
+		return this.command.getCommand();
+	}
 }

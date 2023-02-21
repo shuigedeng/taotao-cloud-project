@@ -29,7 +29,6 @@ import jakarta.mail.internet.MimeMessage;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.context.event.EventListener;
@@ -54,7 +53,7 @@ public class processTriggerListener {
 
 	@Async
 	@EventListener(ProcessTriggerEvent.class)
-	public void processTriggerEventListener(@NotNull ProcessTriggerEvent event) {
+	public void processTriggerEventListener(ProcessTriggerEvent event) {
 		XxlJobLog xxlJobLog = event.getXxlJobLog();
 		XxlJobInfo jobInfo = event.getJobInfo();
 		long time = event.getTime();
