@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -197,14 +196,16 @@ public class RedisListenerConfig {
 		return new RedisKeyExpirationEventMessageListener(listenerContainer);
 	}
 
-	public static class RedisKeyExpirationEventMessageListener extends KeyExpirationEventMessageListener {
+	public static class RedisKeyExpirationEventMessageListener extends
+		KeyExpirationEventMessageListener {
 
-		public RedisKeyExpirationEventMessageListener(RedisMessageListenerContainer listenerContainer) {
+		public RedisKeyExpirationEventMessageListener(
+			RedisMessageListenerContainer listenerContainer) {
 			super(listenerContainer);
 		}
 
 		@Override
-		public void onMessage(@NotNull Message message, byte[] pattern) {
+		public void onMessage(Message message, byte[] pattern) {
 			LogUtils.info("接受到消息: {}, {}", message, new String(pattern));
 		}
 	}

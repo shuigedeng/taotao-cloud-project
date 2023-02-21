@@ -9,49 +9,50 @@ import com.intellij.ui.LanguageTextField;
 import com.taotao.cloud.idea.plugin.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.listener.action.IPSearchActionListener;
 import com.taotao.cloud.idea.plugin.listener.action.PhoneAddressSearchActionListener;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class IPAndPhoneAddressUI {
-    private JPanel panel;
-    private JButton search;
-    private JTable table;
-    private EditorTextField textField;
 
-    private Project project;
+	private JPanel panel;
+	private JButton search;
+	private JTable table;
+	private EditorTextField textField;
 
-    public IPAndPhoneAddressUI(Project project, ToolkitCommand command) {
-        this.project = project;
-        DefaultTableModel tableModel = new DefaultTableModel();
-        this.table.setModel(tableModel);
+	private Project project;
 
-        if (ToolkitCommand.IP.equals(command)) {
-            this.search.addActionListener(new IPSearchActionListener(this.textField, tableModel));
-            this.textField.setPlaceholder("input ip address");
-        } else {
-            this.search.addActionListener(new PhoneAddressSearchActionListener(this.textField, tableModel));
-            this.textField.setPlaceholder("input your phone number");
-        }
-    }
+	public IPAndPhoneAddressUI(Project project, ToolkitCommand command) {
+		this.project = project;
+		DefaultTableModel tableModel = new DefaultTableModel();
+		this.table.setModel(tableModel);
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        this.textField = new LanguageTextField(PlainTextLanguage.INSTANCE, project, "", true);
-        this.textField.addSettingsProvider(getEditorSettingsProvider());
-    }
+		if (ToolkitCommand.IP.equals(command)) {
+			this.search.addActionListener(new IPSearchActionListener(this.textField, tableModel));
+			this.textField.setPlaceholder("input ip address");
+		} else {
+			this.search.addActionListener(
+				new PhoneAddressSearchActionListener(this.textField, tableModel));
+			this.textField.setPlaceholder("input your phone number");
+		}
+	}
 
-    @NotNull
-    private EditorSettingsProvider getEditorSettingsProvider() {
-        return editor -> {
-            EditorSettings settings = editor.getSettings();
-            settings.setIndentGuidesShown(true);
-            settings.setWheelFontChangeEnabled(true);
-        };
-    }
+	private void createUIComponents() {
+		// TODO: place custom component creation code here
+		this.textField = new LanguageTextField(PlainTextLanguage.INSTANCE, project, "", true);
+		this.textField.addSettingsProvider(getEditorSettingsProvider());
+	}
 
-    public JPanel getPanel() {
-        return panel;
-    }
+	private EditorSettingsProvider getEditorSettingsProvider() {
+		return editor -> {
+			EditorSettings settings = editor.getSettings();
+			settings.setIndentGuidesShown(true);
+			settings.setWheelFontChangeEnabled(true);
+		};
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
 }

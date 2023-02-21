@@ -17,7 +17,6 @@ package com.taotao.cloud.order.biz.event.aftersale;
 
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -38,7 +37,7 @@ public class AfterSaleLogListener {
 
 	@Async
 	@EventListener(AfterSaleLogEvent.class)
-	public void saveAfterSaleLog(@NotNull AfterSaleLogEvent event) {
+	public void saveAfterSaleLog(AfterSaleLogEvent event) {
 		AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
 		afterSaleLogService.save(afterSaleLog);
 	}

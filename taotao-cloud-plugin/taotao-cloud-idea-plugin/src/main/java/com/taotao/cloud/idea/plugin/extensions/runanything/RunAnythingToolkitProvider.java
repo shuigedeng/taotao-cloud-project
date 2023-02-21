@@ -3,84 +3,80 @@ package com.taotao.cloud.idea.plugin.extensions.runanything;
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.actions.runAnything.activity.RunAnythingAnActionProvider;
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.util.ObjectUtils;
 import com.taotao.cloud.idea.plugin.actions.ToolkitCommandAction;
 import com.taotao.cloud.idea.plugin.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.service.CacheService;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import javax.swing.Icon;
 
 public class RunAnythingToolkitProvider extends RunAnythingAnActionProvider<AnAction> {
-    private static final String CACHE_KEY = "ToolkitCommandActionInstances";
 
-    private CacheService cacheService;
+	private static final String CACHE_KEY = "ToolkitCommandActionInstances";
 
-    public RunAnythingToolkitProvider() {
-        cacheService = ServiceManager.getService(CacheService.class);
-    }
+	private CacheService cacheService;
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public @NotNull Collection<AnAction> getValues(@NotNull DataContext dataContext, @NotNull String pattern) {
-        Object value = cacheService.get(CACHE_KEY);
-        if (Objects.nonNull(value)) {
-            return (Collection<AnAction>) value;
-        }
-        Collection<AnAction> actions = createActions();
-        cacheService.put(CACHE_KEY, actions);
-        return actions;
-    }
+	public RunAnythingToolkitProvider() {
+		cacheService = ServiceManager.getService(CacheService.class);
+	}
 
-    private Collection<AnAction> createActions() {
-        return Arrays.stream(ToolkitCommand.values())
-                .map(ToolkitCommandAction::new)
-                .collect(Collectors.toList());
-    }
+	@Override
+	@SuppressWarnings("unchecked")
+	public Collection<AnAction> getValues(DataContext dataContext, String pattern) {
+		Object value = cacheService.get(CACHE_KEY);
+		if (Objects.nonNull(value)) {
+			return (Collection<AnAction>) value;
+		}
+		Collection<AnAction> actions = createActions();
+		cacheService.put(CACHE_KEY, actions);
+		return actions;
+	}
 
-    @Override
-    public @NotNull String getCommand(@NotNull AnAction value) {
-        return this.getHelpCommand() + " " + ObjectUtils.notNull(value.getTemplatePresentation().getText(),
-                IdeBundle.message("run.anything.actions.undefined"));
-    }
+	private Collection<AnAction> createActions() {
+		return Arrays.stream(ToolkitCommand.values())
+			.map(ToolkitCommandAction::new)
+			.collect(Collectors.toList());
+	}
 
-    public @Nullable String getHelpGroupTitle() {
-        return "Toolkit";
-    }
+	@Override
+	public String getCommand(AnAction value) {
+		return this.getHelpCommand() + " " + ObjectUtils.notNull(
+			value.getTemplatePresentation().getText(),
+			IdeBundle.message("run.anything.actions.undefined"));
+	}
 
-    @NotNull
-    @Override
-    public String getHelpCommand() {
-        return "toolkit";
-    }
+	@Override
+	public String getHelpGroupTitle() {
+		return "Toolkit";
+	}
 
-    @NotNull
-    @Override
-    public String getHelpCommandPlaceholder() {
-        return "toolkit <command name>";
-    }
 
-    @Override
-    @Nullable
-    public Icon getHelpIcon() {
-        return AllIcons.General.ExternalTools;
-    }
+	@Override
+	public String getHelpCommand() {
+		return "toolkit";
+	}
 
-    @NotNull
-    @Override
-    public String getCompletionGroupTitle() {
-        return "toolkit"; //过滤界面中的名称
-    }
+	@NotNull
+	@Override
+	public String getHelpCommandPlaceholder() {
+		return "toolkit <command name>";
+	}
+
+	@Override
+	public Icon getHelpIcon() {
+		return AllIcons.General.ExternalTools;
+	}
+
+	@Override
+	public String getCompletionGroupTitle() {
+		return "toolkit"; //过滤界面中的名称
+	}
 
 //    @Override
 //    public @Nullable String getAdText() {
