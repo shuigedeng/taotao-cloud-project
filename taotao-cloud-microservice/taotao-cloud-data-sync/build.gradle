@@ -2,14 +2,14 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-common"
     implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
 
-//    implementation "org.springframework.boot:spring-boot-starter-security"
+    //implementation "org.springframework.boot:spring-boot-starter-security"
     //implementation "org.springframework.boot:spring-boot-starter-mail"
 
     implementation("org.springframework.boot:spring-boot-starter-web") {
@@ -19,8 +19,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-undertow"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
-//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-aop"
@@ -42,13 +42,11 @@ dependencies {
     //implementation 'org.springframework.batch.extensions:spring-batch-geode:0.1.0-SNAPSHOT'
 
     implementation "mysql:mysql-connector-java"
-//    implementation "com.baomidou:mybatis-plus-boot-starter"
+    //implementation "com.baomidou:mybatis-plus-boot-starter"
 
-//    implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
-//    implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
-//    implementation "org.antlr:antlr4-runtime:4.11.1"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+    //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
+    //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
+    //implementation "org.antlr:antlr4-runtime:4.11.1"
 }
 
 mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"

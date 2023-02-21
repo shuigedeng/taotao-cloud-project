@@ -9,9 +9,9 @@ repositories {
 
 dependencies {
     //添加gradle版本
-//    implementation 'com.android.tools.build:gradle:3.3.2'
-//    implementation 'org.codehaus.groovy:groovy-all:2.5.8'
-//    implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21'
+    //implementation 'com.android.tools.build:gradle:3.3.2'
+    //implementation 'org.codehaus.groovy:groovy-all:2.5.8'
+    //implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21'
 
     //添加gradle对应api
     implementation gradleApi()
