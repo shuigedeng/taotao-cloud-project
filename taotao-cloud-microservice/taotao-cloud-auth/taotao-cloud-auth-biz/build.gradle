@@ -5,10 +5,12 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-springdoc"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-huawei"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
@@ -31,7 +33,7 @@ dependencies {
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
     implementation "org.webjars:webjars-locator-core:0.52"
 
-    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.1.1.RELEASE"
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     implementation("org.springframework.boot:spring-boot-starter-web") {
@@ -47,7 +49,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server
-    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:1.0.0'
+    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:1.0.1'
 
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
