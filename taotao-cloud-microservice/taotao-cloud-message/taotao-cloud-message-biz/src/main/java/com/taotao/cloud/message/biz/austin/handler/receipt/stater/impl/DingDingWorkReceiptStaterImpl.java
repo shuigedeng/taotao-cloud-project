@@ -6,9 +6,8 @@ import com.java3y.austin.handler.handler.impl.DingDingWorkNoticeHandler;
 import com.java3y.austin.handler.receipt.stater.ReceiptMessageStater;
 import com.java3y.austin.support.dao.ChannelAccountDao;
 import com.java3y.austin.support.domain.ChannelAccount;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 拉取 钉钉工作消息的回执 内容 【未完成】
@@ -17,17 +16,18 @@ import java.util.List;
  */
 public class DingDingWorkReceiptStaterImpl implements ReceiptMessageStater {
 
-    @Autowired
-    private DingDingWorkNoticeHandler workNoticeHandler;
+	@Autowired
+	private DingDingWorkNoticeHandler workNoticeHandler;
 
-    @Autowired
-    private ChannelAccountDao channelAccountDao;
+	@Autowired
+	private ChannelAccountDao channelAccountDao;
 
-    @Override
-    public void start() {
-        List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstant.FALSE, ChannelType.DING_DING_WORK_NOTICE.getCode());
-        for (ChannelAccount channelAccount : accountList) {
-            workNoticeHandler.pull(channelAccount.getId());
-        }
-    }
+	@Override
+	public void start() {
+		List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+			CommonConstant.FALSE, ChannelType.DING_DING_WORK_NOTICE.getCode());
+		for (ChannelAccount channelAccount : accountList) {
+			workNoticeHandler.pull(channelAccount.getId());
+		}
+	}
 }

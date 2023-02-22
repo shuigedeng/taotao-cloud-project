@@ -6,11 +6,10 @@ import com.java3y.austin.handler.receiver.service.ConsumeService;
 import com.java3y.austin.support.constans.MessageQueuePipeline;
 import com.java3y.austin.support.domain.MessageTemplate;
 import com.java3y.austin.support.mq.eventbus.EventBusListener;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author 3y
@@ -19,19 +18,19 @@ import java.util.List;
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.EVENT_BUS)
 public class EventBusReceiver implements EventBusListener {
 
-    @Autowired
-    private ConsumeService consumeService;
+	@Autowired
+	private ConsumeService consumeService;
 
-    @Override
-    @Subscribe
-    public void consume(List<TaskInfo> lists) {
-        consumeService.consume2Send(lists);
+	@Override
+	@Subscribe
+	public void consume(List<TaskInfo> lists) {
+		consumeService.consume2Send(lists);
 
-    }
+	}
 
-    @Override
-    @Subscribe
-    public void recall(MessageTemplate messageTemplate) {
-        consumeService.consume2recall(messageTemplate);
-    }
+	@Override
+	@Subscribe
+	public void recall(MessageTemplate messageTemplate) {
+		consumeService.consume2recall(messageTemplate);
+	}
 }

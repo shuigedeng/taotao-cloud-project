@@ -2,12 +2,11 @@ package com.taotao.cloud.message.biz.austin.web.vo.amis;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 /**
  * amis的通用转化类
@@ -20,124 +19,126 @@ import java.util.List;
 @NoArgsConstructor
 public class CommonAmisVo {
 
-    private String type;
-    private String id;
+	private String type;
+	private String id;
 
-    private String label;
+	private String label;
 
-    private String value;
-    private String schemaApi;
+	private String value;
+	private String schemaApi;
 
 
-    private String mode;
-    private String name;
-    private boolean fixedSize;
-    private String fixedSizeClassName;
-    private String frameImage;
-    private String originalSrc;
-    private Integer interval;
+	private String mode;
+	private String name;
+	private boolean fixedSize;
+	private String fixedSizeClassName;
+	private String frameImage;
+	private String originalSrc;
+	private Integer interval;
 
-    private boolean required;
-    private boolean silentPolling;
+	private boolean required;
+	private boolean silentPolling;
 
-    private String size;
-    private String target;
+	private String size;
+	private String target;
 
-    private boolean addable;
+	private boolean addable;
 
-    private boolean editable;
+	private boolean editable;
 
-    private boolean needConfirm;
+	private boolean needConfirm;
 
-    private String width;
+	private String width;
 
-    private String height;
+	private String height;
 
-    private String src;
+	private String src;
 
-    private String title;
+	private String title;
 
-    private String imageMode;
+	private String imageMode;
 
-    private String varParam;
+	private String varParam;
 
-    private List<CommonAmisVo> body;
+	private List<CommonAmisVo> body;
 
-    private ApiDTO api;
-    /**
-     * columns
-     */
-    @JSONField(name = "columns")
-    private List<ColumnsDTO> columns;
+	private ApiDTO api;
+	/**
+	 * columns
+	 */
+	@JSONField(name = "columns")
+	private List<ColumnsDTO> columns;
 
-    /**
-     * ColumnsDTO
-     */
-    @NoArgsConstructor
-    @Data
-    @AllArgsConstructor
-    @Builder
-    public static class ColumnsDTO {
-        /**
-         * nameX
-         */
-        @JSONField(name = "name")
-        private String name;
-        /**
-         * labelX
-         */
-        @JSONField(name = "label")
-        private String label;
+	/**
+	 * ColumnsDTO
+	 */
+	@NoArgsConstructor
+	@Data
+	@AllArgsConstructor
+	@Builder
+	public static class ColumnsDTO {
 
-        /**
-         * type
-         */
-        @JSONField(name = "type")
-        private String type;
-        /**
-         * placeholder
-         */
-        @JSONField(name = "placeholder")
-        private String placeholder;
+		/**
+		 * nameX
+		 */
+		@JSONField(name = "name")
+		private String name;
+		/**
+		 * labelX
+		 */
+		@JSONField(name = "label")
+		private String label;
 
-        /**
-         * type
-         */
-        @JSONField(name = "required")
-        private Boolean required;
+		/**
+		 * type
+		 */
+		@JSONField(name = "type")
+		private String type;
+		/**
+		 * placeholder
+		 */
+		@JSONField(name = "placeholder")
+		private String placeholder;
 
-        @JSONField(name = "quickEdit")
-        private Boolean quickEdit;
+		/**
+		 * type
+		 */
+		@JSONField(name = "required")
+		private Boolean required;
 
-    }
+		@JSONField(name = "quickEdit")
+		private Boolean quickEdit;
 
-    /**
-     * ApiDTO
-     */
-    @NoArgsConstructor
-    @Data
-    @AllArgsConstructor
-    @Builder
-    public static class ApiDTO {
-        /**
-         * adaptor
-         */
-        @JSONField(name = "adaptor")
-        private String adaptor;
+	}
 
-        /**
-         * adaptor
-         */
-        @JSONField(name = "requestAdaptor")
-        private String requestAdaptor;
+	/**
+	 * ApiDTO
+	 */
+	@NoArgsConstructor
+	@Data
+	@AllArgsConstructor
+	@Builder
+	public static class ApiDTO {
 
-        /**
-         * url
-         */
-        @JSONField(name = "url")
-        private String url;
+		/**
+		 * adaptor
+		 */
+		@JSONField(name = "adaptor")
+		private String adaptor;
 
-    }
+		/**
+		 * adaptor
+		 */
+		@JSONField(name = "requestAdaptor")
+		private String requestAdaptor;
+
+		/**
+		 * url
+		 */
+		@JSONField(name = "url")
+		private String url;
+
+	}
 
 
 }

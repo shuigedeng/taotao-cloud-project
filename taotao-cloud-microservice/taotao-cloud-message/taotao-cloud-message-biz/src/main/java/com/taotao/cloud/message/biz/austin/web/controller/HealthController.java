@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api("健康检测")
 public class HealthController {
-    @GetMapping("/")
-    @ApiOperation("/健康检测")
-    public String health() {
-        return "success";
-    }
+
+	@GetMapping("/")
+	@ApiOperation("/健康检测")
+	public String health() {
+		return "success";
+	}
 }

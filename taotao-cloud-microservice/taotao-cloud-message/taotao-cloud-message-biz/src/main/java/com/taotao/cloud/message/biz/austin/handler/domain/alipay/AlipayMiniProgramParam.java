@@ -1,37 +1,36 @@
 package com.taotao.cloud.message.biz.austin.handler.domain.alipay;
 
+import java.util.Map;
+import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Map;
-import java.util.Set;
-
 /**
- * @author jwq
- * 支付宝小程序参数
+ * @author jwq 支付宝小程序参数
  */
 @Data
 @Builder
 public class AlipayMiniProgramParam {
-    /**
-     * 业务Id
-     */
-    private Long messageTemplateId;
 
-    /**
-     * 发送账号
-     */
-    private Integer sendAccount;
+	/**
+	 * 业务Id
+	 */
+	private Long messageTemplateId;
 
-    /**
-     * 接收者（用户）的 UserId
-     */
-    private Set<String> toUserId;
+	/**
+	 * 发送账号
+	 */
+	private Integer sendAccount;
 
-    /**
-     * 模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
-     */
-    private Map<String, String> data;
+	/**
+	 * 接收者（用户）的 UserId
+	 */
+	private Set<String> toUserId;
+
+	/**
+	 * 模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
+	 */
+	private Map<String, String> data;
 
 //    /**
 //     * 支付消息模板：需传入用户发生的交易行为的支付宝交易号 trade_no；

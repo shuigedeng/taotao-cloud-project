@@ -1,11 +1,10 @@
 package com.taotao.cloud.message.biz.austin.web.vo;
 
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
 
 
 /**
@@ -20,40 +19,40 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class MessageTemplateParam {
 
-    /**
-     * 当前页码
-     */
-    @NotNull
-    private Integer page = 1;
+	/**
+	 * 当前页码
+	 */
+	@NotNull
+	private Integer page = 1;
 
-    /**
-     * 当前页大小
-     */
-    @NotNull
-    private Integer perPage = 10;
+	/**
+	 * 当前页大小
+	 */
+	@NotNull
+	private Integer perPage = 10;
 
-    /**
-     * 模板ID
-     */
-    private Long id;
+	/**
+	 * 模板ID
+	 */
+	private Long id;
 
-    /**
-     * 当前用户
-     */
-    private String creator;
+	/**
+	 * 当前用户
+	 */
+	private String creator;
 
-    /**
-     * 消息接收者(测试发送时使用)
-     */
-    private String receiver;
+	/**
+	 * 消息接收者(测试发送时使用)
+	 */
+	private String receiver;
 
-    /**
-     * 下发参数信息
-     */
-    private String msgContent;
+	/**
+	 * 下发参数信息
+	 */
+	private String msgContent;
 
-    /**
-     * 模版名称
-     */
-    private String keywords;
+	/**
+	 * 模版名称
+	 */
+	private String keywords;
 }

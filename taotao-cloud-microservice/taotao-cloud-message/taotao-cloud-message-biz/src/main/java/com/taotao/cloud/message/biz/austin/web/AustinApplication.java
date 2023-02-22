@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class AustinApplication {
+
 	public static void main(String[] args) {
 
 		/**

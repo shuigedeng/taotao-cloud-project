@@ -110,20 +110,20 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.0.4           
- Spring Boot          | 3.0.1           
- Spring Cloud         | 2022.0.0        
+ Spring               | 6.0.5           
+ Spring Boot          | 3.0.2           
+ Spring Cloud         | 2022.0.1        
  Spring Cloud Alibaba | 2022.0.0.0--RC1 
- Spring Cloud Tencent | 1.8.2--2022.0.0 
+ Spring Cloud Tencent | 1.9.1--2022.0.0 
  Spring Security      | 6.0.1           
  Mybatis Plus         | 3.5.3.1         
- Hutool               | 5.8.11          
- Mysql                | 8.0.31          
+ Hutool               | 5.8.12          
+ Mysql                | 8.0.32          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.0.0           
- Redisson             | 3.19.1          
- Lettuce              | 6.0.2.RELEASE   
+ Redisson             | 3.19.13          
+ Lettuce              | 6.0.3.RELEASE   
  Elasticsearch        | 8.5.3           
  Xxl-job              | 2.3.1           
  EasyCaptcha          | 1.6.2           
@@ -159,7 +159,7 @@ Maven:
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**
   非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.0.1、Spring Cloud 2022.0.0、Spring Cloud Alibaba
+* **主体框架**：采用最新的Spring Boot 3.0.2、Spring Cloud 2022.0.1、Spring Cloud Alibaba
   2022.0.0.0--RC1版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
@@ -188,9 +188,9 @@ Maven:
 ```
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
-│  ├─taotao-cloud-container -- 容器模块
+│  ├─taotao-cloud-demo -- demo模块
 │  ├─taotao-cloud-go -- go模块
-│  ├─taotao-cloud-microservice -- 微服务业务模块
+│  ├─taotao-cloud-microservice -- 微服务模块
 │  │  ├─taotao-cloud-monitor  -- 监控模块
 │  │  ├─taotao-cloud-data-sync  -- 数据同步模块
 │  │  ├─taotao-cloud-auth  -- oauth2认证中心模块
@@ -214,7 +214,7 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-sys  -- 系统模块
 │  │  ├─taotao-cloud-xxljob  -- xxl-job模块
 │  ├─taotao-cloud-netty -- netty模块
-│  ├─taotao-cloud-nod -- node模块
+│  ├─taotao-cloud-node -- node模块
 │  ├─taotao-cloud-plugin -- 插件模块
 │  ├─taotao-cloud-python -- python模块
 │  ├─taotao-cloud-rpc -- rpc模块

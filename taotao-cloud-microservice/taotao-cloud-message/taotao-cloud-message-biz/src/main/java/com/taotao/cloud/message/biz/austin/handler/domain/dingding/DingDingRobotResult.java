@@ -17,15 +17,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 public class DingDingRobotResult {
-    /**
-     * errcode
-     */
-    @SerializedName("errcode")
-    private Integer errCode;
 
-    /**
-     * errmsg
-     */
-    @SerializedName("errmsg")
-    private String errMsg;
+	/**
+	 * errcode
+	 */
+	@SerializedName("errcode")
+	private Integer errCode;
+
+	/**
+	 * errmsg
+	 */
+	@SerializedName("errmsg")
+	private String errMsg;
 }

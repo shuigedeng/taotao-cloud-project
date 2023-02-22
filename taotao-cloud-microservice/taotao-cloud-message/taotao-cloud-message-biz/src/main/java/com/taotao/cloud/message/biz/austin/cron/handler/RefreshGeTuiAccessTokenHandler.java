@@ -7,7 +7,6 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AustinConstant;
 import com.java3y.austin.common.constant.CommonConstant;
 import com.java3y.austin.common.constant.SendAccountConstant;
 import com.java3y.austin.common.dto.account.GeTuiAccount;
@@ -17,14 +16,12 @@ import com.java3y.austin.cron.dto.getui.QueryTokenParamDTO;
 import com.java3y.austin.support.config.SupportThreadPoolConfig;
 import com.java3y.austin.support.dao.ChannelAccountDao;
 import com.java3y.austin.support.domain.ChannelAccount;
-import com.java3y.austin.support.utils.AccountUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 /**
@@ -38,60 +35,67 @@ import java.util.List;
 @Slf4j
 public class RefreshGeTuiAccessTokenHandler {
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+	@Autowired
+	private StringRedisTemplate redisTemplate;
 
-    @Autowired
-    private ChannelAccountDao channelAccountDao;
+	@Autowired
+	private ChannelAccountDao channelAccountDao;
 
 
-    /**
-     * 每小时请求一次接口刷新（以防失效)
-     */
-    @XxlJob("refreshGeTuiAccessTokenJob")
-    public void execute() {
-        log.info("refreshGeTuiAccessTokenJob#execute!");
-        SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
-            List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstant.FALSE, ChannelType.PUSH.getCode());
-            for (ChannelAccount channelAccount : accountList) {
-                GeTuiAccount account = JSON.parseObject(channelAccount.getAccountConfig(), GeTuiAccount.class);
-                String accessToken = getAccessToken(account);
-                if (StrUtil.isNotBlank(accessToken)) {
-                    redisTemplate.opsForValue().set(SendAccountConstant.GE_TUI_ACCESS_TOKEN_PREFIX + channelAccount.getId(), accessToken);
-                }
-            }
-        });
-    }
+	/**
+	 * 每小时请求一次接口刷新（以防失效)
+	 */
+	@XxlJob("refreshGeTuiAccessTokenJob")
+	public void execute() {
+		log.info("refreshGeTuiAccessTokenJob#execute!");
+		SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
+			List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+					CommonConstant.FALSE, ChannelType.PUSH.getCode());
+			for (ChannelAccount channelAccount : accountList) {
+				GeTuiAccount account = JSON.parseObject(channelAccount.getAccountConfig(),
+						GeTuiAccount.class);
+				String accessToken = getAccessToken(account);
+				if (StrUtil.isNotBlank(accessToken)) {
+					redisTemplate.opsForValue().set(SendAccountConstant.GE_TUI_ACCESS_TOKEN_PREFIX
+							+ channelAccount.getId(), accessToken);
+				}
+			}
+		});
+	}
 
-    /**
-     * 获取 access_token
-     *
-     * @param account
-     * @return
-     */
-    private String getAccessToken(GeTuiAccount account) {
-        String accessToken = "";
-        try {
-            String url = "https://restapi.getui.com/v2/" + account.getAppId() + "/auth";
-            String time = String.valueOf(System.currentTimeMillis());
-            String digest = SecureUtil.sha256().digestHex(account.getAppKey() + time + account.getMasterSecret());
-            QueryTokenParamDTO param = QueryTokenParamDTO.builder()
-                    .timestamp(time)
-                    .appKey(account.getAppKey())
-                    .sign(digest).build();
+	/**
+	 * 获取 access_token
+	 *
+	 * @param account
+	 * @return
+	 */
+	private String getAccessToken(GeTuiAccount account) {
+		String accessToken = "";
+		try {
+			String url = "https://restapi.getui.com/v2/" + account.getAppId() + "/auth";
+			String time = String.valueOf(System.currentTimeMillis());
+			String digest = SecureUtil.sha256()
+					.digestHex(account.getAppKey() + time + account.getMasterSecret());
+			QueryTokenParamDTO param = QueryTokenParamDTO.builder()
+					.timestamp(time)
+					.appKey(account.getAppKey())
+					.sign(digest).build();
 
-            String body = HttpRequest.post(url).header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                    .body(JSON.toJSONString(param))
-                    .timeout(20000)
-                    .execute().body();
-            GeTuiTokenResultDTO geTuiTokenResultDTO = JSON.parseObject(body, GeTuiTokenResultDTO.class);
-            if (geTuiTokenResultDTO.getCode().equals(0)) {
-                accessToken = geTuiTokenResultDTO.getData().getToken();
-            }
-        } catch (Exception e) {
-            log.error("RefreshGeTuiAccessTokenHandler#getAccessToken fail:{}", Throwables.getStackTraceAsString(e));
-        }
-        return accessToken;
-    }
+			String body = HttpRequest.post(url)
+					.header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+					.body(JSON.toJSONString(param))
+					.timeout(20000)
+					.execute().body();
+			GeTuiTokenResultDTO geTuiTokenResultDTO = JSON.parseObject(body,
+					GeTuiTokenResultDTO.class);
+			if (geTuiTokenResultDTO.getCode().equals(0)) {
+				accessToken = geTuiTokenResultDTO.getData().getToken();
+			}
+		} catch (Exception e) {
+			log.error("RefreshGeTuiAccessTokenHandler#getAccessToken fail:{}",
+					Throwables.getStackTraceAsString(e));
+		}
+		return accessToken;
+	}
 
 }

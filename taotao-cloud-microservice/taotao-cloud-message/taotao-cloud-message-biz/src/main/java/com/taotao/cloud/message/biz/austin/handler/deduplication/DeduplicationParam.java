@@ -10,34 +10,33 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 3y
- * @date 2021/12/11
- * 去重服务所需要的参数
+ * @date 2021/12/11 去重服务所需要的参数
  */
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeduplicationParam {
-    /**
-     * TaskIno信息
-     */
-    private TaskInfo taskInfo;
 
-    /**
-     * 去重时间
-     * 单位：秒
-     */
-    @JSONField(name = "time")
-    private Long deduplicationTime;
+	/**
+	 * TaskIno信息
+	 */
+	private TaskInfo taskInfo;
 
-    /**
-     * 需达到的次数去重
-     */
-    @JSONField(name = "num")
-    private Integer countNum;
+	/**
+	 * 去重时间 单位：秒
+	 */
+	@JSONField(name = "time")
+	private Long deduplicationTime;
 
-    /**
-     * 标识属于哪种去重(数据埋点)
-     */
-    private AnchorState anchorState;
+	/**
+	 * 需达到的次数去重
+	 */
+	@JSONField(name = "num")
+	private Integer countNum;
+
+	/**
+	 * 标识属于哪种去重(数据埋点)
+	 */
+	private AnchorState anchorState;
 }

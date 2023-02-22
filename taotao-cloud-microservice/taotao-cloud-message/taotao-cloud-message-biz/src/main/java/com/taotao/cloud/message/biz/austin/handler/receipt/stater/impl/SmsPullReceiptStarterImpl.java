@@ -12,12 +12,11 @@ import com.java3y.austin.support.dao.ChannelAccountDao;
 import com.java3y.austin.support.dao.SmsRecordDao;
 import com.java3y.austin.support.domain.ChannelAccount;
 import com.java3y.austin.support.domain.SmsRecord;
+import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -29,33 +28,36 @@ import java.util.Map;
 @Slf4j
 public class SmsPullReceiptStarterImpl implements ReceiptMessageStater {
 
-    @Autowired
-    private ChannelAccountDao channelAccountDao;
+	@Autowired
+	private ChannelAccountDao channelAccountDao;
 
-    @Autowired
-    private Map<String, SmsScript> scriptMap;
+	@Autowired
+	private Map<String, SmsScript> scriptMap;
 
-    @Autowired
-    private SmsRecordDao smsRecordDao;
+	@Autowired
+	private SmsRecordDao smsRecordDao;
 
-    /**
-     * 拉取消息并入库
-     */
-    @Override
-    public void start() {
-        try {
-            List<ChannelAccount> channelAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstant.FALSE, ChannelType.SMS.getCode());
-            for (ChannelAccount channelAccount : channelAccountList) {
-                SmsAccount smsAccount = JSON.parseObject(channelAccount.getAccountConfig(), SmsAccount.class);
-                List<SmsRecord> smsRecordList = scriptMap.get(smsAccount.getScriptName()).pull(smsAccount.getScriptName());
-                if (CollUtil.isNotEmpty(smsRecordList)) {
-                    smsRecordDao.saveAll(smsRecordList);
-                }
-            }
-        } catch (Exception e) {
-            log.error("SmsPullReceiptStarter#start fail:{}", Throwables.getStackTraceAsString(e));
+	/**
+	 * 拉取消息并入库
+	 */
+	@Override
+	public void start() {
+		try {
+			List<ChannelAccount> channelAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+				CommonConstant.FALSE, ChannelType.SMS.getCode());
+			for (ChannelAccount channelAccount : channelAccountList) {
+				SmsAccount smsAccount = JSON.parseObject(channelAccount.getAccountConfig(),
+					SmsAccount.class);
+				List<SmsRecord> smsRecordList = scriptMap.get(smsAccount.getScriptName())
+					.pull(channelAccount.getId().intValue());
+				if (CollUtil.isNotEmpty(smsRecordList)) {
+					smsRecordDao.saveAll(smsRecordList);
+				}
+			}
+		} catch (Exception e) {
+			log.error("SmsPullReceiptStarter#start fail:{}", Throwables.getStackTraceAsString(e));
 
-        }
+		}
 
-    }
+	}
 }

@@ -9,9 +9,10 @@ import com.java3y.austin.handler.deduplication.DeduplicationParam;
  */
 public interface DeduplicationService {
 
-    /**
-     * 去重
-     * @param param
-     */
-    void deduplication(DeduplicationParam param);
+	/**
+	 * 去重
+	 *
+	 * @param param
+	 */
+	void deduplication(DeduplicationParam param);
 }

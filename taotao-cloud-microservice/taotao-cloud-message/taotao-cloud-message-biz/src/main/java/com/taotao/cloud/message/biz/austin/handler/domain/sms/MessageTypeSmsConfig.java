@@ -17,14 +17,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MessageTypeSmsConfig {
 
-    /**
-     * 权重(决定着流量的占比)
-     */
-    private Integer weights;
+	/**
+	 * 权重(决定着流量的占比)
+	 */
+	private Integer weights;
 
-    /**
-     * script名称
-     */
-    private String scriptName;
+	/**
+	 * 短信模板若指定了账号，则该字段有值
+	 */
+	private Integer sendAccount;
+
+	/**
+	 * script名称
+	 */
+	private String scriptName;
 
 }
