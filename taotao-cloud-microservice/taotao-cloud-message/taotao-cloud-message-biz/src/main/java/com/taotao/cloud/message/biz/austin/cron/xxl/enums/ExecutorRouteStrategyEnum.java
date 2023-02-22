@@ -3,21 +3,52 @@ package com.taotao.cloud.message.biz.austin.cron.xxl.enums;
 
 /**
  * 路由策略
+ *
  * @author 3y
  */
 public enum ExecutorRouteStrategyEnum {
 
-    FIRST,
-    LAST,
-    ROUND,
-    RANDOM,
-    CONSISTENT_HASH,
-    LEAST_FREQUENTLY_USED,
-    LEAST_RECENTLY_USED,
-    FAILOVER,
-    BUSYOVER,
-    SHARDING_BROADCAST;
+	/**
+	 * FIRST
+	 */
+	FIRST,
+	/**
+	 * LAST
+	 */
+	LAST,
+	/**
+	 * ROUND
+	 */
+	ROUND,
+	/**
+	 * RANDOM
+	 */
+	RANDOM,
+	/**
+	 * CONSISTENT_HASH
+	 */
+	CONSISTENT_HASH,
+	/**
+	 * LEAST_FREQUENTLY_USED
+	 */
+	LEAST_FREQUENTLY_USED,
+	/**
+	 * LEAST_RECENTLY_USED
+	 */
+	LEAST_RECENTLY_USED,
+	/**
+	 * FAILOVER
+	 */
+	FAILOVER,
+	/**
+	 * BUSYOVER
+	 */
+	BUSYOVER,
+	/**
+	 * SHARDING_BROADCAST
+	 */
+	SHARDING_BROADCAST;
 
-    ExecutorRouteStrategyEnum() {
-    }
+	ExecutorRouteStrategyEnum() {
+	}
 }

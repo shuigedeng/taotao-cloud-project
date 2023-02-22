@@ -17,18 +17,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class YunPianSmsAccount extends SmsAccount {
 
-    /**
-     * apikey
-     */
-    private String apikey;
-    /**
-     * tplId
-     */
-    private String tplId;
+	/**
+	 * apikey
+	 */
+	private String apikey;
+	/**
+	 * tplId
+	 */
+	private String tplId;
 
-    /**
-     * api相关
-     */
-    private String url;
+	/**
+	 * api相关
+	 */
+	private String url;
 
 }

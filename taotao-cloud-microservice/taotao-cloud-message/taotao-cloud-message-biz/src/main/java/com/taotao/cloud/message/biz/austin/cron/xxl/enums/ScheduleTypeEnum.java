@@ -7,18 +7,21 @@ package com.taotao.cloud.message.biz.austin.cron.xxl.enums;
  */
 public enum ScheduleTypeEnum {
 
-    NONE,
-    /**
-     * schedule by cron
-     */
-    CRON,
+	/**
+	 * NONE
+	 */
+	NONE,
+	/**
+	 * schedule by cron
+	 */
+	CRON,
 
-    /**
-     * schedule by fixed rate (in seconds)
-     */
-    FIX_RATE;
+	/**
+	 * schedule by fixed rate (in seconds)
+	 */
+	FIX_RATE;
 
-    ScheduleTypeEnum() {
-    }
+	ScheduleTypeEnum() {
+	}
 
 }

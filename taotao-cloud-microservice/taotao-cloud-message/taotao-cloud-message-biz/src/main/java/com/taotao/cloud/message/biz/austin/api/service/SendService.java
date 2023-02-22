@@ -12,19 +12,21 @@ import com.java3y.austin.service.api.domain.SendResponse;
 public interface SendService {
 
 
-    /**
-     * 单文案发送接口
-     * @param sendRequest
-     * @return
-     */
-    SendResponse send(SendRequest sendRequest);
+	/**
+	 * 单文案发送接口
+	 *
+	 * @param sendRequest
+	 * @return
+	 */
+	SendResponse send(SendRequest sendRequest);
 
 
-    /**
-     * 多文案发送接口
-     * @param batchSendRequest
-     * @return
-     */
-    SendResponse batchSend(BatchSendRequest batchSendRequest);
+	/**
+	 * 多文案发送接口
+	 *
+	 * @param batchSendRequest
+	 * @return
+	 */
+	SendResponse batchSend(BatchSendRequest batchSendRequest);
 
 }

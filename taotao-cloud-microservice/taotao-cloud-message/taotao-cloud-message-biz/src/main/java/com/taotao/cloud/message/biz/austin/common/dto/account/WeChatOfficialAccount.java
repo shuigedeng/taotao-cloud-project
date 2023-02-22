@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *
  * 模板消息参数
  * <p>
  * 参数示例：
@@ -19,11 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WeChatOfficialAccount {
 
-    /**
-     * 账号相关
-     */
-    private String appId;
-    private String secret;
-    private String token;
+	/**
+	 * 账号相关
+	 */
+	private String appId;
+	private String secret;
+	private String token;
 
 }

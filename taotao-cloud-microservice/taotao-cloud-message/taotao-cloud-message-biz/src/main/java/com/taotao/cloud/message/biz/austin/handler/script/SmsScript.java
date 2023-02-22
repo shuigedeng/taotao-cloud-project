@@ -3,7 +3,6 @@ package com.taotao.cloud.message.biz.austin.handler.script;
 
 import com.java3y.austin.handler.domain.sms.SmsParam;
 import com.java3y.austin.support.domain.SmsRecord;
-
 import java.util.List;
 
 
@@ -14,20 +13,21 @@ import java.util.List;
  */
 public interface SmsScript {
 
-    /**
-     * 发送短信
-     *
-     * @param smsParam
-     * @return 渠道商发送接口返回值
-     */
-    List<SmsRecord> send(SmsParam smsParam);
+	/**
+	 * 发送短信
+	 *
+	 * @param smsParam
+	 * @return 渠道商发送接口返回值
+	 */
+	List<SmsRecord> send(SmsParam smsParam);
 
 
-    /**
-     * 拉取回执
-     * @param scriptName 标识账号的脚本名
-     * @return 渠道商回执接口返回值
-     */
-    List<SmsRecord> pull(String scriptName);
+	/**
+	 * 拉取回执
+	 *
+	 * @param id 渠道账号的ID
+	 * @return 渠道商回执接口返回值
+	 */
+	List<SmsRecord> pull(Integer id);
 
 }

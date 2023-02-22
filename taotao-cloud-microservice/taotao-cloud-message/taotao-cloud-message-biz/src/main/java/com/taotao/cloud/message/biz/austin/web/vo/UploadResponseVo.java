@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 上传后成功返回素材的Id
+ *
  * @author 3y
  */
 @Builder
@@ -15,5 +16,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UploadResponseVo {
-    private String id;
+
+	private String id;
 }

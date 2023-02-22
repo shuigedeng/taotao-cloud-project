@@ -1,14 +1,14 @@
 package com.taotao.cloud.message.biz.austin.common.domain;
 
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 /**
  * 埋点信息
+ *
  * @author 3y
  */
 @Data
@@ -35,8 +35,8 @@ public class AnchorInfo {
 
 
     /**
-     * 生成时间
+     * 日志生成时间
      */
-    private long timestamp;
+    private long logTimestamp;
 
 }

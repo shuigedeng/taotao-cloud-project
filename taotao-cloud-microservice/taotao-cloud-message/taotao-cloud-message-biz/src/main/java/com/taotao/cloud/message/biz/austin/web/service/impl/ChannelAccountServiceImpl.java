@@ -6,12 +6,11 @@ import com.java3y.austin.common.constant.AustinConstant;
 import com.java3y.austin.common.constant.CommonConstant;
 import com.java3y.austin.support.dao.ChannelAccountDao;
 import com.java3y.austin.support.domain.ChannelAccount;
-import com.java3y.austin.support.utils.WxServiceUtils;
 import com.java3y.austin.web.service.ChannelAccountService;
+import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author 3y
@@ -19,36 +18,35 @@ import java.util.List;
 @Service
 public class ChannelAccountServiceImpl implements ChannelAccountService {
 
-    @Autowired
-    private ChannelAccountDao channelAccountDao;
-    @Autowired
-    private WxServiceUtils wxServiceUtils;
+	@Autowired
+	private ChannelAccountDao channelAccountDao;
 
-    @Override
-    public ChannelAccount save(ChannelAccount channelAccount) {
-        if (channelAccount.getId() == null) {
-            channelAccount.setCreated(Math.toIntExact(DateUtil.currentSeconds()));
-            channelAccount.setIsDeleted(CommonConstant.FALSE);
-        }
-        channelAccount.setCreator(StrUtil.isBlank(channelAccount.getCreator()) ? AustinConstant.DEFAULT_CREATOR : channelAccount.getCreator());
-        channelAccount.setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
-        ChannelAccount result = channelAccountDao.save(channelAccount);
-        wxServiceUtils.fresh();
-        return result;
-    }
+	@Override
+	public ChannelAccount save(ChannelAccount channelAccount) {
+		if (Objects.isNull(channelAccount.getId())) {
+			channelAccount.setCreated(Math.toIntExact(DateUtil.currentSeconds()));
+			channelAccount.setIsDeleted(CommonConstant.FALSE);
+		}
+		channelAccount.setCreator(
+			StrUtil.isBlank(channelAccount.getCreator()) ? AustinConstant.DEFAULT_CREATOR
+				: channelAccount.getCreator());
+		channelAccount.setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
+		return channelAccountDao.save(channelAccount);
+	}
 
-    @Override
-    public List<ChannelAccount> queryByChannelType(Integer channelType, String creator) {
-        return channelAccountDao.findAllByIsDeletedEqualsAndCreatorEqualsAndSendChannelEquals(CommonConstant.FALSE, creator, channelType);
-    }
+	@Override
+	public List<ChannelAccount> queryByChannelType(Integer channelType, String creator) {
+		return channelAccountDao.findAllByIsDeletedEqualsAndCreatorEqualsAndSendChannelEquals(
+			CommonConstant.FALSE, creator, channelType);
+	}
 
-    @Override
-    public List<ChannelAccount> list(String creator) {
-        return channelAccountDao.findAllByCreatorEquals(creator);
-    }
+	@Override
+	public List<ChannelAccount> list(String creator) {
+		return channelAccountDao.findAllByCreatorEquals(creator);
+	}
 
-    @Override
-    public void deleteByIds(List<Long> ids) {
-        channelAccountDao.deleteAllById(ids);
-    }
+	@Override
+	public void deleteByIds(List<Long> ids) {
+		channelAccountDao.deleteAllById(ids);
+	}
 }

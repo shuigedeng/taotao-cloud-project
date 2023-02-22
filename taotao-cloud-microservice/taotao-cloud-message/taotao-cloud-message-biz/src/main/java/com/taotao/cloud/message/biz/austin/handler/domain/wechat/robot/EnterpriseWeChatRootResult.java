@@ -20,14 +20,14 @@ import lombok.NoArgsConstructor;
 public class EnterpriseWeChatRootResult {
 
 
-    @JSONField(name = "errcode")
-    private Integer errcode;
-    @JSONField(name = "errmsg")
-    private String errmsg;
-    @JSONField(name = "type")
-    private String type;
-    @JSONField(name = "media_id")
-    private String mediaId;
-    @JSONField(name = "created_at")
-    private String createdAt;
+	@JSONField(name = "errcode")
+	private Integer errcode;
+	@JSONField(name = "errmsg")
+	private String errmsg;
+	@JSONField(name = "type")
+	private String type;
+	@JSONField(name = "media_id")
+	private String mediaId;
+	@JSONField(name = "created_at")
+	private String createdAt;
 }

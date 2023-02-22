@@ -15,27 +15,26 @@ import org.springframework.stereotype.Component;
 /**
  * Description:
  *
- * @author elpsycongroo
- * create date: 2022/7/16
+ * @author elpsycongroo create date: 2022/7/16
  */
 @Component
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.ROCKET_MQ)
 @RocketMQMessageListener(topic = "${austin.business.recall.topic.name}",
-        consumerGroup = "${austin.rocketmq.recall.consumer.group}",
-        selectorType = SelectorType.TAG,
-        selectorExpression = "${austin.business.tagId.value}"
+	consumerGroup = "${austin.rocketmq.recall.consumer.group}",
+	selectorType = SelectorType.TAG,
+	selectorExpression = "${austin.business.tagId.value}"
 )
 public class RocketMqRecallReceiver implements RocketMQListener<String> {
 
-    @Autowired
-    private ConsumeService consumeService;
+	@Autowired
+	private ConsumeService consumeService;
 
-    @Override
-    public void onMessage(String message) {
-        if (StringUtils.isBlank(message)) {
-            return;
-        }
-        MessageTemplate messageTemplate = JSON.parseObject(message, MessageTemplate.class);
-        consumeService.consume2recall(messageTemplate);
-    }
+	@Override
+	public void onMessage(String message) {
+		if (StringUtils.isBlank(message)) {
+			return;
+		}
+		MessageTemplate messageTemplate = JSON.parseObject(message, MessageTemplate.class);
+		consumeService.consume2recall(messageTemplate);
+	}
 }

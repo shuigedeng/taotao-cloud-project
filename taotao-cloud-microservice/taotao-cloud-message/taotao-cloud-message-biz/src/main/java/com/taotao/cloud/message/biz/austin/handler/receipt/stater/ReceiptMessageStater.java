@@ -7,8 +7,8 @@ package com.taotao.cloud.message.biz.austin.handler.receipt.stater;
  */
 public interface ReceiptMessageStater {
 
-    /**
-     * 启动拉取回执
-     */
-    void start();
+	/**
+	 * 启动拉取回执
+	 */
+	void start();
 }

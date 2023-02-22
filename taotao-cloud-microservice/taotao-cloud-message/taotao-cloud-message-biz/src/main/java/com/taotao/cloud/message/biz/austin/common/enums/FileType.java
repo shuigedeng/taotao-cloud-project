@@ -14,13 +14,25 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public enum FileType {
+    /**
+     * 图片
+     */
     IMAGE("10", "image"),
+    /**
+     * 语音
+     */
     VOICE("20", "voice"),
+    /**
+     * 普通文件
+     */
     COMMON_FILE("30", "file"),
+    /**
+     * 视频
+     */
     VIDEO("40", "video"),
     ;
-    private String code;
-    private String name;
+    private final String code;
+    private final String name;
 
     public static String getNameByCode(String code) {
         for (FileType fileType : FileType.values()) {
