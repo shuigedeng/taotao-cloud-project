@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.model.entity.file;
+package com.taotao.cloud.file.biz.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -104,10 +104,10 @@ public class File extends BaseSuperEntity<File, Long> {
 
 	@Builder
 	public File(Long id, LocalDateTime createTime, Long createBy,
-			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-			String createName, String bizType, String dataType, String original, String url,
-			String md5,
-			String type, String contextType, String name, String ext, Long length) {
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String createName, String bizType, String dataType, String original, String url,
+		String md5,
+		String type, String contextType, String name, String ext, Long length) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.createName = createName;
 		this.bizType = bizType;
@@ -128,7 +128,7 @@ public class File extends BaseSuperEntity<File, Long> {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-				o)) {
+			o)) {
 			return false;
 		}
 		File file = (File) o;
