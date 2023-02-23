@@ -1,32 +1,23 @@
 package com.taotao.cloud.generator.biz.controller;
 
+import cn.hutool.core.convert.Convert;
 import com.alibaba.druid.DbType;
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlCreateTableStatement;
 import com.alibaba.fastjson.JSON;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.domain.CxSelect;
-import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.security.PermissionUtils;
-import com.ruoyi.common.utils.sql.SqlUtil;
-import com.ruoyi.generator.domain.GenTable;
-import com.ruoyi.generator.domain.GenTableColumn;
-import com.ruoyi.generator.service.IGenTableColumnService;
-import com.ruoyi.generator.service.IGenTableService;
+import com.taotao.cloud.generator.biz.domain.GenTable;
+import com.taotao.cloud.generator.biz.domain.GenTableColumn;
+import com.taotao.cloud.generator.biz.service.IGenTableColumnService;
+import com.taotao.cloud.generator.biz.service.IGenTableService;
+import com.taotao.cloud.web.base.controller.BaseController;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletResponse;
+import lombok.extern.java.Log;
 import org.apache.commons.io.IOUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,6 +32,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 代码生成 操作处理
  *
  * @author ruoyi
+ * @Validated
+ * @RequiredArgsConstructor
+ * @RequestMapping("/gen")
+ * @RestController public class GenController {
+ * <p>
+ * private final IGenTableService genTableService;
+ * @Operation(summary = "查询代码生成列表", description = "查询代码生成列表")
+ * @RequestLogger("查询代码生成列表")
+ * @PreAuthorize("@el.check('admin','timing:list')")
+ * @GetMapping("/list")
  */
 @Controller
 @RequestMapping("/tool/gen")

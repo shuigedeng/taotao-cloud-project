@@ -1,12 +1,11 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.java3y.austin.web.annotation.AustinResult;
-import com.java3y.austin.web.service.DataService;
-import com.java3y.austin.web.vo.DataParam;
-import com.java3y.austin.web.vo.amis.EchartsVo;
-import com.java3y.austin.web.vo.amis.SmsTimeLineVo;
-import com.java3y.austin.web.vo.amis.UserTimeLineVo;
+import com.taotao.cloud.message.biz.austin.web.service.DataService;
+import com.taotao.cloud.message.biz.austin.web.vo.DataParam;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.EchartsVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.SmsTimeLineVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.UserTimeLineVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.Objects;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author 3y
  */
 @Slf4j
-@AustinResult
 @RestController
 @RequestMapping("/trace")
 @Api("获取数据接口（全链路追踪)")
@@ -53,7 +51,7 @@ public class DataController {
 	@ApiOperation("/获取短信下发数据")
 	public SmsTimeLineVo getSmsData(@RequestBody DataParam dataParam) {
 		if (Objects.isNull(dataParam) || Objects.isNull(dataParam.getDateTime()) || StrUtil.isBlank(
-				dataParam.getReceiver())) {
+			dataParam.getReceiver())) {
 			return SmsTimeLineVo.builder().items(Lists.newArrayList()).build();
 		}
 		return dataService.getTraceSmsInfo(dataParam);

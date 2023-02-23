@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.web.service.MaterialService;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.web.service.MaterialService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

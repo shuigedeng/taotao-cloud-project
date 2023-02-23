@@ -1,10 +1,8 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.springeventbus;
 
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.support.constans.MessageQueuePipeline;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.mq.springeventbus.AustinSpringEventBusEvent;
+import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
+import com.taotao.cloud.message.biz.austin.support.mq.springeventbus.AustinSpringEventBusEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

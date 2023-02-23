@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 
-import com.java3y.austin.service.api.domain.SendRequest;
-import com.java3y.austin.service.api.domain.SendResponse;
-import com.java3y.austin.service.api.service.SendService;
+import com.taotao.cloud.message.biz.austin.api.domain.SendRequest;
+import com.taotao.cloud.message.biz.austin.api.domain.SendResponse;
+import com.taotao.cloud.message.biz.austin.api.service.SendService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

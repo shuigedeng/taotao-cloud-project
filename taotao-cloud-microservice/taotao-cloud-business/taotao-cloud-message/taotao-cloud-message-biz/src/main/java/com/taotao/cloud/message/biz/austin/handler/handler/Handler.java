@@ -1,7 +1,8 @@
 package com.taotao.cloud.message.biz.austin.handler.handler;
 
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.support.domain.MessageTemplate;
+
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
 
 /**
  * @author 3y 消息处理器

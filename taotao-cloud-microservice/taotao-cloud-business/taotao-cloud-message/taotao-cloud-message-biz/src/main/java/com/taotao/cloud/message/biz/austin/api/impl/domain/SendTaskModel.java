@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.austin.api.impl.domain;
 
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.service.api.domain.MessageParam;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.pipeline.ProcessModel;
+import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessModel;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

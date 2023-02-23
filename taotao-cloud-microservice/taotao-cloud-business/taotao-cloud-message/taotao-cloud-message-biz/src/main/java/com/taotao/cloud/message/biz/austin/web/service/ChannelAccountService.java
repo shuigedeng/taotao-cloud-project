@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.web.service;
 
 
-import com.java3y.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
 import java.util.List;
 
 /**

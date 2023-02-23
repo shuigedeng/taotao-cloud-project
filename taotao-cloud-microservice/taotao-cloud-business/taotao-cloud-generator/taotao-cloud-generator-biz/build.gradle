@@ -2,12 +2,16 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
-    implementation 'org.apache.velocity:velocity-engine-core'
+    implementation 'org.apache.velocity:velocity-engine-core:2.3'
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-generator:taotao-cloud-generator-api")
 
+    implementation "mysql:mysql-connector-java"
+
     //https://search.maven.org/artifact/com.baomidou/mybatis-plus-generator
-    api "com.baomidou:mybatis-plus-generator:3.5.3.1"
+    implementation "com.baomidou:mybatis-plus-generator:3.5.3.1"
+
+    implementation 'net.maku:maku-generator-boot-starter:3.0.1'
 }
 
 mainClassName = "com.taotao.cloud.report.biz.TaoTaoCloudReportApplication"

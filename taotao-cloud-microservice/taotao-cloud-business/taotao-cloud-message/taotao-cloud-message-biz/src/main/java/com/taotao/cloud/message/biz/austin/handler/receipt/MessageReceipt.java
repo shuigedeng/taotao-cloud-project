@@ -2,8 +2,8 @@ package com.taotao.cloud.message.biz.austin.handler.receipt;
 
 
 import com.google.common.base.Throwables;
-import com.java3y.austin.handler.receipt.stater.ReceiptMessageStater;
-import com.java3y.austin.support.config.SupportThreadPoolConfig;
+import com.taotao.cloud.message.biz.austin.handler.receipt.stater.ReceiptMessageStater;
+import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class MessageReceipt {
 			while (true) {
 				try {
 					for (ReceiptMessageStater receiptMessageStater : receiptMessageStaterList) {
-						//receiptMessageStater.start();
+						receiptMessageStater.start();
 					}
 					Thread.sleep(2000);
 				} catch (Exception e) {

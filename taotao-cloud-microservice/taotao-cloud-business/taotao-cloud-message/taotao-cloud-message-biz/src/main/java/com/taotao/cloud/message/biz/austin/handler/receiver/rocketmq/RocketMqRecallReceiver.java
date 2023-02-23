@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.rocketmq;
 
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.handler.receiver.service.ConsumeService;
-import com.java3y.austin.support.constans.MessageQueuePipeline;
-import com.java3y.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
+import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.annotation.SelectorType;

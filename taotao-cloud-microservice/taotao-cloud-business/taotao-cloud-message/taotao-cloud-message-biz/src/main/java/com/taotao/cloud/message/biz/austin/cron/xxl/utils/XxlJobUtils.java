@@ -2,15 +2,17 @@ package com.taotao.cloud.message.biz.austin.cron.xxl.utils;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.cron.xxl.constants.XxlJobConstant;
-import com.java3y.austin.cron.xxl.entity.XxlJobGroup;
-import com.java3y.austin.cron.xxl.entity.XxlJobInfo;
-import com.java3y.austin.cron.xxl.enums.*;
-import com.java3y.austin.cron.xxl.service.CronTaskService;
-import com.java3y.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.cron.xxl.constants.XxlJobConstant;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobGroup;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
+import com.taotao.cloud.message.biz.austin.cron.xxl.enums.ExecutorRouteStrategyEnum;
+import com.taotao.cloud.message.biz.austin.cron.xxl.enums.MisfireStrategyEnum;
+import com.taotao.cloud.message.biz.austin.cron.xxl.enums.ScheduleTypeEnum;
+import com.taotao.cloud.message.biz.austin.cron.xxl.service.CronTaskService;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
 import java.util.Date;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,28 +48,28 @@ public class XxlJobUtils {
 		// 如果没有指定cron表达式，说明立即执行(给到xxl-job延迟5秒的cron表达式)
 		if (messageTemplate.getExpectPushTime().equals(String.valueOf(CommonConstant.FALSE))) {
 			scheduleConf = DateUtil.format(
-					DateUtil.offsetSecond(new Date(), XxlJobConstant.DELAY_TIME),
-					CommonConstant.CRON_FORMAT);
+				DateUtil.offsetSecond(new Date(), XxlJobConstant.DELAY_TIME),
+				CommonConstant.CRON_FORMAT);
 		}
 
 		XxlJobInfo xxlJobInfo = XxlJobInfo.builder()
-				.jobGroup(queryJobGroupId()).jobDesc(messageTemplate.getName())
-				.author(messageTemplate.getCreator())
-				.scheduleConf(scheduleConf)
-				.scheduleType(ScheduleTypeEnum.CRON.name())
-				.misfireStrategy(MisfireStrategyEnum.DO_NOTHING.name())
-				.executorRouteStrategy(ExecutorRouteStrategyEnum.CONSISTENT_HASH.name())
-				.executorHandler(XxlJobConstant.JOB_HANDLER_NAME)
-				.executorParam(String.valueOf(messageTemplate.getId()))
-				.executorBlockStrategy(ExecutorBlockStrategyEnum.SERIAL_EXECUTION.name())
-				.executorTimeout(XxlJobConstant.TIME_OUT)
-				.executorFailRetryCount(XxlJobConstant.RETRY_COUNT)
-				.glueType(GlueTypeEnum.BEAN.name())
-				.triggerStatus(CommonConstant.FALSE)
-				.glueRemark(StrUtil.EMPTY)
-				.glueSource(StrUtil.EMPTY)
-				.alarmEmail(StrUtil.EMPTY)
-				.childJobId(StrUtil.EMPTY).build();
+			.jobGroup(queryJobGroupId()).jobDesc(messageTemplate.getName())
+			.author(messageTemplate.getCreator())
+			.scheduleConf(scheduleConf)
+			.scheduleType(ScheduleTypeEnum.CRON.name())
+			.misfireStrategy(MisfireStrategyEnum.DO_NOTHING.name())
+			.executorRouteStrategy(ExecutorRouteStrategyEnum.CONSISTENT_HASH.name())
+			.executorHandler(XxlJobConstant.JOB_HANDLER_NAME)
+			.executorParam(String.valueOf(messageTemplate.getId()))
+			.executorBlockStrategy(ExecutorBlockStrategyEnum.SERIAL_EXECUTION.name())
+			.executorTimeout(XxlJobConstant.TIME_OUT)
+			.executorFailRetryCount(XxlJobConstant.RETRY_COUNT)
+			.glueType(GlueTypeEnum.BEAN.name())
+			.triggerStatus(CommonConstant.FALSE)
+			.glueRemark(StrUtil.EMPTY)
+			.glueSource(StrUtil.EMPTY)
+			.alarmEmail(StrUtil.EMPTY)
+			.childJobId(StrUtil.EMPTY).build();
 
 		if (Objects.nonNull(messageTemplate.getCronTaskId())) {
 			xxlJobInfo.setId(messageTemplate.getCronTaskId());
@@ -84,9 +86,9 @@ public class XxlJobUtils {
 		BasicResultVO basicResultVO = cronTaskService.getGroupId(appName, jobHandlerName);
 		if (Objects.isNull(basicResultVO.getData())) {
 			XxlJobGroup xxlJobGroup = XxlJobGroup.builder().appname(appName).title(jobHandlerName)
-					.addressType(CommonConstant.FALSE).build();
+				.addressType(CommonConstant.FALSE).build();
 			if (RespStatusEnum.SUCCESS.getCode()
-					.equals(cronTaskService.createGroup(xxlJobGroup).getStatus())) {
+				.equals(cronTaskService.createGroup(xxlJobGroup).getStatus())) {
 				return (int) cronTaskService.getGroupId(appName, jobHandlerName).getData();
 			}
 		}

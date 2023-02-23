@@ -1,9 +1,8 @@
 package com.taotao.cloud.generator.biz.service.impl;
 
-import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.generator.domain.GenTableColumn;
-import com.ruoyi.generator.mapper.GenTableColumnMapper;
-import com.ruoyi.generator.service.IGenTableColumnService;
+import com.taotao.cloud.generator.biz.domain.GenTableColumn;
+import com.taotao.cloud.generator.biz.mapper.GenTableColumnMapper;
+import com.taotao.cloud.generator.biz.service.IGenTableColumnService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

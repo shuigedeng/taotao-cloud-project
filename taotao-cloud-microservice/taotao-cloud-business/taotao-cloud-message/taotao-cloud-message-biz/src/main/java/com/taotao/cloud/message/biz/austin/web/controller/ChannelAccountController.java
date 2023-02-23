@@ -2,15 +2,14 @@ package com.taotao.cloud.message.biz.austin.web.controller;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.support.domain.ChannelAccount;
-import com.java3y.austin.web.annotation.AustinResult;
-import com.java3y.austin.web.exception.CommonException;
-import com.java3y.austin.web.service.ChannelAccountService;
-import com.java3y.austin.web.utils.Convert4Amis;
-import com.java3y.austin.web.utils.LoginUtils;
-import com.java3y.austin.web.vo.amis.CommonAmisVo;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.web.exception.CommonException;
+import com.taotao.cloud.message.biz.austin.web.service.ChannelAccountService;
+import com.taotao.cloud.message.biz.austin.web.utils.Convert4Amis;
+import com.taotao.cloud.message.biz.austin.web.utils.LoginUtils;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.CommonAmisVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.Arrays;
@@ -54,8 +53,8 @@ public class ChannelAccountController {
 			throw new CommonException(RespStatusEnum.NO_LOGIN);
 		}
 		channelAccount.setCreator(
-				StrUtil.isBlank(channelAccount.getCreator()) ? AustinConstant.DEFAULT_CREATOR
-						: channelAccount.getCreator());
+			StrUtil.isBlank(channelAccount.getCreator()) ? AustinConstant.DEFAULT_CREATOR
+				: channelAccount.getCreator());
 
 		return channelAccountService.save(channelAccount);
 	}
@@ -72,7 +71,7 @@ public class ChannelAccountController {
 		creator = StrUtil.isBlank(creator) ? AustinConstant.DEFAULT_CREATOR : creator;
 
 		List<ChannelAccount> channelAccounts = channelAccountService.queryByChannelType(channelType,
-				creator);
+			creator);
 		return Convert4Amis.getChannelAccountVo(channelAccounts, channelType);
 	}
 
@@ -98,7 +97,7 @@ public class ChannelAccountController {
 	public void deleteByIds(@PathVariable("id") String id) {
 		if (StrUtil.isNotBlank(id)) {
 			List<Long> idList = Arrays.stream(id.split(StrUtil.COMMA)).map(Long::valueOf)
-					.collect(Collectors.toList());
+				.collect(Collectors.toList());
 			channelAccountService.deleteByIds(idList);
 		}
 	}
