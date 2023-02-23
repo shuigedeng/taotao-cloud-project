@@ -3,6 +3,12 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-job:taotao-cloud-job-api")
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-elastic"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-schedule"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
 }
 
 mainClassName = "com.taotao.cloud.report.biz.TaoTaoCloudReportApplication"

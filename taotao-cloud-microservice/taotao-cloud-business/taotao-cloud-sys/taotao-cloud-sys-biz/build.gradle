@@ -22,12 +22,6 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-huawei"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-elastic"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-schedule"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
-
     //implementation "io.github.shuigedeng:taotao-cloud-starter-shardingsphere"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
@@ -37,8 +31,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-oss-minio"
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
 

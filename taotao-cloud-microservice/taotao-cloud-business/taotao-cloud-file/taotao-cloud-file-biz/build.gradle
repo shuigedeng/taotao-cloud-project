@@ -4,6 +4,8 @@ dependencies {
 
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-file:taotao-cloud-file-api")
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-oss-minio"
 }
 
 mainClassName = "com.taotao.cloud.report.biz.TaoTaoCloudReportApplication"
