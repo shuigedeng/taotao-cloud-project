@@ -7,16 +7,24 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-promotion:taotao-cloud-promotion-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-store:taotao-cloud-store-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
+
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
+//    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
+    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
-mainClassName = "com.taotao.cloud.promotion.biz.TaoTaoCloudPromotionApplication"
-description = "促销模块"
-archivesBaseName = 'taotao-cloud-promotion'
+mainClassName = "com.taotao.cloud.sync.biz.TaoTaoCloudStoreApplication"
+description = "商店模块"
+archivesBaseName = 'taotao-cloud-store'
 
 configurations {
     all {
@@ -37,3 +45,5 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
 }
+
+

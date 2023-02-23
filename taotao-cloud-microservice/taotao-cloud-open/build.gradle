@@ -7,7 +7,7 @@ dependencies {
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")

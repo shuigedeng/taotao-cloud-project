@@ -7,7 +7,7 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-wechat:taotao-cloud-wechat-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-api")
 
     implementation "com.tencentcloudapi:tencentcloud-sdk-java:4.0.11"
     implementation "com.google.zxing:core:3.5.1"
