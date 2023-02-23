@@ -1,5 +1,0 @@
-dependencies {
-    api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
-}
-
-description = "推荐模块api"
