@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.mapper;
+package com.taotao.cloud.logs.biz.mapper;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Log;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
