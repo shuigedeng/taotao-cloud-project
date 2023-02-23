@@ -38,7 +38,6 @@ buildSrc/.gradle
 .iml
 mvnw
 mvnw.cmd
-logs/
 help.md
 
 /node_modules/
