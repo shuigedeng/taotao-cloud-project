@@ -1,7 +1,7 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
-    
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
@@ -9,7 +9,7 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-goods:taotao-cloud-goods-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-promotion:taotao-cloud-promotion-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-store:taotao-cloud-store-api")
