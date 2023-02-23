@@ -11,7 +11,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-message:taotao-cloud-message-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-operation:taotao-cloud-operation-api")
 
     implementation "org.apache.pdfbox:pdfbox:2.0.27"
     implementation "io.soabase.record-builder:record-builder-core:35"

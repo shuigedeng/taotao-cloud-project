@@ -7,7 +7,7 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-operation:taotao-cloud-operation-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-operation:taotao-cloud-operation-api")
 }
 
 mainClassName = "com.taotao.cloud.operation.biz.TaoTaoCloudOperationApplication"
