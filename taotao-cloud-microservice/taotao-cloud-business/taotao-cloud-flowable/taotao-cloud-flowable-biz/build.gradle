@@ -5,7 +5,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-distribution:taotao-cloud-distribution-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-store:taotao-cloud-store-api")
 
     implementation 'org.flowable:flowable-spring-boot-starter-process:7.0.0.M1'
