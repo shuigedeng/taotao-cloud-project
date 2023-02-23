@@ -5,7 +5,9 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-sms-aliyun"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-sms-tencentv3"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
@@ -37,11 +39,11 @@ dependencies {
     implementation "com.github.binarywang:weixin-java-miniapp:4.3.0"
     implementation "com.github.binarywang:weixin-java-mp:4.3.0"
 
-    implementation 'org.apache.flink:flink-connector-rabbitmq:1.15.1'
-    implementation "org.apache.flink:flink-connector-kafka_2.11:1.14.3"
-    implementation "org.apache.flink:flink-clients_2.11:1.14.3"
-    implementation "org.apache.flink:flink-streaming-java_2.11:1.14.3"
-    implementation "org.apache.flink:flink-walkthrough-common_2.11:1.14.3"
+//    implementation 'org.apache.flink:flink-connector-rabbitmq:1.15.1'
+//    implementation "org.apache.flink:flink-connector-kafka_2.11:1.14.3"
+//    implementation "org.apache.flink:flink-clients_2.11:1.14.3"
+//    implementation "org.apache.flink:flink-streaming-java_2.11:1.14.3"
+//    implementation "org.apache.flink:flink-walkthrough-common_2.11:1.14.3"
     implementation "com.xuxueli:xxl-job-core:2.3.1"
     implementation 'de.siegmar:logback-gelf:3.0.0'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
