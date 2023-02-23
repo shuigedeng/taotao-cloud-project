@@ -1,0 +1,15 @@
+dependencies {
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
+
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-stock:taotao-cloud-stock-api")
+}
+
+mainClassName = "com.taotao.cloud.stock.biz.TaoTaoCloudStockApplication"
+description = "库存模块"
+archivesBaseName = 'taotao-cloud-stock'
