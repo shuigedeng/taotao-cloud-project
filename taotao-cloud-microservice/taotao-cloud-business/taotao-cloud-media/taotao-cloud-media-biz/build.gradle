@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(":taotao-cloud-microservice:taotao-cloud-media:taotao-cloud-media-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-media:taotao-cloud-media-api")
     //implementation "io.github.shuigedeng:taotao-cloud-starter-common"
 
     implementation "net.sourceforge.tess4j:tess4j:5.6.0"
