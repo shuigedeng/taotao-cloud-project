@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.dao;
 
 
-import com.java3y.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

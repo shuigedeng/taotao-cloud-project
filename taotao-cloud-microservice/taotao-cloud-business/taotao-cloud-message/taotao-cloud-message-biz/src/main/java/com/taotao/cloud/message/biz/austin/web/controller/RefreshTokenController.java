@@ -1,10 +1,9 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.cron.handler.RefreshDingDingAccessTokenHandler;
-import com.java3y.austin.cron.handler.RefreshGeTuiAccessTokenHandler;
-import com.java3y.austin.web.annotation.AustinResult;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.cron.handler.RefreshDingDingAccessTokenHandler;
+import com.taotao.cloud.message.biz.austin.cron.handler.RefreshGeTuiAccessTokenHandler;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

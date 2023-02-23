@@ -1,11 +1,11 @@
 package com.taotao.cloud.message.biz.austin.common.domain;
 
+import com.taotao.cloud.message.biz.austin.common.dto.model.ContentModel;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import scala.xml.dtd.ContentModel$;
 
 /**
  * 发送任务信息
@@ -62,7 +62,7 @@ public class TaskInfo {
 	 * 发送文案模型 message_template表存储的content是JSON(所有内容都会塞进去) 不同的渠道要发送的内容不一样(比如发push会有img，而短信没有)
 	 * 所以会有ContentModel
 	 */
-	private ContentModel$ contentModel;
+	private ContentModel contentModel;
 
 	/**
 	 * 发送账号（邮件下可有多个发送账号、短信可有多个发送账号..）

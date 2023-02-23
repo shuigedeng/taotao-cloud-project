@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.austin.handler.pending;
 
 import com.dtp.core.thread.DtpExecutor;
-import com.java3y.austin.handler.config.HandlerThreadPoolConfig;
-import com.java3y.austin.handler.utils.GroupIdMappingUtils;
-import com.java3y.austin.support.utils.ThreadPoolUtils;
+import com.taotao.cloud.message.biz.austin.handler.config.HandlerThreadPoolConfig;
+import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.ThreadPoolUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

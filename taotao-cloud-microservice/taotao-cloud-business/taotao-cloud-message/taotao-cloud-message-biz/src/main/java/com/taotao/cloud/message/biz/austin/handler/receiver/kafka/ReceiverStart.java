@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.kafka;
 
-import com.java3y.austin.handler.utils.GroupIdMappingUtils;
-import com.java3y.austin.support.constans.MessageQueuePipeline;
+import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
+import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.List;

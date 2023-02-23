@@ -6,21 +6,21 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.model.ContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.service.api.domain.MessageParam;
-import com.java3y.austin.service.api.enums.BusinessCode;
-import com.java3y.austin.service.api.impl.domain.SendTaskModel;
-import com.java3y.austin.support.dao.MessageTemplateDao;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.pipeline.BusinessProcess;
-import com.java3y.austin.support.pipeline.ProcessContext;
-import com.java3y.austin.support.utils.ContentHolderUtil;
-import com.java3y.austin.support.utils.TaskInfoUtils;
+import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
+import com.taotao.cloud.message.biz.austin.api.enums.BusinessCode;
+import com.taotao.cloud.message.biz.austin.api.impl.domain.SendTaskModel;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.model.ContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.support.dao.MessageTemplateDao;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.pipeline.BusinessProcess;
+import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessContext;
+import com.taotao.cloud.message.biz.austin.support.utils.ContentHolderUtil;
+import com.taotao.cloud.message.biz.austin.support.utils.TaskInfoUtils;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,6 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import scala.xml.dtd.ContentModel$;
 
 /**
  * @author 3y
@@ -55,12 +54,14 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 		try {
 			Optional<MessageTemplate> messageTemplate = messageTemplateDao.findById(
 				messageTemplateId);
+
 			if (!messageTemplate.isPresent() || messageTemplate.get().getIsDeleted()
 				.equals(CommonConstant.TRUE)) {
 				context.setNeedBreak(true)
 					.setResponse(BasicResultVO.fail(RespStatusEnum.TEMPLATE_NOT_FOUND));
 				return;
 			}
+
 			if (BusinessCode.COMMON_SEND.getCode().equals(context.getCode())) {
 				List<TaskInfo> taskInfos = assembleTaskInfo(sendTaskModel, messageTemplate.get());
 				sendTaskModel.setTaskInfo(taskInfos);
@@ -88,7 +89,6 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 		List<TaskInfo> taskInfoList = new ArrayList<>();
 
 		for (MessageParam messageParam : messageParamList) {
-
 			TaskInfo taskInfo = TaskInfo.builder()
 				.messageTemplateId(messageTemplate.getId())
 				.businessId(TaskInfoUtils.generateBusinessId(messageTemplate.getId(),
@@ -101,7 +101,8 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 				.msgType(messageTemplate.getMsgType())
 				.shieldType(messageTemplate.getShieldType())
 				.sendAccount(messageTemplate.getSendAccount())
-				.contentModel(getContentModelValue(messageTemplate, messageParam)).build();
+				.contentModel(getContentModelValue(messageTemplate, messageParam))
+				.build();
 
 			taskInfoList.add(taskInfo);
 		}
@@ -114,7 +115,7 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 	/**
 	 * 获取 contentModel，替换模板msgContent中占位符信息
 	 */
-	private static ContentModel$ getContentModelValue(MessageTemplate messageTemplate,
+	private static ContentModel getContentModelValue(MessageTemplate messageTemplate,
 		MessageParam messageParam) {
 
 		// 得到真正的ContentModel 类型

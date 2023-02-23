@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.support.dao;
 
-import com.java3y.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

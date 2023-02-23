@@ -1,11 +1,9 @@
 package com.taotao.cloud.message.biz.austin.handler.receipt.stater.impl;
 
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.handler.handler.impl.DingDingWorkNoticeHandler;
-import com.java3y.austin.handler.receipt.stater.ReceiptMessageStater;
-import com.java3y.austin.support.dao.ChannelAccountDao;
-import com.java3y.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.handler.handler.impl.DingDingWorkNoticeHandler;
+import com.taotao.cloud.message.biz.austin.handler.receipt.stater.ReceiptMessageStater;
+import com.taotao.cloud.message.biz.austin.support.dao.ChannelAccountDao;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 

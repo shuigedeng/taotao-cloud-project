@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.web.handler;
 
-import com.java3y.austin.common.constant.OfficialAccountParamConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.OfficialAccountParamConstant;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.session.WxSessionManager;

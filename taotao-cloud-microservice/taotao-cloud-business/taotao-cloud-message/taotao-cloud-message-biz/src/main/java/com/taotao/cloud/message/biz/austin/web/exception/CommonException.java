@@ -1,6 +1,7 @@
 package com.taotao.cloud.message.biz.austin.web.exception;
 
-import com.java3y.austin.common.enums.RespStatusEnum;
+
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 
 /**
  * @author kl

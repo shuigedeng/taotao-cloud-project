@@ -1,11 +1,11 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.eventbus;
 
 import com.google.common.eventbus.Subscribe;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.receiver.service.ConsumeService;
-import com.java3y.austin.support.constans.MessageQueuePipeline;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.mq.eventbus.EventBusListener;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
+import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.mq.eventbus.EventBusListener;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

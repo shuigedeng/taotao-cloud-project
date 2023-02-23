@@ -1,8 +1,7 @@
 package com.taotao.cloud.message.biz.austin.web.utils;
 
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.constant.OfficialAccountParamConstant;
-import com.java3y.austin.web.config.WeChatLoginConfig;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.OfficialAccountParamConstant;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

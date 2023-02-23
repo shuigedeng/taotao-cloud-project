@@ -2,11 +2,9 @@ package com.taotao.cloud.message.biz.austin.handler.receiver.kafka;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.receiver.service.ConsumeService;
-import com.java3y.austin.handler.utils.GroupIdMappingUtils;
-import com.java3y.austin.support.constans.MessageQueuePipeline;
-import com.java3y.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
+import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
+import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
