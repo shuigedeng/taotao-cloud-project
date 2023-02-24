@@ -1,21 +1,23 @@
 package com.taotao.cloud.gateway.anti_reptile.util;
 
+import com.taotao.cloud.captcha.captcha.utils.CaptchaUtil;
 import com.taotao.cloud.gateway.anti_reptile.module.VerifyImageDTO;
-import com.taotao.cloud.gateway.captcha.utils.CaptchaUtil;
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class VerifyImageUtil {
 
-	private static final String VERIFY_CODE_KEY = "kk-antireptile_verifycdoe_";
+	private static final String VERIFY_CODE_KEY = "tt_antireptile_verifycdoe_";
 
-	@Autowired
-	private RedissonClient redissonClient;
+	private final RedissonClient redissonClient;
+
+	public VerifyImageUtil(RedissonClient redissonClient) {
+		this.redissonClient = redissonClient;
+	}
 
 	public VerifyImageDTO generateVerifyImg() {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

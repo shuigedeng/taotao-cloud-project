@@ -1,7 +1,8 @@
-package com.taotao.cloud.gateway.anti_reptile.rule;
+package com.taotao.cloud.gateway.anti_reptile.rule.rulers;
 
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.gateway.anti_reptile.AntiReptileProperties;
+import com.taotao.cloud.gateway.anti_reptile.rule.AbstractRule;
 import java.time.Duration;
 import java.util.List;
 import org.redisson.api.RAtomicLong;
@@ -9,22 +10,23 @@ import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.server.ServerWebExchange;
 
 public class IpRule extends AbstractRule {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(IpRule.class);
 
-	@Autowired
-	private RedissonClient redissonClient;
-
-	@Autowired
-	private AntiReptileProperties properties;
+	private final RedissonClient redissonClient;
+	private final AntiReptileProperties properties;
 
 	private static final String RATELIMITER_COUNT_PREFIX = "ratelimiter_request_count";
 	private static final String RATELIMITER_EXPIRATIONTIME_PREFIX = "ratelimiter_expirationtime";
 	private static final String RATELIMITER_HIT_CRAWLERSTRATEGY = "ratelimiter_hit_crawlerstrategy";
+
+	public IpRule(RedissonClient redissonClient, AntiReptileProperties properties) {
+		this.redissonClient = redissonClient;
+		this.properties = properties;
+	}
 
 	@Override
 	protected boolean doExecute(ServerWebExchange exchange) {
@@ -81,9 +83,7 @@ public class IpRule extends AbstractRule {
 	@Override
 	public void reset(ServerWebExchange exchange, String realRequestUri) {
 		String ipAddress = RequestUtils.getServerHttpRequestIpAddress(exchange.getRequest());
-		/**
-		 * 重置计数器
-		 */
+		//重置计数器
 		int expirationTime = properties.getIpRule().getExpirationTime();
 		RAtomicLong rRequestCount = redissonClient.getAtomicLong(
 			RATELIMITER_COUNT_PREFIX.concat(realRequestUri).concat(ipAddress));
@@ -92,9 +92,8 @@ public class IpRule extends AbstractRule {
 		rRequestCount.set(0L);
 		rExpirationTime.set(0L);
 		rExpirationTime.expire(Duration.ofMillis(expirationTime));
-		/**
-		 * 清除记录
-		 */
+
+		//清除记录
 		RMap<String, String> rHitMap = redissonClient.getMap(RATELIMITER_HIT_CRAWLERSTRATEGY);
 		rHitMap.remove(ipAddress);
 	}

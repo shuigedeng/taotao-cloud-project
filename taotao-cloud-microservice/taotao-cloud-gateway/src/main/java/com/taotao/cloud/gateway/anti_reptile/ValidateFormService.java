@@ -14,17 +14,18 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.server.ServerWebExchange;
 
 public class ValidateFormService {
 
-	@Autowired
-	private RuleActuator actuator;
+	private final RuleActuator actuator;
+	private final VerifyImageUtil verifyImageUtil;
 
-	@Autowired
-	private VerifyImageUtil verifyImageUtil;
+	public ValidateFormService(RuleActuator actuator, VerifyImageUtil verifyImageUtil) {
+		this.actuator = actuator;
+		this.verifyImageUtil = verifyImageUtil;
+	}
 
 	public String validate(ServerWebExchange exchange) throws UnsupportedEncodingException {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -67,9 +68,7 @@ public class ValidateFormService {
 		verifyImageUtil.saveVerifyCodeToRedis(verifyImage);
 		VerifyImageVO verifyImageVO = new VerifyImageVO();
 		BeanUtils.copyProperties(verifyImage, verifyImageVO);
-		String result =
-			"{\"verifyId\": \"" + verifyImageVO.getVerifyId() + "\",\"verifyImgStr\": \""
-				+ verifyImageVO.getVerifyImgStr() + "\"}";
-		return result;
+		return "{\"verifyId\": \"" + verifyImageVO.getVerifyId() + "\",\"verifyImgStr\": \""
+			+ verifyImageVO.getVerifyImgStr() + "\"}";
 	}
 }

@@ -6,13 +6,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 @RefreshScope
-@ConfigurationProperties(prefix = "anti.reptile.manager")
+@ConfigurationProperties(prefix = AntiReptileProperties.PREFIX)
 public class AntiReptileProperties {
+
+	public static final String PREFIX = "gateway.anti.reptile";
 
 	/**
 	 * 是否启用反爬虫插件
 	 */
-	private boolean enabled;
+	private boolean enabled = false;
 
 	/**
 	 * 是否启用全局拦截，默认为false，可设置为true全局拦截

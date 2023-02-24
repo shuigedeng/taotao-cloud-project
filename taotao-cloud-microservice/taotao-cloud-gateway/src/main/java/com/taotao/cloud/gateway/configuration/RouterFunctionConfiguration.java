@@ -17,9 +17,9 @@ package com.taotao.cloud.gateway.configuration;
 
 import cn.hutool.http.HttpStatus;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.cloud.captcha.util.CaptchaUtils;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.CaptchaUtils;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
