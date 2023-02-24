@@ -82,10 +82,10 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
 			LogUtils.debug("The original request parameter is [{}]", rawQuery);
 			// 执行XSS清理
-			boolean isSQLInjection = SqlInjectionUtils.checkForGet(rawQuery);
+			boolean isSqlInjection = SqlInjectionUtils.checkForGet(rawQuery);
 
 			// 如果存在sql注入,直接拦截请求
-			if (isSQLInjection) {
+			if (isSqlInjection) {
 				return sqlInjectionResponse(exchange, uri);
 			}
 			// 不对参数做任何处理
@@ -101,17 +101,17 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
 			if (StringUtils.isNotBlank(bodyString)) {
 
-				boolean isSQLInjection;
+				boolean isSqlInjection;
 				if (WebFluxUtil.isJsonMediaType(contentType)) {
 					//如果MediaType是json才执行json方式验证
-					isSQLInjection = SqlInjectionUtils.checkForPost(bodyString);
+					isSqlInjection = SqlInjectionUtils.checkForPost(bodyString);
 				} else {
 					//form表单方式，需要走get请求
-					isSQLInjection = SqlInjectionUtils.checkForGet(bodyString);
+					isSqlInjection = SqlInjectionUtils.checkForGet(bodyString);
 				}
 
 				//  如果存在sql注入,直接拦截请求
-				if (isSQLInjection) {
+				if (isSqlInjection) {
 					return sqlInjectionResponse(exchange, uri);
 				}
 

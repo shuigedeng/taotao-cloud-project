@@ -1,16 +1,19 @@
-package com.taotao.cloud.gateway.anti_reptile.rule;
+package com.taotao.cloud.gateway.anti_reptile.rule.rulers;
 
 import com.taotao.cloud.gateway.anti_reptile.AntiReptileProperties;
+import com.taotao.cloud.gateway.anti_reptile.rule.AbstractRule;
 import eu.bitwalker.useragentutils.DeviceType;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.server.ServerWebExchange;
 
 public class UaRule extends AbstractRule {
 
-	@Autowired
-	private AntiReptileProperties properties;
+	private final AntiReptileProperties properties;
+
+	public UaRule(AntiReptileProperties properties) {
+		this.properties = properties;
+	}
 
 	@Override
 	protected boolean doExecute(ServerWebExchange exchange) {

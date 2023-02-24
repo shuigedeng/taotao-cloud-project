@@ -30,7 +30,7 @@ import reactor.core.publisher.Mono;
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "log", havingValue = "true", matchIfMissing = true)
 public class RequestLogFilter implements GlobalFilter, Ordered {
 
-	private static final String START_TIME = "startTime";
+	private static final String START_TIME = "start_time";
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
