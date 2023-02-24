@@ -27,15 +27,13 @@ import org.springframework.context.annotation.Configuration;
 public class AntiReptileConfiguration {
 
 	@Bean
-	@ConditionalOnProperty(prefix = AntiReptileProperties.PREFIX
-		+ ".ip-rule", value = "enabled", havingValue = "true", matchIfMissing = true)
+	@ConditionalOnProperty(prefix = AntiReptileProperties.PREFIX, name = "ip-rule", value = "enabled", havingValue = "true", matchIfMissing = true)
 	public IpRule ipRule(RedissonClient redissonClient, AntiReptileProperties properties) {
 		return new IpRule(redissonClient, properties);
 	}
 
 	@Bean
-	@ConditionalOnProperty(prefix = AntiReptileProperties.PREFIX
-		+ ".ua-rule", value = "enabled", havingValue = "true", matchIfMissing = true)
+	@ConditionalOnProperty(prefix = AntiReptileProperties.PREFIX, name = "ua-rule", value = "enabled", havingValue = "true", matchIfMissing = true)
 	public UaRule uaRule(AntiReptileProperties properties) {
 		return new UaRule(properties);
 	}
