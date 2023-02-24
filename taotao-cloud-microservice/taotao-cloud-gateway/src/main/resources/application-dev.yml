@@ -791,6 +791,30 @@ spring:
 
 taotao:
   cloud:
+    logger:
+      enabled: true
+    anti:
+      reptile:
+        enabled: true #是否开启反爬虫
+        global-filter-mode: false
+        include-urls:
+          - /aa/sd
+          - /asdf
+        ip-rule:
+          enabled: true
+          expiration-time: 5000
+          ignore-ip:
+            - 192.168.1.10
+            - 192.168.1.11
+          lock-expire: 5000
+          request-max-size: 20
+        ua-rule:
+          enabled: true
+          allowed-iot: true
+          allowed-linux: true
+          allowed-mobile: true
+          allowed-pc: true
+          allowed-proxy: true
     monitor:
       enabled: true
       dump:
@@ -832,8 +856,7 @@ taotao:
         prefix: /api
         version: v${taotaoCloudVersion}
         base-uri: ${taotao.cloud.gateway.api.prefix}/${taotao.cloud.gateway.api.version}
-    logger:
-      enabled: true
+
 
 tlog:
   pattern: "$preApp:$preIp:$spanId:$traceId"
@@ -842,27 +865,16 @@ tlog:
   mdcEnable: true
 
 sa-token:
-  # token名称 (同时也是cookie名称)
-  token-name: satoken
-  # token有效期，单位秒，-1代表永不过期
-  timeout: 2592000
-  # token临时有效期 (指定时间内无操作就视为token过期)，单位秒
-  activity-timeout: -1
-  # 是否允许同一账号并发登录 (为false时新登录挤掉旧登录)
-  is-concurrent: true
-  # 在多人登录同一账号时，是否共用一个token (为false时每次登录新建一个token)
-  is-share: false
-  # token风格
-  token-style: uuid
-  # 是否输出操作日志
-  is-log: false
-  # 是否从cookie中读取token
-  is-read-cookie: false
-  # 是否从head中读取token
-  is-read-head: true
-  # 配置Sa-Token单独使用的Redis连接
-  # jwt秘钥
-  jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjk
+  token-name: satoken   # token名称 (同时也是cookie名称)
+  timeout: 2592000   # token有效期，单位秒，-1代表永不过期
+  activity-timeout: -1   # token临时有效期 (指定时间内无操作就视为token过期)，单位秒
+  is-concurrent: true   # 是否允许同一账号并发登录 (为false时新登录挤掉旧登录)
+  is-share: false   # 在多人登录同一账号时，是否共用一个token (为false时每次登录新建一个token)
+  token-style: uuid   # token风格
+  is-log: false   # 是否输出操作日志
+  is-read-cookie: false   # 是否从cookie中读取token
+  is-read-head: true   # 是否从head中读取token
+  jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjk   # 配置Sa-Token单独使用的Redis连接 wt秘钥
 
 # 没啥作用
 knife4j:
@@ -956,3 +968,4 @@ management:
     enabled: true
     sampling:
       probability: 1.0
+

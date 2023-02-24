@@ -9,7 +9,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = AntiReptileProperties.PREFIX)
 public class AntiReptileProperties {
 
-	public static final String PREFIX = "gateway.anti.reptile";
+	public static final String PREFIX = "taotao.cloud.gateway.anti.reptile";
 
 	/**
 	 * 是否启用反爬虫插件
