@@ -64,11 +64,16 @@ buildscript {
         }
 
         mavenCentral()
-        google()
+        gradlePluginPortal()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
         maven { url 'https://repo.spring.io/release' }
-        gradlePluginPortal()
+
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        google()
     }
 
     dependencies {
@@ -124,7 +129,7 @@ plugins {
 
     //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.github.johnrengelman.shadow" version "8.0.0"
 
     //用于运行 SonarQube 分析的 Gradle 插件。
     //https://plugins.gradle.org/plugin/org.sonarqube
@@ -191,34 +196,24 @@ allprojects {
             }
             url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
         }
+
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
         maven { url 'https://repo.spring.io/release' }
 
-        maven { name "Alibaba central"; url "https://maven.aliyun.com/repository/central" }
-        maven { name "Alibaba"; url "https://maven.aliyun.com/repository/public" }
-        maven { name "Alibaba google"; url "https://maven.aliyun.com/repository/google" }
-        maven {
-            name "Alibaba gradle-plugin";
-            url "https://maven.aliyun.com/repository/gradle-plugin"
-        }
-        maven { name "Alibaba spring"; url "https://maven.aliyun.com/repository/spring" }
-        maven {
-            name "Alibaba spring-plugin";
-            url "https://maven.aliyun.com/repository/spring-plugin"
-        }
-        maven { name "Alibaba grails-core"; url "https://maven.aliyun.com/repository/grails-core" }
-        maven {
-            name "Alibaba apache-snapshots";
-            url "https://maven.aliyun.com/repository/apache-snapshots"
-        }
-        maven { name = "华为开源镜像库"; url "https://mirrors.huaweicloud.com/repository/maven/" }
-        maven {
-            url "https://repository.aspose.com/repo/"
-        }
-        maven {
-            url "https://repo.e-iceblue.com/nexus/content/groups/public/"
-        }
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { url "https://maven.aliyun.com/repository/spring" }
+        maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+        maven { url "https://maven.aliyun.com/repository/grails-core" }
+        maven { url "https://maven.aliyun.com/repository/apache-snapshots" }
+
+        maven { url "https://mirrors.huaweicloud.com/repository/maven/" }
+
+        maven { url "https://repository.aspose.com/repo/" }
+        maven { url "https://repo.e-iceblue.cn/repository/maven-public/" }
     }
 }
 
