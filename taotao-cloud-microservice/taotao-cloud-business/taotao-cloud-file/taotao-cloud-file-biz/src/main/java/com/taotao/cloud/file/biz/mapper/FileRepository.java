@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.repository.cls;
+package com.taotao.cloud.file.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.gen.GenTableColumn;
+import com.taotao.cloud.sys.biz.model.entity.file.File;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
@@ -28,10 +28,10 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class GenTableColumnRepository extends BaseClassSuperRepository<GenTableColumn, Long> {
+public class FileRepository extends BaseClassSuperRepository<File, Long> {
 
-	public GenTableColumnRepository(EntityManager em) {
-		super(GenTableColumn.class, em);
+	public FileRepository(EntityManager em) {
+		super(File.class, em);
 	}
 
 }

@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.repository.cls;
+package com.taotao.cloud.generator.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.file.File;
-import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import com.taotao.cloud.sys.biz.model.entity.gen.GenTableColumn;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * CompanyMapper
@@ -27,11 +25,7 @@ import org.springframework.stereotype.Repository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-@Repository
-public class FileRepository extends BaseClassSuperRepository<File, Long> {
+public interface IGenTableColumnRepository extends JpaRepository<GenTableColumn, Long> {
 
-	public FileRepository(EntityManager em) {
-		super(File.class, em);
-	}
 
 }
