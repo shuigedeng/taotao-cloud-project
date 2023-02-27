@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.config.init;
+package com.taotao.cloud.job.biz.init;
 
 import com.taotao.cloud.job.quartz.utils.QuartzManager;
 import com.taotao.cloud.sys.biz.service.business.IQuartzJobService;
@@ -23,14 +23,14 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 /**
- * 石英工作初始化
+ * 计划工作初始化
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-28 11:53:55
+ * @since 2022-04-28 11:54:00
  */
 @Component
-public class QuartzJobInit implements ApplicationRunner {
+public class ScheduledJobInit implements ApplicationRunner {
 
 	@Autowired
 	private IQuartzJobService quartzJobService;
@@ -44,13 +44,8 @@ public class QuartzJobInit implements ApplicationRunner {
 	 */
 	@Override
 	public void run(ApplicationArguments applicationArguments) {
-
-		//DtpExecutor dtpExecutor1 = DtpRegistry.getDtpExecutor("dtpExecutor1");
-		//LogUtils.info("dtpExecutor1-----------{}", dtpExecutor1);
-		//System.out.println("=================================");
-
 		//System.out.println("--------------------注入定时任务---------------------");
-		//List<QuartzJob> quartzJobs = IQuartzJobService.findByIsPauseIsFalse();
+		//List<QuartzJob> quartzJobs = quartzJobService.findByIsPauseIsFalse();
 		//List<QuartzJobModel> quartzJobModels = new ArrayList<>();
 		//
 		//cn.hutool.core.bean.BeanUtil.copyProperties(quartzJobs, quartzJobModels);

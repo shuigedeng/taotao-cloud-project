@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service.business;
+package com.taotao.cloud.job.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzLogDto;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzLogQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzLog;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 
 public interface IQuartzLogService extends IService<QuartzLog> {

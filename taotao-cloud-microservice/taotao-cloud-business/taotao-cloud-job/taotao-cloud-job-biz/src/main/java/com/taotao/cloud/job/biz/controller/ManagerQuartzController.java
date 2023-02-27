@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.controller.business.manager;
+package com.taotao.cloud.job.biz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -85,12 +85,12 @@ public class ManagerQuartzController {
 	@GetMapping(value = "/download")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public void download(HttpServletResponse response, QuartzJobQueryCriteria criteria)
-			throws IOException {
+		throws IOException {
 		List<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob> quartzJobs = quartzJobService.queryAll(
-				criteria);
+			criteria);
 		List<QuartzJobDto> collect = quartzJobs.stream().filter(Objects::nonNull)
-				.map(e -> BeanUtils.copyProperties(e, QuartzJobDto.class))
-				.collect(Collectors.toList());
+			.map(e -> BeanUtils.copyProperties(e, QuartzJobDto.class))
+			.collect(Collectors.toList());
 
 		quartzJobService.download(collect, response);
 	}
@@ -100,11 +100,11 @@ public class ManagerQuartzController {
 	@GetMapping(value = "/logs/download")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public void downloadLog(HttpServletResponse response, QuartzLogQueryCriteria criteria)
-			throws IOException {
+		throws IOException {
 		List<QuartzLog> quartzLogs = quartzLogService.queryAll(criteria);
 		List<QuartzLogDto> collect = quartzLogs.stream().filter(Objects::nonNull)
-				.map(e -> BeanUtils.copyProperties(e, QuartzLogDto.class))
-				.collect(Collectors.toList());
+			.map(e -> BeanUtils.copyProperties(e, QuartzLogDto.class))
+			.collect(Collectors.toList());
 
 		quartzLogService.download(collect, response);
 	}
@@ -114,7 +114,7 @@ public class ManagerQuartzController {
 	@GetMapping(value = "/logs")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Map<String, Object>> getJobLogs(QuartzLogQueryCriteria criteria,
-			Pageable pageable) {
+		Pageable pageable) {
 		Map<String, Object> stringObjectMap = quartzLogService.queryAll(criteria, pageable);
 		return Result.success(stringObjectMap);
 	}
@@ -152,10 +152,10 @@ public class ManagerQuartzController {
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> updateIsPause(@PathVariable Long id) {
 		quartzJobService.updateIsPause(
-				quartzJobService.getOne(
-						new LambdaQueryWrapper<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob>()
-								.eq(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob::getId,
-										id)));
+			quartzJobService.getOne(
+				new LambdaQueryWrapper<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob>()
+					.eq(com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob::getId,
+						id)));
 		return Result.success(true);
 	}
 
@@ -166,10 +166,10 @@ public class ManagerQuartzController {
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> execution(@PathVariable Long id) {
 		quartzJobService.execution(
-				quartzJobService.getOne(
-						new LambdaQueryWrapper<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob>().eq(
-								com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob::getId,
-								id)));
+			quartzJobService.getOne(
+				new LambdaQueryWrapper<com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob>().eq(
+					com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob::getId,
+					id)));
 		return Result.success(true);
 	}
 

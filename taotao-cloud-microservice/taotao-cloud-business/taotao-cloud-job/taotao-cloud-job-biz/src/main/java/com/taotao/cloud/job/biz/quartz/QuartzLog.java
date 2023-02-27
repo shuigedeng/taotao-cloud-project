@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.model.entity.quartz;
+package com.taotao.cloud.job.biz.quartz;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.time.LocalDateTime;
-import java.util.Objects;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +31,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 /**
- * Quartz任务表
+ * Quartz日志表
  *
  * @author shuigedeng
  * @version 2021.10
@@ -43,12 +43,12 @@ import org.hibernate.Hibernate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = QuartzJob.TABLE_NAME)
-@TableName(QuartzJob.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = QuartzJob.TABLE_NAME, comment = "Quartz任务表")
-public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
+@Table(name = QuartzLog.TABLE_NAME)
+@TableName(QuartzLog.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = QuartzLog.TABLE_NAME, comment = "Quartz日志表")
+public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> {
 
-	public static final String TABLE_NAME = "tt_quartz_job";
+	public static final String TABLE_NAME = "tt_quartz_log";
 
 	/**
 	 * Spring Bean名称
@@ -62,11 +62,18 @@ public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
 	@Column(name = "cron_expression", columnDefinition = "varchar(64) not null comment 'cron 表达式'")
 	private String cronExpression;
 
+
 	/**
-	 * 状态：1暂停、0启用
+	 * 异常详细
 	 */
-	@Column(name = "is_pause", columnDefinition = "boolean DEFAULT false comment '收件人'")
-	private Boolean isPause;
+	@Column(name = "exception_detail", columnDefinition = "varchar(4096) not null comment 'cron 异常详细'")
+	private String exceptionDetail;
+
+	/**
+	 * 状态
+	 */
+	@Column(name = "is_success", columnDefinition = "boolean DEFAULT false comment '状态'")
+	private Boolean isSuccess;
 
 	/**
 	 * 任务名称
@@ -87,23 +94,25 @@ public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
 	private String params;
 
 	/**
-	 * 备注
+	 * 耗时（毫秒）
 	 */
-	@Column(name = "remark", columnDefinition = "varchar(256) not null comment '备注'")
-	private String remark;
+	@Column(name = "time", columnDefinition = "bigint not null default 1 comment '耗时（毫秒）'")
+	private Long time;
+
 	@Builder
-	public QuartzJob(Long id, LocalDateTime createTime, Long createBy,
+	public QuartzLog(Long id, LocalDateTime createTime, Long createBy,
 		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-		String beanName, String cronExpression, Boolean isPause, String jobName, String methodName,
-		String params, String remark) {
+		String beanName, String cronExpression, String exceptionDetail, Boolean isSuccess,
+		String jobName, String methodName, String params, Long time) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.beanName = beanName;
 		this.cronExpression = cronExpression;
-		this.isPause = isPause;
+		this.exceptionDetail = exceptionDetail;
+		this.isSuccess = isSuccess;
 		this.jobName = jobName;
 		this.methodName = methodName;
 		this.params = params;
-		this.remark = remark;
+		this.time = time;
 	}
 
 	@Override
@@ -115,8 +124,8 @@ public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
 			o)) {
 			return false;
 		}
-		QuartzJob quartzJob = (QuartzJob) o;
-		return getId() != null && Objects.equals(getId(), quartzJob.getId());
+		QuartzLog quartzLog = (QuartzLog) o;
+		return getId() != null && Objects.equals(getId(), quartzLog.getId());
 	}
 
 	@Override

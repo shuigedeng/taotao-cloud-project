@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service.business.impl;
+package com.taotao.cloud.job.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledLog;
-import com.taotao.cloud.sys.biz.mapper.IScheduledLogMapper;
-import com.taotao.cloud.sys.biz.service.business.IScheduledLogService;
+import com.taotao.cloud.sys.biz.mapper.IScheduledJobMapper;
+import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledJob;
+import com.taotao.cloud.sys.biz.service.business.IScheduledJobService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,9 +33,9 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 //@CacheConfig(cacheNames = "quartzJob")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class ScheduledLogServiceImpl extends
-	ServiceImpl<IScheduledLogMapper, ScheduledLog> implements
-	IScheduledLogService {
+public class ScheduledJobServiceImpl extends
+	ServiceImpl<IScheduledJobMapper, ScheduledJob> implements
+	IScheduledJobService {
 
 
 }

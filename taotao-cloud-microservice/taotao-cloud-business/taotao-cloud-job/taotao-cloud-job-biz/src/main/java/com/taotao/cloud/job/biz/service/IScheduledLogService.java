@@ -13,20 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.mapper;
+package com.taotao.cloud.job.biz.service;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledJob;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledLog;
 
-/**
- * IScheduledJobMapper
- *
- * @author shuigedeng
- * @version 2022.03
- * @since 2022-03-29 09:01:48
- */
-public interface IScheduledJobMapper extends BaseSuperMapper<ScheduledJob, Long> {
+public interface IScheduledLogService extends IService<ScheduledLog> {
 
 }

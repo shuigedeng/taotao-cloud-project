@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.mapper;
+package com.taotao.cloud.job.biz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledLog;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.springframework.stereotype.Repository;
 
 /**
  * IScheduledLogMapper

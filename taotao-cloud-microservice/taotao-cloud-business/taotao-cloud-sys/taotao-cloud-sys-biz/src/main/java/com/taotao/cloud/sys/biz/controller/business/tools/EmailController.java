@@ -6,7 +6,6 @@ import static com.taotao.cloud.openfeign.api.VersionEnum.V2022_08;
 import com.taotao.cloud.cache.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.cache.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.job.quartz.utils.QuartzManager;
 import com.taotao.cloud.openfeign.api.ApiInfo;
 import com.taotao.cloud.openfeign.api.ApiInfo.Create;
 import com.taotao.cloud.openfeign.api.ApiInfo.Update;
@@ -45,8 +44,6 @@ public class EmailController {
 
 	private final RedisDelayQueue redisDelayQueue;
 	private final RedissonTemplate redissonTemplate;
-	private final QuartzManager quartzManager;
-	// private final ScheduledManager scheduledManager;
 	private final IEmailConfigService emailService;
 
 	@ApiInfo(create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),

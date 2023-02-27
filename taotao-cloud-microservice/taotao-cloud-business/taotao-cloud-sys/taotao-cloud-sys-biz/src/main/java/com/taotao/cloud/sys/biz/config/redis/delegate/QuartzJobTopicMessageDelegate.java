@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
-import com.taotao.cloud.sys.biz.service.business.IQuartzJobService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,31 +27,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuartzJobTopicMessageDelegate {
 
-	@Autowired
-	private IQuartzJobService quartzJobService;
-
-	public void addJob(String message) {
-		System.out.println("addJob=====================" + message);
-	}
-
-	public void deleteJob(String message) {
-	}
-
-	public void resumeJob(String message) {
-	}
-
-	public void pauseJob(String message) {
-	}
-
-	public void runJobNow(String message) {
-	}
-
-	public void updateJob(String message) {
-	}
-
-	public void addJobLog(String message) {
-	}
-
-	public void updateJobCron(String message) {
-	}
+	//@Autowired
+	//private IQuartzJobService quartzJobService;
+	//
+	//public void addJob(String message) {
+	//	System.out.println("addJob=====================" + message);
+	//}
+	//
+	//public void deleteJob(String message) {
+	//}
+	//
+	//public void resumeJob(String message) {
+	//}
+	//
+	//public void pauseJob(String message) {
+	//}
+	//
+	//public void runJobNow(String message) {
+	//}
+	//
+	//public void updateJob(String message) {
+	//}
+	//
+	//public void addJobLog(String message) {
+	//}
+	//
+	//public void updateJobCron(String message) {
+	//}
 }
