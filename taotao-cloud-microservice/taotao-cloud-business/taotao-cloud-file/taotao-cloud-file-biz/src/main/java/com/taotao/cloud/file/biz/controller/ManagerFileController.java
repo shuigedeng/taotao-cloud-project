@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.controller.business.manager;
+package com.taotao.cloud.file.biz.controller;
 
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
@@ -49,12 +49,12 @@ public class ManagerFileController {
 	@PreAuthorize("hasAuthority('file:upload')")
 	@PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
 	public Result<UploadFileVO> upload(
-			@Parameter(description = "文件对象", required = true) @NotNull(message = "文件对象不能为空")
-			@RequestPart("file") MultipartFile file) {
+		@Parameter(description = "文件对象", required = true) @NotNull(message = "文件对象不能为空")
+		@RequestPart("file") MultipartFile file) {
 
 		File upload = fileService.upload(file);
 		UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl())
-				.build();
+			.build();
 		return Result.success(result);
 	}
 
@@ -63,14 +63,14 @@ public class ManagerFileController {
 	@PreAuthorize("hasAuthority('file:multiple:upload')")
 	@PostMapping(value = "/multiple/upload", headers = "content-type=multipart/form-data")
 	public Result<List<UploadFileVO>> uploadMultipleFiles(
-			@RequestPart("files") MultipartFile[] files) {
+		@RequestPart("files") MultipartFile[] files) {
 		if (files.length == 0) {
 			throw new BusinessException("文件不能为空");
 		}
 
 		List<File> uploads = Arrays.stream(files)
-				.map(fileService::upload)
-				.collect(Collectors.toList());
+			.map(fileService::upload)
+			.collect(Collectors.toList());
 
 		if (!CollectionUtils.isEmpty(uploads)) {
 			//List<UploadFileVO> result = uploads.stream().map(

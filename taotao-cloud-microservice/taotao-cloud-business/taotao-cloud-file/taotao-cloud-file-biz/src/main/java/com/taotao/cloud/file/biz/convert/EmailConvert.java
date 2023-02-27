@@ -13,20 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.repository.inf;
+package com.taotao.cloud.file.biz.convert;
 
-import com.taotao.cloud.sys.biz.model.entity.file.File;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.taotao.cloud.sys.api.model.dto.email.EmailDTO;
+import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
 
 /**
- * CompanyMapper
+ * DeptMapStruct
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2021/10/13 22:50
+ * @version 2022.04
+ * @since 2022-04-28 13:39:18
  */
+@Mapper(
+	unmappedSourcePolicy = ReportingPolicy.IGNORE,
+	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface EmailConvert {
 
-public interface IFileRepository extends JpaRepository<File, Long> {
+	/**
+	 * 实例
+	 */
+	EmailConvert INSTANCE = Mappers.getMapper(EmailConvert.class);
+
+	EmailConfig convert(EmailDTO emailDTO);
 
 }

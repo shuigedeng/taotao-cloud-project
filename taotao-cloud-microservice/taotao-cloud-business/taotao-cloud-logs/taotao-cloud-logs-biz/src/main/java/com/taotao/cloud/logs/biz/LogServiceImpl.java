@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service.business.impl;
+package com.taotao.cloud.logs.biz;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.json.JSONObject;
