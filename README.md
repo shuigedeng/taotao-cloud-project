@@ -75,7 +75,7 @@ Gradle:
 ```
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2023.02"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2023.03"
   }
 }
 
@@ -90,7 +90,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2023.02</version>
+      <version>2023.03</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -111,7 +111,7 @@ Maven:
  依赖                   | 版本              
 ----------------------|-----------------
  Spring               | 6.0.5           
- Spring Boot          | 3.0.2           
+ Spring Boot          | 3.0.3           
  Spring Cloud         | 2022.0.1        
  Spring Cloud Alibaba | 2022.0.0.0--RC1 
  Spring Cloud Tencent | 1.9.1--2022.0.0 
@@ -122,7 +122,7 @@ Maven:
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.0.0           
- Redisson             | 3.19.13          
+ Redisson             | 3.19.13         
  Lettuce              | 6.0.3.RELEASE   
  Elasticsearch        | 8.5.3           
  Xxl-job              | 2.3.1           
@@ -159,7 +159,7 @@ Maven:
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**
   非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.0.2、Spring Cloud 2022.0.1、Spring Cloud Alibaba
+* **主体框架**：采用最新的Spring Boot 3.0.3、Spring Cloud 2022.0.1、Spring Cloud Alibaba
   2022.0.0.0--RC1版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
