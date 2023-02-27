@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.model.entity.scheduled;
+package com.taotao.cloud.job.biz.scheduled;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
@@ -132,10 +132,10 @@ public class ScheduledJob extends BaseSuperEntity<ScheduledJob, Long> {
 
 	@Builder
 	public ScheduledJob(Long id, LocalDateTime createTime, Long createBy,
-			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-			String cron, String zone, Long fixedDelay, String fixedDelayString, Long fixedRate,
-			String fixedRateString, Long initialDelay, String initialDelayString, boolean cancel,
-			int num, String methodName, String beanName, String type) {
+		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
+		String cron, String zone, Long fixedDelay, String fixedDelayString, Long fixedRate,
+		String fixedRateString, Long initialDelay, String initialDelayString, boolean cancel,
+		int num, String methodName, String beanName, String type) {
 		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
 		this.cron = cron;
 		this.zone = zone;

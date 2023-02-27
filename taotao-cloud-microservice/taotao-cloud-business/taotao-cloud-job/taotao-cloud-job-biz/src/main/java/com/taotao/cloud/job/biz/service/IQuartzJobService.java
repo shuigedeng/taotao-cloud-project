@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service.business;
+package com.taotao.cloud.job.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobDto;

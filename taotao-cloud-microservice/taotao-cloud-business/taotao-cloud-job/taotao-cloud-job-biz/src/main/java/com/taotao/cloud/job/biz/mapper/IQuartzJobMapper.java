@@ -13,11 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service.business;
+package com.taotao.cloud.job.biz.mapper;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledLog;
+import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
-public interface IScheduledLogService extends IService<ScheduledLog> {
+/**
+ * IQuartzJobMapper
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022-03-29 09:01:48
+ */
+
+public interface IQuartzJobMapper extends BaseSuperMapper<QuartzJob, Long> {
 
 }

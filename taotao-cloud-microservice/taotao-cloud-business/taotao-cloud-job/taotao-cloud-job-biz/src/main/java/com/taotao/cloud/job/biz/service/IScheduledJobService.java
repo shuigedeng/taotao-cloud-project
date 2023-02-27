@@ -13,23 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.job.quartz;
+package com.taotao.cloud.job.biz.service;
 
-import org.springframework.stereotype.Component;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledJob;
 
-/**
- * QuartzJobTest
- *
- * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-28 11:54:30
- */
-@Component
-public class QuartzJobTest {
-
-	public void test(String str) {
-
-		System.out.println(Thread.currentThread().getName() + "------------" + str);
-	}
+public interface IScheduledJobService extends IService<ScheduledJob> {
 
 }
