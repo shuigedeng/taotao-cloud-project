@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
+import static org.springframework.cloud.loadbalancer.core.CachingServiceInstanceListSupplier.SERVICE_INSTANCE_CACHE_NAME;
+
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
@@ -22,16 +24,23 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
+import com.alibaba.nacos.client.naming.event.InstancesChangeEvent;
+import com.alibaba.nacos.common.notify.listener.Subscriber;
+import com.alibaba.nacos.common.utils.JacksonUtils;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
+import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
@@ -158,7 +167,7 @@ public class DynamicRouteConfiguration {
 	 * 2）提供动态路由的基础方法，可通过获取bean操作该类的方法。该类提供新增路由、更新路由、删除路由，然后实现发布的功能。
 	 */
 	@Component
-	public class DynamicRouteComponent implements ApplicationEventPublisherAware {
+	public static class DynamicRouteComponent implements ApplicationEventPublisherAware {
 
 		@Autowired
 		private RouteDefinitionWriter routeDefinitionWriter;
@@ -244,4 +253,36 @@ public class DynamicRouteConfiguration {
 		}
 	}
 
+
+	/**
+	 * 一个集群中有某个服务突然下线，但是网关还是会去请求这个实例，所以线上就报错
+	 * <p>
+	 * Gateway中有个缓存 CachingRouteLocator ，而网关服务使用的是lb模式，服务在上线或者下线之后，未能及时刷新这个缓存 CachingRouteLocator
+	 * <p>
+	 * 监听 Nacos 实例刷新事件，一旦出现实例发生变化马上删除缓存。在删除负载均衡缓存后， Spring Cloud Gateway
+	 * 在处理请求时发现没有缓存会重新拉取一遍服务列表，这样之后都是用的是最新的服务列表了，也就达到了动态感知上下线的目的
+	 */
+	@Component
+	@Slf4j
+	public static class NacosInstancesChangeEventListener extends Subscriber<InstancesChangeEvent> {
+
+		@Resource
+		private CacheManager defaultLoadBalancerCacheManager;
+
+		@Override
+		public void onEvent(InstancesChangeEvent event) {
+			log.info("Spring Gateway 接收实例刷新事件：{}, 开始刷新缓存",
+				JacksonUtils.toJson(event));
+			Cache cache = defaultLoadBalancerCacheManager.getCache(SERVICE_INSTANCE_CACHE_NAME);
+			if (cache != null) {
+				cache.evict(event.getServiceName());
+			}
+			log.info("Spring Gateway 实例刷新完成");
+		}
+
+		@Override
+		public Class<? extends com.alibaba.nacos.common.notify.Event> subscribeType() {
+			return InstancesChangeEvent.class;
+		}
+	}
 }
