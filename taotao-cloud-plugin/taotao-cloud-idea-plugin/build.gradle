@@ -7,7 +7,7 @@ plugins {
 dependencies {
     //testImplementation "junit:junit:4.13.2"
 
-    implementation "cn.hutool:hutool-http:5.8.11"
+    implementation "cn.hutool:hutool-http:5.8.12"
     implementation "com.google.zxing:core:3.5.1"
     implementation "com.google.zxing:javase:3.5.1"
 }

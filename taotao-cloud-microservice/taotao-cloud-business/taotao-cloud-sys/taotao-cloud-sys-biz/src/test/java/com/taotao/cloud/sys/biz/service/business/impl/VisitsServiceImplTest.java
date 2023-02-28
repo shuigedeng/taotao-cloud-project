@@ -5,7 +5,7 @@ import static org.mockito.Mockito.when;
 
 import com.taotao.cloud.sys.biz.mapper.ILogMapper;
 import com.taotao.cloud.sys.biz.mapper.IVisitsMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.Visits;
+import com.taotao.cloud.sys.biz.model.entity.Visits;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;

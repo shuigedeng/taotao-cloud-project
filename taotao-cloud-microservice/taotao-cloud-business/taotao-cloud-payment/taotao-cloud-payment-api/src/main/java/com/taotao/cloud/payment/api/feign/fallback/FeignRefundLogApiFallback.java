@@ -1,8 +1,8 @@
 package com.taotao.cloud.payment.api.feign.fallback;
 
 import com.taotao.cloud.payment.api.feign.IFeignRefundLogApi;
-import com.taotao.cloud.payment.api.vo.PayFlowVO;
-import com.taotao.cloud.payment.api.vo.RefundLogVO;
+import com.taotao.cloud.payment.api.model.vo.PayFlowVO;
+import com.taotao.cloud.payment.api.model.vo.RefundLogVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -12,6 +12,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @since 2020/4/29 21:43
  */
 public class FeignRefundLogApiFallback implements FallbackFactory<IFeignRefundLogApi> {
+
 	@Override
 	public IFeignRefundLogApi create(Throwable throwable) {
 		return new IFeignRefundLogApi() {
