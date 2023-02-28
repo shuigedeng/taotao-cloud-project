@@ -1,13 +1,4 @@
 dependencies {
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-api")
@@ -20,8 +11,46 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
     //implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-stock:taotao-cloud-stock-api")
 
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-shardingsphere"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+
+    //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
+    implementation "io.github.memorydoc:gobrs-async-starter:1.3.1-RELEASE"
+    implementation 'io.github.memorydoc:gobrs-async-skywalking-plugin:1.3.1-RELEASE'
+    implementation 'io.github.memorydoc:gobrs-async-trace-plugin:1.3.1-RELEASE'
+    implementation 'io.github.memorydoc:gobrs-async-monitor-plugin:1.3.1-RELEASE'
+
     //https://search.maven.org/artifact/org.springframework.amqp/spring-amqp
     implementation "org.springframework.amqp:spring-amqp:3.0.2"
+
+    //松鼠状态机 https://github.com/hekailiang/squirrel
+    //https://search.maven.org/artifact/org.squirrelframework/squirrel-foundation
+    implementation 'org.squirrelframework:squirrel-foundation:0.3.10'
+
+    //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
+    implementation "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
+    implementation "cn.afterturn:easypoi-base:4.4.0"
+    implementation "cn.afterturn:easypoi-annotation:4.4.0"
+
+    //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
@@ -30,21 +59,9 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
-    implementation "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
-    implementation "cn.afterturn:easypoi-base:4.4.0"
-    implementation "cn.afterturn:easypoi-annotation:4.4.0"
-
-    //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
-    //implementation "io.github.memorydoc:gobrs-async-starter:1.3.1-RELEASE"
-
     //spring状态机 依赖使用的是springboot2.7现在不打开 https://github.com/spring-projects/spring-statemachine
     //https://docs.spring.io/spring-statemachine/docs/3.2.0/reference/
     //implementation('org.springframework.statemachine:spring-statemachine-starter')
-
-    //松鼠状态机 https://github.com/hekailiang/squirrel
-    //https://search.maven.org/artifact/org.squirrelframework/squirrel-foundation
-    implementation 'org.squirrelframework:squirrel-foundation:0.3.10'
 }
 
 //dependencyManagement {
@@ -64,10 +81,14 @@ configurations {
 
         //resolutionStrategy {
         //    force "org.codehaus.groovy:groovy:4.0.0"
+        //    force "com.alibaba.csp:sentinel-core:1.8.6"
         //}
 
         //exclude group: "org.codehaus.groovy", module: "groovy"
         //exclude group: "org.projectlombok", module: "lombok"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-api"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         exclude group: "log4j", module: "log4j"
         exclude group: "log4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-log4j12"
@@ -83,22 +104,3 @@ smartdoc {
     // 你可以使用include配置来让插件自动加载指定依赖的source.
     //include "org.springframework.boot:spring-boot-starter-tomcat"
 }
-
-//configurations {
-//	all {
-//		resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-//		resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
-//
-//		resolutionStrategy {
-//			force "com.alibaba.csp:sentinel-core:1.8.6"
-//		}
-//
-//		exclude group: "log4j", module: "log4j"
-//		exclude group: "log4j", module: "slf4j-simple"
-//		exclude group: "org.slf4j", module: "slf4j-log4j12"
-//		exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
-//		exclude group: "org.apache.logging.log4j", module: "log4j-api"
-//		exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
-//		exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-//	}
-//}

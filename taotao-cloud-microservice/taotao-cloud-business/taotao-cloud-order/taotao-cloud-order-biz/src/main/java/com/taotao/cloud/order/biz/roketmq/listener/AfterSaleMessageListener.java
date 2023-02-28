@@ -2,16 +2,15 @@ package com.taotao.cloud.order.biz.roketmq.listener;
 
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.mq.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
-import com.taotao.cloud.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
+import java.util.List;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * 售后通知

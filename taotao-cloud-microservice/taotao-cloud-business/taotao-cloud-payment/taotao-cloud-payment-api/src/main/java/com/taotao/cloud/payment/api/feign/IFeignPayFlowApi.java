@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.payment.api.feign.fallback.FeignPayFlowApiFallback;
-import com.taotao.cloud.payment.api.vo.PayFlowVO;
+import com.taotao.cloud.payment.api.model.vo.PayFlowVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

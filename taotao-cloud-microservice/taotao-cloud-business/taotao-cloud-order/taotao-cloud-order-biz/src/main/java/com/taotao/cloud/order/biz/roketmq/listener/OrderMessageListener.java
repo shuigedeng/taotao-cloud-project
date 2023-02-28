@@ -7,14 +7,12 @@ import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.message.OrderMessage;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
-import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
+import java.util.List;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * 订单消息
@@ -62,7 +60,8 @@ public class OrderMessageListener implements RocketMQListener<MessageExt> {
 			//订单创建
 			case ORDER_CREATE:
 				String key = new String(messageExt.getBody());
-				TradeDTO tradeDTO = JSONUtil.toBean(redisRepository.get(key).toString(), TradeDTO.class);
+				TradeDTO tradeDTO = JSONUtil.toBean(redisRepository.get(key).toString(),
+					TradeDTO.class);
 				boolean result = true;
 				for (TradeEvent event : tradeEvent) {
 					try {
