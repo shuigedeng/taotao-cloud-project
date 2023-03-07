@@ -34,7 +34,7 @@ import org.springframework.util.MultiValueMap;
  * @since 2020/4/29 22:13
  */
 @Component
-public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
+public class ValidateCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
 
 	private static final String PARAM_CODE = "code";
 	private static final String PARAM_T = "t";
@@ -46,7 +46,7 @@ public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<
 
 	private final RedisRepository redisRepository;
 
-	public ImageCodeGatewayFilterFactory(RedisRepository redisRepository) {
+	public ValidateCodeGatewayFilterFactory(RedisRepository redisRepository) {
 		this.redisRepository = redisRepository;
 	}
 
