@@ -1,23 +1,18 @@
-package com.taotao.cloud.gateway.satoken;//package com.taotao.cloud.gateway.springcloud.satoken;
-//
-//import cn.dev33.satoken.exception.NotLoginException;
-//import cn.dev33.satoken.exception.NotPermissionException;
-//import cn.dev33.satoken.exception.NotRoleException;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.web.bind.annotation.ExceptionHandler;
-//import org.springframework.web.bind.annotation.ResponseBody;
-//
-///**
-// * @author YangBoss
-// * @title: GlobalException
-// * @projectName meta
-// * @description: 拦截全局异常类
-// * @date 2022/8/19 15:39
-// */
-//@Configuration
-//public class GlobalException {
-//
-//	// 全局异常拦截（拦截项目中的所有异常）
+package com.taotao.cloud.gateway.satoken;
+
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * @author YangBoss
+ * @title: GlobalException
+ * @projectName meta
+ * @description: 拦截全局异常类
+ * @date 2022/8/19 15:39
+ */
+@Configuration
+public class GlobalException {
+
+	// 全局异常拦截（拦截项目中的所有异常）
 //	@ResponseBody
 //	@ExceptionHandler
 //	public ResultJsonUtil<Object> handlerException(Exception e) {
@@ -63,4 +58,4 @@ package com.taotao.cloud.gateway.satoken;//package com.taotao.cloud.gateway.spri
 //		// 返回给前端
 //		return re;
 //	}
-//}
+}
