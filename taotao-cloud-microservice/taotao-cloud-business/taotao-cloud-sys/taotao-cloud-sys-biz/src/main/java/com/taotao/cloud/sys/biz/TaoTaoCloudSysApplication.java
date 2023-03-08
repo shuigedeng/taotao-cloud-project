@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.biz;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * TaoTaoCloudSysApplication 抑制java9 module 报错
@@ -48,7 +47,6 @@ public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
 		PropertyUtils.setDefaultProperty("taotao-cloud-sys");
-
 		try {
 			SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 		} catch (Throwable e) {

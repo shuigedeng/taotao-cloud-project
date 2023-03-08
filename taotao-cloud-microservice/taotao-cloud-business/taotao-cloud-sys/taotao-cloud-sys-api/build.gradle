@@ -1,8 +1,67 @@
+apply plugin: "com.google.protobuf"
+
 dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
     compileOnly "io.github.shuigedeng:taotao-cloud-starter-office"
     compileOnly "io.seata:seata-all"
+
+    api "io.grpc:grpc-netty:1.53.0"
+    api "io.grpc:grpc-protobuf:1.53.0"
+    api "io.grpc:grpc-stub:1.53.0"
+    api "io.grpc:grpc-services:1.53.0"
+    api "io.grpc:grpc-api:1.53.0"
+    api "io.grpc:grpc-context:1.53.0"
+    api "io.grpc:grpc-core:1.53.0"
+    api "io.netty:netty-common:4.1.89.Final"
 }
 
 description = "系统模块api"
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.19.1"
+    }
+    generatedFilesBaseDir = "$projectDir/src/generated"
+    clean {
+        delete generatedFilesBaseDir
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.53.0"
+        }
+        //javalite {
+        //    // The codegen for lite comes as a separate artifact
+        //    artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.1'
+        //}
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+//// Optional
+//eclipse {
+//    classpath {
+//        file.beforeMerged { cp ->
+//            def generatedGrpcFolder = new org.gradle.plugins.ide.eclipse.model.SourceFolder('src/generated/main/grpc', null);
+//            generatedGrpcFolder.entryAttributes['ignore_optional_problems'] = 'true';
+//            cp.entries.add( generatedGrpcFolder );
+//            def generatedJavaFolder = new org.gradle.plugins.ide.eclipse.model.SourceFolder('src/generated/main/java', null);
+//            generatedJavaFolder.entryAttributes['ignore_optional_problems'] = 'true';
+//            cp.entries.add( generatedJavaFolder );
+//        }
+//    }
+//}
+//
+//// Optional
+//idea {
+//    module {
+//        sourceDirs += file("src/generated/main/java")
+//        sourceDirs += file("src/generated/main/grpc")
+//        generatedSourceDirs += file("src/generated/main/java")
+//        generatedSourceDirs += file("src/generated/main/grpc")
+//    }
+//}
