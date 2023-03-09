@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service.business;
+package com.taotao.cloud.logs.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.api.model.dto.log.LogQueryCriteria;
-import com.taotao.cloud.sys.biz.model.entity.system.Log;
+import com.taotao.cloud.logs.api.model.dto.LogQueryCriteria;
+import com.taotao.cloud.logs.biz.entity.Log;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;

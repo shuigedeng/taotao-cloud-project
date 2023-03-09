@@ -15,13 +15,12 @@
  */
 package com.taotao.cloud.logs.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.system.Log;
+import com.taotao.cloud.logs.biz.entity.Log;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
 
 /**
  * ILogMapper

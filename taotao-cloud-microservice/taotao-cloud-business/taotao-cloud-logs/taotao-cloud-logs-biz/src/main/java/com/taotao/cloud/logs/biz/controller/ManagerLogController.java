@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.controller.business.manager;
+package com.taotao.cloud.logs.biz.controller;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
-import com.taotao.cloud.sys.api.model.dto.log.LogQueryCriteria;
-import com.taotao.cloud.sys.biz.service.business.ILogService;
+import com.taotao.cloud.logs.api.model.dto.LogQueryCriteria;
+import com.taotao.cloud.logs.biz.service.ILogService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.io.IOException;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -55,7 +55,7 @@ public class ManagerLogController {
 	@GetMapping(value = "/download")
 	@PreAuthorize("@el.check('admin','log:list')")
 	public void download(HttpServletResponse response, LogQueryCriteria criteria)
-			throws IOException {
+		throws IOException {
 		criteria.setLogType("INFO");
 		logService.download(logService.queryAll(criteria), response);
 	}
@@ -65,7 +65,7 @@ public class ManagerLogController {
 	@GetMapping(value = "/error/download")
 	@PreAuthorize("@el.check('admin','log:list')")
 	public void errorDownload(HttpServletResponse response, LogQueryCriteria criteria)
-			throws IOException {
+		throws IOException {
 		criteria.setLogType("ERROR");
 		logService.download(logService.queryAll(criteria), response);
 	}

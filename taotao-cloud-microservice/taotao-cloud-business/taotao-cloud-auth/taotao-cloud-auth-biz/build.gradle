@@ -55,6 +55,7 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //验证码 https://gitee.com/tianai/tianai-captcha-springboot-starter
+    //https://search.maven.org/search?q=g:cloud.tianai.captcha%20AND%20a:tianai-captcha-springboot-starter
     implementation 'cloud.tianai.captcha:tianai-captcha-springboot-starter:1.3.3'
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
