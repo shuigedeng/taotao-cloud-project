@@ -16,9 +16,9 @@
 package com.taotao.cloud.job.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobDto;
-import com.taotao.cloud.sys.api.model.dto.quartz.QuartzJobQueryCriteria;
-import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzJob;
+import com.taotao.cloud.job.api.model.dto.QuartzJobDto;
+import com.taotao.cloud.job.api.model.dto.QuartzJobQueryCriteria;
+import com.taotao.cloud.job.biz.model.entity.QuartzJob;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;

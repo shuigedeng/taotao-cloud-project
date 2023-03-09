@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.generator.biz.mapper;
+package com.taotao.cloud.job.api.model.dto;
 
-import com.taotao.cloud.generator.biz.domain.GenTableColumn;
-import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-/**
- * CompanyMapper
- *
- * @author shuigedeng
- * @version 2022.03
- * @since 2021/10/13 22:50
- */
-@Repository
-public class GenTableColumnRepository extends BaseClassSuperRepository<GenTableColumn, Long> {
+@Data
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+public class QuartzLogQueryCriteria {
 
-	public GenTableColumnRepository(EntityManager em) {
-		super(GenTableColumn.class, em);
-	}
-
+	private String id;
 }

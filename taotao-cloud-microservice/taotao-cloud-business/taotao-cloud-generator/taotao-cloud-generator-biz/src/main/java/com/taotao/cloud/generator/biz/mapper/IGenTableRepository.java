@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.generator.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.gen.GenTable;
+import com.taotao.cloud.generator.biz.domain.GenTable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

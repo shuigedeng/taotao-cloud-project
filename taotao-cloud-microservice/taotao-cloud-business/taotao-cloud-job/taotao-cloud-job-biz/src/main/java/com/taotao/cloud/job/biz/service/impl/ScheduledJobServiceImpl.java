@@ -16,9 +16,9 @@
 package com.taotao.cloud.job.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.sys.biz.mapper.IScheduledJobMapper;
-import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledJob;
-import com.taotao.cloud.sys.biz.service.business.IScheduledJobService;
+import com.taotao.cloud.job.biz.mapper.IScheduledJobMapper;
+import com.taotao.cloud.job.biz.model.entity.ScheduledJob;
+import com.taotao.cloud.job.biz.service.IScheduledJobService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

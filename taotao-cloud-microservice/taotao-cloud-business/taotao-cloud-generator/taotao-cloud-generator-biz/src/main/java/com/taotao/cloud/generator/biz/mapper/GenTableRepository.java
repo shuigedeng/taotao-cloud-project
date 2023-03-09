@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.generator.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.gen.GenTable;
+import com.taotao.cloud.generator.biz.domain.GenTable;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

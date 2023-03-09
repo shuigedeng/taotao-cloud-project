@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.job.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.scheduled.ScheduledJob;
+import com.taotao.cloud.job.biz.model.entity.ScheduledJob;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**

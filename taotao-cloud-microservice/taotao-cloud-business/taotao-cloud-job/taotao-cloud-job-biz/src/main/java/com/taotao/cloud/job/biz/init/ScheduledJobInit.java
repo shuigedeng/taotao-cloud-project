@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.job.biz.init;
 
+import com.taotao.cloud.job.biz.service.IQuartzJobService;
 import com.taotao.cloud.job.quartz.utils.QuartzManager;
-import com.taotao.cloud.sys.biz.service.business.IQuartzJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

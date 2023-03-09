@@ -13,25 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.generator.biz.mapper;
+package com.taotao.cloud.file.api.model.vo;
 
-import com.taotao.cloud.generator.biz.domain.GenTableColumn;
-import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import java.io.Serial;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
- * CompanyMapper
+ * FileVO
  *
  * @author shuigedeng
  * @version 2022.03
- * @since 2021/10/13 22:50
+ * @since 2021/12/20 13:59
  */
-@Repository
-public class GenTableColumnRepository extends BaseClassSuperRepository<GenTableColumn, Long> {
+@Data
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+public class FileVO implements Serializable {
 
-	public GenTableColumnRepository(EntityManager em) {
-		super(GenTableColumn.class, em);
-	}
+	@Serial
+	private static final long serialVersionUID = -4132785717179910025L;
 
+	private String id;
 }

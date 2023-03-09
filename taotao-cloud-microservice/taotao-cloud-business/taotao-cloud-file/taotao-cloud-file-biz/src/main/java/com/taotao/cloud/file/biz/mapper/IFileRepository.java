@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.file.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.file.File;
+import com.taotao.cloud.file.biz.entity.File;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
