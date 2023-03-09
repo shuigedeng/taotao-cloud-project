@@ -13,36 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.model.dto.log;
+package com.taotao.cloud.logs.api.model.dto;
 
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class LogErrorDTO implements Serializable {
+public class LogSmallDTO implements Serializable {
 
-    private Long id;
+	private String description;
 
-    private String username;
+	private String requestIp;
 
-    private String description;
+	private Long time;
 
-    private String method;
+	private String address;
 
-    private String params;
+	private String browser;
 
-    private String browser;
-
-    private String requestIp;
-
-    private String address;
-
-    private Timestamp createTime;
+	private Timestamp createTime;
 }

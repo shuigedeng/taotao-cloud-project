@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.83'
     implementation 'com.squareup.okhttp3:okhttp:4.9.2'
     implementation 'com.google.guava:guava:31.0.1-jre'
-    implementation 'cn.hutool:hutool-all:5.8.13'
+    implementation 'cn.hutool:hutool-all:5.8.14'
     implementation 'mysql:mysql-connector-java:5.1.35'
 }
 

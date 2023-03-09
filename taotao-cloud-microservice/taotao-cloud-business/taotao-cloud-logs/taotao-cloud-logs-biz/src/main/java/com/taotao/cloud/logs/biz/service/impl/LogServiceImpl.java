@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.logs.biz;
+package com.taotao.cloud.logs.biz.service.impl;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.json.JSONObject;
@@ -21,10 +21,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.sys.api.model.dto.log.LogQueryCriteria;
-import com.taotao.cloud.sys.biz.mapper.ILogMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.Log;
-import com.taotao.cloud.sys.biz.service.business.ILogService;
+import com.taotao.cloud.logs.api.model.dto.LogQueryCriteria;
+import com.taotao.cloud.logs.biz.entity.Log;
+import com.taotao.cloud.logs.biz.mapper.ILogMapper;
+import com.taotao.cloud.logs.biz.service.ILogService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;

@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.model.dto.log;
+package com.taotao.cloud.logs.api.model.dto;
 
 
 import java.sql.Timestamp;
 import java.util.List;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -28,12 +31,12 @@ import lombok.*;
 @NoArgsConstructor
 public class LogQueryCriteria {
 
-    private String blurry;
+	private String blurry;
 
-    private String logType;
+	private String logType;
 
-    private List<Timestamp> createTime;
+	private List<Timestamp> createTime;
 
-    private Integer type;
+	private Integer type;
 
 }
