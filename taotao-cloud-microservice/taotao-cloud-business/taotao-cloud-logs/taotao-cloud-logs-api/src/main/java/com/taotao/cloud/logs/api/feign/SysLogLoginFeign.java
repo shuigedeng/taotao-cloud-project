@@ -36,10 +36,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(contextId = SysLogLoginFeign.SYSLOGLOGINFEIGN, value = ServiceNameConstants.XHUICLOUD_LOGS_SERVICE, path = "/sysLogLogin")
 public interface SysLogLoginFeign {
 
-	String SYSLOGLOGINFEIGN = "sysLogLoginFeign";
+    String SYSLOGLOGINFEIGN = "sysLogLoginFeign";
 
-	@PostMapping
-	Response save(@RequestBody SysLogLogin sysLogLogin,
-		@RequestHeader(AuthorizationConstants.FROM) String from);
+    @PostMapping
+    Response save(@RequestBody SysLogLogin sysLogLogin,  @RequestHeader(AuthorizationConstants.FROM) String from);
 
 }
