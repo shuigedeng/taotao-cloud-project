@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.job.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.quartz.QuartzLog;
+import com.taotao.cloud.job.biz.model.entity.QuartzLog;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**

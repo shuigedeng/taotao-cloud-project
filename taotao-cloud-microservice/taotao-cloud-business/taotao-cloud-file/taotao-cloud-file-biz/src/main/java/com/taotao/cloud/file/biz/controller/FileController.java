@@ -1,7 +1,7 @@
 package com.taotao.cloud.file.biz.controller;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.file.api.model.vo.file.UploadFileVO;
+import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.service.IFileService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;

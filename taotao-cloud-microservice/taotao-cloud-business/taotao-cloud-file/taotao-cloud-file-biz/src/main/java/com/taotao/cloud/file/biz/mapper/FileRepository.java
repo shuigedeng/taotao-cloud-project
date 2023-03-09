@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.file.biz.mapper;
 
-import com.taotao.cloud.sys.biz.model.entity.file.File;
+import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
