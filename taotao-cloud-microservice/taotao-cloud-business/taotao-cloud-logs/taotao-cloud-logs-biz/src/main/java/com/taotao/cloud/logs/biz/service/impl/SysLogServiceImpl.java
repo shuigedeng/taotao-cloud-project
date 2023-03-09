@@ -25,9 +25,9 @@
 package com.taotao.cloud.logs.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xhuicloud.logs.entity.SysLog;
-import com.xhuicloud.logs.mapper.SysLogMapper;
-import com.xhuicloud.logs.service.SysLogService;
+import com.taotao.cloud.logs.biz.entity.SysLog;
+import com.taotao.cloud.logs.biz.mapper.SysLogMapper;
+import com.taotao.cloud.logs.biz.service.SysLogService;
 import org.springframework.stereotype.Service;
 
 @Service

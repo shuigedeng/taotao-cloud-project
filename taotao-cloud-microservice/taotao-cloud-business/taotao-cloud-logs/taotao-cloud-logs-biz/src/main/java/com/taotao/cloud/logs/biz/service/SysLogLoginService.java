@@ -25,7 +25,7 @@
 package com.taotao.cloud.logs.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xhuicloud.logs.entity.SysLogLogin;
+import com.taotao.cloud.logs.biz.entity.SysLogLogin;
 
 /**
  * @program: logs

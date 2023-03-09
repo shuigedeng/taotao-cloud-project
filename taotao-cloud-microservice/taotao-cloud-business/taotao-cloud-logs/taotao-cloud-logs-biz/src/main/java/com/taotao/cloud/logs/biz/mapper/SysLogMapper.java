@@ -25,7 +25,7 @@
 package com.taotao.cloud.logs.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xhuicloud.logs.entity.SysLog;
+import com.taotao.cloud.logs.biz.entity.SysLog;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

@@ -2,11 +2,11 @@ package com.taotao.cloud.file.biz.controller;
 
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.sys.api.model.vo.file.FileVO;
-import com.taotao.cloud.sys.api.model.vo.file.UploadFileVO;
-import com.taotao.cloud.sys.biz.model.convert.FileConvert;
-import com.taotao.cloud.sys.biz.model.entity.file.File;
-import com.taotao.cloud.sys.biz.service.business.IFileService;
+import com.taotao.cloud.file.api.model.vo.FileVO;
+import com.taotao.cloud.file.api.model.vo.UploadFileVO;
+import com.taotao.cloud.file.biz.convert.FileConvert;
+import com.taotao.cloud.file.biz.entity.File;
+import com.taotao.cloud.file.biz.service.IFileService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
