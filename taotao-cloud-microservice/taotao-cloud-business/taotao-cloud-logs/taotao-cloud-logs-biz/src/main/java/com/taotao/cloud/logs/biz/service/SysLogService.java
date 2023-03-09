@@ -25,7 +25,7 @@
 package com.taotao.cloud.logs.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xhuicloud.logs.entity.SysLog;
+import com.taotao.cloud.logs.biz.entity.SysLog;
 
 public interface SysLogService extends IService<SysLog> {
 

@@ -26,10 +26,6 @@ package com.taotao.cloud.logs.biz.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xhuicloud.common.authorization.resource.annotation.Anonymous;
-import com.xhuicloud.common.core.utils.Response;
-import com.xhuicloud.logs.entity.SysLog;
-import com.xhuicloud.logs.service.SysLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
