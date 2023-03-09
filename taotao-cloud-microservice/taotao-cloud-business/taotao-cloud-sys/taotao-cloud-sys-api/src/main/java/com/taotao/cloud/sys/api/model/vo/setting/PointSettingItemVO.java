@@ -1,8 +1,7 @@
 package com.taotao.cloud.sys.api.model.vo.setting;
 
-import lombok.Data;
-
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 积分签到设置
@@ -33,6 +32,7 @@ public class PointSettingItemVO implements Comparable<PointSettingItemVO>, Seria
 
 	@Override
 	public int compareTo(PointSettingItemVO pointSettingItem) {
-		return this.day - pointSettingItem.getDay();
+		//return this.day - pointSettingItem.getDay();
+		return 0;
 	}
 }

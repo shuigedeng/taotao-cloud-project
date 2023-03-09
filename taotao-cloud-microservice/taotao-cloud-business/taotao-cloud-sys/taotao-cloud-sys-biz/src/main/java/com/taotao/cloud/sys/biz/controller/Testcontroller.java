@@ -1,7 +1,15 @@
-package com.taotao.cloud.sys.biz;
+package com.taotao.cloud.sys.biz.controller;
+
+import com.taotao.cloud.sys.biz.service.grpc.DeviceGrpcService;
+import org.apache.pulsar.shade.io.swagger.annotations.Api;
+import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value = "Testcontroller", description = "测试swagger")
+@Api(value = "Testcontroller", description = "测试grpc")
 public class Testcontroller {
 
 
