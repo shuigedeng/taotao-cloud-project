@@ -1863,8 +1863,7 @@ grpc:
     #inProcess:
     #  address: in-process:test #这允许客户端在同一应用程序内使用以下配置连接到服务器：
     grpc-server:
-      host: 127.0.01
-      port: 7052
+      address: 'static://127.0.0.1:9898'
     # 服务名（不同服务名可对应不同配置）
     #grpc-sb-server:
     #  # 服务端地址

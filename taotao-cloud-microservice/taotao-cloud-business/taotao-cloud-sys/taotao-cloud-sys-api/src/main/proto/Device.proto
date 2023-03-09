@@ -3,25 +3,25 @@ syntax = "proto3";
 package com.taotao.cloud.sys.api.grpc;
 
 option java_multiple_files = true;
-option java_package = "com.taotao.cloud.sys.api.grpc.lib";
+option java_package = "com.taotao.cloud.sys.api.grpc";
 option java_outer_classname = "DeviceFixProto";
-option objc_class_prefix = "HLW";
+//option objc_class_prefix = "HLW";
 
 // The device service definition.
 service DeviceFixService {
     // Sends a message
-    rpc insertDeviceFix (deviceFix) returns (booleanReply){}
-    rpc updateDeviceFix (deviceFix) returns (booleanReply){}
-    rpc searchDeviceFix (conditionsRequest) returns (deviceFix){}
-    rpc deleteDeviceFix (conditionsRequest) returns (booleanReply){}
+    rpc insertDeviceFix (DeviceFix) returns (BooleanReply){}
+    rpc updateDeviceFix (DeviceFix) returns (BooleanReply){}
+    rpc searchDeviceFix (ConditionsRequest) returns (DeviceFix){}
+    rpc deleteDeviceFix (ConditionsRequest) returns (BooleanReply){}
 }
 
 // The request message .
-message conditionsRequest {
+message ConditionsRequest {
     string id = 1;
 }
 
-message deviceFix {
+message DeviceFix {
     string id = 1;
     string serialNum = 2;
     string userNum = 3;
@@ -33,11 +33,11 @@ message deviceFix {
 }
 
 // The response message
-message booleanReply {
+message BooleanReply {
     bool reply = 1;
 }
 
 // The response message
-message objectReply {
+message ObjectReply {
     bool reply = 1;
 }
