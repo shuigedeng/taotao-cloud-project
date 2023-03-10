@@ -11,6 +11,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
 }
 
-mainClassName = "com.taotao.cloud.report.biz.TaoTaoCloudReportApplication"
-description = "报表模块"
-archivesBaseName = 'taotao-cloud-report'
+mainClassName = "com.taotao.cloud.job.biz.TaoTaoCloudJobApplication"
+description = "定时任务模块"
+archivesBaseName = 'taotao-cloud-job'

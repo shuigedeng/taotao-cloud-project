@@ -12,6 +12,6 @@ dependencies {
     implementation 'org.flowable:flowable-spring-boot-starter-actuator:7.0.0.M1'
 }
 
-mainClassName = "com.taotao.cloud.customer.biz.TaoTaoCloudCustomerApplication"
-description = "flowbale工作流模块"
-archivesBaseName = 'taotao-cloud-customer'
+mainClassName = "com.taotao.cloud.flowable.biz.TaoTaoCloudFlowableApplication"
+description = "flowable工作流模块"
+archivesBaseName = 'taotao-cloud-flowable'
