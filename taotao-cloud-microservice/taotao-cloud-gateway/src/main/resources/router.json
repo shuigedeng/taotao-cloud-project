@@ -1,0 +1,208 @@
+[
+  {
+    "id": "laokou-auth",
+    "uri": "lb://laokou-auth",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/auth/**"
+        }
+      },
+      {
+        "name": "Weight",
+        "args": {
+          "_genkey_0": "auth",
+          "_genkey_1": "100"
+        }
+      }
+    ],
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      },
+      {
+        "name": "RewritePath",
+        "args": {
+          "_genkey_0": "/auth/(?<path>.*)",
+          "_genkey_1": "/$\\{path}"
+        }
+      },
+      {
+        "name": "IpBlack",
+        "args": {
+          "sources": "192.168.62.100"
+        }
+      }
+    ],
+    "metadata": {
+      "version": "2.0"
+    },
+    "order": 999
+  },
+  {
+    "id": "laokou-admin",
+    "uri": "lb://laokou-admin",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/admin/**"
+        }
+      },
+      {
+        "name": "Weight",
+        "args": {
+          "_genkey_0": "admin",
+          "_genkey_1": "100"
+        }
+      }
+    ],
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      },
+      {
+        "name": "RewritePath",
+        "args": {
+          "_genkey_0": "/admin/(?<path>.*)",
+          "_genkey_1": "/$\\{path}"
+        }
+      },
+      {
+        "name": "IpBlack",
+        "args": {
+          "sources": "192.168.62.100"
+        }
+      }
+    ],
+    "metadata": {
+      "version": "2.0"
+    },
+    "order": 999
+  },
+  {
+    "id": "open-api",
+    "uri": "http://127.0.0.1:5555",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/v3/api-docs/**"
+        }
+      },
+      {
+        "name": "Weight",
+        "args": {
+          "_genkey_0": "open-api",
+          "_genkey_1": "100"
+        }
+      }
+    ],
+    "filters": [
+      {
+        "name": "RewritePath",
+        "args": {
+          "_genkey_0": "/v3/api-docs/(?<path>.*)",
+          "_genkey_1": "/$\\{path}/v3/api-docs"
+        }
+      }
+    ],
+    "metadata": {},
+    "order": 999
+  },
+  {
+    "id": "laokou-im",
+    "uri": "lb://laokou-im",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/im/**"
+        }
+      },
+      {
+        "name": "Weight",
+        "args": {
+          "_genkey_0": "im",
+          "_genkey_1": "100"
+        }
+      }
+    ],
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      },
+      {
+        "name": "RewritePath",
+        "args": {
+          "_genkey_0": "/im/(?<path>.*)",
+          "_genkey_1": "/$\\{path}"
+        }
+      },
+      {
+        "name": "IpBlack",
+        "args": {
+          "sources": "192.168.62.100"
+        }
+      }
+    ],
+    "metadata": {
+      "version": "2.0"
+    },
+    "order": 999
+  },
+  {
+    "id": "laokou-oss",
+    "uri": "lb://laokou-oss",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/oss/**"
+        }
+      },
+      {
+        "name": "Weight",
+        "args": {
+          "_genkey_0": "oss",
+          "_genkey_1": "100"
+        }
+      }
+    ],
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      },
+      {
+        "name": "RewritePath",
+        "args": {
+          "_genkey_0": "/oss/(?<path>.*)",
+          "_genkey_1": "/$\\{path}"
+        }
+      },
+      {
+        "name": "IpBlack",
+        "args": {
+          "sources": "192.168.62.100"
+        }
+      }
+    ],
+    "metadata": {
+      "version": "2.0"
+    },
+    "order": 999
+  }
+]

@@ -1,0 +1,95 @@
+pipeline {
+  agent {
+    node {
+      label 'maven'
+    }
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
+  }
+
+  stages {
+    stage('default-0') {
+      parallel {
+        stage('构建master分支代码') {
+          agent none
+          when {
+            branch 'master'
+          }
+          steps {
+            container('maven') {
+              sh 'mvn clean package -DskipTests -Pproduct'
+            }
+          }
+        }
+
+      }
+    }
+
+    stage('构建docker镜像') {
+      agent none
+      steps {
+        container('maven') {
+          sh 'ls $APP_NAME/target'
+          sh 'docker build -t $APP_NAME:latest -f $APP_NAME/dockerfile-k8s ./$APP_NAME/'
+        }
+
+      }
+    }
+
+    stage('推送镜像到仓库') {
+      agent none
+      steps {
+        container('maven') {
+          withCredentials([usernamePassword(credentialsId : "$DOCKER_HUB" ,usernameVariable : 'DOCKER_USER_VAR' ,passwordVariable : 'DOCKER_PWD_VAR' ,)]) {
+            sh 'echo "$DOCKER_PWD_VAR" | docker login $REGISTRY -u "$DOCKER_USER_VAR" --password-stdin'
+            sh 'docker tag $APP_NAME:latest $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:v1.$BUILD_NUMBER'
+            sh 'docker push $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:v1.$BUILD_NUMBER'
+          }
+
+        }
+
+      }
+    }
+
+    stage('发布服务') {
+      agent none
+      steps {
+        container('maven') {
+          withCredentials([kubeconfigFile(credentialsId: env.KUBECONFIG_CREDENTIAL_ID, variable: 'KUBECONFIG')]) {
+            sh 'envsubst < twelvet-gateway/deploy.yml | kubectl apply -f -'
+          }
+        }
+      }
+    }
+
+    stage('删除旧版本docker镜像') {
+      agent none
+      steps {
+        container('maven') {
+          sleep(60)
+          timeout(unit: 'MINUTES', activity: true, time: 5) {
+            waitUntil{
+              script{
+                def r = sh script: 'docker rmi $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:v1.$(($BUILD_NUMBER-1))',returnStatus: true
+                return ( r == 0 )
+              }
+           }
+          }
+        }
+      }
+    }
+
+  }
+  environment {
+    DOCKER_HUB = 'aliyun-docker-registry'
+    KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'
+    REGISTRY = 'registry.cn-guangzhou.aliyuncs.com'
+    DOCKERHUB_NAMESPACE = 'twelvet-pro'
+    APP_NAME = 'twelvet-gateway'
+  }
+  parameters {
+    string(name: 'TAG_NAME', defaultValue: 'master', description: '')
+  }
+}
