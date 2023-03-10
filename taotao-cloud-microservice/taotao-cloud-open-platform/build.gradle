@@ -1,9 +1,17 @@
 dependencies {
-    api "io.github.shuigedeng:taotao-cloud-starter-web"
-    api "io.github.shuigedeng:taotao-cloud-starter-openapi"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openapi"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-third-client"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
 
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-api")
@@ -13,34 +21,11 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-operation:taotao-cloud-operation-api")
 
     implementation "org.apache.pdfbox:pdfbox:2.0.27"
-    implementation "io.soabase.record-builder:record-builder-core:35"
 
-    implementation "com.google.protobuf:protobuf-java:3.22.0"
-    implementation "com.google.protobuf:protobuf-java-util:3.22.0"
-    implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
-
-    implementation "io.protostuff:protostuff-core:1.8.0"
-    implementation "io.protostuff:protostuff-runtime:1.8.0"
-
-    implementation "com.dtflys.forest:forest-spring-boot-starter"
-    implementation "com.github.lianjiatech:retrofit-spring-boot-starter"
-
-    implementation "org.springframework.cloud:spring-cloud-square-retrofit"
-    implementation "org.springframework.cloud:spring-cloud-square-okhttp"
-
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-    //annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    api "org.projectlombok:lombok"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    api "io.soabase.record-builder:record-builder-core"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
 mainClassName = "com.taotao.cloud.open.platform.TaoTaoCloudOpenPlatformApplication"
