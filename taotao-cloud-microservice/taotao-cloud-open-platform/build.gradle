@@ -43,6 +43,6 @@ dependencies {
     annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 }
 
-mainClassName = "com.taotao.cloud.open.biz.TaoTaoCloudOpenApplication"
+mainClassName = "com.taotao.cloud.open.platform.TaoTaoCloudOpenPlatformApplication"
 description = "开放平台模块"
 archivesBaseName = 'taotao-cloud-open-platform'

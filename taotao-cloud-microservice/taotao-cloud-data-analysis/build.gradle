@@ -1,16 +1,16 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-common"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
 
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
-//    implementation "org.springframework.boot:spring-boot-starter-security"
-//    implementation "org.springframework.boot:spring-boot-starter-mail"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
+    //implementation "org.springframework.boot:spring-boot-starter-security"
+    //implementation "org.springframework.boot:spring-boot-starter-mail"
 
-//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
     implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
@@ -31,9 +31,9 @@ dependencies {
     implementation "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
     implementation 'com.alibaba:druid-spring-boot-starter:1.2.16'
 
-//    implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
-//    implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
-//    implementation "org.antlr:antlr4-runtime:4.11.1"
+    //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
+    //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
+    //implementation "org.antlr:antlr4-runtime:4.11.1"
 
     //clickhouse
     implementation "ru.yandex.clickhouse:clickhouse-jdbc:0.3.2"
@@ -42,10 +42,10 @@ dependencies {
     implementation "io.trino:trino-jdbc:407"
     implementation "io.trino:trino-spi:407"
     implementation "io.trino:trino-main:407"
-    implementation "io.airlift:slice:0.44"
+    implementation "io.airlift:slice:0.45"
     implementation "io.airlift:units:1.8"
     implementation "com.google.guava:guava:31.1-jre"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:2.14.0"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.14.2"
 
     //hbase
     implementation "org.apache.hbase:hbase-client:2.5.3-hadoop3"

@@ -15,8 +15,8 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
-//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-//    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
     implementation "cn.hutool:hutool-all"
     implementation "io.netty:netty-all"

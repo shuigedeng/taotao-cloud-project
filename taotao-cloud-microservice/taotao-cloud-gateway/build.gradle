@@ -69,5 +69,5 @@ configurations {
 }
 
 mainClassName = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
-description = "springcloud网关模块"
-archivesBaseName = 'taotao-cloud-gateway-springcloud'
+description = "基于spring-cloud-gateway网关模块"
+archivesBaseName = 'taotao-cloud-gateway'
