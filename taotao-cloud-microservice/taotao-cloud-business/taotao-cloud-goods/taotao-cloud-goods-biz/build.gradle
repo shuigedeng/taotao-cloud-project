@@ -27,23 +27,3 @@ dependencies {
 mainClassName = "com.taotao.cloud.goods.biz.TaoTaoCloudGoodsApplication"
 description = "商品模块"
 archivesBaseName = 'taotao-cloud-goods'
-
-//configurations {
-//    all {
-//        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-//        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
-//
-//        //resolutionStrategy {
-//        //    force "org.codehaus.groovy:groovy:4.0.0"
-//        //}
-//
-//        //exclude group: "org.codehaus.groovy", module: "groovy"
-//        //exclude group: "org.projectlombok", module: "lombok"
-//        exclude group: "log4j", module: "log4j"
-//        exclude group: "log4j", module: "slf4j-simple"
-//        exclude group: "org.slf4j", module: "slf4j-log4j12"
-//        exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
-//        exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
-//        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-//    }
-//}

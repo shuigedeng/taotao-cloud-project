@@ -5,6 +5,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-logs:taotao-cloud-logs-api")
 }
 
-mainClassName = "com.taotao.cloud.report.biz.TaoTaoCloudLogsApplication"
+mainClassName = "com.taotao.cloud.logs.biz.TaoTaoCloudLogsApplication"
 description = "日志模块"
 archivesBaseName = 'taotao-cloud-logs'

@@ -14,6 +14,6 @@ dependencies {
     implementation 'net.maku:maku-generator-boot-starter:3.0.2'
 }
 
-mainClassName = "com.taotao.cloud.report.biz.TaoTaoCloudReportApplication"
-description = "报表模块"
-archivesBaseName = 'taotao-cloud-report'
+mainClassName = "com.taotao.cloud.generator.biz.TaoTaoCloudGeneratorApplication"
+description = "代码生成器模块"
+archivesBaseName = 'taotao-cloud-generator'
