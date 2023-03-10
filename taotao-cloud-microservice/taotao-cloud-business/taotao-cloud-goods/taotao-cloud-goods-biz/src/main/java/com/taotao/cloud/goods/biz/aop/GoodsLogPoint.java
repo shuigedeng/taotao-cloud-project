@@ -8,8 +8,9 @@ import java.lang.annotation.Target;
 
 /**
  * 订单日志注解
- *
- * @OrderLogPoint(description = "'订单['+#orderSn+']修改价格，修改后价格为['+#orderPrice+']'", orderSn = "#orderSn")
+ * <pre class="code">
+ *  @OrderLogPoint(description = "'订单['+#orderSn+']修改价格，修改后价格为['+#orderPrice+']'", orderSn = "#orderSn")
+ * </pre>
  *
  * @author shuigedeng
  * @version 2022.04
@@ -20,14 +21,14 @@ import java.lang.annotation.Target;
 @Documented
 public @interface GoodsLogPoint {
 
-    /**
-     * 日志名称
-     */
-    String description();
+	/**
+	 * 日志名称
+	 */
+	String description();
 
-    /**
-     * 订单编号
-     */
-    String orderSn();
+	/**
+	 * 订单编号
+	 */
+	String orderSn();
 
 }

@@ -7,8 +7,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-promotion:taotao-cloud-promotion-api")

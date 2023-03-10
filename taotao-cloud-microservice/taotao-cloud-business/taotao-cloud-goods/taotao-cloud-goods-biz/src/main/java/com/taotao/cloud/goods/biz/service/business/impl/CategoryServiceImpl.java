@@ -23,19 +23,18 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryParameterGroupServic
 import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品分类业务层实现
@@ -96,7 +95,8 @@ public class CategoryServiceImpl extends
 	public List<CategoryTreeVO> categoryTree() {
 		// 获取缓存数据
 		List<CategoryTreeVO> categoryTreeVOList = redisRepository.lGet(
-			CachePrefix.CATEGORY.getPrefix(), 0L,
+			CachePrefix.CATEGORY.getPrefix(),
+			0L,
 			redisRepository.lGetListSize(CachePrefix.CATEGORY.getPrefix()));
 		if (categoryTreeVOList != null) {
 			return categoryTreeVOList;
@@ -107,14 +107,11 @@ public class CategoryServiceImpl extends
 		queryWrapper.eq(Category::getDelFlag, false);
 		List<Category> list = this.list(queryWrapper);
 
-		//brandService.getBrandsByCategory()
-
 		//构造分类树
 		categoryTreeVOList = new ArrayList<>();
 		for (Category category : list) {
 			if (Long.valueOf(0).equals(category.getParentId())) {
-				CategoryTreeVO categoryTreeVO = CategoryConvert.INSTANCE.convert(
-					category);
+				CategoryTreeVO categoryTreeVO = CategoryConvert.INSTANCE.convert(category);
 				categoryTreeVO.setParentTitle(category.getName());
 				categoryTreeVO.setChildren(findChildren(list, categoryTreeVO));
 				categoryTreeVOList.add(categoryTreeVO);
@@ -315,14 +312,13 @@ public class CategoryServiceImpl extends
 	 * @return 分类VO列表
 	 */
 	private List<CategoryTreeVO> findChildren(List<Category> categories,
-											  CategoryTreeVO categoryTreeVO) {
+		CategoryTreeVO categoryTreeVO) {
 		List<CategoryTreeVO> children = new ArrayList<>();
 		categories.forEach(item -> {
 			if (item.getParentId().equals(categoryTreeVO.getId())) {
 				CategoryTreeVO temp = CategoryConvert.INSTANCE.convert(item);
 				temp.setParentTitle(item.getName());
 				temp.setChildren(findChildren(categories, temp));
-
 				children.add(temp);
 			}
 		});
@@ -372,7 +368,7 @@ public class CategoryServiceImpl extends
 	 * @return 子分类列表VO
 	 */
 	private List<CategoryTreeVO> getChildren(Long parentId,
-											 List<CategoryTreeVO> categoryTreeVOList) {
+		List<CategoryTreeVO> categoryTreeVOList) {
 		for (CategoryTreeVO item : categoryTreeVOList) {
 			if (item.getId().equals(parentId)) {
 				return item.getChildren();

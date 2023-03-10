@@ -1,0 +1,199 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: taotao-cloud-member-configmap
+data:
+  APPLICATION_NAME: taotao-cloud-member
+  APPLICATION_VERSION: '2023.03'
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: taotao-cloud-member-secret
+type: Opaque
+data:
+  ADMIN_USERNAME: YWRtaW4=
+  ADMIN_PASSWORD: MTIzNDU2
+  TAOTAO_CLOUD_MAIL_PASSWORD: dndkcm1zdm1ldm9zYmVlZA==
+  DINGDING_TOKEN_ID: MmY4MWExOGZkMjM1ZmZiZWNjMDA1MTlkNTNiYjgwNTRhN2ZmM2U1MGYzMjg3ZTNlNGM1ZmVmNmU1YzhlMTAxNg==
+  DINGDING_SECRET: U0VDMmVjMTQ5YjZlYWFiMjZhMTZiM2Q2Yzc4ODQ1ODQ4MjUxZDA2NjdmYjhhYTI4OGIwZTc5ZDg2NzVlNDYwOGQ4MA==
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taotao-cloud-member
+  labels:
+    app: taotao-cloud-member
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: taotao-cloud-member
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: taotao-cloud-member
+    spec:
+      terminationGracePeriodSeconds: 30
+      schedulerName: default-scheduler
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+      securityContext: { }
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                topologyKey: "kubernetes.io/hostname"
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - ops-nginx-api
+      volumes:
+        - name: taotao-cloud-member-hostpath
+          hostPath:
+            path: /tmp/logs/taotao-cloud-member
+            type: Directory
+        - name: taotao-cloud-member-secret
+          secret:
+            secretName: taotao-cloud-member-secret
+      initContainers:
+        - name: taotao-cloud-member-init
+          image: yauritux/busybox-curl:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "/bin/sh", "-c", "until curl taotao-cloud-xxljob.default:33335/actuator/health; do echo waiting for admin; sleep 10; done;" ]
+      containers:
+        - name: taotao-cloud-member
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: { }
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-member:2023.03
+          imagePullPolicy: Always
+          ports:
+            - name: order-port
+              containerPort: 33338
+          volumeMounts:
+            - name: taotao-cloud-member-hostpath
+              mountPath: /root/logs
+            - name: taotao-cloud-member-secret
+              mountPath: /etc/secret
+              readOnly: true
+          env:
+            - name: APPLICATION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: taotao-cloud-member-configmap
+                  key: APPLICATION_NAME
+            - name: APPLICATION_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: taotao-cloud-member-configmap
+                  key: APPLICATION_VERSION
+            - name: ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: taotao-cloud-member-secret
+                  key: ADMIN_USERNAME
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: taotao-cloud-member-secret
+                  key: ADMIN_PASSWORD
+            - name: DINGDING_TOKEN_ID
+              valueFrom:
+                secretKeyRef:
+                  name: taotao-cloud-member-secret
+                  key: DINGDING_TOKEN_ID
+            - name: DINGDING_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: taotao-cloud-member-secret
+                  key: DINGDING_SECRET
+            - name: TAOTAO_CLOUD_MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: taotao-cloud-member-secret
+                  key: TAOTAO_CLOUD_MAIL_PASSWORD
+          resources:
+            requests:
+              cpu: '1'
+              memory: 512Mi
+            limits:
+              cpu: '2'
+              memory: 2048Mi
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 33338
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 33338
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 5
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - mkdir -p /root/logs/taotao-cloud-member && touch /root/logs/taotao-cloud-member/jit.compile.log /root/logs/taotao-cloud-member/gc.log
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - sleep 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taotao-cloud-member
+  labels:
+    app: taotao-cloud-member
+spec:
+  type: NodePort
+  selector:
+    app: taotao-cloud-member
+  ports:
+    - name: order-port
+      protocol: TCP
+      port: 33338
+      targetPort: 33338
+      nodePort: 33338
