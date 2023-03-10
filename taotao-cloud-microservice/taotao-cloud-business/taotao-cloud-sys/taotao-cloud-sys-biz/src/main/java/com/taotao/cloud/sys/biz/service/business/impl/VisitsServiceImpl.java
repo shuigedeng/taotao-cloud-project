@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.sys.biz.mapper.IVisitsMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.Visits;
-import com.taotao.cloud.sys.biz.service.business.ILogService;
 import com.taotao.cloud.sys.biz.service.business.IVisitsService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -28,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implements
 	IVisitsService {
 
-	private final ILogService logService;
+	//private final ILogService logService;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -57,8 +56,8 @@ public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implem
 		} else {
 			visits.setPvCounts(visits.getPvCounts() + 1);
 		}
-		long ipCounts = logService.findIp(localDate.toString(), localDate.plusDays(1).toString());
-		visits.setIpCounts(ipCounts);
+		//long ipCounts = logService.findIp(localDate.toString(), localDate.plusDays(1).toString());
+		//visits.setIpCounts(ipCounts);
 		this.saveOrUpdate(visits);
 	}
 
