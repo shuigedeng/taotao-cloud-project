@@ -32,7 +32,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudOpenPlatformApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-open");
+		PropertyUtils.setDefaultProperty("taotao-cloud-open-platform");
 
 		SpringApplication.run(TaoTaoCloudOpenPlatformApplication.class, args);
 	}

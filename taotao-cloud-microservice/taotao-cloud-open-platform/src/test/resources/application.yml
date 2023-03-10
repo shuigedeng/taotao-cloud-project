@@ -1,0 +1,42 @@
+spring:
+  application:
+    #服务名
+    name: client
+
+##openapi配置
+taotao:
+  cloud:
+    openapi:
+      client:
+        config:
+          openApiRefPath: openapi.example.client.openapiclient
+          baseUrl: http://localhost:8080
+          selfPrivateKey: ${keys.local.rsa.privateKey}
+          remotePublicKey: ${keys.remote.rsa.publicKey}
+          asymmetricCryEnum: RSA
+          retDecrypt: true
+          cryModeEnum: SYMMETRIC_CRY
+          symmetricCryEnum: AES
+          callerId: "001"
+          httpConnectionTimeout: 3
+          httpReadTimeout: 6
+          enableCompress: false
+    #      httpProxyHost: 127.0.0.1
+    #      httpProxyPort: 8888
+
+
+#对非对称加密密钥对
+keys:
+  local:
+    rsa:
+      privateKey: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBANJhmcJNrroIYnAJvcU/mdsUg6Stj7El27eyIYXOmv8YB78I6RFSubM/6+jSibobE+QRUB/FlovDy0fwUKQnX4FAjZzO1RCEOwfJc/jECyrtE+2hgSNcHT6YsHKitYMWRH8rcp9lT+IGTKvL+MbYYown/vcc9cu/iG/Bb3qniVvxAgMBAAECgYA5yxUVswhqU45TL+Hhc1jdPbPyQ7mjFP7YZkdePkUHCb9rA9Qe7aZU7xzr/xZVuUWMFBN6Pund6EIKN6K3jZdm5v6ZYQjoP94Kx7YiGvhCz8FjDH/aIydPWJ8z0nGaJSMXZG1My3KBL7HYJWqpj9opPhKOKtPq5n5yOM62HsNrFwJBAPtgQqYsgZtLDIj1qDHV2l2lPMkPDcgABWW6j5K6HeNdiU/guOqXeKMmilYXs5tYNZ93E5f9pPFVa4JVxvcC0EMCQQDWQEtXGirsATL5cKU0MOyKVsiX9jlIlpf3MgdpkqHXZ1rEDFdFjoFJkVVdaQVEgnD6atXBsw5VxQ/CuUfilam7AkBM7XB4Gjavp4/2efc3CRMChYbMoOa+xgLg1u8JIBv1cLKM12C/qgspIqpDHo3AhIYkfvRoFx9bG6EDCe0RurKxAkBLwMfisDnk4Depwo5m+bVo5G5gbIqsg7KPkHzWcyYOB1ksYECrM0u7O0u3j15xbr2LjSKvLiQvZ1G/Q8uK7efpAkEAgHugcehkzc3orJtPOTzM8j8jYAZZXxvqBUq87JKIuYNQ426qb8Jecm1H0yTc+agASDspO6/9oAgm8VaDIUQVbA==
+      publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSYZnCTa66CGJwCb3FP5nbFIOkrY+xJdu3siGFzpr/GAe/COkRUrmzP+vo0om6GxPkEVAfxZaLw8tH8FCkJ1+BQI2cztUQhDsHyXP4xAsq7RPtoYEjXB0+mLByorWDFkR/K3KfZU/iBkyry/jG2GKMJ/73HPXLv4hvwW96p4lb8QIDAQAB
+    sm2:
+      privateKey: MIGTAgEAMBMGByqGSM49AgEGCCqBHM9VAYItBHkwdwIBAQQgxfrVFsdJlPRpl6ZWN/uvpgU8jYWmTzFGWNNGcI1YpiugCgYIKoEcz1UBgi2hRANCAARnRhYuy/opyjqfCD2Eo7zfADM6TcSD4hcf3W2AriP6w6YGaOjYYvBAetuILXjvVOGpVYrrd/f8H1xFNerC5yQQ
+      publicKey: MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEZ0YWLsv6Kco6nwg9hKO83wAzOk3Eg+IXH91tgK4j+sOmBmjo2GLwQHrbiC1471ThqVWK63f3/B9cRTXqwuckEA==
+  remote:
+    rsa:
+      publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyAwOb7iNt/+pj2ksu9c8Jllh/2b2qyMSNk0J5VemQxWZDETNEriOQmpp03ohZMxTgKWv48OZ85JfLV05ZUyeLBbuyHSJzyRz/65KK2tz53BRP8qbGmX4nw8qHL6z/7Hj537b59pWxwZSoJ0aCy4UUV0BY6Jewt4GnSvIGTAHtoQIDAQAB
+    sm2:
+      publicKey: MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEAVWnPeJmQ2Rhap73BJCB+llsm1hvj89h0auAHxelluMJ7b4sFPpsOmcXCgrC0uKZY0cRd2z6EftfFZ1V5BKVsw==
+

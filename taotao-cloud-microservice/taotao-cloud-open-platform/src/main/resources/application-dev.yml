@@ -159,6 +159,9 @@ taotao:
     core:
       enabled: true
       env: dev
+    openapi:
+      enabled: true
+      server: true
 
 management:
   endpoints:
@@ -195,3 +198,19 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
+
+#对非对称加密密钥对
+keys:
+  local:
+    rsa:
+      privateKey: MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALIDA5vuI23/6mPaSy71zwmWWH/ZvarIxI2TQnlV6ZDFZkMRM0SuI5CamnTeiFkzFOApa/jw5nzkl8tXTllTJ4sFu7IdInPJHP/rkora3PncFE/ypsaZfifDyocvrP/sePnftvn2lbHBlKgnRoLLhRRXQFjol7C3gadK8gZMAe2hAgMBAAECgYAoJRFejEM9tqnpuGxdrA4zq44MUTLardnT0sq6OeOJZFcmV13wRnRbU15zbk8iDKjPz8+bjdpw/o10DF2tO9lN+cHBHpUj4uKIiUj1DJZTiHIuwS0uXb5F+UEHga30grunHdPP2XMcbcvCKBDq8d7WwUzXnWLUkSVl9CWT97zHtQJBAPjrMNIr+bhHEZHkVzdUdELGa9FEIpUzx2dYcpnX91dfsjXIE7QGzUWFilKZtDae9Fa6az1yMDS0K3Z750zxyPUCQQC3E21G40ta3NfvjgocZr+IaZ0/JfJ6VKlMosYc+/aoAHUMqx+oQTf2+oSy6SlqpwW+zjyCf9hEp9FGDDFKXtZ9AkEAj8s1ycPTn2uWr8PLyk/EVarQL/R/Ude2knHayhqjbNsAVOc+0pm3TTkGng7it0b9+Xf5aWakiF2oWerbxGxMXQJAGUiij+a2Mn9LhzcLqG58Rz+myuDXwxNMKlxUlg4qO3uMrso3Xgpby00/5GGVKbiVb4uWCcPUP28Z1N28NPQyFQJBAJC9Pts+nCAo/jGtmIB0W9riAmDSpYbosxYhDfbDrazoa5Q12zNNUdmivag6hZ3kY+Ne2v3+jH6iwdSZE7aLT8I=
+      publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyAwOb7iNt/+pj2ksu9c8Jllh/2b2qyMSNk0J5VemQxWZDETNEriOQmpp03ohZMxTgKWv48OZ85JfLV05ZUyeLBbuyHSJzyRz/65KK2tz53BRP8qbGmX4nw8qHL6z/7Hj537b59pWxwZSoJ0aCy4UUV0BY6Jewt4GnSvIGTAHtoQIDAQAB
+    sm2:
+      privateKey: MIGTAgEAMBMGByqGSM49AgEGCCqBHM9VAYItBHkwdwIBAQQgXhrlBH9kaWuNj3nkNWl7qB2wUbqd29E1LwlWYBOjJCygCgYIKoEcz1UBgi2hRANCAAQBVac94mZDZGFqnvcEkIH6WWybWG+Pz2HRq4AfF6WW4wntviwU+mw6ZxcKCsLS4pljRxF3bPoR+18VnVXkEpWz
+      publicKey: MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEAVWnPeJmQ2Rhap73BJCB+llsm1hvj89h0auAHxelluMJ7b4sFPpsOmcXCgrC0uKZY0cRd2z6EftfFZ1V5BKVsw==
+  remote:
+    rsa:
+      publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSYZnCTa66CGJwCb3FP5nbFIOkrY+xJdu3siGFzpr/GAe/COkRUrmzP+vo0om6GxPkEVAfxZaLw8tH8FCkJ1+BQI2cztUQhDsHyXP4xAsq7RPtoYEjXB0+mLByorWDFkR/K3KfZU/iBkyry/jG2GKMJ/73HPXLv4hvwW96p4lb8QIDAQAB
+    sm2:
+      publicKey: MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEZ0YWLsv6Kco6nwg9hKO83wAzOk3Eg+IXH91tgK4j+sOmBmjo2GLwQHrbiC1471ThqVWK63f3/B9cRTXqwuckEA==
+

@@ -1,20 +1,17 @@
 package com.taotao.cloud.open.platform.config;
 
-import com.taotao.cloud.open.platform.common.enums.AsymmetricCryEnum;
-import com.taotao.cloud.open.platform.common.enums.CryModeEnum;
-import com.taotao.cloud.open.platform.common.enums.SymmetricCryEnum;
+import com.taotao.cloud.openapi.common.enums.AsymmetricCryEnum;
+import com.taotao.cloud.openapi.common.enums.CryModeEnum;
+import com.taotao.cloud.openapi.common.enums.SymmetricCryEnum;
+import com.taotao.cloud.openapi.server.config.OpenApiServerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * 开放api配置实现类
- *
- * @author shuigedeng
- * @version 2022.07
- * @since 2022-07-26 10:11:01
+ * openapi的配置信息
  */
 @Component
-public class OpenApiConfigImpl implements OpenApiConfig {
+public class OpenApiConfigImpl implements OpenApiServerConfig {
 
 	@Value("${keys.local.rsa.privateKey}")
 	private String privateKey;
@@ -62,5 +59,11 @@ public class OpenApiConfigImpl implements OpenApiConfig {
 	public boolean enableDoc() {
 		//是否启用接口文档功能
 		return true;
+	}
+
+	@Override
+	public boolean enableCompress() {
+		//HTTP传输内容不启用压缩
+		return false;
 	}
 }
