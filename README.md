@@ -25,9 +25,9 @@
 仓库代码中不涉及公司任何业务代码**
 主要包括如下几部分
 
-- **大数据模块** 集成基于**spark、hive**的日志数据处理和分析, 用户行为分析、推荐系统, **flink、spark
+- **大数据模块** 集成基于**hadoop、hive**的日志数据处理和分析, 用户行为分析、推荐系统, **flink、spark
   streaming**离线/流式计算,
-  **hadoop hive tidb**离线数据仓库, **apache hudi**数据湖 **presto**计算框架等大数据处理
+  **tidb、doris**离线数据仓库, **apache hudi**数据湖, **presto**计算框架等大数据处理
 
 
 - **微服务模块** 基于**spring cloud alibaba**微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成,
@@ -110,19 +110,19 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.0.5           
- Spring Boot          | 3.0.3           
+ Spring               | 6.0.6           
+ Spring Boot          | 3.0.4           
  Spring Cloud         | 2022.0.1        
  Spring Cloud Alibaba | 2022.0.0.0--RC1 
  Spring Cloud Tencent | 1.9.1--2022.0.0 
- Spring Security      | 6.0.1           
+ Spring Security      | 6.0.2           
  Mybatis Plus         | 3.5.3.1         
- Hutool               | 5.8.12          
+ Hutool               | 5.8.14          
  Mysql                | 8.0.32          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.0.0           
- Redisson             | 3.19.13         
+ Redisson             | 3.20.0          
  Lettuce              | 6.0.3.RELEASE   
  Elasticsearch        | 8.5.3           
  Xxl-job              | 2.3.1           
@@ -159,21 +159,21 @@ Maven:
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**
   非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.0.3、Spring Cloud 2022.0.1、Spring Cloud Alibaba
+* **主体框架**：采用最新的Spring Boot 3.0.4、Spring Cloud 2022.0.1、Spring Cloud Alibaba
   2022.0.0.0--RC1版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
-* **日志分析**：集成kafka、elk、prometheus实时监控日志(请求日志、系统日志、数据变更日志、用户日志)
+* **日志分析**：集成kafka、elk、prometheus、loki等实时监控日志(请求日志、系统日志、数据变更日志、用户日志)
 * **分布式事务**：集成spring cloud alibaba seata分布式事务处理
 * **业务熔断**：采用spring cloud alibaba Sentinel实现业务熔断处理，避免服务之间出现雪崩
 * **链路追踪**：自定义traceId的方式，实现简单的链路追踪功能、集成skywalking、sleuth、zipkin链路监控
-* **分布式任务**：集成xxl-job分布式定时任务处理
-* **内部调用**：集成了Feign和Dubbo两种模式支持内部调用，并且可以实现无缝切换
+* **分布式任务**：集成xxl-job、powerjob、quartz等分布式定时任务处理
+* **内部调用**：集成了Feign和Dubbo以及grpc等模式支持内部调用，并且可以实现无缝切换
 * **身份注入**：通过注解的方式，实现用户登录信息的快速注入
 * **在线文档**：通过接入Knife4j，实现在线API文档的查看与调试
 * **消息中心**：集成消息中间件RocketMQ、kafka，对业务进行异步处理
-* **业务分离**：采用前后端分离的框架设计，前端采用react antd脚手架快速开放
+* **业务分离**：采用前后端分离的框架设计，前端采用react antd、taro脚手架快速开放
 * **多租户功能**：集成Mybatis Plus、jpa,实现saas多租户功能
 * **容器化支持**: Docker、Kubernetes、Rancher2 支持
 * **webflux**支持: lambda、stream api、webflux 的生产实践
