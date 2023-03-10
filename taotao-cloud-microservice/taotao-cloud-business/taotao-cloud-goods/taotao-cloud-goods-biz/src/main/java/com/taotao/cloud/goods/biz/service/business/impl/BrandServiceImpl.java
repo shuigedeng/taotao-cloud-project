@@ -23,12 +23,11 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
 import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -40,7 +39,9 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, BrandRepository, IBrandRepository, Long> implements IBrandService {
+public class BrandServiceImpl extends
+	BaseSuperServiceImpl<IBrandMapper, Brand, BrandRepository, IBrandRepository, Long> implements
+	IBrandService {
 
 	/**
 	 * 分类品牌绑定服务
@@ -93,8 +94,9 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
 
 	@Override
 	public Boolean addBrand(BrandDTO brandDTO) {
-		if (getOne(new LambdaQueryWrapper<Brand>().eq(Brand::getName, brandDTO.getName()))
-			!= null) {
+		LambdaQueryWrapper<Brand> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(Brand::getName, brandDTO.getName());
+		if (getOne(lambdaQueryWrapper) != null) {
 			throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
 		}
 		return this.save(BrandConvert.INSTANCE.convert(brandDTO));
@@ -127,7 +129,9 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
 
 	@Override
 	public List<Brand> getAllAvailable() {
-		return this.list(new LambdaQueryWrapper<Brand>().eq(Brand::getDelFlag, 0));
+		LambdaQueryWrapper<Brand> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(Brand::getDelFlag, 0);
+		return this.list(lambdaQueryWrapper);
 	}
 
 	@Override

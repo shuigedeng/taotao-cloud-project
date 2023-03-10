@@ -1,5 +1,12 @@
 dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+
+    compileOnly "io.github.shuigedeng:taotao-cloud-starter-grpc"
+
+    //  1.3.5  Java 9+ compatibility - Do NOT update to 2.0.0
+    // protobuf生成的代码带有javax.annotation.Generated 此注解只有在1.3.5中有  在2版本之后换成了jakarta.annotation.Generated
+    // 等之后支持了jakarta就可以用2版本了
+    api 'jakarta.annotation:jakarta.annotation-api:1.3.5'
 }
 
 description = "商品模块api"

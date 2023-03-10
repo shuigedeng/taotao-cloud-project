@@ -18,6 +18,13 @@ import com.taotao.cloud.goods.biz.elasticsearch.ParamOptions;
 import com.taotao.cloud.goods.biz.elasticsearch.SelectorOptions;
 import com.taotao.cloud.goods.biz.service.business.IEsGoodsIndexService;
 import com.taotao.cloud.goods.biz.service.business.IEsGoodsSearchService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.common.lucene.search.function.FieldValueFactorFunction;
 import org.elasticsearch.common.lucene.search.function.FunctionScoreQuery;
@@ -52,14 +59,6 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * ES商品搜索业务层实现
@@ -103,7 +102,8 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 		}
 
 		if (CharSequenceUtil.isNotEmpty(esGoodsSearchQuery.getKeyword())) {
-			redisRepository.hincr(CachePrefix.HOT_WORD.getPrefix(), esGoodsSearchQuery.getKeyword(), 1.0);
+			redisRepository.hincr(CachePrefix.HOT_WORD.getPrefix(), esGoodsSearchQuery.getKeyword(),
+				1.0);
 		}
 
 		NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(esGoodsSearchQuery);
@@ -170,6 +170,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 		builder.withAggregations(
 			AggregationBuilders.terms("brandIdUrlAgg").field(ATTR_BRAND_ID).size(Integer.MAX_VALUE)
 				.subAggregation(brandUrlBuilder));
+
 		//参数
 		AggregationBuilder valuesBuilder = AggregationBuilders.terms("valueAgg").field(ATTR_VALUE);
 		AggregationBuilder sortBuilder = AggregationBuilders.sum("sortAgg").field(ATTR_SORT);
@@ -212,7 +213,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 	 * @return 聚合商品展示信息
 	 */
 	private EsGoodsRelatedInfo convertToEsGoodsRelatedInfo(Map<String, Aggregation> aggregationMap,
-														   EsGoodsSearchQuery goodsSearch) {
+		EsGoodsSearchQuery goodsSearch) {
 		EsGoodsRelatedInfo esGoodsRelatedInfo = new EsGoodsRelatedInfo();
 		//分类
 		List<SelectorOptions> categoryOptions = new ArrayList<>();
@@ -258,7 +259,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 	 * @return 品牌选择项列表
 	 */
 	private List<SelectorOptions> convertBrandOptions(EsGoodsSearchQuery goodsSearch,
-													  List<? extends Terms.Bucket> brandBuckets, List<? extends Terms.Bucket> brandUrlBuckets) {
+		List<? extends Terms.Bucket> brandBuckets, List<? extends Terms.Bucket> brandUrlBuckets) {
 		List<SelectorOptions> brandOptions = new ArrayList<>();
 		for (int i = 0; i < brandBuckets.size(); i++) {
 			String brandId = brandBuckets.get(i).getKey().toString();
@@ -377,7 +378,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 	 * @return 商品参数属性集合
 	 */
 	private List<ParamOptions> buildGoodsParamOptions(ParsedStringTerms nameAgg,
-													  List<String> nameList) {
+		List<String> nameList) {
 		List<ParamOptions> paramOptions = new ArrayList<>();
 		List<? extends Terms.Bucket> nameBuckets = nameAgg.getBuckets();
 
@@ -411,7 +412,8 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 	 * @param esGoodsSearchQuery 搜索条件
 	 * @return es搜索builder
 	 */
-	private NativeSearchQueryBuilder createSearchQueryBuilder(EsGoodsSearchQuery esGoodsSearchQuery) {
+	private NativeSearchQueryBuilder createSearchQueryBuilder(
+		EsGoodsSearchQuery esGoodsSearchQuery) {
 		NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
 		if (esGoodsSearchQuery != null) {
 			int pageNumber = esGoodsSearchQuery.getCurrentPage() - 1;
@@ -460,10 +462,12 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 			//如果是聚合查询
 			nativeSearchQueryBuilder.withQuery(filterBuilder);
 
-			if (esGoodsSearchQuery != null && CharSequenceUtil.isNotEmpty(esGoodsSearchQuery.getOrder())
+			if (esGoodsSearchQuery != null && CharSequenceUtil.isNotEmpty(
+				esGoodsSearchQuery.getOrder())
 				&& CharSequenceUtil.isNotEmpty(esGoodsSearchQuery.getSort())) {
-				nativeSearchQueryBuilder.withSorts(SortBuilders.fieldSort(esGoodsSearchQuery.getSort())
-					.order(SortOrder.valueOf(esGoodsSearchQuery.getOrder().toUpperCase())));
+				nativeSearchQueryBuilder.withSorts(
+					SortBuilders.fieldSort(esGoodsSearchQuery.getSort())
+						.order(SortOrder.valueOf(esGoodsSearchQuery.getOrder().toUpperCase())));
 			} else {
 				nativeSearchQueryBuilder.withSorts(SortBuilders.scoreSort().order(SortOrder.DESC));
 			}
@@ -494,15 +498,19 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 		}
 		//规格项判定
 		if (searchDTO.getNameIds() != null && !searchDTO.getNameIds().isEmpty()) {
-			filterBuilder.must(QueryBuilders.nestedQuery(ATTR_PATH, QueryBuilders.termsQuery("attrList.nameId", searchDTO.getNameIds()), ScoreMode.None));
+			filterBuilder.must(QueryBuilders.nestedQuery(ATTR_PATH,
+				QueryBuilders.termsQuery("attrList.nameId", searchDTO.getNameIds()),
+				ScoreMode.None));
 		}
 		//分类判定
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getCategoryId())) {
-			filterBuilder.must(QueryBuilders.wildcardQuery("categoryPath", "*" + searchDTO.getCategoryId() + "*"));
+			filterBuilder.must(
+				QueryBuilders.wildcardQuery("categoryPath", "*" + searchDTO.getCategoryId() + "*"));
 		}
 		//店铺分类判定
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getStoreCatId())) {
-			filterBuilder.must(QueryBuilders.wildcardQuery("storeCategoryPath", "*" + searchDTO.getStoreCatId() + "*"));
+			filterBuilder.must(QueryBuilders.wildcardQuery("storeCategoryPath",
+				"*" + searchDTO.getStoreCatId() + "*"));
 		}
 		//店铺判定
 		if (CharSequenceUtil.isNotEmpty(searchDTO.getStoreId())) {
@@ -533,7 +541,9 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 			if (max > Double.MAX_VALUE) {
 				max = Double.MAX_VALUE;
 			}
-			filterBuilder.must(QueryBuilders.rangeQuery("price").from(min).to(max).includeLower(true).includeUpper(true));
+			filterBuilder.must(
+				QueryBuilders.rangeQuery("price").from(min).to(max).includeLower(true)
+					.includeUpper(true));
 		}
 	}
 

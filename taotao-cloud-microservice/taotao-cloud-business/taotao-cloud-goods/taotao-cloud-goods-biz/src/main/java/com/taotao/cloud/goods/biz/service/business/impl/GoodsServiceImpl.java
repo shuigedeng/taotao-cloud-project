@@ -226,6 +226,7 @@ public class GoodsServiceImpl extends
 			LogUtils.error("商品ID为" + goodsId + "的商品不存在");
 			throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
 		}
+
 		//赋值
 		goodsSkuParamsVO = GoodsConvert.INSTANCE.convert(goods);
 		//商品id
@@ -234,12 +235,14 @@ public class GoodsServiceImpl extends
 		List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
 		goodsSkuParamsVO.setGoodsGalleryList(galleryList.stream().filter(Objects::nonNull)
 			.map(GoodsGallery::getOriginal).toList());
+
 		//商品sku赋值
 		List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(
 			goodsId);
 		if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
 			goodsSkuParamsVO.setSkuList(goodsListByGoodsId);
 		}
+
 		//商品分类名称赋值
 		String categoryPath = goods.getCategoryPath();
 		String[] strArray = categoryPath.split(",");

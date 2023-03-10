@@ -59,7 +59,7 @@ public class BrandManagerController {
 	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/all/availables")
+	@GetMapping(value = "/all/available")
 	public Result<List<BrandVO>> getAllAvailable() {
 		List<Brand> list = brandService.getAllAvailable();
 		return Result.success(BrandConvert.INSTANCE.convert(list));
