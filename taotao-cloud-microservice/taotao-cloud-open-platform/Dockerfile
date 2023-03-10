@@ -2,7 +2,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-open-2023.03.jar ./
+ADD ./build/libs/taotao-cloud-open-platform-2023.03.jar ./
 
 RUN java -Djarmode=layertools -jar taotao-cloud-open-platform-2023.03.jar extract
 
@@ -13,7 +13,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalk
 ARG BACKEND_SERVICE=192.168.10.200:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
 ARG TAOTAO_CLOUD_MAIL_PASSWORD=xxxx
-ARG APP_NAME=taotao-cloud-open
+ARG APP_NAME=taotao-cloud-open-platform
 ARG APP_VERSION=2023.03
 ARG JAR=${APP_NAME}-${VERSION}
 ARG JAR_NAME=${JAR}.jar
