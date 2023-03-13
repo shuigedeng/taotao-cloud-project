@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.member.api.constant.MemberCollectionQueryConstants;
 import com.taotao.cloud.member.api.model.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.service.business.IMemberGoodsCollectionService;
 import com.taotao.cloud.store.api.feign.IFeignStoreCollectionApi;
@@ -36,28 +37,24 @@ public class MemberCollectionController {
 	/**
 	 * 会员商品收藏
 	 */
-	private final IMemberGoodsCollectionService IMemberGoodsCollectionService;
+	private final IMemberGoodsCollectionService memberGoodsCollectionService;
 	/**
 	 * 会员店铺
 	 */
 	private final IFeignStoreCollectionApi feignStoreCollectionApi;
-	/**
-	 * 商品收藏关键字
-	 */
-	private static final String GOODS = "GOODS";
 
 	@Operation(summary = "查询会员收藏列表", description = "查询会员收藏列表")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping("/{type}")
 	public Result<PageResult<StoreCollectionVO>> goodsListPage(
-			@Parameter(description = "类型", required = true) @PathVariable String type,
-			@Validated PageQuery page) {
-		if (goods.equals(type)) {
-			IPage<GoodsCollectionVO> goodsCollectionPage = IMemberGoodsCollectionService.goodsCollection(
-					page);
+		@Parameter(description = "类型", required = true) @PathVariable String type,
+		@Validated PageQuery page) {
+		if (MemberCollectionQueryConstants.GOODS.equals(type)) {
+			IPage<GoodsCollectionVO> goodsCollectionPage = memberGoodsCollectionService.goodsCollection(
+				page);
 			return Result.success(
-					PageResult.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
+				PageResult.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
 		}
 
 		return Result.success(feignStoreCollectionApi.storeCollection(page));
@@ -68,10 +65,10 @@ public class MemberCollectionController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping("/{type}/{id}")
 	public Result<Boolean> addGoodsCollection(
-			@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
-			@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
-		if (goods.equals(type)) {
-			return Result.success(IMemberGoodsCollectionService.addGoodsCollection(id));
+		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
+		if (MemberCollectionQueryConstants.GOODS.equals(type)) {
+			return Result.success(memberGoodsCollectionService.addGoodsCollection(id));
 		}
 		return Result.success(feignStoreCollectionApi.addStoreCollection(id));
 	}
@@ -81,10 +78,10 @@ public class MemberCollectionController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@DeleteMapping(value = "/{type}/{id}")
 	public Result<Object> deleteGoodsCollection(
-			@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
-			@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
-		if (goods.equals(type)) {
-			return Result.success(IMemberGoodsCollectionService.deleteGoodsCollection(id));
+		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
+		if (MemberCollectionQueryConstants.GOODS.equals(type)) {
+			return Result.success(memberGoodsCollectionService.deleteGoodsCollection(id));
 		}
 		return Result.success(feignStoreCollectionApi.deleteStoreCollection(id));
 	}
@@ -94,10 +91,10 @@ public class MemberCollectionController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{type}/{id}/collection")
 	public Result<Boolean> isCollection(
-			@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
-			@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
-		if (goods.equals(type)) {
-			return Result.success(this.IMemberGoodsCollectionService.isCollection(id));
+		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
+		if (MemberCollectionQueryConstants.GOODS.equals(type)) {
+			return Result.success(memberGoodsCollectionService.isCollection(id));
 		}
 		return Result.success(this.feignStoreCollectionApi.isCollection(id));
 	}

@@ -13,11 +13,10 @@ import com.taotao.cloud.member.api.model.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.mapper.IGoodsCollectionMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;
 import com.taotao.cloud.member.biz.service.business.IMemberGoodsCollectionService;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 会员收藏业务层实现
@@ -27,7 +26,8 @@ import java.util.Optional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberGoodsCollectionServiceImpl extends
-	ServiceImpl<IGoodsCollectionMapper, MemberGoodsCollection> implements IMemberGoodsCollectionService {
+	ServiceImpl<IGoodsCollectionMapper, MemberGoodsCollection> implements
+	IMemberGoodsCollectionService {
 
 	@Override
 	public IPage<GoodsCollectionVO> goodsCollection(PageQuery pageQuery) {
@@ -35,8 +35,7 @@ public class MemberGoodsCollectionServiceImpl extends
 		queryWrapper.eq("gc.member_id", SecurityUtils.getUserId());
 		queryWrapper.groupBy("gc.id");
 		queryWrapper.orderByDesc("gc.create_time");
-		return this.baseMapper.goodsCollectionVOList(
-			pageQuery.buildMpPage(), queryWrapper);
+		return this.baseMapper.goodsCollectionVOList(pageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override

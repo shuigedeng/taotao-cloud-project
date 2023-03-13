@@ -16,27 +16,22 @@
 package com.taotao.cloud.member.api.constant;
 
 /**
- * 拼音模块常量 
+ * 拼音模块常量
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2022-03-25 14:22:32
  */
-public interface PinyinConstants {
+public interface MemberCollectionQueryConstants {
 
-    /**
-     * 邮件模块的名称
-     */
-    String PINYIN_MODULE_NAME = "kernel-d-pinyin";
+	/**
+	 * 商品收藏关键字->商品
+	 */
+	String GOODS = "GOODS";
 
-    /**
-     * 异常枚举的步进值
-     */
-    String PINYIN_EXCEPTION_STEP_CODE = "22";
-
-    /**
-     * 中文字符的正则表达式
-     */
-    String CHINESE_WORDS_REGEX = "[\u4E00-\u9FA5]+";
+	/**
+	 * 商品收藏关键字->店铺
+	 */
+	String STORE = "STORE";
 
 }
