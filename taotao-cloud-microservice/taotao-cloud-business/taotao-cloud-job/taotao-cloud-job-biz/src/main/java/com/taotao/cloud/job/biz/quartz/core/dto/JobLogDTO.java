@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.job.biz.quartz.core.dto;
 
-import lombok.Data;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * 定时任务调度日志表
@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
  * @date 2022-04-03
  */
 @Data
+@Builder
 public class JobLogDTO implements Serializable {
 
 	private static final long serialVersionUID = -1L;

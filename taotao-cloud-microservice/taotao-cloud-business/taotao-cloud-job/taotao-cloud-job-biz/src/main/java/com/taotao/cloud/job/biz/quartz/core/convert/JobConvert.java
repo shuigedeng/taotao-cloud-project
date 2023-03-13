@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.job.biz.quartz.core.convert;
 
-import com.art.scheduled.core.dto.JobDTO;
-import com.art.scheduled.dao.dataobject.JobDO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobDTO;
+import com.taotao.cloud.job.biz.quartz.dao.dataobject.JobDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

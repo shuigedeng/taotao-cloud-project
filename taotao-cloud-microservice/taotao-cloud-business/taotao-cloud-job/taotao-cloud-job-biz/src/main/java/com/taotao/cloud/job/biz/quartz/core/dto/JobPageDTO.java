@@ -16,12 +16,10 @@
 
 package com.taotao.cloud.job.biz.quartz.core.dto;
 
-import com.art.common.core.model.BasePageEntity;
-import com.art.common.quartz.core.constants.ScheduleConstants;
-import lombok.Data;
-
+import com.taotao.cloud.job.quartz.quartz.core.constants.ScheduleConstants;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
  * @author Fxz
@@ -29,7 +27,8 @@ import java.time.LocalDateTime;
  * @date 2022/12/7 21:49
  */
 @Data
-public class JobPageDTO extends BasePageEntity implements Serializable {
+//public class JobPageDTO extends BasePageEntity implements Serializable {
+public class JobPageDTO implements Serializable {
 
 	private static final long serialVersionUID = -1L;
 
@@ -93,4 +92,11 @@ public class JobPageDTO extends BasePageEntity implements Serializable {
 	 */
 	private LocalDateTime updateTime;
 
+	public long getCurrent() {
+		return 1;
+	}
+
+	public long getSize() {
+		return 1;
+	}
 }

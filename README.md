@@ -117,7 +117,7 @@ Maven:
  Spring Cloud Tencent | 1.9.1--2022.0.0 
  Spring Security      | 6.0.2           
  Mybatis Plus         | 3.5.3.1         
- Hutool               | 5.8.14          
+ Hutool               | 5.8.15          
  Mysql                | 8.0.32          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           

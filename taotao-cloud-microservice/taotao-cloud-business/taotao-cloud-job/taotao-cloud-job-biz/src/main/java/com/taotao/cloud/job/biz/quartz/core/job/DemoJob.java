@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.job.biz.quartz.core.job;
 
-import com.art.common.quartz.core.annotation.ArtQuartzJob;
-import com.art.common.quartz.core.job.ArtJob;
-import lombok.extern.slf4j.Slf4j;
-
+import com.taotao.cloud.job.quartz.quartz.core.annotation.ArtQuartzJob;
+import com.taotao.cloud.job.quartz.quartz.core.job.ArtJob;
 import java.time.LocalDateTime;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Fxz

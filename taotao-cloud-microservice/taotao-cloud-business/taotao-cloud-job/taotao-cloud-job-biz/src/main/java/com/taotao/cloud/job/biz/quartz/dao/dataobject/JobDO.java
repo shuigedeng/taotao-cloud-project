@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.job.biz.quartz.dao.dataobject;
 
-import com.art.common.mp.core.base.BaseCreateEntity;
-import com.art.common.quartz.core.constants.ScheduleConstants;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.job.quartz.quartz.core.constants.ScheduleConstants;
 import lombok.Data;
 
 /**
@@ -31,7 +30,8 @@ import lombok.Data;
  */
 @Data
 @TableName("sys_job")
-public class JobDO extends BaseCreateEntity {
+//public class JobDO extends BaseCreateEntity {
+public class JobDO {
 
 	private static final long serialVersionUID = -1L;
 

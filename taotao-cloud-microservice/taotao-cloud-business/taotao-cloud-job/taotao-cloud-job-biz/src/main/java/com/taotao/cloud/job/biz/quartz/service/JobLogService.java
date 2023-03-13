@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.job.biz.quartz.service;
 
-import com.art.common.quartz.core.service.ArtJobLogService;
-import com.art.scheduled.core.convert.JobLogConvert;
-import com.art.scheduled.core.dto.JobLogDTO;
-import com.art.scheduled.core.dto.JobLogPageDTO;
-import com.art.scheduled.manager.JobLogManager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.taotao.cloud.job.biz.quartz.core.convert.JobLogConvert;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobLogDTO;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobLogPageDTO;
+import com.taotao.cloud.job.biz.quartz.manager.JobLogManager;
+import com.taotao.cloud.job.quartz.quartz.core.service.ArtJobLogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -42,16 +42,19 @@ public class JobLogService implements ArtJobLogService {
 
 	/**
 	 * 保存job执行日志
+	 *
 	 * @param jobBeanName jobBeanName
-	 * @param jobMessage job日志信息
-	 * @param ex 异常信息
+	 * @param jobMessage  job日志信息
+	 * @param ex          异常信息
 	 */
 	@Override
 	public void addJobLog(String jobBeanName, String jobMessage, String ex) {
-		JobLogDTO dto = new JobLogDTO().setJobName(jobBeanName)
-			.setJobMessage(jobMessage)
-			.setExceptionInfo(ex)
-			.setStatus(StringUtils.isBlank(ex) ? "0" : "1");
+		JobLogDTO dto = JobLogDTO.builder()
+			.jobName(jobBeanName)
+			.jobMessage(jobMessage)
+			.exceptionInfo(ex)
+			.status(StringUtils.isBlank(ex) ? "0" : "1")
+			.build();
 		jobLogManager.addJobLog(dto);
 	}
 

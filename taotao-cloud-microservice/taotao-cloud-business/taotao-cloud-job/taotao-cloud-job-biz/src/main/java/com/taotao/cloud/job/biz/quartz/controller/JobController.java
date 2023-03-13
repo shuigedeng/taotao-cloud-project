@@ -17,14 +17,20 @@
 package com.taotao.cloud.job.biz.quartz.controller;
 
 import cn.hutool.core.lang.Assert;
-import com.art.common.core.model.PageResult;
-import com.art.common.core.model.Result;
-import com.art.common.quartz.core.utils.CronUtils;
-import com.art.scheduled.core.dto.JobDTO;
-import com.art.scheduled.core.dto.JobPageDTO;
-import com.art.scheduled.service.JobService;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobDTO;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobPageDTO;
+import com.taotao.cloud.job.biz.quartz.service.JobService;
+import com.taotao.cloud.job.quartz.quartz.core.utils.CronUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 定时任务调度
@@ -53,7 +59,7 @@ public class JobController {
 
 	@DeleteMapping(value = "/delete")
 	public Result<Boolean> delete(Long id) {
-		return Result.judge(jobService.deleteByJobId(id));
+		return Result.success(jobService.deleteByJobId(id));
 	}
 
 	@GetMapping(value = "/findById")
@@ -63,7 +69,7 @@ public class JobController {
 
 	@GetMapping(value = "/page")
 	public Result<PageResult<JobDTO>> page(JobPageDTO page) {
-		return Result.success(PageResult.success(jobService.page(page)));
+		return Result.success(PageResult.convertMybatisPage(jobService.page(page), JobDTO.class));
 	}
 
 	/**
@@ -78,13 +84,14 @@ public class JobController {
 	 * 定时任务立即执行一次
 	 */
 	@PutMapping("/run")
-	public Result<Void> run(@RequestBody JobDTO dto) {
+	public Result<Boolean> run(@RequestBody JobDTO dto) {
 		jobService.run(dto);
 		return Result.success();
 	}
 
 	private void validJob(JobDTO dto) {
-		Assert.isTrue(CronUtils.isValid(dto.getCronExpression()), "新增任务'" + dto.getJobName() + "'失败，Cron表达式不正确");
+		Assert.isTrue(CronUtils.isValid(dto.getCronExpression()),
+			"新增任务'" + dto.getJobName() + "'失败，Cron表达式不正确");
 	}
 
 }

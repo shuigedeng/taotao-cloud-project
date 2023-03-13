@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(value = "Testcontroller", description = "测试grpc")
-public class Testcontroller {
+public class TestGrpcController {
 
 
 	@Autowired

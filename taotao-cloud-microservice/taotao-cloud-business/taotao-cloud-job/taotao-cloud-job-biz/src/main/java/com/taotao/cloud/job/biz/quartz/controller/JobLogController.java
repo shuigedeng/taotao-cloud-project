@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.job.biz.quartz.controller;
 
-import com.art.common.core.model.PageResult;
-import com.art.common.core.model.Result;
-import com.art.scheduled.core.dto.JobLogDTO;
-import com.art.scheduled.core.dto.JobLogPageDTO;
-import com.art.scheduled.service.JobLogService;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobLogDTO;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobLogPageDTO;
+import com.taotao.cloud.job.biz.quartz.service.JobLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +46,8 @@ public class JobLogController {
 
 	@GetMapping(value = "/page")
 	public Result<PageResult<JobLogDTO>> page(JobLogPageDTO pageDTO) {
-		return Result.success(PageResult.success(jobLogService.page(pageDTO)));
+		return Result.success(
+			PageResult.convertMybatisPage(jobLogService.page(pageDTO), JobLogDTO.class));
 	}
 
 }

@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.job.biz.quartz.service;
 
-import com.art.common.quartz.core.constants.ScheduleConstants;
-import com.art.common.quartz.core.scheduler.JobScheduler;
-import com.art.scheduled.core.convert.JobConvert;
-import com.art.scheduled.core.dto.JobDTO;
-import com.art.scheduled.core.dto.JobPageDTO;
-import com.art.scheduled.dao.dataobject.JobDO;
-import com.art.scheduled.manager.JobManager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.job.biz.quartz.core.convert.JobConvert;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobDTO;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobPageDTO;
+import com.taotao.cloud.job.biz.quartz.dao.dataobject.JobDO;
+import com.taotao.cloud.job.biz.quartz.manager.JobManager;
+import com.taotao.cloud.job.quartz.quartz.core.constants.ScheduleConstants;
+import com.taotao.cloud.job.quartz.quartz.core.scheduler.JobScheduler;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -54,7 +54,7 @@ public class JobService {
 
 		// 创建定时任务
 		jobScheduler.add(dto.getJobId(), dto.getJobGroup(), dto.getParameters(), dto.getJobName(),
-				dto.getCronExpression(), dto.getMisfirePolicy());
+			dto.getCronExpression(), dto.getMisfirePolicy());
 
 		// 更改job状态
 		changeStatus(dto.getJobId(), dto.getJobGroup(), dto.getStatus());
@@ -69,8 +69,9 @@ public class JobService {
 	public JobDTO update(JobDTO dto) {
 		jobManager.update(dto);
 
-		jobScheduler.update(dto.getJobId(), dto.getJobGroup(), dto.getParameters(), dto.getJobName(),
-				dto.getCronExpression(), dto.getMisfirePolicy());
+		jobScheduler.update(dto.getJobId(), dto.getJobGroup(), dto.getParameters(),
+			dto.getJobName(),
+			dto.getCronExpression(), dto.getMisfirePolicy());
 
 		// 更改job状态
 		changeStatus(dto.getJobId(), dto.getJobGroup(), dto.getStatus());
@@ -108,15 +109,15 @@ public class JobService {
 	private void changeStatus(Long jobId, String jobGroup, String status) {
 		if (ScheduleConstants.Status.NORMAL.getValue().equals(status)) {
 			resumeJob(jobId, jobGroup);
-		}
-		else if (ScheduleConstants.Status.PAUSE.getValue().equals(status)) {
+		} else if (ScheduleConstants.Status.PAUSE.getValue().equals(status)) {
 			pauseJob(jobId, jobGroup);
 		}
 	}
 
 	/**
 	 * 暂停任务
-	 * @param jobId jobId
+	 *
+	 * @param jobId    jobId
 	 * @param jobGroup job分组
 	 */
 	public void pauseJob(Long jobId, String jobGroup) {
@@ -125,7 +126,8 @@ public class JobService {
 
 	/**
 	 * 恢复任务
-	 * @param jobId jobId
+	 *
+	 * @param jobId    jobId
 	 * @param jobGroup job分组
 	 */
 	public void resumeJob(Long jobId, String jobGroup) {
