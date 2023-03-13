@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.job.biz.quartz.core.dto;
 
-import com.art.common.quartz.core.constants.ScheduleConstants;
-import lombok.Data;
-
+import com.taotao.cloud.job.quartz.quartz.core.constants.ScheduleConstants;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
  * 定时任务调度表

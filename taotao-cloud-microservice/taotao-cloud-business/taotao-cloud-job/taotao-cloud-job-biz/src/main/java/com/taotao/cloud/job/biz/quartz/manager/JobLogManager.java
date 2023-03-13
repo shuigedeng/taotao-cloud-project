@@ -16,15 +16,15 @@
 
 package com.taotao.cloud.job.biz.quartz.manager;
 
-import com.art.scheduled.core.convert.JobLogConvert;
-import com.art.scheduled.core.dto.JobLogDTO;
-import com.art.scheduled.core.dto.JobLogPageDTO;
-import com.art.scheduled.dao.dataobject.JobLogDO;
-import com.art.scheduled.dao.mysql.JobLogMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.taotao.cloud.job.biz.quartz.core.convert.JobLogConvert;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobLogDTO;
+import com.taotao.cloud.job.biz.quartz.core.dto.JobLogPageDTO;
+import com.taotao.cloud.job.biz.quartz.dao.dataobject.JobLogDO;
+import com.taotao.cloud.job.biz.quartz.dao.mysql.JobLogMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -49,7 +49,8 @@ public class JobLogManager {
 
 	public Page<JobLogDO> page(JobLogPageDTO pageDTO) {
 		LambdaQueryWrapper<JobLogDO> wrapper = Wrappers.<JobLogDO>lambdaQuery()
-			.eq(StringUtils.isNotBlank(pageDTO.getJobName()), JobLogDO::getJobName, pageDTO.getJobName());
+			.eq(StringUtils.isNotBlank(pageDTO.getJobName()), JobLogDO::getJobName,
+				pageDTO.getJobName());
 
 		return jobLogMapper.selectPage(Page.of(pageDTO.getCurrent(), pageDTO.getSize()), wrapper);
 	}

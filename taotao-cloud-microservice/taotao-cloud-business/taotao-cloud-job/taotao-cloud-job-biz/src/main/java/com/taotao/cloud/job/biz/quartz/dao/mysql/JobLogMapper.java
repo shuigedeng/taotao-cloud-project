@@ -17,7 +17,7 @@
 package com.taotao.cloud.job.biz.quartz.dao.mysql;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.art.scheduled.dao.dataobject.JobLogDO;
+import com.taotao.cloud.job.biz.quartz.dao.dataobject.JobLogDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
