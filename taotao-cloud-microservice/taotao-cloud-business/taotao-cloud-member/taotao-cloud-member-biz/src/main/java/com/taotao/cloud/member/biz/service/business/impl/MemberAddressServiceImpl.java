@@ -31,22 +31,25 @@ public class MemberAddressServiceImpl extends
 
 	@Override
 	public IPage<MemberAddress> queryPage(PageQuery page, Long memberId) {
-		return this.page(page.buildMpPage(),
-			new LambdaQueryWrapper<MemberAddress>().eq(MemberAddress::getMemberId, memberId));
+		LambdaQueryWrapper<MemberAddress> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(MemberAddress::getMemberId, memberId);
+		return this.page(page.buildMpPage(), lambdaQueryWrapper);
 	}
 
 	@Override
 	public MemberAddress getMemberAddress(Long id) {
-		return this.getOne(new LambdaQueryWrapper<MemberAddress>()
-			.eq(MemberAddress::getMemberId, SecurityUtils.getUserId())
-			.eq(MemberAddress::getId, id));
+		LambdaQueryWrapper<MemberAddress> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(MemberAddress::getMemberId, SecurityUtils.getUserId());
+		lambdaQueryWrapper.eq(MemberAddress::getId, id);
+		return this.getOne(lambdaQueryWrapper);
 	}
 
 	@Override
 	public MemberAddress getDefaultMemberAddress() {
-		return this.getOne(new LambdaQueryWrapper<MemberAddress>()
-			.eq(MemberAddress::getMemberId, SecurityUtils.getUserId())
-			.eq(MemberAddress::getDefaulted, true));
+		LambdaQueryWrapper<MemberAddress> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(MemberAddress::getMemberId, SecurityUtils.getUserId());
+		lambdaQueryWrapper.eq(MemberAddress::getDefaulted, true);
+		return this.getOne(lambdaQueryWrapper);
 	}
 
 	@Override
@@ -82,7 +85,9 @@ public class MemberAddressServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean removeMemberAddress(Long id) {
-		return this.remove(new LambdaQueryWrapper<MemberAddress>().eq(MemberAddress::getId, id));
+		LambdaQueryWrapper<MemberAddress> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(MemberAddress::getId, id);
+		return this.remove(lambdaQueryWrapper);
 	}
 
 	/**

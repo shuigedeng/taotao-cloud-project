@@ -10,8 +10,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.support.tuple.Tuple2;
+import com.taotao.cloud.common.support.tuple.Tuple3;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
@@ -33,8 +36,11 @@ import com.taotao.cloud.order.api.feign.IFeignOrderItemApi;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
+import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadPoolExecutor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +61,6 @@ public class MemberEvaluationServiceImpl extends
 	 */
 	@Autowired
 	private IMemberService memberService;
-
 	/**
 	 * 订单
 	 */
@@ -82,6 +87,9 @@ public class MemberEvaluationServiceImpl extends
 	@Autowired
 	private RocketmqCustomProperties rocketmqCustomProperties;
 
+	@Resource
+	private ThreadPoolExecutor asyncThreadPoolExecutor;
+
 	@Override
 	public IPage<MemberEvaluation> managerQuery(EvaluationPageQuery queryParams) {
 		//获取评价分页
@@ -97,20 +105,46 @@ public class MemberEvaluationServiceImpl extends
 
 	@Override
 	public Boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO) {
-		//获取子订单信息
-		OrderItemVO orderItem = orderItemApi.getBySn(memberEvaluationDTO.getOrderItemSn());
-		//获取订单信息
-		OrderVO order = orderApi.getBySn(orderItem.orderSn());
-		//检测是否可以添加会员评价
-		checkMemberEvaluation(orderItem, order);
 		//获取用户信息
 		Member member = memberService.getUserInfo();
+
 		//获取商品信息
-		GoodsSkuSpecGalleryVO goodsSku = goodsSkuApi.getGoodsSkuByIdFromCache(
-			memberEvaluationDTO.getSkuId());
+		CompletableFuture<GoodsSkuSpecGalleryVO> future1 = CompletableFuture.supplyAsync(
+			() -> goodsSkuApi.getGoodsSkuByIdFromCache(memberEvaluationDTO.getSkuId()),
+			asyncThreadPoolExecutor);
+		//获取订单信息
+		CompletableFuture<Tuple2<OrderItemVO, OrderVO>> future2 = CompletableFuture.supplyAsync(
+				() -> orderItemApi.getBySn(memberEvaluationDTO.getOrderItemSn()),
+				asyncThreadPoolExecutor)
+			.thenApplyAsync((orderItem) -> {
+				OrderVO order = orderApi.getBySn(orderItem.orderSn());
+				return new Tuple2<>(orderItem, order);
+			}, asyncThreadPoolExecutor);
+
+		CompletableFuture<Void> allOfFuture = CompletableFuture.allOf(future1, future2);
+		CompletableFuture<Tuple3<GoodsSkuSpecGalleryVO, OrderItemVO, OrderVO>> resultCompletableFuture = allOfFuture.thenApply(
+			v -> {
+				try {
+					Tuple2<OrderItemVO, OrderVO> join = future2.join();
+					return new Tuple3<>(future1.join(), join._1(), join._2());
+				} catch (Exception e) {
+					LogUtils.error("RemoteDictService.getDictDataAsync Exception dictId = {}", e);
+					throw new RuntimeException(e);
+				}
+			});
+
+		Tuple3<GoodsSkuSpecGalleryVO, OrderItemVO, OrderVO> data = resultCompletableFuture.join();
+		GoodsSkuSpecGalleryVO goodsSku = data._1();
+		OrderItemVO orderItem = data._2();
+		OrderVO order = data._3();
+
+		//检测是否可以添加会员评价
+		checkMemberEvaluation(orderItem, order);
 		//新增用户评价
-		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,
-			member, order);
+		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO,
+			goodsSku,
+			member,
+			order);
 		//过滤商品咨询敏感词
 		memberEvaluation.setContent(SensitiveWordsFilter.filter(memberEvaluation.getContent()));
 		//添加评价

@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(contextId = "IFeignFreightTemplateService", value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignStoreApiFallback.class)
 public interface IFeignStoreCollectionApi {
+
 	@GetMapping(value = "/storeCollection")
 	PageResult<StoreCollectionVO> storeCollection(PageQuery page);
+
 	@GetMapping(value = "/addStoreCollection")
 	Boolean addStoreCollection(Long id);
+
 	@GetMapping(value = "/deleteStoreCollection")
 	Boolean deleteStoreCollection(Long id);
+
 	@GetMapping(value = "/isCollection")
 	Boolean isCollection(Long id);
 }
