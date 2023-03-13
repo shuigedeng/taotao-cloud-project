@@ -9,6 +9,8 @@ import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 管理端,商品分类规格接口
@@ -32,7 +31,7 @@ import java.util.List;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-商品分类规格管理API", description = "平台管理端-商品分类规格管理API")
+@Tag(name = "管理端-商品分类规格管理API", description = "管理端-商品分类规格管理API")
 @RequestMapping("/goods/manager/category/spec")
 public class CategorySpecificationManagerController {
 
@@ -66,7 +65,7 @@ public class CategorySpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}")
 	public Result<Boolean> saveCategoryBrand(@PathVariable Long categoryId,
-											 @RequestParam String[] categorySpecs) {
+		@RequestParam String[] categorySpecs) {
 		//删除分类规格绑定信息
 		this.categorySpecificationService.remove(
 			new QueryWrapper<CategorySpecification>().eq("category_id", categoryId));

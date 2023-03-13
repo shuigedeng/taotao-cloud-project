@@ -16,8 +16,8 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import jakarta.validation.constraints.NotEmpty;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-商品管理API", description = "平台管理端-商品管理API")
+@Tag(name = "管理端-商品管理API", description = "管理端-商品管理API")
 @RequestMapping("/goods/manager/goods")
 public class GoodsManagerController {
 
@@ -56,7 +56,7 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageResult<GoodsVO>> getByPage(
-			@Validated GoodsPageQuery goodsPageQuery) {
+		@Validated GoodsPageQuery goodsPageQuery) {
 		IPage<Goods> goodsPage = goodsService.goodsQueryPage(goodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
 	}
@@ -66,7 +66,7 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/sku/page")
 	public Result<PageResult<GoodsSkuVO>> getSkuByPage(
-			@Validated GoodsPageQuery goodsPageQuery) {
+		@Validated GoodsPageQuery goodsPageQuery) {
 		IPage<GoodsSku> goodsSkuPage = goodsSkuService.goodsSkuQueryPage(goodsPageQuery);
 		return Result.success(PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
 	}
@@ -86,10 +86,10 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}/under")
 	public Result<Boolean> underGoods(@PathVariable Long goodsId,
-			@NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
+		@NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
 		List<Long> goodsIds = List.of(goodsId);
 		return Result.success(
-				goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
+			goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
 	}
 
 	@Operation(summary = "管理员审核商品", description = "管理员审核商品")
@@ -97,7 +97,7 @@ public class GoodsManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "{goodsIds}/auth")
 	public Result<Boolean> auth(@PathVariable List<Long> goodsIds,
-			@RequestParam String authFlag) {
+		@RequestParam String authFlag) {
 		//校验商品是否存在
 		return Result.success(goodsService.auditGoods(goodsIds, GoodsAuthEnum.valueOf(authFlag)));
 	}
@@ -108,7 +108,7 @@ public class GoodsManagerController {
 	@PutMapping(value = "/{goodsId}/up")
 	public Result<Boolean> unpGoods(@PathVariable List<Long> goodsId) {
 		return Result.success(
-				goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
+			goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
 	}
 
 	@Operation(summary = "通过id获取商品详情", description = "通过id获取商品详情")

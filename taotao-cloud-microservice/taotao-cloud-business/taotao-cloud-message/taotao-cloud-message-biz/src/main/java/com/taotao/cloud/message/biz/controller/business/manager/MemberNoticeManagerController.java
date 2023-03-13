@@ -25,7 +25,7 @@ package com.taotao.cloud.message.biz.controller.business.manager;// package com.
 //  */
 // @Validated
 // @RestController
-// @Tag(name = "平台管理端-会员站内信管理API", description = "平台管理端-会员站内信管理API")
+// @Tag(name = "管理端-会员站内信管理API", description = "管理端-会员站内信管理API")
 // @RequestMapping("/message/manager/memberNotice")
 // public class MemberNoticeManagerController {
 //

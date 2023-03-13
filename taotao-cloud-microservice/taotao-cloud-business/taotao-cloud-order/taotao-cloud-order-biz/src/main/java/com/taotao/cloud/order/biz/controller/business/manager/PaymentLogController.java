@@ -3,10 +3,10 @@ package com.taotao.cloud.order.biz.controller.business.manager;
 import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-支付日志管理API", description = "平台管理端-支付日志管理API")
+@Tag(name = "管理端-支付日志管理API", description = "管理端-支付日志管理API")
 @RequestMapping("/order/manager/payment/log")
 public class PaymentLogController {
 
@@ -38,8 +38,8 @@ public class PaymentLogController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<PaymentLogVO>> getByPage(Order order,
-												 SearchVO searchVo) {
+			SearchVO searchVo) {
 		return Result.success(orderService.queryPaymentLogs(
-			PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
+				PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
 	}
 }

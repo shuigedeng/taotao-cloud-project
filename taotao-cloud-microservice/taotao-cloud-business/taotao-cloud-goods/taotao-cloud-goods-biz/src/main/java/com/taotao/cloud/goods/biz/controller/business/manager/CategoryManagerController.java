@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-商品分类管理API", description = "平台管理端-商品分类管理API")
+@Tag(name = "管理端-商品分类管理API", description = "管理端-商品分类管理API")
 @RequestMapping("/goods/manager/category")
 @CacheConfig(cacheNames = "category")
 public class CategoryManagerController {
@@ -125,7 +125,7 @@ public class CategoryManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/disable/{id}")
 	public Result<Boolean> disable(@PathVariable Long id,
-			@RequestParam Boolean enableOperations) {
+		@RequestParam Boolean enableOperations) {
 		Category category = categoryService.getById(id);
 		if (category == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

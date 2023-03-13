@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "买家端-会员商品评价API", description = "买家端-会员商品评价API")
 @RequestMapping("/member/buyer/member/evaluation")
-public class MemberEvaluationBuyerController {
+public class MemberEvaluationController {
 
 	/**
 	 * 会员商品评价
@@ -60,7 +60,7 @@ public class MemberEvaluationBuyerController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
 	public Result<MemberEvaluationVO> queryById(
-			@Parameter(description = "评价ID", required = true) @NotBlank(message = "评价ID不能为空") @PathVariable("id") Long id) {
+		@Parameter(description = "评价ID", required = true) @NotBlank(message = "评价ID不能为空") @PathVariable("id") Long id) {
 		MemberEvaluation memberEvaluation = memberEvaluationService.queryById(id);
 		return Result.success(MemberEvaluationConvert.INSTANCE.convert(memberEvaluation));
 	}
@@ -70,13 +70,13 @@ public class MemberEvaluationBuyerController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<PageResult<MemberEvaluationVO>> queryMineEvaluation(
-			@Validated EvaluationPageQuery evaluationPageQuery) {
+		@Validated EvaluationPageQuery evaluationPageQuery) {
 		//设置当前登录会员
 		evaluationPageQuery.setMemberId(SecurityUtils.getUserId());
 		IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.managerQuery(
-				evaluationPageQuery);
+			evaluationPageQuery);
 		return Result.success(
-				PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
+			PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
 	}
 
 	@Operation(summary = "查看某一个商品的评价列表", description = "查看某一个商品的评价列表")
@@ -84,15 +84,15 @@ public class MemberEvaluationBuyerController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/goods-evaluation/{goodsId}")
 	public Result<PageResult<MemberEvaluationVO>> queryGoodsEvaluation(
-			EvaluationPageQuery evaluationPageQuery,
-			@Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
+		EvaluationPageQuery evaluationPageQuery,
+		@Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
 		//设置查询查询商品
 		evaluationPageQuery.setGoodsId(goodsId);
 		evaluationPageQuery.setStatus(SwitchEnum.OPEN.name());
 		IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.managerQuery(
-				evaluationPageQuery);
+			evaluationPageQuery);
 		return Result.success(
-				PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
+			PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
 	}
 
 	@Operation(summary = "查看某一个商品的评价数量", description = "查看某一个商品的评价数量")
@@ -100,7 +100,7 @@ public class MemberEvaluationBuyerController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/goods-evaluation/number/{goodsId}")
 	public Result<EvaluationNumberVO> queryEvaluationNumber(
-			@Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
+		@Parameter(description = "商品ID", required = true) @NotBlank(message = "商品ID不能为空") @PathVariable("goodsId") Long goodsId) {
 		return Result.success(memberEvaluationService.getEvaluationNumber(goodsId));
 	}
 }

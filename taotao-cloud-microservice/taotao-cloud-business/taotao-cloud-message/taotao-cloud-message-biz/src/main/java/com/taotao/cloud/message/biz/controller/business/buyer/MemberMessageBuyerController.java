@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import com.taotao.cloud.message.biz.service.business.MemberMessageService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "平台管理端-会员站内消息API", description = "平台管理端-会员站内消息API")
+@Tag(name = "管理端-会员站内消息API", description = "管理端-会员站内消息API")
 @RequestMapping("/message/buyer/member")
 public class MemberMessageBuyerController {
 

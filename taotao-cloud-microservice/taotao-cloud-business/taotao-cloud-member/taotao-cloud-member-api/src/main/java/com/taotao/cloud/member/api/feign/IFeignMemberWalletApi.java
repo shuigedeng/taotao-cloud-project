@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberWalletApiFallback.class)
 public interface IFeignMemberWalletApi {
 
-	@GetMapping(value = "/member/wallet/increase")
+	@GetMapping(value = "/member/feign/wallet/increase")
 	boolean increase(@RequestParam MemberWalletUpdateDTO memberWalletUpdateDTO);
 
-	@GetMapping(value = "/member/recharge/save")
+	@GetMapping(value = "/member/feign/recharge/save")
 	boolean save(@RequestParam Long id, @RequestParam String username);
 }

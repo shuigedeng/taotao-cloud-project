@@ -51,7 +51,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 平台管理端-用户管理API
+ * 管理端-用户管理API
  *
  * @author shuigedeng
  * @version 2021.10
@@ -60,17 +60,17 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/manager/user")
-@Tag(name = "平台管理端-用户管理API", description = "平台管理端-用户管理API")
+@Tag(name = "管理端-用户管理API", description = "管理端-用户管理API")
 public class ManagerUserController extends
-	BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
+		BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
 	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
 	@GetMapping("/exists/phone/{phone}")
 	public Result<Boolean> existsByPhone(
-		@Parameter(description = "手机号码", required = true) @NotBlank(message = "手机号码不能为空")
-		@PathVariable(name = "phone") String phone) {
+			@Parameter(description = "手机号码", required = true) @NotBlank(message = "手机号码不能为空")
+			@PathVariable(name = "phone") String phone) {
 		return success(service().existsByPhone(phone));
 	}
 
@@ -79,8 +79,8 @@ public class ManagerUserController extends
 	@PreAuthorize("hasAuthority('sys:user:exists:id')")
 	@GetMapping("/exists/id/{userId}")
 	public Result<Boolean> existsByUserId(
-		@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
-		@PathVariable(name = "userId") Long userId) {
+			@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
+			@PathVariable(name = "userId") Long userId) {
 		return success(service().existsById(userId));
 	}
 
@@ -89,10 +89,10 @@ public class ManagerUserController extends
 	@PreAuthorize("hasAuthority('sys:user:rest:password')")
 	@PostMapping("/rest/password/{userId}")
 	public Result<Boolean> restPass(
-		@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
-		@PathVariable(name = "userId") Long userId,
-		@Parameter(description = "重置密码DTO", required = true)
-		@Validated @RequestBody RestPasswordUserDTO restPasswordDTO) {
+			@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
+			@PathVariable(name = "userId") Long userId,
+			@Parameter(description = "重置密码DTO", required = true)
+			@Validated @RequestBody RestPasswordUserDTO restPasswordDTO) {
 		return success(service().restPass(userId, restPasswordDTO));
 	}
 
@@ -116,18 +116,18 @@ public class ManagerUserController extends
 	@PreAuthorize("hasAuthority('sys:user:role')")
 	@PutMapping("/roles/{userId}")
 	public Result<Boolean> updateUserRoles(
-		@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
-		@PathVariable(name = "userId") Long userId,
-		@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
-		@RequestBody Set<Long> roleIds) {
+			@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
+			@PathVariable(name = "userId") Long userId,
+			@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
+			@RequestBody Set<Long> roleIds) {
 		return success(service().updateUserRoles(userId, roleIds));
 	}
 
 	@PostMapping("/user/test/save")
 	@NotAuth
 	public Result<Boolean> testSave(
-		@Parameter(description = "新增DTO", required = true)
-		@RequestBody @Validated UserSaveDTO saveDTO) {
+			@Parameter(description = "新增DTO", required = true)
+			@RequestBody @Validated UserSaveDTO saveDTO) {
 		User user = new User();
 		BeanUtils.copy(saveDTO, user);
 		user.setAccount("sdfasfd");

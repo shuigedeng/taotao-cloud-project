@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-品牌管理API", description = "平台管理端-品牌管理API")
+@Tag(name = "管理端-品牌管理API", description = "管理端-品牌管理API")
 @RequestMapping("/goods/manager/brand")
 public class BrandManagerController {
 

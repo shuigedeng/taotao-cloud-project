@@ -29,7 +29,7 @@ public interface IFeignMemberApi {
 	 * @return 用户信息
 	 * @since 2020/4/29 17:48
 	 */
-	@GetMapping(value = "/member/info/security")
+	@GetMapping(value = "/member/feign/info/security")
 	SecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
 
 	/**
@@ -39,7 +39,7 @@ public interface IFeignMemberApi {
 	 * @return 会员信息
 	 * @since 2020/11/20 下午4:10
 	 */
-	@GetMapping("/member/info/id/{id:[0-9]*}")
+	@GetMapping("/member/feign/info/id/{id:[0-9]*}")
 	MemberVO findMemberById(@PathVariable(value = "id") Long id);
 
 	/**
@@ -52,27 +52,27 @@ public interface IFeignMemberApi {
 	 * @return {@link Result }<{@link Boolean }>
 	 * @since 2022-04-25 16:41:42
 	 */
-	@GetMapping(value = "/member/updateMemberPoint")
+	@GetMapping(value = "/member/feign/updateMemberPoint")
 	Boolean updateMemberPoint(@RequestParam Long payPoint, @RequestParam String name,
 		@RequestParam Long memberId, @RequestParam String s);
 
-	@GetMapping(value = "/member/username")
+	@GetMapping(value = "/member/feign/username")
 	MemberVO findByUsername(@RequestParam String username);
 
-	@GetMapping(value = "/member/memberId")
+	@GetMapping(value = "/member/feign/memberId")
 	MemberVO getById(@RequestParam Long memberId);
 
 	/**
 	 * new LambdaUpdateWrapper<Member>() .eq(Member::getId, member.getId())
 	 * .set(Member::getHaveStore, true) .set(Member::getStoreId, store.getId())
 	 */
-	@GetMapping(value = "/member/memberId/storeId")
+	@GetMapping(value = "/member/feign/memberId/storeId")
 	Boolean update(@RequestParam Long memberId, @RequestParam Long storeId);
 
-	@GetMapping(value = "/member")
+	@GetMapping(value = "/member/feign/updateById")
 	Boolean updateById(@RequestParam MemberVO member);
 
-	@GetMapping(value = "/member/listFieldsByMemberIds")
+	@GetMapping(value = "/member/feign/listFieldsByMemberIds")
 	List<Map<String, Object>> listFieldsByMemberIds(@RequestParam String s,
 		@RequestParam List<String> ids);
 }

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-退款日志管理API", description = "平台管理端-退款日志管理API")
+@Tag(name = "管理端-退款日志管理API", description = "管理端-退款日志管理API")
 @RequestMapping("/order/manager/refund/log")
 public class RefundLogController {
 
@@ -43,9 +43,9 @@ public class RefundLogController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
 	public Result<IPage<RefundLog>> getByPage(RefundLog entity, SearchVO searchVo,
-		PageVO page) {
+			PageVO page) {
 		return Result.success(refundLogService.page(
-			PageUtil.initPage(page), PageUtil.initWrapper(entity, searchVo)));
+				PageUtil.initPage(page), PageUtil.initWrapper(entity, searchVo)));
 	}
 
 }

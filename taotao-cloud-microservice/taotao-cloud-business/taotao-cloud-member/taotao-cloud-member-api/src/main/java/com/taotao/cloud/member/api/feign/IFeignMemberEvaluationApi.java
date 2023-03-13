@@ -9,12 +9,11 @@ import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
+import java.util.List;
+import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 远程调用会员用户模块
@@ -37,7 +36,7 @@ public interface IFeignMemberEvaluationApi {
 	 * @return {@link Result }<{@link Long }>
 	 * @since 2022-04-25 16:39:41
 	 */
-	@GetMapping(value = "/member/evaluation")
+	@GetMapping(value = "/member/feign/evaluation")
 	Long count(@RequestParam Long goodsId, @RequestParam String name);
 
 	/**
@@ -47,7 +46,7 @@ public interface IFeignMemberEvaluationApi {
 	 * @return {@link Result }<{@link Long }>
 	 * @since 2022-04-25 16:39:46
 	 */
-	@GetMapping(value = "/member/evaluationPageQuery")
+	@GetMapping(value = "/member/feign/evaluationPageQuery")
 	Long getEvaluationCount(@RequestParam EvaluationPageQuery queryParams);
 
 	/**
@@ -57,12 +56,12 @@ public interface IFeignMemberEvaluationApi {
 	 * @return {@link Result }<{@link List }<{@link Map }<{@link String }, {@link Object }>>>
 	 * @since 2022-04-25 16:39:49
 	 */
-	@GetMapping(value = "/member/memberEvaluationNum")
+	@GetMapping(value = "/member/feign/memberEvaluationNum")
 	List<Map<String, Object>> memberEvaluationNum();
 
-	@GetMapping(value = "/member/memberEvaluationDTO")
+	@GetMapping(value = "/member/feign/memberEvaluationDTO")
 	Boolean addMemberEvaluation(@RequestParam MemberEvaluationDTO memberEvaluationDTO,
-								@RequestParam boolean b);
+		@RequestParam boolean b);
 
 	/**
 	 * LambdaQueryWrapper<MemberEvaluation> lambdaQueryWrapper = Wrappers.lambdaQuery();
@@ -73,17 +72,17 @@ public interface IFeignMemberEvaluationApi {
 	 * @param name
 	 * @return
 	 */
-	@GetMapping(value = "/member/evaluation/getStoreRatingVO")
+	@GetMapping(value = "/member/feign/evaluation/getStoreRatingVO")
 	StoreRatingVO getStoreRatingVO(@RequestParam Long id, @RequestParam String name);
 
-	@GetMapping(value = "/member/evaluation/queryById")
+	@GetMapping(value = "/member/feign/evaluation/queryById")
 	MemberEvaluationVO queryById(@RequestParam Long id);
 
-	@GetMapping(value = "/member/evaluation/reply")
+	@GetMapping(value = "/member/feign/evaluation/reply")
 	boolean reply(@RequestParam Long id, @RequestParam String reply,
-				  @RequestParam String replyImage);
+		@RequestParam String replyImage);
 
-	@GetMapping(value = "/member/evaluation/queryPage")
+	@GetMapping(value = "/member/feign/evaluation/queryPage")
 	PageResult<MemberEvaluationListVO> queryPage(
 		@RequestParam EvaluationPageQuery evaluationPageQuery);
 }

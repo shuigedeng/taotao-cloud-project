@@ -4,12 +4,11 @@ import cn.hutool.core.date.DateTime;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberRechargeApiFallback;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
+import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 远程调用会员用户模块
@@ -21,14 +20,14 @@ import java.util.List;
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberRechargeApiFallback.class)
 public interface IFeignMemberRechargeApi {
 
-	@GetMapping(value = "/member/recharge/paySuccess")
+	@GetMapping(value = "/member/feign/recharge/paySuccess")
 	Boolean paySuccess(@RequestParam String sn, @RequestParam String receivableNo,
-					   @RequestParam String paymentMethod);
+		@RequestParam String paymentMethod);
 
-	@GetMapping(value = "/member/recharge/getRecharge")
+	@GetMapping(value = "/member/feign/recharge/getRecharge")
 	MemberRechargeVO getRecharge(@RequestParam String sn);
 
-	@GetMapping(value = "/member/recharge/recharge")
+	@GetMapping(value = "/member/feign/recharge/recharge")
 	MemberRechargeVO recharge(@RequestParam BigDecimal price);
 
 	/**
@@ -38,10 +37,10 @@ public interface IFeignMemberRechargeApi {
 	 *
 	 * @return
 	 */
-	@GetMapping(value = "/member/recharge/list")
+	@GetMapping(value = "/member/feign/recharge/list")
 	List<MemberRechargeVO> list(@RequestParam DateTime dateTime);
 
-	@GetMapping(value = "/member/recharge/rechargeOrderCancel")
+	@GetMapping(value = "/member/feign/recharge/rechargeOrderCancel")
 	Boolean rechargeOrderCancel(@RequestParam String sn);
 }
 

@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.biz.controller.business.seller;// package com.taotao.cloud.member.biz.controller.seller;
+//package com.taotao.cloud.member.biz.controller.business.seller;
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
 // import com.taotao.cloud.common.model.Result;

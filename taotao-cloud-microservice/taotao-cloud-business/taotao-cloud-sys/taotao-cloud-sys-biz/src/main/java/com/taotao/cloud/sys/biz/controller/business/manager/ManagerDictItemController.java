@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 平台管理端-字典项管理API
+ * 管理端-字典项管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -37,9 +37,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/manager/dict/item")
-@Tag(name = "平台管理端-字典项管理API", description = "平台管理端-字典项管理API")
+@Tag(name = "管理端-字典项管理API", description = "管理端-字典项管理API")
 public class ManagerDictItemController extends
-	BaseSuperController<IDictItemService, DictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
+		BaseSuperController<IDictItemService, DictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
 
 	///**
 	// * 根据code查询字典项列表

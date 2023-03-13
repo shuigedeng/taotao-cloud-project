@@ -25,7 +25,7 @@ package com.taotao.cloud.message.biz.controller.business.manager;// package com.
 //  */
 // @Validated
 // @RestController
-// @Tag(name = "平台管理端-服务订阅消息API", description = "平台管理端-服务订阅消息API")
+// @Tag(name = "管理端-服务订阅消息API", description = "管理端-服务订阅消息API")
 // @RequestMapping("/message/manager/serviceNotice")
 // public class ServiceNoticeManagerController {
 //

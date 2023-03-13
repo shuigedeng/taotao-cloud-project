@@ -1,12 +1,4 @@
 dependencies {
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-store:taotao-cloud-store-api")
@@ -16,13 +8,30 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-promotion:taotao-cloud-promotion-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-report:taotao-cloud-report-api")
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-//    annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
-    annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-rxjava"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-laytpl"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-elk"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-office"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-third-client"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
 
     implementation "com.xkcoding.http:simple-http:1.0.5"
     implementation("com.alipay.sdk:alipay-sdk-java:4.35.45.ALL") {
@@ -30,27 +39,38 @@ dependencies {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "xml-apis", module: "xml-apis"
     }
+
+    //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
+
+
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+
 }
 
 mainClassName = "com.taotao.cloud.member.biz.TaoTaoCloudMemberApplication"
 description = "会员模块"
 archivesBaseName = 'taotao-cloud-member'
 
-//configurations {
-//    all {
-//        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-//        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
-//
-//        //resolutionStrategy {
-//        //    force "org.codehaus.groovy:groovy:4.0.0"
-//        //}
-//
-//        //exclude group: "org.codehaus.groovy", module: "groovy"
-//        exclude group: "log4j", module: "log4j"
-//        exclude group: "log4j", module: "slf4j-simple"
-//        exclude group: "org.slf4j", module: "slf4j-log4j12"
-//        exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
-//        exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
-//        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-//    }
-//}
+configurations {
+    all {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            //force "org.codehaus.groovy:groovy:4.0.0"
+            force 'org.antlr:antlr4:4.12.0'
+        }
+
+        //exclude group: "log4j", module: "log4j"
+        //exclude group: "log4j", module: "slf4j-simple"
+        //exclude group: "org.slf4j", module: "slf4j-log4j12"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-api"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+}

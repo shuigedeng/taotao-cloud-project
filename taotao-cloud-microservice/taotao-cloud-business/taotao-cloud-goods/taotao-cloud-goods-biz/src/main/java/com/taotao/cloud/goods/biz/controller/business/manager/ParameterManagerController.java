@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-参数管理API", description = "平台管理端-参数管理API")
+@Tag(name = "管理端-参数管理API", description = "管理端-参数管理API")
 @RequestMapping("/goods/manager/parameters")
 public class ParameterManagerController {
 
@@ -52,7 +52,7 @@ public class ParameterManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
-								  @PathVariable Long id) {
+		@PathVariable Long id) {
 		Parameters parameters = ParametersConvert.INSTANCE.convert(parametersDTO);
 		parameters.setId(id);
 		return Result.success(parametersService.updateParameter(parameters));

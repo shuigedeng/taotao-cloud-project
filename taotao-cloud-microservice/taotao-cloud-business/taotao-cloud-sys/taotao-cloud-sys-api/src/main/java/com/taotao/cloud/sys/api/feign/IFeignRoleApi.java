@@ -25,7 +25,7 @@ public interface IFeignRoleApi {
 	 * @return 角色列表
 	 * @since 2020/10/21 15:13
 	 */
-	@GetMapping("/role/info/userId")
+	@GetMapping("/sys/feign/role/info/userId")
 	List<RoleQueryVO> findRoleByUserId(@RequestParam(value = "userId") Long userId);
 }
 

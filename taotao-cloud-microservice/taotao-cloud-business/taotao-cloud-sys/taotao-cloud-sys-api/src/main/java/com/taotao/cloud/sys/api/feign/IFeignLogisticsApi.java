@@ -27,7 +27,7 @@ public interface IFeignLogisticsApi {
 	 * @return {@link Result }<{@link LogisticsVO }>
 	 * @since 2022-04-25 16:47:29
 	 */
-	@GetMapping("/logistic/codes")
+	@GetMapping("/sys/feign/logistic/codes")
 	LogisticsVO getById(@RequestParam Long logisticsId);
 
 	/**
@@ -38,10 +38,10 @@ public interface IFeignLogisticsApi {
 	 * @return {@link Result }<{@link TracesVO }>
 	 * @since 2022-04-25 16:47:32
 	 */
-	@GetMapping("/logistic/info")
+	@GetMapping("/sys/feign/logistic/info")
 	TracesVO getLogistic(@RequestParam Long logisticsId, @RequestParam String logisticsNo);
 
-	@GetMapping("/logistic/list")
+	@GetMapping("/sys/feign/logistic/list")
 	List<LogisticsVO> list();
 
 }

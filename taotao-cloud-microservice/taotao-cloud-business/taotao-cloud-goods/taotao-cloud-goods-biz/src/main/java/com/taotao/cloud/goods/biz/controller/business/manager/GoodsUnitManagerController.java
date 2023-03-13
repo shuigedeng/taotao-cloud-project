@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-商品计量单位管理API", description = "平台管理端-商品计量单位管理API")
+@Tag(name = "管理端-商品计量单位管理API", description = "管理端-商品计量单位管理API")
 @RequestMapping("/goods/manager/goods/unit")
 public class GoodsUnitManagerController {
 
@@ -75,7 +75,7 @@ public class GoodsUnitManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@NotNull @PathVariable Long id,
-			@Valid @RequestBody GoodsUnit goodsUnit) {
+		@Valid @RequestBody GoodsUnit goodsUnit) {
 		goodsUnit.setId(id);
 		return Result.success(goodsUnitService.updateById(goodsUnit));
 	}
