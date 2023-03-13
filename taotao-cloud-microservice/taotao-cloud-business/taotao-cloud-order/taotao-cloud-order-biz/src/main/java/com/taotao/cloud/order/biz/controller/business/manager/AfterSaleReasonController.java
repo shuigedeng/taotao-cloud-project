@@ -3,13 +3,13 @@ package com.taotao.cloud.order.biz.controller.business.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleReasonDTO;
 import com.taotao.cloud.order.api.model.page.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleReasonVO;
 import com.taotao.cloud.order.biz.model.convert.AfterSaleReasonConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-售后原因管理API", description = "平台管理端-售后原因管理API")
+@Tag(name = "管理端-售后原因管理API", description = "管理端-售后原因管理API")
 @RequestMapping("/order/manager/aftersale/reason")
 public class AfterSaleReasonController {
 
@@ -56,7 +56,8 @@ public class AfterSaleReasonController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<AfterSaleReasonVO>> getByPage(@Validated AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
+	public Result<PageResult<AfterSaleReasonVO>> getByPage(
+			@Validated AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
 		IPage<AfterSaleReason> page = afterSaleReasonService.pageQuery(afterSaleReasonPageQuery);
 		return Result.success(PageResult.convertMybatisPage(page, AfterSaleReasonVO.class));
 	}
@@ -66,7 +67,8 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
 	public Result<Boolean> save(@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO) {
-		return Result.success(afterSaleReasonService.save(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO)));
+		return Result.success(afterSaleReasonService.save(
+				AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO)));
 	}
 
 	@Operation(summary = "修改售后原因", description = "修改售后原因")
@@ -74,8 +76,9 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO,
-								  @PathVariable("id") Long id) {
-		AfterSaleReason afterSaleReason = AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO);
+			@PathVariable("id") Long id) {
+		AfterSaleReason afterSaleReason = AfterSaleReasonConvert.INSTANCE.convert(
+				afterSaleReasonDTO);
 		afterSaleReason.setId(id);
 		return Result.success(afterSaleReasonService.editAfterSaleReason(afterSaleReason));
 	}

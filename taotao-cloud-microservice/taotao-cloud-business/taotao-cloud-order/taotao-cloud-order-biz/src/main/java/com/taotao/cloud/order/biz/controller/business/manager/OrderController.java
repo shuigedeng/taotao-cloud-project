@@ -41,7 +41,7 @@ import zipkin2.storage.Traces;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-订单管理API", description = "平台管理端-订单管理API")
+@Tag(name = "管理端-订单管理API", description = "管理端-订单管理API")
 @RequestMapping("/order/manager/order")
 public class OrderController {
 

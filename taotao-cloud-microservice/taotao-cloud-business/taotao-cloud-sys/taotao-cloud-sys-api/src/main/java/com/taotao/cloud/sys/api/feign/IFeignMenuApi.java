@@ -26,7 +26,7 @@ public interface IFeignMenuApi {
 	 * @return 角色列表
 	 * @since 2020/10/21 15:24
 	 */
-	@GetMapping("/menu/info/codes")
+	@GetMapping("/sys/feign/menu/info/codes")
 	List<MenuQueryVO> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
 
 }

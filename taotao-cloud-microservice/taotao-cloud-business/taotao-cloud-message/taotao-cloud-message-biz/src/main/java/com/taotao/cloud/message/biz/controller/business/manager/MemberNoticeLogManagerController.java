@@ -23,7 +23,7 @@ package com.taotao.cloud.message.biz.controller.business.manager;// package com.
 //  */
 // @Validated
 // @RestController
-// @Tag(name = "平台管理端-会员消息日志管理API", description = "平台管理端-会员消息日志管理API")
+// @Tag(name = "管理端-会员消息日志管理API", description = "管理端-会员消息日志管理API")
 // @RequestMapping("/message/manager/memberNoticeLog")
 // public class MemberNoticeLogManagerController {
 //

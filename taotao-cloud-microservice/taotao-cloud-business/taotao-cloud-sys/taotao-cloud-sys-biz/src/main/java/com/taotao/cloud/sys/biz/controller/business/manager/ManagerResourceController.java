@@ -54,7 +54,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 平台管理端-菜单管理API
+ * 管理端-菜单管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -63,9 +63,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/manager/resource")
-@Tag(name = "平台管理端-资源管理API", description = "平台管理端-资源管理API")
+@Tag(name = "管理端-资源管理API", description = "管理端-资源管理API")
 public class ManagerResourceController extends
-	BaseSuperController<IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, MenuQueryVO> {
+		BaseSuperController<IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, MenuQueryVO> {
 
 	//************************************************菜单*************************************************************
 
@@ -75,8 +75,8 @@ public class ManagerResourceController extends
 	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
 	@GetMapping("/roleId/{roleId}")
 	public Result<List<MenuQueryVO>> findResourceByRoleId(
-		@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
-		@PathVariable(value = "roleId") Long roleId) {
+			@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
+			@PathVariable(value = "roleId") Long roleId) {
 		List<MenuBO> bos = service().findMenuByRoleIds(Set.of(roleId));
 		List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(bos);
 		return success(result);
@@ -87,8 +87,8 @@ public class ManagerResourceController extends
 	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
 	@GetMapping("/roleIds")
 	public Result<List<MenuQueryVO>> findResourceByRoleIds(
-		@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
-		@RequestParam(value = "roleIds") Set<Long> roleIds) {
+			@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
+			@RequestParam(value = "roleIds") Set<Long> roleIds) {
 		List<MenuBO> resources = service().findMenuByRoleIds(roleIds);
 		List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
 		return Result.success(result);
@@ -99,8 +99,8 @@ public class ManagerResourceController extends
 	@PreAuthorize("hasAuthority('sys:resource:info:code')")
 	@GetMapping("/code/{code}")
 	public Result<List<MenuQueryVO>> findResourceByCode(
-		@Parameter(description = "角色code", required = true) @NotBlank(message = "角色code不能为空")
-		@PathVariable(value = "code") String code) {
+			@Parameter(description = "角色code", required = true) @NotBlank(message = "角色code不能为空")
+			@PathVariable(value = "code") String code) {
 		List<MenuBO> resources = service().findMenuByCodes(Set.of(code));
 		List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
 		return Result.success(result);
@@ -111,8 +111,8 @@ public class ManagerResourceController extends
 	@PreAuthorize("hasAuthority('sys:resource:info:codes')")
 	@GetMapping("/codes")
 	public Result<List<MenuQueryVO>> findResourceByCodes(
-		@Parameter(description = "角色cde列表", required = true) @NotNull(message = "角色cde列表不能为空")
-		@RequestParam(value = "codes") Set<String> codes) {
+			@Parameter(description = "角色cde列表", required = true) @NotNull(message = "角色cde列表不能为空")
+			@RequestParam(value = "codes") Set<String> codes) {
 		List<MenuBO> resources = service().findMenuByCodes(codes);
 		List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
 		return success(result);
@@ -149,7 +149,7 @@ public class ManagerResourceController extends
 	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
 	@GetMapping("/current/user/tree")
 	public Result<List<MenuTreeVO>> findCurrentUserResourceTree(
-		@Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
+			@Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
 		Set<String> roleCodes = SecurityUtils.getCurrentUser().getRoleCodes();
 		if (CollUtil.isEmpty(roleCodes)) {
 			return Result.success(Collections.emptyList());
@@ -159,20 +159,20 @@ public class ManagerResourceController extends
 		List<MenuQueryVO> resourceVOList = result.getData();
 
 		List<MenuTreeVO> trees = service().findCurrentUserMenuTree(resourceVOList,
-			parentId);
+				parentId);
 		return Result.success(trees);
 	}
 
 	@Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 "
-		+
-		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
+			+
+			"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:tree')")
 	@GetMapping("/tree")
 	@SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
 	public Result<List<MenuTreeVO>> findResourceTree(
-		@Parameter(name = "lazy", description = "是否是延迟查询") @RequestParam(value = "lazy") boolean lazy,
-		@Parameter(name = "parentId", description = "父id") @RequestParam(value = "parentId") Long parentId) {
+			@Parameter(name = "lazy", description = "是否是延迟查询") @RequestParam(value = "lazy") boolean lazy,
+			@Parameter(name = "parentId", description = "父id") @RequestParam(value = "parentId") Long parentId) {
 		List<MenuTreeVO> trees = service().findMenuTree(lazy, parentId);
 		return success(trees);
 	}

@@ -13,8 +13,8 @@ import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-商品规格管理API", description = "平台管理端-商品规格管理API")
+@Tag(name = "管理端-商品规格管理API", description = "管理端-商品规格管理API")
 @RequestMapping("/goods/manager/spec")
 public class SpecificationManagerController {
 
@@ -61,9 +61,9 @@ public class SpecificationManagerController {
 	@GetMapping
 	public Result<PageResult<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
 		IPage<Specification> specificationPage = specificationService.getPage(
-				specificationPageQuery);
+			specificationPageQuery);
 		return Result.success(
-				PageResult.convertMybatisPage(specificationPage, SpecificationVO.class));
+			PageResult.convertMybatisPage(specificationPage, SpecificationVO.class));
 	}
 
 	@Operation(summary = "保存规格", description = "保存规格")
@@ -72,7 +72,7 @@ public class SpecificationManagerController {
 	@PostMapping
 	public Result<Boolean> save(@Valid @RequestBody SpecificationDTO specificationDTO) {
 		Specification specification = SpecificationConvert.INSTANCE.convert(
-				specificationDTO);
+			specificationDTO);
 		return Result.success(specificationService.save(specification));
 	}
 
@@ -81,9 +81,9 @@ public class SpecificationManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO,
-			@PathVariable Long id) {
+		@PathVariable Long id) {
 		Specification specification = SpecificationConvert.INSTANCE.convert(
-				specificationDTO);
+			specificationDTO);
 		specification.setId(id);
 
 		return Result.success(specificationService.saveOrUpdate(specification));

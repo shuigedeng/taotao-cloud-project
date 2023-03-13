@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.tree.ForestNodeMerger;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.dto.dept.DeptSaveDTO;
 import com.taotao.cloud.sys.api.model.dto.dept.DeptUpdateDTO;
 import com.taotao.cloud.sys.api.model.vo.dept.DeptQueryVO;
@@ -26,18 +25,18 @@ import com.taotao.cloud.sys.api.model.vo.dept.DeptTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.sys.biz.service.business.IDeptService;
 import com.taotao.cloud.web.base.controller.BaseSuperController;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
- * 平台管理端-部门管理API
+ * 管理端-部门管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -46,9 +45,9 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/sys/manager/dept")
-@Tag(name = "平台管理端-部门管理API", description = "平台管理端-部门管理API")
+@Tag(name = "管理端-部门管理API", description = "管理端-部门管理API")
 public class ManagerDeptController extends
-	BaseSuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
+		BaseSuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
 	@Operation(summary = "获取部门树", description = "获取部门树")
 	@RequestLogger

@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/manager/sensitive/word")
-@Tag(name = "平台管理端-敏感词管理API", description = "平台管理端-敏感词管理API")
+@Tag(name = "管理端-敏感词管理API", description = "管理端-敏感词管理API")
 public class SensitiveWordsController {
 
 	private final ISensitiveWordService sensitiveWordService;

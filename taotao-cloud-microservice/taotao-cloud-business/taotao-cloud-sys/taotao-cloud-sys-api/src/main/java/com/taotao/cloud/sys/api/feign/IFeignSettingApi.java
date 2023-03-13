@@ -35,10 +35,10 @@ public interface IFeignSettingApi {
 	 * @return 配置信息
 	 * @since 2022-03-25 14:10:22
 	 */
-	@GetMapping("/sys/tools/setting")
+	@GetMapping("/sys/feign/tools/setting")
 	SettingVO get(@RequestParam(value = "key") String key);
 
-	@GetMapping("/sys/tools/setting/base")
+	@GetMapping("/sys/feign/tools/setting/base")
 	BaseSetting getBaseSetting(String name);
 
 	/**
@@ -48,31 +48,31 @@ public interface IFeignSettingApi {
 	 * @return {@link Result }<{@link GoodsSettingVO }>
 	 * @since 2022-04-25 16:47:40
 	 */
-	@GetMapping("/sys/tools/setting/goods")
+	@GetMapping("/sys/feign/tools/setting/goods")
 	GoodsSettingVO getGoodsSetting(String name);
 
-	@GetMapping("/sys/tools/setting/order")
+	@GetMapping("/sys/feign/tools/setting/order")
 	OrderSettingVO getOrderSetting(String name);
 
-	@GetMapping("/sys/tools/setting/experience")
+	@GetMapping("/sys/feign/tools/setting/experience")
 	ExperienceSettingVO getExperienceSetting(String name);
 
-	@GetMapping("/sys/tools/setting/point")
+	@GetMapping("/sys/feign/tools/setting/point")
 	PointSettingVO getPointSetting(String name);
 
-	@GetMapping("/sys/tools/setting/qq/connect")
+	@GetMapping("/sys/feign/tools/setting/qq/connect")
 	QQConnectSettingVO getQQConnectSetting(String name);
 
-	@GetMapping("/sys/tools/setting/wechat/connect")
+	@GetMapping("/sys/feign/tools/setting/wechat/connect")
 	WechatConnectSettingVO getWechatConnectSetting(String name);
 
-	@GetMapping("/sys/tools/setting/seckill")
+	@GetMapping("/sys/feign/tools/setting/seckill")
 	SeckillSetting getSeckillSetting(String name);
 
-	@GetMapping("/sys/tools/setting/ali")
+	@GetMapping("/sys/feign/tools/setting/ali")
 	AlipayPaymentSetting getAlipayPaymentSetting(String name);
 
-	@GetMapping("/sys/tools/setting/wechat")
+	@GetMapping("/sys/feign/tools/setting/wechat")
 	WechatPaymentSetting getWechatPaymentSetting(String name);
 
 }

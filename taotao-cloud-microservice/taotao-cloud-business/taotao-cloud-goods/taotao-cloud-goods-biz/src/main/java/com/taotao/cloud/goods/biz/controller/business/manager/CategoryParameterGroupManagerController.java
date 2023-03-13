@@ -10,6 +10,7 @@ import com.taotao.cloud.goods.biz.service.business.IParametersService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -21,8 +22,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
  * 管理端,分类绑定参数组接口
  *
@@ -33,7 +32,7 @@ import java.util.List;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-分类绑定参数组API", description = "平台管理端-分类绑定参数组API")
+@Tag(name = "管理端-分类绑定参数组API", description = "管理端-分类绑定参数组API")
 @RequestMapping("/goods/manager/category/parameters")
 public class CategoryParameterGroupManagerController {
 

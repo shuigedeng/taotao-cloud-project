@@ -16,11 +16,11 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.biz.model.convert.LogisticsConvert;
 import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 import com.taotao.cloud.sys.biz.service.business.ILogisticsService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 平台管理端-物流公司管理API
+ * 管理端-物流公司管理API
  *
  * @author shuigedeng
  * @version 2022.03
@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/manager/logistics")
-@Tag(name = "平台管理端-物流公司管理API", description = "平台管理端-物流公司管理API")
+@Tag(name = "管理端-物流公司管理API", description = "管理端-物流公司管理API")
 public class ManagerLogisticsController {
 
 	private final ILogisticsService logisticsService;

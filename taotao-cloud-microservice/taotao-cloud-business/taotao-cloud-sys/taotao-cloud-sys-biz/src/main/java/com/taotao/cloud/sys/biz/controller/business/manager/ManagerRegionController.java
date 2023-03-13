@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 平台管理端-地区管理API
+ * 管理端-地区管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -49,9 +49,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/sys/manager/region")
-@Tag(name = "平台管理端-地区管理API", description = "平台管理端-地区管理API")
+@Tag(name = "管理端-地区管理API", description = "管理端-地区管理API")
 public class ManagerRegionController extends
-	BaseSuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
+		BaseSuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger
@@ -59,8 +59,8 @@ public class ManagerRegionController extends
 	@NotAuth
 	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<RegionParentVO>> queryRegionByParentId(
-		@Parameter(description = "父id") @NotNull(message = "父id不能为空")
-		@PathVariable(name = "parentId") Long parentId) {
+			@Parameter(description = "父id") @NotNull(message = "父id不能为空")
+			@PathVariable(name = "parentId") Long parentId) {
 		List<RegionParentVO> result = service().queryRegionByParentId(parentId);
 		return Result.success(result);
 	}
@@ -71,8 +71,8 @@ public class ManagerRegionController extends
 	@NotAuth
 	//@PreAuthorize("hasAuthority('sys:region:info:true')")
 	public Result<List<RegionParentVO>> tree(
-		@RequestParam(required = false, defaultValue = "1") Long parentId,
-		@RequestParam(required = false, defaultValue = "1024") Integer depth) {
+			@RequestParam(required = false, defaultValue = "1") Long parentId,
+			@RequestParam(required = false, defaultValue = "1024") Integer depth) {
 		List<RegionParentVO> result = service().tree(parentId, depth);
 		return Result.success(result);
 	}

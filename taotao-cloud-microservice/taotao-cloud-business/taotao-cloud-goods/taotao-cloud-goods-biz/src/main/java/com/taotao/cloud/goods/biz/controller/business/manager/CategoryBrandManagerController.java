@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-分类品牌管理API", description = "平台管理端-分类品牌管理API")
+@Tag(name = "管理端-分类品牌管理API", description = "管理端-分类品牌管理API")
 @RequestMapping("/goods/manager/category/brand")
 public class CategoryBrandManagerController {
 
@@ -41,7 +41,7 @@ public class CategoryBrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{categoryId}")
 	public Result<List<CategoryBrandVO>> getCategoryBrandList(
-			@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId) {
+		@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId) {
 		return Result.success(categoryBrandService.getCategoryBrandList(categoryId));
 	}
 
@@ -50,10 +50,10 @@ public class CategoryBrandManagerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{categoryId}/{categoryBrands}")
 	public Result<Boolean> saveCategoryBrand(
-			@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId,
-			@NotBlank(message = "品牌id列表不能为空") @PathVariable(value = "categoryBrands") List<Long> categoryBrands) {
+		@NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId,
+		@NotBlank(message = "品牌id列表不能为空") @PathVariable(value = "categoryBrands") List<Long> categoryBrands) {
 		return Result.success(
-				categoryBrandService.saveCategoryBrandList(categoryId, categoryBrands));
+			categoryBrandService.saveCategoryBrandList(categoryId, categoryBrands));
 	}
 
 }

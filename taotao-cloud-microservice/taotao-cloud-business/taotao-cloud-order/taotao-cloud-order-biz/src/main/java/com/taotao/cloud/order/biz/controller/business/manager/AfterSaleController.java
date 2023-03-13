@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated
 @RestController
-@Tag(name = "平台管理端-售后管理API", description = "平台管理端-售后管理API")
+@Tag(name = "管理端-售后管理API", description = "管理端-售后管理API")
 @RequestMapping("/order/manager/aftersale")
 public class AfterSaleController {
 

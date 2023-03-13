@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 平台管理端-字典管理API
+ * 管理端-字典管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -46,9 +46,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/manager/dict")
-@Tag(name = "平台管理端-字典管理API", description = "平台管理端-字典管理API")
+@Tag(name = "管理端-字典管理API", description = "管理端-字典管理API")
 public class ManagerDictController extends
-	BaseSuperController<IDictService, Dict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
+		BaseSuperController<IDictService, Dict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
 
 
 	@GetMapping("/list-code")
@@ -75,7 +75,7 @@ public class ManagerDictController extends
 			//批量删除字典列表的同时，也要删除字典项的内容
 			for (Object obj : idsCollection) {
 				service().remove(
-					new LambdaQueryWrapper<Dict>().eq(Dict::getId, obj));
+						new LambdaQueryWrapper<Dict>().eq(Dict::getId, obj));
 			}
 			return Result.success("删除成功");
 		}

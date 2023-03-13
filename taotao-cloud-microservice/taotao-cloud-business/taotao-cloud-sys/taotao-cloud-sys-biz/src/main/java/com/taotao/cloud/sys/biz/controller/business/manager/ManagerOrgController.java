@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 平台管理端-部门管理API
+ * 管理端-部门管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -45,9 +45,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/manager/org")
-@Tag(name = "平台管理端-部门管理API", description = "平台管理端-部门管理API")
+@Tag(name = "管理端-部门管理API", description = "管理端-部门管理API")
 public class ManagerOrgController extends
-	BaseSuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
+		BaseSuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
 	@Operation(summary = "获取部门树", description = "获取部门树")
 	@RequestLogger

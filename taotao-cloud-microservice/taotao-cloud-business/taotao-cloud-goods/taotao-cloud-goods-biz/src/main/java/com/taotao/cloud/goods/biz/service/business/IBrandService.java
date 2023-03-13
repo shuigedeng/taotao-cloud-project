@@ -6,7 +6,6 @@ import com.taotao.cloud.goods.api.model.dto.BrandDTO;
 import com.taotao.cloud.goods.api.model.page.BrandPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 import com.taotao.cloud.web.base.service.BaseSuperService;
-
 import java.util.List;
 
 /**
