@@ -1,15 +1,6 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-//    dependencies {
-//        classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.17"
-//    }
-}
-
 apply plugin: "java"
 apply plugin: "idea"
-//apply plugin: "com.google.protobuf"
+apply plugin: "com.google.protobuf"
 
 dependencies {
     implementation(
@@ -29,24 +20,31 @@ repositories {
     mavenCentral()
 }
 
-//protobuf {
-//    protoc {
-//        artifact = "com.google.protobuf:protoc:3.0.0"
-//    }
-//
-//    plugins {
-//        grpc {
-//            artifact = "io.grpc:protoc-gen-grpc-java:1.4.0"
-//        }
-//    }
-//
-//    generateProtoTasks.generatedFilesBaseDir = "src"
-//
-//    generateProtoTasks {
-//        all()*.plugins {
-//            grpc {
-//                setOutputSubDir "java"
-//            }
-//        }
-//    }
-//}
+protobuf {
+    //指定protoc编译器位置 在 protoc 模块下，可以指定多个配置，但是会以最后一个配置为准。
+    protoc {
+        //直接使用Maven Central上已经编译好的protoc编译器，
+        artifact = "com.google.protobuf:protoc:3.19.1"
+        //指定本地已经安装的protoc编译器
+        //path = '/usr/local/bin/protoc'
+    }
+    //generatedFilesBaseDir = "$projectDir/src/generated"
+    clean {
+        delete generatedFilesBaseDir
+    }
+    //指定protoc运行插件
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.53.0"
+        }
+        //javalite {
+        //    // The codegen for lite comes as a separate artifact
+        //    artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.1'
+        //}
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
