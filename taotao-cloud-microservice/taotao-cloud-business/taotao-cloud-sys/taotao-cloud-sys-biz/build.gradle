@@ -1,6 +1,9 @@
 plugins {
+    //Gradle依赖关系分析插件。这个插件试图复制maven依赖插件的分析目标的功能，如果依赖被声明但没有被使用或者使用但没有被声明，则构建失败。
     id "ca.cutterslade.analyze" version "1.9.0"
 }
+
+//appl  "ca.cutterslade.analyze"
 
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
