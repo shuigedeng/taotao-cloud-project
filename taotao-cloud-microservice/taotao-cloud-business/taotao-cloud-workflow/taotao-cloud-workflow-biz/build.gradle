@@ -1,11 +1,16 @@
 dependencies {
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
-
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-api")
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
+
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
 mainClassName = "com.taotao.cloud.workflow.biz.TaoTaoCloudWorkflowApplication"
