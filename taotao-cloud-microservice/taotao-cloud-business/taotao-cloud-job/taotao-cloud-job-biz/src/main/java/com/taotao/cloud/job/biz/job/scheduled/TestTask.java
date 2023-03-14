@@ -1,6 +1,11 @@
 package com.taotao.cloud.job.biz.job.scheduled;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.job.schedule.task.TaskManager;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,18 +20,18 @@ public class TestTask {
 
 	private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-	// @Autowired
-	// private TaskManager taskManager;
-	//
-	// @Scheduled(cron = "0 0/30 * * * ?")
-	// public void robReceiveExpireTask() {
-	// 	LogUtils.info(Thread.currentThread().getName() + "------------测试测试");
-	// 	LogUtils.info(df.format(LocalDateTime.now()) + "测试测试");
-	//
-	// 	List<String> runScheduledName = taskManager.getRunScheduledName();
-	// 	LogUtils.info(runScheduledName.toString());
-	//
-	// 	List<String> allSuperScheduledName = taskManager.getAllSuperScheduledName();
-	// 	LogUtils.info(allSuperScheduledName.toString());
-	// }
+	@Autowired
+	private TaskManager taskManager;
+
+	@Scheduled(cron = "0 0/30 * * * ?")
+	public void robReceiveExpireTask() {
+		LogUtils.info(Thread.currentThread().getName() + "------------测试测试");
+		LogUtils.info(df.format(LocalDateTime.now()) + "测试测试");
+
+		List<String> runScheduledName = taskManager.getRunScheduledName();
+		LogUtils.info(runScheduledName.toString());
+
+		List<String> allSuperScheduledName = taskManager.getAllSuperScheduledName();
+		LogUtils.info(allSuperScheduledName.toString());
+	}
 }
