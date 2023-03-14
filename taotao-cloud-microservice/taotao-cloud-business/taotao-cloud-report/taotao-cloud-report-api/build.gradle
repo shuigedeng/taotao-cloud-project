@@ -1,5 +1,57 @@
 dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+
+    compileOnly "io.github.shuigedeng:taotao-cloud-starter-office"
+    compileOnly "io.seata:seata-all"
+
+    compileOnly "io.github.shuigedeng:taotao-cloud-starter-grpc"
+
+    //  1.3.5  Java 9+ compatibility - Do NOT update to 2.0.0
+    // protobuf生成的代码带有javax.annotation.Generated 此注解只有在1.3.5中有  在2版本之后换成了jakarta.annotation.Generated
+    // 等之后支持了jakarta就可以用2版本了
+    api 'jakarta.annotation:jakarta.annotation-api:1.3.5'
 }
 
 description = "报表中心api"
+
+protobuf {
+    //指定protoc编译器位置 在 protoc 模块下，可以指定多个配置，但是会以最后一个配置为准。
+    protoc {
+        //直接使用Maven Central上已经编译好的protoc编译器，
+        artifact = "com.google.protobuf:protoc:3.19.1"
+        //指定本地已经安装的protoc编译器
+        //path = '/usr/local/bin/protoc'
+    }
+    //generatedFilesBaseDir = "$projectDir/src/generated"
+    clean {
+        delete generatedFilesBaseDir
+    }
+    //指定protoc运行插件
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.53.0"
+        }
+        //javalite {
+        //    // The codegen for lite comes as a separate artifact
+        //    artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.1'
+        //}
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+configurations {
+    all {
+        resolutionStrategy {
+            //force "org.codehaus.groovy:groovy:4.0.0"
+            force 'jakarta.annotation:jakarta.annotation-api:1.3.5'
+        }
+
+        //exclude group: "javax.annotation", module: "javax.annotation-api"
+        //exclude group: "javax.activation", module: "javax.activation-api"
+        //exclude group: "com.google.code.findbugs", module: "jsr305"
+    }
+}

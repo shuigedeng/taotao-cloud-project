@@ -228,6 +228,132 @@ spring:
           lower-case-service-id: true
           enabled: true
       routes:
+        - id: taotao-cloud-auth
+          uri: lb://taotao-cloud-auth
+          metadata:
+            name: 认证管理中心
+          predicates:
+            - Path=${taotao.cloud.gateway.api.base-uri}/auth/**
+          filters:
+            - RewritePath=/auth/(?<path>.*), /auth/$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 3
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/fallback
+        - id: taotao-cloud-customer
+          uri: lb://taotao-cloud-customer
+          metadata:
+            name: 客服管理中心
+          predicates:
+            - Path=${taotao.cloud.gateway.api.base-uri}/customer/**
+          filters:
+            - RewritePath=/customer/(?<path>.*), /customer/$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/myfallback
+        - id: taotao-cloud-distribution
+          uri: lb://taotao-cloud-distribution
+          metadata:
+            name: 营销管理中心
+          predicates:
+            - Path=${taotao.cloud.gateway.api.base-uri}/distribution/**
+          filters:
+            - RewritePath=/distribution/(?<path>.*), /distribution/$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/myfallback
+        - id: taotao-cloud-file
+          uri: lb://taotao-cloud-file
+          metadata:
+            name: 文件管理中心
+          predicates:
+            - Path=${taotao.cloud.gateway.api.base-uri}/file/**
+          filters:
+            - RewritePath=/file/(?<path>.*), /file/$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/myfallback
+        - id: taotao-cloud-flowable
+          uri: lb://taotao-cloud-flowable
+          metadata:
+            name: flowable管理中心
+          predicates:
+            - Path=${taotao.cloud.gateway.api.base-uri}/flowable/**
+          filters:
+            - RewritePath=/flowable/(?<path>.*), /flowable/$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/myfallback
+        - id: taotao-cloud-generator
+          uri: lb://taotao-cloud-generator
+          metadata:
+            name: 代码生成器管理中心
+          predicates:
+            - Path=${taotao.cloud.gateway.api.base-uri}/generator/**
+          filters:
+            - RewritePath=/generator/(?<path>.*), /generator/$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/myfallback
         - id: taotao-cloud-stock
           uri: lb://taotao-cloud-stock
           metadata:
@@ -359,7 +485,7 @@ spring:
         - id: taotao-cloud-payment
           uri: lb://taotao-cloud-payment
           metadata:
-            name: 支付管理模块
+            name: 支付管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/payment/**
           filters:
@@ -380,7 +506,7 @@ spring:
         - id: taotao-cloud-operation
           uri: lb://taotao-cloud-operation
           metadata:
-            name: 运营管理模块
+            name: 运营管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/operation/**
           filters:
@@ -401,7 +527,7 @@ spring:
         - id: taotao-cloud-message
           uri: lb://taotao-cloud-message
           metadata:
-            name: 消息管理模块
+            name: 消息管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/message/**
           filters:
@@ -422,7 +548,7 @@ spring:
         - id: taotao-cloud-member
           uri: lb://taotao-cloud-member
           metadata:
-            name: 会员管理模块
+            name: 会员管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/member/**
           filters:
@@ -440,52 +566,11 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-distribution
-          uri: lb://taotao-cloud-distribution
-          metadata:
-            name: 营销管理模块
-          predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/distribution/**
-          filters:
-            - RewritePath=/distribution/(?<path>.*), /distribution/$\{path}
-            - StripPrefix=2
-            - RequestTime=true
-            - PreserveHostHeader
-            - SwaggerHeader
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@remoteAddrKeyResolver}'
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
-            - name: CircuitBreaker
-              args:
-                name: myCircuitBreaker
-                fallbackUri: forward:/myfallback
-        - id: taotao-cloud-customer
-          uri: lb://taotao-cloud-customer
-          metadata:
-            name: 客服管理模块
-          predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/customer/**
-          filters:
-            - RewritePath=/customer/(?<path>.*), /customer/$\{path}
-            - StripPrefix=2
-            - RequestTime=true
-            - PreserveHostHeader
-            - SwaggerHeader
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@remoteAddrKeyResolver}'
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
-            - name: CircuitBreaker
-              args:
-                name: myCircuitBreaker
-                fallbackUri: forward:/myfallback
+
         - id: taotao-cloud-bulletin
           uri: lb://taotao-cloud-bulletin
           metadata:
-            name: 公告管理模块
+            name: 公告管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/bulletin/**
           filters:
@@ -503,31 +588,11 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-auth
-          uri: lb://taotao-cloud-auth
-          metadata:
-            name: 认证中心模块
-          predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/auth/**
-          filters:
-            - RewritePath=/auth/(?<path>.*), /auth/$\{path}
-            - StripPrefix=2
-            - RequestTime=true
-            - PreserveHostHeader
-            - SwaggerHeader
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@remoteAddrKeyResolver}'
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 3
-            - name: CircuitBreaker
-              args:
-                name: myCircuitBreaker
-                fallbackUri: forward:/fallback
+
         - id: taotao-cloud-sys
           uri: lb://taotao-cloud-sys
           metadata:
-            name: 系统管理模块
+            name: 系统管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
           filters:
@@ -539,7 +604,7 @@ spring:
         - id: taotao-cloud-order
           uri: lb://taotao-cloud-order
           metadata:
-            name: 订单管理模块
+            name: 订单管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/order/**
           filters:
