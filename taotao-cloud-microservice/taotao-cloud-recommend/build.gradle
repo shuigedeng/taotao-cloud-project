@@ -4,5 +4,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.recommend.biz.TaoTaoCloudRecommendApplication"
-description = "推荐模块"
+description = "推荐中心"
 archivesBaseName = 'taotao-cloud-recommend'

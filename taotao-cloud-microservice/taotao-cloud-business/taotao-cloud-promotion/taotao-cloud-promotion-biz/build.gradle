@@ -18,7 +18,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.promotion.biz.TaoTaoCloudPromotionApplication"
-description = "促销模块"
+description = "促销中心"
 archivesBaseName = 'taotao-cloud-promotion'
 
 configurations {

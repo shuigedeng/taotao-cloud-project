@@ -8,7 +8,7 @@
     -- android端日志数据 androidLog.json
 
   后端采集数据
-    -- 系统日志数据 sysLog.json
+    -- 系统日志数据 feignSysLogRequest.json
     -- 请求日志数据 requestLog.json
     -- 业务日志数据 businessLog.json
 
@@ -20,6 +20,7 @@
 ```
 
 ### 数仓分层
+
 ```
 数据引入层 ODS
 
@@ -35,6 +36,7 @@
 ```
 
 ### 数仓开发规范
+
 ```
 1. 数据库命名
     数仓对应分层_(业务线|业务项目)  

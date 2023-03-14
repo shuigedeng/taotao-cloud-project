@@ -15,5 +15,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.customer.biz.TaoTaoCloudCustomerApplication"
-description = "客服模块"
+description = "客服中心"
 archivesBaseName = 'taotao-cloud-customer'

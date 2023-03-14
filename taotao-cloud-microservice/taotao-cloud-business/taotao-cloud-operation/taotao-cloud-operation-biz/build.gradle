@@ -14,6 +14,6 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.operation.biz.TaoTaoCloudOperationApplication"
-description = "运营模块"
+description = "运营中心"
 archivesBaseName = 'taotao-cloud-operation'
 

@@ -11,5 +11,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.tenant.biz.TaoTaoCloudTenantApplication"
-description = "租户模块"
+description = "租户中心"
 archivesBaseName = 'taotao-cloud-tenant'

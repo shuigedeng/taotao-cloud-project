@@ -26,5 +26,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.wechat.biz.TaoTaoCloudWechatApplication"
-description = "微信模块"
+description = "微信中心"
 archivesBaseName = 'taotao-cloud-wechat'

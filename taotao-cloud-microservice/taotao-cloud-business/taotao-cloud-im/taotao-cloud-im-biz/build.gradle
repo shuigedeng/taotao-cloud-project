@@ -25,5 +25,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.im.biz.TaoTaoCloudImApplication"
-description = "im模块"
+description = "im中心"
 archivesBaseName = 'taotao-cloud-im'

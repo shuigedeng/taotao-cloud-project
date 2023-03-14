@@ -45,5 +45,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.graphql.biz.TaoTaoCloudGraphqlApplication"
-description = "graphql模块"
+description = "graphql中心"
 archivesBaseName = 'taotao-cloud-graphql'

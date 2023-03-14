@@ -19,5 +19,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.flowable.biz.TaoTaoCloudFlowableApplication"
-description = "flowable工作流模块"
+description = "flowable工作流中心"
 archivesBaseName = 'taotao-cloud-flowable'

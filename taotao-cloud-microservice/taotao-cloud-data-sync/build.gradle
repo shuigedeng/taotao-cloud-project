@@ -56,6 +56,6 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
-description = "数据同步模块"
+description = "数据同步中心"
 archivesBaseName = 'taotao-cloud-sync'
 

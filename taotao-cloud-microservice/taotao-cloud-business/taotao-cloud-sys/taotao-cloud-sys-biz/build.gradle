@@ -108,7 +108,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
-description = "系统模块"
+description = "系统中心"
 archivesBaseName = 'taotao-cloud-sys'
 
 configurations {

@@ -29,5 +29,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.open.platform.TaoTaoCloudOpenPlatformApplication"
-description = "开放平台模块"
+description = "开放平台中心"
 archivesBaseName = 'taotao-cloud-open-platform'

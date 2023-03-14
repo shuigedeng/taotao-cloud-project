@@ -259,7 +259,7 @@ spring:
         - id: taotao-cloud-stock
           uri: lb://taotao-cloud-stock
           metadata:
-            name: 库存管理模块
+            name: 库存管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/stock/**
           filters:
@@ -282,7 +282,7 @@ spring:
         - id: taotao-cloud-settlement
           uri: lb://taotao-cloud-settlement
           metadata:
-            name: 售后管理模块
+            name: 售后管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/settlement/**
           filters:
@@ -303,7 +303,7 @@ spring:
         - id: taotao-cloud-search
           uri: lb://taotao-cloud-search
           metadata:
-            name: 搜索管理模块
+            name: 搜索管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/search/**
           filters:
@@ -324,7 +324,7 @@ spring:
         - id: taotao-cloud-report
           uri: lb://taotao-cloud-report
           metadata:
-            name: 报表管理模块
+            name: 报表管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/report/**
           filters:
@@ -345,7 +345,7 @@ spring:
         - id: taotao-cloud-recommend
           uri: lb://taotao-cloud-recommend
           metadata:
-            name: 推荐管理模块
+            name: 推荐管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/recommend/**
           filters:
