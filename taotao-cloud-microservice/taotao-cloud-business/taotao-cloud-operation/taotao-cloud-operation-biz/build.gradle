@@ -1,4 +1,6 @@
 dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-operation:taotao-cloud-operation-api")
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
@@ -7,7 +9,10 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-operation:taotao-cloud-operation-api")
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
 mainClassName = "com.taotao.cloud.operation.biz.TaoTaoCloudOperationApplication"

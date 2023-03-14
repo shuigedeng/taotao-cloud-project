@@ -1,4 +1,9 @@
 dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-core"
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
     implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
@@ -20,11 +25,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
-
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
@@ -36,6 +36,10 @@ dependencies {
     //Sa-Token 插件：整合SSO
     implementation "cn.dev33:sa-token-sso:1.34.0"
 
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
 description = "认证模块api"

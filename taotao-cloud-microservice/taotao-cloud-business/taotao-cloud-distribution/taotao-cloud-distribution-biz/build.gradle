@@ -1,13 +1,16 @@
 dependencies {
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-distribution:taotao-cloud-distribution-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
 
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
 mainClassName = "com.taotao.cloud.distribution.biz.TaoTaoCloudDistributionApplication"
