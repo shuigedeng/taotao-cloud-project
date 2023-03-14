@@ -14,6 +14,42 @@ jasypt:
 #      prefix: "ENC@["
 #      suffix: "]"
 
+mybatis-plus-join:
+  banner: true
+  sub-table-logic: true
+
+mybatis-plus:
+  typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity  #实体扫描 多个package用户逗号或者分号分割
+  mapperLocations: classpath:mapper/*.xml # mapper xml 地址
+  global-config:
+    banner: true # 关闭mp3.0自带的banner
+    db-config:
+      id-type: auto #主键类型
+      table-underline: true  #驼峰下划线转换
+      logic-delete-value: 1 #逻辑删除全局值 1已删除
+      logic-not-delete-value: 0 #逻辑未删除全局值 0未删除
+      insert-strategy: not_null  #字段策略
+      update-strategy: not_null  #字段策略
+      where-strategy: not_empty  #字段策略
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志打印参数class  org.apache.ibatis.logging.slf4j.Slf4jImpl com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
+    lazyLoadingEnabled: true  #查询时，关闭关联对象即时加载以提高性能
+    aggressiveLazyLoading: false  #设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能
+    multipleResultSetsEnabled: true #对于未知的SQL查询，允许返回不同的结果集以达到通用的效果
+    useColumnLabel: true #允许使用列标签代替列名
+    useGeneratedKeys: true #允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖
+    autoMappingBehavior: FULL #给予被嵌套的resultMap以字段-属性的映射支持
+    defaultExecutorType: SIMPLE #对于批量更新操作缓存SQL以提高性能
+    defaultStatementTimeout: 15  #数据库超过15秒仍未响应则超时，部分语句可单独指定超时时间
+    jdbcTypeForNull: NULL
+    callSettersOnNulls: true  #当参数为NULL且字段列可为空的Double等类型时可直接当NULL插入
+    logPrefix: "dao."  #打印sql语句
+  configuration-properties:
+    CONSTANT_CIPHER_TEXT: taotao-cloud
+
+
 seata:
   enabled: true
   service:

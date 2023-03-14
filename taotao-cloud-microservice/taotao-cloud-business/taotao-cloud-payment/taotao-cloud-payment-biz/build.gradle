@@ -11,28 +11,34 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-
-    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
-    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
-
+    //https://search.maven.org/artifact/com.alipay.sdk/alipay-sdk-java
     implementation("com.alipay.sdk:alipay-sdk-java:4.35.45.ALL") {
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "xml-apis", module: "xml-apis"
     }
 
+    //https://search.maven.org/artifact/com.github.javen205/IJPay-All
     implementation "com.github.javen205:IJPay-All:2.9.6-17"
 
+    //https://search.maven.org/artifact/com.github.binarywang/weixin-java-pay
     implementation "com.github.binarywang:weixin-java-pay:4.4.9.B"
     implementation "com.github.binarywang:weixin-java-mp:4.4.9.B"
+
+    //https://search.maven.org/artifact/com.paypal.sdk/checkout-sdk
     implementation "com.paypal.sdk:checkout-sdk:2.0.0"
 
+    //https://search.maven.org/artifact/com.yungouos.pay/yungouos-pay-sdk
     implementation "com.yungouos.pay:yungouos-pay-sdk:2.0.29"
 
+    //https://search.maven.org/artifact/jakarta.jms/jakarta.jms-api
     implementation 'jakarta.jms:jakarta.jms-api:3.1.0'
+
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+
 }
 
 mainClassName = "com.taotao.cloud.payment.biz.TaoTaoCloudPayApplication"

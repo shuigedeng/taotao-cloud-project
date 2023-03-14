@@ -28,26 +28,33 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
 
     implementation "mysql:mysql-connector-java"
+
+    //https://search.maven.org/artifact/com.baomidou/mybatis-plus-boot-starter
     implementation "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
+    //https://search.maven.org/artifact/com.alibaba/druid-spring-boot-starter
     implementation 'com.alibaba:druid-spring-boot-starter:1.2.16'
 
     //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
     //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
     //implementation "org.antlr:antlr4-runtime:4.11.1"
 
-    //clickhouse
+    //https://search.maven.org/artifact/ru.yandex.clickhouse/clickhouse-jdbc
     implementation "ru.yandex.clickhouse:clickhouse-jdbc:0.3.2"
 
-    //trino
+    //https://search.maven.org/artifact/io.trino/trino-jdbc
     implementation "io.trino:trino-jdbc:407"
     implementation "io.trino:trino-spi:407"
     implementation "io.trino:trino-main:407"
+    //https://search.maven.org/artifact/io.airlift/slice
     implementation "io.airlift:slice:0.45"
+    //https://search.maven.org/artifact/io.airlift/units
     implementation "io.airlift:units:1.8"
+    //https://search.maven.org/artifact/com.google.guava/guava
     implementation "com.google.guava:guava:31.1-jre"
+    //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-annotations
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.14.2"
 
-    //hbase
+    //https://search.maven.org/artifact/org.apache.hbase/hbase-client
     implementation "org.apache.hbase:hbase-client:2.5.3-hadoop3"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"

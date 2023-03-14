@@ -19,13 +19,14 @@ dependencies {
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
 
+    //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
     implementation 'org.apache.velocity:velocity-engine-core:2.3'
 
     //https://search.maven.org/artifact/com.baomidou/mybatis-plus-generator
     implementation "com.baomidou:mybatis-plus-generator:3.5.3.1"
 
+    //https://search.maven.org/artifact/net.maku/maku-generator-boot-starter
     implementation 'net.maku:maku-generator-boot-starter:3.0.2'
-
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"

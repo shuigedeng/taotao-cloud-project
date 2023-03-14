@@ -14,6 +14,93 @@ jasypt:
 #      prefix: "ENC@["
 #      suffix: "]"
 
+elasticjob:
+  enabled: false   # 此处开启会通过 ElasticJobTracingConfiguration 注入一个tracingDataSource的bean 会和QuartzAutoConfiguration自动配置的的@ConditionalOnSingleCandidate(DataSource.class)冲突 启动会报错
+  #dump:
+  #  port: 9888
+  tracing:
+    type: RDB
+    data-source:
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:mysql://192.168.10.210:13306/taotao-cloud-elasticjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      hikari:
+        auto-commit: true         # 从池返回的连接的默认自动提交行为 默认true
+        connection-timeout: 350000         # 客户端等待连接池的最大毫秒数
+        idle-timeout: 180000         # 允许连接在连接池中空闲的最大时间（毫秒）
+        login-timeout: 5
+        validation-timeout: 3000         # 连接测试活动的最大时间量
+        max-lifetime: 1800000         # 池中关闭连接后的最长生命周期
+        read-only: false
+        connection-test-query: SELECT 1
+        maximum-pool-size: 200
+        minimum-idle: 10
+        pool-name: DatebookHikariCP
+        register-mbeans: true
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+  reg-center:
+    server-lists: 192.168.10.210:2181
+    namespace: taotao-cloud-elasticjob
+  jobs:
+    taotao-cloud-simple-job:
+      elastic-job-class: com.taotao.cloud.sys.biz.job.elastic.TaoTaoSimpleJob
+      jobBootstrapBeanName: taoTaoSimpleBootstrapJob
+      cron: 0 0/30 * * * ?
+      timeZone: GMT+08:00
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+      description: MySimpleJob
+      overwrite: false
+      job-parameter: hello javaboy!
+      jobExecutorServiceHandlerType: myJobExecutorServiceHandler
+      jobListenerTypes:
+        - myJobListener
+      jobErrorHandlerType: EMAIL
+      props:
+        dingtalk:
+          webhook: you_webhook
+          keyword: taotao-cloud
+          secret: you_secret
+          connectTimeout: 3000
+          readTimeout: 5000
+        email:
+          host: smtp.qq.com
+          port: 465
+          username: 981376577@qq.com
+          password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+          useSsl: true
+          subject:
+          from: 981376577@qq.com
+          to: 981376577@qq.com
+          cc:
+          bcc:
+          debug: false
+    taotao-cloud-data-flow-job:
+      elastic-job-class: com.taotao.cloud.sys.biz.job.elastic.TaoTaoDataflowJob
+      jobBootstrapBeanName: taoTaoDataflowBootstrapJob
+      cron: 0 0/30 * * * ?
+      timeZone: GMT+08:00
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+    taotao-cloud-script-job:
+      elasticJobType: SCRIPT
+      jobBootstrapBeanName: taoTaoScriptBootstrapJob
+      cron: 0 0/30 * * * ?
+      shardingTotalCount: 3
+      props:
+        script.command.line: "echo SCRIPT Job: "
+    taotao-cloud-manual-script-job:
+      elasticJobType: SCRIPT
+      jobBootstrapBeanName: taoTaoManualScriptBootstrapJob
+      shardingTotalCount: 9
+      props:
+        script.command.line: "echo Manual SCRIPT Job: "
+
+
 seata:
   enabled: true
   service:
@@ -43,7 +130,101 @@ seata:
       password: nacos
       cluster: default
 
+mybatis-plus-join:
+  banner: true
+  sub-table-logic: true
+
+mybatis-plus:
+  typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity  #实体扫描 多个package用户逗号或者分号分割
+  mapperLocations: classpath:mapper/*.xml # mapper xml 地址
+  global-config:
+    banner: true # 关闭mp3.0自带的banner
+    db-config:
+      id-type: auto #主键类型
+      table-underline: true  #驼峰下划线转换
+      logic-delete-value: 1 #逻辑删除全局值 1已删除
+      logic-not-delete-value: 0 #逻辑未删除全局值 0未删除
+      insert-strategy: not_null  #字段策略
+      update-strategy: not_null  #字段策略
+      where-strategy: not_empty  #字段策略
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志打印参数class  org.apache.ibatis.logging.slf4j.Slf4jImpl com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
+    lazyLoadingEnabled: true  #查询时，关闭关联对象即时加载以提高性能
+    aggressiveLazyLoading: false  #设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能
+    multipleResultSetsEnabled: true #对于未知的SQL查询，允许返回不同的结果集以达到通用的效果
+    useColumnLabel: true #允许使用列标签代替列名
+    useGeneratedKeys: true #允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖
+    autoMappingBehavior: FULL #给予被嵌套的resultMap以字段-属性的映射支持
+    defaultExecutorType: SIMPLE #对于批量更新操作缓存SQL以提高性能
+    defaultStatementTimeout: 15  #数据库超过15秒仍未响应则超时，部分语句可单独指定超时时间
+    jdbcTypeForNull: NULL
+    callSettersOnNulls: true  #当参数为NULL且字段列可为空的Double等类型时可直接当NULL插入
+    logPrefix: "dao."  #打印sql语句
+  configuration-properties:
+    CONSTANT_CIPHER_TEXT: taotao-cloud
+
+powerjob:
+  worker:
+    enabled: true
+    port: 27777
+    protocol: akka
+    app-name: ${spring.application.name}
+    server-address: 192.168.10.210:7700
+    store-strategy: disk
+    max-appended-wf-context-length: 8192
+    max-result-length: 8192
+
 spring:
+  quartz:
+    scheduler-name: taotaoCloudQuartzScheduler
+    job-store-type: jdbc     # 将任务等保存化到数据库
+    wait-for-jobs-to-complete-on-shutdown: true     # 关闭时等待任务完成
+    overwrite-existing-jobs: true     # 可以覆盖已有的任务
+    auto-startup: true
+    jdbc:
+      initialize-schema: never       # 是否自动使用 SQL 初始化 Quartz 表结构
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: taotaoCloudQuartzScheduler # 调度器实例名称
+            instanceId: AUTO     # 调度器实例ID自动生成
+            wrapJobExecutionInUserTransaction: false
+            makeSchedulerThreadDaemon: true    # 是否开启守护线程
+            rmi:
+              export: false
+              proxy: false
+          # JobStore sql: https://github.com/quartz-scheduler/quartz/tree/master/quartz-core/src/main/resources/org/quartz/impl/jdbcjobstore
+          jobStore:
+            acquireTriggersWithinLock: true  # 在调度流程的第一步，也就是拉取待即将触发的triggers时，是上锁的状态，即不会同时存在多个线程拉取到相同的trigger的情况，也就避免的重复调度的危险。参考：https://segmentfault.com/a/1190000015492260
+            #dataSource: DS
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore # JobStore 实现类
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate # 使用完全兼容JDBC的驱动
+            tablePrefix: QRTZ_  # Quartz 表前缀
+            dontSetAutoCommitFalse: false
+            useProperties: false  # 是否将JobDataMap中的属性转为字符串存储
+            misfireThreshold: 60000  #在被认为“失火”之前，调度程序将“容忍”一个Triggers将其下一个启动时间通过的毫秒数。默认值（如果您在配置中未输入此属性）为60000（60秒）。
+            isClustered: true
+            clusterCheckinInterval: 5000 #设置此实例“检入”*与群集的其他实例的频率（以毫秒为单位）。影响检测失败实例的速度。
+            maxMisfiresToHandleAtATime: 1
+          dataSource:
+            DS:
+              driver: com.mysql.cj.jdbc.Driver
+              URL: jdbc:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+              username: root
+              password: 123456
+              maxConnections: 5
+              validationQuery: select 0
+              provider: hikaricp
+          threadPool: # 线程池相关配置
+            threadCount: 25 # 指定线程数，至少为1（无默认值），一般设置为1-100直接的整数，根据系统资源配置。默认为 10
+            threadPriority: 5  # 设置线程的优先级（最大为java.lang.Thread.MAX_PRIORITY 10，最小为Thread.MIN_PRIORITY 1，默认为5）
+            threadNamePrefix: taotao-cloud-quartz-executor
+            class: org.quartz.simpl.SimpleThreadPool  # 指定线程池实现类，对调度器提供固定大小的线程池
+            threadsInheritContextClassLoaderOfInitializingThread: true
+            makeThreadsDaemons: true   # 指定在线程池里面创建的线程是否是守护线程
   main:
     allow-bean-definition-overriding: true
   application:
@@ -340,6 +521,30 @@ taotao:
       log-message-format: com.taotao.cloud.p6spy.component.P6spyLogFormat
       # 使用日志系统记录sql
       #appender: com.p6spy.engine.spy.appender.Slf4JLogger
+    logger:
+      enabled: true
+    job:
+      xxl:
+        enabled: true
+        admin:
+          username: admin
+          password: 123456
+          #addresses: http://127.0.0.1:8080/xxl-job-admin
+        executor:
+          appname: ${spring.application.name}
+          title: 系统管理执行器
+          #address: 127.0.0.1:9999
+          #ip: 127.0.0.1
+          port: 9999
+          access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
+          log-path: ${user.home}/logs/${spring.application.name}/xxl-job
+          log-retention-days: 30
+      elastic:
+        enabled: true
+      quartz:
+        enabled: true
+      scheduled:
+        enabled: true
 
 feign:
   sentinel:
