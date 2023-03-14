@@ -8,6 +8,7 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
 
+    //https://search.maven.org/artifact/org.flowable/flowable-spring-boot-starter-process
     implementation 'org.flowable:flowable-spring-boot-starter-process:7.0.0.M1'
     implementation 'org.flowable:flowable-spring-boot-starter-actuator:7.0.0.M1'
 

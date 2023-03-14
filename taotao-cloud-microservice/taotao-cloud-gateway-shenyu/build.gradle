@@ -7,13 +7,14 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-webflux"
     api "org.springframework.boot:spring-boot-starter-actuator"
 
+    //https://search.maven.org/artifact/org.apache.shenyu/shenyu-spring-boot-starter-gateway
     api "org.apache.shenyu:shenyu-spring-boot-starter-gateway:2.5.1"
     api "org.apache.shenyu:shenyu-spring-boot-starter-instance:2.5.1"
 
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-param-mapping:2.5.1"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-waf:2.5.1"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-ratelimiter:2.5.1"
-    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-hystrix:2.5.0"
+    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-hystrix:2.5.1"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-resilience4j:2.5.1"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sentinel:2.5.1"
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-redirect:2.5.1"

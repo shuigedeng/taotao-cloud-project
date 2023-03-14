@@ -33,7 +33,7 @@ dependencies {
     implementation "org.webjars:bootstrap:5.2.3"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
     implementation "org.webjars:webjars-locator-core:0.52"
-
+    //https://search.maven.org/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity6
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
 
@@ -55,7 +55,7 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //验证码 https://gitee.com/tianai/tianai-captcha-springboot-starter
-    //https://search.maven.org/search?q=g:cloud.tianai.captcha%20AND%20a:tianai-captcha-springboot-starter
+    //https://search.maven.org/artifact/cloud.tianai.captcha/tianai-captcha-springboot-starter
     implementation 'cloud.tianai.captcha:tianai-captcha-springboot-starter:1.3.3'
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
@@ -72,6 +72,7 @@ dependencies {
     implementation "io.projectreactor.netty:reactor-netty"
 
     //百度人脸识别以及登录
+    //https://search.maven.org/artifact/com.baidu.aip/java-sdk
     implementation("com.baidu.aip:java-sdk:4.16.14") {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
@@ -79,8 +80,8 @@ dependencies {
     }
 
     // 阿里云app手机一键登录
+    //https://search.maven.org/artifact/com.aliyun/dypnsapi20170525
     implementation 'com.aliyun:dypnsapi20170525:1.0.8'
-
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"

@@ -7,8 +7,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"

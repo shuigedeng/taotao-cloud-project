@@ -30,6 +30,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
 
+    //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
     implementation 'org.springframework.integration:spring-integration-core:6.0.3'
     implementation 'org.springframework.integration:spring-integration-jdbc:6.0.3'
     implementation 'org.springframework.cloud:spring-cloud-starter-task'

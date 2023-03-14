@@ -21,11 +21,13 @@ dependencies {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
 
+    //https://search.maven.org/artifact/org.apache.skywalking/apm-spring-cloud-gateway-3.x-plugin
     implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin:8.14.0'
 
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     implementation "org.springframework.security:spring-security-oauth2-jose"
+    //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     implementation "com.nimbusds:nimbus-jose-jwt:9.31"
 
     implementation("org.springframework.cloud:spring-cloud-starter-gateway") {
@@ -56,6 +58,7 @@ dependencies {
     implementation("io.github.shuigedeng:taotao-cloud-starter-security-satoken") {
         exclude group: "cn.dev33", module: "sa-token-spring-boot-starter"
     }
+    //https://search.maven.org/artifact/cn.dev33/sa-token-reactor-spring-boot-starter
     implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.34.0'
 }
 
