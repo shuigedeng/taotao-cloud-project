@@ -14,5 +14,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.stock.biz.TaoTaoCloudStockApplication"
-description = "库存模块"
+description = "库存中心"
 archivesBaseName = 'taotao-cloud-stock'

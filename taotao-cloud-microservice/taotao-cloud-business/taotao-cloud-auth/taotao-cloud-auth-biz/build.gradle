@@ -90,5 +90,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
-description = "认证模块"
+description = "认证中心"
 archivesBaseName = 'taotao-cloud-auth'

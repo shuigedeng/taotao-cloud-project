@@ -25,7 +25,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
-description = "监控模块"
+description = "监控中心"
 archivesBaseName = 'taotao-cloud-monitor'
 
 configurations {

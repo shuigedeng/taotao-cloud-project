@@ -14,5 +14,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.workflow.biz.TaoTaoCloudWorkflowApplication"
-description = "工作流模块"
+description = "工作流中心"
 archivesBaseName = 'taotao-cloud-workflow'

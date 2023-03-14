@@ -56,6 +56,6 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.message.biz.TaoTaoCloudMessageApplication"
-description = "消息模块"
+description = "消息中心"
 archivesBaseName = 'taotao-cloud-message'
 

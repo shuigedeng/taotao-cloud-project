@@ -33,5 +33,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.job.biz.TaoTaoCloudJobApplication"
-description = "定时任务模块"
+description = "定时任务中心"
 archivesBaseName = 'taotao-cloud-job'

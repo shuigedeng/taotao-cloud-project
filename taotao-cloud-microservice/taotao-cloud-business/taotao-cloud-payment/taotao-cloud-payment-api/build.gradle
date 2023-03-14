@@ -2,4 +2,4 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 }
 
-description = "支付模块api"
+description = "支付中心api"

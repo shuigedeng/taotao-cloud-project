@@ -16,6 +16,7 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
@@ -28,5 +29,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.file.biz.TaoTaoCloudFileApplication"
-description = "文件模块"
+description = "文件中心"
 archivesBaseName = 'taotao-cloud-file'

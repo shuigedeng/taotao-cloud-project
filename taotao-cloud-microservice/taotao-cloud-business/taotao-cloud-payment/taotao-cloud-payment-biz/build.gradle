@@ -42,6 +42,6 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.payment.biz.TaoTaoCloudPayApplication"
-description = "支付模块"
+description = "支付中心"
 archivesBaseName = 'taotao-cloud-payment'
 

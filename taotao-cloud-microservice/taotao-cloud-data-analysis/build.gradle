@@ -70,6 +70,6 @@ configurations {
 }
 
 mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
-description = "数据分析模块"
+description = "数据分析中心"
 archivesBaseName = 'taotao-cloud-sync'
 

@@ -69,7 +69,7 @@ dependencies {
 //}
 
 mainClassName = "com.taotao.cloud.order.biz.TaoTaoCloudOrderApplication"
-description = "订单模块"
+description = "订单中心"
 archivesBaseName = 'taotao-cloud-order'
 
 configurations {

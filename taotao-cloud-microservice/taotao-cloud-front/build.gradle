@@ -28,5 +28,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.front.TaoTaoCloudPortalApplication"
-description = "前端PC模块"
+description = "前端PC中心"
 archivesBaseName = 'taotao-cloud-front'

@@ -35,5 +35,5 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.generator.biz.TaoTaoCloudGeneratorApplication"
-description = "代码生成器模块"
+description = "代码生成器中心"
 archivesBaseName = 'taotao-cloud-generator'

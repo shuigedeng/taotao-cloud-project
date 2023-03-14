@@ -2,4 +2,4 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 }
 
-description = "促销模块api"
+description = "促销中心api"
