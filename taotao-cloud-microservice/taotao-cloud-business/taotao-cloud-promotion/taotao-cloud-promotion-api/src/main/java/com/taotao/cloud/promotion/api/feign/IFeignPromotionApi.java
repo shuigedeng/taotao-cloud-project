@@ -16,7 +16,6 @@
 package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionApiFallback;
 import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignPromotionService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignPromotionApiFallback.class)
+@FeignClient(contextId = "IFeignPromotionService", value = ServiceName.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignPromotionApiFallback.class)
 public interface IFeignPromotionApi {
 
 	@GetMapping(value = "/withdraw/info/}")

@@ -28,8 +28,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @version 2022.04
  * @since 2022-04-07 22:09
  */
-@FeignClient(contextId = "IFeignKanjiaActivityService", value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignKanjiaActivityApiFallback.class)
+@FeignClient(contextId = "IFeignKanjiaActivityService", value = ServiceName.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignKanjiaActivityApiFallback.class)
 public interface IFeignKanjiaActivityApi {
+
 	@GetMapping(value = "/getById")
 	KanjiaActivityVO getById(Long promotionId);
 }

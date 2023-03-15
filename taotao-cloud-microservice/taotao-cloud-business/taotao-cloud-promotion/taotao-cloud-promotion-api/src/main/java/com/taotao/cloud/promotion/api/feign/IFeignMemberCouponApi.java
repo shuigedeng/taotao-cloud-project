@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberCouponApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignMemberCouponApiFallback.class)
 public interface IFeignMemberCouponApi {
 
 	@GetMapping(value = "/used")
 	void used(List<String> ids);
+
 	@GetMapping(value = "/receiveCoupon")
 	void receiveCoupon(String couponId, Long memberId, String memberName);
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = FeignPayFlowApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_PAYMENT, fallbackFactory = FeignPayFlowApiFallback.class)
 public interface IFeignPayFlowApi {
 
 	/**

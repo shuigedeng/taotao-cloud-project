@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.04
  * @since 2022-04-25 16:37:49
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberEvaluationApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = FeignMemberEvaluationApiFallback.class)
 public interface IFeignMemberEvaluationApi {
 
 
