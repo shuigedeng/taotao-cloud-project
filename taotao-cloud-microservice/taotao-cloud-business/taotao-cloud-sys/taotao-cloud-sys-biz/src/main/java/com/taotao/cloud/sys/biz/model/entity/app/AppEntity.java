@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.app;
+package com.taotao.cloud.sys.biz.model.entity.app;
 
-import com.art.common.mp.core.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 系统应用表
@@ -26,10 +33,18 @@ import lombok.Data;
  * @author fxz
  * @date 2022-09-12
  */
-@Data
-@TableName("sys_app")
-public class AppDO extends BaseEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
+@Entity
+@Table(name = AppEntity.TABLE_NAME)
+@TableName(AppEntity.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = AlipayConfig.TABLE_NAME, comment = "app配置表")
+public class AppEntity extends BaseSuperEntity<AppEntity, Long> {
 
+	public static final String TABLE_NAME = "tt_app";
 	private static final long serialVersionUID = -1L;
 
 	/**

@@ -9,6 +9,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
     implementation "io.github.shuigedeng:taotao-cloud-starter-springdoc"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-office"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
@@ -18,6 +19,7 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybatis-plus"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"

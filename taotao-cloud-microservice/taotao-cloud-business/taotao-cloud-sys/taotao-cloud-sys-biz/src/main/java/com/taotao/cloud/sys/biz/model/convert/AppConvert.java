@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.app;
+package com.taotao.cloud.sys.biz.model.convert;
 
-import com.art.system.api.app.dto.AppDTO;
-import com.art.system.dao.dataobject.AppDO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
+import com.taotao.cloud.sys.biz.model.entity.app.AppEntity;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * @author Fxz
@@ -34,12 +33,12 @@ public interface AppConvert {
 
 	AppConvert INSTANCE = Mappers.getMapper(AppConvert.class);
 
-	Page<AppDTO> convertPage(Page<AppDO> appDO);
+	Page<AppDTO> convertPage(Page<AppEntity> appDO);
 
-	List<AppDTO> convertList(List<AppDO> appDO);
+	List<AppDTO> convertList(List<AppEntity> appEntity);
 
-	AppDTO convert(AppDO appDO);
+	AppDTO convert(AppEntity appEntity);
 
-	AppDO convert(AppDTO appDTO);
+	AppEntity convert(AppDTO appDTO);
 
 }

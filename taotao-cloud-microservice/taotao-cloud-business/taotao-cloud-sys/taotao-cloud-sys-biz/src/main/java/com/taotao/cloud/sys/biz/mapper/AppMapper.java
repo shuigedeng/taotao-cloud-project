@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.app;
+package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.art.system.dao.dataobject.AppDO;
+import com.taotao.cloud.sys.biz.model.entity.app.AppEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -27,6 +27,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2022-09-12
  */
 @Mapper
-public interface AppMapper extends BaseMapper<AppDO> {
+public interface AppMapper extends BaseMapper<AppEntity> {
 
 }

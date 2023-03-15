@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.app;
+package com.taotao.cloud.sys.biz.manager;
 
 import cn.hutool.core.util.StrUtil;
-import com.art.system.api.app.dto.AppDTO;
-import com.art.system.api.app.dto.AppPageDTO;
-import com.art.system.core.convert.AppConvert;
-import com.art.system.dao.dataobject.AppDO;
-import com.art.system.dao.mysql.AppMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
+import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
+import com.taotao.cloud.sys.api.model.dto.app.AppPageDTO;
+import com.taotao.cloud.sys.biz.mapper.AppMapper;
+import com.taotao.cloud.sys.biz.model.convert.AppConvert;
+import com.taotao.cloud.sys.biz.model.entity.app.AppEntity;
 import java.util.List;
 import java.util.Objects;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Fxz
@@ -44,29 +43,36 @@ public class AppManager {
 
 	/**
 	 * 分页查询appDO
+	 *
 	 * @param appPageDTO 分页参数
 	 * @return appDO
 	 */
-	public Page<AppDO> pageApp(AppPageDTO appPageDTO) {
-		LambdaQueryWrapper<AppDO> wrapper = Wrappers.<AppDO>lambdaQuery()
-			.like(StrUtil.isNotBlank(appPageDTO.getName()), AppDO::getName, appPageDTO.getName())
-			.like(StrUtil.isNotBlank(appPageDTO.getCode()), AppDO::getCode, appPageDTO.getCode())
-			.eq(Objects.nonNull(appPageDTO.getId()), AppDO::getId, appPageDTO.getId())
-			.orderByAsc(AppDO::getSort);
+	public Page<AppEntity> pageApp(AppPageDTO appPageDTO) {
+		LambdaQueryWrapper<AppEntity> wrapper = Wrappers.<AppEntity>lambdaQuery()
+			.like(StrUtil.isNotBlank(appPageDTO.getName()), AppEntity::getName,
+				appPageDTO.getName())
+			.like(StrUtil.isNotBlank(appPageDTO.getCode()), AppEntity::getCode,
+				appPageDTO.getCode())
+			.eq(Objects.nonNull(appPageDTO.getId()), AppEntity::getId, appPageDTO.getId())
+			.orderByAsc(AppEntity::getSort);
 
-		return appMapper.selectPage(Page.of(appPageDTO.getCurrent(), appPageDTO.getSize()), wrapper);
+		return appMapper.selectPage(Page.of(appPageDTO.getCurrentPage(), appPageDTO.getPageSize()),
+			wrapper);
 	}
 
 	/**
 	 * 列出所有appDO
+	 *
 	 * @return 所有appDO
 	 */
-	public List<AppDO> listApp() {
-		return appMapper.selectList(Wrappers.<AppDO>lambdaQuery().orderByAsc(AppDO::getSort));
+	public List<AppEntity> listApp() {
+		return appMapper.selectList(
+			Wrappers.<AppEntity>lambdaQuery().orderByAsc(AppEntity::getSort));
 	}
 
 	/**
 	 * 根据Id删除appDO
+	 *
 	 * @param id 主键
 	 * @return 影响行数
 	 */
@@ -76,6 +82,7 @@ public class AppManager {
 
 	/**
 	 * 根据id更新appDO
+	 *
 	 * @param appDTO appDTO
 	 * @return 影响条数
 	 */
@@ -85,6 +92,7 @@ public class AppManager {
 
 	/**
 	 * 新增appDO
+	 *
 	 * @param appDTO appDTO
 	 * @return 影响条数
 	 */
@@ -94,10 +102,11 @@ public class AppManager {
 
 	/**
 	 * 根据id查询appDO
+	 *
 	 * @param id 主键
 	 * @return appDO
 	 */
-	public AppDO findById(Long id) {
+	public AppEntity findById(Long id) {
 		return appMapper.selectById(id);
 	}
 
