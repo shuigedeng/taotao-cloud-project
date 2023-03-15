@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gitegg.service.extension.justauth.mapper.JustAuthSocialMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gitegg.service.extension.justauth.entity.JustAuthSocial">
+        <id column="id" property="id" />
+        <result column="uuid" property="uuid" />
+        <result column="source" property="source" />
+        <result column="username" property="username" />
+        <result column="nickname" property="nickname" />
+        <result column="avatar" property="avatar" />
+        <result column="blog" property="blog" />
+        <result column="company" property="company" />
+        <result column="location" property="location" />
+        <result column="email" property="email" />
+        <result column="remark" property="remark" />
+        <result column="gender" property="gender" />
+        <result column="access_token" property="accessToken" />
+        <result column="expire_in" property="expireIn" />
+        <result column="refresh_token" property="refreshToken" />
+        <result column="access_token_expire_in" property="accessTokenExpireIn" />
+        <result column="uid" property="uid" />
+        <result column="open_id" property="openId" />
+        <result column="access_code" property="accessCode" />
+        <result column="union_id" property="unionId" />
+        <result column="scope" property="scope" />
+        <result column="token_type" property="tokenType" />
+        <result column="id_token" property="idToken" />
+        <result column="mac_algorithm" property="macAlgorithm" />
+        <result column="mac_key" property="macKey" />
+        <result column="code" property="code" />
+        <result column="oauth_token" property="oauthToken" />
+        <result column="oauth_token_secret" property="oauthTokenSecret" />
+        <result column="user_id" property="userId" />
+        <result column="screen_name" property="screenName" />
+        <result column="oauth_callback_confirmed" property="oauthCallbackConfirmed" />
+        <result column="rawUserInfo" property="rawUserInfo" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="create_time" property="createTime" />
+        <result column="creator" property="creator" />
+        <result column="update_time" property="updateTime" />
+        <result column="operator" property="operator" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, uuid, source, username, nickname, avatar, blog, company, location, email, remark, gender, access_token, expire_in, refresh_token, access_token_expire_in, uid, open_id, access_code, union_id, scope, token_type, id_token, mac_algorithm, mac_key, code, oauth_token, oauth_token_secret, user_id, screen_name, oauth_callback_confirmed, rawUserInfo, tenant_id, create_time, creator, update_time, operator, del_flag
+    </sql>
+
+    <!-- 分页查询第三方用户信息列表 -->
+    <select id="queryJustAuthSocialList" resultType="com.gitegg.service.extension.justauth.dto.JustAuthSocialDTO" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthSocialDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_just_auth_social
+        WHERE del_flag = 0
+        <if test="justAuthSocial.uuid != null and justAuthSocial.uuid != ''">
+            AND uuid = #{justAuthSocial.uuid}
+        </if>
+        <if test="justAuthSocial.source != null and justAuthSocial.source != ''">
+            AND source = #{justAuthSocial.source}
+        </if>
+        <if test="justAuthSocial.username != null and justAuthSocial.username != ''">
+            AND username = #{justAuthSocial.username}
+        </if>
+        <if test="justAuthSocial.nickname != null and justAuthSocial.nickname != ''">
+            AND nickname = #{justAuthSocial.nickname}
+        </if>
+        <if test="justAuthSocial.beginDateTime != null and justAuthSocial.beginDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &gt;= DATE_FORMAT(#{justAuthSocial.beginDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        <if test="justAuthSocial.endDateTime != null and justAuthSocial.endDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &lt;= DATE_FORMAT(#{justAuthSocial.endDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        ORDER BY id DESC
+    </select>
+    <!-- 查询第三方用户信息信息 -->
+    <select id="queryJustAuthSocial" resultType="com.gitegg.service.extension.justauth.dto.JustAuthSocialDTO" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthSocialDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_just_auth_social
+        WHERE del_flag = 0
+        <if test="justAuthSocial.uuid != null and justAuthSocial.uuid != ''">
+            AND uuid = #{justAuthSocial.uuid}
+        </if>
+        <if test="justAuthSocial.source != null and justAuthSocial.source != ''">
+            AND source = #{justAuthSocial.source}
+        </if>
+        <if test="justAuthSocial.username != null and justAuthSocial.username != ''">
+            AND username = #{justAuthSocial.username}
+        </if>
+        <if test="justAuthSocial.nickname != null and justAuthSocial.nickname != ''">
+            AND nickname = #{justAuthSocial.nickname}
+        </if>
+        <if test="justAuthSocial.beginDateTime != null and justAuthSocial.beginDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &gt;= DATE_FORMAT(#{justAuthSocial.beginDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        <if test="justAuthSocial.endDateTime != null and justAuthSocial.endDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &lt;= DATE_FORMAT(#{justAuthSocial.endDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        ORDER BY id DESC
+    </select>
+
+    <!-- 查询查询绑定的系统用户id -->
+    <select id="queryUserIdBySocial" resultType="Long" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthSocialDTO">
+        SELECT
+        social_user.user_id
+        FROM t_just_auth_social social
+        inner join t_just_auth_social_user social_user on social.id = social_user.social_id and social_user.del_flag = 0
+        WHERE del_flag = 0
+        <if test="justAuthSocial.uuid != null and justAuthSocial.uuid != ''">
+            AND social.uuid = #{justAuthSocial.uuid}
+        </if>
+        <if test="justAuthSocial.source != null and justAuthSocial.source != ''">
+            AND social.source = #{justAuthSocial.source}
+        </if>
+        ORDER BY social.id DESC
+    </select>
+</mapper>
