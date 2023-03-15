@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.04
  * @since 2022-04-25 16:37:54
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER_CENTER, fallbackFactory = FeignMemberRechargeApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = FeignMemberRechargeApiFallback.class)
 public interface IFeignMemberRechargeApi {
 
 	@GetMapping(value = "/member/feign/recharge/paySuccess")

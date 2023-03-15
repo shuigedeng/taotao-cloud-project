@@ -25,7 +25,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignCouponApiFallback.class)
+@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignCouponApiFallback.class)
 public interface IFeignCouponApi {
 
 }

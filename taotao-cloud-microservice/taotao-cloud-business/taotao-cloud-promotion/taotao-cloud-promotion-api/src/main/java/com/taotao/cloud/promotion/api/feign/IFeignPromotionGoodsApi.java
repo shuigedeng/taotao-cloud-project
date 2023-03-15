@@ -16,7 +16,6 @@
 package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionGoodsApiFallback;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
@@ -32,13 +31,15 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignPromotionGoodsService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = FeignPromotionGoodsApiFallback.class)
+@FeignClient(contextId = "IFeignPromotionGoodsService", value = ServiceName.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignPromotionGoodsApiFallback.class)
 public interface IFeignPromotionGoodsApi {
 
 	@GetMapping(value = "/withdraw/info")
 	PromotionGoodsVO getPromotionsGoods(PromotionGoodsPageQuery searchParams);
+
 	@PostMapping(value = "/updateBatchById")
 	Boolean updateBatchById(List<PromotionGoodsVO> promotionGoods);
+
 	@GetMapping(value = "/getValidPromotionsGoodsPrice")
 	BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList);
 }
