@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gitegg.service.extension.justauth.mapper.JustAuthConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gitegg.service.extension.justauth.entity.JustAuthConfig">
+        <id column="id" property="id" />
+        <result column="enabled" property="enabled" />
+        <result column="enum_class" property="enumClass" />
+        <result column="http_timeout" property="httpTimeout" />
+        <result column="cache_type" property="cacheType" />
+        <result column="cache_prefix" property="cachePrefix" />
+        <result column="cache_timeout" property="cacheTimeout" />
+        <result column="status" property="status" />
+        <result column="remark" property="remark" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="create_time" property="createTime" />
+        <result column="creator" property="creator" />
+        <result column="update_time" property="updateTime" />
+        <result column="operator" property="operator" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, enabled, enum_class, http_timeout, cache_type, cache_prefix, cache_timeout, status, remark, tenant_id, create_time, creator, update_time, operator, del_flag
+    </sql>
+
+    <!-- 分页查询租户第三方登录功能配置表列表 -->
+    <select id="queryJustAuthConfigList" resultType="com.gitegg.service.extension.justauth.dto.JustAuthConfigDTO" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthConfigDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_just_auth_config
+        WHERE del_flag = 0
+        <if test="null != justAuthConfig.enabled and (justAuthConfig.enabled == true or justAuthConfig.enabled == false)">
+            AND enabled = #{justAuthConfig.enabled}
+        </if>
+        <if test="justAuthConfig.status != null and justAuthConfig.status != ''">
+            AND status = #{justAuthConfig.status}
+        </if>
+        <if test="justAuthConfig.beginDateTime != null and justAuthConfig.beginDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &gt;= DATE_FORMAT(#{justAuthConfig.beginDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        <if test="justAuthConfig.endDateTime != null and justAuthConfig.endDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &lt;= DATE_FORMAT(#{justAuthConfig.endDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        ORDER BY id DESC
+    </select>
+    <!-- 查询租户第三方登录功能配置表信息 -->
+    <select id="queryJustAuthConfig" resultType="com.gitegg.service.extension.justauth.dto.JustAuthConfigDTO" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthConfigDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_just_auth_config
+        WHERE del_flag = 0
+        <if test="null != justAuthConfig.enabled and (justAuthConfig.enabled == true or justAuthConfig.enabled == false)">
+            AND enabled = #{justAuthConfig.enabled}
+        </if>
+        <if test="justAuthConfig.status != null and justAuthConfig.status != ''">
+            AND status = #{justAuthConfig.status}
+        </if>
+        <if test="justAuthConfig.beginDateTime != null and justAuthConfig.beginDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &gt;= DATE_FORMAT(#{justAuthConfig.beginDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        <if test="justAuthConfig.endDateTime != null and justAuthConfig.endDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &lt;= DATE_FORMAT(#{justAuthConfig.endDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        ORDER BY id DESC
+    </select>
+
+    <!-- 初始化第三方登录功能配置表列表，单独写是为了排除多租户插件 -->
+    <select id="initJustAuthConfigList" resultType="com.gitegg.service.extension.justauth.dto.JustAuthConfigDTO" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthConfigDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_just_auth_config
+        WHERE del_flag = 0
+        <if test="null != justAuthConfig.enabled and (justAuthConfig.enabled == true or justAuthConfig.enabled == false)">
+            AND enabled = #{justAuthConfig.enabled}
+        </if>
+        <if test="justAuthConfig.status != null and justAuthConfig.status != ''">
+            AND status = #{justAuthConfig.status}
+        </if>
+        ORDER BY id DESC
+    </select>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gitegg.service.extension.justauth.mapper.JustAuthSourceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gitegg.service.extension.justauth.entity.JustAuthSource">
+        <id column="id" property="id" />
+        <result column="source_name" property="sourceName" />
+        <result column="source_type" property="sourceType" />
+        <result column="request_class" property="requestClass" />
+        <result column="client_id" property="clientId" />
+        <result column="client_secret" property="clientSecret" />
+        <result column="redirect_uri" property="redirectUri" />
+        <result column="alipay_public_key" property="alipayPublicKey" />
+        <result column="union_id" property="unionId" />
+        <result column="stack_overflow_key" property="stackOverflowKey" />
+        <result column="agent_id" property="agentId" />
+        <result column="user_type" property="userType" />
+        <result column="domain_prefix" property="domainPrefix" />
+        <result column="ignore_check_state" property="ignoreCheckState" />
+        <result column="scopes" property="scopes" />
+        <result column="device_id" property="deviceId" />
+        <result column="client_os_type" property="clientOsType" />
+        <result column="pack_id" property="packId" />
+        <result column="pkce" property="pkce" />
+        <result column="auth_server_id" property="authServerId" />
+        <result column="ignore_check_redirect_uri" property="ignoreCheckRedirectUri" />
+        <result column="proxy_type" property="proxyType" />
+        <result column="proxy_host_name" property="proxyHostName" />
+        <result column="proxy_port" property="proxyPort" />
+        <result column="status" property="status" />
+        <result column="remark" property="remark" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="create_time" property="createTime" />
+        <result column="creator" property="creator" />
+        <result column="update_time" property="updateTime" />
+        <result column="operator" property="operator" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, source_name, source_type, request_class, client_id, client_secret, redirect_uri, alipay_public_key, union_id, stack_overflow_key, agent_id, user_type, domain_prefix, ignore_check_state, scopes, device_id, client_os_type, pack_id, pkce, auth_server_id, ignore_check_redirect_uri, proxy_type, proxy_host_name, proxy_port, status, remark, tenant_id, create_time, creator, update_time, operator, del_flag
+    </sql>
+
+    <!-- 分页查询租户第三方登录信息配置表列表 -->
+    <select id="queryJustAuthSourceList" resultType="com.gitegg.service.extension.justauth.dto.JustAuthSourceDTO" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthSourceDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_just_auth_source
+        WHERE del_flag = 0
+        <if test="justAuthSource.sourceName != null and justAuthSource.sourceName != ''">
+            AND source_name = #{justAuthSource.sourceName}
+        </if>
+        <if test="justAuthSource.sourceType != null and justAuthSource.sourceType != ''">
+            AND source_type = #{justAuthSource.sourceType}
+        </if>
+        <if test="justAuthSource.status != null and justAuthSource.status != ''">
+            AND status = #{justAuthSource.status}
+        </if>
+        <if test="justAuthSource.beginDateTime != null and justAuthSource.beginDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &gt;= DATE_FORMAT(#{justAuthSource.beginDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        <if test="justAuthSource.endDateTime != null and justAuthSource.endDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &lt;= DATE_FORMAT(#{justAuthSource.endDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        ORDER BY id DESC
+    </select>
+    <!-- 查询租户第三方登录信息配置表信息 -->
+    <select id="queryJustAuthSource" resultType="com.gitegg.service.extension.justauth.dto.JustAuthSourceDTO" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthSourceDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_just_auth_source
+        WHERE del_flag = 0
+        <if test="justAuthSource.sourceName != null and justAuthSource.sourceName != ''">
+            AND source_name = #{justAuthSource.sourceName}
+        </if>
+        <if test="justAuthSource.sourceType != null and justAuthSource.sourceType != ''">
+            AND source_type = #{justAuthSource.sourceType}
+        </if>
+        <if test="justAuthSource.beginDateTime != null and justAuthSource.beginDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &gt;= DATE_FORMAT(#{justAuthSource.beginDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        <if test="justAuthSource.endDateTime != null and justAuthSource.endDateTime != ''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d %H:%M:%S') &lt;= DATE_FORMAT(#{justAuthSource.endDateTime},'%Y-%m-%d %H:%M:%S')
+        </if>
+        ORDER BY id DESC
+    </select>
+
+    <!-- 查询租户第三方登录信息配置表列表， 排除多租户插件-->
+    <select id="initJustAuthSourceList" resultType="com.gitegg.service.extension.justauth.dto.JustAuthSourceDTO" parameterType="com.gitegg.service.extension.justauth.dto.QueryJustAuthSourceDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_just_auth_source
+        WHERE del_flag = 0
+        <if test="justAuthSource.sourceName != null and justAuthSource.sourceName != ''">
+            AND source_name = #{justAuthSource.sourceName}
+        </if>
+        <if test="justAuthSource.sourceType != null and justAuthSource.sourceType != ''">
+            AND source_type = #{justAuthSource.sourceType}
+        </if>
+        <if test="justAuthSource.status != null and justAuthSource.status != ''">
+            AND status = #{justAuthSource.status}
+        </if>
+        ORDER BY id DESC
+    </select>
+</mapper>
