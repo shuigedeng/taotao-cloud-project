@@ -1,3 +1,10 @@
 spring:
   profiles:
     active: dev
+
+# 设置分块信息
+##单位为M
+# upload.chunkSize=2
+# upload.thread.maxSize=25
+# upload.queue.maxSize=100
+# upload.queue.dir=C:\\Users\\NineSun\\Desktop\\11\\
