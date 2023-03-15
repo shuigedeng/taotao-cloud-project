@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.app;
+package com.taotao.cloud.sys.biz.service.business;
 
-import com.art.system.api.app.dto.AppDTO;
-import com.art.system.api.app.dto.AppPageDTO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-
+import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
+import com.taotao.cloud.sys.api.model.dto.app.AppPageDTO;
 import java.util.List;
 
 /**

@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.app;
+package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.art.common.core.util.ValidationUtil;
-import com.art.common.core.constant.ValidationGroup;
-import com.art.common.core.model.PageResult;
-import com.art.common.core.model.Result;
-import com.art.system.api.app.dto.AppDTO;
-import com.art.system.api.app.dto.AppPageDTO;
-import com.art.system.service.AppService;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
+import com.taotao.cloud.sys.api.model.dto.app.AppPageDTO;
+import com.taotao.cloud.sys.biz.service.business.AppService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 系统应用表
@@ -50,8 +52,9 @@ public class AppController {
 	@Operation(summary = "分页")
 	@GetMapping(value = "/page")
 	public Result<PageResult<AppDTO>> pageSysApp(AppPageDTO appPageDTO) {
-		ValidationUtil.validateParam(appPageDTO, ValidationGroup.query.class);
-		return Result.success(PageResult.success(appService.pageApp(appPageDTO)));
+		//Validator.validateParam(appPageDTO, ValidationGroups.query.class);
+		return Result.success(
+			PageResult.convertMybatisPage(appService.pageApp(appPageDTO), AppDTO.class));
 	}
 
 	/**
@@ -59,9 +62,9 @@ public class AppController {
 	 */
 	@Operation(summary = "添加")
 	@PostMapping(value = "/add")
-	public Result<Void> add(@RequestBody AppDTO appDTO) {
-		ValidationUtil.validateParam(appDTO, ValidationGroup.add.class);
-		return Result.judge(appService.addApp(appDTO));
+	public Result<Boolean> add(@RequestBody AppDTO appDTO) {
+		//ValidationUtil.validateParam(appDTO, ValidationGroups.add.class);
+		return Result.success(appService.addApp(appDTO));
 	}
 
 	/**
@@ -69,9 +72,9 @@ public class AppController {
 	 */
 	@Operation(summary = "修改")
 	@PostMapping(value = "/update")
-	public Result<Void> update(@RequestBody AppDTO appDTO) {
-		ValidationUtil.validateParam(appDTO, ValidationGroup.update.class);
-		return Result.judge(appService.updateApp(appDTO));
+	public Result<Boolean> update(@RequestBody AppDTO appDTO) {
+		//ValidationUtil.validateParam(appDTO, ValidationGroups.update.class);
+		return Result.success(appService.updateApp(appDTO));
 	}
 
 	/**
@@ -79,8 +82,8 @@ public class AppController {
 	 */
 	@Operation(summary = "删除")
 	@DeleteMapping(value = "/delete")
-	public Result<Void> delete(Long id) {
-		return Result.judge(appService.deleteApp(id));
+	public Result<Boolean> delete(Long id) {
+		return Result.success(appService.deleteApp(id));
 	}
 
 	/**

@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.app;
+package com.taotao.cloud.sys.biz.service.business.impl;
 
-import com.art.system.api.app.dto.AppDTO;
-import com.art.system.api.app.dto.AppPageDTO;
-import com.art.system.core.convert.AppConvert;
-import com.art.system.manager.AppManager;
-import com.art.system.service.AppService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
+import com.taotao.cloud.sys.api.model.dto.app.AppPageDTO;
+import com.taotao.cloud.sys.biz.manager.AppManager;
+import com.taotao.cloud.sys.biz.model.convert.AppConvert;
+import com.taotao.cloud.sys.biz.service.business.AppService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * 系统应用表

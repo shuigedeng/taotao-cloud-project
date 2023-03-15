@@ -14,25 +14,19 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.app.dto;
+package com.taotao.cloud.sys.api.model.dto.app;
 
-import com.art.common.core.constant.ValidationGroup;
+import com.taotao.cloud.common.model.ValidationGroups;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
-/**
- * @author Fxz
- * @version 0.0.1
- * @date 2022/11/22 23:38
- */
 @Data
 @Builder
 @NoArgsConstructor
@@ -43,25 +37,25 @@ public class AppDTO implements Serializable {
 	private static final long serialVersionUID = -1L;
 
 	@Schema(description = "主键")
-	@NotNull(message = "主键不能为空!", groups = ValidationGroup.update.class)
+	@NotNull(message = "主键不能为空!", groups = ValidationGroups.Update.class)
 	private Long id;
 
 	@Schema(description = "应用名称")
-	@Size(min = 1, max = 10, message = "应用名称长度在1-10之间!", groups = ValidationGroup.add.class)
-	@NotNull(message = "应用名称不能为空!", groups = ValidationGroup.add.class)
+	@Size(min = 1, max = 10, message = "应用名称长度在1-10之间!", groups = ValidationGroups.Create.class)
+	@NotNull(message = "应用名称不能为空!", groups = ValidationGroups.Create.class)
 	private String name;
 
 	@Schema(description = "应用编码")
-	@Size(min = 1, max = 10, message = "应用编码长度在1-10之间!", groups = ValidationGroup.add.class)
-	@NotNull(message = "应用编码不能为空!", groups = ValidationGroup.add.class)
+	@Size(min = 1, max = 10, message = "应用编码长度在1-10之间!", groups = ValidationGroups.Create.class)
+	@NotNull(message = "应用编码不能为空!", groups = ValidationGroups.Create.class)
 	private String code;
 
 	@Schema(description = "图标")
-	@NotNull(message = "图标不能为空!", groups = ValidationGroup.add.class)
+	@NotNull(message = "图标不能为空!", groups = ValidationGroups.Create.class)
 	private String icon;
 
 	@Schema(description = "排序")
-	@NotNull(message = "排序不能为空!", groups = ValidationGroup.add.class)
+	@NotNull(message = "排序不能为空!", groups = ValidationGroups.Create.class)
 	private Integer sort;
 
 	@Schema(description = "创建者")

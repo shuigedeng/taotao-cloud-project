@@ -4,63 +4,61 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gitegg.platform.mybatis.entity.BaseEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.data.mybatisplus.base.entity.MpSuperEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
-* <p>
-* 租户第三方登录功能配置表
-* </p>
-*
-* @author GitEgg
-* @since 2022-05-16
-*/
+ * <p>
+ * 租户第三方登录功能配置表
+ * </p>
+ *
+ * @since 2022-05-16
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("t_just_auth_config")
-@ApiModel(value = "JustAuthConfig对象", description = "租户第三方登录功能配置表")
-public class JustAuthConfig extends BaseEntity {
+@Schema(description = "租户第三方登录功能配置表")
+public class JustAuthConfig extends MpSuperEntity<Long> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+	@Schema(description = "主键")
+	@TableId(value = "id", type = IdType.AUTO)
+	private Long id;
 
-    @ApiModelProperty(value = "JustAuth开关")
-    @TableField("enabled")
-    private Boolean enabled;
+	@Schema(description = "JustAuth开关")
+	@TableField("enabled")
+	private Boolean enabled;
 
-    @ApiModelProperty(value = "自定义扩展第三方登录的配置类")
-    @TableField("enum_class")
-    private String enumClass;
+	@Schema(description = "自定义扩展第三方登录的配置类")
+	@TableField("enum_class")
+	private String enumClass;
 
-    @ApiModelProperty(value = "Http请求的超时时间")
-    @TableField("http_timeout")
-    private Integer httpTimeout;
+	@Schema(description = "Http请求的超时时间")
+	@TableField("http_timeout")
+	private Integer httpTimeout;
 
-    @ApiModelProperty(value = "缓存类型")
-    @TableField("cache_type")
-    private String cacheType;
+	@Schema(description = "缓存类型")
+	@TableField("cache_type")
+	private String cacheType;
 
-    @ApiModelProperty(value = "缓存前缀")
-    @TableField("cache_prefix")
-    private String cachePrefix;
+	@Schema(description = "缓存前缀")
+	@TableField("cache_prefix")
+	private String cachePrefix;
 
-    @ApiModelProperty(value = "缓存超时时间")
-    @TableField("cache_timeout")
-    private Integer cacheTimeout;
+	@Schema(description = "缓存超时时间")
+	@TableField("cache_timeout")
+	private Integer cacheTimeout;
 
-    @ApiModelProperty(value = "状态")
-    @TableField("status")
-    private Integer status;
+	@Schema(description = "状态")
+	@TableField("status")
+	private Integer status;
 
-    @ApiModelProperty(value = "备注")
-    @TableField("remark")
-    private String remark;
+	@Schema(description = "备注")
+	@TableField("remark")
+	private String remark;
 
 
 }
