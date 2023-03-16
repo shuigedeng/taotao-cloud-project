@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.biz.job.scheduled;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.job.schedule.model.entity.Task;
-import com.taotao.cloud.job.schedule.task.TaskManager;
+import com.taotao.cloud.job.schedule.schedule1.model.ScheduledTask;
+import com.taotao.cloud.job.schedule.schedule1.task.TaskManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -32,7 +32,7 @@ public class TestTask {
 		LogUtils.info(Thread.currentThread().getName() + "------------测试测试");
 		LogUtils.info(df.format(LocalDateTime.now()) + "测试测试");
 
-		Map<String, Task> taskMap = taskManager.getTaskMap();
+		Map<String, ScheduledTask> taskMap = taskManager.getTaskMap();
 		LogUtils.info(taskMap.toString());
 
 		//List<String> runScheduledName = taskManager.getRunScheduledName();
