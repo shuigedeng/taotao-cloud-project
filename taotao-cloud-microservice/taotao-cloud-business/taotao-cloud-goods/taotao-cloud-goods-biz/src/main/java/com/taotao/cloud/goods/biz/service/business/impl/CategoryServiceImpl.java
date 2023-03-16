@@ -180,6 +180,7 @@ public class CategoryServiceImpl extends
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<String> getCategoryNameByIds(List<Long> ids) {
 		List<String> categoryName = new ArrayList<>();
 		List<Category> categoryVOList = (List<Category>) redisRepository.get(
