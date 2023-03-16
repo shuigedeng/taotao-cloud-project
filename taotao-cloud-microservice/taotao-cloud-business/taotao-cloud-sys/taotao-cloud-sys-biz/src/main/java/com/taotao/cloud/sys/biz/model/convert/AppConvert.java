@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.model.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
-import com.taotao.cloud.sys.biz.model.entity.app.AppEntity;
+import com.taotao.cloud.sys.biz.model.entity.app.App;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -33,12 +33,12 @@ public interface AppConvert {
 
 	AppConvert INSTANCE = Mappers.getMapper(AppConvert.class);
 
-	Page<AppDTO> convertPage(Page<AppEntity> appDO);
+	Page<AppDTO> convertPage(Page<App> appDO);
 
-	List<AppDTO> convertList(List<AppEntity> appEntity);
+	List<AppDTO> convertList(List<App> app);
 
-	AppDTO convert(AppEntity appEntity);
+	AppDTO convert(App app);
 
-	AppEntity convert(AppDTO appDTO);
+	App convert(AppDTO appDTO);
 
 }

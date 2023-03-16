@@ -997,6 +997,15 @@ taotao:
       ignore-url:
         - /sys/buyer/dict/test/{code}
         - /sys/manager/dept/tree
+    job:
+      scheduled1:
+        enabled: true
+      scheduled2:
+        enabled: true
+      quartz1:
+        enabled: true
+      quartz2:
+        enabled: true
 
 mybatis-plus-join:
   banner: true

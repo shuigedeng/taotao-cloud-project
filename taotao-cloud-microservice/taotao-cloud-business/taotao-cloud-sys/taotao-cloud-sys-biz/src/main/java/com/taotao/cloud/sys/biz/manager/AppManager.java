@@ -24,7 +24,7 @@ import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
 import com.taotao.cloud.sys.api.model.dto.app.AppPageDTO;
 import com.taotao.cloud.sys.biz.mapper.AppMapper;
 import com.taotao.cloud.sys.biz.model.convert.AppConvert;
-import com.taotao.cloud.sys.biz.model.entity.app.AppEntity;
+import com.taotao.cloud.sys.biz.model.entity.app.App;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -47,14 +47,14 @@ public class AppManager {
 	 * @param appPageDTO 分页参数
 	 * @return appDO
 	 */
-	public Page<AppEntity> pageApp(AppPageDTO appPageDTO) {
-		LambdaQueryWrapper<AppEntity> wrapper = Wrappers.<AppEntity>lambdaQuery()
-			.like(StrUtil.isNotBlank(appPageDTO.getName()), AppEntity::getName,
+	public Page<App> pageApp(AppPageDTO appPageDTO) {
+		LambdaQueryWrapper<App> wrapper = Wrappers.<App>lambdaQuery()
+			.like(StrUtil.isNotBlank(appPageDTO.getName()), App::getName,
 				appPageDTO.getName())
-			.like(StrUtil.isNotBlank(appPageDTO.getCode()), AppEntity::getCode,
+			.like(StrUtil.isNotBlank(appPageDTO.getCode()), App::getCode,
 				appPageDTO.getCode())
-			.eq(Objects.nonNull(appPageDTO.getId()), AppEntity::getId, appPageDTO.getId())
-			.orderByAsc(AppEntity::getSort);
+			.eq(Objects.nonNull(appPageDTO.getId()), App::getId, appPageDTO.getId())
+			.orderByAsc(App::getSort);
 
 		return appMapper.selectPage(Page.of(appPageDTO.getCurrentPage(), appPageDTO.getPageSize()),
 			wrapper);
@@ -65,9 +65,9 @@ public class AppManager {
 	 *
 	 * @return 所有appDO
 	 */
-	public List<AppEntity> listApp() {
+	public List<App> listApp() {
 		return appMapper.selectList(
-			Wrappers.<AppEntity>lambdaQuery().orderByAsc(AppEntity::getSort));
+			Wrappers.<App>lambdaQuery().orderByAsc(App::getSort));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class AppManager {
 	 * @param id 主键
 	 * @return appDO
 	 */
-	public AppEntity findById(Long id) {
+	public App findById(Long id) {
 		return appMapper.selectById(id);
 	}
 

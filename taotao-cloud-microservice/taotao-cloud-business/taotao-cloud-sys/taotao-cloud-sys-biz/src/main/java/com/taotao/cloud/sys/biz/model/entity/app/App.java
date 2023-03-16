@@ -39,10 +39,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = AppEntity.TABLE_NAME)
-@TableName(AppEntity.TABLE_NAME)
+@Table(name = App.TABLE_NAME)
+@TableName(App.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = AlipayConfig.TABLE_NAME, comment = "app配置表")
-public class AppEntity extends BaseSuperEntity<AppEntity, Long> {
+public class App extends BaseSuperEntity<App, Long> {
 
 	public static final String TABLE_NAME = "tt_app";
 	private static final long serialVersionUID = -1L;
