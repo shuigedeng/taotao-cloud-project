@@ -133,10 +133,13 @@ public class QuartzJobServiceImpl extends
 		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
+		com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
+		BeanUtils.copyProperties(jobModel, quartzJob1);
 		if (quartzJob.getIsPause()) {
-			quartzManager.resumeJob(jobModel);
+
+			quartzManager.resumeJob(quartzJob1);
 		} else {
-			quartzManager.pauseJob(jobModel);
+			quartzManager.pauseJob(quartzJob1);
 		}
 
 		quartzJob.setIsPause(!quartzJob.getIsPause());
@@ -148,7 +151,10 @@ public class QuartzJobServiceImpl extends
 		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
-		quartzManager.addJob(jobModel);
+		com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
+		BeanUtils.copyProperties(jobModel, quartzJob1);
+
+		quartzManager.addJob(quartzJob1);
 		return SqlHelper.retBool(baseMapper.insert(quartzJob));
 	}
 
@@ -175,7 +181,10 @@ public class QuartzJobServiceImpl extends
 		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
-		quartzManager.runJobNow(jobModel);
+		com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
+		BeanUtils.copyProperties(jobModel, quartzJob1);
+
+		quartzManager.runJobNow(quartzJob1);
 	}
 
 	/**
@@ -201,7 +210,11 @@ public class QuartzJobServiceImpl extends
 				id);
 			QuartzJob jobModel = new QuartzJob();
 			BeanUtils.copyProperties(quartzJob, jobModel);
-			quartzManager.deleteJob(jobModel);
+
+			com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
+			BeanUtils.copyProperties(jobModel, quartzJob1);
+
+			quartzManager.deleteJob(quartzJob1);
 		});
 
 		baseMapper.deleteBatchIds(idList);
