@@ -28,7 +28,7 @@ import com.taotao.cloud.job.api.model.dto.QuartzJobQueryCriteria;
 import com.taotao.cloud.job.biz.mapper.IQuartzJobMapper;
 import com.taotao.cloud.job.biz.model.entity.QuartzJob;
 import com.taotao.cloud.job.biz.service.IQuartzJobService;
-import com.taotao.cloud.job.quartz.utils.QuartzManager;
+import com.taotao.cloud.job.quartz.quartz1.utils.QuartzManager;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -133,14 +133,14 @@ public class QuartzJobServiceImpl extends
 		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
-		com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
-		BeanUtils.copyProperties(jobModel, quartzJob1);
-		if (quartzJob.getIsPause()) {
-
-			quartzManager.resumeJob(quartzJob1);
-		} else {
-			quartzManager.pauseJob(quartzJob1);
-		}
+		//com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
+		//BeanUtils.copyProperties(jobModel, quartzJob1);
+		//if (quartzJob.getIsPause()) {
+		//
+		//	quartzManager.resumeJob(quartzJob1);
+		//} else {
+		//	quartzManager.pauseJob(quartzJob1);
+		//}
 
 		quartzJob.setIsPause(!quartzJob.getIsPause());
 		this.saveOrUpdate(quartzJob);
@@ -151,10 +151,10 @@ public class QuartzJobServiceImpl extends
 		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
-		com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
-		BeanUtils.copyProperties(jobModel, quartzJob1);
-
-		quartzManager.addJob(quartzJob1);
+		//com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
+		//BeanUtils.copyProperties(jobModel, quartzJob1);
+		//
+		//quartzManager.addJob(quartzJob1);
 		return SqlHelper.retBool(baseMapper.insert(quartzJob));
 	}
 
@@ -181,10 +181,10 @@ public class QuartzJobServiceImpl extends
 		QuartzJob jobModel = new QuartzJob();
 		BeanUtils.copyProperties(quartzJob, jobModel);
 
-		com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
-		BeanUtils.copyProperties(jobModel, quartzJob1);
-
-		quartzManager.runJobNow(quartzJob1);
+		//com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
+		//BeanUtils.copyProperties(jobModel, quartzJob1);
+		//
+		//quartzManager.runJobNow(quartzJob1);
 	}
 
 	/**
@@ -211,10 +211,10 @@ public class QuartzJobServiceImpl extends
 			QuartzJob jobModel = new QuartzJob();
 			BeanUtils.copyProperties(quartzJob, jobModel);
 
-			com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
-			BeanUtils.copyProperties(jobModel, quartzJob1);
-
-			quartzManager.deleteJob(quartzJob1);
+			//com.taotao.cloud.job.quartz.entity.QuartzJob quartzJob1 = new com.taotao.cloud.job.quartz.entity.QuartzJob();
+			//BeanUtils.copyProperties(jobModel, quartzJob1);
+			//
+			//quartzManager.deleteJob(quartzJob1);
 		});
 
 		baseMapper.deleteBatchIds(idList);
