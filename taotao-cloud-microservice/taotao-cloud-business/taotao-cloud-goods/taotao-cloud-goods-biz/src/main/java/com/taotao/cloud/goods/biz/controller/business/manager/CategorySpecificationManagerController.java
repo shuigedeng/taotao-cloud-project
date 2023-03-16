@@ -1,15 +1,12 @@
 package com.taotao.cloud.goods.biz.controller.business.manager;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -66,17 +63,6 @@ public class CategorySpecificationManagerController {
 	@PostMapping(value = "/{categoryId}")
 	public Result<Boolean> saveCategoryBrand(@PathVariable Long categoryId,
 		@RequestParam String[] categorySpecs) {
-		//删除分类规格绑定信息
-		this.categorySpecificationService.remove(
-			new QueryWrapper<CategorySpecification>().eq("category_id", categoryId));
-		//绑定规格信息
-		if (categorySpecs != null && categorySpecs.length > 0) {
-			List<CategorySpecification> categorySpecifications = new ArrayList<>();
-			for (String categorySpec : categorySpecs) {
-				categorySpecifications.add(new CategorySpecification(categoryId, categorySpec));
-			}
-			categorySpecificationService.saveBatch(categorySpecifications);
-		}
-		return Result.success(true);
+		return Result.success(specificationService.saveCategoryBrand(categoryId, categorySpecs));
 	}
 }

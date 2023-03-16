@@ -18,11 +18,12 @@ import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -35,8 +36,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 店铺端,商品接口
@@ -131,7 +130,7 @@ public class GoodsSellerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/{goodsId}")
 	public Result<Boolean> update(@RequestBody GoodsOperationDTO goodsOperationDTO,
-								  @PathVariable Long goodsId) {
+		@PathVariable Long goodsId) {
 		return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
 	}
 
@@ -166,7 +165,7 @@ public class GoodsSellerController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/freight")
 	public Result<Boolean> freight(@RequestParam List<Long> goodsId,
-								   @RequestParam Long templateId) {
+		@RequestParam Long templateId) {
 		return Result.success(goodsService.freight(goodsId, templateId));
 	}
 
@@ -197,7 +196,7 @@ public class GoodsSellerController {
 		// 过滤不符合当前店铺的商品
 		List<Long> filterGoodsSkuIds = goodsSkuList.stream().map(GoodsSku::getId).toList();
 		List<GoodsSkuStockDTO> collect = updateStockList.stream()
-			.filter(i -> filterGoodsSkuIds.contains(i.getSkuId())).toList());
+			.filter(i -> filterGoodsSkuIds.contains(i.getSkuId())).toList();
 		return Result.success(goodsSkuService.updateStocks(collect));
 	}
 
