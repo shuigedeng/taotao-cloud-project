@@ -17,11 +17,11 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商品规格业务层实现
@@ -33,7 +33,8 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class SpecificationServiceImpl extends
-	BaseSuperServiceImpl<ISpecificationMapper, Specification, SpecificationRepository, ISpecificationRepository, Long> implements ISpecificationService {
+	BaseSuperServiceImpl<ISpecificationMapper, Specification, SpecificationRepository, ISpecificationRepository, Long> implements
+	ISpecificationService {
 
 	/**
 	 * 分类-规格绑定服务
@@ -67,9 +68,29 @@ public class SpecificationServiceImpl extends
 	@Override
 	public IPage<Specification> getPage(SpecificationPageQuery specificationPageQuery) {
 		LambdaQueryWrapper<Specification> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		lambdaQueryWrapper.like(StringUtils.isNotEmpty(specificationPageQuery.getSpecName()), Specification::getSpecName,
+		lambdaQueryWrapper.like(StringUtils.isNotEmpty(specificationPageQuery.getSpecName()),
+			Specification::getSpecName,
 			specificationPageQuery.getSpecName());
 		return this.page(specificationPageQuery.buildMpPage(), lambdaQueryWrapper);
+	}
+
+	@Override
+	@Transactional
+	public Boolean saveCategoryBrand(Long categoryId, String[] categorySpecs) {
+		QueryWrapper<CategorySpecification> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("category_id", categoryId);
+		//删除分类规格绑定信息
+		this.categorySpecificationService.remove(queryWrapper);
+		//绑定规格信息
+		if (categorySpecs != null && categorySpecs.length > 0) {
+			List<CategorySpecification> categorySpecifications = new ArrayList<>();
+			for (String categorySpec : categorySpecs) {
+				categorySpecifications.add(
+					new CategorySpecification(categoryId, Long.valueOf(categorySpec)));
+			}
+			categorySpecificationService.saveBatch(categorySpecifications);
+		}
+		return true;
 	}
 
 }

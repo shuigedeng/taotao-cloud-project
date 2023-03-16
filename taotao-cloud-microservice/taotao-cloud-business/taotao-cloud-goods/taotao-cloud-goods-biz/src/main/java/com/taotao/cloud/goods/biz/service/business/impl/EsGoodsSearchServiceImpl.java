@@ -51,7 +51,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.client.erhlc.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQuery;
 import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.SearchHitSupport;
@@ -85,7 +85,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
 	 */
 	@Autowired
 	@Qualifier("elasticsearchRestTemplate")
-	private ElasticsearchRestTemplate restTemplate;
+	private ElasticsearchTemplate restTemplate;
 	@Autowired
 	private IEsGoodsIndexService esGoodsIndexService;
 	/**

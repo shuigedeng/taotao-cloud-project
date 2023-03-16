@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.api.model.page.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.web.base.service.BaseSuperService;
-
 import java.util.List;
 
 /**
@@ -34,4 +33,6 @@ public interface ISpecificationService extends BaseSuperService<Specification, L
 	 * @since 2022-04-27 17:01:01
 	 */
 	IPage<Specification> getPage(SpecificationPageQuery specificationPageQuery);
+
+	Boolean saveCategoryBrand(Long categoryId, String[] categorySpecs);
 }
