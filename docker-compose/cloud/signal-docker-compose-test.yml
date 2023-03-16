@@ -1,0 +1,153 @@
+# 新建网络 docker-compose -f  3-zk-kafka-cluster.yml up -d
+# docker network ls #查看当前网络
+# docker network create --driver bridge --subnet 172.11.0.0/16 --gateway 172.11.0.1 taotao-cluster-network
+
+version: '3.8'
+services:
+  #https://www.pudn.com/news/632d53b0272bb74d44e90b24.html    需要执行 START SLAVE ; SHOW SLAVE STATUS\G
+  mysql8:
+    hostname: mysql8
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: master
+      MYSQL_PASSWORD: 123456
+    command:
+      --bind-address=172.11.0.10
+      --default-authentication-plugin=mysql_native_password
+      --max_connections=1000
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --default-time-zone='+8:00'
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+      --expire-logs-days=7
+    image: mysql:8.0
+    privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+    restart: always
+    container_name: mysql8
+    ports:
+      - "3306:3306"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.10
+
+  redis:
+    image: redis:6.0-alpine
+    container_name: redis
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+    #command: [ "redis-server","/etc/redis/redis.conf" ]
+    restart: always
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.12
+
+  zookeeper:
+    image: zookeeper:3.6.3
+    container_name: zookeeper
+    environment:
+      TZ: Asia/Shanghai
+    restart: always
+    ports:
+      - "2181:2181"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.13
+  kafka:
+    image: wurstmeister/kafka:2.13-2.8.1
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=172.11.0.14
+      - KAFKA_ZOOKEEPER_CONNECT=172.11.0.13:2181
+      - KAFKA_BROKER_ID=1
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.10.220:9092
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_HEAP_OPTS="-Xmx512M -Xms16M"
+      - TZ=Asia/Shanghai
+    restart: always
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.14
+
+  sentinel-dashboard:
+    image: dreamkaylee/sentinel-dashboard:1.8.6
+    container_name: sentinel-dashboard
+    ports:
+      - "8858:8858"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.31
+
+  #powerjob-server:
+  #  image: tjqq/powerjob-server:latest
+  #  restart: always
+  #  container_name: powerjob-server
+  #  ports:
+  #    - "7700:7700"
+  #    - "10086:10086"
+  #  environment:
+  #    TZ: "Asia/Shanghai"
+  #    PARAMS: "--spring.profiles.active=product --spring.datasource.core.jdbc-url=jdbc:mysql://172.11.0.10:3306/powerjob-product?useUnicode=true&characterEncoding=UTF-8 --spring.datasource.core.username=root --spring.datasource.core.password=123456"
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.52
+
+  nacos:
+    image: nacos/nacos-server:v2.1.1
+    restart: always
+    container_name: nacos
+    privileged: true
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    environment:
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: 172.11.0.10
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: 123456
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos
+      MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.16
+
+  seata:
+    container_name: seata
+    image: seataio/seata-server:1.6.1
+    restart: always
+    ports:
+      - "8091:8091"
+      - "7091:7091"
+    volumes:
+      - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime"        #设置系统时区
+      - "/usr/share/zoneinfo/Asia/Shanghai:/etc/timezone"  #设置时区
+      - /root/compose/seata/application.yml:/seata-server/resources/application.yml
+    environment:
+      STORE_MODE: db
+      SEATA_PORT: 8091
+      SEATA_IP: 192.168.10.220
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.17
+
+networks:
+  taotao-cluster-network:
+    external: true
