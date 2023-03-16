@@ -1,9 +1,11 @@
 package com.taotao.cloud.job.biz.job.scheduled;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.job.schedule.model.entity.Task;
 import com.taotao.cloud.job.schedule.task.TaskManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -28,10 +30,13 @@ public class TestTask {
 		LogUtils.info(Thread.currentThread().getName() + "------------测试测试");
 		LogUtils.info(df.format(LocalDateTime.now()) + "测试测试");
 
-		List<String> runScheduledName = taskManager.getRunScheduledName();
-		LogUtils.info(runScheduledName.toString());
+		Map<String, Task> taskMap = taskManager.getTaskMap();
+		LogUtils.info(taskMap.toString());
 
-		List<String> allSuperScheduledName = taskManager.getAllSuperScheduledName();
-		LogUtils.info(allSuperScheduledName.toString());
+		//List<String> runScheduledName = taskManager.getRunScheduledName();
+		//LogUtils.info(runScheduledName.toString());
+		//
+		//List<String> allSuperScheduledName = taskManager.getAllSuperScheduledName();
+		//LogUtils.info(allSuperScheduledName.toString());
 	}
 }

@@ -9,7 +9,7 @@ import org.springframework.boot.SpringApplication;
 public class TaoTaoCloudJobApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-report");
+		PropertyUtils.setDefaultProperty("taotao-cloud-job");
 
 		SpringApplication.run(TaoTaoCloudJobApplication.class, args);
 	}

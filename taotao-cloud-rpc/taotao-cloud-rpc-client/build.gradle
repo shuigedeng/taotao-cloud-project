@@ -1,4 +1,0 @@
-dependencies {
-    implementation project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
-    implementation project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
-}

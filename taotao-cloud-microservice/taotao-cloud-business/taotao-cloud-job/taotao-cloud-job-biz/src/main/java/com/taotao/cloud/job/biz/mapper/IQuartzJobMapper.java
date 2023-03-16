@@ -25,7 +25,6 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.03
  * @since 2022-03-29 09:01:48
  */
-
 public interface IQuartzJobMapper extends BaseSuperMapper<QuartzJob, Long> {
 
 }
