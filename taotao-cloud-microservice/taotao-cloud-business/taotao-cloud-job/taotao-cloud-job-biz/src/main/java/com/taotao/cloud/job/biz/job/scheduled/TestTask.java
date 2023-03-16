@@ -5,7 +5,9 @@ import com.taotao.cloud.job.schedule.model.entity.Task;
 import com.taotao.cloud.job.schedule.task.TaskManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Map;
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -38,5 +40,25 @@ public class TestTask {
 		//
 		//List<String> allSuperScheduledName = taskManager.getAllSuperScheduledName();
 		//LogUtils.info(allSuperScheduledName.toString());
+	}
+
+	@Scheduled(cron = "0 */1 * * * ?")
+	@SchedulerLock(name = "scheduledController_notice", lockAtLeastFor = "PT15M", lockAtMostFor = "PT14M")
+	public void notice() {
+		try {
+			LogUtils.info(
+				Thread.currentThread().getName() + "- 执行定时器 scheduledController_notice");
+		} catch (Exception e) {
+			LogUtils.error("异常信息:", e);
+		}
+	}
+
+	/**
+	 * 每分钟执行一次 [秒] [分] [小时] [日] [月] [周] [年]
+	 */
+	@Scheduled(cron = "1 * * * * ?")
+	@SchedulerLock(name = "synchronousSchedule")
+	public void synchronousSchedule() {
+		System.out.println("Start run schedule to synchronous data:" + new Date());
 	}
 }
