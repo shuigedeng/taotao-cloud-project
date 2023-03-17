@@ -43,16 +43,16 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 
-powerjob:
-  worker:
-    enabled: false
-    port: 27777
-    protocol: akka
-    app-name: ${spring.application.name}
-    server-address: 192.168.10.210:7700
-    store-strategy: disk
-    max-appended-wf-context-length: 8192
-    max-result-length: 8192
+#powerjob:
+#  worker:
+#    enabled: false
+#    port: 27777
+#    protocol: akka
+#    app-name: ${spring.application.name}
+#    server-address: 192.168.10.210:7700
+#    store-strategy: disk
+#    max-appended-wf-context-length: 8192
+#    max-result-length: 8192
 
 elasticjob:
   enabled: false   # 此处开启会通过 ElasticJobTracingConfiguration 注入一个tracingDataSource的bean 会和QuartzAutoConfiguration自动配置的的@ConditionalOnSingleCandidate(DataSource.class)冲突 启动会报错
@@ -142,7 +142,7 @@ elasticjob:
 
 redisson:
   client-name: ${spring.application.name}   #在Redis节点里显示的客户端名称。
-  password: taotao-cloud   #用于节点身份验证的密码
+  #password: taotao-cloud   #用于节点身份验证的密码
   lock-model: auto   #锁的模式.如果不设置, REENTRANT(可重入锁),FAIR(公平锁),MULTIPLE(联锁),REDLOCK(红锁),READ(读锁), WRITE(写锁)
   model: single   #集群模式:SINGLE(单例),SENTINEL(哨兵),MASTERSLAVE(主从),CLUSTER(集群),REPLICATED(云托管)
   codec: "com.zengtengpeng.codec.MyJsonJacksonCodec"   #Redisson的对象编码类是用于将对象进行序列化和反序列化，以实现对该对象在Redis里的读取和存储
@@ -173,7 +173,7 @@ redisson:
   attemptTimeout: 10000   #等待获取锁超时时间,-1则是一直等待
   dataValidTime: 1800000
   single_server_config:
-    address: "192.168.10.210:6379"     #服务器地址,必填ip:port
+    address: "192.168.10.220:6379"     #服务器地址,必填ip:port
     subscription_connection_minimum_idle_size: 1     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     subscription_connection_pool_size: 50     #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
     connection_minimum_idle_size: 24     #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
@@ -181,16 +181,16 @@ redisson:
     database: 3     #尝试连接的数据库编号。
     dns_monitoring_interval: 5000     #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
 
-arthas:
-  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
-  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
-  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
-  telnetPort: -1
-  httpPort: -1
-  ip: 0.0.0.0   # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
-  agent-id: ${spring.application.name}
-  app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.210:7777/ws
+#arthas:
+#  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
+#  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
+#  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
+#  telnetPort: -1
+#  httpPort: -1
+#  ip: 0.0.0.0   # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+#  agent-id: ${spring.application.name}
+#  app-name: ${spring.application.name}
+#  tunnel-server: ws://192.168.10.220:7777/ws
 
 dubbo:
   enabled: true
@@ -212,7 +212,7 @@ dubbo:
     shutwait: 3000
     dump-directory: ${user.home}/logs/${spring.application.name}/dubbo/
   registry:
-    address: nacos://192.168.10.210:8848
+    address: nacos://192.168.10.220:8848
     group: DUBBO_REGISTRY_GROUP
     cluster: CQ
     parameters:
@@ -295,7 +295,7 @@ dubbo:
       cluster-name: CQ
   config-center:
     id: ${spring.application.name}
-    address: nacos://192.168.10.210:8848
+    address: nacos://192.168.10.220:8848
     username: nacos
     password: nacos
     group: DUBBO_REGISTRY_GROUP
@@ -324,22 +324,22 @@ dubbo:
 seata:
   enabled: true
   application-id: ${spring.application.name}
-  tx-service-group: taotao_cloud_sys_tx_group   # 事务群组（可以每个应用独立取名，也可以使用相同的名字）
+  tx-service-group: taotao_cloud_tx_group   # 事务群组（可以每个应用独立取名，也可以使用相同的名字）
   enable-auto-data-source-proxy: true
   use-jdk-proxy: false
   data-source-proxy-mode: AT
   service:
     grouplist:
-      CQ: 192.168.10.210:8091
+      SC: 192.168.10.220:8091
     vgroupMapping:
-      taotao_cloud_tx_group: CQ   # TC 集群（必须与seata-server保持一致）
+      taotao_cloud_tx_group: SC   # TC 集群（必须与seata-server保持一致）
     enable-degrade: false     # 降级开关
     disable-global-transaction: false     # 禁用全局事务（默认false）
   config:
     type: nacos
     nacos:
       namespace: taotao-cloud-seata
-      server-addr: 192.168.10.210:8848
+      server-addr: 192.168.10.220:8848
       group: SEATA_GROUP
       username: nacos
       password: nacos
@@ -349,7 +349,7 @@ seata:
     nacos:
       namespace: taotao-cloud-seata
       application: taotao-cloud-seata-server
-      server-addr: 192.168.10.210:8848
+      server-addr: 192.168.10.220:8848
       group: SEATA_GROUP
       username: nacos
       password: nacos
@@ -602,7 +602,7 @@ spring:
     #driver-class-name: com.mysql.cj.jdbc.Driver
     #url: jdbc:p6spy:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    url: jdbc:mysql://192.168.10.220:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -660,10 +660,10 @@ spring:
     #      use_jdbc_metadata_defaults: false
   data:
     redis:
-      host: 192.168.10.210
+      host: 192.168.10.220
       port: 6379
       database: 1
-      password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+      #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
       connect-timeout: 60000
       #sentinel:
       #  master:
@@ -693,13 +693,13 @@ spring:
             # 命令重试发送时间间隔，单位：毫秒
             retryInterval: 1500
             # 密码，没有设置密码时，需要注释掉，否则会报错
-            password: taotao-cloud
+            #password: taotao-cloud
             # 单个连接最大订阅数量
             subscriptionsPerConnection: 5
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://192.168.10.210:6379"
+            address: "redis://192.168.10.220:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -724,7 +724,7 @@ spring:
           lockWatchdogTimeout: 10000
   kafka:
     enabled: true
-    bootstrap-servers: 192.168.10.210:9092
+    bootstrap-servers: 192.168.10.220:9092
     producer:
       retries: 1
       batch-size: 16384
@@ -892,13 +892,13 @@ taotao:
       seata:
         enabled: true
     mq:
-      enabled: false
+      enabled: true
       rocketmq:
         enabled: false
       rabbitmq:
         enabled: false
       kafka:
-        enabled: false
+        enabled: true
       pulsar:
         enabled: false
       stream:
