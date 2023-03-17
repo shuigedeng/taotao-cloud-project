@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz2.model.dto;
+package com.taotao.cloud.job.biz.quartz2.dao;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -28,11 +32,12 @@ import lombok.Data;
  * @date 2022-04-03
  */
 @Data
-@Builder
-public class JobLogDTO implements Serializable {
+@TableName("quartz2_sys_job_log")
+public class JobLogDO implements Serializable {
 
 	private static final long serialVersionUID = -1L;
 
+	@TableId(type = IdType.ASSIGN_ID)
 	private Long id;
 
 	/**
@@ -58,6 +63,7 @@ public class JobLogDTO implements Serializable {
 	/**
 	 * 创建时间
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	private LocalDateTime createTime;
 
 }

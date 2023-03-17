@@ -14,31 +14,28 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz2.dao.dataobject;
+package com.taotao.cloud.job.biz.quartz2.model;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.job.quartz.quartz2.core.constants.ScheduleConstants;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 定时任务调度日志表
- *
- * @author fxz
- * @date 2022-04-03
+ * @author Fxz
+ * @version 0.0.1
+ * @date 2022/12/7 21:49
  */
 @Data
-@TableName("sys_job_log")
-public class JobLogDO implements Serializable {
+//public class JobPageDTO extends BasePageEntity implements Serializable {
+public class JobPageDTO implements Serializable {
 
 	private static final long serialVersionUID = -1L;
 
-	@TableId(type = IdType.ASSIGN_ID)
-	private Long id;
+	/**
+	 * 任务ID
+	 */
+	private Long jobId;
 
 	/**
 	 * 任务名称
@@ -46,24 +43,60 @@ public class JobLogDO implements Serializable {
 	private String jobName;
 
 	/**
-	 * 日志信息
+	 * 任务组名
 	 */
-	private String jobMessage;
+	private String jobGroup;
 
 	/**
-	 * 执行状态（0正常 1失败）
+	 * 执行参数
+	 */
+	private String parameters;
+
+	/**
+	 * cron执行表达式
+	 */
+	private String cronExpression;
+
+	/**
+	 * cron计划策略
+	 */
+	private String misfirePolicy = ScheduleConstants.MISFIRE_DEFAULT;
+
+	/**
+	 * 任务状态（0正常 1暂停）
 	 */
 	private String status;
 
 	/**
-	 * 异常信息
+	 * 备注信息
 	 */
-	private String exceptionInfo;
+	private String remark;
+
+	/**
+	 * 创建者
+	 */
+	private String createBy;
 
 	/**
 	 * 创建时间
 	 */
-	@TableField(fill = FieldFill.INSERT)
 	private LocalDateTime createTime;
 
+	/**
+	 * 更新者
+	 */
+	private String updateBy;
+
+	/**
+	 * 更新时间
+	 */
+	private LocalDateTime updateTime;
+
+	public long getCurrent() {
+		return 1;
+	}
+
+	public long getSize() {
+		return 1;
+	}
 }

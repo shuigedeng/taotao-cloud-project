@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz2.model.convert;
+package com.taotao.cloud.job.biz.quartz2.model;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.job.biz.quartz2.dao.dataobject.JobDO;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobDTO;
+import com.taotao.cloud.job.biz.quartz2.dao.JobDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

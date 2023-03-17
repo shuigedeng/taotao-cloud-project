@@ -1,9 +1,16 @@
 package com.taotao.cloud.job.biz.schedule1.model;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
 import java.util.Date;
+import lombok.Data;
 
-public class Task {
+@Data
+@TableName("schedule1_task")
+public class Task implements Serializable {
+
+	private static final long serialVersionUID = 5126530068827085130L;
 
 	//id
 	private String id;

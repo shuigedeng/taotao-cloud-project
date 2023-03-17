@@ -15,10 +15,14 @@
  */
 package com.taotao.cloud.job.biz.quartz1.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.job.quartz.quartz1.enums.QuartzJobCode;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Data;
 
+@Data
+@TableName("quartz_job_entity")
 public class QuartzJobEntity implements Serializable {
 
 	private static final long serialVersionUID = 5126530068827085130L;

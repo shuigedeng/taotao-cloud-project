@@ -20,11 +20,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.job.biz.quartz2.dao.dataobject.JobLogDO;
-import com.taotao.cloud.job.biz.quartz2.dao.mysql.JobLogMapper;
-import com.taotao.cloud.job.biz.quartz2.model.convert.JobLogConvert;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobLogDTO;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobLogPageDTO;
+import com.taotao.cloud.job.biz.quartz2.dao.JobLogDO;
+import com.taotao.cloud.job.biz.quartz2.dao.JobLogMapper;
+import com.taotao.cloud.job.biz.quartz2.model.JobLogConvert;
+import com.taotao.cloud.job.biz.quartz2.model.JobLogDTO;
+import com.taotao.cloud.job.biz.quartz2.model.JobLogPageDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

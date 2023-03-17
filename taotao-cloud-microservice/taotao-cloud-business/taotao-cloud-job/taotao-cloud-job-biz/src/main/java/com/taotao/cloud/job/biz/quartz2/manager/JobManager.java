@@ -20,11 +20,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.job.biz.quartz2.dao.dataobject.JobDO;
-import com.taotao.cloud.job.biz.quartz2.dao.mysql.JobMapper;
-import com.taotao.cloud.job.biz.quartz2.model.convert.JobConvert;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobDTO;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobPageDTO;
+import com.taotao.cloud.job.biz.quartz2.dao.JobDO;
+import com.taotao.cloud.job.biz.quartz2.dao.JobMapper;
+import com.taotao.cloud.job.biz.quartz2.model.JobConvert;
+import com.taotao.cloud.job.biz.quartz2.model.JobDTO;
+import com.taotao.cloud.job.biz.quartz2.model.JobPageDTO;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -60,6 +61,10 @@ public class JobManager {
 			.like(StringUtils.isNotBlank(page.getJobName()), JobDO::getJobName, page.getJobName());
 
 		return jobMapper.selectPage(Page.of(page.getCurrent(), page.getSize()), wrapper);
+	}
+
+	public List<JobDO> queryAll() {
+		return jobMapper.selectList(new LambdaQueryWrapper<>());
 	}
 
 }

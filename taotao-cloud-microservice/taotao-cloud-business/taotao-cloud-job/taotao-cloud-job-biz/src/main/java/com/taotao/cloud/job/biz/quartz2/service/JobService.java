@@ -16,14 +16,17 @@
 
 package com.taotao.cloud.job.biz.quartz2.service;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.job.biz.quartz2.dao.dataobject.JobDO;
+import com.taotao.cloud.job.biz.quartz2.dao.JobDO;
 import com.taotao.cloud.job.biz.quartz2.manager.JobManager;
-import com.taotao.cloud.job.biz.quartz2.model.convert.JobConvert;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobDTO;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobPageDTO;
+import com.taotao.cloud.job.biz.quartz2.model.JobConvert;
+import com.taotao.cloud.job.biz.quartz2.model.JobDTO;
+import com.taotao.cloud.job.biz.quartz2.model.JobPageDTO;
 import com.taotao.cloud.job.quartz.quartz2.core.constants.ScheduleConstants;
 import com.taotao.cloud.job.quartz.quartz2.core.scheduler.JobScheduler;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -52,13 +55,16 @@ public class JobService {
 		// 保存数据库
 		jobManager.add(dto);
 
+		return addJob(dto);
+	}
+
+	private JobDTO addJob(JobDTO dto) {
 		// 创建定时任务
 		jobScheduler.add(dto.getJobId(), dto.getJobGroup(), dto.getParameters(), dto.getJobName(),
 			dto.getCronExpression(), dto.getMisfirePolicy());
 
 		// 更改job状态
 		changeStatus(dto.getJobId(), dto.getJobGroup(), dto.getStatus());
-
 		return dto;
 	}
 
@@ -69,6 +75,10 @@ public class JobService {
 	public JobDTO update(JobDTO dto) {
 		jobManager.update(dto);
 
+		return updateJob(dto);
+	}
+
+	private JobDTO updateJob(JobDTO dto) {
 		jobScheduler.update(dto.getJobId(), dto.getJobGroup(), dto.getParameters(),
 			dto.getJobName(),
 			dto.getCronExpression(), dto.getMisfirePolicy());
@@ -78,6 +88,7 @@ public class JobService {
 
 		return dto;
 	}
+
 
 	/**
 	 * 根据id删除任务
@@ -156,4 +167,13 @@ public class JobService {
 		return JobConvert.INSTANCE.convert(jobManager.findById(id));
 	}
 
+	public void initTask() {
+		List<JobDO> jobDOS = jobManager.queryAll();
+		if (CollectionUtil.isNotEmpty(jobDOS)) {
+			for (JobDO jobDO : jobDOS) {
+				JobDTO jobDTO = BeanUtil.copyProperties(jobDO, JobDTO.class);
+				addJob(jobDTO);
+			}
+		}
+	}
 }

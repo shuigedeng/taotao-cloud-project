@@ -19,8 +19,8 @@ package com.taotao.cloud.job.biz.quartz2.controller;
 import cn.hutool.core.lang.Assert;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobDTO;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobPageDTO;
+import com.taotao.cloud.job.biz.quartz2.model.JobDTO;
+import com.taotao.cloud.job.biz.quartz2.model.JobPageDTO;
 import com.taotao.cloud.job.biz.quartz2.service.JobService;
 import com.taotao.cloud.job.quartz.quartz2.core.utils.CronUtils;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2022-04-03
  */
 @RestController
-@RequestMapping("/job")
+@RequestMapping("/job/quartz2")
 @RequiredArgsConstructor
 public class JobController {
 

@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz2.dao.dataobject;
+package com.taotao.cloud.job.biz.quartz2.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.job.quartz.quartz2.core.constants.ScheduleConstants;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
@@ -29,7 +30,7 @@ import lombok.Data;
  * @date 2022-04-03
  */
 @Data
-@TableName("sys_job")
+@TableName("quartz2_sys_job")
 //public class JobDO extends BaseCreateEntity {
 public class JobDO {
 
@@ -75,5 +76,25 @@ public class JobDO {
 	 * 备注信息
 	 */
 	private String remark;
+
+	/**
+	 * 创建者
+	 */
+	private String createBy;
+
+	/**
+	 * 创建时间
+	 */
+	private LocalDateTime createTime;
+
+	/**
+	 * 更新者
+	 */
+	private String updateBy;
+
+	/**
+	 * 更新时间
+	 */
+	private LocalDateTime updateTime;
 
 }
