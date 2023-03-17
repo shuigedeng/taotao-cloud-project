@@ -1,7 +1,9 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-job:taotao-cloud-job-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot-starter"
+    }
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
@@ -12,11 +14,11 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
     implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
