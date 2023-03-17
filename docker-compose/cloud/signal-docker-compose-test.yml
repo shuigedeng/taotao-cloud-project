@@ -148,6 +148,18 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.17
 
+  #arthas:
+  #  image: hengyunabc/arthas:latest
+  #  container_name: pyroscope
+  #  restart: always
+  #  ports:
+  #    - "4040:4040"
+  #  command:
+  #    - "java -jar /opt/arthas/arthas-boot.jar"
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.42
+
 networks:
   taotao-cluster-network:
     external: true
