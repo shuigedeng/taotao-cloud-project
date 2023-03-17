@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
  * 启动完成后加载
  **/
 @Component
-public class TaskApplicationDestroy implements DisposableBean {
+public class ScheduleApplicationDestroy implements DisposableBean {
 
-	private final Logger logger = LoggerFactory.getLogger(TaskApplicationRunner.class);
+	private final Logger logger = LoggerFactory.getLogger(ScheduleApplicationRunner.class);
 
 	@Resource
 	private TaskManager taskManager;

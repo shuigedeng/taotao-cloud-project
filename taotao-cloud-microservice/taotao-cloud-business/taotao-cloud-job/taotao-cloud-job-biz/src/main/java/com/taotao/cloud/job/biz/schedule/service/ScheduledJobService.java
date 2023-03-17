@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.biz.schedule.service;
 
 
-import com.taotao.cloud.job.biz.schedule.model.ScheduledJob;
-import com.taotao.cloud.job.biz.schedule.model.ScheduledJobLog;
+import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
+import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
 import com.taotao.cloud.job.biz.schedule.model.TaskParam;
 import com.taotao.cloud.job.biz.schedule.model.TaskVo;
 import java.util.List;

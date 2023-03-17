@@ -22,7 +22,7 @@ public class FileDataSource {
      * 方法描述: 读取基础数据
      *
      * @Return {@link List<RelateDTO>}
-     * @author tarzan
+     * 
      * @date 2020年07月31日 16:53:40
      */
     public static List<RelateDTO> getData() {
@@ -52,7 +52,7 @@ public class FileDataSource {
      * 方法描述: 读取用户数据
      *
      * @Return {@link List<UserDTO>}
-     * @author tarzan
+     * 
      * @date 2020年07月31日 16:54:51
      */
     public static List<UserDTO> getUserData() {
@@ -85,7 +85,7 @@ public class FileDataSource {
      * 方法描述: 读取电影数据
      *
      * @Return {@link List<ItemDTO>}
-     * @author tarzan
+     * 
      * @date 2020年07月31日 16:54:22
      */
     public static List<ItemDTO> getItemData() {

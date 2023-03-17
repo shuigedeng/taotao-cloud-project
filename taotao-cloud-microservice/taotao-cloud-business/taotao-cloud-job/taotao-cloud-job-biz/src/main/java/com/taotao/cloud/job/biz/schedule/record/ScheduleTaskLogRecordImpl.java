@@ -1,6 +1,6 @@
 package com.taotao.cloud.job.biz.schedule.record;
 
-import com.taotao.cloud.job.biz.schedule.model.ScheduledJobLog;
+import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobService;
 import com.taotao.cloud.job.schedule.task.ScheduleTaskLogRecord;
 import java.time.LocalDateTime;

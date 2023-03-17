@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController("task")
 @Tag(name = "任务管理")
-@RequestMapping("/job/schedule1")
+@RequestMapping("/job/schedule")
 public class ScheduledJobLogController {
 
 	@Resource

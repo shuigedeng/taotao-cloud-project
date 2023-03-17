@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
  * 启动完成后加载
  **/
 @Component
-public class Quartz1ApplicationRunner implements ApplicationRunner {
+public class QuartzApplicationRunner implements ApplicationRunner {
 
 	@Resource
 	private QuartzJobService quartzJobService;
 
-	private final Logger logger = LoggerFactory.getLogger(Quartz1ApplicationRunner.class);
+	private final Logger logger = LoggerFactory.getLogger(QuartzApplicationRunner.class);
 
 	@Override
 	public void run(ApplicationArguments args) {
