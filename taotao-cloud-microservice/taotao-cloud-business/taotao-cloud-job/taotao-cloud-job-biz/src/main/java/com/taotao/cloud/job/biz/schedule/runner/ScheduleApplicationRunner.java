@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
  * 启动完成后加载
  **/
 @Component
-public class TaskApplicationRunner implements ApplicationRunner {
+public class ScheduleApplicationRunner implements ApplicationRunner {
 
 	@Resource
 	private TaskManager taskManager;
 
-	private final Logger logger = LoggerFactory.getLogger(TaskApplicationRunner.class);
+	private final Logger logger = LoggerFactory.getLogger(ScheduleApplicationRunner.class);
 
 	@Override
 	public void run(ApplicationArguments args) {

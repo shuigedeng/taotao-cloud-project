@@ -18,7 +18,7 @@ public class Recommend {
 	 *
 	 * @param userId 用户id
 	 * @Return {@link List<ItemDTO>}
-	 * @author tarzan
+	 * 
 	 * @date 2020年07月31日 17:28:06
 	 */
 	public static List<ItemDTO> userCfRecommend(int userId) {
@@ -35,7 +35,7 @@ public class Recommend {
 	 *
 	 * @param itemId 物品id
 	 * @Return {@link List<ItemDTO>}
-	 * @author tarzan
+	 * 
 	 * @date 2020年07月31日 17:28:06
 	 */
 	public static List<ItemDTO> itemCfRecommend(int itemId) {

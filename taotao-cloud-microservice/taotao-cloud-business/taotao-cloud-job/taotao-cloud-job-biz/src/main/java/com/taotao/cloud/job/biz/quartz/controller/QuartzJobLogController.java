@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "定时任务执行日志")
 @RestController
-@RequestMapping("/job/quartz1/quartz/log")
+@RequestMapping("/job/quartz/log")
 public class QuartzJobLogController {
 
 	private final QuartzJobLogService quartzJobLogService;

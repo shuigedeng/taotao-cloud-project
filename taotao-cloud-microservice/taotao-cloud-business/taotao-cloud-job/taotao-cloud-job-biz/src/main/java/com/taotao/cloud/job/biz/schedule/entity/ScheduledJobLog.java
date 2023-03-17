@@ -1,4 +1,4 @@
-package com.taotao.cloud.job.biz.schedule.model;
+package com.taotao.cloud.job.biz.schedule.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;

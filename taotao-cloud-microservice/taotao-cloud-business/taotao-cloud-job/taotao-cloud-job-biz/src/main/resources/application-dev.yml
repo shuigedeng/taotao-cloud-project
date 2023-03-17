@@ -1007,7 +1007,7 @@ mybatis-plus-join:
   sub-table-logic: true
 
 mybatis-plus:
-  typeAliasesPackage: com.taotao.cloud.job.biz.model.entity  #实体扫描 多个package用户逗号或者分号分割
+  typeAliasesPackage: com.taotao.cloud.job.biz.quartz.entity,com.taotao.cloud.job.biz.schedule.entity  #实体扫描 多个package用户逗号或者分号分割
   mapperLocations: classpath:mapper/*.xml # mapper xml 地址
   global-config:
     banner: true # 关闭mp3.0自带的banner

@@ -71,7 +71,7 @@ public class CoreMath {
      * @param xs x集合
      * @param ys y集合
      * @Return {@link double}
-     * @author tarzan
+     * 
      * @date 2020年07月31日 17:03:20
      */
     public static double getRelate(List<Integer> xs, List<Integer> ys){
