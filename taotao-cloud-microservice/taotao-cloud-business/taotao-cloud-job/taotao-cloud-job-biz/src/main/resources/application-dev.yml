@@ -43,16 +43,16 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 
-#powerjob:
-#  worker:
-#    enabled: false
-#    port: 27777
-#    protocol: akka
-#    app-name: ${spring.application.name}
-#    server-address: 192.168.10.210:7700
-#    store-strategy: disk
-#    max-appended-wf-context-length: 8192
-#    max-result-length: 8192
+powerjob:
+  worker:
+    enabled: false
+    port: 27777
+    protocol: akka
+    app-name: ${spring.application.name}
+    server-address: 192.168.10.210:7700
+    store-strategy: disk
+    max-appended-wf-context-length: 8192
+    max-result-length: 8192
 
 elasticjob:
   enabled: false   # 此处开启会通过 ElasticJobTracingConfiguration 注入一个tracingDataSource的bean 会和QuartzAutoConfiguration自动配置的的@ConditionalOnSingleCandidate(DataSource.class)冲突 启动会报错
@@ -286,7 +286,7 @@ dubbo:
     version: ${taotaoCloudVersion}
   metadata-report:
     id: ${spring.application.name}
-    address: nacos://192.168.10.210:8848
+    address: nacos://192.168.10.220:8848
     username: nacos
     password: nacos
     group: DUBBO_REGISTRY_GROUP
@@ -302,24 +302,24 @@ dubbo:
     parameters:
       namespace: taotao-cloud-dubbo
     check: false
-  metrics:
-    default: true
-    id: ${spring.application.name}
-    port: 9091
-    enable-jvm-metrics: true
-    protocol: prometheus
-    aggregation:
-      enabled: true
-      bucketNum: 100
-      timeWindowSeconds: 30
-    prometheus:
-      exporter:
-        enabled: true
-        enableHttpServiceDiscovery: true
-        metricsPort: 18081
-        metricsPath: /test
-      pushgateway:
-        enabled: false
+  #metrics:
+  #  default: false
+  #  id: ${spring.application.name}
+  #  port: 9091
+  #  enable-jvm-metrics: true
+  #  protocol: prometheus
+  #  aggregation:
+  #    enabled: true
+  #    bucketNum: 100
+  #    timeWindowSeconds: 30
+  #  prometheus:
+  #    exporter:
+  #      enabled: false
+  #      enableHttpServiceDiscovery: true
+  #      metricsPort: 18081
+  #      metricsPath: /test
+  #    pushgateway:
+  #      enabled: false
 
 seata:
   enabled: true
@@ -353,7 +353,7 @@ seata:
       group: SEATA_GROUP
       username: nacos
       password: nacos
-      cluster: CQ
+      cluster: SC
   client:
     rm:
       async-commit-buffer-limit: 10000       # 异步提交缓存队列长度（默认10000）
@@ -598,9 +598,9 @@ spring:
       max-request-size: 200MB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #url: jdbc:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
+    #url: jdbc:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
     #driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:p6spy:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    #url: jdbc:p6spy:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     url: jdbc:mysql://192.168.10.220:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -781,11 +781,11 @@ spring:
       #  enabled: true
       enabled: true
   quartz:
-    scheduler-name: taotaoCloudQuartzJobScheduler
+    auto-startup: true #启动开关
+    scheduler-name: taotaoCloudQuartzJobScheduler #调度名称
     job-store-type: jdbc     # 将任务等保存化到数据库
     wait-for-jobs-to-complete-on-shutdown: true     # 关闭时等待任务完成
-    overwrite-existing-jobs: true     # 可以覆盖已有的任务
-    auto-startup: true
+    overwrite-existing-jobs: true     # 启动时更新已经存在的job
     jdbc:
       initialize-schema: never       # 是否自动使用 SQL 初始化 Quartz 表结构
     properties:
@@ -808,9 +808,9 @@ spring:
             tablePrefix: QRTZ_  # Quartz 表前缀
             dontSetAutoCommitFalse: false
             useProperties: false  # 是否将JobDataMap中的属性转为字符串存储
-            misfireThreshold: 60000  #在被认为“失火”之前，调度程序将“容忍”一个Triggers将其下一个启动时间通过的毫秒数。默认值（如果您在配置中未输入此属性）为60000（60秒）。
-            isClustered: true
-            clusterCheckinInterval: 5000 #设置此实例“检入”*与群集的其他实例的频率（以毫秒为单位）。影响检测失败实例的速度。
+            misfireThreshold: 60000  #misfire阈值， 在被认为“失火”之前，调度程序将“容忍”一个Triggers将其下一个启动时间通过的毫秒数。默认值（如果您在配置中未输入此属性）为60000（60秒）。
+            isClustered: true #是否集群
+            clusterCheckinInterval: 15000 #集群检测评率 单位毫秒，设置此实例“检入”*与群集的其他实例的频率（以毫秒为单位）。影响检测失败实例的速度。
             maxMisfiresToHandleAtATime: 1
           #dataSource:
           #  DS:
@@ -844,7 +844,7 @@ taotao:
           secret: ${DINGDING_SECRET:xxxx}
     zookeeper:
       enabled: false
-      connectString: 192.168.10.210:2181
+      connectString: 192.168.10.220:2181
     sensitive:
       enabled: false
     lock:
@@ -995,8 +995,7 @@ taotao:
       enabled: true
     security:
       ignore-url:
-        - /sys/buyer/dict/test/{code}
-        - /sys/manager/dept/tree
+        - /job/**
     job:
       scheduled1:
         enabled: true

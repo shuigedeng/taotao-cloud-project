@@ -14,25 +14,55 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz2.model.job;
+package com.taotao.cloud.job.biz.quartz2.model;
 
-import com.taotao.cloud.job.quartz.quartz2.core.annotation.ArtQuartzJob;
-import com.taotao.cloud.job.quartz.quartz2.core.job.ArtJob;
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
 
 /**
  * @author Fxz
  * @version 0.0.1
- * @date 2022/12/7 11:53
+ * @date 2022/12/7 21:28
  */
-@Slf4j
-@ArtQuartzJob(log = true, name = "demoJob")
-public class DemoJob implements ArtJob {
+@Data
+//public class JobLogPageDTO extends BasePageEntity implements Serializable {
+public class JobLogPageDTO implements Serializable {
 
-	@Override
-	public void execute(String parameter) {
-		log.info("demoJob执行,方法参数:{},时间:{}", parameter, LocalDateTime.now());
+	private static final long serialVersionUID = -1L;
+
+	private Long id;
+
+	/**
+	 * 任务名称
+	 */
+	private String jobName;
+
+	/**
+	 * 日志信息
+	 */
+	private String jobMessage;
+
+	/**
+	 * 执行状态（0正常 1失败）
+	 */
+	private String status;
+
+	/**
+	 * 异常信息
+	 */
+	private String exceptionInfo;
+
+	/**
+	 * 创建时间
+	 */
+	private LocalDateTime createTime;
+
+	public long getCurrent() {
+		return 1;
 	}
 
+	public long getSize() {
+		return 1;
+	}
 }

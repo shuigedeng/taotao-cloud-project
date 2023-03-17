@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Tag(name = "定时任务")
 @RestController
-@RequestMapping("/api/quartz")
+@RequestMapping("/job/quartz1/api/quartz")
 public class QuartzJobController {
 
 	private final QuartzJobService quartzJobService;

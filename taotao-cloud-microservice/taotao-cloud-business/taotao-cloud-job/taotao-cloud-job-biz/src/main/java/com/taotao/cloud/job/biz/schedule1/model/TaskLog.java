@@ -1,10 +1,16 @@
 package com.taotao.cloud.job.biz.schedule1.model;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
 import java.util.Date;
+import lombok.Data;
 
+@Data
+@TableName("schedule1_task_log")
+public class TaskLog implements Serializable {
 
-public class TaskLog {
+	private static final long serialVersionUID = 5126530068827085130L;
 
 	private String id;
 

@@ -14,28 +14,25 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz2.model.convert;
+package com.taotao.cloud.job.biz.quartz2.model;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.job.biz.quartz2.dao.dataobject.JobLogDO;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobLogDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import com.taotao.cloud.job.quartz.quartz2.core.annotation.ArtQuartzJob;
+import com.taotao.cloud.job.quartz.quartz2.core.job.ArtJob;
+import java.time.LocalDateTime;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Fxz
  * @version 0.0.1
- * @date 2022/12/7 21:25
+ * @date 2022/12/7 11:53
  */
-@Mapper
-public interface JobLogConvert {
+@Slf4j
+@ArtQuartzJob(log = true, name = "demoJob")
+public class DemoJob implements ArtJob {
 
-	JobLogConvert INSTANCE = Mappers.getMapper(JobLogConvert.class);
-
-	JobLogDO convert(JobLogDTO jobLogDTO);
-
-	JobLogDTO convert(JobLogDO jobLogDO);
-
-	Page<JobLogDTO> convertPage(Page<JobLogDO> page);
+	@Override
+	public void execute(String parameter) {
+		log.info("demoJob执行,方法参数:{},时间:{}", parameter, LocalDateTime.now());
+	}
 
 }

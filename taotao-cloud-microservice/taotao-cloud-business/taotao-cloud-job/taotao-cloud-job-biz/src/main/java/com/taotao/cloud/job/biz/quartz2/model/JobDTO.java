@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz2.model.dto;
+package com.taotao.cloud.job.biz.quartz2.model;
 
 import com.taotao.cloud.job.quartz.quartz2.core.constants.ScheduleConstants;
 import java.io.Serializable;

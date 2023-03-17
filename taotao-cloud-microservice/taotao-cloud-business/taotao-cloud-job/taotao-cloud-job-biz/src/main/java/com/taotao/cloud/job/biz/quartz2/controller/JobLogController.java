@@ -18,8 +18,8 @@ package com.taotao.cloud.job.biz.quartz2.controller;
 
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobLogDTO;
-import com.taotao.cloud.job.biz.quartz2.model.dto.JobLogPageDTO;
+import com.taotao.cloud.job.biz.quartz2.model.JobLogDTO;
+import com.taotao.cloud.job.biz.quartz2.model.JobLogPageDTO;
 import com.taotao.cloud.job.biz.quartz2.service.JobLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2022-04-03
  */
 @RestController
-@RequestMapping("/jobLog")
+@RequestMapping("/job/quartz2/jobLog")
 @RequiredArgsConstructor
 public class JobLogController {
 

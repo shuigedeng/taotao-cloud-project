@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz2.dao.mysql;
+package com.taotao.cloud.job.biz.quartz2.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.job.biz.quartz2.dao.dataobject.JobDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
