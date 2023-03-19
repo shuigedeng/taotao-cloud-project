@@ -67,7 +67,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
         with:
-          gradle-version: 7.6
+          gradle-version: 8.0.1
           arguments: clean bootJar
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
 
@@ -87,7 +87,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway-springcloud') }}
         with:
-          gradle-version: 7.6
+          gradle-version: 8.0.1
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway/taotao-cloud-gateway-springcloud
 
@@ -107,7 +107,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-auth') }}
         with:
-          gradle-version: 7.6
+          gradle-version: 8.0.1
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
 
@@ -127,7 +127,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxljob') }}
         with:
-          gradle-version: 7.6
+          gradle-version: 8.0.1
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-xxljob
 
@@ -147,7 +147,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order') }}
         with:
-          gradle-version: 7.6
+          gradle-version: 8.0.1
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
 
@@ -167,7 +167,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
         with:
-          gradle-version: 7.6
+          gradle-version: 8.0.1
           arguments: clean bootJar -x test
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
 

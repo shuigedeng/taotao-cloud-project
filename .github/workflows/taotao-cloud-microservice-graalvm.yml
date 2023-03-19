@@ -1,11 +1,11 @@
 #### https://github.com/marketplace?type=actions
 #### https://github.com/sdras/awesome-actions
 
-name: Microservice Docker Image
+name: Microservice Docker graalvm Image
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
@@ -34,13 +34,13 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
           native-image-job-reports: 'true'
-      - name: Gradle BootJar taotao-cloud-monitor
+      - name: Gradle BootJar taotao-cloud-job-biz
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 7.6
-          arguments: bootBuildImage
-          #arguments: nativeBuild
-          #build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
+          gradle-version: 8.0.1
+          #arguments: bootBuildImage
+          arguments: nativeBuild
+          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-job/taotao-cloud-job-biz
 
     #      - name: Publish Docker Image taotao-cloud-demo
     #        uses: elgohr/Publish-Docker-Github-Action@v4
