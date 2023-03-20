@@ -40,11 +40,12 @@ dependencies {
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
 
+    //implementation "org.springdoc:springdoc-openapi:2.0.4"
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-api'
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
 
     implementation "com.github.xiaoymin:knife4j-openapi3-ui"
-    implementation "com.github.xiaoymin:knife4j-openapi3-spring-boot-starter"
+    implementation "com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter"
     //implementation "com.github.xiaoymin:knife4j-gateway-spring-boot-starter:4.0.0"
 
     implementation "org.apache.commons:commons-pool2"
@@ -55,11 +56,11 @@ dependencies {
     //网关限流 https://search.maven.org/artifact/com.eeeffff.limiter/ip-limiter-core-spring-gateway
     //implementation "com.eeeffff.limiter:ip-limiter-core-spring-gateway:1.1.3"
 
-    implementation("io.github.shuigedeng:taotao-cloud-starter-security-satoken") {
-        exclude group: "cn.dev33", module: "sa-token-spring-boot-starter"
-    }
-    //https://search.maven.org/artifact/cn.dev33/sa-token-reactor-spring-boot-starter
-    implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.34.0'
+    //implementation("io.github.shuigedeng:taotao-cloud-starter-security-satoken") {
+    //    exclude group: "cn.dev33", module: "sa-token-spring-boot-starter"
+    //}
+    ////https://search.maven.org/artifact/cn.dev33/sa-token-reactor-spring-boot-starter
+    //implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.34.0'
 }
 
 configurations {

@@ -27,7 +27,7 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: 192.168.10.210:8848
+        server-addr: 192.168.10.220:8848
         metadata:
           version: ${taotaoCloudVersion}
           user.name: "admin"
@@ -40,7 +40,7 @@ spring:
         naming-load-cache-at-start: false
       config:
         enabled: true
-        server-addr: 192.168.10.210:8848
+        server-addr: 192.168.10.220:8848
         namespace: taotao-cloud-dev
         username: nacos
         password: nacos
@@ -114,7 +114,7 @@ spring:
       #            data-type: json
       #            rule-type: param-flow
       transport:
-        dashboard: 192.168.10.210:8858
+        dashboard: 192.168.10.220:8858
         port: 8712
       metric:
         file-single-size: 1024 * 1024 * 50

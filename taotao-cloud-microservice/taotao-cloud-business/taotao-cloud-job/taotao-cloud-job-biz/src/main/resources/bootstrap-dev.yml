@@ -33,7 +33,7 @@ spring:
           user.name: "admin"
           user.password: "123456"
         group: TAOTAO_CLOUD_GROUP
-        namespace: taotao-cloud-job
+        namespace: taotao-cloud-dev
         username: nacos
         password: nacos
         cluster-name: CQ
@@ -41,7 +41,7 @@ spring:
       config:
         enabled: true
         server-addr: 192.168.10.220:8848
-        namespace: taotao-cloud-job
+        namespace: taotao-cloud-dev
         username: nacos
         password: nacos
         group: TAOTAO_CLOUD_GROUP

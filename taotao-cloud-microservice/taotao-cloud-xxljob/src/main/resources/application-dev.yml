@@ -10,7 +10,7 @@ server:
 
 decorator:
   datasource:
-    enabled: true
+    enabled: false
     datasource-proxy:
       logging: slf4j
       query:
@@ -44,7 +44,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.210:7777/ws
+  tunnel-server: ws://192.168.10.220:7777/ws
 
 spring:
   config:
@@ -61,13 +61,13 @@ spring:
     name: taotao-cloud-xxljob
   data:
     redis:
-      host: 192.168.10.210
+      host: 192.168.10.220
       port: 6379
       #sentinel:
       #  master:
       #  nodes:
       database: 1
-      password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+      #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
       connect-timeout: 60000
       #cluster:
       #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
@@ -94,13 +94,13 @@ spring:
             # 命令重试发送时间间隔，单位：毫秒
             retryInterval: 1500
             # 密码，没有设置密码时，需要注释掉，否则会报错
-            password: taotao-cloud
+            #password: taotao-cloud
             # 单个连接最大订阅数量
             subscriptionsPerConnection: 5
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://192.168.10.210:6379"
+            address: "redis://192.168.10.220:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -125,9 +125,9 @@ spring:
           lockWatchdogTimeout: 10000
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
-    #    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:p6spy:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
+    #url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:p6spy:mysql://192.168.10.220:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
     password: 123456
@@ -148,7 +148,7 @@ spring:
         prepStmtCacheSize: 250
   kafka:
     enabled: true
-    bootstrap-servers: 192.168.10.210:9092
+    bootstrap-servers: 192.168.10.220:9092
     producer:
       retries: 1
       batch-size: 16384
@@ -244,7 +244,7 @@ taotao:
   cloud:
     data:
       p6spy:
-        enabled: true
+        enabled: false
         dateformat: yyyy-MM-dd HH:mm:ss
         driverlist: com.mysql.cj.jdbc.Driver
         database-dialect-date-format: yyyy-MM-dd HH:mm:ss
