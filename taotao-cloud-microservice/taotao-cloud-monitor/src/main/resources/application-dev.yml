@@ -26,7 +26,7 @@ redisson:
   #在Redis节点里显示的客户端名称。
   client-name: ${spring.application.name}
   #用于节点身份验证的密码
-  password: taotao-cloud
+  #password: taotao-cloud
   #锁的模式.如果不设置, REENTRANT(可重入锁),FAIR(公平锁),MULTIPLE(联锁),REDLOCK(红锁),READ(读锁), WRITE(写锁)
   lock-model: auto
   #集群模式:SINGLE(单例),SENTINEL(哨兵),MASTERSLAVE(主从),CLUSTER(集群),REPLICATED(云托管)
@@ -75,7 +75,7 @@ redisson:
   dataValidTime: 1800000
   single_server_config:
     #服务器地址,必填ip:port
-    address: "192.168.10.210:6379"
+    address: "192.168.10.220:6379"
     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     subscription_connection_minimum_idle_size: 1
     #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
@@ -99,7 +99,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.210:7777/ws
+  tunnel-server: ws://192.168.10.220:7777/ws
 
 spring:
   config:
@@ -137,13 +137,13 @@ spring:
       password: 123456
   data:
     redis:
-      host: 192.168.10.210
+      host: 192.168.10.220
       port: 6379
       #sentinel:
       #  master:
       #  nodes:
       database: 1
-      password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+      #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
       connect-timeout: 60000
       #cluster:
       #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
@@ -170,13 +170,13 @@ spring:
             # 命令重试发送时间间隔，单位：毫秒
             retryInterval: 1500
             # 密码，没有设置密码时，需要注释掉，否则会报错
-            password: taotao-cloud
+            #password: taotao-cloud
             # 单个连接最大订阅数量
             subscriptionsPerConnection: 5
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://192.168.10.210:6379"
+            address: "redis://192.168.10.220:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -200,7 +200,7 @@ spring:
           # 配置看门狗的默认超时时间为30s，这里改为 10s
           lockWatchdogTimeout: 10000
   kafka:
-    bootstrap-servers: 192.168.10.210:9092
+    bootstrap-servers: 192.168.10.220:9092
     producer:
       retries: 1
       batch-size: 16384

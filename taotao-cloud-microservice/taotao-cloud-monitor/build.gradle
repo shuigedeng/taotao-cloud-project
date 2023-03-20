@@ -31,6 +31,7 @@ archivesBaseName = 'taotao-cloud-monitor'
 configurations {
     all {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.querydsl", module: "querydsl-apt"
     }
 }

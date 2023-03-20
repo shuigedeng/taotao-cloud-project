@@ -25,7 +25,7 @@ jasypt:
 redisson:
   password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
   single-server-config:
-    address: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+    address: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.220}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
@@ -37,7 +37,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.200:7777/ws
+  tunnel-server: ws://192.168.10.220:7777/ws
 
 spring:
   cloud:
