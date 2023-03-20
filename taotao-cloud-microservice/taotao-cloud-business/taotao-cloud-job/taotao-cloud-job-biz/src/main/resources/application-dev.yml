@@ -1179,7 +1179,10 @@ kylin:
     #  namespace: curator/kylin/lock #命名空间
 
 springdoc:
-  showActuator: true
+  api-docs:
+    enabled: true
+  showActuator: false
+  show-spring-cloud-functions: false
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
     - com.taotao.cloud.captcha.controller
