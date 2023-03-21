@@ -2,13 +2,6 @@ package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.model.OfficialAccountsContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.utils.AccountUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,20 +32,20 @@ public class OfficialAccountHandler extends BaseHandler implements Handler {
 		try {
 			OfficialAccountsContentModel contentModel = (OfficialAccountsContentModel) taskInfo.getContentModel();
 			WxMpService wxMpService = accountUtils.getAccountById(taskInfo.getSendAccount(),
-				WxMpService.class);
+					WxMpService.class);
 			List<WxMpTemplateMessage> messages = assembleReq(taskInfo.getReceiver(), contentModel);
 			for (WxMpTemplateMessage message : messages) {
 				try {
 					wxMpService.getTemplateMsgService().sendTemplateMsg(message);
 				} catch (Exception e) {
 					log.info("OfficialAccountHandler#handler fail! param:{},e:{}",
-						JSON.toJSONString(taskInfo), Throwables.getStackTraceAsString(e));
+							JSON.toJSONString(taskInfo), Throwables.getStackTraceAsString(e));
 				}
 			}
 			return true;
 		} catch (Exception e) {
 			log.error("OfficialAccountHandler#handler fail:{},params:{}",
-				Throwables.getStackTraceAsString(e), JSON.toJSONString(taskInfo));
+					Throwables.getStackTraceAsString(e), JSON.toJSONString(taskInfo));
 		}
 		return false;
 	}
@@ -62,17 +55,18 @@ public class OfficialAccountHandler extends BaseHandler implements Handler {
 	 * 组装发送模板信息参数
 	 */
 	private List<WxMpTemplateMessage> assembleReq(Set<String> receiver,
-		OfficialAccountsContentModel contentModel) {
+			OfficialAccountsContentModel contentModel) {
 		List<WxMpTemplateMessage> wxMpTemplateMessages = new ArrayList<>(receiver.size());
 		for (String openId : receiver) {
 			WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-				.toUser(openId)
-				.templateId(contentModel.getTemplateId())
-				.url(contentModel.getUrl())
-				.data(getWxMpTemplateData(contentModel.getOfficialAccountParam()))
-				.miniProgram(new WxMpTemplateMessage.MiniProgram(contentModel.getMiniProgramId(),
-					contentModel.getPath(), false))
-				.build();
+					.toUser(openId)
+					.templateId(contentModel.getTemplateId())
+					.url(contentModel.getUrl())
+					.data(getWxMpTemplateData(contentModel.getOfficialAccountParam()))
+					.miniProgram(
+							new WxMpTemplateMessage.MiniProgram(contentModel.getMiniProgramId(),
+									contentModel.getPath(), false))
+					.build();
 			wxMpTemplateMessages.add(templateMessage);
 		}
 		return wxMpTemplateMessages;

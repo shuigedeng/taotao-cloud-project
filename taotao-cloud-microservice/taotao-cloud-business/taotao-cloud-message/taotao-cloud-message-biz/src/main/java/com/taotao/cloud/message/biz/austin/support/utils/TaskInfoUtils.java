@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.support.utils;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
-import com.java3y.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
 import java.util.Date;
 
 /**

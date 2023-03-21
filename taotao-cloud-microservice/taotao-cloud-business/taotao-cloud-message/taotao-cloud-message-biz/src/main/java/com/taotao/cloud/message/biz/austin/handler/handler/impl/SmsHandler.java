@@ -5,21 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.account.sms.SmsAccount;
-import com.java3y.austin.common.dto.model.SmsContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.handler.domain.sms.MessageTypeSmsConfig;
-import com.java3y.austin.handler.domain.sms.SmsParam;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.handler.script.SmsScript;
-import com.java3y.austin.support.dao.SmsRecordDao;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.domain.SmsRecord;
-import com.java3y.austin.support.service.ConfigService;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -65,22 +51,22 @@ public class SmsHandler extends BaseHandler implements Handler {
 	@Override
 	public boolean handler(TaskInfo taskInfo) {
 		SmsParam smsParam = SmsParam.builder()
-			.phones(taskInfo.getReceiver())
-			.content(getSmsContent(taskInfo))
-			.messageTemplateId(taskInfo.getMessageTemplateId())
-			.build();
+				.phones(taskInfo.getReceiver())
+				.content(getSmsContent(taskInfo))
+				.messageTemplateId(taskInfo.getMessageTemplateId())
+				.build();
 		try {
 			/**
 			 * 1、动态配置做流量负载
 			 * 2、发送短信
 			 */
 			MessageTypeSmsConfig[] messageTypeSmsConfigs = loadBalance(
-				getMessageTypeSmsConfig(taskInfo));
+					getMessageTypeSmsConfig(taskInfo));
 			for (MessageTypeSmsConfig messageTypeSmsConfig : messageTypeSmsConfigs) {
 				smsParam.setScriptName(messageTypeSmsConfig.getScriptName());
 				smsParam.setSendAccountId(messageTypeSmsConfig.getSendAccount());
 				List<SmsRecord> recordList = smsScripts.get(messageTypeSmsConfig.getScriptName())
-					.send(smsParam);
+						.send(smsParam);
 				if (CollUtil.isNotEmpty(recordList)) {
 					smsRecordDao.saveAll(recordList);
 					return true;
@@ -88,7 +74,7 @@ public class SmsHandler extends BaseHandler implements Handler {
 			}
 		} catch (Exception e) {
 			log.error("SmsHandler#handler fail:{},params:{}", Throwables.getStackTraceAsString(e),
-				JSON.toJSONString(smsParam));
+					JSON.toJSONString(smsParam));
 		}
 		return false;
 	}
@@ -148,10 +134,10 @@ public class SmsHandler extends BaseHandler implements Handler {
 		 */
 		if (!taskInfo.getSendAccount().equals(AUTO_FLOW_RULE)) {
 			SmsAccount account = accountUtils.getAccountById(taskInfo.getSendAccount(),
-				SmsAccount.class);
+					SmsAccount.class);
 			return Arrays.asList(
-				MessageTypeSmsConfig.builder().sendAccount(taskInfo.getSendAccount())
-					.scriptName(account.getScriptName()).weights(100).build());
+					MessageTypeSmsConfig.builder().sendAccount(taskInfo.getSendAccount())
+							.scriptName(account.getScriptName()).weights(100).build());
 		}
 
 		/**
@@ -161,7 +147,7 @@ public class SmsHandler extends BaseHandler implements Handler {
 		JSONArray jsonArray = JSON.parseArray(property);
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JSONArray array = jsonArray.getJSONObject(i)
-				.getJSONArray(FLOW_KEY_PREFIX + taskInfo.getMsgType());
+					.getJSONArray(FLOW_KEY_PREFIX + taskInfo.getMsgType());
 			if (CollUtil.isNotEmpty(array)) {
 				return JSON.parseArray(JSON.toJSONString(array), MessageTypeSmsConfig.class);
 			}

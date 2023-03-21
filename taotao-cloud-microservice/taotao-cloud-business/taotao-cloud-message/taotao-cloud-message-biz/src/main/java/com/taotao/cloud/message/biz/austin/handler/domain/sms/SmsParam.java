@@ -26,7 +26,8 @@ public class SmsParam {
 	/**
 	 * 发送账号的id（如果短信模板指定了发送账号，则该字段有值）
 	 * <p>
-	 * 如果有账号id，那就用账号id 检索 如果没有账号id，那就根据 com.java3y.austin.handler.domain.sms.SmsParam#scriptName 检索
+	 * 如果有账号id，那就用账号id 检索 如果没有账号id，那就根据
+	 * com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam#scriptName 检索
 	 */
 	private Integer sendAccountId;
 

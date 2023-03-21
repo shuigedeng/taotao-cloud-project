@@ -3,8 +3,8 @@ package com.taotao.cloud.message.biz.austin.support.service.impl;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.dialect.Props;
 import com.ctrip.framework.apollo.Config;
-import com.java3y.austin.support.service.ConfigService;
-import com.java3y.austin.support.utils.NacosUtils;
+import com.taotao.cloud.message.biz.austin.support.service.ConfigService;
+import com.taotao.cloud.message.biz.austin.support.utils.NacosUtils;
 import java.nio.charset.StandardCharsets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +43,7 @@ public class ConfigServiceImpl implements ConfigService {
 	public String getProperty(String key, String defaultValue) {
 		if (enableApollo) {
 			Config config = com.ctrip.framework.apollo.ConfigService.getConfig(
-				namespaces.split(StrUtil.COMMA)[0]);
+					namespaces.split(StrUtil.COMMA)[0]);
 			return config.getProperty(key, defaultValue);
 		} else if (enableNacos) {
 			return nacosUtils.getProperty(key, defaultValue);

@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.web.service;
 
 
-import com.java3y.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

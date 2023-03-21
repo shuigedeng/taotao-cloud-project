@@ -1,10 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
 import cn.hutool.core.util.IdUtil;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.deduplication.DeduplicationParam;
-import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
-import com.java3y.austin.support.utils.RedisUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -49,7 +46,7 @@ public class SlideWindowLimitService extends AbstractLimitService {
 	 */
 	@Override
 	public Set<String> limitFilter(AbstractDeduplicationService service, TaskInfo taskInfo,
-		DeduplicationParam param) {
+			DeduplicationParam param) {
 
 		Set<String> filterReceiver = new HashSet<>(taskInfo.getReceiver().size());
 		long nowTime = System.currentTimeMillis();
@@ -58,8 +55,8 @@ public class SlideWindowLimitService extends AbstractLimitService {
 			String scoreValue = String.valueOf(IdUtil.getSnowflake().nextId());
 			String score = String.valueOf(nowTime);
 			if (redisUtils.execLimitLua(redisScript, Collections.singletonList(key),
-				String.valueOf(param.getDeduplicationTime() * 1000), score,
-				String.valueOf(param.getCountNum()), scoreValue)) {
+					String.valueOf(param.getDeduplicationTime() * 1000), score,
+					String.valueOf(param.getCountNum()), scoreValue)) {
 				filterReceiver.add(receiver);
 			}
 

@@ -4,11 +4,11 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.domain.AlipayOpenAppMiniTemplatemessageSendModel;
 import com.alipay.api.request.AlipayOpenAppMiniTemplatemessageSendRequest;
-import com.java3y.austin.common.dto.account.AlipayMiniProgramAccount;
-import com.java3y.austin.handler.alipay.AlipayMiniProgramAccountService;
-import com.java3y.austin.handler.config.AlipayClientSingleton;
-import com.java3y.austin.handler.domain.alipay.AlipayMiniProgramParam;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.dto.account.AlipayMiniProgramAccount;
+import com.taotao.cloud.message.biz.austin.handler.alipay.AlipayMiniProgramAccountService;
+import com.taotao.cloud.message.biz.austin.handler.config.AlipayClientSingleton;
+import com.taotao.cloud.message.biz.austin.handler.domain.alipay.AlipayMiniProgramParam;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -35,11 +35,11 @@ public class AlipayMiniProgramAccountServiceImpl implements AlipayMiniProgramAcc
 	@Override
 	public void send(AlipayMiniProgramParam miniProgramParam) throws AlipayApiException {
 		AlipayMiniProgramAccount miniProgramAccount = accountUtils.getAccountById(
-			miniProgramParam.getSendAccount(), AlipayMiniProgramAccount.class);
+				miniProgramParam.getSendAccount(), AlipayMiniProgramAccount.class);
 
 		AlipayClient client = AlipayClientSingleton.getSingleton(miniProgramAccount);
 		List<AlipayOpenAppMiniTemplatemessageSendRequest> request = assembleReq(miniProgramParam,
-			miniProgramAccount);
+				miniProgramAccount);
 		for (AlipayOpenAppMiniTemplatemessageSendRequest req : request) {
 			client.execute(req);
 		}
@@ -49,11 +49,11 @@ public class AlipayMiniProgramAccountServiceImpl implements AlipayMiniProgramAcc
 	 * 组装模板消息的参数
 	 */
 	private List<AlipayOpenAppMiniTemplatemessageSendRequest> assembleReq(
-		AlipayMiniProgramParam alipayMiniProgramParam,
-		AlipayMiniProgramAccount alipayMiniProgramAccount) {
+			AlipayMiniProgramParam alipayMiniProgramParam,
+			AlipayMiniProgramAccount alipayMiniProgramAccount) {
 		Set<String> receiver = alipayMiniProgramParam.getToUserId();
 		List<AlipayOpenAppMiniTemplatemessageSendRequest> requestList = new ArrayList<>(
-			receiver.size());
+				receiver.size());
 
 		for (String toUserId : receiver) {
 			AlipayOpenAppMiniTemplatemessageSendRequest request = new AlipayOpenAppMiniTemplatemessageSendRequest();

@@ -2,7 +2,6 @@ package com.taotao.cloud.message.biz.austin.support.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.CommonConstant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +81,7 @@ public class RedisUtils {
 			redisTemplate.executePipelined((RedisCallback<String>) connection -> {
 				for (Map.Entry<String, String> entry : keyValues.entrySet()) {
 					connection.setEx(entry.getKey().getBytes(), seconds,
-						entry.getValue().getBytes());
+							entry.getValue().getBytes());
 				}
 				return null;
 			});
@@ -142,7 +141,7 @@ public class RedisUtils {
 			redisTemplate.executePipelined((RedisCallback<String>) connection -> {
 				for (Map.Entry<String, String> entry : keyValues.entrySet()) {
 					connection.hIncrBy(entry.getKey().getBytes(), entry.getValue().getBytes(),
-						delta);
+							delta);
 					connection.expire(entry.getKey().getBytes(), seconds);
 				}
 				return null;

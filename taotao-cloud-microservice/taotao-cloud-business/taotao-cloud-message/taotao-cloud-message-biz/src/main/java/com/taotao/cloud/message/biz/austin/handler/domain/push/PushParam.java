@@ -1,7 +1,6 @@
 package com.taotao.cloud.message.biz.austin.handler.domain.push;
 
 
-import com.java3y.austin.common.domain.TaskInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

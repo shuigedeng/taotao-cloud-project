@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.handler.config;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayConfig;
 import com.alipay.api.DefaultAlipayClient;
-import com.java3y.austin.common.dto.account.AlipayMiniProgramAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.account.AlipayMiniProgramAccount;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +23,7 @@ public class AlipayClientSingleton {
 	}
 
 	public static DefaultAlipayClient getSingleton(
-		AlipayMiniProgramAccount alipayMiniProgramAccount) throws AlipayApiException {
+			AlipayMiniProgramAccount alipayMiniProgramAccount) throws AlipayApiException {
 		if (!alipayClientMap.containsKey(alipayMiniProgramAccount.getAppId())) {
 			synchronized (DefaultAlipayClient.class) {
 				if (!alipayClientMap.containsKey(alipayMiniProgramAccount.getAppId())) {

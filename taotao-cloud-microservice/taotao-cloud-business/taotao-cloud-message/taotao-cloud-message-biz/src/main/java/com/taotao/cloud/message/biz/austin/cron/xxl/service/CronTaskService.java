@@ -2,6 +2,7 @@ package com.taotao.cloud.message.biz.austin.cron.xxl.service;
 
 
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobGroup;
 import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
 
 /**

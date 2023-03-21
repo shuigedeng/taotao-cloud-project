@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication;
 
-import com.java3y.austin.handler.deduplication.build.Builder;
-import com.java3y.austin.handler.deduplication.service.DeduplicationService;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.build.Builder;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.service.DeduplicationService;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;

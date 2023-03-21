@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.config;
 
 import cn.hutool.core.thread.ExecutorBuilder;
-import com.java3y.austin.common.constant.ThreadPoolConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.ThreadPoolConstant;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;

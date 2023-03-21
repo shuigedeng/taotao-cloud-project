@@ -1,11 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
 import cn.hutool.core.collection.CollUtil;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.deduplication.DeduplicationParam;
-import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
-import com.java3y.austin.support.utils.RedisUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,13 +28,13 @@ public class SimpleLimitService extends AbstractLimitService {
 
 	@Override
 	public Set<String> limitFilter(AbstractDeduplicationService service, TaskInfo taskInfo,
-		DeduplicationParam param) {
+			DeduplicationParam param) {
 		Set<String> filterReceiver = new HashSet<>(taskInfo.getReceiver().size());
 		// 获取redis记录
 		Map<String, String> readyPutRedisReceiver = new HashMap<>(taskInfo.getReceiver().size());
 		//redis数据隔离
 		List<String> keys = deduplicationAllKey(service, taskInfo).stream()
-			.map(key -> LIMIT_TAG + key).collect(Collectors.toList());
+				.map(key -> LIMIT_TAG + key).collect(Collectors.toList());
 		Map<String, String> inRedisValue = redisUtils.mGet(keys);
 
 		for (String receiver : taskInfo.getReceiver()) {
@@ -66,7 +62,7 @@ public class SimpleLimitService extends AbstractLimitService {
 	 * @param readyPutRedisReceiver
 	 */
 	private void putInRedis(Map<String, String> readyPutRedisReceiver,
-		Map<String, String> inRedisValue, Long deduplicationTime) {
+			Map<String, String> inRedisValue, Long deduplicationTime) {
 		Map<String, String> keyValues = new HashMap<>(readyPutRedisReceiver.size());
 		for (Map.Entry<String, String> entry : readyPutRedisReceiver.entrySet()) {
 			String key = entry.getValue();

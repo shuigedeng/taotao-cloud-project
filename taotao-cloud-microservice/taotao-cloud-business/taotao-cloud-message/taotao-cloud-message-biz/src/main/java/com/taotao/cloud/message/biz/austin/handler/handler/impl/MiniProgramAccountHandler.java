@@ -4,13 +4,6 @@ import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.model.MiniProgramContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.utils.AccountUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,15 +30,15 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
 	public boolean handler(TaskInfo taskInfo) {
 		MiniProgramContentModel contentModel = (MiniProgramContentModel) taskInfo.getContentModel();
 		WxMaService wxMaService = accountUtils.getAccountById(taskInfo.getSendAccount(),
-			WxMaService.class);
+				WxMaService.class);
 		List<WxMaSubscribeMessage> wxMaSubscribeMessages = assembleReq(taskInfo.getReceiver(),
-			contentModel);
+				contentModel);
 		for (WxMaSubscribeMessage message : wxMaSubscribeMessages) {
 			try {
 				wxMaService.getSubscribeService().sendSubscribeMsg(message);
 			} catch (Exception e) {
 				log.info("MiniProgramAccountHandler#handler fail! param:{},e:{}",
-					JSON.toJSONString(taskInfo), Throwables.getStackTraceAsString(e));
+						JSON.toJSONString(taskInfo), Throwables.getStackTraceAsString(e));
 			}
 		}
 		return true;
@@ -55,15 +48,15 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
 	 * 组装发送模板信息参数
 	 */
 	private List<WxMaSubscribeMessage> assembleReq(Set<String> receiver,
-		MiniProgramContentModel contentModel) {
+			MiniProgramContentModel contentModel) {
 		List<WxMaSubscribeMessage> messageList = new ArrayList<>(receiver.size());
 		for (String openId : receiver) {
 			WxMaSubscribeMessage subscribeMessage = WxMaSubscribeMessage.builder()
-				.toUser(openId)
-				.data(getWxMaTemplateData(contentModel.getMiniProgramParam()))
-				.templateId(contentModel.getTemplateId())
-				.page(contentModel.getPage())
-				.build();
+					.toUser(openId)
+					.data(getWxMaTemplateData(contentModel.getMiniProgramParam()))
+					.templateId(contentModel.getTemplateId())
+					.page(contentModel.getPage())
+					.build();
 			messageList.add(subscribeMessage);
 		}
 		return messageList;

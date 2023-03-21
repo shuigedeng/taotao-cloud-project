@@ -2,9 +2,6 @@ package com.taotao.cloud.message.biz.austin.handler.deduplication.service;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.enums.DeduplicationType;
-import com.java3y.austin.handler.deduplication.limit.LimitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,7 +16,7 @@ public class ContentDeduplicationService extends AbstractDeduplicationService {
 
 	@Autowired
 	public ContentDeduplicationService(
-		@Qualifier("SlideWindowLimitService") LimitService limitService) {
+			@Qualifier("SlideWindowLimitService") LimitService limitService) {
 		this.limitService = limitService;
 		deduplicationType = DeduplicationType.CONTENT.getCode();
 	}
@@ -37,6 +34,6 @@ public class ContentDeduplicationService extends AbstractDeduplicationService {
 	@Override
 	public String deduplicationSingleKey(TaskInfo taskInfo, String receiver) {
 		return DigestUtil.md5Hex(taskInfo.getMessageTemplateId() + receiver
-			+ JSON.toJSONString(taskInfo.getContentModel()));
+				+ JSON.toJSONString(taskInfo.getContentModel()));
 	}
 }
