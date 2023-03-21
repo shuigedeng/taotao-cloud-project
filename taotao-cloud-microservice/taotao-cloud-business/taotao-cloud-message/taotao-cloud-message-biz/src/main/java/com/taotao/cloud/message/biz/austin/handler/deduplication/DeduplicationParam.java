@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.enums.AnchorState;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -10,7 +10,7 @@ public class AustinConstant {
 
 	/**
 	 * businessId默认的长度
-	 * 生成的逻辑：com.java3y.austin.support.utils.TaskInfoUtils#generateBusinessId(java.lang.Long,
+	 * 生成的逻辑：com.taotao.cloud.message.biz.austin.support.utils.TaskInfoUtils#generateBusinessId(java.lang.Long,
 	 * java.lang.Integer)
 	 */
 	public final static Integer BUSINESS_ID_LENGTH = 16;

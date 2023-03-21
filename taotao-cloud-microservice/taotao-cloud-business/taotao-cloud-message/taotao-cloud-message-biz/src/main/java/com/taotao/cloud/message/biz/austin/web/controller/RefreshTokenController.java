@@ -26,7 +26,7 @@ public class RefreshTokenController {
 	private RefreshGeTuiAccessTokenHandler refreshGeTuiAccessTokenHandler;
 
 	/**
-	 * 按照不同的渠道刷新对应的Token，channelType取值来源com.java3y.austin.common.enums.ChannelType
+	 * 按照不同的渠道刷新对应的Token，channelType取值来源com.taotao.cloud.message.biz.austin.common.enums.ChannelType
 	 *
 	 * @param channelType
 	 * @return

@@ -1,8 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.deduplication.DeduplicationParam;
-import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.service.AbstractDeduplicationService;
 import java.util.Set;
 
 /**
@@ -21,6 +20,6 @@ public interface LimitService {
 	 * @return 返回不符合条件的手机号码
 	 */
 	Set<String> limitFilter(AbstractDeduplicationService service, TaskInfo taskInfo,
-		DeduplicationParam param);
+			DeduplicationParam param);
 
 }

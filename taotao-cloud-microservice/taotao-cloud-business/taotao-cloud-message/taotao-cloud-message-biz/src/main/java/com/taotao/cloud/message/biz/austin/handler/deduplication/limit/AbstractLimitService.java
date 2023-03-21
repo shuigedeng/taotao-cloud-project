@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.service.AbstractDeduplicationService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public abstract class AbstractLimitService implements LimitService {
 	 * @return
 	 */
 	protected List<String> deduplicationAllKey(AbstractDeduplicationService service,
-		TaskInfo taskInfo) {
+			TaskInfo taskInfo) {
 		List<String> result = new ArrayList<>(taskInfo.getReceiver().size());
 		for (String receiver : taskInfo.getReceiver()) {
 			String key = deduplicationSingleKey(service, taskInfo, receiver);
@@ -30,7 +30,7 @@ public abstract class AbstractLimitService implements LimitService {
 
 
 	protected String deduplicationSingleKey(AbstractDeduplicationService service, TaskInfo taskInfo,
-		String receiver) {
+			String receiver) {
 
 		return service.deduplicationSingleKey(taskInfo, receiver);
 

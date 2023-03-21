@@ -5,14 +5,14 @@ import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
 import cn.binarywang.wx.miniapp.config.impl.WxMaRedisBetterConfigImpl;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.constant.SendAccountConstant;
-import com.java3y.austin.common.dto.account.WeChatMiniProgramAccount;
-import com.java3y.austin.common.dto.account.WeChatOfficialAccount;
-import com.java3y.austin.common.dto.account.sms.SmsAccount;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.support.dao.ChannelAccountDao;
-import com.java3y.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
+import com.taotao.cloud.message.biz.austin.common.dto.account.WeChatMiniProgramAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.account.WeChatOfficialAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.account.sms.SmsAccount;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.support.dao.ChannelAccountDao;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -64,19 +64,19 @@ public class AccountUtils {
 	public <T> T getAccountById(Integer sendAccountId, Class<T> clazz) {
 		try {
 			Optional<ChannelAccount> optionalChannelAccount = channelAccountDao.findById(
-				Long.valueOf(sendAccountId));
+					Long.valueOf(sendAccountId));
 			if (optionalChannelAccount.isPresent()) {
 				ChannelAccount channelAccount = optionalChannelAccount.get();
 				if (clazz.equals(WxMaService.class)) {
 					return (T) ConcurrentHashMapUtils.computeIfAbsent(miniProgramServiceMap,
-						channelAccount, account -> initMiniProgramService(
-							JSON.parseObject(account.getAccountConfig(),
-								WeChatMiniProgramAccount.class)));
+							channelAccount, account -> initMiniProgramService(
+									JSON.parseObject(account.getAccountConfig(),
+											WeChatMiniProgramAccount.class)));
 				} else if (clazz.equals(WxMpService.class)) {
 					return (T) ConcurrentHashMapUtils.computeIfAbsent(officialAccountServiceMap,
-						channelAccount, account -> initOfficialAccountService(
-							JSON.parseObject(account.getAccountConfig(),
-								WeChatOfficialAccount.class)));
+							channelAccount, account -> initOfficialAccountService(
+									JSON.parseObject(account.getAccountConfig(),
+											WeChatOfficialAccount.class)));
 				} else {
 					return JSON.parseObject(channelAccount.getAccountConfig(), clazz);
 				}
@@ -98,17 +98,17 @@ public class AccountUtils {
 	public <T> T getSmsAccountByScriptName(String scriptName, Class<T> clazz) {
 		try {
 			List<ChannelAccount> channelAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-				CommonConstant.FALSE, ChannelType.SMS.getCode());
+					CommonConstant.FALSE, ChannelType.SMS.getCode());
 			for (ChannelAccount channelAccount : channelAccountList) {
 				try {
 					SmsAccount smsAccount = JSON.parseObject(channelAccount.getAccountConfig(),
-						SmsAccount.class);
+							SmsAccount.class);
 					if (smsAccount.getScriptName().equals(scriptName)) {
 						return JSON.parseObject(channelAccount.getAccountConfig(), clazz);
 					}
 				} catch (Exception e) {
 					log.error("AccountUtils#getSmsAccount parse fail! e:{},account:{}",
-						Throwables.getStackTraceAsString(e), JSON.toJSONString(channelAccount));
+							Throwables.getStackTraceAsString(e), JSON.toJSONString(channelAccount));
 				}
 			}
 		} catch (Exception e) {
@@ -126,7 +126,7 @@ public class AccountUtils {
 	public WxMpService initOfficialAccountService(WeChatOfficialAccount officialAccount) {
 		WxMpService wxMpService = new WxMpServiceImpl();
 		WxMpRedisConfigImpl config = new WxMpRedisConfigImpl(redisTemplateWxRedisOps(),
-			SendAccountConstant.OFFICIAL_ACCOUNT_ACCESS_TOKEN_PREFIX);
+				SendAccountConstant.OFFICIAL_ACCOUNT_ACCESS_TOKEN_PREFIX);
 		config.setAppId(officialAccount.getAppId());
 		config.setSecret(officialAccount.getSecret());
 		config.setToken(officialAccount.getToken());
@@ -142,7 +142,7 @@ public class AccountUtils {
 	private WxMaService initMiniProgramService(WeChatMiniProgramAccount miniProgramAccount) {
 		WxMaService wxMaService = new WxMaServiceImpl();
 		WxMaRedisBetterConfigImpl config = new WxMaRedisBetterConfigImpl(redisTemplateWxRedisOps(),
-			SendAccountConstant.MINI_PROGRAM_TOKEN_PREFIX);
+				SendAccountConstant.MINI_PROGRAM_TOKEN_PREFIX);
 		config.setAppid(miniProgramAccount.getAppId());
 		config.setSecret(miniProgramAccount.getAppSecret());
 		wxMaService.setWxMaConfig(config);

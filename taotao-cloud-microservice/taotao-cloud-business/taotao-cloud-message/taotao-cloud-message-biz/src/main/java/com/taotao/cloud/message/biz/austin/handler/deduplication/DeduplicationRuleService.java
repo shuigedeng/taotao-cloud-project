@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication;
 
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.enums.DeduplicationType;
-import com.java3y.austin.support.service.ConfigService;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.DeduplicationType;
+import com.taotao.cloud.message.biz.austin.support.service.ConfigService;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +27,16 @@ public class DeduplicationRuleService {
 	public void duplication(TaskInfo taskInfo) {
 		// 配置样例：{"deduplication_10":{"num":1,"time":300},"deduplication_20":{"num":5}}
 		String deduplicationConfig = config.getProperty(DEDUPLICATION_RULE_KEY,
-			CommonConstant.EMPTY_JSON_OBJECT);
+				CommonConstant.EMPTY_JSON_OBJECT);
 
 		// 去重
 		List<Integer> deduplicationList = DeduplicationType.getDeduplicationList();
 		for (Integer deduplicationType : deduplicationList) {
 			DeduplicationParam deduplicationParam = deduplicationHolder.selectBuilder(
-				deduplicationType).build(deduplicationConfig, taskInfo);
+					deduplicationType).build(deduplicationConfig, taskInfo);
 			if (Objects.nonNull(deduplicationParam)) {
 				deduplicationHolder.selectService(deduplicationType)
-					.deduplication(deduplicationParam);
+						.deduplication(deduplicationParam);
 			}
 		}
 	}

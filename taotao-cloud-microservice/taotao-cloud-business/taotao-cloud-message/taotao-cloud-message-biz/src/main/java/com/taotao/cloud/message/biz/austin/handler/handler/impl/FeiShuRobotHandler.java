@@ -5,17 +5,7 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.account.FeiShuRobotAccount;
-import com.java3y.austin.common.dto.model.FeiShuRobotContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.SendMessageType;
-import com.java3y.austin.handler.domain.feishu.FeiShuRobotParam;
-import com.java3y.austin.handler.domain.feishu.FeiShuRobotResult;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -42,22 +32,22 @@ public class FeiShuRobotHandler extends BaseHandler implements Handler {
 	public boolean handler(TaskInfo taskInfo) {
 		try {
 			FeiShuRobotAccount account = accountUtils.getAccountById(taskInfo.getSendAccount(),
-				FeiShuRobotAccount.class);
+					FeiShuRobotAccount.class);
 			FeiShuRobotParam feiShuRobotParam = assembleParam(taskInfo);
 			String result = HttpRequest.post(account.getWebhook())
-				.header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-				.body(JSON.toJSONString(feiShuRobotParam))
-				.timeout(2000)
-				.execute().body();
+					.header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+					.body(JSON.toJSONString(feiShuRobotParam))
+					.timeout(2000)
+					.execute().body();
 			FeiShuRobotResult feiShuRobotResult = JSON.parseObject(result, FeiShuRobotResult.class);
 			if (feiShuRobotResult.getStatusCode() == 0) {
 				return true;
 			}
 			log.error("FeiShuRobotHandler#handler fail! result:{},params:{}",
-				JSON.toJSONString(feiShuRobotResult), JSON.toJSONString(taskInfo));
+					JSON.toJSONString(feiShuRobotResult), JSON.toJSONString(taskInfo));
 		} catch (Exception e) {
 			log.error("FeiShuRobotHandler#handler fail!e:{},params:{}",
-				Throwables.getStackTraceAsString(e), JSON.toJSONString(taskInfo));
+					Throwables.getStackTraceAsString(e), JSON.toJSONString(taskInfo));
 		}
 		return false;
 	}
@@ -66,32 +56,34 @@ public class FeiShuRobotHandler extends BaseHandler implements Handler {
 		FeiShuRobotContentModel contentModel = (FeiShuRobotContentModel) taskInfo.getContentModel();
 
 		FeiShuRobotParam param = FeiShuRobotParam.builder()
-			.msgType(SendMessageType.geFeiShuRobotTypeByCode(contentModel.getSendType())).build();
+				.msgType(SendMessageType.geFeiShuRobotTypeByCode(contentModel.getSendType()))
+				.build();
 
 		if (SendMessageType.TEXT.getCode().equals(contentModel.getSendType())) {
 			param.setContent(
-				FeiShuRobotParam.ContentDTO.builder().text(contentModel.getContent()).build());
+					FeiShuRobotParam.ContentDTO.builder().text(contentModel.getContent()).build());
 		}
 		if (SendMessageType.RICH_TEXT.getCode().equals(contentModel.getSendType())) {
 			List<FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.PostContentDTO> postContentDtoS = JSON.parseArray(
-				contentModel.getPostContent(),
-				FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.PostContentDTO.class);
+					contentModel.getPostContent(),
+					FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.PostContentDTO.class);
 			List<List<FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.PostContentDTO>> postContentList = new ArrayList<>();
 			postContentList.add(postContentDtoS);
 			FeiShuRobotParam.ContentDTO.PostDTO postDTO = FeiShuRobotParam.ContentDTO.PostDTO.builder()
-				.zhCn(FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.builder()
-					.title(contentModel.getTitle()).content(postContentList).build())
-				.build();
+					.zhCn(FeiShuRobotParam.ContentDTO.PostDTO.ZhCnDTO.builder()
+							.title(contentModel.getTitle()).content(postContentList).build())
+					.build();
 			param.setContent(FeiShuRobotParam.ContentDTO.builder().post(postDTO).build());
 		}
 		if (SendMessageType.SHARE_CHAT.getCode().equals(contentModel.getSendType())) {
 			param.setContent(
-				FeiShuRobotParam.ContentDTO.builder().shareChatId(contentModel.getMediaId())
-					.build());
+					FeiShuRobotParam.ContentDTO.builder().shareChatId(contentModel.getMediaId())
+							.build());
 		}
 		if (SendMessageType.IMAGE.getCode().equals(contentModel.getSendType())) {
 			param.setContent(
-				FeiShuRobotParam.ContentDTO.builder().imageKey(contentModel.getMediaId()).build());
+					FeiShuRobotParam.ContentDTO.builder().imageKey(contentModel.getMediaId())
+							.build());
 		}
 		if (SendMessageType.ACTION_CARD.getCode().equals(contentModel.getSendType())) {
 			//

@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.alipay;
 
 import com.alipay.api.AlipayApiException;
-import com.java3y.austin.handler.domain.alipay.AlipayMiniProgramParam;
+import com.taotao.cloud.message.biz.austin.handler.domain.alipay.AlipayMiniProgramParam;
 
 /**
  * @author jwq 支付宝小程序发送订阅消息接口
