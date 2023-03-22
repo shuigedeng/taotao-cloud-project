@@ -1,0 +1,2 @@
+com.taotao.cloud.log.api.feign.fallback.FeignSysLogApiFallback
+com.taotao.cloud.log.api.feign.fallback.FeignSysLogLoginApiFallback

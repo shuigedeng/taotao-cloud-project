@@ -7,7 +7,7 @@ dependencies {
     implementation "com.google.zxing:javase:3.5.1"
     implementation "cn.hutool:hutool-all:5.8.15"
 
-//    implementation fileTree(dir: "src/main/resource/lib", includes: ["*.jar"])
+    //implementation fileTree(dir: "src/main/resource/lib", includes: ["*.jar"])
     implementation files("src/main/resources/lib/opencv-2413.jar")
     implementation files("src/main/resources/sdk/jna.jar")
     implementation files("src/main/resources/sdk/examples.jar")
