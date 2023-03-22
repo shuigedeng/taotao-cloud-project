@@ -110,11 +110,11 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.0.6           
+ Spring               | 6.0.7           
  Spring Boot          | 3.0.4           
  Spring Cloud         | 2022.0.1        
  Spring Cloud Alibaba | 2022.0.0.0--RC1 
- Spring Cloud Tencent | 1.9.1--2022.0.0 
+ Spring Cloud Tencent | 1.10.2-2022.0.1 
  Spring Security      | 6.0.2           
  Mybatis Plus         | 3.5.3.1         
  Hutool               | 5.8.15          
@@ -160,7 +160,7 @@ Maven:
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**
   非功能性需求**
 * **主体框架**：采用最新的Spring Boot 3.0.4、Spring Cloud 2022.0.1、Spring Cloud Alibaba
-  2022.0.0.0--RC1版本进行设计
+  2022.0.0.0--RC1 版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
@@ -191,27 +191,16 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-demo -- demo模块
 │  ├─taotao-cloud-go -- go模块
 │  ├─taotao-cloud-microservice -- 微服务模块
-│  │  ├─taotao-cloud-monitor  -- 监控模块
+│  │  ├─taotao-cloud-business  -- 所有的业务模块
 │  │  ├─taotao-cloud-data-sync  -- 数据同步模块
-│  │  ├─taotao-cloud-auth  -- oauth2认证中心模块
-│  │  ├─taotao-cloud-customer  -- 客服模块
-│  │  ├─taotao-cloud-distribution  -- 营销/分销模块
+│  │  ├─taotao-cloud-data-analysis  -- 数据分析模块
 │  │  ├─taotao-cloud-front  -- 前端pc模块
 │  │  ├─taotao-cloud-gateway  -- 网关模块
-│  │  ├─taotao-cloud-goods  -- 商品模块
+│  │  ├─taotao-cloud-gateway-shenyu  -- 基于shenyu网关模块
 │  │  ├─taotao-cloud-graphql  -- graphql模块
-│  │  ├─taotao-cloud-member  -- 会员模块
-│  │  ├─taotao-cloud-message  -- 消息模块
-│  │  ├─taotao-cloud-open  -- 开放模块
-│  │  ├─taotao-cloud-operation  -- 运营模块
-│  │  ├─taotao-cloud-order  -- 订单模块
-│  │  ├─taotao-cloud-payment -- 支付模块
-│  │  ├─taotao-cloud-promotion  -- 促销模块
+│  │  ├─taotao-cloud-monitor  -- 监控模块
+│  │  ├─taotao-cloud-open-platform  -- 开放模块
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
-│  │  ├─taotao-cloud-report  -- 报表模块
-│  │  ├─taotao-cloud-stock  -- 库存模块
-│  │  ├─taotao-cloud-store  -- 店铺模块
-│  │  ├─taotao-cloud-sys  -- 系统模块
 │  │  ├─taotao-cloud-xxljob  -- xxl-job模块
 │  ├─taotao-cloud-netty -- netty模块
 │  ├─taotao-cloud-node -- node模块
