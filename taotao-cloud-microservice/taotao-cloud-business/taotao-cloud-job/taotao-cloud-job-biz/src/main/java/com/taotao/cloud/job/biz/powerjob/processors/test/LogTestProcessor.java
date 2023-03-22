@@ -1,4 +1,4 @@
-package com.taotao.cloud.job.biz.powerjob;
+package com.taotao.cloud.job.biz.powerjob.processors.test;
 
 import com.alibaba.fastjson.JSONObject;
 import java.util.Date;
@@ -12,9 +12,6 @@ import tech.powerjob.worker.log.OmsLogger;
 
 /**
  * LogTestProcessor
- *
- * @author tjq
- * @since 2022/9/18
  */
 @Component
 public class LogTestProcessor implements BasicProcessor {

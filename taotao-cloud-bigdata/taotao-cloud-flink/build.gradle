@@ -24,6 +24,15 @@ dependencies {
 
     implementation 'org.slf4j:slf4j-api:2.0.7'
     implementation 'org.slf4j:slf4j-log4j12:2.0.7'
-
 }
 
+configurations {
+    all {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force 'org.glassfish:javax.el:3.0.0'
+        }
+    }
+}

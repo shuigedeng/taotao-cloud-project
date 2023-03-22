@@ -23,14 +23,12 @@ jasypt:
       suffix: "]"
 
 easy-es:
-  enable: true # 是否开启EE自动配置
+  enable: false # 是否开启EE自动配置
   banner: false # 默认为true 打印banner 若您不期望打印banner,可配置为false
-  address: 192.168.10.200:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
+  address: 192.168.10.220:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
   schema: http # 默认为http
-  #如果无账号密码则可不配置此行
-  username:
-  #如果无账号密码则可不配置此行
-  password:
+  username: admin  #如果无账号密码则可不配置此行
+  password: admin     #如果无账号密码则可不配置此行
   connectTimeout: 5000 # 连接超时时间 单位:ms
   socketTimeout: 5000 # 通信超时时间 单位:ms
   keepAliveMillis: 18000 # 心跳策略时间 单位:ms
@@ -52,6 +50,7 @@ easy-es:
       enable-track-total-hits: true # 默认开启,查询若指定了size超过1w条时也会自动开启,开启后查询所有匹配数据,若不开启,会导致无法获取数据总条数,其它功能不受影响.
       refresh-policy: immediate # 数据刷新策略,默认为不刷新
       enable-must2-filter: false # 是否全局开启must查询类型转换为filter查询类型 默认为false不转换
+      batch-update-threshold: 10000
 
 redisson:
   single_server_config:
@@ -395,6 +394,250 @@ spring:
     compression:
       enabled: true
     encoder: proto3
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+    mongodb:
+      database: yapi
+      host: 192.168.10.200
+      port: 27017
+      #username:
+      #password:
+  elasticsearch:
+    uris: http://192.168.10.220:9200
+    password:
+    username:
+    connectionTimeout: 2
+    socketTimeout: 30
+    path-prefix: tt_
+  shardingsphere:
+    enabled: false
+    schema:
+      name: taotao-cloud-shardingsphere
+    props:
+      sql-show: true
+      check-table-metadata-enabled: true
+      kernel-executor-size: 20
+      max:
+        connections:
+          size:
+            pre:
+              #开启内存模式
+              query: 50
+    mode:
+      type: Cluster
+      overwrite: true
+      repository:
+        type: ZooKeeper
+        props:
+          namespace: taotao-cloud-shardingsphere
+          server-lists: 192.168.10.220:2181
+          retryIntervalMilliseconds: 500
+          maxRetries: 3
+          timeToLiveSeconds: 60
+          operationTimeoutMilliseconds: 500
+          digest:
+    datasource:
+      names: ds-master-0,ds-slave-0-1,ds-slave-0-2,ds-master-1,ds-slave-1-1,ds-slave-1-2
+      ds-master-0:
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3316/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+        auto-commit: true
+        connection-timeout: 30000
+        idle-timeout: 25000
+        login-timeout: 5
+        validation-timeout: 3000
+        max-lifetime: 50000
+        read-only: false
+        connection-test-query: SELECT 1
+        maximum-pool-size: 15
+        minimum-idle: 10
+        pool-name: DatebookHikariCP
+        register-mbeans: true
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+      ds-slave-0-1:
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3326/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+        auto-commit: true
+        connection-timeout: 30000
+        idle-timeout: 25000
+        login-timeout: 5
+        validation-timeout: 3000
+        max-lifetime: 50000
+        read-only: false
+        connection-test-query: SELECT 1
+        maximum-pool-size: 15
+        minimum-idle: 10
+        pool-name: DatebookHikariCP
+        register-mbeans: true
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+      ds-slave-0-2:
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3336/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+        auto-commit: true
+        connection-timeout: 30000
+        idle-timeout: 25000
+        login-timeout: 5
+        validation-timeout: 3000
+        max-lifetime: 50000
+        read-only: false
+        connection-test-query: SELECT 1
+        maximum-pool-size: 15
+        minimum-idle: 10
+        pool-name: DatebookHikariCP
+        register-mbeans: true
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+      ds-master-1:
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3376/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+        auto-commit: true
+        connection-timeout: 30000
+        idle-timeout: 25000
+        login-timeout: 5
+        validation-timeout: 3000
+        max-lifetime: 50000
+        read-only: false
+        connection-test-query: SELECT 1
+        maximum-pool-size: 15
+        minimum-idle: 10
+        pool-name: DatebookHikariCP
+        register-mbeans: true
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+      ds-slave-1-1:
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3386/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+        auto-commit: true
+        connection-timeout: 30000
+        idle-timeout: 25000
+        login-timeout: 5
+        validation-timeout: 3000
+        max-lifetime: 50000
+        read-only: false
+        connection-test-query: SELECT 1
+        maximum-pool-size: 15
+        minimum-idle: 10
+        pool-name: DatebookHikariCP
+        register-mbeans: true
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+      ds-slave-1-2:
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3396/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+        auto-commit: true
+        connection-timeout: 30000
+        idle-timeout: 25000
+        login-timeout: 5
+        validation-timeout: 3000
+        max-lifetime: 50000
+        read-only: false
+        connection-test-query: SELECT 1
+        maximum-pool-size: 15
+        minimum-idle: 10
+        pool-name: DatebookHikariCP
+        register-mbeans: true
+        data-source-properties:
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+    rules:
+      sql-parser:
+        sql-comment-parse-enabled: false
+      readwrite-splitting:
+        load-balancers:
+          round-robin:
+            type: ROUND_ROBIN
+            props:
+              worker-id: 123
+          random:
+            type: RANDOM
+            props:
+              worker-id: 123
+        data-sources:
+          ds-master-0:
+            type: Static
+            load-balancer-name: round-robin
+            props:
+              write-data-source-name: ds-master-0
+              read-data-source-names: ds-slave-0-1,ds-slave-0-2
+          ds-master-1:
+            type: Static
+            load-balancer-name: round-robin
+            props:
+              write-data-source-name: ds-master-1
+              read-data-source-names: ds-slave-1-1,ds-slave-1-2
+      sharding:
+        #BoundaryBasedRangeShardingAlgorithm	     基于分片边界的范围分片算法    BOUNDARY_RANGE
+        #VolumeBasedRangeShardingAlgorithm	     基于分片容量的范围分片算法    VOLUME_RANGE
+        #ComplexInlineShardingAlgorithm	         基于行表达式的复合分片算法    COMPLEX_INLINE
+        #AutoIntervalShardingAlgorithm	         基于可变时间范围的分片算法    AUTO_INTERVAL
+        #ClassBasedShardingAlgorithm	             基于自定义类的分片算法        CLASS_BASED
+        #HintInlineShardingAlgorithm	             基于行表达式的 Hint 分片算法  HINT_INLINE
+        #IntervalShardingAlgorithm	             基于固定时间范围的分片算法     INTERVAL
+        #HashModShardingAlgorithm	             基于哈希取模的分片算法        HASH_MOD
+        #InlineShardingAlgorithm	                 基于行表达式的分片算法        INLINE
+        #ModShardingAlgorithm	                 基于取模的分片算法            MOD
+        #CosIdModShardingAlgorithm	             基于 CosId 的取模分片算法     COSID_MOD
+        #CosIdIntervalShardingAlgorithm	         基于 CosId 的固定时间范围的分片算法 COSID_INTERVAL
+        #CosIdSnowflakeIntervalShardingAlgorithm  基于 CosId 的雪花ID固定时间范围的分片算法 COSID_INTERVAL_SNOWFLAKE
+        sharding-algorithms:
+          database-inline:
+            type: INLINE
+            props:
+              algorithm-expression: ds-master-$->{id % 2}
+          tt-sys-user-inline:
+            type: INLINE
+            props:
+              algorithm-expression: tt_sys_user_$->{id % 3}
+        default-database-strategy:
+          standard:
+            sharding-column: id
+            sharding-algorithm-name: database-inline
+        key-generators:
+          snowflake:
+            type: SNOWFLAKE
+            props:
+              worker-id: 123
+        tables:
+          tt_sys_user:
+            actual-data-nodes: ds-master-$->{0..1}.tt_sys_user_$->{0..2}
+            key-generate-strategy:
+              column: id
+              key-generator-name: snowflake
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: database-inline
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: tt-sys-user-inline
   datasource:
     #type: com.zaxxer.hikari.HikariDataSource
     #url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
@@ -605,16 +848,7 @@ spring:
           timeoutConnection: 50000
           timeoutSocket: 50000
           validateAfterInactivity: 200000
-  data:
-    elasticsearch:
-      repositories:
-        enabled: true
-    mongodb:
-      database: yapi
-      host: 192.168.10.200
-      port: 27017
-      #username:
-      #password:
+
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.10.200}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
@@ -655,214 +889,6 @@ spring:
   #      smtp:
   #        ssl:
   #          enable: true
-  shardingsphere:
-    enabled: true
-    schema:
-      name: taotao-cloud-shardingsphere
-    props:
-      sql-show: true
-      check-table-metadata-enabled: true
-      kernel-executor-size: 20
-    mode:
-      type: Cluster
-      overwrite: true
-      repository:
-        type: ZooKeeper
-        props:
-          namespace: taotao-cloud-shardingsphere
-          server-lists: 192.168.10.200:2181
-          retryIntervalMilliseconds: 500
-          maxRetries: 3
-          timeToLiveSeconds: 60
-          operationTimeoutMilliseconds: 500
-          digest:
-    datasource:
-      names: ds-master-0,ds-slave-0-1,ds-slave-0-2,ds-master-1,ds-slave-1-1,ds-slave-1-2
-      ds-master-0:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:3316/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        type: com.zaxxer.hikari.HikariDataSource
-        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-        auto-commit: true
-        connection-timeout: 30000
-        idle-timeout: 25000
-        login-timeout: 5
-        validation-timeout: 3000
-        max-lifetime: 50000
-        read-only: false
-        connection-test-query: SELECT 1
-        maximum-pool-size: 15
-        minimum-idle: 10
-        pool-name: DatebookHikariCP
-        register-mbeans: true
-        data-source-properties:
-          cachePrepStmts: true
-          prepStmtCacheSize: 250
-      ds-slave-0-1:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:3326/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        type: com.zaxxer.hikari.HikariDataSource
-        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-        auto-commit: true
-        connection-timeout: 30000
-        idle-timeout: 25000
-        login-timeout: 5
-        validation-timeout: 3000
-        max-lifetime: 50000
-        read-only: false
-        connection-test-query: SELECT 1
-        maximum-pool-size: 15
-        minimum-idle: 10
-        pool-name: DatebookHikariCP
-        register-mbeans: true
-        data-source-properties:
-          cachePrepStmts: true
-          prepStmtCacheSize: 250
-      ds-slave-0-2:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:3336/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        type: com.zaxxer.hikari.HikariDataSource
-        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-        auto-commit: true
-        connection-timeout: 30000
-        idle-timeout: 25000
-        login-timeout: 5
-        validation-timeout: 3000
-        max-lifetime: 50000
-        read-only: false
-        connection-test-query: SELECT 1
-        maximum-pool-size: 15
-        minimum-idle: 10
-        pool-name: DatebookHikariCP
-        register-mbeans: true
-        data-source-properties:
-          cachePrepStmts: true
-          prepStmtCacheSize: 250
-      ds-master-1:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:3376/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        type: com.zaxxer.hikari.HikariDataSource
-        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-        auto-commit: true
-        connection-timeout: 30000
-        idle-timeout: 25000
-        login-timeout: 5
-        validation-timeout: 3000
-        max-lifetime: 50000
-        read-only: false
-        connection-test-query: SELECT 1
-        maximum-pool-size: 15
-        minimum-idle: 10
-        pool-name: DatebookHikariCP
-        register-mbeans: true
-        data-source-properties:
-          cachePrepStmts: true
-          prepStmtCacheSize: 250
-      ds-slave-1-1:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:3386/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        type: com.zaxxer.hikari.HikariDataSource
-        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-        auto-commit: true
-        connection-timeout: 30000
-        idle-timeout: 25000
-        login-timeout: 5
-        validation-timeout: 3000
-        max-lifetime: 50000
-        read-only: false
-        connection-test-query: SELECT 1
-        maximum-pool-size: 15
-        minimum-idle: 10
-        pool-name: DatebookHikariCP
-        register-mbeans: true
-        data-source-properties:
-          cachePrepStmts: true
-          prepStmtCacheSize: 250
-      ds-slave-1-2:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:3396/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        type: com.zaxxer.hikari.HikariDataSource
-        username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-        password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-        auto-commit: true
-        connection-timeout: 30000
-        idle-timeout: 25000
-        login-timeout: 5
-        validation-timeout: 3000
-        max-lifetime: 50000
-        read-only: false
-        connection-test-query: SELECT 1
-        maximum-pool-size: 15
-        minimum-idle: 10
-        pool-name: DatebookHikariCP
-        register-mbeans: true
-        data-source-properties:
-          cachePrepStmts: true
-          prepStmtCacheSize: 250
-    rules:
-      sql-parser:
-        sql-comment-parse-enabled: false
-      readwrite-splitting:
-        load-balancers:
-          round-robin:
-            type: ROUND_ROBIN
-            props:
-              worker-id: 123
-          random:
-            type: RANDOM
-            props:
-              worker-id: 123
-        data-sources:
-          ds-master-0:
-            type: Static
-            load-balancer-name: round-robin
-            props:
-              write-data-source-name: ds-master-0
-              read-data-source-names: ds-slave-0-1,ds-slave-0-2
-          ds-master-1:
-            type: Static
-            load-balancer-name: round-robin
-            props:
-              write-data-source-name: ds-master-1
-              read-data-source-names: ds-slave-1-1,ds-slave-1-2
-      sharding:
-        sharding-algorithms:
-          database-inline:
-            type: INLINE
-            props:
-              algorithm-expression: ds-master-$->{id % 2}
-          tt-goods-user-inline:
-            type: INLINE
-            props:
-              algorithm-expression: tt_goods_user_$->{id % 3}
-        default-database-strategy:
-          standard:
-            sharding-column: id
-            sharding-algorithm-name: database-inline
-        key-generators:
-          snowflake:
-            type: SNOWFLAKE
-            props:
-              worker-id: 123
-        tables:
-          tt_goods_user:
-            actual-data-nodes: ds-master-$->{0..1}.tt_goods_user_$->{0..2}
-            key-generator:
-              column: id
-              key-generator-name: snowflake
-            database-strategy:
-              standard:
-                sharding-column: id
-                sharding-algorithm-name: database-inline
-            table-strategy:
-              standard:
-                sharding-column: id
-                sharding-algorithm-name: tt-goods-user-inline
   rabbitmq:
     host: 192.168.10.200
     port: 5672

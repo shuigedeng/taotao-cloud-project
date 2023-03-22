@@ -8,10 +8,15 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-shardingsphere"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"

@@ -29,10 +29,6 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-huawei"
 
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-data-shardingsphere"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"

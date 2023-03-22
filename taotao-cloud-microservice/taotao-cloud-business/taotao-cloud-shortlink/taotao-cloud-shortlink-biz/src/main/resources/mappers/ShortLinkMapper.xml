@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zc.shortlink.repository.mapper.ShortLinkMapper">
+    <resultMap id="BaseResultMap" type="com.zc.shortlink.repository.model.ShortLink">
+        <!--@mbg.generated-->
+        <!--@Table short_link.short_link-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="group_id" jdbcType="BIGINT" property="groupId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="origin_url" jdbcType="VARCHAR" property="originUrl"/>
+        <result column="domain" jdbcType="VARCHAR" property="domain"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="sign" jdbcType="VARCHAR" property="sign"/>
+        <result column="account_no" jdbcType="BIGINT" property="accountNo"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="expired" jdbcType="TIMESTAMP" property="expired"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id,
+        group_id,
+        title,
+        origin_url,
+        `domain`,
+        code,
+        sign,
+        account_no,
+        `state`,
+        expired,
+        create_time,
+        update_time,
+        is_deleted
+    </sql>
+</mapper>
