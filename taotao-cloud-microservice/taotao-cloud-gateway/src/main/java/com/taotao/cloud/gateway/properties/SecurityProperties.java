@@ -1,12 +1,12 @@
 package com.taotao.cloud.gateway.properties;
 
 import com.taotao.cloud.common.utils.context.ContextUtils;
+import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -29,6 +29,7 @@ public class SecurityProperties {
 		"/*/v3/**",
 		"/fallback",
 		"/favicon.ico",
+		"/startup-report",
 		"/swagger-resources/**",
 		"/webjars/**",
 		"/druid/**",
