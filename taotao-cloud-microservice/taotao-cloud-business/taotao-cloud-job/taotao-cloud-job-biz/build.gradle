@@ -40,11 +40,58 @@ description = "定时任务中心"
 archivesBaseName = 'taotao-cloud-job'
 
 graalvmNative {
+    //禁用工具链检测
+    //toolchainDetection = false
+
+    //agent {
+    //    defaultMode = "standard" // Default agent mode if one isn't specified using `-Pagent=mode_name`
+    //    enabled = true // Enables the agent
+    //    modes {
+    //        // The standard agent mode generates metadata without conditions.
+    //        standard {
+    //        }
+    //        // The conditional agent mode generates metadata with conditions.
+    //        conditional {
+    //            userCodeFilterPath = "path-to-filter.json" // Path to a filter file that determines classes which will be used in the metadata conditions.
+    //            extraFilterPath = "path-to-another-filter.json" // Optional, extra filter used to further filter the collected metadata.
+    //        }
+    //        // The direct agent mode allows users to directly pass options to the agent.
+    //        direct {
+    //            // {output_dir} is a special string expanded by the plugin to where the agent files would usually be output.
+    //            options.add("config-output-dir={output_dir}")
+    //            options.add("experimental-configuration-with-origins")
+    //        }
+    //    }
+    //    callerFilterFiles.from("filter.json")
+    //    accessFilterFiles.from("filter.json")
+    //    builtinCallerFilter = true
+    //    builtinHeuristicFilter = true
+    //    enableExperimentalPredefinedClasses = false
+    //    enableExperimentalUnsafeAllocationTracing = false
+    //    trackReflectionMetadata = true
+    //    // Copies metadata collected from tasks into the specified directories.
+    //    metadataCopy {
+    //        inputTaskNames.add("test") // Tasks previously executed with the agent attached.
+    //        outputDirectories.add("src/main/resources/META-INF/native-image")
+    //        mergeWithExisting = true // Instead of copying, merge with existing metadata in the output directories.
+    //    }
+    //    /*
+    //    By default, if `-Pagent` is specified, all tasks that extend JavaForkOptions are instrumented.
+    //    This can be limited to only specific tasks that match this predicate.
+    //     */
+    //    tasksToInstrumentPredicate = t -> true
+    //}
+
     binaries {
         //all {
         //    resources.autodetect()
         //}
         main {
+            //javaLauncher = javaToolchains.launcherFor {
+            //    languageVersion = JavaLanguageVersion.of(8)
+            //    vendor = JvmVendorSpec.matching("GraalVM Community")
+            //}
+
             imageName.set('taotao-cloud-job')
             buildArgs.add('--verbose')
             buildArgs.add('--add-opens=java.base/java.nio=ALL-UNNAMED')
@@ -75,7 +122,7 @@ graalvmNative {
     }
 }
 
-//nativeBuild {
+//nativeCompile {
 //    buildArgs('-H:ReflectionConfigurationFiles=../../../src/main/resources/reflection-config.json')
 //    buildArgs('-H:ReflectionConfigurationFiles=./reflection-config.json')
 //}
