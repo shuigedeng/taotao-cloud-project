@@ -3,7 +3,7 @@ plugins {
 
     //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
     //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
-    id "io.freefair.maven-plugin" version "8.0.0-rc1"
+    id "io.freefair.maven-plugin" version "8.0.1"
 
 //    //https://github.com/britter/maven-plugin-development/blob/main/sample/gradle-producer-build
 //    //https://plugins.gradle.org/plugin/de.benediktritter.maven-plugin-development
@@ -18,9 +18,9 @@ plugins {
 apply plugin: "io.freefair.maven-plugin"
 
 dependencies {
-    implementation 'org.apache.maven:maven-core:3.8.6'
-    implementation 'org.apache.maven:maven-model:3.8.6'
-    implementation 'org.apache.maven:maven-plugin-api:3.8.6'
+    implementation 'org.apache.maven:maven-core:3.9.1'
+    implementation 'org.apache.maven:maven-model:3.9.1'
+    implementation 'org.apache.maven:maven-plugin-api:3.9.1'
 
     implementation "com.google.guava:guava:31.1-jre"
 
