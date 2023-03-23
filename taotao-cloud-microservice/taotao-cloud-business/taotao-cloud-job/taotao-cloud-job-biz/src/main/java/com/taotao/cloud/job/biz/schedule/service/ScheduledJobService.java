@@ -19,22 +19,25 @@ public interface ScheduledJobService {
 	 * 新增任务
 	 *
 	 * @param param 新增参数
+	 * @return
 	 */
-	void addTask(TaskParam param);
+	Boolean addTask(TaskParam param);
 
 	/**
 	 * 修改任务
 	 *
 	 * @param param 修改参数
+	 * @return
 	 */
-	void updateTask(TaskParam param);
+	Boolean updateTask(TaskParam param);
 
 	/**
 	 * 执行任务
 	 *
 	 * @param id 任务id
+	 * @return
 	 */
-	void invokeTask(String id);
+	Boolean invokeTask(String id);
 
 
 	/**
@@ -42,21 +45,21 @@ public interface ScheduledJobService {
 	 *
 	 * @param id 任务id
 	 */
-	void stopTask(String id);
+	Boolean stopTask(String id);
 
 	/**
 	 * 删除任务
 	 *
 	 * @param id 任务id
 	 */
-	void deleteTask(String id);
+	Boolean deleteTask(String id);
 
 	/**
 	 * 禁用任务
 	 *
 	 * @param id 任务id
 	 */
-	void forbidTask(String id);
+	Boolean forbidTask(String id);
 
 	/**
 	 * 查询详情

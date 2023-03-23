@@ -456,3 +456,6 @@ management:
   health:
     elasticsearch:
       enabled: false
+
+generator:
+  template:

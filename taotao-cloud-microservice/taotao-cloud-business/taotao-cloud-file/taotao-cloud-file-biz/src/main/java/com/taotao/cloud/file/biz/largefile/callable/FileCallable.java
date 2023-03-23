@@ -22,8 +22,6 @@ public class FileCallable implements Callable<FileUpload> {
 
 	@Override
 	public FileUpload call() throws Exception {
-
-		FileUpload fileUploadDTO = UploadContext.INSTANCE.getInstance(mode).sliceUpload(param);
-		return fileUploadDTO;
+		return UploadContext.INSTANCE.getInstance(mode).sliceUpload(param);
 	}
 }

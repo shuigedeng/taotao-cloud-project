@@ -56,6 +56,7 @@ public class FileController {
 	@PostMapping(value = "/upload")
 	@ResponseBody
 	public Result<FileUpload> upload(FileUploadRequest fileUploadRequestDTO) throws IOException {
+
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		FileUpload fileUploadDTO = null;
 		if (isMultipart) {

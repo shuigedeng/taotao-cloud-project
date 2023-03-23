@@ -1,13 +1,16 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-log:taotao-cloud-log-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot-starter"
+    }
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-data-shardingsphere"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"

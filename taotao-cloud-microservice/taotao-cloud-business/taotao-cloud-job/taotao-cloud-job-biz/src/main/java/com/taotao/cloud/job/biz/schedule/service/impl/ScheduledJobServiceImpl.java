@@ -37,24 +37,14 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 	@Resource
 	private ScheduledJobMapper scheduledJobMapper;
 
-
-	/***
-	 *任务列表查询
-	 * @return o
-	 */
 	@Override
 	public List<ScheduledJob> taskList() {
 		return scheduledJobLogMapper.selectList(new QueryWrapper<>());
 	}
 
-	/**
-	 * 新增列表
-	 *
-	 * @param param 新增参数
-	 */
 	@Override
 	@Transactional
-	public void addTask(TaskParam param) {
+	public Boolean addTask(TaskParam param) {
 		// 解析表达式，此表达式由后端根据规则进行解析，可以直接由前端进行传递
 		String cron = JobUtils.dateConvertToCron(param);
 
@@ -92,15 +82,13 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 		ScheduledTask scheduledTask = new ScheduledTask();
 		BeanUtil.copyProperties(scheduledJob, scheduledTask);
 		taskManager.start(scheduledTask, runType);
+
+		return true;
 	}
 
-	/**
-	 * 修改任务
-	 *
-	 * @param param 修改参数
-	 */
 	@Override
-	public void updateTask(TaskParam param) {
+	@Transactional
+	public Boolean updateTask(TaskParam param) {
 		ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(param.getId());
 		if (scheduledJob == null) {
 			throw new RuntimeException("更新失败,任务不存在");
@@ -130,16 +118,14 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 		ScheduledTask scheduledTask = new ScheduledTask();
 		BeanUtil.copyProperties(scheduledJob, scheduledTask);
 		taskManager.start(scheduledTask, runType);
+
+		return true;
 	}
 
 
-	/**
-	 * 执行任务
-	 *
-	 * @param id 任务id
-	 */
 	@Override
-	public void invokeTask(String id) {
+	@Transactional
+	public Boolean invokeTask(String id) {
 		ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
 
 		if (scheduledJob == null) {
@@ -150,30 +136,26 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 		BeanUtil.copyProperties(scheduledJob, scheduledTask);
 		// 执行
 		taskManager.start(scheduledTask, TaskRunTypeConstant.SYSTEM_RUN);
+
+		return true;
 	}
 
-	/**
-	 * 暂停任务
-	 *
-	 * @param id 任务id
-	 */
 	@Override
-	public void stopTask(String id) {
+	@Transactional
+	public Boolean stopTask(String id) {
 		ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
 
 		if (scheduledJob == null) {
 			throw new RuntimeException("暂停任务失败,任务不存在");
 		}
 		taskManager.stop(id);
+
+		return true;
 	}
 
-	/**
-	 * 删除任务
-	 *
-	 * @param id 任务id
-	 */
 	@Override
-	public void deleteTask(String id) {
+	@Transactional
+	public Boolean deleteTask(String id) {
 		ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
 
 		if (scheduledJob == null) {
@@ -182,15 +164,13 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 		taskManager.stop(id);
 		//数据库删除
 		scheduledJobLogMapper.deleteById(id);
+
+		return true;
 	}
 
-	/**
-	 * 禁用任务
-	 *
-	 * @param id 任务id
-	 */
 	@Override
-	public void forbidTask(String id) {
+	@Transactional
+	public Boolean forbidTask(String id) {
 		ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
 
 		if (scheduledJob == null) {
@@ -204,13 +184,10 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 		scheduledJob.setStatus(1);
 
 		scheduledJobLogMapper.updateById(scheduledJob);
+
+		return true;
 	}
 
-	/**
-	 * 查询详情
-	 *
-	 * @param id 任务id
-	 */
 	@Override
 	public TaskVo getTaskById(String id) {
 		ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);

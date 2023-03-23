@@ -8,28 +8,28 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(title = "定时任务")
 public class QuartzJobDTO {
 
-	@Schema(description = "主键")
+	@Schema(description = "主键 创建时不传，更新时传", example = "1")
 	private Long id;
 
-	@Schema(description = "任务名称")
+	@Schema(description = "任务名称 最好是bean名称", example = "demoJob")
 	private String jobName;
 
-	@Schema(description = "任务组名称")
+	@Schema(description = "任务组名称 最好是bean名称", example = "demoJobGroup")
 	private String groupName;
 
-	@Schema(description = "Bean名称")
+	@Schema(description = "Bean名称", example = "demoJob")
 	private String beanName;
 
-	@Schema(description = "任务类名 和 bean名称 互斥")
+	@Schema(description = "任务类名 和 bean名称 互斥", example = "com.taotao.cloud.xx.job.demoJob")
 	private String jobClassName;
 
-	@Schema(description = "cron表达式")
+	@Schema(description = "cron表达式", example = "* 0/5 * * * ?")
 	private String cronExpression;
 
-	@Schema(description = "方法名称")
+	@Schema(description = "方法名称", example = "handleMessage")
 	private String methodName;
 
-	@Schema(description = "参数")
+	@Schema(description = "参数", example = "demo")
 	private String params;
 
 	@Schema(description = "备注")

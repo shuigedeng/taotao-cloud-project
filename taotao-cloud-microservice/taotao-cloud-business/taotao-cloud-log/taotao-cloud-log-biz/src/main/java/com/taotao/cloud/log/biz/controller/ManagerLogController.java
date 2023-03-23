@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "工具管理端-日志管理API", description = "工具管理端-日志管理API")
-@RequestMapping("/sys/tools/log")
+@RequestMapping("/log")
 public class ManagerLogController {
 
 	private final ILogService logService;

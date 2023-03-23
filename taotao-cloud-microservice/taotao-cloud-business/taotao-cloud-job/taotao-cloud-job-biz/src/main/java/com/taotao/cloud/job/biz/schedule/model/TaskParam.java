@@ -1,14 +1,17 @@
 package com.taotao.cloud.job.biz.schedule.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.StringUtils;
 
-
+@Schema(title = "scheduled定时任务")
 public class TaskParam {
 
 	//任务id
+	@Schema(description = "主键 创建时不传，更新时传", example = "1")
 	private String id;
 
 	//任务名
+	@Schema(description = "任务名", example = "1")
 	private String name;
 
 	/*
@@ -17,25 +20,33 @@ public class TaskParam {
 		String字符串类型，包含'、boolean布尔类型，等于true或者false
 		long长整形，包含L、double浮点类型，包含D、其他类型归类为整形
 	 */
+	@Schema(description = "目标字符串", example = "demoJob.handleMessage('aaa', true, 500L, 1.23D)")
 	private String invokeTarget;
 
-
 	//周期(month、week、day、hour、minute、secods)
+	@Schema(description = "周期(month、week、day、hour、minute、secods)", example = "month")
 	private String cycle;
 
 	//执行策略(1手动，2-自动）
+	@Schema(description = "执行策略(1手动，2-自动）", example = "1")
 	private Integer policy;
 
+	@Schema(description = "周", example = "1")
 	private String week;
 
+	@Schema(description = "月", example = "1")
 	private String month;
 
+	@Schema(description = "天", example = "1")
 	private String day;
 
+	@Schema(description = "销售", example = "1")
 	private String hour;
 
+	@Schema(description = "分钟", example = "1")
 	private String minute;
 
+	@Schema(description = "秒", example = "1")
 	private String secods;
 
 	public String getId() {

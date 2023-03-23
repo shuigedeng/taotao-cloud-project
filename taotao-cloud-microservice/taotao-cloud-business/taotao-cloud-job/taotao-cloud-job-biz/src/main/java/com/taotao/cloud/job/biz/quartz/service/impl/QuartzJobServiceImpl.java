@@ -59,14 +59,14 @@ public class QuartzJobServiceImpl implements QuartzJobService {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void addJob(QuartzJobDTO quartzJobDTO) {
-		QuartzJobEntity quartzJobEntity = new QuartzJobEntity();
-		BeanUtil.copyProperties(quartzJobDTO, quartzJobEntity);
+		QuartzJobEntity quartzJobEntity = BeanUtil.copyProperties(quartzJobDTO,
+			QuartzJobEntity.class);
 		quartzJobEntity.setState(QuartzJobCode.STOP);
 
-		QuartzJob quartzJob = new QuartzJob();
-		BeanUtil.copyProperties(quartzJobEntity, quartzJob);
-
 		if (quartzJobMapper.insert(quartzJobEntity) > 0) {
+			QuartzJob quartzJob = new QuartzJob();
+			BeanUtil.copyProperties(quartzJobEntity, quartzJob);
+
 			quartzManager.addJob(quartzJob);
 		}
 	}

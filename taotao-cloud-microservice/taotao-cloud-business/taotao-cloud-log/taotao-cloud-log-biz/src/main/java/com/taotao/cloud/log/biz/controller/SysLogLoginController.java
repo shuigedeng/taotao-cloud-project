@@ -45,12 +45,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-/**
- * @program: logs
- * @description:
- * @author: Sinda
- * @create: 2022-03-19 20:42:34
- */
 @RestController
 @AllArgsConstructor
 @RequestMapping("/sysLogLogin")
