@@ -1,4 +1,4 @@
-package com.taotao.cloud.open.platform.config;
+package com.taotao.cloud.open.platform.biz.config;
 
 import com.taotao.cloud.openapi.common.enums.AsymmetricCryEnum;
 import com.taotao.cloud.openapi.common.enums.CryModeEnum;

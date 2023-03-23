@@ -16,7 +16,9 @@ import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +32,7 @@ public class QuartzJobController {
 	@Resource
 	private QuartzJobService quartzJobService;
 
-	@PostMapping("/add")
+	@PostMapping("/job")
 	@Operation(summary = "添加任务", description = "添加任务")
 	@RequestLogger
 	public Result<Boolean> add(@RequestBody QuartzJobDTO quartzJobDTO) {
@@ -41,7 +43,7 @@ public class QuartzJobController {
 		return Result.success(true);
 	}
 
-	@PostMapping("/update")
+	@PutMapping("/job")
 	@Operation(summary = "更新任务", description = "更新任务")
 	@RequestLogger
 	public Result<Boolean> update(@RequestBody QuartzJobDTO quartzJobDTO) {
@@ -52,63 +54,63 @@ public class QuartzJobController {
 		return Result.success(true);
 	}
 
-	@GetMapping("/page")
+	@GetMapping("/job/page")
 	@Operation(summary = "分页查询任务列表", description = "分页查询任务列表")
 	@RequestLogger
 	public Result<PageResult<QuartzJobVO>> page(QuartzJobQuery quartzJobQuery) {
 		return Result.success(quartzJobService.page(quartzJobQuery));
 	}
 
-	@GetMapping("/findById")
+	@GetMapping("/job/{id}")
 	@Operation(summary = "单个任务", description = "单个任务")
 	@RequestLogger
-	public Result<QuartzJobVO> findById(Long id) {
+	public Result<QuartzJobVO> findById(@PathVariable Long id) {
 		QuartzJobEntity quartzJob = quartzJobService.findById(id);
 
 		QuartzJobVO quartzJobVO = BeanUtil.copyProperties(quartzJob, QuartzJobVO.class);
 		return Result.success(quartzJobVO);
 	}
 
-	@PostMapping("/start")
+	@PostMapping("/job/start/{id}")
 	@Operation(summary = "启动任务", description = "启动任务")
 	@RequestLogger
-	public Result<Boolean> start(Long id) {
+	public Result<Boolean> start(@PathVariable Long id) {
 		quartzJobService.start(id);
 		return Result.success(true);
 	}
 
-	@PostMapping("/stop")
+	@PostMapping("/job/stop/{id}")
 	@Operation(summary = "停止任务", description = "停止任务")
 	@RequestLogger
-	public Result<Boolean> stop(Long id) {
+	public Result<Boolean> stop(@PathVariable Long id) {
 		quartzJobService.stopJob(id);
 		return Result.success(true);
 	}
 
-	@PostMapping("/execute")
+	@PostMapping("/job/execute/{id}")
 	@Operation(summary = "立即执行任务", description = "立即执行任务")
 	@RequestLogger
-	public Result<Boolean> execute(Long id) {
+	public Result<Boolean> execute(@PathVariable Long id) {
 		quartzJobService.runOnce(id);
 		return Result.success(true);
 	}
 
-	@DeleteMapping("/delete")
+	@DeleteMapping("/job/{id}")
 	@Operation(summary = "删除任务", description = "删除任务")
 	@RequestLogger
-	public Result<Boolean> delete(Long id) {
+	public Result<Boolean> delete(@PathVariable Long id) {
 		quartzJobService.deleteJob(id);
 		return Result.success(true);
 	}
 
-	@GetMapping("/judgeJobClass")
+	@GetMapping("/job/judge-job-class")
 	@Operation(summary = "判断是否是定时任务类", description = "判断是否是定时任务类")
 	@RequestLogger
 	public Result<String> judgeJobClass(String jobClassName) {
 		return Result.success(quartzJobService.judgeJobClass(jobClassName));
 	}
 
-	@PostMapping("/syncJobStatus")
+	@PostMapping("/job/sync-job-status")
 	@Operation(summary = "同步定时任务状态", description = "同步定时任务状态")
 	@RequestLogger
 	public Result<Boolean> syncJobStatus() {

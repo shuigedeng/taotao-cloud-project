@@ -1,4 +1,4 @@
-package com.taotao.cloud.open.platform.openapi;
+package com.taotao.cloud.open.platform.biz.openapi;
 
 import com.taotao.cloud.openapi.server.annotation.OpenApi;
 import com.taotao.cloud.openapi.server.annotation.OpenApiMethod;

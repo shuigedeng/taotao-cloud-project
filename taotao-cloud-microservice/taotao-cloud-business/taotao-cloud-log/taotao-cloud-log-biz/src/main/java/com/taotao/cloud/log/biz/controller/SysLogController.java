@@ -37,14 +37,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @program: XHuiCloud
- * @description: SysLogController
- * @author: Sinda
- * @create: 2020-02-01 00:32
- */
 @RestController
-@RequestMapping("/log")
+@RequestMapping("/sys/log")
 @AllArgsConstructor
 @Tag(name = "工具管理端-日志管理模块", description = "工具管理端-日志管理模块")
 public class SysLogController {

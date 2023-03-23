@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.open.platform;
+package com.taotao.cloud.open.platform.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * TaoTaoCloudOpenApplication
@@ -27,8 +26,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @version 2022.03
  * @since 2020/11/26 下午7:55
  */
-@EnableDiscoveryClient
-@SpringBootApplication
+@TaoTaoCloudApplication
 public class TaoTaoCloudOpenPlatformApplication {
 
 	public static void main(String[] args) {

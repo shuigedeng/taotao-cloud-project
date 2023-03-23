@@ -24,9 +24,9 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
 	public abstract boolean upload(FileUploadRequest param);
 
 	protected File createTmpFile(FileUploadRequest param) {
-
 		FilePathUtil filePathUtil = SpringContextHolder.getBean(FilePathUtil.class);
 		param.setPath(FileUtil.withoutHeadAndTailDiagonal(param.getPath()));
+
 		String fileName = param.getFile().getOriginalFilename();
 		String uploadDirPath = filePathUtil.getPath(param);
 		String tempFileName = fileName + "_tmp";

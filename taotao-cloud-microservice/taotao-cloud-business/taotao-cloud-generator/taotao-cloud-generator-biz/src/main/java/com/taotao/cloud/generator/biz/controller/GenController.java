@@ -10,7 +10,6 @@ import com.taotao.cloud.generator.biz.domain.GenTable;
 import com.taotao.cloud.generator.biz.domain.GenTableColumn;
 import com.taotao.cloud.generator.biz.service.IGenTableColumnService;
 import com.taotao.cloud.generator.biz.service.IGenTableService;
-import com.taotao.cloud.web.base.controller.BaseController;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/tool/gen")
-public class GenController extends BaseController {
+public class GenController {
 
 	private String prefix = "tool/gen";
 
@@ -55,7 +54,7 @@ public class GenController extends BaseController {
 	@Autowired
 	private IGenTableColumnService genTableColumnService;
 
-	@RequiresPermissions("tool:gen:view")
+	//@RequiresPermissions("tool:gen:view")
 	@GetMapping()
 	public String gen() {
 		return prefix + "/gen";
@@ -64,7 +63,7 @@ public class GenController extends BaseController {
 	/**
 	 * 查询代码生成列表
 	 */
-	@RequiresPermissions("tool:gen:list")
+	//@RequiresPermissions("tool:gen:list")
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo genList(GenTable genTable) {

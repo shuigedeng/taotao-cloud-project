@@ -9,7 +9,7 @@ import org.springframework.boot.SpringApplication;
 public class TaoTaoCloudGeneratorApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-report");
+		PropertyUtils.setDefaultProperty("taotao-cloud-generator");
 
 		SpringApplication.run(TaoTaoCloudGeneratorApplication.class, args);
 	}
