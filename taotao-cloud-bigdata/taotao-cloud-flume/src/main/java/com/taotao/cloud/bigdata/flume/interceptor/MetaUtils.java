@@ -16,6 +16,7 @@
 package com.taotao.cloud.bigdata.flume.interceptor;
 
 
+import com.alibaba.fastjson2.JSONObject;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
