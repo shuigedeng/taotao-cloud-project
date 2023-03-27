@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ZhuziTxManagerApplication {
+public class TxManagerApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ZhuziTxManagerApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(TxManagerApplication.class, args);
+	}
 
 }

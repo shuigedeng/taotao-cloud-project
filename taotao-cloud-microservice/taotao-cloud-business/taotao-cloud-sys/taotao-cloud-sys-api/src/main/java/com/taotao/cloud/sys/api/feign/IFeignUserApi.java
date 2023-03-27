@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, contextId = "feignUserApi", fallbackFactory = FeignUserApiFallback.class)
+@FeignClient(name = ServiceName.TAOTAO_CLOUD_SYS, contextId = "IFeignUserApi", fallbackFactory = FeignUserApiFallback.class)
 public interface IFeignUserApi {
 
 	/**
