@@ -861,6 +861,10 @@ taotao:
       enabled: true
     xss:
       enabled: true
+      ignore-paths:
+        - /actuator/**
+      patterns:
+        - /job/**
     sign:
       enabled: true
     web:
