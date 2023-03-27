@@ -31,12 +31,12 @@ pluginManagement {
 
 rootProject.name = 'taotao-cloud-project'
 
-def oneLayerProjects = [ 'scala', 'netty', 'python', 'demo', 'node', 'go']
+def oneLayerProjects = ['scala', 'netty', 'python', 'demo', 'node', 'go']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
-def twoLayerProjects = ['bigdata', 'rpc', 'distributed-tx', 'plugin']
+def twoLayerProjects = ['bigdata', 'plugin']
 for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
@@ -48,7 +48,7 @@ for (project in twoLayerProjects) {
     }
 }
 
-def threeLayerProjects = ['microservice', 'warehouse']
+def threeLayerProjects = ['microservice', 'warehouse', 'custom']
 for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
