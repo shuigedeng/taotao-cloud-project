@@ -148,6 +148,15 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.17
 
+  hertzbeat:
+    image: tancloud/hertzbeat
+    container_name: hertzbeat
+    ports:
+      - "1157:1157"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.99
+
   #arthas:
   #  image: hengyunabc/arthas:latest
   #  container_name: pyroscope
