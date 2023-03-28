@@ -16,7 +16,12 @@
 package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.enums.UserObjectEnum;
 import com.taotao.cloud.web.base.entity.SuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,11 +29,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import java.util.Objects;
 
 /**
  * 用户-角色第三方表
@@ -57,13 +57,15 @@ public class UserRelation extends SuperEntity<UserRelation, Long> {
 	private Long userId;
 
 	/**
-	 * 对象类型 dept position role org dataScope
+	 * 对象类型 org dept position role dataScope
+	 *
+	 * @see UserObjectEnum
 	 */
 	@Column(name = "object_type", columnDefinition = "varchar(255) not null comment '对象类型'")
 	private String objectType;
 
 	/**
-	 * 对象id deptId positionId roleId orgId dataScopeId
+	 * 对象id orgId deptId positionId roleId dataScopeId
 	 */
 	@Column(name = "object_id", columnDefinition = "bigint not null comment '对象id'")
 	private Long objectId;

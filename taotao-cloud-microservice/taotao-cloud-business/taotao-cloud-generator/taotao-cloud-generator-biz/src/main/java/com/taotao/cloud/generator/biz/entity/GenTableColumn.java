@@ -1,4 +1,4 @@
-package com.taotao.cloud.generator.biz.domain;
+package com.taotao.cloud.generator.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -28,11 +28,11 @@ public class GenTableColumn extends BaseSuperEntity<GenTableColumn, Long> {
 
 	public static final String TABLE_NAME = "tt_gen_table_column";
 
-	/**
-	 * 归属表编号
-	 */
-	@Column(name = "table_id", columnDefinition = "bigint not null comment '归属表编号'")
-	private Long tableId;
+	///**
+	// * 归属表编号
+	// */
+	//@Column(name = "table_id", columnDefinition = "bigint not null comment '归属表编号'")
+	//private Long tableId;
 
 	/**
 	 * 列名称

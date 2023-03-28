@@ -18,7 +18,11 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.SexTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,11 +30,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import java.util.Objects;
 
 /**
  * 系统用户表
@@ -48,7 +47,7 @@ import java.util.Objects;
 @Table(name = User.TABLE_NAME)
 @TableName(User.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = User.TABLE_NAME, comment = "用户表")
-public class User extends BaseSuperEntity<User,Long> {
+public class User extends BaseSuperEntity<User, Long> {
 
 	public static final String TABLE_NAME = "tt_user";
 
@@ -109,18 +108,6 @@ public class User extends BaseSuperEntity<User,Long> {
 	private String birthday;
 
 	/**
-	 * 部门ID
-	 */
-	@Column(name = "dept_id", columnDefinition = "bigint not null comment '部门ID'")
-	private Long deptId;
-
-	/**
-	 * 岗位ID
-	 */
-	@Column(name = "job_id", columnDefinition = "bigint not null comment '岗位ID'")
-	private Long jobId;
-
-	/**
 	 * 头像
 	 */
 	@Column(name = "avatar", columnDefinition = "varchar(255) comment '头像'")
@@ -137,6 +124,19 @@ public class User extends BaseSuperEntity<User,Long> {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
+
+	///**
+	// * 部门ID
+	// */
+	//@Column(name = "dept_id", columnDefinition = "bigint not null comment '部门ID'")
+	//private Long deptId;
+	//
+	///**
+	// * 岗位ID
+	// */
+	//@Column(name = "job_id", columnDefinition = "bigint not null comment '岗位ID'")
+	//private Long jobId;
+
 	@Builder
 	public User(Long id, LocalDateTime createTime, Long createBy,
 		LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
@@ -153,8 +153,8 @@ public class User extends BaseSuperEntity<User,Long> {
 		this.sex = sex;
 		this.email = email;
 		this.birthday = birthday;
-		this.deptId = deptId;
-		this.jobId = jobId;
+		//this.deptId = deptId;
+		//this.jobId = jobId;
 		this.avatar = avatar;
 		this.status = status;
 		this.tenantId = tenantId;
@@ -162,7 +162,7 @@ public class User extends BaseSuperEntity<User,Long> {
 
 	@Override
 	public boolean equals(Object o) {
-				if (this == o) {
+		if (this == o) {
 			return true;
 		}
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {

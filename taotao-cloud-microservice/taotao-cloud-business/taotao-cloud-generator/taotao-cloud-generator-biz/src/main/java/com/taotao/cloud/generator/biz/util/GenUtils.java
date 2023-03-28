@@ -1,10 +1,12 @@
 package com.taotao.cloud.generator.biz.util;
 
-import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.cloud.generator.api.constant.GenConstants;
 import com.taotao.cloud.generator.biz.config.GenConfig;
-import com.taotao.cloud.generator.biz.domain.GenTable;
-import com.taotao.cloud.generator.biz.domain.GenTableColumn;
+import com.taotao.cloud.generator.biz.entity.GenTable;
+import com.taotao.cloud.generator.biz.entity.GenTableColumn;
 import java.util.Arrays;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.RegExUtils;
 
 /**
@@ -12,6 +14,7 @@ import org.apache.commons.lang3.RegExUtils;
  *
  * @author ruoyi
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GenUtils {
 
 	/**
@@ -24,7 +27,8 @@ public class GenUtils {
 		genTable.setBusinessName(getBusinessName(genTable.getTableName()));
 		genTable.setFunctionName(replaceText(genTable.getTableComment()));
 		genTable.setFunctionAuthor(GenConfig.getAuthor());
-		genTable.setCreateBy(operName);
+		//genTable.setCreateBy(operName);
+		genTable.setCreateBy(operName.isEmpty() ? 0L : 1L);
 	}
 
 	/**
@@ -33,7 +37,8 @@ public class GenUtils {
 	public static void initColumnField(GenTableColumn column, GenTable table) {
 		String dataType = getDbType(column.getColumnType());
 		String columnName = column.getColumnName();
-		column.setTableId(table.getTableId());
+		//column.setTableId(table.getTableId());
+		column.setId(table.getId());
 		column.setCreateBy(table.getCreateBy());
 		// 设置java字段名
 		column.setJavaField(StringUtils.toCamelCase(columnName));
@@ -57,7 +62,8 @@ public class GenUtils {
 
 			// 如果是浮点型 统一用BigDecimal
 			String[] str = StringUtils.split(
-				StringUtils.substringBetween(column.getColumnType(), "(", ")"), ",");
+				StringUtils.substringBetween(column.getColumnType(), "(", ")"),
+				StringUtils.SEPARATOR);
 			if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0) {
 				column.setJavaType(GenConstants.TYPE_BIGDECIMAL);
 			}
@@ -71,18 +77,23 @@ public class GenUtils {
 			}
 		}
 
-		// 插入字段（默认所有字段都需要插入）
-		column.setIsInsert(GenConstants.REQUIRE);
-
-		// 编辑字段
-		if (!arraysContains(GenConstants.COLUMNNAME_NOT_EDIT, columnName) && !column.isPk()) {
+		// BO对象 默认插入勾选
+		if (!arraysContains(GenConstants.COLUMNNAME_NOT_ADD, columnName) && !column.isPk()) {
+			column.setIsInsert(GenConstants.REQUIRE);
+		}
+		// BO对象 默认编辑勾选
+		if (!arraysContains(GenConstants.COLUMNNAME_NOT_EDIT, columnName)) {
 			column.setIsEdit(GenConstants.REQUIRE);
 		}
-		// 列表字段
-		if (!arraysContains(GenConstants.COLUMNNAME_NOT_LIST, columnName) && !column.isPk()) {
+		// BO对象 默认是否必填勾选
+		if (!arraysContains(GenConstants.COLUMNNAME_NOT_EDIT, columnName)) {
+			column.setIsRequired(GenConstants.REQUIRE);
+		}
+		// VO对象 默认返回勾选
+		if (!arraysContains(GenConstants.COLUMNNAME_NOT_LIST, columnName)) {
 			column.setIsList(GenConstants.REQUIRE);
 		}
-		// 查询字段
+		// BO对象 默认查询勾选
 		if (!arraysContains(GenConstants.COLUMNNAME_NOT_QUERY, columnName) && !column.isPk()) {
 			column.setIsQuery(GenConstants.REQUIRE);
 		}
@@ -100,13 +111,17 @@ public class GenUtils {
 			|| StringUtils.endsWithIgnoreCase(columnName, "sex")) {
 			column.setHtmlType(GenConstants.HTML_SELECT);
 		}
-		// 文件字段设置上传控件
+		// 图片字段设置图片上传控件
+		else if (StringUtils.endsWithIgnoreCase(columnName, "image")) {
+			column.setHtmlType(GenConstants.HTML_IMAGE_UPLOAD);
+		}
+		// 文件字段设置文件上传控件
 		else if (StringUtils.endsWithIgnoreCase(columnName, "file")) {
-			column.setHtmlType(GenConstants.HTML_UPLOAD);
+			column.setHtmlType(GenConstants.HTML_FILE_UPLOAD);
 		}
 		// 内容字段设置富文本控件
 		else if (StringUtils.endsWithIgnoreCase(columnName, "content")) {
-			column.setHtmlType(GenConstants.HTML_SUMMERNOTE);
+			column.setHtmlType(GenConstants.HTML_EDITOR);
 		}
 	}
 
@@ -140,9 +155,11 @@ public class GenUtils {
 	 * @return 业务名
 	 */
 	public static String getBusinessName(String tableName) {
-		int lastIndex = tableName.lastIndexOf("_");
+		int firstIndex = tableName.indexOf("_");
 		int nameLength = tableName.length();
-		return StringUtils.substring(tableName, lastIndex + 1, nameLength);
+		String businessName = StringUtils.substring(tableName, firstIndex + 1, nameLength);
+		businessName = StringUtils.toCamelCase(businessName);
+		return businessName;
 	}
 
 	/**
@@ -155,7 +172,7 @@ public class GenUtils {
 		boolean autoRemovePre = GenConfig.getAutoRemovePre();
 		String tablePrefix = GenConfig.getTablePrefix();
 		if (autoRemovePre && StringUtils.isNotEmpty(tablePrefix)) {
-			String[] searchList = StringUtils.split(tablePrefix, ",");
+			String[] searchList = StringUtils.split(tablePrefix, StringUtils.SEPARATOR);
 			tableName = replaceFirst(tableName, searchList);
 		}
 		return StringUtils.convertToCamelCase(tableName);
@@ -172,7 +189,7 @@ public class GenUtils {
 		String text = replacementm;
 		for (String searchString : searchList) {
 			if (replacementm.startsWith(searchString)) {
-				text = replacementm.replaceFirst(searchString, "");
+				text = replacementm.replaceFirst(searchString, StringUtils.EMPTY);
 				break;
 			}
 		}

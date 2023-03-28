@@ -1,6 +1,5 @@
 package com.taotao.cloud.generator.biz.util;
 
-import com.ruoyi.common.core.utils.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,37 +12,37 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum DataBaseType {
 
-    /**
-     * MySQL
-     */
-    MY_SQL("MySQL"),
+	/**
+	 * MySQL
+	 */
+	MY_SQL("MySQL"),
 
-    /**
-     * Oracle
-     */
-    ORACLE("Oracle"),
+	/**
+	 * Oracle
+	 */
+	ORACLE("Oracle"),
 
-    /**
-     * PostgreSQL
-     */
-    POSTGRE_SQL("PostgreSQL"),
+	/**
+	 * PostgreSQL
+	 */
+	POSTGRE_SQL("PostgreSQL"),
 
-    /**
-     * SQL Server
-     */
-    SQL_SERVER("Microsoft SQL Server");
+	/**
+	 * SQL Server
+	 */
+	SQL_SERVER("Microsoft SQL Server");
 
-    private final String type;
+	private final String type;
 
-    public static DataBaseType find(String databaseProductName) {
-        if (StringUtils.isBlank(databaseProductName)) {
-            return null;
-        }
-        for (DataBaseType type : values()) {
-            if (type.getType().equals(databaseProductName)) {
-                return type;
-            }
-        }
-        return null;
-    }
+	public static DataBaseType find(String databaseProductName) {
+		if (StringUtils.isBlank(databaseProductName)) {
+			return null;
+		}
+		for (DataBaseType type : values()) {
+			if (type.getType().equals(databaseProductName)) {
+				return type;
+			}
+		}
+		return null;
+	}
 }
