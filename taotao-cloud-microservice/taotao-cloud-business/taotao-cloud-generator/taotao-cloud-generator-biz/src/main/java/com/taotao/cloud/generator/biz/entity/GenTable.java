@@ -1,4 +1,4 @@
-package com.taotao.cloud.generator.biz.domain;
+package com.taotao.cloud.generator.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;

@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "RemoteProductService", value = ServiceName.TAOTAO_CLOUD_GENERATOR, fallbackFactory = FeignGeneratorFallbackImpl.class)
+@FeignClient(contextId = "IFeignGeneratorApi", value = ServiceName.TAOTAO_CLOUD_GENERATOR, fallbackFactory = FeignGeneratorFallbackImpl.class)
 public interface IFeignGeneratorApi {
 
 }

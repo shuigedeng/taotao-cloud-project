@@ -1,231 +1,153 @@
 package com.taotao.cloud.generator.biz.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.alibaba.druid.DbType;
-import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.sql.ast.SQLStatement;
-import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlCreateTableStatement;
-import com.alibaba.fastjson.JSON;
-import com.taotao.cloud.generator.biz.domain.GenTable;
-import com.taotao.cloud.generator.biz.domain.GenTableColumn;
-import com.taotao.cloud.generator.biz.service.IGenTableColumnService;
+import cn.hutool.core.io.IoUtil;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.generator.biz.entity.GenTable;
+import com.taotao.cloud.generator.biz.entity.GenTableColumn;
+import com.taotao.cloud.generator.biz.page.PageQuery;
+import com.taotao.cloud.generator.biz.page.TableDataInfo;
 import com.taotao.cloud.generator.biz.service.IGenTableService;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.extern.java.Log;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 代码生成 操作处理
  *
- * @author ruoyi
- * @Validated
- * @RequiredArgsConstructor
- * @RequestMapping("/gen")
- * @RestController public class GenController {
- * <p>
- * private final IGenTableService genTableService;
- * @Operation(summary = "查询代码生成列表", description = "查询代码生成列表")
- * @RequestLogger("查询代码生成列表")
- * @PreAuthorize("@el.check('admin','timing:list')")
- * @GetMapping("/list")
+ * @author Lion Li
  */
-@Controller
-@RequestMapping("/tool/gen")
+@Validated
+@RequiredArgsConstructor
+@RequestMapping("/gen")
+@RestController
 public class GenController {
 
-	private String prefix = "tool/gen";
-
-	@Autowired
-	private IGenTableService genTableService;
-
-	@Autowired
-	private IGenTableColumnService genTableColumnService;
-
-	//@RequiresPermissions("tool:gen:view")
-	@GetMapping()
-	public String gen() {
-		return prefix + "/gen";
-	}
+	private final IGenTableService genTableService;
 
 	/**
 	 * 查询代码生成列表
 	 */
-	//@RequiresPermissions("tool:gen:list")
-	@PostMapping("/list")
-	@ResponseBody
-	public TableDataInfo genList(GenTable genTable) {
-		startPage();
-		List<GenTable> list = genTableService.selectGenTableList(genTable);
-		return getDataTable(list);
+	//@SaCheckPermission("tool:gen:list")
+	@GetMapping("/list")
+	public TableDataInfo<GenTable> genList(GenTable genTable, PageQuery pageQuery) {
+		return genTableService.selectPageGenTableList(genTable, pageQuery);
+	}
+
+	/**
+	 * 修改代码生成业务
+	 *
+	 * @param tableId 表主键
+	 */
+	//@SaCheckPermission("tool:gen:query")
+	@GetMapping(value = "/{tableId}")
+	public Result<Map<String, Object>> getInfo(@PathVariable Long tableId) {
+		GenTable table = genTableService.selectGenTableById(tableId);
+		List<GenTable> tables = genTableService.selectGenTableAll();
+		List<GenTableColumn> list = genTableService.selectGenTableColumnListByTableId(tableId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("info", table);
+		map.put("rows", list);
+		map.put("tables", tables);
+		return Result.success(map);
 	}
 
 	/**
 	 * 查询数据库列表
 	 */
-	@RequiresPermissions("tool:gen:list")
-	@PostMapping("/db/list")
-	@ResponseBody
-	public TableDataInfo dataList(GenTable genTable) {
-		startPage();
-		List<GenTable> list = genTableService.selectDbTableList(genTable);
-		return getDataTable(list);
+	//@SaCheckPermission("tool:gen:list")
+	@GetMapping("/db/list")
+	public TableDataInfo<GenTable> dataList(GenTable genTable, PageQuery pageQuery) {
+		return genTableService.selectPageDbTableList(genTable, pageQuery);
 	}
 
 	/**
 	 * 查询数据表字段列表
+	 *
+	 * @param tableId 表主键
 	 */
-	@RequiresPermissions("tool:gen:list")
-	@PostMapping("/column/list")
-	@ResponseBody
-	public TableDataInfo columnList(GenTableColumn genTableColumn) {
-		TableDataInfo dataInfo = new TableDataInfo();
-		List<GenTableColumn> list = genTableColumnService.selectGenTableColumnListByTableId(
-			genTableColumn);
+	@GetMapping(value = "/column/{tableId}")
+	public TableDataInfo<GenTableColumn> columnList(Long tableId) {
+		TableDataInfo<GenTableColumn> dataInfo = new TableDataInfo<>();
+		List<GenTableColumn> list = genTableService.selectGenTableColumnListByTableId(tableId);
 		dataInfo.setRows(list);
 		dataInfo.setTotal(list.size());
 		return dataInfo;
 	}
 
 	/**
-	 * 导入表结构
-	 */
-	@RequiresPermissions("tool:gen:list")
-	@GetMapping("/importTable")
-	public String importTable() {
-		return prefix + "/importTable";
-	}
-
-	/**
-	 * 创建表结构
-	 */
-	@GetMapping("/createTable")
-	public String createTable() {
-		return prefix + "/createTable";
-	}
-
-	/**
 	 * 导入表结构（保存）
+	 *
+	 * @param tables 表名串
 	 */
-	@RequiresPermissions("tool:gen:list")
-	@Log(title = "代码生成", businessType = BusinessType.IMPORT)
+	//@SaCheckPermission("tool:gen:import")
+	//@Log(title = "代码生成", businessType = BusinessType.IMPORT)
 	@PostMapping("/importTable")
-	@ResponseBody
-	public AjaxResult importTableSave(String tables) {
+	public Result<Boolean> importTableSave(String tables) {
 		String[] tableNames = Convert.toStrArray(tables);
 		// 查询表信息
 		List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames);
-		String operName = Convert.toStr(PermissionUtils.getPrincipalProperty("loginName"));
-		genTableService.importGenTable(tableList, operName);
-		return AjaxResult.success();
-	}
-
-	/**
-	 * 修改代码生成业务
-	 */
-	@RequiresPermissions("tool:gen:edit")
-	@GetMapping("/edit/{tableId}")
-	public String edit(@PathVariable("tableId") Long tableId, ModelMap mmap) {
-		GenTable table = genTableService.selectGenTableById(tableId);
-		List<GenTable> genTables = genTableService.selectGenTableAll();
-		List<CxSelect> cxSelect = new ArrayList<CxSelect>();
-		for (GenTable genTable : genTables) {
-			if (!StringUtils.equals(table.getTableName(), genTable.getTableName())) {
-				CxSelect cxTable = new CxSelect(genTable.getTableName(),
-					genTable.getTableName() + '：' + genTable.getTableComment());
-				List<CxSelect> cxColumns = new ArrayList<CxSelect>();
-				for (GenTableColumn tableColumn : genTable.getColumns()) {
-					cxColumns.add(new CxSelect(tableColumn.getColumnName(),
-						tableColumn.getColumnName() + '：' + tableColumn.getColumnComment()));
-				}
-				cxTable.setS(cxColumns);
-				cxSelect.add(cxTable);
-			}
-		}
-		mmap.put("table", table);
-		mmap.put("data", JSON.toJSON(cxSelect));
-		return prefix + "/edit";
+		genTableService.importGenTable(tableList);
+		return Result.success(true);
 	}
 
 	/**
 	 * 修改保存代码生成业务
 	 */
-	@RequiresPermissions("tool:gen:edit")
-	@Log(title = "代码生成", businessType = BusinessType.UPDATE)
-	@PostMapping("/edit")
-	@ResponseBody
-	public AjaxResult editSave(@Validated GenTable genTable) {
+	//@SaCheckPermission("tool:gen:edit")
+	//@Log(title = "代码生成", businessType = BusinessType.UPDATE)
+	@PutMapping
+	public Result<Boolean> editSave(@Validated @RequestBody GenTable genTable) {
 		genTableService.validateEdit(genTable);
 		genTableService.updateGenTable(genTable);
-		return AjaxResult.success();
+		return Result.success(true);
 	}
 
-	@RequiresPermissions("tool:gen:remove")
-	@Log(title = "代码生成", businessType = BusinessType.DELETE)
-	@PostMapping("/remove")
-	@ResponseBody
-	public AjaxResult remove(String ids) {
-		genTableService.deleteGenTableByIds(ids);
-		return AjaxResult.success();
-	}
-
-	@RequiresRoles("admin")
-	@Log(title = "创建表", businessType = BusinessType.OTHER)
-	@PostMapping("/createTable")
-	@ResponseBody
-	public AjaxResult create(String sql) {
-		try {
-			SqlUtil.filterKeyword(sql);
-			List<SQLStatement> sqlStatements = SQLUtils.parseStatements(sql, DbType.mysql);
-			List<String> tableNames = new ArrayList<>();
-			for (SQLStatement sqlStatement : sqlStatements) {
-				if (sqlStatement instanceof MySqlCreateTableStatement) {
-					MySqlCreateTableStatement createTableStatement = (MySqlCreateTableStatement) sqlStatement;
-					if (genTableService.createTable(createTableStatement.toString())) {
-						String tableName = createTableStatement.getTableName().replaceAll("`", "");
-						tableNames.add(tableName);
-					}
-				}
-			}
-			List<GenTable> tableList = genTableService.selectDbTableListByNames(
-				tableNames.toArray(new String[tableNames.size()]));
-			String operName = Convert.toStr(PermissionUtils.getPrincipalProperty("loginName"));
-			genTableService.importGenTable(tableList, operName);
-			return AjaxResult.success();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return AjaxResult.error("创建表结构异常");
-		}
+	/**
+	 * 删除代码生成
+	 *
+	 * @param tableIds 表主键串
+	 */
+	//@SaCheckPermission("tool:gen:remove")
+	//@Log(title = "代码生成", businessType = BusinessType.DELETE)
+	@DeleteMapping("/{tableIds}")
+	public Result<Boolean> remove(@PathVariable Long[] tableIds) {
+		genTableService.deleteGenTableByIds(tableIds);
+		return Result.success(true);
 	}
 
 	/**
 	 * 预览代码
+	 *
+	 * @param tableId 表主键
 	 */
-	@RequiresPermissions("tool:gen:preview")
+	//@SaCheckPermission("tool:gen:preview")
 	@GetMapping("/preview/{tableId}")
-	@ResponseBody
-	public AjaxResult preview(@PathVariable("tableId") Long tableId) throws IOException {
+	public Result<Map<String, String>> preview(@PathVariable("tableId") Long tableId)
+		throws IOException {
 		Map<String, String> dataMap = genTableService.previewCode(tableId);
-		return AjaxResult.success(dataMap);
+		return Result.success(dataMap);
 	}
 
 	/**
 	 * 生成代码（下载方式）
+	 *
+	 * @param tableName 表名
 	 */
-	@RequiresPermissions("tool:gen:code")
-	@Log(title = "代码生成", businessType = BusinessType.GENCODE)
+	//@SaCheckPermission("tool:gen:code")
+	//@Log(title = "代码生成", businessType = BusinessType.GENCODE)
 	@GetMapping("/download/{tableName}")
 	public void download(HttpServletResponse response, @PathVariable("tableName") String tableName)
 		throws IOException {
@@ -235,35 +157,38 @@ public class GenController {
 
 	/**
 	 * 生成代码（自定义路径）
+	 *
+	 * @param tableName 表名
 	 */
-	@RequiresPermissions("tool:gen:code")
-	@Log(title = "代码生成", businessType = BusinessType.GENCODE)
+	//@SaCheckPermission("tool:gen:code")
+	//@Log(title = "代码生成", businessType = BusinessType.GENCODE)
 	@GetMapping("/genCode/{tableName}")
-	@ResponseBody
-	public AjaxResult genCode(@PathVariable("tableName") String tableName) {
+	public Result<Boolean> genCode(@PathVariable("tableName") String tableName) {
 		genTableService.generatorCode(tableName);
-		return AjaxResult.success();
+		return Result.success(true);
 	}
 
 	/**
 	 * 同步数据库
+	 *
+	 * @param tableName 表名
 	 */
-	@RequiresPermissions("tool:gen:edit")
-	@Log(title = "代码生成", businessType = BusinessType.UPDATE)
+	//@SaCheckPermission("tool:gen:edit")
+	//@Log(title = "代码生成", businessType = BusinessType.UPDATE)
 	@GetMapping("/synchDb/{tableName}")
-	@ResponseBody
-	public AjaxResult synchDb(@PathVariable("tableName") String tableName) {
+	public Result<Boolean> synchDb(@PathVariable("tableName") String tableName) {
 		genTableService.synchDb(tableName);
-		return AjaxResult.success();
+		return Result.success(true);
 	}
 
 	/**
 	 * 批量生成代码
+	 *
+	 * @param tables 表名串
 	 */
-	@RequiresPermissions("tool:gen:code")
-	@Log(title = "代码生成", businessType = BusinessType.GENCODE)
+	//@SaCheckPermission("tool:gen:code")
+	//@Log(title = "代码生成", businessType = BusinessType.GENCODE)
 	@GetMapping("/batchGenCode")
-	@ResponseBody
 	public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
 		String[] tableNames = Convert.toStrArray(tables);
 		byte[] data = genTableService.downloadCode(tableNames);
@@ -275,9 +200,11 @@ public class GenController {
 	 */
 	private void genCode(HttpServletResponse response, byte[] data) throws IOException {
 		response.reset();
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
 		response.setHeader("Content-Disposition", "attachment; filename=\"ruoyi.zip\"");
 		response.addHeader("Content-Length", "" + data.length);
 		response.setContentType("application/octet-stream; charset=UTF-8");
-		IOUtils.write(data, response.getOutputStream());
+		IoUtil.write(response.getOutputStream(), false, data);
 	}
 }
