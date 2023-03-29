@@ -14,19 +14,32 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.biz.dao;
+package com.taotao.cloud.tenant.biz.convert;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.tenant.biz.entity.TenantDO;
-import org.apache.ibatis.annotations.Mapper;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
- * 租户表
- *
  * @author 
- * @date 2022-10-01
+ * @version 0.0.1
+ * @date 2022/11/26 14:31
  */
 @Mapper
-public interface TenantMapper extends BaseMapper<TenantDO> {
+public interface TenantConvert {
+
+	TenantConvert INSTANCE = Mappers.getMapper(TenantConvert.class);
+
+	TenantDO convert(TenantDTO tenant);
+
+	TenantDTO convert(TenantDO tenant);
+
+	List<TenantDTO> convert(List<TenantDO> tenantDOList);
+
+	Page<TenantDTO> convert(Page<TenantDO> tenantDOList);
 
 }

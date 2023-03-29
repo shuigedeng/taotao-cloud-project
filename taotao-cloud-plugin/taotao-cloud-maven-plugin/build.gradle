@@ -1,8 +1,8 @@
 plugins {
     id "java-library"
 
-    //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
     //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
+    //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
     id "io.freefair.maven-plugin" version "8.0.1"
 
 //    //https://github.com/britter/maven-plugin-development/blob/main/sample/gradle-producer-build
@@ -10,8 +10,8 @@ plugins {
 //    id "de.benediktritter.maven-plugin-development" version "0.4.1"
 //    id "maven-publish"
 
-//    //https://plugins.gradle.org/plugin/com.liferay.maven.plugin.builder
 //    //https://github.com/liferay/liferay-portal/blob/master/modules/sdk/gradle-plugins-maven-plugin-builder
+//    //https://plugins.gradle.org/plugin/com.liferay.maven.plugin.builder
 //    id "com.liferay.maven.plugin.builder" version "2.0.0"
 }
 

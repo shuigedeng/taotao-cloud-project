@@ -139,8 +139,8 @@ public class ManagerUserController extends
 		user.setSex(0);
 		user.setEmail("sdfasdf");
 		user.setBirthday("sdfasdf");
-		user.setDeptId(1L);
-		user.setJobId(2L);
+		//user.setDeptId(1L);
+		//user.setJobId(2L);
 		user.setStatus(1);
 		user.setTenantId("sdfasdf");
 		service().im().insert(user);

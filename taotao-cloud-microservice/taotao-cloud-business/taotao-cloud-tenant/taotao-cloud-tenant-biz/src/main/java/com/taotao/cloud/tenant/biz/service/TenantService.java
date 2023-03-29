@@ -1,93 +1,95 @@
+/*
+ * COPYRIGHT (C) 2022 Art AUTHORS(cloud@gmail.com). ALL RIGHTS RESERVED.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.tenant.biz.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
+import com.taotao.cloud.tenant.api.model.dto.TenantPageDTO;
+
 import java.util.List;
-import top.tangyh.basic.base.service.SuperCacheService;
-import top.tangyh.lamp.model.enumeration.system.TenantStatusEnum;
-import top.tangyh.lamp.tenant.dto.TenantConnectDTO;
-import top.tangyh.lamp.tenant.dto.TenantSaveDTO;
-import top.tangyh.lamp.tenant.dto.TenantUpdateDTO;
-import top.tangyh.lamp.tenant.entity.Tenant;
 
 /**
- * <p>
- * 业务接口
- * 企业
- * </p>
+ * 租户表
  *
- * @author zuihou
- * @date 2019-10-24
+ * @author 
+ * @date 2022-10-01
  */
-public interface TenantService extends SuperCacheService<Tenant> {
-    /**
-     * 检测 租户编码是否存在
-     *
-     * @param tenantCode 租户编码
-     * @return 是否存在
-     */
-    boolean check(String tenantCode);
+public interface TenantService {
 
-    /**
-     * 保存
-     *
-     * @param data 租户保存数据
-     * @return 租户
-     */
-    Tenant save(TenantSaveDTO data);
+	/**
+	 * 校验租户信息是否合法
+	 * @param id 租户id
+	 */
+	void validTenant(Long id);
 
-    /**
-     * 修改
-     *
-     * @param model 租户保存数据
-     * @return 租户
-     */
-    Tenant update(TenantUpdateDTO model);
+	/**
+	 * 获取所有租户id集合
+	 * @return 所有租户id集合
+	 */
+	List<Long> getTenantIds();
 
-    /**
-     * 根据编码获取
-     *
-     * @param tenant 租户编码
-     * @return 租户
-     */
-    Tenant getByCode(String tenant);
+	/**
+	 * 根据name查询租户Id
+	 */
+	Long findTenantIdById(String name);
 
-    /**
-     * 通知所有服务链接数据源
-     *
-     * @param tenantConnect 链接信息
-     * @return 是否链接成功
-     */
-    Boolean connect(TenantConnectDTO tenantConnect);
+	/**
+	 * 保存租户信息
+	 * @param tenant 租户信息
+	 */
+	Boolean addSysTenant(TenantDTO tenant);
 
+	/**
+	 * 修改
+	 */
+	Boolean updateSysTenant(TenantDTO tenantDTO);
 
-    /**
-     * 删除租户数据
-     *
-     * @param ids id
-     * @return 是否成功
-     */
-    Boolean delete(List<Long> ids);
+	/**
+	 * 分页查询租户信息
+	 */
+	IPage<TenantDTO> pageSysTenant(TenantPageDTO pageDTO);
 
-    /**
-     * 删除租户和基础数据
-     *
-     * @param ids id
-     * @return 是否成功
-     */
-    Boolean deleteAll(List<Long> ids);
+	/**
+	 * 获取全部
+	 */
+	List<TenantDTO> findAll();
 
-    /**
-     * 查询所有可用的租户
-     *
-     * @return 租户信息
-     */
-    List<Tenant> find();
+	/**
+	 * 删除
+	 */
+	Boolean deleteSysTenant(Long id);
 
-    /**
-     * 修改租户状态
-     *
-     * @param ids
-     * @param status
-     * @return
-     */
-    Boolean updateStatus(List<Long> ids, TenantStatusEnum status);
+	/**
+	 * 更新指定租户的角色菜单信息
+	 * @param id 租户id
+	 * @param menus 菜单信息
+	 */
+	void updateTenantRoleMenu(Long id, List<String> menus);
+
+	/**
+	 * 校验租户下账号数量
+	 */
+	void validCount();
+
+	/**
+	 * 根据id查询租户信息
+	 * @param id 租户id
+	 * @return 租户信息
+	 */
+	TenantDTO findById(Long id);
+
 }
