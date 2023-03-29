@@ -14,49 +14,58 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.service.business;
+package com.taotao.cloud.tenant.biz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
-import com.taotao.cloud.sys.api.model.dto.app.AppPageDTO;
+import com.taotao.cloud.tenant.api.model.dto.TenantPackageDTO;
+import com.taotao.cloud.tenant.api.model.dto.TenantPackagePageDTO;
+import com.taotao.cloud.tenant.biz.entity.TenantPackageDO;
+
 import java.util.List;
 
 /**
- * 系统应用表
+ * 租户套餐表
  *
  * @author 
- * @date 2022-09-12
+ * @date 2022-10-01
  */
-public interface AppService {
+public interface TenantPackageService {
 
 	/**
 	 * 添加
 	 */
-	Boolean addApp(AppDTO appDTO);
+	Boolean addTenantPackage(TenantPackageDTO tenantPackageDTO);
 
 	/**
-	 * 修改
+	 * 更新租户套餐信息
 	 */
-	Boolean updateApp(AppDTO appDTO);
+	Boolean updateTenantPackage(TenantPackageDTO tenantPackageDTO);
 
 	/**
-	 * 分页
+	 * 分页查询租户套餐信息
 	 */
-	IPage<AppDTO> pageApp(AppPageDTO appPageDTO);
+	IPage<TenantPackageDTO> pageTenantPackage(TenantPackagePageDTO tenantPackagePageDTO);
 
 	/**
 	 * 获取单条
 	 */
-	AppDTO findById(Long id);
+	TenantPackageDTO findById(Long id);
 
 	/**
 	 * 获取全部
 	 */
-	List<AppDTO> findAll();
+	List<TenantPackageDTO> findAll();
 
 	/**
 	 * 删除
 	 */
-	Boolean deleteApp(Long id);
+	Boolean deleteTenantPackage(Long id);
+
+	/**
+	 * 校验套餐信息
+	 * @param packageId 套餐id
+	 * @return 套餐信息
+	 */
+	TenantPackageDO validTenantPackage(Long packageId);
 
 }

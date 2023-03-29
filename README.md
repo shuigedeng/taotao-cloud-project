@@ -67,7 +67,7 @@ Requires:
 ```
 JAVA_VERSION >= 17 (推荐使用graalvm-22.3)
 GRALE_VERSION >= 8.0.1
-IDEA_VERSION >= 2022.3.2
+IDEA_VERSION >= 2023.1
 ```
 
 Gradle:
@@ -121,12 +121,12 @@ Maven:
  Roketmq              | 5.0.0           
  Spring Security      | 6.0.3           
  Mybatis Plus         | 3.5.3.1         
- Hutool               | 5.8.15          
+ Hutool               | 5.8.16          
  Mysql                | 8.0.32          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.1.0           
- Redisson             | 3.20.0          
+ Redisson             | 3.20.1          
  Lettuce              | 6.0.3.RELEASE   
  Elasticsearch        | 8.5.3           
  Xxl-job              | 2.4.0           
@@ -134,7 +134,7 @@ Maven:
  Guava                | 31.1-jre        
  Grpc                 | 1.54.0          
  Arthas               | 3.6.7           
- Dynamic-tp           | 1.1.1           
+ Dynamic-tp           | 1.1.2           
  Elasticjob           | 3.0.2           
  Forest               | 1.5.30          
  Netty                | 4.1.90.Final    
@@ -296,7 +296,7 @@ taotao-cloud-project -- 父项目
 [comment]: <> (    </tr>)
 </table>
 
-## 12.starter项目模块
+## 12.基础组件starter项目模块 (暂未开源)
 
 ```
 +--- Project ':taotao-cloud-dependencies'

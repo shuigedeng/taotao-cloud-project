@@ -1,1 +1,1 @@
-com.taotao.cloud.tenant.api.feign.fallback.FeignMemberStatisticsFallbackImpl
+com.taotao.cloud.tenant.api.feign.fallback.FeignTenantFallbackImpl

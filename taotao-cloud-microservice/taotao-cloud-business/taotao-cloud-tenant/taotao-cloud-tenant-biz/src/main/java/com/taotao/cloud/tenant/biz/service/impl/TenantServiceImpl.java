@@ -1,158 +1,240 @@
+/*
+ * COPYRIGHT (C) 2022 Art AUTHORS(cloud@gmail.com). ALL RIGHTS RESERVED.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.tenant.biz.service.impl;
 
-import cn.hutool.core.convert.Convert;
-import java.util.List;
-import java.util.function.Function;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.text.StrPool;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.enums.GlobalStatusEnum;
+import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.enums.DataScopeEnum;
+import com.taotao.cloud.sys.api.feign.IFeignRoleApi;
+import com.taotao.cloud.sys.api.feign.IFeignUserApi;
+import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
+import com.taotao.cloud.tenant.api.model.dto.TenantPageDTO;
+import com.taotao.cloud.tenant.biz.convert.TenantConvert;
+import com.taotao.cloud.tenant.biz.dao.TenantManager;
+import com.taotao.cloud.tenant.biz.entity.TenantDO;
+import com.taotao.cloud.tenant.biz.entity.TenantPackageDO;
+import com.taotao.cloud.tenant.biz.service.TenantPackageService;
+import com.taotao.cloud.tenant.biz.service.TenantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import top.tangyh.basic.base.service.SuperCacheServiceImpl;
-import top.tangyh.basic.database.mybatis.conditions.Wraps;
-import top.tangyh.basic.model.cache.CacheKey;
-import top.tangyh.basic.model.cache.CacheKeyBuilder;
-import top.tangyh.basic.utils.ArgumentAssert;
-import top.tangyh.basic.utils.BeanPlusUtil;
-import top.tangyh.lamp.common.cache.tenant.TenantCacheKeyBuilder;
-import top.tangyh.lamp.common.cache.tenant.TenantCodeCacheKeyBuilder;
-import top.tangyh.lamp.file.service.AppendixService;
-import top.tangyh.lamp.model.enumeration.system.TenantConnectTypeEnum;
-import top.tangyh.lamp.model.enumeration.system.TenantStatusEnum;
-import top.tangyh.lamp.model.enumeration.system.TenantTypeEnum;
-import top.tangyh.lamp.tenant.dao.TenantMapper;
-import top.tangyh.lamp.tenant.dto.TenantConnectDTO;
-import top.tangyh.lamp.tenant.dto.TenantSaveDTO;
-import top.tangyh.lamp.tenant.dto.TenantUpdateDTO;
-import top.tangyh.lamp.tenant.entity.Tenant;
-import top.tangyh.lamp.tenant.service.TenantService;
-import top.tangyh.lamp.tenant.strategy.InitSystemContext;
+
+import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
- * <p>
- * 业务实现类 企业
- * </p>
+ * 租户表
  *
- * @author zuihou
- * @date 2019-10-24
+ * @author 
+ * @date 2022-10-01
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TenantServiceImpl extends SuperCacheServiceImpl<TenantMapper, Tenant> implements
-	TenantService {
+public class TenantServiceImpl implements TenantService {
 
-	private final InitSystemContext initSystemContext;
-	private final AppendixService appendixService;
+	@Resource
+	private TenantPackageService tenantPackageService;
+	@Resource
+	private TenantManager tenantManager;
+
+	@Resource
+	private IFeignUserApi userApi;
+	@Resource
+	private IFeignRoleApi roleApi;
+
 
 	@Override
-	protected CacheKeyBuilder cacheKeyBuilder() {
-		return new TenantCacheKeyBuilder();
+	public void validTenant(Long id) {
+		TenantDO tenantDO = tenantManager.getTenantById(id);
+
+		if (Objects.isNull(tenantDO)) {
+			throw new RuntimeException("租户信息不存在!");
+		}
+		if (tenantDO.getStatus().equals(GlobalStatusEnum.DISABLE.getValue())) {
+			throw new RuntimeException(String.format("租户未开启:%s", tenantDO.getName()));
+		}
+		if (LocalDateTime.now().isAfter(tenantDO.getExpireTime())) {
+			throw new RuntimeException("租户已经过期！");
+		}
 	}
 
+	@Override
+	public List<Long> getTenantIds() {
+		return tenantManager.listTenant().stream().map(TenantDO::getId).collect(Collectors.toList());
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public Boolean addSysTenant(TenantDTO tenant) {
+		// 检查套餐信息
+		TenantPackageDO tenantPackageDO = tenantPackageService.validTenantPackage(tenant.getPackageId());
+
+		// 保存租户信息
+		Long tenantId = tenantManager.addTenant(tenant);
+
+//		TenantUtils.run(tenantId, () -> {
+//			// 根据套餐信息为新租户新建一个角色
+//			Long roleId = createRole(tenantPackageDO);
+//			// 为新租户创建一个默认账号
+//			Long userId = createUser(roleId, tenant);
+//			// 更新租户管理员id
+//			tenantManager.updateTenantAdmin(tenant.getId(), userId);
+//		});
+
+		return Boolean.TRUE;
+	}
 
 	/**
-	 * tenant_name:{tenantCode} -> id 只存租户的id，然后根据id再次查询缓存，这样子的好处是，删除或者修改租户信息时，只需要根据id淘汰缓存即可 缺点就是
-	 * 每次查询，需要多查一次缓存
+	 * 根据角色id与租户信息创建一个默认账号
 	 *
-	 * @param tenant
-	 * @return
+	 * @param roleId 角色id
+	 * @param tenant 租户信息
+	 * @return userId
+	 */
+	private Long createUser(Long roleId, TenantDTO tenant) {
+		// 创建用户
+//		SystemUserDTO systemUserDO = new SystemUserDTO().setUsername(tenant.getUsername())
+//			.setPassword(tenant.getPassword())
+//			.setMobile(tenant.getTenantAdminMobile())
+//			.setUsername(tenant.getTenantAdminName())
+//			.setRoleId(String.valueOf(roleId));
+//
+//		return userApi.createUser(systemUserDO).getUserId();
+		return 0L;
+	}
+
+	/**
+	 * 根据套餐生成一个角色信息
+	 *
+	 * @param tenantPackageDO 租户套餐
+	 * @return 角色信息
+	 */
+	private Long createRole(TenantPackageDO tenantPackageDO) {
+		// 生成租户管理员角色角色
+//		RoleDTO roleDTO = new RoleDTO().setRoleName(RoleAdminEnum.TENANT_ADMIN.getDescription())
+//			.setCode(RoleAdminEnum.TENANT_ADMIN.getType())
+//			.setRemark("系统生成租户管理员角色")
+//			.setMenuId(tenantPackageDO.getMenuIds())
+//			.setDataScope(DataScopeEnum.ALL.getScope());
+//
+//		return roleApi.addRole(roleDTO).getRoleId();
+		return 0L;
+	}
+
+	/**
+	 * 根据name查询租户信息
 	 */
 	@Override
-	public Tenant getByCode(String tenant) {
-		Function<CacheKey, Object> loader = (k) ->
-			getObj(Wraps.<Tenant>lbQ().select(Tenant::getId).eq(Tenant::getCode, tenant),
-				Convert::toLong);
-		CacheKey cacheKey = new TenantCodeCacheKeyBuilder().key(tenant);
-		return getByKey(cacheKey, loader);
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Tenant save(TenantSaveDTO data) {
-		// defaults 库
-		ArgumentAssert.isFalse(check(data.getCode()), "编码重复，请重新输入");
-
-		// 1， 保存租户 (默认库)
-		Tenant tenant = BeanPlusUtil.toBean(data, Tenant.class);
-		tenant.setStatus(TenantStatusEnum.WAIT_INIT);
-		tenant.setType(TenantTypeEnum.CREATE);
-		tenant.setConnectType(TenantConnectTypeEnum.SYSTEM);
-		// defaults 库
-		save(tenant);
-
-		appendixService.save(tenant.getId(), data.getLogos());
-
-		CacheKey cacheKey = new TenantCodeCacheKeyBuilder().key(tenant.getCode());
-		cacheOps.set(cacheKey, tenant.getId());
-		return tenant;
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Tenant update(TenantUpdateDTO model) {
-		Tenant tenant = BeanPlusUtil.toBean(model, Tenant.class);
-		super.updateById(tenant);
-		appendixService.save(tenant.getId(), model.getLogos());
-		return tenant;
-	}
-
-	@Override
-	public boolean check(String tenantCode) {
-		return super.count(Wraps.<Tenant>lbQ().eq(Tenant::getCode, tenantCode)) > 0;
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Boolean connect(TenantConnectDTO tenantConnect) {
-		return initSystemContext.initConnect(tenantConnect) && updateTenantStatus(tenantConnect);
-	}
-
-	private Boolean updateTenantStatus(TenantConnectDTO tenantConnect) {
-		Boolean flag = this.update(Wraps.<Tenant>lbU()
-			.set(Tenant::getStatus, TenantStatusEnum.NORMAL)
-			.set(Tenant::getConnectType, tenantConnect.getConnectType())
-			.eq(Tenant::getId, tenantConnect.getId()));
-		delCache(tenantConnect.getId());
-		return flag;
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Boolean delete(List<Long> ids) {
-		List<String> tenantCodeList = listObjs(
-			Wraps.<Tenant>lbQ().select(Tenant::getCode).in(Tenant::getId, ids), Convert::toStr);
-		if (tenantCodeList.isEmpty()) {
-			return true;
+	public Long findTenantIdById(String name) {
+		TenantDO tenantDO = tenantManager.getTenantByName(name);
+		if (Objects.isNull(tenantDO)) {
+			return null;
 		}
-		appendixService.removeByBizId(ids);
-		return removeByIds(ids);
+
+		return tenantDO.getId();
 	}
 
+	/**
+	 * 删除租户
+	 */
 	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Boolean deleteAll(List<Long> ids) {
-		List<String> tenantCodeList = listObjs(
-			Wraps.<Tenant>lbQ().select(Tenant::getCode).in(Tenant::getId, ids), Convert::toStr);
-		if (tenantCodeList.isEmpty()) {
-			return true;
+	public Boolean deleteSysTenant(Long id) {
+		if (isSystemTenant(id)) {
+			throw new RuntimeException("系统内置租户，不允许删除");
 		}
-		appendixService.removeByBizId(ids);
-		removeByIds(ids);
-		return initSystemContext.delete(ids, tenantCodeList);
+
+		return tenantManager.deleteTenantById(id) > 0;
+	}
+
+	/**
+	 * 更新指定租户的角色菜单信息
+	 *
+	 * @param id    租户id
+	 * @param menus 菜单信息
+	 */
+	@Override
+	public void updateTenantRoleMenu(Long id, List<String> menus) {
+//		TenantUtils.run(id, () -> {
+//			// 本租户下的所有角色
+//			List<RoleDTO> roleDTOList = roleService.getAllRole();
+//
+//			roleDTOList.forEach(r -> {
+//				if (Objects.equals(r.getCode(), RoleAdminEnum.TENANT_ADMIN.getType())) {
+//					// 租户管理员 则直接赋值新菜单
+//					r.setMenuId(String.join(StrPool.COMMA, menus));
+//				} else {
+//					// 非租户管理员 则原菜单和现菜单取交集
+//					r.setMenuId(String.join(StrPool.COMMA,
+//						CollUtil.intersectionDistinct(menus, Arrays.asList(r.getMenuId().split(StrPool.COMMA)))));
+//				}
+//
+//				// 更新角色信息
+//				roleApi.editRole(r);
+//			});
+//		});
 	}
 
 	@Override
-	public List<Tenant> find() {
-		return list(Wraps.<Tenant>lbQ().eq(Tenant::getStatus, TenantStatusEnum.NORMAL));
+	public void validCount() {
+//		long count = userApi.count();
+//		Long tenantId = TenantContextHolder.getTenantId();
+//		TenantDO tenantDO = tenantManager.getTenantById(tenantId);
+//
+//		if (Objects.isNull(tenantDO) || count > tenantDO.getAccountCount()) {
+//			throw new RuntimeException("租户账号数量超过额度！");
+//		}
 	}
 
 	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Boolean updateStatus(List<Long> ids, TenantStatusEnum status) {
-		boolean update = super.update(Wraps.<Tenant>lbU().set(Tenant::getStatus, status)
-			.in(Tenant::getId, ids));
+	public TenantDTO findById(Long id) {
+		return TenantConvert.INSTANCE.convert(tenantManager.getTenantById(id));
+	}
 
-		delCache(ids);
-		return update;
+
+	@Override
+	public Boolean updateSysTenant(TenantDTO tenantDTO) {
+		return tenantManager.updateTenant(tenantDTO) > 0;
+	}
+
+	@Override
+	public IPage<TenantDTO> pageSysTenant(TenantPageDTO pageDTO) {
+		return TenantConvert.INSTANCE.convert(tenantManager.pageTenant(pageDTO));
+	}
+
+	@Override
+	public List<TenantDTO> findAll() {
+		return TenantConvert.INSTANCE.convert(tenantManager.listTenant());
+	}
+
+	/**
+	 * 校验租户是否是系统租户
+	 *
+	 * @param id 租户id 我们任务租户id为0时为系统内置租户 不允许删除
+	 * @return 是否是系统租户
+	 */
+	private boolean isSystemTenant(Long id) {
+		return Objects.equals(id, TenantDO.PACKAGE_ID_SYSTEM);
 	}
 }

@@ -14,31 +14,32 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.model.convert;
+package com.taotao.cloud.tenant.biz.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
-import com.taotao.cloud.sys.biz.model.entity.app.App;
-import java.util.List;
+import com.taotao.cloud.tenant.api.model.dto.TenantPackageDTO;
+import com.taotao.cloud.tenant.biz.entity.TenantPackageDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * @author 
  * @version 0.0.1
- * @date 2022/11/23 00:45
+ * @date 2022/11/26 15:28
  */
 @Mapper
-public interface AppConvert {
+public interface TenantPackageConvert {
 
-	AppConvert INSTANCE = Mappers.getMapper(AppConvert.class);
+	TenantPackageConvert INSTANCE = Mappers.getMapper(TenantPackageConvert.class);
 
-	Page<AppDTO> convertPage(Page<App> appDO);
+	TenantPackageDTO convert(TenantPackageDO tenantPackage);
 
-	List<AppDTO> convertList(List<App> app);
+	TenantPackageDO convert(TenantPackageDTO tenantPackage);
 
-	AppDTO convert(App app);
+	List<TenantPackageDTO> convert(List<TenantPackageDO> list);
 
-	App convert(AppDTO appDTO);
+	Page<TenantPackageDTO> convert(Page<TenantPackageDO> list);
 
 }
