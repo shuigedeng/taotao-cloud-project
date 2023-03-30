@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.mp.convert.message;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
@@ -7,6 +23,7 @@ import cn.iocoder.yudao.module.mp.dal.dataobject.account.MpAccountDO;
 import cn.iocoder.yudao.module.mp.dal.dataobject.message.MpMessageDO;
 import cn.iocoder.yudao.module.mp.dal.dataobject.user.MpUserDO;
 import cn.iocoder.yudao.module.mp.service.message.bo.MpMessageSendOutReqBO;
+import java.util.List;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -17,8 +34,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 @Mapper
 public interface MpMessageConvert {
@@ -41,13 +56,16 @@ public interface MpMessageConvert {
         }
         return message;
     }
-    @Mappings(value = {
-            @Mapping(source = "msgType", target = "type"),
-            @Mapping(target = "createTime", ignore = true),
-    })
+
+    @Mappings(
+            value = {
+                @Mapping(source = "msgType", target = "type"),
+                @Mapping(target = "createTime", ignore = true),
+            })
     MpMessageDO convert(WxMpXmlMessage bean);
 
-    default MpMessageDO convert(MpMessageSendOutReqBO sendReqBO, MpAccountDO account, MpUserDO user) {
+    default MpMessageDO convert(
+            MpMessageSendOutReqBO sendReqBO, MpAccountDO account, MpUserDO user) {
         // 构建消息
         MpMessageDO message = new MpMessageDO();
         message.setType(sendReqBO.getType());
@@ -61,13 +79,16 @@ public interface MpMessageConvert {
                 break;
             case WxConsts.XmlMsgType.VIDEO: // 4. 视频
                 message.setMediaId(sendReqBO.getMediaId())
-                        .setTitle(sendReqBO.getTitle()).setDescription(sendReqBO.getDescription());
+                        .setTitle(sendReqBO.getTitle())
+                        .setDescription(sendReqBO.getDescription());
                 break;
             case WxConsts.XmlMsgType.NEWS: // 5. 图文
                 message.setArticles(sendReqBO.getArticles());
             case WxConsts.XmlMsgType.MUSIC: // 6. 音乐
-                message.setTitle(sendReqBO.getTitle()).setDescription(sendReqBO.getDescription())
-                        .setMusicUrl(sendReqBO.getMusicUrl()).setHqMusicUrl(sendReqBO.getHqMusicUrl())
+                message.setTitle(sendReqBO.getTitle())
+                        .setDescription(sendReqBO.getDescription())
+                        .setMusicUrl(sendReqBO.getMusicUrl())
+                        .setHqMusicUrl(sendReqBO.getHqMusicUrl())
                         .setThumbMediaId(sendReqBO.getThumbMediaId());
                 break;
             default:
@@ -98,16 +119,23 @@ public interface MpMessageConvert {
                 builder = WxMpXmlOutMessage.VOICE().mediaId(message.getMediaId());
                 break;
             case WxConsts.XmlMsgType.VIDEO:
-                builder = WxMpXmlOutMessage.VIDEO().mediaId(message.getMediaId())
-                        .title(message.getTitle()).description(message.getDescription());
+                builder =
+                        WxMpXmlOutMessage.VIDEO()
+                                .mediaId(message.getMediaId())
+                                .title(message.getTitle())
+                                .description(message.getDescription());
                 break;
             case WxConsts.XmlMsgType.NEWS:
                 builder = WxMpXmlOutMessage.NEWS().articles(convertList02(message.getArticles()));
                 break;
             case WxConsts.XmlMsgType.MUSIC:
-                builder = WxMpXmlOutMessage.MUSIC().title(message.getTitle()).description(message.getDescription())
-                        .musicUrl(message.getMusicUrl()).hqMusicUrl(message.getHqMusicUrl())
-                        .thumbMediaId(message.getThumbMediaId());
+                builder =
+                        WxMpXmlOutMessage.MUSIC()
+                                .title(message.getTitle())
+                                .description(message.getDescription())
+                                .musicUrl(message.getMusicUrl())
+                                .hqMusicUrl(message.getHqMusicUrl())
+                                .thumbMediaId(message.getThumbMediaId());
                 break;
             default:
                 throw new IllegalArgumentException("不支持的消息类型：" + message.getType());
@@ -117,6 +145,7 @@ public interface MpMessageConvert {
         builder.toUser(message.getOpenid());
         return builder.build();
     }
+
     List<WxMpXmlOutNewsMessage.Item> convertList02(List<MpMessageDO.Article> list);
 
     default WxMpKefuMessage convert(MpMessageSendReqVO sendReqVO, MpUserDO user) {
@@ -133,16 +162,23 @@ public interface MpMessageConvert {
                 builder = WxMpKefuMessage.VOICE().mediaId(sendReqVO.getMediaId());
                 break;
             case WxConsts.KefuMsgType.VIDEO:
-                builder = WxMpKefuMessage.VIDEO().mediaId(sendReqVO.getMediaId())
-                        .title(sendReqVO.getTitle()).description(sendReqVO.getDescription());
+                builder =
+                        WxMpKefuMessage.VIDEO()
+                                .mediaId(sendReqVO.getMediaId())
+                                .title(sendReqVO.getTitle())
+                                .description(sendReqVO.getDescription());
                 break;
             case WxConsts.KefuMsgType.NEWS:
                 builder = WxMpKefuMessage.NEWS().articles(convertList03(sendReqVO.getArticles()));
                 break;
             case WxConsts.KefuMsgType.MUSIC:
-                builder = WxMpKefuMessage.MUSIC().title(sendReqVO.getTitle()).description(sendReqVO.getDescription())
-                        .thumbMediaId(sendReqVO.getThumbMediaId())
-                        .musicUrl(sendReqVO.getMusicUrl()).hqMusicUrl(sendReqVO.getHqMusicUrl());
+                builder =
+                        WxMpKefuMessage.MUSIC()
+                                .title(sendReqVO.getTitle())
+                                .description(sendReqVO.getDescription())
+                                .thumbMediaId(sendReqVO.getThumbMediaId())
+                                .musicUrl(sendReqVO.getMusicUrl())
+                                .hqMusicUrl(sendReqVO.getHqMusicUrl());
                 break;
             default:
                 throw new IllegalArgumentException("不支持的消息类型：" + sendReqVO.getType());
@@ -151,6 +187,7 @@ public interface MpMessageConvert {
         builder.toUser(user.getOpenid());
         return builder.build();
     }
+
     List<WxMpKefuMessage.WxArticle> convertList03(List<MpMessageDO.Article> list);
 
     default MpMessageDO convert(WxMpKefuMessage wxMessage, MpAccountDO account, MpUserDO user) {
@@ -163,10 +200,11 @@ public interface MpMessageConvert {
         }
         return message;
     }
-    @Mappings(value = {
-            @Mapping(source = "msgType", target = "type"),
-            @Mapping(target = "createTime", ignore = true),
-    })
-    MpMessageDO convert(WxMpKefuMessage bean);
 
+    @Mappings(
+            value = {
+                @Mapping(source = "msgType", target = "type"),
+                @Mapping(target = "createTime", ignore = true),
+            })
+    MpMessageDO convert(WxMpKefuMessage bean);
 }

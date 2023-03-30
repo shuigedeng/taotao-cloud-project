@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.stock.biz.application.event.publish;
 
 import com.egzosn.pay.paypal.bean.order.Payment;
@@ -29,15 +30,14 @@ import org.springframework.context.ApplicationEventPublisherAware;
  */
 public class OrderPaymentEventPublish implements ApplicationEventPublisherAware {
 
-	private ApplicationEventPublisher eventPublisher;
+    private ApplicationEventPublisher eventPublisher;
 
-	@Override
-	public void setApplicationEventPublisher(ApplicationEventPublisher eventPublisher) {
-		this.eventPublisher = eventPublisher;
-	}
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher eventPublisher) {
+        this.eventPublisher = eventPublisher;
+    }
 
-	public void publishImmutablePaymentStartedEvent(Payment savedPayment) {
-		this.eventPublisher.publishEvent(new ImmutablePaymentStartedEvent(savedPayment));
-	}
-
+    public void publishImmutablePaymentStartedEvent(Payment savedPayment) {
+        this.eventPublisher.publishEvent(new ImmutablePaymentStartedEvent(savedPayment));
+    }
 }

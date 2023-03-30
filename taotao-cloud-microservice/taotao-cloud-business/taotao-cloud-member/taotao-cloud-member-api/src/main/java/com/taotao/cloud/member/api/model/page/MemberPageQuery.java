@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.api.model.page;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,20 +40,19 @@ import lombok.NoArgsConstructor;
 @Schema(name = "MemberQuery", description = "会员query")
 public class MemberPageQuery implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
+    @Serial private static final long serialVersionUID = -7605952923416404638L;
 
-	@Schema(description = "用户昵称")
-	private String nickname;
+    @Schema(description = "用户昵称")
+    private String nickname;
 
-	@Schema(description = "用户名称")
-	private String username;
+    @Schema(description = "用户名称")
+    private String username;
 
-	@Schema(description = "手机号码")
-	@Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码格式错误")
-	private String phone;
+    @Schema(description = "手机号码")
+    @Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码格式错误")
+    private String phone;
 
-	@Schema(description = "邮箱")
-	@Email(message = "邮箱格式错误")
-	private String email;
+    @Schema(description = "邮箱")
+    @Email(message = "邮箱格式错误")
+    private String email;
 }

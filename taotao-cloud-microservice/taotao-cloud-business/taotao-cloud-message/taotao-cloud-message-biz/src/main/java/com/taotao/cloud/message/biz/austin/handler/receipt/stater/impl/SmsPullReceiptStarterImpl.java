@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.handler.receipt.stater.impl;
 
 import cn.hutool.core.collection.CollUtil;
@@ -18,7 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 /**
  * 拉取短信回执信息
  *
@@ -28,36 +43,32 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SmsPullReceiptStarterImpl implements ReceiptMessageStater {
 
-	@Autowired
-	private ChannelAccountDao channelAccountDao;
+    @Autowired private ChannelAccountDao channelAccountDao;
 
-	@Autowired
-	private Map<String, SmsScript> scriptMap;
+    @Autowired private Map<String, SmsScript> scriptMap;
 
-	@Autowired
-	private SmsRecordDao smsRecordDao;
+    @Autowired private SmsRecordDao smsRecordDao;
 
-	/**
-	 * 拉取消息并入库
-	 */
-	@Override
-	public void start() {
-		try {
-			List<ChannelAccount> channelAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-				CommonConstant.FALSE, ChannelType.SMS.getCode());
-			for (ChannelAccount channelAccount : channelAccountList) {
-				SmsAccount smsAccount = JSON.parseObject(channelAccount.getAccountConfig(),
-					SmsAccount.class);
-				List<SmsRecord> smsRecordList = scriptMap.get(smsAccount.getScriptName())
-					.pull(channelAccount.getId().intValue());
-				if (CollUtil.isNotEmpty(smsRecordList)) {
-					smsRecordDao.saveAll(smsRecordList);
-				}
-			}
-		} catch (Exception e) {
-			log.error("SmsPullReceiptStarter#start fail:{}", Throwables.getStackTraceAsString(e));
-
-		}
-
-	}
+    /** 拉取消息并入库 */
+    @Override
+    public void start() {
+        try {
+            List<ChannelAccount> channelAccountList =
+                    channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                            CommonConstant.FALSE, ChannelType.SMS.getCode());
+            for (ChannelAccount channelAccount : channelAccountList) {
+                SmsAccount smsAccount =
+                        JSON.parseObject(channelAccount.getAccountConfig(), SmsAccount.class);
+                List<SmsRecord> smsRecordList =
+                        scriptMap
+                                .get(smsAccount.getScriptName())
+                                .pull(channelAccount.getId().intValue());
+                if (CollUtil.isNotEmpty(smsRecordList)) {
+                    smsRecordDao.saveAll(smsRecordList);
+                }
+            }
+        } catch (Exception e) {
+            log.error("SmsPullReceiptStarter#start fail:{}", Throwables.getStackTraceAsString(e));
+        }
+    }
 }

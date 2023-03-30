@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -47,41 +48,37 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = RoleResource.TABLE_NAME, comment = "角色-资源第三方表")
 public class RoleResource extends SuperEntity<RoleResource, Long> {
 
-	public static final String TABLE_NAME = "tt_role_resource";
+    public static final String TABLE_NAME = "tt_role_resource";
 
-	/**
-	 * 角色ID
-	 */
-	@Column(name = "role_id", columnDefinition = "bigint not null comment '角色ID'")
-	private Long roleId;
+    /** 角色ID */
+    @Column(name = "role_id", columnDefinition = "bigint not null comment '角色ID'")
+    private Long roleId;
 
-	/**
-	 * 菜单ID
-	 */
-	@Column(name = "resource_id", columnDefinition = "bigint not null comment '菜单ID'")
-	private Long resourceId;
+    /** 菜单ID */
+    @Column(name = "resource_id", columnDefinition = "bigint not null comment '菜单ID'")
+    private Long resourceId;
 
-	@Builder
-	public RoleResource(Long id, Long roleId, Long resourceId) {
-		super(id);
-		this.roleId = roleId;
-		this.resourceId = resourceId;
-	}
+    @Builder
+    public RoleResource(Long id, Long roleId, Long resourceId) {
+        super(id);
+        this.roleId = roleId;
+        this.resourceId = resourceId;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-			return false;
-		}
-		RoleResource roleResource = (RoleResource) o;
-		return getId() != null && Objects.equals(getId(), roleResource.getId());
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        RoleResource roleResource = (RoleResource) o;
+        return getId() != null && Objects.equals(getId(), roleResource.getId());
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

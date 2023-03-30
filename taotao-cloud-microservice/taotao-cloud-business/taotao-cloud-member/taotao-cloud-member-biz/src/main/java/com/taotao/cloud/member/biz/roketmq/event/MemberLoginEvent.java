@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.member.biz.roketmq.event;
 
+package com.taotao.cloud.member.biz.roketmq.event;
 
 import com.taotao.cloud.member.biz.model.entity.Member;
 
-/**
- * 会员登录消息
- */
+/** 会员登录消息 */
 public interface MemberLoginEvent {
 
-	/**
-	 * 会员登录
-	 *
-	 * @param member 会员
-	 */
-	void memberLogin(Member member);
+    /**
+     * 会员登录
+     *
+     * @param member 会员
+     */
+    void memberLogin(Member member);
 }

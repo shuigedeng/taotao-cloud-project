@@ -1,22 +1,22 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.pay.mq;
 
 import cn.hutool.core.net.url.UrlBuilder;
-import cn.hutool.http.HttpException;
 import cn.hutool.http.HttpUtil;
 import com.taotao.cloud.payment.biz.jeepay.mq.model.PayOrderMchNotifyMQ;
 import com.taotao.cloud.payment.biz.jeepay.mq.vender.IMQSender;
@@ -27,8 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 接收MQ消息
- * 业务： 支付订单商户通知
+ * 接收MQ消息 业务： 支付订单商户通知
+ *
  * @author terrfly
  * @site https://www.jeequan.com
  * @date 2021/7/27 9:23
@@ -37,12 +37,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PayOrderMchNotifyMQReceiver implements PayOrderMchNotifyMQ.IMQReceiver {
 
-    @Autowired
-    private PayOrderService payOrderService;
-    @Autowired
-    private MchNotifyRecordService mchNotifyRecordService;
-    @Autowired
-    private IMQSender mqSender;
+    @Autowired private PayOrderService payOrderService;
+    @Autowired private MchNotifyRecordService mchNotifyRecordService;
+    @Autowired private IMQSender mqSender;
 
     @Override
     public void receive(PayOrderMchNotifyMQ.MsgPayload payload) {
@@ -52,16 +49,16 @@ public class PayOrderMchNotifyMQReceiver implements PayOrderMchNotifyMQ.IMQRecei
 
             Long notifyId = payload.getNotifyId();
             MchNotifyRecord record = mchNotifyRecordService.getById(notifyId);
-            if(record == null || record.getState() != MchNotifyRecord.STATE_ING){
+            if (record == null || record.getState() != MchNotifyRecord.STATE_ING) {
                 log.info("查询通知记录不存在或状态不是通知中");
                 return;
             }
-            if( record.getNotifyCount() >= record.getNotifyCountLimit() ){
+            if (record.getNotifyCount() >= record.getNotifyCountLimit()) {
                 log.info("已达到最大发送次数");
                 return;
             }
 
-            //1. (发送结果最多6次)
+            // 1. (发送结果最多6次)
             Integer currentCount = record.getNotifyCount() + 1;
 
             String notifyUrl = record.getNotifyUrl();
@@ -70,23 +67,25 @@ public class PayOrderMchNotifyMQReceiver implements PayOrderMchNotifyMQ.IMQRecei
                 res = HttpUtil.createPost(notifyUrl).timeout(20000).execute().body();
             } catch (Exception e) {
                 log.error("http error", e);
-                res = "连接["+ UrlBuilder.of(notifyUrl).getHost() +"]异常:【" + e.getMessage() + "】";
+                res = "连接[" + UrlBuilder.of(notifyUrl).getHost() + "]异常:【" + e.getMessage() + "】";
             }
 
-            //支付订单 & 第一次通知: 更新为已通知
-            if(currentCount == 1 && MchNotifyRecord.TYPE_PAY_ORDER == record.getOrderType()){
+            // 支付订单 & 第一次通知: 更新为已通知
+            if (currentCount == 1 && MchNotifyRecord.TYPE_PAY_ORDER == record.getOrderType()) {
                 payOrderService.updateNotifySent(record.getOrderId());
             }
 
-            //通知成功
-            if("SUCCESS".equalsIgnoreCase(res)){
-                mchNotifyRecordService.updateNotifyResult(notifyId, MchNotifyRecord.STATE_SUCCESS, res);
+            // 通知成功
+            if ("SUCCESS".equalsIgnoreCase(res)) {
+                mchNotifyRecordService.updateNotifyResult(
+                        notifyId, MchNotifyRecord.STATE_SUCCESS, res);
                 return;
             }
 
-            //通知次数 >= 最大通知次数时， 更新响应结果为异常， 不在继续延迟发送消息
-            if( currentCount >= record.getNotifyCountLimit() ){
-                mchNotifyRecordService.updateNotifyResult(notifyId, MchNotifyRecord.STATE_FAIL, res);
+            // 通知次数 >= 最大通知次数时， 更新响应结果为异常， 不在继续延迟发送消息
+            if (currentCount >= record.getNotifyCountLimit()) {
+                mchNotifyRecordService.updateNotifyResult(
+                        notifyId, MchNotifyRecord.STATE_FAIL, res);
                 return;
             }
 
@@ -98,7 +97,7 @@ public class PayOrderMchNotifyMQReceiver implements PayOrderMchNotifyMQ.IMQRecei
             mqSender.send(PayOrderMchNotifyMQ.build(notifyId), currentCount * 30);
 
             return;
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
             return;
         }

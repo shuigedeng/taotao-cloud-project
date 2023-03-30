@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.common.database.source.impl;
 
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -24,33 +40,33 @@ public class DbDM extends DbBase {
     }
 
     @Override
-    public LinkedList<Object> getStructParams(String structParams, String table, DataSourceMod dbSourceOrDbLink) {
+    public LinkedList<Object> getStructParams(
+            String structParams, String table, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dataSourceDTO = dbSourceOrDbLink.convertDTO();
         dataSourceDTO.setDbSchema(dataSourceDTO.getUserName());
         return super.getStructParams(structParams, table, dataSourceDTO);
     }
 
-
-//    public static void setDmTableModel(DbConnDTO connDTO, List<DbTableModel> tableModelList) {
-//        //达梦特殊方法
-//        try {
-//            @Cleanup Connection dmConn = connDTO.getConn();
-//            tableModelList.forEach(tm -> {
-//                try {
-//                    Integer sum = DbDM.getSum(dmConn, tm.getTable());
-//                    tm.setSum(sum);
-//                } catch (DataException e) {
-//                    e.printStackTrace();
-//                }
-//            });
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private static Integer getSum(Connection connection, String table) throws DataException {
-//        String sql = "SELECT COUNT(*) as F_SUM FROM " + table;
-//        return JdbcUtil.queryOneInt(connection, sql, "F_SUM");
-//    }
+    //    public static void setDmTableModel(DbConnDTO connDTO, List<DbTableModel> tableModelList) {
+    //        //达梦特殊方法
+    //        try {
+    //            @Cleanup Connection dmConn = connDTO.getConn();
+    //            tableModelList.forEach(tm -> {
+    //                try {
+    //                    Integer sum = DbDM.getSum(dmConn, tm.getTable());
+    //                    tm.setSum(sum);
+    //                } catch (DataException e) {
+    //                    e.printStackTrace();
+    //                }
+    //            });
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //        }
+    //    }
+    //
+    //    private static Integer getSum(Connection connection, String table) throws DataException {
+    //        String sql = "SELECT COUNT(*) as F_SUM FROM " + table;
+    //        return JdbcUtil.queryOneInt(connection, sql, "F_SUM");
+    //    }
 
 }

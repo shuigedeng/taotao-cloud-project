@@ -13,40 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.stock.api.model.dto;
 
+package com.taotao.cloud.stock.api.model.dto;
 
 import java.io.Serializable;
 
-//@ApiModel(value = "商品对象DTO")
+// @ApiModel(value = "商品对象DTO")
 public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 5126530068827085130L;
 
-//    @Schema(description =  "商品名称")
+    //    @Schema(description =  "商品名称")
     private String name;
 
-//    @Schema(description =  "供应商id")
+    //    @Schema(description =  "供应商id")
     private Long supplierId;
 
-//    @Schema(description =  "图片id")
+    //    @Schema(description =  "图片id")
     private Long picId;
 
-//    @Schema(description =  "视频id")
+    //    @Schema(description =  "视频id")
     private Long videoId;
 
-//    @Schema(description =  "商品详情图片id")
+    //    @Schema(description =  "商品详情图片id")
     private Long detailPicId;
 
-//    @Schema(description =  "商品第一张图片id")
+    //    @Schema(description =  "商品第一张图片id")
     private Long firstPicId;
 
-//    @Schema(description =  "商品海报id")
+    //    @Schema(description =  "商品海报id")
     private Long posterPicId;
 
-//    @Schema(description =  "备注")
+    //    @Schema(description =  "备注")
     private String remark;
 
-//    @Schema(description =  "商品状态")
+    //    @Schema(description =  "商品状态")
     private Integer status;
 }

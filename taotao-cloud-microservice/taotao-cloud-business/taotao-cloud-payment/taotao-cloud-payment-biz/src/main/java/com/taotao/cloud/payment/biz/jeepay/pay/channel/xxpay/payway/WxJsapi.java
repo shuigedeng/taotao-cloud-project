@@ -1,18 +1,19 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.xxpay.payway;
 
 import com.alibaba.fastjson.JSONObject;
@@ -27,11 +28,10 @@ import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.UnifiedOrderRQ;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.payway.WxJsapiOrderRQ;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.payway.WxJsapiOrderRS;
 import com.taotao.cloud.payment.biz.jeepay.pay.util.ApiResBuilder;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
 import java.util.Map;
 import java.util.TreeMap;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 /*
  * 小新支付 微信jsapi支付
@@ -40,26 +40,33 @@ import java.util.TreeMap;
  * @site https://www.jeequan.com
  * @date 2021/9/25 16:20
  */
-@Service("xxpayPaymentByWxJsapiService") //Service Name需保持全局唯一性
+@Service("xxpayPaymentByWxJsapiService") // Service Name需保持全局唯一性
 public class WxJsapi extends XxpayPaymentService {
 
     @Override
     public String preCheck(UnifiedOrderRQ rq, PayOrder payOrder) {
 
         WxJsapiOrderRQ bizRQ = (WxJsapiOrderRQ) rq;
-        if(StringUtils.isEmpty(bizRQ.getOpenid())){
+        if (StringUtils.isEmpty(bizRQ.getOpenid())) {
             throw new BizException("[openId]不可为空");
         }
         return null;
     }
 
     @Override
-    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception{
+    public AbstractRS pay(
+            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+            throws Exception {
         WxJsapiOrderRQ bizRQ = (WxJsapiOrderRQ) rq;
 
-        XxpayNormalMchParams params = (XxpayNormalMchParams)configContextQueryService.queryNormalMchParams(mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
+        XxpayNormalMchParams params =
+                (XxpayNormalMchParams)
+                        configContextQueryService.queryNormalMchParams(
+                                mchAppConfigContext.getMchNo(),
+                                mchAppConfigContext.getAppId(),
+                                getIfCode());
         // 构造支付请求参数
-        Map<String,Object> paramMap = new TreeMap();
+        Map<String, Object> paramMap = new TreeMap();
         paramMap.put("mchId", params.getMchId());
         paramMap.put("productId", "8004"); // 微信公众号支付
         paramMap.put("mchOrderNo", payOrder.getPayOrderId());
@@ -78,11 +85,10 @@ public class WxJsapi extends XxpayPaymentService {
         res.setChannelRetMsg(channelRetMsg);
         // 发起支付
         JSONObject resObj = doPay(payOrder, params, paramMap, channelRetMsg);
-        if(resObj == null) {
+        if (resObj == null) {
             return res;
         }
         res.setPayInfo(resObj.getString("payParams"));
         return res;
     }
-
 }

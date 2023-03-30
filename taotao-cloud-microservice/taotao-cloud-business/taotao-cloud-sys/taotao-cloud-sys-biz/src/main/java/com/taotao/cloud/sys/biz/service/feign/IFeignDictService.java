@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.feign;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.web.base.service.BaseSuperService;
-
 
 /**
  * ISysDictService
@@ -28,6 +28,5 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  */
 public interface IFeignDictService extends BaseSuperService<Dict, Long> {
 
- <T> T test123(T t);
-
+    <T> T test123(T t);
 }

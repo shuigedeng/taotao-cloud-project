@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.api.model.vo.position;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-
 import lombok.*;
 
 /**
@@ -36,22 +36,20 @@ import lombok.*;
 @Schema(description = "岗位查询对象")
 public class PositionQueryVO implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = -4132785717179910025L;
+    @Serial private static final long serialVersionUID = -4132785717179910025L;
 
-	@Schema(description = "岗位名称")
-	private String name;
+    @Schema(description = "岗位名称")
+    private String name;
 
-	@Schema(description = "部门id")
-	private Long deptId;
+    @Schema(description = "部门id")
+    private Long deptId;
 
-	@Schema(description = "备注")
-	private String remark;
+    @Schema(description = "备注")
+    private String remark;
 
-	@Schema(description = "排序值")
-	private Integer sortNum;
+    @Schema(description = "排序值")
+    private Integer sortNum;
 
-	@Schema(description = "租户id")
-	private String tenantId;
-
+    @Schema(description = "租户id")
+    private String tenantId;
 }

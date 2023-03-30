@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
@@ -21,6 +22,7 @@ import org.springframework.boot.SpringApplication;
 
 /**
  * TaoTaoCloudSysApplication 抑制java9 module 报错
+ *
  * <pre class="code">
  * --add-opens java.base/java.lang=ALL-UNNAMED
  * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
@@ -41,17 +43,16 @@ import org.springframework.boot.SpringApplication;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
-//@ComponentScan(basePackages = {"com.taotao.cloud.sys.api.feign.fallback"})
+// @ComponentScan(basePackages = {"com.taotao.cloud.sys.api.feign.fallback"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 
-	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-sys");
-		try {
-			SpringApplication.run(TaoTaoCloudSysApplication.class, args);
-		} catch (Throwable e) {
-			throw new RuntimeException(e);
-		}
-	}
-
+    public static void main(String[] args) {
+        PropertyUtils.setDefaultProperty("taotao-cloud-sys");
+        try {
+            SpringApplication.run(TaoTaoCloudSysApplication.class, args);
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

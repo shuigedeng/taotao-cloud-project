@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.convert;
 
 import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
@@ -31,53 +32,50 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-28 13:39:24
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DictConvert {
 
-	/**
-	 * 实例
-	 */
-	DictConvert INSTANCE = Mappers.getMapper(DictConvert.class);
+    /** 实例 */
+    DictConvert INSTANCE = Mappers.getMapper(DictConvert.class);
 
-	FeignDictResponse convert(Dict dict);
+    FeignDictResponse convert(Dict dict);
 
+    /// **
+    // * DictDTO转SysDict
+    // *
+    // * @param dictSaveDTO dictDTO
+    // * @return com.taotao.cloud.sys.biz.entity.SysDict
+    // * @since 2020/11/11 14:52
+    // */
+    // Dict dictDTOToSysDict(DictSaveDTO dictSaveDTO);
 
-	///**
-	// * DictDTO转SysDict
-	// *
-	// * @param dictSaveDTO dictDTO
-	// * @return com.taotao.cloud.sys.biz.entity.SysDict
-	// * @since 2020/11/11 14:52
-	// */
-	//Dict dictDTOToSysDict(DictSaveDTO dictSaveDTO);
+    /// **
+    // * list -> SysUser转UserVO
+    // *
+    // * @param dictList userList
+    // * @return java.util.List<com.taotao.cloud.sys.api.vo.user.UserVO>
+    //
+    // * @since 2020/11/11 15:00
+    // */
+    // List<DictQueryVO> sysDictToDictVO(List<Dict> dictList);
+    //
+    /// **
+    // * sysDict转UserVO
+    // *
+    // * @param sysDict sysDict
+    // * @return com.taotao.cloud.sys.api.vo.user.UserVO
+    //
+    // * @since 2020/11/11 14:47
+    // */
+    // DictQueryVO sysDictToDictVO(Dict sysDict);
 
-	///**
-	// * list -> SysUser转UserVO
-	// *
-	// * @param dictList userList
-	// * @return java.util.List<com.taotao.cloud.sys.api.vo.user.UserVO>
-	//
-	// * @since 2020/11/11 15:00
-	// */
-	//List<DictQueryVO> sysDictToDictVO(List<Dict> dictList);
-	//
-	///**
-	// * sysDict转UserVO
-	// *
-	// * @param sysDict sysDict
-	// * @return com.taotao.cloud.sys.api.vo.user.UserVO
-	//
-	// * @since 2020/11/11 14:47
-	// */
-	//DictQueryVO sysDictToDictVO(Dict sysDict);
-
-	/**
-	 * 复制dict sys dictdto
-	 *
-	 * @param dictSaveDTO dict拯救dto
-	 * @param dict        dict
-	 * @since 2022-04-28 13:39:25
-	 */
-	void copy(DictSaveDTO dictSaveDTO, @MappingTarget Dict dict);
+    /**
+     * 复制dict sys dictdto
+     *
+     * @param dictSaveDTO dict拯救dto
+     * @param dict dict
+     * @since 2022-04-28 13:39:25
+     */
+    void copy(DictSaveDTO dictSaveDTO, @MappingTarget Dict dict);
 }

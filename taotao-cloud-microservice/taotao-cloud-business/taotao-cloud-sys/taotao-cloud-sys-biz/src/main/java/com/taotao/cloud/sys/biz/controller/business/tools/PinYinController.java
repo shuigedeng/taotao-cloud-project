@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.tools;
 
 import com.taotao.cloud.sys.biz.service.business.IPinYinService;
@@ -36,6 +37,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/pinyin")
 public class PinYinController {
 
-	private final IPinYinService pinYinService;
-
+    private final IPinYinService pinYinService;
 }

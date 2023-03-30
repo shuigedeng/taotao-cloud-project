@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DictItemRepository extends BaseClassSuperRepository<DictItem, Long> {
 
-	public DictItemRepository(EntityManager em) {
-		super(DictItem.class, em);
-	}
-
+    public DictItemRepository(EntityManager em) {
+        super(DictItem.class, em);
+    }
 }

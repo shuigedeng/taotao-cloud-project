@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.common.util;
 
 import com.alibaba.fastjson.JSONObject;
@@ -11,22 +27,15 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-/**
- *
- */
+/** */
 public class ServletUtil {
 
-    /**
-     * 获取ServletPath
-     */
+    /** 获取ServletPath */
     public static String getServletPath() {
         return ServletUtil.getRequest().getServletPath();
     }
 
-
-    /**
-     * 获取Request Payload
-     */
+    /** 获取Request Payload */
     public static String getPayload() {
         try {
             @Cleanup ServletInputStream is = ServletUtil.getRequest().getInputStream();
@@ -47,80 +56,58 @@ public class ServletUtil {
         }
     }
 
-
-
-    /**
-     * 获取User-Agent
-     */
+    /** 获取User-Agent */
     public static String getUserAgent() {
         return ServletUtil.getHeader("User-Agent");
     }
 
-    /**
-     * 判断是否是手机端登陆
-     */
+    /** 判断是否是手机端登陆 */
     public static boolean getIsMobileDevice() {
         return isMobileDevice(ServletUtil.getUserAgent());
     }
 
-    /**
-     * 获取HTTP头信息
-     */
+    /** 获取HTTP头信息 */
     public static String getHeader(String name) {
-        if(getRequest()!=null){
+        if (getRequest() != null) {
             return getRequest().getHeader(name);
         }
         return null;
     }
 
-    /**
-     * 获取表单参数
-     */
+    /** 获取表单参数 */
     public static String getParameter(String name) {
         return getRequest().getParameter(name);
     }
 
-    /**
-     * 获取String参数
-     */
+    /** 获取String参数 */
     public static String getParameter(String name, String defaultValue) {
         return ConvertUtil.toStr(getRequest().getParameter(name), defaultValue);
     }
 
-    /**
-     * 获取Integer参数
-     */
+    /** 获取Integer参数 */
     public static Integer getParameterToInt(String name) {
         return ConvertUtil.toInt(getRequest().getParameter(name));
     }
 
-    /**
-     * 获取Integer参数
-     */
+    /** 获取Integer参数 */
     public static Integer getParameterToInt(String name, Integer defaultValue) {
         return ConvertUtil.toInt(getRequest().getParameter(name), defaultValue);
     }
 
-    /**
-     * 获取request
-     */
+    /** 获取request */
     public static HttpServletRequest getRequest() {
-        if(getRequestAttributes()!=null){
+        if (getRequestAttributes() != null) {
             return getRequestAttributes().getRequest();
         }
         return null;
     }
 
-    /**
-     * 获取response
-     */
+    /** 获取response */
     public static HttpServletResponse getResponse() {
         return getRequestAttributes().getResponse();
     }
 
-    /**
-     * 获取session
-     */
+    /** 获取session */
     public static HttpSession getSession() {
         return getRequest().getSession();
     }
@@ -134,13 +121,13 @@ public class ServletUtil {
      * 将字符串渲染到客户端
      *
      * @param response 渲染对象
-     * @param string   待渲染的字符串
+     * @param string 待渲染的字符串
      * @return null
      */
     public static String renderString(HttpServletResponse response, String string) {
         try {
             response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control","no-cache");
+            response.setHeader("Cache-Control", "no-cache");
             response.setContentType("application/json");
             response.setCharacterEncoding(Constants.UTF_8);
             response.getWriter().print(string);
@@ -178,7 +165,7 @@ public class ServletUtil {
     /**
      * 是否包含字符串
      *
-     * @param str  验证字符串
+     * @param str 验证字符串
      * @param strs 字符串组
      * @return 包含返回true
      */
@@ -193,21 +180,21 @@ public class ServletUtil {
         return false;
     }
 
-    /**
-     * 返回JSONObject对象
-     */
-    public static JSONObject getJsonObject() throws Exception{
+    /** 返回JSONObject对象 */
+    public static JSONObject getJsonObject() throws Exception {
         String builder = ServletUtil.getPayload();
         return JSONObject.parseObject(builder);
     }
 
     /**
      * 判断是否是移动设备
+     *
      * @param requestHeader
      * @return
      */
     public static boolean isMobileDevice(String requestHeader) {
-        String[] deviceArray = new String[]{"android", "windows phone", "iphone", "ios", "ipad" ,"mqqbrowser"};
+        String[] deviceArray =
+                new String[] {"android", "windows phone", "iphone", "ios", "ipad", "mqqbrowser"};
         if (requestHeader == null) {
             return false;
         }

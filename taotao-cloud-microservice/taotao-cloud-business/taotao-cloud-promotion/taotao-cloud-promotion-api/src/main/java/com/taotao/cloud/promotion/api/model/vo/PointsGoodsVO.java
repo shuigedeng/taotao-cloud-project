@@ -1,17 +1,30 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.promotion.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serial;
-
-/**
- * 积分商品视图对象
- */
+/** 积分商品视图对象 */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
@@ -19,20 +32,17 @@ import java.io.Serial;
 @NoArgsConstructor
 public class PointsGoodsVO extends PointsGoodsBaseVO {
 
-	@Serial
-	private static final long serialVersionUID = -5163709626742905057L;
+    @Serial private static final long serialVersionUID = -5163709626742905057L;
 
-	private String test;
+    private String test;
 
-	@Schema(description = "商品规格详细信息")
-	private GoodsSkuVO goodsSku;
+    @Schema(description = "商品规格详细信息")
+    private GoodsSkuVO goodsSku;
 
-	@Data
-	@AllArgsConstructor
-	@NoArgsConstructor
-	public static class GoodsSkuVO {
-		private Long id;
-
-	}
-
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class GoodsSkuVO {
+        private Long id;
+    }
 }

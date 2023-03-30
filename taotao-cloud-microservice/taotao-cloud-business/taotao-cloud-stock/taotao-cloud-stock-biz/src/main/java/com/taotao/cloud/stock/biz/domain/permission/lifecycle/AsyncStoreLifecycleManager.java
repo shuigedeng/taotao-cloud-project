@@ -16,13 +16,12 @@
 
 package com.taotao.cloud.stock.biz.domain.permission.lifecycle;
 
+import java.util.Objects;
+import java.util.Optional;
 import org.mallfoundry.store.Store;
 import org.mallfoundry.store.StoreId;
 import org.mallfoundry.store.StoreLifecycleManager;
 import org.mallfoundry.store.StoreProgress;
-
-import java.util.Objects;
-import java.util.Optional;
 
 public class AsyncStoreLifecycleManager implements StoreLifecycleManager {
 

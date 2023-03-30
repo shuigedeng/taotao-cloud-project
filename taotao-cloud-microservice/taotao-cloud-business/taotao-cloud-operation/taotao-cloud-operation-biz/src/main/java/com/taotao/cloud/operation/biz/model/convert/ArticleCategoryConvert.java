@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.operation.biz.model.convert;
 
 import com.taotao.cloud.operation.api.model.vo.ArticleCategoryVO;
@@ -29,15 +30,12 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-28 13:39:18
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ArticleCategoryConvert {
 
-	/**
-	 * 实例
-	 */
-	ArticleCategoryConvert INSTANCE = Mappers.getMapper(ArticleCategoryConvert.class);
+    /** 实例 */
+    ArticleCategoryConvert INSTANCE = Mappers.getMapper(ArticleCategoryConvert.class);
 
-	ArticleCategoryVO convert(ArticleCategory articleCategory);
-
+    ArticleCategoryVO convert(ArticleCategory articleCategory);
 }

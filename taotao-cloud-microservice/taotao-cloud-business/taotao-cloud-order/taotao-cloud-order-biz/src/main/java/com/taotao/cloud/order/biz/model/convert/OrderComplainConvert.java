@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.model.convert;
 
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintDTO;
@@ -27,12 +28,11 @@ import org.mapstruct.factory.Mappers;
  * @since 2020/11/11 14:42
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrderComplainConvert {
 
-	OrderComplainConvert INSTANCE = Mappers.getMapper(OrderComplainConvert.class);
+    OrderComplainConvert INSTANCE = Mappers.getMapper(OrderComplainConvert.class);
 
-	OrderComplaint convert(OrderComplaintDTO orderComplaintDTO);
-
+    OrderComplaint convert(OrderComplaintDTO orderComplaintDTO);
 }

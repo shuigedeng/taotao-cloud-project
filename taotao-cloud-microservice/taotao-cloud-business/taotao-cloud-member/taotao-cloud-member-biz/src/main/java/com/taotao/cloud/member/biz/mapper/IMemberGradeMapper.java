@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
-/**
- * 会员等级数据层
- */
-public interface IMemberGradeMapper extends BaseSuperMapper<MemberGrade, Long> {
-
-}
+/** 会员等级数据层 */
+public interface IMemberGradeMapper extends BaseSuperMapper<MemberGrade, Long> {}

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.service.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -20,9 +21,8 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.payment.biz.repository.cls.PayFlowSuperRepository;
 import com.taotao.cloud.payment.biz.service.IPayFlowService;
-import org.springframework.stereotype.Service;
-
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 /**
  * @author shuigedeng
@@ -32,15 +32,16 @@ import java.util.Optional;
 @Service
 public class PayFlowServiceImpl implements IPayFlowService {
 
-	private final PayFlowSuperRepository payFlowRepository;
+    private final PayFlowSuperRepository payFlowRepository;
 
-	public PayFlowServiceImpl(PayFlowSuperRepository payFlowRepository) {
-		this.payFlowRepository = payFlowRepository;
-	}
+    public PayFlowServiceImpl(PayFlowSuperRepository payFlowRepository) {
+        this.payFlowRepository = payFlowRepository;
+    }
 
-	@Override
-	public PayFlow findPayFlowById(Long id) {
-		Optional<PayFlow> optionalExpressCompany = payFlowRepository.findById(id);
-		return optionalExpressCompany.orElseThrow(() -> new BusinessException(ResultEnum.PAY_FLOW_NOT_EXIST));
-	}
+    @Override
+    public PayFlow findPayFlowById(Long id) {
+        Optional<PayFlow> optionalExpressCompany = payFlowRepository.findById(id);
+        return optionalExpressCompany.orElseThrow(
+                () -> new BusinessException(ResultEnum.PAY_FLOW_NOT_EXIST));
+    }
 }

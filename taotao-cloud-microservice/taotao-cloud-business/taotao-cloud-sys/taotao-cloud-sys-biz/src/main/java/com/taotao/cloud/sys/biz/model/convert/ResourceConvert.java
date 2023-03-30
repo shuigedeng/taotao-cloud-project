@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.convert;
 
 import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
@@ -20,11 +21,10 @@ import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * imenu地图结构
@@ -34,49 +34,46 @@ import java.util.List;
  * @since 2022-04-28 13:39:41
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ResourceConvert {
 
-	/**
-	 * 实例
-	 */
-	ResourceConvert INSTANCE = Mappers.getMapper(ResourceConvert.class);
+    /** 实例 */
+    ResourceConvert INSTANCE = Mappers.getMapper(ResourceConvert.class);
 
-	/**
-	 * 菜单列表树vo列表
-	 *
-	 * @param resourceList 菜单列表
-	 * @return {@link List }<{@link MenuTreeVO }>
-	 * @since 2022-04-28 13:39:41
-	 */
-	List<MenuTreeVO> convertTree(List<Resource> resourceList);
+    /**
+     * 菜单列表树vo列表
+     *
+     * @param resourceList 菜单列表
+     * @return {@link List }<{@link MenuTreeVO }>
+     * @since 2022-04-28 13:39:41
+     */
+    List<MenuTreeVO> convertTree(List<Resource> resourceList);
 
-	/**
-	 * 实体查询bos
-	 *
-	 * @param resources 菜单
-	 * @return {@link List }<{@link DubboMenuQueryRequest }>
-	 * @since 2022-04-28 13:39:41
-	 */
-	List<DubboMenuQueryRequest> convertListRequest(List<Resource> resources);
+    /**
+     * 实体查询bos
+     *
+     * @param resources 菜单
+     * @return {@link List }<{@link DubboMenuQueryRequest }>
+     * @since 2022-04-28 13:39:41
+     */
+    List<DubboMenuQueryRequest> convertListRequest(List<Resource> resources);
 
-	/**
-	 * 菜单bos
-	 *
-	 * @param resources 菜单
-	 * @return {@link List }<{@link MenuBO }>
-	 * @since 2022-04-28 13:39:41
-	 */
-	List<MenuBO> convertListBO(List<Resource> resources);
+    /**
+     * 菜单bos
+     *
+     * @param resources 菜单
+     * @return {@link List }<{@link MenuBO }>
+     * @since 2022-04-28 13:39:41
+     */
+    List<MenuBO> convertListBO(List<Resource> resources);
 
-	/**
-	 * 菜单bos vos
-	 *
-	 * @param bos bos
-	 * @return {@link List }<{@link MenuQueryVO }>
-	 * @since 2022-04-28 13:39:41
-	 */
-	List<MenuQueryVO> convertListVO(List<MenuBO> bos);
-
+    /**
+     * 菜单bos vos
+     *
+     * @param bos bos
+     * @return {@link List }<{@link MenuQueryVO }>
+     * @since 2022-04-28 13:39:41
+     */
+    List<MenuQueryVO> convertListVO(List<MenuBO> bos);
 }

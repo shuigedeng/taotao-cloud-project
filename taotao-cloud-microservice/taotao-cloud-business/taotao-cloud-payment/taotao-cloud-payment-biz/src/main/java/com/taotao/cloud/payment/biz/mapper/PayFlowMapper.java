@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.mapper;
 
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.payment.api.vo.PayFlowVO;
-import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -28,20 +28,20 @@ import org.mapstruct.factory.Mappers;
  * @version 2022.03
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PayFlowMapper {
 
-	PayFlowMapper INSTANCE = Mappers.getMapper(PayFlowMapper.class);
+    PayFlowMapper INSTANCE = Mappers.getMapper(PayFlowMapper.class);
 
-	/**
-	 * payFlow转PayFlowVO
-	 *
-	 * @param payFlow payFlow
-	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
-	 * @author shuigedeng
-	 * @since 2020/11/11 14:47
-	 * @version 2022.03
-	 */
-	PayFlowVO payFlowToPayFlowVO(PayFlow payFlow);
+    /**
+     * payFlow转PayFlowVO
+     *
+     * @param payFlow payFlow
+     * @return com.taotao.cloud.uc.api.vo.user.UserVO
+     * @author shuigedeng
+     * @since 2020/11/11 14:47
+     * @version 2022.03
+     */
+    PayFlowVO payFlowToPayFlowVO(PayFlow payFlow);
 }

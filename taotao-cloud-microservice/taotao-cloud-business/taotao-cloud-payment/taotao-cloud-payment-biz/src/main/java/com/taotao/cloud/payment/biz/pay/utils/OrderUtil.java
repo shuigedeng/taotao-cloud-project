@@ -1,34 +1,25 @@
 /*
- * MIT License
- * Copyright <2021-2022>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- * of the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * @Author: Sinda
- * @Email:  xhuicloud@163.com
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.taotao.cloud.payment.biz.pay.utils;
 
 import com.xhuicloud.pay.entity.PayOrderAll;
+import java.util.Map;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.ObjectUtils;
-
-import java.util.Map;
 
 /**
  * @program: XHuiCloud
@@ -40,8 +31,6 @@ import java.util.Map;
 public class OrderUtil {
 
     public void checkOrder(PayOrderAll payOrderAll, Map<String, String> map) {
-        if (ObjectUtils.isNotEmpty(payOrderAll)){
-
-        }
+        if (ObjectUtils.isNotEmpty(payOrderAll)) {}
     }
 }

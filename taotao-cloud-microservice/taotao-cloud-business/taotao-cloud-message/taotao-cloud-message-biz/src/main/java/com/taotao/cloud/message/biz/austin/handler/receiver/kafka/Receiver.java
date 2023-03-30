@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.handler.receiver.kafka;
 
 import cn.hutool.core.collection.CollUtil;
@@ -27,45 +43,49 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.KAFKA)
 public class Receiver {
 
-	@Autowired
-	private ConsumeService consumeService;
+    @Autowired private ConsumeService consumeService;
 
-	/**
-	 * 发送消息
-	 *
-	 * @param consumerRecord
-	 * @param topicGroupId
-	 */
-	@KafkaListener(topics = "#{'${austin.business.topic.name}'}", containerFactory = "filterContainerFactory")
-	public void consumer(ConsumerRecord<?, String> consumerRecord,
-		@Header(KafkaHeaders.GROUP_ID) String topicGroupId) {
-		Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
-		if (kafkaMessage.isPresent()) {
+    /**
+     * 发送消息
+     *
+     * @param consumerRecord
+     * @param topicGroupId
+     */
+    @KafkaListener(
+            topics = "#{'${austin.business.topic.name}'}",
+            containerFactory = "filterContainerFactory")
+    public void consumer(
+            ConsumerRecord<?, String> consumerRecord,
+            @Header(KafkaHeaders.GROUP_ID) String topicGroupId) {
+        Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
+        if (kafkaMessage.isPresent()) {
 
-			List<TaskInfo> taskInfoLists = JSON.parseArray(kafkaMessage.get(), TaskInfo.class);
-			String messageGroupId = GroupIdMappingUtils.getGroupIdByTaskInfo(
-				CollUtil.getFirst(taskInfoLists.iterator()));
-			/**
-			 * 每个消费者组 只消费 他们自身关心的消息
-			 */
-			if (topicGroupId.equals(messageGroupId)) {
-				consumeService.consume2Send(taskInfoLists);
-			}
-		}
-	}
+            List<TaskInfo> taskInfoLists = JSON.parseArray(kafkaMessage.get(), TaskInfo.class);
+            String messageGroupId =
+                    GroupIdMappingUtils.getGroupIdByTaskInfo(
+                            CollUtil.getFirst(taskInfoLists.iterator()));
+            /** 每个消费者组 只消费 他们自身关心的消息 */
+            if (topicGroupId.equals(messageGroupId)) {
+                consumeService.consume2Send(taskInfoLists);
+            }
+        }
+    }
 
-	/**
-	 * 撤回消息
-	 *
-	 * @param consumerRecord
-	 */
-	@KafkaListener(topics = "#{'${austin.business.recall.topic.name}'}", groupId = "#{'${austin.business.recall.group.name}'}", containerFactory = "filterContainerFactory")
-	public void recall(ConsumerRecord<?, String> consumerRecord) {
-		Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
-		if (kafkaMessage.isPresent()) {
-			MessageTemplate messageTemplate = JSON.parseObject(kafkaMessage.get(),
-				MessageTemplate.class);
-			consumeService.consume2recall(messageTemplate);
-		}
-	}
+    /**
+     * 撤回消息
+     *
+     * @param consumerRecord
+     */
+    @KafkaListener(
+            topics = "#{'${austin.business.recall.topic.name}'}",
+            groupId = "#{'${austin.business.recall.group.name}'}",
+            containerFactory = "filterContainerFactory")
+    public void recall(ConsumerRecord<?, String> consumerRecord) {
+        Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
+        if (kafkaMessage.isPresent()) {
+            MessageTemplate messageTemplate =
+                    JSON.parseObject(kafkaMessage.get(), MessageTemplate.class);
+            consumeService.consume2recall(messageTemplate);
+        }
+    }
 }

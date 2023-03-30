@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.job.api.model.dto;
 
+package com.taotao.cloud.job.api.model.dto;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -31,11 +31,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuartzJobQueryCriteria {
 
-	private String jobName;
+    private String jobName;
 
-	private Boolean isSuccess;
+    private Boolean isSuccess;
 
-	private Boolean isPause;
+    private Boolean isPause;
 
-	private List<Timestamp> createTime;
+    private List<Timestamp> createTime;
 }

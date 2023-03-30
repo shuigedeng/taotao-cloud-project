@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.service.feign;
 
 /**
@@ -22,7 +23,4 @@ package com.taotao.cloud.member.biz.service.feign;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IFeignMemberService {
-
-
-}
+public interface IFeignMemberService {}

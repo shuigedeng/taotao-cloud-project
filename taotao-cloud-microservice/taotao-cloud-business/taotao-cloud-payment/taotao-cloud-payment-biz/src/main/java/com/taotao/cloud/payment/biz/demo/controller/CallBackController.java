@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.demo.controller;
 
 import cn.hutool.core.util.StrUtil;
@@ -18,61 +34,62 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/callback")
 public class CallBackController {
 
-	@Resource
-	private OrderService orderService;
+    @Resource private OrderService orderService;
 
-	@RequestMapping("/notify")
-	public String notify(@RequestParam Map<String, String> data, HttpServletRequest request,
-			HttpServletResponse response) {
-		try {
+    @RequestMapping("/notify")
+    public String notify(
+            @RequestParam Map<String, String> data,
+            HttpServletRequest request,
+            HttpServletResponse response) {
+        try {
 
-			System.out.println("接受到支付结果回调");
-			System.out.println(data.toString());
+            System.out.println("接受到支付结果回调");
+            System.out.println(data.toString());
 
-			String payChannel = data.get("payChannel");
+            String payChannel = data.get("payChannel");
 
-			String attach = data.get("attach");
+            String attach = data.get("attach");
 
-			if (StrUtil.isBlank(payChannel)) {
-				return "payChannel is not null";
-			}
+            if (StrUtil.isBlank(payChannel)) {
+                return "payChannel is not null";
+            }
 
-			String key = null;
-			if ("wxpay".equals(payChannel)) {
-				key = WxPayConfig.key;
-			}
-			if ("alipay".equals(payChannel)) {
-				key = AliPayConfig.key;
-			}
+            String key = null;
+            if ("wxpay".equals(payChannel)) {
+                key = WxPayConfig.key;
+            }
+            if ("alipay".equals(payChannel)) {
+                key = AliPayConfig.key;
+            }
 
-			boolean sign = PaySignUtil.checkNotifySign(request, key);
+            boolean sign = PaySignUtil.checkNotifySign(request, key);
 
-			System.out.println("签名验证：" + sign);
+            System.out.println("签名验证：" + sign);
 
-			if (!sign) {
-				return "sign fail";
-			}
+            if (!sign) {
+                return "sign fail";
+            }
 
-			String outTradeNo = data.get("outTradeNo");
-			String payNo = data.get("payNo");
-			String time = data.get("time");
-			String code = data.get("code");
+            String outTradeNo = data.get("outTradeNo");
+            String payNo = data.get("payNo");
+            String time = data.get("time");
+            String code = data.get("code");
 
-			if (Integer.valueOf(code).intValue() != 1) {
-				return "pay fail";
-			}
+            if (Integer.valueOf(code).intValue() != 1) {
+                return "pay fail";
+            }
 
-			boolean success = orderService.paySuccess(outTradeNo, payNo, time);
-			if (!success) {
-				return "fail";
-			}
-			PrintWriter out = response.getWriter();
-			out.print("SUCCESS");
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            boolean success = orderService.paySuccess(outTradeNo, payNo, time);
+            if (!success) {
+                return "fail";
+            }
+            PrintWriter out = response.getWriter();
+            out.print("SUCCESS");
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

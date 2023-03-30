@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
-
-/**
- * 会员发票数据层
- */
-public interface IMemberReceiptMapper extends BaseSuperMapper<MemberReceipt, Long> {
-
-}
+/** 会员发票数据层 */
+public interface IMemberReceiptMapper extends BaseSuperMapper<MemberReceipt, Long> {}

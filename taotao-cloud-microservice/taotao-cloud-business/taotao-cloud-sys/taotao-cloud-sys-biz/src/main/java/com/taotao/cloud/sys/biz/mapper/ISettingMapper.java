@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
@@ -25,7 +26,4 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
-public interface ISettingMapper extends BaseSuperMapper<Setting, Long> {
-
-}
+public interface ISettingMapper extends BaseSuperMapper<Setting, Long> {}

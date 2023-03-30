@@ -1,11 +1,11 @@
 /*
- * COPYRIGHT (C) 2022 Art AUTHORS(cloud@gmail.com). ALL RIGHTS RESERVED.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,10 +23,8 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 系统应用表
  *
- * @author 
+ * @author
  * @date 2022-09-12
  */
 @Mapper
-public interface AppMapper extends BaseMapper<App> {
-
-}
+public interface AppMapper extends BaseMapper<App> {}

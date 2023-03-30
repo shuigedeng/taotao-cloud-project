@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -23,10 +24,9 @@ import com.taotao.cloud.sys.biz.repository.cls.LogisticsRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ILogisticsRepository;
 import com.taotao.cloud.sys.biz.service.business.ILogisticsService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * @author shuigedeng
@@ -35,14 +35,15 @@ import java.util.Optional;
  */
 @Service
 @AllArgsConstructor
-public class LogisticsServiceImpl extends
-	BaseSuperServiceImpl<ILogisticsMapper, LogisticsConfig, LogisticsRepository, ILogisticsRepository, Long>
-	implements ILogisticsService {
+public class LogisticsServiceImpl
+        extends BaseSuperServiceImpl<
+                ILogisticsMapper, LogisticsConfig, LogisticsRepository, ILogisticsRepository, Long>
+        implements ILogisticsService {
 
-	@Override
-	public LogisticsConfig findLogisticsById(Long id) {
-		Optional<LogisticsConfig> optionalExpressCompany = ir().findById(id);
-		return optionalExpressCompany.orElseThrow(
-			() -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
-	}
+    @Override
+    public LogisticsConfig findLogisticsById(Long id) {
+        Optional<LogisticsConfig> optionalExpressCompany = ir().findById(id);
+        return optionalExpressCompany.orElseThrow(
+                () -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
+    }
 }

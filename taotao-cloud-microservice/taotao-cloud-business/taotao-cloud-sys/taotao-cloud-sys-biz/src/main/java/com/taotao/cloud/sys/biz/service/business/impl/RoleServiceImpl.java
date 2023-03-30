@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -42,44 +43,43 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @AllArgsConstructor
-public class RoleServiceImpl extends
-	BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
-	implements IRoleService {
+public class RoleServiceImpl
+        extends BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
+        implements IRoleService {
 
-	private final static QRole SYS_ROLE = QRole.role;
+    private static final QRole SYS_ROLE = QRole.role;
 
-	private final IRoleResourceService roleResourceService;
+    private final IRoleResourceService roleResourceService;
 
-	@Override
-	public Boolean existRoleByCode(String code) {
-		BooleanExpression predicate = SYS_ROLE.code.eq(code);
-		return cr().exists(predicate);
-	}
+    @Override
+    public Boolean existRoleByCode(String code) {
+        BooleanExpression predicate = SYS_ROLE.code.eq(code);
+        return cr().exists(predicate);
+    }
 
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Boolean saveRoleMenus(Long roleId, Set<Long> menuIds) {
-		return roleResourceService.saveRoleMenu(roleId, menuIds);
-	}
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean saveRoleMenus(Long roleId, Set<Long> menuIds) {
+        return roleResourceService.saveRoleMenu(roleId, menuIds);
+    }
 
-	@Override
-	public List<RoleBO> findAllRoles() {
-		List<Role> roles = ir().findAll();
-		return RoleConvert.INSTANCE.convertListBO(roles);
-	}
+    @Override
+    public List<RoleBO> findAllRoles() {
+        List<Role> roles = ir().findAll();
+        return RoleConvert.INSTANCE.convertListBO(roles);
+    }
 
-	@Override
-	public List<RoleBO> findRoleByUserIds(Set<Long> userIds) {
-		//List<Role> roles = cr().findRoleByUserIds(userIds);
-		List<Role> roles = new ArrayList<>();
-		return RoleConvert.INSTANCE.convertListBO(roles);
-	}
+    @Override
+    public List<RoleBO> findRoleByUserIds(Set<Long> userIds) {
+        // List<Role> roles = cr().findRoleByUserIds(userIds);
+        List<Role> roles = new ArrayList<>();
+        return RoleConvert.INSTANCE.convertListBO(roles);
+    }
 
-	@Override
-	public List<RoleBO> findRoleByCodes(Set<String> codes) {
-		//List<Role> roles = cr().findRoleByCodes(codes);
-		List<Role> roles = new ArrayList<>();
-		return RoleConvert.INSTANCE.convertListBO(roles);
-	}
-
+    @Override
+    public List<RoleBO> findRoleByCodes(Set<String> codes) {
+        // List<Role> roles = cr().findRoleByCodes(codes);
+        List<Role> roles = new ArrayList<>();
+        return RoleConvert.INSTANCE.convertListBO(roles);
+    }
 }

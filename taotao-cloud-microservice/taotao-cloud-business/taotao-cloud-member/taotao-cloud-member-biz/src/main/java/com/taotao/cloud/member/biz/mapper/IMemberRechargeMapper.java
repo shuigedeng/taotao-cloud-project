@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.member.biz.mapper;
 
+package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
-/**
- * 会员签到数据处理层
- */
-public interface IMemberRechargeMapper extends BaseSuperMapper<MemberRecharge, Long> {
-
-}
+/** 会员签到数据处理层 */
+public interface IMemberRechargeMapper extends BaseSuperMapper<MemberRecharge, Long> {}

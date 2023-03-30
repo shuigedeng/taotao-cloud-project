@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboUserRpc;
@@ -37,16 +38,14 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboUserRpc.class, validation = "true")
-public class DubboUserRpcImpl extends
-	BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
-	implements IDubboUserRpc {
+public class DubboUserRpcImpl
+        extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
+        implements IDubboUserRpc {
 
-	private final static QUser USER = QUser.user;
+    private static final QUser USER = QUser.user;
 
-	private final static String DEFAULT_PASSWORD = "123456";
-	private final static String DEFAULT_USERNAME = "admin";
+    private static final String DEFAULT_PASSWORD = "123456";
+    private static final String DEFAULT_USERNAME = "admin";
 
-	private final IUserRelationService userRoleService;
-
-
+    private final IUserRelationService userRoleService;
 }

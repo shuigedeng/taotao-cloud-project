@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.promotion.biz.controller.business.manager;
 
 import cn.hutool.core.util.PageUtil;
@@ -6,13 +22,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.service.business.ICouponService;
 import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
@@ -39,101 +55,95 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion/coupon")
 public class CouponManagerController {
 
-	@Autowired
-	private ICouponService couponService;
-	@Autowired
-	private IMemberCouponService memberCouponService;
+    @Autowired private ICouponService couponService;
+    @Autowired private IMemberCouponService memberCouponService;
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "获取优惠券列表")
-	@GetMapping
-	public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam, PageVO page) {
-		queryParam.setStoreId("platform");
-		return Result.success(couponService.pageVOFindAll(queryParam, page));
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "获取优惠券列表")
+    @GetMapping
+    public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam, PageVO page) {
+        queryParam.setStoreId("platform");
+        return Result.success(couponService.pageVOFindAll(queryParam, page));
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "获取优惠券详情")
-	@GetMapping("/{couponId}")
-	public Result<CouponVO> getCoupon(@PathVariable String couponId) {
-		CouponVO coupon = couponService.getDetail(couponId);
-		return Result.success(coupon);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "获取优惠券详情")
+    @GetMapping("/{couponId}")
+    public Result<CouponVO> getCoupon(@PathVariable String couponId) {
+        CouponVO coupon = couponService.getDetail(couponId);
+        return Result.success(coupon);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "添加优惠券")
-	@PostMapping(consumes = "application/json", produces = "application/json")
-	public Result<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
-		this.setStoreInfo(couponVO);
-		couponService.savePromotions(couponVO);
-		return Result.success(couponVO);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "添加优惠券")
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public Result<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
+        this.setStoreInfo(couponVO);
+        couponService.savePromotions(couponVO);
+        return Result.success(couponVO);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "修改优惠券")
-	@PutMapping(consumes = "application/json", produces = "application/json")
-	public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
-		this.setStoreInfo(couponVO);
-		Coupon coupon = couponService.getById(couponVO.getId());
-		couponService.updatePromotions(couponVO);
-		return Result.success(coupon);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "修改优惠券")
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
+        this.setStoreInfo(couponVO);
+        Coupon coupon = couponService.getById(couponVO.getId());
+        couponService.updatePromotions(couponVO);
+        return Result.success(coupon);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "修改优惠券状态")
-	@PutMapping("/status")
-	public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
-		String[] split = couponIds.split(",");
-		if (couponService.updateStatus(Arrays.asList(split), startTime, endTime)) {
-			return Result.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
-		}
-		throw new BusinessException(ResultEnum.COUPON_EDIT_STATUS_ERROR);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "修改优惠券状态")
+    @PutMapping("/status")
+    public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
+        String[] split = couponIds.split(",");
+        if (couponService.updateStatus(Arrays.asList(split), startTime, endTime)) {
+            return Result.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
+        }
+        throw new BusinessException(ResultEnum.COUPON_EDIT_STATUS_ERROR);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "批量删除")
-	@DeleteMapping(value = "/{ids}")
-	public Result<Object> delAllByIds(@PathVariable List<String> ids) {
-		couponService.removePromotions(ids);
-		return Result.success();
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "批量删除")
+    @DeleteMapping(value = "/{ids}")
+    public Result<Object> delAllByIds(@PathVariable List<String> ids) {
+        couponService.removePromotions(ids);
+        return Result.success();
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "会员优惠券作废")
-	@PutMapping(value = "/member/cancellation/{id}")
-	public Result<Object> cancellation(@PathVariable String id) {
-		memberCouponService.cancellation(id);
-		return Result.success(ResultEnum.COUPON_CANCELLATION_SUCCESS);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "会员优惠券作废")
+    @PutMapping(value = "/member/cancellation/{id}")
+    public Result<Object> cancellation(@PathVariable String id) {
+        memberCouponService.cancellation(id);
+        return Result.success(ResultEnum.COUPON_CANCELLATION_SUCCESS);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "根据优惠券id券分页获取会员领详情")
-	@GetMapping(value = "/member/{id}")
-	public Result<IPage<MemberCoupon>> getByPage(@PathVariable String id,
-		PageVO page) {
-		QueryWrapper<MemberCoupon> queryWrapper = new QueryWrapper<>();
-		IPage<MemberCoupon> data = memberCouponService.page(PageUtil.initPage(page),
-			queryWrapper.eq("coupon_id", id)
-		);
-		return Result.success(data);
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "根据优惠券id券分页获取会员领详情")
+    @GetMapping(value = "/member/{id}")
+    public Result<IPage<MemberCoupon>> getByPage(@PathVariable String id, PageVO page) {
+        QueryWrapper<MemberCoupon> queryWrapper = new QueryWrapper<>();
+        IPage<MemberCoupon> data =
+                memberCouponService.page(PageUtil.initPage(page), queryWrapper.eq("coupon_id", id));
+        return Result.success(data);
+    }
 
-	}
-
-	private void setStoreInfo(CouponVO couponVO) {
-		AuthUser currentUser = UserContext.getCurrentUser();
-		if (currentUser == null) {
-			throw new BusinessException(ResultEnum.USER_NOT_EXIST);
-		}
-		couponVO.setStoreId("platform");
-		couponVO.setStoreName("platform");
-	}
-
+    private void setStoreInfo(CouponVO couponVO) {
+        AuthUser currentUser = UserContext.getCurrentUser();
+        if (currentUser == null) {
+            throw new BusinessException(ResultEnum.USER_NOT_EXIST);
+        }
+        couponVO.setStoreId("platform");
+        couponVO.setStoreName("platform");
+    }
 }

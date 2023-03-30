@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.goods.biz.config.redisson;
 
 import com.taotao.cloud.cache.redis.delay.MessageConversionException;
@@ -27,55 +43,55 @@ import org.springframework.messaging.handler.annotation.Payload;
 @Configuration
 public class RedissonDelayApplication {
 
-	@Bean
-	public RedissonQueue redissonQueue() {
-		return new RedissonQueue("riven", true, null, new DefaultRedissonMessageConverter());
-	}
+    @Bean
+    public RedissonQueue redissonQueue() {
+        return new RedissonQueue("riven", true, null, new DefaultRedissonMessageConverter());
+    }
 
-	@Bean("myMessageConverter")
-	public MessageConverter messageConverter() {
-		return new MessageConverter() {
-			@Override
-			public QueueMessage<?> toMessage(Object object, Map<String, Object> headers)
-				throws MessageConversionException {
-				//do something you want, eg:
-				headers.put("my_header", "my_header_value");
-				return QueueMessageBuilder.withPayload(object).headers(headers).build();
-			}
+    @Bean("myMessageConverter")
+    public MessageConverter messageConverter() {
+        return new MessageConverter() {
+            @Override
+            public QueueMessage<?> toMessage(Object object, Map<String, Object> headers)
+                    throws MessageConversionException {
+                // do something you want, eg:
+                headers.put("my_header", "my_header_value");
+                return QueueMessageBuilder.withPayload(object).headers(headers).build();
+            }
 
-			@Override
-			public Object fromMessage(RedissonMessage redissonMessage)
-				throws MessageConversionException {
-				String payload = redissonMessage.getPayload();
-				String payloadStr = new String(payload);
-				return JsonUtils.toObject(payloadStr, CarLbsDto.class);
-			}
-		};
-	}
+            @Override
+            public Object fromMessage(RedissonMessage redissonMessage)
+                    throws MessageConversionException {
+                String payload = redissonMessage.getPayload();
+                String payloadStr = new String(payload);
+                return JsonUtils.toObject(payloadStr, CarLbsDto.class);
+            }
+        };
+    }
 
-	@RedissonListener(queues = "riven", messageConverter = "myMessageConverter")
-	public void handler(
-		@Header(value = RedissonHeaders.MESSAGE_ID, required = false) String messageId,
-		@Header(RedissonHeaders.DELIVERY_QUEUE_NAME) String queue,
-		@Header(RedissonHeaders.SEND_TIMESTAMP) long sendTimestamp,
-		@Header(RedissonHeaders.EXPECTED_DELAY_MILLIS) long expectedDelayMillis,
-		@Header(value = "my_header", required = false, defaultValue = "test") String myHeader,
-		@Payload CarLbsDto carLbsDto) {
-		System.out.println(messageId);
-		System.out.println(queue);
-		System.out.println(myHeader);
-		long actualDelay = System.currentTimeMillis() - (sendTimestamp + expectedDelayMillis);
-		System.out.println("receive " + carLbsDto + ", delayed " + actualDelay + " millis");
-	}
+    @RedissonListener(queues = "riven", messageConverter = "myMessageConverter")
+    public void handler(
+            @Header(value = RedissonHeaders.MESSAGE_ID, required = false) String messageId,
+            @Header(RedissonHeaders.DELIVERY_QUEUE_NAME) String queue,
+            @Header(RedissonHeaders.SEND_TIMESTAMP) long sendTimestamp,
+            @Header(RedissonHeaders.EXPECTED_DELAY_MILLIS) long expectedDelayMillis,
+            @Header(value = "my_header", required = false, defaultValue = "test") String myHeader,
+            @Payload CarLbsDto carLbsDto) {
+        System.out.println(messageId);
+        System.out.println(queue);
+        System.out.println(myHeader);
+        long actualDelay = System.currentTimeMillis() - (sendTimestamp + expectedDelayMillis);
+        System.out.println("receive " + carLbsDto + ", delayed " + actualDelay + " millis");
+    }
 
-	@Data
-	public static class CarLbsDto {
+    @Data
+    public static class CarLbsDto {
 
-		private String cid;
-		private String businessType;
-		private String city;
-		private String cityId;
-		private String name;
-		private String carNum;
-	}
+        private String cid;
+        private String businessType;
+        private String city;
+        private String cityId;
+        private String name;
+        private String carNum;
+    }
 }

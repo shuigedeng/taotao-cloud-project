@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.log.biz.mapper;
 
 import com.taotao.cloud.log.biz.entity.Log;
@@ -31,10 +32,11 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface ILogMapper extends BaseSuperMapper<Log, Long> {
 
-	@Delete("delete from log where log_type = #{logType}")
-	void deleteByLogType(@Param("logType") String logType);
+    @Delete("delete from log where log_type = #{logType}")
+    void deleteByLogType(@Param("logType") String logType);
 
-	@Select("""
+    @Select(
+            """
 		<script>
 		select l.id,
 			   l.create_time as createTime,
@@ -49,9 +51,10 @@ public interface ILogMapper extends BaseSuperMapper<Log, Long> {
 		order by l.id desc
 		</script>
 		""")
-	List<Log> findAllByPageable(@Param("nickname") String nickname);
+    List<Log> findAllByPageable(@Param("nickname") String nickname);
 
-	@Select("""
+    @Select(
+            """
 		select count(*)
 		FROM (select request_ip
 					 FROM log
@@ -59,5 +62,5 @@ public interface ILogMapper extends BaseSuperMapper<Log, Long> {
 					 GROUP BY request_ip
 			 ) as s
 		""")
-	long findIp(@Param("date1") String date1, @Param("date2") String date2);
+    long findIp(@Param("date1") String date1, @Param("date2") String date2);
 }

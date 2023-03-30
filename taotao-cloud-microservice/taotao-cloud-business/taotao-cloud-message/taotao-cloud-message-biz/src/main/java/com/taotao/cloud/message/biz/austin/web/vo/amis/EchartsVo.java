@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.web.vo.amis;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 3y 图表的Vo https://aisuda.bce.baidu.com/amis/zh-CN/components/chart
- * https://www.runoob.com/echarts/echarts-setup.html
+ *     https://www.runoob.com/echarts/echarts-setup.html
  */
 @Data
 @Builder
@@ -17,117 +33,76 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EchartsVo {
 
-	/**
-	 * title 标题
-	 */
-	@JsonProperty
-	private TitleVO title;
-	/**
-	 * tooltip 提示
-	 */
-	@JsonProperty
-	private TooltipVO tooltip;
-	/**
-	 * legend 图例
-	 */
-	@JsonProperty
-	private LegendVO legend;
-	/**
-	 * xAxis x轴
-	 */
-	@JsonProperty
-	private XaxisVO xAxis;
-	/**
-	 * yAxis y轴
-	 */
-	@JsonProperty
-	private YaxisVO yAxis;
-	/**
-	 * series 系列列表
-	 * <p>
-	 * 每个系列通过 type 决定自己的图表类型
-	 */
-	@JsonProperty
-	private List<SeriesVO> series;
+    /** title 标题 */
+    @JsonProperty private TitleVO title;
+    /** tooltip 提示 */
+    @JsonProperty private TooltipVO tooltip;
+    /** legend 图例 */
+    @JsonProperty private LegendVO legend;
+    /** xAxis x轴 */
+    @JsonProperty private XaxisVO xAxis;
+    /** yAxis y轴 */
+    @JsonProperty private YaxisVO yAxis;
+    /**
+     * series 系列列表
+     *
+     * <p>每个系列通过 type 决定自己的图表类型
+     */
+    @JsonProperty private List<SeriesVO> series;
 
-	/**
-	 * TitleVO
-	 */
-	@Data
-	@Builder
-	public static class TitleVO {
+    /** TitleVO */
+    @Data
+    @Builder
+    public static class TitleVO {
 
-		/**
-		 * text
-		 */
-		private String text;
-	}
+        /** text */
+        private String text;
+    }
 
-	/**
-	 * TooltipVO
-	 */
-	@Data
-	@Builder
-	public static class TooltipVO {
+    /** TooltipVO */
+    @Data
+    @Builder
+    public static class TooltipVO {
 
-		private String color;
-	}
+        private String color;
+    }
 
-	/**
-	 * LegendVO
-	 */
-	@Data
-	@Builder
-	public static class LegendVO {
+    /** LegendVO */
+    @Data
+    @Builder
+    public static class LegendVO {
 
-		/**
-		 * data
-		 */
-		private List<String> data;
-	}
+        /** data */
+        private List<String> data;
+    }
 
-	/**
-	 * XAxisVO
-	 */
-	@Data
-	@Builder
+    /** XAxisVO */
+    @Data
+    @Builder
+    public static class XaxisVO {
 
-	public static class XaxisVO {
+        /** data */
+        private List<String> data;
+    }
 
-		/**
-		 * data
-		 */
-		private List<String> data;
-	}
+    /** YAxisVO */
+    @Data
+    @Builder
+    public static class YaxisVO {
 
-	/**
-	 * YAxisVO
-	 */
-	@Data
-	@Builder
-	public static class YaxisVO {
+        private String type;
+    }
 
-		private String type;
-	}
+    /** SeriesVO */
+    @Data
+    @Builder
+    public static class SeriesVO {
 
-	/**
-	 * SeriesVO
-	 */
-	@Data
-	@Builder
-	public static class SeriesVO {
-
-		/**
-		 * name
-		 */
-		private String name;
-		/**
-		 * type
-		 */
-		private String type;
-		/**
-		 * data
-		 */
-		private List<Integer> data;
-	}
+        /** name */
+        private String name;
+        /** type */
+        private String type;
+        /** data */
+        private List<Integer> data;
+    }
 }

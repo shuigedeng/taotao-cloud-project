@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.common.domain;
 
 import lombok.AllArgsConstructor;
@@ -16,19 +32,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LogParam {
 
-    /**
-     * 需要记录的日志
-     */
+    /** 需要记录的日志 */
     private Object object;
 
-    /**
-     * 标识日志的业务
-     */
+    /** 标识日志的业务 */
     private String bizType;
 
-    /**
-     * 生成时间
-     */
+    /** 生成时间 */
     private long timestamp;
-
 }

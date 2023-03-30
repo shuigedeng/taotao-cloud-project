@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.job.biz.quartz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -38,62 +39,45 @@ import lombok.ToString;
 @org.hibernate.annotations.Table(appliesTo = QuartzJobEntity.TABLE_NAME, comment = "Quartz任务表")
 public class QuartzJobEntity extends BaseSuperEntity<QuartzJobEntity, Long> {
 
-	public static final String TABLE_NAME = "tt_quartz_job";
+    public static final String TABLE_NAME = "tt_quartz_job";
 
-	public static final String JOB_KEY = "JOB_KEY";
+    public static final String JOB_KEY = "JOB_KEY";
 
-	/**
-	 * 任务名称
-	 */
-	@Column(name = "job_name", columnDefinition = "varchar(64) not null comment '任务名称'")
-	private String jobName;
+    /** 任务名称 */
+    @Column(name = "job_name", columnDefinition = "varchar(64) not null comment '任务名称'")
+    private String jobName;
 
-	/**
-	 * 组名称
-	 */
-	@Column(name = "group_name", columnDefinition = "varchar(64) not null comment '组名称'")
-	private String groupName;
+    /** 组名称 */
+    @Column(name = "group_name", columnDefinition = "varchar(64) not null comment '组名称'")
+    private String groupName;
 
-	/**
-	 * Spring Bean名称
-	 */
-	@Column(name = "bean_name", columnDefinition = "varchar(64) not null comment ' Spring Bean名称'")
-	private String beanName;
+    /** Spring Bean名称 */
+    @Column(name = "bean_name", columnDefinition = "varchar(64) not null comment ' Spring Bean名称'")
+    private String beanName;
 
-	/**
-	 * cron 表达式
-	 */
-	@Column(name = "cron_expression", columnDefinition = "varchar(64) not null comment 'cron 表达式'")
-	private String cronExpression;
+    /** cron 表达式 */
+    @Column(name = "cron_expression", columnDefinition = "varchar(64) not null comment 'cron 表达式'")
+    private String cronExpression;
 
-	/**
-	 * @see QuartzJobCode
-	 */
-	@Column(name = "state", columnDefinition = "int default 1 comment '定时任务状态'")
-	private Integer state;
+    /**
+     * @see QuartzJobCode
+     */
+    @Column(name = "state", columnDefinition = "int default 1 comment '定时任务状态'")
+    private Integer state;
 
-	/**
-	 * 方法名称
-	 */
-	@Column(name = "method_name", columnDefinition = "varchar(64) not null comment '方法名称'")
-	private String methodName;
+    /** 方法名称 */
+    @Column(name = "method_name", columnDefinition = "varchar(64) not null comment '方法名称'")
+    private String methodName;
 
-	/**
-	 * 参数
-	 */
-	@Column(name = "params", columnDefinition = "varchar(125) comment '参数'")
-	private String params;
+    /** 参数 */
+    @Column(name = "params", columnDefinition = "varchar(125) comment '参数'")
+    private String params;
 
-	/**
-	 * 备注
-	 */
-	@Column(name = "remark", columnDefinition = "varchar(125) comment '备注'")
-	private String remark;
+    /** 备注 */
+    @Column(name = "remark", columnDefinition = "varchar(125) comment '备注'")
+    private String remark;
 
-	/**
-	 * 是否并发  0：禁止  1：允许
-	 */
-	@Column(name = "concurrent", columnDefinition = "int default 1 comment '是否并发  0：禁止  1：允许'")
-	private Integer concurrent;
-
+    /** 是否并发 0：禁止 1：允许 */
+    @Column(name = "concurrent", columnDefinition = "int default 1 comment '是否并发  0：禁止  1：允许'")
+    private Integer concurrent;
 }

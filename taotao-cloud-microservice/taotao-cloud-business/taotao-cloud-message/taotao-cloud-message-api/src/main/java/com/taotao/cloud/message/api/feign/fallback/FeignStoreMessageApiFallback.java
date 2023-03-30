@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.message.api.feign.fallback;
 
 import com.taotao.cloud.common.model.PageQuery;
@@ -27,17 +28,16 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignStoreMessageApiFallback implements
-	FallbackFactory<IFeignStoreMessageApi> {
+public class FeignStoreMessageApiFallback implements FallbackFactory<IFeignStoreMessageApi> {
 
-	@Override
-	public IFeignStoreMessageApi create(Throwable throwable) {
-		return new IFeignStoreMessageApi() {
+    @Override
+    public IFeignStoreMessageApi create(Throwable throwable) {
+        return new IFeignStoreMessageApi() {
 
-			@Override
-			public PageResult<StoreMessageVO> getPage(PageQuery PageQuery) {
-				return null;
-			}
-		};
-	}
+            @Override
+            public PageResult<StoreMessageVO> getPage(PageQuery PageQuery) {
+                return null;
+            }
+        };
+    }
 }

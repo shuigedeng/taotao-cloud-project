@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.repository.inf;
 
 import com.taotao.cloud.order.biz.model.entity.order.OrderInfo;
@@ -29,24 +30,24 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IOrderInfoRepository extends JpaRepository<OrderInfo, Long> {
 
-	@Query(value = """
+    @Query(value = """
 			select u from OrderInfo u where u.id = ?#{[0]}
 		""")
-	List<OrderInfo> findOrderInfoById(Long id);
+    List<OrderInfo> findOrderInfoById(Long id);
 
-	OrderInfo findByCode(String code);
+    OrderInfo findByCode(String code);
 
-	//@Query(value = """
+    // @Query(value = """
     //        select new com.taotao.cloud.order.api.OrderDO(
-	//			u.memberId,
-	//			u.code,
-	//			u.mainStatus,
-	//			u.childStatus,
-	//			u.amount,
-	//			u.receiverName
-	//		)
-	//		from OrderInfo u
-	//		where u.code = :code
-	//	""")
-	//List<OrderDO> findOrderInfoByBo(@Param("code") String code);
+    //			u.memberId,
+    //			u.code,
+    //			u.mainStatus,
+    //			u.childStatus,
+    //			u.amount,
+    //			u.receiverName
+    //		)
+    //		from OrderInfo u
+    //		where u.code = :code
+    //	""")
+    // List<OrderDO> findOrderInfoByBo(@Param("code") String code);
 }

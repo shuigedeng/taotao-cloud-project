@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.repository.cls;
 
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
@@ -29,21 +30,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class OrderInfoRepository extends BaseClassSuperRepository<OrderInfo, Long> {
 
-	public OrderInfoRepository(EntityManager em) {
-		super(OrderInfo.class, em);
-	}
+    public OrderInfoRepository(EntityManager em) {
+        super(OrderInfo.class, em);
+    }
 
-	public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
+    public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
 
-	public OrderInfo findOrderInfoById(Long id) {
-		OrderInfo fetch = jpaQueryFactory()
-			.selectFrom(ORDER_INFO)
-			.where(ORDER_INFO.id.eq(id))
-			.fetchOne();
+    public OrderInfo findOrderInfoById(Long id) {
+        OrderInfo fetch =
+                jpaQueryFactory().selectFrom(ORDER_INFO).where(ORDER_INFO.id.eq(id)).fetchOne();
 
-		OrderInfo t = getById(id);
+        OrderInfo t = getById(id);
 
-		return fetch;
-	}
-
+        return fetch;
+    }
 }

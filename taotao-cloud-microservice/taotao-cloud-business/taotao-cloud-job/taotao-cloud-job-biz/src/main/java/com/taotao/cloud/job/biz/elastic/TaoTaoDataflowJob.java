@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.biz.elastic;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -20,48 +36,53 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaoTaoDataflowJob implements DataflowJob<Foo> {
 
-	@Override
-	public List<Foo> fetchData(final ShardingContext shardingContext) {
-		// 获取数据
-		LogUtils.info("MyDataflowJob *******************");
-		LogUtils.info("Item : {}, Time: {}, Thread: {}, type:  {}",
-			shardingContext.getShardingItem(),
-			LocalDateTime.now(), Thread.currentThread().getId(), "DATAFLOW");
+    @Override
+    public List<Foo> fetchData(final ShardingContext shardingContext) {
+        // 获取数据
+        LogUtils.info("MyDataflowJob *******************");
+        LogUtils.info(
+                "Item : {}, Time: {}, Thread: {}, type:  {}",
+                shardingContext.getShardingItem(),
+                LocalDateTime.now(),
+                Thread.currentThread().getId(),
+                "DATAFLOW");
 
-		return new ArrayList<>();
-	}
+        return new ArrayList<>();
+    }
 
-	@Override
-	public void processData(final ShardingContext shardingContext, final List<Foo> data) {
-		// 处理数据
-		LogUtils.info("Item : {}, Time: {}, Thread: {}, type:  {}",
-			shardingContext.getShardingItem(),
-			LocalDateTime.now(), Thread.currentThread().getId(), "DATAFLOW");
+    @Override
+    public void processData(final ShardingContext shardingContext, final List<Foo> data) {
+        // 处理数据
+        LogUtils.info(
+                "Item : {}, Time: {}, Thread: {}, type:  {}",
+                shardingContext.getShardingItem(),
+                LocalDateTime.now(),
+                Thread.currentThread().getId(),
+                "DATAFLOW");
+    }
 
-	}
+    public static class Foo implements Serializable {
 
-	public static class Foo implements Serializable {
+        private final long id;
+        private final String location;
+        private final String status;
 
-		private final long id;
-		private final String location;
-		private final String status;
+        public Foo(long id, String location, String status) {
+            this.id = id;
+            this.location = location;
+            this.status = status;
+        }
 
-		public Foo(long id, String location, String status) {
-			this.id = id;
-			this.location = location;
-			this.status = status;
-		}
+        public long getId() {
+            return id;
+        }
 
-		public long getId() {
-			return id;
-		}
+        public String getLocation() {
+            return location;
+        }
 
-		public String getLocation() {
-			return location;
-		}
-
-		public String getStatus() {
-			return status;
-		}
-	}
+        public String getStatus() {
+            return status;
+        }
+    }
 }

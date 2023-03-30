@@ -1,7 +1,20 @@
-package com.taotao.cloud.payment.biz.jeepay.pay.channel.xxpay;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+package com.taotao.cloud.payment.biz.jeepay.pay.channel.xxpay;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -9,6 +22,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 /*
  * 小新支付 工具类
@@ -19,98 +34,98 @@ import java.util.Map;
  */
 @Slf4j
 public class XxpayKit {
-	
-	private static String encodingCharset = "UTF-8";
 
-	/**
-	 * 计算签名
-	 * @param map
-	 * @param key
-	 * @return
-	 */
-	public static String getSign(Map<String,Object> map, String key){
-		ArrayList<String> list = new ArrayList<String>();
-		for(Map.Entry<String,Object> entry:map.entrySet()){
-			if(null != entry.getValue() && !"".equals(entry.getValue())){
-				list.add(entry.getKey() + "=" + entry.getValue() + "&");
-			}
-		}
-		int size = list.size();
-		String [] arrayToSort = list.toArray(new String[size]);
-		Arrays.sort(arrayToSort, String.CASE_INSENSITIVE_ORDER);
-		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < size; i ++) {
-			sb.append(arrayToSort[i]);
-		}
-		String result = sb.toString();
-		result += "key=" + key;
-		log.info("signStr:{}", result);
-		result = md5(result, encodingCharset).toUpperCase();
-		return result;
-	}
+    private static String encodingCharset = "UTF-8";
 
+    /**
+     * 计算签名
+     *
+     * @param map
+     * @param key
+     * @return
+     */
+    public static String getSign(Map<String, Object> map, String key) {
+        ArrayList<String> list = new ArrayList<String>();
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            if (null != entry.getValue() && !"".equals(entry.getValue())) {
+                list.add(entry.getKey() + "=" + entry.getValue() + "&");
+            }
+        }
+        int size = list.size();
+        String[] arrayToSort = list.toArray(new String[size]);
+        Arrays.sort(arrayToSort, String.CASE_INSENSITIVE_ORDER);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            sb.append(arrayToSort[i]);
+        }
+        String result = sb.toString();
+        result += "key=" + key;
+        log.info("signStr:{}", result);
+        result = md5(result, encodingCharset).toUpperCase();
+        return result;
+    }
 
-	/**
-	 * 计算MD5值
-	 * @param value
-	 * @param charset
-	 * @return
-	 */
-	public static String md5(String value, String charset) {
-		MessageDigest md;
-		try {
-			byte[] data = value.getBytes(charset);
-			md = MessageDigest.getInstance("MD5");
-			byte[] digestData = md.digest(data);
-			return toHex(digestData);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			return null;
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public static String toHex(byte input[]) {
-		if (input == null) {
-			return null;
-		}
-		StringBuffer output = new StringBuffer(input.length * 2);
-		for (int i = 0; i < input.length; i++) {
-			int current = input[i] & 0xff;
-			if (current < 16){
-				output.append("0");
-			}
-			output.append(Integer.toString(current, 16));
-		}
-		return output.toString();
-	}
+    /**
+     * 计算MD5值
+     *
+     * @param value
+     * @param charset
+     * @return
+     */
+    public static String md5(String value, String charset) {
+        MessageDigest md;
+        try {
+            byte[] data = value.getBytes(charset);
+            md = MessageDigest.getInstance("MD5");
+            byte[] digestData = md.digest(data);
+            return toHex(digestData);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-	public static String getPaymentUrl(String payUrl) {
-		return getPayUrl(payUrl) + "api/pay/create_order";
-	}
+    public static String toHex(byte input[]) {
+        if (input == null) {
+            return null;
+        }
+        StringBuffer output = new StringBuffer(input.length * 2);
+        for (int i = 0; i < input.length; i++) {
+            int current = input[i] & 0xff;
+            if (current < 16) {
+                output.append("0");
+            }
+            output.append(Integer.toString(current, 16));
+        }
+        return output.toString();
+    }
 
-	public static String getQueryPayOrderUrl(String payUrl) {
-		return getPayUrl(payUrl) + "api/pay/query_order";
-	}
+    public static String getPaymentUrl(String payUrl) {
+        return getPayUrl(payUrl) + "api/pay/create_order";
+    }
 
-	public static String getRefundUrl(String payUrl) {
-		return getPayUrl(payUrl) + "api/refund/create_order";
-	}
+    public static String getQueryPayOrderUrl(String payUrl) {
+        return getPayUrl(payUrl) + "api/pay/query_order";
+    }
 
-	public static String getQueryRefundOrderUrl(String payUrl) {
-		return getPayUrl(payUrl) + "api/refund/query_order";
-	}
+    public static String getRefundUrl(String payUrl) {
+        return getPayUrl(payUrl) + "api/refund/create_order";
+    }
 
-	protected static String getPayUrl(String payUrl) {
-		if(StringUtils.isEmpty(payUrl)) {
-			return payUrl;
-		}
-		if(!payUrl.endsWith("/")) {
-			payUrl += "/";
-		}
-		return payUrl;
-	}
+    public static String getQueryRefundOrderUrl(String payUrl) {
+        return getPayUrl(payUrl) + "api/refund/query_order";
+    }
 
+    protected static String getPayUrl(String payUrl) {
+        if (StringUtils.isEmpty(payUrl)) {
+            return payUrl;
+        }
+        if (!payUrl.endsWith("/")) {
+            payUrl += "/";
+        }
+        return payUrl;
+    }
 }

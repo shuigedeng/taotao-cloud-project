@@ -1,7 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.bootx.code.paymodel;
 
 /**
  * 支付宝支付参数
+ *
  * @author xxm
  * @date 2021/2/27
  */
@@ -37,7 +54,7 @@ public interface AliPayCode {
     /** 支付宝流水号 */
     String TRADE_NO = "trade_no";
 
-    //交易状态说明
+    // 交易状态说明
     /** 交易创建，等待买家付款 */
     String PAYMENT_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
     /** 未付款交易超时关闭，或支付完成后全额退款 */
@@ -47,7 +64,7 @@ public interface AliPayCode {
     /** 交易结束，不可退款 */
     String PAYMENT_TRADE_FINISHED = "TRADE_FINISHED";
 
-    //通知触发条件
+    // 通知触发条件
     /** 交易完成 */
     String NOTIFY_TRADE_FINISHED = "TRADE_FINISHED";
     /** 支付成功 */
@@ -56,7 +73,6 @@ public interface AliPayCode {
     String NOTIFY_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
     /** 交易关闭 */
     String NOTIFY_TRADE_CLOSED = "TRADE_CLOSED";
-
 
     // 错误提示
     /** 交易不存在 */
@@ -67,6 +83,4 @@ public interface AliPayCode {
 
     // 网关返回码 支付进行中 order success pay inprocess
     String INPROCESS = "10003";
-
-
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
@@ -44,40 +45,38 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
 public class BuyerDictController extends BaseBusinessController<IDictService, Dict, Long> {
 
-	//@Autowired
-	//private ProducerService producerService;
+    // @Autowired
+    // private ProducerService producerService;
 
-	@NotAuth
-	@GetMapping("/add/{type}")
-	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
-	public Result<Boolean> add(@PathVariable String type)
-		throws SQLIntegrityConstraintViolationException {
-		Boolean result = service().add(type);
-		return success(result);
-	}
+    @NotAuth
+    @GetMapping("/add/{type}")
+    @ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+    public Result<Boolean> add(@PathVariable String type)
+            throws SQLIntegrityConstraintViolationException {
+        Boolean result = service().add(type);
+        return success(result);
+    }
 
-	@NotAuth
-	@GetMapping("/add1")
-	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
-	public Result<Boolean> add1() {
-		Boolean result = service().add1();
-		return success(result);
-	}
+    @NotAuth
+    @GetMapping("/add1")
+    @ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+    public Result<Boolean> add1() {
+        Boolean result = service().add1();
+        return success(result);
+    }
 
-	@GetMapping("/test/codexxxxx")
-	@ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
-	public Result<Boolean> testCode(@RequestParam String code) {
-		//try {
-		//	producerService.sendStringMsg();
-		//	producerService.sendClassMsg();
-		//} catch (PulsarClientException e) {
-		//	e.printStackTrace();
-		//}
+    @GetMapping("/test/codexxxxx")
+    @ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
+    public Result<Boolean> testCode(@RequestParam String code) {
+        // try {
+        //	producerService.sendStringMsg();
+        //	producerService.sendClassMsg();
+        // } catch (PulsarClientException e) {
+        //	e.printStackTrace();
+        // }
 
-		Dict byCode = service().findByCode(code);
-		LogUtils.info(String.valueOf(byCode));
-		return Result.success(true);
-	}
-
+        Dict byCode = service().findByCode(code);
+        LogUtils.info(String.valueOf(byCode));
+        return Result.success(true);
+    }
 }
-

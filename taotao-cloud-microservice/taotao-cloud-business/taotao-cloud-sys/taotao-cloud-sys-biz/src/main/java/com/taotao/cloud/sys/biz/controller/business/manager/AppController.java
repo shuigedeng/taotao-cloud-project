@@ -1,11 +1,11 @@
 /*
- * COPYRIGHT (C) 2022 Art AUTHORS(cloud@gmail.com). ALL RIGHTS RESERVED.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 系统应用表
  *
- * @author 
+ * @author
  * @date 2022-09-12
  */
 @Tag(name = "应用管理")
@@ -44,64 +44,51 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AppController {
 
-	private final AppService appService;
+    private final AppService appService;
 
-	/**
-	 * 分页
-	 */
-	@Operation(summary = "分页")
-	@GetMapping(value = "/page")
-	public Result<PageResult<AppDTO>> pageSysApp(AppPageDTO appPageDTO) {
-		//Validator.validateParam(appPageDTO, ValidationGroups.query.class);
-		return Result.success(
-			PageResult.convertMybatisPage(appService.pageApp(appPageDTO), AppDTO.class));
-	}
+    /** 分页 */
+    @Operation(summary = "分页")
+    @GetMapping(value = "/page")
+    public Result<PageResult<AppDTO>> pageSysApp(AppPageDTO appPageDTO) {
+        // Validator.validateParam(appPageDTO, ValidationGroups.query.class);
+        return Result.success(
+                PageResult.convertMybatisPage(appService.pageApp(appPageDTO), AppDTO.class));
+    }
 
-	/**
-	 * 添加
-	 */
-	@Operation(summary = "添加")
-	@PostMapping(value = "/add")
-	public Result<Boolean> add(@RequestBody AppDTO appDTO) {
-		//ValidationUtil.validateParam(appDTO, ValidationGroups.add.class);
-		return Result.success(appService.addApp(appDTO));
-	}
+    /** 添加 */
+    @Operation(summary = "添加")
+    @PostMapping(value = "/add")
+    public Result<Boolean> add(@RequestBody AppDTO appDTO) {
+        // ValidationUtil.validateParam(appDTO, ValidationGroups.add.class);
+        return Result.success(appService.addApp(appDTO));
+    }
 
-	/**
-	 * 修改
-	 */
-	@Operation(summary = "修改")
-	@PostMapping(value = "/update")
-	public Result<Boolean> update(@RequestBody AppDTO appDTO) {
-		//ValidationUtil.validateParam(appDTO, ValidationGroups.update.class);
-		return Result.success(appService.updateApp(appDTO));
-	}
+    /** 修改 */
+    @Operation(summary = "修改")
+    @PostMapping(value = "/update")
+    public Result<Boolean> update(@RequestBody AppDTO appDTO) {
+        // ValidationUtil.validateParam(appDTO, ValidationGroups.update.class);
+        return Result.success(appService.updateApp(appDTO));
+    }
 
-	/**
-	 * 删除
-	 */
-	@Operation(summary = "删除")
-	@DeleteMapping(value = "/delete")
-	public Result<Boolean> delete(Long id) {
-		return Result.success(appService.deleteApp(id));
-	}
+    /** 删除 */
+    @Operation(summary = "删除")
+    @DeleteMapping(value = "/delete")
+    public Result<Boolean> delete(Long id) {
+        return Result.success(appService.deleteApp(id));
+    }
 
-	/**
-	 * 获取单条
-	 */
-	@Operation(summary = "获取单条")
-	@GetMapping(value = "/findById")
-	public Result<AppDTO> findById(Long id) {
-		return Result.success(appService.findById(id));
-	}
+    /** 获取单条 */
+    @Operation(summary = "获取单条")
+    @GetMapping(value = "/findById")
+    public Result<AppDTO> findById(Long id) {
+        return Result.success(appService.findById(id));
+    }
 
-	/**
-	 * 获取全部
-	 */
-	@Operation(summary = "获取全部")
-	@GetMapping(value = "/findAll")
-	public Result<List<AppDTO>> findAll() {
-		return Result.success(appService.findAll());
-	}
-
+    /** 获取全部 */
+    @Operation(summary = "获取全部")
+    @GetMapping(value = "/findAll")
+    public Result<List<AppDTO>> findAll() {
+        return Result.success(appService.findAll());
+    }
 }

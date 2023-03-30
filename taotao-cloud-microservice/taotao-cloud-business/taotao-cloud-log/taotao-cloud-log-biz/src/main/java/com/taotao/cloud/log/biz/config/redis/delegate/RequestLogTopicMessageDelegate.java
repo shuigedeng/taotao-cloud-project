@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.log.biz.config.redis.delegate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -32,15 +33,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class RequestLogTopicMessageDelegate {
 
-	@Autowired
-	private ILogService logService;
+    @Autowired private ILogService logService;
 
-	public void handleRequestLog(String message, String channel) {
-		try {
-			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
-			logService.save(log);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-	}
+    public void handleRequestLog(String message, String channel) {
+        try {
+            Log log = JsonUtils.MAPPER.readValue(message, Log.class);
+            logService.save(log);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
 }

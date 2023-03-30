@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.event.sys;
 
 import com.taotao.cloud.web.request.model.RequestLog;
@@ -30,9 +31,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysEventListener {
 
-	@Async
-	@EventListener(SysEvent.class)
-	public void saveRequestLog(SysEvent event) {
-		RequestLog requestLog = (RequestLog) event.getSource();
-	}
+    @Async
+    @EventListener(SysEvent.class)
+    public void saveRequestLog(SysEvent event) {
+        RequestLog requestLog = (RequestLog) event.getSource();
+    }
 }

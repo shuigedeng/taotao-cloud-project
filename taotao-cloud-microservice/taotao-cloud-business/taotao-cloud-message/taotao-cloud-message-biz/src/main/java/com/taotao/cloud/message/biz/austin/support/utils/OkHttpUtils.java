@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.support.utils;
 
 import cn.hutool.core.map.MapUtil;
@@ -23,174 +39,166 @@ import org.springframework.stereotype.Component;
 @Component
 public class OkHttpUtils {
 
-	private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-	private static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
+    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
 
-	@Autowired
-	private OkHttpClient okHttpClient;
+    @Autowired private OkHttpClient okHttpClient;
 
-	/**
-	 * get 请求
-	 *
-	 * @param url 请求url地址
-	 * @return string
-	 */
-	public String doGet(String url) {
-		return doGet(url, null, null);
-	}
+    /**
+     * get 请求
+     *
+     * @param url 请求url地址
+     * @return string
+     */
+    public String doGet(String url) {
+        return doGet(url, null, null);
+    }
 
+    /**
+     * get 请求
+     *
+     * @param url 请求url地址
+     * @param params 请求参数 map
+     * @return string
+     */
+    public String doGet(String url, Map<String, String> params) {
+        return doGet(url, params, null);
+    }
 
-	/**
-	 * get 请求
-	 *
-	 * @param url    请求url地址
-	 * @param params 请求参数 map
-	 * @return string
-	 */
-	public String doGet(String url, Map<String, String> params) {
-		return doGet(url, params, null);
-	}
+    /**
+     * get 请求
+     *
+     * @param url 请求url地址
+     * @param headers 请求头字段 {k1, v1 k2, v2, ...}
+     * @return string
+     */
+    public String doGetWithHeaders(String url, Map<String, String> headers) {
+        return doGet(url, null, headers);
+    }
 
-	/**
-	 * get 请求
-	 *
-	 * @param url     请求url地址
-	 * @param headers 请求头字段 {k1, v1 k2, v2, ...}
-	 * @return string
-	 */
-	public String doGetWithHeaders(String url, Map<String, String> headers) {
-		return doGet(url, null, headers);
-	}
+    /**
+     * get 请求
+     *
+     * @param url 请求url地址
+     * @param params 请求参数 map
+     * @param headers 请求头字段 {k1, v1 k2, v2, ...}
+     * @return string
+     */
+    public String doGet(String url, Map<String, String> params, Map<String, String> headers) {
+        StringBuilder sb = new StringBuilder(url);
+        if (Objects.nonNull(params) && params.keySet().size() > 0) {
+            boolean firstFlag = true;
+            for (String key : params.keySet()) {
+                if (firstFlag) {
+                    sb.append("?").append(key).append("=").append(params.get(key));
+                    firstFlag = false;
+                } else {
+                    sb.append("&").append(key).append("=").append(params.get(key));
+                }
+            }
+        }
+        Request.Builder builder = getBuilderWithHeaders(headers);
+        Request request = builder.url(sb.toString()).build();
 
+        log.info("do get request and url[{}]", sb);
+        return execute(request);
+    }
 
-	/**
-	 * get 请求
-	 *
-	 * @param url     请求url地址
-	 * @param params  请求参数 map
-	 * @param headers 请求头字段 {k1, v1 k2, v2, ...}
-	 * @return string
-	 */
-	public String doGet(String url, Map<String, String> params, Map<String, String> headers) {
-		StringBuilder sb = new StringBuilder(url);
-		if (Objects.nonNull(params) && params.keySet().size() > 0) {
-			boolean firstFlag = true;
-			for (String key : params.keySet()) {
-				if (firstFlag) {
-					sb.append("?").append(key).append("=").append(params.get(key));
-					firstFlag = false;
-				} else {
-					sb.append("&").append(key).append("=").append(params.get(key));
-				}
-			}
-		}
-		Request.Builder builder = getBuilderWithHeaders(headers);
-		Request request = builder.url(sb.toString()).build();
+    /**
+     * post 请求
+     *
+     * @param url 请求url地址
+     * @param params 请求参数 map
+     * @param headers 请求头字段 {k1, v1 k2, v2, ...}
+     * @return string
+     */
+    public String doPost(String url, Map<String, String> params, Map<String, String> headers) {
+        FormBody.Builder formBuilder = new FormBody.Builder();
 
-		log.info("do get request and url[{}]", sb);
-		return execute(request);
-	}
+        if (Objects.nonNull(params) && params.keySet().size() > 0) {
+            for (String key : params.keySet()) {
+                formBuilder.add(key, params.get(key));
+            }
+        }
+        Request.Builder builder = getBuilderWithHeaders(headers);
 
-	/**
-	 * post 请求
-	 *
-	 * @param url     请求url地址
-	 * @param params  请求参数 map
-	 * @param headers 请求头字段 {k1, v1 k2, v2, ...}
-	 * @return string
-	 */
-	public String doPost(String url, Map<String, String> params, Map<String, String> headers) {
-		FormBody.Builder formBuilder = new FormBody.Builder();
+        Request request = builder.url(url).post(formBuilder.build()).build();
+        log.info("do post request and url[{}]", url);
 
-		if (Objects.nonNull(params) && params.keySet().size() > 0) {
-			for (String key : params.keySet()) {
-				formBuilder.add(key, params.get(key));
-			}
-		}
-		Request.Builder builder = getBuilderWithHeaders(headers);
+        return execute(request);
+    }
 
-		Request request = builder.url(url).post(formBuilder.build()).build();
-		log.info("do post request and url[{}]", url);
+    /**
+     * 获取request Builder
+     *
+     * @param headers 请求头字段 {k1, v1 k2, v2, ...}
+     * @return
+     */
+    private Request.Builder getBuilderWithHeaders(Map<String, String> headers) {
+        Request.Builder builder = new Request.Builder();
+        if (!MapUtil.isEmpty(headers)) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                builder.addHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        return builder;
+    }
 
-		return execute(request);
-	}
+    /**
+     * post 请求, 请求数据为 json 的字符串
+     *
+     * @param url 请求url地址
+     * @param json 请求数据, json 字符串
+     * @return string
+     */
+    public String doPostJson(String url, String json) {
+        log.info("do post request and url[{}]", url);
+        return executePost(url, json, JSON, null);
+    }
 
+    /**
+     * post 请求, 请求数据为 json 的字符串
+     *
+     * @param url 请求url地址
+     * @param json 请求数据, json 字符串
+     * @param headers 请求头字段 {k1, v1 k2, v2, ...}
+     * @return string
+     */
+    public String doPostJsonWithHeaders(String url, String json, Map<String, String> headers) {
+        log.info("do post request and url[{}]", url);
+        return executePost(url, json, JSON, headers);
+    }
 
-	/**
-	 * 获取request Builder
-	 *
-	 * @param headers 请求头字段 {k1, v1 k2, v2, ...}
-	 * @return
-	 */
-	private Request.Builder getBuilderWithHeaders(Map<String, String> headers) {
-		Request.Builder builder = new Request.Builder();
-		if (!MapUtil.isEmpty(headers)) {
-			for (Map.Entry<String, String> entry : headers.entrySet()) {
-				builder.addHeader(entry.getKey(), entry.getValue());
-			}
-		}
-		return builder;
-	}
+    /**
+     * post 请求, 请求数据为 xml 的字符串
+     *
+     * @param url 请求url地址
+     * @param xml 请求数据, xml 字符串
+     * @return string
+     */
+    public String doPostXml(String url, String xml) {
+        log.info("do post request and url[{}]", url);
+        return executePost(url, xml, XML, null);
+    }
 
+    private String executePost(
+            String url, String data, MediaType contentType, Map<String, String> headers) {
+        RequestBody requestBody =
+                RequestBody.create(data.getBytes(StandardCharsets.UTF_8), contentType);
+        Request.Builder builder = getBuilderWithHeaders(headers);
+        Request request = builder.url(url).post(requestBody).build();
 
-	/**
-	 * post 请求, 请求数据为 json 的字符串
-	 *
-	 * @param url  请求url地址
-	 * @param json 请求数据, json 字符串
-	 * @return string
-	 */
-	public String doPostJson(String url, String json) {
-		log.info("do post request and url[{}]", url);
-		return executePost(url, json, JSON, null);
-	}
+        return execute(request);
+    }
 
-	/**
-	 * post 请求, 请求数据为 json 的字符串
-	 *
-	 * @param url     请求url地址
-	 * @param json    请求数据, json 字符串
-	 * @param headers 请求头字段 {k1, v1 k2, v2, ...}
-	 * @return string
-	 */
-	public String doPostJsonWithHeaders(String url, String json, Map<String, String> headers) {
-		log.info("do post request and url[{}]", url);
-		return executePost(url, json, JSON, headers);
-	}
-
-	/**
-	 * post 请求, 请求数据为 xml 的字符串
-	 *
-	 * @param url 请求url地址
-	 * @param xml 请求数据, xml 字符串
-	 * @return string
-	 */
-	public String doPostXml(String url, String xml) {
-		log.info("do post request and url[{}]", url);
-		return executePost(url, xml, XML, null);
-	}
-
-
-	private String executePost(String url, String data, MediaType contentType,
-		Map<String, String> headers) {
-		RequestBody requestBody = RequestBody.create(data.getBytes(StandardCharsets.UTF_8),
-			contentType);
-		Request.Builder builder = getBuilderWithHeaders(headers);
-		Request request = builder.url(url).post(requestBody).build();
-
-		return execute(request);
-	}
-
-	private String execute(Request request) {
-		try (Response response = okHttpClient.newCall(request).execute()) {
-			if (response.isSuccessful()) {
-				return response.body().string();
-			}
-		} catch (Exception e) {
-			log.error(Throwables.getStackTraceAsString(e));
-		}
-		return "";
-	}
-
+    private String execute(Request request) {
+        try (Response response = okHttpClient.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                return response.body().string();
+            }
+        } catch (Exception e) {
+            log.error(Throwables.getStackTraceAsString(e));
+        }
+        return "";
+    }
 }
-

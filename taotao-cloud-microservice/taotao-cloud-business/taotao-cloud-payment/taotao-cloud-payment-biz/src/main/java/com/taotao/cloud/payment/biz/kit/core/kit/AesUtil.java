@@ -1,20 +1,33 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.kit.core.kit;
 
 import cn.hutool.core.codec.Base64;
-
-import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.GCMParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
-/**
- * <p>工具类 AesUtil</p>
- */
+/** 工具类 AesUtil */
 public class AesUtil {
 
     static final int KEY_LENGTH_BYTE = 32;
@@ -35,12 +48,13 @@ public class AesUtil {
      * 证书和回调报文解密
      *
      * @param associatedData associated_data
-     * @param nonce          nonce
-     * @param cipherText     ciphertext
+     * @param nonce nonce
+     * @param cipherText ciphertext
      * @return {String} 平台证书明文
      * @throws GeneralSecurityException 异常
      */
-    public String decryptToString(byte[] associatedData, byte[] nonce, String cipherText) throws GeneralSecurityException {
+    public String decryptToString(byte[] associatedData, byte[] nonce, String cipherText)
+            throws GeneralSecurityException {
         try {
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
 

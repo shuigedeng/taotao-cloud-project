@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.api.constant;
 
 /**
@@ -24,14 +25,9 @@ package com.taotao.cloud.member.api.constant;
  */
 public interface MemberCollectionQueryConstants {
 
-	/**
-	 * 商品收藏关键字->商品
-	 */
-	String GOODS = "GOODS";
+    /** 商品收藏关键字->商品 */
+    String GOODS = "GOODS";
 
-	/**
-	 * 商品收藏关键字->店铺
-	 */
-	String STORE = "STORE";
-
+    /** 商品收藏关键字->店铺 */
+    String STORE = "STORE";
 }

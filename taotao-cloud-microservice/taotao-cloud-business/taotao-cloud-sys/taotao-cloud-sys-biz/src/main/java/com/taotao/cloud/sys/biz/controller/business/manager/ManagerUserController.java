@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.exception.BusinessException;
@@ -61,97 +62,106 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/manager/user")
 @Tag(name = "管理端-用户管理API", description = "管理端-用户管理API")
-public class ManagerUserController extends
-		BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
+public class ManagerUserController
+        extends BaseSuperController<
+                IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
-	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
-	@GetMapping("/exists/phone/{phone}")
-	public Result<Boolean> existsByPhone(
-			@Parameter(description = "手机号码", required = true) @NotBlank(message = "手机号码不能为空")
-			@PathVariable(name = "phone") String phone) {
-		return success(service().existsByPhone(phone));
-	}
+    @Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:user:exists:phone')")
+    @GetMapping("/exists/phone/{phone}")
+    public Result<Boolean> existsByPhone(
+            @Parameter(description = "手机号码", required = true)
+                    @NotBlank(message = "手机号码不能为空")
+                    @PathVariable(name = "phone")
+                    String phone) {
+        return success(service().existsByPhone(phone));
+    }
 
-	@Operation(summary = "根据用户id查询用户是否存在", description = "根据用户id查询用户是否存在")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:user:exists:id')")
-	@GetMapping("/exists/id/{userId}")
-	public Result<Boolean> existsByUserId(
-			@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
-			@PathVariable(name = "userId") Long userId) {
-		return success(service().existsById(userId));
-	}
+    @Operation(summary = "根据用户id查询用户是否存在", description = "根据用户id查询用户是否存在")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:user:exists:id')")
+    @GetMapping("/exists/id/{userId}")
+    public Result<Boolean> existsByUserId(
+            @Parameter(description = "用户id", required = true)
+                    @NotNull(message = "用户id不能为空")
+                    @PathVariable(name = "userId")
+                    Long userId) {
+        return success(service().existsById(userId));
+    }
 
-	@Operation(summary = "重置密码", description = "重置密码")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:user:rest:password')")
-	@PostMapping("/rest/password/{userId}")
-	public Result<Boolean> restPass(
-			@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
-			@PathVariable(name = "userId") Long userId,
-			@Parameter(description = "重置密码DTO", required = true)
-			@Validated @RequestBody RestPasswordUserDTO restPasswordDTO) {
-		return success(service().restPass(userId, restPasswordDTO));
-	}
+    @Operation(summary = "重置密码", description = "重置密码")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:user:rest:password')")
+    @PostMapping("/rest/password/{userId}")
+    public Result<Boolean> restPass(
+            @Parameter(description = "用户id", required = true)
+                    @NotNull(message = "用户id不能为空")
+                    @PathVariable(name = "userId")
+                    Long userId,
+            @Parameter(description = "重置密码DTO", required = true) @Validated @RequestBody
+                    RestPasswordUserDTO restPasswordDTO) {
+        return success(service().restPass(userId, restPasswordDTO));
+    }
 
-	@Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:user:info:current')")
-	@GetMapping("/current")
-	public Result<UserQueryVO> getCurrentUser() {
-		SecurityUser securityUser = SecurityUtils.getCurrentUser();
-		if (Objects.isNull(securityUser)) {
-			throw new BusinessException("用户未登录");
-		}
-		Long userId = securityUser.getUserId();
-		User sysUser = service().getById(userId);
-		return success(UserConvert.INSTANCE.convert(sysUser));
-	}
+    @Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:user:info:current')")
+    @GetMapping("/current")
+    public Result<UserQueryVO> getCurrentUser() {
+        SecurityUser securityUser = SecurityUtils.getCurrentUser();
+        if (Objects.isNull(securityUser)) {
+            throw new BusinessException("用户未登录");
+        }
+        Long userId = securityUser.getUserId();
+        User sysUser = service().getById(userId);
+        return success(UserConvert.INSTANCE.convert(sysUser));
+    }
 
+    @Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:user:role')")
+    @PutMapping("/roles/{userId}")
+    public Result<Boolean> updateUserRoles(
+            @Parameter(description = "用户id", required = true)
+                    @NotNull(message = "用户id不能为空")
+                    @PathVariable(name = "userId")
+                    Long userId,
+            @Parameter(description = "角色id列表", required = true)
+                    @NotEmpty(message = "角色id列表不能为空")
+                    @RequestBody
+                    Set<Long> roleIds) {
+        return success(service().updateUserRoles(userId, roleIds));
+    }
 
-	@Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:user:role')")
-	@PutMapping("/roles/{userId}")
-	public Result<Boolean> updateUserRoles(
-			@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
-			@PathVariable(name = "userId") Long userId,
-			@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
-			@RequestBody Set<Long> roleIds) {
-		return success(service().updateUserRoles(userId, roleIds));
-	}
+    @PostMapping("/user/test/save")
+    @NotAuth
+    public Result<Boolean> testSave(
+            @Parameter(description = "新增DTO", required = true) @RequestBody @Validated
+                    UserSaveDTO saveDTO) {
+        User user = new User();
+        BeanUtils.copy(saveDTO, user);
+        user.setAccount("sdfasfd");
+        user.setNickname("sdfasfd");
+        user.setUsername("sdfasfd");
+        user.setPassword("xxx");
+        user.setMobile("123455");
+        user.setPhone("123455");
+        user.setSex(0);
+        user.setEmail("sdfasdf");
+        user.setBirthday("sdfasdf");
+        // user.setDeptId(1L);
+        // user.setJobId(2L);
+        user.setStatus(1);
+        user.setTenantId("sdfasdf");
+        service().im().insert(user);
+        return Result.success(true);
+    }
 
-	@PostMapping("/user/test/save")
-	@NotAuth
-	public Result<Boolean> testSave(
-			@Parameter(description = "新增DTO", required = true)
-			@RequestBody @Validated UserSaveDTO saveDTO) {
-		User user = new User();
-		BeanUtils.copy(saveDTO, user);
-		user.setAccount("sdfasfd");
-		user.setNickname("sdfasfd");
-		user.setUsername("sdfasfd");
-		user.setPassword("xxx");
-		user.setMobile("123455");
-		user.setPhone("123455");
-		user.setSex(0);
-		user.setEmail("sdfasdf");
-		user.setBirthday("sdfasdf");
-		//user.setDeptId(1L);
-		//user.setJobId(2L);
-		user.setStatus(1);
-		user.setTenantId("sdfasdf");
-		service().im().insert(user);
-		return Result.success(true);
-	}
-
-	@GetMapping("/user/test/get")
-	@NotAuth
-	public Result<List<User>> testGet() {
-		List<User> all = service().ir().findAll();
-		return Result.success(all);
-	}
+    @GetMapping("/user/test/get")
+    @NotAuth
+    public Result<List<User>> testGet() {
+        List<User> all = service().ir().findAll();
+        return Result.success(all);
+    }
 }
-

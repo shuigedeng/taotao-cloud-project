@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.log.biz.service.impl;
 
 import cn.hutool.core.lang.Dict;
@@ -51,143 +52,139 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
-	ILogService {
+public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements ILogService {
 
-	@Override
-	public Object findAllByPageable(String nickname, Pageable pageable) {
-		//getPage(pageable);
-		PageInfo<Log> page = new PageInfo<>(this.baseMapper.findAllByPageable(nickname));
-		Map<String, Object> map = new LinkedHashMap<>(2);
-		map.put("content", page.getList());
-		map.put("totalElements", page.getTotal());
-		return map;
-	}
+    @Override
+    public Object findAllByPageable(String nickname, Pageable pageable) {
+        // getPage(pageable);
+        PageInfo<Log> page = new PageInfo<>(this.baseMapper.findAllByPageable(nickname));
+        Map<String, Object> map = new LinkedHashMap<>(2);
+        map.put("content", page.getList());
+        map.put("totalElements", page.getTotal());
+        return map;
+    }
 
+    @Override
+    public Object queryAll(LogQueryCriteria criteria, Pageable pageable) {
+        // getPage(pageable);
+        PageInfo<Log> page = new PageInfo<>(queryAll(criteria));
+        Map<String, Object> map = new LinkedHashMap<>(2);
+        String status = "ERROR";
+        if (status.equals(criteria.getLogType())) {
+            // map.put("content", generator.convert(page.getList(), LogErrorDTO.class));
+            map.put("totalElements", page.getTotal());
+        }
+        map.put("content", page.getList());
+        map.put("totalElements", page.getTotal());
+        return map;
+    }
 
-	@Override
-	public Object queryAll(LogQueryCriteria criteria, Pageable pageable) {
-		//getPage(pageable);
-		PageInfo<Log> page = new PageInfo<>(queryAll(criteria));
-		Map<String, Object> map = new LinkedHashMap<>(2);
-		String status = "ERROR";
-		if (status.equals(criteria.getLogType())) {
-			//map.put("content", generator.convert(page.getList(), LogErrorDTO.class));
-			map.put("totalElements", page.getTotal());
-		}
-		map.put("content", page.getList());
-		map.put("totalElements", page.getTotal());
-		return map;
-	}
+    @Override
+    public List<Log> queryAll(LogQueryCriteria criteria) {
+        return baseMapper.selectList(new QueryWrapper<>(new Log()));
+        // return baseMapper.selectList(QueryHelpPlus.getPredicate(Log.class, criteria));
+    }
 
-	@Override
-	public List<Log> queryAll(LogQueryCriteria criteria) {
-		return baseMapper.selectList(new QueryWrapper<>(new Log()));
-		//return baseMapper.selectList(QueryHelpPlus.getPredicate(Log.class, criteria));
-	}
+    @Override
+    public Object queryAllByUser(LogQueryCriteria criteria, Pageable pageable) {
+        // getPage(pageable);
+        PageInfo<Log> page = new PageInfo<>(queryAll(criteria));
+        Map<String, Object> map = new LinkedHashMap<>(2);
+        // map.put("content", generator.convert(page.getList(), LogSmallDTO.class));
+        map.put("totalElements", page.getTotal());
+        return map;
+    }
 
-	@Override
-	public Object queryAllByUser(LogQueryCriteria criteria, Pageable pageable) {
-		//getPage(pageable);
-		PageInfo<Log> page = new PageInfo<>(queryAll(criteria));
-		Map<String, Object> map = new LinkedHashMap<>(2);
-		//map.put("content", generator.convert(page.getList(), LogSmallDTO.class));
-		map.put("totalElements", page.getTotal());
-		return map;
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void save(String username, String ip, ProceedingJoinPoint joinPoint, Log log, Long uid) {
 
-	}
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        RequestLogger requestLogger = method.getAnnotation(RequestLogger.class);
 
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void save(String username, String ip, ProceedingJoinPoint joinPoint, Log log, Long uid) {
+        // 方法路径
+        String methodName =
+                joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
 
-		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-		Method method = signature.getMethod();
-		RequestLogger requestLogger = method.getAnnotation(RequestLogger.class);
+        StringBuilder params = new StringBuilder("{");
+        // 参数值
+        Object[] argValues = joinPoint.getArgs();
+        // 参数名称
+        String[] argNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
+        if (argValues != null) {
+            for (int i = 0; i < argValues.length; i++) {
+                params.append(" ").append(argNames[i]).append(": ").append(argValues[i]);
+            }
+        }
+        // 描述
+        if (log != null) {
+            log.setDescription(requestLogger.value());
+        }
+        // 类型 0-后台 1-前台
+        // log.setType(aopLog.getType());
+        if (uid != null) {
+            // log.setIp(uid);
+        }
+        assert log != null;
+        log.setIp(ip);
 
-		// 方法路径
-		String methodName =
-			joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
+        String loginPath = "login";
+        if (loginPath.equals(signature.getName())) {
+            try {
+                assert argValues != null;
+                username = new JSONObject(argValues[0]).get("username").toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        log.setLocation(StringUtils.getCityInfo(log.getIp()));
+        log.setMethod(methodName);
+        log.setUsername(username);
+        log.setParams(params + " }");
+        this.save(log);
+    }
 
-		StringBuilder params = new StringBuilder("{");
-		//参数值
-		Object[] argValues = joinPoint.getArgs();
-		//参数名称
-		String[] argNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
-		if (argValues != null) {
-			for (int i = 0; i < argValues.length; i++) {
-				params.append(" ").append(argNames[i]).append(": ").append(argValues[i]);
-			}
-		}
-		// 描述
-		if (log != null) {
-			log.setDescription(requestLogger.value());
-		}
-		//类型 0-后台 1-前台
-		//log.setType(aopLog.getType());
-		if (uid != null) {
-			//log.setIp(uid);
-		}
-		assert log != null;
-		log.setIp(ip);
+    @Override
+    public Object findByErrDetail(Long id) {
+        Log log = this.getById(id);
+        // ValidationUtil.isNull(log.getId(), "Log", "id", id);
+        String details = log.getExDetail();
+        return Dict.create().set("exception", details);
+    }
 
-		String loginPath = "login";
-		if (loginPath.equals(signature.getName())) {
-			try {
-				assert argValues != null;
-				username = new JSONObject(argValues[0]).get("username").toString();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		log.setLocation(StringUtils.getCityInfo(log.getIp()));
-		log.setMethod(methodName);
-		log.setUsername(username);
-		log.setParams(params + " }");
-		this.save(log);
-	}
+    @Override
+    public void download(List<Log> logs, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (Log log : logs) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("用户名", log.getUsername());
+            map.put("IP", log.getIp());
+            map.put("IP来源", log.getLocation());
+            map.put("描述", log.getDescription());
+            map.put("浏览器", log.getBrowser());
+            map.put("请求耗时/毫秒", log.getConsumingTime());
+            map.put("异常详情", log.getExDetail());
+            map.put("创建日期", log.getCreateTime());
+            list.add(map);
+        }
+        // FileUtil.downloadExcel(list, response);
+    }
 
-	@Override
-	public Object findByErrDetail(Long id) {
-		Log log = this.getById(id);
-		//ValidationUtil.isNull(log.getId(), "Log", "id", id);
-		String details = log.getExDetail();
-		return Dict.create()
-			.set("exception", details);
-	}
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delAllByError() {
+        this.baseMapper.deleteByLogType("ERROR");
+    }
 
-	@Override
-	public void download(List<Log> logs, HttpServletResponse response) throws IOException {
-		List<Map<String, Object>> list = new ArrayList<>();
-		for (Log log : logs) {
-			Map<String, Object> map = new LinkedHashMap<>();
-			map.put("用户名", log.getUsername());
-			map.put("IP", log.getIp());
-			map.put("IP来源", log.getLocation());
-			map.put("描述", log.getDescription());
-			map.put("浏览器", log.getBrowser());
-			map.put("请求耗时/毫秒", log.getConsumingTime());
-			map.put("异常详情", log.getExDetail());
-			map.put("创建日期", log.getCreateTime());
-			list.add(map);
-		}
-		//FileUtil.downloadExcel(list, response);
-	}
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delAllByInfo() {
+        this.baseMapper.deleteByLogType("INFO");
+    }
 
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void delAllByError() {
-		this.baseMapper.deleteByLogType("ERROR");
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void delAllByInfo() {
-		this.baseMapper.deleteByLogType("INFO");
-	}
-
-	@Override
-	public long findIp(String toString, String toString1) {
-		return 0;
-	}
+    @Override
+    public long findIp(String toString, String toString1) {
+        return 0;
+    }
 }

@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.log.api.model.dto;
 
+package com.taotao.cloud.log.api.model.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -31,15 +31,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LogSmallDTO implements Serializable {
 
-	private String description;
+    private String description;
 
-	private String requestIp;
+    private String requestIp;
 
-	private Long time;
+    private Long time;
 
-	private String address;
+    private String address;
 
-	private String browser;
+    private String browser;
 
-	private Timestamp createTime;
+    private Timestamp createTime;
 }

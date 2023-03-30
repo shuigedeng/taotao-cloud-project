@@ -1,5 +1,20 @@
-package com.taotao.cloud.message.biz.austin.web.controller;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.message.biz.austin.web.controller;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.hutool.http.HttpUtil;
@@ -34,66 +49,72 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("微信服务号")
 public class MiniProgramController {
 
-	@Autowired
-	private AccountUtils accountUtils;
+    @Autowired private AccountUtils accountUtils;
 
-	@GetMapping("/template/list")
-	@ApiOperation("/根据账号Id获取模板列表")
-	public List<CommonAmisVo> queryList(Integer id) {
-		try {
-			List<CommonAmisVo> result = new ArrayList<>();
-			WxMaService wxMaService = accountUtils.getAccountById(id, WxMaService.class);
-			List<TemplateInfo> templateList = wxMaService.getSubscribeService().getTemplateList();
-			for (TemplateInfo templateInfo : templateList) {
-				CommonAmisVo commonAmisVo = CommonAmisVo.builder().label(templateInfo.getTitle())
-					.value(templateInfo.getPriTmplId()).build();
-				result.add(commonAmisVo);
-			}
-			return result;
-		} catch (Exception e) {
-			log.error("MiniProgramController#queryList fail:{}",
-				Throwables.getStackTraceAsString(e));
-			throw new CommonException(RespStatusEnum.SERVICE_ERROR);
-		}
+    @GetMapping("/template/list")
+    @ApiOperation("/根据账号Id获取模板列表")
+    public List<CommonAmisVo> queryList(Integer id) {
+        try {
+            List<CommonAmisVo> result = new ArrayList<>();
+            WxMaService wxMaService = accountUtils.getAccountById(id, WxMaService.class);
+            List<TemplateInfo> templateList = wxMaService.getSubscribeService().getTemplateList();
+            for (TemplateInfo templateInfo : templateList) {
+                CommonAmisVo commonAmisVo =
+                        CommonAmisVo.builder()
+                                .label(templateInfo.getTitle())
+                                .value(templateInfo.getPriTmplId())
+                                .build();
+                result.add(commonAmisVo);
+            }
+            return result;
+        } catch (Exception e) {
+            log.error(
+                    "MiniProgramController#queryList fail:{}", Throwables.getStackTraceAsString(e));
+            throw new CommonException(RespStatusEnum.SERVICE_ERROR);
+        }
+    }
 
-	}
+    /**
+     * 根据账号Id和模板ID获取模板列表
+     *
+     * @return
+     */
+    @PostMapping("/detailTemplate")
+    @ApiOperation("/根据账号Id和模板ID获取模板列表")
+    public CommonAmisVo queryDetailList(Integer id, String wxTemplateId) {
+        if (Objects.isNull(id) || Objects.isNull(wxTemplateId)) {
+            throw new CommonException(RespStatusEnum.CLIENT_BAD_PARAMETERS);
+        }
+        try {
+            WxMaService wxMaService = accountUtils.getAccountById(id, WxMaService.class);
+            List<TemplateInfo> templateList = wxMaService.getSubscribeService().getTemplateList();
+            return Convert4Amis.getWxMaTemplateParam(wxTemplateId, templateList);
+        } catch (Exception e) {
+            log.error(
+                    "MiniProgramController#queryDetailList fail:{}",
+                    Throwables.getStackTraceAsString(e));
+            throw new CommonException(RespStatusEnum.SERVICE_ERROR);
+        }
+    }
 
-	/**
-	 * 根据账号Id和模板ID获取模板列表
-	 *
-	 * @return
-	 */
-	@PostMapping("/detailTemplate")
-	@ApiOperation("/根据账号Id和模板ID获取模板列表")
-	public CommonAmisVo queryDetailList(Integer id, String wxTemplateId) {
-		if (Objects.isNull(id) || Objects.isNull(wxTemplateId)) {
-			throw new CommonException(RespStatusEnum.CLIENT_BAD_PARAMETERS);
-		}
-		try {
-			WxMaService wxMaService = accountUtils.getAccountById(id, WxMaService.class);
-			List<TemplateInfo> templateList = wxMaService.getSubscribeService().getTemplateList();
-			return Convert4Amis.getWxMaTemplateParam(wxTemplateId, templateList);
-		} catch (Exception e) {
-			log.error("MiniProgramController#queryDetailList fail:{}",
-				Throwables.getStackTraceAsString(e));
-			throw new CommonException(RespStatusEnum.SERVICE_ERROR);
-		}
-	}
-
-	/**
-	 * 登录凭证校验
-	 * <p>
-	 * 临时给小程序登录使用，正常消息推送平台不会有此接口
-	 *
-	 * @return
-	 */
-	@GetMapping("/sync/openid")
-	@ApiOperation("登录凭证校验")
-	public String syncOpenId(String code, String appId, String secret) {
-		String url =
-			"https://api.weixin.qq.com/sns/jscode2session?appid=" + appId + "&secret=" + secret
-				+ "&js_code=" + code + "&grant_type=authorization_code";
-		return HttpUtil.get(url);
-	}
-
+    /**
+     * 登录凭证校验
+     *
+     * <p>临时给小程序登录使用，正常消息推送平台不会有此接口
+     *
+     * @return
+     */
+    @GetMapping("/sync/openid")
+    @ApiOperation("登录凭证校验")
+    public String syncOpenId(String code, String appId, String secret) {
+        String url =
+                "https://api.weixin.qq.com/sns/jscode2session?appid="
+                        + appId
+                        + "&secret="
+                        + secret
+                        + "&js_code="
+                        + code
+                        + "&grant_type=authorization_code";
+        return HttpUtil.get(url);
+    }
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.model.convert;
 
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
@@ -29,23 +30,19 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-27 16:58:24
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface GoodsSkuConvert {
 
-	/**
-	 * 实例
-	 */
-	GoodsSkuConvert INSTANCE = Mappers.getMapper(GoodsSkuConvert.class);
+    /** 实例 */
+    GoodsSkuConvert INSTANCE = Mappers.getMapper(GoodsSkuConvert.class);
 
-	/**
-	 * 产品sku产品sku签证官
-	 *
-	 * @param goodsSku 产品sku
-	 * @return {@link GoodsSkuSpecGalleryVO }
-	 * @since 2022-04-27 16:58:24
-	 */
-	GoodsSkuSpecGalleryVO convert(GoodsSku goodsSku);
-
-
+    /**
+     * 产品sku产品sku签证官
+     *
+     * @param goodsSku 产品sku
+     * @return {@link GoodsSkuSpecGalleryVO }
+     * @since 2022-04-27 16:58:24
+     */
+    GoodsSkuSpecGalleryVO convert(GoodsSku goodsSku);
 }

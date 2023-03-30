@@ -1,4 +1,23 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.mp.service.message;
+
+import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.MESSAGE_SEND_FAIL;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
@@ -17,6 +36,8 @@ import cn.iocoder.yudao.module.mp.service.account.MpAccountService;
 import cn.iocoder.yudao.module.mp.service.material.MpMaterialService;
 import cn.iocoder.yudao.module.mp.service.message.bo.MpMessageSendOutReqBO;
 import cn.iocoder.yudao.module.mp.service.user.MpUserService;
+import javax.annotation.Resource;
+import javax.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -28,12 +49,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.annotation.Resource;
-import javax.validation.Validator;
-
-import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.MESSAGE_SEND_FAIL;
-
 /**
  * 粉丝消息 Service 实现类
  *
@@ -44,23 +59,17 @@ import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.MESSAGE_SEND_F
 @Slf4j
 public class MpMessageServiceImpl implements MpMessageService {
 
-    @Resource
-    @Lazy // 延迟加载，避免循环依赖
+    @Resource @Lazy // 延迟加载，避免循环依赖
     private MpAccountService mpAccountService;
-    @Resource
-    private MpUserService mpUserService;
-    @Resource
-    private MpMaterialService mpMaterialService;
+    @Resource private MpUserService mpUserService;
+    @Resource private MpMaterialService mpMaterialService;
 
-    @Resource
-    private MpMessageMapper mpMessageMapper;
+    @Resource private MpMessageMapper mpMessageMapper;
 
-    @Resource
-    @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource @Lazy // 延迟加载，解决循环依赖的问题
     private MpServiceFactory mpServiceFactory;
 
-    @Resource
-    private Validator validator;
+    @Resource private Validator validator;
 
     @Override
     public PageResult<MpMessageDO> getMessagePage(MpMessagePageReqVO pageReqVO) {
@@ -76,8 +85,10 @@ public class MpMessageServiceImpl implements MpMessageService {
         Assert.notNull(user, "公众号粉丝({}/{}) 不存在", appId, wxMessage.getFromUser());
 
         // 记录消息
-        MpMessageDO message = MpMessageConvert.INSTANCE.convert(wxMessage, account, user)
-                .setSendFrom(MpMessageSendFromEnum.USER_TO_MP.getFrom());
+        MpMessageDO message =
+                MpMessageConvert.INSTANCE
+                        .convert(wxMessage, account, user)
+                        .setSendFrom(MpMessageSendFromEnum.USER_TO_MP.getFrom());
         downloadMessageMedia(message);
         mpMessageMapper.insert(message);
     }
@@ -94,8 +105,10 @@ public class MpMessageServiceImpl implements MpMessageService {
         Assert.notNull(user, "公众号粉丝({}/{}) 不存在", sendReqBO.getAppId(), sendReqBO.getOpenid());
 
         // 记录消息
-        MpMessageDO message = MpMessageConvert.INSTANCE.convert(sendReqBO, account, user).
-                setSendFrom(MpMessageSendFromEnum.MP_TO_USER.getFrom());
+        MpMessageDO message =
+                MpMessageConvert.INSTANCE
+                        .convert(sendReqBO, account, user)
+                        .setSendFrom(MpMessageSendFromEnum.MP_TO_USER.getFrom());
         downloadMessageMedia(message);
         mpMessageMapper.insert(message);
 
@@ -122,8 +135,10 @@ public class MpMessageServiceImpl implements MpMessageService {
         }
 
         // 记录消息
-        MpMessageDO message = MpMessageConvert.INSTANCE.convert(wxMessage, account, user)
-                .setSendFrom(MpMessageSendFromEnum.MP_TO_USER.getFrom());
+        MpMessageDO message =
+                MpMessageConvert.INSTANCE
+                        .convert(wxMessage, account, user)
+                        .setSendFrom(MpMessageSendFromEnum.MP_TO_USER.getFrom());
         downloadMessageMedia(message);
         mpMessageMapper.insert(message);
         return message;
@@ -136,13 +151,18 @@ public class MpMessageServiceImpl implements MpMessageService {
      */
     private void downloadMessageMedia(MpMessageDO message) {
         if (StrUtil.isNotEmpty(message.getMediaId())) {
-            message.setMediaUrl(mpMaterialService.downloadMaterialUrl(message.getAccountId(),
-                    message.getMediaId(), MpUtils.getMediaFileType(message.getType())));
+            message.setMediaUrl(
+                    mpMaterialService.downloadMaterialUrl(
+                            message.getAccountId(),
+                            message.getMediaId(),
+                            MpUtils.getMediaFileType(message.getType())));
         }
         if (StrUtil.isNotEmpty(message.getThumbMediaId())) {
-            message.setThumbMediaUrl(mpMaterialService.downloadMaterialUrl(message.getAccountId(),
-                    message.getThumbMediaId(), WxConsts.MediaFileType.THUMB));
+            message.setThumbMediaUrl(
+                    mpMaterialService.downloadMaterialUrl(
+                            message.getAccountId(),
+                            message.getThumbMediaId(),
+                            WxConsts.MediaFileType.THUMB));
         }
     }
-
 }

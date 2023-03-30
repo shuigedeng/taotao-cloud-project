@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.event.point;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -30,13 +30,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class PointEventListener {
 
-	//@Autowired
-	//private IOrderLogService orderLogService;
+    // @Autowired
+    // private IOrderLogService orderLogService;
 
-	@Async
-	@EventListener(PointEvent.class)
-	public void saveOrderLog(PointEvent event) {
-		//OrderLog orderLog = (OrderLog) event.getSource();
-		//orderLogService.save(orderLog);
-	}
+    @Async
+    @EventListener(PointEvent.class)
+    public void saveOrderLog(PointEvent event) {
+        // OrderLog orderLog = (OrderLog) event.getSource();
+        // orderLogService.save(orderLog);
+    }
 }

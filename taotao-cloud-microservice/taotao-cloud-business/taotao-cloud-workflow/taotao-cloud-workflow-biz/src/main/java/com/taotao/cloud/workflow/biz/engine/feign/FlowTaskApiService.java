@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.engine.feign;
 
 import com.taotao.cloud.workflow.api.feign.flow.FlowTaskApi;
@@ -33,26 +49,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-/**
- * 流程引擎
- *
- */
+/** 流程引擎 */
 @Api(tags = "流程引擎", value = "FlowTask")
 @Service
 public class FlowTaskApiService implements FlowTaskApi {
 
-    @Autowired
-    private FlowDynamicService flowDynamicService;
-    @Autowired
-    private FlowTaskService flowTaskService;
-    @Autowired
-    private FlowTaskNewService flowTaskNewService;
-    @Autowired
-    private FlowTaskNodeService flowTaskNodeService;
-    @Autowired
-    private FlowEngineService flowEngineService;
-    @Autowired
-    private FlowDelegateService flowDelegateService;
+    @Autowired private FlowDynamicService flowDynamicService;
+    @Autowired private FlowTaskService flowTaskService;
+    @Autowired private FlowTaskNewService flowTaskNewService;
+    @Autowired private FlowTaskNodeService flowTaskNodeService;
+    @Autowired private FlowEngineService flowEngineService;
+    @Autowired private FlowDelegateService flowDelegateService;
 
     /**
      * 动态表单信息
@@ -62,7 +69,8 @@ public class FlowTaskApiService implements FlowTaskApi {
      */
     @ApiOperation("动态表单信息")
     @GetMapping("/{id}")
-    public ActionResult dataInfo(@PathVariable("id") String id, String taskOperatorId) throws WorkFlowException {
+    public ActionResult dataInfo(@PathVariable("id") String id, String taskOperatorId)
+            throws WorkFlowException {
         FlowTaskEntity entity = flowTaskService.getInfo(id);
         FlowTaskInfoVO vo = flowDynamicService.info(entity, taskOperatorId);
         return ActionResult.success(vo);
@@ -93,7 +101,9 @@ public class FlowTaskApiService implements FlowTaskApi {
      */
     @ApiOperation("提交")
     @PutMapping("/{id}")
-    public ActionResult submit(@RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id) throws WorkFlowException {
+    public ActionResult submit(
+            @RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id)
+            throws WorkFlowException {
         if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
             flowDynamicService.save(id, flowTaskForm);
             return ActionResult.success(MsgCode.SU002.get());
@@ -106,17 +116,18 @@ public class FlowTaskApiService implements FlowTaskApi {
      * 动态表单详情
      *
      * @param flowId 引擎主键值
-     * @param id     主键值
+     * @param id 主键值
      * @return
      */
     @ApiOperation("动态表单信息")
     @GetMapping("/{flowId}/{id}")
-    public ActionResult info(@PathVariable("flowId") String flowId, @PathVariable("id") String id) throws WorkFlowException {
+    public ActionResult info(@PathVariable("flowId") String flowId, @PathVariable("id") String id)
+            throws WorkFlowException {
         Map<String, Object> data = flowDynamicService.getData(flowId, id);
         return ActionResult.success(data);
     }
 
-    //———————————————内部使用接口——————————
+    // ———————————————内部使用接口——————————
 
     /**
      * 列表（待我审批）
@@ -186,7 +197,8 @@ public class FlowTaskApiService implements FlowTaskApi {
     @Override
     @PostMapping("/Revoke")
     public void revoke(@RequestBody FlowRevokeModel flowRevokeModel) throws WorkFlowException {
-        FlowModel flowModel = JsonUtil.getJsonToBean(flowRevokeModel.getFlowHandleModel(), FlowModel.class);
+        FlowModel flowModel =
+                JsonUtil.getJsonToBean(flowRevokeModel.getFlowHandleModel(), FlowModel.class);
         flowTaskNewService.revoke(flowRevokeModel.getFlowTaskEntity(), flowModel);
     }
 
@@ -236,13 +248,12 @@ public class FlowTaskApiService implements FlowTaskApi {
      */
     @Override
     @PostMapping("/updateFlowEngine/{id}")
-    public void update(@PathVariable("id") String id, @RequestBody FlowEngineEntity engineEntity) throws WorkFlowException {
+    public void update(@PathVariable("id") String id, @RequestBody FlowEngineEntity engineEntity)
+            throws WorkFlowException {
         flowEngineService.update(id, engineEntity);
     }
 
-    /**
-     * 删除流程引擎
-     */
+    /** 删除流程引擎 */
     @Override
     @PostMapping("/deleteFlowEngine")
     public void delete(@RequestBody FlowEngineEntity engineEntity) throws WorkFlowException {
@@ -269,7 +280,8 @@ public class FlowTaskApiService implements FlowTaskApi {
 
     @Override
     @GetMapping("/getInfoByEnCode/{encode}")
-    public FlowEngineEntity getInfoByEnCode(@PathVariable("encode") String encode) throws WorkFlowException {
+    public FlowEngineEntity getInfoByEnCode(@PathVariable("encode") String encode)
+            throws WorkFlowException {
         return flowEngineService.getInfoByEnCode(encode);
     }
 
@@ -284,5 +296,4 @@ public class FlowTaskApiService implements FlowTaskApi {
     public List<FlowDelegateEntity> getDelegateList() {
         return flowDelegateService.getList();
     }
-
 }

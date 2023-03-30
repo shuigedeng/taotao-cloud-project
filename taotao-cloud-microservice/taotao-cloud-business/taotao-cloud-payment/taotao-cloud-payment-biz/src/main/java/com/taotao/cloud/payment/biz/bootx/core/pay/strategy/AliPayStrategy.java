@@ -1,4 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.bootx.core.pay.strategy;
+
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONException;
@@ -20,17 +38,15 @@ import com.taotao.cloud.payment.biz.bootx.exception.payment.PayAmountAbnormalExc
 import com.taotao.cloud.payment.biz.bootx.exception.payment.PayFailureException;
 import com.taotao.cloud.payment.biz.bootx.param.pay.PayModeParam;
 import com.taotao.cloud.payment.biz.bootx.param.paymodel.alipay.AliPayParam;
+import java.math.BigDecimal;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.util.Map;
-
-import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
-
 /**
  * 支付宝支付
+ *
  * @author xxm
  * @date 2021/2/27
  */
@@ -54,15 +70,13 @@ public class AliPayStrategy extends AbsPayStrategy {
         return PayChannelCode.ALI;
     }
 
-    /**
-     * 支付前操作
-     */
+    /** 支付前操作 */
     @Override
-    public void doBeforePayHandler(){
+    public void doBeforePayHandler() {
         try {
             // 支付宝参数验证
             String extraParamsJson = this.getPayMode().getExtraParamsJson();
-            if (StrUtil.isNotBlank(extraParamsJson)){
+            if (StrUtil.isNotBlank(extraParamsJson)) {
                 this.aliPayParam = JSONUtil.toBean(extraParamsJson, AliPayParam.class);
             } else {
                 this.aliPayParam = new AliPayParam();
@@ -72,68 +86,57 @@ public class AliPayStrategy extends AbsPayStrategy {
         }
         // 检查金额
         PayModeParam payMode = this.getPayMode();
-        if (BigDecimalUtil.compareTo(payMode.getAmount(), BigDecimal.ZERO) < 1){
+        if (BigDecimalUtil.compareTo(payMode.getAmount(), BigDecimal.ZERO) < 1) {
             throw new PayAmountAbnormalException();
         }
         // 检查并获取支付宝支付配置
         this.initAlipayConfig();
-        aliPayService.validation(this.getPayMode(),alipayConfig);
+        aliPayService.validation(this.getPayMode(), alipayConfig);
         // 如果没有显式传入同步回调地址, 使用默认配置
-        if (StrUtil.isBlank(aliPayParam.getReturnUrl())){
+        if (StrUtil.isBlank(aliPayParam.getReturnUrl())) {
             aliPayParam.setReturnUrl(alipayConfig.getReturnUrl());
         }
         AlipayConfigService.initApiConfig(alipayConfig);
     }
 
-    /**
-     * 发起支付操作
-     */
+    /** 发起支付操作 */
     @Override
     public void doPayHandler() {
-        aliPayService.pay(this.getPayMode().getAmount(),
+        aliPayService.pay(
+                this.getPayMode().getAmount(),
                 this.getPayment(),
                 this.aliPayParam,
                 this.getPayMode(),
                 this.alipayConfig);
     }
 
-    /**
-     * 支付调起成功
-     */
+    /** 支付调起成功 */
     @Override
-    public void doSuccessHandler(){
-        aliPaymentService.updatePaySuccess(this.getPayment(),this.getPayMode());
+    public void doSuccessHandler() {
+        aliPaymentService.updatePaySuccess(this.getPayment(), this.getPayMode());
     }
 
-    /**
-     * 发起支付失败
-     */
+    /** 发起支付失败 */
     @Override
     public void doErrorHandler(ExceptionInfo exceptionInfo) {
         this.doCloseHandler();
     }
 
-    /**
-     * 异步支付成功
-     */
+    /** 异步支付成功 */
     @Override
     public void doAsyncSuccessHandler(Map<String, String> map) {
         String tradeNo = map.get(AliPayCode.TRADE_NO);
-        aliPaymentService.updateAsyncSuccess(this.getPayment().getId(),this.getPayMode(),tradeNo);
+        aliPaymentService.updateAsyncSuccess(this.getPayment().getId(), this.getPayMode(), tradeNo);
     }
 
-    /**
-     * 异步支付失败
-     */
+    /** 异步支付失败 */
     @Override
     public void doAsyncErrorHandler(ExceptionInfo exceptionInfo) {
         // 调用撤销支付
         this.doCancelHandler();
     }
 
-    /**
-     * 撤销支付
-     */
+    /** 撤销支付 */
     @Override
     public void doCancelHandler() {
         this.initAlipayConfig();
@@ -143,41 +146,36 @@ public class AliPayStrategy extends AbsPayStrategy {
         this.doCloseHandler();
     }
 
-    /**
-     * 关闭本地支付记录
-     */
+    /** 关闭本地支付记录 */
     @Override
     public void doCloseHandler() {
         aliPaymentService.updateClose(this.getPayment().getId());
     }
 
-    /**
-     * 退款
-     */
+    /** 退款 */
     @Override
     public void doRefundHandler() {
         this.initAlipayConfig();
-        aliPayCancelService.refund(this.getPayment(),this.getPayMode().getAmount());
-        aliPaymentService.updatePayRefund(this.getPayment().getId(),this.getPayMode().getAmount());
-        paymentService.updateRefundSuccess(this.getPayment(),this.getPayMode().getAmount(), PayChannelEnum.ALI);
+        aliPayCancelService.refund(this.getPayment(), this.getPayMode().getAmount());
+        aliPaymentService.updatePayRefund(this.getPayment().getId(), this.getPayMode().getAmount());
+        paymentService.updateRefundSuccess(
+                this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.ALI);
     }
 
-    /**
-     * 异步支付单与支付网关进行状态比对
-     */
+    /** 异步支付单与支付网关进行状态比对 */
     @Override
-    public PaySyncResult doSyncPayStatusHandler(){
+    public PaySyncResult doSyncPayStatusHandler() {
         this.initAlipayConfig();
         return alipaySyncService.syncPayStatus(this.getPayment());
     }
 
-    /**
-     * 初始化支付宝配置信息
-     */
-    private void initAlipayConfig(){
+    /** 初始化支付宝配置信息 */
+    private void initAlipayConfig() {
         // 检查并获取支付宝支付配置
-        this.alipayConfig = alipayConfigManager.findActivity()
-                .orElseThrow(() -> new PayFailureException("支付配置不存在"));
+        this.alipayConfig =
+                alipayConfigManager
+                        .findActivity()
+                        .orElseThrow(() -> new PayFailureException("支付配置不存在"));
         AlipayConfigService.initApiConfig(this.alipayConfig);
     }
 }

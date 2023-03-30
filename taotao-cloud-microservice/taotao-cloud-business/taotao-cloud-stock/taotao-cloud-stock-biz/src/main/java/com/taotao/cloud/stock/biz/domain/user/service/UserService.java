@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.stock.biz.domain.user.service;
 
 /**
@@ -22,6 +23,4 @@ package com.taotao.cloud.stock.biz.domain.user.service;
  * @version 2022.03
  * @since 2021/12/28 11:50
  */
-public interface UserService {
-
-}
+public interface UserService {}

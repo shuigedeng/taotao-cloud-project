@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.model.convert;
 
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleLogVO;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * IAfterSaleMapStruct
@@ -31,12 +31,11 @@ import java.util.List;
  * @since 2022-04-07 20:55:46
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AfterSaleLogConvert {
 
-	AfterSaleLogConvert INSTANCE = Mappers.getMapper(AfterSaleLogConvert.class);
+    AfterSaleLogConvert INSTANCE = Mappers.getMapper(AfterSaleLogConvert.class);
 
-	List<AfterSaleLogVO> convert(List<AfterSaleLog> afterSaleLogList);
-
+    List<AfterSaleLogVO> convert(List<AfterSaleLog> afterSaleLogList);
 }

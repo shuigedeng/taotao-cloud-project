@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.controller.feign;
 
 import com.taotao.cloud.goods.biz.model.entity.Goods;
@@ -34,7 +35,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/feign/goods")
 @Tag(name = "内部服务-商品API", description = "内部服务-商品API")
-public class FeignGoodsController extends BaseBusinessController<IGoodsService, Goods, Long> {
-
-}
-
+public class FeignGoodsController extends BaseBusinessController<IGoodsService, Goods, Long> {}

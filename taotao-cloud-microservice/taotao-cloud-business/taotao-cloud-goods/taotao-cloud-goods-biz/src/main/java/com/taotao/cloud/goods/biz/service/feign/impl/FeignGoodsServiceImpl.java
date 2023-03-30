@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.service.feign.impl;
 
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
@@ -33,11 +34,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class FeignGoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long>
-	implements IFeignGoodsService {
+public class FeignGoodsServiceImpl
+        extends BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long>
+        implements IFeignGoodsService {
 
-	@Override
-	public <T> T test123(T t) {
-		return t;
-	}
+    @Override
+    public <T> T test123(T t) {
+        return t;
+    }
 }

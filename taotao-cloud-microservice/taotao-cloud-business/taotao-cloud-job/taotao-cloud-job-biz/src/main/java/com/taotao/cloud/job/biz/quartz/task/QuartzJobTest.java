@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.job.biz.quartz.task;
 
 import org.springframework.stereotype.Component;
@@ -27,8 +28,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuartzJobTest {
 
-	public void test(String str) {
-		System.out.println(Thread.currentThread().getName() + "------------" + str);
-	}
-
+    public void test(String str) {
+        System.out.println(Thread.currentThread().getName() + "------------" + str);
+    }
 }

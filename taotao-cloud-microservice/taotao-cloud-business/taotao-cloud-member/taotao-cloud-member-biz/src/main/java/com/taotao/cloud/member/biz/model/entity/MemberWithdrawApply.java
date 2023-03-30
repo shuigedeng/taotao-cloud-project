@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -46,41 +47,31 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = MemberWithdrawApply.TABLE_NAME, comment = "会员提现申请表")
 public class MemberWithdrawApply extends BaseSuperEntity<MemberWithdrawApply, Long> {
 
-	public static final String TABLE_NAME = "tt_member_withdraw_apply";
+    public static final String TABLE_NAME = "tt_member_withdraw_apply";
 
-	/**
-	 * 申请提现金额
-	 */
-	@Column(name = "apply_money", columnDefinition = "decimal(10,2) not null default 0 comment '申请提现金额'")
-	private BigDecimal applyMoney;
+    /** 申请提现金额 */
+    @Column(
+            name = "apply_money",
+            columnDefinition = "decimal(10,2) not null default 0 comment '申请提现金额'")
+    private BigDecimal applyMoney;
 
-	/**
-	 * 提现状态
-	 */
-	@Column(name = "apply_status", columnDefinition = "varchar(32) not null comment '提现状态'")
-	private String applyStatus;
+    /** 提现状态 */
+    @Column(name = "apply_status", columnDefinition = "varchar(32) not null comment '提现状态'")
+    private String applyStatus;
 
-	/**
-	 * 会员id
-	 */
-	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员id'")
-	private Long memberId;
+    /** 会员id */
+    @Column(name = "member_id", columnDefinition = "bigint not null comment '会员id'")
+    private Long memberId;
 
-	/**
-	 * 审核备注
-	 */
-	@Column(name = "inspect_remark", columnDefinition = "varchar(32) not null comment '审核备注'")
-	private String inspectRemark;
+    /** 审核备注 */
+    @Column(name = "inspect_remark", columnDefinition = "varchar(32) not null comment '审核备注'")
+    private String inspectRemark;
 
-	/**
-	 * 审核时间
-	 */
-	@Column(name = "inspect_time", columnDefinition = "datetime  null comment '审核时间'")
-	private LocalDateTime inspectTime;
+    /** 审核时间 */
+    @Column(name = "inspect_time", columnDefinition = "datetime  null comment '审核时间'")
+    private LocalDateTime inspectTime;
 
-	/**
-	 * sn
-	 */
-	@Column(name = "sn", columnDefinition = "varchar(32) not null comment 'sn'")
-	private String sn;
+    /** sn */
+    @Column(name = "sn", columnDefinition = "varchar(32) not null comment 'sn'")
+    private String sn;
 }

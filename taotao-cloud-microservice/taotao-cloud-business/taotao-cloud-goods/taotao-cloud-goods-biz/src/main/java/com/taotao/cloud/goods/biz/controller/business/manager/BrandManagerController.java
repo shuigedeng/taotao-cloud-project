@@ -1,5 +1,20 @@
-package com.taotao.cloud.goods.biz.controller.business.manager;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
@@ -42,69 +57,66 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/goods/manager/brand")
 public class BrandManagerController {
 
-	/**
-	 * 品牌
-	 */
-	private final IBrandService brandService;
+    /** 品牌 */
+    private final IBrandService brandService;
 
-	@Operation(summary = "通过id获取", description = "通过id获取")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/{id}")
-	public Result<BrandVO> getById(@NotBlank(message = "id不能为空") @PathVariable Long id) {
-		Brand brand = brandService.getById(id);
-		return Result.success(BrandConvert.INSTANCE.convert(brand));
-	}
+    @Operation(summary = "通过id获取", description = "通过id获取")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping(value = "/{id}")
+    public Result<BrandVO> getById(@NotBlank(message = "id不能为空") @PathVariable Long id) {
+        Brand brand = brandService.getById(id);
+        return Result.success(BrandConvert.INSTANCE.convert(brand));
+    }
 
-	@Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/all/available")
-	public Result<List<BrandVO>> getAllAvailable() {
-		List<Brand> list = brandService.getAllAvailable();
-		return Result.success(BrandConvert.INSTANCE.convert(list));
-	}
+    @Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping(value = "/all/available")
+    public Result<List<BrandVO>> getAllAvailable() {
+        List<Brand> list = brandService.getAllAvailable();
+        return Result.success(BrandConvert.INSTANCE.convert(list));
+    }
 
-	@Operation(summary = "分页获取", description = "分页获取")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/page")
-	public Result<PageResult<BrandVO>> brandsQueryPage(@Validated BrandPageQuery page) {
-		IPage<Brand> brandPage = brandService.brandsQueryPage(page);
-		return Result.success(PageResult.convertMybatisPage(brandPage, BrandVO.class));
-	}
+    @Operation(summary = "分页获取", description = "分页获取")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping(value = "/page")
+    public Result<PageResult<BrandVO>> brandsQueryPage(@Validated BrandPageQuery page) {
+        IPage<Brand> brandPage = brandService.brandsQueryPage(page);
+        return Result.success(PageResult.convertMybatisPage(brandPage, BrandVO.class));
+    }
 
-	@Operation(summary = "新增品牌", description = "新增品牌")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping
-	public Result<Boolean> save(@Validated @RequestBody BrandDTO brand) {
-		return Result.success(brandService.addBrand(brand));
-	}
+    @Operation(summary = "新增品牌", description = "新增品牌")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PostMapping
+    public Result<Boolean> save(@Validated @RequestBody BrandDTO brand) {
+        return Result.success(brandService.addBrand(brand));
+    }
 
-	@Operation(summary = "更新品牌", description = "更新品牌")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping("/{id}")
-	public Result<Boolean> update(@PathVariable Long id, @Validated BrandDTO brand) {
-		brand.setId(id);
-		return Result.success(brandService.updateBrand(brand));
-	}
+    @Operation(summary = "更新品牌", description = "更新品牌")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PutMapping("/{id}")
+    public Result<Boolean> update(@PathVariable Long id, @Validated BrandDTO brand) {
+        brand.setId(id);
+        return Result.success(brandService.updateBrand(brand));
+    }
 
-	@Operation(summary = "后台禁用品牌", description = "后台禁用品牌")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping(value = "/disable/{brandId}")
-	public Result<Boolean> disable(@PathVariable Long brandId, @RequestParam Boolean disable) {
-		return Result.success(brandService.brandDisable(brandId, disable));
-	}
+    @Operation(summary = "后台禁用品牌", description = "后台禁用品牌")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PutMapping(value = "/disable/{brandId}")
+    public Result<Boolean> disable(@PathVariable Long brandId, @RequestParam Boolean disable) {
+        return Result.success(brandService.brandDisable(brandId, disable));
+    }
 
-	@Operation(summary = "批量删除", description = "批量删除")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@DeleteMapping(value = "/{ids}")
-	public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
-		return Result.success(brandService.deleteBrands(ids));
-	}
-
+    @Operation(summary = "批量删除", description = "批量删除")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @DeleteMapping(value = "/{ids}")
+    public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
+        return Result.success(brandService.deleteBrands(ids));
+    }
 }

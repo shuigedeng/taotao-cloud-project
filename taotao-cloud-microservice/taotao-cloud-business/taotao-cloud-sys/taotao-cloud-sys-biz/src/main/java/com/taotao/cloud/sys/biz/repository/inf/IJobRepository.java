@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Position;
@@ -25,7 +26,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
-public interface IJobRepository extends JpaRepository<Position, Long> {
-
-}
+public interface IJobRepository extends JpaRepository<Position, Long> {}

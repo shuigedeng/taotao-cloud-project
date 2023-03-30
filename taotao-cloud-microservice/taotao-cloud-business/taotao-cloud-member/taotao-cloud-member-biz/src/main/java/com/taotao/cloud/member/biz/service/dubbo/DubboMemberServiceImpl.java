@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.service.dubbo;
 
 import com.taotao.cloud.member.api.dubbo.IDubboMemberRpc;
@@ -28,7 +29,4 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @DubboService(interfaceClass = IDubboMemberRpc.class, validation = "true")
-public class DubboMemberServiceImpl
-	implements IDubboMemberRpc {
-
-}
+public class DubboMemberServiceImpl implements IDubboMemberRpc {}

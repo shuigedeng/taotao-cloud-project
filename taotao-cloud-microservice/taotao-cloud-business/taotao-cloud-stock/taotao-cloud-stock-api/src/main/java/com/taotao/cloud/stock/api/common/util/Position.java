@@ -22,9 +22,7 @@ public interface Position extends Comparable<Position>, Serializable {
 
     int getPosition();
 
-    default void setPosition(int position) {
-
-    }
+    default void setPosition(int position) {}
 
     @Override
     default int compareTo(Position o) {

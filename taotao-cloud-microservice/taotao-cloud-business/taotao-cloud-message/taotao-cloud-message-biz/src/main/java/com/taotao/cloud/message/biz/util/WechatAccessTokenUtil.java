@@ -1,4 +1,20 @@
-package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.biz.util;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.message.biz.util; // package com.taotao.cloud.message.biz.util;
 //
 // import cn.hutool.http.HttpUtil;
 // import cn.hutool.json.JSONObject;
@@ -32,23 +48,28 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //      */
 //     public String cgiAccessToken(ClientTypeEnum clientTypeEnum) {
 //         //h5 和MP 才有获取token的能力
-//         if (clientTypeEnum.equals(ClientTypeEnum.H5) || clientTypeEnum.equals(ClientTypeEnum.WECHAT_MP)) {
+//         if (clientTypeEnum.equals(ClientTypeEnum.H5) ||
+// clientTypeEnum.equals(ClientTypeEnum.WECHAT_MP)) {
 //
 //             //缓存一下token
-//             String token = cache.getString(CachePrefix.WECHAT_CGI_ACCESS_TOKEN.getPrefix() + clientTypeEnum.name());
+//             String token = cache.getString(CachePrefix.WECHAT_CGI_ACCESS_TOKEN.getPrefix() +
+// clientTypeEnum.name());
 //             if (token != null) {
 //                 return token;
 //             }
 //             //获取微信配置
 //             Setting setting = settingService.get(SettingCategoryEnum.WECHAT_CONNECT.name());
 //             if (setting == null) {
-//                 log.error("获取token客户端异常" + clientTypeEnum.name() + ",客户端未配置微信参数，请前往后台=》联合登陆，进行对应微信配置");
+//                 log.error("获取token客户端异常" + clientTypeEnum.name() +
+// ",客户端未配置微信参数，请前往后台=》联合登陆，进行对应微信配置");
 //                 return null;
 //             }
 //             //获取配置，获取对应的配置
-//             WechatConnectSetting wechatConnectSetting = new Gson().fromJson(setting.getSettingValue(), WechatConnectSetting.class);
+//             WechatConnectSetting wechatConnectSetting = new
+// Gson().fromJson(setting.getSettingValue(), WechatConnectSetting.class);
 //             WechatConnectSettingItem item = null;
-//             for (WechatConnectSettingItem wechatConnectSettingItem : wechatConnectSetting.getWechatConnectSettingItems()) {
+//             for (WechatConnectSettingItem wechatConnectSettingItem :
+// wechatConnectSetting.getWechatConnectSettingItems()) {
 //                 if (wechatConnectSettingItem.getClientType().equals(clientTypeEnum.name())) {
 //                     item = wechatConnectSettingItem;
 //                 }
@@ -58,7 +79,8 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //                 return null;
 //             }
 //             //获取token
-//             String content = HttpUtil.get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential" +
+//             String content =
+// HttpUtil.get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential" +
 //                     "&appid=" + item.getAppId() + "&secret=" + item.getAppSecret());
 //
 //             JSONObject object = new JSONObject(content);
@@ -81,18 +103,22 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //      */
 //     public String cgiJsApiTicket(ClientTypeEnum clientTypeEnum) {
 //         //缓存一下token
-//         String token = cache.getString(CachePrefix.WECHAT_JS_API_TOKEN.getPrefix() + clientTypeEnum.name());
+//         String token = cache.getString(CachePrefix.WECHAT_JS_API_TOKEN.getPrefix() +
+// clientTypeEnum.name());
 //         if (token != null) {
 //             return token;
 //         }
 //         String accessToken = this.cgiAccessToken(clientTypeEnum);
 //         try {
-//             String content = new HttpUtils().get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken + "&type=jsapi");
+//             String content = new
+// HttpUtils().get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accessToken
+// + "&type=jsapi");
 //
 //             JSONObject object = new JSONObject(content);
 //             String ticket = object.getStr("ticket");
 //             Long expires = object.getLong("expires_in");
-//             cache.put(CachePrefix.WECHAT_JS_API_TOKEN.getPrefix() + clientTypeEnum.name(), ticket, expires);
+//             cache.put(CachePrefix.WECHAT_JS_API_TOKEN.getPrefix() + clientTypeEnum.name(),
+// ticket, expires);
 //             return ticket;
 //         } catch (Exception e) {
 //             log.error("微信JsApi签名异常", e);

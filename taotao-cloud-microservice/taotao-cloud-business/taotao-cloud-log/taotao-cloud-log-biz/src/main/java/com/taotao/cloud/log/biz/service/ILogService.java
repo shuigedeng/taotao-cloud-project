@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.log.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -34,79 +35,75 @@ import org.springframework.scheduling.annotation.Async;
  */
 public interface ILogService extends IService<Log> {
 
-	/**
-	 * 分页获取日志数据
-	 *
-	 * @param nickname 昵称
-	 * @param pageable 分页参数
-	 * @return 日志数据
-	 * @since 2022-03-23 08:54:49
-	 */
-	Object findAllByPageable(String nickname, Pageable pageable);
+    /**
+     * 分页获取日志数据
+     *
+     * @param nickname 昵称
+     * @param pageable 分页参数
+     * @return 日志数据
+     * @since 2022-03-23 08:54:49
+     */
+    Object findAllByPageable(String nickname, Pageable pageable);
 
-	/**
-	 * 分页查询
-	 *
-	 * @param criteria 查询条件
-	 * @param pageable 分页参数
-	 * @return 日志数据
-	 */
-	Object queryAll(LogQueryCriteria criteria, Pageable pageable);
+    /**
+     * 分页查询
+     *
+     * @param criteria 查询条件
+     * @param pageable 分页参数
+     * @return 日志数据
+     */
+    Object queryAll(LogQueryCriteria criteria, Pageable pageable);
 
-	/**
-	 * 查询全部数据
-	 *
-	 * @param criteria 查询条件
-	 * @return 日志数据列表
-	 */
-	List<Log> queryAll(LogQueryCriteria criteria);
+    /**
+     * 查询全部数据
+     *
+     * @param criteria 查询条件
+     * @return 日志数据列表
+     */
+    List<Log> queryAll(LogQueryCriteria criteria);
 
-	/**
-	 * 查询用户日志
-	 *
-	 * @param criteria 查询条件
-	 * @param pageable 分页参数
-	 * @return 日志数据
-	 */
-	Object queryAllByUser(LogQueryCriteria criteria, Pageable pageable);
+    /**
+     * 查询用户日志
+     *
+     * @param criteria 查询条件
+     * @param pageable 分页参数
+     * @return 日志数据
+     */
+    Object queryAllByUser(LogQueryCriteria criteria, Pageable pageable);
 
-	/**
-	 * 保存日志数据
-	 *
-	 * @param username  用户
-	 * @param ip        请求IP
-	 * @param joinPoint /
-	 * @param log       日志实体
-	 */
-	@Async
-	void save(String username, String ip, ProceedingJoinPoint joinPoint, Log log, Long uid);
+    /**
+     * 保存日志数据
+     *
+     * @param username 用户
+     * @param ip 请求IP
+     * @param joinPoint /
+     * @param log 日志实体
+     */
+    @Async
+    void save(String username, String ip, ProceedingJoinPoint joinPoint, Log log, Long uid);
 
-	/**
-	 * 查询异常详情
-	 *
-	 * @param id 日志ID
-	 * @return Object
-	 */
-	Object findByErrDetail(Long id);
+    /**
+     * 查询异常详情
+     *
+     * @param id 日志ID
+     * @return Object
+     */
+    Object findByErrDetail(Long id);
 
-	/**
-	 * 导出日志
-	 *
-	 * @param logs     待导出的数据
-	 * @param response /
-	 * @throws IOException /
-	 */
-	void download(List<Log> logs, HttpServletResponse response) throws IOException;
+    /**
+     * 导出日志
+     *
+     * @param logs 待导出的数据
+     * @param response /
+     * @throws IOException /
+     */
+    void download(List<Log> logs, HttpServletResponse response) throws IOException;
 
-	/**
-	 * 删除所有错误日志
-	 */
-	void delAllByError();
+    /** 删除所有错误日志 */
+    void delAllByError();
 
-	/**
-	 * 删除所有INFO日志
-	 */
-	void delAllByInfo();
+    /** 删除所有INFO日志 */
+    void delAllByInfo();
 
-	long findIp(String toString, String toString1);
+    long findIp(String toString, String toString1);
 }

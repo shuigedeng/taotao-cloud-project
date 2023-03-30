@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import cn.hutool.core.collection.CollUtil;
@@ -24,12 +25,11 @@ import com.taotao.cloud.sys.biz.repository.cls.UserRelationRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRelationRepository;
 import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author shuigedeng
@@ -37,30 +37,37 @@ import java.util.stream.Collectors;
  * @since 2020/10/21 09:20
  */
 @Service
-public class UserRelationServiceImpl extends
-	BaseSuperServiceImpl<IUserRelationMapper, UserRelation, UserRelationRepository, IUserRelationRepository, Long>
-	implements IUserRelationService {
+public class UserRelationServiceImpl
+        extends BaseSuperServiceImpl<
+                IUserRelationMapper,
+                UserRelation,
+                UserRelationRepository,
+                IUserRelationRepository,
+                Long>
+        implements IUserRelationService {
 
-	private final static QUserRelation USER_RELATION = QUserRelation.userRelation;
+    private static final QUserRelation USER_RELATION = QUserRelation.userRelation;
 
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Boolean saveUserRoles(Long userId, Set<Long> roleIds) {
-		BooleanExpression expression = USER_RELATION.userId.eq(userId);
-		List<UserRelation> userRoles = cr().fetch(expression);
-		if (CollUtil.isNotEmpty(userRoles)) {
-			cr().deleteAll(userRoles);
-		}
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean saveUserRoles(Long userId, Set<Long> roleIds) {
+        BooleanExpression expression = USER_RELATION.userId.eq(userId);
+        List<UserRelation> userRoles = cr().fetch(expression);
+        if (CollUtil.isNotEmpty(userRoles)) {
+            cr().deleteAll(userRoles);
+        }
 
-		// 批量添加数据
-		List<UserRelation> collect = roleIds.stream()
-			.map(roleId -> UserRelation.builder()
-				.userId(userId)
-				.objectId(roleId)
-				.build()
-			)
-			.collect(Collectors.toList());
-		cr().saveAll(collect);
-		return true;
-	}
+        // 批量添加数据
+        List<UserRelation> collect =
+                roleIds.stream()
+                        .map(
+                                roleId ->
+                                        UserRelation.builder()
+                                                .userId(userId)
+                                                .objectId(roleId)
+                                                .build())
+                        .collect(Collectors.toList());
+        cr().saveAll(collect);
+        return true;
+    }
 }

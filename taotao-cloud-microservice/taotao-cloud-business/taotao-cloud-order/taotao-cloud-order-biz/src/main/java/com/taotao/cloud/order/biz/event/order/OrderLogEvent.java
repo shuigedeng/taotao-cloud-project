@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.event.order;
 
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
@@ -27,7 +28,7 @@ import org.springframework.context.ApplicationEvent;
  */
 public class OrderLogEvent extends ApplicationEvent {
 
-	public OrderLogEvent(OrderLog orderLog) {
-		super(orderLog);
-	}
+    public OrderLogEvent(OrderLog orderLog) {
+        super(orderLog);
+    }
 }

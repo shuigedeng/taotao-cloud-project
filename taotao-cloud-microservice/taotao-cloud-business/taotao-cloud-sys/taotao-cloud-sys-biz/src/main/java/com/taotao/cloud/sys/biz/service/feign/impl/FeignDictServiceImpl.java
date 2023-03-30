@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.feign.impl;
 
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
@@ -23,7 +24,6 @@ import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -35,13 +35,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class FeignDictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
-	implements IFeignDictService {
+public class FeignDictServiceImpl
+        extends BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
+        implements IFeignDictService {
 
-	private final IDictService dictService;
+    private final IDictService dictService;
 
-	@Override
-	public <T> T test123(T t) {
-		return t;
-	}
+    @Override
+    public <T> T test123(T t) {
+        return t;
+    }
 }

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * CompanyMapper
@@ -26,7 +26,4 @@ import org.springframework.stereotype.Repository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
-public interface ISensitiveWordRepository extends JpaRepository<SensitiveWord, Long> {
-
-}
+public interface ISensitiveWordRepository extends JpaRepository<SensitiveWord, Long> {}

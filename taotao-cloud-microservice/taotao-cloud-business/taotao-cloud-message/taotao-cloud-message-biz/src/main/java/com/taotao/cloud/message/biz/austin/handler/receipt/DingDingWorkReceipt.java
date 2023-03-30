@@ -1,13 +1,21 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.handler.receipt;
 
-
-import cn.hutool.core.util.StrUtil;
-import com.dingtalk.api.DefaultDingTalkClient;
-import com.dingtalk.api.DingTalkClient;
-import com.dingtalk.api.request.OapiMessageCorpconversationGetsendresultRequest;
-import com.dingtalk.api.response.OapiMessageCorpconversationGetsendresultResponse;
-import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;
-import com.taotao.cloud.message.biz.austin.common.dto.account.DingDingWorkNoticeAccount;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,29 +31,36 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DingDingWorkReceipt {
 
-    private static final String URL = "https://oapi.dingtalk.com/topapi/message/corpconversation/getsendresult";
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+    private static final String URL =
+            "https://oapi.dingtalk.com/topapi/message/corpconversation/getsendresult";
+    @Autowired private StringRedisTemplate redisTemplate;
 
-    @Autowired
-    private AccountUtils accountUtils;
+    @Autowired private AccountUtils accountUtils;
+
     public void pull() {
-//        try {
-//            for (int index = SendAccountConstant.START; true; index = index + SendAccountConstant.STEP) {
-//                DingDingWorkNoticeAccount account = accountUtils.getAccount(index, SendAccountConstant.DING_DING_WORK_NOTICE_ACCOUNT_KEY, SendAccountConstant.DING_DING_WORK_NOTICE_PREFIX, DingDingWorkNoticeAccount.class);
-//                if (account == null) {
-//                    break;
-//                }
-//                String accessToken = redisTemplate.opsForValue().get(SendAccountConstant.DING_DING_ACCESS_TOKEN_PREFIX + index);
-//                DingTalkClient client = new DefaultDingTalkClient(URL);
-//                OapiMessageCorpconversationGetsendresultRequest req = new OapiMessageCorpconversationGetsendresultRequest();
-//                req.setAgentId(Long.valueOf(account.getAgentId()));
-//                req.setTaskId(456L);
-//                OapiMessageCorpconversationGetsendresultResponse rsp = client.execute(req, accessToken);
-//                System.out.println(rsp.getBody());
-//            }
-//        } catch (Exception e) {
-//            log.error("DingDingWorkReceipt#pull");
-//        }
+        //        try {
+        //            for (int index = SendAccountConstant.START; true; index = index +
+        // SendAccountConstant.STEP) {
+        //                DingDingWorkNoticeAccount account = accountUtils.getAccount(index,
+        // SendAccountConstant.DING_DING_WORK_NOTICE_ACCOUNT_KEY,
+        // SendAccountConstant.DING_DING_WORK_NOTICE_PREFIX, DingDingWorkNoticeAccount.class);
+        //                if (account == null) {
+        //                    break;
+        //                }
+        //                String accessToken =
+        // redisTemplate.opsForValue().get(SendAccountConstant.DING_DING_ACCESS_TOKEN_PREFIX +
+        // index);
+        //                DingTalkClient client = new DefaultDingTalkClient(URL);
+        //                OapiMessageCorpconversationGetsendresultRequest req = new
+        // OapiMessageCorpconversationGetsendresultRequest();
+        //                req.setAgentId(Long.valueOf(account.getAgentId()));
+        //                req.setTaskId(456L);
+        //                OapiMessageCorpconversationGetsendresultResponse rsp = client.execute(req,
+        // accessToken);
+        //                System.out.println(rsp.getBody());
+        //            }
+        //        } catch (Exception e) {
+        //            log.error("DingDingWorkReceipt#pull");
+        //        }
     }
 }

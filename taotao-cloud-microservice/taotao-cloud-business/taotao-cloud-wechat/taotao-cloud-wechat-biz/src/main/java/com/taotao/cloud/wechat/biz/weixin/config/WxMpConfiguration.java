@@ -1,29 +1,32 @@
 /*
-MIT License
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-Copyright (c) 2020 www.joolun.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
 package com.taotao.cloud.wechat.biz.weixin.config;
 
+import static me.chanjar.weixin.common.api.WxConsts.EventType;
+import static me.chanjar.weixin.common.api.WxConsts.EventType.SUBSCRIBE;
+import static me.chanjar.weixin.common.api.WxConsts.EventType.UNSUBSCRIBE;
+import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
+import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType.EVENT;
+import static me.chanjar.weixin.mp.constant.WxMpEventConstants.CustomerService.*;
+import static me.chanjar.weixin.mp.constant.WxMpEventConstants.POI_CHECK_NOTIFY;
+
 import com.joolun.weixin.handler.*;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -32,15 +35,6 @@ import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import java.util.List;
-import java.util.stream.Collectors;
-import static me.chanjar.weixin.common.api.WxConsts.EventType;
-import static me.chanjar.weixin.common.api.WxConsts.EventType.SUBSCRIBE;
-import static me.chanjar.weixin.common.api.WxConsts.EventType.UNSUBSCRIBE;
-import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
-import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType.EVENT;
-import static me.chanjar.weixin.mp.constant.WxMpEventConstants.CustomerService.*;
-import static me.chanjar.weixin.mp.constant.WxMpEventConstants.POI_CHECK_NOTIFY;
 
 /**
  * wechat mp configuration
@@ -72,15 +66,21 @@ public class WxMpConfiguration {
         }
 
         WxMpService service = new WxMpServiceImpl();
-        service.setMultiConfigStorages(configs
-                .stream().map(a -> {
-                    WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
-                    configStorage.setAppId(a.getAppId());
-                    configStorage.setSecret(a.getSecret());
-                    configStorage.setToken(a.getToken());
-                    configStorage.setAesKey(a.getAesKey());
-                    return configStorage;
-                }).collect(Collectors.toMap(WxMpDefaultConfigImpl::getAppId, a -> a, (o, n) -> o)));
+        service.setMultiConfigStorages(
+                configs.stream()
+                        .map(
+                                a -> {
+                                    WxMpDefaultConfigImpl configStorage =
+                                            new WxMpDefaultConfigImpl();
+                                    configStorage.setAppId(a.getAppId());
+                                    configStorage.setSecret(a.getSecret());
+                                    configStorage.setToken(a.getToken());
+                                    configStorage.setAesKey(a.getAesKey());
+                                    return configStorage;
+                                })
+                        .collect(
+                                Collectors.toMap(
+                                        WxMpDefaultConfigImpl::getAppId, a -> a, (o, n) -> o)));
         return service;
     }
 
@@ -92,41 +92,102 @@ public class WxMpConfiguration {
         newRouter.rule().handler(this.logHandler).next();
 
         // 接收客服会话管理事件
-        newRouter.rule().async(false).msgType(EVENT).event(KF_CREATE_SESSION)
-                .handler(this.kfSessionHandler).end();
-        newRouter.rule().async(false).msgType(EVENT).event(KF_CLOSE_SESSION)
-                .handler(this.kfSessionHandler).end();
-        newRouter.rule().async(false).msgType(EVENT).event(KF_SWITCH_SESSION)
-                .handler(this.kfSessionHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(KF_CREATE_SESSION)
+                .handler(this.kfSessionHandler)
+                .end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(KF_CLOSE_SESSION)
+                .handler(this.kfSessionHandler)
+                .end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(KF_SWITCH_SESSION)
+                .handler(this.kfSessionHandler)
+                .end();
 
         // 门店审核事件
-        newRouter.rule().async(false).msgType(EVENT).event(POI_CHECK_NOTIFY).handler(this.storeCheckNotifyHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(POI_CHECK_NOTIFY)
+                .handler(this.storeCheckNotifyHandler)
+                .end();
 
         // 自定义菜单事件
-        newRouter.rule().async(false).msgType(EVENT).event(EventType.CLICK).handler(this.menuHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(EventType.CLICK)
+                .handler(this.menuHandler)
+                .end();
 
         // 点击菜单连接事件
-        newRouter.rule().async(false).msgType(EVENT).event(EventType.VIEW).handler(this.nullHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(EventType.VIEW)
+                .handler(this.nullHandler)
+                .end();
 
         // 关注事件
-        newRouter.rule().async(false).msgType(EVENT).event(SUBSCRIBE).handler(this.subscribeHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(SUBSCRIBE)
+                .handler(this.subscribeHandler)
+                .end();
 
         // 取消关注事件
-        newRouter.rule().async(false).msgType(EVENT).event(UNSUBSCRIBE).handler(this.unsubscribeHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(UNSUBSCRIBE)
+                .handler(this.unsubscribeHandler)
+                .end();
 
         // 上报地理位置事件
-        newRouter.rule().async(false).msgType(EVENT).event(EventType.LOCATION).handler(this.locationHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(EventType.LOCATION)
+                .handler(this.locationHandler)
+                .end();
 
         // 接收地理位置消息
-        newRouter.rule().async(false).msgType(XmlMsgType.LOCATION).handler(this.locationHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(XmlMsgType.LOCATION)
+                .handler(this.locationHandler)
+                .end();
 
         // 扫码事件
-        newRouter.rule().async(false).msgType(EVENT).event(EventType.SCAN).handler(this.scanHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(EventType.SCAN)
+                .handler(this.scanHandler)
+                .end();
 
         // 默认
         newRouter.rule().async(false).handler(this.msgHandler).end();
 
         return newRouter;
     }
-
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboDictRpc;
@@ -36,12 +37,12 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboDictRpc.class, validation = "true")
-public class DubboDictRpcImpl extends
-	BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
-	implements IDubboDictRpc {
+public class DubboDictRpcImpl
+        extends BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
+        implements IDubboDictRpc {
 
-	@Override
-	public DubboDictResponse findByCode(Integer code) {
-		return new DubboDictResponse();
-	}
+    @Override
+    public DubboDictResponse findByCode(Integer code) {
+        return new DubboDictResponse();
+    }
 }

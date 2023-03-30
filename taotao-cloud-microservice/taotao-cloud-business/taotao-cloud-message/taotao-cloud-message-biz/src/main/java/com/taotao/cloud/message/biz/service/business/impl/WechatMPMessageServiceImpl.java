@@ -1,4 +1,21 @@
-package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao.cloud.message.biz.service.impl;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.message.biz.service.business.impl; // package
+                                                            // com.taotao.cloud.message.biz.service.impl;
 //
 // import cn.hutool.http.HttpUtil;
 // import cn.hutool.json.JSONArray;
@@ -30,7 +47,8 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //  */
 // @Service
 //
-// public class WechatMPMessageServiceImpl extends ServiceImpl<WechatMPMessageMapper, WechatMPMessage> implements
+// public class WechatMPMessageServiceImpl extends ServiceImpl<WechatMPMessageMapper,
+// WechatMPMessage> implements
 // 	WechatMPMessageService {
 //     @Autowired
 //     private WechatAccessTokenUtil wechatAccessTokenUtil;
@@ -38,19 +56,23 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //     /**
 //      * get 获取所有的模版
 //      */
-//     private final String allMsgTpl = "https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token=";
+//     private final String allMsgTpl =
+// "https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token=";
 //     /**
 //      * 获取keyid
 //      */
-//     private final String keywords = "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatekeywords?access_token=";
+//     private final String keywords =
+// "https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatekeywords?access_token=";
 //     /**
 //      * post 删除模版 添加模版 获取模版id
 //      */
-//     private final String delMsgTpl = "https://api.weixin.qq.com/wxaapi/newtmpl/deltemplate?access_token=";
+//     private final String delMsgTpl =
+// "https://api.weixin.qq.com/wxaapi/newtmpl/deltemplate?access_token=";
 //     /**
 //      * post 添加模版
 //      */
-//     private final String addTpl = "https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token=";
+//     private final String addTpl =
+// "https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token=";
 //
 //     @Override
 //     public void init() {
@@ -73,7 +95,8 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //                 oldList.forEach(templateId -> {
 //                     Map<String, Object> params = new HashMap<>(1);
 //                     params.put("priTmplId", templateId);
-//                     String message = WechatMessageUtil.wechatHandler(HttpUtil.post(delMsgTpl + accessToken, params));
+//                     String message = WechatMessageUtil.wechatHandler(HttpUtil.post(delMsgTpl +
+// accessToken, params));
 //                     log.info("删除模版请求:{},删除模版响应：{}", params, message);
 //                 });
 //             }
@@ -86,9 +109,11 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //                 Map params = new HashMap<>(16);
 //                 params.put("tid", tplData.getTid());
 //                 //获取微信消息订阅keys
-//                 String keywordsItems = WechatMessageUtil.wechatHandler(HttpUtil.get(keywords + accessToken, params));
+//                 String keywordsItems = WechatMessageUtil.wechatHandler(HttpUtil.get(keywords +
+// accessToken, params));
 //                 JSONArray jsonArray = new JSONObject(keywordsItems).getJSONArray("data");
-//                 List<WechatMessageKeyword> keywordArray = jsonArray.toList(WechatMessageKeyword.class);
+//                 List<WechatMessageKeyword> keywordArray =
+// jsonArray.toList(WechatMessageKeyword.class);
 //
 //                 log.info("keywords:" + keywordArray);
 //                 //存放约定好的kids
@@ -101,7 +126,8 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //                         for (WechatMessageKeyword wechatMessageKeyword : keywordArray) {
 //                             if (wechatMessageKeyword.getName().equals(tplKey)) {
 //                                 kids.add(wechatMessageKeyword.getKid());
-//                                 kidTexts.add(wechatMessageKeyword.getRule() + wechatMessageKeyword.getKid());
+//                                 kidTexts.add(wechatMessageKeyword.getRule() +
+// wechatMessageKeyword.getKid());
 //                                 continue keywordArray;
 //                             }
 //                         }

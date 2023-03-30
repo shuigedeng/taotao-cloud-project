@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.model.convert;
 
 import com.taotao.cloud.goods.api.model.dto.DraftGoodsSkuParamsDTO;
@@ -29,23 +30,19 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-27 16:58:13
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DraftGoodsConvert {
 
-	/**
-	 * 实例
-	 */
-	DraftGoodsConvert INSTANCE = Mappers.getMapper(DraftGoodsConvert.class);
+    /** 实例 */
+    DraftGoodsConvert INSTANCE = Mappers.getMapper(DraftGoodsConvert.class);
 
-	/**
-	 * 商品dtoto草案起草产品
-	 *
-	 * @param draftGoodsSkuParamsDTO 商品dto草案
-	 * @return {@link DraftGoods }
-	 * @since 2022-04-27 16:58:13
-	 */
-	DraftGoods convert(DraftGoodsSkuParamsDTO draftGoodsSkuParamsDTO);
-
-
+    /**
+     * 商品dtoto草案起草产品
+     *
+     * @param draftGoodsSkuParamsDTO 商品dto草案
+     * @return {@link DraftGoods }
+     * @since 2022-04-27 16:58:13
+     */
+    DraftGoods convert(DraftGoodsSkuParamsDTO draftGoodsSkuParamsDTO);
 }

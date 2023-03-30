@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.bootx.controller;
 
 import cn.hutool.db.PageResult;
@@ -9,16 +25,14 @@ import com.taotao.cloud.payment.biz.bootx.param.paymodel.voucher.VoucherGenerati
 import com.taotao.cloud.payment.biz.bootx.param.paymodel.voucher.VoucherParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-/**   
-*
-* @author xxm  
-* @date 2022/3/14 
-*/
+/**
+ * @author xxm
+ * @date 2022/3/14
+ */
 @Tag(name = "储值卡")
 @RestController
 @RequestMapping("/voucher")
@@ -29,53 +43,53 @@ public class VoucherController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<VoucherDto>> page(PageQuery PageQuery, VoucherParam param){
-        return Res.ok(voucherQueryService.page(PageQuery,param));
+    public ResResult<PageResult<VoucherDto>> page(PageQuery PageQuery, VoucherParam param) {
+        return Res.ok(voucherQueryService.page(PageQuery, param));
     }
 
     @Operation(summary = "单条查询")
     @GetMapping("/findById")
-    public ResResult<VoucherDto> findById(Long id){
+    public ResResult<VoucherDto> findById(Long id) {
         return Res.ok(voucherQueryService.findById(id));
     }
 
     @Operation(summary = "根据卡号查询")
     @GetMapping("/findByCardNo")
-    public ResResult<VoucherDto> findByCardNo(String cardNo){
+    public ResResult<VoucherDto> findByCardNo(String cardNo) {
         return Res.ok(voucherQueryService.findByCardNo(cardNo));
     }
-    
+
     @Operation(summary = "批量生成储值卡")
     @PostMapping("/generationBatch")
-    public ResResult<Void> generationBatch(@RequestBody VoucherGenerationParam param){
+    public ResResult<Void> generationBatch(@RequestBody VoucherGenerationParam param) {
         voucherService.generationBatch(param);
         return Res.ok();
     }
 
     @Operation(summary = "冻结")
     @PostMapping("/lock")
-    public ResResult<Void> lock(Long id){
+    public ResResult<Void> lock(Long id) {
         voucherService.lock(id);
         return Res.ok();
     }
 
     @Operation(summary = "启用")
     @PostMapping("/unlock")
-    public ResResult<Void> unlock(Long id){
+    public ResResult<Void> unlock(Long id) {
         voucherService.unlock(id);
         return Res.ok();
     }
 
     @Operation(summary = "批量冻结")
     @PostMapping("/lockBatch")
-    public ResResult<Void> lockBatch(@RequestBody List<Long> ids){
+    public ResResult<Void> lockBatch(@RequestBody List<Long> ids) {
         voucherService.lockBatch(ids);
         return Res.ok();
     }
 
     @Operation(summary = "批量启用")
     @PostMapping("/unlockBatch")
-    public ResResult<Void> unlockBatch(@RequestBody List<Long> ids){
+    public ResResult<Void> unlockBatch(@RequestBody List<Long> ids) {
         voucherService.unlockBatch(ids);
         return Res.ok();
     }

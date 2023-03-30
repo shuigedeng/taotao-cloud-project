@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.bo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
-
 import java.io.Serializable;
 
 /**
@@ -28,42 +28,27 @@ import java.io.Serializable;
  */
 @RecordBuilder
 public record RegionBO(
-	/**
-	 * 地区编码
-	 */
-	String code,
+        /** 地区编码 */
+        String code,
 
-	/**
-	 * 地区名称
-	 */
-	String name,
+        /** 地区名称 */
+        String name,
 
-	/**
-	 * 地区级别（1:省份province,2:市city,3:区县district,4:街道street）
-	 */
-	Integer level,
+        /** 地区级别（1:省份province,2:市city,3:区县district,4:街道street） */
+        Integer level,
 
-	/**
-	 * 城市编码
-	 */
-	String cityCode,
+        /** 城市编码 */
+        String cityCode,
 
-	/**
-	 * 城市中心经度
-	 */
-	String lng,
+        /** 城市中心经度 */
+        String lng,
 
-	/**
-	 * 城市中心纬度
-	 */
-	String lat,
+        /** 城市中心纬度 */
+        String lat,
 
-	/**
-	 * 地区父节点
-	 */
-	Long parentId) implements Serializable {
+        /** 地区父节点 */
+        Long parentId)
+        implements Serializable {
 
-	static final long serialVersionUID = -7605952923416404638L;
-
-
+    static final long serialVersionUID = -7605952923416404638L;
 }

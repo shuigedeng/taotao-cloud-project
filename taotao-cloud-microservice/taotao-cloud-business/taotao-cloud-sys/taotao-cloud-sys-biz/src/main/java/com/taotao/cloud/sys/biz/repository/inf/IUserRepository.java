@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.User;
@@ -25,6 +26,4 @@ import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
-public interface IUserRepository extends BaseInterfaceSuperRepository<User, Long> {
-}
+public interface IUserRepository extends BaseInterfaceSuperRepository<User, Long> {}

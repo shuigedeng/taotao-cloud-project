@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.stock.api.model.query;
 
+package com.taotao.cloud.stock.api.model.query;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -37,10 +37,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmailPageQuery {
 
-	/**
-	 * 收件人，支持多个收件人
-	 */
-	private List<String> tos;
-	private String subject;
-	private String content;
+    /** 收件人，支持多个收件人 */
+    private List<String> tos;
+
+    private String subject;
+    private String content;
 }

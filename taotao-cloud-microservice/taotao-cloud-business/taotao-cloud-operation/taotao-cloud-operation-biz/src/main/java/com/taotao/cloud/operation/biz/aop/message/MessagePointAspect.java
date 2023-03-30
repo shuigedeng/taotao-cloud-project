@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.operation.biz.aop.message;
 
 /**
@@ -22,6 +23,4 @@ package com.taotao.cloud.operation.biz.aop.message;
  * @version 2022.09
  * @since 2022-10-10 17:10
  */
-public class MessagePointAspect {
-
-}
+public class MessagePointAspect {}

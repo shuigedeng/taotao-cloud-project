@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.repository.inf;
 
 import com.taotao.cloud.order.biz.model.entity.order.OrderItemBack;
@@ -26,5 +27,5 @@ import org.springframework.stereotype.Repository;
  * @since 2020/10/22 12:46
  */
 @Repository
-public interface IOrderItemRepository extends JpaRepository<OrderItemBack, Long>, JpaSpecificationExecutor<OrderItemBack> {
-}
+public interface IOrderItemRepository
+        extends JpaRepository<OrderItemBack, Long>, JpaSpecificationExecutor<OrderItemBack> {}

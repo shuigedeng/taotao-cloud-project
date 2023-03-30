@@ -16,9 +16,7 @@
 
 package com.taotao.cloud.stock.api.common.util;
 
-/**
- * 对象创造器，继承此接口必须要。
- */
+/** 对象创造器，继承此接口必须要。 */
 public interface ObjectBuilder<O> {
 
     O build();

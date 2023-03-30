@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.BaseQuery;
@@ -46,14 +47,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/manager/org")
 @Tag(name = "管理端-部门管理API", description = "管理端-部门管理API")
-public class ManagerOrgController extends
-		BaseSuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
+public class ManagerOrgController
+        extends BaseSuperController<
+                IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
-	@Operation(summary = "获取部门树", description = "获取部门树")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-	public Result<List<DeptTreeVO>> tree() {
-		return Result.success(ForestNodeMerger.merge(service().tree()));
-	}
+    @Operation(summary = "获取部门树", description = "获取部门树")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping("/tree")
+    public Result<List<DeptTreeVO>> tree() {
+        return Result.success(ForestNodeMerger.merge(service().tree()));
+    }
 }

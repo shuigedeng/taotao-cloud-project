@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.service.feign.impl;
 
 import com.taotao.cloud.member.biz.service.feign.IFeignMemberService;
@@ -28,6 +29,4 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class FeignMemberServiceImpl implements IFeignMemberService {
-
-}
+public class FeignMemberServiceImpl implements IFeignMemberService {}

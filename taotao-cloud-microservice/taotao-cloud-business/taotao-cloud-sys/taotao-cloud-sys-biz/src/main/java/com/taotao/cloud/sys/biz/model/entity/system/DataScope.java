@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -52,93 +53,71 @@ import org.hibernate.annotations.Type;
 @org.hibernate.annotations.Table(appliesTo = DataScope.TABLE_NAME, comment = "数据权限表")
 public class DataScope extends BaseSuperEntity<DataScope, Long> {
 
-	public static final String TABLE_NAME = "tt_data_scope";
+    public static final String TABLE_NAME = "tt_data_scope";
 
-	/**
-	 * 部门范围限制的字段名称
-	 */
-	private String scopeDeptFiledName = "dept_id";
-	/**
-	 * 公司范围限制的字段名称
-	 */
-	private String scopeOrgFiledName = "org_id";
-	/**
-	 * 个人范围限制的字段名称
-	 */
-	private String scopeSelfFiledName = "create_by";
+    /** 部门范围限制的字段名称 */
+    private String scopeDeptFiledName = "dept_id";
+    /** 公司范围限制的字段名称 */
+    private String scopeOrgFiledName = "org_id";
+    /** 个人范围限制的字段名称 */
+    private String scopeSelfFiledName = "create_by";
 
-	/**
-	 * 编码
-	 */
-	@Column(name = "code", unique = true, columnDefinition = "varchar(255) not null comment '编码'")
-	private String code;
+    /** 编码 */
+    @Column(name = "code", unique = true, columnDefinition = "varchar(255) not null comment '编码'")
+    private String code;
 
-	/**
-	 * 名称
-	 */
-	@Column(name = "名称", unique = true, columnDefinition = "varchar(255) not null comment '名称'")
-	private String name;
+    /** 名称 */
+    @Column(name = "名称", unique = true, columnDefinition = "varchar(255) not null comment '名称'")
+    private String name;
 
-	/**
-	 * 数据范围类型
-	 *
-	 * @see DataScopeEnum
-	 */
-	@Column(name = "type", columnDefinition = "int not null comment '数据范围类型'")
-	private Integer type;
+    /**
+     * 数据范围类型
+     *
+     * @see DataScopeEnum
+     */
+    @Column(name = "type", columnDefinition = "int not null comment '数据范围类型'")
+    private Integer type;
 
-	/**
-	 * 备注
-	 */
-	@Column(name = "备注", columnDefinition = "varchar(1024) null comment '备注'")
-	private String remark;
+    /** 备注 */
+    @Column(name = "备注", columnDefinition = "varchar(1024) null comment '备注'")
+    private String remark;
 
-	/**
-	 * 组织id列表
-	 */
-	@Type(value= JsonType.class)
-	@TableField(typeHandler = JacksonListTypeHandler.class)
-	@Column(name = "org_ids", columnDefinition = "json null comment '组织id列表'")
-	private List<Long> orgIds;
+    /** 组织id列表 */
+    @Type(value = JsonType.class)
+    @TableField(typeHandler = JacksonListTypeHandler.class)
+    @Column(name = "org_ids", columnDefinition = "json null comment '组织id列表'")
+    private List<Long> orgIds;
 
-	/**
-	 * 部门id
-	 */
-	@Type(value= JsonType.class)
-	@TableField(typeHandler = JacksonListTypeHandler.class)
-	@Column(name = "dept_ids", columnDefinition = "json null comment '部门id列表'")
-	private List<Long> deptIds;
+    /** 部门id */
+    @Type(value = JsonType.class)
+    @TableField(typeHandler = JacksonListTypeHandler.class)
+    @Column(name = "dept_ids", columnDefinition = "json null comment '部门id列表'")
+    private List<Long> deptIds;
 
-	/**
-	 * 用户id
-	 */
-	@Type(value= JsonType.class)
-	@TableField(typeHandler = JacksonListTypeHandler.class)
-	@Column(name = "user_ids", columnDefinition = "json null comment '用户id列表'")
-	private List<Long> userIds;
+    /** 用户id */
+    @Type(value = JsonType.class)
+    @TableField(typeHandler = JacksonListTypeHandler.class)
+    @Column(name = "user_ids", columnDefinition = "json null comment '用户id列表'")
+    private List<Long> userIds;
 
-	/**
-	 * 租户id
-	 */
-	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
-	private String tenantId;
+    /** 租户id */
+    @Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
+    private String tenantId;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        DataScope dept = (DataScope) o;
+        return getId() != null && Objects.equals(getId(), dept.getId());
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-				o)) {
-			return false;
-		}
-		DataScope dept = (DataScope) o;
-		return getId() != null && Objects.equals(getId(), dept.getId());
-	}
-
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

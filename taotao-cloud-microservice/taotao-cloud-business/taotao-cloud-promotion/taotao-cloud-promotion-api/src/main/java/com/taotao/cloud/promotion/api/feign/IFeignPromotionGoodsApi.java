@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
@@ -31,16 +32,18 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignPromotionGoodsService", value = ServiceName.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignPromotionGoodsApiFallback.class)
+@FeignClient(
+        contextId = "IFeignPromotionGoodsService",
+        value = ServiceName.TAOTAO_CLOUD_PROMOTION,
+        fallbackFactory = FeignPromotionGoodsApiFallback.class)
 public interface IFeignPromotionGoodsApi {
 
-	@GetMapping(value = "/withdraw/info")
-	PromotionGoodsVO getPromotionsGoods(PromotionGoodsPageQuery searchParams);
+    @GetMapping(value = "/withdraw/info")
+    PromotionGoodsVO getPromotionsGoods(PromotionGoodsPageQuery searchParams);
 
-	@PostMapping(value = "/updateBatchById")
-	Boolean updateBatchById(List<PromotionGoodsVO> promotionGoods);
+    @PostMapping(value = "/updateBatchById")
+    Boolean updateBatchById(List<PromotionGoodsVO> promotionGoods);
 
-	@GetMapping(value = "/getValidPromotionsGoodsPrice")
-	BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList);
+    @GetMapping(value = "/getValidPromotionsGoodsPrice")
+    BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList);
 }
-

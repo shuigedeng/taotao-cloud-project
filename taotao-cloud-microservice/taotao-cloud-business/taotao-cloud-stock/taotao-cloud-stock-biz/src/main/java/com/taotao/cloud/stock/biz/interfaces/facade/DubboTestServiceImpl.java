@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.stock.biz.interfaces.facade;
 
 import com.taotao.cloud.stock.api.dubbo.DubboTestService;
@@ -26,6 +27,4 @@ import org.apache.dubbo.config.annotation.DubboService;
  * @since 2021/12/28 09:46
  */
 @DubboService(version = "1.0", group = "test")
-public class DubboTestServiceImpl implements DubboTestService {
-
-}
+public class DubboTestServiceImpl implements DubboTestService {}

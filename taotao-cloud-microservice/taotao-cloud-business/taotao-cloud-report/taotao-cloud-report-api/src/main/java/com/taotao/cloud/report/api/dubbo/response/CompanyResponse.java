@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.report.api.dubbo.response;
 
+package com.taotao.cloud.report.api.dubbo.response;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
 import java.io.Serializable;
@@ -28,71 +28,45 @@ import java.io.Serializable;
  */
 @RecordBuilder
 public record CompanyResponse(
-	/**
-	 * 租户id
-	 */
-	String tenantId,
+        /** 租户id */
+        String tenantId,
 
-	/**
-	 * 租户密钥
-	 */
-	String tenantSecret,
+        /** 租户密钥 */
+        String tenantSecret,
 
-	/**
-	 * 公司名称
-	 */
-	String name,
+        /** 公司名称 */
+        String name,
 
-	/**
-	 * 企业全称
-	 */
-	String fullName,
+        /** 企业全称 */
+        String fullName,
 
-	/**
-	 * 信用代码
-	 */
-	String creditCode,
+        /** 信用代码 */
+        String creditCode,
 
-	/**
-	 * 邮箱
-	 */
-	String email,
+        /** 邮箱 */
+        String email,
 
-	/**
-	 * 联系人
-	 */
-	String username,
+        /** 联系人 */
+        String username,
 
-	/**
-	 * 联系人手机号
-	 */
-	String phone,
+        /** 联系人手机号 */
+        String phone,
 
-	/**
-	 * 联系人地址
-	 */
-	String address,
+        /** 联系人地址 */
+        String address,
 
-	/**
-	 * 请求域名
-	 */
-	String domain,
+        /** 请求域名 */
+        String domain,
 
-	/**
-	 * 公司网址
-	 */
-	String webSite,
+        /** 公司网址 */
+        String webSite,
 
-	/**
-	 * 所在地区
-	 */
-	String regionInfo,
+        /** 所在地区 */
+        String regionInfo,
 
-	/**
-	 * 公司类型
-	 */
-	Integer type) implements Serializable {
+        /** 公司类型 */
+        Integer type)
+        implements Serializable {
 
-	static final long serialVersionUID = 5126530068827085130L;
-
+    static final long serialVersionUID = 5126530068827085130L;
 }

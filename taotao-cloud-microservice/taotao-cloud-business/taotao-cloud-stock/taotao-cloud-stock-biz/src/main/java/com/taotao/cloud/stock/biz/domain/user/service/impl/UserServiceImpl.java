@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.stock.biz.domain.user.service.impl;
 
 import com.taotao.cloud.stock.biz.domain.user.service.UserService;
@@ -26,6 +27,4 @@ import org.springframework.stereotype.Service;
  * @since 2021/12/28 11:50
  */
 @Service
-public class UserServiceImpl implements UserService {
-
-}
+public class UserServiceImpl implements UserService {}

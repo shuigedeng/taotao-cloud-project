@@ -16,5 +16,4 @@
 
 package com.taotao.cloud.stock.biz.application.event;
 
-public interface PaymentVoidedEvent extends PaymentEvent {
-}
+public interface PaymentVoidedEvent extends PaymentEvent {}

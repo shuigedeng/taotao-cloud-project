@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.operation.biz.task;
 
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import org.springframework.stereotype.Component;
-
 import java.util.concurrent.TimeUnit;
+import org.springframework.stereotype.Component;
 
 /**
  * <br>
@@ -32,15 +32,15 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class WithdrawJobHandler {
 
-	@XxlJob("WithdrawJobHandler")
-	public ReturnT<String> userJobHandler(String param) throws Exception {
-		XxlJobHelper.log("XXL-JOB, Hello World.");
+    @XxlJob("WithdrawJobHandler")
+    public ReturnT<String> userJobHandler(String param) throws Exception {
+        XxlJobHelper.log("XXL-JOB, Hello World.");
 
-		for (int i = 0; i < 5; i++) {
-			XxlJobHelper.log("beat at:" + i);
-			System.out.println("XXL-JOB测试-----" + i);
-			TimeUnit.SECONDS.sleep(2);
-		}
-		return ReturnT.SUCCESS;
-	}
+        for (int i = 0; i < 5; i++) {
+            XxlJobHelper.log("beat at:" + i);
+            System.out.println("XXL-JOB测试-----" + i);
+            TimeUnit.SECONDS.sleep(2);
+        }
+        return ReturnT.SUCCESS;
+    }
 }

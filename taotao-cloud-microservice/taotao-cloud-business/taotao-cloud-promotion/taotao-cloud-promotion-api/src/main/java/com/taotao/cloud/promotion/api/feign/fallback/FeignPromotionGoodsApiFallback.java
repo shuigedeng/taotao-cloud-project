@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.promotion.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
@@ -31,25 +31,24 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  */
 public class FeignPromotionGoodsApiFallback implements FallbackFactory<IFeignPromotionGoodsApi> {
 
-	@Override
-	public IFeignPromotionGoodsApi create(Throwable throwable) {
-		return new IFeignPromotionGoodsApi() {
+    @Override
+    public IFeignPromotionGoodsApi create(Throwable throwable) {
+        return new IFeignPromotionGoodsApi() {
 
-			@Override
-			public PromotionGoodsVO getPromotionsGoods(
-				PromotionGoodsPageQuery searchParams) {
-				return null;
-			}
+            @Override
+            public PromotionGoodsVO getPromotionsGoods(PromotionGoodsPageQuery searchParams) {
+                return null;
+            }
 
-			@Override
-			public Boolean updateBatchById(List<PromotionGoodsVO> promotionGoods) {
-				return null;
-			}
+            @Override
+            public Boolean updateBatchById(List<PromotionGoodsVO> promotionGoods) {
+                return null;
+            }
 
-			@Override
-			public BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList) {
-				return null;
-			}
-		};
-	}
+            @Override
+            public BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList) {
+                return null;
+            }
+        };
+    }
 }

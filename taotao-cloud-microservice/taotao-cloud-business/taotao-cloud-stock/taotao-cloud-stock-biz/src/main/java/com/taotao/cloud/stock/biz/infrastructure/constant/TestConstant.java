@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.stock.biz.infrastructure.constant;
 
 /**
@@ -22,6 +23,4 @@ package com.taotao.cloud.stock.biz.infrastructure.constant;
  * @version 2022.03
  * @since 2021/12/28 09:30
  */
-public class TestConstant {
-
-}
+public class TestConstant {}

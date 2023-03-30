@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.convert;
 
 import com.taotao.cloud.sys.api.model.dto.email.EmailDTO;
@@ -29,15 +30,12 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-28 13:39:18
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EmailConvert {
 
-	/**
-	 * 实例
-	 */
-	EmailConvert INSTANCE = Mappers.getMapper(EmailConvert.class);
+    /** 实例 */
+    EmailConvert INSTANCE = Mappers.getMapper(EmailConvert.class);
 
-	EmailConfig convert(EmailDTO emailDTO);
-
+    EmailConfig convert(EmailDTO emailDTO);
 }

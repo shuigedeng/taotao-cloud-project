@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
@@ -45,16 +46,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-物流公司管理API", description = "管理端-物流公司管理API")
 public class ManagerLogisticsController {
 
-	private final ILogisticsService logisticsService;
+    private final ILogisticsService logisticsService;
 
-	@Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('express:company:info:id')")
-	@GetMapping("/info/id/{id:[0-9]*}")
-	public Result<LogisticsVO> findExpressCompanyById(@PathVariable(value = "id") Long id) {
-		LogisticsConfig logisticsConfig = logisticsService.findLogisticsById(id);
-		LogisticsVO vo = LogisticsConvert.INSTANCE.convert(logisticsConfig);
-		return Result.success(vo);
-	}
-
+    @Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('express:company:info:id')")
+    @GetMapping("/info/id/{id:[0-9]*}")
+    public Result<LogisticsVO> findExpressCompanyById(@PathVariable(value = "id") Long id) {
+        LogisticsConfig logisticsConfig = logisticsService.findLogisticsById(id);
+        LogisticsVO vo = LogisticsConvert.INSTANCE.convert(logisticsConfig);
+        return Result.success(vo);
+    }
 }

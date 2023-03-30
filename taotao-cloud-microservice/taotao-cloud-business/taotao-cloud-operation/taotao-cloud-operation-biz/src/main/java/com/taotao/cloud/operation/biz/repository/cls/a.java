@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.operation.biz.repository.cls;
 
 /**
@@ -22,6 +23,4 @@ package com.taotao.cloud.operation.biz.repository.cls;
  * @version 2022.09
  * @since 2022-10-10 17:08
  */
-public class a {
-
-}
+public class a {}

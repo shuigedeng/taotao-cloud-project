@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.handler.script.impl;
 
 import cn.hutool.core.date.DatePattern;
@@ -35,93 +51,97 @@ import org.springframework.stereotype.Component;
 @Component("YunPianSmsScript")
 public class YunPianSmsScript implements SmsScript {
 
-	@Autowired
-	private AccountUtils accountUtils;
+    @Autowired private AccountUtils accountUtils;
 
-	@Override
-	public List<SmsRecord> send(SmsParam smsParam) {
+    @Override
+    public List<SmsRecord> send(SmsParam smsParam) {
 
-		try {
-			YunPianSmsAccount account =
-					Objects.nonNull(smsParam.getSendAccountId()) ? accountUtils.getAccountById(
-							smsParam.getSendAccountId(), YunPianSmsAccount.class)
-							: accountUtils.getSmsAccountByScriptName(smsParam.getScriptName(),
-									YunPianSmsAccount.class);
-			Map<String, Object> params = assembleParam(smsParam, account);
+        try {
+            YunPianSmsAccount account =
+                    Objects.nonNull(smsParam.getSendAccountId())
+                            ? accountUtils.getAccountById(
+                                    smsParam.getSendAccountId(), YunPianSmsAccount.class)
+                            : accountUtils.getSmsAccountByScriptName(
+                                    smsParam.getScriptName(), YunPianSmsAccount.class);
+            Map<String, Object> params = assembleParam(smsParam, account);
 
-			String result = HttpRequest.post(account.getUrl())
-					.header(Header.CONTENT_TYPE.getValue(),
-							CommonConstant.CONTENT_TYPE_FORM_URL_ENCODE)
-					.header(Header.ACCEPT.getValue(), CommonConstant.CONTENT_TYPE_JSON)
-					.form(params)
-					.timeout(2000)
-					.execute().body();
-			YunPianSendResult yunPianSendResult = JSON.parseObject(result, YunPianSendResult.class);
-			return assembleSmsRecord(smsParam, yunPianSendResult, account);
-		} catch (Exception e) {
-			log.error("YunPianSmsScript#send fail:{},params:{}",
-					Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
-			return null;
-		}
+            String result =
+                    HttpRequest.post(account.getUrl())
+                            .header(
+                                    Header.CONTENT_TYPE.getValue(),
+                                    CommonConstant.CONTENT_TYPE_FORM_URL_ENCODE)
+                            .header(Header.ACCEPT.getValue(), CommonConstant.CONTENT_TYPE_JSON)
+                            .form(params)
+                            .timeout(2000)
+                            .execute()
+                            .body();
+            YunPianSendResult yunPianSendResult = JSON.parseObject(result, YunPianSendResult.class);
+            return assembleSmsRecord(smsParam, yunPianSendResult, account);
+        } catch (Exception e) {
+            log.error(
+                    "YunPianSmsScript#send fail:{},params:{}",
+                    Throwables.getStackTraceAsString(e),
+                    JSON.toJSONString(smsParam));
+            return null;
+        }
+    }
 
-	}
+    @Override
+    public List<SmsRecord> pull(Integer accountId) {
+        // .....
+        return null;
+    }
 
-	@Override
-	public List<SmsRecord> pull(Integer accountId) {
-		// .....
-		return null;
-	}
+    /**
+     * 组装参数
+     *
+     * @param smsParam
+     * @param account
+     * @return
+     */
+    private Map<String, Object> assembleParam(SmsParam smsParam, YunPianSmsAccount account) {
+        Map<String, Object> params = new HashMap<>(8);
+        params.put("apikey", account.getApikey());
+        params.put("mobile", StringUtils.join(smsParam.getPhones(), StrUtil.C_COMMA));
+        params.put("tpl_id", account.getTplId());
+        params.put("tpl_value", "");
+        return params;
+    }
 
-	/**
-	 * 组装参数
-	 *
-	 * @param smsParam
-	 * @param account
-	 * @return
-	 */
-	private Map<String, Object> assembleParam(SmsParam smsParam, YunPianSmsAccount account) {
-		Map<String, Object> params = new HashMap<>(8);
-		params.put("apikey", account.getApikey());
-		params.put("mobile", StringUtils.join(smsParam.getPhones(), StrUtil.C_COMMA));
-		params.put("tpl_id", account.getTplId());
-		params.put("tpl_value", "");
-		return params;
-	}
+    private List<SmsRecord> assembleSmsRecord(
+            SmsParam smsParam, YunPianSendResult response, YunPianSmsAccount account) {
+        if (Objects.isNull(response) || ArrayUtil.isEmpty(response.getData())) {
+            return null;
+        }
 
+        List<SmsRecord> smsRecordList = new ArrayList<>();
 
-	private List<SmsRecord> assembleSmsRecord(SmsParam smsParam, YunPianSendResult response,
-			YunPianSmsAccount account) {
-		if (Objects.isNull(response) || ArrayUtil.isEmpty(response.getData())) {
-			return null;
-		}
+        for (YunPianSendResult.DataDTO datum : response.getData()) {
+            SmsRecord smsRecord =
+                    SmsRecord.builder()
+                            .sendDate(
+                                    Integer.valueOf(
+                                            DateUtil.format(
+                                                    new Date(), DatePattern.PURE_DATE_PATTERN)))
+                            .messageTemplateId(smsParam.getMessageTemplateId())
+                            .phone(Long.valueOf(datum.getMobile()))
+                            .supplierId(account.getSupplierId())
+                            .supplierName(account.getSupplierName())
+                            .msgContent(smsParam.getContent())
+                            .seriesId(datum.getSid())
+                            .chargingNum(Math.toIntExact(datum.getCount()))
+                            .status(
+                                    0 == datum.getCode()
+                                            ? SmsStatus.SEND_SUCCESS.getCode()
+                                            : SmsStatus.SEND_FAIL.getCode())
+                            .reportContent(datum.getMsg())
+                            .created(Math.toIntExact(DateUtil.currentSeconds()))
+                            .updated(Math.toIntExact(DateUtil.currentSeconds()))
+                            .build();
 
-		List<SmsRecord> smsRecordList = new ArrayList<>();
+            smsRecordList.add(smsRecord);
+        }
 
-		for (YunPianSendResult.DataDTO datum : response.getData()) {
-			SmsRecord smsRecord = SmsRecord.builder()
-					.sendDate(
-							Integer.valueOf(
-									DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))
-					.messageTemplateId(smsParam.getMessageTemplateId())
-					.phone(Long.valueOf(datum.getMobile()))
-					.supplierId(account.getSupplierId())
-					.supplierName(account.getSupplierName())
-					.msgContent(smsParam.getContent())
-					.seriesId(datum.getSid())
-					.chargingNum(Math.toIntExact(datum.getCount()))
-					.status(0 == datum.getCode() ? SmsStatus.SEND_SUCCESS.getCode()
-							: SmsStatus.SEND_FAIL.getCode())
-					.reportContent(datum.getMsg())
-					.created(Math.toIntExact(DateUtil.currentSeconds()))
-				.updated(Math.toIntExact(DateUtil.currentSeconds()))
-				.build();
-
-			smsRecordList.add(smsRecord);
-		}
-
-		return smsRecordList;
-	}
-
-
+        return smsRecordList;
+    }
 }
-

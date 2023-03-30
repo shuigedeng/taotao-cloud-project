@@ -1,20 +1,36 @@
-//package com.taotao.cloud.logs.biz.entity;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.log.biz.entity;
 //
-//import org.apache.commons.lang3.StringUtils;
-//import org.apache.commons.lang3.builder.EqualsBuilder;
-//import org.apache.commons.lang3.builder.HashCodeBuilder;
-//import org.springrain.frame.annotation.WhereSQL;
-//import org.springrain.frame.entity.BaseEntity;
+// import org.apache.commons.lang3.StringUtils;
+// import org.apache.commons.lang3.builder.EqualsBuilder;
+// import org.apache.commons.lang3.builder.HashCodeBuilder;
+// import org.springrain.frame.annotation.WhereSQL;
+// import org.springrain.frame.entity.BaseEntity;
 //
-//import jakarta.persistence.Id;
-//import jakarta.persistence.Table;
-//import java.util.Date;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.Table;
+// import java.util.Date;
 //
-///**
+/// **
 // * 权限变更日志
 // */
-//@Table(name = "t_permissions_log")
-//public class PermissionsLog extends BaseEntity {
+// @Table(name = "t_permissions_log")
+// public class PermissionsLog extends BaseEntity {
 //
 //    private static final long serialVersionUID = 1L;
 //
@@ -120,8 +136,10 @@
 //        this.id = id;
 //    }
 //
-//    public PermissionsLog(String siteId, Integer actionType, String operatorUserId, String operatorUserName,
-//                          String operatorUserRoles, Integer operatorObjectType, String operatorObjectId, String operatorObjectName,
+//    public PermissionsLog(String siteId, Integer actionType, String operatorUserId, String
+// operatorUserName,
+//                          String operatorUserRoles, Integer operatorObjectType, String
+// operatorObjectId, String operatorObjectName,
 //                          String actionContent, String createUserId, Date createTime) {
 //        super();
 //        this.siteId = siteId;
@@ -137,7 +155,8 @@
 //        this.createTime = createTime;
 //    }
 //
-//    public PermissionsLog(String siteId, Integer actionType, Integer operatorObjectType, String operatorObjectId,
+//    public PermissionsLog(String siteId, Integer actionType, Integer operatorObjectType, String
+// operatorObjectId,
 //                          String operatorObjectName, String actionContent) {
 //        super();
 //        this.siteId = siteId;
@@ -454,15 +473,24 @@
 //
 //    @Override
 //    public String toString() {
-//        return new StringBuilder().append("主键[").append(getId()).append("],").append("站点ID[").append(getSiteId())
-//                .append("],").append("操作类型 创建、编辑、删除、启用、禁用[").append(getActionType()).append("],").append("操作人ID[")
-//                .append(getOperatorUserId()).append("],").append("操作人当时名称[").append(getOperatorUserName()).append("],")
-//                .append("操作人当时所属角色名称，逗号分割[").append(getOperatorUserRoles()).append("],").append("操作对象类型[")
-//                .append(getOperatorObjectId()).append("],").append("操作对象当时的名称[").append(getOperatorObjectName())
-//                .append("],").append("操作内容详情[").append(getActionContent()).append("],").append("记录创建人[")
-//                .append(getCreateUserId()).append("],").append("记录创建时间[").append(getCreateTime()).append("],")
-//                .append("备用字段[").append(getBak1()).append("],").append("备用字段[").append(getBak2()).append("],")
-//                .append("备用字段[").append(getBak3()).append("],").append("备用字段[").append(getBak4()).append("],")
+//        return new
+// StringBuilder().append("主键[").append(getId()).append("],").append("站点ID[").append(getSiteId())
+//                .append("],").append("操作类型
+// 创建、编辑、删除、启用、禁用[").append(getActionType()).append("],").append("操作人ID[")
+//
+// .append(getOperatorUserId()).append("],").append("操作人当时名称[").append(getOperatorUserName()).append("],")
+//
+// .append("操作人当时所属角色名称，逗号分割[").append(getOperatorUserRoles()).append("],").append("操作对象类型[")
+//
+// .append(getOperatorObjectId()).append("],").append("操作对象当时的名称[").append(getOperatorObjectName())
+//
+// .append("],").append("操作内容详情[").append(getActionContent()).append("],").append("记录创建人[")
+//
+// .append(getCreateUserId()).append("],").append("记录创建时间[").append(getCreateTime()).append("],")
+//
+// .append("备用字段[").append(getBak1()).append("],").append("备用字段[").append(getBak2()).append("],")
+//
+// .append("备用字段[").append(getBak3()).append("],").append("备用字段[").append(getBak4()).append("],")
 //                .append("备用字段[").append(getBak5()).append("],").toString();
 //    }
 //
@@ -484,4 +512,4 @@
 //        PermissionsLog other = (PermissionsLog) obj;
 //        return new EqualsBuilder().append(getId(), other.getId()).isEquals();
 //    }
-//}
+// }

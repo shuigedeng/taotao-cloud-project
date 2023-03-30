@@ -1,11 +1,11 @@
 /*
- * COPYRIGHT (C) 2022 Art AUTHORS(cloud@gmail.com). ALL RIGHTS RESERVED.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,71 +17,51 @@
 package com.taotao.cloud.tenant.api.model.dto;
 
 import com.taotao.cloud.common.enums.GlobalStatusEnum;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
- * @author 
+ * @author
  * @version 0.0.1
  * @date 2022/11/26 15:24
  */
 @Data
 public class TenantPackageDTO implements Serializable {
 
-	private static final long serialVersionUID = -1L;
+    private static final long serialVersionUID = -1L;
 
-	/**
-	 * 主键
-	 */
-	private Long id;
+    /** 主键 */
+    private Long id;
 
-	/**
-	 * 套餐名
-	 */
-	private String name;
+    /** 套餐名 */
+    private String name;
 
-	/**
-	 * 套餐状态
-	 * <p>
-	 * 枚举 {@link GlobalStatusEnum}
-	 */
-	private Integer status;
+    /**
+     * 套餐状态
+     *
+     * <p>枚举 {@link GlobalStatusEnum}
+     */
+    private Integer status;
 
-	/**
-	 * 备注
-	 */
-	private String remark;
+    /** 备注 */
+    private String remark;
 
-	/**
-	 * 套餐关联的菜单编号
-	 */
-	private String menuIds;
+    /** 套餐关联的菜单编号 */
+    private String menuIds;
 
-	/**
-	 * 创建者
-	 */
-	private String createBy;
+    /** 创建者 */
+    private String createBy;
 
-	/**
-	 * 创建时间
-	 */
-	private LocalDateTime createTime;
+    /** 创建时间 */
+    private LocalDateTime createTime;
 
-	/**
-	 * 更新者
-	 */
-	private String updateBy;
+    /** 更新者 */
+    private String updateBy;
 
-	/**
-	 * 更新时间
-	 */
-	private LocalDateTime updateTime;
+    /** 更新时间 */
+    private LocalDateTime updateTime;
 
-	/**
-	 * 逻辑删除标志
-	 */
-	private Boolean delFlag;
-
+    /** 逻辑删除标志 */
+    private Boolean delFlag;
 }

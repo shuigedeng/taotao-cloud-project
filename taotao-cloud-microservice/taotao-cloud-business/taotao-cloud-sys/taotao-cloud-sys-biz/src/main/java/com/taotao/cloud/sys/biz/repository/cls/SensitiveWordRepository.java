@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SensitiveWordRepository extends BaseClassSuperRepository<SensitiveWord, Long> {
 
-	public SensitiveWordRepository(EntityManager em) {
-		super(SensitiveWord.class, em);
-	}
-
+    public SensitiveWordRepository(EntityManager em) {
+        super(SensitiveWord.class, em);
+    }
 }

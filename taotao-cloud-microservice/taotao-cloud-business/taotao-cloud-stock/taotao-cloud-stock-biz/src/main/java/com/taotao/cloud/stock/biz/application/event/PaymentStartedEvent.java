@@ -16,5 +16,4 @@
 
 package com.taotao.cloud.stock.biz.application.event;
 
-public interface PaymentStartedEvent extends PaymentEvent {
-}
+public interface PaymentStartedEvent extends PaymentEvent {}

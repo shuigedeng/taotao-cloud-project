@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.file.api.model.vo;
 
 import java.io.Serial;
@@ -37,12 +38,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UploadFileVO implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = -4132785717179910025L;
+    @Serial private static final long serialVersionUID = -4132785717179910025L;
 
-	private Long id;
+    private Long id;
 
-	private String name;
+    private String name;
 
-	private String url;
+    private String url;
 }

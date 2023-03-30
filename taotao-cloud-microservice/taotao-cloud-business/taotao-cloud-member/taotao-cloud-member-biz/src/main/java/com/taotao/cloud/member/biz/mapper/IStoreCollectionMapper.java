@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -24,22 +25,22 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-/**
- * 会员收藏数据处理层
- */
+/** 会员收藏数据处理层 */
 public interface IStoreCollectionMapper extends BaseSuperMapper<MemberStoreCollection, Long> {
 
-	/**
-	 * 会员店铺收藏分页
-	 *
-	 * @param page         分页
-	 * @param queryWrapper 查询条件
-	 */
-	@Select("""
+    /**
+     * 会员店铺收藏分页
+     *
+     * @param page 分页
+     * @param queryWrapper 查询条件
+     */
+    @Select(
+            """
 		select s.id,s.store_name,s.store_logo,s.self_operated
 		from tt_store s INNER JOIN tt_store_collection sc
 		ON s.id=sc.store_id ${ew.customSqlSegment}
 		""")
-	IPage<StoreCollectionVO> storeCollectionVOList(IPage<StoreCollectionVO> page,
-												   @Param(Constants.WRAPPER) Wrapper<StoreCollectionVO> queryWrapper);
+    IPage<StoreCollectionVO> storeCollectionVOList(
+            IPage<StoreCollectionVO> page,
+            @Param(Constants.WRAPPER) Wrapper<StoreCollectionVO> queryWrapper);
 }

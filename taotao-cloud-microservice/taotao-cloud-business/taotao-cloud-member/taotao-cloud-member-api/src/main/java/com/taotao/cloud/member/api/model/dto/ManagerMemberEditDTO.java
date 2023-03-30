@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.member.api.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -29,37 +45,36 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "会员修改")
 public class ManagerMemberEditDTO implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
+    @Serial private static final long serialVersionUID = -7605952923416404638L;
 
-	@Schema(description = "会员用户名,用户名不能进行修改", required = true)
-	@NotNull(message = "会员用户名不能为空")
-	private String username;
+    @Schema(description = "会员用户名,用户名不能进行修改", required = true)
+    @NotNull(message = "会员用户名不能为空")
+    private String username;
 
-	@Schema(description = "会员密码")
-	private String password;
+    @Schema(description = "会员密码")
+    private String password;
 
-	@Schema(description = "昵称")
-	@Length(min = 2, max = 20, message = "会员昵称必须为2到20位之间")
-	private String nickName;
+    @Schema(description = "昵称")
+    @Length(min = 2, max = 20, message = "会员昵称必须为2到20位之间")
+    private String nickName;
 
-	@Schema(description = "地区")
-	private String region;
+    @Schema(description = "地区")
+    private String region;
 
-	@Schema(description = "地区ID")
-	private String regionId;
+    @Schema(description = "地区ID")
+    private String regionId;
 
-	@Min(message = "必须为数字且1为男,0为女", value = 0)
-	@Max(message = "必须为数字且1为男,0为女", value = 1)
-	@NotNull(message = "会员性别不能为空")
-	@Schema(description = "会员性别,1为男，0为女")
-	private Integer sex;
+    @Min(message = "必须为数字且1为男,0为女", value = 0)
+    @Max(message = "必须为数字且1为男,0为女", value = 1)
+    @NotNull(message = "会员性别不能为空")
+    @Schema(description = "会员性别,1为男，0为女")
+    private Integer sex;
 
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Schema(description = "会员生日")
-	private Date birthday;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Schema(description = "会员生日")
+    private Date birthday;
 
-	@Schema(description = "会员头像")
-	private String face;
+    @Schema(description = "会员头像")
+    private String face;
 }

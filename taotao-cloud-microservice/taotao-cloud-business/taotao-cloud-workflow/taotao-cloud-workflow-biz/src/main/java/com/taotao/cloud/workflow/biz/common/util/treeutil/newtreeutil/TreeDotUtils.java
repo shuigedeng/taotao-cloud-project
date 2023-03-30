@@ -1,5 +1,20 @@
-package com.taotao.cloud.workflow.biz.common.util.treeutil.newtreeutil;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.workflow.biz.common.util.treeutil.newtreeutil;
 
 import com.taotao.cloud.workflow.biz.common.util.treeutil.SumTree;
 import java.util.ArrayList;
@@ -12,15 +27,17 @@ import org.apache.commons.collections4.CollectionUtils;
  */
 public class TreeDotUtils {
 
-    /**
-     * 将List转换为Tree
-     */
-    public static <T extends SumTree> List<SumTree<T>> convertListToTreeDot(List<T> tList, String parentId) {
+    /** 将List转换为Tree */
+    public static <T extends SumTree> List<SumTree<T>> convertListToTreeDot(
+            List<T> tList, String parentId) {
         List<SumTree<T>> sumTrees = new ArrayList<>();
         List<T> list = new ArrayList<>();
-        CollectionUtils.addAll(list,tList);
+        CollectionUtils.addAll(list, tList);
         if (StringUtil.isNotEmpty(parentId)) {
-            List<T> data = list.stream().filter(t -> parentId.equals(t.getParentId())).collect(Collectors.toList());
+            List<T> data =
+                    list.stream()
+                            .filter(t -> parentId.equals(t.getParentId()))
+                            .collect(Collectors.toList());
             list.removeAll(data);
             for (int i = 0; i < data.size(); i++) {
                 T t = data.get(i);
@@ -33,16 +50,14 @@ public class TreeDotUtils {
         return sumTrees;
     }
 
-    /**
-     * 将List转换为Tree
-     */
+    /** 将List转换为Tree */
     public static <T extends SumTree> List<SumTree<T>> convertListToTreeDot(List<T> tList) {
         List<SumTree<T>> sumTrees = new ArrayList<>();
         if (tList != null && tList.size() > 0) {
             for (int i = 0; i < tList.size(); i++) {
                 T t = tList.get(i);
                 if (!isTreeDotExist(tList, t.getParentId())) {
-                    //不存在以父ID为ID的点，说明是当前点是顶级节点
+                    // 不存在以父ID为ID的点，说明是当前点是顶级节点
                     SumTree<T> tSumTree = getTreeDotByT(t, tList);
                     sumTrees.add(tSumTree);
                 }
@@ -51,16 +66,14 @@ public class TreeDotUtils {
         return sumTrees;
     }
 
-    /**
-     * 将List转换为Tree（个别过滤子集）
-     */
+    /** 将List转换为Tree（个别过滤子集） */
     public static <T extends SumTree> List<SumTree<T>> convertListToTreeDotFilter(List<T> tList) {
         List<SumTree<T>> sumTrees = new ArrayList<>();
         if (tList != null && tList.size() > 0) {
             for (int i = 0; i < tList.size(); i++) {
                 T t = tList.get(i);
                 if (!isTreeDotExist(tList, t.getParentId())) {
-                    //不存在以父ID为ID的点，说明是当前点是顶级节点
+                    // 不存在以父ID为ID的点，说明是当前点是顶级节点
                     SumTree<T> tSumTree = getTreeDotByT(t, tList);
                     if ("-1".equals(tSumTree.getParentId()) || "0".equals(tSumTree.getParentId())) {
                         sumTrees.add(tSumTree);
@@ -75,11 +88,8 @@ public class TreeDotUtils {
      * 根据ID判断该点是否存在
      *
      * @param tList
-     * @param id    点ID
-     * @return java.lang.Boolean
-     * @MethosName isTreeDotExist
-     * @Author xiaowd
-     * @Date 2020/4/22 9:50
+     * @param id 点ID
+     * @return java.lang.Boolean @MethosName isTreeDotExist @Author xiaowd @Date 2020/4/22 9:50
      */
     private static <T extends SumTree> Boolean isTreeDotExist(List<T> tList, String id) {
         for (T t : tList) {
@@ -95,17 +105,19 @@ public class TreeDotUtils {
      *
      * @param parentTreeDot 父点
      * @param tList
-     * @return java.util.List<cn.eshore.common.entity.Tree < T>>
-     * @MethosName getChildTreeList
-     * @Author xiaowd
-     * @Date 2020/4/22 10:02
+     * @return java.util.List<cn.eshore.common.entity.Tree < T>> @MethosName
+     *     getChildTreeList @Author xiaowd @Date 2020/4/22 10:02
      */
-    private static <T extends SumTree> List<SumTree<T>> getChildTreeDotList(SumTree<T> parentTreeDot, List<T> tList) {
+    private static <T extends SumTree> List<SumTree<T>> getChildTreeDotList(
+            SumTree<T> parentTreeDot, List<T> tList) {
         List<SumTree<T>> childTreeDotList = new ArrayList<>();
-        List<T> data = tList.stream().filter(t -> parentTreeDot.getId().equals(t.getParentId())).collect(Collectors.toList());
+        List<T> data =
+                tList.stream()
+                        .filter(t -> parentTreeDot.getId().equals(t.getParentId()))
+                        .collect(Collectors.toList());
         for (T t : data) {
             if (parentTreeDot.getId().equals(t.getParentId())) {
-                //如果父ID是传递树点的ID，那么就是传递树点的子点
+                // 如果父ID是传递树点的ID，那么就是传递树点的子点
                 SumTree<T> tSumTree = getTreeDotByT(t, tList);
                 childTreeDotList.add(tSumTree);
             }
@@ -118,10 +130,8 @@ public class TreeDotUtils {
      *
      * @param t
      * @param tList
-     * @return pri.xiaowd.layui.pojo.TreeDot<T>
-     * @MethosName getTreeDotByT
-     * @Author xiaowd
-     * @Date 2020/5/4 22:17
+     * @return pri.xiaowd.layui.pojo.TreeDot<T> @MethosName getTreeDotByT @Author xiaowd @Date
+     *     2020/5/4 22:17
      */
     private static <T extends SumTree> SumTree<T> getTreeDotByT(T t, List<T> tList) {
         SumTree<T> sumTree = t;
@@ -133,5 +143,4 @@ public class TreeDotUtils {
         sumTree.setChildren(children);
         return sumTree;
     }
-
 }

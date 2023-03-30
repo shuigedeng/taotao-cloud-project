@@ -13,12 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.workflow.biz.covert;
 
-import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
-import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
-import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
-import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import com.taotao.cloud.workflow.biz.common.model.engine.FlowHandleModel;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBeforeListVO;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowcomment.FlowCommentForm;
@@ -32,6 +29,10 @@ import com.taotao.cloud.workflow.biz.common.model.engine.flowlaunch.FlowLaunchLi
 import com.taotao.cloud.workflow.biz.common.model.engine.flowmonitor.FlowMonitorListVO;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskInfoVO;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskListModel;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowCommentEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowDelegateEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
+import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -45,34 +46,32 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-28 13:39:18
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface FlowTaskConvert {
 
-	/**
-	 * 实例
-	 */
-	FlowTaskConvert INSTANCE = Mappers.getMapper(FlowTaskConvert.class);
+    /** 实例 */
+    FlowTaskConvert INSTANCE = Mappers.getMapper(FlowTaskConvert.class);
 
-	FlowBeforeListVO convert(FlowTaskListModel flowTaskListModel);
+    FlowBeforeListVO convert(FlowTaskListModel flowTaskListModel);
 
-	List<FlowEngineListVO> convert(List<FlowEngineEntity> list);
+    List<FlowEngineListVO> convert(List<FlowEngineEntity> list);
 
-	FlowDelegateInfoVO convert(FlowDelegateEntity flowDelegateEntity);
+    FlowDelegateInfoVO convert(FlowDelegateEntity flowDelegateEntity);
 
-	FlowDelegateEntity convert(FlowDelegateCrForm flowDelegateCrForm);
+    FlowDelegateEntity convert(FlowDelegateCrForm flowDelegateCrForm);
 
-	List<FlowCommentListVO> convertComment(List<FlowCommentEntity> list);
+    List<FlowCommentListVO> convertComment(List<FlowCommentEntity> list);
 
-	FlowCommentEntity convert(FlowCommentForm flowCommentForm);
+    FlowCommentEntity convert(FlowCommentForm flowCommentForm);
 
-	FlowCommentInfoVO convert(FlowCommentEntity flowCommentForm);
+    FlowCommentInfoVO convert(FlowCommentEntity flowCommentForm);
 
-	FlowLaunchListVO convertLaunch(FlowTaskEntity flowCommentForm);
+    FlowLaunchListVO convertLaunch(FlowTaskEntity flowCommentForm);
 
-	FlowTaskInfoVO convert(FlowTaskEntity flowCommentForm);
+    FlowTaskInfoVO convert(FlowTaskEntity flowCommentForm);
 
-	FlowMonitorListVO convertMonitor(FlowTaskEntity flowCommentForm);
+    FlowMonitorListVO convertMonitor(FlowTaskEntity flowCommentForm);
 
-	FlowModel convert(FlowHandleModel flowCommentForm);
+    FlowModel convert(FlowHandleModel flowCommentForm);
 }

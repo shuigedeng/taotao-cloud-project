@@ -1,9 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.goods.biz.service.business;
 
 import com.taotao.cloud.goods.api.model.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
 import com.taotao.cloud.web.base.service.BaseSuperService;
-
 import java.util.List;
 
 /**
@@ -13,42 +28,42 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:23
  */
-public interface ICategoryParameterGroupService extends BaseSuperService<CategoryParameterGroup, Long> {
+public interface ICategoryParameterGroupService
+        extends BaseSuperService<CategoryParameterGroup, Long> {
 
-	/**
-	 * 查询分类绑定参数集合
-	 *
-	 * @param categoryId 分类Id
-	 * @return {@link List }<{@link ParameterGroupVO }>
-	 * @since 2022-04-27 16:59:23
-	 */
-	List<ParameterGroupVO> getCategoryParams(Long categoryId);
+    /**
+     * 查询分类绑定参数集合
+     *
+     * @param categoryId 分类Id
+     * @return {@link List }<{@link ParameterGroupVO }>
+     * @since 2022-04-27 16:59:23
+     */
+    List<ParameterGroupVO> getCategoryParams(Long categoryId);
 
-	/**
-	 * 查询分类绑定参数组信息
-	 *
-	 * @param categoryId 分类id
-	 * @return {@link List }<{@link CategoryParameterGroup }>
-	 * @since 2022-04-27 16:59:23
-	 */
-	List<CategoryParameterGroup> getCategoryGroup(Long categoryId);
+    /**
+     * 查询分类绑定参数组信息
+     *
+     * @param categoryId 分类id
+     * @return {@link List }<{@link CategoryParameterGroup }>
+     * @since 2022-04-27 16:59:23
+     */
+    List<CategoryParameterGroup> getCategoryGroup(Long categoryId);
 
-	/**
-	 * 更新分类参数组绑定信息
-	 *
-	 * @param categoryParameterGroup 分类参数组信息
-	 * @return {@link Boolean }
-	 * @since 2022-04-27 16:59:23
-	 */
-	Boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup);
+    /**
+     * 更新分类参数组绑定信息
+     *
+     * @param categoryParameterGroup 分类参数组信息
+     * @return {@link Boolean }
+     * @since 2022-04-27 16:59:23
+     */
+    Boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup);
 
-	/**
-	 * 通过分类ID删除关联品牌
-	 *
-	 * @param categoryId 品牌ID
-	 * @return {@link Boolean }
-	 * @since 2022-04-27 16:59:23
-	 */
-	Boolean deleteByCategoryId(Long categoryId);
-
+    /**
+     * 通过分类ID删除关联品牌
+     *
+     * @param categoryId 品牌ID
+     * @return {@link Boolean }
+     * @since 2022-04-27 16:59:23
+     */
+    Boolean deleteByCategoryId(Long categoryId);
 }

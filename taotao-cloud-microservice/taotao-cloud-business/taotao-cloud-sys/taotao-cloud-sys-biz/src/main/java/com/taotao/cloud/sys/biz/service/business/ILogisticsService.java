@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 
 /**
- * ILogisticsService 
+ * ILogisticsService
  *
  * @author shuigedeng
  * @version 2022.03
@@ -26,12 +27,12 @@ import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
  */
 public interface ILogisticsService {
 
-	/**
-	 * 根据id查询物流公司信息
-	 *
-	 * @param id id
-	 * @return 物流公司信息
-	 * @since 2020/11/20 下午1:08
-	 */
-	LogisticsConfig findLogisticsById(Long id);
+    /**
+     * 根据id查询物流公司信息
+     *
+     * @param id id
+     * @return 物流公司信息
+     * @since 2020/11/20 下午1:08
+     */
+    LogisticsConfig findLogisticsById(Long id);
 }

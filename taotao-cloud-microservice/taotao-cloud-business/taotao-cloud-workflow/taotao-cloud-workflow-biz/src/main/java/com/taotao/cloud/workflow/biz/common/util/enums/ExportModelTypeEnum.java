@@ -1,38 +1,44 @@
-package com.taotao.cloud.workflow.biz.common.util.enums;
-
-/**
- * 导入导出模板类型
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
+package com.taotao.cloud.workflow.biz.common.util.enums;
+
+/** 导入导出模板类型 */
 public enum ExportModelTypeEnum {
-	/**
-	 * 功能设计
-	 */
-	Design(1,"design"),
+    /** 功能设计 */
+    Design(1, "design"),
 
-	/**
-	 * APP
-	 */
-	App(2,"app"),
+    /** APP */
+    App(2, "app"),
 
-	/**
-	 *门户
-	 */
-	Portal(5,"portal");
-	private final int code;
-	private final String message;
+    /** 门户 */
+    Portal(5, "portal");
+    private final int code;
+    private final String message;
 
-	public int getCode() {
-		return code;
-	}
+    public int getCode() {
+        return code;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	ExportModelTypeEnum(int code, String message) {
-		this.code = code;
-		this.message = message;
-	}
+    ExportModelTypeEnum(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 }

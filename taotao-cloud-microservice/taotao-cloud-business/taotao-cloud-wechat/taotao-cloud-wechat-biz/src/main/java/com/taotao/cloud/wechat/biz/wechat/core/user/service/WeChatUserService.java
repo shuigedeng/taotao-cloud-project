@@ -1,9 +1,28 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.wechat.core.user.service;
 
 import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.core.util.LocalDateTimeUtil;
 import cn.bootx.starter.wechat.core.user.entity.WechatFans;
 import cn.hutool.core.collection.CollUtil;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -15,12 +34,9 @@ import me.chanjar.weixin.mp.bean.result.WxMpUserList;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * 微信用户相关接口 (获取不到详细信息了)
+ *
  * @author xxm
  * @date 2022/7/15
  */
@@ -32,33 +48,31 @@ public class WeChatUserService {
 
     private static final int SIZE = 100;
 
-    /**
-     * 获取关注用户列表
-     */
-    public void page(PageQuery PageQuery){
+    /** 获取关注用户列表 */
+    public void page(PageQuery PageQuery) {
         WxMpUserService userService = wxMpService.getUserService();
         WxMpUserQuery userQuery = new WxMpUserQuery();
     }
 
-
-    /**
-     * 同步粉丝
-     */
+    /** 同步粉丝 */
     @Async("asyncExecutor")
-    public void sync(){
+    public void sync() {
         // 根据公众号查询已同步用户openid 查询最新的一条
     }
 
     /**
      * 获取微信用户 (获取不到昵称和头像了, 感觉没什么用了)
+     *
      * @param nextOpenid 下一组开始的openid
      */
     @SneakyThrows
     public void fetchUser(String nextOpenid) {
         WxMpUserList wxMpUserList = wxMpService.getUserService().userList(nextOpenid);
         // openId 分组 每组 100个 openid
-        List<List<String>> openIdsList = CollUtil.split(wxMpUserList.getOpenids(), SIZE).stream()
-                .filter(CollUtil::isNotEmpty).collect(Collectors.toList());
+        List<List<String>> openIdsList =
+                CollUtil.split(wxMpUserList.getOpenids(), SIZE).stream()
+                        .filter(CollUtil::isNotEmpty)
+                        .collect(Collectors.toList());
         // 处理每个分组. 调用查询用户信息
         for (List<String> openIdList : openIdsList) {
             log.info("开始批量获取用户信息 {}", openIdList);
@@ -68,11 +82,8 @@ public class WeChatUserService {
         // 如果nextOpenId 不为空，则继续获取
     }
 
-
-    /**
-     * 构建对象
-     */
-    private WechatFans buildFans(WxMpUser wxMpUser){
+    /** 构建对象 */
+    private WechatFans buildFans(WxMpUser wxMpUser) {
         return new WechatFans()
                 .setOpenid(wxMpUser.getOpenId())
                 .setUnionId(wxMpUser.getUnionId())

@@ -1,5 +1,20 @@
-package com.taotao.cloud.goods.biz.controller.business.manager;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
@@ -41,59 +56,55 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/goods/manager/spec")
 public class SpecificationManagerController {
 
-	/**
-	 * 商品规格服务
-	 */
-	private final ISpecificationService specificationService;
+    /** 商品规格服务 */
+    private final ISpecificationService specificationService;
 
-	@Operation(summary = "获取所有可用规格", description = "获取所有可用规格")
-	@RequestLogger("获取所有可用规格")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/all")
-	public Result<List<SpecificationVO>> getAll() {
-		List<Specification> specifications = specificationService.list();
-		return Result.success(SpecificationConvert.INSTANCE.convert(specifications));
-	}
+    @Operation(summary = "获取所有可用规格", description = "获取所有可用规格")
+    @RequestLogger("获取所有可用规格")
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping("/all")
+    public Result<List<SpecificationVO>> getAll() {
+        List<Specification> specifications = specificationService.list();
+        return Result.success(SpecificationConvert.INSTANCE.convert(specifications));
+    }
 
-	@Operation(summary = "搜索规格", description = "搜索规格")
-	@RequestLogger("搜索规格")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping
-	public Result<PageResult<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
-		IPage<Specification> specificationPage = specificationService.getPage(
-			specificationPageQuery);
-		return Result.success(
-			PageResult.convertMybatisPage(specificationPage, SpecificationVO.class));
-	}
+    @Operation(summary = "搜索规格", description = "搜索规格")
+    @RequestLogger("搜索规格")
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping
+    public Result<PageResult<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
+        IPage<Specification> specificationPage =
+                specificationService.getPage(specificationPageQuery);
+        return Result.success(
+                PageResult.convertMybatisPage(specificationPage, SpecificationVO.class));
+    }
 
-	@Operation(summary = "保存规格", description = "保存规格")
-	@RequestLogger("保存规格")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping
-	public Result<Boolean> save(@Valid @RequestBody SpecificationDTO specificationDTO) {
-		Specification specification = SpecificationConvert.INSTANCE.convert(
-			specificationDTO);
-		return Result.success(specificationService.save(specification));
-	}
+    @Operation(summary = "保存规格", description = "保存规格")
+    @RequestLogger("保存规格")
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PostMapping
+    public Result<Boolean> save(@Valid @RequestBody SpecificationDTO specificationDTO) {
+        Specification specification = SpecificationConvert.INSTANCE.convert(specificationDTO);
+        return Result.success(specificationService.save(specification));
+    }
 
-	@Operation(summary = "更改规格", description = "更改规格")
-	@RequestLogger("更改规格")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping("/{id}")
-	public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO,
-		@PathVariable Long id) {
-		Specification specification = SpecificationConvert.INSTANCE.convert(
-			specificationDTO);
-		specification.setId(id);
+    @Operation(summary = "更改规格", description = "更改规格")
+    @RequestLogger("更改规格")
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PutMapping("/{id}")
+    public Result<Boolean> update(
+            @Valid @RequestBody SpecificationDTO specificationDTO, @PathVariable Long id) {
+        Specification specification = SpecificationConvert.INSTANCE.convert(specificationDTO);
+        specification.setId(id);
 
-		return Result.success(specificationService.saveOrUpdate(specification));
-	}
+        return Result.success(specificationService.saveOrUpdate(specification));
+    }
 
-	@Operation(summary = "批量删除", description = "批量删除")
-	@RequestLogger("批量删除")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@DeleteMapping("/{ids}")
-	public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
-		return Result.success(specificationService.deleteSpecification(ids));
-	}
+    @Operation(summary = "批量删除", description = "批量删除")
+    @RequestLogger("批量删除")
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @DeleteMapping("/{ids}")
+    public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
+        return Result.success(specificationService.deleteSpecification(ids));
+    }
 }

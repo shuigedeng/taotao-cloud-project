@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.alipay.service;
 
 import cn.hutool.core.util.IdUtil;
@@ -12,15 +28,15 @@ import com.taotao.cloud.payment.biz.bootx.code.paymodel.AliPayCode;
 import com.taotao.cloud.payment.biz.bootx.core.pay.local.AsyncRefundLocal;
 import com.taotao.cloud.payment.biz.bootx.core.payment.entity.Payment;
 import com.taotao.cloud.payment.biz.bootx.exception.payment.PayFailureException;
+import java.math.BigDecimal;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.Objects;
-
 /**
  * 支付宝支付取消和退款
+ *
  * @author xxm
  * @date 2021/4/20
  */
@@ -29,10 +45,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class AliPayCancelService {
 
-    /**
-     * 关闭支付
-     */
-    public void cancelRemote(Payment payment){
+    /** 关闭支付 */
+    public void cancelRemote(Payment payment) {
         // 只有部分需要调用支付宝网关进行关闭
         AlipayTradeCancelModel model = new AlipayTradeCancelModel();
         model.setOutTradeNo(String.valueOf(payment.getId()));
@@ -40,20 +54,18 @@ public class AliPayCancelService {
         try {
             AlipayTradeCancelResponse response = AliPayApi.tradeCancelToResponse(model);
             log.info(JSONUtil.toJsonStr(response));
-            if (!Objects.equals(AliPayCode.SUCCESS,response.getCode())){
-                log.error("网关返回撤销失败: {}",response.getSubMsg());
+            if (!Objects.equals(AliPayCode.SUCCESS, response.getCode())) {
+                log.error("网关返回撤销失败: {}", response.getSubMsg());
                 throw new PayFailureException(response.getSubMsg());
             }
         } catch (AlipayApiException e) {
-            log.error("关闭订单失败:",e);
+            log.error("关闭订单失败:", e);
             throw new PayFailureException("关闭订单失败");
         }
     }
 
-    /**
-     * 退款
-     */
-    public void refund(Payment payment, BigDecimal amount){
+    /** 退款 */
+    public void refund(Payment payment, BigDecimal amount) {
         AlipayTradeRefundModel refundModel = new AlipayTradeRefundModel();
         refundModel.setOutTradeNo(String.valueOf(payment.getId()));
         refundModel.setRefundAmount(amount.toPlainString());
@@ -64,19 +76,17 @@ public class AliPayCancelService {
         try {
             AlipayTradeRefundResponse response = AliPayApi.tradeRefundToResponse(refundModel);
             log.info(JSONUtil.toJsonStr(response));
-            if (!Objects.equals(AliPayCode.SUCCESS,response.getCode())){
+            if (!Objects.equals(AliPayCode.SUCCESS, response.getCode())) {
                 AsyncRefundLocal.setErrorMsg(response.getSubMsg());
                 AsyncRefundLocal.setErrorCode(response.getCode());
-                log.error("网关返回退款失败: {}",response.getSubMsg());
+                log.error("网关返回退款失败: {}", response.getSubMsg());
                 throw new PayFailureException(response.getSubMsg());
             }
         } catch (AlipayApiException e) {
-            log.error("订单退款失败:",e);
+            log.error("订单退款失败:", e);
             AsyncRefundLocal.setErrorMsg(e.getErrMsg());
             AsyncRefundLocal.setErrorCode(e.getErrCode());
             throw new PayFailureException("订单退款失败");
         }
     }
 }
-
-

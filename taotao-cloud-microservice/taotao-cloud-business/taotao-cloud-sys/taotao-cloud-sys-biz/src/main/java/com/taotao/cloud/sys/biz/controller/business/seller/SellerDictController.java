@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.seller;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -34,8 +35,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/seller/dict")
 @Tag(name = "商户管理端-字典管理API", description = "商户管理端-字典管理API")
-public class SellerDictController extends BaseBusinessController<IDictService, Dict, Long> {
-
-
-}
-
+public class SellerDictController extends BaseBusinessController<IDictService, Dict, Long> {}

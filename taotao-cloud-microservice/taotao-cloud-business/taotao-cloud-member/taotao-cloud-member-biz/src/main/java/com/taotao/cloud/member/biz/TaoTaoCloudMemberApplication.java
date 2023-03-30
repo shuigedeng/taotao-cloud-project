@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
@@ -31,10 +32,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @TaoTaoCloudApplication
 public class TaoTaoCloudMemberApplication {
 
-	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-member");
+    public static void main(String[] args) {
+        PropertyUtils.setDefaultProperty("taotao-cloud-member");
 
-		SpringApplication.run(TaoTaoCloudMemberApplication.class, args);
-	}
-
+        SpringApplication.run(TaoTaoCloudMemberApplication.class, args);
+    }
 }

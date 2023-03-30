@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.wallet.service;
 
 import cn.bootx.common.core.exception.DataNotExistException;
@@ -20,6 +36,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 钱包
+ *
  * @author xxm
  * @date 2022/3/11
  */
@@ -30,45 +47,42 @@ public class WalletQueryService {
     private final WalletManager walletManager;
     private final UserAdminService userAdminService;
 
-    /**
-     * 根据ID查询Wallet
-     */
+    /** 根据ID查询Wallet */
     public WalletDto findById(Long walletId) {
-        return walletManager.findById(walletId).map(Wallet::toDto).orElseThrow(DataNotExistException::new);
+        return walletManager
+                .findById(walletId)
+                .map(Wallet::toDto)
+                .orElseThrow(DataNotExistException::new);
     }
 
-    /**
-     * 根据用户ID查询钱包
-     */
+    /** 根据用户ID查询钱包 */
     public WalletDto findByUser() {
         Long userId = SecurityUtil.getUserId();
-        return walletManager.findByUser(userId).map(Wallet::toDto).orElseThrow(DataNotExistException::new);
+        return walletManager
+                .findByUser(userId)
+                .map(Wallet::toDto)
+                .orElseThrow(DataNotExistException::new);
     }
 
-    /**
-     * 获取钱包综合信息
-     */
-    public WalletInfoDto getWalletInfo(Long walletId){
+    /** 获取钱包综合信息 */
+    public WalletInfoDto getWalletInfo(Long walletId) {
         Wallet wallet = walletManager.findById(walletId).orElseThrow(DataNotExistException::new);
         UserInfoDto userInfoDto = userAdminService.findById(wallet.getUserId());
         WalletInfoDto walletInfoDto = new WalletInfoDto();
-        BeanUtil.copyProperties(wallet,walletInfoDto);
+        BeanUtil.copyProperties(wallet, walletInfoDto);
         walletInfoDto.setUserName(userInfoDto.getName());
         return walletInfoDto;
     }
 
-    /**
-     * 查询用户 分页
-     */
-    public PageResult<WalletDto> page(PageQuery PageQuery, WalletPayParam param){
-        return MpUtil.convert2DtoPageResult(walletManager.page(PageQuery,param));
+    /** 查询用户 分页 */
+    public PageResult<WalletDto> page(PageQuery PageQuery, WalletPayParam param) {
+        return MpUtil.convert2DtoPageResult(walletManager.page(PageQuery, param));
     }
 
-    /**
-     * 待开通钱包的用户列表
-     */
-    public PageResult<UserInfoDto> pageByNotWallet(PageQuery PageQuery, UserInfoParam userInfoParam){
-        return MpUtil.convert2DtoPageResult(walletManager.pageByNotWallet(PageQuery,userInfoParam));
+    /** 待开通钱包的用户列表 */
+    public PageResult<UserInfoDto> pageByNotWallet(
+            PageQuery PageQuery, UserInfoParam userInfoParam) {
+        return MpUtil.convert2DtoPageResult(
+                walletManager.pageByNotWallet(PageQuery, userInfoParam));
     }
-
 }

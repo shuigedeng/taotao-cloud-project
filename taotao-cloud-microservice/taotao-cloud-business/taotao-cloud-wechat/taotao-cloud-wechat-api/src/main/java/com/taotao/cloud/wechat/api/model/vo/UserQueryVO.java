@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.wechat.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -41,50 +42,47 @@ import lombok.NoArgsConstructor;
 @Schema(description = "用户查询VO")
 public class UserQueryVO implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = 5126530068827085130L;
+    @Serial private static final long serialVersionUID = 5126530068827085130L;
 
-	@Schema(description = "id")
-	private Long id;
+    @Schema(description = "id")
+    private Long id;
 
-	@Schema(description = "昵称")
-	private String nickname;
+    @Schema(description = "昵称")
+    private String nickname;
 
-	@Schema(description = "真实用户名")
-	private String username;
+    @Schema(description = "真实用户名")
+    private String username;
 
-	@Schema(description = "手机号")
-	private String phone;
+    @Schema(description = "手机号")
+    private String phone;
 
-	@Schema(description = "性别 1男 2女 0未知")
-	private Integer sex;
+    @Schema(description = "性别 1男 2女 0未知")
+    private Integer sex;
 
-	@Schema(description = "邮箱")
-	private String email;
+    @Schema(description = "邮箱")
+    private String email;
 
-	@Schema(description = "部门ID")
-	private Long deptId;
+    @Schema(description = "部门ID")
+    private Long deptId;
 
-	@Schema(description = "岗位ID")
-	private Long jobId;
+    @Schema(description = "岗位ID")
+    private Long jobId;
 
-	@Schema(description = "头像")
-	private String avatar;
+    @Schema(description = "头像")
+    private String avatar;
 
-	@Schema(description = "是否锁定 1-正常，2-锁定")
-	private Integer lockFlag;
+    @Schema(description = "是否锁定 1-正常，2-锁定")
+    private Integer lockFlag;
 
-	@Schema(description = "角色列表")
-	private Set<String> roles;
+    @Schema(description = "角色列表")
+    private Set<String> roles;
 
-	@Schema(description = "权限列表")
-	private Set<String> permissions;
+    @Schema(description = "权限列表")
+    private Set<String> permissions;
 
-	@Schema(description = "创建时间")
-	private LocalDateTime createTime;
+    @Schema(description = "创建时间")
+    private LocalDateTime createTime;
 
-	@Schema(description = "最后修改时间")
-	private LocalDateTime lastModifiedTime;
-
+    @Schema(description = "最后修改时间")
+    private LocalDateTime lastModifiedTime;
 }
-

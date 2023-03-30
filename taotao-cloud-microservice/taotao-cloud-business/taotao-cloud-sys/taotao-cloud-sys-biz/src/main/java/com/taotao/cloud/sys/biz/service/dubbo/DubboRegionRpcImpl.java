@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
@@ -25,7 +26,6 @@ import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,11 +38,11 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboRegionRpc.class, validation = "true")
-public class DubboRegionRpcImpl extends
-	BaseSuperServiceImpl<IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
-	implements IDubboRegionRpc {
+public class DubboRegionRpcImpl
+        extends BaseSuperServiceImpl<
+                IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
+        implements IDubboRegionRpc {
 
-	private final OkHttpService okHttpService;
-	private final RedisRepository redisRepository;
-
+    private final OkHttpService okHttpService;
+    private final RedisRepository redisRepository;
 }

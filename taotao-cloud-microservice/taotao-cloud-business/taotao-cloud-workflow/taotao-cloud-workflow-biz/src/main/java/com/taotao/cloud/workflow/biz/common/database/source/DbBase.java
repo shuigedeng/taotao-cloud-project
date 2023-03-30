@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.common.database.source;
 
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -25,80 +41,67 @@ import java.util.LinkedList;
 import java.util.List;
 import lombok.Data;
 
-/**
- * 数据库基础模型表
- *
- */
+/** 数据库基础模型表 */
 @Data
 public abstract class DbBase {
 
-    /**
-     * WORKFLOW数据库编码标准
-     */
+    /** WORKFLOW数据库编码标准 */
     public static final String MYSQL = "MySQL";
+
     public static final String DM = "DM8";
     public static final String KINGBASE_ES = "KingbaseES";
     public static final String ORACLE = "Oracle";
     public static final String POSTGRE_SQL = "PostgreSQL";
     public static final String SQL_SERVER = "SQLServer";
 
-    public static final DbBase[] DB_BASES = {new DbMySQL(),
-            new DbSQLServer(), new DbDM(), new DbOracle(), new DbKingbase(), new DbPostgre()};
+    public static final DbBase[] DB_BASES = {
+        new DbMySQL(),
+        new DbSQLServer(),
+        new DbDM(),
+        new DbOracle(),
+        new DbKingbase(),
+        new DbPostgre()
+    };
 
-    public static final String[] DB_ENCODES = {MYSQL, DM, KINGBASE_ES, ORACLE, POSTGRE_SQL, SQL_SERVER};
+    public static final String[] DB_ENCODES = {
+        MYSQL, DM, KINGBASE_ES, ORACLE, POSTGRE_SQL, SQL_SERVER
+    };
 
-    /**
-     * WORKFLOW数据库编码
-     */
+    /** WORKFLOW数据库编码 */
     protected String workflowDbEncode;
-    /**
-     * MybatisPlus数据库编码
-     */
+    /** MybatisPlus数据库编码 */
     protected DbType mpDbType;
-    /**
-     * url里数据库标识
-     */
+    /** url里数据库标识 */
     protected String connUrlEncode;
-    /**
-     * 数据库驱动
-     */
+    /** 数据库驱动 */
     protected String driver;
-    /**
-     * 默认端口
-     */
+    /** 默认端口 */
     protected String defaultPort;
-    /**
-     * 默认预备url
-     */
+    /** 默认预备url */
     protected String defaultPrepareUrl;
-    /**
-     * 获取SQL基础模型
-     */
+    /** 获取SQL基础模型 */
     protected SqlBase sqlBase;
 
-    /**
-     * oracle连接扩展参数
-     */
+    /** oracle连接扩展参数 */
     public String oracleParam;
 
-    /**
-     * 无参构造
-     */
+    /** 无参构造 */
     protected DbBase() {
         init();
     }
 
-    /**
-     * 初始赋值
-     */
+    /** 初始赋值 */
     protected void init() {}
 
-    /**
-     * 数据库对象初始化
-     * 指定子类被创建时，需要提供的参数
-     */
-    protected void setInstance(String workflowDbEncode, DbType mpDbType, String defaultPort, String connUrlEncode,
-                               String driver, String defaultPrepareUrl, SqlBase sqlBase) {
+    /** 数据库对象初始化 指定子类被创建时，需要提供的参数 */
+    protected void setInstance(
+            String workflowDbEncode,
+            DbType mpDbType,
+            String defaultPort,
+            String connUrlEncode,
+            String driver,
+            String defaultPrepareUrl,
+            SqlBase sqlBase) {
         // 绑定：WORKFLOW数据库编码
         this.workflowDbEncode = workflowDbEncode;
         // 绑定：MybatisPlus数据库编码
@@ -114,22 +117,24 @@ public abstract class DbBase {
     }
 
     /**
-     * 获取数据类型
-     * 使用反射方法，抽取所有子类里面的复用方法。
+     * 获取数据类型 使用反射方法，抽取所有子类里面的复用方法。
      *
      * @param dte 数据类型枚举
      * @return 数据类型code
      */
     public DataTypeModel getDataTypeModel(DataTypeEnum dte) throws DataException {
-        try{
+        try {
             // DM8 后期要统一改成 DM
-            String workflowDbEncode = this.getWorkflowDbEncode().equals(DM) ? "DM" : this.getWorkflowDbEncode();
-            Class<DataTypeEnum> clz = (Class<DataTypeEnum>) Class.forName("workflow.database.enums.datatype.viewshow.DataTypeEnum");
+            String workflowDbEncode =
+                    this.getWorkflowDbEncode().equals(DM) ? "DM" : this.getWorkflowDbEncode();
+            Class<DataTypeEnum> clz =
+                    (Class<DataTypeEnum>)
+                            Class.forName("workflow.database.enums.datatype.viewshow.DataTypeEnum");
             // 方法命名规则：getDt + workflowDbEncode
             Method method = clz.getMethod("getDt" + workflowDbEncode);
-            DtInterface dt = (DtInterface) method.invoke(dte,  null);
+            DtInterface dt = (DtInterface) method.invoke(dte, null);
             return dt.getDataTypeModel();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new DataException(e.getMessage());
         }
     }
@@ -142,9 +147,12 @@ public abstract class DbBase {
      */
     public DataTypeModel getDataTypeModel(String dbFieldType) throws Exception {
         // DM8 后期要统一改成 DM
-        String workflowDbEncode = this.getWorkflowDbEncode().equals(DM) ? "DM" : this.getWorkflowDbEncode();
+        String workflowDbEncode =
+                this.getWorkflowDbEncode().equals(DM) ? "DM" : this.getWorkflowDbEncode();
         // 数据类型枚举类命名规则：Dt + workflowDbEncode
-        Class<DtInterface> clz = (Class<DtInterface>) Class.forName("workflow.database.enums.datatype.Dt" + workflowDbEncode);
+        Class<DtInterface> clz =
+                (Class<DtInterface>)
+                        Class.forName("workflow.database.enums.datatype.Dt" + workflowDbEncode);
         Method method = clz.getMethod("values");
         DtInterface[] dataTypes = (DtInterface[]) method.invoke(null, null);
         for (DtInterface dataType : dataTypes) {
@@ -155,24 +163,26 @@ public abstract class DbBase {
         return null;
     }
 
-
-
     public static List<String> dynamicAllTableName = Collections.emptyList();
 
     /**
      * 获取最终动态表名， 处理是否动态表名
+     *
      * @return
      */
-    public TableNameHandler getDynamicTableNameHandler(){
+    public TableNameHandler getDynamicTableNameHandler() {
         return (sql, tableName) -> {
-            //是否租户系统指定数据源
-            boolean isAssignDataSource = StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceName()) && "true".equals(DataSourceContextHolder.getDatasourceName());
-            if(isAssignDataSource){
+            // 是否租户系统指定数据源
+            boolean isAssignDataSource =
+                    StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceName())
+                            && "true".equals(DataSourceContextHolder.getDatasourceName());
+            if (isAssignDataSource) {
                 return tableName;
-            } else{
-                //是否指定数据源, 且在初始库中包含的表
-                boolean hasDataSource = StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceName())
-                        && dynamicAllTableName.contains(tableName.toLowerCase());
+            } else {
+                // 是否指定数据源, 且在初始库中包含的表
+                boolean hasDataSource =
+                        StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceName())
+                                && dynamicAllTableName.contains(tableName.toLowerCase());
                 return hasDataSource ? getDynamicTableName(tableName) : tableName;
             }
         };
@@ -180,10 +190,11 @@ public abstract class DbBase {
 
     /**
      * 获取动态组合表名
+     *
      * @param tableName
      * @return
      */
-    protected String getDynamicTableName(String tableName){
+    protected String getDynamicTableName(String tableName) {
         return DataSourceContextHolder.getDatasourceName() + "." + tableName;
     }
 
@@ -199,33 +210,30 @@ public abstract class DbBase {
     }
 
     /**
-     * 获取数据库连接Url   关键参数：
-     * 1、地址
-     * 2、端口
-     * 3、数据库名
-     * 4、模式 （参数：?currentSchema = schema）
-     * 5、jdbc-url自定义参数
+     * 获取数据库连接Url 关键参数： 1、地址 2、端口 3、数据库名 4、模式 （参数：?currentSchema = schema） 5、jdbc-url自定义参数
      *
-     * 此方法对DbTypeUtil与内部开放，对外关闭。外部调用url，用DbTypeUtil.getUrl()方法
+     * <p>此方法对DbTypeUtil与内部开放，对外关闭。外部调用url，用DbTypeUtil.getUrl()方法
+     *
      * @return String 连接
      */
-    protected String getConnUrl(String prepareUrl, String host, Integer port, String dbName, String schema){
+    protected String getConnUrl(
+            String prepareUrl, String host, Integer port, String dbName, String schema) {
         // 配置文件是否存在自定义数据连接url
         if (StringUtil.isEmpty(prepareUrl)) {
             prepareUrl = this.defaultPrepareUrl;
         }
-        if(StringUtil.isNotEmpty(dbName)){
+        if (StringUtil.isNotEmpty(dbName)) {
             prepareUrl = prepareUrl.replace(DbConst.DB_NAME, dbName);
         }
         // 模式替换
-        if(StringUtil.isNotEmpty(schema)){
+        if (StringUtil.isNotEmpty(schema)) {
             prepareUrl = prepareUrl.replace(DbConst.DB_SCHEMA, schema);
         }
-        if(StringUtil.isNotEmpty(host)){
-            prepareUrl =  prepareUrl.replace(DbConst.HOST, host);
+        if (StringUtil.isNotEmpty(host)) {
+            prepareUrl = prepareUrl.replace(DbConst.HOST, host);
         }
-        if(port != null){
-            prepareUrl =  prepareUrl.replace(DbConst.PORT, port.toString());
+        if (port != null) {
+            prepareUrl = prepareUrl.replace(DbConst.PORT, port.toString());
         }
         return prepareUrl;
     }
@@ -237,22 +245,23 @@ public abstract class DbBase {
      * @param table 表
      * @return 转换后SQL语句
      */
-    public LinkedList<Object> getStructParams(String structParams, String table, DataSourceMod dbSourceOrDbLink) {
+    public LinkedList<Object> getStructParams(
+            String structParams, String table, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dto = dbSourceOrDbLink.convertDTO();
         LinkedList<Object> data = new LinkedList<>();
-        for(String paramStr : structParams.split(":")){
-            if(paramStr.equals(ParamEnum.TABLE.getTarget())){
+        for (String paramStr : structParams.split(":")) {
+            if (paramStr.equals(ParamEnum.TABLE.getTarget())) {
                 data.add(table);
-            }else if(paramStr.equals(ParamEnum.DB_NAME.getTarget())){
+            } else if (paramStr.equals(ParamEnum.DB_NAME.getTarget())) {
                 // 自动库名
                 String dbName = dto.getDbName();
-                if(dbName == null){
+                if (dbName == null) {
                     dbName = dto.getUserName();
                 }
                 data.add(dbName);
-            }else if(paramStr.equals(ParamEnum.DB_SCHEMA.getTarget())){
+            } else if (paramStr.equals(ParamEnum.DB_SCHEMA.getTarget())) {
                 data.add(dto.getDbSchema());
-            }else if(paramStr.equals(ParamEnum.TABLE_SPACE.getTarget())) {
+            } else if (paramStr.equals(ParamEnum.TABLE_SPACE.getTarget())) {
                 data.add(dto.getDbTableSpace());
             }
         }
@@ -264,11 +273,15 @@ public abstract class DbBase {
      * 保持全局只有一处显性getUrl,getConn的方法（即在ConnUtil里）======================================
      */
 
-    public static class BaseCommon{
-        public static String getDbBaseConnUrl(DbBase dbBase, String prepareUrl, String host, Integer port, String dbName, String schema){
+    public static class BaseCommon {
+        public static String getDbBaseConnUrl(
+                DbBase dbBase,
+                String prepareUrl,
+                String host,
+                Integer port,
+                String dbName,
+                String schema) {
             return dbBase.getConnUrl(prepareUrl, host, port, dbName, schema);
         }
     }
-
-
 }

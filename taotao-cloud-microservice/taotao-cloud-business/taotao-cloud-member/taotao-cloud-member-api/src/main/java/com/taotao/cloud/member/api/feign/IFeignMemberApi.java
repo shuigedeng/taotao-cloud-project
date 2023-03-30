@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.member.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
@@ -19,61 +35,65 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.04
  * @since 2022-04-25 16:37:54
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = FeignMemberApiFallback.class)
+@FeignClient(
+        value = ServiceName.TAOTAO_CLOUD_MEMBER,
+        fallbackFactory = FeignMemberApiFallback.class)
 public interface IFeignMemberApi {
 
-	/**
-	 * 通过用户名查询用户包括角色权限等
-	 *
-	 * @param nicknameOrUserNameOrPhoneOrEmail 用户名
-	 * @return 用户信息
-	 * @since 2020/4/29 17:48
-	 */
-	@GetMapping(value = "/member/feign/info/security")
-	SecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
+    /**
+     * 通过用户名查询用户包括角色权限等
+     *
+     * @param nicknameOrUserNameOrPhoneOrEmail 用户名
+     * @return 用户信息
+     * @since 2020/4/29 17:48
+     */
+    @GetMapping(value = "/member/feign/info/security")
+    SecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
 
-	/**
-	 * 根据id查询会员信息
-	 *
-	 * @param id id
-	 * @return 会员信息
-	 * @since 2020/11/20 下午4:10
-	 */
-	@GetMapping("/member/feign/info/id/{id:[0-9]*}")
-	MemberVO findMemberById(@PathVariable(value = "id") Long id);
+    /**
+     * 根据id查询会员信息
+     *
+     * @param id id
+     * @return 会员信息
+     * @since 2020/11/20 下午4:10
+     */
+    @GetMapping("/member/feign/info/id/{id:[0-9]*}")
+    MemberVO findMemberById(@PathVariable(value = "id") Long id);
 
-	/**
-	 * 更新成员点
-	 *
-	 * @param payPoint 支付点
-	 * @param name     名字
-	 * @param memberId 成员身份
-	 * @param s        年代
-	 * @return {@link Result }<{@link Boolean }>
-	 * @since 2022-04-25 16:41:42
-	 */
-	@GetMapping(value = "/member/feign/updateMemberPoint")
-	Boolean updateMemberPoint(@RequestParam Long payPoint, @RequestParam String name,
-		@RequestParam Long memberId, @RequestParam String s);
+    /**
+     * 更新成员点
+     *
+     * @param payPoint 支付点
+     * @param name 名字
+     * @param memberId 成员身份
+     * @param s 年代
+     * @return {@link Result }<{@link Boolean }>
+     * @since 2022-04-25 16:41:42
+     */
+    @GetMapping(value = "/member/feign/updateMemberPoint")
+    Boolean updateMemberPoint(
+            @RequestParam Long payPoint,
+            @RequestParam String name,
+            @RequestParam Long memberId,
+            @RequestParam String s);
 
-	@GetMapping(value = "/member/feign/username")
-	MemberVO findByUsername(@RequestParam String username);
+    @GetMapping(value = "/member/feign/username")
+    MemberVO findByUsername(@RequestParam String username);
 
-	@GetMapping(value = "/member/feign/memberId")
-	MemberVO getById(@RequestParam Long memberId);
+    @GetMapping(value = "/member/feign/memberId")
+    MemberVO getById(@RequestParam Long memberId);
 
-	/**
-	 * new LambdaUpdateWrapper<Member>() .eq(Member::getId, member.getId())
-	 * .set(Member::getHaveStore, true) .set(Member::getStoreId, store.getId())
-	 */
-	@GetMapping(value = "/member/feign/memberId/storeId")
-	Boolean update(@RequestParam Long memberId, @RequestParam Long storeId);
+    /**
+     * new LambdaUpdateWrapper<Member>() .eq(Member::getId, member.getId())
+     * .set(Member::getHaveStore, true) .set(Member::getStoreId, store.getId())
+     */
+    @GetMapping(value = "/member/feign/memberId/storeId")
+    Boolean update(@RequestParam Long memberId, @RequestParam Long storeId);
 
-	@GetMapping(value = "/member/feign/updateById")
-	Boolean updateById(@RequestParam MemberVO member);
+    @GetMapping(value = "/member/feign/updateById")
+    Boolean updateById(@RequestParam MemberVO member);
 
-	@GetMapping(value = "/member/feign/listFieldsByMemberIds")
-	List<Map<String, Object>> listFieldsByMemberIds(@RequestParam String s,
-		@RequestParam List<String> ids);
+    @GetMapping(value = "/member/feign/listFieldsByMemberIds")
+    List<Map<String, Object>> listFieldsByMemberIds(
+            @RequestParam String s, @RequestParam List<String> ids);
 }
-

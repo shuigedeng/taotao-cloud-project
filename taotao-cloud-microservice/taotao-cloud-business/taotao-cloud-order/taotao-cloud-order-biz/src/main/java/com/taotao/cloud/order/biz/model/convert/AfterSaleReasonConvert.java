@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.model.convert;
 
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleReasonDTO;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleReasonVO;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * IAfterSaleMapStruct
@@ -32,16 +32,15 @@ import java.util.List;
  * @since 2022-04-07 20:55:46
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AfterSaleReasonConvert {
 
-	AfterSaleReasonConvert INSTANCE = Mappers.getMapper(AfterSaleReasonConvert.class);
+    AfterSaleReasonConvert INSTANCE = Mappers.getMapper(AfterSaleReasonConvert.class);
 
-	List<AfterSaleReasonVO> convert(List<AfterSaleReason> afterSaleReasonList);
+    List<AfterSaleReasonVO> convert(List<AfterSaleReason> afterSaleReasonList);
 
-	AfterSaleReasonVO convert(AfterSaleReason afterSaleReason);
+    AfterSaleReasonVO convert(AfterSaleReason afterSaleReason);
 
-	AfterSaleReason convert(AfterSaleReasonDTO afterSaleReasonDTO);
-
+    AfterSaleReason convert(AfterSaleReasonDTO afterSaleReasonDTO);
 }

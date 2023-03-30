@@ -1,4 +1,18 @@
-
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.stock.api.common.util;
 
@@ -10,32 +24,32 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-/**
- * 日期处理
- */
+/** 日期处理 */
 public class DateUtils {
-	/** 时间格式(yyyy-MM-dd) */
-	public final static String DATE_PATTERN = "yyyy-MM-dd";
-	/** 时间格式(yyyy-MM-dd HH:mm:ss) */
-	public final static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    /** 时间格式(yyyy-MM-dd) */
+    public static final String DATE_PATTERN = "yyyy-MM-dd";
+    /** 时间格式(yyyy-MM-dd HH:mm:ss) */
+    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * 日期格式化 日期格式为：yyyy-MM-dd
-     * @param date  日期
-     * @return  返回yyyy-MM-dd格式日期
+     *
+     * @param date 日期
+     * @return 返回yyyy-MM-dd格式日期
      */
-	public static String format(Date date) {
+    public static String format(Date date) {
         return format(date, DATE_PATTERN);
     }
 
     /**
      * 日期格式化 日期格式为：yyyy-MM-dd
-     * @param date  日期
-     * @param pattern  格式，如：DateUtils.DATE_TIME_PATTERN
-     * @return  返回yyyy-MM-dd格式日期
+     *
+     * @param date 日期
+     * @param pattern 格式，如：DateUtils.DATE_TIME_PATTERN
+     * @return 返回yyyy-MM-dd格式日期
      */
     public static String format(Date date, String pattern) {
-        if(date != null){
+        if (date != null) {
             SimpleDateFormat df = new SimpleDateFormat(pattern);
             return df.format(date);
         }
@@ -44,11 +58,12 @@ public class DateUtils {
 
     /**
      * 字符串转换成日期
+     *
      * @param strDate 日期字符串
      * @param pattern 日期的格式，如：DateUtils.DATE_TIME_PATTERN
      */
     public static Date stringToDate(String strDate, String pattern) {
-        if (StringUtils.isBlank(strDate)){
+        if (StringUtils.isBlank(strDate)) {
             return null;
         }
 
@@ -58,8 +73,9 @@ public class DateUtils {
 
     /**
      * 根据周数，获取开始日期、结束日期
-     * @param week  周期  0本周，-1上周，-2上上周，1下周，2下下周
-     * @return  返回date[0]开始日期、date[1]结束日期
+     *
+     * @param week 周期 0本周，-1上周，-2上上周，1下周，2下下周
+     * @return 返回date[0]开始日期、date[1]结束日期
      */
     public static Date[] getWeekStartAndEnd(int week) {
         DateTime dateTime = new DateTime();
@@ -68,7 +84,7 @@ public class DateUtils {
         date = date.dayOfWeek().withMinimumValue();
         Date beginDate = date.toDate();
         Date endDate = date.plusDays(6).toDate();
-        return new Date[]{beginDate, endDate};
+        return new Date[] {beginDate, endDate};
     }
 
     /**

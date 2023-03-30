@@ -1,14 +1,29 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.biz.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * 用户-Repository实现类
@@ -17,17 +32,14 @@ import java.util.Map;
  * @date 2021-02-02
  */
 @Repository
-public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO> implements UserRepository, IService<SysUserDO> {
+public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
+        implements UserRepository, IService<SysUserDO> {
 
-    @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
+    @Autowired private SysUserRoleMapper sysUserRoleMapper;
 
-    @Autowired
-    private SysRoleMapper sysRoleMapper;
+    @Autowired private SysRoleMapper sysRoleMapper;
 
-    @Autowired
-    private SysAccountMapper sysAccountMapper;
-
+    @Autowired private SysAccountMapper sysAccountMapper;
 
     @Override
     public User find(UserId userId) {
@@ -37,7 +49,11 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
         if (sysUserDO == null) {
             return null;
         }
-        User user = UserConverter.toUser(sysUserDO, getUserAccount(sysUserDO.getAccountId()), getUserRoleIds(sysUserDO.getId()));
+        User user =
+                UserConverter.toUser(
+                        sysUserDO,
+                        getUserAccount(sysUserDO.getAccountId()),
+                        getUserRoleIds(sysUserDO.getId()));
         return user;
     }
 
@@ -51,7 +67,11 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
         }
         List<User> users = new ArrayList<>();
         for (SysUserDO sysUserDO : sysUserDOList) {
-            User user = UserConverter.toUser(sysUserDO, getUserAccount(sysUserDO.getAccountId()), getUserRoleIds(sysUserDO.getId()));
+            User user =
+                    UserConverter.toUser(
+                            sysUserDO,
+                            getUserAccount(sysUserDO.getAccountId()),
+                            getUserRoleIds(sysUserDO.getId()));
             users.add(user);
         }
         return users;
@@ -73,13 +93,13 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
             SysUserDO sysUserDO = UserConverter.fromUser(user, accountId);
             this.saveOrUpdate(sysUserDO);
             String userId = sysUserDO.getId();
-            //先删除用户与角色关系
+            // 先删除用户与角色关系
             List<String> userIds = new ArrayList<>();
             userIds.add(userId);
             sysUserRoleMapper.deleteByUserIds(userIds);
             List<RoleId> roleIds = user.getRoleIds();
             if (roleIds != null && !roleIds.isEmpty()) {
-                //保存角色与菜单关系
+                // 保存角色与菜单关系
                 for (RoleId roleId : roleIds) {
                     SysUserRoleDO sysUserRoleDO = new SysUserRoleDO();
                     sysUserRoleDO.setUserId(userId);
@@ -96,9 +116,10 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
     @Override
     public void remove(List<UserId> userIds) {
         List<String> ids = new ArrayList<>();
-        userIds.forEach(userId -> {
-            ids.add(userId.getId());
-        });
+        userIds.forEach(
+                userId -> {
+                    ids.add(userId.getId());
+                });
         this.removeByIds(ids);
         sysUserRoleMapper.deleteByUserIds(ids);
     }
@@ -134,5 +155,4 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
         }
         return roleIdList;
     }
-
 }

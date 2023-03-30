@@ -1,15 +1,27 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.promotion.api.model.dto;
-
-
-import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-/**
- * 砍价活动商品DTO
- */
+/** 砍价活动商品DTO */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
@@ -17,12 +29,10 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class KanjiaActivityGoodsDTO extends KanjiaActivityGoodsBaseDTO implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = 1969340823809319805L;
+    @Serial private static final long serialVersionUID = 1969340823809319805L;
 
-	//@Schema(description =  "商品规格详细信息")
-	//private GoodsSku goodsSku;
+    // @Schema(description =  "商品规格详细信息")
+    // private GoodsSku goodsSku;
 
-	private Long id;
-
+    private Long id;
 }

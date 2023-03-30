@@ -1,22 +1,24 @@
-/**
- * <p>IJPay 让支付触手可及，封装了微信支付、支付宝支付、银联支付常用的支付方式以及各种常用的接口。</p>
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * <p>不依赖任何第三方 mvc 框架，仅仅作为工具使用简单快速完成支付模块的开发，可轻松嵌入到任何系统里。 </p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * <p>IJPay 交流群: 723992875</p>
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * <p>Node.js 版: https://gitee.com/javen205/TNWX</p>
- *
- * <p>Model 公用方法</p>
- *
- * @author Javen
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.kit.core.model;
 
 import cn.hutool.core.util.StrUtil;
-import com.ijpay.core.kit.WxPayKit;
 import com.ijpay.core.enums.SignType;
-
+import com.ijpay.core.kit.WxPayKit;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -45,23 +47,24 @@ public class BaseModel {
      * 构建签名 Map
      *
      * @param partnerKey API KEY
-     * @param signType   {@link SignType} 签名类型
+     * @param signType {@link SignType} 签名类型
      * @return 构建签名后的 Map
      */
     public Map<String, String> createSign(String partnerKey, SignType signType) {
-        return createSign(partnerKey,signType,true);
+        return createSign(partnerKey, signType, true);
     }
 
     /**
      * 构建签名 Map
      *
-     * @param partnerKey   API KEY
-     * @param signType     {@link SignType} 签名类型
+     * @param partnerKey API KEY
+     * @param signType {@link SignType} 签名类型
      * @param haveSignType 签名是否包含 sign_type 字段
      * @return 构建签名后的 Map
      */
-    public Map<String, String> createSign(String partnerKey, SignType signType, boolean haveSignType) {
-        return WxPayKit.buildSign(toMap(), partnerKey, signType,haveSignType);
+    public Map<String, String> createSign(
+            String partnerKey, SignType signType, boolean haveSignType) {
+        return WxPayKit.buildSign(toMap(), partnerKey, signType, haveSignType);
     }
 
     /**
@@ -83,21 +86,22 @@ public class BaseModel {
      * 根据属性名获取属性值
      *
      * @param fieldName 属性名称
-     * @param obj       对象
+     * @param obj 对象
      * @return 返回对应属性的值
      */
     public Object getFieldValueByName(String fieldName, Object obj) {
         try {
             String firstLetter = fieldName.substring(0, 1).toUpperCase();
-            String getter = new StringBuffer().append("get")
-                    .append(firstLetter)
-                    .append(fieldName.substring(1))
-                    .toString();
+            String getter =
+                    new StringBuffer()
+                            .append("get")
+                            .append(firstLetter)
+                            .append(fieldName.substring(1))
+                            .toString();
             Method method = obj.getClass().getMethod(getter);
             return method.invoke(obj);
         } catch (Exception e) {
             return null;
         }
     }
-
 }

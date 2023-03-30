@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.api.constant;
 
-import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 
 /**
- * 拼音异常 
+ * 拼音异常
  *
  * @author shuigedeng
  * @version 2022.03
@@ -28,32 +28,31 @@ import com.taotao.cloud.common.exception.BaseException;
  */
 public class PinyinException extends BaseException {
 
+    public PinyinException(String message) {
+        super(message);
+    }
 
-	public PinyinException(String message) {
-		super(message);
-	}
+    public PinyinException(Integer code, String message) {
+        super(code, message);
+    }
 
-	public PinyinException(Integer code, String message) {
-		super(code, message);
-	}
+    public PinyinException(Throwable e) {
+        super(e);
+    }
 
-	public PinyinException(Throwable e) {
-		super(e);
-	}
+    public PinyinException(String message, Throwable e) {
+        super(message, e);
+    }
 
-	public PinyinException(String message, Throwable e) {
-		super(message, e);
-	}
+    public PinyinException(Integer code, String message, Throwable e) {
+        super(code, message, e);
+    }
 
-	public PinyinException(Integer code, String message, Throwable e) {
-		super(code, message, e);
-	}
+    public PinyinException(ResultEnum result) {
+        super(result);
+    }
 
-	public PinyinException(ResultEnum result) {
-		super(result);
-	}
-
-	public PinyinException(ResultEnum result, Throwable e) {
-		super(result, e);
-	}
+    public PinyinException(ResultEnum result, Throwable e) {
+        super(result, e);
+    }
 }

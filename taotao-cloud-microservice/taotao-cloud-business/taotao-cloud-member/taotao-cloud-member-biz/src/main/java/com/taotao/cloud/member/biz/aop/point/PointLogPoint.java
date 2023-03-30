@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.member.biz.aop.point;
 
+package com.taotao.cloud.member.biz.aop.point;
 
 import java.lang.annotation.*;
 
@@ -28,6 +28,4 @@ import java.lang.annotation.*;
 @Target({ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface PointLogPoint {
-
-}
+public @interface PointLogPoint {}

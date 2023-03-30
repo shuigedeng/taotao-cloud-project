@@ -1,4 +1,20 @@
-package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.biz.util;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.message.biz.util; // package com.taotao.cloud.message.biz.util;
 //
 // import cn.hutool.http.HttpUtil;
 // import cn.hutool.json.JSONObject;
@@ -76,7 +92,8 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //         }
 //
 //         Connect connect = connectService.queryConnect(
-//                 ConnectQueryDTO.builder().userId(order.getMemberId()).unionType(ConnectEnum.WECHAT.name()).build()
+//
+// ConnectQueryDTO.builder().userId(order.getMemberId()).unionType(ConnectEnum.WECHAT.name()).build()
 //         );
 //         if (connect == null) {
 //             return;
@@ -87,7 +104,8 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //         String token = wechatAccessTokenUtil.cgiAccessToken(ClientTypeEnum.H5);
 //
 //         //发送url
-//         String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + token;
+//         String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" +
+// token;
 //
 //         Map<String, String> map = new HashMap<>(4);
 //         //用户id
@@ -125,16 +143,19 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //             throw new BusinessException("订单" + sn + "不存在，发送订阅消息错误");
 //         }
 //         //获取微信消息
-//         LambdaQueryWrapper<WechatMPMessage> wechatMPMessageQueryWrapper = new LambdaQueryWrapper();
+//         LambdaQueryWrapper<WechatMPMessage> wechatMPMessageQueryWrapper = new
+// LambdaQueryWrapper();
 //         wechatMPMessageQueryWrapper.eq(WechatMPMessage::getOrderStatus, order.getOrderStatus());
-//         WechatMPMessage wechatMPMessage = wechatMPMessageService.getOne(wechatMPMessageQueryWrapper);
+//         WechatMPMessage wechatMPMessage =
+// wechatMPMessageService.getOne(wechatMPMessageQueryWrapper);
 //         if (wechatMPMessage == null) {
 //             log.info("未配置微信消息订阅");
 //             return;
 //         }
 //
 //         Connect connect = connectService.queryConnect(
-//                 ConnectQueryDTO.builder().userId(order.getMemberId()).unionType(ConnectEnum.WECHAT_MP_OPEN_ID.name()).build()
+//
+// ConnectQueryDTO.builder().userId(order.getMemberId()).unionType(ConnectEnum.WECHAT_MP_OPEN_ID.name()).build()
 //         );
 //         if (connect == null) {
 //             return;
@@ -145,7 +166,8 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //         String token = wechatAccessTokenUtil.cgiAccessToken(ClientTypeEnum.WECHAT_MP);
 //
 //         //发送url
-//         String url = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=" + token;
+//         String url = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=" +
+// token;
 //
 //         Map<String, Object> map = new HashMap<>(4);
 //         //用户id
@@ -190,7 +212,8 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //         LinkedList params = new LinkedList();
 //
 //         for (String param : paramArray) {
-//             WechatMessageItemEnums wechatMessageItemEnums = WechatMessageItemEnums.valueOf(param);
+//             WechatMessageItemEnums wechatMessageItemEnums =
+// WechatMessageItemEnums.valueOf(param);
 //             //初始化参数内容
 //             String val = getParams(wechatMessageItemEnums, order);
 //             params.add(val);
@@ -206,13 +229,15 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //      * @param wechatMPMessage
 //      * @return
 //      */
-//     private Map<String, Map<String, String>> createData(Order order, WechatMPMessage wechatMPMessage) {
+//     private Map<String, Map<String, String>> createData(Order order, WechatMPMessage
+// wechatMPMessage) {
 //         WechatMessageData wechatMessageData = new WechatMessageData();
 //         List<String> paramArray = JSONUtil.toList(wechatMPMessage.getKeywords(), String.class);
 //         List<String> texts = JSONUtil.toList(wechatMPMessage.getKeywordsText(), String.class);
 //         Map<String, String> params = new LinkedHashMap<>();
 //         for (int i = 0; i < paramArray.size(); i++) {
-//             WechatMessageItemEnums wechatMessageItemEnums = WechatMessageItemEnums.valueOf(paramArray.get(i));
+//             WechatMessageItemEnums wechatMessageItemEnums =
+// WechatMessageItemEnums.valueOf(paramArray.get(i));
 //             //初始化参数内容
 //             String val = getParams(wechatMessageItemEnums, order);
 //             val = StringUtils.subStringLength(val, 20);
@@ -241,7 +266,8 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //                 List<OrderItem> orderItems = orderItemService.getByOrderSn(order.getSn());
 //                 StringBuffer stringBuffer = new StringBuffer();
 //                 orderItems.forEach(orderItem -> {
-//                     stringBuffer.append(orderItem.getGoodsName() + "*" + orderItem.getNum() + "  ");
+//                     stringBuffer.append(orderItem.getGoodsName() + "*" + orderItem.getNum() + "
+// ");
 //                 });
 //                 return stringBuffer.toString();
 //             case MEMBER_NAME:
@@ -267,7 +293,8 @@ package com.taotao.cloud.message.biz.util;// package com.taotao.cloud.message.bi
 //             if (("ok").equals(jsonObject.getStr("errmsg"))) {
 //                 return;
 //             }
-//             log.error("微信接口异常，错误码" + jsonObject.get("errcode") + "，" + jsonObject.getStr("errmsg"));
+//             log.error("微信接口异常，错误码" + jsonObject.get("errcode") + "，" +
+// jsonObject.getStr("errmsg"));
 //             throw new BusinessException(ResultEnum.WECHAT_ERROR);
 //         }
 //     }
