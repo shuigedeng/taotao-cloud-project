@@ -1,26 +1,17 @@
 /*
- * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Dante Engine Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
- *
- * 1.请不要删除和修改根目录下的LICENSE文件。
- * 2.请不要删除和修改 Dante Engine 源码头部的版权声明。
- * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
- * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.auth.biz.demo.compliance.entity;
@@ -39,219 +30,223 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: 用户操作审计 </p>
+ * Description: 用户操作审计
  *
  * @author : gengwei.zheng
  * @date : 2022/7/7 18:55
  */
 @Entity
-@Table(name = "oauth2_compliance", indexes = {
-	@Index(name = "oauth2_compliance_id_idx", columnList = "compliance_id")})
+@Table(
+        name = "oauth2_compliance",
+        indexes = {@Index(name = "oauth2_compliance_id_idx", columnList = "compliance_id")})
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = OAuth2Constants.REGION_OAUTH2_COMPLIANCE)
+@org.hibernate.annotations.Cache(
+        usage = CacheConcurrencyStrategy.READ_WRITE,
+        region = OAuth2Constants.REGION_OAUTH2_COMPLIANCE)
 public class OAuth2Compliance extends BaseEntity {
 
-	@Id
-	@UuidGenerator
-	@Column(name = "compliance_id", length = 64)
-	private String complianceId;
+    @Id
+    @UuidGenerator
+    @Column(name = "compliance_id", length = 64)
+    private String complianceId;
 
-	@Column(name = "principal_name", length = 128)
-	private String principalName;
+    @Column(name = "principal_name", length = 128)
+    private String principalName;
 
-	@Column(name = "client_id", length = 100)
-	private String clientId;
+    @Column(name = "client_id", length = 100)
+    private String clientId;
 
-	@Column(name = "ip_address", length = 20)
-	private String ip;
+    @Column(name = "ip_address", length = 20)
+    private String ip;
 
-	@Column(name = "is_mobile")
-	private Boolean mobile = false;
+    @Column(name = "is_mobile")
+    private Boolean mobile = false;
 
-	@Column(name = "os_name", length = 200)
-	private String osName;
+    @Column(name = "os_name", length = 200)
+    private String osName;
 
-	@Column(name = "browser_name", length = 50)
-	private String browserName;
-	@Column(name = "is_mobile_browser")
-	private Boolean mobileBrowser = false;
+    @Column(name = "browser_name", length = 50)
+    private String browserName;
 
-	@Column(name = "engine_name", length = 50)
-	private String engineName;
+    @Column(name = "is_mobile_browser")
+    private Boolean mobileBrowser = false;
 
-	@Column(name = "is_mobile_platform")
-	private Boolean mobilePlatform = false;
+    @Column(name = "engine_name", length = 50)
+    private String engineName;
 
-	@Column(name = "is_iphone_or_ipod")
-	private Boolean iphoneOrIpod = false;
+    @Column(name = "is_mobile_platform")
+    private Boolean mobilePlatform = false;
 
-	@Column(name = "is_ipad")
-	private Boolean ipad = false;
+    @Column(name = "is_iphone_or_ipod")
+    private Boolean iphoneOrIpod = false;
 
-	@Column(name = "is_ios")
-	private Boolean ios = false;
+    @Column(name = "is_ipad")
+    private Boolean ipad = false;
 
-	@Column(name = "is_android")
-	private Boolean android = false;
+    @Column(name = "is_ios")
+    private Boolean ios = false;
 
-	@Column(name = "operation")
-	private String operation;
+    @Column(name = "is_android")
+    private Boolean android = false;
 
-	public String getComplianceId() {
-		return complianceId;
-	}
+    @Column(name = "operation")
+    private String operation;
 
-	public void setComplianceId(String complianceId) {
-		this.complianceId = complianceId;
-	}
+    public String getComplianceId() {
+        return complianceId;
+    }
 
-	public String getPrincipalName() {
-		return principalName;
-	}
+    public void setComplianceId(String complianceId) {
+        this.complianceId = complianceId;
+    }
 
-	public void setPrincipalName(String principalName) {
-		this.principalName = principalName;
-	}
+    public String getPrincipalName() {
+        return principalName;
+    }
 
-	public String getClientId() {
-		return clientId;
-	}
+    public void setPrincipalName(String principalName) {
+        this.principalName = principalName;
+    }
 
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	public String getIp() {
-		return ip;
-	}
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+    public String getIp() {
+        return ip;
+    }
 
-	public Boolean getMobile() {
-		return mobile;
-	}
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
-	public void setMobile(Boolean mobile) {
-		this.mobile = mobile;
-	}
+    public Boolean getMobile() {
+        return mobile;
+    }
 
-	public String getOsName() {
-		return osName;
-	}
+    public void setMobile(Boolean mobile) {
+        this.mobile = mobile;
+    }
 
-	public void setOsName(String osName) {
-		this.osName = osName;
-	}
+    public String getOsName() {
+        return osName;
+    }
 
-	public String getBrowserName() {
-		return browserName;
-	}
+    public void setOsName(String osName) {
+        this.osName = osName;
+    }
 
-	public void setBrowserName(String browserName) {
-		this.browserName = browserName;
-	}
+    public String getBrowserName() {
+        return browserName;
+    }
 
-	public Boolean getMobileBrowser() {
-		return mobileBrowser;
-	}
+    public void setBrowserName(String browserName) {
+        this.browserName = browserName;
+    }
 
-	public void setMobileBrowser(Boolean mobileBrowser) {
-		this.mobileBrowser = mobileBrowser;
-	}
+    public Boolean getMobileBrowser() {
+        return mobileBrowser;
+    }
 
-	public String getEngineName() {
-		return engineName;
-	}
+    public void setMobileBrowser(Boolean mobileBrowser) {
+        this.mobileBrowser = mobileBrowser;
+    }
 
-	public void setEngineName(String engineName) {
-		this.engineName = engineName;
-	}
+    public String getEngineName() {
+        return engineName;
+    }
 
-	public Boolean getMobilePlatform() {
-		return mobilePlatform;
-	}
+    public void setEngineName(String engineName) {
+        this.engineName = engineName;
+    }
 
-	public void setMobilePlatform(Boolean mobilePlatform) {
-		this.mobilePlatform = mobilePlatform;
-	}
+    public Boolean getMobilePlatform() {
+        return mobilePlatform;
+    }
 
-	public Boolean getIphoneOrIpod() {
-		return iphoneOrIpod;
-	}
+    public void setMobilePlatform(Boolean mobilePlatform) {
+        this.mobilePlatform = mobilePlatform;
+    }
 
-	public void setIphoneOrIpod(Boolean iphoneOrIpod) {
-		this.iphoneOrIpod = iphoneOrIpod;
-	}
+    public Boolean getIphoneOrIpod() {
+        return iphoneOrIpod;
+    }
 
-	public Boolean getIpad() {
-		return ipad;
-	}
+    public void setIphoneOrIpod(Boolean iphoneOrIpod) {
+        this.iphoneOrIpod = iphoneOrIpod;
+    }
 
-	public void setIpad(Boolean ipad) {
-		this.ipad = ipad;
-	}
+    public Boolean getIpad() {
+        return ipad;
+    }
 
-	public Boolean getIos() {
-		return ios;
-	}
+    public void setIpad(Boolean ipad) {
+        this.ipad = ipad;
+    }
 
-	public void setIos(Boolean ios) {
-		this.ios = ios;
-	}
+    public Boolean getIos() {
+        return ios;
+    }
 
-	public Boolean getAndroid() {
-		return android;
-	}
+    public void setIos(Boolean ios) {
+        this.ios = ios;
+    }
 
-	public void setAndroid(Boolean android) {
-		this.android = android;
-	}
+    public Boolean getAndroid() {
+        return android;
+    }
 
-	public String getOperation() {
-		return operation;
-	}
+    public void setAndroid(Boolean android) {
+        this.android = android;
+    }
 
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
+    public String getOperation() {
+        return operation;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		OAuth2Compliance that = (OAuth2Compliance) o;
-		return Objects.equal(complianceId, that.complianceId);
-	}
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(complianceId);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        OAuth2Compliance that = (OAuth2Compliance) o;
+        return Objects.equal(complianceId, that.complianceId);
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-			.add("complianceId", complianceId)
-			.add("principalName", principalName)
-			.add("clientId", clientId)
-			.add("ip", ip)
-			.add("mobile", mobile)
-			.add("osName", osName)
-			.add("browserName", browserName)
-			.add("mobileBrowser", mobileBrowser)
-			.add("engineName", engineName)
-			.add("mobilePlatform", mobilePlatform)
-			.add("iphoneOrIpod", iphoneOrIpod)
-			.add("ipad", ipad)
-			.add("ios", ios)
-			.add("android", android)
-			.add("operation", operation)
-			.toString();
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(complianceId);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("complianceId", complianceId)
+                .add("principalName", principalName)
+                .add("clientId", clientId)
+                .add("ip", ip)
+                .add("mobile", mobile)
+                .add("osName", osName)
+                .add("browserName", browserName)
+                .add("mobileBrowser", mobileBrowser)
+                .add("engineName", engineName)
+                .add("mobilePlatform", mobilePlatform)
+                .add("iphoneOrIpod", iphoneOrIpod)
+                .add("ipad", ipad)
+                .add("ios", ios)
+                .add("android", android)
+                .add("operation", operation)
+                .toString();
+    }
 }

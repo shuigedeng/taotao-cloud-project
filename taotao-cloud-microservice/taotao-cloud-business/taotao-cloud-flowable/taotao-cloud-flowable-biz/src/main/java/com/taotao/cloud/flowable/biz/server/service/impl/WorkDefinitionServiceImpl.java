@@ -1,12 +1,12 @@
-/**
- * Copyright (c) 2022 KCloud-Platform-Alibaba Authors. All Rights Reserved.
- * <p>
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +15,15 @@
  */
 
 package com.taotao.cloud.flowable.biz.server.service.impl;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import javax.imageio.ImageIO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.utils.Base64;
@@ -26,8 +35,8 @@ import org.flowable.engine.RepositoryService;
 import org.flowable.engine.repository.ProcessDefinition;
 import org.flowable.engine.repository.ProcessDefinitionQuery;
 import org.flowable.image.impl.DefaultProcessDiagramGenerator;
-import org.laokou.common.i18n.core.CustomException;
 import org.laokou.common.core.utils.StringUtil;
+import org.laokou.common.i18n.core.CustomException;
 import org.laokou.common.i18n.utils.ValidatorUtil;
 import org.laokou.flowable.client.dto.DefinitionDTO;
 import org.laokou.flowable.client.vo.DefinitionVO;
@@ -35,14 +44,6 @@ import org.laokou.flowable.client.vo.PageVO;
 import org.laokou.flowable.server.service.WorkDefinitionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author laokou
@@ -69,7 +70,8 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
         if (count > 0) {
             throw new CustomException("流程已存在，请重新上传");
         }
-        repositoryService.createDeployment()
+        repositoryService
+                .createDeployment()
                 .name(processName)
                 .key(processId)
                 .addBpmnModel(processName, bpmnModel)
@@ -83,15 +85,20 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
         Integer pageNum = dto.getPageNum();
         Integer pageSize = dto.getPageSize();
         String processName = dto.getProcessName();
-        ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery()
-                .latestVersion()
-                .orderByProcessDefinitionKey().asc();
+        ProcessDefinitionQuery processDefinitionQuery =
+                repositoryService
+                        .createProcessDefinitionQuery()
+                        .latestVersion()
+                        .orderByProcessDefinitionKey()
+                        .asc();
         if (StringUtil.isNotEmpty(processName)) {
-            processDefinitionQuery = processDefinitionQuery.processDefinitionNameLike("%" + processName + "%");
+            processDefinitionQuery =
+                    processDefinitionQuery.processDefinitionNameLike("%" + processName + "%");
         }
         long total = processDefinitionQuery.count();
         int pageIndex = pageSize * (pageNum - 1);
-        List<ProcessDefinition> definitionList = processDefinitionQuery.listPage(pageIndex, pageSize);
+        List<ProcessDefinition> definitionList =
+                processDefinitionQuery.listPage(pageIndex, pageSize);
         List<DefinitionVO> voList = new ArrayList<>(definitionList.size());
         for (ProcessDefinition processDefinition : definitionList) {
             DefinitionVO vo = new DefinitionVO();
@@ -102,34 +109,35 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
             vo.setSuspended(processDefinition.isSuspended());
             voList.add(vo);
         }
-        return new PageVO<>(voList,total);
+        return new PageVO<>(voList, total);
     }
 
     @Override
     public String diagramDefinition(String definitionId) {
-        //获取图片流
+        // 获取图片流
         DefaultProcessDiagramGenerator diagramGenerator = new DefaultProcessDiagramGenerator();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(definitionId);
-        //输出为图片
-        InputStream inputStream = diagramGenerator.generateDiagram(
-                bpmnModel,
-                "png",
-                Collections.emptyList(),
-                Collections.emptyList(),
-                "宋体",
-                "宋体",
-                "宋体",
-                null,
-                1.0,
-                false);
-        try(ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+        // 输出为图片
+        InputStream inputStream =
+                diagramGenerator.generateDiagram(
+                        bpmnModel,
+                        "png",
+                        Collections.emptyList(),
+                        Collections.emptyList(),
+                        "宋体",
+                        "宋体",
+                        "宋体",
+                        null,
+                        1.0,
+                        false);
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             BufferedImage image = ImageIO.read(inputStream);
             if (null != image) {
-                ImageIO.write(image,"png",outputStream);
+                ImageIO.write(image, "png", outputStream);
             }
             return Base64.encodeBase64String(outputStream.toByteArray());
         } catch (IOException e) {
-            log.error("错误信息：{}",e.getMessage());
+            log.error("错误信息：{}", e.getMessage());
             return "";
         }
     }
@@ -138,14 +146,18 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
     @Transactional(rollbackFor = Exception.class)
     public Boolean deleteDefinition(String deploymentId) {
         // true允许级联删除 不设置会导致数据库关联异常
-        repositoryService.deleteDeployment(deploymentId,true);
+        repositoryService.deleteDeployment(deploymentId, true);
         return true;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean suspendDefinition(String definitionId) {
-        final ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(definitionId).singleResult();
+        final ProcessDefinition processDefinition =
+                repositoryService
+                        .createProcessDefinitionQuery()
+                        .processDefinitionId(definitionId)
+                        .singleResult();
         if (processDefinition.isSuspended()) {
             throw new CustomException("挂起失败，流程已挂起");
         } else {
@@ -158,7 +170,11 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean activateDefinition(String definitionId) {
-        final ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(definitionId).singleResult();
+        final ProcessDefinition processDefinition =
+                repositoryService
+                        .createProcessDefinitionQuery()
+                        .processDefinitionId(definitionId)
+                        .singleResult();
         if (processDefinition.isSuspended()) {
             // 激活
             repositoryService.activateProcessDefinitionById(definitionId, true, null);

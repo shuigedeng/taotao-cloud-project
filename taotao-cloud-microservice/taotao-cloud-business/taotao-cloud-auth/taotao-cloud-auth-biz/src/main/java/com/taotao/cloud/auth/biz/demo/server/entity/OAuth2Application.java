@@ -1,26 +1,17 @@
 /*
- * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Dante Engine Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
- *
- * 1.请不要删除和修改根目录下的LICENSE文件。
- * 2.请不要删除和修改 Dante Engine 源码头部的版权声明。
- * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
- * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.auth.biz.demo.server.entity;
@@ -33,30 +24,34 @@ import cn.herodotus.engine.oauth2.core.enums.TokenFormat;
 import cn.hutool.core.util.IdUtil;
 import com.google.common.base.MoreObjects;
 import jakarta.persistence.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
- * <p>Description: OAuth2 应用 </p>
- * <p>
- * Spring Authorization Server 默认的 RegisteredClient 不便于扩展。增加该类用于存储标准 RegisteredClient 表结构以外的扩展信息。
+ * Description: OAuth2 应用
+ *
+ * <p>Spring Authorization Server 默认的 RegisteredClient 不便于扩展。增加该类用于存储标准 RegisteredClient 表结构以外的扩展信息。
  *
  * @author : gengwei.zheng
  * @date : 2022/3/1 16:45
  */
 @Entity
-@Table(name = "oauth2_application", indexes = {
-        @Index(name = "oauth2_application_id_idx", columnList = "application_id"),
-        @Index(name = "oauth2_application_cid_idx", columnList = "client_id")})
+@Table(
+        name = "oauth2_application",
+        indexes = {
+            @Index(name = "oauth2_application_id_idx", columnList = "application_id"),
+            @Index(name = "oauth2_application_cid_idx", columnList = "client_id")
+        })
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = OAuth2Constants.REGION_OAUTH2_APPLICATION)
+@org.hibernate.annotations.Cache(
+        usage = CacheConcurrencyStrategy.READ_WRITE,
+        region = OAuth2Constants.REGION_OAUTH2_APPLICATION)
 public class OAuth2Application extends BaseSysEntity {
 
     @Id
@@ -131,14 +126,20 @@ public class OAuth2Application extends BaseSysEntity {
     @Enumerated(EnumType.ORDINAL)
     private Signature idTokenSignatureAlgorithm = Signature.RS256;
 
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = OAuth2Constants.REGION_OAUTH2_APPLICATION_SCOPE)
+    @org.hibernate.annotations.Cache(
+            usage = CacheConcurrencyStrategy.READ_WRITE,
+            region = OAuth2Constants.REGION_OAUTH2_APPLICATION_SCOPE)
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    @JoinTable(name = "oauth2_application_scope",
+    @JoinTable(
+            name = "oauth2_application_scope",
             joinColumns = {@JoinColumn(name = "application_id")},
             inverseJoinColumns = {@JoinColumn(name = "scope_id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"application_id", "scope_id"})},
-            indexes = {@Index(name = "oauth2_application_scope_aid_idx", columnList = "application_id"), @Index(name = "oauth2_application_scope_sid_idx", columnList = "scope_id")})
+            indexes = {
+                @Index(name = "oauth2_application_scope_aid_idx", columnList = "application_id"),
+                @Index(name = "oauth2_application_scope_sid_idx", columnList = "scope_id")
+            })
     private Set<OAuth2Scope> scopes = new HashSet<>();
 
     public String getApplicationId() {

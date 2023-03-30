@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.auth.biz.authentication;
 
 import com.taotao.cloud.auth.biz.utils.SimpleAuthenticationEntryPoint;
@@ -44,320 +60,320 @@ import org.springframework.web.accept.HeaderContentNegotiationStrategy;
  * @param <C>
  * @param <F>
  */
-public abstract class AbstractLoginFilterConfigurer<H extends HttpSecurityBuilder<H>, C extends AbstractLoginFilterConfigurer<H, C, F, A>, F extends AbstractAuthenticationProcessingFilter, A extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, H>>
-		extends AbstractHttpConfigurer<AbstractLoginFilterConfigurer<H, C, F, A>, H> {
+public abstract class AbstractLoginFilterConfigurer<
+                H extends HttpSecurityBuilder<H>,
+                C extends AbstractLoginFilterConfigurer<H, C, F, A>,
+                F extends AbstractAuthenticationProcessingFilter,
+                A extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, H>>
+        extends AbstractHttpConfigurer<AbstractLoginFilterConfigurer<H, C, F, A>, H> {
 
-	private final A configurerAdapter;
+    private final A configurerAdapter;
 
-	private F authFilter;
+    private F authFilter;
 
-	private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
+    private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
 
-	private AuthenticationSuccessHandler successHandler;
+    private AuthenticationSuccessHandler successHandler;
 
-	private AuthenticationEntryPoint authenticationEntryPoint;
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
-	private String loginProcessingUrl;
+    private String loginProcessingUrl;
 
-	private AuthenticationFailureHandler failureHandler;
+    private AuthenticationFailureHandler failureHandler;
 
-	private boolean permitAll;
+    private boolean permitAll;
 
-	private String failureUrl;
+    private String failureUrl;
 
+    public AbstractLoginFilterConfigurer(
+            A configurerAdapter, F authenticationFilter, String defaultLoginProcessingUrl) {
+        this.configurerAdapter = configurerAdapter;
+        this.authFilter = authenticationFilter;
+        if (defaultLoginProcessingUrl != null) {
+            loginProcessingUrl(defaultLoginProcessingUrl);
+        }
+    }
 
-	public AbstractLoginFilterConfigurer(A configurerAdapter,
-			F authenticationFilter,
-			String defaultLoginProcessingUrl) {
-		this.configurerAdapter = configurerAdapter;
-		this.authFilter = authenticationFilter;
-		if (defaultLoginProcessingUrl != null) {
-			loginProcessingUrl(defaultLoginProcessingUrl);
-		}
-	}
+    public final C defaultSuccessUrl(String defaultSuccessUrl) {
+        return defaultSuccessUrl(defaultSuccessUrl, false);
+    }
 
-	public final C defaultSuccessUrl(String defaultSuccessUrl) {
-		return defaultSuccessUrl(defaultSuccessUrl, false);
-	}
+    public final C defaultSuccessUrl(String defaultSuccessUrl, boolean alwaysUse) {
+        SavedRequestAwareAuthenticationSuccessHandler handler =
+                new SavedRequestAwareAuthenticationSuccessHandler();
+        handler.setDefaultTargetUrl(defaultSuccessUrl);
+        handler.setAlwaysUseDefaultTargetUrl(alwaysUse);
+        return successHandler(handler);
+    }
 
-	public final C defaultSuccessUrl(String defaultSuccessUrl, boolean alwaysUse) {
-		SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
-		handler.setDefaultTargetUrl(defaultSuccessUrl);
-		handler.setAlwaysUseDefaultTargetUrl(alwaysUse);
-		return successHandler(handler);
-	}
+    public C loginProcessingUrl(String loginProcessingUrl) {
+        this.loginProcessingUrl = loginProcessingUrl;
+        this.authFilter.setRequiresAuthenticationRequestMatcher(
+                createLoginProcessingUrlMatcher(loginProcessingUrl));
+        return getSelf();
+    }
 
-	public C loginProcessingUrl(String loginProcessingUrl) {
-		this.loginProcessingUrl = loginProcessingUrl;
-		this.authFilter.setRequiresAuthenticationRequestMatcher(
-				createLoginProcessingUrlMatcher(loginProcessingUrl));
-		return getSelf();
-	}
+    protected abstract RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl);
 
-	protected abstract RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl);
+    public final C authenticationDetailsSource(
+            AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource) {
+        this.authenticationDetailsSource = authenticationDetailsSource;
+        return getSelf();
+    }
 
-	public final C authenticationDetailsSource(
-			AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource) {
-		this.authenticationDetailsSource = authenticationDetailsSource;
-		return getSelf();
-	}
+    public final C successHandler(AuthenticationSuccessHandler successHandler) {
+        this.successHandler = successHandler;
+        return getSelf();
+    }
 
-	public final C successHandler(AuthenticationSuccessHandler successHandler) {
-		this.successHandler = successHandler;
-		return getSelf();
-	}
+    public final C authenticationEntryPoint(AuthenticationEntryPoint authenticationEntryPoint) {
+        this.authenticationEntryPoint = authenticationEntryPoint;
+        return getSelf();
+    }
 
-	public final C authenticationEntryPoint(AuthenticationEntryPoint authenticationEntryPoint) {
-		this.authenticationEntryPoint = authenticationEntryPoint;
-		return getSelf();
-	}
+    public final C permitAll() {
+        return permitAll(true);
+    }
 
+    public final C permitAll(boolean permitAll) {
+        this.permitAll = permitAll;
+        return getSelf();
+    }
 
-	public final C permitAll() {
-		return permitAll(true);
-	}
+    public final C failureUrl(String authenticationFailureUrl) {
+        C result =
+                failureHandler(new SimpleUrlAuthenticationFailureHandler(authenticationFailureUrl));
+        this.failureUrl = authenticationFailureUrl;
+        return result;
+    }
 
-	public final C permitAll(boolean permitAll) {
-		this.permitAll = permitAll;
-		return getSelf();
-	}
+    public final C failureHandler(AuthenticationFailureHandler authenticationFailureHandler) {
+        this.failureUrl = null;
+        this.failureHandler = authenticationFailureHandler;
+        return getSelf();
+    }
 
-	public final C failureUrl(String authenticationFailureUrl) {
-		C result = failureHandler(
-				new SimpleUrlAuthenticationFailureHandler(authenticationFailureUrl));
-		this.failureUrl = authenticationFailureUrl;
-		return result;
-	}
+    public A with() {
+        return this.configurerAdapter;
+    }
 
-	public final C failureHandler(AuthenticationFailureHandler authenticationFailureHandler) {
-		this.failureUrl = null;
-		this.failureHandler = authenticationFailureHandler;
-		return getSelf();
-	}
+    @Override
+    public void init(H http) {
+        updateAccessDefaults(http);
+        updateAuthenticationDefaults();
+        registerDefaultAuthenticationEntryPoint(http);
+        AuthenticationProvider authenticationProvider = authenticationProvider(http);
+        http.authenticationProvider(postProcess(authenticationProvider));
+        if (this.successHandler == null) {
+            successHandler(defaultSuccessHandler(http));
+        }
+    }
 
-	public A with() {
-		return this.configurerAdapter;
-	}
+    protected abstract AuthenticationProvider authenticationProvider(H http);
 
-	@Override
-	public void init(H http) {
-		updateAccessDefaults(http);
-		updateAuthenticationDefaults();
-		registerDefaultAuthenticationEntryPoint(http);
-		AuthenticationProvider authenticationProvider = authenticationProvider(http);
-		http.authenticationProvider(postProcess(authenticationProvider));
-		if (this.successHandler == null) {
-			successHandler(defaultSuccessHandler(http));
-		}
-	}
+    protected abstract AuthenticationSuccessHandler defaultSuccessHandler(H http);
 
-	protected abstract AuthenticationProvider authenticationProvider(H http);
+    protected final void updateAuthenticationDefaults() {
+        if (this.failureHandler == null) {
+            failureHandler(
+                    new AuthenticationEntryPointFailureHandler(
+                            new SimpleAuthenticationEntryPoint()));
+        }
+    }
 
-	protected abstract AuthenticationSuccessHandler defaultSuccessHandler(H http);
+    protected final void registerDefaultAuthenticationEntryPoint(H http) {
+        if (authenticationEntryPoint != null) {
+            this.authenticationEntryPoint = new SimpleAuthenticationEntryPoint();
+        }
+        registerAuthenticationEntryPoint(http, this.authenticationEntryPoint);
+    }
 
+    @SuppressWarnings("unchecked")
+    protected final void registerAuthenticationEntryPoint(
+            H http, AuthenticationEntryPoint authenticationEntryPoint) {
+        ExceptionHandlingConfigurer<H> exceptionHandling =
+                http.getConfigurer(ExceptionHandlingConfigurer.class);
+        if (exceptionHandling == null) {
+            return;
+        }
+        exceptionHandling.defaultAuthenticationEntryPointFor(
+                postProcess(authenticationEntryPoint), getAuthenticationEntryPointMatcher(http));
+    }
 
-	protected final void updateAuthenticationDefaults() {
-		if (this.failureHandler == null) {
-			failureHandler(new AuthenticationEntryPointFailureHandler(
-					new SimpleAuthenticationEntryPoint()));
-		}
-	}
+    protected final RequestMatcher getAuthenticationEntryPointMatcher(H http) {
+        ContentNegotiationStrategy contentNegotiationStrategy =
+                http.getSharedObject(ContentNegotiationStrategy.class);
+        if (contentNegotiationStrategy == null) {
+            contentNegotiationStrategy = new HeaderContentNegotiationStrategy();
+        }
+        MediaTypeRequestMatcher mediaMatcher =
+                new MediaTypeRequestMatcher(
+                        contentNegotiationStrategy,
+                        MediaType.APPLICATION_XHTML_XML,
+                        new MediaType("image", "*"),
+                        MediaType.TEXT_HTML,
+                        MediaType.TEXT_PLAIN);
+        mediaMatcher.setIgnoredMediaTypes(Collections.singleton(MediaType.ALL));
+        RequestMatcher notXRequestedWith =
+                new NegatedRequestMatcher(
+                        new RequestHeaderRequestMatcher("X-Requested-With", "XMLHttpRequest"));
+        return new AndRequestMatcher(Arrays.asList(notXRequestedWith, mediaMatcher));
+    }
 
+    @Override
+    public void configure(H http) throws Exception {
+        PortMapper portMapper = http.getSharedObject(PortMapper.class);
+        if (portMapper != null
+                && this.authenticationEntryPoint instanceof LoginUrlAuthenticationEntryPoint) {
+            ((LoginUrlAuthenticationEntryPoint) this.authenticationEntryPoint)
+                    .setPortMapper(portMapper);
+        }
 
-	protected final void registerDefaultAuthenticationEntryPoint(H http) {
-		if (authenticationEntryPoint != null) {
-			this.authenticationEntryPoint = new SimpleAuthenticationEntryPoint();
-		}
-		registerAuthenticationEntryPoint(http, this.authenticationEntryPoint);
-	}
+        RequestCache requestCache = http.getSharedObject(RequestCache.class);
+        if (requestCache != null
+                && this.successHandler instanceof SavedRequestAwareAuthenticationSuccessHandler) {
+            ((SavedRequestAwareAuthenticationSuccessHandler) this.successHandler)
+                    .setRequestCache(requestCache);
+        }
 
-	@SuppressWarnings("unchecked")
-	protected final void registerAuthenticationEntryPoint(H http,
-			AuthenticationEntryPoint authenticationEntryPoint) {
-		ExceptionHandlingConfigurer<H> exceptionHandling = http.getConfigurer(
-				ExceptionHandlingConfigurer.class);
-		if (exceptionHandling == null) {
-			return;
-		}
-		exceptionHandling.defaultAuthenticationEntryPointFor(postProcess(authenticationEntryPoint),
-				getAuthenticationEntryPointMatcher(http));
-	}
+        this.authFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
+        this.authFilter.setAuthenticationSuccessHandler(this.successHandler);
+        this.authFilter.setAuthenticationFailureHandler(this.failureHandler);
+        if (this.authenticationDetailsSource != null) {
+            this.authFilter.setAuthenticationDetailsSource(this.authenticationDetailsSource);
+        }
 
-	protected final RequestMatcher getAuthenticationEntryPointMatcher(H http) {
-		ContentNegotiationStrategy contentNegotiationStrategy = http.getSharedObject(
-				ContentNegotiationStrategy.class);
-		if (contentNegotiationStrategy == null) {
-			contentNegotiationStrategy = new HeaderContentNegotiationStrategy();
-		}
-		MediaTypeRequestMatcher mediaMatcher = new MediaTypeRequestMatcher(
-				contentNegotiationStrategy,
-				MediaType.APPLICATION_XHTML_XML, new MediaType("image", "*"), MediaType.TEXT_HTML,
-				MediaType.TEXT_PLAIN);
-		mediaMatcher.setIgnoredMediaTypes(Collections.singleton(MediaType.ALL));
-		RequestMatcher notXRequestedWith = new NegatedRequestMatcher(
-				new RequestHeaderRequestMatcher("X-Requested-With", "XMLHttpRequest"));
-		return new AndRequestMatcher(Arrays.asList(notXRequestedWith, mediaMatcher));
-	}
+        SessionAuthenticationStrategy sessionAuthenticationStrategy =
+                http.getSharedObject(SessionAuthenticationStrategy.class);
+        if (sessionAuthenticationStrategy != null) {
+            this.authFilter.setSessionAuthenticationStrategy(sessionAuthenticationStrategy);
+        }
 
-	@Override
-	public void configure(H http) throws Exception {
-		PortMapper portMapper = http.getSharedObject(PortMapper.class);
-		if (portMapper != null
-				&& this.authenticationEntryPoint instanceof LoginUrlAuthenticationEntryPoint) {
-			((LoginUrlAuthenticationEntryPoint) this.authenticationEntryPoint).setPortMapper(
-					portMapper);
-		}
+        RememberMeServices rememberMeServices = http.getSharedObject(RememberMeServices.class);
+        if (rememberMeServices != null) {
+            this.authFilter.setRememberMeServices(rememberMeServices);
+        }
 
-		RequestCache requestCache = http.getSharedObject(RequestCache.class);
-		if (requestCache != null
-				&& this.successHandler instanceof SavedRequestAwareAuthenticationSuccessHandler) {
-			((SavedRequestAwareAuthenticationSuccessHandler) this.successHandler).setRequestCache(
-					requestCache);
-		}
+        F filter = postProcess(this.authFilter);
+        http.addFilterBefore(filter, LogoutFilter.class);
+    }
 
-		this.authFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-		this.authFilter.setAuthenticationSuccessHandler(this.successHandler);
-		this.authFilter.setAuthenticationFailureHandler(this.failureHandler);
-		if (this.authenticationDetailsSource != null) {
-			this.authFilter.setAuthenticationDetailsSource(this.authenticationDetailsSource);
-		}
+    public final <T> T getBeanOrNull(ApplicationContext applicationContext, Class<T> beanType) {
+        String[] beanNames = applicationContext.getBeanNamesForType(beanType);
+        if (beanNames.length == 1) {
+            return applicationContext.getBean(beanNames[0], beanType);
+        }
+        return null;
+    }
 
-		SessionAuthenticationStrategy sessionAuthenticationStrategy = http
-				.getSharedObject(SessionAuthenticationStrategy.class);
-		if (sessionAuthenticationStrategy != null) {
-			this.authFilter.setSessionAuthenticationStrategy(sessionAuthenticationStrategy);
-		}
+    /**
+     * Gets the Authentication Filter
+     *
+     * @return the Authentication Filter
+     */
+    protected final F getAuthenticationFilter() {
+        return this.authFilter;
+    }
 
-		RememberMeServices rememberMeServices = http.getSharedObject(RememberMeServices.class);
-		if (rememberMeServices != null) {
-			this.authFilter.setRememberMeServices(rememberMeServices);
-		}
+    /**
+     * Sets the Authentication Filter
+     *
+     * @param authFilter the Authentication Filter
+     */
+    protected final void setAuthenticationFilter(F authFilter) {
+        this.authFilter = authFilter;
+    }
 
-		F filter = postProcess(this.authFilter);
-		http.addFilterBefore(filter, LogoutFilter.class);
-	}
+    /**
+     * Gets the Authentication Entry Point
+     *
+     * @return the Authentication Entry Point
+     */
+    protected final AuthenticationEntryPoint getAuthenticationEntryPoint() {
+        return this.authenticationEntryPoint;
+    }
 
-	public final <T> T getBeanOrNull(ApplicationContext applicationContext, Class<T> beanType) {
-		String[] beanNames = applicationContext.getBeanNamesForType(beanType);
-		if (beanNames.length == 1) {
-			return applicationContext.getBean(beanNames[0], beanType);
-		}
-		return null;
-	}
+    /**
+     * Gets the URL to submit an authentication request to (i.e. where username/password must be
+     * submitted)
+     *
+     * @return the URL to submit an authentication request to
+     */
+    protected final String getLoginProcessingUrl() {
+        return this.loginProcessingUrl;
+    }
 
-	/**
-	 * Gets the Authentication Filter
-	 *
-	 * @return the Authentication Filter
-	 */
-	protected final F getAuthenticationFilter() {
-		return this.authFilter;
-	}
+    /**
+     * Gets the URL to send users to if authentication fails
+     *
+     * @return the URL to send users if authentication fails (e.g. "/login?error").
+     */
+    protected final String getFailureUrl() {
+        return this.failureUrl;
+    }
 
-	/**
-	 * Sets the Authentication Filter
-	 *
-	 * @param authFilter the Authentication Filter
-	 */
-	protected final void setAuthenticationFilter(F authFilter) {
-		this.authFilter = authFilter;
-	}
+    /** Updates the default values for access. */
+    protected final void updateAccessDefaults(H http) {
+        if (this.permitAll) {
+            PermitAllSupport.permitAll(http, this.loginProcessingUrl, this.failureUrl);
+        }
+    }
 
-	/**
-	 * Gets the Authentication Entry Point
-	 *
-	 * @return the Authentication Entry Point
-	 */
-	protected final AuthenticationEntryPoint getAuthenticationEntryPoint() {
-		return this.authenticationEntryPoint;
-	}
+    @SuppressWarnings("unchecked")
+    private C getSelf() {
+        return (C) this;
+    }
 
-	/**
-	 * Gets the URL to submit an authentication request to (i.e. where username/password must be
-	 * submitted)
-	 *
-	 * @return the URL to submit an authentication request to
-	 */
-	protected final String getLoginProcessingUrl() {
-		return this.loginProcessingUrl;
-	}
+    static final class PermitAllSupport {
 
-	/**
-	 * Gets the URL to send users to if authentication fails
-	 *
-	 * @return the URL to send users if authentication fails (e.g. "/login?error").
-	 */
-	protected final String getFailureUrl() {
-		return this.failureUrl;
-	}
+        private PermitAllSupport() {}
 
+        private static void permitAll(
+                HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, String... urls) {
+            for (String url : urls) {
+                if (url != null) {
+                    permitAll(http, new ExactUrlRequestMatcher(url));
+                }
+            }
+        }
 
-	/**
-	 * Updates the default values for access.
-	 */
-	protected final void updateAccessDefaults(H http) {
-		if (this.permitAll) {
-			PermitAllSupport.permitAll(http, this.loginProcessingUrl, this.failureUrl);
-		}
-	}
+        @SuppressWarnings("unchecked")
+        static void permitAll(
+                HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http,
+                RequestMatcher... requestMatchers) {
+            ExpressionUrlAuthorizationConfigurer<?> configurer =
+                    http.getConfigurer(ExpressionUrlAuthorizationConfigurer.class);
+            Assert.state(
+                    configurer != null,
+                    "permitAll only works with HttpSecurity.authorizeRequests()");
+            configurer.getRegistry().requestMatchers(requestMatchers).permitAll();
+        }
 
-	@SuppressWarnings("unchecked")
-	private C getSelf() {
-		return (C) this;
-	}
+        private static final class ExactUrlRequestMatcher implements RequestMatcher {
 
-	static final class PermitAllSupport {
+            private final String processUrl;
 
-		private PermitAllSupport() {
-		}
+            private ExactUrlRequestMatcher(String processUrl) {
+                this.processUrl = processUrl;
+            }
 
-		private static void permitAll(HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http,
-				String... urls) {
-			for (String url : urls) {
-				if (url != null) {
-					permitAll(http, new ExactUrlRequestMatcher(url));
-				}
-			}
-		}
+            @Override
+            public boolean matches(HttpServletRequest request) {
+                String uri = request.getRequestURI();
+                String query = request.getQueryString();
+                if (query != null) {
+                    uri += "?" + query;
+                }
+                if ("".equals(request.getContextPath())) {
+                    return uri.equals(this.processUrl);
+                }
+                return uri.equals(request.getContextPath() + this.processUrl);
+            }
 
-		@SuppressWarnings("unchecked")
-		static void permitAll(HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http,
-				RequestMatcher... requestMatchers) {
-			ExpressionUrlAuthorizationConfigurer<?> configurer = http
-					.getConfigurer(ExpressionUrlAuthorizationConfigurer.class);
-			Assert.state(configurer != null,
-					"permitAll only works with HttpSecurity.authorizeRequests()");
-			configurer.getRegistry().requestMatchers(requestMatchers).permitAll();
-		}
-
-		private static final class ExactUrlRequestMatcher implements RequestMatcher {
-
-			private final String processUrl;
-
-			private ExactUrlRequestMatcher(String processUrl) {
-				this.processUrl = processUrl;
-			}
-
-			@Override
-			public boolean matches(HttpServletRequest request) {
-				String uri = request.getRequestURI();
-				String query = request.getQueryString();
-				if (query != null) {
-					uri += "?" + query;
-				}
-				if ("".equals(request.getContextPath())) {
-					return uri.equals(this.processUrl);
-				}
-				return uri.equals(request.getContextPath() + this.processUrl);
-			}
-
-			@Override
-			public String toString() {
-				return "ExactUrl [processUrl='" + this.processUrl + "']";
-			}
-
-		}
-
-	}
-
+            @Override
+            public String toString() {
+                return "ExactUrl [processUrl='" + this.processUrl + "']";
+            }
+        }
+    }
 }

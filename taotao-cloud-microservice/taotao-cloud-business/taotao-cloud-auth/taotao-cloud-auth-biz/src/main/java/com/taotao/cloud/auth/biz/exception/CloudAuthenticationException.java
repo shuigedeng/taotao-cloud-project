@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.exception;
 
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -27,29 +28,28 @@ import org.springframework.security.oauth2.core.OAuth2Error;
  */
 public class CloudAuthenticationException extends OAuth2AuthenticationException {
 
-	public CloudAuthenticationException(String description) {
-		super(description);
-	}
+    public CloudAuthenticationException(String description) {
+        super(description);
+    }
 
-	public CloudAuthenticationException(OAuth2Error error) {
-		super(error);
-	}
+    public CloudAuthenticationException(OAuth2Error error) {
+        super(error);
+    }
 
-	public CloudAuthenticationException(OAuth2Error error, Throwable cause) {
-		super(error, cause);
-	}
+    public CloudAuthenticationException(OAuth2Error error, Throwable cause) {
+        super(error, cause);
+    }
 
-	public CloudAuthenticationException(OAuth2Error error, String message) {
-		super(error, message);
-	}
+    public CloudAuthenticationException(OAuth2Error error, String message) {
+        super(error, message);
+    }
 
-	public CloudAuthenticationException(OAuth2Error error, String message, Throwable cause) {
-		super(error, message, cause);
-	}
+    public CloudAuthenticationException(OAuth2Error error, String message, Throwable cause) {
+        super(error, message, cause);
+    }
 
-	public static CloudAuthenticationException throwError(String description) {
-		OAuth2Error error = new OAuth2Error("500", description, "");
-		return new CloudAuthenticationException(error);
-	}
-
+    public static CloudAuthenticationException throwError(String description) {
+        OAuth2Error error = new OAuth2Error("500", description, "");
+        return new CloudAuthenticationException(error);
+    }
 }

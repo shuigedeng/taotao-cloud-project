@@ -1,26 +1,17 @@
 /*
- * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Dante Engine Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
- *
- * 1.请不要删除和修改根目录下的LICENSE文件。
- * 2.请不要删除和修改 Dante Engine 源码头部的版权声明。
- * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
- * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.auth.biz.demo.jpa.storage;
@@ -65,255 +56,265 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: 基于 JPA 的 OAuth2 认证服务 </p>
+ * Description: 基于 JPA 的 OAuth2 认证服务
  *
  * @author : gengwei.zheng
  * @date : 2022/2/25 22:16
  */
 public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService {
 
-	private static final Logger log = LoggerFactory.getLogger(JpaOAuth2AuthorizationService.class);
+    private static final Logger log = LoggerFactory.getLogger(JpaOAuth2AuthorizationService.class);
 
-	private final HerodotusAuthorizationService herodotusAuthorizationService;
-	private final RegisteredClientRepository registeredClientRepository;
-	private final ObjectMapper objectMapper = new ObjectMapper();
+    private final HerodotusAuthorizationService herodotusAuthorizationService;
+    private final RegisteredClientRepository registeredClientRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-	public JpaOAuth2AuthorizationService(
-		HerodotusAuthorizationService herodotusAuthorizationService,
-		RegisteredClientRepository registeredClientRepository) {
-		this.herodotusAuthorizationService = herodotusAuthorizationService;
-		this.registeredClientRepository = registeredClientRepository;
+    public JpaOAuth2AuthorizationService(
+            HerodotusAuthorizationService herodotusAuthorizationService,
+            RegisteredClientRepository registeredClientRepository) {
+        this.herodotusAuthorizationService = herodotusAuthorizationService;
+        this.registeredClientRepository = registeredClientRepository;
 
-		ClassLoader classLoader = JpaOAuth2AuthorizationService.class.getClassLoader();
-		List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
-		this.objectMapper.registerModules(securityModules);
-		this.objectMapper.registerModule(new OAuth2AuthorizationServerJackson2Module());
-		this.objectMapper.registerModules(new HerodotusJackson2Module());
-		this.objectMapper.registerModules(new OAuth2TokenJackson2Module());
-	}
+        ClassLoader classLoader = JpaOAuth2AuthorizationService.class.getClassLoader();
+        List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
+        this.objectMapper.registerModules(securityModules);
+        this.objectMapper.registerModule(new OAuth2AuthorizationServerJackson2Module());
+        this.objectMapper.registerModules(new HerodotusJackson2Module());
+        this.objectMapper.registerModules(new OAuth2TokenJackson2Module());
+    }
 
-	@Override
-	public void save(OAuth2Authorization authorization) {
-		this.herodotusAuthorizationService.saveOrUpdate(toEntity(authorization));
-		log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service save entity.");
-	}
+    @Override
+    public void save(OAuth2Authorization authorization) {
+        this.herodotusAuthorizationService.saveOrUpdate(toEntity(authorization));
+        log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service save entity.");
+    }
 
-	@Transactional
-	@Override
-	public void remove(OAuth2Authorization authorization) {
-		Assert.notNull(authorization, "authorization cannot be null");
-		this.herodotusAuthorizationService.deleteById(authorization.getId());
-		log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service remove entity.");
-		// TODO： 后期还是考虑改为异步任务的形式，先临时放在这里。
-		this.herodotusAuthorizationService.clearHistoryToken();
-		log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service clear history token.");
-	}
+    @Transactional
+    @Override
+    public void remove(OAuth2Authorization authorization) {
+        Assert.notNull(authorization, "authorization cannot be null");
+        this.herodotusAuthorizationService.deleteById(authorization.getId());
+        log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service remove entity.");
+        // TODO： 后期还是考虑改为异步任务的形式，先临时放在这里。
+        this.herodotusAuthorizationService.clearHistoryToken();
+        log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service clear history token.");
+    }
 
-	@Override
-	public OAuth2Authorization findById(String id) {
-		HerodotusAuthorization herodotusAuthorization = this.herodotusAuthorizationService.findById(
-			id);
-		if (ObjectUtils.isNotEmpty(herodotusAuthorization)) {
-			log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service findById.");
-			return toObject(herodotusAuthorization);
-		} else {
-			return null;
-		}
-	}
+    @Override
+    public OAuth2Authorization findById(String id) {
+        HerodotusAuthorization herodotusAuthorization =
+                this.herodotusAuthorizationService.findById(id);
+        if (ObjectUtils.isNotEmpty(herodotusAuthorization)) {
+            log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service findById.");
+            return toObject(herodotusAuthorization);
+        } else {
+            return null;
+        }
+    }
 
-	public int findAuthorizationCount(String registeredClientId, String principalName) {
-		int count = this.herodotusAuthorizationService.findAuthorizationCount(registeredClientId,
-			principalName);
-		log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service findAuthorizationCount.");
-		return count;
-	}
+    public int findAuthorizationCount(String registeredClientId, String principalName) {
+        int count =
+                this.herodotusAuthorizationService.findAuthorizationCount(
+                        registeredClientId, principalName);
+        log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service findAuthorizationCount.");
+        return count;
+    }
 
-	public List<OAuth2Authorization> findAvailableAuthorizations(String registeredClientId,
-		String principalName) {
-		List<HerodotusAuthorization> authorizations = this.herodotusAuthorizationService.findAvailableAuthorizations(
-			registeredClientId, principalName);
-		if (CollectionUtils.isNotEmpty(authorizations)) {
-			return authorizations.stream().map(this::toObject).collect(Collectors.toList());
-		}
+    public List<OAuth2Authorization> findAvailableAuthorizations(
+            String registeredClientId, String principalName) {
+        List<HerodotusAuthorization> authorizations =
+                this.herodotusAuthorizationService.findAvailableAuthorizations(
+                        registeredClientId, principalName);
+        if (CollectionUtils.isNotEmpty(authorizations)) {
+            return authorizations.stream().map(this::toObject).collect(Collectors.toList());
+        }
 
-		return new ArrayList<>();
-	}
+        return new ArrayList<>();
+    }
 
-	@Override
-	public OAuth2Authorization findByToken(String token, OAuth2TokenType tokenType) {
-		Assert.hasText(token, "token cannot be empty");
+    @Override
+    public OAuth2Authorization findByToken(String token, OAuth2TokenType tokenType) {
+        Assert.hasText(token, "token cannot be empty");
 
-		Optional<HerodotusAuthorization> result;
-		if (tokenType == null) {
-			result = this.herodotusAuthorizationService.findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(
-				token);
-		} else if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {
-			result = this.herodotusAuthorizationService.findByState(token);
-		} else if (OAuth2ParameterNames.CODE.equals(tokenType.getValue())) {
-			result = this.herodotusAuthorizationService.findByAuthorizationCode(token);
-		} else if (OAuth2ParameterNames.ACCESS_TOKEN.equals(tokenType.getValue())) {
-			result = this.herodotusAuthorizationService.findByAccessToken(token);
-		} else if (OAuth2ParameterNames.REFRESH_TOKEN.equals(tokenType.getValue())) {
-			result = this.herodotusAuthorizationService.findByRefreshToken(token);
-		} else {
-			result = Optional.empty();
-		}
+        Optional<HerodotusAuthorization> result;
+        if (tokenType == null) {
+            result =
+                    this.herodotusAuthorizationService
+                            .findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(
+                                    token);
+        } else if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {
+            result = this.herodotusAuthorizationService.findByState(token);
+        } else if (OAuth2ParameterNames.CODE.equals(tokenType.getValue())) {
+            result = this.herodotusAuthorizationService.findByAuthorizationCode(token);
+        } else if (OAuth2ParameterNames.ACCESS_TOKEN.equals(tokenType.getValue())) {
+            result = this.herodotusAuthorizationService.findByAccessToken(token);
+        } else if (OAuth2ParameterNames.REFRESH_TOKEN.equals(tokenType.getValue())) {
+            result = this.herodotusAuthorizationService.findByRefreshToken(token);
+        } else {
+            result = Optional.empty();
+        }
 
-		log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service findByToken.");
-		return result.map(this::toObject).orElse(null);
-	}
+        log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service findByToken.");
+        return result.map(this::toObject).orElse(null);
+    }
 
-	private OAuth2Authorization toObject(HerodotusAuthorization entity) {
-		RegisteredClient registeredClient = this.registeredClientRepository.findById(
-			entity.getRegisteredClientId());
-		if (registeredClient == null) {
-			throw new DataRetrievalFailureException(
-				"The RegisteredClient with id '" + entity.getRegisteredClientId()
-					+ "' was not found in the RegisteredClientRepository.");
-		}
+    private OAuth2Authorization toObject(HerodotusAuthorization entity) {
+        RegisteredClient registeredClient =
+                this.registeredClientRepository.findById(entity.getRegisteredClientId());
+        if (registeredClient == null) {
+            throw new DataRetrievalFailureException(
+                    "The RegisteredClient with id '"
+                            + entity.getRegisteredClientId()
+                            + "' was not found in the RegisteredClientRepository.");
+        }
 
-		OAuth2Authorization.Builder builder = OAuth2Authorization.withRegisteredClient(
-				registeredClient)
-			.id(entity.getId())
-			.principalName(entity.getPrincipalName())
-			.authorizationGrantType(OAuth2AuthorizationUtils.resolveAuthorizationGrantType(
-				entity.getAuthorizationGrantType()))
-			.attributes(attributes -> attributes.putAll(parseMap(entity.getAttributes())));
-		if (entity.getState() != null) {
-			builder.attribute(OAuth2ParameterNames.STATE, entity.getState());
-		}
+        OAuth2Authorization.Builder builder =
+                OAuth2Authorization.withRegisteredClient(registeredClient)
+                        .id(entity.getId())
+                        .principalName(entity.getPrincipalName())
+                        .authorizationGrantType(
+                                OAuth2AuthorizationUtils.resolveAuthorizationGrantType(
+                                        entity.getAuthorizationGrantType()))
+                        .attributes(
+                                attributes -> attributes.putAll(parseMap(entity.getAttributes())));
+        if (entity.getState() != null) {
+            builder.attribute(OAuth2ParameterNames.STATE, entity.getState());
+        }
 
-		if (entity.getAuthorizationCode() != null) {
-			OAuth2AuthorizationCode authorizationCode = new OAuth2AuthorizationCode(
-				entity.getAuthorizationCode(),
-				DateUtil.toInstant(entity.getAuthorizationCodeIssuedAt()),
-				DateUtil.toInstant(entity.getAuthorizationCodeExpiresAt()));
-			builder.token(authorizationCode,
-				metadata -> metadata.putAll(parseMap(entity.getAuthorizationCodeMetadata())));
-		}
+        if (entity.getAuthorizationCode() != null) {
+            OAuth2AuthorizationCode authorizationCode =
+                    new OAuth2AuthorizationCode(
+                            entity.getAuthorizationCode(),
+                            DateUtil.toInstant(entity.getAuthorizationCodeIssuedAt()),
+                            DateUtil.toInstant(entity.getAuthorizationCodeExpiresAt()));
+            builder.token(
+                    authorizationCode,
+                    metadata -> metadata.putAll(parseMap(entity.getAuthorizationCodeMetadata())));
+        }
 
-		if (entity.getAccessToken() != null) {
-			OAuth2AccessToken accessToken = new OAuth2AccessToken(
-				OAuth2AccessToken.TokenType.BEARER,
-				entity.getAccessToken(),
-				DateUtil.toInstant(entity.getAccessTokenIssuedAt()),
-				DateUtil.toInstant(entity.getAccessTokenExpiresAt()),
-				StringUtils.commaDelimitedListToSet(entity.getAccessTokenScopes()));
-			builder.token(accessToken,
-				metadata -> metadata.putAll(parseMap(entity.getAccessTokenMetadata())));
-		}
+        if (entity.getAccessToken() != null) {
+            OAuth2AccessToken accessToken =
+                    new OAuth2AccessToken(
+                            OAuth2AccessToken.TokenType.BEARER,
+                            entity.getAccessToken(),
+                            DateUtil.toInstant(entity.getAccessTokenIssuedAt()),
+                            DateUtil.toInstant(entity.getAccessTokenExpiresAt()),
+                            StringUtils.commaDelimitedListToSet(entity.getAccessTokenScopes()));
+            builder.token(
+                    accessToken,
+                    metadata -> metadata.putAll(parseMap(entity.getAccessTokenMetadata())));
+        }
 
-		if (entity.getRefreshToken() != null) {
-			OAuth2RefreshToken refreshToken = new OAuth2RefreshToken(
-				entity.getRefreshToken(),
-				DateUtil.toInstant(entity.getRefreshTokenIssuedAt()),
-				DateUtil.toInstant(entity.getRefreshTokenExpiresAt()));
-			builder.token(refreshToken,
-				metadata -> metadata.putAll(parseMap(entity.getRefreshTokenMetadata())));
-		}
+        if (entity.getRefreshToken() != null) {
+            OAuth2RefreshToken refreshToken =
+                    new OAuth2RefreshToken(
+                            entity.getRefreshToken(),
+                            DateUtil.toInstant(entity.getRefreshTokenIssuedAt()),
+                            DateUtil.toInstant(entity.getRefreshTokenExpiresAt()));
+            builder.token(
+                    refreshToken,
+                    metadata -> metadata.putAll(parseMap(entity.getRefreshTokenMetadata())));
+        }
 
-		if (entity.getOidcIdToken() != null) {
-			OidcIdToken idToken = new OidcIdToken(
-				entity.getOidcIdToken(),
-				DateUtil.toInstant(entity.getOidcIdTokenIssuedAt()),
-				DateUtil.toInstant(entity.getOidcIdTokenExpiresAt()),
-				parseMap(entity.getOidcIdTokenClaims()));
-			builder.token(idToken,
-				metadata -> metadata.putAll(parseMap(entity.getOidcIdTokenMetadata())));
-		}
+        if (entity.getOidcIdToken() != null) {
+            OidcIdToken idToken =
+                    new OidcIdToken(
+                            entity.getOidcIdToken(),
+                            DateUtil.toInstant(entity.getOidcIdTokenIssuedAt()),
+                            DateUtil.toInstant(entity.getOidcIdTokenExpiresAt()),
+                            parseMap(entity.getOidcIdTokenClaims()));
+            builder.token(
+                    idToken,
+                    metadata -> metadata.putAll(parseMap(entity.getOidcIdTokenMetadata())));
+        }
 
-		return builder.build();
-	}
+        return builder.build();
+    }
 
-	private HerodotusAuthorization toEntity(OAuth2Authorization authorization) {
-		HerodotusAuthorization entity = new HerodotusAuthorization();
-		entity.setId(authorization.getId());
-		entity.setRegisteredClientId(authorization.getRegisteredClientId());
-		entity.setPrincipalName(authorization.getPrincipalName());
-		entity.setAuthorizationGrantType(authorization.getAuthorizationGrantType().getValue());
-		entity.setAttributes(writeMap(authorization.getAttributes()));
-		entity.setState(authorization.getAttribute(OAuth2ParameterNames.STATE));
+    private HerodotusAuthorization toEntity(OAuth2Authorization authorization) {
+        HerodotusAuthorization entity = new HerodotusAuthorization();
+        entity.setId(authorization.getId());
+        entity.setRegisteredClientId(authorization.getRegisteredClientId());
+        entity.setPrincipalName(authorization.getPrincipalName());
+        entity.setAuthorizationGrantType(authorization.getAuthorizationGrantType().getValue());
+        entity.setAttributes(writeMap(authorization.getAttributes()));
+        entity.setState(authorization.getAttribute(OAuth2ParameterNames.STATE));
 
-		OAuth2Authorization.Token<OAuth2AuthorizationCode> authorizationCode =
-			authorization.getToken(OAuth2AuthorizationCode.class);
-		setTokenValues(
-			authorizationCode,
-			entity::setAuthorizationCode,
-			entity::setAuthorizationCodeIssuedAt,
-			entity::setAuthorizationCodeExpiresAt,
-			entity::setAuthorizationCodeMetadata
-		);
+        OAuth2Authorization.Token<OAuth2AuthorizationCode> authorizationCode =
+                authorization.getToken(OAuth2AuthorizationCode.class);
+        setTokenValues(
+                authorizationCode,
+                entity::setAuthorizationCode,
+                entity::setAuthorizationCodeIssuedAt,
+                entity::setAuthorizationCodeExpiresAt,
+                entity::setAuthorizationCodeMetadata);
 
-		OAuth2Authorization.Token<OAuth2AccessToken> accessToken =
-			authorization.getToken(OAuth2AccessToken.class);
-		setTokenValues(
-			accessToken,
-			entity::setAccessToken,
-			entity::setAccessTokenIssuedAt,
-			entity::setAccessTokenExpiresAt,
-			entity::setAccessTokenMetadata
-		);
-		if (accessToken != null && accessToken.getToken().getScopes() != null) {
-			entity.setAccessTokenScopes(
-				StringUtils.collectionToDelimitedString(accessToken.getToken().getScopes(),
-					SymbolConstants.COMMA));
-		}
+        OAuth2Authorization.Token<OAuth2AccessToken> accessToken =
+                authorization.getToken(OAuth2AccessToken.class);
+        setTokenValues(
+                accessToken,
+                entity::setAccessToken,
+                entity::setAccessTokenIssuedAt,
+                entity::setAccessTokenExpiresAt,
+                entity::setAccessTokenMetadata);
+        if (accessToken != null && accessToken.getToken().getScopes() != null) {
+            entity.setAccessTokenScopes(
+                    StringUtils.collectionToDelimitedString(
+                            accessToken.getToken().getScopes(), SymbolConstants.COMMA));
+        }
 
-		OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken =
-			authorization.getToken(OAuth2RefreshToken.class);
-		setTokenValues(
-			refreshToken,
-			entity::setRefreshToken,
-			entity::setRefreshTokenIssuedAt,
-			entity::setRefreshTokenExpiresAt,
-			entity::setRefreshTokenMetadata
-		);
+        OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken =
+                authorization.getToken(OAuth2RefreshToken.class);
+        setTokenValues(
+                refreshToken,
+                entity::setRefreshToken,
+                entity::setRefreshTokenIssuedAt,
+                entity::setRefreshTokenExpiresAt,
+                entity::setRefreshTokenMetadata);
 
-		OAuth2Authorization.Token<OidcIdToken> oidcIdToken =
-			authorization.getToken(OidcIdToken.class);
-		setTokenValues(
-			oidcIdToken,
-			entity::setOidcIdToken,
-			entity::setOidcIdTokenIssuedAt,
-			entity::setOidcIdTokenExpiresAt,
-			entity::setOidcIdTokenMetadata
-		);
-		if (oidcIdToken != null) {
-			entity.setOidcIdTokenClaims(writeMap(oidcIdToken.getClaims()));
-		}
+        OAuth2Authorization.Token<OidcIdToken> oidcIdToken =
+                authorization.getToken(OidcIdToken.class);
+        setTokenValues(
+                oidcIdToken,
+                entity::setOidcIdToken,
+                entity::setOidcIdTokenIssuedAt,
+                entity::setOidcIdTokenExpiresAt,
+                entity::setOidcIdTokenMetadata);
+        if (oidcIdToken != null) {
+            entity.setOidcIdTokenClaims(writeMap(oidcIdToken.getClaims()));
+        }
 
-		return entity;
-	}
+        return entity;
+    }
 
-	private void setTokenValues(
-		OAuth2Authorization.Token<?> token,
-		Consumer<String> tokenValueConsumer,
-		Consumer<LocalDateTime> issuedAtConsumer,
-		Consumer<LocalDateTime> expiresAtConsumer,
-		Consumer<String> metadataConsumer) {
-		if (token != null) {
-			OAuth2Token oAuth2Token = token.getToken();
-			tokenValueConsumer.accept(oAuth2Token.getTokenValue());
-			issuedAtConsumer.accept(DateUtil.toLocalDateTime(oAuth2Token.getIssuedAt()));
-			expiresAtConsumer.accept(DateUtil.toLocalDateTime(oAuth2Token.getExpiresAt()));
-			metadataConsumer.accept(writeMap(token.getMetadata()));
-		}
-	}
+    private void setTokenValues(
+            OAuth2Authorization.Token<?> token,
+            Consumer<String> tokenValueConsumer,
+            Consumer<LocalDateTime> issuedAtConsumer,
+            Consumer<LocalDateTime> expiresAtConsumer,
+            Consumer<String> metadataConsumer) {
+        if (token != null) {
+            OAuth2Token oAuth2Token = token.getToken();
+            tokenValueConsumer.accept(oAuth2Token.getTokenValue());
+            issuedAtConsumer.accept(DateUtil.toLocalDateTime(oAuth2Token.getIssuedAt()));
+            expiresAtConsumer.accept(DateUtil.toLocalDateTime(oAuth2Token.getExpiresAt()));
+            metadataConsumer.accept(writeMap(token.getMetadata()));
+        }
+    }
 
-	private Map<String, Object> parseMap(String data) {
-		try {
-			return this.objectMapper.readValue(data, new TypeReference<Map<String, Object>>() {
-			});
-		} catch (Exception ex) {
-			throw new IllegalArgumentException(ex.getMessage(), ex);
-		}
-	}
+    private Map<String, Object> parseMap(String data) {
+        try {
+            return this.objectMapper.readValue(data, new TypeReference<Map<String, Object>>() {});
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage(), ex);
+        }
+    }
 
-	private String writeMap(Map<String, Object> data) {
-		try {
-			return this.objectMapper.writeValueAsString(data);
-		} catch (Exception ex) {
-			throw new IllegalArgumentException(ex.getMessage(), ex);
-		}
-	}
+    private String writeMap(Map<String, Object> data) {
+        try {
+            return this.objectMapper.writeValueAsString(data);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex.getMessage(), ex);
+        }
+    }
 }

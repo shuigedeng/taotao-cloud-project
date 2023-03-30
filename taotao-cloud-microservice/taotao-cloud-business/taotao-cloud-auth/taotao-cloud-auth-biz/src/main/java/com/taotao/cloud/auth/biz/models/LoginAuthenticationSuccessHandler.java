@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.models;
 
 import com.taotao.cloud.auth.biz.jwt.JwtTokenGenerator;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -35,22 +36,23 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	private JwtTokenGenerator jwtTokenGenerator;
+    private JwtTokenGenerator jwtTokenGenerator;
 
-	public LoginAuthenticationSuccessHandler(JwtTokenGenerator jwtTokenGenerator) {
-		this.jwtTokenGenerator = jwtTokenGenerator;
-	}
+    public LoginAuthenticationSuccessHandler(JwtTokenGenerator jwtTokenGenerator) {
+        this.jwtTokenGenerator = jwtTokenGenerator;
+    }
 
-	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-		Authentication authentication) throws IOException, ServletException {
+    @Override
+    public void onAuthenticationSuccess(
+            HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+            throws IOException, ServletException {
 
-		//OAuth2AccessTokenResponse oAuth2AccessTokenResponse = jwtTokenGenerator.tokenResponse(
-		//	(SecurityUser) authentication.getPrincipal());
+        // OAuth2AccessTokenResponse oAuth2AccessTokenResponse = jwtTokenGenerator.tokenResponse(
+        //	(SecurityUser) authentication.getPrincipal());
 
-		LogUtils.error("用户认证成功", authentication);
-		ResponseUtils.success(response,
-			jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
-
-	}
+        LogUtils.error("用户认证成功", authentication);
+        ResponseUtils.success(
+                response,
+                jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
+    }
 }

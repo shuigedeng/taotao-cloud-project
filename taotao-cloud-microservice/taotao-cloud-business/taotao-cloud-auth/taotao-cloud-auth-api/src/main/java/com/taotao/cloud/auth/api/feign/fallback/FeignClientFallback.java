@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.api.feign.fallback;
 
 import com.taotao.cloud.auth.api.feign.IFeignClientApi;
@@ -30,8 +31,6 @@ import org.springframework.stereotype.Component;
 public class FeignClientFallback implements FallbackFactory<IFeignClientApi> {
     @Override
     public IFeignClientApi create(Throwable throwable) {
-        return new IFeignClientApi() {
-
-        };
+        return new IFeignClientApi() {};
     }
 }

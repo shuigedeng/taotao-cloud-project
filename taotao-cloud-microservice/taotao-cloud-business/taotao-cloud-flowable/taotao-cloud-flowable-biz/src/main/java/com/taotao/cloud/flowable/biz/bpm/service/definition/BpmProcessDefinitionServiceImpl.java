@@ -1,11 +1,33 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.bpm.service.definition;
+
+import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
+import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
+import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.PROCESS_DEFINITION_KEY_NOT_MATCH;
+import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.PROCESS_DEFINITION_NAME_NOT_MATCH;
+import static java.util.Collections.emptyList;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.PageUtils;
-import com.taotao.cloud.flowable.biz.flowable.core.util.FlowableUtils;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.process.BpmProcessDefinitionListReqVO;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.process.BpmProcessDefinitionPageItemRespVO;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.process.BpmProcessDefinitionPageReqVO;
@@ -15,6 +37,10 @@ import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.definition.BpmFormDO;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.definition.BpmProcessDefinitionExtDO;
 import com.taotao.cloud.flowable.biz.bpm.dal.mysql.definition.BpmProcessDefinitionExtMapper;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.dto.BpmProcessDefinitionCreateReqDTO;
+import com.taotao.cloud.flowable.biz.flowable.core.util.FlowableUtils;
+import java.util.*;
+import javax.annotation.Resource;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.BpmnModel;
@@ -27,20 +53,8 @@ import org.flowable.engine.repository.ProcessDefinitionQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
-import java.util.*;
-
-import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.*;
-import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
-import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.PROCESS_DEFINITION_KEY_NOT_MATCH;
-import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.PROCESS_DEFINITION_NAME_NOT_MATCH;
-import static java.util.Collections.emptyList;
-
 /**
- * 流程定义实现
- * 主要进行 Flowable {@link ProcessDefinition} 和 {@link Deployment} 的维护
+ * 流程定义实现 主要进行 Flowable {@link ProcessDefinition} 和 {@link Deployment} 的维护
  *
  * @author yunlongn
  * @author ZJQ
@@ -53,14 +67,11 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
 
     private static final String BPMN_FILE_SUFFIX = ".bpmn";
 
-    @Resource
-    private RepositoryService repositoryService;
+    @Resource private RepositoryService repositoryService;
 
-    @Resource
-    private BpmProcessDefinitionExtMapper processDefinitionMapper;
+    @Resource private BpmProcessDefinitionExtMapper processDefinitionMapper;
 
-    @Resource
-    private BpmFormService formService;
+    @Resource private BpmFormService formService;
 
     @Override
     public ProcessDefinition getProcessDefinition(String id) {
@@ -69,7 +80,10 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
 
     @Override
     public ProcessDefinition getProcessDefinition2(String id) {
-        return repositoryService.createProcessDefinitionQuery().processDefinitionId(id).singleResult();
+        return repositoryService
+                .createProcessDefinitionQuery()
+                .processDefinitionId(id)
+                .singleResult();
     }
 
     @Override
@@ -77,11 +91,15 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
         if (StrUtil.isEmpty(deploymentId)) {
             return null;
         }
-        return repositoryService.createProcessDefinitionQuery().deploymentId(deploymentId).singleResult();
+        return repositoryService
+                .createProcessDefinitionQuery()
+                .deploymentId(deploymentId)
+                .singleResult();
     }
 
     @Override
-    public List<ProcessDefinition> getProcessDefinitionListByDeploymentIds(Set<String> deploymentIds) {
+    public List<ProcessDefinition> getProcessDefinitionListByDeploymentIds(
+            Set<String> deploymentIds) {
         if (CollUtil.isEmpty(deploymentIds)) {
             return emptyList();
         }
@@ -90,7 +108,11 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
 
     @Override
     public ProcessDefinition getActiveProcessDefinition(String key) {
-        return repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).active().singleResult();
+        return repositoryService
+                .createProcessDefinitionQuery()
+                .processDefinitionKey(key)
+                .active()
+                .singleResult();
     }
 
     @Override
@@ -121,28 +143,44 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
     @Override
     public String createProcessDefinition(@Valid BpmProcessDefinitionCreateReqDTO createReqDTO) {
         // 创建 Deployment 部署
-        Deployment deploy = repositoryService.createDeployment()
-                .key(createReqDTO.getKey()).name(createReqDTO.getName()).category(createReqDTO.getCategory())
-                .addBytes(createReqDTO.getKey() + BPMN_FILE_SUFFIX, createReqDTO.getBpmnBytes())
-                .deploy();
+        Deployment deploy =
+                repositoryService
+                        .createDeployment()
+                        .key(createReqDTO.getKey())
+                        .name(createReqDTO.getName())
+                        .category(createReqDTO.getCategory())
+                        .addBytes(
+                                createReqDTO.getKey() + BPMN_FILE_SUFFIX,
+                                createReqDTO.getBpmnBytes())
+                        .deploy();
 
         // 设置 ProcessDefinition 的 category 分类
-        ProcessDefinition definition = repositoryService.createProcessDefinitionQuery()
-                .deploymentId(deploy.getId()).singleResult();
-        repositoryService.setProcessDefinitionCategory(definition.getId(), createReqDTO.getCategory());
+        ProcessDefinition definition =
+                repositoryService
+                        .createProcessDefinitionQuery()
+                        .deploymentId(deploy.getId())
+                        .singleResult();
+        repositoryService.setProcessDefinitionCategory(
+                definition.getId(), createReqDTO.getCategory());
         // 注意 1，ProcessDefinition 的 key 和 name 是通过 BPMN 中的 <bpmn2:process /> 的 id 和 name 决定
         // 注意 2，目前该项目的设计上，需要保证 Model、Deployment、ProcessDefinition 使用相同的 key，保证关联性。
         //          否则，会导致 ProcessDefinition 的分页无法查询到。
         if (!Objects.equals(definition.getKey(), createReqDTO.getKey())) {
-            throw exception(PROCESS_DEFINITION_KEY_NOT_MATCH, createReqDTO.getKey(), definition.getKey());
+            throw exception(
+                    PROCESS_DEFINITION_KEY_NOT_MATCH, createReqDTO.getKey(), definition.getKey());
         }
         if (!Objects.equals(definition.getName(), createReqDTO.getName())) {
-            throw exception(PROCESS_DEFINITION_NAME_NOT_MATCH, createReqDTO.getName(), definition.getName());
+            throw exception(
+                    PROCESS_DEFINITION_NAME_NOT_MATCH,
+                    createReqDTO.getName(),
+                    definition.getName());
         }
 
         // 插入拓展表
-        BpmProcessDefinitionExtDO definitionDO = BpmProcessDefinitionConvert.INSTANCE.convert2(createReqDTO)
-                .setProcessDefinitionId(definition.getId());
+        BpmProcessDefinitionExtDO definitionDO =
+                BpmProcessDefinitionConvert.INSTANCE
+                        .convert2(createReqDTO)
+                        .setProcessDefinitionId(definition.getId());
         processDefinitionMapper.insert(definitionDO);
         return definition.getId();
     }
@@ -181,19 +219,28 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
         if (oldProcessDefinition == null) {
             return false;
         }
-        BpmProcessDefinitionExtDO oldProcessDefinitionExt = getProcessDefinitionExt(oldProcessDefinition.getId());
+        BpmProcessDefinitionExtDO oldProcessDefinitionExt =
+                getProcessDefinitionExt(oldProcessDefinition.getId());
         if (!StrUtil.equals(createReqDTO.getName(), oldProcessDefinition.getName())
-                || !StrUtil.equals(createReqDTO.getDescription(), oldProcessDefinitionExt.getDescription())
-                || !StrUtil.equals(createReqDTO.getCategory(), oldProcessDefinition.getCategory())) {
+                || !StrUtil.equals(
+                        createReqDTO.getDescription(), oldProcessDefinitionExt.getDescription())
+                || !StrUtil.equals(
+                        createReqDTO.getCategory(), oldProcessDefinition.getCategory())) {
             return false;
         }
         // 校验 form 信息是否更新
         if (!ObjectUtil.equal(createReqDTO.getFormType(), oldProcessDefinitionExt.getFormType())
                 || !ObjectUtil.equal(createReqDTO.getFormId(), oldProcessDefinitionExt.getFormId())
-                || !ObjectUtil.equal(createReqDTO.getFormConf(), oldProcessDefinitionExt.getFormConf())
-                || !ObjectUtil.equal(createReqDTO.getFormFields(), oldProcessDefinitionExt.getFormFields())
-                || !ObjectUtil.equal(createReqDTO.getFormCustomCreatePath(), oldProcessDefinitionExt.getFormCustomCreatePath())
-                || !ObjectUtil.equal(createReqDTO.getFormCustomViewPath(), oldProcessDefinitionExt.getFormCustomViewPath())) {
+                || !ObjectUtil.equal(
+                        createReqDTO.getFormConf(), oldProcessDefinitionExt.getFormConf())
+                || !ObjectUtil.equal(
+                        createReqDTO.getFormFields(), oldProcessDefinitionExt.getFormFields())
+                || !ObjectUtil.equal(
+                        createReqDTO.getFormCustomCreatePath(),
+                        oldProcessDefinitionExt.getFormCustomCreatePath())
+                || !ObjectUtil.equal(
+                        createReqDTO.getFormCustomViewPath(),
+                        oldProcessDefinitionExt.getFormCustomViewPath())) {
             return false;
         }
         // 校验 BPMN XML 信息
@@ -213,7 +260,7 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
      * @param bpmnBytes 原始的 BPMN XML 字节数组
      * @return BPMN Model
      */
-    private  BpmnModel buildBpmnModel(byte[] bpmnBytes) {
+    private BpmnModel buildBpmnModel(byte[] bpmnBytes) {
         // 转换成 BpmnModel 对象
         BpmnXMLConverter converter = new BpmnXMLConverter();
         return converter.convertToBpmnModel(new BytesStreamSource(bpmnBytes), true, true);
@@ -225,12 +272,15 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
     }
 
     @Override
-    public List<BpmProcessDefinitionRespVO> getProcessDefinitionList(BpmProcessDefinitionListReqVO listReqVO) {
+    public List<BpmProcessDefinitionRespVO> getProcessDefinitionList(
+            BpmProcessDefinitionListReqVO listReqVO) {
         // 拼接查询条件
         ProcessDefinitionQuery definitionQuery = repositoryService.createProcessDefinitionQuery();
-        if (Objects.equals(SuspensionState.SUSPENDED.getStateCode(), listReqVO.getSuspensionState())) {
+        if (Objects.equals(
+                SuspensionState.SUSPENDED.getStateCode(), listReqVO.getSuspensionState())) {
             definitionQuery.suspended();
-        } else if (Objects.equals(SuspensionState.ACTIVE.getStateCode(), listReqVO.getSuspensionState())) {
+        } else if (Objects.equals(
+                SuspensionState.ACTIVE.getStateCode(), listReqVO.getSuspensionState())) {
             definitionQuery.active();
         }
         // 执行查询
@@ -240,39 +290,46 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
         }
 
         // 获得 BpmProcessDefinitionDO Map
-        List<BpmProcessDefinitionExtDO> processDefinitionDOs = processDefinitionMapper.selectListByProcessDefinitionIds(
-                convertList(processDefinitions, ProcessDefinition::getId));
-        Map<String, BpmProcessDefinitionExtDO> processDefinitionDOMap = convertMap(processDefinitionDOs,
-                BpmProcessDefinitionExtDO::getProcessDefinitionId);
+        List<BpmProcessDefinitionExtDO> processDefinitionDOs =
+                processDefinitionMapper.selectListByProcessDefinitionIds(
+                        convertList(processDefinitions, ProcessDefinition::getId));
+        Map<String, BpmProcessDefinitionExtDO> processDefinitionDOMap =
+                convertMap(processDefinitionDOs, BpmProcessDefinitionExtDO::getProcessDefinitionId);
         // 执行查询，并返回
-        return BpmProcessDefinitionConvert.INSTANCE.convertList3(processDefinitions, processDefinitionDOMap);
+        return BpmProcessDefinitionConvert.INSTANCE.convertList3(
+                processDefinitions, processDefinitionDOMap);
     }
 
     @Override
     public PageResult<BpmProcessDefinitionPageItemRespVO> getProcessDefinitionPage(
-		    BpmProcessDefinitionPageReqVO pageVO) {
+            BpmProcessDefinitionPageReqVO pageVO) {
         ProcessDefinitionQuery definitionQuery = repositoryService.createProcessDefinitionQuery();
         if (StrUtil.isNotBlank(pageVO.getKey())) {
             definitionQuery.processDefinitionKey(pageVO.getKey());
         }
 
         // 执行查询
-        List<ProcessDefinition> processDefinitions = definitionQuery.orderByProcessDefinitionVersion().desc()
-                .listPage(PageUtils.getStart(pageVO), pageVO.getPageSize());
+        List<ProcessDefinition> processDefinitions =
+                definitionQuery
+                        .orderByProcessDefinitionVersion()
+                        .desc()
+                        .listPage(PageUtils.getStart(pageVO), pageVO.getPageSize());
 
         if (CollUtil.isEmpty(processDefinitions)) {
             return new PageResult<>(emptyList(), definitionQuery.count());
         }
         // 获得 Deployment Map
         Set<String> deploymentIds = new HashSet<>();
-        processDefinitions.forEach(definition -> addIfNotNull(deploymentIds, definition.getDeploymentId()));
+        processDefinitions.forEach(
+                definition -> addIfNotNull(deploymentIds, definition.getDeploymentId()));
         Map<String, Deployment> deploymentMap = getDeploymentMap(deploymentIds);
 
         // 获得 BpmProcessDefinitionDO Map
-        List<BpmProcessDefinitionExtDO> processDefinitionDOs = processDefinitionMapper.selectListByProcessDefinitionIds(
-                convertList(processDefinitions, ProcessDefinition::getId));
-        Map<String, BpmProcessDefinitionExtDO> processDefinitionDOMap = convertMap(processDefinitionDOs,
-                BpmProcessDefinitionExtDO::getProcessDefinitionId);
+        List<BpmProcessDefinitionExtDO> processDefinitionDOs =
+                processDefinitionMapper.selectListByProcessDefinitionIds(
+                        convertList(processDefinitions, ProcessDefinition::getId));
+        Map<String, BpmProcessDefinitionExtDO> processDefinitionDOMap =
+                convertMap(processDefinitionDOs, BpmProcessDefinitionExtDO::getProcessDefinitionId);
 
         // 获得 Form Map
         Set<Long> formIds = convertSet(processDefinitionDOs, BpmProcessDefinitionExtDO::getFormId);
@@ -280,8 +337,9 @@ public class BpmProcessDefinitionServiceImpl implements BpmProcessDefinitionServ
 
         // 拼接结果
         long definitionCount = definitionQuery.count();
-        return new PageResult<>(BpmProcessDefinitionConvert.INSTANCE.convertList(processDefinitions, deploymentMap,
-                processDefinitionDOMap, formMap), definitionCount);
+        return new PageResult<>(
+                BpmProcessDefinitionConvert.INSTANCE.convertList(
+                        processDefinitions, deploymentMap, processDefinitionDOMap, formMap),
+                definitionCount);
     }
-
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.im.biz.platform.common.config;
 
 import cn.hutool.core.date.DatePattern;
@@ -6,6 +22,9 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import java.io.IOException;
+import java.util.Date;
+import java.util.TimeZone;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -13,13 +32,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.TimeZone;
-
-/**
- * 程序注解配置
- */
+/** 程序注解配置 */
 @Configuration
 // 表示通过aop框架暴露该代理对象,AopContext能够访问
 @EnableAspectJAutoProxy(exposeProxy = true)
@@ -29,9 +42,7 @@ import java.util.TimeZone;
 @ComponentScan(basePackages = {"cn.hutool.extra.spring"})
 public class ApplicationConfig {
 
-    /**
-     * 时区配置
-     */
+    /** 时区配置 */
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization() {
         return builder -> builder.timeZone(TimeZone.getDefault());
@@ -44,7 +55,8 @@ public class ApplicationConfig {
      */
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizer() {
-        return builder -> builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+        return builder ->
+                builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
     }
 
     @Bean
@@ -55,27 +67,38 @@ public class ApplicationConfig {
         // 忽略多余的字段不参与序列化
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         // 忽略null属性字段
-//        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        //        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         // null属性字段转""
-        objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
-            @Override
-            public void serialize(Object arg0, JsonGenerator arg1, SerializerProvider arg2) throws IOException {
-                arg1.writeString("");
-            }
-        });
+        objectMapper
+                .getSerializerProvider()
+                .setNullValueSerializer(
+                        new JsonSerializer<Object>() {
+                            @Override
+                            public void serialize(
+                                    Object arg0, JsonGenerator arg1, SerializerProvider arg2)
+                                    throws IOException {
+                                arg1.writeString("");
+                            }
+                        });
         SimpleModule simpleModule = new SimpleModule();
         // 格式化Long
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         // 格式化时间
-        simpleModule.addSerializer(Date.class, new JsonSerializer<Date>() {
-            @Override
-            public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-                jsonGenerator.writeString(DateUtil.format(date, DatePattern.NORM_DATETIME_FORMAT));
-            }
-        });
+        simpleModule.addSerializer(
+                Date.class,
+                new JsonSerializer<Date>() {
+                    @Override
+                    public void serialize(
+                            Date date,
+                            JsonGenerator jsonGenerator,
+                            SerializerProvider serializerProvider)
+                            throws IOException {
+                        jsonGenerator.writeString(
+                                DateUtil.format(date, DatePattern.NORM_DATETIME_FORMAT));
+                    }
+                });
         // 注册 module
         objectMapper.registerModule(simpleModule);
         return objectMapper;
     }
-
 }

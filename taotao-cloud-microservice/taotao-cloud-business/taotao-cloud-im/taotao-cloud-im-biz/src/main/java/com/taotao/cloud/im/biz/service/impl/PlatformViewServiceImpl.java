@@ -1,34 +1,51 @@
-package com.taotao.cloud.im.biz.service.impl;//package com.taotao.cloud.wechat.biz.service.impl;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.im.biz.service.impl; // package com.taotao.cloud.wechat.biz.service.impl;
 //
-//import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-//import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-//import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-//import com.taotao.cloud.common.enums.CachePrefix;
-//import com.taotao.cloud.common.enums.ClientTypeEnum;
-//import com.taotao.cloud.common.enums.ResultEnum;
-//import com.taotao.cloud.common.exception.BusinessException;
-//import com.taotao.cloud.common.utils.number.CurrencyUtil;
-//import com.taotao.cloud.wechat.biz.mapper.PlatformViewMapper;
-//import com.taotao.cloud.wechat.biz.model.entity.PlatformViewData;
-//import com.taotao.cloud.wechat.biz.service.MemberStatisticsService;
-//import com.taotao.cloud.wechat.biz.service.PlatformViewService;
-//import com.taotao.cloud.wechat.biz.util.StatisticsSuffix;
-//import org.apache.commons.lang3.StringUtils;
-//import org.springframework.beans.BeanUtils;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
+// import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+// import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+// import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+// import com.taotao.cloud.common.enums.CachePrefix;
+// import com.taotao.cloud.common.enums.ClientTypeEnum;
+// import com.taotao.cloud.common.enums.ResultEnum;
+// import com.taotao.cloud.common.exception.BusinessException;
+// import com.taotao.cloud.common.utils.number.CurrencyUtil;
+// import com.taotao.cloud.wechat.biz.mapper.PlatformViewMapper;
+// import com.taotao.cloud.wechat.biz.model.entity.PlatformViewData;
+// import com.taotao.cloud.wechat.biz.service.MemberStatisticsService;
+// import com.taotao.cloud.wechat.biz.service.PlatformViewService;
+// import com.taotao.cloud.wechat.biz.util.StatisticsSuffix;
+// import org.apache.commons.lang3.StringUtils;
+// import org.springframework.beans.BeanUtils;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.stereotype.Service;
 //
-//import jakarta.annotation.Resource;
-//import java.util.ArrayList;
-//import java.util.Calendar;
-//import java.util.Date;
-//import java.util.List;
+// import jakarta.annotation.Resource;
+// import java.util.ArrayList;
+// import java.util.Calendar;
+// import java.util.Date;
+// import java.util.List;
 //
-///**
+/// **
 // * 流量统计
 // */
-//@Service
-//public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, PlatformViewData> implements
+// @Service
+// public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, PlatformViewData>
+// implements
 //	PlatformViewService {
 //
 //    /**
@@ -60,8 +77,10 @@ package com.taotao.cloud.im.biz.service.impl;//package com.taotao.cloud.wechat.b
 //            return (Long) object;
 //        }
 //        //这里统计的是有效的accessToken ，如果需要数据精确，需要调整accessToken的有效时间，开发人员建议2小时误差较为合适
-//        Long num = Long.valueOf(cache.keys(CachePrefix.ACCESS_TOKEN.getPrefix(UserEnums.MEMBER) + "*").size());
-//        cache.put(CachePrefix.ONLINE_NUM.getPrefix(), num, statisticsProperties.getCurrentOnlineUpdate().longValue());
+//        Long num = Long.valueOf(cache.keys(CachePrefix.ACCESS_TOKEN.getPrefix(UserEnums.MEMBER) +
+// "*").size());
+//        cache.put(CachePrefix.ONLINE_NUM.getPrefix(), num,
+// statisticsProperties.getCurrentOnlineUpdate().longValue());
 //        return num;
 //    }
 //
@@ -118,7 +137,8 @@ package com.taotao.cloud.im.biz.service.impl;//package com.taotao.cloud.wechat.b
 //        calendar.set(Calendar.SECOND, 0);
 //        calendar.set(Calendar.MILLISECOND, 0);
 //
-//        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - statisticsProperties.getOnlineMember() - 1);
+//        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) -
+// statisticsProperties.getOnlineMember() - 1);
 //        //循环填充数据
 //        for (int i = 0; i < statisticsProperties.getOnlineMember(); i++) {
 //            calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) + 1);
@@ -153,23 +173,27 @@ package com.taotao.cloud.im.biz.service.impl;//package com.taotao.cloud.wechat.b
 //                    //查询 平台流量
 //                    if (StringUtils.isEmpty(queryParam.getStoreId())) {
 //                        //设置PV UV属性
-//                        String pv = cache.getString(CachePrefix.PV.getPrefix() + StatisticsSuffix.suffix());
+//                        String pv = cache.getString(CachePrefix.PV.getPrefix() +
+// StatisticsSuffix.suffix());
 //                        if (pv == null) {
 //                            pv = "0";
 //                        }
 //                        today.setPvNum(Long.valueOf(pv));
-//                        today.setUvNum(cache.counter(CachePrefix.UV.getPrefix() + StatisticsSuffix.suffix()).longValue());
+//                        today.setUvNum(cache.counter(CachePrefix.UV.getPrefix() +
+// StatisticsSuffix.suffix()).longValue());
 //                    }
 //                    //店铺流量
 //                    else {
 //                        //设置PV UV属性
 //
-//                        String pv = cache.getString(CachePrefix.STORE_PV.getPrefix() + StatisticsSuffix.suffix(queryParam.getStoreId()));
+//                        String pv = cache.getString(CachePrefix.STORE_PV.getPrefix() +
+// StatisticsSuffix.suffix(queryParam.getStoreId()));
 //                        if (pv == null) {
 //                            pv = "0";
 //                        }
 //                        today.setPvNum(Long.valueOf(pv));
-//                        today.setUvNum(cache.counter(CachePrefix.STORE_UV.getPrefix() + StatisticsSuffix.suffix(queryParam.getStoreId())).longValue());
+//                        today.setUvNum(cache.counter(CachePrefix.STORE_UV.getPrefix() +
+// StatisticsSuffix.suffix(queryParam.getStoreId())).longValue());
 //                    }
 //                    today.setDate(new Date());
 //                    result.add(today);
@@ -205,7 +229,8 @@ package com.taotao.cloud.im.biz.service.impl;//package com.taotao.cloud.wechat.b
 //        if (startTime != null) {
 //            LambdaQueryWrapper<PlatformViewData> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 //            lambdaQueryWrapper.between(PlatformViewData::getDate, startTime, endTime);
-//            lambdaQueryWrapper.eq(PlatformViewData::getStoreId, StringUtils.isEmpty(queryParam.getStoreId()) ?
+//            lambdaQueryWrapper.eq(PlatformViewData::getStoreId,
+// StringUtils.isEmpty(queryParam.getStoreId()) ?
 //                    "-1" : queryParam.getStoreId());
 //            List<PlatformViewData> dataList = this.list(lambdaQueryWrapper);
 //            result = builderVOS(startTime, endTime, dataList);
@@ -220,14 +245,17 @@ package com.taotao.cloud.im.biz.service.impl;//package com.taotao.cloud.wechat.b
 //        Calendar calendar = Calendar.getInstance();
 //
 //
-//        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+//        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+// calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
 //        calendar.set(Calendar.MILLISECOND, 0);
 //        //如果是今天的统计，则从redis 中拿，否则从数据库中拿
 //        if (dates[0].equals(calendar.getTime())) {
 //            if (StringUtils.isNotEmpty(queryParam.getStoreId())) {
-//                return cache.counter(CachePrefix.UV.getPrefix() + StatisticsSuffix.suffix(queryParam.getStoreId())).intValue();
+//                return cache.counter(CachePrefix.UV.getPrefix() +
+// StatisticsSuffix.suffix(queryParam.getStoreId())).intValue();
 //            }
-//            return cache.counter(CachePrefix.UV.getPrefix() + StatisticsSuffix.suffix()).intValue();
+//            return cache.counter(CachePrefix.UV.getPrefix() +
+// StatisticsSuffix.suffix()).intValue();
 //        } else {
 //            QueryWrapper queryWrapper = new QueryWrapper();
 //            queryWrapper.between("date", dates[0], dates[1]);
@@ -249,7 +277,8 @@ package com.taotao.cloud.im.biz.service.impl;//package com.taotao.cloud.wechat.b
 //     * @param dataList
 //     * @return
 //     */
-//    private List<PlatformViewVO> builderVOS(Date startDate, Date endDate, List<PlatformViewData> dataList) {
+//    private List<PlatformViewVO> builderVOS(Date startDate, Date endDate, List<PlatformViewData>
+// dataList) {
 //
 //        Calendar startTime = Calendar.getInstance();
 //        startTime.setTime(startDate);
@@ -281,4 +310,4 @@ package com.taotao.cloud.im.biz.service.impl;//package com.taotao.cloud.wechat.b
 //
 //    }
 //
-//}
+// }

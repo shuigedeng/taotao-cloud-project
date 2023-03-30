@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2019 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.controller;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
@@ -52,66 +53,63 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth/oauth2")
 public class Oauth2Controller {
 
-	@Autowired
-	private RedisRepository redisRepository;
+    @Autowired private RedisRepository redisRepository;
 
-	/**
-	 * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
-	 *
-	 * @param user OAuth2用户信息
-	 * @return OAuth2用户信息
-	 */
-	@Operation(summary = "获取当前认证的OAuth2用户信息", description = "获取当前认证的OAuth2用户信息")
-	// @RequestLogger
-	@PreAuthorize("hasAuthority('express:company:info:id')")
-	@GetMapping("/user")
-	public Result<OAuth2User> user(@AuthenticationPrincipal OAuth2User user) {
-		return Result.success(user);
-	}
+    /**
+     * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
+     *
+     * @param user OAuth2用户信息
+     * @return OAuth2用户信息
+     */
+    @Operation(summary = "获取当前认证的OAuth2用户信息", description = "获取当前认证的OAuth2用户信息")
+    // @RequestLogger
+    @PreAuthorize("hasAuthority('express:company:info:id')")
+    @GetMapping("/user")
+    public Result<OAuth2User> user(@AuthenticationPrincipal OAuth2User user) {
+        return Result.success(user);
+    }
 
-	/**
-	 * 获取当前认证的OAuth2客户端信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
-	 *
-	 * @param oAuth2AuthorizedClient OAuth2客户端信息
-	 * @return OAuth2客户端信息
-	 */
-	@Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
-	// @RequestLogger
-	@PreAuthorize("hasAuthority('express:company:info:id')")
-	@GetMapping("/client")
-	public Result<OAuth2AuthorizedClient> user(
-			@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
-		return Result.success(oAuth2AuthorizedClient);
-	}
+    /**
+     * 获取当前认证的OAuth2客户端信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
+     *
+     * @param oAuth2AuthorizedClient OAuth2客户端信息
+     * @return OAuth2客户端信息
+     */
+    @Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
+    // @RequestLogger
+    @PreAuthorize("hasAuthority('express:company:info:id')")
+    @GetMapping("/client")
+    public Result<OAuth2AuthorizedClient> user(
+            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+        return Result.success(oAuth2AuthorizedClient);
+    }
 
-	@Operation(summary = "退出系统", description = "退出系统")
-	// @RequestLogger
-	@PostMapping("/logout")
-	public Result<Boolean> logout() {
-		Authentication authentication = SecurityUtils.getAuthentication();
-		if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-			Jwt jwt = jwtAuthenticationToken.getToken();
-			String kid = (String) jwt.getHeaders().get("kid");
-			try {
-				long epochSecond = jwt.getExpiresAt().getEpochSecond();
-				long nowTime = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).getEpochSecond();
+    @Operation(summary = "退出系统", description = "退出系统")
+    // @RequestLogger
+    @PostMapping("/logout")
+    public Result<Boolean> logout() {
+        Authentication authentication = SecurityUtils.getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            Jwt jwt = jwtAuthenticationToken.getToken();
+            String kid = (String) jwt.getHeaders().get("kid");
+            try {
+                long epochSecond = jwt.getExpiresAt().getEpochSecond();
+                long nowTime = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).getEpochSecond();
 
-				// 标识jwt令牌失效
-				redisRepository.setEx(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid, "",
-						epochSecond - nowTime);
+                // 标识jwt令牌失效
+                redisRepository.setEx(
+                        RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid, "", epochSecond - nowTime);
 
-				// 添加用户退出日志
+                // 添加用户退出日志
 
-				// 删除用户在线信息
+                // 删除用户在线信息
 
-				return Result.success(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+                return Result.success(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-		throw new BaseException("退出失败");
-	}
-
-
+        throw new BaseException("退出失败");
+    }
 }

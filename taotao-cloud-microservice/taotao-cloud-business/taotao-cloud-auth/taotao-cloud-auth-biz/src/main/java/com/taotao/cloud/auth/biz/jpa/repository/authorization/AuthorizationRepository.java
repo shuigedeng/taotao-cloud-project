@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.jpa.repository.authorization;
 
 import com.taotao.cloud.auth.biz.jpa.entity.authorization.Authorization;
@@ -25,19 +26,20 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthorizationRepository extends JpaRepository<Authorization, String> {
 
-	Optional<Authorization> findByState(String state);
+    Optional<Authorization> findByState(String state);
 
-	Optional<Authorization> findByAuthorizationCodeValue(String authorizationCode);
+    Optional<Authorization> findByAuthorizationCodeValue(String authorizationCode);
 
-	Optional<Authorization> findByAccessTokenValue(String accessToken);
+    Optional<Authorization> findByAccessTokenValue(String accessToken);
 
-	Optional<Authorization> findByRefreshTokenValue(String refreshToken);
+    Optional<Authorization> findByRefreshTokenValue(String refreshToken);
 
-	@Query("select a from Authorization a where a.state = :token" +
-		" or a.authorizationCodeValue = :token" +
-		" or a.accessTokenValue = :token" +
-		" or a.refreshTokenValue = :token"
-	)
-	Optional<Authorization> findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(
-		@Param("token") String token);
+    @Query(
+            "select a from Authorization a where a.state = :token"
+                    + " or a.authorizationCodeValue = :token"
+                    + " or a.accessTokenValue = :token"
+                    + " or a.refreshTokenValue = :token")
+    Optional<Authorization>
+            findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(
+                    @Param("token") String token);
 }

@@ -1,22 +1,34 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.im.biz.platform.common.utils.redis;
 
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.*;
 import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
-
-/**
- * GeoHash工具类
- */
+/** GeoHash工具类 */
 @Component
 public class GeoHashUtils {
 
-    @Autowired
-    private RedisTemplate redisTemplate;
+    @Autowired private RedisTemplate redisTemplate;
 
     /***
      * 将指定的地理空间位置（纬度、经度、名称）添加到指定的key中。
@@ -27,8 +39,10 @@ public class GeoHashUtils {
      * @return
      */
     public Long add(String key, double longitude, double latitude, String name) {
-//        Long addedNum = redisTemplate.opsForGeo().add("city", new Point(121.47, 31.23), "上海");
-//        Long addedNum = redisTemplate.opsForGeo().add("city", new Point(113.27, 23.13), "广州");
+        //        Long addedNum = redisTemplate.opsForGeo().add("city", new Point(121.47, 31.23),
+        // "上海");
+        //        Long addedNum = redisTemplate.opsForGeo().add("city", new Point(113.27, 23.13),
+        // "广州");
         return redisTemplate.opsForGeo().add(key, new Point(longitude, latitude), name);
     }
 
@@ -68,7 +82,7 @@ public class GeoHashUtils {
      * @param name  名称
      */
     public List<Point> get(String key, String... name) {
-        List<Point> points = redisTemplate.opsForGeo().position(key, name);//params: key, 地方名称...
+        List<Point> points = redisTemplate.opsForGeo().position(key, name); // params: key, 地方名称...
         return points;
     }
 
@@ -90,8 +104,10 @@ public class GeoHashUtils {
      * @return
      */
     public Distance dist(String key, String name1, String name2) {
-        Distance distance = redisTemplate.opsForGeo()
-                .distance(key, name1, name2, RedisGeoCommands.DistanceUnit.KILOMETERS);
+        Distance distance =
+                redisTemplate
+                        .opsForGeo()
+                        .distance(key, name1, name2, RedisGeoCommands.DistanceUnit.KILOMETERS);
         return distance;
     }
 
@@ -105,7 +121,12 @@ public class GeoHashUtils {
      */
     public List<GeoResult<GeoVo>> radius(String key, String name, Integer distance, Integer count) {
         Distance distances = new Distance(distance, Metrics.KILOMETERS);
-        RedisGeoCommands.GeoRadiusCommandArgs args = RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs().includeDistance().includeCoordinates().sortAscending().limit(count);
+        RedisGeoCommands.GeoRadiusCommandArgs args =
+                RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs()
+                        .includeDistance()
+                        .includeCoordinates()
+                        .sortAscending()
+                        .limit(count);
         return redisTemplate.opsForGeo().radius(key, name, distances, args).getContent();
     }
 
@@ -118,9 +139,17 @@ public class GeoHashUtils {
      * @param count 人数
      * @return
      */
-    public List<GeoResult<GeoVo>> radius(String key, double longitude, double latitude, Integer distance, Integer count) {
-        Circle circle = new Circle(new Point(longitude, latitude), new Distance(distance, Metrics.KILOMETERS));
-        RedisGeoCommands.GeoRadiusCommandArgs args = RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs().includeDistance().includeCoordinates().sortAscending().limit(count);
+    public List<GeoResult<GeoVo>> radius(
+            String key, double longitude, double latitude, Integer distance, Integer count) {
+        Circle circle =
+                new Circle(
+                        new Point(longitude, latitude), new Distance(distance, Metrics.KILOMETERS));
+        RedisGeoCommands.GeoRadiusCommandArgs args =
+                RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs()
+                        .includeDistance()
+                        .includeCoordinates()
+                        .sortAscending()
+                        .limit(count);
         return redisTemplate.opsForGeo().radius(key, circle, args).getContent();
     }
 
@@ -143,6 +172,4 @@ public class GeoHashUtils {
         List<String> results = redisTemplate.opsForGeo().hash(key, nameList.toArray());
         return results;
     }
-
 }
-

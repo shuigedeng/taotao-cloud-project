@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.bpm.service.definition;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
@@ -8,14 +24,14 @@ import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.process.
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.process.BpmProcessDefinitionRespVO;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.definition.BpmProcessDefinitionExtDO;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.dto.BpmProcessDefinitionCreateReqDTO;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import javax.validation.Valid;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.repository.ProcessDefinition;
 
-import javax.validation.Valid;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 /**
  * Flowable流程定义接口
  *
@@ -32,7 +48,7 @@ public interface BpmProcessDefinitionService {
      * @return 流程定义 Page
      */
     PageResult<BpmProcessDefinitionPageItemRespVO> getProcessDefinitionPage(
-		    BpmProcessDefinitionPageReqVO pageReqVO);
+            BpmProcessDefinitionPageReqVO pageReqVO);
 
     /**
      * 获得流程定义列表
@@ -40,7 +56,8 @@ public interface BpmProcessDefinitionService {
      * @param listReqVO 列表入参
      * @return 流程定义列表
      */
-    List<BpmProcessDefinitionRespVO> getProcessDefinitionList(BpmProcessDefinitionListReqVO listReqVO);
+    List<BpmProcessDefinitionRespVO> getProcessDefinitionList(
+            BpmProcessDefinitionListReqVO listReqVO);
 
     /**
      * 创建流程定义
@@ -93,7 +110,7 @@ public interface BpmProcessDefinitionService {
     /**
      * 获得编号对应的 ProcessDefinition
      *
-     * 相比 {@link #getProcessDefinition(String)} 方法，category 的取值是正确
+     * <p>相比 {@link #getProcessDefinition(String)} 方法，category 的取值是正确
      *
      * @param id 编号
      * @return 流程定义

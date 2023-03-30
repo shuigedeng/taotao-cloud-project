@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.utils;
 
 import java.security.AlgorithmParameters;
@@ -33,29 +34,29 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  */
 public class WxUtils {
 
-	public static String decrypt(String sessionKey, String iv, String encryptData) {
+    public static String decrypt(String sessionKey, String iv, String encryptData) {
 
-		String decryptString = "";
-		//解码经过 base64 编码的字符串    
-		byte[] sessionKeyByte = Base64.getDecoder().decode(sessionKey);
-		byte[] ivByte = Base64.getDecoder().decode(iv);
-		byte[] encryptDataByte = Base64.getDecoder().decode(encryptData);
+        String decryptString = "";
+        // 解码经过 base64 编码的字符串
+        byte[] sessionKeyByte = Base64.getDecoder().decode(sessionKey);
+        byte[] ivByte = Base64.getDecoder().decode(iv);
+        byte[] encryptDataByte = Base64.getDecoder().decode(encryptData);
 
-		try {
-			Security.addProvider(new BouncyCastleProvider());
-			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
-			//得到密钥
-			Key key = new SecretKeySpec(sessionKeyByte, "AES");
-			//AES 加密算法
-			AlgorithmParameters algorithmParameters = AlgorithmParameters.getInstance("AES");
-			algorithmParameters.init(new IvParameterSpec(ivByte));
-			cipher.init(Cipher.DECRYPT_MODE, key, algorithmParameters);
-			byte[] bytes = cipher.doFinal(encryptDataByte);
-			decryptString = new String(bytes);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return decryptString;
-	}
+        try {
+            Security.addProvider(new BouncyCastleProvider());
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
+            // 得到密钥
+            Key key = new SecretKeySpec(sessionKeyByte, "AES");
+            // AES 加密算法
+            AlgorithmParameters algorithmParameters = AlgorithmParameters.getInstance("AES");
+            algorithmParameters.init(new IvParameterSpec(ivByte));
+            cipher.init(Cipher.DECRYPT_MODE, key, algorithmParameters);
+            byte[] bytes = cipher.doFinal(encryptDataByte);
+            decryptString = new String(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return decryptString;
+    }
 }

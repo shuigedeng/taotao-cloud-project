@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.customer.api.dubbo.request;
 
 import java.io.Serializable;
@@ -35,71 +36,38 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DubboChatbotQueryRequest implements Serializable {
 
-	private static final long serialVersionUID = 5126530068827085130L;
+    private static final long serialVersionUID = 5126530068827085130L;
 
-	/**
-	 * id
-	 */
-	private Long id;
-	/**
-	 * 菜单名称
-	 */
-	private String name;
-	/**
-	 * 菜单类型 1：目录 2：菜单 3：按钮
-	 */
-	private int type;
-	/**
-	 * 权限标识
-	 */
-	private String perms;
-	/**
-	 * 前端path / 即跳转路由
-	 */
-	private String path;
-	/**
-	 * 菜单组件
-	 */
-	private String component;
-	/**
-	 * 父菜单ID
-	 */
-	private long parentId;
-	/**
-	 * 图标
-	 */
-	private String icon;
-	/**
-	 * 是否缓存页面: 0:否 1:是 (默认值0)
-	 */
-	private boolean keepAlive;
-	/**
-	 * 是否隐藏路由菜单: 0否,1是（默认值0）
-	 */
-	private boolean hidden;
-	/**
-	 * 聚合路由 0否,1是（默认值0）
-	 */
-	private boolean alwaysShow;
-	/**
-	 * 重定向
-	 */
-	private String redirect;
-	/**
-	 * 是否为外链 0否,1是（默认值0）
-	 */
-	private boolean isFrame;
-	/**
-	 * 排序值
-	 */
-	private int sortNum;
-	/**
-	 * 创建时间
-	 */
-	private LocalDateTime createTime;
-	/**
-	 * 最后修改时间
-	 */
-	private LocalDateTime lastModifiedTime;
+    /** id */
+    private Long id;
+    /** 菜单名称 */
+    private String name;
+    /** 菜单类型 1：目录 2：菜单 3：按钮 */
+    private int type;
+    /** 权限标识 */
+    private String perms;
+    /** 前端path / 即跳转路由 */
+    private String path;
+    /** 菜单组件 */
+    private String component;
+    /** 父菜单ID */
+    private long parentId;
+    /** 图标 */
+    private String icon;
+    /** 是否缓存页面: 0:否 1:是 (默认值0) */
+    private boolean keepAlive;
+    /** 是否隐藏路由菜单: 0否,1是（默认值0） */
+    private boolean hidden;
+    /** 聚合路由 0否,1是（默认值0） */
+    private boolean alwaysShow;
+    /** 重定向 */
+    private String redirect;
+    /** 是否为外链 0否,1是（默认值0） */
+    private boolean isFrame;
+    /** 排序值 */
+    private int sortNum;
+    /** 创建时间 */
+    private LocalDateTime createTime;
+    /** 最后修改时间 */
+    private LocalDateTime lastModifiedTime;
 }
-

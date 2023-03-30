@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.bpm.framework.flowable.config;
 
 import cn.hutool.core.collection.ListUtil;
@@ -21,13 +37,13 @@ public class BpmFlowableConfiguration {
     /**
      * BPM 模块的 ProcessEngineConfigurationConfigurer 实现类：
      *
-     * 1. 设置各种监听器
-     * 2. 设置自定义的 ActivityBehaviorFactory 实现
+     * <p>1. 设置各种监听器 2. 设置自定义的 ActivityBehaviorFactory 实现
      */
     @Bean
-    public EngineConfigurationConfigurer<SpringProcessEngineConfiguration> bpmProcessEngineConfigurationConfigurer(
-            ObjectProvider<FlowableEventListener> listeners,
-            BpmActivityBehaviorFactory bpmActivityBehaviorFactory) {
+    public EngineConfigurationConfigurer<SpringProcessEngineConfiguration>
+            bpmProcessEngineConfigurationConfigurer(
+                    ObjectProvider<FlowableEventListener> listeners,
+                    BpmActivityBehaviorFactory bpmActivityBehaviorFactory) {
         return configuration -> {
             // 注册监听器，例如说 BpmActivityEventListener
             configuration.setEventListeners(ListUtil.toList(listeners.iterator()));
@@ -37,10 +53,10 @@ public class BpmFlowableConfiguration {
     }
 
     @Bean
-    public BpmActivityBehaviorFactory bpmActivityBehaviorFactory(BpmTaskAssignRuleService taskRuleService) {
+    public BpmActivityBehaviorFactory bpmActivityBehaviorFactory(
+            BpmTaskAssignRuleService taskRuleService) {
         BpmActivityBehaviorFactory bpmActivityBehaviorFactory = new BpmActivityBehaviorFactory();
         bpmActivityBehaviorFactory.setBpmTaskRuleService(taskRuleService);
         return bpmActivityBehaviorFactory;
     }
-
 }

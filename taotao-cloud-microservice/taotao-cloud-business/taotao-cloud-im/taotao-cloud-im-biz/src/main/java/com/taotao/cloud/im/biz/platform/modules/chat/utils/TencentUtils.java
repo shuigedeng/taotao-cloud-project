@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.im.biz.platform.modules.chat.utils;
 
 import cn.hutool.core.util.NumberUtil;
@@ -17,14 +33,10 @@ import com.tencentcloudapi.tmt.v20180321.models.SpeechTranslateResponse;
 import com.tencentcloudapi.tmt.v20180321.models.TextTranslateRequest;
 import com.tencentcloudapi.tmt.v20180321.models.TextTranslateResponse;
 
-/**
- * 腾讯工具类
- */
+/** 腾讯工具类 */
 public class TencentUtils {
 
-    /**
-     * 腾讯翻译
-     */
+    /** 腾讯翻译 */
     public static String translation(TencentConfig tencentConfig, String content) {
         String target = "zh";
         String source = "auto";
@@ -63,12 +75,11 @@ public class TencentUtils {
         return builder.toString();
     }
 
-    /**
-     * 图灵机器人调用
-     */
+    /** 图灵机器人调用 */
     public static String turing(TencentConfig tencentConfig, Long userId, String content) {
         try {
-            Credential cred = new Credential(tencentConfig.getAppKey(), tencentConfig.getAppSecret());
+            Credential cred =
+                    new Credential(tencentConfig.getAppKey(), tencentConfig.getAppSecret());
             // 实例化一个http选项，可选的，没有特殊需求可以跳过
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.setEndpoint("nlp.tencentcloudapi.com");
@@ -90,12 +101,11 @@ public class TencentUtils {
         }
     }
 
-    /**
-     * 语音识别
-     */
+    /** 语音识别 */
     public static String audio2Text(TencentConfig tencentConfig, String content) {
         try {
-            Credential cred = new Credential(tencentConfig.getAppKey(), tencentConfig.getAppSecret());
+            Credential cred =
+                    new Credential(tencentConfig.getAppKey(), tencentConfig.getAppSecret());
             ClientProfile clientProfile = new ClientProfile();
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.setEndpoint("tmt.tencentcloudapi.com");

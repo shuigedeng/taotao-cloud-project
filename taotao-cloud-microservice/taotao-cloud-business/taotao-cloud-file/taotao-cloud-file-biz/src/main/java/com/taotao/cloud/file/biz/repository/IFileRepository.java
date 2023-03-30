@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.file.biz.repository;
 
 import com.taotao.cloud.file.biz.entity.File;
@@ -25,7 +26,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
-public interface IFileRepository extends JpaRepository<File, Long> {
-
-}
+public interface IFileRepository extends JpaRepository<File, Long> {}

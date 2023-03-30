@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.customer.biz.api.remote;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -34,7 +35,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/remote/mall/dict")
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class RemoteDictController extends BaseBusinessController<IDictService, Dict, Long> {
-
-}
-
+public class RemoteDictController extends BaseBusinessController<IDictService, Dict, Long> {}

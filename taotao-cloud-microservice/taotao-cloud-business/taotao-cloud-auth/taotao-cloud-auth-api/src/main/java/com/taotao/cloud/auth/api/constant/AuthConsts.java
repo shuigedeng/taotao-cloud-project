@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.api.constant;
 
 /**
@@ -22,6 +23,4 @@ package com.taotao.cloud.auth.api.constant;
  * @version 2022.09
  * @since 2022-11-04 17:56
  */
-public class AuthConsts {
-
-}
+public class AuthConsts {}

@@ -1,24 +1,32 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.im.biz.platform.modules.chat.enums;
 
 import lombok.Getter;
 
-/**
- * 版本类型枚举
- */
+/** 版本类型枚举 */
 @Getter
 public enum VersionTypeEnum {
 
-    /**
-     * 用户协议
-     */
+    /** 用户协议 */
     AGREEMENT(1L, "agreement"),
-    /**
-     * 安卓
-     */
+    /** 安卓 */
     ANDROID(2L, "android"),
-    /**
-     * iOS
-     */
+    /** iOS */
     IOS(3L, "iOS"),
     ;
 
@@ -29,5 +37,4 @@ public enum VersionTypeEnum {
         this.code = code;
         this.name = name;
     }
-
 }

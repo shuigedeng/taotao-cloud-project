@@ -1,26 +1,17 @@
 /*
- * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Dante Engine licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
- *
- * 1.请不要删除和修改根目录下的LICENSE文件。
- * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
- * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/dante-engine
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/dante-engine
- * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.auth.biz.demo.authentication.properties;
@@ -33,7 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 
 /**
- * <p>Description: OAuth2 界面配置属性 </p>
+ * Description: OAuth2 界面配置属性
  *
  * @author : gengwei.zheng
  * @date : 2022/3/22 10:56
@@ -41,49 +32,30 @@ import org.springframework.security.web.authentication.rememberme.AbstractRememb
 @ConfigurationProperties(prefix = OAuth2Constants.PROPERTY_OAUTH2_UI)
 public class OAuth2UiProperties {
 
-    /**
-     * UI 界面用户名标输入框 name 属性值
-     */
-    private String usernameParameter = UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY;
-    /**
-     * UI 界面密码标输入框 name 属性值
-     */
-    private String passwordParameter = UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY;
-    /**
-     * UI 界面Remember Me name 属性值
-     */
-    private String rememberMeParameter = AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY;
-    /**
-     * UI 界面验证码 name 属性值
-     */
+    /** UI 界面用户名标输入框 name 属性值 */
+    private String usernameParameter =
+            UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY;
+    /** UI 界面密码标输入框 name 属性值 */
+    private String passwordParameter =
+            UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY;
+    /** UI 界面Remember Me name 属性值 */
+    private String rememberMeParameter =
+            AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY;
+    /** UI 界面验证码 name 属性值 */
     private String captchaParameter = "captcha";
-    /**
-     * 登录页面地址
-     */
+    /** 登录页面地址 */
     private String loginPageUrl = "/login";
-    /**
-     * 登录逻辑处理地址
-     */
+    /** 登录逻辑处理地址 */
     private String loginProcessingUrl = loginPageUrl;
-    /**
-     * 失败处理地址
-     */
+    /** 失败处理地址 */
     private String failureUrl = loginPageUrl;
-    /**
-     * 登录失败重定向地址
-     */
+    /** 登录失败重定向地址 */
     private String failureForwardUrl;
-    /**
-     * 登录成功重定向地址
-     */
+    /** 登录成功重定向地址 */
     private String successForwardUrl;
-    /**
-     * 关闭验证码显示，默认 false，显示
-     */
+    /** 关闭验证码显示，默认 false，显示 */
     private Boolean closeCaptcha = false;
-    /**
-     * 验证码类别，默认为 Hutool Gif 类型
-     */
+    /** 验证码类别，默认为 Hutool Gif 类型 */
     private String category = "HUTOOL_GIF";
 
     public String getUsernameParameter() {

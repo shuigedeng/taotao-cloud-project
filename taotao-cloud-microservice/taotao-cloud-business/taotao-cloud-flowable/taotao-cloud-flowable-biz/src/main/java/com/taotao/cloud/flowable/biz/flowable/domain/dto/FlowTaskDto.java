@@ -1,19 +1,33 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.flowable.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.ruoyi.common.core.domain.entity.SysUser;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 /**
- * <p>工作流任务<p>
+ * 工作流任务
+ *
+ * <p>
  *
  * @author Tony
  * @date 2021-04-03
@@ -48,7 +62,9 @@ public class FlowTaskDto implements Serializable {
     private String assigneeName;
 
     @ApiModelProperty("任务执行人部门")
-    private String assigneeDeptName;;
+    private String assigneeDeptName;
+
+    ;
 
     @ApiModelProperty("流程发起人Id")
     private String startUserId;
@@ -102,5 +118,4 @@ public class FlowTaskDto implements Serializable {
     @ApiModelProperty("任务完成时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date finishTime;
-
 }

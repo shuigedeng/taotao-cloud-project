@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.flowable.biz.repository;
 
-import com.taotao.cloud.flowable.biz.model.entity.Chatbot;
 import com.taotao.cloud.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.cloud.flowable.biz.model.entity.Chatbot;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
@@ -28,8 +29,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ChatbotSuperRepository extends JpaSuperRepository<Chatbot, Long> {
 
-	public ChatbotSuperRepository(EntityManager em) {
-		super(Chatbot.class, em);
-	}
-
+    public ChatbotSuperRepository(EntityManager em) {
+        super(Chatbot.class, em);
+    }
 }

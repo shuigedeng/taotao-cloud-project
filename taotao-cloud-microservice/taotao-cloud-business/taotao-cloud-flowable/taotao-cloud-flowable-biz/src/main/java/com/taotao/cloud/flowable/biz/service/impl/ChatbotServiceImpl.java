@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.flowable.biz.service.impl;
 
 import com.taotao.cloud.flowable.biz.model.entity.Chatbot;
@@ -28,15 +29,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChatbotServiceImpl implements IChatbotService {
 
-	private final ChatbotSuperRepository chatbotRepository;
+    private final ChatbotSuperRepository chatbotRepository;
 
-	public ChatbotServiceImpl(
-		ChatbotSuperRepository chatbotRepository) {
-		this.chatbotRepository = chatbotRepository;
-	}
+    public ChatbotServiceImpl(ChatbotSuperRepository chatbotRepository) {
+        this.chatbotRepository = chatbotRepository;
+    }
 
-	@Override
-	public Chatbot findChatbotById(Long id) {
-		return chatbotRepository.getOne(id);
-	}
+    @Override
+    public Chatbot findChatbotById(Long id) {
+        return chatbotRepository.getOne(id);
+    }
 }

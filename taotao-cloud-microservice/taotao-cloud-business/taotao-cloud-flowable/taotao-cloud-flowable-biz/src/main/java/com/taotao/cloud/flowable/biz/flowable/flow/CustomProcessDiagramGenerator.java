@@ -1,13 +1,27 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.flowable.flow;
-
-
-import org.flowable.bpmn.model.Process;
-import org.flowable.bpmn.model.*;
-import org.flowable.image.impl.DefaultProcessDiagramCanvas;
-import org.flowable.image.impl.DefaultProcessDiagramGenerator;
 
 import java.util.Iterator;
 import java.util.List;
+import org.flowable.bpmn.model.*;
+import org.flowable.bpmn.model.Process;
+import org.flowable.image.impl.DefaultProcessDiagramCanvas;
+import org.flowable.image.impl.DefaultProcessDiagramGenerator;
 
 /**
  * @author Tony
@@ -15,9 +29,26 @@ import java.util.List;
  */
 public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerator {
     @Override
-    protected DefaultProcessDiagramCanvas generateProcessDiagram(BpmnModel bpmnModel, String imageType, List<String> highLightedActivities, List<String> highLightedFlows, String activityFontName, String labelFontName, String annotationFontName, ClassLoader customClassLoader, double scaleFactor, boolean drawSequenceFlowNameWithNoLabelDI) {
+    protected DefaultProcessDiagramCanvas generateProcessDiagram(
+            BpmnModel bpmnModel,
+            String imageType,
+            List<String> highLightedActivities,
+            List<String> highLightedFlows,
+            String activityFontName,
+            String labelFontName,
+            String annotationFontName,
+            ClassLoader customClassLoader,
+            double scaleFactor,
+            boolean drawSequenceFlowNameWithNoLabelDI) {
         this.prepareBpmnModel(bpmnModel);
-        DefaultProcessDiagramCanvas processDiagramCanvas = initProcessDiagramCanvas(bpmnModel, imageType, activityFontName, labelFontName, annotationFontName, customClassLoader);
+        DefaultProcessDiagramCanvas processDiagramCanvas =
+                initProcessDiagramCanvas(
+                        bpmnModel,
+                        imageType,
+                        activityFontName,
+                        labelFontName,
+                        annotationFontName,
+                        customClassLoader);
         Iterator var13 = bpmnModel.getPools().iterator();
 
         while (var13.hasNext()) {
@@ -50,7 +81,14 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
             while (subProcesses1.hasNext()) {
                 FlowNode artifact1 = (FlowNode) subProcesses1.next();
                 if (!this.isPartOfCollapsedSubProcess(artifact1, bpmnModel)) {
-                    this.drawActivity(processDiagramCanvas, bpmnModel, artifact1, highLightedActivities, highLightedFlows, scaleFactor, Boolean.valueOf(drawSequenceFlowNameWithNoLabelDI));
+                    this.drawActivity(
+                            processDiagramCanvas,
+                            bpmnModel,
+                            artifact1,
+                            highLightedActivities,
+                            highLightedFlows,
+                            scaleFactor,
+                            Boolean.valueOf(drawSequenceFlowNameWithNoLabelDI));
                 }
             }
         }
@@ -89,7 +127,9 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
 
                         subProcess1 = (SubProcess) artifact3.next();
                         graphicInfo = bpmnModel.getGraphicInfo(subProcess1.getId());
-                    } while (graphicInfo != null && graphicInfo.getExpanded() != null && !graphicInfo.getExpanded().booleanValue());
+                    } while (graphicInfo != null
+                            && graphicInfo.getExpanded() != null
+                            && !graphicInfo.getExpanded().booleanValue());
                 } while (this.isPartOfCollapsedSubProcess(subProcess1, bpmnModel));
 
                 Iterator var19 = subProcess1.getArtifacts().iterator();
@@ -102,14 +142,22 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
         }
     }
 
-    protected static DefaultProcessDiagramCanvas initProcessDiagramCanvas(BpmnModel bpmnModel, String imageType, String activityFontName, String labelFontName, String annotationFontName, ClassLoader customClassLoader) {
+    protected static DefaultProcessDiagramCanvas initProcessDiagramCanvas(
+            BpmnModel bpmnModel,
+            String imageType,
+            String activityFontName,
+            String labelFontName,
+            String annotationFontName,
+            ClassLoader customClassLoader) {
         double minX = 1.7976931348623157E308D;
         double maxX = 0.0D;
         double minY = 1.7976931348623157E308D;
         double maxY = 0.0D;
 
         GraphicInfo nrOfLanes;
-        for (Iterator flowNodes = bpmnModel.getPools().iterator(); flowNodes.hasNext(); maxY = nrOfLanes.getY() + nrOfLanes.getHeight()) {
+        for (Iterator flowNodes = bpmnModel.getPools().iterator();
+                flowNodes.hasNext();
+                maxY = nrOfLanes.getY() + nrOfLanes.getHeight()) {
             Pool artifacts = (Pool) flowNodes.next();
             nrOfLanes = bpmnModel.getGraphicInfo(artifacts.getId());
             minX = nrOfLanes.getX();
@@ -260,28 +308,54 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
             minY = 0.0D;
         }
 
-        return new CustomProcessDiagramCanvas((int) maxX + 10, (int) maxY + 10, (int) minX, (int) minY, imageType, activityFontName, labelFontName, annotationFontName, customClassLoader);
+        return new CustomProcessDiagramCanvas(
+                (int) maxX + 10,
+                (int) maxY + 10,
+                (int) minX,
+                (int) minY,
+                imageType,
+                activityFontName,
+                labelFontName,
+                annotationFontName,
+                customClassLoader);
     }
 
-
-    private static void drawHighLight(DefaultProcessDiagramCanvas processDiagramCanvas, GraphicInfo graphicInfo) {
-        processDiagramCanvas.drawHighLight((int) graphicInfo.getX(), (int) graphicInfo.getY(), (int) graphicInfo.getWidth(), (int) graphicInfo.getHeight());
-
+    private static void drawHighLight(
+            DefaultProcessDiagramCanvas processDiagramCanvas, GraphicInfo graphicInfo) {
+        processDiagramCanvas.drawHighLight(
+                (int) graphicInfo.getX(),
+                (int) graphicInfo.getY(),
+                (int) graphicInfo.getWidth(),
+                (int) graphicInfo.getHeight());
     }
 
-    private static void drawHighLightNow(CustomProcessDiagramCanvas processDiagramCanvas, GraphicInfo graphicInfo) {
-        processDiagramCanvas.drawHighLightNow((int) graphicInfo.getX(), (int) graphicInfo.getY(), (int) graphicInfo.getWidth(), (int) graphicInfo.getHeight());
-
+    private static void drawHighLightNow(
+            CustomProcessDiagramCanvas processDiagramCanvas, GraphicInfo graphicInfo) {
+        processDiagramCanvas.drawHighLightNow(
+                (int) graphicInfo.getX(),
+                (int) graphicInfo.getY(),
+                (int) graphicInfo.getWidth(),
+                (int) graphicInfo.getHeight());
     }
 
-    private static void drawHighLightEnd(CustomProcessDiagramCanvas processDiagramCanvas, GraphicInfo graphicInfo) {
-        processDiagramCanvas.drawHighLightEnd((int) graphicInfo.getX(), (int) graphicInfo.getY(), (int) graphicInfo.getWidth(), (int) graphicInfo.getHeight());
-
+    private static void drawHighLightEnd(
+            CustomProcessDiagramCanvas processDiagramCanvas, GraphicInfo graphicInfo) {
+        processDiagramCanvas.drawHighLightEnd(
+                (int) graphicInfo.getX(),
+                (int) graphicInfo.getY(),
+                (int) graphicInfo.getWidth(),
+                (int) graphicInfo.getHeight());
     }
 
     @Override
-    protected void drawActivity(DefaultProcessDiagramCanvas processDiagramCanvas, BpmnModel bpmnModel,
-                                FlowNode flowNode, List<String> highLightedActivities, List<String> highLightedFlows, double scaleFactor, Boolean drawSequenceFlowNameWithNoLabelDI) {
+    protected void drawActivity(
+            DefaultProcessDiagramCanvas processDiagramCanvas,
+            BpmnModel bpmnModel,
+            FlowNode flowNode,
+            List<String> highLightedActivities,
+            List<String> highLightedFlows,
+            double scaleFactor,
+            Boolean drawSequenceFlowNameWithNoLabelDI) {
 
         ActivityDrawInstruction drawInstruction = activityDrawInstructions.get(flowNode.getClass());
         if (drawInstruction != null) {
@@ -294,7 +368,8 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
             boolean collapsed = false;
             if (flowNode instanceof Activity) {
                 Activity activity = (Activity) flowNode;
-                MultiInstanceLoopCharacteristics multiInstanceLoopCharacteristics = activity.getLoopCharacteristics();
+                MultiInstanceLoopCharacteristics multiInstanceLoopCharacteristics =
+                        activity.getLoopCharacteristics();
                 if (multiInstanceLoopCharacteristics != null) {
                     multiInstanceSequential = multiInstanceLoopCharacteristics.isSequential();
                     multiInstanceParallel = !multiInstanceSequential;
@@ -311,27 +386,36 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
 
             if (scaleFactor == 1.0) {
                 // Actually draw the markers
-                processDiagramCanvas.drawActivityMarkers((int) graphicInfo.getX(), (int) graphicInfo.getY(), (int) graphicInfo.getWidth(), (int) graphicInfo.getHeight(),
-                        multiInstanceSequential, multiInstanceParallel, collapsed);
+                processDiagramCanvas.drawActivityMarkers(
+                        (int) graphicInfo.getX(),
+                        (int) graphicInfo.getY(),
+                        (int) graphicInfo.getWidth(),
+                        (int) graphicInfo.getHeight(),
+                        multiInstanceSequential,
+                        multiInstanceParallel,
+                        collapsed);
             }
 
             // Draw highlighted activities
             if (highLightedActivities.contains(flowNode.getId())) {
 
-                if (highLightedActivities.get(highLightedActivities.size() - 1).equals(flowNode.getId())
+                if (highLightedActivities
+                                .get(highLightedActivities.size() - 1)
+                                .equals(flowNode.getId())
                         && !"endenv".equals(flowNode.getId())) {
                     if ((flowNode.getId().contains("Event_"))) {
-                        drawHighLightEnd((CustomProcessDiagramCanvas) processDiagramCanvas, bpmnModel.getGraphicInfo(flowNode.getId()));
+                        drawHighLightEnd(
+                                (CustomProcessDiagramCanvas) processDiagramCanvas,
+                                bpmnModel.getGraphicInfo(flowNode.getId()));
                     } else {
-                        drawHighLightNow((CustomProcessDiagramCanvas) processDiagramCanvas, bpmnModel.getGraphicInfo(flowNode.getId()));
+                        drawHighLightNow(
+                                (CustomProcessDiagramCanvas) processDiagramCanvas,
+                                bpmnModel.getGraphicInfo(flowNode.getId()));
                     }
                 } else {
                     drawHighLight(processDiagramCanvas, bpmnModel.getGraphicInfo(flowNode.getId()));
                 }
-
-
             }
-
         }
 
         // Outgoing transitions of activity
@@ -348,15 +432,23 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
             if (defaultFlow != null && defaultFlow.equalsIgnoreCase(sequenceFlow.getId())) {
                 isDefault = true;
             }
-            boolean drawConditionalIndicator = sequenceFlow.getConditionExpression() != null && !(flowNode instanceof Gateway);
+            boolean drawConditionalIndicator =
+                    sequenceFlow.getConditionExpression() != null && !(flowNode instanceof Gateway);
 
             String sourceRef = sequenceFlow.getSourceRef();
             String targetRef = sequenceFlow.getTargetRef();
             FlowElement sourceElement = bpmnModel.getFlowElement(sourceRef);
             FlowElement targetElement = bpmnModel.getFlowElement(targetRef);
-            List<GraphicInfo> graphicInfoList = bpmnModel.getFlowLocationGraphicInfo(sequenceFlow.getId());
+            List<GraphicInfo> graphicInfoList =
+                    bpmnModel.getFlowLocationGraphicInfo(sequenceFlow.getId());
             if (graphicInfoList != null && graphicInfoList.size() > 0) {
-                graphicInfoList = connectionPerfectionizer(processDiagramCanvas, bpmnModel, sourceElement, targetElement, graphicInfoList);
+                graphicInfoList =
+                        connectionPerfectionizer(
+                                processDiagramCanvas,
+                                bpmnModel,
+                                sourceElement,
+                                targetElement,
+                                graphicInfoList);
                 int xPoints[] = new int[graphicInfoList.size()];
                 int yPoints[] = new int[graphicInfoList.size()];
 
@@ -370,11 +462,15 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
                     }
                     xPoints[i] = (int) graphicInfo.getX();
                     yPoints[i] = (int) graphicInfo.getY();
-
                 }
 
-                processDiagramCanvas.drawSequenceflow(xPoints, yPoints, drawConditionalIndicator, isDefault, highLighted, scaleFactor);
-
+                processDiagramCanvas.drawSequenceflow(
+                        xPoints,
+                        yPoints,
+                        drawConditionalIndicator,
+                        isDefault,
+                        highLighted,
+                        scaleFactor);
 
                 // Draw sequenceflow label
                 GraphicInfo labelGraphicInfo = bpmnModel.getLabelGraphicInfo(sequenceFlow.getId());
@@ -385,20 +481,26 @@ public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerato
                         GraphicInfo lineCenter = getLineCenter(graphicInfoList);
                         processDiagramCanvas.drawLabel(sequenceFlow.getName(), lineCenter, false);
                     }
-
                 }
             }
         }
 
         // Nested elements
         if (flowNode instanceof FlowElementsContainer) {
-            for (FlowElement nestedFlowElement : ((FlowElementsContainer) flowNode).getFlowElements()) {
-                if (nestedFlowElement instanceof FlowNode && !isPartOfCollapsedSubProcess(nestedFlowElement, bpmnModel)) {
-                    drawActivity(processDiagramCanvas, bpmnModel, (FlowNode) nestedFlowElement,
-                            highLightedActivities, highLightedFlows, scaleFactor, drawSequenceFlowNameWithNoLabelDI);
+            for (FlowElement nestedFlowElement :
+                    ((FlowElementsContainer) flowNode).getFlowElements()) {
+                if (nestedFlowElement instanceof FlowNode
+                        && !isPartOfCollapsedSubProcess(nestedFlowElement, bpmnModel)) {
+                    drawActivity(
+                            processDiagramCanvas,
+                            bpmnModel,
+                            (FlowNode) nestedFlowElement,
+                            highLightedActivities,
+                            highLightedFlows,
+                            scaleFactor,
+                            drawSequenceFlowNameWithNoLabelDI);
                 }
             }
         }
     }
 }
-

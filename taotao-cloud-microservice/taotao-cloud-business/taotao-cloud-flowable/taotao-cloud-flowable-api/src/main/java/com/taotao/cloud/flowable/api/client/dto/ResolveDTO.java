@@ -1,12 +1,12 @@
-/**
- * Copyright (c) 2022 KCloud-Platform-Alibaba Authors. All Rights Reserved.
- * <p>
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,9 +17,8 @@
 package com.taotao.cloud.flowable.api.client.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * @author laokou
@@ -28,10 +27,13 @@ import java.io.Serializable;
 public class ResolveDTO implements Serializable {
     @NotBlank(message = "任务编号不为空")
     private String taskId;
+
     @NotBlank(message = "流程实例编号不为空")
     private String instanceId;
+
     @NotBlank(message = "业务编号不为空")
     private String businessKey;
+
     @NotBlank(message = "流程实例名称不为空")
     private String instanceName;
 }

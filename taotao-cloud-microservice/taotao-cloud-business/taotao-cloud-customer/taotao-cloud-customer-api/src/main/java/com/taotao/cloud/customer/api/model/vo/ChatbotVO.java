@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.customer.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -35,38 +36,38 @@ import lombok.NoArgsConstructor;
 @Schema(name = "机器人客服VO", description = "机器人客服VO")
 public class ChatbotVO implements Serializable {
 
-	private static final long serialVersionUID = 5126530068827085130L;
+    private static final long serialVersionUID = 5126530068827085130L;
 
-	@Schema(description = "机器人名称")
-	private String name;
+    @Schema(description = "机器人名称")
+    private String name;
 
-	@Schema(description = "基础url")
-	private String baseUrl;
+    @Schema(description = "基础url")
+    private String baseUrl;
 
-	@Schema(description = "首选语言")
-	private String primaryLanguage;
+    @Schema(description = "首选语言")
+    private String primaryLanguage;
 
-	@Schema(description = "兜底回复")
-	private String fallback;
+    @Schema(description = "兜底回复")
+    private String fallback;
 
-	@Schema(description = "欢迎语")
-	private String welcome;
+    @Schema(description = "欢迎语")
+    private String welcome;
 
-	@Schema(description = "渠道类型")
-	private String channel;
+    @Schema(description = "渠道类型")
+    private String channel;
 
-	@Schema(description = "渠道标识")
-	private String channelMark;
+    @Schema(description = "渠道标识")
+    private String channelMark;
 
-	@Schema(description = "是否开启 0-未开启，1-开启")
-	private Boolean enabled;
+    @Schema(description = "是否开启 0-未开启，1-开启")
+    private Boolean enabled;
 
-	@Schema(description = "工作模式")
-	private Integer workMode;
+    @Schema(description = "工作模式")
+    private Integer workMode;
 
-	@Schema(description = "创建时间")
-	private LocalDateTime createTime;
+    @Schema(description = "创建时间")
+    private LocalDateTime createTime;
 
-	@Schema(description = "最后修改时间")
-	private LocalDateTime lastModifiedTime;
+    @Schema(description = "最后修改时间")
+    private LocalDateTime lastModifiedTime;
 }

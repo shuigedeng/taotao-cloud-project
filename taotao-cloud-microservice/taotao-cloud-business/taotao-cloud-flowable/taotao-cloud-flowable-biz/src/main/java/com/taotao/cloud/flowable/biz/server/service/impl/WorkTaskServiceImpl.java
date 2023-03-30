@@ -1,23 +1,33 @@
-/**
- * Copyright (c) 2022 KCloud-Platform-Alibaba Authors. All Rights Reserved.
- * <p>
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.flowable.biz.server.service.impl;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.seata.common.util.StringUtils;
 import io.seata.core.context.RootContext;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.imageio.ImageIO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
@@ -43,14 +53,7 @@ import org.laokou.flowable.server.service.WorkTaskService;
 import org.laokou.flowable.server.utils.TaskUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 /**
  * @author laokou
  */
@@ -114,8 +117,8 @@ public class WorkTaskServiceImpl implements WorkTaskService {
             throw new CustomException("非处理任务，请审批任务");
         }
         String assignee = taskUtil.getAssignee(instanceId);
-        log.info("当前审核人：{}",assignee == null ? "无" : assignee);
-        return new AssigneeVO(assignee,instanceId);
+        log.info("当前审核人：{}", assignee == null ? "无" : assignee);
+        return new AssigneeVO(assignee, instanceId);
     }
 
     @Override
@@ -126,33 +129,36 @@ public class WorkTaskServiceImpl implements WorkTaskService {
         String processKey = dto.getProcessKey();
         String businessKey = dto.getBusinessKey();
         String businessName = dto.getBusinessName();
-        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
-                .processDefinitionKey(processKey)
-                .latestVersion()
-                .singleResult();
+        ProcessDefinition processDefinition =
+                repositoryService
+                        .createProcessDefinitionQuery()
+                        .processDefinitionKey(processKey)
+                        .latestVersion()
+                        .singleResult();
         if (processDefinition == null) {
             throw new CustomException("流程未定义");
         }
         if (processDefinition.isSuspended()) {
             throw new CustomException("流程已被挂起，请先激活流程");
         }
-        final ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processKey,businessKey);
+        final ProcessInstance processInstance =
+                runtimeService.startProcessInstanceByKey(processKey, businessKey);
         if (processInstance == null) {
             throw new CustomException("流程不存在");
         }
         String instanceId = processInstance.getId();
-        runtimeService.setProcessInstanceName(instanceId,businessName);
+        runtimeService.setProcessInstanceName(instanceId, businessName);
         String assignee = taskUtil.getAssignee(instanceId);
-        log.info("当前审核人：{}",assignee == null ? "无" : assignee);
-        return new AssigneeVO(assignee,instanceId);
+        log.info("当前审核人：{}", assignee == null ? "无" : assignee);
+        return new AssigneeVO(assignee, instanceId);
     }
 
     @Override
     public PageVO<TaskVO> queryTaskPage(TaskDTO dto) {
         ValidatorUtil.validateEntity(dto);
-        IPage<TaskVO> page = new Page<>(dto.getPageNum(),dto.getPageSize());
+        IPage<TaskVO> page = new Page<>(dto.getPageNum(), dto.getPageSize());
         IPage<TaskVO> takePage = taskMapper.getTakePage(page, dto);
-        return new PageVO<>(takePage.getRecords(),takePage.getTotal());
+        return new PageVO<>(takePage.getRecords(), takePage.getTotal());
     }
 
     @Override
@@ -161,7 +167,7 @@ public class WorkTaskServiceImpl implements WorkTaskService {
         final BufferedImage image = ImageIO.read(inputStream);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         if (null != image) {
-            ImageIO.write(image,PNG,outputStream);
+            ImageIO.write(image, PNG, outputStream);
         }
         String base64String = Base64.encodeBase64String(outputStream.toByteArray());
         return base64String;
@@ -175,10 +181,10 @@ public class WorkTaskServiceImpl implements WorkTaskService {
         String assignee = dto.getAssignee().toString();
         String instanceId = dto.getInstanceId();
         String taskId = dto.getTaskId();
-        checkTask(taskId,owner);
-        taskService.setOwner(taskId,owner);
-        taskService.setAssignee(taskId,assignee);
-        return new AssigneeVO(assignee,instanceId);
+        checkTask(taskId, owner);
+        taskService.setOwner(taskId, owner);
+        taskService.setAssignee(taskId, assignee);
+        return new AssigneeVO(assignee, instanceId);
     }
 
     @Override
@@ -189,18 +195,18 @@ public class WorkTaskServiceImpl implements WorkTaskService {
         String assignee = dto.getAssignee().toString();
         String instanceId = dto.getInstanceId();
         String taskId = dto.getTaskId();
-        checkTask(taskId,owner);
-        taskService.setOwner(taskId,owner);
-        taskService.delegateTask(taskId,assignee);
-        return new AssigneeVO(assignee,instanceId);
+        checkTask(taskId, owner);
+        taskService.setOwner(taskId, owner);
+        taskService.delegateTask(taskId, assignee);
+        return new AssigneeVO(assignee, instanceId);
     }
 
-    private void checkTask(String taskId,String owner) {
+    private void checkTask(String taskId, String owner) {
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         if (task == null) {
             throw new CustomException("任务不存在");
         }
-        if (!StringUtils.equals(owner,task.getAssignee())) {
+        if (!StringUtils.equals(owner, task.getAssignee())) {
             throw new CustomException("该用户无法操作任务");
         }
     }
@@ -208,24 +214,37 @@ public class WorkTaskServiceImpl implements WorkTaskService {
     private InputStream getInputStream(String processInstanceId) {
         String processDefinitionId;
         // 获取当前的流程实例
-        final ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
-                .processInstanceId(processInstanceId)
-                .singleResult();
+        final ProcessInstance processInstance =
+                runtimeService
+                        .createProcessInstanceQuery()
+                        .processInstanceId(processInstanceId)
+                        .singleResult();
         // 如果流程已结束，则得到结束节点
         if (null == processInstance) {
-            final HistoricProcessInstance hpi = historyService.createHistoricProcessInstanceQuery()
-                    .processInstanceId(processInstanceId).singleResult();
+            final HistoricProcessInstance hpi =
+                    historyService
+                            .createHistoricProcessInstanceQuery()
+                            .processInstanceId(processInstanceId)
+                            .singleResult();
             processDefinitionId = hpi.getProcessDefinitionId();
         } else {
             // 没有结束，获取当前活动节点
             // 根据流程实例id获取当前处于ActivityId集合
-            final ProcessInstance pi = runtimeService.createProcessInstanceQuery()
-                    .processInstanceId(processInstanceId).singleResult();
+            final ProcessInstance pi =
+                    runtimeService
+                            .createProcessInstanceQuery()
+                            .processInstanceId(processInstanceId)
+                            .singleResult();
             processDefinitionId = pi.getProcessDefinitionId();
         }
         // 获取活动节点
-        final List<HistoricActivityInstance> highLightedFlowList = historyService.createHistoricActivityInstanceQuery()
-                .processInstanceId(processInstanceId).orderByHistoricActivityInstanceStartTime().asc().list();
+        final List<HistoricActivityInstance> highLightedFlowList =
+                historyService
+                        .createHistoricActivityInstanceQuery()
+                        .processInstanceId(processInstanceId)
+                        .orderByHistoricActivityInstanceStartTime()
+                        .asc()
+                        .list();
         List<String> highLightedFlows = new ArrayList<>(5);
         List<String> highLightedNodes = new ArrayList<>(5);
         // 高亮线
@@ -240,10 +259,20 @@ public class WorkTaskServiceImpl implements WorkTaskService {
         }
         // 获取流程图
         final BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
-        final ProcessEngineConfiguration configuration = processEngine.getProcessEngineConfiguration();
+        final ProcessEngineConfiguration configuration =
+                processEngine.getProcessEngineConfiguration();
         // 获取自定义图片生成器
         ProcessDiagramGenerator diagramGenerator = new CustomProcessDiagramGenerator();
-        return diagramGenerator.generateDiagram(bpmnModel, "png", highLightedNodes, highLightedFlows, configuration.getActivityFontName(),
-                configuration.getLabelFontName(), configuration.getAnnotationFontName(), configuration.getClassLoader(), 1.0, true);
+        return diagramGenerator.generateDiagram(
+                bpmnModel,
+                "png",
+                highLightedNodes,
+                highLightedFlows,
+                configuration.getActivityFontName(),
+                configuration.getLabelFontName(),
+                configuration.getAnnotationFontName(),
+                configuration.getClassLoader(),
+                1.0,
+                true);
     }
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.file.biz.largefile.controller;
 
 import com.taotao.cloud.common.model.Result;
@@ -26,74 +42,66 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class FileController {
 
+    @Autowired private FileService fileService;
 
-	@Autowired
-	private FileService fileService;
+    @Autowired private HttpServletRequest request;
 
-	@Autowired
-	private HttpServletRequest request;
+    @Autowired private HttpServletResponse response;
 
-	@Autowired
-	private HttpServletResponse response;
+    @GetMapping(value = "/")
+    public String gotoPage() {
+        return "index";
+    }
 
+    @GetMapping(value = "/uploadFile")
+    public String gotoFilePage() {
+        return "upload";
+    }
 
-	@GetMapping(value = "/")
-	public String gotoPage() {
-		return "index";
-	}
+    @GetMapping(value = "/oss/upload")
+    public String gotoOssPage() {
+        return "ossUpload";
+    }
 
-	@GetMapping(value = "/uploadFile")
-	public String gotoFilePage() {
-		return "upload";
-	}
+    @PostMapping(value = "/upload")
+    @ResponseBody
+    public Result<FileUpload> upload(FileUploadRequest fileUploadRequestDTO) throws IOException {
 
-	@GetMapping(value = "/oss/upload")
-	public String gotoOssPage() {
-		return "ossUpload";
-	}
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        FileUpload fileUploadDTO = null;
+        if (isMultipart) {
+            StopWatch stopWatch = new StopWatch();
+            stopWatch.start("upload");
+            if (fileUploadRequestDTO.getChunk() != null && fileUploadRequestDTO.getChunks() > 0) {
+                fileUploadDTO = fileService.sliceUpload(fileUploadRequestDTO);
+            } else {
+                fileUploadDTO = fileService.upload(fileUploadRequestDTO);
+            }
+            stopWatch.stop();
+            log.info("{}", stopWatch.prettyPrint());
 
+            return Result.success(fileUploadDTO);
+        }
 
-	@PostMapping(value = "/upload")
-	@ResponseBody
-	public Result<FileUpload> upload(FileUploadRequest fileUploadRequestDTO) throws IOException {
+        throw new RuntimeException("上传失败");
+    }
 
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		FileUpload fileUploadDTO = null;
-		if (isMultipart) {
-			StopWatch stopWatch = new StopWatch();
-			stopWatch.start("upload");
-			if (fileUploadRequestDTO.getChunk() != null && fileUploadRequestDTO.getChunks() > 0) {
-				fileUploadDTO = fileService.sliceUpload(fileUploadRequestDTO);
-			} else {
-				fileUploadDTO = fileService.upload(fileUploadRequestDTO);
-			}
-			stopWatch.stop();
-			log.info("{}", stopWatch.prettyPrint());
+    @RequestMapping(value = "checkFileMd5", method = RequestMethod.POST)
+    @ResponseBody
+    public Result<FileUpload> checkFileMd5(String md5, String path) throws IOException {
+        FileUploadRequest param = new FileUploadRequest().setPath(path).setMd5(md5);
+        FileUpload fileUploadDTO = fileService.checkFileMd5(param);
 
-			return Result.success(fileUploadDTO);
-		}
+        return Result.success(fileUploadDTO);
+    }
 
-		throw new RuntimeException("上传失败");
-	}
-
-	@RequestMapping(value = "checkFileMd5", method = RequestMethod.POST)
-	@ResponseBody
-	public Result<FileUpload> checkFileMd5(String md5, String path) throws IOException {
-		FileUploadRequest param = new FileUploadRequest().setPath(path).setMd5(md5);
-		FileUpload fileUploadDTO = fileService.checkFileMd5(param);
-
-		return Result.success(fileUploadDTO);
-	}
-
-	@PostMapping("/download")
-	public void download(FileDownloadRequest requestDTO) {
-		try {
-			FileUtil.downloadFile(requestDTO.getName(), requestDTO.getPath(), request, response);
-		} catch (FileNotFoundException e) {
-			log.error("download error:" + e.getMessage(), e);
-			throw new RuntimeException("文件下载失败");
-		}
-	}
-
-
+    @PostMapping("/download")
+    public void download(FileDownloadRequest requestDTO) {
+        try {
+            FileUtil.downloadFile(requestDTO.getName(), requestDTO.getPath(), request, response);
+        } catch (FileNotFoundException e) {
+            log.error("download error:" + e.getMessage(), e);
+            throw new RuntimeException("文件下载失败");
+        }
+    }
 }
