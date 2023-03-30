@@ -1,0 +1,35 @@
+apply plugin: 'com.diffplug.spotless'
+
+spotless {
+    // optional: limit format enforcement to just the files changed by this feature branch
+    //ratchetFrom 'origin/main'
+//
+    //format 'misc', {
+    //    // define the files to apply `misc` to
+    //    target '*.gradle', '*.md', '.gitignore'
+//
+    //    // define the steps to apply to those files
+    //    trimTrailingWhitespace()
+    //    indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+    //    endWithNewline()
+    //}
+
+    java {
+        //// don't need to set target, it is inferred from java
+//
+        //// fix formatting of type annotations
+        //formatAnnotations()
+        //// make sure every file has the following copyright header.
+        //// optionally, Spotless can set copyright years by digging
+        //// through git history (see "license" section below)
+        //licenseHeader '/* (C)$YEAR */'
+        //eclipse()
+        // optional: you can specify a specific version and/or config file
+        //eclipse('4.26').configFile('eclipse-prefs.xml')
+
+        // apply a specific flavor of google-java-format
+        googleJavaFormat('1.16.0').aosp().reflowLongStrings().groupArtifact('com.google.googlejavaformat:google-java-format')
+        licenseHeaderFile rootProject.file('spotless/license-header')
+    }
+
+}
