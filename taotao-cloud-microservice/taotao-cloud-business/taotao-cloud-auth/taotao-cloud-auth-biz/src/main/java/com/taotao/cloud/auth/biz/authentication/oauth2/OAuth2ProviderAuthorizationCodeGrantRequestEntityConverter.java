@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2019 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,29 +35,32 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
  * @since 5.1
  */
 public class OAuth2ProviderAuthorizationCodeGrantRequestEntityConverter
-	implements Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> {
+        implements Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> {
 
-	private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> defaultConverter = new OAuth2AuthorizationCodeGrantRequestEntityConverter();
+    private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>>
+            defaultConverter = new OAuth2AuthorizationCodeGrantRequestEntityConverter();
 
-	/**
-	 * Returns the {@link RequestEntity} used for the Access Token Request.
-	 *
-	 * @param authorizationCodeGrantRequest the authorization code grant request
-	 * @return the {@link RequestEntity} used for the Access Token Request
-	 */
-	@Override
-	public RequestEntity<?> convert(
-		OAuth2AuthorizationCodeGrantRequest authorizationCodeGrantRequest) {
+    /**
+     * Returns the {@link RequestEntity} used for the Access Token Request.
+     *
+     * @param authorizationCodeGrantRequest the authorization code grant request
+     * @return the {@link RequestEntity} used for the Access Token Request
+     */
+    @Override
+    public RequestEntity<?> convert(
+            OAuth2AuthorizationCodeGrantRequest authorizationCodeGrantRequest) {
 
-		ClientRegistration clientRegistration = authorizationCodeGrantRequest.getClientRegistration();
-		String registrationId = clientRegistration.getRegistrationId();
+        ClientRegistration clientRegistration =
+                authorizationCodeGrantRequest.getClientRegistration();
+        String registrationId = clientRegistration.getRegistrationId();
 
-		return Arrays.stream(ClientProviders.values())
-			.filter(clientProvider ->
-				Objects.equals(clientProvider.registrationId(), registrationId))
-			.findAny()
-			.map(ClientProviders::converter)
-			.orElse(defaultConverter)
-			.convert(authorizationCodeGrantRequest);
-	}
+        return Arrays.stream(ClientProviders.values())
+                .filter(
+                        clientProvider ->
+                                Objects.equals(clientProvider.registrationId(), registrationId))
+                .findAny()
+                .map(ClientProviders::converter)
+                .orElse(defaultConverter)
+                .convert(authorizationCodeGrantRequest);
+    }
 }

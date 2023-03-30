@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,133 +13,138 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.auth.biz.jpa.entity.client;
 
-import java.time.Instant;
+package com.taotao.cloud.auth.biz.jpa.entity.client;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.Instant;
 
 @Entity
 @Table(name = "`client`")
 public class Client {
-	@Id
-	private String id;
-	private String clientId;
-	private Instant clientIdIssuedAt;
-	private String clientSecret;
-	private Instant clientSecretExpiresAt;
-	private String clientName;
-	@Column(length = 1000)
-	private String clientAuthenticationMethods;
-	@Column(length = 1000)
-	private String authorizationGrantTypes;
-	@Column(length = 1000)
-	private String redirectUris;
-	@Column(length = 1000)
-	private String scopes;
-	@Column(length = 2000)
-	private String clientSettings;
-	@Column(length = 2000)
-	private String tokenSettings;
+    @Id private String id;
+    private String clientId;
+    private Instant clientIdIssuedAt;
+    private String clientSecret;
+    private Instant clientSecretExpiresAt;
+    private String clientName;
 
-	// @fold:on
-	public String getId() {
-		return id;
-	}
+    @Column(length = 1000)
+    private String clientAuthenticationMethods;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    @Column(length = 1000)
+    private String authorizationGrantTypes;
 
-	public String getClientId() {
-		return clientId;
-	}
+    @Column(length = 1000)
+    private String redirectUris;
 
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
+    @Column(length = 1000)
+    private String scopes;
 
-	public Instant getClientIdIssuedAt() {
-		return clientIdIssuedAt;
-	}
+    @Column(length = 2000)
+    private String clientSettings;
 
-	public void setClientIdIssuedAt(Instant clientIdIssuedAt) {
-		this.clientIdIssuedAt = clientIdIssuedAt;
-	}
+    @Column(length = 2000)
+    private String tokenSettings;
 
-	public String getClientSecret() {
-		return clientSecret;
-	}
+    // @fold:on
+    public String getId() {
+        return id;
+    }
 
-	public void setClientSecret(String clientSecret) {
-		this.clientSecret = clientSecret;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public Instant getClientSecretExpiresAt() {
-		return clientSecretExpiresAt;
-	}
+    public String getClientId() {
+        return clientId;
+    }
 
-	public void setClientSecretExpiresAt(Instant clientSecretExpiresAt) {
-		this.clientSecretExpiresAt = clientSecretExpiresAt;
-	}
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
-	public String getClientName() {
-		return clientName;
-	}
+    public Instant getClientIdIssuedAt() {
+        return clientIdIssuedAt;
+    }
 
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
-	}
+    public void setClientIdIssuedAt(Instant clientIdIssuedAt) {
+        this.clientIdIssuedAt = clientIdIssuedAt;
+    }
 
-	public String getClientAuthenticationMethods() {
-		return clientAuthenticationMethods;
-	}
+    public String getClientSecret() {
+        return clientSecret;
+    }
 
-	public void setClientAuthenticationMethods(String clientAuthenticationMethods) {
-		this.clientAuthenticationMethods = clientAuthenticationMethods;
-	}
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
 
-	public String getAuthorizationGrantTypes() {
-		return authorizationGrantTypes;
-	}
+    public Instant getClientSecretExpiresAt() {
+        return clientSecretExpiresAt;
+    }
 
-	public void setAuthorizationGrantTypes(String authorizationGrantTypes) {
-		this.authorizationGrantTypes = authorizationGrantTypes;
-	}
+    public void setClientSecretExpiresAt(Instant clientSecretExpiresAt) {
+        this.clientSecretExpiresAt = clientSecretExpiresAt;
+    }
 
-	public String getRedirectUris() {
-		return redirectUris;
-	}
+    public String getClientName() {
+        return clientName;
+    }
 
-	public void setRedirectUris(String redirectUris) {
-		this.redirectUris = redirectUris;
-	}
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
 
-	public String getScopes() {
-		return scopes;
-	}
+    public String getClientAuthenticationMethods() {
+        return clientAuthenticationMethods;
+    }
 
-	public void setScopes(String scopes) {
-		this.scopes = scopes;
-	}
+    public void setClientAuthenticationMethods(String clientAuthenticationMethods) {
+        this.clientAuthenticationMethods = clientAuthenticationMethods;
+    }
 
-	public String getClientSettings() {
-		return clientSettings;
-	}
+    public String getAuthorizationGrantTypes() {
+        return authorizationGrantTypes;
+    }
 
-	public void setClientSettings(String clientSettings) {
-		this.clientSettings = clientSettings;
-	}
+    public void setAuthorizationGrantTypes(String authorizationGrantTypes) {
+        this.authorizationGrantTypes = authorizationGrantTypes;
+    }
 
-	public String getTokenSettings() {
-		return tokenSettings;
-	}
+    public String getRedirectUris() {
+        return redirectUris;
+    }
 
-	public void setTokenSettings(String tokenSettings) {
-		this.tokenSettings = tokenSettings;
-	}
-	// @fold:off
+    public void setRedirectUris(String redirectUris) {
+        this.redirectUris = redirectUris;
+    }
+
+    public String getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(String scopes) {
+        this.scopes = scopes;
+    }
+
+    public String getClientSettings() {
+        return clientSettings;
+    }
+
+    public void setClientSettings(String clientSettings) {
+        this.clientSettings = clientSettings;
+    }
+
+    public String getTokenSettings() {
+        return tokenSettings;
+    }
+
+    public void setTokenSettings(String tokenSettings) {
+        this.tokenSettings = tokenSettings;
+    }
+    // @fold:off
 }

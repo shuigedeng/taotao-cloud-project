@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.auth.biz.configuration;
 
 import com.nimbusds.jose.jwk.JWKSet;
@@ -16,7 +32,6 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 
-
 /**
  * The Jwt configuration.
  *
@@ -26,65 +41,66 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 @Configuration(proxyBeanMethods = false)
 public class JwtConfiguration {
 
-	@Bean
-	public OAuth2TokenCustomizer<JwtEncodingContext> buildCustomizer() {
-		JwtCustomizer jwtCustomizer = new JwtCustomizerServiceImpl();
-		return jwtCustomizer::customizeToken;
-	}
+    @Bean
+    public OAuth2TokenCustomizer<JwtEncodingContext> buildCustomizer() {
+        JwtCustomizer jwtCustomizer = new JwtCustomizerServiceImpl();
+        return jwtCustomizer::customizeToken;
+    }
 
-	@Bean
-	public JWKSource<SecurityContext> jwkSource() {
-		RSAKey rsaKey = Jwks.generateRsa();
-		JWKSet jwkSet = new JWKSet(rsaKey);
-		return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
-	}
+    @Bean
+    public JWKSource<SecurityContext> jwkSource() {
+        RSAKey rsaKey = Jwks.generateRsa();
+        JWKSet jwkSet = new JWKSet(rsaKey);
+        return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
+    }
 
-	@Bean
-	public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-		return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-	}
+    @Bean
+    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+    }
 
-	@Bean
-	public JwtTokenGenerator jwtTokenGenerator() {
-		return new JwtTokenGeneratorImpl();
-	}
+    @Bean
+    public JwtTokenGenerator jwtTokenGenerator() {
+        return new JwtTokenGeneratorImpl();
+    }
 
-	///**
-	// * 加载JWK资源
-	// *
-	// * @return the jwk source
-	// */
-	//@SneakyThrows
-	//@Bean
-	//public JWKSource<SecurityContext> jwkSource() {
-	//    //TODO 这里优化到配置
-	//    String path = "jose.jks";
-	//    String alias = "jose";
-	//    String pass = "felord.cn";
-	//
-	//    ClassPathResource resource = new ClassPathResource(path);
-	//    KeyStore jks = KeyStore.getInstance("jks");
-	//    char[] pin = pass.toCharArray();
-	//    jks.load(resource.getInputStream(), pin);
-	//    RSAKey rsaKey = RSAKey.load(jks, alias, pin);
-	//    return (jwkSelector, securityContext) -> jwkSelector.select(new JWKSet(rsaKey));
-	//}
-	//
-	///**
-	// * Jwt decoder jwt decoder.
-	// *
-	// * @return the jwt decoder
-	// */
-	//@SneakyThrows
-	//@Bean
-	//@ConditionalOnClass(BearerTokenAuthenticationFilter.class)
-	//JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-	//    ConfigurableJWTProcessor<SecurityContext> jwtProcessor = new DefaultJWTProcessor<>();
-	//    JWSVerificationKeySelector<SecurityContext> keySelector = new JWSVerificationKeySelector<>(JWSAlgorithm.RS256, jwkSource);
-	//    jwtProcessor.setJWSKeySelector(keySelector);
-	//    // Spring Security validates the claim set independent from Nimbus
-	//    jwtProcessor.setJWTClaimsSetVerifier((claims, context) -> {
-	//    });
-	//    return new NimbusJwtDecoder(jwtProcessor);
-	//}
+    /// **
+    // * 加载JWK资源
+    // *
+    // * @return the jwk source
+    // */
+    // @SneakyThrows
+    // @Bean
+    // public JWKSource<SecurityContext> jwkSource() {
+    //    //TODO 这里优化到配置
+    //    String path = "jose.jks";
+    //    String alias = "jose";
+    //    String pass = "felord.cn";
+    //
+    //    ClassPathResource resource = new ClassPathResource(path);
+    //    KeyStore jks = KeyStore.getInstance("jks");
+    //    char[] pin = pass.toCharArray();
+    //    jks.load(resource.getInputStream(), pin);
+    //    RSAKey rsaKey = RSAKey.load(jks, alias, pin);
+    //    return (jwkSelector, securityContext) -> jwkSelector.select(new JWKSet(rsaKey));
+    // }
+    //
+    /// **
+    // * Jwt decoder jwt decoder.
+    // *
+    // * @return the jwt decoder
+    // */
+    // @SneakyThrows
+    // @Bean
+    // @ConditionalOnClass(BearerTokenAuthenticationFilter.class)
+    // JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+    //    ConfigurableJWTProcessor<SecurityContext> jwtProcessor = new DefaultJWTProcessor<>();
+    //    JWSVerificationKeySelector<SecurityContext> keySelector = new
+    // JWSVerificationKeySelector<>(JWSAlgorithm.RS256, jwkSource);
+    //    jwtProcessor.setJWSKeySelector(keySelector);
+    //    // Spring Security validates the claim set independent from Nimbus
+    //    jwtProcessor.setJWTClaimsSetVerifier((claims, context) -> {
+    //    });
+    //    return new NimbusJwtDecoder(jwtProcessor);
+    // }
 }

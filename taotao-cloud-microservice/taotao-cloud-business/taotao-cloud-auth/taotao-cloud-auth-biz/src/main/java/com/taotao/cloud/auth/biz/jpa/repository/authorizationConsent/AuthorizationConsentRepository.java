@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.jpa.repository.authorizationConsent;
 
 import com.taotao.cloud.auth.biz.jpa.entity.authorizationConsent.AuthorizationConsent;
@@ -21,12 +22,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthorizationConsentRepository extends
-	JpaRepository<AuthorizationConsent, AuthorizationConsent.AuthorizationConsentId> {
+public interface AuthorizationConsentRepository
+        extends JpaRepository<AuthorizationConsent, AuthorizationConsent.AuthorizationConsentId> {
 
-	Optional<AuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
-		String registeredClientId, String principalName);
+    Optional<AuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
+            String registeredClientId, String principalName);
 
-	void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId,
-		String principalName);
+    void deleteByRegisteredClientIdAndPrincipalName(
+            String registeredClientId, String principalName);
 }

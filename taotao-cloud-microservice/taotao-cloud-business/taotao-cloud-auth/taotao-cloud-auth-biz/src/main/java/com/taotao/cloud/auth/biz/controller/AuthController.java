@@ -1,33 +1,50 @@
-package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz.controller;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.auth.biz.controller; // package com.taotao.cloud.auth.biz.controller;
 //
-//import cn.hutool.core.util.IdUtil;
-//import cn.hutool.crypto.asymmetric.KeyType;
-//import cn.hutool.crypto.asymmetric.RSA;
-//import com.wf.captcha.ArithmeticCaptcha;
-//import io.undertow.util.BadRequestException;
-//import java.util.HashMap;
-//import java.util.Map;
-//import java.util.concurrent.TimeUnit;
-//import jakarta.servlet.http.HttpServletRequest;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.boot.autoconfigure.security.SecurityProperties;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.validation.annotation.Validated;
-//import org.springframework.web.bind.annotation.DeleteMapping;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
+// import cn.hutool.core.util.IdUtil;
+// import cn.hutool.crypto.asymmetric.KeyType;
+// import cn.hutool.crypto.asymmetric.RSA;
+// import com.wf.captcha.ArithmeticCaptcha;
+// import io.undertow.util.BadRequestException;
+// import java.util.HashMap;
+// import java.util.Map;
+// import java.util.concurrent.TimeUnit;
+// import jakarta.servlet.http.HttpServletRequest;
+// import org.springframework.beans.factory.annotation.Value;
+// import org.springframework.boot.autoconfigure.security.SecurityProperties;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+// import
+// org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+// import org.springframework.security.core.Authentication;
+// import org.springframework.security.core.context.SecurityContextHolder;
+// import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.userdetails.UserDetailsService;
+// import org.springframework.validation.annotation.Validated;
+// import org.springframework.web.bind.annotation.DeleteMapping;
+// import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RestController;
 //
-///**
+/// **
 // * AuthController
 // *
 // * @author shuigedeng
@@ -35,10 +52,10 @@ package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz
 // * @since 2022-02-24 11:21:38
 // */
 //
-//@RestController
-//@RequestMapping("/auth")
-//@Api(tags = "系统：系统授权接口")
-//public class AuthController {
+// @RestController
+// @RequestMapping("/auth")
+// @Api(tags = "系统：系统授权接口")
+// public class AuthController {
 //
 //    @Value("${loginCode.expiration}")
 //    private Long expiration;
@@ -54,7 +71,9 @@ package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz
 //    private final TokenUtil tokenUtil;
 //    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 //
-//    public AuthController(SecurityProperties properties, RedisUtils redisUtils, UserDetailsService userDetailsService, OnlineUserService onlineUserService, TokenUtil tokenUtil, AuthenticationManagerBuilder authenticationManagerBuilder) {
+//    public AuthController(SecurityProperties properties, RedisUtils redisUtils, UserDetailsService
+// userDetailsService, OnlineUserService onlineUserService, TokenUtil tokenUtil,
+// AuthenticationManagerBuilder authenticationManagerBuilder) {
 //        this.properties = properties;
 //        this.redisUtils = redisUtils;
 //        this.userDetailsService = userDetailsService;
@@ -67,7 +86,8 @@ package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz
 //    @ApiOperation("登录授权")
 //    @AnonymousAccess
 //    @PostMapping(value = "/login")
-//    public ResponseEntity<Object> login(@Validated @RequestBody AuthUser authUser, HttpServletRequest request) {
+//    public ResponseEntity<Object> login(@Validated @RequestBody AuthUser authUser,
+// HttpServletRequest request) {
 //        // 密码解密
 //        RSA rsa = new RSA(privateKey, null);
 //        String password = new String(rsa.decrypt(authUser.getPassword(), KeyType.PrivateKey));
@@ -78,13 +98,15 @@ package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz
 //        if (StringUtils.isBlank(code)) {
 //            throw new BadRequestException("验证码不存在或已过期");
 //        }
-//        if (StringUtils.isBlank(authUser.getCode()) || !authUser.getCode().equalsIgnoreCase(code)) {
+//        if (StringUtils.isBlank(authUser.getCode()) || !authUser.getCode().equalsIgnoreCase(code))
+// {
 //            throw new BadRequestException("验证码错误");
 //        }
 //        UsernamePasswordAuthenticationToken authenticationToken =
 //                new UsernamePasswordAuthenticationToken(authUser.getUsername(), password);
 //
-//        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+//        Authentication authentication =
+// authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 //        SecurityContextHolder.getContext().setAuthentication(authentication);
 //        // 生成令牌
 //        final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -107,7 +129,8 @@ package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz
 //    @ApiOperation("获取用户信息")
 //    @GetMapping(value = "/info")
 //    public ResponseEntity<Object> getUserInfo() {
-//        JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(SecurityUtils.getUsername());
+//        JwtUser jwtUser = (JwtUser)
+// userDetailsService.loadUserByUsername(SecurityUtils.getUsername());
 //        return ResponseEntity.ok(jwtUser);
 //    }
 //
@@ -144,4 +167,4 @@ package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz
 //        onlineUserService.logout(tokenUtil.getToken(request));
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
-//}
+// }

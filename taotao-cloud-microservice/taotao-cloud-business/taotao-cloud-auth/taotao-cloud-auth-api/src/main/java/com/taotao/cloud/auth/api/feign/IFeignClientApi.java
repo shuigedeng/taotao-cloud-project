@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.api.feign;
 
 import com.taotao.cloud.auth.api.feign.fallback.FeignClientFallback;
@@ -26,7 +27,8 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @since 2020/5/2 16:42
  * @version 2022.03
  */
-@FeignClient(contextId = "remoteUserService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignClientFallback.class)
-public interface IFeignClientApi {
-}
-
+@FeignClient(
+        contextId = "remoteUserService",
+        value = ServiceName.TAOTAO_CLOUD_SYS,
+        fallbackFactory = FeignClientFallback.class)
+public interface IFeignClientApi {}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.jpa.repository.client;
 
 import com.taotao.cloud.auth.biz.jpa.entity.client.Client;
@@ -23,5 +24,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, String> {
 
-	Optional<Client> findByClientId(String clientId);
+    Optional<Client> findByClientId(String clientId);
 }

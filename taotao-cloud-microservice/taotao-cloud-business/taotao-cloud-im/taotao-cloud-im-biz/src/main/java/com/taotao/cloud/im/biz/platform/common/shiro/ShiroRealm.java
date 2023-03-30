@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.im.biz.platform.common.shiro;
 
 import cn.hutool.core.date.DateUtil;
@@ -15,6 +31,8 @@ import com.platform.common.utils.ip.IpUtils;
 import com.platform.modules.auth.service.TokenService;
 import com.platform.modules.chat.domain.ChatUser;
 import com.platform.modules.chat.service.ChatUserService;
+import jakarta.annotation.Resource;
+import java.util.Arrays;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -26,21 +44,12 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.context.annotation.Lazy;
 
-import jakarta.annotation.Resource;
-import java.util.Arrays;
-
-/**
- * ShiroRealm
- */
+/** ShiroRealm */
 public class ShiroRealm extends AuthorizingRealm {
 
-    @Lazy
-    @Resource
-    private TokenService tokenService;
+    @Lazy @Resource private TokenService tokenService;
 
-    @Lazy
-    @Resource
-    private ChatUserService chatUserService;
+    @Lazy @Resource private ChatUserService chatUserService;
 
     /**
      * 提供用户信息，返回权限信息
@@ -67,9 +76,7 @@ public class ShiroRealm extends AuthorizingRealm {
         return null;
     }
 
-    /**
-     * 必须重写此方法，不然会报错
-     */
+    /** 必须重写此方法，不然会报错 */
     @Override
     public boolean supports(AuthenticationToken authenticationToken) {
         return authenticationToken instanceof ShiroLoginToken
@@ -86,7 +93,8 @@ public class ShiroRealm extends AuthorizingRealm {
      * @throws AuthenticationException
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
+            throws AuthenticationException {
         // token
         if (authenticationToken instanceof ShiroLoginToken) {
             String token = (String) authenticationToken.getPrincipal();
@@ -98,7 +106,8 @@ public class ShiroRealm extends AuthorizingRealm {
             String salt = Md5Utils.salt();
             // 对token加密
             String credentials = Md5Utils.credentials(token, salt);
-            return new SimpleAuthenticationInfo(loginUser, credentials, ByteSource.Util.bytes(salt), getName());
+            return new SimpleAuthenticationInfo(
+                    loginUser, credentials, ByteSource.Util.bytes(salt), getName());
         }
         // 手机+密码登录
         if (authenticationToken instanceof ShiroLoginAuth) {
@@ -129,7 +138,8 @@ public class ShiroRealm extends AuthorizingRealm {
             throw new LoginException("手机号已停用"); // 手机禁用
         }
         // 查询权限
-        LoginUser loginUser = new LoginUser(chatUser, ApiConstant.ROLE_KEY, Arrays.asList(ApiConstant.PERM_APP));
+        LoginUser loginUser =
+                new LoginUser(chatUser, ApiConstant.ROLE_KEY, Arrays.asList(ApiConstant.PERM_APP));
         // 设置代理信息
         makeUserAgent(loginUser);
         String credentials = chatUser.getPassword();
@@ -141,7 +151,8 @@ public class ShiroRealm extends AuthorizingRealm {
             credentials = Md5Utils.credentials(phone, salt);
         }
         // 登录
-        return new SimpleAuthenticationInfo(loginUser, credentials, ByteSource.Util.bytes(salt), getName());
+        return new SimpleAuthenticationInfo(
+                loginUser, credentials, ByteSource.Util.bytes(salt), getName());
     }
 
     /**
@@ -150,7 +161,8 @@ public class ShiroRealm extends AuthorizingRealm {
      * @param loginUser 登录信息
      */
     private void makeUserAgent(LoginUser loginUser) {
-        UserAgent userAgent = UserAgentUtil.parse(ServletUtils.getRequest().getHeader("User-Agent"));
+        UserAgent userAgent =
+                UserAgentUtil.parse(ServletUtils.getRequest().getHeader("User-Agent"));
         String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
         // 登录ip
         loginUser.setIpAddr(ip);
@@ -168,5 +180,4 @@ public class ShiroRealm extends AuthorizingRealm {
     public boolean isPermitted(PrincipalCollection principals, String permission) {
         return super.isPermitted(principals, permission);
     }
-
 }

@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.generator.api.dubbo;
 
+package com.taotao.cloud.generator.api.dubbo;
 
 /**
  * IDubboOrderService
@@ -23,6 +23,4 @@ package com.taotao.cloud.generator.api.dubbo;
  * @version 2022.04
  * @since 2022-04-28 09:21:20
  */
-public interface IDubboGeneratorRpc {
-
-}
+public interface IDubboGeneratorRpc {}

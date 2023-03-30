@@ -1,9 +1,27 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.bpm.framework.flowable.core.behavior;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.RandomUtil;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.BpmTaskAssignRuleService;
+import java.util.List;
+import java.util.Set;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.model.UserTask;
@@ -15,12 +33,8 @@ import org.flowable.engine.impl.util.TaskHelper;
 import org.flowable.task.service.TaskService;
 import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 
-import java.util.List;
-import java.util.Set;
-
 /**
- * 自定义的【单个】流程任务的 assignee 负责人的分配
- * 第一步，基于分配规则，计算出分配任务的【单个】候选人。如果找不到，则直接报业务异常，不继续执行后续的流程；
+ * 自定义的【单个】流程任务的 assignee 负责人的分配 第一步，基于分配规则，计算出分配任务的【单个】候选人。如果找不到，则直接报业务异常，不继续执行后续的流程；
  * 第二步，随机选择一个候选人，则选择作为 assignee 负责人。
  *
  * @author 芋道源码
@@ -28,17 +42,23 @@ import java.util.Set;
 @Slf4j
 public class BpmUserTaskActivityBehavior extends UserTaskActivityBehavior {
 
-    @Setter
-    private BpmTaskAssignRuleService bpmTaskRuleService;
+    @Setter private BpmTaskAssignRuleService bpmTaskRuleService;
 
     public BpmUserTaskActivityBehavior(UserTask userTask) {
         super(userTask);
     }
 
     @Override
-    protected void handleAssignments(TaskService taskService, String assignee, String owner,
-        List<String> candidateUsers, List<String> candidateGroups, TaskEntity task, ExpressionManager expressionManager,
-        DelegateExecution execution, ProcessEngineConfigurationImpl processEngineConfiguration) {
+    protected void handleAssignments(
+            TaskService taskService,
+            String assignee,
+            String owner,
+            List<String> candidateUsers,
+            List<String> candidateGroups,
+            TaskEntity task,
+            ExpressionManager expressionManager,
+            DelegateExecution execution,
+            ProcessEngineConfigurationImpl processEngineConfiguration) {
         // 第一步，获得任务的候选用户
         Long assigneeUserId = calculateTaskCandidateUsers(execution);
         Assert.notNull(assigneeUserId, "任务处理人不能为空");
@@ -47,9 +67,11 @@ public class BpmUserTaskActivityBehavior extends UserTaskActivityBehavior {
     }
 
     private Long calculateTaskCandidateUsers(DelegateExecution execution) {
-        // 情况一，如果是多实例的任务，例如说会签、或签等情况，则从 Variable 中获取。它的任务处理人在 BpmParallelMultiInstanceBehavior 中已经被分配了
+        // 情况一，如果是多实例的任务，例如说会签、或签等情况，则从 Variable 中获取。它的任务处理人在 BpmParallelMultiInstanceBehavior
+        // 中已经被分配了
         if (super.multiInstanceActivityBehavior != null) {
-            return execution.getVariable(super.multiInstanceActivityBehavior.getCollectionElementVariable(), Long.class);
+            return execution.getVariable(
+                    super.multiInstanceActivityBehavior.getCollectionElementVariable(), Long.class);
         }
 
         // 情况二，如果非多实例的任务，则计算任务处理人
@@ -62,5 +84,4 @@ public class BpmUserTaskActivityBehavior extends UserTaskActivityBehavior {
         int index = RandomUtil.randomInt(candidateUserIds.size());
         return CollUtil.get(candidateUserIds, index);
     }
-
 }

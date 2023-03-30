@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.auth.biz.authentication.oauth2.workwechat;
 
 import java.net.URI;
@@ -37,198 +53,223 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.UnknownContentTypeException;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
 /**
  * 获取微信用户信息的服务接口
  *
  * @author felord.cn
  * @since 2021 /8/12 17:45
  */
-public class WorkWechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class WorkWechatOAuth2UserService
+        implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-	private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
-	private static final String MISSING_CODE_ERROR = "missing_code_attribute";
-	private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE = "invalid_user_info_response";
-	private static final ParameterizedTypeReference<WorkWechatOAuth2User> OAUTH2_USER_OBJECT = new ParameterizedTypeReference<WorkWechatOAuth2User>() {
-	};
-	private final RestOperations restOperations;
+    private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
+    private static final String MISSING_CODE_ERROR = "missing_code_attribute";
+    private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE =
+            "invalid_user_info_response";
+    private static final ParameterizedTypeReference<WorkWechatOAuth2User> OAUTH2_USER_OBJECT =
+            new ParameterizedTypeReference<WorkWechatOAuth2User>() {};
+    private final RestOperations restOperations;
 
-	/**
-	 * Instantiates a new Wechat o auth 2 user service.
-	 */
-	public WorkWechatOAuth2UserService() {
-		RestTemplate restTemplate = new RestTemplate(Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
-		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
-		this.restOperations = restTemplate;
-	}
+    /** Instantiates a new Wechat o auth 2 user service. */
+    public WorkWechatOAuth2UserService() {
+        RestTemplate restTemplate =
+                new RestTemplate(
+                        Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
+        restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
+        this.restOperations = restTemplate;
+    }
 
-	@Override
-	public WorkWechatOAuth2User loadUser(OAuth2UserRequest userRequest)
-		throws OAuth2AuthenticationException {
-		ClientRegistration clientRegistration = userRequest.getClientRegistration();
-		String registrationId = clientRegistration.getRegistrationId();
-		Assert.notNull(userRequest, "userRequest cannot be null");
-		if (!StringUtils
-			.hasText(clientRegistration.getProviderDetails().getUserInfoEndpoint().getUri())) {
-			OAuth2Error oauth2Error = new OAuth2Error(MISSING_USER_INFO_URI_ERROR_CODE,
-				"Missing required UserInfo Uri in UserInfoEndpoint for Client Registration: "
-					+ registrationId,
-				null);
-			throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
-		}
-		String code = (String) userRequest.getAdditionalParameters().get(OAuth2ParameterNames.CODE);
-		if (!StringUtils.hasText(code)) {
-			OAuth2Error oauth2Error = new OAuth2Error(MISSING_CODE_ERROR,
-				"Missing required \"code\" attribute in UserInfoEndpoint for Client Registration: "
-					+ registrationId,
-				null);
-			throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
-		}
-		return getResponse(userRequest).getBody();
-	}
+    @Override
+    public WorkWechatOAuth2User loadUser(OAuth2UserRequest userRequest)
+            throws OAuth2AuthenticationException {
+        ClientRegistration clientRegistration = userRequest.getClientRegistration();
+        String registrationId = clientRegistration.getRegistrationId();
+        Assert.notNull(userRequest, "userRequest cannot be null");
+        if (!StringUtils.hasText(
+                clientRegistration.getProviderDetails().getUserInfoEndpoint().getUri())) {
+            OAuth2Error oauth2Error =
+                    new OAuth2Error(
+                            MISSING_USER_INFO_URI_ERROR_CODE,
+                            "Missing required UserInfo Uri in UserInfoEndpoint for Client"
+                                    + " Registration: "
+                                    + registrationId,
+                            null);
+            throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
+        }
+        String code = (String) userRequest.getAdditionalParameters().get(OAuth2ParameterNames.CODE);
+        if (!StringUtils.hasText(code)) {
+            OAuth2Error oauth2Error =
+                    new OAuth2Error(
+                            MISSING_CODE_ERROR,
+                            "Missing required \"code\" attribute in UserInfoEndpoint for Client"
+                                    + " Registration: "
+                                    + registrationId,
+                            null);
+            throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
+        }
+        return getResponse(userRequest).getBody();
+    }
 
-	/**
-	 * 获取微信用户信息借鉴{@link OAuth2AccessTokenResponseClient}
-	 * https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
-	 *
-	 * @param userRequest the user request
-	 * @return response
-	 */
-	private ResponseEntity<WorkWechatOAuth2User> getResponse(OAuth2UserRequest userRequest) {
-		String userInfoUri = userRequest.getClientRegistration()
-			.getProviderDetails()
-			.getUserInfoEndpoint()
-			.getUri();
-		try {
-			LinkedMultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+    /**
+     * 获取微信用户信息借鉴{@link OAuth2AccessTokenResponseClient}
+     * https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+     *
+     * @param userRequest the user request
+     * @return response
+     */
+    private ResponseEntity<WorkWechatOAuth2User> getResponse(OAuth2UserRequest userRequest) {
+        String userInfoUri =
+                userRequest
+                        .getClientRegistration()
+                        .getProviderDetails()
+                        .getUserInfoEndpoint()
+                        .getUri();
+        try {
+            LinkedMultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
 
-			queryParams.add(OAuth2ParameterNames.ACCESS_TOKEN,
-				userRequest.getAccessToken().getTokenValue());
-			queryParams.add(OAuth2ParameterNames.CODE, String.valueOf(
-				userRequest.getAdditionalParameters().get(OAuth2ParameterNames.CODE)));
+            queryParams.add(
+                    OAuth2ParameterNames.ACCESS_TOKEN,
+                    userRequest.getAccessToken().getTokenValue());
+            queryParams.add(
+                    OAuth2ParameterNames.CODE,
+                    String.valueOf(
+                            userRequest.getAdditionalParameters().get(OAuth2ParameterNames.CODE)));
 
-			URI userInfoEndpoint = UriComponentsBuilder.fromUriString(userInfoUri)
-				.queryParams(queryParams).build().toUri();
+            URI userInfoEndpoint =
+                    UriComponentsBuilder.fromUriString(userInfoUri)
+                            .queryParams(queryParams)
+                            .build()
+                            .toUri();
 
-			return this.restOperations.exchange(userInfoEndpoint, HttpMethod.GET, null,
-				OAUTH2_USER_OBJECT);
+            return this.restOperations.exchange(
+                    userInfoEndpoint, HttpMethod.GET, null, OAUTH2_USER_OBJECT);
 
-		} catch (OAuth2AuthorizationException ex) {
-			OAuth2Error oauth2Error = ex.getError();
-			StringBuilder errorDetails = new StringBuilder();
-			errorDetails.append("Error details: [");
-			errorDetails.append("UserInfo Uri: ")
-				.append(userInfoUri);
-			errorDetails.append(", Error Code: ").append(oauth2Error.getErrorCode());
-			if (oauth2Error.getDescription() != null) {
-				errorDetails.append(", Error Description: ").append(oauth2Error.getDescription());
-			}
-			errorDetails.append("]");
-			oauth2Error = new OAuth2Error(INVALID_USER_INFO_RESPONSE_ERROR_CODE,
-				"An error occurred while attempting to retrieve the UserInfo Resource: "
-					+ errorDetails,
-				null);
-			throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
-		} catch (UnknownContentTypeException ex) {
-			String errorMessage =
-				"An error occurred while attempting to retrieve the UserInfo Resource from '"
-					+ userInfoUri
-					+ "': response contains invalid content type '" + ex.getContentType() + "'. "
-					+ "The UserInfo Response should return a JSON object (content type 'application/json') "
-					+ "that contains a collection of name and value pairs of the claims about the authenticated End-User. "
-					+ "Please ensure the UserInfo Uri in UserInfoEndpoint for Client Registration '"
-					+ userRequest.getClientRegistration().getRegistrationId()
-					+ "' conforms to the UserInfo Endpoint, "
-					+ "as defined in OpenID Connect 1.0: 'https://openid.net/specs/openid-connect-core-1_0.html#UserInfo'";
-			OAuth2Error oauth2Error = new OAuth2Error(INVALID_USER_INFO_RESPONSE_ERROR_CODE,
-				errorMessage, null);
-			throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
-		} catch (RestClientException ex) {
-			OAuth2Error oauth2Error = new OAuth2Error(INVALID_USER_INFO_RESPONSE_ERROR_CODE,
-				"An error occurred while attempting to retrieve the UserInfo Resource: "
-					+ ex.getMessage(), null);
-			throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
-		}
-	}
+        } catch (OAuth2AuthorizationException ex) {
+            OAuth2Error oauth2Error = ex.getError();
+            StringBuilder errorDetails = new StringBuilder();
+            errorDetails.append("Error details: [");
+            errorDetails.append("UserInfo Uri: ").append(userInfoUri);
+            errorDetails.append(", Error Code: ").append(oauth2Error.getErrorCode());
+            if (oauth2Error.getDescription() != null) {
+                errorDetails.append(", Error Description: ").append(oauth2Error.getDescription());
+            }
+            errorDetails.append("]");
+            oauth2Error =
+                    new OAuth2Error(
+                            INVALID_USER_INFO_RESPONSE_ERROR_CODE,
+                            "An error occurred while attempting to retrieve the UserInfo Resource: "
+                                    + errorDetails,
+                            null);
+            throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
+        } catch (UnknownContentTypeException ex) {
+            String errorMessage =
+                    "An error occurred while attempting to retrieve the UserInfo Resource from '"
+                            + userInfoUri
+                            + "': response contains invalid content type '"
+                            + ex.getContentType()
+                            + "'. The UserInfo Response should return a JSON object (content type"
+                            + " 'application/json') that contains a collection of name and value"
+                            + " pairs of the claims about the authenticated End-User. Please ensure"
+                            + " the UserInfo Uri in UserInfoEndpoint for Client Registration '"
+                            + userRequest.getClientRegistration().getRegistrationId()
+                            + "' conforms to the UserInfo Endpoint, as defined in OpenID Connect"
+                            + " 1.0:"
+                            + " 'https://openid.net/specs/openid-connect-core-1_0.html#UserInfo'";
+            OAuth2Error oauth2Error =
+                    new OAuth2Error(INVALID_USER_INFO_RESPONSE_ERROR_CODE, errorMessage, null);
+            throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
+        } catch (RestClientException ex) {
+            OAuth2Error oauth2Error =
+                    new OAuth2Error(
+                            INVALID_USER_INFO_RESPONSE_ERROR_CODE,
+                            "An error occurred while attempting to retrieve the UserInfo Resource: "
+                                    + ex.getMessage(),
+                            null);
+            throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
+        }
+    }
 
+    private static class WechatOAuth2UserHttpMessageConverter
+            extends AbstractHttpMessageConverter<WorkWechatOAuth2User> {
 
-	private static class WechatOAuth2UserHttpMessageConverter
-		extends AbstractHttpMessageConverter<WorkWechatOAuth2User> {
+        private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
-		private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
+        private final GenericHttpMessageConverter<Object> jsonMessageConverter =
+                HttpMessageConverters.getJsonMessageConverter();
 
-		private final GenericHttpMessageConverter<Object> jsonMessageConverter = HttpMessageConverters.getJsonMessageConverter();
+        public WechatOAuth2UserHttpMessageConverter() {
+            super(
+                    DEFAULT_CHARSET,
+                    MediaType.TEXT_PLAIN,
+                    MediaType.APPLICATION_JSON,
+                    new MediaType("application", "*+json"));
+        }
 
-		public WechatOAuth2UserHttpMessageConverter() {
-			super(DEFAULT_CHARSET, MediaType.TEXT_PLAIN,
-				MediaType.APPLICATION_JSON,
-				new MediaType("application", "*+json"));
-		}
+        @Override
+        protected boolean supports(Class<?> clazz) {
+            return WorkWechatOAuth2User.class.isAssignableFrom(clazz);
+        }
 
-		@Override
-		protected boolean supports(Class<?> clazz) {
-			return WorkWechatOAuth2User.class.isAssignableFrom(clazz);
-		}
+        @Override
+        protected WorkWechatOAuth2User readInternal(
+                Class<? extends WorkWechatOAuth2User> clazz, HttpInputMessage inputMessage)
+                throws HttpMessageNotReadableException {
+            try {
+                // gh-6463: Parse parameter values as Object in order to handle potential JSON
+                // Object and then convert values to String
+                return (WorkWechatOAuth2User)
+                        this.jsonMessageConverter.read(
+                                OAUTH2_USER_OBJECT.getType(), null, inputMessage);
 
-		@Override
-		protected WorkWechatOAuth2User readInternal(Class<? extends WorkWechatOAuth2User> clazz,
-			HttpInputMessage inputMessage) throws HttpMessageNotReadableException {
-			try {
-				// gh-6463: Parse parameter values as Object in order to handle potential JSON
-				// Object and then convert values to String
-				return (WorkWechatOAuth2User) this.jsonMessageConverter
-					.read(OAUTH2_USER_OBJECT.getType(), null, inputMessage);
+            } catch (Exception ex) {
+                throw new HttpMessageNotReadableException(
+                        "An error occurred reading the OAuth 2.0 Access Token Response: "
+                                + ex.getMessage(),
+                        ex,
+                        inputMessage);
+            }
+        }
 
-			} catch (Exception ex) {
-				throw new HttpMessageNotReadableException(
-					"An error occurred reading the OAuth 2.0 Access Token Response: "
-						+ ex.getMessage(), ex,
-					inputMessage);
-			}
-		}
+        @Override
+        protected void writeInternal(
+                WorkWechatOAuth2User tokenResponse, HttpOutputMessage outputMessage)
+                throws HttpMessageNotWritableException {
+            // noop
+        }
 
-		@Override
-		protected void writeInternal(WorkWechatOAuth2User tokenResponse,
-			HttpOutputMessage outputMessage)
-			throws HttpMessageNotWritableException {
-			// noop
-		}
+        static class HttpMessageConverters {
 
+            private static final boolean jackson2Present;
 
-		static class HttpMessageConverters {
+            private static final boolean gsonPresent;
 
-			private static final boolean jackson2Present;
+            private static final boolean jsonbPresent;
 
-			private static final boolean gsonPresent;
+            static {
+                ClassLoader classLoader = HttpMessageConverters.class.getClassLoader();
+                jackson2Present =
+                        ClassUtils.isPresent(
+                                        "com.fasterxml.jackson.databind.ObjectMapper", classLoader)
+                                && ClassUtils.isPresent(
+                                        "com.fasterxml.jackson.core.JsonGenerator", classLoader);
+                gsonPresent = ClassUtils.isPresent("com.google.gson.Gson", classLoader);
+                jsonbPresent = ClassUtils.isPresent("javax.json.bind.Jsonb", classLoader);
+            }
 
-			private static final boolean jsonbPresent;
+            private HttpMessageConverters() {}
 
-			static {
-				ClassLoader classLoader = HttpMessageConverters.class.getClassLoader();
-				jackson2Present =
-					ClassUtils.isPresent("com.fasterxml.jackson.databind.ObjectMapper", classLoader)
-						&& ClassUtils.isPresent("com.fasterxml.jackson.core.JsonGenerator",
-						classLoader);
-				gsonPresent = ClassUtils.isPresent("com.google.gson.Gson", classLoader);
-				jsonbPresent = ClassUtils.isPresent("javax.json.bind.Jsonb", classLoader);
-			}
-
-			private HttpMessageConverters() {
-			}
-
-			static GenericHttpMessageConverter<Object> getJsonMessageConverter() {
-				if (jackson2Present) {
-					return new MappingJackson2HttpMessageConverter();
-				}
-				if (gsonPresent) {
-					return new GsonHttpMessageConverter();
-				}
-				if (jsonbPresent) {
-					return new JsonbHttpMessageConverter();
-				}
-				return null;
-			}
-
-		}
-	}
+            static GenericHttpMessageConverter<Object> getJsonMessageConverter() {
+                if (jackson2Present) {
+                    return new MappingJackson2HttpMessageConverter();
+                }
+                if (gsonPresent) {
+                    return new GsonHttpMessageConverter();
+                }
+                if (jsonbPresent) {
+                    return new JsonbHttpMessageConverter();
+                }
+                return null;
+            }
+        }
+    }
 }

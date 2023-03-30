@@ -1,25 +1,38 @@
-package com.taotao.cloud.flowable.biz.flowable.service.impl;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.flowable.biz.flowable.service.impl;
 
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.flowable.domain.vo.FlowTaskVo;
 import com.ruoyi.flowable.factory.FlowServiceFactory;
 import com.ruoyi.flowable.service.IFlowInstanceService;
+import java.util.Map;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.common.engine.api.FlowableObjectNotFoundException;
 import org.flowable.engine.history.HistoricProcessInstance;
-import org.flowable.task.api.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 /**
- * <p>工作流流程实例管理<p>
+ * 工作流流程实例管理
+ *
+ * <p>
  *
  * @author Tony
  * @date 2021-04-03
@@ -36,13 +49,12 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
     @Override
     public void stopProcessInstance(FlowTaskVo vo) {
         String taskId = vo.getTaskId();
-
     }
 
     /**
      * 激活或挂起流程实例
      *
-     * @param state      状态
+     * @param state 状态
      * @param instanceId 流程实例ID
      */
     @Override
@@ -61,7 +73,7 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
     /**
      * 删除流程实例ID
      *
-     * @param instanceId   流程实例ID
+     * @param instanceId 流程实例ID
      * @param deleteReason 删除原因
      */
     @Override
@@ -69,7 +81,8 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
     public void delete(String instanceId, String deleteReason) {
 
         // 查询历史数据
-        HistoricProcessInstance historicProcessInstance = getHistoricProcessInstanceById(instanceId);
+        HistoricProcessInstance historicProcessInstance =
+                getHistoricProcessInstanceById(instanceId);
         if (historicProcessInstance.getEndTime() != null) {
             historyService.deleteHistoricProcessInstance(historicProcessInstance.getId());
             return;
@@ -89,7 +102,10 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
     @Override
     public HistoricProcessInstance getHistoricProcessInstanceById(String processInstanceId) {
         HistoricProcessInstance historicProcessInstance =
-                historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+                historyService
+                        .createHistoricProcessInstanceQuery()
+                        .processInstanceId(processInstanceId)
+                        .singleResult();
         if (Objects.isNull(historicProcessInstance)) {
             throw new FlowableObjectNotFoundException("流程实例不存在: " + processInstanceId);
         }
@@ -109,8 +125,8 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
         try {
             // 设置流程发起人Id到流程中
             Long userId = SecurityUtils.getLoginUser().getUser().getUserId();
-//            identityService.setAuthenticatedUserId(userId.toString());
-            variables.put("initiator",userId);
+            //            identityService.setAuthenticatedUserId(userId.toString());
+            variables.put("initiator", userId);
             variables.put("_FLOWABLE_SKIP_EXPRESSION_ENABLED", true);
             runtimeService.startProcessInstanceById(procDefId, variables);
             return AjaxResult.success("流程启动成功");

@@ -1,32 +1,50 @@
-package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz.controller;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.auth.biz.controller; // package com.taotao.cloud.auth.biz.controller;
 //
-//import java.security.Principal;
-//import java.util.Collections;
-//import java.util.HashMap;
-//import java.util.HashSet;
-//import java.util.Map;
-//import java.util.Set;
-//import java.util.stream.Collectors;
-//import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-//import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
-//import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
-//import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
-//import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.util.StringUtils;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
+// import java.security.Principal;
+// import java.util.Collections;
+// import java.util.HashMap;
+// import java.util.HashSet;
+// import java.util.Map;
+// import java.util.Set;
+// import java.util.stream.Collectors;
+// import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
+// import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
+// import
+// org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
+// import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+// import
+// org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+// import org.springframework.stereotype.Controller;
+// import org.springframework.ui.Model;
+// import org.springframework.util.StringUtils;
+// import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.RequestParam;
 //
-///**
+/// **
 // * AuthorizationConsentController
 // *
 // * @author shuigedeng
 // * @version 2022.03
 // * @since 2022-03-28 11:08:41
 // */
-//@Controller
-//public class AuthorizationConsentController {
+// @Controller
+// public class AuthorizationConsentController {
 //
 //	private final RegisteredClientRepository registeredClientRepository;
 //	private final OAuth2AuthorizationConsentService authorizationConsentService;
@@ -83,14 +101,16 @@ package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz
 //
 //	public static class ScopeWithDescription {
 //
-//		private static final String DEFAULT_DESCRIPTION = "UNKNOWN SCOPE - We cannot provide information about this permission, use caution when granting this.";
+//		private static final String DEFAULT_DESCRIPTION = "UNKNOWN SCOPE - We cannot provide information
+// about this permission, use caution when granting this.";
 //		private static final Map<String, String> scopeDescriptions = new HashMap<>();
 //
 //		static {
 //			scopeDescriptions.put("message.read",
 //				"This application will be able to read your message.");
 //			scopeDescriptions.put("message.write",
-//				"This application will be able to add new messages. It will also be able to edit and delete existing messages.");
+//				"This application will be able to add new messages. It will also be able to edit and delete
+// existing messages.");
 //			scopeDescriptions.put("other.scope",
 //				"This is another scope example of a scope description.");
 //		}
@@ -104,4 +124,4 @@ package com.taotao.cloud.auth.biz.controller;//package com.taotao.cloud.auth.biz
 //		}
 //	}
 //
-//}
+// }

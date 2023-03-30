@@ -1,20 +1,19 @@
-/**
- * Licensed to the Apache Software Foundation （ASF） under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * （the "License"）； you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- * <p>
- * https://www.q3z3.com
- * QQ : 939313737
- * <p>
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.im.biz.platform.common.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -26,19 +25,16 @@ import com.platform.common.web.dao.BaseDao;
 import com.platform.common.web.domain.SearchVo;
 import com.platform.common.web.enums.SearchTypeEnum;
 import com.platform.common.web.service.BaseService;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
-/**
- * 基础service实现层基类
- */
+/** 基础service实现层基类 */
 public class BaseServiceImpl<T> implements BaseService<T> {
 
     private BaseDao<T> baseDao;
@@ -75,7 +71,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     /**
-     * eq: Wrapper wrapper = Wrappers.<ChatFriend>lambdaUpdate().set(ChatFriend::getRemark, null).eq(ChatFriend::getId, friend.getId());
+     * eq: Wrapper wrapper = Wrappers.<ChatFriend>lambdaUpdate().set(ChatFriend::getRemark,
+     * null).eq(ChatFriend::getId, friend.getId());
      */
     @Override
     public Integer update(Wrapper wrapper) {
@@ -132,13 +129,14 @@ public class BaseServiceImpl<T> implements BaseService<T> {
         }
         List<T> batchList = new ArrayList<>();
         AtomicReference<Integer> result = new AtomicReference<>(0);
-        list.forEach((o) -> {
-            batchList.add(o);
-            if (batchList.size() == batchCount) {
-                result.updateAndGet(v -> v + baseDao.insertBatchSomeColumn(batchList));
-                batchList.clear();
-            }
-        });
+        list.forEach(
+                (o) -> {
+                    batchList.add(o);
+                    if (batchList.size() == batchCount) {
+                        result.updateAndGet(v -> v + baseDao.insertBatchSomeColumn(batchList));
+                        batchList.clear();
+                    }
+                });
         if (!CollectionUtils.isEmpty(batchList)) {
             result.updateAndGet(v -> v + baseDao.insertBatchSomeColumn(batchList));
             batchList.clear();
@@ -150,7 +148,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     public List<T> search(List<SearchVo> searchList) {
         QueryWrapper wrappers = new QueryWrapper();
         for (SearchVo searchVo : searchList) {
-            SearchTypeEnum searchType = EnumUtils.toEnum(SearchTypeEnum.class, searchVo.getCondition(), SearchTypeEnum.EQ);
+            SearchTypeEnum searchType =
+                    EnumUtils.toEnum(
+                            SearchTypeEnum.class, searchVo.getCondition(), SearchTypeEnum.EQ);
             String name = searchVo.getName();
             String value = searchVo.getValue();
             String value2 = searchVo.getValue2();
@@ -196,21 +196,16 @@ public class BaseServiceImpl<T> implements BaseService<T> {
         return baseDao.search(wrappers);
     }
 
-    /**
-     * 响应请求分页数据
-     */
+    /** 响应请求分页数据 */
     protected PageInfo getPageInfo(List<?> list, List<?> oldList) {
         Long total = new PageInfo(oldList).getTotal();
         return getPageInfo(list, total);
     }
 
-    /**
-     * 格式化分页
-     */
+    /** 格式化分页 */
     public PageInfo getPageInfo(List<?> list, long total) {
         PageInfo pageInfo = new PageInfo(list);
         pageInfo.setTotal(total);
         return pageInfo;
     }
-
 }

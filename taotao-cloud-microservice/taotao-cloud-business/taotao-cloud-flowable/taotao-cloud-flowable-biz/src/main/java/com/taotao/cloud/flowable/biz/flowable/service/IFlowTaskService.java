@@ -1,12 +1,26 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.flowable.service;
 
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.flowable.domain.vo.FlowQueryVo;
 import com.ruoyi.flowable.domain.vo.FlowTaskVo;
-import org.flowable.task.api.Task;
-
 import java.io.InputStream;
-import java.util.List;
+import org.flowable.task.api.Task;
 
 /**
  * @author Tony
@@ -27,7 +41,6 @@ public interface IFlowTaskService {
      * @param flowTaskVo
      */
     void taskReject(FlowTaskVo flowTaskVo);
-
 
     /**
      * 退回任务
@@ -79,7 +92,6 @@ public interface IFlowTaskService {
      */
     void resolveTask(FlowTaskVo flowTaskVo);
 
-
     /**
      * 转办任务
      *
@@ -87,29 +99,31 @@ public interface IFlowTaskService {
      */
     void assignTask(FlowTaskVo flowTaskVo);
 
-
     /**
      * 多实例加签
+     *
      * @param flowTaskVo
      */
     void addMultiInstanceExecution(FlowTaskVo flowTaskVo);
 
     /**
      * 多实例减签
+     *
      * @param flowTaskVo
      */
     void deleteMultiInstanceExecution(FlowTaskVo flowTaskVo);
 
     /**
      * 我发起的流程
-     * @param queryVo  请求参数
+     *
+     * @param queryVo 请求参数
      * @return
      */
     AjaxResult myProcess(FlowQueryVo queryVo);
 
     /**
-     * 取消申请
-     * 目前实现方式: 直接将当前流程变更为已完成
+     * 取消申请 目前实现方式: 直接将当前流程变更为已完成
+     *
      * @param flowTaskVo
      * @return
      */
@@ -117,25 +131,24 @@ public interface IFlowTaskService {
 
     /**
      * 撤回流程
+     *
      * @param flowTaskVo
      * @return
      */
     AjaxResult revokeProcess(FlowTaskVo flowTaskVo);
 
-
     /**
      * 代办任务列表
      *
-     * @param queryVo  请求参数
+     * @param queryVo 请求参数
      * @return
      */
     AjaxResult todoList(FlowQueryVo queryVo);
 
-
     /**
      * 已办任务列表
      *
-     * @param queryVo  请求参数
+     * @param queryVo 请求参数
      * @return
      */
     AjaxResult finishedList(FlowQueryVo queryVo);
@@ -146,7 +159,7 @@ public interface IFlowTaskService {
      * @param procInsId 流程实例Id
      * @return
      */
-    AjaxResult flowRecord(String procInsId,String deployId);
+    AjaxResult flowRecord(String procInsId, String deployId);
 
     /**
      * 根据任务ID查询挂载的表单信息
@@ -158,6 +171,7 @@ public interface IFlowTaskService {
 
     /**
      * 获取流程过程图
+     *
      * @param processId
      * @return
      */
@@ -165,13 +179,15 @@ public interface IFlowTaskService {
 
     /**
      * 获取流程执行节点
+     *
      * @param procInsId
      * @return
      */
-    AjaxResult getFlowViewer(String procInsId,String executionId);
+    AjaxResult getFlowViewer(String procInsId, String executionId);
 
     /**
      * 获取流程变量
+     *
      * @param taskId
      * @return
      */
@@ -179,6 +195,7 @@ public interface IFlowTaskService {
 
     /**
      * 获取下一节点
+     *
      * @param flowTaskVo 任务
      * @return
      */
@@ -188,6 +205,7 @@ public interface IFlowTaskService {
 
     /**
      * 流程初始化表单
+     *
      * @param deployId
      * @return
      */
@@ -195,13 +213,15 @@ public interface IFlowTaskService {
 
     /**
      * 流程节点信息
+     *
      * @param procInsId
      * @return
      */
-    AjaxResult flowXmlAndNode(String procInsId,String deployId);
+    AjaxResult flowXmlAndNode(String procInsId, String deployId);
 
     /**
      * 流程节点表单
+     *
      * @param taskId 流程任务编号
      * @return
      */

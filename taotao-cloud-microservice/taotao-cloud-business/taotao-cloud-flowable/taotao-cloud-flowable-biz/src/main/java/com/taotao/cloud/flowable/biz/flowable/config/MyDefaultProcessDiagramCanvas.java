@@ -1,26 +1,46 @@
-package com.taotao.cloud.flowable.biz.flowable.config;//package com.ruoyi.flowable.config;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.flowable.biz.flowable.config; // package com.ruoyi.flowable.config;
 //
-//import com.sun.prism.paint.Color;
-//import org.flowable.bpmn.model.AssociationDirection;
-//import org.flowable.image.impl.DefaultProcessDiagramCanvas;
+// import com.sun.prism.paint.Color;
+// import org.flowable.bpmn.model.AssociationDirection;
+// import org.flowable.image.impl.DefaultProcessDiagramCanvas;
 //
-//import java.awt.*;
-//import java.awt.geom.Line2D;
-//import java.awt.geom.RoundRectangle2D;
+// import java.awt.*;
+// import java.awt.geom.Line2D;
+// import java.awt.geom.RoundRectangle2D;
 //
-///**
+/// **
 // * @author Tony
 // * @date 2021-04-03
 // */
-//public class MyDefaultProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
+// public class MyDefaultProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
 //    //设置高亮线的颜色  这里我设置成绿色
 //    protected static Color HIGHLIGHT_SEQUENCEFLOW_COLOR = Color.GREEN;
 //
-//    public MyDefaultProcessDiagramCanvas(int width, int height, int minX, int minY, String imageType, String activityFontName, String labelFontName, String annotationFontName, ClassLoader customClassLoader) {
-//        super(width, height, minX, minY, imageType, activityFontName, labelFontName, annotationFontName, customClassLoader);
+//    public MyDefaultProcessDiagramCanvas(int width, int height, int minX, int minY, String
+// imageType, String activityFontName, String labelFontName, String annotationFontName, ClassLoader
+// customClassLoader) {
+//        super(width, height, minX, minY, imageType, activityFontName, labelFontName,
+// annotationFontName, customClassLoader);
 //    }
 //
-//    public MyDefaultProcessDiagramCanvas(int width, int height, int minX, int minY, String imageType) {
+//    public MyDefaultProcessDiagramCanvas(int width, int height, int minX, int minY, String
+// imageType) {
 //        super(width, height, minX, minY, imageType);
 //    }
 //
@@ -29,8 +49,10 @@ package com.taotao.cloud.flowable.biz.flowable.config;//package com.ruoyi.flowab
 //     * 画线颜色设置
 //     */
 //    @Override
-//    public void drawConnection(int[] xPoints, int[] yPoints, boolean conditional, boolean isDefault, String connectionType,
-//                               AssociationDirection associationDirection, boolean highLighted, double scaleFactor) {
+//    public void drawConnection(int[] xPoints, int[] yPoints, boolean conditional, boolean
+// isDefault, String connectionType,
+//                               AssociationDirection associationDirection, boolean highLighted,
+// double scaleFactor) {
 //
 //        Paint originalPaint = g.getPaint();
 //        Stroke originalStroke = g.getStroke();
@@ -54,21 +76,26 @@ package com.taotao.cloud.flowable.biz.flowable.config;//package com.ruoyi.flowab
 //        }
 //
 //        if (isDefault) {
-//            Line2D.Double line = new Line2D.Double(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+//            Line2D.Double line = new Line2D.Double(xPoints[0], yPoints[0], xPoints[1],
+// yPoints[1]);
 //            drawDefaultSequenceFlowIndicator(line, scaleFactor);
 //        }
 //
 //        if (conditional) {
-//            Line2D.Double line = new Line2D.Double(xPoints[0], yPoints[0], xPoints[1], yPoints[1]);
+//            Line2D.Double line = new Line2D.Double(xPoints[0], yPoints[0], xPoints[1],
+// yPoints[1]);
 //            drawConditionalSequenceFlowIndicator(line, scaleFactor);
 //        }
 //
-//        if (associationDirection == AssociationDirection.ONE || associationDirection == AssociationDirection.BOTH) {
-//            Line2D.Double line = new Line2D.Double(xPoints[xPoints.length - 2], yPoints[xPoints.length - 2], xPoints[xPoints.length - 1], yPoints[xPoints.length - 1]);
+//        if (associationDirection == AssociationDirection.ONE || associationDirection ==
+// AssociationDirection.BOTH) {
+//            Line2D.Double line = new Line2D.Double(xPoints[xPoints.length - 2],
+// yPoints[xPoints.length - 2], xPoints[xPoints.length - 1], yPoints[xPoints.length - 1]);
 //            drawArrowHead(line, scaleFactor);
 //        }
 //        if (associationDirection == AssociationDirection.BOTH) {
-//            Line2D.Double line = new Line2D.Double(xPoints[1], yPoints[1], xPoints[0], yPoints[0]);
+//            Line2D.Double line = new Line2D.Double(xPoints[1], yPoints[1], xPoints[0],
+// yPoints[0]);
 //            drawArrowHead(line, scaleFactor);
 //        }
 //        g.setPaint(originalPaint);
@@ -92,4 +119,4 @@ package com.taotao.cloud.flowable.biz.flowable.config;//package com.ruoyi.flowab
 //        g.setPaint(originalPaint);
 //        g.setStroke(originalStroke);
 //    }
-//}
+// }

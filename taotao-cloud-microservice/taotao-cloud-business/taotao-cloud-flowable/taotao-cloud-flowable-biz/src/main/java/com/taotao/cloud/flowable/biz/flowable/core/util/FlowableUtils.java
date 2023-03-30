@@ -1,13 +1,28 @@
-package com.taotao.cloud.flowable.biz.flowable.core.util;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import org.flowable.bpmn.converter.BpmnXMLConverter;
-import org.flowable.bpmn.model.BpmnModel;
-import org.flowable.bpmn.model.FlowElement;
-import org.flowable.common.engine.impl.identity.Authentication;
+package com.taotao.cloud.flowable.biz.flowable.core.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.flowable.bpmn.converter.BpmnXMLConverter;
+import org.flowable.bpmn.model.BpmnModel;
+import org.flowable.bpmn.model.FlowElement;
+import org.flowable.common.engine.impl.identity.Authentication;
 
 /**
  * Flowable 相关的工具方法
@@ -32,24 +47,33 @@ public class FlowableUtils {
      * 获得 BPMN 流程中，指定的元素们
      *
      * @param model
-     * @param clazz 指定元素。例如说，{@link org.flowable.bpmn.model.UserTask}、{@link org.flowable.bpmn.model.Gateway} 等等
+     * @param clazz 指定元素。例如说，{@link org.flowable.bpmn.model.UserTask}、{@link
+     *     org.flowable.bpmn.model.Gateway} 等等
      * @return 元素们
      */
-    public static <T extends FlowElement> List<T> getBpmnModelElements(BpmnModel model, Class<T> clazz) {
+    public static <T extends FlowElement> List<T> getBpmnModelElements(
+            BpmnModel model, Class<T> clazz) {
         List<T> result = new ArrayList<>();
-        model.getProcesses().forEach(process -> {
-            process.getFlowElements().forEach(flowElement -> {
-                if (flowElement.getClass().isAssignableFrom(clazz)) {
-                    result.add((T) flowElement);
-                }
-            });
-        });
+        model.getProcesses()
+                .forEach(
+                        process -> {
+                            process.getFlowElements()
+                                    .forEach(
+                                            flowElement -> {
+                                                if (flowElement
+                                                        .getClass()
+                                                        .isAssignableFrom(clazz)) {
+                                                    result.add((T) flowElement);
+                                                }
+                                            });
+                        });
         return result;
     }
 
     /**
      * 比较 两个bpmnModel 是否相同
-     * @param oldModel  老的bpmn model
+     *
+     * @param oldModel 老的bpmn model
      * @param newModel 新的bpmn model
      */
     public static boolean equals(BpmnModel oldModel, BpmnModel newModel) {
@@ -59,9 +83,10 @@ public class FlowableUtils {
 
     /**
      * 把 bpmnModel 转换成 byte[]
-     * @param model  bpmnModel
+     *
+     * @param model bpmnModel
      */
-    public  static byte[] getBpmnBytes(BpmnModel model) {
+    public static byte[] getBpmnBytes(BpmnModel model) {
         if (model == null) {
             return new byte[0];
         }
@@ -78,5 +103,4 @@ public class FlowableUtils {
     public static String formatCollectionElementVariable(String activityId) {
         return activityId + "_assignee";
     }
-
 }

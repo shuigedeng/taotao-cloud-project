@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.auth.biz.authentication.fingerprint;
 
 import com.taotao.cloud.auth.biz.authentication.fingerprint.service.FingerprintUserDetailsService;
@@ -16,74 +32,75 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-/**
- * 指纹 登录
- */
-public class FingerprintAuthenticationProvider implements AuthenticationProvider, InitializingBean,
-	MessageSourceAware {
+/** 指纹 登录 */
+public class FingerprintAuthenticationProvider
+        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
-	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-	private final FingerprintUserDetailsService fingerprintUserDetailsService;
-	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
+    private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
+    private final FingerprintUserDetailsService fingerprintUserDetailsService;
+    private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	public FingerprintAuthenticationProvider(
-		FingerprintUserDetailsService fingerprintUserDetailsService) {
-		this.fingerprintUserDetailsService = fingerprintUserDetailsService;
-	}
+    public FingerprintAuthenticationProvider(
+            FingerprintUserDetailsService fingerprintUserDetailsService) {
+        this.fingerprintUserDetailsService = fingerprintUserDetailsService;
+    }
 
-	@Override
-	public Authentication authenticate(Authentication authentication)
-		throws AuthenticationException {
-		Assert.isInstanceOf(FingerprintAuthenticationToken.class, authentication,
-			() -> messages.getMessage(
-				"AccountVerificationAuthenticationProvider.onlySupports",
-				"Only AccountVerificationAuthenticationProvider is supported"));
+    @Override
+    public Authentication authenticate(Authentication authentication)
+            throws AuthenticationException {
+        Assert.isInstanceOf(
+                FingerprintAuthenticationToken.class,
+                authentication,
+                () ->
+                        messages.getMessage(
+                                "AccountVerificationAuthenticationProvider.onlySupports",
+                                "Only AccountVerificationAuthenticationProvider is supported"));
 
-		FingerprintAuthenticationToken unAuthenticationToken = (FingerprintAuthenticationToken) authentication;
+        FingerprintAuthenticationToken unAuthenticationToken =
+                (FingerprintAuthenticationToken) authentication;
 
-		String username = unAuthenticationToken.getName();
-		String passowrd = (String) unAuthenticationToken.getCredentials();
+        String username = unAuthenticationToken.getName();
+        String passowrd = (String) unAuthenticationToken.getCredentials();
 
-		// 验证码校验
-		UserDetails userDetails = fingerprintUserDetailsService.loadUserByPhone(username);
-		// 校验密码
-		//TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
-		return createSuccessAuthentication(authentication, userDetails);
-	}
+        // 验证码校验
+        UserDetails userDetails = fingerprintUserDetailsService.loadUserByPhone(username);
+        // 校验密码
+        // TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService 的实现中处理
+        return createSuccessAuthentication(authentication, userDetails);
+    }
 
-	@Override
-	public boolean supports(Class<?> authentication) {
-		return FingerprintAuthenticationToken.class.isAssignableFrom(authentication);
-	}
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return FingerprintAuthenticationToken.class.isAssignableFrom(authentication);
+    }
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(fingerprintUserDetailsService,
-			"fingerprintUserDetailsService must not be null");
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull(
+                fingerprintUserDetailsService, "fingerprintUserDetailsService must not be null");
+    }
 
-	@Override
-	public void setMessageSource(MessageSource messageSource) {
-		this.messages = new MessageSourceAccessor(messageSource);
-	}
+    @Override
+    public void setMessageSource(MessageSource messageSource) {
+        this.messages = new MessageSourceAccessor(messageSource);
+    }
 
-	/**
-	 * 认证成功将非授信凭据转为授信凭据. 封装用户信息 角色信息。
-	 *
-	 * @param authentication the authentication
-	 * @param user           the user
-	 * @return the authentication
-	 */
-	protected Authentication createSuccessAuthentication(Authentication authentication,
-		UserDetails user) {
+    /**
+     * 认证成功将非授信凭据转为授信凭据. 封装用户信息 角色信息。
+     *
+     * @param authentication the authentication
+     * @param user the user
+     * @return the authentication
+     */
+    protected Authentication createSuccessAuthentication(
+            Authentication authentication, UserDetails user) {
 
-		Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(
-			user.getAuthorities());
-		FingerprintAuthenticationToken authenticationToken = new FingerprintAuthenticationToken(
-			user, null, authorities);
-		authenticationToken.setDetails(authentication.getDetails());
+        Collection<? extends GrantedAuthority> authorities =
+                authoritiesMapper.mapAuthorities(user.getAuthorities());
+        FingerprintAuthenticationToken authenticationToken =
+                new FingerprintAuthenticationToken(user, null, authorities);
+        authenticationToken.setDetails(authentication.getDetails());
 
-		return authenticationToken;
-	}
-
+        return authenticationToken;
+    }
 }

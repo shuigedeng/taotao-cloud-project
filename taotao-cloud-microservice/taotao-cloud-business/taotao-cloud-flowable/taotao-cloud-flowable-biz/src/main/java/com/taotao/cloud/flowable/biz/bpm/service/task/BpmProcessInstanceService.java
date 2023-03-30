@@ -1,17 +1,32 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.bpm.service.task;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.yudao.module.bpm.api.task.dto.BpmProcessInstanceCreateReqDTO;
 import cn.iocoder.yudao.module.bpm.controller.admin.task.vo.instance.*;
-import org.flowable.engine.delegate.event.FlowableCancelledEvent;
-import org.flowable.engine.history.HistoricProcessInstance;
-import org.flowable.engine.runtime.ProcessInstance;
-
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.validation.Valid;
+import org.flowable.engine.delegate.event.FlowableCancelledEvent;
+import org.flowable.engine.history.HistoricProcessInstance;
+import org.flowable.engine.runtime.ProcessInstance;
 
 /**
  * 流程实例 Service 接口
@@ -43,7 +58,8 @@ public interface BpmProcessInstanceService {
      * @return 流程实例列表 Map
      */
     default Map<String, ProcessInstance> getProcessInstanceMap(Set<String> ids) {
-        return CollectionUtils.convertMap(getProcessInstances(ids), ProcessInstance::getProcessInstanceId);
+        return CollectionUtils.convertMap(
+                getProcessInstances(ids), ProcessInstance::getProcessInstanceId);
     }
 
     /**
@@ -53,8 +69,8 @@ public interface BpmProcessInstanceService {
      * @param pageReqVO 分页请求
      * @return 流程实例的分页
      */
-    PageResult<BpmProcessInstancePageItemRespVO> getMyProcessInstancePage(Long userId,
-                                                                          @Valid BpmProcessInstanceMyPageReqVO pageReqVO);
+    PageResult<BpmProcessInstancePageItemRespVO> getMyProcessInstancePage(
+            Long userId, @Valid BpmProcessInstanceMyPageReqVO pageReqVO);
     /**
      * 创建流程实例（提供给前端）
      *
@@ -112,7 +128,8 @@ public interface BpmProcessInstanceService {
      * @return 历史的流程实例列表 Map
      */
     default Map<String, HistoricProcessInstance> getHistoricProcessInstanceMap(Set<String> ids) {
-        return CollectionUtils.convertMap(getHistoricProcessInstances(ids), HistoricProcessInstance::getId);
+        return CollectionUtils.convertMap(
+                getHistoricProcessInstances(ids), HistoricProcessInstance::getId);
     }
 
     /**
@@ -143,5 +160,4 @@ public interface BpmProcessInstanceService {
      * @param reason 理由。例如说，审批不通过时，需要传递该值
      */
     void updateProcessInstanceExtReject(String id, String reason);
-
 }

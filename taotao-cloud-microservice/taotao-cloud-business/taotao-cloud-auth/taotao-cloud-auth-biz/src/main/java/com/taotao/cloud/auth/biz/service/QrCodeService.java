@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.service;
 
 import cn.hutool.core.img.ImgUtil;
@@ -30,9 +31,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class QrCodeService {
 
-	public String qrcode() {
-		QrConfig config = QrConfig.create().setWidth(5).setHeight(5);
-		return QrCodeUtil.generateAsBase64("https://m.taotaocloud.top/#/pages/index/index", config, ImgUtil.IMAGE_TYPE_PNG);
-	}
-
+    public String qrcode() {
+        QrConfig config = QrConfig.create().setWidth(5).setHeight(5);
+        return QrCodeUtil.generateAsBase64(
+                "https://m.taotaocloud.top/#/pages/index/index", config, ImgUtil.IMAGE_TYPE_PNG);
+    }
 }

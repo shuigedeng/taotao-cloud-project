@@ -1,4 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.bpm.service.definition;
+
+import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
+import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.*;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
@@ -8,11 +28,14 @@ import cn.iocoder.yudao.framework.common.util.json.JsonUtils;
 import cn.iocoder.yudao.framework.common.util.object.PageUtils;
 import cn.iocoder.yudao.framework.common.util.validation.ValidationUtils;
 import cn.iocoder.yudao.module.bpm.controller.admin.definition.vo.model.*;
+import cn.iocoder.yudao.module.bpm.enums.definition.BpmModelFormTypeEnum;
 import com.taotao.cloud.flowable.biz.bpm.convert.definition.BpmModelConvert;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.definition.BpmFormDO;
-import cn.iocoder.yudao.module.bpm.enums.definition.BpmModelFormTypeEnum;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.dto.BpmModelMetaInfoRespDTO;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.dto.BpmProcessDefinitionCreateReqDTO;
+import java.util.*;
+import javax.annotation.Resource;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.BpmnModel;
@@ -28,17 +51,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
-import java.util.*;
-
-import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
-import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.*;
-
 /**
- * Flowable流程模型实现
- * 主要进行 Flowable {@link Model} 的维护
+ * Flowable流程模型实现 主要进行 Flowable {@link Model} 的维护
  *
  * @author yunlongn
  * @author 芋道源码
@@ -49,14 +63,10 @@ import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.*;
 @Slf4j
 public class BpmModelServiceImpl implements BpmModelService {
 
-    @Resource
-    private RepositoryService repositoryService;
-    @Resource
-    private BpmProcessDefinitionService processDefinitionService;
-    @Resource
-    private BpmFormService bpmFormService;
-    @Resource
-    private BpmTaskAssignRuleService taskAssignRuleService;
+    @Resource private RepositoryService repositoryService;
+    @Resource private BpmProcessDefinitionService processDefinitionService;
+    @Resource private BpmFormService bpmFormService;
+    @Resource private BpmTaskAssignRuleService taskAssignRuleService;
 
     @Override
     public PageResult<BpmModelPageItemRespVO> getModelPage(BpmModelPageReqVO pageVO) {
@@ -71,27 +81,42 @@ public class BpmModelServiceImpl implements BpmModelService {
             modelQuery.modelCategory(pageVO.getCategory());
         }
         // 执行查询
-        List<Model> models = modelQuery.orderByCreateTime().desc()
-                .listPage(PageUtils.getStart(pageVO), pageVO.getPageSize());
+        List<Model> models =
+                modelQuery
+                        .orderByCreateTime()
+                        .desc()
+                        .listPage(PageUtils.getStart(pageVO), pageVO.getPageSize());
 
         // 获得 Form Map
-        Set<Long> formIds = CollectionUtils.convertSet(models, model -> {
-            BpmModelMetaInfoRespDTO metaInfo = JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
-            return metaInfo != null ? metaInfo.getFormId() : null;
-        });
+        Set<Long> formIds =
+                CollectionUtils.convertSet(
+                        models,
+                        model -> {
+                            BpmModelMetaInfoRespDTO metaInfo =
+                                    JsonUtils.parseObject(
+                                            model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
+                            return metaInfo != null ? metaInfo.getFormId() : null;
+                        });
         Map<Long, BpmFormDO> formMap = bpmFormService.getFormMap(formIds);
 
         // 获得 Deployment Map
         Set<String> deploymentIds = new HashSet<>();
-        models.forEach(model -> CollectionUtils.addIfNotNull(deploymentIds, model.getDeploymentId()));
-        Map<String, Deployment> deploymentMap = processDefinitionService.getDeploymentMap(deploymentIds);
+        models.forEach(
+                model -> CollectionUtils.addIfNotNull(deploymentIds, model.getDeploymentId()));
+        Map<String, Deployment> deploymentMap =
+                processDefinitionService.getDeploymentMap(deploymentIds);
         // 获得 ProcessDefinition Map
-        List<ProcessDefinition> processDefinitions = processDefinitionService.getProcessDefinitionListByDeploymentIds(deploymentIds);
-        Map<String, ProcessDefinition> processDefinitionMap = convertMap(processDefinitions, ProcessDefinition::getDeploymentId);
+        List<ProcessDefinition> processDefinitions =
+                processDefinitionService.getProcessDefinitionListByDeploymentIds(deploymentIds);
+        Map<String, ProcessDefinition> processDefinitionMap =
+                convertMap(processDefinitions, ProcessDefinition::getDeploymentId);
 
         // 拼接结果
         long modelCount = modelQuery.count();
-        return new PageResult<>(BpmModelConvert.INSTANCE.convertList(models, formMap, deploymentMap, processDefinitionMap), modelCount);
+        return new PageResult<>(
+                BpmModelConvert.INSTANCE.convertList(
+                        models, formMap, deploymentMap, processDefinitionMap),
+                modelCount);
     }
 
     @Override
@@ -168,16 +193,23 @@ public class BpmModelServiceImpl implements BpmModelService {
         taskAssignRuleService.checkTaskAssignRuleAllConfig(id);
 
         // 1.5 校验模型是否发生修改。如果未修改，则不允许创建
-        BpmProcessDefinitionCreateReqDTO definitionCreateReqDTO = BpmModelConvert.INSTANCE.convert2(model, form).setBpmnBytes(bpmnBytes);
-        if (processDefinitionService.isProcessDefinitionEquals(definitionCreateReqDTO)) { // 流程定义的信息相等
-            ProcessDefinition oldProcessDefinition = processDefinitionService.getProcessDefinitionByDeploymentId(model.getDeploymentId());
-            if (oldProcessDefinition != null && taskAssignRuleService.isTaskAssignRulesEquals(model.getId(), oldProcessDefinition.getId())) {
+        BpmProcessDefinitionCreateReqDTO definitionCreateReqDTO =
+                BpmModelConvert.INSTANCE.convert2(model, form).setBpmnBytes(bpmnBytes);
+        if (processDefinitionService.isProcessDefinitionEquals(
+                definitionCreateReqDTO)) { // 流程定义的信息相等
+            ProcessDefinition oldProcessDefinition =
+                    processDefinitionService.getProcessDefinitionByDeploymentId(
+                            model.getDeploymentId());
+            if (oldProcessDefinition != null
+                    && taskAssignRuleService.isTaskAssignRulesEquals(
+                            model.getId(), oldProcessDefinition.getId())) {
                 throw exception(MODEL_DEPLOY_FAIL_TASK_INFO_EQUALS);
             }
         }
 
         // 2.1 创建流程定义
-        String definitionId = processDefinitionService.createProcessDefinition(definitionCreateReqDTO);
+        String definitionId =
+                processDefinitionService.createProcessDefinition(definitionCreateReqDTO);
 
         // 2.2 将老的流程定义进行挂起。也就是说，只有最新部署的流程定义，才可以发起任务。
         updateProcessDefinitionSuspended(model.getDeploymentId());
@@ -190,7 +222,6 @@ public class BpmModelServiceImpl implements BpmModelService {
         // 2.4 复制任务分配规则
         taskAssignRuleService.copyTaskAssignRules(id, definition.getId());
     }
-
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -214,7 +245,9 @@ public class BpmModelServiceImpl implements BpmModelService {
             throw exception(MODEL_NOT_EXISTS);
         }
         // 校验流程定义存在
-        ProcessDefinition definition = processDefinitionService.getProcessDefinitionByDeploymentId(model.getDeploymentId());
+        ProcessDefinition definition =
+                processDefinitionService.getProcessDefinitionByDeploymentId(
+                        model.getDeploymentId());
         if (definition == null) {
             throw exception(PROCESS_DEFINITION_NOT_EXISTS);
         }
@@ -245,8 +278,9 @@ public class BpmModelServiceImpl implements BpmModelService {
      * @param metaInfoStr 流程模型 metaInfo 字段
      * @return 流程表单
      */
-    private BpmFormDO checkFormConfig(String  metaInfoStr) {
-        BpmModelMetaInfoRespDTO metaInfo = JsonUtils.parseObject(metaInfoStr, BpmModelMetaInfoRespDTO.class);
+    private BpmFormDO checkFormConfig(String metaInfoStr) {
+        BpmModelMetaInfoRespDTO metaInfo =
+                JsonUtils.parseObject(metaInfoStr, BpmModelMetaInfoRespDTO.class);
         if (metaInfo == null || metaInfo.getFormType() == null) {
             throw exception(MODEL_DEPLOY_FAIL_FORM_NOT_CONFIG);
         }
@@ -270,18 +304,19 @@ public class BpmModelServiceImpl implements BpmModelService {
 
     /**
      * 挂起 deploymentId 对应的流程定义。 这里一个deploymentId 只关联一个流程定义
+     *
      * @param deploymentId 流程发布Id.
      */
     private void updateProcessDefinitionSuspended(String deploymentId) {
         if (StrUtil.isEmpty(deploymentId)) {
             return;
         }
-        ProcessDefinition oldDefinition = processDefinitionService.getProcessDefinitionByDeploymentId(deploymentId);
+        ProcessDefinition oldDefinition =
+                processDefinitionService.getProcessDefinitionByDeploymentId(deploymentId);
         if (oldDefinition == null) {
             return;
         }
-        processDefinitionService.updateProcessDefinitionState(oldDefinition.getId(), SuspensionState.SUSPENDED.getStateCode());
+        processDefinitionService.updateProcessDefinitionState(
+                oldDefinition.getId(), SuspensionState.SUSPENDED.getStateCode());
     }
-
-
 }

@@ -1,15 +1,30 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flowable.biz.bpm.service.definition;
 
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.rule.BpmTaskAssignRuleCreateReqVO;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.rule.BpmTaskAssignRuleRespVO;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.rule.BpmTaskAssignRuleUpdateReqVO;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.definition.BpmTaskAssignRuleDO;
-import org.flowable.engine.delegate.DelegateExecution;
-import org.springframework.lang.Nullable;
-
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
+import javax.validation.Valid;
+import org.flowable.engine.delegate.DelegateExecution;
+import org.springframework.lang.Nullable;
 
 /**
  * BPM 任务分配规则 Service 接口
@@ -25,8 +40,8 @@ public interface BpmTaskAssignRuleService {
      * @param taskDefinitionKey 流程任务定义的 Key。允许空
      * @return 任务规则数组
      */
-    List<BpmTaskAssignRuleDO> getTaskAssignRuleListByProcessDefinitionId(String processDefinitionId,
-                                                                         @Nullable String taskDefinitionKey);
+    List<BpmTaskAssignRuleDO> getTaskAssignRuleListByProcessDefinitionId(
+            String processDefinitionId, @Nullable String taskDefinitionKey);
 
     /**
      * 获得流程模型的任务规则数组
@@ -70,8 +85,7 @@ public interface BpmTaskAssignRuleService {
     boolean isTaskAssignRulesEquals(String modelId, String processDefinitionId);
 
     /**
-     * 将流程流程模型的任务分配规则，复制一份给流程定义
-     * 目的：每次流程模型部署时，都会生成一个新的流程定义，此时考虑到每次部署的流程不可变性，所以需要复制一份给该流程定义
+     * 将流程流程模型的任务分配规则，复制一份给流程定义 目的：每次流程模型部署时，都会生成一个新的流程定义，此时考虑到每次部署的流程不可变性，所以需要复制一份给该流程定义
      *
      * @param fromModelId 流程模型编号
      * @param toProcessDefinitionId 流程定义编号
@@ -79,8 +93,7 @@ public interface BpmTaskAssignRuleService {
     void copyTaskAssignRules(String fromModelId, String toProcessDefinitionId);
 
     /**
-     * 校验流程模型的任务分配规则全部都配置了
-     * 目的：如果有规则未配置，会导致流程任务找不到负责人，进而流程无法进行下去！
+     * 校验流程模型的任务分配规则全部都配置了 目的：如果有规则未配置，会导致流程任务找不到负责人，进而流程无法进行下去！
      *
      * @param id 流程模型编号
      */
@@ -93,5 +106,4 @@ public interface BpmTaskAssignRuleService {
      * @return 处理人的编号数组
      */
     Set<Long> calculateTaskCandidateUsers(DelegateExecution execution);
-
 }

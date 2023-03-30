@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.file.biz.mapper;
 
 import com.taotao.cloud.file.biz.entity.File;
@@ -25,6 +26,4 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IFileMapper extends BaseSuperMapper<File, Long> {
-
-}
+public interface IFileMapper extends BaseSuperMapper<File, Long> {}

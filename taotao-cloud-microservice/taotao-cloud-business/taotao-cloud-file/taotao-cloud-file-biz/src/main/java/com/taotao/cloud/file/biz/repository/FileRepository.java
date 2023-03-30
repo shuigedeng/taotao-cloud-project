@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.file.biz.repository;
 
 import com.taotao.cloud.file.biz.entity.File;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FileRepository extends BaseClassSuperRepository<File, Long> {
 
-	public FileRepository(EntityManager em) {
-		super(File.class, em);
-	}
-
+    public FileRepository(EntityManager em) {
+        super(File.class, em);
+    }
 }

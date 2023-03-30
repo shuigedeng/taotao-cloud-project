@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,87 +13,87 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.auth.biz.jpa.entity.authorizationConsent;
 
-import java.io.Serializable;
-import java.util.Objects;
+package com.taotao.cloud.auth.biz.jpa.entity.authorizationConsent;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "`authorizationConsent`")
 @IdClass(AuthorizationConsent.AuthorizationConsentId.class)
 public class AuthorizationConsent {
-	@Id
-	private String registeredClientId;
-	@Id
-	private String principalName;
-	@Column(length = 1000)
-	private String authorities;
+    @Id private String registeredClientId;
+    @Id private String principalName;
 
-	// @fold:on
-	public String getRegisteredClientId() {
-		return registeredClientId;
-	}
+    @Column(length = 1000)
+    private String authorities;
 
-	public void setRegisteredClientId(String registeredClientId) {
-		this.registeredClientId = registeredClientId;
-	}
+    // @fold:on
+    public String getRegisteredClientId() {
+        return registeredClientId;
+    }
 
-	public String getPrincipalName() {
-		return principalName;
-	}
+    public void setRegisteredClientId(String registeredClientId) {
+        this.registeredClientId = registeredClientId;
+    }
 
-	public void setPrincipalName(String principalName) {
-		this.principalName = principalName;
-	}
+    public String getPrincipalName() {
+        return principalName;
+    }
 
-	public String getAuthorities() {
-		return authorities;
-	}
+    public void setPrincipalName(String principalName) {
+        this.principalName = principalName;
+    }
 
-	public void setAuthorities(String authorities) {
-		this.authorities = authorities;
-	}
-	// @fold:off
+    public String getAuthorities() {
+        return authorities;
+    }
 
-	public static class AuthorizationConsentId implements Serializable {
-		private String registeredClientId;
-		private String principalName;
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
+    }
+    // @fold:off
 
-		// @fold:on
-		public String getRegisteredClientId() {
-			return registeredClientId;
-		}
+    public static class AuthorizationConsentId implements Serializable {
+        private String registeredClientId;
+        private String principalName;
 
-		public void setRegisteredClientId(String registeredClientId) {
-			this.registeredClientId = registeredClientId;
-		}
+        // @fold:on
+        public String getRegisteredClientId() {
+            return registeredClientId;
+        }
 
-		public String getPrincipalName() {
-			return principalName;
-		}
+        public void setRegisteredClientId(String registeredClientId) {
+            this.registeredClientId = registeredClientId;
+        }
 
-		public void setPrincipalName(String principalName) {
-			this.principalName = principalName;
-		}
-		// @fold:off
+        public String getPrincipalName() {
+            return principalName;
+        }
 
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-			AuthorizationConsentId that = (AuthorizationConsentId) o;
-			return registeredClientId.equals(that.registeredClientId) && principalName.equals(that.principalName);
-		}
+        public void setPrincipalName(String principalName) {
+            this.principalName = principalName;
+        }
+        // @fold:off
 
-		@Override
-		public int hashCode() {
-			return Objects.hash(registeredClientId, principalName);
-		}
-	}
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            AuthorizationConsentId that = (AuthorizationConsentId) o;
+            return registeredClientId.equals(that.registeredClientId)
+                    && principalName.equals(that.principalName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(registeredClientId, principalName);
+        }
+    }
 }

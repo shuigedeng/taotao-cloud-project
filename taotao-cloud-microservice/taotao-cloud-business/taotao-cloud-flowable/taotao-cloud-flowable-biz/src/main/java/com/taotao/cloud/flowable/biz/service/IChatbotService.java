@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.flowable.biz.service;
 
 import com.taotao.cloud.flowable.biz.model.entity.Chatbot;
@@ -23,14 +24,14 @@ import com.taotao.cloud.flowable.biz.model.entity.Chatbot;
  * @version 2022.03
  */
 public interface IChatbotService {
-	/**
-	 * 根据id查询机器人客服信息
-	 *
-	 * @param id id
-	 * @return com.taotao.cloud.customer.biz.entity.Chatbot
-	 * @author shuigedeng
-	 * @since 2020/11/20 上午10:42
-	 * @version 2022.03
-	 */
-	Chatbot findChatbotById(Long id);
+    /**
+     * 根据id查询机器人客服信息
+     *
+     * @param id id
+     * @return com.taotao.cloud.customer.biz.entity.Chatbot
+     * @author shuigedeng
+     * @since 2020/11/20 上午10:42
+     * @version 2022.03
+     */
+    Chatbot findChatbotById(Long id);
 }

@@ -1,16 +1,31 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.biz.util;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.StrUtil;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.springframework.util.AntPathMatcher;
-
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.springframework.util.AntPathMatcher;
 
 /**
  * 字符串工具类
@@ -52,9 +67,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return !isEmpty(str);
     }
 
-    /**
-     * 去空格
-     */
+    /** 去空格 */
     public static String trim(String str) {
         return StrUtil.trim(str);
     }
@@ -62,7 +75,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 截取字符串
      *
-     * @param str   字符串
+     * @param str 字符串
      * @param start 开始
      * @return 结果
      */
@@ -73,9 +86,9 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 截取字符串
      *
-     * @param str   字符串
+     * @param str 字符串
      * @param start 开始
-     * @param end   结束
+     * @param end 结束
      * @return 结果
      */
     public static String substring(final String str, int start, int end) {
@@ -92,7 +105,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * 转义\： format("this is \\\\{} for {}", "a", "b") -> this is \a for b<br>
      *
      * @param template 文本模板，被替换的部分用 {} 表示
-     * @param params   参数值
+     * @param params 参数值
      * @return 格式化后的文本
      */
     public static String format(String template, Object... params) {
@@ -123,10 +136,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 字符串转list
      *
-     * @param str         字符串
-     * @param sep         分隔符
+     * @param str 字符串
+     * @param sep 分隔符
      * @param filterBlank 过滤纯空白
-     * @param trim        去掉首尾空白
+     * @param trim 去掉首尾空白
      * @return list集合
      */
     public static List<String> str2List(String str, String sep, boolean filterBlank, boolean trim) {
@@ -156,17 +169,16 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 查找指定字符串是否包含指定字符串列表中的任意一个字符串同时串忽略大小写
      *
-     * @param cs                  指定字符串
+     * @param cs 指定字符串
      * @param searchCharSequences 需要检查的字符串数组
      * @return 是否包含任意一个字符串
      */
-    public static boolean containsAnyIgnoreCase(CharSequence cs, CharSequence... searchCharSequences) {
+    public static boolean containsAnyIgnoreCase(
+            CharSequence cs, CharSequence... searchCharSequences) {
         return StrUtil.containsAnyIgnoreCase(cs, searchCharSequences);
     }
 
-    /**
-     * 驼峰转下划线命名
-     */
+    /** 驼峰转下划线命名 */
     public static String toUnderScoreCase(String str) {
         return StrUtil.toUnderlineCase(str);
     }
@@ -174,7 +186,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 是否包含字符串
      *
-     * @param str  验证字符串
+     * @param str 验证字符串
      * @param strs 字符串组
      * @return 包含返回true
      */
@@ -192,9 +204,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return StrUtil.upperFirst(StrUtil.toCamelCase(name));
     }
 
-    /**
-     * 驼峰式命名法 例如：user_name->userName
-     */
+    /** 驼峰式命名法 例如：user_name->userName */
     public static String toCamelCase(String s) {
         return StrUtil.toCamelCase(s);
     }
@@ -202,7 +212,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 查找指定字符串是否匹配指定字符串列表中的任意一个字符串
      *
-     * @param str  指定字符串
+     * @param str 指定字符串
      * @param strs 需要检查的字符串数组
      * @return 是否匹配
      */
@@ -219,13 +229,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * 判断url是否与规则配置:
-     * ? 表示单个字符;
-     * * 表示一层路径内的任意字符串，不可跨层级;
-     * ** 表示任意层路径;
+     * 判断url是否与规则配置: ? 表示单个字符; * 表示一层路径内的任意字符串，不可跨层级; ** 表示任意层路径;
      *
      * @param pattern 匹配规则
-     * @param url     需要匹配的url
+     * @param url 需要匹配的url
      */
     public static boolean isMatch(String pattern, String url) {
         AntPathMatcher matcher = new AntPathMatcher();
@@ -235,7 +242,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 数字左边补齐0，使之达到指定长度。注意，如果数字转换为字符串后，长度大于size，则只保留 最后size个字符。
      *
-     * @param num  数字对象
+     * @param num 数字对象
      * @param size 字符串指定长度
      * @return 返回数字的字符串格式，该字符串为指定长度。
      */
@@ -246,9 +253,9 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 字符串左补齐。如果原始字符串s长度大于size，则只保留最后size个字符。
      *
-     * @param s    原始字符串
+     * @param s 原始字符串
      * @param size 字符串指定长度
-     * @param c    用于补齐的字符
+     * @param c 用于补齐的字符
      * @return 返回指定长度的字符串，由原字符串左补齐或截取得到。
      */
     public static String padl(final String s, final int size, final char c) {
@@ -284,7 +291,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 切分字符串
      *
-     * @param str       被切分的字符串
+     * @param str 被切分的字符串
      * @param separator 分隔符
      * @return 分割后的数据列表
      */
@@ -295,7 +302,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 切分字符串自定义转换(分隔符默认逗号)
      *
-     * @param str    被切分的字符串
+     * @param str 被切分的字符串
      * @param mapper 自定义转换
      * @return 分割后的数据列表
      */
@@ -306,20 +313,19 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 切分字符串自定义转换
      *
-     * @param str       被切分的字符串
+     * @param str 被切分的字符串
      * @param separator 分隔符
-     * @param mapper    自定义转换
+     * @param mapper 自定义转换
      * @return 分割后的数据列表
      */
-    public static <T> List<T> splitTo(String str, String separator, Function<? super Object, T> mapper) {
+    public static <T> List<T> splitTo(
+            String str, String separator, Function<? super Object, T> mapper) {
         if (isBlank(str)) {
             return new ArrayList<>(0);
         }
-        return StrUtil.split(str, separator)
-            .stream()
-            .filter(Objects::nonNull)
-            .map(mapper)
-            .collect(Collectors.toList());
+        return StrUtil.split(str, separator).stream()
+                .filter(Objects::nonNull)
+                .map(mapper)
+                .collect(Collectors.toList());
     }
-
 }

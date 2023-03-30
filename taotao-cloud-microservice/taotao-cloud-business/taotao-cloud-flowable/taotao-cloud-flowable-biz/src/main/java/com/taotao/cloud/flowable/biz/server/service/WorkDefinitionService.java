@@ -1,25 +1,26 @@
-/**
- * Copyright (c) 2022 KCloud-Platform-Alibaba Authors. All Rights Reserved.
- * <p>
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.flowable.biz.server.service;
+
+import java.io.InputStream;
 import org.laokou.flowable.client.dto.DefinitionDTO;
 import org.laokou.flowable.client.vo.DefinitionVO;
 import org.laokou.flowable.client.vo.PageVO;
 
-import java.io.IOException;
-import java.io.InputStream;
 /**
  * @author laokou
  */
@@ -27,6 +28,7 @@ public interface WorkDefinitionService {
 
     /**
      * 新增流程文件
+     *
      * @param in
      * @return
      */
@@ -34,6 +36,7 @@ public interface WorkDefinitionService {
 
     /**
      * 分页查询流程
+     *
      * @param dto
      * @return
      */
@@ -41,6 +44,7 @@ public interface WorkDefinitionService {
 
     /**
      * 查看流程图
+     *
      * @param definitionId
      * @return
      */
@@ -48,6 +52,7 @@ public interface WorkDefinitionService {
 
     /**
      * 删除流程
+     *
      * @param deploymentId
      * @return
      */
@@ -55,6 +60,7 @@ public interface WorkDefinitionService {
 
     /**
      * 挂起流程
+     *
      * @param definitionId
      * @return
      */
@@ -62,9 +68,9 @@ public interface WorkDefinitionService {
 
     /**
      * 激活流程
+     *
      * @param definitionId
      * @return
      */
     Boolean activateDefinition(String definitionId);
-
 }

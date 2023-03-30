@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.im.biz.platform.modules.chat.vo;
 
 import com.platform.common.enums.GenderEnum;
@@ -8,49 +24,27 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true) // 链式调用
 public class MyVo09 {
 
-    /**
-     * 主键
-     */
+    /** 主键 */
     private Long userId;
-    /**
-     * 昵称
-     */
+    /** 昵称 */
     private String nickName;
-    /**
-     * 头像
-     */
+    /** 头像 */
     private String portrait;
-    /**
-     * 封面
-     */
+    /** 封面 */
     private String cover;
-    /**
-     * 性别1男0女
-     */
+    /** 性别1男0女 */
     private GenderEnum gender;
-    /**
-     * 手机号
-     */
+    /** 手机号 */
     private String phone;
-    /**
-     * 推送id
-     */
+    /** 推送id */
     private String cid;
-    /**
-     * 微聊号
-     */
+    /** 微聊号 */
     private String chatNo;
-    /**
-     * 介绍
-     */
+    /** 介绍 */
     private String intro;
-    /**
-     * 省份
-     */
+    /** 省份 */
     private String provinces;
-    /**
-     * 城市
-     */
+    /** 城市 */
     private String city;
 
     public String getGenderLabel() {
@@ -59,5 +53,4 @@ public class MyVo09 {
         }
         return gender.getInfo();
     }
-
 }

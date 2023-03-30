@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.sa.just.biz.just.justauth.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -9,39 +25,38 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * <p>
  * 租户第三方用户绑定 Mapper 接口
- * </p>
  *
  * @since 2022-05-19
  */
 public interface JustAuthSocialUserMapper extends BaseMapper<JustAuthSocialUser> {
 
-	/**
-	 * 分页查询租户第三方用户绑定列表
-	 *
-	 * @param page
-	 * @param justAuthSocialUserDTO
-	 * @return
-	 */
-	Page<JustAuthSocialUserDTO> queryJustAuthSocialUserList(Page<JustAuthSocialUserDTO> page,
-		@Param("justAuthSocialUser") QueryJustAuthSocialUserDTO justAuthSocialUserDTO);
+    /**
+     * 分页查询租户第三方用户绑定列表
+     *
+     * @param page
+     * @param justAuthSocialUserDTO
+     * @return
+     */
+    Page<JustAuthSocialUserDTO> queryJustAuthSocialUserList(
+            Page<JustAuthSocialUserDTO> page,
+            @Param("justAuthSocialUser") QueryJustAuthSocialUserDTO justAuthSocialUserDTO);
 
-	/**
-	 * 查询租户第三方用户绑定列表
-	 *
-	 * @param justAuthSocialUserDTO
-	 * @return
-	 */
-	List<JustAuthSocialUserDTO> queryJustAuthSocialUserList(
-		@Param("justAuthSocialUser") QueryJustAuthSocialUserDTO justAuthSocialUserDTO);
+    /**
+     * 查询租户第三方用户绑定列表
+     *
+     * @param justAuthSocialUserDTO
+     * @return
+     */
+    List<JustAuthSocialUserDTO> queryJustAuthSocialUserList(
+            @Param("justAuthSocialUser") QueryJustAuthSocialUserDTO justAuthSocialUserDTO);
 
-	/**
-	 * 查询租户第三方用户绑定信息
-	 *
-	 * @param justAuthSocialUserDTO
-	 * @return
-	 */
-	JustAuthSocialUserDTO queryJustAuthSocialUser(
-		@Param("justAuthSocialUser") QueryJustAuthSocialUserDTO justAuthSocialUserDTO);
+    /**
+     * 查询租户第三方用户绑定信息
+     *
+     * @param justAuthSocialUserDTO
+     * @return
+     */
+    JustAuthSocialUserDTO queryJustAuthSocialUser(
+            @Param("justAuthSocialUser") QueryJustAuthSocialUserDTO justAuthSocialUserDTO);
 }
