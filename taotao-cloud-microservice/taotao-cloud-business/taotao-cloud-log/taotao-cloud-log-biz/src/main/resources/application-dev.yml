@@ -785,6 +785,9 @@ taotao:
           enabled: false
         tenant:
           enabled: false
+        sql-log-enable: true
+        sql-collector-enable: true
+        audit-enable: true
       jpa:
         enabled: true
         packages: com.taotao.cloud.log.biz.model.entity
@@ -851,7 +854,8 @@ taotao:
       enabled: true
     security:
       ignore-url:
-        - /job/**
+        - /log/**
+        - /log/testAdd
     job:
       scheduled:
         enabled: true

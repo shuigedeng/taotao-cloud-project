@@ -51,7 +51,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @AllArgsConstructor
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements ILogService {
 
     @Override
@@ -98,7 +97,6 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements ILog
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(String username, String ip, ProceedingJoinPoint joinPoint, Log log, Long uid) {
-
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         RequestLogger requestLogger = method.getAnnotation(RequestLogger.class);
