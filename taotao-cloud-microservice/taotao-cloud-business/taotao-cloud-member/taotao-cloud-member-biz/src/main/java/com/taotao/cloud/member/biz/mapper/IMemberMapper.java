@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.member.biz.mapper;
 
+package com.taotao.cloud.member.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -22,32 +22,29 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
-
-/**
- * 会员数据处理层
- */
+/** 会员数据处理层 */
 public interface IMemberMapper extends BaseSuperMapper<Member, Long> {
 
-	/**
-	 * 获取所有的会员手机号
-	 *
-	 * @return 会员手机号
-	 */
-	@Select("""
+    /**
+     * 获取所有的会员手机号
+     *
+     * @return 会员手机号
+     */
+    @Select("""
 		select m.mobile
 		from tt_member m
 		""")
-	List<String> getAllMemberMobile();
+    List<String> getAllMemberMobile();
 
-	@Select("""
+    @Select("""
 		select *
 		from tt_member
 		${ew.customSqlSegment}
 		""")
-	IPage<MemberVO> pageByMemberVO(IPage<MemberVO> page,
-								   @Param(Constants.WRAPPER) Wrapper<Member> queryWrapper);
+    IPage<MemberVO> pageByMemberVO(
+            IPage<MemberVO> page, @Param(Constants.WRAPPER) Wrapper<Member> queryWrapper);
 }

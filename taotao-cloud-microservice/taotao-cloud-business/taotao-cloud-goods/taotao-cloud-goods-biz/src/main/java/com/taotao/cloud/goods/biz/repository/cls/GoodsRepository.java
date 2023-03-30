@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.repository.cls;
 
 import com.taotao.cloud.goods.biz.model.entity.Goods;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GoodsRepository extends BaseClassSuperRepository<Goods, Long> {
 
-	public GoodsRepository(EntityManager em) {
-		super(Goods.class, em);
-	}
-
+    public GoodsRepository(EntityManager em) {
+        super(Goods.class, em);
+    }
 }

@@ -1,22 +1,22 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.mch.ctrl.merchant;
 
 import cn.hutool.core.util.IdUtil;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.ApiCodeEnum;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.MchApp;
@@ -45,10 +45,8 @@ public class MchAppController extends CommonCtrl {
     @Autowired private IMQSender mqSender;
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 应用列表
-     * @Date: 9:59 2021/6/16
-    */
+     * @Author: ZhuXiao @Description: 应用列表 @Date: 9:59 2021/6/16
+     */
     @PreAuthorize("hasAuthority('ENT_MCH_APP_LIST')")
     @GetMapping
     public ApiRes list() {
@@ -60,10 +58,8 @@ public class MchAppController extends CommonCtrl {
     }
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 新建应用
-     * @Date: 10:05 2021/6/16
-    */
+     * @Author: ZhuXiao @Description: 新建应用 @Date: 10:05 2021/6/16
+     */
     @PreAuthorize("hasAuthority('ENT_MCH_APP_ADD')")
     @MethodLog(remark = "新建应用")
     @PostMapping
@@ -80,9 +76,7 @@ public class MchAppController extends CommonCtrl {
     }
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 应用详情
-     * @Date: 10:13 2021/6/16
+     * @Author: ZhuXiao @Description: 应用详情 @Date: 10:13 2021/6/16
      */
     @PreAuthorize("hasAnyAuthority('ENT_MCH_APP_VIEW', 'ENT_MCH_APP_EDIT')")
     @GetMapping("/{appId}")
@@ -97,10 +91,8 @@ public class MchAppController extends CommonCtrl {
     }
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 更新应用信息
-     * @Date: 10:11 2021/6/16
-    */
+     * @Author: ZhuXiao @Description: 更新应用信息 @Date: 10:11 2021/6/16
+     */
     @PreAuthorize("hasAuthority('ENT_MCH_APP_EDIT')")
     @MethodLog(remark = "更新应用信息")
     @PutMapping("/{appId}")
@@ -119,14 +111,16 @@ public class MchAppController extends CommonCtrl {
         }
         // 推送修改应用消息
         mqSender.send(
-	        ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP, null, mchApp.getMchNo(), appId));
+                ResetIsvMchAppInfoConfigMQ.build(
+                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP,
+                        null,
+                        mchApp.getMchNo(),
+                        appId));
         return ApiRes.ok();
     }
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 删除应用
-     * @Date: 10:14 2021/6/16
+     * @Author: ZhuXiao @Description: 删除应用 @Date: 10:14 2021/6/16
      */
     @PreAuthorize("hasAuthority('ENT_MCH_APP_DEL')")
     @MethodLog(remark = "删除应用")
@@ -141,8 +135,12 @@ public class MchAppController extends CommonCtrl {
         mchAppService.removeByAppId(appId);
 
         // 推送mq到目前节点进行更新数据
-        mqSender.send(ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP, null, mchApp.getMchNo(), appId));
+        mqSender.send(
+                ResetIsvMchAppInfoConfigMQ.build(
+                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP,
+                        null,
+                        mchApp.getMchNo(),
+                        appId));
         return ApiRes.ok();
     }
-
 }

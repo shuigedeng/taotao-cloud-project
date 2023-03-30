@@ -1,18 +1,19 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.mq.vender.aliyunrocketmq.receive;
 
 import com.taotao.cloud.payment.biz.jeepay.mq.constant.MQVenderCS;
@@ -27,8 +28,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
- * AliYunRocketMQ消息接收器：仅在vender=AliYunRocketMQ时 && 项目实现IMQReceiver接口时 进行实例化
- * 业务：  支付订单补单（一般用于没有回调的接口，比如微信的条码支付）
+ * AliYunRocketMQ消息接收器：仅在vender=AliYunRocketMQ时 && 项目实现IMQReceiver接口时 进行实例化 业务：
+ * 支付订单补单（一般用于没有回调的接口，比如微信的条码支付）
  */
 @Slf4j
 @Component
@@ -38,12 +39,9 @@ public class PayOrderReissueAliYunRocketMQReceiver extends AbstractAliYunRocketM
 
     private static final String CONSUMER_NAME = "支付订单补单消息";
 
-    @Autowired
-    private PayOrderReissueMQ.IMQReceiver mqReceiver;
+    @Autowired private PayOrderReissueMQ.IMQReceiver mqReceiver;
 
-    /**
-     * 接收 【 queue 】 类型的消息
-     **/
+    /** 接收 【 queue 】 类型的消息 */
     @Override
     @Async(MqThreadExecutor.EXECUTOR_PAYORDER_MCH_NOTIFY)
     public void receiveMsg(String msg) {

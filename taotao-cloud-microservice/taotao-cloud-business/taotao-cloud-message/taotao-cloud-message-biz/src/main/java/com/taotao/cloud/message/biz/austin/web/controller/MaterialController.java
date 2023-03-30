@@ -1,5 +1,20 @@
-package com.taotao.cloud.message.biz.austin.web.controller;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.message.biz.austin.web.controller;
 
 import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
@@ -14,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
 /**
  * 素材管理接口
  *
@@ -26,31 +40,31 @@ import org.springframework.web.multipart.MultipartFile;
 @Api("素材管理接口")
 public class MaterialController {
 
-	@Autowired
-	private MaterialService materialService;
+    @Autowired private MaterialService materialService;
 
-
-	/**
-	 * 素材上传接口
-	 *
-	 * @param file        文件内容
-	 * @param sendAccount 发送账号
-	 * @param sendChannel 发送渠道
-	 * @param fileType    文件类型
-	 * @return
-	 */
-	@PostMapping("/upload")
-	@ApiOperation("/素材上传接口")
-	public BasicResultVO uploadMaterial(@RequestParam("file") MultipartFile file,
-		String sendAccount, Integer sendChannel, String fileType) {
-		if (ChannelType.DING_DING_WORK_NOTICE.getCode().equals(sendChannel)) {
-			return materialService.dingDingMaterialUpload(file, sendAccount, fileType);
-		} else if (ChannelType.ENTERPRISE_WE_CHAT_ROBOT.getCode().equals(sendChannel)) {
-			return materialService.enterpriseWeChatRootMaterialUpload(file, sendAccount, fileType);
-		} else if (ChannelType.ENTERPRISE_WE_CHAT.getCode().equals(sendChannel)) {
-			return materialService.enterpriseWeChatMaterialUpload(file, sendAccount, fileType);
-		}
-		return BasicResultVO.success();
-	}
-
+    /**
+     * 素材上传接口
+     *
+     * @param file 文件内容
+     * @param sendAccount 发送账号
+     * @param sendChannel 发送渠道
+     * @param fileType 文件类型
+     * @return
+     */
+    @PostMapping("/upload")
+    @ApiOperation("/素材上传接口")
+    public BasicResultVO uploadMaterial(
+            @RequestParam("file") MultipartFile file,
+            String sendAccount,
+            Integer sendChannel,
+            String fileType) {
+        if (ChannelType.DING_DING_WORK_NOTICE.getCode().equals(sendChannel)) {
+            return materialService.dingDingMaterialUpload(file, sendAccount, fileType);
+        } else if (ChannelType.ENTERPRISE_WE_CHAT_ROBOT.getCode().equals(sendChannel)) {
+            return materialService.enterpriseWeChatRootMaterialUpload(file, sendAccount, fileType);
+        } else if (ChannelType.ENTERPRISE_WE_CHAT.getCode().equals(sendChannel)) {
+            return materialService.enterpriseWeChatMaterialUpload(file, sendAccount, fileType);
+        }
+        return BasicResultVO.success();
+    }
 }

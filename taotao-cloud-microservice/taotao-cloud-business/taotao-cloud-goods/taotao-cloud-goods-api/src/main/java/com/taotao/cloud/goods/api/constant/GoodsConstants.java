@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.api.constant;
 
 /**
- * 拼音模块常量 
+ * 拼音模块常量
  *
  * @author shuigedeng
  * @version 2022.03
@@ -24,19 +25,12 @@ package com.taotao.cloud.goods.api.constant;
  */
 public interface GoodsConstants {
 
-    /**
-     * 邮件模块的名称
-     */
+    /** 邮件模块的名称 */
     String PINYIN_MODULE_NAME = "kernel-d-pinyin";
 
-    /**
-     * 异常枚举的步进值
-     */
+    /** 异常枚举的步进值 */
     String PINYIN_EXCEPTION_STEP_CODE = "22";
 
-    /**
-     * 中文字符的正则表达式
-     */
+    /** 中文字符的正则表达式 */
     String CHINESE_WORDS_REGEX = "[\u4E00-\u9FA5]+";
-
 }

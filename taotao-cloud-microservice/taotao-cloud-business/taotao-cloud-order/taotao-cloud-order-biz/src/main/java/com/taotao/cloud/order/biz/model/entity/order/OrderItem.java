@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.order.biz.model.entity.order;
 
 import cn.hutool.core.collection.CollUtil;
@@ -46,207 +62,181 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = OrderItem.TABLE_NAME, comment = "子订单表")
 public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
 
-	public static final String TABLE_NAME = "tt_order_item";
+    public static final String TABLE_NAME = "tt_order_item";
 
-	/**
-	 * 订单编号
-	 */
-	@Column(name = "order_sn", columnDefinition = "varchar(64) not null comment '订单编号'")
-	private String orderSn;
+    /** 订单编号 */
+    @Column(name = "order_sn", columnDefinition = "varchar(64) not null comment '订单编号'")
+    private String orderSn;
 
-	/**
-	 * 子订单编号
-	 */
-	@Column(name = "sn", columnDefinition = "varchar(64) not null comment '子订单编号'")
-	private String sn;
+    /** 子订单编号 */
+    @Column(name = "sn", columnDefinition = "varchar(64) not null comment '子订单编号'")
+    private String sn;
 
-	/**
-	 * 单价
-	 */
-	@Column(name = "unit_price", columnDefinition = "varchar(64) not null comment '单价'")
-	private BigDecimal unitPrice;
+    /** 单价 */
+    @Column(name = "unit_price", columnDefinition = "varchar(64) not null comment '单价'")
+    private BigDecimal unitPrice;
 
-	/**
-	 * 小记
-	 */
-	@Column(name = "sub_total", columnDefinition = "varchar(64) not null comment '小记'")
-	private BigDecimal subTotal;
+    /** 小记 */
+    @Column(name = "sub_total", columnDefinition = "varchar(64) not null comment '小记'")
+    private BigDecimal subTotal;
 
-	/**
-	 * 商品ID
-	 */
-	@Column(name = "goods_id", columnDefinition = "varchar(64) not null comment '商品ID'")
-	private Long goodsId;
+    /** 商品ID */
+    @Column(name = "goods_id", columnDefinition = "varchar(64) not null comment '商品ID'")
+    private Long goodsId;
 
-	/**
-	 * 货品ID
-	 */
-	@Column(name = "sku_id", columnDefinition = "varchar(64) not null comment '货品ID'")
-	private Long skuId;
+    /** 货品ID */
+    @Column(name = "sku_id", columnDefinition = "varchar(64) not null comment '货品ID'")
+    private Long skuId;
 
-	/**
-	 * 销售量
-	 */
-	@Column(name = "num", columnDefinition = "varchar(64) not null comment '销售量'")
-	private Integer num;
+    /** 销售量 */
+    @Column(name = "num", columnDefinition = "varchar(64) not null comment '销售量'")
+    private Integer num;
 
-	/**
-	 * 交易编号
-	 */
-	@Column(name = "trade_sn", columnDefinition = "varchar(64) not null comment '交易编号'")
-	private String tradeSn;
+    /** 交易编号 */
+    @Column(name = "trade_sn", columnDefinition = "varchar(64) not null comment '交易编号'")
+    private String tradeSn;
 
-	/**
-	 * 图片
-	 */
-	@Column(name = "image", columnDefinition = "varchar(64) not null comment '图片'")
-	private String image;
+    /** 图片 */
+    @Column(name = "image", columnDefinition = "varchar(64) not null comment '图片'")
+    private String image;
 
-	/**
-	 * 商品名称
-	 */
-	@Column(name = "goods_name", columnDefinition = "varchar(64) not null comment '商品名称'")
-	private String goodsName;
+    /** 商品名称 */
+    @Column(name = "goods_name", columnDefinition = "varchar(64) not null comment '商品名称'")
+    private String goodsName;
 
-	/**
-	 * 分类ID
-	 */
-	@Column(name = "category_id", columnDefinition = "varchar(64) not null comment '分类ID'")
-	private Long categoryId;
+    /** 分类ID */
+    @Column(name = "category_id", columnDefinition = "varchar(64) not null comment '分类ID'")
+    private Long categoryId;
 
-	/**
-	 * 快照id
-	 */
-	@Column(name = "snapshot_id", columnDefinition = "varchar(64) not null comment '快照id'")
-	private Long snapshotId;
+    /** 快照id */
+    @Column(name = "snapshot_id", columnDefinition = "varchar(64) not null comment '快照id'")
+    private Long snapshotId;
 
-	/**
-	 * 规格json
-	 */
-	@Column(name = "specs", columnDefinition = "json not null comment '规格json'")
-	private String specs;
+    /** 规格json */
+    @Column(name = "specs", columnDefinition = "json not null comment '规格json'")
+    private String specs;
 
-	/**
-	 * 促销类型
-	 */
-	@Column(name = "promotion_type", columnDefinition = "varchar(64) not null comment '促销类型'")
-	private String promotionType;
+    /** 促销类型 */
+    @Column(name = "promotion_type", columnDefinition = "varchar(64) not null comment '促销类型'")
+    private String promotionType;
 
-	/**
-	 * 促销id
-	 */
-	@Column(name = "promotion_id", columnDefinition = "varchar(64) not null comment '促销id'")
-	private Long promotionId;
+    /** 促销id */
+    @Column(name = "promotion_id", columnDefinition = "varchar(64) not null comment '促销id'")
+    private Long promotionId;
 
-	/**
-	 * 销售金额
-	 */
-	@Column(name = "goods_price", columnDefinition = "varchar(64) not null comment '销售金额'")
-	private BigDecimal goodsPrice;
+    /** 销售金额 */
+    @Column(name = "goods_price", columnDefinition = "varchar(64) not null comment '销售金额'")
+    private BigDecimal goodsPrice;
 
-	/**
-	 * 实际金额
-	 */
-	@Column(name = "flow_price", columnDefinition = "varchar(64) not null comment '实际金额'")
-	private BigDecimal flowPrice;
+    /** 实际金额 */
+    @Column(name = "flow_price", columnDefinition = "varchar(64) not null comment '实际金额'")
+    private BigDecimal flowPrice;
 
-	/**
-	 * 评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，
-	 *
-	 * @see CommentStatusEnum
-	 */
-	@Column(name = "comment_status", columnDefinition = "varchar(64) not null comment '评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，'")
-	private String commentStatus;
+    /**
+     * 评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，
+     *
+     * @see CommentStatusEnum
+     */
+    @Column(
+            name = "comment_status",
+            columnDefinition =
+                    "varchar(64) not null comment"
+                            + " '评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，'")
+    private String commentStatus;
 
-	/**
-	 * 售后状态
-	 *
-	 * @see OrderItemAfterSaleStatusEnum
-	 */
-	@Column(name = "after_sale_status", columnDefinition = "varchar(64) not null comment '售后状态'")
-	private String afterSaleStatus;
+    /**
+     * 售后状态
+     *
+     * @see OrderItemAfterSaleStatusEnum
+     */
+    @Column(name = "after_sale_status", columnDefinition = "varchar(64) not null comment '售后状态'")
+    private String afterSaleStatus;
 
-	/**
-	 * 价格详情
-	 */
-	@Column(name = "price_detail", columnDefinition = "varchar(64) not null comment '价格详情'")
-	private String priceDetail;
+    /** 价格详情 */
+    @Column(name = "price_detail", columnDefinition = "varchar(64) not null comment '价格详情'")
+    private String priceDetail;
 
-	/**
-	 * 投诉状态
-	 *
-	 * @see OrderComplaintStatusEnum
-	 */
-	@Column(name = "complain_status", columnDefinition = "varchar(64) not null comment '投诉状态'")
-	private String complainStatus;
+    /**
+     * 投诉状态
+     *
+     * @see OrderComplaintStatusEnum
+     */
+    @Column(name = "complain_status", columnDefinition = "varchar(64) not null comment '投诉状态'")
+    private String complainStatus;
 
-	/**
-	 * 交易投诉id
-	 */
-	@Column(name = "complain_id", columnDefinition = "varchar(64) not null comment '交易投诉id'")
-	private Long complainId;
+    /** 交易投诉id */
+    @Column(name = "complain_id", columnDefinition = "varchar(64) not null comment '交易投诉id'")
+    private Long complainId;
 
-	/**
-	 * 退货商品数量
-	 */
-	@Column(name = "return_goods_number", columnDefinition = "varchar(64) not null comment '退货商品数量'")
-	private Integer returnGoodsNumber;
+    /** 退货商品数量 */
+    @Column(
+            name = "return_goods_number",
+            columnDefinition = "varchar(64) not null comment '退货商品数量'")
+    private Integer returnGoodsNumber;
 
-	public OrderItem(CartSkuVO cartSkuVO, CartVO cartVO, TradeDTO tradeDTO) {
-		Long oldId = this.getId();
-		BeanUtils.copyProperties(cartSkuVO.getGoodsSku(), this);
-		BeanUtils.copyProperties(cartSkuVO.getPriceDetailDTO(), this);
-		BeanUtils.copyProperties(cartSkuVO, this);
-		this.setId(oldId);
-		if (cartSkuVO.getPriceDetailDTO().getJoinPromotion() != null
-				&& !cartSkuVO.getPriceDetailDTO().getJoinPromotion().isEmpty()) {
-			this.setPromotionType(
-					CollUtil.join(cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream().map(
-							PromotionSkuVO::getPromotionType).collect(Collectors.toList()), ","));
-			this.setPromotionId(CollUtil.join(
-					cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
-							.map(PromotionSkuVO::getActivityId).collect(Collectors.toList()), ","));
-		}
-		this.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.NEW.name());
-		this.setCommentStatus(CommentStatusEnum.NEW.name());
-		this.setComplainStatus(OrderComplaintStatusEnum.NEW.name());
-		this.setPriceDetailDTO(cartSkuVO.getPriceDetailDTO());
-		this.setOrderSn(cartVO.getSn());
-		this.setTradeSn(tradeDTO.getSn());
-		this.setImage(cartSkuVO.getGoodsSku().getThumbnail());
-		this.setGoodsName(cartSkuVO.getGoodsSku().getGoodsName());
-		this.setSkuId(cartSkuVO.getGoodsSku().getId());
-		this.setCategoryId(cartSkuVO.getGoodsSku().getCategoryPath().substring(
-				cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1
-		));
-		this.setGoodsPrice(cartSkuVO.getGoodsSku().getPrice());
-		this.setUnitPrice(cartSkuVO.getPurchasePrice());
-		this.setSubTotal(cartSkuVO.getSubTotal());
-		this.setSn(SnowFlake.createStr("OI"));
-	}
+    public OrderItem(CartSkuVO cartSkuVO, CartVO cartVO, TradeDTO tradeDTO) {
+        Long oldId = this.getId();
+        BeanUtils.copyProperties(cartSkuVO.getGoodsSku(), this);
+        BeanUtils.copyProperties(cartSkuVO.getPriceDetailDTO(), this);
+        BeanUtils.copyProperties(cartSkuVO, this);
+        this.setId(oldId);
+        if (cartSkuVO.getPriceDetailDTO().getJoinPromotion() != null
+                && !cartSkuVO.getPriceDetailDTO().getJoinPromotion().isEmpty()) {
+            this.setPromotionType(
+                    CollUtil.join(
+                            cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
+                                    .map(PromotionSkuVO::getPromotionType)
+                                    .collect(Collectors.toList()),
+                            ","));
+            this.setPromotionId(
+                    CollUtil.join(
+                            cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
+                                    .map(PromotionSkuVO::getActivityId)
+                                    .collect(Collectors.toList()),
+                            ","));
+        }
+        this.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.NEW.name());
+        this.setCommentStatus(CommentStatusEnum.NEW.name());
+        this.setComplainStatus(OrderComplaintStatusEnum.NEW.name());
+        this.setPriceDetailDTO(cartSkuVO.getPriceDetailDTO());
+        this.setOrderSn(cartVO.getSn());
+        this.setTradeSn(tradeDTO.getSn());
+        this.setImage(cartSkuVO.getGoodsSku().getThumbnail());
+        this.setGoodsName(cartSkuVO.getGoodsSku().getGoodsName());
+        this.setSkuId(cartSkuVO.getGoodsSku().getId());
+        this.setCategoryId(
+                cartSkuVO
+                        .getGoodsSku()
+                        .getCategoryPath()
+                        .substring(cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1));
+        this.setGoodsPrice(cartSkuVO.getGoodsSku().getPrice());
+        this.setUnitPrice(cartSkuVO.getPurchasePrice());
+        this.setSubTotal(cartSkuVO.getSubTotal());
+        this.setSn(SnowFlake.createStr("OI"));
+    }
 
-	public PriceDetailDTO getPriceDetailDTO() {
-		return JSONUtil.toBean(priceDetail, PriceDetailDTO.class);
-	}
+    public PriceDetailDTO getPriceDetailDTO() {
+        return JSONUtil.toBean(priceDetail, PriceDetailDTO.class);
+    }
 
-	public void setPriceDetailDTO(PriceDetailDTO priceDetail) {
-		this.priceDetail = JSONUtil.toJsonStr(priceDetail);
-	}
+    public void setPriceDetailDTO(PriceDetailDTO priceDetail) {
+        this.priceDetail = JSONUtil.toJsonStr(priceDetail);
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-			return false;
-		}
-		OrderItem orderItem = (OrderItem) o;
-		return getId() != null && Objects.equals(getId(), orderItem.getId());
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        OrderItem orderItem = (OrderItem) o;
+        return getId() != null && Objects.equals(getId(), orderItem.getId());
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

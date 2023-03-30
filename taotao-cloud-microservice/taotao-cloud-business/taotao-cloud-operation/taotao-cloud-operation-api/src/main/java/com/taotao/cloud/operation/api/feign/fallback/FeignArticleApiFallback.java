@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.operation.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.operation.api.feign.IFeignArticleApi;
 import com.taotao.cloud.operation.api.model.vo.ArticleVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -28,13 +27,13 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @since 2020/4/29 21:43
  */
 public class FeignArticleApiFallback implements FallbackFactory<IFeignArticleApi> {
-	@Override
-	public IFeignArticleApi create(Throwable throwable) {
-		return new IFeignArticleApi() {
-			@Override
-			public ArticleVO getMemberSecurityUser(Long id) {
-				return null;
-			}
-		};
-	}
+    @Override
+    public IFeignArticleApi create(Throwable throwable) {
+        return new IFeignArticleApi() {
+            @Override
+            public ArticleVO getMemberSecurityUser(Long id) {
+                return null;
+            }
+        };
+    }
 }

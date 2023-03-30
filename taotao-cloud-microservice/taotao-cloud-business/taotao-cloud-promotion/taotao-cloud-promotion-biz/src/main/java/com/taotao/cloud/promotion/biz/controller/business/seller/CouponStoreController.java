@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.promotion.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -6,11 +22,11 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.service.business.ICouponService;
+import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
@@ -39,88 +55,93 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/store/promotion/coupon")
 public class CouponStoreController {
 
-	@Autowired
-	private ICouponService couponService;
+    @Autowired private ICouponService couponService;
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@GetMapping
-	@Operation(summary = "获取优惠券列表")
-	public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam, PageVO page) {
-		page.setNotConvert(true);
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		queryParam.setStoreId(storeId);
-		IPage<CouponVO> coupons = couponService.pageVOFindAll(queryParam, page);
-		return Result.success(coupons);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @GetMapping
+    @Operation(summary = "获取优惠券列表")
+    public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam, PageVO page) {
+        page.setNotConvert(true);
+        String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+        queryParam.setStoreId(storeId);
+        IPage<CouponVO> coupons = couponService.pageVOFindAll(queryParam, page);
+        return Result.success(coupons);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "获取优惠券详情")
-	@GetMapping("/{couponId}")
-	public Result<Coupon> getCouponList(@PathVariable String couponId) {
-		CouponVO coupon = OperationalJudgment.judgment(couponService.getDetail(couponId));
-		return Result.success(coupon);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "获取优惠券详情")
+    @GetMapping("/{couponId}")
+    public Result<Coupon> getCouponList(@PathVariable String couponId) {
+        CouponVO coupon = OperationalJudgment.judgment(couponService.getDetail(couponId));
+        return Result.success(coupon);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "添加优惠券")
-	@PostMapping(consumes = "application/json", produces = "application/json")
-	public Result<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
-		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-		couponVO.setStoreId(currentUser.getStoreId());
-		couponVO.setStoreName(currentUser.getStoreName());
-		if (couponService.savePromotions(couponVO)) {
-			return Result.success(couponVO);
-		}
-		return Result.error(ResultEnum.COUPON_SAVE_ERROR);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "添加优惠券")
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public Result<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
+        AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
+        couponVO.setStoreId(currentUser.getStoreId());
+        couponVO.setStoreName(currentUser.getStoreName());
+        if (couponService.savePromotions(couponVO)) {
+            return Result.success(couponVO);
+        }
+        return Result.error(ResultEnum.COUPON_SAVE_ERROR);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@PutMapping(consumes = "application/json", produces = "application/json")
-	@Operation(summary = "修改优惠券")
-	public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
-		OperationalJudgment.judgment(couponService.getById(couponVO.getId()));
-		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-		couponVO.setStoreId(currentUser.getStoreId());
-		couponVO.setStoreName(currentUser.getStoreName());
-		if (couponService.updatePromotions(couponVO)) {
-			return Result.success(couponVO);
-		}
-		return Result.error(ResultEnum.COUPON_SAVE_ERROR);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    @Operation(summary = "修改优惠券")
+    public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
+        OperationalJudgment.judgment(couponService.getById(couponVO.getId()));
+        AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
+        couponVO.setStoreId(currentUser.getStoreId());
+        couponVO.setStoreName(currentUser.getStoreName());
+        if (couponService.updatePromotions(couponVO)) {
+            return Result.success(couponVO);
+        }
+        return Result.error(ResultEnum.COUPON_SAVE_ERROR);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@DeleteMapping(value = "/{ids}")
-	@Operation(summary = "批量删除")
-	public Result<Object> delAllByIds(@PathVariable List<String> ids) {
-		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		LambdaQueryWrapper<Coupon> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.in(Coupon::getId, ids);
-		queryWrapper.eq(Coupon::getStoreId, storeId);
-		List<Coupon> list = couponService.list(queryWrapper);
-		List<String> filterIds = list.stream().map(Coupon::getId).collect(Collectors.toList());
-		return couponService.removePromotions(filterIds) ? Result.success()
-			: Result.error(ResultEnum.COUPON_DELETE_ERROR);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @DeleteMapping(value = "/{ids}")
+    @Operation(summary = "批量删除")
+    public Result<Object> delAllByIds(@PathVariable List<String> ids) {
+        String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+        LambdaQueryWrapper<Coupon> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(Coupon::getId, ids);
+        queryWrapper.eq(Coupon::getStoreId, storeId);
+        List<Coupon> list = couponService.list(queryWrapper);
+        List<String> filterIds = list.stream().map(Coupon::getId).collect(Collectors.toList());
+        return couponService.removePromotions(filterIds)
+                ? Result.success()
+                : Result.error(ResultEnum.COUPON_DELETE_ERROR);
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "修改优惠券状态")
-	@PutMapping("/status")
-	public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
-		AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-		String[] split = couponIds.split(",");
-		List<String> couponIdList = couponService.list(
-				new LambdaQueryWrapper<Coupon>().in(Coupon::getId, Arrays.asList(split))
-					.eq(Coupon::getStoreId, currentUser.getStoreId())).stream().map(Coupon::getId)
-			.collect(Collectors.toList());
-		if (couponService.updateStatus(couponIdList, startTime, endTime)) {
-			return Result.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
-		}
-		throw new BusinessException(ResultEnum.COUPON_EDIT_STATUS_ERROR);
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "修改优惠券状态")
+    @PutMapping("/status")
+    public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
+        AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
+        String[] split = couponIds.split(",");
+        List<String> couponIdList =
+                couponService
+                        .list(
+                                new LambdaQueryWrapper<Coupon>()
+                                        .in(Coupon::getId, Arrays.asList(split))
+                                        .eq(Coupon::getStoreId, currentUser.getStoreId()))
+                        .stream()
+                        .map(Coupon::getId)
+                        .collect(Collectors.toList());
+        if (couponService.updateStatus(couponIdList, startTime, endTime)) {
+            return Result.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
+        }
+        throw new BusinessException(ResultEnum.COUPON_EDIT_STATUS_ERROR);
+    }
 }

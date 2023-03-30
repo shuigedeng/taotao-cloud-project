@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.api.common.util.message;
 
 import com.aliyuncs.DefaultAcsClient;
@@ -14,9 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-/**
- * 发送短信 - 阿里大鱼
- */
+/** 发送短信 - 阿里大鱼 */
 @Component
 public class AliSmsUtils {
 
@@ -55,7 +69,8 @@ public class AliSmsUtils {
         // "LTAITplfFi8vUYPt";//你的accessKeyId,参考本文档步骤2
         // final String accessKeySecret =
         // 初始化ascClient,暂时不支持多region（请勿修改）
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+        IClientProfile profile =
+                DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         try {
             DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
         } catch (ClientException e1) {
@@ -98,5 +113,4 @@ public class AliSmsUtils {
         }
         return false;
     }
-
 }

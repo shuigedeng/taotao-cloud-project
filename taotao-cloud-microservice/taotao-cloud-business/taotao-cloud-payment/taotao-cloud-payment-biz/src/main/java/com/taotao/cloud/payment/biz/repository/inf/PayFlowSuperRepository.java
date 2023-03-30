@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.repository.inf;
 
 import com.taotao.cloud.data.jpa.base.repository.JpaSuperRepository;
@@ -28,8 +29,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PayFlowSuperRepository extends JpaSuperRepository<PayFlow, Long> {
 
-	public PayFlowSuperRepository(EntityManager em) {
-		super(PayFlow.class, em);
-	}
-
+    public PayFlowSuperRepository(EntityManager em) {
+        super(PayFlow.class, em);
+    }
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.niefy.modules.wx.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -24,102 +40,97 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-
 @Service("wxAccountService")
-public class WxAccountServiceImpl extends ServiceImpl<WxAccountMapper, WxAccount> implements
-		WxAccountService {
+public class WxAccountServiceImpl extends ServiceImpl<WxAccountMapper, WxAccount>
+        implements WxAccountService {
 
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	WxMpService wxMpService;
+    @Autowired WxMpService wxMpService;
 
-	@Override
-	public PageUtils queryPage(Map<String, Object> params) {
-		String name = (String) params.get("name");
-		IPage<WxAccount> page = this.page(
-				new Query<WxAccount>().getPage(params),
-				new QueryWrapper<WxAccount>()
-						.like(StringUtils.hasText(name), "name", name)
-		);
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+        String name = (String) params.get("name");
+        IPage<WxAccount> page =
+                this.page(
+                        new Query<WxAccount>().getPage(params),
+                        new QueryWrapper<WxAccount>()
+                                .like(StringUtils.hasText(name), "name", name));
 
-		return new PageUtils(page);
-	}
+        return new PageUtils(page);
+    }
 
-	@PostConstruct
-	public void loadWxMpConfigStorages() {
-		logger.info("加载公众号配置...");
-		List<WxAccount> accountList = this.list();
-		if (accountList == null || accountList.isEmpty()) {
-			logger.info("未读取到公众号配置，请在管理后台添加");
-			return;
-		}
-		logger.info("加载到{}条公众号配置", accountList.size());
-		accountList.forEach(this::addAccountToRuntime);
-		logger.info("公众号配置加载完成");
-	}
+    @PostConstruct
+    public void loadWxMpConfigStorages() {
+        logger.info("加载公众号配置...");
+        List<WxAccount> accountList = this.list();
+        if (accountList == null || accountList.isEmpty()) {
+            logger.info("未读取到公众号配置，请在管理后台添加");
+            return;
+        }
+        logger.info("加载到{}条公众号配置", accountList.size());
+        accountList.forEach(this::addAccountToRuntime);
+        logger.info("公众号配置加载完成");
+    }
 
-	@Override
-	public boolean save(WxAccount entity) {
-		Assert.notNull(entity, "WxAccount不得为空");
-		String appid = entity.getAppid();
-		if (this.isAccountInRuntime(appid)) { //已有此appid信息，更新
-			logger.info("更新公众号配置");
-			wxMpService.removeConfigStorage(appid);
-			this.addAccountToRuntime(entity);
+    @Override
+    public boolean save(WxAccount entity) {
+        Assert.notNull(entity, "WxAccount不得为空");
+        String appid = entity.getAppid();
+        if (this.isAccountInRuntime(appid)) { // 已有此appid信息，更新
+            logger.info("更新公众号配置");
+            wxMpService.removeConfigStorage(appid);
+            this.addAccountToRuntime(entity);
 
-			return SqlHelper.retBool(this.baseMapper.updateById(entity));
-		} else {//已有此appid信息，新增
-			logger.info("新增公众号配置");
-			this.addAccountToRuntime(entity);
+            return SqlHelper.retBool(this.baseMapper.updateById(entity));
+        } else { // 已有此appid信息，新增
+            logger.info("新增公众号配置");
+            this.addAccountToRuntime(entity);
 
-			return SqlHelper.retBool(this.baseMapper.insert(entity));
-		}
+            return SqlHelper.retBool(this.baseMapper.insert(entity));
+        }
+    }
 
-	}
+    @Override
+    public boolean removeByIds(Collection<?> idList) {
+        Assert.notEmpty(idList, "WxAccount不得为空");
 
-	@Override
-	public boolean removeByIds(Collection<?> idList) {
-		Assert.notEmpty(idList, "WxAccount不得为空");
+        // 更新wxMpService配置
+        logger.info("同步移除公众号配置");
+        idList.forEach(id -> wxMpService.removeConfigStorage((String) id));
 
-		// 更新wxMpService配置
-		logger.info("同步移除公众号配置");
-		idList.forEach(id -> wxMpService.removeConfigStorage((String) id));
+        return SqlHelper.retBool(this.baseMapper.deleteBatchIds(idList));
+    }
 
-		return SqlHelper.retBool(this.baseMapper.deleteBatchIds(idList));
-	}
+    /**
+     * 判断当前账号是存在
+     *
+     * @param appid
+     * @return
+     */
+    private boolean isAccountInRuntime(String appid) {
+        try {
+            return wxMpService.switchover(appid);
+        } catch (NullPointerException e) { // sdk bug，未添加任何账号时configStorageMap为null会出错
+            return false;
+        }
+    }
 
-	/**
-	 * 判断当前账号是存在
-	 *
-	 * @param appid
-	 * @return
-	 */
-	private boolean isAccountInRuntime(String appid) {
-		try {
-			return wxMpService.switchover(appid);
-		} catch (NullPointerException e) {// sdk bug，未添加任何账号时configStorageMap为null会出错
-			return false;
-		}
-	}
-
-	/**
-	 * 添加账号到当前程序，如首次添加需初始化configStorageMap
-	 *
-	 * @param entity
-	 */
-	private synchronized void addAccountToRuntime(WxAccount entity) {
-		String appid = entity.getAppid();
-		WxMpDefaultConfigImpl config = entity.toWxMpConfigStorage();
-		try {
-			wxMpService.addConfigStorage(appid, config);
-		} catch (NullPointerException e) {
-			logger.info("需初始化configStorageMap...");
-			Map<String, WxMpConfigStorage> configStorages = new HashMap<>(4);
-			configStorages.put(appid, config);
-			wxMpService.setMultiConfigStorages(configStorages, appid);
-		}
-	}
-
-
+    /**
+     * 添加账号到当前程序，如首次添加需初始化configStorageMap
+     *
+     * @param entity
+     */
+    private synchronized void addAccountToRuntime(WxAccount entity) {
+        String appid = entity.getAppid();
+        WxMpDefaultConfigImpl config = entity.toWxMpConfigStorage();
+        try {
+            wxMpService.addConfigStorage(appid, config);
+        } catch (NullPointerException e) {
+            logger.info("需初始化configStorageMap...");
+            Map<String, WxMpConfigStorage> configStorages = new HashMap<>(4);
+            configStorages.put(appid, config);
+            wxMpService.setMultiConfigStorages(configStorages, appid);
+        }
+    }
 }

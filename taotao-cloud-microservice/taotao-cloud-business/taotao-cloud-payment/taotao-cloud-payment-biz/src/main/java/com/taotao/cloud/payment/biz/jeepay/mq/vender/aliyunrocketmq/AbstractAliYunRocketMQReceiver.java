@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.jeepay.mq.vender.aliyunrocketmq;
 
 import com.aliyun.openservices.ons.api.*;
@@ -8,8 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public abstract class AbstractAliYunRocketMQReceiver implements IMQMsgReceiver, InitializingBean {
 
-    @Autowired
-    private AliYunRocketMQFactory aliYunRocketMQFactory;
+    @Autowired private AliYunRocketMQFactory aliYunRocketMQFactory;
 
     /**
      * 获取topic名称
@@ -37,25 +52,42 @@ public abstract class AbstractAliYunRocketMQReceiver implements IMQMsgReceiver, 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Consumer consumerClient = MQSendTypeEnum.BROADCAST.equals(getMQType()) ?
-                // 广播订阅模式
-                aliYunRocketMQFactory.broadcastConsumerClient() :
-                aliYunRocketMQFactory.consumerClient();
-        consumerClient.subscribe(this.getMQName(), AliYunRocketMQFactory.defaultTag, new MessageListener() {
-            @Override
-            public Action consume(Message message, ConsumeContext context) {
-                try {
-                    receiveMsg(new String(message.getBody()));
-                    log.debug("【{}】MQ消息消费成功topic:{}, messageId:{}", getConsumerName(), message.getTopic(), message.getMsgID());
-                    return Action.CommitMessage;
-                } catch (Exception e) {
-                    log.error("【{}】MQ消息消费失败topic:{}, messageId:{}", getConsumerName(), message.getTopic(), message.getMsgID(), e);
-                }
-                return Action.ReconsumeLater;
-            }
-        });
+        Consumer consumerClient =
+                MQSendTypeEnum.BROADCAST.equals(getMQType())
+                        ?
+                        // 广播订阅模式
+                        aliYunRocketMQFactory.broadcastConsumerClient()
+                        : aliYunRocketMQFactory.consumerClient();
+        consumerClient.subscribe(
+                this.getMQName(),
+                AliYunRocketMQFactory.defaultTag,
+                new MessageListener() {
+                    @Override
+                    public Action consume(Message message, ConsumeContext context) {
+                        try {
+                            receiveMsg(new String(message.getBody()));
+                            log.debug(
+                                    "【{}】MQ消息消费成功topic:{}, messageId:{}",
+                                    getConsumerName(),
+                                    message.getTopic(),
+                                    message.getMsgID());
+                            return Action.CommitMessage;
+                        } catch (Exception e) {
+                            log.error(
+                                    "【{}】MQ消息消费失败topic:{}, messageId:{}",
+                                    getConsumerName(),
+                                    message.getTopic(),
+                                    message.getMsgID(),
+                                    e);
+                        }
+                        return Action.ReconsumeLater;
+                    }
+                });
         consumerClient.start();
-        log.info("初始化[{}]消费者topic: {},tag: {}成功", getConsumerName(), this.getMQName(), AliYunRocketMQFactory.defaultTag);
+        log.info(
+                "初始化[{}]消费者topic: {},tag: {}成功",
+                getConsumerName(),
+                this.getMQName(),
+                AliYunRocketMQFactory.defaultTag);
     }
-
 }

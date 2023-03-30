@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -49,74 +50,74 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = DictItem.TABLE_NAME, comment = "字典项表")
 public class DictItem extends BaseSuperEntity<DictItem, Long> {
 
-	public static final String TABLE_NAME = "tt_dict_item";
+    public static final String TABLE_NAME = "tt_dict_item";
 
-	/**
-	 * 字典id
-	 *
-	 * @see Dict
-	 */
-	@Column(name = "dict_id", columnDefinition = "bigint not null comment '字典id'")
-	private Long dictId;
+    /**
+     * 字典id
+     *
+     * @see Dict
+     */
+    @Column(name = "dict_id", columnDefinition = "bigint not null comment '字典id'")
+    private Long dictId;
 
-	/**
-	 * 字典项文本
-	 */
-	@Column(name = "item_text", columnDefinition = "varchar(2000) not null comment '字典项文本'")
-	private String itemText;
+    /** 字典项文本 */
+    @Column(name = "item_text", columnDefinition = "varchar(2000) not null comment '字典项文本'")
+    private String itemText;
 
-	/**
-	 * 字典项值
-	 */
-	@Column(name = "item_value", columnDefinition = "varchar(2000) not null comment '字典项文本'")
-	private String itemValue;
+    /** 字典项值 */
+    @Column(name = "item_value", columnDefinition = "varchar(2000) not null comment '字典项文本'")
+    private String itemValue;
 
-	/**
-	 * 描述
-	 */
-	@Column(name = "description", columnDefinition = "varchar(255) comment '描述'")
-	private String description;
+    /** 描述 */
+    @Column(name = "description", columnDefinition = "varchar(255) comment '描述'")
+    private String description;
 
-	/**
-	 * 状态 0不启用 1启用
-	 */
-	@Column(name = "status", columnDefinition = "int NOT NULL DEFAULT 1 comment ' 状态 0不启用 1启用'")
-	private Integer status;
+    /** 状态 0不启用 1启用 */
+    @Column(name = "status", columnDefinition = "int NOT NULL DEFAULT 1 comment ' 状态 0不启用 1启用'")
+    private Integer status;
 
-	/**
-	 * 排序值
-	 */
-	@Column(name = "sort_num", columnDefinition = "int not null default 1 comment '排序值'")
-	private Integer sortNum;
+    /** 排序值 */
+    @Column(name = "sort_num", columnDefinition = "int not null default 1 comment '排序值'")
+    private Integer sortNum;
 
-	@Builder
-	public DictItem(Long id, LocalDateTime createTime, Long createBy,
-			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-			Long dictId, String itemText, String itemValue, String description, Integer status,
-			Integer sortNum) {
-		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
-		this.dictId = dictId;
-		this.itemText = itemText;
-		this.itemValue = itemValue;
-		this.description = description;
-		this.status = status;
-		this.sortNum = sortNum;
-	}
+    @Builder
+    public DictItem(
+            Long id,
+            LocalDateTime createTime,
+            Long createBy,
+            LocalDateTime updateTime,
+            Long updateBy,
+            Integer version,
+            Boolean delFlag,
+            Long dictId,
+            String itemText,
+            String itemValue,
+            String description,
+            Integer status,
+            Integer sortNum) {
+        super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+        this.dictId = dictId;
+        this.itemText = itemText;
+        this.itemValue = itemValue;
+        this.description = description;
+        this.status = status;
+        this.sortNum = sortNum;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-			return false;
-		}
-		DictItem dictItem = (DictItem) o;
-		return getId() != null && Objects.equals(getId(), dictItem.getId());
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        DictItem dictItem = (DictItem) o;
+        return getId() != null && Objects.equals(getId(), dictItem.getId());
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

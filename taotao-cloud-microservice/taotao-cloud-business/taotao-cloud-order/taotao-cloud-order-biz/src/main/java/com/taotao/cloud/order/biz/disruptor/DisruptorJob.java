@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.disruptor;
 
 import com.taotao.cloud.disruptor.context.DisruptorTemplate;
 import com.taotao.cloud.disruptor.event.DisruptorBindEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * DisruptorJob
@@ -30,29 +29,28 @@ import org.springframework.scheduling.annotation.Scheduled;
  * @since 2021/09/03 17:58
  */
 @Configuration
-//@EnableScheduling
+// @EnableScheduling
 public class DisruptorJob {
 
-	@Autowired
-	private DisruptorTemplate disruptorTemplate;
+    @Autowired private DisruptorTemplate disruptorTemplate;
 
-	//@Scheduled(fixedDelay = 1000000)
-	public void send() {
-		DisruptorBindEvent envent = new DisruptorBindEvent(this, "message" + Math.random());
-		envent.setEvent("Event-Output");
-		envent.setTag("TagA-Output");
-		envent.setKey("id" + Math.random());
+    // @Scheduled(fixedDelay = 1000000)
+    public void send() {
+        DisruptorBindEvent envent = new DisruptorBindEvent(this, "message" + Math.random());
+        envent.setEvent("Event-Output");
+        envent.setTag("TagA-Output");
+        envent.setKey("id" + Math.random());
 
-		disruptorTemplate.publishEvent(envent);
-	}
+        disruptorTemplate.publishEvent(envent);
+    }
 
-	//@Scheduled(fixedDelay = 1000000)
-	public void send2() {
-		DisruptorBindEvent envent = new DisruptorBindEvent(this, "message" + Math.random());
-		envent.setEvent("Event-Output");
-		envent.setTag("TagB-Output");
-		envent.setKey("id" + Math.random());
+    // @Scheduled(fixedDelay = 1000000)
+    public void send2() {
+        DisruptorBindEvent envent = new DisruptorBindEvent(this, "message" + Math.random());
+        envent.setEvent("Event-Output");
+        envent.setTag("TagB-Output");
+        envent.setKey("id" + Math.random());
 
-		disruptorTemplate.publishEvent(envent);
-	}
+        disruptorTemplate.publishEvent(envent);
+    }
 }

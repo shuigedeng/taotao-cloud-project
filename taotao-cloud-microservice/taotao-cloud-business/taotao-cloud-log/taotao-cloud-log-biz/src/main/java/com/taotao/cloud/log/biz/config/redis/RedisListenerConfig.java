@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.log.biz.config.redis;
 
 import com.taotao.cloud.common.constant.RedisConstant;
@@ -47,56 +48,56 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 @Configuration
 public class RedisListenerConfig {
 
-	@Bean
-	@Primary
-	public RedisMessageListenerContainer redisMessageListenerContainer(
-		RedisConnectionFactory redisConnectionFactory,
-		RequestLogTopicMessageDelegate requestLogTopicMessageDelegate) {
+    @Bean
+    @Primary
+    public RedisMessageListenerContainer redisMessageListenerContainer(
+            RedisConnectionFactory redisConnectionFactory,
+            RequestLogTopicMessageDelegate requestLogTopicMessageDelegate) {
 
-		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-		container.setConnectionFactory(redisConnectionFactory);
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(redisConnectionFactory);
 
-		//Runtime.getRuntime().availableProcessors() * 2
-		MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
-			100,
-			1500,
-			2000,
-			TimeUnit.SECONDS,
-			new SynchronousQueue<>(),
-			new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
-		executor.setNamePrefix("taotao-cloud-redis-listener-executor");
-		container.setTaskExecutor(executor);
+        // Runtime.getRuntime().availableProcessors() * 2
+        MonitorThreadPoolExecutor executor =
+                new MonitorThreadPoolExecutor(
+                        100,
+                        1500,
+                        2000,
+                        TimeUnit.SECONDS,
+                        new SynchronousQueue<>(),
+                        new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
+        executor.setNamePrefix("taotao-cloud-redis-listener-executor");
+        container.setTaskExecutor(executor);
 
-		Map<MessageListenerAdapter, Collection<? extends Topic>> listeners = new HashMap<>();
+        Map<MessageListenerAdapter, Collection<? extends Topic>> listeners = new HashMap<>();
 
-		MessageListenerAdapter handleRequestLog = new MessageListenerAdapter(
-			requestLogTopicMessageDelegate, "handleRequestLog");
-		handleRequestLog.afterPropertiesSet();
-		listeners.put(handleRequestLog, List.of(ChannelTopic.of(RedisConstant.REQUEST_LOG_TOPIC)));
+        MessageListenerAdapter handleRequestLog =
+                new MessageListenerAdapter(requestLogTopicMessageDelegate, "handleRequestLog");
+        handleRequestLog.afterPropertiesSet();
+        listeners.put(handleRequestLog, List.of(ChannelTopic.of(RedisConstant.REQUEST_LOG_TOPIC)));
 
-		container.setMessageListeners(listeners);
-		return container;
-	}
+        container.setMessageListeners(listeners);
+        return container;
+    }
 
-	@Bean
-	@Primary
-	public KeyExpirationEventMessageListener keyExpirationEventMessageListener(
-		RedisMessageListenerContainer listenerContainer) {
-		return new RedisKeyExpirationEventMessageListener(listenerContainer);
-	}
+    @Bean
+    @Primary
+    public KeyExpirationEventMessageListener keyExpirationEventMessageListener(
+            RedisMessageListenerContainer listenerContainer) {
+        return new RedisKeyExpirationEventMessageListener(listenerContainer);
+    }
 
-	public static class RedisKeyExpirationEventMessageListener extends
-		KeyExpirationEventMessageListener {
+    public static class RedisKeyExpirationEventMessageListener
+            extends KeyExpirationEventMessageListener {
 
-		public RedisKeyExpirationEventMessageListener(
-			RedisMessageListenerContainer listenerContainer) {
-			super(listenerContainer);
-		}
+        public RedisKeyExpirationEventMessageListener(
+                RedisMessageListenerContainer listenerContainer) {
+            super(listenerContainer);
+        }
 
-		@Override
-		public void onMessage(Message message, byte[] pattern) {
-			LogUtils.info("接受到消息: {}, {}", message, new String(pattern));
-		}
-	}
-
+        @Override
+        public void onMessage(Message message, byte[] pattern) {
+            LogUtils.info("接受到消息: {}, {}", message, new String(pattern));
+        }
+    }
 }

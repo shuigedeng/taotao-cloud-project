@@ -1,12 +1,27 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.kit.core;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,48 +30,47 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.util.HashMap;
-import java.util.Map;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
-/**
- * xpath解析xml
- */
+/** xpath解析xml */
 public class XmlHelper {
     private final XPath path;
     private final Document doc;
 
-    private XmlHelper(InputSource inputSource) throws ParserConfigurationException, SAXException, IOException {
+    private XmlHelper(InputSource inputSource)
+            throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory dbf = getDocumentBuilderFactory();
-        //This is the PRIMARY defense. If DTDs (doctypes) are disallowed, almost all
-        //XML entity attacks are prevented
-        //Xerces 2 only -
-        //http://xerces.apache.org/xerces2-j/features.html#disallow-doctype-decl
+        // This is the PRIMARY defense. If DTDs (doctypes) are disallowed, almost all
+        // XML entity attacks are prevented
+        // Xerces 2 only -
+        // http://xerces.apache.org/xerces2-j/features.html#disallow-doctype-decl
         dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 
-        //If you can't completely disable DTDs, then at least do the following:
-        //Xerces 1 -
-        //http://xerces.apache.org/xerces-j/features.html#external-general-entities
-        //Xerces 2 -
-        //http://xerces.apache.org/xerces2-j/features.html#external-general-entities
-        //JDK7+ - http://xml.org/sax/features/external-general-entities
+        // If you can't completely disable DTDs, then at least do the following:
+        // Xerces 1 -
+        // http://xerces.apache.org/xerces-j/features.html#external-general-entities
+        // Xerces 2 -
+        // http://xerces.apache.org/xerces2-j/features.html#external-general-entities
+        // JDK7+ - http://xml.org/sax/features/external-general-entities
         dbf.setFeature("http://xml.org/sax/features/external-general-entities", false);
 
-        //Xerces 1 -
-        //http://xerces.apache.org/xerces-j/features.html#external-parameter-entities
-        //Xerces 2 -
-        //http://xerces.apache.org/xerces2-j/features.html#external-parameter-entities
-        //JDK7+ - http://xml.org/sax/features/external-parameter-entities
+        // Xerces 1 -
+        // http://xerces.apache.org/xerces-j/features.html#external-parameter-entities
+        // Xerces 2 -
+        // http://xerces.apache.org/xerces2-j/features.html#external-parameter-entities
+        // JDK7+ - http://xml.org/sax/features/external-parameter-entities
         dbf.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
 
-        //Disable external DTDs as well
+        // Disable external DTDs as well
         dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
-        //and these as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and
-        //Entity Attacks"
+        // and these as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and
+        // Entity Attacks"
         dbf.setXIncludeAware(false);
         dbf.setExpandEntityReferences(false);
         DocumentBuilder db = dbf.newDocumentBuilder();
@@ -152,7 +166,7 @@ public class XmlHelper {
     /**
      * 获取String
      *
-     * @param node       节点
+     * @param node 节点
      * @param expression 相对于node的路径
      * @return String
      */
@@ -163,7 +177,7 @@ public class XmlHelper {
     /**
      * 获取
      *
-     * @param node       节点
+     * @param node 节点
      * @param expression 相对于node的路径
      * @return String
      */
@@ -174,7 +188,7 @@ public class XmlHelper {
     /**
      * 获取
      *
-     * @param node       节点
+     * @param node 节点
      * @param expression 相对于node的路径
      * @return {Number}
      */
@@ -185,7 +199,7 @@ public class XmlHelper {
     /**
      * 获取某个节点
      *
-     * @param node       节点
+     * @param node 节点
      * @param expression 路径
      * @return {Node}
      */
@@ -196,7 +210,7 @@ public class XmlHelper {
     /**
      * 获取子节点
      *
-     * @param node       节点
+     * @param node 节点
      * @param expression 相对于node的路径
      * @return NodeList
      */
@@ -212,14 +226,14 @@ public class XmlHelper {
     public Map<String, String> toMap() {
         Element root = doc.getDocumentElement();
 
-        //将节点封装成map形式
+        // 将节点封装成map形式
         NodeList list = root.getChildNodes();
         Map<String, String> params = new HashMap<String, String>(list.getLength());
         for (int i = 0; i < list.getLength(); i++) {
             Node node = list.item(i);
             params.put(node.getNodeName(), node.getTextContent());
         }
-        //含有空白符会生成一个#text参数
+        // 含有空白符会生成一个#text参数
         params.remove("#text");
         return params;
     }
@@ -232,12 +246,10 @@ public class XmlHelper {
         return XmlHelperHolder.xPathFactory;
     }
 
-    /**
-     * 内部类单例
-     */
+    /** 内部类单例 */
     private static class XmlHelperHolder {
-        private static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        private static DocumentBuilderFactory documentBuilderFactory =
+                DocumentBuilderFactory.newInstance();
         private static XPathFactory xPathFactory = XPathFactory.newInstance();
     }
-
 }

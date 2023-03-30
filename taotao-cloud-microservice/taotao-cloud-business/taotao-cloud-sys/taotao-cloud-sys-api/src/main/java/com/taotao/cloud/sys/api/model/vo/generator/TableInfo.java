@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.api.model.vo.generator;
 
 import lombok.AllArgsConstructor;
@@ -33,28 +34,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TableInfo {
 
-	/**
-	 * 表名称
-	 */
-	private Object tableName;
+    /** 表名称 */
+    private Object tableName;
 
-	/**
-	 * 创建日期
-	 */
-	private Object createTime;
+    /** 创建日期 */
+    private Object createTime;
 
-	/**
-	 * 数据库引擎
-	 */
-	private Object engine;
+    /** 数据库引擎 */
+    private Object engine;
 
-	/**
-	 * 编码集
-	 */
-	private Object coding;
+    /** 编码集 */
+    private Object coding;
 
-	/**
-	 * 备注
-	 */
-	private Object remark;
+    /** 备注 */
+    private Object remark;
 }

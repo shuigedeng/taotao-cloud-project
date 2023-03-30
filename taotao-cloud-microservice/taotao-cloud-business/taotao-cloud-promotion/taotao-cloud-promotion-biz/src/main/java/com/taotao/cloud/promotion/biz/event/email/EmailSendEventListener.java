@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.promotion.biz.event.email;
 
 import com.taotao.cloud.web.request.model.RequestLog;
@@ -30,10 +31,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailSendEventListener {
 
-	@Async
-	@EventListener(EmailSendEvent.class)
-	public void saveRequestLog(EmailSendEvent event) {
-		RequestLog requestLog = (RequestLog) event.getSource();
-
-	}
+    @Async
+    @EventListener(EmailSendEvent.class)
+    public void saveRequestLog(EmailSendEvent event) {
+        RequestLog requestLog = (RequestLog) event.getSource();
+    }
 }

@@ -1,5 +1,20 @@
-package com.taotao.cloud.message.biz.austin.support.utils;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.message.biz.austin.support.utils;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.WxMaSubscribeService;
@@ -35,85 +50,79 @@ import org.springframework.stereotype.Component;
 @Data
 public class WxServiceUtils {
 
-	/**
-	 * 推送消息的小程序/微信服务号 账号
-	 */
-	private Map<Long, WxMpService> officialAccountServiceMap = new ConcurrentHashMap<>();
-	private Map<Long, WxMaSubscribeService> miniProgramServiceMap = new ConcurrentHashMap<>();
+    /** 推送消息的小程序/微信服务号 账号 */
+    private Map<Long, WxMpService> officialAccountServiceMap = new ConcurrentHashMap<>();
 
-	@Autowired
-	private ChannelAccountDao channelAccountDao;
+    private Map<Long, WxMaSubscribeService> miniProgramServiceMap = new ConcurrentHashMap<>();
 
-	@PostConstruct
-	public void init() {
-		initOfficialAccount();
-		initMiniProgram();
-	}
+    @Autowired private ChannelAccountDao channelAccountDao;
 
+    @PostConstruct
+    public void init() {
+        initOfficialAccount();
+        initMiniProgram();
+    }
 
-	/**
-	 * 当账号存在变更/新增时，刷新Map
-	 */
-	public void fresh() {
-		init();
-	}
+    /** 当账号存在变更/新增时，刷新Map */
+    public void fresh() {
+        init();
+    }
 
-	/**
-	 * 得到所有的小程序账号
-	 */
-	private void initMiniProgram() {
-		List<ChannelAccount> miniProgram = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-				CommonConstant.FALSE, ChannelType.MINI_PROGRAM.getCode());
-		for (ChannelAccount channelAccount : miniProgram) {
-			WeChatMiniProgramAccount weChatMiniProgramAccount = JSON.parseObject(
-					channelAccount.getAccountConfig(), WeChatMiniProgramAccount.class);
-			miniProgramServiceMap.put(channelAccount.getId(),
-					initMiniProgramService(weChatMiniProgramAccount));
-		}
-	}
+    /** 得到所有的小程序账号 */
+    private void initMiniProgram() {
+        List<ChannelAccount> miniProgram =
+                channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                        CommonConstant.FALSE, ChannelType.MINI_PROGRAM.getCode());
+        for (ChannelAccount channelAccount : miniProgram) {
+            WeChatMiniProgramAccount weChatMiniProgramAccount =
+                    JSON.parseObject(
+                            channelAccount.getAccountConfig(), WeChatMiniProgramAccount.class);
+            miniProgramServiceMap.put(
+                    channelAccount.getId(), initMiniProgramService(weChatMiniProgramAccount));
+        }
+    }
 
-	/**
-	 * 得到所有的微信服务号账号
-	 */
-	private void initOfficialAccount() {
-		List<ChannelAccount> officialAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-				CommonConstant.FALSE, ChannelType.OFFICIAL_ACCOUNT.getCode());
-		for (ChannelAccount channelAccount : officialAccountList) {
-			WeChatOfficialAccount weChatOfficialAccount = JSON.parseObject(
-					channelAccount.getAccountConfig(), WeChatOfficialAccount.class);
-			officialAccountServiceMap.put(channelAccount.getId(),
-					initOfficialAccountService(weChatOfficialAccount));
-		}
+    /** 得到所有的微信服务号账号 */
+    private void initOfficialAccount() {
+        List<ChannelAccount> officialAccountList =
+                channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                        CommonConstant.FALSE, ChannelType.OFFICIAL_ACCOUNT.getCode());
+        for (ChannelAccount channelAccount : officialAccountList) {
+            WeChatOfficialAccount weChatOfficialAccount =
+                    JSON.parseObject(
+                            channelAccount.getAccountConfig(), WeChatOfficialAccount.class);
+            officialAccountServiceMap.put(
+                    channelAccount.getId(), initOfficialAccountService(weChatOfficialAccount));
+        }
+    }
 
-	}
+    /**
+     * 初始化微信服务号
+     *
+     * @return
+     */
+    public WxMpService initOfficialAccountService(WeChatOfficialAccount officialAccount) {
+        WxMpService wxMpService = new WxMpServiceImpl();
+        WxMpDefaultConfigImpl config = new WxMpDefaultConfigImpl();
+        config.setAppId(officialAccount.getAppId());
+        config.setSecret(officialAccount.getSecret());
+        config.setToken(officialAccount.getToken());
+        wxMpService.setWxMpConfigStorage(config);
+        return wxMpService;
+    }
 
-	/**
-	 * 初始化微信服务号
-	 *
-	 * @return
-	 */
-	public WxMpService initOfficialAccountService(WeChatOfficialAccount officialAccount) {
-		WxMpService wxMpService = new WxMpServiceImpl();
-		WxMpDefaultConfigImpl config = new WxMpDefaultConfigImpl();
-		config.setAppId(officialAccount.getAppId());
-		config.setSecret(officialAccount.getSecret());
-		config.setToken(officialAccount.getToken());
-		wxMpService.setWxMpConfigStorage(config);
-		return wxMpService;
-	}
-
-	/**
-	 * 初始化微信小程序
-	 *
-	 * @return
-	 */
-	private WxMaSubscribeServiceImpl initMiniProgramService(
-			WeChatMiniProgramAccount miniProgramAccount) {
-		WxMaService wxMaService = new WxMaServiceImpl();
-		WxMaDefaultConfigImpl wxMaConfig = new WxMaDefaultConfigImpl();
-		wxMaConfig.setAppid(miniProgramAccount.getAppId());
-		wxMaConfig.setSecret(miniProgramAccount.getAppSecret());
-		wxMaService.setWxMaConfig(wxMaConfig);
-		return new WxMaSubscribeServiceImpl(wxMaService);
-	}
+    /**
+     * 初始化微信小程序
+     *
+     * @return
+     */
+    private WxMaSubscribeServiceImpl initMiniProgramService(
+            WeChatMiniProgramAccount miniProgramAccount) {
+        WxMaService wxMaService = new WxMaServiceImpl();
+        WxMaDefaultConfigImpl wxMaConfig = new WxMaDefaultConfigImpl();
+        wxMaConfig.setAppid(miniProgramAccount.getAppId());
+        wxMaConfig.setSecret(miniProgramAccount.getAppSecret());
+        wxMaService.setWxMaConfig(wxMaConfig);
+        return new WxMaSubscribeServiceImpl(wxMaService);
+    }
 }

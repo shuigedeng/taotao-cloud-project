@@ -1,42 +1,48 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.web.utils;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ReflectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
 import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * for Amis!!! amis框架在【表单】回显的时候，不支持嵌套动态语法!!
- * 编写工具类将 List/Object 铺平成 Map
+ * for Amis!!! amis框架在【表单】回显的时候，不支持嵌套动态语法!! 编写工具类将 List/Object 铺平成 Map
  * https://baidu.gitee.io/amis/zh-CN/components/form/index#%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96
  *
  * @author 3y
  * @date 2022/1/23
  */
 public class ConvertMap {
-    /**
-     * 需要打散的字段(将json字符串打散为一个一个字段返回）
-     * (主要是用于回显数据)
-     */
+    /** 需要打散的字段(将json字符串打散为一个一个字段返回） (主要是用于回显数据) */
     private static final List<String> FLAT_FIELD_NAME = Arrays.asList("msgContent");
 
-    /**
-     * 需要格式化为jsonArray返回的字段
-     * (前端是一个JSONArray传递进来)
-     */
+    /** 需要格式化为jsonArray返回的字段 (前端是一个JSONArray传递进来) */
     private static final List<String> PARSE_JSON_ARRAY = Arrays.asList("feedCards", "btns");
 
-    /**
-     * 钉钉工作消息OA实际的映射
-     */
-    private static final List<String> DING_DING_OA_FIELD = Arrays.asList("dingDingOaHead", "dingDingOaBody");
-    /**
-     * 钉钉OA字段名实际的映射
-     */
+    /** 钉钉工作消息OA实际的映射 */
+    private static final List<String> DING_DING_OA_FIELD =
+            Arrays.asList("dingDingOaHead", "dingDingOaBody");
+    /** 钉钉OA字段名实际的映射 */
     private static final Map<String, String> DING_DING_OA_NAME_MAPPING = new HashMap<>();
+
     static {
         DING_DING_OA_NAME_MAPPING.put("bgcolor", "dingDingOaHeadBgColor");
         DING_DING_OA_NAME_MAPPING.put("text", "dingDingOaHeadTitle");
@@ -63,8 +69,8 @@ public class ConvertMap {
 
     /**
      * 将单个对象转换成Map(无嵌套)
-     * <p>
-     * 主要兼容amis的回显(前端不用amis可忽略)
+     *
+     * <p>主要兼容amis的回显(前端不用amis可忽略)
      *
      * @param obj
      * @return
@@ -77,20 +83,18 @@ public class ConvertMap {
                 String fieldValue = (String) ReflectUtil.getFieldValue(obj, field);
                 JSONObject jsonObject = JSONObject.parseObject(fieldValue);
                 for (String key : jsonObject.keySet()) {
-                    /**
-                     * 钉钉OA消息回显
-                     */
+                    /** 钉钉OA消息回显 */
                     if (DING_DING_OA_FIELD.contains(key)) {
                         JSONObject object = jsonObject.getJSONObject(key);
                         for (String objKey : object.keySet()) {
-                            result.put(DING_DING_OA_NAME_MAPPING.get(objKey), object.getString(objKey));
+                            result.put(
+                                    DING_DING_OA_NAME_MAPPING.get(objKey),
+                                    object.getString(objKey));
                         }
                     } else if (PARSE_JSON_ARRAY.contains(key)) {
-                        /**
-                         * 部分字段是直接传入数组，把数组直接返回(也是用于回显)
-                         */
+                        /** 部分字段是直接传入数组，把数组直接返回(也是用于回显) */
                         result.put(key, JSON.parseArray(jsonObject.getString(key)));
-                    } else{
+                    } else {
                         result.put(key, jsonObject.getString(key));
                     }
                 }

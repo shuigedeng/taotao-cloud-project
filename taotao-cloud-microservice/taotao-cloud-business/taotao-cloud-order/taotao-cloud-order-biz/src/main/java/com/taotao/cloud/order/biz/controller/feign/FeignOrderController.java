@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.controller.feign;
 
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;
@@ -36,34 +37,33 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
 public class FeignOrderController implements IFeignOrderApi {
 
-	@Override
-	public OrderVO findOrderInfoByCode(String code) {
-		return null;
-	}
+    @Override
+    public OrderVO findOrderInfoByCode(String code) {
+        return null;
+    }
 
-	@Override
-	public OrderVO saveOrder(OrderSaveDTO orderDTO) {
-		return null;
-	}
+    @Override
+    public OrderVO saveOrder(OrderSaveDTO orderDTO) {
+        return null;
+    }
 
-	@Override
-	public OrderDetailVO queryDetail(String sn) {
-		return null;
-	}
+    @Override
+    public OrderDetailVO queryDetail(String sn) {
+        return null;
+    }
 
-	@Override
-	public Boolean payOrder(String sn, String paymentMethod, String receivableNo) {
-		return null;
-	}
+    @Override
+    public Boolean payOrder(String sn, String paymentMethod, String receivableNo) {
+        return null;
+    }
 
-	@Override
-	public OrderVO getBySn(String sn) {
-		return null;
-	}
+    @Override
+    public OrderVO getBySn(String sn) {
+        return null;
+    }
 
-	@Override
-	public List<OrderVO> getByTradeSn(String sn) {
-		return null;
-	}
+    @Override
+    public List<OrderVO> getByTradeSn(String sn) {
+        return null;
+    }
 }
-

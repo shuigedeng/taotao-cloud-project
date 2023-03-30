@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service.business;
 
+package com.taotao.cloud.sys.biz.service.business;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.model.vo.alipay.TradeVO;
@@ -29,38 +29,38 @@ import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
  */
 public interface IAlipayConfigService extends IService<AlipayConfig> {
 
-	/**
-	 * 处理来自PC的交易请求
-	 *
-	 * @param alipay 支付宝配置
-	 * @param trade  交易详情
-	 * @return String
-	 * @throws Exception 异常
-	 */
-	String toPayAsPc(AlipayConfig alipay, TradeVO trade) throws Exception;
+    /**
+     * 处理来自PC的交易请求
+     *
+     * @param alipay 支付宝配置
+     * @param trade 交易详情
+     * @return String
+     * @throws Exception 异常
+     */
+    String toPayAsPc(AlipayConfig alipay, TradeVO trade) throws Exception;
 
-	/**
-	 * 处理来自手机网页的交易请求
-	 *
-	 * @param alipay 支付宝配置
-	 * @param trade  交易详情
-	 * @return String
-	 * @throws Exception 异常
-	 */
-	String toPayAsWeb(AlipayConfig alipay, TradeVO trade) throws Exception;
+    /**
+     * 处理来自手机网页的交易请求
+     *
+     * @param alipay 支付宝配置
+     * @param trade 交易详情
+     * @return String
+     * @throws Exception 异常
+     */
+    String toPayAsWeb(AlipayConfig alipay, TradeVO trade) throws Exception;
 
-	/**
-	 * 查询配置
-	 *
-	 * @return 配置信息
-	 */
-	AlipayConfig find();
+    /**
+     * 查询配置
+     *
+     * @return 配置信息
+     */
+    AlipayConfig find();
 
-	/**
-	 * 更新配置
-	 *
-	 * @param alipayConfig 支付宝配置
-	 * @return 是否完成更新
-	 */
-	Boolean update(AlipayConfig alipayConfig);
+    /**
+     * 更新配置
+     *
+     * @param alipayConfig 支付宝配置
+     * @return 是否完成更新
+     */
+    Boolean update(AlipayConfig alipayConfig);
 }

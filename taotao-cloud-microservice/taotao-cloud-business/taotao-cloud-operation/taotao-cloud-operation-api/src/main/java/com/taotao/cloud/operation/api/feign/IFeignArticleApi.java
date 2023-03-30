@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.operation.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
@@ -28,17 +29,19 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignArticleService", value = ServiceName.TAOTAO_CLOUD_OPERATION, fallbackFactory = FeignArticleApiFallback.class)
+@FeignClient(
+        contextId = "IFeignArticleService",
+        value = ServiceName.TAOTAO_CLOUD_OPERATION,
+        fallbackFactory = FeignArticleApiFallback.class)
 public interface IFeignArticleApi {
 
-	/**
-	 * 根据id查询文章详情
-	 *
-	 * @param id id
-	 * @return 文章详情
-	 * @since 2020/11/20 上午9:50
-	 */
-	@GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
-	ArticleVO getMemberSecurityUser(@PathVariable(value = "id") Long id);
+    /**
+     * 根据id查询文章详情
+     *
+     * @param id id
+     * @return 文章详情
+     * @since 2020/11/20 上午9:50
+     */
+    @GetMapping(value = "/withdraw/info/id/{id:[0-9]*}")
+    ArticleVO getMemberSecurityUser(@PathVariable(value = "id") Long id);
 }
-

@@ -1,5 +1,20 @@
-package com.taotao.cloud.goods.biz.controller.business.seller;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.goods.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
@@ -32,18 +47,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/goods/seller/goods/unit")
 public class GoodsUnitSellerController {
 
-	/**
-	 * 商品计量单位服务
-	 */
-	private final IGoodsUnitService goodsUnitService;
+    /** 商品计量单位服务 */
+    private final IGoodsUnitService goodsUnitService;
 
-	@Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
-	@RequestLogger("分页获取商品计量单位")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/page")
-	public Result<PageResult<GoodsUnitVO>> getByPage(PageQuery pageQuery) {
-		IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
-		return Result.success(PageResult.convertMybatisPage(page, GoodsUnitVO.class));
-	}
-
+    @Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
+    @RequestLogger("分页获取商品计量单位")
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping("/page")
+    public Result<PageResult<GoodsUnitVO>> getByPage(PageQuery pageQuery) {
+        IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
+        return Result.success(PageResult.convertMybatisPage(page, GoodsUnitVO.class));
+    }
 }

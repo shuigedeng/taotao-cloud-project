@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.convert;
 
 import com.taotao.cloud.sys.api.model.vo.dept.DeptTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * DeptMapStruct
@@ -31,22 +31,19 @@ import java.util.List;
  * @since 2022-04-28 13:39:18
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DeptConvert {
 
-	/**
-	 * 实例
-	 */
-	DeptConvert INSTANCE = Mappers.getMapper(DeptConvert.class);
+    /** 实例 */
+    DeptConvert INSTANCE = Mappers.getMapper(DeptConvert.class);
 
-	/**
-	 * 部门列表给签证官
-	 *
-	 * @param deptList 部门列表
-	 * @return {@link List }<{@link DeptTreeVO }>
-	 * @since 2022-04-28 13:39:18
-	 */
-	List<DeptTreeVO> convertTree(List<Dept> deptList);
-
+    /**
+     * 部门列表给签证官
+     *
+     * @param deptList 部门列表
+     * @return {@link List }<{@link DeptTreeVO }>
+     * @since 2022-04-28 13:39:18
+     */
+    List<DeptTreeVO> convertTree(List<Dept> deptList);
 }

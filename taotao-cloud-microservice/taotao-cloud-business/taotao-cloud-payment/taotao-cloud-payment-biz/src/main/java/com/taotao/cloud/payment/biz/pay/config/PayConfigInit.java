@@ -1,25 +1,17 @@
 /*
- * MIT License
- * Copyright <2021-2022>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- * of the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * @Author: Sinda
- * @Email:  xhuicloud@163.com
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.taotao.cloud.payment.biz.pay.config;
@@ -63,54 +55,59 @@ import org.springframework.scheduling.annotation.Async;
 @AllArgsConstructor
 public class PayConfigInit {
 
-	private final SysTenantServiceFeign sysTenantServiceFeign;
+    private final SysTenantServiceFeign sysTenantServiceFeign;
 
-	private final PayChannelService payChannelService;
+    private final PayChannelService payChannelService;
 
-	public final static Map<Integer, String> tenantIdAliPayAppIdMaps = Maps.newHashMap();
+    public static final Map<Integer, String> tenantIdAliPayAppIdMaps = Maps.newHashMap();
 
-	public final static Map<Integer, TenantVo> tenantMaps = Maps.newHashMap();
+    public static final Map<Integer, TenantVo> tenantMaps = Maps.newHashMap();
 
-	@Async
-	@Order
-	@EventListener(WebServerInitializedEvent.class)
-	public void init() {
+    @Async
+    @Order
+    @EventListener(WebServerInitializedEvent.class)
+    public void init() {
 
-		List<PayChannel> payChannels = new ArrayList<>();
-		List<TenantVo> data = null;
-		while (CollectionUtil.isEmpty(data)) {
-			data = sysTenantServiceFeign.list(IS_COMMING_ANONYMOUS_YES).getData();
-		}
-		data.forEach(tenant -> {
-			XHuiCommonThreadLocalHolder.setTenant(tenant.getId());
+        List<PayChannel> payChannels = new ArrayList<>();
+        List<TenantVo> data = null;
+        while (CollectionUtil.isEmpty(data)) {
+            data = sysTenantServiceFeign.list(IS_COMMING_ANONYMOUS_YES).getData();
+        }
+        data.forEach(
+                tenant -> {
+                    XHuiCommonThreadLocalHolder.setTenant(tenant.getId());
 
-			List<PayChannel> payChannelList = payChannelService
-				.list(Wrappers.<PayChannel>lambdaQuery()
-					.eq(PayChannel::getDelFlag, 1)
-					.eq(PayChannel::getTenantId, tenant.getId()));
-			payChannels.addAll(payChannelList);
-			tenantMaps.put(tenant.getId(), tenant);
-		});
+                    List<PayChannel> payChannelList =
+                            payChannelService.list(
+                                    Wrappers.<PayChannel>lambdaQuery()
+                                            .eq(PayChannel::getDelFlag, 1)
+                                            .eq(PayChannel::getTenantId, tenant.getId()));
+                    payChannels.addAll(payChannelList);
+                    tenantMaps.put(tenant.getId(), tenant);
+                });
 
-		payChannels.forEach(payChannel -> {
-			tenantIdAliPayAppIdMaps.put(payChannel.getTenantId(), payChannel.getAppId());
-		});
+        payChannels.forEach(
+                payChannel -> {
+                    tenantIdAliPayAppIdMaps.put(payChannel.getTenantId(), payChannel.getAppId());
+                });
 
-		payChannels.forEach(payChannel -> {
-			JSONObject params = JSONUtil.parseObj(payChannel.getConfig());
-			if (StringUtils.equals(payChannel.getChannelId(), (PayTypeEnum.ALIPAY_WAP.getType()))) {
-				AliPayApiConfig aliPayApiConfig = AliPayApiConfig.New()
-					.setAppId(payChannel.getAppId())
-					.setPrivateKey(params.getStr("privateKey"))
-					.setCharset(CharsetUtil.UTF_8)
-					.setAlipayPublicKey(params.getStr("alipayPublicKey"))
-					.setServiceUrl(params.getStr("serviceUrl"))
-					.setSignType("RSA2")
-					.build();
-				AliPayApiConfigKit.putApiConfig(aliPayApiConfig);
-				log.info("AliPay支付渠道初始化完成:AppId:{}", payChannel.getAppId());
-			}
-		});
-	}
-
+        payChannels.forEach(
+                payChannel -> {
+                    JSONObject params = JSONUtil.parseObj(payChannel.getConfig());
+                    if (StringUtils.equals(
+                            payChannel.getChannelId(), (PayTypeEnum.ALIPAY_WAP.getType()))) {
+                        AliPayApiConfig aliPayApiConfig =
+                                AliPayApiConfig.New()
+                                        .setAppId(payChannel.getAppId())
+                                        .setPrivateKey(params.getStr("privateKey"))
+                                        .setCharset(CharsetUtil.UTF_8)
+                                        .setAlipayPublicKey(params.getStr("alipayPublicKey"))
+                                        .setServiceUrl(params.getStr("serviceUrl"))
+                                        .setSignType("RSA2")
+                                        .build();
+                        AliPayApiConfigKit.putApiConfig(aliPayApiConfig);
+                        log.info("AliPay支付渠道初始化完成:AppId:{}", payChannel.getAppId());
+                    }
+                });
+    }
 }

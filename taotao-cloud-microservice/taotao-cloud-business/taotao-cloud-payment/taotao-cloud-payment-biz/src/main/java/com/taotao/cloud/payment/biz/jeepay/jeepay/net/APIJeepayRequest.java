@@ -1,5 +1,20 @@
-package com.taotao.cloud.payment.biz.jeepay.jeepay.net;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.payment.biz.jeepay.jeepay.net;
 
 import com.taotao.cloud.payment.biz.jeepay.jeepay.exception.JeepayException;
 import java.io.IOException;
@@ -11,43 +26,33 @@ import java.util.*;
 
 /**
  * API请求
+ *
  * @author jmdhappy
  * @site https://www.jeepay.vip
  * @date 2021-06-08 11:00
  */
 public class APIJeepayRequest {
-    /**
-     * 请求方法 (GET, POST, DELETE or PUT)
-     * */
+    /** 请求方法 (GET, POST, DELETE or PUT) */
     APIResource.RequestMethod method;
 
-    /**
-     * 请求URL
-     */
+    /** 请求URL */
     URL url;
 
-    /**
-     * 请求Body
-     */
+    /** 请求Body */
     HttpContent content;
 
-    /**
-     * 请求Header
-     */
+    /** 请求Header */
     HttpHeaders headers;
 
-    /**
-     * 请求参数
-     */
+    /** 请求参数 */
     Map<String, Object> params;
 
-    /**
-     * 请求选项
-     */
+    /** 请求选项 */
     RequestOptions options;
 
     /**
      * 实例化Jeepay请求
+     *
      * @param method
      * @param url
      * @param params
@@ -83,7 +88,8 @@ public class APIJeepayRequest {
 
         sb.append(spec);
 
-        if ((method != APIResource.RequestMethod.POST && method != APIResource.RequestMethod.PUT) && (params != null)) {
+        if ((method != APIResource.RequestMethod.POST && method != APIResource.RequestMethod.PUT)
+                && (params != null)) {
             String queryString = createQuery(params);
             if (!queryString.isEmpty()) {
                 sb.append("?");
@@ -94,8 +100,9 @@ public class APIJeepayRequest {
         return new URL(sb.toString());
     }
 
-    private static HttpContent buildContent (
-            APIResource.RequestMethod method, Map<String, Object> params, RequestOptions options) throws JeepayException {
+    private static HttpContent buildContent(
+            APIResource.RequestMethod method, Map<String, Object> params, RequestOptions options)
+            throws JeepayException {
         if (method != APIResource.RequestMethod.POST && method != APIResource.RequestMethod.PUT) {
             return null;
         }
@@ -136,8 +143,7 @@ public class APIJeepayRequest {
             if (queryStringBuffer.length() > 0) {
                 queryStringBuffer.append("&");
             }
-            queryStringBuffer.append(urlEncodePair(entry.getKey(),
-                    entry.getValue()));
+            queryStringBuffer.append(urlEncodePair(entry.getKey(), entry.getValue()));
         }
         return queryStringBuffer.toString();
     }
@@ -205,8 +211,8 @@ public class APIJeepayRequest {
         return flatParams;
     }
 
-    private static HttpHeaders buildHeaders(APIResource.RequestMethod method, RequestOptions options)
-            throws JeepayException {
+    private static HttpHeaders buildHeaders(
+            APIResource.RequestMethod method, RequestOptions options) throws JeepayException {
         Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
 
         // Accept
@@ -225,9 +231,9 @@ public class APIJeepayRequest {
             throws IOException {
 
         String signType = options.getSignType();
-        if("MD5".equalsIgnoreCase(signType)) {
+        if ("MD5".equalsIgnoreCase(signType)) {
             return JeepayKit.getSign(params, options.getApiKey());
-        }else if("RSA2".equalsIgnoreCase(signType)) {
+        } else if ("RSA2".equalsIgnoreCase(signType)) {
             throw new AssertionError("暂不支持RSA2签名");
         }
         throw new AssertionError("请设置正确的签名类型");

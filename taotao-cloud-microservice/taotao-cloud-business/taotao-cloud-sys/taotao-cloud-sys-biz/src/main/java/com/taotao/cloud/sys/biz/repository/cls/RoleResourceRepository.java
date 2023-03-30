@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RoleResourceRepository extends BaseClassSuperRepository<RoleResource, Long> {
 
-	public RoleResourceRepository(EntityManager em) {
-		super(RoleResource.class, em);
-	}
-
+    public RoleResourceRepository(EntityManager em) {
+        super(RoleResource.class, em);
+    }
 }

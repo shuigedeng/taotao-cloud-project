@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.service;
 
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
@@ -24,12 +25,12 @@ import com.taotao.cloud.dubbo.biz.entity.PayFlow;
  */
 public interface IPayFlowService {
 
-	/**
-	 * 根据id查询支付信息
-	 *
-	 * @param id id
-	 * @return {@link PayFlow }
-	 * @since 2022-05-30 16:46:32
-	 */
-	PayFlow findPayFlowById(Long id);
+    /**
+     * 根据id查询支付信息
+     *
+     * @param id id
+     * @return {@link PayFlow }
+     * @since 2022-05-30 16:46:32
+     */
+    PayFlow findPayFlowById(Long id);
 }

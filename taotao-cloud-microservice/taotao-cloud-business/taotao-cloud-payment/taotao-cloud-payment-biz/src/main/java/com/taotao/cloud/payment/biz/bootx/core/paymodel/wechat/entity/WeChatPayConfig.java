@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.entity;
 
 import cn.bootx.common.core.function.EntityBaseFunction;
@@ -13,6 +29,7 @@ import lombok.experimental.Accessors;
 
 /**
  * 微信支付
+ *
  * @author xxm
  * @date 2021/3/1
  */
@@ -20,7 +37,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @TableName("pay_wechat_pay_config")
-public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<WeChatPayConfigDto> {
+public class WeChatPayConfig extends MpBaseEntity
+        implements EntityBaseFunction<WeChatPayConfigDto> {
 
     /** 名称 */
     private String name;
@@ -32,6 +50,7 @@ public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<
     private String mchId;
     /**
      * 认证方式
+     *
      * @see cn.bootx.payment.code.paymodel.WeChatPayCode
      */
     private Integer authType;
@@ -47,21 +66,15 @@ public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<
     private String apiKey3;
     /** 应用域名，回调中会使用此参数 */
     private String domain;
-    /** 服务器异步通知页面路径 通知url必须为直接可访问的url，不能携带参数。公网域名必须为https  */
+    /** 服务器异步通知页面路径 通知url必须为直接可访问的url，不能携带参数。公网域名必须为https */
     private String notifyUrl;
     /** 页面跳转同步通知页面路径 */
     private String returnUrl;
-    /**
-     * API 证书中的 p12
-     */
+    /** API 证书中的 p12 */
     private String certPath;
-    /**
-     * API 证书中的 key.pem
-     */
+    /** API 证书中的 key.pem */
     private String keyPemPath;
-    /**
-     * API 证书中的 cert.pem
-     */
+    /** API 证书中的 cert.pem */
     private String certPemPath;
     /** 是否沙箱环境 */
     private boolean sandbox;
@@ -74,16 +87,16 @@ public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<
 
     @Override
     public WeChatPayConfigDto toDto() {
-        WeChatPayConfigDto convert =  WeChatConvert.CONVERT.convert(this);
-        if (StrUtil.isNotBlank(this.getPayWays())){
-            convert.setPayWayList(StrUtil.split(this.getPayWays(),','));
+        WeChatPayConfigDto convert = WeChatConvert.CONVERT.convert(this);
+        if (StrUtil.isNotBlank(this.getPayWays())) {
+            convert.setPayWayList(StrUtil.split(this.getPayWays(), ','));
         }
         return convert;
     }
 
-    public static WeChatPayConfig init(WeChatPayConfigDto dto){
+    public static WeChatPayConfig init(WeChatPayConfigDto dto) {
         WeChatPayConfig convert = WeChatConvert.CONVERT.convert(dto);
-        if (CollUtil.isNotEmpty(dto.getPayWayList())){
+        if (CollUtil.isNotEmpty(dto.getPayWayList())) {
             convert.setPayWays(String.join(",", dto.getPayWayList()));
         }
         return convert;

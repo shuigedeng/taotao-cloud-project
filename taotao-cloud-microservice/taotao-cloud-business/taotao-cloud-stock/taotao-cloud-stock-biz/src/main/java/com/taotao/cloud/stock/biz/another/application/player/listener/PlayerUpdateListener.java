@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.biz.another.application.player.listener;
 
 import com.taotao.cloud.ddd.biz.domain.game.service.GameDomainService;
@@ -6,17 +22,16 @@ import com.taotao.cloud.ddd.biz.domain.player.event.PlayerUpdateEvent;
 // 比赛领域监听运动员变更事件
 public class PlayerUpdateListener {
 
-	@Resource
-	private GameDomainService gameDomainService;
+    @Resource private GameDomainService gameDomainService;
 
-	@PostConstruct
-	public void init() {
-		EventBusManager.register(this);
-	}
+    @PostConstruct
+    public void init() {
+        EventBusManager.register(this);
+    }
 
-	@Subscribe
-	public void listen(PlayerUpdateEvent event) {
-		// 更新比赛计划
-		gameDomainService.updateGameSchedule();
-	}
+    @Subscribe
+    public void listen(PlayerUpdateEvent event) {
+        // 更新比赛计划
+        gameDomainService.updateGameSchedule();
+    }
 }

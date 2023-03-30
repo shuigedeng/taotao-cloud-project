@@ -1,20 +1,36 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.wechat.core.menu.domin;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-/**   
+/**
  * 微信自定义菜单
- * @author xxm  
- * @date 2022/8/8 
+ *
+ * @author xxm
+ * @date 2022/8/8
  */
 @Data
 @Accessors(chain = true)
@@ -25,9 +41,11 @@ public class WeChatMenuInfo {
     @Data
     @Accessors(chain = true)
     @Schema(title = "菜单按钮")
-    public static class Button{
+    public static class Button {
 
         /**
+         *
+         *
          * <pre>
          * 菜单的响应动作类型.
          * view表示网页类型，
@@ -37,12 +55,12 @@ public class WeChatMenuInfo {
          */
         private String type;
 
-        /**
-         * 菜单标题，不超过16个字节，子菜单不超过60个字节.
-         */
+        /** 菜单标题，不超过16个字节，子菜单不超过60个字节. */
         private String name;
 
         /**
+         *
+         *
          * <pre>
          * 菜单KEY值，用于消息接口推送，不超过128字节.
          * click等点击类型必须
@@ -51,6 +69,8 @@ public class WeChatMenuInfo {
         private String key;
 
         /**
+         *
+         *
          * <pre>
          * 网页链接.
          * 用户点击菜单可打开链接，不超过1024字节。type为miniprogram时，不支持小程序的老版本客户端将打开本url。
@@ -60,6 +80,8 @@ public class WeChatMenuInfo {
         private String url;
 
         /**
+         *
+         *
          * <pre>
          * 调用新增永久素材接口返回的合法media_id.
          * media_id类型和view_limited类型必须
@@ -68,6 +90,8 @@ public class WeChatMenuInfo {
         private String mediaId;
 
         /**
+         *
+         *
          * <pre>
          * 调用发布图文接口获得的article_id.
          * article_id类型和article_view_limited类型必须
@@ -76,6 +100,8 @@ public class WeChatMenuInfo {
         private String articleId;
 
         /**
+         *
+         *
          * <pre>
          * 小程序的appid.
          * miniprogram类型必须
@@ -84,6 +110,8 @@ public class WeChatMenuInfo {
         private String appId;
 
         /**
+         *
+         *
          * <pre>
          * 小程序的页面路径.
          * miniprogram类型必须
@@ -92,25 +120,20 @@ public class WeChatMenuInfo {
         private String pagePath;
 
         private List<Button> subButtons = new ArrayList<>();
-
     }
 
-    /**
-     * 转换成wxJava的对象
-     */
-    public WxMenu toWxMenu(){
+    /** 转换成wxJava的对象 */
+    public WxMenu toWxMenu() {
         WxMenu wxMenu = new WxMenu();
-        List<WxMenuButton> collect = this.getButtons().stream()
-                .map(this::toWxButton)
-                .collect(Collectors.toList());
+        List<WxMenuButton> collect =
+                this.getButtons().stream().map(this::toWxButton).collect(Collectors.toList());
         wxMenu.setButtons(collect);
         return wxMenu;
     }
 
-    private WxMenuButton toWxButton(Button button){
-        List<WxMenuButton> subButtons = button.getSubButtons().stream()
-                .map(this::toWxButton)
-                .collect(Collectors.toList());
+    private WxMenuButton toWxButton(Button button) {
+        List<WxMenuButton> subButtons =
+                button.getSubButtons().stream().map(this::toWxButton).collect(Collectors.toList());
         WxMenuButton wxMenuButton = new WxMenuButton();
         wxMenuButton.setType(button.getType());
         wxMenuButton.setName(button.getName());
@@ -124,26 +147,24 @@ public class WeChatMenuInfo {
         return wxMenuButton;
     }
 
-    /**
-     * 从WxJava对象转成
-     */
-    public static WeChatMenuInfo init(WxMpMenu wxMpMenu){
+    /** 从WxJava对象转成 */
+    public static WeChatMenuInfo init(WxMpMenu wxMpMenu) {
         WeChatMenuInfo weChatMenuInfo = new WeChatMenuInfo();
-        List<Button> buttons = wxMpMenu.getMenu().getButtons().stream()
-                .map(WeChatMenuInfo::initButton)
-                .collect(Collectors.toList());
+        List<Button> buttons =
+                wxMpMenu.getMenu().getButtons().stream()
+                        .map(WeChatMenuInfo::initButton)
+                        .collect(Collectors.toList());
 
         weChatMenuInfo.setButtons(buttons);
         return weChatMenuInfo;
     }
 
-    /**
-     * 菜单按钮转换
-     */
-    private static Button initButton(WxMenuButton wxMenuButton){
-        List<Button> subButtons = wxMenuButton.getSubButtons().stream()
-                .map(WeChatMenuInfo::initButton)
-                .collect(Collectors.toList());
+    /** 菜单按钮转换 */
+    private static Button initButton(WxMenuButton wxMenuButton) {
+        List<Button> subButtons =
+                wxMenuButton.getSubButtons().stream()
+                        .map(WeChatMenuInfo::initButton)
+                        .collect(Collectors.toList());
         Button button = new Button();
         button.setType(wxMenuButton.getType());
         button.setName(wxMenuButton.getName());

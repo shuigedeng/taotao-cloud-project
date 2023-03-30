@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.system.ServiceNotice;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ServiceNoticeRepository extends BaseClassSuperRepository<ServiceNotice, Long> {
 
-	public ServiceNoticeRepository(EntityManager em) {
-		super(ServiceNotice.class, em);
-	}
-
+    public ServiceNoticeRepository(EntityManager em) {
+        super(ServiceNotice.class, em);
+    }
 }

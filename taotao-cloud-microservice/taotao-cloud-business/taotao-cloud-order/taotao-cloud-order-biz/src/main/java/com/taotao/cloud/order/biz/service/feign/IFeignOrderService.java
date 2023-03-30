@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.service.feign;
 
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.web.base.service.BaseSuperService;
-
 
 /**
  * ISysDictService
@@ -28,6 +28,5 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  */
 public interface IFeignOrderService extends BaseSuperService<Order, Long> {
 
-	<T> T test123(T t);
-
+    <T> T test123(T t);
 }

@@ -1,4 +1,23 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.mp.service.account;
+
+import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.USER_USERNAME_EXISTS;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil;
@@ -15,6 +34,10 @@ import cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants;
 import cn.iocoder.yudao.module.mp.framework.mp.core.MpServiceFactory;
 import cn.iocoder.yudao.module.mp.mq.producer.MpAccountProducer;
 import com.google.common.annotations.VisibleForTesting;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -23,14 +46,6 @@ import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
-
-import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.USER_USERNAME_EXISTS;
 
 /**
  * 公众号账号 Service 实现类
@@ -43,37 +58,33 @@ import static cn.iocoder.yudao.module.system.enums.ErrorCodeConstants.USER_USERN
 public class MpAccountServiceImpl implements MpAccountService {
 
     /**
-     * 账号缓存
-     * key：账号编号 {@link MpAccountDO#getAppId()}
+     * 账号缓存 key：账号编号 {@link MpAccountDO#getAppId()}
      *
-     * 这里声明 volatile 修饰的原因是，每次刷新时，直接修改指向
+     * <p>这里声明 volatile 修饰的原因是，每次刷新时，直接修改指向
      */
-    @Getter
-    private volatile Map<String, MpAccountDO> accountCache;
+    @Getter private volatile Map<String, MpAccountDO> accountCache;
 
-    @Resource
-    private MpAccountMapper mpAccountMapper;
+    @Resource private MpAccountMapper mpAccountMapper;
 
-    @Resource
-    @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource @Lazy // 延迟加载，解决循环依赖的问题
     private MpServiceFactory mpServiceFactory;
 
-    @Resource
-    private MpAccountProducer mpAccountProducer;
+    @Resource private MpAccountProducer mpAccountProducer;
 
     @Override
     @PostConstruct
     public void initLocalCache() {
         // 注意：忽略自动多租户，因为要全局初始化缓存
-        TenantUtils.executeIgnore(() -> {
-            // 第一步：查询数据
-            List<MpAccountDO> accounts = mpAccountMapper.selectList();
-            log.info("[initLocalCacheIfUpdate][缓存公众号账号，数量为:{}]", accounts.size());
+        TenantUtils.executeIgnore(
+                () -> {
+                    // 第一步：查询数据
+                    List<MpAccountDO> accounts = mpAccountMapper.selectList();
+                    log.info("[initLocalCacheIfUpdate][缓存公众号账号，数量为:{}]", accounts.size());
 
-            // 第二步：构建缓存。创建或更新支付 Client
-            mpServiceFactory.init(accounts);
-            accountCache = CollectionUtils.convertMap(accounts, MpAccountDO::getAppId);
-        });
+                    // 第二步：构建缓存。创建或更新支付 Client
+                    mpServiceFactory.init(accounts);
+                    accountCache = CollectionUtils.convertMap(accounts, MpAccountDO::getAppId);
+                });
     }
 
     @Override
@@ -127,17 +138,18 @@ public class MpAccountServiceImpl implements MpAccountService {
     @VisibleForTesting
     public void validateAppIdUnique(Long id, String appId) {
         // 多个租户，appId 是不能重复，否则公众号回调会无法识别
-        TenantUtils.executeIgnore(() -> {
-            MpAccountDO account = mpAccountMapper.selectByAppId(appId);
-            if (account == null) {
-                return;
-            }
-            // 存在 account 记录的情况下
-            if (id == null // 新增时，说明重复
-                    || ObjUtil.notEqual(id, account.getId())) { // 更新时，如果 id 不一致，说明重复
-                throw exception(USER_USERNAME_EXISTS);
-            }
-        });
+        TenantUtils.executeIgnore(
+                () -> {
+                    MpAccountDO account = mpAccountMapper.selectByAppId(appId);
+                    if (account == null) {
+                        return;
+                    }
+                    // 存在 account 记录的情况下
+                    if (id == null // 新增时，说明重复
+                            || ObjUtil.notEqual(id, account.getId())) { // 更新时，如果 id 不一致，说明重复
+                        throw exception(USER_USERNAME_EXISTS);
+                    }
+                });
     }
 
     @Override
@@ -169,10 +181,12 @@ public class MpAccountServiceImpl implements MpAccountService {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(account.getAppId());
         String qrCodeUrl;
         try {
-            WxMpQrCodeTicket qrCodeTicket = mpService.getQrcodeService().qrCodeCreateLastTicket("default");
+            WxMpQrCodeTicket qrCodeTicket =
+                    mpService.getQrcodeService().qrCodeCreateLastTicket("default");
             qrCodeUrl = mpService.getQrcodeService().qrCodePictureUrl(qrCodeTicket.getTicket());
         } catch (WxErrorException e) {
-            throw exception(ErrorCodeConstants.ACCOUNT_GENERATE_QR_CODE_FAIL, e.getError().getErrorMsg());
+            throw exception(
+                    ErrorCodeConstants.ACCOUNT_GENERATE_QR_CODE_FAIL, e.getError().getErrorMsg());
         }
 
         // 保存二维码
@@ -189,8 +203,8 @@ public class MpAccountServiceImpl implements MpAccountService {
         try {
             mpService.clearQuota(account.getAppId());
         } catch (WxErrorException e) {
-            throw exception(ErrorCodeConstants.ACCOUNT_CLEAR_QUOTA_FAIL, e.getError().getErrorMsg());
+            throw exception(
+                    ErrorCodeConstants.ACCOUNT_CLEAR_QUOTA_FAIL, e.getError().getErrorMsg());
         }
     }
-
 }

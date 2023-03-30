@@ -1,4 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.mp.service.user;
+
+import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.USER_NOT_EXISTS;
+import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.USER_UPDATE_TAG_FAIL;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
@@ -13,6 +33,12 @@ import cn.iocoder.yudao.module.mp.dal.dataobject.user.MpUserDO;
 import cn.iocoder.yudao.module.mp.dal.mysql.user.MpUserMapper;
 import cn.iocoder.yudao.module.mp.framework.mp.core.MpServiceFactory;
 import cn.iocoder.yudao.module.mp.service.account.MpAccountService;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -22,17 +48,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
-import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.USER_NOT_EXISTS;
-import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.USER_UPDATE_TAG_FAIL;
 
 /**
  * 微信公众号粉丝 Service 实现类
@@ -44,16 +59,13 @@ import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.USER_UPDATE_TA
 @Slf4j
 public class MpUserServiceImpl implements MpUserService {
 
-    @Resource
-    @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource @Lazy // 延迟加载，解决循环依赖的问题
     private MpAccountService mpAccountService;
 
-    @Resource
-    @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource @Lazy // 延迟加载，解决循环依赖的问题
     private MpServiceFactory mpServiceFactory;
 
-    @Resource
-    private MpUserMapper mpUserMapper;
+    @Resource private MpUserMapper mpUserMapper;
 
     @Override
     public MpUserDO getUser(Long id) {
@@ -138,9 +150,12 @@ public class MpUserServiceImpl implements MpUserService {
             return;
         }
         // 1. 获得数据库已保存的粉丝列表
-        List<MpUserDO> dbUsers = mpUserMapper.selectListByAppIdAndOpenid(account.getAppId(),
-                CollectionUtils.convertList(wxUsers, WxMpUser::getOpenId));
-        Map<String, MpUserDO> openId2Users = CollectionUtils.convertMap(dbUsers, MpUserDO::getOpenid);
+        List<MpUserDO> dbUsers =
+                mpUserMapper.selectListByAppIdAndOpenid(
+                        account.getAppId(),
+                        CollectionUtils.convertList(wxUsers, WxMpUser::getOpenId));
+        Map<String, MpUserDO> openId2Users =
+                CollectionUtils.convertMap(dbUsers, MpUserDO::getOpenid);
 
         // 2.1 根据情况，插入或更新
         List<MpUserDO> users = MpUserConvert.INSTANCE.convertList(account, wxUsers);
@@ -167,8 +182,11 @@ public class MpUserServiceImpl implements MpUserService {
             log.error("[updateUserUnsubscribe][微信公众号粉丝 appId({}) openid({}) 不存在]", appId, openid);
             return;
         }
-        mpUserMapper.updateById(new MpUserDO().setId(dbUser.getId()).setSubscribeStatus(CommonStatusEnum.DISABLE.getStatus())
-                .setUnsubscribeTime(LocalDateTime.now()));
+        mpUserMapper.updateById(
+                new MpUserDO()
+                        .setId(dbUser.getId())
+                        .setSubscribeStatus(CommonStatusEnum.DISABLE.getStatus())
+                        .setUnsubscribeTime(LocalDateTime.now()));
     }
 
     @Override
@@ -198,18 +216,17 @@ public class MpUserServiceImpl implements MpUserService {
             // 第一步，先取消原来的标签
             List<Long> oldTagIds = mpService.getUserTagService().userTagList(openid);
             for (Long tagId : oldTagIds) {
-                mpService.getUserTagService().batchUntagging(tagId, new String[]{openid});
+                mpService.getUserTagService().batchUntagging(tagId, new String[] {openid});
             }
             // 第二步，再设置新的标签
             if (CollUtil.isEmpty(tagIds)) {
                 return;
             }
-            for (Long tagId: tagIds) {
-                mpService.getUserTagService().batchTagging(tagId, new String[]{openid});
+            for (Long tagId : tagIds) {
+                mpService.getUserTagService().batchTagging(tagId, new String[] {openid});
             }
         } catch (WxErrorException e) {
             throw exception(USER_UPDATE_TAG_FAIL, e.getError().getErrorMsg());
         }
     }
-
 }

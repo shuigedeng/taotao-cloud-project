@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.service.dubbo;
 
 import com.taotao.cloud.order.api.dubbo.IDubboOrderRpc;
@@ -32,8 +33,5 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass = IDubboOrderRpc.class, validation = "true")
 public class DubboOrderServiceImpl implements IDubboOrderRpc {
 
-	@DubboReference
-	private IDubboUserRpc dubboUserRpc;
-
-
+    @DubboReference private IDubboUserRpc dubboUserRpc;
 }

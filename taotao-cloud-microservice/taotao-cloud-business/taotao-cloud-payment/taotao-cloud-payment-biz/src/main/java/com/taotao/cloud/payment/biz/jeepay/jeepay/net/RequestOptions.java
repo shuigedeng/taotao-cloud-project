@@ -1,10 +1,26 @@
-package com.taotao.cloud.payment.biz.jeepay.jeepay.net;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.payment.biz.jeepay.jeepay.net;
 
 import com.taotao.cloud.payment.biz.jeepay.jeepay.Jeepay;
 
 /**
  * 请求参数选项内容
+ *
  * @author jmdhappy
  * @site https://www.jeepay.vip
  * @date 2021-06-08 11:00
@@ -226,8 +242,8 @@ public class RequestOptions {
         if (apiUri == null) {
             throw new InvalidRequestOptionsException("接口URI不能为空!");
         }
-        if(apiUri.startsWith("/")) {
-            throw new InvalidRequestOptionsException("接口URI("+apiUri+")不能以'/'开头");
+        if (apiUri.startsWith("/")) {
+            throw new InvalidRequestOptionsException("接口URI(" + apiUri + ")不能以'/'开头");
         }
         return apiUri;
     }

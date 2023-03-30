@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -32,34 +48,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/setting")
 public class SettingController {
 
-	private final ISettingService settingService;
+    private final ISettingService settingService;
 
-	@NotAuth
-	public Result<SettingVO> getByKey(@RequestParam String key) {
-		Setting setting = settingService.get(key);
-		return Result.success(BeanUtils.copy(setting, SettingVO.class));
-	}
+    @NotAuth
+    public Result<SettingVO> getByKey(@RequestParam String key) {
+        Setting setting = settingService.get(key);
+        return Result.success(BeanUtils.copy(setting, SettingVO.class));
+    }
 
-	@NotAuth
-	@GetMapping("/all")
-	public Result<List<Setting>> getAll() {
-		List<Setting> list = settingService.list();
+    @NotAuth
+    @GetMapping("/all")
+    public Result<List<Setting>> getAll() {
+        List<Setting> list = settingService.list();
 
-		List<Setting> settings = settingService.im().selectList(new QueryWrapper<>());
-		List<Setting> all = settingService.cr().findAll();
-		List<Setting> all1 = settingService.ir().findAll();
-		return Result.success(list);
-	}
+        List<Setting> settings = settingService.im().selectList(new QueryWrapper<>());
+        List<Setting> all = settingService.cr().findAll();
+        List<Setting> all1 = settingService.ir().findAll();
+        return Result.success(list);
+    }
 
-	@NotAuth
-	@PostMapping("/save")
-	public Result<Boolean> save(@RequestBody Setting setting) {
+    @NotAuth
+    @PostMapping("/save")
+    public Result<Boolean> save(@RequestBody Setting setting) {
 
-		settingService.im().insert(setting);
-		settingService.cr().save(setting);
-		settingService.ir().save(setting);
+        settingService.im().insert(setting);
+        settingService.cr().save(setting);
+        settingService.ir().save(setting);
 
-		return Result.success(true);
-	}
-
+        return Result.success(true);
+    }
 }

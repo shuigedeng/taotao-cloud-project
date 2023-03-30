@@ -13,61 +13,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.member.biz.mapper;
 
+package com.taotao.cloud.member.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
-
-/**
- * 会员签到数据处理层
- */
+/** 会员签到数据处理层 */
 public interface IMemberSignMapper extends BaseSuperMapper<MemberSign, Long> {
 
-	/**
-	 * 获取会员之前签到信息
-	 *
-	 * @param memberId 会员ID
-	 * @return 会员签到列表
-	 */
-	@Select("""
+    /**
+     * 获取会员之前签到信息
+     *
+     * @param memberId 会员ID
+     * @return 会员签到列表
+     */
+    @Select(
+            """
 		SELECT *
 		FROM tt_member_sign
 		WHERE TO_DAYS( NOW( ) ) - TO_DAYS( create_time) = 1 and member_id = #{memberId}
 		""")
-	List<MemberSign> getBeforeMemberSign(Long memberId);
+    List<MemberSign> getBeforeMemberSign(Long memberId);
 
-	/**
-	 * 获取会员签到
-	 *
-	 * @param queryWrapper 查询条件
-	 * @return 会员签到列表
-	 */
-	@Select("""
+    /**
+     * 获取会员签到
+     *
+     * @param queryWrapper 查询条件
+     * @return 会员签到列表
+     */
+    @Select("""
 		select *
 		from tt_member_sign
 		${ew.customSqlSegment}
 		""")
-	List<MemberSign> getTodayMemberSign(@Param(Constants.WRAPPER) Wrapper<MemberSign> queryWrapper);
+    List<MemberSign> getTodayMemberSign(@Param(Constants.WRAPPER) Wrapper<MemberSign> queryWrapper);
 
-	/**
-	 * 获取当月的会员签到记录
-	 *
-	 * @param memberId 会员ID
-	 * @param time     时间
-	 * @return 会员签到列表
-	 */
-	@Select("""
+    /**
+     * 获取当月的会员签到记录
+     *
+     * @param memberId 会员ID
+     * @param time 时间
+     * @return 会员签到列表
+     */
+    @Select(
+            """
 		SELECT *
 		FROM tt_member_sign
 		WHERE DATE_FORMAT(create_time,'%Y%m') = #{time} and member_id = #{memberId}
 		""")
-	List<MemberSign> getMonthMemberSign(Long memberId, String time);
-
+    List<MemberSign> getMonthMemberSign(Long memberId, String time);
 }

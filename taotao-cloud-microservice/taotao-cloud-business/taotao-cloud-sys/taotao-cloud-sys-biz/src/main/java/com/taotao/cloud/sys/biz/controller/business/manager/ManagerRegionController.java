@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.BaseQuery;
@@ -50,40 +51,48 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/manager/region")
 @Tag(name = "管理端-地区管理API", description = "管理端-地区管理API")
-public class ManagerRegionController extends
-		BaseSuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
+public class ManagerRegionController
+        extends BaseSuperController<
+                IRegionService,
+                Region,
+                Long,
+                BaseQuery,
+                RegionSaveDTO,
+                RegionUpdateDTO,
+                RegionQueryVO> {
 
-	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
-	@RequestLogger
-	@GetMapping("/parentId/{parentId}")
-	@NotAuth
-	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
-	public Result<List<RegionParentVO>> queryRegionByParentId(
-			@Parameter(description = "父id") @NotNull(message = "父id不能为空")
-			@PathVariable(name = "parentId") Long parentId) {
-		List<RegionParentVO> result = service().queryRegionByParentId(parentId);
-		return Result.success(result);
-	}
+    @Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
+    @RequestLogger
+    @GetMapping("/parentId/{parentId}")
+    @NotAuth
+    // @PreAuthorize("hasAuthority('sys:region:info:parentId')")
+    public Result<List<RegionParentVO>> queryRegionByParentId(
+            @Parameter(description = "父id")
+                    @NotNull(message = "父id不能为空")
+                    @PathVariable(name = "parentId")
+                    Long parentId) {
+        List<RegionParentVO> result = service().queryRegionByParentId(parentId);
+        return Result.success(result);
+    }
 
-	@Operation(summary = "树形结构查询", description = "树形结构查询")
-	@RequestLogger
-	@GetMapping(value = "/tree")
-	@NotAuth
-	//@PreAuthorize("hasAuthority('sys:region:info:true')")
-	public Result<List<RegionParentVO>> tree(
-			@RequestParam(required = false, defaultValue = "1") Long parentId,
-			@RequestParam(required = false, defaultValue = "1024") Integer depth) {
-		List<RegionParentVO> result = service().tree(parentId, depth);
-		return Result.success(result);
-	}
+    @Operation(summary = "树形结构查询", description = "树形结构查询")
+    @RequestLogger
+    @GetMapping(value = "/tree")
+    @NotAuth
+    // @PreAuthorize("hasAuthority('sys:region:info:true')")
+    public Result<List<RegionParentVO>> tree(
+            @RequestParam(required = false, defaultValue = "1") Long parentId,
+            @RequestParam(required = false, defaultValue = "1024") Integer depth) {
+        List<RegionParentVO> result = service().tree(parentId, depth);
+        return Result.success(result);
+    }
 
-	@Operation(summary = "另一种树形结构查询", description = "另一种树形结构查询")
-	@RequestLogger
-	@GetMapping(value = "/other/tree")
-	@PreAuthorize("hasAuthority('sys:region:info:true')")
-	public Result<List<RegionTreeVO>> treeOther() {
-		List<RegionTreeVO> result = service().treeOther();
-		return Result.success(ForestNodeMerger.merge(result));
-	}
-
+    @Operation(summary = "另一种树形结构查询", description = "另一种树形结构查询")
+    @RequestLogger
+    @GetMapping(value = "/other/tree")
+    @PreAuthorize("hasAuthority('sys:region:info:true')")
+    public Result<List<RegionTreeVO>> treeOther() {
+        List<RegionTreeVO> result = service().treeOther();
+        return Result.success(ForestNodeMerger.merge(result));
+    }
 }

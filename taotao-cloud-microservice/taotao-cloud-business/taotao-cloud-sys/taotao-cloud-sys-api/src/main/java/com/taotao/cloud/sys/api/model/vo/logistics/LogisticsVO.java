@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.api.model.vo.logistics;
 
 import java.io.Serial;
 import java.io.Serializable;
-
 import lombok.*;
 
 /**
@@ -34,43 +34,28 @@ import lombok.*;
 @NoArgsConstructor
 public class LogisticsVO implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = -4132785717179910025L;
+    @Serial private static final long serialVersionUID = -4132785717179910025L;
 
-	private Long id;
+    private Long id;
 
-	/**
-	 * 物流公司名称
-	 */
-	private String name;
+    /** 物流公司名称 */
+    private String name;
 
-	/**
-	 * 物流公司code
-	 */
-	private String code;
+    /** 物流公司code */
+    private String code;
 
-	/**
-	 * 物流公司联系人
-	 */
-	private String contactName;
+    /** 物流公司联系人 */
+    private String contactName;
 
-	/**
-	 * 物流公司联系电话
-	 */
-	private String contactMobile;
+    /** 物流公司联系电话 */
+    private String contactMobile;
 
-	/**
-	 * 支持电子面单
-	 */
-	private String standBy;
+    /** 支持电子面单 */
+    private String standBy;
 
-	/**
-	 * 物流公司电子面单表单
-	 */
-	private String formItems;
+    /** 物流公司电子面单表单 */
+    private String formItems;
 
-	/**
-	 * 禁用状态 OPEN：开启，CLOSE：禁用
-	 */
-	private String disabled;
+    /** 禁用状态 OPEN：开启，CLOSE：禁用 */
+    private String disabled;
 }

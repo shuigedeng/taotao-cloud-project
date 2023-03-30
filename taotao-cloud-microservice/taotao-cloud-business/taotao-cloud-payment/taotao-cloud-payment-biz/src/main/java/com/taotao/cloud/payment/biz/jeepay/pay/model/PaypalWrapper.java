@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.jeepay.pay.model;
 
 import cn.hutool.json.JSONObject;
@@ -15,6 +31,9 @@ import com.paypal.orders.PurchaseUnit;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.PayOrder;
 import com.taotao.cloud.payment.biz.jeepay.core.model.params.pppay.PpPayNormalMchParams;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.msg.ChannelRetMsg;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,10 +42,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * none.
@@ -82,8 +97,7 @@ public class PaypalWrapper {
     }
 
     /**
-     * 处理并捕获订单
-     * 由于 Paypal 创建订单后需要进行一次 Capture(捕获) 才可以正确获取到订单的支付状态
+     * 处理并捕获订单 由于 Paypal 创建订单后需要进行一次 Capture(捕获) 才可以正确获取到订单的支付状态
      *
      * @param token
      * @param payOrder
@@ -91,7 +105,8 @@ public class PaypalWrapper {
      * @return
      * @throws IOException
      */
-    public ChannelRetMsg processOrder(String token, PayOrder payOrder, boolean isCapture) throws IOException {
+    public ChannelRetMsg processOrder(String token, PayOrder payOrder, boolean isCapture)
+            throws IOException {
         // Paypal 创建订单存在一个 Token，当订单捕获之后会有一个 捕获的ID ，退款需要用到
         String ppOrderId = this.processOrder(payOrder.getChannelOrderNo(), token).get(0);
         String ppCatptId = this.processOrder(payOrder.getChannelOrderNo()).get(1);
@@ -156,7 +171,7 @@ public class PaypalWrapper {
             ChannelRetMsg result = new ChannelRetMsg();
             result.setNeedQuery(true);
             result.setChannelOrderId(ppOrderId + "," + ppCatptId); // 渠道订单号
-            result.setChannelUserId(orderUserId);  // 支付用户ID
+            result.setChannelUserId(orderUserId); // 支付用户ID
             result.setChannelAttach(orderJsonStr); // Capture 响应数据
             result.setResponseEntity(textResp("SUCCESS")); // 响应数据
             result.setChannelState(ChannelRetMsg.ChannelState.WAITING); // 默认支付中
@@ -168,7 +183,7 @@ public class PaypalWrapper {
     /**
      * 处理 Paypal 状态码
      *
-     * @param status        状态码
+     * @param status 状态码
      * @param channelRetMsg 通知信息
      * @return 通知信息
      */
@@ -197,18 +212,20 @@ public class PaypalWrapper {
         return new ResponseEntity(text, httpHeaders, HttpStatus.OK);
     }
 
-    public static PaypalWrapper buildPaypalWrapper(PpPayNormalMchParams ppPayNormalMchParams){
+    public static PaypalWrapper buildPaypalWrapper(PpPayNormalMchParams ppPayNormalMchParams) {
         PaypalWrapper paypalWrapper = new PaypalWrapper();
-        PayPalEnvironment environment = new PayPalEnvironment.Live(ppPayNormalMchParams.getClientId(), ppPayNormalMchParams.getSecret());
+        PayPalEnvironment environment =
+                new PayPalEnvironment.Live(
+                        ppPayNormalMchParams.getClientId(), ppPayNormalMchParams.getSecret());
         if (ppPayNormalMchParams.getSandbox() == 1) {
-            environment = new PayPalEnvironment.Sandbox(ppPayNormalMchParams.getClientId(), ppPayNormalMchParams.getSecret());
+            environment =
+                    new PayPalEnvironment.Sandbox(
+                            ppPayNormalMchParams.getClientId(), ppPayNormalMchParams.getSecret());
         }
         paypalWrapper.setEnvironment(environment);
         paypalWrapper.setClient(new PayPalHttpClient(environment));
         paypalWrapper.setNotifyWebhook(ppPayNormalMchParams.getNotifyWebhook());
         paypalWrapper.setRefundWebhook(ppPayNormalMchParams.getRefundWebhook());
         return paypalWrapper;
-
     }
-
 }

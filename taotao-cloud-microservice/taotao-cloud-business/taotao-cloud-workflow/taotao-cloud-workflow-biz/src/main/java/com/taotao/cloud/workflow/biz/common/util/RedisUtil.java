@@ -1,5 +1,20 @@
-package com.taotao.cloud.workflow.biz.common.util;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.workflow.biz.common.util;
 
 import com.taotao.cloud.workflow.biz.common.database.data.DataSourceContextHolder;
 import java.util.ArrayList;
@@ -17,43 +32,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-/**
- *
- */
+/** */
 @Slf4j
 @Component
 public class RedisUtil {
-    /**
-     * 默认缓存时间 60S
-     */
-    public final static int CAHCETIME = 60;
-    /**
-     * 默认缓存时间 1hr
-     */
-    public final static int CAHCEHOUR = 60 * 60;
-    /**
-     * 默认缓存时间 1Day
-     */
-    public final static int CAHCEDAY = 60 * 60 * 24;
-    /**
-     * 默认缓存时间 1week
-     */
-    public final static int CAHCEWEEK = 60 * 60 * 24 * 7;
-    /**
-     * 默认缓存时间 1month
-     */
-    public final static int CAHCEMONTH = 60 * 60 * 24 * 7 * 30;
-    /**
-     * 默认缓存时间 1年
-     */
-    public final static int CAHCEYEAR = 60 * 60 * 24 * 7 * 30 * 12;
+    /** 默认缓存时间 60S */
+    public static final int CAHCETIME = 60;
+    /** 默认缓存时间 1hr */
+    public static final int CAHCEHOUR = 60 * 60;
+    /** 默认缓存时间 1Day */
+    public static final int CAHCEDAY = 60 * 60 * 24;
+    /** 默认缓存时间 1week */
+    public static final int CAHCEWEEK = 60 * 60 * 24 * 7;
+    /** 默认缓存时间 1month */
+    public static final int CAHCEMONTH = 60 * 60 * 24 * 7 * 30;
+    /** 默认缓存时间 1年 */
+    public static final int CAHCEYEAR = 60 * 60 * 24 * 7 * 30 * 12;
 
     private static long expiresIn = TimeUnit.SECONDS.toSeconds(CAHCEHOUR * 8);
 
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
-    @Autowired
-    private CacheKeyUtil cacheKeyUtil;
+    @Autowired private RedisTemplate<String, Object> redisTemplate;
+    @Autowired private CacheKeyUtil cacheKeyUtil;
     // =============================common============================
 
     /**
@@ -66,12 +65,15 @@ public class RedisUtil {
         Set<String> keys = Collections.emptySet();
         if (tenantId == null) {
             keys = redisTemplate.keys("*");
-        }else{
+        } else {
             keys = redisTemplate.keys("*" + tenantId + "*");
         }
-        if(CollectionUtils.isNotEmpty(keys)) {
-            //排除ID生成器的缓存记录， 如果删除在集群情况下ID生成器的机器编号可能会重复导致生成的ID重复
-            keys = keys.stream().filter(s -> !s.startsWith(CacheKeyUtil.IDGENERATOR)).collect(Collectors.toSet());
+        if (CollectionUtils.isNotEmpty(keys)) {
+            // 排除ID生成器的缓存记录， 如果删除在集群情况下ID生成器的机器编号可能会重复导致生成的ID重复
+            keys =
+                    keys.stream()
+                            .filter(s -> !s.startsWith(CacheKeyUtil.IDGENERATOR))
+                            .collect(Collectors.toSet());
         }
         return keys;
     }
@@ -83,16 +85,27 @@ public class RedisUtil {
      */
     public Set<String> getAllVisiualKeys() {
         Set<String> allKey = new HashSet<>(16);
-        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getAllUser() + "*")));
-        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getCompanySelect() + "*")));
-        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getDictionary() + "*")));
-        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getDynamic() + "*")));
-        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getOrganizeList() + "*")));
-        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getPositionList() + "*")));
-        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getVisiualData() + "*")));
+        allKey.addAll(
+                Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getAllUser() + "*")));
+        allKey.addAll(
+                Objects.requireNonNull(
+                        redisTemplate.keys("*" + cacheKeyUtil.getCompanySelect() + "*")));
+        allKey.addAll(
+                Objects.requireNonNull(
+                        redisTemplate.keys("*" + cacheKeyUtil.getDictionary() + "*")));
+        allKey.addAll(
+                Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getDynamic() + "*")));
+        allKey.addAll(
+                Objects.requireNonNull(
+                        redisTemplate.keys("*" + cacheKeyUtil.getOrganizeList() + "*")));
+        allKey.addAll(
+                Objects.requireNonNull(
+                        redisTemplate.keys("*" + cacheKeyUtil.getPositionList() + "*")));
+        allKey.addAll(
+                Objects.requireNonNull(
+                        redisTemplate.keys("*" + cacheKeyUtil.getVisiualData() + "*")));
         return allKey;
     }
-
 
     /**
      * 返回 key 的剩余的过期时间
@@ -115,9 +128,7 @@ public class RedisUtil {
         }
     }
 
-    /**
-     * 删除可视化redis
-     */
+    /** 删除可视化redis */
     public void removeSome(String key) {
         Set<String> keys = redisTemplate.keys("*" + CacheKeyUtil.VISIUALDATA + key + "*");
         if (CollectionUtils.isNotEmpty(keys)) {
@@ -125,20 +136,15 @@ public class RedisUtil {
         }
     }
 
-    /**
-     * 删除用户对应的token,redis
-     */
+    /** 删除用户对应的token,redis */
     public void removeUserToken(String userToken) {
-        Set<String> keys = redisTemplate.keys(userToken+"*");
+        Set<String> keys = redisTemplate.keys(userToken + "*");
         if (CollectionUtils.isNotEmpty(keys)) {
             redisTemplate.delete(keys);
         }
     }
 
-
-    /**
-     * 删除全部redis
-     */
+    /** 删除全部redis */
     public void removeAll() {
         Set<String> keys = getAllKeys();
         if (CollectionUtils.isNotEmpty(keys)) {
@@ -200,12 +206,14 @@ public class RedisUtil {
         expire(key, time);
     }
 
-    /**
-     * Object转成JSON数据
-     */
+    /** Object转成JSON数据 */
     private String toJson(Object object) {
-        if (object instanceof Integer || object instanceof Long || object instanceof Float ||
-                object instanceof Double || object instanceof Boolean || object instanceof String) {
+        if (object instanceof Integer
+                || object instanceof Long
+                || object instanceof Float
+                || object instanceof Double
+                || object instanceof Boolean
+                || object instanceof String) {
             return String.valueOf(object);
         }
         return JsonUtil.getObjectToString(object);
@@ -320,7 +328,7 @@ public class RedisUtil {
      * @param key
      * @return
      */
-    public <K,V> Map<K, V> getMap(String key) {
+    public <K, V> Map<K, V> getMap(String key) {
         return (Map<K, V>) redisTemplate.opsForHash().entries(key);
     }
 
@@ -328,8 +336,8 @@ public class RedisUtil {
      * 插入map的值
      *
      * @param hashId 主键id
-     * @param key    map的key
-     * @param value  map的值
+     * @param key map的key
+     * @param value map的值
      */
     public void insertHash(String hashId, String key, String value) {
         redisTemplate.opsForHash().put(hashId, key, value);
@@ -372,11 +380,10 @@ public class RedisUtil {
     /**
      * 获取list缓存的内容
      *
-     * @param key   键
+     * @param key 键
      * @param start 开始 0 是第一个元素
-     * @param end   结束 -1代表所有值
-     * @return
-     * @取出来的元素 总数 end-start+1
+     * @param end 结束 -1代表所有值
+     * @return @取出来的元素 总数 end-start+1
      */
     public List<Object> get(String key, long start, long end) {
         try {
@@ -405,7 +412,7 @@ public class RedisUtil {
     /**
      * 通过索引 获取list中的值
      *
-     * @param key   键
+     * @param key 键
      * @param index 索引 index>=0时， 0 表头，1 第二个元素，依次类推；index<0时，-1，表尾，-2倒数第二个元素，依次类推
      * @return
      */
@@ -422,6 +429,4 @@ public class RedisUtil {
         Set<String> data = redisTemplate.keys(tenantId + CacheKeyUtil.LOGINONLINE + "*");
         return data.size();
     }
-
-
 }

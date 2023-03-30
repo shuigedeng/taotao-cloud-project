@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.promotion.api.feign.fallback;
 
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanApi;
@@ -27,18 +28,18 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  */
 public class FeignPintuanApiFallback implements FallbackFactory<IFeignPintuanApi> {
 
-	@Override
-	public IFeignPintuanApi create(Throwable throwable) {
-		return new IFeignPintuanApi() {
-			@Override
-			public PintuanVO getById(Long pintuanId) {
-				return null;
-			}
-			//@Override
-			//public Result<CouponVO> getMemberSecurityUser(Long id) {
-			//	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
-			//	return Result.fail(null, 500);
-			//}
-		};
-	}
+    @Override
+    public IFeignPintuanApi create(Throwable throwable) {
+        return new IFeignPintuanApi() {
+            @Override
+            public PintuanVO getById(Long pintuanId) {
+                return null;
+            }
+            // @Override
+            // public Result<CouponVO> getMemberSecurityUser(Long id) {
+            //	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
+            //	return Result.fail(null, 500);
+            // }
+        };
+    }
 }

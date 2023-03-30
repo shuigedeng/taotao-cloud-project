@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.model.convert;
 
 import com.taotao.cloud.goods.api.model.dto.SpecificationDTO;
 import com.taotao.cloud.goods.api.model.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * ISpecificationMapStruct
@@ -32,32 +32,28 @@ import java.util.List;
  * @since 2022-04-27 16:58:30
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface SpecificationConvert {
 
-	/**
-	 * 实例
-	 */
-	SpecificationConvert INSTANCE = Mappers.getMapper(SpecificationConvert.class);
+    /** 实例 */
+    SpecificationConvert INSTANCE = Mappers.getMapper(SpecificationConvert.class);
 
-	/**
-	 * 规范来规范vos
-	 *
-	 * @param specifications 规范
-	 * @return {@link List }<{@link SpecificationVO }>
-	 * @since 2022-04-27 16:58:30
-	 */
-	List<SpecificationVO> convert(List<Specification> specifications);
+    /**
+     * 规范来规范vos
+     *
+     * @param specifications 规范
+     * @return {@link List }<{@link SpecificationVO }>
+     * @since 2022-04-27 16:58:30
+     */
+    List<SpecificationVO> convert(List<Specification> specifications);
 
-	/**
-	 * 规范dtoto规范
-	 *
-	 * @param specificationDTO 规范dto
-	 * @return {@link Specification }
-	 * @since 2022-04-27 16:58:30
-	 */
-	Specification convert(SpecificationDTO specificationDTO);
-
-
+    /**
+     * 规范dtoto规范
+     *
+     * @param specificationDTO 规范dto
+     * @return {@link Specification }
+     * @since 2022-04-27 16:58:30
+     */
+    Specification convert(SpecificationDTO specificationDTO);
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.api.mp.enums;
 
 import cn.iocoder.yudao.framework.common.exception.ErrorCode;
@@ -5,7 +21,7 @@ import cn.iocoder.yudao.framework.common.exception.ErrorCode;
 /**
  * Mp 错误码枚举类
  *
- * mp 系统，使用 1-006-000-000 段
+ * <p>mp 系统，使用 1-006-000-000 段
  */
 public interface ErrorCodeConstants {
 
@@ -17,7 +33,8 @@ public interface ErrorCodeConstants {
     // ========== 公众号统计 1006001000============
     ErrorCode STATISTICS_GET_USER_SUMMARY_FAIL = new ErrorCode(1006001000, "获取粉丝增减数据失败，原因：{}");
     ErrorCode STATISTICS_GET_USER_CUMULATE_FAIL = new ErrorCode(1006001001, "获得粉丝累计数据失败，原因：{}");
-    ErrorCode STATISTICS_GET_UPSTREAM_MESSAGE_FAIL = new ErrorCode(1006001002, "获得消息发送概况数据失败，原因：{}");
+    ErrorCode STATISTICS_GET_UPSTREAM_MESSAGE_FAIL =
+            new ErrorCode(1006001002, "获得消息发送概况数据失败，原因：{}");
     ErrorCode STATISTICS_GET_INTERFACE_SUMMARY_FAIL = new ErrorCode(1006001003, "获得接口分析数据失败，原因：{}");
 
     // ========== 公众号标签 1006002000============
@@ -60,5 +77,4 @@ public interface ErrorCodeConstants {
     ErrorCode AUTO_REPLY_ADD_SUBSCRIBE_FAIL_EXISTS = new ErrorCode(1006009001, "操作失败，原因：已存在关注时的回复");
     ErrorCode AUTO_REPLY_ADD_MESSAGE_FAIL_EXISTS = new ErrorCode(1006009002, "操作失败，原因：已存在该消息类型的回复");
     ErrorCode AUTO_REPLY_ADD_KEYWORD_FAIL_EXISTS = new ErrorCode(1006009003, "操作失败，原因：已关在该关键字的回复");
-
 }

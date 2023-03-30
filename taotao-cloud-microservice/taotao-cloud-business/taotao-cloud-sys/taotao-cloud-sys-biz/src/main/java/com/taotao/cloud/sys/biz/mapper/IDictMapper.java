@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.model.bo.DictDeptBO;
@@ -30,10 +31,10 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
 public interface IDictMapper extends BaseSuperMapper<Dict, Long> {
 
-	@Select("""
+    @Select(
+            """
 		select dict.id as id,
 		dict.description as description,
 		dict.itemValue as itemValue,
@@ -43,5 +44,5 @@ public interface IDictMapper extends BaseSuperMapper<Dict, Long> {
 		from tt_dict dict left join tt_dept dept on dict.id = dept.id
 		where dict.id in #{params.ids}
 		""")
-	List<DictDeptBO> testMybatisQueryStructure(@Param("params") DictDeptParams params);
+    List<DictDeptBO> testMybatisQueryStructure(@Param("params") DictDeptParams params);
 }

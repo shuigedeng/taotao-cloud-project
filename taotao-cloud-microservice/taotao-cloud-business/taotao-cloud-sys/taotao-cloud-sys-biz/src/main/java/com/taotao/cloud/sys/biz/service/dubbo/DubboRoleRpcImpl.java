@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboRoleRpc;
@@ -37,12 +38,11 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboRoleRpc.class, validation = "true")
-public class DubboRoleRpcImpl extends
-	BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
-	implements IDubboRoleRpc {
+public class DubboRoleRpcImpl
+        extends BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
+        implements IDubboRoleRpc {
 
-	private final static QRole ROLE = QRole.role;
+    private static final QRole ROLE = QRole.role;
 
-	private final IRoleResourceService roleResourceService;
-
+    private final IRoleResourceService roleResourceService;
 }

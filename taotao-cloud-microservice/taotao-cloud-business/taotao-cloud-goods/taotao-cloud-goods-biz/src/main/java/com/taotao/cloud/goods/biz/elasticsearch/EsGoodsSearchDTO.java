@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.goods.biz.elasticsearch;
 
 import com.taotao.cloud.common.utils.lang.StringUtils;
@@ -19,7 +35,7 @@ public class EsGoodsSearchDTO {
     @Schema(description = "品牌,可以多选 品牌Id@品牌Id@品牌Id")
     private String brandId;
 
-    @Schema(description="是否为推荐商品")
+    @Schema(description = "是否为推荐商品")
     private Boolean recommend;
 
     @Schema(description = "价格", example = "10_30")
@@ -43,10 +59,10 @@ public class EsGoodsSearchDTO {
     @Schema(description = "当前商品skuId,根据当前浏览的商品信息来给用户推荐可能喜欢的商品")
     private String currentGoodsId;
 
-    //过滤搜索关键字
+    // 过滤搜索关键字
     public String getKeyword() {
         if (StringUtils.isNotEmpty(keyword)) {
-            //RegularUtil.replace(this.keyword);
+            // RegularUtil.replace(this.keyword);
         }
         return keyword;
     }

@@ -1,5 +1,20 @@
-package com.taotao.cloud.payment.biz.jeepay.jeepay.util;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.payment.biz.jeepay.jeepay.util;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -17,16 +32,17 @@ import java.util.*;
 
 /**
  * 输出Json格式数据
+ *
  * @author jmdhappy
  * @site https://www.jeepay.vip
  * @date 2021-06-08 11:00
  */
 public class JSONWriter {
 
-    private StringBuffer  buf           = new StringBuffer();
-    private Stack<Object> calls         = new Stack<Object>();
-    private boolean       emitClassName = true;
-    private DateFormat    format;
+    private StringBuffer buf = new StringBuffer();
+    private Stack<Object> calls = new Stack<Object>();
+    private boolean emitClassName = true;
+    private DateFormat format;
 
     public JSONWriter(boolean emitClassName) {
         this.emitClassName = emitClassName;
@@ -76,7 +92,9 @@ public class JSONWriter {
             add(null);
         } else {
             calls.push(object);
-            if (object instanceof Class<?>) { string(object); } else if (object instanceof Boolean) {
+            if (object instanceof Class<?>) {
+                string(object);
+            } else if (object instanceof Boolean) {
                 bool(((Boolean) object).booleanValue());
             } else if (object instanceof Number) {
                 add(object);
@@ -92,8 +110,14 @@ public class JSONWriter {
                 array((Iterator<?>) object, isApiModel);
             } else if (object instanceof Collection<?>) {
                 array(((Collection<?>) object).iterator(), isApiModel);
-            } else if (object instanceof Date) { date((Date) object); } else {
-                if (isApiModel) { model(object); } else { bean(object); }
+            } else if (object instanceof Date) {
+                date((Date) object);
+            } else {
+                if (isApiModel) {
+                    model(object);
+                } else {
+                    bean(object);
+                }
             }
             calls.pop();
         }
@@ -103,7 +127,9 @@ public class JSONWriter {
         Iterator<Object> it = calls.iterator();
         while (it.hasNext()) {
             Object called = it.next();
-            if (object == called) { return true; }
+            if (object == called) {
+                return true;
+            }
         }
         return false;
     }
@@ -120,10 +146,16 @@ public class JSONWriter {
                 String name = prop.getName();
                 Method accessor = prop.getReadMethod();
                 if ((emitClassName || !"class".equals(name)) && accessor != null) {
-                    if (!accessor.isAccessible()) { accessor.setAccessible(true); }
+                    if (!accessor.isAccessible()) {
+                        accessor.setAccessible(true);
+                    }
                     Object value = accessor.invoke(object, (Object[]) null);
-                    if (value == null) { continue; }
-                    if (addedSomething) { add(','); }
+                    if (value == null) {
+                        continue;
+                    }
+                    if (addedSomething) {
+                        add(',');
+                    }
                     add(name, value);
                     addedSomething = true;
                 }
@@ -132,8 +164,12 @@ public class JSONWriter {
             for (int i = 0; i < ff.length; ++i) {
                 Field field = ff[i];
                 Object value = field.get(object);
-                if (value == null) { continue; }
-                if (addedSomething) { add(','); }
+                if (value == null) {
+                    continue;
+                }
+                if (addedSomething) {
+                    add(',');
+                }
                 add(field.getName(), value);
                 addedSomething = true;
             }
@@ -160,33 +196,45 @@ public class JSONWriter {
                 ApiListField listField = field.getAnnotation(ApiListField.class);
                 // 优先处理列表类型注解,非列表类型才处理字段注解
                 if (listField != null) {
-                    PropertyDescriptor pd = new PropertyDescriptor(field.getName(),
-                            object.getClass());
+                    PropertyDescriptor pd =
+                            new PropertyDescriptor(field.getName(), object.getClass());
                     Method accessor = pd.getReadMethod();
-                    if (!accessor.isAccessible()) { accessor.setAccessible(true); }
+                    if (!accessor.isAccessible()) {
+                        accessor.setAccessible(true);
+                    }
                     Object value = accessor.invoke(object, (Object[]) null);
-                    if (value == null) { continue; }
-                    if (addedSomething) { add(','); }
+                    if (value == null) {
+                        continue;
+                    }
+                    if (addedSomething) {
+                        add(',');
+                    }
                     add(listField.value(), value, true);
                     addedSomething = true;
                 } else if (jsonField != null) {
-                    PropertyDescriptor pd = new PropertyDescriptor(field.getName(),
-                            object.getClass());
+                    PropertyDescriptor pd =
+                            new PropertyDescriptor(field.getName(), object.getClass());
                     Method accessor = pd.getReadMethod();
-                    if (!accessor.isAccessible()) { accessor.setAccessible(true); }
+                    if (!accessor.isAccessible()) {
+                        accessor.setAccessible(true);
+                    }
                     Object value = accessor.invoke(object, (Object[]) null);
-                    if (value == null) { continue; }
-                    if (addedSomething) { add(','); }
+                    if (value == null) {
+                        continue;
+                    }
+                    if (addedSomething) {
+                        add(',');
+                    }
                     add(jsonField.value(), value, true);
                     addedSomething = true;
                 }
             }
         } catch (IntrospectionException e1) {
 
-            //todo
+            // todo
         } catch (IllegalAccessException e2) {
 
-            //todo
+            // todo
         } catch (IllegalArgumentException e3) {
             // todo
         } catch (InvocationTargetException e4) {
@@ -214,7 +262,9 @@ public class JSONWriter {
             value(e.getKey());
             add(":");
             value(e.getValue());
-            if (it.hasNext()) { add(','); }
+            if (it.hasNext()) {
+                add(',');
+            }
         }
         add("}");
     }
@@ -227,7 +277,9 @@ public class JSONWriter {
         add("[");
         while (it.hasNext()) {
             value(it.next(), isApiModel);
-            if (it.hasNext()) { add(","); }
+            if (it.hasNext()) {
+                add(",");
+            }
         }
         add("]");
     }
@@ -241,7 +293,9 @@ public class JSONWriter {
         int length = Array.getLength(object);
         for (int i = 0; i < length; ++i) {
             value(Array.get(object, i), isApiModel);
-            if (i < length - 1) { add(','); }
+            if (i < length - 1) {
+                add(',');
+            }
         }
         add("]");
     }
@@ -264,15 +318,23 @@ public class JSONWriter {
         add('"');
         CharacterIterator it = new StringCharacterIterator(obj.toString());
         for (char c = it.first(); c != CharacterIterator.DONE; c = it.next()) {
-            if (c == '"') { add("\\\""); } else if (c == '\\') { add("\\\\"); } else if (c == '/') { add("\\/"); } else if (c == '\b') {
+            if (c == '"') {
+                add("\\\"");
+            } else if (c == '\\') {
+                add("\\\\");
+            } else if (c == '/') {
+                add("\\/");
+            } else if (c == '\b') {
                 add("\\b");
-            } else if (c
-                    == '\f') { add("\\f"); } else if (c == '\n') {
+            } else if (c == '\f') {
+                add("\\f");
+            } else if (c == '\n') {
                 add("\\n");
-            } else if (c
-                    == '\r') { add("\\r"); } else if (c
-                    == '\t') { add("\\t"); } else if (Character
-                    .isISOControl(c)) {
+            } else if (c == '\r') {
+                add("\\r");
+            } else if (c == '\t') {
+                add("\\t");
+            } else if (Character.isISOControl(c)) {
                 unicode(c);
             } else {
                 add(c);

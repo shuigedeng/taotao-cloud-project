@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.model.vo.alipay;
 
+package com.taotao.cloud.sys.api.model.vo.alipay;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-
 import lombok.*;
 
 /**
@@ -35,43 +34,27 @@ import lombok.*;
 @NoArgsConstructor
 public class TradeVO {
 
-	/**
-	 * （必填）商品描述
-	 */
-	private String body;
+    /** （必填）商品描述 */
+    private String body;
 
-	/**
-	 * （必填）商品名称
-	 */
-	private String subject;
+    /** （必填）商品名称 */
+    private String subject;
 
-	/**
-	 * （必填）商户订单号，应该由后台生成
-	 */
-	private String outTradeNo;
+    /** （必填）商户订单号，应该由后台生成 */
+    private String outTradeNo;
 
-	/**
-	 * （必填）第三方订单号
-	 */
-	private String tradeNo;
+    /** （必填）第三方订单号 */
+    private String tradeNo;
 
-	/**
-	 * （必填）价格
-	 */
-	private String totalAmount;
+    /** （必填）价格 */
+    private String totalAmount;
 
-	/**
-	 * 订单状态,已支付，未支付，作废
-	 */
-	private String state;
+    /** 订单状态,已支付，未支付，作废 */
+    private String state;
 
-	/**
-	 * 创建时间，存入数据库时需要
-	 */
-	private Timestamp createTime;
+    /** 创建时间，存入数据库时需要 */
+    private Timestamp createTime;
 
-	/**
-	 * 作废时间，存入数据库时需要
-	 */
-	private Date cancelTime;
+    /** 作废时间，存入数据库时需要 */
+    private Date cancelTime;
 }

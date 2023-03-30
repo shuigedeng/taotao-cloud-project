@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.api.model.dto;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
@@ -29,32 +30,17 @@ import jakarta.validation.constraints.NotBlank;
 @RecordBuilder
 public record EmailDTO(
 
-		/**
-		 * 收件人
-		 */
-		@NotBlank(message = "收件人不能为空")
-		String fromUser,
+        /** 收件人 */
+        @NotBlank(message = "收件人不能为空") String fromUser,
 
-		/**
-		 * 邮件服务器SMTP地址
-		 */
-		String host,
+        /** 邮件服务器SMTP地址 */
+        String host,
 
-		/**
-		 * 密码
-		 */
-		String pass,
+        /** 密码 */
+        String pass,
 
-		/**
-		 * 端口
-		 */
-		@Max(value = 200, message = "端口不能大于200")
-		Integer port,
+        /** 端口 */
+        @Max(value = 200, message = "端口不能大于200") Integer port,
 
-		/**
-		 * 发件者用户名
-		 */
-		String user
-) {
-
-}
+        /** 发件者用户名 */
+        String user) {}

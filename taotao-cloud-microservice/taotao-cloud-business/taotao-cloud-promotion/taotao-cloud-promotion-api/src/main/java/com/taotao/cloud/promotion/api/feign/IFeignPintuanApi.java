@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
@@ -27,11 +28,12 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignPintuanService", value = ServiceName.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignPintuanApiFallback.class)
+@FeignClient(
+        contextId = "IFeignPintuanService",
+        value = ServiceName.TAOTAO_CLOUD_PROMOTION,
+        fallbackFactory = FeignPintuanApiFallback.class)
 public interface IFeignPintuanApi {
 
-	@GetMapping(value = "/getById")
-	PintuanVO getById(Long pintuanId);
-
+    @GetMapping(value = "/getById")
+    PintuanVO getById(Long pintuanId);
 }
-

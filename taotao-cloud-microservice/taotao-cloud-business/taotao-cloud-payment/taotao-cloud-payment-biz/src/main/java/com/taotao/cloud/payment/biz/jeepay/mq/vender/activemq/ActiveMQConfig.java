@@ -1,18 +1,19 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.mq.vender.activemq;
 
 import com.jeequan.jeepay.components.mq.constant.MQSendTypeEnum;
@@ -41,37 +42,33 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.ACTIVE_MQ)
 public class ActiveMQConfig {
 
-	Map<String, Destination> map = new ConcurrentHashMap<>();
+    Map<String, Destination> map = new ConcurrentHashMap<>();
 
-	public Destination getDestination(AbstractMQ mqModel) {
+    public Destination getDestination(AbstractMQ mqModel) {
 
-		if (map.get(mqModel.getMQName()) == null) {
-			this.init(mqModel.getMQName(), mqModel.getMQType());
-		}
-		return map.get(mqModel.getMQName());
-	}
+        if (map.get(mqModel.getMQName()) == null) {
+            this.init(mqModel.getMQName(), mqModel.getMQType());
+        }
+        return map.get(mqModel.getMQName());
+    }
 
-	private synchronized void init(String mqName, MQSendTypeEnum mqSendTypeEnum) {
+    private synchronized void init(String mqName, MQSendTypeEnum mqSendTypeEnum) {
 
-		if (mqSendTypeEnum == MQSendTypeEnum.QUEUE) {
-			map.put(mqName, new ActiveMQQueue(mqName));
-		} else {
-			map.put(mqName, new ActiveMQTopic(mqName));
-		}
-	}
+        if (mqSendTypeEnum == MQSendTypeEnum.QUEUE) {
+            map.put(mqName, new ActiveMQQueue(mqName));
+        } else {
+            map.put(mqName, new ActiveMQTopic(mqName));
+        }
+    }
 
+    public static final String TOPIC_LISTENER_CONTAINER = "jmsTopicListenerContainer";
 
-	public static final String TOPIC_LISTENER_CONTAINER = "jmsTopicListenerContainer";
-
-	/**
-	 * 新增jmsListenerContainer, 用于接收topic类型的消息
-	 **/
-	@Bean
-	public JmsListenerContainerFactory<?> jmsTopicListenerContainer(ConnectionFactory factory) {
-		DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
-		bean.setPubSubDomain(true);
-		bean.setConnectionFactory(factory);
-		return bean;
-	}
-
+    /** 新增jmsListenerContainer, 用于接收topic类型的消息 */
+    @Bean
+    public JmsListenerContainerFactory<?> jmsTopicListenerContainer(ConnectionFactory factory) {
+        DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
+        bean.setPubSubDomain(true);
+        bean.setConnectionFactory(factory);
+        return bean;
+    }
 }

@@ -1,17 +1,29 @@
-package com.taotao.cloud.workflow.biz.common.constant;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.workflow.biz.common.constant;
 
 import com.taotao.cloud.workflow.biz.common.constant.model.MCode;
 
-/**
- * 常用提示信息
- */
+/** 常用提示信息 */
 public interface MsgCode {
 
-    /**
-     * 执行成功：SU（success）
-     */
+    /** 执行成功：SU（success） */
     MCode SU000 = MSG("Success");
+
     MCode SU001 = MSG("新建成功");
     MCode SU002 = MSG("保存成功");
     MCode SU003 = MSG("删除成功");
@@ -30,10 +42,9 @@ public interface MsgCode {
     MCode SU016 = MSG("设置成功");
     MCode SU017 = MSG("验证成功");
 
-    /**
-     * 执行失败：FA（fail）
-     */
+    /** 执行失败：FA（fail） */
     MCode FA001 = MSG("此条数据不存在");
+
     MCode FA002 = MSG("更新失败，数据不存在");
     MCode FA003 = MSG("删除失败，数据不存在");
     MCode FA004 = MSG("复制失败，数据不存在");
@@ -64,40 +75,33 @@ public interface MsgCode {
     MCode FA101 = MSG("保存失败");
     MCode FA102 = MSG("更新失败");
 
-
-
-    /**
-     * 重名判断
-     */
+    /** 重名判断 */
     MCode EXIST001 = MSG("名称不能重复");
+
     MCode EXIST002 = MSG("编码不能重复");
     MCode EXIST003 = MSG("模板已存在");
     MCode EXIST004 = MSG("文件夹名称不能重复");
 
-    /**
-     * 导入导出：IMP（import/export）
-     */
+    /** 导入导出：IMP（import/export） */
     MCode IMP001 = MSG("导入成功");
+
     MCode IMP002 = MSG("导入失败，文件格式错误");
     MCode IMP003 = MSG("导入失败，数据已存在");
     MCode IMP004 = MSG("导入失败，数据有误");
 
-    /**
-     * 其他
-     */
+    /** 其他 */
     MCode PRI001 = MSG("打印模板不存在");
+
     MCode PRI002 = MSG("数字字典不存在printDev的字典分类");
     MCode PRI003 = MSG("第1条SQL语句：查询出多条表头信息");
     MCode PRI004 = MSG("第1条SQL语句：未查出表头信息");
     MCode PRI005 = MSG("第{index}条SQL语句：");
     MCode COD001 = MSG("集合条件过滤获得目标为空");
 
-
-    /**
-     * 登录相关
-     */
+    /** 登录相关 */
     /*=====0-账号相关====*/
     MCode LOG001 = MSG("账户异常");
+
     MCode LOG002 = MSG("注销成功");
     MCode LOG003 = MSG("无效的账号");
     MCode LOG004 = MSG("账号异常，请联系管理员修改所属组织信息");
@@ -121,19 +125,18 @@ public interface MsgCode {
     MCode LOG202 = LOG("修改成功，请牢记新密码。");
     MCode LOG203 = LOG("修改失败，账号不存在。");
 
-    /**
-     * 数据库
-     */
-    MCode DB001 = DB("数据类型编码不符合标准（请注意大小写）。MySQL , SQLServer , Oracle , DM8 , KingbaseES , PostgreSQL");
+    /** 数据库 */
+    MCode DB001 =
+            DB("数据类型编码不符合标准（请注意大小写）。MySQL , SQLServer , Oracle , DM8 , KingbaseES , PostgreSQL");
+
     MCode DB002 = DB("请检查 1、连接信息 2、网络通信 3、数据库服务启动状态。 详情：");
     MCode DB003 = DB("通过url找不到对应数据库");
     MCode DB004 = DB("查询结果集为空。");
 
-    /**
-     * 工作流相关错误码
-     */
+    /** 工作流相关错误码 */
     /*========0-状态、短提示==========*/
     MCode WF001 = WF("必填值");
+
     MCode WF002 = WF("【审核通过】");
     MCode WF003 = WF("【审核同意】");
     MCode WF004 = WF("【审核拒绝】");
@@ -167,22 +170,19 @@ public interface MsgCode {
     MCode WF122 = WF("没有权限操作");
     MCode WF123 = WF("该流程待办已删除");
 
-
-    static MCode MSG(String desc){
+    static MCode MSG(String desc) {
         return new MCode("message", desc);
     }
 
-    static MCode LOG(String desc){
+    static MCode LOG(String desc) {
         return new MCode("login", desc);
     }
 
-    static MCode DB(String desc){
+    static MCode DB(String desc) {
         return new MCode("database", desc);
     }
 
-    static MCode WF(String desc){
+    static MCode WF(String desc) {
         return new MCode("workflow", desc);
     }
-
-
 }

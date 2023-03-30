@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -48,83 +49,76 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = Dept.TABLE_NAME, comment = "后台部门表")
 public class Dept extends BaseSuperEntity<Dept, Long> {
 
-	public static final String TABLE_NAME = "tt_dept";
+    public static final String TABLE_NAME = "tt_dept";
 
-	/**
-	 * 部门名称
-	 */
-	@Column(name = "name", columnDefinition = "varchar(32) not null comment '部门名称'")
-	private String name;
+    /** 部门名称 */
+    @Column(name = "name", columnDefinition = "varchar(32) not null comment '部门名称'")
+    private String name;
 
-	/**
-	 * 上级部门id
-	 */
-	@Column(name = "parent_id", columnDefinition = "bigint not null default 0 comment '上级部门id'")
-	private Long parentId;
+    /** 上级部门id */
+    @Column(name = "parent_id", columnDefinition = "bigint not null default 0 comment '上级部门id'")
+    private Long parentId;
 
-	/**
-	 * 公司id
-	 */
-	@Column(name = "org_id", columnDefinition = "bigint not null comment '组织id'")
-	private Long orgId;
+    /** 公司id */
+    @Column(name = "org_id", columnDefinition = "bigint not null comment '组织id'")
+    private Long orgId;
 
-	/**
-	 * 备注
-	 */
-	@Column(name = "remark", columnDefinition = "varchar(255) comment '备注'")
-	private String remark;
+    /** 备注 */
+    @Column(name = "remark", columnDefinition = "varchar(255) comment '备注'")
+    private String remark;
 
-	/**
-	 * 备注
-	 */
-	@Column(name = "id_tree", columnDefinition = "varchar(4096) comment 'id树，逗号连接'")
-	private String idTree;
+    /** 备注 */
+    @Column(name = "id_tree", columnDefinition = "varchar(4096) comment 'id树，逗号连接'")
+    private String idTree;
 
-	/**
-	 * 当前深度
-	 */
-	@Column(name = "depth", columnDefinition = "int not null default 0 comment '当前深度 已1开始'")
-	private Integer depth;
+    /** 当前深度 */
+    @Column(name = "depth", columnDefinition = "int not null default 0 comment '当前深度 已1开始'")
+    private Integer depth;
 
-	/**
-	 * 排序值
-	 */
-	@Column(name = "sort_num", columnDefinition = "int not null default 0 comment '排序值'")
-	private Integer sortNum;
+    /** 排序值 */
+    @Column(name = "sort_num", columnDefinition = "int not null default 0 comment '排序值'")
+    private Integer sortNum;
 
-	/**
-	 * 租户id
-	 */
-	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
-	private String tenantId;
+    /** 租户id */
+    @Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
+    private String tenantId;
 
-	@Builder
-	public Dept(Long id, LocalDateTime createTime, Long createBy,
-			LocalDateTime updateTime, Long updateBy, Integer version, Boolean delFlag,
-			String name, Long parentId, String remark, Integer sortNum, String tenantId) {
-		super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
-		this.name = name;
-		this.parentId = parentId;
-		this.remark = remark;
-		this.sortNum = sortNum;
-		this.tenantId = tenantId;
-	}
+    @Builder
+    public Dept(
+            Long id,
+            LocalDateTime createTime,
+            Long createBy,
+            LocalDateTime updateTime,
+            Long updateBy,
+            Integer version,
+            Boolean delFlag,
+            String name,
+            Long parentId,
+            String remark,
+            Integer sortNum,
+            String tenantId) {
+        super(id, createTime, createBy, updateTime, updateBy, version, delFlag);
+        this.name = name;
+        this.parentId = parentId;
+        this.remark = remark;
+        this.sortNum = sortNum;
+        this.tenantId = tenantId;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
-				o)) {
-			return false;
-		}
-		Dept dept = (Dept) o;
-		return getId() != null && Objects.equals(getId(), dept.getId());
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        Dept dept = (Dept) o;
+        return getId() != null && Objects.equals(getId(), dept.getId());
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

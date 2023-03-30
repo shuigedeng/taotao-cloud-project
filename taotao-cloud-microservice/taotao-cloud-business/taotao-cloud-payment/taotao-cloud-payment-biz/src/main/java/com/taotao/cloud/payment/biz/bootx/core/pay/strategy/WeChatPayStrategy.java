@@ -1,4 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.bootx.core.pay.strategy;
+
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONException;
@@ -20,18 +38,16 @@ import com.taotao.cloud.payment.biz.bootx.exception.payment.PayAmountAbnormalExc
 import com.taotao.cloud.payment.biz.bootx.exception.payment.PayFailureException;
 import com.taotao.cloud.payment.biz.bootx.param.pay.PayModeParam;
 import com.taotao.cloud.payment.biz.bootx.param.paymodel.wechat.WeChatPayParam;
+import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.util.Map;
-import java.util.Optional;
-
-import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
-
 /**
  * 微信支付
+ *
  * @author xxm
  * @date 2021/4/5
  */
@@ -50,23 +66,19 @@ public class WeChatPayStrategy extends AbsPayStrategy {
     private WeChatPayConfig weChatPayConfig;
     private WeChatPayParam weChatPayParam;
 
-    /**
-     * 类型
-     */
+    /** 类型 */
     @Override
     public int getType() {
         return PayChannelCode.WECHAT;
     }
 
-    /**
-     * 支付前操作
-     */
+    /** 支付前操作 */
     @Override
-    public void doBeforePayHandler(){
+    public void doBeforePayHandler() {
         try {
             // 微信参数验证
             String extraParamsJson = this.getPayMode().getExtraParamsJson();
-            if (StrUtil.isNotBlank(extraParamsJson)){
+            if (StrUtil.isNotBlank(extraParamsJson)) {
 
                 this.weChatPayParam = JSONUtil.toBean(extraParamsJson, WeChatPayParam.class);
             } else {
@@ -78,109 +90,97 @@ public class WeChatPayStrategy extends AbsPayStrategy {
 
         // 检查金额
         PayModeParam payMode = this.getPayMode();
-        if (BigDecimalUtil.compareTo(payMode.getAmount(), BigDecimal.ZERO) < 1){
+        if (BigDecimalUtil.compareTo(payMode.getAmount(), BigDecimal.ZERO) < 1) {
             throw new PayAmountAbnormalException();
         }
 
         // 检查并获取微信支付配置
         this.initWeChatPayConfig();
-        weChatPayService.validation(this.getPayMode(),weChatPayConfig);
+        weChatPayService.validation(this.getPayMode(), weChatPayConfig);
         WeChatPayConfigService.initApiConfig(weChatPayConfig);
     }
 
-    /**
-     * 发起支付
-     */
+    /** 发起支付 */
     @Override
     public void doPayHandler() {
-        weChatPayService.pay(this.getPayMode().getAmount(),
+        weChatPayService.pay(
+                this.getPayMode().getAmount(),
                 this.getPayment(),
                 this.weChatPayParam,
                 this.getPayMode(),
                 this.weChatPayConfig);
     }
 
-    /**
-     * 支付调起成功
-     */
+    /** 支付调起成功 */
     @Override
-    public void doSuccessHandler(){
-        weChatPaymentService.updatePaySuccess(this.getPayment(),this.getPayMode());
+    public void doSuccessHandler() {
+        weChatPaymentService.updatePaySuccess(this.getPayment(), this.getPayMode());
     }
-    /**
-     * 错误处理
-     */
+    /** 错误处理 */
     @Override
     public void doErrorHandler(ExceptionInfo exceptionInfo) {
         this.doCloseHandler();
     }
 
-    /**
-     * 异步支付成功
-     */
+    /** 异步支付成功 */
     @Override
     public void doAsyncSuccessHandler(Map<String, String> map) {
         String tradeNo = map.get(WeChatPayCode.OUT_TRADE_NO);
-        weChatPaymentService.updateSyncSuccess(this.getPayment().getId(),this.getPayMode(),tradeNo);
+        weChatPaymentService.updateSyncSuccess(
+                this.getPayment().getId(), this.getPayMode(), tradeNo);
     }
 
-    /**
-     * 异步支付失败
-     */
+    /** 异步支付失败 */
     @Override
     public void doAsyncErrorHandler(ExceptionInfo exceptionInfo) {
         // 调用撤销支付
         this.doCancelHandler();
     }
 
-    /**
-     * 撤销支付
-     */
+    /** 撤销支付 */
     @Override
     public void doCancelHandler() {
         // 检查并获取微信支付配置
         this.initWeChatPayConfig();
-        weChatPayCancelService.cancelRemote(this.getPayment(),weChatPayConfig);
+        weChatPayCancelService.cancelRemote(this.getPayment(), weChatPayConfig);
         // 调用关闭本地支付记录
         this.doCloseHandler();
     }
 
-    /**
-     * 关闭本地支付记录
-     */
+    /** 关闭本地支付记录 */
     @Override
     public void doCloseHandler() {
         weChatPaymentService.updateClose(this.getPayment().getId());
     }
 
-    /**
-     * 退款
-     */
+    /** 退款 */
     @Override
     public void doRefundHandler() {
         this.initWeChatPayConfig();
-        weChatPaymentService.updatePayRefund(this.getPayment().getId(),this.getPayMode().getAmount());
-        paymentService.updateRefundSuccess(this.getPayment(),this.getPayMode().getAmount(), PayChannelEnum.WECHAT);
+        weChatPaymentService.updatePayRefund(
+                this.getPayment().getId(), this.getPayMode().getAmount());
+        paymentService.updateRefundSuccess(
+                this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.WECHAT);
     }
 
-    /**
-     * 异步支付单与支付网关进行状态比对
-     */
+    /** 异步支付单与支付网关进行状态比对 */
     @Override
-    public PaySyncResult doSyncPayStatusHandler(){
+    public PaySyncResult doSyncPayStatusHandler() {
         // 检查并获取微信支付配置
         this.initWeChatPayConfig();
-        return weChatPaySyncService.syncPayStatus(this.getPayment().getId(),this.weChatPayConfig);
+        return weChatPaySyncService.syncPayStatus(this.getPayment().getId(), this.weChatPayConfig);
     }
 
-    /**
-     * 初始化微信支付
-     */
-    private void initWeChatPayConfig(){
+    /** 初始化微信支付 */
+    private void initWeChatPayConfig() {
         // 检查并获取微信支付配置
-        this.weChatPayConfig = Optional.ofNullable(this.weChatPayConfig)
-                .orElse(weChatPayConfigManager.findEnable()
-                        .orElseThrow(() -> new PayFailureException("支付配置不存在")));
-        WeChatPayConfigService.initApiConfig(weChatPayConfig);;
+        this.weChatPayConfig =
+                Optional.ofNullable(this.weChatPayConfig)
+                        .orElse(
+                                weChatPayConfigManager
+                                        .findEnable()
+                                        .orElseThrow(() -> new PayFailureException("支付配置不存在")));
+        WeChatPayConfigService.initApiConfig(weChatPayConfig);
+        ;
     }
 }

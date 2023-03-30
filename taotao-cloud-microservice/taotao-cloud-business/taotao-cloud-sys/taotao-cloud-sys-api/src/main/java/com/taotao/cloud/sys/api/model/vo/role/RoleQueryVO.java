@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.api.model.vo.role;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
 import lombok.*;
 
 /**
@@ -34,22 +34,26 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema( description = "角色查询对象")
+@Schema(description = "角色查询对象")
 public class RoleQueryVO implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = 5126530068827085130L;
+    @Serial private static final long serialVersionUID = 5126530068827085130L;
 
-	@Schema(description = "id")
-	private Long id;
-	@Schema(description = "角色名称")
-	private String name;
-	@Schema(description = "角色code")
-	private String code;
-	@Schema(description = "备注")
-	private String remark;
-	@Schema(description = "创建时间")
-	private LocalDateTime createTime;
-	@Schema(description = "最后修改时间")
-	private LocalDateTime lastModifiedTime;
+    @Schema(description = "id")
+    private Long id;
+
+    @Schema(description = "角色名称")
+    private String name;
+
+    @Schema(description = "角色code")
+    private String code;
+
+    @Schema(description = "备注")
+    private String remark;
+
+    @Schema(description = "创建时间")
+    private LocalDateTime createTime;
+
+    @Schema(description = "最后修改时间")
+    private LocalDateTime lastModifiedTime;
 }

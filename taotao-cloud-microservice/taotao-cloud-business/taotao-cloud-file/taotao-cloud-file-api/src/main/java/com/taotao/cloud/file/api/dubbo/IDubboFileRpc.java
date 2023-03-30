@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.file.api.dubbo;
 
+package com.taotao.cloud.file.api.dubbo;
 
 import com.taotao.cloud.file.api.dubbo.response.DubboFileResponse;
 
@@ -27,12 +27,12 @@ import com.taotao.cloud.file.api.dubbo.response.DubboFileResponse;
  */
 public interface IDubboFileRpc {
 
-	/**
-	 * 字典code查询
-	 *
-	 * @param code 代码
-	 * @return {@link DubboFileResponse }
-	 * @since 2022-06-29 21:45:44
-	 */
-	DubboFileResponse findByCode(Integer code);
+    /**
+     * 字典code查询
+     *
+     * @param code 代码
+     * @return {@link DubboFileResponse }
+     * @since 2022-06-29 21:45:44
+     */
+    DubboFileResponse findByCode(Integer code);
 }

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.model.convert;
 
 import com.taotao.cloud.goods.api.model.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
+import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * IGoodsSkuMapStruct
@@ -31,17 +31,14 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:58:21
  */
-@Mapper(builder = @Builder(disableBuilder = true),
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(
+        builder = @Builder(disableBuilder = true),
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommodityConvert {
 
-	/**
-	 * 实例
-	 */
-	CommodityConvert INSTANCE = Mappers.getMapper(CommodityConvert.class);
+    /** 实例 */
+    CommodityConvert INSTANCE = Mappers.getMapper(CommodityConvert.class);
 
-	List<CommoditySkuVO> convert(List<Commodity> commodities);
-
-
+    List<CommoditySkuVO> convert(List<Commodity> commodities);
 }

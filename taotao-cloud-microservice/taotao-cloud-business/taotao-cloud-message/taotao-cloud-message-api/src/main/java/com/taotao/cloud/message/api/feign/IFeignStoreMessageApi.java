@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.message.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
@@ -29,10 +30,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MESSAGE, fallbackFactory = FeignStoreMessageApiFallback.class)
+@FeignClient(
+        value = ServiceName.TAOTAO_CLOUD_MESSAGE,
+        fallbackFactory = FeignStoreMessageApiFallback.class)
 public interface IFeignStoreMessageApi {
 
-	@GetMapping(value = "/message/getPage")
-	PageResult<StoreMessageVO> getPage(PageQuery PageQuery);
+    @GetMapping(value = "/message/getPage")
+    PageResult<StoreMessageVO> getPage(PageQuery PageQuery);
 }
-

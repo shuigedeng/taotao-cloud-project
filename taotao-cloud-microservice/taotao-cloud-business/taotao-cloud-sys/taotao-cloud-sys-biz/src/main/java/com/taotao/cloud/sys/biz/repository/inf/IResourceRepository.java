@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.exception.ExceptionUtils;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import java.util.List;
 import java.util.Objects;
@@ -33,14 +32,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface IResourceRepository extends JpaRepository<Resource, Long> {
 
-	public List<Resource> searchByComponent(String component);
+    public List<Resource> searchByComponent(String component);
 
-	default List<Long> selectByComponent(String component){
-		List<Resource> resources = searchByComponent(component);
-		return Optional.ofNullable(resources)
-			.stream()
-			.filter(Objects::nonNull)
-			.map(e -> e.get(0).getId())
-			.collect(Collectors.toList());
-	}
+    default List<Long> selectByComponent(String component) {
+        List<Resource> resources = searchByComponent(component);
+        return Optional.ofNullable(resources).stream()
+                .filter(Objects::nonNull)
+                .map(e -> e.get(0).getId())
+                .collect(Collectors.toList());
+    }
 }

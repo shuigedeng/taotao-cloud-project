@@ -1,13 +1,28 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.biz.interfaces.web;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * 权限Controller
@@ -20,26 +35,22 @@ import java.util.Set;
 @RequestMapping("/permission")
 public class PermissionController {
 
-    @Autowired
-    private PermissionApplicationService permissionApplicationService;
+    @Autowired private PermissionApplicationService permissionApplicationService;
 
-    @Autowired
-    private PermissionQueryService permissionQueryService;
+    @Autowired private PermissionQueryService permissionQueryService;
 
-    /**
-     * 导航菜单
-     */
+    /** 导航菜单 */
     @ApiOperation("导航菜单")
     @GetMapping("/nav")
     public Result nav() {
-        List<PermissionDTO> menuList = permissionQueryService.getUserMenuTree(RequestUtils.getUserId());
-        Set<String> permissions = permissionQueryService.getPermissionCodes(RequestUtils.getUserId());
+        List<PermissionDTO> menuList =
+                permissionQueryService.getUserMenuTree(RequestUtils.getUserId());
+        Set<String> permissions =
+                permissionQueryService.getPermissionCodes(RequestUtils.getUserId());
         return Result.ok().put("menuList", menuList).put("permissions", permissions);
     }
 
-    /**
-     * 所有权限列表
-     */
+    /** 所有权限列表 */
     @ApiOperation("所有权限列表")
     @GetMapping("/list")
     public Result list() {
@@ -47,9 +58,7 @@ public class PermissionController {
         return Result.ok().put("permissionList", permissionList);
     }
 
-    /**
-     * 选择菜单
-     */
+    /** 选择菜单 */
     @ApiOperation("选择菜单")
     @GetMapping("/selectMenu")
     public Result selectMenu() {
@@ -57,9 +66,7 @@ public class PermissionController {
         return Result.ok().put("menuList", menuList);
     }
 
-    /**
-     * 权限信息
-     */
+    /** 权限信息 */
     @ApiOperation("权限信息")
     @GetMapping("/info/{id}")
     @PreAuthorize("hasAuthority('sys:permission:info')")
@@ -68,9 +75,7 @@ public class PermissionController {
         return Result.ok().put("permission", permission);
     }
 
-    /**
-     * 保存权限
-     */
+    /** 保存权限 */
     @ApiOperation("保存权限")
     @SysLog("保存权限")
     @PostMapping("/save")
@@ -81,9 +86,7 @@ public class PermissionController {
         return Result.ok();
     }
 
-    /**
-     * 修改权限
-     */
+    /** 修改权限 */
     @ApiOperation("修改权限")
     @SysLog("修改权限")
     @PostMapping("/update")
@@ -94,9 +97,7 @@ public class PermissionController {
         return Result.ok();
     }
 
-    /**
-     * 删除权限
-     */
+    /** 删除权限 */
     @ApiOperation("删除权限")
     @SysLog("删除权限")
     @PostMapping("/delete/{id}")
@@ -106,9 +107,7 @@ public class PermissionController {
         return Result.ok();
     }
 
-    /**
-     * 禁用权限
-     */
+    /** 禁用权限 */
     @ApiOperation("禁用权限")
     @SysLog("禁用权限")
     @PostMapping("/disable/{id}")
@@ -117,5 +116,4 @@ public class PermissionController {
         permissionApplicationService.disable(id);
         return Result.ok();
     }
-
 }

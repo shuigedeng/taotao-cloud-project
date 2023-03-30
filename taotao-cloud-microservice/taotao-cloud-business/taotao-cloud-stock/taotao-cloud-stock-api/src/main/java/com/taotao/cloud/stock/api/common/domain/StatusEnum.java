@@ -1,22 +1,31 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.api.common.domain;
 
 import org.apache.commons.lang.StringUtils;
 
-/**
- * 用户状态枚举
- */
+/** 用户状态枚举 */
 public enum StatusEnum implements ValueObject<StatusEnum> {
 
-    /**
-     * 有效
-     */
-    ENABLE("0","有效"),
+    /** 有效 */
+    ENABLE("0", "有效"),
 
-    /**
-     * 禁用
-     */
-    DISABLE("1","禁用");
-
+    /** 禁用 */
+    DISABLE("1", "禁用");
 
     private String value;
 
@@ -41,12 +50,12 @@ public enum StatusEnum implements ValueObject<StatusEnum> {
      * @param value
      * @return
      */
-    public static String getLabelByValue(String value){
-        if(StringUtils.isBlank(value)) {
+    public static String getLabelByValue(String value) {
+        if (StringUtils.isBlank(value)) {
             return "";
         }
         for (StatusEnum s : StatusEnum.values()) {
-            if(value.equals(s.getValue())){
+            if (value.equals(s.getValue())) {
                 return s.getLabel();
             }
         }
@@ -59,12 +68,12 @@ public enum StatusEnum implements ValueObject<StatusEnum> {
      * @param value
      * @return
      */
-    public static StatusEnum getStatusEnum(String value){
-        if(StringUtils.isBlank(value)) {
+    public static StatusEnum getStatusEnum(String value) {
+        if (StringUtils.isBlank(value)) {
             return null;
         }
         for (StatusEnum s : StatusEnum.values()) {
-            if(value.equals(s.getValue())){
+            if (value.equals(s.getValue())) {
                 return s;
             }
         }

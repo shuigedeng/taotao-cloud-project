@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.stock.api.enums;
 
+package com.taotao.cloud.stock.api.enums;
 
 /**
  * 菜单类型
@@ -25,33 +25,27 @@ package com.taotao.cloud.stock.api.enums;
  */
 public enum ResourceTypeEnum {
 
-	/**
-	 * 目录
-	 */
-	DIR(1, "目录"),
-	/**
-	 * 菜单
-	 */
-	MENU(2, "菜单"),
-	/**
-	 * 资源 (包括分页、各种按钮、删除 等等 对应的是请求路径如：/api/menu/find)
-	 */
-	RESOURCE(3, "资源");
+    /** 目录 */
+    DIR(1, "目录"),
+    /** 菜单 */
+    MENU(2, "菜单"),
+    /** 资源 (包括分页、各种按钮、删除 等等 对应的是请求路径如：/api/menu/find) */
+    RESOURCE(3, "资源");
 
-	private final Integer code;
+    private final Integer code;
 
-	private final String message;
+    private final String message;
 
-	ResourceTypeEnum(Integer code, String message) {
-		this.code = code;
-		this.message = message;
-	}
+    ResourceTypeEnum(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 
-	public Integer getCode() {
-		return code;
-	}
+    public Integer getCode() {
+        return code;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 }

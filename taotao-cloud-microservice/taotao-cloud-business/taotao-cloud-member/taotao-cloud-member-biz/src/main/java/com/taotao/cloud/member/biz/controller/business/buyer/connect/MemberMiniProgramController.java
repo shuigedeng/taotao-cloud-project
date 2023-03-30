@@ -1,4 +1,21 @@
-package com.taotao.cloud.member.biz.controller.business.buyer.connect;// package com.taotao.cloud.member.biz.controller.buyer.connect;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.member.biz.controller.business.buyer.connect; // package
+                                                                       // com.taotao.cloud.member.biz.controller.buyer.connect;
 //
 // import com.taotao.cloud.common.constant.CommonConstant;
 // import com.taotao.cloud.common.model.Result;
@@ -50,7 +67,8 @@ package com.taotao.cloud.member.biz.controller.business.buyer.connect;// package
 // 		return Result.success(wechatMPMessageService.list());
 // 	}
 //
-// 	@Operation(summary = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度", description = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度")
+// 	@Operation(summary = "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度", description =
+// "小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度")
 // 	@RequestLogger("小程序二维码生成：不限制数量，但是限制长度，只能存放32为长度")
 // 	@PreAuthorize("@el.check('admin','timing:list')")
 // 	@GetMapping("/mp/unlimited")
@@ -58,7 +76,8 @@ package com.taotao.cloud.member.biz.controller.business.buyer.connect;// package
 // 		return Result.success(wechatMpCodeUtil.createCode(page, scene));
 // 	}
 //
-// 	@Operation(summary = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现", description = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现")
+// 	@Operation(summary = "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现", description =
+// "小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现")
 // 	@RequestLogger("小程序二维码生成:只适用于少量场景，多数场景需要unlimitedAPI实现")
 // 	@PreAuthorize("@el.check('admin','timing:list')")
 // 	@GetMapping("/mp/qrcode")

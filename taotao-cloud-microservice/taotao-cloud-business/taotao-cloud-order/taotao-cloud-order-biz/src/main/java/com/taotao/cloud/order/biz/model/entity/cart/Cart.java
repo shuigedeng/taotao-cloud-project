@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.model.entity.cart;
 
 import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
@@ -48,53 +49,44 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = "tt_cart", comment = "购物车表")
 public class Cart extends JpaSuperEntity<Long> {
 
-	@Serial
-	private static final long serialVersionUID = 6887296988458221221L;
+    @Serial private static final long serialVersionUID = 6887296988458221221L;
 
-	/**
-	 * 申请单号
-	 */
-	@Column(name = "code", unique = true, columnDefinition = "varchar(32) not null comment '申请单号'")
-	private String code;
+    /** 申请单号 */
+    @Column(name = "code", unique = true, columnDefinition = "varchar(32) not null comment '申请单号'")
+    private String code;
 
-	/**
-	 * 公司ID
-	 */
-	@Column(name = "company_id", columnDefinition = "bigint not null comment '公司ID'")
-	private Long companyId;
+    /** 公司ID */
+    @Column(name = "company_id", columnDefinition = "bigint not null comment '公司ID'")
+    private Long companyId;
 
-	/**
-	 * 商城ID
-	 */
-	@Column(name = "mall_id", columnDefinition = "bigint not null comment '商城ID'")
-	private Long mallId;
+    /** 商城ID */
+    @Column(name = "mall_id", columnDefinition = "bigint not null comment '商城ID'")
+    private Long mallId;
 
-	/**
-	 * 提现金额
-	 */
-	@Column(name = "amount", columnDefinition = "decimal(10,2) not null default 0 comment '提现金额'")
-	private BigDecimal amount;
+    /** 提现金额 */
+    @Column(name = "amount", columnDefinition = "decimal(10,2) not null default 0 comment '提现金额'")
+    private BigDecimal amount;
 
-	/**
-	 * 钱包余额
-	 */
-	@Column(name = "balance_amount", columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
-	private BigDecimal balanceAmount;
+    /** 钱包余额 */
+    @Column(
+            name = "balance_amount",
+            columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
+    private BigDecimal balanceAmount;
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-			return false;
-		}
-		Cart cart = (Cart) o;
-		return getId() != null && Objects.equals(getId(), cart.getId());
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        Cart cart = (Cart) o;
+        return getId() != null && Objects.equals(getId(), cart.getId());
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

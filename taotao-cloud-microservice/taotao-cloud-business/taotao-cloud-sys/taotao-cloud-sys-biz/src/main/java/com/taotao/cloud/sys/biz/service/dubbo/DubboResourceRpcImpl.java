@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboResourceRpc;
@@ -25,11 +26,10 @@ import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * MenuServiceImpl
@@ -41,19 +41,18 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboResourceRpc.class, validation = "true")
-public class DubboResourceRpcImpl extends
-	BaseSuperServiceImpl<IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
-	implements IDubboResourceRpc {
+public class DubboResourceRpcImpl
+        extends BaseSuperServiceImpl<
+                IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
+        implements IDubboResourceRpc {
 
-	private final IRoleService roleService;
+    private final IRoleService roleService;
 
-	private final static QResource RESOURCE = QResource.resource;
+    private static final QResource RESOURCE = QResource.resource;
 
-	@Override
-	public List<DubboMenuQueryRequest> queryAllById(Long id) {
-		List<Resource> all = ir().findAll();
-		return ResourceConvert.INSTANCE.convertListRequest(all);
-	}
-
-
+    @Override
+    public List<DubboMenuQueryRequest> queryAllById(Long id) {
+        List<Resource> all = ir().findAll();
+        return ResourceConvert.INSTANCE.convertListRequest(all);
+    }
 }

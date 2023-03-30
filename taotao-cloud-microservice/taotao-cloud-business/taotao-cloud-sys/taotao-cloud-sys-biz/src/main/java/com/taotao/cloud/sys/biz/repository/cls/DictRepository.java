@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -32,21 +33,24 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DictRepository extends BaseClassSuperRepository<Dict, Long> {
 
-	public DictRepository(EntityManager em) {
-		super(Dict.class, em);
-	}
+    public DictRepository(EntityManager em) {
+        super(Dict.class, em);
+    }
 
-	public Optional<Dict> findByCode(String code) {
-		//ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-		//	.withMatcher("dictCode", GenericPropertyMatcher::exact);
-		//Optional<Dict> one = findOne(
-		//	Example.of(Dict.builder().dictCode(code).build(), exampleMatcher));
+    public Optional<Dict> findByCode(String code) {
+        // ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+        //	.withMatcher("dictCode", GenericPropertyMatcher::exact);
+        // Optional<Dict> one = findOne(
+        //	Example.of(Dict.builder().dictCode(code).build(), exampleMatcher));
 
-		return findOne((Specification<Dict>) (root, query, builder) -> query.where(
-			builder.equal(root.get("dictCode"), code)).getRestriction());
-	}
+        return findOne(
+                (Specification<Dict>)
+                        (root, query, builder) ->
+                                query.where(builder.equal(root.get("dictCode"), code))
+                                        .getRestriction());
+    }
 
-	public boolean existsByDictCode(String dictCode) {
-		return false;
-	}
+    public boolean existsByDictCode(String dictCode) {
+        return false;
+    }
 }

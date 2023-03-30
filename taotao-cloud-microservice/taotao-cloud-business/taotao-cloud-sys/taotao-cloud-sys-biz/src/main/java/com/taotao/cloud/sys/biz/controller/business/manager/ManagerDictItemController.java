@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.BaseQuery;
@@ -38,23 +39,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/manager/dict/item")
 @Tag(name = "管理端-字典项管理API", description = "管理端-字典项管理API")
-public class ManagerDictItemController extends
-		BaseSuperController<IDictItemService, DictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
+public class ManagerDictItemController
+        extends BaseSuperController<
+                IDictItemService,
+                DictItem,
+                Long,
+                BaseQuery,
+                DictItemSaveDTO,
+                DictItemUpdateDTO,
+                DictItemQueryVO> {
 
-	///**
-	// * 根据code查询字典项列表
-	// *
-	// * @param code 字典码
-	// * @return Result<List < SysDict>>
-	// */
-	//@PreAuth
-	//@Log(value = "字典项列表", exception = "字典项列表异常")
-	//@GetMapping("list-value")
-	//@ApiOperation(value = "字典项列表", notes = "字典项列表")
-	//public Result<?> listValue(@RequestParam String code) {
-	//	return Result.data(sysDictService.list(new LambdaQueryWrapper<SysDict>()
-	//		.eq(SysDict::getCode, code)
-	//		.ne(SysDict::getParentId, 0)
-	//		.orderByAsc(SysDict::getSort)));
-	//}
+    /// **
+    // * 根据code查询字典项列表
+    // *
+    // * @param code 字典码
+    // * @return Result<List < SysDict>>
+    // */
+    // @PreAuth
+    // @Log(value = "字典项列表", exception = "字典项列表异常")
+    // @GetMapping("list-value")
+    // @ApiOperation(value = "字典项列表", notes = "字典项列表")
+    // public Result<?> listValue(@RequestParam String code) {
+    //	return Result.data(sysDictService.list(new LambdaQueryWrapper<SysDict>()
+    //		.eq(SysDict::getCode, code)
+    //		.ne(SysDict::getParentId, 0)
+    //		.orderByAsc(SysDict::getSort)));
+    // }
 }

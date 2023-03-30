@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.message.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
@@ -27,34 +28,34 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MESSAGE, fallbackFactory = FeignNoticeMessageApiFallback.class)
+@FeignClient(
+        value = ServiceName.TAOTAO_CLOUD_MESSAGE,
+        fallbackFactory = FeignNoticeMessageApiFallback.class)
 public interface IFeignNoticeMessageApi {
 
-	@GetMapping(value = "/noticeMessage/sms")
-	void noticeMessage(NoticeMessageDTO noticeMessageDTO);
+    @GetMapping(value = "/noticeMessage/sms")
+    void noticeMessage(NoticeMessageDTO noticeMessageDTO);
 
-	@GetMapping(value = "/message/sms")
-	boolean sendSms();
+    @GetMapping(value = "/message/sms")
+    boolean sendSms();
 
-	/**
-	 * 站内信
-	 *
-	 * @return
-	 */
-	@GetMapping(value = "/message/message")
-	boolean sendMessage();
+    /**
+     * 站内信
+     *
+     * @return
+     */
+    @GetMapping(value = "/message/message")
+    boolean sendMessage();
 
-	@GetMapping(value = "/message/dingtalk")
-	boolean sendDingtalk();
+    @GetMapping(value = "/message/dingtalk")
+    boolean sendDingtalk();
 
-	@GetMapping(value = "/message/wechat")
-	boolean sendWechat();
+    @GetMapping(value = "/message/wechat")
+    boolean sendWechat();
 
-	@GetMapping(value = "/message/email")
-	boolean sendEmail();
+    @GetMapping(value = "/message/email")
+    boolean sendEmail();
 
-	@GetMapping(value = "/message/store")
-	boolean sendStoreMessage();
-
+    @GetMapping(value = "/message/store")
+    boolean sendStoreMessage();
 }
-

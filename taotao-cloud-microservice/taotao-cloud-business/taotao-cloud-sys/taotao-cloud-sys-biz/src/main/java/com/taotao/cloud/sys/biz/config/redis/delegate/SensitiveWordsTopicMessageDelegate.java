@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -30,10 +31,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SensitiveWordsTopicMessageDelegate {
 
-	@Autowired
-	private ISensitiveWordService sensitiveWordService;
+    @Autowired private ISensitiveWordService sensitiveWordService;
 
-	public void handleSensitiveWords(String message) {
-		LogUtils.info(message);
-	}
+    public void handleSensitiveWords(String message) {
+        LogUtils.info(message);
+    }
 }

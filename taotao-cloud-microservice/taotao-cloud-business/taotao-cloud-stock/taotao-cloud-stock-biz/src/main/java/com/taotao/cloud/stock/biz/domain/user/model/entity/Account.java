@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.biz.domain.user.model.entity;
 
 import com.taotao.cloud.stock.biz.domain.model.user.AccountId;
@@ -17,28 +33,23 @@ import com.taotao.cloud.stock.biz.domain.user.model.vo.Password;
  */
 public class Account implements Entity<Account> {
 
-    /**
-     * accountId
-     */
+    /** accountId */
     private AccountId accountId;
 
-    /**
-     * 手机号
-     */
+    /** 手机号 */
     private com.taotao.cloud.stock.biz.domain.model.user.Mobile mobile;
 
-    /**
-     * 邮箱
-     */
+    /** 邮箱 */
     private com.taotao.cloud.stock.biz.domain.model.user.Email email;
 
-    /**
-     * 密码
-     */
+    /** 密码 */
     private Password password;
 
-
-    public Account(AccountId accountId, com.taotao.cloud.stock.biz.domain.model.user.Mobile mobile, com.taotao.cloud.stock.biz.domain.model.user.Email email, Password password) {
+    public Account(
+            AccountId accountId,
+            com.taotao.cloud.stock.biz.domain.model.user.Mobile mobile,
+            com.taotao.cloud.stock.biz.domain.model.user.Email email,
+            Password password) {
         this.accountId = accountId;
         this.mobile = mobile;
         this.email = email;
@@ -51,7 +62,9 @@ public class Account implements Entity<Account> {
     }
 
     public Account(
-		    com.taotao.cloud.stock.biz.domain.model.user.Mobile mobile, com.taotao.cloud.stock.biz.domain.model.user.Email email, Password password) {
+            com.taotao.cloud.stock.biz.domain.model.user.Mobile mobile,
+            com.taotao.cloud.stock.biz.domain.model.user.Email email,
+            Password password) {
         this.mobile = mobile;
         this.email = email;
         this.password = password;

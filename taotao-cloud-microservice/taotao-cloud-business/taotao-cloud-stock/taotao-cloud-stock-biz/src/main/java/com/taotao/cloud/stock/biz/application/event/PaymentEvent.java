@@ -17,7 +17,6 @@
 package com.taotao.cloud.stock.biz.application.event;
 
 import com.egzosn.pay.paypal.bean.order.Payment;
-
 import com.taotao.cloud.stock.api.common.util.ObjectEvent;
 import java.io.Serializable;
 

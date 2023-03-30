@@ -1,11 +1,11 @@
 /*
- * Copyright © 2018 organization baomidou
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.workflow.biz.common.database.plugins;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -39,15 +40,32 @@ import org.apache.ibatis.session.RowBounds;
  * @since 2.5.1
  */
 @Intercepts({
-        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
-        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
-        @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})})
+    @Signature(
+            type = Executor.class,
+            method = "query",
+            args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+    @Signature(
+            type = Executor.class,
+            method = "query",
+            args = {
+                MappedStatement.class,
+                Object.class,
+                RowBounds.class,
+                ResultHandler.class,
+                CacheKey.class,
+                BoundSql.class
+            }),
+    @Signature(
+            type = Executor.class,
+            method = "update",
+            args = {MappedStatement.class, Object.class})
+})
 @Slf4j
 public class MyMasterSlaveAutoRoutingPlugin implements Interceptor {
 
     protected DynamicRoutingDataSource dynamicDataSource;
 
-    public MyMasterSlaveAutoRoutingPlugin(DataSource dataSource){
+    public MyMasterSlaveAutoRoutingPlugin(DataSource dataSource) {
         this.dynamicDataSource = (DynamicRoutingDataSource) dataSource;
     }
 
@@ -60,16 +78,26 @@ public class MyMasterSlaveAutoRoutingPlugin implements Interceptor {
         MappedStatement ms = (MappedStatement) args[0];
         String pushedDataSource = null;
         try {
-            String tenantId = StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceId()) ? DataSourceContextHolder.getDatasourceId() : "";
+            String tenantId =
+                    StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceId())
+                            ? DataSourceContextHolder.getDatasourceId()
+                            : "";
             // 判断切库
-            String dataSource = SqlCommandType.SELECT == ms.getSqlCommandType() ? DdConstants.SLAVE : DdConstants.MASTER;
+            String dataSource =
+                    SqlCommandType.SELECT == ms.getSqlCommandType()
+                            ? DdConstants.SLAVE
+                            : DdConstants.MASTER;
             // 如果是从库
             if (DdConstants.SLAVE.equals(dataSource)) {
                 // 判断从库不存在
-                if (!dynamicDataSource.getGroupDataSources().containsKey(tenantId + "-" +DdConstants.SLAVE)) {
+                if (!dynamicDataSource
+                        .getGroupDataSources()
+                        .containsKey(tenantId + "-" + DdConstants.SLAVE)) {
                     // 判断主库存在（有主库没从库）
-                    if (dynamicDataSource.getGroupDataSources().containsKey(tenantId + "-" +DdConstants.MASTER)) {
-                        dataSource = tenantId + "-" +DdConstants.MASTER;
+                    if (dynamicDataSource
+                            .getGroupDataSources()
+                            .containsKey(tenantId + "-" + DdConstants.MASTER)) {
+                        dataSource = tenantId + "-" + DdConstants.MASTER;
                     }
                 } else {
                     dataSource = tenantId + "-" + DdConstants.SLAVE;
@@ -83,7 +111,8 @@ public class MyMasterSlaveAutoRoutingPlugin implements Interceptor {
                 RedisUtil redisUtil = SpringContext.getBean(RedisUtil.class);
                 if (redisUtil.exists(tenantId)) {
                     Object string = redisUtil.getString(tenantId);
-                    List<TenantLinkModel> linkList = JsonUtil.getJsonToList(String.valueOf(string), TenantLinkModel.class);
+                    List<TenantLinkModel> linkList =
+                            JsonUtil.getJsonToList(String.valueOf(string), TenantLinkModel.class);
                     // 添加数据源信息到redis中
                     List<String> list = new ArrayList<>(16);
                     for (TenantLinkModel model : linkList) {
@@ -98,7 +127,8 @@ public class MyMasterSlaveAutoRoutingPlugin implements Interceptor {
                         druidDataSource.setUsername(model.getUserName());
                         druidDataSource.setPassword(model.getPassword());
                         try {
-                            druidDataSource.setDriverClassName(DbTypeUtil.getDriver(model.getDbType()).getDriver());
+                            druidDataSource.setDriverClassName(
+                                    DbTypeUtil.getDriver(model.getDbType()).getDriver());
                         } catch (DataException e) {
                             e.printStackTrace();
                         }
@@ -131,6 +161,5 @@ public class MyMasterSlaveAutoRoutingPlugin implements Interceptor {
     }
 
     @Override
-    public void setProperties(Properties properties) {
-    }
+    public void setProperties(Properties properties) {}
 }

@@ -1,103 +1,79 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.jeepay.jeepay.model;
 
 /**
  * 支付查单响应实体类
+ *
  * @author jmdhappy
  * @site https://www.jeepay.vip
  * @date 2021-06-08 11:00
  */
 public class PayOrderQueryResModel extends JeepayObject {
 
-    /**
-     * 支付订单号
-     */
+    /** 支付订单号 */
     private String payOrderId;
 
-    /**
-     * 商户号
-     */
+    /** 商户号 */
     private String mchNo;
 
-    /**
-     * 商户订单号
-     */
+    /** 商户订单号 */
     private String mchOrderNo;
 
-    /**
-     * 支付接口
-     */
+    /** 支付接口 */
     private String ifCode;
 
-    /**
-     * 支付方式
-     */
+    /** 支付方式 */
     private String wayCode;
 
-    /**
-     * 支付金额,单位分
-     */
+    /** 支付金额,单位分 */
     private Long amount;
 
-    /**
-     * 三位货币代码,人民币:cny
-     */
+    /** 三位货币代码,人民币:cny */
     private String currency;
 
-    /**
-     * 支付订单状态
-     * 0-订单生成
-     * 1-支付中
-     * 2-支付成功
-     * 3-支付失败
-     * 4-已撤销
-     * 5-已退款
-     * 6-订单关闭
-     */
+    /** 支付订单状态 0-订单生成 1-支付中 2-支付成功 3-支付失败 4-已撤销 5-已退款 6-订单关闭 */
     private int state;
 
-    /**
-     * 客户端IPV4地址
-     */
+    /** 客户端IPV4地址 */
     private String clientIp;
 
-    /**
-     * 商品标题
-     */
+    /** 商品标题 */
     private String subject;
 
-    /**
-     * 商品描述
-     */
+    /** 商品描述 */
     private String body;
 
-    /**
-     * 渠道订单号
-     */
+    /** 渠道订单号 */
     private String channelOrderNo;
 
-    /**
-     * 渠道错误码
-     */
+    /** 渠道错误码 */
     private String errCode;
 
-    /**
-     * 渠道错误描述
-     */
+    /** 渠道错误描述 */
     private String errMsg;
 
-    /**
-     * 扩展参数
-     */
+    /** 扩展参数 */
     private String extParam;
 
-    /**
-     * 订单创建时间,13位时间戳
-     */
+    /** 订单创建时间,13位时间戳 */
     private Long createdAt;
 
-    /**
-     * 订单支付成功时间,13位时间戳
-     */
+    /** 订单支付成功时间,13位时间戳 */
     private Long successTime;
 
     public String getPayOrderId() {

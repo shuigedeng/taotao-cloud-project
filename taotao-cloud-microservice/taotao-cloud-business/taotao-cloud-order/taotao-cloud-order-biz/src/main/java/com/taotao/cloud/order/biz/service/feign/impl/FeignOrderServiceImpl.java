@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.service.feign.impl;
 
 import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
@@ -35,15 +36,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class FeignOrderServiceImpl extends
-	BaseSuperServiceImpl<IOrderMapper, Order, OrderRepository, IOrderRepository, Long>
-	implements IFeignOrderService {
+public class FeignOrderServiceImpl
+        extends BaseSuperServiceImpl<IOrderMapper, Order, OrderRepository, IOrderRepository, Long>
+        implements IFeignOrderService {
 
-	@Autowired
-	private IOrderService orderService;
+    @Autowired private IOrderService orderService;
 
-	@Override
-	public <T> T test123(T t) {
-		return t;
-	}
+    @Override
+    public <T> T test123(T t) {
+        return t;
+    }
 }

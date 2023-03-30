@@ -1,18 +1,19 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.mgr.ctrl.isv;
 
 import cn.hutool.core.date.DateUtil;
@@ -53,7 +54,7 @@ public class IsvInfoController extends CommonCtrl {
      * @describe: 查询服务商信息列表
      */
     @PreAuthorize("hasAuthority('ENT_ISV_LIST')")
-    @RequestMapping(value="", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ApiRes list() {
         IsvInfo isvInfo = getObject(IsvInfo.class);
         LambdaQueryWrapper<IsvInfo> wrapper = IsvInfo.gw();
@@ -79,7 +80,7 @@ public class IsvInfoController extends CommonCtrl {
      */
     @PreAuthorize("hasAuthority('ENT_ISV_INFO_ADD')")
     @MethodLog(remark = "新增服务商")
-    @RequestMapping(value="", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public ApiRes add() {
         IsvInfo isvInfo = getObject(IsvInfo.class);
         String isvNo = "V" + DateUtil.currentSeconds();
@@ -100,12 +101,14 @@ public class IsvInfoController extends CommonCtrl {
      */
     @PreAuthorize("hasAuthority('ENT_ISV_INFO_DEL')")
     @MethodLog(remark = "删除服务商")
-    @RequestMapping(value="/{isvNo}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{isvNo}", method = RequestMethod.DELETE)
     public ApiRes delete(@PathVariable("isvNo") String isvNo) {
         isvInfoService.removeByIsvNo(isvNo);
 
         // 推送mq到目前节点进行更新数据
-        mqSender.send(ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, isvNo, null, null));
+        mqSender.send(
+                ResetIsvMchAppInfoConfigMQ.build(
+                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, isvNo, null, null));
         return ApiRes.ok();
     }
 
@@ -116,7 +119,7 @@ public class IsvInfoController extends CommonCtrl {
      */
     @PreAuthorize("hasAuthority('ENT_ISV_INFO_EDIT')")
     @MethodLog(remark = "更新服务商信息")
-    @RequestMapping(value="/{isvNo}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{isvNo}", method = RequestMethod.PUT)
     public ApiRes update(@PathVariable("isvNo") String isvNo) {
         IsvInfo isvInfo = getObject(IsvInfo.class);
         isvInfo.setIsvNo(isvNo);
@@ -124,7 +127,8 @@ public class IsvInfoController extends CommonCtrl {
 
         // 推送mq到目前节点进行更新数据
         mqSender.send(
-	        ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, isvNo, null, null));
+                ResetIsvMchAppInfoConfigMQ.build(
+                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, isvNo, null, null));
 
         if (!result) {
             return ApiRes.fail(ApiCodeEnum.SYS_OPERATION_FAIL_UPDATE);
@@ -138,7 +142,7 @@ public class IsvInfoController extends CommonCtrl {
      * @describe: 查看服务商信息
      */
     @PreAuthorize("hasAnyAuthority('ENT_ISV_INFO_VIEW', 'ENT_ISV_INFO_EDIT')")
-    @RequestMapping(value="/{isvNo}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{isvNo}", method = RequestMethod.GET)
     public ApiRes detail(@PathVariable("isvNo") String isvNo) {
         IsvInfo isvInfo = isvInfoService.getById(isvNo);
         if (isvInfo == null) {

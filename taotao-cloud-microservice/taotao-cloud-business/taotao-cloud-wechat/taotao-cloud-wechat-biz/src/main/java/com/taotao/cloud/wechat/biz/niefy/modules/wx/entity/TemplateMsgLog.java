@@ -1,20 +1,36 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.niefy.modules.wx.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.github.niefy.common.utils.Json;
+import java.io.Serializable;
+import java.util.Date;
 import lombok.Data;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
  * 模板消息日志
+ *
  * @author Nifury
  * @date 2017-9-27
  */
@@ -23,8 +39,10 @@ import java.util.Date;
 public class TemplateMsgLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @TableId(type = IdType.AUTO)
     private Long logId;
+
     private String appid;
     private String touser;
     private String templateId;
@@ -34,10 +52,9 @@ public class TemplateMsgLog implements Serializable {
     private Date sendTime;
     private String sendResult;
 
-    public TemplateMsgLog() {
-    }
+    public TemplateMsgLog() {}
 
-    public TemplateMsgLog(WxMpTemplateMessage msg,String appid, String sendResult) {
+    public TemplateMsgLog(WxMpTemplateMessage msg, String appid, String sendResult) {
         this.appid = appid;
         this.touser = msg.getToUser();
         this.templateId = msg.getTemplateId();
@@ -52,5 +69,4 @@ public class TemplateMsgLog implements Serializable {
     public String toString() {
         return Json.toJsonString(this);
     }
-
 }

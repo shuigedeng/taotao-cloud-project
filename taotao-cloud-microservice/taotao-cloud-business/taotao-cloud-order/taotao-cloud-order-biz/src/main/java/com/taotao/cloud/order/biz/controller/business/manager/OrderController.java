@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.order.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -45,80 +61,76 @@ import zipkin2.storage.Traces;
 @RequestMapping("/order/manager/order")
 public class OrderController {
 
-	/**
-	 * 订单
-	 */
-	private final IOrderService orderService;
-	/**
-	 * 订单价格
-	 */
-	private final IOrderPriceService orderPriceService;
+    /** 订单 */
+    private final IOrderService orderService;
+    /** 订单价格 */
+    private final IOrderPriceService orderPriceService;
 
-	@Operation(summary = "查询订单列表分页", description = "查询订单列表分页")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-	public Result<PageResult<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
-		IPage<OrderSimpleVO> page = orderService.pageQuery(orderPageQuery);
-		return Result.success(PageResult.convertMybatisPage(page, OrderSimpleVO.class));
-	}
+    @Operation(summary = "查询订单列表分页", description = "查询订单列表分页")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping("/tree")
+    public Result<PageResult<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
+        IPage<OrderSimpleVO> page = orderService.pageQuery(orderPageQuery);
+        return Result.success(PageResult.convertMybatisPage(page, OrderSimpleVO.class));
+    }
 
-	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/queryExportOrder")
-	public Result<List<OrderExportVO>> queryExportOrder(OrderPageQuery orderPageQuery) {
-		return Result.success(orderService.queryExportOrder(orderPageQuery));
-	}
+    @Operation(summary = "查询订单导出列表", description = "查询订单导出列表")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping("/queryExportOrder")
+    public Result<List<OrderExportVO>> queryExportOrder(OrderPageQuery orderPageQuery) {
+        return Result.success(orderService.queryExportOrder(orderPageQuery));
+    }
 
-	@Operation(summary = "订单明细", description = "订单明细")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/{orderSn}")
-	public Result<OrderDetailVO> detail(@PathVariable String orderSn) {
-		return Result.success(orderService.queryDetail(orderSn));
-	}
+    @Operation(summary = "订单明细", description = "订单明细")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping(value = "/{orderSn}")
+    public Result<OrderDetailVO> detail(@PathVariable String orderSn) {
+        return Result.success(orderService.queryDetail(orderSn));
+    }
 
-	@Operation(summary = "确认收款", description = "确认收款")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping(value = "/{orderSn}/pay")
-	public Result<Boolean> payOrder(@PathVariable String orderSn) {
-		return Result.success(orderPriceService.adminPayOrder(orderSn));
-	}
+    @Operation(summary = "确认收款", description = "确认收款")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PostMapping(value = "/{orderSn}/pay")
+    public Result<Boolean> payOrder(@PathVariable String orderSn) {
+        return Result.success(orderPriceService.adminPayOrder(orderSn));
+    }
 
-	@Operation(summary = "修改收货人信息", description = "修改收货人信息")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping(value = "/{orderSn}/consignee")
-	public Result<Order> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
-			@Valid MemberAddressDTO memberAddressDTO) {
-		return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
-	}
+    @Operation(summary = "修改收货人信息", description = "修改收货人信息")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PutMapping(value = "/{orderSn}/consignee")
+    public Result<Order> consignee(
+            @NotNull(message = "参数非法") @PathVariable String orderSn,
+            @Valid MemberAddressDTO memberAddressDTO) {
+        return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
+    }
 
-	@Operation(summary = "修改订单价格", description = "修改订单价格")
-	@RequestLogger
-	@PutMapping(value = "/{orderSn}/price")
-	public Result<Boolean> updateOrderPrice(@PathVariable String orderSn,
-			@NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
-		return Result.success(orderPriceService.updatePrice(orderSn, price));
-	}
+    @Operation(summary = "修改订单价格", description = "修改订单价格")
+    @RequestLogger
+    @PutMapping(value = "/{orderSn}/price")
+    public Result<Boolean> updateOrderPrice(
+            @PathVariable String orderSn,
+            @NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
+        return Result.success(orderPriceService.updatePrice(orderSn, price));
+    }
 
-	@Operation(summary = "取消订单", description = "取消订单")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping(value = "/{orderSn}/cancel")
-	public Result<Order> cancel(@PathVariable String orderSn,
-			@RequestParam String reason) {
-		return Result.success(orderService.cancel(orderSn, reason));
-	}
+    @Operation(summary = "取消订单", description = "取消订单")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PostMapping(value = "/{orderSn}/cancel")
+    public Result<Order> cancel(@PathVariable String orderSn, @RequestParam String reason) {
+        return Result.success(orderService.cancel(orderSn, reason));
+    }
 
-	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping(value = "/traces/{orderSn}")
-	public Result<Traces> getTraces(
-			@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
-		return Result.success(orderService.getTraces(orderSn));
-	}
+    @Operation(summary = "查询物流踪迹", description = "查询物流踪迹")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PostMapping(value = "/traces/{orderSn}")
+    public Result<Traces> getTraces(@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
+        return Result.success(orderService.getTraces(orderSn));
+    }
 }

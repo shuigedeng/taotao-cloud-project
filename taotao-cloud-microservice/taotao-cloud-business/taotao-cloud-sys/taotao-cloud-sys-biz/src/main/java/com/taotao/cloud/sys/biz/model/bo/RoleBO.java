@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.bo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -29,32 +29,19 @@ import java.time.LocalDateTime;
  */
 @RecordBuilder
 public record RoleBO(
-	/**
-	 * id
-	 */
-	Long id,
-	/**
-	 * 角色名称
-	 */
-	String name,
-	/**
-	 * 角色code
-	 */
-	String code,
-	/**
-	 * 备注
-	 */
-	String remark,
-	/**
-	 * 创建时间
-	 */
-	LocalDateTime createTime,
-	/**
-	 * 最后修改时间
-	 */
-	LocalDateTime lastModifiedTime) implements Serializable {
+        /** id */
+        Long id,
+        /** 角色名称 */
+        String name,
+        /** 角色code */
+        String code,
+        /** 备注 */
+        String remark,
+        /** 创建时间 */
+        LocalDateTime createTime,
+        /** 最后修改时间 */
+        LocalDateTime lastModifiedTime)
+        implements Serializable {
 
-	static final long serialVersionUID = 5126530068827085130L;
-
-
+    static final long serialVersionUID = 5126530068827085130L;
 }

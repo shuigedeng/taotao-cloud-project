@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
@@ -27,17 +28,17 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  */
 public interface ISettingService extends BaseSuperService<Setting, Long> {
 
-	/**
-	 * 通过key获取
-	 *
-	 * @param key
-	 */
-	Setting get(String key);
+    /**
+     * 通过key获取
+     *
+     * @param key
+     */
+    Setting get(String key);
 
-	/**
-	 * 修改
-	 *
-	 * @param setting
-	 */
-	boolean saveUpdate(Setting setting);
+    /**
+     * 修改
+     *
+     * @param setting
+     */
+    boolean saveUpdate(Setting setting);
 }

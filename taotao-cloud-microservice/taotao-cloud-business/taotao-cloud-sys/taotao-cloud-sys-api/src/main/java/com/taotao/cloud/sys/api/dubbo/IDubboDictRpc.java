@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.api.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
@@ -26,12 +27,12 @@ import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
  */
 public interface IDubboDictRpc {
 
-	/**
-	 * 字典code查询
-	 *
-	 * @param code 代码
-	 * @return {@link DubboDictResponse }
-	 * @since 2022-06-29 21:45:44
-	 */
-	DubboDictResponse findByCode(Integer code);
+    /**
+     * 字典code查询
+     *
+     * @param code 代码
+     * @return {@link DubboDictResponse }
+     * @since 2022-06-29 21:45:44
+     */
+    DubboDictResponse findByCode(Integer code);
 }

@@ -16,16 +16,14 @@
 
 package com.taotao.cloud.stock.biz.application.event.subscribe;
 
+import java.util.stream.Collectors;
 import org.mallfoundry.finance.Payment;
 import org.mallfoundry.finance.PaymentCapturedEvent;
 import org.mallfoundry.finance.PaymentEvent;
 import org.mallfoundry.finance.PaymentOrder;
 import org.mallfoundry.finance.PaymentStartedEvent;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
-
-import java.util.stream.Collectors;
 
 @AutoConfiguration
 public class OrderPaymentEventSubscribe {
@@ -37,8 +35,9 @@ public class OrderPaymentEventSubscribe {
     }
 
     private OrderPaymentResult createPaymentResult(Payment payment) {
-//        var instrument = payment.getInstrument();
-//        return new DefaultOrderPaymentResult(payment.getId(), instrument.getType(), payment.getStatus());
+        //        var instrument = payment.getInstrument();
+        //        return new DefaultOrderPaymentResult(payment.getId(), instrument.getType(),
+        // payment.getStatus());
         return new DefaultOrderPaymentResult(payment.getId(), null, payment.getStatus());
     }
 
@@ -54,7 +53,10 @@ public class OrderPaymentEventSubscribe {
 
     private void handlePaymentEvent(PaymentEvent event) {
         var payment = event.getPayment();
-        var orderIds = payment.getOrders().stream().map(PaymentOrder::getId).collect(Collectors.toUnmodifiableSet());
+        var orderIds =
+                payment.getOrders().stream()
+                        .map(PaymentOrder::getId)
+                        .collect(Collectors.toUnmodifiableSet());
         var paymentResult = this.createPaymentResult(payment);
         this.orderService.payOrders(orderIds, paymentResult);
     }

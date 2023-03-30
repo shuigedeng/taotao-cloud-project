@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.dubbo;
 
+package com.taotao.cloud.sys.api.dubbo;
 
 /**
  * ISysDictItemService
@@ -23,6 +23,4 @@ package com.taotao.cloud.sys.api.dubbo;
  * @version 2021.10
  * @since 2021-10-09 20:32:47
  */
-public interface IDubboDictItemRpc {
-
-}
+public interface IDubboDictItemRpc {}

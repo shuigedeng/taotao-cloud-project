@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -44,17 +45,13 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = MemberStoreCollection.TABLE_NAME, comment = "会员店铺收藏表")
 public class MemberStoreCollection extends BaseSuperEntity<MemberStoreCollection, Long> {
 
-	public static final String TABLE_NAME = "tt_member_store_collection";
+    public static final String TABLE_NAME = "tt_member_store_collection";
 
-	/**
-	 * 会员id
-	 */
-	@Column(name = "member_id", columnDefinition = "bigint not null comment '会员id'")
-	private Long memberId;
+    /** 会员id */
+    @Column(name = "member_id", columnDefinition = "bigint not null comment '会员id'")
+    private Long memberId;
 
-	/**
-	 * 店铺id
-	 */
-	@Column(name = "store_id", columnDefinition = "bigint not null comment '店铺id'")
-	private Long storeId;
+    /** 店铺id */
+    @Column(name = "store_id", columnDefinition = "bigint not null comment '店铺id'")
+    private Long storeId;
 }

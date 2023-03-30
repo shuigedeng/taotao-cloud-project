@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.aop.member;
 
 import com.taotao.cloud.member.biz.service.business.IMemberService;
@@ -33,12 +34,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberLogAspect {
 
+    @Autowired private IMemberService memberService;
 
-	@Autowired
-	private IMemberService memberService;
-
-	@After("@annotation(com.taotao.cloud.member.biz.aop.member.MemberLogPoint)")
-	public void doAfter(JoinPoint pjp) {
-		//todo 需要实现
-	}
+    @After("@annotation(com.taotao.cloud.member.biz.aop.member.MemberLogPoint)")
+    public void doAfter(JoinPoint pjp) {
+        // todo 需要实现
+    }
 }

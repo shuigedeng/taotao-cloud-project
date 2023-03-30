@@ -1,24 +1,41 @@
-package com.taotao.cloud.media.biz.opencv.common.mapper;//package com.taotao.cloud.opencv.biz.opencv.common.mapper;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.media.biz.opencv.common.mapper; // package
+                                                         // com.taotao.cloud.opencv.biz.opencv.common.mapper;
 //
-//import com.taotao.cloud.opencv.biz.opencv.common.utils.Exceptions;
-//import com.taotao.cloud.opencv.biz.opencv.common.utils.Reflections;
-//import java.io.StringReader;
-//import java.io.StringWriter;
-//import java.util.Collection;
-//import java.util.concurrent.ConcurrentHashMap;
-//import java.util.concurrent.ConcurrentMap;
-//import javax.xml.bind.JAXBContext;
-//import javax.xml.bind.JAXBElement;
-//import javax.xml.bind.JAXBException;
-//import javax.xml.bind.Marshaller;
-//import javax.xml.bind.Unmarshaller;
-//import javax.xml.bind.annotation.XmlAnyElement;
-//import javax.xml.namespace.QName;
-//import org.apache.commons.lang3.StringUtils;
-//import org.springframework.http.converter.HttpMessageConversionException;
-//import org.springframework.util.Assert;
+// import com.taotao.cloud.opencv.biz.opencv.common.utils.Exceptions;
+// import com.taotao.cloud.opencv.biz.opencv.common.utils.Reflections;
+// import java.io.StringReader;
+// import java.io.StringWriter;
+// import java.util.Collection;
+// import java.util.concurrent.ConcurrentHashMap;
+// import java.util.concurrent.ConcurrentMap;
+// import javax.xml.bind.JAXBContext;
+// import javax.xml.bind.JAXBElement;
+// import javax.xml.bind.JAXBException;
+// import javax.xml.bind.Marshaller;
+// import javax.xml.bind.Unmarshaller;
+// import javax.xml.bind.annotation.XmlAnyElement;
+// import javax.xml.namespace.QName;
+// import org.apache.commons.lang3.StringUtils;
+// import org.springframework.http.converter.HttpMessageConversionException;
+// import org.springframework.util.Assert;
 //
-///**
+/// **
 // * 使用Jaxb2.0实现XML<->Java Object的Mapper.
 // * 在创建时需要设定所有需要序列化的Root对象的Class.
 // * 特别支持Root对象是Collection的情形.
@@ -26,10 +43,11 @@ package com.taotao.cloud.media.biz.opencv.common.mapper;//package com.taotao.clo
 // * 创建时间	2017年9月28日
 // *
 // */
-//@SuppressWarnings("rawtypes")
-//public class JaxbMapper {
+// @SuppressWarnings("rawtypes")
+// public class JaxbMapper {
 //
-//	private static ConcurrentMap<Class, JAXBContext> jaxbContexts = new ConcurrentHashMap<Class, JAXBContext>();
+//	private static ConcurrentMap<Class, JAXBContext> jaxbContexts = new ConcurrentHashMap<Class,
+// JAXBContext>();
 //
 //	/**
 //	 * Java Object->Xml without encoding.
@@ -75,7 +93,8 @@ package com.taotao.cloud.media.biz.opencv.common.mapper;//package com.taotao.clo
 //			CollectionWrapper wrapper = new CollectionWrapper();
 //			wrapper.collection = root;
 //
-//			JAXBElement<CollectionWrapper> wrapperElement = new JAXBElement<CollectionWrapper>(new QName(rootName),
+//			JAXBElement<CollectionWrapper> wrapperElement = new JAXBElement<CollectionWrapper>(new
+// QName(rootName),
 //					CollectionWrapper.class, wrapper);
 //
 //			StringWriter writer = new StringWriter();
@@ -143,7 +162,8 @@ package com.taotao.cloud.media.biz.opencv.common.mapper;//package com.taotao.clo
 //				jaxbContext = JAXBContext.newInstance(clazz, CollectionWrapper.class);
 //				jaxbContexts.putIfAbsent(clazz, jaxbContext);
 //			} catch (JAXBException ex) {
-//				throw new HttpMessageConversionException("Could not instantiate JAXBContext for class [" + clazz
+//				throw new HttpMessageConversionException("Could not instantiate JAXBContext for class [" +
+// clazz
 //						+ "]: " + ex.getMessage(), ex);
 //			}
 //		}
@@ -159,4 +179,4 @@ package com.taotao.cloud.media.biz.opencv.common.mapper;//package com.taotao.clo
 //		protected Collection<?> collection;
 //	}
 //
-//}
+// }

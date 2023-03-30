@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.app.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -41,22 +57,22 @@ import org.springframework.stereotype.Service;
  * @date 2021-08-08
  */
 @Service
-public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity> implements AppDataService {
+public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity>
+        implements AppDataService {
 
-    @Autowired
-    private UserProvider userProvider;
-    @Autowired
-    private ModuleApi moduleApi;
-    @Autowired
-    private AuthorizeApi authorizeApi;
-    @Autowired
-    private FlowEngineApi flowEngineApi;
+    @Autowired private UserProvider userProvider;
+    @Autowired private ModuleApi moduleApi;
+    @Autowired private AuthorizeApi authorizeApi;
+    @Autowired private FlowEngineApi flowEngineApi;
 
     @Override
     public List<AppDataEntity> getList(String type) {
         UserInfo userInfo = userProvider.get();
         QueryWrapper<AppDataEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(AppDataEntity::getObjectType, type).eq(AppDataEntity::getCreatorUserId, userInfo.getUserId());
+        queryWrapper
+                .lambda()
+                .eq(AppDataEntity::getObjectType, type)
+                .eq(AppDataEntity::getCreatorUserId, userInfo.getUserId());
         return this.list(queryWrapper);
     }
 
@@ -70,7 +86,10 @@ public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity
     public AppDataEntity getInfo(String objectId) {
         UserInfo userInfo = userProvider.get();
         QueryWrapper<AppDataEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(AppDataEntity::getObjectId, objectId).eq(AppDataEntity::getCreatorUserId, userInfo.getUserId());
+        queryWrapper
+                .lambda()
+                .eq(AppDataEntity::getObjectId, objectId)
+                .eq(AppDataEntity::getCreatorUserId, userInfo.getUserId());
         return this.getOne(queryWrapper);
     }
 
@@ -78,7 +97,10 @@ public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity
     public boolean isExistByObjectId(String objectId) {
         UserInfo userInfo = userProvider.get();
         QueryWrapper<AppDataEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(AppDataEntity::getObjectId, objectId).eq(AppDataEntity::getCreatorUserId, userInfo.getUserId());
+        queryWrapper
+                .lambda()
+                .eq(AppDataEntity::getObjectId, objectId)
+                .eq(AppDataEntity::getCreatorUserId, userInfo.getUserId());
         return this.count(queryWrapper) > 0 ? true : false;
     }
 
@@ -107,7 +129,8 @@ public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity
     @Override
     public List<AppFlowListAllVO> getFlowList(FlowPagination pagination) {
         List<AppDataEntity> dataList = getList("1");
-        List<String> objectId = dataList.stream().map(AppDataEntity::getObjectId).collect(Collectors.toList());
+        List<String> objectId =
+                dataList.stream().map(AppDataEntity::getObjectId).collect(Collectors.toList());
         FlowAppPageModel pageModel = flowEngineApi.getAppPageList(pagination);
         List<FlowEngineEntity> pageList = pageModel.getList();
         PaginationVO paginaModel = pageModel.getPaginationVO();
@@ -126,19 +149,28 @@ public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity
         List<AppDataEntity> dataList = getList(type);
         AuthorizeVO authorizeModel = authorizeApi.getAuthorize(true);
         List<ModuleModel> buttonList = authorizeModel.getModuleList();
-        List<ModuleEntity> menuList = moduleApi.getList().stream().filter(t -> "App".equals(t.getCategory()) && t.getEnabledMark() == 1).collect(Collectors.toList());
+        List<ModuleEntity> menuList =
+                moduleApi.getList().stream()
+                        .filter(t -> "App".equals(t.getCategory()) && t.getEnabledMark() == 1)
+                        .collect(Collectors.toList());
         List<UserMenuModel> list = new LinkedList<>();
         for (ModuleEntity module : menuList) {
-            boolean count = buttonList.stream().filter(t -> t.getId().equals(module.getId())).count() > 0;
+            boolean count =
+                    buttonList.stream().filter(t -> t.getId().equals(module.getId())).count() > 0;
             UserMenuModel userMenuModel = JsonUtil.getJsonToBean(module, UserMenuModel.class);
             if (count) {
-                boolean isData = dataList.stream().filter(t -> t.getObjectId().equals(module.getId())).count() > 0;
+                boolean isData =
+                        dataList.stream()
+                                        .filter(t -> t.getObjectId().equals(module.getId()))
+                                        .count()
+                                > 0;
                 userMenuModel.setIsData(isData);
                 list.add(userMenuModel);
             }
         }
         List<SumTree<UserMenuModel>> menuAll = TreeDotUtils.convertListToTreeDot(list);
-        List<AppDataListAllVO> menuListAll = JsonUtil.getJsonToList(menuAll, AppDataListAllVO.class);
+        List<AppDataListAllVO> menuListAll =
+                JsonUtil.getJsonToList(menuAll, AppDataListAllVO.class);
         List<AppDataListAllVO> data = new LinkedList<>();
         for (AppDataListAllVO appMenu : menuListAll) {
             if ("-1".equals(appMenu.getParentId())) {
@@ -147,6 +179,4 @@ public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity
         }
         return data;
     }
-
-
 }

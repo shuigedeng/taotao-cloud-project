@@ -1,4 +1,21 @@
-package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao.cloud.message.biz.service.impl;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.message.biz.service.business.impl; // package
+                                                            // com.taotao.cloud.message.biz.service.impl;
 //
 // import cn.hutool.http.HttpUtil;
 // import cn.hutool.json.JSONObject;
@@ -29,7 +46,8 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //  * 微信模版消息（公众号） 业务实现
 //  */
 // @Service
-// public class WechatMessageServiceImpl extends ServiceImpl<WechatMessageMapper, WechatMessage> implements
+// public class WechatMessageServiceImpl extends ServiceImpl<WechatMessageMapper, WechatMessage>
+// implements
 // 	WechatMessageService {
 //
 //     @Autowired
@@ -38,19 +56,23 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //     /**
 //      * 设置行业
 //      */
-//     private final String setIndustry = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token=";
+//     private final String setIndustry =
+// "https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token=";
 //     /**
 //      * get 获取所有的模版
 //      */
-//     private final String allMsgTpl = "https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=";
+//     private final String allMsgTpl =
+// "https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=";
 //     /**
 //      * post 删除模版 添加模版 获取模版id
 //      */
-//     private final String delMsgTpl = "https://api.weixin.qq.com/cgi-bin/template/del_private_template?access_token=";
+//     private final String delMsgTpl =
+// "https://api.weixin.qq.com/cgi-bin/template/del_private_template?access_token=";
 //     /**
 //      * post 添加模版
 //      */
-//     private final String addTpl = "https://api.weixin.qq.com/cgi-bin/template/api_add_template?access_token=";
+//     private final String addTpl =
+// "https://api.weixin.qq.com/cgi-bin/template/api_add_template?access_token=";
 //
 //     @Override
 //     public void init() {
@@ -67,7 +89,8 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //             setIndustryParams.put("industry_id1", 1);
 //             //通信与运营商
 //             setIndustryParams.put("industry_id2", 5);
-//             String context = HttpUtils.doPostWithJson(setIndustry + accessToken, setIndustryParams);
+//             String context = HttpUtils.doPostWithJson(setIndustry + accessToken,
+// setIndustryParams);
 //
 //             log.info("设置模版请求{},设置行业响应：{}", setIndustryParams, context);
 //             //获取已有模版，删除
@@ -87,7 +110,8 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //                 oldList.forEach(templateId -> {
 //                     Map<String, Object> params = new HashMap<>(1);
 //                     params.put("template_id", templateId);
-//                     String message = WechatMessageUtil.wechatHandler(HttpUtil.post(delMsgTpl + accessToken, params));
+//                     String message = WechatMessageUtil.wechatHandler(HttpUtil.post(delMsgTpl +
+// accessToken, params));
 //                     log.info("删除模版请求:{},删除模版响应：{}", params, message);
 //                 });
 //             }
@@ -138,8 +162,10 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //                 "您有新订单需要支付",
 //                 "如有问题，请联系在线客服",
 //                 "OPENTM207498902",
-//                 WechatMessageItemEnums.MEMBER_NAME.name() + "," + WechatMessageItemEnums.ORDER_SN.name() + "," +
-//                         WechatMessageItemEnums.PRICE.name() + "," + WechatMessageItemEnums.GOODS_INFO.name(),
+//                 WechatMessageItemEnums.MEMBER_NAME.name() + "," +
+// WechatMessageItemEnums.ORDER_SN.name() + "," +
+//                         WechatMessageItemEnums.PRICE.name() + "," +
+// WechatMessageItemEnums.GOODS_INFO.name(),
 //                 OrderStatusEnum.UNPAID));
 //         //已发货
 //         msg.add(new WechatMessageData(
@@ -148,7 +174,8 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //                 "如有问题，请联系在线客服",
 //                 "OPENTM200565259",
 //                 WechatMessageItemEnums.ORDER_SN.name() + "," +
-//                         WechatMessageItemEnums.LOGISTICS_NAME.name() + "," + WechatMessageItemEnums.LOGISTICS_NO.name(),
+//                         WechatMessageItemEnums.LOGISTICS_NAME.name() + "," +
+// WechatMessageItemEnums.LOGISTICS_NO.name(),
 //                 OrderStatusEnum.DELIVERED));
 //
 //         //已完成
@@ -157,8 +184,10 @@ package com.taotao.cloud.message.biz.service.business.impl;// package com.taotao
 //                 "您的订单已完成，是否有什么想对掌柜说的话呢",
 //                 "诚邀您来评价，评价还赠送积分哦",
 //                 "OPENTM416131050",
-//                 WechatMessageItemEnums.MEMBER_NAME.name() + "," + WechatMessageItemEnums.ORDER_SN.name() + "," +
-//                         WechatMessageItemEnums.PRICE.name() + "," + WechatMessageItemEnums.GOODS_INFO.name(),
+//                 WechatMessageItemEnums.MEMBER_NAME.name() + "," +
+// WechatMessageItemEnums.ORDER_SN.name() + "," +
+//                         WechatMessageItemEnums.PRICE.name() + "," +
+// WechatMessageItemEnums.GOODS_INFO.name(),
 //                 OrderStatusEnum.COMPLETED));
 //
 //         return msg;

@@ -1,10 +1,25 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.biz.interfaces.assembler;
 
 import com.taotao.cloud.stock.api.model.dto.RoleDTO;
-import org.springframework.beans.BeanUtils;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.BeanUtils;
 
 /**
  * 角色Assembler
@@ -22,9 +37,11 @@ public class RoleDTOAssembler {
         dto.setRemarks(role.getRemarks());
         if (role.getPermissionIds() != null) {
             List<String> permissionIdList = new ArrayList<>();
-            role.getPermissionIds().forEach(permissionId -> {
-                permissionIdList.add(permissionId.getId());
-            });
+            role.getPermissionIds()
+                    .forEach(
+                            permissionId -> {
+                                permissionIdList.add(permissionId.getId());
+                            });
             dto.setPermissionIdList(permissionIdList);
         }
         dto.setStatus(role.getStatus() == null ? null : role.getStatus().getValue());
@@ -51,7 +68,14 @@ public class RoleDTOAssembler {
                 permissionIdList.add(new PermissionId(permissionId));
             }
         }
-        Role Role = new Role(roleId, roleCode, roleName, roleCommand.getRemarks(), null, permissionIdList);
+        Role Role =
+                new Role(
+                        roleId,
+                        roleCode,
+                        roleName,
+                        roleCommand.getRemarks(),
+                        null,
+                        permissionIdList);
         return Role;
     }
 

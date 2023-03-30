@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberNoticeLog;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
-/**
- * 会员消息数据处理层
- */
-public interface IMemberNoticeLogMapper extends BaseSuperMapper<MemberNoticeLog, Long> {
-
-}
+/** 会员消息数据处理层 */
+public interface IMemberNoticeLogMapper extends BaseSuperMapper<MemberNoticeLog, Long> {}

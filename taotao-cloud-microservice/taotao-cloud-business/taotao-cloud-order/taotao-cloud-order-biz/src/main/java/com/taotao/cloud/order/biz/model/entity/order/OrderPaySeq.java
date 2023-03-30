@@ -1,5 +1,20 @@
-package com.taotao.cloud.order.biz.model.entity.order;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.order.biz.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
@@ -35,82 +50,66 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = OrderPaySeq.TABLE_NAME, comment = "订单支付流水表")
 public class OrderPaySeq extends BaseSuperEntity<OrderPaySeq, Long> {
 
-	public static final String TABLE_NAME = "order_pay_seq";
+    public static final String TABLE_NAME = "order_pay_seq";
 
-	/**
-	 * 支付流水编码--需要与微信的预支付ID进行关联
-	 */
-	@Column(name = "pay_code", columnDefinition = "varchar(32) not null comment '支付流水编码'")
-	private String payCode;
+    /** 支付流水编码--需要与微信的预支付ID进行关联 */
+    @Column(name = "pay_code", columnDefinition = "varchar(32) not null comment '支付流水编码'")
+    private String payCode;
 
-	/**
-	 * 买家ID
-	 */
-	@Column(name = "customer_id", columnDefinition = "bigint not null comment '买家ID'")
-	private Long customerId;
+    /** 买家ID */
+    @Column(name = "customer_id", columnDefinition = "bigint not null comment '买家ID'")
+    private Long customerId;
 
-	/**
-	 * 付款方银行编码
-	 */
-	@Column(name = "payer_bank_code", columnDefinition = "varchar(32) not null comment '付款方银行编码'")
-	private String payerBankCode;
+    /** 付款方银行编码 */
+    @Column(name = "payer_bank_code", columnDefinition = "varchar(32) not null comment '付款方银行编码'")
+    private String payerBankCode;
 
-	/**
-	 * 交易金额
-	 */
-	@Column(name = "actual_amount", columnDefinition = "decimal(10,2) not null default 0 comment '交易金额'")
-	private BigDecimal actualAmount;
+    /** 交易金额 */
+    @Column(
+            name = "actual_amount",
+            columnDefinition = "decimal(10,2) not null default 0 comment '交易金额'")
+    private BigDecimal actualAmount;
 
-	/**
-	 * 微信预支付ID
-	 */
-	@Column(name = "prepay_id", columnDefinition = "varchar(32) not null comment '微信预支付ID'")
-	private String prepayId;
+    /** 微信预支付ID */
+    @Column(name = "prepay_id", columnDefinition = "varchar(32) not null comment '微信预支付ID'")
+    private String prepayId;
 
-	/**
-	 * 微信交易ID
-	 */
-	@Column(name = "transaction_id", columnDefinition = "varchar(32) not null comment '微信交易ID'")
-	private String transactionId;
+    /** 微信交易ID */
+    @Column(name = "transaction_id", columnDefinition = "varchar(32) not null comment '微信交易ID'")
+    private String transactionId;
 
-	/**
-	 * 微信商户ID
-	 */
-	@Column(name = "mch_id", columnDefinition = "varchar(32) not null comment '微信商户ID'")
-	private String mchId;
+    /** 微信商户ID */
+    @Column(name = "mch_id", columnDefinition = "varchar(32) not null comment '微信商户ID'")
+    private String mchId;
 
-	/**
-	 * 微信APPID
-	 */
-	@Column(name = "app_id", columnDefinition = "varchar(32) not null comment '微信APPID'")
-	private String appId;
+    /** 微信APPID */
+    @Column(name = "app_id", columnDefinition = "varchar(32) not null comment '微信APPID'")
+    private String appId;
 
-	/**
-	 * 状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功
-	 */
-	@Column(name = "status", columnDefinition = "int not null default 0 comment '状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功'")
-	private Integer status;
+    /** 状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功 */
+    @Column(
+            name = "status",
+            columnDefinition = "int not null default 0 comment '状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功'")
+    private Integer status;
 
-	/**
-	 * 备注
-	 */
-	@Column(name = "remark", columnDefinition = "varchar(3200) comment '备注'")
-	private String remark;
+    /** 备注 */
+    @Column(name = "remark", columnDefinition = "varchar(3200) comment '备注'")
+    private String remark;
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-			return false;
-		}
-		OrderPaySeq that = (OrderPaySeq) o;
-		return getId() != null && Objects.equals(getId(), that.getId());
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        OrderPaySeq that = (OrderPaySeq) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

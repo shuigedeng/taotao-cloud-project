@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.disruptor;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -33,9 +34,9 @@ import org.springframework.stereotype.Component;
 @Component("emailHandler")
 public class EmailDisruptorHandler implements DisruptorHandler<DisruptorBindEvent> {
 
-	@Override
-	public void doHandler(DisruptorBindEvent event,
-		HandlerChain<DisruptorBindEvent> handlerChain) throws Exception {
-		LogUtils.info(event.toString());
-	}
+    @Override
+    public void doHandler(DisruptorBindEvent event, HandlerChain<DisruptorBindEvent> handlerChain)
+            throws Exception {
+        LogUtils.info(event.toString());
+    }
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.niefy.modules.wx.service;
 
 import me.chanjar.weixin.common.api.WxConsts;
@@ -16,16 +32,15 @@ public interface MsgReplyService {
     /**
      * 根据规则配置通过微信客服消息接口自动回复消息
      *
-     *
      * @param appid
      * @param exactMatch 是否精确匹配
-     * @param toUser     用户openid
-     * @param keywords   匹配关键词
+     * @param toUser 用户openid
+     * @param keywords 匹配关键词
      * @return 是否已自动回复，无匹配规则则不自动回复
      */
     boolean tryAutoReply(String appid, boolean exactMatch, String toUser, String keywords);
 
-    default void reply(String toUser,String replyType, String replyContent){
+    default void reply(String toUser, String replyType, String replyContent) {
         try {
             if (WxConsts.KefuMsgType.TEXT.equals(replyType)) {
                 this.replyText(toUser, replyContent);
@@ -53,55 +68,33 @@ public interface MsgReplyService {
         }
     }
 
-    /**
-     * 回复文字消息
-     */
+    /** 回复文字消息 */
     void replyText(String toUser, String replyContent) throws WxErrorException;
 
-    /**
-     * 回复图片消息
-     */
+    /** 回复图片消息 */
     void replyImage(String toUser, String mediaId) throws WxErrorException;
 
-    /**
-     * 回复录音消息
-     */
+    /** 回复录音消息 */
     void replyVoice(String toUser, String mediaId) throws WxErrorException;
 
-    /**
-     * 回复视频消息
-     */
+    /** 回复视频消息 */
     void replyVideo(String toUser, String mediaId) throws WxErrorException;
 
-    /**
-     * 回复音乐消息
-     */
+    /** 回复音乐消息 */
     void replyMusic(String toUser, String mediaId) throws WxErrorException;
 
-    /**
-     * 回复图文消息（点击跳转到外链）
-     * 图文消息条数限制在1条以内
-     */
+    /** 回复图文消息（点击跳转到外链） 图文消息条数限制在1条以内 */
     void replyNews(String toUser, String newsInfoJson) throws WxErrorException;
 
-    /**
-     * 回复公众号文章消息（点击跳转到图文消息页面）
-     * 图文消息条数限制在1条以内
-     */
+    /** 回复公众号文章消息（点击跳转到图文消息页面） 图文消息条数限制在1条以内 */
     void replyMpNews(String toUser, String mediaId) throws WxErrorException;
 
-    /**
-     * 回复卡券消息
-     */
+    /** 回复卡券消息 */
     void replyWxCard(String toUser, String cardId) throws WxErrorException;
 
-    /**
-     * 回复小程序消息
-     */
+    /** 回复小程序消息 */
     void replyMiniProgram(String toUser, String miniProgramInfoJson) throws WxErrorException;
 
-    /**
-     * 回复菜单消息
-     */
+    /** 回复菜单消息 */
     void replyMsgMenu(String toUser, String msgMenusJson) throws WxErrorException;
 }

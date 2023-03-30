@@ -13,23 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.feign.impl;
 
-import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
-import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
-import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
-import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
-import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
-import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
 import com.taotao.cloud.sys.biz.service.feign.IFeignUserService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,13 +35,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class FeignUserServiceImpl extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
-	implements IFeignUserService {
+public class FeignUserServiceImpl
+        extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
+        implements IFeignUserService {
 
-	private final IUserService userService;
+    private final IUserService userService;
 
-	@Override
-	public <T> T test123(T t) {
-		return t;
-	}
+    @Override
+    public <T> T test123(T t) {
+        return t;
+    }
 }

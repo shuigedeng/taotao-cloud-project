@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.event.member;
 
 import org.springframework.context.event.EventListener;
@@ -29,13 +30,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberCreateEventListener {
 
-	//@Autowired
-	//private IAfterSaleLogService afterSaleLogService;
+    // @Autowired
+    // private IAfterSaleLogService afterSaleLogService;
 
-	@Async
-	@EventListener(MemberCreateEvent.class)
-	public void saveAfterSaleLog(MemberCreateEvent event) {
-		//AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
-		//afterSaleLogService.save(afterSaleLog);
-	}
+    @Async
+    @EventListener(MemberCreateEvent.class)
+    public void saveAfterSaleLog(MemberCreateEvent event) {
+        // AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
+        // afterSaleLogService.save(afterSaleLog);
+    }
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.event.order;
 
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
@@ -32,13 +33,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderLogEventListener {
 
-	@Autowired
-	private IOrderLogService orderLogService;
+    @Autowired private IOrderLogService orderLogService;
 
-	@Async
-	@EventListener(OrderLogEvent.class)
-	public void saveOrderLog(OrderLogEvent event) {
-		OrderLog orderLog = (OrderLog) event.getSource();
-		orderLogService.save(orderLog);
-	}
+    @Async
+    @EventListener(OrderLogEvent.class)
+    public void saveOrderLog(OrderLogEvent event) {
+        OrderLog orderLog = (OrderLog) event.getSource();
+        orderLogService.save(orderLog);
+    }
 }

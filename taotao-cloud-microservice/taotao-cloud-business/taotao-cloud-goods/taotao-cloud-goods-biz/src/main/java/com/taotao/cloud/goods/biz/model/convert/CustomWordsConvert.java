@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.model.convert;
 
 import com.taotao.cloud.goods.api.model.vo.CustomWordsVO;
@@ -29,23 +30,19 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-27 16:58:09
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CustomWordsConvert {
 
-	/**
-	 * 实例
-	 */
-	CustomWordsConvert INSTANCE = Mappers.getMapper(CustomWordsConvert.class);
+    /** 实例 */
+    CustomWordsConvert INSTANCE = Mappers.getMapper(CustomWordsConvert.class);
 
-	/**
-	 * 自定义单词voto自定义单词
-	 *
-	 * @param customWordsVO 自定义单词签证官
-	 * @return {@link CustomWords }
-	 * @since 2022-04-27 16:58:09
-	 */
-	CustomWords convert(CustomWordsVO customWordsVO);
-
-
+    /**
+     * 自定义单词voto自定义单词
+     *
+     * @param customWordsVO 自定义单词签证官
+     * @return {@link CustomWords }
+     * @since 2022-04-27 16:58:09
+     */
+    CustomWords convert(CustomWordsVO customWordsVO);
 }

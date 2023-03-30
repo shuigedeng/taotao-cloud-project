@@ -1,16 +1,30 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.form.controller;
 
 import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackForm;
+import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowStatusEnum;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskOperatorService;
 import com.taotao.cloud.workflow.biz.form.entity.BatchPackEntity;
-import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackForm;
-import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackInfoVO;
 import com.taotao.cloud.workflow.biz.form.service.BatchPackService;
-
 import jakarta.validation.Valid;
-
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,18 +35,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 批包装指令
- */
+/** 批包装指令 */
 @Tag(tags = "批包装指令", value = "BatchPack")
 @RestController
 @RequestMapping("/api/workflow/Form/BatchPack")
 public class BatchPackController {
 
-    @Autowired
-    private BatchPackService batchPackService;
-    @Autowired
-    private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired private BatchPackService batchPackService;
+    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取批包装指令信息
@@ -42,7 +52,8 @@ public class BatchPackController {
      */
     @Operation("获取批包装指令信息")
     @GetMapping("/{id}")
-    public Result<BatchPackInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<BatchPackInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
+            throws DataException {
         BatchPackInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -70,7 +81,9 @@ public class BatchPackController {
     @Operation("新建批包装指令")
     @PostMapping
     public Result create(@RequestBody @Valid BatchPackForm batchPackForm) throws WorkFlowException {
-        if (batchPackForm.getProductionQuty() != null && StringUtil.isNotEmpty(batchPackForm.getProductionQuty()) && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
+        if (batchPackForm.getProductionQuty() != null
+                && StringUtil.isNotEmpty(batchPackForm.getProductionQuty())
+                && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
             return Result.fail("批产数量只能输入正整数");
         }
         BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
@@ -86,13 +99,17 @@ public class BatchPackController {
      * 修改批包装指令
      *
      * @param batchPackForm 表单对象
-     * @param id            主键
+     * @param id 主键
      * @return
      */
     @Operation("修改批包装指令")
     @PutMapping("/{id}")
-    public Result update(@RequestBody @Valid BatchPackForm batchPackForm, @PathVariable("id") String id) throws WorkFlowException {
-        if (batchPackForm.getProductionQuty() != null && StringUtil.isNotEmpty(batchPackForm.getProductionQuty()) && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
+    public Result update(
+            @RequestBody @Valid BatchPackForm batchPackForm, @PathVariable("id") String id)
+            throws WorkFlowException {
+        if (batchPackForm.getProductionQuty() != null
+                && StringUtil.isNotEmpty(batchPackForm.getProductionQuty())
+                && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
             return Result.fail("批产数量只能输入正整数");
         }
         BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);

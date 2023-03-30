@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.sms.SmsSign;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SmsSignRepository extends BaseClassSuperRepository<SmsSign, Long> {
 
-	public SmsSignRepository(EntityManager em) {
-		super(SmsSign.class, em);
-	}
-
+    public SmsSignRepository(EntityManager em) {
+        super(SmsSign.class, em);
+    }
 }

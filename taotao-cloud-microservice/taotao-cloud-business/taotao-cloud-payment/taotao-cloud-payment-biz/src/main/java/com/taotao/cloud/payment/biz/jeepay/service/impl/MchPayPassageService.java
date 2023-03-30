@@ -1,18 +1,19 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.service.impl;
 
 import cn.hutool.core.util.StrUtil;
@@ -23,20 +24,17 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.MchPayPassage;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.PayInterfaceDefine;
 import com.taotao.cloud.payment.biz.jeepay.core.exception.BizException;
 import com.taotao.cloud.payment.biz.jeepay.service.mapper.MchPayPassageMapper;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
- * <p>
  * 商户支付通道表 服务实现类
- * </p>
  *
  * @author [mybatis plus generator]
  * @since 2021-04-27
@@ -47,11 +45,10 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
     @Autowired private PayInterfaceDefineService payInterfaceDefineService;
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 根据支付方式查询可用的支付接口列表
-     * @Date: 9:56 2021/5/10
-    */
-    public List<JSONObject> selectAvailablePayInterfaceList(String wayCode, String appId, Byte infoType, Byte mchType) {
+     * @Author: ZhuXiao @Description: 根据支付方式查询可用的支付接口列表 @Date: 9:56 2021/5/10
+     */
+    public List<JSONObject> selectAvailablePayInterfaceList(
+            String wayCode, String appId, Byte infoType, Byte mchType) {
         Map params = new HashMap();
         params.put("wayCode", wayCode);
         params.put("appId", appId);
@@ -64,11 +61,12 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
 
         // 添加通道状态
         for (JSONObject object : list) {
-            MchPayPassage payPassage = baseMapper.selectOne(MchPayPassage.gw()
-                    .eq(MchPayPassage::getAppId, appId)
-                    .eq(MchPayPassage::getWayCode, wayCode)
-                    .eq(MchPayPassage::getIfCode, object.getString("ifCode"))
-            );
+            MchPayPassage payPassage =
+                    baseMapper.selectOne(
+                            MchPayPassage.gw()
+                                    .eq(MchPayPassage::getAppId, appId)
+                                    .eq(MchPayPassage::getWayCode, wayCode)
+                                    .eq(MchPayPassage::getIfCode, object.getString("ifCode")));
             if (payPassage != null) {
                 object.put("passageId", payPassage.getId());
                 if (payPassage.getRate() != null) {
@@ -76,8 +74,9 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
                 }
                 object.put("state", payPassage.getState());
             }
-            if(object.getBigDecimal("ifRate") != null) {
-                object.put("ifRate", object.getBigDecimal("ifRate").multiply(new BigDecimal("100")));
+            if (object.getBigDecimal("ifRate") != null) {
+                object.put(
+                        "ifRate", object.getBigDecimal("ifRate").multiply(new BigDecimal("100")));
             }
         }
         return list;
@@ -93,7 +92,10 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
                 payPassage.setMchNo(mchNo);
             }
             if (payPassage.getRate() != null) {
-                payPassage.setRate(payPassage.getRate().divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
+                payPassage.setRate(
+                        payPassage
+                                .getRate()
+                                .divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
             }
             if (!saveOrUpdate(payPassage)) {
                 throw new BizException("操作失败");
@@ -101,32 +103,36 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
         }
     }
 
+    /** 根据应用ID 和 支付方式， 查询出商户可用的支付接口 * */
+    public MchPayPassage findMchPayPassage(String mchNo, String appId, String wayCode) {
 
-    /** 根据应用ID 和 支付方式， 查询出商户可用的支付接口 **/
-    public MchPayPassage findMchPayPassage(String mchNo, String appId, String wayCode){
-
-        List<MchPayPassage> list = list(MchPayPassage.gw()
-                                    .eq(MchPayPassage::getMchNo, mchNo)
-                                    .eq(MchPayPassage::getAppId, appId)
-                                    .eq(MchPayPassage::getState, CS.YES)
-                                    .eq(MchPayPassage::getWayCode, wayCode)
-        );
+        List<MchPayPassage> list =
+                list(
+                        MchPayPassage.gw()
+                                .eq(MchPayPassage::getMchNo, mchNo)
+                                .eq(MchPayPassage::getAppId, appId)
+                                .eq(MchPayPassage::getState, CS.YES)
+                                .eq(MchPayPassage::getWayCode, wayCode));
 
         if (list.isEmpty()) {
             return null;
-        }else { // 返回一个可用通道
+        } else { // 返回一个可用通道
 
             HashMap<String, MchPayPassage> mchPayPassageMap = new HashMap<>();
 
-            for (MchPayPassage mchPayPassage:list) {
+            for (MchPayPassage mchPayPassage : list) {
                 mchPayPassageMap.put(mchPayPassage.getIfCode(), mchPayPassage);
             }
             // 查询ifCode所有接口
-            PayInterfaceDefine interfaceDefine = payInterfaceDefineService
-                    .getOne(PayInterfaceDefine.gw()
-                            .select(PayInterfaceDefine::getIfCode, PayInterfaceDefine::getState)
-                            .eq(PayInterfaceDefine::getState, CS.YES)
-                            .in(PayInterfaceDefine::getIfCode, mchPayPassageMap.keySet()), false);
+            PayInterfaceDefine interfaceDefine =
+                    payInterfaceDefineService.getOne(
+                            PayInterfaceDefine.gw()
+                                    .select(
+                                            PayInterfaceDefine::getIfCode,
+                                            PayInterfaceDefine::getState)
+                                    .eq(PayInterfaceDefine::getState, CS.YES)
+                                    .in(PayInterfaceDefine::getIfCode, mchPayPassageMap.keySet()),
+                            false);
 
             if (interfaceDefine != null) {
                 return mchPayPassageMap.get(interfaceDefine.getIfCode());
@@ -134,6 +140,4 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
         }
         return null;
     }
-
-
 }

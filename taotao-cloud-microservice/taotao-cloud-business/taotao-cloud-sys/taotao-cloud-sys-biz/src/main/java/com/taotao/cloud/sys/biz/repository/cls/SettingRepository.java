@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SettingRepository extends BaseClassSuperRepository<Setting, Long> {
 
-	public SettingRepository(EntityManager em) {
-		super(Setting.class, em);
-	}
-
+    public SettingRepository(EntityManager em) {
+        super(Setting.class, em);
+    }
 }

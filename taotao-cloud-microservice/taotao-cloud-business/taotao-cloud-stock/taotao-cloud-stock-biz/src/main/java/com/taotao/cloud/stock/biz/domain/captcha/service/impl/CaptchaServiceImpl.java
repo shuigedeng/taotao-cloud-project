@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.stock.biz.domain.captcha.service.impl;
 
 import com.taotao.cloud.stock.biz.domain.captcha.service.CaptchaService;
@@ -24,6 +25,4 @@ import com.taotao.cloud.stock.biz.domain.captcha.service.CaptchaService;
  * @version 2022.03
  * @since 2021/12/28 11:54
  */
-public class CaptchaServiceImpl implements CaptchaService {
-
-}
+public class CaptchaServiceImpl implements CaptchaService {}

@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.api.model.page;
 
 import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * 会员query
@@ -41,10 +41,9 @@ import java.io.Serializable;
 @Schema(name = "MemberPointHistoryPageQuery", description = "会员query")
 public class MemberPointHistoryPageQuery extends PageQuery implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
+    @Serial private static final long serialVersionUID = -7605952923416404638L;
 
-	private Long memberId;
+    private Long memberId;
 
-	private String memberName;
+    private String memberName;
 }

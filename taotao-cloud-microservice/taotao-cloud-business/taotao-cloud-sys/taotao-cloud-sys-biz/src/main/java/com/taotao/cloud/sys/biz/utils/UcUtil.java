@@ -1,4 +1,20 @@
-//package com.taotao.cloud.sys.biz.utils;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.sys.biz.utils;
 //
 // import cn.hutool.core.bean.BeanUtil;
 // import cn.hutool.core.util.StrUtil;
@@ -67,7 +83,8 @@
 //                     // 如果是获取类型不需要按钮，且菜单类型是按钮的，直接过滤掉
 //                     continue;
 //                 }
-//                 if (sysMenu.getMenuId() != null && sysMenu.getMenuId().equals(menu.getParentId())) {
+//                 if (sysMenu.getMenuId() != null &&
+// sysMenu.getMenuId().equals(menu.getParentId())) {
 //                     menuTreeVo.setParentName(sysMenu.getName());
 //                     menuTreeVo.setLevel(sysMenu.getLevel() + 1);
 //                     menuTreeVo.setTitle(menu.getName());
@@ -130,7 +147,8 @@
 //             for (SysDept dept : depts) {
 //                 SysDeptTreeVo sysDeptTreeVo = new SysDeptTreeVo();
 //                 BeanUtil.copyProperties(dept, sysDeptTreeVo);
-//                 if (sysDept.getDeptId() != null && sysDept.getDeptId().equals(dept.getParentId())) {
+//                 if (sysDept.getDeptId() != null &&
+// sysDept.getDeptId().equals(dept.getParentId())) {
 //                     sysDeptTreeVo.setParentName(sysDept.getName());
 //                     sysDeptTreeVo.setLevel(sysDept.getLevel() + 1);
 //
@@ -178,7 +196,8 @@
 //      * @author shuigedeng
 //      * @since 2020/4/30 11:07
 //      */
-//     public void getPermissionJsonArray(JSONArray jsonArray, List<SysMenu> metaList, JSONObject parentJson) {
+//     public void getPermissionJsonArray(JSONArray jsonArray, List<SysMenu> metaList, JSONObject
+// parentJson) {
 //         for (SysMenu permission : metaList) {
 //             if (permission.getType() == null) {
 //                 continue;
@@ -191,7 +210,8 @@
 //             if (parentJson == null && tempPid.equals(0)) {
 //                 jsonArray.add(json);
 //                 getPermissionJsonArray(jsonArray, metaList, json);
-//             } else if (parentJson != null && tempPid != 0 && tempPid.equals(Integer.parseInt(parentJson.getString("id")))) {
+//             } else if (parentJson != null && tempPid != 0 &&
+// tempPid.equals(Integer.parseInt(parentJson.getString("id")))) {
 //                 // 类型( 0：一级菜单 1：子菜单 2：按钮 )
 //                 if (permission.getType().equals(1) || permission.getType().equals(0)) {
 //                     if (parentJson.containsKey("children")) {
@@ -238,7 +258,8 @@
 //
 //             if (permission.getParentId().equals(0)) {
 //                 //一级目录需要加斜杠，不然访问 会跳转404页面
-//                 json.put("component", StrUtil.isEmpty(permission.getComponent()) ? "Layout" : permission.getComponent());
+//                 json.put("component", StrUtil.isEmpty(permission.getComponent()) ? "Layout" :
+// permission.getComponent());
 //             } else if (!StrUtil.isEmpty(permission.getComponent())) {
 //                 json.put("component", permission.getComponent());
 //             }
@@ -281,7 +302,8 @@
 //      * @since 2020/4/30 11:07
 //      */
 //     private boolean isUrl(String url) {
-//         return url != null && (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("{{"));
+//         return url != null && (url.startsWith("http://") || url.startsWith("https://") ||
+// url.startsWith("{{"));
 //     }
 //
 //     /**

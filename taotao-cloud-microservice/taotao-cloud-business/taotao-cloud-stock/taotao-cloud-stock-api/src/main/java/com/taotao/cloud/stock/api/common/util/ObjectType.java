@@ -17,7 +17,6 @@
 package com.taotao.cloud.stock.api.common.util;
 
 public enum ObjectType {
-
     UNKNOWN(1000),
 
     APPLICATION(1101),

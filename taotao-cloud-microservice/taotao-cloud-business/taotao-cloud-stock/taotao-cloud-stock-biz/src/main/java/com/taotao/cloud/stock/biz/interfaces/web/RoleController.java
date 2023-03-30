@@ -1,14 +1,29 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.biz.interfaces.web;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 角色Controller
@@ -21,15 +36,11 @@ import java.util.Map;
 @RequestMapping("/role")
 public class RoleController {
 
-    @Autowired
-    private RoleQueryService roleQueryService;
+    @Autowired private RoleQueryService roleQueryService;
 
-    @Autowired
-    private RoleApplicationService roleApplicationService;
+    @Autowired private RoleApplicationService roleApplicationService;
 
-    /**
-     * 角色分页查询
-     */
+    /** 角色分页查询 */
     @ApiOperation("角色分页查询")
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('sys:role:list')")
@@ -38,9 +49,7 @@ public class RoleController {
         return Result.ok().put(PageConstant.PAGE, page);
     }
 
-    /**
-     * 角色列表
-     */
+    /** 角色列表 */
     @ApiOperation("角色列表")
     @GetMapping("/select")
     @PreAuthorize("hasAuthority('sys:role:select')")
@@ -49,9 +58,7 @@ public class RoleController {
         return Result.ok().put("list", list);
     }
 
-    /**
-     * 角色信息
-     */
+    /** 角色信息 */
     @ApiOperation("角色信息")
     @GetMapping("/info/{id}")
     @PreAuthorize("hasAuthority('sys:role:info')")
@@ -60,9 +67,7 @@ public class RoleController {
         return Result.ok().put("role", role);
     }
 
-    /**
-     * 保存角色
-     */
+    /** 保存角色 */
     @ApiOperation("保存角色")
     @SysLog("保存角色")
     @PostMapping("/save")
@@ -73,9 +78,7 @@ public class RoleController {
         return Result.ok();
     }
 
-    /**
-     * 修改角色
-     */
+    /** 修改角色 */
     @ApiOperation("修改角色")
     @SysLog("修改角色")
     @PostMapping("/update")
@@ -86,9 +89,7 @@ public class RoleController {
         return Result.ok();
     }
 
-    /**
-     * 删除角色
-     */
+    /** 删除角色 */
     @ApiOperation("删除角色")
     @SysLog("删除角色")
     @PostMapping("/delete")
@@ -98,9 +99,7 @@ public class RoleController {
         return Result.ok();
     }
 
-    /**
-     * 禁用角色
-     */
+    /** 禁用角色 */
     @ApiOperation("禁用角色")
     @SysLog("禁用角色")
     @PostMapping("/disable/{id}")

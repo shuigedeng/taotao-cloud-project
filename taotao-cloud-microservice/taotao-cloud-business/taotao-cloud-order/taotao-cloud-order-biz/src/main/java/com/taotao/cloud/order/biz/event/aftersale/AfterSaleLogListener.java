@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.event.aftersale;
 
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
@@ -32,13 +33,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AfterSaleLogListener {
 
-	@Autowired
-	private IAfterSaleLogService afterSaleLogService;
+    @Autowired private IAfterSaleLogService afterSaleLogService;
 
-	@Async
-	@EventListener(AfterSaleLogEvent.class)
-	public void saveAfterSaleLog(AfterSaleLogEvent event) {
-		AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
-		afterSaleLogService.save(afterSaleLog);
-	}
+    @Async
+    @EventListener(AfterSaleLogEvent.class)
+    public void saveAfterSaleLog(AfterSaleLogEvent event) {
+        AfterSaleLog afterSaleLog = (AfterSaleLog) event.getSource();
+        afterSaleLogService.save(afterSaleLog);
+    }
 }

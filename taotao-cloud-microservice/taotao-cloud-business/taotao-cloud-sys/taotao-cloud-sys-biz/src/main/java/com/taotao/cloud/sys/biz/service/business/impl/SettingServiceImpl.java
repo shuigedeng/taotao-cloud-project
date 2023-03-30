@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.taotao.cloud.sys.biz.mapper.ISettingMapper;
@@ -35,20 +36,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @CacheConfig(cacheNames = "{setting}")
-public class SettingServiceImpl extends
-	BaseSuperServiceImpl<ISettingMapper, Setting, SettingRepository, ISettingRepository, Long>
-	implements ISettingService {
+public class SettingServiceImpl
+        extends BaseSuperServiceImpl<
+                ISettingMapper, Setting, SettingRepository, ISettingRepository, Long>
+        implements ISettingService {
 
-	@Override
-	@Cacheable(key = "#key")
-	public Setting get(String key) {
-		return this.getById(key);
-	}
+    @Override
+    @Cacheable(key = "#key")
+    public Setting get(String key) {
+        return this.getById(key);
+    }
 
-	@Override
-	@CacheEvict(key = "#setting.id")
-	public boolean saveUpdate(Setting setting) {
-		return this.saveOrUpdate(setting);
-	}
-
+    @Override
+    @CacheEvict(key = "#setting.id")
+    public boolean saveUpdate(Setting setting) {
+        return this.saveOrUpdate(setting);
+    }
 }

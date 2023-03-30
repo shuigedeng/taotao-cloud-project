@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.model.convert;
 
 import com.taotao.cloud.goods.api.model.dto.StoreGoodsLabelDTO;
@@ -30,31 +31,28 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-27 16:58:16
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface GoodsLabelStoreConvert {
 
-	/**
-	 * 实例
-	 */
-	GoodsLabelStoreConvert INSTANCE = Mappers.getMapper(GoodsLabelStoreConvert.class);
+    /** 实例 */
+    GoodsLabelStoreConvert INSTANCE = Mappers.getMapper(GoodsLabelStoreConvert.class);
 
-	/**
-	 * 商店商品标签存储货物标签信息签证官
-	 *
-	 * @param storeGoodsLabel 商店商品标签
-	 * @return {@link StoreGoodsLabelInfoVO }
-	 * @since 2022-04-27 16:58:17
-	 */
-	StoreGoodsLabelInfoVO convert(StoreGoodsLabel storeGoodsLabel);
+    /**
+     * 商店商品标签存储货物标签信息签证官
+     *
+     * @param storeGoodsLabel 商店商品标签
+     * @return {@link StoreGoodsLabelInfoVO }
+     * @since 2022-04-27 16:58:17
+     */
+    StoreGoodsLabelInfoVO convert(StoreGoodsLabel storeGoodsLabel);
 
-	/**
-	 * 商店商品标签dtoto商店商品标签
-	 *
-	 * @param storeGoodsLabelDTO 商店商品标签dto
-	 * @return {@link StoreGoodsLabel }
-	 * @since 2022-04-27 16:58:17
-	 */
-	StoreGoodsLabel convert(StoreGoodsLabelDTO storeGoodsLabelDTO);
-
+    /**
+     * 商店商品标签dtoto商店商品标签
+     *
+     * @param storeGoodsLabelDTO 商店商品标签dto
+     * @return {@link StoreGoodsLabel }
+     * @since 2022-04-27 16:58:17
+     */
+    StoreGoodsLabel convert(StoreGoodsLabelDTO storeGoodsLabelDTO);
 }

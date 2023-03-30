@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -36,50 +52,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/goods/manager/category/parameters")
 public class CategoryParameterGroupManagerController {
 
-	/**
-	 * 商品参数组服务
-	 */
-	private final IParametersService parametersService;
-	/**
-	 * 分类绑定参数组服务
-	 */
-	private final ICategoryParameterGroupService categoryParameterGroupService;
+    /** 商品参数组服务 */
+    private final IParametersService parametersService;
+    /** 分类绑定参数组服务 */
+    private final ICategoryParameterGroupService categoryParameterGroupService;
 
-	@Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/{categoryId}")
-	public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable Long categoryId) {
-		return Result.success(categoryParameterGroupService.getCategoryParams(categoryId));
-	}
+    @Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping(value = "/{categoryId}")
+    public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable Long categoryId) {
+        return Result.success(categoryParameterGroupService.getCategoryParams(categoryId));
+    }
 
-	@Operation(summary = "保存数据", description = "保存数据")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping
-	public Result<Boolean> saveOrUpdate(
-		@Validated CategoryParameterGroup categoryParameterGroup) {
-		return Result.success(categoryParameterGroupService.save(categoryParameterGroup));
-	}
+    @Operation(summary = "保存数据", description = "保存数据")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PostMapping
+    public Result<Boolean> saveOrUpdate(@Validated CategoryParameterGroup categoryParameterGroup) {
+        return Result.success(categoryParameterGroupService.save(categoryParameterGroup));
+    }
 
-	@Operation(summary = "更新数据", description = "更新数据")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PutMapping
-	public Result<Boolean> update(
-		@Validated CategoryParameterGroup categoryParameterGroup) {
-		return Result.success(categoryParameterGroupService.updateById(categoryParameterGroup));
-	}
+    @Operation(summary = "更新数据", description = "更新数据")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PutMapping
+    public Result<Boolean> update(@Validated CategoryParameterGroup categoryParameterGroup) {
+        return Result.success(categoryParameterGroupService.updateById(categoryParameterGroup));
+    }
 
-	@Operation(summary = "通过id删除参数组", description = "通过id删除参数组")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@DeleteMapping(value = "/{id}")
-	public Result<Boolean> delAllByIds(@PathVariable Long id) {
-		//删除参数
-		parametersService.remove(new QueryWrapper<Parameters>().eq("group_id", id));
-		//删除参数组
-		return Result.success(categoryParameterGroupService.removeById(id));
-	}
-
+    @Operation(summary = "通过id删除参数组", description = "通过id删除参数组")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @DeleteMapping(value = "/{id}")
+    public Result<Boolean> delAllByIds(@PathVariable Long id) {
+        // 删除参数
+        parametersService.remove(new QueryWrapper<Parameters>().eq("group_id", id));
+        // 删除参数组
+        return Result.success(categoryParameterGroupService.removeById(id));
+    }
 }

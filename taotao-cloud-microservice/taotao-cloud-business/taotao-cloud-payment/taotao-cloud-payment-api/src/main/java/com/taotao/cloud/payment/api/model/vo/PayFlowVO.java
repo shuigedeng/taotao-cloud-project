@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.payment.api.model.vo;
 
+package com.taotao.cloud.payment.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
@@ -39,36 +39,35 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "支付流水信息VO")
 public class PayFlowVO implements Serializable {
-	@Serial
-	private static final long serialVersionUID = 5126530068827085130L;
+    @Serial private static final long serialVersionUID = 5126530068827085130L;
 
-	@Schema(description = "id")
-	private Long id;
+    @Schema(description = "id")
+    private Long id;
 
-	@Schema(description = "支付流水号")
-	private String code;
+    @Schema(description = "支付流水号")
+    private String code;
 
-	@Schema(description = "订单号")
-	private String orderCode;
+    @Schema(description = "订单号")
+    private String orderCode;
 
-	@Schema(description = "商品id")
-	private Long productId;
+    @Schema(description = "商品id")
+    private Long productId;
 
-	@Schema(description = "支付金额")
-	private BigDecimal paidAmount;
+    @Schema(description = "支付金额")
+    private BigDecimal paidAmount;
 
-	@Schema(description = "支付方式")
-	private Integer paidMethod;
+    @Schema(description = "支付方式")
+    private Integer paidMethod;
 
-	@Schema(description = "购买个数")
-	private Integer buyCount;
+    @Schema(description = "购买个数")
+    private Integer buyCount;
 
-	@Schema(description = "支付时间")
-	private LocalDateTime payTime;
+    @Schema(description = "支付时间")
+    private LocalDateTime payTime;
 
-	@Schema(description = "创建时间")
-	private LocalDateTime createTime;
+    @Schema(description = "创建时间")
+    private LocalDateTime createTime;
 
-	@Schema(description = "最后修改时间")
-	private LocalDateTime lastModifiedTime;
+    @Schema(description = "最后修改时间")
+    private LocalDateTime lastModifiedTime;
 }

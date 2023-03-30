@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.event.member;
 
 import org.springframework.context.ApplicationEvent;
@@ -26,11 +27,11 @@ import org.springframework.context.ApplicationEvent;
  */
 public class MemberCreateEvent extends ApplicationEvent {
 
-	public MemberCreateEvent(Object source) {
-		super(source);
-	}
+    public MemberCreateEvent(Object source) {
+        super(source);
+    }
 
-	//public MemberCreateEvent(AfterSaleLog afterSaleLog) {
-	//	super(afterSaleLog);
-	//}
+    // public MemberCreateEvent(AfterSaleLog afterSaleLog) {
+    //	super(afterSaleLog);
+    // }
 }

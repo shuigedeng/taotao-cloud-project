@@ -1,5 +1,20 @@
-package com.taotao.cloud.workflow.biz.common.util;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.workflow.biz.common.util;
 
 import static java.util.stream.Collectors.toList;
 
@@ -9,12 +24,8 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * 字符串工具类
- *
- */
-public class StringUtil extends StringUtils
-{
+/** 字符串工具类 */
+public class StringUtil extends StringUtils {
     /** 空字符串 */
     private static final String NULLSTR = "";
 
@@ -30,8 +41,7 @@ public class StringUtil extends StringUtils
      * @param value defaultValue 要判断的value
      * @return value 返回值
      */
-    public static <T> T nvl(T value, T defaultValue)
-    {
+    public static <T> T nvl(T value, T defaultValue) {
         return value != null ? value : defaultValue;
     }
 
@@ -41,8 +51,7 @@ public class StringUtil extends StringUtils
      * @param coll 要判断的Collection
      * @return true：为空 false：非空
      */
-    public static boolean isEmpty(Collection<?> coll)
-    {
+    public static boolean isEmpty(Collection<?> coll) {
         return isNull(coll) || coll.isEmpty();
     }
 
@@ -52,19 +61,16 @@ public class StringUtil extends StringUtils
      * @param coll 要判断的Collection
      * @return true：非空 false：空
      */
-    public static boolean isNotEmpty(Collection<?> coll)
-    {
+    public static boolean isNotEmpty(Collection<?> coll) {
         return !isEmpty(coll);
     }
 
     /**
      * * 判断一个对象数组是否为空
      *
-     * @param objects 要判断的对象数组
-     ** @return true：为空 false：非空
+     * @param objects 要判断的对象数组 * @return true：为空 false：非空
      */
-    public static boolean isEmpty(Object[] objects)
-    {
+    public static boolean isEmpty(Object[] objects) {
         return isNull(objects) || (objects.length == 0);
     }
 
@@ -74,8 +80,7 @@ public class StringUtil extends StringUtils
      * @param objects 要判断的对象数组
      * @return true：非空 false：空
      */
-    public static boolean isNotEmpty(Object[] objects)
-    {
+    public static boolean isNotEmpty(Object[] objects) {
         return !isEmpty(objects);
     }
 
@@ -85,8 +90,7 @@ public class StringUtil extends StringUtils
      * @param map 要判断的Map
      * @return true：为空 false：非空
      */
-    public static boolean isEmpty(Map<?, ?> map)
-    {
+    public static boolean isEmpty(Map<?, ?> map) {
         return isNull(map) || map.isEmpty();
     }
 
@@ -96,8 +100,7 @@ public class StringUtil extends StringUtils
      * @param map 要判断的Map
      * @return true：非空 false：空
      */
-    public static boolean isNotEmpty(Map<?, ?> map)
-    {
+    public static boolean isNotEmpty(Map<?, ?> map) {
         return !isEmpty(map);
     }
 
@@ -107,8 +110,7 @@ public class StringUtil extends StringUtils
      * @param str String
      * @return true：为空 false：非空
      */
-    public static boolean isEmpty(String str)
-    {
+    public static boolean isEmpty(String str) {
         return isNull(str) || NULLSTR.equals(str.trim());
     }
 
@@ -118,8 +120,7 @@ public class StringUtil extends StringUtils
      * @param str String
      * @return true：非空串 false：空串
      */
-    public static boolean isNotEmpty(String str)
-    {
+    public static boolean isNotEmpty(String str) {
         return !isEmpty(str);
     }
 
@@ -129,8 +130,7 @@ public class StringUtil extends StringUtils
      * @param object Object
      * @return true：为空 false：非空
      */
-    public static boolean isNull(Object object)
-    {
+    public static boolean isNull(Object object) {
         return object == null;
     }
 
@@ -140,8 +140,7 @@ public class StringUtil extends StringUtils
      * @param object Object
      * @return true：非空 false：空
      */
-    public static boolean isNotNull(Object object)
-    {
+    public static boolean isNotNull(Object object) {
         return !isNull(object);
     }
 
@@ -151,16 +150,12 @@ public class StringUtil extends StringUtils
      * @param object 对象
      * @return true：是数组 false：不是数组
      */
-    public static boolean isArray(Object object)
-    {
+    public static boolean isArray(Object object) {
         return isNotNull(object) && object.getClass().isArray();
     }
 
-    /**
-     * 去空格
-     */
-    public static String trim(String str)
-    {
+    /** 去空格 */
+    public static String trim(String str) {
         return (str == null ? "" : str.trim());
     }
 
@@ -171,24 +166,19 @@ public class StringUtil extends StringUtils
      * @param start 开始
      * @return 结果
      */
-    public static String substring(final String str, int start)
-    {
-        if (str == null)
-        {
+    public static String substring(final String str, int start) {
+        if (str == null) {
             return NULLSTR;
         }
 
-        if (start < 0)
-        {
+        if (start < 0) {
             start = str.length() + start;
         }
 
-        if (start < 0)
-        {
+        if (start < 0) {
             start = 0;
         }
-        if (start > str.length())
-        {
+        if (start > str.length()) {
             return NULLSTR;
         }
 
@@ -203,38 +193,30 @@ public class StringUtil extends StringUtils
      * @param end 结束
      * @return 结果
      */
-    public static String substring(final String str, int start, int end)
-    {
-        if (str == null)
-        {
+    public static String substring(final String str, int start, int end) {
+        if (str == null) {
             return NULLSTR;
         }
 
-        if (end < 0)
-        {
+        if (end < 0) {
             end = str.length() + end;
         }
-        if (start < 0)
-        {
+        if (start < 0) {
             start = str.length() + start;
         }
 
-        if (end > str.length())
-        {
+        if (end > str.length()) {
             end = str.length();
         }
 
-        if (start > end)
-        {
+        if (start > end) {
             return NULLSTR;
         }
 
-        if (start < 0)
-        {
+        if (start < 0) {
             start = 0;
         }
-        if (end < 0)
-        {
+        if (end < 0) {
             end = 0;
         }
 
@@ -254,22 +236,16 @@ public class StringUtil extends StringUtils
      * @param params 参数值
      * @return 格式化后的文本
      */
-    public static String format(String template, Object... params)
-    {
-        if (isEmpty(params) || isEmpty(template))
-        {
+    public static String format(String template, Object... params) {
+        if (isEmpty(params) || isEmpty(template)) {
             return template;
         }
         return StrFormatter.format(template, params);
     }
 
-    /**
-     * 下划线转驼峰命名
-     */
-    public static String toUnderScoreCase(String str)
-    {
-        if (str == null)
-        {
+    /** 下划线转驼峰命名 */
+    public static String toUnderScoreCase(String str) {
+        if (str == null) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
@@ -279,31 +255,23 @@ public class StringUtil extends StringUtils
         boolean curreCharIsUpperCase = true;
         // 下一字符是否大写
         boolean nexteCharIsUpperCase = true;
-        for (int i = 0; i < str.length(); i++)
-        {
+        for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
-            if (i > 0)
-            {
+            if (i > 0) {
                 preCharIsUpperCase = Character.isUpperCase(str.charAt(i - 1));
-            }
-            else
-            {
+            } else {
                 preCharIsUpperCase = false;
             }
 
             curreCharIsUpperCase = Character.isUpperCase(c);
 
-            if (i < (str.length() - 1))
-            {
+            if (i < (str.length() - 1)) {
                 nexteCharIsUpperCase = Character.isUpperCase(str.charAt(i + 1));
             }
 
-            if (preCharIsUpperCase && curreCharIsUpperCase && !nexteCharIsUpperCase)
-            {
+            if (preCharIsUpperCase && curreCharIsUpperCase && !nexteCharIsUpperCase) {
                 sb.append(SEPARATOR);
-            }
-            else if ((i != 0 && !preCharIsUpperCase) && curreCharIsUpperCase)
-            {
+            } else if ((i != 0 && !preCharIsUpperCase) && curreCharIsUpperCase) {
                 sb.append(SEPARATOR);
             }
             sb.append(Character.toLowerCase(c));
@@ -319,14 +287,10 @@ public class StringUtil extends StringUtils
      * @param strs 字符串组
      * @return 包含返回true
      */
-    public static boolean inStringIgnoreCase(String str, String... strs)
-    {
-        if (str != null && strs != null)
-        {
-            for (String s : strs)
-            {
-                if (str.equalsIgnoreCase(trim(s)))
-                {
+    public static boolean inStringIgnoreCase(String str, String... strs) {
+        if (str != null && strs != null) {
+            for (String s : strs) {
+                if (str.equalsIgnoreCase(trim(s))) {
                     return true;
                 }
             }
@@ -340,27 +304,21 @@ public class StringUtil extends StringUtils
      * @param name 转换前的下划线大写方式命名的字符串
      * @return 转换后的驼峰式命名的字符串
      */
-    public static String convertToCamelCase(String name)
-    {
+    public static String convertToCamelCase(String name) {
         StringBuilder result = new StringBuilder();
         // 快速检查
-        if (name == null || name.isEmpty())
-        {
+        if (name == null || name.isEmpty()) {
             // 没必要转换
             return "";
-        }
-        else if (!name.contains("_"))
-        {
+        } else if (!name.contains("_")) {
             // 不含下划线，仅将首字母大写
             return name.substring(0, 1).toUpperCase() + name.substring(1);
         }
         // 用下划线将原始字符串分割
         String[] camels = name.split("_");
-        for (String camel : camels)
-        {
+        for (String camel : camels) {
             // 跳过原始字符串中开头、结尾的下换线或双重下划线
-            if (camel.isEmpty())
-            {
+            if (camel.isEmpty()) {
                 continue;
             }
             // 首字母大写
@@ -370,33 +328,23 @@ public class StringUtil extends StringUtils
         return result.toString();
     }
 
-    /**
-     * 驼峰式命名法 例如：user_name->userName
-     */
-    public static String toCamelCase(String s)
-    {
-        if (s == null)
-        {
+    /** 驼峰式命名法 例如：user_name->userName */
+    public static String toCamelCase(String s) {
+        if (s == null) {
             return null;
         }
         s = s.toLowerCase();
         StringBuilder sb = new StringBuilder(s.length());
         boolean upperCase = false;
-        for (int i = 0; i < s.length(); i++)
-        {
+        for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
 
-            if (c == SEPARATOR)
-            {
+            if (c == SEPARATOR) {
                 upperCase = true;
-            }
-            else if (upperCase)
-            {
+            } else if (upperCase) {
                 sb.append(Character.toUpperCase(c));
                 upperCase = false;
-            }
-            else
-            {
+            } else {
                 sb.append(c);
             }
         }
@@ -410,16 +358,12 @@ public class StringUtil extends StringUtils
      * @param strs 需要检查的字符串数组
      * @return 是否匹配
      */
-    public static boolean matches(String str, List<String> strs)
-    {
-        if (isEmpty(str) || isEmpty(strs))
-        {
+    public static boolean matches(String str, List<String> strs) {
+        if (isEmpty(str) || isEmpty(strs)) {
             return false;
         }
-        for (String testStr : strs)
-        {
-            if (matches(str, testStr))
-            {
+        for (String testStr : strs) {
+            if (matches(str, testStr)) {
                 return true;
             }
         }
@@ -433,16 +377,12 @@ public class StringUtil extends StringUtils
      * @param strs 需要检查的字符串数组
      * @return 是否匹配
      */
-    public static boolean matches(String str, String... strs)
-    {
-        if (isEmpty(str) || isEmpty(strs))
-        {
+    public static boolean matches(String str, String... strs) {
+        if (isEmpty(str) || isEmpty(strs)) {
             return false;
         }
-        for (String testStr : strs)
-        {
-            if (matches(str, testStr))
-            {
+        for (String testStr : strs) {
+            if (matches(str, testStr)) {
                 return true;
             }
         }
@@ -456,10 +396,8 @@ public class StringUtil extends StringUtils
      * @param pattern 需要检查的字符串
      * @return 是否匹配
      */
-    public static boolean matches(String str, String pattern)
-    {
-        if (isEmpty(pattern) || isEmpty(str))
-        {
+    public static boolean matches(String str, String pattern) {
+        if (isEmpty(pattern) || isEmpty(str)) {
             return false;
         }
 
@@ -477,16 +415,18 @@ public class StringUtil extends StringUtils
         String suffixPattern = "";
 
         boolean result = false;
-        do
-        {
+        do {
             formerStarOffset = indexOf(pattern, START, beginOffset);
-            prefixPattern = substring(pattern, beginOffset, formerStarOffset > -1 ? formerStarOffset : pattern.length());
+            prefixPattern =
+                    substring(
+                            pattern,
+                            beginOffset,
+                            formerStarOffset > -1 ? formerStarOffset : pattern.length());
 
             // 匹配前缀Pattern
             result = remainingUri.contains(prefixPattern);
             // 已经没有星号，直接返回
-            if (formerStarOffset == -1)
-            {
+            if (formerStarOffset == -1) {
                 return result;
             }
 
@@ -495,14 +435,17 @@ public class StringUtil extends StringUtils
                 return false;
             }
 
-            if (!isEmpty(prefixPattern))
-            {
+            if (!isEmpty(prefixPattern)) {
                 remainingUri = substringAfter(str, prefixPattern);
             }
 
             // 匹配后缀Pattern
             latterStarOffset = indexOf(pattern, START, formerStarOffset + 1);
-            suffixPattern = substring(pattern, formerStarOffset + 1, latterStarOffset > -1 ? latterStarOffset : pattern.length());
+            suffixPattern =
+                    substring(
+                            pattern,
+                            formerStarOffset + 1,
+                            latterStarOffset > -1 ? latterStarOffset : pattern.length());
 
             result = remainingUri.contains(suffixPattern);
             // 匹配失败，直接返回
@@ -510,35 +453,34 @@ public class StringUtil extends StringUtils
                 return false;
             }
 
-            if (!isEmpty(suffixPattern))
-            {
+            if (!isEmpty(suffixPattern)) {
                 remainingUri = substringAfter(str, suffixPattern);
             }
 
             // 移动指针
             beginOffset = latterStarOffset + 1;
 
-        }
-        while (!isEmpty(suffixPattern) && !isEmpty(remainingUri));
+        } while (!isEmpty(suffixPattern) && !isEmpty(remainingUri));
 
         return true;
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T cast(Object obj)
-    {
+    public static <T> T cast(Object obj) {
         return (T) obj;
     }
 
     /**
      * 取交集，分别删除交集，将剩余的值添加进新的list
+     *
      * @param list1
      * @param list2
      * @return
      */
-    public static List<String> removeRepeatFactor(List<String> list1 , List<String> list2){
-        List<String> intersection = list1.stream().filter(item -> list2.contains(item)).collect(toList());
-        List<String> listAllDistinct=new ArrayList<>();
+    public static List<String> removeRepeatFactor(List<String> list1, List<String> list2) {
+        List<String> intersection =
+                list1.stream().filter(item -> list2.contains(item)).collect(toList());
+        List<String> listAllDistinct = new ArrayList<>();
         list1.removeAll(intersection);
         list2.removeAll(intersection);
         listAllDistinct.addAll(list1);

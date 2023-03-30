@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.repository.inf;
 
 import com.taotao.cloud.goods.biz.model.entity.Goods;
@@ -25,6 +26,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IGoodsRepository extends JpaRepository<Goods, Long> {
-
-}
+public interface IGoodsRepository extends JpaRepository<Goods, Long> {}

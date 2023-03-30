@@ -1,7 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.pppay;
 
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSONObject;
 import com.paypal.core.PayPalHttpClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.exceptions.HttpException;
@@ -38,8 +53,12 @@ public class PppayRefundService extends AbstractRefundService {
     }
 
     @Override
-    public ChannelRetMsg refund(RefundOrderRQ bizRQ, RefundOrder refundOrder, PayOrder payOrder,
-                                MchAppConfigContext mchAppConfigContext) throws Exception {
+    public ChannelRetMsg refund(
+            RefundOrderRQ bizRQ,
+            RefundOrder refundOrder,
+            PayOrder payOrder,
+            MchAppConfigContext mchAppConfigContext)
+            throws Exception {
         if (payOrder.getChannelOrderNo() == null) {
             return ChannelRetMsg.confirmFail();
         }
@@ -76,9 +95,9 @@ public class PppayRefundService extends AbstractRefundService {
         ChannelRetMsg channelRetMsg = ChannelRetMsg.waiting();
         channelRetMsg.setResponseEntity(paypalWrapper.textResp("ERROR"));
         HttpResponse<Refund> response;
-        try{
+        try {
             response = client.execute(request);
-        }catch (HttpException e) {
+        } catch (HttpException e) {
             String message = e.getMessage();
             cn.hutool.json.JSONObject messageObj = JSONUtil.parseObj(message);
             String issue = messageObj.getByPath("details[0].issue", String.class);
@@ -100,7 +119,8 @@ public class PppayRefundService extends AbstractRefundService {
     }
 
     @Override
-    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
+    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext)
+            throws Exception {
         if (refundOrder.getChannelOrderNo() == null) {
             return ChannelRetMsg.confirmFail();
         }

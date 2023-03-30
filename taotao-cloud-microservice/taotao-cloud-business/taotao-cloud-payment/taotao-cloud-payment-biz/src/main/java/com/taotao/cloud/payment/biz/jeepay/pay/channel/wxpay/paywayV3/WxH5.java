@@ -1,18 +1,19 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.wxpay.paywayV3;
 
 import cn.hutool.core.codec.Base64;
@@ -42,7 +43,7 @@ import org.springframework.stereotype.Service;
  * @site https://www.jeequan.com
  * @date 2021/6/8 18:08
  */
-@Service("wxpayPaymentByH5V3Service") //Service Name需保持全局唯一性
+@Service("wxpayPaymentByH5V3Service") // Service Name需保持全局唯一性
 public class WxH5 extends WxpayPaymentService {
 
     @Override
@@ -51,11 +52,13 @@ public class WxH5 extends WxpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(
+            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         WxH5OrderRQ bizRQ = (WxH5OrderRQ) rq;
 
-        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper =
+                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
         WxPayService wxPayService = wxServiceWrapper.getWxPayService();
         wxPayService.getConfig().setTradeType(WxPayConstants.TradeType.MWEB);
 
@@ -70,10 +73,10 @@ public class WxH5 extends WxpayPaymentService {
 
         reqJSON.put("scene_info", sceneInfo);
 
-        String reqUrl;  // 请求地址
-        if(mchAppConfigContext.isIsvsubMch()){ // 特约商户
+        String reqUrl; // 请求地址
+        if (mchAppConfigContext.isIsvsubMch()) { // 特约商户
             reqUrl = WxpayV3Util.ISV_URL_MAP.get(WxPayConstants.TradeType.MWEB);
-        }else {
+        } else {
             reqUrl = WxpayV3Util.NORMALMCH_URL_MAP.get(WxPayConstants.TradeType.MWEB);
         }
 
@@ -89,10 +92,13 @@ public class WxH5 extends WxpayPaymentService {
             JSONObject resJSON = WxpayV3Util.unifiedOrderV3(reqUrl, reqJSON, wxPayService);
 
             String payUrl = resJSON.getString("h5_url");
-            payUrl = sysConfigService.getDBApplicationConfig().getPaySiteUrl() + "/api/common/payUrl/" + Base64.encode(payUrl);
-            if (CS.PAY_DATA_TYPE.CODE_IMG_URL.equals(bizRQ.getPayDataType())){ //二维码图片地址
+            payUrl =
+                    sysConfigService.getDBApplicationConfig().getPaySiteUrl()
+                            + "/api/common/payUrl/"
+                            + Base64.encode(payUrl);
+            if (CS.PAY_DATA_TYPE.CODE_IMG_URL.equals(bizRQ.getPayDataType())) { // 二维码图片地址
                 res.setCodeImgUrl(sysConfigService.getDBApplicationConfig().genScanImgUrl(payUrl));
-            }else{ // 默认都为 payUrl方式
+            } else { // 默认都为 payUrl方式
                 res.setPayUrl(payUrl);
             }
 
@@ -100,12 +106,11 @@ public class WxH5 extends WxpayPaymentService {
             channelRetMsg.setChannelState(ChannelRetMsg.ChannelState.WAITING);
 
         } catch (WxPayException e) {
-            //明确失败
+            // 明确失败
             channelRetMsg.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_FAIL);
             WxpayKit.commonSetErrInfo(channelRetMsg, e);
         }
 
         return res;
     }
-
 }

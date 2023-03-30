@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.model.page;
 
+package com.taotao.cloud.sys.api.model.page;
 
 import com.taotao.cloud.common.model.PageQuery;
 import java.util.List;
@@ -38,10 +38,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegionPageQuery extends PageQuery {
 
-	/**
-	 * 收件人，支持多个收件人
-	 */
-	private List<String> tos;
-	private String subject;
-	private String content;
+    /** 收件人，支持多个收件人 */
+    private List<String> tos;
+
+    private String subject;
+    private String content;
 }

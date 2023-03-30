@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.model.convert;
 
 import com.taotao.cloud.member.api.model.vo.MemberGradeVO;
@@ -29,16 +30,12 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-28 13:39:18
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MemberGradeConvert {
 
-	/**
-	 * 实例
-	 */
-	MemberGradeConvert INSTANCE = Mappers.getMapper(MemberGradeConvert.class);
+    /** 实例 */
+    MemberGradeConvert INSTANCE = Mappers.getMapper(MemberGradeConvert.class);
 
-
-	MemberGradeVO convert(MemberGrade memberGrade);
-
+    MemberGradeVO convert(MemberGrade memberGrade);
 }

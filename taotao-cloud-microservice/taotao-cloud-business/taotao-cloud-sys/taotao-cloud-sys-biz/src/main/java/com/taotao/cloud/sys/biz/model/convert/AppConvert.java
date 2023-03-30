@@ -1,11 +1,11 @@
 /*
- * COPYRIGHT (C) 2022 Art AUTHORS(cloud@gmail.com). ALL RIGHTS RESERVED.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,21 +24,20 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 /**
- * @author 
+ * @author
  * @version 0.0.1
  * @date 2022/11/23 00:45
  */
 @Mapper
 public interface AppConvert {
 
-	AppConvert INSTANCE = Mappers.getMapper(AppConvert.class);
+    AppConvert INSTANCE = Mappers.getMapper(AppConvert.class);
 
-	Page<AppDTO> convertPage(Page<App> appDO);
+    Page<AppDTO> convertPage(Page<App> appDO);
 
-	List<AppDTO> convertList(List<App> app);
+    List<AppDTO> convertList(List<App> app);
 
-	AppDTO convert(App app);
+    AppDTO convert(App app);
 
-	App convert(AppDTO appDTO);
-
+    App convert(AppDTO appDTO);
 }

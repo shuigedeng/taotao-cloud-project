@@ -29,8 +29,8 @@ public class AsyncStoreLifecycleExecutor {
 
     private final StorePostService storePostService;
 
-    public AsyncStoreLifecycleExecutor(StoreLifecycle lifecycle,
-                                       StorePostService storePostService) {
+    public AsyncStoreLifecycleExecutor(
+            StoreLifecycle lifecycle, StorePostService storePostService) {
         this.lifecycle = lifecycle;
         this.storePostService = storePostService;
     }
@@ -38,36 +38,40 @@ public class AsyncStoreLifecycleExecutor {
     @Async
     @Transactional
     public void doInitialize(Store store) {
-        SubjectHolder.switchTo().systemUser()
-                .doRun(() -> {
-                    var progress = StoreProgressResources.getStoreProgress(store.toId());
-                    try {
-                        progress.initializing();
-                        this.lifecycle.doInitialize(store);
-                        this.storePostService.initializeStore(store);
-                        progress.initialized();
-                    } catch (Exception e) {
-                        progress.failed();
-                        throw e;
-                    }
-                });
+        SubjectHolder.switchTo()
+                .systemUser()
+                .doRun(
+                        () -> {
+                            var progress = StoreProgressResources.getStoreProgress(store.toId());
+                            try {
+                                progress.initializing();
+                                this.lifecycle.doInitialize(store);
+                                this.storePostService.initializeStore(store);
+                                progress.initialized();
+                            } catch (Exception e) {
+                                progress.failed();
+                                throw e;
+                            }
+                        });
     }
 
     @Async
     @Transactional
     public void doClose(Store store) {
-        SubjectHolder.switchTo().systemUser()
-                .doRun(() -> {
-                    var progress = StoreProgressResources.getStoreProgress(store.toId());
-                    try {
-                        progress.closing();
-                        this.lifecycle.doClose(store);
-                        this.storePostService.closeStore(store);
-                        progress.closed();
-                    } catch (Exception e) {
-                        progress.failed();
-                        throw e;
-                    }
-                });
+        SubjectHolder.switchTo()
+                .systemUser()
+                .doRun(
+                        () -> {
+                            var progress = StoreProgressResources.getStoreProgress(store.toId());
+                            try {
+                                progress.closing();
+                                this.lifecycle.doClose(store);
+                                this.storePostService.closeStore(store);
+                                progress.closed();
+                            } catch (Exception e) {
+                                progress.failed();
+                                throw e;
+                            }
+                        });
     }
 }

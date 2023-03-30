@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.stock.biz.domain.tenant.service.impl;
 
 import com.taotao.cloud.stock.biz.domain.tenant.service.TenantService;
@@ -26,6 +27,4 @@ import org.springframework.stereotype.Service;
  * @since 2021/12/28 11:51
  */
 @Service
-public class TenantServiceImpl implements TenantService {
-
-}
+public class TenantServiceImpl implements TenantService {}

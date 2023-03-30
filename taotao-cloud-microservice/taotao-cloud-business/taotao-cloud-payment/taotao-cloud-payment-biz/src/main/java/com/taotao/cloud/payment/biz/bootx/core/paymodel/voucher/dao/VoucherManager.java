@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.voucher.dao;
 
 import cn.bootx.common.core.rest.param.PageQuery;
@@ -8,71 +24,55 @@ import cn.bootx.payment.core.paymodel.voucher.entity.Voucher;
 import cn.bootx.payment.param.paymodel.voucher.VoucherParam;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
-/**   
-*
-* @author xxm  
-* @date 2022/3/14 
-*/
+/**
+ * @author xxm
+ * @date 2022/3/14
+ */
 @Slf4j
 @Repository
 @RequiredArgsConstructor
 public class VoucherManager extends BaseManager<VoucherMapper, Voucher> {
 
-    /**
-     * 分页
-     */
-    public Page<Voucher> page(PageQuery PageQuery, VoucherParam param){
+    /** 分页 */
+    public Page<Voucher> page(PageQuery PageQuery, VoucherParam param) {
         Page<Voucher> mpPage = MpUtil.getMpPage(PageQuery, Voucher.class);
         return this.lambdaQuery()
-                .ge(Objects.nonNull(param.getStartTime()),Voucher::getStartTime,param.getStartTime())
-                .le(Objects.nonNull(param.getEndTime()),Voucher::getEndTime,param.getEndTime())
-                .eq(Objects.nonNull(param.getEnduring()),Voucher::getEnduring,param.getEnduring())
-                .like(StrUtil.isNotBlank(param.getCardNo()),Voucher::getCardNo,param.getCardNo())
-                .like(Objects.nonNull(param.getBatchNo()),Voucher::getBatchNo,param.getBatchNo())
+                .ge(
+                        Objects.nonNull(param.getStartTime()),
+                        Voucher::getStartTime,
+                        param.getStartTime())
+                .le(Objects.nonNull(param.getEndTime()), Voucher::getEndTime, param.getEndTime())
+                .eq(Objects.nonNull(param.getEnduring()), Voucher::getEnduring, param.getEnduring())
+                .like(StrUtil.isNotBlank(param.getCardNo()), Voucher::getCardNo, param.getCardNo())
+                .like(Objects.nonNull(param.getBatchNo()), Voucher::getBatchNo, param.getBatchNo())
                 .orderByDesc(MpBaseEntity::getId)
                 .page(mpPage);
     }
 
-    /**
-     * 根据卡号查询
-     */
-    public Optional<Voucher> findByCardNo(String cardNo){
-        return this.findByField(Voucher::getCardNo,cardNo);
+    /** 根据卡号查询 */
+    public Optional<Voucher> findByCardNo(String cardNo) {
+        return this.findByField(Voucher::getCardNo, cardNo);
     }
 
-    /**
-     * 根据卡号查询
-     */
-    public List<Voucher> findByCardNoList(List<String> cardNos){
-        return this.findAllByFields(Voucher::getCardNo,cardNos);
+    /** 根据卡号查询 */
+    public List<Voucher> findByCardNoList(List<String> cardNos) {
+        return this.findAllByFields(Voucher::getCardNo, cardNos);
     }
 
-    /**
-     * 更改状态
-     */
-    public void changeStatus(Long id, int status){
-        this.lambdaUpdate()
-                .eq(MpBaseEntity::getId,id)
-                .set(Voucher::getStatus,status)
-                .update();
-
+    /** 更改状态 */
+    public void changeStatus(Long id, int status) {
+        this.lambdaUpdate().eq(MpBaseEntity::getId, id).set(Voucher::getStatus, status).update();
     }
 
-    /**
-     * 批量更改状态
-     */
-    public void changeStatusBatch(List<Long> ids, int status){
-        this.lambdaUpdate()
-                .in(MpBaseEntity::getId,ids)
-                .set(Voucher::getStatus,status)
-                .update();
+    /** 批量更改状态 */
+    public void changeStatusBatch(List<Long> ids, int status) {
+        this.lambdaUpdate().in(MpBaseEntity::getId, ids).set(Voucher::getStatus, status).update();
     }
 }

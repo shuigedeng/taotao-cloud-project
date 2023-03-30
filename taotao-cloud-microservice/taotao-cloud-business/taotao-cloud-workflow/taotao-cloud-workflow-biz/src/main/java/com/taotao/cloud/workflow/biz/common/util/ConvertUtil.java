@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.common.util;
 
 import java.math.BigDecimal;
@@ -7,16 +23,14 @@ import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.util.Set;
 
-/**
- *
- */
+/** */
 public class ConvertUtil {
     /**
      * 转换为字符串<br>
      * 如果给定的值为null，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -47,7 +61,7 @@ public class ConvertUtil {
      * 如果给定的值为null，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -80,7 +94,7 @@ public class ConvertUtil {
      * 如果给定的值为<code>null</code>，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -122,7 +136,7 @@ public class ConvertUtil {
      * 如果给定的值为<code>null</code>，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -164,7 +178,7 @@ public class ConvertUtil {
      * 如果给定的值为空，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -203,7 +217,7 @@ public class ConvertUtil {
      * 如果给定的值为空，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -249,7 +263,7 @@ public class ConvertUtil {
      */
     public static Integer[] toIntArray(String split, String str) {
         if (StringUtil.isEmpty(str)) {
-            return new Integer[]{};
+            return new Integer[] {};
         }
         String[] arr = str.split(split);
         final Integer[] ints = new Integer[arr.length];
@@ -276,7 +290,7 @@ public class ConvertUtil {
      * 如果给定的值为空，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -319,7 +333,7 @@ public class ConvertUtil {
      * 如果给定的值为空，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -362,7 +376,7 @@ public class ConvertUtil {
      * 如果给定的值为空，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -404,7 +418,7 @@ public class ConvertUtil {
      * String支持的值为：true、false、yes、ok、no，1,0 如果给定的值为空，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -456,8 +470,8 @@ public class ConvertUtil {
      * 转换为Enum对象<br>
      * 如果给定的值为空，或者转换失败，返回默认值<br>
      *
-     * @param clazz        Enum的Class
-     * @param value        值
+     * @param clazz Enum的Class
+     * @param value 值
      * @param defaultValue 默认值
      * @return Enum
      */
@@ -498,7 +512,7 @@ public class ConvertUtil {
      * 如果给定的值为空，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -540,7 +554,7 @@ public class ConvertUtil {
      * 如果给定的值为空，或者转换失败，返回默认值<br>
      * 转换失败不会报错
      *
-     * @param value        被转换的值
+     * @param value 被转换的值
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
@@ -587,7 +601,7 @@ public class ConvertUtil {
      * 将对象转为字符串<br>
      * 1、Byte数组和ByteBuffer会被转换为对应字符串的数组 2、对象数组会调用Arrays.toString方法
      *
-     * @param obj         对象
+     * @param obj 对象
      * @param charsetName 字符集
      * @return 字符串
      */
@@ -599,7 +613,7 @@ public class ConvertUtil {
      * 将对象转为字符串<br>
      * 1、Byte数组和ByteBuffer会被转换为对应字符串的数组 2、对象数组会调用Arrays.toString方法
      *
-     * @param obj     对象
+     * @param obj 对象
      * @param charset 字符集
      * @return 字符串
      */
@@ -621,18 +635,20 @@ public class ConvertUtil {
     /**
      * 将byte数组转为字符串
      *
-     * @param bytes   byte数组
+     * @param bytes byte数组
      * @param charset 字符集
      * @return 字符串
      */
     public static String str(byte[] bytes, String charset) {
-        return str(bytes, StringUtil.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+        return str(
+                bytes,
+                StringUtil.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset));
     }
 
     /**
      * 解码字节码
      *
-     * @param data    字符串
+     * @param data 字符串
      * @param charset 字符集，如果此字段为空，则解码的结果取决于平台
      * @return 解码后的字符串
      */
@@ -650,7 +666,7 @@ public class ConvertUtil {
     /**
      * 将编码的byteBuffer数据转换为字符串
      *
-     * @param data    数据
+     * @param data 数据
      * @param charset 字符集，如果为空使用当前系统字符集
      * @return 字符串
      */
@@ -665,7 +681,7 @@ public class ConvertUtil {
     /**
      * 将编码的byteBuffer数据转换为字符串
      *
-     * @param data    数据
+     * @param data 数据
      * @param charset 字符集，如果为空使用当前系统字符集
      * @return 字符串
      */
@@ -691,7 +707,7 @@ public class ConvertUtil {
     /**
      * 半角转全角
      *
-     * @param input         String
+     * @param input String
      * @param notConvertSet 不替换的字符集合
      * @return 全角字符串.
      */
@@ -725,7 +741,7 @@ public class ConvertUtil {
     /**
      * 替换全角为半角
      *
-     * @param text          文本
+     * @param text 文本
      * @param notConvertSet 不替换的字符集合
      * @return 替换后的字符
      */
@@ -764,7 +780,9 @@ public class ConvertUtil {
 
         String s = "";
         for (int i = 0; i < fraction.length; i++) {
-            s += (digit[(int) (Math.floor(n * 10 * Math.pow(10, i)) % 10)] + fraction[i]).replaceAll("(零.)+", "");
+            s +=
+                    (digit[(int) (Math.floor(n * 10 * Math.pow(10, i)) % 10)] + fraction[i])
+                            .replaceAll("(零.)+", "");
         }
         if (s.length() < 1) {
             s = "整";
@@ -779,6 +797,10 @@ public class ConvertUtil {
             }
             s = p.replaceAll("(零.)*零$", "").replaceAll("^$", "零") + unit[0][i] + s;
         }
-        return head + s.replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$", "零元整");
+        return head
+                + s.replaceAll("(零.)*零元", "元")
+                        .replaceFirst("(零.)+", "")
+                        .replaceAll("(零.)+", "零")
+                        .replaceAll("^整$", "零元整");
     }
 }

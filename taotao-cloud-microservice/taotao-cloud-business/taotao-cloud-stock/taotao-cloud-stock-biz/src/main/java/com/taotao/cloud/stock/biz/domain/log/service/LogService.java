@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.stock.biz.domain.log.service;
 
 /**
@@ -22,6 +23,4 @@ package com.taotao.cloud.stock.biz.domain.log.service;
  * @version v1.0
  * @since 2021/12/28 11:54
  */
-public interface LogService {
-
-}
+public interface LogService {}

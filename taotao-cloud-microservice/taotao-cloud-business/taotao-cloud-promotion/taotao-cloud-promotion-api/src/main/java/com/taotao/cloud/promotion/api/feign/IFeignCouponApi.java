@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
@@ -25,8 +26,8 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignCouponApiFallback.class)
-public interface IFeignCouponApi {
-
-}
-
+@FeignClient(
+        contextId = "remoteWithdrawService",
+        value = ServiceName.TAOTAO_CLOUD_PROMOTION,
+        fallbackFactory = FeignCouponApiFallback.class)
+public interface IFeignCouponApi {}

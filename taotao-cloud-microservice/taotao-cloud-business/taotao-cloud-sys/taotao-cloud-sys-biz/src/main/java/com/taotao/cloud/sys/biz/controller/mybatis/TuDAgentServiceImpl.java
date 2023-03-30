@@ -1,41 +1,58 @@
-//package com.taotao.cloud.sys.biz.controller.mybatis;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.sys.biz.controller.mybatis;
 //
-//import cn.com.common.util.util.StringUtils;
-//import com.aegonthtf.fate.constant.CommonConstant;
-//import com.aegonthtf.fate.dao.secondary.TuDAgentDao;
-//import com.aegonthtf.fate.entity.user.FateAgent;
-//import com.aegonthtf.fate.entity.user.FateGoals;
-//import com.aegonthtf.fate.entity.user.FateRecord;
-//import com.aegonthtf.fate.entity.user.TuDAgent;
-//import com.aegonthtf.fate.service.convert.TuDagentToFateAgentConverter;
-//import com.aegonthtf.fate.service.convert.TuDagentToFateRecordConverter;
-//import com.aegonthtf.fate.service.user.*;
-//import com.aegonthtf.fate.util.JodaTimeUtils;
-//import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-//import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-//import org.apache.commons.lang3.tuple.ImmutablePair;
-//import org.joda.time.LocalDateTime;
-//import org.springframework.beans.factory.InitializingBean;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.util.CollectionUtils;
+// import cn.com.common.util.util.StringUtils;
+// import com.aegonthtf.fate.constant.CommonConstant;
+// import com.aegonthtf.fate.dao.secondary.TuDAgentDao;
+// import com.aegonthtf.fate.entity.user.FateAgent;
+// import com.aegonthtf.fate.entity.user.FateGoals;
+// import com.aegonthtf.fate.entity.user.FateRecord;
+// import com.aegonthtf.fate.entity.user.TuDAgent;
+// import com.aegonthtf.fate.service.convert.TuDagentToFateAgentConverter;
+// import com.aegonthtf.fate.service.convert.TuDagentToFateRecordConverter;
+// import com.aegonthtf.fate.service.user.*;
+// import com.aegonthtf.fate.util.JodaTimeUtils;
+// import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+// import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+// import org.apache.commons.lang3.tuple.ImmutablePair;
+// import org.joda.time.LocalDateTime;
+// import org.springframework.beans.factory.InitializingBean;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Qualifier;
+// import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+// import org.springframework.stereotype.Service;
+// import org.springframework.transaction.annotation.Transactional;
+// import org.springframework.util.CollectionUtils;
 //
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Objects;
-//import java.util.Optional;
-//import java.util.concurrent.BlockingQueue;
-//import java.util.concurrent.Executor;
+// import java.util.ArrayList;
+// import java.util.List;
+// import java.util.Objects;
+// import java.util.Optional;
+// import java.util.concurrent.BlockingQueue;
+// import java.util.concurrent.Executor;
 //
-///**
+/// **
 // * 营销员维度表(TuDAgent)表服务实现类
 // *
 // */
-//@Service("tuDAgentService")
-//public class TuDAgentServiceImpl extends ServiceImpl<TuDAgentDao, TuDAgent> implements TuDAgentService, InitializingBean {
+// @Service("tuDAgentService")
+// public class TuDAgentServiceImpl extends ServiceImpl<TuDAgentDao, TuDAgent> implements
+// TuDAgentService, InitializingBean {
 //    @Autowired
 //    public               FateAgentService      fateAgentService;
 //    @Autowired
@@ -65,8 +82,10 @@
 //
 //    @Override
 //    public void syncFateAgent(LocalDateTime staratDateTime) {
-//        ImmutablePair<LocalDateTime, LocalDateTime> timeDay = JodaTimeUtils.criticalTimeDay(staratDateTime.toLocalDate());
-//        this.baseMapper.getUserListByLcdBigData(timeDay.getLeft().toDate(), timeDay.getRight().toDate(),
+//        ImmutablePair<LocalDateTime, LocalDateTime> timeDay =
+// JodaTimeUtils.criticalTimeDay(staratDateTime.toLocalDate());
+//        this.baseMapper.getUserListByLcdBigData(timeDay.getLeft().toDate(),
+// timeDay.getRight().toDate(),
 //                resultContext -> {
 //                    Optional.ofNullable(resultContext.getResultObject())
 //                            .ifPresent(this.tuDAgentServiceImplQueue1::add);
@@ -94,7 +113,8 @@
 //            List<FateAgent> fateAgents = new ArrayList<>();
 //            String day = staratDateTime.toString("d");
 //            tuDAgents1.parallelStream().forEach(item -> {
-//                FateAgent fateAgent = this.fateAgentService.getFateAgentByAgentCode(item.getAgentCode());
+//                FateAgent fateAgent =
+// this.fateAgentService.getFateAgentByAgentCode(item.getAgentCode());
 //                FateAgent to;
 //                if (Objects.isNull(fateAgent)) {
 //                    to = TuDagentToFateAgentConverter.to(item, staratDateTime, new FateAgent());
@@ -102,7 +122,8 @@
 ////                to = TuDagentToFateAgentConverter.to(item, fateAgent);
 //                    //有记录的更新AGENT_STATUS
 //                    to = fateAgent;
-//                    Optional.ofNullable(item.getAgentStatus()).ifPresent(fateAgent::setAgentStatus);
+//
+// Optional.ofNullable(item.getAgentStatus()).ifPresent(fateAgent::setAgentStatus);
 //                }
 //                if (Objects.isNull(to)) {
 //                    return;
@@ -111,11 +132,15 @@
 //                this.fateApolloActService.contractEventHandling(staratDateTime, item);
 //                //获取省一 二 三
 //                if (StringUtils.isNotBlank(to.getBranchcode())) {
-//                    FateAgent fateAgentOfBranch123 = this.fateBranchService.getFateBranchByBranchCode(to.getBranchcode());
+//                    FateAgent fateAgentOfBranch123 =
+// this.fateBranchService.getFateBranchByBranchCode(to.getBranchcode());
 //                    if (!Objects.isNull(fateAgentOfBranch123)) {
-//                        Optional.ofNullable(fateAgentOfBranch123.getBrhFst()).ifPresent(to::setBrhFst);
-//                        Optional.ofNullable(fateAgentOfBranch123.getBrhScd()).ifPresent(to::setBrhScd);
-//                        Optional.ofNullable(fateAgentOfBranch123.getBrhThd()).ifPresent(to::setBrhThd);
+//
+// Optional.ofNullable(fateAgentOfBranch123.getBrhFst()).ifPresent(to::setBrhFst);
+//
+// Optional.ofNullable(fateAgentOfBranch123.getBrhScd()).ifPresent(to::setBrhScd);
+//
+// Optional.ofNullable(fateAgentOfBranch123.getBrhThd()).ifPresent(to::setBrhThd);
 //                    }
 //                }
 //                //获取目标APE 每月一号 二号更新 GAPE和目标新增人力gManpower
@@ -129,11 +154,13 @@
 //                        //目标达成-APE
 //                        to.setGApe(Objects.isNull(itemFateGoals.getGApe()) ? 0D : one.getGApe());
 //                        //目标-新增人力
-//                        to.setGManpower(Objects.isNull(itemFateGoals.getGManpower()) ? 0 : one.getGManpower());
+//                        to.setGManpower(Objects.isNull(itemFateGoals.getGManpower()) ? 0 :
+// one.getGManpower());
 //                    });
 //                }
 //                //达成-新增人力 aManpower
-//                Integer aManpower = this.tuDAgentService.getFateAgentByAManpowerAndMonth(to.getAgentCode(), staratDateTime);
+//                Integer aManpower =
+// this.tuDAgentService.getFateAgentByAManpowerAndMonth(to.getAgentCode(), staratDateTime);
 //                to.setAManpower(Objects.isNull(aManpower) ? 0 : aManpower);
 //                fateAgents.add(to);
 //            });
@@ -178,7 +205,8 @@
 //                if (Objects.isNull(item)) {
 //                    return;
 //                }
-//                FateRecord fateRecord = this.fateRecordService.getTodayByAgentCode(item.getAgentCode(), staratDateTime);
+//                FateRecord fateRecord =
+// this.fateRecordService.getTodayByAgentCode(item.getAgentCode(), staratDateTime);
 //                FateRecord to;
 //                if (Objects.isNull(fateRecord)) {
 //                    to = TuDagentToFateRecordConverter.to(item, staratDateTime, new FateRecord());
@@ -190,29 +218,38 @@
 //                }
 //                //获取省一 二 三
 //                if (StringUtils.isNotBlank(to.getBranchcode())) {
-//                    FateAgent fateAgentOfBranch123 = this.fateBranchService.getFateBranchByBranchCode(to.getBranchcode());
+//                    FateAgent fateAgentOfBranch123 =
+// this.fateBranchService.getFateBranchByBranchCode(to.getBranchcode());
 //                    if (!Objects.isNull(fateAgentOfBranch123)) {
-//                        Optional.ofNullable(fateAgentOfBranch123.getBrhFst()).ifPresent(to::setBrhFst);
-//                        Optional.ofNullable(fateAgentOfBranch123.getBrhScd()).ifPresent(to::setBrhScd);
-//                        Optional.ofNullable(fateAgentOfBranch123.getBrhThd()).ifPresent(to::setBrhThd);
+//
+// Optional.ofNullable(fateAgentOfBranch123.getBrhFst()).ifPresent(to::setBrhFst);
+//
+// Optional.ofNullable(fateAgentOfBranch123.getBrhScd()).ifPresent(to::setBrhScd);
+//
+// Optional.ofNullable(fateAgentOfBranch123.getBrhThd()).ifPresent(to::setBrhThd);
 //                    }
 //                }
 //                //判断工作日逻辑
 //                //1.根据代理人工号查询aisuattendance表有无当天记录。
-//                //SELECT COUNT(1) FROM AISUATTENDANCE T WHERE T.AI_REC_ENDDT IS NULL AND T.AI_AGID = '工号' AND T.AI_ATTENDANCE_DATE = '日期';
+//                //SELECT COUNT(1) FROM AISUATTENDANCE T WHERE T.AI_REC_ENDDT IS NULL AND T.AI_AGID
+// = '工号' AND T.AI_ATTENDANCE_DATE = '日期';
 //                //2.若无记录，则当天非工作日，若有记录，查当前代理人是否请假。
-//                //select count(1) from aisuleave where ai_agid='0000223106' and ai_leave_enddt >='20201230' and ai_leave_stdt <='20201230';
+//                //select count(1) from aisuleave where ai_agid='0000223106' and ai_leave_enddt
+// >='20201230' and ai_leave_stdt <='20201230';
 //                //3.若仍无记录，则当天是工作日。
 //                String workFlag;
-//                Integer count1 = this.aisuattendanceService.getWorkFlagByAgentCode(to.getAgentCode(), staratDateTime);
+//                Integer count1 =
+// this.aisuattendanceService.getWorkFlagByAgentCode(to.getAgentCode(), staratDateTime);
 //                if (count1 <= 0) {
 //                    workFlag = "N";
 //                } else {
-//                    Integer count2 = this.aisuleaveService.getWorkFlagByAgentCode(to.getAgentCode(), staratDateTime);
+//                    Integer count2 =
+// this.aisuleaveService.getWorkFlagByAgentCode(to.getAgentCode(), staratDateTime);
 //                    workFlag = (count2 <= 0) ? "Y" : "N";
 //                }
 //                to.setWorkFlag(workFlag); //是否是工作日(Y:N)	每天7点批处理更新
-//                Integer count = this.fateRecordService.getYesterdayFateRecordByAgentCode(to.getAgentCode());
+//                Integer count =
+// this.fateRecordService.getYesterdayFateRecordByAgentCode(to.getAgentCode());
 //                to.setRecordDays(count); //连续打卡天数
 //                fateRecords.add(to);
 //            });
@@ -227,8 +264,10 @@
 //
 //    //查询该工号当月 //当月达成-新增人力 aManpower
 //    @Override
-//    public Integer getFateAgentByAManpowerAndMonth(String agentCode, LocalDateTime staratDateTime) {
-//        ImmutablePair<LocalDateTime, LocalDateTime> timeMonth = JodaTimeUtils.criticalTimeMonth(staratDateTime);
+//    public Integer getFateAgentByAManpowerAndMonth(String agentCode, LocalDateTime staratDateTime)
+// {
+//        ImmutablePair<LocalDateTime, LocalDateTime> timeMonth =
+// JodaTimeUtils.criticalTimeMonth(staratDateTime);
 //        return this.count(new QueryWrapper<TuDAgent>().lambda()
 //                .eq(TuDAgent::getRefferCode, agentCode)
 //                .ge(TuDAgent::getFcd, timeMonth.left.toDate())
@@ -243,5 +282,5 @@
 //        this.tuDAgentServiceImplQueue1 = poolTaskExecutor1.getThreadPoolExecutor().getQueue();
 //        this.tuDAgentServiceImplQueue2 = poolTaskExecutor2.getThreadPoolExecutor().getQueue();
 //    }
-//}
+// }
 //

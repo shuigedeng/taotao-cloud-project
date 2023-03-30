@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.aop.other;
 
 /**
@@ -22,6 +23,4 @@ package com.taotao.cloud.sys.biz.aop.other;
  * @version 2022.07
  * @since 2022-07-22 16:42
  */
-public class a {
-
-}
+public class a {}

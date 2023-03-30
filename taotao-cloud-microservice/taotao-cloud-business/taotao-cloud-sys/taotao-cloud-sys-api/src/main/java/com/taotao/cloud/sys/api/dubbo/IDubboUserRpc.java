@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.api.dubbo;
 
 /**
- * IDubboUserService 
+ * IDubboUserService
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2022-03-25 14:22:32
  */
-public interface IDubboUserRpc {
-
-}
+public interface IDubboUserRpc {}

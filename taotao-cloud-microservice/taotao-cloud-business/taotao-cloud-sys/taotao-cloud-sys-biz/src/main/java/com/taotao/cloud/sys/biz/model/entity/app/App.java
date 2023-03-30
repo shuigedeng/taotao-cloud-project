@@ -1,11 +1,11 @@
 /*
- * COPYRIGHT (C) 2022 Art AUTHORS(cloud@gmail.com). ALL RIGHTS RESERVED.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,6 @@
 package com.taotao.cloud.sys.biz.model.entity.app;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -30,7 +29,7 @@ import lombok.Setter;
 /**
  * 系统应用表
  *
- * @author 
+ * @author
  * @date 2022-09-12
  */
 @NoArgsConstructor
@@ -44,26 +43,17 @@ import lombok.Setter;
 @org.hibernate.annotations.Table(appliesTo = App.TABLE_NAME, comment = "app配置表")
 public class App extends BaseSuperEntity<App, Long> {
 
-	public static final String TABLE_NAME = "tt_app";
+    public static final String TABLE_NAME = "tt_app";
 
-	/**
-	 * 应用名称
-	 */
-	private String name;
+    /** 应用名称 */
+    private String name;
 
-	/**
-	 * 应用编码
-	 */
-	private String code;
+    /** 应用编码 */
+    private String code;
 
-	/**
-	 * 图标
-	 */
-	private String icon;
+    /** 图标 */
+    private String icon;
 
-	/**
-	 * 排序
-	 */
-	private Integer sort;
-
+    /** 排序 */
+    private Integer sort;
 }

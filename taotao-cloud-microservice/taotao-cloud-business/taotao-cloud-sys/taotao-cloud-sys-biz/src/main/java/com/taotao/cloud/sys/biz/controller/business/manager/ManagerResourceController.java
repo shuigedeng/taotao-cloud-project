@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import cn.hutool.core.collection.CollUtil;
@@ -64,168 +65,188 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/manager/resource")
 @Tag(name = "管理端-资源管理API", description = "管理端-资源管理API")
-public class ManagerResourceController extends
-		BaseSuperController<IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, MenuQueryVO> {
+public class ManagerResourceController
+        extends BaseSuperController<
+                IResourceService,
+                Resource,
+                Long,
+                BaseQuery,
+                ResourceSaveDTO,
+                ResourceUpdateDTO,
+                MenuQueryVO> {
 
-	//************************************************菜单*************************************************************
+    // ************************************************菜单*************************************************************
 
-	@Operation(summary = "根据角色id获取菜单列表", description = "根据角色id获取菜单列表")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
-	@GetMapping("/roleId/{roleId}")
-	public Result<List<MenuQueryVO>> findResourceByRoleId(
-			@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
-			@PathVariable(value = "roleId") Long roleId) {
-		List<MenuBO> bos = service().findMenuByRoleIds(Set.of(roleId));
-		List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(bos);
-		return success(result);
-	}
+    @Operation(summary = "根据角色id获取菜单列表", description = "根据角色id获取菜单列表")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @SentinelResource(
+            value = "findResourceByRoleId",
+            blockHandler = "findResourceByRoleIdException")
+    @GetMapping("/roleId/{roleId}")
+    public Result<List<MenuQueryVO>> findResourceByRoleId(
+            @Parameter(description = "角色id", required = true)
+                    @NotNull(message = "角色id不能为空")
+                    @PathVariable(value = "roleId")
+                    Long roleId) {
+        List<MenuBO> bos = service().findMenuByRoleIds(Set.of(roleId));
+        List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(bos);
+        return success(result);
+    }
 
-	@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
-	@GetMapping("/roleIds")
-	public Result<List<MenuQueryVO>> findResourceByRoleIds(
-			@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
-			@RequestParam(value = "roleIds") Set<Long> roleIds) {
-		List<MenuBO> resources = service().findMenuByRoleIds(roleIds);
-		List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
-		return Result.success(result);
-	}
+    @Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
+    @GetMapping("/roleIds")
+    public Result<List<MenuQueryVO>> findResourceByRoleIds(
+            @Parameter(description = "角色id列表", required = true)
+                    @NotEmpty(message = "角色id列表不能为空")
+                    @RequestParam(value = "roleIds")
+                    Set<Long> roleIds) {
+        List<MenuBO> resources = service().findMenuByRoleIds(roleIds);
+        List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
+        return Result.success(result);
+    }
 
-	@Operation(summary = "根据角色code获取菜单列表", description = "根据角色code获取菜单列表")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:code')")
-	@GetMapping("/code/{code}")
-	public Result<List<MenuQueryVO>> findResourceByCode(
-			@Parameter(description = "角色code", required = true) @NotBlank(message = "角色code不能为空")
-			@PathVariable(value = "code") String code) {
-		List<MenuBO> resources = service().findMenuByCodes(Set.of(code));
-		List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
-		return Result.success(result);
-	}
+    @Operation(summary = "根据角色code获取菜单列表", description = "根据角色code获取菜单列表")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:code')")
+    @GetMapping("/code/{code}")
+    public Result<List<MenuQueryVO>> findResourceByCode(
+            @Parameter(description = "角色code", required = true)
+                    @NotBlank(message = "角色code不能为空")
+                    @PathVariable(value = "code")
+                    String code) {
+        List<MenuBO> resources = service().findMenuByCodes(Set.of(code));
+        List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
+        return Result.success(result);
+    }
 
-	@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:codes')")
-	@GetMapping("/codes")
-	public Result<List<MenuQueryVO>> findResourceByCodes(
-			@Parameter(description = "角色cde列表", required = true) @NotNull(message = "角色cde列表不能为空")
-			@RequestParam(value = "codes") Set<String> codes) {
-		List<MenuBO> resources = service().findMenuByCodes(codes);
-		List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
-		return success(result);
-	}
+    @Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:codes')")
+    @GetMapping("/codes")
+    public Result<List<MenuQueryVO>> findResourceByCodes(
+            @Parameter(description = "角色cde列表", required = true)
+                    @NotNull(message = "角色cde列表不能为空")
+                    @RequestParam(value = "codes")
+                    Set<String> codes) {
+        List<MenuBO> resources = service().findMenuByCodes(codes);
+        List<MenuQueryVO> result = ResourceConvert.INSTANCE.convertListVO(resources);
+        return success(result);
+    }
 
-	//@ApiOperation("根据parentId获取角色列表")
-	//@SysOperateLog(description = "根据parentId获取角色列表")
-	//@PreAuthorize("hasAuthority('sys:resource:info:parentId')")
-	//@GetMapping("/info/parentId")
-	//public Result<List<ResourceVO>> findResourceByCode1s(@NotNull(message = "parentId不能为空")
-	//@RequestParam(value = "parentId") Long parentId) {
-	//	List<SysResource> roles = resourceService.findResourceByParentId(parentId);
-	//	List<ResourceVO> collect = roles.stream()
-	//		.filter(Objects::nonNull)
-	//		.map(SysResourceUtil::copy)
-	//		.collect(Collectors.toList());
-	//	return Result.succeed(collect);
-	//}
+    // @ApiOperation("根据parentId获取角色列表")
+    // @SysOperateLog(description = "根据parentId获取角色列表")
+    // @PreAuthorize("hasAuthority('sys:resource:info:parentId')")
+    // @GetMapping("/info/parentId")
+    // public Result<List<ResourceVO>> findResourceByCode1s(@NotNull(message = "parentId不能为空")
+    // @RequestParam(value = "parentId") Long parentId) {
+    //	List<SysResource> roles = resourceService.findResourceByParentId(parentId);
+    //	List<ResourceVO> collect = roles.stream()
+    //		.filter(Objects::nonNull)
+    //		.map(SysResourceUtil::copy)
+    //		.collect(Collectors.toList());
+    //	return Result.succeed(collect);
+    // }
 
-	@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:current:user')")
-	@GetMapping("/current/user")
-	public Result<List<MenuQueryVO>> findCurrentUserResource() {
-		Set<String> roleCodes = SecurityUtils.getCurrentUser().getRoleCodes();
-		if (CollUtil.isEmpty(roleCodes)) {
-			return success(new ArrayList<>());
-		}
-		return findResourceByCodes(roleCodes);
-	}
+    @Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:current:user')")
+    @GetMapping("/current/user")
+    public Result<List<MenuQueryVO>> findCurrentUserResource() {
+        Set<String> roleCodes = SecurityUtils.getCurrentUser().getRoleCodes();
+        if (CollUtil.isEmpty(roleCodes)) {
+            return success(new ArrayList<>());
+        }
+        return findResourceByCodes(roleCodes);
+    }
 
-	@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
-	@GetMapping("/current/user/tree")
-	public Result<List<MenuTreeVO>> findCurrentUserResourceTree(
-			@Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
-		Set<String> roleCodes = SecurityUtils.getCurrentUser().getRoleCodes();
-		if (CollUtil.isEmpty(roleCodes)) {
-			return Result.success(Collections.emptyList());
-		}
+    @Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
+    @GetMapping("/current/user/tree")
+    public Result<List<MenuTreeVO>> findCurrentUserResourceTree(
+            @Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
+        Set<String> roleCodes = SecurityUtils.getCurrentUser().getRoleCodes();
+        if (CollUtil.isEmpty(roleCodes)) {
+            return Result.success(Collections.emptyList());
+        }
 
-		Result<List<MenuQueryVO>> result = findResourceByCodes(roleCodes);
-		List<MenuQueryVO> resourceVOList = result.getData();
+        Result<List<MenuQueryVO>> result = findResourceByCodes(roleCodes);
+        List<MenuQueryVO> resourceVOList = result.getData();
 
-		List<MenuTreeVO> trees = service().findCurrentUserMenuTree(resourceVOList,
-				parentId);
-		return Result.success(trees);
-	}
+        List<MenuTreeVO> trees = service().findCurrentUserMenuTree(resourceVOList, parentId);
+        return Result.success(trees);
+    }
 
-	@Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 "
-			+
-			"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:tree')")
-	@GetMapping("/tree")
-	@SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
-	public Result<List<MenuTreeVO>> findResourceTree(
-			@Parameter(name = "lazy", description = "是否是延迟查询") @RequestParam(value = "lazy") boolean lazy,
-			@Parameter(name = "parentId", description = "父id") @RequestParam(value = "parentId") Long parentId) {
-		List<MenuTreeVO> trees = service().findMenuTree(lazy, parentId);
-		return success(trees);
-	}
+    @Operation(
+            summary = "获取树形菜单集合",
+            description =
+                    "获取树形菜单集合 1.false-非懒加载，查询全部 "
+                            + "2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:tree')")
+    @GetMapping("/tree")
+    @SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
+    public Result<List<MenuTreeVO>> findResourceTree(
+            @Parameter(name = "lazy", description = "是否是延迟查询") @RequestParam(value = "lazy")
+                    boolean lazy,
+            @Parameter(name = "parentId", description = "父id") @RequestParam(value = "parentId")
+                    Long parentId) {
+        List<MenuTreeVO> trees = service().findMenuTree(lazy, parentId);
+        return success(trees);
+    }
 
-	@NotAuth
-	@Operation(summary = "testNotAuth", description = "testNotAuth")
-	@RequestLogger
-	@GetMapping("/test/se")
-	public Result<Boolean> testNotAuth() {
+    @NotAuth
+    @Operation(summary = "testNotAuth", description = "testNotAuth")
+    @RequestLogger
+    @GetMapping("/test/se")
+    public Result<Boolean> testNotAuth() {
 
-		List<DubboMenuQueryRequest> allById = service().findAllById(1L);
-		return Result.success(true);
-	}
+        List<DubboMenuQueryRequest> allById = service().findAllById(1L);
+        return Result.success(true);
+    }
 
-	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
-	@RequestLogger
-	@GetMapping("/test/pe")
-	@PreAuthorize("@pms.hasPermission(#request, authentication, 'export')")
-	//@PreAuthorize("hasPermission(#request, 'batch')")
-	public Result<Boolean> testPermissionVerifier(HttpServletRequest request) {
-		return Result.success(true);
-	}
+    @Operation(summary = "测试分布式事务", description = "测试分布式事务")
+    @RequestLogger
+    @GetMapping("/test/pe")
+    @PreAuthorize("@pms.hasPermission(#request, authentication, 'export')")
+    // @PreAuthorize("hasPermission(#request, 'batch')")
+    public Result<Boolean> testPermissionVerifier(HttpServletRequest request) {
+        return Result.success(true);
+    }
 
-	//@Operation(summary = "测试异步", description = "测试异步")
-	//@RequestLogger("测试异步")
-	//@GetMapping("/test/async")
-	//public Result<Boolean> testAsync() throws ExecutionException, InterruptedException {
-	//	Future<Boolean> result = service().testAsync();
-	//	return Result.success(result.get());
-	//}
-	//
-	//@Operation(summary = "测试异步结果", description = "测试异步结果")
-	//@RequestLogger("测试异步结果")
-	//@GetMapping("/test/async/future")
-	//public Future<Boolean> testAsyncFuture() {
-	//	return service().testAsync();
-	//}
-	//
-	//@Operation(summary = "测试分布式事务", description = "测试分布式事务")
-	//@RequestLogger("测试分布式事务")
-	//@GetMapping("/test/seata")
-	//@SentinelResource(value = "testSeata", blockHandler = "testSeataException")
-	//public Result<Boolean> testSeata(HttpServletRequest request, HttpServletResponse response) {
-	//	Boolean result = service().testSeata();
-	//	return Result.success(result);
-	//}
+    // @Operation(summary = "测试异步", description = "测试异步")
+    // @RequestLogger("测试异步")
+    // @GetMapping("/test/async")
+    // public Result<Boolean> testAsync() throws ExecutionException, InterruptedException {
+    //	Future<Boolean> result = service().testAsync();
+    //	return Result.success(result.get());
+    // }
+    //
+    // @Operation(summary = "测试异步结果", description = "测试异步结果")
+    // @RequestLogger("测试异步结果")
+    // @GetMapping("/test/async/future")
+    // public Future<Boolean> testAsyncFuture() {
+    //	return service().testAsync();
+    // }
+    //
+    // @Operation(summary = "测试分布式事务", description = "测试分布式事务")
+    // @RequestLogger("测试分布式事务")
+    // @GetMapping("/test/seata")
+    // @SentinelResource(value = "testSeata", blockHandler = "testSeataException")
+    // public Result<Boolean> testSeata(HttpServletRequest request, HttpServletResponse response) {
+    //	Boolean result = service().testSeata();
+    //	return Result.success(result);
+    // }
 
-	public Result<Boolean> testSeataException(BlockException e) {
-		e.printStackTrace();
-		LogUtils.error(" 该接口已经被限流啦", e);
-		return Result.fail("该接口已经被限流啦");
-	}
+    public Result<Boolean> testSeataException(BlockException e) {
+        e.printStackTrace();
+        LogUtils.error(" 该接口已经被限流啦", e);
+        return Result.fail("该接口已经被限流啦");
+    }
 
-	//************************************************资源*************************************************************
+    // ************************************************资源*************************************************************
 
 }

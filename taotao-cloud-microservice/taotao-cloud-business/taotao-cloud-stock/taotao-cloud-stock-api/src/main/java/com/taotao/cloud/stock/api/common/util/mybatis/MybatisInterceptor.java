@@ -1,6 +1,28 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.stock.api.common.util.mybatis;
 
 import com.xtoon.boot.common.util.UserContext;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -12,32 +34,29 @@ import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-
 /**
  * mybatis拦截器，自动注入创建人、创建时间、修改人、修改时间
  *
  * @author shuigedeng
  * @date 2021-01-25
  */
-
 @Component
-@Intercepts({ @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }) })
+@Intercepts({
+    @Signature(
+            type = Executor.class,
+            method = "update",
+            args = {MappedStatement.class, Object.class})
+})
 public class MybatisInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
-//        String sqlId = mappedStatement.getId();
-//        log.debug("------sqlId------" + sqlId);
+        //        String sqlId = mappedStatement.getId();
+        //        log.debug("------sqlId------" + sqlId);
         SqlCommandType sqlCommandType = mappedStatement.getSqlCommandType();
         Object parameter = invocation.getArgs()[1];
-//        log.debug("------sqlCommandType------" + sqlCommandType);
+        //        log.debug("------sqlCommandType------" + sqlCommandType);
 
         if (parameter == null) {
             return invocation.proceed();
@@ -46,7 +65,7 @@ public class MybatisInterceptor implements Interceptor {
             String userId = this.getLoginUser();
             Field[] fields = getAllFields(parameter);
             for (Field field : fields) {
-//                log.debug("------field.name------" + field.getName());
+                //                log.debug("------field.name------" + field.getName());
                 try {
                     if ("createdBy".equals(field.getName())) {
                         field.setAccessible(true);
@@ -81,19 +100,19 @@ public class MybatisInterceptor implements Interceptor {
             Field[] fields = null;
             if (parameter instanceof MapperMethod.ParamMap) {
                 MapperMethod.ParamMap<?> p = (MapperMethod.ParamMap<?>) parameter;
-                //update-begin-author:scott date:20190729 for:批量更新报错issues/IZA3Q--
+                // update-begin-author:scott date:20190729 for:批量更新报错issues/IZA3Q--
                 if (p.containsKey("et")) {
                     parameter = p.get("et");
                 } else {
                     parameter = p.get("param1");
                 }
-                //update-end-author:scott date:20190729 for:批量更新报错issues/IZA3Q-
+                // update-end-author:scott date:20190729 for:批量更新报错issues/IZA3Q-
 
-                //update-begin-author:scott date:20190729 for:更新指定字段时报错 issues/#516-
+                // update-begin-author:scott date:20190729 for:更新指定字段时报错 issues/#516-
                 if (parameter == null) {
                     return invocation.proceed();
                 }
-                //update-end-author:scott date:20190729 for:更新指定字段时报错 issues/#516-
+                // update-end-author:scott date:20190729 for:更新指定字段时报错 issues/#516-
 
                 fields = getAllFields(parameter);
             } else {
@@ -101,10 +120,10 @@ public class MybatisInterceptor implements Interceptor {
             }
 
             for (Field field : fields) {
-//                log.debug("------field.name------" + field.getName());
+                //                log.debug("------field.name------" + field.getName());
                 try {
                     if ("updatedBy".equals(field.getName())) {
-                        //获取登录用户信息
+                        // 获取登录用户信息
                         if (userId != null) {
                             // 登录账号
                             field.setAccessible(true);
@@ -140,7 +159,7 @@ public class MybatisInterceptor implements Interceptor {
         try {
             userId = UserContext.getUserId();
         } catch (Exception e) {
-            //e.printStackTrace();
+            // e.printStackTrace();
             userId = null;
         }
         return userId;
@@ -163,6 +182,4 @@ public class MybatisInterceptor implements Interceptor {
         fieldList.toArray(fields);
         return fields;
     }
-
 }
-

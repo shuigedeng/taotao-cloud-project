@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.service.business.impl;
 
 import cn.hutool.core.collection.CollUtil;
@@ -24,12 +25,10 @@ import com.taotao.cloud.sys.biz.repository.cls.RoleResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 /**
  * @author shuigedeng
@@ -38,29 +37,34 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class RoleResourceServiceImpl extends
-	BaseSuperServiceImpl<IRoleResourceMapper, RoleResource, RoleResourceRepository, IRoleResourceRepository, Long>
-	implements IRoleResourceService {
+public class RoleResourceServiceImpl
+        extends BaseSuperServiceImpl<
+                IRoleResourceMapper,
+                RoleResource,
+                RoleResourceRepository,
+                IRoleResourceRepository,
+                Long>
+        implements IRoleResourceService {
 
-	private final static QRoleResource ROLE_RESOURCE = QRoleResource.roleResource;
+    private static final QRoleResource ROLE_RESOURCE = QRoleResource.roleResource;
 
-	@Override
-	public Boolean saveRoleMenu(Long roleId, Set<Long> menuIds) {
-		BooleanExpression expression = ROLE_RESOURCE.roleId.eq(roleId);
-		List<RoleResource> roleResources = cr().fetch(expression);
-		if (CollUtil.isNotEmpty(roleResources)) {
-			cr().deleteAll(roleResources);
-		}
+    @Override
+    public Boolean saveRoleMenu(Long roleId, Set<Long> menuIds) {
+        BooleanExpression expression = ROLE_RESOURCE.roleId.eq(roleId);
+        List<RoleResource> roleResources = cr().fetch(expression);
+        if (CollUtil.isNotEmpty(roleResources)) {
+            cr().deleteAll(roleResources);
+        }
 
-		 //批量添加数据
-		//List<RoleMenu> collect = menuIds.stream()
-		//	.map(resourceId -> RoleMenu.builder()
-		//		.roleId(roleId)
-		//		.resourceId(resourceId)
-		//		.build())
-		//	.collect(Collectors.toList());
-		//cr().saveAll(collect);
+        // 批量添加数据
+        // List<RoleMenu> collect = menuIds.stream()
+        //	.map(resourceId -> RoleMenu.builder()
+        //		.roleId(roleId)
+        //		.resourceId(resourceId)
+        //		.build())
+        //	.collect(Collectors.toList());
+        // cr().saveAll(collect);
 
-		return true;
-	}
+        return true;
+    }
 }

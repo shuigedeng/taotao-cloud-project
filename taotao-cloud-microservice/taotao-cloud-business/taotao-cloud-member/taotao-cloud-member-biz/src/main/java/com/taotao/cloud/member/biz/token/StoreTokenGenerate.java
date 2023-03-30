@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.token;
 
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -27,34 +28,30 @@ import com.taotao.cloud.store.api.model.vo.StoreVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * 商家token生成
- */
+/** 商家token生成 */
 @Component
 public class StoreTokenGenerate extends AbstractTokenGenerate<Member> {
-	@Autowired
-	private IFeignStoreApi storeService;
-	@Autowired
-	private TokenUtil tokenUtil;
+    @Autowired private IFeignStoreApi storeService;
+    @Autowired private TokenUtil tokenUtil;
 
-	@Override
-	public Token createToken(Member member, Boolean longTerm) {
-		if (Boolean.FALSE.equals(member.getHaveStore())) {
-			throw new BusinessException(ResultEnum.STORE_NOT_OPEN);
-		}
-		StoreVO store = storeService.findSotreByMemberId(member.getId());
-		// AuthUser authUser = new AuthUser(member.getUsername(), member.getId(), member.getNickname(), store.getStoreLogo(), UserEnum.STORE);
-		//
-		// authUser.setStoreId(store.getId());
-		// authUser.setStoreName(store.getStoreName());
-		// return tokenUtil.createToken(member.getUsername(), authUser, longTerm, UserEnum.STORE);
+    @Override
+    public Token createToken(Member member, Boolean longTerm) {
+        if (Boolean.FALSE.equals(member.getHaveStore())) {
+            throw new BusinessException(ResultEnum.STORE_NOT_OPEN);
+        }
+        StoreVO store = storeService.findSotreByMemberId(member.getId());
+        // AuthUser authUser = new AuthUser(member.getUsername(), member.getId(),
+        // member.getNickname(), store.getStoreLogo(), UserEnum.STORE);
+        //
+        // authUser.setStoreId(store.getId());
+        // authUser.setStoreName(store.getStoreName());
+        // return tokenUtil.createToken(member.getUsername(), authUser, longTerm, UserEnum.STORE);
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public Token refreshToken(String refreshToken) {
-		return tokenUtil.refreshToken(refreshToken, UserEnum.STORE);
-	}
-
+    @Override
+    public Token refreshToken(String refreshToken) {
+        return tokenUtil.refreshToken(refreshToken, UserEnum.STORE);
+    }
 }

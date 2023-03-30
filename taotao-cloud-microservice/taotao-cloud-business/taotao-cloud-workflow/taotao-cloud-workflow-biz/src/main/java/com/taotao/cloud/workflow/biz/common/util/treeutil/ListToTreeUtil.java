@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.common.util.treeutil;
 
 import com.alibaba.fastjson.JSONArray;
@@ -9,8 +25,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 
-/**
- */
+/** */
 public class ListToTreeUtil {
 
     /**
@@ -32,7 +47,10 @@ public class ListToTreeUtil {
      */
     private static List<TreeViewModel> getChildNodeList(List<TreeViewModel> data, String parentId) {
         List<TreeViewModel> treeList = new ArrayList<>();
-        List<TreeViewModel> childNodeList = data.stream().filter(t -> String.valueOf(t.getParentId()).equals(parentId)).collect(Collectors.toList());
+        List<TreeViewModel> childNodeList =
+                data.stream()
+                        .filter(t -> String.valueOf(t.getParentId()).equals(parentId))
+                        .collect(Collectors.toList());
         for (TreeViewModel entity : childNodeList) {
             TreeViewModel model = new TreeViewModel();
             model.setId(entity.getId());
@@ -40,7 +58,21 @@ public class ListToTreeUtil {
             model.setParentId(entity.getParentId());
             model.setIsexpand(entity.getIsexpand());
             model.setComplete(entity.getComplete());
-            model.setHasChildren(entity.getHasChildren() == null ? data.stream().filter(t -> String.valueOf(t.getParentId()).equals(String.valueOf(entity.getId()))).count() == 0 ? false : true : false);
+            model.setHasChildren(
+                    entity.getHasChildren() == null
+                            ? data.stream()
+                                                    .filter(
+                                                            t ->
+                                                                    String.valueOf(t.getParentId())
+                                                                            .equals(
+                                                                                    String.valueOf(
+                                                                                            entity
+                                                                                                    .getId())))
+                                                    .count()
+                                            == 0
+                                    ? false
+                                    : true
+                            : false);
             if (entity.getShowcheck()) {
                 model.setCheckstate(entity.getCheckstate());
                 model.setShowcheck(true);
@@ -86,9 +118,9 @@ public class ListToTreeUtil {
     /**
      * 转换树表
      *
-     * @param data     数据
+     * @param data 数据
      * @param parentId 父节点
-     * @param level    层级
+     * @param level 层级
      * @return
      */
     public static Object listTree(List<TreeListModel> data, String parentId, int level) {
@@ -102,13 +134,17 @@ public class ListToTreeUtil {
     /**
      * 递归
      *
-     * @param data         数据
-     * @param level        层级
-     * @param parentId     父节点
+     * @param data 数据
+     * @param level 层级
+     * @param parentId 父节点
      * @param treeGridList 返回数据
      */
-    private static void getChildNodeList(List<TreeListModel> data, int level, String parentId, List<Object> treeGridList) {
-        List<TreeListModel> childNodeList = data.stream().filter(t -> t.getParentId().equals(parentId)).collect(Collectors.toList());
+    private static void getChildNodeList(
+            List<TreeListModel> data, int level, String parentId, List<Object> treeGridList) {
+        List<TreeListModel> childNodeList =
+                data.stream()
+                        .filter(t -> t.getParentId().equals(parentId))
+                        .collect(Collectors.toList());
         if (childNodeList.size() > 0) {
             level++;
         }
@@ -121,7 +157,12 @@ public class ListToTreeUtil {
             if (entity.getIsLeaf() != null) {
                 ht.put("isLeaf", entity.getIsLeaf());
             } else {
-                ht.put("isLeaf", data.stream().filter(t -> t.getParentId().equals(entity.getId())).count() == 0 ? true : false);
+                ht.put(
+                        "isLeaf",
+                        data.stream().filter(t -> t.getParentId().equals(entity.getId())).count()
+                                        == 0
+                                ? true
+                                : false);
             }
             ht.put("parent", parentId);
             ht.put("expanded", entity.getExpanded());
@@ -134,21 +175,22 @@ public class ListToTreeUtil {
     /**
      * 递归查询父节点
      *
-     * @param data     条件的的数据
-     * @param dataAll  所有的数据
-     * @param id       id
+     * @param data 条件的的数据
+     * @param dataAll 所有的数据
+     * @param id id
      * @param parentId parentId
      * @param <T>
      * @return
      */
-    public static <T> JSONArray treeWhere(List<T> data, List<T> dataAll, String id, String parentId) {
+    public static <T> JSONArray treeWhere(
+            List<T> data, List<T> dataAll, String id, String parentId) {
         JSONArray resultData = new JSONArray();
         if (data.size() == dataAll.size()) {
             resultData.addAll(data);
             return resultData;
         }
         List<T> dataListAll = new ArrayList<>();
-        CollectionUtils.addAll(dataListAll,dataAll);
+        CollectionUtils.addAll(dataListAll, dataAll);
         dataListAll.removeAll(data);
         for (int i = 0; i < data.size(); i++) {
             T entity = data.get(i);
@@ -167,7 +209,7 @@ public class ListToTreeUtil {
     /**
      * 递归查询父节点
      *
-     * @param data    条件的的数据
+     * @param data 条件的的数据
      * @param dataAll 所有的数据
      * @param <T>
      * @return
@@ -181,16 +223,24 @@ public class ListToTreeUtil {
     /**
      * 递归查询父节点
      *
-     * @param dataAll    所有数据
-     * @param json       当前对象
+     * @param dataAll 所有数据
+     * @param json 当前对象
      * @param resultData 结果数据
-     * @param id         id
-     * @param parentId   parentId
+     * @param id id
+     * @param parentId parentId
      * @param <T>
      * @return
      */
-    private static <T> JSONArray ParentData(List<T> dataAll, JSONObject json, JSONArray resultData, String id, String parentId) {
-        List<T> data = dataAll.stream().filter(t -> JSONObject.parseObject(JSONObject.toJSONString(t)).get(id).equals(json.getString(parentId))).collect(Collectors.toList());
+    private static <T> JSONArray ParentData(
+            List<T> dataAll, JSONObject json, JSONArray resultData, String id, String parentId) {
+        List<T> data =
+                dataAll.stream()
+                        .filter(
+                                t ->
+                                        JSONObject.parseObject(JSONObject.toJSONString(t))
+                                                .get(id)
+                                                .equals(json.getString(parentId)))
+                        .collect(Collectors.toList());
         dataAll.removeAll(data);
         for (int i = 0; i < data.size(); i++) {
             T entity = data.get(i);
@@ -210,18 +260,25 @@ public class ListToTreeUtil {
     /**
      * 递归查询子节点
      *
-     * @param dataAll  所有的数据
-     * @param id       id
+     * @param dataAll 所有的数据
+     * @param id id
      * @param parentId parentId
-     * @param fid      查询的父亲节点
+     * @param fid 查询的父亲节点
      * @param <T>
      * @return
      */
     public static <T> JSONArray treeWhere(String fid, List<T> dataAll, String id, String parentId) {
         JSONArray resultData = new JSONArray();
-        List<T> data = dataAll.stream().filter(t -> JSONObject.parseObject(JSONObject.toJSONString(t)).get(parentId).equals(fid)).collect(Collectors.toList());
+        List<T> data =
+                dataAll.stream()
+                        .filter(
+                                t ->
+                                        JSONObject.parseObject(JSONObject.toJSONString(t))
+                                                .get(parentId)
+                                                .equals(fid))
+                        .collect(Collectors.toList());
         List<T> dataListAll = new ArrayList<>();
-        CollectionUtils.addAll(dataListAll,dataAll);
+        CollectionUtils.addAll(dataListAll, dataAll);
         dataListAll.removeAll(data);
         for (int i = 0; i < data.size(); i++) {
             T entity = data.get(i);
@@ -240,7 +297,7 @@ public class ListToTreeUtil {
      * 递归查询子节点
      *
      * @param data 所有的数据
-     * @param fid  查询的父亲节点
+     * @param fid 查询的父亲节点
      * @param <T>
      * @return
      */
@@ -253,15 +310,23 @@ public class ListToTreeUtil {
     /**
      * 递归查询子节点
      *
-     * @param dataAll  所有的数据
-     * @param id       F_Id
+     * @param dataAll 所有的数据
+     * @param id F_Id
      * @param parentId F_ParentId
-     * @param fid      查询的父亲节点
+     * @param fid 查询的父亲节点
      * @param <T>
      * @return
      */
-    public static <T> JSONArray ChildData(String fid, List<T> dataAll, JSONArray resultData, String id, String parentId) {
-        List<T> data = dataAll.stream().filter(t -> JSONObject.parseObject(JSONObject.toJSONString(t)).get(parentId).equals(fid)).collect(Collectors.toList());
+    public static <T> JSONArray ChildData(
+            String fid, List<T> dataAll, JSONArray resultData, String id, String parentId) {
+        List<T> data =
+                dataAll.stream()
+                        .filter(
+                                t ->
+                                        JSONObject.parseObject(JSONObject.toJSONString(t))
+                                                .get(parentId)
+                                                .equals(fid))
+                        .collect(Collectors.toList());
         dataAll.removeAll(data);
         for (int i = 0; i < data.size(); i++) {
             T entity = data.get(i);

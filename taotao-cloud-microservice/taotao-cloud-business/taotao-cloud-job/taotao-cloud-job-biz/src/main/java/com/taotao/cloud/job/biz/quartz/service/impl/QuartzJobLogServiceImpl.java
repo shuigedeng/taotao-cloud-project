@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.biz.quartz.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
@@ -14,47 +30,45 @@ import java.util.Objects;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-/**
- * 定时任务日志
- */
+/** 定时任务日志 */
 @Service
 public class QuartzJobLogServiceImpl implements QuartzJobLogService {
 
-	private final QuartzJobLogMapper quartzJobLogMapper;
+    private final QuartzJobLogMapper quartzJobLogMapper;
 
-	public QuartzJobLogServiceImpl(QuartzJobLogMapper quartzJobLogMapper) {
-		this.quartzJobLogMapper = quartzJobLogMapper;
-	}
+    public QuartzJobLogServiceImpl(QuartzJobLogMapper quartzJobLogMapper) {
+        this.quartzJobLogMapper = quartzJobLogMapper;
+    }
 
-	@Override
-	@Async("asyncExecutor")
-	public void add(QuartzJobLogEntity quartzJobLog) {
-		quartzJobLog.setCreateTime(LocalDateTime.now());
-		quartzJobLogMapper.insert(quartzJobLog);
-	}
+    @Override
+    @Async("asyncExecutor")
+    public void add(QuartzJobLogEntity quartzJobLog) {
+        quartzJobLog.setCreateTime(LocalDateTime.now());
+        quartzJobLogMapper.insert(quartzJobLog);
+    }
 
-	@Override
-	public PageResult<QuartzJobLogVO> page(QuartzJobLogQuery quartzJobLogQuery) {
+    @Override
+    public PageResult<QuartzJobLogVO> page(QuartzJobLogQuery quartzJobLogQuery) {
 
-		LambdaQueryWrapper<QuartzJobLogEntity> wrapper = new LambdaQueryWrapper<>();
-		wrapper
-			.eq(QuartzJobLogEntity::getClassName, quartzJobLogQuery.getClassName())
-			.eq(Objects.nonNull(quartzJobLogQuery.getSuccess()), QuartzJobLogEntity::getIsSuccess,
-				quartzJobLogQuery.getSuccess())
-			.orderByDesc(QuartzJobLogEntity::getId);
+        LambdaQueryWrapper<QuartzJobLogEntity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(QuartzJobLogEntity::getClassName, quartzJobLogQuery.getClassName())
+                .eq(
+                        Objects.nonNull(quartzJobLogQuery.getSuccess()),
+                        QuartzJobLogEntity::getIsSuccess,
+                        quartzJobLogQuery.getSuccess())
+                .orderByDesc(QuartzJobLogEntity::getId);
 
-		IPage<QuartzJobLogEntity> quartzLogIPage = this.quartzJobLogMapper.selectPage(
-			quartzJobLogQuery.buildMpPage(), wrapper);
+        IPage<QuartzJobLogEntity> quartzLogIPage =
+                this.quartzJobLogMapper.selectPage(quartzJobLogQuery.buildMpPage(), wrapper);
 
-		return PageResult.convertMybatisPage(quartzLogIPage, QuartzJobLogVO.class);
-	}
+        return PageResult.convertMybatisPage(quartzLogIPage, QuartzJobLogVO.class);
+    }
 
-	@Override
-	public QuartzJobLogVO findById(Long id) {
-		QuartzJobLogVO vo = new QuartzJobLogVO();
-		QuartzJobLogEntity quartzJobLog = quartzJobLogMapper.selectById(id);
-		BeanUtil.copyProperties(quartzJobLog, vo);
-		return vo;
-	}
-
+    @Override
+    public QuartzJobLogVO findById(Long id) {
+        QuartzJobLogVO vo = new QuartzJobLogVO();
+        QuartzJobLogEntity quartzJobLog = quartzJobLogMapper.selectById(id);
+        BeanUtil.copyProperties(quartzJobLog, vo);
+        return vo;
+    }
 }

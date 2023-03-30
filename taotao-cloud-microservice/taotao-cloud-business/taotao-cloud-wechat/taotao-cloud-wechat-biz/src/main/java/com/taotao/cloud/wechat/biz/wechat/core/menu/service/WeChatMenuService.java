@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.wechat.core.menu.service;
 
 import cn.bootx.common.core.exception.DataNotExistException;
@@ -13,6 +29,7 @@ import cn.bootx.starter.wechat.param.menu.WeChatMenuParam;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.date.DateUtil;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +40,11 @@ import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-/**   
+/**
  * 微信菜单
- * @author xxm  
- * @date 2022/8/6 
+ *
+ * @author xxm
+ * @date 2022/8/6
  */
 @Slf4j
 @Service
@@ -37,60 +53,52 @@ public class WeChatMenuService {
     private final WxMpService wxMpService;
     private final WeChatMenuManager weChatMenuManager;
 
-    /**
-     * 添加
-     */
-    public void add(WeChatMenuParam param){
+    /** 添加 */
+    public void add(WeChatMenuParam param) {
         WeChatMenu weChatMenu = WeChatMenu.init(param);
         weChatMenuManager.save(weChatMenu);
     }
 
-    /**
-     * 修改
-     */
-    public void update(WeChatMenuParam param){
-        WeChatMenu weChatMenu = weChatMenuManager.findById(param.getId()).orElseThrow(DataNotExistException::new);
+    /** 修改 */
+    public void update(WeChatMenuParam param) {
+        WeChatMenu weChatMenu =
+                weChatMenuManager.findById(param.getId()).orElseThrow(DataNotExistException::new);
 
-        BeanUtil.copyProperties(param,weChatMenu, CopyOptions.create().ignoreNullValue());
+        BeanUtil.copyProperties(param, weChatMenu, CopyOptions.create().ignoreNullValue());
         weChatMenuManager.updateById(weChatMenu);
     }
 
-    /**
-     * 分页
-     */
-    public PageResult<WeChatMenuDto> page(PageQuery PageQuery, WeChatMenuParam weChatMenuParam){
-        return MpUtil.convert2DtoPageResult(weChatMenuManager.page(PageQuery,weChatMenuParam));
+    /** 分页 */
+    public PageResult<WeChatMenuDto> page(PageQuery PageQuery, WeChatMenuParam weChatMenuParam) {
+        return MpUtil.convert2DtoPageResult(weChatMenuManager.page(PageQuery, weChatMenuParam));
     }
 
-    /**
-     * 获取单条
-     */
-    public WeChatMenuDto findById(Long id){
-        return weChatMenuManager.findById(id).map(WeChatMenu::toDto).orElseThrow(DataNotExistException::new);
+    /** 获取单条 */
+    public WeChatMenuDto findById(Long id) {
+        return weChatMenuManager
+                .findById(id)
+                .map(WeChatMenu::toDto)
+                .orElseThrow(DataNotExistException::new);
     }
 
-    /**
-     * 获取全部
-     */
-    public List<WeChatMenuDto> findAll(){
+    /** 获取全部 */
+    public List<WeChatMenuDto> findAll() {
         return ResultConvertUtil.dtoListConvert(weChatMenuManager.findAll());
     }
 
-    /**
-     * 删除
-     */
-    public void delete(Long id){
+    /** 删除 */
+    public void delete(Long id) {
         weChatMenuManager.deleteById(id);
     }
 
-
-    /**
-     * 发布菜单
-     */
+    /** 发布菜单 */
     @SneakyThrows
     @Transactional(rollbackFor = Exception.class)
-    public void publish(Long id){
-        WeChatMenu weChatMenu = weChatMenuManager.findById(id).orElseThrow(() -> new DataNotExistException("菜单信息不存在"));
+    public void publish(Long id) {
+        WeChatMenu weChatMenu =
+                weChatMenuManager
+                        .findById(id)
+                        .orElseThrow(() -> new DataNotExistException("菜单信息不存在"));
         WxMenu wxMenu = weChatMenu.getMenuInfo().toWxMenu();
         WxMpMenuService menuService = wxMpService.getMenuService();
         menuService.menuCreate(wxMenu);
@@ -99,31 +107,27 @@ public class WeChatMenuService {
         weChatMenuManager.updateById(weChatMenu);
     }
 
-    /**
-     * 导入当前微信菜单
-     */
+    /** 导入当前微信菜单 */
     @Transactional(rollbackFor = Exception.class)
     @SneakyThrows
-    public void importMenu(){
+    public void importMenu() {
         WxMpMenuService menuService = wxMpService.getMenuService();
         WxMpMenu wxMpMenu = menuService.menuGet();
         WeChatMenuInfo weChatMenuInfo = WeChatMenuInfo.init(wxMpMenu);
-        WeChatMenu weChatMenu = new WeChatMenu()
-                .setName("微信自定义菜单")
-                .setRemark("导入时间" + DateUtil.now())
-                .setPublish(true)
-                .setMenuInfo(weChatMenuInfo);
+        WeChatMenu weChatMenu =
+                new WeChatMenu()
+                        .setName("微信自定义菜单")
+                        .setRemark("导入时间" + DateUtil.now())
+                        .setPublish(true)
+                        .setMenuInfo(weChatMenuInfo);
         weChatMenuManager.clearPublish();
         weChatMenuManager.save(weChatMenu);
     }
 
-    /**
-     * 清空菜单
-     */
+    /** 清空菜单 */
     @SneakyThrows
-    public void clearMenu(){
+    public void clearMenu() {
         WxMpMenuService menuService = wxMpService.getMenuService();
         menuService.menuDelete();
     }
-
 }

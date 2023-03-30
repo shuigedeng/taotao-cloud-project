@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.order.biz.stream.kafka;
 
 import com.taotao.cloud.rocketmq.channel.TaoTaoCloudSink;
@@ -20,55 +36,56 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderConsumer {
 
-	//, @Payload String msg
-	@StreamListener(value = TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
-	@SendTo(Processor.OUTPUT)
-	public Message<?> test(Message<String> message) {
-		String payload = message.getPayload();
-		System.out.println("order Consumer" + payload);
+    // , @Payload String msg
+    @StreamListener(value = TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
+    @SendTo(Processor.OUTPUT)
+    public Message<?> test(Message<String> message) {
+        String payload = message.getPayload();
+        System.out.println("order Consumer" + payload);
 
-		return MessageBuilder.fromMessage(message)
-			.build();
-	}
+        return MessageBuilder.fromMessage(message).build();
+    }
 
-	//@StreamListener(value=TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
-	//public void in(String in, @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
-	//	System.out.println(in);
-	//	consumer.pause(Collections.singleton(new TopicPartition("myTopic", 0)));
-	//}
+    // @StreamListener(value=TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
+    // public void in(String in, @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
+    //	System.out.println(in);
+    //	consumer.pause(Collections.singleton(new TopicPartition("myTopic", 0)));
+    // }
 
-	@Bean
-	public ApplicationListener<ListenerContainerIdleEvent> idleListener() {
-		return event -> {
-			System.out.println(event);
-			if (event.getConsumer().paused().size() > 0) {
-				event.getConsumer().resume(event.getConsumer().paused());
-			}
-		};
-	}
+    @Bean
+    public ApplicationListener<ListenerContainerIdleEvent> idleListener() {
+        return event -> {
+            System.out.println(event);
+            if (event.getConsumer().paused().size() > 0) {
+                event.getConsumer().resume(event.getConsumer().paused());
+            }
+        };
+    }
 
-	@Component
-	public static class NoOpBindingMeters {
+    @Component
+    public static class NoOpBindingMeters {
 
-		NoOpBindingMeters(MeterRegistry registry) {
-			registry.config().meterFilter(
-				MeterFilter.denyNameStartsWith(KafkaBinderMetrics.OFFSET_LAG_METRIC_NAME));
-		}
-	}
+        NoOpBindingMeters(MeterRegistry registry) {
+            registry.config()
+                    .meterFilter(
+                            MeterFilter.denyNameStartsWith(
+                                    KafkaBinderMetrics.OFFSET_LAG_METRIC_NAME));
+        }
+    }
 
-	@Bean
-	public DlqPartitionFunction partitionFunction() {
-		return (group, record, ex) -> 0;
-	}
+    @Bean
+    public DlqPartitionFunction partitionFunction() {
+        return (group, record, ex) -> 0;
+    }
 
-	@Bean
-	public DlqDestinationResolver dlqDestinationResolver() {
-		return (rec, ex) -> {
-			if ("word1".equals(rec.topic())) {
-				return "topic1-dlq";
-			} else {
-				return "topic2-dlq";
-			}
-		};
-	}
+    @Bean
+    public DlqDestinationResolver dlqDestinationResolver() {
+        return (rec, ex) -> {
+            if ("word1".equals(rec.topic())) {
+                return "topic1-dlq";
+            } else {
+                return "topic2-dlq";
+            }
+        };
+    }
 }

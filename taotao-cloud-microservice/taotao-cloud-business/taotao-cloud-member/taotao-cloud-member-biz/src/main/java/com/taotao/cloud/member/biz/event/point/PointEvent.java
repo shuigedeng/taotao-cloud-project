@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.event.point;
 
 import org.springframework.context.ApplicationEvent;
@@ -26,11 +27,11 @@ import org.springframework.context.ApplicationEvent;
  */
 public class PointEvent extends ApplicationEvent {
 
-	public PointEvent(Object source) {
-		super(source);
-	}
+    public PointEvent(Object source) {
+        super(source);
+    }
 
-	//public PointEvent(OrderLog orderLog) {
-	//	super(orderLog);
-	//}
+    // public PointEvent(OrderLog orderLog) {
+    //	super(orderLog);
+    // }
 }

@@ -1,10 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.kit.core.kit;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
-
-import javax.crypto.Cipher;
 import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -24,26 +38,18 @@ import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
+import javax.crypto.Cipher;
 
-/**
- * <p>RSA 非对称加密工具类</p>
- */
-
+/** RSA 非对称加密工具类 */
 public class RsaKit {
 
-    /**
-     * RSA最大加密明文大小
-     */
+    /** RSA最大加密明文大小 */
     private static final int MAX_ENCRYPT_BLOCK = 117;
 
-    /**
-     * RSA最大解密密文大小
-     */
+    /** RSA最大解密密文大小 */
     private static final int MAX_DECRYPT_BLOCK = 128;
 
-    /**
-     * 加密算法RSA
-     */
+    /** 加密算法RSA */
     private static final String KEY_ALGORITHM = "RSA";
 
     /**
@@ -71,11 +77,10 @@ public class RsaKit {
     }
 
     /**
-     * 使用模和指数生成RSA公钥
-     * 注意：【此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同，如Android默认是RSA
+     * 使用模和指数生成RSA公钥 注意：【此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同，如Android默认是RSA
      * /None/NoPadding】
      *
-     * @param modulus  模
+     * @param modulus 模
      * @param exponent 公钥指数
      * @return {@link RSAPublicKey}
      */
@@ -87,7 +92,7 @@ public class RsaKit {
             RSAPublicKeySpec keySpec = new RSAPublicKeySpec(b1, b2);
             return (RSAPublicKey) keyFactory.generatePublic(keySpec);
         } catch (Exception e) {
-			LogUtils.error("使用模和指数生成RSA公钥错误",e);
+            LogUtils.error("使用模和指数生成RSA公钥错误", e);
             return null;
         }
     }
@@ -95,7 +100,7 @@ public class RsaKit {
     /**
      * 公钥加密
      *
-     * @param data      需要加密的数据
+     * @param data 需要加密的数据
      * @param publicKey 公钥
      * @return 加密后的数据
      * @throws Exception 异常信息
@@ -107,7 +112,7 @@ public class RsaKit {
     /**
      * 公钥加密
      *
-     * @param data      需要加密的数据
+     * @param data 需要加密的数据
      * @param publicKey 公钥
      * @return 加密后的数据
      * @throws Exception 异常信息
@@ -119,19 +124,20 @@ public class RsaKit {
     /**
      * 公钥加密
      *
-     * @param data      需要加密的数据
+     * @param data 需要加密的数据
      * @param publicKey 公钥
-     * @param fillMode  填充模式
+     * @param fillMode 填充模式
      * @return 加密后的数据
      * @throws Exception 异常信息
      */
-    public static String encryptByPublicKey(String data, String publicKey, String fillMode) throws Exception {
+    public static String encryptByPublicKey(String data, String publicKey, String fillMode)
+            throws Exception {
         byte[] dataByte = data.getBytes(StandardCharsets.UTF_8);
         byte[] keyBytes = Base64.decode(publicKey);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         Key key = keyFactory.generatePublic(x509KeySpec);
-        //对数据加密
+        // 对数据加密
         Cipher cipher = Cipher.getInstance(fillMode);
         cipher.init(Cipher.ENCRYPT_MODE, key);
         int inputLen = dataByte.length;
@@ -139,7 +145,7 @@ public class RsaKit {
         int offSet = 0;
         byte[] cache;
         int i = 0;
-        //对数据分段加密
+        // 对数据分段加密
         while (inputLen - offSet > 0) {
             if (inputLen - offSet > MAX_ENCRYPT_BLOCK) {
                 cache = cipher.doFinal(dataByte, offSet, MAX_ENCRYPT_BLOCK);
@@ -158,7 +164,7 @@ public class RsaKit {
     /**
      * 私钥签名
      *
-     * @param data       需要加密的数据
+     * @param data 需要加密的数据
      * @param privateKey 私钥
      * @return 加密后的数据
      * @throws Exception 异常信息
@@ -178,7 +184,7 @@ public class RsaKit {
     /**
      * 私钥签名
      *
-     * @param data       需要加密的数据
+     * @param data 需要加密的数据
      * @param privateKey 私钥
      * @return 加密后的数据
      * @throws Exception 异常信息
@@ -194,13 +200,14 @@ public class RsaKit {
     /**
      * 公钥验证签名
      *
-     * @param data      需要加密的数据
-     * @param sign      签名
+     * @param data 需要加密的数据
+     * @param sign 签名
      * @param publicKey 公钥
      * @return 验证结果
      * @throws Exception 异常信息
      */
-    public static boolean checkByPublicKey(String data, String sign, String publicKey) throws Exception {
+    public static boolean checkByPublicKey(String data, String sign, String publicKey)
+            throws Exception {
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         byte[] encodedKey = Base64.decode(publicKey);
         PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
@@ -213,13 +220,14 @@ public class RsaKit {
     /**
      * 公钥验证签名
      *
-     * @param data      需要加密的数据
-     * @param sign      签名
+     * @param data 需要加密的数据
+     * @param sign 签名
      * @param publicKey 公钥
      * @return 验证结果
      * @throws Exception 异常信息
      */
-    public static boolean checkByPublicKey(String data, String sign, PublicKey publicKey) throws Exception {
+    public static boolean checkByPublicKey(String data, String sign, PublicKey publicKey)
+            throws Exception {
         Signature signature = Signature.getInstance("SHA256WithRSA");
         signature.initVerify(publicKey);
         signature.update(data.getBytes(StandardCharsets.UTF_8));
@@ -229,7 +237,7 @@ public class RsaKit {
     /**
      * 私钥解密
      *
-     * @param data       需要解密的数据
+     * @param data 需要解密的数据
      * @param privateKey 私钥
      * @return 解密后的数据
      * @throws Exception 异常信息
@@ -241,7 +249,7 @@ public class RsaKit {
     /**
      * 私钥解密
      *
-     * @param data       需要解密的数据
+     * @param data 需要解密的数据
      * @param privateKey 私钥
      * @return 解密后的数据
      * @throws Exception 异常信息
@@ -253,13 +261,14 @@ public class RsaKit {
     /**
      * 私钥解密
      *
-     * @param data       需要解密的数据
+     * @param data 需要解密的数据
      * @param privateKey 私钥
-     * @param fillMode   填充模式
+     * @param fillMode 填充模式
      * @return 解密后的数据
      * @throws Exception 异常信息
      */
-    public static String decryptByPrivateKey(String data, String privateKey, String fillMode) throws Exception {
+    public static String decryptByPrivateKey(String data, String privateKey, String fillMode)
+            throws Exception {
         byte[] encryptedData = Base64.decode(data);
         byte[] keyBytes = Base64.decode(privateKey);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
@@ -273,7 +282,7 @@ public class RsaKit {
         int offSet = 0;
         byte[] cache;
         int i = 0;
-        //对数据分段解密
+        // 对数据分段解密
         while (inputLen - offSet > 0) {
             if (inputLen - offSet > MAX_DECRYPT_BLOCK) {
                 cache = cipher.doFinal(encryptedData, offSet, MAX_DECRYPT_BLOCK);
@@ -359,7 +368,7 @@ public class RsaKit {
         System.out.println("加密之后：" + encrypt);
         System.out.println("解密之后：" + decrypt);
 
-        //OPPO
+        // OPPO
         String sign = encryptByPrivateKey(content, privateKey);
         System.out.println("加密之后：" + sign);
         System.out.println(checkByPublicKey(content, sign, publicKey));

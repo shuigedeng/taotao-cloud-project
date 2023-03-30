@@ -1,24 +1,23 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.ApiCodeEnum;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;
@@ -32,20 +31,16 @@ import com.taotao.cloud.payment.biz.jeepay.core.entity.SysUser;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.SysUserAuth;
 import com.taotao.cloud.payment.biz.jeepay.core.exception.BizException;
 import com.taotao.cloud.payment.biz.jeepay.service.mapper.MchInfoMapper;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
- * <p>
  * 商户信息表 服务实现类
- * </p>
  *
  * @author [mybatis plus generator]
  * @since 2021-04-27
@@ -119,10 +114,9 @@ public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
         if (!saveResult) {
             throw new BizException(ApiCodeEnum.SYS_OPERATION_FAIL_CREATE);
         }
-
     }
 
-    /** 删除商户 **/
+    /** 删除商户 * */
     @Transactional(rollbackFor = Exception.class)
     public List<Long> removeByMchNo(String mchNo) {
         try {
@@ -143,16 +137,19 @@ public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
 
             // 3.删除当前商户支付接口配置参数
             List<String> appIdList = new LinkedList<>();
-            mchAppService.list(MchApp.gw().eq(MchApp::getMchNo, mchNo)).forEach(item -> appIdList.add(item.getAppId()));
-            payInterfaceConfigService.remove(PayInterfaceConfig.gw()
-                    .in(PayInterfaceConfig::getInfoId, appIdList)
-                    .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP)
-            );
+            mchAppService
+                    .list(MchApp.gw().eq(MchApp::getMchNo, mchNo))
+                    .forEach(item -> appIdList.add(item.getAppId()));
+            payInterfaceConfigService.remove(
+                    PayInterfaceConfig.gw()
+                            .in(PayInterfaceConfig::getInfoId, appIdList)
+                            .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP));
 
-            List<SysUser> userList = sysUserService.list(SysUser.gw()
-                    .eq(SysUser::getBelongInfoId, mchNo)
-                    .eq(SysUser::getSysType, CS.SYS_TYPE.MCH)
-            );
+            List<SysUser> userList =
+                    sysUserService.list(
+                            SysUser.gw()
+                                    .eq(SysUser::getBelongInfoId, mchNo)
+                                    .eq(SysUser::getSysType, CS.SYS_TYPE.MCH));
 
             // 4.删除当前商户应用信息
             mchAppService.removeByIds(appIdList);
@@ -160,7 +157,7 @@ public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
             // 返回的用户id
             List<Long> userIdList = new ArrayList<>();
             if (userList.size() > 0) {
-                for (SysUser user:userList) {
+                for (SysUser user : userList) {
                     userIdList.add(user.getSysUserId());
                 }
                 // 5.删除当前商户用户子用户信息
@@ -168,10 +165,10 @@ public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
             }
 
             // 6.删除当前商户的登录用户
-            sysUserService.remove(SysUser.gw()
-                    .eq(SysUser::getBelongInfoId, mchNo)
-                    .eq(SysUser::getSysType, CS.SYS_TYPE.MCH)
-            );
+            sysUserService.remove(
+                    SysUser.gw()
+                            .eq(SysUser::getBelongInfoId, mchNo)
+                            .eq(SysUser::getSysType, CS.SYS_TYPE.MCH));
 
             // 7.删除当前商户
             boolean removeMchInfo = removeById(mchNo);
@@ -179,7 +176,7 @@ public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
                 throw new BizException("删除当前商户失败");
             }
             return userIdList;
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new BizException(e.getMessage());
         }
     }

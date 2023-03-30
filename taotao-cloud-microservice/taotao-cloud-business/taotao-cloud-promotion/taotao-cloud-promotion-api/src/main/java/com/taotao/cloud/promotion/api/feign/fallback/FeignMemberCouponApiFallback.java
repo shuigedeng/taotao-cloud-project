@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.promotion.api.feign.fallback;
 
 import com.taotao.cloud.promotion.api.feign.IFeignMemberCouponApi;
@@ -27,20 +28,18 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  */
 public class FeignMemberCouponApiFallback implements FallbackFactory<IFeignMemberCouponApi> {
 
-	@Override
-	public IFeignMemberCouponApi create(Throwable throwable) {
-		return new IFeignMemberCouponApi() {
+    @Override
+    public IFeignMemberCouponApi create(Throwable throwable) {
+        return new IFeignMemberCouponApi() {
 
-			@Override
-			public void used(List<String> ids) {
-				//	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
-				//	return Result.fail(null, 500);
-			}
+            @Override
+            public void used(List<String> ids) {
+                //	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
+                //	return Result.fail(null, 500);
+            }
 
-			@Override
-			public void receiveCoupon(String couponId, Long memberId, String memberName) {
-
-			}
-		};
-	}
+            @Override
+            public void receiveCoupon(String couponId, Long memberId, String memberName) {}
+        };
+    }
 }

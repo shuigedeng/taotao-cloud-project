@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.goods.biz.model.convert;
 
 import com.taotao.cloud.goods.api.model.dto.ParametersDTO;
 import com.taotao.cloud.goods.api.model.vo.ParametersVO;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * IParametersMapStruct
@@ -32,32 +32,28 @@ import java.util.List;
  * @since 2022-04-27 16:58:27
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ParametersConvert {
 
-	/**
-	 * 实例
-	 */
-	ParametersConvert INSTANCE = Mappers.getMapper(ParametersConvert.class);
+    /** 实例 */
+    ParametersConvert INSTANCE = Mappers.getMapper(ParametersConvert.class);
 
-	/**
-	 * 参数参数vos
-	 *
-	 * @param parameters 参数
-	 * @return {@link List }<{@link ParametersVO }>
-	 * @since 2022-04-27 16:58:27
-	 */
-	List<ParametersVO> convert(List<Parameters> parameters);
+    /**
+     * 参数参数vos
+     *
+     * @param parameters 参数
+     * @return {@link List }<{@link ParametersVO }>
+     * @since 2022-04-27 16:58:27
+     */
+    List<ParametersVO> convert(List<Parameters> parameters);
 
-	/**
-	 * 参数dtoto参数
-	 *
-	 * @param parametersDTO 参数dto
-	 * @return {@link Parameters }
-	 * @since 2022-04-27 16:58:27
-	 */
-	Parameters convert(ParametersDTO parametersDTO);
-
-
+    /**
+     * 参数dtoto参数
+     *
+     * @param parametersDTO 参数dto
+     * @return {@link Parameters }
+     * @since 2022-04-27 16:58:27
+     */
+    Parameters convert(ParametersDTO parametersDTO);
 }

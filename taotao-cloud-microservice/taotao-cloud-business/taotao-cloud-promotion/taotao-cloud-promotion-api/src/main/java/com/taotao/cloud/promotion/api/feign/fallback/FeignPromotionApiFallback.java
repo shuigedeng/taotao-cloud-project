@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.promotion.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionApi;
 import java.util.Map;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -28,15 +28,14 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  */
 public class FeignPromotionApiFallback implements FallbackFactory<IFeignPromotionApi> {
 
-	@Override
-	public IFeignPromotionApi create(Throwable throwable) {
-		return new IFeignPromotionApi() {
+    @Override
+    public IFeignPromotionApi create(Throwable throwable) {
+        return new IFeignPromotionApi() {
 
-			@Override
-			public Map<String, Object> getGoodsSkuPromotionMap(Long storeId,
-				Long goodsIndexId) {
-				return null;
-			}
-		};
-	}
+            @Override
+            public Map<String, Object> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId) {
+                return null;
+            }
+        };
+    }
 }

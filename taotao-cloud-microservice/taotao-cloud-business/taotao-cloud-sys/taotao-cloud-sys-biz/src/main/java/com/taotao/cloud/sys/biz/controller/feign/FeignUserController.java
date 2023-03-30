@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.feign;
 
 import com.taotao.cloud.common.model.SecurityUser;
@@ -36,23 +37,23 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @AllArgsConstructor
-public class FeignUserController extends BaseFeignController<IUserService, User, Long> implements
-	IFeignUserApi {
+public class FeignUserController extends BaseFeignController<IUserService, User, Long>
+        implements IFeignUserApi {
 
-	private final IFeignUserService feignUserService;
+    private final IFeignUserService feignUserService;
 
-	@Override
-	public UserQueryVO findUserInfoByUsername(String username) {
-		return null;
-	}
+    @Override
+    public UserQueryVO findUserInfoByUsername(String username) {
+        return null;
+    }
 
-	@Override
-	public SecurityUser getUserInfoBySocial(String providerId, int providerUserId) {
-		return null;
-	}
+    @Override
+    public SecurityUser getUserInfoBySocial(String providerId, int providerUserId) {
+        return null;
+    }
 
-	@Override
-	public SecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
-		return null;
-	}
+    @Override
+    public SecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
+        return null;
+    }
 }

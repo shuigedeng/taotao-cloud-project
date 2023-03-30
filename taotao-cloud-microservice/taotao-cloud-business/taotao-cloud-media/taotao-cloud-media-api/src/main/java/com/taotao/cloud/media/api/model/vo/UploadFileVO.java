@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.media.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,11 +29,11 @@ import java.io.Serializable;
 @Schema(name = "UploadFileVO", description = "上传文件VO")
 public class UploadFileVO implements Serializable {
 
-	private static final long serialVersionUID = 5126530068827085130L;
+    private static final long serialVersionUID = 5126530068827085130L;
 
-	@Schema(description = "id")
-	private Long id;
+    @Schema(description = "id")
+    private Long id;
 
-	@Schema(description = "文件路径")
-	private String url;
+    @Schema(description = "文件路径")
+    private String url;
 }

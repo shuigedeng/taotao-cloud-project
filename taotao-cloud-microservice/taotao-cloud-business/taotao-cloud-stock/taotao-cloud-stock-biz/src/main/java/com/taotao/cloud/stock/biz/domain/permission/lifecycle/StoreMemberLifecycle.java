@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.stock.biz.domain.permission.lifecycle;
 
+import static org.mallfoundry.store.StoreLifecycle.POSITION_STEP;
+
 import org.mallfoundry.member.MemberService;
 import org.mallfoundry.store.Store;
 import org.mallfoundry.store.StoreLifecycle;
 import org.springframework.core.annotation.Order;
-
-import static org.mallfoundry.store.StoreLifecycle.POSITION_STEP;
 
 @Order(POSITION_STEP * 3)
 public class StoreMemberLifecycle implements StoreLifecycle {

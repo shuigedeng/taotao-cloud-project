@@ -13,43 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Select;
 
-/**
- * 会员积分历史数据处理层
- */
+/** 会员积分历史数据处理层 */
 public interface IMemberPointsHistoryMapper extends BaseSuperMapper<MemberPointsHistory, Long> {
 
-	/**
-	 * 获取所有用户的积分历史VO
-	 *
-	 * @param pointType 积分类型
-	 * @return 积分
-	 */
-	@Select("""
+    /**
+     * 获取所有用户的积分历史VO
+     *
+     * @param pointType 积分类型
+     * @return 积分
+     */
+    @Select(
+            """
 		SELECT SUM( variable_point )
 		FROM tt_member_points_history
 		WHERE point_type = #{pointType}
 		""")
-	Long getALLMemberPointsHistoryVO(String pointType);
+    Long getALLMemberPointsHistoryVO(String pointType);
 
-	/**
-	 * 获取用户的积分数量
-	 *
-	 * @param pointType 积分类型
-	 * @param memberId  会员ID
-	 * @return 积分数量
-	 */
-	@Select("""
+    /**
+     * 获取用户的积分数量
+     *
+     * @param pointType 积分类型
+     * @param memberId 会员ID
+     * @return 积分数量
+     */
+    @Select(
+            """
 		SELECT SUM( variable_point )
 		FROM tt_member_points_history
 		WHERE point_type = #{pointType} AND member_id=#{memberId}
 		""")
-	Long getMemberPointsHistoryVO(String pointType, String memberId);
-
-
+    Long getMemberPointsHistoryVO(String pointType, String memberId);
 }

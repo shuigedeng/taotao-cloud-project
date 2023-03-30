@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.log.api.event;
 
 import java.time.Clock;
@@ -27,11 +28,11 @@ import org.springframework.context.ApplicationEvent;
  */
 public class SysUserLoginLogEvent extends ApplicationEvent {
 
-	public SysUserLoginLogEvent(Object source) {
-		super(source);
-	}
+    public SysUserLoginLogEvent(Object source) {
+        super(source);
+    }
 
-	public SysUserLoginLogEvent(Object source, Clock clock) {
-		super(source, clock);
-	}
+    public SysUserLoginLogEvent(Object source, Clock clock) {
+        super(source, clock);
+    }
 }

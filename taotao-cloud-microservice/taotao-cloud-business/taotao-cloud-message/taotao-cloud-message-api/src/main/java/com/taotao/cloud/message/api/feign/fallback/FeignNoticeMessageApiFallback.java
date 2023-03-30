@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.message.api.feign.fallback;
 
 import com.taotao.cloud.message.api.feign.IFeignNoticeMessageApi;
@@ -25,47 +26,44 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignNoticeMessageApiFallback implements
-	FallbackFactory<IFeignNoticeMessageApi> {
+public class FeignNoticeMessageApiFallback implements FallbackFactory<IFeignNoticeMessageApi> {
 
-	@Override
-	public IFeignNoticeMessageApi create(Throwable throwable) {
-		return new IFeignNoticeMessageApi() {
+    @Override
+    public IFeignNoticeMessageApi create(Throwable throwable) {
+        return new IFeignNoticeMessageApi() {
 
-			@Override
-			public void noticeMessage(NoticeMessageDTO noticeMessageDTO) {
+            @Override
+            public void noticeMessage(NoticeMessageDTO noticeMessageDTO) {}
 
-			}
+            @Override
+            public boolean sendSms() {
+                return false;
+            }
 
-			@Override
-			public boolean sendSms() {
-				return false;
-			}
+            @Override
+            public boolean sendMessage() {
+                return false;
+            }
 
-			@Override
-			public boolean sendMessage() {
-				return false;
-			}
+            @Override
+            public boolean sendDingtalk() {
+                return false;
+            }
 
-			@Override
-			public boolean sendDingtalk() {
-				return false;
-			}
+            @Override
+            public boolean sendWechat() {
+                return false;
+            }
 
-			@Override
-			public boolean sendWechat() {
-				return false;
-			}
+            @Override
+            public boolean sendEmail() {
+                return false;
+            }
 
-			@Override
-			public boolean sendEmail() {
-				return false;
-			}
-
-			@Override
-			public boolean sendStoreMessage() {
-				return false;
-			}
-		};
-	}
+            @Override
+            public boolean sendStoreMessage() {
+                return false;
+            }
+        };
+    }
 }

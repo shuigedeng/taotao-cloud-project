@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.model.entity.system.ServiceNotice;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * IServiceNoticeMapper
@@ -26,7 +26,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-
-public interface IServiceNoticeMapper extends BaseSuperMapper<ServiceNotice, Long> {
-
-}
+public interface IServiceNoticeMapper extends BaseSuperMapper<ServiceNotice, Long> {}

@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.bo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
-
 import java.io.Serializable;
 
 /**
@@ -28,32 +28,21 @@ import java.io.Serializable;
  */
 @RecordBuilder
 public record JobBO(
-	/**
-	 * 岗位名称
-	 */
-	String name,
+        /** 岗位名称 */
+        String name,
 
-	/**
-	 * 部门id
-	 */
-	Long deptId,
+        /** 部门id */
+        Long deptId,
 
-	/**
-	 * 备注
-	 */
-	String remark,
+        /** 备注 */
+        String remark,
 
-	/**
-	 * 排序值
-	 */
-	Integer sortNum,
+        /** 排序值 */
+        Integer sortNum,
 
-	/**
-	 * 租户id
-	 */
-	String tenantId) implements Serializable {
+        /** 租户id */
+        String tenantId)
+        implements Serializable {
 
-	static final long serialVersionUID = -7605952923416404638L;
-
-
+    static final long serialVersionUID = -7605952923416404638L;
 }

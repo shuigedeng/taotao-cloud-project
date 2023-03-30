@@ -1,5 +1,20 @@
-package com.taotao.cloud.payment.biz.jeepay.jeepay;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.payment.biz.jeepay.jeepay;
 
 import com.taotao.cloud.payment.biz.jeepay.jeepay.exception.JeepayException;
 import com.taotao.cloud.payment.biz.jeepay.jeepay.net.APIResource;
@@ -11,6 +26,7 @@ import java.util.Map;
 
 /**
  * Jeepay sdk客户端
+ *
  * @author jmdhappy
  * @site https://www.jeepay.vip
  * @date 2021-06-08 11:00
@@ -67,10 +83,10 @@ public class JeepayClient extends APIResource {
         this.apiBase = apiBase;
     }
 
-    public JeepayClient() {
-    }
+    public JeepayClient() {}
 
-    public static synchronized JeepayClient getInstance(String appId, String apiKey, String apiBase) {
+    public static synchronized JeepayClient getInstance(
+            String appId, String apiKey, String apiBase) {
         JeepayClient client = clientMap.get(appId);
         if (client != null) {
             return client;
@@ -109,17 +125,17 @@ public class JeepayClient extends APIResource {
     public <T extends JeepayResponse> T execute(JeepayRequest<T> request) throws JeepayException {
 
         // 支持用户自己设置RequestOptions
-        if(request.getRequestOptions() == null) {
-            RequestOptions options = RequestOptions.builder()
-                    .setVersion(request.getApiVersion())
-                    .setUri(request.getApiUri())
-                    .setAppId(this.appId)
-                    .setApiKey(this.apiKey)
-                    .build();
+        if (request.getRequestOptions() == null) {
+            RequestOptions options =
+                    RequestOptions.builder()
+                            .setVersion(request.getApiVersion())
+                            .setUri(request.getApiUri())
+                            .setAppId(this.appId)
+                            .setApiKey(this.apiKey)
+                            .build();
             request.setRequestOptions(options);
         }
 
         return execute(request, RequestMethod.POST, this.apiBase);
     }
-
 }

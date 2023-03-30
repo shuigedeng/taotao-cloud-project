@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.message.biz.model.convert;
 
 import com.taotao.cloud.message.biz.model.entity.Message;
@@ -30,22 +31,19 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-28 13:39:18
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MessageConvert {
 
-	/**
-	 * 实例
-	 */
-	MessageConvert INSTANCE = Mappers.getMapper(MessageConvert.class);
+    /** 实例 */
+    MessageConvert INSTANCE = Mappers.getMapper(MessageConvert.class);
 
-	/**
-	 * 部门列表给签证官
-	 *
-	 * @param deptList 部门列表
-	 * @return {@link List }<{@link DeptTreeVO }>
-	 * @since 2022-04-28 13:39:18
-	 */
-	List<DeptTreeVO> convertTree(List<Message> deptList);
-
+    /**
+     * 部门列表给签证官
+     *
+     * @param deptList 部门列表
+     * @return {@link List }<{@link DeptTreeVO }>
+     * @since 2022-04-28 13:39:18
+     */
+    List<DeptTreeVO> convertTree(List<Message> deptList);
 }

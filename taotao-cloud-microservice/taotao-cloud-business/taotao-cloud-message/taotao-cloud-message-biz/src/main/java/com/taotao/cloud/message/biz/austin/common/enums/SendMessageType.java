@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.message.biz.austin.common.enums;
 
 import lombok.AllArgsConstructor;
@@ -14,94 +30,53 @@ import lombok.ToString;
 @AllArgsConstructor
 public enum SendMessageType {
 
-    /**
-     * 文本类型的消息
-     */
+    /** 文本类型的消息 */
     TEXT("10", "文本", "text", "text", "text", "text"),
-    /**
-     * 语音类型的消息
-     */
+    /** 语音类型的消息 */
     VOICE("20", "语音", null, "voice", null, null),
-    /**
-     * 视频类型的消息
-     */
+    /** 视频类型的消息 */
     VIDEO("30", "视频", null, null, null, null),
-    /**
-     * 图文类型的消息
-     */
+    /** 图文类型的消息 */
     NEWS("40", "图文", "feedCard", null, "news", null),
-    /**
-     * 文本卡片类型的消息
-     */
+    /** 文本卡片类型的消息 */
     TEXT_CARD("50", "文本卡片", null, null, null, null),
-    /**
-     * 文件类型的消息
-     */
+    /** 文件类型的消息 */
     FILE("60", "文件", null, "file", "file", null),
-    /**
-     * 小程序通知类型的消息
-     */
+    /** 小程序通知类型的消息 */
     MINI_PROGRAM_NOTICE("70", "小程序通知", null, null, null, null),
-    /**
-     * markdown类型的消息
-     */
+    /** markdown类型的消息 */
     MARKDOWN("80", "markdown", "markdown", "markdown", "markdown", null),
-    /**
-     * 模板卡片类型的消息
-     */
+    /** 模板卡片类型的消息 */
     TEMPLATE_CARD("90", "模板卡片", null, null, "template_card", null),
-    /**
-     * 图片类型的消息
-     */
+    /** 图片类型的消息 */
     IMAGE("100", "图片", null, "image", "image", "image"),
-    /**
-     * 链接消息类型的消息
-     */
+    /** 链接消息类型的消息 */
     LINK("110", "链接消息", "link", "link", null, null),
-    /**
-     * 跳转卡片消息类型的消息
-     */
+    /** 跳转卡片消息类型的消息 */
     ACTION_CARD("120", "跳转卡片消息", "actionCard", "action_card", null, "interactive"),
-    /**
-     * OA消息类型的消息
-     */
+    /** OA消息类型的消息 */
     OA("130", "OA消息", null, "oa", null, null),
-    /**
-     * 图文消息(mpNews)类型的消息
-     */
+    /** 图文消息(mpNews)类型的消息 */
     MP_NEWS("140", "图文消息(mpNews)", null, null, null, null),
-    /**
-     * 富文本类型的消息
-     */
+    /** 富文本类型的消息 */
     RICH_TEXT("150", "富文本", null, null, null, "post"),
-    /**
-     * 群名片类型的消息
-     */
+    /** 群名片类型的消息 */
     SHARE_CHAT("160", "群名片", null, null, null, "share_chat");
 
     private final String code;
     private final String description;
 
-    /**
-     * 钉钉工作消息的类型值
-     */
+    /** 钉钉工作消息的类型值 */
     private final String dingDingRobotType;
 
-    /**
-     * 钉钉机器人消息的类型值
-     */
+    /** 钉钉机器人消息的类型值 */
     private final String dingDingWorkType;
 
-    /**
-     * 企业微信机器人的类型值
-     */
+    /** 企业微信机器人的类型值 */
     private final String enterpriseWeChatRobotType;
 
-    /**
-     * 飞书机器人类型值
-     */
+    /** 飞书机器人类型值 */
     private final String feiShuRobotType;
-
 
     /**
      * 通过code获取钉钉机器人的Type值

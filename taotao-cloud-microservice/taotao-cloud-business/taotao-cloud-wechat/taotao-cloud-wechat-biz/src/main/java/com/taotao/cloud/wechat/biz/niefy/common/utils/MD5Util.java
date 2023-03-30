@@ -1,13 +1,28 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.niefy.common.utils;
 
 import java.security.MessageDigest;
 import java.util.Objects;
 
-/**
- * MD5加密工具类
- */
+/** MD5加密工具类 */
 public class MD5Util {
-    private static final String DEFAULT_MD_5_SALT = "fjdsl321312kf349832&*^*903294[JNLIUIK]%fsdjfkl";//加盐md5盐值
+    private static final String DEFAULT_MD_5_SALT =
+            "fjdsl321312kf349832&*^*903294[JNLIUIK]%fsdjfkl"; // 加盐md5盐值
 
     /**
      * 获得字符串的md5值
@@ -15,7 +30,9 @@ public class MD5Util {
      * @return md5加密后的字符串
      */
     public static String getMd5(String s) {
-        char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+        char[] hexDigits = {
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+        };
         try {
             byte[] btInput = s.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象
@@ -54,7 +71,7 @@ public class MD5Util {
     /**
      * 获得加盐md5，算法过程是原字符串md5后连接加盐字符串后再进行md5
      *
-     * @param str  待加密的字符串
+     * @param str 待加密的字符串
      * @param salt 盐
      * @return 加盐md5
      */
@@ -63,8 +80,7 @@ public class MD5Util {
     }
 
     /**
-     * 获得加盐md5，算法过程是原字符串md5后连接加盐字符串后再进行md5
-     * 使用默认盐值
+     * 获得加盐md5，算法过程是原字符串md5后连接加盐字符串后再进行md5 使用默认盐值
      *
      * @param str 待加密的字符串
      * @return 加盐md5

@@ -1,4 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.mp.controller.admin.account;
+
+import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
@@ -9,15 +27,12 @@ import cn.iocoder.yudao.module.mp.service.account.MpAccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import javax.validation.Valid;
-import java.util.List;
-
-import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 @Api(tags = "管理后台 - 公众号账号")
 @RestController
@@ -25,8 +40,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 @Validated
 public class MpAccountController {
 
-    @Resource
-    private MpAccountService mpAccountService;
+    @Resource private MpAccountService mpAccountService;
 
     @PostMapping("/create")
     @ApiOperation("创建公众号账号")
@@ -38,7 +52,8 @@ public class MpAccountController {
     @PutMapping("/update")
     @ApiOperation("更新公众号账号")
     @PreAuthorize("@ss.hasPermission('mp:account:update')")
-    public CommonResult<Boolean> updateAccount(@Valid @RequestBody MpAccountUpdateReqVO updateReqVO) {
+    public CommonResult<Boolean> updateAccount(
+            @Valid @RequestBody MpAccountUpdateReqVO updateReqVO) {
         mpAccountService.updateAccount(updateReqVO);
         return success(true);
     }
@@ -54,7 +69,12 @@ public class MpAccountController {
 
     @GetMapping("/get")
     @ApiOperation("获得公众号账号")
-    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
+    @ApiImplicitParam(
+            name = "id",
+            value = "编号",
+            required = true,
+            example = "1024",
+            dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:account:query')")
     public CommonResult<MpAccountRespVO> getAccount(@RequestParam("id") Long id) {
         MpAccountDO wxAccount = mpAccountService.getAccount(id);
@@ -64,7 +84,8 @@ public class MpAccountController {
     @GetMapping("/page")
     @ApiOperation("获得公众号账号分页")
     @PreAuthorize("@ss.hasPermission('mp:account:query')")
-    public CommonResult<PageResult<MpAccountRespVO>> getAccountPage(@Valid MpAccountPageReqVO pageVO) {
+    public CommonResult<PageResult<MpAccountRespVO>> getAccountPage(
+            @Valid MpAccountPageReqVO pageVO) {
         PageResult<MpAccountDO> pageResult = mpAccountService.getAccountPage(pageVO);
         return success(MpAccountConvert.INSTANCE.convertPage(pageResult));
     }
@@ -94,5 +115,4 @@ public class MpAccountController {
         mpAccountService.clearAccountQuota(id);
         return success(true);
     }
-
 }

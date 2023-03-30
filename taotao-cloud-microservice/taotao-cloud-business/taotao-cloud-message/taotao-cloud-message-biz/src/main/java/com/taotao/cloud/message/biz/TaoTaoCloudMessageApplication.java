@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.message.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * TaoTaoCloudMessageApplication
@@ -31,10 +30,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @TaoTaoCloudApplication
 public class TaoTaoCloudMessageApplication {
 
-	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-message");
+    public static void main(String[] args) {
+        PropertyUtils.setDefaultProperty("taotao-cloud-message");
 
-		SpringApplication.run(TaoTaoCloudMessageApplication.class, args);
-	}
-
+        SpringApplication.run(TaoTaoCloudMessageApplication.class, args);
+    }
 }

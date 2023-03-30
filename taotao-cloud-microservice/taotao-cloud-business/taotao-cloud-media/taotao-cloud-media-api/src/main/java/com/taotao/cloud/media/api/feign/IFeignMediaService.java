@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.media.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
@@ -14,18 +30,20 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteChatbotService", value = ServiceName.TAOTAO_CLOUD_FILE, fallbackFactory = FeignMediaFallback.class)
+@FeignClient(
+        contextId = "remoteChatbotService",
+        value = ServiceName.TAOTAO_CLOUD_FILE,
+        fallbackFactory = FeignMediaFallback.class)
 public interface IFeignMediaService {
 
-	/**
-	 * 根据id查询文件信息
-	 *
-	 * @param id id
-	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.dfs.api.vo.FileVO>
-	 * @author shuigedeng
-	 * @since 2020/11/20 上午11:17
-	 */
-	@GetMapping("/file/info/id/{id:[0-9]*}")
-	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id);
+    /**
+     * 根据id查询文件信息
+     *
+     * @param id id
+     * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.dfs.api.vo.FileVO>
+     * @author shuigedeng
+     * @since 2020/11/20 上午11:17
+     */
+    @GetMapping("/file/info/id/{id:[0-9]*}")
+    public Result<FileVO> findFileById(@PathVariable(value = "id") Long id);
 }
-

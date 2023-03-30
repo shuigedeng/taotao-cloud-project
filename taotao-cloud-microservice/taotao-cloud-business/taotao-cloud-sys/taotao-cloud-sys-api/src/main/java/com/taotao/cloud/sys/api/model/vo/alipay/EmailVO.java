@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.api.model.vo.alipay;
 
-
 import java.util.List;
-
 import lombok.*;
 
 /**
@@ -34,10 +33,9 @@ import lombok.*;
 @NoArgsConstructor
 public class EmailVO {
 
-	/**
-	 * 收件人，支持多个收件人
-	 */
-	private List<String> tos;
-	private String subject;
-	private String content;
+    /** 收件人，支持多个收件人 */
+    private List<String> tos;
+
+    private String subject;
+    private String content;
 }

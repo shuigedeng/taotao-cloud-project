@@ -1,18 +1,19 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.mch.ctrl.merchant;
 
 import com.alibaba.fastjson.JSONObject;
@@ -34,15 +35,14 @@ import com.taotao.cloud.payment.biz.jeepay.service.impl.MchAppService;
 import com.taotao.cloud.payment.biz.jeepay.service.impl.MchInfoService;
 import com.taotao.cloud.payment.biz.jeepay.service.impl.PayInterfaceConfigService;
 import com.taotao.cloud.payment.biz.jeepay.service.impl.SysConfigService;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 商户支付接口配置类
@@ -62,18 +62,22 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
     @Autowired private IMQSender mqSender;
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 查询商户支付接口配置列表
-     * @Date: 10:51 2021/5/13
-    */
+     * @Author: ZhuXiao @Description: 查询商户支付接口配置列表 @Date: 10:51 2021/5/13
+     */
     @PreAuthorize("hasAuthority('ENT_MCH_PAY_CONFIG_LIST')")
     @GetMapping
     public ApiRes list() {
         MchInfo mchInfo = mchInfoService.getById(getCurrentUser().getSysUser().getBelongInfoId());
-        List<PayInterfaceDefine> list = payInterfaceConfigService.selectAllPayIfConfigListByAppId(getValStringRequired("appId"));
+        List<PayInterfaceDefine> list =
+                payInterfaceConfigService.selectAllPayIfConfigListByAppId(
+                        getValStringRequired("appId"));
 
         for (PayInterfaceDefine define : list) {
-            define.addExt("mchParams", mchInfo.getType() == CS.MCH_TYPE_NORMAL ? define.getNormalMchParams() : define.getIsvsubMchParams());
+            define.addExt(
+                    "mchParams",
+                    mchInfo.getType() == CS.MCH_TYPE_NORMAL
+                            ? define.getNormalMchParams()
+                            : define.getIsvsubMchParams());
             define.setNormalMchParams(null);
             define.setIsvsubMchParams(null);
         }
@@ -81,18 +85,20 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
     }
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 根据 商户号、接口类型 获取商户参数配置
-     * @Date: 10:54 2021/5/13
-    */
+     * @Author: ZhuXiao @Description: 根据 商户号、接口类型 获取商户参数配置 @Date: 10:54 2021/5/13
+     */
     @PreAuthorize("hasAuthority('ENT_MCH_PAY_CONFIG_VIEW')")
     @GetMapping("/{appId}/{ifCode}")
-    public ApiRes getByMchNo(@PathVariable(value = "appId") String appId, @PathVariable(value = "ifCode") String ifCode) {
-        PayInterfaceConfig payInterfaceConfig = payInterfaceConfigService.getByInfoIdAndIfCode(CS.INFO_TYPE_MCH_APP, appId, ifCode);
+    public ApiRes getByMchNo(
+            @PathVariable(value = "appId") String appId,
+            @PathVariable(value = "ifCode") String ifCode) {
+        PayInterfaceConfig payInterfaceConfig =
+                payInterfaceConfigService.getByInfoIdAndIfCode(CS.INFO_TYPE_MCH_APP, appId, ifCode);
         if (payInterfaceConfig != null) {
             // 费率转换为百分比数值
             if (payInterfaceConfig.getIfRate() != null) {
-                payInterfaceConfig.setIfRate(payInterfaceConfig.getIfRate().multiply(new BigDecimal("100")));
+                payInterfaceConfig.setIfRate(
+                        payInterfaceConfig.getIfRate().multiply(new BigDecimal("100")));
             }
 
             // 敏感数据脱敏
@@ -101,7 +107,10 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
 
                 // 普通商户的支付参数执行数据脱敏
                 if (mchInfo.getType() == CS.MCH_TYPE_NORMAL) {
-                    NormalMchParams mchParams = NormalMchParams.factory(payInterfaceConfig.getIfCode(), payInterfaceConfig.getIfParams());
+                    NormalMchParams mchParams =
+                            NormalMchParams.factory(
+                                    payInterfaceConfig.getIfCode(),
+                                    payInterfaceConfig.getIfParams());
                     if (mchParams != null) {
                         payInterfaceConfig.setIfParams(mchParams.deSenData());
                     }
@@ -112,10 +121,8 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
     }
 
     /**
-     * @Author: ZhuXiao
-     * @Description: 更新商户支付参数
-     * @Date: 10:56 2021/5/13
-    */
+     * @Author: ZhuXiao @Description: 更新商户支付参数 @Date: 10:56 2021/5/13
+     */
     @PreAuthorize("hasAuthority('ENT_MCH_PAY_CONFIG_ADD')")
     @PostMapping
     @MethodLog(remark = "更新商户支付参数")
@@ -130,25 +137,30 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
 
         // 存入真实费率
         if (payInterfaceConfig.getIfRate() != null) {
-            payInterfaceConfig.setIfRate(payInterfaceConfig.getIfRate().divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
+            payInterfaceConfig.setIfRate(
+                    payInterfaceConfig
+                            .getIfRate()
+                            .divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
         }
 
-        //添加更新者信息
+        // 添加更新者信息
         Long userId = getCurrentUser().getSysUser().getSysUserId();
         String realName = getCurrentUser().getSysUser().getRealname();
         payInterfaceConfig.setUpdatedUid(userId);
         payInterfaceConfig.setUpdatedBy(realName);
 
-        //根据 商户号、接口类型 获取商户参数配置
-        PayInterfaceConfig dbRecoed = payInterfaceConfigService.getByInfoIdAndIfCode(CS.INFO_TYPE_MCH_APP, infoId, ifCode);
-        //若配置存在，为saveOrUpdate添加ID，第一次配置添加创建者
+        // 根据 商户号、接口类型 获取商户参数配置
+        PayInterfaceConfig dbRecoed =
+                payInterfaceConfigService.getByInfoIdAndIfCode(
+                        CS.INFO_TYPE_MCH_APP, infoId, ifCode);
+        // 若配置存在，为saveOrUpdate添加ID，第一次配置添加创建者
         if (dbRecoed != null) {
             payInterfaceConfig.setId(dbRecoed.getId());
 
             // 合并支付参数
             payInterfaceConfig.setIfParams(
-	            StringKit.marge(dbRecoed.getIfParams(), payInterfaceConfig.getIfParams()));
-        }else {
+                    StringKit.marge(dbRecoed.getIfParams(), payInterfaceConfig.getIfParams()));
+        } else {
             payInterfaceConfig.setCreatedUid(userId);
             payInterfaceConfig.setCreatedBy(realName);
         }
@@ -158,12 +170,16 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
             throw new BizException("配置失败");
         }
         mqSender.send(
-	        ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP, null, getCurrentMchNo(), infoId));
+                ResetIsvMchAppInfoConfigMQ.build(
+                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP,
+                        null,
+                        getCurrentMchNo(),
+                        infoId));
 
         return ApiRes.ok();
     }
 
-    /** 查询支付宝商户授权URL **/
+    /** 查询支付宝商户授权URL * */
     @GetMapping("/alipayIsvsubMchAuthUrls/{mchAppId}")
     public ApiRes queryAlipayIsvsubMchAuthUrl(@PathVariable String mchAppId) {
 
@@ -175,7 +191,8 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
 
         MchInfo mchInfo = mchInfoService.getById(mchApp.getMchNo());
         DBApplicationConfig dbApplicationConfig = sysConfigService.getDBApplicationConfig();
-        String authUrl = dbApplicationConfig.genAlipayIsvsubMchAuthUrl(mchInfo.getIsvNo(), mchAppId);
+        String authUrl =
+                dbApplicationConfig.genAlipayIsvsubMchAuthUrl(mchInfo.getIsvNo(), mchAppId);
         String authQrImgUrl = dbApplicationConfig.genScanImgUrl(authUrl);
 
         JSONObject result = new JSONObject();
@@ -184,26 +201,31 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
         return ApiRes.ok(result);
     }
 
-
     /** 查询当前应用支持的支付接口 */
     @PreAuthorize("hasAuthority( 'ENT_DIVISION_RECEIVER_ADD' )")
-    @RequestMapping(value="ifCodes/{appId}", method = RequestMethod.GET)
+    @RequestMapping(value = "ifCodes/{appId}", method = RequestMethod.GET)
     public ApiRes getIfCodeByAppId(@PathVariable("appId") String appId) {
 
-        if(mchAppService.count(MchApp.gw().eq(MchApp::getMchNo, getCurrentMchNo()).eq(MchApp::getAppId, appId)) <= 0){
+        if (mchAppService.count(
+                        MchApp.gw()
+                                .eq(MchApp::getMchNo, getCurrentMchNo())
+                                .eq(MchApp::getAppId, appId))
+                <= 0) {
             throw new BizException("商户应用不存在");
         }
 
         Set<String> result = new HashSet<>();
 
-        payInterfaceConfigService.list(PayInterfaceConfig.gw().select(PayInterfaceConfig::getIfCode)
-        .eq(PayInterfaceConfig::getState, CS.PUB_USABLE)
-        .eq(PayInterfaceConfig::getInfoId, appId)
-        .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP)
-        ).stream().forEach(r -> result.add(r.getIfCode()));
+        payInterfaceConfigService
+                .list(
+                        PayInterfaceConfig.gw()
+                                .select(PayInterfaceConfig::getIfCode)
+                                .eq(PayInterfaceConfig::getState, CS.PUB_USABLE)
+                                .eq(PayInterfaceConfig::getInfoId, appId)
+                                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP))
+                .stream()
+                .forEach(r -> result.add(r.getIfCode()));
 
         return ApiRes.ok(result);
     }
-
-
 }

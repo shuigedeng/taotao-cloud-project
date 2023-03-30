@@ -1,18 +1,19 @@
 /*
- * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.ysfpay;
 
 import com.alibaba.fastjson.JSONObject;
@@ -24,13 +25,12 @@ import com.taotao.cloud.payment.biz.jeepay.pay.channel.AbstractChannelNoticeServ
 import com.taotao.cloud.payment.biz.jeepay.pay.channel.ysfpay.utils.YsfSignUtils;
 import com.taotao.cloud.payment.biz.jeepay.pay.model.MchAppConfigContext;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.msg.ChannelRetMsg;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 云闪付回调
@@ -49,7 +49,8 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
     }
 
     @Override
-    public MutablePair<String, Object> parseParams(HttpServletRequest request, String urlOrderId, NoticeTypeEnum noticeTypeEnum) {
+    public MutablePair<String, Object> parseParams(
+            HttpServletRequest request, String urlOrderId, NoticeTypeEnum noticeTypeEnum) {
 
         try {
 
@@ -64,7 +65,12 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
     }
 
     @Override
-    public ChannelRetMsg doNotice(HttpServletRequest request, Object params, PayOrder payOrder, MchAppConfigContext mchAppConfigContext, NoticeTypeEnum noticeTypeEnum) {
+    public ChannelRetMsg doNotice(
+            HttpServletRequest request,
+            Object params,
+            PayOrder payOrder,
+            MchAppConfigContext mchAppConfigContext,
+            NoticeTypeEnum noticeTypeEnum) {
         try {
 
             ChannelRetMsg result = ChannelRetMsg.confirmSuccess(null);
@@ -78,12 +84,12 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
             // 校验支付回调
             boolean verifyResult = verifyParams(jsonParams, payOrder, mchAppConfigContext);
             // 验证参数失败
-            if(!verifyResult){
+            if (!verifyResult) {
                 throw ResponseException.buildText("ERROR");
             }
             log.info("{}验证支付通知数据及签名通过", logPrefix);
 
-            //验签成功后判断上游订单状态
+            // 验签成功后判断上游订单状态
             ResponseEntity okResponse = textResp("success");
             result.setResponseEntity(okResponse);
             result.setChannelOrderId(jsonParams.getString("transIndex"));
@@ -97,12 +103,14 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
 
     /**
      * 验证云闪付支付通知参数
+     *
      * @return
      */
-    public boolean verifyParams(JSONObject jsonParams, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public boolean verifyParams(
+            JSONObject jsonParams, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
-        String orderNo = jsonParams.getString("orderNo");		// 商户订单号
-        String txnAmt = jsonParams.getString("txnAmt"); 		// 支付金额
+        String orderNo = jsonParams.getString("orderNo"); // 商户订单号
+        String txnAmt = jsonParams.getString("txnAmt"); // 支付金额
         if (StringUtils.isEmpty(orderNo)) {
             log.info("订单ID为空 [orderNo]={}", orderNo);
             return false;
@@ -112,24 +120,33 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
             return false;
         }
 
-        YsfpayIsvParams isvParams = (YsfpayIsvParams)configContextQueryService.queryIsvParams(mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
+        YsfpayIsvParams isvParams =
+                (YsfpayIsvParams)
+                        configContextQueryService.queryIsvParams(
+                                mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
 
-        //验签
+        // 验签
         String ysfpayPublicKey = isvParams.getYsfpayPublicKey();
 
-        //验签失败
-        if(!YsfSignUtils.validate((JSONObject) JSONObject.toJSON(jsonParams), ysfpayPublicKey)) {
-            log.info("【云闪付回调】 验签失败！ 回调参数：parameter = {}, ysfpayPublicKey={} ", jsonParams, ysfpayPublicKey);
+        // 验签失败
+        if (!YsfSignUtils.validate((JSONObject) JSONObject.toJSON(jsonParams), ysfpayPublicKey)) {
+            log.info(
+                    "【云闪付回调】 验签失败！ 回调参数：parameter = {}, ysfpayPublicKey={} ",
+                    jsonParams,
+                    ysfpayPublicKey);
             return false;
         }
 
         // 核对金额
         long dbPayAmt = payOrder.getAmount().longValue();
         if (dbPayAmt != Long.parseLong(txnAmt)) {
-            log.info("订单金额与参数金额不符。 dbPayAmt={}, txnAmt={}, payOrderId={}", dbPayAmt, txnAmt, orderNo);
+            log.info(
+                    "订单金额与参数金额不符。 dbPayAmt={}, txnAmt={}, payOrderId={}",
+                    dbPayAmt,
+                    txnAmt,
+                    orderNo);
             return false;
         }
         return true;
     }
-
 }

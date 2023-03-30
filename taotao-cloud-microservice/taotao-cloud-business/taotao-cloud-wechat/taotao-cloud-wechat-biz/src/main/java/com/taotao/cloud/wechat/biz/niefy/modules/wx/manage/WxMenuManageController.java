@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.niefy.modules.wx.manage;
 
 import com.github.niefy.common.utils.R;
@@ -26,12 +42,9 @@ import org.springframework.web.bind.annotation.*;
 public class WxMenuManageController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     private final WxMpService wxService;
-    @Autowired
-    private WxMpService wxMpService;
+    @Autowired private WxMpService wxMpService;
 
-    /**
-     * 获取公众号菜单
-     */
+    /** 获取公众号菜单 */
     @GetMapping("/getMenu")
     @ApiOperation(value = "获取公众号菜单")
     public R getMenu(@CookieValue String appid) throws WxErrorException {
@@ -40,13 +53,12 @@ public class WxMenuManageController {
         return R.ok().put(wxMpMenu);
     }
 
-    /**
-     * 创建、更新菜单
-     */
+    /** 创建、更新菜单 */
     @PostMapping("/updateMenu")
     @RequiresPermissions("wx:menu:save")
     @ApiOperation(value = "创建、更新菜单")
-    public R updateMenu(@CookieValue String appid,@RequestBody WxMenu wxMenu) throws WxErrorException {
+    public R updateMenu(@CookieValue String appid, @RequestBody WxMenu wxMenu)
+            throws WxErrorException {
         wxMpService.switchoverTo(appid);
         wxService.getMenuService().menuCreate(wxMenu);
         return R.ok();

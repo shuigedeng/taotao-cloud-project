@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.common.util;
 
 import com.alibaba.fastjson.JSONObject;
@@ -15,23 +31,20 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- */
+/** */
 @Slf4j
 public class IpUtil {
 
-    /**
-     * 检测ip信息的网站
-     */
-    private final static String IP_URL = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={ip}&resource_id=6006";
-    /**
-     * IP的正则
-     */
-    private static Pattern pattern = Pattern
-            .compile("(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
-                    + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
-                    + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
-                    + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})");
+    /** 检测ip信息的网站 */
+    private static final String IP_URL =
+            "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={ip}&resource_id=6006";
+    /** IP的正则 */
+    private static Pattern pattern =
+            Pattern.compile(
+                    "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
+                            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
+                            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
+                            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})");
 
     /**
      * 内网IP
@@ -42,14 +55,19 @@ public class IpUtil {
 
     static {
         Set<String> ipFilter = new HashSet<String>();
-        ipFilter.add("^10\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])"
-                + "\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])" + "\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
+        ipFilter.add(
+                "^10\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])"
+                        + "\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])"
+                        + "\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
         // B类地址范围: 172.16.0.0---172.31.255.255
-        ipFilter.add("^172\\.(1[6789]|2[0-9]|3[01])\\" + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])\\"
-                + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
+        ipFilter.add(
+                "^172\\.(1[6789]|2[0-9]|3[01])\\"
+                        + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])\\"
+                        + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
         // C类地址范围: 192.168.0.0---192.168.255.255
-        ipFilter.add("^192\\.168\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])\\"
-                + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
+        ipFilter.add(
+                "^192\\.168\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])\\"
+                        + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
         ipFilter.add("127.0.0.1");
         ipFilter.add("0.0.0.0");
         ipFilter.add("localhost");
@@ -104,9 +122,7 @@ public class IpUtil {
         return m.matches();
     }
 
-    /**
-     * 获取ip信息
-     */
+    /** 获取ip信息 */
     private static JSONObject getIpInfo(String ip) {
         JSONObject data = null;
         if (!ipIsInner(ip)) {
@@ -116,7 +132,8 @@ public class IpUtil {
                 URL url = new URL(ipUrl);
                 HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
                 httpUrlConnection.setRequestMethod("GET");
-                httpUrlConnection.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
+                httpUrlConnection.setRequestProperty(
+                        "Content-type", "application/x-www-form-urlencoded");
                 httpUrlConnection.setDoInput(true);
                 httpUrlConnection.setDoOutput(true);
                 httpUrlConnection.setReadTimeout(5000);
@@ -146,9 +163,7 @@ public class IpUtil {
         return data;
     }
 
-    /**
-     * 获取ip所在的城市和宽带属于哪一家
-     */
+    /** 获取ip所在的城市和宽带属于哪一家 */
     public static String getIpCity(String ip) {
         String ipInfo = null;
         if (ip != null) {
@@ -170,8 +185,7 @@ public class IpUtil {
     /**
      * 判断IP是否内网IP
      *
-     * @param ip
-     * @Title: ipIsInner
+     * @param ip @Title: ipIsInner
      * @return: boolean
      */
     public static boolean ipIsInner(String ip) {

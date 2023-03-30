@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.convert;
 
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
@@ -29,59 +30,56 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-28 13:39:34
  */
 @Mapper(
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface LogisticsConvert {
 
-	/**
-	 * 实例
-	 */
-	LogisticsConvert INSTANCE = Mappers.getMapper(LogisticsConvert.class);
+    /** 实例 */
+    LogisticsConvert INSTANCE = Mappers.getMapper(LogisticsConvert.class);
 
+    /**
+     * 物流文件签证官
+     *
+     * @param logisticsConfig 物流配置
+     * @return {@link LogisticsVO }
+     * @since 2022-04-28 13:39:35
+     */
+    LogisticsVO convert(LogisticsConfig logisticsConfig);
 
-	/**
-	 * 物流文件签证官
-	 *
-	 * @param logisticsConfig 物流配置
-	 * @return {@link LogisticsVO }
-	 * @since 2022-04-28 13:39:35
-	 */
-	LogisticsVO convert(LogisticsConfig logisticsConfig);
-
-	// /**
-	//  * SysUser转AddUserVO
-	//  *
-	//  * @param sysUser sysUser
-	//  * @return com.taotao.cloud.sys.api.vo.user.AddUserVO
-	//  * @since 2020/11/11 16:59
-	//  */
-	// AddUserVO sysUserToAddUserVO(SysUser sysUser);
-	//
-	// /**
-	//  * list -> SysUser转UserVO
-	//  *
-	//  * @param userList userList
-	//  * @return java.util.List<com.taotao.cloud.sys.api.vo.user.UserVO>
-	//  * @since 2020/11/11 15:00
-	//  */
-	// List<UserVO> sysUserToUserVO(List<SysUser> userList);
-	//
-	// /**
-	//  * UserDTO转SysUser
-	//  *
-	//  * @param userDTO userDTO
-	//  * @return com.taotao.cloud.sys.biz.entity.SysUser
-	//  * @since 2020/11/11 14:52
-	//  */
-	// SysUser userDtoToSysUser(UserDTO userDTO);
-	//
-	// /**
-	//  * 拷贝 UserDTO 到SysUser
-	//  *
-	//  * @param userDTO userDTO
-	//  * @param user    user
-	//  * @return void
-	//  * @since 2020/11/11 16:59
-	//  */
-	// void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
+    // /**
+    //  * SysUser转AddUserVO
+    //  *
+    //  * @param sysUser sysUser
+    //  * @return com.taotao.cloud.sys.api.vo.user.AddUserVO
+    //  * @since 2020/11/11 16:59
+    //  */
+    // AddUserVO sysUserToAddUserVO(SysUser sysUser);
+    //
+    // /**
+    //  * list -> SysUser转UserVO
+    //  *
+    //  * @param userList userList
+    //  * @return java.util.List<com.taotao.cloud.sys.api.vo.user.UserVO>
+    //  * @since 2020/11/11 15:00
+    //  */
+    // List<UserVO> sysUserToUserVO(List<SysUser> userList);
+    //
+    // /**
+    //  * UserDTO转SysUser
+    //  *
+    //  * @param userDTO userDTO
+    //  * @return com.taotao.cloud.sys.biz.entity.SysUser
+    //  * @since 2020/11/11 14:52
+    //  */
+    // SysUser userDtoToSysUser(UserDTO userDTO);
+    //
+    // /**
+    //  * 拷贝 UserDTO 到SysUser
+    //  *
+    //  * @param userDTO userDTO
+    //  * @param user    user
+    //  * @return void
+    //  * @since 2020/11/11 16:59
+    //  */
+    // void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
 }

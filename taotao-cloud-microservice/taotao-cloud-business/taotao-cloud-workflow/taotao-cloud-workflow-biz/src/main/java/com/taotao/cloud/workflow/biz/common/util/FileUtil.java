@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.workflow.biz.common.util;
 
 import java.io.BufferedReader;
@@ -29,9 +45,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-/**
- *
- */
+/** */
 @Slf4j
 public class FileUtil {
 
@@ -71,7 +85,8 @@ public class FileUtil {
      * @return
      */
     public static boolean createFile(String filePath, String fileName) {
-        String strFilePath = XSSEscape.escapePath(filePath + fileName);;
+        String strFilePath = XSSEscape.escapePath(filePath + fileName);
+        ;
         File file = new File(XSSEscape.escapePath(filePath));
         if (!file.exists()) {
             /** 注意这里是 mkdirs()方法 可以创建多个文件夹 */
@@ -254,11 +269,11 @@ public class FileUtil {
      * 向文件中添加内容
      *
      * @param strcontent 内容
-     * @param filePath   地址
-     * @param fileName   文件名
+     * @param filePath 地址
+     * @param fileName 文件名
      */
     public static void writeToFile(String strcontent, String filePath, String fileName) {
-        //生成文件夹之后，再生成文件，不然会出错
+        // 生成文件夹之后，再生成文件，不然会出错
         String strFilePath = filePath + fileName;
         // 每次写入时，都换行写
         File subfile = new File(XSSEscape.escapePath(strFilePath));
@@ -279,9 +294,9 @@ public class FileUtil {
     /**
      * 修改文件内容（覆盖或者添加）
      *
-     * @param path    文件地址
+     * @param path 文件地址
      * @param content 覆盖内容
-     * @param append  指定了写入的方式，是覆盖写还是追加写(true=追加)(false=覆盖)
+     * @param append 指定了写入的方式，是覆盖写还是追加写(true=追加)(false=覆盖)
      */
     public static void modifyFile(String path, String content, boolean append) {
         try {
@@ -306,8 +321,12 @@ public class FileUtil {
         StringBuffer sb = new StringBuffer("");
         String line;
         try {
-            @Cleanup FileInputStream inputStream = new FileInputStream(new File(XSSEscape.escapePath(filePath + filename)));
-            @Cleanup InputStreamReader inputStreamReader= new InputStreamReader(inputStream, Constants.UTF8);
+            @Cleanup
+            FileInputStream inputStream =
+                    new FileInputStream(new File(XSSEscape.escapePath(filePath + filename)));
+            @Cleanup
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(inputStream, Constants.UTF8);
             @Cleanup BufferedReader reader = new BufferedReader(inputStreamReader);
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
@@ -328,7 +347,7 @@ public class FileUtil {
     public static void renameFile(String oldPath, String newPath) {
         File oleFile = new File(oldPath);
         File newFile = new File(newPath);
-        //执行重命名
+        // 执行重命名
         oleFile.renameTo(newFile);
     }
 
@@ -336,33 +355,33 @@ public class FileUtil {
      * 复制文件
      *
      * @param fromFile 要复制的文件目录
-     * @param toFile   要粘贴的文件目录
+     * @param toFile 要粘贴的文件目录
      * @return 是否复制成功
      */
     public static boolean copy(String fromFile, String toFile) {
-        //要复制的文件目录
+        // 要复制的文件目录
         File[] currentFiles;
         File root = new File(fromFile);
-        //如同判断SD卡是否存在或者文件是否存在
-        //如果不存在则 return出去
+        // 如同判断SD卡是否存在或者文件是否存在
+        // 如果不存在则 return出去
         if (!root.exists()) {
             return false;
         }
-        //如果存在则获取当前目录下的全部文件 填充数组
+        // 如果存在则获取当前目录下的全部文件 填充数组
         currentFiles = root.listFiles();
-        //目标目录
+        // 目标目录
         File targetDir = new File(toFile);
-        //创建目录
+        // 创建目录
         if (!targetDir.exists()) {
             targetDir.mkdirs();
         }
-        //遍历要复制该目录下的全部文件
+        // 遍历要复制该目录下的全部文件
         for (int i = 0; i < currentFiles.length; i++) {
             if (currentFiles[i].isDirectory()) {
-                //如果当前项为子目录 进行递归
+                // 如果当前项为子目录 进行递归
                 copy(currentFiles[i].getPath() + "/", toFile + currentFiles[i].getName() + "/");
             } else {
-                //如果当前项为文件则进行文件拷贝
+                // 如果当前项为文件则进行文件拷贝
                 copyFile(currentFiles[i].getPath(), toFile + currentFiles[i].getName());
             }
         }
@@ -370,8 +389,8 @@ public class FileUtil {
     }
 
     /**
-     * 文件拷贝
-     * 要复制的目录下的所有非子目录(文件夹)文件拷贝
+     * 文件拷贝 要复制的目录下的所有非子目录(文件夹)文件拷贝
+     *
      * @param fromFile
      * @param toFile
      * @return
@@ -395,6 +414,7 @@ public class FileUtil {
 
     /**
      * 文件拷贝
+     *
      * @param fromFile
      * @param toFile
      * @param fileName
@@ -402,9 +422,9 @@ public class FileUtil {
      */
     public static boolean copyFile(String fromFile, String toFile, String fileName) {
         try {
-            //目标目录
+            // 目标目录
             File targetDir = new File(toFile);
-            //创建目录
+            // 创建目录
             if (!targetDir.exists()) {
                 targetDir.mkdirs();
             }
@@ -513,7 +533,7 @@ public class FileUtil {
     /**
      * 上传文件
      *
-     * @param file     文件
+     * @param file 文件
      * @param filePath 保存路径
      * @param fileName 保存名称
      */
@@ -527,16 +547,14 @@ public class FileUtil {
                 tempFile.mkdirs();
             }
             File f = new File(escapeFilePath, escapeFileName);
-            //将上传的文件存储到指定位置
+            // 将上传的文件存储到指定位置
             file.transferTo(f);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
     }
 
-    /**
-     * 读取文件修改时间
-     */
+    /** 读取文件修改时间 */
     public static String getCreateTime(String filePath) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         File file = new File(XSSEscape.escapePath(filePath));
@@ -548,9 +566,7 @@ public class FileUtil {
         return dateString;
     }
 
-    /**
-     * 获取文件类型
-     */
+    /** 获取文件类型 */
     public static String getFileType(File file) {
         if (file.isFile()) {
             String fileName = file.getName();
@@ -560,12 +576,10 @@ public class FileUtil {
         return null;
     }
 
-    /**
-     * 获取文件类型
-     */
+    /** 获取文件类型 */
     public static String getFileType(String fileName) {
         int lastIndexOf = fileName.lastIndexOf(".") + 1;
-        //获取文件的后缀名 jpg
+        // 获取文件的后缀名 jpg
         String suffix = fileName.substring(lastIndexOf);
         return suffix;
     }
@@ -601,16 +615,16 @@ public class FileUtil {
     /**
      * 压缩文件夹
      *
-     * @param srcDir           压缩文件夹路径
-     * @param outDir           压缩文件路径
-     * @param keepDirStructure 是否保留原来的目录结构,
-     *                         true:保留目录结构;
-     *                         false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
+     * @param srcDir 压缩文件夹路径
+     * @param outDir 压缩文件路径
+     * @param keepDirStructure 是否保留原来的目录结构, true:保留目录结构;
+     *     false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
      * @throws RuntimeException 压缩失败会抛出运行时异常
      */
     public static void toZip(String outDir, boolean keepDirStructure, String... srcDir) {
         try {
-            @Cleanup OutputStream out = new FileOutputStream(new File(XSSEscape.escapePath(outDir)));
+            @Cleanup
+            OutputStream out = new FileOutputStream(new File(XSSEscape.escapePath(outDir)));
             @Cleanup ZipOutputStream zos = null;
             try {
                 zos = new ZipOutputStream(out);
@@ -639,15 +653,16 @@ public class FileUtil {
     /**
      * 递归压缩方法
      *
-     * @param sourceFile       源文件
-     * @param zos              zip输出流
-     * @param name             压缩后的名称
-     * @param keepDirStructure 是否保留原来的目录结构,
-     *                         true:保留目录结构;
-     *                         false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
+     * @param sourceFile 源文件
+     * @param zos zip输出流
+     * @param name 压缩后的名称
+     * @param keepDirStructure 是否保留原来的目录结构, true:保留目录结构;
+     *     false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
      * @throws Exception
      */
-    private static void compress(File sourceFile, ZipOutputStream zos, String name, boolean keepDirStructure) throws Exception {
+    private static void compress(
+            File sourceFile, ZipOutputStream zos, String name, boolean keepDirStructure)
+            throws Exception {
         byte[] buf = new byte[BUFFER_SIZE];
         if (sourceFile.isFile()) {
             zos.putNextEntry(new ZipEntry(name));
@@ -668,8 +683,7 @@ public class FileUtil {
             } else {
                 for (File file : listFiles) {
                     if (keepDirStructure) {
-                        compress(file, zos, name + "/" + file.getName(),
-                                keepDirStructure);
+                        compress(file, zos, name + "/" + file.getName(), keepDirStructure);
                     } else {
                         compress(file, zos, file.getName(), keepDirStructure);
                     }
@@ -678,7 +692,9 @@ public class FileUtil {
         }
     }
 
-    private static void compress(List<File> sourceFileList, ZipOutputStream zos, boolean keepDirStructure) throws Exception {
+    private static void compress(
+            List<File> sourceFileList, ZipOutputStream zos, boolean keepDirStructure)
+            throws Exception {
         byte[] buf = new byte[BUFFER_SIZE];
         for (File sourceFile : sourceFileList) {
             String name = sourceFile.getName();
@@ -701,25 +717,22 @@ public class FileUtil {
                 } else {
                     for (File file : listFiles) {
                         if (keepDirStructure) {
-                            compress(file, zos, name + "/" + file.getName(),
-                                    keepDirStructure);
+                            compress(file, zos, name + "/" + file.getName(), keepDirStructure);
                         } else {
-                            compress(file, zos, file.getName(),
-                                    keepDirStructure);
+                            compress(file, zos, file.getName(), keepDirStructure);
                         }
-
                     }
                 }
             }
         }
     }
 
-    //=================================判断文件后缀==========================
+    // =================================判断文件后缀==========================
 
     /**
      * 允许文件类型
      *
-     * @param fileType      文件所有类型
+     * @param fileType 文件所有类型
      * @param fileExtension 当前文件类型
      * @return
      */
@@ -731,7 +744,7 @@ public class FileUtil {
     /**
      * 允许图片类型
      *
-     * @param imageType     图片所有类型
+     * @param imageType 图片所有类型
      * @param fileExtension 当前图片类型
      * @return
      */
@@ -744,7 +757,7 @@ public class FileUtil {
      * 允许上传大小
      *
      * @param fileSize 文件大小
-     * @param maxSize  最大的文件
+     * @param maxSize 最大的文件
      * @return
      */
     public static boolean fileSize(Long fileSize, int maxSize) {
@@ -756,28 +769,31 @@ public class FileUtil {
 
     /**
      * 导入生成临时文件后，获取文件内容
-     * @param multipartFile     文件
-     * @param filePath          路径
+     *
+     * @param multipartFile 文件
+     * @param filePath 路径
      * @return
      */
-    public static String getFileContent(MultipartFile multipartFile, String filePath){
-        //文件名
+    public static String getFileContent(MultipartFile multipartFile, String filePath) {
+        // 文件名
         String fileName = multipartFile.getName();
-        //上传到项目文件路径中
-        FileUtil.upFile(multipartFile,filePath,fileName);
-        //读取文件文件内容
+        // 上传到项目文件路径中
+        FileUtil.upFile(multipartFile, filePath, fileName);
+        // 读取文件文件内容
         String fileContent = FileUtil.getString(filePath, fileName);
         return fileContent;
     }
 
     /**
      * 判断是否为json格式且不为空
+     *
      * @param multipartFile
-     * @param type  类型
+     * @param type 类型
      * @return
      */
     public static boolean existsSuffix(MultipartFile multipartFile, String type) {
-        if (!multipartFile.getOriginalFilename().endsWith("." + type) || multipartFile.getSize()<1){
+        if (!multipartFile.getOriginalFilename().endsWith("." + type)
+                || multipartFile.getSize() < 1) {
             return true;
         }
         return false;
@@ -808,5 +824,4 @@ public class FileUtil {
         MultipartFile multipartFile = new CommonsMultipartFile(item);
         return multipartFile;
     }
-
 }

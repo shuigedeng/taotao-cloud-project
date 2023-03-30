@@ -1,4 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.wechat.biz.mp.controller.admin.tag;
+
+import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
@@ -9,15 +27,12 @@ import cn.iocoder.yudao.module.mp.service.tag.MpTagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import javax.validation.Valid;
-import java.util.List;
-
-import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 
 @Api(tags = "管理后台 - 公众号标签")
 @RestController
@@ -25,8 +40,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
 @Validated
 public class MpTagController {
 
-    @Resource
-    private MpTagService mpTagService;
+    @Resource private MpTagService mpTagService;
 
     @PostMapping("/create")
     @ApiOperation("创建公众号标签")
@@ -70,11 +84,14 @@ public class MpTagController {
 
     @PostMapping("/sync")
     @ApiOperation("同步公众号标签")
-    @ApiImplicitParam(name = "accountId", value = "公众号账号的编号", required = true, dataTypeClass = Long.class)
+    @ApiImplicitParam(
+            name = "accountId",
+            value = "公众号账号的编号",
+            required = true,
+            dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:tag:sync')")
     public CommonResult<Boolean> syncTag(@RequestParam("accountId") Long accountId) {
         mpTagService.syncTag(accountId);
         return success(true);
     }
-
 }

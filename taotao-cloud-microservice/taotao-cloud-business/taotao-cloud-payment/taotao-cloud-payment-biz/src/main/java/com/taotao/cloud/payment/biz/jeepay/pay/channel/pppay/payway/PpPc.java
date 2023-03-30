@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.pppay.payway;
 
 import cn.hutool.json.JSONUtil;
@@ -16,12 +32,11 @@ import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.UnifiedOrderRQ;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.payway.PPPcOrderRQ;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.payway.PPPcOrderRS;
 import com.taotao.cloud.payment.biz.jeepay.pay.util.ApiResBuilder;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * none.
@@ -39,21 +54,23 @@ public class PpPc extends PppayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws
-            Exception {
+    public AbstractRS pay(
+            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+            throws Exception {
         PPPcOrderRQ bizRQ = (PPPcOrderRQ) rq;
 
         OrderRequest orderRequest = new OrderRequest();
 
         // 配置 Paypal ApplicationContext 也就是支付页面信息
-        ApplicationContext applicationContext = new ApplicationContext()
-                .brandName(mchAppConfigContext.getMchApp().getAppName())
-                .landingPage("NO_PREFERENCE")
-                .returnUrl(getReturnUrl(payOrder.getPayOrderId()))
-                .userAction("PAY_NOW")
-                .shippingPreference("NO_SHIPPING");
+        ApplicationContext applicationContext =
+                new ApplicationContext()
+                        .brandName(mchAppConfigContext.getMchApp().getAppName())
+                        .landingPage("NO_PREFERENCE")
+                        .returnUrl(getReturnUrl(payOrder.getPayOrderId()))
+                        .userAction("PAY_NOW")
+                        .shippingPreference("NO_SHIPPING");
 
-        if(StringUtils.isNotBlank(bizRQ.getCancelUrl())) {
+        if (StringUtils.isNotBlank(bizRQ.getCancelUrl())) {
             applicationContext.cancelUrl(bizRQ.getCancelUrl());
         }
 
@@ -67,35 +84,43 @@ public class PpPc extends PppayPaymentService {
         String currency = payOrder.getCurrency().toUpperCase();
 
         // 由于 Paypal 是支持订单多商品的，这里值添加一个
-        PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest()
-                // 绑定 订单 ID 否则回调和异步较难处理
-                .customId(payOrder.getPayOrderId())
-                .invoiceId(payOrder.getPayOrderId())
-                .amountWithBreakdown(new AmountWithBreakdown()
-                        .currencyCode(currency)
-                        .value(amountStr)
-                        .amountBreakdown(
-                                new AmountBreakdown().itemTotal(new Money().currencyCode(currency).value(amountStr))
-                        )
-                )
-                .items(new ArrayList<Item>() {
-                    {
-                        add(
-                                new Item()
-                                        .name(payOrder.getSubject())
-                                        .description(payOrder.getBody())
-                                        .sku(payOrder.getPayOrderId())
-                                        .unitAmount(new Money().currencyCode(currency).value(amountStr))
-                                        .quantity("1")
-                        );
-                    }
-                });
+        PurchaseUnitRequest purchaseUnitRequest =
+                new PurchaseUnitRequest()
+                        // 绑定 订单 ID 否则回调和异步较难处理
+                        .customId(payOrder.getPayOrderId())
+                        .invoiceId(payOrder.getPayOrderId())
+                        .amountWithBreakdown(
+                                new AmountWithBreakdown()
+                                        .currencyCode(currency)
+                                        .value(amountStr)
+                                        .amountBreakdown(
+                                                new AmountBreakdown()
+                                                        .itemTotal(
+                                                                new Money()
+                                                                        .currencyCode(currency)
+                                                                        .value(amountStr))))
+                        .items(
+                                new ArrayList<Item>() {
+                                    {
+                                        add(
+                                                new Item()
+                                                        .name(payOrder.getSubject())
+                                                        .description(payOrder.getBody())
+                                                        .sku(payOrder.getPayOrderId())
+                                                        .unitAmount(
+                                                                new Money()
+                                                                        .currencyCode(currency)
+                                                                        .value(amountStr))
+                                                        .quantity("1"));
+                                    }
+                                });
 
         purchaseUnitRequests.add(purchaseUnitRequest);
         orderRequest.purchaseUnits(purchaseUnitRequests);
 
         // 从缓存获取 Paypal 操作工具
-        PaypalWrapper paypalWrapper = configContextQueryService.getPaypalWrapper(mchAppConfigContext);
+        PaypalWrapper paypalWrapper =
+                configContextQueryService.getPaypalWrapper(mchAppConfigContext);
 
         OrdersCreateRequest request = new OrdersCreateRequest();
         request.header("prefer", "return=representation");
@@ -106,9 +131,9 @@ public class PpPc extends PppayPaymentService {
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();
 
         HttpResponse<Order> response;
-        try{
+        try {
             response = paypalWrapper.getClient().execute(request);
-        }catch (HttpException e) {
+        } catch (HttpException e) {
             String message = e.getMessage();
             cn.hutool.json.JSONObject messageObj = JSONUtil.parseObj(message);
             String issue = messageObj.getByPath("details[0].issue", String.class);
@@ -127,12 +152,17 @@ public class PpPc extends PppayPaymentService {
             String tradeNo = response.result().id();
 
             // 从返回数据里读取出支付链接
-            LinkDescription paypalLink = order.links().stream().reduce(null, (result, curr) -> {
-                if (curr.rel().equalsIgnoreCase("approve") && curr.method().equalsIgnoreCase("get")) {
-                    result = curr;
-                }
-                return result;
-            });
+            LinkDescription paypalLink =
+                    order.links().stream()
+                            .reduce(
+                                    null,
+                                    (result, curr) -> {
+                                        if (curr.rel().equalsIgnoreCase("approve")
+                                                && curr.method().equalsIgnoreCase("get")) {
+                                            result = curr;
+                                        }
+                                        return result;
+                                    });
 
             // 设置返回实体
             channelRetMsg.setChannelAttach(JSONUtil.toJsonStr(new Json().serialize(order)));

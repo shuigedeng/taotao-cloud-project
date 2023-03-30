@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
@@ -30,8 +31,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRelationRepository extends BaseClassSuperRepository<UserRelation, Long> {
 
-	public UserRelationRepository(EntityManager em) {
-		super(UserRelation.class, em);
-	}
-
+    public UserRelationRepository(EntityManager em) {
+        super(UserRelation.class, em);
+    }
 }

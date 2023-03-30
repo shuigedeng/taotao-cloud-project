@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.model.bo;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -29,72 +29,39 @@ import java.time.LocalDateTime;
  */
 @RecordBuilder
 public record MenuBO(
-	/**
-	 * id
-	 */
-	Long id,
-	/**
-	 * 菜单名称
-	 */
-	String name,
-	/**
-	 * 菜单类型 1：目录 2：菜单 3：按钮
-	 */
-	int type,
-	/**
-	 * 权限标识
-	 */
-	String perms,
-	/**
-	 * 前端path / 即跳转路由
-	 */
-	String path,
-	/**
-	 * 菜单组件
-	 */
-	String component,
-	/**
-	 * 父菜单ID
-	 */
-	Long parentId,
-	/**
-	 * 图标
-	 */
-	String icon,
-	/**
-	 * 是否缓存页面: 0:否 1:是 (默认值0)
-	 */
-	boolean keepAlive,
-	/**
-	 * 是否隐藏路由菜单: 0否,1是（默认值0）
-	 */
-	boolean hidden,
-	/**
-	 * 聚合路由 0否,1是（默认值0）
-	 */
-	boolean alwaysShow,
-	/**
-	 * 重定向
-	 */
-	String redirect,
-	/**
-	 * 是否为外链 0否,1是（默认值0）
-	 */
-	boolean isFrame,
-	/**
-	 * 排序值
-	 */
-	int sortNum,
-	/**
-	 * 创建时间
-	 */
-	LocalDateTime createTime,
-	/**
-	 * 最后修改时间
-	 */
-	LocalDateTime lastModifiedTime) implements Serializable {
+        /** id */
+        Long id,
+        /** 菜单名称 */
+        String name,
+        /** 菜单类型 1：目录 2：菜单 3：按钮 */
+        int type,
+        /** 权限标识 */
+        String perms,
+        /** 前端path / 即跳转路由 */
+        String path,
+        /** 菜单组件 */
+        String component,
+        /** 父菜单ID */
+        Long parentId,
+        /** 图标 */
+        String icon,
+        /** 是否缓存页面: 0:否 1:是 (默认值0) */
+        boolean keepAlive,
+        /** 是否隐藏路由菜单: 0否,1是（默认值0） */
+        boolean hidden,
+        /** 聚合路由 0否,1是（默认值0） */
+        boolean alwaysShow,
+        /** 重定向 */
+        String redirect,
+        /** 是否为外链 0否,1是（默认值0） */
+        boolean isFrame,
+        /** 排序值 */
+        int sortNum,
+        /** 创建时间 */
+        LocalDateTime createTime,
+        /** 最后修改时间 */
+        LocalDateTime lastModifiedTime)
+        implements Serializable {
 
-	static final long serialVersionUID = 5126530068827085130L;
-
+    static final long serialVersionUID = 5126530068827085130L;
 }
-

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.log.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -27,7 +28,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-
 
 /**
  * 日志表
@@ -47,196 +47,138 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = Log.TABLE_NAME, comment = "日志表")
 public class Log extends BaseSuperEntity<Log, Long> {
 
-	public static final String TABLE_NAME = "tt_log";
+    public static final String TABLE_NAME = "tt_log";
 
-	/**
-	 * 请求日志id
-	 */
-	@Column(name = "trace_id", columnDefinition = "varchar(64) null comment '请求日志id'")
-	private String traceId;
+    /** 请求日志id */
+    @Column(name = "trace_id", columnDefinition = "varchar(64) null comment '请求日志id'")
+    private String traceId;
 
-	/**
-	 * 服务名称
-	 */
-	@Column(name = "application_name", columnDefinition = "varchar(128) null comment '服务名称'")
-	private String applicationName;
+    /** 服务名称 */
+    @Column(name = "application_name", columnDefinition = "varchar(128) null comment '服务名称'")
+    private String applicationName;
 
-	/**
-	 * 操作人ID
-	 */
-	@Column(name = "username", columnDefinition = "varchar(64) null comment '操作人'")
-	private String username;
+    /** 操作人ID */
+    @Column(name = "username", columnDefinition = "varchar(64) null comment '操作人'")
+    private String username;
 
-	/**
-	 * 操作人ID
-	 */
-	@Column(name = "user_id", columnDefinition = "varchar(128) null comment '操作人ID'")
-	private String userId;
+    /** 操作人ID */
+    @Column(name = "user_id", columnDefinition = "varchar(128) null comment '操作人ID'")
+    private String userId;
 
-	/**
-	 * 客户端ID
-	 */
-	@Column(name = "client_id", columnDefinition = "varchar(128) null comment '客户端ID'")
-	private String clientId;
+    /** 客户端ID */
+    @Column(name = "client_id", columnDefinition = "varchar(128) null comment '客户端ID'")
+    private String clientId;
 
-	/**
-	 * 操作描述
-	 */
-	@Column(name = "description", columnDefinition = "varchar(1024) null comment '操作描述'")
-	private String description;
+    /** 操作描述 */
+    @Column(name = "description", columnDefinition = "varchar(1024) null comment '操作描述'")
+    private String description;
 
-	/**
-	 * 操作IP
-	 */
-	@Column(name = "ip", columnDefinition = "varchar(128) null comment '操作IP'")
-	private String ip;
+    /** 操作IP */
+    @Column(name = "ip", columnDefinition = "varchar(128) null comment '操作IP'")
+    private String ip;
 
-	/**
-	 * 操作类型 1 操作记录 2异常记录
-	 */
-	@Column(name = "operate_type", columnDefinition = "int null comment '操作类型 1 操作记录 2异常记录'")
-	private Integer operateType;
+    /** 操作类型 1 操作记录 2异常记录 */
+    @Column(name = "operate_type", columnDefinition = "int null comment '操作类型 1 操作记录 2异常记录'")
+    private Integer operateType;
 
-	/**
-	 * 请求类型（1查询/获取，2添加，3修改，4删除）
-	 */
-	@Column(name = "request_type", columnDefinition = "int null comment '请求类型（1查询/获取，2添加，3修改，4删除）'")
-	private Integer requestType;
+    /** 请求类型（1查询/获取，2添加，3修改，4删除） */
+    @Column(name = "request_type", columnDefinition = "int null comment '请求类型（1查询/获取，2添加，3修改，4删除）'")
+    private Integer requestType;
 
-	/**
-	 * 请求方法名称
-	 */
-	@Column(name = "method_name", columnDefinition = "varchar(128) null comment '请求方法名称'")
-	private String methodName;
+    /** 请求方法名称 */
+    @Column(name = "method_name", columnDefinition = "varchar(128) null comment '请求方法名称'")
+    private String methodName;
 
-	/**
-	 * 请求方式
-	 */
-	@Column(name = "method", columnDefinition = "varchar(128) null comment '请求方式'")
-	private String method;
+    /** 请求方式 */
+    @Column(name = "method", columnDefinition = "varchar(128) null comment '请求方式'")
+    private String method;
 
-	/**
-	 * 请求url
-	 */
-	@Column(name = "url", columnDefinition = "varchar(256) null comment '请求url'")
-	private String url;
+    /** 请求url */
+    @Column(name = "url", columnDefinition = "varchar(256) null comment '请求url'")
+    private String url;
 
-	/**
-	 * 方法参数
-	 */
-	@Column(name = "args", columnDefinition = "varchar(1024) null comment '方法参数'")
-	private String args;
+    /** 方法参数 */
+    @Column(name = "args", columnDefinition = "varchar(1024) null comment '方法参数'")
+    private String args;
 
-	/**
-	 * 请求参数
-	 */
-	@Column(name = "params", columnDefinition = "varchar(1024) null comment '请求参数'")
-	private String params;
+    /** 请求参数 */
+    @Column(name = "params", columnDefinition = "varchar(1024) null comment '请求参数'")
+    private String params;
 
-	/**
-	 * 请求头
-	 */
-	@Column(name = "headers", columnDefinition = "text null comment '请求头'")
-	private String headers;
+    /** 请求头 */
+    @Column(name = "headers", columnDefinition = "text null comment '请求头'")
+    private String headers;
 
-	/**
-	 * 类路径
-	 */
-	@Column(name = "classpath", columnDefinition = "text null comment '类路径'")
-	private String classpath;
+    /** 类路径 */
+    @Column(name = "classpath", columnDefinition = "text null comment '类路径'")
+    private String classpath;
 
-	/**
-	 * 开始时间
-	 */
-	@Column(name = "start_time", columnDefinition = "bigint null comment '开始时间'")
-	private Long startTime;
+    /** 开始时间 */
+    @Column(name = "start_time", columnDefinition = "bigint null comment '开始时间'")
+    private Long startTime;
 
-	/**
-	 * 完成时间
-	 */
-	@Column(name = "end_time", columnDefinition = "bigint null comment '完成时间'")
-	private Long endTime;
+    /** 完成时间 */
+    @Column(name = "end_time", columnDefinition = "bigint null comment '完成时间'")
+    private Long endTime;
 
-	/**
-	 * 消耗时间
-	 */
-	@Column(name = "consuming_time", columnDefinition = "bigint null comment '消耗时间'")
-	private Long consumingTime;
+    /** 消耗时间 */
+    @Column(name = "consuming_time", columnDefinition = "bigint null comment '消耗时间'")
+    private Long consumingTime;
 
-	/**
-	 * 异常详情信息 堆栈信息
-	 */
-	@Column(name = "ex_detail", columnDefinition = "text null comment '异常详情信息 堆栈信息'")
-	private String exDetail;
+    /** 异常详情信息 堆栈信息 */
+    @Column(name = "ex_detail", columnDefinition = "text null comment '异常详情信息 堆栈信息'")
+    private String exDetail;
 
-	/**
-	 * 异常描述 e.getMessage
-	 */
-	@Column(name = "ex_desc", columnDefinition = "text null comment ' 异常描述 e.getMessage'")
-	private String exDesc;
+    /** 异常描述 e.getMessage */
+    @Column(name = "ex_desc", columnDefinition = "text null comment ' 异常描述 e.getMessage'")
+    private String exDesc;
 
-	/**
-	 * 租户id
-	 */
-	@Column(name = "tenant_id", columnDefinition = "varchar(64) null comment '租户id'")
-	private String tenantId;
+    /** 租户id */
+    @Column(name = "tenant_id", columnDefinition = "varchar(64) null comment '租户id'")
+    private String tenantId;
 
-	/**
-	 * 来源
-	 */
-	@Column(name = "source", columnDefinition = "varchar(256) null comment '来源'")
-	private String source;
+    /** 来源 */
+    @Column(name = "source", columnDefinition = "varchar(256) null comment '来源'")
+    private String source;
 
-	/**
-	 * 记录时间
-	 */
-	@Column(name = "ctime", columnDefinition = "varchar(128) null comment '记录时间'")
-	private String ctime;
+    /** 记录时间 */
+    @Column(name = "ctime", columnDefinition = "varchar(128) null comment '记录时间'")
+    private String ctime;
 
-	/**
-	 * 返回值
-	 */
-	@Column(name = "result", columnDefinition = "text null comment '返回值'")
-	private String result;
+    /** 返回值 */
+    @Column(name = "result", columnDefinition = "text null comment '返回值'")
+    private String result;
 
-	/**
-	 * 天
-	 */
-	@Column(name = "logday", columnDefinition = "varchar(64) null comment '天'")
-	private String logday;
+    /** 天 */
+    @Column(name = "logday", columnDefinition = "varchar(64) null comment '天'")
+    private String logday;
 
-	/**
-	 * 操作地点
-	 */
-	@Column(name = "location", columnDefinition = "varchar(1024) null comment '操作地点'")
-	private String location;
+    /** 操作地点 */
+    @Column(name = "location", columnDefinition = "varchar(1024) null comment '操作地点'")
+    private String location;
 
-	/**
-	 * 操作系统
-	 */
-	@Column(name = "os", columnDefinition = "text null comment '操作系统'")
-	private String os;
+    /** 操作系统 */
+    @Column(name = "os", columnDefinition = "text null comment '操作系统'")
+    private String os;
 
-	/**
-	 * 浏览器
-	 */
-	@Column(name = "browser", columnDefinition = "text null comment '浏览器'")
-	private String browser;
+    /** 浏览器 */
+    @Column(name = "browser", columnDefinition = "text null comment '浏览器'")
+    private String browser;
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-			return false;
-		}
-		Log log = (Log) o;
-		return getId() != null && Objects.equals(getId(), log.getId());
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        Log log = (Log) o;
+        return getId() != null && Objects.equals(getId(), log.getId());
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

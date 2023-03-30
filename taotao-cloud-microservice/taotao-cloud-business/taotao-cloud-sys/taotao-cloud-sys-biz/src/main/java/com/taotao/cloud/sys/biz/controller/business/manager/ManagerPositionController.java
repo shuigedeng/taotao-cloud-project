@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.BaseQuery;
@@ -38,8 +39,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/manager/position")
 @Tag(name = "管理端-岗位管理API", description = "管理端-岗位管理API")
-public class ManagerPositionController extends
-		BaseSuperController<IPositionService, Position, Long, BaseQuery, PositionSaveDTO, PositionUpdateDTO, PositionQueryVO> {
-
-
-}
+public class ManagerPositionController
+        extends BaseSuperController<
+                IPositionService,
+                Position,
+                Long,
+                BaseQuery,
+                PositionSaveDTO,
+                PositionUpdateDTO,
+                PositionQueryVO> {}

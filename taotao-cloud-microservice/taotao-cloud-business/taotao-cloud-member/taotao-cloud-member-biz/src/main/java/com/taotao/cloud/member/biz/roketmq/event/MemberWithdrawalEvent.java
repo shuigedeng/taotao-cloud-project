@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.member.biz.roketmq.event;
 
+package com.taotao.cloud.member.biz.roketmq.event;
 
 import com.taotao.cloud.mq.stream.message.MemberWithdrawalMessage;
 
-/**
- * 会员提现消息
- */
+/** 会员提现消息 */
 public interface MemberWithdrawalEvent {
 
-	/**
-	 * 会员提现
-	 *
-	 * @param memberWithdrawalMessage 提现对象
-	 */
-	void memberWithdrawal(MemberWithdrawalMessage memberWithdrawalMessage);
+    /**
+     * 会员提现
+     *
+     * @param memberWithdrawalMessage 提现对象
+     */
+    void memberWithdrawal(MemberWithdrawalMessage memberWithdrawalMessage);
 }

@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.log.api.model.dto;
 
+package com.taotao.cloud.log.api.model.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -31,21 +31,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LogErrorDTO implements Serializable {
 
-	private Long id;
+    private Long id;
 
-	private String username;
+    private String username;
 
-	private String description;
+    private String description;
 
-	private String method;
+    private String method;
 
-	private String params;
+    private String params;
 
-	private String browser;
+    private String browser;
 
-	private String requestIp;
+    private String requestIp;
 
-	private String address;
+    private String address;
 
-	private Timestamp createTime;
+    private Timestamp createTime;
 }

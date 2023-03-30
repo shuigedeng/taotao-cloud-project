@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.order.biz.repository.cls;
 
 import com.taotao.cloud.order.biz.model.entity.order.OrderItemBack;
@@ -28,7 +29,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class OrderItemRepository extends BaseClassSuperRepository<OrderItemBack, Long> {
 
-	public OrderItemRepository(EntityManager em) {
-		super(OrderItemBack.class, em);
-	}
+    public OrderItemRepository(EntityManager em) {
+        super(OrderItemBack.class, em);
+    }
 }
