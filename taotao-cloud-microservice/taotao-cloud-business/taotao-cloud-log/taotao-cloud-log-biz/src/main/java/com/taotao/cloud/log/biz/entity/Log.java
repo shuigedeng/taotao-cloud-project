@@ -17,6 +17,7 @@
 package com.taotao.cloud.log.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.mybatisplus.encrypt.annotation.EncryptField;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -163,6 +164,7 @@ public class Log extends BaseSuperEntity<Log, Long> {
 
     /** 浏览器 */
     @Column(name = "browser", columnDefinition = "text null comment '浏览器'")
+	@EncryptField
     private String browser;
 
     @Override

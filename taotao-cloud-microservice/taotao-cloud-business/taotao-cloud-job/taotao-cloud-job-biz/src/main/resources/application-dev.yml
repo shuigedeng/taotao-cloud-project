@@ -927,12 +927,43 @@ taotao:
         enabled: true
       mybatis-plus:
         enabled: true
+        entity-package-path: aaaaa
         auto-fill:
           enabled: true
-        dynamic:
-          enabled: false
-        tenant:
-          enabled: false
+          enable-insert-fill: true
+          enable-update-fill: true
+        interceptor:
+          enabled: true
+          pagination:
+            db-type: mysql
+            enabled: true
+            max-limit: 1000
+            optimize-join: true
+            overflow: true
+          block-attack:
+            enabled: true
+          illegal-sql:
+            enabled: true
+          optimistic-locker:
+            enabled: true
+          data-scope:
+            enabled: true
+          multi-tenant-line:
+            enabled: true
+          sql-log:
+            enabled: true
+          sql-collector:
+            enabled: true
+          field-encrypt:
+            enabled: true
+          data-operate:
+            enabled: true
+          slow-query:
+            enabled: true
+            slow-sql-threshold-ms: 6000
+          big-result-query:
+            enabled: true
+            size: 1000
       jpa:
         enabled: true
         packages: com.taotao.cloud.job.biz.model.entity

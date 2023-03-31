@@ -779,15 +779,56 @@ taotao:
         enabled: true
       mybatis-plus:
         enabled: true
-        auto-fill:
-          enabled: true
+        entity-package-path: aaaaa
         dynamic:
           enabled: false
-        tenant:
-          enabled: false
-        sql-log-enable: true
-        sql-collector-enable: true
-        audit-enable: true
+        auto-fill:
+          enabled: true
+          enable-insert-fill: true
+          enable-update-fill: true
+        interceptor:
+          enabled: true
+          pagination:
+            db-type: mysql
+            enabled: true
+            max-limit: 1000
+            optimize-join: true
+            overflow: true
+          blockAttack:
+            enabled: true
+          illegalSql:
+            enabled: true
+          optimisticLocker:
+            enabled: true
+          dataScope:
+            enabled: true
+          multiTenantLine:
+            enabled: true
+            column: tenant_id
+            multiTenantType: column
+            ignore-sqls:
+              - vip.mate.system.mapper.UserMapper.findList
+          sqlLog:
+            enabled: true
+          sqlCollector:
+            enabled: true
+          fieldEncrypt:
+            enabled: true
+            algorithm: rsa
+            #password: 123456
+            private-key: MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAK6Szy4Sswb53bnr1sBhlmejI5qDFhS3jvl2IAVVxXRTjVkUXQldQJUB+l6sPHNqII2FaZCmB8L2kg/HHBOYbwazsf7JfDd9ryXTgE2GDTXB0cqplM7evx88RxskMJH+hws4c6JL2PUhCpdMM+4iuavDQxV8n8WKEL3pQr9CoMY/AgMBAAECgYA1dQ5NUPuSbMw5ZR8fTSLV/I5n/7Ewyd7VxBbdG106GGXFu+cbeXtPxcnJ2NswCnUKcSqY2UayLHggrbuKwphohqfDXBrpAfLuJcuNEL1gmo431F/NIGWxOclfaOldfFEP7oK7O9DaUHfrFir5beVkUL21/BMYFeMuHdX/dRpY3QJBAONz4t/HB0ahCEX3P907MRbOnhvv2oQlcEGP5XQbO2laAbyRekJ4LZOzlGaHQCBjmGYwb+++JTCpLiZXcYEJLdsCQQDEe+aBAcT32tPUzwelxBcgk6qNdSz9SKqnvbGcm3p+7APU+lBQZ3FpOUt3enaY7T96xOnJW6azvcgKwuAQPMBtAkBM7ecwNMrbMp/vuh6ZnumNgziqzkckJt1+70J2MLe5fD3WH4YwcSFJMZXhz6D603S6K2vQtIkzmiUHxs+XCxm9AkAbhCaBxpepBlJIKT4u7sk2XLez28cTKYwMtbob7oI3KCJZPzzkJbhyPf3dm57kR8VuEgmTk2xDG77aEvSCEZ/5AkAXNc2KiH5d9BhN3E6F38pa+bhMowYkglrR4Rw/QgadVYUA/YuIRQj17XmHfn7hxvL9b/crfn9uQrR3i2KAgN3C
+            public-key: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCuks8uErMG+d2569bAYZZnoyOagxYUt475diAFVcV0U41ZFF0JXUCVAfperDxzaiCNhWmQpgfC9pIPxxwTmG8Gs7H+yXw3fa8l04BNhg01wdHKqZTO3r8fPEcbJDCR/ocLOHOiS9j1IQqXTDPuIrmrw0MVfJ/FihC96UK/QqDGPwIDAQAB
+            encode: base64
+          dataOperate:
+            enabled: true
+          slowQuery:
+            enabled: true
+            slow-sql-threshold-ms: 6000
+          bigResultQuery:
+            enabled: true
+            size: 1000
+          cipherEncrypt:
+            enabled: false
       jpa:
         enabled: true
         packages: com.taotao.cloud.log.biz.model.entity
