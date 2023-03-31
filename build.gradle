@@ -30,7 +30,7 @@ buildscript {
         mapstructProcessorVersion = "1.5.3.Final"
         lombokMapstructBindingVersion = "0.2.0"
         lombokVersion = "1.18.26"
-        recordBuilderVersion = "35"
+        recordBuilderVersion = "36"
     }
 
     repositories {
