@@ -564,11 +564,11 @@ spring:
     #      use_jdbc_metadata_defaults: false
   data:
     mongodb:
-      database: yapi
+      database: taotao-cloud
       host: 192.168.10.220
       port: 27017
-      username:
-      password:
+      username: root
+      password: "123456"
     redis:
       host: 192.168.10.220
       port: 6379
@@ -906,13 +906,8 @@ taotao:
       enabled: true
     security:
       ignore-url:
-        - /log/**
-        - /log/testAdd
-    job:
-      scheduled:
-        enabled: true
-      quartz:
-        enabled: true
+        - /sysLogLogin/**
+        - /log/login/add
 
 mybatis-plus-join:
   banner: true
@@ -1124,4 +1119,4 @@ knife4j:
 
 log:
   store:
-    type: jdbc
+    type: mongodb

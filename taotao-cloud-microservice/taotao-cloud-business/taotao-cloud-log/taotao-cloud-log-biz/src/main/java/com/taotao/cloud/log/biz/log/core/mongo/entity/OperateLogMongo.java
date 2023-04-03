@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 */
 @Data
 @Accessors(chain = true)
-@Document(collection="starter_audit_operate_log")
+@Document(collection="tt_request_log")
 public class OperateLogMongo  {
 
     @Id

@@ -16,7 +16,9 @@
 
 package com.taotao.cloud.log.biz.properties;
 
+import com.taotao.cloud.data.mybatisplus.properties.MybatisPlusInterceptorProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +30,6 @@ import org.springframework.stereotype.Component;
  * @since 2021-09-04 07:44:25
  */
 @Component
-@RefreshScope
 @ConfigurationProperties(prefix = LogStoreTypeProperties.PREFIX)
 public class LogStoreTypeProperties {
 
