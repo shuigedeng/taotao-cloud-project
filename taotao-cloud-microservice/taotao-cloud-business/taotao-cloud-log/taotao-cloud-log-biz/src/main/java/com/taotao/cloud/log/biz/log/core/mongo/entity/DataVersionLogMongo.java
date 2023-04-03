@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Data
 @FieldNameConstants
 @Accessors(chain = true)
-@Document("starter_audit_data_version")
+@Document("tt_data_version_log")
 public class DataVersionLogMongo {
 
 	@Id

@@ -43,7 +43,7 @@ public class DataVersionLogDb extends BaseSuperEntity<DataVersionLogDb, Long> {
 	private String dataContent;
 
 	@Schema(description = "本次变动的数据内容")
-	private Object changeContent;
+	private String changeContent;
 
 	@Schema(description = "数据版本")
 	private Integer version;

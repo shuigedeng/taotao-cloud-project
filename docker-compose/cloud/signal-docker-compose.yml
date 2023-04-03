@@ -423,9 +423,10 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.36
   mongo:
-    image: mongo:6.0.2
+    image: mongo:latest
     container_name: mongo
     restart: always
+    command: [--auth]
     ports:
       - "27017:27017"
     environment:
@@ -433,8 +434,11 @@ services:
       MONGO_INITDB_DATABASE: taotao-cloud
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_USERNAME: root
+      MONGO_PASSWORD: 123456
     volumes:
       - /root/compose/mongodb:/data/db
+      - ./mongo/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.37

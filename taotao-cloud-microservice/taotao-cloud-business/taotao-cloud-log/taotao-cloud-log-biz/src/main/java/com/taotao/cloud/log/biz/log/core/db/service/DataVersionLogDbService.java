@@ -51,7 +51,7 @@ public class DataVersionLogDbService implements DataVersionLogService {
 			dataVersionLog.setDataContent(JsonUtils.toJson(param.getDataContent()));
 		}
 		if (param.getChangeContent() instanceof String) {
-			dataVersionLog.setChangeContent(param.getChangeContent());
+			dataVersionLog.setChangeContent((String) param.getChangeContent());
 		} else {
 			if (Objects.nonNull(param.getChangeContent())) {
 				dataVersionLog.setChangeContent(JsonUtils.toJson(param.getChangeContent()));
