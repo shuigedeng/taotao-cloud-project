@@ -477,7 +477,7 @@ spring:
             - type: capacity                       # 报警项类型，查看源码 NotifyTypeEnum枚举类
               enabled: true
               threshold: 80                        # 报警阈值
-              platforms: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
+              platform-ids: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
               interval: 120                        # 报警间隔（单位：s）
       executors: # 动态线程池配置，都有默认值，采用默认值的可以不配置该项，减少配置量
         - threadPoolName: taotao-cloud-job-executor
@@ -510,7 +510,7 @@ spring:
             - type: change
               enabled: true
               threshold: 80                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -519,7 +519,7 @@ spring:
             - type: liveness
               enabled: true
               threshold: 80                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -528,7 +528,7 @@ spring:
             - type: reject
               enabled: true
               threshold: 1                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -537,7 +537,7 @@ spring:
             - type: run_timeout
               enabled: true
               threshold: 1                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -546,7 +546,7 @@ spring:
             - type: queue_timeout
               enabled: true
               threshold: 1                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -917,11 +917,6 @@ taotao:
         cache-manager:
           enabled: true
           type: redis
-    third-client:
-      forest:
-        enabled: false
-      retrofit:
-        enabled: false
     data:
       elasticsearch:
         enabled: true

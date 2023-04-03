@@ -1,20 +1,23 @@
 package com.taotao.cloud.log.biz.log.param;
 
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
 /**   
 * 登录日志
-* @author xxm  
+* @author shuigedeng  
 * @date 2021/8/12 
 */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
 @Schema(description= "登录日志")
-public class LoginLogParam {
+public class LoginLogParam extends PageQuery {
 
     @Schema(description= "用户账号id")
     private Long userId;

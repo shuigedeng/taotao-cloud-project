@@ -1,8 +1,7 @@
 package com.taotao.cloud.log.biz.log.core.mongo.entity;
 
-import cn.bootx.common.core.function.EntityBaseFunction;
-import cn.bootx.starter.audit.log.core.mongo.convert.LogConvert;
-import cn.bootx.starter.audit.log.dto.OperateLogDto;
+import com.taotao.cloud.log.biz.log.core.mongo.convert.LogConvert;
+import com.taotao.cloud.log.biz.log.dto.OperateLogDto;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
@@ -12,13 +11,13 @@ import java.time.LocalDateTime;
 
 /**
 *
-* @author xxm
+* @author shuigedeng
 * @date 2021/12/2
 */
 @Data
 @Accessors(chain = true)
 @Document(collection="starter_audit_operate_log")
-public class OperateLogMongo  implements EntityBaseFunction<OperateLogDto> {
+public class OperateLogMongo  {
 
     @Id
     private Long id;
@@ -65,7 +64,6 @@ public class OperateLogMongo  implements EntityBaseFunction<OperateLogDto> {
     /** 操作时间 */
     private LocalDateTime operateTime;
 
-    @Override
     public OperateLogDto toDto() {
         return LogConvert.CONVERT.convert(this);
     }

@@ -14,34 +14,34 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.log.biz.config.redis.delegate;
+package com.taotao.cloud.log.biz.properties;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.log.biz.entity.Log;
-import com.taotao.cloud.log.biz.service.ILogService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 /**
- * SensitiveWordsTopicMessageDelegate
+ * MybatisPlusAutoFillProperties
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2022/02/09 20:46
+ * @version 2021.9
+ * @since 2021-09-04 07:44:25
  */
 @Component
-public class RequestLogTopicMessageDelegate {
+@RefreshScope
+@ConfigurationProperties(prefix = LogStoreTypeProperties.PREFIX)
+public class LogStoreTypeProperties {
 
-	@Autowired
-	private ILogService logService;
+	public static final String PREFIX = "log.store.type";
 
-	public void handleRequestLog(String message, String channel) {
-		try {
-			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
-			logService.save(log);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+	// db, mongo
+	private String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }
