@@ -370,7 +370,7 @@ spring:
             - type: capacity                       # 报警项类型，查看源码 NotifyTypeEnum枚举类
               enabled: true
               threshold: 80                        # 报警阈值
-              platforms: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
+              platform-ids: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
               interval: 120                        # 报警间隔（单位：s）
       rocketMqTp: # rocketmq 线程池配置
         - threadPoolName: group1#topic1            # 名称规则：group + "#" + topic
@@ -381,7 +381,7 @@ spring:
             - type: capacity                       # 报警项类型，查看源码 NotifyTypeEnum枚举类
               enabled: true
               threshold: 80                        # 报警阈值
-              platforms: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
+              platform-ids: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
               interval: 120                        # 报警间隔（单位：s）
       executors: # 动态线程池配置，都有默认值，采用默认值的可以不配置该项，减少配置量
         - threadPoolName: taotao-cloud-log-executor
@@ -405,7 +405,7 @@ spring:
             - type: capacity               # 报警项类型，查看源码 NotifyTypeEnum枚举类
               enabled: true
               threshold: 80                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -414,7 +414,7 @@ spring:
             - type: change
               enabled: true
               threshold: 80                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -423,7 +423,7 @@ spring:
             - type: liveness
               enabled: true
               threshold: 80                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -432,7 +432,7 @@ spring:
             - type: reject
               enabled: true
               threshold: 1                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -441,7 +441,7 @@ spring:
             - type: run_timeout
               enabled: true
               threshold: 1                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -450,7 +450,7 @@ spring:
             - type: queue_timeout
               enabled: true
               threshold: 1                # 报警阈值
-              platforms:
+              platform-ids:
                 - ding
                 - wechat
                 - email
@@ -563,6 +563,12 @@ spring:
     #    temp:
     #      use_jdbc_metadata_defaults: false
   data:
+    mongodb:
+      database: yapi
+      host: 192.168.10.220
+      port: 27017
+      username:
+      password:
     redis:
       host: 192.168.10.220
       port: 6379
@@ -802,7 +808,7 @@ taotao:
             enabled: true
           dataScope:
             enabled: true
-          multiTenantLine:
+          multiTenant:
             enabled: true
             column: tenant_id
             multiTenantType: column
@@ -821,6 +827,11 @@ taotao:
             encode: base64
           dataOperate:
             enabled: true
+          data-change:
+            enabled: true
+            types:
+              - logger
+              - redis
           slowQuery:
             enabled: true
             slow-sql-threshold-ms: 6000
@@ -1110,3 +1121,7 @@ knife4j:
     - name: 标题2
       locations: classpath:markdown1/*
       group: 用户模块
+
+log:
+  store:
+    type: jdbc

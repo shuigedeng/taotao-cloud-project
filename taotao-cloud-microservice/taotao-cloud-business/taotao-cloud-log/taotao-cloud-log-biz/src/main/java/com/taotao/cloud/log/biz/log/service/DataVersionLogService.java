@@ -1,21 +1,18 @@
 package com.taotao.cloud.log.biz.log.service;
 
-import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
-import cn.bootx.starter.audit.log.dto.DataVersionLogDto;
-import cn.bootx.starter.audit.log.param.DataVersionLogParam;
-import org.springframework.scheduling.annotation.Async;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.log.biz.log.dto.DataVersionLogDto;
+import com.taotao.cloud.log.biz.log.param.DataVersionLogParam;
 
 /**
  * 数据版本日志
- * @author xxm
+ * @author shuigedeng
  * @date 2022/1/10
  */
 public interface DataVersionLogService {
     /**
      * 添加
      */
-    @Async("asyncExecutor")
     void add(DataVersionLogParam param);
 
     /**
@@ -26,7 +23,7 @@ public interface DataVersionLogService {
     /**
      * 分页
      */
-    PageResult<DataVersionLogDto> page(PageParam pageParam, DataVersionLogParam param);
+    PageResult<DataVersionLogDto> page(DataVersionLogParam param);
 
     /**
      * 删除

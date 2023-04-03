@@ -20,6 +20,7 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
+import com.taotao.cloud.log.biz.config.redis.delegate.DataVersionLogTopicMessageDelegate;
 import com.taotao.cloud.log.biz.config.redis.delegate.RequestLogTopicMessageDelegate;
 import java.util.Collection;
 import java.util.HashMap;
@@ -51,8 +52,9 @@ public class RedisListenerConfig {
     @Bean
     @Primary
     public RedisMessageListenerContainer redisMessageListenerContainer(
-            RedisConnectionFactory redisConnectionFactory,
-            RequestLogTopicMessageDelegate requestLogTopicMessageDelegate) {
+		RedisConnectionFactory redisConnectionFactory,
+		RequestLogTopicMessageDelegate requestLogTopicMessageDelegate,
+		DataVersionLogTopicMessageDelegate dataVersionLogTopicMessageDelegate) {
 
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory);
@@ -71,10 +73,15 @@ public class RedisListenerConfig {
 
         Map<MessageListenerAdapter, Collection<? extends Topic>> listeners = new HashMap<>();
 
-        MessageListenerAdapter handleRequestLog =
+        MessageListenerAdapter requestLogMessageListenerAdapter =
                 new MessageListenerAdapter(requestLogTopicMessageDelegate, "handleRequestLog");
-        handleRequestLog.afterPropertiesSet();
-        listeners.put(handleRequestLog, List.of(ChannelTopic.of(RedisConstant.REQUEST_LOG_TOPIC)));
+		requestLogMessageListenerAdapter.afterPropertiesSet();
+        listeners.put(requestLogMessageListenerAdapter, List.of(ChannelTopic.of(RedisConstant.REQUEST_LOG_TOPIC)));
+
+		MessageListenerAdapter dataVersionLogListenerAdapter =
+			new MessageListenerAdapter(dataVersionLogTopicMessageDelegate, "handleRequestLog");
+		dataVersionLogListenerAdapter.afterPropertiesSet();
+		listeners.put(dataVersionLogListenerAdapter, List.of(ChannelTopic.of(RedisConstant.DATA_VERSION_LOG_TOPIC)));
 
         container.setMessageListeners(listeners);
         return container;

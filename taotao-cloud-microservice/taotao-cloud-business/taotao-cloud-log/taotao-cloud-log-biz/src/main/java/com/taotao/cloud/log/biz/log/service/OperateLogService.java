@@ -1,14 +1,14 @@
 package com.taotao.cloud.log.biz.log.service;
 
-import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
-import cn.bootx.starter.audit.log.dto.OperateLogDto;
-import cn.bootx.starter.audit.log.param.OperateLogParam;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.log.biz.log.dto.OperateLogDto;
+import com.taotao.cloud.log.biz.log.param.OperateLogParam;
 import org.springframework.scheduling.annotation.Async;
 
 /**   
 * 操作日志
-* @author xxm  
+* @author shuigedeng  
 * @date 2021/8/12 
 */
 public interface OperateLogService {
@@ -16,7 +16,6 @@ public interface OperateLogService {
     /**
      * 添加
      */
-    @Async("asyncExecutor")
     void add(OperateLogParam operateLog);
 
     /**
@@ -27,7 +26,7 @@ public interface OperateLogService {
     /**
      * 分页
      */
-    PageResult<OperateLogDto> page(PageParam pageParam, OperateLogParam operateLogParam);
+    PageResult<OperateLogDto> page( OperateLogParam operateLogParam);
 
     /**
      * 删除

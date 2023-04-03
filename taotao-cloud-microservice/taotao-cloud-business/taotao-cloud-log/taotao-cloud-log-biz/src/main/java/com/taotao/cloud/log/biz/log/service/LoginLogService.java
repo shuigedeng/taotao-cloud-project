@@ -1,14 +1,14 @@
 package com.taotao.cloud.log.biz.log.service;
 
-import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
-import cn.bootx.starter.audit.log.dto.LoginLogDto;
-import cn.bootx.starter.audit.log.param.LoginLogParam;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.log.biz.log.dto.LoginLogDto;
+import com.taotao.cloud.log.biz.log.param.LoginLogParam;
 import org.springframework.scheduling.annotation.Async;
 
 /**   
 * 登陆日志
-* @author xxm  
+* @author shuigedeng  
 * @date 2021/12/2 
 */
 public interface LoginLogService {
@@ -16,7 +16,6 @@ public interface LoginLogService {
     /**
      * 添加
      */
-    @Async("asyncExecutor")
     void add(LoginLogParam loginLog);
 
     /**
@@ -27,7 +26,7 @@ public interface LoginLogService {
     /**
      * 分页
      */
-    PageResult<LoginLogDto> page(PageParam pageParam, LoginLogParam loginLogParam);
+    PageResult<LoginLogDto> page(LoginLogParam loginLogParam);
 
     /**
      * 删除

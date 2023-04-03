@@ -1,17 +1,14 @@
 package com.taotao.cloud.log.biz.log.core.mongo.service;
 
-import cn.bootx.common.core.code.CommonCode;
-import cn.bootx.common.core.exception.DataNotExistException;
-import cn.bootx.common.core.rest.PageResult;
-import cn.bootx.common.core.rest.param.PageParam;
-import cn.bootx.common.jackson.util.JacksonUtil;
-import cn.bootx.starter.audit.log.core.mongo.dao.DataVersionLogMongoRepository;
-import cn.bootx.starter.audit.log.core.mongo.entity.DataVersionLogMongo;
-import cn.bootx.starter.audit.log.dto.DataVersionLogDto;
-import cn.bootx.starter.audit.log.param.DataVersionLogParam;
-import cn.bootx.starter.audit.log.service.DataVersionLogService;
-import cn.bootx.starter.auth.util.SecurityUtil;
 import cn.hutool.core.util.IdUtil;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.log.biz.log.core.mongo.dao.DataVersionLogMongoRepository;
+import com.taotao.cloud.log.biz.log.core.mongo.entity.DataVersionLogMongo;
+import com.taotao.cloud.log.biz.log.dto.DataVersionLogDto;
+import com.taotao.cloud.log.biz.log.param.DataVersionLogParam;
+import com.taotao.cloud.log.biz.log.service.DataVersionLogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,88 +25,84 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
-*
-* @author xxm
-* @date 2022/1/10
-*/
+ * @author shuigedeng
+ * @date 2022/1/10
+ */
 @Slf4j
 @Service
-@ConditionalOnProperty(prefix = "bootx.starter.audit-log", value = "store", havingValue = "mongo")
+@ConditionalOnProperty(prefix = "log.store", value = "type", havingValue = "mongodb")
 @RequiredArgsConstructor
 public class DataVersionLogMongoService implements DataVersionLogService {
-    private final DataVersionLogMongoRepository repository;
-    private final MongoTemplate mongoTemplate;
+	private final DataVersionLogMongoRepository repository;
+	private final MongoTemplate mongoTemplate;
 
-    /**
-     * 添加
-     */
-    @Override
-    public void add(DataVersionLogParam param) {
-        // 查询数据最新版本
-        Criteria criteria = Criteria.where(DataVersionLogMongo.Fields.tableName).is(param.getDataName())
-                .and(DataVersionLogMongo.Fields.dataId).is(param.getDataId());
-        Sort sort = Sort.by(Sort.Order.desc(DataVersionLogMongo.Fields.version));
-        Query query = new Query().addCriteria(criteria).with(sort).limit(1);
-        DataVersionLogMongo one = mongoTemplate.findOne(query, DataVersionLogMongo.class);
-        Integer maxVersion = Optional.ofNullable(one).map(DataVersionLogMongo::getVersion).orElse(0);
+	/**
+	 * 添加
+	 */
+	@Override
+	public void add(DataVersionLogParam param) {
+		// 查询数据最新版本
+		Criteria criteria = Criteria.where(DataVersionLogMongo.Fields.tableName).is(param.getDataName())
+			.and(DataVersionLogMongo.Fields.dataId).is(param.getDataId());
+		Sort sort = Sort.by(Sort.Order.desc(DataVersionLogMongo.Fields.version));
+		Query query = new Query().addCriteria(criteria).with(sort).limit(1);
+		DataVersionLogMongo one = mongoTemplate.findOne(query, DataVersionLogMongo.class);
+		Integer maxVersion = Optional.ofNullable(one).map(DataVersionLogMongo::getVersion).orElse(0);
 
-        DataVersionLogMongo dataVersionLog = new DataVersionLogMongo()
-                .setTableName(param.getTableName())
-                .setDataName(param.getDataName())
-                .setDataId(param.getDataId())
-                .setCreator(SecurityUtil.getUserIdOrDefaultId())
-                .setCreateTime(LocalDateTime.now())
-                .setVersion(maxVersion+1);
-        if (param.getDataContent() instanceof String){
-            dataVersionLog.setDataContent((String) param.getDataContent());
-        } else {
-            dataVersionLog.setDataContent(JacksonUtil.toJson(param.getDataContent()));
-        }
-        if (param.getChangeContent() instanceof String){
-            dataVersionLog.setChangeContent(param.getChangeContent());
-        } else {
-            if (Objects.nonNull(param.getChangeContent())) {
-                dataVersionLog.setChangeContent(JacksonUtil.toJson(param.getChangeContent()));
-            }
-        }
-        dataVersionLog.setId(IdUtil.getSnowflakeNextId());
-        repository.save(dataVersionLog);
-    }
+		DataVersionLogMongo dataVersionLog = new DataVersionLogMongo();
+		dataVersionLog.setTableName(param.getTableName());
+		dataVersionLog.setDataName(param.getDataName());
+		dataVersionLog.setDataId(param.getDataId());
+		dataVersionLog.setCreator(SecurityUtils.getUserIdWithAnonymous());
+		dataVersionLog.setCreateTime(LocalDateTime.now());
+		dataVersionLog.setVersion(maxVersion + 1);
+		if (param.getDataContent() instanceof String) {
+			dataVersionLog.setDataContent((String) param.getDataContent());
+		} else {
+			dataVersionLog.setDataContent(JsonUtils.toJson(param.getDataContent()));
+		}
+		if (param.getChangeContent() instanceof String) {
+			dataVersionLog.setChangeContent(param.getChangeContent());
+		} else {
+			if (Objects.nonNull(param.getChangeContent())) {
+				dataVersionLog.setChangeContent(JsonUtils.toJson(param.getChangeContent()));
+			}
+		}
+		dataVersionLog.setId(IdUtil.getSnowflakeNextId());
+		repository.save(dataVersionLog);
+	}
 
-    @Override
-    public DataVersionLogDto findById(Long id) {
-        return repository.findById(id).map(DataVersionLogMongo::toDto).orElseThrow(DataNotExistException::new);
-    }
+	@Override
+	public DataVersionLogDto findById(Long id) {
+		return repository.findById(id).map(DataVersionLogMongo::toDto).orElseThrow(RuntimeException::new);
+	}
 
-    @Override
-    public PageResult<DataVersionLogDto> page(PageParam pageParam, DataVersionLogParam param) {
-        DataVersionLogMongo dataVersionLogMongo = new DataVersionLogMongo()
-                .setDataId(param.getDataId())
-                .setVersion(param.getVersion())
-                .setTableName(param.getTableName())
-                .setDataName(param.getDataName());
-        // 查询条件
-        ExampleMatcher matching = ExampleMatcher.matching()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<DataVersionLogMongo> example = Example.of(dataVersionLogMongo, matching);
-        //设置分页条件 (第几页，每页大小，排序)
-        Sort sort = Sort.by(Sort.Order.desc(CommonCode.ID));
-        Pageable pageable = PageRequest.of(pageParam.getCurrent()-1, pageParam.getSize(), sort);
+	@Override
+	public PageResult<DataVersionLogDto> page(DataVersionLogParam param) {
+		DataVersionLogMongo dataVersionLogMongo = new DataVersionLogMongo()
+			.setDataId(param.getDataId())
+			.setVersion(param.getVersion())
+			.setTableName(param.getTableName())
+			.setDataName(param.getDataName());
+		// 查询条件
+		ExampleMatcher matching = ExampleMatcher.matching()
+			.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+		Example<DataVersionLogMongo> example = Example.of(dataVersionLogMongo, matching);
+		//设置分页条件 (第几页，每页大小，排序)
+		Sort sort = Sort.by(Sort.Order.desc("id"));
+		Pageable pageable = PageRequest.of(param.getCurrentPage() - 1, param.getPageSize(), sort);
 
-        Page<DataVersionLogMongo> page = repository.findAll(example,pageable);
-        List<DataVersionLogDto> records = page.getContent().stream()
-                .map(DataVersionLogMongo::toDto)
-                .collect(Collectors.toList());
+		Page<DataVersionLogMongo> page = repository.findAll(example, pageable);
+		List<DataVersionLogDto> records = page.getContent().stream()
+			.map(DataVersionLogMongo::toDto)
+			.collect(Collectors.toList());
 
-        return new PageResult<DataVersionLogDto>()
-                .setCurrent(pageParam.getCurrent())
-                .setSize(pageParam.getSize())
-                .setRecords(records)
-                .setTotal(page.getTotalElements());
-    }
+		return PageResult.of(page.getTotalElements(), 1, param.getCurrentPage(), param.getPageSize(), records);
 
-    @Override
-    public void delete(Long id) {
+	}
 
-    }
+	@Override
+	public void delete(Long id) {
+
+	}
 }

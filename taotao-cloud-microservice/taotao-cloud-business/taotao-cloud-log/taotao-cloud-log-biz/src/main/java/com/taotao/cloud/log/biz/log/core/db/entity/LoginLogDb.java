@@ -1,62 +1,90 @@
 package com.taotao.cloud.log.biz.log.core.db.entity;
 
-import cn.bootx.common.core.function.EntityBaseFunction;
-import cn.bootx.common.mybatisplus.base.MpIdEntity;
-import cn.bootx.starter.audit.log.core.db.convert.LogConvert;
-import cn.bootx.starter.audit.log.dto.LoginLogDto;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import com.taotao.cloud.log.biz.log.core.db.convert.LogConvert;
+import com.taotao.cloud.log.biz.log.dto.LoginLogDto;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**   
-* 登录日志
-* @author xxm  
-* @date 2021/8/12 
-*/
-@EqualsAndHashCode(callSuper = true)
-@Data
-@Accessors(chain = true)
-@TableName("starter_audit_login_log")
-public class LoginLogDb extends MpIdEntity implements EntityBaseFunction<LoginLogDto> {
+/**
+ * 登录日志
+ *
+ * @author shuigedeng
+ * @date 2021/8/12
+ */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
+@Entity
+@Table(name = LoginLogDb.TABLE_NAME)
+@TableName(LoginLogDb.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = LoginLogDb.TABLE_NAME, comment = "app配置表")
+public class LoginLogDb extends BaseSuperEntity<LoginLogDb, Long> {
 
-    /** 用户账号id */
-    private Long userId;
+	public static final String TABLE_NAME = "tt_login_log";
 
-    /** 用户名称 */
-    private String account;
+	/**
+	 * 用户账号id
+	 */
+	private Long userId;
 
-    /** 登录成功状态*/
-    private Boolean login;
+	/**
+	 * 用户名称
+	 */
+	private String account;
 
-    /** 登录终端 */
-    private String client;
+	/**
+	 * 登录成功状态
+	 */
+	private Boolean login;
 
-    /** 登录方式 */
-    private String loginType;
+	/**
+	 * 登录终端
+	 */
+	private String client;
 
-    /** 登录IP地址 */
-    private String ip;
+	/**
+	 * 登录方式
+	 */
+	private String loginType;
 
-    /** 登录地点 */
-    private String loginLocation;
+	/**
+	 * 登录IP地址
+	 */
+	private String ip;
 
-    /** 浏览器类型 */
-    private String browser;
+	/**
+	 * 登录地点
+	 */
+	private String loginLocation;
 
-    /** 操作系统 */
-    private String os;
+	/**
+	 * 浏览器类型
+	 */
+	private String browser;
 
-    /** 提示消息 */
-    private String msg;
+	/**
+	 * 操作系统
+	 */
+	private String os;
 
-    /** 访问时间 */
-    private LocalDateTime loginTime;
+	/**
+	 * 提示消息
+	 */
+	private String msg;
 
-    @Override
-    public LoginLogDto toDto() {
-        return LogConvert.CONVERT.convert(this);
-    }
+	/**
+	 * 访问时间
+	 */
+	private LocalDateTime loginTime;
+
+	public LoginLogDto toDto() {
+		return LogConvert.CONVERT.convert(this);
+	}
 }

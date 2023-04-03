@@ -31,17 +31,17 @@ import org.springframework.stereotype.Component;
  * @since 2022/02/09 20:46
  */
 @Component
-public class RequestLogTopicMessageDelegate {
+public class DataVersionLogTopicMessageDelegate {
 
-	@Autowired
+    @Autowired
 	private ILogService logService;
 
-	public void handleRequestLog(String message, String channel) {
-		try {
-			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
-			logService.save(log);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-	}
+    public void handleRequestLog(String message, String channel) {
+        try {
+            Log log = JsonUtils.MAPPER.readValue(message, Log.class);
+            logService.save(log);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
 }
