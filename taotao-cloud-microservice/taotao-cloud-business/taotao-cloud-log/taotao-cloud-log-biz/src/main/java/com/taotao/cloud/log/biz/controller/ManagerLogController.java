@@ -33,7 +33,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-
+import com.taotao.cloud.data.mybatisplus.interceptor.easylog.common.audit.DataAuditLogging;
 /**
  * LogController
  *
@@ -142,6 +142,7 @@ public class ManagerLogController {
 	}
 	@PostMapping(value = "/testUpdate")
 	@NotAuth
+	@DataAuditLogging
 	public Result<Boolean> testUpdate(@RequestBody Log log) {
 		boolean save = logService.updateById(log);
 		return Result.success(save);

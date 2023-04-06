@@ -8,7 +8,7 @@ checkstyle {
 
     //https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml
     //configFile = file("${rootDir}/checkstyle/google_checks.xml")
-    configFile = rootProject.file('checkstyle/google_checks.xml')
+    configFile = rootProject.file('code-analysis/checkstyle/google_checks.xml')
 
     // The source sets to be analyzed as part of the check and build tasks.
     // Use 'sourceSets = []' to remove Checkstyle from the check and build tasks.
@@ -20,7 +20,7 @@ checkstyle {
     // Whether or not rule violations are to be displayed on the console.
     showViolations = true
 
-    reportsDir = file("$project.buildDir/checkstyle")
+    reportsDir = file("$project.buildDir/code-analysis/checkstyle")
 }
 
 tasks.withType(Checkstyle) {
@@ -28,6 +28,6 @@ tasks.withType(Checkstyle) {
         xml.required = false
         html.required = true
         //https://raw.githubusercontent.com/checkstyle/contribution/master/xsl
-        html.stylesheet resources.text.fromFile("${rootDir}/checkstyle/reports/checkstyle-noframes.xsl")
+        html.stylesheet resources.text.fromFile("${rootDir}/code-analysis/checkstyle/reports/checkstyle-noframes.xsl")
     }
 }

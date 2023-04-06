@@ -827,11 +827,10 @@ taotao:
             encode: base64
           dataOperate:
             enabled: true
-          data-change:
+          dataChange:
             enabled: true
             types:
               - logger
-              - redis
           slowQuery:
             enabled: true
             slow-sql-threshold-ms: 6000
