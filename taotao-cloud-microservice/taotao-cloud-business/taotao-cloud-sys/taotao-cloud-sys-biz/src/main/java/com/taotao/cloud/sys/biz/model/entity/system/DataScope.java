@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.data.mybatisplus.datascope.dataPermission.enums.DataScopeEnum;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.JacksonListTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.vladmihalcea.hibernate.type.json.JsonType;

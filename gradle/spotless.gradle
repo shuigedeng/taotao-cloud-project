@@ -29,7 +29,7 @@ spotless {
 
         // apply a specific flavor of google-java-format
         googleJavaFormat('1.16.0').aosp().reflowLongStrings().groupArtifact('com.google.googlejavaformat:google-java-format')
-        licenseHeaderFile rootProject.file('spotless/license-header')
+        licenseHeaderFile rootProject.file('code-analysis/spotless/license-header')
     }
 
 }

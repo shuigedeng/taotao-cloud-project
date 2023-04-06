@@ -67,6 +67,9 @@ buildscript {
 
     dependencies {
         /* 添加插件依赖路径（通过jar方式） */
+
+        //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.14"
     }
 }
 
@@ -225,6 +228,7 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
     apply from: rootProject.file('gradle/test.gradle')
     apply from: rootProject.file('gradle/checkstyle.gradle')
     apply from: rootProject.file('gradle/spotless.gradle')
+    apply from: rootProject.file('gradle/spotbugs.gradle')
 
     dependencies {
         implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")

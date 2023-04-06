@@ -17,6 +17,7 @@
 package com.taotao.cloud.log.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.mybatisplus.interceptor.datachanage.annotation.DataVersionLog;
 import com.taotao.cloud.data.mybatisplus.interceptor.encrypt.annotation.EncryptField;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
@@ -37,6 +38,7 @@ import org.hibernate.Hibernate;
  * @version 2021.10
  * @since 2022-02-15 09:25:26
  */
+@DataVersionLog(title = "系统日志变更数据")
 @Getter
 @Setter
 @ToString(callSuper = true)
