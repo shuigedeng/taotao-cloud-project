@@ -45,29 +45,35 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TemplateMsgServiceImpl implements TemplateMsgService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired private TemplateMsgLogService templateMsgLogService;
+
+    @Autowired
+    private TemplateMsgLogService templateMsgLogService;
+
     private final WxMpService wxService;
-    @Autowired MsgTemplateService msgTemplateService;
-    @Autowired WxUserService wxUserService;
+
+    @Autowired
+    MsgTemplateService msgTemplateService;
+
+    @Autowired
+    WxUserService wxUserService;
 
     /** 发送微信模版消息,使用固定线程的线程池 */
     @Override
     @Async
     public void sendTemplateMsg(WxMpTemplateMessage msg, String appid) {
-        TaskExcutor.submit(
-                () -> {
-                    String result;
-                    try {
-                        wxService.switchover(appid);
-                        result = wxService.getTemplateMsgService().sendTemplateMsg(msg);
-                    } catch (WxErrorException e) {
-                        result = e.getMessage();
-                    }
+        TaskExcutor.submit(() -> {
+            String result;
+            try {
+                wxService.switchover(appid);
+                result = wxService.getTemplateMsgService().sendTemplateMsg(msg);
+            } catch (WxErrorException e) {
+                result = e.getMessage();
+            }
 
-                    // 保存发送日志
-                    TemplateMsgLog log = new TemplateMsgLog(msg, appid, result);
-                    templateMsgLogService.addLog(log);
-                });
+            // 保存发送日志
+            TemplateMsgLog log = new TemplateMsgLog(msg, appid, result);
+            templateMsgLogService.addLog(log);
+        });
     }
 
     @Override
@@ -75,12 +81,11 @@ public class TemplateMsgServiceImpl implements TemplateMsgService {
     public void sendMsgBatch(TemplateMsgBatchForm form, String appid) {
         logger.info("批量发送模板消息任务开始,参数：{}", form.toString());
         wxService.switchover(appid);
-        WxMpTemplateMessage.WxMpTemplateMessageBuilder builder =
-                WxMpTemplateMessage.builder()
-                        .templateId(form.getTemplateId())
-                        .url(form.getUrl())
-                        .miniProgram(form.getMiniprogram())
-                        .data(form.getData());
+        WxMpTemplateMessage.WxMpTemplateMessageBuilder builder = WxMpTemplateMessage.builder()
+                .templateId(form.getTemplateId())
+                .url(form.getUrl())
+                .miniProgram(form.getMiniprogram())
+                .data(form.getData());
         Map<String, Object> filterParams = form.getWxUserFilterParams();
         if (filterParams == null) {
             filterParams = new HashMap<>(8);
@@ -93,12 +98,10 @@ public class TemplateMsgServiceImpl implements TemplateMsgService {
             // 按条件查询用户
             IPage<WxUser> wxUsers = wxUserService.queryPage(filterParams);
             logger.info("批量发送模板消息任务,使用查询条件，处理第{}页，总用户数：{}", currentPage, wxUsers.getTotal());
-            wxUsers.getRecords()
-                    .forEach(
-                            user -> {
-                                WxMpTemplateMessage msg = builder.toUser(user.getOpenid()).build();
-                                this.sendTemplateMsg(msg, appid);
-                            });
+            wxUsers.getRecords().forEach(user -> {
+                WxMpTemplateMessage msg = builder.toUser(user.getOpenid()).build();
+                this.sendTemplateMsg(msg, appid);
+            });
             currentPage = wxUsers.getCurrent() + 1L;
             totalPages = wxUsers.getPages();
         }

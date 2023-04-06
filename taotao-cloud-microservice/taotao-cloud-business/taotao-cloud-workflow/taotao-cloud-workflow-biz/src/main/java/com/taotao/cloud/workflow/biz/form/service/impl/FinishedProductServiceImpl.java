@@ -33,13 +33,17 @@ import org.springframework.stereotype.Service;
 
 /** 成品入库单 */
 @Service
-public class FinishedProductServiceImpl
-        extends ServiceImpl<FinishedProductMapper, FinishedProductEntity>
+public class FinishedProductServiceImpl extends ServiceImpl<FinishedProductMapper, FinishedProductEntity>
         implements FinishedProductService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FinishedProductEntryService finishedProductEntryService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FinishedProductEntryService finishedProductEntryService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public List<FinishedProductEntryEntity> getFinishedEntryList(String id) {
@@ -61,9 +65,7 @@ public class FinishedProductServiceImpl
     @Override
     @DSTransactional
     public void save(
-            String id,
-            FinishedProductEntity entity,
-            List<FinishedProductEntryEntity> finishedProductEntryEntityList)
+            String id, FinishedProductEntity entity, List<FinishedProductEntryEntity> finishedProductEntryEntityList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -151,14 +153,10 @@ public class FinishedProductServiceImpl
 
     @Override
     public void data(String id, String data) {
-        FinishedProductForm finishedProductForm =
-                JsonUtil.getJsonToBean(data, FinishedProductForm.class);
-        FinishedProductEntity entity =
-                JsonUtil.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
+        FinishedProductForm finishedProductForm = JsonUtil.getJsonToBean(data, FinishedProductForm.class);
+        FinishedProductEntity entity = JsonUtil.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
         List<FinishedProductEntryEntityInfoModel> entryList =
-                finishedProductForm.getEntryList() != null
-                        ? finishedProductForm.getEntryList()
-                        : new ArrayList<>();
+                finishedProductForm.getEntryList() != null ? finishedProductForm.getEntryList() : new ArrayList<>();
         List<FinishedProductEntryEntity> finishedProductEntryEntityList =
                 JsonUtil.getJsonToList(entryList, FinishedProductEntryEntity.class);
         entity.setId(id);

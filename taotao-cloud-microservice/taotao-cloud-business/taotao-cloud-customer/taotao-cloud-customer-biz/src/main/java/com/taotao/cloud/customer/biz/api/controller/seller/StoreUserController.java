@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/store/user")
 public class StoreUserController {
 
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignMemberApi memberApi;
 
     @Operation(summary = "获取当前登录用户接口", description = "获取当前登录用户接口")
     @RequestLogger

@@ -89,7 +89,9 @@ public class QueryRefundOrderRS extends AbstractRS {
                         ? null
                         : refundOrder.getSuccessTime().getTime());
         result.setCreatedAt(
-                refundOrder.getCreatedAt() == null ? null : refundOrder.getCreatedAt().getTime());
+                refundOrder.getCreatedAt() == null
+                        ? null
+                        : refundOrder.getCreatedAt().getTime());
         return result;
     }
 }

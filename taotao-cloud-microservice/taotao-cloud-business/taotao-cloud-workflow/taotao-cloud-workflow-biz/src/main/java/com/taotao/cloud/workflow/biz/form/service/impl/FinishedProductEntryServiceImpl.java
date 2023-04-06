@@ -24,6 +24,5 @@ import org.springframework.stereotype.Service;
 
 /** 成品入库单明细 */
 @Service
-public class FinishedProductEntryServiceImpl
-        extends ServiceImpl<FinishedProductEntryMapper, FinishedProductEntryEntity>
+public class FinishedProductEntryServiceImpl extends ServiceImpl<FinishedProductEntryMapper, FinishedProductEntryEntity>
         implements FinishedProductEntryService {}

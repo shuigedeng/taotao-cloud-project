@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.sync.batch.mybatis;
 
 import org.springframework.batch.core.ExitStatus;
@@ -28,14 +29,13 @@ import org.springframework.batch.core.StepExecutionListener;
  */
 public class MybatisStepExecutionListener implements StepExecutionListener {
 
-	@Override
-	public void beforeStep(StepExecution stepExecution) {
-		StepExecutionListener.super.beforeStep(stepExecution);
-	}
+    @Override
+    public void beforeStep(StepExecution stepExecution) {
+        StepExecutionListener.super.beforeStep(stepExecution);
+    }
 
-
-	@Override
-	public ExitStatus afterStep(StepExecution stepExecution) {
-		return StepExecutionListener.super.afterStep(stepExecution);
-	}
+    @Override
+    public ExitStatus afterStep(StepExecution stepExecution) {
+        return StepExecutionListener.super.afterStep(stepExecution);
+    }
 }

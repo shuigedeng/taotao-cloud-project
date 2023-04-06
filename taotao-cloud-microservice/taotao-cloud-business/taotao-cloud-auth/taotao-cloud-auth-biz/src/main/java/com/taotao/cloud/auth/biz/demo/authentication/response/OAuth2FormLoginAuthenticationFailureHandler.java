@@ -43,11 +43,9 @@ import org.springframework.util.Assert;
  * @date : 2020/1/26 18:08
  * @see SimpleUrlAuthenticationFailureHandler
  */
-public class OAuth2FormLoginAuthenticationFailureHandler
-        extends SimpleUrlAuthenticationFailureHandler {
+public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(OAuth2FormLoginAuthenticationFailureHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(OAuth2FormLoginAuthenticationFailureHandler.class);
 
     private String defaultFailureUrl;
 
@@ -74,15 +72,13 @@ public class OAuth2FormLoginAuthenticationFailureHandler
             } else {
                 this.logger.debug("Sending 401 Unauthorized error");
             }
-            response.sendError(
-                    HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+            response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
             return;
         }
 
         String errorMessage = "请刷新重试！";
 
-        Result<String> result =
-                SecurityGlobalExceptionHandler.resolveSecurityException(e, request.getRequestURI());
+        Result<String> result = SecurityGlobalExceptionHandler.resolveSecurityException(e, request.getRequestURI());
         if (ObjectUtils.isNotEmpty(result) && StringUtils.isNotBlank(result.getMessage())) {
             errorMessage = result.getMessage();
         } else {

@@ -38,9 +38,11 @@ import org.springframework.stereotype.Component;
 public class RechargeCashier implements CashierExecute {
 
     /** 余额 */
-    @Autowired private IFeignMemberRechargeApi memberRechargeApi;
+    @Autowired
+    private IFeignMemberRechargeApi memberRechargeApi;
     /** 设置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
 
     @Override
     public CashierEnum cashierEnum() {
@@ -52,13 +54,8 @@ public class RechargeCashier implements CashierExecute {
         PayParam payParam = paymentSuccessParams.getPayParam();
         if (payParam.getOrderType().equals(CashierEnum.RECHARGE.name())) {
             memberRechargeApi.paySuccess(
-                    payParam.getSn(),
-                    paymentSuccessParams.getReceivableNo(),
-                    paymentSuccessParams.getPaymentMethod());
-            LogUtils.info(
-                    "会员充值-订单号{},第三方流水：{}",
-                    payParam.getSn(),
-                    paymentSuccessParams.getReceivableNo());
+                    payParam.getSn(), paymentSuccessParams.getReceivableNo(), paymentSuccessParams.getPaymentMethod());
+            LogUtils.info("会员充值-订单号{},第三方流水：{}", payParam.getSn(), paymentSuccessParams.getReceivableNo());
         }
     }
 
@@ -78,8 +75,7 @@ public class RechargeCashier implements CashierExecute {
             cashierParam.setPrice(recharge.getRechargeMoney());
 
             try {
-                BaseSetting baseSetting =
-                        settingApi.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
+                BaseSetting baseSetting = settingApi.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
                 cashierParam.setTitle(baseSetting.getSiteName());
             } catch (Exception e) {
                 cashierParam.setTitle("多用户商城，在线充值");

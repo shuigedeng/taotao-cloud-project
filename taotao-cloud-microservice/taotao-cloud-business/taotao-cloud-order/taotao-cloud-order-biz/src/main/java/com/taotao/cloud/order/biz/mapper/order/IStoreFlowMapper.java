@@ -36,8 +36,7 @@ public interface IStoreFlowMapper extends BaseSuperMapper<StoreFlow, Long> {
      * @return 入账流水
      */
     @Select("SELECT * FROM tt_store_flow ${ew.customSqlSegment}")
-    List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(
-            @Param(Constants.WRAPPER) Wrapper<StoreFlow> queryWrapper);
+    List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(@Param(Constants.WRAPPER) Wrapper<StoreFlow> queryWrapper);
 
     /**
      * 获取结算单的退款流水

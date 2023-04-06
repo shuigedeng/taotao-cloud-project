@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class BpmFormController {
 
-    @Resource private BpmFormService formService;
+    @Resource
+    private BpmFormService formService;
 
     @PostMapping("/create")
     @ApiOperation("创建动态表单")
@@ -68,12 +69,7 @@ public class BpmFormController {
 
     @GetMapping("/get")
     @ApiOperation("获得动态表单")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('bpm:form:query')")
     public CommonResult<BpmFormRespVO> getForm(@RequestParam("id") Long id) {
         BpmFormDO form = formService.getForm(id);

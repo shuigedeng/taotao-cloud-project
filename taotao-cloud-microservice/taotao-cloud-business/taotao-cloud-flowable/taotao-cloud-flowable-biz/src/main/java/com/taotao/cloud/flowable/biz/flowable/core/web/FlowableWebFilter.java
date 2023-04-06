@@ -32,8 +32,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class FlowableWebFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(
-            HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         try {
             // 设置工作流的用户

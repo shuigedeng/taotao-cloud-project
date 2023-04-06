@@ -71,12 +71,10 @@ public class OkHttpConfiguration {
     public X509TrustManager x509TrustManager() {
         return new X509TrustManager() {
             @Override
-            public void checkClientTrusted(X509Certificate[] chain, String authType)
-                    throws CertificateException {}
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
 
             @Override
-            public void checkServerTrusted(X509Certificate[] chain, String authType)
-                    throws CertificateException {}
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
 
             @Override
             public X509Certificate[] getAcceptedIssuers() {

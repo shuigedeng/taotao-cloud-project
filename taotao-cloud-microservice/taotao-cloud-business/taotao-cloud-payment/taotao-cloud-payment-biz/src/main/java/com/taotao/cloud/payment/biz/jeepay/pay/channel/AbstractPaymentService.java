@@ -31,9 +31,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public abstract class AbstractPaymentService implements IPaymentService {
 
-    @Autowired protected SysConfigService sysConfigService;
-    @Autowired protected ChannelCertConfigKitBean channelCertConfigKitBean;
-    @Autowired protected ConfigContextQueryService configContextQueryService;
+    @Autowired
+    protected SysConfigService sysConfigService;
+
+    @Autowired
+    protected ChannelCertConfigKitBean channelCertConfigKitBean;
+
+    @Autowired
+    protected ConfigContextQueryService configContextQueryService;
 
     /** 订单分账（一般用作 如微信订单将在下单处做标记） */
     protected boolean isDivisionOrder(PayOrder payOrder) {
@@ -47,9 +52,7 @@ public abstract class AbstractPaymentService implements IPaymentService {
     }
 
     protected String getNotifyUrl() {
-        return sysConfigService.getDBApplicationConfig().getPaySiteUrl()
-                + "/api/pay/notify/"
-                + getIfCode();
+        return sysConfigService.getDBApplicationConfig().getPaySiteUrl() + "/api/pay/notify/" + getIfCode();
     }
 
     protected String getNotifyUrl(String payOrderId) {
@@ -61,9 +64,7 @@ public abstract class AbstractPaymentService implements IPaymentService {
     }
 
     protected String getReturnUrl() {
-        return sysConfigService.getDBApplicationConfig().getPaySiteUrl()
-                + "/api/pay/return/"
-                + getIfCode();
+        return sysConfigService.getDBApplicationConfig().getPaySiteUrl() + "/api/pay/return/" + getIfCode();
     }
 
     protected String getReturnUrl(String payOrderId) {

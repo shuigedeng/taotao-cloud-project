@@ -39,7 +39,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/sys/log")
 @Api(tags = {"系统日志-管理后台"})
 public class SysLogController {
-    @Autowired private SysLogService sysLogService;
+    @Autowired
+    private SysLogService sysLogService;
 
     /** 列表 */
     @ResponseBody

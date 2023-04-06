@@ -46,10 +46,7 @@ public class BpmProcessDefinitionRespVO {
     @ApiModelProperty(value = "表单类型", notes = "参见 bpm_model_form_type 数据字典", example = "1")
     private Integer formType;
 
-    @ApiModelProperty(
-            value = "表单编号",
-            example = "1024",
-            notes = "在表单类型为 {@link BpmModelFormTypeEnum#CUSTOM} 时，必须非空")
+    @ApiModelProperty(value = "表单编号", example = "1024", notes = "在表单类型为 {@link BpmModelFormTypeEnum#CUSTOM} 时，必须非空")
     private Long formId;
 
     @ApiModelProperty(
@@ -76,10 +73,6 @@ public class BpmProcessDefinitionRespVO {
             notes = "在表单类型为 {@link BpmModelFormTypeEnum#CUSTOM} 时，必须非空")
     private String formCustomViewPath;
 
-    @ApiModelProperty(
-            value = "中断状态",
-            required = true,
-            example = "1",
-            notes = "参见 SuspensionState 枚举")
+    @ApiModelProperty(value = "中断状态", required = true, example = "1", notes = "参见 SuspensionState 枚举")
     private Integer suspensionState;
 }

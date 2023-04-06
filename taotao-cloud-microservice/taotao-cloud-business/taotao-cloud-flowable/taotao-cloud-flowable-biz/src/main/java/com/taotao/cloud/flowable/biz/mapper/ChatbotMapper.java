@@ -27,9 +27,7 @@ import org.mapstruct.factory.Mappers;
  * @since 2020/11/11 14:42
  * @version 2022.03
  */
-@Mapper(
-        unmappedSourcePolicy = ReportingPolicy.IGNORE,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ChatbotMapper {
 
     ChatbotMapper INSTANCE = Mappers.getMapper(ChatbotMapper.class);

@@ -60,9 +60,7 @@ public class HttpURLConnectionClient extends HttpClient {
             return new APIJeepayResponse(responseCode, responseBody, headers);
         } catch (IOException e) {
             throw new APIConnectionException(
-                    String.format(
-                            "请求Jeepay(%s)异常,请检查网络或重试.异常信息:%s", request.getUrl(), e.getMessage()),
-                    e);
+                    String.format("请求Jeepay(%s)异常,请检查网络或重试.异常信息:%s", request.getUrl(), e.getMessage()), e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -75,7 +73,8 @@ public class HttpURLConnectionClient extends HttpClient {
 
         userAgentHeadersMap.put(
                 "User-Agent",
-                Collections.singletonList(buildUserAgentString(request.getOptions().getVersion())));
+                Collections.singletonList(
+                        buildUserAgentString(request.getOptions().getVersion())));
         userAgentHeadersMap.put(
                 "X-Jeepay-Client-User-Agent",
                 Collections.singletonList(
@@ -84,8 +83,7 @@ public class HttpURLConnectionClient extends HttpClient {
         return request.getHeaders().withAdditionalHeaders(userAgentHeadersMap);
     }
 
-    private static HttpURLConnection createJeepayConnection(APIJeepayRequest request)
-            throws IOException {
+    private static HttpURLConnection createJeepayConnection(APIJeepayRequest request) throws IOException {
         HttpURLConnection conn = (HttpURLConnection) request.url.openConnection();
 
         conn.setConnectTimeout(request.options.getConnectTimeout());

@@ -92,11 +92,7 @@ public class TransferOrderService extends ServiceImpl<TransferOrderMapper, Trans
     /** 更新转账订单状态 【转账中】 --》 【转账成功/转账失败】 * */
     @Transactional
     public boolean updateIng2SuccessOrFail(
-            String transferId,
-            Byte updateState,
-            String channelOrderNo,
-            String channelErrCode,
-            String channelErrMsg) {
+            String transferId, Byte updateState, String channelOrderNo, String channelErrCode, String channelErrMsg) {
 
         if (updateState == TransferOrder.STATE_ING) {
             return true;
@@ -113,24 +109,17 @@ public class TransferOrderService extends ServiceImpl<TransferOrderMapper, Trans
 
         if (StringUtils.isNotEmpty(transferId)) {
             return getOne(
-                    TransferOrder.gw()
-                            .eq(TransferOrder::getMchNo, mchNo)
-                            .eq(TransferOrder::getTransferId, transferId));
+                    TransferOrder.gw().eq(TransferOrder::getMchNo, mchNo).eq(TransferOrder::getTransferId, transferId));
         } else if (StringUtils.isNotEmpty(mchOrderNo)) {
             return getOne(
-                    TransferOrder.gw()
-                            .eq(TransferOrder::getMchNo, mchNo)
-                            .eq(TransferOrder::getMchOrderNo, mchOrderNo));
+                    TransferOrder.gw().eq(TransferOrder::getMchNo, mchNo).eq(TransferOrder::getMchOrderNo, mchOrderNo));
         } else {
             return null;
         }
     }
 
     public IPage<TransferOrder> pageList(
-            IPage iPage,
-            LambdaQueryWrapper<TransferOrder> wrapper,
-            TransferOrder transferOrder,
-            JSONObject paramJSON) {
+            IPage iPage, LambdaQueryWrapper<TransferOrder> wrapper, TransferOrder transferOrder, JSONObject paramJSON) {
         if (StringUtils.isNotEmpty(transferOrder.getTransferId())) {
             wrapper.eq(TransferOrder::getTransferId, transferOrder.getTransferId());
         }
@@ -159,18 +148,13 @@ public class TransferOrderService extends ServiceImpl<TransferOrderMapper, Trans
         }
         // 三合一订单
         if (paramJSON != null && StringUtils.isNotEmpty(paramJSON.getString("unionOrderId"))) {
-            wrapper.and(
-                    wr -> {
-                        wr.eq(TransferOrder::getTransferId, paramJSON.getString("unionOrderId"))
-                                .or()
-                                .eq(
-                                        TransferOrder::getMchOrderNo,
-                                        paramJSON.getString("unionOrderId"))
-                                .or()
-                                .eq(
-                                        TransferOrder::getChannelOrderNo,
-                                        paramJSON.getString("unionOrderId"));
-                    });
+            wrapper.and(wr -> {
+                wr.eq(TransferOrder::getTransferId, paramJSON.getString("unionOrderId"))
+                        .or()
+                        .eq(TransferOrder::getMchOrderNo, paramJSON.getString("unionOrderId"))
+                        .or()
+                        .eq(TransferOrder::getChannelOrderNo, paramJSON.getString("unionOrderId"));
+            });
         }
         wrapper.orderByDesc(TransferOrder::getCreatedAt);
 

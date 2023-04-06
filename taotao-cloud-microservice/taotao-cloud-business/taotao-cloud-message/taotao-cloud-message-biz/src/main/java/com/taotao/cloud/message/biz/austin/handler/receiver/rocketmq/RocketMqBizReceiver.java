@@ -43,7 +43,8 @@ import org.springframework.stereotype.Component;
         selectorExpression = "${austin.business.tagId.value}")
 public class RocketMqBizReceiver implements RocketMQListener<String> {
 
-    @Autowired private ConsumeService consumeService;
+    @Autowired
+    private ConsumeService consumeService;
 
     @Override
     public void onMessage(String message) {

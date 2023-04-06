@@ -50,9 +50,7 @@ public class UnsubscribeHandler extends AbstractHandler {
             WxSessionManager sessionManager) {
         String openId = wxMessage.getFromUser();
         log.info("取消关注用户 OPENID: " + openId);
-        WxUser wxUser =
-                wxUserMapper.selectOne(
-                        Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, openId));
+        WxUser wxUser = wxUserMapper.selectOne(Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, openId));
         if (wxUser != null) {
             wxUser.setSubscribe(ConfigConstant.SUBSCRIBE_TYPE_NO);
             wxUser.setCancelSubscribeTime(LocalDateTime.now());

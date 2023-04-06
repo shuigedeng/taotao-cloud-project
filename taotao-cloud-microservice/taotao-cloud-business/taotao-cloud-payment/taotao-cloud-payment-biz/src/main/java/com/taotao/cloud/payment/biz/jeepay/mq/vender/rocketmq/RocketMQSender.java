@@ -63,7 +63,8 @@ public class RocketMQSender implements IMQSender {
         DELAY_TIME_LEVEL.add(60 * 60 * 2);
     }
 
-    @Autowired private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     public void send(AbstractMQ mqModel) {
@@ -91,11 +92,7 @@ public class RocketMQSender implements IMQSender {
         // 两个时间的绝对值 - 位置
         TreeMap<Integer, Integer> resultMap = new TreeMap<>();
         DELAY_TIME_LEVEL.stream()
-                .forEach(
-                        time ->
-                                resultMap.put(
-                                        Math.abs(delay - time),
-                                        DELAY_TIME_LEVEL.indexOf(time) + 1));
+                .forEach(time -> resultMap.put(Math.abs(delay - time), DELAY_TIME_LEVEL.indexOf(time) + 1));
         return resultMap.firstEntry().getValue();
     }
 }

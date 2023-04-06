@@ -46,8 +46,7 @@ public interface IPromotionGoodsService extends IService<PromotionGoods> {
      * @return {@link String }
      * @since 2022-04-27 16:44:13
      */
-    static String getPromotionGoodsStockCacheKey(
-            PromotionTypeEnum typeEnum, String promotionId, String skuId) {
+    static String getPromotionGoodsStockCacheKey(PromotionTypeEnum typeEnum, String promotionId, String skuId) {
         return "{"
                 + CachePrefix.PROMOTION_GOODS_STOCK.name()
                 + "_"
@@ -157,8 +156,7 @@ public interface IPromotionGoodsService extends IService<PromotionGoods> {
      * @return {@link List }<{@link Integer }>
      * @since 2022-04-27 16:44:14
      */
-    List<Integer> getPromotionGoodsStock(
-            PromotionTypeEnum typeEnum, String promotionId, List<String> skuId);
+    List<Integer> getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, List<String> skuId);
 
     /**
      * 更新促销活动商品库存
@@ -169,8 +167,7 @@ public interface IPromotionGoodsService extends IService<PromotionGoods> {
      * @param quantity 更新后的库存数量
      * @since 2022-04-27 16:44:14
      */
-    void updatePromotionGoodsStock(
-            PromotionTypeEnum typeEnum, String promotionId, String skuId, Integer quantity);
+    void updatePromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, String skuId, Integer quantity);
 
     /**
      * 更新促销活动商品索引

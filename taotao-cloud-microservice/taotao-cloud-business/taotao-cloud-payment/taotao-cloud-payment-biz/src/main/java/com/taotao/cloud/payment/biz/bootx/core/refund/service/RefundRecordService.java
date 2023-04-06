@@ -48,9 +48,6 @@ public class RefundRecordService {
 
     /** 根据id查询 */
     public RefundRecordDto findById(Long id) {
-        return refundRecordManager
-                .findById(id)
-                .map(RefundRecord::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return refundRecordManager.findById(id).map(RefundRecord::toDto).orElseThrow(DataNotExistException::new);
     }
 }

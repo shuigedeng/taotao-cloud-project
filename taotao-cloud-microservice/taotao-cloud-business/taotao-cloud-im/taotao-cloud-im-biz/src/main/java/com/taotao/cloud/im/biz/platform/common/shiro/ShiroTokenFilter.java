@@ -37,8 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ShiroTokenFilter extends AuthenticatingFilter {
 
     @Override
-    protected AuthenticationToken createToken(
-            ServletRequest request, ServletResponse servletResponse) {
+    protected AuthenticationToken createToken(ServletRequest request, ServletResponse servletResponse) {
         // 获取请求token
         ShiroLoginToken token = getToken(request);
         if (token == null) {
@@ -49,14 +48,12 @@ public class ShiroTokenFilter extends AuthenticatingFilter {
 
     @SneakyThrows
     @Override
-    protected boolean isAccessAllowed(
-            ServletRequest request, ServletResponse response, Object mappedValue) {
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         return ((HttpServletRequest) request).getMethod().equals(RequestMethod.OPTIONS.name());
     }
 
     @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response)
-            throws Exception {
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         // 获取请求token
         ShiroLoginToken token = getToken(request);
         if (token == null) {
@@ -72,8 +69,7 @@ public class ShiroTokenFilter extends AuthenticatingFilter {
         }
     }
 
-    private boolean error(ServletResponse response, ResultCodeEnum resultCode, String msg)
-            throws IOException {
+    private boolean error(ServletResponse response, ResultCodeEnum resultCode, String msg) throws IOException {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setContentType("application/json;charset=utf-8");
         httpResponse.getWriter().print(JSONUtil.toJsonStr(AjaxResult.result(resultCode, msg)));

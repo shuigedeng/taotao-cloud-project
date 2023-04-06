@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/transferOrders")
 public class TransferOrderController extends CommonCtrl {
 
-    @Autowired private TransferOrderService transferOrderService;
+    @Autowired
+    private TransferOrderService transferOrderService;
 
     /** list * */
     @PreAuthorize("hasAuthority('ENT_TRANSFER_ORDER_LIST')")
@@ -53,8 +54,7 @@ public class TransferOrderController extends CommonCtrl {
         JSONObject paramJSON = getReqParamJSON();
         LambdaQueryWrapper<TransferOrder> wrapper = TransferOrder.gw();
         wrapper.eq(TransferOrder::getMchNo, getCurrentMchNo());
-        IPage<TransferOrder> pages =
-                transferOrderService.pageList(getIPage(), wrapper, transferOrder, paramJSON);
+        IPage<TransferOrder> pages = transferOrderService.pageList(getIPage(), wrapper, transferOrder, paramJSON);
 
         return ApiRes.page(pages);
     }
@@ -63,8 +63,7 @@ public class TransferOrderController extends CommonCtrl {
     @PreAuthorize("hasAuthority('ENT_TRANSFER_ORDER_VIEW')")
     @RequestMapping(value = "/{recordId}", method = RequestMethod.GET)
     public ApiRes detail(@PathVariable("recordId") String transferId) {
-        TransferOrder refundOrder =
-                transferOrderService.queryMchOrder(getCurrentMchNo(), null, transferId);
+        TransferOrder refundOrder = transferOrderService.queryMchOrder(getCurrentMchNo(), null, transferId);
         if (refundOrder == null) {
             return ApiRes.fail(ApiCodeEnum.SYS_OPERATION_FAIL_SELETE);
         }

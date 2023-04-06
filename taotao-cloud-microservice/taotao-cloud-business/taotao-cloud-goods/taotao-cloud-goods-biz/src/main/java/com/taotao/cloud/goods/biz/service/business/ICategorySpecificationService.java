@@ -28,8 +28,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:40
  */
-public interface ICategorySpecificationService
-        extends BaseSuperService<CategorySpecification, Long> {
+public interface ICategorySpecificationService extends BaseSuperService<CategorySpecification, Long> {
 
     /**
      * 根据分类id查询规格信息

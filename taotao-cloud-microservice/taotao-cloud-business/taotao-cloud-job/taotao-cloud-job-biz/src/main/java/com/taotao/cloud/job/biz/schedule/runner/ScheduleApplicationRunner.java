@@ -28,7 +28,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduleApplicationRunner implements ApplicationRunner {
 
-    @Resource private TaskManager taskManager;
+    @Resource
+    private TaskManager taskManager;
 
     private final Logger logger = LoggerFactory.getLogger(ScheduleApplicationRunner.class);
 

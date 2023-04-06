@@ -28,7 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "Testcontroller", description = "测试grpc")
 public class TestGrpcController {
 
-    @Autowired private DeviceGrpcService deviceGrpcService;
+    @Autowired
+    private DeviceGrpcService deviceGrpcService;
 
     @RequestMapping("/testInsertDeviceFix")
     @ApiOperation(value = "test", httpMethod = "GET", notes = "测试grpc插入")

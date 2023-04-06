@@ -35,7 +35,8 @@ import lombok.*;
 @Schema(description = "部门树VO")
 public class SysDeptTreeVo implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "对应SysDepart中的id字段,前端数据树中的key")
     private Integer key;

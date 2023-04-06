@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class QueryTransferOrderController extends ApiController {
 
-    @Autowired private TransferOrderService transferOrderService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private TransferOrderService transferOrderService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     /** 查单接口 * */
     @RequestMapping("/api/transfer/query")
@@ -55,8 +58,7 @@ public class QueryTransferOrderController extends ApiController {
         }
 
         TransferOrder refundOrder =
-                transferOrderService.queryMchOrder(
-                        rq.getMchNo(), rq.getMchOrderNo(), rq.getTransferId());
+                transferOrderService.queryMchOrder(rq.getMchNo(), rq.getMchOrderNo(), rq.getTransferId());
         if (refundOrder == null) {
             throw new BizException("订单不存在");
         }
@@ -64,6 +66,8 @@ public class QueryTransferOrderController extends ApiController {
         QueryTransferOrderRS bizRes = QueryTransferOrderRS.buildByRecord(refundOrder);
         return ApiRes.okWithSign(
                 bizRes,
-                configContextQueryService.queryMchApp(rq.getMchNo(), rq.getAppId()).getAppSecret());
+                configContextQueryService
+                        .queryMchApp(rq.getMchNo(), rq.getAppId())
+                        .getAppSecret());
     }
 }

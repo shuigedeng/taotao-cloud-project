@@ -35,7 +35,8 @@ import lombok.Setter;
 @Schema(description = "分销订单查询对象")
 public class DistributionOrderPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = -8736018687663645064L;
+    @Serial
+    private static final long serialVersionUID = -8736018687663645064L;
 
     @Schema(description = "分销员名称")
     private String distributionName;

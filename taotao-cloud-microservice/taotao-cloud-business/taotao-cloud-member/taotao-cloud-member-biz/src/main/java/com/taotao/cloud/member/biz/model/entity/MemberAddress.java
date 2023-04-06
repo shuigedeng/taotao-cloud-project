@@ -60,15 +60,11 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
     private String mobile;
 
     /** 地址名称，逗号分割 */
-    @Column(
-            name = "consignee_address_path",
-            columnDefinition = "varchar(255) not null comment '地址名称，逗号分割'")
+    @Column(name = "consignee_address_path", columnDefinition = "varchar(255) not null comment '地址名称，逗号分割'")
     private String consigneeAddressPath;
 
     /** 地址id,逗号分割 */
-    @Column(
-            name = "consignee_address_id_path",
-            columnDefinition = "varchar(255) not null comment '地址id,逗号分割'")
+    @Column(name = "consignee_address_id_path", columnDefinition = "varchar(255) not null comment '地址id,逗号分割'")
     private String consigneeAddressIdPath;
 
     /** 省 */
@@ -104,9 +100,7 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
     private String detail;
 
     /** 是否为默认收货地址 */
-    @Column(
-            name = "defaulted",
-            columnDefinition = "boolean not null default true comment '是否为默认收货地址'")
+    @Column(name = "defaulted", columnDefinition = "boolean not null default true comment '是否为默认收货地址'")
     private Boolean defaulted;
 
     /** 地址别名 */

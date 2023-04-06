@@ -50,6 +50,5 @@ public interface HerodotusAuthorizationConsentRepository
      * @param registeredClientId 注册OAuth2客户端ID
      * @param principalName 用户名
      */
-    void deleteByRegisteredClientIdAndPrincipalName(
-            String registeredClientId, String principalName);
+    void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName);
 }

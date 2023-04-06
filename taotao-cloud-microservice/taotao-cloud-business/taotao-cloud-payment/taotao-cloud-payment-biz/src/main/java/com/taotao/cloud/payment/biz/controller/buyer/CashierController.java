@@ -47,14 +47,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/buyer/payment/cashier")
 public class CashierController {
 
-    @Autowired private CashierSupport cashierSupport;
+    @Autowired
+    private CashierSupport cashierSupport;
 
     @Operation(summary = "获取支付详情", description = "获取支付详情")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping(value = "/tradeDetail")
-    public Result<CashierParam> paymentParams(
-            @Parameter(description = "客户端类型") @Validated PayParam payParam) {
+    public Result<CashierParam> paymentParams(@Parameter(description = "客户端类型") @Validated PayParam payParam) {
         CashierParam cashierParam = cashierSupport.cashierParam(payParam);
         return Result.success(cashierParam);
     }
@@ -67,15 +67,13 @@ public class CashierController {
             HttpServletRequest request,
             HttpServletResponse response,
             @Parameter(description = "支付方式 WECHAT,ALIPAY") @PathVariable String paymentMethod,
-            @Parameter(description = "调起方式 APP,NATIVE,JSAPI,H5,MP") @PathVariable
-                    String paymentClient,
+            @Parameter(description = "调起方式 APP,NATIVE,JSAPI,H5,MP") @PathVariable String paymentClient,
             @Validated PayParam payParam) {
         PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.valueOf(paymentMethod);
         PaymentClientEnum paymentClientEnum = PaymentClientEnum.valueOf(paymentClient);
 
         try {
-            return cashierSupport.payment(
-                    paymentMethodEnum, paymentClientEnum, request, response, payParam);
+            return cashierSupport.payment(paymentMethodEnum, paymentClientEnum, request, response, payParam);
         } catch (ServiceException se) {
             log.info("支付异常", se);
             throw se;

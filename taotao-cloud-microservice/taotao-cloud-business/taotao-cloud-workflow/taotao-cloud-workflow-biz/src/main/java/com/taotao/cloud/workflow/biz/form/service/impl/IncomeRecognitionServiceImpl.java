@@ -30,12 +30,14 @@ import org.springframework.stereotype.Service;
 
 /** 收入确认分析表 */
 @Service
-public class IncomeRecognitionServiceImpl
-        extends ServiceImpl<IncomeRecognitionMapper, IncomeRecognitionEntity>
+public class IncomeRecognitionServiceImpl extends ServiceImpl<IncomeRecognitionMapper, IncomeRecognitionEntity>
         implements IncomeRecognitionService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public IncomeRecognitionEntity getInfo(String id) {
@@ -69,8 +71,7 @@ public class IncomeRecognitionServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, IncomeRecognitionEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, IncomeRecognitionEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -96,10 +97,8 @@ public class IncomeRecognitionServiceImpl
 
     @Override
     public void data(String id, String data) {
-        IncomeRecognitionForm incomeRecognitionForm =
-                JsonUtil.getJsonToBean(data, IncomeRecognitionForm.class);
-        IncomeRecognitionEntity entity =
-                JsonUtil.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
+        IncomeRecognitionForm incomeRecognitionForm = JsonUtil.getJsonToBean(data, IncomeRecognitionForm.class);
+        IncomeRecognitionEntity entity = JsonUtil.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

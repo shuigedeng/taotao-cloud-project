@@ -41,16 +41,16 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class OfficialAccountServiceImpl implements OfficialAccountService {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     @Override
     public List<String> send(WeChatOfficialParam officialParam) throws Exception {
-        WeChatOfficialAccount officialAccount =
-                accountUtils.getAccount(
-                        officialParam.getSendAccount(),
-                        SendAccountConstant.WECHAT_OFFICIAL_ACCOUNT_KEY,
-                        SendAccountConstant.WECHAT_OFFICIAL__PREFIX,
-                        WeChatOfficialAccount.class);
+        WeChatOfficialAccount officialAccount = accountUtils.getAccount(
+                officialParam.getSendAccount(),
+                SendAccountConstant.WECHAT_OFFICIAL_ACCOUNT_KEY,
+                SendAccountConstant.WECHAT_OFFICIAL__PREFIX,
+                WeChatOfficialAccount.class);
         WxMpService wxMpService = initService(officialAccount);
         List<WxMpTemplateMessage> messages = assembleReq(officialParam, officialAccount);
         List<String> messageIds = new ArrayList<>(messages.size());
@@ -69,18 +69,14 @@ public class OfficialAccountServiceImpl implements OfficialAccountService {
 
         // 构建微信模板消息
         for (String openId : receiver) {
-            WxMpTemplateMessage templateMessage =
-                    WxMpTemplateMessage.builder()
-                            .toUser(openId)
-                            .templateId(officialAccount.getTemplateId())
-                            .url(officialAccount.getUrl())
-                            .data(getWxMpTemplateData(officialParam.getData()))
-                            .miniProgram(
-                                    new WxMpTemplateMessage.MiniProgram(
-                                            officialAccount.getMiniProgramId(),
-                                            officialAccount.getPath(),
-                                            false))
-                            .build();
+            WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+                    .toUser(openId)
+                    .templateId(officialAccount.getTemplateId())
+                    .url(officialAccount.getUrl())
+                    .data(getWxMpTemplateData(officialParam.getData()))
+                    .miniProgram(new WxMpTemplateMessage.MiniProgram(
+                            officialAccount.getMiniProgramId(), officialAccount.getPath(), false))
+                    .build();
             wxMpTemplateMessages.add(templateMessage);
         }
         return wxMpTemplateMessages;

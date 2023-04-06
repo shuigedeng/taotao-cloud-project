@@ -48,7 +48,8 @@ public class PayInterfaceDefine extends BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 接口代码 全小写 wxpay alipay */
-    @TableId private String ifCode;
+    @TableId
+    private String ifCode;
 
     /** 接口名称 */
     private String ifName;

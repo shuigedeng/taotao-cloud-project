@@ -38,8 +38,7 @@ public class ConvertMap {
     private static final List<String> PARSE_JSON_ARRAY = Arrays.asList("feedCards", "btns");
 
     /** 钉钉工作消息OA实际的映射 */
-    private static final List<String> DING_DING_OA_FIELD =
-            Arrays.asList("dingDingOaHead", "dingDingOaBody");
+    private static final List<String> DING_DING_OA_FIELD = Arrays.asList("dingDingOaHead", "dingDingOaBody");
     /** 钉钉OA字段名实际的映射 */
     private static final Map<String, String> DING_DING_OA_NAME_MAPPING = new HashMap<>();
 
@@ -87,9 +86,7 @@ public class ConvertMap {
                     if (DING_DING_OA_FIELD.contains(key)) {
                         JSONObject object = jsonObject.getJSONObject(key);
                         for (String objKey : object.keySet()) {
-                            result.put(
-                                    DING_DING_OA_NAME_MAPPING.get(objKey),
-                                    object.getString(objKey));
+                            result.put(DING_DING_OA_NAME_MAPPING.get(objKey), object.getString(objKey));
                         }
                     } else if (PARSE_JSON_ARRAY.contains(key)) {
                         /** 部分字段是直接传入数组，把数组直接返回(也是用于回显) */

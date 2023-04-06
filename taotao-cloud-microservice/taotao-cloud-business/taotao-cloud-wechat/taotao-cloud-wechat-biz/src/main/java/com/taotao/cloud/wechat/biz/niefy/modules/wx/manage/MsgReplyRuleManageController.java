@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/msgReplyRule")
 @Api(tags = {"自动回复规则-管理后台"})
 public class MsgReplyRuleManageController {
-    @Autowired private MsgReplyRuleService msgReplyRuleService;
-    @Autowired private WxMpService wxMpService;
+    @Autowired
+    private MsgReplyRuleService msgReplyRuleService;
+
+    @Autowired
+    private WxMpService wxMpService;
 
     /** 列表 */
     @GetMapping("/list")

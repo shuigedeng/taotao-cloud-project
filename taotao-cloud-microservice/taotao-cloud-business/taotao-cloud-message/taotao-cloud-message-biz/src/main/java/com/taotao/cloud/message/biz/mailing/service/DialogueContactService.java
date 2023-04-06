@@ -75,17 +75,16 @@ public class DialogueContactService extends BaseLayeredService<DialogueContact, 
     public Page<DialogueContact> findByCondition(int pageNumber, int pageSize, String receiverId) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        Specification<DialogueContact> specification =
-                (root, criteriaQuery, criteriaBuilder) -> {
-                    List<Predicate> predicates = new ArrayList<>();
+        Specification<DialogueContact> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
 
-                    predicates.add(criteriaBuilder.equal(root.get("receiverId"), receiverId));
+            predicates.add(criteriaBuilder.equal(root.get("receiverId"), receiverId));
 
-                    Predicate[] predicateArray = new Predicate[predicates.size()];
-                    criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
-                    criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createTime")));
-                    return criteriaQuery.getRestriction();
-                };
+            Predicate[] predicateArray = new Predicate[predicates.size()];
+            criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
+            criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createTime")));
+            return criteriaQuery.getRestriction();
+        };
 
         log.debug("[Websocket] |- DialogueContact Service findByCondition.");
         return this.findByPage(specification, pageable);

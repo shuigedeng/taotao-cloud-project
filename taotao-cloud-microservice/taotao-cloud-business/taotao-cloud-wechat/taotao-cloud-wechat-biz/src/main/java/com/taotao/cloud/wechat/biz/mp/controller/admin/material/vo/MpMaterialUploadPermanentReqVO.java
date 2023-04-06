@@ -35,11 +35,7 @@ public class MpMaterialUploadPermanentReqVO {
     @NotNull(message = "公众号账号的编号不能为空")
     private Long accountId;
 
-    @ApiModelProperty(
-            value = "文件类型",
-            required = true,
-            example = "image",
-            notes = "参见 WxConsts.MediaFileType 枚举")
+    @ApiModelProperty(value = "文件类型", required = true, example = "image", notes = "参见 WxConsts.MediaFileType 枚举")
     @NotEmpty(message = "文件类型不能为空")
     private String type;
 

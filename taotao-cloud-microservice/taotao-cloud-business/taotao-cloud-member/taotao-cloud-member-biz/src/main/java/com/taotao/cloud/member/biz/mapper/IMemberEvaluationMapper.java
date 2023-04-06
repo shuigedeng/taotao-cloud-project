@@ -43,8 +43,7 @@ public interface IMemberEvaluationMapper extends BaseSuperMapper<MemberEvaluatio
 		${ew.customSqlSegment}
 		""")
     IPage<MemberEvaluation> getMemberEvaluationList(
-            IPage<MemberEvaluation> page,
-            @Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
+            IPage<MemberEvaluation> page, @Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
 
     /**
      * 评价数量
@@ -75,8 +74,7 @@ public interface IMemberEvaluationMapper extends BaseSuperMapper<MemberEvaluatio
 		FROM tt_member_evaluation
 		${ew.customSqlSegment}
 		""")
-    StoreRatingVO getStoreRatingVO(
-            @Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
+    StoreRatingVO getStoreRatingVO(@Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
 
     /**
      * 商品会员评价数量
@@ -84,12 +82,10 @@ public interface IMemberEvaluationMapper extends BaseSuperMapper<MemberEvaluatio
      * @param queryWrapper 查询条件
      * @return 评价数量
      */
-    @Select(
-            """
+    @Select("""
 		SELECT goods_id,COUNT(goods_id) AS num
 		FROM tt_member_evaluation
 		GROUP BY goods_id
 		""")
-    List<Map<String, Object>> memberEvaluationNum(
-            @Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
+    List<Map<String, Object>> memberEvaluationNum(@Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
 }

@@ -38,7 +38,8 @@ public class EventBusSendMqServiceImpl implements SendMqService {
 
     private EventBus eventBus = new EventBus();
 
-    @Autowired private EventBusListener eventBusListener;
+    @Autowired
+    private EventBusListener eventBusListener;
 
     @Value("${austin.business.topic.name}")
     private String sendTopic;

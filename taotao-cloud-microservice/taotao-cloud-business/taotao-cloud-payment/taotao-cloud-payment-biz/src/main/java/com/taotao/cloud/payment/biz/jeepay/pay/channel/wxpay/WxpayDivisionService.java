@@ -47,7 +47,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class WxpayDivisionService implements IDivisionService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -60,8 +61,7 @@ public class WxpayDivisionService implements IDivisionService {
     }
 
     @Override
-    public ChannelRetMsg bind(
-            MchDivisionReceiver mchDivisionReceiver, MchAppConfigContext mchAppConfigContext) {
+    public ChannelRetMsg bind(MchDivisionReceiver mchDivisionReceiver, MchAppConfigContext mchAppConfigContext) {
 
         try {
 
@@ -73,23 +73,17 @@ public class WxpayDivisionService implements IDivisionService {
             JSONObject receiverJSON = new JSONObject();
 
             // 0-个人， 1-商户  (目前仅支持服务商appI获取个人openId, 即： PERSONAL_OPENID， 不支持 PERSONAL_SUB_OPENID )
-            receiverJSON.put(
-                    "type",
-                    mchDivisionReceiver.getAccType() == 0 ? "PERSONAL_OPENID" : "MERCHANT_ID");
+            receiverJSON.put("type", mchDivisionReceiver.getAccType() == 0 ? "PERSONAL_OPENID" : "MERCHANT_ID");
             receiverJSON.put("account", mchDivisionReceiver.getAccNo());
             receiverJSON.put("name", mchDivisionReceiver.getAccName());
             receiverJSON.put("relation_type", mchDivisionReceiver.getRelationType());
             receiverJSON.put("custom_relation", mchDivisionReceiver.getRelationTypeName());
             request.setReceiver(receiverJSON.toJSONString());
 
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
             ProfitSharingReceiverResult profitSharingReceiverResult =
-                    wxServiceWrapper
-                            .getWxPayService()
-                            .getProfitSharingService()
-                            .addReceiver(request);
+                    wxServiceWrapper.getWxPayService().getProfitSharingService().addReceiver(request);
 
             // 明确成功
             return ChannelRetMsg.confirmSuccess(null);
@@ -110,9 +104,7 @@ public class WxpayDivisionService implements IDivisionService {
 
     @Override
     public ChannelRetMsg singleDivision(
-            PayOrder payOrder,
-            List<PayOrderDivisionRecord> recordList,
-            MchAppConfigContext mchAppConfigContext) {
+            PayOrder payOrder, List<PayOrderDivisionRecord> recordList, MchAppConfigContext mchAppConfigContext) {
 
         try {
 
@@ -140,8 +132,7 @@ public class WxpayDivisionService implements IDivisionService {
                 JSONObject receiverJSON = new JSONObject();
                 // 0-个人， 1-商户  (目前仅支持服务商appI获取个人openId, 即： PERSONAL_OPENID， 不支持 PERSONAL_SUB_OPENID
                 // )
-                receiverJSON.put(
-                        "type", record.getAccType() == 0 ? "PERSONAL_OPENID" : "MERCHANT_ID");
+                receiverJSON.put("type", record.getAccType() == 0 ? "PERSONAL_OPENID" : "MERCHANT_ID");
                 receiverJSON.put("account", record.getAccNo());
                 receiverJSON.put("amount", record.getCalDivisionAmount());
                 receiverJSON.put("description", record.getPayOrderId() + "分账");
@@ -150,20 +141,15 @@ public class WxpayDivisionService implements IDivisionService {
 
             // 不存在接收账号时，订单完结（解除冻结金额）
             if (receiverJSONArray.isEmpty()) {
-                return ChannelRetMsg.confirmSuccess(
-                        this.divisionFinish(payOrder, mchAppConfigContext));
+                return ChannelRetMsg.confirmSuccess(this.divisionFinish(payOrder, mchAppConfigContext));
             }
 
             request.setReceivers(receiverJSONArray.toJSONString());
 
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
             ProfitSharingResult profitSharingResult =
-                    wxServiceWrapper
-                            .getWxPayService()
-                            .getProfitSharingService()
-                            .profitSharing(request);
+                    wxServiceWrapper.getWxPayService().getProfitSharingService().profitSharing(request);
             return ChannelRetMsg.confirmSuccess(profitSharingResult.getOrderId());
 
         } catch (WxPayException wxPayException) {
@@ -181,8 +167,7 @@ public class WxpayDivisionService implements IDivisionService {
     }
 
     /** 调用订单的完结接口 (分账对象不存在时) */
-    private String divisionFinish(PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
-            throws WxPayException {
+    private String divisionFinish(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws WxPayException {
 
         ProfitSharingFinishRequest request = new ProfitSharingFinishRequest();
 
@@ -195,8 +180,7 @@ public class WxpayDivisionService implements IDivisionService {
         request.setOutOrderNo(SeqKit.genDivisionBatchId());
         request.setDescription("完结分账");
 
-        WxServiceWrapper wxServiceWrapper =
-                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
         return wxServiceWrapper
                 .getWxPayService()
                 .getProfitSharingService()

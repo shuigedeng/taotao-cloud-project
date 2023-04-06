@@ -48,7 +48,8 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class BpmOALeaveController {
 
-    @Resource private BpmOALeaveService leaveService;
+    @Resource
+    private BpmOALeaveService leaveService;
 
     @PostMapping("/create")
     @PreAuthorize("@ss.hasPermission('bpm:oa-leave:create')")
@@ -60,12 +61,7 @@ public class BpmOALeaveController {
     @GetMapping("/get")
     @PreAuthorize("@ss.hasPermission('bpm:oa-leave:query')")
     @ApiOperation("获得请假申请")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     public CommonResult<BpmOALeaveRespVO> getLeave(@RequestParam("id") Long id) {
         BpmOALeaveDO leave = leaveService.getLeave(id);
         return success(BpmOALeaveConvert.INSTANCE.convert(leave));
@@ -74,8 +70,7 @@ public class BpmOALeaveController {
     @GetMapping("/page")
     @PreAuthorize("@ss.hasPermission('bpm:oa-leave:query')")
     @ApiOperation("获得请假申请分页")
-    public CommonResult<PageResult<BpmOALeaveRespVO>> getLeavePage(
-            @Valid BpmOALeavePageReqVO pageVO) {
+    public CommonResult<PageResult<BpmOALeaveRespVO>> getLeavePage(@Valid BpmOALeavePageReqVO pageVO) {
         PageResult<BpmOALeaveDO> pageResult = leaveService.getLeavePage(getLoginUserId(), pageVO);
         return success(BpmOALeaveConvert.INSTANCE.convertPage(pageResult));
     }

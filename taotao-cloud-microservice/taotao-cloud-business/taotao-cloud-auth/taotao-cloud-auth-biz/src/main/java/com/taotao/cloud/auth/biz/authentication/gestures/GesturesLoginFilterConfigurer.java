@@ -31,10 +31,7 @@ import org.springframework.util.Assert;
 
 public class GesturesLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H,
-                GesturesLoginFilterConfigurer<H>,
-                GesturesAuthenticationFilter,
-                LoginFilterSecurityConfigurer<H>> {
+                H, GesturesLoginFilterConfigurer<H>, GesturesAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private GesturesUserDetailsService gesturesUserDetailsService;
 
@@ -64,10 +61,9 @@ public class GesturesLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-        GesturesUserDetailsService gesturesUserDetailsService =
-                this.gesturesUserDetailsService != null
-                        ? this.gesturesUserDetailsService
-                        : getBeanOrNull(applicationContext, GesturesUserDetailsService.class);
+        GesturesUserDetailsService gesturesUserDetailsService = this.gesturesUserDetailsService != null
+                ? this.gesturesUserDetailsService
+                : getBeanOrNull(applicationContext, GesturesUserDetailsService.class);
         Assert.notNull(gesturesUserDetailsService, "gesturesUserDetailsService is required");
 
         return new GesturesAuthenticationProvider(gesturesUserDetailsService);

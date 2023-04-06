@@ -39,11 +39,9 @@ import org.springframework.security.core.userdetails.User;
  */
 public class HerodotusUserDeserializer extends JsonDeserializer<HerodotusUser> {
 
-    private static final TypeReference<Set<HerodotusGrantedAuthority>>
-            HERODOTUS_GRANTED_AUTHORITY_SET =
-                    new TypeReference<Set<HerodotusGrantedAuthority>>() {};
-    private static final TypeReference<Set<String>> HERODOTUS_ROLE_SET =
-            new TypeReference<Set<String>>() {};
+    private static final TypeReference<Set<HerodotusGrantedAuthority>> HERODOTUS_GRANTED_AUTHORITY_SET =
+            new TypeReference<Set<HerodotusGrantedAuthority>>() {};
+    private static final TypeReference<Set<String>> HERODOTUS_ROLE_SET = new TypeReference<Set<String>>() {};
 
     /**
      * This method will create {@link User} object. It will ensure successful object creation even
@@ -71,23 +69,23 @@ public class HerodotusUserDeserializer extends JsonDeserializer<HerodotusUser> {
         String password = passwordNode.asText("");
         boolean enabled = readJsonNode(jsonNode, "enabled").asBoolean();
         boolean accountNonExpired = readJsonNode(jsonNode, "accountNonExpired").asBoolean();
-        boolean credentialsNonExpired = readJsonNode(jsonNode, "credentialsNonExpired").asBoolean();
+        boolean credentialsNonExpired =
+                readJsonNode(jsonNode, "credentialsNonExpired").asBoolean();
         boolean accountNonLocked = readJsonNode(jsonNode, "accountNonLocked").asBoolean();
         String employeeId = readJsonNode(jsonNode, "employeeId").asText();
         String avatar = readJsonNode(jsonNode, "avatar").asText();
-        HerodotusUser result =
-                new HerodotusUser(
-                        userId,
-                        username,
-                        password,
-                        enabled,
-                        accountNonExpired,
-                        credentialsNonExpired,
-                        accountNonLocked,
-                        authorities,
-                        roles,
-                        employeeId,
-                        avatar);
+        HerodotusUser result = new HerodotusUser(
+                userId,
+                username,
+                password,
+                enabled,
+                accountNonExpired,
+                credentialsNonExpired,
+                accountNonLocked,
+                authorities,
+                roles,
+                employeeId,
+                avatar);
         if (passwordNode.asText(null) == null) {
             result.eraseCredentials();
         }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.ratelimiter;
 
 import com.google.common.collect.Maps;
@@ -32,38 +33,38 @@ import reactor.core.publisher.Mono;
 @Component
 public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.Config> {
 
-	private final RateLimiter rateLimiter = RateLimiter.create(2.0);
+    private final RateLimiter rateLimiter = RateLimiter.create(2.0);
 
-	public static final String CONFIG_PROPERTY_NAME = "taotao-cloud-gateway-springcloud-rate-limiter";
+    public static final String CONFIG_PROPERTY_NAME = "taotao-cloud-gateway-springcloud-rate-limiter";
 
-	protected GatewayRateLimiter(ConfigurationService configurationService) {
-		super(Config.class, CONFIG_PROPERTY_NAME, configurationService);
-	}
+    protected GatewayRateLimiter(ConfigurationService configurationService) {
+        super(Config.class, CONFIG_PROPERTY_NAME, configurationService);
+    }
 
-	@Override
-	public Mono<Response> isAllowed(String routeId, String id) {
-		Config config = getConfig().get(routeId);
-		return Mono.fromSupplier(() -> {
-			boolean acquire = rateLimiter.tryAcquire(config.requestedToken);
-			if (acquire) {
-				return new Response(true, Maps.newHashMap());
-			}
+    @Override
+    public Mono<Response> isAllowed(String routeId, String id) {
+        Config config = getConfig().get(routeId);
+        return Mono.fromSupplier(() -> {
+            boolean acquire = rateLimiter.tryAcquire(config.requestedToken);
+            if (acquire) {
+                return new Response(true, Maps.newHashMap());
+            }
 
-			return new Response(false, Maps.newHashMap());
-		});
-	}
+            return new Response(false, Maps.newHashMap());
+        });
+    }
 
-	public static class Config {
+    public static class Config {
 
-		// 每次请求多少个token
-		private Integer requestedToken;
+        // 每次请求多少个token
+        private Integer requestedToken;
 
-		public Integer getRequestedToken() {
-			return requestedToken;
-		}
+        public Integer getRequestedToken() {
+            return requestedToken;
+        }
 
-		public void setRequestedToken(Integer requestedToken) {
-			this.requestedToken = requestedToken;
-		}
-	}
+        public void setRequestedToken(Integer requestedToken) {
+            this.requestedToken = requestedToken;
+        }
+    }
 }

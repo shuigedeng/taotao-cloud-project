@@ -48,17 +48,16 @@ public class WholesalerBaseServiceImpl extends ServiceImpl<WholesalerBaseMapper,
     @Override
     @Transactional(readOnly = true)
     public void fixReuseSendMsgNew() {
-        this.baseMapper.getBaseWeekList(
-                resultContext -> {
-                    WholesalerBase base = resultContext.getResultObject();
-                    try {
-                        // 逻辑代码
-                        log.info("base-->{}", base);
-                    } catch (Exception e) {
-                        log.error("XX发生错误,原因 = {}", e.getMessage());
-                        e.printStackTrace();
-                    }
-                });
+        this.baseMapper.getBaseWeekList(resultContext -> {
+            WholesalerBase base = resultContext.getResultObject();
+            try {
+                // 逻辑代码
+                log.info("base-->{}", base);
+            } catch (Exception e) {
+                log.error("XX发生错误,原因 = {}", e.getMessage());
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -103,32 +102,28 @@ public class WholesalerBaseServiceImpl extends ServiceImpl<WholesalerBaseMapper,
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             Cursor<WholesalerBase> cursors =
                     sqlSession.getMapper(WholesalerBaseMapper.class).scan();
-            cursors.forEach(
-                    base -> {
-                        // 业务需求
-                        System.out.println("base = " + base);
-                    });
+            cursors.forEach(base -> {
+                // 业务需求
+                System.out.println("base = " + base);
+            });
         }
     }
 
     @Override
     public void transactionTemplateTest() {
-        TransactionTemplate transactionTemplate =
-                new TransactionTemplate(platformTransactionManager);
+        TransactionTemplate transactionTemplate = new TransactionTemplate(platformTransactionManager);
 
-        transactionTemplate.execute(
-                status -> {
-                    try (Cursor<WholesalerBase> cursor = this.baseMapper.scan()) {
-                        cursor.forEach(
-                                base -> {
-                                    // 需求代码
-                                    System.out.println("base = " + base);
-                                });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return null;
+        transactionTemplate.execute(status -> {
+            try (Cursor<WholesalerBase> cursor = this.baseMapper.scan()) {
+                cursor.forEach(base -> {
+                    // 需求代码
+                    System.out.println("base = " + base);
                 });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
     }
 
     @Override
@@ -172,34 +167,30 @@ public class WholesalerBaseServiceImpl extends ServiceImpl<WholesalerBaseMapper,
 
     public void getLargeData1() {
         String sql = "select * from t_mall_order";
-        this.baseMapper.dynamicSelectLargeData1(
-                sql,
-                new ResultHandler<TblMallOrder>() {
-                    @Override
-                    public void handleResult(ResultContext<? extends TblMallOrder> resultContext) {
-                        TblMallOrder tblMallOrder = resultContext.getResultObject();
-                        System.out.println(tblMallOrder);
-                    }
-                });
+        this.baseMapper.dynamicSelectLargeData1(sql, new ResultHandler<TblMallOrder>() {
+            @Override
+            public void handleResult(ResultContext<? extends TblMallOrder> resultContext) {
+                TblMallOrder tblMallOrder = resultContext.getResultObject();
+                System.out.println(tblMallOrder);
+            }
+        });
     }
 
     public void getLargeData2() {
         String sql = "select * from t_mall_order";
-        this.baseMapper.dynamicSelectLargeData1(
-                sql,
-                new ResultHandler<TblMallOrder>() {
-                    @Override
-                    public void handleResult(ResultContext<? extends TblMallOrder> resultContext) {
-                        TblMallOrder tblMallOrder = resultContext.getResultObject();
-                        System.out.println(tblMallOrder);
-                        // 你可以看自己的项目需要分批进行处理或者单个处理，这里以分批处理为例
-                        mallOrders.add(tblMallOrder);
-                        size++;
-                        if (size == BATCH_SIZE) {
-                            handle();
-                        }
-                    }
-                });
+        this.baseMapper.dynamicSelectLargeData1(sql, new ResultHandler<TblMallOrder>() {
+            @Override
+            public void handleResult(ResultContext<? extends TblMallOrder> resultContext) {
+                TblMallOrder tblMallOrder = resultContext.getResultObject();
+                System.out.println(tblMallOrder);
+                // 你可以看自己的项目需要分批进行处理或者单个处理，这里以分批处理为例
+                mallOrders.add(tblMallOrder);
+                size++;
+                if (size == BATCH_SIZE) {
+                    handle();
+                }
+            }
+        });
         // 用来完成最后一批数据处理
         handle();
     }

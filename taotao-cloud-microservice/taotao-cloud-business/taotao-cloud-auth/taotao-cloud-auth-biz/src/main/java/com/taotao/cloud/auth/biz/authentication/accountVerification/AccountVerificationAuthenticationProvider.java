@@ -51,15 +51,13 @@ public class AccountVerificationAuthenticationProvider
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
                 AccountVerificationAuthenticationToken.class,
                 authentication,
-                () ->
-                        messages.getMessage(
-                                "AccountVerificationAuthenticationProvider.onlySupports",
-                                "Only AccountVerificationAuthenticationProvider is supported"));
+                () -> messages.getMessage(
+                        "AccountVerificationAuthenticationProvider.onlySupports",
+                        "Only AccountVerificationAuthenticationProvider is supported"));
 
         AccountVerificationAuthenticationToken unAuthenticationToken =
                 (AccountVerificationAuthenticationToken) authentication;
@@ -72,8 +70,7 @@ public class AccountVerificationAuthenticationProvider
         // 验证码校验
         if (accountVerificationService.verifyCaptcha(verificationCode)) {
             UserDetails userDetails =
-                    accountVerificationUserDetailsService.loadUserByUsername(
-                            username, password, type);
+                    accountVerificationUserDetailsService.loadUserByUsername(username, password, type);
             // 校验密码
             // TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService
             // 的实现中处理
@@ -90,9 +87,7 @@ public class AccountVerificationAuthenticationProvider
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Assert.notNull(
-                accountVerificationUserDetailsService,
-                "captchaUserDetailsService must not be null");
+        Assert.notNull(accountVerificationUserDetailsService, "captchaUserDetailsService must not be null");
         Assert.notNull(accountVerificationService, "captchaService must not be null");
     }
 
@@ -108,25 +103,19 @@ public class AccountVerificationAuthenticationProvider
      * @param user the user
      * @return the authentication
      */
-    protected Authentication createSuccessAuthentication(
-            Authentication authentication, UserDetails user) {
+    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
 
-        Collection<? extends GrantedAuthority> authorities =
-                authoritiesMapper.mapAuthorities(user.getAuthorities());
+        Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
 
         String type = "";
         String verificationCode = "";
-        if (authentication
-                instanceof
-                AccountVerificationAuthenticationToken
-                accountVerificationAuthenticationToken) {
+        if (authentication instanceof AccountVerificationAuthenticationToken accountVerificationAuthenticationToken) {
             type = accountVerificationAuthenticationToken.getType();
             verificationCode = accountVerificationAuthenticationToken.getVerificationCode();
         }
 
         AccountVerificationAuthenticationToken authenticationToken =
-                new AccountVerificationAuthenticationToken(
-                        user, null, verificationCode, type, authorities);
+                new AccountVerificationAuthenticationToken(user, null, verificationCode, type, authorities);
         authenticationToken.setDetails(authentication.getDetails());
 
         return authenticationToken;

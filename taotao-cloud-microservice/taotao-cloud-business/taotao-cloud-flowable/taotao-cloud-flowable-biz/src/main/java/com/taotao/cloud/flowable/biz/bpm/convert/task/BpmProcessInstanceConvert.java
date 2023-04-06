@@ -94,14 +94,11 @@ public interface BpmProcessInstanceConvert {
     BpmProcessInstanceRespVO.ProcessDefinition convert2(ProcessDefinition bean);
 
     @Mapping(source = "from.id", target = "to.id", ignore = true)
-    void copyTo(
-            BpmProcessDefinitionExtDO from,
-            @MappingTarget BpmProcessInstanceRespVO.ProcessDefinition to);
+    void copyTo(BpmProcessDefinitionExtDO from, @MappingTarget BpmProcessInstanceRespVO.ProcessDefinition to);
 
     BpmProcessInstanceRespVO.User convert2(AdminUserRespDTO bean);
 
-    default BpmProcessInstanceResultEvent convert(
-            Object source, HistoricProcessInstance instance, Integer result) {
+    default BpmProcessInstanceResultEvent convert(Object source, HistoricProcessInstance instance, Integer result) {
         BpmProcessInstanceResultEvent event = new BpmProcessInstanceResultEvent(source);
         event.setId(instance.getId());
         event.setProcessDefinitionKey(instance.getProcessDefinitionKey());
@@ -110,8 +107,7 @@ public interface BpmProcessInstanceConvert {
         return event;
     }
 
-    default BpmProcessInstanceResultEvent convert(
-            Object source, ProcessInstance instance, Integer result) {
+    default BpmProcessInstanceResultEvent convert(Object source, ProcessInstance instance, Integer result) {
         BpmProcessInstanceResultEvent event = new BpmProcessInstanceResultEvent(source);
         event.setId(instance.getId());
         event.setProcessDefinitionKey(instance.getProcessDefinitionKey());
@@ -120,16 +116,14 @@ public interface BpmProcessInstanceConvert {
         return event;
     }
 
-    default BpmMessageSendWhenProcessInstanceApproveReqDTO convert2ApprovedReq(
-            ProcessInstance instance) {
+    default BpmMessageSendWhenProcessInstanceApproveReqDTO convert2ApprovedReq(ProcessInstance instance) {
         return new BpmMessageSendWhenProcessInstanceApproveReqDTO()
                 .setStartUserId(NumberUtils.parseLong(instance.getStartUserId()))
                 .setProcessInstanceId(instance.getId())
                 .setProcessInstanceName(instance.getName());
     }
 
-    default BpmMessageSendWhenProcessInstanceRejectReqDTO convert2RejectReq(
-            ProcessInstance instance, String reason) {
+    default BpmMessageSendWhenProcessInstanceRejectReqDTO convert2RejectReq(ProcessInstance instance, String reason) {
         return new BpmMessageSendWhenProcessInstanceRejectReqDTO()
                 .setProcessInstanceName(instance.getName())
                 .setProcessInstanceId(instance.getId())

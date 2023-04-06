@@ -72,8 +72,7 @@ public class AliPayServiceImpl implements PayService {
         try {
             // 根据租户 选择支付商户号
             Integer tenantId = XHuiCommonThreadLocalHolder.getTenant();
-            AliPayApiConfigKit.setThreadLocalAppId(
-                    PayConfigInit.tenantIdAliPayAppIdMaps.get(tenantId));
+            AliPayApiConfigKit.setThreadLocalAppId(PayConfigInit.tenantIdAliPayAppIdMaps.get(tenantId));
             // wap 支付
             alipayWapPay(payOrderDto, payOrderAll, tenantId);
             // tradeCreate 支付
@@ -85,8 +84,7 @@ public class AliPayServiceImpl implements PayService {
     }
 
     @SneakyThrows
-    private Object alipayTradeCreate(
-            PayOrderDto payOrderDto, PayOrderAll payOrderAll, Integer tenantId) {
+    private Object alipayTradeCreate(PayOrderDto payOrderDto, PayOrderAll payOrderAll, Integer tenantId) {
         AlipayOpenAuthTokenAppModel authTokenAppModel = new AlipayOpenAuthTokenAppModel();
         authTokenAppModel.setGrantType("authorization_code");
         authTokenAppModel.setCode(payOrderDto.getCode());
@@ -97,10 +95,8 @@ public class AliPayServiceImpl implements PayService {
         model.setSubject(payOrderAll.getGoodsTitle());
         // 买家支付宝账号，和buyer_id不能同时为空
         model.setBuyerId(AliPayApi.openAuthTokenAppToResponse(authTokenAppModel).getUserId());
-        AlipayTradeCreateResponse response =
-                AliPayApi.tradeCreateToResponse(
-                        model,
-                        payProperties.getDomain() + payProperties.getAlipay().getNotifyUrl());
+        AlipayTradeCreateResponse response = AliPayApi.tradeCreateToResponse(
+                model, payProperties.getDomain() + payProperties.getAlipay().getNotifyUrl());
         return response.getTradeNo();
     }
 

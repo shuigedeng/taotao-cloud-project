@@ -56,8 +56,7 @@ public class JustAuthServiceImpl implements IJustAuthService {
     /** 查询第三方用户绑定关系 */
     @Override
     public Long userBindId(
-            @NotBlank @RequestParam("uuid") String uuid,
-            @NotBlank @RequestParam("source") String source) {
+            @NotBlank @RequestParam("uuid") String uuid, @NotBlank @RequestParam("source") String source) {
         QueryJustAuthSocialDTO queryJustAuthSocialDTO = new QueryJustAuthSocialDTO();
         queryJustAuthSocialDTO.setUuid(uuid);
         queryJustAuthSocialDTO.setSource(source);
@@ -67,12 +66,10 @@ public class JustAuthServiceImpl implements IJustAuthService {
 
     /** 创建或更新第三方用户信息 */
     @Override
-    public Long userCreateOrUpdate(
-            @NotNull @RequestBody JustAuthSocialInfoDTO justAuthSocialInfoDTO) {
+    public Long userCreateOrUpdate(@NotNull @RequestBody JustAuthSocialInfoDTO justAuthSocialInfoDTO) {
         UpdateJustAuthSocialDTO createJustAuthSocialDTO =
                 BeanCopierUtils.copyByClass(justAuthSocialInfoDTO, UpdateJustAuthSocialDTO.class);
-        JustAuthSocial justAuthSocial =
-                justAuthSocialService.createOrUpdateJustAuthSocial(createJustAuthSocialDTO);
+        JustAuthSocial justAuthSocial = justAuthSocialService.createOrUpdateJustAuthSocial(createJustAuthSocialDTO);
         return justAuthSocial.getId();
     }
 
@@ -85,11 +82,11 @@ public class JustAuthServiceImpl implements IJustAuthService {
                 justAuthSocialUserService.queryJustAuthSocialUserList(justAuthSocialUserQuery);
         if (CollectionUtils.isEmpty(justAuthSocialUserList)) {
             return Result.error(ResultCodeEnum.BIND_NOT_FOUND);
-        } else if (!CollectionUtils.isEmpty(justAuthSocialUserList)
-                && justAuthSocialUserList.size() > 1) {
+        } else if (!CollectionUtils.isEmpty(justAuthSocialUserList) && justAuthSocialUserList.size() > 1) {
             return Result.error(ResultCodeEnum.BIND_MULTIPLE);
         }
-        return Result.data(justAuthSocialUserList.get(GitEggConstant.Number.ZERO).getUserId());
+        return Result.data(
+                justAuthSocialUserList.get(GitEggConstant.Number.ZERO).getUserId());
     }
 
     /**
@@ -107,8 +104,7 @@ public class JustAuthServiceImpl implements IJustAuthService {
     /** 绑定第三方用户信息 */
     @Override
     public JustAuthSocialUser userBind(
-            @NotNull @RequestParam("socialId") Long socialId,
-            @NotNull @RequestParam("userId") Long userId) {
+            @NotNull @RequestParam("socialId") Long socialId, @NotNull @RequestParam("userId") Long userId) {
         CreateJustAuthSocialUserDTO justAuthSocialUserCreate = new CreateJustAuthSocialUserDTO();
         justAuthSocialUserCreate.setSocialId(socialId);
         justAuthSocialUserCreate.setUserId(userId);
@@ -120,8 +116,7 @@ public class JustAuthServiceImpl implements IJustAuthService {
     /** 解绑第三方用户信息" */
     @Override
     public Result<JustAuthSocialUser> userUnbind(
-            @NotNull @RequestParam("socialId") Long socialId,
-            @NotNull @RequestParam("userId") Long userId) {
+            @NotNull @RequestParam("socialId") Long socialId, @NotNull @RequestParam("userId") Long userId) {
         QueryJustAuthSocialUserDTO justAuthSocialUserQuery = new QueryJustAuthSocialUserDTO();
         justAuthSocialUserQuery.setSocialId(socialId);
         justAuthSocialUserQuery.setUserId(userId);

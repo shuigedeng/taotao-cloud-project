@@ -43,7 +43,6 @@ public class DelegateClientRegistrationRepository implements ClientRegistrationR
     }
 
     public void addClientRegistration(ClientRegistration clientRegistration) {
-        clientRegistrationMap.putIfAbsent(
-                clientRegistration.getRegistrationId(), clientRegistration);
+        clientRegistrationMap.putIfAbsent(clientRegistration.getRegistrationId(), clientRegistration);
     }
 }

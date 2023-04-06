@@ -44,9 +44,7 @@ public class TenantRepositoryImpl extends ServiceImpl<SysTenantMapper, SysTenant
 
     @Override
     public Tenant find(TenantName tenantName) {
-        SysTenantDO sysTenantDO =
-                this.getOne(
-                        new QueryWrapper<SysTenantDO>().eq("tenant_name", tenantName.getName()));
+        SysTenantDO sysTenantDO = this.getOne(new QueryWrapper<SysTenantDO>().eq("tenant_name", tenantName.getName()));
         if (sysTenantDO == null) {
             return null;
         }
@@ -56,9 +54,7 @@ public class TenantRepositoryImpl extends ServiceImpl<SysTenantMapper, SysTenant
 
     @Override
     public Tenant find(TenantCode tenantCode) {
-        SysTenantDO sysTenantDO =
-                this.getOne(
-                        new QueryWrapper<SysTenantDO>().eq("tenant_code", tenantCode.getCode()));
+        SysTenantDO sysTenantDO = this.getOne(new QueryWrapper<SysTenantDO>().eq("tenant_code", tenantCode.getCode()));
         if (sysTenantDO == null) {
             return null;
         }

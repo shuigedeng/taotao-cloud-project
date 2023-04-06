@@ -33,7 +33,8 @@ import org.hibernate.validator.constraints.Length;
 @Schema(description = "分销员申请DTO")
 public class DistributionApplyDTO {
 
-    @Serial private static final long serialVersionUID = 7814832369110695758L;
+    @Serial
+    private static final long serialVersionUID = 7814832369110695758L;
 
     @NotBlank(message = "姓名不能为空")
     @Schema(description = "会员姓名")

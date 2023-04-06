@@ -54,10 +54,7 @@ public class PppayRefundService extends AbstractRefundService {
 
     @Override
     public ChannelRetMsg refund(
-            RefundOrderRQ bizRQ,
-            RefundOrder refundOrder,
-            PayOrder payOrder,
-            MchAppConfigContext mchAppConfigContext)
+            RefundOrderRQ bizRQ, RefundOrder refundOrder, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
         if (payOrder.getChannelOrderNo() == null) {
             return ChannelRetMsg.confirmFail();
@@ -66,8 +63,10 @@ public class PppayRefundService extends AbstractRefundService {
         PaypalWrapper paypalWrapper = mchAppConfigContext.getPaypalWrapper();
 
         // 因为退款需要商户 Token 而同步支付回调不会保存订单信息
-        String ppOrderId = paypalWrapper.processOrder(payOrder.getChannelOrderNo()).get(0);
-        String ppCatptId = paypalWrapper.processOrder(payOrder.getChannelOrderNo()).get(1);
+        String ppOrderId =
+                paypalWrapper.processOrder(payOrder.getChannelOrderNo()).get(0);
+        String ppCatptId =
+                paypalWrapper.processOrder(payOrder.getChannelOrderNo()).get(1);
 
         if (ppOrderId == null || ppCatptId == null) {
             return ChannelRetMsg.confirmFail();
@@ -76,7 +75,8 @@ public class PppayRefundService extends AbstractRefundService {
         PayPalHttpClient client = paypalWrapper.getClient();
 
         // 处理金额
-        String amountStr = AmountUtil.convertCent2Dollar(refundOrder.getRefundAmount().toString());
+        String amountStr =
+                AmountUtil.convertCent2Dollar(refundOrder.getRefundAmount().toString());
         String currency = payOrder.getCurrency().toUpperCase();
 
         RefundRequest refundRequest = new RefundRequest();
@@ -119,8 +119,7 @@ public class PppayRefundService extends AbstractRefundService {
     }
 
     @Override
-    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception {
+    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
         if (refundOrder.getChannelOrderNo() == null) {
             return ChannelRetMsg.confirmFail();
         }

@@ -47,11 +47,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/mainChart")
 public class MainChartController extends CommonCtrl {
 
-    @Autowired private PayOrderService payOrderService;
+    @Autowired
+    private PayOrderService payOrderService;
 
-    @Autowired private SysUserService sysUserService;
+    @Autowired
+    private SysUserService sysUserService;
 
-    @Autowired private MchInfoService mchInfoService;
+    @Autowired
+    private MchInfoService mchInfoService;
 
     /** 周交易总金额 */
     @PreAuthorize("hasAuthority('ENT_MCH_MAIN_PAY_AMOUNT_WEEK')")
@@ -80,8 +83,7 @@ public class MainChartController extends CommonCtrl {
         String createdStart = paramJSON.getString("createdStart");
         String createdEnd = paramJSON.getString("createdEnd");
 
-        List<Map> mapList =
-                payOrderService.mainPagePayCount(getCurrentMchNo(), createdStart, createdEnd);
+        List<Map> mapList = payOrderService.mainPagePayCount(getCurrentMchNo(), createdStart, createdEnd);
         // 返回数据
         return ApiRes.ok(mapList);
     }
@@ -94,8 +96,7 @@ public class MainChartController extends CommonCtrl {
         // 开始、结束时间
         String createdStart = paramJSON.getString("createdStart");
         String createdEnd = paramJSON.getString("createdEnd");
-        ArrayList arrayResult =
-                payOrderService.mainPagePayTypeCount(getCurrentMchNo(), createdStart, createdEnd);
+        ArrayList arrayResult = payOrderService.mainPagePayTypeCount(getCurrentMchNo(), createdStart, createdEnd);
         return ApiRes.ok(arrayResult);
     }
 

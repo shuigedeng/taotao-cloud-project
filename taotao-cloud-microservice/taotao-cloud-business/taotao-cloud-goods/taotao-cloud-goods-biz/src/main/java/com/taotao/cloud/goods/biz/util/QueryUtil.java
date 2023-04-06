@@ -28,10 +28,7 @@ public class QueryUtil {
 
     public static <T> QueryWrapper<T> goodsQueryWrapper(GoodsPageQuery goodsPageQuery) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(
-                Objects.nonNull(goodsPageQuery.getGoodsId()),
-                "goods_id",
-                goodsPageQuery.getGoodsId());
+        queryWrapper.eq(Objects.nonNull(goodsPageQuery.getGoodsId()), "goods_id", goodsPageQuery.getGoodsId());
         queryWrapper.like(
                 CharSequenceUtil.isNotEmpty(goodsPageQuery.getGoodsName()),
                 "goods_name",
@@ -40,10 +37,7 @@ public class QueryUtil {
                 CharSequenceUtil.isNotEmpty(goodsPageQuery.getId()),
                 "id",
                 List.of(goodsPageQuery.getId().split(",")));
-        queryWrapper.eq(
-                Objects.nonNull(goodsPageQuery.getStoreId()),
-                "store_id",
-                goodsPageQuery.getStoreId());
+        queryWrapper.eq(Objects.nonNull(goodsPageQuery.getStoreId()), "store_id", goodsPageQuery.getStoreId());
         queryWrapper.like(
                 CharSequenceUtil.isNotEmpty(goodsPageQuery.getStoreName()),
                 "store_name",
@@ -56,24 +50,16 @@ public class QueryUtil {
                 CharSequenceUtil.isNotEmpty(goodsPageQuery.getStoreCategoryPath()),
                 "store_category_path",
                 goodsPageQuery.getStoreCategoryPath());
-        queryWrapper.eq(
-                goodsPageQuery.getSelfOperated() != null,
-                "self_operated",
-                goodsPageQuery.getSelfOperated());
+        queryWrapper.eq(goodsPageQuery.getSelfOperated() != null, "self_operated", goodsPageQuery.getSelfOperated());
         queryWrapper.eq(
                 CharSequenceUtil.isNotEmpty(goodsPageQuery.getMarketEnable()),
                 "market_enable",
                 goodsPageQuery.getMarketEnable());
         queryWrapper.eq(
-                CharSequenceUtil.isNotEmpty(goodsPageQuery.getAuthFlag()),
-                "auth_flag",
-                goodsPageQuery.getAuthFlag());
-        queryWrapper.le(
-                goodsPageQuery.getLeQuantity() != null, "quantity", goodsPageQuery.getLeQuantity());
-        queryWrapper.ge(
-                goodsPageQuery.getGeQuantity() != null, "quantity", goodsPageQuery.getGeQuantity());
-        queryWrapper.le(
-                goodsPageQuery.getRecommend() != null, "recommend", goodsPageQuery.getRecommend());
+                CharSequenceUtil.isNotEmpty(goodsPageQuery.getAuthFlag()), "auth_flag", goodsPageQuery.getAuthFlag());
+        queryWrapper.le(goodsPageQuery.getLeQuantity() != null, "quantity", goodsPageQuery.getLeQuantity());
+        queryWrapper.ge(goodsPageQuery.getGeQuantity() != null, "quantity", goodsPageQuery.getGeQuantity());
+        queryWrapper.le(goodsPageQuery.getRecommend() != null, "recommend", goodsPageQuery.getRecommend());
         queryWrapper.eq(
                 CharSequenceUtil.isNotEmpty(goodsPageQuery.getGoodsType()),
                 "goods_type",
@@ -83,8 +69,7 @@ public class QueryUtil {
         return queryWrapper;
     }
 
-    private static <T> void goodsBetweenWrapper(
-            QueryWrapper<T> queryWrapper, GoodsPageQuery goodsPageQuery) {
+    private static <T> void goodsBetweenWrapper(QueryWrapper<T> queryWrapper, GoodsPageQuery goodsPageQuery) {
         if (CharSequenceUtil.isNotEmpty(goodsPageQuery.getPrice())) {
             String[] s = goodsPageQuery.getPrice().split("_");
             if (s.length > 1) {
@@ -95,8 +80,7 @@ public class QueryUtil {
         }
     }
 
-    public static <T> QueryWrapper<T> draftGoodsQueryWrapper(
-            DraftGoodsPageQuery draftGoodsPageQuery) {
+    public static <T> QueryWrapper<T> draftGoodsQueryWrapper(DraftGoodsPageQuery draftGoodsPageQuery) {
         QueryWrapper<T> queryWrapper = goodsQueryWrapper(draftGoodsPageQuery);
         if (StrUtil.isNotEmpty(draftGoodsPageQuery.getSaveType())) {
             queryWrapper.eq("save_type", draftGoodsPageQuery.getSaveType());

@@ -66,8 +66,6 @@ public class LogisticsConfig extends BaseSuperEntity<LogisticsConfig, Long> {
     private String formItems;
 
     /** 禁用状态 OPEN：开启，CLOSE：禁用 */
-    @Column(
-            name = "disabled",
-            columnDefinition = "varchar(12) not null COMMENT '禁用状态 OPEN：开启，CLOSE：禁用'")
+    @Column(name = "disabled", columnDefinition = "varchar(12) not null COMMENT '禁用状态 OPEN：开启，CLOSE：禁用'")
     private String disabled;
 }

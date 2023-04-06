@@ -58,8 +58,7 @@ public class AliJsapi extends AlipayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
 
         AliJsapiOrderRQ bizRQ = (AliJsapiOrderRQ) rq;
@@ -69,11 +68,8 @@ public class AliJsapi extends AlipayPaymentService {
         model.setOutTradeNo(payOrder.getPayOrderId());
         model.setSubject(payOrder.getSubject()); // 订单标题
         model.setBody(payOrder.getBody()); // 订单描述信息
-        model.setTotalAmount(
-                AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
-        model.setTimeExpire(
-                DateUtil.format(
-                        payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
+        model.setTotalAmount(AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
+        model.setTimeExpire(DateUtil.format(payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
         model.setBuyerId(bizRQ.getBuyerUserId());
         req.setNotifyUrl(getNotifyUrl()); // 设置异步通知地址
         req.setBizModel(model);
@@ -82,8 +78,9 @@ public class AliJsapi extends AlipayPaymentService {
         AlipayKit.putApiIsvInfo(mchAppConfigContext, req, model);
 
         // 调起支付宝 （如果异常， 将直接跑出   ChannelException ）
-        AlipayTradeCreateResponse alipayResp =
-                configContextQueryService.getAlipayClientWrapper(mchAppConfigContext).execute(req);
+        AlipayTradeCreateResponse alipayResp = configContextQueryService
+                .getAlipayClientWrapper(mchAppConfigContext)
+                .execute(req);
 
         // 构造函数响应数据
         AliJsapiOrderRS res = ApiResBuilder.buildSuccess(AliJsapiOrderRS.class);
@@ -102,10 +99,8 @@ public class AliJsapi extends AlipayPaymentService {
 
         } else {
             channelRetMsg.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_FAIL);
-            channelRetMsg.setChannelErrCode(
-                    AlipayKit.appendErrCode(alipayResp.getCode(), alipayResp.getSubCode()));
-            channelRetMsg.setChannelErrMsg(
-                    AlipayKit.appendErrMsg(alipayResp.getMsg(), alipayResp.getSubMsg()));
+            channelRetMsg.setChannelErrCode(AlipayKit.appendErrCode(alipayResp.getCode(), alipayResp.getSubCode()));
+            channelRetMsg.setChannelErrMsg(AlipayKit.appendErrMsg(alipayResp.getMsg(), alipayResp.getSubMsg()));
         }
         return res;
     }

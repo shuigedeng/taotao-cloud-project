@@ -33,7 +33,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ValidateService {
 
-    @Autowired private Validator validator;
+    @Autowired
+    private Validator validator;
 
     public void validate(Object obj) {
 
@@ -41,10 +42,8 @@ public class ValidateService {
         if (resultSet == null || resultSet.isEmpty()) {
             return;
         }
-        resultSet.stream()
-                .forEach(
-                        item -> {
-                            throw new BizException(item.getMessage());
-                        });
+        resultSet.stream().forEach(item -> {
+            throw new BizException(item.getMessage());
+        });
     }
 }

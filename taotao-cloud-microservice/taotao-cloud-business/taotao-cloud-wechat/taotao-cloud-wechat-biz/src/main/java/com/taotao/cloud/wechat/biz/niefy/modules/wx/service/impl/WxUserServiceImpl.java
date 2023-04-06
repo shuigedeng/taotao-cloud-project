@@ -47,8 +47,13 @@ import org.springframework.util.StringUtils;
 @Service
 public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> implements WxUserService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired private WxUserMapper userMapper;
-    @Autowired private WxMpService wxMpService;
+
+    @Autowired
+    private WxUserMapper userMapper;
+
+    @Autowired
+    private WxMpService wxMpService;
+
     private static volatile boolean syncWxUserTaskRunning = false;
 
     @Override
@@ -146,8 +151,7 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
         try {
             int page = 1;
             while (hasMore) {
-                WxMpUserList wxMpUserList =
-                        wxMpUserService.userList(nextOpenid); // 拉取openid列表，每次最多1万个
+                WxMpUserList wxMpUserList = wxMpUserService.userList(nextOpenid); // 拉取openid列表，每次最多1万个
                 logger.info("拉取openid列表：第{}页，数量：{}", page++, wxMpUserList.getCount());
                 List<String> openids = wxMpUserList.getOpenids();
                 this.syncWxUsers(openids, appid);
@@ -181,25 +185,18 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
             final List<String> subOpenids = openids.subList(finalStart, finalEnd);
             TaskExcutor.submit(
                     () -> { // 使用线程池同步数据，否则大量粉丝数据需同步时会很慢
-                        logger.info(
-                                "同步批次:【{}--{}-{}】，数量：{}",
-                                batch,
-                                finalStart,
-                                finalEnd,
-                                subOpenids.size());
+                        logger.info("同步批次:【{}--{}-{}】，数量：{}", batch, finalStart, finalEnd, subOpenids.size());
                         wxMpService.switchover(appid);
                         List<WxMpUser> wxMpUsers = null; // 批量获取用户信息，每次最多100个
                         try {
                             wxMpUsers = wxMpUserService.userInfoList(subOpenids);
                         } catch (WxErrorException e) {
-                            logger.error(
-                                    "同步出错，批次：【{}--{}-{}】，错误信息：{}", batch, finalStart, finalEnd, e);
+                            logger.error("同步出错，批次：【{}--{}-{}】，错误信息：{}", batch, finalStart, finalEnd, e);
                         }
                         if (wxMpUsers != null && !wxMpUsers.isEmpty()) {
-                            List<WxUser> wxUsers =
-                                    wxMpUsers.parallelStream()
-                                            .map(item -> new WxUser(item, appid))
-                                            .collect(Collectors.toList());
+                            List<WxUser> wxUsers = wxMpUsers.parallelStream()
+                                    .map(item -> new WxUser(item, appid))
+                                    .collect(Collectors.toList());
                             this.saveOrUpdateBatch(wxUsers);
                         }
                     });

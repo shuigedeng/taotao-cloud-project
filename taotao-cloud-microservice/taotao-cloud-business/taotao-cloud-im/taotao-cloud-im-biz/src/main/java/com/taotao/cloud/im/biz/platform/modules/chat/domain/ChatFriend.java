@@ -36,7 +36,8 @@ public class ChatFriend extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /** 用户id */
     private Long fromId;
     /** 好友id */

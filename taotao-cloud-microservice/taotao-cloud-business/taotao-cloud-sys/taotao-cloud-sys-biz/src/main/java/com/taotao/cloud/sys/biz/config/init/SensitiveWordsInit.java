@@ -32,7 +32,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SensitiveWordsInit implements ApplicationRunner {
 
-    @Autowired private ISensitiveWordService sensitiveWordsService;
+    @Autowired
+    private ISensitiveWordService sensitiveWordsService;
 
     /** consumer 启动时，实时更新一下过滤词 */
     @Override

@@ -40,7 +40,8 @@ import lombok.*;
 public class BpmProcessDefinitionExtDO extends BaseDO {
 
     /** 编号 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /**
      * 流程定义的编号
      *

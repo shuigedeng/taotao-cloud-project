@@ -37,6 +37,5 @@ public interface IPurchaseOrderItemService extends IService<PurchaseOrderItem> {
      * @return boolean
      * @since 2022-04-28 08:55:27
      */
-    boolean addPurchaseOrderItem(
-            String purchaseOrderId, List<PurchaseOrderItem> purchaseOrderItemList);
+    boolean addPurchaseOrderItem(String purchaseOrderId, List<PurchaseOrderItem> purchaseOrderItemList);
 }

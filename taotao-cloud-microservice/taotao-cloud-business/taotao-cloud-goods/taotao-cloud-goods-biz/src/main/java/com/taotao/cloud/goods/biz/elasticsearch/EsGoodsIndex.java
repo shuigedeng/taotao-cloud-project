@@ -55,9 +55,11 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Accessors(chain = true)
 public class EsGoodsIndex implements Serializable {
 
-    @Serial private static final long serialVersionUID = -6856471777036048874L;
+    @Serial
+    private static final long serialVersionUID = -6856471777036048874L;
 
-    @Id private Long id;
+    @Id
+    private Long id;
 
     /** 商品id */
     @Field(type = FieldType.Long)
@@ -246,30 +248,24 @@ public class EsGoodsIndex implements Serializable {
             // 接受不了参数索引
             List<EsGoodsAttribute> attributes = new ArrayList<>();
             // 循环参数分组
-            goodsParamDTOS.forEach(
-                    goodsParamGroup -> {
-                        // 如果参数有配置，则增加索引
-                        if (goodsParamGroup.getGoodsParamsItemDTOList() != null
-                                && !goodsParamGroup.getGoodsParamsItemDTOList().isEmpty()) {
-                            // 循环分组的内容
-                            goodsParamGroup
-                                    .getGoodsParamsItemDTOList()
-                                    .forEach(
-                                            goodsParam -> {
-                                                // 如果字段需要索引，则增加索引字段
-                                                if (goodsParam.getIsIndex() != null
-                                                        && goodsParam.getIsIndex() == 1) {
-                                                    EsGoodsAttribute attribute =
-                                                            new EsGoodsAttribute();
-                                                    attribute.setType(1);
-                                                    attribute.setName(goodsParam.getParamName());
-                                                    attribute.setValue(goodsParam.getParamValue());
-                                                    attribute.setSort(goodsParam.getSort());
-                                                    attributes.add(attribute);
-                                                }
-                                            });
+            goodsParamDTOS.forEach(goodsParamGroup -> {
+                // 如果参数有配置，则增加索引
+                if (goodsParamGroup.getGoodsParamsItemDTOList() != null
+                        && !goodsParamGroup.getGoodsParamsItemDTOList().isEmpty()) {
+                    // 循环分组的内容
+                    goodsParamGroup.getGoodsParamsItemDTOList().forEach(goodsParam -> {
+                        // 如果字段需要索引，则增加索引字段
+                        if (goodsParam.getIsIndex() != null && goodsParam.getIsIndex() == 1) {
+                            EsGoodsAttribute attribute = new EsGoodsAttribute();
+                            attribute.setType(1);
+                            attribute.setName(goodsParam.getParamName());
+                            attribute.setValue(goodsParam.getParamValue());
+                            attribute.setSort(goodsParam.getSort());
+                            attributes.add(attribute);
                         }
                     });
+                }
+            });
             this.attrList = attributes;
         }
     }

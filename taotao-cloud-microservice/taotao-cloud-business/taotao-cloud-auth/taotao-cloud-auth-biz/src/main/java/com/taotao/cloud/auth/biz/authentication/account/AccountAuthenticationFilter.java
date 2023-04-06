@@ -46,8 +46,7 @@ public class AccountAuthenticationFilter extends AbstractAuthenticationProcessin
      */
     private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
-    private Converter<HttpServletRequest, AccountAuthenticationToken>
-            accountVerificationAuthenticationTokenConverter;
+    private Converter<HttpServletRequest, AccountAuthenticationToken> accountVerificationAuthenticationTokenConverter;
 
     private boolean postOnly = true;
 
@@ -62,16 +61,13 @@ public class AccountAuthenticationFilter extends AbstractAuthenticationProcessin
     }
 
     @Override
-    public Authentication attemptAuthentication(
-            HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException(
-                    "Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        AccountAuthenticationToken authRequest =
-                accountVerificationAuthenticationTokenConverter.convert(request);
+        AccountAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(request);
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
         return this.getAuthenticationManager().authenticate(authRequest);

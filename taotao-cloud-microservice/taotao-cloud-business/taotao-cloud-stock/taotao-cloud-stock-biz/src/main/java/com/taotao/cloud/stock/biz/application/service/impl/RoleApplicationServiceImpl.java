@@ -31,14 +31,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RoleApplicationServiceImpl implements RoleApplicationService {
 
-    @Autowired private RoleRepository roleRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(RoleCommand roleCommand) {
         Role role = RoleDTOAssembler.toRole(roleCommand);
-        RoleCreateSpecification roleCreateSpecification =
-                new RoleCreateSpecification(roleRepository);
+        RoleCreateSpecification roleCreateSpecification = new RoleCreateSpecification(roleRepository);
         roleCreateSpecification.isSatisfiedBy(role);
         roleRepository.store(role);
     }
@@ -48,12 +48,11 @@ public class RoleApplicationServiceImpl implements RoleApplicationService {
     public void deleteBatch(List<String> ids) {
         RoleUpdateSpecification roleUpdateSpecification = new RoleUpdateSpecification();
         List<RoleId> roleIds = new ArrayList<>();
-        ids.forEach(
-                id -> {
-                    Role role = roleRepository.find(new RoleId(id));
-                    roleUpdateSpecification.isSatisfiedBy(role);
-                    roleIds.add(new RoleId(id));
-                });
+        ids.forEach(id -> {
+            Role role = roleRepository.find(new RoleId(id));
+            roleUpdateSpecification.isSatisfiedBy(role);
+            roleIds.add(new RoleId(id));
+        });
         roleRepository.remove(roleIds);
     }
 

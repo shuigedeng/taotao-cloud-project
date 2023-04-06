@@ -38,7 +38,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MemberCouponSearchQuery extends BasePromotionsSearchQuery implements Serializable {
 
-    @Serial private static final long serialVersionUID = 4566880169478260409L;
+    @Serial
+    private static final long serialVersionUID = 4566880169478260409L;
 
     private static final String PRICE_COLUMN = "price";
 

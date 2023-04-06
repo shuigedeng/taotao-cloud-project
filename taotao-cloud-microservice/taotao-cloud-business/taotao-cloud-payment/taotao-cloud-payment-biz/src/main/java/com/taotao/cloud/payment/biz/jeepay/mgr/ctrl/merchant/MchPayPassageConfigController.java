@@ -52,10 +52,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/mch/payPassages")
 public class MchPayPassageConfigController extends CommonCtrl {
 
-    @Autowired private MchPayPassageService mchPayPassageService;
-    @Autowired private PayWayService payWayService;
-    @Autowired private MchInfoService mchInfoService;
-    @Autowired private MchAppService mchAppService;
+    @Autowired
+    private MchPayPassageService mchPayPassageService;
+
+    @Autowired
+    private PayWayService payWayService;
+
+    @Autowired
+    private MchInfoService mchInfoService;
+
+    @Autowired
+    private MchAppService mchAppService;
 
     /**
      * @Author: ZhuXiao @Description: 查询支付方式列表，并添加是否配置支付通道状态 @Date: 15:31 2021/5/10
@@ -82,23 +89,19 @@ public class MchPayPassageConfigController extends CommonCtrl {
 
             // 支付方式代码集合
             List<String> wayCodeList = new LinkedList<>();
-            payWayPage.getRecords().stream()
-                    .forEach(payWay -> wayCodeList.add(payWay.getWayCode()));
+            payWayPage.getRecords().stream().forEach(payWay -> wayCodeList.add(payWay.getWayCode()));
 
             // 应用支付通道集合
-            List<MchPayPassage> mchPayPassageList =
-                    mchPayPassageService.list(
-                            MchPayPassage.gw()
-                                    .select(MchPayPassage::getWayCode, MchPayPassage::getState)
-                                    .eq(MchPayPassage::getAppId, appId)
-                                    .in(MchPayPassage::getWayCode, wayCodeList));
+            List<MchPayPassage> mchPayPassageList = mchPayPassageService.list(MchPayPassage.gw()
+                    .select(MchPayPassage::getWayCode, MchPayPassage::getState)
+                    .eq(MchPayPassage::getAppId, appId)
+                    .in(MchPayPassage::getWayCode, wayCodeList));
 
             for (PayWay payWay : payWayPage.getRecords()) {
                 payWay.addExt("passageState", CS.NO);
                 for (MchPayPassage mchPayPassage : mchPayPassageList) {
                     // 某种支付方式多个通道的情况下，只要有一个通道状态为开启，则该支付方式对应为开启状态
-                    if (payWay.getWayCode().equals(mchPayPassage.getWayCode())
-                            && mchPayPassage.getState() == CS.YES) {
+                    if (payWay.getWayCode().equals(mchPayPassage.getWayCode()) && mchPayPassage.getState() == CS.YES) {
                         payWay.addExt("passageState", CS.YES);
                         break;
                     }
@@ -114,8 +117,7 @@ public class MchPayPassageConfigController extends CommonCtrl {
      */
     @PreAuthorize("hasAuthority('ENT_MCH_PAY_PASSAGE_CONFIG')")
     @GetMapping("/availablePayInterface/{appId}/{wayCode}")
-    public ApiRes availablePayInterface(
-            @PathVariable("appId") String appId, @PathVariable("wayCode") String wayCode) {
+    public ApiRes availablePayInterface(@PathVariable("appId") String appId, @PathVariable("wayCode") String wayCode) {
 
         MchApp mchApp = mchAppService.getById(appId);
         if (mchApp == null || mchApp.getState() != CS.YES) {
@@ -128,9 +130,8 @@ public class MchPayPassageConfigController extends CommonCtrl {
         }
 
         // 根据支付方式查询可用支付接口列表
-        List<JSONObject> list =
-                mchPayPassageService.selectAvailablePayInterfaceList(
-                        wayCode, appId, CS.INFO_TYPE_MCH_APP, mchInfo.getType());
+        List<JSONObject> list = mchPayPassageService.selectAvailablePayInterfaceList(
+                wayCode, appId, CS.INFO_TYPE_MCH_APP, mchInfo.getType());
 
         return ApiRes.ok(list);
     }
@@ -146,8 +147,7 @@ public class MchPayPassageConfigController extends CommonCtrl {
         String reqParams = getValStringRequired("reqParams");
 
         try {
-            List<MchPayPassage> mchPayPassageList =
-                    JSONArray.parseArray(reqParams, MchPayPassage.class);
+            List<MchPayPassage> mchPayPassageList = JSONArray.parseArray(reqParams, MchPayPassage.class);
             if (CollectionUtils.isEmpty(mchPayPassageList)) {
                 throw new BizException("操作失败");
             }

@@ -37,7 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class FeedbackBuyerController {
 
     /** 意见反馈 */
-    @Autowired private FeedbackService feedbackService;
+    @Autowired
+    private FeedbackService feedbackService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")

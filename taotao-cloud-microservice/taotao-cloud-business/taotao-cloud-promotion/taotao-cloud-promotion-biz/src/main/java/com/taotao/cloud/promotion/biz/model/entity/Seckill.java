@@ -66,9 +66,7 @@ public class Seckill extends BasePromotions<Seckill, Long> {
     private String hours;
 
     /** 已参与此活动的商家id集合 商家id集合以逗号分隔 */
-    @Column(
-            name = "store_ids",
-            columnDefinition = "varchar(1024) not null  comment '已参与此活动的商家id集合 商家id集合以逗号分隔'")
+    @Column(name = "store_ids", columnDefinition = "varchar(1024) not null  comment '已参与此活动的商家id集合 商家id集合以逗号分隔'")
     private String storeIds;
     /** 商品数量 */
     @Column(name = "goods_num", columnDefinition = "int not null  comment '商品数量'")
@@ -76,8 +74,7 @@ public class Seckill extends BasePromotions<Seckill, Long> {
 
     public Seckill(int day, String hours, String seckillRule) {
         // 默认创建*天后的秒杀活动
-        DateTime dateTime =
-                DateUtil.beginOfDay(DateUtil.offset(new DateTime(), DateField.DAY_OF_YEAR, day));
+        DateTime dateTime = DateUtil.beginOfDay(DateUtil.offset(new DateTime(), DateField.DAY_OF_YEAR, day));
         this.applyEndTime = dateTime;
         this.hours = hours;
         this.seckillRule = seckillRule;

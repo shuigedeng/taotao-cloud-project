@@ -28,8 +28,7 @@ public class CommonUtil {
      * @param dataSourceUtil
      * @return
      */
-    public static DruidDataSource getDruidDataSource(DataSourceUtil dataSourceUtil)
-            throws DataException {
+    public static DruidDataSource getDruidDataSource(DataSourceUtil dataSourceUtil) throws DataException {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setUsername(dataSourceUtil.getUserName());
         druidDataSource.setPassword(dataSourceUtil.getPassword());

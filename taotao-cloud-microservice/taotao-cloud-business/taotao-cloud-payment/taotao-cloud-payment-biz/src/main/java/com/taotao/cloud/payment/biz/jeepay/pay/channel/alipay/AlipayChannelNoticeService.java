@@ -81,10 +81,8 @@ public class AlipayChannelNoticeService extends AbstractChannelNoticeService {
             if (mchAppConfigContext.isIsvsubMch()) {
 
                 // 获取支付参数
-                AlipayIsvParams alipayParams =
-                        (AlipayIsvParams)
-                                configContextQueryService.queryIsvParams(
-                                        mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
+                AlipayIsvParams alipayParams = (AlipayIsvParams) configContextQueryService.queryIsvParams(
+                        mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
                 useCert = alipayParams.getUseCert();
                 alipaySignType = alipayParams.getSignType();
                 alipayPublicCert = alipayParams.getAlipayPublicCert();
@@ -94,11 +92,8 @@ public class AlipayChannelNoticeService extends AbstractChannelNoticeService {
 
                 // 获取支付参数
                 AlipayNormalMchParams alipayParams =
-                        (AlipayNormalMchParams)
-                                configContextQueryService.queryNormalMchParams(
-                                        mchAppConfigContext.getMchNo(),
-                                        mchAppConfigContext.getAppId(),
-                                        getIfCode());
+                        (AlipayNormalMchParams) configContextQueryService.queryNormalMchParams(
+                                mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
 
                 useCert = alipayParams.getUseCert();
                 alipaySignType = alipayParams.getSignType();
@@ -112,20 +107,15 @@ public class AlipayChannelNoticeService extends AbstractChannelNoticeService {
             boolean verifyResult;
             if (useCert != null && useCert == CS.YES) { // 证书方式
 
-                verifyResult =
-                        AlipaySignature.rsaCertCheckV1(
-                                jsonParams.toJavaObject(Map.class),
-                                getCertFilePath(alipayPublicCert),
-                                AlipayConfig.CHARSET,
-                                alipaySignType);
+                verifyResult = AlipaySignature.rsaCertCheckV1(
+                        jsonParams.toJavaObject(Map.class),
+                        getCertFilePath(alipayPublicCert),
+                        AlipayConfig.CHARSET,
+                        alipaySignType);
 
             } else {
-                verifyResult =
-                        AlipaySignature.rsaCheckV1(
-                                jsonParams.toJavaObject(Map.class),
-                                alipayPublicKey,
-                                AlipayConfig.CHARSET,
-                                alipaySignType);
+                verifyResult = AlipaySignature.rsaCheckV1(
+                        jsonParams.toJavaObject(Map.class), alipayPublicKey, AlipayConfig.CHARSET, alipaySignType);
             }
 
             // 验签失败

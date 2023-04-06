@@ -47,8 +47,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/authorize/compliance")
 @Tags({@Tag(name = "OAuth2 认证服务接口"), @Tag(name = "OAuth2 应用安全合规接口"), @Tag(name = "OAuth2 审计管理接口")})
-public class OAuth2ComplianceController
-        extends BaseWriteableRestController<OAuth2Compliance, String> {
+public class OAuth2ComplianceController extends BaseWriteableRestController<OAuth2Compliance, String> {
 
     private final OAuth2ComplianceService complianceService;
 
@@ -69,9 +68,7 @@ public class OAuth2ComplianceController
                 @ApiResponse(
                         description = "人员分页列表",
                         content =
-                                @Content(
-                                        mediaType = "application/json",
-                                        schema = @Schema(implementation = Map.class)))
+                                @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))
             })
     @Parameters({
         @Parameter(name = "pageNumber", required = true, description = "当前页码"),
@@ -88,8 +85,7 @@ public class OAuth2ComplianceController
             @RequestParam(value = "clientId", required = false) String clientId,
             @RequestParam(value = "ip", required = false) String ip) {
         Page<OAuth2Compliance> pages =
-                complianceService.findByCondition(
-                        pageNumber, pageSize, principalName, clientId, ip);
+                complianceService.findByCondition(pageNumber, pageSize, principalName, clientId, ip);
         return result(pages);
     }
 }

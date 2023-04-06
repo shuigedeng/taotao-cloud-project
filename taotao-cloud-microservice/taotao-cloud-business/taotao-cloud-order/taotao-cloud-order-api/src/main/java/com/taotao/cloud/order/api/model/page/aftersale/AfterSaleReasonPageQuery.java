@@ -30,7 +30,8 @@ import lombok.*;
 @Schema(description = "售后原因搜索参数")
 public class AfterSaleReasonPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 
     @Schema(description = "服务类型")
     private String serviceType;

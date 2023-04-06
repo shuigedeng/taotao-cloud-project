@@ -45,15 +45,9 @@ public class FlowDelegateServiceImpl extends ServiceImpl<FlowDelegateMapper, Flo
         queryWrapper.lambda().eq(FlowDelegateEntity::getCreatorUserId, SecurityUtils.getUserId());
         if (!StrUtil.isEmpty(pagination.getKeyword())) {
             flag = true;
-            queryWrapper
-                    .lambda()
-                    .and(
-                            t ->
-                                    t.like(FlowDelegateEntity::getFlowName, pagination.getKeyword())
-                                            .or()
-                                            .like(
-                                                    FlowDelegateEntity::getToUserName,
-                                                    pagination.getKeyword()));
+            queryWrapper.lambda().and(t -> t.like(FlowDelegateEntity::getFlowName, pagination.getKeyword())
+                    .or()
+                    .like(FlowDelegateEntity::getToUserName, pagination.getKeyword()));
         }
         // 排序
         queryWrapper

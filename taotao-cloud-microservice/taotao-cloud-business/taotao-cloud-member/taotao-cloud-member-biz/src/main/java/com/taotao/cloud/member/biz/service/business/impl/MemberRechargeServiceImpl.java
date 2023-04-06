@@ -51,7 +51,8 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
         implements IMemberRechargeService {
 
     /** 会员预存款 */
-    @Autowired private IFeignMemberWalletApi feignMemberWalletApi;
+    @Autowired
+    private IFeignMemberWalletApi feignMemberWalletApi;
 
     @Override
     public MemberRecharge recharge(BigDecimal price) {
@@ -60,8 +61,7 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
         // 构建sn
         String sn = "Y" + IdGeneratorUtils.getId();
         // 整合充值订单数据
-        MemberRecharge recharge =
-                new MemberRecharge(sn, authUser.getUserId(), authUser.getUsername(), price);
+        MemberRecharge recharge = new MemberRecharge(sn, authUser.getUserId(), authUser.getUsername(), price);
         // 添加预存款充值账单
         this.save(recharge);
         // 返回预存款
@@ -102,8 +102,7 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
     @Override
     public void paySuccess(String sn, String receivableNo, String paymentMethod) {
         // 根据sn获取支付账单
-        MemberRecharge recharge =
-                this.getOne(new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
+        MemberRecharge recharge = this.getOne(new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
         // 如果支付账单不为空则进行一下逻辑
         if (recharge != null && !recharge.getPayStatus().equals(PayStatusEnum.PAID.name())) {
             // 将此账单支付状态更改为已支付
@@ -114,19 +113,17 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
             // 执行保存操作
             this.updateById(recharge);
             // 增加预存款余额
-            feignMemberWalletApi.increase(
-                    new MemberWalletUpdateDTO(
-                            recharge.getRechargeMoney(),
-                            recharge.getMemberId(),
-                            "会员余额充值，充值单号为：" + recharge.getRechargeSn(),
-                            DepositServiceTypeEnum.WALLET_RECHARGE.name()));
+            feignMemberWalletApi.increase(new MemberWalletUpdateDTO(
+                    recharge.getRechargeMoney(),
+                    recharge.getMemberId(),
+                    "会员余额充值，充值单号为：" + recharge.getRechargeSn(),
+                    DepositServiceTypeEnum.WALLET_RECHARGE.name()));
         }
     }
 
     @Override
     public MemberRecharge getRecharge(String sn) {
-        MemberRecharge recharge =
-                this.getOne(new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
+        MemberRecharge recharge = this.getOne(new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
         if (recharge != null) {
             return recharge;
         }
@@ -135,8 +132,7 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 
     @Override
     public void rechargeOrderCancel(String sn) {
-        MemberRecharge recharge =
-                this.getOne(new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
+        MemberRecharge recharge = this.getOne(new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
         if (recharge != null) {
             recharge.setPayStatus(PayStatusEnum.CANCEL.name());
             this.updateById(recharge);

@@ -61,8 +61,7 @@ public class WeChatMenuService {
 
     /** 修改 */
     public void update(WeChatMenuParam param) {
-        WeChatMenu weChatMenu =
-                weChatMenuManager.findById(param.getId()).orElseThrow(DataNotExistException::new);
+        WeChatMenu weChatMenu = weChatMenuManager.findById(param.getId()).orElseThrow(DataNotExistException::new);
 
         BeanUtil.copyProperties(param, weChatMenu, CopyOptions.create().ignoreNullValue());
         weChatMenuManager.updateById(weChatMenu);
@@ -75,10 +74,7 @@ public class WeChatMenuService {
 
     /** 获取单条 */
     public WeChatMenuDto findById(Long id) {
-        return weChatMenuManager
-                .findById(id)
-                .map(WeChatMenu::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return weChatMenuManager.findById(id).map(WeChatMenu::toDto).orElseThrow(DataNotExistException::new);
     }
 
     /** 获取全部 */
@@ -95,10 +91,7 @@ public class WeChatMenuService {
     @SneakyThrows
     @Transactional(rollbackFor = Exception.class)
     public void publish(Long id) {
-        WeChatMenu weChatMenu =
-                weChatMenuManager
-                        .findById(id)
-                        .orElseThrow(() -> new DataNotExistException("菜单信息不存在"));
+        WeChatMenu weChatMenu = weChatMenuManager.findById(id).orElseThrow(() -> new DataNotExistException("菜单信息不存在"));
         WxMenu wxMenu = weChatMenu.getMenuInfo().toWxMenu();
         WxMpMenuService menuService = wxMpService.getMenuService();
         menuService.menuCreate(wxMenu);
@@ -114,12 +107,11 @@ public class WeChatMenuService {
         WxMpMenuService menuService = wxMpService.getMenuService();
         WxMpMenu wxMpMenu = menuService.menuGet();
         WeChatMenuInfo weChatMenuInfo = WeChatMenuInfo.init(wxMpMenu);
-        WeChatMenu weChatMenu =
-                new WeChatMenu()
-                        .setName("微信自定义菜单")
-                        .setRemark("导入时间" + DateUtil.now())
-                        .setPublish(true)
-                        .setMenuInfo(weChatMenuInfo);
+        WeChatMenu weChatMenu = new WeChatMenu()
+                .setName("微信自定义菜单")
+                .setRemark("导入时间" + DateUtil.now())
+                .setPublish(true)
+                .setMenuInfo(weChatMenuInfo);
         weChatMenuManager.clearPublish();
         weChatMenuManager.save(weChatMenu);
     }

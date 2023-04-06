@@ -61,7 +61,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNoticeService {
 
-    @Autowired RefundOrderService refundOrderService;
+    @Autowired
+    RefundOrderService refundOrderService;
 
     @Override
     public String getIfCode() {
@@ -81,8 +82,7 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
 
             // 获取支付参数 (缓存数据) 和 商户信息
             MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(
-                            refundOrder.getMchNo(), refundOrder.getAppId());
+                    configContextQueryService.queryMchInfoAndAppInfo(refundOrder.getMchNo(), refundOrder.getAppId());
             if (mchAppConfigContext == null) {
                 throw new BizException("获取商户信息失败");
             }
@@ -91,26 +91,19 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
             Byte mchType = mchAppConfigContext.getMchType();
             if (CS.MCH_TYPE_NORMAL == mchType) {
                 WxpayNormalMchParams normalMchParams =
-                        (WxpayNormalMchParams)
-                                configContextQueryService.queryNormalMchParams(
-                                        mchAppConfigContext.getMchNo(),
-                                        mchAppConfigContext.getAppId(),
-                                        getIfCode());
+                        (WxpayNormalMchParams) configContextQueryService.queryNormalMchParams(
+                                mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
                 apiVersion = normalMchParams.getApiVersion();
-                wxKey =
-                        CS.PAY_IF_VERSION.WX_V2.equals(apiVersion)
-                                ? normalMchParams.getKey()
-                                : normalMchParams.getApiV3Key();
+                wxKey = CS.PAY_IF_VERSION.WX_V2.equals(apiVersion)
+                        ? normalMchParams.getKey()
+                        : normalMchParams.getApiV3Key();
             } else if (CS.MCH_TYPE_ISVSUB == mchType) {
-                WxpayIsvParams wxpayIsvParams =
-                        (WxpayIsvParams)
-                                configContextQueryService.queryIsvParams(
-                                        mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
+                WxpayIsvParams wxpayIsvParams = (WxpayIsvParams) configContextQueryService.queryIsvParams(
+                        mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
                 apiVersion = wxpayIsvParams.getApiVersion();
-                wxKey =
-                        CS.PAY_IF_VERSION.WX_V2.equals(apiVersion)
-                                ? wxpayIsvParams.getKey()
-                                : wxpayIsvParams.getApiV3Key();
+                wxKey = CS.PAY_IF_VERSION.WX_V2.equals(apiVersion)
+                        ? wxpayIsvParams.getKey()
+                        : wxpayIsvParams.getApiV3Key();
             } else {
                 throw new BizException("商户类型错误");
             }
@@ -122,8 +115,7 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
                 return MutablePair.of(urlOrderId, result);
 
             } else if (CS.PAY_IF_VERSION.WX_V2.equals(apiVersion)) { // V2接口回调
-                String xmlResult =
-                        IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
+                String xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
                 if (StringUtils.isEmpty(xmlResult)) {
                     return null;
                 }
@@ -146,8 +138,7 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
             NoticeTypeEnum noticeTypeEnum) {
         try {
             ChannelRetMsg result = new ChannelRetMsg();
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
             result.setChannelState(ChannelRetMsg.ChannelState.WAITING); // 默认支付中
             if (CS.PAY_IF_VERSION.WX_V3.equals(wxServiceWrapper.getApiVersion())) {
@@ -171,8 +162,7 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
                 result.setResponseEntity(okResponse); // 响应数据
             } else if (CS.PAY_IF_VERSION.WX_V2.equals(wxServiceWrapper.getApiVersion())) {
                 // 获取回调参数
-                WxPayRefundNotifyResult.ReqInfo notifyResult =
-                        (WxPayRefundNotifyResult.ReqInfo) params;
+                WxPayRefundNotifyResult.ReqInfo notifyResult = (WxPayRefundNotifyResult.ReqInfo) params;
                 // 验证参数
                 verifyWxPay2Params(notifyResult, refundOrder);
 
@@ -213,20 +203,16 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
 
         log.info("\n【请求头信息】：{}\n【加密数据】：{}", header.toString(), params);
 
-        WxPayService wxPayService =
-                configContextQueryService
-                        .getWxServiceWrapper(mchAppConfigContext)
-                        .getWxPayService();
+        WxPayService wxPayService = configContextQueryService
+                .getWxServiceWrapper(mchAppConfigContext)
+                .getWxPayService();
         WxPayConfig wxPayConfig = wxPayService.getConfig();
         // 自动获取微信平台证书
-        PrivateKey privateKey =
-                PemUtils.loadPrivateKey(new FileInputStream(wxPayConfig.getPrivateKeyPath()));
-        AutoUpdateCertificatesVerifier verifier =
-                new AutoUpdateCertificatesVerifier(
-                        new WxPayCredentials(
-                                wxPayConfig.getMchId(),
-                                new PrivateKeySigner(wxPayConfig.getCertSerialNo(), privateKey)),
-                        wxPayConfig.getApiV3Key().getBytes("utf-8"));
+        PrivateKey privateKey = PemUtils.loadPrivateKey(new FileInputStream(wxPayConfig.getPrivateKeyPath()));
+        AutoUpdateCertificatesVerifier verifier = new AutoUpdateCertificatesVerifier(
+                new WxPayCredentials(
+                        wxPayConfig.getMchId(), new PrivateKeySigner(wxPayConfig.getCertSerialNo(), privateKey)),
+                wxPayConfig.getApiV3Key().getBytes("utf-8"));
         wxPayConfig.setVerifier(verifier);
         wxPayService.setConfig(wxPayConfig);
 
@@ -240,8 +226,7 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
      *
      * @return
      */
-    public void verifyWxPay3Params(
-            WxPayRefundNotifyV3Result.DecryptNotifyResult result, RefundOrder refundOrder) {
+    public void verifyWxPay3Params(WxPayRefundNotifyV3Result.DecryptNotifyResult result, RefundOrder refundOrder) {
 
         try {
             // 核对金额
@@ -261,8 +246,7 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
      *
      * @return
      */
-    public void verifyWxPay2Params(
-            WxPayRefundNotifyResult.ReqInfo result, RefundOrder refundOrder) {
+    public void verifyWxPay2Params(WxPayRefundNotifyResult.ReqInfo result, RefundOrder refundOrder) {
 
         try {
             // 核对金额

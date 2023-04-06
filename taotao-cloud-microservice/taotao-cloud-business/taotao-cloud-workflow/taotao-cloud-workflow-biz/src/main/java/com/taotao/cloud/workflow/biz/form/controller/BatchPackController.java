@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/BatchPack")
 public class BatchPackController {
 
-    @Autowired private BatchPackService batchPackService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private BatchPackService batchPackService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取批包装指令信息
@@ -52,8 +55,7 @@ public class BatchPackController {
      */
     @Operation("获取批包装指令信息")
     @GetMapping("/{id}")
-    public Result<BatchPackInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<BatchPackInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         BatchPackInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -104,8 +106,7 @@ public class BatchPackController {
      */
     @Operation("修改批包装指令")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid BatchPackForm batchPackForm, @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid BatchPackForm batchPackForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (batchPackForm.getProductionQuty() != null
                 && StringUtil.isNotEmpty(batchPackForm.getProductionQuty())

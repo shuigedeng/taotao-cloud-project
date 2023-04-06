@@ -22,7 +22,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DefaultAccountVerificationService implements AccountVerificationService {
-    @Autowired private RedisRepository repository;
+    @Autowired
+    private RedisRepository repository;
 
     @Override
     public boolean verifyCaptcha(String verificationCode) {

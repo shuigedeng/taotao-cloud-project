@@ -43,10 +43,7 @@ public class YmlUtil {
         if (!ymls.containsKey(fileName)) {
             ymls.put(
                     fileName,
-                    new Yaml()
-                            .loadAs(
-                                    YmlUtil.class.getResourceAsStream("/" + fileName),
-                                    LinkedHashMap.class));
+                    new Yaml().loadAs(YmlUtil.class.getResourceAsStream("/" + fileName), LinkedHashMap.class));
         }
     }
 

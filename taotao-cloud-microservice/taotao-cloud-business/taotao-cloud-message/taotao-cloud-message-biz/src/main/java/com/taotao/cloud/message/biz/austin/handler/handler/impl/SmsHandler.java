@@ -44,13 +44,17 @@ public class SmsHandler extends BaseHandler implements Handler {
         channelCode = ChannelType.SMS.getCode();
     }
 
-    @Autowired private SmsRecordDao smsRecordDao;
+    @Autowired
+    private SmsRecordDao smsRecordDao;
 
-    @Autowired private ConfigService config;
+    @Autowired
+    private ConfigService config;
 
-    @Autowired private Map<String, SmsScript> smsScripts;
+    @Autowired
+    private Map<String, SmsScript> smsScripts;
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     /** 流量自动分配策略 */
     private static final Integer AUTO_FLOW_RULE = 0;
@@ -60,16 +64,14 @@ public class SmsHandler extends BaseHandler implements Handler {
 
     @Override
     public boolean handler(TaskInfo taskInfo) {
-        SmsParam smsParam =
-                SmsParam.builder()
-                        .phones(taskInfo.getReceiver())
-                        .content(getSmsContent(taskInfo))
-                        .messageTemplateId(taskInfo.getMessageTemplateId())
-                        .build();
+        SmsParam smsParam = SmsParam.builder()
+                .phones(taskInfo.getReceiver())
+                .content(getSmsContent(taskInfo))
+                .messageTemplateId(taskInfo.getMessageTemplateId())
+                .build();
         try {
             /** 1、动态配置做流量负载 2、发送短信 */
-            MessageTypeSmsConfig[] messageTypeSmsConfigs =
-                    loadBalance(getMessageTypeSmsConfig(taskInfo));
+            MessageTypeSmsConfig[] messageTypeSmsConfigs = loadBalance(getMessageTypeSmsConfig(taskInfo));
             for (MessageTypeSmsConfig messageTypeSmsConfig : messageTypeSmsConfigs) {
                 smsParam.setScriptName(messageTypeSmsConfig.getScriptName());
                 smsParam.setSendAccountId(messageTypeSmsConfig.getSendAccount());
@@ -141,24 +143,19 @@ public class SmsHandler extends BaseHandler implements Handler {
 
         /** 如果模板指定了账号，则优先使用具体的账号进行发送 */
         if (!taskInfo.getSendAccount().equals(AUTO_FLOW_RULE)) {
-            SmsAccount account =
-                    accountUtils.getAccountById(taskInfo.getSendAccount(), SmsAccount.class);
-            return Arrays.asList(
-                    MessageTypeSmsConfig.builder()
-                            .sendAccount(taskInfo.getSendAccount())
-                            .scriptName(account.getScriptName())
-                            .weights(100)
-                            .build());
+            SmsAccount account = accountUtils.getAccountById(taskInfo.getSendAccount(), SmsAccount.class);
+            return Arrays.asList(MessageTypeSmsConfig.builder()
+                    .sendAccount(taskInfo.getSendAccount())
+                    .scriptName(account.getScriptName())
+                    .weights(100)
+                    .build());
         }
 
         /** 读取流量配置 */
         String property = config.getProperty(FLOW_KEY, CommonConstant.EMPTY_VALUE_JSON_ARRAY);
         JSONArray jsonArray = JSON.parseArray(property);
         for (int i = 0; i < jsonArray.size(); i++) {
-            JSONArray array =
-                    jsonArray
-                            .getJSONObject(i)
-                            .getJSONArray(FLOW_KEY_PREFIX + taskInfo.getMsgType());
+            JSONArray array = jsonArray.getJSONObject(i).getJSONArray(FLOW_KEY_PREFIX + taskInfo.getMsgType());
             if (CollUtil.isNotEmpty(array)) {
                 return JSON.parseArray(JSON.toJSONString(array), MessageTypeSmsConfig.class);
             }

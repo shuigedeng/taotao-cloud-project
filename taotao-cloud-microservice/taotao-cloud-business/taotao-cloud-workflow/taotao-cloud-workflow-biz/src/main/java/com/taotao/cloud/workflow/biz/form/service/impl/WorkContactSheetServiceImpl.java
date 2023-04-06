@@ -33,13 +33,17 @@ import org.springframework.stereotype.Service;
 
 /** 工作联系单 */
 @Service
-public class WorkContactSheetServiceImpl
-        extends ServiceImpl<WorkContactSheetMapper, WorkContactSheetEntity>
+public class WorkContactSheetServiceImpl extends ServiceImpl<WorkContactSheetMapper, WorkContactSheetEntity>
         implements WorkContactSheetService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public WorkContactSheetEntity getInfo(String id) {
@@ -79,8 +83,7 @@ public class WorkContactSheetServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, WorkContactSheetEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, WorkContactSheetEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -112,10 +115,8 @@ public class WorkContactSheetServiceImpl
 
     @Override
     public void data(String id, String data) {
-        WorkContactSheetForm workContactSheetForm =
-                JsonUtils.getJsonToBean(data, WorkContactSheetForm.class);
-        WorkContactSheetEntity entity =
-                JsonUtils.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);
+        WorkContactSheetForm workContactSheetForm = JsonUtils.getJsonToBean(data, WorkContactSheetForm.class);
+        WorkContactSheetEntity entity = JsonUtils.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

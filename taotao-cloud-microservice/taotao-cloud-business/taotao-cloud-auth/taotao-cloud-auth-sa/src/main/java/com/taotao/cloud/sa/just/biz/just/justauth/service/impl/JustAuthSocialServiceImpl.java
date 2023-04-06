@@ -67,8 +67,7 @@ public class JustAuthSocialServiceImpl extends ServiceImpl<JustAuthSocialMapper,
      * @return
      */
     @Override
-    public List<JustAuthSocialDTO> queryJustAuthSocialList(
-            QueryJustAuthSocialDTO queryJustAuthSocialDTO) {
+    public List<JustAuthSocialDTO> queryJustAuthSocialList(QueryJustAuthSocialDTO queryJustAuthSocialDTO) {
         List<JustAuthSocialDTO> justAuthSocialInfoList =
                 justAuthSocialMapper.queryJustAuthSocialList(queryJustAuthSocialDTO);
         return justAuthSocialInfoList;
@@ -82,8 +81,7 @@ public class JustAuthSocialServiceImpl extends ServiceImpl<JustAuthSocialMapper,
      */
     @Override
     public JustAuthSocialDTO queryJustAuthSocial(QueryJustAuthSocialDTO queryJustAuthSocialDTO) {
-        JustAuthSocialDTO justAuthSocialDTO =
-                justAuthSocialMapper.queryJustAuthSocial(queryJustAuthSocialDTO);
+        JustAuthSocialDTO justAuthSocialDTO = justAuthSocialMapper.queryJustAuthSocial(queryJustAuthSocialDTO);
         return justAuthSocialDTO;
     }
 
@@ -100,8 +98,7 @@ public class JustAuthSocialServiceImpl extends ServiceImpl<JustAuthSocialMapper,
      */
     @Override
     public JustAuthSocial createJustAuthSocial(CreateJustAuthSocialDTO justAuthSocial) {
-        JustAuthSocial justAuthSocialEntity =
-                BeanCopierUtils.copyByClass(justAuthSocial, JustAuthSocial.class);
+        JustAuthSocial justAuthSocialEntity = BeanCopierUtils.copyByClass(justAuthSocial, JustAuthSocial.class);
         this.save(justAuthSocialEntity);
         return justAuthSocialEntity;
     }
@@ -114,8 +111,7 @@ public class JustAuthSocialServiceImpl extends ServiceImpl<JustAuthSocialMapper,
      */
     @Override
     public boolean updateJustAuthSocial(UpdateJustAuthSocialDTO justAuthSocial) {
-        JustAuthSocial justAuthSocialEntity =
-                BeanCopierUtils.copyByClass(justAuthSocial, JustAuthSocial.class);
+        JustAuthSocial justAuthSocialEntity = BeanCopierUtils.copyByClass(justAuthSocial, JustAuthSocial.class);
         boolean result = this.updateById(justAuthSocialEntity);
         return result;
     }
@@ -129,8 +125,7 @@ public class JustAuthSocialServiceImpl extends ServiceImpl<JustAuthSocialMapper,
     @Override
     public JustAuthSocial createOrUpdateJustAuthSocial(UpdateJustAuthSocialDTO justAuthSocial) {
         boolean result;
-        JustAuthSocial justAuthSocialEntity =
-                BeanCopierUtils.copyByClass(justAuthSocial, JustAuthSocial.class);
+        JustAuthSocial justAuthSocialEntity = BeanCopierUtils.copyByClass(justAuthSocial, JustAuthSocial.class);
         QueryJustAuthSocialDTO queryJustAuthSocialDTO = new QueryJustAuthSocialDTO();
         queryJustAuthSocialDTO.setSource(justAuthSocial.getSource());
         queryJustAuthSocialDTO.setUuid(justAuthSocial.getUuid());

@@ -60,19 +60,16 @@ public class SmsWebmvcPathAutoConfiguration {
     @Autowired
     @ConditionalOnBean(RequestMappingHandlerMapping.class)
     public void smsController(
-            SmsWebmvcProperties properties,
-            RequestMappingHandlerMapping mapping,
-            SmsController controller)
+            SmsWebmvcProperties properties, RequestMappingHandlerMapping mapping, SmsController controller)
             throws NoSuchMethodException, SecurityException {
 
         String bathPath = getBasePath(properties);
 
         if (properties.isEnableSend()) {
             Method sendMethod = SmsController.class.getMethod("sendVerificationCode", String.class);
-            RequestMappingInfo sendInfo =
-                    RequestMappingInfo.paths(bathPath + "/verificationCode/{phone}")
-                            .methods(RequestMethod.POST)
-                            .build();
+            RequestMappingInfo sendInfo = RequestMappingInfo.paths(bathPath + "/verificationCode/{phone}")
+                    .methods(RequestMethod.POST)
+                    .build();
             mapping.registerMapping(sendInfo, controller, sendMethod);
             LogUtils.debug("registerMapping: {}", sendInfo);
         } else {
@@ -80,14 +77,11 @@ public class SmsWebmvcPathAutoConfiguration {
         }
 
         if (properties.isEnableGet()) {
-            Method getMethod =
-                    SmsController.class.getMethod(
-                            "getVerificationCode", String.class, String.class);
-            RequestMappingInfo getInfo =
-                    RequestMappingInfo.paths(bathPath + "/verificationCode/{phone}")
-                            .methods(RequestMethod.GET)
-                            .produces("application/json")
-                            .build();
+            Method getMethod = SmsController.class.getMethod("getVerificationCode", String.class, String.class);
+            RequestMappingInfo getInfo = RequestMappingInfo.paths(bathPath + "/verificationCode/{phone}")
+                    .methods(RequestMethod.GET)
+                    .produces("application/json")
+                    .build();
             mapping.registerMapping(getInfo, controller, getMethod);
             LogUtils.debug("registerMapping: {}", getInfo);
         } else {
@@ -95,12 +89,10 @@ public class SmsWebmvcPathAutoConfiguration {
         }
 
         if (properties.isEnableVerify()) {
-            Method verifyMethod =
-                    SmsController.class.getMethod("verifyVerificationCode", VerifyInfo.class);
-            RequestMappingInfo verifyInfo =
-                    RequestMappingInfo.paths(bathPath + "/verificationCode")
-                            .methods(RequestMethod.POST)
-                            .build();
+            Method verifyMethod = SmsController.class.getMethod("verifyVerificationCode", VerifyInfo.class);
+            RequestMappingInfo verifyInfo = RequestMappingInfo.paths(bathPath + "/verificationCode")
+                    .methods(RequestMethod.POST)
+                    .build();
             mapping.registerMapping(verifyInfo, controller, verifyMethod);
             LogUtils.debug("registerMapping: {}", verifyInfo);
         } else {
@@ -109,10 +101,9 @@ public class SmsWebmvcPathAutoConfiguration {
 
         if (properties.isEnableNotice()) {
             Method noticeMethod = SmsController.class.getMethod("sendNotice", NoticeInfo.class);
-            RequestMappingInfo noticeInfo =
-                    RequestMappingInfo.paths(bathPath + "/notice")
-                            .methods(RequestMethod.PUT)
-                            .build();
+            RequestMappingInfo noticeInfo = RequestMappingInfo.paths(bathPath + "/notice")
+                    .methods(RequestMethod.PUT)
+                    .build();
             mapping.registerMapping(noticeInfo, controller, noticeMethod);
             LogUtils.debug("registerMapping: {}", noticeInfo);
         } else {

@@ -29,7 +29,8 @@ public class ChatVersion extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /** 版本 */
     private String version;
     /** 地址 */

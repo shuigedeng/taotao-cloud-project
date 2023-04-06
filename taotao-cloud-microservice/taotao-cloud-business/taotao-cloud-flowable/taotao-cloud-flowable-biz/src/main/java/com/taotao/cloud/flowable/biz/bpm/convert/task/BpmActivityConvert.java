@@ -36,9 +36,6 @@ public interface BpmActivityConvert {
 
     List<BpmActivityRespVO> convertList(List<HistoricActivityInstance> list);
 
-    @Mappings({
-        @Mapping(source = "activityId", target = "key"),
-        @Mapping(source = "activityType", target = "type")
-    })
+    @Mappings({@Mapping(source = "activityId", target = "key"), @Mapping(source = "activityType", target = "type")})
     BpmActivityRespVO convert(HistoricActivityInstance bean);
 }

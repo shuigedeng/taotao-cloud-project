@@ -43,7 +43,8 @@ import org.hibernate.validator.constraints.Length;
 @Schema(description = "用户重置密码DTO")
 public class RestPasswordUserDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "手机号", required = true)
     @NotBlank(message = "手机号不能为空")

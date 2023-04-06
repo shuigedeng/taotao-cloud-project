@@ -64,9 +64,7 @@ public class MapReduceProcessorDemo implements MapReduceProcessor {
             return new ProcessResult(true, "MAP_SUCCESS");
         } else {
             System.out.println("==== NORMAL_PROCESS ====");
-            omsLogger.info(
-                    "[DemoMRProcessor] process subTask: {}.",
-                    JSON.toJSONString(context.getSubTask()));
+            omsLogger.info("[DemoMRProcessor] process subTask: {}.", JSON.toJSONString(context.getSubTask()));
             System.out.println("subTask: " + JsonUtils.toJSONString(context.getSubTask()));
             Thread.sleep(1000);
             if (context.getCurrentRetryTimes() == 0) {

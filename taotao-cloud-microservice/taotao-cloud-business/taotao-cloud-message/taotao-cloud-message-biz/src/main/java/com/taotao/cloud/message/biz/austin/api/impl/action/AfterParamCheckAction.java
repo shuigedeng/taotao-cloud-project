@@ -44,8 +44,7 @@ public class AfterParamCheckAction implements BusinessProcess<SendTaskModel> {
 
     public static final String PHONE_REGEX_EXP =
             "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(166)|(17[0-9])|(18[0-9])|(19[1,8,9]))\\d{8}$";
-    public static final String EMAIL_REGEX_EXP =
-            "^[A-Za-z0-9-_\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+    public static final String EMAIL_REGEX_EXP = "^[A-Za-z0-9-_\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
 
     public static final HashMap<Integer, String> CHANNEL_REGEX_EXP = new HashMap<>();
 
@@ -63,8 +62,7 @@ public class AfterParamCheckAction implements BusinessProcess<SendTaskModel> {
         filterIllegalReceiver(taskInfo);
 
         if (CollUtil.isEmpty(taskInfo)) {
-            context.setNeedBreak(true)
-                    .setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
+            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
         }
     }
 
@@ -88,10 +86,9 @@ public class AfterParamCheckAction implements BusinessProcess<SendTaskModel> {
         Iterator<TaskInfo> iterator = taskInfo.iterator();
         while (iterator.hasNext()) {
             TaskInfo task = iterator.next();
-            Set<String> illegalPhone =
-                    task.getReceiver().stream()
-                            .filter(phone -> !ReUtil.isMatch(regexExp, phone))
-                            .collect(Collectors.toSet());
+            Set<String> illegalPhone = task.getReceiver().stream()
+                    .filter(phone -> !ReUtil.isMatch(regexExp, phone))
+                    .collect(Collectors.toSet());
 
             if (CollUtil.isNotEmpty(illegalPhone)) {
                 task.getReceiver().removeAll(illegalPhone);

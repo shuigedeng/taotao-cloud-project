@@ -34,9 +34,11 @@ import org.springframework.stereotype.Component;
 public class OnlineMemberStatistics implements EveryHourExecute {
 
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
     /** 统计小时 */
-    @Autowired private StatisticsProperties statisticsProperties;
+    @Autowired
+    private StatisticsProperties statisticsProperties;
 
     @Override
     public void execute() {
@@ -51,32 +53,26 @@ public class OnlineMemberStatistics implements EveryHourExecute {
         }
 
         // 过滤 有效统计时间
-        calendar.set(
-                Calendar.HOUR_OF_DAY,
-                calendar.get(Calendar.HOUR_OF_DAY) - statisticsProperties.getOnlineMember());
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - statisticsProperties.getOnlineMember());
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
         Calendar finalCalendar = calendar;
-        onlineMemberVOS =
-                onlineMemberVOS.stream()
-                        .filter(
-                                onlineMemberVO ->
-                                        onlineMemberVO.getDate().after(finalCalendar.getTime()))
-                        .collect(Collectors.toList());
+        onlineMemberVOS = onlineMemberVOS.stream()
+                .filter(onlineMemberVO -> onlineMemberVO.getDate().after(finalCalendar.getTime()))
+                .collect(Collectors.toList());
 
         // 计入新数据
         calendar = Calendar.getInstance();
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        onlineMemberVOS.add(
-                new OnlineMemberVO(
-                        calendar.getTime(),
-                        redisRepository
-                                .keys(CachePrefix.ACCESS_TOKEN.getPrefix(UserEnum.MEMBER) + "*")
-                                .size()));
+        onlineMemberVOS.add(new OnlineMemberVO(
+                calendar.getTime(),
+                redisRepository
+                        .keys(CachePrefix.ACCESS_TOKEN.getPrefix(UserEnum.MEMBER) + "*")
+                        .size()));
 
         // 写入缓存
         redisRepository.set(CachePrefix.ONLINE_MEMBER.getPrefix(), onlineMemberVOS);
@@ -105,12 +101,9 @@ public class OnlineMemberStatistics implements EveryHourExecute {
         calendar.set(Calendar.MILLISECOND, 0);
         calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 48);
 
-        onlineMemberVOS =
-                onlineMemberVOS.stream()
-                        .filter(
-                                onlineMemberVO ->
-                                        onlineMemberVO.getDate().after(calendar.getTime()))
-                        .collect(Collectors.toList());
+        onlineMemberVOS = onlineMemberVOS.stream()
+                .filter(onlineMemberVO -> onlineMemberVO.getDate().after(calendar.getTime()))
+                .collect(Collectors.toList());
         onlineMemberVOS.add(new OnlineMemberVO(time, num));
 
         // 写入缓存

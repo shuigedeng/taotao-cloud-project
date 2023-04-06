@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.authentication;
 
 import cn.hutool.core.collection.CollectionUtil;
@@ -35,35 +36,34 @@ import reactor.core.publisher.Mono;
  * @version 2022.03
  * @since 2020/4/29 22:10
  */
-public class GatewayServerAuthenticationSuccessHandler implements
-	ServerAuthenticationSuccessHandler {
+public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
 
-	@Override
-	public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange,
-		Authentication authentication) {
-		MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
-		Object principal = authentication.getPrincipal();
+    @Override
+    public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
+        MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
+        Object principal = authentication.getPrincipal();
 
-		if (principal instanceof SecurityUser) {
-			SecurityUser user = (SecurityUser) authentication.getPrincipal();
-			headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_ID_HEADER,
-				String.valueOf(user.getUserId()));
-			headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_HEADER, JSON.toJSONString(user));
-			headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_NAME_HEADER, user.getUsername());
-		}
+        if (principal instanceof SecurityUser) {
+            SecurityUser user = (SecurityUser) authentication.getPrincipal();
+            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_ID_HEADER, String.valueOf(user.getUserId()));
+            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_HEADER, JSON.toJSONString(user));
+            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_NAME_HEADER, user.getUsername());
+        }
 
-//        OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
-//        String clientId = oauth2Authentication.getOAuth2Request().getClientId();
-//        headerValues.add(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, clientId);
-		headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_ROLE_HEADER,
-			CollectionUtil.join(authentication.getAuthorities(), ","));
+        //        OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
+        //        String clientId = oauth2Authentication.getOAuth2Request().getClientId();
+        //        headerValues.add(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, clientId);
+        headerValues.add(
+                CommonConstant.TAOTAO_CLOUD_USER_ROLE_HEADER,
+                CollectionUtil.join(authentication.getAuthorities(), ","));
 
-		ServerWebExchange exchange = webFilterExchange.getExchange();
-		ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
-			.headers(h -> h.addAll(headerValues))
-			.build();
+        ServerWebExchange exchange = webFilterExchange.getExchange();
+        ServerHttpRequest serverHttpRequest = exchange.getRequest()
+                .mutate()
+                .headers(h -> h.addAll(headerValues))
+                .build();
 
-		ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
-		return webFilterExchange.getChain().filter(build);
-	}
+        ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
+        return webFilterExchange.getChain().filter(build);
+    }
 }

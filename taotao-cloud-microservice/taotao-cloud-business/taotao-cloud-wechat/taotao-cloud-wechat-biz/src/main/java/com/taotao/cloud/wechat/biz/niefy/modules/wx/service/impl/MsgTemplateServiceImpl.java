@@ -36,22 +36,21 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 @Service("msgTemplateService")
-public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTemplate>
-        implements MsgTemplateService {
-    @Autowired private WxMpService wxService;
+public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTemplate> implements MsgTemplateService {
+    @Autowired
+    private WxMpService wxService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String title = (String) params.get("title");
         String name = (String) params.get("name");
         String appid = (String) params.get("appid");
-        IPage<MsgTemplate> page =
-                this.page(
-                        new Query<MsgTemplate>().getPage(params),
-                        new QueryWrapper<MsgTemplate>()
-                                .eq(StringUtils.hasText(appid), "appid", appid)
-                                .like(StringUtils.hasText(title), "title", title)
-                                .like(StringUtils.hasText(name), "name", name));
+        IPage<MsgTemplate> page = this.page(
+                new Query<MsgTemplate>().getPage(params),
+                new QueryWrapper<MsgTemplate>()
+                        .eq(StringUtils.hasText(appid), "appid", appid)
+                        .like(StringUtils.hasText(title), "title", title)
+                        .like(StringUtils.hasText(name), "name", name));
 
         return new PageUtils(page);
     }
@@ -65,12 +64,10 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
 
     @Override
     public void syncWxTemplate(String appid) throws WxErrorException {
-        List<WxMpTemplate> wxMpTemplateList =
-                wxService.getTemplateMsgService().getAllPrivateTemplate();
-        List<MsgTemplate> templates =
-                wxMpTemplateList.stream()
-                        .map(item -> new MsgTemplate(item, appid))
-                        .collect(Collectors.toList());
+        List<WxMpTemplate> wxMpTemplateList = wxService.getTemplateMsgService().getAllPrivateTemplate();
+        List<MsgTemplate> templates = wxMpTemplateList.stream()
+                .map(item -> new MsgTemplate(item, appid))
+                .collect(Collectors.toList());
         this.saveBatch(templates);
     }
 }

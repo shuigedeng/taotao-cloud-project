@@ -65,9 +65,7 @@ public class OrderPaySeq extends BaseSuperEntity<OrderPaySeq, Long> {
     private String payerBankCode;
 
     /** 交易金额 */
-    @Column(
-            name = "actual_amount",
-            columnDefinition = "decimal(10,2) not null default 0 comment '交易金额'")
+    @Column(name = "actual_amount", columnDefinition = "decimal(10,2) not null default 0 comment '交易金额'")
     private BigDecimal actualAmount;
 
     /** 微信预支付ID */
@@ -87,9 +85,7 @@ public class OrderPaySeq extends BaseSuperEntity<OrderPaySeq, Long> {
     private String appId;
 
     /** 状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功 */
-    @Column(
-            name = "status",
-            columnDefinition = "int not null default 0 comment '状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功'")
+    @Column(name = "status", columnDefinition = "int not null default 0 comment '状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功'")
     private Integer status;
 
     /** 备注 */

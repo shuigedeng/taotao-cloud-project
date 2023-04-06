@@ -37,8 +37,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @TableName("pay_wechat_pay_config")
-public class WeChatPayConfig extends MpBaseEntity
-        implements EntityBaseFunction<WeChatPayConfigDto> {
+public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<WeChatPayConfigDto> {
 
     /** 名称 */
     private String name;

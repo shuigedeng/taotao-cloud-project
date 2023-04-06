@@ -47,8 +47,7 @@ public interface BpmProcessDefinitionService {
      * @param pageReqVO 分页入参
      * @return 流程定义 Page
      */
-    PageResult<BpmProcessDefinitionPageItemRespVO> getProcessDefinitionPage(
-            BpmProcessDefinitionPageReqVO pageReqVO);
+    PageResult<BpmProcessDefinitionPageItemRespVO> getProcessDefinitionPage(BpmProcessDefinitionPageReqVO pageReqVO);
 
     /**
      * 获得流程定义列表
@@ -56,8 +55,7 @@ public interface BpmProcessDefinitionService {
      * @param listReqVO 列表入参
      * @return 流程定义列表
      */
-    List<BpmProcessDefinitionRespVO> getProcessDefinitionList(
-            BpmProcessDefinitionListReqVO listReqVO);
+    List<BpmProcessDefinitionRespVO> getProcessDefinitionList(BpmProcessDefinitionListReqVO listReqVO);
 
     /**
      * 创建流程定义

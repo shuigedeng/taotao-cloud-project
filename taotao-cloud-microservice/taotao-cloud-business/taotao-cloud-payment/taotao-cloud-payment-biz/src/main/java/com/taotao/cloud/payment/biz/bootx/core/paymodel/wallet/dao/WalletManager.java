@@ -79,7 +79,10 @@ public class WalletManager extends BaseManager<WalletMapper, Wallet> {
 
     /** 更新钱包状态 */
     public void setUpStatus(Long walletId, int status) {
-        lambdaUpdate().eq(Wallet::getId, walletId).set(Wallet::getStatus, status).update();
+        lambdaUpdate()
+                .eq(Wallet::getId, walletId)
+                .set(Wallet::getStatus, status)
+                .update();
     }
 
     /** 用户钱包是否存在 */
@@ -105,24 +108,14 @@ public class WalletManager extends BaseManager<WalletMapper, Wallet> {
         QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
         wrapper.isNull("w.id")
                 .orderByDesc("w.id")
-                .like(
-                        StrUtil.isNotBlank(userInfoParam.getUsername()),
-                        "w.username",
-                        userInfoParam.getUsername())
-                .like(
-                        StrUtil.isNotBlank(userInfoParam.getName()),
-                        "w.name",
-                        userInfoParam.getName());
+                .like(StrUtil.isNotBlank(userInfoParam.getUsername()), "w.username", userInfoParam.getUsername())
+                .like(StrUtil.isNotBlank(userInfoParam.getName()), "w.name", userInfoParam.getName());
         return walletMapper.pageByNotWallet(mpPage, wrapper);
     }
 
     /** 查询已经存在钱包的用户id */
     public List<Long> findExistUserIds(List<Long> userIds) {
-        return this.lambdaQuery()
-                .select(Wallet::getUserId)
-                .in(Wallet::getUserId, userIds)
-                .list()
-                .stream()
+        return this.lambdaQuery().select(Wallet::getUserId).in(Wallet::getUserId, userIds).list().stream()
                 .map(Wallet::getUserId)
                 .collect(Collectors.toList());
     }

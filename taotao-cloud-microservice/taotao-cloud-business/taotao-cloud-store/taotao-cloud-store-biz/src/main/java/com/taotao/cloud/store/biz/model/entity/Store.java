@@ -72,9 +72,7 @@ public class Store extends BaseSuperEntity<Store, Long> {
     @Column(name = "store_disable", columnDefinition = "varchar(64) not null comment '店铺状态'")
     private String storeDisable;
 
-    @Column(
-            name = "self_operated",
-            columnDefinition = "boolean not null default true comment '是否自营'")
+    @Column(name = "self_operated", columnDefinition = "boolean not null default true comment '是否自营'")
     private Boolean selfOperated;
 
     @Column(name = "store_logo", columnDefinition = "varchar(64) not null comment '店铺logo'")
@@ -86,32 +84,22 @@ public class Store extends BaseSuperEntity<Store, Long> {
     @Column(name = "store_desc", columnDefinition = "varchar(64) not null comment '店铺简介'")
     private String storeDesc;
 
-    @Column(
-            name = "store_address_path",
-            columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
+    @Column(name = "store_address_path", columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
     private String storeAddressPath;
 
-    @Column(
-            name = "store_address_id_path",
-            columnDefinition = "varchar(64) not null comment '地址id 逗号分割 '")
+    @Column(name = "store_address_id_path", columnDefinition = "varchar(64) not null comment '地址id 逗号分割 '")
     private String storeAddressIdPath;
 
     @Column(name = "store_address_detail", columnDefinition = "varchar(64) not null comment '详细地址'")
     private String storeAddressDetail;
 
-    @Column(
-            name = "description_score",
-            columnDefinition = "decimal(10,2) not null default 0 comment '描述评分'")
+    @Column(name = "description_score", columnDefinition = "decimal(10,2) not null default 0 comment '描述评分'")
     private BigDecimal descriptionScore;
 
-    @Column(
-            name = "service_score",
-            columnDefinition = "decimal(10,2) not null default 0 comment '服务评分'")
+    @Column(name = "service_score", columnDefinition = "decimal(10,2) not null default 0 comment '服务评分'")
     private BigDecimal serviceScore;
 
-    @Column(
-            name = "delivery_score",
-            columnDefinition = "decimal(10,2) not null default 0 comment '交付分数'")
+    @Column(name = "delivery_score", columnDefinition = "decimal(10,2) not null default 0 comment '交付分数'")
     private BigDecimal deliveryScore;
 
     @Column(name = "goods_num", columnDefinition = "int not null default 0 comment '商品数量'")

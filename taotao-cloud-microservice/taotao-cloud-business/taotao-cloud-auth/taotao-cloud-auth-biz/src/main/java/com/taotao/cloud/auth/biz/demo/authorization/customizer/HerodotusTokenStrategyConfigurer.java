@@ -55,16 +55,14 @@ public class HerodotusTokenStrategyConfigurer {
         this.endpointProperties = endpointProperties;
         this.resourceServerProperties = resourceServerProperties;
         this.opaqueTokenIntrospector =
-                new HerodotusOpaqueTokenIntrospector(
-                        this.endpointProperties, this.resourceServerProperties);
+                new HerodotusOpaqueTokenIntrospector(this.endpointProperties, this.resourceServerProperties);
     }
 
     private boolean isRemoteValidate() {
         return this.securityProperties.getValidate() == Target.REMOTE;
     }
 
-    public OAuth2ResourceServerConfigurer<HttpSecurity> from(
-            OAuth2ResourceServerConfigurer<HttpSecurity> configurer) {
+    public OAuth2ResourceServerConfigurer<HttpSecurity> from(OAuth2ResourceServerConfigurer<HttpSecurity> configurer) {
         if (isRemoteValidate()) {
             configurer
                     .opaqueToken(opaque -> opaque.introspector(opaqueTokenIntrospector))
@@ -72,11 +70,8 @@ public class HerodotusTokenStrategyConfigurer {
                     .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
         } else {
             configurer
-                    .jwt(
-                            jwt ->
-                                    jwt.decoder(this.jwtDecoder)
-                                            .jwtAuthenticationConverter(
-                                                    new HerodotusJwtAuthenticationConverter()))
+                    .jwt(jwt -> jwt.decoder(this.jwtDecoder)
+                            .jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
                     .bearerTokenResolver(new DefaultBearerTokenResolver())
                     .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                     .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
@@ -85,7 +80,6 @@ public class HerodotusTokenStrategyConfigurer {
     }
 
     public BearerTokenResolver createBearerTokenResolver() {
-        return new HerodotusBearerTokenResolver(
-                this.jwtDecoder, this.opaqueTokenIntrospector, this.isRemoteValidate());
+        return new HerodotusBearerTokenResolver(this.jwtDecoder, this.opaqueTokenIntrospector, this.isRemoteValidate());
     }
 }

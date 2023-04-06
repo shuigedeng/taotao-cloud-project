@@ -56,8 +56,7 @@ public class CommonController extends AbstractCtrl {
     @RequestMapping(value = "/payUrl/{payData}")
     private String toPayUrl(@PathVariable("payData") String payData) {
         String payUrl = Base64.decodeStr(payData);
-        request.setAttribute(
-                "payHtml", "<script>window.location.href = '" + payUrl + "';</script>");
+        request.setAttribute("payHtml", "<script>window.location.href = '" + payUrl + "';</script>");
         return "common/toPay";
     }
 }

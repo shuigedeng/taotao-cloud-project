@@ -74,8 +74,7 @@ public class QueryUtils {
         return queryWrapper;
     }
 
-    private static <T> void betweenWrapper(
-            QueryWrapper<T> queryWrapper, AfterSalePageQuery afterSalePageQuery) {
+    private static <T> void betweenWrapper(QueryWrapper<T> queryWrapper, AfterSalePageQuery afterSalePageQuery) {
         if (StringUtils.isNotEmpty(afterSalePageQuery.getApplyRefundPrice())) {
             String[] s = afterSalePageQuery.getApplyRefundPrice().split("_");
             if (s.length > 1) {

@@ -46,13 +46,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class MsgReplyServiceImpl implements MsgReplyService {
-    @Autowired MsgReplyRuleService msgReplyRuleService;
-    @Autowired WxMpService wxMpService;
+    @Autowired
+    MsgReplyRuleService msgReplyRuleService;
+
+    @Autowired
+    WxMpService wxMpService;
 
     @Value("${wx.mp.autoReplyInterval:1000}")
     Long autoReplyInterval;
 
-    @Autowired WxMsgService wxMsgService;
+    @Autowired
+    WxMsgService wxMsgService;
 
     /**
      * 根据规则配置通过微信客服消息接口自动回复消息
@@ -66,8 +70,7 @@ public class MsgReplyServiceImpl implements MsgReplyService {
     @Override
     public boolean tryAutoReply(String appid, boolean exactMatch, String toUser, String keywords) {
         try {
-            List<MsgReplyRule> rules =
-                    msgReplyRuleService.getMatchedRules(appid, exactMatch, keywords);
+            List<MsgReplyRule> rules = msgReplyRuleService.getMatchedRules(appid, exactMatch, keywords);
             if (rules.isEmpty()) {
                 return false;
             }
@@ -93,7 +96,8 @@ public class MsgReplyServiceImpl implements MsgReplyService {
     public void replyText(String toUser, String content) throws WxErrorException {
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(WxMpKefuMessage.TEXT().toUser(toUser).content(content).build());
+                .sendKefuMessage(
+                        WxMpKefuMessage.TEXT().toUser(toUser).content(content).build());
 
         JSONObject json = new JSONObject().fluentPut("content", content);
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.TEXT, toUser, json));
@@ -103,7 +107,8 @@ public class MsgReplyServiceImpl implements MsgReplyService {
     public void replyImage(String toUser, String mediaId) throws WxErrorException {
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(WxMpKefuMessage.IMAGE().toUser(toUser).mediaId(mediaId).build());
+                .sendKefuMessage(
+                        WxMpKefuMessage.IMAGE().toUser(toUser).mediaId(mediaId).build());
 
         JSONObject json = new JSONObject().fluentPut("mediaId", mediaId);
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.IMAGE, toUser, json));
@@ -113,7 +118,8 @@ public class MsgReplyServiceImpl implements MsgReplyService {
     public void replyVoice(String toUser, String mediaId) throws WxErrorException {
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(WxMpKefuMessage.VOICE().toUser(toUser).mediaId(mediaId).build());
+                .sendKefuMessage(
+                        WxMpKefuMessage.VOICE().toUser(toUser).mediaId(mediaId).build());
 
         JSONObject json = new JSONObject().fluentPut("mediaId", mediaId);
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.VOICE, toUser, json));
@@ -123,7 +129,8 @@ public class MsgReplyServiceImpl implements MsgReplyService {
     public void replyVideo(String toUser, String mediaId) throws WxErrorException {
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(WxMpKefuMessage.VIDEO().toUser(toUser).mediaId(mediaId).build());
+                .sendKefuMessage(
+                        WxMpKefuMessage.VIDEO().toUser(toUser).mediaId(mediaId).build());
 
         JSONObject json = new JSONObject().fluentPut("mediaId", mediaId);
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.VIDEO, toUser, json));
@@ -134,15 +141,14 @@ public class MsgReplyServiceImpl implements MsgReplyService {
         JSONObject json = JSON.parseObject(musicInfoJson);
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(
-                        WxMpKefuMessage.MUSIC()
-                                .toUser(toUser)
-                                .musicUrl(json.getString("musicurl"))
-                                .hqMusicUrl(json.getString("hqmusicurl"))
-                                .title(json.getString("title"))
-                                .description(json.getString("description"))
-                                .thumbMediaId(json.getString("thumb_media_id"))
-                                .build());
+                .sendKefuMessage(WxMpKefuMessage.MUSIC()
+                        .toUser(toUser)
+                        .musicUrl(json.getString("musicurl"))
+                        .hqMusicUrl(json.getString("hqmusicurl"))
+                        .title(json.getString("title"))
+                        .description(json.getString("description"))
+                        .thumbMediaId(json.getString("thumb_media_id"))
+                        .build());
 
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.IMAGE, toUser, json));
     }
@@ -156,21 +162,18 @@ public class MsgReplyServiceImpl implements MsgReplyService {
      */
     @Override
     public void replyNews(String toUser, String newsInfoJson) throws WxErrorException {
-        WxMpKefuMessage.WxArticle wxArticle =
-                JSON.parseObject(newsInfoJson, WxMpKefuMessage.WxArticle.class);
-        List<WxMpKefuMessage.WxArticle> newsList =
-                new ArrayList<WxMpKefuMessage.WxArticle>() {
-                    {
-                        add(wxArticle);
-                    }
-                };
+        WxMpKefuMessage.WxArticle wxArticle = JSON.parseObject(newsInfoJson, WxMpKefuMessage.WxArticle.class);
+        List<WxMpKefuMessage.WxArticle> newsList = new ArrayList<WxMpKefuMessage.WxArticle>() {
+            {
+                add(wxArticle);
+            }
+        };
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(WxMpKefuMessage.NEWS().toUser(toUser).articles(newsList).build());
+                .sendKefuMessage(
+                        WxMpKefuMessage.NEWS().toUser(toUser).articles(newsList).build());
 
-        wxMsgService.addWxMsg(
-                WxMsg.buildOutMsg(
-                        WxConsts.KefuMsgType.NEWS, toUser, JSON.parseObject(newsInfoJson)));
+        wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.NEWS, toUser, JSON.parseObject(newsInfoJson)));
     }
 
     /**
@@ -184,7 +187,8 @@ public class MsgReplyServiceImpl implements MsgReplyService {
     public void replyMpNews(String toUser, String mediaId) throws WxErrorException {
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(WxMpKefuMessage.MPNEWS().toUser(toUser).mediaId(mediaId).build());
+                .sendKefuMessage(
+                        WxMpKefuMessage.MPNEWS().toUser(toUser).mediaId(mediaId).build());
 
         JSONObject json = new JSONObject().fluentPut("mediaId", mediaId);
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.MPNEWS, toUser, json));
@@ -194,26 +198,25 @@ public class MsgReplyServiceImpl implements MsgReplyService {
     public void replyWxCard(String toUser, String cardId) throws WxErrorException {
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(WxMpKefuMessage.WXCARD().toUser(toUser).cardId(cardId).build());
+                .sendKefuMessage(
+                        WxMpKefuMessage.WXCARD().toUser(toUser).cardId(cardId).build());
 
         JSONObject json = new JSONObject().fluentPut("cardId", cardId);
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.WXCARD, toUser, json));
     }
 
     @Override
-    public void replyMiniProgram(String toUser, String miniProgramInfoJson)
-            throws WxErrorException {
+    public void replyMiniProgram(String toUser, String miniProgramInfoJson) throws WxErrorException {
         JSONObject json = JSON.parseObject(miniProgramInfoJson);
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(
-                        WxMpKefuMessage.MINIPROGRAMPAGE()
-                                .toUser(toUser)
-                                .title(json.getString("title"))
-                                .appId(json.getString("appid"))
-                                .pagePath(json.getString("pagepath"))
-                                .thumbMediaId(json.getString("thumb_media_id"))
-                                .build());
+                .sendKefuMessage(WxMpKefuMessage.MINIPROGRAMPAGE()
+                        .toUser(toUser)
+                        .title(json.getString("title"))
+                        .appId(json.getString("appid"))
+                        .pagePath(json.getString("pagepath"))
+                        .thumbMediaId(json.getString("thumb_media_id"))
+                        .build());
 
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.IMAGE, toUser, json));
     }
@@ -221,17 +224,15 @@ public class MsgReplyServiceImpl implements MsgReplyService {
     @Override
     public void replyMsgMenu(String toUser, String msgMenusJson) throws WxErrorException {
         JSONObject json = JSON.parseObject(msgMenusJson);
-        List<WxMpKefuMessage.MsgMenu> msgMenus =
-                JSON.parseArray(json.getString("list"), WxMpKefuMessage.MsgMenu.class);
+        List<WxMpKefuMessage.MsgMenu> msgMenus = JSON.parseArray(json.getString("list"), WxMpKefuMessage.MsgMenu.class);
         wxMpService
                 .getKefuService()
-                .sendKefuMessage(
-                        WxMpKefuMessage.MSGMENU()
-                                .toUser(toUser)
-                                .headContent(json.getString("head_content"))
-                                .tailContent(json.getString("tail_content"))
-                                .msgMenus(msgMenus)
-                                .build());
+                .sendKefuMessage(WxMpKefuMessage.MSGMENU()
+                        .toUser(toUser)
+                        .headContent(json.getString("head_content"))
+                        .tailContent(json.getString("tail_content"))
+                        .msgMenus(msgMenus)
+                        .build());
 
         wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.IMAGE, toUser, json));
     }

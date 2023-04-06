@@ -54,11 +54,7 @@ public class BpmModelPageItemRespVO extends BpmModelBaseVO {
         @ApiModelProperty(value = "部署时间", required = true)
         private LocalDateTime deploymentTime;
 
-        @ApiModelProperty(
-                value = "中断状态",
-                required = true,
-                example = "1",
-                notes = "参见 SuspensionState 枚举")
+        @ApiModelProperty(value = "中断状态", required = true, example = "1", notes = "参见 SuspensionState 枚举")
         private Integer suspensionState;
     }
 }

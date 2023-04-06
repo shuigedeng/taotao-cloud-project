@@ -99,8 +99,7 @@ public class DesUtil {
      * @param isEncode
      * @return
      */
-    private static String keyGeneratorEs(
-            String res, String algorithm, String key, int keysize, boolean isEncode) {
+    private static String keyGeneratorEs(String res, String algorithm, String key, int keysize, boolean isEncode) {
         try {
             SecretKeySpec sks = null;
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");

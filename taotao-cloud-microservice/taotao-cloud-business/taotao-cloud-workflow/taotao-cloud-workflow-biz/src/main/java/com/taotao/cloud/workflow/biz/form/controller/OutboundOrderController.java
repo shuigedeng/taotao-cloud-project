@@ -42,8 +42,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/OutboundOrder")
 public class OutboundOrderController {
 
-    @Autowired private OutboundOrderService outboundOrderService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private OutboundOrderService outboundOrderService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取出库单信息
@@ -53,17 +56,14 @@ public class OutboundOrderController {
      */
     @Operation("获取出库单信息")
     @GetMapping("/{id}")
-    public Result<OutboundOrderInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<OutboundOrderInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         OutboundOrderInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), OutboundOrderInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), OutboundOrderInfoVO.class);
                     isData = false;
                 }
             }
@@ -72,8 +72,7 @@ public class OutboundOrderController {
             OutboundOrderEntity entity = outboundOrderService.getInfo(id);
             List<OutboundEntryEntity> entityList = outboundOrderService.getOutboundEntryList(id);
             vo = JsonUtils.getJsonToBean(entity, OutboundOrderInfoVO.class);
-            vo.setEntryList(
-                    JsonUtils.getJsonToList(entityList, OutboundEntryEntityInfoModel.class));
+            vo.setEntryList(JsonUtils.getJsonToList(entityList, OutboundEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -87,22 +86,16 @@ public class OutboundOrderController {
      */
     @Operation("新建出库单")
     @PostMapping
-    public Result create(@RequestBody OutboundOrderForm outboundOrderForm)
-            throws WorkFlowException {
-        OutboundOrderEntity outbound =
-                JsonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
+    public Result create(@RequestBody OutboundOrderForm outboundOrderForm) throws WorkFlowException {
+        OutboundOrderEntity outbound = JsonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
         List<OutboundEntryEntity> outboundEntryList =
-                JsonUtils.getJsonToList(
-                        outboundOrderForm.getEntryList(), OutboundEntryEntity.class);
+                JsonUtils.getJsonToList(outboundOrderForm.getEntryList(), OutboundEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(outboundOrderForm.getStatus())) {
             outboundOrderService.save(outbound.getId(), outbound, outboundEntryList);
             return Result.success(MsgCode.SU002.get());
         }
         outboundOrderService.submit(
-                outbound.getId(),
-                outbound,
-                outboundEntryList,
-                outboundOrderForm.getCandidateList());
+                outbound.getId(), outbound, outboundEntryList, outboundOrderForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -116,20 +109,16 @@ public class OutboundOrderController {
      */
     @Operation("修改出库单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody OutboundOrderForm outboundOrderForm, @PathVariable("id") String id)
+    public Result update(@RequestBody OutboundOrderForm outboundOrderForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        OutboundOrderEntity outbound =
-                JsonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
+        OutboundOrderEntity outbound = JsonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
         List<OutboundEntryEntity> outboundEntryList =
-                JsonUtils.getJsonToList(
-                        outboundOrderForm.getEntryList(), OutboundEntryEntity.class);
+                JsonUtils.getJsonToList(outboundOrderForm.getEntryList(), OutboundEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(outboundOrderForm.getStatus())) {
             outboundOrderService.save(id, outbound, outboundEntryList);
             return Result.success(MsgCode.SU002.get());
         }
-        outboundOrderService.submit(
-                id, outbound, outboundEntryList, outboundOrderForm.getCandidateList());
+        outboundOrderService.submit(id, outbound, outboundEntryList, outboundOrderForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 }

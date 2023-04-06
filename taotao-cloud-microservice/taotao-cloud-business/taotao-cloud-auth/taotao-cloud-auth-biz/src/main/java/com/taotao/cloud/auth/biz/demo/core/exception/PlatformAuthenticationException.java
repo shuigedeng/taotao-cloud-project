@@ -27,8 +27,7 @@ import org.springframework.security.core.AuthenticationException;
  * @author : gengwei.zheng
  * @date : 2021/10/16 14:41
  */
-public class PlatformAuthenticationException extends AuthenticationException
-        implements HerodotusException {
+public class PlatformAuthenticationException extends AuthenticationException implements HerodotusException {
 
     public PlatformAuthenticationException(String msg, Throwable cause) {
         super(msg, cause);

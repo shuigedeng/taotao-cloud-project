@@ -105,10 +105,10 @@ public class PaypalWrapper {
      * @return
      * @throws IOException
      */
-    public ChannelRetMsg processOrder(String token, PayOrder payOrder, boolean isCapture)
-            throws IOException {
+    public ChannelRetMsg processOrder(String token, PayOrder payOrder, boolean isCapture) throws IOException {
         // Paypal 创建订单存在一个 Token，当订单捕获之后会有一个 捕获的ID ，退款需要用到
-        String ppOrderId = this.processOrder(payOrder.getChannelOrderNo(), token).get(0);
+        String ppOrderId =
+                this.processOrder(payOrder.getChannelOrderNo(), token).get(0);
         String ppCatptId = this.processOrder(payOrder.getChannelOrderNo()).get(1);
 
         ChannelRetMsg channelRetMsg = ChannelRetMsg.waiting();
@@ -215,12 +215,10 @@ public class PaypalWrapper {
     public static PaypalWrapper buildPaypalWrapper(PpPayNormalMchParams ppPayNormalMchParams) {
         PaypalWrapper paypalWrapper = new PaypalWrapper();
         PayPalEnvironment environment =
-                new PayPalEnvironment.Live(
-                        ppPayNormalMchParams.getClientId(), ppPayNormalMchParams.getSecret());
+                new PayPalEnvironment.Live(ppPayNormalMchParams.getClientId(), ppPayNormalMchParams.getSecret());
         if (ppPayNormalMchParams.getSandbox() == 1) {
             environment =
-                    new PayPalEnvironment.Sandbox(
-                            ppPayNormalMchParams.getClientId(), ppPayNormalMchParams.getSecret());
+                    new PayPalEnvironment.Sandbox(ppPayNormalMchParams.getClientId(), ppPayNormalMchParams.getSecret());
         }
         paypalWrapper.setEnvironment(environment);
         paypalWrapper.setClient(new PayPalHttpClient(environment));

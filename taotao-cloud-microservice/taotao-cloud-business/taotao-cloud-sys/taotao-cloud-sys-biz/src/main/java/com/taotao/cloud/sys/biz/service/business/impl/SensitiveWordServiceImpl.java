@@ -34,11 +34,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class SensitiveWordServiceImpl
         extends BaseSuperServiceImpl<
-                ISensitiveWordMapper,
-                SensitiveWord,
-                SensitiveWordRepository,
-                ISensitiveWordRepository,
-                Long>
+                ISensitiveWordMapper, SensitiveWord, SensitiveWordRepository, ISensitiveWordRepository, Long>
         implements ISensitiveWordService {
 
     private final RedisRepository redisRepository;
@@ -50,9 +46,7 @@ public class SensitiveWordServiceImpl
             return;
         }
         List<String> sensitiveWords =
-                sensitiveWordsList.stream()
-                        .map(SensitiveWord::getSensitiveWord)
-                        .collect(Collectors.toList());
+                sensitiveWordsList.stream().map(SensitiveWord::getSensitiveWord).collect(Collectors.toList());
 
         redisRepository.set(RedisConstant.SENSITIVE_WORDS_KEY, sensitiveWords);
     }

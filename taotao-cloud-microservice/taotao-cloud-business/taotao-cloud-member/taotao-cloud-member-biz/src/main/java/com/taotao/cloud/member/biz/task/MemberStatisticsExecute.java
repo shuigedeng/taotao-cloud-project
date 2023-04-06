@@ -30,7 +30,8 @@ import org.springframework.stereotype.Component;
 public class MemberStatisticsExecute implements EveryDayExecute {
 
     /** 会员统计 */
-    @Autowired private IFeignMemberStatisticsApi memberStatisticsService;
+    @Autowired
+    private IFeignMemberStatisticsApi memberStatisticsService;
 
     @Override
     public void execute() {
@@ -51,10 +52,8 @@ public class MemberStatisticsExecute implements EveryDayExecute {
             MemberStatisticsDTO memberStatisticsData = new MemberStatisticsDTO();
             memberStatisticsData.setMemberCount(memberStatisticsService.memberCount(endTime));
             memberStatisticsData.setCreateDate(startTime);
-            memberStatisticsData.setActiveQuantity(
-                    memberStatisticsService.activeQuantity(startTime));
-            memberStatisticsData.setNewlyAdded(
-                    memberStatisticsService.newlyAdded(startTime, endTime));
+            memberStatisticsData.setActiveQuantity(memberStatisticsService.activeQuantity(startTime));
+            memberStatisticsData.setNewlyAdded(memberStatisticsService.newlyAdded(startTime, endTime));
             memberStatisticsService.saveMemberStatistics(memberStatisticsData);
         } catch (Exception e) {
             LogUtils.error("每日会员统计功能异常：", e);

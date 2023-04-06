@@ -36,7 +36,8 @@ public final class RedisUtil {
 
     private static Logger logger = LoggerFactory.getLogger(RedisUtil.class);
 
-    @Autowired private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     // =============================common============================
 
@@ -185,25 +186,23 @@ public final class RedisUtil {
      */
     public boolean setAsync(String key, Object value, long time, TimeUnit timeUnit) {
         SimpleAsyncExec simpleAsyncExec = SimpleAsyncExec.getInstance();
-        Boolean flag =
-                simpleAsyncExec.exec(
-                        new Callable() {
-                            @Override
-                            public Boolean call() throws Exception {
-                                try {
-                                    if (time > 0) {
-                                        redisTemplate.opsForValue().set(key, value, time, timeUnit);
-                                    } else {
-                                        set(key, value);
-                                    }
-                                    return true;
+        Boolean flag = simpleAsyncExec.exec(new Callable() {
+            @Override
+            public Boolean call() throws Exception {
+                try {
+                    if (time > 0) {
+                        redisTemplate.opsForValue().set(key, value, time, timeUnit);
+                    } else {
+                        set(key, value);
+                    }
+                    return true;
 
-                                } catch (Exception e) {
-                                    logger.error("set setAsync:" + e.getMessage(), e);
-                                    return false;
-                                }
-                            }
-                        });
+                } catch (Exception e) {
+                    logger.error("set setAsync:" + e.getMessage(), e);
+                    return false;
+                }
+            }
+        });
 
         return flag;
     }
@@ -670,18 +669,15 @@ public final class RedisUtil {
      * @param consumer 对迭代到的key进行操作
      */
     public void scan(String pattern, Consumer<byte[]> consumer) {
-        redisTemplate.execute(
-                (RedisConnection connection) -> {
-                    try (Cursor<byte[]> cursor =
-                            connection.scan(
-                                    ScanOptions.scanOptions()
-                                            .count(Long.MAX_VALUE)
-                                            .match(pattern)
-                                            .build())) {
-                        cursor.forEachRemaining(consumer);
-                        return null;
-                    }
-                });
+        redisTemplate.execute((RedisConnection connection) -> {
+            try (Cursor<byte[]> cursor = connection.scan(ScanOptions.scanOptions()
+                    .count(Long.MAX_VALUE)
+                    .match(pattern)
+                    .build())) {
+                cursor.forEachRemaining(consumer);
+                return null;
+            }
+        });
     }
 
     /**
@@ -692,13 +688,11 @@ public final class RedisUtil {
      */
     public List<String> keys(String pattern) {
         List<String> keys = new ArrayList<>();
-        this.scan(
-                pattern,
-                item -> {
-                    // 符合条件的key
-                    String key = new String(item, StandardCharsets.UTF_8);
-                    keys.add(key);
-                });
+        this.scan(pattern, item -> {
+            // 符合条件的key
+            String key = new String(item, StandardCharsets.UTF_8);
+            keys.add(key);
+        });
         return keys;
     }
 

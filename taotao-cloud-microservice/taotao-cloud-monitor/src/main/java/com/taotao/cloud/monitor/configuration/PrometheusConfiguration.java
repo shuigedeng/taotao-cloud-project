@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.monitor.configuration;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.api.PrometheusApi;
 import com.taotao.cloud.monitor.api.ReactivePrometheusApi;
 import com.taotao.cloud.monitor.model.AlertMessage;
 import com.taotao.cloud.monitor.properties.PrometheusProperties;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -79,40 +79,36 @@ import org.springframework.scheduling.annotation.Async;
 @ConditionalOnProperty(prefix = PrometheusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class PrometheusConfiguration {
 
-	@Configuration
-	@ConditionalOnBean(DiscoveryClient.class)
-	@ConditionalOnDiscoveryEnabled
-	//@ConditionalOnBlockingDiscoveryEnabled
-	//@ConditionalOnProperty(value = "spring.cloud.discovery.blocking.enabled")
-	public static class PrometheusApiConfiguration {
+    @Configuration
+    @ConditionalOnBean(DiscoveryClient.class)
+    @ConditionalOnDiscoveryEnabled
+    // @ConditionalOnBlockingDiscoveryEnabled
+    // @ConditionalOnProperty(value = "spring.cloud.discovery.blocking.enabled")
+    public static class PrometheusApiConfiguration {
 
-		@Bean
-		public PrometheusApi prometheusApi(DiscoveryClient discoveryClient,
-                                           ApplicationEventPublisher eventPublisher) {
-			return new PrometheusApi(discoveryClient, eventPublisher);
-		}
+        @Bean
+        public PrometheusApi prometheusApi(DiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
+            return new PrometheusApi(discoveryClient, eventPublisher);
+        }
 
-		@Async
-		@EventListener
-		public void onAlertEvent(AlertMessage message) {
-			// 处理 alert webhook message
-			LogUtils.info(message.toString());
-		}
+        @Async
+        @EventListener
+        public void onAlertEvent(AlertMessage message) {
+            // 处理 alert webhook message
+            LogUtils.info(message.toString());
+        }
+    }
 
-	}
+    @Configuration
+    @ConditionalOnBean(ReactiveDiscoveryClient.class)
+    @ConditionalOnDiscoveryEnabled
+    @ConditionalOnReactiveDiscoveryEnabled
+    public static class ReactivePrometheusApiConfiguration {
 
-	@Configuration
-	@ConditionalOnBean(ReactiveDiscoveryClient.class)
-	@ConditionalOnDiscoveryEnabled
-	@ConditionalOnReactiveDiscoveryEnabled
-	public static class ReactivePrometheusApiConfiguration {
-
-		@Bean
-		public ReactivePrometheusApi reactivePrometheusApi(ReactiveDiscoveryClient discoveryClient,
-                                                           ApplicationEventPublisher eventPublisher) {
-			return new ReactivePrometheusApi(discoveryClient, eventPublisher);
-		}
-
-	}
-
+        @Bean
+        public ReactivePrometheusApi reactivePrometheusApi(
+                ReactiveDiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
+            return new ReactivePrometheusApi(discoveryClient, eventPublisher);
+        }
+    }
 }

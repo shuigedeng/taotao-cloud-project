@@ -44,8 +44,7 @@ public class DbSQLServer extends DbBase {
     }
 
     @Override
-    public DbTableFieldModel getPartFieldModel(ResultSet result)
-            throws SQLException, DataException {
+    public DbTableFieldModel getPartFieldModel(ResultSet result) throws SQLException, DataException {
         DbTableFieldModel model = new DbTableFieldModel();
         /*  Text 和 Image 是可能被 SQServer 以后的版本淘汰的数据类型
         varchar(max)-------text;

@@ -54,16 +54,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMapper, FreightTemplate>
         implements IFreightTemplateService {
     /** 配送子模板 */
-    @Autowired private IFreightTemplateChildService freightTemplateChildService;
+    @Autowired
+    private IFreightTemplateChildService freightTemplateChildService;
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     @Override
     public List<FreightTemplateInfoVO> getFreightTemplateList(String storeId) {
         // 先从缓存中获取运费模板，如果有则直接返回，如果没有则查询数据后再返回
         List<FreightTemplateInfoVO> list =
-                (List<FreightTemplateInfoVO>)
-                        redisRepository.get(CachePrefix.SHIP_TEMPLATE.getPrefix() + storeId);
+                (List<FreightTemplateInfoVO>) redisRepository.get(CachePrefix.SHIP_TEMPLATE.getPrefix() + storeId);
         if (list != null) {
             return list;
         }
@@ -78,14 +79,12 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
                 FreightTemplateInfoVO freightTemplateInfoVO = new FreightTemplateInfoVO();
                 BeanUtils.copyProperties(freightTemplate, freightTemplateInfoVO);
                 List<FreightTemplateChild> freightTemplateChildren =
-                        freightTemplateChildService.getFreightTemplateChild(
-                                freightTemplate.getId());
+                        freightTemplateChildService.getFreightTemplateChild(freightTemplate.getId());
                 if (!freightTemplateChildren.isEmpty()) {
 
                     freightTemplateInfoVO.setFreightTemplateChildList(
                             IFreightTemplateChildMapStruct.INSTANCE
-                                    .freightTemplateChildListToFreightTemplateChildVoList(
-                                            freightTemplateChildren));
+                                    .freightTemplateChildListToFreightTemplateChildVoList(freightTemplateChildren));
                 }
                 list.add(freightTemplateInfoVO);
             }
@@ -109,15 +108,13 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
         FreightTemplate freightTemplate = this.getById(id);
         if (freightTemplate != null) {
             // 复制属性
-            org.springframework.beans.BeanUtils.copyProperties(
-                    freightTemplate, freightTemplateInfoVO);
+            org.springframework.beans.BeanUtils.copyProperties(freightTemplate, freightTemplateInfoVO);
             // 填写运费模板子内容
             List<FreightTemplateChild> freightTemplateChildList =
                     freightTemplateChildService.getFreightTemplateChild(id);
             freightTemplateInfoVO.setFreightTemplateChildList(
-                    IFreightTemplateChildMapStruct.INSTANCE
-                            .freightTemplateChildListToFreightTemplateChildVoList(
-                                    freightTemplateChildList));
+                    IFreightTemplateChildMapStruct.INSTANCE.freightTemplateChildListToFreightTemplateChildVoList(
+                            freightTemplateChildList));
         }
         return freightTemplateInfoVO;
     }
@@ -137,14 +134,12 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
         List<FreightTemplateChildVO> list = new ArrayList<>();
         // 如果子运费模板不为空则进行新增
         if (freightTemplateInfoVO.getFreightTemplateChildList() != null) {
-            for (FreightTemplateChildVO freightTemplateChild :
-                    freightTemplateInfoVO.getFreightTemplateChildList()) {
+            for (FreightTemplateChildVO freightTemplateChild : freightTemplateInfoVO.getFreightTemplateChildList()) {
                 freightTemplateChild.setFreightTemplateId(freightTemplate.getId());
                 list.add(freightTemplateChild);
             }
             List<FreightTemplateChild> freightTemplateChildren =
-                    IFreightTemplateChildMapStruct.INSTANCE
-                            .freightTemplateChildVOListTofreightTemplateChildList(list);
+                    IFreightTemplateChildMapStruct.INSTANCE.freightTemplateChildVOListTofreightTemplateChildList(list);
             // 添加运费模板子内容
             freightTemplateChildService.addFreightTemplateChild(freightTemplateChildren);
         }
@@ -172,14 +167,12 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
         freightTemplateChildService.removeFreightTemplate(freightTemplateInfoVO.getId());
         // 给子模板赋父模板的id
         List<FreightTemplateChildVO> list = new ArrayList<>();
-        for (FreightTemplateChildVO freightTemplateChild :
-                freightTemplateInfoVO.getFreightTemplateChildList()) {
+        for (FreightTemplateChildVO freightTemplateChild : freightTemplateInfoVO.getFreightTemplateChildList()) {
             freightTemplateChild.setFreightTemplateId(freightTemplate.getId());
             list.add(freightTemplateChild);
         }
         List<FreightTemplateChild> freightTemplateChildren =
-                IFreightTemplateChildMapStruct.INSTANCE
-                        .freightTemplateChildVOListTofreightTemplateChildList(list);
+                IFreightTemplateChildMapStruct.INSTANCE.freightTemplateChildVOListTofreightTemplateChildList(list);
         // 添加模板子内容
         freightTemplateChildService.addFreightTemplateChild(freightTemplateChildren);
         // 更新缓存

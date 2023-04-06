@@ -31,7 +31,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 @EqualsAndHashCode(callSuper = false)
 public class GiteeOAuth2User implements OAuth2User, Serializable {
 
-    @Serial private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String login;

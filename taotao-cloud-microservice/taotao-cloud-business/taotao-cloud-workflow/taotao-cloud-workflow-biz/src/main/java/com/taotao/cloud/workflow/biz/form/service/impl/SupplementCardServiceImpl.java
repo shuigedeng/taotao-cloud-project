@@ -31,12 +31,14 @@ import org.springframework.stereotype.Service;
 
 /** 补卡申请 */
 @Service
-public class SupplementCardServiceImpl
-        extends ServiceImpl<SupplementCardMapper, SupplementCardEntity>
+public class SupplementCardServiceImpl extends ServiceImpl<SupplementCardMapper, SupplementCardEntity>
         implements SupplementCardService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public SupplementCardEntity getInfo(String id) {
@@ -70,8 +72,7 @@ public class SupplementCardServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, SupplementCardEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, SupplementCardEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -97,10 +98,8 @@ public class SupplementCardServiceImpl
 
     @Override
     public void data(String id, String data) {
-        SupplementCardForm supplementCardForm =
-                JsonUtil.getJsonToBean(data, SupplementCardForm.class);
-        SupplementCardEntity entity =
-                JsonUtil.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
+        SupplementCardForm supplementCardForm = JsonUtil.getJsonToBean(data, SupplementCardForm.class);
+        SupplementCardEntity entity = JsonUtil.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

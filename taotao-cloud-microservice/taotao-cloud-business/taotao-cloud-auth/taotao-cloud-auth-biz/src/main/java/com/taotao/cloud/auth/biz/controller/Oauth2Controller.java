@@ -53,7 +53,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth/oauth2")
 public class Oauth2Controller {
 
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     /**
      * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
@@ -94,11 +95,11 @@ public class Oauth2Controller {
             String kid = (String) jwt.getHeaders().get("kid");
             try {
                 long epochSecond = jwt.getExpiresAt().getEpochSecond();
-                long nowTime = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).getEpochSecond();
+                long nowTime =
+                        LocalDateTime.now().toInstant(ZoneOffset.of("+8")).getEpochSecond();
 
                 // 标识jwt令牌失效
-                redisRepository.setEx(
-                        RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid, "", epochSecond - nowTime);
+                redisRepository.setEx(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid, "", epochSecond - nowTime);
 
                 // 添加用户退出日志
 

@@ -30,9 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IJustAuthService {
 
     /** 查询第三方用户绑定关系 */
-    Long userBindId(
-            @NotBlank @RequestParam("uuid") String uuid,
-            @NotBlank @RequestParam("source") String source);
+    Long userBindId(@NotBlank @RequestParam("uuid") String uuid, @NotBlank @RequestParam("source") String source);
 
     /** 创建或更新第三方用户信息 */
     Long userCreateOrUpdate(@NotNull @RequestBody JustAuthSocialInfoDTO justAuthSocialInfoDTO);
@@ -50,11 +48,9 @@ public interface IJustAuthService {
 
     /** 绑定第三方用户信息 */
     JustAuthSocialUser userBind(
-            @NotNull @RequestParam("socialId") Long socialId,
-            @NotNull @RequestParam("userId") Long userId);
+            @NotNull @RequestParam("socialId") Long socialId, @NotNull @RequestParam("userId") Long userId);
 
     /** 解绑第三方用户信息" */
     Result<JustAuthSocialUser> userUnbind(
-            @NotNull @RequestParam("socialId") Long socialId,
-            @NotNull @RequestParam("userId") Long userId);
+            @NotNull @RequestParam("socialId") Long socialId, @NotNull @RequestParam("userId") Long userId);
 }

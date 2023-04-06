@@ -30,8 +30,7 @@ import org.springframework.stereotype.Service;
 public class ContentDeduplicationService extends AbstractDeduplicationService {
 
     @Autowired
-    public ContentDeduplicationService(
-            @Qualifier("SlideWindowLimitService") LimitService limitService) {
+    public ContentDeduplicationService(@Qualifier("SlideWindowLimitService") LimitService limitService) {
         this.limitService = limitService;
         deduplicationType = DeduplicationType.CONTENT.getCode();
     }
@@ -49,8 +48,6 @@ public class ContentDeduplicationService extends AbstractDeduplicationService {
     @Override
     public String deduplicationSingleKey(TaskInfo taskInfo, String receiver) {
         return DigestUtil.md5Hex(
-                taskInfo.getMessageTemplateId()
-                        + receiver
-                        + JSON.toJSONString(taskInfo.getContentModel()));
+                taskInfo.getMessageTemplateId() + receiver + JSON.toJSONString(taskInfo.getContentModel()));
     }
 }

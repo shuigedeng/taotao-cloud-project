@@ -48,8 +48,7 @@ public class CaiHongPi {
 
     /** 载入金句库 */
     static {
-        InputStream inputStream =
-                CaiHongPi.class.getClassLoader().getResourceAsStream("static/jinju.txt");
+        InputStream inputStream = CaiHongPi.class.getClassLoader().getResourceAsStream("static/jinju.txt");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String str = "";
             String temp = "";

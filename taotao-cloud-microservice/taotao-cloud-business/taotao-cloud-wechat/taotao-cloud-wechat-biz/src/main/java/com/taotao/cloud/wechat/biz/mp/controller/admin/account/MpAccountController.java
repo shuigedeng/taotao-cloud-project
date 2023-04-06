@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpAccountController {
 
-    @Resource private MpAccountService mpAccountService;
+    @Resource
+    private MpAccountService mpAccountService;
 
     @PostMapping("/create")
     @ApiOperation("创建公众号账号")
@@ -52,8 +53,7 @@ public class MpAccountController {
     @PutMapping("/update")
     @ApiOperation("更新公众号账号")
     @PreAuthorize("@ss.hasPermission('mp:account:update')")
-    public CommonResult<Boolean> updateAccount(
-            @Valid @RequestBody MpAccountUpdateReqVO updateReqVO) {
+    public CommonResult<Boolean> updateAccount(@Valid @RequestBody MpAccountUpdateReqVO updateReqVO) {
         mpAccountService.updateAccount(updateReqVO);
         return success(true);
     }
@@ -69,12 +69,7 @@ public class MpAccountController {
 
     @GetMapping("/get")
     @ApiOperation("获得公众号账号")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:account:query')")
     public CommonResult<MpAccountRespVO> getAccount(@RequestParam("id") Long id) {
         MpAccountDO wxAccount = mpAccountService.getAccount(id);
@@ -84,8 +79,7 @@ public class MpAccountController {
     @GetMapping("/page")
     @ApiOperation("获得公众号账号分页")
     @PreAuthorize("@ss.hasPermission('mp:account:query')")
-    public CommonResult<PageResult<MpAccountRespVO>> getAccountPage(
-            @Valid MpAccountPageReqVO pageVO) {
+    public CommonResult<PageResult<MpAccountRespVO>> getAccountPage(@Valid MpAccountPageReqVO pageVO) {
         PageResult<MpAccountDO> pageResult = mpAccountService.getAccountPage(pageVO);
         return success(MpAccountConvert.INSTANCE.convertPage(pageResult));
     }

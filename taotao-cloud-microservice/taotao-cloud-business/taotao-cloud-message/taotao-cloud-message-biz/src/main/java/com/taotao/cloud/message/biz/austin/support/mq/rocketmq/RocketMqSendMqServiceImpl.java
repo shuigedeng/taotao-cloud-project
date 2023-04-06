@@ -36,7 +36,8 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.ROCKET_MQ)
 public class RocketMqSendMqServiceImpl implements SendMqService {
 
-    @Autowired private RocketMQTemplate rocketMqTemplate;
+    @Autowired
+    private RocketMQTemplate rocketMqTemplate;
 
     @Override
     public void send(String topic, String jsonValue, String tagId) {

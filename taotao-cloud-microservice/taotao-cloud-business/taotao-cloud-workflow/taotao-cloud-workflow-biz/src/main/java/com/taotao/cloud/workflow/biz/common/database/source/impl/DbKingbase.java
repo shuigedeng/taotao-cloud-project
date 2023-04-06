@@ -39,14 +39,12 @@ public class DbKingbase extends DbBase {
     }
 
     @Override
-    public String getConnUrl(
-            String prepareUrl, String host, Integer port, String dbName, String schema) {
+    public String getConnUrl(String prepareUrl, String host, Integer port, String dbName, String schema) {
         return super.getConnUrl(prepareUrl, host, port, dbName, getCheckSchema(schema));
     }
 
     @Override
-    public DbTableFieldModel getPartFieldModel(ResultSet result)
-            throws SQLException, DataException {
+    public DbTableFieldModel getPartFieldModel(ResultSet result) throws SQLException, DataException {
         DbTableFieldModel model = new DbTableFieldModel();
         // 主键
         if (result.getString(DbAliasEnum.PRIMARY_KEY.AS()) != null) {
@@ -64,8 +62,7 @@ public class DbKingbase extends DbBase {
     }
 
     @Override
-    public LinkedList<Object> getStructParams(
-            String structParams, String table, DataSourceMod dbSourceOrDbLink) {
+    public LinkedList<Object> getStructParams(String structParams, String table, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dataSourceDTO = dbSourceOrDbLink.convertDTO();
         dataSourceDTO.setDbName(dataSourceDTO.getUserName());
         dataSourceDTO.setDbSchema(getCheckSchema(dataSourceDTO.getDbSchema()));

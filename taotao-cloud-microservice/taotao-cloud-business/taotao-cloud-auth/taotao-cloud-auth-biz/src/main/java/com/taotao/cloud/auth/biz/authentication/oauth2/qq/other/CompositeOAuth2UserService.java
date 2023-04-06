@@ -30,8 +30,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
  * 除了同时支持GOOGLE，OKTA，GITHUB，FACEBOOK之外，可能还需要同时支持QQ、微信等多种认证服务
  * 根据registrationId选择相应的OAuth2AccessTokenResponseClient
  */
-public class CompositeOAuth2UserService
-        implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class CompositeOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private Map<String, OAuth2UserService> userServices;
 
     private static final String DefaultUserServiceKey = "default_key";

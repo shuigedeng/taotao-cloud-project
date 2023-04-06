@@ -45,7 +45,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class WxAuthController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired SysLogService sysLogService;
+
+    @Autowired
+    SysLogService sysLogService;
+
     private final WxMpService wxMpService;
 
     /**
@@ -66,8 +69,7 @@ public class WxAuthController {
             @RequestBody WxH5OuthrizeForm form) {
         try {
             this.wxMpService.switchoverTo(appid);
-            WxOAuth2AccessToken token =
-                    wxMpService.getOAuth2Service().getAccessToken(form.getCode());
+            WxOAuth2AccessToken token = wxMpService.getOAuth2Service().getAccessToken(form.getCode());
             String openid = token.getOpenId();
             CookieUtil.setCookie(response, "openid", openid, 365 * 24 * 60 * 60);
             String openidToken = MD5Util.getMd5AndSalt(openid);
@@ -97,8 +99,7 @@ public class WxAuthController {
             @RequestBody WxH5OuthrizeForm form) {
         try {
             this.wxMpService.switchoverTo(appid);
-            WxOAuth2AccessToken token =
-                    wxMpService.getOAuth2Service().getAccessToken(form.getCode());
+            WxOAuth2AccessToken token = wxMpService.getOAuth2Service().getAccessToken(form.getCode());
             WxOAuth2UserInfo userInfo = wxMpService.getOAuth2Service().getUserInfo(token, "zh_CN");
             String openid = userInfo.getOpenid();
             CookieUtil.setCookie(response, "openid", openid, 365 * 24 * 60 * 60);
@@ -120,8 +121,7 @@ public class WxAuthController {
      */
     @GetMapping("/getShareSignature")
     @ApiOperation(value = "获取微信分享的签名配置", notes = "微信公众号添加了js安全域名的网站才能加载微信分享")
-    public R getShareSignature(
-            HttpServletRequest request, HttpServletResponse response, @CookieValue String appid)
+    public R getShareSignature(HttpServletRequest request, HttpServletResponse response, @CookieValue String appid)
             throws WxErrorException {
         this.wxMpService.switchoverTo(appid);
         // 1.拼接url（当前网页的URL，不包含#及其后面部分）
@@ -140,8 +140,8 @@ public class WxAuthController {
 
         // 加密获取signature
         StringBuilder wxBaseString = new StringBuilder();
-        wxMap.forEach(
-                (key, value) -> wxBaseString.append(key).append("=").append(value).append("&"));
+        wxMap.forEach((key, value) ->
+                wxBaseString.append(key).append("=").append(value).append("&"));
         String wxSignString = wxBaseString.substring(0, wxBaseString.length() - 1);
         // signature
         String wxSignature = SHA1Util.sha1(wxSignString);

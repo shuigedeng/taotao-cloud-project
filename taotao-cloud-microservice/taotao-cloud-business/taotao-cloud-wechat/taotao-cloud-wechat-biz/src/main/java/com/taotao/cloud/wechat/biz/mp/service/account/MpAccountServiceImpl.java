@@ -62,29 +62,32 @@ public class MpAccountServiceImpl implements MpAccountService {
      *
      * <p>这里声明 volatile 修饰的原因是，每次刷新时，直接修改指向
      */
-    @Getter private volatile Map<String, MpAccountDO> accountCache;
+    @Getter
+    private volatile Map<String, MpAccountDO> accountCache;
 
-    @Resource private MpAccountMapper mpAccountMapper;
+    @Resource
+    private MpAccountMapper mpAccountMapper;
 
-    @Resource @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource
+    @Lazy // 延迟加载，解决循环依赖的问题
     private MpServiceFactory mpServiceFactory;
 
-    @Resource private MpAccountProducer mpAccountProducer;
+    @Resource
+    private MpAccountProducer mpAccountProducer;
 
     @Override
     @PostConstruct
     public void initLocalCache() {
         // 注意：忽略自动多租户，因为要全局初始化缓存
-        TenantUtils.executeIgnore(
-                () -> {
-                    // 第一步：查询数据
-                    List<MpAccountDO> accounts = mpAccountMapper.selectList();
-                    log.info("[initLocalCacheIfUpdate][缓存公众号账号，数量为:{}]", accounts.size());
+        TenantUtils.executeIgnore(() -> {
+            // 第一步：查询数据
+            List<MpAccountDO> accounts = mpAccountMapper.selectList();
+            log.info("[initLocalCacheIfUpdate][缓存公众号账号，数量为:{}]", accounts.size());
 
-                    // 第二步：构建缓存。创建或更新支付 Client
-                    mpServiceFactory.init(accounts);
-                    accountCache = CollectionUtils.convertMap(accounts, MpAccountDO::getAppId);
-                });
+            // 第二步：构建缓存。创建或更新支付 Client
+            mpServiceFactory.init(accounts);
+            accountCache = CollectionUtils.convertMap(accounts, MpAccountDO::getAppId);
+        });
     }
 
     @Override
@@ -138,18 +141,17 @@ public class MpAccountServiceImpl implements MpAccountService {
     @VisibleForTesting
     public void validateAppIdUnique(Long id, String appId) {
         // 多个租户，appId 是不能重复，否则公众号回调会无法识别
-        TenantUtils.executeIgnore(
-                () -> {
-                    MpAccountDO account = mpAccountMapper.selectByAppId(appId);
-                    if (account == null) {
-                        return;
-                    }
-                    // 存在 account 记录的情况下
-                    if (id == null // 新增时，说明重复
-                            || ObjUtil.notEqual(id, account.getId())) { // 更新时，如果 id 不一致，说明重复
-                        throw exception(USER_USERNAME_EXISTS);
-                    }
-                });
+        TenantUtils.executeIgnore(() -> {
+            MpAccountDO account = mpAccountMapper.selectByAppId(appId);
+            if (account == null) {
+                return;
+            }
+            // 存在 account 记录的情况下
+            if (id == null // 新增时，说明重复
+                    || ObjUtil.notEqual(id, account.getId())) { // 更新时，如果 id 不一致，说明重复
+                throw exception(USER_USERNAME_EXISTS);
+            }
+        });
     }
 
     @Override
@@ -181,12 +183,12 @@ public class MpAccountServiceImpl implements MpAccountService {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(account.getAppId());
         String qrCodeUrl;
         try {
-            WxMpQrCodeTicket qrCodeTicket =
-                    mpService.getQrcodeService().qrCodeCreateLastTicket("default");
+            WxMpQrCodeTicket qrCodeTicket = mpService.getQrcodeService().qrCodeCreateLastTicket("default");
             qrCodeUrl = mpService.getQrcodeService().qrCodePictureUrl(qrCodeTicket.getTicket());
         } catch (WxErrorException e) {
             throw exception(
-                    ErrorCodeConstants.ACCOUNT_GENERATE_QR_CODE_FAIL, e.getError().getErrorMsg());
+                    ErrorCodeConstants.ACCOUNT_GENERATE_QR_CODE_FAIL,
+                    e.getError().getErrorMsg());
         }
 
         // 保存二维码

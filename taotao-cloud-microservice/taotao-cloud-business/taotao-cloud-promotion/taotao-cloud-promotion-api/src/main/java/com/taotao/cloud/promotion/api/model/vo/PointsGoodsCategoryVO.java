@@ -32,7 +32,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PointsGoodsCategoryVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 5528833118735059182L;
+    @Serial
+    private static final long serialVersionUID = 5528833118735059182L;
 
     private Long id;
 

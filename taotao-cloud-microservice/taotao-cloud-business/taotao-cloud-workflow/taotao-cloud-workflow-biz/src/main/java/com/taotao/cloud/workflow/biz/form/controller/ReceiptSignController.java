@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ReceiptSign")
 public class ReceiptSignController {
 
-    @Autowired private ReceiptSignService receiptSignService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ReceiptSignService receiptSignService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取收文签呈单信息
@@ -51,8 +54,7 @@ public class ReceiptSignController {
      */
     @Operation("获取收文签呈单信息")
     @GetMapping("/{id}")
-    public Result<ReceiptSignInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<ReceiptSignInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ReceiptSignInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class ReceiptSignController {
     @Operation("新建收文签呈单")
     @PostMapping
     public Result create(@RequestBody ReceiptSignForm receiptSignForm) throws WorkFlowException {
-        ReceiptSignEntity entity =
-                JsonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
+        ReceiptSignEntity entity = JsonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptSignForm.getStatus())) {
             receiptSignService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -99,11 +100,9 @@ public class ReceiptSignController {
      */
     @Operation("修改收文签呈单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody ReceiptSignForm receiptSignForm, @PathVariable("id") String id)
+    public Result update(@RequestBody ReceiptSignForm receiptSignForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        ReceiptSignEntity entity =
-                JsonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
+        ReceiptSignEntity entity = JsonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(receiptSignForm.getStatus())) {
             receiptSignService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

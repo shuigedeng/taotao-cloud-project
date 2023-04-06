@@ -86,29 +86,36 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/workflow/engine/flow-engine")
 public class FlowEngineController {
 
-    @Autowired private FlowEngineService flowEngineService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private DataFileExport fileExport;
-    @Autowired private ServiceAllUtil serviceUtil;
-    @Autowired private ConfigValueUtil configValueUtil;
-    @Autowired private VisualDevTableCre visualDevTableCre;
+    @Autowired
+    private FlowEngineService flowEngineService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private DataFileExport fileExport;
+
+    @Autowired
+    private ServiceAllUtil serviceUtil;
+
+    @Autowired
+    private ConfigValueUtil configValueUtil;
+
+    @Autowired
+    private VisualDevTableCre visualDevTableCre;
 
     @Operation(summary = "分页获取流程引擎列表", description = "分页获取流程引擎列表")
     @GetMapping("/page")
     public Result<PageResult<FlowPageListVO>> list(FlowPagination pagination) {
         IPage<FlowEngineEntity> entityPage = flowEngineService.getPageList(pagination);
         List<FlowEngineEntity> records = entityPage.getRecords();
-        List<DictionaryDataEntity> dictionList =
-                serviceUtil.getDictionName(
-                        records.stream()
-                                .map(FlowEngineEntity::getCategory)
-                                .collect(Collectors.toList()));
+        List<DictionaryDataEntity> dictionList = serviceUtil.getDictionName(
+                records.stream().map(FlowEngineEntity::getCategory).collect(Collectors.toList()));
         for (FlowEngineEntity entity : records) {
-            DictionaryDataEntity dataEntity =
-                    dictionList.stream()
-                            .filter(t -> t.getEnCode().equals(entity.getCategory()))
-                            .findFirst()
-                            .orElse(null);
+            DictionaryDataEntity dataEntity = dictionList.stream()
+                    .filter(t -> t.getEnCode().equals(entity.getCategory()))
+                    .findFirst()
+                    .orElse(null);
             entity.setCategory(dataEntity != null ? dataEntity.getFullName() : "");
         }
         return Result.success(PageResult.convertMybatisPage(entityPage, FlowPageListVO.class));
@@ -127,13 +134,11 @@ public class FlowEngineController {
 
     @Operation(summary = "表单主表属性", description = "表单主表属性")
     @GetMapping("/form-data/fields/{id}")
-    public Result<List<FormDataField>> getFormDataField(@PathVariable("id") String id)
-            throws WorkFlowException {
+    public Result<List<FormDataField>> getFormDataField(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         List<FormDataField> formDataFieldList = new ArrayList<>();
         if (entity.getFormType() == 1) {
-            List<FlowEngineModel> list =
-                    JsonUtils.toList(entity.getFormData(), FlowEngineModel.class);
+            List<FlowEngineModel> list = JsonUtils.toList(entity.getFormData(), FlowEngineModel.class);
             for (FlowEngineModel model : list) {
                 FormDataField formDataField = new FormDataField();
                 formDataField.setLabel(model.getFiledName());
@@ -144,18 +149,16 @@ public class FlowEngineController {
             // formTempJson
             FormDataModel formData = JsonUtils.toObject(entity.getFormData(), FormDataModel.class);
             List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
-            List<TableModel> tableModelList =
-                    JsonUtils.toList(entity.getFlowTables(), TableModel.class);
+            List<TableModel> tableModelList = JsonUtils.toList(entity.getFlowTables(), TableModel.class);
 
             List<FormAllModel> formAllModel = new ArrayList<>();
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             FormCloumnUtil.recursionForm(recursionForm, formAllModel);
 
             // 主表数据
-            List<FormAllModel> mast =
-                    formAllModel.stream()
-                            .filter(t -> FormEnum.mast.getMessage().equals(t.getFlowKey()))
-                            .toList();
+            List<FormAllModel> mast = formAllModel.stream()
+                    .filter(t -> FormEnum.mast.getMessage().equals(t.getFlowKey()))
+                    .toList();
 
             for (FormAllModel model : mast) {
                 FieLdsModel fieLdsModel = model.getFormColumnModel().getFieLdsModel();
@@ -177,10 +180,9 @@ public class FlowEngineController {
     @Operation(summary = "表单列表", description = "表单列表")
     @GetMapping("/field-data/select/{id}")
     public Result<List<FlowEngineSelectVO>> getFormData(@PathVariable("id") String id) {
-        List<FlowTaskEntity> flowTaskList =
-                flowTaskService.getTaskList(id).stream()
-                        .filter(t -> FlowTaskStatusEnum.Adopt.getCode().equals(t.getStatus()))
-                        .toList();
+        List<FlowTaskEntity> flowTaskList = flowTaskService.getTaskList(id).stream()
+                .filter(t -> FlowTaskStatusEnum.Adopt.getCode().equals(t.getStatus()))
+                .toList();
 
         List<FlowEngineSelectVO> vo = new ArrayList<>();
         for (FlowTaskEntity taskEntity : flowTaskList) {
@@ -219,27 +221,21 @@ public class FlowEngineController {
 
     @Operation(summary = "新建流程引擎", description = "新建流程引擎")
     @PostMapping
-    public Result<Boolean> create(@Valid @RequestBody FlowEngineCrForm flowEngineCrForm)
-            throws WorkFlowException {
-        FlowEngineEntity flowEngineEntity =
-                JsonUtils.toObject(flowEngineCrForm, FlowEngineEntity.class);
-        if (flowEngineService.isExistByFullName(
-                flowEngineEntity.getFullName(), flowEngineEntity.getId())) {
+    public Result<Boolean> create(@Valid @RequestBody FlowEngineCrForm flowEngineCrForm) throws WorkFlowException {
+        FlowEngineEntity flowEngineEntity = JsonUtils.toObject(flowEngineCrForm, FlowEngineEntity.class);
+        if (flowEngineService.isExistByFullName(flowEngineEntity.getFullName(), flowEngineEntity.getId())) {
             throw new WorkFlowException("流程名称不能重复");
         }
 
-        if (flowEngineService.isExistByEnCode(
-                flowEngineEntity.getEnCode(), flowEngineEntity.getId())) {
+        if (flowEngineService.isExistByEnCode(flowEngineEntity.getEnCode(), flowEngineEntity.getId())) {
             throw new WorkFlowException("流程编码不能重复");
         }
 
         if (flowEngineEntity.getFormType() != 1) {
-            FormDataModel formData =
-                    JsonUtils.toObject(flowEngineEntity.getFormData(), FormDataModel.class);
+            FormDataModel formData = JsonUtils.toObject(flowEngineEntity.getFormData(), FormDataModel.class);
 
             List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
-            List<TableModel> tableModelList =
-                    JsonUtils.toList(flowEngineEntity.getFlowTables(), TableModel.class);
+            List<TableModel> tableModelList = JsonUtils.toList(flowEngineEntity.getFlowTables(), TableModel.class);
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             List<FormAllModel> formAllModel = new ArrayList<>();
             if (FormCloumnUtil.repetition(recursionForm, formAllModel)) {
@@ -251,11 +247,9 @@ public class FlowEngineController {
 
     @Operation(summary = "更新流程引擎", description = "更新流程引擎")
     @PutMapping("/{id}")
-    public Result<Boolean> update(
-            @PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm)
+    public Result<Boolean> update(@PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm)
             throws WorkFlowException {
-        FlowEngineEntity flowEngineEntity =
-                JsonUtils.toObject(flowEngineUpForm, FlowEngineEntity.class);
+        FlowEngineEntity flowEngineEntity = JsonUtils.toObject(flowEngineUpForm, FlowEngineEntity.class);
         if (flowEngineService.isExistByFullName(flowEngineUpForm.getFullName(), id)) {
             throw new WorkFlowException("流程名称不能重复");
         }
@@ -264,11 +258,9 @@ public class FlowEngineController {
         }
 
         if (flowEngineEntity.getFormType() != 1) {
-            FormDataModel formData =
-                    JsonUtils.toObject(flowEngineEntity.getFormData(), FormDataModel.class);
+            FormDataModel formData = JsonUtils.toObject(flowEngineEntity.getFormData(), FormDataModel.class);
             List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
-            List<TableModel> tableModelList =
-                    JsonUtils.toList(flowEngineEntity.getFlowTables(), TableModel.class);
+            List<TableModel> tableModelList = JsonUtils.toList(flowEngineEntity.getFlowTables(), TableModel.class);
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             List<FormAllModel> formAllModel = new ArrayList<>();
             if (FormCloumnUtil.repetition(recursionForm, formAllModel)) {
@@ -344,26 +336,23 @@ public class FlowEngineController {
     @GetMapping("/actions/export/{id}")
     public Result exportData(@PathVariable("id") String id) throws WorkFlowException {
         FlowExportModel model = flowEngineService.exportData(id);
-        DownloadVO downloadVO =
-                fileExport.exportFile(
-                        model,
-                        configValueUtil.getTemporaryFilePath(),
-                        model.getFlowEngine().getFullName(),
-                        ModuleTypeEnum.FLOW_FLOWENGINE.getTableName());
+        DownloadVO downloadVO = fileExport.exportFile(
+                model,
+                configValueUtil.getTemporaryFilePath(),
+                model.getFlowEngine().getFullName(),
+                ModuleTypeEnum.FLOW_FLOWENGINE.getTableName());
         return Result.success(downloadVO);
     }
 
     @Operation(summary = "工作流导入", description = "工作流导入")
     @PostMapping(value = "/actions/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Result ImportData(@RequestPart("file") MultipartFile multipartFile)
-            throws WorkFlowException {
+    public Result ImportData(@RequestPart("file") MultipartFile multipartFile) throws WorkFlowException {
         // 判断是否为.json结尾
         if (FileUtil.existsSuffix(multipartFile, ModuleTypeEnum.FLOW_FLOWENGINE.getTableName())) {
             return Result.fail(MsgCode.IMP002.get());
         }
         // 获取文件内容
-        String fileContent =
-                FileUtil.getFileContent(multipartFile, configValueUtil.getTemporaryFilePath());
+        String fileContent = FileUtil.getFileContent(multipartFile, configValueUtil.getTemporaryFilePath());
         FlowExportModel vo = JsonUtils.getJsonToBean(fileContent, FlowExportModel.class);
         return flowEngineService.ImportData(vo.getFlowEngine(), vo.getVisibleList());
     }

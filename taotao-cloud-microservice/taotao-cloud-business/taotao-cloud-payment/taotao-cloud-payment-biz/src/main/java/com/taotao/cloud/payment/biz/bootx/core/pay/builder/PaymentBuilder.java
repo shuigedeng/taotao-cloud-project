@@ -64,12 +64,11 @@ public class PaymentBuilder {
         List<PayChannelInfo> payTypeInfos = buildPayTypeInfo(payParam.getPayModeList());
         List<RefundableInfo> refundableInfos = buildRefundableInfo(payParam.getPayModeList());
         // 计算总价
-        BigDecimal sumAmount =
-                payTypeInfos.stream()
-                        .map(PayChannelInfo::getAmount)
-                        .filter(Objects::nonNull)
-                        .reduce(BigDecimal::add)
-                        .orElse(BigDecimal.ZERO);
+        BigDecimal sumAmount = payTypeInfos.stream()
+                .map(PayChannelInfo::getAmount)
+                .filter(Objects::nonNull)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
         // 支付通道信息
         payment.setPayChannelInfo(JSONUtil.toJsonStr(payTypeInfos))
                 .setRefundableInfo(JSONUtil.toJsonStr(refundableInfos))
@@ -84,33 +83,25 @@ public class PaymentBuilder {
     private List<PayChannelInfo> buildPayTypeInfo(List<PayModeParam> payModeParamList) {
         return CollectionUtil.isEmpty(payModeParamList)
                 ? Collections.emptyList()
-                : payModeParamList.stream()
-                        .map(PayModeParam::toPayTypeInfo)
-                        .collect(Collectors.toList());
+                : payModeParamList.stream().map(PayModeParam::toPayTypeInfo).collect(Collectors.toList());
     }
     /** 构建RefundableInfo */
     private List<RefundableInfo> buildRefundableInfo(List<PayModeParam> payModeParamList) {
         return CollectionUtil.isEmpty(payModeParamList)
                 ? Collections.emptyList()
-                : payModeParamList.stream()
-                        .map(PayModeParam::toRefundableInfo)
-                        .collect(Collectors.toList());
+                : payModeParamList.stream().map(PayModeParam::toRefundableInfo).collect(Collectors.toList());
     }
 
     /** 根据Payment构建PayParam支付参数 */
     public PayParam buildPayParamByPayment(Payment payment) {
         PayParam payParam = new PayParam();
         // 恢复 payModeList
-        List<PayModeParam> payModeParams =
-                payment.getPayChannelInfoList().stream()
-                        .map(
-                                payTypeInfo ->
-                                        new PayModeParam()
-                                                .setAmount(payTypeInfo.getAmount())
-                                                .setPayChannel(payTypeInfo.getPayChannel())
-                                                .setExtraParamsJson(
-                                                        payTypeInfo.getExtraParamsJson()))
-                        .collect(Collectors.toList());
+        List<PayModeParam> payModeParams = payment.getPayChannelInfoList().stream()
+                .map(payTypeInfo -> new PayModeParam()
+                        .setAmount(payTypeInfo.getAmount())
+                        .setPayChannel(payTypeInfo.getPayChannel())
+                        .setExtraParamsJson(payTypeInfo.getExtraParamsJson()))
+                .collect(Collectors.toList());
         payParam.setPayModeList(payModeParams)
                 .setBusinessId(payment.getBusinessId())
                 .setUserId(payment.getUserId())
@@ -140,13 +131,9 @@ public class PaymentBuilder {
             List<PayChannelInfo> channelInfos = payment.getPayChannelInfoList();
 
             // 设置异步支付参数
-            List<PayChannelInfo> moneyPayTypeInfos =
-                    channelInfos.stream()
-                            .filter(
-                                    payTypeInfo ->
-                                            PayChannelCode.ASYNC_TYPE.contains(
-                                                    payTypeInfo.getPayChannel()))
-                            .collect(Collectors.toList());
+            List<PayChannelInfo> moneyPayTypeInfos = channelInfos.stream()
+                    .filter(payTypeInfo -> PayChannelCode.ASYNC_TYPE.contains(payTypeInfo.getPayChannel()))
+                    .collect(Collectors.toList());
             if (!CollUtil.isEmpty(moneyPayTypeInfos)) {
                 paymentResult.setAsyncPayInfo(AsyncPayInfoLocal.get());
             }

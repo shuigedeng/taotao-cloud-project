@@ -42,8 +42,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/0")
 public class VehicleApplyController {
 
-    @Autowired private VehicleApplyService vehicleApplyService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private VehicleApplyService vehicleApplyService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取车辆申请信息
@@ -53,8 +56,7 @@ public class VehicleApplyController {
      */
     @Operation("获取车辆申请信息")
     @GetMapping("/{id}")
-    public Result<VehicleApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<VehicleApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         VehicleApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -82,8 +84,7 @@ public class VehicleApplyController {
     @Operation("新建车辆申请")
     @PostMapping
     public Result create(@RequestBody VehicleApplyForm vehicleApplyForm) throws WorkFlowException {
-        VehicleApplyEntity entity =
-                JsonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
+        VehicleApplyEntity entity = JsonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(vehicleApplyForm.getStatus())) {
             vehicleApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -101,11 +102,9 @@ public class VehicleApplyController {
      */
     @Operation("修改车辆申请")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody VehicleApplyForm vehicleApplyForm, @PathVariable("id") String id)
+    public Result update(@RequestBody VehicleApplyForm vehicleApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        VehicleApplyEntity entity =
-                JsonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
+        VehicleApplyEntity entity = JsonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(vehicleApplyForm.getStatus())) {
             vehicleApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -45,8 +45,7 @@ public class MediaService {
         if (cameras.containsKey(cameraDto.getMediaKey())) {
             MediaTransfer mediaConvert = cameras.get(cameraDto.getMediaKey());
             if (mediaConvert instanceof MediaTransferFlvByJavacv) {
-                MediaTransferFlvByJavacv mediaTransferFlvByJavacv =
-                        (MediaTransferFlvByJavacv) mediaConvert;
+                MediaTransferFlvByJavacv mediaTransferFlvByJavacv = (MediaTransferFlvByJavacv) mediaConvert;
                 // 如果当前已经用ffmpeg，则重新拉流
                 if (cameraDto.isEnabledFFmpeg()) {
                     mediaTransferFlvByJavacv.setRunning(false);
@@ -56,8 +55,7 @@ public class MediaService {
                     mediaTransferFlvByJavacv.addClient(ctx, ClientType.HTTP);
                 }
             } else if (mediaConvert instanceof MediaTransferFlvByFFmpeg) {
-                MediaTransferFlvByFFmpeg mediaTransferFlvByFFmpeg =
-                        (MediaTransferFlvByFFmpeg) mediaConvert;
+                MediaTransferFlvByFFmpeg mediaTransferFlvByFFmpeg = (MediaTransferFlvByFFmpeg) mediaConvert;
                 // 如果当前已经用javacv，则关闭再重新拉流
                 if (!cameraDto.isEnabledFFmpeg()) {
                     mediaTransferFlvByFFmpeg.stopFFmpeg();
@@ -94,8 +92,7 @@ public class MediaService {
         if (cameras.containsKey(cameraDto.getMediaKey())) {
             MediaTransfer mediaConvert = cameras.get(cameraDto.getMediaKey());
             if (mediaConvert instanceof MediaTransferFlvByJavacv) {
-                MediaTransferFlvByJavacv mediaTransferFlvByJavacv =
-                        (MediaTransferFlvByJavacv) mediaConvert;
+                MediaTransferFlvByJavacv mediaTransferFlvByJavacv = (MediaTransferFlvByJavacv) mediaConvert;
                 // 如果当前已经用ffmpeg，则重新拉流
                 if (cameraDto.isEnabledFFmpeg()) {
                     mediaTransferFlvByJavacv.setRunning(false);
@@ -105,8 +102,7 @@ public class MediaService {
                     mediaTransferFlvByJavacv.addClient(ctx, ClientType.WEBSOCKET);
                 }
             } else if (mediaConvert instanceof MediaTransferFlvByFFmpeg) {
-                MediaTransferFlvByFFmpeg mediaTransferFlvByFFmpeg =
-                        (MediaTransferFlvByFFmpeg) mediaConvert;
+                MediaTransferFlvByFFmpeg mediaTransferFlvByFFmpeg = (MediaTransferFlvByFFmpeg) mediaConvert;
                 // 如果当前已经用javacv，则关闭再重新拉流
                 if (!cameraDto.isEnabledFFmpeg()) {
                     mediaTransferFlvByFFmpeg.stopFFmpeg();
@@ -162,9 +158,7 @@ public class MediaService {
             MediaTransferFlvByJavacv mediaft = (MediaTransferFlvByJavacv) mediaTransfer;
             // 30秒还没true认为启动不了
             for (int i = 0; i < 60; i++) {
-                if (mediaft.isRunning()
-                        && mediaft.isGrabberStatus()
-                        && mediaft.isRecorderStatus()) {
+                if (mediaft.isRunning() && mediaft.isGrabberStatus() && mediaft.isRecorderStatus()) {
                     return true;
                 }
                 try {
@@ -199,13 +193,11 @@ public class MediaService {
         if (cameras.containsKey(cameraDto.getMediaKey())) {
             MediaTransfer mediaConvert = cameras.get(cameraDto.getMediaKey());
             if (mediaConvert instanceof MediaTransferFlvByJavacv) {
-                MediaTransferFlvByJavacv mediaTransferFlvByJavacv =
-                        (MediaTransferFlvByJavacv) mediaConvert;
+                MediaTransferFlvByJavacv mediaTransferFlvByJavacv = (MediaTransferFlvByJavacv) mediaConvert;
                 mediaTransferFlvByJavacv.setRunning(false);
                 cameras.remove(cameraDto.getMediaKey());
             } else if (mediaConvert instanceof MediaTransferFlvByFFmpeg) {
-                MediaTransferFlvByFFmpeg mediaTransferFlvByFFmpeg =
-                        (MediaTransferFlvByFFmpeg) mediaConvert;
+                MediaTransferFlvByFFmpeg mediaTransferFlvByFFmpeg = (MediaTransferFlvByFFmpeg) mediaConvert;
                 mediaTransferFlvByFFmpeg.stopFFmpeg();
                 cameras.remove(cameraDto.getMediaKey());
             }

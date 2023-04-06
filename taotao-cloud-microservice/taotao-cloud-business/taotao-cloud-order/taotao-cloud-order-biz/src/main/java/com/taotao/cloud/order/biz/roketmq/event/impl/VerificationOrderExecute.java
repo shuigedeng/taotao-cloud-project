@@ -41,8 +41,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class VerificationOrderExecute implements OrderStatusChangeEvent {
 
-    @Autowired private IOrderService orderService;
-    @Autowired private IOrderItemService orderItemService;
+    @Autowired
+    private IOrderService orderService;
+
+    @Autowired
+    private IOrderItemService orderItemService;
 
     @Override
     public void orderChange(OrderMessage orderMessage) {
@@ -53,18 +56,14 @@ public class VerificationOrderExecute implements OrderStatusChangeEvent {
             // 获取随机数，判定是否存在
             String code = getCode(order.getStoreId());
             // 设置订单验证码
-            orderService.update(
-                    new LambdaUpdateWrapper<Order>()
-                            .set(Order::getVerificationCode, code)
-                            .eq(Order::getSn, orderMessage.getOrderSn()));
+            orderService.update(new LambdaUpdateWrapper<Order>()
+                    .set(Order::getVerificationCode, code)
+                    .eq(Order::getSn, orderMessage.getOrderSn()));
             // 修改虚拟订单货物可以进行售后、投诉
-            orderItemService.update(
-                    new LambdaUpdateWrapper<OrderItem>()
-                            .eq(OrderItem::getOrderSn, orderMessage.getOrderSn())
-                            .set(
-                                    OrderItem::getAfterSaleStatus,
-                                    OrderItemAfterSaleStatusEnum.NOT_APPLIED)
-                            .set(OrderItem::getCommentStatus, OrderComplaintStatusEnum.NO_APPLY));
+            orderItemService.update(new LambdaUpdateWrapper<OrderItem>()
+                    .eq(OrderItem::getOrderSn, orderMessage.getOrderSn())
+                    .set(OrderItem::getAfterSaleStatus, OrderItemAfterSaleStatusEnum.NOT_APPLIED)
+                    .set(OrderItem::getCommentStatus, OrderComplaintStatusEnum.NO_APPLY));
         }
     }
 
@@ -79,10 +78,9 @@ public class VerificationOrderExecute implements OrderStatusChangeEvent {
         // 获取八位验证码
         String code = Long.toString(RandomUtil.randomLong(10000000, 99999999));
 
-        LambdaQueryWrapper<Order> lambdaQueryWrapper =
-                new LambdaQueryWrapper<Order>()
-                        .eq(Order::getVerificationCode, code)
-                        .eq(Order::getStoreId, storeId);
+        LambdaQueryWrapper<Order> lambdaQueryWrapper = new LambdaQueryWrapper<Order>()
+                .eq(Order::getVerificationCode, code)
+                .eq(Order::getStoreId, storeId);
 
         if (orderService.getOne(lambdaQueryWrapper) == null) {
             return code;

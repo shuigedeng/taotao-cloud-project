@@ -42,9 +42,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/payWays")
 public class PayWayController extends CommonCtrl {
 
-    @Autowired PayWayService payWayService;
-    @Autowired MchPayPassageService mchPayPassageService;
-    @Autowired PayOrderService payOrderService;
+    @Autowired
+    PayWayService payWayService;
+
+    @Autowired
+    MchPayPassageService mchPayPassageService;
+
+    @Autowired
+    PayOrderService payOrderService;
 
     /**
      * @Author: ZhuXiao @Description: list @Date: 15:52 2021/4/27

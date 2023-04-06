@@ -36,8 +36,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Api(tags = {"粉丝标签"})
 public class WxUserTagsController {
-    @Autowired WxUserTagsService wxUserTagsService;
-    @Autowired WxUserService wxUserService;
+    @Autowired
+    WxUserTagsService wxUserTagsService;
+
+    @Autowired
+    WxUserService wxUserService;
+
     private final WxMpService wxMpService;
 
     @GetMapping("/userTags")
@@ -59,10 +63,7 @@ public class WxUserTagsController {
 
     @PostMapping("/tagging")
     @ApiOperation(value = "给用户绑定标签")
-    public R tagging(
-            @CookieValue String appid,
-            @CookieValue String openid,
-            @RequestBody WxUserTaggingForm form) {
+    public R tagging(@CookieValue String appid, @CookieValue String openid, @RequestBody WxUserTaggingForm form) {
         this.wxMpService.switchoverTo(appid);
         try {
             wxUserTagsService.tagging(form.getTagid(), openid);
@@ -79,10 +80,7 @@ public class WxUserTagsController {
 
     @PostMapping("/untagging")
     @ApiOperation(value = "解绑标签")
-    public R untagging(
-            @CookieValue String appid,
-            @CookieValue String openid,
-            @RequestBody WxUserTaggingForm form)
+    public R untagging(@CookieValue String appid, @CookieValue String openid, @RequestBody WxUserTaggingForm form)
             throws WxErrorException {
         this.wxMpService.switchoverTo(appid);
         wxUserTagsService.untagging(form.getTagid(), openid);

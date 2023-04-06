@@ -47,8 +47,7 @@ public class DownUtil {
             response.setCharacterEncoding(Constants.UTF_8);
             response.setHeader("content-Type", "application/vnd.ms-excel");
             response.setHeader(
-                    "Content-Disposition",
-                    "attachment;filename=" + URLEncoder.encode(fileName, Constants.UTF_8));
+                    "Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, Constants.UTF_8));
             @Cleanup ServletOutputStream outputStream = response.getOutputStream();
             workbook.write(outputStream);
         } catch (IOException e) {
@@ -83,8 +82,7 @@ public class DownUtil {
             } else {
                 codeFileName = URLEncoder.encode(escapeFileName, Constants.UTF_8);
             }
-            response.setHeader(
-                    "Content-Disposition", "attachment;filename=\"" + codeFileName + "\"");
+            response.setHeader("Content-Disposition", "attachment;filename=\"" + codeFileName + "\"");
             @Cleanup OutputStream os = response.getOutputStream();
             int i;
             byte[] buff = new byte[1024 * 8];
@@ -131,8 +129,7 @@ public class DownUtil {
                 codeFileName = URLEncoder.encode(escapeFileName, Constants.UTF_8);
             }
             response.setHeader(
-                    "Content-Disposition",
-                    "attachment;filename=" + new String(codeFileName.getBytes(), "utf-8"));
+                    "Content-Disposition", "attachment;filename=" + new String(codeFileName.getBytes(), "utf-8"));
             @Cleanup OutputStream os = response.getOutputStream();
             int i;
             byte[] buff = new byte[1024 * 8];

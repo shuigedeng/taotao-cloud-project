@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/StaffOvertime")
 public class StaffOvertimeController {
 
-    @Autowired private StaffOvertimeService staffOvertimeService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private StaffOvertimeService staffOvertimeService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取员工加班申请表信息
@@ -51,17 +54,14 @@ public class StaffOvertimeController {
      */
     @Operation("获取员工加班申请表信息")
     @GetMapping("/{id}")
-    public Result<StaffOvertimeInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<StaffOvertimeInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         StaffOvertimeInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), StaffOvertimeInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), StaffOvertimeInfoVO.class);
                     isData = false;
                 }
             }
@@ -81,13 +81,11 @@ public class StaffOvertimeController {
      */
     @Operation("新建员工加班申请表")
     @PostMapping
-    public Result create(@RequestBody StaffOvertimeForm staffOvertimeForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody StaffOvertimeForm staffOvertimeForm) throws WorkFlowException {
         if (staffOvertimeForm.getStartTime() > staffOvertimeForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        StaffOvertimeEntity entity =
-                JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
+        StaffOvertimeEntity entity = JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(staffOvertimeForm.getStatus())) {
             staffOvertimeService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -105,14 +103,12 @@ public class StaffOvertimeController {
      */
     @Operation("修改员工加班申请表")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody StaffOvertimeForm staffOvertimeForm, @PathVariable("id") String id)
+    public Result update(@RequestBody StaffOvertimeForm staffOvertimeForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (staffOvertimeForm.getStartTime() > staffOvertimeForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        StaffOvertimeEntity entity =
-                JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
+        StaffOvertimeEntity entity = JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(staffOvertimeForm.getStatus())) {
             staffOvertimeService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

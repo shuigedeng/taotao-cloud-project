@@ -46,8 +46,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/division/records")
 public class PayOrderDivisionRecordController extends CommonCtrl {
 
-    @Autowired private PayOrderDivisionRecordService payOrderDivisionRecordService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private PayOrderDivisionRecordService payOrderDivisionRecordService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /** list */
     @PreAuthorize("hasAnyAuthority( 'ENT_DIVISION_RECORD_LIST' )")
@@ -65,8 +68,7 @@ public class PayOrderDivisionRecordController extends CommonCtrl {
         }
 
         if (queryObject.getReceiverGroupId() != null) {
-            condition.eq(
-                    PayOrderDivisionRecord::getReceiverGroupId, queryObject.getReceiverGroupId());
+            condition.eq(PayOrderDivisionRecord::getReceiverGroupId, queryObject.getReceiverGroupId());
         }
 
         if (StringUtils.isNotEmpty(queryObject.getAppId())) {
@@ -87,19 +89,16 @@ public class PayOrderDivisionRecordController extends CommonCtrl {
 
         if (paramJSON != null) {
             if (StringUtils.isNotEmpty(paramJSON.getString("createdStart"))) {
-                condition.ge(
-                        PayOrderDivisionRecord::getCreatedAt, paramJSON.getString("createdStart"));
+                condition.ge(PayOrderDivisionRecord::getCreatedAt, paramJSON.getString("createdStart"));
             }
             if (StringUtils.isNotEmpty(paramJSON.getString("createdEnd"))) {
-                condition.le(
-                        PayOrderDivisionRecord::getCreatedAt, paramJSON.getString("createdEnd"));
+                condition.le(PayOrderDivisionRecord::getCreatedAt, paramJSON.getString("createdEnd"));
             }
         }
 
         condition.orderByDesc(PayOrderDivisionRecord::getCreatedAt); // 时间倒序
 
-        IPage<PayOrderDivisionRecord> pages =
-                payOrderDivisionRecordService.page(getIPage(true), condition);
+        IPage<PayOrderDivisionRecord> pages = payOrderDivisionRecordService.page(getIPage(true), condition);
         return ApiRes.page(pages);
     }
 
@@ -107,11 +106,9 @@ public class PayOrderDivisionRecordController extends CommonCtrl {
     @PreAuthorize("hasAuthority( 'ENT_DIVISION_RECORD_VIEW' )")
     @RequestMapping(value = "/{recordId}", method = RequestMethod.GET)
     public ApiRes detail(@PathVariable("recordId") Long recordId) {
-        PayOrderDivisionRecord record =
-                payOrderDivisionRecordService.getOne(
-                        PayOrderDivisionRecord.gw()
-                                .eq(PayOrderDivisionRecord::getMchNo, getCurrentMchNo())
-                                .eq(PayOrderDivisionRecord::getRecordId, recordId));
+        PayOrderDivisionRecord record = payOrderDivisionRecordService.getOne(PayOrderDivisionRecord.gw()
+                .eq(PayOrderDivisionRecord::getMchNo, getCurrentMchNo())
+                .eq(PayOrderDivisionRecord::getRecordId, recordId));
         if (record == null) {
             throw new BizException(ApiCodeEnum.SYS_OPERATION_FAIL_SELETE);
         }
@@ -122,11 +119,9 @@ public class PayOrderDivisionRecordController extends CommonCtrl {
     @PreAuthorize("hasAuthority( 'ENT_DIVISION_RECORD_RESEND' )")
     @RequestMapping(value = "/resend/{recordId}", method = RequestMethod.POST)
     public ApiRes resend(@PathVariable("recordId") Long recordId) {
-        PayOrderDivisionRecord record =
-                payOrderDivisionRecordService.getOne(
-                        PayOrderDivisionRecord.gw()
-                                .eq(PayOrderDivisionRecord::getMchNo, getCurrentMchNo())
-                                .eq(PayOrderDivisionRecord::getRecordId, recordId));
+        PayOrderDivisionRecord record = payOrderDivisionRecordService.getOne(PayOrderDivisionRecord.gw()
+                .eq(PayOrderDivisionRecord::getMchNo, getCurrentMchNo())
+                .eq(PayOrderDivisionRecord::getRecordId, recordId));
         if (record == null) {
             throw new BizException(ApiCodeEnum.SYS_OPERATION_FAIL_SELETE);
         }

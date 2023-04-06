@@ -38,11 +38,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @date : 2022/2/26 12:35
  */
 @AutoConfiguration
-@EnableConfigurationProperties({
-    OAuth2Properties.class,
-    OAuth2UiProperties.class,
-    OAuth2ComplianceProperties.class
-})
+@EnableConfigurationProperties({OAuth2Properties.class, OAuth2UiProperties.class, OAuth2ComplianceProperties.class})
 @Import({OAuth2DataJpaConfiguration.class})
 @EntityScan(basePackages = {"cn.herodotus.engine.oauth2.server.authentication.entity"})
 @EnableJpaRepositories(
@@ -56,8 +52,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         })
 public class OAuth2AuthenticationServerConfiguration {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(OAuth2AuthenticationServerConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(OAuth2AuthenticationServerConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {

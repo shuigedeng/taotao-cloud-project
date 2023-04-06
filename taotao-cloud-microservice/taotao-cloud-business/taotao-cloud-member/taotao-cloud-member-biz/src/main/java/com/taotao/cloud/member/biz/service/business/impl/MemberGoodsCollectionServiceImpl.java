@@ -41,8 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberGoodsCollectionServiceImpl
-        extends ServiceImpl<IGoodsCollectionMapper, MemberGoodsCollection>
+public class MemberGoodsCollectionServiceImpl extends ServiceImpl<IGoodsCollectionMapper, MemberGoodsCollection>
         implements IMemberGoodsCollectionService {
 
     @Override
@@ -64,11 +63,9 @@ public class MemberGoodsCollectionServiceImpl
 
     @Override
     public Boolean addGoodsCollection(Long skuId) {
-        MemberGoodsCollection memberGoodsCollection =
-                this.getOne(
-                        new LambdaUpdateWrapper<MemberGoodsCollection>()
-                                .eq(MemberGoodsCollection::getMemberId, SecurityUtils.getUserId())
-                                .eq(MemberGoodsCollection::getSkuId, skuId));
+        MemberGoodsCollection memberGoodsCollection = this.getOne(new LambdaUpdateWrapper<MemberGoodsCollection>()
+                .eq(MemberGoodsCollection::getMemberId, SecurityUtils.getUserId())
+                .eq(MemberGoodsCollection::getSkuId, skuId));
 
         if (memberGoodsCollection == null) {
             memberGoodsCollection = new MemberGoodsCollection(SecurityUtils.getUserId(), skuId);

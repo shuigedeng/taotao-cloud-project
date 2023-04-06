@@ -70,9 +70,11 @@ public class AuthorizationServerConfiguration {
     @Value("${oauth2.token.issuer}")
     private String tokenIssuer;
 
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
-    @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     @Qualifier("memberUserDetailsService")
@@ -84,54 +86,28 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
-            throws Exception {
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
 
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
-                new OAuth2AuthorizationServerConfigurer();
+        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
 
-        http.apply(
-                authorizationServerConfigurer
-                        .tokenEndpoint(
-                                tokenEndpointCustomizer ->
-                                        tokenEndpointCustomizer
-                                                .accessTokenRequestConverter(
-                                                        new DelegatingAuthenticationConverter(
-                                                                Arrays.asList(
-                                                                        new OAuth2AuthorizationCodeAuthenticationConverter(),
-                                                                        new OAuth2RefreshTokenAuthenticationConverter(),
-                                                                        new OAuth2ClientCredentialsAuthenticationConverter())))
-                                                .errorResponseHandler(
-                                                        (request, response, authException) -> {
-                                                            LogUtils.error("用户认证失败", authException);
-                                                            ResponseUtils.fail(
-                                                                    response,
-                                                                    authException.getMessage());
-                                                        }))
-                        .authorizationEndpoint(
-                                authorizationEndpointCustomizer ->
-                                        authorizationEndpointCustomizer.consentPage(
-                                                "/oauth2/consent"))
-                        .oidc(
-                                oidcCustomizer ->
-                                        oidcCustomizer.userInfoEndpoint(
-                                                userInfoEndpointCustomizer ->
-                                                        userInfoEndpointCustomizer.userInfoMapper(
-                                                                userInfoMapper -> {
-                                                                    OidcUserInfoAuthenticationToken
-                                                                            authentication =
-                                                                                    userInfoMapper
-                                                                                            .getAuthentication();
-                                                                    JwtAuthenticationToken
-                                                                            principal =
-                                                                                    (JwtAuthenticationToken)
-                                                                                            authentication
-                                                                                                    .getPrincipal();
-                                                                    return new OidcUserInfo(
-                                                                            principal
-                                                                                    .getToken()
-                                                                                    .getClaims());
-                                                                }))));
+        http.apply(authorizationServerConfigurer
+                .tokenEndpoint(tokenEndpointCustomizer -> tokenEndpointCustomizer
+                        .accessTokenRequestConverter(new DelegatingAuthenticationConverter(Arrays.asList(
+                                new OAuth2AuthorizationCodeAuthenticationConverter(),
+                                new OAuth2RefreshTokenAuthenticationConverter(),
+                                new OAuth2ClientCredentialsAuthenticationConverter())))
+                        .errorResponseHandler((request, response, authException) -> {
+                            LogUtils.error("用户认证失败", authException);
+                            ResponseUtils.fail(response, authException.getMessage());
+                        }))
+                .authorizationEndpoint(authorizationEndpointCustomizer ->
+                        authorizationEndpointCustomizer.consentPage("/oauth2/consent"))
+                .oidc(oidcCustomizer -> oidcCustomizer.userInfoEndpoint(
+                        userInfoEndpointCustomizer -> userInfoEndpointCustomizer.userInfoMapper(userInfoMapper -> {
+                            OidcUserInfoAuthenticationToken authentication = userInfoMapper.getAuthentication();
+                            JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
+                            return new OidcUserInfo(principal.getToken().getClaims());
+                        }))));
 
         RequestMatcher authorizationServerConfigurerEndpointsMatcher =
                 authorizationServerConfigurer.getEndpointsMatcher();
@@ -139,15 +115,13 @@ public class AuthorizationServerConfiguration {
         http.securityMatcher(authorizationServerConfigurerEndpointsMatcher)
                 .authorizeHttpRequests(
                         authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-                .csrf(
-                        csrf ->
-                                csrf.ignoringRequestMatchers(
-                                        authorizationServerConfigurerEndpointsMatcher))
+                .csrf(csrf -> csrf.ignoringRequestMatchers(authorizationServerConfigurerEndpointsMatcher))
                 .formLogin()
                 .and()
                 .apply(authorizationServerConfigurer);
 
-        SecurityFilterChain securityFilterChain = http.formLogin(Customizer.withDefaults()).build();
+        SecurityFilterChain securityFilterChain =
+                http.formLogin(Customizer.withDefaults()).build();
 
         // addCustomOAuth2ResourceOwnerPasswordAuthenticationProvider(http);
         //
@@ -168,13 +142,11 @@ public class AuthorizationServerConfiguration {
             RedisRepository redisRepository,
             JwtDecoder jwtDecoder) {
 
-        JdbcOAuth2AuthorizationService service =
-                new CloudOAuth2AuthorizationService(
-                        jdbcTemplate, registeredClientRepository, redisRepository, jwtDecoder);
+        JdbcOAuth2AuthorizationService service = new CloudOAuth2AuthorizationService(
+                jdbcTemplate, registeredClientRepository, redisRepository, jwtDecoder);
 
         JdbcOAuth2AuthorizationService.OAuth2AuthorizationRowMapper rowMapper =
-                new JdbcOAuth2AuthorizationService.OAuth2AuthorizationRowMapper(
-                        registeredClientRepository);
+                new JdbcOAuth2AuthorizationService.OAuth2AuthorizationRowMapper(registeredClientRepository);
 
         ObjectMapper objectMapper = new ObjectMapper();
         ClassLoader classLoader = JdbcOAuth2AuthorizationService.class.getClassLoader();
@@ -197,8 +169,7 @@ public class AuthorizationServerConfiguration {
     @Bean
     public OAuth2AuthorizationConsentService authorizationConsentService(
             JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-        return new CloudJdbcOAuth2AuthorizationConsentService(
-                jdbcTemplate, registeredClientRepository);
+        return new CloudJdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
     }
 
     @Bean

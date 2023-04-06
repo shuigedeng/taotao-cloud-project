@@ -36,10 +36,17 @@ import org.springframework.stereotype.Service;
 public class SalesOrderServiceImpl extends ServiceImpl<SalesOrderMapper, SalesOrderEntity>
         implements SalesOrderService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private SalesOrderEntryService salesOrderEntryService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private SalesOrderEntryService salesOrderEntryService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public List<SalesOrderEntryEntity> getSalesEntryList(String id) {
@@ -60,10 +67,7 @@ public class SalesOrderServiceImpl extends ServiceImpl<SalesOrderMapper, SalesOr
 
     @Override
     @DSTransactional
-    public void save(
-            String id,
-            SalesOrderEntity entity,
-            List<SalesOrderEntryEntity> salesOrderEntryEntityList)
+    public void save(String id, SalesOrderEntity entity, List<SalesOrderEntryEntity> salesOrderEntryEntityList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -166,9 +170,7 @@ public class SalesOrderServiceImpl extends ServiceImpl<SalesOrderMapper, SalesOr
         SalesOrderForm salesOrderForm = JsonUtil.getJsonToBean(data, SalesOrderForm.class);
         SalesOrderEntity entity = JsonUtil.getJsonToBean(salesOrderForm, SalesOrderEntity.class);
         List<SalesOrderEntryEntityInfoModel> entryList =
-                salesOrderForm.getEntryList() != null
-                        ? salesOrderForm.getEntryList()
-                        : new ArrayList<>();
+                salesOrderForm.getEntryList() != null ? salesOrderForm.getEntryList() : new ArrayList<>();
         List<SalesOrderEntryEntity> salesOrderEntryEntityList =
                 JsonUtil.getJsonToList(entryList, SalesOrderEntryEntity.class);
         entity.setId(id);

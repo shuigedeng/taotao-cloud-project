@@ -75,8 +75,7 @@ public class ToolUtils {
                                     && !"OR".equalsIgnoreCase(keywordArray[i])
                                     && !"OR".equalsIgnoreCase(keywordArray[i])) {
                                 if (keywordArray[i].startsWith("(")) {
-                                    if (keywordArray[i].contains("NOT")
-                                            || keywordArray[i].contains("not")) {
+                                    if (keywordArray[i].contains("NOT") || keywordArray[i].contains("not")) {
                                         handleKeyWords.append(keywordArray[i].toUpperCase());
                                         continue;
                                     }
@@ -107,8 +106,7 @@ public class ToolUtils {
                                     && !"OR".equalsIgnoreCase(keywordArray[i])
                                     && !"NOT".equalsIgnoreCase(keywordArray[i])) {
                                 if (keywordArray[i].startsWith("(")) {
-                                    if (keywordArray[i].contains("NOT")
-                                            || keywordArray[i].contains("not")) {
+                                    if (keywordArray[i].contains("NOT") || keywordArray[i].contains("not")) {
                                         handleKeyWords
                                                 .append(keywordArray[i].toUpperCase())
                                                 .append(" ");
@@ -135,7 +133,9 @@ public class ToolUtils {
                                             .append("\" ");
                                 }
                             } else {
-                                handleKeyWords.append(keywordArray[i].toUpperCase()).append(" ");
+                                handleKeyWords
+                                        .append(keywordArray[i].toUpperCase())
+                                        .append(" ");
                             }
                         }
                     }

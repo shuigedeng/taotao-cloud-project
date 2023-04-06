@@ -35,7 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/article")
 @Api(tags = {"CMS文章"})
 public class ArticleController {
-    @Autowired ArticleService articleService;
+    @Autowired
+    ArticleService articleService;
 
     /**
      * 查看文章详情

@@ -38,7 +38,8 @@ import lombok.*;
 @Schema(description = "树形菜单列表")
 public class MenuTreeVO extends MapperNode implements Serializable {
 
-    @Serial private static final long serialVersionUID = -5853343562172855421L;
+    @Serial
+    private static final long serialVersionUID = -5853343562172855421L;
 
     @Schema(description = "图标")
     private String icon;

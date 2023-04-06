@@ -39,7 +39,8 @@ import org.springframework.web.multipart.MultipartFile;
 @CacheConfig(cacheNames = {"wxAssetsServiceCache"})
 @Slf4j
 public class WxAssetsServiceImpl implements WxAssetsService {
-    @Autowired WxMpService wxMpService;
+    @Autowired
+    WxMpService wxMpService;
 
     @Override
     @Cacheable(key = "methodName+ #appid")
@@ -70,8 +71,7 @@ public class WxAssetsServiceImpl implements WxAssetsService {
 
     @Cacheable(key = "methodName + #appid + #page")
     @Override
-    public WxMpMaterialNewsBatchGetResult materialNewsBatchGet(String appid, int page)
-            throws WxErrorException {
+    public WxMpMaterialNewsBatchGetResult materialNewsBatchGet(String appid, int page) throws WxErrorException {
         log.info("从API获取媒体素材列表,page={}", page);
         wxMpService.switchoverTo(appid);
         final int pageSize = PageSizeConstant.PAGE_SIZE_SMALL;
@@ -99,8 +99,7 @@ public class WxAssetsServiceImpl implements WxAssetsService {
      */
     @Override
     @CacheEvict(allEntries = true)
-    public void materialArticleUpdate(String appid, WxMpMaterialArticleUpdate form)
-            throws WxErrorException {
+    public void materialArticleUpdate(String appid, WxMpMaterialArticleUpdate form) throws WxErrorException {
         log.info("更新图文素材...");
         wxMpService.switchoverTo(appid);
         wxMpService.getMaterialService().materialNewsUpdate(form);
@@ -109,16 +108,12 @@ public class WxAssetsServiceImpl implements WxAssetsService {
     @Override
     @CacheEvict(allEntries = true)
     public WxMpMaterialUploadResult materialFileUpload(
-            String appid, String mediaType, String fileName, MultipartFile file)
-            throws WxErrorException, IOException {
+            String appid, String mediaType, String fileName, MultipartFile file) throws WxErrorException, IOException {
         log.info("上传媒体素材：{}", fileName);
         wxMpService.switchoverTo(appid);
         String originalFilename = file.getOriginalFilename();
-        File tempFile =
-                File.createTempFile(
-                        fileName + "--",
-                        Objects.requireNonNull(originalFilename)
-                                .substring(originalFilename.lastIndexOf(".")));
+        File tempFile = File.createTempFile(
+                fileName + "--", Objects.requireNonNull(originalFilename).substring(originalFilename.lastIndexOf(".")));
         file.transferTo(tempFile);
         WxMpMaterial wxMaterial = new WxMpMaterial();
         wxMaterial.setFile(tempFile);
@@ -126,8 +121,7 @@ public class WxAssetsServiceImpl implements WxAssetsService {
         if (WxConsts.MediaFileType.VIDEO.equals(mediaType)) {
             wxMaterial.setVideoTitle(fileName);
         }
-        WxMpMaterialUploadResult res =
-                wxMpService.getMaterialService().materialFileUpload(mediaType, wxMaterial);
+        WxMpMaterialUploadResult res = wxMpService.getMaterialService().materialFileUpload(mediaType, wxMaterial);
         tempFile.deleteOnExit();
         return res;
     }

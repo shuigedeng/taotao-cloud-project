@@ -196,8 +196,7 @@ public class JSONWriter {
                 ApiListField listField = field.getAnnotation(ApiListField.class);
                 // 优先处理列表类型注解,非列表类型才处理字段注解
                 if (listField != null) {
-                    PropertyDescriptor pd =
-                            new PropertyDescriptor(field.getName(), object.getClass());
+                    PropertyDescriptor pd = new PropertyDescriptor(field.getName(), object.getClass());
                     Method accessor = pd.getReadMethod();
                     if (!accessor.isAccessible()) {
                         accessor.setAccessible(true);
@@ -212,8 +211,7 @@ public class JSONWriter {
                     add(listField.value(), value, true);
                     addedSomething = true;
                 } else if (jsonField != null) {
-                    PropertyDescriptor pd =
-                            new PropertyDescriptor(field.getName(), object.getClass());
+                    PropertyDescriptor pd = new PropertyDescriptor(field.getName(), object.getClass());
                     Method accessor = pd.getReadMethod();
                     if (!accessor.isAccessible()) {
                         accessor.setAccessible(true);

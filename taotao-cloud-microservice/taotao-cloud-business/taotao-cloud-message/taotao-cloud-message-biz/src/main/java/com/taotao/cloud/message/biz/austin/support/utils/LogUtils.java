@@ -37,7 +37,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogUtils extends CustomLogListener {
 
-    @Autowired private SendMqService sendMqService;
+    @Autowired
+    private SendMqService sendMqService;
 
     @Value("${austin.business.log.topic.name}")
     private String topicName;

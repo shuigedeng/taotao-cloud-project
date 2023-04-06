@@ -38,7 +38,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MessageAutoReplyHandler implements WxMpMessageHandler {
 
-    @Resource private MpAutoReplyService mpAutoReplyService;
+    @Resource
+    private MpAutoReplyService mpAutoReplyService;
 
     @Override
     public WxMpXmlOutMessage handle(

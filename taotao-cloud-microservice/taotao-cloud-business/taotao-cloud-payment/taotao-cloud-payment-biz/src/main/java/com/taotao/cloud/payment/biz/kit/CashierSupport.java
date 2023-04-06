@@ -47,11 +47,14 @@ import org.springframework.stereotype.Component;
 public class CashierSupport {
 
     /** 收银台 */
-    @Autowired private List<CashierExecute> cashierExecuteList;
+    @Autowired
+    private List<CashierExecute> cashierExecuteList;
     /** 预存款 */
-    @Autowired private IFeignMemberWalletApi memberWalletApi;
+    @Autowired
+    private IFeignMemberWalletApi memberWalletApi;
     /** 配置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
 
     /**
      * 支付
@@ -73,10 +76,7 @@ public class CashierSupport {
         // 获取支付插件
         Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
         LogUtils.info(
-                "支付请求：客户端：{},支付类型：{},请求：{}",
-                paymentClientEnum.name(),
-                paymentMethodEnum.name(),
-                payParam.toString());
+                "支付请求：客户端：{},支付类型：{},请求：{}", paymentClientEnum.name(), paymentMethodEnum.name(), payParam.toString());
 
         // 支付方式调用
         return switch (paymentClientEnum) {
@@ -107,8 +107,7 @@ public class CashierSupport {
         SettingVO setting = settingApi.get(SettingCategoryEnum.PAYMENT_SUPPORT.name());
         PaymentSupportSetting paymentSupportSetting =
                 JSONUtil.toBean(setting.getSettingValue(), PaymentSupportSetting.class);
-        for (PaymentSupportItem paymentSupportItem :
-                paymentSupportSetting.getPaymentSupportItems()) {
+        for (PaymentSupportItem paymentSupportItem : paymentSupportSetting.getPaymentSupportItems()) {
             if (paymentSupportItem.getClient().equals(clientTypeEnum.name())) {
                 return paymentSupportItem.getSupports();
             }
@@ -165,16 +164,11 @@ public class CashierSupport {
             }
 
             cashierParam.setSupport(support(payParam.getClientType()));
-            cashierParam.setWalletValue(
-                    memberWalletApi
-                            .getMemberWallet(UserContext.getCurrentUser().getId())
-                            .getMemberWallet());
-            OrderSettingVO orderSetting =
-                    JSONUtil.toBean(
-                            settingApi
-                                    .get(SettingCategoryEnum.ORDER_SETTING.name())
-                                    .getSettingValue(),
-                            OrderSetting.class);
+            cashierParam.setWalletValue(memberWalletApi
+                    .getMemberWallet(UserContext.getCurrentUser().getId())
+                    .getMemberWallet());
+            OrderSettingVO orderSetting = JSONUtil.toBean(
+                    settingApi.get(SettingCategoryEnum.ORDER_SETTING.name()).getSettingValue(), OrderSetting.class);
             Integer minute = orderSetting.getAutoCancel();
             cashierParam.setAutoCancel(cashierParam.getCreateTime().getTime() + minute * 1000 * 60);
             return cashierParam;

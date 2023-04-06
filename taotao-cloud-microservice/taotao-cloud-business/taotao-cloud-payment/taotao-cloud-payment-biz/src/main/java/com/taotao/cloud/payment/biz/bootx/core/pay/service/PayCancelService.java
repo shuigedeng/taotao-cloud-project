@@ -59,10 +59,7 @@ public class PayCancelService {
     @Transactional(rollbackFor = Exception.class)
     public void cancelByPaymentId(Long paymentId) {
         // 获取payment和paymentParam数据
-        Payment payment =
-                paymentManager
-                        .findById(paymentId)
-                        .orElseThrow(() -> new PayFailureException("未找到payment"));
+        Payment payment = paymentManager.findById(paymentId).orElseThrow(() -> new PayFailureException("未找到payment"));
         this.cancelPayment(payment);
     }
 
@@ -74,8 +71,7 @@ public class PayCancelService {
         ;
 
         // 1.获取支付方式，通过工厂生成对应的策略组
-        List<AbsPayStrategy> paymentStrategyList =
-                PayStrategyFactory.create(payParam.getPayModeList());
+        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayModeList());
         if (CollectionUtil.isEmpty(paymentStrategyList)) {
             throw new PayUnsupportedMethodException();
         }
@@ -86,16 +82,13 @@ public class PayCancelService {
         }
 
         // 3.执行取消订单
-        this.doHandler(
-                payment,
-                paymentStrategyList,
-                (strategyList, paymentObj) -> {
-                    // 发起取消进行的执行方法
-                    strategyList.forEach(AbsPayStrategy::doCancelHandler);
-                    // 取消订单
-                    paymentObj.setPayStatus(PayStatusCode.TRADE_CANCEL);
-                    paymentManager.updateById(paymentObj);
-                });
+        this.doHandler(payment, paymentStrategyList, (strategyList, paymentObj) -> {
+            // 发起取消进行的执行方法
+            strategyList.forEach(AbsPayStrategy::doCancelHandler);
+            // 取消订单
+            paymentObj.setPayStatus(PayStatusCode.TRADE_CANCEL);
+            paymentManager.updateById(paymentObj);
+        });
     }
 
     /**

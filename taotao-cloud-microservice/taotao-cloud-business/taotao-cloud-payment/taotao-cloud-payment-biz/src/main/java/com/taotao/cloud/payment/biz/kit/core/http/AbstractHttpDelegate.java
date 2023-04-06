@@ -63,8 +63,7 @@ public abstract class AbstractHttpDelegate {
      * @param headers 请求头
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public PaymentHttpResponse get(
-            String url, Map<String, Object> paramMap, Map<String, String> headers) {
+    public PaymentHttpResponse get(String url, Map<String, Object> paramMap, Map<String, String> headers) {
         PaymentHttpResponse response = new PaymentHttpResponse();
         HttpResponse httpResponse = getToResponse(url, paramMap, headers);
         response.setBody(httpResponse.body());
@@ -103,8 +102,7 @@ public abstract class AbstractHttpDelegate {
      * @param headers 请求头
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public PaymentHttpResponse post(
-            String url, Map<String, Object> paramMap, Map<String, String> headers) {
+    public PaymentHttpResponse post(String url, Map<String, Object> paramMap, Map<String, String> headers) {
         PaymentHttpResponse response = new PaymentHttpResponse();
         HttpResponse httpResponse = postToResponse(url, headers, paramMap);
         response.setBody(httpResponse.body());
@@ -138,8 +136,7 @@ public abstract class AbstractHttpDelegate {
      * @param headers 请求头
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public PaymentHttpResponse patch(
-            String url, Map<String, Object> paramMap, Map<String, String> headers) {
+    public PaymentHttpResponse patch(String url, Map<String, Object> paramMap, Map<String, String> headers) {
         PaymentHttpResponse response = new PaymentHttpResponse();
         HttpResponse httpResponse = patchToResponse(url, headers, paramMap);
         response.setBody(httpResponse.body());
@@ -173,8 +170,7 @@ public abstract class AbstractHttpDelegate {
      * @param headers 请求头
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public PaymentHttpResponse delete(
-            String url, Map<String, Object> paramMap, Map<String, String> headers) {
+    public PaymentHttpResponse delete(String url, Map<String, Object> paramMap, Map<String, String> headers) {
         PaymentHttpResponse response = new PaymentHttpResponse();
         HttpResponse httpResponse = deleteToResponse(url, headers, paramMap);
         response.setBody(httpResponse.body());
@@ -208,8 +204,7 @@ public abstract class AbstractHttpDelegate {
      * @param headers 请求头
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public PaymentHttpResponse put(
-            String url, Map<String, Object> paramMap, Map<String, String> headers) {
+    public PaymentHttpResponse put(String url, Map<String, Object> paramMap, Map<String, String> headers) {
         PaymentHttpResponse response = new PaymentHttpResponse();
         HttpResponse httpResponse = putToResponse(url, headers, paramMap);
         response.setBody(httpResponse.body());
@@ -246,22 +241,15 @@ public abstract class AbstractHttpDelegate {
      * @param protocol 协议
      * @return {@link String} 请求返回的结果
      */
-    public String upload(
-            String url,
-            String data,
-            String certPath,
-            String certPass,
-            String filePath,
-            String protocol) {
+    public String upload(String url, String data, String certPath, String certPass, String filePath, String protocol) {
         try {
             File file = FileUtil.newFile(filePath);
             return HttpRequest.post(url)
-                    .setSSLSocketFactory(
-                            SSLSocketFactoryBuilder.create()
-                                    .setProtocol(protocol)
-                                    .setKeyManagers(getKeyManager(certPass, certPath, null))
-                                    .setSecureRandom(new SecureRandom())
-                                    .build())
+                    .setSSLSocketFactory(SSLSocketFactoryBuilder.create()
+                            .setProtocol(protocol)
+                            .setKeyManagers(getKeyManager(certPass, certPath, null))
+                            .setSecureRandom(new SecureRandom())
+                            .build())
                     .header("Content-Type", "multipart/form-data;boundary=\"boundary\"")
                     .form("file", file)
                     .form("meta", data)
@@ -282,8 +270,7 @@ public abstract class AbstractHttpDelegate {
      * @param filePath 上传文件路径
      * @return {@link String} 请求返回的结果
      */
-    public String upload(
-            String url, String data, String certPath, String certPass, String filePath) {
+    public String upload(String url, String data, String certPath, String certPass, String filePath) {
         return upload(url, data, certPath, certPass, filePath, SSLSocketFactoryBuilder.TLSv1);
     }
 
@@ -300,12 +287,11 @@ public abstract class AbstractHttpDelegate {
     public String post(String url, String data, String certPath, String certPass, String protocol) {
         try {
             return HttpRequest.post(url)
-                    .setSSLSocketFactory(
-                            SSLSocketFactoryBuilder.create()
-                                    .setProtocol(protocol)
-                                    .setKeyManagers(getKeyManager(certPass, certPath, null))
-                                    .setSecureRandom(new SecureRandom())
-                                    .build())
+                    .setSSLSocketFactory(SSLSocketFactoryBuilder.create()
+                            .setProtocol(protocol)
+                            .setKeyManagers(getKeyManager(certPass, certPath, null))
+                            .setSecureRandom(new SecureRandom())
+                            .build())
                     .body(data)
                     .execute()
                     .body();
@@ -337,16 +323,14 @@ public abstract class AbstractHttpDelegate {
      * @param protocol 协议
      * @return {@link String} 请求返回的结果
      */
-    public String post(
-            String url, String data, InputStream certFile, String certPass, String protocol) {
+    public String post(String url, String data, InputStream certFile, String certPass, String protocol) {
         try {
             return HttpRequest.post(url)
-                    .setSSLSocketFactory(
-                            SSLSocketFactoryBuilder.create()
-                                    .setProtocol(protocol)
-                                    .setKeyManagers(getKeyManager(certPass, null, certFile))
-                                    .setSecureRandom(new SecureRandom())
-                                    .build())
+                    .setSSLSocketFactory(SSLSocketFactoryBuilder.create()
+                            .setProtocol(protocol)
+                            .setKeyManagers(getKeyManager(certPass, null, certFile))
+                            .setSecureRandom(new SecureRandom())
+                            .build())
                     .body(data)
                     .execute()
                     .body();
@@ -376,8 +360,7 @@ public abstract class AbstractHttpDelegate {
      * @param headers 请求头
      * @return {@link HttpResponse} 请求返回的结果
      */
-    private HttpResponse getToResponse(
-            String url, Map<String, Object> paramMap, Map<String, String> headers) {
+    private HttpResponse getToResponse(String url, Map<String, Object> paramMap, Map<String, String> headers) {
         return HttpRequest.get(url).addHeaders(headers).form(paramMap).execute();
     }
 
@@ -401,8 +384,7 @@ public abstract class AbstractHttpDelegate {
      * @param paramMap 请求参数
      * @return {@link HttpResponse} 请求返回的结果
      */
-    private HttpResponse postToResponse(
-            String url, Map<String, String> headers, Map<String, Object> paramMap) {
+    private HttpResponse postToResponse(String url, Map<String, String> headers, Map<String, Object> paramMap) {
         return HttpRequest.post(url).addHeaders(headers).form(paramMap).execute();
     }
 
@@ -414,8 +396,7 @@ public abstract class AbstractHttpDelegate {
      * @param paramMap 请求参数
      * @return {@link HttpResponse} 请求返回的结果
      */
-    private HttpResponse patchToResponse(
-            String url, Map<String, String> headers, Map<String, Object> paramMap) {
+    private HttpResponse patchToResponse(String url, Map<String, String> headers, Map<String, Object> paramMap) {
         return HttpRequest.patch(url).addHeaders(headers).form(paramMap).execute();
     }
 
@@ -451,8 +432,7 @@ public abstract class AbstractHttpDelegate {
      * @param paramMap 请求参数
      * @return {@link HttpResponse} 请求返回的结果
      */
-    private HttpResponse deleteToResponse(
-            String url, Map<String, String> headers, Map<String, Object> paramMap) {
+    private HttpResponse deleteToResponse(String url, Map<String, String> headers, Map<String, Object> paramMap) {
         return HttpRequest.delete(url).addHeaders(headers).form(paramMap).execute();
     }
 
@@ -476,21 +456,18 @@ public abstract class AbstractHttpDelegate {
      * @param paramMap 请求参数
      * @return {@link HttpResponse} 请求返回的结果
      */
-    private HttpResponse putToResponse(
-            String url, Map<String, String> headers, Map<String, Object> paramMap) {
+    private HttpResponse putToResponse(String url, Map<String, String> headers, Map<String, Object> paramMap) {
         return HttpRequest.put(url).addHeaders(headers).form(paramMap).execute();
     }
 
-    private KeyManager[] getKeyManager(String certPass, String certPath, InputStream certFile)
-            throws Exception {
+    private KeyManager[] getKeyManager(String certPass, String certPath, InputStream certFile) throws Exception {
         KeyStore clientStore = KeyStore.getInstance("PKCS12");
         if (certFile != null) {
             clientStore.load(certFile, certPass.toCharArray());
         } else {
             clientStore.load(new FileInputStream(certPath), certPass.toCharArray());
         }
-        KeyManagerFactory kmf =
-                KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         kmf.init(clientStore, certPass.toCharArray());
         return kmf.getKeyManagers();
     }

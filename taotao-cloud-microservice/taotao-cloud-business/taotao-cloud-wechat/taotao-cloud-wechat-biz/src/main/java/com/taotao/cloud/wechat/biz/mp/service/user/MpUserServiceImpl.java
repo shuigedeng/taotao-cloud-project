@@ -59,13 +59,16 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 public class MpUserServiceImpl implements MpUserService {
 
-    @Resource @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource
+    @Lazy // 延迟加载，解决循环依赖的问题
     private MpAccountService mpAccountService;
 
-    @Resource @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource
+    @Lazy // 延迟加载，解决循环依赖的问题
     private MpServiceFactory mpServiceFactory;
 
-    @Resource private MpUserMapper mpUserMapper;
+    @Resource
+    private MpUserMapper mpUserMapper;
 
     @Override
     public MpUserDO getUser(Long id) {
@@ -150,12 +153,9 @@ public class MpUserServiceImpl implements MpUserService {
             return;
         }
         // 1. 获得数据库已保存的粉丝列表
-        List<MpUserDO> dbUsers =
-                mpUserMapper.selectListByAppIdAndOpenid(
-                        account.getAppId(),
-                        CollectionUtils.convertList(wxUsers, WxMpUser::getOpenId));
-        Map<String, MpUserDO> openId2Users =
-                CollectionUtils.convertMap(dbUsers, MpUserDO::getOpenid);
+        List<MpUserDO> dbUsers = mpUserMapper.selectListByAppIdAndOpenid(
+                account.getAppId(), CollectionUtils.convertList(wxUsers, WxMpUser::getOpenId));
+        Map<String, MpUserDO> openId2Users = CollectionUtils.convertMap(dbUsers, MpUserDO::getOpenid);
 
         // 2.1 根据情况，插入或更新
         List<MpUserDO> users = MpUserConvert.INSTANCE.convertList(account, wxUsers);
@@ -182,11 +182,10 @@ public class MpUserServiceImpl implements MpUserService {
             log.error("[updateUserUnsubscribe][微信公众号粉丝 appId({}) openid({}) 不存在]", appId, openid);
             return;
         }
-        mpUserMapper.updateById(
-                new MpUserDO()
-                        .setId(dbUser.getId())
-                        .setSubscribeStatus(CommonStatusEnum.DISABLE.getStatus())
-                        .setUnsubscribeTime(LocalDateTime.now()));
+        mpUserMapper.updateById(new MpUserDO()
+                .setId(dbUser.getId())
+                .setSubscribeStatus(CommonStatusEnum.DISABLE.getStatus())
+                .setUnsubscribeTime(LocalDateTime.now()));
     }
 
     @Override

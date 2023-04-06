@@ -33,7 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("gobrs")
 public class GobrsController {
 
-    @Autowired private GobrsService gobrsService;
+    @Autowired
+    private GobrsService gobrsService;
 
     /**
      * Gobrs test string.

@@ -32,7 +32,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "会员搜索VO")
 public class MemberSearchVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "用户名")
     private String username;

@@ -55,7 +55,8 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
 
     public static final String TABLE_NAME = "tt_store_flow";
 
-    @Serial private static final long serialVersionUID = -5998757398902747939L;
+    @Serial
+    private static final long serialVersionUID = -5998757398902747939L;
     /** 流水编号 */
     @Column(name = "sn", columnDefinition = "varchar(64) not null comment '流水编号'")
     private String sn;
@@ -103,9 +104,7 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
      *
      * @see FlowTypeEnum
      */
-    @Column(
-            name = "flow_type",
-            columnDefinition = "varchar(64) not null comment '流水类型：PAY/REFUND 支付/退款'")
+    @Column(name = "flow_type", columnDefinition = "varchar(64) not null comment '流水类型：PAY/REFUND 支付/退款'")
     private String flowType;
 
     /**
@@ -113,39 +112,25 @@ public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
      *
      * @see OrderPromotionTypeEnum
      */
-    @Column(
-            name = "order_promotion_type",
-            columnDefinition = "varchar(64) not null comment '订单促销类型'")
+    @Column(name = "order_promotion_type", columnDefinition = "varchar(64) not null comment '订单促销类型'")
     private String orderPromotionType;
     /** 积分活动商品结算价格 */
-    @Column(
-            name = "point_settlement_price",
-            columnDefinition = "varchar(64) not null comment '积分活动商品结算价格'")
+    @Column(name = "point_settlement_price", columnDefinition = "varchar(64) not null comment '积分活动商品结算价格'")
     private BigDecimal pointSettlementPrice;
     /** 砍价活动商品结算价格 */
-    @Column(
-            name = "kanjia_settlement_price",
-            columnDefinition = "varchar(64) not null comment '砍价活动商品结算价格'")
+    @Column(name = "kanjia_settlement_price", columnDefinition = "varchar(64) not null comment '砍价活动商品结算价格'")
     private BigDecimal kanjiaSettlementPrice;
     /** 平台优惠券 使用金额 */
-    @Column(
-            name = "site_coupon_price",
-            columnDefinition = "varchar(64) not null comment '平台优惠券 使用金额'")
+    @Column(name = "site_coupon_price", columnDefinition = "varchar(64) not null comment '平台优惠券 使用金额'")
     private BigDecimal siteCouponPrice;
     /** 站点优惠券佣金比例 */
-    @Column(
-            name = "site_coupon_point",
-            columnDefinition = "varchar(64) not null comment '站点优惠券佣金比例'")
+    @Column(name = "site_coupon_point", columnDefinition = "varchar(64) not null comment '站点优惠券佣金比例'")
     private BigDecimal siteCouponPoint;
     /** 站点优惠券佣金 */
-    @Column(
-            name = "site_coupon_commission",
-            columnDefinition = "varchar(64) not null comment '站点优惠券佣金'")
+    @Column(name = "site_coupon_commission", columnDefinition = "varchar(64) not null comment '站点优惠券佣金'")
     private BigDecimal siteCouponCommission;
     /** 单品分销返现支出 */
-    @Column(
-            name = "distribution_rebate",
-            columnDefinition = "varchar(64) not null comment '单品分销返现支出'")
+    @Column(name = "distribution_rebate", columnDefinition = "varchar(64) not null comment '单品分销返现支出'")
     private BigDecimal distributionRebate;
     /** 平台收取交易佣金 */
     @Column(name = "commission_price", columnDefinition = "varchar(64) not null comment '平台收取交易佣金'")

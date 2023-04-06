@@ -53,7 +53,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/flowable/task")
 public class FlowTaskController {
 
-    @Autowired private IFlowTaskService flowTaskService;
+    @Autowired
+    private IFlowTaskService flowTaskService;
 
     @ApiOperation(value = "我发起的流程", response = FlowTaskDto.class)
     @GetMapping(value = "/myProcess")
@@ -99,8 +100,7 @@ public class FlowTaskController {
 
     @ApiOperation(value = "获取流程变量", response = FlowTaskDto.class)
     @GetMapping(value = "/processVariables/{taskId}")
-    public AjaxResult processVariables(
-            @ApiParam(value = "流程任务Id") @PathVariable(value = "taskId") String taskId) {
+    public AjaxResult processVariables(@ApiParam(value = "流程任务Id") @PathVariable(value = "taskId") String taskId) {
         return flowTaskService.processVariables(taskId);
     }
 
@@ -204,8 +204,7 @@ public class FlowTaskController {
      * @param processId 任务ID
      */
     @GetMapping("/diagram/{processId}")
-    public void genProcessDiagram(
-            HttpServletResponse response, @PathVariable("processId") String processId) {
+    public void genProcessDiagram(HttpServletResponse response, @PathVariable("processId") String processId) {
         InputStream inputStream = flowTaskService.diagram(processId);
         OutputStream os = null;
         BufferedImage image = null;
@@ -238,8 +237,7 @@ public class FlowTaskController {
      */
     @GetMapping("/flowViewer/{procInsId}/{executionId}")
     public AjaxResult getFlowViewer(
-            @PathVariable("procInsId") String procInsId,
-            @PathVariable("executionId") String executionId) {
+            @PathVariable("procInsId") String procInsId, @PathVariable("executionId") String executionId) {
         return flowTaskService.getFlowViewer(procInsId, executionId);
     }
 
@@ -263,8 +261,7 @@ public class FlowTaskController {
      * @return
      */
     @GetMapping("/flowTaskForm")
-    public AjaxResult flowTaskForm(@RequestParam(value = "taskId", required = false) String taskId)
-            throws Exception {
+    public AjaxResult flowTaskForm(@RequestParam(value = "taskId", required = false) String taskId) throws Exception {
         return flowTaskService.flowTaskForm(taskId);
     }
 }

@@ -29,7 +29,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class KanjiaActivityGoodsDTO extends KanjiaActivityGoodsBaseDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 1969340823809319805L;
+    @Serial
+    private static final long serialVersionUID = 1969340823809319805L;
 
     // @Schema(description =  "商品规格详细信息")
     // private GoodsSku goodsSku;

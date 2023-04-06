@@ -36,13 +36,10 @@ public class HerodotusAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AccessDeniedException accessDeniedException)
+            HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
             throws IOException, ServletException {
         Result<String> result =
-                SecurityGlobalExceptionHandler.resolveException(
-                        accessDeniedException, request.getRequestURI());
+                SecurityGlobalExceptionHandler.resolveException(accessDeniedException, request.getRequestURI());
         response.setStatus(result.getStatus());
         WebUtils.renderJson(response, result);
     }

@@ -36,7 +36,10 @@ public enum FriendTypeEnum {
     SELF("self", "自己"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     FriendTypeEnum(String code, String info) {

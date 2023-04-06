@@ -60,15 +60,11 @@ import org.springframework.util.StringUtils;
  *     Request</a>
  * @since 0.0.1
  */
-public final class OAuth2AuthorizationCodeAuthenticationProvider
-        extends AbstractAuthenticationProvider {
+public final class OAuth2AuthorizationCodeAuthenticationProvider extends AbstractAuthenticationProvider {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(OAuth2AuthorizationCodeAuthenticationProvider.class);
-    private static final String ERROR_URI =
-            "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
-    private static final OAuth2TokenType AUTHORIZATION_CODE_TOKEN_TYPE =
-            new OAuth2TokenType(OAuth2ParameterNames.CODE);
+    private static final Logger log = LoggerFactory.getLogger(OAuth2AuthorizationCodeAuthenticationProvider.class);
+    private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
+    private static final OAuth2TokenType AUTHORIZATION_CODE_TOKEN_TYPE = new OAuth2TokenType(OAuth2ParameterNames.CODE);
 
     private final OAuth2AuthorizationService authorizationService;
     private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
@@ -91,8 +87,7 @@ public final class OAuth2AuthorizationCodeAuthenticationProvider
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         OAuth2AuthorizationCodeAuthenticationToken authorizationCodeAuthentication =
                 (OAuth2AuthorizationCodeAuthenticationToken) authentication;
 
@@ -101,9 +96,8 @@ public final class OAuth2AuthorizationCodeAuthenticationProvider
                         authorizationCodeAuthentication);
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
-        OAuth2Authorization authorization =
-                this.authorizationService.findByToken(
-                        authorizationCodeAuthentication.getCode(), AUTHORIZATION_CODE_TOKEN_TYPE);
+        OAuth2Authorization authorization = this.authorizationService.findByToken(
+                authorizationCodeAuthentication.getCode(), AUTHORIZATION_CODE_TOKEN_TYPE);
         if (authorization == null) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_GRANT);
         }
@@ -118,17 +112,14 @@ public final class OAuth2AuthorizationCodeAuthenticationProvider
                 // Invalidate the authorization code given that a different client is attempting to
                 // use it
                 authorization =
-                        OAuth2AuthenticationProviderUtils.invalidate(
-                                authorization, authorizationCode.getToken());
+                        OAuth2AuthenticationProviderUtils.invalidate(authorization, authorizationCode.getToken());
                 this.authorizationService.save(authorization);
             }
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_GRANT);
         }
 
         if (StringUtils.hasText(authorizationRequest.getRedirectUri())
-                && !authorizationRequest
-                        .getRedirectUri()
-                        .equals(authorizationCodeAuthentication.getRedirectUri())) {
+                && !authorizationRequest.getRedirectUri().equals(authorizationCodeAuthentication.getRedirectUri())) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_GRANT);
         }
 
@@ -136,69 +127,55 @@ public final class OAuth2AuthorizationCodeAuthenticationProvider
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_GRANT);
         }
 
-        Authentication usernamePasswordAuthentication =
-                authorization.getAttribute(Principal.class.getName());
+        Authentication usernamePasswordAuthentication = authorization.getAttribute(Principal.class.getName());
 
         // @formatter:off
-        DefaultOAuth2TokenContext.Builder tokenContextBuilder =
-                DefaultOAuth2TokenContext.builder()
-                        .registeredClient(registeredClient)
-                        .principal(usernamePasswordAuthentication)
-                        .authorizationServerContext(AuthorizationServerContextHolder.getContext())
-                        .authorization(authorization)
-                        .authorizedScopes(authorization.getAuthorizedScopes())
-                        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                        .authorizationGrant(authorizationCodeAuthentication);
+        DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
+                .registeredClient(registeredClient)
+                .principal(usernamePasswordAuthentication)
+                .authorizationServerContext(AuthorizationServerContextHolder.getContext())
+                .authorization(authorization)
+                .authorizedScopes(authorization.getAuthorizedScopes())
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrant(authorizationCodeAuthentication);
         // @formatter:on
 
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.from(authorization);
 
         // ----- Access token -----
         OAuth2AccessToken accessToken =
-                createOAuth2AccessToken(
-                        tokenContextBuilder, authorizationBuilder, this.tokenGenerator, ERROR_URI);
+                createOAuth2AccessToken(tokenContextBuilder, authorizationBuilder, this.tokenGenerator, ERROR_URI);
 
         // ----- Refresh token -----
-        OAuth2RefreshToken refreshToken =
-                creatOAuth2RefreshToken(
-                        tokenContextBuilder,
-                        authorizationBuilder,
-                        this.tokenGenerator,
-                        ERROR_URI,
-                        clientPrincipal,
-                        registeredClient);
+        OAuth2RefreshToken refreshToken = creatOAuth2RefreshToken(
+                tokenContextBuilder,
+                authorizationBuilder,
+                this.tokenGenerator,
+                ERROR_URI,
+                clientPrincipal,
+                registeredClient);
 
         // ----- ID token -----
-        OidcIdToken idToken =
-                createOidcIdToken(
-                        tokenContextBuilder,
-                        authorizationBuilder,
-                        this.tokenGenerator,
-                        ERROR_URI,
-                        authorizationRequest.getScopes());
+        OidcIdToken idToken = createOidcIdToken(
+                tokenContextBuilder,
+                authorizationBuilder,
+                this.tokenGenerator,
+                ERROR_URI,
+                authorizationRequest.getScopes());
 
         authorization = authorizationBuilder.build();
 
         // Invalidate the authorization code as it can only be used once
-        authorization =
-                OAuth2AuthenticationProviderUtils.invalidate(
-                        authorization, authorizationCode.getToken());
+        authorization = OAuth2AuthenticationProviderUtils.invalidate(authorization, authorizationCode.getToken());
 
         this.authorizationService.save(authorization);
 
-        log.debug(
-                "[Herodotus] |- Authorization Code returning"
-                        + " OAuth2AccessTokenAuthenticationToken.");
+        log.debug("[Herodotus] |- Authorization Code returning" + " OAuth2AccessTokenAuthenticationToken.");
 
         Map<String, Object> additionalParameters = idTokenAdditionalParameters(idToken);
 
-        OAuth2AccessTokenAuthenticationToken accessTokenAuthenticationToken =
-                new OAuth2AccessTokenAuthenticationToken(
-                        registeredClient,
-                        clientPrincipal,
-                        accessToken,
-                        refreshToken,
-                        additionalParameters);
+        OAuth2AccessTokenAuthenticationToken accessTokenAuthenticationToken = new OAuth2AccessTokenAuthenticationToken(
+                registeredClient, clientPrincipal, accessToken, refreshToken, additionalParameters);
         return createOAuth2AccessTokenAuthenticationToken(
                 usernamePasswordAuthentication, accessTokenAuthenticationToken);
     }

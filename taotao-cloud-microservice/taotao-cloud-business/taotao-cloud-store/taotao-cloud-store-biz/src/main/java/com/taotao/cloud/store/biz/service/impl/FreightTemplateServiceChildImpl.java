@@ -35,8 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class FreightTemplateServiceChildImpl
-        extends ServiceImpl<FreightTemplateChildMapper, FreightTemplateChild>
+public class FreightTemplateServiceChildImpl extends ServiceImpl<FreightTemplateChildMapper, FreightTemplateChild>
         implements IFreightTemplateChildService {
 
     @Override

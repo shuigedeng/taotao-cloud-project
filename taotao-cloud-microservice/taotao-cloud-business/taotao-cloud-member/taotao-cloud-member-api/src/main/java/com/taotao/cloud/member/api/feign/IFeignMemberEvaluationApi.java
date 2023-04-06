@@ -38,9 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.04
  * @since 2022-04-25 16:37:49
  */
-@FeignClient(
-        value = ServiceName.TAOTAO_CLOUD_MEMBER,
-        fallbackFactory = FeignMemberEvaluationApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = FeignMemberEvaluationApiFallback.class)
 public interface IFeignMemberEvaluationApi {
 
     /**
@@ -77,8 +75,7 @@ public interface IFeignMemberEvaluationApi {
     List<Map<String, Object>> memberEvaluationNum();
 
     @GetMapping(value = "/member/feign/memberEvaluationDTO")
-    Boolean addMemberEvaluation(
-            @RequestParam MemberEvaluationDTO memberEvaluationDTO, @RequestParam boolean b);
+    Boolean addMemberEvaluation(@RequestParam MemberEvaluationDTO memberEvaluationDTO, @RequestParam boolean b);
 
     /**
      * LambdaQueryWrapper<MemberEvaluation> lambdaQueryWrapper = Wrappers.lambdaQuery();
@@ -96,10 +93,8 @@ public interface IFeignMemberEvaluationApi {
     MemberEvaluationVO queryById(@RequestParam Long id);
 
     @GetMapping(value = "/member/feign/evaluation/reply")
-    boolean reply(
-            @RequestParam Long id, @RequestParam String reply, @RequestParam String replyImage);
+    boolean reply(@RequestParam Long id, @RequestParam String reply, @RequestParam String replyImage);
 
     @GetMapping(value = "/member/feign/evaluation/queryPage")
-    PageResult<MemberEvaluationListVO> queryPage(
-            @RequestParam EvaluationPageQuery evaluationPageQuery);
+    PageResult<MemberEvaluationListVO> queryPage(@RequestParam EvaluationPageQuery evaluationPageQuery);
 }

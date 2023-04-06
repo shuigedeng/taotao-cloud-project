@@ -40,7 +40,8 @@ import lombok.experimental.SuperBuilder;
 @Schema(description = "商品基础VO")
 public class GoodsVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 1450550797436233753L;
+    @Serial
+    private static final long serialVersionUID = 1450550797436233753L;
 
     private Long id;
 

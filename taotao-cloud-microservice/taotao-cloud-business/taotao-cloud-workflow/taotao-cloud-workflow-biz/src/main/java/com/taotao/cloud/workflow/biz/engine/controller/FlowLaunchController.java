@@ -57,26 +57,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/engine/flow-launch")
 public class FlowLaunchController {
 
-    @Autowired private FlowEngineService flowEngineService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FlowTaskNewService flowTaskNewService;
+    @Autowired
+    private FlowEngineService flowEngineService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FlowTaskNewService flowTaskNewService;
 
     @Operation(summary = "获取流程发起列表", description = "获取流程发起列表(带分页)")
     @GetMapping("/page")
     public Result<PageResult<FlowLaunchListVO>> list(PaginationFlowTask paginationFlowTask) {
         List<FlowTaskEntity> data = flowTaskService.getLaunchList(paginationFlowTask);
-        List<FlowEngineEntity> engineList =
-                flowEngineService.getFlowList(
-                        data.stream().map(FlowTaskEntity::getFlowId).collect(Collectors.toList()));
+        List<FlowEngineEntity> engineList = flowEngineService.getFlowList(
+                data.stream().map(FlowTaskEntity::getFlowId).collect(Collectors.toList()));
         List<FlowLaunchListVO> listVO = new LinkedList<>();
         for (FlowTaskEntity taskEntity : data) {
             // 用户名称赋值
             FlowLaunchListVO vo = FlowTaskConvert.INSTANCE.convertLaunch(taskEntity);
-            FlowEngineEntity entity =
-                    engineList.stream()
-                            .filter(t -> t.getId().equals(taskEntity.getFlowId()))
-                            .findFirst()
-                            .orElse(null);
+            FlowEngineEntity entity = engineList.stream()
+                    .filter(t -> t.getId().equals(taskEntity.getFlowId()))
+                    .findFirst()
+                    .orElse(null);
             if (entity != null) {
                 vo.setFormData(entity.getFormData());
                 vo.setFormType(entity.getFormType());
@@ -95,8 +98,7 @@ public class FlowLaunchController {
             if (entity.getFlowType() == 1) {
                 return Result.fail("功能流程不能删除");
             }
-            if (!FlowNature.ParentId.equals(entity.getParentId())
-                    && StrUtil.isNotEmpty(entity.getParentId())) {
+            if (!FlowNature.ParentId.equals(entity.getParentId()) && StrUtil.isNotEmpty(entity.getParentId())) {
                 return Result.fail("子表数据不能删除");
             }
             flowTaskService.delete(entity);
@@ -117,8 +119,7 @@ public class FlowLaunchController {
 
     @Operation(summary = "撤回流程发起", description = "注意：在撤销流程时要保证你的下一节点没有处理这条记录；如已处理则无法撤销流程。")
     @PutMapping("/actions/withdraw/{id}")
-    public Result<String> revoke(
-            @PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel)
+    public Result<String> revoke(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel)
             throws WorkFlowException {
         FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(id);
         FlowModel flowModel = FlowTaskConvert.INSTANCE.convert(flowHandleModel);

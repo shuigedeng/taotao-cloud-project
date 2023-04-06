@@ -52,13 +52,11 @@ public class WxLite extends WxpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
 
         WxJsapiOrderRQ bizRQ = (WxJsapiOrderRQ) rq;
-        WxServiceWrapper wxServiceWrapper =
-                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
         WxPayService wxPayService = wxServiceWrapper.getWxPayService();
         wxPayService.getConfig().setTradeType(WxPayConstants.TradeType.JSAPI);
 
@@ -76,9 +74,7 @@ public class WxLite extends WxpayPaymentService {
         String reqUrl; // 请求地址
         if (mchAppConfigContext.isIsvsubMch()) { // 特约商户
             reqUrl = WxpayV3Util.ISV_URL_MAP.get(WxPayConstants.TradeType.JSAPI);
-            reqJSON.put(
-                    "payer",
-                    WxpayV3Util.processIsvPayer(reqJSON.getString("sub_appid"), bizRQ.getOpenid()));
+            reqJSON.put("payer", WxpayV3Util.processIsvPayer(reqJSON.getString("sub_appid"), bizRQ.getOpenid()));
         } else {
             reqUrl = WxpayV3Util.NORMALMCH_URL_MAP.get(WxPayConstants.TradeType.JSAPI);
 

@@ -43,43 +43,37 @@ public class NightShieldLazyPendingHandler {
 
     private static final String NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY = "night_shield_send";
 
-    @Autowired private KafkaTemplate kafkaTemplate;
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
 
     @Value("${austin.business.topic.name}")
     private String topicName;
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     /** 处理 夜间屏蔽(次日早上9点发送的任务) */
     @XxlJob("nightShieldLazyJob")
     public void execute() {
         log.info("NightShieldLazyPendingHandler#execute!");
-        SupportThreadPoolConfig.getPendingSingleThreadPool()
-                .execute(
-                        () -> {
-                            while (redisUtils.lLen(NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY) > 0) {
-                                String taskInfo =
-                                        redisUtils.lPop(NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY);
-                                if (StrUtil.isNotBlank(taskInfo)) {
-                                    try {
-                                        kafkaTemplate.send(
-                                                topicName,
-                                                JSON.toJSONString(
-                                                        Arrays.asList(
-                                                                JSON.parseObject(
-                                                                        taskInfo, TaskInfo.class)),
-                                                        new SerializerFeature[] {
-                                                            SerializerFeature.WriteClassName
-                                                        }));
-                                    } catch (Exception e) {
-                                        log.error(
-                                                "nightShieldLazyJob send kafka fail!"
-                                                        + " e:{},params:{}",
-                                                Throwables.getStackTraceAsString(e),
-                                                taskInfo);
-                                    }
-                                }
-                            }
-                        });
+        SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
+            while (redisUtils.lLen(NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY) > 0) {
+                String taskInfo = redisUtils.lPop(NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY);
+                if (StrUtil.isNotBlank(taskInfo)) {
+                    try {
+                        kafkaTemplate.send(
+                                topicName,
+                                JSON.toJSONString(
+                                        Arrays.asList(JSON.parseObject(taskInfo, TaskInfo.class)),
+                                        new SerializerFeature[] {SerializerFeature.WriteClassName}));
+                    } catch (Exception e) {
+                        log.error(
+                                "nightShieldLazyJob send kafka fail!" + " e:{},params:{}",
+                                Throwables.getStackTraceAsString(e),
+                                taskInfo);
+                    }
+                }
+            }
+        });
     }
 }

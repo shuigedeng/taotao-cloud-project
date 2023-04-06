@@ -26,7 +26,8 @@ import lombok.Data;
 @Data
 public class DefinitionVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -2308324118562026040L;
+    @Serial
+    private static final long serialVersionUID = -2308324118562026040L;
     /** 流程定义id */
     private String definitionId;
 

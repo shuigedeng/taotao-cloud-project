@@ -32,8 +32,7 @@ import java.io.IOException;
  * @author : gengwei.zheng
  * @date : 2022/3/17 20:28
  */
-public class HerodotusGrantedAuthorityDeserializer
-        extends JsonDeserializer<HerodotusGrantedAuthority> {
+public class HerodotusGrantedAuthorityDeserializer extends JsonDeserializer<HerodotusGrantedAuthority> {
     @Override
     public HerodotusGrantedAuthority deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JacksonException {

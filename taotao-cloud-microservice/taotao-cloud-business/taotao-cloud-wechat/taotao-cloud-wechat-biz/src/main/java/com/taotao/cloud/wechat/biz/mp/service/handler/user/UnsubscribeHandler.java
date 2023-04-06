@@ -38,7 +38,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class UnsubscribeHandler implements WxMpMessageHandler {
 
-    @Resource @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource
+    @Lazy // 延迟加载，解决循环依赖的问题
     private MpUserService mpUserService;
 
     @Override

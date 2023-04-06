@@ -62,10 +62,9 @@ public class GenUtils {
                 || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType)) {
             // 字符串长度超过500设置为文本域
             Integer columnLength = getColumnLength(column.getColumnType());
-            String htmlType =
-                    columnLength >= 500 || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType)
-                            ? GenConstants.HTML_TEXTAREA
-                            : GenConstants.HTML_INPUT;
+            String htmlType = columnLength >= 500 || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType)
+                    ? GenConstants.HTML_TEXTAREA
+                    : GenConstants.HTML_INPUT;
             column.setHtmlType(htmlType);
         } else if (arraysContains(GenConstants.COLUMNTYPE_TIME, dataType)) {
             column.setJavaType(GenConstants.TYPE_DATE);
@@ -74,10 +73,8 @@ public class GenUtils {
             column.setHtmlType(GenConstants.HTML_INPUT);
 
             // 如果是浮点型 统一用BigDecimal
-            String[] str =
-                    StringUtils.split(
-                            StringUtils.substringBetween(column.getColumnType(), "(", ")"),
-                            StringUtils.SEPARATOR);
+            String[] str = StringUtils.split(
+                    StringUtils.substringBetween(column.getColumnType(), "(", ")"), StringUtils.SEPARATOR);
             if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0) {
                 column.setJavaType(GenConstants.TYPE_BIGDECIMAL);
             }

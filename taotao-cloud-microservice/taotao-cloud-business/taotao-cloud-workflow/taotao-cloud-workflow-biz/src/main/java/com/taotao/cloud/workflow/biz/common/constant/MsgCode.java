@@ -126,8 +126,7 @@ public interface MsgCode {
     MCode LOG203 = LOG("修改失败，账号不存在。");
 
     /** 数据库 */
-    MCode DB001 =
-            DB("数据类型编码不符合标准（请注意大小写）。MySQL , SQLServer , Oracle , DM8 , KingbaseES , PostgreSQL");
+    MCode DB001 = DB("数据类型编码不符合标准（请注意大小写）。MySQL , SQLServer , Oracle , DM8 , KingbaseES , PostgreSQL");
 
     MCode DB002 = DB("请检查 1、连接信息 2、网络通信 3、数据库服务启动状态。 详情：");
     MCode DB003 = DB("通过url找不到对应数据库");

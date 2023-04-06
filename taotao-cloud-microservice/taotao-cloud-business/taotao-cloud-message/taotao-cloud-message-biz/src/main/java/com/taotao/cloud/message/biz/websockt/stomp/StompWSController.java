@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class StompWSController {
 
-    @Autowired private SimpMessagingTemplate simpMessagingTemplate;
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     // @MessageMapping("/hello")
     // @SendTo("/topic/hello")

@@ -35,7 +35,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "交易参数")
 public class TradeDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -8383072817737513063L;
+    @Serial
+    private static final long serialVersionUID = -8383072817737513063L;
 
     @Schema(description = "购物车购买：CART/立即购买：BUY_NOW/拼团购买：PINTUAN / 积分购买：POINT")
     private String way;

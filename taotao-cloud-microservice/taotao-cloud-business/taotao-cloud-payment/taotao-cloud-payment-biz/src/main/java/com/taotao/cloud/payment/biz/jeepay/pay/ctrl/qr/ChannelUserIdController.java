@@ -46,8 +46,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/channelUserId")
 public class ChannelUserIdController extends AbstractPayOrderController {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
 
     /** 重定向到微信地址 * */
     @RequestMapping("/jump")
@@ -79,15 +82,12 @@ public class ChannelUserIdController extends AbstractPayOrderController {
 
         // 回调地址
         String callbackUrl =
-                sysConfigService
-                        .getDBApplicationConfig()
-                        .genMchChannelUserIdApiOauth2RedirectUrlEncode(jsonObject);
+                sysConfigService.getDBApplicationConfig().genMchChannelUserIdApiOauth2RedirectUrlEncode(jsonObject);
 
         // 获取商户配置信息
         MchAppConfigContext mchAppConfigContext =
                 configContextQueryService.queryMchInfoAndAppInfo(rq.getMchNo(), rq.getAppId());
-        String redirectUrl =
-                channelUserService.buildUserRedirectUrl(callbackUrl, mchAppConfigContext);
+        String redirectUrl = channelUserService.buildUserRedirectUrl(callbackUrl, mchAppConfigContext);
         response.sendRedirect(redirectUrl);
     }
 
@@ -112,12 +112,10 @@ public class ChannelUserIdController extends AbstractPayOrderController {
         }
 
         // 获取商户配置信息
-        MchAppConfigContext mchAppConfigContext =
-                configContextQueryService.queryMchInfoAndAppInfo(mchNo, appId);
+        MchAppConfigContext mchAppConfigContext = configContextQueryService.queryMchInfoAndAppInfo(mchNo, appId);
 
         // 获取渠道用户ID
-        String channelUserId =
-                channelUserService.getChannelUserId(getReqParamJSON(), mchAppConfigContext);
+        String channelUserId = channelUserService.getChannelUserId(getReqParamJSON(), mchAppConfigContext);
 
         // 同步跳转
         JSONObject appendParams = new JSONObject();

@@ -56,10 +56,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/mchTransfers")
 public class MchTransferController extends CommonCtrl {
 
-    @Autowired private MchAppService mchAppService;
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
-    @Autowired private PayInterfaceDefineService payInterfaceDefineService;
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private MchAppService mchAppService;
+
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
+
+    @Autowired
+    private PayInterfaceDefineService payInterfaceDefineService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
 
     /** 查询商户对应应用下支持的支付通道 * */
     @PreAuthorize("hasAuthority('ENT_MCH_TRANSFER_IF_CODE_LIST')")
@@ -68,12 +75,11 @@ public class MchTransferController extends CommonCtrl {
 
         List<String> ifCodeList = new ArrayList<>();
         payInterfaceConfigService
-                .list(
-                        PayInterfaceConfig.gw()
-                                .select(PayInterfaceConfig::getIfCode)
-                                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP)
-                                .eq(PayInterfaceConfig::getInfoId, appId)
-                                .eq(PayInterfaceConfig::getState, CS.PUB_USABLE))
+                .list(PayInterfaceConfig.gw()
+                        .select(PayInterfaceConfig::getIfCode)
+                        .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP)
+                        .eq(PayInterfaceConfig::getInfoId, appId)
+                        .eq(PayInterfaceConfig::getState, CS.PUB_USABLE))
                 .stream()
                 .forEach(r -> ifCodeList.add(r.getIfCode()));
 
@@ -82,8 +88,7 @@ public class MchTransferController extends CommonCtrl {
         }
 
         List<PayInterfaceDefine> result =
-                payInterfaceDefineService.list(
-                        PayInterfaceDefine.gw().in(PayInterfaceDefine::getIfCode, ifCodeList));
+                payInterfaceDefineService.list(PayInterfaceDefine.gw().in(PayInterfaceDefine::getIfCode, ifCodeList));
         return ApiRes.ok(result);
     }
 
@@ -111,14 +116,10 @@ public class MchTransferController extends CommonCtrl {
 
         DBApplicationConfig dbApplicationConfig = sysConfigService.getDBApplicationConfig();
 
-        param.put(
-                "redirectUrl",
-                dbApplicationConfig.getMchSiteUrl() + "/api/anon/channelUserIdCallback");
+        param.put("redirectUrl", dbApplicationConfig.getMchSiteUrl() + "/api/anon/channelUserIdCallback");
 
         param.put("sign", JeepayKit.getSign(param, mchApp.getAppSecret()));
-        String url =
-                StringKit.appendUrlQuery(
-                        dbApplicationConfig.getPaySiteUrl() + "/api/channelUserId/jump", param);
+        String url = StringKit.appendUrlQuery(dbApplicationConfig.getPaySiteUrl() + "/api/channelUserId/jump", param);
 
         return ApiRes.ok(url);
     }
@@ -144,9 +145,7 @@ public class MchTransferController extends CommonCtrl {
         request.setBizModel(model);
 
         JeepayClient jeepayClient =
-                new JeepayClient(
-                        sysConfigService.getDBApplicationConfig().getPaySiteUrl(),
-                        mchApp.getAppSecret());
+                new JeepayClient(sysConfigService.getDBApplicationConfig().getPaySiteUrl(), mchApp.getAppSecret());
 
         try {
             TransferOrderCreateResponse response = jeepayClient.execute(request);

@@ -36,9 +36,14 @@ public class ContractApprovalSheetServiceImpl
         extends ServiceImpl<ContractApprovalSheetMapper, ContractApprovalSheetEntity>
         implements ContractApprovalSheetService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public ContractApprovalSheetEntity getInfo(String id) {
@@ -78,8 +83,7 @@ public class ContractApprovalSheetServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, ContractApprovalSheetEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, ContractApprovalSheetEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -114,8 +118,7 @@ public class ContractApprovalSheetServiceImpl
         ContractApprovalSheetForm contractApprovalSheetForm =
                 JsonUtils.getJsonToBean(data, ContractApprovalSheetForm.class);
         ContractApprovalSheetEntity entity =
-                JsonUtils.getJsonToBean(
-                        contractApprovalSheetForm, ContractApprovalSheetEntity.class);
+                JsonUtils.getJsonToBean(contractApprovalSheetForm, ContractApprovalSheetEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

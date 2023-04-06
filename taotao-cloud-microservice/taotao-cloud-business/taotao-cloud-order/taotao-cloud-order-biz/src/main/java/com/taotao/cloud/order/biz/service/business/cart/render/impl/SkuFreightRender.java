@@ -67,8 +67,7 @@ public class SkuFreightRender implements ICartRenderStep {
                 continue;
             }
             // 寻找对应对商品运费计算模版
-            FreightTemplateInfoVO freightTemplate =
-                    freightTemplateService.getFreightTemplate(freightTemplateId);
+            FreightTemplateInfoVO freightTemplate = freightTemplateService.getFreightTemplate(freightTemplateId);
             if (freightTemplate != null
                     && freightTemplate.getFreightTemplateChildList() != null
                     && !freightTemplate.getFreightTemplateChildList().isEmpty()) {
@@ -81,8 +80,7 @@ public class SkuFreightRender implements ICartRenderStep {
                 // 获取市级别id
                 String addressId = memberAddress.getConsigneeAddressIdPath().split(",")[1];
                 // 获取匹配的收货地址
-                for (FreightTemplateChild templateChild :
-                        freightTemplate.getFreightTemplateChildList()) {
+                for (FreightTemplateChild templateChild : freightTemplate.getFreightTemplateChildList()) {
                     // 如果当前模版包含，则返回
                     if (templateChild.getAreaId().contains(addressId)) {
                         freightTemplateChild = templateChild;
@@ -99,18 +97,14 @@ public class SkuFreightRender implements ICartRenderStep {
                 }
 
                 // 物流规则模型创立
-                FreightTemplateChildDTO freightTemplateChildDTO =
-                        new FreightTemplateChildDTO(freightTemplateChild);
+                FreightTemplateChildDTO freightTemplateChildDTO = new FreightTemplateChildDTO(freightTemplateChild);
 
                 freightTemplateChildDTO.setPricingMethod(freightTemplate.getPricingMethod());
 
                 // 要计算的基数 数量/重量
-                BigDecimal count =
-                        (freightTemplateChildDTO
-                                        .getPricingMethod()
-                                        .equals(FreightTemplateEnum.NUM.name()))
-                                ? cartSkuVO.getNum()
-                                : cartSkuVO.getGoodsSku().getWeight() * cartSkuVO.getNum();
+                BigDecimal count = (freightTemplateChildDTO.getPricingMethod().equals(FreightTemplateEnum.NUM.name()))
+                        ? cartSkuVO.getNum()
+                        : cartSkuVO.getGoodsSku().getWeight() * cartSkuVO.getNum();
 
                 // 计算运费
                 BigDecimal countFreight = countFreight(count, freightTemplateChildDTO);
@@ -145,8 +139,7 @@ public class SkuFreightRender implements ICartRenderStep {
             return CurrencyUtils.add(
                     finalFreight,
                     CurrencyUtils.mul(
-                            Math.ceil(continuedCount / template.getContinuedCompany()),
-                            template.getContinuedPrice()));
+                            Math.ceil(continuedCount / template.getContinuedCompany()), template.getContinuedPrice()));
         } catch (Exception e) {
             return 0D;
         }

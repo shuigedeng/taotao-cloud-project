@@ -56,18 +56,11 @@ public class XxpayRefundService extends AbstractRefundService {
 
     @Override
     public ChannelRetMsg refund(
-            RefundOrderRQ bizRQ,
-            RefundOrder refundOrder,
-            PayOrder payOrder,
-            MchAppConfigContext mchAppConfigContext)
+            RefundOrderRQ bizRQ, RefundOrder refundOrder, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
 
-        XxpayNormalMchParams params =
-                (XxpayNormalMchParams)
-                        configContextQueryService.queryNormalMchParams(
-                                mchAppConfigContext.getMchNo(),
-                                mchAppConfigContext.getAppId(),
-                                getIfCode());
+        XxpayNormalMchParams params = (XxpayNormalMchParams) configContextQueryService.queryNormalMchParams(
+                mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
 
         // 构造支付请求参数
         Map<String, Object> paramMap = new TreeMap();
@@ -86,8 +79,7 @@ public class XxpayRefundService extends AbstractRefundService {
         String sign = XxpayKit.getSign(paramMap, params.getKey());
         paramMap.put("sign", sign);
         // 退款地址
-        String refundUrl =
-                XxpayKit.getRefundUrl(params.getPayUrl()) + "?" + JeepayKit.genUrlParams(paramMap);
+        String refundUrl = XxpayKit.getRefundUrl(params.getPayUrl()) + "?" + JeepayKit.genUrlParams(paramMap);
         String resStr = "";
         try {
             log.info("发起退款[{}]参数：{}", getIfCode(), refundUrl);
@@ -138,15 +130,10 @@ public class XxpayRefundService extends AbstractRefundService {
     }
 
     @Override
-    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception {
+    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
 
-        XxpayNormalMchParams params =
-                (XxpayNormalMchParams)
-                        configContextQueryService.queryNormalMchParams(
-                                mchAppConfigContext.getMchNo(),
-                                mchAppConfigContext.getAppId(),
-                                getIfCode());
+        XxpayNormalMchParams params = (XxpayNormalMchParams) configContextQueryService.queryNormalMchParams(
+                mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
 
         // 构造支付请求参数
         Map<String, Object> paramMap = new TreeMap();
@@ -158,13 +145,14 @@ public class XxpayRefundService extends AbstractRefundService {
         paramMap.put("sign", sign);
         // 退款查询地址
         String queryRefundOrderUrl =
-                XxpayKit.getQueryRefundOrderUrl(params.getPayUrl())
-                        + "?"
-                        + JeepayKit.genUrlParams(paramMap);
+                XxpayKit.getQueryRefundOrderUrl(params.getPayUrl()) + "?" + JeepayKit.genUrlParams(paramMap);
         String resStr = "";
         try {
             log.info("查询退款[{}]参数：{}", getIfCode(), queryRefundOrderUrl);
-            resStr = HttpUtil.createPost(queryRefundOrderUrl).timeout(60 * 1000).execute().body();
+            resStr = HttpUtil.createPost(queryRefundOrderUrl)
+                    .timeout(60 * 1000)
+                    .execute()
+                    .body();
             log.info("查询退款[{}]结果：{}", getIfCode(), resStr);
         } catch (Exception e) {
             log.error("http error", e);

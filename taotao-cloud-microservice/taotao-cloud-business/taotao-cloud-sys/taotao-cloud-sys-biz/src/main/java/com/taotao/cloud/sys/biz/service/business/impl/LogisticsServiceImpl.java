@@ -36,14 +36,12 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class LogisticsServiceImpl
-        extends BaseSuperServiceImpl<
-                ILogisticsMapper, LogisticsConfig, LogisticsRepository, ILogisticsRepository, Long>
+        extends BaseSuperServiceImpl<ILogisticsMapper, LogisticsConfig, LogisticsRepository, ILogisticsRepository, Long>
         implements ILogisticsService {
 
     @Override
     public LogisticsConfig findLogisticsById(Long id) {
         Optional<LogisticsConfig> optionalExpressCompany = ir().findById(id);
-        return optionalExpressCompany.orElseThrow(
-                () -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
+        return optionalExpressCompany.orElseThrow(() -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
     }
 }

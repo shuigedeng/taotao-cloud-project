@@ -36,11 +36,9 @@ public class TemplateMsgLogServiceImpl extends ServiceImpl<TemplateMsgLogMapper,
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String appid = (String) params.get("appid");
-        IPage<TemplateMsgLog> page =
-                this.page(
-                        new Query<TemplateMsgLog>().getPage(params),
-                        new QueryWrapper<TemplateMsgLog>()
-                                .eq(StringUtils.hasText(appid), "appid", appid));
+        IPage<TemplateMsgLog> page = this.page(
+                new Query<TemplateMsgLog>().getPage(params),
+                new QueryWrapper<TemplateMsgLog>().eq(StringUtils.hasText(appid), "appid", appid));
 
         return new PageUtils(page);
     }

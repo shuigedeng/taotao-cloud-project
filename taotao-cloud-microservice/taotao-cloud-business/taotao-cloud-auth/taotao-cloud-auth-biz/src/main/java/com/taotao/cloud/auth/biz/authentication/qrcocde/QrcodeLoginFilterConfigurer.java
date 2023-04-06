@@ -32,10 +32,7 @@ import org.springframework.util.Assert;
 
 public class QrcodeLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H,
-                QrcodeLoginFilterConfigurer<H>,
-                QrcodeAuthenticationFilter,
-                LoginFilterSecurityConfigurer<H>> {
+                H, QrcodeLoginFilterConfigurer<H>, QrcodeAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private QrcodeUserDetailsService qrcodeUserDetailsService;
     private QrcodeService qrcodeService;
@@ -45,8 +42,7 @@ public class QrcodeLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         super(securityConfigurer, new QrcodeAuthenticationFilter(), "/login/qrcode");
     }
 
-    public QrcodeLoginFilterConfigurer<H> accountUserDetailsService(
-            QrcodeUserDetailsService qrcodeUserDetailsService) {
+    public QrcodeLoginFilterConfigurer<H> accountUserDetailsService(QrcodeUserDetailsService qrcodeUserDetailsService) {
         this.qrcodeUserDetailsService = qrcodeUserDetailsService;
         return this;
     }
@@ -69,16 +65,14 @@ public class QrcodeLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     @Override
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-        QrcodeUserDetailsService qrcodeUserDetailsService =
-                this.qrcodeUserDetailsService != null
-                        ? this.qrcodeUserDetailsService
-                        : getBeanOrNull(applicationContext, QrcodeUserDetailsService.class);
+        QrcodeUserDetailsService qrcodeUserDetailsService = this.qrcodeUserDetailsService != null
+                ? this.qrcodeUserDetailsService
+                : getBeanOrNull(applicationContext, QrcodeUserDetailsService.class);
         Assert.notNull(qrcodeUserDetailsService, "qrcodeUserDetailsService is required");
 
-        QrcodeService qrcodeService =
-                this.qrcodeService != null
-                        ? this.qrcodeService
-                        : getBeanOrNull(applicationContext, QrcodeService.class);
+        QrcodeService qrcodeService = this.qrcodeService != null
+                ? this.qrcodeService
+                : getBeanOrNull(applicationContext, QrcodeService.class);
         Assert.notNull(qrcodeService, "captchaUserDetailsService is required");
 
         return new QrcodeAuthenticationProvider(qrcodeService, qrcodeUserDetailsService);

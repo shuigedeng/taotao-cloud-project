@@ -33,7 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SendController {
 
-    @Autowired private SendService sendService;
+    @Autowired
+    private SendService sendService;
 
     /**
      * 发送消息接口 入参完整示例：curl -XPOST "127.0.0.1:8080/send" -H 'Content-Type: application/json' -d

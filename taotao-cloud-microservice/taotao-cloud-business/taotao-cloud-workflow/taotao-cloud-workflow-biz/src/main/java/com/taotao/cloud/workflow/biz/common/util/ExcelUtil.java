@@ -37,8 +37,7 @@ public class ExcelUtil {
      * @param <T>
      * @return
      */
-    public static <T> List<T> importExcel(
-            String filePath, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
+    public static <T> List<T> importExcel(String filePath, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
         if (StringUtil.isBlank(filePath)) {
             return null;
         }
@@ -64,8 +63,7 @@ public class ExcelUtil {
      * @param <T>
      * @return
      */
-    public static <T> List<T> importExcel(
-            File file, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
+    public static <T> List<T> importExcel(File file, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
         if (file == null) {
             return null;
         }

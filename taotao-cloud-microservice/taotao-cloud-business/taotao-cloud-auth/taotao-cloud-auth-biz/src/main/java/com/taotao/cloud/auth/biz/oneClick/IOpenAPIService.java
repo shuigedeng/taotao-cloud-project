@@ -44,8 +44,7 @@ public interface IOpenAPIService {
      * @param phoneNumber 手机号，必填
      * @param outId 外部流水号，非必填
      */
-    VerifyMobileResponse verifyMobile(
-            String accessCode, String phoneNumber, String outId, HttpServletRequest request);
+    VerifyMobileResponse verifyMobile(String accessCode, String phoneNumber, String outId, HttpServletRequest request);
 
     /**
      * 根据键名查询参数配置信息

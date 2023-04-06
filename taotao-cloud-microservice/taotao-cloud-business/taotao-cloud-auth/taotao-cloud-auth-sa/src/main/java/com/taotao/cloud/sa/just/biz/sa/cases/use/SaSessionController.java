@@ -62,12 +62,11 @@ public class SaSessionController {
         float age3 = session.getFloat("age"); // 转 float 类型
         double age4 = session.getDouble("age"); // 转 double 类型
         int age5 = session.get("age5", 22); // 取不到时就返回默认值
-        int age6 =
-                session.get(
-                        "age5",
-                        () -> { // 取不到时就执行 lambda 获取值
-                            return 26;
-                        });
+        int age6 = session.get(
+                "age5",
+                () -> { // 取不到时就执行 lambda 获取值
+                    return 26;
+                });
 
         /*
          * 存取值范围是一次会话有效的，也就是说，在一次登录有效期内，你可以在一个请求里存值，然后在另一个请求里取值

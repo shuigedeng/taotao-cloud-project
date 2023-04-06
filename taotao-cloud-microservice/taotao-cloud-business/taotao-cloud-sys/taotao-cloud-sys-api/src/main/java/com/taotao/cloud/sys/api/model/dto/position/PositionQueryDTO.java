@@ -36,7 +36,8 @@ import lombok.*;
 @Schema(description = "岗位查询对象")
 public class PositionQueryDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "岗位名称")
     private String name;

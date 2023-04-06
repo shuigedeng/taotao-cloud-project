@@ -42,21 +42,16 @@ public class DynamicGeneratorInterceptor extends DynamicDataSourceAnnotationInte
                 DS ds = methodInvocation.getThis().getClass().getAnnotation(DS.class);
                 if (ds != null && StringUtil.isNotEmpty(ds.value())) {
                     String datasourceName = ds.value();
-                    DynamicSourceGeneratorInterface m =
-                            (DynamicSourceGeneratorInterface) methodInvocation.getThis();
+                    DynamicSourceGeneratorInterface m = (DynamicSourceGeneratorInterface) methodInvocation.getThis();
                     String now = null;
                     try {
                         boolean invalid = true;
                         if (Boolean.TRUE.equals(m.cachedConnection())) {
                             if (dynamicRoutingDataSource == null) {
-                                dynamicRoutingDataSource =
-                                        SpringContext.getBean(DynamicRoutingDataSource.class);
-                                dataSourceCreator =
-                                        SpringContext.getBean(DefaultDataSourceCreator.class);
+                                dynamicRoutingDataSource = SpringContext.getBean(DynamicRoutingDataSource.class);
+                                dataSourceCreator = SpringContext.getBean(DefaultDataSourceCreator.class);
                             }
-                            if (dynamicRoutingDataSource
-                                    .getDataSources()
-                                    .containsKey(datasourceName)) {
+                            if (dynamicRoutingDataSource.getDataSources().containsKey(datasourceName)) {
                                 //                                if
                                 // (dynamicRoutingDataSource.getCurrentDataSources().get(datasourceName).getConnection().isValid(5)) {
                                 // 已存在当前动态数据源且数据源可用则不重新获取数据源配置
@@ -76,8 +71,7 @@ public class DynamicGeneratorInterceptor extends DynamicDataSourceAnnotationInte
                                 dataSourceProperty.setUrl(ConnUtil.getUrl(dataSource));
                                 dataSourceProperty.setDriverClassName(dataSource.getDriver());
                                 dynamicRoutingDataSource.addDataSource(
-                                        datasourceName,
-                                        dataSourceCreator.createDataSource(dataSourceProperty));
+                                        datasourceName, dataSourceCreator.createDataSource(dataSourceProperty));
                             }
                         }
                     } finally {

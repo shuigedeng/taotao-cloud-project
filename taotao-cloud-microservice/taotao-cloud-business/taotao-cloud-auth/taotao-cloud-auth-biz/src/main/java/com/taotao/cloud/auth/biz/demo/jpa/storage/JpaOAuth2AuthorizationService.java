@@ -102,8 +102,7 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
 
     @Override
     public OAuth2Authorization findById(String id) {
-        HerodotusAuthorization herodotusAuthorization =
-                this.herodotusAuthorizationService.findById(id);
+        HerodotusAuthorization herodotusAuthorization = this.herodotusAuthorizationService.findById(id);
         if (ObjectUtils.isNotEmpty(herodotusAuthorization)) {
             log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service findById.");
             return toObject(herodotusAuthorization);
@@ -113,18 +112,14 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
     }
 
     public int findAuthorizationCount(String registeredClientId, String principalName) {
-        int count =
-                this.herodotusAuthorizationService.findAuthorizationCount(
-                        registeredClientId, principalName);
+        int count = this.herodotusAuthorizationService.findAuthorizationCount(registeredClientId, principalName);
         log.debug("[Herodotus] |- Jpa OAuth2 Authorization Service findAuthorizationCount.");
         return count;
     }
 
-    public List<OAuth2Authorization> findAvailableAuthorizations(
-            String registeredClientId, String principalName) {
+    public List<OAuth2Authorization> findAvailableAuthorizations(String registeredClientId, String principalName) {
         List<HerodotusAuthorization> authorizations =
-                this.herodotusAuthorizationService.findAvailableAuthorizations(
-                        registeredClientId, principalName);
+                this.herodotusAuthorizationService.findAvailableAuthorizations(registeredClientId, principalName);
         if (CollectionUtils.isNotEmpty(authorizations)) {
             return authorizations.stream().map(this::toObject).collect(Collectors.toList());
         }
@@ -140,8 +135,7 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         if (tokenType == null) {
             result =
                     this.herodotusAuthorizationService
-                            .findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(
-                                    token);
+                            .findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(token);
         } else if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {
             result = this.herodotusAuthorizationService.findByState(token);
         } else if (OAuth2ParameterNames.CODE.equals(tokenType.getValue())) {
@@ -159,73 +153,57 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
     }
 
     private OAuth2Authorization toObject(HerodotusAuthorization entity) {
-        RegisteredClient registeredClient =
-                this.registeredClientRepository.findById(entity.getRegisteredClientId());
+        RegisteredClient registeredClient = this.registeredClientRepository.findById(entity.getRegisteredClientId());
         if (registeredClient == null) {
-            throw new DataRetrievalFailureException(
-                    "The RegisteredClient with id '"
-                            + entity.getRegisteredClientId()
-                            + "' was not found in the RegisteredClientRepository.");
+            throw new DataRetrievalFailureException("The RegisteredClient with id '"
+                    + entity.getRegisteredClientId()
+                    + "' was not found in the RegisteredClientRepository.");
         }
 
-        OAuth2Authorization.Builder builder =
-                OAuth2Authorization.withRegisteredClient(registeredClient)
-                        .id(entity.getId())
-                        .principalName(entity.getPrincipalName())
-                        .authorizationGrantType(
-                                OAuth2AuthorizationUtils.resolveAuthorizationGrantType(
-                                        entity.getAuthorizationGrantType()))
-                        .attributes(
-                                attributes -> attributes.putAll(parseMap(entity.getAttributes())));
+        OAuth2Authorization.Builder builder = OAuth2Authorization.withRegisteredClient(registeredClient)
+                .id(entity.getId())
+                .principalName(entity.getPrincipalName())
+                .authorizationGrantType(
+                        OAuth2AuthorizationUtils.resolveAuthorizationGrantType(entity.getAuthorizationGrantType()))
+                .attributes(attributes -> attributes.putAll(parseMap(entity.getAttributes())));
         if (entity.getState() != null) {
             builder.attribute(OAuth2ParameterNames.STATE, entity.getState());
         }
 
         if (entity.getAuthorizationCode() != null) {
-            OAuth2AuthorizationCode authorizationCode =
-                    new OAuth2AuthorizationCode(
-                            entity.getAuthorizationCode(),
-                            DateUtil.toInstant(entity.getAuthorizationCodeIssuedAt()),
-                            DateUtil.toInstant(entity.getAuthorizationCodeExpiresAt()));
+            OAuth2AuthorizationCode authorizationCode = new OAuth2AuthorizationCode(
+                    entity.getAuthorizationCode(),
+                    DateUtil.toInstant(entity.getAuthorizationCodeIssuedAt()),
+                    DateUtil.toInstant(entity.getAuthorizationCodeExpiresAt()));
             builder.token(
-                    authorizationCode,
-                    metadata -> metadata.putAll(parseMap(entity.getAuthorizationCodeMetadata())));
+                    authorizationCode, metadata -> metadata.putAll(parseMap(entity.getAuthorizationCodeMetadata())));
         }
 
         if (entity.getAccessToken() != null) {
-            OAuth2AccessToken accessToken =
-                    new OAuth2AccessToken(
-                            OAuth2AccessToken.TokenType.BEARER,
-                            entity.getAccessToken(),
-                            DateUtil.toInstant(entity.getAccessTokenIssuedAt()),
-                            DateUtil.toInstant(entity.getAccessTokenExpiresAt()),
-                            StringUtils.commaDelimitedListToSet(entity.getAccessTokenScopes()));
-            builder.token(
-                    accessToken,
-                    metadata -> metadata.putAll(parseMap(entity.getAccessTokenMetadata())));
+            OAuth2AccessToken accessToken = new OAuth2AccessToken(
+                    OAuth2AccessToken.TokenType.BEARER,
+                    entity.getAccessToken(),
+                    DateUtil.toInstant(entity.getAccessTokenIssuedAt()),
+                    DateUtil.toInstant(entity.getAccessTokenExpiresAt()),
+                    StringUtils.commaDelimitedListToSet(entity.getAccessTokenScopes()));
+            builder.token(accessToken, metadata -> metadata.putAll(parseMap(entity.getAccessTokenMetadata())));
         }
 
         if (entity.getRefreshToken() != null) {
-            OAuth2RefreshToken refreshToken =
-                    new OAuth2RefreshToken(
-                            entity.getRefreshToken(),
-                            DateUtil.toInstant(entity.getRefreshTokenIssuedAt()),
-                            DateUtil.toInstant(entity.getRefreshTokenExpiresAt()));
-            builder.token(
-                    refreshToken,
-                    metadata -> metadata.putAll(parseMap(entity.getRefreshTokenMetadata())));
+            OAuth2RefreshToken refreshToken = new OAuth2RefreshToken(
+                    entity.getRefreshToken(),
+                    DateUtil.toInstant(entity.getRefreshTokenIssuedAt()),
+                    DateUtil.toInstant(entity.getRefreshTokenExpiresAt()));
+            builder.token(refreshToken, metadata -> metadata.putAll(parseMap(entity.getRefreshTokenMetadata())));
         }
 
         if (entity.getOidcIdToken() != null) {
-            OidcIdToken idToken =
-                    new OidcIdToken(
-                            entity.getOidcIdToken(),
-                            DateUtil.toInstant(entity.getOidcIdTokenIssuedAt()),
-                            DateUtil.toInstant(entity.getOidcIdTokenExpiresAt()),
-                            parseMap(entity.getOidcIdTokenClaims()));
-            builder.token(
-                    idToken,
-                    metadata -> metadata.putAll(parseMap(entity.getOidcIdTokenMetadata())));
+            OidcIdToken idToken = new OidcIdToken(
+                    entity.getOidcIdToken(),
+                    DateUtil.toInstant(entity.getOidcIdTokenIssuedAt()),
+                    DateUtil.toInstant(entity.getOidcIdTokenExpiresAt()),
+                    parseMap(entity.getOidcIdTokenClaims()));
+            builder.token(idToken, metadata -> metadata.putAll(parseMap(entity.getOidcIdTokenMetadata())));
         }
 
         return builder.build();
@@ -236,7 +214,8 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         entity.setId(authorization.getId());
         entity.setRegisteredClientId(authorization.getRegisteredClientId());
         entity.setPrincipalName(authorization.getPrincipalName());
-        entity.setAuthorizationGrantType(authorization.getAuthorizationGrantType().getValue());
+        entity.setAuthorizationGrantType(
+                authorization.getAuthorizationGrantType().getValue());
         entity.setAttributes(writeMap(authorization.getAttributes()));
         entity.setState(authorization.getAttribute(OAuth2ParameterNames.STATE));
 
@@ -249,8 +228,7 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
                 entity::setAuthorizationCodeExpiresAt,
                 entity::setAuthorizationCodeMetadata);
 
-        OAuth2Authorization.Token<OAuth2AccessToken> accessToken =
-                authorization.getToken(OAuth2AccessToken.class);
+        OAuth2Authorization.Token<OAuth2AccessToken> accessToken = authorization.getToken(OAuth2AccessToken.class);
         setTokenValues(
                 accessToken,
                 entity::setAccessToken,
@@ -258,13 +236,11 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
                 entity::setAccessTokenExpiresAt,
                 entity::setAccessTokenMetadata);
         if (accessToken != null && accessToken.getToken().getScopes() != null) {
-            entity.setAccessTokenScopes(
-                    StringUtils.collectionToDelimitedString(
-                            accessToken.getToken().getScopes(), SymbolConstants.COMMA));
+            entity.setAccessTokenScopes(StringUtils.collectionToDelimitedString(
+                    accessToken.getToken().getScopes(), SymbolConstants.COMMA));
         }
 
-        OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken =
-                authorization.getToken(OAuth2RefreshToken.class);
+        OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken = authorization.getToken(OAuth2RefreshToken.class);
         setTokenValues(
                 refreshToken,
                 entity::setRefreshToken,
@@ -272,8 +248,7 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
                 entity::setRefreshTokenExpiresAt,
                 entity::setRefreshTokenMetadata);
 
-        OAuth2Authorization.Token<OidcIdToken> oidcIdToken =
-                authorization.getToken(OidcIdToken.class);
+        OAuth2Authorization.Token<OidcIdToken> oidcIdToken = authorization.getToken(OidcIdToken.class);
         setTokenValues(
                 oidcIdToken,
                 entity::setOidcIdToken,

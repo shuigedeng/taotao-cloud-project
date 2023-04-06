@@ -63,8 +63,7 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
     private static final String MISSING_OPENID_ERROR_CODE = "missing_openid_attribute";
-    private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE =
-            "invalid_user_info_response";
+    private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE = "invalid_user_info_response";
     private static final String OPENID_KEY = "openid";
     private static final String LANG_KEY = "lang";
     private static final String DEFAULT_LANG = "zh_CN";
@@ -75,40 +74,34 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     /** Instantiates a new Wechat o auth 2 user service. */
     public WechatOAuth2UserService() {
         RestTemplate restTemplate =
-                new RestTemplate(
-                        Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
+                new RestTemplate(Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
         restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
         this.restOperations = restTemplate;
     }
 
     @Override
-    public WechatOAuth2User loadUser(OAuth2UserRequest userRequest)
-            throws OAuth2AuthenticationException {
+    public WechatOAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         ClientRegistration clientRegistration = userRequest.getClientRegistration();
         String registrationId = clientRegistration.getRegistrationId();
         Assert.notNull(userRequest, "userRequest cannot be null");
 
         if (!StringUtils.hasText(
                 clientRegistration.getProviderDetails().getUserInfoEndpoint().getUri())) {
-            OAuth2Error oauth2Error =
-                    new OAuth2Error(
-                            MISSING_USER_INFO_URI_ERROR_CODE,
-                            "Missing required UserInfo Uri in UserInfoEndpoint for Client"
-                                    + " Registration: "
-                                    + registrationId,
-                            null);
+            OAuth2Error oauth2Error = new OAuth2Error(
+                    MISSING_USER_INFO_URI_ERROR_CODE,
+                    "Missing required UserInfo Uri in UserInfoEndpoint for Client" + " Registration: " + registrationId,
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
         }
 
         String openid = (String) userRequest.getAdditionalParameters().get(OPENID_KEY);
         if (!StringUtils.hasText(openid)) {
-            OAuth2Error oauth2Error =
-                    new OAuth2Error(
-                            MISSING_OPENID_ERROR_CODE,
-                            "Missing required \"openid\" attribute in UserInfoEndpoint for Client"
-                                    + " Registration: "
-                                    + registrationId,
-                            null);
+            OAuth2Error oauth2Error = new OAuth2Error(
+                    MISSING_OPENID_ERROR_CODE,
+                    "Missing required \"openid\" attribute in UserInfoEndpoint for Client"
+                            + " Registration: "
+                            + registrationId,
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
         }
         return getResponse(userRequest).getBody();
@@ -122,12 +115,11 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
      * @return response
      */
     private ResponseEntity<WechatOAuth2User> getResponse(OAuth2UserRequest userRequest) {
-        String userInfoUri =
-                userRequest
-                        .getClientRegistration()
-                        .getProviderDetails()
-                        .getUserInfoEndpoint()
-                        .getUri();
+        String userInfoUri = userRequest
+                .getClientRegistration()
+                .getProviderDetails()
+                .getUserInfoEndpoint()
+                .getUri();
 
         try {
             LinkedMultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
@@ -139,14 +131,12 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                     OPENID_KEY,
                     String.valueOf(userRequest.getAdditionalParameters().get(OPENID_KEY)));
             queryParams.add(LANG_KEY, DEFAULT_LANG);
-            URI userInfoEndpoint =
-                    UriComponentsBuilder.fromUriString(userInfoUri)
-                            .queryParams(queryParams)
-                            .build()
-                            .toUri();
+            URI userInfoEndpoint = UriComponentsBuilder.fromUriString(userInfoUri)
+                    .queryParams(queryParams)
+                    .build()
+                    .toUri();
 
-            return this.restOperations.exchange(
-                    userInfoEndpoint, HttpMethod.GET, null, OAUTH2_USER_OBJECT);
+            return this.restOperations.exchange(userInfoEndpoint, HttpMethod.GET, null, OAUTH2_USER_OBJECT);
         } catch (OAuth2AuthorizationException ex) {
             OAuth2Error oauth2Error = ex.getError();
             StringBuilder errorDetails = new StringBuilder();
@@ -157,43 +147,36 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 errorDetails.append(", Error Description: ").append(oauth2Error.getDescription());
             }
             errorDetails.append("]");
-            oauth2Error =
-                    new OAuth2Error(
-                            INVALID_USER_INFO_RESPONSE_ERROR_CODE,
-                            "An error occurred while attempting to retrieve the UserInfo Resource: "
-                                    + errorDetails,
-                            null);
+            oauth2Error = new OAuth2Error(
+                    INVALID_USER_INFO_RESPONSE_ERROR_CODE,
+                    "An error occurred while attempting to retrieve the UserInfo Resource: " + errorDetails,
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
         } catch (UnknownContentTypeException ex) {
-            String errorMessage =
-                    "An error occurred while attempting to retrieve the UserInfo Resource from '"
-                            + userInfoUri
-                            + "': response contains invalid content type '"
-                            + ex.getContentType()
-                            + "'. The UserInfo Response should return a JSON object (content type"
-                            + " 'application/json') that contains a collection of name and value"
-                            + " pairs of the claims about the authenticated End-User. Please ensure"
-                            + " the UserInfo Uri in UserInfoEndpoint for Client Registration '"
-                            + userRequest.getClientRegistration().getRegistrationId()
-                            + "' conforms to the UserInfo Endpoint, as defined in OpenID Connect"
-                            + " 1.0:"
-                            + " 'https://openid.net/specs/openid-connect-core-1_0.html#UserInfo'";
-            OAuth2Error oauth2Error =
-                    new OAuth2Error(INVALID_USER_INFO_RESPONSE_ERROR_CODE, errorMessage, null);
+            String errorMessage = "An error occurred while attempting to retrieve the UserInfo Resource from '"
+                    + userInfoUri
+                    + "': response contains invalid content type '"
+                    + ex.getContentType()
+                    + "'. The UserInfo Response should return a JSON object (content type"
+                    + " 'application/json') that contains a collection of name and value"
+                    + " pairs of the claims about the authenticated End-User. Please ensure"
+                    + " the UserInfo Uri in UserInfoEndpoint for Client Registration '"
+                    + userRequest.getClientRegistration().getRegistrationId()
+                    + "' conforms to the UserInfo Endpoint, as defined in OpenID Connect"
+                    + " 1.0:"
+                    + " 'https://openid.net/specs/openid-connect-core-1_0.html#UserInfo'";
+            OAuth2Error oauth2Error = new OAuth2Error(INVALID_USER_INFO_RESPONSE_ERROR_CODE, errorMessage, null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
         } catch (RestClientException ex) {
-            OAuth2Error oauth2Error =
-                    new OAuth2Error(
-                            INVALID_USER_INFO_RESPONSE_ERROR_CODE,
-                            "An error occurred while attempting to retrieve the UserInfo Resource: "
-                                    + ex.getMessage(),
-                            null);
+            OAuth2Error oauth2Error = new OAuth2Error(
+                    INVALID_USER_INFO_RESPONSE_ERROR_CODE,
+                    "An error occurred while attempting to retrieve the UserInfo Resource: " + ex.getMessage(),
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
         }
     }
 
-    private static class WechatOAuth2UserHttpMessageConverter
-            extends AbstractHttpMessageConverter<WechatOAuth2User> {
+    private static class WechatOAuth2UserHttpMessageConverter extends AbstractHttpMessageConverter<WechatOAuth2User> {
 
         private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
@@ -214,28 +197,24 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         }
 
         @Override
-        protected WechatOAuth2User readInternal(
-                Class<? extends WechatOAuth2User> clazz, HttpInputMessage inputMessage)
+        protected WechatOAuth2User readInternal(Class<? extends WechatOAuth2User> clazz, HttpInputMessage inputMessage)
                 throws HttpMessageNotReadableException {
             try {
                 // gh-6463: Parse parameter values as Object in order to handle potential JSON
                 // Object and then convert values to String
                 return (WechatOAuth2User)
-                        this.jsonMessageConverter.read(
-                                OAUTH2_USER_OBJECT.getType(), null, inputMessage);
+                        this.jsonMessageConverter.read(OAUTH2_USER_OBJECT.getType(), null, inputMessage);
 
             } catch (Exception ex) {
                 throw new HttpMessageNotReadableException(
-                        "An error occurred reading the OAuth 2.0 Access Token Response: "
-                                + ex.getMessage(),
+                        "An error occurred reading the OAuth 2.0 Access Token Response: " + ex.getMessage(),
                         ex,
                         inputMessage);
             }
         }
 
         @Override
-        protected void writeInternal(
-                WechatOAuth2User tokenResponse, HttpOutputMessage outputMessage)
+        protected void writeInternal(WechatOAuth2User tokenResponse, HttpOutputMessage outputMessage)
                 throws HttpMessageNotWritableException {
             // noop
         }
@@ -250,11 +229,8 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
             static {
                 ClassLoader classLoader = HttpMessageConverters.class.getClassLoader();
-                jackson2Present =
-                        ClassUtils.isPresent(
-                                        "com.fasterxml.jackson.databind.ObjectMapper", classLoader)
-                                && ClassUtils.isPresent(
-                                        "com.fasterxml.jackson.core.JsonGenerator", classLoader);
+                jackson2Present = ClassUtils.isPresent("com.fasterxml.jackson.databind.ObjectMapper", classLoader)
+                        && ClassUtils.isPresent("com.fasterxml.jackson.core.JsonGenerator", classLoader);
                 gsonPresent = ClassUtils.isPresent("com.google.gson.Gson", classLoader);
                 jsonbPresent = ClassUtils.isPresent("javax.json.bind.Jsonb", classLoader);
             }

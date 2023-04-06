@@ -36,9 +36,14 @@ import org.springframework.stereotype.Service;
 public class SalesSupportServiceImpl extends ServiceImpl<SalesSupportMapper, SalesSupportEntity>
         implements SalesSupportService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public SalesSupportEntity getInfo(String id) {
@@ -78,8 +83,7 @@ public class SalesSupportServiceImpl extends ServiceImpl<SalesSupportMapper, Sal
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, SalesSupportEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, SalesSupportEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -112,8 +116,7 @@ public class SalesSupportServiceImpl extends ServiceImpl<SalesSupportMapper, Sal
     @Override
     public void data(String id, String data) {
         SalesSupportForm salesSupportForm = JsonUtils.getJsonToBean(data, SalesSupportForm.class);
-        SalesSupportEntity entity =
-                JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
+        SalesSupportEntity entity = JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

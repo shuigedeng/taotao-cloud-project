@@ -29,8 +29,7 @@ import java.time.format.DateTimeFormatter;
 public class IdGenerator {
 
     public static String generateAuthorizationId(String id) {
-        String currentTime =
-                DateTimeFormatter.ofPattern("yyyyMMddhhmmssSSS").format(LocalDateTime.now());
+        String currentTime = DateTimeFormatter.ofPattern("yyyyMMddhhmmssSSS").format(LocalDateTime.now());
         return id + currentTime;
     }
 

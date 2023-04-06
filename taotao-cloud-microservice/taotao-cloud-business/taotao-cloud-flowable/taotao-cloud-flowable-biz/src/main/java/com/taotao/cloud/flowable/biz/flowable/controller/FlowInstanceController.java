@@ -46,7 +46,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/flowable/instance")
 public class FlowInstanceController {
 
-    @Autowired private IFlowInstanceService flowInstanceService;
+    @Autowired
+    private IFlowInstanceService flowInstanceService;
 
     @ApiOperation(value = "根据流程定义id启动流程实例")
     @PostMapping("/startBy/{procDefId}")

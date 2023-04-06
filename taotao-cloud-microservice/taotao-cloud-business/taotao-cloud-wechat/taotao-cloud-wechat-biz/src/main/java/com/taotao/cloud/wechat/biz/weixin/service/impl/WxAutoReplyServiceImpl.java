@@ -29,5 +29,4 @@ import org.springframework.stereotype.Service;
  * @date 2019-04-18 15:40:39
  */
 @Service
-public class WxAutoReplyServiceImpl extends ServiceImpl<WxAutoReplyMapper, WxAutoReply>
-        implements WxAutoReplyService {}
+public class WxAutoReplyServiceImpl extends ServiceImpl<WxAutoReplyMapper, WxAutoReply> implements WxAutoReplyService {}

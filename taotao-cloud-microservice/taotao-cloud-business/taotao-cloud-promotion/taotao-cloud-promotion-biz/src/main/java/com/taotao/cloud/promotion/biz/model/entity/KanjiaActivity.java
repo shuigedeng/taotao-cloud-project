@@ -53,9 +53,7 @@ public class KanjiaActivity extends BaseSuperEntity<KanjiaActivity, Long> {
 
     public static final String TABLE_NAME = "tt_kanjia_activity";
     /** 砍价商品id */
-    @Column(
-            name = "kanjia_activity_goods_id",
-            columnDefinition = "bigint not null comment '砍价商品id'")
+    @Column(name = "kanjia_activity_goods_id", columnDefinition = "bigint not null comment '砍价商品id'")
     private Long kanjiaActivityGoodsId;
     /** 发起砍价活动会员id */
     @Column(name = "member_id", columnDefinition = "bigint not null comment '发起砍价活动会员id'")
@@ -64,14 +62,10 @@ public class KanjiaActivity extends BaseSuperEntity<KanjiaActivity, Long> {
     @Column(name = "member_name", columnDefinition = "varchar(255) not null comment '发起砍价活动会员名称'")
     private String memberName;
     /** 剩余购买金额 */
-    @Column(
-            name = "surplus_price",
-            columnDefinition = "decimal(10,2) not null default 0 comment '剩余购买金额'")
+    @Column(name = "surplus_price", columnDefinition = "decimal(10,2) not null default 0 comment '剩余购买金额'")
     private BigDecimal surplusPrice;
     /** 砍价最低购买金额 */
-    @Column(
-            name = "purchase_price",
-            columnDefinition = "decimal(10,2) not null default 0 comment '砍价最低购买金额'")
+    @Column(name = "purchase_price", columnDefinition = "decimal(10,2) not null default 0 comment '砍价最低购买金额'")
     private BigDecimal purchasePrice;
     /** 砍价商品skuId */
     @Column(name = "sku_id", columnDefinition = "bigint not null comment '砍价商品skuId'")

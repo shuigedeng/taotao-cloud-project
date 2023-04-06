@@ -37,7 +37,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/wxAccount")
 @Api(tags = {"公众号账号-管理后台"})
 public class WxAccountManageController {
-    @Autowired private WxAccountService wxAccountService;
+    @Autowired
+    private WxAccountService wxAccountService;
 
     /** 列表 */
     @GetMapping("/list")

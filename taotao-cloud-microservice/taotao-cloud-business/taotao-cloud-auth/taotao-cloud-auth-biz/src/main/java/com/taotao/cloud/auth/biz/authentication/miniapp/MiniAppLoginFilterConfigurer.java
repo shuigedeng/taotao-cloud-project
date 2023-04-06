@@ -34,10 +34,7 @@ import org.springframework.util.Assert;
 
 public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H,
-                MiniAppLoginFilterConfigurer<H>,
-                MiniAppAuthenticationFilter,
-                LoginFilterSecurityConfigurer<H>> {
+                H, MiniAppLoginFilterConfigurer<H>, MiniAppAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private MiniAppUserDetailsService miniAppUserDetailsService;
 
@@ -57,8 +54,7 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         return this;
     }
 
-    public MiniAppLoginFilterConfigurer<H> miniAppClientService(
-            MiniAppClientService miniAppClientService) {
+    public MiniAppLoginFilterConfigurer<H> miniAppClientService(MiniAppClientService miniAppClientService) {
         this.miniAppClientService = miniAppClientService;
         return this;
     }
@@ -82,19 +78,16 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
 
     private void initPreAuthenticationFilter(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-        MiniAppClientService miniAppClientService =
-                this.miniAppClientService != null
-                        ? this.miniAppClientService
-                        : getBeanOrNull(applicationContext, MiniAppClientService.class);
+        MiniAppClientService miniAppClientService = this.miniAppClientService != null
+                ? this.miniAppClientService
+                : getBeanOrNull(applicationContext, MiniAppClientService.class);
 
-        MiniAppSessionKeyCacheService miniAppSessionKeyCacheService =
-                this.miniAppSessionKeyCacheService != null
-                        ? this.miniAppSessionKeyCacheService
-                        : getBeanOrNull(applicationContext, MiniAppSessionKeyCacheService.class);
+        MiniAppSessionKeyCacheService miniAppSessionKeyCacheService = this.miniAppSessionKeyCacheService != null
+                ? this.miniAppSessionKeyCacheService
+                : getBeanOrNull(applicationContext, MiniAppSessionKeyCacheService.class);
 
         MiniAppPreAuthenticationFilter miniAppPreAuthenticationFilter =
-                new MiniAppPreAuthenticationFilter(
-                        miniAppClientService, miniAppSessionKeyCacheService);
+                new MiniAppPreAuthenticationFilter(miniAppClientService, miniAppSessionKeyCacheService);
         http.addFilterBefore(postProcess(miniAppPreAuthenticationFilter), LogoutFilter.class);
     }
 
@@ -106,18 +99,15 @@ public class MiniAppLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     @Override
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-        MiniAppUserDetailsService miniAppUserDetailsService =
-                this.miniAppUserDetailsService != null
-                        ? this.miniAppUserDetailsService
-                        : getBeanOrNull(applicationContext, MiniAppUserDetailsService.class);
+        MiniAppUserDetailsService miniAppUserDetailsService = this.miniAppUserDetailsService != null
+                ? this.miniAppUserDetailsService
+                : getBeanOrNull(applicationContext, MiniAppUserDetailsService.class);
 
-        MiniAppSessionKeyCacheService miniAppSessionKeyCacheService =
-                this.miniAppSessionKeyCacheService != null
-                        ? this.miniAppSessionKeyCacheService
-                        : getBeanOrNull(applicationContext, MiniAppSessionKeyCacheService.class);
+        MiniAppSessionKeyCacheService miniAppSessionKeyCacheService = this.miniAppSessionKeyCacheService != null
+                ? this.miniAppSessionKeyCacheService
+                : getBeanOrNull(applicationContext, MiniAppSessionKeyCacheService.class);
 
-        return new MiniAppAuthenticationProvider(
-                miniAppUserDetailsService, miniAppSessionKeyCacheService);
+        return new MiniAppAuthenticationProvider(miniAppUserDetailsService, miniAppSessionKeyCacheService);
     }
 
     @Override

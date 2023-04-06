@@ -50,9 +50,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/paytest")
 public class PaytestController extends CommonCtrl {
 
-    @Autowired private MchAppService mchAppService;
-    @Autowired private MchPayPassageService mchPayPassageService;
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private MchAppService mchAppService;
+
+    @Autowired
+    private MchPayPassageService mchPayPassageService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
 
     /** 查询商户对应应用下支持的支付方式 * */
     @PreAuthorize("hasAuthority('ENT_MCH_PAY_TEST_PAYWAY_LIST')")
@@ -61,12 +66,11 @@ public class PaytestController extends CommonCtrl {
 
         Set<String> payWaySet = new HashSet<>();
         mchPayPassageService
-                .list(
-                        MchPayPassage.gw()
-                                .select(MchPayPassage::getWayCode)
-                                .eq(MchPayPassage::getMchNo, getCurrentMchNo())
-                                .eq(MchPayPassage::getAppId, appId)
-                                .eq(MchPayPassage::getState, CS.PUB_USABLE))
+                .list(MchPayPassage.gw()
+                        .select(MchPayPassage::getWayCode)
+                        .eq(MchPayPassage::getMchNo, getCurrentMchNo())
+                        .eq(MchPayPassage::getAppId, appId)
+                        .eq(MchPayPassage::getState, CS.PUB_USABLE))
                 .stream()
                 .forEach(r -> payWaySet.add(r.getWayCode()));
 
@@ -123,8 +127,7 @@ public class PaytestController extends CommonCtrl {
 
         DBApplicationConfig dbApplicationConfig = sysConfigService.getDBApplicationConfig();
 
-        model.setNotifyUrl(
-                dbApplicationConfig.getMchSiteUrl() + "/api/anon/paytestNotify/payOrder"); // 回调地址
+        model.setNotifyUrl(dbApplicationConfig.getMchSiteUrl() + "/api/anon/paytestNotify/payOrder"); // 回调地址
         model.setDivisionMode(divisionMode); // 分账模式
 
         // 设置扩展参数
@@ -137,8 +140,7 @@ public class PaytestController extends CommonCtrl {
         }
         model.setChannelExtra(extParams.toString());
 
-        JeepayClient jeepayClient =
-                new JeepayClient(dbApplicationConfig.getPaySiteUrl(), mchApp.getAppSecret());
+        JeepayClient jeepayClient = new JeepayClient(dbApplicationConfig.getPaySiteUrl(), mchApp.getAppSecret());
 
         try {
             PayOrderCreateResponse response = jeepayClient.execute(request);

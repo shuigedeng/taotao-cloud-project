@@ -54,10 +54,8 @@ public class CategorySpecificationSellerController {
     @RequestLogger("查询某分类下绑定的规格信息")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
-    public Result<List<SpecificationVO>> getCategorySpec(
-            @PathVariable("categoryId") Long categoryId) {
-        List<Specification> categorySpecList =
-                categorySpecificationService.getCategorySpecList(categoryId);
+    public Result<List<SpecificationVO>> getCategorySpec(@PathVariable("categoryId") Long categoryId) {
+        List<Specification> categorySpecList = categorySpecificationService.getCategorySpecList(categoryId);
 
         return Result.success(SpecificationConvert.INSTANCE.convert(categorySpecList));
     }

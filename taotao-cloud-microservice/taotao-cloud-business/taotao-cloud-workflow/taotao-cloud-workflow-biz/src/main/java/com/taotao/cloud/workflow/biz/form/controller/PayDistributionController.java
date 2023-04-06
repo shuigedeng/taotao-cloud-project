@@ -38,8 +38,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/PayDistribution")
 public class PayDistributionController {
 
-    @Autowired private PayDistributionService payDistributionService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private PayDistributionService payDistributionService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取薪酬发放信息
@@ -57,9 +60,7 @@ public class PayDistributionController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), PayDistributionInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), PayDistributionInfoVO.class);
                     isData = false;
                 }
             }
@@ -79,16 +80,13 @@ public class PayDistributionController {
      */
     @Operation("新建薪酬发放")
     @PostMapping
-    public Result create(@RequestBody PayDistributionForm payDistributionForm)
-            throws WorkFlowException {
-        PayDistributionEntity entity =
-                JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
+    public Result create(@RequestBody PayDistributionForm payDistributionForm) throws WorkFlowException {
+        PayDistributionEntity entity = JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(payDistributionForm.getStatus())) {
             payDistributionService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
         }
-        payDistributionService.submit(
-                entity.getId(), entity, payDistributionForm.getCandidateList());
+        payDistributionService.submit(entity.getId(), entity, payDistributionForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -101,11 +99,9 @@ public class PayDistributionController {
      */
     @Operation("修改薪酬发放")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody PayDistributionForm payDistributionForm, @PathVariable("id") String id)
+    public Result update(@RequestBody PayDistributionForm payDistributionForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        PayDistributionEntity entity =
-                JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
+        PayDistributionEntity entity = JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(payDistributionForm.getStatus())) {
             payDistributionService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

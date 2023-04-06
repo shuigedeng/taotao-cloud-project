@@ -24,7 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public abstract class AbstractAliYunRocketMQReceiver implements IMQMsgReceiver, InitializingBean {
 
-    @Autowired private AliYunRocketMQFactory aliYunRocketMQFactory;
+    @Autowired
+    private AliYunRocketMQFactory aliYunRocketMQFactory;
 
     /**
      * 获取topic名称
@@ -52,42 +53,35 @@ public abstract class AbstractAliYunRocketMQReceiver implements IMQMsgReceiver, 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Consumer consumerClient =
-                MQSendTypeEnum.BROADCAST.equals(getMQType())
-                        ?
-                        // 广播订阅模式
-                        aliYunRocketMQFactory.broadcastConsumerClient()
-                        : aliYunRocketMQFactory.consumerClient();
-        consumerClient.subscribe(
-                this.getMQName(),
-                AliYunRocketMQFactory.defaultTag,
-                new MessageListener() {
-                    @Override
-                    public Action consume(Message message, ConsumeContext context) {
-                        try {
-                            receiveMsg(new String(message.getBody()));
-                            log.debug(
-                                    "【{}】MQ消息消费成功topic:{}, messageId:{}",
-                                    getConsumerName(),
-                                    message.getTopic(),
-                                    message.getMsgID());
-                            return Action.CommitMessage;
-                        } catch (Exception e) {
-                            log.error(
-                                    "【{}】MQ消息消费失败topic:{}, messageId:{}",
-                                    getConsumerName(),
-                                    message.getTopic(),
-                                    message.getMsgID(),
-                                    e);
-                        }
-                        return Action.ReconsumeLater;
-                    }
-                });
+        Consumer consumerClient = MQSendTypeEnum.BROADCAST.equals(getMQType())
+                ?
+                // 广播订阅模式
+                aliYunRocketMQFactory.broadcastConsumerClient()
+                : aliYunRocketMQFactory.consumerClient();
+        consumerClient.subscribe(this.getMQName(), AliYunRocketMQFactory.defaultTag, new MessageListener() {
+            @Override
+            public Action consume(Message message, ConsumeContext context) {
+                try {
+                    receiveMsg(new String(message.getBody()));
+                    log.debug(
+                            "【{}】MQ消息消费成功topic:{}, messageId:{}",
+                            getConsumerName(),
+                            message.getTopic(),
+                            message.getMsgID());
+                    return Action.CommitMessage;
+                } catch (Exception e) {
+                    log.error(
+                            "【{}】MQ消息消费失败topic:{}, messageId:{}",
+                            getConsumerName(),
+                            message.getTopic(),
+                            message.getMsgID(),
+                            e);
+                }
+                return Action.ReconsumeLater;
+            }
+        });
         consumerClient.start();
         log.info(
-                "初始化[{}]消费者topic: {},tag: {}成功",
-                getConsumerName(),
-                this.getMQName(),
-                AliYunRocketMQFactory.defaultTag);
+                "初始化[{}]消费者topic: {},tag: {}成功", getConsumerName(), this.getMQName(), AliYunRocketMQFactory.defaultTag);
     }
 }

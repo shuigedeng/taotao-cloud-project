@@ -60,8 +60,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlow>
-        implements IStoreFlowService {
+public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlow> implements IStoreFlowService {
 
     /** 订单 */
     private final IOrderService orderService;
@@ -117,13 +116,11 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
                 }
                 // 如果为砍价活动，填写砍价结算价
                 else if (orderPromotionType.equals(OrderPromotionTypeEnum.KANJIA.name())) {
-                    storeFlow.setKanjiaSettlementPrice(
-                            item.getPriceDetailDTO().getSettlementPrice());
+                    storeFlow.setKanjiaSettlementPrice(item.getPriceDetailDTO().getSettlementPrice());
                 }
                 // 如果为砍价活动，填写砍价结算价
                 else if (orderPromotionType.equals(OrderPromotionTypeEnum.POINTS.name())) {
-                    storeFlow.setPointSettlementPrice(
-                            item.getPriceDetailDTO().getSettlementPrice());
+                    storeFlow.setPointSettlementPrice(item.getPriceDetailDTO().getSettlementPrice());
                 }
             }
             // 添加支付方式
@@ -156,32 +153,23 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
         storeFlow.setSpecs(afterSale.getSpecs());
 
         // 获取付款信息
-        StoreFlow payStoreFlow =
-                this.getOne(
-                        new LambdaUpdateWrapper<StoreFlow>()
-                                .eq(StoreFlow::getOrderItemSn, afterSale.getOrderItemSn())
-                                .eq(StoreFlow::getFlowType, FlowTypeEnum.PAY));
+        StoreFlow payStoreFlow = this.getOne(new LambdaUpdateWrapper<StoreFlow>()
+                .eq(StoreFlow::getOrderItemSn, afterSale.getOrderItemSn())
+                .eq(StoreFlow::getFlowType, FlowTypeEnum.PAY));
         storeFlow.setNum(afterSale.getNum());
         storeFlow.setCategoryId(payStoreFlow.getCategoryId());
         // 佣金
-        storeFlow.setCommissionPrice(
-                CurrencyUtils.mul(
-                        CurrencyUtils.div(payStoreFlow.getCommissionPrice(), payStoreFlow.getNum()),
-                        afterSale.getNum()));
+        storeFlow.setCommissionPrice(CurrencyUtils.mul(
+                CurrencyUtils.div(payStoreFlow.getCommissionPrice(), payStoreFlow.getNum()), afterSale.getNum()));
         // 分销佣金
-        storeFlow.setDistributionRebate(
-                CurrencyUtils.mul(
-                        CurrencyUtils.div(
-                                payStoreFlow.getDistributionRebate(), payStoreFlow.getNum()),
-                        afterSale.getNum()));
+        storeFlow.setDistributionRebate(CurrencyUtils.mul(
+                CurrencyUtils.div(payStoreFlow.getDistributionRebate(), payStoreFlow.getNum()), afterSale.getNum()));
         // 流水金额
         storeFlow.setFinalPrice(afterSale.getActualRefundPrice());
         // 最终结算金额
-        storeFlow.setBillPrice(
-                CurrencyUtils.add(
-                        CurrencyUtils.add(
-                                storeFlow.getFinalPrice(), storeFlow.getDistributionRebate()),
-                        storeFlow.getCommissionPrice()));
+        storeFlow.setBillPrice(CurrencyUtils.add(
+                CurrencyUtils.add(storeFlow.getFinalPrice(), storeFlow.getDistributionRebate()),
+                storeFlow.getCommissionPrice()));
         // 获取第三方支付流水号
         RefundLogVO refundLog = feignRefundLogApi.queryByAfterSaleSn(afterSale.getSn());
         storeFlow.setTransactionId(refundLog.getReceivableNo());
@@ -191,8 +179,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
 
     @Override
     public IPage<StoreFlow> getStoreFlow(StoreFlowPageQuery storeFlowPageQuery) {
-        return this.page(
-                storeFlowPageQuery.buildMpPage(), generatorQueryWrapper(storeFlowPageQuery));
+        return this.page(storeFlowPageQuery.buildMpPage(), generatorQueryWrapper(storeFlowPageQuery));
     }
 
     @Override
@@ -201,28 +188,30 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
     }
 
     @Override
-    public List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(
-            StoreFlowPageQuery storeFlowQueryDTO) {
+    public List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(StoreFlowPageQuery storeFlowQueryDTO) {
         return baseMapper.getStoreFlowPayDownloadVO(generatorQueryWrapper(storeFlowQueryDTO));
     }
 
     @Override
-    public List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(
-            StoreFlowPageQuery storeFlowQueryDTO) {
+    public List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(StoreFlowPageQuery storeFlowQueryDTO) {
         return baseMapper.getStoreFlowRefundDownloadVO(generatorQueryWrapper(storeFlowQueryDTO));
     }
 
     @Override
     public IPage<StoreFlow> getStoreFlow(StorePageQuery storePageQuery) {
         BillVO bill = feignBillApi.getById(storePageQuery.getId());
-        return this.getStoreFlow(
-                StoreFlowPageQuery.builder().type(type).pageVO(pageVO).bill(bill).build());
+        return this.getStoreFlow(StoreFlowPageQuery.builder()
+                .type(type)
+                .pageVO(pageVO)
+                .bill(bill)
+                .build());
     }
 
     @Override
     public IPage<StoreFlow> getDistributionFlow(DistributionPageQuery distributionPageQuery) {
         BillVO bill = feignBillApi.getById(distributionPageQuery.getId());
-        return this.getStoreFlow(StoreFlowPageQuery.builder().pageVO(pageVO).bill(bill).build());
+        return this.getStoreFlow(
+                StoreFlowPageQuery.builder().pageVO(pageVO).bill(bill).build());
     }
 
     @Override
@@ -236,13 +225,11 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
      * @param storeFlowPageQuery 搜索参数
      * @return 查询wrapper
      */
-    private LambdaQueryWrapper<StoreFlow> generatorQueryWrapper(
-            StoreFlowPageQuery storeFlowPageQuery) {
+    private LambdaQueryWrapper<StoreFlow> generatorQueryWrapper(StoreFlowPageQuery storeFlowPageQuery) {
         LambdaQueryWrapper<StoreFlow> lambdaQueryWrapper = Wrappers.lambdaQuery();
         // 分销订单过滤是否判定
         lambdaQueryWrapper.isNotNull(
-                storeFlowPageQuery.getJustDistribution() != null
-                        && storeFlowPageQuery.getJustDistribution(),
+                storeFlowPageQuery.getJustDistribution() != null && storeFlowPageQuery.getJustDistribution(),
                 StoreFlow::getDistributionRebate);
 
         // 流水类型判定
@@ -266,10 +253,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
         // 结算单非空，则校对结算单参数
         if (storeFlowPageQuery.getBill() != null) {
             StoreFlowPageQuery.BillDTO bill = storeFlowPageQuery.getBill();
-            lambdaQueryWrapper.eq(
-                    StringUtils.isNotEmpty(bill.getStoreId()),
-                    StoreFlow::getStoreId,
-                    bill.getStoreId());
+            lambdaQueryWrapper.eq(StringUtils.isNotEmpty(bill.getStoreId()), StoreFlow::getStoreId, bill.getStoreId());
             lambdaQueryWrapper.between(
                     bill.getStartTime() != null && bill.getEndTime() != null,
                     StoreFlow::getCreateTime,

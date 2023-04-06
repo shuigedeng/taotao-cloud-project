@@ -32,7 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class TrtcController {
 
-    @Resource private TrtcService trtcService;
+    @Resource
+    private TrtcService trtcService;
 
     /** 获取签名 */
     @ApiVersion(VersionEnum.V1_0_0)

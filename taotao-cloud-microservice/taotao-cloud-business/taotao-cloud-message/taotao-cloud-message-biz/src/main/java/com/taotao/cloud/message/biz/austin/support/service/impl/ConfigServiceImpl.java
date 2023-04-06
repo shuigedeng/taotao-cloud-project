@@ -47,14 +47,14 @@ public class ConfigServiceImpl implements ConfigService {
     @Value("${austin.nacos.enabled}")
     private Boolean enableNacos;
 
-    @Autowired private NacosUtils nacosUtils;
+    @Autowired
+    private NacosUtils nacosUtils;
 
     @Override
     public String getProperty(String key, String defaultValue) {
         if (enableApollo) {
-            Config config =
-                    com.ctrip.framework.apollo.ConfigService.getConfig(
-                            namespaces.split(StrUtil.COMMA)[0]);
+            Config config = com.ctrip.framework.apollo.ConfigService.getConfig(
+                    namespaces.split(StrUtil.COMMA)[0]);
             return config.getProperty(key, defaultValue);
         } else if (enableNacos) {
             return nacosUtils.getProperty(key, defaultValue);

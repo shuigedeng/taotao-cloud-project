@@ -72,11 +72,7 @@ public class VideoUtil {
                     new BufferedImage(srcImageWidth, srcImageHeight, BufferedImage.TYPE_3BYTE_BGR);
             thumbnailImage
                     .getGraphics()
-                    .drawImage(
-                            srcImage.getScaledInstance(srcImageWidth, srcImageHeight, 1),
-                            0,
-                            0,
-                            null);
+                    .drawImage(srcImage.getScaledInstance(srcImageWidth, srcImageHeight, 1), 0, 0, null);
             ImageIO.write(thumbnailImage, "jpg", out);
             ff.stop();
             // log.warn("[视频截图][耗时:{}]",DateUtil.conversion(System.currentTimeMillis()-fr));

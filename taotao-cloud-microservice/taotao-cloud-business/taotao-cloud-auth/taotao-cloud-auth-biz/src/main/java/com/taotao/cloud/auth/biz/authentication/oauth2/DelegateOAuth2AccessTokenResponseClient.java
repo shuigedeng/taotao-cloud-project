@@ -44,20 +44,17 @@ public class DelegateOAuth2AccessTokenResponseClient
     }
 
     @Override
-    public OAuth2AccessTokenResponse getTokenResponse(
-            OAuth2AuthorizationCodeGrantRequest authorizationGrantRequest) {
+    public OAuth2AccessTokenResponse getTokenResponse(OAuth2AuthorizationCodeGrantRequest authorizationGrantRequest) {
         String registrationId =
                 authorizationGrantRequest.getClientRegistration().getRegistrationId();
 
         if (ClientProviders.WORK_WECHAT_SCAN_CLIENT.registrationId().equals(registrationId)) {
             // todo 缓存获取token 如果获取不到再请求 并放入缓存  企业微信的token不允许频繁获取
-            OAuth2AccessTokenResponse tokenResponse =
-                    delegate.getTokenResponse(authorizationGrantRequest);
-            String code =
-                    authorizationGrantRequest
-                            .getAuthorizationExchange()
-                            .getAuthorizationResponse()
-                            .getCode();
+            OAuth2AccessTokenResponse tokenResponse = delegate.getTokenResponse(authorizationGrantRequest);
+            String code = authorizationGrantRequest
+                    .getAuthorizationExchange()
+                    .getAuthorizationResponse()
+                    .getCode();
 
             return OAuth2AccessTokenResponse.withResponse(tokenResponse)
                     .additionalParameters(Collections.singletonMap(OAuth2ParameterNames.CODE, code))
@@ -65,8 +62,7 @@ public class DelegateOAuth2AccessTokenResponseClient
         }
 
         if ("weibo".equals(registrationId)) {
-            ClientRegistration clientRegistration =
-                    authorizationGrantRequest.getClientRegistration();
+            ClientRegistration clientRegistration = authorizationGrantRequest.getClientRegistration();
 
             System.out.println("registerId：" + clientRegistration.getRegistrationId());
             OAuth2AuthorizationExchange oAuth2AuthorizationExchange =
@@ -75,8 +71,11 @@ public class DelegateOAuth2AccessTokenResponseClient
             Map<String, String> params = new HashMap<>();
             params.put("client_id", clientRegistration.getClientId());
             params.put("client_secret", clientRegistration.getClientSecret());
-            params.put("grant_type", clientRegistration.getAuthorizationGrantType().getValue());
-            params.put("code", oAuth2AuthorizationExchange.getAuthorizationResponse().getCode());
+            params.put(
+                    "grant_type", clientRegistration.getAuthorizationGrantType().getValue());
+            params.put(
+                    "code",
+                    oAuth2AuthorizationExchange.getAuthorizationResponse().getCode());
             params.put(
                     "redirect_uri",
                     oAuth2AuthorizationExchange.getAuthorizationResponse().getRedirectUri());
@@ -84,16 +83,14 @@ public class DelegateOAuth2AccessTokenResponseClient
 
             String baseUri = clientRegistration.getProviderDetails().getTokenUri();
 
-            String accessTokenUri =
-                    baseUri
-                            + "?client_id={client_id}"
-                            + "&client_secret={client_secret}"
-                            + "&grant_type={grant_type}"
-                            + "&redirect_uri={redirect_uri}"
-                            + "&code={code}";
+            String accessTokenUri = baseUri
+                    + "?client_id={client_id}"
+                    + "&client_secret={client_secret}"
+                    + "&grant_type={grant_type}"
+                    + "&redirect_uri={redirect_uri}"
+                    + "&code={code}";
 
-            String accessTokenResponse =
-                    this.restOperations.postForObject(accessTokenUri, null, String.class, params);
+            String accessTokenResponse = this.restOperations.postForObject(accessTokenUri, null, String.class, params);
 
             JSONObject object = JSONObject.parseObject(accessTokenResponse);
             String accessToken = object.getString("access_token");
@@ -106,7 +103,9 @@ public class DelegateOAuth2AccessTokenResponseClient
             return OAuth2AccessTokenResponse.withToken(accessToken)
                     .expiresIn(Long.parseLong(expiresIn))
                     .tokenType(OAuth2AccessToken.TokenType.BEARER)
-                    .scopes(oAuth2AuthorizationExchange.getAuthorizationRequest().getScopes())
+                    .scopes(oAuth2AuthorizationExchange
+                            .getAuthorizationRequest()
+                            .getScopes())
                     .additionalParameters(additionalParameters)
                     .build();
         }

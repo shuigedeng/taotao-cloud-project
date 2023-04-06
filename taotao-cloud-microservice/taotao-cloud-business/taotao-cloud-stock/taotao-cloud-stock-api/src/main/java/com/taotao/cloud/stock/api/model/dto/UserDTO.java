@@ -62,13 +62,7 @@ public class UserDTO implements Serializable {
 
     public UserDTO() {}
 
-    public UserDTO(
-            String id,
-            String userName,
-            String email,
-            String mobile,
-            String status,
-            List<String> roleIdList) {
+    public UserDTO(String id, String userName, String email, String mobile, String status, List<String> roleIdList) {
         this.id = id;
         this.userName = userName;
         this.email = email;

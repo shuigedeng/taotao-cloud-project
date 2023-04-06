@@ -41,7 +41,8 @@ import lombok.NoArgsConstructor;
 @Schema(name = "MemberPointHistoryPageQuery", description = "会员query")
 public class MemberPointHistoryPageQuery extends PageQuery implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     private Long memberId;
 

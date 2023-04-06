@@ -88,8 +88,7 @@ public enum DataTypeEnum {
             DtKingbaseES.BIGINT,
             DtPostgreSQL.INT8),
     /** oracle数字类型 */
-    ORACLE_NUMBER(
-            ViewDataTypeConst.ORACLE_NUMBER, null, DtOracle.NUMBER_VIEW, null, null, null, null);
+    ORACLE_NUMBER(ViewDataTypeConst.ORACLE_NUMBER, null, DtOracle.NUMBER_VIEW, null, null, null, null);
 
     private final String viewFieldType;
 
@@ -129,8 +128,7 @@ public enum DataTypeEnum {
      * @param db 数据基类
      * @return view类型对象的数据类型
      */
-    public static DataTypeModel getDataTypeModel(String viewFieldType, DbBase db)
-            throws DataException {
+    public static DataTypeModel getDataTypeModel(String viewFieldType, DbBase db) throws DataException {
         if (StringUtil.isNotNull(viewFieldType)) {
             for (DataTypeEnum value : DataTypeEnum.values()) {
                 if (value.getViewFieldType().equalsIgnoreCase(viewFieldType)) {

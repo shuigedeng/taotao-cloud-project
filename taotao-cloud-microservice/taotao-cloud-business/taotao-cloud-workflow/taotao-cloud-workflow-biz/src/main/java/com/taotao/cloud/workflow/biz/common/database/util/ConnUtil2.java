@@ -34,21 +34,13 @@ public class ConnUtil2 {
         return getConnTimeout(dbSourceOrDbLink, null);
     }
 
-    public static Connection getConnTimeout(DataSourceMod dataSourceUtil, String dbName)
-            throws DataException {
+    public static Connection getConnTimeout(DataSourceMod dataSourceUtil, String dbName) throws DataException {
         DataSourceDTO dsd = dataSourceUtil.convertDTO(dbName);
         DbBase dbBase = DbTypeUtil.getDb(dataSourceUtil);
-        return createConn(
-                dbBase.getDriver(),
-                dsd.getUserName(),
-                dsd.getPassword(),
-                ConnUtil.getUrl(dsd),
-                3L,
-                "254");
+        return createConn(dbBase.getDriver(), dsd.getUserName(), dsd.getPassword(), ConnUtil.getUrl(dsd), 3L, "254");
     }
 
-    public static Connection getConnTimeout(String userName, String password, String url)
-            throws DataException {
+    public static Connection getConnTimeout(String userName, String password, String url) throws DataException {
         return createConn(DbTypeUtil.getDb(url).getDriver(), userName, password, url, 3L, "254");
     }
 
@@ -65,12 +57,7 @@ public class ConnUtil2 {
      * @throws DataException 连接错误
      */
     private static Connection createConn(
-            String driverClass,
-            String userName,
-            String password,
-            String url,
-            Long timeoutNum,
-            String warning)
+            String driverClass, String userName, String password, String url, Long timeoutNum, String warning)
             throws DataException {
         final Connection[] conn = {null};
         Callable<String> task = getTask(userName, password, url, driverClass, conn);
@@ -83,8 +70,7 @@ public class ConnUtil2 {
         }
     }
 
-    private static void futureGo(Callable<String> task, String warning, Long timeoutNum)
-            throws DataException {
+    private static void futureGo(Callable<String> task, String warning, Long timeoutNum) throws DataException {
         ThreadPoolTaskExecutor executor = SpringContext.getBean(ThreadPoolTaskExecutor.class);
         Future<String> future = executor.submit(task);
         try {
@@ -100,20 +86,18 @@ public class ConnUtil2 {
     }
 
     private static Callable<String> getTask(
-            String userName, String password, String url, String driverClass, Connection[] conn)
-            throws DataException {
-        Callable<String> task =
-                () -> {
-                    // 执行耗时代码
-                    try {
-                        Class.forName(driverClass);
-                        conn[0] = DriverManager.getConnection(url, userName, password);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        throw new DataException(e.getMessage());
-                    }
-                    return "jdbc连接成功";
-                };
+            String userName, String password, String url, String driverClass, Connection[] conn) throws DataException {
+        Callable<String> task = () -> {
+            // 执行耗时代码
+            try {
+                Class.forName(driverClass);
+                conn[0] = DriverManager.getConnection(url, userName, password);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new DataException(e.getMessage());
+            }
+            return "jdbc连接成功";
+        };
         return task;
     }
 }

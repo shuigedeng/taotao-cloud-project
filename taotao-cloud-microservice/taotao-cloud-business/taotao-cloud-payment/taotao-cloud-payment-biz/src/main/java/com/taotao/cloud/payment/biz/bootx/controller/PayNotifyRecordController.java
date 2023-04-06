@@ -41,8 +41,7 @@ public class PayNotifyRecordController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<PayNotifyRecordDto>> page(
-            PageQuery PageQuery, PayNotifyRecordDto param) {
+    public ResResult<PageResult<PayNotifyRecordDto>> page(PageQuery PageQuery, PayNotifyRecordDto param) {
         return Res.ok(notifyRecordService.page(PageQuery, param));
     }
 

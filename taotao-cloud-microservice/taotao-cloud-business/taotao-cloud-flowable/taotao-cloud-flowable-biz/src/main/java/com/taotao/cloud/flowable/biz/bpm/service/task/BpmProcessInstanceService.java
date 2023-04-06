@@ -58,8 +58,7 @@ public interface BpmProcessInstanceService {
      * @return 流程实例列表 Map
      */
     default Map<String, ProcessInstance> getProcessInstanceMap(Set<String> ids) {
-        return CollectionUtils.convertMap(
-                getProcessInstances(ids), ProcessInstance::getProcessInstanceId);
+        return CollectionUtils.convertMap(getProcessInstances(ids), ProcessInstance::getProcessInstanceId);
     }
 
     /**
@@ -128,8 +127,7 @@ public interface BpmProcessInstanceService {
      * @return 历史的流程实例列表 Map
      */
     default Map<String, HistoricProcessInstance> getHistoricProcessInstanceMap(Set<String> ids) {
-        return CollectionUtils.convertMap(
-                getHistoricProcessInstances(ids), HistoricProcessInstance::getId);
+        return CollectionUtils.convertMap(getHistoricProcessInstances(ids), HistoricProcessInstance::getId);
     }
 
     /**

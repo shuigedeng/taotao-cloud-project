@@ -55,11 +55,9 @@ public class WeChatMediaService {
     @SneakyThrows
     public PageResult<WeChatMediaDto> pageFile(PageQuery PageQuery, String type) {
         WxMpMaterialService materialService = wxMpService.getMaterialService();
-        val result =
-                materialService.materialFileBatchGet(type, PageQuery.start(), PageQuery.getSize());
+        val result = materialService.materialFileBatchGet(type, PageQuery.start(), PageQuery.getSize());
         //        val result = new WxMpMaterialFileBatchGetResult();
-        val items =
-                result.getItems().stream().map(WeChatMediaDto::init).collect(Collectors.toList());
+        val items = result.getItems().stream().map(WeChatMediaDto::init).collect(Collectors.toList());
         PageResult<WeChatMediaDto> pageResult = new PageResult<>();
         pageResult
                 .setCurrent(PageQuery.getCurrent())
@@ -103,8 +101,7 @@ public class WeChatMediaService {
         String originalFilename = multipartFile.getOriginalFilename();
         String fileName = FileNameUtil.mainName(originalFilename);
         String fileType = FileTypeUtil.getType(new ByteArrayInputStream(bytes), originalFilename);
-        File tempFile =
-                FileUtil.createTempFile(new ByteArrayInputStream(bytes), fileName, fileType);
+        File tempFile = FileUtil.createTempFile(new ByteArrayInputStream(bytes), fileName, fileType);
         WxMpMaterial material = new WxMpMaterial();
         material.setFile(tempFile);
         if (Objects.equals(mediaType, WxConsts.MediaFileType.VIDEO)) {

@@ -38,10 +38,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PipelineConfig {
 
-    @Autowired private PreParamCheckAction preParamCheckAction;
-    @Autowired private AssembleAction assembleAction;
-    @Autowired private AfterParamCheckAction afterParamCheckAction;
-    @Autowired private SendMqAction sendMqAction;
+    @Autowired
+    private PreParamCheckAction preParamCheckAction;
+
+    @Autowired
+    private AssembleAction assembleAction;
+
+    @Autowired
+    private AfterParamCheckAction afterParamCheckAction;
+
+    @Autowired
+    private SendMqAction sendMqAction;
 
     /**
      * 普通发送执行流程 1. 前置参数校验 2. 组装参数 3. 后置参数校验 4. 发送消息至MQ
@@ -52,8 +59,7 @@ public class PipelineConfig {
     public ProcessTemplate commonSendTemplate() {
         ProcessTemplate processTemplate = new ProcessTemplate();
         processTemplate.setProcessList(
-                Arrays.asList(
-                        preParamCheckAction, assembleAction, afterParamCheckAction, sendMqAction));
+                Arrays.asList(preParamCheckAction, assembleAction, afterParamCheckAction, sendMqAction));
         return processTemplate;
     }
 

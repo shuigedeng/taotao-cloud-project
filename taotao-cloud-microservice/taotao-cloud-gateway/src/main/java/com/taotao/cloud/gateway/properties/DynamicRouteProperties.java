@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -36,51 +37,51 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = DynamicRouteProperties.PREFIX)
 public class DynamicRouteProperties {
 
-	public static final String PREFIX = "taotao.cloud.gateway.dynamic.route";
+    public static final String PREFIX = "taotao.cloud.gateway.dynamic.route";
 
-	/**
-	 * 是否开启
-	 */
-	private Boolean enabled = false;
+    /**
+     * 是否开启
+     */
+    private Boolean enabled = false;
 
-	/**
-	 * 类型
-	 */
-	private String type = "nacos";
+    /**
+     * 类型
+     */
+    private String type = "nacos";
 
-	private String dataId = "";
+    private String dataId = "";
 
-	private String groupId = "";
+    private String groupId = "";
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getDataId() {
-		return dataId;
-	}
+    public String getDataId() {
+        return dataId;
+    }
 
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
-	}
+    public void setDataId(String dataId) {
+        this.dataId = dataId;
+    }
 
-	public String getGroupId() {
-		return groupId;
-	}
+    public String getGroupId() {
+        return groupId;
+    }
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
-	}
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.graphql.project;
 
 import java.util.List;
-
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -25,20 +25,19 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ProjectController {
 
-	private final SpringProjectsClient client;
+    private final SpringProjectsClient client;
 
-	public ProjectController(SpringProjectsClient client) {
-		this.client = client;
-	}
+    public ProjectController(SpringProjectsClient client) {
+        this.client = client;
+    }
 
-	@QueryMapping
-	public Project project(@Argument String slug) {
-		return client.fetchProject(slug);
-	}
+    @QueryMapping
+    public Project project(@Argument String slug) {
+        return client.fetchProject(slug);
+    }
 
-	@SchemaMapping
-	public List<Release> releases(Project project) {
-		return client.fetchProjectReleases(project.getSlug());
-	}
-
+    @SchemaMapping
+    public List<Release> releases(Project project) {
+        return client.fetchProjectReleases(project.getSlug());
+    }
 }

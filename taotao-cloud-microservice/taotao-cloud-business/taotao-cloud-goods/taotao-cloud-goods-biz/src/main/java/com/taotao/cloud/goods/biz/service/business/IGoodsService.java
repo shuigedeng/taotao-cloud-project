@@ -137,8 +137,7 @@ public interface IGoodsService extends BaseSuperService<Goods, Long> {
      * @return {@link Boolean }
      * @since 2022-04-27 17:00:16
      */
-    Boolean updateGoodsMarketAble(
-            List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason);
+    Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason);
 
     /**
      * 更新商品上架状态状态
@@ -149,8 +148,7 @@ public interface IGoodsService extends BaseSuperService<Goods, Long> {
      * @return {@link Boolean }
      * @since 2022-04-27 17:00:16
      */
-    Boolean managerUpdateGoodsMarketAble(
-            List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason);
+    Boolean managerUpdateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason);
 
     /**
      * 删除商品

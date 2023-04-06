@@ -46,7 +46,8 @@ public record AllowOperation(
         @Schema(description = "是否可以进行核销") Boolean take)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -5109440403955543227L;
+    @Serial
+    private static final long serialVersionUID = -5109440403955543227L;
 
     /**
      * 根据各种状态构建对象
@@ -59,8 +60,7 @@ public record AllowOperation(
         String status = order.getOrderStatus();
         String payStatus = order.getPayStatus();
         // 编辑订单价格 未付款并且是新订单
-        if (payStatus.equals(PayStatusEnum.UNPAID.name())
-                && status.equals(OrderStatusEnum.UNPAID.name())) {
+        if (payStatus.equals(PayStatusEnum.UNPAID.name()) && status.equals(OrderStatusEnum.UNPAID.name())) {
             this.editPrice = true;
         }
 
@@ -73,15 +73,12 @@ public record AllowOperation(
             this.cancel = true;
         }
         // 新订单，允许支付
-        this.pay =
-                status.equals(OrderStatusEnum.UNPAID.name())
-                        && payStatus.equals(PayStatusEnum.UNPAID.name());
+        this.pay = status.equals(OrderStatusEnum.UNPAID.name()) && payStatus.equals(PayStatusEnum.UNPAID.name());
 
         // 可编辑订单收件人信息=实物订单 && 订单未发货 && 订单未取消
-        this.editConsignee =
-                order.getOrderType().equals(OrderTypeEnum.NORMAL.name())
-                        && order.getDeliverStatus().equals(DeliverStatusEnum.UNDELIVERED.name())
-                        && !status.equals(OrderStatusEnum.CANCELLED.name());
+        this.editConsignee = order.getOrderType().equals(OrderTypeEnum.NORMAL.name())
+                && order.getDeliverStatus().equals(DeliverStatusEnum.UNDELIVERED.name())
+                && !status.equals(OrderStatusEnum.CANCELLED.name());
 
         // 是否允许被发货
         this.ship = editConsignee && status.equals(OrderStatusEnum.UNDELIVERED.name());
@@ -90,13 +87,11 @@ public record AllowOperation(
         this.rog = status.equals(OrderStatusEnum.DELIVERED.name());
 
         // 是否允许查看物流信息
-        this.showLogistics =
-                order.getDeliverStatus().equals(DeliverStatusEnum.DELIVERED.name())
-                        && status.equals(OrderStatusEnum.DELIVERED.name());
+        this.showLogistics = order.getDeliverStatus().equals(DeliverStatusEnum.DELIVERED.name())
+                && status.equals(OrderStatusEnum.DELIVERED.name());
 
-        this.take =
-                order.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())
-                        && order.getOrderStatus().equals(OrderStatusEnum.TAKE.name());
+        this.take = order.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())
+                && order.getOrderStatus().equals(OrderStatusEnum.TAKE.name());
     }
 
     /**
@@ -109,8 +104,7 @@ public record AllowOperation(
         String status = order.getOrderStatus();
         String payStatus = order.getPayStatus();
         // 编辑订单价格 未付款并且是新订单
-        if (payStatus.equals(PayStatusEnum.UNPAID.name())
-                && status.equals(OrderStatusEnum.UNPAID.name())) {
+        if (payStatus.equals(PayStatusEnum.UNPAID.name()) && status.equals(OrderStatusEnum.UNPAID.name())) {
             this.editPrice = true;
         }
 
@@ -135,12 +129,10 @@ public record AllowOperation(
         this.rog = status.equals(OrderStatusEnum.DELIVERED.name());
 
         // 是否允许查看物流信息
-        this.showLogistics =
-                order.getDeliverStatus().equals(DeliverStatusEnum.DELIVERED.name())
-                        && status.equals(OrderStatusEnum.DELIVERED.name());
+        this.showLogistics = order.getDeliverStatus().equals(DeliverStatusEnum.DELIVERED.name())
+                && status.equals(OrderStatusEnum.DELIVERED.name());
 
-        this.take =
-                order.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())
-                        && order.getOrderStatus().equals(OrderStatusEnum.TAKE.name());
+        this.take = order.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())
+                && order.getOrderStatus().equals(OrderStatusEnum.TAKE.name());
     }
 }

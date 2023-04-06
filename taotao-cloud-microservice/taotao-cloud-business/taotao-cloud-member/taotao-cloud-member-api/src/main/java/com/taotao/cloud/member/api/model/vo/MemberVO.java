@@ -36,7 +36,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "MemberVO")
 public class MemberVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 1810890757303309436L;
+    @Serial
+    private static final long serialVersionUID = 1810890757303309436L;
 
     @Schema(description = "唯一标识", hidden = true)
     private Long id;

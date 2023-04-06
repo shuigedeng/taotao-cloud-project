@@ -67,9 +67,7 @@ public class FullDiscountRender implements ICartRenderStep {
 
         // 店铺id集合
         List<String> storeIds =
-                tradeDTO.getCartList().stream()
-                        .map(CartVO::getStoreId)
-                        .collect(Collectors.toList());
+                tradeDTO.getCartList().stream().map(CartVO::getStoreId).collect(Collectors.toList());
         // 获取当前店铺进行到满减活动
         List<FullDiscountVO> fullDiscounts = fullDiscountService.currentPromotion(storeIds);
         if (fullDiscounts == null || fullDiscounts.isEmpty()) {
@@ -86,8 +84,7 @@ public class FullDiscountRender implements ICartRenderStep {
 
                     // 如果有赠品，则将赠品信息写入
                     if (Boolean.TRUE.equals(fullDiscount.getIsGift())) {
-                        GoodsSku goodsSku =
-                                goodsSkuService.getGoodsSkuByIdFromCache(fullDiscount.getGiftId());
+                        GoodsSku goodsSku = goodsSkuService.getGoodsSkuByIdFromCache(fullDiscount.getGiftId());
                         fullDiscount.setGiftSku(goodsSku);
                     }
 
@@ -114,9 +111,7 @@ public class FullDiscountRender implements ICartRenderStep {
                             // 打折
                             else if (Boolean.TRUE.equals(fullDiscount.getIsFullRate())) {
                                 this.renderFullRate(
-                                        cart,
-                                        skuPriceDetail,
-                                        CurrencyUtils.div(fullDiscount.getFullRate(), 10));
+                                        cart, skuPriceDetail, CurrencyUtils.div(fullDiscount.getFullRate(), 10));
                             }
                             // 渲染满优惠
                             renderFullMinus(cart);
@@ -134,31 +129,23 @@ public class FullDiscountRender implements ICartRenderStep {
      * @param skuPriceDetail skuPriceDetail
      * @param rate rate
      */
-    private void renderFullRate(
-            CartVO cart, Map<String, BigDecimal> skuPriceDetail, BigDecimal rate) {
+    private void renderFullRate(CartVO cart, Map<String, BigDecimal> skuPriceDetail, BigDecimal rate) {
 
-        List<CartSkuVO> cartSkuVOS =
-                cart.getCheckedSkuList().stream()
-                        .filter(
-                                cartSkuVO -> {
-                                    return skuPriceDetail.containsKey(
-                                            cartSkuVO.getGoodsSku().getId());
-                                })
-                        .collect(Collectors.toList());
+        List<CartSkuVO> cartSkuVOS = cart.getCheckedSkuList().stream()
+                .filter(cartSkuVO -> {
+                    return skuPriceDetail.containsKey(cartSkuVO.getGoodsSku().getId());
+                })
+                .collect(Collectors.toList());
 
         // 循环计算扣减金额
-        cartSkuVOS.forEach(
-                cartSkuVO -> {
-                    PriceDetailDTO priceDetailDTO = cartSkuVO.getPriceDetailDTO();
+        cartSkuVOS.forEach(cartSkuVO -> {
+            PriceDetailDTO priceDetailDTO = cartSkuVO.getPriceDetailDTO();
 
-                    // 优惠金额=旧的优惠金额+商品金额*商品折扣比例
-                    priceDetailDTO.setDiscountPrice(
-                            CurrencyUtils.add(
-                                    priceDetailDTO.getDiscountPrice(),
-                                    CurrencyUtils.mul(
-                                            priceDetailDTO.getGoodsPrice(),
-                                            CurrencyUtils.sub(1, rate))));
-                });
+            // 优惠金额=旧的优惠金额+商品金额*商品折扣比例
+            priceDetailDTO.setDiscountPrice(CurrencyUtils.add(
+                    priceDetailDTO.getDiscountPrice(),
+                    CurrencyUtils.mul(priceDetailDTO.getGoodsPrice(), CurrencyUtils.sub(1, rate))));
+        });
     }
 
     /**
@@ -168,8 +155,7 @@ public class FullDiscountRender implements ICartRenderStep {
      * @param cartSkuVOS 购物车商品sku信息
      * @return 参与满优惠的商品id
      */
-    public Map<String, BigDecimal> initFullDiscountGoods(
-            FullDiscountVO fullDiscount, List<CartSkuVO> cartSkuVOS) {
+    public Map<String, BigDecimal> initFullDiscountGoods(FullDiscountVO fullDiscount, List<CartSkuVO> cartSkuVOS) {
         Map<String, BigDecimal> skuPriceDetail = new HashMap<>(16);
 
         // 全品类参与
@@ -180,10 +166,9 @@ public class FullDiscountRender implements ICartRenderStep {
                         cartSkuVO.getPriceDetailDTO().getGoodsPrice());
             }
         } else {
-            List<String> collect =
-                    fullDiscount.getPromotionGoodsList().stream()
-                            .map(PromotionGoods::getSkuId)
-                            .collect(Collectors.toList());
+            List<String> collect = fullDiscount.getPromotionGoodsList().stream()
+                    .map(PromotionGoods::getSkuId)
+                    .collect(Collectors.toList());
             // sku 集合判定
             for (CartSkuVO cartSkuVO : cartSkuVOS) {
                 // 如果参加满减，并且购物车选中状态 ，则记录商品sku
@@ -232,20 +217,18 @@ public class FullDiscountRender implements ICartRenderStep {
      */
     private boolean isFull(BigDecimal price, CartVO cart) {
         if (cart.getFullDiscount().getFullMoney() <= price) {
-            cart.setPromotionNotice(
-                    "正在参与满优惠活动["
-                            + cart.getFullDiscount().getPromotionName()
-                            + "]"
-                            + cart.getFullDiscount().notice());
+            cart.setPromotionNotice("正在参与满优惠活动["
+                    + cart.getFullDiscount().getPromotionName()
+                    + "]"
+                    + cart.getFullDiscount().notice());
             return true;
         } else {
-            cart.setPromotionNotice(
-                    "还差"
-                            + CurrencyUtils.sub(cart.getFullDiscount().getFullMoney(), price)
-                            + " 即可参与活动（"
-                            + cart.getFullDiscount().getPromotionName()
-                            + "）"
-                            + cart.getFullDiscount().notice());
+            cart.setPromotionNotice("还差"
+                    + CurrencyUtils.sub(cart.getFullDiscount().getFullMoney(), price)
+                    + " 即可参与活动（"
+                    + cart.getFullDiscount().getPromotionName()
+                    + "）"
+                    + cart.getFullDiscount().notice());
             return false;
         }
     }

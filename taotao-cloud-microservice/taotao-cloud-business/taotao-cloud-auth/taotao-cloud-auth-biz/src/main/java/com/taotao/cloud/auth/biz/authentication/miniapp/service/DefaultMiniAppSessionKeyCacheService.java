@@ -24,7 +24,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultMiniAppSessionKeyCacheService implements MiniAppSessionKeyCacheService {
 
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     @Override
     public String put(String cacheKey, String sessionKey) {

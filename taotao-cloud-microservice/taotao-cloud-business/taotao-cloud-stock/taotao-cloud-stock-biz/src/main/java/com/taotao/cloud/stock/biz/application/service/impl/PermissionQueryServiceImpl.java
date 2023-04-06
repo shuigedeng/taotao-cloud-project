@@ -31,9 +31,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PermissionQueryServiceImpl implements PermissionQueryService {
 
-    @Autowired private PermissionRepository permissionRepository;
+    @Autowired
+    private PermissionRepository permissionRepository;
 
-    @Autowired private SysPermissionMapper sysPermissionMapper;
+    @Autowired
+    private SysPermissionMapper sysPermissionMapper;
 
     @Override
     public List<PermissionDTO> listAllPermission() {
@@ -75,14 +77,10 @@ public class PermissionQueryServiceImpl implements PermissionQueryService {
     @Override
     public Set<String> getPermissionCodes(String userId) {
         List<SysPermissionDO> sysPermissionDOList = getSysPermissionDOList(userId);
-        Set<String> permissionCodes =
-                sysPermissionDOList.stream()
-                        .filter(p -> p.getPermissionCodes() != null)
-                        .flatMap(
-                                p ->
-                                        Arrays.asList(p.getPermissionCodes().trim().split(","))
-                                                .stream())
-                        .collect(Collectors.toSet());
+        Set<String> permissionCodes = sysPermissionDOList.stream()
+                .filter(p -> p.getPermissionCodes() != null)
+                .flatMap(p -> Arrays.asList(p.getPermissionCodes().trim().split(",")).stream())
+                .collect(Collectors.toSet());
         return permissionCodes;
     }
 
@@ -103,10 +101,8 @@ public class PermissionQueryServiceImpl implements PermissionQueryService {
     private List<SysPermissionDO> getSysPermissionDOList(String userId) {
         List<SysPermissionDO> sysPermissionDOList;
         if (new UserId(userId).isSysAdmin()) {
-            sysPermissionDOList =
-                    sysPermissionMapper.selectList(
-                            new QueryWrapper<SysPermissionDO>()
-                                    .eq("status", StatusEnum.ENABLE.getValue()));
+            sysPermissionDOList = sysPermissionMapper.selectList(
+                    new QueryWrapper<SysPermissionDO>().eq("status", StatusEnum.ENABLE.getValue()));
         } else {
             sysPermissionDOList = sysPermissionMapper.queryPermissionByUserId(userId);
         }
@@ -132,8 +128,7 @@ public class PermissionQueryServiceImpl implements PermissionQueryService {
     private List<PermissionDTO> queryListParentId(String parentId, Set<String> menuIdList) {
         Map<String, Object> params = new HashMap<>();
         params.put("parentId", parentId);
-        List<PermissionDTO> menuList =
-                PermissionDTOAssembler.getPermissionList(permissionRepository.queryList(params));
+        List<PermissionDTO> menuList = PermissionDTOAssembler.getPermissionList(permissionRepository.queryList(params));
         if (menuIdList == null) {
             return menuList;
         }
@@ -147,14 +142,12 @@ public class PermissionQueryServiceImpl implements PermissionQueryService {
     }
 
     /** 递归 */
-    private List<PermissionDTO> getMenuTreeList(
-            List<PermissionDTO> menuList, Set<String> menuIdList) {
+    private List<PermissionDTO> getMenuTreeList(List<PermissionDTO> menuList, Set<String> menuIdList) {
         List<PermissionDTO> subMenuList = new ArrayList<>();
         for (PermissionDTO entity : menuList) {
             // 目录
             if (PermissionTypeEnum.CATALOG.getValue().equals(entity.getPermissionType())) {
-                entity.setSubList(
-                        getMenuTreeList(queryListParentId(entity.getId(), menuIdList), menuIdList));
+                entity.setSubList(getMenuTreeList(queryListParentId(entity.getId(), menuIdList), menuIdList));
             }
             subMenuList.add(entity);
         }

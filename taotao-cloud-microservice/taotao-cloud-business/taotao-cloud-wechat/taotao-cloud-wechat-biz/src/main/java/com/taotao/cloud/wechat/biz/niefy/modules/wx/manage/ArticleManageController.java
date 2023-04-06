@@ -39,7 +39,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/article")
 @Api(tags = {"文章管理-管理后台"})
 public class ArticleManageController {
-    @Autowired private ArticleService articleService;
+    @Autowired
+    private ArticleService articleService;
 
     /** 列表 */
     @GetMapping("/list")

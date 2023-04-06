@@ -35,9 +35,14 @@ import org.springframework.stereotype.Service;
 public class LeaveApplyServiceImpl extends ServiceImpl<LeaveApplyMapper, LeaveApplyEntity>
         implements LeaveApplyService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public LeaveApplyEntity getInfo(String id) {

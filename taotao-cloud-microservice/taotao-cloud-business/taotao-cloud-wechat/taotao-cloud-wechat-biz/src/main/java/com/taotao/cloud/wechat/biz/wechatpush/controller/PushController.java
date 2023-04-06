@@ -42,7 +42,8 @@ public class PushController {
     @Value("${target.test.openId}")
     private String testTarget;
 
-    @Autowired Pusher pusherService;
+    @Autowired
+    Pusher pusherService;
 
     /** 微信测试账号推送 */
     @GetMapping("/push")

@@ -32,7 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login/qrcode")
 public class QrcodeLoginController {
 
-    @Autowired private QrCodeLoginService qrCodeLoginService;
+    @Autowired
+    private QrCodeLoginService qrCodeLoginService;
 
     @RequestMapping(value = "/code", method = RequestMethod.GET)
     public void createCodeImg(HttpServletRequest request, HttpServletResponse response) {

@@ -89,8 +89,7 @@ public interface IOrderService extends IService<Order> {
      * @return {@link List }<{@link Order }>
      * @since 2022-04-28 08:54:47
      */
-    List<Order> queryListByPromotion(
-            String orderPromotionType, String payStatus, String parentOrderSn, String orderSn);
+    List<Order> queryListByPromotion(String orderPromotionType, String payStatus, String parentOrderSn, String orderSn);
 
     /**
      * 根据促销查询订单
@@ -102,8 +101,7 @@ public interface IOrderService extends IService<Order> {
      * @return long
      * @since 2022-04-28 08:54:47
      */
-    long queryCountByPromotion(
-            String orderPromotionType, String payStatus, String parentOrderSn, String orderSn);
+    long queryCountByPromotion(String orderPromotionType, String payStatus, String parentOrderSn, String orderSn);
 
     /**
      * 父级拼团订单分组
@@ -294,6 +292,5 @@ public interface IOrderService extends IService<Order> {
      * @param queryWrapper 查询条件
      * @return 订单支付记录分页
      */
-    IPage<PaymentLogVO> queryPaymentLogs(
-            IPage<PaymentLogVO> page, Wrapper<PaymentLogVO> queryWrapper);
+    IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page, Wrapper<PaymentLogVO> queryWrapper);
 }

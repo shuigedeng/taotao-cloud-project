@@ -33,7 +33,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "会员发票")
 public class MemberReceiptAddVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -8267092982915677995L;
+    @Serial
+    private static final long serialVersionUID = -8267092982915677995L;
 
     @Schema(description = "唯一标识", hidden = true)
     private String id;

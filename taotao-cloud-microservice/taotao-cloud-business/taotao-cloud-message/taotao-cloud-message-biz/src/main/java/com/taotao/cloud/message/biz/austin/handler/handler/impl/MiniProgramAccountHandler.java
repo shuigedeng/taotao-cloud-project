@@ -35,7 +35,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MiniProgramAccountHandler extends BaseHandler implements Handler {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     public MiniProgramAccountHandler() {
         channelCode = ChannelType.MINI_PROGRAM.getCode();
@@ -44,10 +45,8 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
     @Override
     public boolean handler(TaskInfo taskInfo) {
         MiniProgramContentModel contentModel = (MiniProgramContentModel) taskInfo.getContentModel();
-        WxMaService wxMaService =
-                accountUtils.getAccountById(taskInfo.getSendAccount(), WxMaService.class);
-        List<WxMaSubscribeMessage> wxMaSubscribeMessages =
-                assembleReq(taskInfo.getReceiver(), contentModel);
+        WxMaService wxMaService = accountUtils.getAccountById(taskInfo.getSendAccount(), WxMaService.class);
+        List<WxMaSubscribeMessage> wxMaSubscribeMessages = assembleReq(taskInfo.getReceiver(), contentModel);
         for (WxMaSubscribeMessage message : wxMaSubscribeMessages) {
             try {
                 wxMaService.getSubscribeService().sendSubscribeMsg(message);
@@ -62,17 +61,15 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
     }
 
     /** 组装发送模板信息参数 */
-    private List<WxMaSubscribeMessage> assembleReq(
-            Set<String> receiver, MiniProgramContentModel contentModel) {
+    private List<WxMaSubscribeMessage> assembleReq(Set<String> receiver, MiniProgramContentModel contentModel) {
         List<WxMaSubscribeMessage> messageList = new ArrayList<>(receiver.size());
         for (String openId : receiver) {
-            WxMaSubscribeMessage subscribeMessage =
-                    WxMaSubscribeMessage.builder()
-                            .toUser(openId)
-                            .data(getWxMaTemplateData(contentModel.getMiniProgramParam()))
-                            .templateId(contentModel.getTemplateId())
-                            .page(contentModel.getPage())
-                            .build();
+            WxMaSubscribeMessage subscribeMessage = WxMaSubscribeMessage.builder()
+                    .toUser(openId)
+                    .data(getWxMaTemplateData(contentModel.getMiniProgramParam()))
+                    .templateId(contentModel.getTemplateId())
+                    .page(contentModel.getPage())
+                    .build();
             messageList.add(subscribeMessage);
         }
         return messageList;

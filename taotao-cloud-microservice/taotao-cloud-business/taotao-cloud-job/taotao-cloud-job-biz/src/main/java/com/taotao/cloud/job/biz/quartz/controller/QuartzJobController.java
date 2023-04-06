@@ -45,7 +45,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "quartz任务管理API", description = "quartz任务管理API")
 public class QuartzJobController {
 
-    @Resource private QuartzJobService quartzJobService;
+    @Resource
+    private QuartzJobService quartzJobService;
 
     @PostMapping("/job")
     @Operation(summary = "添加任务", description = "添加任务")

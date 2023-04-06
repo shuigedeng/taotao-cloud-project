@@ -58,13 +58,10 @@ public class MemberEvaluationController {
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping
-    public Result<PageResult<MemberEvaluationListVO>> getByPage(
-            EvaluationPageQuery evaluationPageQuery) {
+    public Result<PageResult<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
         evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
-        IPage<MemberEvaluation> memberEvaluationPage =
-                memberEvaluationService.queryPage(evaluationPageQuery);
-        return Result.success(
-                PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
+        IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.queryPage(evaluationPageQuery);
+        return Result.success(PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
     }
 
     @Operation(summary = "通过id获取", description = "通过id获取")
@@ -72,8 +69,7 @@ public class MemberEvaluationController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping(value = "/{id}")
     public Result<MemberEvaluationVO> get(@PathVariable Long id) {
-        MemberEvaluation memberEvaluation =
-                OperationalJudgment.judgment(memberEvaluationService.queryById(id));
+        MemberEvaluation memberEvaluation = OperationalJudgment.judgment(memberEvaluationService.queryById(id));
         return Result.success(MemberEvaluationConvert.INSTANCE.convert(memberEvaluation));
     }
 
@@ -81,8 +77,7 @@ public class MemberEvaluationController {
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @PutMapping(value = "/reply/{id}")
-    public Result<Boolean> reply(
-            @PathVariable Long id, @RequestParam String reply, @RequestParam String replyImage) {
+    public Result<Boolean> reply(@PathVariable Long id, @RequestParam String reply, @RequestParam String replyImage) {
         OperationalJudgment.judgment(memberEvaluationService.queryById(id));
         return Result.success(memberEvaluationService.reply(id, reply, replyImage));
     }

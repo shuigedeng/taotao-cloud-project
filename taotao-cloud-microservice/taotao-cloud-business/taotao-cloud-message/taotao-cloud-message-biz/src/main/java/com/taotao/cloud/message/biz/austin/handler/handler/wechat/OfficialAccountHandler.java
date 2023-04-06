@@ -38,7 +38,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class OfficialAccountHandler extends BaseHandler implements Handler {
 
-    @Autowired private OfficialAccountService officialAccountService;
+    @Autowired
+    private OfficialAccountService officialAccountService;
 
     public OfficialAccountHandler() {
         channelCode = ChannelType.OFFICIAL_ACCOUNT.getCode();
@@ -47,15 +48,13 @@ public class OfficialAccountHandler extends BaseHandler implements Handler {
     @Override
     public boolean handler(TaskInfo taskInfo) {
         // 构建微信模板消息
-        OfficialAccountsContentModel contentModel =
-                (OfficialAccountsContentModel) taskInfo.getContentModel();
-        WeChatOfficialParam officialParam =
-                WeChatOfficialParam.builder()
-                        .openIds(taskInfo.getReceiver())
-                        .messageTemplateId(taskInfo.getMessageTemplateId())
-                        .sendAccount(taskInfo.getSendAccount())
-                        .data(contentModel.getMap())
-                        .build();
+        OfficialAccountsContentModel contentModel = (OfficialAccountsContentModel) taskInfo.getContentModel();
+        WeChatOfficialParam officialParam = WeChatOfficialParam.builder()
+                .openIds(taskInfo.getReceiver())
+                .messageTemplateId(taskInfo.getMessageTemplateId())
+                .sendAccount(taskInfo.getSendAccount())
+                .data(contentModel.getMap())
+                .build();
 
         // 微信模板消息需要记录响应结果
         try {

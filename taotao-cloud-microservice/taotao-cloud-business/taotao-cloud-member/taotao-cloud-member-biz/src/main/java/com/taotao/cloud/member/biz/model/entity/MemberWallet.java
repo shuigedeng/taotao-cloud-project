@@ -53,9 +53,7 @@ public class MemberWallet extends BaseSuperEntity<MemberWallet, Long> {
     private Long memberId;
 
     /** 会员预存款 */
-    @Column(
-            name = "member_wallet",
-            columnDefinition = "decimal(10,2) not null default 0 comment '会员预存款'")
+    @Column(name = "member_wallet", columnDefinition = "decimal(10,2) not null default 0 comment '会员预存款'")
     private BigDecimal memberWallet;
 
     /** 会员预存款冻结金额,提现使用 */

@@ -44,8 +44,7 @@ public class JSONArrayTypeHandler extends BaseTypeHandler<JSONArray> {
     }
 
     @Override
-    public JSONArray getNullableResult(CallableStatement callableStatement, int columnIndex)
-            throws SQLException {
+    public JSONArray getNullableResult(CallableStatement callableStatement, int columnIndex) throws SQLException {
         return JSONArray.parseArray(callableStatement.getString(columnIndex));
     }
 }

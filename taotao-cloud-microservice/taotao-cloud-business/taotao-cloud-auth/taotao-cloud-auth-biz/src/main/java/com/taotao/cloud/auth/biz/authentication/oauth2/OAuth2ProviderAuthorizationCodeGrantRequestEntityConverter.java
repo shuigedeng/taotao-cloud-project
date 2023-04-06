@@ -37,8 +37,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 public class OAuth2ProviderAuthorizationCodeGrantRequestEntityConverter
         implements Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> {
 
-    private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>>
-            defaultConverter = new OAuth2AuthorizationCodeGrantRequestEntityConverter();
+    private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> defaultConverter =
+            new OAuth2AuthorizationCodeGrantRequestEntityConverter();
 
     /**
      * Returns the {@link RequestEntity} used for the Access Token Request.
@@ -47,17 +47,13 @@ public class OAuth2ProviderAuthorizationCodeGrantRequestEntityConverter
      * @return the {@link RequestEntity} used for the Access Token Request
      */
     @Override
-    public RequestEntity<?> convert(
-            OAuth2AuthorizationCodeGrantRequest authorizationCodeGrantRequest) {
+    public RequestEntity<?> convert(OAuth2AuthorizationCodeGrantRequest authorizationCodeGrantRequest) {
 
-        ClientRegistration clientRegistration =
-                authorizationCodeGrantRequest.getClientRegistration();
+        ClientRegistration clientRegistration = authorizationCodeGrantRequest.getClientRegistration();
         String registrationId = clientRegistration.getRegistrationId();
 
         return Arrays.stream(ClientProviders.values())
-                .filter(
-                        clientProvider ->
-                                Objects.equals(clientProvider.registrationId(), registrationId))
+                .filter(clientProvider -> Objects.equals(clientProvider.registrationId(), registrationId))
                 .findAny()
                 .map(ClientProviders::converter)
                 .orElse(defaultConverter)

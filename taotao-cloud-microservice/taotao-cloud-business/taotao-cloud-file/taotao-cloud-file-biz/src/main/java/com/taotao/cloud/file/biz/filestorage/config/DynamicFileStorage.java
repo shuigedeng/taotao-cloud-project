@@ -25,7 +25,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class DynamicFileStorage {
 
-    @Autowired private List<LocalFileStorage> list;
+    @Autowired
+    private List<LocalFileStorage> list;
 
     public void add() {
         // TODO 读取数据库配置

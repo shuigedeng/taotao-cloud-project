@@ -46,7 +46,8 @@ public class CaptchaService {
     public static final String PARAM_T = "t";
     public static final String PARAM_CODE = "code";
 
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     public ArithmeticCaptcha getCaptcha(HttpServletRequest request) {
         ArithmeticCaptcha captcha = CaptchaUtils.getArithmeticCaptcha();

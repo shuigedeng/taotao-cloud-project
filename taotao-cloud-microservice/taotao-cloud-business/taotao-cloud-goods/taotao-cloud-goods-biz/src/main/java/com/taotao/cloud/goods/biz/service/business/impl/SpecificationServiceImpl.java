@@ -50,11 +50,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SpecificationServiceImpl
         extends BaseSuperServiceImpl<
-                ISpecificationMapper,
-                Specification,
-                SpecificationRepository,
-                ISpecificationRepository,
-                Long>
+                ISpecificationMapper, Specification, SpecificationRepository, ISpecificationRepository, Long>
         implements ISpecificationService {
 
     /** 分类-规格绑定服务 */
@@ -67,9 +63,8 @@ public class SpecificationServiceImpl
         boolean result = false;
         for (Long id : ids) {
             // 如果此规格绑定分类则不允许删除
-            List<CategorySpecification> list =
-                    categorySpecificationService.list(
-                            new QueryWrapper<CategorySpecification>().eq("specification_id", id));
+            List<CategorySpecification> list = categorySpecificationService.list(
+                    new QueryWrapper<CategorySpecification>().eq("specification_id", id));
 
             if (!list.isEmpty()) {
                 List<Long> categoryIds = new ArrayList<>();
@@ -105,8 +100,7 @@ public class SpecificationServiceImpl
         if (categorySpecs != null && categorySpecs.length > 0) {
             List<CategorySpecification> categorySpecifications = new ArrayList<>();
             for (String categorySpec : categorySpecs) {
-                categorySpecifications.add(
-                        new CategorySpecification(categoryId, Long.valueOf(categorySpec)));
+                categorySpecifications.add(new CategorySpecification(categoryId, Long.valueOf(categorySpec)));
             }
             categorySpecificationService.saveBatch(categorySpecifications);
         }

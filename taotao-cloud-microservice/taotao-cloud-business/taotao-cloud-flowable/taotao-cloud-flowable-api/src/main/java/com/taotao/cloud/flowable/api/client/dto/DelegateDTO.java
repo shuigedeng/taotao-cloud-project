@@ -24,5 +24,6 @@ import lombok.Data;
  */
 @Data
 public class DelegateDTO extends TransferDTO {
-    @Serial private static final long serialVersionUID = -4922465039180029063L;
+    @Serial
+    private static final long serialVersionUID = -4922465039180029063L;
 }

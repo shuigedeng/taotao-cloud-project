@@ -57,8 +57,7 @@ public class AliPayApiConfigKit {
     static DefaultAlipayClient rebuild() throws AlipayApiException {
         AlipayPaymentSetting setting;
         try {
-            SettingService settingService =
-                    (SettingService) SpringContextUtil.getBean("settingServiceImpl");
+            SettingService settingService = (SettingService) SpringContextUtil.getBean("settingServiceImpl");
             Setting systemSetting = settingService.get(SettingCategoryEnum.ALIPAY_PAYMENT.name());
             setting = JSONUtil.toBean(systemSetting.getSettingValue(), AlipayPaymentSetting.class);
         } catch (Exception e) {

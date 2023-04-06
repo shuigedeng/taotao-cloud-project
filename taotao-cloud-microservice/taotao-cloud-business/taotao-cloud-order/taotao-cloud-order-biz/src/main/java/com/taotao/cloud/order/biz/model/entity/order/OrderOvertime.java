@@ -64,9 +64,7 @@ public class OrderOvertime extends BaseSuperEntity<OrderOvertime, Long> {
     private LocalDateTime paySuccessTime;
 
     /** 超时类型 */
-    @Column(
-            name = "type",
-            columnDefinition = "int not null default 0 comment '超时类型 0-未支付超时 1-未处理售后超时'")
+    @Column(name = "type", columnDefinition = "int not null default 0 comment '超时类型 0-未支付超时 1-未处理售后超时'")
     private Integer type;
 
     /** 超时时间 */

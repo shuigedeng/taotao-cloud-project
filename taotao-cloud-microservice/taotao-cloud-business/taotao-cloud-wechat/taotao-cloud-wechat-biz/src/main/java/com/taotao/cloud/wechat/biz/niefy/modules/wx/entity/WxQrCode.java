@@ -36,7 +36,8 @@ public class WxQrCode implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** ID */
-    @TableId private Long id;
+    @TableId
+    private Long id;
 
     private String appid;
     /** 二维码类型 */

@@ -37,7 +37,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MessageReceiveHandler implements WxMpMessageHandler {
 
-    @Resource private MpMessageService mpMessageService;
+    @Resource
+    private MpMessageService mpMessageService;
 
     @Override
     public WxMpXmlOutMessage handle(

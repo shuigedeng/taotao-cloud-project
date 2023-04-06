@@ -24,7 +24,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class RegionTests {
 
-    @Autowired private IRegionService regionService;
+    @Autowired
+    private IRegionService regionService;
 
     @Test
     public void synchronizationData() {

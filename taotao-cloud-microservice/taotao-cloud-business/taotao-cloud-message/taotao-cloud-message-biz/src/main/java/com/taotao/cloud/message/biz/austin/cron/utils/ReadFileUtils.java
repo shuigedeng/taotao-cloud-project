@@ -57,9 +57,7 @@ public class ReadFileUtils {
     public static void getCsvRow(String path, CsvRowHandler csvRowHandler) {
         try {
             // 把首行当做是标题，获取reader
-            CsvReader reader =
-                    CsvUtil.getReader(
-                            new FileReader(path), new CsvReadConfig().setContainsHeader(true));
+            CsvReader reader = CsvUtil.getReader(new FileReader(path), new CsvReadConfig().setContainsHeader(true));
             reader.read(csvRowHandler);
         } catch (Exception e) {
             log.error("ReadFileUtils#getCsvRow fail!{}", Throwables.getStackTraceAsString(e));
@@ -75,9 +73,7 @@ public class ReadFileUtils {
     public static long countCsvRow(String path, CountFileRowHandler countFileRowHandler) {
         try {
             // 把首行当做是标题，获取reader
-            CsvReader reader =
-                    CsvUtil.getReader(
-                            new FileReader(path), new CsvReadConfig().setContainsHeader(true));
+            CsvReader reader = CsvUtil.getReader(new FileReader(path), new CsvReadConfig().setContainsHeader(true));
             reader.read(countFileRowHandler);
         } catch (Exception e) {
             log.error("ReadFileUtils#getCsvRow fail!{}", Throwables.getStackTraceAsString(e));
@@ -112,9 +108,7 @@ public class ReadFileUtils {
         List<CrowdInfoVo> result = new ArrayList<>();
         try {
             CsvData data = CsvUtil.getReader().read(FileUtil.file(path));
-            if (Objects.isNull(data)
-                    || Objects.isNull(data.getRow(0))
-                    || Objects.isNull(data.getRow(1))) {
+            if (Objects.isNull(data) || Objects.isNull(data.getRow(0)) || Objects.isNull(data.getRow(1))) {
                 log.error("read csv file empty!,path:{}", path);
             }
             // 第一行为默认为头信息,所以遍历从第二行开始,第一列默认为接收者Id(不处理)
@@ -126,11 +120,10 @@ public class ReadFileUtils {
                     param.put(headerInfo.get(j), row.get(j));
                 }
 
-                result.add(
-                        CrowdInfoVo.builder()
-                                .receiver(CollUtil.getFirst(row.iterator()))
-                                .params(param)
-                                .build());
+                result.add(CrowdInfoVo.builder()
+                        .receiver(CollUtil.getFirst(row.iterator()))
+                        .params(param)
+                        .build());
             }
 
         } catch (Exception e) {

@@ -37,7 +37,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BpmProcessInstanceEventListener extends AbstractFlowableEngineEventListener {
 
-    @Resource @Lazy private BpmProcessInstanceService processInstanceService;
+    @Resource
+    @Lazy
+    private BpmProcessInstanceService processInstanceService;
 
     public static final Set<FlowableEngineEventType> PROCESS_INSTANCE_EVENTS =
             ImmutableSet.<FlowableEngineEventType>builder()
@@ -62,7 +64,6 @@ public class BpmProcessInstanceEventListener extends AbstractFlowableEngineEvent
 
     @Override
     protected void processCompleted(FlowableEngineEntityEvent event) {
-        processInstanceService.updateProcessInstanceExtComplete(
-                (ProcessInstance) event.getEntity());
+        processInstanceService.updateProcessInstanceExtComplete((ProcessInstance) event.getEntity());
     }
 }

@@ -37,12 +37,9 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 public enum AuthenticationMethod implements BaseUiEnum<String> {
 
     /** enum */
-    CLIENT_SECRET_BASIC(
-            ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue(), "基于Client Secret的Basic验证模式"),
-    CLIENT_SECRET_POST(
-            ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue(), "基于Client Secret的Post验证模式"),
-    CLIENT_SECRET_JWT(
-            ClientAuthenticationMethod.CLIENT_SECRET_JWT.getValue(), "基于Client Secret的JWT验证模式"),
+    CLIENT_SECRET_BASIC(ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue(), "基于Client Secret的Basic验证模式"),
+    CLIENT_SECRET_POST(ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue(), "基于Client Secret的Post验证模式"),
+    CLIENT_SECRET_JWT(ClientAuthenticationMethod.CLIENT_SECRET_JWT.getValue(), "基于Client Secret的JWT验证模式"),
     PRIVATE_KEY_JWT(ClientAuthenticationMethod.PRIVATE_KEY_JWT.getValue(), "基于私钥的JWT验证模式"),
     NONE(ClientAuthenticationMethod.NONE.getValue(), "不设置任何模式");
 

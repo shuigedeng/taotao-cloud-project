@@ -46,11 +46,9 @@ import org.springframework.util.Assert;
  */
 public class OAuth2ClientCredentialsAuthenticationProvider extends AbstractAuthenticationProvider {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(OAuth2ClientCredentialsAuthenticationProvider.class);
+    private static final Logger log = LoggerFactory.getLogger(OAuth2ClientCredentialsAuthenticationProvider.class);
 
-    private static final String ERROR_URI =
-            "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
+    private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
     private final OAuth2AuthorizationService authorizationService;
     private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
     private final ClientDetailsService clientDetailsService;
@@ -75,8 +73,7 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends AbstractAuthe
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         OAuth2ClientCredentialsAuthenticationToken clientCredentialsAuthentication =
                 (OAuth2ClientCredentialsAuthenticationToken) authentication;
 
@@ -85,15 +82,12 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends AbstractAuthe
                         clientCredentialsAuthentication);
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
-        if (!registeredClient
-                .getAuthorizationGrantTypes()
-                .contains(AuthorizationGrantType.CLIENT_CREDENTIALS)) {
+        if (!registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.CLIENT_CREDENTIALS)) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
         }
 
         // Default to configured scopes
-        Set<String> authorizedScopes =
-                validateScopes(clientCredentialsAuthentication.getScopes(), registeredClient);
+        Set<String> authorizedScopes = validateScopes(clientCredentialsAuthentication.getScopes(), registeredClient);
 
         Set<HerodotusGrantedAuthority> authorities =
                 clientDetailsService.findAuthoritiesById(registeredClient.getClientId());
@@ -102,39 +96,33 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends AbstractAuthe
             log.debug("[Herodotus] |- Assign authorities to OAuth2ClientAuthenticationToken.");
         }
 
-        OAuth2Authorization.Builder authorizationBuilder =
-                OAuth2Authorization.withRegisteredClient(registeredClient)
-                        .principalName(clientPrincipal.getName())
-                        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                        .authorizedScopes(authorizedScopes);
+        OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
+                .principalName(clientPrincipal.getName())
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .authorizedScopes(authorizedScopes);
 
         // @formatter:off
-        DefaultOAuth2TokenContext.Builder tokenContextBuilder =
-                DefaultOAuth2TokenContext.builder()
-                        .registeredClient(registeredClient)
-                        .principal(clientPrincipal)
-                        .authorizationServerContext(AuthorizationServerContextHolder.getContext())
-                        .authorizedScopes(authorizedScopes)
-                        .tokenType(OAuth2TokenType.ACCESS_TOKEN)
-                        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                        .authorizationGrant(clientCredentialsAuthentication);
+        DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
+                .registeredClient(registeredClient)
+                .principal(clientPrincipal)
+                .authorizationServerContext(AuthorizationServerContextHolder.getContext())
+                .authorizedScopes(authorizedScopes)
+                .tokenType(OAuth2TokenType.ACCESS_TOKEN)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .authorizationGrant(clientCredentialsAuthentication);
         // @formatter:on
 
         // ----- Access token -----
         OAuth2AccessToken accessToken =
-                createOAuth2AccessToken(
-                        tokenContextBuilder, authorizationBuilder, this.tokenGenerator, ERROR_URI);
+                createOAuth2AccessToken(tokenContextBuilder, authorizationBuilder, this.tokenGenerator, ERROR_URI);
 
         OAuth2Authorization authorization = authorizationBuilder.build();
 
         this.authorizationService.save(authorization);
 
-        log.debug(
-                "[Herodotus] |- Client Credentials returning"
-                        + " OAuth2AccessTokenAuthenticationToken.");
+        log.debug("[Herodotus] |- Client Credentials returning" + " OAuth2AccessTokenAuthenticationToken.");
 
-        return new OAuth2AccessTokenAuthenticationToken(
-                registeredClient, clientPrincipal, accessToken);
+        return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken);
     }
 
     @Override

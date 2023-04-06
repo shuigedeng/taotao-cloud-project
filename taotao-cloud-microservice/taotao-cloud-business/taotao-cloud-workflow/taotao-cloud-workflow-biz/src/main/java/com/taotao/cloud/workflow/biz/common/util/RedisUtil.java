@@ -51,8 +51,11 @@ public class RedisUtil {
 
     private static long expiresIn = TimeUnit.SECONDS.toSeconds(CAHCEHOUR * 8);
 
-    @Autowired private RedisTemplate<String, Object> redisTemplate;
-    @Autowired private CacheKeyUtil cacheKeyUtil;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    @Autowired
+    private CacheKeyUtil cacheKeyUtil;
     // =============================common============================
 
     /**
@@ -70,10 +73,9 @@ public class RedisUtil {
         }
         if (CollectionUtils.isNotEmpty(keys)) {
             // 排除ID生成器的缓存记录， 如果删除在集群情况下ID生成器的机器编号可能会重复导致生成的ID重复
-            keys =
-                    keys.stream()
-                            .filter(s -> !s.startsWith(CacheKeyUtil.IDGENERATOR))
-                            .collect(Collectors.toSet());
+            keys = keys.stream()
+                    .filter(s -> !s.startsWith(CacheKeyUtil.IDGENERATOR))
+                    .collect(Collectors.toSet());
         }
         return keys;
     }
@@ -85,25 +87,13 @@ public class RedisUtil {
      */
     public Set<String> getAllVisiualKeys() {
         Set<String> allKey = new HashSet<>(16);
-        allKey.addAll(
-                Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getAllUser() + "*")));
-        allKey.addAll(
-                Objects.requireNonNull(
-                        redisTemplate.keys("*" + cacheKeyUtil.getCompanySelect() + "*")));
-        allKey.addAll(
-                Objects.requireNonNull(
-                        redisTemplate.keys("*" + cacheKeyUtil.getDictionary() + "*")));
-        allKey.addAll(
-                Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getDynamic() + "*")));
-        allKey.addAll(
-                Objects.requireNonNull(
-                        redisTemplate.keys("*" + cacheKeyUtil.getOrganizeList() + "*")));
-        allKey.addAll(
-                Objects.requireNonNull(
-                        redisTemplate.keys("*" + cacheKeyUtil.getPositionList() + "*")));
-        allKey.addAll(
-                Objects.requireNonNull(
-                        redisTemplate.keys("*" + cacheKeyUtil.getVisiualData() + "*")));
+        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getAllUser() + "*")));
+        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getCompanySelect() + "*")));
+        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getDictionary() + "*")));
+        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getDynamic() + "*")));
+        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getOrganizeList() + "*")));
+        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getPositionList() + "*")));
+        allKey.addAll(Objects.requireNonNull(redisTemplate.keys("*" + cacheKeyUtil.getVisiualData() + "*")));
         return allKey;
     }
 

@@ -33,12 +33,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/player")
 public class PlayerController {
 
-    @Resource private PlayerClientService playerClientService;
+    @Resource
+    private PlayerClientService playerClientService;
 
     @PostMapping("/add")
     public ResultDTO<Boolean> add(
-            @RequestHeader("test-login-info") String loginUserId,
-            @RequestBody PlayerCreateDTO dto) {
+            @RequestHeader("test-login-info") String loginUserId, @RequestBody PlayerCreateDTO dto) {
         dto.setCreator(loginUserId);
         ResultCommonDTO<Boolean> resultDTO = playerClientService.addPlayer(dto);
         return resultDTO;
@@ -46,8 +46,7 @@ public class PlayerController {
 
     @PostMapping("/update")
     public ResultDTO<Boolean> update(
-            @RequestHeader("test-login-info") String loginUserId,
-            @RequestBody PlayerUpdateDTO dto) {
+            @RequestHeader("test-login-info") String loginUserId, @RequestBody PlayerUpdateDTO dto) {
         dto.setUpdator(loginUserId);
         ResultCommonDTO<Boolean> resultDTO = playerClientService.updatePlayer(dto);
         return resultDTO;
@@ -55,8 +54,7 @@ public class PlayerController {
 
     @GetMapping("/{playerId}/query")
     public ResultDTO<PlayerQueryResultDTO> queryById(
-            @RequestHeader("test-login-info") String loginUserId,
-            @PathVariable("playerId") String playerId) {
+            @RequestHeader("test-login-info") String loginUserId, @PathVariable("playerId") String playerId) {
         ResultCommonDTO<PlayerQueryResultDTO> resultDTO = playerClientService.queryById(playerId);
         return resultDTO;
     }

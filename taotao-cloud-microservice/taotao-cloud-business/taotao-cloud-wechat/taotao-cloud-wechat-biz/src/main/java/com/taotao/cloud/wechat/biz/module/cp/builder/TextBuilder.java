@@ -28,12 +28,11 @@ public class TextBuilder extends AbstractBuilder {
 
     @Override
     public WxCpXmlOutMessage build(String content, WxCpXmlMessage wxMessage, WxCpService service) {
-        WxCpXmlOutTextMessage m =
-                WxCpXmlOutMessage.TEXT()
-                        .content(content)
-                        .fromUser(wxMessage.getToUserName())
-                        .toUser(wxMessage.getFromUserName())
-                        .build();
+        WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT()
+                .content(content)
+                .fromUser(wxMessage.getToUserName())
+                .toUser(wxMessage.getFromUserName())
+                .build();
         return m;
     }
 }

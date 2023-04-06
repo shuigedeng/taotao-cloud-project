@@ -34,7 +34,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class KanjiaActivityGoodsParams implements Serializable {
 
-    @Serial private static final long serialVersionUID = 1344104067705714289L;
+    @Serial
+    private static final long serialVersionUID = 1344104067705714289L;
 
     @Schema(description = "活动商品")
     private String goodsName;

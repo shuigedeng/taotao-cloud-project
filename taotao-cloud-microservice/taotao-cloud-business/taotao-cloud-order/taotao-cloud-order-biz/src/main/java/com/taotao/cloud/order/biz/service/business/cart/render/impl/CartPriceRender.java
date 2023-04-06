@@ -71,23 +71,20 @@ public class CartPriceRender implements ICartRenderStep {
         // 购物车列表
         List<CartVO> cartVOS = tradeDTO.getCartList();
 
-        cartVOS.forEach(
-                cartVO -> {
-                    cartVO.getPriceDetailDTO()
-                            .accumulationPriceDTO(
-                                    cartVO.getCheckedSkuList().stream()
-                                            .filter(CartSkuVO::getChecked)
-                                            .map(CartSkuVO::getPriceDetailDTO)
-                                            .collect(Collectors.toList()));
-                    List<Integer> skuNum =
-                            cartVO.getSkuList().stream()
-                                    .filter(CartSkuVO::getChecked)
-                                    .map(CartSkuVO::getNum)
-                                    .toList();
-                    for (Integer num : skuNum) {
-                        cartVO.addGoodsNum(num);
-                    }
-                });
+        cartVOS.forEach(cartVO -> {
+            cartVO.getPriceDetailDTO()
+                    .accumulationPriceDTO(cartVO.getCheckedSkuList().stream()
+                            .filter(CartSkuVO::getChecked)
+                            .map(CartSkuVO::getPriceDetailDTO)
+                            .collect(Collectors.toList()));
+            List<Integer> skuNum = cartVO.getSkuList().stream()
+                    .filter(CartSkuVO::getChecked)
+                    .map(CartSkuVO::getNum)
+                    .toList();
+            for (Integer num : skuNum) {
+                cartVO.addGoodsNum(num);
+            }
+        });
     }
 
     /**
@@ -98,9 +95,8 @@ public class CartPriceRender implements ICartRenderStep {
      */
     void buildTradePrice(TradeDTO tradeDTO) {
         tradeDTO.getPriceDetailDTO()
-                .accumulationPriceDTO(
-                        tradeDTO.getCartList().stream()
-                                .map(CartVO::getPriceDetailDTO)
-                                .collect(Collectors.toList()));
+                .accumulationPriceDTO(tradeDTO.getCartList().stream()
+                        .map(CartVO::getPriceDetailDTO)
+                        .collect(Collectors.toList()));
     }
 }

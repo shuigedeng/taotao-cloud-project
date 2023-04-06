@@ -40,6 +40,5 @@ public interface ArticleMapper extends BaseSuperMapper<Article, Long> {
 		select a.id,a.title,a.sort,ac.article_category_name,a.open_status
 		from tt_article as a inner join tt_article_category ac on a.category_id=ac.id ${ew.customSqlSegment}
 		""")
-    IPage<ArticleVO> getArticleList(
-            IPage<ArticleVO> page, @Param(Constants.WRAPPER) Wrapper<ArticleVO> queryWrapper);
+    IPage<ArticleVO> getArticleList(IPage<ArticleVO> page, @Param(Constants.WRAPPER) Wrapper<ArticleVO> queryWrapper);
 }

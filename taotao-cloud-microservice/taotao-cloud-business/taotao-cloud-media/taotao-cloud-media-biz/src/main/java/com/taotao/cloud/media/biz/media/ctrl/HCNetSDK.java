@@ -53,8 +53,7 @@ public interface HCNetSDK extends StdCallLibrary {
     public static final int MAX_SHELTERNUM = 4; // 8000设备最大遮挡区域数
     public static final int MAX_DAYS = 7; // 每周天数
     public static final int PHONENUMBER_LEN = 32; // pppoe拨号号码最大长度
-    public static final int MAX_DISKNUM_V30 =
-            33; // 9000设备最大硬盘数/* 最多33个硬盘(包括16个内置SATA硬盘、1个eSATA硬盘和16个NFS盘) */
+    public static final int MAX_DISKNUM_V30 = 33; // 9000设备最大硬盘数/* 最多33个硬盘(包括16个内置SATA硬盘、1个eSATA硬盘和16个NFS盘) */
     public static final int MAX_DISKNUM = 16; // 8000设备最大硬盘数
     public static final int MAX_DISKNUM_V10 = 8; // 1.2版本之前版本
     public static final int MAX_WINDOW_V30 = 32; // 9000设备本地显示最大播放窗口数
@@ -214,8 +213,7 @@ public interface HCNetSDK extends StdCallLibrary {
     public static final int NET_DVR_IPC_COUNT_OVERFLOW = 86; /*超出最大的ip接入通道数*/
     public static final int NET_PLAYM4_NOERROR = 500; // no error
     public static final int NET_PLAYM4_PARA_OVER = 501; // input parameter is invalid;
-    public static final int NET_PLAYM4_ORDER_ERROR =
-            502; // The order of the function to be called is error.
+    public static final int NET_PLAYM4_ORDER_ERROR = 502; // The order of the function to be called is error.
     public static final int NET_PLAYM4_TIMER_ERROR = 503; // Create multimedia clock failed;
     public static final int NET_PLAYM4_DEC_VIDEO_ERROR = 504; // Decode video data failed.
     public static final int NET_PLAYM4_DEC_AUDIO_ERROR = 505; // Decode audio data failed.
@@ -223,33 +221,24 @@ public interface HCNetSDK extends StdCallLibrary {
     public static final int NET_PLAYM4_OPEN_FILE_ERROR = 507; // Open the file failed.
     public static final int NET_PLAYM4_CREATE_OBJ_ERROR = 508; // Create thread or event failed
     public static final int NET_PLAYM4_CREATE_DDRAW_ERROR = 509; // Create DirectDraw object failed.
-    public static final int NET_PLAYM4_CREATE_OFFSCREEN_ERROR =
-            510; // failed when creating off-screen surface.
+    public static final int NET_PLAYM4_CREATE_OFFSCREEN_ERROR = 510; // failed when creating off-screen surface.
     public static final int NET_PLAYM4_BUF_OVER = 511; // buffer is overflow
-    public static final int NET_PLAYM4_CREATE_SOUND_ERROR =
-            512; // failed when creating audio device.
+    public static final int NET_PLAYM4_CREATE_SOUND_ERROR = 512; // failed when creating audio device.
     public static final int NET_PLAYM4_SET_VOLUME_ERROR = 513; // Set volume failed
-    public static final int NET_PLAYM4_SUPPORT_FILE_ONLY =
-            514; // The function only support play file.
-    public static final int NET_PLAYM4_SUPPORT_STREAM_ONLY =
-            515; // The function only support play stream.
+    public static final int NET_PLAYM4_SUPPORT_FILE_ONLY = 514; // The function only support play file.
+    public static final int NET_PLAYM4_SUPPORT_STREAM_ONLY = 515; // The function only support play stream.
     public static final int NET_PLAYM4_SYS_NOT_SUPPORT = 516; // System not support.
     public static final int NET_PLAYM4_FILEHEADER_UNKNOWN = 517; // No file header.
-    public static final int NET_PLAYM4_VERSION_INCORRECT =
-            518; // The version of decoder and encoder is not adapted.
+    public static final int NET_PLAYM4_VERSION_INCORRECT = 518; // The version of decoder and encoder is not adapted.
     public static final int NET_PALYM4_INIT_DECODER_ERROR = 519; // Initialize decoder failed.
     public static final int NET_PLAYM4_CHECK_FILE_ERROR = 520; // The file data is unknown.
-    public static final int NET_PLAYM4_INIT_TIMER_ERROR =
-            521; // Initialize multimedia clock failed.
+    public static final int NET_PLAYM4_INIT_TIMER_ERROR = 521; // Initialize multimedia clock failed.
     public static final int NET_PLAYM4_BLT_ERROR = 522; // Blt failed.
     public static final int NET_PLAYM4_UPDATE_ERROR = 523; // Update failed.
-    public static final int NET_PLAYM4_OPEN_FILE_ERROR_MULTI =
-            524; // openfile error, streamtype is multi
-    public static final int NET_PLAYM4_OPEN_FILE_ERROR_VIDEO =
-            525; // openfile error, streamtype is video
+    public static final int NET_PLAYM4_OPEN_FILE_ERROR_MULTI = 524; // openfile error, streamtype is multi
+    public static final int NET_PLAYM4_OPEN_FILE_ERROR_VIDEO = 525; // openfile error, streamtype is video
     public static final int NET_PLAYM4_JPEG_COMPRESS_ERROR = 526; // JPEG compress error
-    public static final int NET_PLAYM4_EXTRACT_NOT_SUPPORT =
-            527; // Don't support the version of this file.
+    public static final int NET_PLAYM4_EXTRACT_NOT_SUPPORT = 527; // Don't support the version of this file.
     public static final int NET_PLAYM4_EXTRACT_DATA_ERROR = 528; // extract video data failed.
     /*******************全局错误码 end**********************/
     /*************************************************
@@ -803,16 +792,12 @@ public interface HCNetSDK extends StdCallLibrary {
 
         // 用于列表中显示
         public String toStringTime() {
-            return String.format(
-                    "%02d/%02d/%02d%02d:%02d:%02d",
-                    dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond);
+            return String.format("%02d/%02d/%02d%02d:%02d:%02d", dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond);
         }
 
         // 存储文件名使用
         public String toStringTitle() {
-            return String.format(
-                    "Time%02d%02d%02d%02d%02d%02d",
-                    dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond);
+            return String.format("Time%02d%02d%02d%02d%02d%02d", dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond);
         }
     }
 
@@ -1008,8 +993,7 @@ public interface HCNetSDK extends StdCallLibrary {
     }
 
     public static class NET_DVR_MOTION_V30 extends Structure { // 移动侦测(子结构)(9000扩展)
-        public byte96[] byMotionScope =
-                new byte96[64]; /*侦测区域,0-96位,表示64行,共有96*64个小宏块,为1表示是移动侦测区域,0-表示不是*/
+        public byte96[] byMotionScope = new byte96[64]; /*侦测区域,0-96位,表示64行,共有96*64个小宏块,为1表示是移动侦测区域,0-表示不是*/
         public byte byMotionSensitive; /*移动侦测灵敏度, 0 - 5,越高越灵敏,oxff关闭*/
         public byte byEnableHandleMotion; /* 是否处理移动侦测 0－否 1－是*/
         public byte byPrecision; /* 移动侦测算法的进度: 0--16*16, 1--32*32, 2--64*64 ... */
@@ -1078,10 +1062,8 @@ public interface HCNetSDK extends StdCallLibrary {
 
     public static class NET_DVR_VICOLOR extends Structure {
 
-        public NET_DVR_COLOR[] struColor =
-                new NET_DVR_COLOR[MAX_TIMESEGMENT_V30]; /*图象参数(第一个有效，其他三个保留)*/
-        public NET_DVR_SCHEDTIME[] struHandleTime =
-                new NET_DVR_SCHEDTIME[MAX_TIMESEGMENT_V30]; /*处理时间段(保留)*/
+        public NET_DVR_COLOR[] struColor = new NET_DVR_COLOR[MAX_TIMESEGMENT_V30]; /*图象参数(第一个有效，其他三个保留)*/
+        public NET_DVR_SCHEDTIME[] struHandleTime = new NET_DVR_SCHEDTIME[MAX_TIMESEGMENT_V30]; /*处理时间段(保留)*/
     }
     ;
 
@@ -1211,8 +1193,7 @@ public interface HCNetSDK extends StdCallLibrary {
         // 9-192K 10-224K 11-256K 12-320K 13-384K 14-448K 15-512K 16-640K
         // 17-768K 18-896K 19-1024K 20-1280K 21-1536K 22-1792K
         // 23-2048最高位(31位)置成1表示是自定义码流, 0-30位表示码流值。
-        public int
-                dwVideoFrameRate; // 帧率 0-全部; 1-1/16; 2-1/8; 3-1/4; 4-1/2; 5-1; 6-2; 7-4; 8-6; 9-8;
+        public int dwVideoFrameRate; // 帧率 0-全部; 1-1/16; 2-1/8; 3-1/4; 4-1/2; 5-1; 6-2; 7-4; 8-6; 9-8;
         // 10-10; 11-12; 12-16; 13-20; V2.0版本中新加14-15; 15-18; 16-22;
         public short wIntervalFrameI; // I帧间隔
         public byte byIntervalBPFrame; // 0-BBP帧; 1-BP帧; 2-单P帧
@@ -1237,14 +1218,12 @@ public interface HCNetSDK extends StdCallLibrary {
         public byte byResolution; // 分辨率0-DCIF 1-CIF, 2-QCIF, 3-4CIF, 4-2CIF, 5-2QCIF(352X144)(车载专用)
         public byte byBitrateType; // 码率类型0:变码率，1:定码率
         public byte byPicQuality; // 图象质量 0-最好 1-次好 2-较好 3-一般 4-较差 5-差
-        public int
-                dwVideoBitrate; // 视频码率 0-保留 1-16K(保留) 2-32K 3-48k 4-64K 5-80K 6-96K 7-128K 8-160k
+        public int dwVideoBitrate; // 视频码率 0-保留 1-16K(保留) 2-32K 3-48k 4-64K 5-80K 6-96K 7-128K 8-160k
         // 9-192K 10-224K 11-256K 12-320K
         // 13-384K 14-448K 15-512K 16-640K 17-768K 18-896K 19-1024K 20-1280K 21-1536K 22-1792K
         // 23-2048K
         // 最高位(31位)置成1表示是自定义码流, 0-30位表示码流值(MIN-32K MAX-8192K)。
-        public int
-                dwVideoFrameRate; // 帧率 0-全部; 1-1/16; 2-1/8; 3-1/4; 4-1/2; 5-1; 6-2; 7-4; 8-6; 9-8;
+        public int dwVideoFrameRate; // 帧率 0-全部; 1-1/16; 2-1/8; 3-1/4; 4-1/2; 5-1; 6-2; 7-4; 8-6; 9-8;
         // 10-10; 11-12; 12-16; 13-20;
     }
 
@@ -1259,14 +1238,12 @@ public interface HCNetSDK extends StdCallLibrary {
         public byte byResolution; // 分辨率0-DCIF 1-CIF, 2-QCIF, 3-4CIF, 4-2CIF, 5-2QCIF(352X144)(车载专用)
         public byte byBitrateType; // 码率类型0:变码率，1:定码率
         public byte byPicQuality; // 图象质量 0-最好 1-次好 2-较好 3-一般 4-较差 5-差
-        public int
-                dwVideoBitrate; // 视频码率 0-保留 1-16K(保留) 2-32K 3-48k 4-64K 5-80K 6-96K 7-128K 8-160k
+        public int dwVideoBitrate; // 视频码率 0-保留 1-16K(保留) 2-32K 3-48k 4-64K 5-80K 6-96K 7-128K 8-160k
         // 9-192K 10-224K 11-256K 12-320K
         // 13-384K 14-448K 15-512K 16-640K 17-768K 18-896K 19-1024K 20-1280K 21-1536K 22-1792K
         // 23-2048K
         // 最高位(31位)置成1表示是自定义码流, 0-30位表示码流值(MIN-32K MAX-8192K)。
-        public int
-                dwVideoFrameRate; // 帧率 0-全部; 1-1/16; 2-1/8; 3-1/4; 4-1/2; 5-1; 6-2; 7-4; 8-6; 9-8;
+        public int dwVideoFrameRate; // 帧率 0-全部; 1-1/16; 2-1/8; 3-1/4; 4-1/2; 5-1; 6-2; 7-4; 8-6; 9-8;
         // 10-10; 11-12; 12-16; 13-20, //V2.0增加14-15, 15-18, 16-22;
         public short wIntervalFrameI; // I帧间隔
         // 2006-08-11 增加单P帧的配置接口，可以改善实时流延时问题
@@ -1280,8 +1257,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public NET_DVR_COMPRESSION_INFO_EX struNetPara; // 网传
     }
 
-    public static class NET_DVR_RECCOMPRESSIONCFG_EX
-            extends Structure { // 录象时间段压缩参数配置(GE定制)2006-09-18
+    public static class NET_DVR_RECCOMPRESSIONCFG_EX extends Structure { // 录象时间段压缩参数配置(GE定制)2006-09-18
         int dwSize;
         NET_DVR_COMPRESSION_INFO_EX[][] struRecTimePara =
                 new NET_DVR_COMPRESSION_INFO_EX[MAX_DAYS][MAX_TIMESEGMENT]; // 录像时间段
@@ -1315,8 +1291,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public NET_DVR_RECORDDAY[] struRecAllDay = new NET_DVR_RECORDDAY[MAX_DAYS];
         public NET_DVR_RECORDSCHEDWEEK[] struRecordSched = new NET_DVR_RECORDSCHEDWEEK[MAX_DAYS];
         public int dwRecordTime; /* 录象延时长度 0-5秒， 1-20秒， 2-30秒， 3-1分钟， 4-2分钟， 5-5分钟， 6-10分钟*/
-        public int
-                dwPreRecordTime; /* 预录时间 0-不预录 1-5秒 2-10秒 3-15秒 4-20秒 5-25秒 6-30秒 7-0xffffffff(尽可能预录) */
+        public int dwPreRecordTime; /* 预录时间 0-不预录 1-5秒 2-10秒 3-15秒 4-20秒 5-25秒 6-30秒 7-0xffffffff(尽可能预录) */
         public int dwRecorderDuration; /* 录像保存的最长时间 */
         public byte byRedundancyRec; /*是否冗余录像,重要数据双备份：0/1*/
         public byte byAudioRec; /*录像时复合流编码时是否记录音频数据：国外有此法规*/
@@ -1330,8 +1305,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public NET_DVR_RECORDDAY[] struRecAllDay = new NET_DVR_RECORDDAY[MAX_DAYS];
         public NET_DVR_RECORDSCHEDWEEK[] struRecordSched = new NET_DVR_RECORDSCHEDWEEK[MAX_DAYS];
         public int dwRecordTime; /* 录象时间长度 0-5秒， 1-20秒， 2-30秒， 3-1分钟， 4-2分钟， 5-5分钟， 6-10分钟*/
-        public int
-                dwPreRecordTime; /* 预录时间 0-不预录 1-5秒 2-10秒 3-15秒 4-20秒 5-25秒 6-30秒 7-0xffffffff(尽可能预录) */
+        public int dwPreRecordTime; /* 预录时间 0-不预录 1-5秒 2-10秒 3-15秒 4-20秒 5-25秒 6-30秒 7-0xffffffff(尽可能预录) */
     }
 
     // 云台协议表结构配置
@@ -1344,8 +1318,7 @@ public interface HCNetSDK extends StdCallLibrary {
     public static class NET_DVR_PTZCFG extends Structure {
 
         public int dwSize;
-        public NET_DVR_PTZ_PROTOCOL[] struPtz =
-                new NET_DVR_PTZ_PROTOCOL[PTZ_PROTOCOL_NUM]; /*最大200中PTZ协议*/
+        public NET_DVR_PTZ_PROTOCOL[] struPtz = new NET_DVR_PTZ_PROTOCOL[PTZ_PROTOCOL_NUM]; /*最大200中PTZ协议*/
         public int dwPtzNum; /*有效的ptz协议数目，从0开始(即计算时加1)*/
         public byte[] byRes = new byte[8];
     }
@@ -1353,8 +1326,8 @@ public interface HCNetSDK extends StdCallLibrary {
     /***************************云台类型(end)******************************/
     public static class NET_DVR_DECODERCFG_V30 extends Structure { // 通道解码器(云台)参数配置(9000扩展)
         public int dwSize;
-        public int
-                dwBaudRate; // 波特率(bps)，0－50，1－75，2－110，3－150，4－300，5－600，6－1200，7－2400，8－4800，9－9600，10－19200， 11－38400，12－57600，13－76800，14－115.2k;
+        public int dwBaudRate; // 波特率(bps)，0－50，1－75，2－110，3－150，4－300，5－600，6－1200，7－2400，8－4800，9－9600，10－19200，
+        // 11－38400，12－57600，13－76800，14－115.2k;
         public byte byDataBit; // 数据有几位 0－5位，1－6位，2－7位，3－8位;
         public byte byStopBit; // 停止位 0－1位，1－2位;
         public byte byParity; // 校验 0－无校验，1－奇校验，2－偶校验;
@@ -1369,8 +1342,8 @@ public interface HCNetSDK extends StdCallLibrary {
 
     public static class NET_DVR_DECODERCFG extends Structure { // 通道解码器(云台)参数配置
         public int dwSize;
-        public int
-                dwBaudRate; // 波特率(bps)，0－50，1－75，2－110，3－150，4－300，5－600，6－1200，7－2400，8－4800，9－9600，10－19200， 11－38400，12－57600，13－76800，14－115.2k;
+        public int dwBaudRate; // 波特率(bps)，0－50，1－75，2－110，3－150，4－300，5－600，6－1200，7－2400，8－4800，9－9600，10－19200，
+        // 11－38400，12－57600，13－76800，14－115.2k;
         public byte byDataBit; // 数据有几位 0－5位，1－6位，2－7位，3－8位;
         public byte byStopBit; // 停止位 0－1位，1－2位;
         public byte byParity; // 校验 0－无校验，1－奇校验，2－偶校验;
@@ -1430,8 +1403,8 @@ public interface HCNetSDK extends StdCallLibrary {
 
     public static class NET_DVR_RS232CFG extends Structure { // RS232串口参数配置
         public int dwSize;
-        public int
-                dwBaudRate; // 波特率(bps)，0－50，1－75，2－110，3－150，4－300，5－600，6－1200，7－2400，8－4800，9－9600，10－19200， 11－38400，12－57600，13－76800，14－115.2k;
+        public int dwBaudRate; // 波特率(bps)，0－50，1－75，2－110，3－150，4－300，5－600，6－1200，7－2400，8－4800，9－9600，10－19200，
+        // 11－38400，12－57600，13－76800，14－115.2k;
         public byte byDataBit; // 数据有几位 0－5位，1－6位，2－7位，3－8位;
         public byte byStopBit; // 停止位 0－1位，1－2位;
         public byte byParity; // 校验 0－无校验，1－奇校验，2－偶校验;
@@ -1450,8 +1423,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public NET_DVR_SCHEDTIMEWEEK[] struAlarmTime = new NET_DVR_SCHEDTIMEWEEK[MAX_DAYS]; // 布防时间
         public byte[] byRelRecordChan = new byte[MAX_CHANNUM_V30]; // 报警触发的录象通道,为1表示触发该通道
         public byte[] byEnablePreset = new byte[MAX_CHANNUM_V30]; /* 是否调用预置点 0-否,1-是*/
-        public byte[] byPresetNo =
-                new byte[MAX_CHANNUM_V30]; /* 调用的云台预置点序号,一个报警输入可以调用多个通道的云台预置点, 0xff表示不调用预置点。*/
+        public byte[] byPresetNo = new byte[MAX_CHANNUM_V30]; /* 调用的云台预置点序号,一个报警输入可以调用多个通道的云台预置点, 0xff表示不调用预置点。*/
         public byte[] byEnablePresetRevert = new byte[MAX_CHANNUM_V30]; /* 是否恢复到调用预置点前的位置(保留) */
         public short[] wPresetRevertDelay = new short[MAX_CHANNUM_V30]; /* 恢复预置点延时(保留) */
         public byte[] byEnableCruise = new byte[MAX_CHANNUM_V30]; /* 是否调用巡航 0-否,1-是*/
@@ -1470,8 +1442,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public NET_DVR_SCHEDTIMEWEEK[] struAlarmTime = new NET_DVR_SCHEDTIMEWEEK[MAX_DAYS]; // 布防时间
         public byte[] byRelRecordChan = new byte[MAX_CHANNUM]; // 报警触发的录象通道,为1表示触发该通道
         public byte[] byEnablePreset = new byte[MAX_CHANNUM]; /* 是否调用预置点 0-否,1-是*/
-        public byte[] byPresetNo =
-                new byte[MAX_CHANNUM]; /* 调用的云台预置点序号,一个报警输入可以调用多个通道的云台预置点, 0xff表示不调用预置点。*/
+        public byte[] byPresetNo = new byte[MAX_CHANNUM]; /* 调用的云台预置点序号,一个报警输入可以调用多个通道的云台预置点, 0xff表示不调用预置点。*/
         public byte[] byEnableCruise = new byte[MAX_CHANNUM]; /* 是否调用巡航 0-否,1-是*/
         public byte[] byCruiseNo = new byte[MAX_CHANNUM]; /* 巡航 */
         public byte[] byEnablePtzTrack = new byte[MAX_CHANNUM]; /* 是否调用轨迹 0-否,1-是*/
@@ -1483,8 +1454,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public int dwSpeed; /*速度*/
         public int dwLongitude; /* 经度*/
         public int dwLatitude; /* 纬度*/
-        public byte[] direction =
-                new byte[2]; /* direction[0]:'E'or'W'(东经/西经), direction[1]:'N'or'S'(北纬/南纬) */
+        public byte[] direction = new byte[2]; /* direction[0]:'E'or'W'(东经/西经), direction[1]:'N'or'S'(北纬/南纬) */
         public byte[] res = new byte[2]; /* 保留位 */
     }
 
@@ -1495,10 +1465,8 @@ public interface HCNetSDK extends StdCallLibrary {
         public byte[] byAlarmOutputNumber = new byte[MAX_ALARMOUT_V30]; /*触发的输出端口，为1表示对应输出*/
         public byte[] byAlarmRelateChannel =
                 new byte[MAX_CHANNUM_V30]; /*触发的录像通道，为1表示对应录像, dwAlarmRelateChannel[0]对应第1个通道*/
-        public byte[] byChannel =
-                new byte[MAX_CHANNUM_V30]; /*dwAlarmType为2或3,6时，表示哪个通道，dwChannel[0]对应第1个通道*/
-        public byte[] byDiskNumber =
-                new byte[MAX_DISKNUM_V30]; /*dwAlarmType为1,4,5时,表示哪个硬盘, dwDiskNumber[0]对应第1个硬盘*/
+        public byte[] byChannel = new byte[MAX_CHANNUM_V30]; /*dwAlarmType为2或3,6时，表示哪个通道，dwChannel[0]对应第1个通道*/
+        public byte[] byDiskNumber = new byte[MAX_DISKNUM_V30]; /*dwAlarmType为1,4,5时,表示哪个硬盘, dwDiskNumber[0]对应第1个硬盘*/
     }
 
     public static class NET_DVR_ALARMINFO extends Structure {
@@ -1507,24 +1475,18 @@ public interface HCNetSDK extends StdCallLibrary {
                 dwAlarmType; /*0-信号量报警,1-硬盘满,2-信号丢失,3－移动侦测,4－硬盘未格式化,5-读写硬盘出错,6-遮挡报警,7-制式不匹配, 8-非法访问, 9-串口状态, 0xa-GPS定位信息(车载定制)*/
         public int dwAlarmInputNumber; /*报警输入端口, 当报警类型为9时该变量表示串口状态0表示正常， -1表示错误*/
         public int[] dwAlarmOutputNumber = new int[MAX_ALARMOUT]; /*触发的输出端口，为1表示对应哪一个输出*/
-        public int[] dwAlarmRelateChannel =
-                new int[MAX_CHANNUM]; /*触发的录像通道，dwAlarmRelateChannel[0]为1表示第1个通道录像*/
-        public int[] dwChannel =
-                new int[MAX_CHANNUM]; /*dwAlarmType为2或3,6时，表示哪个通道，dwChannel[0]位对应第1个通道*/
-        public int[] dwDiskNumber =
-                new int[MAX_DISKNUM]; /*dwAlarmType为1,4,5时,表示哪个硬盘, dwDiskNumber[0]位对应第1个硬盘*/
+        public int[] dwAlarmRelateChannel = new int[MAX_CHANNUM]; /*触发的录像通道，dwAlarmRelateChannel[0]为1表示第1个通道录像*/
+        public int[] dwChannel = new int[MAX_CHANNUM]; /*dwAlarmType为2或3,6时，表示哪个通道，dwChannel[0]位对应第1个通道*/
+        public int[] dwDiskNumber = new int[MAX_DISKNUM]; /*dwAlarmType为1,4,5时,表示哪个硬盘, dwDiskNumber[0]位对应第1个硬盘*/
     }
 
     public static class NET_DVR_ALARMINFO_EX extends Structure { // 上传报警信息(杭州竞天定制 2006-07-28)
-        public int
-                dwAlarmType; /*0-信号量报警,1-硬盘满,2-信号丢失,3－移动侦测,4－硬盘未格式化,5-读写硬盘出错,6-遮挡报警,7-制式不匹配, 8-非法访问*/
+        public int dwAlarmType; /*0-信号量报警,1-硬盘满,2-信号丢失,3－移动侦测,4－硬盘未格式化,5-读写硬盘出错,6-遮挡报警,7-制式不匹配, 8-非法访问*/
         public int dwAlarmInputNumber; /*报警输入端口*/
         public int[] dwAlarmOutputNumber = new int[MAX_ALARMOUT]; /*报警输入端口对应的输出端口，哪一位为1表示对应哪一个输出*/
         public int[] dwAlarmRelateChannel =
-                new int
-                        [MAX_CHANNUM]; /*报警输入端口对应的录像通道，哪一位为1表示对应哪一路录像,dwAlarmRelateChannel[0]对应第1个通道*/
-        public int[] dwChannel =
-                new int[MAX_CHANNUM]; /*dwAlarmType为2或3,6时，表示哪个通道，dwChannel[0]位对应第0个通道*/
+                new int[MAX_CHANNUM]; /*报警输入端口对应的录像通道，哪一位为1表示对应哪一路录像,dwAlarmRelateChannel[0]对应第1个通道*/
+        public int[] dwChannel = new int[MAX_CHANNUM]; /*dwAlarmType为2或3,6时，表示哪个通道，dwChannel[0]位对应第0个通道*/
         public int[] dwDiskNumber = new int[MAX_DISKNUM]; /*dwAlarmType为1,4,5时,表示哪个硬盘*/
         public byte[] sSerialNumber = new byte[SERIALNO_LEN]; // 序列号
         public byte[] sRemoteAlarmIP = new byte[16]; // 远程报警IP地址；
@@ -1554,10 +1516,8 @@ public interface HCNetSDK extends StdCallLibrary {
         /* IP接入配置结构 */
         public int dwSize; /* 结构大小 */
         public NET_DVR_IPDEVINFO[] struIPDevInfo = new NET_DVR_IPDEVINFO[MAX_IP_DEVICE]; /* IP设备 */
-        public byte[] byAnalogChanEnable =
-                new byte[MAX_ANALOG_CHANNUM]; /* 模拟通道是否启用，从低到高表示1-32通道，0表示无效 1有效 */
-        public NET_DVR_IPCHANINFO[] struIPChanInfo =
-                new NET_DVR_IPCHANINFO[MAX_IP_CHANNEL]; /* IP通道 */
+        public byte[] byAnalogChanEnable = new byte[MAX_ANALOG_CHANNUM]; /* 模拟通道是否启用，从低到高表示1-32通道，0表示无效 1有效 */
+        public NET_DVR_IPCHANINFO[] struIPChanInfo = new NET_DVR_IPCHANINFO[MAX_IP_CHANNEL]; /* IP通道 */
     }
 
     public static class NET_DVR_IPALARMOUTINFO extends Structure {
@@ -1570,8 +1530,7 @@ public interface HCNetSDK extends StdCallLibrary {
     public static class NET_DVR_IPALARMOUTCFG extends Structure {
         /* IP报警输出配置结构 */
         public int dwSize; /* 结构大小 */
-        public NET_DVR_IPALARMOUTINFO[] struIPAlarmOutInfo =
-                new NET_DVR_IPALARMOUTINFO[MAX_IP_ALARMOUT]; /* IP报警输出 */
+        public NET_DVR_IPALARMOUTINFO[] struIPAlarmOutInfo = new NET_DVR_IPALARMOUTINFO[MAX_IP_ALARMOUT]; /* IP报警输出 */
     }
 
     public static class NET_DVR_IPALARMININFO extends Structure {
@@ -1584,19 +1543,15 @@ public interface HCNetSDK extends StdCallLibrary {
     public static class NET_DVR_IPALARMINCFG extends Structure {
         /* IP报警输入配置结构 */
         public int dwSize; /* 结构大小 */
-        public NET_DVR_IPALARMININFO[] struIPAlarmInInfo =
-                new NET_DVR_IPALARMININFO[MAX_IP_ALARMIN]; /* IP报警输入 */
+        public NET_DVR_IPALARMININFO[] struIPAlarmInInfo = new NET_DVR_IPALARMININFO[MAX_IP_ALARMIN]; /* IP报警输入 */
     }
 
     public static class NET_DVR_IPALARMINFO extends Structure { // ipc alarm info
         public NET_DVR_IPDEVINFO[] struIPDevInfo = new NET_DVR_IPDEVINFO[MAX_IP_DEVICE]; /* IP设备 */
         public byte[] byAnalogChanEnable = new byte[MAX_ANALOG_CHANNUM]; /* 模拟通道是否启用，0-未启用 1-启用 */
-        public NET_DVR_IPCHANINFO[] struIPChanInfo =
-                new NET_DVR_IPCHANINFO[MAX_IP_CHANNEL]; /* IP通道 */
-        public NET_DVR_IPALARMININFO[] struIPAlarmInInfo =
-                new NET_DVR_IPALARMININFO[MAX_IP_ALARMIN]; /* IP报警输入 */
-        public NET_DVR_IPALARMOUTINFO[] struIPAlarmOutInfo =
-                new NET_DVR_IPALARMOUTINFO[MAX_IP_ALARMOUT]; /* IP报警输出 */
+        public NET_DVR_IPCHANINFO[] struIPChanInfo = new NET_DVR_IPCHANINFO[MAX_IP_CHANNEL]; /* IP通道 */
+        public NET_DVR_IPALARMININFO[] struIPAlarmInInfo = new NET_DVR_IPALARMININFO[MAX_IP_ALARMIN]; /* IP报警输入 */
+        public NET_DVR_IPALARMOUTINFO[] struIPAlarmOutInfo = new NET_DVR_IPALARMOUTINFO[MAX_IP_ALARMOUT]; /* IP报警输出 */
     }
 
     public static class NET_DVR_SINGLE_HD extends Structure { // 本地硬盘信息配置
@@ -1614,8 +1569,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
         public int dwSize;
         public int dwHDCount; /*硬盘数(不可设置)*/
-        public NET_DVR_SINGLE_HD[] struHDInfo =
-                new NET_DVR_SINGLE_HD[MAX_DISKNUM_V30]; // 硬盘相关操作都需要重启才能生效；
+        public NET_DVR_SINGLE_HD[] struHDInfo = new NET_DVR_SINGLE_HD[MAX_DISKNUM_V30]; // 硬盘相关操作都需要重启才能生效；
     }
 
     public static class NET_DVR_SINGLE_HDGROUP extends Structure { // 本地盘组信息配置
@@ -1628,8 +1582,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
         public int dwSize;
         public int dwHDGroupCount; /*盘组总数(不可设置)*/
-        public NET_DVR_SINGLE_HDGROUP[] struHDGroupAttr =
-                new NET_DVR_SINGLE_HDGROUP[MAX_HD_GROUP]; // 硬盘相关操作都需要重启才能生效；
+        public NET_DVR_SINGLE_HDGROUP[] struHDGroupAttr = new NET_DVR_SINGLE_HDGROUP[MAX_HD_GROUP]; // 硬盘相关操作都需要重启才能生效；
     }
 
     public static class NET_DVR_SCALECFG extends Structure { // 配置缩放参数的结构
@@ -1644,8 +1597,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public byte[] sAlarmOutName = new byte[NAME_LEN]; /* 名称 */
         public int dwAlarmOutDelay; /* 输出保持时间(-1为无限，手动关闭) */
         // 0-5秒,1-10秒,2-30秒,3-1分钟,4-2分钟,5-5分钟,6-10分钟,7-手动
-        public NET_DVR_SCHEDTIMEWEEK[] struAlarmOutTime =
-                new NET_DVR_SCHEDTIMEWEEK[MAX_DAYS]; /* 报警输出激活时间段 */
+        public NET_DVR_SCHEDTIMEWEEK[] struAlarmOutTime = new NET_DVR_SCHEDTIMEWEEK[MAX_DAYS]; /* 报警输出激活时间段 */
         public byte[] byRes = new byte[16];
     }
 
@@ -1654,8 +1606,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public byte[] sAlarmOutName = new byte[NAME_LEN]; /* 名称 */
         public int dwAlarmOutDelay; /* 输出保持时间(-1为无限，手动关闭) */
         // 0-5秒,1-10秒,2-30秒,3-1分钟,4-2分钟,5-5分钟,6-10分钟,7-手动
-        public NET_DVR_SCHEDTIMEWEEK[] struAlarmOutTime =
-                new NET_DVR_SCHEDTIMEWEEK[MAX_DAYS]; /* 报警输出激活时间段 */
+        public NET_DVR_SCHEDTIMEWEEK[] struAlarmOutTime = new NET_DVR_SCHEDTIMEWEEK[MAX_DAYS]; /* 报警输出激活时间段 */
     }
 
     public static class NET_DVR_PREVIEWCFG_V30 extends Structure { // DVR本地预览参数(9000扩展)
@@ -1663,8 +1614,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public byte byPreviewNumber; // 预览数目,0-1画面,1-4画面,2-9画面,3-16画面, 4-6画面, 5-8画面, 0xff:最大画面
         public byte byEnableAudio; // 是否声音预览,0-不预览,1-预览
         public short wSwitchTime; // 切换时间,0-不切换,1-5s,2-10s,3-20s,4-30s,5-60s,6-120s,7-300s
-        public byte[][] bySwitchSeq =
-                new byte[MAX_PREVIEW_MODE][MAX_WINDOW_V30]; // 切换顺序,如果lSwitchSeq[i]为 0xff表示不用
+        public byte[][] bySwitchSeq = new byte[MAX_PREVIEW_MODE][MAX_WINDOW_V30]; // 切换顺序,如果lSwitchSeq[i]为 0xff表示不用
         public byte[] byRes = new byte[24];
     }
 
@@ -1713,8 +1663,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public int dwSize;
         public NET_DVR_VOOUT[] struVOOut = new NET_DVR_VOOUT[MAX_VIDEOOUT_V30];
         public NET_DVR_VGAPARA[] struVGAPara = new NET_DVR_VGAPARA[MAX_VGA_V30]; /* VGA参数 */
-        public NET_DVR_MATRIXPARA_V30[] struMatrixPara =
-                new NET_DVR_MATRIXPARA_V30[MAX_MATRIXOUT]; /* MATRIX参数 */
+        public NET_DVR_MATRIXPARA_V30[] struMatrixPara = new NET_DVR_MATRIXPARA_V30[MAX_MATRIXOUT]; /* MATRIX参数 */
         public byte[] byRes = new byte[16];
     }
 
@@ -1854,8 +1803,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
     public static class NET_DVR_EXCEPTION extends Structure { // DVR异常参数
         public int dwSize;
-        public NET_DVR_HANDLEEXCEPTION[] struExceptionHandleType =
-                new NET_DVR_HANDLEEXCEPTION[MAX_EXCEPTIONNUM];
+        public NET_DVR_HANDLEEXCEPTION[] struExceptionHandleType = new NET_DVR_HANDLEEXCEPTION[MAX_EXCEPTIONNUM];
         /*数组0-盘满,1- 硬盘出错,2-网线断,3-局域网内IP 地址冲突,4-非法访问, 5-输入/输出视频制式不匹配, 6-行车超速(车载专用)*/
     }
 
@@ -1890,8 +1838,7 @@ public interface HCNetSDK extends StdCallLibrary {
     public static class NET_DVR_WORKSTATE_V30 extends Structure { // DVR工作状态(9000扩展)
         public int dwDeviceStatic; // 设备的状态,0-正常,1-CPU占用率太高,超过85%,2-硬件错误,例如串口死掉
         public NET_DVR_DISKSTATE[] struHardDiskStatic = new NET_DVR_DISKSTATE[MAX_DISKNUM_V30];
-        public NET_DVR_CHANNELSTATE_V30[] struChanStatic =
-                new NET_DVR_CHANNELSTATE_V30[MAX_CHANNUM_V30]; // 通道的状态
+        public NET_DVR_CHANNELSTATE_V30[] struChanStatic = new NET_DVR_CHANNELSTATE_V30[MAX_CHANNUM_V30]; // 通道的状态
         public byte[] byAlarmInStatic = new byte[MAX_ALARMIN_V30]; // 报警端口的状态,0-没有报警,1-有报警
         public byte[] byAlarmOutStatic = new byte[MAX_ALARMOUT_V30]; // 报警输出端口的状态,0-没有输出,1-有报警输出
         public int dwLocalDisplay; // 本地显示状态,0-正常,1-不正常
@@ -1902,8 +1849,7 @@ public interface HCNetSDK extends StdCallLibrary {
     public static class NET_DVR_WORKSTATE extends Structure { // DVR工作状态
         public int dwDeviceStatic; // 设备的状态,0-正常,1-CPU占用率太高,超过85%,2-硬件错误,例如串口死掉
         public NET_DVR_DISKSTATE[] struHardDiskStatic = new NET_DVR_DISKSTATE[MAX_DISKNUM];
-        public NET_DVR_CHANNELSTATE[] struChanStatic =
-                new NET_DVR_CHANNELSTATE[MAX_CHANNUM]; // 通道的状态
+        public NET_DVR_CHANNELSTATE[] struChanStatic = new NET_DVR_CHANNELSTATE[MAX_CHANNUM]; // 通道的状态
         public byte[] byAlarmInStatic = new byte[MAX_ALARMIN]; // 报警端口的状态,0-没有报警,1-有报警
         public byte[] byAlarmOutStatic = new byte[MAX_ALARMOUT]; // 报警输出端口的状态,0-没有输出,1-有报警输出
         public int dwLocalDisplay; // 本地显示状态,0-正常,1-不正常
@@ -2012,8 +1958,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public byte[] sFtpCode = new byte[8]; /*客户定义的操作类型的对应的码*/
     }
 
-    public static class NET_DVR_FRAMEFORMAT_EX
-            extends Structure { // ATM参数添加FTP上传参数, 俄罗斯银行定制, 2006-11-17
+    public static class NET_DVR_FRAMEFORMAT_EX extends Structure { // ATM参数添加FTP上传参数, 俄罗斯银行定制, 2006-11-17
         public int dwSize;
         public byte[] sATMIP = new byte[16]; /* ATM IP地址 */
         public int dwATMType; /* ATM类型 */
@@ -2104,8 +2049,7 @@ public interface HCNetSDK extends StdCallLibrary {
     public static class NET_DVR_PORTCFG extends Structure {
 
         public int dwSize;
-        public NET_DVR_PORTINFO[] struTransPortInfo =
-                new NET_DVR_PORTINFO[MAX_TRANSPARENTNUM]; /* 数组0表示232 数组1表示485 */
+        public NET_DVR_PORTINFO[] struTransPortInfo = new NET_DVR_PORTINFO[MAX_TRANSPARENTNUM]; /* 数组0表示232 数组1表示485 */
     }
 
     /*https://jna.dev.java.net/javadoc/com/sun/jna/Union.html#setType(java.lang.Class)  see how to use the JNA Union*/
@@ -2176,7 +2120,6 @@ public interface HCNetSDK extends StdCallLibrary {
     }
 
     /*****************************DS-6001D/F(end)***************************/
-
     public static class NET_DVR_SHOWSTRINGINFO extends Structure { // 单字符参数(子结构)
         public short wShowString; // 预览的图象上是否显示字符,0-不显示,1-显示 区域大小704*576,单个字符的大小为32*32
         public short wStringSize; /* 该行字符的长度，不能大于44个字符 */
@@ -2189,24 +2132,21 @@ public interface HCNetSDK extends StdCallLibrary {
     public static class NET_DVR_SHOWSTRING_V30 extends Structure {
 
         public int dwSize;
-        public NET_DVR_SHOWSTRINGINFO[] struStringInfo =
-                new NET_DVR_SHOWSTRINGINFO[MAX_STRINGNUM_V30]; /* 要显示的字符内容 */
+        public NET_DVR_SHOWSTRINGINFO[] struStringInfo = new NET_DVR_SHOWSTRINGINFO[MAX_STRINGNUM_V30]; /* 要显示的字符内容 */
     }
 
     // 叠加字符扩展(8条字符)
     public static class NET_DVR_SHOWSTRING_EX extends Structure {
 
         public int dwSize;
-        public NET_DVR_SHOWSTRINGINFO[] struStringInfo =
-                new NET_DVR_SHOWSTRINGINFO[MAX_STRINGNUM_EX]; /* 要显示的字符内容 */
+        public NET_DVR_SHOWSTRINGINFO[] struStringInfo = new NET_DVR_SHOWSTRINGINFO[MAX_STRINGNUM_EX]; /* 要显示的字符内容 */
     }
 
     // 叠加字符
     public static class NET_DVR_SHOWSTRING extends Structure {
 
         public int dwSize;
-        public NET_DVR_SHOWSTRINGINFO[] struStringInfo =
-                new NET_DVR_SHOWSTRINGINFO[MAX_STRINGNUM]; /* 要显示的字符内容 */
+        public NET_DVR_SHOWSTRINGINFO[] struStringInfo = new NET_DVR_SHOWSTRINGINFO[MAX_STRINGNUM]; /* 要显示的字符内容 */
     }
 
     /****************************DS9000新增结构(begin)******************************/
@@ -2284,8 +2224,7 @@ public interface HCNetSDK extends StdCallLibrary {
         /*注意：当图像压缩分辨率为VGA时，支持0=CIF, 1=QCIF, 2=D1抓图，
         当分辨率为3=UXGA(1600x1200), 4=SVGA(800x600), 5=HD720p(1280x720),6=VGA,7=XVGA, 8=HD900p
         仅支持当前分辨率的抓图*/
-        public short
-                wPicSize; /* 0=CIF, 1=QCIF, 2=D1 3=UXGA(1600x1200), 4=SVGA(800x600), 5=HD720p(1280x720),6=VGA*/
+        public short wPicSize; /* 0=CIF, 1=QCIF, 2=D1 3=UXGA(1600x1200), 4=SVGA(800x600), 5=HD720p(1280x720),6=VGA*/
         public short wPicQuality; /* 图片质量系数 0-最好 1-较好 2-一般 */
     }
 
@@ -2297,10 +2236,8 @@ public interface HCNetSDK extends StdCallLibrary {
         public int dwAlarmOutChan; /* 选择报警弹出大报警通道切换时间：1画面的输出通道: 0:主输出/1:辅1/2:辅2/3:辅3/4:辅4 */
         public int dwAlarmChanSwitchTime; /* :1秒 - 10:10秒 */
         public int[] dwAuxSwitchTime =
-                new int
-                        [MAX_AUXOUT]; /* 辅助输出切换时间: 0-不切换,1-5s,2-10s,3-20s,4-30s,5-60s,6-120s,7-300s */
-        public byte[][] byAuxOrder =
-                new byte[MAX_AUXOUT][MAX_WINDOW]; /* 辅助输出预览顺序, 0xff表示相应的窗口不预览 */
+                new int[MAX_AUXOUT]; /* 辅助输出切换时间: 0-不切换,1-5s,2-10s,3-20s,4-30s,5-60s,6-120s,7-300s */
+        public byte[][] byAuxOrder = new byte[MAX_AUXOUT][MAX_WINDOW]; /* 辅助输出预览顺序, 0xff表示相应的窗口不预览 */
     }
 
     // ntp
@@ -2432,8 +2369,7 @@ public interface HCNetSDK extends StdCallLibrary {
         public NET_DVR_MATRIX_DECINFO struDecChanInfo; /* 动态解码通道信息 */
     }
 
-    public static class NET_DVR_MATRIX_DEC_CHAN_STATUS
-            extends Structure { // 2007-12-13 modified by zxy
+    public static class NET_DVR_MATRIX_DEC_CHAN_STATUS extends Structure { // 2007-12-13 modified by zxy
         // 修改多路解码器的NET_DVR_MATRIX_DEC_CHAN_STATUS结构
         public int dwSize; // 2008-1-16 modified by zxy dwIsLinked的状态由原来的0－未链接 1－连接修改成以下三种状态。
         public int dwIsLinked; /* 解码通道状态 0－休眠 1－正在连接 2－已连接 3-正在解码 */
@@ -2464,8 +2400,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
         public int dwSize;
         public int dwPoolTime; /*轮巡时间 */
-        public NET_DVR_MATRIX_DECCHANINFO[] struchanConInfo =
-                new NET_DVR_MATRIX_DECCHANINFO[MAX_CYCLE_CHAN];
+        public NET_DVR_MATRIX_DECCHANINFO[] struchanConInfo = new NET_DVR_MATRIX_DECCHANINFO[MAX_CYCLE_CHAN];
     }
 
     // 2007-05-25  多路解码器数字矩阵配置
@@ -2643,15 +2578,13 @@ public interface HCNetSDK extends StdCallLibrary {
     /************************************多路解码器(end)***************************************/
 
     /************************************多路解码器(end)***************************************/
-
     public static class NET_DVR_EMAILCFG extends Structure {
         /* 12 bytes */
 
         public int dwSize;
         public byte[] sUserName = new byte[32];
         public byte[] sPassWord = new byte[32];
-        public byte[] sFromName =
-                new byte[32]; /* Sender */ // 字符串中的第一个字符和最后一个字符不能是"@",并且字符串中要有"@"字符
+        public byte[] sFromName = new byte[32]; /* Sender */ // 字符串中的第一个字符和最后一个字符不能是"@",并且字符串中要有"@"字符
         public byte[] sFromAddr = new byte[48]; /* Sender address */
         public byte[] sToName1 = new byte[32]; /* Receiver1 */
         public byte[] sToName2 = new byte[32]; /* Receiver2 */
@@ -2844,8 +2777,7 @@ public interface HCNetSDK extends StdCallLibrary {
     public static class NET_DVR_CARDINFO extends Structure {
 
         public NativeLong lChannel; // 通道号
-        public NativeLong
-                lLinkMode; // 最高位(31)为0表示主码流，为1表示子，0－30位表示码流连接方式:0：TCP方式,1：UDP方式,2：多播方式,3 -
+        public NativeLong lLinkMode; // 最高位(31)为0表示主码流，为1表示子，0－30位表示码流连接方式:0：TCP方式,1：UDP方式,2：多播方式,3 -
         // RTP方式，4-电话线，5－128k宽带，6－256k宽带，7－384k宽带，8－512k宽带；
         public String sMultiCastIP;
         public NET_DVR_DISPLAY_PARA struDisplayPara;
@@ -2886,8 +2818,7 @@ public interface HCNetSDK extends StdCallLibrary {
     {
 
         public NativeLong lChannel; // 通道号
-        public int
-                dwFileType; // 录象文件类型0xff－全部，0－定时录像,1-移动侦测 ，2－报警触发，3-报警|移动侦测 4-报警&移动侦测 5-命令触发 6-手动录像
+        public int dwFileType; // 录象文件类型0xff－全部，0－定时录像,1-移动侦测 ，2－报警触发，3-报警|移动侦测 4-报警&移动侦测 5-命令触发 6-手动录像
         public int dwIsLocked; // 是否锁定 0-正常文件,1-锁定文件, 0xff表示所有文件
         public int dwUseCardNo; // 是否使用卡号
         public byte[] sCardNumber = new byte[32]; // 卡号
@@ -2922,21 +2853,13 @@ public interface HCNetSDK extends StdCallLibrary {
     public static interface FRealDataCallBack_V30 extends StdCallCallback {
 
         public void invoke(
-                NativeLong lRealHandle,
-                int dwDataType,
-                ByteByReference pBuffer,
-                int dwBufSize,
-                Pointer pUser);
+                NativeLong lRealHandle, int dwDataType, ByteByReference pBuffer, int dwBufSize, Pointer pUser);
     }
 
     public static interface FMSGCallBack extends StdCallCallback {
 
         public void invoke(
-                NativeLong lCommand,
-                NET_DVR_ALARMER pAlarmer,
-                RECV_ALARM pAlarmInfo,
-                int dwBufLen,
-                Pointer pUser);
+                NativeLong lCommand, NET_DVR_ALARMER pAlarmer, RECV_ALARM pAlarmInfo, int dwBufLen, Pointer pUser);
     }
 
     public static interface FMessCallBack extends StdCallCallback {
@@ -2951,14 +2874,12 @@ public interface HCNetSDK extends StdCallLibrary {
 
     public static interface FMessCallBack_NEW extends StdCallCallback {
 
-        public boolean invoke(
-                NativeLong lCommand, String sDVRIP, String pBuf, int dwBufLen, short dwLinkDVRPort);
+        public boolean invoke(NativeLong lCommand, String sDVRIP, String pBuf, int dwBufLen, short dwLinkDVRPort);
     }
 
     public static interface FMessageCallBack extends StdCallCallback {
 
-        public boolean invoke(
-                NativeLong lCommand, String sDVRIP, String pBuf, int dwBufLen, int dwUser);
+        public boolean invoke(NativeLong lCommand, String sDVRIP, String pBuf, int dwBufLen, int dwUser);
     }
 
     public static interface FExceptionCallBack extends StdCallCallback {
@@ -2973,62 +2894,36 @@ public interface HCNetSDK extends StdCallLibrary {
 
     public static interface FStdDataCallBack extends StdCallCallback {
 
-        public void invoke(
-                NativeLong lRealHandle,
-                int dwDataType,
-                ByteByReference pBuffer,
-                int dwBufSize,
-                int dwUser);
+        public void invoke(NativeLong lRealHandle, int dwDataType, ByteByReference pBuffer, int dwBufSize, int dwUser);
     }
 
     public static interface FPlayDataCallBack extends StdCallCallback {
 
-        public void invoke(
-                NativeLong lPlayHandle,
-                int dwDataType,
-                ByteByReference pBuffer,
-                int dwBufSize,
-                int dwUser);
+        public void invoke(NativeLong lPlayHandle, int dwDataType, ByteByReference pBuffer, int dwBufSize, int dwUser);
     }
 
     public static interface FVoiceDataCallBack extends StdCallCallback {
 
         public void invoke(
-                NativeLong lVoiceComHandle,
-                String pRecvDataBuffer,
-                int dwBufSize,
-                byte byAudioFlag,
-                int dwUser);
+                NativeLong lVoiceComHandle, String pRecvDataBuffer, int dwBufSize, byte byAudioFlag, int dwUser);
     }
 
     public static interface FVoiceDataCallBack_V30 extends StdCallCallback {
 
         public void invoke(
-                NativeLong lVoiceComHandle,
-                String pRecvDataBuffer,
-                int dwBufSize,
-                byte byAudioFlag,
-                Pointer pUser);
+                NativeLong lVoiceComHandle, String pRecvDataBuffer, int dwBufSize, byte byAudioFlag, Pointer pUser);
     }
 
     public static interface FVoiceDataCallBack_MR extends StdCallCallback {
 
         public void invoke(
-                NativeLong lVoiceComHandle,
-                String pRecvDataBuffer,
-                int dwBufSize,
-                byte byAudioFlag,
-                int dwUser);
+                NativeLong lVoiceComHandle, String pRecvDataBuffer, int dwBufSize, byte byAudioFlag, int dwUser);
     }
 
     public static interface FVoiceDataCallBack_MR_V30 extends StdCallCallback {
 
         public void invoke(
-                NativeLong lVoiceComHandle,
-                String pRecvDataBuffer,
-                int dwBufSize,
-                byte byAudioFlag,
-                String pUser);
+                NativeLong lVoiceComHandle, String pRecvDataBuffer, int dwBufSize, byte byAudioFlag, String pUser);
     }
 
     public static interface FVoiceDataCallBack2 extends StdCallCallback {
@@ -3038,8 +2933,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
     public static interface FSerialDataCallBack extends StdCallCallback {
 
-        public void invoke(
-                NativeLong lSerialHandle, String pRecvDataBuffer, int dwBufSize, int dwUser);
+        public void invoke(NativeLong lSerialHandle, String pRecvDataBuffer, int dwBufSize, int dwUser);
     }
 
     public static interface FRowDataCallBack extends StdCallCallback {
@@ -3126,24 +3020,15 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_StopListen();
 
-    NativeLong NET_DVR_StartListen_V30(
-            String sLocalIP, short wLocalPort, FMSGCallBack DataCallback, Pointer pUserData);
+    NativeLong NET_DVR_StartListen_V30(String sLocalIP, short wLocalPort, FMSGCallBack DataCallback, Pointer pUserData);
 
     boolean NET_DVR_StopListen_V30(NativeLong lListenHandle);
 
     NativeLong NET_DVR_Login(
-            String sDVRIP,
-            short wDVRPort,
-            String sUserName,
-            String sPassword,
-            NET_DVR_DEVICEINFO lpDeviceInfo);
+            String sDVRIP, short wDVRPort, String sUserName, String sPassword, NET_DVR_DEVICEINFO lpDeviceInfo);
 
     NativeLong NET_DVR_Login_V30(
-            String sDVRIP,
-            short wDVRPort,
-            String sUserName,
-            String sPassword,
-            NET_DVR_DEVICEINFO_V30 lpDeviceInfo);
+            String sDVRIP, short wDVRPort, String sUserName, String sPassword, NET_DVR_DEVICEINFO_V30 lpDeviceInfo);
 
     boolean NET_DVR_Logout(NativeLong lUserID);
 
@@ -3208,11 +3093,9 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_StopSaveRealData(NativeLong lRealHandle);
 
-    boolean NET_DVR_SetRealDataCallBack(
-            NativeLong lRealHandle, FRowDataCallBack fRealDataCallBack, int dwUser);
+    boolean NET_DVR_SetRealDataCallBack(NativeLong lRealHandle, FRowDataCallBack fRealDataCallBack, int dwUser);
 
-    boolean NET_DVR_SetStandardDataCallBack(
-            NativeLong lRealHandle, FStdDataCallBack fStdDataCallBack, int dwUser);
+    boolean NET_DVR_SetStandardDataCallBack(NativeLong lRealHandle, FStdDataCallBack fStdDataCallBack, int dwUser);
 
     boolean NET_DVR_CapturePicture(NativeLong lRealHandle, String sPicFileName); // bmp
 
@@ -3224,18 +3107,15 @@ public interface HCNetSDK extends StdCallLibrary {
     // 云台控制相关接口
     boolean NET_DVR_PTZControl(NativeLong lRealHandle, int dwPTZCommand, int dwStop);
 
-    boolean NET_DVR_PTZControl_Other(
-            NativeLong lUserID, NativeLong lChannel, int dwPTZCommand, int dwStop);
+    boolean NET_DVR_PTZControl_Other(NativeLong lUserID, NativeLong lChannel, int dwPTZCommand, int dwStop);
 
     boolean NET_DVR_TransPTZ(NativeLong lRealHandle, String pPTZCodeBuf, int dwBufSize);
 
-    boolean NET_DVR_TransPTZ_Other(
-            NativeLong lUserID, NativeLong lChannel, String pPTZCodeBuf, int dwBufSize);
+    boolean NET_DVR_TransPTZ_Other(NativeLong lUserID, NativeLong lChannel, String pPTZCodeBuf, int dwBufSize);
 
     boolean NET_DVR_PTZPreset(NativeLong lRealHandle, int dwPTZPresetCmd, int dwPresetIndex);
 
-    boolean NET_DVR_PTZPreset_Other(
-            NativeLong lUserID, NativeLong lChannel, int dwPTZPresetCmd, int dwPresetIndex);
+    boolean NET_DVR_PTZPreset_Other(NativeLong lUserID, NativeLong lChannel, int dwPTZPresetCmd, int dwPresetIndex);
 
     boolean NET_DVR_TransPTZ_EX(NativeLong lRealHandle, String pPTZCodeBuf, int dwBufSize);
 
@@ -3244,11 +3124,7 @@ public interface HCNetSDK extends StdCallLibrary {
     boolean NET_DVR_PTZPreset_EX(NativeLong lRealHandle, int dwPTZPresetCmd, int dwPresetIndex);
 
     boolean NET_DVR_PTZCruise(
-            NativeLong lRealHandle,
-            int dwPTZCruiseCmd,
-            byte byCruiseRoute,
-            byte byCruisePoint,
-            short wInput);
+            NativeLong lRealHandle, int dwPTZCruiseCmd, byte byCruiseRoute, byte byCruisePoint, short wInput);
 
     boolean NET_DVR_PTZCruise_Other(
             NativeLong lUserID,
@@ -3259,11 +3135,7 @@ public interface HCNetSDK extends StdCallLibrary {
             short wInput);
 
     boolean NET_DVR_PTZCruise_EX(
-            NativeLong lRealHandle,
-            int dwPTZCruiseCmd,
-            byte byCruiseRoute,
-            byte byCruisePoint,
-            short wInput);
+            NativeLong lRealHandle, int dwPTZCruiseCmd, byte byCruiseRoute, byte byCruisePoint, short wInput);
 
     boolean NET_DVR_PTZTrack(NativeLong lRealHandle, int dwPTZTrackCmd);
 
@@ -3271,35 +3143,25 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_PTZTrack_EX(NativeLong lRealHandle, int dwPTZTrackCmd);
 
-    boolean NET_DVR_PTZControlWithSpeed(
-            NativeLong lRealHandle, int dwPTZCommand, int dwStop, int dwSpeed);
+    boolean NET_DVR_PTZControlWithSpeed(NativeLong lRealHandle, int dwPTZCommand, int dwStop, int dwSpeed);
 
     boolean NET_DVR_PTZControlWithSpeed_Other(
             NativeLong lUserID, NativeLong lChannel, int dwPTZCommand, int dwStop, int dwSpeed);
 
-    boolean NET_DVR_PTZControlWithSpeed_EX(
-            NativeLong lRealHandle, int dwPTZCommand, int dwStop, int dwSpeed);
+    boolean NET_DVR_PTZControlWithSpeed_EX(NativeLong lRealHandle, int dwPTZCommand, int dwStop, int dwSpeed);
 
     boolean NET_DVR_GetPTZCruise(
-            NativeLong lUserID,
-            NativeLong lChannel,
-            NativeLong lCruiseRoute,
-            NET_DVR_CRUISE_RET lpCruiseRet);
+            NativeLong lUserID, NativeLong lChannel, NativeLong lCruiseRoute, NET_DVR_CRUISE_RET lpCruiseRet);
 
     boolean NET_DVR_PTZMltTrack(NativeLong lRealHandle, int dwPTZTrackCmd, int dwTrackIndex);
 
-    boolean NET_DVR_PTZMltTrack_Other(
-            NativeLong lUserID, NativeLong lChannel, int dwPTZTrackCmd, int dwTrackIndex);
+    boolean NET_DVR_PTZMltTrack_Other(NativeLong lUserID, NativeLong lChannel, int dwPTZTrackCmd, int dwTrackIndex);
 
     boolean NET_DVR_PTZMltTrack_EX(NativeLong lRealHandle, int dwPTZTrackCmd, int dwTrackIndex);
 
     // 文件查找与回放
     NativeLong NET_DVR_FindFile(
-            NativeLong lUserID,
-            NativeLong lChannel,
-            int dwFileType,
-            NET_DVR_TIME lpStartTime,
-            NET_DVR_TIME lpStopTime);
+            NativeLong lUserID, NativeLong lChannel, int dwFileType, NET_DVR_TIME lpStartTime, NET_DVR_TIME lpStopTime);
 
     NativeLong NET_DVR_FindNextFile(NativeLong lFindHandle, NET_DVR_FIND_DATA lpFindData);
 
@@ -3315,11 +3177,7 @@ public interface HCNetSDK extends StdCallLibrary {
     NativeLong NET_DVR_FindNextFile_Card(NativeLong lFindHandle, NET_DVR_FINDDATA_CARD lpFindData);
 
     NativeLong NET_DVR_FindFile_Card(
-            NativeLong lUserID,
-            NativeLong lChannel,
-            int dwFileType,
-            NET_DVR_TIME lpStartTime,
-            NET_DVR_TIME lpStopTime);
+            NativeLong lUserID, NativeLong lChannel, int dwFileType, NET_DVR_TIME lpStartTime, NET_DVR_TIME lpStopTime);
 
     boolean NET_DVR_LockFileByName(NativeLong lUserID, String sLockFileName);
 
@@ -3328,19 +3186,14 @@ public interface HCNetSDK extends StdCallLibrary {
     NativeLong NET_DVR_PlayBackByName(NativeLong lUserID, String sPlayBackFileName, HWND hWnd);
 
     NativeLong NET_DVR_PlayBackByTime(
-            NativeLong lUserID,
-            NativeLong lChannel,
-            NET_DVR_TIME lpStartTime,
-            NET_DVR_TIME lpStopTime,
-            HWND hWnd);
+            NativeLong lUserID, NativeLong lChannel, NET_DVR_TIME lpStartTime, NET_DVR_TIME lpStopTime, HWND hWnd);
 
     boolean NET_DVR_PlayBackControl(
             NativeLong lPlayHandle, int dwControlCode, int dwInValue, IntByReference LPOutValue);
 
     boolean NET_DVR_StopPlayBack(NativeLong lPlayHandle);
 
-    boolean NET_DVR_SetPlayDataCallBack(
-            NativeLong lPlayHandle, FPlayDataCallBack fPlayDataCallBack, int dwUser);
+    boolean NET_DVR_SetPlayDataCallBack(NativeLong lPlayHandle, FPlayDataCallBack fPlayDataCallBack, int dwUser);
 
     boolean NET_DVR_PlayBackSaveData(NativeLong lPlayHandle, String sFileName);
 
@@ -3350,8 +3203,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_PlayBackCaptureFile(NativeLong lPlayHandle, String sFileName);
 
-    NativeLong NET_DVR_GetFileByName(
-            NativeLong lUserID, String sDVRFileName, String sSavedFileName);
+    NativeLong NET_DVR_GetFileByName(NativeLong lUserID, String sDVRFileName, String sSavedFileName);
 
     NativeLong NET_DVR_GetFileByTime(
             NativeLong lUserID,
@@ -3398,8 +3250,7 @@ public interface HCNetSDK extends StdCallLibrary {
     boolean NET_DVR_CloseAlarmChan_V30(NativeLong lAlarmHandle);
 
     // 语音对讲
-    NativeLong NET_DVR_StartVoiceCom(
-            NativeLong lUserID, FVoiceDataCallBack fVoiceDataCallBack, int dwUser);
+    NativeLong NET_DVR_StartVoiceCom(NativeLong lUserID, FVoiceDataCallBack fVoiceDataCallBack, int dwUser);
 
     NativeLong NET_DVR_StartVoiceCom_V30(
             NativeLong lUserID,
@@ -3413,14 +3264,10 @@ public interface HCNetSDK extends StdCallLibrary {
     boolean NET_DVR_StopVoiceCom(NativeLong lVoiceComHandle);
 
     // 语音转发
-    NativeLong NET_DVR_StartVoiceCom_MR(
-            NativeLong lUserID, FVoiceDataCallBack_MR fVoiceDataCallBack, int dwUser);
+    NativeLong NET_DVR_StartVoiceCom_MR(NativeLong lUserID, FVoiceDataCallBack_MR fVoiceDataCallBack, int dwUser);
 
     NativeLong NET_DVR_StartVoiceCom_MR_V30(
-            NativeLong lUserID,
-            int dwVoiceChan,
-            FVoiceDataCallBack_MR_V30 fVoiceDataCallBack,
-            Pointer pUser);
+            NativeLong lUserID, int dwVoiceChan, FVoiceDataCallBack_MR_V30 fVoiceDataCallBack, Pointer pUser);
 
     boolean NET_DVR_VoiceComSendData(NativeLong lVoiceComHandle, String pSendBuf, int dwBufSize);
 
@@ -3442,25 +3289,17 @@ public interface HCNetSDK extends StdCallLibrary {
     ////////////////////////////////////////////////////////////
     // 透明通道设置
     NativeLong NET_DVR_SerialStart(
-            NativeLong lUserID,
-            NativeLong lSerialPort,
-            FSerialDataCallBack fSerialDataCallBack,
-            int dwUser);
+            NativeLong lUserID, NativeLong lSerialPort, FSerialDataCallBack fSerialDataCallBack, int dwUser);
 
     // 485作为透明通道时，需要指明通道号，因为不同通道号485的设置可以不同(比如波特率)
-    boolean NET_DVR_SerialSend(
-            NativeLong lSerialHandle, NativeLong lChannel, String pSendBuf, int dwBufSize);
+    boolean NET_DVR_SerialSend(NativeLong lSerialHandle, NativeLong lChannel, String pSendBuf, int dwBufSize);
 
     boolean NET_DVR_SerialStop(NativeLong lSerialHandle);
 
     boolean NET_DVR_SendTo232Port(NativeLong lUserID, String pSendBuf, int dwBufSize);
 
     boolean NET_DVR_SendToSerialPort(
-            NativeLong lUserID,
-            int dwSerialPort,
-            int dwSerialIndex,
-            String pSendBuf,
-            int dwBufSize);
+            NativeLong lUserID, int dwSerialPort, int dwSerialIndex, String pSendBuf, int dwBufSize);
 
     // 解码 nBitrate = 16000
     Pointer NET_DVR_InitG722Decoder(int nBitrate);
@@ -3493,8 +3332,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_ReleaseDDraw_Card();
 
-    NativeLong NET_DVR_RealPlay_Card(
-            NativeLong lUserID, NET_DVR_CARDINFO lpCardInfo, NativeLong lChannelNum);
+    NativeLong NET_DVR_RealPlay_Card(NativeLong lUserID, NET_DVR_CARDINFO lpCardInfo, NativeLong lChannelNum);
 
     boolean NET_DVR_ResetPara_Card(NativeLong lRealHandle, NET_DVR_DISPLAY_PARA lpDisplayPara);
 
@@ -3561,10 +3399,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
     // 2005-09-15
     boolean NET_DVR_CaptureJPEGPicture(
-            NativeLong lUserID,
-            NativeLong lChannel,
-            NET_DVR_JPEGPARA lpJpegPara,
-            String sPicFileName);
+            NativeLong lUserID, NativeLong lChannel, NET_DVR_JPEGPARA lpJpegPara, String sPicFileName);
 
     // JPEG抓图到内存
     boolean NET_DVR_CaptureJPEGPicture_NEW(
@@ -3605,24 +3440,19 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_PTZSelZoomIn(NativeLong lRealHandle, NET_DVR_POINT_FRAME pStruPointFrame);
 
-    boolean NET_DVR_PTZSelZoomIn_EX(
-            NativeLong lUserID, NativeLong lChannel, NET_DVR_POINT_FRAME pStruPointFrame);
+    boolean NET_DVR_PTZSelZoomIn_EX(NativeLong lUserID, NativeLong lChannel, NET_DVR_POINT_FRAME pStruPointFrame);
 
     // 解码设备DS-6001D/DS-6001F
-    boolean NET_DVR_StartDecode(
-            NativeLong lUserID, NativeLong lChannel, NET_DVR_DECODERINFO lpDecoderinfo);
+    boolean NET_DVR_StartDecode(NativeLong lUserID, NativeLong lChannel, NET_DVR_DECODERINFO lpDecoderinfo);
 
     boolean NET_DVR_StopDecode(NativeLong lUserID, NativeLong lChannel);
 
-    boolean NET_DVR_GetDecoderState(
-            NativeLong lUserID, NativeLong lChannel, NET_DVR_DECODERSTATE lpDecoderState);
+    boolean NET_DVR_GetDecoderState(NativeLong lUserID, NativeLong lChannel, NET_DVR_DECODERSTATE lpDecoderState);
 
     // 2005-08-01
-    boolean NET_DVR_SetDecInfo(
-            NativeLong lUserID, NativeLong lChannel, NET_DVR_DECCFG lpDecoderinfo);
+    boolean NET_DVR_SetDecInfo(NativeLong lUserID, NativeLong lChannel, NET_DVR_DECCFG lpDecoderinfo);
 
-    boolean NET_DVR_GetDecInfo(
-            NativeLong lUserID, NativeLong lChannel, NET_DVR_DECCFG lpDecoderinfo);
+    boolean NET_DVR_GetDecInfo(NativeLong lUserID, NativeLong lChannel, NET_DVR_DECCFG lpDecoderinfo);
 
     boolean NET_DVR_SetDecTransPort(NativeLong lUserID, NET_DVR_PORTCFG lpTransPort);
 
@@ -3636,66 +3466,50 @@ public interface HCNetSDK extends StdCallLibrary {
             IntByReference LPOutValue,
             NET_DVR_PLAYREMOTEFILE lpRemoteFileInfo);
 
-    boolean NET_DVR_StartDecSpecialCon(
-            NativeLong lUserID, NativeLong lChannel, NET_DVR_DECCHANINFO lpDecChanInfo);
+    boolean NET_DVR_StartDecSpecialCon(NativeLong lUserID, NativeLong lChannel, NET_DVR_DECCHANINFO lpDecChanInfo);
 
-    boolean NET_DVR_StopDecSpecialCon(
-            NativeLong lUserID, NativeLong lChannel, NET_DVR_DECCHANINFO lpDecChanInfo);
+    boolean NET_DVR_StopDecSpecialCon(NativeLong lUserID, NativeLong lChannel, NET_DVR_DECCHANINFO lpDecChanInfo);
 
     boolean NET_DVR_DecCtrlDec(NativeLong lUserID, NativeLong lChannel, int dwControlCode);
 
     boolean NET_DVR_DecCtrlScreen(NativeLong lUserID, NativeLong lChannel, int dwControl);
 
-    boolean NET_DVR_GetDecCurLinkStatus(
-            NativeLong lUserID, NativeLong lChannel, NET_DVR_DECSTATUS lpDecStatus);
+    boolean NET_DVR_GetDecCurLinkStatus(NativeLong lUserID, NativeLong lChannel, NET_DVR_DECSTATUS lpDecStatus);
 
     // 多路解码器
     // 2007-11-30 V211支持以下接口 //11
-    boolean NET_DVR_MatrixStartDynamic(
-            NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_DYNAMIC_DEC lpDynamicInfo);
+    boolean NET_DVR_MatrixStartDynamic(NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_DYNAMIC_DEC lpDynamicInfo);
 
     boolean NET_DVR_MatrixStopDynamic(NativeLong lUserID, int dwDecChanNum);
 
-    boolean NET_DVR_MatrixGetDecChanInfo(
-            NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_DEC_CHAN_INFO lpInter);
+    boolean NET_DVR_MatrixGetDecChanInfo(NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_DEC_CHAN_INFO lpInter);
 
-    boolean NET_DVR_MatrixSetLoopDecChanInfo(
-            NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_LOOP_DECINFO lpInter);
+    boolean NET_DVR_MatrixSetLoopDecChanInfo(NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_LOOP_DECINFO lpInter);
 
-    boolean NET_DVR_MatrixGetLoopDecChanInfo(
-            NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_LOOP_DECINFO lpInter);
+    boolean NET_DVR_MatrixGetLoopDecChanInfo(NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_LOOP_DECINFO lpInter);
 
     boolean NET_DVR_MatrixSetLoopDecChanEnable(NativeLong lUserID, int dwDecChanNum, int dwEnable);
 
-    boolean NET_DVR_MatrixGetLoopDecChanEnable(
-            NativeLong lUserID, int dwDecChanNum, IntByReference lpdwEnable);
+    boolean NET_DVR_MatrixGetLoopDecChanEnable(NativeLong lUserID, int dwDecChanNum, IntByReference lpdwEnable);
 
     boolean NET_DVR_MatrixGetLoopDecEnable(NativeLong lUserID, IntByReference lpdwEnable);
 
     boolean NET_DVR_MatrixSetDecChanEnable(NativeLong lUserID, int dwDecChanNum, int dwEnable);
 
-    boolean NET_DVR_MatrixGetDecChanEnable(
-            NativeLong lUserID, int dwDecChanNum, IntByReference lpdwEnable);
+    boolean NET_DVR_MatrixGetDecChanEnable(NativeLong lUserID, int dwDecChanNum, IntByReference lpdwEnable);
 
     boolean NET_DVR_MatrixGetDecChanStatus(
             NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_DEC_CHAN_STATUS lpInter);
 
     // 2007-12-22 增加支持接口 //18
-    boolean NET_DVR_MatrixSetTranInfo(
-            NativeLong lUserID, NET_DVR_MATRIX_TRAN_CHAN_CONFIG lpTranInfo);
+    boolean NET_DVR_MatrixSetTranInfo(NativeLong lUserID, NET_DVR_MATRIX_TRAN_CHAN_CONFIG lpTranInfo);
 
-    boolean NET_DVR_MatrixGetTranInfo(
-            NativeLong lUserID, NET_DVR_MATRIX_TRAN_CHAN_CONFIG lpTranInfo);
+    boolean NET_DVR_MatrixGetTranInfo(NativeLong lUserID, NET_DVR_MATRIX_TRAN_CHAN_CONFIG lpTranInfo);
 
-    boolean NET_DVR_MatrixSetRemotePlay(
-            NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_DEC_REMOTE_PLAY lpInter);
+    boolean NET_DVR_MatrixSetRemotePlay(NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_DEC_REMOTE_PLAY lpInter);
 
     boolean NET_DVR_MatrixSetRemotePlayControl(
-            NativeLong lUserID,
-            int dwDecChanNum,
-            int dwControlCode,
-            int dwInValue,
-            IntByReference LPOutValue);
+            NativeLong lUserID, int dwDecChanNum, int dwControlCode, int dwInValue, IntByReference LPOutValue);
 
     boolean NET_DVR_MatrixGetRemotePlayStatus(
             NativeLong lUserID, int dwDecChanNum, NET_DVR_MATRIX_DEC_REMOTE_PLAY_STATUS lpOuter);
@@ -3725,11 +3539,7 @@ public interface HCNetSDK extends StdCallLibrary {
             IntByReference lpBytesReturned);
 
     boolean NET_DVR_SetDVRConfig(
-            NativeLong lUserID,
-            int dwCommand,
-            NativeLong lChannel,
-            Pointer lpInBuffer,
-            int dwInBufferSize);
+            NativeLong lUserID, int dwCommand, NativeLong lChannel, Pointer lpInBuffer, int dwInBufferSize);
 
     boolean NET_DVR_GetDVRWorkState_V30(NativeLong lUserID, NET_DVR_WORKSTATE_V30 lpWorkState);
 
@@ -3755,26 +3565,19 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_ClientSetframeformat(NativeLong lUserID, NET_DVR_FRAMEFORMAT lpFrameFormat);
 
-    boolean NET_DVR_ClientGetframeformat_V30(
-            NativeLong lUserID, NET_DVR_FRAMEFORMAT_V30 lpFrameFormat);
+    boolean NET_DVR_ClientGetframeformat_V30(NativeLong lUserID, NET_DVR_FRAMEFORMAT_V30 lpFrameFormat);
 
-    boolean NET_DVR_ClientSetframeformat_V30(
-            NativeLong lUserID, NET_DVR_FRAMEFORMAT_V30 lpFrameFormat);
+    boolean NET_DVR_ClientSetframeformat_V30(NativeLong lUserID, NET_DVR_FRAMEFORMAT_V30 lpFrameFormat);
 
     boolean NET_DVR_GetAlarmOut_V30(NativeLong lUserID, NET_DVR_ALARMOUTSTATUS_V30 lpAlarmOutState);
 
     boolean NET_DVR_GetAlarmOut(NativeLong lUserID, NET_DVR_ALARMOUTSTATUS lpAlarmOutState);
 
-    boolean NET_DVR_SetAlarmOut(
-            NativeLong lUserID, NativeLong lAlarmOutPort, NativeLong lAlarmOutStatic);
+    boolean NET_DVR_SetAlarmOut(NativeLong lUserID, NativeLong lAlarmOutPort, NativeLong lAlarmOutStatic);
 
     // 视频参数调节
     boolean NET_DVR_ClientSetVideoEffect(
-            NativeLong lRealHandle,
-            int dwBrightValue,
-            int dwContrastValue,
-            int dwSaturationValue,
-            int dwHueValue);
+            NativeLong lRealHandle, int dwBrightValue, int dwContrastValue, int dwSaturationValue, int dwHueValue);
 
     boolean NET_DVR_ClientGetVideoEffect(
             NativeLong lRealHandle,
@@ -3788,8 +3591,7 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_SetConfigFile(NativeLong lUserID, String sFileName);
 
-    boolean NET_DVR_GetConfigFile_V30(
-            NativeLong lUserID, String sOutBuffer, int dwOutSize, IntByReference pReturnSize);
+    boolean NET_DVR_GetConfigFile_V30(NativeLong lUserID, String sOutBuffer, int dwOutSize, IntByReference pReturnSize);
 
     boolean NET_DVR_GetConfigFile_EX(NativeLong lUserID, String sOutBuffer, int dwOutSize);
 
@@ -3809,11 +3611,9 @@ public interface HCNetSDK extends StdCallLibrary {
 
     boolean NET_DVR_UnLockPanel(NativeLong lUserID);
 
-    boolean NET_DVR_SetRtspConfig(
-            NativeLong lUserID, int dwCommand, NET_DVR_RTSPCFG lpInBuffer, int dwInBufferSize);
+    boolean NET_DVR_SetRtspConfig(NativeLong lUserID, int dwCommand, NET_DVR_RTSPCFG lpInBuffer, int dwInBufferSize);
 
-    boolean NET_DVR_GetRtspConfig(
-            NativeLong lUserID, int dwCommand, NET_DVR_RTSPCFG lpOutBuffer, int dwOutBufferSize);
+    boolean NET_DVR_GetRtspConfig(NativeLong lUserID, int dwCommand, NET_DVR_RTSPCFG lpOutBuffer, int dwOutBufferSize);
 }
 
 // 播放库函数声明,PlayCtrl.dll
@@ -3826,8 +3626,7 @@ interface PlayCtrl extends StdCallLibrary {
 
     boolean PlayM4_GetPort(NativeLongByReference nPort);
 
-    boolean PlayM4_OpenStream(
-            NativeLong nPort, ByteByReference pFileHeadBuf, int nSize, int nBufPoolSize);
+    boolean PlayM4_OpenStream(NativeLong nPort, ByteByReference pFileHeadBuf, int nSize, int nBufPoolSize);
 
     boolean PlayM4_InputData(NativeLong nPort, ByteByReference pBuf, int nSize);
 
@@ -3839,8 +3638,7 @@ interface PlayCtrl extends StdCallLibrary {
 
     boolean PlayM4_Stop(NativeLong nPort);
 
-    boolean PlayM4_SetSecretKey(
-            NativeLong nPort, NativeLong lKeyType, String pSecretKey, NativeLong lKeyLen);
+    boolean PlayM4_SetSecretKey(NativeLong nPort, NativeLong lKeyType, String pSecretKey, NativeLong lKeyLen);
 }
 
 // windows gdi接口,gdi32.dll in system32 folder, 在设置遮挡区域,移动侦测区域等情况下使用

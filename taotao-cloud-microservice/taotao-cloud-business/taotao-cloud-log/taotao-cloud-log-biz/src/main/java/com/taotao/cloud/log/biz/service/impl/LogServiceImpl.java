@@ -39,7 +39,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -102,8 +101,7 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements ILog
         RequestLogger requestLogger = method.getAnnotation(RequestLogger.class);
 
         // 方法路径
-        String methodName =
-                joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
+        String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
 
         StringBuilder params = new StringBuilder("{");
         // 参数值

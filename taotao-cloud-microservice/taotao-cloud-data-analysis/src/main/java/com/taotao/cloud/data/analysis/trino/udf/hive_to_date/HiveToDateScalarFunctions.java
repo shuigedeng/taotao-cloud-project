@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udf.hive_to_date;
 
 import io.airlift.slice.Slice;
@@ -32,13 +33,13 @@ import java.util.Date;
  */
 public class HiveToDateScalarFunctions {
 
-	public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
 
-	@ScalarFunction("hive_to_date")
-	@Description("hive to_date function")
-	@SqlType(StandardTypes.TIMESTAMP)
-	public static Slice toDate(@SqlType(StandardTypes.TIMESTAMP) long input) {
-		final DateFormat format = new SimpleDateFormat(DATE_FORMAT);
-		return Slices.utf8Slice(format.format(new Date(input)));
-	}
+    @ScalarFunction("hive_to_date")
+    @Description("hive to_date function")
+    @SqlType(StandardTypes.TIMESTAMP)
+    public static Slice toDate(@SqlType(StandardTypes.TIMESTAMP) long input) {
+        final DateFormat format = new SimpleDateFormat(DATE_FORMAT);
+        return Slices.utf8Slice(format.format(new Date(input)));
+    }
 }

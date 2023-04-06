@@ -34,8 +34,7 @@ public class MemberMessageServiceImpl extends ServiceImpl<MemberMessageMapper, M
         implements MemberMessageService {
 
     @Override
-    public IPage<MemberMessage> getPage(
-            MemberMessageQueryVO memberMessageQueryVO, PageQuery PageQuery) {
+    public IPage<MemberMessage> getPage(MemberMessageQueryVO memberMessageQueryVO, PageQuery PageQuery) {
         QueryWrapper<MemberMessage> queryWrapper = new QueryWrapper<>();
         // 消息id
         queryWrapper.eq(
@@ -44,9 +43,7 @@ public class MemberMessageServiceImpl extends ServiceImpl<MemberMessageMapper, M
                 memberMessageQueryVO.getMessageId());
         // 消息标题
         queryWrapper.like(
-                StringUtils.isNotEmpty(memberMessageQueryVO.getTitle()),
-                "title",
-                memberMessageQueryVO.getTitle());
+                StringUtils.isNotEmpty(memberMessageQueryVO.getTitle()), "title", memberMessageQueryVO.getTitle());
         // 会员id
         queryWrapper.eq(
                 StringUtils.isNotEmpty(memberMessageQueryVO.getMemberId()),
@@ -54,9 +51,7 @@ public class MemberMessageServiceImpl extends ServiceImpl<MemberMessageMapper, M
                 memberMessageQueryVO.getMemberId());
         // 消息状态
         queryWrapper.eq(
-                StringUtils.isNotEmpty(memberMessageQueryVO.getStatus()),
-                "status",
-                memberMessageQueryVO.getStatus());
+                StringUtils.isNotEmpty(memberMessageQueryVO.getStatus()), "status", memberMessageQueryVO.getStatus());
         // 倒序
         queryWrapper.orderByDesc("create_time");
         // 构建查询

@@ -31,9 +31,11 @@ import org.springframework.stereotype.Component;
 public class BillExecute implements EveryDayExecute {
 
     /** 结算单 */
-    @Autowired private IBillService billService;
+    @Autowired
+    private IBillService billService;
     /** 店铺详情 */
-    @Autowired private IStoreDetailService storeDetailService;
+    @Autowired
+    private IStoreDetailService storeDetailService;
 
     /** 1.查询今日待结算的商家 2.查询商家上次结算日期，生成本次结算单 3.记录商家结算日 */
     @Override
@@ -52,9 +54,7 @@ public class BillExecute implements EveryDayExecute {
 
             // 生成结算单
             billService.createBill(
-                    storeSettlementDay.getStoreId(),
-                    storeSettlementDay.getSettlementDay(),
-                    LocalDateTime.now());
+                    storeSettlementDay.getStoreId(), storeSettlementDay.getSettlementDay(), LocalDateTime.now());
 
             // 修改店铺结算时间
             storeDetailService.updateSettlementDay(storeSettlementDay.getStoreId(), endTime);

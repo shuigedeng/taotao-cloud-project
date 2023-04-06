@@ -35,7 +35,8 @@ public class ChatUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId private Long userId;
+    @TableId
+    private Long userId;
     /** 昵称 */
     private String nickName;
     /** 介绍 */
@@ -70,7 +71,8 @@ public class ChatUser extends BaseEntity {
     @TableField(updateStrategy = FieldStrategy.NEVER)
     private Date createTime;
     /** 注销0正常null注销 */
-    @TableLogic private Integer deleted;
+    @TableLogic
+    private Integer deleted;
     /** 注销时间 */
     private Date deletedTime;
 

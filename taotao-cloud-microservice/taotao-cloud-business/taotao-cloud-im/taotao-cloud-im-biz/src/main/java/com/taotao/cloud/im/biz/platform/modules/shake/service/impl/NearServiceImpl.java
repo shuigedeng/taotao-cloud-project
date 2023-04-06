@@ -40,9 +40,11 @@ import org.springframework.util.CollectionUtils;
 @Service("nearService")
 public class NearServiceImpl implements NearService {
 
-    @Autowired private GeoHashUtils geoHashUtils;
+    @Autowired
+    private GeoHashUtils geoHashUtils;
 
-    @Resource private ChatUserService chatUserService;
+    @Resource
+    private ChatUserService chatUserService;
 
     @Override
     public List<NearVo02> doNear(NearVo01 nearVo) {
@@ -60,55 +62,49 @@ public class NearServiceImpl implements NearService {
         // 当前用户ID
         String userId = NumberUtil.toStr(ShiroUtils.getUserId());
         // 保存坐标
-        geoHashUtils.add(
-                ApiConstant.REDIS_NEAR, nearVo.getLongitude(), nearVo.getLatitude(), userId);
+        geoHashUtils.add(ApiConstant.REDIS_NEAR, nearVo.getLongitude(), nearVo.getLatitude(), userId);
     }
 
     private List<NearVo02> getNear() {
         // 当前用户
         String userId = NumberUtil.toStr(ShiroUtils.getUserId());
         // 100公里内的9999个用户
-        List<GeoResult<GeoVo>> geoResults =
-                geoHashUtils.radius(ApiConstant.REDIS_NEAR, userId, 100, 9999);
+        List<GeoResult<GeoVo>> geoResults = geoHashUtils.radius(ApiConstant.REDIS_NEAR, userId, 100, 9999);
         // 过滤
         List<String> userList = new ArrayList<>();
-        List<NearVo02> dataList =
-                geoResults.stream()
-                        .collect(
-                                ArrayList::new,
-                                (x, y) -> {
-                                    String name = JSONUtil.parseObj(y.getContent()).getStr("name");
-                                    if (!userId.equals(name)) {
-                                        userList.add(name);
-                                        NearVo02 nearVo =
-                                                new NearVo02()
-                                                        .setUserId(NumberUtil.parseLong(name))
-                                                        .setDistance(y.getDistance().getValue())
-                                                        .setDistanceUnit(y.getDistance().getUnit());
-                                        x.add(nearVo);
-                                    }
-                                },
-                                ArrayList::addAll);
+        List<NearVo02> dataList = geoResults.stream()
+                .collect(
+                        ArrayList::new,
+                        (x, y) -> {
+                            String name = JSONUtil.parseObj(y.getContent()).getStr("name");
+                            if (!userId.equals(name)) {
+                                userList.add(name);
+                                NearVo02 nearVo = new NearVo02()
+                                        .setUserId(NumberUtil.parseLong(name))
+                                        .setDistance(y.getDistance().getValue())
+                                        .setDistanceUnit(y.getDistance().getUnit());
+                                x.add(nearVo);
+                            }
+                        },
+                        ArrayList::addAll);
         if (CollectionUtils.isEmpty(userList)) {
             return dataList;
         }
-        HashMap<Long, ChatUser> mapList =
-                chatUserService.getByIds(userList).stream()
-                        .collect(
-                                HashMap::new,
-                                (x, y) -> {
-                                    x.put(y.getUserId(), y);
-                                },
-                                HashMap::putAll);
+        HashMap<Long, ChatUser> mapList = chatUserService.getByIds(userList).stream()
+                .collect(
+                        HashMap::new,
+                        (x, y) -> {
+                            x.put(y.getUserId(), y);
+                        },
+                        HashMap::putAll);
         // 转换
-        dataList.forEach(
-                e -> {
-                    ChatUser chatUser = ChatUser.initUser(mapList.get(e.getUserId()));
-                    e.setPortrait(chatUser.getPortrait())
-                            .setIntro(chatUser.getIntro())
-                            .setNickName(chatUser.getNickName())
-                            .setGender(chatUser.getGender());
-                });
+        dataList.forEach(e -> {
+            ChatUser chatUser = ChatUser.initUser(mapList.get(e.getUserId()));
+            e.setPortrait(chatUser.getPortrait())
+                    .setIntro(chatUser.getIntro())
+                    .setNickName(chatUser.getNickName())
+                    .setGender(chatUser.getGender());
+        });
         return dataList;
     }
 }

@@ -50,7 +50,8 @@ public class RefundOrder extends BaseModel {
     private static final long serialVersionUID = 1L;
 
     /** 退款订单号（支付系统生成订单号） */
-    @TableId private String refundOrderId;
+    @TableId
+    private String refundOrderId;
 
     /** 支付订单号（与t_pay_order对应） */
     private String payOrderId;

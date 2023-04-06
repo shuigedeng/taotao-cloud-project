@@ -44,21 +44,20 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class BpmUserGroupController {
 
-    @Resource private BpmUserGroupService userGroupService;
+    @Resource
+    private BpmUserGroupService userGroupService;
 
     @PostMapping("/create")
     @ApiOperation("创建用户组")
     @PreAuthorize("@ss.hasPermission('bpm:user-group:create')")
-    public CommonResult<Long> createUserGroup(
-            @Valid @RequestBody BpmUserGroupCreateReqVO createReqVO) {
+    public CommonResult<Long> createUserGroup(@Valid @RequestBody BpmUserGroupCreateReqVO createReqVO) {
         return success(userGroupService.createUserGroup(createReqVO));
     }
 
     @PutMapping("/update")
     @ApiOperation("更新用户组")
     @PreAuthorize("@ss.hasPermission('bpm:user-group:update')")
-    public CommonResult<Boolean> updateUserGroup(
-            @Valid @RequestBody BpmUserGroupUpdateReqVO updateReqVO) {
+    public CommonResult<Boolean> updateUserGroup(@Valid @RequestBody BpmUserGroupUpdateReqVO updateReqVO) {
         userGroupService.updateUserGroup(updateReqVO);
         return success(true);
     }
@@ -74,12 +73,7 @@ public class BpmUserGroupController {
 
     @GetMapping("/get")
     @ApiOperation("获得用户组")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('bpm:user-group:query')")
     public CommonResult<BpmUserGroupRespVO> getUserGroup(@RequestParam("id") Long id) {
         BpmUserGroupDO userGroup = userGroupService.getUserGroup(id);
@@ -89,8 +83,7 @@ public class BpmUserGroupController {
     @GetMapping("/page")
     @ApiOperation("获得用户组分页")
     @PreAuthorize("@ss.hasPermission('bpm:user-group:query')")
-    public CommonResult<PageResult<BpmUserGroupRespVO>> getUserGroupPage(
-            @Valid BpmUserGroupPageReqVO pageVO) {
+    public CommonResult<PageResult<BpmUserGroupRespVO>> getUserGroupPage(@Valid BpmUserGroupPageReqVO pageVO) {
         PageResult<BpmUserGroupDO> pageResult = userGroupService.getUserGroupPage(pageVO);
         return success(BpmUserGroupConvert.INSTANCE.convertPage(pageResult));
     }
@@ -99,8 +92,7 @@ public class BpmUserGroupController {
     @ApiOperation(value = "获取用户组精简信息列表", notes = "只包含被开启的用户组，主要用于前端的下拉选项")
     public CommonResult<List<BpmUserGroupRespVO>> getSimpleUserGroups() {
         // 获用户门列表，只要开启状态的
-        List<BpmUserGroupDO> list =
-                userGroupService.getUserGroupListByStatus(CommonStatusEnum.ENABLE.getStatus());
+        List<BpmUserGroupDO> list = userGroupService.getUserGroupListByStatus(CommonStatusEnum.ENABLE.getStatus());
         // 排序后，返回给前端
         return success(BpmUserGroupConvert.INSTANCE.convertList2(list));
     }

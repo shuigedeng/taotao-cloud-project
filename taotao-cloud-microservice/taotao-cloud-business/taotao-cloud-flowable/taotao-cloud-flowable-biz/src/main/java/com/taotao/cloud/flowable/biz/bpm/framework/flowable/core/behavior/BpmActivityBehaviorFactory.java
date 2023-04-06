@@ -39,7 +39,8 @@ import org.flowable.engine.impl.bpmn.parser.factory.DefaultActivityBehaviorFacto
 @ToString(callSuper = true)
 public class BpmActivityBehaviorFactory extends DefaultActivityBehaviorFactory {
 
-    @Setter private BpmTaskAssignRuleService bpmTaskRuleService;
+    @Setter
+    private BpmTaskAssignRuleService bpmTaskRuleService;
 
     @Override
     public UserTaskActivityBehavior createUserTaskActivityBehavior(UserTask userTask) {

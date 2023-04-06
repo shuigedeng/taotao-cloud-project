@@ -33,7 +33,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysDeployFormServiceImpl implements ISysDeployFormService {
-    @Autowired private SysDeployFormMapper sysDeployFormMapper;
+    @Autowired
+    private SysDeployFormMapper sysDeployFormMapper;
 
     /**
      * 查询流程实例关联表单
@@ -65,8 +66,7 @@ public class SysDeployFormServiceImpl implements ISysDeployFormService {
      */
     @Override
     public int insertSysDeployForm(SysDeployForm sysDeployForm) {
-        SysForm sysForm =
-                sysDeployFormMapper.selectSysDeployFormByDeployId(sysDeployForm.getDeployId());
+        SysForm sysForm = sysDeployFormMapper.selectSysDeployFormByDeployId(sysDeployForm.getDeployId());
         if (Objects.isNull(sysForm)) {
             return sysDeployFormMapper.insertSysDeployForm(sysDeployForm);
         } else {

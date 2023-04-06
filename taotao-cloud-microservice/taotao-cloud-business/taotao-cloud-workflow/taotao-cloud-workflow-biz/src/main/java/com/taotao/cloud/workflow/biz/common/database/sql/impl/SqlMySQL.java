@@ -34,67 +34,58 @@ public class SqlMySQL extends SqlBase {
 
     @Override
     protected void init() {
-        String fieldListSql =
-                "SELECT COLUMN_NAME "
-                        + DbAliasConst.FIELD_NAME
-                        + ",data_type "
-                        + DbAliasConst.DATA_TYPE
-                        + ",CHARACTER_MAXIMUM_LENGTH "
-                        + DbAliasConst.DATA_LENGTH
-                        + ", "
-                        + "NUMERIC_PRECISION AS "
-                        + DbAliasConst.PRECISION
-                        + ",NUMERIC_SCALE AS "
-                        + DbAliasConst.DECIMALS
-                        + ", "
-                        + "IF ( IS_NULLABLE = 'YES', '1', '0' ) "
-                        + DbAliasConst.ALLOW_NULL
-                        + ", COLUMN_COMMENT "
-                        + DbAliasConst.FIELD_COMMENT
-                        + ","
-                        + "IF ( COLUMN_KEY = 'PRI', '1', '0' ) "
-                        + DbAliasConst.PRIMARY_KEY
-                        + ", "
-                        + "column_default "
-                        + DbAliasConst.DEFAULTS
-                        + ","
-                        + "CONCAT(upper(COLUMN_NAME),'(',COLUMN_COMMENT,')') as 'F_DESCRIPTION' "
-                        + "FROM INFORMATION_SCHEMA.COLUMNS "
-                        + "WHERE TABLE_NAME = "
-                        + ParamEnum.TABLE.getParamSign()
-                        + " AND TABLE_SCHEMA= "
-                        + ParamEnum.DB_SCHEMA.getParamSign()
-                        + ";";
-        String tableListSql =
-                "SELECT table_name "
-                        + DbAliasConst.TABLE_NAME
-                        + ",table_rows "
-                        + DbAliasConst.TABLE_SUM
-                        + ","
-                        + " data_length "
-                        + DbAliasConst.TABLE_SIZE
-                        + ", table_comment "
-                        + DbAliasConst.TABLE_COMMENT
-                        + ", CONCAT(table_name,'(',table_comment,')') as 'F_DESCRIPTION' FROM"
-                        + " information_schema.TABLES WHERE TABLE_SCHEMA = "
-                        + ParamEnum.DB_NAME.getParamSign()
-                        + ";";
-        String existsTableSql =
-                "SELECT table_name "
-                        + DbAliasConst.TABLE_NAME
-                        + " FROM information_schema.TABLES WHERE "
-                        + "TABLE_SCHEMA = "
-                        + ParamEnum.DB_NAME.getParamSign()
-                        + " and table_name = "
-                        + ParamEnum.TABLE.getParamSign()
-                        + ";";
-        setInstance(
-                fieldListSql,
-                tableListSql,
-                existsTableSql,
-                "{table}:{dbName}",
-                "{dbName}:",
-                "{dbName}:{table}");
+        String fieldListSql = "SELECT COLUMN_NAME "
+                + DbAliasConst.FIELD_NAME
+                + ",data_type "
+                + DbAliasConst.DATA_TYPE
+                + ",CHARACTER_MAXIMUM_LENGTH "
+                + DbAliasConst.DATA_LENGTH
+                + ", "
+                + "NUMERIC_PRECISION AS "
+                + DbAliasConst.PRECISION
+                + ",NUMERIC_SCALE AS "
+                + DbAliasConst.DECIMALS
+                + ", "
+                + "IF ( IS_NULLABLE = 'YES', '1', '0' ) "
+                + DbAliasConst.ALLOW_NULL
+                + ", COLUMN_COMMENT "
+                + DbAliasConst.FIELD_COMMENT
+                + ","
+                + "IF ( COLUMN_KEY = 'PRI', '1', '0' ) "
+                + DbAliasConst.PRIMARY_KEY
+                + ", "
+                + "column_default "
+                + DbAliasConst.DEFAULTS
+                + ","
+                + "CONCAT(upper(COLUMN_NAME),'(',COLUMN_COMMENT,')') as 'F_DESCRIPTION' "
+                + "FROM INFORMATION_SCHEMA.COLUMNS "
+                + "WHERE TABLE_NAME = "
+                + ParamEnum.TABLE.getParamSign()
+                + " AND TABLE_SCHEMA= "
+                + ParamEnum.DB_SCHEMA.getParamSign()
+                + ";";
+        String tableListSql = "SELECT table_name "
+                + DbAliasConst.TABLE_NAME
+                + ",table_rows "
+                + DbAliasConst.TABLE_SUM
+                + ","
+                + " data_length "
+                + DbAliasConst.TABLE_SIZE
+                + ", table_comment "
+                + DbAliasConst.TABLE_COMMENT
+                + ", CONCAT(table_name,'(',table_comment,')') as 'F_DESCRIPTION' FROM"
+                + " information_schema.TABLES WHERE TABLE_SCHEMA = "
+                + ParamEnum.DB_NAME.getParamSign()
+                + ";";
+        String existsTableSql = "SELECT table_name "
+                + DbAliasConst.TABLE_NAME
+                + " FROM information_schema.TABLES WHERE "
+                + "TABLE_SCHEMA = "
+                + ParamEnum.DB_NAME.getParamSign()
+                + " and table_name = "
+                + ParamEnum.TABLE.getParamSign()
+                + ";";
+        setInstance(fieldListSql, tableListSql, existsTableSql, "{table}:{dbName}", "{dbName}:", "{dbName}:{table}");
     }
 
     @Override
@@ -112,15 +103,10 @@ public class SqlMySQL extends SqlBase {
         int startIndex = currentPage - 1;
         String sortSql = StringUtil.isEmpty(sortType) ? "" : " ORDER BY " + sortType;
         // 获取dataListSql
-        String dataListSql =
-                sql + sortSql + " LIMIT " + startIndex * pageSize + "," + pageSize + ";";
+        String dataListSql = sql + sortSql + " LIMIT " + startIndex * pageSize + "," + pageSize + ";";
         // 获取totalSql
         String totalSql =
-                "SELECT COUNT(*) "
-                        + DbAliasEnum.TOTAL_RECORD.asByDb(this.dbBase)
-                        + " FROM ("
-                        + sql
-                        + ") workflow_tab;";
+                "SELECT COUNT(*) " + DbAliasEnum.TOTAL_RECORD.asByDb(this.dbBase) + " FROM (" + sql + ") workflow_tab;";
         return new String[] {dataListSql, totalSql};
     }
 
@@ -129,17 +115,14 @@ public class SqlMySQL extends SqlBase {
         // 第一SELECT一定要大写，第一个FROM与SELECT之间，能插入COUNT(*),不报错
         int selectStar = sql.indexOf("SELECT");
         int fromEnd = sql.indexOf("FROM");
-        return sql.substring(0, selectStar + 6)
-                + " COUNT(*) AS totalRecord "
-                + sql.substring(fromEnd);
+        return sql.substring(0, selectStar + 6) + " COUNT(*) AS totalRecord " + sql.substring(fromEnd);
     }
 
     /** 设置表注释 */
     @Override
     public PreparedStatementDTO getTableCommentPSD(CreateSqlDTO createSqlDTO) {
         // 模板：ALTER TABLE table_name COMMENT='这是表的注释';
-        String table =
-                HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
+        String table = HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
         String preparedSql = "ALTER TABLE " + table + " COMMENT= ?;";
         return new PreparedStatementDTO(null, preparedSql, createSqlDTO.getTableComment());
     }
@@ -148,31 +131,22 @@ public class SqlMySQL extends SqlBase {
     @Override
     public List<PreparedStatementDTO> getFieldCommentPSD(CreateSqlDTO createSqlDTO) {
         // 模板：ALTER table table_name MODIFY `column_name` datetime DEFAULT NULL COMMENT '这是字段的注释'
-        String table =
-                HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
+        String table = HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
         List<PreparedStatementDTO> listPSD = new ArrayList<>();
         String dataTypeFormat = "";
         for (DbTableFieldModel fieldModel : createSqlDTO.getFieldModels()) {
             try {
-                dataTypeFormat =
-                        CreateSql.dataTypeFormat(
-                                fieldModel.getDataType(),
-                                fieldModel.getDataLength(),
-                                fieldModel.getPrimaryKey(),
-                                new DbMySQL());
+                dataTypeFormat = CreateSql.dataTypeFormat(
+                        fieldModel.getDataType(),
+                        fieldModel.getDataLength(),
+                        fieldModel.getPrimaryKey(),
+                        new DbMySQL());
             } catch (DataException e) {
                 e.printStackTrace();
             }
-            String column =
-                    HtmlUtils.htmlEscape(String.valueOf(fieldModel.getField()), CharsetKit.UTF_8);
+            String column = HtmlUtils.htmlEscape(String.valueOf(fieldModel.getField()), CharsetKit.UTF_8);
             String preparedSql =
-                    "ALTER TABLE "
-                            + table
-                            + " MODIFY COLUMN `"
-                            + column
-                            + "` "
-                            + dataTypeFormat
-                            + " COMMENT ?;";
+                    "ALTER TABLE " + table + " MODIFY COLUMN `" + column + "` " + dataTypeFormat + " COMMENT ?;";
             listPSD.add(new PreparedStatementDTO(null, preparedSql, fieldModel.getFieldName()));
         }
         return listPSD;

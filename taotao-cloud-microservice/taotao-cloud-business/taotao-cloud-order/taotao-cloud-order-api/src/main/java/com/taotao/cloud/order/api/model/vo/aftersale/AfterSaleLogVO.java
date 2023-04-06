@@ -47,5 +47,6 @@ public record AfterSaleLogVO(
         @Schema(description = "日志信息") String message)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

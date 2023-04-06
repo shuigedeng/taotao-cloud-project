@@ -57,14 +57,20 @@ import org.springframework.stereotype.Service;
  * @since 2022-04-27 16:45:59
  */
 @Service
-public class CouponActivityServiceImpl
-        extends AbstractPromotionsServiceImpl<CouponActivityMapper, CouponActivity>
+public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<CouponActivityMapper, CouponActivity>
         implements ICouponActivityService {
 
-    @Autowired private ICouponService couponService;
-    @Autowired private IMemberCouponService memberCouponService;
-    @Autowired private ICouponActivityItemService couponActivityItemService;
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private ICouponService couponService;
+
+    @Autowired
+    private IMemberCouponService memberCouponService;
+
+    @Autowired
+    private ICouponActivityItemService couponActivityItemService;
+
+    @Autowired
+    private IFeignMemberApi memberApi;
 
     @Override
     public CouponActivityVO getCouponActivityVO(String couponActivityId) {
@@ -134,8 +140,7 @@ public class CouponActivityServiceImpl
             // 如果有会员，则写入会员信息
             if (couponActivityDTO.getMemberDTOS() != null
                     && !couponActivityDTO.getMemberDTOS().isEmpty()) {
-                couponActivityDTO.setActivityScopeInfo(
-                        JSONUtil.toJsonStr(couponActivityDTO.getMemberDTOS()));
+                couponActivityDTO.setActivityScopeInfo(JSONUtil.toJsonStr(couponActivityDTO.getMemberDTOS()));
             }
         }
     }
@@ -152,9 +157,7 @@ public class CouponActivityServiceImpl
         if (couponActivity instanceof CouponActivityDTO) {
             CouponActivityDTO couponActivityDTO = (CouponActivityDTO) couponActivity;
             // 指定会员判定
-            if (couponActivity
-                            .getActivityScope()
-                            .equals(CouponActivitySendTypeEnum.DESIGNATED.name())
+            if (couponActivity.getActivityScope().equals(CouponActivitySendTypeEnum.DESIGNATED.name())
                     && couponActivityDTO.getMemberDTOS().isEmpty()) {
                 throw new BusinessException(ResultEnum.COUPON_ACTIVITY_MEMBER_ERROR);
             }
@@ -173,14 +176,11 @@ public class CouponActivityServiceImpl
         super.updatePromotionsGoods(couponActivity);
         if (couponActivity instanceof CouponActivityDTO
                 && !PromotionsStatusEnum.CLOSE.name().equals(couponActivity.getPromotionStatus())
-                && PromotionsScopeTypeEnum.PORTION_GOODS
-                        .name()
-                        .equals(couponActivity.getScopeType())) {
+                && PromotionsScopeTypeEnum.PORTION_GOODS.name().equals(couponActivity.getScopeType())) {
 
             CouponActivityDTO couponActivityDTO = (CouponActivityDTO) couponActivity;
             // 创建优惠券活动子列表
-            for (CouponActivityItem couponActivityItem :
-                    couponActivityDTO.getCouponActivityItems()) {
+            for (CouponActivityItem couponActivityItem : couponActivityDTO.getCouponActivityItems()) {
                 couponActivityItem.setActivityId(couponActivityDTO.getId());
             }
             // 更新优惠券活动项信息
@@ -197,9 +197,7 @@ public class CouponActivityServiceImpl
     public void updateEsGoodsIndex(CouponActivity couponActivity) {
         // 如果是精准发券，进行发送优惠券
         if (!PromotionsStatusEnum.CLOSE.name().equals(couponActivity.getPromotionStatus())
-                && couponActivity
-                        .getCouponActivityType()
-                        .equals(CouponActivityTypeEnum.SPECIFY.name())) {
+                && couponActivity.getCouponActivityType().equals(CouponActivityTypeEnum.SPECIFY.name())) {
             this.specify(couponActivity.getId());
         }
     }
@@ -220,8 +218,7 @@ public class CouponActivityServiceImpl
      * @param memberList 用户列表
      * @param couponActivityItems 优惠券列表
      */
-    private void sendCoupon(
-            List<Map<String, Object>> memberList, List<CouponActivityItem> couponActivityItems) {
+    private void sendCoupon(List<Map<String, Object>> memberList, List<CouponActivityItem> couponActivityItems) {
 
         for (CouponActivityItem couponActivityItem : couponActivityItems) {
             // 获取优惠券
@@ -246,8 +243,7 @@ public class CouponActivityServiceImpl
                 memberCouponService.saveBatch(memberCouponList);
                 // 添加优惠券已领取数量
                 couponService.receiveCoupon(
-                        couponActivityItem.getCouponId(),
-                        memberCouponList.size() * couponActivityItem.getNum());
+                        couponActivityItem.getCouponId(), memberCouponList.size() * couponActivityItem.getNum());
             } else {
                 log.error("赠送优惠券失败,当前优惠券不存在:" + couponActivityItem.getCouponId());
             }
@@ -268,10 +264,9 @@ public class CouponActivityServiceImpl
             List<String> ids = new ArrayList<>();
             if (JSONUtil.isJsonArray(couponActivity.getActivityScopeInfo())) {
                 JSONArray array = JSONUtil.parseArray(couponActivity.getActivityScopeInfo());
-                ids =
-                        array.toList(Map.class).stream()
-                                .map(i -> i.get("id").toString())
-                                .collect(Collectors.toList());
+                ids = array.toList(Map.class).stream()
+                        .map(i -> i.get("id").toString())
+                        .collect(Collectors.toList());
             }
             return memberApi.listFieldsByMemberIds("id,nick_name", ids);
         }

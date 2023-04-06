@@ -52,8 +52,7 @@ public class YsfBar extends YsfpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
         String logPrefix = "【云闪付条码(unionpay)支付】";
 
@@ -71,14 +70,10 @@ public class YsfBar extends YsfpayPaymentService {
         // 客户端IP
         reqParams.put(
                 "termInfo",
-                "{\"ip\": \""
-                        + StringUtils.defaultIfEmpty(payOrder.getClientIp(), "127.0.0.1")
-                        + "\"}"); // 终端信息
+                "{\"ip\": \"" + StringUtils.defaultIfEmpty(payOrder.getClientIp(), "127.0.0.1") + "\"}"); // 终端信息
 
         // 发送请求
-        JSONObject resJSON =
-                packageParamAndReq(
-                        "/gateway/api/pay/micropay", reqParams, logPrefix, mchAppConfigContext);
+        JSONObject resJSON = packageParamAndReq("/gateway/api/pay/micropay", reqParams, logPrefix, mchAppConfigContext);
         // 请求 & 响应成功， 判断业务逻辑
         String respCode = resJSON.getString("respCode"); // 应答码
         String respMsg = resJSON.getString("respMsg"); // 应答信息

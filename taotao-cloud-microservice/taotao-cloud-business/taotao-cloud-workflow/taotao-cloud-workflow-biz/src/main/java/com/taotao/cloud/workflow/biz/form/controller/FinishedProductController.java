@@ -44,8 +44,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/FinishedProduct")
 public class FinishedProductController {
 
-    @Autowired private FinishedProductService finishedProductService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private FinishedProductService finishedProductService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取成品入库单信息
@@ -63,20 +66,16 @@ public class FinishedProductController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), FinishedProductInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), FinishedProductInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             FinishedProductEntity entity = finishedProductService.getInfo(id);
-            List<FinishedProductEntryEntity> entityList =
-                    finishedProductService.getFinishedEntryList(id);
+            List<FinishedProductEntryEntity> entityList = finishedProductService.getFinishedEntryList(id);
             vo = JsonUtils.getJsonToBean(entity, FinishedProductInfoVO.class);
-            vo.setEntryList(
-                    JsonUtils.getJsonToList(entityList, FinishedProductEntryEntityInfoModel.class));
+            vo.setEntryList(JsonUtils.getJsonToList(entityList, FinishedProductEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -90,22 +89,16 @@ public class FinishedProductController {
      */
     @Operation("新建成品入库单")
     @PostMapping
-    public Result create(@RequestBody @Valid FinishedProductForm finishedProductForm)
-            throws WorkFlowException {
-        FinishedProductEntity finished =
-                JsonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
+    public Result create(@RequestBody @Valid FinishedProductForm finishedProductForm) throws WorkFlowException {
+        FinishedProductEntity finished = JsonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
         List<FinishedProductEntryEntity> finishedEntryList =
-                JsonUtils.getJsonToList(
-                        finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
+                JsonUtils.getJsonToList(finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(finishedProductForm.getStatus())) {
             finishedProductService.save(finished.getId(), finished, finishedEntryList);
             return Result.success(MsgCode.SU002.get());
         }
         finishedProductService.submit(
-                finished.getId(),
-                finished,
-                finishedEntryList,
-                finishedProductForm.getCandidateList());
+                finished.getId(), finished, finishedEntryList, finishedProductForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -119,21 +112,16 @@ public class FinishedProductController {
      */
     @Operation("修改成品入库单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid FinishedProductForm finishedProductForm,
-            @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid FinishedProductForm finishedProductForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        FinishedProductEntity finished =
-                JsonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
+        FinishedProductEntity finished = JsonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
         List<FinishedProductEntryEntity> finishedEntryList =
-                JsonUtils.getJsonToList(
-                        finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
+                JsonUtils.getJsonToList(finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(finishedProductForm.getStatus())) {
             finishedProductService.save(id, finished, finishedEntryList);
             return Result.success(MsgCode.SU002.get());
         }
-        finishedProductService.submit(
-                id, finished, finishedEntryList, finishedProductForm.getCandidateList());
+        finishedProductService.submit(id, finished, finishedEntryList, finishedProductForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 }

@@ -33,8 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author : gengwei.zheng
  * @date : 2022/2/25 21:05
  */
-public interface HerodotusAuthorizationRepository
-        extends BaseRepository<HerodotusAuthorization, String> {
+public interface HerodotusAuthorizationRepository extends BaseRepository<HerodotusAuthorization, String> {
 
     /**
      * 根据 State 查询 OAuth2 认证信息
@@ -80,9 +79,8 @@ public interface HerodotusAuthorizationRepository
      * @param localDateTime 时间
      * @return 认证信息列表
      */
-    List<HerodotusAuthorization>
-            findAllByRegisteredClientIdAndPrincipalNameAndAccessTokenExpiresAtAfter(
-                    String registeredClientId, String principalName, LocalDateTime localDateTime);
+    List<HerodotusAuthorization> findAllByRegisteredClientIdAndPrincipalNameAndAccessTokenExpiresAtAfter(
+            String registeredClientId, String principalName, LocalDateTime localDateTime);
 
     /**
      * 根据 RefreshToken 过期时间，清理历史 Token信息

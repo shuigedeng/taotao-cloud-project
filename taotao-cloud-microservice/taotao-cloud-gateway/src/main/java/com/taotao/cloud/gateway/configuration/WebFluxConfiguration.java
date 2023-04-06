@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.configuration;
 
 import com.alibaba.cloud.nacos.NacosConfigProperties;
@@ -44,48 +45,46 @@ import reactor.core.publisher.Mono;
  */
 @Configuration
 @EnableConfigurationProperties({
-	DynamicRouteProperties.class,
-	ApiProperties.class,
-	FilterProperties.class,
-	SecurityProperties.class,
-	HttpsProperties.class,
-	NacosConfigProperties.class
+    DynamicRouteProperties.class,
+    ApiProperties.class,
+    FilterProperties.class,
+    SecurityProperties.class,
+    HttpsProperties.class,
+    NacosConfigProperties.class
 })
 public class WebFluxConfiguration {
 
-	@Bean(name = "userKeyResolver")
-	public KeyResolver userKeyResolver() {
-		return exchange -> Mono.just(exchange.getRequest().getQueryParams().getFirst("userId"));
-	}
+    @Bean(name = "userKeyResolver")
+    public KeyResolver userKeyResolver() {
+        return exchange -> Mono.just(exchange.getRequest().getQueryParams().getFirst("userId"));
+    }
 
-	@Primary
-	@Bean(name = "apiKeyResolver")
-	public KeyResolver apiKeyResolver() {
-		return exchange -> Mono.just(exchange.getRequest().getPath().value());
-	}
+    @Primary
+    @Bean(name = "apiKeyResolver")
+    public KeyResolver apiKeyResolver() {
+        return exchange -> Mono.just(exchange.getRequest().getPath().value());
+    }
 
-	@Bean(name = "remoteAddrKeyResolver")
-	public KeyResolver remoteAddrKeyResolver() {
-		return exchange -> Mono.just(
-			Objects.requireNonNull(exchange.getRequest().getRemoteAddress()).getAddress()
-				.getHostAddress());
-	}
+    @Bean(name = "remoteAddrKeyResolver")
+    public KeyResolver remoteAddrKeyResolver() {
+        return exchange ->
+                Mono.just(Objects.requireNonNull(exchange.getRequest().getRemoteAddress())
+                        .getAddress()
+                        .getHostAddress());
+    }
 
-	@Bean
-	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-		return new HiddenHttpMethodFilter() {
-			@Override
-			public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-				return chain.filter(exchange);
-			}
-		};
-	}
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter() {
+            @Override
+            public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+                return chain.filter(exchange);
+            }
+        };
+    }
 
-	@Bean
-	MeterRegistryCustomizer<MeterRegistry> configurer(
-		@Value("${spring.application.name}") String applicationName) {
-		return (registry) -> registry.config().commonTags("application", applicationName);
-	}
-
+    @Bean
+    MeterRegistryCustomizer<MeterRegistry> configurer(@Value("${spring.application.name}") String applicationName) {
+        return (registry) -> registry.config().commonTags("application", applicationName);
+    }
 }
-

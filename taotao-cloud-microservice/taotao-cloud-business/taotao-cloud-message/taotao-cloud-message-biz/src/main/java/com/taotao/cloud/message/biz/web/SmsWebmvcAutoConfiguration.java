@@ -37,8 +37,7 @@ public class SmsWebmvcAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(SmsController.class)
-    public SmsController smsController(
-            VerificationCodeService verificationCodeService, NoticeService noticeService) {
+    public SmsController smsController(VerificationCodeService verificationCodeService, NoticeService noticeService) {
         return new SmsController(verificationCodeService, noticeService);
     }
 }

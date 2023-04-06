@@ -24,6 +24,5 @@ import org.springframework.stereotype.Service;
 
 /** 入库申请单明细 */
 @Service
-public class WarehouseEntryServiceImpl
-        extends ServiceImpl<WarehouseEntryMapper, WarehouseEntryEntity>
+public class WarehouseEntryServiceImpl extends ServiceImpl<WarehouseEntryMapper, WarehouseEntryEntity>
         implements WarehouseEntryService {}

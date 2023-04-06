@@ -32,8 +32,7 @@ public class StandaloneProcessorDemo implements BasicProcessor {
 
         OmsLogger omsLogger = context.getOmsLogger();
         omsLogger.info("StandaloneProcessorDemo start process,context is {}.", context);
-        omsLogger.info(
-                "Notice! If you want this job process failed, your jobParams need to be 'failed'");
+        omsLogger.info("Notice! If you want this job process failed, your jobParams need to be 'failed'");
 
         omsLogger.info("Let's test the exception~");
         // 测试异常日志

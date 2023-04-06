@@ -41,19 +41,22 @@ public class ConsumeServiceImpl implements ConsumeService {
 
     private static final String LOG_BIZ_TYPE = "Receiver#consumer";
     private static final String LOG_BIZ_RECALL_TYPE = "Receiver#recall";
-    @Autowired private ApplicationContext context;
 
-    @Autowired private TaskPendingHolder taskPendingHolder;
+    @Autowired
+    private ApplicationContext context;
 
-    @Autowired private LogUtils logUtils;
+    @Autowired
+    private TaskPendingHolder taskPendingHolder;
 
-    @Autowired private HandlerHolder handlerHolder;
+    @Autowired
+    private LogUtils logUtils;
+
+    @Autowired
+    private HandlerHolder handlerHolder;
 
     @Override
     public void consume2Send(List<TaskInfo> taskInfoLists) {
-        String topicGroupId =
-                GroupIdMappingUtils.getGroupIdByTaskInfo(
-                        CollUtil.getFirst(taskInfoLists.iterator()));
+        String topicGroupId = GroupIdMappingUtils.getGroupIdByTaskInfo(CollUtil.getFirst(taskInfoLists.iterator()));
         for (TaskInfo taskInfo : taskInfoLists) {
             logUtils.print(
                     LogParam.builder().bizType(LOG_BIZ_TYPE).object(taskInfo).build(),
@@ -69,8 +72,10 @@ public class ConsumeServiceImpl implements ConsumeService {
 
     @Override
     public void consume2recall(MessageTemplate messageTemplate) {
-        logUtils.print(
-                LogParam.builder().bizType(LOG_BIZ_RECALL_TYPE).object(messageTemplate).build());
+        logUtils.print(LogParam.builder()
+                .bizType(LOG_BIZ_RECALL_TYPE)
+                .object(messageTemplate)
+                .build());
         handlerHolder.route(messageTemplate.getSendChannel()).recall(messageTemplate);
     }
 }

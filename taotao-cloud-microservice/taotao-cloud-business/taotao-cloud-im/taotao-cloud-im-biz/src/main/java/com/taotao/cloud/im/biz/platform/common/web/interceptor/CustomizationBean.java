@@ -23,18 +23,15 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomizationBean
-        implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+public class CustomizationBean implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
     @Override
     public void customize(UndertowServletWebServerFactory factory) {
-        factory.addDeploymentInfoCustomizers(
-                deploymentInfo -> {
-                    WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
-                    webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(false, 1024));
-                    deploymentInfo.addServletContextAttribute(
-                            "io.undertow.websockets.jsr.WebSocketDeploymentInfo",
-                            webSocketDeploymentInfo);
-                });
+        factory.addDeploymentInfoCustomizers(deploymentInfo -> {
+            WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
+            webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(false, 1024));
+            deploymentInfo.addServletContextAttribute(
+                    "io.undertow.websockets.jsr.WebSocketDeploymentInfo", webSocketDeploymentInfo);
+        });
     }
 }

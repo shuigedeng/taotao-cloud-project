@@ -87,6 +87,5 @@ public interface DistributionGoodsMapper extends BaseSuperMapper<DistributionGoo
 		${ew.customSqlSegment}
 		""")
     IPage<DistributionGoodsVO> getDistributionGoodsVO(
-            IPage<DistributionGoodsVO> page,
-            @Param(Constants.WRAPPER) Wrapper<DistributionGoodsVO> queryWrapper);
+            IPage<DistributionGoodsVO> page, @Param(Constants.WRAPPER) Wrapper<DistributionGoodsVO> queryWrapper);
 }

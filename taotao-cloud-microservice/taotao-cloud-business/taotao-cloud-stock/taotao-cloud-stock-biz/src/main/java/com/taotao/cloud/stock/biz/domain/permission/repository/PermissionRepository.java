@@ -39,8 +39,7 @@ public interface PermissionRepository {
      * @param params
      * @return
      */
-    List<com.taotao.cloud.stock.biz.domain.model.permission.Permission> queryList(
-            Map<String, Object> params);
+    List<com.taotao.cloud.stock.biz.domain.model.permission.Permission> queryList(Map<String, Object> params);
 
     /**
      * 角色编码获取权限
@@ -48,8 +47,7 @@ public interface PermissionRepository {
      * @param rolecode
      * @return
      */
-    List<com.taotao.cloud.stock.biz.domain.model.permission.Permission> queryList(
-            RoleCode rolecode);
+    List<com.taotao.cloud.stock.biz.domain.model.permission.Permission> queryList(RoleCode rolecode);
 
     /**
      * 获取权限
@@ -66,8 +64,7 @@ public interface PermissionRepository {
      * @param permissionName
      * @return
      */
-    com.taotao.cloud.stock.biz.domain.model.permission.Permission find(
-            PermissionName permissionName);
+    com.taotao.cloud.stock.biz.domain.model.permission.Permission find(PermissionName permissionName);
 
     /**
      * 保存

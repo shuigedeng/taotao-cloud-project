@@ -35,9 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.04
  * @since 2022-04-25 16:37:54
  */
-@FeignClient(
-        value = ServiceName.TAOTAO_CLOUD_MEMBER,
-        fallbackFactory = FeignMemberApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = FeignMemberApiFallback.class)
 public interface IFeignMemberApi {
 
     /**
@@ -94,6 +92,5 @@ public interface IFeignMemberApi {
     Boolean updateById(@RequestParam MemberVO member);
 
     @GetMapping(value = "/member/feign/listFieldsByMemberIds")
-    List<Map<String, Object>> listFieldsByMemberIds(
-            @RequestParam String s, @RequestParam List<String> ids);
+    List<Map<String, Object>> listFieldsByMemberIds(@RequestParam String s, @RequestParam List<String> ids);
 }

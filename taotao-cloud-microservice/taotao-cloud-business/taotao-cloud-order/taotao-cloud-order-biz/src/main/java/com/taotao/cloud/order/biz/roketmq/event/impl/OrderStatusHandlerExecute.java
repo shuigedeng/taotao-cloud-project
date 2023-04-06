@@ -34,7 +34,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderStatusHandlerExecute implements TradeEvent {
 
-    @Autowired private ITradeService tradeService;
+    @Autowired
+    private ITradeService tradeService;
 
     @Override
     public void orderCreate(TradeDTO tradeDTO) {

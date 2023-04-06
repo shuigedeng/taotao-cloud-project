@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/PostBatchTab")
 public class PostBatchTabController {
 
-    @Autowired private PostBatchTabService postBatchTabService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private PostBatchTabService postBatchTabService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取发文呈批表信息
@@ -51,8 +54,7 @@ public class PostBatchTabController {
      */
     @Operation("获取发文呈批表信息")
     @GetMapping("/{id}")
-    public Result<PostBatchTabInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<PostBatchTabInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         PostBatchTabInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class PostBatchTabController {
     @Operation("新建发文呈批表")
     @PostMapping
     public Result create(@RequestBody PostBatchTabForm postBatchTabForm) throws WorkFlowException {
-        PostBatchTabEntity entity =
-                JsonUtils.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);
+        PostBatchTabEntity entity = JsonUtils.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(postBatchTabForm.getStatus())) {
             postBatchTabService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -99,11 +100,9 @@ public class PostBatchTabController {
      */
     @Operation("修改发文呈批表")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody PostBatchTabForm postBatchTabForm, @PathVariable("id") String id)
+    public Result update(@RequestBody PostBatchTabForm postBatchTabForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        PostBatchTabEntity entity =
-                JsonUtils.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);
+        PostBatchTabEntity entity = JsonUtils.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(postBatchTabForm.getStatus())) {
             postBatchTabService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

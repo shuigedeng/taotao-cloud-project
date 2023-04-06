@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.configuration;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -41,35 +41,35 @@ public class CorsConfiguration {
     @Bean
     @Profile({"dev"})
     public CorsWebFilter devCorsFilter() {
-	    org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
-	    config.setAllowCredentials(true);
-	    config.addAllowedOrigin("*");
-	    config.addAllowedHeader("*");
-	    config.setMaxAge(18000L);
-	    config.addAllowedMethod("*");
-	    // 配置前端js允许访问的自定义响应头
-	    config.addExposedHeader("setToken");
-	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
-	    source.registerCorsConfiguration("/**", config);
+        org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.setMaxAge(18000L);
+        config.addAllowedMethod("*");
+        // 配置前端js允许访问的自定义响应头
+        config.addExposedHeader("setToken");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
+        source.registerCorsConfiguration("/**", config);
 
-	    return new CorsWebFilter(source);
+        return new CorsWebFilter(source);
     }
 
-	@Bean
-	@Profile({"test"})
-	public CorsWebFilter testCorsFilter() {
-		org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
-		// 是否允许携带cookie跨域
-		config.setAllowCredentials(true);
-		config.addAllowedOriginPattern("https://*.test.taotaocloud.top");
-		config.addAllowedHeader("*");
-		config.addAllowedMethod("*");
-		config.setMaxAge(18000L);
-		// 配置前端js允许访问的自定义响应头
-		// config.addExposedHeader("*");
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
-		source.registerCorsConfiguration("/**", config);
+    @Bean
+    @Profile({"test"})
+    public CorsWebFilter testCorsFilter() {
+        org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
+        // 是否允许携带cookie跨域
+        config.setAllowCredentials(true);
+        config.addAllowedOriginPattern("https://*.test.taotaocloud.top");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.setMaxAge(18000L);
+        // 配置前端js允许访问的自定义响应头
+        // config.addExposedHeader("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
+        source.registerCorsConfiguration("/**", config);
 
-		return new CorsWebFilter(source);
-	}
+        return new CorsWebFilter(source);
+    }
 }

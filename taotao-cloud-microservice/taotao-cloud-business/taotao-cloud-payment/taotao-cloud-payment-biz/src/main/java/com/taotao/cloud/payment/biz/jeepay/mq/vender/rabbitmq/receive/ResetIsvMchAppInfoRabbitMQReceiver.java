@@ -42,7 +42,8 @@ import org.springframework.stereotype.Component;
 @ConditionalOnBean(ResetIsvMchAppInfoConfigMQ.IMQReceiver.class)
 public class ResetIsvMchAppInfoRabbitMQReceiver implements IMQMsgReceiver {
 
-    @Autowired private ResetIsvMchAppInfoConfigMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private ResetIsvMchAppInfoConfigMQ.IMQReceiver mqReceiver;
 
     /**
      * 接收 【 MQSendTypeEnum.BROADCAST 】 广播类型的消息
@@ -61,9 +62,8 @@ public class ResetIsvMchAppInfoRabbitMQReceiver implements IMQMsgReceiver {
                         value = @Queue(), // 注意这里不要定义队列名称,系统会随机产生
                         exchange =
                                 @Exchange(
-                                        name =
-                                                RabbitMQConfig.FANOUT_EXCHANGE_NAME_PREFIX
-                                                        + ResetIsvMchAppInfoConfigMQ.MQ_NAME,
+                                        name = RabbitMQConfig.FANOUT_EXCHANGE_NAME_PREFIX
+                                                + ResetIsvMchAppInfoConfigMQ.MQ_NAME,
                                         type = ExchangeTypes.FANOUT))
             })
     public void receiveMsg(String msg) {

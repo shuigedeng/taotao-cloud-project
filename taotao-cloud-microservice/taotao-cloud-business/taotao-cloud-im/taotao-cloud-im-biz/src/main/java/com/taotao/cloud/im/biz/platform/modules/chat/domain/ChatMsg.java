@@ -36,7 +36,8 @@ public class ChatMsg extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 消息主键 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /** 发送人 */
     private Long fromId;
     /** 接收人 */

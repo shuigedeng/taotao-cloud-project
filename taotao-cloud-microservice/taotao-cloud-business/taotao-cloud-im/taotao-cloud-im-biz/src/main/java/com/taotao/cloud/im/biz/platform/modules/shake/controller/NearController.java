@@ -37,7 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/near")
 public class NearController extends BaseController {
 
-    @Resource private NearService nearService;
+    @Resource
+    private NearService nearService;
 
     /**
      * 发送附近的人

@@ -58,7 +58,8 @@ import org.springframework.stereotype.Service;
 @Sharable // 不new，采用共享handler
 public class FlvHandler extends SimpleChannelInboundHandler<Object> {
 
-    @Autowired private MediaService mediaService;
+    @Autowired
+    private MediaService mediaService;
 
     private WebSocketServerHandshaker handshaker;
 
@@ -111,14 +112,12 @@ public class FlvHandler extends SimpleChannelInboundHandler<Object> {
 
                 // 参数分别是ws地址，子协议，是否扩展，最大frame长度
                 WebSocketServerHandshakerFactory factory =
-                        new WebSocketServerHandshakerFactory(
-                                getWebSocketLocation(req), null, true, 5 * 1024 * 1024);
+                        new WebSocketServerHandshakerFactory(getWebSocketLocation(req), null, true, 5 * 1024 * 1024);
                 handshaker = factory.newHandshaker(req);
                 if (handshaker == null) {
                     WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
                 } else {
-                    HttpResponse rsp =
-                            new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+                    HttpResponse rsp = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
                     rsp.headers().set(HttpHeaderNames.SERVER, MediaConstant.serverName);
                     DefaultChannelPromise channelPromise = new DefaultChannelPromise(ctx.channel());
 
@@ -174,11 +173,8 @@ public class FlvHandler extends SimpleChannelInboundHandler<Object> {
      * @param status
      */
     private void sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {
-        FullHttpResponse response =
-                new DefaultFullHttpResponse(
-                        HttpVersion.HTTP_1_1,
-                        status,
-                        Unpooled.copiedBuffer("请求地址有误: " + status + "\r\n", CharsetUtil.UTF_8));
+        FullHttpResponse response = new DefaultFullHttpResponse(
+                HttpVersion.HTTP_1_1, status, Unpooled.copiedBuffer("请求地址有误: " + status + "\r\n", CharsetUtil.UTF_8));
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
 
         ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);

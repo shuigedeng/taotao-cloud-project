@@ -53,7 +53,8 @@ import org.springframework.web.bind.annotation.*;
 @Tags({@Tag(name = "OAuth2 认证服务器接口"), @Tag(name = "OAuth2 认证服务器开放接口"), @Tag(name = "验证码接口")})
 public class CaptchaController implements Controller {
 
-    @Autowired private CaptchaRendererFactory captchaRendererFactory;
+    @Autowired
+    private CaptchaRendererFactory captchaRendererFactory;
 
     @AccessLimited
     @Operation(
@@ -63,9 +64,7 @@ public class CaptchaController implements Controller {
                 @ApiResponse(
                         description = "验证码图形信息",
                         content =
-                                @Content(
-                                        mediaType = "application/json",
-                                        schema = @Schema(implementation = Map.class)))
+                                @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))
             })
     @Parameters({
         @Parameter(name = "identity", required = true, in = ParameterIn.PATH, description = "身份信息"),
@@ -73,8 +72,7 @@ public class CaptchaController implements Controller {
     })
     @GetMapping
     public Result<Captcha> create(
-            @NotBlank(message = "身份信息不能为空") String identity,
-            @NotBlank(message = "验证码类型不能为空") String category) {
+            @NotBlank(message = "身份信息不能为空") String identity, @NotBlank(message = "验证码类型不能为空") String category) {
         Captcha captcha = captchaRendererFactory.getCaptcha(identity, category);
         if (ObjectUtils.isNotEmpty(captcha)) {
             return Result.success("验证码创建成功", captcha);
@@ -91,11 +89,7 @@ public class CaptchaController implements Controller {
             requestBody =
                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
                             content = @Content(mediaType = "application/json")),
-            responses = {
-                @ApiResponse(
-                        description = "验证结果",
-                        content = @Content(mediaType = "application/json"))
-            })
+            responses = {@ApiResponse(description = "验证结果", content = @Content(mediaType = "application/json"))})
     @Parameters({
         @Parameter(
                 name = "jigsawVerification",

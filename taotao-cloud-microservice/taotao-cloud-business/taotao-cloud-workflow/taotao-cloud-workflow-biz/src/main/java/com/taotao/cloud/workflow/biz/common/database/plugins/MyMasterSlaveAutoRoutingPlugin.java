@@ -78,25 +78,18 @@ public class MyMasterSlaveAutoRoutingPlugin implements Interceptor {
         MappedStatement ms = (MappedStatement) args[0];
         String pushedDataSource = null;
         try {
-            String tenantId =
-                    StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceId())
-                            ? DataSourceContextHolder.getDatasourceId()
-                            : "";
+            String tenantId = StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceId())
+                    ? DataSourceContextHolder.getDatasourceId()
+                    : "";
             // 判断切库
             String dataSource =
-                    SqlCommandType.SELECT == ms.getSqlCommandType()
-                            ? DdConstants.SLAVE
-                            : DdConstants.MASTER;
+                    SqlCommandType.SELECT == ms.getSqlCommandType() ? DdConstants.SLAVE : DdConstants.MASTER;
             // 如果是从库
             if (DdConstants.SLAVE.equals(dataSource)) {
                 // 判断从库不存在
-                if (!dynamicDataSource
-                        .getGroupDataSources()
-                        .containsKey(tenantId + "-" + DdConstants.SLAVE)) {
+                if (!dynamicDataSource.getGroupDataSources().containsKey(tenantId + "-" + DdConstants.SLAVE)) {
                     // 判断主库存在（有主库没从库）
-                    if (dynamicDataSource
-                            .getGroupDataSources()
-                            .containsKey(tenantId + "-" + DdConstants.MASTER)) {
+                    if (dynamicDataSource.getGroupDataSources().containsKey(tenantId + "-" + DdConstants.MASTER)) {
                         dataSource = tenantId + "-" + DdConstants.MASTER;
                     }
                 } else {

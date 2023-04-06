@@ -43,8 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderItem>
-        implements IOrderItemService {
+public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderItem> implements IOrderItemService {
 
     @Override
     public Boolean updateCommentStatus(String orderItemSn, CommentStatusEnum commentStatusEnum) {
@@ -65,10 +64,7 @@ public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderIte
 
     @Override
     public Boolean updateOrderItemsComplainStatus(
-            String orderSn,
-            Long skuId,
-            Long complainId,
-            OrderComplaintStatusEnum complainStatusEnum) {
+            String orderSn, Long skuId, Long complainId, OrderComplaintStatusEnum complainStatusEnum) {
         LambdaQueryWrapper<OrderItem> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(OrderItem::getOrderSn, orderSn).eq(OrderItem::getSkuId, skuId);
         OrderItem orderItem = getOne(queryWrapper);
@@ -96,9 +92,8 @@ public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderIte
 
     @Override
     public OrderItem getByOrderSnAndSkuId(String orderSn, Long skuId) {
-        return this.getOne(
-                new LambdaQueryWrapper<OrderItem>()
-                        .eq(OrderItem::getOrderSn, orderSn)
-                        .eq(OrderItem::getSkuId, skuId));
+        return this.getOne(new LambdaQueryWrapper<OrderItem>()
+                .eq(OrderItem::getOrderSn, orderSn)
+                .eq(OrderItem::getSkuId, skuId));
     }
 }

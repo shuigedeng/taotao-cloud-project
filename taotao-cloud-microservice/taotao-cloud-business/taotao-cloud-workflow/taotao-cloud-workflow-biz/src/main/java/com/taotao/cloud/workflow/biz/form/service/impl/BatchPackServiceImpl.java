@@ -33,11 +33,13 @@ import org.springframework.stereotype.Service;
 
 /** */
 @Service
-public class BatchPackServiceImpl extends ServiceImpl<BatchPackMapper, BatchPackEntity>
-        implements BatchPackService {
+public class BatchPackServiceImpl extends ServiceImpl<BatchPackMapper, BatchPackEntity> implements BatchPackService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public BatchPackEntity getInfo(String id) {

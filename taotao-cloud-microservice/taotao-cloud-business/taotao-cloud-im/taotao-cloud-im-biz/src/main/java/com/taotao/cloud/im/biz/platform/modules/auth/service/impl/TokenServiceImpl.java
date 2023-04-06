@@ -32,7 +32,8 @@ import org.springframework.stereotype.Service;
 @Service("tokenService")
 public class TokenServiceImpl implements TokenService {
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     public String generateToken() {
@@ -43,8 +44,7 @@ public class TokenServiceImpl implements TokenService {
         String tokenPrefix = ApiConstant.TOKEN_APP;
         Integer timeout = PlatformConfig.TIMEOUT;
         // 存储redis
-        redisUtils.set(
-                tokenPrefix + token, JSONUtil.toJsonStr(loginUser), timeout, TimeUnit.MINUTES);
+        redisUtils.set(tokenPrefix + token, JSONUtil.toJsonStr(loginUser), timeout, TimeUnit.MINUTES);
         return token;
     }
 

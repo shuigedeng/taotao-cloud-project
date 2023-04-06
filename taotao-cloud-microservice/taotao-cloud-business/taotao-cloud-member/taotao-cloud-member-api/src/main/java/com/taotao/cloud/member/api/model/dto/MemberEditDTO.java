@@ -45,7 +45,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "会员信息修改DTO")
 public class MemberEditDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "昵称", required = true)
     @Size(min = 2, max = 20, message = "会员昵称必须为2到20位之间")

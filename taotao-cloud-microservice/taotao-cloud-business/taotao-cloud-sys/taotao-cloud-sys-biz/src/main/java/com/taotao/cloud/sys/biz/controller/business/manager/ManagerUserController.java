@@ -63,8 +63,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/user")
 @Tag(name = "管理端-用户管理API", description = "管理端-用户管理API")
 public class ManagerUserController
-        extends BaseSuperController<
-                IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
+        extends BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
     @Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
     @RequestLogger
@@ -127,9 +126,7 @@ public class ManagerUserController
                     @NotNull(message = "用户id不能为空")
                     @PathVariable(name = "userId")
                     Long userId,
-            @Parameter(description = "角色id列表", required = true)
-                    @NotEmpty(message = "角色id列表不能为空")
-                    @RequestBody
+            @Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空") @RequestBody
                     Set<Long> roleIds) {
         return success(service().updateUserRoles(userId, roleIds));
     }
@@ -137,8 +134,7 @@ public class ManagerUserController
     @PostMapping("/user/test/save")
     @NotAuth
     public Result<Boolean> testSave(
-            @Parameter(description = "新增DTO", required = true) @RequestBody @Validated
-                    UserSaveDTO saveDTO) {
+            @Parameter(description = "新增DTO", required = true) @RequestBody @Validated UserSaveDTO saveDTO) {
         User user = new User();
         BeanUtils.copy(saveDTO, user);
         user.setAccount("sdfasfd");

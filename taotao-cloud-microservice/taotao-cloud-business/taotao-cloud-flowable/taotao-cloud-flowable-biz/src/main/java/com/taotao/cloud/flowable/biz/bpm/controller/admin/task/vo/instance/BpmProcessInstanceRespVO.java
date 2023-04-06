@@ -33,25 +33,13 @@ public class BpmProcessInstanceRespVO {
     @ApiModelProperty(value = "流程名称", required = true, example = "芋道")
     private String name;
 
-    @ApiModelProperty(
-            value = "流程分类",
-            required = true,
-            notes = "参见 bpm_model_category 数据字典",
-            example = "1")
+    @ApiModelProperty(value = "流程分类", required = true, notes = "参见 bpm_model_category 数据字典", example = "1")
     private String category;
 
-    @ApiModelProperty(
-            value = "流程实例的状态",
-            required = true,
-            notes = "参见 bpm_process_instance_status",
-            example = "1")
+    @ApiModelProperty(value = "流程实例的状态", required = true, notes = "参见 bpm_process_instance_status", example = "1")
     private Integer status;
 
-    @ApiModelProperty(
-            value = "流程实例的结果",
-            required = true,
-            notes = "参见 bpm_process_instance_result",
-            example = "2")
+    @ApiModelProperty(value = "流程实例的结果", required = true, notes = "参见 bpm_process_instance_result", example = "2")
     private Integer result;
 
     @ApiModelProperty(value = "提交时间", required = true)
@@ -99,10 +87,7 @@ public class BpmProcessInstanceRespVO {
         @ApiModelProperty(value = "表单类型", notes = "参见 bpm_model_form_type 数据字典", example = "1")
         private Integer formType;
 
-        @ApiModelProperty(
-                value = "表单编号",
-                example = "1024",
-                notes = "在表单类型为 {@link BpmModelFormTypeEnum#CUSTOM} 时，必须非空")
+        @ApiModelProperty(value = "表单编号", example = "1024", notes = "在表单类型为 {@link BpmModelFormTypeEnum#CUSTOM} 时，必须非空")
         private Long formId;
 
         @ApiModelProperty(

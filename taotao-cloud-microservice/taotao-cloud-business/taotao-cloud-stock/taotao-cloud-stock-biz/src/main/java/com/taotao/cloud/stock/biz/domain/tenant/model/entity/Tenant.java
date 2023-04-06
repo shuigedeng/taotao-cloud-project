@@ -53,11 +53,7 @@ public class Tenant implements Entity<Tenant> {
     }
 
     public Tenant(
-            TenantId tenantId,
-            TenantCode tenantCode,
-            TenantName tenantName,
-            StatusEnum status,
-            UserId creatorId) {
+            TenantId tenantId, TenantCode tenantCode, TenantName tenantName, StatusEnum status, UserId creatorId) {
         this.tenantId = tenantId;
         this.tenantCode = tenantCode;
         this.tenantName = tenantName;
@@ -76,8 +72,7 @@ public class Tenant implements Entity<Tenant> {
 
     /** 禁用 */
     public void disable() {
-        StatusEnum status =
-                this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
+        StatusEnum status = this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
         this.status = status;
     }
 

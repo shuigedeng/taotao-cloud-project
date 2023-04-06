@@ -56,10 +56,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/divisionReceivers")
 public class MchDivisionReceiverController extends CommonCtrl {
 
-    @Autowired private MchDivisionReceiverService mchDivisionReceiverService;
-    @Autowired private MchDivisionReceiverGroupService mchDivisionReceiverGroupService;
-    @Autowired private MchAppService mchAppService;
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private MchDivisionReceiverService mchDivisionReceiverService;
+
+    @Autowired
+    private MchDivisionReceiverGroupService mchDivisionReceiverGroupService;
+
+    @Autowired
+    private MchAppService mchAppService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
 
     /** list */
     @PreAuthorize("hasAnyAuthority( 'ENT_DIVISION_RECEIVER_LIST' )")
@@ -84,8 +91,7 @@ public class MchDivisionReceiverController extends CommonCtrl {
         }
 
         if (StringUtils.isNotEmpty(queryObject.getReceiverGroupName())) {
-            condition.like(
-                    MchDivisionReceiver::getReceiverGroupName, queryObject.getReceiverGroupName());
+            condition.like(MchDivisionReceiver::getReceiverGroupName, queryObject.getReceiverGroupName());
         }
 
         if (StringUtils.isNotEmpty(queryObject.getAppId())) {
@@ -98,8 +104,7 @@ public class MchDivisionReceiverController extends CommonCtrl {
 
         condition.orderByDesc(MchDivisionReceiver::getCreatedAt); // 时间倒序
 
-        IPage<MchDivisionReceiver> pages =
-                mchDivisionReceiverService.page(getIPage(true), condition);
+        IPage<MchDivisionReceiver> pages = mchDivisionReceiverService.page(getIPage(true), condition);
         return ApiRes.page(pages);
     }
 
@@ -107,11 +112,9 @@ public class MchDivisionReceiverController extends CommonCtrl {
     @PreAuthorize("hasAuthority( 'ENT_DIVISION_RECEIVER_VIEW' )")
     @RequestMapping(value = "/{recordId}", method = RequestMethod.GET)
     public ApiRes detail(@PathVariable("recordId") Long recordId) {
-        MchDivisionReceiver record =
-                mchDivisionReceiverService.getOne(
-                        MchDivisionReceiver.gw()
-                                .eq(MchDivisionReceiver::getMchNo, getCurrentMchNo())
-                                .eq(MchDivisionReceiver::getReceiverId, recordId));
+        MchDivisionReceiver record = mchDivisionReceiverService.getOne(MchDivisionReceiver.gw()
+                .eq(MchDivisionReceiver::getMchNo, getCurrentMchNo())
+                .eq(MchDivisionReceiver::getReceiverId, recordId));
         if (record == null) {
             throw new BizException(ApiCodeEnum.SYS_OPERATION_FAIL_SELETE);
         }
@@ -137,15 +140,12 @@ public class MchDivisionReceiverController extends CommonCtrl {
         request.setBizModel(model);
         model.setMchNo(this.getCurrentMchNo());
         model.setAppId(mchApp.getAppId());
-        model.setDivisionProfit(
-                new BigDecimal(model.getDivisionProfit())
-                        .divide(new BigDecimal(100))
-                        .toPlainString());
+        model.setDivisionProfit(new BigDecimal(model.getDivisionProfit())
+                .divide(new BigDecimal(100))
+                .toPlainString());
 
         JeepayClient jeepayClient =
-                new JeepayClient(
-                        sysConfigService.getDBApplicationConfig().getPaySiteUrl(),
-                        mchApp.getAppSecret());
+                new JeepayClient(sysConfigService.getDBApplicationConfig().getPaySiteUrl(), mchApp.getAppSecret());
 
         try {
             DivisionReceiverBindResponse response = jeepayClient.execute(request);
@@ -179,8 +179,7 @@ public class MchDivisionReceiverController extends CommonCtrl {
 
         if (record.getReceiverGroupId() != null) {
             MchDivisionReceiverGroup groupRecord =
-                    mchDivisionReceiverGroupService.findByIdAndMchNo(
-                            record.getReceiverGroupId(), getCurrentMchNo());
+                    mchDivisionReceiverGroupService.findByIdAndMchNo(record.getReceiverGroupId(), getCurrentMchNo());
             if (record == null) {
                 throw new BizException("账号组不存在");
             }
@@ -200,11 +199,9 @@ public class MchDivisionReceiverController extends CommonCtrl {
     @RequestMapping(value = "/{recordId}", method = RequestMethod.DELETE)
     @MethodLog(remark = "删除分账接收账号")
     public ApiRes del(@PathVariable("recordId") Long recordId) {
-        MchDivisionReceiver record =
-                mchDivisionReceiverService.getOne(
-                        MchDivisionReceiver.gw()
-                                .eq(MchDivisionReceiver::getReceiverGroupId, recordId)
-                                .eq(MchDivisionReceiver::getMchNo, getCurrentMchNo()));
+        MchDivisionReceiver record = mchDivisionReceiverService.getOne(MchDivisionReceiver.gw()
+                .eq(MchDivisionReceiver::getReceiverGroupId, recordId)
+                .eq(MchDivisionReceiver::getMchNo, getCurrentMchNo()));
         if (record == null) {
             throw new BizException(ApiCodeEnum.SYS_OPERATION_FAIL_SELETE);
         }

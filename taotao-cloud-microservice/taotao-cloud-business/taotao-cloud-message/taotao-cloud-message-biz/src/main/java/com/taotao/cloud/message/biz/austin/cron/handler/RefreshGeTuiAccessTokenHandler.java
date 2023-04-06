@@ -49,36 +49,29 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class RefreshGeTuiAccessTokenHandler {
 
-    @Autowired private StringRedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
-    @Autowired private ChannelAccountDao channelAccountDao;
+    @Autowired
+    private ChannelAccountDao channelAccountDao;
 
     /** 每小时请求一次接口刷新（以防失效) */
     @XxlJob("refreshGeTuiAccessTokenJob")
     public void execute() {
         log.info("refreshGeTuiAccessTokenJob#execute!");
-        SupportThreadPoolConfig.getPendingSingleThreadPool()
-                .execute(
-                        () -> {
-                            List<ChannelAccount> accountList =
-                                    channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-                                            CommonConstant.FALSE, ChannelType.PUSH.getCode());
-                            for (ChannelAccount channelAccount : accountList) {
-                                GeTuiAccount account =
-                                        JSON.parseObject(
-                                                channelAccount.getAccountConfig(),
-                                                GeTuiAccount.class);
-                                String accessToken = getAccessToken(account);
-                                if (StrUtil.isNotBlank(accessToken)) {
-                                    redisTemplate
-                                            .opsForValue()
-                                            .set(
-                                                    SendAccountConstant.GE_TUI_ACCESS_TOKEN_PREFIX
-                                                            + channelAccount.getId(),
-                                                    accessToken);
-                                }
-                            }
-                        });
+        SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
+            List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                    CommonConstant.FALSE, ChannelType.PUSH.getCode());
+            for (ChannelAccount channelAccount : accountList) {
+                GeTuiAccount account = JSON.parseObject(channelAccount.getAccountConfig(), GeTuiAccount.class);
+                String accessToken = getAccessToken(account);
+                if (StrUtil.isNotBlank(accessToken)) {
+                    redisTemplate
+                            .opsForValue()
+                            .set(SendAccountConstant.GE_TUI_ACCESS_TOKEN_PREFIX + channelAccount.getId(), accessToken);
+                }
+            }
+        });
     }
 
     /**
@@ -92,32 +85,25 @@ public class RefreshGeTuiAccessTokenHandler {
         try {
             String url = "https://restapi.getui.com/v2/" + account.getAppId() + "/auth";
             String time = String.valueOf(System.currentTimeMillis());
-            String digest =
-                    SecureUtil.sha256()
-                            .digestHex(account.getAppKey() + time + account.getMasterSecret());
-            QueryTokenParamDTO param =
-                    QueryTokenParamDTO.builder()
-                            .timestamp(time)
-                            .appKey(account.getAppKey())
-                            .sign(digest)
-                            .build();
+            String digest = SecureUtil.sha256().digestHex(account.getAppKey() + time + account.getMasterSecret());
+            QueryTokenParamDTO param = QueryTokenParamDTO.builder()
+                    .timestamp(time)
+                    .appKey(account.getAppKey())
+                    .sign(digest)
+                    .build();
 
-            String body =
-                    HttpRequest.post(url)
-                            .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                            .body(JSON.toJSONString(param))
-                            .timeout(20000)
-                            .execute()
-                            .body();
-            GeTuiTokenResultDTO geTuiTokenResultDTO =
-                    JSON.parseObject(body, GeTuiTokenResultDTO.class);
+            String body = HttpRequest.post(url)
+                    .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+                    .body(JSON.toJSONString(param))
+                    .timeout(20000)
+                    .execute()
+                    .body();
+            GeTuiTokenResultDTO geTuiTokenResultDTO = JSON.parseObject(body, GeTuiTokenResultDTO.class);
             if (geTuiTokenResultDTO.getCode().equals(0)) {
                 accessToken = geTuiTokenResultDTO.getData().getToken();
             }
         } catch (Exception e) {
-            log.error(
-                    "RefreshGeTuiAccessTokenHandler#getAccessToken fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("RefreshGeTuiAccessTokenHandler#getAccessToken fail:{}", Throwables.getStackTraceAsString(e));
         }
         return accessToken;
     }

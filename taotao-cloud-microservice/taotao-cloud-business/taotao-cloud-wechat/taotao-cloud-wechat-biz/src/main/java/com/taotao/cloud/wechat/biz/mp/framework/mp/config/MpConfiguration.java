@@ -44,8 +44,7 @@ public class MpConfiguration {
 
     @Bean
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    public RedisTemplateWxRedisOps redisTemplateWxRedisOps(
-            StringRedisTemplate stringRedisTemplate) {
+    public RedisTemplateWxRedisOps redisTemplateWxRedisOps(StringRedisTemplate stringRedisTemplate) {
         return new RedisTemplateWxRedisOps(stringRedisTemplate);
     }
 

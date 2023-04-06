@@ -41,7 +41,8 @@ import lombok.ToString;
 public class BpmProcessInstanceExtDO extends BaseDO {
 
     /** 编号，自增 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /**
      * 发起流程的用户编号
      *

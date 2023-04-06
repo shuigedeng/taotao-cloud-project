@@ -25,8 +25,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class DataFileExport implements FileExport {
-    @Autowired private UserProvider userProvider;
-    @Autowired private ConfigValueUtil configValueUtil;
+    @Autowired
+    private UserProvider userProvider;
+
+    @Autowired
+    private ConfigValueUtil configValueUtil;
 
     @Override
     public DownloadVO exportFile(Object obj, String filePath, String fileName, String tableName) {
@@ -37,26 +40,15 @@ public class DataFileExport implements FileExport {
         FileUtil.writeToFile(json, filePath, fileName);
         /** 是否需要上产到minio */
         try {
-            UploadUtil.uploadFile(
-                    configValueUtil.getFileType(),
-                    filePath + fileName,
-                    FileTypeEnum.EXPORT,
-                    fileName);
+            UploadUtil.uploadFile(configValueUtil.getFileType(), filePath + fileName, FileTypeEnum.EXPORT, fileName);
         } catch (IOException e) {
             log.error("上传文件失败，错误" + e.getMessage());
         }
         /** 生成下载下载文件路径 */
-        DownloadVO vo =
-                DownloadVO.builder()
-                        .name(fileName)
-                        .url(
-                                UploaderUtil.uploaderFile(
-                                        userProvider.get().getId()
-                                                + "#"
-                                                + fileName
-                                                + "#"
-                                                + "export"))
-                        .build();
+        DownloadVO vo = DownloadVO.builder()
+                .name(fileName)
+                .url(UploaderUtil.uploaderFile(userProvider.get().getId() + "#" + fileName + "#" + "export"))
+                .build();
         return vo;
     }
 }

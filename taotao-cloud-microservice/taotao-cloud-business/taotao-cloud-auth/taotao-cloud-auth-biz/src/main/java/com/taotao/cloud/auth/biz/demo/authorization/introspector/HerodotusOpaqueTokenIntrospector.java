@@ -72,8 +72,7 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
     private Converter<String, RequestEntity<?>> requestEntityConverter;
 
     public HerodotusOpaqueTokenIntrospector(
-            EndpointProperties endpointProperties,
-            OAuth2ResourceServerProperties resourceServerProperties) {
+            EndpointProperties endpointProperties, OAuth2ResourceServerProperties resourceServerProperties) {
         this(
                 getIntrospectionUri(endpointProperties, resourceServerProperties),
                 resourceServerProperties.getOpaquetoken().getClientId(),
@@ -87,17 +86,13 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
      * @param clientId The client id authorized to introspect
      * @param clientSecret The client's secret
      */
-    public HerodotusOpaqueTokenIntrospector(
-            String introspectionUri, String clientId, String clientSecret) {
+    public HerodotusOpaqueTokenIntrospector(String introspectionUri, String clientId, String clientSecret) {
         Assert.notNull(introspectionUri, "introspectionUri cannot be null");
         Assert.notNull(clientId, "clientId cannot be null");
         Assert.notNull(clientSecret, "clientSecret cannot be null");
-        this.requestEntityConverter =
-                this.defaultRequestEntityConverter(URI.create(introspectionUri));
+        this.requestEntityConverter = this.defaultRequestEntityConverter(URI.create(introspectionUri));
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate
-                .getInterceptors()
-                .add(new BasicAuthenticationInterceptor(clientId, clientSecret));
+        restTemplate.getInterceptors().add(new BasicAuthenticationInterceptor(clientId, clientSecret));
         this.restOperations = restTemplate;
     }
 
@@ -110,18 +105,15 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
      * @param introspectionUri The introspection endpoint uri
      * @param restOperations The client for performing the introspection request
      */
-    public HerodotusOpaqueTokenIntrospector(
-            String introspectionUri, RestOperations restOperations) {
+    public HerodotusOpaqueTokenIntrospector(String introspectionUri, RestOperations restOperations) {
         Assert.notNull(introspectionUri, "introspectionUri cannot be null");
         Assert.notNull(restOperations, "restOperations cannot be null");
-        this.requestEntityConverter =
-                this.defaultRequestEntityConverter(URI.create(introspectionUri));
+        this.requestEntityConverter = this.defaultRequestEntityConverter(URI.create(introspectionUri));
         this.restOperations = restOperations;
     }
 
     private static String getIntrospectionUri(
-            EndpointProperties endpointProperties,
-            OAuth2ResourceServerProperties resourceServerProperties) {
+            EndpointProperties endpointProperties, OAuth2ResourceServerProperties resourceServerProperties) {
         String introspectionUri = endpointProperties.getTokenIntrospectionUri();
         String configIntrospectionUri =
                 resourceServerProperties.getOpaquetoken().getIntrospectionUri();
@@ -131,8 +123,7 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
         return introspectionUri;
     }
 
-    private Converter<String, RequestEntity<?>> defaultRequestEntityConverter(
-            URI introspectionUri) {
+    private Converter<String, RequestEntity<?>> defaultRequestEntityConverter(URI introspectionUri) {
         return (token) -> {
             HttpHeaders headers = requestHeaders();
             MultiValueMap<String, String> body = requestBody(token);
@@ -170,8 +161,7 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
      * @param requestEntityConverter the {@link Converter} used for converting to a {@link
      *     RequestEntity} representation of the token introspection request
      */
-    public void setRequestEntityConverter(
-            Converter<String, RequestEntity<?>> requestEntityConverter) {
+    public void setRequestEntityConverter(Converter<String, RequestEntity<?>> requestEntityConverter) {
         Assert.notNull(requestEntityConverter, "requestEntityConverter cannot be null");
         this.requestEntityConverter = requestEntityConverter;
     }
@@ -184,8 +174,7 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
         }
     }
 
-    private Map<String, Object> adaptToNimbusResponse(
-            ResponseEntity<Map<String, Object>> responseEntity) {
+    private Map<String, Object> adaptToNimbusResponse(ResponseEntity<Map<String, Object>> responseEntity) {
         if (responseEntity.getStatusCode() != HttpStatus.OK) {
             throw new OAuth2IntrospectionException(
                     "Introspection endpoint responded with " + responseEntity.getStatusCode());
@@ -197,19 +186,15 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
             return Collections.emptyMap();
         }
 
-        boolean active =
-                (boolean)
-                        claims.compute(
-                                OAuth2TokenIntrospectionClaimNames.ACTIVE,
-                                (k, v) -> {
-                                    if (v instanceof String) {
-                                        return Boolean.parseBoolean((String) v);
-                                    }
-                                    if (v instanceof Boolean) {
-                                        return v;
-                                    }
-                                    return false;
-                                });
+        boolean active = (boolean) claims.compute(OAuth2TokenIntrospectionClaimNames.ACTIVE, (k, v) -> {
+            if (v instanceof String) {
+                return Boolean.parseBoolean((String) v);
+            }
+            if (v instanceof Boolean) {
+                return v;
+            }
+            return false;
+        });
         if (!active) {
             this.logger.trace("Did not validate token since it is inactive");
             throw new BadOpaqueTokenException("Provided token isn't active");
@@ -218,22 +203,17 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
     }
 
     private OAuth2AuthenticatedPrincipal convertClaimsSet(Map<String, Object> claims) {
+        claims.computeIfPresent(OAuth2TokenIntrospectionClaimNames.AUD, (k, v) -> {
+            if (v instanceof String) {
+                return Collections.singletonList(v);
+            }
+            return v;
+        });
+        claims.computeIfPresent(OAuth2TokenIntrospectionClaimNames.CLIENT_ID, (k, v) -> v.toString());
         claims.computeIfPresent(
-                OAuth2TokenIntrospectionClaimNames.AUD,
-                (k, v) -> {
-                    if (v instanceof String) {
-                        return Collections.singletonList(v);
-                    }
-                    return v;
-                });
+                OAuth2TokenIntrospectionClaimNames.EXP, (k, v) -> Instant.ofEpochSecond(((Number) v).longValue()));
         claims.computeIfPresent(
-                OAuth2TokenIntrospectionClaimNames.CLIENT_ID, (k, v) -> v.toString());
-        claims.computeIfPresent(
-                OAuth2TokenIntrospectionClaimNames.EXP,
-                (k, v) -> Instant.ofEpochSecond(((Number) v).longValue()));
-        claims.computeIfPresent(
-                OAuth2TokenIntrospectionClaimNames.IAT,
-                (k, v) -> Instant.ofEpochSecond(((Number) v).longValue()));
+                OAuth2TokenIntrospectionClaimNames.IAT, (k, v) -> Instant.ofEpochSecond(((Number) v).longValue()));
         // RFC-7662 page 7 directs users to RFC-7519 for defining the values of these
         // issuer fields.
         // https://datatracker.ietf.org/doc/html/rfc7662#page-7
@@ -254,20 +234,16 @@ public class HerodotusOpaqueTokenIntrospector implements OpaqueTokenIntrospector
         // would *only* allow valid URLs, which is not what we wish to achieve here.
         claims.computeIfPresent(OAuth2TokenIntrospectionClaimNames.ISS, (k, v) -> v.toString());
         claims.computeIfPresent(
-                OAuth2TokenIntrospectionClaimNames.NBF,
-                (k, v) -> Instant.ofEpochSecond(((Number) v).longValue()));
+                OAuth2TokenIntrospectionClaimNames.NBF, (k, v) -> Instant.ofEpochSecond(((Number) v).longValue()));
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         claims.computeIfPresent(OAuth2TokenIntrospectionClaimNames.SCOPE, (k, v) -> v.toString());
-        claims.computeIfPresent(
-                BaseConstants.AUTHORITIES,
-                (k, v) -> {
-                    if (v instanceof ArrayList) {
-                        List<String> values = (List<String>) v;
-                        values.forEach(
-                                value -> authorities.add(new HerodotusGrantedAuthority(value)));
-                    }
-                    return v;
-                });
+        claims.computeIfPresent(BaseConstants.AUTHORITIES, (k, v) -> {
+            if (v instanceof ArrayList) {
+                List<String> values = (List<String>) v;
+                values.forEach(value -> authorities.add(new HerodotusGrantedAuthority(value)));
+            }
+            return v;
+        });
         return new OAuth2IntrospectionAuthenticatedPrincipal(claims, authorities);
     }
 }

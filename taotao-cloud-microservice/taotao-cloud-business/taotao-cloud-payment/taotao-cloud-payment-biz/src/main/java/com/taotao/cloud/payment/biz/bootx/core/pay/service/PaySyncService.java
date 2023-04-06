@@ -68,8 +68,7 @@ public class PaySyncService {
     private Payment syncPayment(Payment payment) {
         PayParam payParam = PaymentBuilder.buildPayParamByPayment(payment);
         // 1.获取支付方式，通过工厂生成对应的策略组
-        List<AbsPayStrategy> paymentStrategyList =
-                PayStrategyFactory.create(payParam.getPayModeList());
+        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayModeList());
         if (CollUtil.isEmpty(paymentStrategyList)) {
             throw new PayUnsupportedMethodException();
         }
@@ -88,38 +87,33 @@ public class PaySyncService {
 
         switch (paySyncStatus) {
                 // 支付成功
-            case PaySyncStatus.TRADE_SUCCESS:
-                {
-                    // payment 变更为支付成功
-                    this.paymentSuccess(payment, syncPayStrategy, paySyncResult);
-                    break;
-                }
+            case PaySyncStatus.TRADE_SUCCESS: {
+                // payment 变更为支付成功
+                this.paymentSuccess(payment, syncPayStrategy, paySyncResult);
+                break;
+            }
                 // 待付款 理论上不会出现, 不进行处理
-            case PaySyncStatus.WAIT_BUYER_PAY:
-                {
-                    log.warn("依然是代付款状态");
-                    break;
-                }
+            case PaySyncStatus.WAIT_BUYER_PAY: {
+                log.warn("依然是代付款状态");
+                break;
+            }
                 // 网关已经超时关闭 和 网关没找到记录
             case PaySyncStatus.TRADE_CLOSED:
-            case PaySyncStatus.NOT_FOUND:
-                {
-                    // 判断下是否超时, 同时payment 变更为取消支付
-                    this.paymentCancel(payment, paymentStrategyList);
-                    break;
-                }
+            case PaySyncStatus.NOT_FOUND: {
+                // 判断下是否超时, 同时payment 变更为取消支付
+                this.paymentCancel(payment, paymentStrategyList);
+                break;
+            }
                 // 调用出错
-            case PaySyncStatus.FAIL:
-                {
-                    // 不进行处理
-                    log.warn("支付状态同步接口调用出错");
-                    break;
-                }
+            case PaySyncStatus.FAIL: {
+                // 不进行处理
+                log.warn("支付状态同步接口调用出错");
+                break;
+            }
             case PaySyncStatus.NOT_SYNC:
-            default:
-                {
-                    throw new BizException("代码有问题");
-                }
+            default: {
+                throw new BizException("代码有问题");
+            }
         }
         return payment;
     }
@@ -127,20 +121,16 @@ public class PaySyncService {
     /** payment 变更为取消支付 */
     private void paymentCancel(Payment payment, List<AbsPayStrategy> absPayStrategies) {
         // 关闭本地支付记录
-        this.doHandler(
-                payment,
-                absPayStrategies,
-                (strategyList, paymentObj) -> {
-                    strategyList.forEach(AbsPayStrategy::doCloseHandler);
-                    // 修改payment支付状态为取消
-                    payment.setPayStatus(PayStatusCode.TRADE_CANCEL);
-                    paymentManager.save(payment);
-                });
+        this.doHandler(payment, absPayStrategies, (strategyList, paymentObj) -> {
+            strategyList.forEach(AbsPayStrategy::doCloseHandler);
+            // 修改payment支付状态为取消
+            payment.setPayStatus(PayStatusCode.TRADE_CANCEL);
+            paymentManager.save(payment);
+        });
     }
 
     /** payment 变更为已支付 */
-    private void paymentSuccess(
-            Payment payment, AbsPayStrategy syncPayStrategy, PaySyncResult paySyncResult) {
+    private void paymentSuccess(Payment payment, AbsPayStrategy syncPayStrategy, PaySyncResult paySyncResult) {
 
         // 已支付不在重复处理
         if (Objects.equals(payment.getPayStatus(), PayStatusCode.TRADE_SUCCESS)) {

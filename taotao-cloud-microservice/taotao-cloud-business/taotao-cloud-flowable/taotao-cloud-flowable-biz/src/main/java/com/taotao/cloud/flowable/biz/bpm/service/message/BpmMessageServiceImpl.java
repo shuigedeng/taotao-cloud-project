@@ -40,35 +40,29 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 public class BpmMessageServiceImpl implements BpmMessageService {
 
-    @Resource private SmsSendApi smsSendApi;
+    @Resource
+    private SmsSendApi smsSendApi;
 
-    @Resource private WebProperties webProperties;
+    @Resource
+    private WebProperties webProperties;
 
     @Override
-    public void sendMessageWhenProcessInstanceApprove(
-            BpmMessageSendWhenProcessInstanceApproveReqDTO reqDTO) {
+    public void sendMessageWhenProcessInstanceApprove(BpmMessageSendWhenProcessInstanceApproveReqDTO reqDTO) {
         Map<String, Object> templateParams = new HashMap<>();
         templateParams.put("processInstanceName", reqDTO.getProcessInstanceName());
         templateParams.put("detailUrl", getProcessInstanceDetailUrl(reqDTO.getProcessInstanceId()));
-        smsSendApi.sendSingleSmsToAdmin(
-                BpmMessageConvert.INSTANCE.convert(
-                        reqDTO.getStartUserId(),
-                        BpmMessageEnum.PROCESS_INSTANCE_APPROVE.getSmsTemplateCode(),
-                        templateParams));
+        smsSendApi.sendSingleSmsToAdmin(BpmMessageConvert.INSTANCE.convert(
+                reqDTO.getStartUserId(), BpmMessageEnum.PROCESS_INSTANCE_APPROVE.getSmsTemplateCode(), templateParams));
     }
 
     @Override
-    public void sendMessageWhenProcessInstanceReject(
-            BpmMessageSendWhenProcessInstanceRejectReqDTO reqDTO) {
+    public void sendMessageWhenProcessInstanceReject(BpmMessageSendWhenProcessInstanceRejectReqDTO reqDTO) {
         Map<String, Object> templateParams = new HashMap<>();
         templateParams.put("processInstanceName", reqDTO.getProcessInstanceName());
         templateParams.put("reason", reqDTO.getReason());
         templateParams.put("detailUrl", getProcessInstanceDetailUrl(reqDTO.getProcessInstanceId()));
-        smsSendApi.sendSingleSmsToAdmin(
-                BpmMessageConvert.INSTANCE.convert(
-                        reqDTO.getStartUserId(),
-                        BpmMessageEnum.PROCESS_INSTANCE_REJECT.getSmsTemplateCode(),
-                        templateParams));
+        smsSendApi.sendSingleSmsToAdmin(BpmMessageConvert.INSTANCE.convert(
+                reqDTO.getStartUserId(), BpmMessageEnum.PROCESS_INSTANCE_REJECT.getSmsTemplateCode(), templateParams));
     }
 
     @Override
@@ -78,11 +72,8 @@ public class BpmMessageServiceImpl implements BpmMessageService {
         templateParams.put("taskName", reqDTO.getTaskName());
         templateParams.put("startUserNickname", reqDTO.getStartUserNickname());
         templateParams.put("detailUrl", getProcessInstanceDetailUrl(reqDTO.getProcessInstanceId()));
-        smsSendApi.sendSingleSmsToAdmin(
-                BpmMessageConvert.INSTANCE.convert(
-                        reqDTO.getAssigneeUserId(),
-                        BpmMessageEnum.TASK_ASSIGNED.getSmsTemplateCode(),
-                        templateParams));
+        smsSendApi.sendSingleSmsToAdmin(BpmMessageConvert.INSTANCE.convert(
+                reqDTO.getAssigneeUserId(), BpmMessageEnum.TASK_ASSIGNED.getSmsTemplateCode(), templateParams));
     }
 
     private String getProcessInstanceDetailUrl(String taskId) {

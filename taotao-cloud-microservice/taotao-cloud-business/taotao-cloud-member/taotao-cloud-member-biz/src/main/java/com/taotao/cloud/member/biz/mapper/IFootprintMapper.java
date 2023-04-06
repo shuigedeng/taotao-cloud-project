@@ -41,8 +41,7 @@ public interface IFootprintMapper extends BaseSuperMapper<MemberBrowse, Long> {
 		from tt_foot_print
 		${ew.customSqlSegment}
 		""")
-    List<String> footprintSkuIdList(
-            IPage<String> page, @Param(Constants.WRAPPER) Wrapper<MemberBrowse> queryWrapper);
+    List<String> footprintSkuIdList(IPage<String> page, @Param(Constants.WRAPPER) Wrapper<MemberBrowse> queryWrapper);
 
     /**
      * 删除超过100条后的记录

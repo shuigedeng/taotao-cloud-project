@@ -57,17 +57,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreManagerController {
 
     /** 店铺 */
-    @Autowired private IStoreService storeService;
+    @Autowired
+    private IStoreService storeService;
     /** 店铺详情 */
-    @Autowired private IStoreDetailService storeDetailService;
+    @Autowired
+    private IStoreDetailService storeDetailService;
 
     @Operation(summary = "获取店铺分页列表", description = "获取店铺分页列表")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/all")
     public Result<List<Store>> getAll() {
-        return Result.success(
-                storeService.list(new QueryWrapper<Store>().eq("store_disable", "OPEN")));
+        return Result.success(storeService.list(new QueryWrapper<Store>().eq("store_disable", "OPEN")));
     }
 
     @Operation(summary = "获取店铺分页列表", description = "获取店铺分页列表")

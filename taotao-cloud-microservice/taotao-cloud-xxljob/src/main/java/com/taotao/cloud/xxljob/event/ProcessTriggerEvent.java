@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.xxljob.event;
 
 import com.taotao.cloud.xxljob.core.model.XxlJobGroup;
@@ -29,35 +30,35 @@ import org.springframework.context.ApplicationEvent;
  */
 public class ProcessTriggerEvent extends ApplicationEvent {
 
-	private final XxlJobLog xxlJobLog;
-	private final XxlJobGroup group;
-	private final XxlJobInfo jobInfo;
+    private final XxlJobLog xxlJobLog;
+    private final XxlJobGroup group;
+    private final XxlJobInfo jobInfo;
 
-	private final long time;
+    private final long time;
 
-	public ProcessTriggerEvent(XxlJobGroup group, XxlJobInfo jobInfo, XxlJobLog xxlJobLog, long time) {
-		super(xxlJobLog);
+    public ProcessTriggerEvent(XxlJobGroup group, XxlJobInfo jobInfo, XxlJobLog xxlJobLog, long time) {
+        super(xxlJobLog);
 
-		this.xxlJobLog = xxlJobLog;
-		this.group = group;
-		this.jobInfo = jobInfo;
+        this.xxlJobLog = xxlJobLog;
+        this.group = group;
+        this.jobInfo = jobInfo;
 
-		this.time = time;
-	}
+        this.time = time;
+    }
 
-	public long getTime() {
-		return time;
-	}
+    public long getTime() {
+        return time;
+    }
 
-	public XxlJobLog getXxlJobLog() {
-		return xxlJobLog;
-	}
+    public XxlJobLog getXxlJobLog() {
+        return xxlJobLog;
+    }
 
-	public XxlJobGroup getGroup() {
-		return group;
-	}
+    public XxlJobGroup getGroup() {
+        return group;
+    }
 
-	public XxlJobInfo getJobInfo() {
-		return jobInfo;
-	}
+    public XxlJobInfo getJobInfo() {
+        return jobInfo;
+    }
 }

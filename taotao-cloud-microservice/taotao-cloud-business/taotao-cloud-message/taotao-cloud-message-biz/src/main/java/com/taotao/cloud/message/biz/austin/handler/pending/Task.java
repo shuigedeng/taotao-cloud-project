@@ -42,13 +42,17 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Task implements Runnable {
 
-    @Autowired private HandlerHolder handlerHolder;
+    @Autowired
+    private HandlerHolder handlerHolder;
 
-    @Autowired private DeduplicationRuleService deduplicationRuleService;
+    @Autowired
+    private DeduplicationRuleService deduplicationRuleService;
 
-    @Autowired private DiscardMessageService discardMessageService;
+    @Autowired
+    private DiscardMessageService discardMessageService;
 
-    @Autowired private ShieldService shieldService;
+    @Autowired
+    private ShieldService shieldService;
 
     private TaskInfo taskInfo;
 

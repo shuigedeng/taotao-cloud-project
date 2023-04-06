@@ -44,12 +44,13 @@ import org.springframework.stereotype.Service;
  * @since 2022-05-16 17:36:07
  */
 @Service
-public class NoticeMessageExecute
-        implements TradeEvent, OrderStatusChangeEvent, AfterSaleStatusChangeEvent {
+public class NoticeMessageExecute implements TradeEvent, OrderStatusChangeEvent, AfterSaleStatusChangeEvent {
 
-    @Autowired private IFeignNoticeMessageApi noticeMessageService;
+    @Autowired
+    private IFeignNoticeMessageApi noticeMessageService;
 
-    @Autowired private IOrderService orderService;
+    @Autowired
+    private IOrderService orderService;
 
     @Override
     public void orderCreate(TradeDTO tradeDTO) {
@@ -78,13 +79,11 @@ public class NoticeMessageExecute
                     params.put(
                             NoticeMessageParameterEnum.CANCEL_REASON.getType(),
                             orderDetailVO.order().cancelReason());
-                    noticeMessageDTO.setNoticeMessageNodeEnum(
-                            NoticeMessageNodeEnum.ORDER_CANCEL_SUCCESS);
+                    noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.ORDER_CANCEL_SUCCESS);
                     break;
                     // 如果订单新的状态为已经支付，则发送支付成功站内信
                 case PAID:
-                    noticeMessageDTO.setNoticeMessageNodeEnum(
-                            NoticeMessageNodeEnum.ORDER_PAY_SUCCESS);
+                    noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.ORDER_PAY_SUCCESS);
                     break;
                     // 如果订单新的状态为已发货，则发送已发货站内信
                 case DELIVERED:
@@ -95,8 +94,7 @@ public class NoticeMessageExecute
                     // 订单完成消息
                     noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.ORDER_COMPLETE);
                     // 订单完成也可以进行评价，所以要有评价消息
-                    noticeMessageDTO.setNoticeMessageNodeEnum(
-                            NoticeMessageNodeEnum.ORDER_EVALUATION);
+                    noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.ORDER_EVALUATION);
                     break;
                     // 如果是拼团订单，发送拼团成功消息
                 case UNDELIVERED:
@@ -104,8 +102,7 @@ public class NoticeMessageExecute
                             .name()
                             .equals(orderDetailVO.order().orderPromotionType())) {
                         // 拼团成功消息
-                        noticeMessageDTO.setNoticeMessageNodeEnum(
-                                NoticeMessageNodeEnum.PINTUAN_SUCCESS);
+                        noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.PINTUAN_SUCCESS);
                     }
                     break;
                 default:
@@ -137,8 +134,7 @@ public class NoticeMessageExecute
         noticeMessageDTO.setParameter(params);
         // 如果售后单是申请中 则发送申请中站内信
         if (afterSale.getServiceStatus().equals(AfterSaleStatusEnum.APPLY.name())) {
-            noticeMessageDTO.setNoticeMessageNodeEnum(
-                    NoticeMessageNodeEnum.AFTER_SALE_CREATE_SUCCESS);
+            noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.AFTER_SALE_CREATE_SUCCESS);
         }
         // 售后审核同意切退货站内信通知
         else if (afterSale.getServiceStatus().equals(AfterSaleStatusEnum.PASS.name())
@@ -165,9 +161,7 @@ public class NoticeMessageExecute
             noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.AFTER_SALE_ROG_PASS);
         }
         // 退货物品拒收站内信通知
-        else if (afterSale
-                .getServiceStatus()
-                .equals(AfterSaleStatusEnum.SELLER_TERMINATION.name())) {
+        else if (afterSale.getServiceStatus().equals(AfterSaleStatusEnum.SELLER_TERMINATION.name())) {
             noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.AFTER_SALE_ROG_REFUSE);
         }
         // 售后完成通知

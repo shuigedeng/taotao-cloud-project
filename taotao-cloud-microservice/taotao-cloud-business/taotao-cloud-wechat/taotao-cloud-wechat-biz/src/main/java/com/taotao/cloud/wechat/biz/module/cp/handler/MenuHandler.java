@@ -37,10 +37,8 @@ public class MenuHandler extends AbstractHandler {
             WxCpService cpService,
             WxSessionManager sessionManager) {
 
-        String msg =
-                String.format(
-                        "type:%s, event:%s, key:%s",
-                        wxMessage.getMsgType(), wxMessage.getEvent(), wxMessage.getEventKey());
+        String msg = String.format(
+                "type:%s, event:%s, key:%s", wxMessage.getMsgType(), wxMessage.getEvent(), wxMessage.getEventKey());
         if (MenuButtonType.VIEW.equals(wxMessage.getEvent())) {
             return null;
         }

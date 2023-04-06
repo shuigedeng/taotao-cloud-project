@@ -47,8 +47,7 @@ public class WalletLogManager extends BaseManager<WalletLogMapper, WalletLog> {
     }
 
     /** 分页查询指定用户的钱包日志 */
-    public Page<WalletLog> pageByUserId(
-            PageQuery PageQuery, WalletLogQueryParam param, Long userId) {
+    public Page<WalletLog> pageByUserId(PageQuery PageQuery, WalletLogQueryParam param, Long userId) {
         Page<WalletLog> mpPage = MpUtil.getMpPage(PageQuery, WalletLog.class);
 
         return this.lambdaQuery()

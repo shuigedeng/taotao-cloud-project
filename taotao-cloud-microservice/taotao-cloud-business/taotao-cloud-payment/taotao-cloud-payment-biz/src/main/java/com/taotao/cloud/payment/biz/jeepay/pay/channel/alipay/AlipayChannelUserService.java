@@ -42,7 +42,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AlipayChannelUserService implements IChannelUserService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -50,17 +51,14 @@ public class AlipayChannelUserService implements IChannelUserService {
     }
 
     @Override
-    public String buildUserRedirectUrl(
-            String callbackUrlEncode, MchAppConfigContext mchAppConfigContext) {
+    public String buildUserRedirectUrl(String callbackUrlEncode, MchAppConfigContext mchAppConfigContext) {
 
         String oauthUrl = AlipayConfig.PROD_OAUTH_URL;
         String appId = null;
 
         if (mchAppConfigContext.isIsvsubMch()) {
-            AlipayIsvParams isvParams =
-                    (AlipayIsvParams)
-                            configContextQueryService.queryIsvParams(
-                                    mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
+            AlipayIsvParams isvParams = (AlipayIsvParams) configContextQueryService.queryIsvParams(
+                    mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
             if (isvParams == null) {
                 throw new BizException("服务商支付宝接口没有配置！");
             }
@@ -68,11 +66,8 @@ public class AlipayChannelUserService implements IChannelUserService {
         } else {
             // 获取商户配置信息
             AlipayNormalMchParams normalMchParams =
-                    (AlipayNormalMchParams)
-                            configContextQueryService.queryNormalMchParams(
-                                    mchAppConfigContext.getMchNo(),
-                                    mchAppConfigContext.getAppId(),
-                                    getIfCode());
+                    (AlipayNormalMchParams) configContextQueryService.queryNormalMchParams(
+                            mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
             if (normalMchParams == null) {
                 throw new BizException("商户支付宝接口没有配置！");
             }

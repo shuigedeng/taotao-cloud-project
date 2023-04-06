@@ -61,28 +61,16 @@ public class FinanceTest {
          */
 
         /** 分账配置，返回配置单号。后续生成分账账单需要用 */
-        String configNo =
-                Finance.wxPayConfig(
-                        mch_id,
-                        null,
-                        "测试分账",
-                        "o-_-itxeWVTRnl-iGT_JJ-t3kpxU",
-                        null,
-                        null,
-                        "0.12",
-                        null,
-                        key);
+        String configNo = Finance.wxPayConfig(
+                mch_id, null, "测试分账", "o-_-itxeWVTRnl-iGT_JJ-t3kpxU", null, null, "0.12", null, key);
         System.out.println("微信分账配置结果：" + configNo);
 
         /** 支付宝分账配置 */
-        String aliPayConfigNo =
-                Finance.aliPayConfig(
-                        "支付宝商户号", "测试分账", "分账收款方支付宝账户", "分账收款方支付宝姓名", null, null, "支付宝密钥");
+        String aliPayConfigNo = Finance.aliPayConfig("支付宝商户号", "测试分账", "分账收款方支付宝账户", "分账收款方支付宝姓名", null, null, "支付宝密钥");
         System.out.println("微信分账配置结果：" + aliPayConfigNo);
 
         /** 生成分账账单 */
-        List<String> list =
-                Finance.createBill(mch_id, "1582434286538", configNo, null, null, null, key);
+        List<String> list = Finance.createBill(mch_id, "1582434286538", configNo, null, null, null, key);
         System.out.println("生成分账账单结果：" + list.toString());
 
         // 分账账单号 此处不要学哦 没有做数据合法性校验 只是大概演示个流程给大家瞅瞅

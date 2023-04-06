@@ -26,5 +26,4 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.04
  * @since 2022-04-22 16:24:53
  */
-public interface DistributionSelectedGoodsMapper
-        extends BaseSuperMapper<DistributionSelectedGoods, Long> {}
+public interface DistributionSelectedGoodsMapper extends BaseSuperMapper<DistributionSelectedGoods, Long> {}

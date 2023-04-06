@@ -50,7 +50,8 @@ import lombok.Data;
 @Schema(description = "购物车视图")
 public class TradeDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -3137165707807057810L;
+    @Serial
+    private static final long serialVersionUID = -3137165707807057810L;
 
     @Schema(description = "sn")
     private String sn;

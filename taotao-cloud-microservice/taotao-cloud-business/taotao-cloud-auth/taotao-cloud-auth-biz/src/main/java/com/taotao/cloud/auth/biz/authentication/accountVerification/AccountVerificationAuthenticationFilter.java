@@ -29,8 +29,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-public class AccountVerificationAuthenticationFilter
-        extends AbstractAuthenticationProcessingFilter {
+public class AccountVerificationAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
@@ -64,12 +63,10 @@ public class AccountVerificationAuthenticationFilter
     }
 
     @Override
-    public Authentication attemptAuthentication(
-            HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException(
-                    "Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
         AccountVerificationAuthenticationToken authRequest =
@@ -79,8 +76,7 @@ public class AccountVerificationAuthenticationFilter
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 
-    private Converter<HttpServletRequest, AccountVerificationAuthenticationToken>
-            defaultConverter() {
+    private Converter<HttpServletRequest, AccountVerificationAuthenticationToken> defaultConverter() {
         return request -> {
             String username = request.getParameter(this.usernameParameter);
             username = (username != null) ? username.trim() : "";
@@ -94,13 +90,11 @@ public class AccountVerificationAuthenticationFilter
             String type = request.getParameter(this.typeParameter);
             type = (type != null) ? type.trim() : "";
 
-            return new AccountVerificationAuthenticationToken(
-                    username, passord, verificationCode, type);
+            return new AccountVerificationAuthenticationToken(username, passord, verificationCode, type);
         };
     }
 
-    protected void setDetails(
-            HttpServletRequest request, AccountVerificationAuthenticationToken authRequest) {
+    protected void setDetails(HttpServletRequest request, AccountVerificationAuthenticationToken authRequest) {
         authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
     }
 
@@ -115,13 +109,11 @@ public class AccountVerificationAuthenticationFilter
     }
 
     public void setVerificationCodeParameter(String verificationCodeParameter) {
-        Assert.hasText(
-                verificationCodeParameter, "verificationCode parameter must not be empty or null");
+        Assert.hasText(verificationCodeParameter, "verificationCode parameter must not be empty or null");
         this.verificationCodeParameter = verificationCodeParameter;
     }
 
-    public void setConverter(
-            Converter<HttpServletRequest, AccountVerificationAuthenticationToken> converter) {
+    public void setConverter(Converter<HttpServletRequest, AccountVerificationAuthenticationToken> converter) {
         Assert.notNull(converter, "Converter must not be null");
         this.accountVerificationAuthenticationTokenConverter = converter;
     }

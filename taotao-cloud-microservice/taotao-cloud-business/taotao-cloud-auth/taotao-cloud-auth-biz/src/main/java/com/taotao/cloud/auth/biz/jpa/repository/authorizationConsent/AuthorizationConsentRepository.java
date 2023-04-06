@@ -28,6 +28,5 @@ public interface AuthorizationConsentRepository
     Optional<AuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
             String registeredClientId, String principalName);
 
-    void deleteByRegisteredClientIdAndPrincipalName(
-            String registeredClientId, String principalName);
+    void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName);
 }

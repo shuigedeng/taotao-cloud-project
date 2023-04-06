@@ -36,7 +36,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class BpmTaskAssignStartUserScript implements BpmTaskAssignScript {
 
-    @Resource @Lazy // 解决循环依赖
+    @Resource
+    @Lazy // 解决循环依赖
     private BpmProcessInstanceService bpmProcessInstanceService;
 
     @Override

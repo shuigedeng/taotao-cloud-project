@@ -42,8 +42,7 @@ public class DbMySQL extends DbBase {
         // 精度
         String precision = result.getString(DbAliasConst.PRECISION);
         DataTypeModel dataTypeModel =
-                getDataTypeModel(
-                        result.getString(DbAliasEnum.getAsByDb(this, DbAliasConst.DATA_TYPE)));
+                getDataTypeModel(result.getString(DbAliasEnum.getAsByDb(this, DbAliasConst.DATA_TYPE)));
         if (dataTypeModel != null) {
             if (!StringUtil.isEmpty(precision) || dataTypeModel.getPrecisionMax() != null) {
                 model.setDataLength(precision + "," + result.getString(DbAliasConst.DECIMALS));

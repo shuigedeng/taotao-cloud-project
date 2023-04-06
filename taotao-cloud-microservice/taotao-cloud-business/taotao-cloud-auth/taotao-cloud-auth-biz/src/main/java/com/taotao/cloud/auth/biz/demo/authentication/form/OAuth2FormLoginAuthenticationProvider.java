@@ -47,8 +47,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class OAuth2FormLoginAuthenticationProvider extends DaoAuthenticationProvider {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(OAuth2FormLoginAuthenticationProvider.class);
+    private static final Logger log = LoggerFactory.getLogger(OAuth2FormLoginAuthenticationProvider.class);
 
     private final CaptchaRendererFactory captchaRendererFactory;
 
@@ -64,10 +63,7 @@ public class OAuth2FormLoginAuthenticationProvider extends DaoAuthenticationProv
         Object details = authentication.getDetails();
 
         if (ObjectUtils.isNotEmpty(details)
-                && details
-                        instanceof
-                        FormLoginWebAuthenticationDetails
-                        formLoginWebAuthenticationDetails) {
+                && details instanceof FormLoginWebAuthenticationDetails formLoginWebAuthenticationDetails) {
 
             if (!formLoginWebAuthenticationDetails.getClosed()) {
 
@@ -103,8 +99,7 @@ public class OAuth2FormLoginAuthenticationProvider extends DaoAuthenticationProv
     @Override
     public boolean supports(Class<?> authentication) {
         // 返回true后才会执行上面的authenticate方法,这步能确保authentication能正确转换类型
-        boolean supports =
-                (OAuth2FormLoginAuthenticationToken.class.isAssignableFrom(authentication));
+        boolean supports = (OAuth2FormLoginAuthenticationToken.class.isAssignableFrom(authentication));
         log.trace("[Herodotus] |- Form Login Authentication is supports! [{}]", supports);
         return supports;
     }

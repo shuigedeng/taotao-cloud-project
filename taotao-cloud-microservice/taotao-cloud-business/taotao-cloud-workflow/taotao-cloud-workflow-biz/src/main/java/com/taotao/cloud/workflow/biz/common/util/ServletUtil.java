@@ -193,8 +193,7 @@ public class ServletUtil {
      * @return
      */
     public static boolean isMobileDevice(String requestHeader) {
-        String[] deviceArray =
-                new String[] {"android", "windows phone", "iphone", "ios", "ipad", "mqqbrowser"};
+        String[] deviceArray = new String[] {"android", "windows phone", "iphone", "ios", "ipad", "mqqbrowser"};
         if (requestHeader == null) {
             return false;
         }

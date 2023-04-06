@@ -56,19 +56,15 @@ public class WalletService {
             throw new BizException("钱包已经开通");
         }
         Wallet wallet =
-                new Wallet()
-                        .setUserId(userId)
-                        .setBalance(BigDecimal.ZERO)
-                        .setStatus(WalletCode.STATUS_NORMAL);
+                new Wallet().setUserId(userId).setBalance(BigDecimal.ZERO).setStatus(WalletCode.STATUS_NORMAL);
         walletManager.save(wallet);
         // 激活 log
-        WalletLog activeLog =
-                new WalletLog()
-                        .setWalletId(wallet.getId())
-                        .setUserId(wallet.getUserId())
-                        .setType(WalletCode.LOG_ACTIVE)
-                        .setRemark("激活钱包")
-                        .setOperationSource(WalletCode.OPERATION_SOURCE_USER);
+        WalletLog activeLog = new WalletLog()
+                .setWalletId(wallet.getId())
+                .setUserId(wallet.getUserId())
+                .setType(WalletCode.LOG_ACTIVE)
+                .setRemark("激活钱包")
+                .setOperationSource(WalletCode.OPERATION_SOURCE_USER);
         walletLogManager.save(activeLog);
     }
 
@@ -77,29 +73,22 @@ public class WalletService {
         // 查询出
         List<Long> existUserIds = walletManager.findExistUserIds(userIds);
         userIds.removeAll(existUserIds);
-        List<Wallet> wallets =
-                userIds.stream()
-                        .map(
-                                userId ->
-                                        new Wallet()
-                                                .setUserId(userId)
-                                                .setStatus(WalletCode.STATUS_NORMAL)
-                                                .setBalance(BigDecimal.ZERO))
-                        .collect(Collectors.toList());
+        List<Wallet> wallets = userIds.stream()
+                .map(userId -> new Wallet()
+                        .setUserId(userId)
+                        .setStatus(WalletCode.STATUS_NORMAL)
+                        .setBalance(BigDecimal.ZERO))
+                .collect(Collectors.toList());
         walletManager.saveAll(wallets);
-        List<WalletLog> walletLogs =
-                wallets.stream()
-                        .map(
-                                wallet ->
-                                        new WalletLog()
-                                                .setWalletId(wallet.getId())
-                                                .setUserId(wallet.getUserId())
-                                                .setAmount(BigDecimal.ZERO)
-                                                .setType(WalletCode.LOG_ACTIVE)
-                                                .setRemark("激活钱包")
-                                                .setOperationSource(
-                                                        WalletCode.OPERATION_SOURCE_USER))
-                        .collect(Collectors.toList());
+        List<WalletLog> walletLogs = wallets.stream()
+                .map(wallet -> new WalletLog()
+                        .setWalletId(wallet.getId())
+                        .setUserId(wallet.getUserId())
+                        .setAmount(BigDecimal.ZERO)
+                        .setType(WalletCode.LOG_ACTIVE)
+                        .setRemark("激活钱包")
+                        .setOperationSource(WalletCode.OPERATION_SOURCE_USER))
+                .collect(Collectors.toList());
         walletLogManager.saveAll(walletLogs);
     }
 
@@ -123,39 +112,30 @@ public class WalletService {
         } else {
             return;
         }
-        Wallet wallet =
-                walletManager.findById(param.getWalletId()).orElseThrow(DataNotExistException::new);
-        WalletLog walletLog =
-                new WalletLog()
-                        .setAmount(param.getAmount())
-                        .setWalletId(wallet.getId())
-                        .setType(WalletCode.LOG_ADMIN_CHANGER)
-                        .setUserId(wallet.getUserId())
-                        .setRemark(String.format("系统变动余额 %.2f ", param.getAmount()))
-                        .setOperationSource(WalletCode.OPERATION_SOURCE_ADMIN);
+        Wallet wallet = walletManager.findById(param.getWalletId()).orElseThrow(DataNotExistException::new);
+        WalletLog walletLog = new WalletLog()
+                .setAmount(param.getAmount())
+                .setWalletId(wallet.getId())
+                .setType(WalletCode.LOG_ADMIN_CHANGER)
+                .setUserId(wallet.getUserId())
+                .setRemark(String.format("系统变动余额 %.2f ", param.getAmount()))
+                .setOperationSource(WalletCode.OPERATION_SOURCE_ADMIN);
         walletLogManager.save(walletLog);
     }
 
     /** 根据支付单对钱包充值的余额进行扣减 */
     @Transactional(rollbackFor = Exception.class)
-    public void deductedBalanceByPaymentId(
-            Long paymentId, Long orderId, String remark, Boolean isThrowError) {
+    public void deductedBalanceByPaymentId(Long paymentId, Long orderId, String remark, Boolean isThrowError) {
 
         // 根据支付记录ID查询交易的金额和交易的钱包ID
-        WalletLog walletLog =
-                walletLogManager
-                        .findFirstByPayment(paymentId)
-                        .orElseThrow(DataNotExistException::new);
+        WalletLog walletLog = walletLogManager.findFirstByPayment(paymentId).orElseThrow(DataNotExistException::new);
         if (walletLog == null) {
             return;
         }
 
         // 充值类型
         List<Integer> chargeLogType =
-                Lists.newArrayList(
-                        WalletCode.LOG_RECHARGE,
-                        WalletCode.LOG_AUTO_RECHARGE,
-                        WalletCode.LOG_ADMIN_CHANGER);
+                Lists.newArrayList(WalletCode.LOG_RECHARGE, WalletCode.LOG_AUTO_RECHARGE, WalletCode.LOG_ADMIN_CHANGER);
 
         // 保证是充值类型 且充值金额大于0
         if (!chargeLogType.contains(walletLog.getType())
@@ -171,19 +151,16 @@ public class WalletService {
         walletManager.reduceBalanceUnlimited(walletLog.getWalletId(), walletLog.getAmount());
 
         // 记录日志
-        WalletLog log =
-                new WalletLog()
-                        .setWalletId(walletLog.getWalletId())
-                        .setUserId(walletLog.getUserId())
-                        .setPaymentId(paymentId)
-                        .setAmount(walletLog.getAmount())
-                        .setType(WalletCode.LOG_SYSTEM_REDUCE_BALANCE)
-                        .setRemark(
-                                String.format(
-                                        "系统减少余额 %.2f (" + remark + ")", walletLog.getAmount()))
-                        .setOperationSource(WalletCode.OPERATION_SOURCE_SYSTEM)
-                        .setPaymentId(paymentId)
-                        .setBusinessId(String.valueOf(orderId));
+        WalletLog log = new WalletLog()
+                .setWalletId(walletLog.getWalletId())
+                .setUserId(walletLog.getUserId())
+                .setPaymentId(paymentId)
+                .setAmount(walletLog.getAmount())
+                .setType(WalletCode.LOG_SYSTEM_REDUCE_BALANCE)
+                .setRemark(String.format("系统减少余额 %.2f (" + remark + ")", walletLog.getAmount()))
+                .setOperationSource(WalletCode.OPERATION_SOURCE_SYSTEM)
+                .setPaymentId(paymentId)
+                .setBusinessId(String.valueOf(orderId));
         walletLogManager.save(log);
     }
 

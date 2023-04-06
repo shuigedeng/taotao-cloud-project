@@ -39,8 +39,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public abstract class ApiController extends AbstractCtrl {
 
-    @Autowired private ValidateService validateService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ValidateService validateService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     /** 获取请求参数并转换为对象，通用验证 * */
     protected <T extends AbstractRQ> T getRQ(Class<T> cls) {
@@ -70,8 +73,7 @@ public abstract class ApiController extends AbstractCtrl {
             throw new BizException("参数有误！");
         }
 
-        MchAppConfigContext mchAppConfigContext =
-                configContextQueryService.queryMchInfoAndAppInfo(mchNo, appId);
+        MchAppConfigContext mchAppConfigContext = configContextQueryService.queryMchInfoAndAppInfo(mchNo, appId);
 
         if (mchAppConfigContext == null) {
             throw new BizException("商户或商户应用不存在");

@@ -47,11 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CustomWordsServiceImpl
         extends BaseSuperServiceImpl<
-                ICustomWordsMapper,
-                CustomWords,
-                CustomWordsRepository,
-                ICustomWordsRepository,
-                Long>
+                ICustomWordsMapper, CustomWords, CustomWordsRepository, ICustomWordsRepository, Long>
         implements ICustomWordsService {
 
     @Override
@@ -67,7 +63,8 @@ public class CustomWordsServiceImpl
             for (CustomWords customWords : list) {
                 if (flag) {
                     try {
-                        response.setHeader("Last-Modified", customWords.getCreateTime().toString());
+                        response.setHeader(
+                                "Last-Modified", customWords.getCreateTime().toString());
                         response.setHeader("ETag", Integer.toString(list.size()));
                     } catch (Exception e) {
                         LogUtils.error("自定义分词错误", e);
@@ -88,8 +85,7 @@ public class CustomWordsServiceImpl
     @Transactional(rollbackFor = Exception.class)
     public Boolean addCustomWords(CustomWordsVO customWordsVO) {
         LambdaQueryWrapper<CustomWords> queryWrapper =
-                new LambdaQueryWrapper<CustomWords>()
-                        .eq(CustomWords::getName, customWordsVO.getName());
+                new LambdaQueryWrapper<CustomWords>().eq(CustomWords::getName, customWordsVO.getName());
         CustomWords one = this.getOne(queryWrapper, false);
         if (one != null && one.getDisabled().equals(1)) {
             throw new BusinessException(ResultEnum.CUSTOM_WORDS_EXIST_ERROR);

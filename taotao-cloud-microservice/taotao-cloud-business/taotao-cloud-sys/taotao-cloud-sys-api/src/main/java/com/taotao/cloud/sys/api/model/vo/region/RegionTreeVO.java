@@ -37,7 +37,8 @@ import lombok.*;
 @Schema(description = "地区查询VO")
 public class RegionTreeVO extends MapperNode implements Serializable {
 
-    @Serial private static final long serialVersionUID = -5853343562172855421L;
+    @Serial
+    private static final long serialVersionUID = -5853343562172855421L;
 
     @Schema(description = "地区编码")
     private String code;

@@ -34,9 +34,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tenant")
 public class TenantController {
 
-    @Autowired private TenantQueryService tenantQueryService;
+    @Autowired
+    private TenantQueryService tenantQueryService;
 
-    @Autowired private TenantApplicationService tenantApplicationService;
+    @Autowired
+    private TenantApplicationService tenantApplicationService;
 
     /** 用户分页查询 */
     @ApiOperation("租户分页查询")

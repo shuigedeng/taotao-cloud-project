@@ -16,10 +16,7 @@
 
 package com.taotao.cloud.log.biz.properties;
 
-import com.taotao.cloud.data.mybatisplus.properties.MybatisPlusInterceptorProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,16 +30,16 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = LogStoreTypeProperties.PREFIX)
 public class LogStoreTypeProperties {
 
-	public static final String PREFIX = "log.store.type";
+    public static final String PREFIX = "log.store.type";
 
-	// db, mongo
-	private String type;
+    // db, mongo
+    private String type;
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 }

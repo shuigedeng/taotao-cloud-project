@@ -43,9 +43,7 @@ public class PayModelUtil {
 
     /** 判断是否有异步支付 */
     public boolean isNotSync(List<PayModeParam> payModeParams) {
-        return payModeParams.stream()
-                .map(PayModeParam::getPayChannel)
-                .noneMatch(PayChannelCode.ASYNC_TYPE::contains);
+        return payModeParams.stream().map(PayModeParam::getPayChannel).noneMatch(PayChannelCode.ASYNC_TYPE::contains);
     }
 
     /** 获取异步支付参数 */
@@ -66,14 +64,12 @@ public class PayModelUtil {
         PayChannelEnum payChannelEnum = PayChannelEnum.findByNo(payChannel);
         switch (payChannelEnum) {
             case ALI -> {
-                return JSONUtil.toJsonStr(
-                        new AliPayParam()
-                                .setAuthCode(map.get(PayModelExtraCode.AUTH_CODE))
-                                .setReturnUrl(map.get(PayModelExtraCode.RETURN_URL)));
+                return JSONUtil.toJsonStr(new AliPayParam()
+                        .setAuthCode(map.get(PayModelExtraCode.AUTH_CODE))
+                        .setReturnUrl(map.get(PayModelExtraCode.RETURN_URL)));
             }
             case WECHAT -> {
-                return JSONUtil.toJsonStr(
-                        new WeChatPayParam().setAuthCode(map.get(PayModelExtraCode.AUTH_CODE)));
+                return JSONUtil.toJsonStr(new WeChatPayParam().setAuthCode(map.get(PayModelExtraCode.AUTH_CODE)));
             }
             case VOUCHER -> {
                 String voucherNo = map.get(PayModelExtraCode.VOUCHER_NO);

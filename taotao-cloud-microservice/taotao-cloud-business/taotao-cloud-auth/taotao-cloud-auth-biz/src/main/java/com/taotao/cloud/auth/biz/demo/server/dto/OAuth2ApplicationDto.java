@@ -91,9 +91,7 @@ public class OAuth2ApplicationDto extends BaseSysDto {
     @Schema(name = "客户端JSON Web密钥集的URL", title = "客户端JSON Web密钥集的URL")
     private String jwkSetUrl;
 
-    @Schema(
-            name = "JWT 签名算法",
-            title = "仅在 clientAuthenticationMethods 为 private_key_jwt 和 client_secret_jwt 方法下使用")
+    @Schema(name = "JWT 签名算法", title = "仅在 clientAuthenticationMethods 为 private_key_jwt 和 client_secret_jwt 方法下使用")
     private Signature authenticationSigningAlgorithm;
 
     @Schema(name = "Access Token", title = "OAuth 2.0令牌的标准数据格式")

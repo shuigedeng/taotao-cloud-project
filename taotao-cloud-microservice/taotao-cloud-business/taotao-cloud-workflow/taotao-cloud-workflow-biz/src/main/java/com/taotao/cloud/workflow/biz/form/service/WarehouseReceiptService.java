@@ -49,10 +49,7 @@ public interface WarehouseReceiptService extends IService<WarehouseReceiptEntity
      * @param warehouseEntryEntityList 子表
      * @throws WorkFlowException 异常
      */
-    void save(
-            String id,
-            WarehouseReceiptEntity entity,
-            List<WarehouseEntryEntity> warehouseEntryEntityList)
+    void save(String id, WarehouseReceiptEntity entity, List<WarehouseEntryEntity> warehouseEntryEntityList)
             throws WorkFlowException;
 
     /**

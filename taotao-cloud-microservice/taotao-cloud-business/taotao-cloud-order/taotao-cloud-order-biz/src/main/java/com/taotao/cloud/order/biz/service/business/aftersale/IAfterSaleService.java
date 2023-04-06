@@ -92,8 +92,7 @@ public interface IAfterSaleService extends IService<AfterSale> {
      * @return {@link Boolean }
      * @since 2022-04-28 08:49:10
      */
-    Boolean review(
-            String afterSaleSn, String serviceStatus, String remark, BigDecimal actualRefundPrice);
+    Boolean review(String afterSaleSn, String serviceStatus, String remark, BigDecimal actualRefundPrice);
 
     /**
      * 买家退货,物流填写
@@ -105,8 +104,7 @@ public interface IAfterSaleService extends IService<AfterSale> {
      * @return {@link AfterSale }
      * @since 2022-04-28 08:49:10
      */
-    AfterSale buyerDelivery(
-            String afterSaleSn, String logisticsNo, Long logisticsId, LocalDateTime mDeliverTime);
+    AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, Long logisticsId, LocalDateTime mDeliverTime);
 
     /**
      * 获取买家退货物流踪迹

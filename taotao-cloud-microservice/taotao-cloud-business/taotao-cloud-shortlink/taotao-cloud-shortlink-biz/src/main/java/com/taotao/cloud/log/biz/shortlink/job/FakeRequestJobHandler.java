@@ -38,7 +38,8 @@ public class FakeRequestJobHandler extends IJobHandler {
     //    @Resource
     //    private ShortLinkService shortLinkService;
 
-    @Resource private ShortLinkServiceImpl shortLinkService;
+    @Resource
+    private ShortLinkServiceImpl shortLinkService;
 
     @XxlJob(value = "fakeRequest")
     @Override
@@ -48,23 +49,21 @@ public class FakeRequestJobHandler extends IJobHandler {
 
         List<ShortLinkCreateRequest> requests = new ArrayList<>(5000);
         for (int i = 0; i < 5000; i++) {
-            String url =
-                    "https://estate.zc.net/details/"
-                            + i
-                            + "/estateid/"
-                            + random.nextInt(2000000000)
-                            + "?time="
-                            + System.currentTimeMillis();
-            ShortLinkCreateRequest createRequest =
-                    ShortLinkCreateRequest.builder()
-                            .title("房源-" + random.nextInt(100000000))
-                            .originalUrl(url)
-                            .domainType(ShortLinkDomainTypeEnum.ORIGIN.getCode())
-                            .groupId((long) (random.nextInt(4) + 1))
-                            .domainId(1L)
-                            .accountId(1L)
-                            .expired(LocalDate.now().plusDays(random.nextInt(10000)))
-                            .build();
+            String url = "https://estate.zc.net/details/"
+                    + i
+                    + "/estateid/"
+                    + random.nextInt(2000000000)
+                    + "?time="
+                    + System.currentTimeMillis();
+            ShortLinkCreateRequest createRequest = ShortLinkCreateRequest.builder()
+                    .title("房源-" + random.nextInt(100000000))
+                    .originalUrl(url)
+                    .domainType(ShortLinkDomainTypeEnum.ORIGIN.getCode())
+                    .groupId((long) (random.nextInt(4) + 1))
+                    .domainId(1L)
+                    .accountId(1L)
+                    .expired(LocalDate.now().plusDays(random.nextInt(10000)))
+                    .build();
 
             requests.add(createRequest);
         }

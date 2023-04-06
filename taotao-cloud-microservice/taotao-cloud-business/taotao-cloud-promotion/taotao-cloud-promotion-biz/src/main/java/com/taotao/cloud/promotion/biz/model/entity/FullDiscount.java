@@ -51,24 +51,16 @@ public class FullDiscount extends BasePromotions<FullDiscount, Long> {
 
     public static final String TABLE_NAME = "tt_full_discount";
     /** 优惠门槛金额 */
-    @Column(
-            name = "full_money",
-            columnDefinition = "decimal(10,2) not null default 0 comment '优惠门槛金额'")
+    @Column(name = "full_money", columnDefinition = "decimal(10,2) not null default 0 comment '优惠门槛金额'")
     private BigDecimal fullMoney;
     /** 活动是否减现金 */
-    @Column(
-            name = "is_full_minus",
-            columnDefinition = "boolean not null default false comment '活动是否减现金'")
+    @Column(name = "is_full_minus", columnDefinition = "boolean not null default false comment '活动是否减现金'")
     private Boolean isFullMinus;
     /** 减现金 */
-    @Column(
-            name = "full_minus",
-            columnDefinition = "decimal(10,2) not null default 0 comment '减现金'")
+    @Column(name = "full_minus", columnDefinition = "decimal(10,2) not null default 0 comment '减现金'")
     private BigDecimal fullMinus;
     /** 是否打折 */
-    @Column(
-            name = "is_full_rate",
-            columnDefinition = "boolean not null default false  comment '是否打折'")
+    @Column(name = "is_full_rate", columnDefinition = "boolean not null default false  comment '是否打折'")
     private Boolean isFullRate;
     /** 打折 */
     @Column(name = "full_rate", columnDefinition = "decimal(10,2) not null default 0 comment '打折'")
@@ -80,9 +72,7 @@ public class FullDiscount extends BasePromotions<FullDiscount, Long> {
     @Column(name = "point", columnDefinition = "int not null default 0 comment '赠送多少积分'")
     private Integer point;
     /** 是否包邮 */
-    @Column(
-            name = "is_free_freight",
-            columnDefinition = "boolean not null default false comment '是否包邮'")
+    @Column(name = "is_free_freight", columnDefinition = "boolean not null default false comment '是否包邮'")
     private Boolean isFreeFreight;
     /** 是否有赠品 */
     @Column(name = "is_gift", columnDefinition = "boolean not null default false comment '是否有赠品'")

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.filter.gateway;
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -32,22 +33,24 @@ import org.springframework.web.server.ServerWebExchange;
 @Component
 public class SwaggerHeaderGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
 
-	private static final String HEADER_NAME = "X-Forwarded-Prefix";
+    private static final String HEADER_NAME = "X-Forwarded-Prefix";
 
-	private static final String SWAGGER_URI = "/v3/api-docs";
+    private static final String SWAGGER_URI = "/v3/api-docs";
 
-	@Override
-	public GatewayFilter apply(Object config) {
-		return (exchange, chain) -> {
-			ServerHttpRequest request = exchange.getRequest();
-			String path = request.getURI().getPath();
-			if (!StringUtils.endsWithIgnoreCase(path, SWAGGER_URI)) {
-				return chain.filter(exchange);
-			}
-			String basePath = path.substring(0, path.lastIndexOf(SWAGGER_URI));
-			ServerHttpRequest newRequest = request.mutate().header(HEADER_NAME, basePath).build();
-			ServerWebExchange newExchange = exchange.mutate().request(newRequest).build();
-			return chain.filter(newExchange);
-		};
-	}
+    @Override
+    public GatewayFilter apply(Object config) {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+            String path = request.getURI().getPath();
+            if (!StringUtils.endsWithIgnoreCase(path, SWAGGER_URI)) {
+                return chain.filter(exchange);
+            }
+            String basePath = path.substring(0, path.lastIndexOf(SWAGGER_URI));
+            ServerHttpRequest newRequest =
+                    request.mutate().header(HEADER_NAME, basePath).build();
+            ServerWebExchange newExchange =
+                    exchange.mutate().request(newRequest).build();
+            return chain.filter(newExchange);
+        };
+    }
 }

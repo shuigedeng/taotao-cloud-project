@@ -69,10 +69,9 @@ public class WeChatUserService {
     public void fetchUser(String nextOpenid) {
         WxMpUserList wxMpUserList = wxMpService.getUserService().userList(nextOpenid);
         // openId 分组 每组 100个 openid
-        List<List<String>> openIdsList =
-                CollUtil.split(wxMpUserList.getOpenids(), SIZE).stream()
-                        .filter(CollUtil::isNotEmpty)
-                        .collect(Collectors.toList());
+        List<List<String>> openIdsList = CollUtil.split(wxMpUserList.getOpenids(), SIZE).stream()
+                .filter(CollUtil::isNotEmpty)
+                .collect(Collectors.toList());
         // 处理每个分组. 调用查询用户信息
         for (List<String> openIdList : openIdsList) {
             log.info("开始批量获取用户信息 {}", openIdList);

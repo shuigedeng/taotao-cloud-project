@@ -91,7 +91,8 @@ public class DateKit {
             Date yesterdayDateTime = DateUtil.offsetDay(nowDateTime, -1).toJdkDate(); // 昨天
 
             Integer offsetDay = 1 - Integer.parseInt(dateVal); // 获取时间偏移量
-            Date offsetDayDate = DateUtil.offsetDay(yesterdayDateTime, offsetDay).toJdkDate();
+            Date offsetDayDate =
+                    DateUtil.offsetDay(yesterdayDateTime, offsetDay).toJdkDate();
             return new Date[] {getBegin(offsetDayDate), getEnd(yesterdayDateTime)};
 
         } else if ("customDate".equals(dateType) || "customDateTime".equals(dateType)) { // 自定义格式
@@ -102,25 +103,16 @@ public class DateKit {
             }
 
             String timeStr1 = "N".equalsIgnoreCase(timeArray[0]) ? null : timeArray[0]; // 开始时间，
-            String timeStr2 =
-                    "N".equalsIgnoreCase(timeArray[1]) ? null : timeArray[1]; // 结束时间， N表示为空， 占位使用
+            String timeStr2 = "N".equalsIgnoreCase(timeArray[1]) ? null : timeArray[1]; // 结束时间， N表示为空， 占位使用
 
             Date time1 = null;
             Date time2 = null;
 
             if (StringUtils.isNotEmpty(timeStr1)) {
-                time1 =
-                        DateUtil.parseDateTime(
-                                "customDate".equals(dateType)
-                                        ? (timeStr1 + " 00:00:00")
-                                        : timeStr1);
+                time1 = DateUtil.parseDateTime("customDate".equals(dateType) ? (timeStr1 + " 00:00:00") : timeStr1);
             }
             if (StringUtils.isNotEmpty(timeStr2)) {
-                time2 =
-                        DateUtil.parseDateTime(
-                                "customDate".equals(dateType)
-                                        ? (timeStr2 + " 23:59:59")
-                                        : timeStr2);
+                time2 = DateUtil.parseDateTime("customDate".equals(dateType) ? (timeStr2 + " 23:59:59") : timeStr2);
             }
             return new Date[] {time1, time2};
 

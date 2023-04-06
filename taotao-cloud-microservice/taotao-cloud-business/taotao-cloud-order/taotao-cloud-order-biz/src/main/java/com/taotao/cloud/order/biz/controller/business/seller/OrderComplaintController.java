@@ -74,16 +74,14 @@ public class OrderComplaintController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{id}")
     public Result<OrderComplaintVO> getOrderComplainById(@PathVariable Long id) {
-        return Result.success(
-                OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id)));
+        return Result.success(OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id)));
     }
 
     @Operation(summary = "分页获取", description = "分页获取")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/page")
-    public Result<PageResult<OrderComplaintBaseVO>> get(
-            OrderComplaintPageQuery orderComplaintPageQuery) {
+    public Result<PageResult<OrderComplaintBaseVO>> get(OrderComplaintPageQuery orderComplaintPageQuery) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         orderComplaintPageQuery.setStoreId(storeId);
         IPage<OrderComplaint> page = orderComplaintService.pageQuery(orderComplaintPageQuery);
@@ -98,24 +96,21 @@ public class OrderComplaintController {
             @PathVariable("complainId") Long complainId,
             @Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
         SecurityUser user = SecurityUtils.getCurrentUser();
-        OrderComplaintCommunication orderComplaintCommunication =
-                OrderComplaintCommunication.builder()
-                        .complainId(complainId)
-                        .content(orderComplaintCommunicationDTO.content())
-                        .owner(CommunicationOwnerEnum.STORE.name())
-                        .ownerName(user.getUsername())
-                        .ownerId(user.getStoreId())
-                        .build();
-        return Result.success(
-                orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
+        OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
+                .complainId(complainId)
+                .content(orderComplaintCommunicationDTO.content())
+                .owner(CommunicationOwnerEnum.STORE.name())
+                .ownerName(user.getUsername())
+                .ownerId(user.getStoreId())
+                .build();
+        return Result.success(orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
     }
 
     @Operation(summary = "修改申诉信息", description = "修改申诉信息")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
-    public Result<Boolean> update(
-            @PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
+    public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         OrderComplaint orderComplaint = OrderComplainConvert.INSTANCE.convert(orderComplaintDTO);
         orderComplaint.setStoreId(storeId);
@@ -128,17 +123,14 @@ public class OrderComplaintController {
     @PostMapping("/appeal")
     public Result<OrderComplaintVO> appeal(@Validated @RequestBody StoreAppealDTO storeAppealDTO) {
         orderComplaintService.appeal(storeAppealDTO);
-        return Result.success(
-                orderComplaintService.getOrderComplainById(storeAppealDTO.orderComplaintId()));
+        return Result.success(orderComplaintService.getOrderComplainById(storeAppealDTO.orderComplaintId()));
     }
 
     @Operation(summary = "修改状态", description = "修改状态")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/status")
-    public Result<Boolean> updateStatus(
-            @Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
-        return Result.success(
-                orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
+    public Result<Boolean> updateStatus(@Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
+        return Result.success(orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
     }
 }

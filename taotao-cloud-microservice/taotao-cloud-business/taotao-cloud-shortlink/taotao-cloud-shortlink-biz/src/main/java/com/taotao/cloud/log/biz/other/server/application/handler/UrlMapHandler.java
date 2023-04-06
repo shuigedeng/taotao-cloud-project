@@ -42,7 +42,8 @@ public class UrlMapHandler implements Handler {
     private static final String SHORT2LONGURL = "根据短链接获取长链接";
 
     // 缓存要生成缓存
-    @Autowired Cache<String, String> caffeineCache;
+    @Autowired
+    Cache<String, String> caffeineCache;
 
     @Value("${shorturl.prefix}")
     private String shortUrlPrefix;
@@ -105,8 +106,7 @@ public class UrlMapHandler implements Handler {
                     @Override
                     public void run() {
                         try {
-                            CsvWriter csvWriter =
-                                    new CsvWriter(csvFilePath, ';', Charset.forName("UTF-8"));
+                            CsvWriter csvWriter = new CsvWriter(csvFilePath, ';', Charset.forName("UTF-8"));
                             Iterator<String> it = caffeineCache.asMap().keySet().iterator();
                             while (it.hasNext()) {
                                 String[] csvContent = new String[1];

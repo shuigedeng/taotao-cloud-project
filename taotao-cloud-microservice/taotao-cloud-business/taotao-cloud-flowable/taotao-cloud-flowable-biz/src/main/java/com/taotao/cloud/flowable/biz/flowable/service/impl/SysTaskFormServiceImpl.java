@@ -31,7 +31,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysTaskFormServiceImpl implements ISysTaskFormService {
-    @Autowired private SysTaskFormMapper sysTaskFormMapper;
+    @Autowired
+    private SysTaskFormMapper sysTaskFormMapper;
 
     /**
      * 查询流程任务关联单

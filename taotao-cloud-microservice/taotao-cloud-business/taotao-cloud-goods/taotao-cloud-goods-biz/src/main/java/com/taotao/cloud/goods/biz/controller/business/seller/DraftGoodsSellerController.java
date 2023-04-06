@@ -63,8 +63,7 @@ public class DraftGoodsSellerController {
     @RequestLogger("分页获取草稿商品列表")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/page")
-    public Result<PageResult<DraftGoodsVO>> getDraftGoodsByPage(
-            DraftGoodsPageQuery draftGoodsPageQuery) {
+    public Result<PageResult<DraftGoodsVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         draftGoodsPageQuery.setStoreId(storeId);
         IPage<DraftGoods> draftGoods = draftGoodsService.draftGoodsQueryPage(draftGoodsPageQuery);
@@ -83,8 +82,7 @@ public class DraftGoodsSellerController {
     @RequestLogger("保存草稿商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping
-    public Result<Boolean> saveDraftGoods(
-            @Validated @RequestBody DraftGoodsSkuParamsDTO draftGoodsSkuParamsDTO) {
+    public Result<Boolean> saveDraftGoods(@Validated @RequestBody DraftGoodsSkuParamsDTO draftGoodsSkuParamsDTO) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         if (draftGoodsSkuParamsDTO.getStoreId() == null) {
             draftGoodsSkuParamsDTO.setStoreId(storeId);

@@ -1,35 +1,51 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.recommend.biz.service;
 
 import com.taotao.cloud.recommend.biz.dto.ItemDTO;
 import com.taotao.cloud.recommend.biz.dto.RelateDTO;
 import com.taotao.cloud.recommend.biz.dto.UserDTO;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Lists;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Lists;
 
 @Data
 @Slf4j
 public class FileDataSource {
 
-      public  static String folderPath;
+    public static String folderPath;
 
     /**
      * 方法描述: 读取基础数据
      *
      * @Return {@link List<RelateDTO>}
-     * 
+     *
      * @date 2020年07月31日 16:53:40
      */
     public static List<RelateDTO> getData() {
-        folderPath= Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k")).getPath();
+        folderPath = Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k"))
+                .getPath();
         List<RelateDTO> relateList = Lists.newArrayList();
         try {
-            FileInputStream out = new FileInputStream(folderPath+"\\u.data");
+            FileInputStream out = new FileInputStream(folderPath + "\\u.data");
             InputStreamReader reader = new InputStreamReader(out, StandardCharsets.UTF_8);
             BufferedReader in = new BufferedReader(reader);
             String line;
@@ -52,14 +68,15 @@ public class FileDataSource {
      * 方法描述: 读取用户数据
      *
      * @Return {@link List<UserDTO>}
-     * 
+     *
      * @date 2020年07月31日 16:54:51
      */
     public static List<UserDTO> getUserData() {
-        folderPath= Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k")).getPath();
+        folderPath = Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k"))
+                .getPath();
         List<UserDTO> userList = Lists.newArrayList();
         try {
-            FileInputStream out = new FileInputStream(folderPath+"\\u.user");
+            FileInputStream out = new FileInputStream(folderPath + "\\u.user");
             InputStreamReader reader = new InputStreamReader(out, StandardCharsets.UTF_8);
             BufferedReader in = new BufferedReader(reader);
             String line;
@@ -80,19 +97,19 @@ public class FileDataSource {
         return userList;
     }
 
-
     /**
      * 方法描述: 读取电影数据
      *
      * @Return {@link List<ItemDTO>}
-     * 
+     *
      * @date 2020年07月31日 16:54:22
      */
     public static List<ItemDTO> getItemData() {
-        folderPath= Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k")).getPath();
+        folderPath = Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k"))
+                .getPath();
         List<ItemDTO> itemList = Lists.newArrayList();
         try {
-            FileInputStream out = new FileInputStream(folderPath+"\\u.item");
+            FileInputStream out = new FileInputStream(folderPath + "\\u.item");
             InputStreamReader reader = new InputStreamReader(out, StandardCharsets.UTF_8);
             BufferedReader in = new BufferedReader(reader);
             String line;
@@ -111,7 +128,4 @@ public class FileDataSource {
         }
         return itemList;
     }
-
-
 }
-

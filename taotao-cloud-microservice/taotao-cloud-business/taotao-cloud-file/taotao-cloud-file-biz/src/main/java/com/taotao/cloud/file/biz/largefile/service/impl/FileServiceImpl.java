@@ -51,27 +51,26 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class FileServiceImpl implements FileService {
 
-    @Autowired private RedisUtil redisUtil;
+    @Autowired
+    private RedisUtil redisUtil;
 
-    @Autowired private FilePathUtil filePathUtil;
+    @Autowired
+    private FilePathUtil filePathUtil;
 
     private AtomicInteger atomicInteger = new AtomicInteger(0);
 
-    private final ExecutorService executorService =
-            Executors.newFixedThreadPool(
-                    Integer.valueOf(YmlUtil.getValue("upload.thread.maxSize").toString()),
-                    (r) -> {
-                        String threadName = "uploadPool-" + atomicInteger.getAndIncrement();
-                        Thread thread = new Thread(r);
-                        thread.setName(threadName);
-                        return thread;
-                    });
+    private final ExecutorService executorService = Executors.newFixedThreadPool(
+            Integer.valueOf(YmlUtil.getValue("upload.thread.maxSize").toString()), (r) -> {
+                String threadName = "uploadPool-" + atomicInteger.getAndIncrement();
+                Thread thread = new Thread(r);
+                thread.setName(threadName);
+                return thread;
+            });
 
-    private final CompletionService<FileUpload> completionService =
-            new ExecutorCompletionService<>(
-                    executorService,
-                    new LinkedBlockingDeque<>(
-                            Integer.valueOf(YmlUtil.getValue("upload.queue.maxSize").toString())));
+    private final CompletionService<FileUpload> completionService = new ExecutorCompletionService<>(
+            executorService,
+            new LinkedBlockingDeque<>(
+                    Integer.valueOf(YmlUtil.getValue("upload.queue.maxSize").toString())));
 
     @Override
     public FileUpload upload(FileUploadRequest param) throws IOException {
@@ -108,8 +107,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public FileUpload sliceUpload(FileUploadRequest fileUploadRequestDTO) {
         try {
-            completionService.submit(
-                    new FileCallable(UploadModeEnum.RANDOM_ACCESS, fileUploadRequestDTO));
+            completionService.submit(new FileCallable(UploadModeEnum.RANDOM_ACCESS, fileUploadRequestDTO));
 
             return completionService.take().get();
         } catch (InterruptedException | ExecutionException e) {
@@ -122,8 +120,9 @@ public class FileServiceImpl implements FileService {
     public FileUpload checkFileMd5(FileUploadRequest param) throws IOException {
         Object uploadProgressObj = redisUtil.hget(FileConstant.FILE_UPLOAD_STATUS, param.getMd5());
         if (uploadProgressObj == null) {
-            FileUpload fileMd5DTO =
-                    FileUpload.builder().code(FileCheckMd5Status.FILE_NO_UPLOAD.getValue()).build();
+            FileUpload fileMd5DTO = FileUpload.builder()
+                    .code(FileCheckMd5Status.FILE_NO_UPLOAD.getValue())
+                    .build();
             return fileMd5DTO;
         }
         String processingStr = uploadProgressObj.toString();
@@ -133,8 +132,7 @@ public class FileServiceImpl implements FileService {
     }
 
     /** 填充返回文件内容信息 */
-    private FileUpload fillFileUploadDTO(FileUploadRequest param, boolean processing, String value)
-            throws IOException {
+    private FileUpload fillFileUploadDTO(FileUploadRequest param, boolean processing, String value) throws IOException {
 
         if (processing) {
             param.setPath(FileUtil.withoutHeadAndTailDiagonal(param.getPath()));

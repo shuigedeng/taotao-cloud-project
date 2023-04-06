@@ -52,9 +52,7 @@ public class ZxingCodeUtil {
         try {
             Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
             hints.put(EncodeHintType.CHARACTER_SET, "code");
-            BitMatrix bitMatrix =
-                    new MultiFormatWriter()
-                            .encode(message, BarcodeFormat.CODE_128, width, height, hints);
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(message, BarcodeFormat.CODE_128, width, height, hints);
             return toBufferedImage(bitMatrix);
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,8 +125,7 @@ public class ZxingCodeUtil {
      * @param height 高度
      * @return
      */
-    public static BufferedImage createCodeWithLogo(
-            String message, String logoPath, int width, int height) {
+    public static BufferedImage createCodeWithLogo(String message, String logoPath, int width, int height) {
         BufferedImage bim = createCode(message, width, height);
         try {
             // 读取二维码图片，并构建绘图对象
@@ -194,23 +191,17 @@ public class ZxingCodeUtil {
                     outg.drawString(
                             productName1,
                             200 - strWidth1 / 2,
-                            image.getHeight()
-                                    + (outImage.getHeight() - image.getHeight()) / 2
-                                    + 12);
-                    BufferedImage outImage2 =
-                            new BufferedImage(400, 485, BufferedImage.TYPE_4BYTE_ABGR);
+                            image.getHeight() + (outImage.getHeight() - image.getHeight()) / 2 + 12);
+                    BufferedImage outImage2 = new BufferedImage(400, 485, BufferedImage.TYPE_4BYTE_ABGR);
                     Graphics2D outg2 = outImage2.createGraphics();
-                    outg2.drawImage(
-                            outImage, 0, 0, outImage.getWidth(), outImage.getHeight(), null);
+                    outg2.drawImage(outImage, 0, 0, outImage.getWidth(), outImage.getHeight(), null);
                     outg2.setColor(Color.BLACK);
                     // 字体、字型、字号
                     outg2.setFont(new Font("宋体", Font.BOLD, 30));
                     outg2.drawString(
                             productName2,
                             200 - strWidth2 / 2,
-                            outImage.getHeight()
-                                    + (outImage2.getHeight() - outImage.getHeight()) / 2
-                                    + 5);
+                            outImage.getHeight() + (outImage2.getHeight() - outImage.getHeight()) / 2 + 5);
                     outg2.dispose();
                     outImage2.flush();
                     outImage = outImage2;
@@ -219,9 +210,7 @@ public class ZxingCodeUtil {
                     outg.drawString(
                             text,
                             200 - strWidth / 2,
-                            image.getHeight()
-                                    + (outImage.getHeight() - image.getHeight()) / 2
-                                    + 12);
+                            image.getHeight() + (outImage.getHeight() - image.getHeight()) / 2 + 12);
                 }
                 outg.dispose();
                 outImage.flush();

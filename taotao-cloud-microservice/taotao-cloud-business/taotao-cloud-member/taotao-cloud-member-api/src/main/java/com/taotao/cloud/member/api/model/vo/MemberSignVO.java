@@ -38,7 +38,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "会员签到DTO")
 public class MemberSignVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "会员用户名")
     private String memberName;

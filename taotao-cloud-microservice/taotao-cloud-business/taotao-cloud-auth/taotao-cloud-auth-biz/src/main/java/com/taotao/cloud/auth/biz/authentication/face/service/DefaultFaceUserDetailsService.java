@@ -28,8 +28,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultFaceUserDetailsService implements FaceUserDetailsService {
 
-    @Autowired private FaceUtils faceUtils;
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private FaceUtils faceUtils;
+
+    @Autowired
+    private IFeignMemberApi memberApi;
 
     @Override
     public UserDetails loadUserByImgBase64(String imgBase64) throws UsernameNotFoundException {

@@ -32,12 +32,7 @@ public class RoleDTO implements Serializable {
 
     public RoleDTO() {}
 
-    public RoleDTO(
-            String id,
-            String roleCode,
-            String roleName,
-            String remarks,
-            List<String> permissionIdList) {
+    public RoleDTO(String id, String roleCode, String roleName, String remarks, List<String> permissionIdList) {
         this.id = id;
         this.roleCode = roleCode;
         this.roleName = roleName;

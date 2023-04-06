@@ -33,14 +33,20 @@ import org.springframework.stereotype.Service;
 
 /** 采购原材料 */
 @Service
-public class ProcurementMaterialServiceImpl
-        extends ServiceImpl<ProcurementMaterialMapper, ProcurementMaterialEntity>
+public class ProcurementMaterialServiceImpl extends ServiceImpl<ProcurementMaterialMapper, ProcurementMaterialEntity>
         implements ProcurementMaterialService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private ProcurementEntryService procurementEntryEntityService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private ProcurementEntryService procurementEntryEntityService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public List<ProcurementEntryEntity> getProcurementEntryList(String id) {
@@ -63,9 +69,7 @@ public class ProcurementMaterialServiceImpl
     @Override
     @DSTransactional
     public void save(
-            String id,
-            ProcurementMaterialEntity entity,
-            List<ProcurementEntryEntity> procurementEntryEntityList)
+            String id, ProcurementMaterialEntity entity, List<ProcurementEntryEntity> procurementEntryEntityList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -165,14 +169,12 @@ public class ProcurementMaterialServiceImpl
 
     @Override
     public void data(String id, String data) {
-        ProcurementMaterialForm procurementMaterialForm =
-                JsonUtil.getJsonToBean(data, ProcurementMaterialForm.class);
+        ProcurementMaterialForm procurementMaterialForm = JsonUtil.getJsonToBean(data, ProcurementMaterialForm.class);
         ProcurementMaterialEntity entity =
                 JsonUtil.getJsonToBean(procurementMaterialForm, ProcurementMaterialEntity.class);
-        List<ProcurementEntryEntityInfoModel> entryList =
-                procurementMaterialForm.getEntryList() != null
-                        ? procurementMaterialForm.getEntryList()
-                        : new ArrayList<>();
+        List<ProcurementEntryEntityInfoModel> entryList = procurementMaterialForm.getEntryList() != null
+                ? procurementMaterialForm.getEntryList()
+                : new ArrayList<>();
         List<ProcurementEntryEntity> procurementEntryEntityList =
                 JsonUtil.getJsonToList(entryList, ProcurementEntryEntity.class);
         entity.setId(id);

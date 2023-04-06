@@ -35,7 +35,8 @@ public class ResetAppConfigAliYunRocketMQReceiver extends AbstractAliYunRocketMQ
 
     private static final String CONSUMER_NAME = "更新系统配置参数消息";
 
-    @Autowired private ResetAppConfigMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private ResetAppConfigMQ.IMQReceiver mqReceiver;
 
     /**
      * 接收 【 MQSendTypeEnum.BROADCAST 】 广播类型的消息

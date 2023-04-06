@@ -46,15 +46,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class GoodsGalleryServiceImpl
         extends BaseSuperServiceImpl<
-                IGoodsGalleryMapper,
-                GoodsGallery,
-                GoodsGalleryRepository,
-                IGoodsGalleryRepository,
-                Long>
+                IGoodsGalleryMapper, GoodsGallery, GoodsGalleryRepository, IGoodsGalleryRepository, Long>
         implements IGoodsGalleryService {
 
     /** 设置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -79,20 +76,13 @@ public class GoodsGalleryServiceImpl
     public GoodsGallery getGoodsGallery(String origin) {
         GoodsGallery goodsGallery = new GoodsGallery();
         // 获取商品系统配置决定是否审核
-        GoodsSettingVO goodsSetting =
-                settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
+        GoodsSettingVO goodsSetting = settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
         // 缩略图
-        String thumbnail =
-                FileUtils.getUrl(
-                        origin,
-                        goodsSetting.getAbbreviationPictureWidth(),
-                        goodsSetting.getAbbreviationPictureHeight());
+        String thumbnail = FileUtils.getUrl(
+                origin, goodsSetting.getAbbreviationPictureWidth(), goodsSetting.getAbbreviationPictureHeight());
         // 小图
         String small =
-                FileUtils.getUrl(
-                        origin,
-                        goodsSetting.getSmallPictureWidth(),
-                        goodsSetting.getSmallPictureHeight());
+                FileUtils.getUrl(origin, goodsSetting.getSmallPictureWidth(), goodsSetting.getSmallPictureHeight());
         // 赋值
         goodsGallery.setSmall(small);
         goodsGallery.setThumbnail(thumbnail);

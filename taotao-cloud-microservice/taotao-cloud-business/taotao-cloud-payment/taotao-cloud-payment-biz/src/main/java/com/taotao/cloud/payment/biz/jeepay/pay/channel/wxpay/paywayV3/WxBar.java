@@ -34,7 +34,8 @@ import org.springframework.stereotype.Service;
 @Service("wxpayPaymentByBarV3Service") // Service Name需保持全局唯一性
 public class WxBar extends WxpayPaymentService {
 
-    @Autowired private WxBar wxBar;
+    @Autowired
+    private WxBar wxBar;
 
     @Override
     public String preCheck(UnifiedOrderRQ rq, PayOrder payOrder) {
@@ -42,8 +43,7 @@ public class WxBar extends WxpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
         return wxBar.pay(rq, payOrder, mchAppConfigContext);
     }

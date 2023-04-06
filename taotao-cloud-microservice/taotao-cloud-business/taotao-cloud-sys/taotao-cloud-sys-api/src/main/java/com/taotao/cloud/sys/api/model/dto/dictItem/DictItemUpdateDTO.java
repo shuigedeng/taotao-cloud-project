@@ -43,7 +43,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "字典项更新对象")
 public class DictItemUpdateDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "字典id", required = true)
     @NotNull(message = "字典id不能为空")

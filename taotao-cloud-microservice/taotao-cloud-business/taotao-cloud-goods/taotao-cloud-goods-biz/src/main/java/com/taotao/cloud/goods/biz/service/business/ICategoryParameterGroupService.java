@@ -28,8 +28,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:23
  */
-public interface ICategoryParameterGroupService
-        extends BaseSuperService<CategoryParameterGroup, Long> {
+public interface ICategoryParameterGroupService extends BaseSuperService<CategoryParameterGroup, Long> {
 
     /**
      * 查询分类绑定参数集合

@@ -37,7 +37,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MiniProgramAccountHandler extends BaseHandler implements Handler {
 
-    @Autowired private MiniProgramAccountService miniProgramAccountService;
+    @Autowired
+    private MiniProgramAccountService miniProgramAccountService;
 
     public MiniProgramAccountHandler() {
         channelCode = ChannelType.MINI_PROGRAM.getCode();
@@ -66,12 +67,11 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
      */
     private WeChatMiniProgramParam buildMiniProgramParam(TaskInfo taskInfo) {
         // 小程序订阅消息可以关联到系统业务，通过接口查询。
-        WeChatMiniProgramParam miniProgramParam =
-                WeChatMiniProgramParam.builder()
-                        .openIds(taskInfo.getReceiver())
-                        .messageTemplateId(taskInfo.getMessageTemplateId())
-                        .sendAccount(taskInfo.getSendAccount())
-                        .build();
+        WeChatMiniProgramParam miniProgramParam = WeChatMiniProgramParam.builder()
+                .openIds(taskInfo.getReceiver())
+                .messageTemplateId(taskInfo.getMessageTemplateId())
+                .sendAccount(taskInfo.getSendAccount())
+                .build();
 
         MiniProgramContentModel contentModel = (MiniProgramContentModel) taskInfo.getContentModel();
         miniProgramParam.setData(contentModel.getMap());

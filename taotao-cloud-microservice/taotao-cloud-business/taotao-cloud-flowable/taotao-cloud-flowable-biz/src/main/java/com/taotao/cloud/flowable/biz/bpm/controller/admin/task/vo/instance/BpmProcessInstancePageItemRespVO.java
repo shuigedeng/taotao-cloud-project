@@ -35,25 +35,13 @@ public class BpmProcessInstancePageItemRespVO {
     @ApiModelProperty(value = "流程定义的编号", required = true, example = "2048")
     private String processDefinitionId;
 
-    @ApiModelProperty(
-            value = "流程分类",
-            required = true,
-            notes = "参见 bpm_model_category 数据字典",
-            example = "1")
+    @ApiModelProperty(value = "流程分类", required = true, notes = "参见 bpm_model_category 数据字典", example = "1")
     private String category;
 
-    @ApiModelProperty(
-            value = "流程实例的状态",
-            required = true,
-            notes = "参见 bpm_process_instance_status",
-            example = "1")
+    @ApiModelProperty(value = "流程实例的状态", required = true, notes = "参见 bpm_process_instance_status", example = "1")
     private Integer status;
 
-    @ApiModelProperty(
-            value = "流程实例的结果",
-            required = true,
-            notes = "参见 bpm_process_instance_result",
-            example = "2")
+    @ApiModelProperty(value = "流程实例的结果", required = true, notes = "参见 bpm_process_instance_result", example = "2")
     private Integer result;
 
     @ApiModelProperty(value = "提交时间", required = true)

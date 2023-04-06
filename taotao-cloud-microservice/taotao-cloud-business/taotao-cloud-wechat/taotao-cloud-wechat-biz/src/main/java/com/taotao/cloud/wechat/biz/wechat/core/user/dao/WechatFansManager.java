@@ -46,7 +46,8 @@ public class WechatFansManager extends BaseManager<WechatFansMapper, WechatFans>
     /** 获取最新的一条 */
     public Optional<WechatFans> findLatest() {
         Page<WechatFans> mpPage = new Page<>(0, 1);
-        Page<WechatFans> fansPage = this.lambdaQuery().orderByDesc(MpIdEntity::getId).page(mpPage);
+        Page<WechatFans> fansPage =
+                this.lambdaQuery().orderByDesc(MpIdEntity::getId).page(mpPage);
         if (fansPage.getTotal() > 0) {
             return Optional.of(fansPage.getRecords().get(0));
         }

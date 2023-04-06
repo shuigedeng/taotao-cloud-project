@@ -64,9 +64,7 @@ public class MemberBrowseController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @DeleteMapping(value = "/{ids}")
     public Result<Boolean> delAllByIds(
-            @Parameter(description = "会员地址ID", required = true)
-                    @NotEmpty(message = "商品ID不能为空")
-                    @PathVariable("ids")
+            @Parameter(description = "会员地址ID", required = true) @NotEmpty(message = "商品ID不能为空") @PathVariable("ids")
                     List<Long> ids) {
         return Result.success(memberBrowseService.deleteByIds(ids));
     }

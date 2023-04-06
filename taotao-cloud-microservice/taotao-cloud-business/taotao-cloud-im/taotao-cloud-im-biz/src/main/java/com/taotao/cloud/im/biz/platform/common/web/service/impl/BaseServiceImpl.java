@@ -129,14 +129,13 @@ public class BaseServiceImpl<T> implements BaseService<T> {
         }
         List<T> batchList = new ArrayList<>();
         AtomicReference<Integer> result = new AtomicReference<>(0);
-        list.forEach(
-                (o) -> {
-                    batchList.add(o);
-                    if (batchList.size() == batchCount) {
-                        result.updateAndGet(v -> v + baseDao.insertBatchSomeColumn(batchList));
-                        batchList.clear();
-                    }
-                });
+        list.forEach((o) -> {
+            batchList.add(o);
+            if (batchList.size() == batchCount) {
+                result.updateAndGet(v -> v + baseDao.insertBatchSomeColumn(batchList));
+                batchList.clear();
+            }
+        });
         if (!CollectionUtils.isEmpty(batchList)) {
             result.updateAndGet(v -> v + baseDao.insertBatchSomeColumn(batchList));
             batchList.clear();
@@ -149,8 +148,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
         QueryWrapper wrappers = new QueryWrapper();
         for (SearchVo searchVo : searchList) {
             SearchTypeEnum searchType =
-                    EnumUtils.toEnum(
-                            SearchTypeEnum.class, searchVo.getCondition(), SearchTypeEnum.EQ);
+                    EnumUtils.toEnum(SearchTypeEnum.class, searchVo.getCondition(), SearchTypeEnum.EQ);
             String name = searchVo.getName();
             String value = searchVo.getValue();
             String value2 = searchVo.getValue2();

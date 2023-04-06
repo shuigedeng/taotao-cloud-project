@@ -45,8 +45,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CloseOrderController extends ApiController {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     /**
      * @author: xiaoyu
@@ -63,15 +66,12 @@ public class CloseOrderController extends ApiController {
             throw new BizException("payOrderId不能为空");
         }
 
-        PayOrder payOrder =
-                payOrderService.queryMchOrder(
-                        rq.getMchNo(), rq.getPayOrderId(), rq.getMchOrderNo());
+        PayOrder payOrder = payOrderService.queryMchOrder(rq.getMchNo(), rq.getPayOrderId(), rq.getMchOrderNo());
         if (payOrder == null) {
             throw new BizException("订单不存在");
         }
 
-        if (payOrder.getState() != PayOrder.STATE_INIT
-                && payOrder.getState() != PayOrder.STATE_ING) {
+        if (payOrder.getState() != PayOrder.STATE_INIT && payOrder.getState() != PayOrder.STATE_ING) {
             throw new BizException("当前订单不可关闭");
         }
 
@@ -82,9 +82,7 @@ public class CloseOrderController extends ApiController {
 
             // 查询支付接口是否存在
             IPayOrderCloseService closeService =
-                    SpringBeansUtil.getBean(
-                            payOrder.getIfCode() + "PayOrderCloseService",
-                            IPayOrderCloseService.class);
+                    SpringBeansUtil.getBean(payOrder.getIfCode() + "PayOrderCloseService", IPayOrderCloseService.class);
 
             // 支付通道接口实现不存在
             if (closeService == null) {
@@ -94,8 +92,7 @@ public class CloseOrderController extends ApiController {
 
             // 查询出商户应用的配置信息
             MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(
-                            payOrder.getMchNo(), payOrder.getAppId());
+                    configContextQueryService.queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId());
 
             ChannelRetMsg channelRetMsg = closeService.close(payOrder, mchAppConfigContext);
             if (channelRetMsg == null) {
@@ -120,6 +117,8 @@ public class CloseOrderController extends ApiController {
 
         return ApiRes.okWithSign(
                 bizRes,
-                configContextQueryService.queryMchApp(rq.getMchNo(), rq.getAppId()).getAppSecret());
+                configContextQueryService
+                        .queryMchApp(rq.getMchNo(), rq.getAppId())
+                        .getAppSecret());
     }
 }

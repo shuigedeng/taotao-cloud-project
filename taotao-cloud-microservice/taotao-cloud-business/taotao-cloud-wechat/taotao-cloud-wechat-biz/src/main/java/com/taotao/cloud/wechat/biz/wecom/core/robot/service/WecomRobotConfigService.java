@@ -60,18 +60,13 @@ public class WecomRobotConfigService {
     }
 
     /** 分页 */
-    public PageResult<WecomRobotConfigDto> page(
-            PageQuery PageQuery, WecomRobotConfigParam wecomRobotConfigParam) {
-        return MpUtil.convert2DtoPageResult(
-                robotConfigManager.page(PageQuery, wecomRobotConfigParam));
+    public PageResult<WecomRobotConfigDto> page(PageQuery PageQuery, WecomRobotConfigParam wecomRobotConfigParam) {
+        return MpUtil.convert2DtoPageResult(robotConfigManager.page(PageQuery, wecomRobotConfigParam));
     }
 
     /** 获取单条 */
     public WecomRobotConfigDto findById(Long id) {
-        return robotConfigManager
-                .findById(id)
-                .map(WecomRobotConfig::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return robotConfigManager.findById(id).map(WecomRobotConfig::toDto).orElseThrow(DataNotExistException::new);
     }
 
     /** 获取全部 */

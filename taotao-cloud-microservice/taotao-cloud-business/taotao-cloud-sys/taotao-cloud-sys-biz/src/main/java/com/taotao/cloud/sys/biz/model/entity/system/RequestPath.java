@@ -74,9 +74,7 @@ public class RequestPath extends BaseSuperEntity<RequestPath, Long> {
     private boolean enable;
 
     /** 是否通过系统生成的权限 */
-    @Column(
-            name = "generate",
-            columnDefinition = "boolean not null default false comment '是否通过系统生成的权限'")
+    @Column(name = "generate", columnDefinition = "boolean not null default false comment '是否通过系统生成的权限'")
     private boolean generate;
 
     /** 描述 */

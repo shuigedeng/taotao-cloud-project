@@ -51,8 +51,11 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("sys/oss")
 @Api(tags = {"对象存储/文件上传"})
 public class SysOssController {
-    @Autowired private SysOssService sysOssService;
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private SysOssService sysOssService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
 
     private static final String KEY = ConfigConstant.CLOUD_STORAGE_CONFIG_KEY;
 
@@ -110,11 +113,9 @@ public class SysOssController {
         }
 
         // 上传文件
-        String suffix =
-                Objects.requireNonNull(file.getOriginalFilename())
-                        .substring(file.getOriginalFilename().lastIndexOf("."));
-        String url =
-                Objects.requireNonNull(OSSFactory.build()).uploadSuffix(file.getBytes(), suffix);
+        String suffix = Objects.requireNonNull(file.getOriginalFilename())
+                .substring(file.getOriginalFilename().lastIndexOf("."));
+        String url = Objects.requireNonNull(OSSFactory.build()).uploadSuffix(file.getBytes(), suffix);
 
         // 保存文件信息
         SysOssEntity ossEntity = new SysOssEntity();

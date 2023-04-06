@@ -50,8 +50,7 @@ public interface IOrderItemService extends IService<OrderItem> {
      * @return {@link Boolean }
      * @since 2022-05-16 17:23:39
      */
-    Boolean updateAfterSaleStatus(
-            String orderItemSn, OrderItemAfterSaleStatusEnum orderItemAfterSaleStatusEnum);
+    Boolean updateAfterSaleStatus(String orderItemSn, OrderItemAfterSaleStatusEnum orderItemAfterSaleStatusEnum);
 
     /**
      * 更新订单可投诉状态
@@ -64,10 +63,7 @@ public interface IOrderItemService extends IService<OrderItem> {
      * @since 2022-05-16 17:23:36
      */
     Boolean updateOrderItemsComplainStatus(
-            String orderSn,
-            Long skuId,
-            Long complainId,
-            OrderComplaintStatusEnum complainStatusEnum);
+            String orderSn, Long skuId, Long complainId, OrderComplaintStatusEnum complainStatusEnum);
 
     /**
      * 根据子订单编号获取子订单信息

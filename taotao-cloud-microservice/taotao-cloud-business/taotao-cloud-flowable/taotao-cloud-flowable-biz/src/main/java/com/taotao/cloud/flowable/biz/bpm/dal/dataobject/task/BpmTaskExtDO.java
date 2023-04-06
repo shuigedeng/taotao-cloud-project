@@ -37,7 +37,8 @@ import lombok.ToString;
 public class BpmTaskExtDO extends BaseDO {
 
     /** 编号，自增 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
 
     /**
      * 任务的审批人

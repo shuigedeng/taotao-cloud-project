@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.doris.mapper;
 
 import com.taotao.cloud.data.analysis.doris.model.DorisUser;
@@ -29,7 +30,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DorisUserMapper {
 
-	List<DorisUser> queryUser();
+    List<DorisUser> queryUser();
 
-	Integer insertUser(DorisUser user);
+    Integer insertUser(DorisUser user);
 }

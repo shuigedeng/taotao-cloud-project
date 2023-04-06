@@ -48,8 +48,7 @@ public interface PostBatchTabService extends IService<PostBatchTabEntity> {
      * @param entity 实体对象
      * @throws WorkFlowException 异常
      */
-    void submit(String id, PostBatchTabEntity entity, Map<String, List<String>> candidateList)
-            throws WorkFlowException;
+    void submit(String id, PostBatchTabEntity entity, Map<String, List<String>> candidateList) throws WorkFlowException;
 
     /**
      * 更改数据

@@ -42,15 +42,13 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable>
-        extends BaseSuperEntity<T, I> {
+public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable> extends BaseSuperEntity<T, I> {
 
-    @Serial private static final long serialVersionUID = 7814832369110695758L;
+    @Serial
+    private static final long serialVersionUID = 7814832369110695758L;
 
     /** 商家名称，如果是平台，这个值为 platform */
-    @Column(
-            name = "store_name",
-            columnDefinition = "varchar(255) not null comment '商家名称，如果是平台，这个值为 platform'")
+    @Column(name = "store_name", columnDefinition = "varchar(255) not null comment '商家名称，如果是平台，这个值为 platform'")
     private String storeName;
 
     /** 商家id，如果是平台，这个值为 0 */
@@ -85,9 +83,7 @@ public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable>
      */
     public String getPromotionStatus() {
         if (endTime == null) {
-            return startTime != null
-                    ? PromotionsStatusEnum.START.name()
-                    : PromotionsStatusEnum.CLOSE.name();
+            return startTime != null ? PromotionsStatusEnum.START.name() : PromotionsStatusEnum.CLOSE.name();
         }
         LocalDateTime now = LocalDateTime.now();
         if (now.isBefore(startTime)) {

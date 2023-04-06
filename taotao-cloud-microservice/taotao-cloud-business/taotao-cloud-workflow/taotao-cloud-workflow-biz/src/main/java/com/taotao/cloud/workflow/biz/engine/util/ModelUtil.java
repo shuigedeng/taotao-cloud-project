@@ -39,16 +39,7 @@ public class ModelUtil {
             throws WorkFlowException {
         FlowTaskNewService flowTaskNewService = SpringContext.getBean(FlowTaskNewService.class);
         FlowModel flowModel =
-                assignment(
-                        id,
-                        flowId,
-                        processId,
-                        flowTitle,
-                        flowUrgent,
-                        billNo,
-                        formEntity,
-                        null,
-                        new HashMap<>());
+                assignment(id, flowId, processId, flowTitle, flowUrgent, billNo, formEntity, null, new HashMap<>());
         flowTaskNewService.saveIsAdmin(flowModel);
     }
 
@@ -62,16 +53,7 @@ public class ModelUtil {
             Object formEntity,
             String freeApproverUserId)
             throws WorkFlowException {
-        submit(
-                id,
-                flowId,
-                processId,
-                flowTitle,
-                flowUrgent,
-                billNo,
-                formEntity,
-                freeApproverUserId,
-                new HashMap<>());
+        submit(id, flowId, processId, flowTitle, flowUrgent, billNo, formEntity, freeApproverUserId, new HashMap<>());
     }
 
     public static void submit(
@@ -86,17 +68,8 @@ public class ModelUtil {
             Map<String, List<String>> candidateList)
             throws WorkFlowException {
         FlowTaskNewService flowTaskNewService = SpringContext.getBean(FlowTaskNewService.class);
-        FlowModel flowModel =
-                assignment(
-                        id,
-                        flowId,
-                        processId,
-                        flowTitle,
-                        flowUrgent,
-                        billNo,
-                        formEntity,
-                        freeApproverUserId,
-                        candidateList);
+        FlowModel flowModel = assignment(
+                id, flowId, processId, flowTitle, flowUrgent, billNo, formEntity, freeApproverUserId, candidateList);
         flowTaskNewService.submit(flowModel);
     }
 

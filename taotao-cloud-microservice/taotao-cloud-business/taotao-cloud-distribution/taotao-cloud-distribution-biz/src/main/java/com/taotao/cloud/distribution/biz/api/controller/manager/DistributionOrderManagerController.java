@@ -39,7 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/distribution/order")
 public class DistributionOrderManagerController {
 
-    @Autowired private IDistributionOrderService distributionOrderService;
+    @Autowired
+    private IDistributionOrderService distributionOrderService;
 
     @Operation(summary = "通过id获取分销订单", description = "通过id获取分销订单")
     @RequestLogger
@@ -53,10 +54,8 @@ public class DistributionOrderManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/getByPage")
-    public Result<IPage<DistributionOrder>> getByPage(
-            DistributionOrderPageQuery distributionOrderPageQuery) {
+    public Result<IPage<DistributionOrder>> getByPage(DistributionOrderPageQuery distributionOrderPageQuery) {
 
-        return Result.success(
-                distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
+        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
     }
 }

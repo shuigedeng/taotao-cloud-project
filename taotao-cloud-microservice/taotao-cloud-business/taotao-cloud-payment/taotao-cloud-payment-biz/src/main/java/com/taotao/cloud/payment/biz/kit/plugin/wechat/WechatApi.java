@@ -65,8 +65,7 @@ public class WechatApi {
      * @param isSandBox 是否是沙箱环境
      * @return {@link String} 返回完整的接口请求URL
      */
-    public static String getReqUrl(
-            WechatApiEnum wechatApiEnum, WechatDomain wechatDomain, boolean isSandBox) {
+    public static String getReqUrl(WechatApiEnum wechatApiEnum, WechatDomain wechatDomain, boolean isSandBox) {
         if (wechatDomain == null) {
             wechatDomain = WechatDomain.CHINA;
         }
@@ -110,8 +109,7 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String execution(
-            String apiUrl, Map<String, String> params, String certPath, String certPass) {
+    public static String execution(String apiUrl, Map<String, String> params, String certPath, String certPass) {
         return doPostSsl(apiUrl, params, certPath, certPass);
     }
 
@@ -138,8 +136,7 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String execution(
-            String apiUrl, Map<String, String> params, InputStream certFile, String certPass) {
+    public static String execution(String apiUrl, Map<String, String> params, InputStream certFile, String certPass) {
         return doPostSsl(apiUrl, params, certFile, certPass);
     }
 
@@ -152,17 +149,12 @@ public class WechatApi {
      * @param certFile 证书文件输入流
      * @return {@link String} 请求返回的结果
      */
-    public static String execution(
-            String apiUrl, Map<String, String> params, InputStream certFile) {
+    public static String execution(String apiUrl, Map<String, String> params, InputStream certFile) {
         return doPostSsl(apiUrl, params, certFile);
     }
 
     public static String execution(
-            String apiUrl,
-            Map<String, String> params,
-            String certPath,
-            String certPass,
-            String filePath) {
+            String apiUrl, Map<String, String> params, String certPath, String certPass, String filePath) {
         return doUploadSsl(apiUrl, params, certPath, certPass, filePath);
     }
 
@@ -199,10 +191,8 @@ public class WechatApi {
             File file)
             throws Exception {
         // 构建 Authorization
-        String authorization =
-                WxPayKit.buildAuthorization(
-                        method, urlSuffix, mchId, serialNo, keyPath, body, nonceStr, timestamp,
-                        authType);
+        String authorization = WxPayKit.buildAuthorization(
+                method, urlSuffix, mchId, serialNo, keyPath, body, nonceStr, timestamp, authType);
 
         if (StrUtil.isEmpty(platSerialNo)) {
             platSerialNo = serialNo;
@@ -254,17 +244,8 @@ public class WechatApi {
             File file)
             throws Exception {
         // 构建 Authorization
-        String authorization =
-                WxPayKit.buildAuthorization(
-                        method,
-                        urlSuffix,
-                        mchId,
-                        serialNo,
-                        privateKey,
-                        body,
-                        nonceStr,
-                        timestamp,
-                        authType);
+        String authorization = WxPayKit.buildAuthorization(
+                method, urlSuffix, mchId, serialNo, privateKey, body, nonceStr, timestamp, authType);
 
         if (StrUtil.isEmpty(platSerialNo)) {
             platSerialNo = serialNo;
@@ -575,20 +556,19 @@ public class WechatApi {
             String authType,
             File file)
             throws Exception {
-        PaymentHttpResponse response =
-                v3(
-                        method,
-                        urlPrefix,
-                        urlSuffix,
-                        mchId,
-                        serialNo,
-                        platSerialNo,
-                        keyPath,
-                        body,
-                        nonceStr,
-                        timestamp,
-                        authType,
-                        file);
+        PaymentHttpResponse response = v3(
+                method,
+                urlPrefix,
+                urlSuffix,
+                mchId,
+                serialNo,
+                platSerialNo,
+                keyPath,
+                body,
+                nonceStr,
+                timestamp,
+                authType,
+                file);
         return buildResMap(response);
     }
 
@@ -614,8 +594,7 @@ public class WechatApi {
             String keyPath,
             String body)
             throws Exception {
-        PaymentHttpResponse response =
-                v3(method, urlPrefix, urlSuffix, mchId, serialNo, null, keyPath, body);
+        PaymentHttpResponse response = v3(method, urlPrefix, urlSuffix, mchId, serialNo, null, keyPath, body);
         return buildResMap(response);
     }
 
@@ -644,8 +623,7 @@ public class WechatApi {
             String keyPath,
             String body)
             throws Exception {
-        PaymentHttpResponse response =
-                v3(method, urlPrefix, urlSuffix, mchId, serialNo, platSerialNo, keyPath, body);
+        PaymentHttpResponse response = v3(method, urlPrefix, urlSuffix, mchId, serialNo, platSerialNo, keyPath, body);
         return buildResMap(response);
     }
 
@@ -674,8 +652,7 @@ public class WechatApi {
             String keyPath,
             Map<String, String> params)
             throws Exception {
-        PaymentHttpResponse response =
-                v3(method, urlPrefix, urlSuffix, mchId, serialNo, platSerialNo, keyPath, params);
+        PaymentHttpResponse response = v3(method, urlPrefix, urlSuffix, mchId, serialNo, platSerialNo, keyPath, params);
         return buildResMap(response);
     }
 
@@ -702,8 +679,7 @@ public class WechatApi {
             String keyPath,
             Map<String, String> params)
             throws Exception {
-        PaymentHttpResponse response =
-                v3(method, urlPrefix, urlSuffix, mchId, serialNo, null, keyPath, params);
+        PaymentHttpResponse response = v3(method, urlPrefix, urlSuffix, mchId, serialNo, null, keyPath, params);
         return buildResMap(response);
     }
 
@@ -732,8 +708,7 @@ public class WechatApi {
             String body,
             File file)
             throws Exception {
-        PaymentHttpResponse response =
-                v3(urlPrefix, urlSuffix, mchId, serialNo, platSerialNo, keyPath, body, file);
+        PaymentHttpResponse response = v3(urlPrefix, urlSuffix, mchId, serialNo, platSerialNo, keyPath, body, file);
         return buildResMap(response);
     }
 
@@ -752,13 +727,7 @@ public class WechatApi {
      */
     @Deprecated
     public static Map<String, Object> v3Upload(
-            String urlPrefix,
-            String urlSuffix,
-            String mchId,
-            String serialNo,
-            String keyPath,
-            String body,
-            File file)
+            String urlPrefix, String urlSuffix, String mchId, String serialNo, String keyPath, String body, File file)
             throws Exception {
         return v3Upload(urlPrefix, urlSuffix, mchId, serialNo, null, keyPath, body, file);
     }
@@ -771,10 +740,8 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String sendWorkWxRedPack(
-            Map<String, String> params, String certPath, String certPass) {
-        return execution(
-                getReqUrl(WechatApiEnum.SEND_WORK_WX_RED_PACK), params, certPath, certPass);
+    public static String sendWorkWxRedPack(Map<String, String> params, String certPath, String certPass) {
+        return execution(getReqUrl(WechatApiEnum.SEND_WORK_WX_RED_PACK), params, certPath, certPass);
     }
 
     /**
@@ -785,10 +752,8 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String sendWorkWxRedPack(
-            Map<String, String> params, InputStream certFile, String certPass) {
-        return execution(
-                getReqUrl(WechatApiEnum.SEND_WORK_WX_RED_PACK), params, certFile, certPass);
+    public static String sendWorkWxRedPack(Map<String, String> params, InputStream certFile, String certPass) {
+        return execution(getReqUrl(WechatApiEnum.SEND_WORK_WX_RED_PACK), params, certFile, certPass);
     }
 
     /**
@@ -799,10 +764,8 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String queryWorkWxRedPack(
-            Map<String, String> params, String certPath, String certPass) {
-        return execution(
-                getReqUrl(WechatApiEnum.QUERY_WORK_WX_RED_PACK), params, certPath, certPass);
+    public static String queryWorkWxRedPack(Map<String, String> params, String certPath, String certPass) {
+        return execution(getReqUrl(WechatApiEnum.QUERY_WORK_WX_RED_PACK), params, certPath, certPass);
     }
 
     /**
@@ -813,10 +776,8 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String queryWorkWxRedPack(
-            Map<String, String> params, InputStream certFile, String certPass) {
-        return execution(
-                getReqUrl(WechatApiEnum.QUERY_WORK_WX_RED_PACK), params, certFile, certPass);
+    public static String queryWorkWxRedPack(Map<String, String> params, InputStream certFile, String certPass) {
+        return execution(getReqUrl(WechatApiEnum.QUERY_WORK_WX_RED_PACK), params, certFile, certPass);
     }
 
     /**
@@ -827,10 +788,8 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String trans2pocket(
-            Map<String, String> params, String certPath, String certPass) {
-        return execution(
-                getReqUrl(WechatApiEnum.PAY_WWS_TRANS_2_POCKET), params, certPath, certPass);
+    public static String trans2pocket(Map<String, String> params, String certPath, String certPass) {
+        return execution(getReqUrl(WechatApiEnum.PAY_WWS_TRANS_2_POCKET), params, certPath, certPass);
     }
 
     /**
@@ -841,10 +800,8 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String trans2pocket(
-            Map<String, String> params, InputStream certFile, String certPass) {
-        return execution(
-                getReqUrl(WechatApiEnum.PAY_WWS_TRANS_2_POCKET), params, certFile, certPass);
+    public static String trans2pocket(Map<String, String> params, InputStream certFile, String certPass) {
+        return execution(getReqUrl(WechatApiEnum.PAY_WWS_TRANS_2_POCKET), params, certFile, certPass);
     }
 
     /**
@@ -855,10 +812,8 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String queryTrans2pocket(
-            Map<String, String> params, String certPath, String certPass) {
-        return execution(
-                getReqUrl(WechatApiEnum.QUERY_WWS_TRANS_2_POCKET), params, certPath, certPass);
+    public static String queryTrans2pocket(Map<String, String> params, String certPath, String certPass) {
+        return execution(getReqUrl(WechatApiEnum.QUERY_WWS_TRANS_2_POCKET), params, certPath, certPass);
     }
 
     /**
@@ -869,10 +824,8 @@ public class WechatApi {
      * @param certPass 证书密码
      * @return {@link String} 请求返回的结果
      */
-    public static String queryTrans2pocket(
-            Map<String, String> params, InputStream certFile, String certPass) {
-        return execution(
-                getReqUrl(WechatApiEnum.QUERY_WWS_TRANS_2_POCKET), params, certFile, certPass);
+    public static String queryTrans2pocket(Map<String, String> params, InputStream certFile, String certPass) {
+        return execution(getReqUrl(WechatApiEnum.QUERY_WWS_TRANS_2_POCKET), params, certFile, certPass);
     }
 
     /**
@@ -892,8 +845,7 @@ public class WechatApi {
      * @param headers 请求头
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public static PaymentHttpResponse get(
-            String url, Map<String, Object> params, Map<String, String> headers) {
+    public static PaymentHttpResponse get(String url, Map<String, Object> params, Map<String, String> headers) {
         return HttpKit.getDelegate().get(url, params, headers);
     }
 
@@ -932,8 +884,7 @@ public class WechatApi {
      * @param data 请求参数
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public static PaymentHttpResponse post(
-            String url, String authorization, String serialNumber, String data) {
+    public static PaymentHttpResponse post(String url, String authorization, String serialNumber, String data) {
         return post(url, data, getHeaders(authorization, serialNumber));
     }
 
@@ -958,8 +909,7 @@ public class WechatApi {
      * @param data 请求参数
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public static PaymentHttpResponse delete(
-            String url, String authorization, String serialNumber, String data) {
+    public static PaymentHttpResponse delete(String url, String authorization, String serialNumber, String data) {
         return delete(url, data, getHeaders(authorization, serialNumber));
     }
 
@@ -971,8 +921,7 @@ public class WechatApi {
      * @param headers 请求头
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public static PaymentHttpResponse upload(
-            String url, Map<String, Object> params, Map<String, String> headers) {
+    public static PaymentHttpResponse upload(String url, Map<String, Object> params, Map<String, String> headers) {
         return HttpKit.getDelegate().post(url, params, headers);
     }
 
@@ -1015,8 +964,7 @@ public class WechatApi {
      * @param data 请求参数
      * @return {@link PaymentHttpResponse} 请求返回的结果
      */
-    public static PaymentHttpResponse put(
-            String url, String authorization, String serialNumber, String data) {
+    public static PaymentHttpResponse put(String url, String authorization, String serialNumber, String data) {
         return put(url, data, getHeaders(authorization, serialNumber));
     }
 
@@ -1024,13 +972,11 @@ public class WechatApi {
         return HttpKit.getDelegate().post(url, WxPayKit.toXml(params));
     }
 
-    public static String doPostSsl(
-            String url, Map<String, String> params, String certPath, String certPass) {
+    public static String doPostSsl(String url, Map<String, String> params, String certPath, String certPass) {
         return HttpKit.getDelegate().post(url, WxPayKit.toXml(params), certPath, certPass);
     }
 
-    public static String doPostSsl(
-            String url, Map<String, String> params, InputStream certFile, String certPass) {
+    public static String doPostSsl(String url, Map<String, String> params, InputStream certFile, String certPass) {
         return HttpKit.getDelegate().post(url, WxPayKit.toXml(params), certFile, certPass);
     }
 
@@ -1051,17 +997,11 @@ public class WechatApi {
     }
 
     public static String doUploadSsl(
-            String url,
-            Map<String, String> params,
-            String certPath,
-            String certPass,
-            String filePath) {
-        return HttpKit.getDelegate()
-                .upload(url, WxPayKit.toXml(params), certPath, certPass, filePath);
+            String url, Map<String, String> params, String certPath, String certPass, String filePath) {
+        return HttpKit.getDelegate().upload(url, WxPayKit.toXml(params), certPath, certPass, filePath);
     }
 
-    public static String doUploadSsl(
-            String url, Map<String, String> params, String certPath, String filePath) {
+    public static String doUploadSsl(String url, Map<String, String> params, String certPath, String filePath) {
         if (params.isEmpty() || !params.containsKey("mch_id")) {
             throw new RuntimeException("请求参数中必须包含 mch_id，如接口参考中不包 mch_id， 请使用其他同名构造方法。");
         }

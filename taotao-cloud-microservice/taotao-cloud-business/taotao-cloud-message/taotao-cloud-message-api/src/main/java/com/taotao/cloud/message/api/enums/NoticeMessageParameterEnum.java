@@ -51,8 +51,7 @@ public enum NoticeMessageParameterEnum {
      * @return
      */
     public static String getValueByType(String type) {
-        for (NoticeMessageParameterEnum noticeMessageParameterEnum :
-                NoticeMessageParameterEnum.values()) {
+        for (NoticeMessageParameterEnum noticeMessageParameterEnum : NoticeMessageParameterEnum.values()) {
             if (type.toLowerCase().equals(noticeMessageParameterEnum.getType().toLowerCase())) {
                 return noticeMessageParameterEnum.getDescription();
             }

@@ -44,8 +44,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion")
 public class PromotionManagerController {
 
-    @Autowired private IPromotionService promotionService;
-    @Autowired private IPromotionGoodsService promotionGoodsService;
+    @Autowired
+    private IPromotionService promotionService;
+
+    @Autowired
+    private IPromotionGoodsService promotionGoodsService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -66,8 +69,7 @@ public class PromotionManagerController {
         searchParams.setPromotionId(promotionId);
         searchParams.setPromotionType(promotionType);
         searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
-        IPage<PromotionGoods> promotionGoods =
-                promotionGoodsService.pageFindAll(searchParams, pageVO);
+        IPage<PromotionGoods> promotionGoods = promotionGoodsService.pageFindAll(searchParams, pageVO);
         return Result.success(promotionGoods);
     }
 }

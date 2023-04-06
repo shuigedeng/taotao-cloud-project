@@ -40,7 +40,8 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.KAFKA)
 public class KafkaSendMqServiceImpl implements SendMqService {
 
-    @Autowired private KafkaTemplate kafkaTemplate;
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
 
     @Value("${austin.business.tagId.key}")
     private String tagIdKey;
@@ -48,9 +49,7 @@ public class KafkaSendMqServiceImpl implements SendMqService {
     @Override
     public void send(String topic, String jsonValue, String tagId) {
         if (StrUtil.isNotBlank(tagId)) {
-            List<Header> headers =
-                    Arrays.asList(
-                            new RecordHeader(tagIdKey, tagId.getBytes(StandardCharsets.UTF_8)));
+            List<Header> headers = Arrays.asList(new RecordHeader(tagIdKey, tagId.getBytes(StandardCharsets.UTF_8)));
             kafkaTemplate.send(new ProducerRecord(topic, null, null, null, jsonValue, headers));
         } else {
             kafkaTemplate.send(topic, jsonValue);

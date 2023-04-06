@@ -37,8 +37,7 @@ import org.springframework.stereotype.Service;
 @Service
 @CacheConfig(cacheNames = "{setting}")
 public class SettingServiceImpl
-        extends BaseSuperServiceImpl<
-                ISettingMapper, Setting, SettingRepository, ISettingRepository, Long>
+        extends BaseSuperServiceImpl<ISettingMapper, Setting, SettingRepository, ISettingRepository, Long>
         implements ISettingService {
 
     @Override

@@ -55,8 +55,7 @@ public class ApplicationConfig {
      */
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizer() {
-        return builder ->
-                builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+        return builder -> builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
     }
 
     @Bean
@@ -69,34 +68,23 @@ public class ApplicationConfig {
         // 忽略null属性字段
         //        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         // null属性字段转""
-        objectMapper
-                .getSerializerProvider()
-                .setNullValueSerializer(
-                        new JsonSerializer<Object>() {
-                            @Override
-                            public void serialize(
-                                    Object arg0, JsonGenerator arg1, SerializerProvider arg2)
-                                    throws IOException {
-                                arg1.writeString("");
-                            }
-                        });
+        objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
+            @Override
+            public void serialize(Object arg0, JsonGenerator arg1, SerializerProvider arg2) throws IOException {
+                arg1.writeString("");
+            }
+        });
         SimpleModule simpleModule = new SimpleModule();
         // 格式化Long
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         // 格式化时间
-        simpleModule.addSerializer(
-                Date.class,
-                new JsonSerializer<Date>() {
-                    @Override
-                    public void serialize(
-                            Date date,
-                            JsonGenerator jsonGenerator,
-                            SerializerProvider serializerProvider)
-                            throws IOException {
-                        jsonGenerator.writeString(
-                                DateUtil.format(date, DatePattern.NORM_DATETIME_FORMAT));
-                    }
-                });
+        simpleModule.addSerializer(Date.class, new JsonSerializer<Date>() {
+            @Override
+            public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+                    throws IOException {
+                jsonGenerator.writeString(DateUtil.format(date, DatePattern.NORM_DATETIME_FORMAT));
+            }
+        });
         // 注册 module
         objectMapper.registerModule(simpleModule);
         return objectMapper;

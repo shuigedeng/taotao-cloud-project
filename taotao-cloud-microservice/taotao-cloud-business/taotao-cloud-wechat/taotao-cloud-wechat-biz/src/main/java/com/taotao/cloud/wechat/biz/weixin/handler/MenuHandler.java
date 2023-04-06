@@ -67,8 +67,7 @@ public class MenuHandler extends AbstractHandler {
             throws WxErrorException {
         // 消息记录
         WxMenu wxMenu = null;
-        if (EventType.CLICK.equals(wxMessage.getEvent())
-                || EventType.SCANCODE_WAITMSG.equals(wxMessage.getEvent())) {
+        if (EventType.CLICK.equals(wxMessage.getEvent()) || EventType.SCANCODE_WAITMSG.equals(wxMessage.getEvent())) {
             wxMenu = wxMenuMapper.selectById(wxMessage.getEventKey());
             if (wxMenu == null) { // 菜单过期
                 return new TextBuilder()
@@ -81,12 +80,9 @@ public class MenuHandler extends AbstractHandler {
             wxMenu = new WxMenu();
         }
         WxUser wxUser =
-                wxUserMapper.selectOne(
-                        Wrappers.<WxUser>lambdaQuery()
-                                .eq(WxUser::getOpenId, wxMessage.getFromUser()));
+                wxUserMapper.selectOne(Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, wxMessage.getFromUser()));
         if (wxUser == null) { // 库中无此用户
-            WxMpUser userWxInfo =
-                    weixinService.getUserService().userInfo(wxMessage.getFromUser(), null);
+            WxMpUser userWxInfo = weixinService.getUserService().userInfo(wxMessage.getFromUser(), null);
             wxUser = new WxUser();
             wxUser.setSubscribeNum(1);
             SubscribeHandler.setWxUserValue(wxUser, userWxInfo);
@@ -103,8 +99,7 @@ public class MenuHandler extends AbstractHandler {
      * @param wxMenu
      * @return
      */
-    public WxMpXmlOutMessage getWxMpXmlOutMessage(
-            WxMpXmlMessage wxMessage, WxMenu wxMenu, WxUser wxUser) {
+    public WxMpXmlOutMessage getWxMpXmlOutMessage(WxMpXmlMessage wxMessage, WxMenu wxMenu, WxUser wxUser) {
         WxMpXmlOutMessage wxMpXmlOutMessage = null;
         // 记录接收消息
         WxMsg wxMsg = new WxMsg();
@@ -138,48 +133,44 @@ public class MenuHandler extends AbstractHandler {
             wxMsg.setRepType(wxMenu.getRepType());
             if (WxConsts.KefuMsgType.TEXT.equals(wxMenu.getRepType())) {
                 wxMsg.setRepContent(wxMenu.getRepContent());
-                wxMpXmlOutMessage =
-                        new TextBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .content(wxMenu.getRepContent())
-                                .build();
+                wxMpXmlOutMessage = new TextBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .content(wxMenu.getRepContent())
+                        .build();
             }
             if (WxConsts.KefuMsgType.IMAGE.equals(wxMenu.getRepType())) {
                 wxMsg.setRepName(wxMenu.getRepName());
                 wxMsg.setRepUrl(wxMenu.getRepUrl());
                 wxMsg.setRepMediaId(wxMenu.getRepMediaId());
-                wxMpXmlOutMessage =
-                        new ImageBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .mediaId(wxMenu.getRepMediaId())
-                                .build();
+                wxMpXmlOutMessage = new ImageBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .mediaId(wxMenu.getRepMediaId())
+                        .build();
             }
             if (WxConsts.KefuMsgType.VOICE.equals(wxMenu.getRepType())) {
                 wxMsg.setRepName(wxMenu.getRepName());
                 wxMsg.setRepUrl(wxMenu.getRepUrl());
                 wxMsg.setRepMediaId(wxMenu.getRepMediaId());
-                wxMpXmlOutMessage =
-                        new VoiceBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .mediaId(wxMenu.getRepMediaId())
-                                .build();
+                wxMpXmlOutMessage = new VoiceBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .mediaId(wxMenu.getRepMediaId())
+                        .build();
             }
             if (WxConsts.KefuMsgType.VIDEO.equals(wxMenu.getRepType())) {
                 wxMsg.setRepName(wxMenu.getRepName());
                 wxMsg.setRepDesc(wxMenu.getRepDesc());
                 wxMsg.setRepUrl(wxMenu.getRepUrl());
                 wxMsg.setRepMediaId(wxMenu.getRepMediaId());
-                wxMpXmlOutMessage =
-                        new VideoBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .mediaId(wxMenu.getRepMediaId())
-                                .title(wxMenu.getRepName())
-                                .description(wxMenu.getRepDesc())
-                                .build();
+                wxMpXmlOutMessage = new VideoBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .mediaId(wxMenu.getRepMediaId())
+                        .title(wxMenu.getRepName())
+                        .description(wxMenu.getRepDesc())
+                        .build();
             }
             if (WxConsts.KefuMsgType.MUSIC.equals(wxMenu.getRepType())) {
                 wxMsg.setRepName(wxMenu.getRepName());
@@ -188,22 +179,20 @@ public class MenuHandler extends AbstractHandler {
                 wxMsg.setRepHqUrl(wxMenu.getRepHqUrl());
                 wxMsg.setRepThumbMediaId(wxMenu.getRepThumbMediaId());
                 wxMsg.setRepThumbUrl(wxMenu.getRepThumbUrl());
-                wxMpXmlOutMessage =
-                        new MusicBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .thumbMediaId(wxMenu.getRepThumbMediaId())
-                                .title(wxMenu.getRepName())
-                                .description(wxMenu.getRepDesc())
-                                .musicUrl(wxMenu.getRepUrl())
-                                .hqMusicUrl(wxMenu.getRepHqUrl())
-                                .build();
+                wxMpXmlOutMessage = new MusicBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .thumbMediaId(wxMenu.getRepThumbMediaId())
+                        .title(wxMenu.getRepName())
+                        .description(wxMenu.getRepDesc())
+                        .musicUrl(wxMenu.getRepUrl())
+                        .hqMusicUrl(wxMenu.getRepHqUrl())
+                        .build();
             }
             if (WxConsts.KefuMsgType.NEWS.equals(wxMenu.getRepType())) {
                 List<WxMpXmlOutNewsMessage.Item> list = new ArrayList<>();
                 List<JSONObject> listJSONObject =
-                        JSONUtil.toList(
-                                wxMenu.getContent().getJSONArray("articles"), JSONObject.class);
+                        JSONUtil.toList(wxMenu.getContent().getJSONArray("articles"), JSONObject.class);
                 WxMpXmlOutNewsMessage.Item t;
                 for (JSONObject jSONObject : listJSONObject) {
                     t = new WxMpXmlOutNewsMessage.Item();
@@ -218,12 +207,11 @@ public class MenuHandler extends AbstractHandler {
                 wxMsg.setRepUrl(wxMenu.getRepUrl());
                 wxMsg.setRepMediaId(wxMenu.getRepMediaId());
                 wxMsg.setContent(wxMenu.getContent());
-                wxMpXmlOutMessage =
-                        new NewsBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .articles(list)
-                                .build();
+                wxMpXmlOutMessage = new NewsBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .articles(list)
+                        .build();
             }
             wxMsgMapper.insert(wxMsg);
         }

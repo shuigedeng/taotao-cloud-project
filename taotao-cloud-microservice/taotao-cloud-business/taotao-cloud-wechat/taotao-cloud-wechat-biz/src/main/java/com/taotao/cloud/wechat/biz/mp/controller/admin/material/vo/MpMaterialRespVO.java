@@ -37,18 +37,10 @@ public class MpMaterialRespVO {
     @ApiModelProperty(value = "素材的 media_id", required = true, example = "123")
     private String mediaId;
 
-    @ApiModelProperty(
-            value = "文件类型",
-            required = true,
-            example = "image",
-            notes = "参见 WxConsts.MediaFileType 枚举")
+    @ApiModelProperty(value = "文件类型", required = true, example = "image", notes = "参见 WxConsts.MediaFileType 枚举")
     private String type;
 
-    @ApiModelProperty(
-            value = "是否永久",
-            required = true,
-            example = "true",
-            notes = "true - 永久；false - 临时")
+    @ApiModelProperty(value = "是否永久", required = true, example = "true", notes = "true - 永久；false - 临时")
     private Boolean permanent;
 
     @ApiModelProperty(value = "素材的 URL", required = true, example = "https://www.iocoder.cn/1.png")
@@ -57,10 +49,7 @@ public class MpMaterialRespVO {
     @ApiModelProperty(value = "名字", example = "yunai.png")
     private String name;
 
-    @ApiModelProperty(
-            value = "公众号文件 URL",
-            example = "https://mmbiz.qpic.cn/xxx.mp3",
-            notes = "只有【永久素材】使用")
+    @ApiModelProperty(value = "公众号文件 URL", example = "https://mmbiz.qpic.cn/xxx.mp3", notes = "只有【永久素材】使用")
     private String mpUrl;
 
     @ApiModelProperty(value = "视频素材的标题", example = "我是标题", notes = "只有【永久素材】使用")

@@ -61,19 +61,26 @@ import org.springframework.util.StringUtils;
 @Service("chatTopicService")
 public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements ChatTopicService {
 
-    @Resource private ChatTopicDao chatTopicDao;
+    @Resource
+    private ChatTopicDao chatTopicDao;
 
-    @Resource private ChatUserService chatUserService;
+    @Resource
+    private ChatUserService chatUserService;
 
-    @Resource private ChatFriendService chatFriendService;
+    @Resource
+    private ChatFriendService chatFriendService;
 
-    @Resource private ChatTopicLikeService chatTopicLikeService;
+    @Resource
+    private ChatTopicLikeService chatTopicLikeService;
 
-    @Resource private ChatTopicReplyService chatTopicReplyService;
+    @Resource
+    private ChatTopicReplyService chatTopicReplyService;
 
-    @Resource private ChatPushService chatPushService;
+    @Resource
+    private ChatPushService chatPushService;
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     private static final Integer DEFAULT_COUNT = 10;
 
@@ -91,13 +98,12 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
     @Override
     public void sendTopic(TopicVo01 topicVo) {
         Long userId = ShiroUtils.getUserId();
-        ChatTopic topic =
-                new ChatTopic()
-                        .setUserId(userId)
-                        .setTopicType(topicVo.getTopicType())
-                        .setContent(topicVo.getContent())
-                        .setLocation(topicVo.getLocation())
-                        .setCreateTime(DateUtil.date());
+        ChatTopic topic = new ChatTopic()
+                .setUserId(userId)
+                .setTopicType(topicVo.getTopicType())
+                .setContent(topicVo.getContent())
+                .setLocation(topicVo.getLocation())
+                .setCreateTime(DateUtil.date());
         this.add(topic);
         // 好友列表
         List<Long> userList = chatFriendService.queryFriendId(userId);
@@ -106,10 +112,9 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
         }
         ChatUser chatUser = ChatUser.initUser(chatUserService.getById(userId));
         List<PushParamVo> paramList = new ArrayList<>();
-        userList.forEach(
-                e -> {
-                    paramList.add(new PushParamVo().setToId(e).setPortrait(chatUser.getPortrait()));
-                });
+        userList.forEach(e -> {
+            paramList.add(new PushParamVo().setToId(e).setPortrait(chatUser.getPortrait()));
+        });
         // 推送
         chatPushService.pushNotice(paramList, PushNoticeTypeEnum.TOPIC_RED);
     }
@@ -157,15 +162,13 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
         List<ChatTopic> topicList = this.queryList(new ChatTopic().setUserId(friendId));
         List<TopicVo03> dataList = new ArrayList<>();
         String finalNickName = nickName;
-        topicList.forEach(
-                e -> {
-                    TopicVo04 topic =
-                            BeanUtil.copyProperties(e, TopicVo04.class)
-                                    .setNickName(finalNickName)
-                                    .setPortrait(chatUser.getPortrait())
-                                    .setTopicId(e.getId());
-                    dataList.add(formatTopic(topic));
-                });
+        topicList.forEach(e -> {
+            TopicVo04 topic = BeanUtil.copyProperties(e, TopicVo04.class)
+                    .setNickName(finalNickName)
+                    .setPortrait(chatUser.getPortrait())
+                    .setTopicId(e.getId());
+            dataList.add(formatTopic(topic));
+        });
         return getPageInfo(dataList, topicList);
     }
 
@@ -175,15 +178,14 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
         // 分页
         List<TopicVo04> topicList = chatTopicDao.topicList(userId);
         List<TopicVo03> dataList = new ArrayList<>();
-        topicList.forEach(
-                e -> {
-                    if (StringUtils.isEmpty(e.getPortrait())) {
-                        ChatUser chatUser = ChatUser.initUser(null);
-                        e.setNickName(chatUser.getNickName());
-                        e.setPortrait(chatUser.getPortrait());
-                    }
-                    dataList.add(formatTopic(e));
-                });
+        topicList.forEach(e -> {
+            if (StringUtils.isEmpty(e.getPortrait())) {
+                ChatUser chatUser = ChatUser.initUser(null);
+                e.setNickName(chatUser.getNickName());
+                e.setPortrait(chatUser.getPortrait());
+            }
+            dataList.add(formatTopic(e));
+        });
         return getPageInfo(dataList, topicList);
     }
 
@@ -206,11 +208,10 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
                 nickName = chatFriend.getRemark();
             }
         }
-        TopicVo04 topicVo =
-                BeanUtil.copyProperties(topic, TopicVo04.class)
-                        .setNickName(nickName)
-                        .setPortrait(chatUser.getPortrait())
-                        .setTopicId(topic.getId());
+        TopicVo04 topicVo = BeanUtil.copyProperties(topic, TopicVo04.class)
+                .setNickName(nickName)
+                .setPortrait(chatUser.getPortrait())
+                .setTopicId(topic.getId());
         return formatTopic(topicVo);
     }
 
@@ -225,10 +226,9 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
         }
         List<String> jsonStr = redisUtils.lAll(key);
         List<TopicVo09> dataList = new ArrayList<>();
-        jsonStr.forEach(
-                e -> {
-                    dataList.add(JSONUtil.toBean(e, TopicVo09.class));
-                });
+        jsonStr.forEach(e -> {
+            dataList.add(JSONUtil.toBean(e, TopicVo09.class));
+        });
         return dataList;
     }
 
@@ -257,18 +257,14 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
         }
         // 点赞操作
         chatTopicLikeService.add(
-                new ChatTopicLike()
-                        .setTopicId(topicId)
-                        .setUserId(userId)
-                        .setHasLike(YesOrNoEnum.YES));
+                new ChatTopicLike().setTopicId(topicId).setUserId(userId).setHasLike(YesOrNoEnum.YES));
         // 如果是自己给自己点赞，则不处理
         if (userId.equals(topic.getUserId())) {
             return;
         }
         // 给贴主发送通知
         ChatUser fromUser = ChatUser.initUser(chatUserService.getById(userId));
-        PushParamVo paramVo =
-                new PushParamVo().setToId(topic.getUserId()).setPortrait(fromUser.getPortrait());
+        PushParamVo paramVo = new PushParamVo().setToId(topic.getUserId()).setPortrait(fromUser.getPortrait());
         chatPushService.pushNotice(paramVo, PushNoticeTypeEnum.TOPIC_REPLY);
         // 通知
         this.addNotice(topic.getUserId(), topic, fromUser, TopicNoticeTypeEnum.LIKE, null);
@@ -311,30 +307,25 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
         if (topic == null) {
             return new TopicVo06();
         }
-        ChatTopicReply topicReply =
-                new ChatTopicReply()
-                        .setReplyType(TopicReplyTypeEnum.TOPIC)
-                        .setContent(content)
-                        .setTopicId(topic.getId())
-                        .setUserId(userId)
-                        .setTargetId(topic.getId())
-                        .setReplyStatus(YesOrNoEnum.YES)
-                        .setCreateTime(DateUtil.date());
+        ChatTopicReply topicReply = new ChatTopicReply()
+                .setReplyType(TopicReplyTypeEnum.TOPIC)
+                .setContent(content)
+                .setTopicId(topic.getId())
+                .setUserId(userId)
+                .setTargetId(topic.getId())
+                .setReplyStatus(YesOrNoEnum.YES)
+                .setCreateTime(DateUtil.date());
         chatTopicReplyService.add(topicReply);
         // 给贴主发送通知
         ChatUser fromUser = ChatUser.initUser(chatUserService.getById(userId));
-        TopicVo06 result =
-                BeanUtil.toBean(topicReply, TopicVo06.class)
-                        .setUserId(fromUser.getUserId())
-                        .setNickName(fromUser.getNickName())
-                        .setPortrait(fromUser.getPortrait())
-                        .setCanDeleted(YesOrNoEnum.YES);
+        TopicVo06 result = BeanUtil.toBean(topicReply, TopicVo06.class)
+                .setUserId(fromUser.getUserId())
+                .setNickName(fromUser.getNickName())
+                .setPortrait(fromUser.getPortrait())
+                .setCanDeleted(YesOrNoEnum.YES);
         if (!topic.getUserId().equals(userId)) {
             // 帖主推送
-            PushParamVo paramVo =
-                    new PushParamVo()
-                            .setToId(topic.getUserId())
-                            .setPortrait(fromUser.getPortrait());
+            PushParamVo paramVo = new PushParamVo().setToId(topic.getUserId()).setPortrait(fromUser.getPortrait());
             chatPushService.pushNotice(paramVo, PushNoticeTypeEnum.TOPIC_REPLY);
             // 帖主推送
             addNotice(topic.getUserId(), topic, fromUser, TopicNoticeTypeEnum.REPLY, content);
@@ -356,34 +347,27 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
         if (topic == null) {
             return new TopicVo06();
         }
-        ChatTopicReply topicReply =
-                new ChatTopicReply()
-                        .setReplyType(TopicReplyTypeEnum.USER)
-                        .setContent(content)
-                        .setTopicId(reply.getTopicId())
-                        .setUserId(userId)
-                        .setTargetId(reply.getUserId())
-                        .setReplyStatus(YesOrNoEnum.YES)
-                        .setCreateTime(DateUtil.date());
+        ChatTopicReply topicReply = new ChatTopicReply()
+                .setReplyType(TopicReplyTypeEnum.USER)
+                .setContent(content)
+                .setTopicId(reply.getTopicId())
+                .setUserId(userId)
+                .setTargetId(reply.getUserId())
+                .setReplyStatus(YesOrNoEnum.YES)
+                .setCreateTime(DateUtil.date());
         chatTopicReplyService.add(topicReply);
         // 给贴主发送通知
         ChatUser fromUser = ChatUser.initUser(chatUserService.getById(userId));
         // 帖主推送
         if (!topic.getUserId().equals(userId)) {
-            PushParamVo paramVo =
-                    new PushParamVo()
-                            .setToId(topic.getUserId())
-                            .setPortrait(fromUser.getPortrait());
+            PushParamVo paramVo = new PushParamVo().setToId(topic.getUserId()).setPortrait(fromUser.getPortrait());
             chatPushService.pushNotice(paramVo, PushNoticeTypeEnum.TOPIC_REPLY);
             // 帖主推送
             addNotice(topic.getUserId(), topic, fromUser, TopicNoticeTypeEnum.REPLY, content);
         }
         // 用户推送
         if (!reply.getUserId().equals(userId)) {
-            PushParamVo paramVo =
-                    new PushParamVo()
-                            .setToId(reply.getUserId())
-                            .setPortrait(fromUser.getPortrait());
+            PushParamVo paramVo = new PushParamVo().setToId(reply.getUserId()).setPortrait(fromUser.getPortrait());
             chatPushService.pushNotice(paramVo, PushNoticeTypeEnum.TOPIC_REPLY);
             // 用户推送
             addNotice(reply.getUserId(), topic, fromUser, TopicNoticeTypeEnum.REPLY, content);
@@ -431,27 +415,20 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
 
     /** 执行添加 */
     private void addNotice(
-            Long userId,
-            ChatTopic topic,
-            ChatUser fromUser,
-            TopicNoticeTypeEnum noticeType,
-            String content) {
-        ThreadUtil.execAsync(
-                () -> {
-                    TopicVo09 topicVo =
-                            new TopicVo09()
-                                    .setTopicId(topic.getId())
-                                    .setTopicType(topic.getTopicType())
-                                    .setTopicContent(topic.getContent())
-                                    .setNoticeType(noticeType)
-                                    .setUserId(fromUser.getUserId())
-                                    .setNickName(fromUser.getNickName())
-                                    .setPortrait(fromUser.getPortrait())
-                                    .setReplyContent(content)
-                                    .setReplyTime(DateUtil.date());
-                    redisUtils.lLeftPush(
-                            ApiConstant.REDIS_TOPIC_REPLY + userId, JSONUtil.toJsonStr(topicVo));
-                });
+            Long userId, ChatTopic topic, ChatUser fromUser, TopicNoticeTypeEnum noticeType, String content) {
+        ThreadUtil.execAsync(() -> {
+            TopicVo09 topicVo = new TopicVo09()
+                    .setTopicId(topic.getId())
+                    .setTopicType(topic.getTopicType())
+                    .setTopicContent(topic.getContent())
+                    .setNoticeType(noticeType)
+                    .setUserId(fromUser.getUserId())
+                    .setNickName(fromUser.getNickName())
+                    .setPortrait(fromUser.getPortrait())
+                    .setReplyContent(content)
+                    .setReplyTime(DateUtil.date());
+            redisUtils.lLeftPush(ApiConstant.REDIS_TOPIC_REPLY + userId, JSONUtil.toJsonStr(topicVo));
+        });
     }
 
     /** 格式化帖子 */
@@ -462,20 +439,18 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
         YesOrNoEnum like = selfLike(likeList);
         // 查询评论信息
         List<TopicVo06> replyList = chatTopicReplyService.queryReplyList(topic.getTopicId());
-        TopicVo03 topicVo =
-                new TopicVo03()
-                        .setTopic(topic)
-                        .setLikeList(likeList)
-                        .setLike(like)
-                        .setReplyList(replyList);
+        TopicVo03 topicVo = new TopicVo03()
+                .setTopic(topic)
+                .setLikeList(likeList)
+                .setLike(like)
+                .setReplyList(replyList);
         return topicVo;
     }
 
     /** 是否点赞 */
     private YesOrNoEnum selfLike(List<TopicVo05> likeList) {
         Long userId = ShiroUtils.getUserId();
-        List<Long> userList =
-                likeList.stream().map(TopicVo05::getUserId).collect(Collectors.toList());
+        List<Long> userList = likeList.stream().map(TopicVo05::getUserId).collect(Collectors.toList());
         return userList.contains(userId) ? YesOrNoEnum.YES : YesOrNoEnum.NO;
     }
 }

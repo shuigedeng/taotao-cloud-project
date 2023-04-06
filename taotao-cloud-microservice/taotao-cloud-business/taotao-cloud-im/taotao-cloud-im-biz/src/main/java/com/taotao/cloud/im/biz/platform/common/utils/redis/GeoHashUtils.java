@@ -28,7 +28,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class GeoHashUtils {
 
-    @Autowired private RedisTemplate redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /***
      * 将指定的地理空间位置（纬度、经度、名称）添加到指定的key中。
@@ -105,9 +106,7 @@ public class GeoHashUtils {
      */
     public Distance dist(String key, String name1, String name2) {
         Distance distance =
-                redisTemplate
-                        .opsForGeo()
-                        .distance(key, name1, name2, RedisGeoCommands.DistanceUnit.KILOMETERS);
+                redisTemplate.opsForGeo().distance(key, name1, name2, RedisGeoCommands.DistanceUnit.KILOMETERS);
         return distance;
     }
 
@@ -121,12 +120,11 @@ public class GeoHashUtils {
      */
     public List<GeoResult<GeoVo>> radius(String key, String name, Integer distance, Integer count) {
         Distance distances = new Distance(distance, Metrics.KILOMETERS);
-        RedisGeoCommands.GeoRadiusCommandArgs args =
-                RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs()
-                        .includeDistance()
-                        .includeCoordinates()
-                        .sortAscending()
-                        .limit(count);
+        RedisGeoCommands.GeoRadiusCommandArgs args = RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs()
+                .includeDistance()
+                .includeCoordinates()
+                .sortAscending()
+                .limit(count);
         return redisTemplate.opsForGeo().radius(key, name, distances, args).getContent();
     }
 
@@ -141,15 +139,12 @@ public class GeoHashUtils {
      */
     public List<GeoResult<GeoVo>> radius(
             String key, double longitude, double latitude, Integer distance, Integer count) {
-        Circle circle =
-                new Circle(
-                        new Point(longitude, latitude), new Distance(distance, Metrics.KILOMETERS));
-        RedisGeoCommands.GeoRadiusCommandArgs args =
-                RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs()
-                        .includeDistance()
-                        .includeCoordinates()
-                        .sortAscending()
-                        .limit(count);
+        Circle circle = new Circle(new Point(longitude, latitude), new Distance(distance, Metrics.KILOMETERS));
+        RedisGeoCommands.GeoRadiusCommandArgs args = RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs()
+                .includeDistance()
+                .includeCoordinates()
+                .sortAscending()
+                .limit(count);
         return redisTemplate.opsForGeo().radius(key, circle, args).getContent();
     }
 

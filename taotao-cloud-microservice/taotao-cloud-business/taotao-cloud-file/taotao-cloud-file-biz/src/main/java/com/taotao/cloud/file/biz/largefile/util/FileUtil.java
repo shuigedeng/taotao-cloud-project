@@ -67,13 +67,9 @@ public class FileUtil extends FileUtils {
 
             for (int i = 0; i < filePaths.length; i++) {
                 if (new File(oldPath + File.separator + filePaths[i]).isDirectory()) {
-                    moveFiles(
-                            oldPath + File.separator + filePaths[i],
-                            newPath + File.separator + filePaths[i]);
+                    moveFiles(oldPath + File.separator + filePaths[i], newPath + File.separator + filePaths[i]);
                 } else if (new File(oldPath + File.separator + filePaths[i]).isFile()) {
-                    copyFile(
-                            oldPath + File.separator + filePaths[i],
-                            newPath + File.separator + filePaths[i]);
+                    copyFile(oldPath + File.separator + filePaths[i], newPath + File.separator + filePaths[i]);
                     new File(oldPath + File.separator + filePaths[i])
                             .renameTo(new File(newPath + File.separator + filePaths[i]));
                 }
@@ -102,20 +98,11 @@ public class FileUtil extends FileUtils {
     public static String getFileName(String fileName) {
 
         String name = "";
-        if (StringUtils.lastIndexOf(fileName, SLASH_ONE)
-                >= StringUtils.lastIndexOf(fileName, SLASH_TWO)) {
-            name =
-                    StringUtils.substring(
-                            fileName,
-                            StringUtils.lastIndexOf(fileName, SLASH_ONE) + 1,
-                            fileName.length());
+        if (StringUtils.lastIndexOf(fileName, SLASH_ONE) >= StringUtils.lastIndexOf(fileName, SLASH_TWO)) {
+            name = StringUtils.substring(fileName, StringUtils.lastIndexOf(fileName, SLASH_ONE) + 1, fileName.length());
 
         } else {
-            name =
-                    StringUtils.substring(
-                            fileName,
-                            StringUtils.lastIndexOf(fileName, SLASH_TWO) + 1,
-                            fileName.length());
+            name = StringUtils.substring(fileName, StringUtils.lastIndexOf(fileName, SLASH_TWO) + 1, fileName.length());
         }
         return StringUtils.trimToEmpty(name);
     }
@@ -123,13 +110,12 @@ public class FileUtil extends FileUtils {
     /** 获取没有扩展名的文件名 */
     public static String getWithoutExtension(String fileName) {
 
-        String ext =
-                StringUtils.substring(
-                        fileName,
-                        0,
-                        StringUtils.lastIndexOf(fileName, DOT) == -1
-                                ? fileName.length()
-                                : StringUtils.lastIndexOf(fileName, DOT));
+        String ext = StringUtils.substring(
+                fileName,
+                0,
+                StringUtils.lastIndexOf(fileName, DOT) == -1
+                        ? fileName.length()
+                        : StringUtils.lastIndexOf(fileName, DOT));
         return StringUtils.trimToEmpty(ext);
     }
 
@@ -308,9 +294,7 @@ public class FileUtil extends FileUtils {
         if (StringUtils.lastIndexOf(filePath, SLASH_ONE) == 0) {
             return SLASH_ONE;
         } else {
-            String path =
-                    StringUtils.substring(
-                            filePath, 0, StringUtils.lastIndexOf(filePath, SLASH_ONE));
+            String path = StringUtils.substring(filePath, 0, StringUtils.lastIndexOf(filePath, SLASH_ONE));
             return path;
         }
     }
@@ -342,8 +326,7 @@ public class FileUtil extends FileUtils {
         return list;
     }
 
-    public static void downloadFile(
-            String name, String path, HttpServletRequest request, HttpServletResponse response)
+    public static void downloadFile(String name, String path, HttpServletRequest request, HttpServletResponse response)
             throws FileNotFoundException {
         File downloadFile = new File(path);
         String fileName = name;
@@ -481,8 +464,7 @@ public class FileUtil extends FileUtils {
 
     public static boolean isBase64(String str) {
 
-        String base64Pattern =
-                "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
+        String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
         return Pattern.matches(base64Pattern, str);
     }
 
@@ -515,29 +497,22 @@ public class FileUtil extends FileUtils {
             }
 
             mappedByteBuffer.force();
-            AccessController.doPrivileged(
-                    new PrivilegedAction<Object>() {
-                        @Override
-                        public Object run() {
+            AccessController.doPrivileged(new PrivilegedAction<Object>() {
+                @Override
+                public Object run() {
 
-                            try {
-                                Method getCleanerMethod =
-                                        mappedByteBuffer
-                                                .getClass()
-                                                .getMethod("cleaner", new Class[0]);
-                                getCleanerMethod.setAccessible(true);
-                                Cleaner cleaner =
-                                        (Cleaner)
-                                                getCleanerMethod.invoke(
-                                                        mappedByteBuffer, new Object[0]);
-                                cleaner.clean();
-                            } catch (Exception e) {
-                                log.error("clean MappedByteBuffer error!!!", e);
-                            }
-                            log.info("clean MappedByteBuffer completed!!!");
-                            return null;
-                        }
-                    });
+                    try {
+                        Method getCleanerMethod = mappedByteBuffer.getClass().getMethod("cleaner", new Class[0]);
+                        getCleanerMethod.setAccessible(true);
+                        Cleaner cleaner = (Cleaner) getCleanerMethod.invoke(mappedByteBuffer, new Object[0]);
+                        cleaner.clean();
+                    } catch (Exception e) {
+                        log.error("clean MappedByteBuffer error!!!", e);
+                    }
+                    log.info("clean MappedByteBuffer completed!!!");
+                    return null;
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -546,24 +521,21 @@ public class FileUtil extends FileUtils {
 
     public static void clean(final Object buffer) {
 
-        AccessController.doPrivileged(
-                new PrivilegedAction() {
-                    @Override
-                    public Object run() {
+        AccessController.doPrivileged(new PrivilegedAction() {
+            @Override
+            public Object run() {
 
-                        try {
-                            Method getCleanerMethod =
-                                    buffer.getClass().getMethod("cleaner", new Class[0]);
-                            getCleanerMethod.setAccessible(true);
-                            Cleaner cleaner =
-                                    (Cleaner) getCleanerMethod.invoke(buffer, new Object[0]);
-                            cleaner.clean();
-                        } catch (Exception e) {
-                            log.error("clean fail :" + e.getMessage(), e);
-                        }
-                        return null;
-                    }
-                });
+                try {
+                    Method getCleanerMethod = buffer.getClass().getMethod("cleaner", new Class[0]);
+                    getCleanerMethod.setAccessible(true);
+                    Cleaner cleaner = (Cleaner) getCleanerMethod.invoke(buffer, new Object[0]);
+                    cleaner.clean();
+                } catch (Exception e) {
+                    log.error("clean fail :" + e.getMessage(), e);
+                }
+                return null;
+            }
+        });
     }
 
     public static void close(FileInputStream in, MappedByteBuffer byteBuffer) {

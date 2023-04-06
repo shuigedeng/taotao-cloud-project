@@ -58,14 +58,13 @@ public class RedisListenerConfig {
         container.setConnectionFactory(redisConnectionFactory);
 
         // Runtime.getRuntime().availableProcessors() * 2
-        MonitorThreadPoolExecutor executor =
-                new MonitorThreadPoolExecutor(
-                        100,
-                        1500,
-                        2000,
-                        TimeUnit.SECONDS,
-                        new SynchronousQueue<>(),
-                        new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
+        MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
+                100,
+                1500,
+                2000,
+                TimeUnit.SECONDS,
+                new SynchronousQueue<>(),
+                new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
         executor.setNamePrefix("taotao-cloud-redis-listener-executor");
         container.setTaskExecutor(executor);
 
@@ -87,11 +86,9 @@ public class RedisListenerConfig {
         return new RedisKeyExpirationEventMessageListener(listenerContainer);
     }
 
-    public static class RedisKeyExpirationEventMessageListener
-            extends KeyExpirationEventMessageListener {
+    public static class RedisKeyExpirationEventMessageListener extends KeyExpirationEventMessageListener {
 
-        public RedisKeyExpirationEventMessageListener(
-                RedisMessageListenerContainer listenerContainer) {
+        public RedisKeyExpirationEventMessageListener(RedisMessageListenerContainer listenerContainer) {
             super(listenerContainer);
         }
 

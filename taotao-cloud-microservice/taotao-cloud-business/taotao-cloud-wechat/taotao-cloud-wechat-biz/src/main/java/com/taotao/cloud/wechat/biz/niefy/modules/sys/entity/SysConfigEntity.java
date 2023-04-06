@@ -31,7 +31,9 @@ import lombok.Data;
 @TableName("sys_config")
 public class SysConfigEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @TableId private Long id;
+
+    @TableId
+    private Long id;
 
     @NotBlank(message = "参数名不能为空")
     private String paramKey;

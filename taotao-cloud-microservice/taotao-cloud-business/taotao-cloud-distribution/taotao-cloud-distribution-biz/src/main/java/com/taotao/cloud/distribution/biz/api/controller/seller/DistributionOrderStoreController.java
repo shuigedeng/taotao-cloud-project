@@ -41,14 +41,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionOrderStoreController {
 
     /** 分销订单 */
-    @Autowired private IDistributionOrderService distributionOrderService;
+    @Autowired
+    private IDistributionOrderService distributionOrderService;
 
     @Operation(summary = "获取分销订单列表", description = "获取分销订单列表")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping
-    public Result<IPage<DistributionOrder>> distributionOrder(
-            DistributionOrderPageQuery distributionOrderPageQuery) {
+    public Result<IPage<DistributionOrder>> distributionOrder(DistributionOrderPageQuery distributionOrderPageQuery) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         // 获取当前登录商家账号-查询当前店铺的分销订单
         distributionOrderPageQuery.setStoreId(storeId);

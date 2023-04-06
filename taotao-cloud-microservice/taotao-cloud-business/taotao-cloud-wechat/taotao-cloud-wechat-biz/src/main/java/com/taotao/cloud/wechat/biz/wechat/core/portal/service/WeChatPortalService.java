@@ -94,13 +94,8 @@ public class WeChatPortalService {
 
         // aes加密模式
         if (SymmetricAlgorithm.AES.name().equalsIgnoreCase(encType)) {
-            WxMpXmlMessage inMessage =
-                    WxMpXmlMessage.fromEncryptedXml(
-                            requestBody,
-                            wxMpService.getWxMpConfigStorage(),
-                            timestamp,
-                            nonce,
-                            msgSignature);
+            WxMpXmlMessage inMessage = WxMpXmlMessage.fromEncryptedXml(
+                    requestBody, wxMpService.getWxMpConfigStorage(), timestamp, nonce, msgSignature);
 
             log.debug("消息解密后内容为：{} ", inMessage.toString());
 

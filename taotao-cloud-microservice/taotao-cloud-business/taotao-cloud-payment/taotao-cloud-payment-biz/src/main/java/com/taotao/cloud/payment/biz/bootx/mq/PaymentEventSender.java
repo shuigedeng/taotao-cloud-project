@@ -37,7 +37,6 @@ public class PaymentEventSender {
     private final RabbitTemplate rabbitTemplate;
     /** 支付完成 事件发布 */
     public void sendPaymentCompleted(PayResult event) {
-        rabbitTemplate.convertAndSend(
-                PaymentEventCode.EXCHANGE_PAYMENT, PaymentEventCode.PAY_COMPLETE, event);
+        rabbitTemplate.convertAndSend(PaymentEventCode.EXCHANGE_PAYMENT, PaymentEventCode.PAY_COMPLETE, event);
     }
 }

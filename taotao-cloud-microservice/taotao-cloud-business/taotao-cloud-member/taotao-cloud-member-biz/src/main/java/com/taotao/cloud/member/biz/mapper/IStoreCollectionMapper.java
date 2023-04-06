@@ -41,6 +41,5 @@ public interface IStoreCollectionMapper extends BaseSuperMapper<MemberStoreColle
 		ON s.id=sc.store_id ${ew.customSqlSegment}
 		""")
     IPage<StoreCollectionVO> storeCollectionVOList(
-            IPage<StoreCollectionVO> page,
-            @Param(Constants.WRAPPER) Wrapper<StoreCollectionVO> queryWrapper);
+            IPage<StoreCollectionVO> page, @Param(Constants.WRAPPER) Wrapper<StoreCollectionVO> queryWrapper);
 }

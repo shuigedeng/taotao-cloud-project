@@ -40,9 +40,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Service("fileService")
 public class FileServiceImpl implements FileService {
 
-    @Autowired private OssConfig ossConfig;
+    @Autowired
+    private OssConfig ossConfig;
 
-    @Autowired private TencentConfig tencentConfig;
+    @Autowired
+    private TencentConfig tencentConfig;
 
     @Override
     public UploadFileVo uploadFile(MultipartFile file) {

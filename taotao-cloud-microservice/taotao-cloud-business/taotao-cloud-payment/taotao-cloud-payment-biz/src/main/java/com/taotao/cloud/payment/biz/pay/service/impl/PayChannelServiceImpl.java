@@ -23,5 +23,4 @@ import com.xhuicloud.pay.service.PayChannelService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PayChannelServiceImpl extends ServiceImpl<PayChannelMapper, PayChannel>
-        implements PayChannelService {}
+public class PayChannelServiceImpl extends ServiceImpl<PayChannelMapper, PayChannel> implements PayChannelService {}

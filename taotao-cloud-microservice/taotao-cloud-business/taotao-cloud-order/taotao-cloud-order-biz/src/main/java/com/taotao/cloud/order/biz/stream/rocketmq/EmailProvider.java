@@ -25,7 +25,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailProvider {
 
-    @Autowired private TaoTaoCloudSource source;
+    @Autowired
+    private TaoTaoCloudSource source;
 
     // 普通发送
     public void send(String content) {

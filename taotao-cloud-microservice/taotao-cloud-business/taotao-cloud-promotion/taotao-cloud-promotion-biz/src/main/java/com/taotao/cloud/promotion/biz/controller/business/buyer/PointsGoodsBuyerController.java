@@ -45,15 +45,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/buyer/promotion/pointsGoods")
 public class PointsGoodsBuyerController {
 
-    @Autowired private IPointsGoodsService pointsGoodsService;
-    @Autowired private IPointsGoodsCategoryService pointsGoodsCategoryService;
+    @Autowired
+    private IPointsGoodsService pointsGoodsService;
+
+    @Autowired
+    private IPointsGoodsCategoryService pointsGoodsCategoryService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping
     @Operation(summary = "分页获取积分商品")
-    public Result<IPage<PointsGoods>> getPointsGoodsPage(
-            PointsGoodsPageQuery searchParams, PageVO page) {
+    public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsPageQuery searchParams, PageVO page) {
         IPage<PointsGoods> pointsGoodsByPage = pointsGoodsService.pageFindAll(searchParams, page);
         return Result.success(pointsGoodsByPage);
     }
@@ -70,8 +72,7 @@ public class PointsGoodsBuyerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping("/{id}")
     @Operation(summary = "获取积分活动商品")
-    public Result<PointsGoodsVO> getPointsGoodsPage(
-            @Parameter(name = "积分商品ID") @PathVariable String id) {
+    public Result<PointsGoodsVO> getPointsGoodsPage(@Parameter(name = "积分商品ID") @PathVariable String id) {
         return Result.success(pointsGoodsService.getPointsGoodsDetail(id));
     }
 }

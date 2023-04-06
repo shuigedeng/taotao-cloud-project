@@ -47,9 +47,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ChatPushServiceImpl implements ChatPushService {
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
-    @Autowired private PushConfig pushConfig;
+    @Autowired
+    private PushConfig pushConfig;
 
     /** 消息长度 */
     private static final Integer MSG_LENGTH = 2048;
@@ -58,69 +60,58 @@ public class ChatPushServiceImpl implements ChatPushService {
     public void setAlias(Long userId, String cid) {
         // 异步注册
         PushTokenDto tokenDto = initPushToken();
-        ThreadUtil.execAsync(
-                () -> {
-                    PushAliasVo aliasVo =
-                            new PushAliasVo().setCid(cid).setAlias(NumberUtil.toStr(userId));
-                    PushUtils.setAlias(tokenDto, aliasVo);
-                });
+        ThreadUtil.execAsync(() -> {
+            PushAliasVo aliasVo = new PushAliasVo().setCid(cid).setAlias(NumberUtil.toStr(userId));
+            PushUtils.setAlias(tokenDto, aliasVo);
+        });
     }
 
     @Override
     public void delAlias(Long userId, String cid) {
         // 异步注册
         PushTokenDto tokenDto = initPushToken();
-        ThreadUtil.execAsync(
-                () -> {
-                    PushAliasVo aliasVo =
-                            new PushAliasVo().setCid(cid).setAlias(NumberUtil.toStr(userId));
-                    PushUtils.delAlias(tokenDto, aliasVo);
-                });
+        ThreadUtil.execAsync(() -> {
+            PushAliasVo aliasVo = new PushAliasVo().setCid(cid).setAlias(NumberUtil.toStr(userId));
+            PushUtils.delAlias(tokenDto, aliasVo);
+        });
     }
 
     @Override
     public void pushMsg(PushParamVo from, PushMsgTypeEnum msgType) {
         PushTokenDto pushTokenDto = initPushToken();
         // 异步发送
-        ThreadUtil.execAsync(
-                () -> {
-                    doMsg(from, null, msgType, pushTokenDto);
-                });
+        ThreadUtil.execAsync(() -> {
+            doMsg(from, null, msgType, pushTokenDto);
+        });
     }
 
     @Override
     public void pushMsg(List<PushParamVo> userList, PushMsgTypeEnum msgType) {
         PushTokenDto pushTokenDto = initPushToken();
         // 异步发送
-        ThreadUtil.execAsync(
-                () -> {
-                    userList.forEach(
-                            e -> {
-                                doMsg(e, e, msgType, pushTokenDto);
-                            });
-                });
+        ThreadUtil.execAsync(() -> {
+            userList.forEach(e -> {
+                doMsg(e, e, msgType, pushTokenDto);
+            });
+        });
     }
 
     @Override
     public void pushMsg(List<PushParamVo> userList, PushParamVo group, PushMsgTypeEnum msgType) {
         PushTokenDto pushTokenDto = initPushToken();
         // 异步发送
-        ThreadUtil.execAsync(
-                () -> {
-                    userList.forEach(
-                            e -> {
-                                doMsg(e, group, msgType, pushTokenDto);
-                            });
-                });
+        ThreadUtil.execAsync(() -> {
+            userList.forEach(e -> {
+                doMsg(e, group, msgType, pushTokenDto);
+            });
+        });
     }
 
     /** 发送消息 */
-    private void doMsg(
-            PushParamVo from, PushParamVo to, PushMsgTypeEnum msgType, PushTokenDto pushTokenDto) {
+    private void doMsg(PushParamVo from, PushParamVo to, PushMsgTypeEnum msgType, PushTokenDto pushTokenDto) {
         Long userId = from.getToId();
         // 组装消息体
-        PushMsgVo pushMsgVo =
-                new PushMsgVo().setMsgType(msgType.getCode()).setContent(from.getContent());
+        PushMsgVo pushMsgVo = new PushMsgVo().setMsgType(msgType.getCode()).setContent(from.getContent());
         YesOrNoEnum top = from.getTop();
         if (top != null) {
             pushMsgVo.setTop(top.getCode());
@@ -132,8 +123,8 @@ public class ChatPushServiceImpl implements ChatPushService {
         String msgId = IdUtil.objectId();
         PushBodyVo pushBodyVo = new PushBodyVo(msgId, PushBodyTypeEnum.MSG, pushMsgVo);
         // 发送人
-        pushBodyVo.setFromInfo(
-                BeanUtil.toBean(from, PushFromVo.class).setUserType(from.getUserType().getCode()));
+        pushBodyVo.setFromInfo(BeanUtil.toBean(from, PushFromVo.class)
+                .setUserType(from.getUserType().getCode()));
         // 接收人
         if (to != null) {
             pushBodyVo.setGroupInfo(BeanUtil.toBean(to, PushToVo.class));
@@ -142,15 +133,12 @@ public class ChatPushServiceImpl implements ChatPushService {
         // 验证消息长度
         if (StrUtil.length(from.getContent()) > MSG_LENGTH) {
             // 组装消息体
-            PushMsgDto pushBigDto =
-                    initTransmission(
-                            new PushBodyVo(msgId, PushBodyTypeEnum.BIG, new PushBigVo(msgId)));
+            PushMsgDto pushBigDto = initTransmission(new PushBodyVo(msgId, PushBodyTypeEnum.BIG, new PushBigVo(msgId)));
             // 发送通知
             PushUtils.pushAlias(pushTokenDto, pushBigDto, userId);
             // 存离线消息
             String key = ApiConstant.REDIS_MSG_BIG + msgId;
-            redisUtils.set(
-                    key, JSONUtil.toJsonStr(pushBodyVo), ApiConstant.REDIS_MSG_TIME, TimeUnit.DAYS);
+            redisUtils.set(key, JSONUtil.toJsonStr(pushBodyVo), ApiConstant.REDIS_MSG_TIME, TimeUnit.DAYS);
             return;
         }
         PushResultVo pushResult = PushUtils.pushAlias(pushTokenDto, pushMsgDto, userId);
@@ -162,21 +150,19 @@ public class ChatPushServiceImpl implements ChatPushService {
     @Override
     public void pullOffLine(Long userId) {
         // 异步执行
-        ThreadUtil.execAsync(
-                () -> {
-                    String key = makeMsgKey(userId);
-                    Long size = redisUtils.lLen(key);
-                    if (size.longValue() == 0) {
-                        return;
-                    }
-                    PushTokenDto pushTokenDto = initPushToken();
-                    for (int i = 0; i < size; i++) {
-                        String json = redisUtils.lLeftPop(key);
-                        PushUtils.pushAlias(
-                                pushTokenDto, JSONUtil.toBean(json, PushMsgDto.class), userId);
-                    }
-                    redisUtils.delete(key);
-                });
+        ThreadUtil.execAsync(() -> {
+            String key = makeMsgKey(userId);
+            Long size = redisUtils.lLen(key);
+            if (size.longValue() == 0) {
+                return;
+            }
+            PushTokenDto pushTokenDto = initPushToken();
+            for (int i = 0; i < size; i++) {
+                String json = redisUtils.lLeftPop(key);
+                PushUtils.pushAlias(pushTokenDto, JSONUtil.toBean(json, PushMsgDto.class), userId);
+            }
+            redisUtils.delete(key);
+        });
     }
 
     @Override
@@ -188,21 +174,16 @@ public class ChatPushServiceImpl implements ChatPushService {
     public void pushNotice(List<PushParamVo> userList, PushNoticeTypeEnum pushNoticeType) {
         PushTokenDto pushTokenDto = initPushToken();
         // 异步发送
-        ThreadUtil.execAsync(
-                () -> {
-                    userList.forEach(
-                            e -> {
-                                this.doNotice(e.getToId(), e, pushTokenDto, pushNoticeType);
-                            });
-                });
+        ThreadUtil.execAsync(() -> {
+            userList.forEach(e -> {
+                this.doNotice(e.getToId(), e, pushTokenDto, pushNoticeType);
+            });
+        });
     }
 
     /** 发送消息 */
     private void doNotice(
-            Long userId,
-            PushParamVo paramVo,
-            PushTokenDto pushTokenDto,
-            PushNoticeTypeEnum pushNoticeType) {
+            Long userId, PushParamVo paramVo, PushTokenDto pushTokenDto, PushNoticeTypeEnum pushNoticeType) {
         // 组装消息体
         PushNoticeVo pushNoticeVo = new PushNoticeVo();
         switch (pushNoticeType) {
@@ -212,17 +193,14 @@ public class ChatPushServiceImpl implements ChatPushService {
             case TOPIC_REPLY:
                 Long topicCount = redisUtils.increment(ApiConstant.REDIS_TOPIC_NOTICE + userId, 1);
                 pushNoticeVo.setTopicReply(
-                        Dict.create()
-                                .set("count", topicCount)
-                                .set("portrait", paramVo.getPortrait()));
+                        Dict.create().set("count", topicCount).set("portrait", paramVo.getPortrait()));
                 break;
             case FRIEND_APPLY:
                 Long applyCount = redisUtils.increment(ApiConstant.REDIS_FRIEND_NOTICE + userId, 1);
                 pushNoticeVo.setFriendApply(Dict.create().set("count", applyCount));
                 break;
         }
-        PushBodyVo pushBodyVo =
-                new PushBodyVo(IdUtil.objectId(), PushBodyTypeEnum.NOTICE, pushNoticeVo);
+        PushBodyVo pushBodyVo = new PushBodyVo(IdUtil.objectId(), PushBodyTypeEnum.NOTICE, pushNoticeVo);
         PushMsgDto pushMsgDto = initTransmission(pushBodyVo);
         PushUtils.pushAlias(pushTokenDto, pushMsgDto, userId);
     }

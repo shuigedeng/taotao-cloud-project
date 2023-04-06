@@ -88,10 +88,9 @@ public class GenTableServiceImpl implements IGenTableService {
      */
     @Override
     public List<GenTableColumn> selectGenTableColumnListByTableId(Long tableId) {
-        return genTableColumnMapper.selectList(
-                new LambdaQueryWrapper<GenTableColumn>()
-                        .eq(GenTableColumn::getId, tableId)
-                        .orderByAsc(GenTableColumn::getSort));
+        return genTableColumnMapper.selectList(new LambdaQueryWrapper<GenTableColumn>()
+                .eq(GenTableColumn::getId, tableId)
+                .orderByAsc(GenTableColumn::getSort));
     }
 
     /**
@@ -109,8 +108,7 @@ public class GenTableServiceImpl implements IGenTableService {
 
     @Override
     public TableDataInfo<GenTable> selectPageGenTableList(GenTable genTable, PageQuery pageQuery) {
-        Page<GenTable> page =
-                baseMapper.selectPage(pageQuery.build(), this.buildGenTableQueryWrapper(genTable));
+        Page<GenTable> page = baseMapper.selectPage(pageQuery.build(), this.buildGenTableQueryWrapper(genTable));
         return TableDataInfo.build(page);
     }
 
@@ -190,8 +188,7 @@ public class GenTableServiceImpl implements IGenTableService {
     public void deleteGenTableByIds(Long[] tableIds) {
         List<Long> ids = Arrays.asList(tableIds);
         baseMapper.deleteBatchIds(ids);
-        genTableColumnMapper.delete(
-                new LambdaQueryWrapper<GenTableColumn>().in(GenTableColumn::getId, ids));
+        genTableColumnMapper.delete(new LambdaQueryWrapper<GenTableColumn>().in(GenTableColumn::getId, ids));
     }
 
     /**
@@ -210,8 +207,7 @@ public class GenTableServiceImpl implements IGenTableService {
                 int row = baseMapper.insert(table);
                 if (row > 0) {
                     // 保存列信息
-                    List<GenTableColumn> genTableColumns =
-                            genTableColumnMapper.selectDbTableColumnsByName(tableName);
+                    List<GenTableColumn> genTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
                     List<GenTableColumn> saveColumns = new ArrayList<>();
                     for (GenTableColumn column : genTableColumns) {
                         GenUtils.initColumnField(column, table);
@@ -304,8 +300,7 @@ public class GenTableServiceImpl implements IGenTableService {
         // 获取模板列表
         List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
         for (String template : templates) {
-            if (!StringUtils.containsAny(
-                    template, "sql.vm", "api.js.vm", "index.vue.vm", "index-tree.vue.vm")) {
+            if (!StringUtils.containsAny(template, "sql.vm", "api.js.vm", "index.vue.vm", "index-tree.vue.vm")) {
                 // 渲染模板
                 StringWriter sw = new StringWriter();
                 Template tpl = Velocity.getTemplate(template, UTF8);
@@ -333,48 +328,43 @@ public class GenTableServiceImpl implements IGenTableService {
         Map<String, GenTableColumn> tableColumnMap =
                 StreamUtils.toIdentityMap(tableColumns, GenTableColumn::getColumnName);
 
-        List<GenTableColumn> dbTableColumns =
-                genTableColumnMapper.selectDbTableColumnsByName(tableName);
+        List<GenTableColumn> dbTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
         if (CollUtil.isEmpty(dbTableColumns)) {
             throw new RuntimeException("同步数据失败，原表结构不存在");
         }
-        List<String> dbTableColumnNames =
-                StreamUtils.toList(dbTableColumns, GenTableColumn::getColumnName);
+        List<String> dbTableColumnNames = StreamUtils.toList(dbTableColumns, GenTableColumn::getColumnName);
 
         List<GenTableColumn> saveColumns = new ArrayList<>();
-        dbTableColumns.forEach(
-                column -> {
-                    GenUtils.initColumnField(column, table);
-                    if (tableColumnMap.containsKey(column.getColumnName())) {
-                        GenTableColumn prevColumn = tableColumnMap.get(column.getColumnName());
-                        // column.setColumnId(prevColumn.getColumnId());
-                        column.setId(prevColumn.getId());
-                        if (column.isList()) {
-                            // 如果是列表，继续保留查询方式/字典类型选项
-                            column.setDictType(prevColumn.getDictType());
-                            column.setQueryType(prevColumn.getQueryType());
-                        }
-                        if (StringUtils.isNotEmpty(prevColumn.getIsRequired())
-                                && !column.isPk()
-                                && (column.isInsert() || column.isEdit())
-                                && ((column.isUsableColumn()) || (!column.isSuperColumn()))) {
-                            // 如果是(新增/修改&非主键/非忽略及父属性)，继续保留必填/显示类型选项
-                            column.setIsRequired(prevColumn.getIsRequired());
-                            column.setHtmlType(prevColumn.getHtmlType());
-                        }
-                        genTableColumnMapper.updateById(column);
-                    } else {
-                        genTableColumnMapper.insert(column);
-                    }
-                });
+        dbTableColumns.forEach(column -> {
+            GenUtils.initColumnField(column, table);
+            if (tableColumnMap.containsKey(column.getColumnName())) {
+                GenTableColumn prevColumn = tableColumnMap.get(column.getColumnName());
+                // column.setColumnId(prevColumn.getColumnId());
+                column.setId(prevColumn.getId());
+                if (column.isList()) {
+                    // 如果是列表，继续保留查询方式/字典类型选项
+                    column.setDictType(prevColumn.getDictType());
+                    column.setQueryType(prevColumn.getQueryType());
+                }
+                if (StringUtils.isNotEmpty(prevColumn.getIsRequired())
+                        && !column.isPk()
+                        && (column.isInsert() || column.isEdit())
+                        && ((column.isUsableColumn()) || (!column.isSuperColumn()))) {
+                    // 如果是(新增/修改&非主键/非忽略及父属性)，继续保留必填/显示类型选项
+                    column.setIsRequired(prevColumn.getIsRequired());
+                    column.setHtmlType(prevColumn.getHtmlType());
+                }
+                genTableColumnMapper.updateById(column);
+            } else {
+                genTableColumnMapper.insert(column);
+            }
+        });
         if (CollUtil.isNotEmpty(saveColumns)) {
             genTableColumnMapper.insertBatch(saveColumns);
         }
 
         List<GenTableColumn> delColumns =
-                StreamUtils.filter(
-                        tableColumns,
-                        column -> !dbTableColumnNames.contains(column.getColumnName()));
+                StreamUtils.filter(tableColumns, column -> !dbTableColumnNames.contains(column.getColumnName()));
         if (CollUtil.isNotEmpty(delColumns)) {
             List<Long> ids = StreamUtils.toList(delColumns, GenTableColumn::getId);
             genTableColumnMapper.deleteBatchIds(ids);

@@ -47,8 +47,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sys/user")
 @Api(tags = {"管理后台用户-管理后台"})
 public class SysUserController extends AbstractController {
-    @Autowired private SysUserService sysUserService;
-    @Autowired private SysUserRoleService sysUserRoleService;
+    @Autowired
+    private SysUserService sysUserService;
+
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
 
     /** 所有用户列表 */
     @GetMapping("/list")

@@ -25,8 +25,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BpmProcessDefinitionExtMapper extends BaseMapperX<BpmProcessDefinitionExtDO> {
 
-    default List<BpmProcessDefinitionExtDO> selectListByProcessDefinitionIds(
-            Collection<String> processDefinitionIds) {
+    default List<BpmProcessDefinitionExtDO> selectListByProcessDefinitionIds(Collection<String> processDefinitionIds) {
         return selectList("process_definition_id", processDefinitionIds);
     }
 

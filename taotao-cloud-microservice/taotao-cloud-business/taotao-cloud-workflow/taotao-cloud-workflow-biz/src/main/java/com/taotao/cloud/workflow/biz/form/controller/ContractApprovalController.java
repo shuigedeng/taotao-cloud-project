@@ -32,8 +32,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ContractApproval")
 public class ContractApprovalController {
 
-    @Autowired private ContractApprovalService contractApprovalService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ContractApprovalService contractApprovalService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取合同审批信息
@@ -51,9 +54,7 @@ public class ContractApprovalController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtil.getJsonToBean(
-                                    operator.getDraftData(), ContractApprovalInfoVO.class);
+                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), ContractApprovalInfoVO.class);
                     isData = false;
                 }
             }
@@ -73,10 +74,8 @@ public class ContractApprovalController {
      */
     @Operation("新建合同审批")
     @PostMapping
-    public Result create(@RequestBody @Valid ContractApprovalForm contractApprovalForm)
-            throws WorkFlowException {
-        ContractApprovalEntity entity =
-                JsonUtil.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);
+    public Result create(@RequestBody @Valid ContractApprovalForm contractApprovalForm) throws WorkFlowException {
+        ContractApprovalEntity entity = JsonUtil.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(contractApprovalForm.getStatus())) {
             contractApprovalService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -98,21 +97,15 @@ public class ContractApprovalController {
      */
     @Operation("修改合同审批")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid ContractApprovalForm contractApprovalForm,
-            @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid ContractApprovalForm contractApprovalForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        ContractApprovalEntity entity =
-                JsonUtil.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);
+        ContractApprovalEntity entity = JsonUtil.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(contractApprovalForm.getStatus())) {
             contractApprovalService.save(id, entity);
             return Result.success(MsgCode.SU002.get());
         }
         contractApprovalService.submit(
-                id,
-                entity,
-                contractApprovalForm.getFreeApproverUserId(),
-                contractApprovalForm.getCandidateList());
+                id, entity, contractApprovalForm.getFreeApproverUserId(), contractApprovalForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 }

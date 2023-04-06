@@ -44,10 +44,7 @@ public class VoucherManager extends BaseManager<VoucherMapper, Voucher> {
     public Page<Voucher> page(PageQuery PageQuery, VoucherParam param) {
         Page<Voucher> mpPage = MpUtil.getMpPage(PageQuery, Voucher.class);
         return this.lambdaQuery()
-                .ge(
-                        Objects.nonNull(param.getStartTime()),
-                        Voucher::getStartTime,
-                        param.getStartTime())
+                .ge(Objects.nonNull(param.getStartTime()), Voucher::getStartTime, param.getStartTime())
                 .le(Objects.nonNull(param.getEndTime()), Voucher::getEndTime, param.getEndTime())
                 .eq(Objects.nonNull(param.getEnduring()), Voucher::getEnduring, param.getEnduring())
                 .like(StrUtil.isNotBlank(param.getCardNo()), Voucher::getCardNo, param.getCardNo())
@@ -68,11 +65,17 @@ public class VoucherManager extends BaseManager<VoucherMapper, Voucher> {
 
     /** 更改状态 */
     public void changeStatus(Long id, int status) {
-        this.lambdaUpdate().eq(MpBaseEntity::getId, id).set(Voucher::getStatus, status).update();
+        this.lambdaUpdate()
+                .eq(MpBaseEntity::getId, id)
+                .set(Voucher::getStatus, status)
+                .update();
     }
 
     /** 批量更改状态 */
     public void changeStatusBatch(List<Long> ids, int status) {
-        this.lambdaUpdate().in(MpBaseEntity::getId, ids).set(Voucher::getStatus, status).update();
+        this.lambdaUpdate()
+                .in(MpBaseEntity::getId, ids)
+                .set(Voucher::getStatus, status)
+                .update();
     }
 }

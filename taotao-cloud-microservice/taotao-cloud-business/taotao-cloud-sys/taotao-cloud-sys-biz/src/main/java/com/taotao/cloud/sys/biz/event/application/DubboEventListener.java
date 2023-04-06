@@ -27,34 +27,26 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class DubboEventListener {
     @Component
-    public static class ServiceBeanExportedEventListener
-            implements ApplicationListener<ServiceBeanExportedEvent> {
+    public static class ServiceBeanExportedEventListener implements ApplicationListener<ServiceBeanExportedEvent> {
         @Override
         public void onApplicationEvent(ServiceBeanExportedEvent event) {
-            LogUtils.info(
-                    "DubboEventListener ----- ServiceBeanExportedEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("DubboEventListener ----- ServiceBeanExportedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class DubboApplicationStateEventListener
-            implements ApplicationListener<DubboApplicationStateEvent> {
+    public static class DubboApplicationStateEventListener implements ApplicationListener<DubboApplicationStateEvent> {
         @Override
         public void onApplicationEvent(DubboApplicationStateEvent event) {
-            LogUtils.info(
-                    "DubboEventListener ----- DubboApplicationStateEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("DubboEventListener ----- DubboApplicationStateEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class DubboConfigInitEventListener
-            implements ApplicationListener<DubboConfigInitEvent> {
+    public static class DubboConfigInitEventListener implements ApplicationListener<DubboConfigInitEvent> {
         @Override
         public void onApplicationEvent(DubboConfigInitEvent event) {
-            LogUtils.info(
-                    "DubboEventListener ----- DubboConfigInitEvent onApplicationEvent {}", event);
+            LogUtils.info("DubboEventListener ----- DubboConfigInitEvent onApplicationEvent {}", event);
         }
     }
 }

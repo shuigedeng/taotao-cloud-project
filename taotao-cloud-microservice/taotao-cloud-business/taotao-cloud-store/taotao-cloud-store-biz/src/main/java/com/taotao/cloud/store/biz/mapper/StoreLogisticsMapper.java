@@ -29,9 +29,8 @@ public interface StoreLogisticsMapper extends BaseSuperMapper<StoreLogistics> {
      * @param storeId 店铺ID
      * @return 物流公司列表
      */
-    @Select(
-            "SELECT l.* FROM tt_logistics l RIGHT JOIN  tt_store_logistics sl ON"
-                    + " l.id=sl.logistics_id WHERE sl.store_id=#{storeId} AND l.disabled='OPEN'")
+    @Select("SELECT l.* FROM tt_logistics l RIGHT JOIN  tt_store_logistics sl ON"
+            + " l.id=sl.logistics_id WHERE sl.store_id=#{storeId} AND l.disabled='OPEN'")
     List<StoreLogisticsVO> getSelectedStoreLogistics(String storeId);
 
     /**
@@ -40,9 +39,8 @@ public interface StoreLogisticsMapper extends BaseSuperMapper<StoreLogistics> {
      * @param storeId 店铺ID
      * @return 店铺已选择的物流公司名称列表
      */
-    @Select(
-            "SELECT l.name FROM tt_logistics l RIGHT JOIN  tt_store_logistics sl ON"
-                    + " l.id=sl.logistics_id WHERE sl.store_id=#{storeId} AND l.disabled='OPEN'")
+    @Select("SELECT l.name FROM tt_logistics l RIGHT JOIN  tt_store_logistics sl ON"
+            + " l.id=sl.logistics_id WHERE sl.store_id=#{storeId} AND l.disabled='OPEN'")
     List<String> getSelectedStoreLogisticsName(String storeId);
 
     /**
@@ -51,9 +49,8 @@ public interface StoreLogisticsMapper extends BaseSuperMapper<StoreLogistics> {
      * @param storeId 店铺列表
      * @return 店铺地址VO列表
      */
-    @Select(
-            "SELECT *, ( SELECT sl.id FROM tt_store_logistics sl WHERE l.id = sl.logistics_id AND"
-                    + " sl.store_id=#{storeId} ) AS selected FROM tt_logistics l WHERE"
-                    + " l.disabled='OPEN';")
+    @Select("SELECT *, ( SELECT sl.id FROM tt_store_logistics sl WHERE l.id = sl.logistics_id AND"
+            + " sl.store_id=#{storeId} ) AS selected FROM tt_logistics l WHERE"
+            + " l.disabled='OPEN';")
     List<StoreLogisticsVO> getStoreLogistics(String storeId);
 }

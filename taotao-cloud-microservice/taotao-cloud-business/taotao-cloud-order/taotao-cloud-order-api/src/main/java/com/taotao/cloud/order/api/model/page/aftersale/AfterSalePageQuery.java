@@ -43,7 +43,8 @@ import lombok.Setter;
 @Schema(description = "售后搜索参数")
 public class AfterSalePageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 
     @Schema(description = "售后服务单号")
     private String sn;
@@ -72,9 +73,7 @@ public class AfterSalePageQuery extends PageQuery {
     /**
      * @see AfterSaleTypeEnum
      */
-    @Schema(
-            description = "售后类型",
-            allowableValues = "CANCEL,RETURN_GOODS,EXCHANGE_GOODS,REISSUE_GOODS")
+    @Schema(description = "售后类型", allowableValues = "CANCEL,RETURN_GOODS,EXCHANGE_GOODS,REISSUE_GOODS")
     private String serviceType;
 
     /**
@@ -82,8 +81,7 @@ public class AfterSalePageQuery extends PageQuery {
      */
     @Schema(
             description = "售后单状态",
-            allowableValues =
-                    "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
+            allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
     private String serviceStatus;
 
     @Schema(description = "开始时间 yyyy-MM-dd HH:mm:ss")

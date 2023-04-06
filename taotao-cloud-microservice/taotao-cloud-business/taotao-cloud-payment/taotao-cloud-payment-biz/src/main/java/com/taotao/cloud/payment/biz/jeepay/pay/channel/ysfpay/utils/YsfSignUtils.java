@@ -156,22 +156,20 @@ public class YsfSignUtils {
 
         // 2. 拼接为 key=value&形式
         StringBuffer stringBuffer = new StringBuffer();
-        tree.keySet().stream()
-                .forEach(
-                        key -> {
-                            if (tree.get(key) == null) {
-                                return;
-                            }
-                            if ("signature".equals(key)) { // 签名串， 不参与签名
-                                return;
-                            }
+        tree.keySet().stream().forEach(key -> {
+            if (tree.get(key) == null) {
+                return;
+            }
+            if ("signature".equals(key)) { // 签名串， 不参与签名
+                return;
+            }
 
-                            stringBuffer
-                                    .append(key)
-                                    .append("=")
-                                    .append(tree.get(key).toString())
-                                    .append("&");
-                        });
+            stringBuffer
+                    .append(key)
+                    .append("=")
+                    .append(tree.get(key).toString())
+                    .append("&");
+        });
 
         // 3. 去掉最后一个&
         return stringBuffer.substring(0, stringBuffer.length() - 1);
@@ -186,26 +184,23 @@ public class YsfSignUtils {
 
         // 2. 拼接为 key=value&形式
         StringBuffer stringBuffer = new StringBuffer();
-        tree.keySet().stream()
-                .forEach(
-                        key -> {
-                            if (tree.get(key) == null) {
-                                return;
-                            }
-                            if (StringUtils.isAnyEmpty(
-                                    key, tree.get(key).toString())) { // 空值， 不参与签名
-                                return;
-                            }
-                            if ("signature".equals(key)) { // 签名串， 不参与签名
-                                return;
-                            }
+        tree.keySet().stream().forEach(key -> {
+            if (tree.get(key) == null) {
+                return;
+            }
+            if (StringUtils.isAnyEmpty(key, tree.get(key).toString())) { // 空值， 不参与签名
+                return;
+            }
+            if ("signature".equals(key)) { // 签名串， 不参与签名
+                return;
+            }
 
-                            stringBuffer
-                                    .append(key)
-                                    .append("=")
-                                    .append(tree.get(key).toString())
-                                    .append("&");
-                        });
+            stringBuffer
+                    .append(key)
+                    .append("=")
+                    .append(tree.get(key).toString())
+                    .append("&");
+        });
 
         // 3. 去掉最后一个&
         return stringBuffer.substring(0, stringBuffer.length() - 1);
@@ -220,22 +215,20 @@ public class YsfSignUtils {
 
         // 2. 拼接为 key=value&形式
         StringBuffer stringBuffer = new StringBuffer();
-        tree.keySet().stream()
-                .forEach(
-                        key -> {
-                            if (tree.get(key) == null) {
-                                return;
-                            }
-                            if ("signature".equals(key)) { // 签名串， 不参与签名
-                                return;
-                            }
+        tree.keySet().stream().forEach(key -> {
+            if (tree.get(key) == null) {
+                return;
+            }
+            if ("signature".equals(key)) { // 签名串， 不参与签名
+                return;
+            }
 
-                            stringBuffer
-                                    .append(key)
-                                    .append("=")
-                                    .append(tree.get(key).toString())
-                                    .append("&");
-                        });
+            stringBuffer
+                    .append(key)
+                    .append("=")
+                    .append(tree.get(key).toString())
+                    .append("&");
+        });
 
         // 3. 去掉最后一个&
         return stringBuffer.substring(0, stringBuffer.length() - 1);
@@ -266,8 +259,7 @@ public class YsfSignUtils {
         try {
             KeyStore keyStore = KeyStore.getInstance(KEYSTORE_TYPE_PKCS12, KEYSTORE_PROVIDER_BC);
             fis = new FileInputStream(pfxkeyfile);
-            char[] nPassword =
-                    null == keypwd || "".equals(keypwd.trim()) ? null : keypwd.toCharArray();
+            char[] nPassword = null == keypwd || "".equals(keypwd.trim()) ? null : keypwd.toCharArray();
             if (null != keyStore) {
                 keyStore.load(fis, nPassword);
             }

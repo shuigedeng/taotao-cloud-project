@@ -39,24 +39,25 @@ import org.springframework.stereotype.Service;
  * @since 2021-04-27
  */
 @Service
-public class PayInterfaceConfigService
-        extends ServiceImpl<PayInterfaceConfigMapper, PayInterfaceConfig> {
+public class PayInterfaceConfigService extends ServiceImpl<PayInterfaceConfigMapper, PayInterfaceConfig> {
 
-    @Autowired private PayInterfaceDefineService payInterfaceDefineService;
+    @Autowired
+    private PayInterfaceDefineService payInterfaceDefineService;
 
-    @Autowired private MchInfoService mchInfoService;
+    @Autowired
+    private MchInfoService mchInfoService;
 
-    @Autowired private MchAppService mchAppService;
+    @Autowired
+    private MchAppService mchAppService;
 
     /**
      * @Author: ZhuXiao @Description: 根据 账户类型、账户号、接口类型 获取支付参数配置 @Date: 17:20 2021/4/27
      */
     public PayInterfaceConfig getByInfoIdAndIfCode(Byte infoType, String infoId, String ifCode) {
-        return getOne(
-                PayInterfaceConfig.gw()
-                        .eq(PayInterfaceConfig::getInfoType, infoType)
-                        .eq(PayInterfaceConfig::getInfoId, infoId)
-                        .eq(PayInterfaceConfig::getIfCode, ifCode));
+        return getOne(PayInterfaceConfig.gw()
+                .eq(PayInterfaceConfig::getInfoType, infoType)
+                .eq(PayInterfaceConfig::getInfoId, infoId)
+                .eq(PayInterfaceConfig::getIfCode, ifCode));
     }
 
     /**
@@ -110,14 +111,12 @@ public class PayInterfaceConfigService
         if (mchInfo.getType() == CS.MCH_TYPE_ISVSUB) {
             queryWrapper.eq(PayInterfaceDefine::getIsIsvMode, CS.YES); // 支持服务商模式
             // 商户类型为特约商户，服务商应已经配置支付参数
-            List<PayInterfaceConfig> isvConfigList =
-                    this.list(
-                            PayInterfaceConfig.gw()
-                                    .eq(PayInterfaceConfig::getInfoId, mchInfo.getIsvNo())
-                                    .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_ISV)
-                                    .eq(PayInterfaceConfig::getState, CS.YES)
-                                    .ne(PayInterfaceConfig::getIfParams, "")
-                                    .isNotNull(PayInterfaceConfig::getIfParams));
+            List<PayInterfaceConfig> isvConfigList = this.list(PayInterfaceConfig.gw()
+                    .eq(PayInterfaceConfig::getInfoId, mchInfo.getIsvNo())
+                    .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_ISV)
+                    .eq(PayInterfaceConfig::getState, CS.YES)
+                    .ne(PayInterfaceConfig::getIfParams, "")
+                    .isNotNull(PayInterfaceConfig::getIfParams));
 
             for (PayInterfaceConfig config : isvConfigList) {
                 config.addExt("mchType", mchInfo.getType());
@@ -142,8 +141,7 @@ public class PayInterfaceConfigService
                 }
             }
 
-            if (mchInfo.getType() == CS.MCH_TYPE_ISVSUB
-                    && isvPayConfigMap.get(define.getIfCode()) == null) {
+            if (mchInfo.getType() == CS.MCH_TYPE_ISVSUB && isvPayConfigMap.get(define.getIfCode()) == null) {
                 define.addExt("subMchIsvConfig", CS.NO); // 特约商户，服务商支付参数的配置状态，0表示未配置
             }
         }
@@ -153,12 +151,11 @@ public class PayInterfaceConfigService
     /** 查询商户app使用已正确配置了通道信息 */
     public boolean mchAppHasAvailableIfCode(String appId, String ifCode) {
 
-        return this.count(
-                        PayInterfaceConfig.gw()
-                                .eq(PayInterfaceConfig::getIfCode, ifCode)
-                                .eq(PayInterfaceConfig::getState, CS.PUB_USABLE)
-                                .eq(PayInterfaceConfig::getInfoId, appId)
-                                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP))
+        return this.count(PayInterfaceConfig.gw()
+                        .eq(PayInterfaceConfig::getIfCode, ifCode)
+                        .eq(PayInterfaceConfig::getState, CS.PUB_USABLE)
+                        .eq(PayInterfaceConfig::getInfoId, appId)
+                        .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP))
                 > 0;
     }
 }

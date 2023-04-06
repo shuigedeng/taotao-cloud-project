@@ -39,10 +39,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 /** 楼层装修管理业务层实现 */
 @Service
-public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData>
-        implements PageDataService {
+public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData> implements PageDataService {
 
-    @Autowired private SystemSettingProperties systemSettingProperties;
+    @Autowired
+    private SystemSettingProperties systemSettingProperties;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -87,8 +87,7 @@ public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData>
     @Transactional(rollbackFor = Exception.class)
     public PageData updatePageData(PageData pageData) {
         // 如果页面为发布，则关闭其他页面，开启此页面
-        if (pageData.getPageShow() != null
-                && pageData.getPageShow().equals(SwitchEnum.OPEN.name())) {
+        if (pageData.getPageShow() != null && pageData.getPageShow().equals(SwitchEnum.OPEN.name())) {
             LambdaUpdateWrapper<PageData> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
             lambdaUpdateWrapper.eq(PageData::getPageType, pageData.getPageType());
             lambdaUpdateWrapper.eq(PageData::getPageClientType, pageData.getPageClientType());
@@ -148,10 +147,7 @@ public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData>
         // 判断是否有其他页面，如果没有其他的页面则无法进行删除
         QueryWrapper<Integer> queryWrapper = Wrappers.query();
         queryWrapper.eq(pageData.getPageType() != null, "page_type", pageData.getPageType());
-        queryWrapper.eq(
-                pageData.getPageClientType() != null,
-                "page_client_type",
-                pageData.getPageClientType());
+        queryWrapper.eq(pageData.getPageClientType() != null, "page_client_type", pageData.getPageClientType());
         // 如果为店铺页面需要设置店铺ID
         if (pageData.getPageType().equals(PageEnum.STORE.name())) {
             queryWrapper.eq(pageData.getNum() != null, "num", pageData.getNum());
@@ -167,8 +163,7 @@ public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData>
     public PageDataVO getPageData(PageDataDTO pageDataDTO) {
 
         // 如果获取的是专题、店铺页面数据需要传入ID
-        if (!pageDataDTO.getPageType().equals(PageEnum.INDEX.name())
-                && pageDataDTO.getNum() == null) {
+        if (!pageDataDTO.getPageType().equals(PageEnum.INDEX.name()) && pageDataDTO.getNum() == null) {
             throw new BusinessException(ResultEnum.PAGE_NOT_EXIST);
         }
         QueryWrapper<PageDataVO> queryWrapper = Wrappers.query();
@@ -186,10 +181,7 @@ public class PageDataServiceImpl extends ServiceImpl<PageDataMapper, PageData>
         QueryWrapper<PageDataListVO> queryWrapper = Wrappers.query();
         queryWrapper.eq(pageDataDTO.getPageType() != null, "page_type", pageDataDTO.getPageType());
         queryWrapper.eq(pageDataDTO.getNum() != null, "num", pageDataDTO.getNum());
-        queryWrapper.eq(
-                pageDataDTO.getPageClientType() != null,
-                "page_client_type",
-                pageDataDTO.getPageClientType());
+        queryWrapper.eq(pageDataDTO.getPageClientType() != null, "page_client_type", pageDataDTO.getPageClientType());
 
         return this.baseMapper.getPageDataList(PageUtil.initPage(pageVO), queryWrapper);
     }

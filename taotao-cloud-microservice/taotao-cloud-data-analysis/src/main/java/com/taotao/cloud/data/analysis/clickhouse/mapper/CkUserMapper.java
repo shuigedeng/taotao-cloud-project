@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.clickhouse.mapper;
 
 import com.taotao.cloud.data.analysis.clickhouse.model.CkUser;
@@ -29,7 +30,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CkUserMapper {
 
-	List<CkUser> queryUser();
+    List<CkUser> queryUser();
 
-	Integer insertUser(CkUser user);
+    Integer insertUser(CkUser user);
 }

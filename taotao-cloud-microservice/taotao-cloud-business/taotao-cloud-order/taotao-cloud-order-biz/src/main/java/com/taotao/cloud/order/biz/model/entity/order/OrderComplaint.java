@@ -55,7 +55,8 @@ public class OrderComplaint extends BaseSuperEntity<OrderComplaint, Long> {
 
     public static final String TABLE_NAME = "tt_order_complaint";
 
-    @Serial private static final long serialVersionUID = 7185050229757228184L;
+    @Serial
+    private static final long serialVersionUID = 7185050229757228184L;
 
     /** 投诉主题 */
     @Column(name = "complain_topic", columnDefinition = "varchar(255) not null comment '投诉主题'")
@@ -132,9 +133,7 @@ public class OrderComplaint extends BaseSuperEntity<OrderComplaint, Long> {
     @Column(name = "consignee_name", columnDefinition = "varchar(255) not null comment '收货人'")
     private String consigneeName;
     /** 收货地址 */
-    @Column(
-            name = "consignee_address_path",
-            columnDefinition = "varchar(255) not null comment '收货地址'")
+    @Column(name = "consignee_address_path", columnDefinition = "varchar(255) not null comment '收货地址'")
     private String consigneeAddressPath;
     /** 收货人手机 */
     @Column(name = "consignee_mobile", columnDefinition = "varchar(255) not null comment '收货人手机'")

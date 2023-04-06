@@ -55,10 +55,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/payOrder")
 public class PayOrderController extends CommonCtrl {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private PayWayService payWayService;
-    @Autowired private SysConfigService sysConfigService;
-    @Autowired private MchAppService mchAppService;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private PayWayService payWayService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
+
+    @Autowired
+    private MchAppService mchAppService;
 
     /**
      * @author: pangxiaoyu
@@ -73,8 +80,7 @@ public class PayOrderController extends CommonCtrl {
         JSONObject paramJSON = getReqParamJSON();
         LambdaQueryWrapper<PayOrder> wrapper = PayOrder.gw();
 
-        IPage<PayOrder> pages =
-                payOrderService.listByPage(getIPage(), payOrder, paramJSON, wrapper);
+        IPage<PayOrder> pages = payOrderService.listByPage(getIPage(), payOrder, paramJSON, wrapper);
         // 得到所有支付方式
         Map<String, String> payWayNameMap = new HashMap<>();
         List<PayWay> payWayList = payWayService.list();
@@ -150,9 +156,7 @@ public class PayOrderController extends CommonCtrl {
         MchApp mchApp = mchAppService.getById(payOrder.getAppId());
 
         JeepayClient jeepayClient =
-                new JeepayClient(
-                        sysConfigService.getDBApplicationConfig().getPaySiteUrl(),
-                        mchApp.getAppSecret());
+                new JeepayClient(sysConfigService.getDBApplicationConfig().getPaySiteUrl(), mchApp.getAppSecret());
 
         try {
             RefundOrderCreateResponse response = jeepayClient.execute(request);

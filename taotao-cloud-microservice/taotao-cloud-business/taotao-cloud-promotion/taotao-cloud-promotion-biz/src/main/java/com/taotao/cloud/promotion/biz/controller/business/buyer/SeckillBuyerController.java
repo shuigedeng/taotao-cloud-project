@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SeckillBuyerController {
 
     /** 秒杀活动 */
-    @Autowired private ISeckillApplyService seckillApplyService;
+    @Autowired
+    private ISeckillApplyService seckillApplyService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")

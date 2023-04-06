@@ -38,16 +38,16 @@ public class OutboundOrderServiceImpl extends ServiceImpl<OutboundOrderMapper, O
 
     // @Autowired
     // private BillRuleService billRuleService;
-    @Autowired private OutboundEntryService outboundEntryService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private OutboundEntryService outboundEntryService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public List<OutboundEntryEntity> getOutboundEntryList(String id) {
         QueryWrapper<OutboundEntryEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper
-                .lambda()
-                .eq(OutboundEntryEntity::getOutboundId, id)
-                .orderByDesc(OutboundEntryEntity::getSortCode);
+        queryWrapper.lambda().eq(OutboundEntryEntity::getOutboundId, id).orderByDesc(OutboundEntryEntity::getSortCode);
         return outboundEntryService.list(queryWrapper);
     }
 
@@ -60,10 +60,7 @@ public class OutboundOrderServiceImpl extends ServiceImpl<OutboundOrderMapper, O
 
     @Override
     @DSTransactional
-    public void save(
-            String id,
-            OutboundOrderEntity entity,
-            List<OutboundEntryEntity> outboundEntryEntityList)
+    public void save(String id, OutboundOrderEntity entity, List<OutboundEntryEntity> outboundEntryEntityList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -152,12 +149,9 @@ public class OutboundOrderServiceImpl extends ServiceImpl<OutboundOrderMapper, O
     @Override
     public void data(String id, String data) {
         OutboundOrderForm outboundOrderForm = JsonUtil.getJsonToBean(data, OutboundOrderForm.class);
-        OutboundOrderEntity entity =
-                JsonUtil.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
+        OutboundOrderEntity entity = JsonUtil.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
         List<OutboundEntryEntityInfoModel> entryList =
-                outboundOrderForm.getEntryList() != null
-                        ? outboundOrderForm.getEntryList()
-                        : new ArrayList<>();
+                outboundOrderForm.getEntryList() != null ? outboundOrderForm.getEntryList() : new ArrayList<>();
         List<OutboundEntryEntity> outboundEntryEntityList =
                 JsonUtil.getJsonToList(entryList, OutboundEntryEntity.class);
         entity.setId(id);

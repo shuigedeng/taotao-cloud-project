@@ -51,16 +51,18 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class PointsGoodsServiceImpl
-        extends AbstractPromotionsServiceImpl<PointsGoodsMapper, PointsGoods>
+public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<PointsGoodsMapper, PointsGoods>
         implements IPointsGoodsService {
 
     /** 促销商品 */
-    @Autowired private IPromotionGoodsService promotionGoodsService;
+    @Autowired
+    private IPromotionGoodsService promotionGoodsService;
     /** 规格商品 */
-    @Autowired private IFeignGoodsSkuApi goodsSkuApi;
+    @Autowired
+    private IFeignGoodsSkuApi goodsSkuApi;
 
-    @Autowired private IFeignEsGoodsIndexApi esGoodsIndexApi;
+    @Autowired
+    private IFeignEsGoodsIndexApi esGoodsIndexApi;
 
     @Override
     public boolean savePointsGoodsBatch(List<PointsGoods> promotionsList) {
@@ -86,14 +88,12 @@ public class PointsGoodsServiceImpl
         if (saveBatch) {
             this.promotionGoodsService.saveOrUpdateBatch(promotionGoodsList);
             for (Map.Entry<String, Long> entry : skuPoints.entrySet()) {
-                Map<String, Object> query =
-                        MapUtil.builder(new HashMap<String, Object>())
-                                .put("id", entry.getKey())
-                                .build();
-                Map<String, Object> update =
-                        MapUtil.builder(new HashMap<String, Object>())
-                                .put("points", entry.getValue())
-                                .build();
+                Map<String, Object> query = MapUtil.builder(new HashMap<String, Object>())
+                        .put("id", entry.getKey())
+                        .build();
+                Map<String, Object> update = MapUtil.builder(new HashMap<String, Object>())
+                        .put("points", entry.getValue())
+                        .build();
                 this.esGoodsIndexApi.updateIndex(query, update);
             }
         }
@@ -162,9 +162,7 @@ public class PointsGoodsServiceImpl
     @Override
     public PointsGoodsVO getPointsGoodsDetailBySkuId(String skuId) {
         PointsGoods pointsGoods =
-                this.getOne(
-                        new LambdaQueryWrapper<PointsGoods>().eq(PointsGoods::getSkuId, skuId),
-                        false);
+                this.getOne(new LambdaQueryWrapper<PointsGoods>().eq(PointsGoods::getSkuId, skuId), false);
         if (pointsGoods == null) {
             log.error("skuId为" + skuId + "的积分商品不存在！");
             throw new BusinessException();
@@ -207,10 +205,8 @@ public class PointsGoodsServiceImpl
     @Override
     public void updatePromotionsGoods(PointsGoods promotions) {
         this.promotionGoodsService.remove(
-                new LambdaQueryWrapper<PromotionGoods>()
-                        .eq(PromotionGoods::getPromotionId, promotions.getId()));
-        this.promotionGoodsService.save(
-                new PromotionGoods(promotions, this.checkSkuExist(promotions.getSkuId())));
+                new LambdaQueryWrapper<PromotionGoods>().eq(PromotionGoods::getPromotionId, promotions.getId()));
+        this.promotionGoodsService.save(new PromotionGoods(promotions, this.checkSkuExist(promotions.getSkuId())));
     }
 
     /**
@@ -220,14 +216,12 @@ public class PointsGoodsServiceImpl
      */
     @Override
     public void updateEsGoodsIndex(PointsGoods promotions) {
-        Map<String, Object> query =
-                MapUtil.builder(new HashMap<String, Object>())
-                        .put("id", promotions.getSkuId())
-                        .build();
-        Map<String, Object> update =
-                MapUtil.builder(new HashMap<String, Object>())
-                        .put("points", promotions.getPoints())
-                        .build();
+        Map<String, Object> query = MapUtil.builder(new HashMap<String, Object>())
+                .put("id", promotions.getSkuId())
+                .build();
+        Map<String, Object> update = MapUtil.builder(new HashMap<String, Object>())
+                .put("points", promotions.getPoints())
+                .build();
         this.esGoodsIndexApi.updateIndex(query, update);
     }
 
@@ -264,10 +258,8 @@ public class PointsGoodsServiceImpl
         if (CharSequenceUtil.isNotEmpty(id)) {
             queryWrapper.ne("id", id);
         }
-        queryWrapper.and(
-                i ->
-                        i.or(PromotionTools.queryPromotionStatus(PromotionsStatusEnum.START))
-                                .or(PromotionTools.queryPromotionStatus(PromotionsStatusEnum.NEW)));
+        queryWrapper.and(i -> i.or(PromotionTools.queryPromotionStatus(PromotionsStatusEnum.START))
+                .or(PromotionTools.queryPromotionStatus(PromotionsStatusEnum.NEW)));
         return this.getOne(queryWrapper, false);
     }
 

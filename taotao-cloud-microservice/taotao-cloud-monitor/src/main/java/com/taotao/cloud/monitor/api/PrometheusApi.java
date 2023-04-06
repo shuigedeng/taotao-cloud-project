@@ -44,41 +44,40 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/actuator/prometheus/web")
 public class PrometheusApi {
 
-	private final DiscoveryClient discoveryClient;
-	private final ApplicationEventPublisher eventPublisher;
+    private final DiscoveryClient discoveryClient;
+    private final ApplicationEventPublisher eventPublisher;
 
-	public PrometheusApi(DiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
-		this.discoveryClient = discoveryClient;
-		this.eventPublisher = eventPublisher;
-	}
+    public PrometheusApi(DiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
+        this.discoveryClient = discoveryClient;
+        this.eventPublisher = eventPublisher;
+    }
 
-	@GetMapping("/sd")
-	public List<TargetGroup> getList() {
-		List<String> serviceIdList = discoveryClient.getServices();
-		if (serviceIdList == null || serviceIdList.isEmpty()) {
-			return Collections.emptyList();
-		}
+    @GetMapping("/sd")
+    public List<TargetGroup> getList() {
+        List<String> serviceIdList = discoveryClient.getServices();
+        if (serviceIdList == null || serviceIdList.isEmpty()) {
+            return Collections.emptyList();
+        }
 
-		List<TargetGroup> targetGroupList = new ArrayList<>();
-		for (String serviceId : serviceIdList) {
-			List<ServiceInstance> instanceList = discoveryClient.getInstances(serviceId);
-			List<String> targets = new ArrayList<>();
+        List<TargetGroup> targetGroupList = new ArrayList<>();
+        for (String serviceId : serviceIdList) {
+            List<ServiceInstance> instanceList = discoveryClient.getInstances(serviceId);
+            List<String> targets = new ArrayList<>();
 
-			for (ServiceInstance instance : instanceList) {
-				targets.add(String.format("%s:%d", instance.getHost(), instance.getPort()));
-			}
+            for (ServiceInstance instance : instanceList) {
+                targets.add(String.format("%s:%d", instance.getHost(), instance.getPort()));
+            }
 
-			Map<String, String> labels = new HashMap<>(2);
-			labels.put("__taotao_prometheus_job", serviceId);
-			targetGroupList.add(new TargetGroup(targets, labels));
-		}
-		return targetGroupList;
-	}
+            Map<String, String> labels = new HashMap<>(2);
+            labels.put("__taotao_prometheus_job", serviceId);
+            targetGroupList.add(new TargetGroup(targets, labels));
+        }
+        return targetGroupList;
+    }
 
-	@PostMapping("/alerts")
-	public ResponseEntity<Object> postAlerts(@RequestBody AlertMessage message) {
-		eventPublisher.publishEvent(message);
-		return ResponseEntity.ok().build();
-	}
-
+    @PostMapping("/alerts")
+    public ResponseEntity<Object> postAlerts(@RequestBody AlertMessage message) {
+        eventPublisher.publishEvent(message);
+        return ResponseEntity.ok().build();
+    }
 }

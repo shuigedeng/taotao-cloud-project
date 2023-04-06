@@ -44,7 +44,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion/pointsGoodsCategory")
 public class PointsGoodsCategoryManagerController {
 
-    @Autowired private IPointsGoodsCategoryService pointsGoodsCategoryService;
+    @Autowired
+    private IPointsGoodsCategoryService pointsGoodsCategoryService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")

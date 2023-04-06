@@ -50,20 +50,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class TencentSmsReceipt {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
-    @Autowired private SmsRecordDao smsRecordDao;
+    @Autowired
+    private SmsRecordDao smsRecordDao;
 
     /** 拉取消息并入库 */
     public void pull() {
 
         // 获取腾讯云账号信息
-        TencentSmsAccount account =
-                accountUtils.getAccount(
-                        10,
-                        SendAccountConstant.SMS_ACCOUNT_KEY,
-                        SendAccountConstant.SMS_PREFIX,
-                        TencentSmsAccount.class);
+        TencentSmsAccount account = accountUtils.getAccount(
+                10, SendAccountConstant.SMS_ACCOUNT_KEY, SendAccountConstant.SMS_PREFIX, TencentSmsAccount.class);
         try {
             SmsClient client = getSmsClient(account);
 
@@ -74,34 +72,26 @@ public class TencentSmsReceipt {
 
             PullSmsSendStatusResponse resp = client.PullSmsSendStatus(req);
             List<SmsRecord> smsRecordList = new ArrayList<>();
-            if (resp != null
-                    && resp.getPullSmsSendStatusSet() != null
-                    && resp.getPullSmsSendStatusSet().length > 0) {
+            if (resp != null && resp.getPullSmsSendStatusSet() != null && resp.getPullSmsSendStatusSet().length > 0) {
                 log.debug("receipt sms:{}", JSON.toJSONString(resp.getPullSmsSendStatusSet()));
                 for (PullSmsSendStatus pullSmsSendStatus : resp.getPullSmsSendStatusSet()) {
-                    SmsRecord smsRecord =
-                            SmsRecord.builder()
-                                    .sendDate(
-                                            Integer.valueOf(
-                                                    DateUtil.format(
-                                                            new Date(),
-                                                            DatePattern.PURE_DATE_PATTERN)))
-                                    .messageTemplateId(0L)
-                                    .phone(Long.valueOf(pullSmsSendStatus.getSubscriberNumber()))
-                                    .supplierId(account.getSupplierId())
-                                    .supplierName(account.getSupplierName())
-                                    .msgContent("")
-                                    .seriesId(pullSmsSendStatus.getSerialNo())
-                                    .chargingNum(0)
-                                    .status(
-                                            "SUCCESS".equals(pullSmsSendStatus.getReportStatus())
-                                                    ? SmsStatus.RECEIVE_SUCCESS.getCode()
-                                                    : SmsStatus.RECEIVE_FAIL.getCode())
-                                    .reportContent(pullSmsSendStatus.getDescription())
-                                    .updated(
-                                            Math.toIntExact(pullSmsSendStatus.getUserReceiveTime()))
-                                    .created(Math.toIntExact(DateUtil.currentSeconds()))
-                                    .build();
+                    SmsRecord smsRecord = SmsRecord.builder()
+                            .sendDate(Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))
+                            .messageTemplateId(0L)
+                            .phone(Long.valueOf(pullSmsSendStatus.getSubscriberNumber()))
+                            .supplierId(account.getSupplierId())
+                            .supplierName(account.getSupplierName())
+                            .msgContent("")
+                            .seriesId(pullSmsSendStatus.getSerialNo())
+                            .chargingNum(0)
+                            .status(
+                                    "SUCCESS".equals(pullSmsSendStatus.getReportStatus())
+                                            ? SmsStatus.RECEIVE_SUCCESS.getCode()
+                                            : SmsStatus.RECEIVE_FAIL.getCode())
+                            .reportContent(pullSmsSendStatus.getDescription())
+                            .updated(Math.toIntExact(pullSmsSendStatus.getUserReceiveTime()))
+                            .created(Math.toIntExact(DateUtil.currentSeconds()))
+                            .build();
                     smsRecordList.add(smsRecord);
                 }
             }

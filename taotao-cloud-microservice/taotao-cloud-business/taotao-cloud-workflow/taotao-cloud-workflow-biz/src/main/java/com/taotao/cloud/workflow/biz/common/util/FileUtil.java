@@ -322,11 +322,8 @@ public class FileUtil {
         String line;
         try {
             @Cleanup
-            FileInputStream inputStream =
-                    new FileInputStream(new File(XSSEscape.escapePath(filePath + filename)));
-            @Cleanup
-            InputStreamReader inputStreamReader =
-                    new InputStreamReader(inputStream, Constants.UTF8);
+            FileInputStream inputStream = new FileInputStream(new File(XSSEscape.escapePath(filePath + filename)));
+            @Cleanup InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Constants.UTF8);
             @Cleanup BufferedReader reader = new BufferedReader(inputStreamReader);
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
@@ -623,8 +620,7 @@ public class FileUtil {
      */
     public static void toZip(String outDir, boolean keepDirStructure, String... srcDir) {
         try {
-            @Cleanup
-            OutputStream out = new FileOutputStream(new File(XSSEscape.escapePath(outDir)));
+            @Cleanup OutputStream out = new FileOutputStream(new File(XSSEscape.escapePath(outDir)));
             @Cleanup ZipOutputStream zos = null;
             try {
                 zos = new ZipOutputStream(out);
@@ -660,8 +656,7 @@ public class FileUtil {
      *     false:所有文件跑到压缩包根目录下(注意：不保留目录结构可能会出现同名文件,会压缩失败)
      * @throws Exception
      */
-    private static void compress(
-            File sourceFile, ZipOutputStream zos, String name, boolean keepDirStructure)
+    private static void compress(File sourceFile, ZipOutputStream zos, String name, boolean keepDirStructure)
             throws Exception {
         byte[] buf = new byte[BUFFER_SIZE];
         if (sourceFile.isFile()) {
@@ -692,8 +687,7 @@ public class FileUtil {
         }
     }
 
-    private static void compress(
-            List<File> sourceFileList, ZipOutputStream zos, boolean keepDirStructure)
+    private static void compress(List<File> sourceFileList, ZipOutputStream zos, boolean keepDirStructure)
             throws Exception {
         byte[] buf = new byte[BUFFER_SIZE];
         for (File sourceFile : sourceFileList) {
@@ -792,8 +786,7 @@ public class FileUtil {
      * @return
      */
     public static boolean existsSuffix(MultipartFile multipartFile, String type) {
-        if (!multipartFile.getOriginalFilename().endsWith("." + type)
-                || multipartFile.getSize() < 1) {
+        if (!multipartFile.getOriginalFilename().endsWith("." + type) || multipartFile.getSize() < 1) {
             return true;
         }
         return false;

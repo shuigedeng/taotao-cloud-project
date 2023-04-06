@@ -48,10 +48,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/cashier")
 public class QrCashierController extends AbstractPayOrderController {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private SysConfigService sysConfigService;
-    @Autowired private PayMchNotifyService payMchNotifyService;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
+
+    @Autowired
+    private PayMchNotifyService payMchNotifyService;
 
     /** 返回 oauth2【获取uerId跳转地址】 * */
     @PostMapping("/redirectUrl")
@@ -62,20 +69,16 @@ public class QrCashierController extends AbstractPayOrderController {
 
         // 回调地址
         String redirectUrlEncode =
-                sysConfigService
-                        .getDBApplicationConfig()
-                        .genOauth2RedirectUrlEncode(payOrder.getPayOrderId());
+                sysConfigService.getDBApplicationConfig().genOauth2RedirectUrlEncode(payOrder.getPayOrderId());
 
         // 获取商户配置信息
         MchAppConfigContext mchAppConfigContext =
-                configContextQueryService.queryMchInfoAndAppInfo(
-                        payOrder.getMchNo(), payOrder.getAppId());
+                configContextQueryService.queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId());
 
         // 获取接口并返回数据
         IChannelUserService channelUserService =
                 getServiceByWayCode(getWayCode(), "ChannelUserService", IChannelUserService.class);
-        return ApiRes.ok(
-                channelUserService.buildUserRedirectUrl(redirectUrlEncode, mchAppConfigContext));
+        return ApiRes.ok(channelUserService.buildUserRedirectUrl(redirectUrlEncode, mchAppConfigContext));
     }
 
     /** 获取userId * */
@@ -89,12 +92,10 @@ public class QrCashierController extends AbstractPayOrderController {
 
         // 获取商户配置信息
         MchAppConfigContext mchAppConfigContext =
-                configContextQueryService.queryMchInfoAndAppInfo(
-                        payOrder.getMchNo(), payOrder.getAppId());
+                configContextQueryService.queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId());
         IChannelUserService channelUserService =
                 getServiceByWayCode(wayCode, "ChannelUserService", IChannelUserService.class);
-        return ApiRes.ok(
-                channelUserService.getChannelUserId(getReqParamJSON(), mchAppConfigContext));
+        return ApiRes.ok(channelUserService.getChannelUserId(getReqParamJSON(), mchAppConfigContext));
     }
 
     /** 获取订单支付信息 * */
@@ -109,13 +110,12 @@ public class QrCashierController extends AbstractPayOrderController {
         resOrder.setMchOrderNo(payOrder.getMchOrderNo());
         resOrder.setMchName(payOrder.getMchName());
         resOrder.setAmount(payOrder.getAmount());
-        resOrder.setReturnUrl(
-                payMchNotifyService.createReturnUrl(
-                        payOrder,
-                        configContextQueryService
-                                .queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId())
-                                .getMchApp()
-                                .getAppSecret()));
+        resOrder.setReturnUrl(payMchNotifyService.createReturnUrl(
+                payOrder,
+                configContextQueryService
+                        .queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId())
+                        .getMchApp()
+                        .getAppSecret()));
         return ApiRes.ok(resOrder);
     }
 

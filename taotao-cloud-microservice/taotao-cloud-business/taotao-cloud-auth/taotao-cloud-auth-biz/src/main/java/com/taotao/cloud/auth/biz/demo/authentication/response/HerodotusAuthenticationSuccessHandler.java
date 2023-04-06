@@ -52,8 +52,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 public class HerodotusAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(HerodotusAuthenticationSuccessHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(HerodotusAuthenticationSuccessHandler.class);
 
     private final HttpMessageConverter<OAuth2AccessTokenResponse> accessTokenHttpResponseConverter =
             new OAuth2AccessTokenResponseHttpMessageConverter();
@@ -76,17 +75,13 @@ public class HerodotusAuthenticationSuccessHandler implements AuthenticationSucc
 
         OAuth2AccessToken accessToken = accessTokenAuthentication.getAccessToken();
         OAuth2RefreshToken refreshToken = accessTokenAuthentication.getRefreshToken();
-        Map<String, Object> additionalParameters =
-                accessTokenAuthentication.getAdditionalParameters();
+        Map<String, Object> additionalParameters = accessTokenAuthentication.getAdditionalParameters();
 
-        OAuth2AccessTokenResponse.Builder builder =
-                OAuth2AccessTokenResponse.withToken(accessToken.getTokenValue())
-                        .tokenType(accessToken.getTokenType())
-                        .scopes(accessToken.getScopes());
+        OAuth2AccessTokenResponse.Builder builder = OAuth2AccessTokenResponse.withToken(accessToken.getTokenValue())
+                .tokenType(accessToken.getTokenType())
+                .scopes(accessToken.getScopes());
         if (accessToken.getIssuedAt() != null && accessToken.getExpiresAt() != null) {
-            builder.expiresIn(
-                    ChronoUnit.SECONDS.between(
-                            accessToken.getIssuedAt(), accessToken.getExpiresAt()));
+            builder.expiresIn(ChronoUnit.SECONDS.between(accessToken.getIssuedAt(), accessToken.getExpiresAt()));
         }
 
         if (refreshToken != null) {

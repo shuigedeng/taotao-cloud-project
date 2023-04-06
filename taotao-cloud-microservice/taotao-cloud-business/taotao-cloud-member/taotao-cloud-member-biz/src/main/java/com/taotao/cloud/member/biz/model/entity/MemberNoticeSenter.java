@@ -60,8 +60,6 @@ public class MemberNoticeSenter extends BaseSuperEntity<MemberNoticeSenter, Long
     private String memberIds;
 
     /** 发送类型,ALL 全站，SELECT 指定会员 */
-    @Column(
-            name = "send_type",
-            columnDefinition = "varchar(32) not null comment '发送类型,ALL 全站，SELECT 指定会员'")
+    @Column(name = "send_type", columnDefinition = "varchar(32) not null comment '发送类型,ALL 全站，SELECT 指定会员'")
     private String sendType;
 }

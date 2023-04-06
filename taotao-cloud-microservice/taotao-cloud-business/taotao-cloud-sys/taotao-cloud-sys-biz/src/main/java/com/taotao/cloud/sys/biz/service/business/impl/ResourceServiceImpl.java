@@ -51,8 +51,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class ResourceServiceImpl
-        extends BaseSuperServiceImpl<
-                IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
+        extends BaseSuperServiceImpl<IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
         implements IResourceService {
 
     private final IRoleService roleService;

@@ -39,8 +39,7 @@ public interface BpmTaskService {
      * @param pageReqVO 分页请求
      * @return 流程任务分页
      */
-    PageResult<BpmTaskTodoPageItemRespVO> getTodoTaskPage(
-            Long userId, BpmTaskTodoPageReqVO pageReqVO);
+    PageResult<BpmTaskTodoPageItemRespVO> getTodoTaskPage(Long userId, BpmTaskTodoPageReqVO pageReqVO);
 
     /**
      * 获得已办的流程任务分页
@@ -49,8 +48,7 @@ public interface BpmTaskService {
      * @param pageReqVO 分页请求
      * @return 流程任务分页
      */
-    PageResult<BpmTaskDonePageItemRespVO> getDoneTaskPage(
-            Long userId, BpmTaskDonePageReqVO pageReqVO);
+    PageResult<BpmTaskDonePageItemRespVO> getDoneTaskPage(Long userId, BpmTaskDonePageReqVO pageReqVO);
 
     /**
      * 获得流程任务 Map
@@ -58,8 +56,7 @@ public interface BpmTaskService {
      * @param processInstanceIds 流程实例的编号数组
      * @return 流程任务 Map
      */
-    default Map<String, List<Task>> getTaskMapByProcessInstanceIds(
-            List<String> processInstanceIds) {
+    default Map<String, List<Task>> getTaskMapByProcessInstanceIds(List<String> processInstanceIds) {
         return CollectionUtils.convertMultiMap(
                 getTasksByProcessInstanceIds(processInstanceIds), Task::getProcessInstanceId);
     }

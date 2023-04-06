@@ -54,18 +54,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class FlowDynamicServiceImpl implements FlowDynamicService {
 
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FlowEngineService flowEngineService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
-    @Autowired private FlowDataUtil flowDataUtil;
-    @Autowired private ServiceAllUtil serviceUtil;
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FlowEngineService flowEngineService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
+
+    @Autowired
+    private FlowDataUtil flowDataUtil;
+
+    @Autowired
+    private ServiceAllUtil serviceUtil;
 
     @Override
-    public FlowTaskInfoVO info(FlowTaskEntity entity, String taskOperatorId)
-            throws WorkFlowException {
+    public FlowTaskInfoVO info(FlowTaskEntity entity, String taskOperatorId) throws WorkFlowException {
         FlowEngineEntity flowEntity = flowEngineService.getInfo(entity.getFlowId());
-        List<TableModel> tableModelList =
-                JsonUtils.toList(flowEntity.getFlowTables(), TableModel.class);
+        List<TableModel> tableModelList = JsonUtils.toList(flowEntity.getFlowTables(), TableModel.class);
         FlowTaskInfoVO vo = FlowTaskConvert.INSTANCE.convert(entity);
         boolean infoData = true;
         if (StrUtil.isNotEmpty(taskOperatorId)) {
@@ -82,8 +89,7 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
             FormDataModel formData = JsonUtils.toObject(entity.getFlowForm(), FormDataModel.class);
             List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
             DbLinkEntity link = serviceUtil.getDbLink(flowEntity.getDbLinkId());
-            Map<String, Object> result =
-                    flowDataUtil.info(list, entity, tableModelList, false, link);
+            Map<String, Object> result = flowDataUtil.info(list, entity, tableModelList, false, link);
             vo.setData(JsonUtils.toJSONString(result));
         }
         return vo;
@@ -99,8 +105,7 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
         String title = info.getUserName() + "的" + entity.getFullName();
         String formId = RandomUtil.uuId();
         // tableJson
-        List<TableModel> tableModelList =
-                JsonUtils.toList(entity.getFlowTables(), TableModel.class);
+        List<TableModel> tableModelList = JsonUtils.toList(entity.getFlowTables(), TableModel.class);
         // formTempJson
         FormDataModel formData = JsonUtils.toObject(entity.getFormData(), FormDataModel.class);
         List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
@@ -138,8 +143,7 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
         String title = info.getUserName() + "的" + entity.getFullName();
         String formId = RandomUtil.uuId();
         // tableJson
-        List<TableModel> tableModelList =
-                JsonUtils.toList(entity.getFlowTables(), TableModel.class);
+        List<TableModel> tableModelList = JsonUtils.toList(entity.getFlowTables(), TableModel.class);
         // formTempJson
         FormDataModel formData = JsonUtils.toObject(entity.getFormData(), FormDataModel.class);
         List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
@@ -169,8 +173,7 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
     public Map<String, Object> getData(String flowId, String id) throws WorkFlowException {
         FlowTaskEntity entity = flowTaskService.getInfo(id);
         FlowEngineEntity flowentity = flowEngineService.getInfo(flowId);
-        List<TableModel> tableModelList =
-                JsonUtils.toList(flowentity.getFlowTables(), TableModel.class);
+        List<TableModel> tableModelList = JsonUtils.toList(flowentity.getFlowTables(), TableModel.class);
         // formTempJson
         FormDataModel formData = JsonUtils.toObject(entity.getFlowForm(), FormDataModel.class);
         List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);

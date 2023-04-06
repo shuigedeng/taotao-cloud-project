@@ -56,11 +56,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PayOrderDivisionExecController extends ApiController {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private MchDivisionReceiverService mchDivisionReceiverService;
-    @Autowired private MchDivisionReceiverGroupService mchDivisionReceiverGroupService;
-    @Autowired private PayOrderDivisionProcessService payOrderDivisionProcessService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private MchDivisionReceiverService mchDivisionReceiverService;
+
+    @Autowired
+    private MchDivisionReceiverGroupService mchDivisionReceiverGroupService;
+
+    @Autowired
+    private PayOrderDivisionProcessService payOrderDivisionProcessService;
 
     /** 分账执行 * */
     @PostMapping("/api/division/exec")
@@ -76,8 +85,7 @@ public class PayOrderDivisionExecController extends ApiController {
             }
 
             PayOrder payOrder =
-                    payOrderService.queryMchOrder(
-                            bizRQ.getMchNo(), bizRQ.getPayOrderId(), bizRQ.getMchOrderNo());
+                    payOrderService.queryMchOrder(bizRQ.getMchNo(), bizRQ.getPayOrderId(), bizRQ.getMchOrderNo());
             if (payOrder == null) {
                 throw new BizException("订单不存在");
             }
@@ -91,33 +99,23 @@ public class PayOrderDivisionExecController extends ApiController {
             List<PayOrderDivisionMQ.CustomerDivisionReceiver> receiverList = null;
 
             // 不使用默认分组， 需要转换每个账号信息
-            if (bizRQ.getUseSysAutoDivisionReceivers() != CS.YES
-                    && !StringUtils.isEmpty(bizRQ.getReceivers())) {
-                receiverList =
-                        JSON.parseArray(
-                                bizRQ.getReceivers(),
-                                PayOrderDivisionMQ.CustomerDivisionReceiver.class);
+            if (bizRQ.getUseSysAutoDivisionReceivers() != CS.YES && !StringUtils.isEmpty(bizRQ.getReceivers())) {
+                receiverList = JSON.parseArray(bizRQ.getReceivers(), PayOrderDivisionMQ.CustomerDivisionReceiver.class);
             }
 
             // 验证账号是否合法
-            this.checkReceiverList(
-                    receiverList, payOrder.getIfCode(), bizRQ.getMchNo(), bizRQ.getAppId());
+            this.checkReceiverList(receiverList, payOrder.getIfCode(), bizRQ.getMchNo(), bizRQ.getAppId());
 
             // 商户配置信息
             MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(
-                            bizRQ.getMchNo(), bizRQ.getAppId());
+                    configContextQueryService.queryMchInfoAndAppInfo(bizRQ.getMchNo(), bizRQ.getAppId());
             if (mchAppConfigContext == null) {
                 throw new BizException("获取商户应用信息失败");
             }
 
             // 处理分账请求
-            ChannelRetMsg channelRetMsg =
-                    payOrderDivisionProcessService.processPayOrderDivision(
-                            bizRQ.getPayOrderId(),
-                            bizRQ.getUseSysAutoDivisionReceivers(),
-                            receiverList,
-                            false);
+            ChannelRetMsg channelRetMsg = payOrderDivisionProcessService.processPayOrderDivision(
+                    bizRQ.getPayOrderId(), bizRQ.getUseSysAutoDivisionReceivers(), receiverList, false);
 
             PayOrderDivisionExecRS bizRS = new PayOrderDivisionExecRS();
             bizRS.setState(
@@ -141,10 +139,7 @@ public class PayOrderDivisionExecController extends ApiController {
 
     /** 检验账号是否合法 * */
     private void checkReceiverList(
-            List<PayOrderDivisionMQ.CustomerDivisionReceiver> receiverList,
-            String ifCode,
-            String mchNo,
-            String appId) {
+            List<PayOrderDivisionMQ.CustomerDivisionReceiver> receiverList, String ifCode, String mchNo, String appId) {
 
         if (receiverList == null || receiverList.isEmpty()) {
             return;
@@ -199,14 +194,12 @@ public class PayOrderDivisionExecController extends ApiController {
 
         if (!receiverIdSet.isEmpty()) {
 
-            long receiverCount =
-                    mchDivisionReceiverService.count(
-                            MchDivisionReceiver.gw()
-                                    .in(MchDivisionReceiver::getReceiverId, receiverIdSet)
-                                    .eq(MchDivisionReceiver::getMchNo, mchNo)
-                                    .eq(MchDivisionReceiver::getAppId, appId)
-                                    .eq(MchDivisionReceiver::getIfCode, ifCode)
-                                    .eq(MchDivisionReceiver::getState, CS.YES));
+            long receiverCount = mchDivisionReceiverService.count(MchDivisionReceiver.gw()
+                    .in(MchDivisionReceiver::getReceiverId, receiverIdSet)
+                    .eq(MchDivisionReceiver::getMchNo, mchNo)
+                    .eq(MchDivisionReceiver::getAppId, appId)
+                    .eq(MchDivisionReceiver::getIfCode, ifCode)
+                    .eq(MchDivisionReceiver::getState, CS.YES));
 
             if (receiverCount != receiverIdSet.size()) {
                 throw new BizException("分账[用户]中包含不存在或渠道不可用账号，请更改");
@@ -215,13 +208,9 @@ public class PayOrderDivisionExecController extends ApiController {
 
         if (!receiverGroupIdSet.isEmpty()) {
 
-            long receiverGroupCount =
-                    mchDivisionReceiverGroupService.count(
-                            MchDivisionReceiverGroup.gw()
-                                    .in(
-                                            MchDivisionReceiverGroup::getReceiverGroupId,
-                                            receiverGroupIdSet)
-                                    .eq(MchDivisionReceiverGroup::getMchNo, mchNo));
+            long receiverGroupCount = mchDivisionReceiverGroupService.count(MchDivisionReceiverGroup.gw()
+                    .in(MchDivisionReceiverGroup::getReceiverGroupId, receiverGroupIdSet)
+                    .eq(MchDivisionReceiverGroup::getMchNo, mchNo));
 
             if (receiverGroupCount != receiverGroupIdSet.size()) {
                 throw new BizException("分账[账号组]中包含不存在或不可用组，请更改");

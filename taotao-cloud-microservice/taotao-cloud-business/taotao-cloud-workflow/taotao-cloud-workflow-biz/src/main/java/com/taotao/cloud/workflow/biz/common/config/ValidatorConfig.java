@@ -29,13 +29,12 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
 public class ValidatorConfig {
     @Bean
     public Validator validator() {
-        ValidatorFactory validatorFactory =
-                Validation.byProvider(HibernateValidator.class)
-                        .configure()
-                        // failFast：true  快速失败返回模式(只要有一个验证失败，则返回)    false
-                        // 普通模式(会校验完所有的属性，然后返回所有的验证失败信息)
-                        .addProperty("hibernate.validator.fail_fast", "false")
-                        .buildValidatorFactory();
+        ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
+                .configure()
+                // failFast：true  快速失败返回模式(只要有一个验证失败，则返回)    false
+                // 普通模式(会校验完所有的属性，然后返回所有的验证失败信息)
+                .addProperty("hibernate.validator.fail_fast", "false")
+                .buildValidatorFactory();
         return validatorFactory.getValidator();
     }
 

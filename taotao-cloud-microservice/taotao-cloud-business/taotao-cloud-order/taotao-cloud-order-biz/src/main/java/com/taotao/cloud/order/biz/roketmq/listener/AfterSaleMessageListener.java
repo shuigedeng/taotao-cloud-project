@@ -42,17 +42,15 @@ import org.springframework.stereotype.Component;
 public class AfterSaleMessageListener implements RocketMQListener<MessageExt> {
 
     /** 售后订单状态 */
-    @Autowired private List<AfterSaleStatusChangeEvent> afterSaleStatusChangeEvents;
+    @Autowired
+    private List<AfterSaleStatusChangeEvent> afterSaleStatusChangeEvents;
 
     @Override
     public void onMessage(MessageExt messageExt) {
-        if (AfterSaleTagsEnum.valueOf(messageExt.getTags())
-                == AfterSaleTagsEnum.AFTER_SALE_STATUS_CHANGE) {
-            for (AfterSaleStatusChangeEvent afterSaleStatusChangeEvent :
-                    afterSaleStatusChangeEvents) {
+        if (AfterSaleTagsEnum.valueOf(messageExt.getTags()) == AfterSaleTagsEnum.AFTER_SALE_STATUS_CHANGE) {
+            for (AfterSaleStatusChangeEvent afterSaleStatusChangeEvent : afterSaleStatusChangeEvents) {
                 try {
-                    AfterSale afterSale =
-                            JSONUtil.toBean(new String(messageExt.getBody()), AfterSale.class);
+                    AfterSale afterSale = JSONUtil.toBean(new String(messageExt.getBody()), AfterSale.class);
                     afterSaleStatusChangeEvent.afterSaleStatusChange(afterSale);
                 } catch (Exception e) {
                     LogUtils.error(

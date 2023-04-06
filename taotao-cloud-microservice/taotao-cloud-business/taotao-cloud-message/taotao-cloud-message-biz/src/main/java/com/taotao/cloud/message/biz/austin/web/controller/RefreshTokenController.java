@@ -33,8 +33,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RefreshTokenController {
 
-    @Autowired private RefreshDingDingAccessTokenHandler refreshDingDingAccessTokenHandler;
-    @Autowired private RefreshGeTuiAccessTokenHandler refreshGeTuiAccessTokenHandler;
+    @Autowired
+    private RefreshDingDingAccessTokenHandler refreshDingDingAccessTokenHandler;
+
+    @Autowired
+    private RefreshGeTuiAccessTokenHandler refreshGeTuiAccessTokenHandler;
 
     /**
      * 按照不同的渠道刷新对应的Token，channelType取值来源com.taotao.cloud.message.biz.austin.common.enums.ChannelType

@@ -30,15 +30,13 @@ public final class OSSFactory {
     private static SysConfigService sysConfigService;
 
     static {
-        OSSFactory.sysConfigService =
-                (SysConfigService) SpringContextUtils.getBean("sysConfigService");
+        OSSFactory.sysConfigService = (SysConfigService) SpringContextUtils.getBean("sysConfigService");
     }
 
     public static AbstractCloudStorageService build() {
         // 获取云存储配置信息
         CloudStorageConfig config =
-                sysConfigService.getConfigObject(
-                        ConfigConstant.CLOUD_STORAGE_CONFIG_KEY, CloudStorageConfig.class);
+                sysConfigService.getConfigObject(ConfigConstant.CLOUD_STORAGE_CONFIG_KEY, CloudStorageConfig.class);
 
         if (config.getType() == Constant.CloudService.QINIU.getValue()) {
             return new QiniuAbstractCloudStorageService(config);

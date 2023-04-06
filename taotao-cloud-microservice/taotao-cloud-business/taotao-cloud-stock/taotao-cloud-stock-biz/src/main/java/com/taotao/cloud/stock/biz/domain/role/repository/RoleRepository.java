@@ -40,8 +40,7 @@ public interface RoleRepository {
      * @param roleId
      * @return
      */
-    com.taotao.cloud.stock.biz.domain.model.role.Role find(
-            com.taotao.cloud.stock.biz.domain.model.role.RoleId roleId);
+    com.taotao.cloud.stock.biz.domain.model.role.Role find(com.taotao.cloud.stock.biz.domain.model.role.RoleId roleId);
 
     /**
      * 获取角色

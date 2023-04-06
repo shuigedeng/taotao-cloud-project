@@ -82,8 +82,7 @@ public class JustAuthSourceServiceImpl extends ServiceImpl<JustAuthSourceMapper,
      * @return
      */
     @Override
-    public List<JustAuthSourceDTO> queryJustAuthSourceList(
-            QueryJustAuthSourceDTO queryJustAuthSourceDTO) {
+    public List<JustAuthSourceDTO> queryJustAuthSourceList(QueryJustAuthSourceDTO queryJustAuthSourceDTO) {
         List<JustAuthSourceDTO> justAuthSourceInfoList =
                 justAuthSourceMapper.queryJustAuthSourceList(queryJustAuthSourceDTO);
         return justAuthSourceInfoList;
@@ -97,8 +96,7 @@ public class JustAuthSourceServiceImpl extends ServiceImpl<JustAuthSourceMapper,
      */
     @Override
     public JustAuthSourceDTO queryJustAuthSource(QueryJustAuthSourceDTO queryJustAuthSourceDTO) {
-        JustAuthSourceDTO justAuthSourceDTO =
-                justAuthSourceMapper.queryJustAuthSource(queryJustAuthSourceDTO);
+        JustAuthSourceDTO justAuthSourceDTO = justAuthSourceMapper.queryJustAuthSource(queryJustAuthSourceDTO);
         return justAuthSourceDTO;
     }
 
@@ -110,8 +108,7 @@ public class JustAuthSourceServiceImpl extends ServiceImpl<JustAuthSourceMapper,
      */
     @Override
     public boolean createJustAuthSource(CreateJustAuthSourceDTO justAuthSource) {
-        JustAuthSource justAuthSourceEntity =
-                BeanCopierUtils.copyByClass(justAuthSource, JustAuthSource.class);
+        JustAuthSource justAuthSourceEntity = BeanCopierUtils.copyByClass(justAuthSource, JustAuthSource.class);
         boolean result = this.save(justAuthSourceEntity);
         if (result) {
             // 新增到缓存
@@ -131,8 +128,7 @@ public class JustAuthSourceServiceImpl extends ServiceImpl<JustAuthSourceMapper,
      */
     @Override
     public boolean updateJustAuthSource(UpdateJustAuthSourceDTO justAuthSource) {
-        JustAuthSource justAuthSourceEntity =
-                BeanCopierUtils.copyByClass(justAuthSource, JustAuthSource.class);
+        JustAuthSource justAuthSourceEntity = BeanCopierUtils.copyByClass(justAuthSource, JustAuthSource.class);
         boolean result = this.updateById(justAuthSourceEntity);
         if (result) {
             // 新增到缓存
@@ -202,14 +198,12 @@ public class JustAuthSourceServiceImpl extends ServiceImpl<JustAuthSourceMapper,
         // 判断是否开启了租户模式，如果开启了，那么角色权限需要按租户进行分类存储
         if (enable) {
             Map<Long, List<JustAuthSourceDTO>> authSourceListMap =
-                    justAuthSourceInfoList.stream()
-                            .collect(Collectors.groupingBy(JustAuthSourceDTO::getTenantId));
-            authSourceListMap.forEach(
-                    (key, value) -> {
-                        String redisKey = AuthConstant.SOCIAL_TENANT_SOURCE_KEY + key;
-                        redisTemplate.delete(redisKey);
-                        addJustAuthSource(redisKey, value);
-                    });
+                    justAuthSourceInfoList.stream().collect(Collectors.groupingBy(JustAuthSourceDTO::getTenantId));
+            authSourceListMap.forEach((key, value) -> {
+                String redisKey = AuthConstant.SOCIAL_TENANT_SOURCE_KEY + key;
+                redisTemplate.delete(redisKey);
+                addJustAuthSource(redisKey, value);
+            });
 
         } else {
             redisTemplate.delete(AuthConstant.SOCIAL_SOURCE_KEY);
@@ -219,18 +213,14 @@ public class JustAuthSourceServiceImpl extends ServiceImpl<JustAuthSourceMapper,
 
     private void addJustAuthSource(String key, List<JustAuthSourceDTO> sourceList) {
         Map<String, String> authConfigMap = new TreeMap<>();
-        Optional.ofNullable(sourceList)
-                .orElse(new ArrayList<>())
-                .forEach(
-                        source -> {
-                            try {
-                                authConfigMap.put(
-                                        source.getSourceName(), JsonUtils.objToJson(source));
-                                redisTemplate.opsForHash().putAll(key, authConfigMap);
-                            } catch (Exception e) {
-                                log.error("初始化第三方登录失败：{}", e);
-                            }
-                        });
+        Optional.ofNullable(sourceList).orElse(new ArrayList<>()).forEach(source -> {
+            try {
+                authConfigMap.put(source.getSourceName(), JsonUtils.objToJson(source));
+                redisTemplate.opsForHash().putAll(key, authConfigMap);
+            } catch (Exception e) {
+                log.error("初始化第三方登录失败：{}", e);
+            }
+        });
     }
 
     private void addOrUpdateJustAuthSourceCache(JustAuthSourceDTO justAuthSource) {
@@ -241,10 +231,7 @@ public class JustAuthSourceServiceImpl extends ServiceImpl<JustAuthSourceMapper,
             }
             redisTemplate
                     .opsForHash()
-                    .put(
-                            redisKey,
-                            justAuthSource.getSourceName(),
-                            JsonUtils.objToJson(justAuthSource));
+                    .put(redisKey, justAuthSource.getSourceName(), JsonUtils.objToJson(justAuthSource));
         } catch (Exception e) {
             log.error("修改第三方登录缓存失败：{}", e);
         }
@@ -258,10 +245,7 @@ public class JustAuthSourceServiceImpl extends ServiceImpl<JustAuthSourceMapper,
             }
             redisTemplate
                     .opsForHash()
-                    .delete(
-                            redisKey,
-                            justAuthSource.getSourceName(),
-                            JsonUtils.objToJson(justAuthSource));
+                    .delete(redisKey, justAuthSource.getSourceName(), JsonUtils.objToJson(justAuthSource));
         } catch (Exception e) {
             log.error("删除第三方登录缓存失败：{}", e);
         }

@@ -75,8 +75,7 @@ public class FileMD5Util {
     public static void main(String[] args) throws Exception {
 
         long start = System.currentTimeMillis();
-        String filePath =
-                "F:\\desktop\\uploads\\461ad6106d8253b94bd00546a4a1a8e4\\pycharm-professional-2019.1.3.exe";
+        String filePath = "F:\\desktop\\uploads\\461ad6106d8253b94bd00546a4a1a8e4\\pycharm-professional-2019.1.3.exe";
         File file = new File(filePath);
         String md5 = FileMD5Util.getFileMD5(file);
         long end = System.currentTimeMillis();

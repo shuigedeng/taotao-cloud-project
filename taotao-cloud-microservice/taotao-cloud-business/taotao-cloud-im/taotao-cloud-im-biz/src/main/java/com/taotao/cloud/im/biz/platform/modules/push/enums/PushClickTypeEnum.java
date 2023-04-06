@@ -37,7 +37,9 @@ public enum PushClickTypeEnum {
     NONE("none", "纯通知，无后续动作"),
     ;
 
-    @JsonValue private String code;
+    @JsonValue
+    private String code;
+
     private String info;
 
     PushClickTypeEnum(String code, String info) {

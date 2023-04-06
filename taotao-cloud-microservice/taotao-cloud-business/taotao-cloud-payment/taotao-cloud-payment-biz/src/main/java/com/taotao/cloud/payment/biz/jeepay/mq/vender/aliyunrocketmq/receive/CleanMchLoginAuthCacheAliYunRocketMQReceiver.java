@@ -36,7 +36,8 @@ public class CleanMchLoginAuthCacheAliYunRocketMQReceiver extends AbstractAliYun
 
     private static final String CONSUMER_NAME = "清除商户登录消息";
 
-    @Autowired private CleanMchLoginAuthCacheMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private CleanMchLoginAuthCacheMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 queue 】 类型的消息 */
     @Override

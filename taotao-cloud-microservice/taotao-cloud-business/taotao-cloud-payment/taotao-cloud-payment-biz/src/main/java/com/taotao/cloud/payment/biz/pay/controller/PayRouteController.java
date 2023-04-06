@@ -107,8 +107,7 @@ public class PayRouteController {
     @SneakyThrows
     @GetMapping("/call")
     @Anonymous(value = false)
-    public ModelAndView call(
-            PayOrderDto payOrderDto, HttpServletRequest request, ModelAndView modelAndView) {
+    public ModelAndView call(PayOrderDto payOrderDto, HttpServletRequest request, ModelAndView modelAndView) {
         payOrderDto.setQuitUrl(payProperties.getDomain() + "pay/route");
         if (ObjectUtil.isNotNull(getTenant(XHuiCommonThreadLocalHolder.getTenant()))) {
             if (UserAgentUtil.isWeChat(request)) {

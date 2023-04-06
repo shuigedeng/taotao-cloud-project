@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleStoreController {
 
     /** 文章 */
-    @Autowired private ArticleService articleService;
+    @Autowired
+    private ArticleService articleService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -54,8 +55,7 @@ public class ArticleStoreController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "查看文章")
     @GetMapping(value = "/{id}")
-    public Result<Article> get(
-            @Parameter(description = "文章ID", required = true) @PathVariable String id) {
+    public Result<Article> get(@Parameter(description = "文章ID", required = true) @PathVariable String id) {
         return Result.success(articleService.getById(id));
     }
 }

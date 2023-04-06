@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/collect")
 public class CollectController extends BaseController {
 
-    @Resource private ChatCollectService collectService;
+    @Resource
+    private ChatCollectService collectService;
 
     /** 增加 */
     @ApiVersion(VersionEnum.V1_0_0)

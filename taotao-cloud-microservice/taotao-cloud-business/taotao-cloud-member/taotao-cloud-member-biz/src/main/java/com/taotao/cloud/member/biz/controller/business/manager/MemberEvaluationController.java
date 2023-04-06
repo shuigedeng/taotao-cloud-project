@@ -65,12 +65,9 @@ public class MemberEvaluationController {
     @Operation(summary = "获取评价分页", description = "获取评价分页")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    public Result<PageResult<MemberEvaluationListVO>> queryPage(
-            EvaluationPageQuery evaluationPageQuery) {
-        IPage<MemberEvaluation> memberEvaluationPage =
-                memberEvaluationService.queryPage(evaluationPageQuery);
-        return Result.success(
-                PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
+    public Result<PageResult<MemberEvaluationListVO>> queryPage(EvaluationPageQuery evaluationPageQuery) {
+        IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.queryPage(evaluationPageQuery);
+        return Result.success(PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
     }
 
     @Operation(summary = "修改评价状态", description = "修改评价状态")
@@ -79,8 +76,7 @@ public class MemberEvaluationController {
     @GetMapping(value = "/status/{id}")
     public Result<Boolean> updateStatus(
             @PathVariable Long id,
-            @Parameter(description = "显示状态,OPEN 正常 ,CLOSE 关闭", required = true) @NotNull
-                    String status) {
+            @Parameter(description = "显示状态,OPEN 正常 ,CLOSE 关闭", required = true) @NotNull String status) {
         return Result.success(memberEvaluationService.updateStatus(id, status));
     }
 

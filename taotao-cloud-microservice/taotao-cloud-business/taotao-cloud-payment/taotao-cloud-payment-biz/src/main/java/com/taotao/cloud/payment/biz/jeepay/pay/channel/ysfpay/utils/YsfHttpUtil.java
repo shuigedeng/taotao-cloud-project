@@ -57,8 +57,7 @@ public class YsfHttpUtil {
         return doGet(url, params, null);
     }
 
-    public static String doGet(String url, Map<String, Object> headers, Map<String, Object> params)
-            throws Exception {
+    public static String doGet(String url, Map<String, Object> headers, Map<String, Object> params) throws Exception {
         String getUrl = buildGetUrl(url, params);
         return doRequest(getUrl, "GET", headers, null);
     }
@@ -71,18 +70,16 @@ public class YsfHttpUtil {
         return doPost(url, null, params);
     }
 
-    public static String doPost(String url, Map<String, Object> headers, Map<String, Object> params)
-            throws Exception {
+    public static String doPost(String url, Map<String, Object> headers, Map<String, Object> params) throws Exception {
         return doPostStr(url, headers, buildQueryParams(params));
     }
 
-    public static String doPostStr(String url, Map<String, Object> headers, String data)
-            throws Exception {
+    public static String doPostStr(String url, Map<String, Object> headers, String data) throws Exception {
         return doRequest(url, "POST", headers, data);
     }
 
-    public static String doPostJson(
-            String url, Map<String, Object> headers, Map<String, Object> params) throws Exception {
+    public static String doPostJson(String url, Map<String, Object> headers, Map<String, Object> params)
+            throws Exception {
         if (headers == null) {
             headers = new HashMap<String, Object>();
         }
@@ -93,10 +90,7 @@ public class YsfHttpUtil {
     }
 
     public static String doPostFile(
-            String url,
-            Map<String, Object> headers,
-            Map<String, Object> params,
-            Map<String, FileItem> fileParams)
+            String url, Map<String, Object> headers, Map<String, Object> params, Map<String, FileItem> fileParams)
             throws Exception {
         HttpURLConnection http = null;
         InputStream in = null;
@@ -106,8 +100,7 @@ public class YsfHttpUtil {
 
             http = getHttpConnection(url, "POST");
             http.setRequestProperty(
-                    "Content-Type",
-                    "multipart/form-data; boundary=" + boundary + ";charset=" + DEFAULT_CHARSET);
+                    "Content-Type", "multipart/form-data; boundary=" + boundary + ";charset=" + DEFAULT_CHARSET);
 
             // 添加HTTP请求头
             if (headers != null && !headers.isEmpty()) {
@@ -122,8 +115,7 @@ public class YsfHttpUtil {
             byte[] entryBoundaryBytes = ("\r\n--" + boundary + "\r\n").getBytes(DEFAULT_CHARSET);
             if (params != null && !params.isEmpty()) {
                 for (Entry<String, Object> textEntry : params.entrySet()) {
-                    byte[] textBytes =
-                            getTextEntry(textEntry.getKey(), String.valueOf(textEntry.getValue()));
+                    byte[] textBytes = getTextEntry(textEntry.getKey(), String.valueOf(textEntry.getValue()));
                     out.write(entryBoundaryBytes);
                     out.write(textBytes);
                 }
@@ -133,11 +125,7 @@ public class YsfHttpUtil {
             if (fileParams != null && !fileParams.isEmpty()) {
                 for (Entry<String, FileItem> fileEntry : fileParams.entrySet()) {
                     FileItem fileItem = fileEntry.getValue();
-                    byte[] fileBytes =
-                            getFileEntry(
-                                    fileEntry.getKey(),
-                                    fileItem.getFileName(),
-                                    fileItem.getMimeType());
+                    byte[] fileBytes = getFileEntry(fileEntry.getKey(), fileItem.getFileName(), fileItem.getMimeType());
                     out.write(entryBoundaryBytes);
                     out.write(fileBytes);
                     out.write(fileItem.getContent());
@@ -176,8 +164,8 @@ public class YsfHttpUtil {
         }
     }
 
-    public static String doRequest(
-            String url, String method, Map<String, Object> headers, String data) throws Exception {
+    public static String doRequest(String url, String method, Map<String, Object> headers, String data)
+            throws Exception {
         HttpURLConnection http = null;
         InputStream in = null;
         OutputStream out = null;
@@ -224,10 +212,7 @@ public class YsfHttpUtil {
         boolean isSSL = url.startsWith("https");
         if (isSSL) {
             SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(
-                    new KeyManager[0],
-                    new TrustManager[] {new SimpleTrustManager()},
-                    new SecureRandom());
+            sslContext.init(new KeyManager[0], new TrustManager[] {new SimpleTrustManager()}, new SecureRandom());
             SSLSocketFactory sslf = sslContext.getSocketFactory();
 
             HttpsURLConnection https = (HttpsURLConnection) new URL(url).openConnection();
@@ -304,9 +289,7 @@ public class YsfHttpUtil {
             } else {
                 hasParam = true;
             }
-            query.append(entry.getKey())
-                    .append("=")
-                    .append(URLEncoder.encode(v.toString(), DEFAULT_CHARSET));
+            query.append(entry.getKey()).append("=").append(URLEncoder.encode(v.toString(), DEFAULT_CHARSET));
         }
         return query.toString();
     }
@@ -320,8 +303,7 @@ public class YsfHttpUtil {
         return entry.toString().getBytes(DEFAULT_CHARSET);
     }
 
-    private static byte[] getFileEntry(String fieldName, String fileName, String mimeType)
-            throws Exception {
+    private static byte[] getFileEntry(String fieldName, String fileName, String mimeType) throws Exception {
         StringBuilder entry = new StringBuilder();
         entry.append("Content-Disposition:form-data; name=\"");
         entry.append(fieldName);
@@ -347,12 +329,10 @@ public class YsfHttpUtil {
         }
 
         @Override
-        public void checkServerTrusted(X509Certificate[] chain, String authType)
-                throws CertificateException {}
+        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
 
         @Override
-        public void checkClientTrusted(X509Certificate[] chain, String authType)
-                throws CertificateException {}
+        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
     }
 
     public static class FileItem {
@@ -458,12 +438,10 @@ public class YsfHttpUtil {
         if (CS.PAY_WAY_CODE.ALI_JSAPI.equals(wayCode) || CS.PAY_WAY_CODE.ALI_BAR.equals(wayCode)) {
             return "alipay";
 
-        } else if (CS.PAY_WAY_CODE.WX_JSAPI.equals(wayCode)
-                || CS.PAY_WAY_CODE.WX_BAR.equals(wayCode)) {
+        } else if (CS.PAY_WAY_CODE.WX_JSAPI.equals(wayCode) || CS.PAY_WAY_CODE.WX_BAR.equals(wayCode)) {
             return "wechat";
 
-        } else if (CS.PAY_WAY_CODE.YSF_JSAPI.equals(wayCode)
-                || CS.PAY_WAY_CODE.YSF_BAR.equals(wayCode)) {
+        } else if (CS.PAY_WAY_CODE.YSF_JSAPI.equals(wayCode) || CS.PAY_WAY_CODE.YSF_BAR.equals(wayCode)) {
             return "unionpay";
         }
         return null;

@@ -32,7 +32,8 @@ public class DistributionSelectedGoodsServiceImpl
         implements IDistributionSelectedGoodsService {
 
     /** 分销员 */
-    @Autowired private IDistributionService distributionService;
+    @Autowired
+    private IDistributionService distributionService;
 
     @Override
     public boolean add(String distributionGoodsId) {
@@ -51,18 +52,14 @@ public class DistributionSelectedGoodsServiceImpl
         distributionService.checkDistributionSetting();
 
         String distributionId = distributionService.getDistribution().getId();
-        return this.remove(
-                new LambdaQueryWrapper<DistributionSelectedGoods>()
-                        .eq(DistributionSelectedGoods::getDistributionGoodsId, distributionGoodsId)
-                        .eq(DistributionSelectedGoods::getDistributionId, distributionId));
+        return this.remove(new LambdaQueryWrapper<DistributionSelectedGoods>()
+                .eq(DistributionSelectedGoods::getDistributionGoodsId, distributionGoodsId)
+                .eq(DistributionSelectedGoods::getDistributionId, distributionId));
     }
 
     @Override
     public boolean deleteByDistributionGoodsId(String distributionGoodsId) {
-        return this.remove(
-                new LambdaQueryWrapper<DistributionSelectedGoods>()
-                        .eq(
-                                DistributionSelectedGoods::getDistributionGoodsId,
-                                distributionGoodsId));
+        return this.remove(new LambdaQueryWrapper<DistributionSelectedGoods>()
+                .eq(DistributionSelectedGoods::getDistributionGoodsId, distributionGoodsId));
     }
 }

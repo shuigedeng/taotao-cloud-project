@@ -40,5 +40,6 @@ public record ReceiptDTO(
         @Schema(description = "小计") BigDecimal subtotal)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

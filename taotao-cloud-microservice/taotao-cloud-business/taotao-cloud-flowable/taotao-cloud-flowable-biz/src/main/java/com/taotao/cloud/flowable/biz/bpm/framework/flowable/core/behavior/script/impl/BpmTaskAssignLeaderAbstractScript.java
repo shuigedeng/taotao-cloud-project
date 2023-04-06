@@ -40,9 +40,14 @@ import org.springframework.util.Assert;
  */
 public abstract class BpmTaskAssignLeaderAbstractScript implements BpmTaskAssignScript {
 
-    @Resource private AdminUserApi adminUserApi;
-    @Resource private DeptApi deptApi;
-    @Resource @Lazy // 解决循环依赖
+    @Resource
+    private AdminUserApi adminUserApi;
+
+    @Resource
+    private DeptApi deptApi;
+
+    @Resource
+    @Lazy // 解决循环依赖
     private BpmProcessInstanceService bpmProcessInstanceService;
 
     protected Set<Long> calculateTaskCandidateUsers(DelegateExecution execution, int level) {

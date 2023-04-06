@@ -43,7 +43,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, PurchaseOrder>
         implements IPurchaseOrderService {
 
-    @Autowired private IPurchaseOrderItemService purchaseOrderItemService;
+    @Autowired
+    private IPurchaseOrderItemService purchaseOrderItemService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -55,8 +56,7 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, 
         purchaseOrder.setMemberId(UserContext.getCurrentUser().getId());
         this.save(purchaseOrder);
         // 添加采购单子内容
-        purchaseOrderItemService.addPurchaseOrderItem(
-                purchaseOrder.getId(), purchaseOrderVO.getPurchaseOrderItems());
+        purchaseOrderItemService.addPurchaseOrderItem(purchaseOrder.getId(), purchaseOrderVO.getPurchaseOrderItems());
         return purchaseOrderVO;
     }
 
@@ -68,10 +68,8 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, 
         BeanUtil.copyProperties(purchaseOrder, purchaseOrderVO);
 
         // 获取采购单子内容
-        purchaseOrderVO.setPurchaseOrderItems(
-                purchaseOrderItemService.list(
-                        new LambdaQueryWrapper<PurchaseOrderItem>()
-                                .eq(PurchaseOrderItem::getPurchaseOrderId, id)));
+        purchaseOrderVO.setPurchaseOrderItems(purchaseOrderItemService.list(
+                new LambdaQueryWrapper<PurchaseOrderItem>().eq(PurchaseOrderItem::getPurchaseOrderId, id)));
         return purchaseOrderVO;
     }
 

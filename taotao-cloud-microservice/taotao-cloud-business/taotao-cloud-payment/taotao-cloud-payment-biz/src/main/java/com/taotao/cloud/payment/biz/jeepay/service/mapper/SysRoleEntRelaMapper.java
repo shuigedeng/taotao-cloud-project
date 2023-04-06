@@ -28,6 +28,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface SysRoleEntRelaMapper extends BaseSuperMapper<SysRoleEntRela> {
 
-    List<String> selectEntIdsByUserId(
-            @Param("userId") Long userId, @Param("sysType") String sysType);
+    List<String> selectEntIdsByUserId(@Param("userId") Long userId, @Param("sysType") String sysType);
 }

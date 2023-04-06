@@ -34,8 +34,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @version 2022.03
  * @since 2020/11/20 下午4:10
  */
-public class FeignMemberEvaluationApiFallback
-        implements FallbackFactory<IFeignMemberEvaluationApi> {
+public class FeignMemberEvaluationApiFallback implements FallbackFactory<IFeignMemberEvaluationApi> {
     @Override
     public IFeignMemberEvaluationApi create(Throwable throwable) {
         return new IFeignMemberEvaluationApi() {
@@ -76,8 +75,7 @@ public class FeignMemberEvaluationApiFallback
             }
 
             @Override
-            public PageResult<MemberEvaluationListVO> queryPage(
-                    EvaluationPageQuery evaluationPageQuery) {
+            public PageResult<MemberEvaluationListVO> queryPage(EvaluationPageQuery evaluationPageQuery) {
                 return null;
             }
         };

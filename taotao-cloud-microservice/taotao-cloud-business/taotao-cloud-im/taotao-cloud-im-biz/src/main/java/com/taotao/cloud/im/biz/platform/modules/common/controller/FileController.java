@@ -34,7 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public class FileController {
 
-    @Resource private FileService fileService;
+    @Resource
+    private FileService fileService;
 
     /** 通用上传请求 */
     @ApiVersion(VersionEnum.V1_0_0)

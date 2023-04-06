@@ -28,8 +28,7 @@ import org.apache.commons.lang3.time.DateUtils;
 public class JsonDateDeserializer extends JsonDeserializer<Date> {
 
     @Override
-    public Date deserialize(JsonParser jsonParser, DeserializationContext context)
-            throws IOException {
+    public Date deserialize(JsonParser jsonParser, DeserializationContext context) throws IOException {
         String date = jsonParser.getText();
         return parseDate(date);
     }

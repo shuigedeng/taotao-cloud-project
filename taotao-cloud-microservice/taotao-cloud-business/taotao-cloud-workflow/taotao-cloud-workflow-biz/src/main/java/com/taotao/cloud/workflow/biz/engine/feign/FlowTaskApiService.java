@@ -54,12 +54,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Service
 public class FlowTaskApiService implements FlowTaskApi {
 
-    @Autowired private FlowDynamicService flowDynamicService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FlowTaskNewService flowTaskNewService;
-    @Autowired private FlowTaskNodeService flowTaskNodeService;
-    @Autowired private FlowEngineService flowEngineService;
-    @Autowired private FlowDelegateService flowDelegateService;
+    @Autowired
+    private FlowDynamicService flowDynamicService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FlowTaskNewService flowTaskNewService;
+
+    @Autowired
+    private FlowTaskNodeService flowTaskNodeService;
+
+    @Autowired
+    private FlowEngineService flowEngineService;
+
+    @Autowired
+    private FlowDelegateService flowDelegateService;
 
     /**
      * 动态表单信息
@@ -69,8 +80,7 @@ public class FlowTaskApiService implements FlowTaskApi {
      */
     @ApiOperation("动态表单信息")
     @GetMapping("/{id}")
-    public ActionResult dataInfo(@PathVariable("id") String id, String taskOperatorId)
-            throws WorkFlowException {
+    public ActionResult dataInfo(@PathVariable("id") String id, String taskOperatorId) throws WorkFlowException {
         FlowTaskEntity entity = flowTaskService.getInfo(id);
         FlowTaskInfoVO vo = flowDynamicService.info(entity, taskOperatorId);
         return ActionResult.success(vo);
@@ -101,8 +111,7 @@ public class FlowTaskApiService implements FlowTaskApi {
      */
     @ApiOperation("提交")
     @PutMapping("/{id}")
-    public ActionResult submit(
-            @RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id)
+    public ActionResult submit(@RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
             flowDynamicService.save(id, flowTaskForm);
@@ -197,8 +206,7 @@ public class FlowTaskApiService implements FlowTaskApi {
     @Override
     @PostMapping("/Revoke")
     public void revoke(@RequestBody FlowRevokeModel flowRevokeModel) throws WorkFlowException {
-        FlowModel flowModel =
-                JsonUtil.getJsonToBean(flowRevokeModel.getFlowHandleModel(), FlowModel.class);
+        FlowModel flowModel = JsonUtil.getJsonToBean(flowRevokeModel.getFlowHandleModel(), FlowModel.class);
         flowTaskNewService.revoke(flowRevokeModel.getFlowTaskEntity(), flowModel);
     }
 
@@ -280,8 +288,7 @@ public class FlowTaskApiService implements FlowTaskApi {
 
     @Override
     @GetMapping("/getInfoByEnCode/{encode}")
-    public FlowEngineEntity getInfoByEnCode(@PathVariable("encode") String encode)
-            throws WorkFlowException {
+    public FlowEngineEntity getInfoByEnCode(@PathVariable("encode") String encode) throws WorkFlowException {
         return flowEngineService.getInfoByEnCode(encode);
     }
 

@@ -56,8 +56,7 @@ public class TempData {
      * @param lRealHandle 预览句柄
      * @param lChannel 通道句柄
      */
-    public void setNativeLong(
-            String IPKey, NativeLong lUserID, NativeLong lRealHandle, NativeLong lChannel) {
+    public void setNativeLong(String IPKey, NativeLong lUserID, NativeLong lRealHandle, NativeLong lChannel) {
         MyNativeLong myNativeLong = new MyNativeLong();
 
         myNativeLong.setlUserID(lUserID);

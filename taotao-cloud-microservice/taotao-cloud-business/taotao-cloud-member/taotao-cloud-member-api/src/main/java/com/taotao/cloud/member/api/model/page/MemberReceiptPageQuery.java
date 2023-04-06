@@ -41,7 +41,8 @@ import lombok.Setter;
 @Schema(description = "会员发票查询DTO")
 public class MemberReceiptPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = -8210927982915677995L;
+    @Serial
+    private static final long serialVersionUID = -8210927982915677995L;
 
     @Schema(description = "会员ID")
     private String memberId;

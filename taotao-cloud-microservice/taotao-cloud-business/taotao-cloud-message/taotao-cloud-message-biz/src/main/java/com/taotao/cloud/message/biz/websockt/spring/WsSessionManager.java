@@ -24,8 +24,7 @@ import org.springframework.web.socket.WebSocketSession;
 @Slf4j
 public class WsSessionManager {
     /** 保存连接 session 的地方 */
-    private static final ConcurrentHashMap<String, WebSocketSession> SESSION_POOL =
-            new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, WebSocketSession> SESSION_POOL = new ConcurrentHashMap<>();
 
     /**
      * 添加 session

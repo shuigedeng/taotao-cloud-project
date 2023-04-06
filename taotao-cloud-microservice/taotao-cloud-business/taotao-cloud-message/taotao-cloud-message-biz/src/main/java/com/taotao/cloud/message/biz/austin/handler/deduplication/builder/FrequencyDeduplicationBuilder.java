@@ -37,13 +37,11 @@ public class FrequencyDeduplicationBuilder extends AbstractDeduplicationBuilder 
 
     @Override
     public DeduplicationParam build(String deduplication, TaskInfo taskInfo) {
-        DeduplicationParam deduplicationParam =
-                getParamsFromConfig(deduplicationType, deduplication, taskInfo);
+        DeduplicationParam deduplicationParam = getParamsFromConfig(deduplicationType, deduplication, taskInfo);
         if (deduplicationParam == null) {
             return null;
         }
-        deduplicationParam.setDeduplicationTime(
-                (DateUtil.endOfDay(new Date()).getTime() - DateUtil.current()) / 1000);
+        deduplicationParam.setDeduplicationTime((DateUtil.endOfDay(new Date()).getTime() - DateUtil.current()) / 1000);
         deduplicationParam.setAnchorState(AnchorState.RULE_DEDUPLICATION);
         return deduplicationParam;
     }

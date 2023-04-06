@@ -29,9 +29,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
-        value = ServiceName.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = FeignCategoryApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignCategoryApiFallback.class)
 public interface IFeignCategoryApi {
 
     @GetMapping(value = "/category/first/id/{id:[0-9]*}")

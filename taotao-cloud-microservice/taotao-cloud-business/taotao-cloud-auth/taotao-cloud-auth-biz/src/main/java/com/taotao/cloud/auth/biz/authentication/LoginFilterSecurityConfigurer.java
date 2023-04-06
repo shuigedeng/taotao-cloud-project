@@ -151,10 +151,8 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>>
      * @return the login filter security configurer
      */
     public LoginFilterSecurityConfigurer<H> fingerprintLogin(
-            Customizer<FingerprintLoginFilterConfigurer<H>>
-                    fingerprintLoginFilterConfigurerCustomizer) {
-        fingerprintLoginFilterConfigurerCustomizer.customize(
-                lazyInitFingerprintLoginFilterConfigurer());
+            Customizer<FingerprintLoginFilterConfigurer<H>> fingerprintLoginFilterConfigurerCustomizer) {
+        fingerprintLoginFilterConfigurerCustomizer.customize(lazyInitFingerprintLoginFilterConfigurer());
         return this;
     }
 
@@ -348,11 +346,9 @@ public class LoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>>
         return miniAppLoginFilterConfigurer;
     }
 
-    private AccountVerificationLoginFilterConfigurer<H>
-            lazyInitAccountVerificationLoginFilterConfigurer() {
+    private AccountVerificationLoginFilterConfigurer<H> lazyInitAccountVerificationLoginFilterConfigurer() {
         if (accountVerificationLoginFilterConfigurer == null) {
-            this.accountVerificationLoginFilterConfigurer =
-                    new AccountVerificationLoginFilterConfigurer<>(this);
+            this.accountVerificationLoginFilterConfigurer = new AccountVerificationLoginFilterConfigurer<>(this);
         }
         return accountVerificationLoginFilterConfigurer;
     }

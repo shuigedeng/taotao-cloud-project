@@ -38,25 +38,24 @@ import me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
  * @author 芋道源码
  */
 @TableName(value = "mp_auto_reply", autoResultMap = true)
-@KeySequence(
-        "mp_auto_reply_seq") // 用于 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库的主键自增。如果是 MySQL 等数据库，可不写。
+@KeySequence("mp_auto_reply_seq") // 用于 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库的主键自增。如果是 MySQL 等数据库，可不写。
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class MpAutoReplyDO extends BaseDO {
 
-    public static Set<String> REQUEST_MESSAGE_TYPE =
-            SetUtils.asSet(
-                    XmlMsgType.TEXT,
-                    XmlMsgType.IMAGE,
-                    XmlMsgType.VOICE,
-                    XmlMsgType.VIDEO,
-                    XmlMsgType.SHORTVIDEO,
-                    XmlMsgType.LOCATION,
-                    XmlMsgType.LINK);
+    public static Set<String> REQUEST_MESSAGE_TYPE = SetUtils.asSet(
+            XmlMsgType.TEXT,
+            XmlMsgType.IMAGE,
+            XmlMsgType.VOICE,
+            XmlMsgType.VIDEO,
+            XmlMsgType.SHORTVIDEO,
+            XmlMsgType.LOCATION,
+            XmlMsgType.LINK);
 
     /** 主键 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /**
      * 公众号账号的编号
      *

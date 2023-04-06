@@ -42,18 +42,14 @@ public class ShortLinkInvoker {
 
     public List<ShortLinkDTO> listShortLinkCode(ShortLinkListRequest request) {
         try {
-            CommonResponse<List<ShortLinkDTO>> response =
-                    shortLinkService.listShortLinkCode(request);
+            CommonResponse<List<ShortLinkDTO>> response = shortLinkService.listShortLinkCode(request);
             if (CommonBizUtil.isSuccessResponse(response)) {
                 return Optional.ofNullable(response.getData()).orElse(Collections.emptyList());
             }
 
             log.warn("listShortLinkCode: 查短链失败, request -> {}", JSONObject.toJSONString(request));
         } catch (Exception e) {
-            log.warn(
-                    "listShortLinkCode: 查短链错误, request -> {},e -> {}",
-                    JSONObject.toJSONString(request),
-                    e.toString());
+            log.warn("listShortLinkCode: 查短链错误, request -> {},e -> {}", JSONObject.toJSONString(request), e.toString());
         }
 
         return Collections.emptyList();

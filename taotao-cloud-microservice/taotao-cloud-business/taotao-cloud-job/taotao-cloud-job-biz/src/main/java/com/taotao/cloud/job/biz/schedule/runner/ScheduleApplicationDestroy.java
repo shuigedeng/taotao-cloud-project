@@ -29,7 +29,8 @@ public class ScheduleApplicationDestroy implements DisposableBean {
 
     private final Logger logger = LoggerFactory.getLogger(ScheduleApplicationRunner.class);
 
-    @Resource private TaskManager taskManager;
+    @Resource
+    private TaskManager taskManager;
 
     @Override
     public void destroy() throws Exception {

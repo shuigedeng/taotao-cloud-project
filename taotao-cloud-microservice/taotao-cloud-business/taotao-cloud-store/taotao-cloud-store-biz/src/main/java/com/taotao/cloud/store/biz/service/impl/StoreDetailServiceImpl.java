@@ -58,19 +58,23 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, StoreDetail>
-        implements IStoreDetailService {
+public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, StoreDetail> implements IStoreDetailService {
 
     /** 店铺 */
-    @Autowired private IStoreService storeService;
+    @Autowired
+    private IStoreService storeService;
     /** 分类 */
-    @Autowired private IFeignCategoryApi categoryApi;
+    @Autowired
+    private IFeignCategoryApi categoryApi;
 
-    @Autowired private IFeignGoodsApi goodsApi;
+    @Autowired
+    private IFeignGoodsApi goodsApi;
 
-    @Autowired private RocketmqCustomProperties rocketmqCustomProperties;
+    @Autowired
+    private RocketmqCustomProperties rocketmqCustomProperties;
 
-    @Autowired private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     public StoreDetailInfoVO getStoreDetailVO(Long storeId) {
@@ -106,22 +110,17 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
     public void updateStoreGoodsInfo(Store store) {
         goodsApi.updateStoreDetail(store.getId());
 
-        Map<String, Object> updateIndexFieldsMap =
-                EsIndexUtil.getUpdateIndexFieldsMap(
-                        MapUtil.builder().put("storeId", store.getId()).build(),
-                        MapUtil.builder()
-                                .put("storeName", store.getStoreName())
-                                .put("selfOperated", store.getSelfOperated())
-                                .build());
+        Map<String, Object> updateIndexFieldsMap = EsIndexUtil.getUpdateIndexFieldsMap(
+                MapUtil.builder().put("storeId", store.getId()).build(),
+                MapUtil.builder()
+                        .put("storeName", store.getStoreName())
+                        .put("selfOperated", store.getSelfOperated())
+                        .build());
         String destination =
-                rocketmqCustomProperties.getGoodsTopic()
-                        + ":"
-                        + GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
+                rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
         // 发送mq消息
         rocketMQTemplate.asyncSend(
-                destination,
-                JSONUtil.toJsonStr(updateIndexFieldsMap),
-                RocketmqSendCallbackBuilder.commonCallback());
+                destination, JSONUtil.toJsonStr(updateIndexFieldsMap), RocketmqSendCallbackBuilder.commonCallback());
     }
 
     @Override
@@ -153,8 +152,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
 
     @Override
     public StoreAfterSaleAddressDTO getStoreAfterSaleAddressDTO(Long id) {
-        StoreAfterSaleAddressDTO storeAfterSaleAddressDTO =
-                this.baseMapper.getStoreAfterSaleAddressDTO(id);
+        StoreAfterSaleAddressDTO storeAfterSaleAddressDTO = this.baseMapper.getStoreAfterSaleAddressDTO(id);
         if (storeAfterSaleAddressDTO == null) {
             storeAfterSaleAddressDTO = new StoreAfterSaleAddressDTO();
         }
@@ -165,21 +163,15 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
     public boolean editStoreAfterSaleAddressDTO(StoreAfterSaleAddressDTO storeAfterSaleAddressDTO) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         LambdaUpdateWrapper<StoreDetail> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+        lambdaUpdateWrapper.set(StoreDetail::getSalesConsigneeName, storeAfterSaleAddressDTO.getSalesConsigneeName());
         lambdaUpdateWrapper.set(
-                StoreDetail::getSalesConsigneeName,
-                storeAfterSaleAddressDTO.getSalesConsigneeName());
+                StoreDetail::getSalesConsigneeAddressId, storeAfterSaleAddressDTO.getSalesConsigneeAddressId());
         lambdaUpdateWrapper.set(
-                StoreDetail::getSalesConsigneeAddressId,
-                storeAfterSaleAddressDTO.getSalesConsigneeAddressId());
+                StoreDetail::getSalesConsigneeAddressPath, storeAfterSaleAddressDTO.getSalesConsigneeAddressPath());
         lambdaUpdateWrapper.set(
-                StoreDetail::getSalesConsigneeAddressPath,
-                storeAfterSaleAddressDTO.getSalesConsigneeAddressPath());
+                StoreDetail::getSalesConsigneeDetail, storeAfterSaleAddressDTO.getSalesConsigneeDetail());
         lambdaUpdateWrapper.set(
-                StoreDetail::getSalesConsigneeDetail,
-                storeAfterSaleAddressDTO.getSalesConsigneeDetail());
-        lambdaUpdateWrapper.set(
-                StoreDetail::getSalesConsigneeMobile,
-                storeAfterSaleAddressDTO.getSalesConsigneeMobile());
+                StoreDetail::getSalesConsigneeMobile, storeAfterSaleAddressDTO.getSalesConsigneeMobile());
         lambdaUpdateWrapper.eq(StoreDetail::getStoreId, storeId);
         return this.update(lambdaUpdateWrapper);
     }
@@ -200,8 +192,7 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
         List<CategoryTreeVO> categoryList = categoryApi.firstCategory();
         // 获取店铺信息
         StoreDetail storeDetail =
-                this.getOne(
-                        new LambdaQueryWrapper<StoreDetail>().eq(StoreDetail::getStoreId, storeId));
+                this.getOne(new LambdaQueryWrapper<StoreDetail>().eq(StoreDetail::getStoreId, storeId));
         // 获取店铺分类
         String[] storeCategoryList = storeDetail.getGoodsManagementCategory().split(",");
         List<StoreManagementCategoryVO> list = new ArrayList<>();

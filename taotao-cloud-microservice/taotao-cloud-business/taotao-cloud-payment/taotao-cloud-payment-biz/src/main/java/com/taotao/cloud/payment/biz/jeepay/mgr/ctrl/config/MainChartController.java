@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/mainChart")
 public class MainChartController extends CommonCtrl {
 
-    @Autowired private PayOrderService payOrderService;
+    @Autowired
+    private PayOrderService payOrderService;
 
     /**
      * @author: pangxiaoyu
@@ -97,8 +98,7 @@ public class MainChartController extends CommonCtrl {
         // 开始、结束时间
         String createdStart = paramJSON.getString("createdStart");
         String createdEnd = paramJSON.getString("createdEnd");
-        ArrayList arrayResult =
-                payOrderService.mainPagePayTypeCount(null, createdStart, createdEnd);
+        ArrayList arrayResult = payOrderService.mainPagePayTypeCount(null, createdStart, createdEnd);
         return ApiRes.ok(arrayResult);
     }
 }

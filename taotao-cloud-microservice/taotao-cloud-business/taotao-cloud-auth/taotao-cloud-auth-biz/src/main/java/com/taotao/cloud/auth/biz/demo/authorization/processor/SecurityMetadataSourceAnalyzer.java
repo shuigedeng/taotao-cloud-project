@@ -58,12 +58,10 @@ public class SecurityMetadataSourceAnalyzer {
      * @param resources 权限数据
      */
     private void appendToGroup(
-            Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>>
-                    container,
+            Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> container,
             Category category,
             LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> resources) {
-        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> value =
-                new LinkedHashMap<>();
+        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> value = new LinkedHashMap<>();
 
         if (container.containsKey(category)) {
             value = container.get(category);
@@ -79,20 +77,16 @@ public class SecurityMetadataSourceAnalyzer {
      * @param requestMap 静态权限数据
      * @return 分组后的权限数据
      */
-    private Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>>
-            groupSecurityMatchers(
-                    LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> requestMap) {
+    private Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> groupSecurityMatchers(
+            LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> requestMap) {
 
-        Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> group =
-                new LinkedHashMap<>();
+        Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> group = new LinkedHashMap<>();
 
-        requestMap.forEach(
-                (key, value) -> {
-                    LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> resources =
-                            new LinkedHashMap<>();
-                    resources.put(key, value);
-                    appendToGroup(group, Category.getCategory(key.getPattern()), resources);
-                });
+        requestMap.forEach((key, value) -> {
+            LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> resources = new LinkedHashMap<>();
+            resources.put(key, value);
+            appendToGroup(group, Category.getCategory(key.getPattern()), resources);
+        });
 
         return group;
     }
@@ -113,8 +107,8 @@ public class SecurityMetadataSourceAnalyzer {
         LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> requestMappings =
                 securityMetadataSourceParser.getConfiguredSecurityMetadata();
         if (MapUtils.isNotEmpty(requestMappings)) {
-            Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>>
-                    grouping = groupSecurityMatchers(requestMappings);
+            Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> grouping =
+                    groupSecurityMatchers(requestMappings);
 
             LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> wildcards =
                     grouping.get(Category.WILDCARD);
@@ -139,16 +133,14 @@ public class SecurityMetadataSourceAnalyzer {
         LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> compatibles =
                 securityMetadataSourceStorage.getCompatible();
         // 创建一个临时的 Matcher 容器
-        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> matchers =
-                new LinkedHashMap<>(compatibles);
+        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> matchers = new LinkedHashMap<>(compatibles);
 
         // 对分发的 SecurityAttributes 进行分组
         Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> grouping =
                 groupingSecurityAttributes(securityAttributes);
 
         // 拿到带有通配符的分组数据
-        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> wildcards =
-                grouping.get(Category.WILDCARD);
+        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> wildcards = grouping.get(Category.WILDCARD);
         if (MapUtils.isNotEmpty(wildcards)) {
             matchers.putAll(wildcards);
         }
@@ -160,8 +152,7 @@ public class SecurityMetadataSourceAnalyzer {
         securityMetadataSourceStorage.addToStorage(matchers, placeholders, false);
 
         // 拿到全路径的分组数据，并检测是否存在冲突的匹配规则，然后将结果存入本地存储
-        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> fullPaths =
-                grouping.get(Category.FULL_PATH);
+        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> fullPaths = grouping.get(Category.FULL_PATH);
         log.debug("[Herodotus] |- Store full path type security attributes.");
         securityMetadataSourceStorage.addToStorage(matchers, fullPaths, true);
 
@@ -174,24 +165,16 @@ public class SecurityMetadataSourceAnalyzer {
      * @param securityAttributes 权限数据
      * @return 分组后的权限数据
      */
-    private Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>>
-            groupingSecurityAttributes(List<SecurityAttribute> securityAttributes) {
+    private Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> groupingSecurityAttributes(
+            List<SecurityAttribute> securityAttributes) {
 
-        Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> group =
-                new LinkedHashMap<>();
+        Map<Category, LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>> group = new LinkedHashMap<>();
 
-        securityAttributes.parallelStream()
-                .forEach(
-                        securityAttribute -> {
-                            LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>
-                                    resources =
-                                            securityMetadataSourceParser.postProcess(
-                                                    securityAttribute);
-                            appendToGroup(
-                                    group,
-                                    Category.getCategory(securityAttribute.getUrl()),
-                                    resources);
-                        });
+        securityAttributes.parallelStream().forEach(securityAttribute -> {
+            LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> resources =
+                    securityMetadataSourceParser.postProcess(securityAttribute);
+            appendToGroup(group, Category.getCategory(securityAttribute.getUrl()), resources);
+        });
 
         log.debug("[Herodotus] |- Grouping security attributes by category.");
         return group;

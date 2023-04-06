@@ -109,51 +109,37 @@ public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
             Integer sourceY = yPoints[i - 1];
             Integer targetX = xPoints[i];
             Integer targetY = yPoints[i];
-            java.awt.geom.Line2D.Double line =
-                    new java.awt.geom.Line2D.Double(
-                            (double) sourceX, (double) sourceY, (double) targetX, (double) targetY);
+            java.awt.geom.Line2D.Double line = new java.awt.geom.Line2D.Double(
+                    (double) sourceX, (double) sourceY, (double) targetX, (double) targetY);
             this.g.draw(line);
         }
 
         java.awt.geom.Line2D.Double line;
         if (isDefault) {
-            line =
-                    new java.awt.geom.Line2D.Double(
-                            (double) xPoints[0],
-                            (double) yPoints[0],
-                            (double) xPoints[1],
-                            (double) yPoints[1]);
+            line = new java.awt.geom.Line2D.Double(
+                    (double) xPoints[0], (double) yPoints[0], (double) xPoints[1], (double) yPoints[1]);
             this.drawDefaultSequenceFlowIndicator(line, scaleFactor);
         }
 
         if (conditional) {
-            line =
-                    new java.awt.geom.Line2D.Double(
-                            (double) xPoints[0],
-                            (double) yPoints[0],
-                            (double) xPoints[1],
-                            (double) yPoints[1]);
+            line = new java.awt.geom.Line2D.Double(
+                    (double) xPoints[0], (double) yPoints[0], (double) xPoints[1], (double) yPoints[1]);
             this.drawConditionalSequenceFlowIndicator(line, scaleFactor);
         }
 
         if (associationDirection.equals(AssociationDirection.ONE)
                 || associationDirection.equals(AssociationDirection.BOTH)) {
-            line =
-                    new java.awt.geom.Line2D.Double(
-                            (double) xPoints[xPoints.length - 2],
-                            (double) yPoints[xPoints.length - 2],
-                            (double) xPoints[xPoints.length - 1],
-                            (double) yPoints[xPoints.length - 1]);
+            line = new java.awt.geom.Line2D.Double(
+                    (double) xPoints[xPoints.length - 2],
+                    (double) yPoints[xPoints.length - 2],
+                    (double) xPoints[xPoints.length - 1],
+                    (double) yPoints[xPoints.length - 1]);
             this.drawArrowHead(line, scaleFactor);
         }
 
         if (associationDirection.equals(AssociationDirection.BOTH)) {
-            line =
-                    new java.awt.geom.Line2D.Double(
-                            (double) xPoints[1],
-                            (double) yPoints[1],
-                            (double) xPoints[0],
-                            (double) yPoints[0]);
+            line = new java.awt.geom.Line2D.Double(
+                    (double) xPoints[1], (double) yPoints[1], (double) xPoints[0], (double) yPoints[0]);
             this.drawArrowHead(line, scaleFactor);
         }
 
@@ -192,92 +178,46 @@ public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
 
         try {
             USERTASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/userTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/userTask.png", this.customClassLoader));
             SCRIPTTASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/scriptTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/scriptTask.png", this.customClassLoader));
             SERVICETASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/serviceTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/serviceTask.png", this.customClassLoader));
             RECEIVETASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/receiveTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/receiveTask.png", this.customClassLoader));
             SENDTASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/sendTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/sendTask.png", this.customClassLoader));
             MANUALTASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/manualTask.png", this.customClassLoader));
-            BUSINESS_RULE_TASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/businessRuleTask.png",
-                                    this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/manualTask.png", this.customClassLoader));
+            BUSINESS_RULE_TASK_IMAGE = ImageIO.read(
+                    ReflectUtil.getResource("org/flowable/icons/businessRuleTask.png", this.customClassLoader));
             SHELL_TASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/shellTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/shellTask.png", this.customClassLoader));
             DMN_TASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/dmnTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/dmnTask.png", this.customClassLoader));
             CAMEL_TASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/camelTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/camelTask.png", this.customClassLoader));
             MULE_TASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/muleTask.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/muleTask.png", this.customClassLoader));
             HTTP_TASK_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/httpTask.png", this.customClassLoader));
-            TIMER_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/timer.png", this.customClassLoader));
-            COMPENSATE_THROW_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/compensate-throw.png",
-                                    this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/httpTask.png", this.customClassLoader));
+            TIMER_IMAGE = ImageIO.read(ReflectUtil.getResource("org/flowable/icons/timer.png", this.customClassLoader));
+            COMPENSATE_THROW_IMAGE = ImageIO.read(
+                    ReflectUtil.getResource("org/flowable/icons/compensate-throw.png", this.customClassLoader));
             COMPENSATE_CATCH_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/compensate.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/compensate.png", this.customClassLoader));
             ERROR_THROW_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/error-throw.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/error-throw.png", this.customClassLoader));
             ERROR_CATCH_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/error.png", this.customClassLoader));
-            MESSAGE_THROW_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/message-throw.png",
-                                    this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/error.png", this.customClassLoader));
+            MESSAGE_THROW_IMAGE = ImageIO.read(
+                    ReflectUtil.getResource("org/flowable/icons/message-throw.png", this.customClassLoader));
             MESSAGE_CATCH_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/message.png", this.customClassLoader));
-            SIGNAL_THROW_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/signal-throw.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/message.png", this.customClassLoader));
+            SIGNAL_THROW_IMAGE = ImageIO.read(
+                    ReflectUtil.getResource("org/flowable/icons/signal-throw.png", this.customClassLoader));
             SIGNAL_CATCH_IMAGE =
-                    ImageIO.read(
-                            ReflectUtil.getResource(
-                                    "org/flowable/icons/signal.png", this.customClassLoader));
+                    ImageIO.read(ReflectUtil.getResource("org/flowable/icons/signal.png", this.customClassLoader));
         } catch (IOException var4) {
             LOGGER.warn("Could not load image for process diagram creation: {}", var4.getMessage());
         }
@@ -409,8 +349,7 @@ public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
      * @param scaleFactor
      */
     @Override
-    protected void drawTask(
-            String name, GraphicInfo graphicInfo, boolean thickBorder, double scaleFactor) {
+    protected void drawTask(String name, GraphicInfo graphicInfo, boolean thickBorder, double scaleFactor) {
 
         Paint originalPaint = g.getPaint();
         int x = (int) graphicInfo.getX();
@@ -466,30 +405,18 @@ public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
     public void drawStartEvent(GraphicInfo graphicInfo, BufferedImage image, double scaleFactor) {
         Paint originalPaint = g.getPaint();
         g.setPaint(EVENT_COLOR);
-        Ellipse2D circle =
-                new Ellipse2D.Double(
-                        graphicInfo.getX(),
-                        graphicInfo.getY(),
-                        graphicInfo.getWidth(),
-                        graphicInfo.getHeight());
+        Ellipse2D circle = new Ellipse2D.Double(
+                graphicInfo.getX(), graphicInfo.getY(), graphicInfo.getWidth(), graphicInfo.getHeight());
         g.fill(circle);
         g.setPaint(EVENT_BORDER_COLOR);
         g.draw(circle);
         g.setPaint(originalPaint);
         if (image != null) {
             // calculate coordinates to center image
-            int imageX =
-                    (int)
-                            Math.round(
-                                    graphicInfo.getX()
-                                            + (graphicInfo.getWidth() / 2)
-                                            - (image.getWidth() / (2 * scaleFactor)));
-            int imageY =
-                    (int)
-                            Math.round(
-                                    graphicInfo.getY()
-                                            + (graphicInfo.getHeight() / 2)
-                                            - (image.getHeight() / (2 * scaleFactor)));
+            int imageX = (int) Math.round(
+                    graphicInfo.getX() + (graphicInfo.getWidth() / 2) - (image.getWidth() / (2 * scaleFactor)));
+            int imageY = (int) Math.round(
+                    graphicInfo.getY() + (graphicInfo.getHeight() / 2) - (image.getHeight() / (2 * scaleFactor)));
             g.drawImage(
                     image,
                     imageX,
@@ -511,12 +438,8 @@ public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
         Paint originalPaint = g.getPaint();
         Stroke originalStroke = g.getStroke();
         g.setPaint(EVENT_COLOR);
-        Ellipse2D circle =
-                new Ellipse2D.Double(
-                        graphicInfo.getX(),
-                        graphicInfo.getY(),
-                        graphicInfo.getWidth(),
-                        graphicInfo.getHeight());
+        Ellipse2D circle = new Ellipse2D.Double(
+                graphicInfo.getX(), graphicInfo.getY(), graphicInfo.getWidth(), graphicInfo.getHeight());
         g.fill(circle);
         g.setPaint(EVENT_BORDER_COLOR);
         //        g.setPaint(HIGHLIGHT_COLOR);

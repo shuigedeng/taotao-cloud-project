@@ -63,8 +63,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @CacheConfig(cacheNames = "{category}")
 public class CategoryServiceImpl
-        extends BaseSuperServiceImpl<
-                ICategoryMapper, Category, CategorytRepository, ICategoryRepository, Long>
+        extends BaseSuperServiceImpl<ICategoryMapper, Category, CategorytRepository, ICategoryRepository, Long>
         implements ICategoryService {
 
     private static final String DELETE_FLAG_COLUMN = "delete_flag";
@@ -103,11 +102,8 @@ public class CategoryServiceImpl
     @Override
     public List<CategoryTreeVO> categoryTree() {
         // 获取缓存数据
-        List<CategoryTreeVO> categoryTreeVOList =
-                redisRepository.lGet(
-                        CachePrefix.CATEGORY.getPrefix(),
-                        0L,
-                        redisRepository.lGetListSize(CachePrefix.CATEGORY.getPrefix()));
+        List<CategoryTreeVO> categoryTreeVOList = redisRepository.lGet(
+                CachePrefix.CATEGORY.getPrefix(), 0L, redisRepository.lGetListSize(CachePrefix.CATEGORY.getPrefix()));
         if (categoryTreeVOList != null) {
             return categoryTreeVOList;
         }
@@ -194,13 +190,11 @@ public class CategoryServiceImpl
     @SuppressWarnings("unchecked")
     public List<String> getCategoryNameByIds(List<Long> ids) {
         List<String> categoryName = new ArrayList<>();
-        List<Category> categoryVOList =
-                (List<Category>) redisRepository.get(CachePrefix.CATEGORY_ARRAY.getPrefix());
+        List<Category> categoryVOList = (List<Category>) redisRepository.get(CachePrefix.CATEGORY_ARRAY.getPrefix());
         // 如果缓存中为空，则重新获取缓存
         if (categoryVOList == null) {
             categoryTree();
-            categoryVOList =
-                    (List<Category>) redisRepository.get(CachePrefix.CATEGORY_ARRAY.getPrefix());
+            categoryVOList = (List<Category>) redisRepository.get(CachePrefix.CATEGORY_ARRAY.getPrefix());
         }
 
         // 还为空的话，直接返回
@@ -323,18 +317,16 @@ public class CategoryServiceImpl
      * @param categoryTreeVO 分类VO
      * @return 分类VO列表
      */
-    private List<CategoryTreeVO> findChildren(
-            List<Category> categories, CategoryTreeVO categoryTreeVO) {
+    private List<CategoryTreeVO> findChildren(List<Category> categories, CategoryTreeVO categoryTreeVO) {
         List<CategoryTreeVO> children = new ArrayList<>();
-        categories.forEach(
-                item -> {
-                    if (item.getParentId().equals(categoryTreeVO.getId())) {
-                        CategoryTreeVO temp = CategoryConvert.INSTANCE.convert(item);
-                        temp.setParentTitle(item.getName());
-                        temp.setChildren(findChildren(categories, temp));
-                        children.add(temp);
-                    }
-                });
+        categories.forEach(item -> {
+            if (item.getParentId().equals(categoryTreeVO.getId())) {
+                CategoryTreeVO temp = CategoryConvert.INSTANCE.convert(item);
+                temp.setParentTitle(item.getName());
+                temp.setChildren(findChildren(categories, temp));
+                children.add(temp);
+            }
+        });
 
         return children;
     }
@@ -380,8 +372,7 @@ public class CategoryServiceImpl
      * @param categoryTreeVOList 分类VO
      * @return 子分类列表VO
      */
-    private List<CategoryTreeVO> getChildren(
-            Long parentId, List<CategoryTreeVO> categoryTreeVOList) {
+    private List<CategoryTreeVO> getChildren(Long parentId, List<CategoryTreeVO> categoryTreeVOList) {
         for (CategoryTreeVO item : categoryTreeVOList) {
             if (item.getId().equals(parentId)) {
                 return item.getChildren();

@@ -51,10 +51,7 @@ public class AccountAuthenticationToken extends AbstractAuthenticationToken {
      * @param authorities the authorities
      */
     public AccountAuthenticationToken(
-            Object principal,
-            String password,
-            String type,
-            Collection<? extends GrantedAuthority> authorities) {
+            Object principal, String password, String type, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         this.password = password;
@@ -76,9 +73,8 @@ public class AccountAuthenticationToken extends AbstractAuthenticationToken {
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
         if (isAuthenticated) {
-            throw new IllegalArgumentException(
-                    "Cannot set this token to trusted - use constructor which takes a"
-                            + " GrantedAuthority list instead");
+            throw new IllegalArgumentException("Cannot set this token to trusted - use constructor which takes a"
+                    + " GrantedAuthority list instead");
         }
 
         super.setAuthenticated(false);

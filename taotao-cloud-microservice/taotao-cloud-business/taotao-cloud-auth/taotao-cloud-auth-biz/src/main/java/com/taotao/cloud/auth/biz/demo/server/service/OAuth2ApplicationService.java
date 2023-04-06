@@ -128,8 +128,7 @@ public class OAuth2ApplicationService extends BaseLayeredService<OAuth2Applicati
                 StringUtils.commaDelimitedListToSet(application.getClientAuthenticationMethods());
         Set<String> authorizationGrantTypes =
                 StringUtils.commaDelimitedListToSet(application.getAuthorizationGrantTypes());
-        Set<String> redirectUris =
-                StringUtils.commaDelimitedListToSet(application.getRedirectUris());
+        Set<String> redirectUris = StringUtils.commaDelimitedListToSet(application.getRedirectUris());
         Set<OAuth2Scope> clientScopes = application.getScopes();
 
         return RegisteredClient.withId(application.getApplicationId())
@@ -138,27 +137,13 @@ public class OAuth2ApplicationService extends BaseLayeredService<OAuth2Applicati
                 // 客户端密码
                 .clientSecret(application.getClientSecret())
                 .clientSecretExpiresAt(DateUtil.toInstant(application.getClientSecretExpiresAt()))
-                .clientAuthenticationMethods(
-                        authenticationMethods ->
-                                clientAuthenticationMethods.forEach(
-                                        authenticationMethod ->
-                                                authenticationMethods.add(
-                                                        OAuth2AuthorizationUtils
-                                                                .resolveClientAuthenticationMethod(
-                                                                        authenticationMethod))))
-                .authorizationGrantTypes(
-                        (grantTypes) ->
-                                authorizationGrantTypes.forEach(
-                                        grantType ->
-                                                grantTypes.add(
-                                                        OAuth2AuthorizationUtils
-                                                                .resolveAuthorizationGrantType(
-                                                                        grantType))))
+                .clientAuthenticationMethods(authenticationMethods ->
+                        clientAuthenticationMethods.forEach(authenticationMethod -> authenticationMethods.add(
+                                OAuth2AuthorizationUtils.resolveClientAuthenticationMethod(authenticationMethod))))
+                .authorizationGrantTypes((grantTypes) -> authorizationGrantTypes.forEach(
+                        grantType -> grantTypes.add(OAuth2AuthorizationUtils.resolveAuthorizationGrantType(grantType))))
                 .redirectUris((uris) -> uris.addAll(redirectUris))
-                .scopes(
-                        (scopes) ->
-                                clientScopes.forEach(
-                                        clientScope -> scopes.add(clientScope.getScopeCode())))
+                .scopes((scopes) -> clientScopes.forEach(clientScope -> scopes.add(clientScope.getScopeCode())))
                 .clientSettings(createClientSettings(application))
                 .tokenSettings(createTokenSettings(application))
                 .build();
@@ -166,15 +151,14 @@ public class OAuth2ApplicationService extends BaseLayeredService<OAuth2Applicati
 
     private ClientSettings createClientSettings(OAuth2Application application) {
         ClientSettings.Builder clientSettingsBuilder = ClientSettings.builder();
-        clientSettingsBuilder.requireAuthorizationConsent(
-                application.getRequireAuthorizationConsent());
+        clientSettingsBuilder.requireAuthorizationConsent(application.getRequireAuthorizationConsent());
         clientSettingsBuilder.requireProofKey(application.getRequireProofKey());
         if (StringUtils.hasText(application.getJwkSetUrl())) {
             clientSettingsBuilder.jwkSetUrl(application.getJwkSetUrl());
         }
         if (ObjectUtils.isNotEmpty(application.getAuthenticationSigningAlgorithm())) {
-            JwsAlgorithm jwsAlgorithm =
-                    SignatureAlgorithm.from(application.getAuthenticationSigningAlgorithm().name());
+            JwsAlgorithm jwsAlgorithm = SignatureAlgorithm.from(
+                    application.getAuthenticationSigningAlgorithm().name());
             if (ObjectUtils.isNotEmpty(jwsAlgorithm)) {
                 clientSettingsBuilder.tokenEndpointAuthenticationSigningAlgorithm(jwsAlgorithm);
             }
@@ -193,8 +177,8 @@ public class OAuth2ApplicationService extends BaseLayeredService<OAuth2Applicati
         tokenSettingsBuilder.authorizationCodeTimeToLive(application.getAuthorizationCodeTtl());
         tokenSettingsBuilder.accessTokenFormat(getTokenFormat());
         if (ObjectUtils.isNotEmpty(application.getIdTokenSignatureAlgorithm())) {
-            SignatureAlgorithm signatureAlgorithm =
-                    SignatureAlgorithm.from(application.getIdTokenSignatureAlgorithm().name());
+            SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.from(
+                    application.getIdTokenSignatureAlgorithm().name());
             if (ObjectUtils.isNotEmpty(signatureAlgorithm)) {
                 tokenSettingsBuilder.idTokenSignatureAlgorithm(signatureAlgorithm);
             }

@@ -45,7 +45,8 @@ public class YsfpayRefundService extends AbstractRefundService {
         return CS.IF_CODE.YSFPAY;
     }
 
-    @Autowired private YsfpayPaymentService ysfpayPaymentService;
+    @Autowired
+    private YsfpayPaymentService ysfpayPaymentService;
 
     @Override
     public String preCheck(RefundOrderRQ bizRQ, RefundOrder refundOrder, PayOrder payOrder) {
@@ -54,10 +55,7 @@ public class YsfpayRefundService extends AbstractRefundService {
 
     @Override
     public ChannelRetMsg refund(
-            RefundOrderRQ bizRQ,
-            RefundOrder refundOrder,
-            PayOrder payOrder,
-            MchAppConfigContext mchAppConfigContext)
+            RefundOrderRQ bizRQ, RefundOrder refundOrder, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();
         JSONObject reqParams = new JSONObject();
@@ -71,9 +69,8 @@ public class YsfpayRefundService extends AbstractRefundService {
             reqParams.put("orderType ", orderType); // 订单类型
 
             // 封装公共参数 & 签名 & 调起http请求 & 返回响应数据并包装为json格式。
-            JSONObject resJSON =
-                    ysfpayPaymentService.packageParamAndReq(
-                            "/gateway/api/pay/refund", reqParams, logPrefix, mchAppConfigContext);
+            JSONObject resJSON = ysfpayPaymentService.packageParamAndReq(
+                    "/gateway/api/pay/refund", reqParams, logPrefix, mchAppConfigContext);
             log.info("查询订单 payorderId:{}, 返回结果:{}", payOrder.getPayOrderId(), resJSON);
             if (resJSON == null) {
                 channelRetMsg.setChannelState(ChannelRetMsg.ChannelState.UNKNOWN); // 状态不明确
@@ -98,8 +95,7 @@ public class YsfpayRefundService extends AbstractRefundService {
     }
 
     @Override
-    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception {
+    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();
         JSONObject reqParams = new JSONObject();
         String orderType = YsfHttpUtil.getOrderTypeByCommon(refundOrder.getWayCode());
@@ -109,12 +105,8 @@ public class YsfpayRefundService extends AbstractRefundService {
             reqParams.put("origOrderNo", refundOrder.getPayOrderId()); // 原交易订单号
 
             // 封装公共参数 & 签名 & 调起http请求 & 返回响应数据并包装为json格式。
-            JSONObject resJSON =
-                    ysfpayPaymentService.packageParamAndReq(
-                            "/gateway/api/pay/refundQuery",
-                            reqParams,
-                            logPrefix,
-                            mchAppConfigContext);
+            JSONObject resJSON = ysfpayPaymentService.packageParamAndReq(
+                    "/gateway/api/pay/refundQuery", reqParams, logPrefix, mchAppConfigContext);
             log.info("查询订单 refundOrderId:{}, 返回结果:{}", refundOrder.getRefundOrderId(), resJSON);
             if (resJSON == null) {
                 channelRetMsg.setChannelState(ChannelRetMsg.ChannelState.UNKNOWN); // 状态不明确

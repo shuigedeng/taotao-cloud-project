@@ -52,9 +52,11 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpDraftController {
 
-    @Resource private MpServiceFactory mpServiceFactory;
+    @Resource
+    private MpServiceFactory mpServiceFactory;
 
-    @Resource private MpMaterialService mpMaterialService;
+    @Resource
+    private MpMaterialService mpMaterialService;
 
     @GetMapping("/page")
     @ApiOperation("获得草稿分页")
@@ -64,10 +66,7 @@ public class MpDraftController {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(reqVO.getAccountId());
         WxMpDraftList draftList;
         try {
-            draftList =
-                    mpService
-                            .getDraftService()
-                            .listDraft(PageUtils.getStart(reqVO), reqVO.getPageSize());
+            draftList = mpService.getDraftService().listDraft(PageUtils.getStart(reqVO), reqVO.getPageSize());
         } catch (WxErrorException e) {
             throw exception(DRAFT_LIST_FAIL, e.getError().getErrorMsg());
         }
@@ -83,32 +82,19 @@ public class MpDraftController {
         // 1.1 获得 mediaId 数组
         Set<String> mediaIds = new HashSet<>();
         items.forEach(
-                item ->
-                        item.getContent()
-                                .getNewsItem()
-                                .forEach(newsItem -> mediaIds.add(newsItem.getThumbMediaId())));
+                item -> item.getContent().getNewsItem().forEach(newsItem -> mediaIds.add(newsItem.getThumbMediaId())));
         if (CollUtil.isEmpty(mediaIds)) {
             return;
         }
         // 1.2 批量查询对应的 Media 素材
-        Map<String, MpMaterialDO> materials =
-                CollectionUtils.convertMap(
-                        mpMaterialService.getMaterialListByMediaId(mediaIds),
-                        MpMaterialDO::getMediaId);
+        Map<String, MpMaterialDO> materials = CollectionUtils.convertMap(
+                mpMaterialService.getMaterialListByMediaId(mediaIds), MpMaterialDO::getMediaId);
 
         // 2. 设置回 WxMpDraftItem 记录
-        items.forEach(
-                item ->
-                        item.getContent()
-                                .getNewsItem()
-                                .forEach(
-                                        newsItem ->
-                                                findAndThen(
-                                                        materials,
-                                                        newsItem.getThumbMediaId(),
-                                                        material ->
-                                                                newsItem.setThumbUrl(
-                                                                        material.getUrl()))));
+        items.forEach(item -> item.getContent()
+                .getNewsItem()
+                .forEach(newsItem -> findAndThen(
+                        materials, newsItem.getThumbMediaId(), material -> newsItem.setThumbUrl(material.getUrl()))));
     }
 
     @PostMapping("/create")

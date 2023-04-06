@@ -50,38 +50,32 @@ public class RefreshDingDingAccessTokenHandler {
 
     private static final String URL = "https://oapi.dingtalk.com/gettoken";
 
-    @Autowired private StringRedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
-    @Autowired private ChannelAccountDao channelAccountDao;
+    @Autowired
+    private ChannelAccountDao channelAccountDao;
 
     /** 每小时请求一次接口刷新（以防失效) */
     @XxlJob("refreshAccessTokenJob")
     public void execute() {
         log.info("refreshAccessTokenJob#execute!");
-        SupportThreadPoolConfig.getPendingSingleThreadPool()
-                .execute(
-                        () -> {
-                            List<ChannelAccount> accountList =
-                                    channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-                                            CommonConstant.FALSE,
-                                            ChannelType.DING_DING_WORK_NOTICE.getCode());
-                            for (ChannelAccount channelAccount : accountList) {
-                                DingDingWorkNoticeAccount account =
-                                        JSON.parseObject(
-                                                channelAccount.getAccountConfig(),
-                                                DingDingWorkNoticeAccount.class);
-                                String accessToken = getAccessToken(account);
-                                if (StrUtil.isNotBlank(accessToken)) {
-                                    redisTemplate
-                                            .opsForValue()
-                                            .set(
-                                                    SendAccountConstant
-                                                                    .DING_DING_ACCESS_TOKEN_PREFIX
-                                                            + channelAccount.getId(),
-                                                    accessToken);
-                                }
-                            }
-                        });
+        SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
+            List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                    CommonConstant.FALSE, ChannelType.DING_DING_WORK_NOTICE.getCode());
+            for (ChannelAccount channelAccount : accountList) {
+                DingDingWorkNoticeAccount account =
+                        JSON.parseObject(channelAccount.getAccountConfig(), DingDingWorkNoticeAccount.class);
+                String accessToken = getAccessToken(account);
+                if (StrUtil.isNotBlank(accessToken)) {
+                    redisTemplate
+                            .opsForValue()
+                            .set(
+                                    SendAccountConstant.DING_DING_ACCESS_TOKEN_PREFIX + channelAccount.getId(),
+                                    accessToken);
+                }
+            }
+        });
     }
 
     /**
@@ -101,9 +95,7 @@ public class RefreshDingDingAccessTokenHandler {
             OapiGettokenResponse rsp = client.execute(req);
             accessToken = rsp.getAccessToken();
         } catch (Exception e) {
-            log.error(
-                    "RefreshDingDingAccessTokenHandler#getAccessToken fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("RefreshDingDingAccessTokenHandler#getAccessToken fail:{}", Throwables.getStackTraceAsString(e));
         }
         return accessToken;
     }

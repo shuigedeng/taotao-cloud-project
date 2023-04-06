@@ -29,9 +29,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("sysMenuService")
-public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity>
-        implements SysMenuService {
-    @Autowired private SysRoleMenuService sysRoleMenuService;
+public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
+    @Autowired
+    private SysRoleMenuService sysRoleMenuService;
 
     @Override
     public List<SysMenuEntity> queryListParentId(Long parentId, List<Long> menuIdList) {
@@ -95,16 +95,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity>
     }
 
     /** 递归 */
-    private List<SysMenuEntity> getMenuTreeList(
-            List<SysMenuEntity> menuList, List<Long> menuIdList) {
+    private List<SysMenuEntity> getMenuTreeList(List<SysMenuEntity> menuList, List<Long> menuIdList) {
         List<SysMenuEntity> subMenuList = new ArrayList<>();
 
         for (SysMenuEntity entity : menuList) {
             // 目录
             if (entity.getType() == Constant.MenuType.CATALOG.getValue()) {
-                entity.setList(
-                        getMenuTreeList(
-                                queryListParentId(entity.getMenuId(), menuIdList), menuIdList));
+                entity.setList(getMenuTreeList(queryListParentId(entity.getMenuId(), menuIdList), menuIdList));
             }
             subMenuList.add(entity);
         }

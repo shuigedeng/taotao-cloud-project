@@ -58,11 +58,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/channelbiz/alipay")
 public class AlipayBizController extends AbstractCtrl {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private SysConfigService sysConfigService;
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
-    @Autowired private MchAppService mchAppService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
+
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
+
+    @Autowired
+    private MchAppService mchAppService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /**
      * 跳转到支付宝的授权页面 （统一从pay项目获取到isv配置信息） isvAndMchNo 格式: ISVNO_MCHAPPID example:
@@ -70,14 +79,12 @@ public class AlipayBizController extends AbstractCtrl {
      * *
      */
     @RequestMapping("/redirectAppToAppAuth/{isvAndMchAppId}")
-    public void redirectAppToAppAuth(@PathVariable("isvAndMchAppId") String isvAndMchAppId)
-            throws IOException {
+    public void redirectAppToAppAuth(@PathVariable("isvAndMchAppId") String isvAndMchAppId) throws IOException {
 
         String isvNo = isvAndMchAppId.split("_")[0];
 
         AlipayIsvParams alipayIsvParams =
-                (AlipayIsvParams)
-                        configContextQueryService.queryIsvParams(isvNo, CS.IF_CODE.ALIPAY);
+                (AlipayIsvParams) configContextQueryService.queryIsvParams(isvNo, CS.IF_CODE.ALIPAY);
         alipayIsvParams.getSandbox();
 
         String oauthUrl = AlipayConfig.PROD_APP_TO_APP_AUTH_URL;
@@ -85,15 +92,10 @@ public class AlipayBizController extends AbstractCtrl {
             oauthUrl = AlipayConfig.SANDBOX_APP_TO_APP_AUTH_URL;
         }
 
-        String redirectUrl =
-                sysConfigService.getDBApplicationConfig().getPaySiteUrl()
-                        + "/api/channelbiz/alipay/appToAppAuthCallback";
+        String redirectUrl = sysConfigService.getDBApplicationConfig().getPaySiteUrl()
+                + "/api/channelbiz/alipay/appToAppAuthCallback";
         response.sendRedirect(
-                String.format(
-                        oauthUrl,
-                        alipayIsvParams.getAppId(),
-                        URLUtil.encodeAll(redirectUrl),
-                        isvAndMchAppId));
+                String.format(oauthUrl, alipayIsvParams.getAppId(), URLUtil.encodeAll(redirectUrl), isvAndMchAppId));
     }
 
     /** 支付宝授权回调地址 * */
@@ -116,8 +118,7 @@ public class AlipayBizController extends AbstractCtrl {
                 MchApp mchApp = mchAppService.getById(mchAppId);
 
                 MchAppConfigContext mchAppConfigContext =
-                        configContextQueryService.queryMchInfoAndAppInfo(
-                                mchApp.getMchNo(), mchAppId);
+                        configContextQueryService.queryMchInfoAndAppInfo(mchApp.getMchNo(), mchAppId);
                 AlipayClientWrapper alipayClientWrapper =
                         configContextQueryService.getAlipayClientWrapper(mchAppConfigContext);
 
@@ -140,9 +141,8 @@ public class AlipayBizController extends AbstractCtrl {
                 ifParams.put("refreshToken", resp.getAppRefreshToken());
                 ifParams.put("expireTimestamp", resp.getExpiresIn());
 
-                PayInterfaceConfig dbRecord =
-                        payInterfaceConfigService.getByInfoIdAndIfCode(
-                                CS.INFO_TYPE_MCH_APP, mchAppId, CS.IF_CODE.ALIPAY);
+                PayInterfaceConfig dbRecord = payInterfaceConfigService.getByInfoIdAndIfCode(
+                        CS.INFO_TYPE_MCH_APP, mchAppId, CS.IF_CODE.ALIPAY);
 
                 if (dbRecord != null) {
                     PayInterfaceConfig updateRecord = new PayInterfaceConfig();
@@ -164,12 +164,8 @@ public class AlipayBizController extends AbstractCtrl {
                 }
 
                 // 更新应用配置信息
-                mqSender.send(
-                        ResetIsvMchAppInfoConfigMQ.build(
-                                ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP,
-                                null,
-                                mchApp.getMchNo(),
-                                mchApp.getAppId()));
+                mqSender.send(ResetIsvMchAppInfoConfigMQ.build(
+                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP, null, mchApp.getMchNo(), mchApp.getAppId()));
             }
         } catch (Exception e) {
             log.error("error", e);

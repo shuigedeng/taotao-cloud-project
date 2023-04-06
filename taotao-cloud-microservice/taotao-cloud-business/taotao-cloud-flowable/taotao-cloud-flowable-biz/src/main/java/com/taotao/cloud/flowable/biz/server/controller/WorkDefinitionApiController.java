@@ -42,18 +42,15 @@ public class WorkDefinitionApiController {
 
     @PostMapping(value = "/insert")
     @Operation(summary = "流程定义>新增流程", description = "流程定义>新增流程")
-    public HttpResult<Boolean> insert(
-            @Valid @NotNull(message = "请上传相关流程图") @RequestPart("file") MultipartFile file)
+    public HttpResult<Boolean> insert(@Valid @NotNull(message = "请上传相关流程图") @RequestPart("file") MultipartFile file)
             throws IOException {
-        return new HttpResult<Boolean>()
-                .ok(workDefinitionService.insertDefinition(file.getInputStream()));
+        return new HttpResult<Boolean>().ok(workDefinitionService.insertDefinition(file.getInputStream()));
     }
 
     @PostMapping(value = "/query")
     @Operation(summary = "流程定义>查询流程", description = "流程定义>查询流程")
     public HttpResult<PageVO<DefinitionVO>> query(@RequestBody DefinitionDTO dto) {
-        return new HttpResult<PageVO<DefinitionVO>>()
-                .ok(workDefinitionService.queryDefinitionPage(dto));
+        return new HttpResult<PageVO<DefinitionVO>>().ok(workDefinitionService.queryDefinitionPage(dto));
     }
 
     @GetMapping(value = "/diagram")

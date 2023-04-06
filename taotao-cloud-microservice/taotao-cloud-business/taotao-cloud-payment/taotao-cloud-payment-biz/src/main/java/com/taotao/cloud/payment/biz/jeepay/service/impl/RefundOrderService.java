@@ -41,21 +41,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrder> {
 
-    @Autowired private PayOrderMapper payOrderMapper;
+    @Autowired
+    private PayOrderMapper payOrderMapper;
 
     /** 查询商户订单 * */
     public RefundOrder queryMchOrder(String mchNo, String mchRefundNo, String refundOrderId) {
 
         if (StringUtils.isNotEmpty(refundOrderId)) {
             return getOne(
-                    RefundOrder.gw()
-                            .eq(RefundOrder::getMchNo, mchNo)
-                            .eq(RefundOrder::getRefundOrderId, refundOrderId));
+                    RefundOrder.gw().eq(RefundOrder::getMchNo, mchNo).eq(RefundOrder::getRefundOrderId, refundOrderId));
         } else if (StringUtils.isNotEmpty(mchRefundNo)) {
             return getOne(
-                    RefundOrder.gw()
-                            .eq(RefundOrder::getMchNo, mchNo)
-                            .eq(RefundOrder::getMchRefundNo, mchRefundNo));
+                    RefundOrder.gw().eq(RefundOrder::getMchNo, mchNo).eq(RefundOrder::getMchRefundNo, mchRefundNo));
         } else {
             return null;
         }
@@ -94,14 +91,11 @@ public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrd
         }
 
         // 2. 更新订单表数据（更新退款次数,退款状态,如全额退款更新支付状态为已退款）
-        RefundOrder refundOrder =
-                getOne(
-                        RefundOrder.gw()
-                                .select(RefundOrder::getPayOrderId, RefundOrder::getRefundAmount)
-                                .eq(RefundOrder::getRefundOrderId, refundOrderId));
+        RefundOrder refundOrder = getOne(RefundOrder.gw()
+                .select(RefundOrder::getPayOrderId, RefundOrder::getRefundAmount)
+                .eq(RefundOrder::getRefundOrderId, refundOrderId));
         int updateCount =
-                payOrderMapper.updateRefundAmountAndCount(
-                        refundOrder.getPayOrderId(), refundOrder.getRefundAmount());
+                payOrderMapper.updateRefundAmountAndCount(refundOrder.getPayOrderId(), refundOrder.getRefundAmount());
         if (updateCount <= 0) {
             throw new BizException("更新订单数据异常");
         }
@@ -112,10 +106,7 @@ public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrd
     /** 更新退款单状态 【退款中】 --》 【退款失败】 * */
     @Transactional
     public boolean updateIng2Fail(
-            String refundOrderId,
-            String channelOrderNo,
-            String channelErrCode,
-            String channelErrMsg) {
+            String refundOrderId, String channelOrderNo, String channelErrCode, String channelErrMsg) {
 
         RefundOrder updateRecord = new RefundOrder();
         updateRecord.setState(RefundOrder.STATE_FAIL);
@@ -158,17 +149,12 @@ public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrd
         return baseMapper.update(
                 refundOrder,
                 RefundOrder.gw()
-                        .in(
-                                RefundOrder::getState,
-                                Arrays.asList(RefundOrder.STATE_INIT, RefundOrder.STATE_ING))
+                        .in(RefundOrder::getState, Arrays.asList(RefundOrder.STATE_INIT, RefundOrder.STATE_ING))
                         .le(RefundOrder::getExpiredTime, new Date()));
     }
 
     public IPage<RefundOrder> pageList(
-            IPage iPage,
-            LambdaQueryWrapper<RefundOrder> wrapper,
-            RefundOrder refundOrder,
-            JSONObject paramJSON) {
+            IPage iPage, LambdaQueryWrapper<RefundOrder> wrapper, RefundOrder refundOrder, JSONObject paramJSON) {
         if (StringUtils.isNotEmpty(refundOrder.getRefundOrderId())) {
             wrapper.eq(RefundOrder::getRefundOrderId, refundOrder.getRefundOrderId());
         }
@@ -206,22 +192,15 @@ public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrd
         }
         // 三合一订单
         if (paramJSON != null && StringUtils.isNotEmpty(paramJSON.getString("unionOrderId"))) {
-            wrapper.and(
-                    wr -> {
-                        wr.eq(RefundOrder::getPayOrderId, paramJSON.getString("unionOrderId"))
-                                .or()
-                                .eq(
-                                        RefundOrder::getRefundOrderId,
-                                        paramJSON.getString("unionOrderId"))
-                                .or()
-                                .eq(
-                                        RefundOrder::getChannelPayOrderNo,
-                                        paramJSON.getString("unionOrderId"))
-                                .or()
-                                .eq(
-                                        RefundOrder::getMchRefundNo,
-                                        paramJSON.getString("unionOrderId"));
-                    });
+            wrapper.and(wr -> {
+                wr.eq(RefundOrder::getPayOrderId, paramJSON.getString("unionOrderId"))
+                        .or()
+                        .eq(RefundOrder::getRefundOrderId, paramJSON.getString("unionOrderId"))
+                        .or()
+                        .eq(RefundOrder::getChannelPayOrderNo, paramJSON.getString("unionOrderId"))
+                        .or()
+                        .eq(RefundOrder::getMchRefundNo, paramJSON.getString("unionOrderId"));
+            });
         }
         wrapper.orderByDesc(RefundOrder::getCreatedAt);
 

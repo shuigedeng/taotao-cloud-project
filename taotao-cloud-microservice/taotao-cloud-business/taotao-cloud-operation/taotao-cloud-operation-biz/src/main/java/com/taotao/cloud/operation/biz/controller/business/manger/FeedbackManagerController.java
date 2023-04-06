@@ -39,7 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class FeedbackManagerController {
 
     /** 意见反馈 */
-    @Autowired private FeedbackService feedbackService;
+    @Autowired
+    private FeedbackService feedbackService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -55,8 +56,7 @@ public class FeedbackManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "查看意见反馈")
     @GetMapping(value = "/{id}")
-    public Result<Feedback> getFeedback(
-            @Parameter(description = "意见反馈ID") @PathVariable String id) {
+    public Result<Feedback> getFeedback(@Parameter(description = "意见反馈ID") @PathVariable String id) {
         return Result.success(this.feedbackService.getById(id));
     }
 }

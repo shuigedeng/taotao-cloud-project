@@ -28,11 +28,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 /** 专题活动业务层实现 */
 @Service
-public class SpecialServiceImpl extends ServiceImpl<SpecialMapper, Special>
-        implements SpecialService {
+public class SpecialServiceImpl extends ServiceImpl<SpecialMapper, Special> implements SpecialService {
 
     /** 页面数据 */
-    @Autowired private PageDataService pageDataService;
+    @Autowired
+    private PageDataService pageDataService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

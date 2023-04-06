@@ -82,11 +82,8 @@ public class PayOrderDivisionMQ extends AbstractMQ {
 
     /** 【！重要配置项！】 构造MQModel , 一般用于发送MQ时 * */
     public static PayOrderDivisionMQ build(
-            String payOrderId,
-            Byte useSysAutoDivisionReceivers,
-            List<CustomerDivisionReceiver> receiverList) {
-        return new PayOrderDivisionMQ(
-                new MsgPayload(payOrderId, useSysAutoDivisionReceivers, receiverList, false));
+            String payOrderId, Byte useSysAutoDivisionReceivers, List<CustomerDivisionReceiver> receiverList) {
+        return new PayOrderDivisionMQ(new MsgPayload(payOrderId, useSysAutoDivisionReceivers, receiverList, false));
     }
 
     /** 【！重要配置项！】 构造MQModel , 一般用于发送MQ时 * */
@@ -95,8 +92,7 @@ public class PayOrderDivisionMQ extends AbstractMQ {
             Byte useSysAutoDivisionReceivers,
             List<CustomerDivisionReceiver> receiverList,
             Boolean isResend) {
-        return new PayOrderDivisionMQ(
-                new MsgPayload(payOrderId, useSysAutoDivisionReceivers, receiverList, isResend));
+        return new PayOrderDivisionMQ(new MsgPayload(payOrderId, useSysAutoDivisionReceivers, receiverList, isResend));
     }
 
     /** 解析MQ消息， 一般用于接收MQ消息时 * */

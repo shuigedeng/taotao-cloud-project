@@ -39,7 +39,8 @@ public class TestTask {
 
     private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    @Autowired private TaskManager taskManager;
+    @Autowired
+    private TaskManager taskManager;
 
     // @Scheduled(cron = "0 0/30 * * * ?")
     public void robReceiveExpireTask() {
@@ -57,10 +58,7 @@ public class TestTask {
     }
 
     // @Scheduled(cron = "0 */1 * * * ?")
-    @SchedulerLock(
-            name = "scheduledController_notice",
-            lockAtLeastFor = "PT30S",
-            lockAtMostFor = "PT10M")
+    @SchedulerLock(name = "scheduledController_notice", lockAtLeastFor = "PT30S", lockAtMostFor = "PT10M")
     public void notice() {
         try {
             LogUtils.info(Thread.currentThread().getName() + "- 执行定时器 scheduledController_notice");

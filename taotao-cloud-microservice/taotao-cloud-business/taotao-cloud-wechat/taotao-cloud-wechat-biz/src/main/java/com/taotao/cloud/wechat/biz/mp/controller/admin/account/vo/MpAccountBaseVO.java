@@ -40,10 +40,7 @@ public class MpAccountBaseVO {
     @NotEmpty(message = "公众号 appId 不能为空")
     private String appId;
 
-    @ApiModelProperty(
-            value = "公众号密钥",
-            required = true,
-            example = "3a7b3b20c537e52e74afd395eb85f61f")
+    @ApiModelProperty(value = "公众号密钥", required = true, example = "3a7b3b20c537e52e74afd395eb85f61f")
     @NotEmpty(message = "公众号密钥不能为空")
     private String appSecret;
 

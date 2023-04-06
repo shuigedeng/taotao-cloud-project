@@ -62,16 +62,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements IStoreService {
 
     /** 会员 */
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignMemberApi memberApi;
     /** 商品 */
-    @Autowired private IFeignGoodsApi goodsApi;
+    @Autowired
+    private IFeignGoodsApi goodsApi;
     /** 店铺详情 */
-    @Autowired private IStoreDetailService storeDetailService;
+    @Autowired
+    private IStoreDetailService storeDetailService;
 
     @Override
     public IPage<StoreVO> findByConditionPage(StorePageQuery storePageQuery) {
-        return this.baseMapper.getStoreList(
-                storePageQuery.buildMpPage(), QueryUtil.queryWrapper(storePageQuery));
+        return this.baseMapper.getStoreList(storePageQuery.buildMpPage(), QueryUtil.queryWrapper(storePageQuery));
     }
 
     @Override
@@ -119,8 +121,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
     public Store edit(StoreEditDTO storeEditDTO) {
         if (storeEditDTO != null) {
             // 判断店铺名是否唯一
-            Store storeTmp =
-                    getOne(new QueryWrapper<Store>().eq("store_name", storeEditDTO.getStoreName()));
+            Store storeTmp = getOne(new QueryWrapper<Store>().eq("store_name", storeEditDTO.getStoreName()));
             if (storeTmp != null && !storeTmp.getId().equals(storeEditDTO.getStoreId())) {
                 throw new BusinessException(ResultEnum.STORE_NAME_EXIST_ERROR);
             }
@@ -160,8 +161,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
         StoreDetail storeDetail = new StoreDetail();
         BeanUtils.copyProperties(storeEditDTO, storeDetail);
         storeDetailService.update(
-                storeDetail,
-                new QueryWrapper<StoreDetail>().eq("store_id", storeEditDTO.getStoreId()));
+                storeDetail, new QueryWrapper<StoreDetail>().eq("store_id", storeEditDTO.getStoreId()));
     }
 
     @Override
@@ -178,10 +178,9 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
             member.setStoreId(id);
             memberApi.updateById(member);
             // 设定商家的结算日
-            storeDetailService.update(
-                    new LambdaUpdateWrapper<StoreDetail>()
-                            .eq(StoreDetail::getStoreId, id)
-                            .set(StoreDetail::getSettlementDay, new DateTime()));
+            storeDetailService.update(new LambdaUpdateWrapper<StoreDetail>()
+                    .eq(StoreDetail::getStoreId, id)
+                    .set(StoreDetail::getSettlementDay, new DateTime()));
         } else {
             store.setStoreDisable(StoreStatusEnum.REFUSED.value());
         }
@@ -292,10 +291,9 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
         // 获取店铺已上架已审核通过商品数量
         long goodsNum = goodsApi.countStoreGoodsNum(storeId);
         // 修改店铺商品数量
-        this.update(
-                new LambdaUpdateWrapper<Store>()
-                        .set(Store::getGoodsNum, goodsNum)
-                        .eq(Store::getId, storeId));
+        this.update(new LambdaUpdateWrapper<Store>()
+                .set(Store::getGoodsNum, goodsNum)
+                .eq(Store::getId, storeId));
     }
 
     @Override

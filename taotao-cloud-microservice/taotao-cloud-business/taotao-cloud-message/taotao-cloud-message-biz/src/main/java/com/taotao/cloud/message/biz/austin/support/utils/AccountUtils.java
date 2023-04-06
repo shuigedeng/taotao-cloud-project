@@ -52,15 +52,16 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 @Configuration
 public class AccountUtils {
 
-    @Autowired private ChannelAccountDao channelAccountDao;
-    @Autowired private StringRedisTemplate redisTemplate;
+    @Autowired
+    private ChannelAccountDao channelAccountDao;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /** 消息的小程序/微信服务号账号 */
-    private ConcurrentMap<ChannelAccount, WxMpService> officialAccountServiceMap =
-            new ConcurrentHashMap<>();
+    private ConcurrentMap<ChannelAccount, WxMpService> officialAccountServiceMap = new ConcurrentHashMap<>();
 
-    private ConcurrentMap<ChannelAccount, WxMaService> miniProgramServiceMap =
-            new ConcurrentHashMap<>();
+    private ConcurrentMap<ChannelAccount, WxMaService> miniProgramServiceMap = new ConcurrentHashMap<>();
 
     @Bean
     public RedisTemplateWxRedisOps redisTemplateWxRedisOps() {
@@ -78,30 +79,21 @@ public class AccountUtils {
     @SuppressWarnings("unchecked")
     public <T> T getAccountById(Integer sendAccountId, Class<T> clazz) {
         try {
-            Optional<ChannelAccount> optionalChannelAccount =
-                    channelAccountDao.findById(Long.valueOf(sendAccountId));
+            Optional<ChannelAccount> optionalChannelAccount = channelAccountDao.findById(Long.valueOf(sendAccountId));
             if (optionalChannelAccount.isPresent()) {
                 ChannelAccount channelAccount = optionalChannelAccount.get();
                 if (clazz.equals(WxMaService.class)) {
-                    return (T)
-                            ConcurrentHashMapUtils.computeIfAbsent(
-                                    miniProgramServiceMap,
-                                    channelAccount,
-                                    account ->
-                                            initMiniProgramService(
-                                                    JSON.parseObject(
-                                                            account.getAccountConfig(),
-                                                            WeChatMiniProgramAccount.class)));
+                    return (T) ConcurrentHashMapUtils.computeIfAbsent(
+                            miniProgramServiceMap,
+                            channelAccount,
+                            account -> initMiniProgramService(
+                                    JSON.parseObject(account.getAccountConfig(), WeChatMiniProgramAccount.class)));
                 } else if (clazz.equals(WxMpService.class)) {
-                    return (T)
-                            ConcurrentHashMapUtils.computeIfAbsent(
-                                    officialAccountServiceMap,
-                                    channelAccount,
-                                    account ->
-                                            initOfficialAccountService(
-                                                    JSON.parseObject(
-                                                            account.getAccountConfig(),
-                                                            WeChatOfficialAccount.class)));
+                    return (T) ConcurrentHashMapUtils.computeIfAbsent(
+                            officialAccountServiceMap,
+                            channelAccount,
+                            account -> initOfficialAccountService(
+                                    JSON.parseObject(account.getAccountConfig(), WeChatOfficialAccount.class)));
                 } else {
                     return JSON.parseObject(channelAccount.getAccountConfig(), clazz);
                 }
@@ -122,13 +114,11 @@ public class AccountUtils {
      */
     public <T> T getSmsAccountByScriptName(String scriptName, Class<T> clazz) {
         try {
-            List<ChannelAccount> channelAccountList =
-                    channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-                            CommonConstant.FALSE, ChannelType.SMS.getCode());
+            List<ChannelAccount> channelAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                    CommonConstant.FALSE, ChannelType.SMS.getCode());
             for (ChannelAccount channelAccount : channelAccountList) {
                 try {
-                    SmsAccount smsAccount =
-                            JSON.parseObject(channelAccount.getAccountConfig(), SmsAccount.class);
+                    SmsAccount smsAccount = JSON.parseObject(channelAccount.getAccountConfig(), SmsAccount.class);
                     if (smsAccount.getScriptName().equals(scriptName)) {
                         return JSON.parseObject(channelAccount.getAccountConfig(), clazz);
                     }
@@ -153,10 +143,8 @@ public class AccountUtils {
      */
     public WxMpService initOfficialAccountService(WeChatOfficialAccount officialAccount) {
         WxMpService wxMpService = new WxMpServiceImpl();
-        WxMpRedisConfigImpl config =
-                new WxMpRedisConfigImpl(
-                        redisTemplateWxRedisOps(),
-                        SendAccountConstant.OFFICIAL_ACCOUNT_ACCESS_TOKEN_PREFIX);
+        WxMpRedisConfigImpl config = new WxMpRedisConfigImpl(
+                redisTemplateWxRedisOps(), SendAccountConstant.OFFICIAL_ACCOUNT_ACCESS_TOKEN_PREFIX);
         config.setAppId(officialAccount.getAppId());
         config.setSecret(officialAccount.getSecret());
         config.setToken(officialAccount.getToken());
@@ -172,8 +160,7 @@ public class AccountUtils {
     private WxMaService initMiniProgramService(WeChatMiniProgramAccount miniProgramAccount) {
         WxMaService wxMaService = new WxMaServiceImpl();
         WxMaRedisBetterConfigImpl config =
-                new WxMaRedisBetterConfigImpl(
-                        redisTemplateWxRedisOps(), SendAccountConstant.MINI_PROGRAM_TOKEN_PREFIX);
+                new WxMaRedisBetterConfigImpl(redisTemplateWxRedisOps(), SendAccountConstant.MINI_PROGRAM_TOKEN_PREFIX);
         config.setAppid(miniProgramAccount.getAppId());
         config.setSecret(miniProgramAccount.getAppSecret());
         wxMaService.setWxMaConfig(config);

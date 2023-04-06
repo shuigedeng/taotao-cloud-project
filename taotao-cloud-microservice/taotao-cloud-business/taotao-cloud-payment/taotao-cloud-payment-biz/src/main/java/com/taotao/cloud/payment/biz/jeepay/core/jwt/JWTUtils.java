@@ -42,7 +42,8 @@ public class JWTUtils {
     /** 根据token与秘钥 解析token并转换为 JWTPayload * */
     public static JWTPayload parseToken(String token, String secret) {
         try {
-            Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+            Claims claims =
+                    Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 
             JWTPayload result = new JWTPayload();
             result.setSysUserId(claims.get("sysUserId", Long.class));

@@ -36,7 +36,8 @@ public class SysRoleEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 角色ID */
-    @TableId private Long roleId;
+    @TableId
+    private Long roleId;
 
     /** 角色名称 */
     @NotBlank(message = "角色名称不能为空")

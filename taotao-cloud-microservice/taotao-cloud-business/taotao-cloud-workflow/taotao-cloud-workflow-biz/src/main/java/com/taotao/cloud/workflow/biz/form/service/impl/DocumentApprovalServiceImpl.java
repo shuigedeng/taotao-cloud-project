@@ -32,13 +32,17 @@ import org.springframework.stereotype.Service;
 
 /** 文件签批意见表 */
 @Service
-public class DocumentApprovalServiceImpl
-        extends ServiceImpl<DocumentApprovalMapper, DocumentApprovalEntity>
+public class DocumentApprovalServiceImpl extends ServiceImpl<DocumentApprovalMapper, DocumentApprovalEntity>
         implements DocumentApprovalService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public DocumentApprovalEntity getInfo(String id) {
@@ -82,8 +86,7 @@ public class DocumentApprovalServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, DocumentApprovalEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, DocumentApprovalEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -115,10 +118,8 @@ public class DocumentApprovalServiceImpl
 
     @Override
     public void data(String id, String data) {
-        DocumentApprovalForm documentApprovalForm =
-                JsonUtils.getJsonToBean(data, DocumentApprovalForm.class);
-        DocumentApprovalEntity entity =
-                JsonUtils.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
+        DocumentApprovalForm documentApprovalForm = JsonUtils.getJsonToBean(data, DocumentApprovalForm.class);
+        DocumentApprovalEntity entity = JsonUtils.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

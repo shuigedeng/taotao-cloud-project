@@ -40,13 +40,13 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpMessageController {
 
-    @Resource private MpMessageService mpMessageService;
+    @Resource
+    private MpMessageService mpMessageService;
 
     @GetMapping("/page")
     @ApiOperation("获得公众号消息分页")
     @PreAuthorize("@ss.hasPermission('mp:message:query')")
-    public CommonResult<PageResult<MpMessageRespVO>> getMessagePage(
-            @Valid MpMessagePageReqVO pageVO) {
+    public CommonResult<PageResult<MpMessageRespVO>> getMessagePage(@Valid MpMessagePageReqVO pageVO) {
         PageResult<MpMessageDO> pageResult = mpMessageService.getMessagePage(pageVO);
         return success(MpMessageConvert.INSTANCE.convertPage(pageResult));
     }

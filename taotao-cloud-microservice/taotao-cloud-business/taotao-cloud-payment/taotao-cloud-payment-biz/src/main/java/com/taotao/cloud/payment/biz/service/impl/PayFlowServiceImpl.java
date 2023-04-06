@@ -41,7 +41,6 @@ public class PayFlowServiceImpl implements IPayFlowService {
     @Override
     public PayFlow findPayFlowById(Long id) {
         Optional<PayFlow> optionalExpressCompany = payFlowRepository.findById(id);
-        return optionalExpressCompany.orElseThrow(
-                () -> new BusinessException(ResultEnum.PAY_FLOW_NOT_EXIST));
+        return optionalExpressCompany.orElseThrow(() -> new BusinessException(ResultEnum.PAY_FLOW_NOT_EXIST));
     }
 }

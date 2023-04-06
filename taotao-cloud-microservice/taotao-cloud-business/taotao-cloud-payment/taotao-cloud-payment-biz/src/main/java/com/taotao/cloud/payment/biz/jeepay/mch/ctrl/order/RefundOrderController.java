@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/refundOrder")
 public class RefundOrderController extends CommonCtrl {
 
-    @Autowired private RefundOrderService refundOrderService;
+    @Autowired
+    private RefundOrderService refundOrderService;
 
     /**
      * @Author: ZhuXiao @Description: 退款订单信息列表 @Date: 10:44 2021/5/13
@@ -55,8 +56,7 @@ public class RefundOrderController extends CommonCtrl {
         JSONObject paramJSON = getReqParamJSON();
         LambdaQueryWrapper<RefundOrder> wrapper = RefundOrder.gw();
         wrapper.eq(RefundOrder::getMchNo, getCurrentMchNo());
-        IPage<RefundOrder> pages =
-                refundOrderService.pageList(getIPage(), wrapper, refundOrder, paramJSON);
+        IPage<RefundOrder> pages = refundOrderService.pageList(getIPage(), wrapper, refundOrder, paramJSON);
 
         return ApiRes.page(pages);
     }

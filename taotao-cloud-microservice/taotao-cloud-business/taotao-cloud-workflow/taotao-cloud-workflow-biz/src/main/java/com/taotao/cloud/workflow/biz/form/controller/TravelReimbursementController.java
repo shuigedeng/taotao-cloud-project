@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/TravelReimbursement")
 public class TravelReimbursementController {
 
-    @Autowired private TravelReimbursementService travelReimbursementService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private TravelReimbursementService travelReimbursementService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取差旅报销申请表信息
@@ -51,17 +54,15 @@ public class TravelReimbursementController {
      */
     @Operation("获取差旅报销申请表信息")
     @GetMapping("/{id}")
-    public Result<TravelReimbursementInfoVO> info(
-            @PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<TravelReimbursementInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
+            throws DataException {
         TravelReimbursementInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), TravelReimbursementInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), TravelReimbursementInfoVO.class);
                     isData = false;
                 }
             }
@@ -81,8 +82,7 @@ public class TravelReimbursementController {
      */
     @Operation("新建差旅报销申请表")
     @PostMapping
-    public Result create(@RequestBody TravelReimbursementForm travelReimbursementForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody TravelReimbursementForm travelReimbursementForm) throws WorkFlowException {
         if (travelReimbursementForm.getSetOutDate() > travelReimbursementForm.getReturnDate()) {
             return Result.fail("结束时间不能小于起始时间");
         }
@@ -92,8 +92,7 @@ public class TravelReimbursementController {
             travelReimbursementService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
         }
-        travelReimbursementService.submit(
-                entity.getId(), entity, travelReimbursementForm.getCandidateList());
+        travelReimbursementService.submit(entity.getId(), entity, travelReimbursementForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -106,9 +105,7 @@ public class TravelReimbursementController {
      */
     @Operation("修改差旅报销申请表")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody TravelReimbursementForm travelReimbursementForm,
-            @PathVariable("id") String id)
+    public Result update(@RequestBody TravelReimbursementForm travelReimbursementForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (travelReimbursementForm.getSetOutDate() > travelReimbursementForm.getReturnDate()) {
             return Result.fail("结束时间不能小于起始时间");

@@ -81,9 +81,7 @@ public class AfterSaleReasonController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping
     public Result<Boolean> save(@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO) {
-        return Result.success(
-                afterSaleReasonService.save(
-                        AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO)));
+        return Result.success(afterSaleReasonService.save(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO)));
     }
 
     @Operation(summary = "修改售后原因", description = "修改售后原因")
@@ -91,10 +89,8 @@ public class AfterSaleReasonController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
     public Result<Boolean> update(
-            @Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO,
-            @PathVariable("id") Long id) {
-        AfterSaleReason afterSaleReason =
-                AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO);
+            @Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO, @PathVariable("id") Long id) {
+        AfterSaleReason afterSaleReason = AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO);
         afterSaleReason.setId(id);
         return Result.success(afterSaleReasonService.editAfterSaleReason(afterSaleReason));
     }

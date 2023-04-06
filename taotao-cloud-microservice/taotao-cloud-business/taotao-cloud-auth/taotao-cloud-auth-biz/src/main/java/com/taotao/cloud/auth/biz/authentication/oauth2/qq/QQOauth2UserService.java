@@ -57,18 +57,15 @@ public class QQOauth2UserService extends DefaultOAuth2UserService {
         if (QQ.equals(registrationId)) {
             String tokenValue = userRequest.getAccessToken().getTokenValue();
             // openId请求
-            RequestEntity<?> openIdRequest =
-                    RequestEntity.get(
-                                    UriComponentsBuilder.fromUriString(QQ_OPEN_ID_URL)
-                                            .queryParam("access_token", tokenValue)
-                                            .build()
-                                            .toUri())
-                            .build();
+            RequestEntity<?> openIdRequest = RequestEntity.get(UriComponentsBuilder.fromUriString(QQ_OPEN_ID_URL)
+                            .queryParam("access_token", tokenValue)
+                            .build()
+                            .toUri())
+                    .build();
 
             // openId响应
             ResponseEntity<String> openIdResponse =
-                    restTemplate.exchange(
-                            openIdRequest, new ParameterizedTypeReference<String>() {});
+                    restTemplate.exchange(openIdRequest, new ParameterizedTypeReference<String>() {});
 
             LogUtils.info("qq的openId响应信息：{}", openIdResponse);
 
@@ -81,38 +78,30 @@ public class QQOauth2UserService extends DefaultOAuth2UserService {
             }
 
             // userInfo请求
-            RequestEntity<?> userInfoRequest =
-                    RequestEntity.get(
-                                    UriComponentsBuilder.fromUriString(
-                                                    clientRegistration
-                                                            .getProviderDetails()
-                                                            .getUserInfoEndpoint()
-                                                            .getUri())
-                                            .queryParam("access_token", tokenValue)
-                                            .queryParam("openid", openId)
-                                            .queryParam(
-                                                    "oauth_consumer_key",
-                                                    clientRegistration.getClientId())
-                                            .build()
-                                            .toUri())
-                            .build();
+            RequestEntity<?> userInfoRequest = RequestEntity.get(UriComponentsBuilder.fromUriString(clientRegistration
+                                    .getProviderDetails()
+                                    .getUserInfoEndpoint()
+                                    .getUri())
+                            .queryParam("access_token", tokenValue)
+                            .queryParam("openid", openId)
+                            .queryParam("oauth_consumer_key", clientRegistration.getClientId())
+                            .build()
+                            .toUri())
+                    .build();
 
             // userInfo响应
             ResponseEntity<String> userInfoResponse =
-                    restTemplate.exchange(
-                            userInfoRequest, new ParameterizedTypeReference<String>() {});
+                    restTemplate.exchange(userInfoRequest, new ParameterizedTypeReference<String>() {});
 
             LogUtils.info("qq的userInfo响应信息：{}", userInfoResponse);
 
-            String userNameAttributeName =
-                    clientRegistration
-                            .getProviderDetails()
-                            .getUserInfoEndpoint()
-                            .getUserNameAttributeName();
+            String userNameAttributeName = clientRegistration
+                    .getProviderDetails()
+                    .getUserInfoEndpoint()
+                    .getUserNameAttributeName();
             Map<String, Object> userAttributes = null;
             try {
-                userAttributes =
-                        extractQqUserInfo(Objects.requireNonNull(userInfoResponse.getBody()));
+                userAttributes = extractQqUserInfo(Objects.requireNonNull(userInfoResponse.getBody()));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
@@ -134,11 +123,8 @@ public class QQOauth2UserService extends DefaultOAuth2UserService {
      * @return qq的openId
      */
     private String extractQqOpenId(String openIdResponse) throws JsonProcessingException {
-        String openId =
-                openIdResponse.substring(
-                        openIdResponse.indexOf('(') + 1, openIdResponse.indexOf(')'));
-        Map<String, String> map =
-                objectMapper.readValue(openId, new TypeReference<Map<String, String>>() {});
+        String openId = openIdResponse.substring(openIdResponse.indexOf('(') + 1, openIdResponse.indexOf(')'));
+        Map<String, String> map = objectMapper.readValue(openId, new TypeReference<Map<String, String>>() {});
         return map.get("openid");
     }
 
@@ -148,9 +134,7 @@ public class QQOauth2UserService extends DefaultOAuth2UserService {
      * @param userInfoResponse qq的用户信息响应字符串
      * @return qq的用户信息
      */
-    private Map<String, Object> extractQqUserInfo(String userInfoResponse)
-            throws JsonProcessingException {
-        return objectMapper.readValue(
-                userInfoResponse, new TypeReference<Map<String, Object>>() {});
+    private Map<String, Object> extractQqUserInfo(String userInfoResponse) throws JsonProcessingException {
+        return objectMapper.readValue(userInfoResponse, new TypeReference<Map<String, Object>>() {});
     }
 }

@@ -33,8 +33,7 @@ public interface ErrorCodeConstants {
     // ========== 公众号统计 1006001000============
     ErrorCode STATISTICS_GET_USER_SUMMARY_FAIL = new ErrorCode(1006001000, "获取粉丝增减数据失败，原因：{}");
     ErrorCode STATISTICS_GET_USER_CUMULATE_FAIL = new ErrorCode(1006001001, "获得粉丝累计数据失败，原因：{}");
-    ErrorCode STATISTICS_GET_UPSTREAM_MESSAGE_FAIL =
-            new ErrorCode(1006001002, "获得消息发送概况数据失败，原因：{}");
+    ErrorCode STATISTICS_GET_UPSTREAM_MESSAGE_FAIL = new ErrorCode(1006001002, "获得消息发送概况数据失败，原因：{}");
     ErrorCode STATISTICS_GET_INTERFACE_SUMMARY_FAIL = new ErrorCode(1006001003, "获得接口分析数据失败，原因：{}");
 
     // ========== 公众号标签 1006002000============

@@ -28,8 +28,7 @@ import org.springframework.security.authentication.AuthenticationDetailsSource;
  * @date : 2022/4/12 10:41
  */
 public class OAuth2FormLoginWebAuthenticationDetailSource
-        implements AuthenticationDetailsSource<
-                HttpServletRequest, FormLoginWebAuthenticationDetails> {
+        implements AuthenticationDetailsSource<HttpServletRequest, FormLoginWebAuthenticationDetails> {
 
     private final OAuth2UiProperties uiProperties;
 

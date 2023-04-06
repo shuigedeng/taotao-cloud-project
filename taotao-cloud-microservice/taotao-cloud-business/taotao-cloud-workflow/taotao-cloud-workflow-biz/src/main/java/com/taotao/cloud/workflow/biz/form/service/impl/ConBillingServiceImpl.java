@@ -36,9 +36,14 @@ import org.springframework.stereotype.Service;
 public class ConBillingServiceImpl extends ServiceImpl<ConBillingMapper, ConBillingEntity>
         implements ConBillingService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public ConBillingEntity getInfo(String id) {

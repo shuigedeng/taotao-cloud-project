@@ -48,10 +48,7 @@ public class AliPayRequest {
      * @throws IOException IO 异常
      */
     public static void wapPay(
-            HttpServletResponse response,
-            AlipayTradeWapPayModel model,
-            String returnUrl,
-            String notifyUrl)
+            HttpServletResponse response, AlipayTradeWapPayModel model, String returnUrl, String notifyUrl)
             throws AlipayApiException, IOException {
         String form = wapPayStr(model, returnUrl, notifyUrl);
         response.setContentType("text/html;charset=UTF-8");
@@ -70,8 +67,8 @@ public class AliPayRequest {
      * @return {@link AlipayTradeAppPayResponse}
      * @throws AlipayApiException 支付宝 Api 异常
      */
-    public static AlipayTradeAppPayResponse appPayToResponse(
-            AlipayTradeAppPayModel model, String notifyUrl) throws AlipayApiException {
+    public static AlipayTradeAppPayResponse appPayToResponse(AlipayTradeAppPayModel model, String notifyUrl)
+            throws AlipayApiException {
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
         request.setBizModel(model);
         request.setNotifyUrl(notifyUrl);
@@ -89,10 +86,7 @@ public class AliPayRequest {
      * @throws IOException IO 异常
      */
     public static void tradePage(
-            HttpServletResponse response,
-            AlipayTradePagePayModel model,
-            String notifyUrl,
-            String returnUrl)
+            HttpServletResponse response, AlipayTradePagePayModel model, String notifyUrl, String returnUrl)
             throws AlipayApiException, IOException {
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
         request.setBizModel(model);
@@ -141,23 +135,19 @@ public class AliPayRequest {
         return pageExecute(aliPayRequest).getBody();
     }
 
-    public static <T extends AlipayResponse> T doExecute(AlipayRequest<T> request)
-            throws AlipayApiException {
+    public static <T extends AlipayResponse> T doExecute(AlipayRequest<T> request) throws AlipayApiException {
         return certificateExecute(request);
     }
 
-    public static <T extends AlipayResponse> T certificateExecute(AlipayRequest<T> request)
-            throws AlipayApiException {
+    public static <T extends AlipayResponse> T certificateExecute(AlipayRequest<T> request) throws AlipayApiException {
         return AliPayApiConfigKit.getAliPayApiConfig().certificateExecute(request);
     }
 
-    public static <T extends AlipayResponse> T pageExecute(AlipayRequest<T> request)
-            throws AlipayApiException {
+    public static <T extends AlipayResponse> T pageExecute(AlipayRequest<T> request) throws AlipayApiException {
         return AliPayApiConfigKit.getAliPayApiConfig().pageExecute(request);
     }
 
-    public static <T extends AlipayResponse> T sdkExecute(AlipayRequest<T> request)
-            throws AlipayApiException {
+    public static <T extends AlipayResponse> T sdkExecute(AlipayRequest<T> request) throws AlipayApiException {
         return AliPayApiConfigKit.getAliPayApiConfig().sdkExecute(request);
     }
 }

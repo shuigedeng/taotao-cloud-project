@@ -60,8 +60,7 @@ public class WeChatTemplateController {
 
     @Operation(summary = "分页查询")
     @GetMapping(value = "/page")
-    public ResResult<PageResult<WeChatTemplateDto>> page(
-            PageQuery PageQuery, WeChatTemplateParam weChatTemplateParam) {
+    public ResResult<PageResult<WeChatTemplateDto>> page(PageQuery PageQuery, WeChatTemplateParam weChatTemplateParam) {
         return Res.ok(weChatTemplateService.page(PageQuery, weChatTemplateParam));
     }
 

@@ -32,7 +32,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PointsGoodsBaseVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 7814832369110695758L;
+    @Serial
+    private static final long serialVersionUID = 7814832369110695758L;
 
     private Long id;
 

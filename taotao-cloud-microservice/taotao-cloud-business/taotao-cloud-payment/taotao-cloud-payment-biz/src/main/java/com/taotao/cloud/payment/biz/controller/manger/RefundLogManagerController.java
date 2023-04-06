@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-退款日志接口", description = "管理端-退款日志接口I")
 @RequestMapping("/manager/order/refundLog")
 public class RefundLogManagerController {
-    @Autowired private RefundLogService refundLogService;
+    @Autowired
+    private RefundLogService refundLogService;
 
     @Operation(summary = "查看退款日志详情", description = "查看退款日志详情")
     @RequestLogger
@@ -55,8 +56,6 @@ public class RefundLogManagerController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping
     public Result<IPage<RefundLog>> getByPage(RefundLog entity, SearchVO searchVo, PageVO page) {
-        return Result.success(
-                refundLogService.page(
-                        PageUtil.initPage(page), PageUtil.initWrapper(entity, searchVo)));
+        return Result.success(refundLogService.page(PageUtil.initPage(page), PageUtil.initWrapper(entity, searchVo)));
     }
 }

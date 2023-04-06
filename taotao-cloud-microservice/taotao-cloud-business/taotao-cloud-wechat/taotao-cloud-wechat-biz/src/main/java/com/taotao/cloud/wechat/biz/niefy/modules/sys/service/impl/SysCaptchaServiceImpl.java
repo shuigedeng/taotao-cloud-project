@@ -36,9 +36,9 @@ import org.springframework.stereotype.Service;
  * @author Mark sunlightcs@gmail.com
  */
 @Service("sysCaptchaService")
-public class SysCaptchaServiceImpl extends ServiceImpl<SysCaptchaDao, SysCaptchaEntity>
-        implements SysCaptchaService {
-    @Autowired private Producer producer;
+public class SysCaptchaServiceImpl extends ServiceImpl<SysCaptchaDao, SysCaptchaEntity> implements SysCaptchaService {
+    @Autowired
+    private Producer producer;
 
     @Override
     public BufferedImage getCaptcha(String uuid) {
@@ -60,8 +60,7 @@ public class SysCaptchaServiceImpl extends ServiceImpl<SysCaptchaDao, SysCaptcha
 
     @Override
     public boolean validate(String uuid, String code) {
-        SysCaptchaEntity captchaEntity =
-                this.getOne(new QueryWrapper<SysCaptchaEntity>().eq("uuid", uuid));
+        SysCaptchaEntity captchaEntity = this.getOne(new QueryWrapper<SysCaptchaEntity>().eq("uuid", uuid));
         if (captchaEntity == null) {
             return false;
         }

@@ -34,18 +34,15 @@ import org.springframework.context.ApplicationListener;
  * @author : gengwei.zheng
  * @date : 2021/8/6 12:23
  */
-public class RemoteSecurityMetadataSyncListener
-        implements ApplicationListener<RemoteSecurityMetadataSyncEvent> {
+public class RemoteSecurityMetadataSyncListener implements ApplicationListener<RemoteSecurityMetadataSyncEvent> {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(RemoteSecurityMetadataSyncListener.class);
+    private static final Logger log = LoggerFactory.getLogger(RemoteSecurityMetadataSyncListener.class);
 
     private final SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer;
     private final ServiceMatcher serviceMatcher;
 
     public RemoteSecurityMetadataSyncListener(
-            SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer,
-            ServiceMatcher serviceMatcher) {
+            SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer, ServiceMatcher serviceMatcher) {
         this.securityMetadataSourceAnalyzer = securityMetadataSourceAnalyzer;
         this.serviceMatcher = serviceMatcher;
     }
@@ -58,8 +55,7 @@ public class RemoteSecurityMetadataSyncListener
 
             String data = event.getData();
             if (StringUtils.isNotBlank(data)) {
-                List<SecurityAttribute> securityAttributes =
-                        JacksonUtils.toList(data, SecurityAttribute.class);
+                List<SecurityAttribute> securityAttributes = JacksonUtils.toList(data, SecurityAttribute.class);
 
                 if (CollectionUtils.isNotEmpty(securityAttributes)) {
                     log.debug(

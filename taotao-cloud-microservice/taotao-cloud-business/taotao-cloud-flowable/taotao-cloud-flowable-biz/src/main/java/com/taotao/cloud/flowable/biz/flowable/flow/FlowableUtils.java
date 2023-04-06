@@ -89,9 +89,7 @@ public class FlowableUtils {
             allElements.add(flowElement);
             if (flowElement instanceof SubProcess) {
                 // 继续深入子流程，进一步获取子流程
-                allElements =
-                        FlowableUtils.getAllElements(
-                                ((SubProcess) flowElement).getFlowElements(), allElements);
+                allElements = FlowableUtils.getAllElements(((SubProcess) flowElement).getFlowElements(), allElements);
             }
         }
         return allElements;
@@ -112,9 +110,7 @@ public class FlowableUtils {
 
         // 如果该节点为开始节点，且存在上级子节点，则顺着上级子节点继续迭代
         if (source instanceof StartEvent && source.getSubProcess() != null) {
-            userTaskList =
-                    iteratorFindParentUserTasks(
-                            source.getSubProcess(), hasSequenceFlow, userTaskList);
+            userTaskList = iteratorFindParentUserTasks(source.getSubProcess(), hasSequenceFlow, userTaskList);
         }
 
         // 根据类型，获取入口连线
@@ -137,14 +133,12 @@ public class FlowableUtils {
                 // 类型为子流程，则添加子流程开始节点出口处相连的节点
                 if (sequenceFlow.getSourceFlowElement() instanceof SubProcess) {
                     // 获取子流程用户任务节点
-                    List<UserTask> childUserTaskList =
-                            findChildProcessUserTasks(
-                                    (StartEvent)
-                                            ((SubProcess) sequenceFlow.getSourceFlowElement())
-                                                    .getFlowElements()
-                                                    .toArray()[0],
-                                    null,
-                                    null);
+                    List<UserTask> childUserTaskList = findChildProcessUserTasks(
+                            (StartEvent) ((SubProcess) sequenceFlow.getSourceFlowElement())
+                                    .getFlowElements()
+                                    .toArray()[0],
+                            null,
+                            null);
                     // 如果找到节点，则说明该线路找到节点，不继续向下找，反之继续
                     if (childUserTaskList != null && childUserTaskList.size() > 0) {
                         userTaskList.addAll(childUserTaskList);
@@ -153,8 +147,7 @@ public class FlowableUtils {
                 }
                 // 继续迭代
                 userTaskList =
-                        iteratorFindParentUserTasks(
-                                sequenceFlow.getSourceFlowElement(), hasSequenceFlow, userTaskList);
+                        iteratorFindParentUserTasks(sequenceFlow.getSourceFlowElement(), hasSequenceFlow, userTaskList);
             }
         }
         return userTaskList;
@@ -170,18 +163,14 @@ public class FlowableUtils {
      * @return
      */
     public static List<UserTask> iteratorFindChildUserTasks(
-            FlowElement source,
-            List<String> runTaskKeyList,
-            Set<String> hasSequenceFlow,
-            List<UserTask> userTaskList) {
+            FlowElement source, List<String> runTaskKeyList, Set<String> hasSequenceFlow, List<UserTask> userTaskList) {
         hasSequenceFlow = hasSequenceFlow == null ? new HashSet<>() : hasSequenceFlow;
         userTaskList = userTaskList == null ? new ArrayList<>() : userTaskList;
 
         // 如果该节点为开始节点，且存在上级子节点，则顺着上级子节点继续迭代
         if (source instanceof EndEvent && source.getSubProcess() != null) {
             userTaskList =
-                    iteratorFindChildUserTasks(
-                            source.getSubProcess(), runTaskKeyList, hasSequenceFlow, userTaskList);
+                    iteratorFindChildUserTasks(source.getSubProcess(), runTaskKeyList, hasSequenceFlow, userTaskList);
         }
 
         // 根据类型，获取出口连线
@@ -204,15 +193,13 @@ public class FlowableUtils {
                 }
                 // 如果节点为子流程节点情况，则从节点中的第一个节点开始获取
                 if (sequenceFlow.getTargetFlowElement() instanceof SubProcess) {
-                    List<UserTask> childUserTaskList =
-                            iteratorFindChildUserTasks(
-                                    (FlowElement)
-                                            (((SubProcess) sequenceFlow.getTargetFlowElement())
-                                                    .getFlowElements()
-                                                    .toArray()[0]),
-                                    runTaskKeyList,
-                                    hasSequenceFlow,
-                                    null);
+                    List<UserTask> childUserTaskList = iteratorFindChildUserTasks(
+                            (FlowElement) (((SubProcess) sequenceFlow.getTargetFlowElement())
+                                    .getFlowElements()
+                                    .toArray()[0]),
+                            runTaskKeyList,
+                            hasSequenceFlow,
+                            null);
                     // 如果找到节点，则说明该线路找到节点，不继续向下找，反之继续
                     if (childUserTaskList != null && childUserTaskList.size() > 0) {
                         userTaskList.addAll(childUserTaskList);
@@ -220,12 +207,8 @@ public class FlowableUtils {
                     }
                 }
                 // 继续迭代
-                userTaskList =
-                        iteratorFindChildUserTasks(
-                                sequenceFlow.getTargetFlowElement(),
-                                runTaskKeyList,
-                                hasSequenceFlow,
-                                userTaskList);
+                userTaskList = iteratorFindChildUserTasks(
+                        sequenceFlow.getTargetFlowElement(), runTaskKeyList, hasSequenceFlow, userTaskList);
             }
         }
         return userTaskList;
@@ -263,14 +246,12 @@ public class FlowableUtils {
                 }
                 // 如果节点为子流程节点情况，则从节点中的第一个节点开始获取
                 if (sequenceFlow.getTargetFlowElement() instanceof SubProcess) {
-                    List<UserTask> childUserTaskList =
-                            findChildProcessUserTasks(
-                                    (FlowElement)
-                                            (((SubProcess) sequenceFlow.getTargetFlowElement())
-                                                    .getFlowElements()
-                                                    .toArray()[0]),
-                                    hasSequenceFlow,
-                                    null);
+                    List<UserTask> childUserTaskList = findChildProcessUserTasks(
+                            (FlowElement) (((SubProcess) sequenceFlow.getTargetFlowElement())
+                                    .getFlowElements()
+                                    .toArray()[0]),
+                            hasSequenceFlow,
+                            null);
                     // 如果找到节点，则说明该线路找到节点，不继续向下找，反之继续
                     if (childUserTaskList != null && childUserTaskList.size() > 0) {
                         userTaskList.addAll(childUserTaskList);
@@ -279,8 +260,7 @@ public class FlowableUtils {
                 }
                 // 继续迭代
                 userTaskList =
-                        findChildProcessUserTasks(
-                                sequenceFlow.getTargetFlowElement(), hasSequenceFlow, userTaskList);
+                        findChildProcessUserTasks(sequenceFlow.getTargetFlowElement(), hasSequenceFlow, userTaskList);
             }
         }
         return userTaskList;
@@ -309,12 +289,7 @@ public class FlowableUtils {
         // 如果该节点为开始节点，且存在上级子节点，则顺着上级子节点继续迭代
         if (source instanceof StartEvent && source.getSubProcess() != null) {
             dirtyRoads =
-                    iteratorFindDirtyRoads(
-                            source.getSubProcess(),
-                            passRoads,
-                            hasSequenceFlow,
-                            targets,
-                            dirtyRoads);
+                    iteratorFindDirtyRoads(source.getSubProcess(), passRoads, hasSequenceFlow, targets, dirtyRoads);
         }
 
         // 根据类型，获取入口连线
@@ -338,37 +313,28 @@ public class FlowableUtils {
                 }
                 // 如果该节点为开始节点，且存在上级子节点，则顺着上级子节点继续迭代
                 if (sequenceFlow.getSourceFlowElement() instanceof SubProcess) {
-                    dirtyRoads =
-                            findChildProcessAllDirtyRoad(
-                                    (StartEvent)
-                                            ((SubProcess) sequenceFlow.getSourceFlowElement())
-                                                    .getFlowElements()
-                                                    .toArray()[0],
-                                    null,
-                                    dirtyRoads);
+                    dirtyRoads = findChildProcessAllDirtyRoad(
+                            (StartEvent) ((SubProcess) sequenceFlow.getSourceFlowElement())
+                                    .getFlowElements()
+                                    .toArray()[0],
+                            null,
+                            dirtyRoads);
                     // 是否存在子流程上，true 是，false 否
-                    Boolean isInChildProcess =
-                            dirtyTargetInChildProcess(
-                                    (StartEvent)
-                                            ((SubProcess) sequenceFlow.getSourceFlowElement())
-                                                    .getFlowElements()
-                                                    .toArray()[0],
-                                    null,
-                                    targets,
-                                    null);
+                    Boolean isInChildProcess = dirtyTargetInChildProcess(
+                            (StartEvent) ((SubProcess) sequenceFlow.getSourceFlowElement())
+                                    .getFlowElements()
+                                    .toArray()[0],
+                            null,
+                            targets,
+                            null);
                     if (isInChildProcess) {
                         // 已在子流程上找到，该路线结束
                         continue;
                     }
                 }
                 // 继续迭代
-                dirtyRoads =
-                        iteratorFindDirtyRoads(
-                                sequenceFlow.getSourceFlowElement(),
-                                passRoads,
-                                hasSequenceFlow,
-                                targets,
-                                dirtyRoads);
+                dirtyRoads = iteratorFindDirtyRoads(
+                        sequenceFlow.getSourceFlowElement(), passRoads, hasSequenceFlow, targets, dirtyRoads);
             }
         }
         return dirtyRoads;
@@ -403,19 +369,16 @@ public class FlowableUtils {
                 dirtyRoads.add(sequenceFlow.getTargetFlowElement().getId());
                 // 如果节点为子流程节点情况，则从节点中的第一个节点开始获取
                 if (sequenceFlow.getTargetFlowElement() instanceof SubProcess) {
-                    dirtyRoads =
-                            findChildProcessAllDirtyRoad(
-                                    (FlowElement)
-                                            (((SubProcess) sequenceFlow.getTargetFlowElement())
-                                                    .getFlowElements()
-                                                    .toArray()[0]),
-                                    hasSequenceFlow,
-                                    dirtyRoads);
+                    dirtyRoads = findChildProcessAllDirtyRoad(
+                            (FlowElement) (((SubProcess) sequenceFlow.getTargetFlowElement())
+                                    .getFlowElements()
+                                    .toArray()[0]),
+                            hasSequenceFlow,
+                            dirtyRoads);
                 }
                 // 继续迭代
                 dirtyRoads =
-                        findChildProcessAllDirtyRoad(
-                                sequenceFlow.getTargetFlowElement(), hasSequenceFlow, dirtyRoads);
+                        findChildProcessAllDirtyRoad(sequenceFlow.getTargetFlowElement(), hasSequenceFlow, dirtyRoads);
             }
         }
         return dirtyRoads;
@@ -431,10 +394,7 @@ public class FlowableUtils {
      * @return
      */
     public static Boolean dirtyTargetInChildProcess(
-            FlowElement source,
-            Set<String> hasSequenceFlow,
-            List<String> targets,
-            Boolean inChildProcess) {
+            FlowElement source, Set<String> hasSequenceFlow, List<String> targets, Boolean inChildProcess) {
         hasSequenceFlow = hasSequenceFlow == null ? new HashSet<>() : hasSequenceFlow;
         inChildProcess = inChildProcess != null && inChildProcess;
 
@@ -457,23 +417,17 @@ public class FlowableUtils {
                 }
                 // 如果节点为子流程节点情况，则从节点中的第一个节点开始获取
                 if (sequenceFlow.getTargetFlowElement() instanceof SubProcess) {
-                    inChildProcess =
-                            dirtyTargetInChildProcess(
-                                    (FlowElement)
-                                            (((SubProcess) sequenceFlow.getTargetFlowElement())
-                                                    .getFlowElements()
-                                                    .toArray()[0]),
-                                    hasSequenceFlow,
-                                    targets,
-                                    inChildProcess);
+                    inChildProcess = dirtyTargetInChildProcess(
+                            (FlowElement) (((SubProcess) sequenceFlow.getTargetFlowElement())
+                                    .getFlowElements()
+                                    .toArray()[0]),
+                            hasSequenceFlow,
+                            targets,
+                            inChildProcess);
                 }
                 // 继续迭代
-                inChildProcess =
-                        dirtyTargetInChildProcess(
-                                sequenceFlow.getTargetFlowElement(),
-                                hasSequenceFlow,
-                                targets,
-                                inChildProcess);
+                inChildProcess = dirtyTargetInChildProcess(
+                        sequenceFlow.getTargetFlowElement(), hasSequenceFlow, targets, inChildProcess);
             }
         }
         return inChildProcess;
@@ -489,18 +443,14 @@ public class FlowableUtils {
      * @return
      */
     public static Boolean iteratorCheckSequentialReferTarget(
-            FlowElement source,
-            String targetKsy,
-            Set<String> hasSequenceFlow,
-            Boolean isSequential) {
+            FlowElement source, String targetKsy, Set<String> hasSequenceFlow, Boolean isSequential) {
         isSequential = isSequential == null || isSequential;
         hasSequenceFlow = hasSequenceFlow == null ? new HashSet<>() : hasSequenceFlow;
 
         // 如果该节点为开始节点，且存在上级子节点，则顺着上级子节点继续迭代
         if (source instanceof StartEvent && source.getSubProcess() != null) {
-            isSequential =
-                    iteratorCheckSequentialReferTarget(
-                            source.getSubProcess(), targetKsy, hasSequenceFlow, isSequential);
+            isSequential = iteratorCheckSequentialReferTarget(
+                    source.getSubProcess(), targetKsy, hasSequenceFlow, isSequential);
         }
 
         // 根据类型，获取入口连线
@@ -528,12 +478,8 @@ public class FlowableUtils {
                     break;
                 }
                 // 否则就继续迭代
-                isSequential =
-                        iteratorCheckSequentialReferTarget(
-                                sequenceFlow.getSourceFlowElement(),
-                                targetKsy,
-                                hasSequenceFlow,
-                                isSequential);
+                isSequential = iteratorCheckSequentialReferTarget(
+                        sequenceFlow.getSourceFlowElement(), targetKsy, hasSequenceFlow, isSequential);
             }
         }
         return isSequential;
@@ -548,10 +494,7 @@ public class FlowableUtils {
      * @return
      */
     public static List<List<UserTask>> findRoad(
-            FlowElement source,
-            List<UserTask> passRoads,
-            Set<String> hasSequenceFlow,
-            List<List<UserTask>> roads) {
+            FlowElement source, List<UserTask> passRoads, Set<String> hasSequenceFlow, List<List<UserTask>> roads) {
         passRoads = passRoads == null ? new ArrayList<>() : passRoads;
         roads = roads == null ? new ArrayList<>() : roads;
         hasSequenceFlow = hasSequenceFlow == null ? new HashSet<>() : hasSequenceFlow;
@@ -577,12 +520,7 @@ public class FlowableUtils {
                     passRoads.add((UserTask) sequenceFlow.getSourceFlowElement());
                 }
                 // 继续迭代
-                roads =
-                        findRoad(
-                                sequenceFlow.getSourceFlowElement(),
-                                passRoads,
-                                hasSequenceFlow,
-                                roads);
+                roads = findRoad(sequenceFlow.getSourceFlowElement(), passRoads, hasSequenceFlow, roads);
             }
         } else {
             // 添加路线
@@ -599,22 +537,18 @@ public class FlowableUtils {
      * @return
      */
     public static List<String> historicTaskInstanceClean(
-            Collection<FlowElement> allElements,
-            List<HistoricTaskInstance> historicTaskInstanceList) {
+            Collection<FlowElement> allElements, List<HistoricTaskInstance> historicTaskInstanceList) {
         // 会签节点收集
         List<String> multiTask = new ArrayList<>();
-        allElements.forEach(
-                flowElement -> {
-                    if (flowElement instanceof UserTask) {
-                        // 如果该节点的行为为会签行为，说明该节点为会签节点
-                        if (((UserTask) flowElement).getBehavior()
-                                        instanceof ParallelMultiInstanceBehavior
-                                || ((UserTask) flowElement).getBehavior()
-                                        instanceof SequentialMultiInstanceBehavior) {
-                            multiTask.add(flowElement.getId());
-                        }
-                    }
-                });
+        allElements.forEach(flowElement -> {
+            if (flowElement instanceof UserTask) {
+                // 如果该节点的行为为会签行为，说明该节点为会签节点
+                if (((UserTask) flowElement).getBehavior() instanceof ParallelMultiInstanceBehavior
+                        || ((UserTask) flowElement).getBehavior() instanceof SequentialMultiInstanceBehavior) {
+                    multiTask.add(flowElement.getId());
+                }
+            }
+        });
         // 循环放入栈，栈 LIFO：后进先出
         Stack<HistoricTaskInstance> stack = new Stack<>();
         historicTaskInstanceList.forEach(stack::push);
@@ -654,10 +588,7 @@ public class FlowableUtils {
                 }
                 // 会签回退删除原因有点不同
                 if (stack.peek().getDeleteReason().contains("Change parent activity to ")) {
-                    dirtyPoint =
-                            stack.peek()
-                                    .getDeleteReason()
-                                    .replace("Change parent activity to ", "");
+                    dirtyPoint = stack.peek().getDeleteReason().replace("Change parent activity to ", "");
                 }
                 FlowElement dirtyTask = null;
                 // 获取变更节点的对应的入口处连线
@@ -668,9 +599,8 @@ public class FlowableUtils {
                     }
                 }
                 // 获取脏数据线路
-                Set<String> dirtyDataLine =
-                        FlowableUtils.iteratorFindDirtyRoads(
-                                dirtyTask, null, null, Arrays.asList(dirtyPoint.split(",")), null);
+                Set<String> dirtyDataLine = FlowableUtils.iteratorFindDirtyRoads(
+                        dirtyTask, null, null, Arrays.asList(dirtyPoint.split(",")), null);
                 // 自己本身也是脏线路上的点，加进去
                 dirtyDataLine.add(stack.peek().getTaskDefinitionKey());
                 log.info(stack.peek().getTaskDefinitionKey() + "点脏路线集合：" + dirtyDataLine);
@@ -710,13 +640,10 @@ public class FlowableUtils {
                 }
                 // 会签脏数据处理，节点退回会签清空
                 // 如果在会签脏数据范畴中发现 Key改变，说明会签脏数据在上个节点就结束了，可以把会签脏数据删掉
-                if (multiKey != null
-                        && !multiKey.toString().equals(stack.peek().getTaskDefinitionKey())) {
+                if (multiKey != null && !multiKey.toString().equals(stack.peek().getTaskDefinitionKey())) {
                     deleteKeyList.set(
                             multiIndex,
-                            deleteKeyList
-                                    .get(multiIndex)
-                                    .replace(stack.peek().getTaskDefinitionKey() + ",", ""));
+                            deleteKeyList.get(multiIndex).replace(stack.peek().getTaskDefinitionKey() + ",", ""));
                     multiKey = null;
                     // 结束进行下校验删除
                     multiOpera = true;
@@ -728,10 +655,7 @@ public class FlowableUtils {
                         && deleteKeyList.get(i).contains(stack.peek().getTaskDefinitionKey())) {
                     // 删除匹配到的部分
                     deleteKeyList.set(
-                            i,
-                            deleteKeyList
-                                    .get(i)
-                                    .replace(stack.peek().getTaskDefinitionKey() + ",", ""));
+                            i, deleteKeyList.get(i).replace(stack.peek().getTaskDefinitionKey() + ",", ""));
                 }
                 // 如果每组中的元素都以匹配过，说明脏数据结束
                 if ("".equals(deleteKeyList.get(i))) {
@@ -743,9 +667,7 @@ public class FlowableUtils {
             }
             // 会签数据处理需要在循环外处理，否则可能导致溢出
             // 会签的数据肯定是之前放进去的所以理论上不会溢出，但还是校验下
-            if (multiOpera
-                    && deleteKeyList.size() > multiIndex
-                    && "".equals(deleteKeyList.get(multiIndex))) {
+            if (multiOpera && deleteKeyList.size() > multiIndex && "".equals(deleteKeyList.get(multiIndex))) {
                 // 同时删除脏数据
                 deleteKeyList.remove(multiIndex);
                 dirtyDataLineList.remove(multiIndex);

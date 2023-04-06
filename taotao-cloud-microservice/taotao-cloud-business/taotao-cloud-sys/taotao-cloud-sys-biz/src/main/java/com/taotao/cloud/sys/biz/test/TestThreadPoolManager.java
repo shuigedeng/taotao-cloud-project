@@ -59,23 +59,20 @@ public class TestThreadPoolManager implements BeanFactoryAware {
     Queue<Object> msgQueue = new LinkedBlockingQueue<Object>();
 
     /** 当线程池的容量满了，执行下面代码，将订单存入到缓冲队列 */
-    final RejectedExecutionHandler handler =
-            (r, executor) -> {
-                // 订单加入到缓冲队列
-                msgQueue.offer(((BusinessThread) r).getAcceptStr());
-                System.out.println(
-                        "系统任务太忙了,把此订单交给(调度线程池)逐一处理，订单号：" + ((BusinessThread) r).getAcceptStr());
-            };
+    final RejectedExecutionHandler handler = (r, executor) -> {
+        // 订单加入到缓冲队列
+        msgQueue.offer(((BusinessThread) r).getAcceptStr());
+        System.out.println("系统任务太忙了,把此订单交给(调度线程池)逐一处理，订单号：" + ((BusinessThread) r).getAcceptStr());
+    };
 
     /** 创建线程池 */
-    final ThreadPoolExecutor threadPool =
-            new ThreadPoolExecutor(
-                    CORE_POOL_SIZE,
-                    MAX_POOL_SIZE,
-                    KEEP_ALIVE_TIME,
-                    TimeUnit.SECONDS,
-                    new ArrayBlockingQueue<>(WORK_QUEUE_SIZE),
-                    this.handler);
+    final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+            CORE_POOL_SIZE,
+            MAX_POOL_SIZE,
+            KEEP_ALIVE_TIME,
+            TimeUnit.SECONDS,
+            new ArrayBlockingQueue<>(WORK_QUEUE_SIZE),
+            this.handler);
 
     /** 将任务加入订单线程池 */
     public void addOrders(String orderId) {
@@ -92,23 +89,22 @@ public class TestThreadPoolManager implements BeanFactoryAware {
     final ScheduledExecutorService scheduler = new ScheduledThreadPoolExecutor(5);
 
     /** 检查(调度线程池)，每秒执行一次，查看订单的缓冲队列是否有 订单记录，则重新加入到线程池 */
-    final ScheduledFuture scheduledFuture =
-            scheduler.scheduleAtFixedRate(
-                    () -> {
-                        // 判断缓冲队列是否存在记录
-                        if (!msgQueue.isEmpty()) {
-                            // 当线程池的队列容量少于WORK_QUEUE_SIZE，则开始把缓冲队列的订单 加入到 线程池
-                            if (threadPool.getQueue().size() < WORK_QUEUE_SIZE) {
-                                String orderId = (String) msgQueue.poll();
-                                BusinessThread businessThread = new BusinessThread(orderId);
-                                threadPool.execute(businessThread);
-                                System.out.println("(调度线程池)缓冲队列出现订单业务，重新添加到线程池，订单号：" + orderId);
-                            }
-                        }
-                    },
-                    0,
-                    1,
-                    TimeUnit.SECONDS);
+    final ScheduledFuture scheduledFuture = scheduler.scheduleAtFixedRate(
+            () -> {
+                // 判断缓冲队列是否存在记录
+                if (!msgQueue.isEmpty()) {
+                    // 当线程池的队列容量少于WORK_QUEUE_SIZE，则开始把缓冲队列的订单 加入到 线程池
+                    if (threadPool.getQueue().size() < WORK_QUEUE_SIZE) {
+                        String orderId = (String) msgQueue.poll();
+                        BusinessThread businessThread = new BusinessThread(orderId);
+                        threadPool.execute(businessThread);
+                        System.out.println("(调度线程池)缓冲队列出现订单业务，重新添加到线程池，订单号：" + orderId);
+                    }
+                }
+            },
+            0,
+            1,
+            TimeUnit.SECONDS);
 
     /** 获取消息缓冲队列 */
     public Queue<Object> getMsgQueue() {

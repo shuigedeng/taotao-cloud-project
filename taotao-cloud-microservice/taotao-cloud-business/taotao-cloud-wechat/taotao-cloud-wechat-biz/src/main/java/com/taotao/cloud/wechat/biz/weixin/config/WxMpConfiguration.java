@@ -66,21 +66,16 @@ public class WxMpConfiguration {
         }
 
         WxMpService service = new WxMpServiceImpl();
-        service.setMultiConfigStorages(
-                configs.stream()
-                        .map(
-                                a -> {
-                                    WxMpDefaultConfigImpl configStorage =
-                                            new WxMpDefaultConfigImpl();
-                                    configStorage.setAppId(a.getAppId());
-                                    configStorage.setSecret(a.getSecret());
-                                    configStorage.setToken(a.getToken());
-                                    configStorage.setAesKey(a.getAesKey());
-                                    return configStorage;
-                                })
-                        .collect(
-                                Collectors.toMap(
-                                        WxMpDefaultConfigImpl::getAppId, a -> a, (o, n) -> o)));
+        service.setMultiConfigStorages(configs.stream()
+                .map(a -> {
+                    WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
+                    configStorage.setAppId(a.getAppId());
+                    configStorage.setSecret(a.getSecret());
+                    configStorage.setToken(a.getToken());
+                    configStorage.setAesKey(a.getAesKey());
+                    return configStorage;
+                })
+                .collect(Collectors.toMap(WxMpDefaultConfigImpl::getAppId, a -> a, (o, n) -> o)));
         return service;
     }
 

@@ -36,8 +36,11 @@ import org.springframework.stereotype.Service;
 public class TravelApplyServiceImpl extends ServiceImpl<TravelApplyMapper, TravelApplyEntity>
         implements TravelApplyService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public TravelApplyEntity getInfo(String id) {
@@ -98,8 +101,7 @@ public class TravelApplyServiceImpl extends ServiceImpl<TravelApplyMapper, Trave
     @Override
     public void data(String id, String data) {
         TravelApplyForm travelApplyForm = JsonUtils.getJsonToBean(data, TravelApplyForm.class);
-        TravelApplyEntity entity =
-                JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

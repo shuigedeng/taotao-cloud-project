@@ -33,12 +33,14 @@ import org.springframework.stereotype.Service;
 
 /** 费用支出单 */
 @Service
-public class ExpenseExpenditureServiceImpl
-        extends ServiceImpl<ExpenseExpenditureMapper, ExpenseExpenditureEntity>
+public class ExpenseExpenditureServiceImpl extends ServiceImpl<ExpenseExpenditureMapper, ExpenseExpenditureEntity>
         implements ExpenseExpenditureService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public ExpenseExpenditureEntity getInfo(String id) {
@@ -72,8 +74,7 @@ public class ExpenseExpenditureServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, ExpenseExpenditureEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, ExpenseExpenditureEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -99,8 +100,7 @@ public class ExpenseExpenditureServiceImpl
 
     @Override
     public void data(String id, String data) {
-        ExpenseExpenditureForm expenseExpenditureForm =
-                JsonUtils.getJsonToBean(data, ExpenseExpenditureForm.class);
+        ExpenseExpenditureForm expenseExpenditureForm = JsonUtils.getJsonToBean(data, ExpenseExpenditureForm.class);
         ExpenseExpenditureEntity entity =
                 JsonUtils.getJsonToBean(expenseExpenditureForm, ExpenseExpenditureEntity.class);
         entity.setId(id);

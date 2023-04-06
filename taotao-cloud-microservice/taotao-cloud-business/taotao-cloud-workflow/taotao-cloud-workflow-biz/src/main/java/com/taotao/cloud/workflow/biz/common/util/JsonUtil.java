@@ -51,8 +51,7 @@ public class JsonUtil {
      */
     public static Map<String, Object> entityToMap(Object object) {
         String jsonStr = JSONObject.toJSONString(object);
-        Map<String, Object> map =
-                JSONObject.parseObject(jsonStr, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> map = JSONObject.parseObject(jsonStr, new TypeReference<Map<String, Object>>() {});
         return map;
     }
 
@@ -63,8 +62,7 @@ public class JsonUtil {
      * @return
      */
     public static Map<String, Object> stringToMap(String object) {
-        Map<String, Object> map =
-                JSONObject.parseObject(object, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> map = JSONObject.parseObject(object, new TypeReference<Map<String, Object>>() {});
         return map;
     }
 
@@ -118,8 +116,7 @@ public class JsonUtil {
      */
     public static String getObjectToStringDateFormat(Object object, String dateFormat) {
         JSON.defaultTimeZone = TimeZone.getTimeZone(ZoneId.of("+8"));
-        return JSON.toJSONStringWithDateFormat(
-                object, dateFormat, SerializerFeature.WriteMapNullValue);
+        return JSON.toJSONStringWithDateFormat(object, dateFormat, SerializerFeature.WriteMapNullValue);
     }
 
     //    /**
@@ -179,8 +176,7 @@ public class JsonUtil {
      * @return List<Map<String, Object>>
      */
     public static List<Map<String, Object>> getJsonToList(JSONArray jsonArray) {
-        return JSON.parseObject(
-                JSON.toJSONString(jsonArray), new TypeReference<List<Map<String, Object>>>() {});
+        return JSON.parseObject(JSON.toJSONString(jsonArray), new TypeReference<List<Map<String, Object>>>() {});
     }
 
     /**

@@ -53,47 +53,32 @@ public interface BpmProcessDefinitionConvert {
             Map<String, Deployment> deploymentMap,
             Map<String, BpmProcessDefinitionExtDO> processDefinitionDOMap,
             Map<Long, BpmFormDO> formMap) {
-        return CollectionUtils.convertList(
-                list,
-                definition -> {
-                    Deployment deployment =
-                            definition.getDeploymentId() != null
-                                    ? deploymentMap.get(definition.getDeploymentId())
-                                    : null;
-                    BpmProcessDefinitionExtDO definitionDO =
-                            processDefinitionDOMap.get(definition.getId());
-                    BpmFormDO form =
-                            definitionDO != null ? formMap.get(definitionDO.getFormId()) : null;
-                    return convert(definition, deployment, definitionDO, form);
-                });
+        return CollectionUtils.convertList(list, definition -> {
+            Deployment deployment =
+                    definition.getDeploymentId() != null ? deploymentMap.get(definition.getDeploymentId()) : null;
+            BpmProcessDefinitionExtDO definitionDO = processDefinitionDOMap.get(definition.getId());
+            BpmFormDO form = definitionDO != null ? formMap.get(definitionDO.getFormId()) : null;
+            return convert(definition, deployment, definitionDO, form);
+        });
     }
 
     default List<BpmProcessDefinitionRespVO> convertList3(
-            List<ProcessDefinition> list,
-            Map<String, BpmProcessDefinitionExtDO> processDefinitionDOMap) {
-        return CollectionUtils.convertList(
-                list,
-                processDefinition -> {
-                    BpmProcessDefinitionRespVO respVO = convert3(processDefinition);
-                    BpmProcessDefinitionExtDO processDefinitionExtDO =
-                            processDefinitionDOMap.get(processDefinition.getId());
-                    // 复制通用属性
-                    copyTo(processDefinitionExtDO, respVO);
-                    return respVO;
-                });
+            List<ProcessDefinition> list, Map<String, BpmProcessDefinitionExtDO> processDefinitionDOMap) {
+        return CollectionUtils.convertList(list, processDefinition -> {
+            BpmProcessDefinitionRespVO respVO = convert3(processDefinition);
+            BpmProcessDefinitionExtDO processDefinitionExtDO = processDefinitionDOMap.get(processDefinition.getId());
+            // 复制通用属性
+            copyTo(processDefinitionExtDO, respVO);
+            return respVO;
+        });
     }
 
-    @Mapping(
-            source = "suspended",
-            target = "suspensionState",
-            qualifiedByName = "convertSuspendedToSuspensionState")
+    @Mapping(source = "suspended", target = "suspensionState", qualifiedByName = "convertSuspendedToSuspensionState")
     BpmProcessDefinitionRespVO convert3(ProcessDefinition bean);
 
     @Named("convertSuspendedToSuspensionState")
     default Integer convertSuspendedToSuspensionState(boolean suspended) {
-        return suspended
-                ? SuspensionState.SUSPENDED.getStateCode()
-                : SuspensionState.ACTIVE.getStateCode();
+        return suspended ? SuspensionState.SUSPENDED.getStateCode() : SuspensionState.ACTIVE.getStateCode();
     }
 
     default BpmProcessDefinitionPageItemRespVO convert(
@@ -103,9 +88,7 @@ public interface BpmProcessDefinitionConvert {
             BpmFormDO form) {
         BpmProcessDefinitionPageItemRespVO respVO = convert(bean);
         respVO.setSuspensionState(
-                bean.isSuspended()
-                        ? SuspensionState.SUSPENDED.getStateCode()
-                        : SuspensionState.ACTIVE.getStateCode());
+                bean.isSuspended() ? SuspensionState.SUSPENDED.getStateCode() : SuspensionState.ACTIVE.getStateCode());
         if (deployment != null) {
             respVO.setDeploymentTime(LocalDateTimeUtil.of(deployment.getDeploymentTime()));
         }

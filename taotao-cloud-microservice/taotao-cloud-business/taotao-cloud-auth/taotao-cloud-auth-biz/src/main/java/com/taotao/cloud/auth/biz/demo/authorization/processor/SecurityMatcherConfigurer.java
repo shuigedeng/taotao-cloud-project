@@ -34,22 +34,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class SecurityMatcherConfigurer {
 
-    private static final List<String> DEFAULT_IGNORED_STATIC_RESOURCES =
-            Lists.newArrayList(
-                    "/error/**",
-                    "/plugins/**",
-                    "/authorization/**",
-                    "/static/**",
-                    "/webjars/**",
-                    "/swagger-ui.html",
-                    "/swagger-ui/**",
-                    "/swagger-resources/**",
-                    "/v3/api-docs",
-                    "/v3/api-docs/**",
-                    "/openapi.json",
-                    "/favicon.ico");
-    private static final List<String> DEFAULT_PERMIT_ALL_RESOURCES =
-            Lists.newArrayList("/open/**", "/oauth2/sign-out");
+    private static final List<String> DEFAULT_IGNORED_STATIC_RESOURCES = Lists.newArrayList(
+            "/error/**",
+            "/plugins/**",
+            "/authorization/**",
+            "/static/**",
+            "/webjars/**",
+            "/swagger-ui.html",
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/openapi.json",
+            "/favicon.ico");
+    private static final List<String> DEFAULT_PERMIT_ALL_RESOURCES = Lists.newArrayList("/open/**", "/oauth2/sign-out");
 
     private List<String> staticResources;
     private List<String> permitAllResources;
@@ -65,9 +63,7 @@ public class SecurityMatcherConfigurer {
     public List<String> getStaticResourceList() {
         if (CollectionUtils.isEmpty(this.staticResources)) {
             this.staticResources =
-                    merge(
-                            securityProperties.getMatcher().getStaticResources(),
-                            DEFAULT_IGNORED_STATIC_RESOURCES);
+                    merge(securityProperties.getMatcher().getStaticResources(), DEFAULT_IGNORED_STATIC_RESOURCES);
         }
         return this.staticResources;
     }
@@ -75,9 +71,7 @@ public class SecurityMatcherConfigurer {
     public List<String> getPermitAllList() {
         if (CollectionUtils.isEmpty(this.permitAllResources)) {
             this.permitAllResources =
-                    merge(
-                            securityProperties.getMatcher().getPermitAll(),
-                            DEFAULT_PERMIT_ALL_RESOURCES);
+                    merge(securityProperties.getMatcher().getPermitAll(), DEFAULT_PERMIT_ALL_RESOURCES);
         }
         return this.permitAllResources;
     }

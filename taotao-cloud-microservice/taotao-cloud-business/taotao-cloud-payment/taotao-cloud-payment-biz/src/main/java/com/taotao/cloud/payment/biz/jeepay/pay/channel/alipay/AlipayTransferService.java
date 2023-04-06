@@ -44,7 +44,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlipayTransferService implements ITransferService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -68,28 +69,22 @@ public class AlipayTransferService implements ITransferService {
 
     @Override
     public ChannelRetMsg transfer(
-            TransferOrderRQ bizRQ,
-            TransferOrder transferOrder,
-            MchAppConfigContext mchAppConfigContext) {
+            TransferOrderRQ bizRQ, TransferOrder transferOrder, MchAppConfigContext mchAppConfigContext) {
 
         AlipayFundTransUniTransferRequest request = new AlipayFundTransUniTransferRequest();
         AlipayFundTransUniTransferModel model = new AlipayFundTransUniTransferModel();
-        model.setTransAmount(
-                AmountUtil.convertCent2Dollar(transferOrder.getAmount())); // 转账金额，单位：元。
+        model.setTransAmount(AmountUtil.convertCent2Dollar(transferOrder.getAmount())); // 转账金额，单位：元。
         model.setOutBizNo(transferOrder.getTransferId()); // 商户转账唯一订单号
         model.setRemark(transferOrder.getTransferDesc()); // 转账备注
         model.setProductCode("TRANS_ACCOUNT_NO_PWD"); // 销售产品码。单笔无密转账固定为 TRANS_ACCOUNT_NO_PWD
         model.setBizScene("DIRECT_TRANSFER"); // 业务场景 单笔无密转账固定为 DIRECT_TRANSFER。
         model.setOrderTitle("转账"); // 转账业务的标题，用于在支付宝用户的账单里显示。
         model.setBusinessParams(
-                transferOrder
-                        .getChannelExtra()); // 转账业务请求的扩展参数 {\"payer_show_name_use_alias\":\"xx公司\"}
+                transferOrder.getChannelExtra()); // 转账业务请求的扩展参数 {\"payer_show_name_use_alias\":\"xx公司\"}
 
         Participant accPayeeInfo = new Participant();
-        accPayeeInfo.setName(
-                StringUtils.defaultString(transferOrder.getAccountName(), null)); // 收款方真实姓名
-        accPayeeInfo.setIdentityType(
-                "ALIPAY_LOGON_ID"); // ALIPAY_USERID： 支付宝用户ID      ALIPAY_LOGONID:支付宝登录账号
+        accPayeeInfo.setName(StringUtils.defaultString(transferOrder.getAccountName(), null)); // 收款方真实姓名
+        accPayeeInfo.setIdentityType("ALIPAY_LOGON_ID"); // ALIPAY_USERID： 支付宝用户ID      ALIPAY_LOGONID:支付宝登录账号
         accPayeeInfo.setIdentity(transferOrder.getAccountNo()); // 收款方账户
         model.setPayeeInfo(accPayeeInfo);
 
@@ -99,10 +94,9 @@ public class AlipayTransferService implements ITransferService {
         AlipayKit.putApiIsvInfo(mchAppConfigContext, request, model);
 
         // 调起支付宝接口
-        AlipayFundTransUniTransferResponse response =
-                configContextQueryService
-                        .getAlipayClientWrapper(mchAppConfigContext)
-                        .execute(request);
+        AlipayFundTransUniTransferResponse response = configContextQueryService
+                .getAlipayClientWrapper(mchAppConfigContext)
+                .execute(request);
 
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();
         channelRetMsg.setChannelAttach(response.getBody());

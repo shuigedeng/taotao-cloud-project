@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class StaticController extends CommonCtrl {
 
-    @Autowired private OssYmlConfig ossYmlConfig;
+    @Autowired
+    private OssYmlConfig ossYmlConfig;
 
     /** 图片预览 * */
     @GetMapping("/api/anon/localOssFiles/**/*.*")
@@ -49,11 +50,9 @@ public class StaticController extends CommonCtrl {
         try {
 
             // 查找图片文件
-            File imgFile =
-                    new File(
-                            ossYmlConfig.getOss().getFilePublicPath()
-                                    + File.separator
-                                    + request.getRequestURI().substring(24));
+            File imgFile = new File(ossYmlConfig.getOss().getFilePublicPath()
+                    + File.separator
+                    + request.getRequestURI().substring(24));
             if (!imgFile.isFile() || !imgFile.exists()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -62,8 +61,7 @@ public class StaticController extends CommonCtrl {
             HttpHeaders httpHeaders = new HttpHeaders();
             //            httpHeaders.setContentType(MediaType.IMAGE_JPEG);  //图片格式
             InputStream inputStream = new FileInputStream(imgFile);
-            return new ResponseEntity<>(
-                    new InputStreamResource(inputStream), httpHeaders, HttpStatus.OK);
+            return new ResponseEntity<>(new InputStreamResource(inputStream), httpHeaders, HttpStatus.OK);
 
         } catch (FileNotFoundException e) {
             logger.error("static file error", e);

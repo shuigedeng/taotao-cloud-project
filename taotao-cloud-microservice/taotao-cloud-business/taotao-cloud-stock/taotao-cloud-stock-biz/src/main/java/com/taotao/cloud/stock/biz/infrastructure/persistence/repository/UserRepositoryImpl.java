@@ -35,11 +35,14 @@ import org.springframework.stereotype.Repository;
 public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         implements UserRepository, IService<SysUserDO> {
 
-    @Autowired private SysUserRoleMapper sysUserRoleMapper;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
 
-    @Autowired private SysRoleMapper sysRoleMapper;
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
-    @Autowired private SysAccountMapper sysAccountMapper;
+    @Autowired
+    private SysAccountMapper sysAccountMapper;
 
     @Override
     public User find(UserId userId) {
@@ -49,11 +52,8 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         if (sysUserDO == null) {
             return null;
         }
-        User user =
-                UserConverter.toUser(
-                        sysUserDO,
-                        getUserAccount(sysUserDO.getAccountId()),
-                        getUserRoleIds(sysUserDO.getId()));
+        User user = UserConverter.toUser(
+                sysUserDO, getUserAccount(sysUserDO.getAccountId()), getUserRoleIds(sysUserDO.getId()));
         return user;
     }
 
@@ -67,11 +67,8 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         }
         List<User> users = new ArrayList<>();
         for (SysUserDO sysUserDO : sysUserDOList) {
-            User user =
-                    UserConverter.toUser(
-                            sysUserDO,
-                            getUserAccount(sysUserDO.getAccountId()),
-                            getUserRoleIds(sysUserDO.getId()));
+            User user = UserConverter.toUser(
+                    sysUserDO, getUserAccount(sysUserDO.getAccountId()), getUserRoleIds(sysUserDO.getId()));
             users.add(user);
         }
         return users;
@@ -116,10 +113,9 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     @Override
     public void remove(List<UserId> userIds) {
         List<String> ids = new ArrayList<>();
-        userIds.forEach(
-                userId -> {
-                    ids.add(userId.getId());
-                });
+        userIds.forEach(userId -> {
+            ids.add(userId.getId());
+        });
         this.removeByIds(ids);
         sysUserRoleMapper.deleteByUserIds(ids);
     }

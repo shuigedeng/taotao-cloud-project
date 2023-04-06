@@ -36,16 +36,14 @@ public class MessageQueueUtils {
      * @param groupId
      * @return
      */
-    public static KafkaSource<String> getKafkaConsumer(
-            String topicName, String groupId, String broker) {
-        KafkaSource<String> source =
-                KafkaSource.<String>builder()
-                        .setBootstrapServers(broker)
-                        .setTopics(topicName)
-                        .setGroupId(groupId)
-                        .setStartingOffsets(OffsetsInitializer.earliest())
-                        .setValueOnlyDeserializer(new SimpleStringSchema())
-                        .build();
+    public static KafkaSource<String> getKafkaConsumer(String topicName, String groupId, String broker) {
+        KafkaSource<String> source = KafkaSource.<String>builder()
+                .setBootstrapServers(broker)
+                .setTopics(topicName)
+                .setGroupId(groupId)
+                .setStartingOffsets(OffsetsInitializer.earliest())
+                .setValueOnlyDeserializer(new SimpleStringSchema())
+                .build();
         return source;
     }
 }

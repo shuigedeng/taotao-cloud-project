@@ -45,9 +45,11 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class MpOpenController {
 
-    @Resource private MpServiceFactory mpServiceFactory;
+    @Resource
+    private MpServiceFactory mpServiceFactory;
 
-    @Resource private MpAccountService mpAccountService;
+    @Resource
+    private MpAccountService mpAccountService;
 
     /**
      * 接收微信公众号的校验签名
@@ -57,14 +59,12 @@ public class MpOpenController {
      */
     @ApiOperation("校验签名") // 参见
     @GetMapping(value = "/{appId}", produces = "text/plain;charset=utf-8")
-    public String checkSignature(
-            @PathVariable("appId") String appId, MpOpenCheckSignatureReqVO reqVO) {
+    public String checkSignature(@PathVariable("appId") String appId, MpOpenCheckSignatureReqVO reqVO) {
         log.info("[checkSignature][appId({}) 接收到来自微信服务器的认证消息({})]", appId, reqVO);
         // 校验请求签名
         WxMpService wxMpService = mpServiceFactory.getRequiredMpService(appId);
         // 校验通过
-        if (wxMpService.checkSignature(
-                reqVO.getTimestamp(), reqVO.getNonce(), reqVO.getSignature())) {
+        if (wxMpService.checkSignature(reqVO.getTimestamp(), reqVO.getNonce(), reqVO.getSignature())) {
             return reqVO.getEchostr();
         }
         // 校验不通过
@@ -81,9 +81,7 @@ public class MpOpenController {
     @PostMapping(value = "/{appId}", produces = "application/xml; charset=UTF-8")
     @OperateLog(enable = false) // 回调地址，无需记录操作日志
     public String handleMessage(
-            @PathVariable("appId") String appId,
-            @RequestBody String content,
-            MpOpenHandleMessageReqVO reqVO) {
+            @PathVariable("appId") String appId, @RequestBody String content, MpOpenHandleMessageReqVO reqVO) {
         log.info("[handleMessage][appId({}) 推送消息，参数({}) 内容({})]", appId, reqVO, content);
 
         // 处理 appId + 多租户的上下文
@@ -91,8 +89,7 @@ public class MpOpenController {
         Assert.notNull(account, "公众号 appId({}) 不存在", appId);
         try {
             MpContextHolder.setAppId(appId);
-            return TenantUtils.execute(
-                    account.getTenantId(), () -> handleMessage0(appId, content, reqVO));
+            return TenantUtils.execute(account.getTenantId(), () -> handleMessage0(appId, content, reqVO));
         } finally {
             MpContextHolder.clear();
         }
@@ -101,24 +98,19 @@ public class MpOpenController {
     private String handleMessage0(String appId, String content, MpOpenHandleMessageReqVO reqVO) {
         // 校验请求签名
         WxMpService mppService = mpServiceFactory.getRequiredMpService(appId);
-        Assert.isTrue(
-                mppService.checkSignature(
-                        reqVO.getTimestamp(), reqVO.getNonce(), reqVO.getSignature()),
-                "非法请求");
+        Assert.isTrue(mppService.checkSignature(reqVO.getTimestamp(), reqVO.getNonce(), reqVO.getSignature()), "非法请求");
 
         // 第一步，解析消息
         WxMpXmlMessage inMessage = null;
         if (StrUtil.isBlank(reqVO.getEncrypt_type())) { // 明文模式
             inMessage = WxMpXmlMessage.fromXml(content);
-        } else if (Objects.equals(
-                reqVO.getEncrypt_type(), MpOpenHandleMessageReqVO.ENCRYPT_TYPE_AES)) { // AES 加密模式
-            inMessage =
-                    WxMpXmlMessage.fromEncryptedXml(
-                            content,
-                            mppService.getWxMpConfigStorage(),
-                            reqVO.getTimestamp(),
-                            reqVO.getNonce(),
-                            reqVO.getMsg_signature());
+        } else if (Objects.equals(reqVO.getEncrypt_type(), MpOpenHandleMessageReqVO.ENCRYPT_TYPE_AES)) { // AES 加密模式
+            inMessage = WxMpXmlMessage.fromEncryptedXml(
+                    content,
+                    mppService.getWxMpConfigStorage(),
+                    reqVO.getTimestamp(),
+                    reqVO.getNonce(),
+                    reqVO.getMsg_signature());
         }
         Assert.notNull(inMessage, "消息解析失败，原因：消息为空");
 
@@ -132,8 +124,7 @@ public class MpOpenController {
         // 第三步，返回消息
         if (StrUtil.isBlank(reqVO.getEncrypt_type())) { // 明文模式
             return outMessage.toXml();
-        } else if (Objects.equals(
-                reqVO.getEncrypt_type(), MpOpenHandleMessageReqVO.ENCRYPT_TYPE_AES)) { // AES 加密模式
+        } else if (Objects.equals(reqVO.getEncrypt_type(), MpOpenHandleMessageReqVO.ENCRYPT_TYPE_AES)) { // AES 加密模式
             return outMessage.toEncryptedXml(mppService.getWxMpConfigStorage());
         }
         return "";

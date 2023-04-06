@@ -53,13 +53,9 @@ public class HerodotusClientDetailsService implements EnhanceClientDetailsServic
                 for (OAuth2Scope scope : scopes) {
                     Set<OAuth2Authority> authorities = scope.getAuthorities();
                     if (CollectionUtils.isNotEmpty(authorities)) {
-                        Set<HerodotusGrantedAuthority> grantedAuthorities =
-                                authorities.stream()
-                                        .map(
-                                                item ->
-                                                        new HerodotusGrantedAuthority(
-                                                                item.getAuthorityCode()))
-                                        .collect(Collectors.toSet());
+                        Set<HerodotusGrantedAuthority> grantedAuthorities = authorities.stream()
+                                .map(item -> new HerodotusGrantedAuthority(item.getAuthorityCode()))
+                                .collect(Collectors.toSet());
                         result.addAll(grantedAuthorities);
                     }
                 }

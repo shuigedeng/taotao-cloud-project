@@ -43,8 +43,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/isv/payConfigs")
 public class IsvPayInterfaceConfigController extends CommonCtrl {
 
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /**
      * @Author: ZhuXiao @Description: 查询服务商支付接口配置列表 @Date: 16:45 2021/4/27
@@ -53,9 +56,8 @@ public class IsvPayInterfaceConfigController extends CommonCtrl {
     @GetMapping
     public ApiRes list() {
 
-        List<PayInterfaceDefine> list =
-                payInterfaceConfigService.selectAllPayIfConfigListByIsvNo(
-                        CS.INFO_TYPE_ISV, getValStringRequired("isvNo"));
+        List<PayInterfaceDefine> list = payInterfaceConfigService.selectAllPayIfConfigListByIsvNo(
+                CS.INFO_TYPE_ISV, getValStringRequired("isvNo"));
         return ApiRes.ok(list);
     }
 
@@ -65,19 +67,16 @@ public class IsvPayInterfaceConfigController extends CommonCtrl {
     @PreAuthorize("hasAuthority('ENT_ISV_PAY_CONFIG_VIEW')")
     @GetMapping("/{isvNo}/{ifCode}")
     public ApiRes getByMchNo(
-            @PathVariable(value = "isvNo") String isvNo,
-            @PathVariable(value = "ifCode") String ifCode) {
+            @PathVariable(value = "isvNo") String isvNo, @PathVariable(value = "ifCode") String ifCode) {
         PayInterfaceConfig payInterfaceConfig =
                 payInterfaceConfigService.getByInfoIdAndIfCode(CS.INFO_TYPE_ISV, isvNo, ifCode);
         if (payInterfaceConfig != null) {
             if (payInterfaceConfig.getIfRate() != null) {
-                payInterfaceConfig.setIfRate(
-                        payInterfaceConfig.getIfRate().multiply(new BigDecimal("100")));
+                payInterfaceConfig.setIfRate(payInterfaceConfig.getIfRate().multiply(new BigDecimal("100")));
             }
             if (StringUtils.isNotBlank(payInterfaceConfig.getIfParams())) {
                 IsvParams isvParams =
-                        IsvParams.factory(
-                                payInterfaceConfig.getIfCode(), payInterfaceConfig.getIfParams());
+                        IsvParams.factory(payInterfaceConfig.getIfCode(), payInterfaceConfig.getIfParams());
                 if (isvParams != null) {
                     payInterfaceConfig.setIfParams(isvParams.deSenData());
                 }
@@ -103,9 +102,7 @@ public class IsvPayInterfaceConfigController extends CommonCtrl {
         // 存入真实费率
         if (payInterfaceConfig.getIfRate() != null) {
             payInterfaceConfig.setIfRate(
-                    payInterfaceConfig
-                            .getIfRate()
-                            .divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
+                    payInterfaceConfig.getIfRate().divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
         }
 
         // 添加更新者信息
@@ -115,15 +112,13 @@ public class IsvPayInterfaceConfigController extends CommonCtrl {
         payInterfaceConfig.setUpdatedBy(realName);
 
         // 根据 服务商号、接口类型 获取商户参数配置
-        PayInterfaceConfig dbRecoed =
-                payInterfaceConfigService.getByInfoIdAndIfCode(CS.INFO_TYPE_ISV, infoId, ifCode);
+        PayInterfaceConfig dbRecoed = payInterfaceConfigService.getByInfoIdAndIfCode(CS.INFO_TYPE_ISV, infoId, ifCode);
         // 若配置存在，为saveOrUpdate添加ID，第一次配置添加创建者
         if (dbRecoed != null) {
             payInterfaceConfig.setId(dbRecoed.getId());
 
             // 合并支付参数
-            payInterfaceConfig.setIfParams(
-                    StringKit.marge(dbRecoed.getIfParams(), payInterfaceConfig.getIfParams()));
+            payInterfaceConfig.setIfParams(StringKit.marge(dbRecoed.getIfParams(), payInterfaceConfig.getIfParams()));
         } else {
             payInterfaceConfig.setCreatedUid(userId);
             payInterfaceConfig.setCreatedBy(realName);
@@ -136,8 +131,7 @@ public class IsvPayInterfaceConfigController extends CommonCtrl {
 
         // 推送mq到目前节点进行更新数据
         mqSender.send(
-                ResetIsvMchAppInfoConfigMQ.build(
-                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, infoId, null, null));
+                ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, infoId, null, null));
 
         return ApiRes.ok();
     }

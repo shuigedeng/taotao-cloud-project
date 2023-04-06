@@ -40,19 +40,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionOrderBuyerController {
 
     /** 分销订单 */
-    @Autowired private IDistributionOrderService distributionOrderService;
+    @Autowired
+    private IDistributionOrderService distributionOrderService;
     /** 分销员 */
-    @Autowired private IDistributionService distributionService;
+    @Autowired
+    private IDistributionService distributionService;
 
     @Operation(summary = "分销员订单", description = "分销员订单")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping
-    public Result<IPage<DistributionOrder>> casHistory(
-            DistributionOrderPageQuery distributionOrderPageQuery) {
+    public Result<IPage<DistributionOrder>> casHistory(DistributionOrderPageQuery distributionOrderPageQuery) {
         // 获取当前登录的分销员
-        distributionOrderPageQuery.setDistributionId(distributionService.getDistribution().getId());
-        return Result.success(
-                distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
+        distributionOrderPageQuery.setDistributionId(
+                distributionService.getDistribution().getId());
+        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
     }
 }

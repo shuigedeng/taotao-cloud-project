@@ -25,7 +25,8 @@ import tk.mybatis.mapper.common.Mapper;
 
 public class OrderDaoImpl implements OrderDao {
 
-    @Autowired private Mapper<Order> mapper;
+    @Autowired
+    private Mapper<Order> mapper;
 
     @Override
     public Order selectOne(Order arg0) {

@@ -75,8 +75,9 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
 
     @Override
     public void create(List<FlowTaskNodeEntity> dataAll) {
-        List<FlowTaskNodeEntity> startNodes =
-                dataAll.stream().filter(t -> FlowNature.NodeStart.equals(t.getNodeType())).toList();
+        List<FlowTaskNodeEntity> startNodes = dataAll.stream()
+                .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
+                .toList();
         if (startNodes.size() > 0) {
             String startNode = startNodes.get(0).getNodeCode();
             long num = 0L;
@@ -91,18 +92,19 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
             String nodeNext = FlowNature.NodeEnd;
             for (FlowTaskNodeEntity entity : dataAll) {
                 String type = entity.getNodeType();
-                FlowTaskNodeEntity node =
-                        treeList.stream()
-                                .filter(t -> t.getNodeCode().equals(entity.getNodeCode()))
-                                .findFirst()
-                                .orElse(null);
+                FlowTaskNodeEntity node = treeList.stream()
+                        .filter(t -> t.getNodeCode().equals(entity.getNodeCode()))
+                        .findFirst()
+                        .orElse(null);
                 // 判断结束节点是否多个
-                List<FlowTaskNodeEntity> endCount =
-                        treeList.stream().filter(t -> StrUtil.isEmpty(t.getNodeNext())).toList();
+                List<FlowTaskNodeEntity> endCount = treeList.stream()
+                        .filter(t -> StrUtil.isEmpty(t.getNodeNext()))
+                        .toList();
                 // 判断下一节点是否多个
                 String next = entity.getNodeNext();
-                List<FlowTaskNodeEntity> nextNum =
-                        treeList.stream().filter(t -> t.getNodeNext().equals(next)).toList();
+                List<FlowTaskNodeEntity> nextNum = treeList.stream()
+                        .filter(t -> t.getNodeNext().equals(next))
+                        .toList();
                 if (StringUtil.isEmpty(next)) {
                     entity.setNodeNext(nodeNext);
                 }
@@ -119,13 +121,10 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                     if (endCount.size() > 1) {
                         if (nodeNext.equals(entity.getNodeNext())) {
                             ChildNodeList modelList =
-                                    JsonUtils.toObject(
-                                            entity.getNodePropertyJson(), ChildNodeList.class);
+                                    JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
                             // 添加指向下一节点的id
                             List<String> nextEndList =
-                                    endCount.stream()
-                                            .map(t -> t.getNodeCode())
-                                            .collect(Collectors.toList());
+                                    endCount.stream().map(t -> t.getNodeCode()).collect(Collectors.toList());
                             nextEndList.remove(entity.getNodeCode());
                             // 赋值合流id和分流的id
                             modelList.getCustom().setInterflow(true);
@@ -136,14 +135,11 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                     }
                     // 至少2条下一节点一样,才有可能是分流
                     if (nextNum.size() > 1) {
-                        ChildNodeList modelList =
-                                JsonUtils.toObject(
-                                        entity.getNodePropertyJson(), ChildNodeList.class);
+                        ChildNodeList modelList = JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
                         // 添加指向下一节点的id
-                        List<String> nextEndList =
-                                nextNum.stream()
-                                        .map(FlowTaskNodeEntity::getNodeCode)
-                                        .collect(Collectors.toList());
+                        List<String> nextEndList = nextNum.stream()
+                                .map(FlowTaskNodeEntity::getNodeCode)
+                                .collect(Collectors.toList());
                         nextEndList.remove(entity.getNodeCode());
                         // 赋值合流id和分流的id
                         modelList.getCustom().setInterflowId(String.join(",", nextEndList));
@@ -217,7 +213,9 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
             if (nodeNext.length > 0) {
                 for (int k = 0; k < nodeNext.length; k++) {
                     String next = nodeNext[k];
-                    long nums = treeList.stream().filter(t -> t.getNodeCode().equals(next)).count();
+                    long nums = treeList.stream()
+                            .filter(t -> t.getNodeCode().equals(next))
+                            .count();
                     if (StrUtil.isNotEmpty(next) && nums == 0) {
                         nodeList(dataAll, next, treeList, num, max);
                     }

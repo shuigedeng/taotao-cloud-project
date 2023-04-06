@@ -38,7 +38,8 @@ public class WxMsg implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
 
     private String appid;
     /** 微信用户ID */

@@ -28,8 +28,7 @@ public class CookieUtil {
      *
      * @param maxAge 秒
      */
-    public static void setCookie(
-            HttpServletResponse response, String cookieName, String cookieValue, int maxAge) {
+    public static void setCookie(HttpServletResponse response, String cookieName, String cookieValue, int maxAge) {
         Cookie cookie = new Cookie(cookieName, cookieValue);
         maxAge = Math.max(maxAge, 0);
         cookie.setMaxAge(maxAge);
@@ -46,11 +45,7 @@ public class CookieUtil {
     }
 
     public static void refreshCookie(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            String cookieName,
-            String domain,
-            int maxAge) {
+            HttpServletRequest request, HttpServletResponse response, String cookieName, String domain, int maxAge) {
         Cookie cookie = getCookie(request, cookieName);
         if (cookie != null) {
             cookie.setMaxAge(maxAge);

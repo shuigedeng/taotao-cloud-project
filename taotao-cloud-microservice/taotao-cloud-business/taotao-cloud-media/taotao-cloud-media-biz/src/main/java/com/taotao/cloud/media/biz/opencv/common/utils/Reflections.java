@@ -72,8 +72,7 @@ public class Reflections {
         Field field = getAccessibleField(obj, fieldName);
 
         if (field == null) {
-            throw new IllegalArgumentException(
-                    "Could not find field [" + fieldName + "] on target [" + obj + "]");
+            throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + obj + "]");
         }
 
         Object result = null;
@@ -90,8 +89,7 @@ public class Reflections {
         Field field = getAccessibleField(obj, fieldName);
 
         if (field == null) {
-            throw new IllegalArgumentException(
-                    "Could not find field [" + fieldName + "] on target [" + obj + "]");
+            throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + obj + "]");
         }
 
         try {
@@ -106,14 +104,10 @@ public class Reflections {
      * 同时匹配方法名+参数类型，
      */
     public static Object invokeMethod(
-            final Object obj,
-            final String methodName,
-            final Class<?>[] parameterTypes,
-            final Object[] args) {
+            final Object obj, final String methodName, final Class<?>[] parameterTypes, final Object[] args) {
         Method method = getAccessibleMethod(obj, methodName, parameterTypes);
         if (method == null) {
-            throw new IllegalArgumentException(
-                    "Could not find method [" + methodName + "] on target [" + obj + "]");
+            throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + obj + "]");
         }
 
         try {
@@ -127,12 +121,10 @@ public class Reflections {
      * 直接调用对象方法, 无视private/protected修饰符， 用于一次性调用的情况，否则应使用getAccessibleMethodByName()函数获得Method后反复调用.
      * 只匹配函数名，如果有多个同名函数调用第一个。
      */
-    public static Object invokeMethodByName(
-            final Object obj, final String methodName, final Object[] args) {
+    public static Object invokeMethodByName(final Object obj, final String methodName, final Object[] args) {
         Method method = getAccessibleMethodByName(obj, methodName);
         if (method == null) {
-            throw new IllegalArgumentException(
-                    "Could not find method [" + methodName + "] on target [" + obj + "]");
+            throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + obj + "]");
         }
 
         try {
@@ -265,19 +257,16 @@ public class Reflections {
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
 
         if (index >= params.length || index < 0) {
-            logger.warn(
-                    "Index: "
-                            + index
-                            + ", Size of "
-                            + clazz.getSimpleName()
-                            + "'s Parameterized Type: "
-                            + params.length);
+            logger.warn("Index: "
+                    + index
+                    + ", Size of "
+                    + clazz.getSimpleName()
+                    + "'s Parameterized Type: "
+                    + params.length);
             return Object.class;
         }
         if (!(params[index] instanceof Class)) {
-            logger.warn(
-                    clazz.getSimpleName()
-                            + " not set the actual class on superclass generic parameter");
+            logger.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
             return Object.class;
         }
 

@@ -35,21 +35,21 @@ import org.springframework.util.StringUtils;
 @Service
 public class MsgReplyRuleServiceImpl extends ServiceImpl<MsgReplyRuleMapper, MsgReplyRule>
         implements MsgReplyRuleService {
-    @Autowired MsgReplyRuleMapper msgReplyRuleMapper;
+    @Autowired
+    MsgReplyRuleMapper msgReplyRuleMapper;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String matchValue = (String) params.get("matchValue");
         String appid = (String) params.get("appid");
-        IPage<MsgReplyRule> page =
-                this.page(
-                        new Query<MsgReplyRule>().getPage(params),
-                        new QueryWrapper<MsgReplyRule>()
-                                .eq(StringUtils.hasText(appid), "appid", appid)
-                                .or()
-                                .apply("appid is null or appid = ''")
-                                .like(StringUtils.hasText(matchValue), "match_value", matchValue)
-                                .orderByDesc("update_time"));
+        IPage<MsgReplyRule> page = this.page(
+                new Query<MsgReplyRule>().getPage(params),
+                new QueryWrapper<MsgReplyRule>()
+                        .eq(StringUtils.hasText(appid), "appid", appid)
+                        .or()
+                        .apply("appid is null or appid = ''")
+                        .like(StringUtils.hasText(matchValue), "match_value", matchValue)
+                        .orderByDesc("update_time"));
 
         return new PageUtils(page);
     }
@@ -76,8 +76,7 @@ public class MsgReplyRuleServiceImpl extends ServiceImpl<MsgReplyRuleMapper, Msg
      */
     @Override
     public List<MsgReplyRule> getRules() {
-        return msgReplyRuleMapper.selectList(
-                new QueryWrapper<MsgReplyRule>().orderByDesc("rule_id"));
+        return msgReplyRuleMapper.selectList(new QueryWrapper<MsgReplyRule>().orderByDesc("rule_id"));
     }
 
     /**
@@ -87,12 +86,11 @@ public class MsgReplyRuleServiceImpl extends ServiceImpl<MsgReplyRuleMapper, Msg
      */
     @Override
     public List<MsgReplyRule> getValidRules() {
-        return msgReplyRuleMapper.selectList(
-                new QueryWrapper<MsgReplyRule>()
-                        .eq("status", 1)
-                        .isNotNull("match_value")
-                        .ne("match_value", "")
-                        .orderByDesc("priority"));
+        return msgReplyRuleMapper.selectList(new QueryWrapper<MsgReplyRule>()
+                .eq("status", 1)
+                .isNotNull("match_value")
+                .ne("match_value", "")
+                .orderByDesc("priority"));
     }
 
     /**
@@ -107,30 +105,14 @@ public class MsgReplyRuleServiceImpl extends ServiceImpl<MsgReplyRuleMapper, Msg
     public List<MsgReplyRule> getMatchedRules(String appid, boolean exactMatch, String keywords) {
         LocalTime now = LocalTime.now();
         return this.getValidRules().stream()
-                .filter(
-                        rule ->
-                                !StringUtils.hasText(rule.getAppid())
-                                        || appid.equals(
-                                                rule.getAppid())) // 检测是否是对应公众号的规则，如果appid为空则为通用规则
-                .filter(
-                        rule ->
-                                null == rule.getEffectTimeStart()
-                                        || rule.getEffectTimeStart()
-                                                .toLocalTime()
-                                                .isBefore(
-                                                        now)) // 检测是否在有效时段，effectTimeStart为null则一直有效
-                .filter(
-                        rule ->
-                                null == rule.getEffectTimeEnd()
-                                        || rule.getEffectTimeEnd()
-                                                .toLocalTime()
-                                                .isAfter(now)) // 检测是否在有效时段，effectTimeEnd为null则一直有效
-                .filter(
-                        rule ->
-                                isMatch(
-                                        exactMatch || rule.isExactMatch(),
-                                        rule.getMatchValue().split(","),
-                                        keywords)) // 检测是否符合匹配规则
+                .filter(rule -> !StringUtils.hasText(rule.getAppid())
+                        || appid.equals(rule.getAppid())) // 检测是否是对应公众号的规则，如果appid为空则为通用规则
+                .filter(rule -> null == rule.getEffectTimeStart()
+                        || rule.getEffectTimeStart().toLocalTime().isBefore(now)) // 检测是否在有效时段，effectTimeStart为null则一直有效
+                .filter(rule -> null == rule.getEffectTimeEnd()
+                        || rule.getEffectTimeEnd().toLocalTime().isAfter(now)) // 检测是否在有效时段，effectTimeEnd为null则一直有效
+                .filter(rule -> isMatch(
+                        exactMatch || rule.isExactMatch(), rule.getMatchValue().split(","), keywords)) // 检测是否符合匹配规则
                 .collect(Collectors.toList());
     }
 

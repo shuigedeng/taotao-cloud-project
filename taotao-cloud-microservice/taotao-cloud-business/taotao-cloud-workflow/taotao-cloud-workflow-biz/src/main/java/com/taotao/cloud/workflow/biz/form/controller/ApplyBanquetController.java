@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ApplyBanquet")
 public class ApplyBanquetController {
 
-    @Autowired private ApplyBanquetService applyBanquetService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ApplyBanquetService applyBanquetService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取宴请申请信息
@@ -52,8 +55,7 @@ public class ApplyBanquetController {
      */
     @Operation("获取宴请申请信息")
     @GetMapping("/{id}")
-    public Result<ApplyBanquetInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<ApplyBanquetInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ApplyBanquetInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class ApplyBanquetController {
      */
     @Operation("新建宴请申请")
     @PostMapping
-    public Result create(@RequestBody @Valid ApplyBanquetForm applyBanquetForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid ApplyBanquetForm applyBanquetForm) throws WorkFlowException {
         if (applyBanquetForm.getBanquetNum() != null
                 && StringUtil.isNotEmpty(applyBanquetForm.getBanquetNum())
                 && !RegexUtils.checkDigit2(applyBanquetForm.getBanquetNum())) {
@@ -96,8 +97,7 @@ public class ApplyBanquetController {
                 && !RegexUtils.checkDecimals2(String.valueOf(applyBanquetForm.getExpectedCost()))) {
             return Result.fail("预计费用必须大于0，最多只能有两位小数");
         }
-        ApplyBanquetEntity entity =
-                JsonUtils.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
+        ApplyBanquetEntity entity = JsonUtils.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyBanquetForm.getStatus())) {
             applyBanquetService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -115,8 +115,7 @@ public class ApplyBanquetController {
      */
     @Operation("修改宴请申请")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid ApplyBanquetForm applyBanquetForm, @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid ApplyBanquetForm applyBanquetForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (applyBanquetForm.getBanquetNum() != null
                 && StringUtil.isNotEmpty(applyBanquetForm.getBanquetNum())
@@ -132,8 +131,7 @@ public class ApplyBanquetController {
                 && !RegexUtils.checkDecimals2(String.valueOf(applyBanquetForm.getExpectedCost()))) {
             return Result.fail("预计费用必须大于0，最多只能有两位小数");
         }
-        ApplyBanquetEntity entity =
-                JsonUtils.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
+        ApplyBanquetEntity entity = JsonUtils.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyBanquetForm.getStatus())) {
             applyBanquetService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

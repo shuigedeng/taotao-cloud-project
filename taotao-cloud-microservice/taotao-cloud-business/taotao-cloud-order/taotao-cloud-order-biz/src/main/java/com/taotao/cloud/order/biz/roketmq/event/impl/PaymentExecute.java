@@ -38,7 +38,8 @@ import org.springframework.stereotype.Service;
 public class PaymentExecute implements OrderStatusChangeEvent {
 
     /** 订单 */
-    @Autowired private IOrderService orderService;
+    @Autowired
+    private IOrderService orderService;
 
     @Override
     public void orderChange(OrderMessage orderMessage) {
@@ -49,26 +50,24 @@ public class PaymentExecute implements OrderStatusChangeEvent {
             if (order.getPayStatus().equals(PayStatusEnum.UNPAID.name())) {
                 return;
             }
-            PaymentMethodEnum paymentMethodEnum =
-                    PaymentMethodEnum.valueOf(order.getPaymentMethod());
+            PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.valueOf(order.getPaymentMethod());
 
             // 获取支付方式
             Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
 
-            RefundLog refundLog =
-                    RefundLog.builder()
-                            .isRefund(false)
-                            .totalAmount(order.getFlowPrice())
-                            .payPrice(order.getFlowPrice())
-                            .memberId(order.getMemberId())
-                            .paymentName(order.getPaymentMethod())
-                            .afterSaleNo("订单取消")
-                            .orderSn(order.getSn())
-                            .paymentReceivableNo(order.getReceivableNo())
-                            .outOrderNo("AF" + SnowFlake.getIdStr())
-                            .outOrderNo("AF" + SnowFlake.getIdStr())
-                            .refundReason("订单取消")
-                            .build();
+            RefundLog refundLog = RefundLog.builder()
+                    .isRefund(false)
+                    .totalAmount(order.getFlowPrice())
+                    .payPrice(order.getFlowPrice())
+                    .memberId(order.getMemberId())
+                    .paymentName(order.getPaymentMethod())
+                    .afterSaleNo("订单取消")
+                    .orderSn(order.getSn())
+                    .paymentReceivableNo(order.getReceivableNo())
+                    .outOrderNo("AF" + SnowFlake.getIdStr())
+                    .outOrderNo("AF" + SnowFlake.getIdStr())
+                    .refundReason("订单取消")
+                    .build();
             payment.refund(refundLog);
         }
     }

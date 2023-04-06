@@ -47,10 +47,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CouponBuyerController {
 
     /** 优惠券 */
-    @Autowired private ICouponService couponService;
+    @Autowired
+    private ICouponService couponService;
 
     /** 会员优惠券 */
-    @Autowired private IMemberCouponService memberCouponService;
+    @Autowired
+    private IMemberCouponService memberCouponService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -77,12 +79,10 @@ public class CouponBuyerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "获取当前会员的对于当前商品可使用的优惠券列表")
     @GetMapping("/canUse")
-    public Result<IPage<MemberCoupon>> getCouponsByCanUse(
-            CouponPageQuery param, BigDecimal totalPrice, PageVO pageVo) {
+    public Result<IPage<MemberCoupon>> getCouponsByCanUse(CouponPageQuery param, BigDecimal totalPrice, PageVO pageVo) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         param.setMemberId(currentUser.getId());
-        return Result.success(
-                memberCouponService.getMemberCouponsByCanUse(param, totalPrice, pageVo));
+        return Result.success(memberCouponService.getMemberCouponsByCanUse(param, totalPrice, pageVo));
     }
 
     @RequestLogger
@@ -97,11 +97,9 @@ public class CouponBuyerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "会员领取优惠券")
     @GetMapping("/receive/{couponId}")
-    public Result<Object> receiveCoupon(
-            @NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
+    public Result<Object> receiveCoupon(@NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-        memberCouponService.receiveBuyerCoupon(
-                couponId, currentUser.getId(), currentUser.getNickName());
+        memberCouponService.receiveBuyerCoupon(couponId, currentUser.getId(), currentUser.getNickName());
         return Result.success();
     }
 
@@ -109,10 +107,8 @@ public class CouponBuyerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "通过id获取")
     @GetMapping(value = "/get/{couponId}")
-    public Result<MemberCoupon> get(
-            @NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
-        MemberCoupon memberCoupon =
-                OperationalJudgment.judgment(memberCouponService.getById(couponId));
+    public Result<MemberCoupon> get(@NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
+        MemberCoupon memberCoupon = OperationalJudgment.judgment(memberCouponService.getById(couponId));
         return Result.success(memberCoupon);
     }
 }

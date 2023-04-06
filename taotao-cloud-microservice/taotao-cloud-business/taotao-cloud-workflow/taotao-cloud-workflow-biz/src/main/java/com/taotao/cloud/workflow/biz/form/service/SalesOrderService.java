@@ -49,10 +49,7 @@ public interface SalesOrderService extends IService<SalesOrderEntity> {
      * @param salesOrderEntryEntityList 子表
      * @throws WorkFlowException 异常
      */
-    void save(
-            String id,
-            SalesOrderEntity entity,
-            List<SalesOrderEntryEntity> salesOrderEntryEntityList)
+    void save(String id, SalesOrderEntity entity, List<SalesOrderEntryEntity> salesOrderEntryEntityList)
             throws WorkFlowException;
 
     /**

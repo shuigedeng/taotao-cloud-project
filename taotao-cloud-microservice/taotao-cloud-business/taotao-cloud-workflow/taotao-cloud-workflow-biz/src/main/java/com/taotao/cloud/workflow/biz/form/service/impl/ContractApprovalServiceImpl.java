@@ -32,13 +32,17 @@ import org.springframework.stereotype.Service;
 
 /** 合同审批 */
 @Service
-public class ContractApprovalServiceImpl
-        extends ServiceImpl<ContractApprovalMapper, ContractApprovalEntity>
+public class ContractApprovalServiceImpl extends ServiceImpl<ContractApprovalMapper, ContractApprovalEntity>
         implements ContractApprovalService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public ContractApprovalEntity getInfo(String id) {
@@ -114,10 +118,8 @@ public class ContractApprovalServiceImpl
 
     @Override
     public void data(String id, String data) {
-        ContractApprovalForm contractApprovalForm =
-                JsonUtils.getJsonToBean(data, ContractApprovalForm.class);
-        ContractApprovalEntity entity =
-                JsonUtils.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);
+        ContractApprovalForm contractApprovalForm = JsonUtils.getJsonToBean(data, ContractApprovalForm.class);
+        ContractApprovalEntity entity = JsonUtils.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

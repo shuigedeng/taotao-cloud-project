@@ -30,7 +30,10 @@ public enum ApplyTypeEnum {
     GROUP("2", "群组"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     ApplyTypeEnum(String code, String info) {

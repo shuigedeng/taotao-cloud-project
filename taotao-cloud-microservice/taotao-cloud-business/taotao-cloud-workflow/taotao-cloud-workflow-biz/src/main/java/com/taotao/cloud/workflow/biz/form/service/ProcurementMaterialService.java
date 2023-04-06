@@ -49,10 +49,7 @@ public interface ProcurementMaterialService extends IService<ProcurementMaterial
      * @param procurementEntryEntityList 子表
      * @throws WorkFlowException 异常
      */
-    void save(
-            String id,
-            ProcurementMaterialEntity entity,
-            List<ProcurementEntryEntity> procurementEntryEntityList)
+    void save(String id, ProcurementMaterialEntity entity, List<ProcurementEntryEntity> procurementEntryEntityList)
             throws WorkFlowException;
 
     /**

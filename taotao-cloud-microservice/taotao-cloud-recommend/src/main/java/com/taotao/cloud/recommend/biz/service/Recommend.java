@@ -1,5 +1,20 @@
-package com.taotao.cloud.recommend.biz.service;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.recommend.biz.service;
 
 import com.taotao.cloud.recommend.biz.core.ItemCF;
 import com.taotao.cloud.recommend.biz.core.UserCF;
@@ -13,38 +28,35 @@ import java.util.stream.Collectors;
  */
 public class Recommend {
 
-	/**
-	 * 方法描述: 猜你喜欢
-	 *
-	 * @param userId 用户id
-	 * @Return {@link List<ItemDTO>}
-	 * 
-	 * @date 2020年07月31日 17:28:06
-	 */
-	public static List<ItemDTO> userCfRecommend(int userId) {
-		List<RelateDTO> data = FileDataSource.getData();
-		List<Integer> recommendations = UserCF.recommend(userId, data);
-		return FileDataSource.getItemData().stream()
-			.filter(e -> recommendations.contains(e.getId()))
-			.collect(Collectors.toList());
-	}
+    /**
+     * 方法描述: 猜你喜欢
+     *
+     * @param userId 用户id
+     * @Return {@link List<ItemDTO>}
+     *
+     * @date 2020年07月31日 17:28:06
+     */
+    public static List<ItemDTO> userCfRecommend(int userId) {
+        List<RelateDTO> data = FileDataSource.getData();
+        List<Integer> recommendations = UserCF.recommend(userId, data);
+        return FileDataSource.getItemData().stream()
+                .filter(e -> recommendations.contains(e.getId()))
+                .collect(Collectors.toList());
+    }
 
-
-	/**
-	 * 方法描述: 猜你喜欢
-	 *
-	 * @param itemId 物品id
-	 * @Return {@link List<ItemDTO>}
-	 * 
-	 * @date 2020年07月31日 17:28:06
-	 */
-	public static List<ItemDTO> itemCfRecommend(int itemId) {
-		List<RelateDTO> data = FileDataSource.getData();
-		List<Integer> recommendations = ItemCF.recommend(itemId, data);
-		return FileDataSource.getItemData().stream()
-			.filter(e -> recommendations.contains(e.getId()))
-			.collect(Collectors.toList());
-	}
-
-
+    /**
+     * 方法描述: 猜你喜欢
+     *
+     * @param itemId 物品id
+     * @Return {@link List<ItemDTO>}
+     *
+     * @date 2020年07月31日 17:28:06
+     */
+    public static List<ItemDTO> itemCfRecommend(int itemId) {
+        List<RelateDTO> data = FileDataSource.getData();
+        List<Integer> recommendations = ItemCF.recommend(itemId, data);
+        return FileDataSource.getItemData().stream()
+                .filter(e -> recommendations.contains(e.getId()))
+                .collect(Collectors.toList());
+    }
 }

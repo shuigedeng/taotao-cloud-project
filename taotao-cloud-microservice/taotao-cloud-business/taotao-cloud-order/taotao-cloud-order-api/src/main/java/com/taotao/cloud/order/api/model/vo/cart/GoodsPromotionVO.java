@@ -44,7 +44,8 @@ public record GoodsPromotionVO(
         @Schema(description = "限购数量") Integer limitNum)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 1622051257060817414L;
+    @Serial
+    private static final long serialVersionUID = 1622051257060817414L;
 
     // public GoodsPromotionVO(PromotionGoods promotionGoods) {
     // 	this.startTime = promotionGoods.getStartTime();

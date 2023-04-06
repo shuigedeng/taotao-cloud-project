@@ -50,11 +50,8 @@ public class MemberPointsHistoryController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping(value = "/page")
     public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(PageQuery page) {
-        IPage<MemberPointsHistory> memberPointsHistoryPage =
-                memberPointsHistoryService.pageQuery(page);
-        return Result.success(
-                PageResult.convertMybatisPage(
-                        memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
+        IPage<MemberPointsHistory> memberPointsHistoryPage = memberPointsHistoryService.pageQuery(page);
+        return Result.success(PageResult.convertMybatisPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
     }
 
     @Operation(summary = "获取当前会员积分", description = "获取当前会员积分")
@@ -62,7 +59,6 @@ public class MemberPointsHistoryController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping(value = "/current/points")
     public Result<MemberPointsHistoryVO> getMemberPointsHistoryVO() {
-        return Result.success(
-                memberPointsHistoryService.getMemberPointsHistoryVO(SecurityUtils.getUserId()));
+        return Result.success(memberPointsHistoryService.getMemberPointsHistoryVO(SecurityUtils.getUserId()));
     }
 }

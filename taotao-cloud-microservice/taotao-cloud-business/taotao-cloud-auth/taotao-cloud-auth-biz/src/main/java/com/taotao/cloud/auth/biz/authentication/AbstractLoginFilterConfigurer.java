@@ -99,8 +99,7 @@ public abstract class AbstractLoginFilterConfigurer<
     }
 
     public final C defaultSuccessUrl(String defaultSuccessUrl, boolean alwaysUse) {
-        SavedRequestAwareAuthenticationSuccessHandler handler =
-                new SavedRequestAwareAuthenticationSuccessHandler();
+        SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
         handler.setDefaultTargetUrl(defaultSuccessUrl);
         handler.setAlwaysUseDefaultTargetUrl(alwaysUse);
         return successHandler(handler);
@@ -108,8 +107,7 @@ public abstract class AbstractLoginFilterConfigurer<
 
     public C loginProcessingUrl(String loginProcessingUrl) {
         this.loginProcessingUrl = loginProcessingUrl;
-        this.authFilter.setRequiresAuthenticationRequestMatcher(
-                createLoginProcessingUrlMatcher(loginProcessingUrl));
+        this.authFilter.setRequiresAuthenticationRequestMatcher(createLoginProcessingUrlMatcher(loginProcessingUrl));
         return getSelf();
     }
 
@@ -141,8 +139,7 @@ public abstract class AbstractLoginFilterConfigurer<
     }
 
     public final C failureUrl(String authenticationFailureUrl) {
-        C result =
-                failureHandler(new SimpleUrlAuthenticationFailureHandler(authenticationFailureUrl));
+        C result = failureHandler(new SimpleUrlAuthenticationFailureHandler(authenticationFailureUrl));
         this.failureUrl = authenticationFailureUrl;
         return result;
     }
@@ -175,9 +172,7 @@ public abstract class AbstractLoginFilterConfigurer<
 
     protected final void updateAuthenticationDefaults() {
         if (this.failureHandler == null) {
-            failureHandler(
-                    new AuthenticationEntryPointFailureHandler(
-                            new SimpleAuthenticationEntryPoint()));
+            failureHandler(new AuthenticationEntryPointFailureHandler(new SimpleAuthenticationEntryPoint()));
         }
     }
 
@@ -189,10 +184,8 @@ public abstract class AbstractLoginFilterConfigurer<
     }
 
     @SuppressWarnings("unchecked")
-    protected final void registerAuthenticationEntryPoint(
-            H http, AuthenticationEntryPoint authenticationEntryPoint) {
-        ExceptionHandlingConfigurer<H> exceptionHandling =
-                http.getConfigurer(ExceptionHandlingConfigurer.class);
+    protected final void registerAuthenticationEntryPoint(H http, AuthenticationEntryPoint authenticationEntryPoint) {
+        ExceptionHandlingConfigurer<H> exceptionHandling = http.getConfigurer(ExceptionHandlingConfigurer.class);
         if (exceptionHandling == null) {
             return;
         }
@@ -201,39 +194,32 @@ public abstract class AbstractLoginFilterConfigurer<
     }
 
     protected final RequestMatcher getAuthenticationEntryPointMatcher(H http) {
-        ContentNegotiationStrategy contentNegotiationStrategy =
-                http.getSharedObject(ContentNegotiationStrategy.class);
+        ContentNegotiationStrategy contentNegotiationStrategy = http.getSharedObject(ContentNegotiationStrategy.class);
         if (contentNegotiationStrategy == null) {
             contentNegotiationStrategy = new HeaderContentNegotiationStrategy();
         }
-        MediaTypeRequestMatcher mediaMatcher =
-                new MediaTypeRequestMatcher(
-                        contentNegotiationStrategy,
-                        MediaType.APPLICATION_XHTML_XML,
-                        new MediaType("image", "*"),
-                        MediaType.TEXT_HTML,
-                        MediaType.TEXT_PLAIN);
+        MediaTypeRequestMatcher mediaMatcher = new MediaTypeRequestMatcher(
+                contentNegotiationStrategy,
+                MediaType.APPLICATION_XHTML_XML,
+                new MediaType("image", "*"),
+                MediaType.TEXT_HTML,
+                MediaType.TEXT_PLAIN);
         mediaMatcher.setIgnoredMediaTypes(Collections.singleton(MediaType.ALL));
         RequestMatcher notXRequestedWith =
-                new NegatedRequestMatcher(
-                        new RequestHeaderRequestMatcher("X-Requested-With", "XMLHttpRequest"));
+                new NegatedRequestMatcher(new RequestHeaderRequestMatcher("X-Requested-With", "XMLHttpRequest"));
         return new AndRequestMatcher(Arrays.asList(notXRequestedWith, mediaMatcher));
     }
 
     @Override
     public void configure(H http) throws Exception {
         PortMapper portMapper = http.getSharedObject(PortMapper.class);
-        if (portMapper != null
-                && this.authenticationEntryPoint instanceof LoginUrlAuthenticationEntryPoint) {
-            ((LoginUrlAuthenticationEntryPoint) this.authenticationEntryPoint)
-                    .setPortMapper(portMapper);
+        if (portMapper != null && this.authenticationEntryPoint instanceof LoginUrlAuthenticationEntryPoint) {
+            ((LoginUrlAuthenticationEntryPoint) this.authenticationEntryPoint).setPortMapper(portMapper);
         }
 
         RequestCache requestCache = http.getSharedObject(RequestCache.class);
-        if (requestCache != null
-                && this.successHandler instanceof SavedRequestAwareAuthenticationSuccessHandler) {
-            ((SavedRequestAwareAuthenticationSuccessHandler) this.successHandler)
-                    .setRequestCache(requestCache);
+        if (requestCache != null && this.successHandler instanceof SavedRequestAwareAuthenticationSuccessHandler) {
+            ((SavedRequestAwareAuthenticationSuccessHandler) this.successHandler).setRequestCache(requestCache);
         }
 
         this.authFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
@@ -328,8 +314,7 @@ public abstract class AbstractLoginFilterConfigurer<
 
         private PermitAllSupport() {}
 
-        private static void permitAll(
-                HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, String... urls) {
+        private static void permitAll(HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, String... urls) {
             for (String url : urls) {
                 if (url != null) {
                     permitAll(http, new ExactUrlRequestMatcher(url));
@@ -339,13 +324,10 @@ public abstract class AbstractLoginFilterConfigurer<
 
         @SuppressWarnings("unchecked")
         static void permitAll(
-                HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http,
-                RequestMatcher... requestMatchers) {
+                HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, RequestMatcher... requestMatchers) {
             ExpressionUrlAuthorizationConfigurer<?> configurer =
                     http.getConfigurer(ExpressionUrlAuthorizationConfigurer.class);
-            Assert.state(
-                    configurer != null,
-                    "permitAll only works with HttpSecurity.authorizeRequests()");
+            Assert.state(configurer != null, "permitAll only works with HttpSecurity.authorizeRequests()");
             configurer.getRegistry().requestMatchers(requestMatchers).permitAll();
         }
 

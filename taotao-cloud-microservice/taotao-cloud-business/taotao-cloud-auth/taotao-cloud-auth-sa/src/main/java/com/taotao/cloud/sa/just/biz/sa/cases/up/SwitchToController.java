@@ -64,12 +64,10 @@ public class SwitchToController {
         System.out.println("------- [身份临时切换] 调用前，当前登录账号id是：" + StpUtil.getLoginId());
 
         // 以 lambda 表达式的方式身份切换，作用范围只在这个 lambda 表达式内有效
-        StpUtil.switchTo(
-                userId,
-                () -> {
-                    System.out.println("是否正在身份临时切换中: " + StpUtil.isSwitch()); // 输出 true
-                    System.out.println("获取当前登录账号id: " + StpUtil.getLoginId()); // 输出 10044
-                });
+        StpUtil.switchTo(userId, () -> {
+            System.out.println("是否正在身份临时切换中: " + StpUtil.isSwitch()); // 输出 true
+            System.out.println("获取当前登录账号id: " + StpUtil.getLoginId()); // 输出 10044
+        });
 
         // 结束后，再次获取当前登录账号，输出10001
         System.out.println("------- [身份临时切换] 调用结束，当前登录账号id是：" + StpUtil.getLoginId());

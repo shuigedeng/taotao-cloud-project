@@ -27,7 +27,8 @@ import lombok.Data;
  */
 @Data
 public class TaskDTO implements Serializable {
-    @Serial private static final long serialVersionUID = -3817507884449344739L;
+    @Serial
+    private static final long serialVersionUID = -3817507884449344739L;
 
     @NotNull(message = "显示页码不为空")
     private Integer pageNum;

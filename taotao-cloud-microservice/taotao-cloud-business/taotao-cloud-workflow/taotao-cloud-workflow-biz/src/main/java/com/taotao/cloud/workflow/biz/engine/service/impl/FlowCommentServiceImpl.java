@@ -41,8 +41,7 @@ public class FlowCommentServiceImpl extends ServiceImpl<FlowCommentMapper, FlowC
         QueryWrapper<FlowCommentEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(FlowCommentEntity::getTaskId, pagination.getTaskId());
         queryWrapper.lambda().orderByDesc(FlowCommentEntity::getCreatorTime);
-        Page<FlowCommentEntity> page =
-                new Page<>(pagination.getCurrentPage(), pagination.getPageSize());
+        Page<FlowCommentEntity> page = new Page<>(pagination.getCurrentPage(), pagination.getPageSize());
         IPage<FlowCommentEntity> userIPage = this.page(page, queryWrapper);
         return pagination.setData(userIPage.getRecords(), page.getTotal());
     }

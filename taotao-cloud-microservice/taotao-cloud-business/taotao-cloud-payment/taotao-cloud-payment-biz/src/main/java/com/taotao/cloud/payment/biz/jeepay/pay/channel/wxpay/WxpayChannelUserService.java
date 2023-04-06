@@ -42,11 +42,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class WxpayChannelUserService implements IChannelUserService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     /** 默认官方跳转地址 * */
-    private static final String DEFAULT_OAUTH_URL =
-            "https://open.weixin.qq.com/connect/oauth2/authorize";
+    private static final String DEFAULT_OAUTH_URL = "https://open.weixin.qq.com/connect/oauth2/authorize";
 
     @Override
     public String getIfCode() {
@@ -54,16 +54,13 @@ public class WxpayChannelUserService implements IChannelUserService {
     }
 
     @Override
-    public String buildUserRedirectUrl(
-            String callbackUrlEncode, MchAppConfigContext mchAppConfigContext) {
+    public String buildUserRedirectUrl(String callbackUrlEncode, MchAppConfigContext mchAppConfigContext) {
 
         String appId = null;
         String oauth2Url = "";
         if (mchAppConfigContext.isIsvsubMch()) {
-            WxpayIsvParams wxpayIsvParams =
-                    (WxpayIsvParams)
-                            configContextQueryService.queryIsvParams(
-                                    mchAppConfigContext.getMchInfo().getIsvNo(), CS.IF_CODE.WXPAY);
+            WxpayIsvParams wxpayIsvParams = (WxpayIsvParams) configContextQueryService.queryIsvParams(
+                    mchAppConfigContext.getMchInfo().getIsvNo(), CS.IF_CODE.WXPAY);
             if (wxpayIsvParams == null) {
                 throw new BizException("服务商微信支付接口没有配置！");
             }
@@ -72,11 +69,8 @@ public class WxpayChannelUserService implements IChannelUserService {
         } else {
             // 获取商户配置信息
             WxpayNormalMchParams normalMchParams =
-                    (WxpayNormalMchParams)
-                            configContextQueryService.queryNormalMchParams(
-                                    mchAppConfigContext.getMchNo(),
-                                    mchAppConfigContext.getAppId(),
-                                    CS.IF_CODE.WXPAY);
+                    (WxpayNormalMchParams) configContextQueryService.queryNormalMchParams(
+                            mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), CS.IF_CODE.WXPAY);
             if (normalMchParams == null) {
                 throw new BizException("商户微信支付接口没有配置！");
             }
@@ -87,12 +81,10 @@ public class WxpayChannelUserService implements IChannelUserService {
         if (StringUtils.isBlank(oauth2Url)) {
             oauth2Url = DEFAULT_OAUTH_URL;
         }
-        String wxUserRedirectUrl =
-                String.format(
-                        oauth2Url
-                                + "?appid=%s&scope=snsapi_base&state=&redirect_uri=%s&response_type=code#wechat_redirect",
-                        appId,
-                        callbackUrlEncode);
+        String wxUserRedirectUrl = String.format(
+                oauth2Url + "?appid=%s&scope=snsapi_base&state=&redirect_uri=%s&response_type=code#wechat_redirect",
+                appId,
+                callbackUrlEncode);
         log.info("wxUserRedirectUrl={}", wxUserRedirectUrl);
         return wxUserRedirectUrl;
     }
@@ -102,8 +94,7 @@ public class WxpayChannelUserService implements IChannelUserService {
         String code = reqParams.getString("code");
         try {
 
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
             return wxServiceWrapper
                     .getWxMpService()
                     .getOAuth2Service()

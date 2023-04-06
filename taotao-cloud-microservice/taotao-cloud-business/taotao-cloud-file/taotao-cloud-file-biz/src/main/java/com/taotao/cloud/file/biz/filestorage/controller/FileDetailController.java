@@ -27,7 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class FileDetailController {
 
-    @Autowired private FileStorageService fileStorageService;
+    @Autowired
+    private FileStorageService fileStorageService;
 
     /** 上传文件，成功返回文件 url */
     @PostMapping("/upload")

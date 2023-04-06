@@ -26,5 +26,4 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.04
  * @since 2022-04-27 16:55:31
  */
-public interface ICategoryParameterGroupMapper
-        extends BaseSuperMapper<CategoryParameterGroup, Long> {}
+public interface ICategoryParameterGroupMapper extends BaseSuperMapper<CategoryParameterGroup, Long> {}

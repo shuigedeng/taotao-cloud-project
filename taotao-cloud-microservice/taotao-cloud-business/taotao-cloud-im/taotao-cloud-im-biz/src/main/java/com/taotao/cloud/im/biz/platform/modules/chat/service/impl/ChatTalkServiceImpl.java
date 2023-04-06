@@ -47,47 +47,44 @@ import org.springframework.util.CollectionUtils;
 @Service("chatTalkService")
 public class ChatTalkServiceImpl implements ChatTalkService {
 
-    @Autowired private TencentConfig tencentConfig;
+    @Autowired
+    private TencentConfig tencentConfig;
 
-    @Resource private ChatWeatherService weatherService;
+    @Resource
+    private ChatWeatherService weatherService;
 
-    @Resource private ChatUserService chatUserService;
+    @Resource
+    private ChatUserService chatUserService;
 
     /** 好友列表 */
     private static List<FriendVo06> friendList() {
         // 图灵机器人
         Long turingId = 10001L;
         FriendTypeEnum turingType = FriendTypeEnum.TURING;
-        FriendVo06 turing =
-                new FriendVo06()
-                        .setUserId(turingId)
-                        .setChatNo(NumberUtil.toStr(turingId))
-                        .setNickName(turingType.getInfo())
-                        .setPortrait(
-                                "http://q3z3-im.oss-cn-beijing.aliyuncs.com/95079883a2f04cee830502eee97ce2a2.png")
-                        .setUserType(turingType);
+        FriendVo06 turing = new FriendVo06()
+                .setUserId(turingId)
+                .setChatNo(NumberUtil.toStr(turingId))
+                .setNickName(turingType.getInfo())
+                .setPortrait("http://q3z3-im.oss-cn-beijing.aliyuncs.com/95079883a2f04cee830502eee97ce2a2.png")
+                .setUserType(turingType);
         // 天气机器人
         Long weatherId = 10002L;
         FriendTypeEnum weatherType = FriendTypeEnum.WEATHER;
-        FriendVo06 weather =
-                new FriendVo06()
-                        .setUserId(weatherId)
-                        .setChatNo(NumberUtil.toStr(weatherId))
-                        .setNickName(weatherType.getInfo())
-                        .setPortrait(
-                                "http://q3z3-im.oss-cn-beijing.aliyuncs.com/0295f6edc9de43748c0d2f25b5057893.png")
-                        .setUserType(weatherType);
+        FriendVo06 weather = new FriendVo06()
+                .setUserId(weatherId)
+                .setChatNo(NumberUtil.toStr(weatherId))
+                .setNickName(weatherType.getInfo())
+                .setPortrait("http://q3z3-im.oss-cn-beijing.aliyuncs.com/0295f6edc9de43748c0d2f25b5057893.png")
+                .setUserType(weatherType);
         // 翻译机器人
         Long translationId = 10003L;
         FriendTypeEnum translationType = FriendTypeEnum.TRANSLATION;
-        FriendVo06 translation =
-                new FriendVo06()
-                        .setUserId(translationId)
-                        .setChatNo(NumberUtil.toStr(translationId))
-                        .setNickName(translationType.getInfo())
-                        .setPortrait(
-                                "http://q3z3-im.oss-cn-beijing.aliyuncs.com/18ac0b6aa3d147e6b1a65c2eb838707e.png")
-                        .setUserType(translationType);
+        FriendVo06 translation = new FriendVo06()
+                .setUserId(translationId)
+                .setChatNo(NumberUtil.toStr(translationId))
+                .setNickName(translationType.getInfo())
+                .setPortrait("http://q3z3-im.oss-cn-beijing.aliyuncs.com/18ac0b6aa3d147e6b1a65c2eb838707e.png")
+                .setUserType(translationType);
         return CollUtil.newArrayList(turing, weather, translation);
     }
 
@@ -95,17 +92,15 @@ public class ChatTalkServiceImpl implements ChatTalkService {
     public List<FriendVo06> queryFriendList() {
         Long userId = ShiroUtils.getUserId();
         List<FriendVo06> userList = friendList();
-        userList.add(
-                BeanUtil.toBean(chatUserService.findById(userId), FriendVo06.class)
-                        .setUserType(FriendTypeEnum.SELF));
+        userList.add(BeanUtil.toBean(chatUserService.findById(userId), FriendVo06.class)
+                .setUserType(FriendTypeEnum.SELF));
         return userList;
     }
 
     @Override
     public FriendVo07 queryFriendInfo(Long userId) {
         Map<Long, FriendVo06> dataList =
-                friendList().stream()
-                        .collect(Collectors.toMap(FriendVo06::getUserId, a -> a, (k1, k2) -> k1));
+                friendList().stream().collect(Collectors.toMap(FriendVo06::getUserId, a -> a, (k1, k2) -> k1));
         FriendVo06 friendVo = dataList.get(userId);
         if (friendVo == null) {
             return null;
@@ -118,20 +113,18 @@ public class ChatTalkServiceImpl implements ChatTalkService {
     @Override
     public PushParamVo talk(Long userId, String content) {
         Map<Long, FriendVo06> dataList =
-                friendList().stream()
-                        .collect(Collectors.toMap(FriendVo06::getUserId, a -> a, (k1, k2) -> k1));
+                friendList().stream().collect(Collectors.toMap(FriendVo06::getUserId, a -> a, (k1, k2) -> k1));
         FriendVo06 friendVo = dataList.get(userId);
         if (friendVo == null) {
             return null;
         }
         Long current = ShiroUtils.getUserId();
-        PushParamVo paramVo =
-                new PushParamVo()
-                        .setUserId(friendVo.getUserId())
-                        .setPortrait(friendVo.getPortrait())
-                        .setNickName(friendVo.getNickName())
-                        .setContent(content)
-                        .setUserType(friendVo.getUserType());
+        PushParamVo paramVo = new PushParamVo()
+                .setUserId(friendVo.getUserId())
+                .setPortrait(friendVo.getPortrait())
+                .setNickName(friendVo.getNickName())
+                .setContent(content)
+                .setUserType(friendVo.getUserType());
         switch (friendVo.getUserType()) {
             case TURING:
                 content = TencentUtils.turing(tencentConfig, current, content);
@@ -153,29 +146,28 @@ public class ChatTalkServiceImpl implements ChatTalkService {
             return "暂未找到结果";
         }
         StringBuilder builder = new StringBuilder();
-        dataList.forEach(
-                e -> {
-                    builder.append("城市：");
-                    builder.append(e.getStr("province"));
-                    builder.append(e.getStr("city"));
-                    builder.append("\n");
-                    builder.append("天气：");
-                    builder.append(e.getStr("weather"));
-                    builder.append("\n");
-                    builder.append("温度：");
-                    builder.append(e.getStr("temperature"));
-                    builder.append("℃");
-                    builder.append("\n");
-                    builder.append("风力：");
-                    builder.append(e.getStr("windpower"));
-                    builder.append("级");
-                    builder.append("\n");
-                    builder.append("湿度：");
-                    builder.append(e.getStr("temperature"));
-                    builder.append("RH");
-                    builder.append("\n");
-                    builder.append("\n");
-                });
+        dataList.forEach(e -> {
+            builder.append("城市：");
+            builder.append(e.getStr("province"));
+            builder.append(e.getStr("city"));
+            builder.append("\n");
+            builder.append("天气：");
+            builder.append(e.getStr("weather"));
+            builder.append("\n");
+            builder.append("温度：");
+            builder.append(e.getStr("temperature"));
+            builder.append("℃");
+            builder.append("\n");
+            builder.append("风力：");
+            builder.append(e.getStr("windpower"));
+            builder.append("级");
+            builder.append("\n");
+            builder.append("湿度：");
+            builder.append(e.getStr("temperature"));
+            builder.append("RH");
+            builder.append("\n");
+            builder.append("\n");
+        });
         return StrUtil.removeSuffix(builder.toString(), "\n\n");
     }
 

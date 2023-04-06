@@ -66,7 +66,10 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
         Process process = bpmnModel.getProcesses().stream().findFirst().get();
         String processId = process.getId();
         String processName = process.getName() + BPMN_FILE_SUFFIX;
-        long count = repositoryService.createDeploymentQuery().deploymentKey(processId).count();
+        long count = repositoryService
+                .createDeploymentQuery()
+                .deploymentKey(processId)
+                .count();
         if (count > 0) {
             throw new CustomException("流程已存在，请重新上传");
         }
@@ -85,20 +88,17 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
         Integer pageNum = dto.getPageNum();
         Integer pageSize = dto.getPageSize();
         String processName = dto.getProcessName();
-        ProcessDefinitionQuery processDefinitionQuery =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .latestVersion()
-                        .orderByProcessDefinitionKey()
-                        .asc();
+        ProcessDefinitionQuery processDefinitionQuery = repositoryService
+                .createProcessDefinitionQuery()
+                .latestVersion()
+                .orderByProcessDefinitionKey()
+                .asc();
         if (StringUtil.isNotEmpty(processName)) {
-            processDefinitionQuery =
-                    processDefinitionQuery.processDefinitionNameLike("%" + processName + "%");
+            processDefinitionQuery = processDefinitionQuery.processDefinitionNameLike("%" + processName + "%");
         }
         long total = processDefinitionQuery.count();
         int pageIndex = pageSize * (pageNum - 1);
-        List<ProcessDefinition> definitionList =
-                processDefinitionQuery.listPage(pageIndex, pageSize);
+        List<ProcessDefinition> definitionList = processDefinitionQuery.listPage(pageIndex, pageSize);
         List<DefinitionVO> voList = new ArrayList<>(definitionList.size());
         for (ProcessDefinition processDefinition : definitionList) {
             DefinitionVO vo = new DefinitionVO();
@@ -118,18 +118,8 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
         DefaultProcessDiagramGenerator diagramGenerator = new DefaultProcessDiagramGenerator();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(definitionId);
         // 输出为图片
-        InputStream inputStream =
-                diagramGenerator.generateDiagram(
-                        bpmnModel,
-                        "png",
-                        Collections.emptyList(),
-                        Collections.emptyList(),
-                        "宋体",
-                        "宋体",
-                        "宋体",
-                        null,
-                        1.0,
-                        false);
+        InputStream inputStream = diagramGenerator.generateDiagram(
+                bpmnModel, "png", Collections.emptyList(), Collections.emptyList(), "宋体", "宋体", "宋体", null, 1.0, false);
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             BufferedImage image = ImageIO.read(inputStream);
             if (null != image) {
@@ -153,11 +143,10 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean suspendDefinition(String definitionId) {
-        final ProcessDefinition processDefinition =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .processDefinitionId(definitionId)
-                        .singleResult();
+        final ProcessDefinition processDefinition = repositoryService
+                .createProcessDefinitionQuery()
+                .processDefinitionId(definitionId)
+                .singleResult();
         if (processDefinition.isSuspended()) {
             throw new CustomException("挂起失败，流程已挂起");
         } else {
@@ -170,11 +159,10 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean activateDefinition(String definitionId) {
-        final ProcessDefinition processDefinition =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .processDefinitionId(definitionId)
-                        .singleResult();
+        final ProcessDefinition processDefinition = repositoryService
+                .createProcessDefinitionQuery()
+                .processDefinitionId(definitionId)
+                .singleResult();
         if (processDefinition.isSuspended()) {
             // 激活
             repositoryService.activateProcessDefinitionById(definitionId, true, null);

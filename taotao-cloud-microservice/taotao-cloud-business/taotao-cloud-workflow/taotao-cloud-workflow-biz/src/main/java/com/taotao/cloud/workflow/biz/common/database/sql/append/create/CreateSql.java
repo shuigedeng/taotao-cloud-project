@@ -32,8 +32,7 @@ import org.springframework.web.util.HtmlUtils;
 public class CreateSql {
 
     /** 获取 - SQL */
-    public static List<PreparedStatementDTO> getCreTabSql(CreateSqlDTO createSqlDTO)
-            throws Exception {
+    public static List<PreparedStatementDTO> getCreTabSql(CreateSqlDTO createSqlDTO) throws Exception {
         List<PreparedStatementDTO> PSDList = new LinkedList<>();
         // 字段添加
         PSDList.add(getFieldsPSD(createSqlDTO));
@@ -61,15 +60,9 @@ public class CreateSql {
              * 基本框架：CREATE TABLE + {表名} + ({字段集合})
              */
             // 表名无法用?占位符的方式防止SQL注入，使用过滤的方法了
-            String tableName =
-                    HtmlUtils.htmlEscape(
-                            String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
+            String tableName = HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
             dto.setPrepareSql(
-                    "CREATE TABLE "
-                            + tableName
-                            + " ( "
-                            + preparedSql.substring(0, preparedSql.length() - 1)
-                            + " ) ");
+                    "CREATE TABLE " + tableName + " ( " + preparedSql.substring(0, preparedSql.length() - 1) + " ) ");
         } else {
             throw new Exception("没有初始字段");
         }
@@ -77,8 +70,7 @@ public class CreateSql {
     }
 
     /** 装配 - 单个字段 */
-    private static void fieldsSqlFrame(
-            DbBase dbBase, DbTableFieldModel fieldModel, PreparedStatementDTO dto)
+    private static void fieldsSqlFrame(DbBase dbBase, DbTableFieldModel fieldModel, PreparedStatementDTO dto)
             throws Exception {
         // 防止sql注入的参数
         String field = fieldModel.getField();
@@ -95,8 +87,7 @@ public class CreateSql {
         // 允空
         String notNull = DbAliasEnum.ALLOW_NULL.isFalse().equals(allowNull) ? " NOT NULL " : "";
         // 主键
-        String primaryKeySqlFragment =
-                DbAliasEnum.PRIMARY_KEY.isTrue().equals(primaryKey) ? " PRIMARY KEY " : "";
+        String primaryKeySqlFragment = DbAliasEnum.PRIMARY_KEY.isTrue().equals(primaryKey) ? " PRIMARY KEY " : "";
         /* ===============字段字段===================
          * 字段：{字段名} + {字段类型} + ({字段长度} + {非空限定} + {主键判断} + [{mysql注释}],
          * @return 单个字段SQL
@@ -104,8 +95,7 @@ public class CreateSql {
         // 这个地方会出现关键字问题比如field为name
         // 字段名无法用?占位符的方式防止SQL注入，使用过滤的方法了
         field = HtmlUtils.htmlEscape(String.valueOf(field), CharsetKit.UTF_8);
-        String sqlFragment =
-                field + " " + dataType + " " + notNull + " " + primaryKeySqlFragment + ",";
+        String sqlFragment = field + " " + dataType + " " + notNull + " " + primaryKeySqlFragment + ",";
 
         // 准备参数及SQL语句
         dto.setPrepareSql(dto.getPrepareSql() + sqlFragment);
@@ -114,15 +104,13 @@ public class CreateSql {
     }
 
     /** 设置 - 类型 */
-    public static String dataTypeFormat(
-            String dataType, String dataLength, Integer primaryKey, DbBase dbBase)
+    public static String dataTypeFormat(String dataType, String dataLength, Integer primaryKey, DbBase dbBase)
             throws DataException {
         // 获取数据库指定类型
         DataTypeModel dataTypeModel = DataTypeEnum.getDataTypeModel(dataType, dbBase);
         if (dataTypeModel != null) {
             // MySQL独有,varchar作为主键的特殊处理
-            dataTypeModel =
-                    SqlUtil.getMysqlDataTypeModel(dbBase, primaryKey, dataType, dataTypeModel);
+            dataTypeModel = SqlUtil.getMysqlDataTypeModel(dbBase, primaryKey, dataType, dataTypeModel);
             return getDataType(dataLength, dataTypeModel);
         } else {
             throw new DataException("数据类型不存在");
@@ -135,11 +123,7 @@ public class CreateSql {
         // 长度设置
         if (dataTypeModel.getLengthModifyFlag()) {
             String precision = getPrecision(dataTypeModel, dataLength);
-            return dataTypeModel.getDbFieldType()
-                    + "("
-                    + dataTypeModel.getCurrentLength()
-                    + precision
-                    + ")";
+            return dataTypeModel.getDbFieldType() + "(" + dataTypeModel.getCurrentLength() + precision + ")";
         } else {
             return dataTypeModel.getDbFieldType();
         }

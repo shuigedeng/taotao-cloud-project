@@ -77,14 +77,10 @@ public class MemberReceipt extends BaseSuperEntity<MemberReceipt, Long> {
     private String receiptType;
 
     /** 是否为默认选项 0：否，1：是 */
-    @Column(
-            name = "defaulted",
-            columnDefinition = "int not null default 0 comment '是否为默认选项 0：否，1：是'")
+    @Column(name = "defaulted", columnDefinition = "int not null default 0 comment '是否为默认选项 0：否，1：是'")
     private Integer defaulted;
 
     /** 删除标志 true/false 删除/未删除 */
-    @Column(
-            name = "delete_flag",
-            columnDefinition = "boolean not null default false comment '删除标志 true/false 删除/未删除'")
+    @Column(name = "delete_flag", columnDefinition = "boolean not null default false comment '删除标志 true/false 删除/未删除'")
     private Boolean deleteFlag;
 }

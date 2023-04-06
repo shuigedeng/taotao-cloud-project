@@ -54,8 +54,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class BrandServiceImpl
-        extends BaseSuperServiceImpl<IBrandMapper, Brand, BrandRepository, IBrandRepository, Long>
+public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, BrandRepository, IBrandRepository, Long>
         implements IBrandService {
 
     /** 分类品牌绑定服务 */
@@ -115,10 +114,9 @@ public class BrandServiceImpl
     public Boolean updateBrand(BrandDTO brandDTO) {
         this.checkExist(brandDTO.getId());
 
-        if (getOne(
-                        new LambdaQueryWrapper<Brand>()
-                                .eq(Brand::getName, brandDTO.getName())
-                                .ne(Brand::getId, brandDTO.getId()))
+        if (getOne(new LambdaQueryWrapper<Brand>()
+                        .eq(Brand::getName, brandDTO.getName())
+                        .ne(Brand::getId, brandDTO.getId()))
                 != null) {
             throw new BusinessException(ResultEnum.BRAND_NAME_EXIST_ERROR);
         }
@@ -159,8 +157,7 @@ public class BrandServiceImpl
      */
     private void checkBind(List<Long> brandIds) {
         // 分了绑定关系查询
-        List<CategoryBrand> categoryBrands =
-                categoryBrandService.getCategoryBrandListByBrandId(brandIds);
+        List<CategoryBrand> categoryBrands = categoryBrandService.getCategoryBrandListByBrandId(brandIds);
 
         if (!categoryBrands.isEmpty()) {
             List<Long> categoryIds =
@@ -173,10 +170,8 @@ public class BrandServiceImpl
         // 分了商品绑定关系查询
         List<Goods> goods = goodsService.getByBrandIds(brandIds);
         if (!goods.isEmpty()) {
-            List<String> goodsNames =
-                    goods.stream().map(Goods::getGoodsName).collect(Collectors.toList());
-            throw new BusinessException(
-                    ResultEnum.BRAND_BIND_GOODS_ERROR.getCode(), JSONUtil.toJsonStr(goodsNames));
+            List<String> goodsNames = goods.stream().map(Goods::getGoodsName).collect(Collectors.toList());
+            throw new BusinessException(ResultEnum.BRAND_BIND_GOODS_ERROR.getCode(), JSONUtil.toJsonStr(goodsNames));
         }
     }
 

@@ -41,10 +41,4 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-岗位管理API", description = "管理端-岗位管理API")
 public class ManagerPositionController
         extends BaseSuperController<
-                IPositionService,
-                Position,
-                Long,
-                BaseQuery,
-                PositionSaveDTO,
-                PositionUpdateDTO,
-                PositionQueryVO> {}
+                IPositionService, Position, Long, BaseQuery, PositionSaveDTO, PositionUpdateDTO, PositionQueryVO> {}

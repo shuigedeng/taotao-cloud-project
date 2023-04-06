@@ -35,7 +35,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class NoticeMessageExecute implements MemberPointChangeEvent, MemberWithdrawalEvent {
 
-    @Autowired private IFeignNoticeMessageApi noticeMessageService;
+    @Autowired
+    private IFeignNoticeMessageApi noticeMessageService;
 
     @Override
     public void memberPointChange(MemberPointMessageDTO memberPointMessageDTO) {
@@ -65,8 +66,7 @@ public class NoticeMessageExecute implements MemberPointChangeEvent, MemberWithd
         noticeMessageDTO.setMemberId(memberWithdrawalMessage.getMemberId());
         // 如果提现状态为申请则发送申请提现站内消息
         if (memberWithdrawalMessage.getStatus().equals(WithdrawStatusEnum.APPLY.name())) {
-            noticeMessageDTO.setNoticeMessageNodeEnum(
-                    NoticeMessageNodeEnum.WALLET_WITHDRAWAL_CREATE);
+            noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.WALLET_WITHDRAWAL_CREATE);
             Map<String, String> params = new HashMap<>(2);
             params.put("price", memberWithdrawalMessage.getPrice().toString());
             noticeMessageDTO.setParameter(params);
@@ -76,15 +76,12 @@ public class NoticeMessageExecute implements MemberPointChangeEvent, MemberWithd
         // 如果提现状态为通过则发送审核通过站内消息
         if (memberWithdrawalMessage.getStatus().equals(WithdrawStatusEnum.VIA_AUDITING.name())) {
             // 如果提现到余额
-            if (memberWithdrawalMessage
-                    .getDestination()
-                    .equals(MemberWithdrawalDestinationEnum.WALLET.name())) {
+            if (memberWithdrawalMessage.getDestination().equals(MemberWithdrawalDestinationEnum.WALLET.name())) {
                 // 组织参数
                 Map<String, String> params = new HashMap<>(2);
                 params.put("income", memberWithdrawalMessage.getPrice().toString());
                 noticeMessageDTO.setParameter(params);
-                noticeMessageDTO.setNoticeMessageNodeEnum(
-                        NoticeMessageNodeEnum.WALLET_WITHDRAWAL_SUCCESS);
+                noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.WALLET_WITHDRAWAL_SUCCESS);
                 // 发送提现成功消息
                 noticeMessageService.noticeMessage(noticeMessageDTO);
                 params.put("income", memberWithdrawalMessage.getPrice().toString());
@@ -95,14 +92,11 @@ public class NoticeMessageExecute implements MemberPointChangeEvent, MemberWithd
                 noticeMessageService.noticeMessage(noticeMessageDTO);
             }
             // 如果提现到微信
-            if (memberWithdrawalMessage
-                    .getDestination()
-                    .equals(MemberWithdrawalDestinationEnum.WECHAT.name())) {
+            if (memberWithdrawalMessage.getDestination().equals(MemberWithdrawalDestinationEnum.WECHAT.name())) {
                 Map<String, String> params = new HashMap<>(2);
                 params.put("income", memberWithdrawalMessage.getPrice().toString());
                 noticeMessageDTO.setParameter(params);
-                noticeMessageDTO.setNoticeMessageNodeEnum(
-                        NoticeMessageNodeEnum.WALLET_WITHDRAWAL_WEICHAT_SUCCESS);
+                noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.WALLET_WITHDRAWAL_WEICHAT_SUCCESS);
                 // 发送提现成功消息
                 noticeMessageService.noticeMessage(noticeMessageDTO);
 
@@ -116,8 +110,7 @@ public class NoticeMessageExecute implements MemberPointChangeEvent, MemberWithd
         }
         // 如果提现状态为拒绝则发送审核拒绝站内消息
         if (memberWithdrawalMessage.getStatus().equals(WithdrawStatusEnum.FAIL_AUDITING.name())) {
-            noticeMessageDTO.setNoticeMessageNodeEnum(
-                    NoticeMessageNodeEnum.WALLET_WITHDRAWAL_ERROR);
+            noticeMessageDTO.setNoticeMessageNodeEnum(NoticeMessageNodeEnum.WALLET_WITHDRAWAL_ERROR);
             Map<String, String> params = new HashMap<>(2);
             params.put("price", memberWithdrawalMessage.getPrice().toString());
             noticeMessageDTO.setParameter(params);

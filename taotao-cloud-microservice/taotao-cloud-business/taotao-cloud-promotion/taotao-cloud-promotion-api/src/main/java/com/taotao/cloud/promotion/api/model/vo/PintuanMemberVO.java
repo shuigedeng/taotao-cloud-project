@@ -31,7 +31,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PintuanMemberVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 7814832369110695758L;
+    @Serial
+    private static final long serialVersionUID = 7814832369110695758L;
 
     @Schema(description = "会员编号")
     private Long memberId;

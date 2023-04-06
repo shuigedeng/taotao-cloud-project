@@ -37,11 +37,9 @@ public class RoleDTOAssembler {
         dto.setRemarks(role.getRemarks());
         if (role.getPermissionIds() != null) {
             List<String> permissionIdList = new ArrayList<>();
-            role.getPermissionIds()
-                    .forEach(
-                            permissionId -> {
-                                permissionIdList.add(permissionId.getId());
-                            });
+            role.getPermissionIds().forEach(permissionId -> {
+                permissionIdList.add(permissionId.getId());
+            });
             dto.setPermissionIdList(permissionIdList);
         }
         dto.setStatus(role.getStatus() == null ? null : role.getStatus().getValue());
@@ -68,14 +66,7 @@ public class RoleDTOAssembler {
                 permissionIdList.add(new PermissionId(permissionId));
             }
         }
-        Role Role =
-                new Role(
-                        roleId,
-                        roleCode,
-                        roleName,
-                        roleCommand.getRemarks(),
-                        null,
-                        permissionIdList);
+        Role Role = new Role(roleId, roleCode, roleName, roleCommand.getRemarks(), null, permissionIdList);
         return Role;
     }
 

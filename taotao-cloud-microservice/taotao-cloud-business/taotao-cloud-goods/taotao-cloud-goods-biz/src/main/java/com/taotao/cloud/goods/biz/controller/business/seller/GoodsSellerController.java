@@ -114,9 +114,7 @@ public class GoodsSellerController {
         // 商品SKU列表
         IPage<GoodsSku> goodsSkuPage = goodsSkuService.goodsSkuQueryPage(goodsPageQuery);
         StockWarningVO stockWarning =
-                new StockWarningVO(
-                        stockWarnNum,
-                        PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+                new StockWarningVO(stockWarnNum, PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
         return Result.success(stockWarning);
     }
 
@@ -140,8 +138,7 @@ public class GoodsSellerController {
     @RequestLogger("修改商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/{goodsId}")
-    public Result<Boolean> update(
-            @RequestBody GoodsOperationDTO goodsOperationDTO, @PathVariable Long goodsId) {
+    public Result<Boolean> update(@RequestBody GoodsOperationDTO goodsOperationDTO, @PathVariable Long goodsId) {
         return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
     }
 
@@ -150,8 +147,7 @@ public class GoodsSellerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/under")
     public Result<Boolean> underGoods(@RequestParam List<Long> goodsId) {
-        return Result.success(
-                goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.DOWN, "商家下架"));
+        return Result.success(goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.DOWN, "商家下架"));
     }
 
     @Operation(summary = "上架商品", description = "上架商品")
@@ -159,8 +155,7 @@ public class GoodsSellerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/up")
     public Result<Boolean> unpGoods(@RequestParam List<Long> goodsId) {
-        return Result.success(
-                goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
+        return Result.success(goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
     }
 
     @Operation(summary = "删除商品", description = "删除商品")
@@ -175,8 +170,7 @@ public class GoodsSellerController {
     @RequestLogger("设置商品运费模板")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/freight")
-    public Result<Boolean> freight(
-            @RequestParam List<Long> goodsId, @RequestParam Long templateId) {
+    public Result<Boolean> freight(@RequestParam List<Long> goodsId, @RequestParam Long templateId) {
         return Result.success(goodsService.freight(goodsId, templateId));
     }
 
@@ -186,12 +180,9 @@ public class GoodsSellerController {
     @GetMapping(value = "/sku/{goodsId}/page")
     public Result<List<GoodsSkuSpecGalleryVO>> getSkuByList(@PathVariable Long goodsId) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
-        return Result.success(
-                goodsSkuService.getGoodsSkuVOList(
-                        goodsSkuService.list(
-                                new LambdaQueryWrapper<GoodsSku>()
-                                        .eq(GoodsSku::getGoodsId, goodsId)
-                                        .eq(GoodsSku::getStoreId, storeId))));
+        return Result.success(goodsSkuService.getGoodsSkuVOList(goodsSkuService.list(new LambdaQueryWrapper<GoodsSku>()
+                .eq(GoodsSku::getGoodsId, goodsId)
+                .eq(GoodsSku::getStoreId, storeId))));
     }
 
     @Operation(summary = "修改商品库存", description = "修改商品库存")
@@ -201,19 +192,18 @@ public class GoodsSellerController {
     public Result<Boolean> updateStocks(@RequestBody List<GoodsSkuStockDTO> updateStockList) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         // 获取商品skuId集合
-        List<Long> goodsSkuIds = updateStockList.stream().map(GoodsSkuStockDTO::getSkuId).toList();
+        List<Long> goodsSkuIds =
+                updateStockList.stream().map(GoodsSkuStockDTO::getSkuId).toList();
         // 根据skuId集合查询商品信息
-        List<GoodsSku> goodsSkuList =
-                goodsSkuService.list(
-                        new LambdaQueryWrapper<GoodsSku>()
-                                .in(GoodsSku::getId, goodsSkuIds)
-                                .eq(GoodsSku::getStoreId, storeId));
+        List<GoodsSku> goodsSkuList = goodsSkuService.list(new LambdaQueryWrapper<GoodsSku>()
+                .in(GoodsSku::getId, goodsSkuIds)
+                .eq(GoodsSku::getStoreId, storeId));
         // 过滤不符合当前店铺的商品
-        List<Long> filterGoodsSkuIds = goodsSkuList.stream().map(GoodsSku::getId).toList();
-        List<GoodsSkuStockDTO> collect =
-                updateStockList.stream()
-                        .filter(i -> filterGoodsSkuIds.contains(i.getSkuId()))
-                        .toList();
+        List<Long> filterGoodsSkuIds =
+                goodsSkuList.stream().map(GoodsSku::getId).toList();
+        List<GoodsSkuStockDTO> collect = updateStockList.stream()
+                .filter(i -> filterGoodsSkuIds.contains(i.getSkuId()))
+                .toList();
         return Result.success(goodsSkuService.updateStocks(collect));
     }
 }

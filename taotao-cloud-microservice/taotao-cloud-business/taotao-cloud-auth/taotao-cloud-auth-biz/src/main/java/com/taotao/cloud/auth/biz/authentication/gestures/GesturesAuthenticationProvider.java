@@ -33,8 +33,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /** 手势 登录 */
-public class GesturesAuthenticationProvider
-        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+public class GesturesAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private final GesturesUserDetailsService gesturesUserDetailsService;
@@ -45,18 +44,15 @@ public class GesturesAuthenticationProvider
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
                 GesturesAuthenticationToken.class,
                 authentication,
-                () ->
-                        messages.getMessage(
-                                "AccountVerificationAuthenticationProvider.onlySupports",
-                                "Only AccountVerificationAuthenticationProvider is supported"));
+                () -> messages.getMessage(
+                        "AccountVerificationAuthenticationProvider.onlySupports",
+                        "Only AccountVerificationAuthenticationProvider is supported"));
 
-        GesturesAuthenticationToken unAuthenticationToken =
-                (GesturesAuthenticationToken) authentication;
+        GesturesAuthenticationToken unAuthenticationToken = (GesturesAuthenticationToken) authentication;
 
         String username = unAuthenticationToken.getName();
         String passowrd = (String) unAuthenticationToken.getCredentials();
@@ -90,13 +86,10 @@ public class GesturesAuthenticationProvider
      * @param user the user
      * @return the authentication
      */
-    protected Authentication createSuccessAuthentication(
-            Authentication authentication, UserDetails user) {
+    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
 
-        Collection<? extends GrantedAuthority> authorities =
-                authoritiesMapper.mapAuthorities(user.getAuthorities());
-        GesturesAuthenticationToken authenticationToken =
-                new GesturesAuthenticationToken(user, null, authorities);
+        Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
+        GesturesAuthenticationToken authenticationToken = new GesturesAuthenticationToken(user, null, authorities);
         authenticationToken.setDetails(authentication.getDetails());
 
         return authenticationToken;

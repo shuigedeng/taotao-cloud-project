@@ -41,8 +41,7 @@ public interface ICommodityMapper extends BaseSuperMapper<Commodity, Long> {
      * @return {@link List }<{@link String }>
      * @since 2022-04-27 16:55:41
      */
-    @Select(
-            """
+    @Select("""
 		SELECT live_goods_id
 		FROM tt_commodity
 		WHERE audit_status='0' or audit_status='1'
@@ -94,6 +93,5 @@ public interface ICommodityMapper extends BaseSuperMapper<Commodity, Long> {
 		${ew.customSqlSegment}
 		""")
     IPage<CommoditySkuVO> commodityVOList(
-            IPage<CommoditySkuVO> page,
-            @Param(Constants.WRAPPER) Wrapper<CommoditySkuVO> queryWrapper);
+            IPage<CommoditySkuVO> page, @Param(Constants.WRAPPER) Wrapper<CommoditySkuVO> queryWrapper);
 }

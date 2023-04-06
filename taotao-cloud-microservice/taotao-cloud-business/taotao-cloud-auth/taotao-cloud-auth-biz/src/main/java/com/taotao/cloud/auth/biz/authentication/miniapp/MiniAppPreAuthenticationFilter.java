@@ -61,16 +61,14 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
      * @param miniAppSessionKeyCacheService the mini app session key cache
      */
     public MiniAppPreAuthenticationFilter(
-            MiniAppClientService miniAppClientService,
-            MiniAppSessionKeyCacheService miniAppSessionKeyCacheService) {
+            MiniAppClientService miniAppClientService, MiniAppSessionKeyCacheService miniAppSessionKeyCacheService) {
         this.miniAppClientService = miniAppClientService;
         this.miniAppSessionKeyCacheService = miniAppSessionKeyCacheService;
         this.restOperations = new RestTemplate();
     }
 
     @Override
-    protected void doFilterInternal(
-            HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
         if (response.isCommitted()) {
@@ -113,16 +111,17 @@ public class MiniAppPreAuthenticationFilter extends OncePerRequestFilter {
      * @param jsCode jsCode
      * @return ObjectNode
      */
-    private WechatLoginResponse getResponse(MiniAppClient miniAppClient, String jsCode)
-            throws JsonProcessingException {
+    private WechatLoginResponse getResponse(MiniAppClient miniAppClient, String jsCode) throws JsonProcessingException {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("appid", miniAppClient.getAppId());
         queryParams.add("secret", miniAppClient.getSecret());
         queryParams.add("js_code", jsCode);
         queryParams.add("grant_type", "authorization_code");
 
-        URI uri =
-                UriComponentsBuilder.fromHttpUrl(ENDPOINT).queryParams(queryParams).build().toUri();
+        URI uri = UriComponentsBuilder.fromHttpUrl(ENDPOINT)
+                .queryParams(queryParams)
+                .build()
+                .toUri();
         String response = restOperations.getForObject(uri, String.class);
 
         if (Objects.isNull(response)) {

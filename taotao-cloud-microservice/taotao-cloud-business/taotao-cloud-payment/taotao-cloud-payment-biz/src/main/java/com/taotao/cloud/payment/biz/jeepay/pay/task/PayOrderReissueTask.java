@@ -42,8 +42,11 @@ public class PayOrderReissueTask {
 
     private static final int QUERY_PAGE_SIZE = 100; // 每次查询数量
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private ChannelOrderReissueService channelOrderReissueService;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private ChannelOrderReissueService channelOrderReissueService;
 
     @Scheduled(cron = "0 0/1 * * * ?") // 每分钟执行一次
     public void start() {
@@ -53,20 +56,16 @@ public class PayOrderReissueTask {
 
         // 查询条件： 支付中的订单 & （ 订单创建时间 + 10分钟 >= 当前时间 ）
         LambdaQueryWrapper<PayOrder> lambdaQueryWrapper =
-                PayOrder.gw()
-                        .eq(PayOrder::getState, PayOrder.STATE_ING)
-                        .le(PayOrder::getCreatedAt, offsetDate);
+                PayOrder.gw().eq(PayOrder::getState, PayOrder.STATE_ING).le(PayOrder::getCreatedAt, offsetDate);
 
         int currentPageIndex = 1; // 当前页码
         while (true) {
 
             try {
                 IPage<PayOrder> payOrderIPage =
-                        payOrderService.page(
-                                new Page(currentPageIndex, QUERY_PAGE_SIZE), lambdaQueryWrapper);
+                        payOrderService.page(new Page(currentPageIndex, QUERY_PAGE_SIZE), lambdaQueryWrapper);
 
-                if (payOrderIPage == null
-                        || payOrderIPage.getRecords().isEmpty()) { // 本次查询无结果, 不再继续查询;
+                if (payOrderIPage == null || payOrderIPage.getRecords().isEmpty()) { // 本次查询无结果, 不再继续查询;
                     break;
                 }
 

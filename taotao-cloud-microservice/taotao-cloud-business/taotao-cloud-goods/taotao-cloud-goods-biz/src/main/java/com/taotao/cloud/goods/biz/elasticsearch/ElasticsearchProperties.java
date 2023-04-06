@@ -42,10 +42,12 @@ import org.springframework.stereotype.Component;
 public class ElasticsearchProperties {
 
     /** 请求协议 */
-    @Builder.Default private String schema = "https";
+    @Builder.Default
+    private String schema = "https";
 
     /** 集群名称 */
-    @Builder.Default private String clusterName = "elasticsearch";
+    @Builder.Default
+    private String clusterName = "elasticsearch";
 
     /** 集群节点 */
     @Builder.Default
@@ -56,25 +58,32 @@ public class ElasticsearchProperties {
     private String indexPrefix;
 
     /** 连接超时时间(毫秒) */
-    @Builder.Default private Integer connectTimeout = 1000;
+    @Builder.Default
+    private Integer connectTimeout = 1000;
 
     /** socket 超时时间 */
-    @Builder.Default private Integer socketTimeout = 30000;
+    @Builder.Default
+    private Integer socketTimeout = 30000;
 
     /** 连接请求超时时间 */
-    @Builder.Default private Integer connectionRequestTimeout = 500;
+    @Builder.Default
+    private Integer connectionRequestTimeout = 500;
 
     /** 每个路由的最大连接数量 */
-    @Builder.Default private Integer maxConnectPerRoute = 10;
+    @Builder.Default
+    private Integer maxConnectPerRoute = 10;
 
     /** 最大连接总数量 */
-    @Builder.Default private Integer maxConnectTotal = 30;
+    @Builder.Default
+    private Integer maxConnectTotal = 30;
 
     /** 索引配置信息 */
-    @Builder.Default private Index index = new Index();
+    @Builder.Default
+    private Index index = new Index();
 
     /** 认证账户 */
-    @Builder.Default private Account account = new Account();
+    @Builder.Default
+    private Account account = new Account();
 
     /** 索引配置信息 */
     @Data

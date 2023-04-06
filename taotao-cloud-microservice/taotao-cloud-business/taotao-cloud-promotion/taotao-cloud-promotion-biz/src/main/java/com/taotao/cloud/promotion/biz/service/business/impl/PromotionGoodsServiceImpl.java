@@ -66,15 +66,20 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
         implements IPromotionGoodsService {
 
     /** Redis */
-    @Autowired private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
     /** 秒杀活动申请 */
-    @Autowired private ISeckillApplyService seckillApplyService;
+    @Autowired
+    private ISeckillApplyService seckillApplyService;
     /** 规格商品 */
-    @Autowired private IFeignGoodsSkuApi goodsSkuApi;
+    @Autowired
+    private IFeignGoodsSkuApi goodsSkuApi;
 
-    @Autowired private IFullDiscountService fullDiscountService;
+    @Autowired
+    private IFullDiscountService fullDiscountService;
 
-    @Autowired private ICouponService couponService;
+    @Autowired
+    private ICouponService couponService;
 
     @Override
     public List<PromotionGoods> findNowSkuPromotion(String skuId) {
@@ -195,8 +200,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
             return this.baseMapper.selectInnerOverlapPromotionGoodsWithout(
                     promotionType, skuId, startTime, endTime, promotionId);
         } else {
-            return this.baseMapper.selectInnerOverlapPromotionGoods(
-                    promotionType, skuId, startTime, endTime);
+            return this.baseMapper.selectInnerOverlapPromotionGoods(promotionType, skuId, startTime, endTime);
         }
     }
 
@@ -209,10 +213,8 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
      * @return 促销活动商品库存
      */
     @Override
-    public Integer getPromotionGoodsStock(
-            PromotionTypeEnum typeEnum, String promotionId, String skuId) {
-        String promotionStockKey =
-                IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
+    public Integer getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, String skuId) {
+        String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
         String promotionGoodsStock = stringRedisTemplate.opsForValue().get(promotionStockKey);
 
         // 库存如果不为空，则直接返回
@@ -239,8 +241,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
     }
 
     @Override
-    public List<Integer> getPromotionGoodsStock(
-            PromotionTypeEnum typeEnum, String promotionId, List<String> skuId) {
+    public List<Integer> getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, List<String> skuId) {
         PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
         searchParams.setPromotionType(typeEnum.name());
         searchParams.setPromotionId(promotionId);
@@ -276,21 +277,16 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
     @Override
     public void updatePromotionGoodsStock(
             PromotionTypeEnum typeEnum, String promotionId, String skuId, Integer quantity) {
-        String promotionStockKey =
-                IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
+        String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
         if (typeEnum.equals(PromotionTypeEnum.SECKILL)) {
             LambdaQueryWrapper<SeckillApply> queryWrapper = new LambdaQueryWrapper<>();
-            queryWrapper
-                    .eq(SeckillApply::getSeckillId, promotionId)
-                    .eq(SeckillApply::getSkuId, skuId);
+            queryWrapper.eq(SeckillApply::getSeckillId, promotionId).eq(SeckillApply::getSkuId, skuId);
             SeckillApply seckillApply = this.seckillApplyService.getOne(queryWrapper, false);
             if (seckillApply == null) {
                 throw new BusinessException(ResultEnum.SECKILL_NOT_EXIST_ERROR);
             }
             LambdaUpdateWrapper<SeckillApply> updateWrapper = new LambdaUpdateWrapper<>();
-            updateWrapper
-                    .eq(SeckillApply::getSeckillId, promotionId)
-                    .eq(SeckillApply::getSkuId, skuId);
+            updateWrapper.eq(SeckillApply::getSeckillId, promotionId).eq(SeckillApply::getSkuId, skuId);
             updateWrapper.set(SeckillApply::getQuantity, quantity);
             seckillApplyService.update(updateWrapper);
         } else {
@@ -327,10 +323,9 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
      */
     @Override
     public void deletePromotionGoods(String promotionId, List<String> skuIds) {
-        LambdaQueryWrapper<PromotionGoods> queryWrapper =
-                new LambdaQueryWrapper<PromotionGoods>()
-                        .eq(PromotionGoods::getPromotionId, promotionId)
-                        .in(PromotionGoods::getSkuId, skuIds);
+        LambdaQueryWrapper<PromotionGoods> queryWrapper = new LambdaQueryWrapper<PromotionGoods>()
+                .eq(PromotionGoods::getPromotionId, promotionId)
+                .in(PromotionGoods::getSkuId, skuIds);
         this.remove(queryWrapper);
     }
 
@@ -342,8 +337,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
     @Override
     public void deletePromotionGoods(List<Long> promotionIds) {
         LambdaQueryWrapper<PromotionGoods> queryWrapper =
-                new LambdaQueryWrapper<PromotionGoods>()
-                        .in(PromotionGoods::getPromotionId, promotionIds);
+                new LambdaQueryWrapper<PromotionGoods>().in(PromotionGoods::getPromotionId, promotionIds);
         this.remove(queryWrapper);
     }
 

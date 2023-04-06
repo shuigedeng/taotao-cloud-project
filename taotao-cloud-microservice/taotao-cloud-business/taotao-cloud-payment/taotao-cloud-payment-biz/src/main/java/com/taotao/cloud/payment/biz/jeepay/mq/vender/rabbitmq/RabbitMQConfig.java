@@ -58,16 +58,15 @@ public class RabbitMQConfig {
     private CustomExchange delayedExchange;
 
     /** 注入rabbitMQBeanProcessor */
-    @Autowired private RabbitMQBeanProcessor rabbitMQBeanProcessor;
+    @Autowired
+    private RabbitMQBeanProcessor rabbitMQBeanProcessor;
 
     /** 在全部bean注册完成后再执行 */
     @PostConstruct
     public void init() {
 
         // 获取到所有的MQ定义
-        Set<Class<?>> set =
-                ClassUtil.scanPackageBySuper(
-                        ClassUtil.getPackage(AbstractMQ.class), AbstractMQ.class);
+        Set<Class<?>> set = ClassUtil.scanPackageBySuper(ClassUtil.getPackage(AbstractMQ.class), AbstractMQ.class);
 
         for (Class<?> aClass : set) {
 
@@ -87,25 +86,21 @@ public class RabbitMQConfig {
                 // 动态注册交换机， 交换机名称/bean名称 =  FANOUT_EXCHANGE_NAME_PREFIX + amq.getMQName()
                 rabbitMQBeanProcessor.beanDefinitionRegistry.registerBeanDefinition(
                         FANOUT_EXCHANGE_NAME_PREFIX + amq.getMQName(),
-                        BeanDefinitionBuilder.genericBeanDefinition(
-                                        FanoutExchange.class,
-                                        () -> {
+                        BeanDefinitionBuilder.genericBeanDefinition(FanoutExchange.class, () -> {
 
-                                            // 普通FanoutExchange 交换机
-                                            return new FanoutExchange(
-                                                    FANOUT_EXCHANGE_NAME_PREFIX + amq.getMQName(),
-                                                    true,
-                                                    false);
+                                    // 普通FanoutExchange 交换机
+                                    return new FanoutExchange(
+                                            FANOUT_EXCHANGE_NAME_PREFIX + amq.getMQName(), true, false);
 
-                                            // 支持 延迟的 FanoutExchange 交换机， 配置无效果。
-                                            //                            Map<String, Object> args =
-                                            // new HashMap<>();
-                                            //                            args.put("x-delayed-type",
-                                            // ExchangeTypes.FANOUT);
-                                            //                            return new
-                                            // CustomExchange(RabbitMQConfig.DELAYED_EXCHANGE_NAME,
-                                            // "x-delayed-message", true, false, args);
-                                        })
+                                    // 支持 延迟的 FanoutExchange 交换机， 配置无效果。
+                                    //                            Map<String, Object> args =
+                                    // new HashMap<>();
+                                    //                            args.put("x-delayed-type",
+                                    // ExchangeTypes.FANOUT);
+                                    //                            return new
+                                    // CustomExchange(RabbitMQConfig.DELAYED_EXCHANGE_NAME,
+                                    // "x-delayed-message", true, false, args);
+                                })
                                 .getBeanDefinition());
 
             } else {
@@ -113,16 +108,11 @@ public class RabbitMQConfig {
                 // 延迟交换机与Queue进行绑定， 绑定Bean名称 = mqName_DelayedBind
                 rabbitMQBeanProcessor.beanDefinitionRegistry.registerBeanDefinition(
                         amq.getMQName() + "_DelayedBind",
-                        BeanDefinitionBuilder.genericBeanDefinition(
-                                        Binding.class,
-                                        () ->
-                                                BindingBuilder.bind(
-                                                                SpringBeansUtil.getBean(
-                                                                        amq.getMQName(),
-                                                                        Queue.class))
-                                                        .to(delayedExchange)
-                                                        .with(amq.getMQName())
-                                                        .noargs())
+                        BeanDefinitionBuilder.genericBeanDefinition(Binding.class, () -> BindingBuilder.bind(
+                                                SpringBeansUtil.getBean(amq.getMQName(), Queue.class))
+                                        .to(delayedExchange)
+                                        .with(amq.getMQName())
+                                        .noargs())
                                 .getBeanDefinition());
             }
         }

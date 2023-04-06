@@ -87,99 +87,68 @@ public class ConfigValueUtil {
 
     public String getServiceDirectoryPath() {
         String folder =
-                StringUtil.isNotEmpty(serviceDirectoryPath)
-                        ? serviceDirectoryPath
-                        : ConfigConst.CODE_TEMP_FOLDER;
+                StringUtil.isNotEmpty(serviceDirectoryPath) ? serviceDirectoryPath : ConfigConst.CODE_TEMP_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getDataBackupFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(dataBackupFilePath)
-                        ? dataBackupFilePath
-                        : ConfigConst.DATA_BACKUP_FOLDER;
+        String folder = StringUtil.isNotEmpty(dataBackupFilePath) ? dataBackupFilePath : ConfigConst.DATA_BACKUP_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getTemporaryFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(temporaryFilePath)
-                        ? temporaryFilePath
-                        : ConfigConst.TEMPORARY_FOLDER;
+        String folder = StringUtil.isNotEmpty(temporaryFilePath) ? temporaryFilePath : ConfigConst.TEMPORARY_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getSystemFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(systemFilePath) ? systemFilePath : ConfigConst.SYSTEM_FOLDER;
+        String folder = StringUtil.isNotEmpty(systemFilePath) ? systemFilePath : ConfigConst.SYSTEM_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getTemplateFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(templateFilePath)
-                        ? templateFilePath
-                        : ConfigConst.TEMPLATE_FOLDER;
+        String folder = StringUtil.isNotEmpty(templateFilePath) ? templateFilePath : ConfigConst.TEMPLATE_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getTemplateCodePath() {
-        String folder =
-                StringUtil.isNotEmpty(templateCodePath)
-                        ? templateCodePath
-                        : ConfigConst.TEMPLATE_CODE_FOLDER;
+        String folder = StringUtil.isNotEmpty(templateCodePath) ? templateCodePath : ConfigConst.TEMPLATE_CODE_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getEmailFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(emailFilePath) ? emailFilePath : ConfigConst.EMAIL_FOLDER;
+        String folder = StringUtil.isNotEmpty(emailFilePath) ? emailFilePath : ConfigConst.EMAIL_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getDocumentPreviewPath() {
         String folder =
-                StringUtil.isNotEmpty(documentPreviewPath)
-                        ? documentPreviewPath
-                        : ConfigConst.DOCUMENT_PREVIEW_FOLDER;
+                StringUtil.isNotEmpty(documentPreviewPath) ? documentPreviewPath : ConfigConst.DOCUMENT_PREVIEW_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getUserAvatarFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(userAvatarFilePath)
-                        ? userAvatarFilePath
-                        : ConfigConst.USER_AVATAR_FOLDER;
+        String folder = StringUtil.isNotEmpty(userAvatarFilePath) ? userAvatarFilePath : ConfigConst.USER_AVATAR_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getImContentFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(imContentFilePath)
-                        ? imContentFilePath
-                        : ConfigConst.IM_CONTENT_FOLDER;
+        String folder = StringUtil.isNotEmpty(imContentFilePath) ? imContentFilePath : ConfigConst.IM_CONTENT_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getDocumentFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(documentFilePath)
-                        ? documentFilePath
-                        : ConfigConst.DOCUMENT_FOLDER;
+        String folder = StringUtil.isNotEmpty(documentFilePath) ? documentFilePath : ConfigConst.DOCUMENT_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getWebAnnexFilePath() {
-        String folder =
-                StringUtil.isNotEmpty(webAnnexFilePath)
-                        ? webAnnexFilePath
-                        : ConfigConst.WEB_ANNEX_FOLDER;
+        String folder = StringUtil.isNotEmpty(webAnnexFilePath) ? webAnnexFilePath : ConfigConst.WEB_ANNEX_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 
     public String getBiVisualPath() {
-        String folder =
-                StringUtil.isNotEmpty(biVisualPath) ? biVisualPath : ConfigConst.BI_VISUAL_FOLDER;
+        String folder = StringUtil.isNotEmpty(biVisualPath) ? biVisualPath : ConfigConst.BI_VISUAL_FOLDER;
         return getXssPath(path + folder + File.separator);
     }
 

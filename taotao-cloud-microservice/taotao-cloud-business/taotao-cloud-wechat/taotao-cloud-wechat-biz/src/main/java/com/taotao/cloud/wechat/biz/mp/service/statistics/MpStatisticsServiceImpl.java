@@ -41,16 +41,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class MpStatisticsServiceImpl implements MpStatisticsService {
 
-    @Resource @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource
+    @Lazy // 延迟加载，解决循环依赖的问题
     private MpServiceFactory mpServiceFactory;
 
     @Override
     public List<WxDataCubeUserSummary> getUserSummary(Long accountId, LocalDateTime[] date) {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(accountId);
         try {
-            return mpService
-                    .getDataCubeService()
-                    .getUserSummary(DateUtil.date(date[0]), DateUtil.date(date[1]));
+            return mpService.getDataCubeService().getUserSummary(DateUtil.date(date[0]), DateUtil.date(date[1]));
         } catch (WxErrorException e) {
             throw exception(STATISTICS_GET_USER_SUMMARY_FAIL, e.getError().getErrorMsg());
         }
@@ -60,9 +59,7 @@ public class MpStatisticsServiceImpl implements MpStatisticsService {
     public List<WxDataCubeUserCumulate> getUserCumulate(Long accountId, LocalDateTime[] date) {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(accountId);
         try {
-            return mpService
-                    .getDataCubeService()
-                    .getUserCumulate(DateUtil.date(date[0]), DateUtil.date(date[1]));
+            return mpService.getDataCubeService().getUserCumulate(DateUtil.date(date[0]), DateUtil.date(date[1]));
         } catch (WxErrorException e) {
             throw exception(STATISTICS_GET_USER_CUMULATE_FAIL, e.getError().getErrorMsg());
         }
@@ -72,22 +69,17 @@ public class MpStatisticsServiceImpl implements MpStatisticsService {
     public List<WxDataCubeMsgResult> getUpstreamMessage(Long accountId, LocalDateTime[] date) {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(accountId);
         try {
-            return mpService
-                    .getDataCubeService()
-                    .getUpstreamMsg(DateUtil.date(date[0]), DateUtil.date(date[1]));
+            return mpService.getDataCubeService().getUpstreamMsg(DateUtil.date(date[0]), DateUtil.date(date[1]));
         } catch (WxErrorException e) {
             throw exception(STATISTICS_GET_UPSTREAM_MESSAGE_FAIL, e.getError().getErrorMsg());
         }
     }
 
     @Override
-    public List<WxDataCubeInterfaceResult> getInterfaceSummary(
-            Long accountId, LocalDateTime[] date) {
+    public List<WxDataCubeInterfaceResult> getInterfaceSummary(Long accountId, LocalDateTime[] date) {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(accountId);
         try {
-            return mpService
-                    .getDataCubeService()
-                    .getInterfaceSummary(DateUtil.date(date[0]), DateUtil.date(date[1]));
+            return mpService.getDataCubeService().getInterfaceSummary(DateUtil.date(date[0]), DateUtil.date(date[1]));
         } catch (WxErrorException e) {
             throw exception(STATISTICS_GET_INTERFACE_SUMMARY_FAIL, e.getError().getErrorMsg());
         }

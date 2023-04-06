@@ -23,9 +23,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(
-        value = ServiceName.TAOTAO_CLOUD_MEMBER,
-        fallbackFactory = FeignMemberAddressApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = FeignMemberAddressApiFallback.class)
 public interface IFeignMemberAddressApi {
 
     @GetMapping(value = "/member/feign/address/shippingAddressId")

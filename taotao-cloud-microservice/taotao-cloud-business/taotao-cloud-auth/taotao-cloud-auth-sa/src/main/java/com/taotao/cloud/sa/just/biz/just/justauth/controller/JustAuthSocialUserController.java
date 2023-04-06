@@ -61,11 +61,9 @@ public class JustAuthSocialUserController {
     @GetMapping("/list")
     @ApiOperation(value = "查询第三方用户绑定列表")
     public Result<Page<JustAuthSocialUserDTO>> list(
-            QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO,
-            Page<JustAuthSocialUserDTO> page) {
+            QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO, Page<JustAuthSocialUserDTO> page) {
         Page<JustAuthSocialUserDTO> pageJustAuthSocialUser =
-                justAuthSocialUserService.queryJustAuthSocialUserList(
-                        page, queryJustAuthSocialUserDTO);
+                justAuthSocialUserService.queryJustAuthSocialUserList(page, queryJustAuthSocialUserDTO);
         return Result.success(pageJustAuthSocialUser);
     }
 
@@ -148,8 +146,7 @@ public class JustAuthSocialUserController {
         if (CollectionUtils.isEmpty(justAuthSocialUserIds)) {
             return Result.error("第三方用户绑定ID列表不能为空");
         }
-        boolean result =
-                justAuthSocialUserService.batchDeleteJustAuthSocialUser(justAuthSocialUserIds);
+        boolean result = justAuthSocialUserService.batchDeleteJustAuthSocialUser(justAuthSocialUserIds);
         return Result.success(result);
     }
 }

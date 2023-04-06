@@ -26,8 +26,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ThirdSessionHolder {
 
-    private final ThreadLocal<ThirdSession> THREAD_LOCAL_THIRD_SESSION =
-            new TransmittableThreadLocal<>();
+    private final ThreadLocal<ThirdSession> THREAD_LOCAL_THIRD_SESSION = new TransmittableThreadLocal<>();
 
     /**
      * TTL 设置thirdSession

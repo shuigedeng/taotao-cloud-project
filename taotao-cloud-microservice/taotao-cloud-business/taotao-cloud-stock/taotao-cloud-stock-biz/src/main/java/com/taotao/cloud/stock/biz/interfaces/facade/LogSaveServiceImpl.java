@@ -28,7 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @DubboService(timeout = 3000)
 public class LogSaveServiceImpl implements LogSaveService {
 
-    @Autowired private LogRepository logRepository;
+    @Autowired
+    private LogRepository logRepository;
 
     @Override
     public void save(LogDTO logDTO) {

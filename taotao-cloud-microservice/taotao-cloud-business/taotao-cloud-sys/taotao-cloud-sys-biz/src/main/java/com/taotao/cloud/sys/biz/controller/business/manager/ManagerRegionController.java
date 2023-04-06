@@ -53,13 +53,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-地区管理API", description = "管理端-地区管理API")
 public class ManagerRegionController
         extends BaseSuperController<
-                IRegionService,
-                Region,
-                Long,
-                BaseQuery,
-                RegionSaveDTO,
-                RegionUpdateDTO,
-                RegionQueryVO> {
+                IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
     @Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
     @RequestLogger
@@ -67,9 +61,7 @@ public class ManagerRegionController
     @NotAuth
     // @PreAuthorize("hasAuthority('sys:region:info:parentId')")
     public Result<List<RegionParentVO>> queryRegionByParentId(
-            @Parameter(description = "父id")
-                    @NotNull(message = "父id不能为空")
-                    @PathVariable(name = "parentId")
+            @Parameter(description = "父id") @NotNull(message = "父id不能为空") @PathVariable(name = "parentId")
                     Long parentId) {
         List<RegionParentVO> result = service().queryRegionByParentId(parentId);
         return Result.success(result);

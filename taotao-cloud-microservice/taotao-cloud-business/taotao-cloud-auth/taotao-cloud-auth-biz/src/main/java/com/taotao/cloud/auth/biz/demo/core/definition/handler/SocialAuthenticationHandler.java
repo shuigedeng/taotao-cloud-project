@@ -39,6 +39,5 @@ public interface SocialAuthenticationHandler {
      * @return 系统用户
      * @throws AuthenticationException {@link AuthenticationException} 认证错误
      */
-    HerodotusUser authentication(String source, AccessPrincipal accessPrincipal)
-            throws AuthenticationException;
+    HerodotusUser authentication(String source, AccessPrincipal accessPrincipal) throws AuthenticationException;
 }

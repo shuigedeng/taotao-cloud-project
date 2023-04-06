@@ -39,7 +39,8 @@ import org.springframework.util.StringUtils;
 @Component
 public class RedisUtils {
 
-    @Autowired private StringRedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /** -------------------key相关操作--------------------- */
 
@@ -731,11 +732,8 @@ public class RedisUtils {
      * @param unit
      * @return
      */
-    public String lBRightPopAndLeftPush(
-            String sourceKey, String destinationKey, long timeout, TimeUnit unit) {
-        return redisTemplate
-                .opsForList()
-                .rightPopAndLeftPush(sourceKey, destinationKey, timeout, unit);
+    public String lBRightPopAndLeftPush(String sourceKey, String destinationKey, long timeout, TimeUnit unit) {
+        return redisTemplate.opsForList().rightPopAndLeftPush(sourceKey, destinationKey, timeout, unit);
     }
 
     /**
@@ -1173,8 +1171,7 @@ public class RedisUtils {
      * @param end
      * @return
      */
-    public Set<TypedTuple<String>> zRangeByScoreWithScores(
-            String key, double min, double max, long start, long end) {
+    public Set<TypedTuple<String>> zRangeByScoreWithScores(String key, double min, double max, long start, long end) {
         return redisTemplate.opsForZSet().rangeByScoreWithScores(key, min, max, start, end);
     }
 
@@ -1222,8 +1219,7 @@ public class RedisUtils {
      * @param max
      * @return
      */
-    public Set<TypedTuple<String>> zReverseRangeByScoreWithScores(
-            String key, double min, double max) {
+    public Set<TypedTuple<String>> zReverseRangeByScoreWithScores(String key, double min, double max) {
         return redisTemplate.opsForZSet().reverseRangeByScoreWithScores(key, min, max);
     }
 
@@ -1237,8 +1233,7 @@ public class RedisUtils {
      * @param end
      * @return
      */
-    public Set<String> zReverseRangeByScore(
-            String key, double min, double max, long start, long end) {
+    public Set<String> zReverseRangeByScore(String key, double min, double max, long start, long end) {
         return redisTemplate.opsForZSet().reverseRangeByScore(key, min, max, start, end);
     }
 

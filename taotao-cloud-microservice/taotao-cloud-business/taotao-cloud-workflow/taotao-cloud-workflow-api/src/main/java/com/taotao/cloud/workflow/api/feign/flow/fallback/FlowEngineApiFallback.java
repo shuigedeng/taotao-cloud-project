@@ -43,8 +43,7 @@ public class FlowEngineApiFallback implements FlowEngineApi {
     }
 
     @Override
-    public void updateByID(
-            @PathVariable("id") String id, @RequestBody FlowEngineEntity flowEngineEntity) {}
+    public void updateByID(@PathVariable("id") String id, @RequestBody FlowEngineEntity flowEngineEntity) {}
 
     @Override
     public FlowAppPageModel getAppPageList(FlowPagination pagination) {

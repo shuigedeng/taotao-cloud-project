@@ -50,8 +50,7 @@ public class InterfaceSecurityService {
 
     @Autowired
     public InterfaceSecurityService(
-            HttpCryptoProcessor httpCryptoProcessor,
-            RegisteredClientRepository registeredClientRepository) {
+            HttpCryptoProcessor httpCryptoProcessor, RegisteredClientRepository registeredClientRepository) {
         this.httpCryptoProcessor = httpCryptoProcessor;
         this.registeredClientRepository = registeredClientRepository;
     }

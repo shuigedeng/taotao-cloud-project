@@ -61,6 +61,5 @@ public class ProcessConstants {
     public static final String PROCESS_INITIATOR = "INITIATOR";
 
     /** 流程跳过 */
-    public static final String FLOWABLE_SKIP_EXPRESSION_ENABLED =
-            "_FLOWABLE_SKIP_EXPRESSION_ENABLED";
+    public static final String FLOWABLE_SKIP_EXPRESSION_ENABLED = "_FLOWABLE_SKIP_EXPRESSION_ENABLED";
 }

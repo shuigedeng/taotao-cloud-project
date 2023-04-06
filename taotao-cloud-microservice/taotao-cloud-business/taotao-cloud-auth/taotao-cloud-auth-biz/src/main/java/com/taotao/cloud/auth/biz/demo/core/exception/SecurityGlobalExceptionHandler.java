@@ -69,12 +69,10 @@ public class SecurityGlobalExceptionHandler {
                 GlobalExceptionHandler.getUnauthorizedResult(ResultErrorCodes.INVALID_GRANT));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.INVALID_REDIRECT_URI,
-                GlobalExceptionHandler.getPreconditionFailedResult(
-                        ResultErrorCodes.INVALID_REDIRECT_URI));
+                GlobalExceptionHandler.getPreconditionFailedResult(ResultErrorCodes.INVALID_REDIRECT_URI));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.INVALID_REQUEST,
-                GlobalExceptionHandler.getPreconditionFailedResult(
-                        ResultErrorCodes.INVALID_REQUEST));
+                GlobalExceptionHandler.getPreconditionFailedResult(ResultErrorCodes.INVALID_REQUEST));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.INVALID_SCOPE,
                 GlobalExceptionHandler.getPreconditionFailedResult(ResultErrorCodes.INVALID_SCOPE));
@@ -86,23 +84,19 @@ public class SecurityGlobalExceptionHandler {
                 GlobalExceptionHandler.getInternalServerErrorResult(ResultErrorCodes.SERVER_ERROR));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.TEMPORARILY_UNAVAILABLE,
-                GlobalExceptionHandler.getServiceUnavailableResult(
-                        ResultErrorCodes.TEMPORARILY_UNAVAILABLE));
+                GlobalExceptionHandler.getServiceUnavailableResult(ResultErrorCodes.TEMPORARILY_UNAVAILABLE));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.UNAUTHORIZED_CLIENT,
                 GlobalExceptionHandler.getUnauthorizedResult(ResultErrorCodes.UNAUTHORIZED_CLIENT));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.UNSUPPORTED_GRANT_TYPE,
-                GlobalExceptionHandler.getNotAcceptableResult(
-                        ResultErrorCodes.UNSUPPORTED_GRANT_TYPE));
+                GlobalExceptionHandler.getNotAcceptableResult(ResultErrorCodes.UNSUPPORTED_GRANT_TYPE));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.UNSUPPORTED_RESPONSE_TYPE,
-                GlobalExceptionHandler.getNotAcceptableResult(
-                        ResultErrorCodes.UNSUPPORTED_RESPONSE_TYPE));
+                GlobalExceptionHandler.getNotAcceptableResult(ResultErrorCodes.UNSUPPORTED_RESPONSE_TYPE));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.UNSUPPORTED_TOKEN_TYPE,
-                GlobalExceptionHandler.getNotAcceptableResult(
-                        ResultErrorCodes.UNSUPPORTED_TOKEN_TYPE));
+                GlobalExceptionHandler.getNotAcceptableResult(ResultErrorCodes.UNSUPPORTED_TOKEN_TYPE));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.ACCOUNT_EXPIRED,
                 GlobalExceptionHandler.getUnauthorizedResult(ResultErrorCodes.ACCOUNT_EXPIRED));
@@ -120,8 +114,7 @@ public class SecurityGlobalExceptionHandler {
                 GlobalExceptionHandler.getUnauthorizedResult(ResultErrorCodes.ACCOUNT_LOCKED));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.ACCOUNT_ENDPOINT_LIMITED,
-                GlobalExceptionHandler.getUnauthorizedResult(
-                        ResultErrorCodes.ACCOUNT_ENDPOINT_LIMITED));
+                GlobalExceptionHandler.getUnauthorizedResult(ResultErrorCodes.ACCOUNT_ENDPOINT_LIMITED));
         EXCEPTION_DICTIONARY.put(
                 OAuth2ErrorCodes.USERNAME_NOT_FOUND,
                 GlobalExceptionHandler.getUnauthorizedResult(ResultErrorCodes.USERNAME_NOT_FOUND));
@@ -149,9 +142,7 @@ public class SecurityGlobalExceptionHandler {
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public static Result<String> validationMethodArgumentException(
-            MethodArgumentNotValidException ex,
-            HttpServletRequest request,
-            HttpServletResponse response) {
+            MethodArgumentNotValidException ex, HttpServletRequest request, HttpServletResponse response) {
         return validationBindException(ex, request, response);
     }
 
@@ -164,8 +155,7 @@ public class SecurityGlobalExceptionHandler {
         FieldError fieldError = bindingResult.getFieldError();
         // 返回第一个错误的信息
         if (ObjectUtils.isNotEmpty(fieldError)) {
-            result.validation(
-                    fieldError.getDefaultMessage(), fieldError.getCode(), fieldError.getField());
+            result.validation(fieldError.getDefaultMessage(), fieldError.getCode(), fieldError.getField());
         }
 
         response.setStatus(result.getStatus());
@@ -197,8 +187,7 @@ public class SecurityGlobalExceptionHandler {
     }
 
     @ExceptionHandler({Exception.class, PlatformException.class})
-    public static Result<String> exception(
-            Exception ex, HttpServletRequest request, HttpServletResponse response) {
+    public static Result<String> exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());
         response.setStatus(result.getStatus());
         return result;
@@ -218,8 +207,7 @@ public class SecurityGlobalExceptionHandler {
 
         Exception reason = new Exception();
         if (exception instanceof OAuth2AuthenticationException) {
-            OAuth2AuthenticationException oAuth2AuthenticationException =
-                    (OAuth2AuthenticationException) exception;
+            OAuth2AuthenticationException oAuth2AuthenticationException = (OAuth2AuthenticationException) exception;
             OAuth2Error oAuth2Error = oAuth2AuthenticationException.getError();
             if (EXCEPTION_DICTIONARY.containsKey(oAuth2Error.getErrorCode())) {
                 Result<String> result = EXCEPTION_DICTIONARY.get(oAuth2Error.getErrorCode());

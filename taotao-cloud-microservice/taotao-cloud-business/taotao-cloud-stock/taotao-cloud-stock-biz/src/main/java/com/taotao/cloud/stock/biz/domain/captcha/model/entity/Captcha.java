@@ -36,9 +36,7 @@ public class Captcha implements Entity<Captcha> {
     private Date expireTime;
 
     public Captcha(
-            com.taotao.cloud.stock.biz.domain.model.captcha.Uuid uuid,
-            CaptchaCode captchaCode,
-            Date expireTime) {
+            com.taotao.cloud.stock.biz.domain.model.captcha.Uuid uuid, CaptchaCode captchaCode, Date expireTime) {
         this.uuid = uuid;
         this.captchaCode = captchaCode;
         this.expireTime = expireTime;
@@ -50,8 +48,7 @@ public class Captcha implements Entity<Captcha> {
     }
 
     public boolean validate(CaptchaCode captchaCode) {
-        return this.captchaCode.sameValueAs(captchaCode)
-                && this.expireTime.getTime() >= System.currentTimeMillis();
+        return this.captchaCode.sameValueAs(captchaCode) && this.expireTime.getTime() >= System.currentTimeMillis();
     }
 
     @Override

@@ -63,10 +63,7 @@ public class HerodotusUser implements UserDetails, CredentialsContainer {
 
     /** Calls the more complex constructor with all boolean arguments set to {@code true}. */
     public HerodotusUser(
-            String userId,
-            String username,
-            String password,
-            Collection<? extends GrantedAuthority> authorities) {
+            String userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this(userId, username, password, authorities, null);
     }
 
@@ -180,15 +177,13 @@ public class HerodotusUser implements UserDetails, CredentialsContainer {
         return avatar;
     }
 
-    private static SortedSet<GrantedAuthority> sortAuthorities(
-            Collection<? extends GrantedAuthority> authorities) {
+    private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
         Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
         // Ensure array iteration order is predictable (as per
         // UserDetails.getAuthorities() contract and SEC-717)
         SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet<>(new AuthorityComparator());
         for (GrantedAuthority grantedAuthority : authorities) {
-            Assert.notNull(
-                    grantedAuthority, "GrantedAuthority list cannot contain any null elements");
+            Assert.notNull(grantedAuthority, "GrantedAuthority list cannot contain any null elements");
             sortedAuthorities.add(grantedAuthority);
         }
         return sortedAuthorities;

@@ -56,14 +56,11 @@ public class SubscribeHandler extends AbstractHandler {
         log.info("新关注用户 OPENID: " + wxMessage.getFromUser());
         // 获取微信用户基本信息
         try {
-            WxMpUser userWxInfo =
-                    weixinService.getUserService().userInfo(wxMessage.getFromUser(), null);
+            WxMpUser userWxInfo = weixinService.getUserService().userInfo(wxMessage.getFromUser(), null);
             if (userWxInfo != null) {
                 // TODO 添加关注用户到本地数据库
-                WxUser wxUser =
-                        wxUserMapper.selectOne(
-                                Wrappers.<WxUser>lambdaQuery()
-                                        .eq(WxUser::getOpenId, userWxInfo.getOpenId()));
+                WxUser wxUser = wxUserMapper.selectOne(
+                        Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, userWxInfo.getOpenId()));
                 if (wxUser == null) { // 第一次关注
                     wxUser = new WxUser();
                     wxUser.setSubscribeNum(1);
@@ -77,16 +74,11 @@ public class SubscribeHandler extends AbstractHandler {
                     wxUserMapper.updateById(wxUser);
                 }
                 // 发送关注消息
-                List<WxAutoReply> listWxAutoReply =
-                        wxAutoReplyService.list(
-                                Wrappers.<WxAutoReply>query()
-                                        .lambda()
-                                        .eq(
-                                                WxAutoReply::getType,
-                                                ConfigConstant.WX_AUTO_REPLY_TYPE_1));
+                List<WxAutoReply> listWxAutoReply = wxAutoReplyService.list(Wrappers.<WxAutoReply>query()
+                        .lambda()
+                        .eq(WxAutoReply::getType, ConfigConstant.WX_AUTO_REPLY_TYPE_1));
                 WxMpXmlOutMessage wxMpXmlOutMessage =
-                        MsgHandler.getWxMpXmlOutMessage(
-                                wxMessage, listWxAutoReply, wxUser, wxMsgService);
+                        MsgHandler.getWxMpXmlOutMessage(wxMessage, listWxAutoReply, wxUser, wxMsgService);
                 return wxMpXmlOutMessage;
             }
         } catch (Exception e) {
@@ -101,8 +93,7 @@ public class SubscribeHandler extends AbstractHandler {
         wxUser.setSubscribe(ConfigConstant.SUBSCRIBE_TYPE_YES);
         wxUser.setSubscribeScene(userWxInfo.getSubscribeScene());
         if (null != userWxInfo.getSubscribeTime()) {
-            wxUser.setSubscribeTime(
-                    LocalDateTimeUtils.timestamToDatetime(userWxInfo.getSubscribeTime() * 1000));
+            wxUser.setSubscribeTime(LocalDateTimeUtils.timestamToDatetime(userWxInfo.getSubscribeTime() * 1000));
         }
         wxUser.setOpenId(userWxInfo.getOpenId());
         wxUser.setLanguage(userWxInfo.getLanguage());

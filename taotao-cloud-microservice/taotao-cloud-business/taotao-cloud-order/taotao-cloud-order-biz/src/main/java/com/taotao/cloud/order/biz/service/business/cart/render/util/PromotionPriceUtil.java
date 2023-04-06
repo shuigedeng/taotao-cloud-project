@@ -73,7 +73,8 @@ public class PromotionPriceUtil {
                         if (promotionTypeEnum == PromotionTypeEnum.COUPON) {
                             cartSkuVO
                                     .getPriceDetailDTO()
-                                    .setCouponPrice(cartSkuVO.getPriceDetailDTO().getGoodsPrice());
+                                    .setCouponPrice(
+                                            cartSkuVO.getPriceDetailDTO().getGoodsPrice());
                         } else {
                             cartSkuVO
                                     .getPriceDetailDTO()
@@ -105,10 +106,7 @@ public class PromotionPriceUtil {
                     if (count > 0) {
                         // 商品金额占比
                         BigDecimal point =
-                                CurrencyUtils.div(
-                                        cartSkuVO.getPriceDetailDTO().getGoodsPrice(),
-                                        totalPrice,
-                                        4);
+                                CurrencyUtils.div(cartSkuVO.getPriceDetailDTO().getGoodsPrice(), totalPrice, 4);
                         // 商品优惠金额
                         skuDiscountPrice = CurrencyUtils.mul(discountPrice, point);
                         // 累加已优惠金额
@@ -123,34 +121,25 @@ public class PromotionPriceUtil {
 
                         cartSkuVO
                                 .getPriceDetailDTO()
-                                .setCouponPrice(
-                                        CurrencyUtils.add(
-                                                cartSkuVO.getPriceDetailDTO().getCouponPrice(),
-                                                skuDiscountPrice));
+                                .setCouponPrice(CurrencyUtils.add(
+                                        cartSkuVO.getPriceDetailDTO().getCouponPrice(), skuDiscountPrice));
                     } else if (promotionTypeEnum == PromotionTypeEnum.PLATFORM_COUPON) {
 
                         cartSkuVO
                                 .getPriceDetailDTO()
-                                .setSiteCouponPrice(
-                                        CurrencyUtils.add(
-                                                cartSkuVO.getPriceDetailDTO().getCouponPrice(),
-                                                skuDiscountPrice));
+                                .setSiteCouponPrice(CurrencyUtils.add(
+                                        cartSkuVO.getPriceDetailDTO().getCouponPrice(), skuDiscountPrice));
 
                         cartSkuVO
                                 .getPriceDetailDTO()
-                                .setCouponPrice(
-                                        CurrencyUtils.add(
-                                                cartSkuVO.getPriceDetailDTO().getCouponPrice(),
-                                                cartSkuVO
-                                                        .getPriceDetailDTO()
-                                                        .getSiteCouponPrice()));
+                                .setCouponPrice(CurrencyUtils.add(
+                                        cartSkuVO.getPriceDetailDTO().getCouponPrice(),
+                                        cartSkuVO.getPriceDetailDTO().getSiteCouponPrice()));
                     } else {
                         cartSkuVO
                                 .getPriceDetailDTO()
-                                .setDiscountPrice(
-                                        CurrencyUtils.add(
-                                                cartSkuVO.getPriceDetailDTO().getDiscountPrice(),
-                                                skuDiscountPrice));
+                                .setDiscountPrice(CurrencyUtils.add(
+                                        cartSkuVO.getPriceDetailDTO().getDiscountPrice(), skuDiscountPrice));
                     }
                 }
             }
@@ -166,8 +155,7 @@ public class PromotionPriceUtil {
      * @param promotionId 活动ID
      * @return 是否有效
      */
-    private boolean checkPromotionValidTime(
-            Date startTime, Date endTime, String promotionType, String promotionId) {
+    private boolean checkPromotionValidTime(Date startTime, Date endTime, String promotionType, String promotionId) {
         long now = System.currentTimeMillis();
         if (startTime.getTime() > now) {
             LogUtils.error("商品ID为{}的{}活动开始时间小于当时时间，活动未开始！", promotionId, promotionType);

@@ -63,8 +63,7 @@ public abstract class AbstractSocialAuthenticationHandler implements SocialAuthe
      * @return 系统用户 {@link HerodotusUser}
      * @throws UsernameAlreadyExistsException 用户名已经存在
      */
-    public abstract HerodotusUser register(SocialUserDetails socialUserDetails)
-            throws UsernameAlreadyExistsException;
+    public abstract HerodotusUser register(SocialUserDetails socialUserDetails) throws UsernameAlreadyExistsException;
 
     /**
      * 系统用户与社交用户绑定操作
@@ -82,8 +81,7 @@ public abstract class AbstractSocialAuthenticationHandler implements SocialAuthe
      * @param HerodotusUser 系统用户信息 {@link HerodotusUser}
      * @param socialUserDetails 社交登录过程中，第三方系统返回的新信息
      */
-    public abstract void additionalRegisterOperation(
-            HerodotusUser HerodotusUser, SocialUserDetails socialUserDetails);
+    public abstract void additionalRegisterOperation(HerodotusUser HerodotusUser, SocialUserDetails socialUserDetails);
 
     /**
      * 系统用户注册
@@ -117,8 +115,7 @@ public abstract class AbstractSocialAuthenticationHandler implements SocialAuthe
      * @param accessPrincipal 社交登录所需要的信息
      */
     @Override
-    public HerodotusUser authentication(String source, AccessPrincipal accessPrincipal)
-            throws AuthenticationException {
+    public HerodotusUser authentication(String source, AccessPrincipal accessPrincipal) throws AuthenticationException {
         SocialUserDetails newSocialUserDetails = this.identity(source, accessPrincipal);
         SocialUserDetails oldSocialUserDetails = this.isUserExist(newSocialUserDetails);
 
@@ -129,8 +126,7 @@ public abstract class AbstractSocialAuthenticationHandler implements SocialAuthe
             return HerodotusUser;
         } else {
             HerodotusUser HerodotusUser = this.signIn(oldSocialUserDetails);
-            this.additionalSignInOperation(
-                    HerodotusUser, newSocialUserDetails, oldSocialUserDetails);
+            this.additionalSignInOperation(HerodotusUser, newSocialUserDetails, oldSocialUserDetails);
             return HerodotusUser;
         }
     }

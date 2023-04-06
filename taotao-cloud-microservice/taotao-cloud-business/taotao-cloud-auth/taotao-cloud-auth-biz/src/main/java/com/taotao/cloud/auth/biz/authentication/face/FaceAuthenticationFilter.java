@@ -37,8 +37,7 @@ public class FaceAuthenticationFilter extends AbstractAuthenticationProcessingFi
 
     private final String imgBase64Parameter = SPRING_SECURITY_FORM_IMAGE_BASE_64_KEY;
 
-    private Converter<HttpServletRequest, FaceAuthenticationToken>
-            accountVerificationAuthenticationTokenConverter;
+    private Converter<HttpServletRequest, FaceAuthenticationToken> accountVerificationAuthenticationTokenConverter;
 
     private boolean postOnly = true;
 
@@ -53,16 +52,13 @@ public class FaceAuthenticationFilter extends AbstractAuthenticationProcessingFi
     }
 
     @Override
-    public Authentication attemptAuthentication(
-            HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException(
-                    "Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        FaceAuthenticationToken authRequest =
-                accountVerificationAuthenticationTokenConverter.convert(request);
+        FaceAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(request);
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
         return this.getAuthenticationManager().authenticate(authRequest);

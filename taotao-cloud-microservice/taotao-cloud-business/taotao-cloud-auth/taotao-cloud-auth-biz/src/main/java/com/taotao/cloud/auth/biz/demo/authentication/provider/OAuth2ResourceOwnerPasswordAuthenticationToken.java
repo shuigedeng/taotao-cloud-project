@@ -33,8 +33,7 @@ import org.springframework.util.Assert;
  * @author : gengwei.zheng
  * @date : 2022/2/22 15:49
  */
-public class OAuth2ResourceOwnerPasswordAuthenticationToken
-        extends OAuth2AuthorizationGrantAuthenticationToken {
+public class OAuth2ResourceOwnerPasswordAuthenticationToken extends OAuth2AuthorizationGrantAuthenticationToken {
 
     private final Set<String> scopes;
 
@@ -44,11 +43,8 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken
             @Nullable Map<String, Object> additionalParameters) {
         super(HerodotusGrantType.PASSWORD, clientPrincipal, additionalParameters);
         Assert.notNull(clientPrincipal, "clientPrincipal cannot be null");
-        this.scopes =
-                Collections.unmodifiableSet(
-                        CollectionUtils.isNotEmpty(scopes)
-                                ? new HashSet<>(scopes)
-                                : Collections.emptySet());
+        this.scopes = Collections.unmodifiableSet(
+                CollectionUtils.isNotEmpty(scopes) ? new HashSet<>(scopes) : Collections.emptySet());
     }
 
     public Set<String> getScopes() {

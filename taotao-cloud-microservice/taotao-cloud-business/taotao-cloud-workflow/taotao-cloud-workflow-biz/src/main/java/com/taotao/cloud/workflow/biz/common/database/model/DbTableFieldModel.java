@@ -68,33 +68,26 @@ public class DbTableFieldModel extends JdbcGetMod {
             ResultSet result = modelDTO.getResultSet();
             DbBase db = modelDTO.getDbBase();
             DbTableFieldModel model = db.getPartFieldModel(result);
-            String dbFieldType =
-                    result.getString(DbAliasEnum.getAsByDb(db, DbAliasConst.DATA_TYPE));
+            String dbFieldType = result.getString(DbAliasEnum.getAsByDb(db, DbAliasConst.DATA_TYPE));
             DataTypeModel dataTypeModel = db.getDataTypeModel(dbFieldType);
 
             // 字段类型(会出现一些项目中没有内置的类型)
             String dataType;
             if (dataTypeModel != null) {
-                dataType =
-                        model.getDataType() != null
-                                ? model.getDataType()
-                                : dataTypeModel.getViewDataType();
+                dataType = model.getDataType() != null ? model.getDataType() : dataTypeModel.getViewDataType();
             } else {
                 // 返回类型原值
                 dataType = dbFieldType;
             }
 
             // 字段名
-            String fieldName =
-                    model.getField() != null
-                            ? model.getField()
-                            : result.getString(DbAliasEnum.getAsByDb(db, DbAliasConst.FIELD_NAME));
+            String fieldName = model.getField() != null
+                    ? model.getField()
+                    : result.getString(DbAliasEnum.getAsByDb(db, DbAliasConst.FIELD_NAME));
             // 字段注释
-            String fieldComment =
-                    model.getFieldComment() != null
-                            ? model.getFieldComment()
-                            : result.getString(
-                                    DbAliasEnum.getAsByDb(db, DbAliasConst.FIELD_COMMENT));
+            String fieldComment = model.getFieldComment() != null
+                    ? model.getFieldComment()
+                    : result.getString(DbAliasEnum.getAsByDb(db, DbAliasConst.FIELD_COMMENT));
             // 字段默认值
             /*String defaults = model.getDefaults()!=null ? model.getDefaults() :
             result.getString(DbAliasEnum.DEFAULTS.AS());*/
@@ -104,33 +97,25 @@ public class DbTableFieldModel extends JdbcGetMod {
             if (dataTypeModel != null && !dataTypeModel.getLengthModifyFlag()) {
                 dataLength = ViewDataTypeConst.DEFAULT;
             } else {
-                dataLength =
-                        model.getDataLength() != null
-                                ? model.getDataLength()
-                                :
-                                // 如果不getLong的话，有一些长度会显示类似5E+1的字符串,用getLong不用Int,因为有些长度例如：4294967295
-                                String.valueOf(
-                                        result.getLong(
-                                                DbAliasEnum.getAsByDb(
-                                                        db, DbAliasConst.DATA_LENGTH)));
+                dataLength = model.getDataLength() != null
+                        ? model.getDataLength()
+                        :
+                        // 如果不getLong的话，有一些长度会显示类似5E+1的字符串,用getLong不用Int,因为有些长度例如：4294967295
+                        String.valueOf(result.getLong(DbAliasEnum.getAsByDb(db, DbAliasConst.DATA_LENGTH)));
                 // text的长度默认无法设置
-                if ("0".equals(dataLength)
-                        || StringUtil.isEmpty(dataLength)
-                        || "null".equals(dataLength)) {
+                if ("0".equals(dataLength) || StringUtil.isEmpty(dataLength) || "null".equals(dataLength)) {
                     dataLength = ViewDataTypeConst.DEFAULT;
                 }
             }
 
             // 字段主键
-            Integer primaryKey =
-                    model.getPrimaryKey() != null
-                            ? model.getPrimaryKey()
-                            : result.getInt(DbAliasEnum.PRIMARY_KEY.asByDb(db));
+            Integer primaryKey = model.getPrimaryKey() != null
+                    ? model.getPrimaryKey()
+                    : result.getInt(DbAliasEnum.PRIMARY_KEY.asByDb(db));
             // 字段允空
-            Integer allowNull =
-                    model.getAllowNull() != null
-                            ? model.getAllowNull()
-                            : result.getInt(DbAliasEnum.ALLOW_NULL.asByDb(db));
+            Integer allowNull = model.getAllowNull() != null
+                    ? model.getAllowNull()
+                    : result.getInt(DbAliasEnum.ALLOW_NULL.asByDb(db));
 
             this.setField(fieldName)
                     .

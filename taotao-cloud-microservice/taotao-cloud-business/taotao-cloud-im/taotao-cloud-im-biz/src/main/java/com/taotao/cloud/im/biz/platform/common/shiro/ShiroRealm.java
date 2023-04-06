@@ -47,9 +47,13 @@ import org.springframework.context.annotation.Lazy;
 /** ShiroRealm */
 public class ShiroRealm extends AuthorizingRealm {
 
-    @Lazy @Resource private TokenService tokenService;
+    @Lazy
+    @Resource
+    private TokenService tokenService;
 
-    @Lazy @Resource private ChatUserService chatUserService;
+    @Lazy
+    @Resource
+    private ChatUserService chatUserService;
 
     /**
      * 提供用户信息，返回权限信息
@@ -106,8 +110,7 @@ public class ShiroRealm extends AuthorizingRealm {
             String salt = Md5Utils.salt();
             // 对token加密
             String credentials = Md5Utils.credentials(token, salt);
-            return new SimpleAuthenticationInfo(
-                    loginUser, credentials, ByteSource.Util.bytes(salt), getName());
+            return new SimpleAuthenticationInfo(loginUser, credentials, ByteSource.Util.bytes(salt), getName());
         }
         // 手机+密码登录
         if (authenticationToken instanceof ShiroLoginAuth) {
@@ -138,8 +141,7 @@ public class ShiroRealm extends AuthorizingRealm {
             throw new LoginException("手机号已停用"); // 手机禁用
         }
         // 查询权限
-        LoginUser loginUser =
-                new LoginUser(chatUser, ApiConstant.ROLE_KEY, Arrays.asList(ApiConstant.PERM_APP));
+        LoginUser loginUser = new LoginUser(chatUser, ApiConstant.ROLE_KEY, Arrays.asList(ApiConstant.PERM_APP));
         // 设置代理信息
         makeUserAgent(loginUser);
         String credentials = chatUser.getPassword();
@@ -151,8 +153,7 @@ public class ShiroRealm extends AuthorizingRealm {
             credentials = Md5Utils.credentials(phone, salt);
         }
         // 登录
-        return new SimpleAuthenticationInfo(
-                loginUser, credentials, ByteSource.Util.bytes(salt), getName());
+        return new SimpleAuthenticationInfo(loginUser, credentials, ByteSource.Util.bytes(salt), getName());
     }
 
     /**
@@ -161,8 +162,7 @@ public class ShiroRealm extends AuthorizingRealm {
      * @param loginUser 登录信息
      */
     private void makeUserAgent(LoginUser loginUser) {
-        UserAgent userAgent =
-                UserAgentUtil.parse(ServletUtils.getRequest().getHeader("User-Agent"));
+        UserAgent userAgent = UserAgentUtil.parse(ServletUtils.getRequest().getHeader("User-Agent"));
         String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
         // 登录ip
         loginUser.setIpAddr(ip);

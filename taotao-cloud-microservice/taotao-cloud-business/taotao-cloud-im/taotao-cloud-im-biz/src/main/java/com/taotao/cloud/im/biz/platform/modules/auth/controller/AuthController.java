@@ -48,9 +48,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController extends BaseController {
 
-    @Resource private ChatUserService chatUserService;
+    @Resource
+    private ChatUserService chatUserService;
 
-    @Resource private SmsService smsService;
+    @Resource
+    private SmsService smsService;
 
     /**
      * 发送验证码（登录/注册/忘记密码）

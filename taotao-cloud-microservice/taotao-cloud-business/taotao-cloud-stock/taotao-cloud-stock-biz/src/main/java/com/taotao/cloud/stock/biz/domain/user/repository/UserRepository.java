@@ -38,8 +38,7 @@ public interface UserRepository {
      * @param userId
      * @return
      */
-    com.taotao.cloud.stock.biz.domain.model.user.User find(
-            com.taotao.cloud.stock.biz.domain.model.user.UserId userId);
+    com.taotao.cloud.stock.biz.domain.model.user.User find(com.taotao.cloud.stock.biz.domain.model.user.UserId userId);
 
     /**
      * 根据手机号获取账号

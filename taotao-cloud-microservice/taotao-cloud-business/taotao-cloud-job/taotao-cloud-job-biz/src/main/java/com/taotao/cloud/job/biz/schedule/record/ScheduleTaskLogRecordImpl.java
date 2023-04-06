@@ -31,7 +31,8 @@ public class ScheduleTaskLogRecordImpl implements ScheduleTaskLogRecord {
 
     private final Logger log = LoggerFactory.getLogger(ScheduleTaskLogRecordImpl.class);
 
-    @Autowired private ScheduledJobService scheduledJobService;
+    @Autowired
+    private ScheduledJobService scheduledJobService;
 
     @Override
     public void recordTaskLog(String taskId, long currentTime, Exception e) {
@@ -43,10 +44,7 @@ public class ScheduleTaskLogRecordImpl implements ScheduleTaskLogRecord {
         if (e != null) {
             // 异常
             status = 1;
-            exceptionInfo =
-                    e.getMessage().length() > 500
-                            ? e.getMessage().substring(0, 500)
-                            : e.getMessage();
+            exceptionInfo = e.getMessage().length() > 500 ? e.getMessage().substring(0, 500) : e.getMessage();
         }
 
         // 记录日志

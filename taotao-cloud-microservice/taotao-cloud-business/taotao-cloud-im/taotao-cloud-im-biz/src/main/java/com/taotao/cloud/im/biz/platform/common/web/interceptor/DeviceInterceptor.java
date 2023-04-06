@@ -32,8 +32,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class DeviceInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(
-            HttpServletRequest request, HttpServletResponse response, Object handler)
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String device = ServletUtil.getHeader(request, HeadConstant.DEVICE, CharsetUtil.UTF_8);
         if (StringUtils.isEmpty(device)) {

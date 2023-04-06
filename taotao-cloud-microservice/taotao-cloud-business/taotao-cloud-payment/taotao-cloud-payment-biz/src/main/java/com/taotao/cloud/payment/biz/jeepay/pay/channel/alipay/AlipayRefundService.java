@@ -54,10 +54,7 @@ public class AlipayRefundService extends AbstractRefundService {
 
     @Override
     public ChannelRetMsg refund(
-            RefundOrderRQ bizRQ,
-            RefundOrder refundOrder,
-            PayOrder payOrder,
-            MchAppConfigContext mchAppConfigContext)
+            RefundOrderRQ bizRQ, RefundOrder refundOrder, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
 
         AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
@@ -73,10 +70,9 @@ public class AlipayRefundService extends AbstractRefundService {
         // 统一放置 isv接口必传信息
         AlipayKit.putApiIsvInfo(mchAppConfigContext, request, model);
 
-        AlipayTradeRefundResponse response =
-                configContextQueryService
-                        .getAlipayClientWrapper(mchAppConfigContext)
-                        .execute(request);
+        AlipayTradeRefundResponse response = configContextQueryService
+                .getAlipayClientWrapper(mchAppConfigContext)
+                .execute(request);
 
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();
         channelRetMsg.setChannelAttach(response.getBody());
@@ -94,8 +90,7 @@ public class AlipayRefundService extends AbstractRefundService {
     }
 
     @Override
-    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception {
+    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
 
         AlipayTradeFastpayRefundQueryRequest request = new AlipayTradeFastpayRefundQueryRequest();
         AlipayTradeFastpayRefundQueryModel model = new AlipayTradeFastpayRefundQueryModel();
@@ -107,19 +102,17 @@ public class AlipayRefundService extends AbstractRefundService {
         // 统一放置 isv接口必传信息
         AlipayKit.putApiIsvInfo(mchAppConfigContext, request, model);
 
-        AlipayTradeFastpayRefundQueryResponse response =
-                configContextQueryService
-                        .getAlipayClientWrapper(mchAppConfigContext)
-                        .execute(request);
+        AlipayTradeFastpayRefundQueryResponse response = configContextQueryService
+                .getAlipayClientWrapper(mchAppConfigContext)
+                .execute(request);
 
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();
         channelRetMsg.setChannelAttach(response.getBody());
 
         // 调用成功 & 金额相等  （传入不存在的outRequestNo支付宝仍然返回响应成功只是数据不存在， 调用isSuccess() 仍是成功, 此处需判断金额是否相等）
-        Long channelRefundAmount =
-                response.getRefundAmount() == null
-                        ? null
-                        : Long.parseLong(AmountUtil.convertDollar2Cent(response.getRefundAmount()));
+        Long channelRefundAmount = response.getRefundAmount() == null
+                ? null
+                : Long.parseLong(AmountUtil.convertDollar2Cent(response.getRefundAmount()));
         if (response.isSuccess() && refundOrder.getRefundAmount().equals(channelRefundAmount)) {
             channelRetMsg.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_SUCCESS);
         } else {

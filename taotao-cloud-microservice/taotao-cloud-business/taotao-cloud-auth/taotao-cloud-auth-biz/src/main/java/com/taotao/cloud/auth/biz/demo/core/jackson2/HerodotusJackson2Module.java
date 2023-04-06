@@ -39,10 +39,8 @@ public class HerodotusJackson2Module extends SimpleModule {
     public void setupModule(SetupContext context) {
         SecurityJackson2Modules.enableDefaultTyping(context.getOwner());
         context.setMixInAnnotations(HerodotusUser.class, HerodotusUserMixin.class);
+        context.setMixInAnnotations(HerodotusGrantedAuthority.class, HerodotusGrantedAuthorityMixin.class);
         context.setMixInAnnotations(
-                HerodotusGrantedAuthority.class, HerodotusGrantedAuthorityMixin.class);
-        context.setMixInAnnotations(
-                FormLoginWebAuthenticationDetails.class,
-                FormLoginWebAuthenticationDetailsMixin.class);
+                FormLoginWebAuthenticationDetails.class, FormLoginWebAuthenticationDetailsMixin.class);
     }
 }

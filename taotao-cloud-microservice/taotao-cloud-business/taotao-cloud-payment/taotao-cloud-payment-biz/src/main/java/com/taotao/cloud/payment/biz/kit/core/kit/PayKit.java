@@ -150,13 +150,11 @@ public class PayKit {
      * @param encode 是否进行URLEncoder
      * @return 拼接后字符串
      */
-    public static String createLinkString(
-            Map<String, String> params, String connStr, boolean encode) {
+    public static String createLinkString(Map<String, String> params, String connStr, boolean encode) {
         return createLinkString(params, connStr, encode, false);
     }
 
-    public static String createLinkString(
-            Map<String, String> params, String connStr, boolean encode, boolean quotes) {
+    public static String createLinkString(Map<String, String> params, String connStr, boolean encode, boolean quotes) {
         List<String> keys = new ArrayList<>(params.keySet());
         Collections.sort(keys);
         StringBuilder content = new StringBuilder();
@@ -216,8 +214,7 @@ public class PayKit {
      * @param suffix xml 后缀
      * @return xml 字符串
      */
-    public static StringBuffer forEachMap(
-            Map<String, String> params, String prefix, String suffix) {
+    public static StringBuffer forEachMap(Map<String, String> params, String prefix, String suffix) {
         StringBuffer xml = new StringBuffer();
         if (StrUtil.isNotEmpty(prefix)) {
             xml.append(prefix);
@@ -323,8 +320,7 @@ public class PayKit {
      * @return 生成 v3 签名
      * @throws Exception 异常信息
      */
-    public static String createSign(ArrayList<String> signMessage, String keyPath)
-            throws Exception {
+    public static String createSign(ArrayList<String> signMessage, String keyPath) throws Exception {
         return createSign(buildSignMessage(signMessage), keyPath);
     }
 
@@ -336,8 +332,7 @@ public class PayKit {
      * @return 生成 v3 签名
      * @throws Exception 异常信息
      */
-    public static String createSign(ArrayList<String> signMessage, PrivateKey privateKey)
-            throws Exception {
+    public static String createSign(ArrayList<String> signMessage, PrivateKey privateKey) throws Exception {
         return createSign(buildSignMessage(signMessage), privateKey);
     }
 
@@ -387,12 +382,7 @@ public class PayKit {
      * @return 请求头 Authorization
      */
     public static String getAuthorization(
-            String mchId,
-            String serialNo,
-            String nonceStr,
-            String timestamp,
-            String signature,
-            String authType) {
+            String mchId, String serialNo, String nonceStr, String timestamp, String signature, String authType) {
         Map<String, String> params = new HashMap<>(5);
         params.put("mchid", mchId);
         params.put("serial_no", serialNo);
@@ -422,11 +412,10 @@ public class PayKit {
      */
     public static PrivateKey getPrivateKey(String keyPath) throws Exception {
         String originalKey = FileUtil.readUtf8String(keyPath);
-        String privateKey =
-                originalKey
-                        .replace("-----BEGIN PRIVATE KEY-----", "")
-                        .replace("-----END PRIVATE KEY-----", "")
-                        .replaceAll("\\s+", "");
+        String privateKey = originalKey
+                .replace("-----BEGIN PRIVATE KEY-----", "")
+                .replace("-----END PRIVATE KEY-----", "")
+                .replaceAll("\\s+", "");
 
         return RsaKit.loadPrivateKey(privateKey);
     }
@@ -460,8 +449,7 @@ public class PayKit {
      */
     public static X509Certificate getCertificate(String publicKey) {
         try {
-            X509Certificate cert =
-                    PayKit.getCertificate(new ByteArrayInputStream(publicKey.getBytes()));
+            X509Certificate cert = PayKit.getCertificate(new ByteArrayInputStream(publicKey.getBytes()));
             cert.checkValidity();
             return cert;
         } catch (CertificateExpiredException e) {

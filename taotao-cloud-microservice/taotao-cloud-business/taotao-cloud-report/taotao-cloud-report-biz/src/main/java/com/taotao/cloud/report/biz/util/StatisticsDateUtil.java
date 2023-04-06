@@ -112,8 +112,7 @@ public class StatisticsDateUtil {
             return getDateArray(SearchTypeEnum.valueOf(statisticsQueryParam.getSearchType()));
         }
         // 按照年月查询
-        else if (statisticsQueryParam.getMonth() != null
-                && statisticsQueryParam.getYear() != null) {
+        else if (statisticsQueryParam.getMonth() != null && statisticsQueryParam.getYear() != null) {
             return getDateArray(statisticsQueryParam.getYear(), statisticsQueryParam.getMonth());
         }
         // 默认查询当前月份

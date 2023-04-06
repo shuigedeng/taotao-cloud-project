@@ -41,7 +41,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth/captcha")
 public class CaptchaController {
 
-    @Autowired private CaptchaService captchaService;
+    @Autowired
+    private CaptchaService captchaService;
 
     @Operation(summary = "获取验证码", description = "获取验证码")
     // @RequestLogger

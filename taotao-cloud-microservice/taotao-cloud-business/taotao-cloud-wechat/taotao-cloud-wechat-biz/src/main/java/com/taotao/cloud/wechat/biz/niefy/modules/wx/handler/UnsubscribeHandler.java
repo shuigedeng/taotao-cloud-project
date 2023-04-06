@@ -30,7 +30,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UnsubscribeHandler extends AbstractHandler {
-    @Autowired WxUserService userService;
+    @Autowired
+    WxUserService userService;
 
     @Override
     public WxMpXmlOutMessage handle(

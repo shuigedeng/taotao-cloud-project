@@ -30,19 +30,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 @DubboService
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    @Autowired private CaptchaRepository captchaRepository;
+    @Autowired
+    private CaptchaRepository captchaRepository;
 
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @Autowired private PermissionQueryService permissionQueryService;
+    @Autowired
+    private PermissionQueryService permissionQueryService;
 
     @Override
     public boolean validateCaptcha(String uuid, String captchaCode) {
         if (StringUtils.isBlank(uuid) || StringUtils.isBlank(captchaCode)) {
             return false;
         }
-        CaptchaValidateService captchaValidateService =
-                new CaptchaValidateService(captchaRepository);
+        CaptchaValidateService captchaValidateService = new CaptchaValidateService(captchaRepository);
         return captchaValidateService.validate(new Uuid(uuid), new CaptchaCode(captchaCode));
     }
 

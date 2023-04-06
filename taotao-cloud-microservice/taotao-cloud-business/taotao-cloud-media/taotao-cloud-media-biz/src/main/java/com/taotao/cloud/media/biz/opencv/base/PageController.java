@@ -140,11 +140,7 @@ public class PageController extends BaseController {
             if (contArea > 1200) { // 此处是根据轮廓面积
                 // 红线画出识别的轮廓
                 Core.rectangle(
-                        image,
-                        new Point(r.x, r.y),
-                        new Point(r.x + r.width, r.y + r.height),
-                        new Scalar(0, 0, 255),
-                        2);
+                        image, new Point(r.x, r.y), new Point(r.x + r.width, r.y + r.height), new Scalar(0, 0, 255), 2);
                 pageSize++;
             }
         }
@@ -229,13 +225,7 @@ public class PageController extends BaseController {
         // Imgproc.threshold(markmat, markmat, 190, 255, Imgproc.THRESH_BINARY_INV);
         Vector<MatOfPoint> contours = new Vector<MatOfPoint>();
         Mat rsmat = new Mat();
-        Imgproc.findContours(
-                markmat,
-                contours,
-                rsmat,
-                Imgproc.RETR_TREE,
-                Imgproc.CHAIN_APPROX_SIMPLE,
-                new Point());
+        Imgproc.findContours(markmat, contours, rsmat, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE, new Point());
         MatOfPoint markMop = new MatOfPoint();
         Mat result = new Mat(markmat.size(), CvType.CV_8U, new Scalar(255));
         Imgproc.drawContours(result, contours, 0, new Scalar(0), 1);

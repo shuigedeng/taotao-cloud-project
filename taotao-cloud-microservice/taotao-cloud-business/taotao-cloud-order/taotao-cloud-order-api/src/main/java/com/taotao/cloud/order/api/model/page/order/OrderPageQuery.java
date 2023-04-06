@@ -46,7 +46,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "订单查询参数")
 public class OrderPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = -6380573339089959194L;
+    @Serial
+    private static final long serialVersionUID = -6380573339089959194L;
 
     @Schema(description = "商品名称")
     private String goodsName;
@@ -56,12 +57,7 @@ public class OrderPageQuery extends PageQuery {
 
     @Schema(
             description = "页面标签",
-            example =
-                    "ALL:全部,"
-                            + "WAIT_PAY:待付款,"
-                            + "WAIT_ROG:待收货,"
-                            + "CANCELLED:已取消,"
-                            + "COMPLETE:已完成")
+            example = "ALL:全部," + "WAIT_PAY:待付款," + "WAIT_ROG:待收货," + "CANCELLED:已取消," + "COMPLETE:已完成")
     private String tag;
 
     @Schema(description = "商家ID")

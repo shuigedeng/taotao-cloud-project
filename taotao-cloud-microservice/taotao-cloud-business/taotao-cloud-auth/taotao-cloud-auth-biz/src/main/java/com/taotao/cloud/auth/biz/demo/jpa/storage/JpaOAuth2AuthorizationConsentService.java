@@ -39,8 +39,7 @@ import org.springframework.util.StringUtils;
  */
 public class JpaOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(JpaOAuth2AuthorizationConsentService.class);
+    private static final Logger log = LoggerFactory.getLogger(JpaOAuth2AuthorizationConsentService.class);
 
     private final HerodotusAuthorizationConsentService herodotusAuthorizationConsentService;
     private final RegisteredClientRepository registeredClientRepository;
@@ -62,8 +61,7 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
     public void remove(OAuth2AuthorizationConsent authorizationConsent) {
         log.debug("[Herodotus] |- Jpa OAuth2 Authorization Consent Service remove entity.");
         this.herodotusAuthorizationConsentService.deleteByRegisteredClientIdAndPrincipalName(
-                authorizationConsent.getRegisteredClientId(),
-                authorizationConsent.getPrincipalName());
+                authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
     }
 
     @Override
@@ -75,24 +73,19 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
                 .orElse(null);
     }
 
-    private OAuth2AuthorizationConsent toObject(
-            HerodotusAuthorizationConsent authorizationConsent) {
+    private OAuth2AuthorizationConsent toObject(HerodotusAuthorizationConsent authorizationConsent) {
         String registeredClientId = authorizationConsent.getRegisteredClientId();
-        RegisteredClient registeredClient =
-                this.registeredClientRepository.findById(registeredClientId);
+        RegisteredClient registeredClient = this.registeredClientRepository.findById(registeredClientId);
         if (registeredClient == null) {
-            throw new DataRetrievalFailureException(
-                    "The RegisteredClient with id '"
-                            + registeredClientId
-                            + "' was not found in the RegisteredClientRepository.");
+            throw new DataRetrievalFailureException("The RegisteredClient with id '"
+                    + registeredClientId
+                    + "' was not found in the RegisteredClientRepository.");
         }
 
         OAuth2AuthorizationConsent.Builder builder =
-                OAuth2AuthorizationConsent.withId(
-                        registeredClientId, authorizationConsent.getPrincipalName());
+                OAuth2AuthorizationConsent.withId(registeredClientId, authorizationConsent.getPrincipalName());
         if (authorizationConsent.getAuthorities() != null) {
-            for (String authority :
-                    StringUtils.commaDelimitedListToSet(authorizationConsent.getAuthorities())) {
+            for (String authority : StringUtils.commaDelimitedListToSet(authorizationConsent.getAuthorities())) {
                 builder.authority(new HerodotusGrantedAuthority(authority));
             }
         }
@@ -100,8 +93,7 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
         return builder.build();
     }
 
-    private HerodotusAuthorizationConsent toEntity(
-            OAuth2AuthorizationConsent authorizationConsent) {
+    private HerodotusAuthorizationConsent toEntity(OAuth2AuthorizationConsent authorizationConsent) {
         HerodotusAuthorizationConsent entity = new HerodotusAuthorizationConsent();
         entity.setRegisteredClientId(authorizationConsent.getRegisteredClientId());
         entity.setPrincipalName(authorizationConsent.getPrincipalName());

@@ -33,7 +33,8 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.RABBIT_MQ)
 public class RabbitSendMqServiceImpl implements SendMqService {
 
-    @Autowired private RabbitTemplate rabbitTemplate;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Value("${austin.rabbitmq.topic.name}")
     private String confTopic;
@@ -46,10 +47,7 @@ public class RabbitSendMqServiceImpl implements SendMqService {
         if (topic.equals(confTopic)) {
             rabbitTemplate.convertAndSend(exchangeName, confTopic, jsonValue);
         } else {
-            log.error(
-                    "RabbitSendMqServiceImpl send topic error! topic:{},confTopic:{}",
-                    topic,
-                    confTopic);
+            log.error("RabbitSendMqServiceImpl send topic error! topic:{},confTopic:{}", topic, confTopic);
         }
     }
 

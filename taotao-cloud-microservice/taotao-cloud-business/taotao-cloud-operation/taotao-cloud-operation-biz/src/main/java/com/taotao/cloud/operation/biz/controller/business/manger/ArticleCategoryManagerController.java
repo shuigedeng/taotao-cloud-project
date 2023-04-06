@@ -43,7 +43,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleCategoryManagerController {
 
     /** 文章分类 */
-    @Autowired private ArticleCategoryService articleCategoryService;
+    @Autowired
+    private ArticleCategoryService articleCategoryService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -62,8 +63,7 @@ public class ArticleCategoryManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "查看文章分类")
     @GetMapping(value = "/{id}")
-    public Result<ArticleCategory> getArticleCategory(
-            @Parameter(description = "文章分类ID") @PathVariable String id) {
+    public Result<ArticleCategory> getArticleCategory(@Parameter(description = "文章分类ID") @PathVariable String id) {
         return Result.success(this.articleCategoryService.getById(id));
     }
 
@@ -87,8 +87,7 @@ public class ArticleCategoryManagerController {
     @Operation(summary = "修改文章分类")
     @PutMapping("/update/{id}")
     public Result<ArticleCategory> update(
-            @Valid ArticleCategory articleCategory,
-            @Parameter(description = "文章分类ID") @PathVariable("id") String id) {
+            @Valid ArticleCategory articleCategory, @Parameter(description = "文章分类ID") @PathVariable("id") String id) {
 
         if (articleCategory.getLevel() == null) {
             articleCategory.setLevel(0);
@@ -105,8 +104,7 @@ public class ArticleCategoryManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "删除文章分类")
     @DeleteMapping("/{id}")
-    public Result<ArticleCategory> deleteById(
-            @Parameter(description = "文章分类ID") @PathVariable String id) {
+    public Result<ArticleCategory> deleteById(@Parameter(description = "文章分类ID") @PathVariable String id) {
         articleCategoryService.deleteById(id);
         return Result.success();
     }

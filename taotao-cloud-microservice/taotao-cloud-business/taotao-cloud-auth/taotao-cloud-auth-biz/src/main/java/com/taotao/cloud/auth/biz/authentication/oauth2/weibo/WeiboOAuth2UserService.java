@@ -27,11 +27,11 @@ import org.springframework.web.client.RestTemplate;
 
 public class WeiboOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    @Resource private RestTemplate restTemplate;
+    @Resource
+    private RestTemplate restTemplate;
 
     @Override
-    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest)
-            throws OAuth2AuthenticationException {
+    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
         Map<String, Object> additionalParameters = oAuth2UserRequest.getAdditionalParameters();
         String uid = additionalParameters.get("uid").toString();
 
@@ -41,12 +41,11 @@ public class WeiboOAuth2UserService implements OAuth2UserService<OAuth2UserReque
         params.put("uid", uid);
         params.put("access_token", access_token);
 
-        String baseUri =
-                oAuth2UserRequest
-                        .getClientRegistration()
-                        .getProviderDetails()
-                        .getUserInfoEndpoint()
-                        .getUri();
+        String baseUri = oAuth2UserRequest
+                .getClientRegistration()
+                .getProviderDetails()
+                .getUserInfoEndpoint()
+                .getUri();
         String userInfoUri = baseUri + "?uid={uid}" + "&access_token={access_token}";
         System.out.println(userInfoUri);
 

@@ -52,8 +52,7 @@ public class PreparedStatementDTO {
         this.prepareDataList = new LinkedList<>(Arrays.asList(objs));
     }
 
-    public PreparedStatementDTO(
-            Connection conn, String prepareSql, LinkedList<Object> prepareDataList) {
+    public PreparedStatementDTO(Connection conn, String prepareSql, LinkedList<Object> prepareDataList) {
         this.conn = conn;
         this.prepareSql = prepareSql;
         this.prepareDataList = prepareDataList;

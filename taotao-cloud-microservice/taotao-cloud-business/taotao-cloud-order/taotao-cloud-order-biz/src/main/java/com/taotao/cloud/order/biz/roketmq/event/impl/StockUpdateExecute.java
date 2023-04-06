@@ -58,21 +58,32 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
     /** 出库失败消息 */
     static String outOfStockMessage = "库存不足，出库失败";
     /** Redis */
-    @Autowired private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-    @Autowired private DefaultRedisScript<Boolean> quantityScript;
+    @Autowired
+    private DefaultRedisScript<Boolean> quantityScript;
     /** 订单 */
-    @Autowired private IOrderService orderService;
+    @Autowired
+    private IOrderService orderService;
     /** 规格商品 */
-    @Autowired private IFeignGoodsSkuApi goodsSkuApi;
+    @Autowired
+    private IFeignGoodsSkuApi goodsSkuApi;
     /** 促销商品 */
-    @Autowired private IFeignPromotionGoodsApi promotionGoodsApi;
+    @Autowired
+    private IFeignPromotionGoodsApi promotionGoodsApi;
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
-    @Autowired private IFeignKanjiaActivityApi kanjiaActivityApi;
-    @Autowired private IFeignKanjiaActivityGoodsApi kanjiaActivityGoodsApi;
-    @Autowired private IFeignPointsGoodsApi pointsGoodsApi;
+    @Autowired
+    private IFeignKanjiaActivityApi kanjiaActivityApi;
+
+    @Autowired
+    private IFeignKanjiaActivityGoodsApi kanjiaActivityGoodsApi;
+
+    @Autowired
+    private IFeignPointsGoodsApi pointsGoodsApi;
 
     @Override
     public void orderChange(OrderMessage orderMessage) {
@@ -95,8 +106,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
                 checkStocks(stocks, order);
 
                 // 库存扣除结果
-                Boolean skuResult =
-                        stringRedisTemplate.execute(quantityScript, keys, values.toArray());
+                Boolean skuResult = stringRedisTemplate.execute(quantityScript, keys, values.toArray());
                 // 如果库存扣减都成功，则记录成交订单
                 if (Boolean.TRUE.equals(skuResult)) {
                     LogUtils.info("库存扣减成功,参数为{};{}", keys, values);
@@ -127,8 +137,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
                         values.add(Integer.toString(i));
                     }
                     // 批量脚本执行库存回退
-                    Boolean skuResult =
-                            stringRedisTemplate.execute(quantityScript, keys, values.toArray());
+                    Boolean skuResult = stringRedisTemplate.execute(quantityScript, keys, values.toArray());
 
                     // 返还失败，则记录日志
                     if (Boolean.FALSE.equals(skuResult)) {
@@ -161,15 +170,13 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
      * @param orderItems
      */
     private void initSkuCache(List<OrderItemVO> orderItems) {
-        orderItems.forEach(
-                orderItem -> {
-                    // 如果不存在
-                    if (!redisRepository.hasKey(
-                            GoodsSkuService.getStockCacheKey(orderItem.getSkuId()))) {
-                        // 内部会自动写入，这里不需要进行二次处理
-                        goodsSkuApi.getStock(orderItem.getSkuId());
-                    }
-                });
+        orderItems.forEach(orderItem -> {
+            // 如果不存在
+            if (!redisRepository.hasKey(GoodsSkuService.getStockCacheKey(orderItem.getSkuId()))) {
+                // 内部会自动写入，这里不需要进行二次处理
+                goodsSkuApi.getStock(orderItem.getSkuId());
+            }
+        });
     }
 
     /**
@@ -179,48 +186,40 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
      */
     private void initPromotionCache(List<OrderItemVO> orderItems) {
         // 如果促销类型需要库存判定，则做对应处理
-        orderItems.forEach(
-                orderItem -> {
-                    if (orderItem.getPromotionType() != null) {
-                        // 如果此促销有库存概念，则计入
-                        if (PromotionTypeEnum.haveStock(orderItem.getPromotionType())) {
-                            PromotionTypeEnum promotionTypeEnum =
-                                    PromotionTypeEnum.valueOf(orderItem.getPromotionType());
-                            String cacheKey =
-                                    PromotionGoodsService.getPromotionGoodsStockCacheKey(
-                                            promotionTypeEnum,
-                                            orderItem.getPromotionId(),
-                                            orderItem.getSkuId());
+        orderItems.forEach(orderItem -> {
+            if (orderItem.getPromotionType() != null) {
+                // 如果此促销有库存概念，则计入
+                if (PromotionTypeEnum.haveStock(orderItem.getPromotionType())) {
+                    PromotionTypeEnum promotionTypeEnum = PromotionTypeEnum.valueOf(orderItem.getPromotionType());
+                    String cacheKey = PromotionGoodsService.getPromotionGoodsStockCacheKey(
+                            promotionTypeEnum, orderItem.getPromotionId(), orderItem.getSkuId());
 
-                            switch (promotionTypeEnum) {
-                                case KANJIA -> {
-                                    redisRepository.set(
-                                            cacheKey,
-                                            kanjiaActivityGoodsApi
-                                                    .getKanjiaGoodsBySkuId(orderItem.getSkuId())
-                                                    .getStock());
-                                }
-                                case POINTS_GOODS -> {
-                                    redisRepository.set(
-                                            cacheKey,
-                                            pointsGoodsApi
-                                                    .getPointsGoodsDetailBySkuId(
-                                                            orderItem.getSkuId())
-                                                    .getActiveStock());
-                                }
-                                case SECKILL, PINTUAN -> {
-                                    redisRepository.set(
-                                            cacheKey,
-                                            promotionGoodsApi.getPromotionGoodsStock(
-                                                    promotionTypeEnum,
-                                                    orderItem.getPromotionId(),
-                                                    orderItem.getSkuId()));
-                                }
-                                default -> {}
-                            }
+                    switch (promotionTypeEnum) {
+                        case KANJIA -> {
+                            redisRepository.set(
+                                    cacheKey,
+                                    kanjiaActivityGoodsApi
+                                            .getKanjiaGoodsBySkuId(orderItem.getSkuId())
+                                            .getStock());
                         }
+                        case POINTS_GOODS -> {
+                            redisRepository.set(
+                                    cacheKey,
+                                    pointsGoodsApi
+                                            .getPointsGoodsDetailBySkuId(orderItem.getSkuId())
+                                            .getActiveStock());
+                        }
+                        case SECKILL, PINTUAN -> {
+                            redisRepository.set(
+                                    cacheKey,
+                                    promotionGoodsApi.getPromotionGoodsStock(
+                                            promotionTypeEnum, orderItem.getPromotionId(), orderItem.getSkuId()));
+                        }
+                        default -> {}
                     }
-                });
+                }
+            }
+        });
     }
 
     /**
@@ -246,9 +245,8 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
                 return;
             }
             PromotionTypeEnum promotionTypeEnum = PromotionTypeEnum.valueOf(sku.getPromotionType());
-            keys.add(
-                    PromotionGoodsService.getPromotionGoodsStockCacheKey(
-                            promotionTypeEnum, sku.getPromotionId(), sku.getSkuId()));
+            keys.add(PromotionGoodsService.getPromotionGoodsStockCacheKey(
+                    promotionTypeEnum, sku.getPromotionId(), sku.getSkuId()));
             int i = -sku.getNum();
             values.add(Integer.toString(i));
         }
@@ -284,44 +282,28 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
                     && null != orderItem.getPromotionId()
                     && PromotionTypeEnum.haveStock(orderItem.getPromotionType())) {
                 // 如果促销有库存信息
-                PromotionTypeEnum promotionTypeEnum =
-                        PromotionTypeEnum.valueOf(orderItem.getPromotionType());
+                PromotionTypeEnum promotionTypeEnum = PromotionTypeEnum.valueOf(orderItem.getPromotionType());
 
                 // 修改砍价商品库存
                 if (promotionTypeEnum.equals(PromotionTypeEnum.KANJIA)) {
-                    KanjiaActivityVO kanjiaActivity =
-                            kanjiaActivityApi.getById(orderItem.getPromotionId());
+                    KanjiaActivityVO kanjiaActivity = kanjiaActivityApi.getById(orderItem.getPromotionId());
                     KanjiaActivityGoodsDTO kanjiaActivityGoodsDTO =
-                            kanjiaActivityGoodsApi.getKanjiaGoodsDetail(
-                                    kanjiaActivity.getKanjiaActivityGoodsId());
+                            kanjiaActivityGoodsApi.getKanjiaGoodsDetail(kanjiaActivity.getKanjiaActivityGoodsId());
 
-                    Integer stock =
-                            Integer.parseInt(
-                                    redisRepository
-                                            .get(
-                                                    PromotionGoodsService
-                                                            .getPromotionGoodsStockCacheKey(
-                                                                    promotionTypeEnum,
-                                                                    orderItem.getPromotionId(),
-                                                                    orderItem.getSkuId()))
-                                            .toString());
+                    Integer stock = Integer.parseInt(redisRepository
+                            .get(PromotionGoodsService.getPromotionGoodsStockCacheKey(
+                                    promotionTypeEnum, orderItem.getPromotionId(), orderItem.getSkuId()))
+                            .toString());
                     kanjiaActivityGoodsDTO.setStock(stock);
 
                     kanjiaActivityGoodsApi.updateById(kanjiaActivityGoodsDTO);
                     // 修改积分商品库存
                 } else if (promotionTypeEnum.equals(PromotionTypeEnum.POINTS_GOODS)) {
-                    PointsGoodsVO pointsGoodsVO =
-                            pointsGoodsApi.getPointsGoodsDetail(orderItem.getPromotionId());
-                    Integer stock =
-                            Integer.parseInt(
-                                    redisRepository
-                                            .get(
-                                                    PromotionGoodsService
-                                                            .getPromotionGoodsStockCacheKey(
-                                                                    promotionTypeEnum,
-                                                                    orderItem.getPromotionId(),
-                                                                    orderItem.getSkuId()))
-                                            .toString());
+                    PointsGoodsVO pointsGoodsVO = pointsGoodsApi.getPointsGoodsDetail(orderItem.getPromotionId());
+                    Integer stock = Integer.parseInt(redisRepository
+                            .get(PromotionGoodsService.getPromotionGoodsStockCacheKey(
+                                    promotionTypeEnum, orderItem.getPromotionId(), orderItem.getSkuId()))
+                            .toString());
                     pointsGoodsVO.setActiveStock(stock);
                     pointsGoodsApi.updateById(pointsGoodsVO);
                 } else {
@@ -331,11 +313,8 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
                     searchParams.setSkuId(orderItem.getSkuId());
                     PromotionGoodsVO pGoods = promotionGoodsApi.getPromotionsGoods(searchParams);
                     // 记录需要更新的促销库存信息
-                    promotionKey.add(
-                            PromotionGoodsService.getPromotionGoodsStockCacheKey(
-                                    promotionTypeEnum,
-                                    orderItem.getPromotionId(),
-                                    orderItem.getSkuId()));
+                    promotionKey.add(PromotionGoodsService.getPromotionGoodsStockCacheKey(
+                            promotionTypeEnum, orderItem.getPromotionId(), orderItem.getSkuId()));
                     if (pGoods != null) {
                         promotionGoods.add(pGoods);
                     }
@@ -357,7 +336,9 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
         if (!promotionKey.isEmpty()) {
             List<PromotionGoodsVO> promotionStocks = redisRepository.mGet(promotionKey);
             for (int i = 0; i < promotionKey.size(); i++) {
-                promotionGoods.get(i).setQuantity(Convert.toInt(promotionStocks.get(i).toString()));
+                promotionGoods
+                        .get(i)
+                        .setQuantity(Convert.toInt(promotionStocks.get(i).toString()));
                 Integer num = promotionGoods.get(i).getNum();
                 promotionGoods
                         .get(i)

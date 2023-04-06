@@ -31,7 +31,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class BpmOALeaveResultListener extends BpmProcessInstanceResultEventListener {
 
-    @Resource private BpmOALeaveService leaveService;
+    @Resource
+    private BpmOALeaveService leaveService;
 
     @Override
     protected String getProcessDefinitionKey() {

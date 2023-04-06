@@ -75,14 +75,10 @@ public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
     @Column(name = "company_address", columnDefinition = "varchar(64) not null comment '公司地址'")
     private String companyAddress;
 
-    @Column(
-            name = "company_address_id_path",
-            columnDefinition = "varchar(64) not null comment '公司地址地区Id'")
+    @Column(name = "company_address_id_path", columnDefinition = "varchar(64) not null comment '公司地址地区Id'")
     private String companyAddressIdPath;
 
-    @Column(
-            name = "company_address_path",
-            columnDefinition = "varchar(64) not null comment '公司地址地区'")
+    @Column(name = "company_address_path", columnDefinition = "varchar(64) not null comment '公司地址地区'")
     private String companyAddressPath;
 
     @Column(name = "company_phone", columnDefinition = "varchar(64) not null comment '公司电话'")
@@ -96,9 +92,7 @@ public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
     private Integer employeeNum;
 
     @Min(value = 1, message = "注册资金,至少一位")
-    @Column(
-            name = "registered_capital",
-            columnDefinition = "decimal(10,2) not null default 0 comment '注册资金'")
+    @Column(name = "registered_capital", columnDefinition = "decimal(10,2) not null default 0 comment '注册资金'")
     private BigDecimal registeredCapital;
 
     @Length(min = 2, max = 20, message = "联系人长度为：2-20位字符")
@@ -130,29 +124,19 @@ public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
     @Column(name = "legal_photo", columnDefinition = "varchar(64) not null comment '法人身份证照片'")
     private String legalPhoto;
 
-    @Column(
-            name = "settlement_bank_account_name",
-            columnDefinition = "varchar(64) not null comment '结算银行开户行名称'")
+    @Column(name = "settlement_bank_account_name", columnDefinition = "varchar(64) not null comment '结算银行开户行名称'")
     private String settlementBankAccountName;
 
-    @Column(
-            name = "settlement_bank_account_num",
-            columnDefinition = "varchar(64) not null comment '结算银行开户账号'")
+    @Column(name = "settlement_bank_account_num", columnDefinition = "varchar(64) not null comment '结算银行开户账号'")
     private String settlementBankAccountNum;
 
-    @Column(
-            name = "settlement_bank_branch_name",
-            columnDefinition = "varchar(64) not null comment '结算银行开户支行名称'")
+    @Column(name = "settlement_bank_branch_name", columnDefinition = "varchar(64) not null comment '结算银行开户支行名称'")
     private String settlementBankBranchName;
 
-    @Column(
-            name = "settlement_bank_joint_name",
-            columnDefinition = "varchar(64) not null comment '结算银行支行联行号'")
+    @Column(name = "settlement_bank_joint_name", columnDefinition = "varchar(64) not null comment '结算银行支行联行号'")
     private String settlementBankJointName;
 
-    @Column(
-            name = "goods_management_category",
-            columnDefinition = "varchar(64) not null comment '店铺经营类目'")
+    @Column(name = "goods_management_category", columnDefinition = "varchar(64) not null comment '店铺经营类目'")
     private String goodsManagementCategory;
 
     @Column(name = "settlement_cycle", columnDefinition = "varchar(64) not null comment '结算周期'")
@@ -168,29 +152,19 @@ public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
     private String ddCode;
 
     // 店铺退货收件地址
-    @Column(
-            name = "sales_consignee_name",
-            columnDefinition = "varchar(64) not null comment '收货人姓名'")
+    @Column(name = "sales_consignee_name", columnDefinition = "varchar(64) not null comment '收货人姓名'")
     private String salesConsigneeName;
 
-    @Column(
-            name = "sales_consignee_mobile",
-            columnDefinition = "varchar(64) not null comment '收件人手机'")
+    @Column(name = "sales_consignee_mobile", columnDefinition = "varchar(64) not null comment '收件人手机'")
     private String salesConsigneeMobile;
 
-    @Column(
-            name = "sales_consignee_address_id",
-            columnDefinition = "varchar(64) not null comment '地址Id 逗号分割'")
+    @Column(name = "sales_consignee_address_id", columnDefinition = "varchar(64) not null comment '地址Id 逗号分割'")
     private String salesConsigneeAddressId;
 
-    @Column(
-            name = "sales_consignee_address_path",
-            columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
+    @Column(name = "sales_consignee_address_path", columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
     private String salesConsigneeAddressPath;
 
-    @Column(
-            name = "sales_consignee_detail",
-            columnDefinition = "varchar(64) not null comment '详细地址'")
+    @Column(name = "sales_consignee_detail", columnDefinition = "varchar(64) not null comment '详细地址'")
     private String salesConsigneeDetail;
 
     public StoreDetail(Store store, AdminStoreApplyDTO adminStoreApplyDTO) {

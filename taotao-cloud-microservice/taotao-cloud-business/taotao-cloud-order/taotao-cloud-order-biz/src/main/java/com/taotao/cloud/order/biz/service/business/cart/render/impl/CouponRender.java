@@ -91,32 +91,19 @@ public class CouponRender implements ICartRenderStep {
      * @since 2022-04-28 08:52:40
      */
     private void checkMemberExistCoupon(TradeDTO tradeDTO, List<MemberCoupon> memberCouponList) {
-        if (tradeDTO.getPlatformCoupon() != null
-                && tradeDTO.getPlatformCoupon().getMemberCoupon() != null) {
-            boolean b =
-                    memberCouponList.parallelStream()
-                            .anyMatch(
-                                    i ->
-                                            i.getId()
-                                                    .equals(
-                                                            tradeDTO.getPlatformCoupon()
-                                                                    .getMemberCoupon()
-                                                                    .getId()));
+        if (tradeDTO.getPlatformCoupon() != null && tradeDTO.getPlatformCoupon().getMemberCoupon() != null) {
+            boolean b = memberCouponList.parallelStream().anyMatch(i -> i.getId()
+                    .equals(tradeDTO.getPlatformCoupon().getMemberCoupon().getId()));
             if (!b) {
                 tradeDTO.setPlatformCoupon(null);
             }
         }
         if (!tradeDTO.getStoreCoupons().isEmpty()) {
-            for (Map.Entry<String, MemberCouponDTO> entry : tradeDTO.getStoreCoupons().entrySet()) {
+            for (Map.Entry<String, MemberCouponDTO> entry :
+                    tradeDTO.getStoreCoupons().entrySet()) {
                 if (entry.getValue().getMemberCoupon() != null
-                        && memberCouponList.parallelStream()
-                                .noneMatch(
-                                        i ->
-                                                i.getId()
-                                                        .equals(
-                                                                entry.getValue()
-                                                                        .getMemberCoupon()
-                                                                        .getId()))) {
+                        && memberCouponList.parallelStream().noneMatch(i -> i.getId()
+                                .equals(entry.getValue().getMemberCoupon().getId()))) {
                     tradeDTO.getStoreCoupons().remove(entry.getKey());
                 }
             }
@@ -136,8 +123,7 @@ public class CouponRender implements ICartRenderStep {
         }
         List<CartSkuVO> filterSku = filterSkuVo(tradeDTO.getCheckedSkuList(), memberCoupon);
         if (filterSku == null || filterSku.isEmpty()) {
-            tradeDTO.getCantUseCoupons()
-                    .add(new MemberCouponVO(memberCoupon, "购物车中没有满足优惠券使用范围的优惠券"));
+            tradeDTO.getCantUseCoupons().add(new MemberCouponVO(memberCoupon, "购物车中没有满足优惠券使用范围的优惠券"));
             return;
         }
         List<PriceDetailDTO> priceDetailDTOS =
@@ -151,15 +137,12 @@ public class CouponRender implements ICartRenderStep {
             tradeDTO.getCanUseCoupons().add(memberCoupon);
         } else {
             tradeDTO.getCantUseCoupons()
-                    .add(
-                            new MemberCouponVO(
-                                    memberCoupon,
-                                    "优惠券使用门槛不足，还差"
-                                            + StringUtils.toFen(
-                                                    CurrencyUtils.sub(
-                                                            memberCoupon.getConsumeThreshold(),
-                                                            totalPrice.getGoodsPrice()))
-                                            + "元"));
+                    .add(new MemberCouponVO(
+                            memberCoupon,
+                            "优惠券使用门槛不足，还差"
+                                    + StringUtils.toFen(CurrencyUtils.sub(
+                                            memberCoupon.getConsumeThreshold(), totalPrice.getGoodsPrice()))
+                                    + "元"));
         }
     }
 
@@ -177,14 +160,9 @@ public class CouponRender implements ICartRenderStep {
         if (Boolean.TRUE.equals(memberCoupon.getIsPlatform())) {
             filterSku = cartSkuVOS;
         } else {
-            filterSku =
-                    cartSkuVOS.stream()
-                            .filter(
-                                    cartSkuVO ->
-                                            cartSkuVO
-                                                    .getStoreId()
-                                                    .equals(memberCoupon.getStoreId()))
-                            .collect(Collectors.toList());
+            filterSku = cartSkuVOS.stream()
+                    .filter(cartSkuVO -> cartSkuVO.getStoreId().equals(memberCoupon.getStoreId()))
+                    .collect(Collectors.toList());
         }
         if (filterSku == null || filterSku.isEmpty()) {
             return Collections.emptyList();
@@ -195,14 +173,11 @@ public class CouponRender implements ICartRenderStep {
                 return filterSku;
             case PORTION_GOODS:
                 // 按照商品过滤
-                filterSku =
-                        filterSku.stream()
-                                .filter(
-                                        cartSkuVO ->
-                                                memberCoupon
-                                                        .getScopeId()
-                                                        .contains(cartSkuVO.getGoodsSku().getId()))
-                                .collect(Collectors.toList());
+                filterSku = filterSku.stream()
+                        .filter(cartSkuVO -> memberCoupon
+                                .getScopeId()
+                                .contains(cartSkuVO.getGoodsSku().getId()))
+                        .collect(Collectors.toList());
                 break;
 
             case PORTION_SHOP_CATEGORY:
@@ -213,22 +188,16 @@ public class CouponRender implements ICartRenderStep {
             case PORTION_GOODS_CATEGORY:
 
                 // 按照店铺分类过滤
-                filterSku =
-                        filterSku.stream()
-                                .filter(
-                                        cartSkuVO -> {
-                                            // 平台分类获取
-                                            String[] categoryPath =
-                                                    cartSkuVO
-                                                            .getGoodsSku()
-                                                            .getCategoryPath()
-                                                            .split(",");
-                                            // 平台三级分类
-                                            String categoryId =
-                                                    categoryPath[categoryPath.length - 1];
-                                            return memberCoupon.getScopeId().contains(categoryId);
-                                        })
-                                .collect(Collectors.toList());
+                filterSku = filterSku.stream()
+                        .filter(cartSkuVO -> {
+                            // 平台分类获取
+                            String[] categoryPath =
+                                    cartSkuVO.getGoodsSku().getCategoryPath().split(",");
+                            // 平台三级分类
+                            String categoryId = categoryPath[categoryPath.length - 1];
+                            return memberCoupon.getScopeId().contains(categoryId);
+                        })
+                        .collect(Collectors.toList());
                 break;
             default:
                 return Collections.emptyList();
@@ -243,25 +212,22 @@ public class CouponRender implements ICartRenderStep {
      * @param memberCoupon 会员优惠
      * @return 优惠券按照店铺分类过滤的购物车商品信息
      */
-    private List<CartSkuVO> filterPromotionShopCategory(
-            List<CartSkuVO> filterSku, MemberCoupon memberCoupon) {
+    private List<CartSkuVO> filterPromotionShopCategory(List<CartSkuVO> filterSku, MemberCoupon memberCoupon) {
         return filterSku.stream()
-                .filter(
-                        cartSkuVO -> {
-                            if (CharSequenceUtil.isNotEmpty(
-                                    cartSkuVO.getGoodsSku().getStoreCategoryPath())) {
-                                // 获取店铺分类
-                                String[] storeCategoryPath =
-                                        cartSkuVO.getGoodsSku().getStoreCategoryPath().split(",");
-                                for (String category : storeCategoryPath) {
-                                    // 店铺分类只要有一项吻合，即可返回true
-                                    if (memberCoupon.getScopeId().contains(category)) {
-                                        return true;
-                                    }
-                                }
+                .filter(cartSkuVO -> {
+                    if (CharSequenceUtil.isNotEmpty(cartSkuVO.getGoodsSku().getStoreCategoryPath())) {
+                        // 获取店铺分类
+                        String[] storeCategoryPath =
+                                cartSkuVO.getGoodsSku().getStoreCategoryPath().split(",");
+                        for (String category : storeCategoryPath) {
+                            // 店铺分类只要有一项吻合，即可返回true
+                            if (memberCoupon.getScopeId().contains(category)) {
+                                return true;
                             }
-                            return false;
-                        })
+                        }
+                    }
+                    return false;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -303,8 +269,7 @@ public class CouponRender implements ICartRenderStep {
         // 接收具体优惠券信息
         MemberCoupon coupon = memberCouponDTO.getMemberCoupon();
         // 处理一个极端情况，如果优惠券满减金额大于订单金额
-        if (coupon.getCouponType().equals(CouponTypeEnum.PRICE.name())
-                && coupon.getPrice() > countPrice) {
+        if (coupon.getCouponType().equals(CouponTypeEnum.PRICE.name()) && coupon.getPrice() > countPrice) {
             // 将符合优惠券的金额写入，即最大扣减金额
             coupon.setPrice(countPrice);
         }
@@ -349,9 +314,7 @@ public class CouponRender implements ICartRenderStep {
                     // 写入平台优惠券承担比例
                     if (cartSkuVO.getGoodsSku().getId().equals(skuId)) {
                         // 写入店铺承担比例
-                        cartSkuVO
-                                .getPriceDetailDTO()
-                                .setSiteCouponPoint(coupon.getStoreCommission());
+                        cartSkuVO.getPriceDetailDTO().setSiteCouponPoint(coupon.getStoreCommission());
                     }
                 }
             }
@@ -365,8 +328,7 @@ public class CouponRender implements ICartRenderStep {
      * @param tradeDTO 交易dto
      * @param coupon 优惠券信息
      */
-    private void renderCouponDiscount(
-            Map<String, BigDecimal> couponMap, TradeDTO tradeDTO, MemberCoupon coupon) {
+    private void renderCouponDiscount(Map<String, BigDecimal> couponMap, TradeDTO tradeDTO, MemberCoupon coupon) {
         // 循环所有优惠券
         for (String skuId : couponMap.keySet()) {
 
@@ -378,11 +340,9 @@ public class CouponRender implements ICartRenderStep {
                     PriceDetailDTO priceDetailDTO = item.getPriceDetailDTO();
 
                     // 打折金额=商品金额*折扣/10
-                    BigDecimal discountCouponPrice =
-                            CurrencyUtils.mul(
-                                    priceDetailDTO.getGoodsPrice(),
-                                    CurrencyUtils.sub(
-                                            1, CurrencyUtils.div(coupon.getDiscount(), 10, 3)));
+                    BigDecimal discountCouponPrice = CurrencyUtils.mul(
+                            priceDetailDTO.getGoodsPrice(),
+                            CurrencyUtils.sub(1, CurrencyUtils.div(coupon.getDiscount(), 10, 3)));
 
                     // 平台券则写入店铺承担优惠券比例
                     if (Boolean.TRUE.equals(coupon.getIsPlatform())) {
@@ -390,8 +350,7 @@ public class CouponRender implements ICartRenderStep {
                         priceDetailDTO.setSiteCouponPoint(coupon.getStoreCommission());
                     }
                     priceDetailDTO.setCouponPrice(
-                            CurrencyUtils.add(
-                                    priceDetailDTO.getCouponPrice(), discountCouponPrice));
+                            CurrencyUtils.add(priceDetailDTO.getCouponPrice(), discountCouponPrice));
                 }
             }
         }

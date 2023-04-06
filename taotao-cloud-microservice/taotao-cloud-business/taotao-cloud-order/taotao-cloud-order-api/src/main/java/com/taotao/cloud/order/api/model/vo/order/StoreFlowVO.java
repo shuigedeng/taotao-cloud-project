@@ -42,7 +42,8 @@ import lombok.ToString;
 @NoArgsConstructor
 public class StoreFlowVO {
 
-    @Serial private static final long serialVersionUID = -5998757398902747939L;
+    @Serial
+    private static final long serialVersionUID = -5998757398902747939L;
     /** 流水编号 */
     private String sn;
     /** 订单sn */

@@ -37,7 +37,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CouponPageQuery extends BasePromotionsSearchQuery implements Serializable {
 
-    @Serial private static final long serialVersionUID = 4566880169478260409L;
+    @Serial
+    private static final long serialVersionUID = 4566880169478260409L;
 
     private static final String PRICE_COLUMN = "price";
     private static final String RANGE_DAY_TYPE_COLUMN = "range_day_type";

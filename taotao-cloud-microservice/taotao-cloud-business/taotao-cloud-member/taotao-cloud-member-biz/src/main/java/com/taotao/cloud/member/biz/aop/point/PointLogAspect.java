@@ -39,9 +39,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class PointLogAspect {
 
-    @Autowired private IMemberPointsHistoryService memberPointsHistoryService;
+    @Autowired
+    private IMemberPointsHistoryService memberPointsHistoryService;
 
-    @Autowired private IMemberService memberService;
+    @Autowired
+    private IMemberService memberService;
 
     @After("@annotation(com.taotao.cloud.member.biz.aop.point.PointLogPoint)")
     public void doAfter(JoinPoint pjp) {

@@ -44,9 +44,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionBuyerController {
 
     /** 分销员 */
-    @Autowired private IDistributionService distributionService;
+    @Autowired
+    private IDistributionService distributionService;
     /** 分销员订单 */
-    @Autowired private IDistributionOrderService distributionOrderService;
+    @Autowired
+    private IDistributionOrderService distributionOrderService;
 
     @Operation(summary = "申请分销员", description = "申请分销员")
     @RequestLogger
@@ -62,14 +64,12 @@ public class DistributionBuyerController {
     @GetMapping("/distributionOrder")
     public Result<IPage<DistributionOrder>> distributionOrderPage(
             DistributionOrderPageQuery distributionOrderPageQuery) {
-        distributionOrderPageQuery.setDistributionId(distributionService.getDistribution().getId());
-        return Result.success(
-                distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
+        distributionOrderPageQuery.setDistributionId(
+                distributionService.getDistribution().getId());
+        return Result.success(distributionOrderService.getDistributionOrderPage(distributionOrderPageQuery));
     }
 
-    @Operation(
-            summary = "获取当前会员的分销员信息,可根据分销员信息查询待提现金额以及冻结金额等信息",
-            description = "获取当前会员的分销员信息,可根据分销员信息查询待提现金额以及冻结金额等信息")
+    @Operation(summary = "获取当前会员的分销员信息,可根据分销员信息查询待提现金额以及冻结金额等信息", description = "获取当前会员的分销员信息,可根据分销员信息查询待提现金额以及冻结金额等信息")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.monitor.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,15 +30,15 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = PrometheusProperties.PREFIX)
 public class PrometheusProperties {
 
-	public static final String PREFIX = "taotao.cloud.prometheus";
+    public static final String PREFIX = "taotao.cloud.prometheus";
 
-	private boolean enabled = false;
+    private boolean enabled = false;
 
-	public boolean getEnabled() {
-		return enabled;
-	}
+    public boolean getEnabled() {
+        return enabled;
+    }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }

@@ -49,17 +49,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 /** 分销佣金业务层实现 */
 @Service
-public class DistributionCashServiceImpl
-        extends ServiceImpl<DistributionCashMapper, DistributionCash>
+public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMapper, DistributionCash>
         implements IDistributionCashService {
 
     /** 分销员 */
-    @Autowired private IDistributionService distributionService;
+    @Autowired
+    private IDistributionService distributionService;
     /** 会员余额 */
-    @Autowired private IFeignMemberWalletApi memberWalletApi;
+    @Autowired
+    private IFeignMemberWalletApi memberWalletApi;
 
-    @Autowired private RocketMQTemplate rocketMQTemplate;
-    @Autowired private RocketmqCustomProperties rocketmqCustomProperties;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
+
+    @Autowired
+    private RocketmqCustomProperties rocketmqCustomProperties;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -71,10 +75,7 @@ public class DistributionCashServiceImpl
         // 获取分销员
         Distribution distribution = distributionService.getDistribution();
         // 如果未找到分销员或者分销员状态不是已通过则无法申请提现
-        if (distribution != null
-                && distribution
-                        .getDistributionStatus()
-                        .equals(DistributionStatusEnum.PASS.name())) {
+        if (distribution != null && distribution.getDistributionStatus().equals(DistributionStatusEnum.PASS.name())) {
             // 校验分销佣金是否大于提现金额
             if (distribution.getCanRebate().compareTo(applyMoney) < 0) {
                 throw new BusinessException(ResultEnum.WALLET_WITHDRAWAL_INSUFFICIENT);
@@ -83,29 +84,20 @@ public class DistributionCashServiceImpl
             distribution.setCanRebate(CurrencyUtils.sub(distribution.getCanRebate(), applyMoney));
             distributionService.updateById(distribution);
             // 提现申请记录
-            DistributionCash distributionCash =
-                    new DistributionCash(
-                            "D" + IdGeneratorUtils.getId(),
-                            distribution.getId(),
-                            applyMoney,
-                            distribution.getMemberName());
+            DistributionCash distributionCash = new DistributionCash(
+                    "D" + IdGeneratorUtils.getId(), distribution.getId(), applyMoney, distribution.getMemberName());
             boolean result = this.save(distributionCash);
             if (result) {
                 // 发送提现消息
                 MemberWithdrawalMessage memberWithdrawalMessage = new MemberWithdrawalMessage();
                 memberWithdrawalMessage.setMemberId(distribution.getMemberId());
                 memberWithdrawalMessage.setPrice(applyMoney);
-                memberWithdrawalMessage.setDestination(
-                        MemberWithdrawalDestinationEnum.WALLET.name());
+                memberWithdrawalMessage.setDestination(MemberWithdrawalDestinationEnum.WALLET.name());
                 memberWithdrawalMessage.setStatus(WithdrawStatusEnum.APPLY.name());
                 String destination =
-                        rocketmqCustomProperties.getMemberTopic()
-                                + ":"
-                                + MemberTagsEnum.MEMBER_WITHDRAWAL.name();
+                        rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_WITHDRAWAL.name();
                 rocketMQTemplate.asyncSend(
-                        destination,
-                        memberWithdrawalMessage,
-                        RocketmqSendCallbackBuilder.commonCallback());
+                        destination, memberWithdrawalMessage, RocketmqSendCallbackBuilder.commonCallback());
                 return true;
             }
             return false;
@@ -122,12 +114,9 @@ public class DistributionCashServiceImpl
     }
 
     @Override
-    public IPage<DistributionCash> getDistributionCash(
-            DistributionCashSearchVO distributionCashSearchVO) {
+    public IPage<DistributionCash> getDistributionCash(DistributionCashSearchVO distributionCashSearchVO) {
 
-        return this.page(
-                PageUtil.initPage(distributionCashSearchVO),
-                distributionCashSearchVO.queryWrapper());
+        return this.page(PageUtil.initPage(distributionCashSearchVO), distributionCashSearchVO.queryWrapper());
     }
 
     @Override
@@ -142,39 +131,28 @@ public class DistributionCashServiceImpl
         // 只有分销员和分销佣金记录存在的情况才可以审核
         if (distributorCash != null) {
             // 获取分销员
-            Distribution distribution =
-                    distributionService.getById(distributorCash.getDistributionId());
+            Distribution distribution = distributionService.getById(distributorCash.getDistributionId());
             if (distribution != null
-                    && distribution
-                            .getDistributionStatus()
-                            .equals(DistributionStatusEnum.PASS.name())) {
+                    && distribution.getDistributionStatus().equals(DistributionStatusEnum.PASS.name())) {
                 MemberWithdrawalMessage memberWithdrawalMessage = new MemberWithdrawalMessage();
                 // 审核通过
                 if (result.equals(WithdrawStatusEnum.VIA_AUDITING.name())) {
                     memberWithdrawalMessage.setStatus(WithdrawStatusEnum.VIA_AUDITING.name());
                     // 分销记录操作
-                    distributorCash.setDistributionCashStatus(
-                            WithdrawStatusEnum.VIA_AUDITING.name());
+                    distributorCash.setDistributionCashStatus(WithdrawStatusEnum.VIA_AUDITING.name());
                     distributorCash.setPayTime(new Date());
                     // 提现到余额
-                    memberWalletApi.increase(
-                            new MemberWalletUpdateDTO(
-                                    distributorCash.getPrice(),
-                                    distribution.getMemberId(),
-                                    "分销["
-                                            + distributorCash.getSn()
-                                            + "]佣金提现到余额["
-                                            + distributorCash.getPrice()
-                                            + "]",
-                                    DepositServiceTypeEnum.WALLET_COMMISSION.name()));
+                    memberWalletApi.increase(new MemberWalletUpdateDTO(
+                            distributorCash.getPrice(),
+                            distribution.getMemberId(),
+                            "分销[" + distributorCash.getSn() + "]佣金提现到余额[" + distributorCash.getPrice() + "]",
+                            DepositServiceTypeEnum.WALLET_COMMISSION.name()));
                 } else {
                     memberWithdrawalMessage.setStatus(WithdrawStatusEnum.FAIL_AUDITING.name());
                     // 分销员可提现金额退回
                     distribution.setCanRebate(
-                            CurrencyUtils.add(
-                                    distribution.getCanRebate(), distributorCash.getPrice()));
-                    distributorCash.setDistributionCashStatus(
-                            WithdrawStatusEnum.FAIL_AUDITING.name());
+                            CurrencyUtils.add(distribution.getCanRebate(), distributorCash.getPrice()));
+                    distributorCash.setDistributionCashStatus(WithdrawStatusEnum.FAIL_AUDITING.name());
                 }
                 // 分销员金额相关处理
                 distributionService.updateById(distribution);
@@ -184,16 +162,11 @@ public class DistributionCashServiceImpl
                     // 组织会员提现审核消息
                     memberWithdrawalMessage.setMemberId(distribution.getMemberId());
                     memberWithdrawalMessage.setPrice(distributorCash.getPrice());
-                    memberWithdrawalMessage.setDestination(
-                            MemberWithdrawalDestinationEnum.WALLET.name());
+                    memberWithdrawalMessage.setDestination(MemberWithdrawalDestinationEnum.WALLET.name());
                     String destination =
-                            rocketmqCustomProperties.getMemberTopic()
-                                    + ":"
-                                    + MemberTagsEnum.MEMBER_WITHDRAWAL.name();
+                            rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_WITHDRAWAL.name();
                     rocketMQTemplate.asyncSend(
-                            destination,
-                            memberWithdrawalMessage,
-                            RocketmqSendCallbackBuilder.commonCallback());
+                            destination, memberWithdrawalMessage, RocketmqSendCallbackBuilder.commonCallback());
                 }
                 return distributorCash;
             }

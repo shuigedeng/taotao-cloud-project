@@ -46,9 +46,11 @@ public class ChatWeatherServiceImpl implements ChatWeatherService {
     private static final String EXT_BASE = "base";
     private static final String EXT_ALL = "all";
 
-    @Autowired private AmapConfig amapConfig;
+    @Autowired
+    private AmapConfig amapConfig;
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     public Dict queryBase(String cityCode) {
@@ -68,21 +70,14 @@ public class ChatWeatherServiceImpl implements ChatWeatherService {
             return JSONUtil.parseArray(redisUtils.get(key));
         }
         String url =
-                URL.replace("CITY", city)
-                        .replace("KEY", amapConfig.getKey())
-                        .replace("EXT", extensions);
+                URL.replace("CITY", city).replace("KEY", amapConfig.getKey()).replace("EXT", extensions);
         String result = HttpUtil.get(url);
         JSONObject jsonObject = JSONUtil.parseObj(result);
         if (1 != jsonObject.getInt("status")) {
             throw new BaseException("天气接口异常，请稍后再试");
         }
-        JSONArray jsonArray =
-                jsonObject.getJSONArray(EXT_BASE.equals(extensions) ? "lives" : "forecasts");
-        redisUtils.set(
-                key,
-                JSONUtil.toJsonStr(jsonArray),
-                ApiConstant.REDIS_MP_WEATHER_TIME,
-                TimeUnit.MINUTES);
+        JSONArray jsonArray = jsonObject.getJSONArray(EXT_BASE.equals(extensions) ? "lives" : "forecasts");
+        redisUtils.set(key, JSONUtil.toJsonStr(jsonArray), ApiConstant.REDIS_MP_WEATHER_TIME, TimeUnit.MINUTES);
         return jsonArray;
     }
 

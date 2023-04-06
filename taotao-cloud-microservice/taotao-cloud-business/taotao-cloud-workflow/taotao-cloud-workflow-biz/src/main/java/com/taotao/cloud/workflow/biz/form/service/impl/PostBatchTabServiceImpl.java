@@ -36,9 +36,14 @@ import org.springframework.stereotype.Service;
 public class PostBatchTabServiceImpl extends ServiceImpl<PostBatchTabMapper, PostBatchTabEntity>
         implements PostBatchTabService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public PostBatchTabEntity getInfo(String id) {
@@ -78,8 +83,7 @@ public class PostBatchTabServiceImpl extends ServiceImpl<PostBatchTabMapper, Pos
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, PostBatchTabEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, PostBatchTabEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -112,8 +116,7 @@ public class PostBatchTabServiceImpl extends ServiceImpl<PostBatchTabMapper, Pos
     @Override
     public void data(String id, String data) {
         PostBatchTabForm postBatchTabForm = JsonUtils.getJsonToBean(data, PostBatchTabForm.class);
-        PostBatchTabEntity entity =
-                JsonUtils.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);
+        PostBatchTabEntity entity = JsonUtils.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

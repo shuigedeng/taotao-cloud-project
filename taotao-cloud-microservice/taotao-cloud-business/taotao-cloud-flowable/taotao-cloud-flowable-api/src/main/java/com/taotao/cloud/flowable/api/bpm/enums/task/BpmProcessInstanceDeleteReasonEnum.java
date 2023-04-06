@@ -32,8 +32,7 @@ public enum BpmProcessInstanceDeleteReasonEnum {
     CANCEL_TASK("主动取消任务，原因：{}"),
 
     // ========== 流程任务的独有原因 ==========
-    MULTI_TASK_END(
-            "系统自动取消，原因：多任务审批已经满足条件，无需审批该任务"), // 多实例满足 condition 而结束时，其它任务实例任务会被取消，对应的删除原因是 MI_END
+    MULTI_TASK_END("系统自动取消，原因：多任务审批已经满足条件，无需审批该任务"), // 多实例满足 condition 而结束时，其它任务实例任务会被取消，对应的删除原因是 MI_END
     ;
 
     private final String reason;

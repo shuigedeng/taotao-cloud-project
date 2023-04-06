@@ -34,8 +34,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /** 用户+密码+认证码 登录 */
-public class QrcodeAuthenticationProvider
-        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+public class QrcodeAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private final QrcodeUserDetailsService qrcodeUserDetailsService;
@@ -49,18 +48,15 @@ public class QrcodeAuthenticationProvider
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
                 QrcodeAuthenticationToken.class,
                 authentication,
-                () ->
-                        messages.getMessage(
-                                "AccountVerificationAuthenticationProvider.onlySupports",
-                                "Only AccountVerificationAuthenticationProvider is supported"));
+                () -> messages.getMessage(
+                        "AccountVerificationAuthenticationProvider.onlySupports",
+                        "Only AccountVerificationAuthenticationProvider is supported"));
 
-        QrcodeAuthenticationToken unAuthenticationToken =
-                (QrcodeAuthenticationToken) authentication;
+        QrcodeAuthenticationToken unAuthenticationToken = (QrcodeAuthenticationToken) authentication;
 
         String username = unAuthenticationToken.getName();
         String passowrd = (String) unAuthenticationToken.getCredentials();
@@ -97,13 +93,10 @@ public class QrcodeAuthenticationProvider
      * @param user the user
      * @return the authentication
      */
-    protected Authentication createSuccessAuthentication(
-            Authentication authentication, UserDetails user) {
+    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
 
-        Collection<? extends GrantedAuthority> authorities =
-                authoritiesMapper.mapAuthorities(user.getAuthorities());
-        QrcodeAuthenticationToken authenticationToken =
-                new QrcodeAuthenticationToken(user, null, authorities);
+        Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
+        QrcodeAuthenticationToken authenticationToken = new QrcodeAuthenticationToken(user, null, authorities);
         authenticationToken.setDetails(authentication.getDetails());
 
         return authenticationToken;

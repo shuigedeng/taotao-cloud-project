@@ -96,9 +96,7 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
     /** 好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评 */
     @Column(
             name = "grade",
-            columnDefinition =
-                    "varchar(32) not null default 'GOOD' comment '好中差评 ,"
-                            + " GOOD：好评，MODERATE：中评，WORSE：差评'")
+            columnDefinition = "varchar(32) not null default 'GOOD' comment '好中差评 ," + " GOOD：好评，MODERATE：中评，WORSE：差评'")
     private String grade;
 
     /** 评价内容 */
@@ -110,9 +108,7 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
     private String images;
 
     /** 状态 OPEN 正常 ,CLOSE 关闭 */
-    @Column(
-            name = "status",
-            columnDefinition = "varchar(32) default 'OPEN' comment '状态  OPEN 正常 ,CLOSE 关闭'")
+    @Column(name = "status", columnDefinition = "varchar(32) default 'OPEN' comment '状态  OPEN 正常 ,CLOSE 关闭'")
     private String status;
 
     /** 评价回复 */
@@ -124,15 +120,11 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
     private String replyImage;
 
     /** 评论是否有图片 true 有 ,false 没有 */
-    @Column(
-            name = "have_image",
-            columnDefinition = "boolean default false comment '评论是否有图片 true 有 ,false 没有'")
+    @Column(name = "have_image", columnDefinition = "boolean default false comment '评论是否有图片 true 有 ,false 没有'")
     private Boolean haveImage;
 
     /** 回复是否有图片 true 有 ,false 没有 */
-    @Column(
-            name = "have_reply_image",
-            columnDefinition = "boolean default false comment '回复是否有图片 true 有 ,false 没有'")
+    @Column(name = "have_reply_image", columnDefinition = "boolean default false comment '回复是否有图片 true 有 ,false 没有'")
     private Boolean haveReplyImage;
 
     /** 回复状态 */
@@ -152,10 +144,7 @@ public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
     private Integer descriptionScore;
 
     public MemberEvaluation(
-            MemberEvaluationDTO memberEvaluationDTO,
-            GoodsSkuSpecGalleryVO goodsSku,
-            Member member,
-            OrderVO order) {
+            MemberEvaluationDTO memberEvaluationDTO, GoodsSkuSpecGalleryVO goodsSku, Member member, OrderVO order) {
         // 复制评价信息
         BeanUtils.copyProperties(memberEvaluationDTO, this);
 

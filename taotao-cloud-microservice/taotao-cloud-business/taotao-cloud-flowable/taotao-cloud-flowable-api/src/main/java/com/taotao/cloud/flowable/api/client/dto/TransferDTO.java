@@ -26,7 +26,8 @@ import lombok.Data;
  */
 @Data
 public class TransferDTO extends ResolveDTO implements Serializable {
-    @Serial private static final long serialVersionUID = -9069535207783920486L;
+    @Serial
+    private static final long serialVersionUID = -9069535207783920486L;
 
     @NotNull(message = "用户编号不为空")
     private Long userId;

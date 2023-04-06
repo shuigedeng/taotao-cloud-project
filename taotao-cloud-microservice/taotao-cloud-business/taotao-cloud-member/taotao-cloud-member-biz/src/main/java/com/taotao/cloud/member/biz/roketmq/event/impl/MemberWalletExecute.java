@@ -26,7 +26,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberWalletExecute implements MemberRegisterEvent {
 
-    @Autowired private IFeignMemberWalletApi memberWalletApi;
+    @Autowired
+    private IFeignMemberWalletApi memberWalletApi;
 
     @Override
     public void memberRegister(Member member) {

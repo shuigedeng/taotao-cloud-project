@@ -61,9 +61,7 @@ public class ConnectWebBindController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping("/login/web/{type}")
     public Result<String> webAuthorize(
-            @Parameter(name = "type", description = "登录方式:QQ,微信,微信_PC QQ,WECHAT,WECHAT_PC")
-                    @PathVariable
-                    String type,
+            @Parameter(name = "type", description = "登录方式:QQ,微信,微信_PC QQ,WECHAT,WECHAT_PC") @PathVariable String type,
             HttpServletResponse response)
             throws IOException {
         AuthRequest authRequest = connectUtil.getAuthRequest(type);

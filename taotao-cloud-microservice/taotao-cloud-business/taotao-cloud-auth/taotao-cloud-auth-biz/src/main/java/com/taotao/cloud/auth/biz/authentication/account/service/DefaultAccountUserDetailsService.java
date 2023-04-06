@@ -30,8 +30,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultAccountUserDetailsService implements AccountUserDetailsService {
 
-    @Autowired private IFeignUserApi userApi;
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignUserApi userApi;
+
+    @Autowired
+    private IFeignMemberApi memberApi;
 
     @Override
     public UserDetails loadUserByUsername(String username, String password, String type)

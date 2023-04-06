@@ -31,8 +31,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-05-30 16:47:38
  */
 @Service
-public class RefundLogServiceImpl extends ServiceImpl<RefundLogMapper, RefundLog>
-        implements RefundLogService {
+public class RefundLogServiceImpl extends ServiceImpl<RefundLogMapper, RefundLog> implements RefundLogService {
 
     @Override
     public RefundLog queryByAfterSaleSn(String sn) {

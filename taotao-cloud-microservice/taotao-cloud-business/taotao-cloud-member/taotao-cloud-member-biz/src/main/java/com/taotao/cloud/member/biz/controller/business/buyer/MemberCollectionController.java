@@ -58,13 +58,10 @@ public class MemberCollectionController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping("/{type}")
     public Result<PageResult<StoreCollectionVO>> goodsListPage(
-            @Parameter(description = "类型", required = true) @PathVariable String type,
-            @Validated PageQuery page) {
+            @Parameter(description = "类型", required = true) @PathVariable String type, @Validated PageQuery page) {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
-            IPage<GoodsCollectionVO> goodsCollectionPage =
-                    memberGoodsCollectionService.goodsCollection(page);
-            return Result.success(
-                    PageResult.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
+            IPage<GoodsCollectionVO> goodsCollectionPage = memberGoodsCollectionService.goodsCollection(page);
+            return Result.success(PageResult.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
         }
 
         return Result.success(feignStoreCollectionApi.storeCollection(page));
@@ -75,13 +72,8 @@ public class MemberCollectionController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @PostMapping("/{type}/{id}")
     public Result<Boolean> addGoodsCollection(
-            @Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺")
-                    @PathVariable
-                    String type,
-            @Parameter(description = "id", required = true)
-                    @NotNull(message = "值不能为空")
-                    @PathVariable
-                    Long id) {
+            @Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+            @Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             return Result.success(memberGoodsCollectionService.addGoodsCollection(id));
         }
@@ -93,13 +85,8 @@ public class MemberCollectionController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @DeleteMapping(value = "/{type}/{id}")
     public Result<Object> deleteGoodsCollection(
-            @Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺")
-                    @PathVariable
-                    String type,
-            @Parameter(description = "id", required = true)
-                    @NotNull(message = "值不能为空")
-                    @PathVariable
-                    Long id) {
+            @Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+            @Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             return Result.success(memberGoodsCollectionService.deleteGoodsCollection(id));
         }
@@ -111,13 +98,8 @@ public class MemberCollectionController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping(value = "/{type}/{id}/collection")
     public Result<Boolean> isCollection(
-            @Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺")
-                    @PathVariable
-                    String type,
-            @Parameter(description = "id", required = true)
-                    @NotNull(message = "值不能为空")
-                    @PathVariable
-                    Long id) {
+            @Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+            @Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             return Result.success(memberGoodsCollectionService.isCollection(id));
         }

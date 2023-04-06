@@ -34,9 +34,7 @@ public interface StoreMapper extends BaseSuperMapper<Store> {
      * @param id 店铺ID
      * @return 店铺VO
      */
-    @Select(
-            "select s.*,d.* from tt_store s inner join tt_store_detail d on s.id=d.store_id where"
-                    + " s.id=#{id} ")
+    @Select("select s.*,d.* from tt_store s inner join tt_store_detail d on s.id=d.store_id where" + " s.id=#{id} ")
     StoreVO getStoreDetail(Long id);
 
     /**
@@ -47,8 +45,7 @@ public interface StoreMapper extends BaseSuperMapper<Store> {
      * @return 店铺VO分页列表
      */
     @Select("select s.* from tt_store as s ${ew.customSqlSegment}")
-    IPage<StoreVO> getStoreList(
-            IPage<StoreVO> page, @Param(Constants.WRAPPER) Wrapper<StoreVO> queryWrapper);
+    IPage<StoreVO> getStoreList(IPage<StoreVO> page, @Param(Constants.WRAPPER) Wrapper<StoreVO> queryWrapper);
 
     /**
      * 修改店铺收藏数据

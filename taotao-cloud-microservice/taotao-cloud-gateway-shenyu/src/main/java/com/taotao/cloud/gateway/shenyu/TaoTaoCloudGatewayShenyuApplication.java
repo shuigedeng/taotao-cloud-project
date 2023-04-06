@@ -1,12 +1,11 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,9 +16,7 @@
 
 package com.taotao.cloud.gateway.shenyu;
 
-import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
-import java.io.File;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -29,15 +26,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TaoTaoCloudGatewayShenyuApplication {
 
-	/**
-	 * Main Entrance.
-	 *
-	 * @param args startup arguments
-	 */
-	public static void main(final String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-gateway-shenyu");
+    /**
+     * Main Entrance.
+     *
+     * @param args startup arguments
+     */
+    public static void main(final String[] args) {
+        PropertyUtils.setDefaultProperty("taotao-cloud-gateway-shenyu");
 
-		SpringApplication.run(TaoTaoCloudGatewayShenyuApplication.class, args);
-	}
-
+        SpringApplication.run(TaoTaoCloudGatewayShenyuApplication.class, args);
+    }
 }

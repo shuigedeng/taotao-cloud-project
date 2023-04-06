@@ -39,11 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserRelationServiceImpl
         extends BaseSuperServiceImpl<
-                IUserRelationMapper,
-                UserRelation,
-                UserRelationRepository,
-                IUserRelationRepository,
-                Long>
+                IUserRelationMapper, UserRelation, UserRelationRepository, IUserRelationRepository, Long>
         implements IUserRelationService {
 
     private static final QUserRelation USER_RELATION = QUserRelation.userRelation;
@@ -58,15 +54,10 @@ public class UserRelationServiceImpl
         }
 
         // 批量添加数据
-        List<UserRelation> collect =
-                roleIds.stream()
-                        .map(
-                                roleId ->
-                                        UserRelation.builder()
-                                                .userId(userId)
-                                                .objectId(roleId)
-                                                .build())
-                        .collect(Collectors.toList());
+        List<UserRelation> collect = roleIds.stream()
+                .map(roleId ->
+                        UserRelation.builder().userId(userId).objectId(roleId).build())
+                .collect(Collectors.toList());
         cr().saveAll(collect);
         return true;
     }

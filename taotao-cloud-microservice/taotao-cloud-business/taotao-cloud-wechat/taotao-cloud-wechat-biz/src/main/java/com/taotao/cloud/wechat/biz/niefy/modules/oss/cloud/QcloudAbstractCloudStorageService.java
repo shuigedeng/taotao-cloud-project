@@ -48,8 +48,7 @@ public class QcloudAbstractCloudStorageService extends AbstractCloudStorageServi
     }
 
     private void init() {
-        COSCredentials credentials =
-                new BasicCOSCredentials(config.getQcloudSecretId(), config.getQcloudSecretKey());
+        COSCredentials credentials = new BasicCOSCredentials(config.getQcloudSecretId(), config.getQcloudSecretKey());
 
         // 设置bucket所在的区域，华南：gz 华北：tj 华东：sh
         Region region = new Region(config.getQcloudRegion());
@@ -69,12 +68,8 @@ public class QcloudAbstractCloudStorageService extends AbstractCloudStorageServi
         // 设置输入流长度为500
         objectMetadata.setContentLength(data.length);
         // 上传到腾讯云
-        PutObjectRequest request =
-                new PutObjectRequest(
-                        config.getQcloudBucketName(),
-                        path,
-                        new ByteArrayInputStream(data),
-                        objectMetadata);
+        PutObjectRequest request = new PutObjectRequest(
+                config.getQcloudBucketName(), path, new ByteArrayInputStream(data), objectMetadata);
         client.putObject(request);
 
         return config.getQcloudDomain() + path;

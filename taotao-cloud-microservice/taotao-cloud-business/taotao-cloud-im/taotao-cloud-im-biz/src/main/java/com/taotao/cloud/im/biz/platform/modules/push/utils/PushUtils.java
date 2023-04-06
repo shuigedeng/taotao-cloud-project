@@ -56,14 +56,8 @@ public class PushUtils {
     public static PushTokenDto createToken(PushConfig pushConfig) {
         String url = formatUrl(pushConfig.getAppId(), AUTH_URL);
         String timestamp = String.valueOf(DateUtil.current());
-        String sign =
-                SecureUtil.sha256(
-                        pushConfig.getAppKey() + timestamp + pushConfig.getMasterSecret());
-        Dict dict =
-                Dict.create()
-                        .set("sign", sign)
-                        .set("timestamp", timestamp)
-                        .set("appkey", pushConfig.getAppKey());
+        String sign = SecureUtil.sha256(pushConfig.getAppKey() + timestamp + pushConfig.getMasterSecret());
+        Dict dict = Dict.create().set("sign", sign).set("timestamp", timestamp).set("appkey", pushConfig.getAppKey());
         String jsonStr = HttpUtil.post(url, JSONUtil.toJsonStr(dict), TIMEOUT);
         log.info(jsonStr);
         JSONObject data = JSONUtil.parseObj(jsonStr).getJSONObject("data");
@@ -79,13 +73,12 @@ public class PushUtils {
     public static void setAlias(PushTokenDto tokenDto, List<PushAliasVo> list) {
         String url = formatUrl(tokenDto.getAppId(), USER_ALIAS);
         String body = JSONUtil.toJsonStr(Dict.create().set("data_list", list));
-        String jsonStr =
-                HttpUtil.createPost(url)
-                        .body(body)
-                        .setReadTimeout(TIMEOUT)
-                        .header("token", tokenDto.getToken())
-                        .execute()
-                        .body();
+        String jsonStr = HttpUtil.createPost(url)
+                .body(body)
+                .setReadTimeout(TIMEOUT)
+                .header("token", tokenDto.getToken())
+                .execute()
+                .body();
         log.info(jsonStr);
     }
 
@@ -98,13 +91,12 @@ public class PushUtils {
     public static void delAlias(PushTokenDto tokenDto, List<PushAliasVo> list) {
         String url = formatUrl(tokenDto.getAppId(), USER_ALIAS);
         String body = JSONUtil.toJsonStr(Dict.create().set("data_list", list));
-        String jsonStr =
-                HttpUtil.createRequest(Method.DELETE, url)
-                        .body(body)
-                        .setReadTimeout(TIMEOUT)
-                        .header("token", tokenDto.getToken())
-                        .execute()
-                        .body();
+        String jsonStr = HttpUtil.createRequest(Method.DELETE, url)
+                .body(body)
+                .setReadTimeout(TIMEOUT)
+                .header("token", tokenDto.getToken())
+                .execute()
+                .body();
         log.info(jsonStr);
     }
 
@@ -116,13 +108,12 @@ public class PushUtils {
     public static PushResultVo pushAlias(PushTokenDto tokenDto, PushMsgDto msgDto, Long userId) {
         String url = formatUrl(tokenDto.getAppId(), PUSH_ALIAS_URL);
         String body = JSONUtil.toJsonStr(initBody(msgDto, userId));
-        String jsonStr =
-                HttpUtil.createPost(url)
-                        .header("token", tokenDto.getToken())
-                        .body(body)
-                        .timeout(TIMEOUT)
-                        .execute()
-                        .body();
+        String jsonStr = HttpUtil.createPost(url)
+                .header("token", tokenDto.getToken())
+                .body(body)
+                .timeout(TIMEOUT)
+                .execute()
+                .body();
         log.info(jsonStr);
         boolean result = 0 == JSONUtil.parseObj(jsonStr).getInt("code");
         boolean online = jsonStr.contains("online");
@@ -134,18 +125,18 @@ public class PushUtils {
         Dict message = Dict.create();
         // 通知
         if (msgDto.getTransmission() == null) {
-            message.set("notification", msgDto.setClick_type(msgDto.getClickType().getCode()));
+            message.set(
+                    "notification", msgDto.setClick_type(msgDto.getClickType().getCode()));
         }
         // 透传
         else {
             message.set("transmission", JSONUtil.toJsonStr(msgDto.getTransmission()));
         }
-        Dict dict =
-                Dict.create()
-                        .set("request_id", IdUtil.objectId())
-                        .set("settings", Dict.create().set("ttl", TTL))
-                        .set("audience", Dict.create().set("alias", Arrays.asList(userId)))
-                        .set("push_message", message);
+        Dict dict = Dict.create()
+                .set("request_id", IdUtil.objectId())
+                .set("settings", Dict.create().set("ttl", TTL))
+                .set("audience", Dict.create().set("alias", Arrays.asList(userId)))
+                .set("push_message", message);
         return dict;
     }
 

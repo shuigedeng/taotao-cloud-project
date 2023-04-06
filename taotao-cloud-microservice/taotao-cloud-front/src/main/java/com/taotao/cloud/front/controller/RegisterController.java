@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.front.controller;
 
 import com.taotao.cloud.front.util.Constants;
 import com.taotao.cloud.front.util.ResponseBase;
 import com.taotao.cloud.front.util.User;
-import java.io.IOException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,33 +36,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RegisterController {
 
-	// @Autowired
-	// private UserServiceFegin userServiceFegin;
+    // @Autowired
+    // private UserServiceFegin userServiceFegin;
 
-	private static final String LOGIN = "login";
-	private static final String REGISTER = "register";
+    private static final String LOGIN = "login";
+    private static final String REGISTER = "register";
 
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register() {
-		return REGISTER;
-	}
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register() {
+        return REGISTER;
+    }
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(User user, HttpServletRequest reqest, HttpServletResponse response)
-			throws IOException {
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String register(User user, HttpServletRequest reqest, HttpServletResponse response) throws IOException {
 
-		// ResponseBase registerUser = userServiceFegin.registerUser(user);
-		ResponseBase responseBase = new ResponseBase();
-		responseBase.setCode(200);
+        // ResponseBase registerUser = userServiceFegin.registerUser(user);
+        ResponseBase responseBase = new ResponseBase();
+        responseBase.setCode(200);
 
-		if (!responseBase.getCode().equals(Constants.HTTP_RES_CODE_200)) {
-			reqest.setAttribute("error", responseBase.getMessage());
-			return REGISTER;
-		}
+        if (!responseBase.getCode().equals(Constants.HTTP_RES_CODE_200)) {
+            reqest.setAttribute("error", responseBase.getMessage());
+            return REGISTER;
+        }
 
-		// 2.注册成功，跳转到登录页面
-		response.sendRedirect(LOGIN);
-		return LOGIN;
-	}
-
+        // 2.注册成功，跳转到登录页面
+        response.sendRedirect(LOGIN);
+        return LOGIN;
+    }
 }

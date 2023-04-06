@@ -25,12 +25,10 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class StreamEventListener {
     @Component
-    public static class BindingCreatedEventListener
-            implements ApplicationListener<BindingCreatedEvent> {
+    public static class BindingCreatedEventListener implements ApplicationListener<BindingCreatedEvent> {
         @Override
         public void onApplicationEvent(BindingCreatedEvent event) {
-            LogUtils.info(
-                    "StreamEventListener ----- BindingCreatedEvent onApplicationEvent {}", event);
+            LogUtils.info("StreamEventListener ----- BindingCreatedEvent onApplicationEvent {}", event);
         }
     }
 }

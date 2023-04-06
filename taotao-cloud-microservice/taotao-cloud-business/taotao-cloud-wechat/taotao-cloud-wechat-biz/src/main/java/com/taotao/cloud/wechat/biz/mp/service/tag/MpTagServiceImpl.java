@@ -54,11 +54,14 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class MpTagServiceImpl implements MpTagService {
 
-    @Resource private MpTagMapper mpTagMapper;
+    @Resource
+    private MpTagMapper mpTagMapper;
 
-    @Resource private MpAccountService mpAccountService;
+    @Resource
+    private MpAccountService mpAccountService;
 
-    @Resource @Lazy // 延迟加载，为了解决延迟加载
+    @Resource
+    @Lazy // 延迟加载，为了解决延迟加载
     private MpServiceFactory mpServiceFactory;
 
     @Override
@@ -148,24 +151,19 @@ public class MpTagServiceImpl implements MpTagService {
         }
 
         // 第二步，合并更新回自己的数据库；由于标签只有 100 个，所以直接 for 循环操作
-        Map<Long, MpTagDO> tagMap =
-                convertMap(mpTagMapper.selectListByAccountId(accountId), MpTagDO::getTagId);
-        wxTags.forEach(
-                wxTag -> {
-                    MpTagDO tag = tagMap.remove(wxTag.getId());
-                    // 情况一，不存在，新增
-                    if (tag == null) {
-                        tag = MpTagConvert.INSTANCE.convert(wxTag, account);
-                        mpTagMapper.insert(tag);
-                        return;
-                    }
-                    // 情况二，存在，则更新
-                    mpTagMapper.updateById(
-                            new MpTagDO()
-                                    .setId(tag.getId())
-                                    .setName(wxTag.getName())
-                                    .setCount(wxTag.getCount()));
-                });
+        Map<Long, MpTagDO> tagMap = convertMap(mpTagMapper.selectListByAccountId(accountId), MpTagDO::getTagId);
+        wxTags.forEach(wxTag -> {
+            MpTagDO tag = tagMap.remove(wxTag.getId());
+            // 情况一，不存在，新增
+            if (tag == null) {
+                tag = MpTagConvert.INSTANCE.convert(wxTag, account);
+                mpTagMapper.insert(tag);
+                return;
+            }
+            // 情况二，存在，则更新
+            mpTagMapper.updateById(
+                    new MpTagDO().setId(tag.getId()).setName(wxTag.getName()).setCount(wxTag.getCount()));
+        });
         // 情况三，部分标签已经不存在了，删除
         if (CollUtil.isNotEmpty(tagMap)) {
             mpTagMapper.deleteBatchIds(convertList(tagMap.values(), MpTagDO::getId));

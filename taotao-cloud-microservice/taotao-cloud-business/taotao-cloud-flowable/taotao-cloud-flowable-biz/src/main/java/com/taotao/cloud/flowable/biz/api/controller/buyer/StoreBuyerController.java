@@ -54,11 +54,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreBuyerController {
 
     /** 店铺 */
-    @Autowired private IFeignStoreApi storeApi;
+    @Autowired
+    private IFeignStoreApi storeApi;
     /** 店铺商品分类 */
-    @Autowired private IFeignStoreGoodsLabelApi storeGoodsLabelApi;
+    @Autowired
+    private IFeignStoreGoodsLabelApi storeGoodsLabelApi;
     /** 店铺详情 */
-    @Autowired private IFeignStoreDetailApi storeDetailApi;
+    @Autowired
+    private IFeignStoreDetailApi storeDetailApi;
 
     @Operation(summary = "获取店铺列表分页", description = "获取店铺列表分页")
     @RequestLogger
@@ -80,8 +83,7 @@ public class StoreBuyerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/get/licencePhoto/{id}")
-    public Result<StoreOtherVO> licencePhoto(
-            @Parameter(description = "店铺ID") @NotNull @PathVariable String id) {
+    public Result<StoreOtherVO> licencePhoto(@Parameter(description = "店铺ID") @NotNull @PathVariable String id) {
         return Result.success(storeDetailApi.getStoreOtherVO(id));
     }
 

@@ -37,7 +37,8 @@ public class PulsarConfiguration {
     @Configuration
     public static class PulsarErrorHandler {
 
-        @Autowired private ConsumerAggregator aggregator;
+        @Autowired
+        private ConsumerAggregator aggregator;
 
         @EventListener(ApplicationReadyEvent.class)
         public void pulsarErrorHandler() {

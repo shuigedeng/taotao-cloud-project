@@ -32,13 +32,17 @@ import org.springframework.stereotype.Service;
 
 /** 文件签阅表 */
 @Service
-public class DocumentSigningServiceImpl
-        extends ServiceImpl<DocumentSigningMapper, DocumentSigningEntity>
+public class DocumentSigningServiceImpl extends ServiceImpl<DocumentSigningMapper, DocumentSigningEntity>
         implements DocumentSigningService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public DocumentSigningEntity getInfo(String id) {
@@ -82,8 +86,7 @@ public class DocumentSigningServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, DocumentSigningEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, DocumentSigningEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -115,10 +118,8 @@ public class DocumentSigningServiceImpl
 
     @Override
     public void data(String id, String data) {
-        DocumentSigningForm documentSigningForm =
-                JsonUtils.getJsonToBean(data, DocumentSigningForm.class);
-        DocumentSigningEntity entity =
-                JsonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
+        DocumentSigningForm documentSigningForm = JsonUtils.getJsonToBean(data, DocumentSigningForm.class);
+        DocumentSigningEntity entity = JsonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -53,27 +53,29 @@ public class SmsHandler extends BaseHandler implements Handler {
         channelCode = ChannelType.SMS.getCode();
     }
 
-    @Autowired private SmsRecordDao smsRecordDao;
+    @Autowired
+    private SmsRecordDao smsRecordDao;
 
-    @Autowired private SmsScriptHolder smsScriptHolder;
+    @Autowired
+    private SmsScriptHolder smsScriptHolder;
 
-    @Autowired private ConfigService config;
+    @Autowired
+    private ConfigService config;
 
     @Override
     public boolean handler(TaskInfo taskInfo) {
-        SmsParam smsParam =
-                SmsParam.builder()
-                        .phones(taskInfo.getReceiver())
-                        .content(getSmsContent(taskInfo))
-                        .messageTemplateId(taskInfo.getMessageTemplateId())
-                        .build();
+        SmsParam smsParam = SmsParam.builder()
+                .phones(taskInfo.getReceiver())
+                .content(getSmsContent(taskInfo))
+                .messageTemplateId(taskInfo.getMessageTemplateId())
+                .build();
         try {
             /** 1、动态配置做流量负载 2、发送短信 */
-            MessageTypeSmsConfig[] messageTypeSmsConfigs =
-                    loadBalance(getMessageTypeSmsConfig(taskInfo.getMsgType()));
+            MessageTypeSmsConfig[] messageTypeSmsConfigs = loadBalance(getMessageTypeSmsConfig(taskInfo.getMsgType()));
             for (MessageTypeSmsConfig messageTypeSmsConfig : messageTypeSmsConfigs) {
-                List<SmsRecord> recordList =
-                        smsScriptHolder.route(messageTypeSmsConfig.getScriptName()).send(smsParam);
+                List<SmsRecord> recordList = smsScriptHolder
+                        .route(messageTypeSmsConfig.getScriptName())
+                        .send(smsParam);
                 if (CollUtil.isNotEmpty(recordList)) {
                     smsRecordDao.saveAll(recordList);
                     return true;
@@ -139,8 +141,7 @@ public class SmsHandler extends BaseHandler implements Handler {
         String apolloKey = "msgTypeSmsConfig";
         String messagePrefix = "message_type_";
 
-        String property =
-                config.getProperty(apolloKey, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY);
+        String property = config.getProperty(apolloKey, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY);
         JSONArray jsonArray = JSON.parseArray(property);
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONArray array = jsonArray.getJSONObject(i).getJSONArray(messagePrefix + msgType);

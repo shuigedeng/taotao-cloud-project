@@ -44,8 +44,7 @@ public class PrincipalUtils {
         return details;
     }
 
-    public static PrincipalDetails toPrincipalDetails(
-            OAuth2AuthenticatedPrincipal authenticatedPrincipal) {
+    public static PrincipalDetails toPrincipalDetails(OAuth2AuthenticatedPrincipal authenticatedPrincipal) {
         PrincipalDetails details = new PrincipalDetails();
         details.setOpenId(authenticatedPrincipal.getAttribute(BaseConstants.OPEN_ID));
         details.setUserName(authenticatedPrincipal.getName());

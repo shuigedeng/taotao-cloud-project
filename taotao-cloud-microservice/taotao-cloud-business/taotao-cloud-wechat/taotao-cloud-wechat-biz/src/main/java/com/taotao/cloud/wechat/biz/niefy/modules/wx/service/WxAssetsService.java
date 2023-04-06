@@ -50,8 +50,7 @@ public interface WxAssetsService {
      * @return
      * @throws WxErrorException
      */
-    WxMpMaterialFileBatchGetResult materialFileBatchGet(String appid, String type, int page)
-            throws WxErrorException;
+    WxMpMaterialFileBatchGetResult materialFileBatchGet(String appid, String type, int page) throws WxErrorException;
 
     /**
      * 分页获取图文素材列表
@@ -61,8 +60,7 @@ public interface WxAssetsService {
      * @return
      * @throws WxErrorException
      */
-    WxMpMaterialNewsBatchGetResult materialNewsBatchGet(String appid, int page)
-            throws WxErrorException;
+    WxMpMaterialNewsBatchGetResult materialNewsBatchGet(String appid, int page) throws WxErrorException;
 
     /**
      * 添加图文永久素材
@@ -72,8 +70,7 @@ public interface WxAssetsService {
      * @return
      * @throws WxErrorException
      */
-    WxMpMaterialUploadResult materialNewsUpload(String appid, List<WxMpNewsArticle> articles)
-            throws WxErrorException;
+    WxMpMaterialUploadResult materialNewsUpload(String appid, List<WxMpNewsArticle> articles) throws WxErrorException;
 
     /**
      * 更新图文素材中的某篇文章
@@ -81,8 +78,7 @@ public interface WxAssetsService {
      * @param appid
      * @param form
      */
-    void materialArticleUpdate(String appid, WxMpMaterialArticleUpdate form)
-            throws WxErrorException;
+    void materialArticleUpdate(String appid, WxMpMaterialArticleUpdate form) throws WxErrorException;
 
     /**
      * 添加多媒体永久素材
@@ -94,8 +90,7 @@ public interface WxAssetsService {
      * @return
      * @throws WxErrorException
      */
-    WxMpMaterialUploadResult materialFileUpload(
-            String appid, String mediaType, String fileName, MultipartFile file)
+    WxMpMaterialUploadResult materialFileUpload(String appid, String mediaType, String fileName, MultipartFile file)
             throws WxErrorException, IOException;
 
     /**

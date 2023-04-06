@@ -52,9 +52,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("渠道账号管理接口")
 public class ChannelAccountController {
 
-    @Autowired private ChannelAccountService channelAccountService;
+    @Autowired
+    private ChannelAccountService channelAccountService;
 
-    @Autowired private LoginUtils loginUtils;
+    @Autowired
+    private LoginUtils loginUtils;
 
     /** 如果Id存在，则修改 如果Id不存在，则保存 */
     @PostMapping("/save")
@@ -80,8 +82,7 @@ public class ChannelAccountController {
         }
         creator = StrUtil.isBlank(creator) ? AustinConstant.DEFAULT_CREATOR : creator;
 
-        List<ChannelAccount> channelAccounts =
-                channelAccountService.queryByChannelType(channelType, creator);
+        List<ChannelAccount> channelAccounts = channelAccountService.queryByChannelType(channelType, creator);
         return Convert4Amis.getChannelAccountVo(channelAccounts, channelType);
     }
 
@@ -103,9 +104,7 @@ public class ChannelAccountController {
     public void deleteByIds(@PathVariable("id") String id) {
         if (StrUtil.isNotBlank(id)) {
             List<Long> idList =
-                    Arrays.stream(id.split(StrUtil.COMMA))
-                            .map(Long::valueOf)
-                            .collect(Collectors.toList());
+                    Arrays.stream(id.split(StrUtil.COMMA)).map(Long::valueOf).collect(Collectors.toList());
             channelAccountService.deleteByIds(idList);
         }
     }

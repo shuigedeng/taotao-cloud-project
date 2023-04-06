@@ -40,14 +40,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class OpenAPIServiceImpl implements IOpenAPIService {
 
-    @Autowired private RedisUtil redisUtil;
-    @Resource private BaseCommonMapper baseCommonMapper;
+    @Autowired
+    private RedisUtil redisUtil;
+
+    @Resource
+    private BaseCommonMapper baseCommonMapper;
 
     /** 使用AK&SK初始化账号Client */
-    public static com.aliyun.dypnsapi20170525.Client createClient(
-            String accessKeyId, String accessKeySecret) throws Exception {
-        Config config =
-                new Config().setAccessKeyId(accessKeyId).setAccessKeySecret(accessKeySecret);
+    public static com.aliyun.dypnsapi20170525.Client createClient(String accessKeyId, String accessKeySecret)
+            throws Exception {
+        Config config = new Config().setAccessKeyId(accessKeyId).setAccessKeySecret(accessKeySecret);
         // 访问的域名
         config.endpoint = "dypnsapi.aliyuncs.com";
         return new com.aliyun.dypnsapi20170525.Client(config);
@@ -58,17 +60,14 @@ public class OpenAPIServiceImpl implements IOpenAPIService {
      * "Mobile": 121343241 } }
      */
     @Override
-    public GetMobileResponse getMobile(
-            String accessToken, String outId, HttpServletRequest request) {
+    public GetMobileResponse getMobile(String accessToken, String outId, HttpServletRequest request) {
         com.aliyun.dypnsapi20170525.Client client = null;
         GetMobileResponse response = new GetMobileResponse();
         try {
 
             // 从数据库查询获取短信全局配置数据，存在从缓存里取
-            String accessKeyId =
-                    this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_ID, request);
-            String accessKeySecret =
-                    this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_SECRET, request);
+            String accessKeyId = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_ID, request);
+            String accessKeySecret = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_SECRET, request);
             if (StringUtils.isNoneEmpty(accessKeyId, accessKeySecret)) {
                 client = createClient(accessKeyId, accessKeySecret);
                 GetMobileRequest mobileRequest = new GetMobileRequest();
@@ -96,10 +95,8 @@ public class OpenAPIServiceImpl implements IOpenAPIService {
         try {
 
             // 从数据库查询获取短信全局配置数据，存在从缓存里取
-            String accessKeyId =
-                    this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_ID, request);
-            String accessKeySecret =
-                    this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_SECRET, request);
+            String accessKeyId = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_ID, request);
+            String accessKeySecret = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_SECRET, request);
             if (StringUtils.isNoneEmpty(accessKeyId, accessKeySecret)) {
                 client = createClient(accessKeyId, accessKeySecret);
                 VerifyMobileRequest verifyMobileRequest = new VerifyMobileRequest();

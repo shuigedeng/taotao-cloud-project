@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ArticlesWarehous")
 public class ArticlesWarehousController {
 
-    @Autowired private ArticlesWarehousService articlesWarehousService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ArticlesWarehousService articlesWarehousService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取用品入库申请表信息
@@ -59,9 +62,7 @@ public class ArticlesWarehousController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), ArticlesWarehousInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ArticlesWarehousInfoVO.class);
                     isData = false;
                 }
             }
@@ -81,21 +82,18 @@ public class ArticlesWarehousController {
      */
     @Operation("新建用品入库申请表")
     @PostMapping
-    public Result create(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm) throws WorkFlowException {
         if (articlesWarehousForm.getEstimatePeople() != null
                 && StringUtil.isNotEmpty(articlesWarehousForm.getEstimatePeople())
                 && !RegexUtils.checkDigit2(articlesWarehousForm.getEstimatePeople())) {
             return Result.fail("数量只能输入正整数");
         }
-        ArticlesWarehousEntity entity =
-                JsonUtils.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
+        ArticlesWarehousEntity entity = JsonUtils.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(articlesWarehousForm.getStatus())) {
             articlesWarehousService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
         }
-        articlesWarehousService.submit(
-                entity.getId(), entity, articlesWarehousForm.getCandidateList());
+        articlesWarehousService.submit(entity.getId(), entity, articlesWarehousForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -108,17 +106,14 @@ public class ArticlesWarehousController {
      */
     @Operation("修改用品入库申请表")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid ArticlesWarehousForm articlesWarehousForm,
-            @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (articlesWarehousForm.getEstimatePeople() != null
                 && StringUtil.isNotEmpty(articlesWarehousForm.getEstimatePeople())
                 && !RegexUtils.checkDigit2(articlesWarehousForm.getEstimatePeople())) {
             return Result.fail("数量只能输入正整数");
         }
-        ArticlesWarehousEntity entity =
-                JsonUtils.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
+        ArticlesWarehousEntity entity = JsonUtils.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(articlesWarehousForm.getStatus())) {
             articlesWarehousService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

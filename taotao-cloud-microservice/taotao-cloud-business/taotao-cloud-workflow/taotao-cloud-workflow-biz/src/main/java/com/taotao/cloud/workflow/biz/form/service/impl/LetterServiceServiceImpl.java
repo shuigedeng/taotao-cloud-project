@@ -36,9 +36,14 @@ import org.springframework.stereotype.Service;
 public class LetterServiceServiceImpl extends ServiceImpl<LetterServiceMapper, LetterServiceEntity>
         implements LetterServiceService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public LetterServiceEntity getInfo(String id) {
@@ -78,8 +83,7 @@ public class LetterServiceServiceImpl extends ServiceImpl<LetterServiceMapper, L
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, LetterServiceEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, LetterServiceEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -111,10 +115,8 @@ public class LetterServiceServiceImpl extends ServiceImpl<LetterServiceMapper, L
 
     @Override
     public void data(String id, String data) {
-        LetterServiceForm letterServiceForm =
-                JsonUtils.getJsonToBean(data, LetterServiceForm.class);
-        LetterServiceEntity entity =
-                JsonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
+        LetterServiceForm letterServiceForm = JsonUtils.getJsonToBean(data, LetterServiceForm.class);
+        LetterServiceEntity entity = JsonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

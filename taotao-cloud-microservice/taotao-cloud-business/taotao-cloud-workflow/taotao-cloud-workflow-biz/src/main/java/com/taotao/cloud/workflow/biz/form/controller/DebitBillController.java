@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/DebitBill")
 public class DebitBillController {
 
-    @Autowired private DebitBillService debitBillService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private DebitBillService debitBillService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取借支单信息
@@ -52,8 +55,7 @@ public class DebitBillController {
      */
     @Operation("获取借支单信息")
     @GetMapping("/{id}")
-    public Result<DebitBillInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<DebitBillInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         DebitBillInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -104,8 +106,7 @@ public class DebitBillController {
      */
     @Operation("修改借支单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid DebitBillForm debitBillForm, @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid DebitBillForm debitBillForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (debitBillForm.getAmountDebit() != null
                 && !"".equals(String.valueOf(debitBillForm.getAmountDebit()))

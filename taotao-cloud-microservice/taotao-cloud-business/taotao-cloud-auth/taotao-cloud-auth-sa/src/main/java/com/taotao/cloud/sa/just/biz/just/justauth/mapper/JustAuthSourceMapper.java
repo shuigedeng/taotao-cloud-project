@@ -40,8 +40,7 @@ public interface JustAuthSourceMapper extends BaseMapper<JustAuthSource> {
      * @return
      */
     Page<JustAuthSourceDTO> queryJustAuthSourceList(
-            Page<JustAuthSourceDTO> page,
-            @Param("justAuthSource") QueryJustAuthSourceDTO justAuthSourceDTO);
+            Page<JustAuthSourceDTO> page, @Param("justAuthSource") QueryJustAuthSourceDTO justAuthSourceDTO);
 
     /**
      * 查询租户第三方登录信息配置表列表
@@ -49,8 +48,7 @@ public interface JustAuthSourceMapper extends BaseMapper<JustAuthSource> {
      * @param justAuthSourceDTO
      * @return
      */
-    List<JustAuthSourceDTO> queryJustAuthSourceList(
-            @Param("justAuthSource") QueryJustAuthSourceDTO justAuthSourceDTO);
+    List<JustAuthSourceDTO> queryJustAuthSourceList(@Param("justAuthSource") QueryJustAuthSourceDTO justAuthSourceDTO);
 
     /**
      * 查询租户第三方登录信息配置表信息
@@ -58,8 +56,7 @@ public interface JustAuthSourceMapper extends BaseMapper<JustAuthSource> {
      * @param justAuthSourceDTO
      * @return
      */
-    JustAuthSourceDTO queryJustAuthSource(
-            @Param("justAuthSource") QueryJustAuthSourceDTO justAuthSourceDTO);
+    JustAuthSourceDTO queryJustAuthSource(@Param("justAuthSource") QueryJustAuthSourceDTO justAuthSourceDTO);
 
     /**
      * 排除多租户插件查询租户第三方登录信息配置表列表
@@ -68,6 +65,5 @@ public interface JustAuthSourceMapper extends BaseMapper<JustAuthSource> {
      * @return
      */
     @InterceptorIgnore(tenantLine = "true")
-    List<JustAuthSourceDTO> initJustAuthSourceList(
-            @Param("justAuthSource") QueryJustAuthSourceDTO justAuthSourceDTO);
+    List<JustAuthSourceDTO> initJustAuthSourceList(@Param("justAuthSource") QueryJustAuthSourceDTO justAuthSourceDTO);
 }

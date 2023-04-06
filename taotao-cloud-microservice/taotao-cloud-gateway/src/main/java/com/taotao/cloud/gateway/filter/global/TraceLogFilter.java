@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.constant.CommonConstant;
@@ -39,22 +40,22 @@ import reactor.core.publisher.Mono;
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "trace", havingValue = "true", matchIfMissing = true)
 public class TraceLogFilter implements GlobalFilter, Ordered {
 
-	@Override
-	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-		String traceId = IdGeneratorUtils.getIdStr();
-		TraceUtils.setMdcTraceId(traceId);
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        String traceId = IdGeneratorUtils.getIdStr();
+        TraceUtils.setMdcTraceId(traceId);
 
-		ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
-			.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId))
-			.build();
+        ServerHttpRequest serverHttpRequest = exchange.getRequest()
+                .mutate()
+                .headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId))
+                .build();
 
-		ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
-		return chain.filter(build);
-	}
+        ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
+        return chain.filter(build);
+    }
 
-	@Override
-	public int getOrder() {
-		return 1;
-	}
+    @Override
+    public int getOrder() {
+        return 1;
+    }
 }
-

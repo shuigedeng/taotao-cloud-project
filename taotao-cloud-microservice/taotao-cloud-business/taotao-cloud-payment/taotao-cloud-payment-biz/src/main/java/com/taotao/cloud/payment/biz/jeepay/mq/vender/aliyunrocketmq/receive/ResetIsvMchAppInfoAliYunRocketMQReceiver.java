@@ -37,7 +37,8 @@ public class ResetIsvMchAppInfoAliYunRocketMQReceiver extends AbstractAliYunRock
 
     private static final String CONSUMER_NAME = "更新服务商/商户/商户应用配置信息消息";
 
-    @Autowired private ResetIsvMchAppInfoConfigMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private ResetIsvMchAppInfoConfigMQ.IMQReceiver mqReceiver;
 
     /**
      * 接收 【 MQSendTypeEnum.BROADCAST 】 广播类型的消息

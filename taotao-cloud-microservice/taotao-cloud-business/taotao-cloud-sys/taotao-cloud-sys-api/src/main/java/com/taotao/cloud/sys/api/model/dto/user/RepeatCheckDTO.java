@@ -35,7 +35,8 @@ import lombok.*;
 @Schema(description = "重复检查DTO")
 public class RepeatCheckDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "字段值 邮箱 手机号 用户名", required = true)
     private String fieldVal;

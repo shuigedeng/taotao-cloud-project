@@ -45,8 +45,7 @@ public class YsfJsapi extends YsfpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
         String logPrefix = "【云闪付(unionpay)jsapi支付】";
         JSONObject reqParams = new JSONObject();
@@ -60,18 +59,13 @@ public class YsfJsapi extends YsfpayPaymentService {
         jsapiParamsSet(reqParams, payOrder, getNotifyUrl(), getReturnUrl());
         // 云闪付扫一扫支付， 需要传入termInfo参数
         reqParams.put(
-                "termInfo",
-                "{\"ip\": \""
-                        + StringUtils.defaultIfEmpty(payOrder.getClientIp(), "127.0.0.1")
-                        + "\"}");
+                "termInfo", "{\"ip\": \"" + StringUtils.defaultIfEmpty(payOrder.getClientIp(), "127.0.0.1") + "\"}");
 
         // 客户端IP
-        reqParams.put(
-                "customerIp", StringUtils.defaultIfEmpty(payOrder.getClientIp(), "127.0.0.1"));
+        reqParams.put("customerIp", StringUtils.defaultIfEmpty(payOrder.getClientIp(), "127.0.0.1"));
         // 发送请求并返回订单状态
         JSONObject resJSON =
-                packageParamAndReq(
-                        "/gateway/api/pay/unifiedorder", reqParams, logPrefix, mchAppConfigContext);
+                packageParamAndReq("/gateway/api/pay/unifiedorder", reqParams, logPrefix, mchAppConfigContext);
         // 请求 & 响应成功， 判断业务逻辑
         String respCode = resJSON.getString("respCode"); // 应答码
         String respMsg = resJSON.getString("respMsg"); // 应答信息

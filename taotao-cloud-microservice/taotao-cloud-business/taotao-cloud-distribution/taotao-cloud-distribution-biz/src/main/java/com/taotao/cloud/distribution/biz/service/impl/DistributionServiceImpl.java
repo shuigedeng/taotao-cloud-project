@@ -50,23 +50,24 @@ public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Dis
         implements IDistributionService {
 
     /** 会员 */
-    @Autowired private IFeignMemberService feignMemberService;
+    @Autowired
+    private IFeignMemberService feignMemberService;
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
     /** 设置 */
-    @Autowired private IFeignSettingService feignSettingService;
+    @Autowired
+    private IFeignSettingService feignSettingService;
 
     @Override
-    public IPage<Distribution> distributionPage(
-            DistributionPageQuery distributionPageQuery, PageQuery page) {
+    public IPage<Distribution> distributionPage(DistributionPageQuery distributionPageQuery, PageQuery page) {
         return this.page(page.buildMpPage(), distributionPageQuery.queryWrapper());
     }
 
     @Override
     public Distribution getDistribution() {
         return this.getOne(
-                new LambdaQueryWrapper<Distribution>()
-                        .eq(Distribution::getMemberId, SecurityUtils.getUserId()));
+                new LambdaQueryWrapper<Distribution>().eq(Distribution::getMemberId, SecurityUtils.getUserId()));
     }
 
     @Override
@@ -83,9 +84,7 @@ public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Dis
         if (Optional.ofNullable(distribution).isPresent()) {
             if (distribution.getDistributionStatus().equals(DistributionStatusEnum.APPLY.name())) {
                 throw new BusinessException(ResultEnum.DISTRIBUTION_IS_APPLY);
-            } else if (distribution
-                    .getDistributionStatus()
-                    .equals(DistributionStatusEnum.REFUSE.name())) {
+            } else if (distribution.getDistributionStatus().equals(DistributionStatusEnum.REFUSE.name())) {
                 distribution.setDistributionStatus(DistributionStatusEnum.APPLY.name());
                 BeanUtils.copyProperties(distributionApplyDTO, distribution);
                 this.updateById(distribution);
@@ -163,8 +162,7 @@ public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Dis
         // 储存分销关系时间
         Distribution distribution = this.getById(distributionId);
         if (distribution != null) {
-            Result<SettingVO> settingResult =
-                    feignSettingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
+            Result<SettingVO> settingResult = feignSettingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
             DistributionSetting distributionSetting =
                     JSONUtil.toBean(settingResult.getSettingValue(), DistributionSetting.class);
 
@@ -180,8 +178,7 @@ public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Dis
     @Override
     public void checkDistributionSetting() {
         // 获取分销是否开启
-        Result<SettingVO> settingResult =
-                feignSettingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
+        Result<SettingVO> settingResult = feignSettingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
         DistributionSetting distributionSetting =
                 JSONUtil.toBean(settingResult.getSettingValue(), DistributionSetting.class);
         if (Boolean.FALSE.equals(distributionSetting.getIsOpen())) {

@@ -42,8 +42,7 @@ public class SymmetricUtils {
 
         AES ase = SecureUtil.aes(symmetricKey.getBytes());
         String encryptedRealSecretKey = ase.encryptHex(realSecretKey);
-        log.trace(
-                "[Herodotus] |- Generate Encrypt Hex Secret Key is : [{}]", encryptedRealSecretKey);
+        log.trace("[Herodotus] |- Generate Encrypt Hex Secret Key is : [{}]", encryptedRealSecretKey);
 
         return encryptedRealSecretKey;
     }

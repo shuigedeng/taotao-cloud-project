@@ -36,8 +36,12 @@ import org.springframework.stereotype.Component;
 public class RandomUtil {
 
     private static final String ID_IDX = CacheKeyUtil.IDGENERATOR + "Index_";
-    @Autowired private RedisTemplate<String, Long> redisTemplate;
-    @Autowired private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
+    @Autowired
+    private RedisTemplate<String, Long> redisTemplate;
+
+    @Autowired
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     // ID缓存有效时间 定时刷新有效期
     private static long CacheTimeout = 60 * 60 * 24;
@@ -46,9 +50,7 @@ public class RandomUtil {
     private static byte WorkerIdBitLength = 16;
     // 65535 参数为shot 最大值为Short.MAX_VALUE
     private static int MaxWorkerIdNumberByMode =
-            (1 << WorkerIdBitLength) - 1 > Short.MAX_VALUE
-                    ? Short.MAX_VALUE
-                    : (1 << WorkerIdBitLength) - 1;
+            (1 << WorkerIdBitLength) - 1 > Short.MAX_VALUE ? Short.MAX_VALUE : (1 << WorkerIdBitLength) - 1;
     private static ScheduledThreadPoolExecutor scheduledThreadPoolExecutor;
 
     private short workerId = -1;
@@ -60,8 +62,7 @@ public class RandomUtil {
         redisTemplate = SpringContext.getBean("redisTemplate");
         redisTemplate = SpringContext.getBean("redisTemplate");
         if (redisTemplate != null) {
-            RedisAtomicLong redisAtomicLong =
-                    new RedisAtomicLong(ID_IDX, redisTemplate.getConnectionFactory());
+            RedisAtomicLong redisAtomicLong = new RedisAtomicLong(ID_IDX, redisTemplate.getConnectionFactory());
             for (int i = 0; i <= MaxWorkerIdNumberByMode; i++) {
                 long andInc = redisAtomicLong.getAndIncrement();
                 long result = andInc % (MaxWorkerIdNumberByMode + 1);
@@ -70,22 +71,16 @@ public class RandomUtil {
                     redisAtomicLong.set(andInc % (MaxWorkerIdNumberByMode));
                 }
                 cacheKey = ID_IDX + result;
-                boolean useSuccess =
-                        redisTemplate
-                                .opsForValue()
-                                .setIfAbsent(
-                                        cacheKey,
-                                        System.currentTimeMillis(),
-                                        CacheTimeout,
-                                        TimeUnit.SECONDS);
+                boolean useSuccess = redisTemplate
+                        .opsForValue()
+                        .setIfAbsent(cacheKey, System.currentTimeMillis(), CacheTimeout, TimeUnit.SECONDS);
                 if (useSuccess) {
                     workerId = (short) result;
                     break;
                 }
             }
             if (workerId == -1) {
-                throw new RuntimeException(
-                        String.format("已尝试生成%d个ID生成器编号, 无法获取到可用编号", MaxWorkerIdNumberByMode + 1));
+                throw new RuntimeException(String.format("已尝试生成%d个ID生成器编号, 无法获取到可用编号", MaxWorkerIdNumberByMode + 1));
             }
         } else {
             workerId = (short) new Random().nextInt(MaxWorkerIdNumberByMode);
@@ -94,21 +89,17 @@ public class RandomUtil {
         IdGeneratorOptions options = new IdGeneratorOptions(workerId);
         options.WorkerIdBitLength = WorkerIdBitLength;
         YitIdHelper.setIdGenerator(options);
-        scheduledThreadPoolExecutor =
-                new ScheduledThreadPoolExecutor(
-                        1, threadPoolTaskExecutor.getThreadPoolExecutor().getThreadFactory());
+        scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(
+                1, threadPoolTaskExecutor.getThreadPoolExecutor().getThreadFactory());
         // 提前一分钟续期
         scheduledThreadPoolExecutor.scheduleWithFixedDelay(
                 resetExpire, ScheduleTimeout, ScheduleTimeout, TimeUnit.SECONDS);
     }
 
-    private Runnable resetExpire =
-            () -> {
-                // 重新设值, 如果Redis被意外清空或者掉线可以把当前编号重新锁定
-                redisTemplate
-                        .opsForValue()
-                        .set(cacheKey, System.currentTimeMillis(), CacheTimeout, TimeUnit.SECONDS);
-            };
+    private Runnable resetExpire = () -> {
+        // 重新设值, 如果Redis被意外清空或者掉线可以把当前编号重新锁定
+        redisTemplate.opsForValue().set(cacheKey, System.currentTimeMillis(), CacheTimeout, TimeUnit.SECONDS);
+    };
 
     @PreDestroy
     private void onDestroy() {

@@ -40,8 +40,7 @@ public interface IJustAuthSocialUserService extends IService<JustAuthSocialUser>
      * @return
      */
     Page<JustAuthSocialUserDTO> queryJustAuthSocialUserList(
-            Page<JustAuthSocialUserDTO> page,
-            QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO);
+            Page<JustAuthSocialUserDTO> page, QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO);
 
     /**
      * 查询租户第三方登录功能配置表列表
@@ -49,8 +48,7 @@ public interface IJustAuthSocialUserService extends IService<JustAuthSocialUser>
      * @param queryJustAuthSocialUserDTO
      * @return
      */
-    List<JustAuthSocialUserDTO> queryJustAuthSocialUserList(
-            QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO);
+    List<JustAuthSocialUserDTO> queryJustAuthSocialUserList(QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO);
 
     /**
      * 查询租户第三方登录功能配置表详情
@@ -58,8 +56,7 @@ public interface IJustAuthSocialUserService extends IService<JustAuthSocialUser>
      * @param queryJustAuthSocialUserDTO
      * @return
      */
-    JustAuthSocialUserDTO queryJustAuthSocialUser(
-            QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO);
+    JustAuthSocialUserDTO queryJustAuthSocialUser(QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO);
 
     /**
      * 创建租户第三方登录功能配置表

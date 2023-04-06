@@ -66,8 +66,7 @@ public class MpUtils {
         ValidationUtils.validate(validator, message, group);
     }
 
-    public static void validateButton(
-            Validator validator, String type, String messageType, Object button) {
+    public static void validateButton(Validator validator, String type, String messageType, Object button) {
         if (StrUtil.isBlank(type)) {
             return;
         }

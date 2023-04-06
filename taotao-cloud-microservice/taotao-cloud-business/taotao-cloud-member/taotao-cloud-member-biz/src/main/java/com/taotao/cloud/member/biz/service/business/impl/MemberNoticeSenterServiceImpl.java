@@ -38,14 +38,15 @@ import org.springframework.transaction.annotation.Transactional;
 /** 会员消息业务层实现 */
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-public class MemberNoticeSenterServiceImpl
-        extends ServiceImpl<IMemberNoticeSenterMapper, MemberNoticeSenter>
+public class MemberNoticeSenterServiceImpl extends ServiceImpl<IMemberNoticeSenterMapper, MemberNoticeSenter>
         implements IMemberNoticeSenterService {
 
     /** 会员 */
-    @Autowired private IMemberService memberService;
+    @Autowired
+    private IMemberService memberService;
     /** 会员站内信 */
-    @Autowired private IMemberNoticeService memberNoticeService;
+    @Autowired
+    private IMemberNoticeService memberNoticeService;
 
     @Override
     public boolean customSave(MemberNoticeSenter memberNoticeSenter) {

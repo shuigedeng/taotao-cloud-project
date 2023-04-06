@@ -49,10 +49,7 @@ public interface FinishedProductService extends IService<FinishedProductEntity> 
      * @param finishedProductEntryEntityList 子表
      * @throws WorkFlowException 异常
      */
-    void save(
-            String id,
-            FinishedProductEntity entity,
-            List<FinishedProductEntryEntity> finishedProductEntryEntityList)
+    void save(String id, FinishedProductEntity entity, List<FinishedProductEntryEntity> finishedProductEntryEntityList)
             throws WorkFlowException;
 
     /**

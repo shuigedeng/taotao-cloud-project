@@ -50,8 +50,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/sysConfigs")
 public class SysConfigController extends CommonCtrl {
 
-    @Autowired private SysConfigService sysConfigService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private SysConfigService sysConfigService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /**
      * @author: pangxiaoyu

@@ -34,10 +34,10 @@ import org.springframework.util.StringUtils;
 
 /** 帖子回复表 服务层实现 q3z3 */
 @Service("chatTopicReplyService")
-public class ChatTopicReplyServiceImpl extends BaseServiceImpl<ChatTopicReply>
-        implements ChatTopicReplyService {
+public class ChatTopicReplyServiceImpl extends BaseServiceImpl<ChatTopicReply> implements ChatTopicReplyService {
 
-    @Resource private ChatTopicReplyDao chatTopicReplyDao;
+    @Resource
+    private ChatTopicReplyDao chatTopicReplyDao;
 
     @Autowired
     public void setBaseDao() {
@@ -59,26 +59,23 @@ public class ChatTopicReplyServiceImpl extends BaseServiceImpl<ChatTopicReply>
     public List<TopicVo06> queryReplyList(Long topicId) {
         Long userId = ShiroUtils.getUserId();
         List<TopicVo06> dataList = chatTopicReplyDao.queryReplyList(userId, topicId);
-        dataList.forEach(
-                e -> {
-                    // 是否可以删除
-                    e.setCanDeleted(
-                            userId.equals(e.getUserId()) ? YesOrNoEnum.YES : YesOrNoEnum.NO);
-                    // 纠正注销用户
-                    if (StringUtils.isEmpty(e.getPortrait())) {
-                        ChatUser chatUser = ChatUser.initUser(null);
-                        e.setUserId(chatUser.getUserId());
-                        e.setNickName(chatUser.getNickName());
-                        e.setPortrait(chatUser.getPortrait());
-                    }
-                    // 纠正注销用户
-                    if (TopicReplyTypeEnum.USER.equals(e.getReplyType())
-                            && StringUtils.isEmpty(e.getToPortrait())) {
-                        ChatUser chatUser = ChatUser.initUser(null);
-                        e.setToNickName(chatUser.getNickName());
-                        e.setToPortrait(chatUser.getPortrait());
-                    }
-                });
+        dataList.forEach(e -> {
+            // 是否可以删除
+            e.setCanDeleted(userId.equals(e.getUserId()) ? YesOrNoEnum.YES : YesOrNoEnum.NO);
+            // 纠正注销用户
+            if (StringUtils.isEmpty(e.getPortrait())) {
+                ChatUser chatUser = ChatUser.initUser(null);
+                e.setUserId(chatUser.getUserId());
+                e.setNickName(chatUser.getNickName());
+                e.setPortrait(chatUser.getPortrait());
+            }
+            // 纠正注销用户
+            if (TopicReplyTypeEnum.USER.equals(e.getReplyType()) && StringUtils.isEmpty(e.getToPortrait())) {
+                ChatUser chatUser = ChatUser.initUser(null);
+                e.setToNickName(chatUser.getNickName());
+                e.setToPortrait(chatUser.getPortrait());
+            }
+        });
         return dataList;
     }
 }

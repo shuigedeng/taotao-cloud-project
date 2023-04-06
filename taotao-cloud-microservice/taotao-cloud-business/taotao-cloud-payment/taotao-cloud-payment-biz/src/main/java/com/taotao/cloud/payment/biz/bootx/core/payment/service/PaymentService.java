@@ -58,8 +58,7 @@ public class PaymentService {
             }
 
             // 支付失败
-            List<Integer> trades =
-                    Arrays.asList(PayStatusCode.TRADE_FAIL, PayStatusCode.TRADE_CANCEL);
+            List<Integer> trades = Arrays.asList(PayStatusCode.TRADE_FAIL, PayStatusCode.TRADE_CANCEL);
             if (trades.contains(payment.getPayStatus())) {
                 throw new PayFailureException("支付失败或已经被撤销");
             }
@@ -70,15 +69,13 @@ public class PaymentService {
     }
 
     /** 退款成功处理, 更新可退款信息 */
-    public void updateRefundSuccess(
-            Payment payment, BigDecimal amount, PayChannelEnum payChannelEnum) {
+    public void updateRefundSuccess(Payment payment, BigDecimal amount, PayChannelEnum payChannelEnum) {
         // 删除旧有的退款记录, 替换退款完的新的
         List<RefundableInfo> refundableInfos = payment.getRefundableInfoList();
-        RefundableInfo refundableInfo =
-                refundableInfos.stream()
-                        .filter(o -> o.getPayChannel() == payChannelEnum.getNo())
-                        .findFirst()
-                        .orElseThrow(() -> new PayFailureException("数据不存在"));
+        RefundableInfo refundableInfo = refundableInfos.stream()
+                .filter(o -> o.getPayChannel() == payChannelEnum.getNo())
+                .findFirst()
+                .orElseThrow(() -> new PayFailureException("数据不存在"));
         refundableInfos.remove(refundableInfo);
         refundableInfo.setAmount(refundableInfo.getAmount().subtract(amount));
         refundableInfos.add(refundableInfo);

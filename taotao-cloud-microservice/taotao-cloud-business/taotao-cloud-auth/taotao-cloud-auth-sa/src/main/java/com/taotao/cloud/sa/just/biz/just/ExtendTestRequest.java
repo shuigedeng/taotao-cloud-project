@@ -105,16 +105,15 @@ public class ExtendTestRequest extends AuthDefaultRequest {
     public AuthResponse refresh(AuthToken authToken) {
         return AuthResponse.builder()
                 .code(AuthResponseStatus.SUCCESS.getCode())
-                .data(
-                        AuthToken.builder()
-                                .openId("openId")
-                                .expireIn(1000)
-                                .idToken("idToken")
-                                .scope("scope")
-                                .refreshToken("refreshToken")
-                                .accessToken("accessToken")
-                                .code("code")
-                                .build())
+                .data(AuthToken.builder()
+                        .openId("openId")
+                        .expireIn(1000)
+                        .idToken("idToken")
+                        .scope("scope")
+                        .refreshToken("refreshToken")
+                        .accessToken("accessToken")
+                        .code("code")
+                        .build())
                 .build();
     }
 }

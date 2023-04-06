@@ -33,8 +33,7 @@ public interface IDistributionService extends IService<Distribution> {
      * @param page 分页
      * @return
      */
-    IPage<Distribution> distributionPage(
-            DistributionPageQuery distributionPageQuery, PageQuery page);
+    IPage<Distribution> distributionPage(DistributionPageQuery distributionPageQuery, PageQuery page);
 
     /**
      * 获取当前登录的会员的分销员信息

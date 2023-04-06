@@ -41,7 +41,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "添加会员DTO")
 public class MemberAddDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @NotEmpty(message = "会员用户名必填")
     @Size(max = 30, message = "会员用户名最长30位")

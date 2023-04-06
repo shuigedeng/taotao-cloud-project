@@ -31,12 +31,14 @@ import org.springframework.stereotype.Service;
 
 /** 行政赏罚单 */
 @Service
-public class RewardPunishmentServiceImpl
-        extends ServiceImpl<RewardPunishmentMapper, RewardPunishmentEntity>
+public class RewardPunishmentServiceImpl extends ServiceImpl<RewardPunishmentMapper, RewardPunishmentEntity>
         implements RewardPunishmentService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public RewardPunishmentEntity getInfo(String id) {
@@ -70,8 +72,7 @@ public class RewardPunishmentServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, RewardPunishmentEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, RewardPunishmentEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -97,10 +98,8 @@ public class RewardPunishmentServiceImpl
 
     @Override
     public void data(String id, String data) {
-        RewardPunishmentForm rewardPunishmentForm =
-                JsonUtil.getJsonToBean(data, RewardPunishmentForm.class);
-        RewardPunishmentEntity entity =
-                JsonUtil.getJsonToBean(rewardPunishmentForm, RewardPunishmentEntity.class);
+        RewardPunishmentForm rewardPunishmentForm = JsonUtil.getJsonToBean(data, RewardPunishmentForm.class);
+        RewardPunishmentEntity entity = JsonUtil.getJsonToBean(rewardPunishmentForm, RewardPunishmentEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

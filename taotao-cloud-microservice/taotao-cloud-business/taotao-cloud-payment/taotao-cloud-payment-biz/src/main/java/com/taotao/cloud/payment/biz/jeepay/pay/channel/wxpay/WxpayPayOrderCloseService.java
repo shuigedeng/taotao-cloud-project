@@ -44,7 +44,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class WxpayPayOrderCloseService implements IPayOrderCloseService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -56,8 +57,7 @@ public class WxpayPayOrderCloseService implements IPayOrderCloseService {
 
         try {
 
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
             if (CS.PAY_IF_VERSION.WX_V2.equals(wxServiceWrapper.getApiVersion())) { // V2
 
@@ -86,24 +86,19 @@ public class WxpayPayOrderCloseService implements IPayOrderCloseService {
                 JSONObject reqJson = new JSONObject();
                 if (mchAppConfigContext.isIsvsubMch()) { // 特约商户
                     WxpayIsvsubMchParams isvsubMchParams =
-                            (WxpayIsvsubMchParams)
-                                    configContextQueryService.queryIsvsubMchParams(
-                                            mchAppConfigContext.getMchNo(),
-                                            mchAppConfigContext.getAppId(),
-                                            getIfCode());
-                    reqUrl =
-                            String.format(
-                                    "/v3/pay/partner/transactions/out-trade-no/%s/close",
-                                    payOrder.getPayOrderId());
+                            (WxpayIsvsubMchParams) configContextQueryService.queryIsvsubMchParams(
+                                    mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
+                    reqUrl = String.format(
+                            "/v3/pay/partner/transactions/out-trade-no/%s/close", payOrder.getPayOrderId());
                     reqJson.put(
-                            "sp_mchid", wxServiceWrapper.getWxPayService().getConfig().getMchId());
+                            "sp_mchid",
+                            wxServiceWrapper.getWxPayService().getConfig().getMchId());
                     reqJson.put("sub_mchid", isvsubMchParams.getSubMchId());
                 } else {
-                    reqUrl =
-                            String.format(
-                                    "/v3/pay/transactions/out-trade-no/%s/close",
-                                    payOrder.getPayOrderId());
-                    reqJson.put("mchid", wxServiceWrapper.getWxPayService().getConfig().getMchId());
+                    reqUrl = String.format("/v3/pay/transactions/out-trade-no/%s/close", payOrder.getPayOrderId());
+                    reqJson.put(
+                            "mchid",
+                            wxServiceWrapper.getWxPayService().getConfig().getMchId());
                 }
 
                 WxpayV3Util.closeOrderV3(reqUrl, reqJson, wxServiceWrapper.getWxPayService());

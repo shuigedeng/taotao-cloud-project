@@ -42,8 +42,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboResourceRpc.class, validation = "true")
 public class DubboResourceRpcImpl
-        extends BaseSuperServiceImpl<
-                IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
+        extends BaseSuperServiceImpl<IResourceMapper, Resource, ResourceRepository, IResourceRepository, Long>
         implements IDubboResourceRpc {
 
     private final IRoleService roleService;

@@ -52,7 +52,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlipayDivisionService implements IDivisionService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -65,12 +66,10 @@ public class AlipayDivisionService implements IDivisionService {
     }
 
     @Override
-    public ChannelRetMsg bind(
-            MchDivisionReceiver mchDivisionReceiver, MchAppConfigContext mchAppConfigContext) {
+    public ChannelRetMsg bind(MchDivisionReceiver mchDivisionReceiver, MchAppConfigContext mchAppConfigContext) {
 
         try {
-            AlipayTradeRoyaltyRelationBindRequest request =
-                    new AlipayTradeRoyaltyRelationBindRequest();
+            AlipayTradeRoyaltyRelationBindRequest request = new AlipayTradeRoyaltyRelationBindRequest();
             AlipayTradeRoyaltyRelationBindModel model = new AlipayTradeRoyaltyRelationBindModel();
             request.setBizModel(model);
             model.setOutRequestNo(SeqKit.genDivisionBatchId());
@@ -89,10 +88,9 @@ public class AlipayDivisionService implements IDivisionService {
             royaltyEntity.setMemo(mchDivisionReceiver.getRelationTypeName()); // 分账关系描述
             model.setReceiverList(Arrays.asList(royaltyEntity));
 
-            AlipayTradeRoyaltyRelationBindResponse alipayResp =
-                    configContextQueryService
-                            .getAlipayClientWrapper(mchAppConfigContext)
-                            .execute(request);
+            AlipayTradeRoyaltyRelationBindResponse alipayResp = configContextQueryService
+                    .getAlipayClientWrapper(mchAppConfigContext)
+                    .execute(request);
 
             if (alipayResp.isSuccess()) {
                 return ChannelRetMsg.confirmSuccess(null);
@@ -100,10 +98,8 @@ public class AlipayDivisionService implements IDivisionService {
 
             // 异常：
             ChannelRetMsg channelRetMsg = ChannelRetMsg.confirmFail();
-            channelRetMsg.setChannelErrCode(
-                    AlipayKit.appendErrCode(alipayResp.getCode(), alipayResp.getSubCode()));
-            channelRetMsg.setChannelErrMsg(
-                    AlipayKit.appendErrMsg(alipayResp.getMsg(), alipayResp.getSubMsg()));
+            channelRetMsg.setChannelErrCode(AlipayKit.appendErrCode(alipayResp.getCode(), alipayResp.getSubCode()));
+            channelRetMsg.setChannelErrMsg(AlipayKit.appendErrMsg(alipayResp.getMsg(), alipayResp.getSubMsg()));
             return channelRetMsg;
 
         } catch (ChannelException e) {
@@ -123,9 +119,7 @@ public class AlipayDivisionService implements IDivisionService {
 
     @Override
     public ChannelRetMsg singleDivision(
-            PayOrder payOrder,
-            List<PayOrderDivisionRecord> recordList,
-            MchAppConfigContext mchAppConfigContext) {
+            PayOrder payOrder, List<PayOrderDivisionRecord> recordList, MchAppConfigContext mchAppConfigContext) {
 
         try {
 
@@ -138,9 +132,7 @@ public class AlipayDivisionService implements IDivisionService {
             request.setBizModel(model);
 
             model.setOutRequestNo(
-                    recordList
-                            .get(0)
-                            .getBatchOrderId()); // 结算请求流水号，由商家自定义。32个字符以内，仅可包含字母、数字、下划线。需保证在商户端不重复。
+                    recordList.get(0).getBatchOrderId()); // 结算请求流水号，由商家自定义。32个字符以内，仅可包含字母、数字、下划线。需保证在商户端不重复。
             model.setTradeNo(recordList.get(0).getPayOrderChannelOrderNo()); // 支付宝订单号
 
             // 统一放置 isv接口必传信息
@@ -190,10 +182,9 @@ public class AlipayDivisionService implements IDivisionService {
             if (log.isInfoEnabled()) {
                 log.info("订单：[{}], 支付宝分账请求：{}", payOrder.getPayOrderId(), JSON.toJSONString(model));
             }
-            AlipayTradeOrderSettleResponse alipayResp =
-                    configContextQueryService
-                            .getAlipayClientWrapper(mchAppConfigContext)
-                            .execute(request);
+            AlipayTradeOrderSettleResponse alipayResp = configContextQueryService
+                    .getAlipayClientWrapper(mchAppConfigContext)
+                    .execute(request);
             log.info("订单：[{}], 支付宝分账响应：{}", payOrder.getPayOrderId(), alipayResp.getBody());
             if (alipayResp.isSuccess()) {
                 return ChannelRetMsg.confirmSuccess(alipayResp.getTradeNo());
@@ -201,10 +192,8 @@ public class AlipayDivisionService implements IDivisionService {
 
             // 异常：
             ChannelRetMsg channelRetMsg = ChannelRetMsg.confirmFail();
-            channelRetMsg.setChannelErrCode(
-                    AlipayKit.appendErrCode(alipayResp.getCode(), alipayResp.getSubCode()));
-            channelRetMsg.setChannelErrMsg(
-                    AlipayKit.appendErrMsg(alipayResp.getMsg(), alipayResp.getSubMsg()));
+            channelRetMsg.setChannelErrCode(AlipayKit.appendErrCode(alipayResp.getCode(), alipayResp.getSubCode()));
+            channelRetMsg.setChannelErrMsg(AlipayKit.appendErrMsg(alipayResp.getMsg(), alipayResp.getSubMsg()));
             return channelRetMsg;
 
         } catch (ChannelException e) {

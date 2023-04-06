@@ -35,7 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/register")
 public class RegisterController {
 
-    @Autowired private RegisterApplicationService registerApplicationService;
+    @Autowired
+    private RegisterApplicationService registerApplicationService;
 
     /** 注册租户 */
     @ApiOperation("注册租户")

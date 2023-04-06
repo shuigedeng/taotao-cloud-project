@@ -41,7 +41,8 @@ import lombok.experimental.SuperBuilder;
 @Schema(description = "商品VO")
 public class GoodsSkuParamsVO extends GoodsVO {
 
-    @Serial private static final long serialVersionUID = 6377623919990713567L;
+    @Serial
+    private static final long serialVersionUID = 6377623919990713567L;
 
     @Schema(description = "分类名称")
     private List<String> categoryName;

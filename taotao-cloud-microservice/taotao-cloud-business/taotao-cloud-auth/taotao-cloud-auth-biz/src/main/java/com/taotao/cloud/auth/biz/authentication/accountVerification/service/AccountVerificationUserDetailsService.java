@@ -28,6 +28,5 @@ public interface AccountVerificationUserDetailsService {
      * @return userDetails
      * @throws UsernameNotFoundException not found user
      */
-    UserDetails loadUserByUsername(String username, String password, String type)
-            throws UsernameNotFoundException;
+    UserDetails loadUserByUsername(String username, String password, String type) throws UsernameNotFoundException;
 }

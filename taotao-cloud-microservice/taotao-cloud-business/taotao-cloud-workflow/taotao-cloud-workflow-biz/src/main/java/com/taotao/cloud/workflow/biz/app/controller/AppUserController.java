@@ -41,7 +41,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/User")
 public class AppUserController {
 
-    @Autowired private AppService appService;
+    @Autowired
+    private AppService appService;
 
     /**
      * 用户信息

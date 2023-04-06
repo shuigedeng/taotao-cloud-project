@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "TestRediscontroller", description = "测试redis")
 public class TestRedisController {
 
-    @Autowired private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 什么是缓存穿透 缓存穿透指的是一个缓存系统无法缓存某个查询的数据，从而导致这个查询每一次都要访问数据库。
@@ -84,10 +85,7 @@ public class TestRedisController {
             String lockKey = "lock_user_" + id.toString();
             String lockValue = UUID.randomUUID().toString();
             try {
-                Boolean lockResult =
-                        redisTemplate
-                                .opsForValue()
-                                .setIfAbsent(lockKey, lockValue, 60, TimeUnit.SECONDS);
+                Boolean lockResult = redisTemplate.opsForValue().setIfAbsent(lockKey, lockValue, 60, TimeUnit.SECONDS);
                 if (lockResult != null && lockResult) {
                     // 查询数据库
                     // user = userRepository.findById(id).orElse(null);

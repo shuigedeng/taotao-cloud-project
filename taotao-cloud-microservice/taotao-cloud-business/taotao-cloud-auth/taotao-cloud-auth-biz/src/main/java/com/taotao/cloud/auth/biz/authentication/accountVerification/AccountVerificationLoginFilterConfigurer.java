@@ -43,12 +43,8 @@ public class AccountVerificationLoginFilterConfigurer<H extends HttpSecurityBuil
 
     private JwtTokenGenerator jwtTokenGenerator;
 
-    public AccountVerificationLoginFilterConfigurer(
-            LoginFilterSecurityConfigurer<H> securityConfigurer) {
-        super(
-                securityConfigurer,
-                new AccountVerificationAuthenticationFilter(),
-                "/login/account/verification");
+    public AccountVerificationLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
+        super(securityConfigurer, new AccountVerificationAuthenticationFilter(), "/login/account/verification");
     }
 
     public AccountVerificationLoginFilterConfigurer<H> accountVerificationUserDetailsService(
@@ -63,8 +59,7 @@ public class AccountVerificationLoginFilterConfigurer<H extends HttpSecurityBuil
         return this;
     }
 
-    public AccountVerificationLoginFilterConfigurer<H> jwtTokenGenerator(
-            JwtTokenGenerator jwtTokenGenerator) {
+    public AccountVerificationLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
         this.jwtTokenGenerator = jwtTokenGenerator;
         return this;
     }
@@ -80,16 +75,13 @@ public class AccountVerificationLoginFilterConfigurer<H extends HttpSecurityBuil
         AccountVerificationUserDetailsService captchaUserDetailsService =
                 this.accountVerificationUserDetailsService != null
                         ? this.accountVerificationUserDetailsService
-                        : getBeanOrNull(
-                                applicationContext, AccountVerificationUserDetailsService.class);
+                        : getBeanOrNull(applicationContext, AccountVerificationUserDetailsService.class);
         Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
-        AccountVerificationService captchaService =
-                this.accountVerificationService != null
-                        ? this.accountVerificationService
-                        : getBeanOrNull(applicationContext, AccountVerificationService.class);
+        AccountVerificationService captchaService = this.accountVerificationService != null
+                ? this.accountVerificationService
+                : getBeanOrNull(applicationContext, AccountVerificationService.class);
         Assert.notNull(captchaService, "captchaService is required");
-        return new AccountVerificationAuthenticationProvider(
-                captchaUserDetailsService, captchaService);
+        return new AccountVerificationAuthenticationProvider(captchaUserDetailsService, captchaService);
     }
 
     @Override

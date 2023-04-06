@@ -54,9 +54,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/store/bill")
 public class BillStoreController {
 
-    @Autowired private BillService billService;
+    @Autowired
+    private BillService billService;
 
-    @Autowired private IFeignStoreFlowApi storeFlowApi;
+    @Autowired
+    private IFeignStoreFlowApi storeFlowApi;
 
     @Operation(summary = "获取结算单分页", description = "获取结算单分页")
     @RequestLogger
@@ -81,9 +83,7 @@ public class BillStoreController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{id}/getStoreFlow")
     public Result<PageResult<StoreFlowVO>> getStoreFlow(
-            @PathVariable String id,
-            @Parameter(description = "流水类型:PAY、REFUND") String flowType,
-            PageQuery PageQuery) {
+            @PathVariable String id, @Parameter(description = "流水类型:PAY、REFUND") String flowType, PageQuery PageQuery) {
         OperationalJudgment.judgment(billService.getById(id));
         IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
         return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
@@ -93,8 +93,7 @@ public class BillStoreController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{id}/getDistributionFlow")
-    public Result<PageResult<StoreFlowVO>> getDistributionFlow(
-            @PathVariable String id, PageQuery PageQuery) {
+    public Result<PageResult<StoreFlowVO>> getDistributionFlow(@PathVariable String id, PageQuery PageQuery) {
         OperationalJudgment.judgment(billService.getById(id));
         IPage<StoreFlowVO> distributionFlow = storeFlowApi.getDistributionFlow(id, PageQuery);
         return Result.success(PageResult.convertMybatisPage(distributionFlow, StoreFlowVO.class));

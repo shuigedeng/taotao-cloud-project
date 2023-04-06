@@ -53,11 +53,9 @@ import org.springframework.util.Assert;
  * @date : 2022/7/6 16:07
  * @see org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider
  */
-public abstract class AbstractUserDetailsAuthenticationProvider
-        extends AbstractAuthenticationProvider {
+public abstract class AbstractUserDetailsAuthenticationProvider extends AbstractAuthenticationProvider {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(AbstractUserDetailsAuthenticationProvider.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractUserDetailsAuthenticationProvider.class);
 
     private final MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
     private final UserDetailsService userDetailsService;
@@ -89,49 +87,37 @@ public abstract class AbstractUserDetailsAuthenticationProvider
     }
 
     protected abstract void additionalAuthenticationChecks(
-            UserDetails userDetails, Map<String, Object> additionalParameters)
-            throws AuthenticationException;
+            UserDetails userDetails, Map<String, Object> additionalParameters) throws AuthenticationException;
 
     protected abstract UserDetails retrieveUser(Map<String, Object> additionalParameters)
             throws AuthenticationException;
 
-    private Authentication authenticateUserDetails(
-            Map<String, Object> additionalParameters, String registeredClientId)
+    private Authentication authenticateUserDetails(Map<String, Object> additionalParameters, String registeredClientId)
             throws AuthenticationException {
         UserDetails user = retrieveUser(additionalParameters);
 
         if (!user.isAccountNonLocked()) {
             log.debug("[Herodotus] |- Failed to authenticate since user account is locked");
             throw new LockedException(
-                    messages.getMessage(
-                            "AbstractUserDetailsAuthenticationProvider.locked",
-                            "User account is locked"));
+                    messages.getMessage("AbstractUserDetailsAuthenticationProvider.locked", "User account is locked"));
         }
         if (!user.isEnabled()) {
             log.debug("[Herodotus] |- Failed to authenticate since user account is disabled");
             throw new DisabledException(
-                    messages.getMessage(
-                            "AbstractUserDetailsAuthenticationProvider.disabled",
-                            "User is disabled"));
+                    messages.getMessage("AbstractUserDetailsAuthenticationProvider.disabled", "User is disabled"));
         }
         if (!user.isAccountNonExpired()) {
             log.debug("[Herodotus] |- Failed to authenticate since user account has expired");
-            throw new AccountExpiredException(
-                    messages.getMessage(
-                            "AbstractUserDetailsAuthenticationProvider.expired",
-                            "User account has expired"));
+            throw new AccountExpiredException(messages.getMessage(
+                    "AbstractUserDetailsAuthenticationProvider.expired", "User account has expired"));
         }
 
         additionalAuthenticationChecks(user, additionalParameters);
 
         if (!user.isCredentialsNonExpired()) {
-            log.debug(
-                    "[Herodotus] |- Failed to authenticate since user account credentials have"
-                            + " expired");
-            throw new CredentialsExpiredException(
-                    messages.getMessage(
-                            "AbstractUserDetailsAuthenticationProvider.credentialsExpired",
-                            "User credentials have expired"));
+            log.debug("[Herodotus] |- Failed to authenticate since user account credentials have" + " expired");
+            throw new CredentialsExpiredException(messages.getMessage(
+                    "AbstractUserDetailsAuthenticationProvider.credentialsExpired", "User credentials have expired"));
         }
 
         if (complianceProperties.getSignInEndpointLimited().getEnabled()
@@ -140,11 +126,9 @@ public abstract class AbstractUserDetailsAuthenticationProvider
                 JpaOAuth2AuthorizationService jpaOAuth2AuthorizationService =
                         (JpaOAuth2AuthorizationService) authorizationService;
                 int count =
-                        jpaOAuth2AuthorizationService.findAuthorizationCount(
-                                registeredClientId, user.getUsername());
+                        jpaOAuth2AuthorizationService.findAuthorizationCount(registeredClientId, user.getUsername());
                 if (count >= complianceProperties.getSignInEndpointLimited().getMaximum()) {
-                    throw new AccountEndpointLimitedException(
-                            "Use same endpoint signIn exceed limit");
+                    throw new AccountEndpointLimitedException("Use same endpoint signIn exceed limit");
                 }
             }
         }
@@ -154,37 +138,31 @@ public abstract class AbstractUserDetailsAuthenticationProvider
             if (authorizationService instanceof JpaOAuth2AuthorizationService) {
                 JpaOAuth2AuthorizationService jpaOAuth2AuthorizationService =
                         (JpaOAuth2AuthorizationService) authorizationService;
-                List<OAuth2Authorization> authorizations =
-                        jpaOAuth2AuthorizationService.findAvailableAuthorizations(
-                                registeredClientId, user.getUsername());
+                List<OAuth2Authorization> authorizations = jpaOAuth2AuthorizationService.findAvailableAuthorizations(
+                        registeredClientId, user.getUsername());
                 if (CollectionUtils.isNotEmpty(authorizations)) {
-                    authorizations.forEach(
-                            authorization -> {
-                                OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken =
-                                        authorization.getToken(OAuth2RefreshToken.class);
-                                if (ObjectUtils.isNotEmpty(refreshToken)) {
-                                    authorization =
-                                            OAuth2AuthenticationProviderUtils.invalidate(
-                                                    authorization, refreshToken.getToken());
-                                }
-                                log.debug(
-                                        "[Herodotus] |- Sign in user [{}] with token id [{}] will"
-                                                + " be kicked out.",
-                                        user.getUsername(),
-                                        authorization.getId());
-                                jpaOAuth2AuthorizationService.save(authorization);
-                            });
+                    authorizations.forEach(authorization -> {
+                        OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken =
+                                authorization.getToken(OAuth2RefreshToken.class);
+                        if (ObjectUtils.isNotEmpty(refreshToken)) {
+                            authorization = OAuth2AuthenticationProviderUtils.invalidate(
+                                    authorization, refreshToken.getToken());
+                        }
+                        log.debug(
+                                "[Herodotus] |- Sign in user [{}] with token id [{}] will" + " be kicked out.",
+                                user.getUsername(),
+                                authorization.getId());
+                        jpaOAuth2AuthorizationService.save(authorization);
+                    });
                 }
             }
         }
 
-        return new UsernamePasswordAuthenticationToken(
-                user, user.getPassword(), user.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
     }
 
     protected Authentication getUsernamePasswordAuthentication(
-            Map<String, Object> additionalParameters, String registeredClientId)
-            throws AuthenticationException {
+            Map<String, Object> additionalParameters, String registeredClientId) throws AuthenticationException {
         Authentication authentication = null;
         try {
             authentication = authenticateUserDetails(additionalParameters, registeredClientId);
@@ -192,9 +170,7 @@ public abstract class AbstractUserDetailsAuthenticationProvider
             // covers expired, locked, disabled cases (mentioned in section 5.2, draft 31)
             String exceptionName = ase.getClass().getSimpleName();
             OAuth2EndpointUtils.throwError(
-                    exceptionName,
-                    ase.getMessage(),
-                    OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
+                    exceptionName, ase.getMessage(), OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
         } catch (BadCredentialsException bce) {
             OAuth2EndpointUtils.throwError(
                     OAuth2ErrorCodes.BAD_CREDENTIALS,

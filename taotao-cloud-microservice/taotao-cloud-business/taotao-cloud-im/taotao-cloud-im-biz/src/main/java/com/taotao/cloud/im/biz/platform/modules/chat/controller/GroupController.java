@@ -40,9 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/group")
 public class GroupController extends BaseController {
 
-    @Resource private ChatGroupService chatGroupService;
+    @Resource
+    private ChatGroupService chatGroupService;
 
-    @Resource private ChatMsgService chatMsgService;
+    @Resource
+    private ChatMsgService chatMsgService;
 
     /** 建立群组 */
     @ApiVersion(VersionEnum.V1_0_0)

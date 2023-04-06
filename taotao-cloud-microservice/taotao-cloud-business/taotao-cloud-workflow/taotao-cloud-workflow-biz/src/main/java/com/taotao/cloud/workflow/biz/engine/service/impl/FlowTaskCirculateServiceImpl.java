@@ -26,8 +26,7 @@ import org.springframework.stereotype.Service;
 
 /** 流程传阅 */
 @Service
-public class FlowTaskCirculateServiceImpl
-        extends ServiceImpl<FlowTaskCirculateMapper, FlowTaskCirculateEntity>
+public class FlowTaskCirculateServiceImpl extends ServiceImpl<FlowTaskCirculateMapper, FlowTaskCirculateEntity>
         implements FlowTaskCirculateService {
 
     @Override

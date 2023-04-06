@@ -36,10 +36,17 @@ import org.springframework.stereotype.Service;
 public class PurchaseListServiceImpl extends ServiceImpl<PurchaseListMapper, PurchaseListEntity>
         implements PurchaseListService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private PurchaseListEntryService purchaseListEntryService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private PurchaseListEntryService purchaseListEntryService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public List<PurchaseListEntryEntity> getPurchaseEntryList(String id) {
@@ -60,10 +67,7 @@ public class PurchaseListServiceImpl extends ServiceImpl<PurchaseListMapper, Pur
 
     @Override
     @DSTransactional
-    public void save(
-            String id,
-            PurchaseListEntity entity,
-            List<PurchaseListEntryEntity> purchaseListEntryEntityList)
+    public void save(String id, PurchaseListEntity entity, List<PurchaseListEntryEntity> purchaseListEntryEntityList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -164,12 +168,9 @@ public class PurchaseListServiceImpl extends ServiceImpl<PurchaseListMapper, Pur
     @Override
     public void data(String id, String data) {
         PurchaseListForm purchaseListForm = JsonUtil.getJsonToBean(data, PurchaseListForm.class);
-        PurchaseListEntity entity =
-                JsonUtil.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
+        PurchaseListEntity entity = JsonUtil.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
         List<PurchaseListEntryEntityInfoModel> entryList =
-                purchaseListForm.getEntryList() != null
-                        ? purchaseListForm.getEntryList()
-                        : new ArrayList<>();
+                purchaseListForm.getEntryList() != null ? purchaseListForm.getEntryList() : new ArrayList<>();
         List<PurchaseListEntryEntity> purchaseListEntryEntityList =
                 JsonUtil.getJsonToList(entryList, PurchaseListEntryEntity.class);
         entity.setId(id);

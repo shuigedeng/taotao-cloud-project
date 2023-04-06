@@ -50,64 +50,47 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StoreGoodsLabelServiceImpl
         extends BaseSuperServiceImpl<
-                IStoreGoodsLabelMapper,
-                StoreGoodsLabel,
-                StoreGoodsLabelRepository,
-                IStoreGoodsLabelRepository,
-                Long>
+                IStoreGoodsLabelMapper, StoreGoodsLabel, StoreGoodsLabelRepository, IStoreGoodsLabelRepository, Long>
         implements IStoreGoodsLabelService {
 
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     @Override
     public List<StoreGoodsLabelVO> listByStoreId(Long storeId) {
         // 从缓存中获取店铺分类
         if (redisRepository.hasKey(CachePrefix.STORE_CATEGORY.getPrefix() + storeId)) {
-            return (List<StoreGoodsLabelVO>)
-                    redisRepository.get(CachePrefix.STORE_CATEGORY.getPrefix() + storeId);
+            return (List<StoreGoodsLabelVO>) redisRepository.get(CachePrefix.STORE_CATEGORY.getPrefix() + storeId);
         }
 
         List<StoreGoodsLabel> list = list(storeId);
         List<StoreGoodsLabelVO> storeGoodsLabelVOList = new ArrayList<>();
 
         // 循环列表判断是否为顶级，如果为顶级获取下级数据
-        list.stream()
-                .filter(storeGoodsLabel -> storeGoodsLabel.getLevel() == 0)
-                .forEach(
-                        storeGoodsLabel -> {
-                            StoreGoodsLabelVO storeGoodsLabelVO =
-                                    new StoreGoodsLabelVO(
-                                            storeGoodsLabel.getId(),
-                                            storeGoodsLabel.getLabelName(),
-                                            storeGoodsLabel.getLevel(),
-                                            storeGoodsLabel.getSortOrder());
-                            List<StoreGoodsLabelVO> storeGoodsLabelVOChildList = new ArrayList<>();
-                            list.stream()
-                                    .filter(
-                                            label ->
-                                                    label.getParentId()
-                                                            .equals(storeGoodsLabel.getId()))
-                                    .forEach(
-                                            storeGoodsLabelChild ->
-                                                    storeGoodsLabelVOChildList.add(
-                                                            new StoreGoodsLabelVO(
-                                                                    storeGoodsLabelChild.getId(),
-                                                                    storeGoodsLabelChild
-                                                                            .getLabelName(),
-                                                                    storeGoodsLabelChild.getLevel(),
-                                                                    storeGoodsLabelChild
-                                                                            .getSortOrder())));
-                            storeGoodsLabelVO.setChildren(storeGoodsLabelVOChildList);
-                            storeGoodsLabelVOList.add(storeGoodsLabelVO);
-                        });
+        list.stream().filter(storeGoodsLabel -> storeGoodsLabel.getLevel() == 0).forEach(storeGoodsLabel -> {
+            StoreGoodsLabelVO storeGoodsLabelVO = new StoreGoodsLabelVO(
+                    storeGoodsLabel.getId(),
+                    storeGoodsLabel.getLabelName(),
+                    storeGoodsLabel.getLevel(),
+                    storeGoodsLabel.getSortOrder());
+            List<StoreGoodsLabelVO> storeGoodsLabelVOChildList = new ArrayList<>();
+            list.stream()
+                    .filter(label -> label.getParentId().equals(storeGoodsLabel.getId()))
+                    .forEach(storeGoodsLabelChild -> storeGoodsLabelVOChildList.add(new StoreGoodsLabelVO(
+                            storeGoodsLabelChild.getId(),
+                            storeGoodsLabelChild.getLabelName(),
+                            storeGoodsLabelChild.getLevel(),
+                            storeGoodsLabelChild.getSortOrder())));
+            storeGoodsLabelVO.setChildren(storeGoodsLabelVOChildList);
+            storeGoodsLabelVOList.add(storeGoodsLabelVO);
+        });
 
         // 调整店铺分类排序
         storeGoodsLabelVOList.sort(Comparator.comparing(StoreGoodsLabelVO::getSortOrder));
 
         if (!storeGoodsLabelVOList.isEmpty()) {
-            redisRepository.set(
-                    CachePrefix.CATEGORY.getPrefix() + storeId + "tree", storeGoodsLabelVOList);
+            redisRepository.set(CachePrefix.CATEGORY.getPrefix() + storeId + "tree", storeGoodsLabelVOList);
         }
         return storeGoodsLabelVOList;
     }
@@ -120,10 +103,9 @@ public class StoreGoodsLabelServiceImpl
      */
     @Override
     public List<StoreGoodsLabel> listByStoreIds(List<Long> ids) {
-        return this.list(
-                new LambdaQueryWrapper<StoreGoodsLabel>()
-                        .in(StoreGoodsLabel::getId, ids)
-                        .orderByAsc(StoreGoodsLabel::getLevel));
+        return this.list(new LambdaQueryWrapper<StoreGoodsLabel>()
+                .in(StoreGoodsLabel::getId, ids)
+                .orderByAsc(StoreGoodsLabel::getLevel));
     }
 
     @Override

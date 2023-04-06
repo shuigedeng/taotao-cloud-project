@@ -36,7 +36,8 @@ import lombok.*;
 @Schema(description = "用户查询对象")
 public class UserQueryDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "用户昵称")
     private String nickname;

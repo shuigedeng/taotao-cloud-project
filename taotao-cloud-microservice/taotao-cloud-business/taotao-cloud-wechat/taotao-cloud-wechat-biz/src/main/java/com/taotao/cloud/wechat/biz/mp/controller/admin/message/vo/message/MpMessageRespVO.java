@@ -47,18 +47,10 @@ public class MpMessageRespVO {
     @ApiModelProperty(value = "公众号粉丝标志", required = true, example = "o6_bmjrPTlm6_2sgVt7hMZOPfL2M")
     private String openid;
 
-    @ApiModelProperty(
-            value = "消息类型",
-            required = true,
-            example = "text",
-            notes = "参见 WxConsts.XmlMsgType 枚举")
+    @ApiModelProperty(value = "消息类型", required = true, example = "text", notes = "参见 WxConsts.XmlMsgType 枚举")
     private String type;
 
-    @ApiModelProperty(
-            value = "消息来源",
-            required = true,
-            example = "1",
-            notes = "参见 MpMessageSendFromEnum 枚举")
+    @ApiModelProperty(value = "消息来源", required = true, example = "1", notes = "参见 MpMessageSendFromEnum 枚举")
     private Integer sendFrom;
 
     // ========= 普通消息内容
@@ -67,10 +59,7 @@ public class MpMessageRespVO {
     @ApiModelProperty(value = "消息内容", example = "你好呀", notes = "消息类型为 text 时，才有值")
     private String content;
 
-    @ApiModelProperty(
-            value = "媒体素材的编号",
-            example = "1234567890",
-            notes = "消息类型为 image、voice、video 时，才有值")
+    @ApiModelProperty(value = "媒体素材的编号", example = "1234567890", notes = "消息类型为 image、voice、video 时，才有值")
     private String mediaId;
 
     @ApiModelProperty(
@@ -91,10 +80,7 @@ public class MpMessageRespVO {
     @ApiModelProperty(value = "描述", example = "我是描述", notes = "消息类型为 video、music 时，才有值")
     private String description;
 
-    @ApiModelProperty(
-            value = "缩略图的媒体 id",
-            example = "1234567890",
-            notes = "消息类型为 video、music 时，才有值")
+    @ApiModelProperty(value = "缩略图的媒体 id", example = "1234567890", notes = "消息类型为 video、music 时，才有值")
     private String thumbMediaId;
 
     @ApiModelProperty(
@@ -103,10 +89,7 @@ public class MpMessageRespVO {
             notes = "消息类型为 video、music 时，才有值")
     private String thumbMediaUrl;
 
-    @ApiModelProperty(
-            value = "点击图文消息跳转链接",
-            example = "https://www.iocoder.cn",
-            notes = "消息类型为 link 时，才有值")
+    @ApiModelProperty(value = "点击图文消息跳转链接", example = "https://www.iocoder.cn", notes = "消息类型为 link 时，才有值")
     private String url;
 
     @ApiModelProperty(value = "地理位置维度", example = "23.137466", notes = "消息类型为 location 时，才有值")
@@ -129,16 +112,10 @@ public class MpMessageRespVO {
     @TableField(typeHandler = MpMessageDO.ArticleTypeHandler.class)
     private List<MpMessageDO.Article> articles;
 
-    @ApiModelProperty(
-            value = "音乐链接",
-            example = "https://www.iocoder.cn/xxx.mp3",
-            notes = "消息类型为 music 时，才有值")
+    @ApiModelProperty(value = "音乐链接", example = "https://www.iocoder.cn/xxx.mp3", notes = "消息类型为 music 时，才有值")
     private String musicUrl;
 
-    @ApiModelProperty(
-            value = "高质量音乐链接",
-            example = "https://www.iocoder.cn/xxx.mp3",
-            notes = "消息类型为 music 时，才有值")
+    @ApiModelProperty(value = "高质量音乐链接", example = "https://www.iocoder.cn/xxx.mp3", notes = "消息类型为 music 时，才有值")
     private String hqMusicUrl;
 
     // ========= 事件推送
@@ -147,10 +124,7 @@ public class MpMessageRespVO {
     @ApiModelProperty(value = "事件类型", example = "subscribe", notes = "参见 WxConsts.EventType 枚举")
     private String event;
 
-    @ApiModelProperty(
-            value = "事件 Key",
-            example = "qrscene_123456",
-            notes = "参见 WxConsts.EventType 枚举")
+    @ApiModelProperty(value = "事件 Key", example = "qrscene_123456", notes = "参见 WxConsts.EventType 枚举")
     private String eventKey;
 
     @ApiModelProperty(value = "创建时间", required = true)

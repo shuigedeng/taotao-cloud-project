@@ -39,7 +39,8 @@ import lombok.*;
 @Schema(description = "部门树VO")
 public class DeptTreeVO extends MapperNode implements INode {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     /// **
     // * 主键ID

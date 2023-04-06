@@ -78,21 +78,23 @@ public class MybatisPlusConfig {
     /** 对接数据库的实体层 */
     static final String ALIASES_PACKAGE = "workflow.*.entity";
 
-    @Autowired private DataSourceUtil dataSourceUtil;
-    @Autowired private ConfigValueUtil configValueUtil;
+    @Autowired
+    private DataSourceUtil dataSourceUtil;
+
+    @Autowired
+    private ConfigValueUtil configValueUtil;
 
     @Primary
     @Bean(name = "dataSourceSystem")
-    public DataSource dataSourceOne(
-            DynamicDataSourceProperties properties, DefaultDataSourceCreator dataSourceCreator)
+    public DataSource dataSourceOne(DynamicDataSourceProperties properties, DefaultDataSourceCreator dataSourceCreator)
             throws Exception {
         //        return druidDataSource();
         return dynamicDataSource(properties, dataSourceCreator);
     }
 
     @Bean(name = "sqlSessionFactorySystem")
-    public SqlSessionFactory sqlSessionFactoryOne(
-            @Qualifier("dataSourceSystem") DataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactoryOne(@Qualifier("dataSourceSystem") DataSource dataSource)
+            throws Exception {
         return createSqlSessionFactory(dataSource);
     }
 
@@ -112,17 +114,14 @@ public class MybatisPlusConfig {
                 List<String> tableNames = new ArrayList<>();
                 if (conn != null) {
                     JdbcUtil.queryCustomMods(
-                                    dbBase.getSqlBase().getTableListPSD(conn, dataSourceUtil),
-                                    DbTableModel.class)
-                            .forEach(
-                                    dbTableModel -> {
-                                        tableNames.add(dbTableModel.getTable().toLowerCase());
-                                    });
+                                    dbBase.getSqlBase().getTableListPSD(conn, dataSourceUtil), DbTableModel.class)
+                            .forEach(dbTableModel -> {
+                                tableNames.add(dbTableModel.getTable().toLowerCase());
+                            });
                 }
                 // 将当前连接库的所有表保存, 在列表中的表才进行切库, 所有表名转小写, 后续比对转小写
                 DbBase.dynamicAllTableName = tableNames;
-                dynamicTableNameInnerInterceptor.setTableNameHandler(
-                        dbBase.getDynamicTableNameHandler());
+                dynamicTableNameInnerInterceptor.setTableNameHandler(dbBase.getDynamicTableNameHandler());
                 interceptor.addInnerInterceptor(dynamicTableNameInnerInterceptor);
             }
             // 新版本分页必须指定数据库，否则分页不生效
@@ -135,8 +134,7 @@ public class MybatisPlusConfig {
     }
 
     protected DataSource dynamicDataSource(
-            DynamicDataSourceProperties properties, DefaultDataSourceCreator dataSourceCreator)
-            throws Exception {
+            DynamicDataSourceProperties properties, DefaultDataSourceCreator dataSourceCreator) throws Exception {
         if (Boolean.parseBoolean(configValueUtil.getMultiTenancy())) {
             // 多租户安全空库保护（下个版本切库失败，直接中止项目，去除切库保护这个动作。）
             String url = ConnUtil.getUrl(dataSourceUtil, "workflow_protect");
@@ -144,8 +142,7 @@ public class MybatisPlusConfig {
                 ConnUtil.getConn(dataSourceUtil.getUserName(), dataSourceUtil.getPassword(), url)
                         .close();
             } catch (Exception e) {
-                throw new Exception(
-                        "WORKFLOW_PROTECT库异常或不存在,请重新创建多租户初始保护库WORKFLOW_PROTECT库：" + e.getMessage());
+                throw new Exception("WORKFLOW_PROTECT库异常或不存在,请重新创建多租户初始保护库WORKFLOW_PROTECT库：" + e.getMessage());
             }
         }
         String url = ConnUtil.getUrl(dataSourceUtil);
@@ -161,7 +158,8 @@ public class MybatisPlusConfig {
         dataSource.setP6spy(properties.getP6spy());
         dataSource.setSeata(properties.getSeata());
         boolean hasPrimary = false;
-        for (Map.Entry<String, DataSourceProperty> ds : properties.getDatasource().entrySet()) {
+        for (Map.Entry<String, DataSourceProperty> ds :
+                properties.getDatasource().entrySet()) {
             if (ds.getKey().equals(properties.getPrimary())
                     || ds.getKey().startsWith(properties.getPrimary() + "_")
                     || properties.getPrimary().equals(ds.getValue().getPoolName())) {
@@ -171,9 +169,7 @@ public class MybatisPlusConfig {
         }
         if (!hasPrimary) {
             // 未配置多数据源， 从主配置复制数据库配置填充多数据源
-            dataSource.addDataSource(
-                    properties.getPrimary(),
-                    dataSourceCreator.createDataSource(dataSourceProperty));
+            dataSource.addDataSource(properties.getPrimary(), dataSourceCreator.createDataSource(dataSourceProperty));
         }
         DataSource ds = dataSource.getDataSource(properties.getPrimary());
 
@@ -182,13 +178,9 @@ public class MybatisPlusConfig {
             if (ds instanceof ItemDataSource) {
                 //                String logonUer = "SYSDBA";
                 String logonUer = "Default";
-                Properties connProp =
-                        DbOracle.setConnProp(
-                                logonUer,
-                                dataSourceProperty.getUsername(),
-                                dataSourceProperty.getPassword());
-                ((DruidDataSource) ((ItemDataSource) ds).getDataSource())
-                        .setConnectProperties(connProp);
+                Properties connProp = DbOracle.setConnProp(
+                        logonUer, dataSourceProperty.getUsername(), dataSourceProperty.getPassword());
+                ((DruidDataSource) ((ItemDataSource) ds).getDataSource()).setConnectProperties(connProp);
             }
         }
         return dataSource;
@@ -196,10 +188,8 @@ public class MybatisPlusConfig {
 
     @Bean
     public Advisor myDynamicDatasourceGeneratorAdvisor(DsProcessor dsProcessor) {
-        DynamicGeneratorInterceptor interceptor =
-                new DynamicGeneratorInterceptor(true, dsProcessor);
-        DynamicDataSourceAnnotationAdvisor advisor =
-                new DynamicDataSourceAnnotationAdvisor(interceptor, DS.class);
+        DynamicGeneratorInterceptor interceptor = new DynamicGeneratorInterceptor(true, dsProcessor);
+        DynamicDataSourceAnnotationAdvisor advisor = new DynamicDataSourceAnnotationAdvisor(interceptor, DS.class);
         return advisor;
     }
 
@@ -216,8 +206,7 @@ public class MybatisPlusConfig {
             try {
                 ConnUtil.getConn(userName, password, url).close();
             } catch (Exception e) {
-                throw new Exception(
-                        "WORKFLOW_PROTECT库异常或不存在,请重新创建多租户初始保护库WORKFLOW_PROTECT库：" + e.getMessage());
+                throw new Exception("WORKFLOW_PROTECT库异常或不存在,请重新创建多租户初始保护库WORKFLOW_PROTECT库：" + e.getMessage());
             }
         } else {
             url = ConnUtil.getUrl(dataSourceUtil);
@@ -270,8 +259,7 @@ public class MybatisPlusConfig {
         bean.setTypeAliasesPackage(ALIASES_PACKAGE);
         bean.setMapperLocations(resolveMapperLocations());
         bean.setConfiguration(configuration(dataSource));
-        bean.setPlugins(
-                new Interceptor[] {pageHelper(), new MyMasterSlaveAutoRoutingPlugin(dataSource)});
+        bean.setPlugins(new Interceptor[] {pageHelper(), new MyMasterSlaveAutoRoutingPlugin(dataSource)});
         return bean.getObject();
     }
 
@@ -279,8 +267,7 @@ public class MybatisPlusConfig {
         PageInterceptor pageHelper = new PageInterceptor();
         // 配置PageHelper参数
         Properties properties = new Properties();
-        properties.setProperty(
-                "dialectAlias", "kingbasees8=com.github.pagehelper.dialect.helper.MySqlDialect");
+        properties.setProperty("dialectAlias", "kingbasees8=com.github.pagehelper.dialect.helper.MySqlDialect");
         properties.setProperty("autoRuntimeDialect", "true");
         properties.setProperty("offsetAsPageNum", "false");
         properties.setProperty("rowBoundsWithCount", "false");

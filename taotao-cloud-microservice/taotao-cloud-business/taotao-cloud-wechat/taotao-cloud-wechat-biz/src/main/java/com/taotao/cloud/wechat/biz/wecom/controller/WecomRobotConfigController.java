@@ -56,8 +56,7 @@ public class WecomRobotConfigController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<WecomRobotConfigDto>> page(
-            PageQuery PageQuery, WecomRobotConfigParam param) {
+    public ResResult<PageResult<WecomRobotConfigDto>> page(PageQuery PageQuery, WecomRobotConfigParam param) {
         return Res.ok(robotConfigService.page(PageQuery, param));
     }
 

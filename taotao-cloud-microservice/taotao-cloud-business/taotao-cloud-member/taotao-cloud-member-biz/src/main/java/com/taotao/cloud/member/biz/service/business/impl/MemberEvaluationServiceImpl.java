@@ -69,24 +69,30 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberEvaluationServiceImpl
-        extends ServiceImpl<IMemberEvaluationMapper, MemberEvaluation>
+public class MemberEvaluationServiceImpl extends ServiceImpl<IMemberEvaluationMapper, MemberEvaluation>
         implements IMemberEvaluationService {
 
     /** 会员 */
-    @Autowired private IMemberService memberService;
+    @Autowired
+    private IMemberService memberService;
     /** 订单 */
-    @Autowired private IFeignOrderApi orderApi;
+    @Autowired
+    private IFeignOrderApi orderApi;
     /** 子订单 */
-    @Autowired private IFeignOrderItemApi orderItemApi;
+    @Autowired
+    private IFeignOrderItemApi orderItemApi;
     /** 商品 */
-    @Autowired private IFeignGoodsSkuApi goodsSkuApi;
+    @Autowired
+    private IFeignGoodsSkuApi goodsSkuApi;
     /** rocketMq */
-    @Autowired private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
     /** rocketMq配置 */
-    @Autowired private RocketmqCustomProperties rocketmqCustomProperties;
+    @Autowired
+    private RocketmqCustomProperties rocketmqCustomProperties;
 
-    @Resource private ThreadPoolExecutor asyncThreadPoolExecutor;
+    @Resource
+    private ThreadPoolExecutor asyncThreadPoolExecutor;
 
     @Override
     public IPage<MemberEvaluation> managerQuery(EvaluationPageQuery queryParams) {
@@ -97,8 +103,7 @@ public class MemberEvaluationServiceImpl
     @Override
     public IPage<MemberEvaluation> queryPage(EvaluationPageQuery evaluationPageQuery) {
         return this.baseMapper.getMemberEvaluationList(
-                evaluationPageQuery.buildMpPage(),
-                QueryUtils.evaluationQueryWrapper(evaluationPageQuery));
+                evaluationPageQuery.buildMpPage(), QueryUtils.evaluationQueryWrapper(evaluationPageQuery));
     }
 
     @Override
@@ -107,38 +112,29 @@ public class MemberEvaluationServiceImpl
         Member member = memberService.getUserInfo();
 
         // 获取商品信息
-        CompletableFuture<GoodsSkuSpecGalleryVO> future1 =
-                CompletableFuture.supplyAsync(
-                        () -> goodsSkuApi.getGoodsSkuByIdFromCache(memberEvaluationDTO.getSkuId()),
-                        asyncThreadPoolExecutor);
+        CompletableFuture<GoodsSkuSpecGalleryVO> future1 = CompletableFuture.supplyAsync(
+                () -> goodsSkuApi.getGoodsSkuByIdFromCache(memberEvaluationDTO.getSkuId()), asyncThreadPoolExecutor);
         // 获取订单信息
-        CompletableFuture<Tuple2<OrderItemVO, OrderVO>> future2 =
-                CompletableFuture.supplyAsync(
-                                () -> orderItemApi.getBySn(memberEvaluationDTO.getOrderItemSn()),
-                                asyncThreadPoolExecutor)
-                        .thenApplyAsync(
-                                (orderItem) -> {
-                                    OrderVO order = orderApi.getBySn(orderItem.orderSn());
-                                    return new Tuple2<>(orderItem, order);
-                                },
-                                asyncThreadPoolExecutor);
+        CompletableFuture<Tuple2<OrderItemVO, OrderVO>> future2 = CompletableFuture.supplyAsync(
+                        () -> orderItemApi.getBySn(memberEvaluationDTO.getOrderItemSn()), asyncThreadPoolExecutor)
+                .thenApplyAsync(
+                        (orderItem) -> {
+                            OrderVO order = orderApi.getBySn(orderItem.orderSn());
+                            return new Tuple2<>(orderItem, order);
+                        },
+                        asyncThreadPoolExecutor);
 
         CompletableFuture<Void> allOfFuture = CompletableFuture.allOf(future1, future2);
-        CompletableFuture<Tuple3<GoodsSkuSpecGalleryVO, OrderItemVO, OrderVO>>
-                resultCompletableFuture =
-                        allOfFuture.thenApply(
-                                v -> {
-                                    try {
-                                        Tuple2<OrderItemVO, OrderVO> join = future2.join();
-                                        return new Tuple3<>(future1.join(), join._1(), join._2());
-                                    } catch (Exception e) {
-                                        LogUtils.error(
-                                                "RemoteDictService.getDictDataAsync Exception"
-                                                        + " dictId = {}",
-                                                e);
-                                        throw new RuntimeException(e);
-                                    }
-                                });
+        CompletableFuture<Tuple3<GoodsSkuSpecGalleryVO, OrderItemVO, OrderVO>> resultCompletableFuture =
+                allOfFuture.thenApply(v -> {
+                    try {
+                        Tuple2<OrderItemVO, OrderVO> join = future2.join();
+                        return new Tuple3<>(future1.join(), join._1(), join._2());
+                    } catch (Exception e) {
+                        LogUtils.error("RemoteDictService.getDictDataAsync Exception" + " dictId = {}", e);
+                        throw new RuntimeException(e);
+                    }
+                });
 
         Tuple3<GoodsSkuSpecGalleryVO, OrderItemVO, OrderVO> data = resultCompletableFuture.join();
         GoodsSkuSpecGalleryVO goodsSku = data._1();
@@ -148,8 +144,7 @@ public class MemberEvaluationServiceImpl
         // 检测是否可以添加会员评价
         checkMemberEvaluation(orderItem, order);
         // 新增用户评价
-        MemberEvaluation memberEvaluation =
-                new MemberEvaluation(memberEvaluationDTO, goodsSku, member, order);
+        MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku, member, order);
         // 过滤商品咨询敏感词
         memberEvaluation.setContent(SensitiveWordsFilter.filter(memberEvaluation.getContent()));
         // 添加评价
@@ -159,13 +154,9 @@ public class MemberEvaluationServiceImpl
         orderItemApi.updateCommentStatus(orderItem.sn(), CommentStatusEnum.FINISHED);
         // 发送商品评价消息
         String destination =
-                rocketmqCustomProperties.getGoodsTopic()
-                        + ":"
-                        + GoodsTagsEnum.GOODS_COMMENT_COMPLETE.name();
+                rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_COMMENT_COMPLETE.name();
         rocketMQTemplate.asyncSend(
-                destination,
-                JSONUtil.toJsonStr(memberEvaluation),
-                RocketmqSendCallbackBuilder.commonCallback());
+                destination, JSONUtil.toJsonStr(memberEvaluation), RocketmqSendCallbackBuilder.commonCallback());
         return true;
     }
 
@@ -179,10 +170,7 @@ public class MemberEvaluationServiceImpl
         UpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.update();
         updateWrapper.eq("id", id);
         updateWrapper.set(
-                "status",
-                status.equals(SwitchEnum.OPEN.name())
-                        ? SwitchEnum.OPEN.name()
-                        : SwitchEnum.CLOSE.name());
+                "status", status.equals(SwitchEnum.OPEN.name()) ? SwitchEnum.OPEN.name() : SwitchEnum.CLOSE.name());
         return this.update(updateWrapper);
     }
 
@@ -228,11 +216,8 @@ public class MemberEvaluationServiceImpl
         evaluationNumberVO.setGood(good);
         evaluationNumberVO.setModerate(moderate);
         evaluationNumberVO.setWorse(worse);
-        evaluationNumberVO.setHaveImage(
-                this.count(
-                        new QueryWrapper<MemberEvaluation>()
-                                .eq("have_image", 1)
-                                .eq("goods_id", goodsId)));
+        evaluationNumberVO.setHaveImage(this.count(
+                new QueryWrapper<MemberEvaluation>().eq("have_image", 1).eq("goods_id", goodsId)));
 
         return evaluationNumberVO;
     }

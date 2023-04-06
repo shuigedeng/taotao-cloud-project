@@ -36,9 +36,14 @@ import org.springframework.stereotype.Service;
 public class ApplyMeetingServiceImpl extends ServiceImpl<ApplyMeetingMapper, ApplyMeetingEntity>
         implements ApplyMeetingService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public ApplyMeetingEntity getInfo(String id) {
@@ -78,8 +83,7 @@ public class ApplyMeetingServiceImpl extends ServiceImpl<ApplyMeetingMapper, App
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, ApplyMeetingEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, ApplyMeetingEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -112,8 +116,7 @@ public class ApplyMeetingServiceImpl extends ServiceImpl<ApplyMeetingMapper, App
     @Override
     public void data(String id, String data) {
         ApplyMeetingForm applyBanquetForm = JsonUtils.getJsonToBean(data, ApplyMeetingForm.class);
-        ApplyMeetingEntity entity =
-                JsonUtils.getJsonToBean(applyBanquetForm, ApplyMeetingEntity.class);
+        ApplyMeetingEntity entity = JsonUtils.getJsonToBean(applyBanquetForm, ApplyMeetingEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

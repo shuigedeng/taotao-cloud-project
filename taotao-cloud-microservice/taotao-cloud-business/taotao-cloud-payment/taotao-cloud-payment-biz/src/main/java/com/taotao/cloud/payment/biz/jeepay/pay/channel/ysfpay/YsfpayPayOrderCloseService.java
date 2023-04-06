@@ -43,11 +43,11 @@ public class YsfpayPayOrderCloseService implements IPayOrderCloseService {
         return CS.IF_CODE.YSFPAY;
     }
 
-    @Autowired private YsfpayPaymentService ysfpayPaymentService;
+    @Autowired
+    private YsfpayPaymentService ysfpayPaymentService;
 
     @Override
-    public ChannelRetMsg close(PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception {
+    public ChannelRetMsg close(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
         JSONObject reqParams = new JSONObject();
         String orderType = YsfHttpUtil.getOrderTypeByCommon(payOrder.getWayCode());
         String logPrefix = "【云闪付(" + orderType + ")关闭订单】";
@@ -57,12 +57,8 @@ public class YsfpayPayOrderCloseService implements IPayOrderCloseService {
             reqParams.put("orderType", orderType); // 订单类型
 
             // 封装公共参数 & 签名 & 调起http请求 & 返回响应数据并包装为json格式。
-            JSONObject resJSON =
-                    ysfpayPaymentService.packageParamAndReq(
-                            "/gateway/api/pay/closeOrder",
-                            reqParams,
-                            logPrefix,
-                            mchAppConfigContext);
+            JSONObject resJSON = ysfpayPaymentService.packageParamAndReq(
+                    "/gateway/api/pay/closeOrder", reqParams, logPrefix, mchAppConfigContext);
             log.info("关闭订单 payorderId:{}, 返回结果:{}", payOrder.getPayOrderId(), resJSON);
             if (resJSON == null) {
                 return ChannelRetMsg.sysError("【云闪付】请求关闭订单异常");

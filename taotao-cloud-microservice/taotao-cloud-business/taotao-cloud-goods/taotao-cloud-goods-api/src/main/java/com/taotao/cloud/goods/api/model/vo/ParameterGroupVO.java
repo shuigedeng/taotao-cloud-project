@@ -32,7 +32,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ParameterGroupVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 724427321881170297L;
+    @Serial
+    private static final long serialVersionUID = 724427321881170297L;
 
     @Schema(description = "参数组关联的参数集合")
     private List<ParametersVO> params;

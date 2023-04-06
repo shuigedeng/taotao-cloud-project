@@ -56,9 +56,7 @@ public class DateTimeZoneUtil implements Serializable {
             throw new Exception("date is not null");
         }
         ZonedDateTime zonedDateTime = DateTimeConverterUtil.toZonedDateTime(date);
-        time =
-                DateTimeFormatterUtil.format(
-                        zonedDateTime, DateTimeFormatterUtil.YYYY_MM_DD_T_HH_MM_SS_XXX_FMT);
+        time = DateTimeFormatterUtil.format(zonedDateTime, DateTimeFormatterUtil.YYYY_MM_DD_T_HH_MM_SS_XXX_FMT);
         return time;
     }
 
@@ -77,8 +75,7 @@ public class DateTimeZoneUtil implements Serializable {
             throw new Exception("str is not null");
         }
         ZonedDateTime zonedDateTime =
-                DateTimeFormatterUtil.parseToZonedDateTime(
-                        str, DateTimeFormatterUtil.YYYY_MM_DD_T_HH_MM_SS_XXX_FMT);
+                DateTimeFormatterUtil.parseToZonedDateTime(str, DateTimeFormatterUtil.YYYY_MM_DD_T_HH_MM_SS_XXX_FMT);
         if (zonedDateTime == null) {
             throw new Exception("str to zonedDateTime fail");
         }

@@ -56,23 +56,18 @@ public class AliPaymentService {
         List<PayChannelInfo> payTypeInfos = payment.getPayChannelInfoList();
         List<RefundableInfo> refundableInfos = payment.getRefundableInfoList();
         // 清除已有的异步支付类型信息
-        payTypeInfos.removeIf(
-                payTypeInfo -> PayChannelCode.ASYNC_TYPE.contains(payTypeInfo.getPayChannel()));
-        refundableInfos.removeIf(
-                payTypeInfo -> PayChannelCode.ASYNC_TYPE.contains(payTypeInfo.getPayChannel()));
+        payTypeInfos.removeIf(payTypeInfo -> PayChannelCode.ASYNC_TYPE.contains(payTypeInfo.getPayChannel()));
+        refundableInfos.removeIf(payTypeInfo -> PayChannelCode.ASYNC_TYPE.contains(payTypeInfo.getPayChannel()));
         // 更新支付宝支付类型信息
-        payTypeInfos.add(
-                new PayChannelInfo()
-                        .setPayChannel(PayChannelCode.ALI)
-                        .setPayWay(payModeParam.getPayWay())
-                        .setAmount(payModeParam.getAmount())
-                        .setExtraParamsJson(payModeParam.getExtraParamsJson()));
+        payTypeInfos.add(new PayChannelInfo()
+                .setPayChannel(PayChannelCode.ALI)
+                .setPayWay(payModeParam.getPayWay())
+                .setAmount(payModeParam.getAmount())
+                .setExtraParamsJson(payModeParam.getExtraParamsJson()));
         payment.setPayChannelInfo(JSONUtil.toJsonStr(payTypeInfos));
         // 更新支付宝可退款类型信息
         refundableInfos.add(
-                new RefundableInfo()
-                        .setPayChannel(PayChannelCode.ALI)
-                        .setAmount(payModeParam.getAmount()));
+                new RefundableInfo().setPayChannel(PayChannelCode.ALI).setAmount(payModeParam.getAmount()));
         payment.setRefundableInfo(JSONUtil.toJsonStr(refundableInfos));
     }
 
@@ -80,8 +75,7 @@ public class AliPaymentService {
     public void updateAsyncSuccess(Long id, PayModeParam payModeParam, String tradeNo) {
 
         // 更新支付记录
-        Payment payment =
-                paymentManager.findById(id).orElseThrow(() -> new PayFailureException("支付记录不存在"));
+        Payment payment = paymentManager.findById(id).orElseThrow(() -> new PayFailureException("支付记录不存在"));
 
         // 创建支付宝支付记录
         AliPayment aliPayment = new AliPayment();
@@ -100,26 +94,24 @@ public class AliPaymentService {
     /** 取消状态 */
     public void updateClose(Long paymentId) {
         Optional<AliPayment> aliPaymentOptional = aliPaymentManager.findByPaymentId(paymentId);
-        aliPaymentOptional.ifPresent(
-                aliPayment -> {
-                    aliPayment.setPayStatus(PayStatusCode.TRADE_CANCEL);
-                    aliPaymentManager.updateById(aliPayment);
-                });
+        aliPaymentOptional.ifPresent(aliPayment -> {
+            aliPayment.setPayStatus(PayStatusCode.TRADE_CANCEL);
+            aliPaymentManager.updateById(aliPayment);
+        });
     }
 
     /** 更新退款 */
     public void updatePayRefund(Long paymentId, BigDecimal amount) {
         Optional<AliPayment> aliPaymentOptional = aliPaymentManager.findByPaymentId(paymentId);
-        aliPaymentOptional.ifPresent(
-                payment -> {
-                    BigDecimal refundableBalance = payment.getRefundableBalance().subtract(amount);
-                    payment.setRefundableBalance(refundableBalance);
-                    if (BigDecimalUtil.compareTo(refundableBalance, BigDecimal.ZERO) == 0) {
-                        payment.setPayStatus(PayStatusCode.TRADE_REFUNDED);
-                    } else {
-                        payment.setPayStatus(PayStatusCode.TRADE_REFUNDING);
-                    }
-                    aliPaymentManager.updateById(payment);
-                });
+        aliPaymentOptional.ifPresent(payment -> {
+            BigDecimal refundableBalance = payment.getRefundableBalance().subtract(amount);
+            payment.setRefundableBalance(refundableBalance);
+            if (BigDecimalUtil.compareTo(refundableBalance, BigDecimal.ZERO) == 0) {
+                payment.setPayStatus(PayStatusCode.TRADE_REFUNDED);
+            } else {
+                payment.setPayStatus(PayStatusCode.TRADE_REFUNDING);
+            }
+            aliPaymentManager.updateById(payment);
+        });
     }
 }

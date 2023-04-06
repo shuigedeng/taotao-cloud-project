@@ -32,8 +32,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserProvider {
 
-    @Autowired private RedisUtil redisUtil;
-    @Autowired private CacheKeyUtil cacheKeyUtil;
+    @Autowired
+    private RedisUtil redisUtil;
+
+    @Autowired
+    private CacheKeyUtil cacheKeyUtil;
 
     /** 获取token */
     public static String getToken() {
@@ -57,9 +60,7 @@ public class UserProvider {
             tokens = JwtUtil.getRealToken(tokens);
         }
         if (tokens != null) {
-            userInfo =
-                    JsonUtil.getJsonToBean(
-                            String.valueOf(redisUtil.getString(tokens)), UserInfo.class);
+            userInfo = JsonUtil.getJsonToBean(String.valueOf(redisUtil.getString(tokens)), UserInfo.class);
         }
         if (userInfo == null) {
             userInfo = new UserInfo();
@@ -90,9 +91,7 @@ public class UserProvider {
             token = tenantId + "login_online_mobile_" + userId;
         }
         String onlineInfo = String.valueOf(redisUtil.getString(token));
-        userInfo =
-                JsonUtil.getJsonToBean(
-                        String.valueOf(redisUtil.getString(onlineInfo)), UserInfo.class);
+        userInfo = JsonUtil.getJsonToBean(String.valueOf(redisUtil.getString(onlineInfo)), UserInfo.class);
         return userInfo == null ? new UserInfo() : userInfo;
     }
 
@@ -111,8 +110,7 @@ public class UserProvider {
         String userId = userInfo.getUserId();
         long time = DateUtil.getTime(userInfo.getOverdueTime()) - DateUtil.getTime(new Date());
 
-        String authorize =
-                String.valueOf(redisUtil.getString(cacheKeyUtil.getUserAuthorize() + userId));
+        String authorize = String.valueOf(redisUtil.getString(cacheKeyUtil.getUserAuthorize() + userId));
         String loginOnlineKey = cacheKeyUtil.getLoginOnline() + userId;
         redisUtil.remove(authorize);
         // 记录Token
@@ -137,17 +135,13 @@ public class UserProvider {
         // 清除websocket登录状态
         boolean isMobileDevice = ServletUtil.getIsMobileDevice();
         String userId = String.valueOf(userInfo.getUserId());
-        String tenandId =
-                "null".equals(String.valueOf(userInfo.getTenantId())) ? "" : userInfo.getTenantId();
-        OnlineUserModel user =
-                OnlineUserProvider.getOnlineUserList().stream()
-                        .filter(
-                                t ->
-                                        userId.equals(t.getUserId())
-                                                && tenandId.equals(t.getTenantId())
-                                                && isMobileDevice == t.getIsMobileDevice())
-                        .findFirst()
-                        .orElse(null);
+        String tenandId = "null".equals(String.valueOf(userInfo.getTenantId())) ? "" : userInfo.getTenantId();
+        OnlineUserModel user = OnlineUserProvider.getOnlineUserList().stream()
+                .filter(t -> userId.equals(t.getUserId())
+                        && tenandId.equals(t.getTenantId())
+                        && isMobileDevice == t.getIsMobileDevice())
+                .findFirst()
+                .orElse(null);
         if (user != null) {
             JSONObject object = new JSONObject();
             object.put("method", "logout");
@@ -178,16 +172,11 @@ public class UserProvider {
         String userId = userInfo.getUserId();
         if (ServletUtil.getIsMobileDevice()) {
             String key =
-                    String.valueOf(
-                            redisUtil.getString(
-                                    cacheKeyUtil.getMobileLoginOnline() + userInfo.getUserId()));
+                    String.valueOf(redisUtil.getString(cacheKeyUtil.getMobileLoginOnline() + userInfo.getUserId()));
             redisUtil.remove(key);
             redisUtil.remove(cacheKeyUtil.getMobileLoginOnline() + userInfo.getUserId());
         } else {
-            String key =
-                    String.valueOf(
-                            redisUtil.getString(
-                                    cacheKeyUtil.getLoginOnline() + userInfo.getUserId()));
+            String key = String.valueOf(redisUtil.getString(cacheKeyUtil.getLoginOnline() + userInfo.getUserId()));
             redisUtil.remove(key);
             redisUtil.remove(cacheKeyUtil.getLoginOnline() + userInfo.getUserId());
         }
@@ -201,10 +190,8 @@ public class UserProvider {
         if (userId == null) {
             return;
         }
-        String onlineToken =
-                String.valueOf(redisUtil.getString(cacheKeyUtil.getLoginOnline() + userId));
-        String mobileOnlineToken =
-                String.valueOf(redisUtil.getString(cacheKeyUtil.getMobileLoginOnline() + userId));
+        String onlineToken = String.valueOf(redisUtil.getString(cacheKeyUtil.getLoginOnline() + userId));
+        String mobileOnlineToken = String.valueOf(redisUtil.getString(cacheKeyUtil.getMobileLoginOnline() + userId));
         if (!StringUtils.isEmpty(onlineToken)) {
             redisUtil.remove(cacheKeyUtil.getLoginOnline() + userId);
             redisUtil.remove(onlineToken);
@@ -244,11 +231,10 @@ public class UserProvider {
     public boolean isLogined() {
 
         UserInfo userInfo = this.get();
-        String userOnline =
-                (ServletUtil.getIsMobileDevice() == true
-                                ? cacheKeyUtil.getMobileLoginOnline()
-                                : cacheKeyUtil.getLoginOnline())
-                        + userInfo.getUserId();
+        String userOnline = (ServletUtil.getIsMobileDevice() == true
+                        ? cacheKeyUtil.getMobileLoginOnline()
+                        : cacheKeyUtil.getLoginOnline())
+                + userInfo.getUserId();
         Object online = redisUtil.getString(userOnline);
         return online == null ? true : false;
     }

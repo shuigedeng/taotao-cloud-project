@@ -41,7 +41,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EsGoodsSearchQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "关键字")
     private String keyword;

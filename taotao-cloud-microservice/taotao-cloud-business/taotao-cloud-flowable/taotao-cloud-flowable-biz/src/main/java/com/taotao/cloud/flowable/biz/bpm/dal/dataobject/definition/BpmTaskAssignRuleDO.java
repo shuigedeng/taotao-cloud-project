@@ -48,7 +48,8 @@ public class BpmTaskAssignRuleDO extends BaseDO {
     public static final String PROCESS_DEFINITION_ID_NULL = "";
 
     /** 编号 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
 
     /**
      * 流程模型编号

@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.error;
 
+import java.util.Collections;
+import java.util.List;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -34,9 +37,6 @@ import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.result.view.ViewResolver;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
  * 自定义异常处理
  *
@@ -51,39 +51,40 @@ import java.util.List;
 @EnableConfigurationProperties({ServerProperties.class, WebProperties.class})
 public class ErrorWebFluxAutoConfiguration {
 
-	private final ServerProperties serverProperties;
-	private final ApplicationContext applicationContext;
-	private final WebProperties webProperties;
-	private final List<ViewResolver> viewResolvers;
-	private final ServerCodecConfigurer serverCodecConfigurer;
+    private final ServerProperties serverProperties;
+    private final ApplicationContext applicationContext;
+    private final WebProperties webProperties;
+    private final List<ViewResolver> viewResolvers;
+    private final ServerCodecConfigurer serverCodecConfigurer;
 
-	public ErrorWebFluxAutoConfiguration(ServerProperties serverProperties,
-										 WebProperties webProperties,
-										 ObjectProvider<List<ViewResolver>> viewResolversProvider,
-										 ServerCodecConfigurer serverCodecConfigurer,
-										 ApplicationContext applicationContext) {
-		this.serverProperties = serverProperties;
-		this.applicationContext = applicationContext;
-		this.webProperties = webProperties;
-		this.viewResolvers = viewResolversProvider.getIfAvailable(Collections::emptyList);
-		this.serverCodecConfigurer = serverCodecConfigurer;
-	}
+    public ErrorWebFluxAutoConfiguration(
+            ServerProperties serverProperties,
+            WebProperties webProperties,
+            ObjectProvider<List<ViewResolver>> viewResolversProvider,
+            ServerCodecConfigurer serverCodecConfigurer,
+            ApplicationContext applicationContext) {
+        this.serverProperties = serverProperties;
+        this.applicationContext = applicationContext;
+        this.webProperties = webProperties;
+        this.viewResolvers = viewResolversProvider.getIfAvailable(Collections::emptyList);
+        this.serverCodecConfigurer = serverCodecConfigurer;
+    }
 
-	@Bean
-	@Order(Ordered.HIGHEST_PRECEDENCE)
-	public ErrorWebExceptionHandler errorWebExceptionHandler(ErrorAttributes errorAttributes) {
-		//DefaultErrorWebExceptionHandler exceptionHandler = new DefaultErrorWebExceptionHandler(errorAttributes,
-		//	 webProperties.getResources(),
-		//	this.serverProperties.getError(), applicationContext);
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public ErrorWebExceptionHandler errorWebExceptionHandler(ErrorAttributes errorAttributes) {
+        // DefaultErrorWebExceptionHandler exceptionHandler = new DefaultErrorWebExceptionHandler(errorAttributes,
+        //	 webProperties.getResources(),
+        //	this.serverProperties.getError(), applicationContext);
 
-		JsonErrorWebExceptionHandler exceptionHandler = new JsonErrorWebExceptionHandler(
-			errorAttributes,
-			webProperties.getResources(),
-			this.serverProperties.getError(),
-			this.applicationContext);
-		exceptionHandler.setViewResolvers(this.viewResolvers);
-		exceptionHandler.setMessageWriters(this.serverCodecConfigurer.getWriters());
-		exceptionHandler.setMessageReaders(this.serverCodecConfigurer.getReaders());
-		return exceptionHandler;
-	}
+        JsonErrorWebExceptionHandler exceptionHandler = new JsonErrorWebExceptionHandler(
+                errorAttributes,
+                webProperties.getResources(),
+                this.serverProperties.getError(),
+                this.applicationContext);
+        exceptionHandler.setViewResolvers(this.viewResolvers);
+        exceptionHandler.setMessageWriters(this.serverCodecConfigurer.getWriters());
+        exceptionHandler.setMessageReaders(this.serverCodecConfigurer.getReaders());
+        return exceptionHandler;
+    }
 }

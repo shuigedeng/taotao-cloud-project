@@ -40,7 +40,8 @@ import lombok.NoArgsConstructor;
 @Schema(name = "MemberQuery", description = "会员query")
 public class MemberPageQuery implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "用户昵称")
     private String nickname;

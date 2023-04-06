@@ -36,7 +36,8 @@ public class ChatGroupInfo extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId private Long infoId;
+    @TableId
+    private Long infoId;
     /** 用户id */
     private Long userId;
     /** 群组id */

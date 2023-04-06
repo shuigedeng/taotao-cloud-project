@@ -37,8 +37,7 @@ public interface MessageTemplateDao
      * @param pageable 分页对象
      * @return
      */
-    List<MessageTemplate> findAllByIsDeletedEqualsOrderByUpdatedDesc(
-            Integer deleted, Pageable pageable);
+    List<MessageTemplate> findAllByIsDeletedEqualsOrderByUpdatedDesc(Integer deleted, Pageable pageable);
 
     /**
      * 统计未删除的条数

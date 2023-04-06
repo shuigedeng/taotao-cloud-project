@@ -52,13 +52,11 @@ public class WxH5 extends WxpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         WxH5OrderRQ bizRQ = (WxH5OrderRQ) rq;
 
-        WxServiceWrapper wxServiceWrapper =
-                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
         WxPayService wxPayService = wxServiceWrapper.getWxPayService();
         wxPayService.getConfig().setTradeType(WxPayConstants.TradeType.MWEB);
 
@@ -92,10 +90,9 @@ public class WxH5 extends WxpayPaymentService {
             JSONObject resJSON = WxpayV3Util.unifiedOrderV3(reqUrl, reqJSON, wxPayService);
 
             String payUrl = resJSON.getString("h5_url");
-            payUrl =
-                    sysConfigService.getDBApplicationConfig().getPaySiteUrl()
-                            + "/api/common/payUrl/"
-                            + Base64.encode(payUrl);
+            payUrl = sysConfigService.getDBApplicationConfig().getPaySiteUrl()
+                    + "/api/common/payUrl/"
+                    + Base64.encode(payUrl);
             if (CS.PAY_DATA_TYPE.CODE_IMG_URL.equals(bizRQ.getPayDataType())) { // 二维码图片地址
                 res.setCodeImgUrl(sysConfigService.getDBApplicationConfig().genScanImgUrl(payUrl));
             } else { // 默认都为 payUrl方式

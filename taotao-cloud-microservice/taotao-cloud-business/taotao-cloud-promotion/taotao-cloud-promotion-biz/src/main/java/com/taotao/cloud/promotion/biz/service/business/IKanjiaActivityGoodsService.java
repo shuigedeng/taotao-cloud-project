@@ -53,8 +53,7 @@ public interface IKanjiaActivityGoodsService extends IService<KanjiaActivityGood
      * @return {@link IPage }<{@link KanjiaActivityGoods }>
      * @since 2022-04-27 16:43:36
      */
-    IPage<KanjiaActivityGoods> getForPage(
-            KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery pageVO);
+    IPage<KanjiaActivityGoods> getForPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery pageVO);
 
     /**
      * 查询砍价活动商品分页信息

@@ -117,18 +117,41 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 
-    @Autowired private ServiceAllUtil serviceUtil;
-    @Autowired private FlowCandidatesService flowCandidatesService;
-    @Autowired private FlowTaskNodeService flowTaskNodeService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
-    @Autowired private FlowTaskOperatorRecordService flowTaskOperatorRecordService;
-    @Autowired private FlowTaskCirculateService flowTaskCirculateService;
-    @Autowired private FlowEngineService flowEngineService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FlowDataUtil flowDataUtil;
-    @Autowired private RedisRepository redisRepository;
-    @Autowired private FlowMsgUtil flowMsgUtil;
-    @Autowired private FlowDelegateService flowDelegateService;
+    @Autowired
+    private ServiceAllUtil serviceUtil;
+
+    @Autowired
+    private FlowCandidatesService flowCandidatesService;
+
+    @Autowired
+    private FlowTaskNodeService flowTaskNodeService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
+
+    @Autowired
+    private FlowTaskOperatorRecordService flowTaskOperatorRecordService;
+
+    @Autowired
+    private FlowTaskCirculateService flowTaskCirculateService;
+
+    @Autowired
+    private FlowEngineService flowEngineService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FlowDataUtil flowDataUtil;
+
+    @Autowired
+    private RedisRepository redisRepository;
+
+    @Autowired
+    private FlowMsgUtil flowMsgUtil;
+
+    @Autowired
+    private FlowDelegateService flowDelegateService;
 
     /** 节点id */
     private String taskNodeId = "taskNodeId";
@@ -148,13 +171,8 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         String flowId = flowModel.getFlowId();
         UserInfo userInfo = userProvider.get();
         flowModel.setStatus(
-                StrUtil.isNotEmpty(flowModel.getStatus())
-                        ? flowModel.getStatus()
-                        : FlowStatusEnum.save.getMessage());
-        String userId =
-                StrUtil.isNotEmpty(flowModel.getUserId())
-                        ? flowModel.getUserId()
-                        : userInfo.getUserId();
+                StrUtil.isNotEmpty(flowModel.getStatus()) ? flowModel.getStatus() : FlowStatusEnum.save.getMessage());
+        String userId = StrUtil.isNotEmpty(flowModel.getUserId()) ? flowModel.getUserId() : userInfo.getUserId();
         // 流程引擎
         FlowEngineEntity engine = flowEngineService.getInfo(flowId);
         boolean flag = flowModel.getId() == null;
@@ -203,38 +221,33 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 保存节点
         this.nodeListAll(taskNodeList, flowModel, true);
         // 获取下一个节点
-        Optional<FlowTaskNodeEntity> first =
-                taskNodeList.stream()
-                        .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
-                        .findFirst();
+        Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
+                .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
+                .findFirst();
         if (first.isEmpty()) {
             throw new WorkFlowException(MsgCode.COD001.get());
         }
         FlowTaskNodeEntity startNode = first.get();
         List<String> nodeList = Arrays.asList(startNode.getNodeNext().split(","));
         // 获取下一审批人
-        List<ChildNodeList> nextOperatorList =
-                nodeListAll.stream()
-                        .filter(t -> nodeList.contains(t.getCustom().getNodeId()))
-                        .collect(Collectors.toList());
-        Map<String, List<String>> nodeIdAll =
-                this.nextOperator(operatorList, nextOperatorList, flowTask, flowModel);
+        List<ChildNodeList> nextOperatorList = nodeListAll.stream()
+                .filter(t -> nodeList.contains(t.getCustom().getNodeId()))
+                .collect(Collectors.toList());
+        Map<String, List<String>> nodeIdAll = this.nextOperator(operatorList, nextOperatorList, flowTask, flowModel);
         // 审核人
         flowTaskOperatorService.create(operatorList);
         // 更新关联子流程id
         for (String nodeId : nodeIdAll.keySet()) {
             FlowTaskNodeEntity entity = flowTaskNodeService.getInfo(nodeId);
             if (entity != null) {
-                ChildNodeList childNodeList =
-                        JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNodeList = JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
                 childNodeList.getCustom().setTaskId(nodeIdAll.get(nodeId));
                 entity.setNodePropertyJson(JsonUtils.toJSONString(childNodeList));
                 flowTaskNodeService.update(entity);
             }
         }
         // 提交记录
-        ChildNodeList start =
-                JsonUtils.toObject(startNode.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList start = JsonUtils.toObject(startNode.getNodePropertyJson(), ChildNodeList.class);
         boolean request = requestData(start, flowModel.getFormData());
         if (request) {
             throw new WorkFlowException(MsgCode.WF001.get());
@@ -266,8 +279,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             dateList.add(date);
         }
         startOperator.setDescription(JsonUtils.toJSONString(dateList));
-        List<FlowTaskOperatorEntity> operatorAll =
-                this.timer(startOperator, taskNodeList, operatorList);
+        List<FlowTaskOperatorEntity> operatorAll = this.timer(startOperator, taskNodeList, operatorList);
         for (FlowTaskOperatorEntity operatorTime : operatorAll) {
             List<Date> dateAll = JsonUtils.toList(operatorTime.getDescription(), Date.class);
             if (dateAll.size() > 0) {
@@ -330,8 +342,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             }
         }
         // 更新新流程
-        ChildNode childNodeAll =
-                JsonUtils.toObject(flowTask.getFlowTemplateJson(), ChildNode.class);
+        ChildNode childNodeAll = JsonUtils.toObject(flowTask.getFlowTemplateJson(), ChildNode.class);
         List<ChildNodeList> nodeListAll = new ArrayList<>();
         List<ConditionList> conditionListAll = new ArrayList<>();
         List<FlowTaskNodeEntity> taskNodeLis = new ArrayList<>();
@@ -344,28 +355,22 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         }
         UserInfo userInfo = userProvider.get();
         flowModel.setOperatorId(operator.getId());
-        String userId =
-                StrUtil.isNotEmpty(flowModel.getUserId())
-                        ? flowModel.getUserId()
-                        : userInfo.getUserId();
+        String userId = StrUtil.isNotEmpty(flowModel.getUserId()) ? flowModel.getUserId() : userInfo.getUserId();
         // 流程所有节点
         List<FlowTaskNodeEntity> flowTaskNodeAll = flowTaskNodeService.getList(flowTask.getId());
-        List<FlowTaskNodeEntity> taskNodeList =
-                flowTaskNodeAll.stream()
-                        .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
-                        .collect(Collectors.toList());
+        List<FlowTaskNodeEntity> taskNodeList = flowTaskNodeAll.stream()
+                .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
+                .collect(Collectors.toList());
         // 当前节点
-        Optional<FlowTaskNodeEntity> first =
-                taskNodeList.stream()
-                        .filter(m -> m.getId().equals(operator.getTaskNodeId()))
-                        .findFirst();
+        Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
+                .filter(m -> m.getId().equals(operator.getTaskNodeId()))
+                .findFirst();
         if (first.isEmpty()) {
             throw new WorkFlowException(MsgCode.COD001.get());
         }
         FlowTaskNodeEntity taskNode = first.get();
         // 当前节点属性
-        ChildNodeList nodeModel =
-                JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList nodeModel = JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
         boolean request = requestData(nodeModel, flowModel.getFormData());
         if (request) {
             throw new WorkFlowException(MsgCode.WF001.get());
@@ -398,16 +403,13 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 更新下一节点
         List<FlowTaskOperatorEntity> operatorList = new ArrayList<>();
         // 获取下一审批人
-        List<FlowTaskNodeEntity> nextNode =
-                taskNodeList.stream()
-                        .filter(t -> taskNode.getNodeNext().contains(t.getNodeCode()))
-                        .collect(Collectors.toList());
+        List<FlowTaskNodeEntity> nextNode = taskNodeList.stream()
+                .filter(t -> taskNode.getNodeNext().contains(t.getNodeCode()))
+                .collect(Collectors.toList());
         List<ChildNodeList> nextOperatorList = new ArrayList<>();
-        List<FlowTaskNodeEntity> result =
-                this.isNextAll(taskNodeList, nextNode, taskNode, flowModel);
+        List<FlowTaskNodeEntity> result = this.isNextAll(taskNodeList, nextNode, taskNode, flowModel);
         for (FlowTaskNodeEntity entity : result) {
-            ChildNodeList node =
-                    JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList node = JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
             nextOperatorList.add(node);
         }
         // 节点事件
@@ -419,15 +421,12 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         flowTaskService.update(flowTask);
         // 新增审批候选人
         Map<String, List<String>> candidateList =
-                flowModel.getCandidateList() != null
-                        ? flowModel.getCandidateList()
-                        : new HashMap<>();
+                flowModel.getCandidateList() != null ? flowModel.getCandidateList() : new HashMap<>();
         for (String key : candidateList.keySet()) {
-            FlowTaskNodeEntity taskNodeEntity =
-                    taskNodeList.stream()
-                            .filter(t -> t.getNodeCode().equals(key))
-                            .findFirst()
-                            .orElse(null);
+            FlowTaskNodeEntity taskNodeEntity = taskNodeList.stream()
+                    .filter(t -> t.getNodeCode().equals(key))
+                    .findFirst()
+                    .orElse(null);
             if (taskNodeEntity != null) {
                 List<String> list = candidateList.get(key);
                 FlowCandidatesEntity entity = new FlowCandidatesEntity();
@@ -441,15 +440,13 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             }
         }
         // 下个节点
-        Map<String, List<String>> nodeIdAll =
-                this.nextOperator(operatorList, nextOperatorList, flowTask, flowModel);
+        Map<String, List<String>> nodeIdAll = this.nextOperator(operatorList, nextOperatorList, flowTask, flowModel);
         flowTaskOperatorService.create(operatorList);
         // 更新关联子流程id
         for (String nodeId : nodeIdAll.keySet()) {
             FlowTaskNodeEntity entity = flowTaskNodeService.getInfo(nodeId);
             if (entity != null) {
-                ChildNodeList childNodeList =
-                        JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNodeList = JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
                 childNodeList.getCustom().setTaskId(nodeIdAll.get(nodeId));
                 entity.setNodePropertyJson(JsonUtils.toJSONString(childNodeList));
                 flowTaskNodeService.update(entity);
@@ -483,8 +480,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         flowMsgModel.setTaskNodeEntity(taskNode);
         flowMsgModel.setTaskEntity(flowTask);
         flowMsgModel.setEngine(engine);
-        flowMsgModel.setTitle(
-                StrUtil.isNotEmpty(flowModel.getFreeApproverUserId()) ? "已被【指派】" : "");
+        flowMsgModel.setTitle(StrUtil.isNotEmpty(flowModel.getFreeApproverUserId()) ? "已被【指派】" : "");
         flowMsgUtil.message(flowMsgModel);
     }
 
@@ -501,33 +497,26 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
 
     @Override
     @DSTransactional
-    public void reject(
-            FlowTaskEntity flowTask, FlowTaskOperatorEntity operator, FlowModel flowModel)
+    public void reject(FlowTaskEntity flowTask, FlowTaskOperatorEntity operator, FlowModel flowModel)
             throws WorkFlowException {
         UserInfo userInfo = userProvider.get();
-        String userId =
-                StrUtil.isNotEmpty(flowModel.getUserId())
-                        ? flowModel.getUserId()
-                        : userInfo.getUserId();
+        String userId = StrUtil.isNotEmpty(flowModel.getUserId()) ? flowModel.getUserId() : userInfo.getUserId();
         // 流程所有节点
         List<FlowTaskNodeEntity> flowTaskNodeAll = flowTaskNodeService.getList(flowTask.getId());
-        List<FlowTaskNodeEntity> taskNodeList =
-                flowTaskNodeAll.stream()
-                        .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
-                        .collect(Collectors.toList());
+        List<FlowTaskNodeEntity> taskNodeList = flowTaskNodeAll.stream()
+                .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
+                .collect(Collectors.toList());
         // 当前节点
-        Optional<FlowTaskNodeEntity> first =
-                taskNodeList.stream()
-                        .filter(m -> m.getId().equals(operator.getTaskNodeId()))
-                        .findFirst();
+        Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
+                .filter(m -> m.getId().equals(operator.getTaskNodeId()))
+                .findFirst();
         if (first.isEmpty()) {
             throw new WorkFlowException(MsgCode.COD001.get());
         }
         FlowTaskNodeEntity taskNode = first.get();
         FlowEngineEntity engine = flowEngineService.getInfo(flowTask.getFlowId());
         // 当前节点属性
-        ChildNodeList nodeModel =
-                JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList nodeModel = JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
         // 驳回记录
         FlowTaskOperatorRecordEntity operatorRecord = new FlowTaskOperatorRecordEntity();
         // 审批数据赋值
@@ -562,16 +551,14 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<FlowTaskNodeEntity> upAll =
                 this.isUpAll(taskNodeList, taskNode, isReject, thisStepAll, rejectList, thisStepId);
         for (FlowTaskNodeEntity entity : upAll) {
-            ChildNodeList node =
-                    JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList node = JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
             nextOperatorList.add(node);
         }
         // 驳回节点
         List<FlowTaskOperatorEntity> operatorList = new ArrayList<>();
         // 如果开始节点就不需要找下一节点
-        boolean isStart =
-                nextOperatorList.stream()
-                        .anyMatch(t -> FlowNature.NodeStart.equals(t.getCustom().getType()));
+        boolean isStart = nextOperatorList.stream()
+                .anyMatch(t -> FlowNature.NodeStart.equals(t.getCustom().getType()));
         if (!isStart) {
             // 赋值数据
             flowModel.setProcessId(flowTask.getId());
@@ -581,8 +568,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             this.nextOperator(operatorList, nextOperatorList, flowTask, flowModel);
             // 驳回节点之后的状态修改
             flowTaskNodeService.updateCompletion(rejectList, 0);
-            Set<String> uptList =
-                    upAll.stream().map(FlowTaskNodeEntity::getId).collect(Collectors.toSet());
+            Set<String> uptList = upAll.stream().map(FlowTaskNodeEntity::getId).collect(Collectors.toSet());
             flowTaskOperatorRecordService.updateStatus(uptList, flowTask.getId());
         } else {
             flowTaskNodeService.update(flowTask.getId());
@@ -594,8 +580,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<String> stepNameList = new ArrayList<>();
         List<String> progressList = new ArrayList<>();
         for (FlowTaskNodeEntity taskNodes : thisStepAll) {
-            ChildNodeList childNode =
-                    JsonUtils.toObject(taskNodes.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.toObject(taskNodes.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             String progress = properties.getProgress();
             if (StrUtil.isNotEmpty(progress)) {
@@ -607,13 +592,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 驳回比例不够，不修改当前节点
         if (thisStepAll.size() > 0) {
             Collections.sort(progressList);
-            flowTask.setCompletion(
-                    progressList.size() > 0 ? Integer.parseInt(progressList.get(0)) : 0);
+            flowTask.setCompletion(progressList.size() > 0 ? Integer.parseInt(progressList.get(0)) : 0);
             flowTask.setThisStepId(String.join(",", stepIdList));
             flowTask.setThisStep(String.join(",", stepNameList));
             // 判断驳回节点是否是开发节点
-            flowTask.setStatus(
-                    isStart ? FlowTaskStatusEnum.Reject.getCode() : flowTask.getStatus());
+            flowTask.setStatus(isStart ? FlowTaskStatusEnum.Reject.getCode() : flowTask.getStatus());
             // 会签拒绝更新未审批用户
             Set<String> rejectNodeList = new HashSet<>();
             this.upAll(rejectNodeList, rejectList, taskNodeList);
@@ -664,19 +647,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param rejectList
      * @param taskNodeList
      */
-    private void upAll(
-            Set<String> rejectNodeList,
-            List<String> rejectList,
-            List<FlowTaskNodeEntity> taskNodeList) {
-        List<FlowTaskNodeEntity> nodeList =
-                taskNodeList.stream().filter(t -> rejectList.contains(t.getId())).toList();
+    private void upAll(Set<String> rejectNodeList, List<String> rejectList, List<FlowTaskNodeEntity> taskNodeList) {
+        List<FlowTaskNodeEntity> nodeList = taskNodeList.stream()
+                .filter(t -> rejectList.contains(t.getId()))
+                .toList();
         for (FlowTaskNodeEntity taskNode : nodeList) {
-            List<String> list =
-                    StrUtil.isNotEmpty(taskNode.getNodeNext())
-                            ? Arrays.asList(taskNode.getNodeNext().split(","))
-                            : new ArrayList<>();
-            List<FlowTaskNodeEntity> taskList =
-                    taskNodeList.stream().filter(t -> list.contains(t.getNodeCode())).toList();
+            List<String> list = StrUtil.isNotEmpty(taskNode.getNodeNext())
+                    ? Arrays.asList(taskNode.getNodeNext().split(","))
+                    : new ArrayList<>();
+            List<FlowTaskNodeEntity> taskList = taskNodeList.stream()
+                    .filter(t -> list.contains(t.getNodeCode()))
+                    .toList();
             List<String> rejectListAll =
                     taskList.stream().map(FlowTaskNodeEntity::getId).collect(Collectors.toList());
             rejectNodeList.add(taskNode.getId());
@@ -690,11 +671,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             throws WorkFlowException {
         UserInfo userInfo = userProvider.get();
         // 撤回经办
-        FlowTaskOperatorEntity operatorEntity =
-                flowTaskOperatorService.getInfo(operatorRecord.getTaskOperatorId());
+        FlowTaskOperatorEntity operatorEntity = flowTaskOperatorService.getInfo(operatorRecord.getTaskOperatorId());
         // 撤回节点
-        FlowTaskNodeEntity flowTaskNodeEntity =
-                flowTaskNodeService.getInfo(operatorRecord.getTaskNodeId());
+        FlowTaskNodeEntity flowTaskNodeEntity = flowTaskNodeService.getInfo(operatorRecord.getTaskNodeId());
         // 撤回任务
         FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(operatorRecord.getTaskId());
         FlowEngineEntity engine = flowEngineService.getInfo(flowTaskEntity.getFlowId());
@@ -709,8 +688,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                         .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
                         .toList();
         // 撤回节点属性
-        ChildNodeList nodeModel =
-                JsonUtils.toObject(flowTaskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList nodeModel = JsonUtils.toObject(flowTaskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
         // 拒绝不撤回
         if (FlowNature.ProcessCompletion.equals(operatorEntity.getHandleStatus())) {
             throw new WorkFlowException(MsgCode.WF104.get());
@@ -721,17 +699,12 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             throw new WorkFlowException(MsgCode.WF105.get());
         }
         // 撤回节点下一节点已操作
-        List<FlowTaskOperatorEntity> recallNextOperatorList =
-                flowTaskOperatorEntityList.stream()
-                        .filter(x -> flowTaskNodeEntity.getNodeNext().contains(x.getNodeCode()))
-                        .toList();
-        boolean isRecall =
-                recallNextOperatorList.stream()
-                        .anyMatch(
-                                t ->
-                                        FlowNature.AuditCompletion.equals(t.getCompletion())
-                                                && FlowNodeEnum.Process.getCode()
-                                                        .equals(t.getState()));
+        List<FlowTaskOperatorEntity> recallNextOperatorList = flowTaskOperatorEntityList.stream()
+                .filter(x -> flowTaskNodeEntity.getNodeNext().contains(x.getNodeCode()))
+                .toList();
+        boolean isRecall = recallNextOperatorList.stream()
+                .anyMatch(t -> FlowNature.AuditCompletion.equals(t.getCompletion())
+                        && FlowNodeEnum.Process.getCode().equals(t.getState()));
         if (isRecall) {
             throw new WorkFlowException(MsgCode.WF106.get());
         }
@@ -752,8 +725,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<String> delOperatorRecordIds = new ArrayList<>();
         for (FlowTaskOperatorEntity item : operatorList) {
             FlowTaskOperatorRecordEntity record =
-                    flowTaskOperatorRecordService.getInfo(
-                            item.getTaskId(), item.getTaskNodeId(), item.getId());
+                    flowTaskOperatorRecordService.getInfo(item.getTaskId(), item.getTaskNodeId(), item.getId());
             if (record != null) {
                 delOperatorRecordIds.add(record.getId());
             }
@@ -761,20 +733,16 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 撤回节点是否完成
         if (FlowNature.AuditCompletion.equals(flowTaskNodeEntity.getCompletion())) {
             // 撤回节点下一节点经办删除
-            List<String> idAll =
-                    recallNextOperatorList.stream()
-                            .map(FlowTaskOperatorEntity::getId)
-                            .collect(Collectors.toList());
+            List<String> idAll = recallNextOperatorList.stream()
+                    .map(FlowTaskOperatorEntity::getId)
+                    .collect(Collectors.toList());
             flowTaskOperatorService.updateTaskOperatorState(idAll);
-            List<FlowTaskOperatorEntity> hanleOperatorList =
-                    flowTaskOperatorEntityList.stream()
-                            .filter(
-                                    x ->
-                                            x.getTaskNodeId().equals(operatorRecord.getTaskNodeId())
-                                                    && Objects.isNull(x.getHandleStatus())
-                                                    && Objects.isNull(x.getHandleTime())
-                                                    && Objects.isNull(x.getParentId()))
-                            .toList();
+            List<FlowTaskOperatorEntity> hanleOperatorList = flowTaskOperatorEntityList.stream()
+                    .filter(x -> x.getTaskNodeId().equals(operatorRecord.getTaskNodeId())
+                            && Objects.isNull(x.getHandleStatus())
+                            && Objects.isNull(x.getHandleTime())
+                            && Objects.isNull(x.getParentId()))
+                    .toList();
             for (FlowTaskOperatorEntity taskOperator : hanleOperatorList) {
                 taskOperator.setCompletion(FlowNature.ProcessCompletion);
             }
@@ -783,14 +751,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<String> stepIdList = new ArrayList<>();
             List<String> stepNameList = new ArrayList<>();
             List<String> progressList = new ArrayList<>();
-            List<FlowTaskNodeEntity> recallNodeList =
-                    flowTaskNodeEntityList.stream()
-                            .filter(x -> flowTaskNodeEntity.getSortCode().equals(x.getSortCode()))
-                            .toList();
+            List<FlowTaskNodeEntity> recallNodeList = flowTaskNodeEntityList.stream()
+                    .filter(x -> flowTaskNodeEntity.getSortCode().equals(x.getSortCode()))
+                    .toList();
             for (FlowTaskNodeEntity taskNodeEntity : recallNodeList) {
-                ChildNodeList childNode =
-                        JsonUtils.toObject(
-                                taskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNode = JsonUtils.toObject(taskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
                 Properties properties = childNode.getProperties();
                 String progress = properties.getProgress();
                 if (StrUtil.isNotEmpty(progress)) {
@@ -804,8 +769,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 }
             }
             // 更新当前节点
-            flowTaskEntity.setCompletion(
-                    progressList.size() > 0 ? Integer.parseInt(progressList.get(0)) : 0);
+            flowTaskEntity.setCompletion(progressList.size() > 0 ? Integer.parseInt(progressList.get(0)) : 0);
             flowTaskEntity.setThisStepId(String.join(",", stepIdList));
             flowTaskEntity.setThisStep(String.join(",", stepNameList));
             flowTaskEntity.setStatus(FlowTaskStatusEnum.Handle.getCode());
@@ -815,19 +779,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             flowTaskOperatorService.update(taskOperator);
         }
         // 撤回删除候选人
-        List<String> nextNodeList =
-                flowTaskNodeEntityList.stream()
-                        .filter(t -> t.getSortCode().equals(flowTaskNodeEntity.getSortCode() + 1))
-                        .map(FlowTaskNodeEntity::getId)
-                        .collect(Collectors.toList());
+        List<String> nextNodeList = flowTaskNodeEntityList.stream()
+                .filter(t -> t.getSortCode().equals(flowTaskNodeEntity.getSortCode() + 1))
+                .map(FlowTaskNodeEntity::getId)
+                .collect(Collectors.toList());
         String handId = userInfo.getUserId();
         flowCandidatesService.delete(nextNodeList, handId, operatorRecord.getTaskOperatorId());
         // 删除经办记录
         delOperatorRecordIds.add(operatorRecord.getId());
         flowTaskOperatorRecordService.updateStatus(delOperatorRecordIds);
         // 撤回记录
-        FlowTaskOperatorEntity operator =
-                JsonUtils.toObject(operatorRecord, FlowTaskOperatorEntity.class);
+        FlowTaskOperatorEntity operator = JsonUtils.toObject(operatorRecord, FlowTaskOperatorEntity.class);
         operator.setId(operatorRecord.getTaskOperatorId());
         // 审批数据赋值
         FlowOperatordModel flowOperatordModel = new FlowOperatordModel();
@@ -847,11 +809,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
     public void revoke(FlowTaskEntity flowTask, FlowModel flowModel) {
         UserInfo userInfo = userProvider.get();
         List<FlowTaskNodeEntity> list = flowTaskNodeService.getList(flowTask.getId());
-        FlowTaskNodeEntity start =
-                list.stream()
-                        .filter(t -> FlowNature.NodeStart.equals(String.valueOf(t.getNodeType())))
-                        .findFirst()
-                        .orElse(null);
+        FlowTaskNodeEntity start = list.stream()
+                .filter(t -> FlowNature.NodeStart.equals(String.valueOf(t.getNodeType())))
+                .findFirst()
+                .orElse(null);
         // 删除节点
         flowTaskNodeService.deleteByTaskId(flowTask.getId());
         // 删除经办
@@ -859,12 +820,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 删除候选人
         flowCandidatesService.deleteByTaskId(flowTask.getId());
         // 修改经办记录状态
-        List<FlowTaskOperatorRecordEntity> recordList =
-                flowTaskOperatorRecordService.getList(flowTask.getId());
+        List<FlowTaskOperatorRecordEntity> recordList = flowTaskOperatorRecordService.getList(flowTask.getId());
         List<String> recordListAll =
-                recordList.stream()
-                        .map(FlowTaskOperatorRecordEntity::getId)
-                        .collect(Collectors.toList());
+                recordList.stream().map(FlowTaskOperatorRecordEntity::getId).collect(Collectors.toList());
         flowTaskOperatorRecordService.updateStatus(recordListAll);
         // 更新当前节点
         flowTask.setThisStepId(start.getNodeCode());
@@ -880,8 +838,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowTaskOperatorRecordEntity operatorRecord = new FlowTaskOperatorRecordEntity();
         operatorRecord.setTaskId(flowTask.getId());
         operatorRecord.setHandleStatus(FlowRecordEnum.revoke.getCode());
-        FlowTaskOperatorEntity operator =
-                JsonUtils.toObject(operatorRecord, FlowTaskOperatorEntity.class);
+        FlowTaskOperatorEntity operator = JsonUtils.toObject(operatorRecord, FlowTaskOperatorEntity.class);
         // 审批数据赋值
         FlowOperatordModel flowOperatordModel = new FlowOperatordModel();
         flowOperatordModel.setStatus(FlowRecordEnum.revoke.getCode());
@@ -891,8 +848,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         this.operatorRecord(operatorRecord, flowOperatordModel);
         flowTaskOperatorRecordService.create(operatorRecord);
         // 撤回事件
-        ChildNodeList nodeModel =
-                JsonUtils.toObject(start.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList nodeModel = JsonUtils.toObject(start.getNodePropertyJson(), ChildNodeList.class);
         flowModel.setFormData(JsonUtils.toMap(flowTask.getFlowFormContentJson()));
         operatorRecord.setHandleStatus(FlowTaskStatusEnum.Revoke.getCode());
         flowMsgUtil.event(3, nodeModel, operatorRecord, flowModel);
@@ -927,14 +883,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
     @Override
     @DSTransactional
     public boolean assign(String id, FlowModel flowModel) throws WorkFlowException {
-        List<FlowTaskOperatorEntity> list =
-                flowTaskOperatorService.getList(id).stream()
-                        .filter(
-                                t ->
-                                        FlowNodeEnum.Process.getCode().equals(t.getState())
-                                                && flowModel.getNodeCode().equals(t.getNodeCode())
-                                                && FlowNature.ParentId.equals(t.getParentId()))
-                        .toList();
+        List<FlowTaskOperatorEntity> list = flowTaskOperatorService.getList(id).stream()
+                .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState())
+                        && flowModel.getNodeCode().equals(t.getNodeCode())
+                        && FlowNature.ParentId.equals(t.getParentId()))
+                .toList();
         boolean isOk = list.size() > 0;
         if (list.size() > 0) {
             FlowTaskOperatorEntity entity = list.get(0);
@@ -968,11 +921,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             flowTaskOperatorRecordService.create(operatorRecord);
             // 发送消息
             List<FlowTaskNodeEntity> taskNodeList = flowTaskNodeService.getList(entity.getTaskId());
-            FlowTaskNodeEntity taskNode =
-                    taskNodeList.stream()
-                            .filter(t -> t.getId().equals(entity.getTaskNodeId()))
-                            .findFirst()
-                            .orElse(null);
+            FlowTaskNodeEntity taskNode = taskNodeList.stream()
+                    .filter(t -> t.getId().equals(entity.getTaskNodeId()))
+                    .findFirst()
+                    .orElse(null);
             FlowTaskEntity flowTask = flowTaskService.getInfoSubmit(entity.getTaskId());
             FlowEngineEntity engine = flowEngineService.getInfo(flowTask.getFlowId());
             FlowMsgModel flowMsgModel = new FlowMsgModel();
@@ -1012,33 +964,29 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         this.operatorRecord(operatorRecord, flowOperatordModel);
         flowTaskOperatorRecordService.create(operatorRecord);
         // 发送消息
-        List<FlowTaskNodeEntity> taskNodeList =
-                flowTaskNodeService.getList(taskOperator.getTaskId());
-        FlowTaskNodeEntity taskNode =
-                taskNodeList.stream()
-                        .filter(t -> t.getId().equals(taskOperator.getTaskNodeId()))
-                        .findFirst()
-                        .orElse(null);
-        FlowTaskEntity flowTask =
-                flowTaskService.getInfoSubmit(
-                        taskNode.getTaskId(),
-                        FlowTaskEntity::getId,
-                        FlowTaskEntity::getFullName,
-                        FlowTaskEntity::getCreatorUserId,
-                        FlowTaskEntity::getStatus,
-                        FlowTaskEntity::getFlowFormContentJson);
+        List<FlowTaskNodeEntity> taskNodeList = flowTaskNodeService.getList(taskOperator.getTaskId());
+        FlowTaskNodeEntity taskNode = taskNodeList.stream()
+                .filter(t -> t.getId().equals(taskOperator.getTaskNodeId()))
+                .findFirst()
+                .orElse(null);
+        FlowTaskEntity flowTask = flowTaskService.getInfoSubmit(
+                taskNode.getTaskId(),
+                FlowTaskEntity::getId,
+                FlowTaskEntity::getFullName,
+                FlowTaskEntity::getCreatorUserId,
+                FlowTaskEntity::getStatus,
+                FlowTaskEntity::getFlowFormContentJson);
         FlowEngineEntity engine = flowEngineService.getInfo(flowTask.getFlowId());
-        List<FlowTaskOperatorEntity> operatorList =
-                new ArrayList() {
-                    {
-                        FlowTaskOperatorEntity operatorEntity = new FlowTaskOperatorEntity();
-                        operatorEntity.setId(taskOperator.getId());
-                        operatorEntity.setTaskId(operatorRecord.getTaskId());
-                        operatorEntity.setHandleId(taskOperator.getHandleId());
-                        operatorEntity.setTaskNodeId(operatorRecord.getTaskNodeId());
-                        add(operatorEntity);
-                    }
-                };
+        List<FlowTaskOperatorEntity> operatorList = new ArrayList() {
+            {
+                FlowTaskOperatorEntity operatorEntity = new FlowTaskOperatorEntity();
+                operatorEntity.setId(taskOperator.getId());
+                operatorEntity.setTaskId(operatorRecord.getTaskId());
+                operatorEntity.setHandleId(taskOperator.getHandleId());
+                operatorEntity.setTaskNodeId(operatorRecord.getTaskNodeId());
+                add(operatorEntity);
+            }
+        };
         FlowMsgModel flowMsgModel = new FlowMsgModel();
         flowMsgModel.setCirculateList(new ArrayList<>());
         flowMsgModel.setTitle("已被【转办】");
@@ -1056,62 +1004,48 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             throws WorkFlowException {
         FlowBeforeInfoVO vo = new FlowBeforeInfoVO();
         FlowTaskEntity taskEntity = flowTaskService.getInfo(id);
-        List<FlowTaskNodeEntity> taskNodeAllList =
-                flowTaskNodeService.getList(taskEntity.getId()).stream()
-                        .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
-                        .toList();
-        List<FlowTaskNodeEntity> taskNodeList =
-                taskNodeAllList.stream()
-                        .sorted(Comparator.comparing(FlowTaskNodeEntity::getSortCode))
-                        .collect(Collectors.toList());
-        List<FlowTaskOperatorEntity> taskOperatorList =
-                flowTaskOperatorService.getList(taskEntity.getId()).stream()
-                        .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
-                        .collect(Collectors.toList());
+        List<FlowTaskNodeEntity> taskNodeAllList = flowTaskNodeService.getList(taskEntity.getId()).stream()
+                .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
+                .toList();
+        List<FlowTaskNodeEntity> taskNodeList = taskNodeAllList.stream()
+                .sorted(Comparator.comparing(FlowTaskNodeEntity::getSortCode))
+                .collect(Collectors.toList());
+        List<FlowTaskOperatorEntity> taskOperatorList = flowTaskOperatorService.getList(taskEntity.getId()).stream()
+                .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
+                .collect(Collectors.toList());
         List<FlowTaskOperatorRecordEntity> operatorRecordList =
                 flowTaskOperatorRecordService.getList(taskEntity.getId());
         boolean colorFlag = true;
         // 已办人员
         List<FlowTaskOperatorRecordModel> recordList = new ArrayList<>();
-        List<String> userIdAll =
-                operatorRecordList.stream()
-                        .map(FlowTaskOperatorRecordEntity::getHandleId)
-                        .collect(Collectors.toList());
-        userIdAll.addAll(
-                operatorRecordList.stream()
-                        .map(FlowTaskOperatorRecordEntity::getOperatorId)
-                        .toList());
+        List<String> userIdAll = operatorRecordList.stream()
+                .map(FlowTaskOperatorRecordEntity::getHandleId)
+                .collect(Collectors.toList());
+        userIdAll.addAll(operatorRecordList.stream()
+                .map(FlowTaskOperatorRecordEntity::getOperatorId)
+                .toList());
         List<UserEntity> userList = serviceUtil.getUserName(userIdAll);
         for (FlowTaskOperatorRecordEntity entity : operatorRecordList) {
-            UserEntity userName =
-                    userList.stream()
-                            .filter(t -> t.getId().equals(entity.getHandleId()))
-                            .findFirst()
-                            .orElse(null);
-            FlowTaskOperatorRecordModel infoModel =
-                    JsonUtils.toObject(entity, FlowTaskOperatorRecordModel.class);
-            infoModel.setUserName(
-                    userName != null ? userName.getRealName() + "/" + userName.getAccount() : "");
-            UserEntity operatorName =
-                    userList.stream()
-                            .filter(t -> t.getId().equals(entity.getOperatorId()))
-                            .findFirst()
-                            .orElse(null);
+            UserEntity userName = userList.stream()
+                    .filter(t -> t.getId().equals(entity.getHandleId()))
+                    .findFirst()
+                    .orElse(null);
+            FlowTaskOperatorRecordModel infoModel = JsonUtils.toObject(entity, FlowTaskOperatorRecordModel.class);
+            infoModel.setUserName(userName != null ? userName.getRealName() + "/" + userName.getAccount() : "");
+            UserEntity operatorName = userList.stream()
+                    .filter(t -> t.getId().equals(entity.getOperatorId()))
+                    .findFirst()
+                    .orElse(null);
             infoModel.setOperatorId(
-                    operatorName != null
-                            ? operatorName.getRealName() + "/" + operatorName.getAccount()
-                            : "");
+                    operatorName != null ? operatorName.getRealName() + "/" + operatorName.getAccount() : "");
             recordList.add(infoModel);
         }
         vo.setFlowTaskOperatorRecordList(recordList);
         // 流程节点
         String[] tepId =
-                taskEntity.getThisStepId() != null
-                        ? taskEntity.getThisStepId().split(",")
-                        : new String[] {};
+                taskEntity.getThisStepId() != null ? taskEntity.getThisStepId().split(",") : new String[] {};
         List<String> tepIdAll = Arrays.asList(tepId);
-        List<FlowTaskNodeModel> flowTaskNodeListAll =
-                JsonUtils.toList(taskNodeList, FlowTaskNodeModel.class);
+        List<FlowTaskNodeModel> flowTaskNodeListAll = JsonUtils.toList(taskNodeList, FlowTaskNodeModel.class);
         for (FlowTaskNodeModel model : flowTaskNodeListAll) {
             // 流程图节点颜色
             if (colorFlag || model.getCompletion() == 1) {
@@ -1127,8 +1061,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 }
             }
             // 查询审批人
-            ChildNodeList childNode =
-                    JsonUtils.toObject(model.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.toObject(model.getNodePropertyJson(), ChildNodeList.class);
             Custom custom = childNode.getCustom();
             Properties properties = childNode.getProperties();
             String type = properties.getAssigneeType();
@@ -1144,10 +1077,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<String> userName = new ArrayList<>();
             if (FlowNature.NodeStart.equals(custom.getType())) {
                 UserEntity startUser = serviceUtil.getUserInfo(taskEntity.getCreatorUserId());
-                userName.add(
-                        startUser != null
-                                ? startUser.getRealName() + "/" + startUser.getAccount()
-                                : "");
+                userName.add(startUser != null ? startUser.getRealName() + "/" + startUser.getAccount() : "");
             } else if (FlowNature.NodeSubFlow.equals(custom.getType())) {
                 List<UserEntity> list = this.childSaveList(childNode, taskEntity);
                 List<String> nameList = new ArrayList<>();
@@ -1156,15 +1086,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 }
                 userName.addAll(nameList);
             } else if (FlowTaskOperatorEnum.FreeApprover.getCode().equals(type)) {
-                List<String> operatorUserList =
-                        taskOperatorList.stream()
-                                .filter(
-                                        t ->
-                                                t.getNodeCode().equals(custom.getNodeId())
-                                                        && FlowNature.ParentId.equals(
-                                                                t.getParentId()))
-                                .map(FlowTaskOperatorEntity::getHandleId)
-                                .collect(Collectors.toList());
+                List<String> operatorUserList = taskOperatorList.stream()
+                        .filter(t -> t.getNodeCode().equals(custom.getNodeId())
+                                && FlowNature.ParentId.equals(t.getParentId()))
+                        .map(FlowTaskOperatorEntity::getHandleId)
+                        .collect(Collectors.toList());
                 List<UserEntity> userListAll = serviceUtil.getUserName(operatorUserList);
                 List<String> nameList = new ArrayList<>();
                 for (UserEntity operator : userListAll) {
@@ -1175,18 +1101,16 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 boolean isShow = true;
                 // 环节还没有经过和当前不显示审批人
                 if (FlowTaskOperatorEnum.Tache.getCode().equals(type)) {
-                    boolean completion =
-                            ("0".equals(model.getType()) || "1".equals(model.getType()));
+                    boolean completion = ("0".equals(model.getType()) || "1".equals(model.getType()));
                     if (!completion) {
                         isShow = false;
                     }
                 }
                 if (isShow) {
                     List<String> nameList = new ArrayList<>();
-                    List<String> operatorUserList =
-                            operatorList.stream()
-                                    .map(FlowTaskOperatorEntity::getHandleId)
-                                    .collect(Collectors.toList());
+                    List<String> operatorUserList = operatorList.stream()
+                            .map(FlowTaskOperatorEntity::getHandleId)
+                            .collect(Collectors.toList());
                     List<UserEntity> userListAll = serviceUtil.getUserName(operatorUserList);
                     for (UserEntity operator : userListAll) {
                         nameList.add(operator.getRealName() + "/" + operator.getAccount());
@@ -1203,8 +1127,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             FlowTaskNodeEntity taskNode = flowTaskNodeService.getInfo(taskNodeId);
             vo.setFormOperates(new ArrayList<>());
             if (taskNode != null) {
-                ChildNodeList childNode =
-                        JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList childNode = JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 approversProperties = childNode.getProperties();
                 vo.setFormOperates(childNode.getProperties().getFormOperates());
             }
@@ -1245,13 +1168,13 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<FlowTaskOperatorRecordEntity> recordListAll =
                 flowTaskOperatorRecordService.getRecordList(id, handleStatus);
         List<String> userIdAll = new ArrayList<>();
-        List<String> userIdList =
-                recordListAll.stream().map(FlowTaskOperatorRecordEntity::getHandleId).toList();
-        List<String> operatorId =
-                recordListAll.stream()
-                        .map(FlowTaskOperatorRecordEntity::getOperatorId)
-                        .filter(StrUtil::isNotEmpty)
-                        .toList();
+        List<String> userIdList = recordListAll.stream()
+                .map(FlowTaskOperatorRecordEntity::getHandleId)
+                .toList();
+        List<String> operatorId = recordListAll.stream()
+                .map(FlowTaskOperatorRecordEntity::getOperatorId)
+                .filter(StrUtil::isNotEmpty)
+                .toList();
         userIdAll.addAll(userIdList);
         userIdAll.addAll(operatorId);
         List<UserEntity> userList = serviceUtil.getUserName(userIdAll);
@@ -1259,21 +1182,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         Map<String, String> map = new HashMap<>();
         Map<String, List<FlowTaskOperatorRecordEntity>> operatorAll = new HashMap<>();
         if (FlowRecordListEnum.position.getCode().equals(category)) {
-            List<String> userId =
-                    userList.stream().map(UserEntity::getId).collect(Collectors.toList());
+            List<String> userId = userList.stream().map(UserEntity::getId).collect(Collectors.toList());
             List<UserRelationEntity> relationList = serviceUtil.getListByUserIdAll(userId);
             List<String> objectId =
-                    relationList.stream()
-                            .map(UserRelationEntity::getObjectId)
-                            .collect(Collectors.toList());
+                    relationList.stream().map(UserRelationEntity::getObjectId).collect(Collectors.toList());
             List<PositionEntity> positionListAll = serviceUtil.getPositionName(objectId);
             for (PositionEntity entity : positionListAll) {
                 map.put(entity.getId(), entity.getFullName());
-                List<String> userAll =
-                        relationList.stream()
-                                .filter(t -> t.getObjectId().equals(entity.getId()))
-                                .map(UserRelationEntity::getUserId)
-                                .toList();
+                List<String> userAll = relationList.stream()
+                        .filter(t -> t.getObjectId().equals(entity.getId()))
+                        .map(UserRelationEntity::getUserId)
+                        .toList();
                 List<FlowTaskOperatorRecordEntity> operator = new LinkedList<>();
                 for (FlowTaskOperatorRecordEntity recordEntity : recordListAll) {
                     if (userAll.contains(recordEntity.getHandleId())) {
@@ -1283,21 +1202,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 operatorAll.put(entity.getId(), operator);
             }
         } else if (FlowRecordListEnum.role.getCode().equals(category)) {
-            List<String> userId =
-                    userList.stream().map(UserEntity::getId).collect(Collectors.toList());
+            List<String> userId = userList.stream().map(UserEntity::getId).collect(Collectors.toList());
             List<UserRelationEntity> relationList = serviceUtil.getListByUserIdAll(userId);
             List<String> objectId =
-                    relationList.stream()
-                            .map(UserRelationEntity::getObjectId)
-                            .collect(Collectors.toList());
+                    relationList.stream().map(UserRelationEntity::getObjectId).collect(Collectors.toList());
             List<RoleEntity> roleListAll = serviceUtil.getListByIds(objectId);
             for (RoleEntity entity : roleListAll) {
                 map.put(entity.getId(), entity.getFullName());
-                List<String> userAll =
-                        relationList.stream()
-                                .filter(t -> t.getObjectId().equals(entity.getId()))
-                                .map(UserRelationEntity::getUserId)
-                                .toList();
+                List<String> userAll = relationList.stream()
+                        .filter(t -> t.getObjectId().equals(entity.getId()))
+                        .map(UserRelationEntity::getUserId)
+                        .toList();
                 List<FlowTaskOperatorRecordEntity> operator = new LinkedList<>();
                 for (FlowTaskOperatorRecordEntity recordEntity : recordListAll) {
                     if (userAll.contains(recordEntity.getHandleId())) {
@@ -1312,11 +1227,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<OrganizeEntity> organizeListAll = serviceUtil.getOrganizeName(organizeList);
             for (OrganizeEntity entity : organizeListAll) {
                 map.put(entity.getId(), entity.getFullName());
-                List<String> userAll =
-                        userList.stream()
-                                .filter(t -> t.getOrganizeId().equals(entity.getId()))
-                                .map(UserEntity::getId)
-                                .collect(Collectors.toList());
+                List<String> userAll = userList.stream()
+                        .filter(t -> t.getOrganizeId().equals(entity.getId()))
+                        .map(UserEntity::getId)
+                        .collect(Collectors.toList());
                 List<FlowTaskOperatorRecordEntity> operator = new LinkedList<>();
                 for (FlowTaskOperatorRecordEntity recordEntity : recordListAll) {
                     if (userAll.contains(recordEntity.getHandleId())) {
@@ -1335,22 +1249,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<FlowSummary> childList = new ArrayList<>();
             for (FlowTaskOperatorRecordEntity entity : recordList) {
                 FlowSummary childSummary = JsonUtils.toObject(entity, FlowSummary.class);
-                UserEntity user =
-                        userList.stream()
-                                .filter(t -> t.getId().equals(entity.getHandleId()))
-                                .findFirst()
-                                .orElse(null);
-                childSummary.setUserName(
-                        user != null ? user.getRealName() + "/" + user.getAccount() : "");
-                UserEntity userEntity =
-                        userList.stream()
-                                .filter(t -> t.getId().equals(entity.getOperatorId()))
-                                .findFirst()
-                                .orElse(null);
+                UserEntity user = userList.stream()
+                        .filter(t -> t.getId().equals(entity.getHandleId()))
+                        .findFirst()
+                        .orElse(null);
+                childSummary.setUserName(user != null ? user.getRealName() + "/" + user.getAccount() : "");
+                UserEntity userEntity = userList.stream()
+                        .filter(t -> t.getId().equals(entity.getOperatorId()))
+                        .findFirst()
+                        .orElse(null);
                 childSummary.setOperatorId(
-                        userEntity != null
-                                ? userEntity.getRealName() + "/" + userEntity.getAccount()
-                                : "");
+                        userEntity != null ? userEntity.getRealName() + "/" + userEntity.getAccount() : "");
                 childList.add(childSummary);
             }
             summary.setList(childList);
@@ -1381,8 +1290,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
     }
 
     @Override
-    public List<FlowCandidateVO> candidates(String id, FlowHandleModel flowCandidateModel)
-            throws WorkFlowException {
+    public List<FlowCandidateVO> candidates(String id, FlowHandleModel flowCandidateModel) throws WorkFlowException {
         List<ChildNodeList> childNodeListAll = this.childNodeListAll(id, flowCandidateModel);
         List<FlowCandidateVO> listVO = new ArrayList<>();
         for (ChildNodeList childNodeList : childNodeListAll) {
@@ -1413,10 +1321,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             list.addAll(positionList);
             list.addAll(roleList);
             List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(list);
-            List<String> userId =
-                    listByObjectIdAll.stream()
-                            .map(UserRelationEntity::getUserId)
-                            .collect(Collectors.toList());
+            List<String> userId = listByObjectIdAll.stream()
+                    .map(UserRelationEntity::getUserId)
+                    .collect(Collectors.toList());
             userId.addAll(properties.getApprovers());
             Pagination pagination = JsonUtils.getJsonToBean(flowCandidateModel, Pagination.class);
             List<UserEntity> userName = serviceUtil.getUserName(userId, pagination);
@@ -1434,8 +1341,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
     @Override
     @DSTransactional
     public void batch(FlowHandleModel flowHandleModel) throws WorkFlowException {
-        List<String> idList =
-                flowHandleModel.getIds() != null ? flowHandleModel.getIds() : new ArrayList<>();
+        List<String> idList = flowHandleModel.getIds() != null ? flowHandleModel.getIds() : new ArrayList<>();
         Integer batchType = flowHandleModel.getBatchType();
         UserInfo userInfo = userProvider.get();
         for (String id : idList) {
@@ -1463,14 +1369,12 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
     }
 
     @Override
-    public List<FlowCandidateVO> batchCandidates(String flowId, String operatorId)
-            throws WorkFlowException {
+    public List<FlowCandidateVO> batchCandidates(String flowId, String operatorId) throws WorkFlowException {
         FlowEngineEntity flowEngine = flowEngineService.getInfo(flowId);
         FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(operatorId);
         FlowTaskNodeEntity taskNode = flowTaskNodeService.getInfo(operator.getTaskNodeId());
         FlowTaskEntity task = flowTaskService.getInfo(operator.getTaskId());
-        ChildNode childNodeAll =
-                JsonUtils.toObject(flowEngine.getFlowTemplateJson(), ChildNode.class);
+        ChildNode childNodeAll = JsonUtils.toObject(flowEngine.getFlowTemplateJson(), ChildNode.class);
         // 获取流程节点
         List<ChildNodeList> nodeListAll = new ArrayList<>();
         List<ConditionList> conditionListAll = new ArrayList<>();
@@ -1478,23 +1382,16 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         FlowJsonUtil.getTemplateAll(childNodeAll, nodeListAll, conditionListAll);
         // 判断节点是否有在条件中
         boolean isCondition =
-                conditionListAll.stream()
-                        .anyMatch(t -> operator.getNodeCode().equals(t.getPrevId()));
+                conditionListAll.stream().anyMatch(t -> operator.getNodeCode().equals(t.getPrevId()));
         boolean isNext = false;
         if (isCondition) {
-            List<String> nodeNext =
-                    StrUtil.isNotEmpty(taskNode.getNodeNext())
-                            ? Arrays.asList(taskNode.getNodeNext().split(","))
-                            : new ArrayList<>();
-            isNext =
-                    nodeListAll.stream()
-                            .anyMatch(
-                                    t ->
-                                            nodeNext.contains(t.getCustom().getNodeId())
-                                                    && FlowTaskOperatorEnum.FreeApprover.getCode()
-                                                            .equals(
-                                                                    t.getProperties()
-                                                                            .getAssigneeType()));
+            List<String> nodeNext = StrUtil.isNotEmpty(taskNode.getNodeNext())
+                    ? Arrays.asList(taskNode.getNodeNext().split(","))
+                    : new ArrayList<>();
+            isNext = nodeListAll.stream()
+                    .anyMatch(t -> nodeNext.contains(t.getCustom().getNodeId())
+                            && FlowTaskOperatorEnum.FreeApprover.getCode()
+                                    .equals(t.getProperties().getAssigneeType()));
         }
         if (isNext) {
             throw new WorkFlowException("条件流程包含候选人无法批量通过");
@@ -1515,8 +1412,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @throws WorkFlowException
      */
     @Override
-    public void permissions(
-            String userId, String flowId, FlowTaskOperatorEntity operator, String msg)
+    public void permissions(String userId, String flowId, FlowTaskOperatorEntity operator, String msg)
             throws WorkFlowException {
         UserInfo userInfo = userProvider.get();
         if (operator == null
@@ -1524,10 +1420,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 || !FlowNature.ProcessCompletion.equals(operator.getCompletion())) {
             throw new WorkFlowException(StrUtil.isEmpty(msg) ? MsgCode.WF123.get() : msg);
         }
-        List<String> flowDelegateList =
-                flowDelegateService.getUser(userInfo.getUserId(), flowId, userId).stream()
-                        .map(FlowDelegateEntity::getFTouserid)
-                        .collect(Collectors.toList());
+        List<String> flowDelegateList = flowDelegateService.getUser(userInfo.getUserId(), flowId, userId).stream()
+                .map(FlowDelegateEntity::getFTouserid)
+                .collect(Collectors.toList());
         flowDelegateList.add(userId);
         if (!flowDelegateList.contains(userInfo.getUserId())) {
             throw new WorkFlowException(MsgCode.WF123.get());
@@ -1556,15 +1451,16 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<ChildNodeList> childNodeListAll,
             String nodeCode,
             boolean isNext) {
-        List<FlowTaskNodeEntity> nodeList =
-                taskNodeList.stream().filter(t -> t.getNodeCode().equals(nodeCode)).toList();
+        List<FlowTaskNodeEntity> nodeList = taskNodeList.stream()
+                .filter(t -> t.getNodeCode().equals(nodeCode))
+                .toList();
         for (FlowTaskNodeEntity taskNodeEntity : nodeList) {
             if (isNext) {
-                List<String> nextNodeList = Arrays.asList(taskNodeEntity.getNodeNext().split(","));
-                List<FlowTaskNodeEntity> nextTaskNodeList =
-                        taskNodeList.stream()
-                                .filter(t -> nextNodeList.contains(t.getNodeCode()))
-                                .toList();
+                List<String> nextNodeList =
+                        Arrays.asList(taskNodeEntity.getNodeNext().split(","));
+                List<FlowTaskNodeEntity> nextTaskNodeList = taskNodeList.stream()
+                        .filter(t -> nextNodeList.contains(t.getNodeCode()))
+                        .toList();
                 for (FlowTaskNodeEntity nodeEntity : nextTaskNodeList) {
                     String nodeType = nodeEntity.getNodeType();
                     String code = nodeEntity.getNodeCode();
@@ -1572,15 +1468,13 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                         candidate(taskNodeList, childNodeListAll, code, true);
                     } else {
                         ChildNodeList childNodeList =
-                                JsonUtils.toObject(
-                                        nodeEntity.getNodePropertyJson(), ChildNodeList.class);
+                                JsonUtils.toObject(nodeEntity.getNodePropertyJson(), ChildNodeList.class);
                         childNodeListAll.add(childNodeList);
                     }
                 }
             } else {
                 ChildNodeList childNodeList =
-                        JsonUtils.toObject(
-                                taskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
+                        JsonUtils.toObject(taskNodeEntity.getNodePropertyJson(), ChildNodeList.class);
                 childNodeListAll.add(childNodeList);
             }
         }
@@ -1615,8 +1509,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     formData = JsonUtils.toMap(String.valueOf(data));
                 }
             }
-            ChildNode childNodeAll =
-                    JsonUtils.toObject(engine.getFlowTemplateJson(), ChildNode.class);
+            ChildNode childNodeAll = JsonUtils.toObject(engine.getFlowTemplateJson(), ChildNode.class);
             // 获取流程节点
             List<ChildNodeList> nodeListAll = new ArrayList<>();
             List<ConditionList> conditionListAll = new ArrayList<>();
@@ -1624,12 +1517,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             FlowTaskEntity flowTask = new FlowTaskEntity();
             flowTask.setId(RandomUtil.uuId());
             flowTask.setFlowFormContentJson(JsonUtils.toJSONString(formData));
-            this.updateNodeList(
-                    flowTask, childNodeAll, nodeListAll, conditionListAll, taskNodeList);
-            Optional<FlowTaskNodeEntity> first =
-                    taskNodeList.stream()
-                            .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
-                            .findFirst();
+            this.updateNodeList(flowTask, childNodeAll, nodeListAll, conditionListAll, taskNodeList);
+            Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
+                    .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
+                    .findFirst();
             if (first.isEmpty()) {
                 throw new WorkFlowException(MsgCode.COD001.get());
             }
@@ -1661,8 +1552,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param flowModel 提交数据
      * @throws WorkFlowException 异常
      */
-    private void task(
-            FlowTaskEntity taskEntity, FlowEngineEntity engine, FlowModel flowModel, String userId)
+    private void task(FlowTaskEntity taskEntity, FlowEngineEntity engine, FlowModel flowModel, String userId)
             throws WorkFlowException {
         if (flowModel.getId() != null && !checkStatus(taskEntity.getStatus())) {
             throw new WorkFlowException(MsgCode.WF108.get());
@@ -1674,8 +1564,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         taskEntity.setFullName(flowModel.getFlowTitle());
         taskEntity.setFlowUrgent(flowModel.getFlowUrgent() != null ? flowModel.getFlowUrgent() : 1);
         taskEntity.setFlowId(engine.getId());
-        taskEntity.setFlowCode(
-                engine.getEnCode() != null ? engine.getEnCode() : MsgCode.WF109.get());
+        taskEntity.setFlowCode(engine.getEnCode() != null ? engine.getEnCode() : MsgCode.WF109.get());
         taskEntity.setFlowName(engine.getFullName());
         taskEntity.setFlowType(engine.getType());
         taskEntity.setFlowCategory(engine.getCategory());
@@ -1691,13 +1580,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         taskEntity.setEnabledMark(1);
         taskEntity.setCreatorUserId(userId);
         taskEntity.setFlowFormContentJson(
-                flowModel.getFormData() != null
-                        ? JsonUtils.toJSONString(flowModel.getFormData())
-                        : "{}");
-        taskEntity.setParentId(
-                flowModel.getParentId() != null ? flowModel.getParentId() : FlowNature.ParentId);
-        taskEntity.setIsAsync(
-                flowModel.getIsAsync() ? FlowNature.ChildAsync : FlowNature.ChildSync);
+                flowModel.getFormData() != null ? JsonUtils.toJSONString(flowModel.getFormData()) : "{}");
+        taskEntity.setParentId(flowModel.getParentId() != null ? flowModel.getParentId() : FlowNature.ParentId);
+        taskEntity.setIsAsync(flowModel.getIsAsync() ? FlowNature.ChildAsync : FlowNature.ChildSync);
         ChildNode childNode = JsonUtils.toObject(engine.getFlowTemplateJson(), ChildNode.class);
         boolean isBatchApproval = false;
         if (ObjectUtil.isNotEmpty(childNode.getProperties().getIsBatchApproval())
@@ -1731,10 +1616,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
     private void nodeListAll(List<FlowTaskNodeEntity> dataAll, FlowModel flowModel, boolean isAdd)
             throws WorkFlowException {
         UserInfo userInfo = userProvider.get();
-        Optional<FlowTaskNodeEntity> first =
-                dataAll.stream()
-                        .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
-                        .findFirst();
+        Optional<FlowTaskNodeEntity> first = dataAll.stream()
+                .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
+                .findFirst();
         if (!first.isPresent()) {
             throw new WorkFlowException(MsgCode.COD001.get());
         }
@@ -1745,9 +1629,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         String type = "endround";
         long maxNum = 1L;
         Map<String, List<String>> candidateList =
-                flowModel.getCandidateList() != null
-                        ? flowModel.getCandidateList()
-                        : new HashMap<>();
+                flowModel.getCandidateList() != null ? flowModel.getCandidateList() : new HashMap<>();
         List<FlowCandidatesEntity> candidateListAll = new ArrayList<>();
         for (FlowTaskNodeEntity entity : dataAll) {
             if (StrUtil.isEmpty(entity.getNodeNext())) {
@@ -1757,10 +1639,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 maxNum = entity.getSortCode();
             }
             if (!"timer".equals(entity.getNodeType())) {
-                List<String> list =
-                        candidateList.get(entity.getNodeCode()) != null
-                                ? candidateList.get(entity.getNodeCode())
-                                : new ArrayList<>();
+                List<String> list = candidateList.get(entity.getNodeCode()) != null
+                        ? candidateList.get(entity.getNodeCode())
+                        : new ArrayList<>();
                 if (list.size() > 0) {
                     FlowCandidatesEntity candidates = new FlowCandidatesEntity();
                     candidates.setHandleId(userInfo.getId());
@@ -1781,8 +1662,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         endround.setCreatorTime(new Date());
         endround.setSortCode(++maxNum);
         endround.setTaskId(startNodes.getTaskId());
-        ChildNodeList endNode =
-                JsonUtils.toObject(startNodes.getNodePropertyJson(), ChildNodeList.class);
+        ChildNodeList endNode = JsonUtils.toObject(startNodes.getNodePropertyJson(), ChildNodeList.class);
         endNode.getCustom().setNodeId(nodeNext);
         endNode.setTaskNodeId(endround.getId());
         endNode.getCustom().setType(type);
@@ -1815,11 +1695,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             entity.setSortCode(num);
             entity.setState(FlowNodeEnum.Process.getCode());
         }
-        List<String> nextNode =
-                nodeList.stream()
-                        .map(FlowTaskNodeEntity::getNodeNext)
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList());
+        List<String> nextNode = nodeList.stream()
+                .map(FlowTaskNodeEntity::getNodeNext)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
         if (nextNode.size() > 0) {
             String nodes = String.join(",", nextNode);
             num++;
@@ -1858,12 +1737,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             taskNode.setState(FlowNodeEnum.Futility.getCode());
             taskNode.setSortCode(-2L);
             taskNode.setNodeUp(properties.getRejectStep());
-            taskNode.setNodeNext(
-                    FlowJsonUtil.getNextNode(nodeId, dataJson, nodeListAll, conditionListAll));
+            taskNode.setNodeNext(FlowJsonUtil.getNextNode(nodeId, dataJson, nodeListAll, conditionListAll));
             taskNode.setNodePropertyJson(JsonUtils.toJSONString(childNode));
             boolean isStart = FlowNature.NodeStart.equals(childNode.getCustom().getType());
-            taskNode.setCompletion(
-                    isStart ? FlowNature.AuditCompletion : FlowNature.ProcessCompletion);
+            taskNode.setCompletion(isStart ? FlowNature.AuditCompletion : FlowNature.ProcessCompletion);
             taskNode.setNodeName(isStart ? MsgCode.WF006.get() : properties.getTitle());
             taskNodeList.add(taskNode);
             if ("empty".equals(type)) {
@@ -1875,10 +1752,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         }
         // 指向empty，继续指向下一个节点
         for (FlowTaskNodeEntity empty : emptyList) {
-            List<FlowTaskNodeEntity> noxtEmptyList =
-                    taskNodeList.stream()
-                            .filter(t -> t.getNodeNext().contains(empty.getNodeCode()))
-                            .toList();
+            List<FlowTaskNodeEntity> noxtEmptyList = taskNodeList.stream()
+                    .filter(t -> t.getNodeNext().contains(empty.getNodeCode()))
+                    .toList();
             for (FlowTaskNodeEntity entity : noxtEmptyList) {
                 entity.setNodeNext(empty.getNodeNext());
             }
@@ -1886,19 +1762,16 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 指向timer，继续指向下一个节点
         for (FlowTaskNodeEntity timer : timerList) {
             // 获取到timer的上一节点
-            ChildNodeList timerlList =
-                    JsonUtils.toObject(timer.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList timerlList = JsonUtils.toObject(timer.getNodePropertyJson(), ChildNodeList.class);
             DateProperties timers = timerlList.getTimer();
             timers.setNodeId(timer.getNodeCode());
             timers.setTime(true);
-            List<FlowTaskNodeEntity> upEmptyList =
-                    taskNodeList.stream()
-                            .filter(t -> t.getNodeNext().contains(timer.getNodeCode()))
-                            .toList();
+            List<FlowTaskNodeEntity> upEmptyList = taskNodeList.stream()
+                    .filter(t -> t.getNodeNext().contains(timer.getNodeCode()))
+                    .toList();
             for (FlowTaskNodeEntity entity : upEmptyList) {
                 // 上一节点赋值timer的属性
-                ChildNodeList modelList =
-                        JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
+                ChildNodeList modelList = JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
                 modelList.setTimer(timers);
                 entity.setNodeNext(timer.getNodeNext());
                 entity.setNodePropertyJson(JsonUtils.toJSONString(modelList));
@@ -1943,14 +1816,12 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     List<String> taskNodeList = new ArrayList<>();
                     FlowEngineEntity engine = flowEngineService.getInfo(flowId);
                     // 创建子流程
-                    Map<String, Object> data =
-                            this.childData(engine, flowModel, assignList, isCustom);
+                    Map<String, Object> data = this.childData(engine, flowModel, assignList, isCustom);
                     data.put("flowId", flowId);
                     // 子节点审批人
                     List<UserEntity> list = this.childSaveList(childNode, flowTask);
                     // 子流程消息
-                    List<FlowTaskNodeEntity> childTaskNodeAll =
-                            flowTaskNodeService.getList(flowTask.getId());
+                    List<FlowTaskNodeEntity> childTaskNodeAll = flowTaskNodeService.getList(flowTask.getId());
                     List<FlowTaskOperatorEntity> childOperatorList = new ArrayList<>();
                     FlowMsgModel flowMsgModel = new FlowMsgModel();
                     flowMsgModel.setCirculateList(new ArrayList<>());
@@ -1960,8 +1831,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     flowMsgModel.setLaunch(true);
                     for (UserEntity entity : list) {
                         String title = entity.getRealName() + "的" + engine.getFullName() + "(子流程)";
-                        FlowModel nextFlowModel =
-                                this.assignment(data, parentEngine, flowTask.getId(), title);
+                        FlowModel nextFlowModel = this.assignment(data, parentEngine, flowTask.getId(), title);
                         nextFlowModel.setUserId(entity.getId());
                         nextFlowModel.setFlowTitle(title);
                         nextFlowModel.setFormData(data);
@@ -1974,8 +1844,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                         parentModel.setUserId("");
                         parentModel.setFormData(data);
                         parentModel.setIsAsync(properties.getIsAsync());
-                        FlowTaskNodeEntity taskNodeEntity =
-                                flowTaskNodeService.getInfo(childNode.getTaskNodeId());
+                        FlowTaskNodeEntity taskNodeEntity = flowTaskNodeService.getInfo(childNode.getTaskNodeId());
                         FlowTaskOperatorEntity parentOperator = new FlowTaskOperatorEntity();
                         this.parentOperator(parentOperator, taskNodeEntity);
                         if (properties.getIsAsync()) {
@@ -2076,11 +1945,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 // 时时查用户主管
                 UserEntity info = serviceUtil.getUserInfo(createUserId);
                 if (info != null) {
-                    userId =
-                            getManagerByLevel(
-                                    info.getManagerId(),
-                                    properties.getManagerLevel(),
-                                    new ArrayList<>());
+                    userId = getManagerByLevel(info.getManagerId(), properties.getManagerLevel(), new ArrayList<>());
                     userIdAll.add(userId);
                 }
             }
@@ -2088,8 +1953,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             if (FlowTaskOperatorEnum.DepartmentCharge.getCode().equals(type)) {
                 UserEntity userEntity = serviceUtil.getUserInfo(createUserId);
                 if (userEntity != null) {
-                    OrganizeEntity organizeEntity =
-                            serviceUtil.getOrganizeInfo(userEntity.getOrganizeId());
+                    OrganizeEntity organizeEntity = serviceUtil.getOrganizeInfo(userEntity.getOrganizeId());
                     if (organizeEntity != null) {
                         userId = organizeEntity.getManager();
                         userIdAll.add(userId);
@@ -2104,19 +1968,13 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             if (FlowTaskOperatorEnum.Tache.getCode().equals(type)) {
                 List<FlowTaskOperatorRecordEntity> operatorUserList =
                         flowTaskOperatorRecordService.getList(taskEntity.getId()).stream()
-                                .filter(
-                                        t ->
-                                                properties.getNodeId().equals(t.getNodeCode())
-                                                        && FlowRecordEnum.audit
-                                                                .getCode()
-                                                                .equals(t.getHandleStatus())
-                                                        && FlowNodeEnum.Process.getCode()
-                                                                .equals(t.getStatus()))
+                                .filter(t -> properties.getNodeId().equals(t.getNodeCode())
+                                        && FlowRecordEnum.audit.getCode().equals(t.getHandleStatus())
+                                        && FlowNodeEnum.Process.getCode().equals(t.getStatus()))
                                 .toList();
-                List<String> handleId =
-                        operatorUserList.stream()
-                                .map(FlowTaskOperatorRecordEntity::getHandleId)
-                                .toList();
+                List<String> handleId = operatorUserList.stream()
+                        .map(FlowTaskOperatorRecordEntity::getHandleId)
+                        .toList();
                 userIdAll.addAll(handleId);
             }
             // 【变量】
@@ -2129,10 +1987,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                         handleIdAll.addAll((List) data);
                     } else {
                         if (String.valueOf(data).contains("[")) {
-                            handleIdAll.addAll(
-                                    JsonUtils.toList(String.valueOf(data), String.class));
+                            handleIdAll.addAll(JsonUtils.toList(String.valueOf(data), String.class));
                         } else {
-                            handleIdAll.addAll(Arrays.asList(String.valueOf(data).split(",")));
+                            handleIdAll.addAll(
+                                    Arrays.asList(String.valueOf(data).split(",")));
                         }
                     }
                     userIdAll.addAll(handleIdAll);
@@ -2140,25 +1998,23 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             }
             // 【服务】
             if (FlowTaskOperatorEnum.Serve.getCode().equals(type)) {
-                String url =
-                        properties.getGetUserUrl()
-                                + "?"
-                                + taskNodeId
-                                + "="
-                                + childNode.getTaskNodeId()
-                                + "&"
-                                + taskId
-                                + "="
-                                + childNode.getTaskId();
+                String url = properties.getGetUserUrl()
+                        + "?"
+                        + taskNodeId
+                        + "="
+                        + childNode.getTaskNodeId()
+                        + "&"
+                        + taskId
+                        + "="
+                        + childNode.getTaskId();
                 String token = UserProvider.getToken();
                 JSONObject object = HttpUtil.httpRequest(url, "GET", null, token);
                 if (object != null) {
                     if (object.get("data") != null) {
                         JSONObject data = object.getJSONObject("data");
-                        List<String> handleId =
-                                StrUtil.isNotEmpty(data.getString("handleId"))
-                                        ? Arrays.asList(data.getString("handleId").split(","))
-                                        : new ArrayList<>();
+                        List<String> handleId = StrUtil.isNotEmpty(data.getString("handleId"))
+                                ? Arrays.asList(data.getString("handleId").split(","))
+                                : new ArrayList<>();
                         userIdAll.addAll(handleId);
                     }
                 }
@@ -2167,14 +2023,12 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             if (FlowTaskOperatorEnum.FreeApprover.getCode().equals(type)) {
                 String nodeId = childNode.getTaskNodeId();
                 List<FlowCandidatesEntity> candidatesList = flowCandidatesService.getlist(nodeId);
-                candidatesList.forEach(
-                        t -> {
-                            List<String> candidates =
-                                    StrUtil.isNotEmpty(t.getCandidates())
-                                            ? JsonUtils.toList(t.getCandidates(), String.class)
-                                            : new ArrayList<>();
-                            userIdAll.addAll(candidates);
-                        });
+                candidatesList.forEach(t -> {
+                    List<String> candidates = StrUtil.isNotEmpty(t.getCandidates())
+                            ? JsonUtils.toList(t.getCandidates(), String.class)
+                            : new ArrayList<>();
+                    userIdAll.addAll(candidates);
+                });
             } else {
                 // 发起者【指定用户】
                 userIdAll.addAll(properties.getApprovers());
@@ -2186,10 +2040,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 list.addAll(positionList);
                 list.addAll(roleList);
                 List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(list);
-                List<String> userPosition =
-                        listByObjectIdAll.stream()
-                                .map(UserRelationEntity::getUserId)
-                                .collect(Collectors.toList());
+                List<String> userPosition = listByObjectIdAll.stream()
+                        .map(UserRelationEntity::getUserId)
+                        .collect(Collectors.toList());
                 userIdAll.addAll(userPosition);
             }
             List<UserEntity> userAll = serviceUtil.getUserName(userIdAll);
@@ -2217,20 +2070,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         if (level == 0) {
             return managerId;
         } else {
-            UserEntity userEntity =
-                    userList.stream()
-                            .filter(t -> t.getId().equals(managerId))
-                            .findFirst()
-                            .orElse(null);
+            UserEntity userEntity = userList.stream()
+                    .filter(t -> t.getId().equals(managerId))
+                    .findFirst()
+                    .orElse(null);
             if (userEntity == null) {
                 userEntity = serviceUtil.getUserInfo(managerId);
                 if (userEntity != null) {
                     userList.add(userEntity);
                 }
             }
-            return userEntity != null
-                    ? getManagerByLevel(userEntity.getManagerId(), level, userList)
-                    : "";
+            return userEntity != null ? getManagerByLevel(userEntity.getManagerId(), level, userList) : "";
         }
     }
 
@@ -2240,8 +2090,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param nextList 所有审批人数据
      * @param taskOperatoUser 对象
      */
-    private void operatorUser(
-            List<FlowTaskOperatorEntity> nextList, TaskOperatoUser taskOperatoUser) {
+    private void operatorUser(List<FlowTaskOperatorEntity> nextList, TaskOperatoUser taskOperatoUser) {
         String handLeId = taskOperatoUser.getHandLeId();
         Date date = taskOperatoUser.getDate();
         ChildNodeList childNode = taskOperatoUser.getChildNode();
@@ -2342,8 +2191,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             result.add(taskNode);
             // 加签记录
         } else {
-            ChildNodeList nodeModel =
-                    JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList nodeModel = JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = nodeModel.getProperties();
             // 会签通过
             boolean isCountersign = true;
@@ -2354,18 +2202,13 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             if (fixed) {
                 List<FlowTaskOperatorEntity> operatorList =
                         flowTaskOperatorService.getList(taskNode.getTaskId()).stream()
-                                .filter(
-                                        t ->
-                                                t.getTaskNodeId().equals(taskNode.getId())
-                                                        && FlowNodeEnum.Process.getCode()
-                                                                .equals(t.getState()))
+                                .filter(t -> t.getTaskNodeId().equals(taskNode.getId())
+                                        && FlowNodeEnum.Process.getCode().equals(t.getState()))
                                 .collect(Collectors.toList());
-                double total =
-                        operatorList.stream()
-                                .filter(t -> FlowNature.ParentId.equals(t.getParentId()))
-                                .count();
-                List<FlowTaskOperatorEntity> passNumList =
-                        this.passNum(operatorList, FlowNature.AuditCompletion);
+                double total = operatorList.stream()
+                        .filter(t -> FlowNature.ParentId.equals(t.getParentId()))
+                        .count();
+                List<FlowTaskOperatorEntity> passNumList = this.passNum(operatorList, FlowNature.AuditCompletion);
                 double passNum = passNumList.size();
                 isCountersign = this.isCountersign(pass, total, passNum);
             }
@@ -2407,27 +2250,23 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param operatorList 流程经办数据
      * @return
      */
-    private List<FlowTaskOperatorEntity> passNum(
-            List<FlowTaskOperatorEntity> operatorList, Integer completion) {
+    private List<FlowTaskOperatorEntity> passNum(List<FlowTaskOperatorEntity> operatorList, Integer completion) {
         // 1.先挑选parentId为0,没有加签人的数据
-        List<String> idListAll =
-                operatorList.stream()
-                        .filter(t -> FlowNature.ParentId.equals(t.getParentId()))
-                        .map(FlowTaskOperatorEntity::getId)
-                        .collect(Collectors.toList());
-        List<String> childList =
-                operatorList.stream()
-                        .map(FlowTaskOperatorEntity::getParentId)
-                        .filter(parentId -> !FlowNature.ParentId.equals(parentId))
-                        .toList();
+        List<String> idListAll = operatorList.stream()
+                .filter(t -> FlowNature.ParentId.equals(t.getParentId()))
+                .map(FlowTaskOperatorEntity::getId)
+                .collect(Collectors.toList());
+        List<String> childList = operatorList.stream()
+                .map(FlowTaskOperatorEntity::getParentId)
+                .filter(parentId -> !FlowNature.ParentId.equals(parentId))
+                .toList();
         idListAll.removeAll(childList);
         Set<String> idAll = new HashSet<>(idListAll);
         // 2.从加签人中筛选最后审批人数据
-        List<String> parentList =
-                operatorList.stream()
-                        .filter(t -> !FlowNature.ParentId.equals(t.getParentId()))
-                        .map(FlowTaskOperatorEntity::getId)
-                        .collect(Collectors.toList());
+        List<String> parentList = operatorList.stream()
+                .filter(t -> !FlowNature.ParentId.equals(t.getParentId()))
+                .map(FlowTaskOperatorEntity::getId)
+                .collect(Collectors.toList());
         parentList.removeAll(childList);
         idAll.addAll(parentList);
         // 3.获取最后的审批人数据
@@ -2451,18 +2290,13 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         boolean isNext = true;
         for (FlowTaskNodeEntity nodeEntity : nextNodeEntity) {
             String nextNode = nodeEntity.getNodeCode();
-            List<FlowTaskNodeEntity> interflowAll =
-                    nodeListAll.stream()
-                            .filter(
-                                    t ->
-                                            String.valueOf(t.getNodeNext()).contains(nextNode)
-                                                    && FlowNodeEnum.Process.getCode()
-                                                            .equals(t.getState()))
-                            .toList();
-            List<FlowTaskNodeEntity> flowAll =
-                    interflowAll.stream()
-                            .filter(t -> !FlowNature.AuditCompletion.equals(t.getCompletion()))
-                            .toList();
+            List<FlowTaskNodeEntity> interflowAll = nodeListAll.stream()
+                    .filter(t -> String.valueOf(t.getNodeNext()).contains(nextNode)
+                            && FlowNodeEnum.Process.getCode().equals(t.getState()))
+                    .toList();
+            List<FlowTaskNodeEntity> flowAll = interflowAll.stream()
+                    .filter(t -> !FlowNature.AuditCompletion.equals(t.getCompletion()))
+                    .toList();
             if (flowAll.size() > 0) {
                 isNext = false;
                 break;
@@ -2479,9 +2313,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param flowModel 提交数据
      */
     private void circulateList(
-            ChildNodeList nodeModel,
-            List<FlowTaskCirculateEntity> circulateList,
-            FlowModel flowModel) {
+            ChildNodeList nodeModel, List<FlowTaskCirculateEntity> circulateList, FlowModel flowModel) {
         Properties circleproperties = nodeModel.getProperties();
         List<String> userIdAll = new ArrayList<>(circleproperties.getCirculateUser());
         // 传阅者【指定角色】
@@ -2493,15 +2325,12 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         userAll.addAll(posList);
         List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(userAll);
         List<String> userPosition =
-                listByObjectIdAll.stream()
-                        .map(UserRelationEntity::getUserId)
-                        .collect(Collectors.toList());
+                listByObjectIdAll.stream().map(UserRelationEntity::getUserId).collect(Collectors.toList());
         userIdAll.addAll(userPosition);
         // 指定传阅人
-        String[] copyIds =
-                StrUtil.isNotEmpty(flowModel.getCopyIds())
-                        ? flowModel.getCopyIds().split(",")
-                        : new String[] {};
+        String[] copyIds = StrUtil.isNotEmpty(flowModel.getCopyIds())
+                ? flowModel.getCopyIds().split(",")
+                : new String[] {};
         List<String> id = Arrays.asList(copyIds);
         userIdAll.addAll(id);
         List<UserEntity> list = serviceUtil.getUserName(userIdAll);
@@ -2600,77 +2429,62 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         if (isReject) {
             boolean isUp = FlowNature.UP.equals(taskNode.getNodeUp());
             if (FlowNature.START.equals(taskNode.getNodeUp())) {
-                List<FlowTaskNodeEntity> startNode =
-                        nodeListAll.stream()
-                                .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
-                                .toList();
+                List<FlowTaskNodeEntity> startNode = nodeListAll.stream()
+                        .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
+                        .toList();
                 result.addAll(startNode);
                 thisStepAll.addAll(result);
             } else if (FlowNature.UP.equals(taskNode.getNodeUp())) {
-                List<FlowTaskNodeEntity> nodeList =
-                        nodeListAll.stream()
-                                .filter(
-                                        t ->
-                                                StrUtil.isNotEmpty(t.getNodeNext())
-                                                        && t.getNodeNext()
-                                                                .contains(taskNode.getNodeCode()))
-                                .toList();
+                List<FlowTaskNodeEntity> nodeList = nodeListAll.stream()
+                        .filter(t -> StrUtil.isNotEmpty(t.getNodeNext())
+                                && t.getNodeNext().contains(taskNode.getNodeCode()))
+                        .toList();
                 result.addAll(nodeList);
                 for (FlowTaskNodeEntity taskNodeEntity : nodeList) {
-                    List<String> next = Arrays.asList(taskNodeEntity.getNodeNext().split(","));
+                    List<String> next =
+                            Arrays.asList(taskNodeEntity.getNodeNext().split(","));
                     thisStepIdAll.removeAll(next);
                 }
-                List<FlowTaskNodeEntity> stepId =
-                        nodeListAll.stream()
-                                .filter(t -> thisStepIdAll.contains(t.getNodeCode()))
-                                .toList();
+                List<FlowTaskNodeEntity> stepId = nodeListAll.stream()
+                        .filter(t -> thisStepIdAll.contains(t.getNodeCode()))
+                        .toList();
                 thisStepAll.addAll(result);
                 thisStepAll.addAll(stepId);
             } else {
                 List<FlowTaskNodeEntity> taskNodeList = new ArrayList<>();
-                FlowTaskNodeEntity taskNodeEntity =
-                        nodeListAll.stream()
-                                .filter(t -> t.getNodeCode().equals(taskNode.getNodeUp()))
-                                .findFirst()
-                                .orElse(null);
+                FlowTaskNodeEntity taskNodeEntity = nodeListAll.stream()
+                        .filter(t -> t.getNodeCode().equals(taskNode.getNodeUp()))
+                        .findFirst()
+                        .orElse(null);
                 if (taskNodeEntity != null) {
-                    taskNodeList =
-                            nodeListAll.stream()
-                                    .filter(
-                                            t ->
-                                                    t.getSortCode()
-                                                            .equals(taskNodeEntity.getSortCode()))
-                                    .collect(Collectors.toList());
+                    taskNodeList = nodeListAll.stream()
+                            .filter(t -> t.getSortCode().equals(taskNodeEntity.getSortCode()))
+                            .collect(Collectors.toList());
                 }
                 result.addAll(taskNodeList);
                 thisStepAll.addAll(result);
             }
-            result =
-                    result.stream()
-                            .sorted(
-                                    Comparator.comparing(FlowTaskNodeEntity::getSortCode)
-                                            .reversed())
-                            .collect(Collectors.toList());
-            boolean isChild =
-                    result.stream().anyMatch(t -> FlowNature.NodeSubFlow.equals(t.getNodeType()));
+            result = result.stream()
+                    .sorted(Comparator.comparing(FlowTaskNodeEntity::getSortCode)
+                            .reversed())
+                    .collect(Collectors.toList());
+            boolean isChild = result.stream().anyMatch(t -> FlowNature.NodeSubFlow.equals(t.getNodeType()));
             if (isChild) {
                 throw new WorkFlowException(MsgCode.WF114.get());
             }
-            Long nodeSortCode =
-                    result.size() > 0
-                            ? result.stream()
-                                    .min(Comparator.comparing(FlowTaskNodeEntity::getSortCode))
-                                    .get()
-                                    .getSortCode()
-                            : 0L;
+            Long nodeSortCode = result.size() > 0
+                    ? result.stream()
+                            .min(Comparator.comparing(FlowTaskNodeEntity::getSortCode))
+                            .get()
+                            .getSortCode()
+                    : 0L;
             if (isUp) {
                 rejectList.addAll(result.stream().map(FlowTaskNodeEntity::getId).toList());
             } else {
-                rejectList.addAll(
-                        result.stream()
-                                .filter(t -> t.getSortCode() >= nodeSortCode)
-                                .map(FlowTaskNodeEntity::getId)
-                                .toList());
+                rejectList.addAll(result.stream()
+                        .filter(t -> t.getSortCode() >= nodeSortCode)
+                        .map(FlowTaskNodeEntity::getId)
+                        .toList());
             }
         }
         return result;
@@ -2683,24 +2497,17 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @return
      */
     private boolean isReject(FlowTaskNodeEntity taskNode) {
-        List<FlowTaskOperatorEntity> operatorList =
-                flowTaskOperatorService.getList(taskNode.getTaskId()).stream()
-                        .filter(
-                                t ->
-                                        t.getTaskNodeId().equals(taskNode.getId())
-                                                && FlowNodeEnum.Process.getCode()
-                                                        .equals(t.getState()))
-                        .collect(Collectors.toList());
-        ChildNodeList nodeModel =
-                JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
+        List<FlowTaskOperatorEntity> operatorList = flowTaskOperatorService.getList(taskNode.getTaskId()).stream()
+                .filter(t -> t.getTaskNodeId().equals(taskNode.getId())
+                        && FlowNodeEnum.Process.getCode().equals(t.getState()))
+                .collect(Collectors.toList());
+        ChildNodeList nodeModel = JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
         Properties properties = nodeModel.getProperties();
         long pass = 100 - properties.getCountersignRatio();
-        double total =
-                operatorList.stream()
-                        .filter(t -> FlowNature.ParentId.equals(t.getParentId()))
-                        .count();
-        List<FlowTaskOperatorEntity> passNumList =
-                this.passNum(operatorList, FlowNature.RejectCompletion);
+        double total = operatorList.stream()
+                .filter(t -> FlowNature.ParentId.equals(t.getParentId()))
+                .count();
+        List<FlowTaskOperatorEntity> passNumList = this.passNum(operatorList, FlowNature.RejectCompletion);
         double passNum = passNumList.size();
         return this.isCountersign(pass, total, passNum);
     }
@@ -2713,35 +2520,24 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param engine 引擎
      * @param flowModel 提交数据
      */
-    private Map<String, Object> createData(
-            FlowEngineEntity engine, FlowTaskEntity taskEntity, FlowModel flowModel)
+    private Map<String, Object> createData(FlowEngineEntity engine, FlowTaskEntity taskEntity, FlowModel flowModel)
             throws WorkFlowException {
         Map<String, Object> resultData = flowModel.getFormData();
         try {
             Map<String, Object> data = flowModel.getFormData();
             if (FlowNature.CUSTOM.equals(engine.getFormType())) {
-                List<TableModel> tableList =
-                        JsonUtils.toList(engine.getFlowTables(), TableModel.class);
+                List<TableModel> tableList = JsonUtils.toList(engine.getFlowTables(), TableModel.class);
                 // 获取属性
                 DbLinkEntity dbLink = serviceUtil.getDbLink(engine.getDbLinkId());
-                FormDataModel formData =
-                        JsonUtils.toObject(taskEntity.getFlowForm(), FormDataModel.class);
+                FormDataModel formData = JsonUtils.toObject(taskEntity.getFlowForm(), FormDataModel.class);
                 List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
                 if (StrUtil.isNotEmpty(flowModel.getId())) {
                     // 更新
-                    resultData =
-                            flowDataUtil.update(
-                                    data, list, tableList, taskEntity.getProcessId(), dbLink);
+                    resultData = flowDataUtil.update(data, list, tableList, taskEntity.getProcessId(), dbLink);
                 } else {
                     // 新增
-                    resultData =
-                            flowDataUtil.create(
-                                    data,
-                                    list,
-                                    tableList,
-                                    taskEntity.getProcessId(),
-                                    new HashMap<>(16),
-                                    dbLink);
+                    resultData = flowDataUtil.create(
+                            data, list, tableList, taskEntity.getProcessId(), new HashMap<>(16), dbLink);
                 }
             } else {
                 // 系统表单
@@ -2767,26 +2563,19 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
     private boolean isNext(FlowTaskEntity flowTask) throws WorkFlowException {
         boolean isEnd = true;
         // 子流程结束，触发主流程
-        if (!FlowNature.ParentId.equals(flowTask.getParentId())
-                && StrUtil.isNotEmpty(flowTask.getParentId())) {
+        if (!FlowNature.ParentId.equals(flowTask.getParentId()) && StrUtil.isNotEmpty(flowTask.getParentId())) {
             isEnd = false;
-            if (FlowNature.ChildSync.equals(flowTask.getIsAsync())
-                    || ObjectUtil.isEmpty(flowTask.getIsAsync())) {
-                List<FlowTaskEntity> parentList =
-                        flowTaskService.getChildList(
-                                flowTask.getParentId(),
-                                FlowTaskEntity::getId,
-                                FlowTaskEntity::getThisStepId);
+            if (FlowNature.ChildSync.equals(flowTask.getIsAsync()) || ObjectUtil.isEmpty(flowTask.getIsAsync())) {
+                List<FlowTaskEntity> parentList = flowTaskService.getChildList(
+                        flowTask.getParentId(), FlowTaskEntity::getId, FlowTaskEntity::getThisStepId);
                 // 判断子流程排除自己，判断其他子流程是否都完成
-                boolean isNext =
-                        parentList.stream()
-                                        .filter(t -> !FlowNature.NodeEnd.equals(t.getThisStepId()))
-                                        .count()
-                                == 0;
+                boolean isNext = parentList.stream()
+                                .filter(t -> !FlowNature.NodeEnd.equals(t.getThisStepId()))
+                                .count()
+                        == 0;
                 if (isNext) {
                     FlowTaskEntity parentFlowTask = flowTaskService.getInfo(flowTask.getParentId());
-                    List<FlowTaskNodeEntity> parentNodeAll =
-                            flowTaskNodeService.getList(parentFlowTask.getId());
+                    List<FlowTaskNodeEntity> parentNodeAll = flowTaskNodeService.getList(parentFlowTask.getId());
                     FlowTaskOperatorEntity parentOperator = new FlowTaskOperatorEntity();
                     boolean isNode = this.updateTaskNode(parentList, parentNodeAll, parentOperator);
                     FlowModel parentModel = new FlowModel();
@@ -2824,8 +2613,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         if (FlowTaskOperatorEnum.DepartmentCharge.getCode().equals(type)) {
             UserEntity userEntity = serviceUtil.getUserInfo(createUserId);
             if (userEntity != null) {
-                OrganizeEntity organizeEntity =
-                        serviceUtil.getOrganizeInfo(userEntity.getOrganizeId());
+                OrganizeEntity organizeEntity = serviceUtil.getOrganizeInfo(userEntity.getOrganizeId());
                 if (organizeEntity != null) {
                     userId = organizeEntity.getManager();
                     userIdAll.add(userId);
@@ -2837,11 +2625,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             // 时时查用户主管
             UserEntity info = serviceUtil.getUserInfo(createUserId);
             if (info != null) {
-                userId =
-                        getManagerByLevel(
-                                info.getManagerId(),
-                                properties.getManagerLevel(),
-                                new ArrayList<>());
+                userId = getManagerByLevel(info.getManagerId(), properties.getManagerLevel(), new ArrayList<>());
                 userIdAll.add(userId);
             }
         }
@@ -2871,42 +2655,34 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         if (FlowTaskOperatorEnum.Tache.getCode().equals(type)) {
             List<FlowTaskOperatorRecordEntity> operatorUserList =
                     flowTaskOperatorRecordService.getList(taskEntity.getId()).stream()
-                            .filter(
-                                    t ->
-                                            properties.getNodeId().equals(t.getNodeCode())
-                                                    && FlowRecordEnum.audit
-                                                            .getCode()
-                                                            .equals(t.getHandleStatus())
-                                                    && FlowNodeEnum.Process.getCode()
-                                                            .equals(t.getStatus()))
+                            .filter(t -> properties.getNodeId().equals(t.getNodeCode())
+                                    && FlowRecordEnum.audit.getCode().equals(t.getHandleStatus())
+                                    && FlowNodeEnum.Process.getCode().equals(t.getStatus()))
                             .collect(Collectors.toList());
-            List<String> handleId =
-                    operatorUserList.stream()
-                            .map(FlowTaskOperatorRecordEntity::getHandleId)
-                            .collect(Collectors.toList());
+            List<String> handleId = operatorUserList.stream()
+                    .map(FlowTaskOperatorRecordEntity::getHandleId)
+                    .collect(Collectors.toList());
             userIdAll.addAll(handleId);
         }
         // 【服务】
         if (FlowTaskOperatorEnum.Serve.getCode().equals(type)) {
-            String url =
-                    properties.getGetUserUrl()
-                            + "?"
-                            + taskNodeId
-                            + "="
-                            + childNode.getTaskNodeId()
-                            + "&"
-                            + taskId
-                            + "="
-                            + childNode.getTaskId();
+            String url = properties.getGetUserUrl()
+                    + "?"
+                    + taskNodeId
+                    + "="
+                    + childNode.getTaskNodeId()
+                    + "&"
+                    + taskId
+                    + "="
+                    + childNode.getTaskId();
             String token = UserProvider.getToken();
             JSONObject object = HttpUtil.httpRequest(url, "GET", null, token);
             if (object != null) {
                 if (object.get("data") != null) {
                     JSONObject data = object.getJSONObject("data");
-                    List<String> handleId =
-                            StrUtil.isNotEmpty(data.getString("handleId"))
-                                    ? Arrays.asList(data.getString("handleId").split(","))
-                                    : new ArrayList<>();
+                    List<String> handleId = StrUtil.isNotEmpty(data.getString("handleId"))
+                            ? Arrays.asList(data.getString("handleId").split(","))
+                            : new ArrayList<>();
                     userIdAll.addAll(handleId);
                 }
             }
@@ -2922,9 +2698,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         list.addAll(roleList);
         List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(list);
         List<String> handleId =
-                listByObjectIdAll.stream()
-                        .map(UserRelationEntity::getUserId)
-                        .collect(Collectors.toList());
+                listByObjectIdAll.stream().map(UserRelationEntity::getUserId).collect(Collectors.toList());
         userIdAll.addAll(handleId);
         List<UserEntity> userList = serviceUtil.getUserName(userIdAll);
         if (userList.size() == 0) {
@@ -2942,33 +2716,24 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param parentId 上一节点
      * @return
      */
-    private FlowModel assignment(
-            Map<String, Object> data, FlowEngineEntity engine, String parentId, String title) {
+    private FlowModel assignment(Map<String, Object> data, FlowEngineEntity engine, String parentId, String title) {
         FlowModel flowModel = new FlowModel();
         String billNo = "单据规则不存在";
         if (FlowNature.CUSTOM.equals(engine.getFormType())) {
             FormDataModel formData = JsonUtils.toObject(engine.getFormData(), FormDataModel.class);
             List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
             List<FormAllModel> formAllModel = new ArrayList<>();
-            List<TableModel> tableModelList =
-                    JsonUtils.toList(engine.getFlowTables(), TableModel.class);
+            List<TableModel> tableModelList = JsonUtils.toList(engine.getFlowTables(), TableModel.class);
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             FormCloumnUtil.recursionForm(recursionForm, formAllModel);
-            List<FormAllModel> mastForm =
-                    formAllModel.stream()
-                            .filter(t -> FormEnum.mast.getMessage().equals(t.getFlowKey()))
-                            .toList();
-            FormAllModel formModel =
-                    mastForm.stream()
-                            .filter(
-                                    t ->
-                                            FlowKeyConsts.BILLRULE.equals(
-                                                    t.getFormColumnModel()
-                                                            .getFieLdsModel()
-                                                            .getConfig()
-                                                            .getFlowKey()))
-                            .findFirst()
-                            .orElse(null);
+            List<FormAllModel> mastForm = formAllModel.stream()
+                    .filter(t -> FormEnum.mast.getMessage().equals(t.getFlowKey()))
+                    .toList();
+            FormAllModel formModel = mastForm.stream()
+                    .filter(t -> FlowKeyConsts.BILLRULE.equals(
+                            t.getFormColumnModel().getFieLdsModel().getConfig().getFlowKey()))
+                    .findFirst()
+                    .orElse(null);
             try {
                 if (formModel != null) {
                     FieLdsModel fieLdsModel = formModel.getFormColumnModel().getFieLdsModel();
@@ -2997,10 +2762,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @return
      */
     private Map<String, Object> childData(
-            FlowEngineEntity engine,
-            FlowModel flowModel,
-            List<FlowAssignModel> assignList,
-            boolean isCustom) {
+            FlowEngineEntity engine, FlowModel flowModel, List<FlowAssignModel> assignList, boolean isCustom) {
         Map<String, Object> result = new HashMap<>(16);
         if (engine != null) {
             Map<String, Object> formData = flowModel.getFormData();
@@ -3019,8 +2781,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param task 父节点流程任务
      */
     private void delChild(FlowTaskEntity task) {
-        List<FlowTaskEntity> childTaskList =
-                flowTaskService.getChildList(task.getId(), FlowTaskEntity::getId);
+        List<FlowTaskEntity> childTaskList = flowTaskService.getChildList(task.getId(), FlowTaskEntity::getId);
         for (FlowTaskEntity flowTask : childTaskList) {
             // 删除子流程
             flowTaskService.deleteChild(flowTask);
@@ -3041,8 +2802,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         Set<FlowTaskNodeEntity> taskNodeList = new HashSet<>();
         List<String> taskId = parentList.stream().map(FlowTaskEntity::getId).toList();
         for (FlowTaskNodeEntity nodeEntity : parentNodeAll) {
-            ChildNodeList parentNode =
-                    JsonUtils.toObject(nodeEntity.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList parentNode = JsonUtils.toObject(nodeEntity.getNodePropertyJson(), ChildNodeList.class);
             List<String> taskIdAll = parentNode.getCustom().getTaskId();
             boolean isNum = taskIdAll.stream().anyMatch(taskId::contains);
             if (isNum) {
@@ -3063,8 +2823,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param parentOperator
      * @param nodeEntity
      */
-    private void parentOperator(
-            FlowTaskOperatorEntity parentOperator, FlowTaskNodeEntity nodeEntity) {
+    private void parentOperator(FlowTaskOperatorEntity parentOperator, FlowTaskNodeEntity nodeEntity) {
         parentOperator.setTaskNodeId(nodeEntity.getId());
         parentOperator.setDescription(JsonUtils.toJSONString(new ArrayList<>()));
         parentOperator.setNodeCode(nodeEntity.getNodeCode());
@@ -3111,20 +2870,18 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         Set<String> delNodeList = new HashSet<>();
         List<String> progressList = new ArrayList<>();
         List<String> nextOperator = new ArrayList<>();
-        ChildNodeList end =
-                nextOperatorList.stream()
-                        .filter(t -> t.getCustom().getNodeId().contains(FlowNature.NodeEnd))
-                        .findFirst()
-                        .orElse(null);
+        ChildNodeList end = nextOperatorList.stream()
+                .filter(t -> t.getCustom().getNodeId().contains(FlowNature.NodeEnd))
+                .findFirst()
+                .orElse(null);
         for (ChildNodeList childNode : nextOperatorList) {
             Properties properties = childNode.getProperties();
             String id = childNode.getCustom().getNodeId();
             String progress = properties.getProgress();
-            List<FlowTaskNodeEntity> taskNodeList =
-                    flowTaskNodeList.stream()
-                            .filter(t -> t.getNodeNext() != null)
-                            .filter(t -> t.getNodeNext().contains(id))
-                            .toList();
+            List<FlowTaskNodeEntity> taskNodeList = flowTaskNodeList.stream()
+                    .filter(t -> t.getNodeNext() != null)
+                    .filter(t -> t.getNodeNext().contains(id))
+                    .toList();
             List<String> nodeList =
                     taskNodeList.stream().map(FlowTaskNodeEntity::getNodeCode).toList();
             nextOperatorList.stream()
@@ -3138,18 +2895,12 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             }
         }
         String[] thisNode =
-                flowTask.getThisStepId() != null
-                        ? flowTask.getThisStepId().split(",")
-                        : new String[] {};
+                flowTask.getThisStepId() != null ? flowTask.getThisStepId().split(",") : new String[] {};
         Set<String> thisStepId = new HashSet<>();
         for (String id : thisNode) {
-            boolean isStepId =
-                    flowTaskNodeList.stream()
-                            .anyMatch(
-                                    t ->
-                                            t.getNodeCode().equals(id)
-                                                    && FlowNature.ProcessCompletion.equals(
-                                                            t.getCompletion()));
+            boolean isStepId = flowTaskNodeList.stream()
+                    .anyMatch(
+                            t -> t.getNodeCode().equals(id) && FlowNature.ProcessCompletion.equals(t.getCompletion()));
             if (isStepId) {
                 thisStepId.add(id);
             }
@@ -3158,18 +2909,16 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         thisStepId.addAll(nextOperator);
         List<String> thisNodeName = new ArrayList<>();
         for (String id : thisStepId) {
-            List<String> nodeList =
-                    flowTaskNodeList.stream()
-                            .filter(t -> t.getNodeCode().equals(id))
-                            .map(FlowTaskNodeEntity::getNodeName)
-                            .toList();
+            List<String> nodeList = flowTaskNodeList.stream()
+                    .filter(t -> t.getNodeCode().equals(id))
+                    .map(FlowTaskNodeEntity::getNodeName)
+                    .toList();
             thisNodeName.addAll(nodeList);
         }
         flowTask.setThisStepId(String.join(",", thisStepId));
         flowTask.setThisStep(String.join(",", thisNodeName));
         Collections.sort(progressList);
-        flowTask.setCompletion(
-                progressList.size() > 0 ? Integer.valueOf(progressList.get(0)) : null);
+        flowTask.setCompletion(progressList.size() > 0 ? Integer.valueOf(progressList.get(0)) : null);
         if (end != null) {
             isEnd = this.endround(flowTask, end, flowModel);
         }
@@ -3182,8 +2931,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @param record 审批实例
      * @param operatordModel 对象数据
      */
-    private void operatorRecord(
-            FlowTaskOperatorRecordEntity record, FlowOperatordModel operatordModel) {
+    private void operatorRecord(FlowTaskOperatorRecordEntity record, FlowOperatordModel operatordModel) {
         int status = operatordModel.getStatus();
         FlowModel flowModel = operatordModel.getFlowModel();
         String userId = operatordModel.getUserId();
@@ -3201,10 +2949,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         record.setTaskId(operator.getTaskId());
         record.setSignImg(flowModel.getSignImg());
         boolean freeApprover = !FlowNature.ParentId.equals(operator.getParentId());
-        record.setStatus(
-                freeApprover
-                        ? FlowNodeEnum.FreeApprover.getCode()
-                        : FlowNodeEnum.Process.getCode());
+        record.setStatus(freeApprover ? FlowNodeEnum.FreeApprover.getCode() : FlowNodeEnum.Process.getCode());
     }
 
     /**
@@ -3243,23 +2988,21 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<FlowTaskNodeEntity> taskNodeList,
             List<FlowTaskOperatorEntity> operatorList) {
         List<FlowTaskOperatorEntity> operatorListAll = new ArrayList<>();
-        FlowTaskNodeEntity taskNode =
-                taskNodeList.stream()
-                        .filter(t -> t.getId().equals(taskOperator.getTaskNodeId()))
-                        .findFirst()
-                        .orElse(null);
+        FlowTaskNodeEntity taskNode = taskNodeList.stream()
+                .filter(t -> t.getId().equals(taskOperator.getTaskNodeId()))
+                .findFirst()
+                .orElse(null);
         if (taskNode != null) {
             // 获取其他分流的定时器
-            List<String> nodeList =
-                    taskNodeList.stream()
-                            .filter(t -> t.getSortCode().equals(taskNode.getSortCode()))
-                            .map(FlowTaskNodeEntity::getId)
-                            .toList();
-            List<FlowTaskOperatorEntity> operatorAll =
-                    flowTaskOperatorService.getList(taskOperator.getTaskId());
+            List<String> nodeList = taskNodeList.stream()
+                    .filter(t -> t.getSortCode().equals(taskNode.getSortCode()))
+                    .map(FlowTaskNodeEntity::getId)
+                    .toList();
+            List<FlowTaskOperatorEntity> operatorAll = flowTaskOperatorService.getList(taskOperator.getTaskId());
             Set<Date> dateListAll = new HashSet<>();
-            List<FlowTaskOperatorEntity> list =
-                    operatorAll.stream().filter(t -> nodeList.contains(t.getTaskNodeId())).toList();
+            List<FlowTaskOperatorEntity> list = operatorAll.stream()
+                    .filter(t -> nodeList.contains(t.getTaskNodeId()))
+                    .toList();
             for (FlowTaskOperatorEntity operator : list) {
                 if (StrUtil.isNotEmpty(operator.getDescription())) {
                     List<Date> dateList = JsonUtils.toList(operator.getDescription(), Date.class);
@@ -3287,10 +3030,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
      * @return
      */
     private boolean requestData(ChildNodeList nodeModel, Map<String, Object> formData) {
-        List<FormOperates> formOperates =
-                nodeModel.getProperties().getFormOperates().stream()
-                        .filter(FormOperates::isRequired)
-                        .toList();
+        List<FormOperates> formOperates = nodeModel.getProperties().getFormOperates().stream()
+                .filter(FormOperates::isRequired)
+                .toList();
         boolean flag = false;
         for (FormOperates formOperate : formOperates) {
             String model = formOperate.getId();

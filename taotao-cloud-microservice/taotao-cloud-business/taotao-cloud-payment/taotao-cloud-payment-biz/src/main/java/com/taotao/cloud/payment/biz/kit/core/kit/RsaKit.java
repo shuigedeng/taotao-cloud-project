@@ -130,8 +130,7 @@ public class RsaKit {
      * @return 加密后的数据
      * @throws Exception 异常信息
      */
-    public static String encryptByPublicKey(String data, String publicKey, String fillMode)
-            throws Exception {
+    public static String encryptByPublicKey(String data, String publicKey, String fillMode) throws Exception {
         byte[] dataByte = data.getBytes(StandardCharsets.UTF_8);
         byte[] keyBytes = Base64.decode(publicKey);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
@@ -206,8 +205,7 @@ public class RsaKit {
      * @return 验证结果
      * @throws Exception 异常信息
      */
-    public static boolean checkByPublicKey(String data, String sign, String publicKey)
-            throws Exception {
+    public static boolean checkByPublicKey(String data, String sign, String publicKey) throws Exception {
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         byte[] encodedKey = Base64.decode(publicKey);
         PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
@@ -226,8 +224,7 @@ public class RsaKit {
      * @return 验证结果
      * @throws Exception 异常信息
      */
-    public static boolean checkByPublicKey(String data, String sign, PublicKey publicKey)
-            throws Exception {
+    public static boolean checkByPublicKey(String data, String sign, PublicKey publicKey) throws Exception {
         Signature signature = Signature.getInstance("SHA256WithRSA");
         signature.initVerify(publicKey);
         signature.update(data.getBytes(StandardCharsets.UTF_8));
@@ -267,8 +264,7 @@ public class RsaKit {
      * @return 解密后的数据
      * @throws Exception 异常信息
      */
-    public static String decryptByPrivateKey(String data, String privateKey, String fillMode)
-            throws Exception {
+    public static String decryptByPrivateKey(String data, String privateKey, String fillMode) throws Exception {
         byte[] encryptedData = Base64.decode(data);
         byte[] keyBytes = Base64.decode(privateKey);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);

@@ -124,9 +124,7 @@ public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
     private String original;
 
     /** 店铺分类路径 */
-    @Column(
-            name = "store_category_path",
-            columnDefinition = "varchar(255) not null comment '店铺分类路径'")
+    @Column(name = "store_category_path", columnDefinition = "varchar(255) not null comment '店铺分类路径'")
     private String storeCategoryPath;
 
     /** 评论数量 */

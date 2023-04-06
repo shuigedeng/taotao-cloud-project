@@ -36,7 +36,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class OfficialAccountHandler extends BaseHandler implements Handler {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     public OfficialAccountHandler() {
         channelCode = ChannelType.OFFICIAL_ACCOUNT.getCode();
@@ -45,10 +46,8 @@ public class OfficialAccountHandler extends BaseHandler implements Handler {
     @Override
     public boolean handler(TaskInfo taskInfo) {
         try {
-            OfficialAccountsContentModel contentModel =
-                    (OfficialAccountsContentModel) taskInfo.getContentModel();
-            WxMpService wxMpService =
-                    accountUtils.getAccountById(taskInfo.getSendAccount(), WxMpService.class);
+            OfficialAccountsContentModel contentModel = (OfficialAccountsContentModel) taskInfo.getContentModel();
+            WxMpService wxMpService = accountUtils.getAccountById(taskInfo.getSendAccount(), WxMpService.class);
             List<WxMpTemplateMessage> messages = assembleReq(taskInfo.getReceiver(), contentModel);
             for (WxMpTemplateMessage message : messages) {
                 try {
@@ -71,22 +70,17 @@ public class OfficialAccountHandler extends BaseHandler implements Handler {
     }
 
     /** 组装发送模板信息参数 */
-    private List<WxMpTemplateMessage> assembleReq(
-            Set<String> receiver, OfficialAccountsContentModel contentModel) {
+    private List<WxMpTemplateMessage> assembleReq(Set<String> receiver, OfficialAccountsContentModel contentModel) {
         List<WxMpTemplateMessage> wxMpTemplateMessages = new ArrayList<>(receiver.size());
         for (String openId : receiver) {
-            WxMpTemplateMessage templateMessage =
-                    WxMpTemplateMessage.builder()
-                            .toUser(openId)
-                            .templateId(contentModel.getTemplateId())
-                            .url(contentModel.getUrl())
-                            .data(getWxMpTemplateData(contentModel.getOfficialAccountParam()))
-                            .miniProgram(
-                                    new WxMpTemplateMessage.MiniProgram(
-                                            contentModel.getMiniProgramId(),
-                                            contentModel.getPath(),
-                                            false))
-                            .build();
+            WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
+                    .toUser(openId)
+                    .templateId(contentModel.getTemplateId())
+                    .url(contentModel.getUrl())
+                    .data(getWxMpTemplateData(contentModel.getOfficialAccountParam()))
+                    .miniProgram(new WxMpTemplateMessage.MiniProgram(
+                            contentModel.getMiniProgramId(), contentModel.getPath(), false))
+                    .build();
             wxMpTemplateMessages.add(templateMessage);
         }
         return wxMpTemplateMessages;

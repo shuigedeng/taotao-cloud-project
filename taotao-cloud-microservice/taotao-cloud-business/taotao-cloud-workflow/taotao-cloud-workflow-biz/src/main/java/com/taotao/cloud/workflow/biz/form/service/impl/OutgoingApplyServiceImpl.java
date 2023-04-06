@@ -34,9 +34,14 @@ import org.springframework.stereotype.Service;
 public class OutgoingApplyServiceImpl extends ServiceImpl<OutgoingApplyMapper, OutgoingApplyEntity>
         implements OutgoingApplyService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public OutgoingApplyEntity getInfo(String id) {
@@ -76,8 +81,7 @@ public class OutgoingApplyServiceImpl extends ServiceImpl<OutgoingApplyMapper, O
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, OutgoingApplyEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, OutgoingApplyEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -109,10 +113,8 @@ public class OutgoingApplyServiceImpl extends ServiceImpl<OutgoingApplyMapper, O
 
     @Override
     public void data(String id, String data) {
-        OutgoingApplyForm outgoingApplyForm =
-                JsonUtils.getJsonToBean(data, OutgoingApplyForm.class);
-        OutgoingApplyEntity entity =
-                JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
+        OutgoingApplyForm outgoingApplyForm = JsonUtils.getJsonToBean(data, OutgoingApplyForm.class);
+        OutgoingApplyEntity entity = JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -48,8 +48,7 @@ public class WebsocketInterceptor implements HandshakeInterceptor {
             throws Exception {
         System.out.println("握手开始");
         // 获得请求参数
-        Map<String, String> paramMap =
-                HttpUtil.decodeParamMap(request.getURI().getQuery(), StandardCharsets.UTF_8);
+        Map<String, String> paramMap = HttpUtil.decodeParamMap(request.getURI().getQuery(), StandardCharsets.UTF_8);
         String uid = paramMap.get("token");
         if (StrUtil.isNotBlank(uid)) {
             // 放入属性域
@@ -71,10 +70,7 @@ public class WebsocketInterceptor implements HandshakeInterceptor {
      */
     @Override
     public void afterHandshake(
-            ServerHttpRequest request,
-            ServerHttpResponse response,
-            WebSocketHandler wsHandler,
-            Exception exception) {
+            ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
         System.out.println("握手完成");
     }
 }

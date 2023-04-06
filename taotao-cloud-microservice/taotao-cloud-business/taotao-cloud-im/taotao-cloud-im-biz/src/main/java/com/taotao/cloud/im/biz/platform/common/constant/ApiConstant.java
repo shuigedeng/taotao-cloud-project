@@ -52,8 +52,7 @@ public class ApiConstant {
     public static final Integer QR_CODE_SIZE = 600;
 
     /** 视频参数 */
-    public static final String VIDEO_PARAM =
-            "?x-oss-process=video/snapshot,t_1000,f_png,w_600,m_fast";
+    public static final String VIDEO_PARAM = "?x-oss-process=video/snapshot,t_1000,f_png,w_600,m_fast";
 
     /** 图片参数 */
     public static final String IMAGE_PARAM = "?x-oss-process=image/resize,w_200";

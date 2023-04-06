@@ -24,7 +24,8 @@ import lombok.Data;
 @Data
 public class OrderSettingVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -2628613596000114786L;
+    @Serial
+    private static final long serialVersionUID = -2628613596000114786L;
     /** 自动取消 分钟 */
     private Integer autoCancel;
 

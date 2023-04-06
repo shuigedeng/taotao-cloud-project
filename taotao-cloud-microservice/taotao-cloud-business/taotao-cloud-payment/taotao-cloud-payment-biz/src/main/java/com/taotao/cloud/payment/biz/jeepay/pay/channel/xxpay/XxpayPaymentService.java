@@ -61,11 +61,9 @@ public class XxpayPaymentService extends AbstractPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
-        return PaywayUtil.getRealPaywayService(this, payOrder.getWayCode())
-                .pay(rq, payOrder, mchAppConfigContext);
+        return PaywayUtil.getRealPaywayService(this, payOrder.getWayCode()).pay(rq, payOrder, mchAppConfigContext);
     }
 
     /**
@@ -78,16 +76,12 @@ public class XxpayPaymentService extends AbstractPaymentService {
      * @return
      */
     protected JSONObject doPay(
-            PayOrder payOrder,
-            XxpayNormalMchParams params,
-            Map paramMap,
-            ChannelRetMsg channelRetMsg) {
+            PayOrder payOrder, XxpayNormalMchParams params, Map paramMap, ChannelRetMsg channelRetMsg) {
         // 生成签名
         String sign = XxpayKit.getSign(paramMap, params.getKey());
         paramMap.put("sign", sign);
         // 支付下单地址
-        String payUrl =
-                XxpayKit.getPaymentUrl(params.getPayUrl()) + "?" + JeepayKit.genUrlParams(paramMap);
+        String payUrl = XxpayKit.getPaymentUrl(params.getPayUrl()) + "?" + JeepayKit.genUrlParams(paramMap);
         String resStr = "";
         try {
             log.info("发起支付[{}]参数：{}", getIfCode(), payUrl);

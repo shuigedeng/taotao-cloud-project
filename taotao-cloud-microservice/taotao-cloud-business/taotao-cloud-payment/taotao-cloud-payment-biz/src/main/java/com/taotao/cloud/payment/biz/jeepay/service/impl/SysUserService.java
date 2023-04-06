@@ -33,8 +33,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
 
-    @Autowired private SysUserAuthService sysUserAuthService;
-    @Autowired private SysUserRoleRelaService sysUserRoleRelaService;
+    @Autowired
+    private SysUserAuthService sysUserAuthService;
+
+    @Autowired
+    private SysUserRoleRelaService sysUserRoleRelaService;
 
     /** 添加系统用户 * */
     @Transactional
@@ -62,37 +65,26 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         }
 
         // 登录用户名不可重复
-        if (count(
-                        SysUser.gw()
-                                .eq(SysUser::getSysType, sysType)
-                                .eq(SysUser::getLoginUsername, sysUser.getLoginUsername()))
+        if (count(SysUser.gw()
+                        .eq(SysUser::getSysType, sysType)
+                        .eq(SysUser::getLoginUsername, sysUser.getLoginUsername()))
                 > 0) {
             throw new BizException("登录用户名已存在！");
         }
         // 手机号不可重复
-        if (count(
-                        SysUser.gw()
-                                .eq(SysUser::getSysType, sysType)
-                                .eq(SysUser::getTelphone, sysUser.getTelphone()))
-                > 0) {
+        if (count(SysUser.gw().eq(SysUser::getSysType, sysType).eq(SysUser::getTelphone, sysUser.getTelphone())) > 0) {
             throw new BizException("手机号已存在！");
         }
         // 员工号不可重复
-        if (count(
-                        SysUser.gw()
-                                .eq(SysUser::getSysType, sysType)
-                                .eq(SysUser::getUserNo, sysUser.getUserNo()))
-                > 0) {
+        if (count(SysUser.gw().eq(SysUser::getSysType, sysType).eq(SysUser::getUserNo, sysUser.getUserNo())) > 0) {
             throw new BizException("员工号已存在！");
         }
 
         // 女  默认头像
         if (sysUser.getSex() != null && CS.SEX_FEMALE == sysUser.getSex()) {
-            sysUser.setAvatarUrl(
-                    "https://jeequan.oss-cn-beijing.aliyuncs.com/jeepay/img/defava_f.png");
+            sysUser.setAvatarUrl("https://jeequan.oss-cn-beijing.aliyuncs.com/jeepay/img/defava_f.png");
         } else {
-            sysUser.setAvatarUrl(
-                    "https://jeequan.oss-cn-beijing.aliyuncs.com/jeepay/img/defava_m.png");
+            sysUser.setAvatarUrl("https://jeequan.oss-cn-beijing.aliyuncs.com/jeepay/img/defava_m.png");
         }
 
         // 1. 插入用户主表
@@ -126,31 +118,27 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         // 修改了手机号， 需要修改auth表信息
         if (!dbRecord.getTelphone().equals(sysUser.getTelphone())) {
 
-            if (count(
-                            SysUser.gw()
-                                    .eq(SysUser::getSysType, dbRecord.getSysType())
-                                    .eq(SysUser::getTelphone, sysUser.getTelphone()))
+            if (count(SysUser.gw()
+                            .eq(SysUser::getSysType, dbRecord.getSysType())
+                            .eq(SysUser::getTelphone, sysUser.getTelphone()))
                     > 0) {
                 throw new BizException("该手机号已关联其他用户！");
             }
 
-            sysUserAuthService.resetAuthInfo(
-                    sysUserId, null, sysUser.getTelphone(), null, dbRecord.getSysType());
+            sysUserAuthService.resetAuthInfo(sysUserId, null, sysUser.getTelphone(), null, dbRecord.getSysType());
         }
 
         // 修改了手机号， 需要修改auth表信息
         if (!dbRecord.getLoginUsername().equals(sysUser.getLoginUsername())) {
 
-            if (count(
-                            SysUser.gw()
-                                    .eq(SysUser::getSysType, dbRecord.getSysType())
-                                    .eq(SysUser::getLoginUsername, sysUser.getLoginUsername()))
+            if (count(SysUser.gw()
+                            .eq(SysUser::getSysType, dbRecord.getSysType())
+                            .eq(SysUser::getLoginUsername, sysUser.getLoginUsername()))
                     > 0) {
                 throw new BizException("该登录用户名已关联其他用户！");
             }
 
-            sysUserAuthService.resetAuthInfo(
-                    sysUserId, sysUser.getLoginUsername(), null, null, dbRecord.getSysType());
+            sysUserAuthService.resetAuthInfo(sysUserId, sysUser.getLoginUsername(), null, null, dbRecord.getSysType());
         }
 
         // 修改用户主表
@@ -175,10 +163,9 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     @Transactional
     public void removeUser(SysUser sysUser, String sysType) {
         // 1.删除用户登录信息
-        sysUserAuthService.remove(
-                SysUserAuth.gw()
-                        .eq(SysUserAuth::getSysType, sysType)
-                        .in(SysUserAuth::getUserId, sysUser.getSysUserId()));
+        sysUserAuthService.remove(SysUserAuth.gw()
+                .eq(SysUserAuth::getSysType, sysType)
+                .in(SysUserAuth::getUserId, sysUser.getSysUserId()));
         // 2.删除用户角色信息
         sysUserRoleRelaService.removeById(sysUser.getSysUserId());
         // 3.删除用户信息
@@ -188,12 +175,11 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
     /** 获取到商户的超管用户ID * */
     public Long findMchAdminUserId(String mchNo) {
 
-        return getOne(
-                        SysUser.gw()
-                                .select(SysUser::getSysUserId)
-                                .eq(SysUser::getBelongInfoId, mchNo)
-                                .eq(SysUser::getSysType, CS.SYS_TYPE.MCH)
-                                .eq(SysUser::getIsAdmin, CS.YES))
+        return getOne(SysUser.gw()
+                        .select(SysUser::getSysUserId)
+                        .eq(SysUser::getBelongInfoId, mchNo)
+                        .eq(SysUser::getSysType, CS.SYS_TYPE.MCH)
+                        .eq(SysUser::getIsAdmin, CS.YES))
                 .getSysUserId();
     }
 }

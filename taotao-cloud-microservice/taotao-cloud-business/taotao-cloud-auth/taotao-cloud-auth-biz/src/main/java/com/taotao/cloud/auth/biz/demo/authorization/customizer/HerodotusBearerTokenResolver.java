@@ -42,9 +42,7 @@ public class HerodotusBearerTokenResolver implements BearerTokenResolver {
     private final boolean isRemoteValidate;
 
     public HerodotusBearerTokenResolver(
-            JwtDecoder jwtDecoder,
-            OpaqueTokenIntrospector opaqueTokenIntrospector,
-            boolean isRemoteValidate) {
+            JwtDecoder jwtDecoder, OpaqueTokenIntrospector opaqueTokenIntrospector, boolean isRemoteValidate) {
         this.jwtDecoder = jwtDecoder;
         this.opaqueTokenIntrospector = opaqueTokenIntrospector;
         this.isRemoteValidate = isRemoteValidate;

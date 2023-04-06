@@ -70,8 +70,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @AllArgsConstructor
 @Service
-public class DictServiceImpl
-        extends BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
+public class DictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
         implements IDictService {
 
     private final IDictItemService dictItemService;
@@ -105,8 +104,7 @@ public class DictServiceImpl
                 .ifPresent(dictCode -> predicate.and(DICT.dictCode.eq(dictCode)));
         Optional.ofNullable(dictPageQuery.getDescription())
                 .ifPresent(description -> predicate.and(DICT.description.like(description)));
-        Optional.ofNullable(dictPageQuery.getRemark())
-                .ifPresent(remark -> predicate.and(DICT.remark.like(remark)));
+        Optional.ofNullable(dictPageQuery.getRemark()).ifPresent(remark -> predicate.and(DICT.remark.like(remark)));
         return cr().findPageable(predicate, page, SORT_DESC, CREATE_TIME_DESC);
     }
 
@@ -166,16 +164,15 @@ public class DictServiceImpl
         } catch (InterruptedException ignored) {
         }
 
-        Dict result =
-                Dict.builder()
-                        .id(2L)
-                        .createBy(2L)
-                        .createTime(LocalDateTime.now())
-                        .dictCode("async123123123")
-                        .dictName("asynclsdfjaslf")
-                        .remark("asyncsdfasfd")
-                        .description("asyncsdflasjdfl")
-                        .build();
+        Dict result = Dict.builder()
+                .id(2L)
+                .createBy(2L)
+                .createTime(LocalDateTime.now())
+                .dictCode("async123123123")
+                .dictName("asynclsdfjaslf")
+                .remark("asyncsdfasfd")
+                .description("asyncsdflasjdfl")
+                .build();
 
         Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
 
@@ -197,12 +194,16 @@ public class DictServiceImpl
             throw new BusinessException("xxxxxx");
         }
         if ("2".equals(type)) {
-            throw new SQLIntegrityConstraintViolationException(
-                    "SQLIntegrityConstraintViolationException");
+            throw new SQLIntegrityConstraintViolationException("SQLIntegrityConstraintViolationException");
         }
 
-        Dict d1 = Dict.builder().dictCode("asdfsadf").dictName("sldf").sortNum(3).build();
-        Dict d2 = Dict.builder().dictCode("asdfsadf222").dictName("sldf222").sortNum(5).build();
+        Dict d1 =
+                Dict.builder().dictCode("asdfsadf").dictName("sldf").sortNum(3).build();
+        Dict d2 = Dict.builder()
+                .dictCode("asdfsadf222")
+                .dictName("sldf222")
+                .sortNum(5)
+                .build();
         int i = im().insertBatchSomeColumn(List.of(d1, d2));
 
         return true;
@@ -259,12 +260,12 @@ public class DictServiceImpl
         if (id != null) {
             builder.and(DICT.id.eq(id));
         }
-        List<Dict> dicts = cr().jpaQueryFactory().selectFrom(DICT).where(builder).fetch();
+        List<Dict> dicts =
+                cr().jpaQueryFactory().selectFrom(DICT).where(builder).fetch();
         System.out.println(dicts);
     }
 
-    public PagedList<Dict> testBlazeQuery(
-            @NotNull Long deptId, Dict params, @NotNull Pageable page) {
+    public PagedList<Dict> testBlazeQuery(@NotNull Long deptId, Dict params, @NotNull Pageable page) {
         // BooleanBuilder builder = SelectBuilder.booleanBuilder(params).getPredicate();
         BooleanBuilder builder = SelectBuilder.booleanBuilder().getPredicate();
         builder.and(DICT.id.eq(deptId));
@@ -282,12 +283,11 @@ public class DictServiceImpl
         if (Objects.isNull(projectId)) {
             return Lists.newArrayList();
         }
-        BooleanBuilder where =
-                SelectBooleanBuilder.booleanBuilder()
-                        .and(DICT.id.eq(projectId))
-                        .notEmptyIn(ids, DICT.id)
-                        .notBlankContains(name, DICT.dictName)
-                        .getPredicate();
+        BooleanBuilder where = SelectBooleanBuilder.booleanBuilder()
+                .and(DICT.id.eq(projectId))
+                .notEmptyIn(ids, DICT.id)
+                .notBlankContains(name, DICT.dictName)
+                .getPredicate();
         JPAQuery<Dict> query = cr().jpaQueryFactory().selectFrom(DICT).where(where);
         if (limit != null && limit > 0) {
             query.limit(limit);

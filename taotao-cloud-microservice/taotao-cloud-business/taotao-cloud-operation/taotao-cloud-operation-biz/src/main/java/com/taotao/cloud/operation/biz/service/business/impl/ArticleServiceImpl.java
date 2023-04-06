@@ -37,8 +37,7 @@ import org.springframework.stereotype.Service;
 
 /** 文章业务层实现 */
 @Service
-public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
-        implements ArticleService {
+public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
     @Override
     public IPage<ArticleVO> managerArticlePage(ArticlePageQuery articlePageQuery) {
@@ -49,10 +48,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
                 StringUtils.isNotBlank(articlePageQuery.getCategoryId()),
                 "category_id",
                 articlePageQuery.getCategoryId());
-        queryWrapper.like(
-                StringUtils.isNotBlank(articlePageQuery.getTitle()),
-                "title",
-                articlePageQuery.getTitle());
+        queryWrapper.like(StringUtils.isNotBlank(articlePageQuery.getTitle()), "title", articlePageQuery.getTitle());
 
         return this.baseMapper.getArticleList(articlePageQuery.buildMpPage(), queryWrapper);
     }
@@ -65,10 +61,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
                 StringUtils.isNotBlank(articlePageQuery.getCategoryId()),
                 "category_id",
                 articlePageQuery.getCategoryId());
-        queryWrapper.like(
-                StringUtils.isNotBlank(articlePageQuery.getTitle()),
-                "title",
-                articlePageQuery.getTitle());
+        queryWrapper.like(StringUtils.isNotBlank(articlePageQuery.getTitle()), "title", articlePageQuery.getTitle());
         queryWrapper.eq("open_status", true);
 
         return this.baseMapper.getArticleList(articlePageQuery.buildMpPage(), queryWrapper);

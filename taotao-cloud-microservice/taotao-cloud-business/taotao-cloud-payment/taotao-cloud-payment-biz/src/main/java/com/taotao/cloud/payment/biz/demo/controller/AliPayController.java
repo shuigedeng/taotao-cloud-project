@@ -31,7 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/alipay")
 public class AliPayController {
 
-    @Resource private AliPayService aliPayService;
+    @Resource
+    private AliPayService aliPayService;
 
     @ResponseBody
     @RequestMapping("/nativePay")

@@ -36,13 +36,12 @@ public class TenantConverter {
         if (sysTenantDO.getCreatorId() != null) {
             creatorId = new UserId(sysTenantDO.getCreatorId());
         }
-        Tenant tenant =
-                new Tenant(
-                        tenantId,
-                        new TenantCode(sysTenantDO.getTenantCode()),
-                        new TenantName(sysTenantDO.getTenantName()),
-                        StatusEnum.getStatusEnum(sysTenantDO.getStatus()),
-                        creatorId);
+        Tenant tenant = new Tenant(
+                tenantId,
+                new TenantCode(sysTenantDO.getTenantCode()),
+                new TenantName(sysTenantDO.getTenantName()),
+                StatusEnum.getStatusEnum(sysTenantDO.getStatus()),
+                creatorId);
         return tenant;
     }
 
@@ -51,12 +50,14 @@ public class TenantConverter {
             throw new RuntimeException("租户不存在");
         }
         SysTenantDO sysTenantDO = new SysTenantDO();
-        sysTenantDO.setId(tenant.getTenantId() == null ? null : tenant.getTenantId().getId());
+        sysTenantDO.setId(
+                tenant.getTenantId() == null ? null : tenant.getTenantId().getId());
         sysTenantDO.setTenantCode(
                 tenant.getTenantCode() == null ? null : tenant.getTenantCode().getCode());
         sysTenantDO.setTenantName(
                 tenant.getTenantName() == null ? null : tenant.getTenantName().getName());
-        sysTenantDO.setStatus(tenant.getStatus() == null ? null : tenant.getStatus().getValue());
+        sysTenantDO.setStatus(
+                tenant.getStatus() == null ? null : tenant.getStatus().getValue());
         sysTenantDO.setCreatorId(
                 tenant.getCreatorId() == null ? null : tenant.getCreatorId().getId());
         return sysTenantDO;

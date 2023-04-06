@@ -118,16 +118,15 @@ public class TreeUtil {
         List<MenuTreeVO> trees = new ArrayList<>();
         MenuTreeVO node;
         for (MenuBO menu : menus) {
-            node =
-                    MenuTreeVO.builder()
-                            .name(menu.name())
-                            .type(menu.type())
-                            .keepAlive(menu.keepAlive())
-                            .path(menu.path())
-                            .perms(menu.perms())
-                            .label(menu.name())
-                            .icon(menu.icon())
-                            .build();
+            node = MenuTreeVO.builder()
+                    .name(menu.name())
+                    .type(menu.type())
+                    .keepAlive(menu.keepAlive())
+                    .path(menu.path())
+                    .perms(menu.perms())
+                    .label(menu.name())
+                    .icon(menu.icon())
+                    .build();
             node.setId(menu.id());
             node.setParentId(menu.parentId());
             node.setChildren(new ArrayList<>());
@@ -148,36 +147,33 @@ public class TreeUtil {
     public static List<MenuTreeVO> buildTree(List<Resource> resources) {
         return resources.stream()
                 .filter(Objects::nonNull)
-                .map(
-                        sysMenu -> {
-                            MenuTreeVO tree = OrikaUtils.convert(sysMenu, MenuTreeVO.class);
-                            tree.setHidden(sysMenu.getHidden());
+                .map(sysMenu -> {
+                    MenuTreeVO tree = OrikaUtils.convert(sysMenu, MenuTreeVO.class);
+                    tree.setHidden(sysMenu.getHidden());
 
-                            MenuMetaVO meta = new MenuMetaVO();
-                            meta.setIcon(sysMenu.getIcon());
-                            meta.setTitle(sysMenu.getName());
-                            tree.setMeta(meta);
+                    MenuMetaVO meta = new MenuMetaVO();
+                    meta.setIcon(sysMenu.getIcon());
+                    meta.setTitle(sysMenu.getName());
+                    tree.setMeta(meta);
 
-                            // 只有当菜单类型为目录的时候，如果是顶级，则强制修改为Layout
-                            if (sysMenu.getParentId() == -1L
-                                    && ResourceTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
-                                tree.setComponent("Layout");
-                                tree.setRedirect("noRedirect");
-                                tree.setAlwaysShow(true);
-                            }
-                            tree.setSort(sysMenu.getSortNum());
+                    // 只有当菜单类型为目录的时候，如果是顶级，则强制修改为Layout
+                    if (sysMenu.getParentId() == -1L
+                            && ResourceTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
+                        tree.setComponent("Layout");
+                        tree.setRedirect("noRedirect");
+                        tree.setAlwaysShow(true);
+                    }
+                    tree.setSort(sysMenu.getSortNum());
 
-                            if (ResourceTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
-                                tree.setTypeName(ResourceTypeEnum.DIR.getMessage());
-                            } else if (ResourceTypeEnum.MENU.getCode().equals(sysMenu.getType())) {
-                                tree.setTypeName(ResourceTypeEnum.MENU.getMessage());
-                            } else if (ResourceTypeEnum.RESOURCE
-                                    .getCode()
-                                    .equals(sysMenu.getType())) {
-                                tree.setTypeName(ResourceTypeEnum.RESOURCE.getMessage());
-                            }
-                            return tree;
-                        })
+                    if (ResourceTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
+                        tree.setTypeName(ResourceTypeEnum.DIR.getMessage());
+                    } else if (ResourceTypeEnum.MENU.getCode().equals(sysMenu.getType())) {
+                        tree.setTypeName(ResourceTypeEnum.MENU.getMessage());
+                    } else if (ResourceTypeEnum.RESOURCE.getCode().equals(sysMenu.getType())) {
+                        tree.setTypeName(ResourceTypeEnum.RESOURCE.getMessage());
+                    }
+                    return tree;
+                })
                 .toList();
     }
 
@@ -195,12 +191,11 @@ public class TreeUtil {
                 // 过滤父节点
                 .filter(parent -> parent.getParentId().equals(parentId))
                 // 把父节点children递归赋值成为子节点
-                .peek(
-                        child -> {
-                            List<E> list = streamToTree(treeList, child.getId());
-                            list.sort(Comparator.comparing(E::getSort));
-                            child.setChildren(list);
-                        })
+                .peek(child -> {
+                    List<E> list = streamToTree(treeList, child.getId());
+                    list.sort(Comparator.comparing(E::getSort));
+                    child.setChildren(list);
+                })
                 .collect(Collectors.toList());
     }
 
@@ -399,30 +394,26 @@ public class TreeUtil {
         List<Region> emptyList = new ArrayList<>();
 
         // 将数组数据转为map结构，pcode为key
-        Map<String, List<Region>> regionMap =
-                regionList.stream()
-                        .map(
-                                item -> {
-                                    Region region = new Region();
-                                    BeanUtils.copyProperties(item, region);
-                                    return region;
-                                })
-                        .collect(Collectors.groupingBy(Region::getCode, Collectors.toList()));
+        Map<String, List<Region>> regionMap = regionList.stream()
+                .map(item -> {
+                    Region region = new Region();
+                    BeanUtils.copyProperties(item, region);
+                    return region;
+                })
+                .collect(Collectors.groupingBy(Region::getCode, Collectors.toList()));
         // 上面的Collectors.groupingBy将数据按Pcode分组，方便下面操作
 
         // 封装树形结构并塞进emptyList数组中
-        regionMap.forEach(
-                (pcode, collect) -> {
-                    if (pcode.equals("0")) {
-                        emptyList.addAll(collect);
-                    }
-                    collect.forEach(
-                            item -> {
-                                // item.setCodeTree(regionMap.get(item.getCode()));
-                                // 因为上面根据pcode分组了，所以这里的collect是以pcode为key的map对象
-                                // ,item则是当前遍历的pcode底下的children
-                            });
-                });
+        regionMap.forEach((pcode, collect) -> {
+            if (pcode.equals("0")) {
+                emptyList.addAll(collect);
+            }
+            collect.forEach(item -> {
+                // item.setCodeTree(regionMap.get(item.getCode()));
+                // 因为上面根据pcode分组了，所以这里的collect是以pcode为key的map对象
+                // ,item则是当前遍历的pcode底下的children
+            });
+        });
         map.put("tree", emptyList);
         return map;
     }

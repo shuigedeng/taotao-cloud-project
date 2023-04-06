@@ -45,25 +45,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 /** 分销订单接口实现 */
 @Service
-public class DistributionOrderServiceImpl
-        extends ServiceImpl<DistributionOrderMapper, DistributionOrder>
+public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderMapper, DistributionOrder>
         implements IDistributionOrderService {
 
     /** 订单 */
-    @Autowired private IFeignOrderApi orderApi;
+    @Autowired
+    private IFeignOrderApi orderApi;
     /** 店铺流水 */
-    @Autowired private StoreFlowService storeFlowService;
+    @Autowired
+    private StoreFlowService storeFlowService;
     /** 分销员 */
-    @Autowired private IDistributionService distributionService;
+    @Autowired
+    private IDistributionService distributionService;
     /** 系统设置 */
-    @Autowired private IFeignSettingApi feignSettingApi;
+    @Autowired
+    private IFeignSettingApi feignSettingApi;
 
     @Override
-    public IPage<DistributionOrder> getDistributionOrderPage(
-            DistributionOrderPageQuery distributionOrderPageQuery) {
-        return this.page(
-                distributionOrderPageQuery.buildMpPage(),
-                distributionOrderPageQuery.queryWrapper());
+    public IPage<DistributionOrder> getDistributionOrderPage(DistributionOrderPageQuery distributionOrderPageQuery) {
+        return this.page(distributionOrderPageQuery.buildMpPage(), distributionOrderPageQuery.queryWrapper());
     }
 
     /**
@@ -81,12 +81,10 @@ public class DistributionOrderServiceImpl
         // 判断是否为分销订单，如果为分销订单则获取分销佣金
         if (order.getDistributionId() != null) {
             // 根据订单编号获取有分销金额的店铺流水记录
-            List<StoreFlow> storeFlowList =
-                    storeFlowService.listStoreFlow(
-                            StoreFlowPageQuery.builder()
-                                    .justDistribution(true)
-                                    .orderSn(orderSn)
-                                    .build());
+            List<StoreFlow> storeFlowList = storeFlowService.listStoreFlow(StoreFlowPageQuery.builder()
+                    .justDistribution(true)
+                    .orderSn(orderSn)
+                    .build());
             BigDecimal rebate = 0.0;
             // 循环店铺流水记录判断是否包含分销商品
             // 包含分销商品则进行记录分销订单、计算分销总额
@@ -99,8 +97,7 @@ public class DistributionOrderServiceImpl
                 distributionOrder.setDistributionName(distribution.getMemberName());
 
                 // 设置结算天数(解冻日期)
-                Result<SettingVO> settingResult =
-                        feignSettingApi.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
+                Result<SettingVO> settingResult = feignSettingApi.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
                 DistributionSetting distributionSetting =
                         JSONUtil.toBean(settingResult.getSettingValue(), DistributionSetting.class);
                 // 默认解冻1天
@@ -108,9 +105,7 @@ public class DistributionOrderServiceImpl
                     distributionOrder.setSettleCycle(new DateTime());
                 } else {
                     DateTime dateTime = new DateTime();
-                    dateTime =
-                            dateTime.offsetNew(
-                                    DateField.DAY_OF_MONTH, distributionSetting.getCashDay());
+                    dateTime = dateTime.offsetNew(DateField.DAY_OF_MONTH, distributionSetting.getCashDay());
                     distributionOrder.setSettleCycle(dateTime);
                 }
 
@@ -126,19 +121,17 @@ public class DistributionOrderServiceImpl
                         DateTime dateTime = new DateTime();
                         dateTime = dateTime.offsetNew(DateField.MINUTE, 5);
                         // 计算分销提佣
-                        this.baseMapper.rebate(
-                                DistributionOrderStatusEnum.WAIT_BILL.name(), dateTime);
+                        this.baseMapper.rebate(DistributionOrderStatusEnum.WAIT_BILL.name(), dateTime);
 
                         // 修改分销订单状态
-                        this.update(
-                                new LambdaUpdateWrapper<DistributionOrder>()
-                                        .eq(
-                                                DistributionOrder::getDistributionOrderStatus,
-                                                DistributionOrderStatusEnum.WAIT_BILL.name())
-                                        .le(DistributionOrder::getSettleCycle, dateTime)
-                                        .set(
-                                                DistributionOrder::getDistributionOrderStatus,
-                                                DistributionOrderStatusEnum.WAIT_CASH.name()));
+                        this.update(new LambdaUpdateWrapper<DistributionOrder>()
+                                .eq(
+                                        DistributionOrder::getDistributionOrderStatus,
+                                        DistributionOrderStatusEnum.WAIT_BILL.name())
+                                .le(DistributionOrder::getSettleCycle, dateTime)
+                                .set(
+                                        DistributionOrder::getDistributionOrderStatus,
+                                        DistributionOrderStatusEnum.WAIT_CASH.name()));
                     }
                 }
             }
@@ -157,14 +150,11 @@ public class DistributionOrderServiceImpl
         Order order = orderApi.getBySn(orderSn);
 
         // 判断是否为已付款的分销订单，则获取分销佣金
-        if (order.getDistributionId() != null
-                && order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
+        if (order.getDistributionId() != null && order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
 
             // 根据订单编号获取有分销金额的店铺流水记录
             List<DistributionOrder> distributionOrderList =
-                    this.list(
-                            new LambdaQueryWrapper<DistributionOrder>()
-                                    .eq(DistributionOrder::getOrderSn, orderSn));
+                    this.list(new LambdaQueryWrapper<DistributionOrder>().eq(DistributionOrder::getOrderSn, orderSn));
 
             // 如果没有分销定单，则直接返回
             if (distributionOrderList.isEmpty()) {
@@ -180,58 +170,42 @@ public class DistributionOrderServiceImpl
 
             // 如果包含分销商品则记录会员的分销总额
             if (rebate != 0.0) {
-                distributionService.subCanRebate(
-                        CurrencyUtils.sub(0, rebate), order.getDistributionId());
+                distributionService.subCanRebate(CurrencyUtils.sub(0, rebate), order.getDistributionId());
             }
         }
 
         // 修改分销订单的状态
-        this.update(
-                new LambdaUpdateWrapper<DistributionOrder>()
-                        .eq(DistributionOrder::getOrderSn, orderSn)
-                        .set(
-                                DistributionOrder::getDistributionOrderStatus,
-                                DistributionOrderStatusEnum.CANCEL.name()));
+        this.update(new LambdaUpdateWrapper<DistributionOrder>()
+                .eq(DistributionOrder::getOrderSn, orderSn)
+                .set(DistributionOrder::getDistributionOrderStatus, DistributionOrderStatusEnum.CANCEL.name()));
     }
 
     @Override
     public void refundOrder(String afterSaleSn) {
         // 判断是否为分销订单
-        StoreFlow storeFlow =
-                storeFlowService.queryOne(
-                        StoreFlowPageQuery.builder()
-                                .justDistribution(true)
-                                .refundSn(afterSaleSn)
-                                .build());
+        StoreFlow storeFlow = storeFlowService.queryOne(StoreFlowPageQuery.builder()
+                .justDistribution(true)
+                .refundSn(afterSaleSn)
+                .build());
         if (storeFlow != null) {
 
             // 获取收款分销订单
-            DistributionOrder distributionOrder =
-                    this.getOne(
-                            new LambdaQueryWrapper<DistributionOrder>()
-                                    .eq(
-                                            DistributionOrder::getOrderItemSn,
-                                            storeFlow.getOrderItemSn()));
+            DistributionOrder distributionOrder = this.getOne(new LambdaQueryWrapper<DistributionOrder>()
+                    .eq(DistributionOrder::getOrderItemSn, storeFlow.getOrderItemSn()));
             // 分销订单不存在，则直接返回
             if (distributionOrder == null) {
                 return;
             }
-            if (distributionOrder
-                    .getDistributionOrderStatus()
-                    .equals(DistributionOrderStatusEnum.WAIT_BILL.name())) {
-                this.update(
-                        new LambdaUpdateWrapper<DistributionOrder>()
-                                .eq(DistributionOrder::getOrderItemSn, storeFlow.getOrderItemSn())
-                                .set(
-                                        DistributionOrder::getDistributionOrderStatus,
-                                        DistributionOrderStatusEnum.CANCEL.name()));
+            if (distributionOrder.getDistributionOrderStatus().equals(DistributionOrderStatusEnum.WAIT_BILL.name())) {
+                this.update(new LambdaUpdateWrapper<DistributionOrder>()
+                        .eq(DistributionOrder::getOrderItemSn, storeFlow.getOrderItemSn())
+                        .set(DistributionOrder::getDistributionOrderStatus, DistributionOrderStatusEnum.CANCEL.name()));
             }
             // 如果已结算则创建退款分销订单
             else {
                 // 修改分销员提成金额
                 distributionService.subCanRebate(
-                        CurrencyUtils.sub(0, storeFlow.getDistributionRebate()),
-                        distributionOrder.getDistributionId());
+                        CurrencyUtils.sub(0, storeFlow.getDistributionRebate()), distributionOrder.getDistributionId());
             }
         }
     }

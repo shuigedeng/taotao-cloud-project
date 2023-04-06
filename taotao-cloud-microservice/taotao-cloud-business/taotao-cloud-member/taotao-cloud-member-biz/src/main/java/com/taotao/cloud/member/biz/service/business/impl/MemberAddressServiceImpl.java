@@ -42,7 +42,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberAddressServiceImpl extends ServiceImpl<IMemberAddressMapper, MemberAddress>
         implements IMemberAddressService {
 
-    @DubboReference private IDubboUserRpc userRpc;
+    @DubboReference
+    private IDubboUserRpc userRpc;
 
     @Override
     public IPage<MemberAddress> queryPage(PageQuery page, Long memberId) {
@@ -82,8 +83,7 @@ public class MemberAddressServiceImpl extends ServiceImpl<IMemberAddressMapper, 
     public Boolean updateMemberAddress(MemberAddress memberAddress) {
         MemberAddress originalMemberAddress = this.getMemberAddress(memberAddress.getId());
 
-        if (originalMemberAddress != null
-                && originalMemberAddress.getMemberId().equals(SecurityUtils.getUserId())) {
+        if (originalMemberAddress != null && originalMemberAddress.getMemberId().equals(SecurityUtils.getUserId())) {
             if (memberAddress.getDefaulted() == null) {
                 memberAddress.setDefaulted(false);
             }

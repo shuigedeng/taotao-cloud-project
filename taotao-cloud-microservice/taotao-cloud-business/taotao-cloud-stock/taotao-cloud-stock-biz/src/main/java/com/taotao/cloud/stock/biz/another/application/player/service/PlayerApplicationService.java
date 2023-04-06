@@ -21,9 +21,14 @@ import com.taotao.cloud.ddd.biz.domain.player.service.PlayerDomainService;
 // 运动员应用服务
 public class PlayerApplicationService {
 
-    @Resource private LogDomainService logDomainService;
-    @Resource private PlayerDomainService playerDomainService;
-    @Resource private PlayerApplicationAdapter playerApplicationAdapter;
+    @Resource
+    private LogDomainService logDomainService;
+
+    @Resource
+    private PlayerDomainService playerDomainService;
+
+    @Resource
+    private PlayerApplicationAdapter playerApplicationAdapter;
 
     public boolean updatePlayer(PlayerUpdateAgg agg) {
         // 运动员领域

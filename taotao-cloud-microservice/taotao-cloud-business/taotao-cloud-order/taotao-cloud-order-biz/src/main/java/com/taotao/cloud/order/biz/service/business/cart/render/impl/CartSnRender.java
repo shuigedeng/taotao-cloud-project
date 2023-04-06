@@ -41,18 +41,16 @@ public class CartSnRender implements ICartRenderStep {
     public void render(TradeDTO tradeDTO) {
         // 生成各个sn
         tradeDTO.setSn(SnowFlake.createStr("T"));
-        tradeDTO.getCartList()
-                .forEach(
-                        item -> {
-                            // 写入备注
-                            if (tradeDTO.getStoreRemark() != null) {
-                                for (StoreRemarkDTO remark : tradeDTO.getStoreRemark()) {
-                                    if (item.getStoreId().equals(remark.getStoreId())) {
-                                        item.setRemark(remark.getRemark());
-                                    }
-                                }
-                            }
-                            item.setSn(SnowFlake.createStr("O"));
-                        });
+        tradeDTO.getCartList().forEach(item -> {
+            // 写入备注
+            if (tradeDTO.getStoreRemark() != null) {
+                for (StoreRemarkDTO remark : tradeDTO.getStoreRemark()) {
+                    if (item.getStoreId().equals(remark.getStoreId())) {
+                        item.setRemark(remark.getRemark());
+                    }
+                }
+            }
+            item.setSn(SnowFlake.createStr("O"));
+        });
     }
 }

@@ -49,7 +49,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("微信服务号")
 public class MiniProgramController {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     @GetMapping("/template/list")
     @ApiOperation("/根据账号Id获取模板列表")
@@ -59,17 +60,15 @@ public class MiniProgramController {
             WxMaService wxMaService = accountUtils.getAccountById(id, WxMaService.class);
             List<TemplateInfo> templateList = wxMaService.getSubscribeService().getTemplateList();
             for (TemplateInfo templateInfo : templateList) {
-                CommonAmisVo commonAmisVo =
-                        CommonAmisVo.builder()
-                                .label(templateInfo.getTitle())
-                                .value(templateInfo.getPriTmplId())
-                                .build();
+                CommonAmisVo commonAmisVo = CommonAmisVo.builder()
+                        .label(templateInfo.getTitle())
+                        .value(templateInfo.getPriTmplId())
+                        .build();
                 result.add(commonAmisVo);
             }
             return result;
         } catch (Exception e) {
-            log.error(
-                    "MiniProgramController#queryList fail:{}", Throwables.getStackTraceAsString(e));
+            log.error("MiniProgramController#queryList fail:{}", Throwables.getStackTraceAsString(e));
             throw new CommonException(RespStatusEnum.SERVICE_ERROR);
         }
     }
@@ -90,9 +89,7 @@ public class MiniProgramController {
             List<TemplateInfo> templateList = wxMaService.getSubscribeService().getTemplateList();
             return Convert4Amis.getWxMaTemplateParam(wxTemplateId, templateList);
         } catch (Exception e) {
-            log.error(
-                    "MiniProgramController#queryDetailList fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("MiniProgramController#queryDetailList fail:{}", Throwables.getStackTraceAsString(e));
             throw new CommonException(RespStatusEnum.SERVICE_ERROR);
         }
     }
@@ -107,14 +104,13 @@ public class MiniProgramController {
     @GetMapping("/sync/openid")
     @ApiOperation("登录凭证校验")
     public String syncOpenId(String code, String appId, String secret) {
-        String url =
-                "https://api.weixin.qq.com/sns/jscode2session?appid="
-                        + appId
-                        + "&secret="
-                        + secret
-                        + "&js_code="
-                        + code
-                        + "&grant_type=authorization_code";
+        String url = "https://api.weixin.qq.com/sns/jscode2session?appid="
+                + appId
+                + "&secret="
+                + secret
+                + "&js_code="
+                + code
+                + "&grant_type=authorization_code";
         return HttpUtil.get(url);
     }
 }

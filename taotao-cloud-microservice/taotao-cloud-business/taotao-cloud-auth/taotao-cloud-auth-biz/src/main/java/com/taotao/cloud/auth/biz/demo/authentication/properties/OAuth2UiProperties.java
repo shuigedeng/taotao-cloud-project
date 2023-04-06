@@ -33,14 +33,11 @@ import org.springframework.security.web.authentication.rememberme.AbstractRememb
 public class OAuth2UiProperties {
 
     /** UI 界面用户名标输入框 name 属性值 */
-    private String usernameParameter =
-            UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY;
+    private String usernameParameter = UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY;
     /** UI 界面密码标输入框 name 属性值 */
-    private String passwordParameter =
-            UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY;
+    private String passwordParameter = UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY;
     /** UI 界面Remember Me name 属性值 */
-    private String rememberMeParameter =
-            AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY;
+    private String rememberMeParameter = AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY;
     /** UI 界面验证码 name 属性值 */
     private String captchaParameter = "captcha";
     /** 登录页面地址 */

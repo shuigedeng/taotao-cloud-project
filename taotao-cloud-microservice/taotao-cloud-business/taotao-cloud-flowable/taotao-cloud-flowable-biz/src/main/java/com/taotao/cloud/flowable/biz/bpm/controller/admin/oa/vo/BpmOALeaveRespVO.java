@@ -33,11 +33,7 @@ public class BpmOALeaveRespVO extends BpmOALeaveBaseVO {
     @ApiModelProperty(value = "请假表单主键", required = true, example = "1024")
     private Long id;
 
-    @ApiModelProperty(
-            value = "状态",
-            required = true,
-            example = "1",
-            notes = "参见 bpm_process_instance_result 枚举")
+    @ApiModelProperty(value = "状态", required = true, example = "1", notes = "参见 bpm_process_instance_result 枚举")
     private Integer result;
 
     @ApiModelProperty(value = "申请时间", required = true)

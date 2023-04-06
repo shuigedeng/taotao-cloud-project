@@ -32,7 +32,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "会员积分VO")
 public class MemberPointsHistoryVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "当前会员积分")
     private Long point;

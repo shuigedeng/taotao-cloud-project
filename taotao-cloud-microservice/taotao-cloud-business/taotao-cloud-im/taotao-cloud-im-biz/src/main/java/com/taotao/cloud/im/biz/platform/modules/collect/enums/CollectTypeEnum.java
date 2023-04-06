@@ -40,7 +40,10 @@ public enum CollectTypeEnum {
     FILE("FILE", "文件"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     CollectTypeEnum(String code, String info) {

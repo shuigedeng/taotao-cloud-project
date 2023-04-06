@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.clickhouse.model;
 
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -28,61 +29,56 @@ import java.util.Objects;
  */
 @TableName("user")
 public class CkUser {
-	@TableId
-	private String id;
+    @TableId
+    private String id;
 
-	private Integer sales;
+    private Integer sales;
 
-	private Integer month;
+    private Integer month;
 
-	@Override
-	public String toString() {
-		return "TestOrder{" +
-			"id='" + id + '\'' +
-			", sales=" + sales +
-			", month=" + month +
-			'}';
-	}
+    @Override
+    public String toString() {
+        return "TestOrder{" + "id='" + id + '\'' + ", sales=" + sales + ", month=" + month + '}';
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		CkUser user = (CkUser) o;
-		return Objects.equals(id, user.id) && Objects
-			.equals(sales, user.sales) && Objects.equals(month, user.month);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CkUser user = (CkUser) o;
+        return Objects.equals(id, user.id) && Objects.equals(sales, user.sales) && Objects.equals(month, user.month);
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, sales, month);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, sales, month);
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public Integer getSales() {
-		return sales;
-	}
+    public Integer getSales() {
+        return sales;
+    }
 
-	public void setSales(Integer sales) {
-		this.sales = sales;
-	}
+    public void setSales(Integer sales) {
+        this.sales = sales;
+    }
 
-	public Integer getMonth() {
-		return month;
-	}
+    public Integer getMonth() {
+        return month;
+    }
 
-	public void setMonth(Integer month) {
-		this.month = month;
-	}
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
 }

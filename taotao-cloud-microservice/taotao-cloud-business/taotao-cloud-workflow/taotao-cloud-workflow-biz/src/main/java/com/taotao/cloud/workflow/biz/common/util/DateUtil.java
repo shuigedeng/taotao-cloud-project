@@ -514,8 +514,7 @@ public class DateUtil {
      * @param k
      * @return
      */
-    public static List getTimeList(
-            int beginYear, int beginMonth, int endYear, int endMonth, int k) {
+    public static List getTimeList(int beginYear, int beginMonth, int endYear, int endMonth, int k) {
         List list = new ArrayList();
         if (beginYear == endYear) {
             for (int j = beginMonth; j <= endMonth; j++) {
@@ -631,8 +630,7 @@ public class DateUtil {
      */
     public static String daFormat(Long date) {
         DateTimeFormatter ftf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String dateString =
-                ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(date), ZoneId.of("+8")));
+        String dateString = ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(date), ZoneId.of("+8")));
         return dateString;
     }
 
@@ -644,8 +642,7 @@ public class DateUtil {
      */
     public static String daFormatYmd(Long date) {
         DateTimeFormatter ftf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String dateString =
-                ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(date), ZoneId.of("+8")));
+        String dateString = ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(date), ZoneId.of("+8")));
         return dateString;
     }
 
@@ -721,8 +718,7 @@ public class DateUtil {
      */
     public static String cstFormat(String str) {
         try {
-            SimpleDateFormat formatter =
-                    new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+            SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
             Date date = formatter.parse(str);
             return dateFormat(date);
         } catch (Exception e) {
@@ -1413,9 +1409,7 @@ public class DateUtil {
     public static List<Date> getAllDays(Date startTime, Date endTime) {
         List<Date> listDay = new ArrayList<>();
         Date dtDay = new Date();
-        for (dtDay = startTime;
-                dtDay.compareTo(endTime) <= 0;
-                dtDay = DateUtil.dateAddDays(dtDay, 1)) {
+        for (dtDay = startTime; dtDay.compareTo(endTime) <= 0; dtDay = DateUtil.dateAddDays(dtDay, 1)) {
             listDay.add(dtDay);
         }
         return listDay;
@@ -1555,8 +1549,7 @@ public class DateUtil {
         return convertSuccess;
     }
 
-    public static boolean isOverlap(
-            Date leftStartDate, Date leftEndDate, Date rightStartDate, Date rightEndDate) {
+    public static boolean isOverlap(Date leftStartDate, Date leftEndDate, Date rightStartDate, Date rightEndDate) {
 
         return ((leftStartDate.getTime() >= rightStartDate.getTime())
                         && leftStartDate.getTime() < rightEndDate.getTime())
@@ -1590,13 +1583,9 @@ public class DateUtil {
             long date1 = Long.parseLong(String.valueOf(jsonArray.get(0)));
             long date2 = Long.parseLong(String.valueOf(jsonArray.get(1)));
             String value1 =
-                    ftfDateRange.format(
-                            LocalDateTime.ofInstant(
-                                    Instant.ofEpochMilli(date1), ZoneId.systemDefault()));
+                    ftfDateRange.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(date1), ZoneId.systemDefault()));
             String value2 =
-                    ftfDateRange.format(
-                            LocalDateTime.ofInstant(
-                                    Instant.ofEpochMilli(date2), ZoneId.systemDefault()));
+                    ftfDateRange.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(date2), ZoneId.systemDefault()));
             jsonArray.clear();
             jsonArray.add(value1 + "至");
             jsonArray.add(value2);

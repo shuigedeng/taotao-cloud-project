@@ -137,7 +137,10 @@ public class JeepayKit {
         for (String key : keySet) {
             urlParam.append(key)
                     .append("=")
-                    .append(paraMap.get(key) == null ? "" : doEncode(paraMap.get(key).toString()));
+                    .append(
+                            paraMap.get(key) == null
+                                    ? ""
+                                    : doEncode(paraMap.get(key).toString()));
             if (++i == keySet.size()) {
                 break;
             }

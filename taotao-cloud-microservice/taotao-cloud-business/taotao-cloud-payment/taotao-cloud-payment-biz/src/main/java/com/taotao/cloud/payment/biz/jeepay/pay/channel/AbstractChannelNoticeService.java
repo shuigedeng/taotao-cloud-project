@@ -37,9 +37,14 @@ import org.springframework.http.ResponseEntity;
  */
 public abstract class AbstractChannelNoticeService implements IChannelNoticeService {
 
-    @Autowired private RequestKitBean requestKitBean;
-    @Autowired private ChannelCertConfigKitBean channelCertConfigKitBean;
-    @Autowired protected ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private RequestKitBean requestKitBean;
+
+    @Autowired
+    private ChannelCertConfigKitBean channelCertConfigKitBean;
+
+    @Autowired
+    protected ConfigContextQueryService configContextQueryService;
 
     @Override
     public ResponseEntity doNotifyOrderNotExists(HttpServletRequest request) {

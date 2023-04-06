@@ -52,8 +52,7 @@ public class WxH5 extends WxpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         WxH5OrderRQ bizRQ = (WxH5OrderRQ) rq;
 
@@ -69,17 +68,15 @@ public class WxH5 extends WxpayPaymentService {
         // 1. 如果抛异常，则订单状态为： 生成状态，此时没有查单处理操作。 订单将超时关闭
         // 2. 接口调用成功， 后续异常需进行捕捉， 如果 逻辑代码出现异常则需要走完正常流程，此时订单状态为： 支付中， 需要查单处理。
 
-        WxServiceWrapper wxServiceWrapper =
-                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
         WxPayService wxPayService = wxServiceWrapper.getWxPayService();
         try {
             WxPayMwebOrderResult wxPayMwebOrderResult = wxPayService.createOrder(req);
 
             String payUrl = wxPayMwebOrderResult.getMwebUrl();
-            payUrl =
-                    sysConfigService.getDBApplicationConfig().getPaySiteUrl()
-                            + "/api/common/payUrl/"
-                            + Base64.encode(payUrl);
+            payUrl = sysConfigService.getDBApplicationConfig().getPaySiteUrl()
+                    + "/api/common/payUrl/"
+                    + Base64.encode(payUrl);
 
             if (CS.PAY_DATA_TYPE.FORM.equals(bizRQ.getPayDataType())) { // 表单方式
                 res.setFormContent(payUrl);

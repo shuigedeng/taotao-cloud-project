@@ -42,17 +42,20 @@ import org.springframework.stereotype.Service;
 
 /** 会员签到业务层实现 */
 @Service
-public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, MemberSign>
-        implements IMemberSignService {
+public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, MemberSign> implements IMemberSignService {
 
     /** RocketMQ */
-    @Autowired private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
     /** RocketMQ 配置 */
-    @Autowired private RocketmqCustomProperties rocketmqCustomProperties;
+    @Autowired
+    private RocketmqCustomProperties rocketmqCustomProperties;
     /** 配置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
     /** 会员 */
-    @Autowired private IMemberService memberService;
+    @Autowired
+    private IMemberService memberService;
 
     @Override
     public Boolean memberSign() {
@@ -86,11 +89,8 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
                 this.baseMapper.insert(memberSign);
                 // 签到成功后发送消息赠送积分
                 String destination =
-                        rocketmqCustomProperties.getMemberTopic()
-                                + ":"
-                                + MemberTagsEnum.MEMBER_SING.name();
-                rocketMQTemplate.asyncSend(
-                        destination, memberSign, RocketmqSendCallbackBuilder.commonCallback());
+                        rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_SING.name();
+                rocketMQTemplate.asyncSend(destination, memberSign, RocketmqSendCallbackBuilder.commonCallback());
                 return true;
             } catch (Exception e) {
                 throw new ServiceException(ResultCode.MEMBER_SIGN_REPEAT);
@@ -101,8 +101,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 
     @Override
     public List<MemberSignVO> getMonthSignDay(String time) {
-        List<MemberSign> monthMemberSign =
-                this.baseMapper.getMonthMemberSign(SecurityUtils.getUserId(), time);
+        List<MemberSign> monthMemberSign = this.baseMapper.getMonthMemberSign(SecurityUtils.getUserId(), time);
         return BeanUtils.copy(monthMemberSign, MemberSignVO.class);
     }
 
@@ -110,8 +109,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
     public void memberSignSendPoint(Long memberId, Integer day) {
         try {
             // 获取签到积分赠送设置
-            PointSettingVO pointSetting =
-                    settingApi.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
+            PointSettingVO pointSetting = settingApi.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
             String content = "";
             // 赠送积分
             Long point = null;
@@ -130,8 +128,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
                 content = "会员签到第" + day + "天，赠送积分" + point + "分";
             }
             // 赠送会员积分
-            memberService.updateMemberPoint(
-                    point, PointTypeEnum.INCREASE.name(), memberId, content);
+            memberService.updateMemberPoint(point, PointTypeEnum.INCREASE.name(), memberId, content);
         } catch (Exception e) {
             LogUtils.error("会员签到错误", e);
         }

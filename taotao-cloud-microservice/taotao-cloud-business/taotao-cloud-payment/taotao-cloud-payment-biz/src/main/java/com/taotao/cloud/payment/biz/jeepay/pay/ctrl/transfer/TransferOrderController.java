@@ -53,10 +53,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TransferOrderController extends ApiController {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private TransferOrderService transferOrderService;
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
-    @Autowired private PayMchNotifyService payMchNotifyService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private TransferOrderService transferOrderService;
+
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
+
+    @Autowired
+    private PayMchNotifyService payMchNotifyService;
 
     /** 转账 * */
     @PostMapping("/api/transferOrder")
@@ -72,22 +79,19 @@ public class TransferOrderController extends ApiController {
             String ifCode = bizRQ.getIfCode();
 
             // 商户订单号是否重复
-            if (transferOrderService.count(
-                            TransferOrder.gw()
-                                    .eq(TransferOrder::getMchNo, mchNo)
-                                    .eq(TransferOrder::getMchOrderNo, bizRQ.getMchOrderNo()))
+            if (transferOrderService.count(TransferOrder.gw()
+                            .eq(TransferOrder::getMchNo, mchNo)
+                            .eq(TransferOrder::getMchOrderNo, bizRQ.getMchOrderNo()))
                     > 0) {
                 throw new BizException("商户订单[" + bizRQ.getMchOrderNo() + "]已存在");
             }
 
-            if (StringUtils.isNotEmpty(bizRQ.getNotifyUrl())
-                    && !StringKit.isAvailableUrl(bizRQ.getNotifyUrl())) {
+            if (StringUtils.isNotEmpty(bizRQ.getNotifyUrl()) && !StringKit.isAvailableUrl(bizRQ.getNotifyUrl())) {
                 throw new BizException("异步通知地址协议仅支持http:// 或 https:// !");
             }
 
             // 商户配置信息
-            MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(mchNo, appId);
+            MchAppConfigContext mchAppConfigContext = configContextQueryService.queryMchInfoAndAppInfo(mchNo, appId);
             if (mchAppConfigContext == null) {
                 throw new BizException("获取商户应用信息失败");
             }
@@ -122,8 +126,7 @@ public class TransferOrderController extends ApiController {
             transferOrderService.save(transferOrder);
 
             // 调起上游接口
-            ChannelRetMsg channelRetMsg =
-                    transferService.transfer(bizRQ, transferOrder, mchAppConfigContext);
+            ChannelRetMsg channelRetMsg = transferService.transfer(bizRQ, transferOrder, mchAppConfigContext);
 
             // 处理退款单状态
             this.processChannelMsg(channelRetMsg, transferOrder);
@@ -156,8 +159,7 @@ public class TransferOrderController extends ApiController {
         }
     }
 
-    private TransferOrder genTransferOrder(
-            TransferOrderRQ rq, MchInfo mchInfo, MchApp mchApp, String ifCode) {
+    private TransferOrder genTransferOrder(TransferOrderRQ rq, MchInfo mchInfo, MchApp mchApp, String ifCode) {
 
         TransferOrder transferOrder = new TransferOrder();
         transferOrder.setTransferId(SeqKit.genTransferId()); // 生成转账订单号
@@ -171,8 +173,7 @@ public class TransferOrderController extends ApiController {
         transferOrder.setEntryType(rq.getEntryType()); // 入账方式
         transferOrder.setAmount(rq.getAmount()); // 订单金额
         transferOrder.setCurrency(rq.getCurrency()); // 币种
-        transferOrder.setClientIp(
-                StringUtils.defaultIfEmpty(rq.getClientIp(), getClientIp())); // 客户端IP
+        transferOrder.setClientIp(StringUtils.defaultIfEmpty(rq.getClientIp(), getClientIp())); // 客户端IP
         transferOrder.setState(TransferOrder.STATE_INIT); // 订单状态, 默认订单生成状态
         transferOrder.setAccountNo(rq.getAccountNo()); // 收款账号
         transferOrder.setAccountName(rq.getAccountName()); // 账户姓名
@@ -197,15 +198,13 @@ public class TransferOrderController extends ApiController {
         // 明确成功
         if (ChannelRetMsg.ChannelState.CONFIRM_SUCCESS == channelRetMsg.getChannelState()) {
 
-            this.updateInitOrderStateThrowException(
-                    TransferOrder.STATE_SUCCESS, transferOrder, channelRetMsg);
+            this.updateInitOrderStateThrowException(TransferOrder.STATE_SUCCESS, transferOrder, channelRetMsg);
             payMchNotifyService.transferOrderNotify(transferOrder);
 
             // 明确失败
         } else if (ChannelRetMsg.ChannelState.CONFIRM_FAIL == channelRetMsg.getChannelState()) {
 
-            this.updateInitOrderStateThrowException(
-                    TransferOrder.STATE_FAIL, transferOrder, channelRetMsg);
+            this.updateInitOrderStateThrowException(TransferOrder.STATE_FAIL, transferOrder, channelRetMsg);
             payMchNotifyService.transferOrderNotify(transferOrder);
 
             // 上游处理中 || 未知 || 上游接口返回异常  订单为支付中状态
@@ -213,8 +212,7 @@ public class TransferOrderController extends ApiController {
                 || ChannelRetMsg.ChannelState.UNKNOWN == channelRetMsg.getChannelState()
                 || ChannelRetMsg.ChannelState.API_RET_ERROR == channelRetMsg.getChannelState()) {
 
-            this.updateInitOrderStateThrowException(
-                    TransferOrder.STATE_ING, transferOrder, channelRetMsg);
+            this.updateInitOrderStateThrowException(TransferOrder.STATE_ING, transferOrder, channelRetMsg);
 
             // 系统异常：  订单不再处理。  为： 生成状态
         } else if (ChannelRetMsg.ChannelState.SYS_ERROR == channelRetMsg.getChannelState()) {
@@ -239,13 +237,12 @@ public class TransferOrderController extends ApiController {
             throw new BizException("更新转账订单异常!");
         }
 
-        isSuccess =
-                transferOrderService.updateIng2SuccessOrFail(
-                        transferOrder.getTransferId(),
-                        transferOrder.getState(),
-                        channelRetMsg.getChannelOrderId(),
-                        channelRetMsg.getChannelErrCode(),
-                        channelRetMsg.getChannelErrMsg());
+        isSuccess = transferOrderService.updateIng2SuccessOrFail(
+                transferOrder.getTransferId(),
+                transferOrder.getState(),
+                channelRetMsg.getChannelOrderId(),
+                channelRetMsg.getChannelErrCode(),
+                channelRetMsg.getChannelErrMsg());
         if (!isSuccess) {
             throw new BizException("更新转账订单异常!");
         }

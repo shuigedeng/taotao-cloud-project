@@ -50,21 +50,19 @@ public class SsoServerController {
     private void configSso(SaSsoConfig sso) {
 
         // 配置：未登录时返回的View
-        sso.setNotLoginView(
-                () -> {
-                    return new ModelAndView("sa-login.html");
-                });
+        sso.setNotLoginView(() -> {
+            return new ModelAndView("sa-login.html");
+        });
 
         // 配置：登录处理函数
-        sso.setDoLoginHandle(
-                (name, pwd) -> {
-                    // 此处仅做模拟登录，真实环境应该查询数据进行登录
-                    if ("sa".equals(name) && "123456".equals(pwd)) {
-                        StpUtil.login(10001);
-                        return SaResult.ok("登录成功！").setData(StpUtil.getTokenValue());
-                    }
-                    return SaResult.error("登录失败！");
-                });
+        sso.setDoLoginHandle((name, pwd) -> {
+            // 此处仅做模拟登录，真实环境应该查询数据进行登录
+            if ("sa".equals(name) && "123456".equals(pwd)) {
+                StpUtil.login(10001);
+                return SaResult.ok("登录成功！").setData(StpUtil.getTokenValue());
+            }
+            return SaResult.error("登录失败！");
+        });
 
         // 配置 Http 请求处理器 （在模式三的单点注销功能下用到，如不需要可以注释掉）
         // sso.setSendHttp(url -> {

@@ -23,7 +23,8 @@ import org.apache.shiro.authc.AuthenticationException;
 /** 登录异常 */
 public class LoginException extends AuthenticationException {
 
-    @Getter private ResultCodeEnum code;
+    @Getter
+    private ResultCodeEnum code;
 
     public LoginException(String message) {
         super(message);

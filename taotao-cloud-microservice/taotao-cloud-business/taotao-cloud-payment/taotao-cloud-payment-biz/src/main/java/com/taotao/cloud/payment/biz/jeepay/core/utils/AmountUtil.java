@@ -37,8 +37,7 @@ public class AmountUtil {
      */
     public static String convertDollar2Cent(String str) {
         DecimalFormat df = new DecimalFormat("0.00");
-        StringBuffer sb =
-                df.format(Double.parseDouble(str), new StringBuffer(), new FieldPosition(0));
+        StringBuffer sb = df.format(Double.parseDouble(str), new StringBuffer(), new FieldPosition(0));
         int idx = sb.toString().indexOf(".");
         sb.deleteCharAt(idx);
         for (; sb.length() != 1; ) {

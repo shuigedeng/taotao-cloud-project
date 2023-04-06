@@ -86,8 +86,7 @@ public interface IStoreFlowService extends IService<StoreFlow> {
      * @return {@link List }<{@link StoreFlowRefundDownloadVO }>
      * @since 2022-04-28 08:54:53
      */
-    List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(
-            StoreFlowPageQuery storeFlowQueryDTO);
+    List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(StoreFlowPageQuery storeFlowQueryDTO);
 
     /**
      * 根据结算单ID获取商家流水

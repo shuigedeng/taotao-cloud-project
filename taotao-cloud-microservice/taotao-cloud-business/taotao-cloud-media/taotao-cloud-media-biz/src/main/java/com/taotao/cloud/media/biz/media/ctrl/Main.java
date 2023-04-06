@@ -30,8 +30,7 @@ public class Main {
         //		boolean imgSavePath = Control.getImgSavePath("192.168.106.151", "D:\\tempFile\\4.jpg");
 
         // 制摄像机云台控制(开启)
-        Control.cloudControl(
-                "192.168.106.151", CloudCode.PAN_RIGHT, CloudCode.SPEED_LV6, CloudCode.START);
+        Control.cloudControl("192.168.106.151", CloudCode.PAN_RIGHT, CloudCode.SPEED_LV6, CloudCode.START);
         try {
             // 让云台运行1000ms
             Thread.sleep(1000);
@@ -39,8 +38,7 @@ public class Main {
             e.printStackTrace();
         }
         // 制摄像机云台控制(关闭)
-        Control.cloudControl(
-                "192.168.106.151", CloudCode.PAN_RIGHT, CloudCode.SPEED_LV6, CloudCode.END);
+        Control.cloudControl("192.168.106.151", CloudCode.PAN_RIGHT, CloudCode.SPEED_LV6, CloudCode.END);
         //
         //		System.out.println(imgSavePath);
 

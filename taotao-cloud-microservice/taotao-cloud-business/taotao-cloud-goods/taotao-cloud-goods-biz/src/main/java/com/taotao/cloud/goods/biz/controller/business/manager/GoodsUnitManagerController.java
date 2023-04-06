@@ -87,8 +87,7 @@ public class GoodsUnitManagerController {
     @RequestLogger("编辑商品计量单位")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
-    public Result<Boolean> update(
-            @NotNull @PathVariable Long id, @Valid @RequestBody GoodsUnit goodsUnit) {
+    public Result<Boolean> update(@NotNull @PathVariable Long id, @Valid @RequestBody GoodsUnit goodsUnit) {
         goodsUnit.setId(id);
         return Result.success(goodsUnitService.updateById(goodsUnit));
     }

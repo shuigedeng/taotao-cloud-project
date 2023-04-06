@@ -27,8 +27,7 @@ import java.util.stream.Collectors;
  * @site https://www.jeepay.vip
  * @date 2021-06-08 11:00
  */
-public class CaseInsensitiveMap<V> extends AbstractMap<String, V>
-        implements Map<String, V>, Cloneable, Serializable {
+public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Map<String, V>, Cloneable, Serializable {
 
     private static final long serialVersionUID = -1121409735905111733L;
 
@@ -92,16 +91,12 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V>
 
     @Override
     public Set<String> keySet() {
-        return this.store.values().stream()
-                .map(entry -> entry.getKey())
-                .collect(Collectors.toSet());
+        return this.store.values().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
     }
 
     @Override
     public Collection<V> values() {
-        return this.store.values().stream()
-                .map(entry -> entry.getValue())
-                .collect(Collectors.toList());
+        return this.store.values().stream().map(entry -> entry.getValue()).collect(Collectors.toList());
     }
 
     @Override

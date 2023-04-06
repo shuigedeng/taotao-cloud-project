@@ -75,8 +75,7 @@ public class PinyinServiceImpl implements IPinYinService {
         Set<Object> keys = properties.keySet();
         for (Object lastNameObject : keys) {
             String lastname = (String) lastNameObject;
-            if (lastnameChines.length() >= lastname.length()
-                    && lastnameChines.startsWith(lastname)) {
+            if (lastnameChines.length() >= lastname.length() && lastnameChines.startsWith(lastname)) {
                 return properties.getProperty(lastname);
             }
         }
@@ -109,9 +108,7 @@ public class PinyinServiceImpl implements IPinYinService {
             for (char chineseWord : chineseWordsArray) {
                 // 判断是否为汉字字符
                 if (Character.toString(chineseWord).matches(CHINESE_WORDS_REGEX)) {
-                    String[] strings =
-                            PinyinHelper.toHanyuPinyinStringArray(
-                                    chineseWord, hanyuPinyinOutputFormat);
+                    String[] strings = PinyinHelper.toHanyuPinyinStringArray(chineseWord, hanyuPinyinOutputFormat);
                     finalPinyinString.append(strings[0]);
                 } else {
                     finalPinyinString.append(chineseWord);
@@ -174,9 +171,7 @@ public class PinyinServiceImpl implements IPinYinService {
 
                 // 如果字符是中文,则将中文转为汉语拼音,并取第一个字母
                 if (str.matches(CHINESE_WORDS_REGEX)) {
-                    hanyupinyin.append(
-                            PinyinHelper.toHanyuPinyinStringArray(word, defaultFormat)[0].charAt(
-                                    0));
+                    hanyupinyin.append(PinyinHelper.toHanyuPinyinStringArray(word, defaultFormat)[0].charAt(0));
                 }
                 // 如果字符是数字,取数字
                 else if (str.matches("[0-9]+")) {

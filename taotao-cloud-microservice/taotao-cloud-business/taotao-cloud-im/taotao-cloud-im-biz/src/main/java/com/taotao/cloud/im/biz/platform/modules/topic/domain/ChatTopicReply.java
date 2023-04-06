@@ -34,7 +34,8 @@ public class ChatTopicReply extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId private Long replyId;
+    @TableId
+    private Long replyId;
     /** 回复类型1帖子2用户 */
     private TopicReplyTypeEnum replyType;
     /** 回复状态 */

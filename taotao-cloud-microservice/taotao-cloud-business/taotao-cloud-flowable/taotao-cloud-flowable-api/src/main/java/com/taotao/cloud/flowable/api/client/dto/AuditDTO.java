@@ -29,7 +29,8 @@ import lombok.Data;
 @Data
 public class AuditDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -945627686622034109L;
+    @Serial
+    private static final long serialVersionUID = -945627686622034109L;
     /** 任务id */
     @NotBlank(message = "任务编号不为空")
     private String taskId;

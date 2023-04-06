@@ -35,8 +35,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class FaceUtils {
 
-    @Autowired private AipFace client; // 按类型注入IOC容器中的AipFace客户端对象
-    @Autowired private BaiduFaceProperties properties;
+    @Autowired
+    private AipFace client; // 按类型注入IOC容器中的AipFace客户端对象
+
+    @Autowired
+    private BaiduFaceProperties properties;
 
     private HashMap<String, String> options;
 
@@ -84,8 +87,7 @@ public class FaceUtils {
         byte[] bytes = Files.readAllBytes(Paths.get(facePath));
         String image = Base64Util.encode(bytes);
         String imageType = "BASE64";
-        JSONObject result =
-                client.addUser(image, imageType, properties.getGroupId(), userId, options);
+        JSONObject result = client.addUser(image, imageType, properties.getGroupId(), userId, options);
         System.out.println(result.toString(2));
         String msg = result.getString("error_msg");
         if (result.getInt("error_code") == 0) { // 通用的看error_code，对应的值为0，则表示成功
@@ -144,7 +146,8 @@ public class FaceUtils {
         System.out.println(res.toString(2));
         System.out.println(res.getJSONObject("result"));
         System.out.println(res.getJSONObject("result").getJSONArray("user_list"));
-        JSONObject user = (JSONObject) res.getJSONObject("result").getJSONArray("user_list").get(0);
+        JSONObject user = (JSONObject)
+                res.getJSONObject("result").getJSONArray("user_list").get(0);
         Double score = (Double) user.get("score");
 
         return score;

@@ -45,16 +45,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionGoodsBuyerController {
 
     /** 分销商品 */
-    @Autowired private IDistributionGoodsService distributionGoodsService;
+    @Autowired
+    private IDistributionGoodsService distributionGoodsService;
     /** 选择分销商品 */
-    @Autowired private IDistributionSelectedGoodsService distributionSelectedGoodsService;
+    @Autowired
+    private IDistributionSelectedGoodsService distributionSelectedGoodsService;
 
     @Operation(summary = "获取分销商商品列表", description = "获取分销商商品列表")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping
-    public Result<IPage<DistributionGoodsVO>> distributionGoods(
-            DistributionGoodsPageQuery distributionGoodsPageQuery) {
+    public Result<IPage<DistributionGoodsVO>> distributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
         return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
     }
 
@@ -65,8 +66,7 @@ public class DistributionGoodsBuyerController {
     @PreventDuplicateSubmissions
     @GetMapping(value = "/checked/{distributionGoodsId}")
     public Result<Object> distributionCheckGoods(
-            @NotNull(message = "分销商品不能为空") @PathVariable("distributionGoodsId")
-                    String distributionGoodsId,
+            @NotNull(message = "分销商品不能为空") @PathVariable("distributionGoodsId") String distributionGoodsId,
             @Parameter(description = "是否选择") Boolean checked) {
         boolean result = false;
         if (checked) {

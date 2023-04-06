@@ -107,13 +107,8 @@ public class WxPortalController {
             out = outMessage.toXml();
         } else if ("aes".equalsIgnoreCase(encType)) {
             // aes加密的消息
-            WxMpXmlMessage inMessage =
-                    WxMpXmlMessage.fromEncryptedXml(
-                            requestBody,
-                            wxService.getWxMpConfigStorage(),
-                            timestamp,
-                            nonce,
-                            msgSignature);
+            WxMpXmlMessage inMessage = WxMpXmlMessage.fromEncryptedXml(
+                    requestBody, wxService.getWxMpConfigStorage(), timestamp, nonce, msgSignature);
             log.debug("\n消息解密后内容为：\n{} ", inMessage.toString());
             WxMpXmlOutMessage outMessage = this.route(inMessage);
             if (outMessage == null) {

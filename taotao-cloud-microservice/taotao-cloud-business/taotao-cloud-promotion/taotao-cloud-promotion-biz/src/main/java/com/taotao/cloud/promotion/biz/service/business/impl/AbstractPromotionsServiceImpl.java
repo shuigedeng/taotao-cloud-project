@@ -52,18 +52,20 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 2022.04
  * @since 2022-04-27 16:44:46
  */
-public class AbstractPromotionsServiceImpl<
-                M extends BaseSuperMapper<T>, T extends BasePromotions<T, Long>>
+public class AbstractPromotionsServiceImpl<M extends BaseSuperMapper<T>, T extends BasePromotions<T, Long>>
         extends ServiceImpl<M, T> implements AbstractPromotionsService<T> {
 
     /** 推广产品服务 促销商品 */
-    @Autowired private IPromotionGoodsService promotionGoodsService;
+    @Autowired
+    private IPromotionGoodsService promotionGoodsService;
 
     /** rocketmq自定义属性 rocketMq配置 */
-    @Autowired private RocketmqCustomProperties rocketmqCustomProperties;
+    @Autowired
+    private RocketmqCustomProperties rocketmqCustomProperties;
 
     /** 火箭mqtemplate rocketMq */
-    @Autowired private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     /**
      * 通用促销保存 调用顺序: 1. initPromotion 初始化促销信息 2. checkPromotions 检查促销参数 3. save 保存促销信息 4.
@@ -113,17 +115,13 @@ public class AbstractPromotionsServiceImpl<
             this.updateEsGoodsIndex(t);
         }
         if (startTime != null && endTime != null) {
-            return this.update(
-                    new UpdateWrapper<T>()
-                            .in("id", ids)
-                            .set("start_time", new Date(startTime))
-                            .set("end_time", new Date(endTime)));
+            return this.update(new UpdateWrapper<T>()
+                    .in("id", ids)
+                    .set("start_time", new Date(startTime))
+                    .set("end_time", new Date(endTime)));
         } else {
             return this.update(
-                    new UpdateWrapper<T>()
-                            .in("id", ids)
-                            .set("start_time", null)
-                            .set("end_time", null));
+                    new UpdateWrapper<T>().in("id", ids).set("start_time", null).set("end_time", null));
         }
     }
 
@@ -141,8 +139,7 @@ public class AbstractPromotionsServiceImpl<
     }
 
     @Override
-    public <S extends BasePromotionsSearchQuery> IPage<T> pageFindAll(
-            S searchParams, PageQuery page) {
+    public <S extends BasePromotionsSearchQuery> IPage<T> pageFindAll(S searchParams, PageQuery page) {
         // page.setNotConvert(false);
         return this.page(page.buildMpPage(), searchParams.queryWrapper());
     }
@@ -176,8 +173,7 @@ public class AbstractPromotionsServiceImpl<
     @Transactional(rollbackFor = {Exception.class})
     public void updatePromotionsGoods(T promotions) {
         if (promotions.getStartTime() == null && promotions.getEndTime() == null) {
-            this.promotionGoodsService.deletePromotionGoods(
-                    Collections.singletonList(promotions.getId()));
+            this.promotionGoodsService.deletePromotionGoods(Collections.singletonList(promotions.getId()));
             return;
         }
 
@@ -191,8 +187,7 @@ public class AbstractPromotionsServiceImpl<
             promotionGoods.setEndTime(promotions.getEndTime());
             promotionGoods.setPromotionType(this.getPromotionType().name());
             promotionGoods.setTitle(promotions.getPromotionName());
-            this.promotionGoodsService.deletePromotionGoods(
-                    Collections.singletonList(promotions.getId()));
+            this.promotionGoodsService.deletePromotionGoods(Collections.singletonList(promotions.getId()));
             this.promotionGoodsService.save(promotionGoods);
         }
     }
@@ -202,12 +197,9 @@ public class AbstractPromotionsServiceImpl<
         if (promotions.getStartTime() == null && promotions.getEndTime() == null) {
             // 删除商品促销消息
             String destination =
-                    rocketmqCustomProperties.getGoodsTopic()
-                            + ":"
-                            + GoodsTagsEnum.DELETE_GOODS_INDEX_PROMOTIONS.name();
+                    rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.DELETE_GOODS_INDEX_PROMOTIONS.name();
             // 发送mq消息
-            rocketMQTemplate.asyncSend(
-                    destination, promotions.getId(), RocketmqSendCallbackBuilder.commonCallback());
+            rocketMQTemplate.asyncSend(destination, promotions.getId(), RocketmqSendCallbackBuilder.commonCallback());
         } else {
 
             String esPromotionKey = this.getPromotionType().name() + "-" + promotions.getId();
@@ -220,14 +212,10 @@ public class AbstractPromotionsServiceImpl<
             map.put("promotions", promotions);
             // 更新商品促销消息
             String destination =
-                    rocketmqCustomProperties.getGoodsTopic()
-                            + ":"
-                            + GoodsTagsEnum.UPDATE_GOODS_INDEX_PROMOTIONS.name();
+                    rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.UPDATE_GOODS_INDEX_PROMOTIONS.name();
             // 发送mq消息
             rocketMQTemplate.asyncSend(
-                    destination,
-                    JSONUtil.toJsonStr(map),
-                    RocketmqSendCallbackBuilder.commonCallback());
+                    destination, JSONUtil.toJsonStr(map), RocketmqSendCallbackBuilder.commonCallback());
         }
     }
 

@@ -82,8 +82,7 @@ public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper,
      * @return
      */
     @Override
-    public List<JustAuthConfigDTO> queryJustAuthConfigList(
-            QueryJustAuthConfigDTO queryJustAuthConfigDTO) {
+    public List<JustAuthConfigDTO> queryJustAuthConfigList(QueryJustAuthConfigDTO queryJustAuthConfigDTO) {
         List<JustAuthConfigDTO> justAuthConfigInfoList =
                 justAuthConfigMapper.queryJustAuthConfigList(queryJustAuthConfigDTO);
         return justAuthConfigInfoList;
@@ -97,8 +96,7 @@ public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper,
      */
     @Override
     public JustAuthConfigDTO queryJustAuthConfig(QueryJustAuthConfigDTO queryJustAuthConfigDTO) {
-        JustAuthConfigDTO justAuthConfigDTO =
-                justAuthConfigMapper.queryJustAuthConfig(queryJustAuthConfigDTO);
+        JustAuthConfigDTO justAuthConfigDTO = justAuthConfigMapper.queryJustAuthConfig(queryJustAuthConfigDTO);
         return justAuthConfigDTO;
     }
 
@@ -110,8 +108,7 @@ public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper,
      */
     @Override
     public boolean createJustAuthConfig(CreateJustAuthConfigDTO justAuthConfig) {
-        JustAuthConfig justAuthConfigEntity =
-                BeanCopierUtils.copyByClass(justAuthConfig, JustAuthConfig.class);
+        JustAuthConfig justAuthConfigEntity = BeanCopierUtils.copyByClass(justAuthConfig, JustAuthConfig.class);
         boolean result = this.save(justAuthConfigEntity);
         if (result) {
             // 新增到缓存
@@ -131,8 +128,7 @@ public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper,
      */
     @Override
     public boolean updateJustAuthConfig(UpdateJustAuthConfigDTO justAuthConfig) {
-        JustAuthConfig justAuthConfigEntity =
-                BeanCopierUtils.copyByClass(justAuthConfig, JustAuthConfig.class);
+        JustAuthConfig justAuthConfigEntity = BeanCopierUtils.copyByClass(justAuthConfig, JustAuthConfig.class);
         boolean result = this.updateById(justAuthConfigEntity);
         if (result) {
             // 更新到缓存
@@ -200,14 +196,12 @@ public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper,
         // 判断是否开启了租户模式，如果开启了，那么角色权限需要按租户进行分类存储
         if (enable) {
             Map<Long, List<JustAuthConfigDTO>> authSourceListMap =
-                    justAuthSourceInfoList.stream()
-                            .collect(Collectors.groupingBy(JustAuthConfigDTO::getTenantId));
-            authSourceListMap.forEach(
-                    (key, value) -> {
-                        String redisKey = AuthConstant.SOCIAL_TENANT_CONFIG_KEY + key;
-                        redisTemplate.delete(redisKey);
-                        addJustAuthConfig(redisKey, value);
-                    });
+                    justAuthSourceInfoList.stream().collect(Collectors.groupingBy(JustAuthConfigDTO::getTenantId));
+            authSourceListMap.forEach((key, value) -> {
+                String redisKey = AuthConstant.SOCIAL_TENANT_CONFIG_KEY + key;
+                redisTemplate.delete(redisKey);
+                addJustAuthConfig(redisKey, value);
+            });
 
         } else {
             redisTemplate.delete(AuthConstant.SOCIAL_CONFIG_KEY);
@@ -217,21 +211,16 @@ public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper,
 
     private void addJustAuthConfig(String key, List<JustAuthConfigDTO> configList) {
         Map<String, String> authConfigMap = new TreeMap<>();
-        Optional.ofNullable(configList)
-                .orElse(new ArrayList<>())
-                .forEach(
-                        config -> {
-                            try {
-                                authConfigMap.put(
-                                        enable
-                                                ? config.getTenantId().toString()
-                                                : AuthConstant.SOCIAL_DEFAULT,
-                                        JsonUtils.objToJson(config));
-                                redisTemplate.opsForHash().putAll(key, authConfigMap);
-                            } catch (Exception e) {
-                                log.error("初始化第三方登录失败：{}", e);
-                            }
-                        });
+        Optional.ofNullable(configList).orElse(new ArrayList<>()).forEach(config -> {
+            try {
+                authConfigMap.put(
+                        enable ? config.getTenantId().toString() : AuthConstant.SOCIAL_DEFAULT,
+                        JsonUtils.objToJson(config));
+                redisTemplate.opsForHash().putAll(key, authConfigMap);
+            } catch (Exception e) {
+                log.error("初始化第三方登录失败：{}", e);
+            }
+        });
     }
 
     private void addOrUpdateJustAuthConfigCache(JustAuthConfigDTO justAuthConfig) {
@@ -244,9 +233,7 @@ public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper,
                     .opsForHash()
                     .put(
                             redisKey,
-                            enable
-                                    ? justAuthConfig.getTenantId().toString()
-                                    : AuthConstant.SOCIAL_DEFAULT,
+                            enable ? justAuthConfig.getTenantId().toString() : AuthConstant.SOCIAL_DEFAULT,
                             JsonUtils.objToJson(justAuthConfig));
         } catch (Exception e) {
             log.error("修改第三方登录缓存失败：{}", e);
@@ -263,9 +250,7 @@ public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper,
                     .opsForHash()
                     .delete(
                             redisKey,
-                            enable
-                                    ? justAuthConfig.getTenantId().toString()
-                                    : AuthConstant.SOCIAL_DEFAULT,
+                            enable ? justAuthConfig.getTenantId().toString() : AuthConstant.SOCIAL_DEFAULT,
                             JsonUtils.objToJson(justAuthConfig));
         } catch (Exception e) {
             log.error("删除第三方登录缓存失败：{}", e);

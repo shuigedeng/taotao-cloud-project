@@ -74,13 +74,10 @@ public class CommissionRender implements ICartRenderStep {
 
                 PriceDetailDTO priceDetailDTO = cartSkuVO.getPriceDetailDTO();
                 // 平台佣金根据分类计算
-                String categoryId =
-                        cartSkuVO
-                                .getGoodsSku()
-                                .getCategoryPath()
-                                .substring(
-                                        cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",")
-                                                + 1);
+                String categoryId = cartSkuVO
+                        .getGoodsSku()
+                        .getCategoryPath()
+                        .substring(cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1);
                 if (StrUtil.isNotEmpty(categoryId)) {
                     BigDecimal commissionRate =
                             categoryService.getById(categoryId).getCommissionRate();
@@ -89,16 +86,14 @@ public class CommissionRender implements ICartRenderStep {
 
                 // 如果积分订单 积分订单，单独操作订单结算金额和商家结算字段
                 if (tradeDTO.getCartTypeEnum().equals(CartTypeEnum.POINTS)) {
-                    PointsGoodsVO pointsGoodsVO =
-                            pointsGoodsService.getPointsGoodsDetailBySkuId(
-                                    cartSkuVO.getGoodsSku().getId());
+                    PointsGoodsVO pointsGoodsVO = pointsGoodsService.getPointsGoodsDetailBySkuId(
+                            cartSkuVO.getGoodsSku().getId());
                     priceDetailDTO.setSettlementPrice(pointsGoodsVO.getSettlementPrice());
                 }
                 // 如果砍价订单 计算金额，单独操作订单结算金额和商家结算字段
                 else if (tradeDTO.getCartTypeEnum().equals(CartTypeEnum.KANJIA)) {
-                    KanjiaActivityGoods kanjiaActivityGoods =
-                            kanjiaActivityGoodsService.getKanjiaGoodsBySkuId(
-                                    cartSkuVO.getGoodsSku().getId());
+                    KanjiaActivityGoods kanjiaActivityGoods = kanjiaActivityGoodsService.getKanjiaGoodsBySkuId(
+                            cartSkuVO.getGoodsSku().getId());
                     priceDetailDTO.setSettlementPrice(kanjiaActivityGoods.getSettlementPrice());
                 }
             }

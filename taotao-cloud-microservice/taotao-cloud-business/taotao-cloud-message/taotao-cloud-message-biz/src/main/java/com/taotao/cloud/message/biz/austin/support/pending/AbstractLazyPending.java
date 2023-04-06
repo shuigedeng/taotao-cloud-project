@@ -53,44 +53,34 @@ public abstract class AbstractLazyPending<T> {
     @PostConstruct
     public void initConsumePending() {
         ExecutorService executorService = SupportThreadPoolConfig.getPendingSingleThreadPool();
-        executorService.execute(
-                () -> {
-                    while (true) {
-                        try {
-                            T obj =
-                                    pendingParam
-                                            .getQueue()
-                                            .poll(
-                                                    pendingParam.getTimeThreshold(),
-                                                    TimeUnit.MILLISECONDS);
-                            if (null != obj) {
-                                tasks.add(obj);
-                            }
-
-                            // 处理条件：1. 数量超限 2. 时间超限
-                            if (CollUtil.isNotEmpty(tasks) && dataReady()) {
-                                List<T> taskRef = tasks;
-                                tasks = Lists.newArrayList();
-                                lastHandleTime = System.currentTimeMillis();
-
-                                // 具体执行逻辑
-                                pendingParam
-                                        .getExecutorService()
-                                        .execute(() -> this.handle(taskRef));
-                            }
-
-                            // 判断是否停止当前线程
-                            if (stop && CollUtil.isEmpty(tasks)) {
-                                executorService.shutdown();
-                                break;
-                            }
-                        } catch (Exception e) {
-                            log.error(
-                                    "Pending#initConsumePending failed:{}",
-                                    Throwables.getStackTraceAsString(e));
-                        }
+        executorService.execute(() -> {
+            while (true) {
+                try {
+                    T obj = pendingParam.getQueue().poll(pendingParam.getTimeThreshold(), TimeUnit.MILLISECONDS);
+                    if (null != obj) {
+                        tasks.add(obj);
                     }
-                });
+
+                    // 处理条件：1. 数量超限 2. 时间超限
+                    if (CollUtil.isNotEmpty(tasks) && dataReady()) {
+                        List<T> taskRef = tasks;
+                        tasks = Lists.newArrayList();
+                        lastHandleTime = System.currentTimeMillis();
+
+                        // 具体执行逻辑
+                        pendingParam.getExecutorService().execute(() -> this.handle(taskRef));
+                    }
+
+                    // 判断是否停止当前线程
+                    if (stop && CollUtil.isEmpty(tasks)) {
+                        executorService.shutdown();
+                        break;
+                    }
+                } catch (Exception e) {
+                    log.error("Pending#initConsumePending failed:{}", Throwables.getStackTraceAsString(e));
+                }
+            }
+        });
     }
 
     /**

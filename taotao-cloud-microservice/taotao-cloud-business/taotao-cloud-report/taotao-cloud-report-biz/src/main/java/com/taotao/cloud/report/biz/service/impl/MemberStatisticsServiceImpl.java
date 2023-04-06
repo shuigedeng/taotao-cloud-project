@@ -27,8 +27,7 @@ import org.springframework.stereotype.Service;
 
 /** 会员统计业务层实现 */
 @Service
-public class MemberStatisticsServiceImpl
-        extends ServiceImpl<MemberStatisticsMapper, MemberStatisticsData>
+public class MemberStatisticsServiceImpl extends ServiceImpl<MemberStatisticsMapper, MemberStatisticsData>
         implements MemberStatisticsService {
 
     @Override

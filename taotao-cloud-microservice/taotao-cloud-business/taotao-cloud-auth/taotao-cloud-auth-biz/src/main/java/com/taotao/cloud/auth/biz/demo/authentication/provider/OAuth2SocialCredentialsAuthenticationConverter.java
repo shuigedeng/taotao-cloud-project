@@ -63,19 +63,15 @@ public class OAuth2SocialCredentialsAuthenticationConverter implements Authentic
         MultiValueMap<String, String> parameters = OAuth2EndpointUtils.getParameters(request);
 
         // scope (OPTIONAL)
-        String scope =
-                OAuth2EndpointUtils.checkOptionalParameter(parameters, OAuth2ParameterNames.SCOPE);
+        String scope = OAuth2EndpointUtils.checkOptionalParameter(parameters, OAuth2ParameterNames.SCOPE);
 
         Set<String> requestedScopes = null;
         if (StringUtils.hasText(scope)) {
-            requestedScopes =
-                    new HashSet<>(
-                            Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
+            requestedScopes = new HashSet<>(Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
         }
 
         // source (REQUIRED)
-        String source =
-                OAuth2EndpointUtils.checkRequiredParameter(parameters, BaseConstants.SOURCE);
+        String source = OAuth2EndpointUtils.checkRequiredParameter(parameters, BaseConstants.SOURCE);
         // others (REQUIRED)
         // TODO：2022-03-31 这里主要是作为参数的检查，社交登录内容比较多，后续根据实际情况添加
         if (StringUtils.hasText(source)) {
@@ -104,19 +100,13 @@ public class OAuth2SocialCredentialsAuthenticationConverter implements Authentic
 
         String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
 
-        Map<String, Object> additionalParameters =
-                parameters.entrySet().stream()
-                        .filter(
-                                e ->
-                                        !e.getKey().equals(OAuth2ParameterNames.GRANT_TYPE)
-                                                && !e.getKey().equals(OAuth2ParameterNames.SCOPE))
-                        .collect(
-                                Collectors.toMap(
-                                        Map.Entry::getKey,
-                                        e -> parameterDecrypt(e.getValue().get(0), sessionId)));
+        Map<String, Object> additionalParameters = parameters.entrySet().stream()
+                .filter(e -> !e.getKey().equals(OAuth2ParameterNames.GRANT_TYPE)
+                        && !e.getKey().equals(OAuth2ParameterNames.SCOPE))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey, e -> parameterDecrypt(e.getValue().get(0), sessionId)));
 
-        return new OAuth2SocialCredentialsAuthenticationToken(
-                clientPrincipal, requestedScopes, additionalParameters);
+        return new OAuth2SocialCredentialsAuthenticationToken(clientPrincipal, requestedScopes, additionalParameters);
     }
 
     private Object parameterDecrypt(Object object, String sessionId) {
@@ -126,8 +116,7 @@ public class OAuth2SocialCredentialsAuthenticationConverter implements Authentic
                     return httpCryptoProcessor.decrypt(sessionId, object.toString());
                 } catch (SessionInvalidException e) {
                     OAuth2EndpointUtils.throwError(
-                            cn.herodotus.engine.oauth2.core.constants.OAuth2ErrorCodes
-                                    .SESSION_EXPIRED,
+                            cn.herodotus.engine.oauth2.core.constants.OAuth2ErrorCodes.SESSION_EXPIRED,
                             e.getMessage(),
                             OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
                 }

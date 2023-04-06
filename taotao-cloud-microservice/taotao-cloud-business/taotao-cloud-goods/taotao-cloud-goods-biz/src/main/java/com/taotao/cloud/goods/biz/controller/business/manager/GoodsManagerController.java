@@ -96,11 +96,9 @@ public class GoodsManagerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/{goodsId}/under")
     public Result<Boolean> underGoods(
-            @PathVariable Long goodsId,
-            @NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
+            @PathVariable Long goodsId, @NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
         List<Long> goodsIds = List.of(goodsId);
-        return Result.success(
-                goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
+        return Result.success(goodsService.managerUpdateGoodsMarketAble(goodsIds, GoodsStatusEnum.DOWN, reason));
     }
 
     @Operation(summary = "管理员审核商品", description = "管理员审核商品")
@@ -117,8 +115,7 @@ public class GoodsManagerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/{goodsId}/up")
     public Result<Boolean> unpGoods(@PathVariable List<Long> goodsId) {
-        return Result.success(
-                goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
+        return Result.success(goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
     }
 
     @Operation(summary = "通过id获取商品详情", description = "通过id获取商品详情")

@@ -43,8 +43,7 @@ public class DbPostgre extends DbBase {
     }
 
     @Override
-    public DbTableFieldModel getPartFieldModel(ResultSet result)
-            throws SQLException, DataException {
+    public DbTableFieldModel getPartFieldModel(ResultSet result) throws SQLException, DataException {
         DbTableFieldModel model = new DbTableFieldModel();
         // "t"不允许为空,"f"允许为空
         if (result.getString(DbAliasEnum.ALLOW_NULL.asByDb(this)).equals("t")) {

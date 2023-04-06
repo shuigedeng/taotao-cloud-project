@@ -52,7 +52,10 @@ public enum PushMsgTypeEnum {
     TRTC_VIDEO_END("TRTC_VIDEO_END", "实时视频结束"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     PushMsgTypeEnum(String code, String info) {

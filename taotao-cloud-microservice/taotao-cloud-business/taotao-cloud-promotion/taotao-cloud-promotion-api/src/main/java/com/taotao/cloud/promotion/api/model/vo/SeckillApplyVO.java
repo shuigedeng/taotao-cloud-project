@@ -33,7 +33,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SeckillApplyVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 7076774723400062602L;
+    @Serial
+    private static final long serialVersionUID = 7076774723400062602L;
 
     private Long id;
 

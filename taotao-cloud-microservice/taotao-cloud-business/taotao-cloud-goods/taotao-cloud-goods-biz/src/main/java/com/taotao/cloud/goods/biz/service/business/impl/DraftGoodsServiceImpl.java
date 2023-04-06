@@ -57,8 +57,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class DraftGoodsServiceImpl
-        extends BaseSuperServiceImpl<
-                IDraftGoodsMapper, DraftGoods, DraftGoodsRepository, IDraftGoodsRepository, Long>
+        extends BaseSuperServiceImpl<IDraftGoodsMapper, DraftGoods, DraftGoodsRepository, IDraftGoodsRepository, Long>
         implements IDraftGoodsService {
 
     /** 分类 */
@@ -94,15 +93,14 @@ public class DraftGoodsServiceImpl
     public Boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
         if (draftGoods.getGoodsGalleryList() != null
                 && !draftGoods.getGoodsGalleryList().isEmpty()) {
-            GoodsGallery goodsGallery =
-                    goodsGalleryService.getGoodsGallery(draftGoods.getGoodsGalleryList().get(0));
+            GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(
+                    draftGoods.getGoodsGalleryList().get(0));
             draftGoods.setOriginal(goodsGallery.getOriginal());
             draftGoods.setSmall(goodsGallery.getSmall());
             draftGoods.setThumbnail(goodsGallery.getThumbnail());
         }
         draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
-        draftGoods.setSkuListJson(
-                JSONUtil.toJsonStr(this.getGoodsSkuList(draftGoods.getSkuList())));
+        draftGoods.setSkuListJson(JSONUtil.toJsonStr(this.getGoodsSkuList(draftGoods.getSkuList())));
         draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
 
         return this.saveOrUpdate(DraftGoodsConvert.INSTANCE.convert(draftGoods));
@@ -128,12 +126,9 @@ public class DraftGoodsServiceImpl
         }
         draftGoodsSkuParamsVO.setCategoryName(categoryName);
         draftGoodsSkuParamsVO.setGoodsParamsDTOList(
-                JSONUtil.toList(
-                        JSONUtil.parseArray(draftGoods.getGoodsParamsListJson()),
-                        GoodsParamsDTO.class));
+                JSONUtil.toList(JSONUtil.parseArray(draftGoods.getGoodsParamsListJson()), GoodsParamsDTO.class));
         draftGoodsSkuParamsVO.setGoodsGalleryList(
-                JSONUtil.toList(
-                        JSONUtil.parseArray(draftGoods.getGoodsGalleryListJson()), String.class));
+                JSONUtil.toList(JSONUtil.parseArray(draftGoods.getGoodsGalleryListJson()), String.class));
         JSONArray jsonArray = JSONUtil.parseArray(draftGoods.getSkuListJson());
         List<GoodsSku> list = JSONUtil.toList(jsonArray, GoodsSku.class);
         draftGoodsSkuParamsVO.setSkuList(goodsSkuService.getGoodsSkuVOList(list));
@@ -142,8 +137,7 @@ public class DraftGoodsServiceImpl
 
     @Override
     public IPage<DraftGoods> draftGoodsQueryPage(DraftGoodsPageQuery searchParams) {
-        return this.page(
-                searchParams.buildMpPage(), QueryUtil.draftGoodsQueryWrapper(searchParams));
+        return this.page(searchParams.buildMpPage(), QueryUtil.draftGoodsQueryWrapper(searchParams));
     }
 
     /**

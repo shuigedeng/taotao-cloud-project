@@ -36,7 +36,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/shake")
 public class ShakeController extends BaseController {
 
-    @Resource private ShakeService shakeService;
+    @Resource
+    private ShakeService shakeService;
 
     /**
      * 发送摇一摇

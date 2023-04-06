@@ -31,8 +31,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultMiniAppUserDetailsService implements MiniAppUserDetailsService {
 
-    @Autowired private IFeignUserApi userApi;
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignUserApi userApi;
+
+    @Autowired
+    private IFeignMemberApi memberApi;
 
     @Override
     public UserDetails register(MiniAppRequest request, String sessionKey) {

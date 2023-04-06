@@ -45,17 +45,14 @@ public class RedPacketController {
 
     private static int corePoolSize = Runtime.getRuntime().availableProcessors();
     /** 创建线程池 调整队列数 拒绝服务 */
-    private static ThreadPoolExecutor executor =
-            new ThreadPoolExecutor(
-                    corePoolSize,
-                    corePoolSize + 1,
-                    10l,
-                    TimeUnit.SECONDS,
-                    new LinkedBlockingQueue<>(1000));
+    private static ThreadPoolExecutor executor = new ThreadPoolExecutor(
+            corePoolSize, corePoolSize + 1, 10l, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1000));
 
-    @Autowired private RedisUtil redisUtil;
+    @Autowired
+    private RedisUtil redisUtil;
 
-    @Autowired private IRedPacketService redPacketService;
+    @Autowired
+    private IRedPacketService redPacketService;
 
     /**
      * 抢红包 拆红包 抢到基本能拆到 建议使用抢红包二的方式
@@ -77,23 +74,19 @@ public class RedPacketController {
         /** 模拟100个用户抢10个红包 */
         for (int i = 1; i <= skillNum; i++) {
             int userId = i;
-            Runnable task =
-                    () -> {
-                        /** 抢红包拦截，其实应该分两步，为了演示方便 */
-                        long count = redisUtil.decr(redPacketId + "-num", 1);
-                        if (count >= 0) {
-                            Result result = redPacketService.startSeckil(redPacketId, userId);
-                            BigDecimal amount =
-                                    BigDecimalUtil.divide(
-                                            BigDecimal.parseBigDecimal(
-                                                    result.get("msg").toString()),
-                                            (BigDecimal) 100);
-                            LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
-                        } else {
-                            LOGGER.info("用户{}抢红包失败", userId);
-                        }
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                /** 抢红包拦截，其实应该分两步，为了演示方便 */
+                long count = redisUtil.decr(redPacketId + "-num", 1);
+                if (count >= 0) {
+                    Result result = redPacketService.startSeckil(redPacketId, userId);
+                    BigDecimal amount = BigDecimalUtil.divide(
+                            BigDecimal.parseBigDecimal(result.get("msg").toString()), (BigDecimal) 100);
+                    LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
+                } else {
+                    LOGGER.info("用户{}抢红包失败", userId);
+                }
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {
@@ -125,29 +118,25 @@ public class RedPacketController {
         /** 模拟100个用户抢10个红包 */
         for (int i = 1; i <= skillNum; i++) {
             int userId = i;
-            Runnable task =
-                    () -> {
-                        /** 抢红包 判断剩余金额 */
-                        Integer money = (Integer) redisUtil.getValue(redPacketId + "-money");
-                        if (money > 0) {
-                            /** 虽然能抢到 但是不一定能拆到 类似于微信的 点击红包显示抢的按钮 */
-                            Result result = redPacketService.startTwoSeckil(redPacketId, userId);
-                            if (result.get("code").toString().equals("500")) {
-                                LOGGER.info("用户{}手慢了，红包派完了", userId);
-                            } else {
-                                BigDecimal amount =
-                                        BigDecimalUtil.divide(
-                                                BigDecimal.parseBigDecimal(
-                                                        result.get("msg").toString()),
-                                                (BigDecimal) 100);
-                                LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
-                            }
-                        } else {
-                            /** 直接显示手慢了，红包派完了 */
-                            // LOGGER.info("用户{}手慢了，红包派完了",userId);
-                        }
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                /** 抢红包 判断剩余金额 */
+                Integer money = (Integer) redisUtil.getValue(redPacketId + "-money");
+                if (money > 0) {
+                    /** 虽然能抢到 但是不一定能拆到 类似于微信的 点击红包显示抢的按钮 */
+                    Result result = redPacketService.startTwoSeckil(redPacketId, userId);
+                    if (result.get("code").toString().equals("500")) {
+                        LOGGER.info("用户{}手慢了，红包派完了", userId);
+                    } else {
+                        BigDecimal amount = BigDecimalUtil.divide(
+                                BigDecimal.parseBigDecimal(result.get("msg").toString()), (BigDecimal) 100);
+                        LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
+                    }
+                } else {
+                    /** 直接显示手慢了，红包派完了 */
+                    // LOGGER.info("用户{}手慢了，红包派完了",userId);
+                }
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {
@@ -182,25 +171,21 @@ public class RedPacketController {
         /** 模拟 9个用户抢10个红包 */
         for (int i = 1; i <= skillNum; i++) {
             int userId = i;
-            Runnable task =
-                    () -> {
-                        /** 抢红包 判断剩余金额 */
-                        Integer money = (Integer) redisUtil.getValue(redPacketId + "-money");
-                        if (money > 0) {
-                            Result result = redPacketService.startTwoSeckil(redPacketId, userId);
-                            if (result.get("code").toString().equals("500")) {
-                                LOGGER.info("用户{}手慢了，红包派完了", userId);
-                            } else {
-                                BigDecimal amount =
-                                        BigDecimalUtil.divide(
-                                                BigDecimal.parseBigDecimal(
-                                                        result.get("msg").toString()),
-                                                (BigDecimal) 100);
-                                LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
-                            }
-                        }
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                /** 抢红包 判断剩余金额 */
+                Integer money = (Integer) redisUtil.getValue(redPacketId + "-money");
+                if (money > 0) {
+                    Result result = redPacketService.startTwoSeckil(redPacketId, userId);
+                    if (result.get("code").toString().equals("500")) {
+                        LOGGER.info("用户{}手慢了，红包派完了", userId);
+                    } else {
+                        BigDecimal amount = BigDecimalUtil.divide(
+                                BigDecimal.parseBigDecimal(result.get("msg").toString()), (BigDecimal) 100);
+                        LOGGER.info("用户{}抢红包成功，金额：{}", userId, amount);
+                    }
+                }
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {

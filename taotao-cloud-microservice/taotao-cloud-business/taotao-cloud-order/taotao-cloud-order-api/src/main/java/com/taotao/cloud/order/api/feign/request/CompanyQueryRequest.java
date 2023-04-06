@@ -41,7 +41,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "公司查询对象")
 public class CompanyQueryRequest implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "租户id")
     private String tenantId;

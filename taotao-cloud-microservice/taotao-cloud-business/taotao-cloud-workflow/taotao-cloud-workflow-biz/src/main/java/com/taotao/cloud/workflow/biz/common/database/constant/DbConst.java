@@ -37,12 +37,12 @@ public class DbConst {
     /** 默认表（不可删） */
     public static final String BYO_TABLE =
             "base_authorize,base_comfields,base_billrule,base_dbbackup,base_dblink,base_dictionarydata,"
-                + "base_dictionarytype,base_imcontent,base_languagemap,base_languagetype,base_menu,"
-                + "base_message,base_messagereceive,base_module,base_modulebutton,base_modulecolumn,"
-                + "base_moduledataauthorize,base_moduledataauthorizescheme,base_organize,base_position,"
-                + "base_province,base_role,base_sysconfig,base_syslog,base_timetask,base_timetasklog,"
-                + "base_user,base_userrelation,crm_busines,crm_businesproduct,crm_clue,crm_contract,"
-                + "crm_contractinvoice,crm_contractmoney,crm_contractproduct," /*crm_customer*/
+                    + "base_dictionarytype,base_imcontent,base_languagemap,base_languagetype,base_menu,"
+                    + "base_message,base_messagereceive,base_module,base_modulebutton,base_modulecolumn,"
+                    + "base_moduledataauthorize,base_moduledataauthorizescheme,base_organize,base_position,"
+                    + "base_province,base_role,base_sysconfig,base_syslog,base_timetask,base_timetasklog,"
+                    + "base_user,base_userrelation,crm_busines,crm_businesproduct,crm_clue,crm_contract,"
+                    + "crm_contractinvoice,crm_contractmoney,crm_contractproduct," /*crm_customer*/
                     + ",crm_customercontacts,"
                     + "crm_followlog,crm_invoice,crm_product,crm_receivable,ext_bigdata,ext_document,"
                     + "ext_documentshare,ext_emailconfig,ext_emailreceive,ext_emailsend,ext_employee,ext_order,"

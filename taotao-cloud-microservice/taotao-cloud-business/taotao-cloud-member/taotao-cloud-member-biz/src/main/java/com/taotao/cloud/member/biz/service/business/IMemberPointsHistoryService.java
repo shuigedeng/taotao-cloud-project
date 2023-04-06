@@ -58,6 +58,5 @@ public interface IMemberPointsHistoryService extends IService<MemberPointsHistor
      * @return {@link IPage }<{@link MemberPointsHistory }>
      * @since 2022-05-31 14:16:22
      */
-    IPage<MemberPointsHistory> memberPointsHistoryPageQuery(
-            PageQuery pageQuery, Long memberId, String memberName);
+    IPage<MemberPointsHistory> memberPointsHistoryPageQuery(PageQuery pageQuery, Long memberId, String memberName);
 }

@@ -34,6 +34,5 @@ public interface LimitService {
      * @param param 去重参数
      * @return 返回不符合条件的手机号码
      */
-    Set<String> limitFilter(
-            AbstractDeduplicationService service, TaskInfo taskInfo, DeduplicationParam param);
+    Set<String> limitFilter(AbstractDeduplicationService service, TaskInfo taskInfo, DeduplicationParam param);
 }

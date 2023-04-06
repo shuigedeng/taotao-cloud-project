@@ -45,7 +45,8 @@ import me.chanjar.weixin.common.api.WxConsts;
 public class MpMaterialDO extends BaseDO {
 
     /** 主键 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /**
      * 公众号账号的编号
      *

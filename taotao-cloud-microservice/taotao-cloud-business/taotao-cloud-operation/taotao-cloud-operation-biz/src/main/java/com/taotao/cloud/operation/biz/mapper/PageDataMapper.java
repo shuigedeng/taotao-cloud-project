@@ -56,6 +56,5 @@ public interface PageDataMapper extends BaseSuperMapper<PageData, Long> {
      */
     @Select("SELECT id,name,page_show FROM tt_page_data ${ew.customSqlSegment}")
     IPage<PageDataListVO> getPageDataList(
-            IPage<PageDataListVO> page,
-            @Param(Constants.WRAPPER) Wrapper<PageDataListVO> queryWrapper);
+            IPage<PageDataListVO> page, @Param(Constants.WRAPPER) Wrapper<PageDataListVO> queryWrapper);
 }

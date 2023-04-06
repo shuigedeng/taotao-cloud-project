@@ -25,15 +25,14 @@ package com.taotao.cloud.stock.biz.interfaces.assembler;
 public class LogDTOAssembler {
 
     public static Log toLog(final LogDTO logDTO) {
-        Log log =
-                new Log(
-                        null,
-                        logDTO.getUserName() == null ? null : new UserName(logDTO.getUserName()),
-                        logDTO.getOperation(),
-                        logDTO.getMethod(),
-                        logDTO.getParams(),
-                        logDTO.getTime(),
-                        logDTO.getIp());
+        Log log = new Log(
+                null,
+                logDTO.getUserName() == null ? null : new UserName(logDTO.getUserName()),
+                logDTO.getOperation(),
+                logDTO.getMethod(),
+                logDTO.getParams(),
+                logDTO.getTime(),
+                logDTO.getIp());
 
         return log;
     }

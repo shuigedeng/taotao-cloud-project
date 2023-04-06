@@ -36,9 +36,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public abstract class CommonCtrl extends AbstractCtrl {
 
-    @Autowired protected SystemYmlConfig mainConfig;
+    @Autowired
+    protected SystemYmlConfig mainConfig;
 
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private SysConfigService sysConfigService;
 
     /** 获取当前用户ID */
     protected JeeUserDetails getCurrentUser() {

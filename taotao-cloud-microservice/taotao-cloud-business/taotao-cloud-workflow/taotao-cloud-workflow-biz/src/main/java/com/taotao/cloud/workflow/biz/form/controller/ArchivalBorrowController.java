@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ArchivalBorrow")
 public class ArchivalBorrowController {
 
-    @Autowired private ArchivalBorrowService archivalBorrowService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ArchivalBorrowService archivalBorrowService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取档案借阅申请信息
@@ -60,9 +63,7 @@ public class ArchivalBorrowController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), ArchivalBorrowInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ArchivalBorrowInfoVO.class);
                     isData = false;
                 }
             }
@@ -82,13 +83,11 @@ public class ArchivalBorrowController {
      */
     @Operation("新建档案借阅申请")
     @PostMapping
-    public Result create(@RequestBody @Valid ArchivalBorrowForm archivalBorrowForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid ArchivalBorrowForm archivalBorrowForm) throws WorkFlowException {
         if (archivalBorrowForm.getBorrowingDate() > archivalBorrowForm.getReturnDate()) {
             return Result.fail("归还时间不能小于借阅时间");
         }
-        ArchivalBorrowEntity entity =
-                JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
+        ArchivalBorrowEntity entity = JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(archivalBorrowForm.getStatus())) {
             archivalBorrowService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -106,15 +105,12 @@ public class ArchivalBorrowController {
      */
     @Operation("修改档案借阅申请")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid ArchivalBorrowForm archivalBorrowForm,
-            @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid ArchivalBorrowForm archivalBorrowForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (archivalBorrowForm.getBorrowingDate() > archivalBorrowForm.getReturnDate()) {
             return Result.fail("归还时间不能小于借阅时间");
         }
-        ArchivalBorrowEntity entity =
-                JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
+        ArchivalBorrowEntity entity = JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(archivalBorrowForm.getStatus())) {
             archivalBorrowService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -42,11 +42,14 @@ import org.springframework.stereotype.Service;
 public class MemberExperienceExecute implements OrderStatusChangeEvent {
 
     /** 配置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
     /** 会员 */
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignMemberApi memberApi;
     /** 订单 */
-    @Autowired private IOrderService orderService;
+    @Autowired
+    private IOrderService orderService;
 
     /**
      * 完成订单赠送经验值
@@ -61,14 +64,10 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
             // 获取订单信息
             Order order = orderService.getBySn(orderMessage.orderSn());
             // 计算赠送经验值数量
-            BigDecimal point =
-                    CurrencyUtils.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
+            BigDecimal point = CurrencyUtils.mul(experienceSetting.getMoney(), order.getFlowPrice(), 0);
             // 赠送会员经验值
             memberApi.updateMemberPoint(
-                    point.longValue(),
-                    PointTypeEnum.INCREASE.name(),
-                    order.getMemberId(),
-                    "会员下单，赠送经验值" + point + "分");
+                    point.longValue(), PointTypeEnum.INCREASE.name(), order.getMemberId(), "会员下单，赠送经验值" + point + "分");
         }
     }
 

@@ -42,13 +42,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class MpStatisticsController {
 
-    @Resource private MpStatisticsService mpStatisticsService;
+    @Resource
+    private MpStatisticsService mpStatisticsService;
 
     @GetMapping("/user-summary")
     @ApiOperation("获得粉丝增减数据")
     @PreAuthorize("@ss.hasPermission('mp:statistics:query')")
-    public CommonResult<List<MpStatisticsUserSummaryRespVO>> getUserSummary(
-            MpStatisticsGetReqVO getReqVO) {
+    public CommonResult<List<MpStatisticsUserSummaryRespVO>> getUserSummary(MpStatisticsGetReqVO getReqVO) {
         List<WxDataCubeUserSummary> list =
                 mpStatisticsService.getUserSummary(getReqVO.getAccountId(), getReqVO.getDate());
         return success(MpStatisticsConvert.INSTANCE.convertList01(list));
@@ -57,8 +57,7 @@ public class MpStatisticsController {
     @GetMapping("/user-cumulate")
     @ApiOperation("获得粉丝累计数据")
     @PreAuthorize("@ss.hasPermission('mp:statistics:query')")
-    public CommonResult<List<MpStatisticsUserCumulateRespVO>> getUserCumulate(
-            MpStatisticsGetReqVO getReqVO) {
+    public CommonResult<List<MpStatisticsUserCumulateRespVO>> getUserCumulate(MpStatisticsGetReqVO getReqVO) {
         List<WxDataCubeUserCumulate> list =
                 mpStatisticsService.getUserCumulate(getReqVO.getAccountId(), getReqVO.getDate());
         return success(MpStatisticsConvert.INSTANCE.convertList02(list));
@@ -67,8 +66,7 @@ public class MpStatisticsController {
     @GetMapping("/upstream-message")
     @ApiOperation("获取消息发送概况数据")
     @PreAuthorize("@ss.hasPermission('mp:statistics:query')")
-    public CommonResult<List<MpStatisticsUpstreamMessageRespVO>> getUpstreamMessage(
-            MpStatisticsGetReqVO getReqVO) {
+    public CommonResult<List<MpStatisticsUpstreamMessageRespVO>> getUpstreamMessage(MpStatisticsGetReqVO getReqVO) {
         List<WxDataCubeMsgResult> list =
                 mpStatisticsService.getUpstreamMessage(getReqVO.getAccountId(), getReqVO.getDate());
         return success(MpStatisticsConvert.INSTANCE.convertList03(list));
@@ -77,11 +75,9 @@ public class MpStatisticsController {
     @GetMapping("/interface-summary")
     @ApiOperation("获取消息发送概况数据")
     @PreAuthorize("@ss.hasPermission('mp:statistics:query')")
-    public CommonResult<List<MpStatisticsInterfaceSummaryRespVO>> getInterfaceSummary(
-            MpStatisticsGetReqVO getReqVO) {
+    public CommonResult<List<MpStatisticsInterfaceSummaryRespVO>> getInterfaceSummary(MpStatisticsGetReqVO getReqVO) {
         List<WxDataCubeInterfaceResult> list =
-                mpStatisticsService.getInterfaceSummary(
-                        getReqVO.getAccountId(), getReqVO.getDate());
+                mpStatisticsService.getInterfaceSummary(getReqVO.getAccountId(), getReqVO.getDate());
         return success(MpStatisticsConvert.INSTANCE.convertList04(list));
     }
 }

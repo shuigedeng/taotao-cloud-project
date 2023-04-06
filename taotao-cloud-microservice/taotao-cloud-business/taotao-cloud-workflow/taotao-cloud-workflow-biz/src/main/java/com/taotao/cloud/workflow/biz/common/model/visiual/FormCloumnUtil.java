@@ -58,12 +58,9 @@ public class FormCloumnUtil {
                     || FormEnum.tab.getMessage().equals(workflowkey)
                     || FormEnum.collapse.getMessage().equals(workflowkey)
                     || isWorkflowKey) {
-                String key =
-                        isWorkflowKey
-                                ? isName
-                                        ? FormEnum.collapse.getMessage()
-                                        : FormEnum.tab.getMessage()
-                                : workflowkey;
+                String key = isWorkflowKey
+                        ? isName ? FormEnum.collapse.getMessage() : FormEnum.tab.getMessage()
+                        : workflowkey;
                 // 布局属性
                 FormModel formModel = JsonUtil.getJsonToBean(fieLdsModel, FormModel.class);
                 formModel.setSpan(config.getSpan());
@@ -117,57 +114,36 @@ public class FormCloumnUtil {
         }
         for (FormAllModel formModel : formAllModel) {
             if (FormEnum.mast.getMessage().equals(formModel.getWorkflowKey())) {
-                String workflowkey =
-                        formModel
-                                .getFormColumnModel()
-                                .getFieLdsModel()
-                                .getConfig()
-                                .getWorkflowKey();
+                String workflowkey = formModel
+                        .getFormColumnModel()
+                        .getFieLdsModel()
+                        .getConfig()
+                        .getWorkflowKey();
                 if (FormEnum.relationFormAttr.getMessage().equals(workflowkey)
                         || FormEnum.popupAttr.getMessage().equals(workflowkey)) {
                     List<FieLdsModel> partenList = new ArrayList<>();
-                    partenList.addAll(
-                            formAllModel.stream()
-                                    .filter(t -> t.getFormColumnModel() != null)
-                                    .map(t -> t.getFormColumnModel().getFieLdsModel())
-                                    .toList());
-                    partenList.addAll(
-                            formAllModel.stream()
-                                    .filter(t -> t.getFormMastTableModel() != null)
-                                    .map(
-                                            t ->
-                                                    t.getFormMastTableModel()
-                                                            .getMastTable()
-                                                            .getFieLdsModel())
-                                    .toList());
-                    String relationField =
-                            formModel
-                                    .getFormColumnModel()
-                                    .getFieLdsModel()
-                                    .getRelationField()
-                                    .split("_workflowTable_")[0];
-                    FieLdsModel parten =
-                            partenList.stream()
-                                    .filter(t -> relationField.equals(t.getVModel()))
-                                    .findFirst()
-                                    .orElse(null);
+                    partenList.addAll(formAllModel.stream()
+                            .filter(t -> t.getFormColumnModel() != null)
+                            .map(t -> t.getFormColumnModel().getFieLdsModel())
+                            .toList());
+                    partenList.addAll(formAllModel.stream()
+                            .filter(t -> t.getFormMastTableModel() != null)
+                            .map(t -> t.getFormMastTableModel().getMastTable().getFieLdsModel())
+                            .toList());
+                    String relationField = formModel
+                            .getFormColumnModel()
+                            .getFieLdsModel()
+                            .getRelationField()
+                            .split("_workflowTable_")[0];
+                    FieLdsModel parten = partenList.stream()
+                            .filter(t -> relationField.equals(t.getVModel()))
+                            .findFirst()
+                            .orElse(null);
                     if (parten != null) {
-                        formModel
-                                .getFormColumnModel()
-                                .getFieLdsModel()
-                                .setInterfaceId(parten.getInterfaceId());
-                        formModel
-                                .getFormColumnModel()
-                                .getFieLdsModel()
-                                .setModelId(parten.getModelId());
-                        formModel
-                                .getFormColumnModel()
-                                .getFieLdsModel()
-                                .setPropsValue(parten.getPropsValue());
-                        formModel
-                                .getFormColumnModel()
-                                .getFieLdsModel()
-                                .setRelationField(parten.getVModel());
+                        formModel.getFormColumnModel().getFieLdsModel().setInterfaceId(parten.getInterfaceId());
+                        formModel.getFormColumnModel().getFieLdsModel().setModelId(parten.getModelId());
+                        formModel.getFormColumnModel().getFieLdsModel().setPropsValue(parten.getPropsValue());
+                        formModel.getFormColumnModel().getFieLdsModel().setRelationField(parten.getVModel());
                     }
                 }
             }
@@ -191,25 +167,20 @@ public class FormCloumnUtil {
 
     /** 主表属性添加 */
     private static void model(
-            FieLdsModel fieLdsModel,
-            List<FormAllModel> formAllModel,
-            List<TableModel> tableModelList) {
+            FieLdsModel fieLdsModel, List<FormAllModel> formAllModel, List<TableModel> tableModelList) {
         FormColumnModel mastModel = formModel(fieLdsModel);
         FormAllModel formModel = new FormAllModel();
         formModel.setWorkflowKey(FormEnum.mast.getMessage());
         formModel.setFormColumnModel(mastModel);
         if (tableModelList.size() > 0) {
-            TableModel tableModel =
-                    tableModelList.stream()
-                            .filter(
-                                    t ->
-                                            t.getTable()
-                                                    .equals(fieLdsModel.getConfig().getTableName()))
-                            .findFirst()
-                            .orElse(null);
+            TableModel tableModel = tableModelList.stream()
+                    .filter(t -> t.getTable().equals(fieLdsModel.getConfig().getTableName()))
+                    .findFirst()
+                    .orElse(null);
             if (tableModel == null) {
-                Optional<TableModel> first =
-                        tableModelList.stream().filter(t -> "1".equals(t.getTypeId())).findFirst();
+                Optional<TableModel> first = tableModelList.stream()
+                        .filter(t -> "1".equals(t.getTypeId()))
+                        .findFirst();
                 if (first.isPresent()) {
                     tableModel = first.get();
                 }
@@ -229,20 +200,15 @@ public class FormCloumnUtil {
     }
 
     /** 主表的属性是子表字段 */
-    private static void mastTable(
-            TableModel tableModel, FieLdsModel fieLdsModel, List<FormAllModel> formAllModel) {
+    private static void mastTable(TableModel tableModel, FieLdsModel fieLdsModel, List<FormAllModel> formAllModel) {
         FormMastTableModel childModel = new FormMastTableModel();
         String vModel = fieLdsModel.getVModel();
         List<TableFields> tableFieldsList = tableModel.getFields();
         String mastKey = "workflow_" + tableModel.getTable() + "_workflow_";
-        TableFields tableFields =
-                tableFieldsList.stream()
-                        .filter(
-                                t ->
-                                        StringUtil.isNotEmpty(vModel)
-                                                && vModel.equals(mastKey + t.getField()))
-                        .findFirst()
-                        .orElse(null);
+        TableFields tableFields = tableFieldsList.stream()
+                .filter(t -> StringUtil.isNotEmpty(vModel) && vModel.equals(mastKey + t.getField()))
+                .findFirst()
+                .orElse(null);
         FormAllModel formModel = new FormAllModel();
         formModel.setWorkflowKey(FormEnum.mastTable.getMessage());
         if (tableFields != null) {
@@ -262,16 +228,14 @@ public class FormCloumnUtil {
         ConfigModel config = model.getConfig();
         List<FieLdsModel> childModelList = config.getChildren();
         String table = model.getVModel();
-        List<String> summaryField =
-                StringUtil.isNotEmpty(model.getSummaryField())
-                        ? JsonUtil.getJsonToList(model.getSummaryField(), String.class)
-                        : new ArrayList<>();
+        List<String> summaryField = StringUtil.isNotEmpty(model.getSummaryField())
+                ? JsonUtil.getJsonToList(model.getSummaryField(), String.class)
+                : new ArrayList<>();
         Map<String, String> summaryName = new HashMap<>();
         for (FieLdsModel childmodel : childModelList) {
             if (childmodel.getProps() != null) {
                 PropsBeanModel beanModel =
-                        JsonUtil.getJsonToBean(
-                                childmodel.getProps().getProps(), PropsBeanModel.class);
+                        JsonUtil.getJsonToBean(childmodel.getProps().getProps(), PropsBeanModel.class);
                 PropsModel propsModel = new PropsModel();
                 propsModel.setProps(childmodel.getProps().getProps());
                 propsModel.setPropsModel(beanModel);
@@ -286,10 +250,8 @@ public class FormCloumnUtil {
             childList.add(childModel);
         }
         multipleChoices(config);
-        FormColumnTableModel tableModel =
-                JsonUtil.getJsonToBean(config, FormColumnTableModel.class);
-        tableModel.setActionText(
-                StringUtil.isNotEmpty(model.getActionText()) ? model.getActionText() : "新增");
+        FormColumnTableModel tableModel = JsonUtil.getJsonToBean(config, FormColumnTableModel.class);
+        tableModel.setActionText(StringUtil.isNotEmpty(model.getActionText()) ? model.getActionText() : "新增");
         tableModel.setTableModel(table);
         tableModel.setChildList(childList);
         tableModel.setShowSummary(model.getShowSummary());
@@ -307,11 +269,10 @@ public class FormCloumnUtil {
         if (FormEnum.relationFormAttr.getMessage().equals(workflowkey)
                 || FormEnum.popupAttr.getMessage().equals(workflowkey)) {
             String relationField = childmodel.getRelationField().split("_workflowTable_")[0];
-            FieLdsModel child =
-                    childModelList.stream()
-                            .filter(t -> relationField.equals(t.getVModel()))
-                            .findFirst()
-                            .orElse(null);
+            FieLdsModel child = childModelList.stream()
+                    .filter(t -> relationField.equals(t.getVModel()))
+                    .findFirst()
+                    .orElse(null);
             if (child != null) {
                 childmodel.setInterfaceId(child.getInterfaceId());
                 childmodel.setModelId(child.getModelId());
@@ -334,8 +295,7 @@ public class FormCloumnUtil {
         FormColumnModel formColumnModel = new FormColumnModel();
         // 级联判断多选还是单选
         if (WorkflowKeyConsts.CASCADER.equals(configModel.getWorkflowKey())) {
-            PropsBeanModel propsMap =
-                    JsonUtil.getJsonToBean(model.getProps().getProps(), PropsBeanModel.class);
+            PropsBeanModel propsMap = JsonUtil.getJsonToBean(model.getProps().getProps(), PropsBeanModel.class);
             model.setMultiple(propsMap.getMultiple());
         }
         formColumnModel.setFieLdsModel(model);
@@ -352,18 +312,17 @@ public class FormCloumnUtil {
         List<TableModel> tableModelList = recursionForm.getTableModelList();
         recursionForm(recursionForm, formAllModel);
         if (tableModelList.size() > 0) {
-            List<FormAllModel> tables =
-                    formAllModel.stream()
-                            .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
-                            .toList();
-            List<FormAllModel> mastTable =
-                    formAllModel.stream()
-                            .filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey()))
-                            .toList();
+            List<FormAllModel> tables = formAllModel.stream()
+                    .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
+                    .toList();
+            List<FormAllModel> mastTable = formAllModel.stream()
+                    .filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey()))
+                    .toList();
             List<String> tableList =
                     tables.stream().map(t -> t.getChildList().getTableName()).toList();
-            List<String> mastTableList =
-                    mastTable.stream().map(t -> t.getFormMastTableModel().getTable()).toList();
+            List<String> mastTableList = mastTable.stream()
+                    .map(t -> t.getFormMastTableModel().getTable())
+                    .toList();
             flag = tableList.stream().anyMatch(mastTableList::contains);
         }
         return flag;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.graphql.greeting;
+
+import static org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST;
 
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import static org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST;
-
 @Controller
 public class GreetingController {
 
-	@QueryMapping
-	public String greeting() {
-		RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
-		return "Hello " + attributes.getAttribute(RequestAttributeFilter.NAME_ATTRIBUTE, SCOPE_REQUEST);
-	}
-
+    @QueryMapping
+    public String greeting() {
+        RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
+        return "Hello " + attributes.getAttribute(RequestAttributeFilter.NAME_ATTRIBUTE, SCOPE_REQUEST);
+    }
 }

@@ -26,7 +26,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class StreamFunctionService {
 
-    @Autowired private StreamBridge bridge;
+    @Autowired
+    private StreamBridge bridge;
 
     public void sendKafka(String content) {
         boolean send = bridge.send("outputKafka-out-0", content);

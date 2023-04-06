@@ -40,10 +40,8 @@ public class BpmFlowableConfiguration {
      * <p>1. 设置各种监听器 2. 设置自定义的 ActivityBehaviorFactory 实现
      */
     @Bean
-    public EngineConfigurationConfigurer<SpringProcessEngineConfiguration>
-            bpmProcessEngineConfigurationConfigurer(
-                    ObjectProvider<FlowableEventListener> listeners,
-                    BpmActivityBehaviorFactory bpmActivityBehaviorFactory) {
+    public EngineConfigurationConfigurer<SpringProcessEngineConfiguration> bpmProcessEngineConfigurationConfigurer(
+            ObjectProvider<FlowableEventListener> listeners, BpmActivityBehaviorFactory bpmActivityBehaviorFactory) {
         return configuration -> {
             // 注册监听器，例如说 BpmActivityEventListener
             configuration.setEventListeners(ListUtil.toList(listeners.iterator()));
@@ -53,8 +51,7 @@ public class BpmFlowableConfiguration {
     }
 
     @Bean
-    public BpmActivityBehaviorFactory bpmActivityBehaviorFactory(
-            BpmTaskAssignRuleService taskRuleService) {
+    public BpmActivityBehaviorFactory bpmActivityBehaviorFactory(BpmTaskAssignRuleService taskRuleService) {
         BpmActivityBehaviorFactory bpmActivityBehaviorFactory = new BpmActivityBehaviorFactory();
         bpmActivityBehaviorFactory.setBpmTaskRuleService(taskRuleService);
         return bpmActivityBehaviorFactory;

@@ -63,16 +63,13 @@ public class AuthorizationConsentController {
             @RequestParam(OAuth2ParameterNames.SCOPE) String scope,
             @RequestParam(OAuth2ParameterNames.STATE) String state) {
 
-        RegisteredClient registeredClient =
-                this.registeredClientRepository.findByClientId(clientId);
+        RegisteredClient registeredClient = this.registeredClientRepository.findByClientId(clientId);
         String id = registeredClient.getId();
         OAuth2AuthorizationConsent currentAuthorizationConsent =
                 this.authorizationConsentService.findById(id, principal.getName());
 
         Set<String> authorizedScopes =
-                currentAuthorizationConsent != null
-                        ? currentAuthorizationConsent.getScopes()
-                        : Collections.emptySet();
+                currentAuthorizationConsent != null ? currentAuthorizationConsent.getScopes() : Collections.emptySet();
 
         // Set<OAuth2Scope> scopesToApproves = new HashSet<>();
         // Set<OAuth2Scope> previouslyApprovedScopesSet = new HashSet<>();
@@ -91,8 +88,7 @@ public class AuthorizationConsentController {
 
         String clientName = registeredClient.getClientName();
 
-        model.addAttribute(
-                "authorizationEndpoint", authorizationServerSettings.getAuthorizationEndpoint());
+        model.addAttribute("authorizationEndpoint", authorizationServerSettings.getAuthorizationEndpoint());
         model.addAttribute("clientId", clientId);
         model.addAttribute("clientName", clientName);
         model.addAttribute("state", state);

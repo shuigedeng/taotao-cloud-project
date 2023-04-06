@@ -58,7 +58,9 @@ public class AlipaySyncService {
 
                 HashMap<String, String> map = new HashMap<>(1);
                 map.put(AliPayCode.TRADE_NO, response.getTradeNo());
-                return paySyncResult.setPaySyncStatus(PaySyncStatus.TRADE_SUCCESS).setMap(map);
+                return paySyncResult
+                        .setPaySyncStatus(PaySyncStatus.TRADE_SUCCESS)
+                        .setMap(map);
             }
             // 待支付
             if (Objects.equals(tradeStatus, AliPayCode.PAYMENT_WAIT_BUYER_PAY)) {

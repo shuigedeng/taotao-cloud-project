@@ -68,5 +68,6 @@ public record OrderExportVO(
         @Schema(description = "店铺名称") String storeName)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

@@ -48,7 +48,8 @@ public class JiNianRi {
     public static int after(String date) {
         int day = 0;
         try {
-            long time = System.currentTimeMillis() - simpleDateFormat.parse(date).getTime();
+            long time =
+                    System.currentTimeMillis() - simpleDateFormat.parse(date).getTime();
             day = (int) (time / 86400000L);
         } catch (ParseException e) {
             e.printStackTrace();

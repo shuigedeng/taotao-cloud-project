@@ -60,8 +60,7 @@ public class PayCallbackService {
      */
     public PayCallbackResult callback(Long paymentId, int tradeStatus, Map<String, String> map) {
 
-        PayCallbackResult result =
-                new PayCallbackResult().setCode(PayStatusCode.NOTIFY_PROCESS_SUCCESS);
+        PayCallbackResult result = new PayCallbackResult().setCode(PayStatusCode.NOTIFY_PROCESS_SUCCESS);
         // 成功状态
         if (PayStatusCode.NOTIFY_TRADE_SUCCESS == tradeStatus) {
             // 1. 获取payment和paymentParam数据
@@ -74,15 +73,13 @@ public class PayCallbackService {
 
             // payment已被取消,记录回调记录,后期处理
             if (!Objects.equals(payment.getPayStatus(), PayStatusCode.TRADE_PROGRESS)) {
-                return result.setCode(PayStatusCode.NOTIFY_PROCESS_FAIL)
-                        .setMsg("支付单不是待支付状态,记录回调记录");
+                return result.setCode(PayStatusCode.NOTIFY_PROCESS_FAIL).setMsg("支付单不是待支付状态,记录回调记录");
             }
 
             // 2.通过工厂生成对应的策略组
             PayParam payParam = PaymentBuilder.buildPayParamByPayment(payment);
 
-            List<AbsPayStrategy> paymentStrategyList =
-                    PayStrategyFactory.create(payParam.getPayModeList());
+            List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayModeList());
             if (CollectionUtil.isEmpty(paymentStrategyList)) {
                 throw new PayUnsupportedMethodException();
             }
@@ -92,21 +89,15 @@ public class PayCallbackService {
                 paymentStrategy.initPayParam(payment, payParam);
             }
             // 4.处理方法, 支付时只有一种payModel(异步支付), 失败时payment的所有payModel都会生效
-            boolean handlerFlag =
-                    this.doHandler(
-                            payment,
-                            paymentStrategyList,
-                            (strategyList, paymentObj) -> {
-                                // 执行异步支付方式的成功回调(不会有同步payModel)
-                                strategyList.forEach(
-                                        absPaymentStrategy ->
-                                                absPaymentStrategy.doAsyncSuccessHandler(map));
+            boolean handlerFlag = this.doHandler(payment, paymentStrategyList, (strategyList, paymentObj) -> {
+                // 执行异步支付方式的成功回调(不会有同步payModel)
+                strategyList.forEach(absPaymentStrategy -> absPaymentStrategy.doAsyncSuccessHandler(map));
 
-                                // 修改payment支付状态为成功
-                                paymentObj.setPayStatus(PayStatusCode.TRADE_SUCCESS);
-                                paymentObj.setPayTime(LocalDateTime.now());
-                                paymentManager.updateById(paymentObj);
-                            });
+                // 修改payment支付状态为成功
+                paymentObj.setPayStatus(PayStatusCode.TRADE_SUCCESS);
+                paymentObj.setPayTime(LocalDateTime.now());
+                paymentManager.updateById(paymentObj);
+            });
 
             if (handlerFlag) {
                 // 5. 发送成功事件
@@ -134,13 +125,9 @@ public class PayCallbackService {
 
         try {
             // 1.获取异步支付方式，通过工厂生成对应的策略组
-            List<AbsPayStrategy> syncPaymentStrategyList =
-                    strategyList.stream()
-                            .filter(
-                                    paymentStrategy ->
-                                            PayChannelCode.ASYNC_TYPE.contains(
-                                                    paymentStrategy.getType()))
-                            .collect(Collectors.toList());
+            List<AbsPayStrategy> syncPaymentStrategyList = strategyList.stream()
+                    .filter(paymentStrategy -> PayChannelCode.ASYNC_TYPE.contains(paymentStrategy.getType()))
+                    .collect(Collectors.toList());
             // 执行成功
             successCallback.accept(syncPaymentStrategyList, payment);
         } catch (Exception e) {
@@ -152,8 +139,7 @@ public class PayCallbackService {
     }
 
     /** 对Error的处理 */
-    private void asyncErrorHandler(
-            Payment payment, List<AbsPayStrategy> strategyList, Exception e) {
+    private void asyncErrorHandler(Payment payment, List<AbsPayStrategy> strategyList, Exception e) {
 
         // 默认的错误信息
         ExceptionInfo exceptionInfo = new ExceptionInfo(PayStatusCode.TRADE_FAIL, e.getMessage());

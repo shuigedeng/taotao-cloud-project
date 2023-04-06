@@ -34,8 +34,7 @@ import org.springframework.util.CollectionUtils;
  */
 @Component
 @Slf4j
-public class ThreadPoolExecutorShutdownDefinition
-        implements ApplicationListener<ContextClosedEvent> {
+public class ThreadPoolExecutorShutdownDefinition implements ApplicationListener<ContextClosedEvent> {
 
     private final List<ExecutorService> POOLS = Collections.synchronizedList(new ArrayList<>(12));
 

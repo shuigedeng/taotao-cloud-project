@@ -28,8 +28,11 @@ import java.util.Objects;
 @Table(name = "`authorizationConsent`")
 @IdClass(AuthorizationConsent.AuthorizationConsentId.class)
 public class AuthorizationConsent {
-    @Id private String registeredClientId;
-    @Id private String principalName;
+    @Id
+    private String registeredClientId;
+
+    @Id
+    private String principalName;
 
     @Column(length = 1000)
     private String authorities;
@@ -87,8 +90,7 @@ public class AuthorizationConsent {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             AuthorizationConsentId that = (AuthorizationConsentId) o;
-            return registeredClientId.equals(that.registeredClientId)
-                    && principalName.equals(that.principalName);
+            return registeredClientId.equals(that.registeredClientId) && principalName.equals(that.principalName);
         }
 
         @Override

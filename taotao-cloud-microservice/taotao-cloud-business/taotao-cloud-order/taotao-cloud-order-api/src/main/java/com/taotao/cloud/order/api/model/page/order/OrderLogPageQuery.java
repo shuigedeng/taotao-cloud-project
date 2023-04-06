@@ -41,7 +41,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "订单查询参数")
 public class OrderLogPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = -6380573339089959194L;
+    @Serial
+    private static final long serialVersionUID = -6380573339089959194L;
 
     /** 订单编号 */
     private String orderSn;

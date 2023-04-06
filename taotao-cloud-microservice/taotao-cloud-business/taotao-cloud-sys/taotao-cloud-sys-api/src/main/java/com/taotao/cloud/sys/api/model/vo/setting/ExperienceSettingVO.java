@@ -25,7 +25,8 @@ import lombok.Data;
 @Data
 public class ExperienceSettingVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4261856614779031745L;
+    @Serial
+    private static final long serialVersionUID = -4261856614779031745L;
 
     /** 注册 */
     private Integer register;

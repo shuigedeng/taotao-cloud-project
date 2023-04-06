@@ -80,8 +80,7 @@ public class GoodsLabelSellerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping
     public Result<Boolean> add(@Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
-        StoreGoodsLabel storeGoodsLabel =
-                GoodsLabelStoreConvert.INSTANCE.convert(storeGoodsLabelDTO);
+        StoreGoodsLabel storeGoodsLabel = GoodsLabelStoreConvert.INSTANCE.convert(storeGoodsLabelDTO);
         return Result.success(storeGoodsLabelService.addStoreGoodsLabel(storeGoodsLabel));
     }
 
@@ -89,10 +88,8 @@ public class GoodsLabelSellerController {
     @RequestLogger("修改店铺商品分类")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
-    public Result<Boolean> edit(
-            @PathVariable Long id, @Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
-        StoreGoodsLabel storeGoodsLabel =
-                GoodsLabelStoreConvert.INSTANCE.convert(storeGoodsLabelDTO);
+    public Result<Boolean> edit(@PathVariable Long id, @Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
+        StoreGoodsLabel storeGoodsLabel = GoodsLabelStoreConvert.INSTANCE.convert(storeGoodsLabelDTO);
         storeGoodsLabel.setId(id);
         return Result.success(storeGoodsLabelService.editStoreGoodsLabel(storeGoodsLabel));
     }

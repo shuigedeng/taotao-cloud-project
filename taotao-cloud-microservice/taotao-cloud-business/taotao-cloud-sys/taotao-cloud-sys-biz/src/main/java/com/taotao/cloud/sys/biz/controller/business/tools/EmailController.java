@@ -65,14 +65,8 @@ public class EmailController {
     @ApiInfo(
             create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
             update = {
-                @Update(
-                        version = V2022_07,
-                        content = "主要修改了配置信息的接口查询",
-                        date = "2022-07-01 17:11:55"),
-                @Update(
-                        version = V2022_08,
-                        content = "主要修改了配置信息的接口查询08",
-                        date = "2022-07-01 17:11:55")
+                @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+                @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
     @Operation(summary = "查询邮件配置信息", description = "查询邮件配置信息")
     @RequestLogger

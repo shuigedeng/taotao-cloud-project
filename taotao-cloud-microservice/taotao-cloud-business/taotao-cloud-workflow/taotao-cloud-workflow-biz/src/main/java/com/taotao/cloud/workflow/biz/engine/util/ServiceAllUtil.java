@@ -37,16 +37,35 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceAllUtil {
 
-    @Autowired private DblinkService dblinkService;
-    @Autowired private DbTableService dbTableService;
-    @Autowired private DictionaryDataService dictionaryDataService;
-    @Autowired private UserRelationService userRelationService;
-    @Autowired private UserService userService;
-    @Autowired private RoleService roleService;
-    @Autowired private OrganizeService organizeService;
-    @Autowired private PositionService positionService;
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private DataInterfaceService dataInterfaceService;
+    @Autowired
+    private DblinkService dblinkService;
+
+    @Autowired
+    private DbTableService dbTableService;
+
+    @Autowired
+    private DictionaryDataService dictionaryDataService;
+
+    @Autowired
+    private UserRelationService userRelationService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private OrganizeService organizeService;
+
+    @Autowired
+    private PositionService positionService;
+
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private DataInterfaceService dataInterfaceService;
 
     // --------------------------------数据连接------------------------------
     public DbLinkEntity getDbLink(String dbLink) {
@@ -59,8 +78,7 @@ public class ServiceAllUtil {
 
     // --------------------------------数据字典------------------------------
     public List<DictionaryDataEntity> getDiList() {
-        return dictionaryDataService.getList(
-                DictionaryDataEnum.FLOWWOEK_ENGINE.getDictionaryTypeId());
+        return dictionaryDataService.getList(DictionaryDataEnum.FLOWWOEK_ENGINE.getDictionaryTypeId());
     }
 
     public List<DictionaryDataEntity> getDictionName(List<String> id) {

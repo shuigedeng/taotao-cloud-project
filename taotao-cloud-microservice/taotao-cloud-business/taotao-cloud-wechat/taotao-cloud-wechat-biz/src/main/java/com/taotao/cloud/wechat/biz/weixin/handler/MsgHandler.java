@@ -64,55 +64,39 @@ public class MsgHandler extends AbstractHandler {
         if (!wxMessage.getMsgType().equals(XmlMsgType.EVENT)) {
             WxMpXmlOutMessage rs;
             // TODO 可以选择将消息保存到本地
-            WxUser wxUser =
-                    wxUserMapper.selectOne(
-                            Wrappers.<WxUser>lambdaQuery()
-                                    .eq(WxUser::getOpenId, wxMessage.getFromUser()));
+            WxUser wxUser = wxUserMapper.selectOne(
+                    Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, wxMessage.getFromUser()));
             if (WxConsts.KefuMsgType.TEXT.equals(wxMessage.getMsgType())) { // 1、先处理是否有文本关键字回复
                 // 先全匹配
-                List<WxAutoReply> listWxAutoReply =
-                        wxAutoReplyService.list(
-                                Wrappers.<WxAutoReply>query()
-                                        .lambda()
-                                        .eq(
-                                                WxAutoReply::getType,
-                                                ConfigConstant.WX_AUTO_REPLY_TYPE_3)
-                                        .eq(WxAutoReply::getRepMate, ConfigConstant.WX_REP_MATE_1)
-                                        .eq(WxAutoReply::getReqKey, wxMessage.getContent()));
+                List<WxAutoReply> listWxAutoReply = wxAutoReplyService.list(Wrappers.<WxAutoReply>query()
+                        .lambda()
+                        .eq(WxAutoReply::getType, ConfigConstant.WX_AUTO_REPLY_TYPE_3)
+                        .eq(WxAutoReply::getRepMate, ConfigConstant.WX_REP_MATE_1)
+                        .eq(WxAutoReply::getReqKey, wxMessage.getContent()));
                 if (listWxAutoReply != null && listWxAutoReply.size() > 0) {
-                    rs =
-                            this.getWxMpXmlOutMessage(
-                                    wxMessage, listWxAutoReply, wxUser, wxMsgService);
+                    rs = this.getWxMpXmlOutMessage(wxMessage, listWxAutoReply, wxUser, wxMsgService);
                     if (rs != null) {
                         return rs;
                     }
                 }
                 // 再半匹配
-                listWxAutoReply =
-                        wxAutoReplyService.list(
-                                Wrappers.<WxAutoReply>query()
-                                        .lambda()
-                                        .eq(
-                                                WxAutoReply::getType,
-                                                ConfigConstant.WX_AUTO_REPLY_TYPE_3)
-                                        .eq(WxAutoReply::getRepMate, ConfigConstant.WX_REP_MATE_2)
-                                        .like(WxAutoReply::getReqKey, wxMessage.getContent()));
+                listWxAutoReply = wxAutoReplyService.list(Wrappers.<WxAutoReply>query()
+                        .lambda()
+                        .eq(WxAutoReply::getType, ConfigConstant.WX_AUTO_REPLY_TYPE_3)
+                        .eq(WxAutoReply::getRepMate, ConfigConstant.WX_REP_MATE_2)
+                        .like(WxAutoReply::getReqKey, wxMessage.getContent()));
                 if (listWxAutoReply != null && listWxAutoReply.size() > 0) {
-                    rs =
-                            this.getWxMpXmlOutMessage(
-                                    wxMessage, listWxAutoReply, wxUser, wxMsgService);
+                    rs = this.getWxMpXmlOutMessage(wxMessage, listWxAutoReply, wxUser, wxMsgService);
                     if (rs != null) {
                         return rs;
                     }
                 }
             }
             // 2、再处理消息回复
-            List<WxAutoReply> listWxAutoReply =
-                    wxAutoReplyService.list(
-                            Wrappers.<WxAutoReply>query()
-                                    .lambda()
-                                    .eq(WxAutoReply::getType, ConfigConstant.WX_AUTO_REPLY_TYPE_2)
-                                    .eq(WxAutoReply::getReqType, wxMessage.getMsgType()));
+            List<WxAutoReply> listWxAutoReply = wxAutoReplyService.list(Wrappers.<WxAutoReply>query()
+                    .lambda()
+                    .eq(WxAutoReply::getType, ConfigConstant.WX_AUTO_REPLY_TYPE_2)
+                    .eq(WxAutoReply::getReqType, wxMessage.getMsgType()));
             rs = this.getWxMpXmlOutMessage(wxMessage, listWxAutoReply, wxUser, wxMsgService);
             return rs;
         }
@@ -127,10 +111,7 @@ public class MsgHandler extends AbstractHandler {
      * @return
      */
     public static WxMpXmlOutMessage getWxMpXmlOutMessage(
-            WxMpXmlMessage wxMessage,
-            List<WxAutoReply> listWxAutoReply,
-            WxUser wxUser,
-            WxMsgService wxMsgService) {
+            WxMpXmlMessage wxMessage, List<WxAutoReply> listWxAutoReply, WxUser wxUser, WxMsgService wxMsgService) {
         WxMpXmlOutMessage wxMpXmlOutMessage = null;
         // 记录接收消息
         WxMsg wxMsg = new WxMsg();
@@ -174,10 +155,7 @@ public class MsgHandler extends AbstractHandler {
         wxMsg.setCreateTime(now);
         wxMsgService.save(wxMsg);
         // 推送websocket
-        String destination =
-                WebSocketConstant.USER_DESTINATION_PREFIX
-                        + WebSocketConstant.WX_MSG
-                        + wxMsg.getWxUserId();
+        String destination = WebSocketConstant.USER_DESTINATION_PREFIX + WebSocketConstant.WX_MSG + wxMsg.getWxUserId();
         if (listWxAutoReply != null && listWxAutoReply.size() > 0) {
             WxAutoReply wxAutoReply = listWxAutoReply.get(0);
             // 记录回复消息
@@ -191,48 +169,44 @@ public class MsgHandler extends AbstractHandler {
 
             if (WxConsts.KefuMsgType.TEXT.equals(wxAutoReply.getRepType())) { // 文本
                 wxMsg.setRepContent(wxAutoReply.getRepContent());
-                wxMpXmlOutMessage =
-                        new TextBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .content(wxAutoReply.getRepContent())
-                                .build();
+                wxMpXmlOutMessage = new TextBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .content(wxAutoReply.getRepContent())
+                        .build();
             }
             if (WxConsts.KefuMsgType.IMAGE.equals(wxAutoReply.getRepType())) { // 图片
                 wxMsg.setRepName(wxAutoReply.getRepName());
                 wxMsg.setRepUrl(wxAutoReply.getRepUrl());
                 wxMsg.setRepMediaId(wxAutoReply.getRepMediaId());
-                wxMpXmlOutMessage =
-                        new ImageBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .mediaId(wxAutoReply.getRepMediaId())
-                                .build();
+                wxMpXmlOutMessage = new ImageBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .mediaId(wxAutoReply.getRepMediaId())
+                        .build();
             }
             if (WxConsts.KefuMsgType.VOICE.equals(wxAutoReply.getRepType())) {
                 wxMsg.setRepName(wxAutoReply.getRepName());
                 wxMsg.setRepUrl(wxAutoReply.getRepUrl());
                 wxMsg.setRepMediaId(wxAutoReply.getRepMediaId());
-                wxMpXmlOutMessage =
-                        new VoiceBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .mediaId(wxAutoReply.getRepMediaId())
-                                .build();
+                wxMpXmlOutMessage = new VoiceBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .mediaId(wxAutoReply.getRepMediaId())
+                        .build();
             }
             if (WxConsts.KefuMsgType.VIDEO.equals(wxAutoReply.getRepType())) {
                 wxMsg.setRepName(wxAutoReply.getRepName());
                 wxMsg.setRepDesc(wxAutoReply.getRepDesc());
                 wxMsg.setRepUrl(wxAutoReply.getRepUrl());
                 wxMsg.setRepMediaId(wxAutoReply.getRepMediaId());
-                wxMpXmlOutMessage =
-                        new VideoBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .mediaId(wxAutoReply.getRepMediaId())
-                                .title(wxAutoReply.getRepName())
-                                .description(wxAutoReply.getRepDesc())
-                                .build();
+                wxMpXmlOutMessage = new VideoBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .mediaId(wxAutoReply.getRepMediaId())
+                        .title(wxAutoReply.getRepName())
+                        .description(wxAutoReply.getRepDesc())
+                        .build();
             }
             if (WxConsts.KefuMsgType.MUSIC.equals(wxAutoReply.getRepType())) {
                 wxMsg.setRepName(wxAutoReply.getRepName());
@@ -241,16 +215,15 @@ public class MsgHandler extends AbstractHandler {
                 wxMsg.setRepHqUrl(wxAutoReply.getRepHqUrl());
                 wxMsg.setRepThumbMediaId(wxAutoReply.getRepThumbMediaId());
                 wxMsg.setRepThumbUrl(wxAutoReply.getRepThumbUrl());
-                wxMpXmlOutMessage =
-                        new MusicBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .thumbMediaId(wxAutoReply.getRepThumbMediaId())
-                                .title(wxAutoReply.getRepName())
-                                .description(wxAutoReply.getRepDesc())
-                                .musicUrl(wxAutoReply.getRepUrl())
-                                .hqMusicUrl(wxAutoReply.getRepHqUrl())
-                                .build();
+                wxMpXmlOutMessage = new MusicBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .thumbMediaId(wxAutoReply.getRepThumbMediaId())
+                        .title(wxAutoReply.getRepName())
+                        .description(wxAutoReply.getRepDesc())
+                        .musicUrl(wxAutoReply.getRepUrl())
+                        .hqMusicUrl(wxAutoReply.getRepHqUrl())
+                        .build();
             }
             if (WxConsts.KefuMsgType.NEWS.equals(wxAutoReply.getRepType())) {
                 List<WxMpXmlOutNewsMessage.Item> list = new ArrayList<>();
@@ -270,12 +243,11 @@ public class MsgHandler extends AbstractHandler {
                 wxMsg.setRepUrl(wxAutoReply.getRepUrl());
                 wxMsg.setRepMediaId(wxAutoReply.getRepMediaId());
                 wxMsg.setContent(wxAutoReply.getContent());
-                wxMpXmlOutMessage =
-                        new NewsBuilder()
-                                .fromUser(wxMessage.getToUser())
-                                .toUser(wxMessage.getFromUser())
-                                .articles(list)
-                                .build();
+                wxMpXmlOutMessage = new NewsBuilder()
+                        .fromUser(wxMessage.getToUser())
+                        .toUser(wxMessage.getFromUser())
+                        .articles(list)
+                        .build();
             }
             wxMsgService.save(wxMsg);
         }

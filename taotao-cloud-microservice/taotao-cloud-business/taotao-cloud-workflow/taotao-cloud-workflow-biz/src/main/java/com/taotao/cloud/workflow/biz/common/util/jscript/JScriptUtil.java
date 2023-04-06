@@ -26,12 +26,11 @@ import javax.script.ScriptException;
 public class JScriptUtil {
 
     /** 数据接口通用定义函数 */
-    public static final String JSCONTENT =
-            "var method = function(data) {"
-                    + "${jsContent}"
-                    + "};"
-                    + "var result = method(JSON.parse('${data}'));"
-                    + "JSON.stringify(result);";
+    public static final String JSCONTENT = "var method = function(data) {"
+            + "${jsContent}"
+            + "};"
+            + "var result = method(JSON.parse('${data}'));"
+            + "JSON.stringify(result);";
 
     /**
      * 调用js代码

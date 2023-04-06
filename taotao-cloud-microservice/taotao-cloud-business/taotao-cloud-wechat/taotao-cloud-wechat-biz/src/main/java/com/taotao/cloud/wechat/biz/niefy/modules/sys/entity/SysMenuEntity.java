@@ -34,7 +34,8 @@ public class SysMenuEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 菜单ID */
-    @TableId private Long menuId;
+    @TableId
+    private Long menuId;
 
     /** 父菜单ID，一级菜单为0 */
     private Long parentId;

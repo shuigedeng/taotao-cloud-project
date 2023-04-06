@@ -63,10 +63,7 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
     @Column(name = "category", columnDefinition = "varchar(255) not null comment '分类'")
     private String category;
 
-    @Column(
-            name = "en_code",
-            unique = true,
-            columnDefinition = "varchar(255) not null comment '编码'")
+    @Column(name = "en_code", unique = true, columnDefinition = "varchar(255) not null comment '编码'")
     private String enCode;
 
     @Type(value = JsonType.class)

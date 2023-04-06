@@ -23,11 +23,7 @@ import lombok.Data;
 @Data
 public class CreateSqlDTO {
 
-    public CreateSqlDTO(
-            DbBase dbBase,
-            String newTable,
-            String tableComment,
-            List<DbTableFieldModel> fieldModels) {
+    public CreateSqlDTO(DbBase dbBase, String newTable, String tableComment, List<DbTableFieldModel> fieldModels) {
         this.dbBase = dbBase;
         this.newTable = newTable;
         this.tableComment = tableComment;

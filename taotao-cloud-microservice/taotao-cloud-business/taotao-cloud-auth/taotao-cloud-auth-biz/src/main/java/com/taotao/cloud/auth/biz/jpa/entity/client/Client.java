@@ -25,7 +25,9 @@ import java.time.Instant;
 @Entity
 @Table(name = "`client`")
 public class Client {
-    @Id private String id;
+    @Id
+    private String id;
+
     private String clientId;
     private Instant clientIdIssuedAt;
     private String clientSecret;

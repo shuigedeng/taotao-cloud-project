@@ -41,7 +41,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CategorySearchQuery implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "分类名称")
     private String name;

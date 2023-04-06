@@ -57,13 +57,19 @@ import org.springframework.stereotype.Service;
  * @date 2021-08-08
  */
 @Service
-public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity>
-        implements AppDataService {
+public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity> implements AppDataService {
 
-    @Autowired private UserProvider userProvider;
-    @Autowired private ModuleApi moduleApi;
-    @Autowired private AuthorizeApi authorizeApi;
-    @Autowired private FlowEngineApi flowEngineApi;
+    @Autowired
+    private UserProvider userProvider;
+
+    @Autowired
+    private ModuleApi moduleApi;
+
+    @Autowired
+    private AuthorizeApi authorizeApi;
+
+    @Autowired
+    private FlowEngineApi flowEngineApi;
 
     @Override
     public List<AppDataEntity> getList(String type) {
@@ -149,28 +155,27 @@ public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity
         List<AppDataEntity> dataList = getList(type);
         AuthorizeVO authorizeModel = authorizeApi.getAuthorize(true);
         List<ModuleModel> buttonList = authorizeModel.getModuleList();
-        List<ModuleEntity> menuList =
-                moduleApi.getList().stream()
-                        .filter(t -> "App".equals(t.getCategory()) && t.getEnabledMark() == 1)
-                        .collect(Collectors.toList());
+        List<ModuleEntity> menuList = moduleApi.getList().stream()
+                .filter(t -> "App".equals(t.getCategory()) && t.getEnabledMark() == 1)
+                .collect(Collectors.toList());
         List<UserMenuModel> list = new LinkedList<>();
         for (ModuleEntity module : menuList) {
-            boolean count =
-                    buttonList.stream().filter(t -> t.getId().equals(module.getId())).count() > 0;
+            boolean count = buttonList.stream()
+                            .filter(t -> t.getId().equals(module.getId()))
+                            .count()
+                    > 0;
             UserMenuModel userMenuModel = JsonUtil.getJsonToBean(module, UserMenuModel.class);
             if (count) {
-                boolean isData =
-                        dataList.stream()
-                                        .filter(t -> t.getObjectId().equals(module.getId()))
-                                        .count()
-                                > 0;
+                boolean isData = dataList.stream()
+                                .filter(t -> t.getObjectId().equals(module.getId()))
+                                .count()
+                        > 0;
                 userMenuModel.setIsData(isData);
                 list.add(userMenuModel);
             }
         }
         List<SumTree<UserMenuModel>> menuAll = TreeDotUtils.convertListToTreeDot(list);
-        List<AppDataListAllVO> menuListAll =
-                JsonUtil.getJsonToList(menuAll, AppDataListAllVO.class);
+        List<AppDataListAllVO> menuListAll = JsonUtil.getJsonToList(menuAll, AppDataListAllVO.class);
         List<AppDataListAllVO> data = new LinkedList<>();
         for (AppDataListAllVO appMenu : menuListAll) {
             if ("-1".equals(appMenu.getParentId())) {

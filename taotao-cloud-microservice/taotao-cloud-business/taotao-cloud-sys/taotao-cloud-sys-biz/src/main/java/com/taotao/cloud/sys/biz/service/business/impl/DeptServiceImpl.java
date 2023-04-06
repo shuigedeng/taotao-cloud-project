@@ -38,8 +38,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class DeptServiceImpl
-        extends BaseSuperServiceImpl<IDeptMapper, Dept, DeptRepository, IDeptRepository, Long>
+public class DeptServiceImpl extends BaseSuperServiceImpl<IDeptMapper, Dept, DeptRepository, IDeptRepository, Long>
         implements IDeptService {
 
     @Override
@@ -50,12 +49,11 @@ public class DeptServiceImpl
 
         return DeptConvert.INSTANCE.convertTree(list).stream()
                 .filter(Objects::nonNull)
-                .peek(
-                        e -> {
-                            e.setKey(e.getId());
-                            e.setValue(e.getId());
-                            e.setTitle(e.getName());
-                        })
+                .peek(e -> {
+                    e.setKey(e.getId());
+                    e.setValue(e.getId());
+                    e.setTitle(e.getName());
+                })
                 .collect(Collectors.toList());
     }
 }

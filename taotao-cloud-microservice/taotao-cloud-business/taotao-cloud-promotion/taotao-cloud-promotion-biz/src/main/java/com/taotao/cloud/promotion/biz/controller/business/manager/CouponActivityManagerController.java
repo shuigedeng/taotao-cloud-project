@@ -52,7 +52,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion/couponActivity")
 public class CouponActivityManagerController {
 
-    @Autowired private ICouponActivityService couponActivityService;
+    @Autowired
+    private ICouponActivityService couponActivityService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -65,11 +66,7 @@ public class CouponActivityManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "获取优惠券活动")
-    @ApiImplicitParam(
-            name = "couponActivityId",
-            value = "优惠券活动ID",
-            required = true,
-            paramType = "path")
+    @ApiImplicitParam(name = "couponActivityId", value = "优惠券活动ID", required = true, paramType = "path")
     @GetMapping("/{couponActivityId}")
     public Result<CouponActivityVO> getCouponActivity(@PathVariable String couponActivityId) {
         return Result.success(couponActivityService.getCouponActivityVO(couponActivityId));
@@ -92,12 +89,7 @@ public class CouponActivityManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "关闭优惠券活动")
     @ApiImplicitParams({
-        @ApiImplicitParam(
-                name = "id",
-                value = "优惠券活动ID",
-                required = true,
-                dataType = "String",
-                paramType = "path")
+        @ApiImplicitParam(name = "id", value = "优惠券活动ID", required = true, dataType = "String", paramType = "path")
     })
     @DeleteMapping("/{id}")
     public Result<CouponActivity> updateStatus(@PathVariable String id) {

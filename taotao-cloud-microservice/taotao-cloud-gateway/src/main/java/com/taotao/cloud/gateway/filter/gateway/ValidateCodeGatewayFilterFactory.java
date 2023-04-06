@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.filter.gateway;
 
 import cn.hutool.core.util.StrUtil;
@@ -36,51 +37,50 @@ import org.springframework.util.MultiValueMap;
 @Component
 public class ValidateCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
 
-	private static final String PARAM_CODE = "code";
-	private static final String PARAM_T = "t";
+    private static final String PARAM_CODE = "code";
+    private static final String PARAM_T = "t";
 
-	private static final String NOT_CODE_NULL = "验证码不能为空";
-	private static final String NOT_LEGAL = "验证码不合法";
-	private static final String INVALID = "验证码已失效";
-	private static final String ERROR = "验证码错误";
+    private static final String NOT_CODE_NULL = "验证码不能为空";
+    private static final String NOT_LEGAL = "验证码不合法";
+    private static final String INVALID = "验证码已失效";
+    private static final String ERROR = "验证码错误";
 
-	private final RedisRepository redisRepository;
+    private final RedisRepository redisRepository;
 
-	public ValidateCodeGatewayFilterFactory(RedisRepository redisRepository) {
-		this.redisRepository = redisRepository;
-	}
+    public ValidateCodeGatewayFilterFactory(RedisRepository redisRepository) {
+        this.redisRepository = redisRepository;
+    }
 
-	@Override
-	public GatewayFilter apply(Object config) {
-		return (exchange, chain) -> {
-			ServerHttpRequest request = exchange.getRequest();
-			if (!StrUtil.containsAnyIgnoreCase(request.getURI().getPath(),
-				SecurityConstant.OAUTH_TOKEN_URL)) {
-				return chain.filter(exchange);
-			}
-			validateCode(request);
-			return chain.filter(exchange);
-		};
-	}
+    @Override
+    public GatewayFilter apply(Object config) {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+            if (!StrUtil.containsAnyIgnoreCase(request.getURI().getPath(), SecurityConstant.OAUTH_TOKEN_URL)) {
+                return chain.filter(exchange);
+            }
+            validateCode(request);
+            return chain.filter(exchange);
+        };
+    }
 
-	private void validateCode(ServerHttpRequest request) {
-		MultiValueMap<String, String> params = request.getQueryParams();
-		String code = params.getFirst(PARAM_CODE);
-		String t = params.getFirst(PARAM_T);
-		if (StrUtil.isBlank(code)) {
-			throw new BaseException(NOT_CODE_NULL);
-		}
-		String key = RedisConstant.CAPTCHA_KEY_PREFIX + t;
-		if (!redisRepository.exists(key)) {
-			throw new BaseException(NOT_LEGAL);
-		}
+    private void validateCode(ServerHttpRequest request) {
+        MultiValueMap<String, String> params = request.getQueryParams();
+        String code = params.getFirst(PARAM_CODE);
+        String t = params.getFirst(PARAM_T);
+        if (StrUtil.isBlank(code)) {
+            throw new BaseException(NOT_CODE_NULL);
+        }
+        String key = RedisConstant.CAPTCHA_KEY_PREFIX + t;
+        if (!redisRepository.exists(key)) {
+            throw new BaseException(NOT_LEGAL);
+        }
 
-		Object captcha = redisRepository.get(key);
-		if (captcha == null) {
-			throw new BaseException(INVALID);
-		}
-		if (!code.toLowerCase().equals(captcha)) {
-			throw new BaseException(ERROR);
-		}
-	}
+        Object captcha = redisRepository.get(key);
+        if (captcha == null) {
+            throw new BaseException(INVALID);
+        }
+        if (!code.toLowerCase().equals(captcha)) {
+            throw new BaseException(ERROR);
+        }
+    }
 }

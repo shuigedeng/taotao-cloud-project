@@ -36,8 +36,7 @@ public class ConnUtil {
      * @param dbName 数据库名
      * @return url连接
      */
-    public static Connection getConn(DataSourceMod dataSourceUtil, String dbName)
-            throws DataException {
+    public static Connection getConn(DataSourceMod dataSourceUtil, String dbName) throws DataException {
         // 避免spring托管的数据源DataSource数据被修改
         DataSourceDTO dsd = dataSourceUtil.convertDTO(dbName);
         if (DbTypeUtil.checkOracle(dsd)) {
@@ -46,8 +45,7 @@ public class ConnUtil {
         return getConn(dsd.getUserName(), dsd.getPassword(), getUrl(dsd));
     }
 
-    public static Connection getConn(String userName, String password, String url)
-            throws DataException {
+    public static Connection getConn(String userName, String password, String url) throws DataException {
         DbBase db = DbTypeUtil.getDb(url);
         return ConnCommon.createConn(db.getDriver(), userName, password, url);
     }
@@ -91,10 +89,8 @@ public class ConnUtil {
             // 当地址为空，用本地回环地址
             String host = dsd.getHost() == null ? "127.0.0.1" : dsd.getHost();
             // 当端口为空，用数据库一般默认端口
-            Integer port =
-                    dsd.getPort() == null ? Integer.parseInt(db.getDefaultPort()) : dsd.getPort();
-            return DbBase.BaseCommon.getDbBaseConnUrl(
-                    db, dsd.getPrepareUrl(), host, port, dbName, dbSchema);
+            Integer port = dsd.getPort() == null ? Integer.parseInt(db.getDefaultPort()) : dsd.getPort();
+            return DbBase.BaseCommon.getDbBaseConnUrl(db, dsd.getPrepareUrl(), host, port, dbName, dbSchema);
         } catch (DataException e) {
             e.printStackTrace();
         }
@@ -114,8 +110,8 @@ public class ConnUtil {
          * @return 数据库连接
          * @throws DataException ignore
          */
-        public static Connection createConn(
-                String driver, String userName, String password, String url) throws DataException {
+        public static Connection createConn(String driver, String userName, String password, String url)
+                throws DataException {
             try {
                 Class.forName(driver);
                 return DriverManager.getConnection(url, userName, password);
@@ -126,8 +122,7 @@ public class ConnUtil {
         }
 
         public static Connection createConnByProp(
-                String driver, String userName, String password, String url, Properties conProps)
-                throws DataException {
+                String driver, String userName, String password, String url, Properties conProps) throws DataException {
             try {
                 conProps.put("user", userName);
                 conProps.put("password", password);
@@ -144,8 +139,7 @@ public class ConnUtil {
          * @param dbSourceOrDbLink 数据源对象
          * @return ignore
          */
-        public static Connection getConnRemarks(DataSourceUtil dbSourceOrDbLink)
-                throws DataException {
+        public static Connection getConnRemarks(DataSourceUtil dbSourceOrDbLink) throws DataException {
             Properties props = new Properties();
             props.setProperty("remarks", "true");
             props.setProperty("useInformationSchema", "true");

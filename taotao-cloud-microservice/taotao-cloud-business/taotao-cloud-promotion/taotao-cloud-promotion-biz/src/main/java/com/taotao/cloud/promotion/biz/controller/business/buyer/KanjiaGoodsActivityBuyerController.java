@@ -52,11 +52,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class KanjiaGoodsActivityBuyerController {
 
     /** 砍价活动商品 */
-    @Autowired private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
+    @Autowired
+    private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
     /** 帮砍记录 */
-    @Autowired private IKanjiaActivityLogService kanJiaActivityLogService;
+    @Autowired
+    private IKanjiaActivityLogService kanJiaActivityLogService;
     /** 砍价活动 */
-    @Autowired private IKanjiaActivityService kanJiaActivityService;
+    @Autowired
+    private IKanjiaActivityService kanJiaActivityService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -68,16 +71,14 @@ public class KanjiaGoodsActivityBuyerController {
         kanjiaActivityGoodsParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         kanjiaActivityGoodsParams.setStartTime(System.currentTimeMillis());
         kanjiaActivityGoodsParams.setEndTime(System.currentTimeMillis());
-        return Result.success(
-                kanJiaActivityGoodsService.kanjiaGoodsVOPage(kanjiaActivityGoodsParams, page));
+        return Result.success(kanJiaActivityGoodsService.kanjiaGoodsVOPage(kanjiaActivityGoodsParams, page));
     }
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping("/{id}")
     @Operation(summary = "获取砍价活动商品")
-    public Result<KanjiaActivityGoodsVO> getKanjiaActivityGoods(
-            @Parameter(name = "砍价活动商品ID") @PathVariable String id) {
+    public Result<KanjiaActivityGoodsVO> getKanjiaActivityGoods(@Parameter(name = "砍价活动商品ID") @PathVariable String id) {
         return Result.success(kanJiaActivityGoodsService.getKanJiaGoodsVO(id));
     }
 
@@ -87,22 +88,19 @@ public class KanjiaGoodsActivityBuyerController {
     @Operation(summary = "分页获取砍价活动-帮砍记录")
     public Result<IPage<KanjiaActivityLog>> getKanjiaActivityLog(
             KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageVO page) {
-        return Result.success(
-                kanJiaActivityLogService.getForPage(kanJiaActivityLogPageQuery, page));
+        return Result.success(kanJiaActivityLogService.getForPage(kanJiaActivityLogPageQuery, page));
     }
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @PostMapping("/getKanjiaActivity")
     @Operation(summary = "获取砍价活动")
-    public Result<KanjiaActivityVO> getKanJiaActivity(
-            KanjiaActivitySearchQuery kanjiaActivitySearchParams) {
+    public Result<KanjiaActivityVO> getKanJiaActivity(KanjiaActivitySearchQuery kanjiaActivitySearchParams) {
         // 如果是非被邀请关系则填写会员ID
         if (StrUtil.isEmpty(kanjiaActivitySearchParams.getKanjiaActivityId())) {
             kanjiaActivitySearchParams.setMemberId(UserContext.getCurrentUser().getId());
         }
-        return Result.success(
-                kanJiaActivityService.getKanjiaActivityVO(kanjiaActivitySearchParams));
+        return Result.success(kanJiaActivityService.getKanjiaActivityVO(kanjiaActivitySearchParams));
     }
 
     @RequestLogger
@@ -118,8 +116,7 @@ public class KanjiaGoodsActivityBuyerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @PostMapping("/help/{kanjiaActivityId}")
     @Operation(summary = "帮砍一刀")
-    public Result<KanjiaActivityLog> helpKanJia(
-            @Parameter(name = "砍价活动ID") @PathVariable String kanjiaActivityId) {
+    public Result<KanjiaActivityLog> helpKanJia(@Parameter(name = "砍价活动ID") @PathVariable String kanjiaActivityId) {
         KanjiaActivityLog kanjiaActivityLog = kanJiaActivityService.helpKanJia(kanjiaActivityId);
         return Result.success(kanjiaActivityLog);
     }
@@ -132,8 +129,7 @@ public class KanjiaGoodsActivityBuyerController {
             KanjiaActivityPageQuery kanjiaActivityPageQuery, PageVO page) {
         // 会员端查询到的肯定是已经开始的活动商品
         kanjiaActivityPageQuery.setMemberId(UserContext.getCurrentUser().getId());
-        IPage<KanjiaActivity> kanjiaActivity =
-                kanJiaActivityService.getForPage(kanjiaActivityPageQuery, page);
+        IPage<KanjiaActivity> kanjiaActivity = kanJiaActivityService.getForPage(kanjiaActivityPageQuery, page);
         return Result.success(kanjiaActivity);
     }
 }

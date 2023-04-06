@@ -39,7 +39,8 @@ import org.springframework.stereotype.Component;
 @ConditionalOnBean(CleanMchLoginAuthCacheMQ.IMQReceiver.class)
 public class CleanMchLoginAuthCacheRabbitMQReceiver implements IMQMsgReceiver {
 
-    @Autowired private CleanMchLoginAuthCacheMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private CleanMchLoginAuthCacheMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 queue 】 类型的消息 * */
     @Override

@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpMenuController {
 
-    @Resource private MpMenuService mpMenuService;
+    @Resource
+    private MpMenuService mpMenuService;
 
     @PostMapping("/save")
     @ApiOperation("保存公众号菜单")

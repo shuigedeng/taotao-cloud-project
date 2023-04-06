@@ -60,11 +60,14 @@ public abstract class AbstractCtrl {
     private static final String SORT_FIELD_PARAM_NAME = "sortField"; // 排序字段
     private static final String SORT_ORDER_FLAG_PARAM_NAME = "sortOrder"; // 排序正序， 倒序标志
 
-    @Autowired protected HttpServletRequest request; // 自动注入request
+    @Autowired
+    protected HttpServletRequest request; // 自动注入request
 
-    @Autowired protected HttpServletResponse response; // 自动注入response
+    @Autowired
+    protected HttpServletResponse response; // 自动注入response
 
-    @Autowired protected RequestKitBean requestKitBean;
+    @Autowired
+    protected RequestKitBean requestKitBean;
 
     /** 获取json格式的请求参数 */
     protected JSONObject getReqParamJSON() {
@@ -247,9 +250,7 @@ public abstract class AbstractCtrl {
     public Long getRequiredAmountL(String name) {
         String amountStr = getValStringRequired(name); // 前端填写的为元,可以为小数点2位
         Long amountL =
-                new BigDecimal(amountStr.trim())
-                        .multiply(new BigDecimal(100))
-                        .longValue(); // // 转成分
+                new BigDecimal(amountStr.trim()).multiply(new BigDecimal(100)).longValue(); // // 转成分
         return amountL;
     }
 
@@ -260,9 +261,7 @@ public abstract class AbstractCtrl {
             return null;
         }
         Long amountL =
-                new BigDecimal(amountStr.trim())
-                        .multiply(new BigDecimal(100))
-                        .longValue(); // // 转成分
+                new BigDecimal(amountStr.trim()).multiply(new BigDecimal(100)).longValue(); // // 转成分
         return amountL;
     }
 
@@ -275,10 +274,9 @@ public abstract class AbstractCtrl {
         for (String name : names) {
             String amountStr = getValString(name); // 前端填写的为元,可以为小数点2位
             if (StringUtils.isNotBlank(amountStr)) {
-                Long amountL =
-                        new BigDecimal(amountStr.trim())
-                                .multiply(new BigDecimal(100))
-                                .longValue(); // // 转成分
+                Long amountL = new BigDecimal(amountStr.trim())
+                        .multiply(new BigDecimal(100))
+                        .longValue(); // // 转成分
                 if (!name.contains(".")) {
                     getReqParamJSON().put(name, amountL);
                     continue;
@@ -296,13 +294,11 @@ public abstract class AbstractCtrl {
      * @return
      */
     protected Date[] getQueryDateRange() {
-        return DateKit.getQueryDateRange(
-                getReqParamJSON().getString("queryDateRange")); // 默认参数为 queryDateRange
+        return DateKit.getQueryDateRange(getReqParamJSON().getString("queryDateRange")); // 默认参数为 queryDateRange
     }
 
     /** 请求参数转换为map格式 */
-    public Map<String, Object> request2payResponseMap(
-            HttpServletRequest request, String[] paramArray) {
+    public Map<String, Object> request2payResponseMap(HttpServletRequest request, String[] paramArray) {
         Map<String, Object> responseMap = new HashMap<>();
         for (int i = 0; i < paramArray.length; i++) {
             String key = paramArray[i];

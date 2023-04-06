@@ -60,10 +60,7 @@ public class APIJeepayRequest {
      * @throws JeepayException
      */
     public APIJeepayRequest(
-            APIResource.RequestMethod method,
-            String url,
-            Map<String, Object> params,
-            RequestOptions options)
+            APIResource.RequestMethod method, String url, Map<String, Object> params, RequestOptions options)
             throws JeepayException {
         try {
             this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
@@ -81,15 +78,13 @@ public class APIJeepayRequest {
         }
     }
 
-    private static URL buildURL(
-            APIResource.RequestMethod method, String spec, Map<String, Object> params)
+    private static URL buildURL(APIResource.RequestMethod method, String spec, Map<String, Object> params)
             throws IOException {
         StringBuilder sb = new StringBuilder();
 
         sb.append(spec);
 
-        if ((method != APIResource.RequestMethod.POST && method != APIResource.RequestMethod.PUT)
-                && (params != null)) {
+        if ((method != APIResource.RequestMethod.POST && method != APIResource.RequestMethod.PUT) && (params != null)) {
             String queryString = createQuery(params);
             if (!queryString.isEmpty()) {
                 sb.append("?");
@@ -189,9 +184,7 @@ public class APIJeepayRequest {
                 Map<String, Object> flatNestedMap = new HashMap<String, Object>();
                 Map<?, ?> nestedMap = (Map<?, ?>) value;
                 for (Map.Entry<?, ?> nestedEntry : nestedMap.entrySet()) {
-                    flatNestedMap.put(
-                            String.format("%s[%s]", key, nestedEntry.getKey()),
-                            nestedEntry.getValue());
+                    flatNestedMap.put(String.format("%s[%s]", key, nestedEntry.getKey()), nestedEntry.getValue());
                 }
                 flatParams.putAll(flattenParams(flatNestedMap));
             } else if (value instanceof ArrayList<?>) {
@@ -211,8 +204,8 @@ public class APIJeepayRequest {
         return flatParams;
     }
 
-    private static HttpHeaders buildHeaders(
-            APIResource.RequestMethod method, RequestOptions options) throws JeepayException {
+    private static HttpHeaders buildHeaders(APIResource.RequestMethod method, RequestOptions options)
+            throws JeepayException {
         Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
 
         // Accept

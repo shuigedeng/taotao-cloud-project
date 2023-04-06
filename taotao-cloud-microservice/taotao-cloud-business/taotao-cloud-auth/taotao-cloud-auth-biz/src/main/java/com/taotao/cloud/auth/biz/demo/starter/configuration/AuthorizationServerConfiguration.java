@@ -95,8 +95,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfiguration {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {
@@ -115,93 +114,74 @@ public class AuthorizationServerConfiguration {
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer)
             throws Exception {
 
-        log.debug(
-                "[Herodotus] |- Core [Authorization Server Security Filter Chain] Auto Configure.");
+        log.debug("[Herodotus] |- Core [Authorization Server Security Filter Chain] Auto Configure.");
 
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
-                new OAuth2AuthorizationServerConfigurer();
+        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
         httpSecurity.apply(authorizationServerConfigurer);
 
-        HerodotusAuthenticationFailureHandler failureHandler =
-                new HerodotusAuthenticationFailureHandler();
+        HerodotusAuthenticationFailureHandler failureHandler = new HerodotusAuthenticationFailureHandler();
         authorizationServerConfigurer.tokenRevocationEndpoint(
                 endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.tokenIntrospectionEndpoint(
                 endpoint -> endpoint.errorResponseHandler(failureHandler));
-        authorizationServerConfigurer.clientAuthentication(
-                endpoint -> endpoint.errorResponseHandler(failureHandler));
-        authorizationServerConfigurer.authorizationEndpoint(
-                endpoint -> {
-                    endpoint.errorResponseHandler(failureHandler);
-                    endpoint.consentPage("/oauth2/consent");
-                });
-        authorizationServerConfigurer.tokenEndpoint(
-                endpoint -> {
-                    AuthenticationConverter authenticationConverter =
-                            new DelegatingAuthenticationConverter(
-                                    Arrays.asList(
-                                            new OAuth2AuthorizationCodeAuthenticationConverter(),
-                                            new OAuth2RefreshTokenAuthenticationConverter(),
-                                            new OAuth2ClientCredentialsAuthenticationConverter(),
-                                            new OAuth2ResourceOwnerPasswordAuthenticationConverter(
-                                                    httpCryptoProcessor),
-                                            new OAuth2SocialCredentialsAuthenticationConverter(
-                                                    httpCryptoProcessor)));
-                    endpoint.accessTokenRequestConverter(authenticationConverter);
-                    endpoint.errorResponseHandler(failureHandler);
-                    endpoint.accessTokenResponseHandler(
-                            new HerodotusAuthenticationSuccessHandler(httpCryptoProcessor));
-                });
+        authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
+            endpoint.errorResponseHandler(failureHandler);
+            endpoint.consentPage("/oauth2/consent");
+        });
+        authorizationServerConfigurer.tokenEndpoint(endpoint -> {
+            AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(Arrays.asList(
+                    new OAuth2AuthorizationCodeAuthenticationConverter(),
+                    new OAuth2RefreshTokenAuthenticationConverter(),
+                    new OAuth2ClientCredentialsAuthenticationConverter(),
+                    new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
+                    new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor)));
+            endpoint.accessTokenRequestConverter(authenticationConverter);
+            endpoint.errorResponseHandler(failureHandler);
+            endpoint.accessTokenResponseHandler(new HerodotusAuthenticationSuccessHandler(httpCryptoProcessor));
+        });
 
         // 使用自定义的 AuthenticationProvider 替换已有 AuthenticationProvider
-        authorizationServerConfigurer.withObjectPostProcessor(
-                new ObjectPostProcessor<AuthenticationProvider>() {
-                    @Override
-                    public <O extends AuthenticationProvider> O postProcess(O object) {
-                        OAuth2AuthorizationService authorizationService =
-                                OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+        authorizationServerConfigurer.withObjectPostProcessor(new ObjectPostProcessor<AuthenticationProvider>() {
+            @Override
+            public <O extends AuthenticationProvider> O postProcess(O object) {
+                OAuth2AuthorizationService authorizationService =
+                        OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
 
-                        if (org.springframework.security.oauth2.server.authorization.authentication
-                                .OAuth2AuthorizationCodeAuthenticationProvider.class
-                                .isAssignableFrom(object.getClass())) {
-                            OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
-                                    OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
-                            OAuth2AuthorizationCodeAuthenticationProvider provider =
-                                    new OAuth2AuthorizationCodeAuthenticationProvider(
-                                            authorizationService, tokenGenerator);
-                            log.debug(
-                                    "[Herodotus] |- Custom"
-                                            + " OAuth2AuthorizationCodeAuthenticationProvider is in"
-                                            + " effect!");
-                            return (O) provider;
-                        }
+                if (org.springframework.security.oauth2.server.authorization.authentication
+                        .OAuth2AuthorizationCodeAuthenticationProvider.class
+                        .isAssignableFrom(object.getClass())) {
+                    OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
+                            OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+                    OAuth2AuthorizationCodeAuthenticationProvider provider =
+                            new OAuth2AuthorizationCodeAuthenticationProvider(authorizationService, tokenGenerator);
+                    log.debug("[Herodotus] |- Custom"
+                            + " OAuth2AuthorizationCodeAuthenticationProvider is in"
+                            + " effect!");
+                    return (O) provider;
+                }
 
-                        if (org.springframework.security.oauth2.server.authorization.authentication
-                                .OAuth2ClientCredentialsAuthenticationProvider.class
-                                .isAssignableFrom(object.getClass())) {
-                            OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
-                                    OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
-                            OAuth2ClientCredentialsAuthenticationProvider provider =
-                                    new OAuth2ClientCredentialsAuthenticationProvider(
-                                            authorizationService,
-                                            tokenGenerator,
-                                            clientDetailsService);
-                            log.debug(
-                                    "[Herodotus] |- Custom"
-                                            + " OAuth2ClientCredentialsAuthenticationProvider is in"
-                                            + " effect!");
-                            return (O) provider;
-                        }
-                        return object;
-                    }
-                });
+                if (org.springframework.security.oauth2.server.authorization.authentication
+                        .OAuth2ClientCredentialsAuthenticationProvider.class
+                        .isAssignableFrom(object.getClass())) {
+                    OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
+                            OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+                    OAuth2ClientCredentialsAuthenticationProvider provider =
+                            new OAuth2ClientCredentialsAuthenticationProvider(
+                                    authorizationService, tokenGenerator, clientDetailsService);
+                    log.debug("[Herodotus] |- Custom"
+                            + " OAuth2ClientCredentialsAuthenticationProvider is in"
+                            + " effect!");
+                    return (O) provider;
+                }
+                return object;
+            }
+        });
 
-        authorizationServerConfigurer.oidc(
-                oidc -> {
-                    oidc.clientRegistrationEndpoint(Customizer.withDefaults());
-                    oidc.userInfoEndpoint(
-                            userInfo -> userInfo.userInfoMapper(new HerodotusOidcUserInfoMapper()));
-                });
+        authorizationServerConfigurer.oidc(oidc -> {
+            oidc.clientRegistrationEndpoint(Customizer.withDefaults());
+            oidc.userInfoEndpoint(userInfo -> userInfo.userInfoMapper(new HerodotusOidcUserInfoMapper()));
+        });
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
         // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
@@ -212,57 +192,45 @@ public class AuthorizationServerConfiguration {
                         authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .oauth2ResourceServer(
-                        configurer -> herodotusTokenStrategyConfigurer.from(configurer));
+                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer));
 
         // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager
         // 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
         // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
-        ApplicationContext applicationContext =
-                httpSecurity.getSharedObject(ApplicationContext.class);
+        ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
         authenticationManagerBuilder.authenticationEventPublisher(
                 new DefaultOAuth2AuthenticationEventPublisher(applicationContext));
 
         // build() 方法会让以上所有的配置生效
-        SecurityFilterChain securityFilterChain =
-                httpSecurity
-                        .formLogin(Customizer.withDefaults())
-                        .sessionManagement(Customizer.withDefaults())
-                        .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
-                        .build();
+        SecurityFilterChain securityFilterChain = httpSecurity
+                .formLogin(Customizer.withDefaults())
+                .sessionManagement(Customizer.withDefaults())
+                .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
+                .build();
 
         // 增加新的、自定义 OAuth2 Granter
-        OAuth2AuthorizationService authorizationService =
-                OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+        OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
         OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
                 OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
 
-        OAuth2ResourceOwnerPasswordAuthenticationProvider
-                resourceOwnerPasswordAuthenticationProvider =
-                        new OAuth2ResourceOwnerPasswordAuthenticationProvider(
-                                authorizationService,
-                                tokenGenerator,
-                                userDetailsService,
-                                complianceProperties);
+        OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
+                new OAuth2ResourceOwnerPasswordAuthenticationProvider(
+                        authorizationService, tokenGenerator, userDetailsService, complianceProperties);
         resourceOwnerPasswordAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
 
         OAuth2SocialCredentialsAuthenticationProvider socialCredentialsAuthenticationProvider =
                 new OAuth2SocialCredentialsAuthenticationProvider(
-                        authorizationService,
-                        tokenGenerator,
-                        userDetailsService,
-                        complianceProperties);
+                        authorizationService, tokenGenerator, userDetailsService, complianceProperties);
         httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
 
         return securityFilterChain;
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource(OAuth2Properties oAuth2Properties)
-            throws NoSuchAlgorithmException {
+    public JWKSource<SecurityContext> jwkSource(OAuth2Properties oAuth2Properties) throws NoSuchAlgorithmException {
 
         OAuth2Properties.Jwk jwk = oAuth2Properties.getJwk();
 
@@ -271,12 +239,10 @@ public class AuthorizationServerConfiguration {
             try {
                 Resource[] resource = ResourceUtils.getResources(jwk.getJksKeyStore());
                 if (ArrayUtils.isNotEmpty(resource)) {
-                    KeyStoreKeyFactory keyStoreKeyFactory =
-                            new KeyStoreKeyFactory(
-                                    resource[0], jwk.getJksStorePassword().toCharArray());
-                    keyPair =
-                            keyStoreKeyFactory.getKeyPair(
-                                    jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
+                    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+                            resource[0], jwk.getJksStorePassword().toCharArray());
+                    keyPair = keyStoreKeyFactory.getKeyPair(
+                            jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
                 }
             } catch (IOException e) {
                 log.error("[Herodotus] |- Read custom certificate under resource folder error!", e);
@@ -290,11 +256,10 @@ public class AuthorizationServerConfiguration {
 
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAKey rsaKey =
-                new RSAKey.Builder(publicKey)
-                        .privateKey(privateKey)
-                        .keyID(UUID.randomUUID().toString())
-                        .build();
+        RSAKey rsaKey = new RSAKey.Builder(publicKey)
+                .privateKey(privateKey)
+                .keyID(UUID.randomUUID().toString())
+                .build();
         JWKSet jwkSet = new JWKSet(rsaKey);
         return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
     }
@@ -314,15 +279,13 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {
-        HerodotusOpaqueTokenCustomizer herodotusOpaqueTokenCustomizer =
-                new HerodotusOpaqueTokenCustomizer();
+        HerodotusOpaqueTokenCustomizer herodotusOpaqueTokenCustomizer = new HerodotusOpaqueTokenCustomizer();
         log.trace("[Herodotus] |- Bean [OAuth2 Opaque Token Customizer] Auto Configure.");
         return herodotusOpaqueTokenCustomizer;
     }
 
     @Bean
-    public AuthorizationServerSettings authorizationServerSettings(
-            EndpointProperties endpointProperties) {
+    public AuthorizationServerSettings authorizationServerSettings(EndpointProperties endpointProperties) {
         return AuthorizationServerSettings.builder()
                 .issuer(endpointProperties.getIssuerUri())
                 .authorizationEndpoint(endpointProperties.getAuthorizationEndpoint())
@@ -331,8 +294,7 @@ public class AuthorizationServerConfiguration {
                 .tokenIntrospectionEndpoint(endpointProperties.getTokenIntrospectionEndpoint())
                 .jwkSetEndpoint(endpointProperties.getJwkSetEndpoint())
                 .oidcUserInfoEndpoint(endpointProperties.getOidcUserInfoEndpoint())
-                .oidcClientRegistrationEndpoint(
-                        endpointProperties.getOidcClientRegistrationEndpoint())
+                .oidcClientRegistrationEndpoint(endpointProperties.getOidcClientRegistrationEndpoint())
                 .build();
     }
 }

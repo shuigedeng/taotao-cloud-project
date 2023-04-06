@@ -53,7 +53,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/Data")
 public class AppDataController {
 
-    @Autowired private AppDataService appDataService;
+    @Autowired
+    private AppDataService appDataService;
 
     /**
      * 常用数据

@@ -42,8 +42,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sys/role")
 @Api(tags = {"管理后台角色"})
 public class SysRoleController extends AbstractController {
-    @Autowired private SysRoleService sysRoleService;
-    @Autowired private SysRoleMenuService sysRoleMenuService;
+    @Autowired
+    private SysRoleService sysRoleService;
+
+    @Autowired
+    private SysRoleMenuService sysRoleMenuService;
 
     /** 角色列表 */
     @GetMapping("/list")

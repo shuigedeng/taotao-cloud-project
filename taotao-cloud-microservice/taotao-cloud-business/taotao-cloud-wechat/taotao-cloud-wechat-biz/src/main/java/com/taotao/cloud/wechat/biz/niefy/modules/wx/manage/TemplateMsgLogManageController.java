@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/templateMsgLog")
 @Api(tags = {"模板消息发送记录-管理后台"})
 public class TemplateMsgLogManageController {
-    @Autowired private TemplateMsgLogService templateMsgLogService;
-    @Autowired private WxMpService wxMpService;
+    @Autowired
+    private TemplateMsgLogService templateMsgLogService;
+
+    @Autowired
+    private WxMpService wxMpService;
 
     /** 列表 */
     @GetMapping("/list")

@@ -57,9 +57,7 @@ public class Special extends BaseSuperEntity<Special, Long> {
     private String specialName;
 
     /** 楼层对应连接端类型 PC,H5,WECHAT_MP,APP ClientTypeEnum */
-    @Column(
-            name = "client_type",
-            columnDefinition = "varchar(255) not null comment '楼层对应连接端类型 PC,H5,WECHAT_MP,APP'")
+    @Column(name = "client_type", columnDefinition = "varchar(255) not null comment '楼层对应连接端类型 PC,H5,WECHAT_MP,APP'")
     private String clientType;
     /** 页面ID */
     @Column(name = "page_data_id", columnDefinition = "varchar(255) not null comment '页面ID '")

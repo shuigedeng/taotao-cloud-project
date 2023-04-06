@@ -47,19 +47,23 @@ import org.springframework.stereotype.Component;
 public class WalletPlugin implements Payment {
 
     /** 支付日志 */
-    @Autowired private PaymentService paymentService;
+    @Autowired
+    private PaymentService paymentService;
     /** 退款日志 */
-    @Autowired private RefundLogService refundLogService;
+    @Autowired
+    private RefundLogService refundLogService;
     /** 会员余额 */
-    @Autowired private IFeignMemberWalletApi memberWalletApi;
+    @Autowired
+    private IFeignMemberWalletApi memberWalletApi;
     /** 收银台 */
-    @Autowired private CashierSupport cashierSupport;
+    @Autowired
+    private CashierSupport cashierSupport;
 
-    @Autowired private RedissonClient redissonClient;
+    @Autowired
+    private RedissonClient redissonClient;
 
     @Override
-    public Result<Object> h5pay(
-            HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
+    public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
         savePaymentLog(payParam);
         return Result.success(ResultEnum.PAY_SUCCESS);
     }
@@ -96,16 +100,11 @@ public class WalletPlugin implements Payment {
     public void cancel(RefundLog refundLog) {
 
         try {
-            memberWalletApi.increase(
-                    new MemberWalletUpdateDTO(
-                            refundLog.getTotalAmount(),
-                            refundLog.getMemberId(),
-                            "取消["
-                                    + refundLog.getOrderSn()
-                                    + "]订单，退还金额["
-                                    + refundLog.getTotalAmount()
-                                    + "]",
-                            DepositServiceTypeEnum.WALLET_REFUND.name()));
+            memberWalletApi.increase(new MemberWalletUpdateDTO(
+                    refundLog.getTotalAmount(),
+                    refundLog.getMemberId(),
+                    "取消[" + refundLog.getOrderSn() + "]订单，退还金额[" + refundLog.getTotalAmount() + "]",
+                    DepositServiceTypeEnum.WALLET_REFUND.name()));
             refundLog.setIsRefund(true);
             refundLogService.save(refundLog);
         } catch (Exception e) {
@@ -136,16 +135,11 @@ public class WalletPlugin implements Payment {
     @Override
     public void refund(RefundLog refundLog) {
         try {
-            memberWalletApi.increase(
-                    new MemberWalletUpdateDTO(
-                            refundLog.getTotalAmount(),
-                            refundLog.getMemberId(),
-                            "售后["
-                                    + refundLog.getAfterSaleNo()
-                                    + "]审批，退还金额["
-                                    + refundLog.getTotalAmount()
-                                    + "]",
-                            DepositServiceTypeEnum.WALLET_REFUND.name()));
+            memberWalletApi.increase(new MemberWalletUpdateDTO(
+                    refundLog.getTotalAmount(),
+                    refundLog.getMemberId(),
+                    "售后[" + refundLog.getAfterSaleNo() + "]审批，退还金额[" + refundLog.getTotalAmount() + "]",
+                    DepositServiceTypeEnum.WALLET_REFUND.name()));
             refundLog.setIsRefund(true);
             refundLogService.save(refundLog);
         } catch (Exception e) {
@@ -166,41 +160,26 @@ public class WalletPlugin implements Payment {
             if (UserContext.getCurrentUser() == null) {
                 throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
             }
-            boolean result =
-                    memberWalletApi.reduce(
-                            new MemberWalletUpdateDTO(
-                                    cashierParam.getPrice(),
-                                    UserContext.getCurrentUser().getId(),
-                                    "订单["
-                                            + cashierParam.getOrderSns()
-                                            + "]支付金额["
-                                            + cashierParam.getPrice()
-                                            + "]",
-                                    DepositServiceTypeEnum.WALLET_PAY.name()));
+            boolean result = memberWalletApi.reduce(new MemberWalletUpdateDTO(
+                    cashierParam.getPrice(),
+                    UserContext.getCurrentUser().getId(),
+                    "订单[" + cashierParam.getOrderSns() + "]支付金额[" + cashierParam.getPrice() + "]",
+                    DepositServiceTypeEnum.WALLET_PAY.name()));
 
             if (result) {
                 try {
-                    PaymentSuccessParams paymentSuccessParams =
-                            new PaymentSuccessParams(
-                                    PaymentMethodEnum.WALLET.name(),
-                                    "",
-                                    cashierParam.getPrice(),
-                                    payParam);
+                    PaymentSuccessParams paymentSuccessParams = new PaymentSuccessParams(
+                            PaymentMethodEnum.WALLET.name(), "", cashierParam.getPrice(), payParam);
 
                     paymentService.success(paymentSuccessParams);
                     LogUtils.info("支付回调通知：余额支付：{}", payParam);
                 } catch (ServiceException e) {
                     // 业务异常，则支付手动回滚
-                    memberWalletApi.increase(
-                            new MemberWalletUpdateDTO(
-                                    cashierParam.getPrice(),
-                                    UserContext.getCurrentUser().getId(),
-                                    "订单["
-                                            + cashierParam.getOrderSns()
-                                            + "]支付异常，余额返还["
-                                            + cashierParam.getPrice()
-                                            + "]",
-                                    DepositServiceTypeEnum.WALLET_REFUND.name()));
+                    memberWalletApi.increase(new MemberWalletUpdateDTO(
+                            cashierParam.getPrice(),
+                            UserContext.getCurrentUser().getId(),
+                            "订单[" + cashierParam.getOrderSns() + "]支付异常，余额返还[" + cashierParam.getPrice() + "]",
+                            DepositServiceTypeEnum.WALLET_REFUND.name()));
                     throw e;
                 }
             } else {

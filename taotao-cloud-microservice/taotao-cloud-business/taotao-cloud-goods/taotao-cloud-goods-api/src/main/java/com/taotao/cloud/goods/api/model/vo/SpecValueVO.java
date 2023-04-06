@@ -32,7 +32,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SpecValueVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4433579132929428572L;
+    @Serial
+    private static final long serialVersionUID = -4433579132929428572L;
 
     @Schema(description = "规格项名字")
     private String specName;

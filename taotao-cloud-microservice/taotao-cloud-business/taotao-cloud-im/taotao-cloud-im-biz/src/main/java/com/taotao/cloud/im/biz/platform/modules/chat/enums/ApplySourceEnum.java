@@ -42,7 +42,10 @@ public enum ApplySourceEnum {
     NEAR("8", "附近的人"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     ApplySourceEnum(String code, String info) {

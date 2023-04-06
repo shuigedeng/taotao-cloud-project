@@ -38,7 +38,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "商品参数列表")
 public class GoodsParamsItemDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -8823775607604091035L;
+    @Serial
+    private static final long serialVersionUID = -8823775607604091035L;
 
     @Schema(description = "参数ID")
     private Long paramId;

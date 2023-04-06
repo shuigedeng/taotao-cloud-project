@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.collect_list;
 
 import static io.trino.spi.type.VarbinaryType.VARBINARY;
@@ -29,26 +30,25 @@ import io.trino.spi.type.Type;
  * @version 2022.04
  * @since 2020/10/29 18:04
  */
-public class CollectListStatsSerializer implements
-	AccumulatorStateSerializer<CollectListAggregationFunctions.CollectState> {
+public class CollectListStatsSerializer
+        implements AccumulatorStateSerializer<CollectListAggregationFunctions.CollectState> {
 
-	@Override
-	public Type getSerializedType() {
-		return VARBINARY;
-	}
+    @Override
+    public Type getSerializedType() {
+        return VARBINARY;
+    }
 
-	@Override
-	public void serialize(CollectListAggregationFunctions.CollectState state, BlockBuilder out) {
-		if (state.get() == null) {
-			out.appendNull();
-		} else {
-			VARBINARY.writeSlice(out, state.get().serialize());
-		}
-	}
+    @Override
+    public void serialize(CollectListAggregationFunctions.CollectState state, BlockBuilder out) {
+        if (state.get() == null) {
+            out.appendNull();
+        } else {
+            VARBINARY.writeSlice(out, state.get().serialize());
+        }
+    }
 
-	@Override
-	public void deserialize(Block block, int index,
-		CollectListAggregationFunctions.CollectState state) {
-		state.set(new CollectListStats(VARBINARY.getSlice(block, index)));
-	}
+    @Override
+    public void deserialize(Block block, int index, CollectListAggregationFunctions.CollectState state) {
+        state.set(new CollectListStats(VARBINARY.getSlice(block, index)));
+    }
 }

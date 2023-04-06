@@ -58,8 +58,7 @@ public class Control {
      * @param iStop 是否为停止操作
      * @return
      */
-    public static boolean cloudControl(
-            String ip, CloudCode iCommand, CloudCode iSpeed, CloudCode iStop) {
+    public static boolean cloudControl(String ip, CloudCode iCommand, CloudCode iSpeed, CloudCode iStop) {
         // 获取ip对应摄像头的句柄
         MyNativeLong nativeLong = TempData.getTempData().getNativeLong(ip);
         if (nativeLong == null) {
@@ -77,8 +76,7 @@ public class Control {
             return hCNetSDK.NET_DVR_PTZControl(lRealHandle, iCommand.getKey(), iStop.getKey());
         }
 
-        return hCNetSDK.NET_DVR_PTZControlWithSpeed(
-                lRealHandle, iCommand.getKey(), iStop.getKey(), iSpeed.getKey());
+        return hCNetSDK.NET_DVR_PTZControlWithSpeed(lRealHandle, iCommand.getKey(), iStop.getKey(), iSpeed.getKey());
     }
 
     /**

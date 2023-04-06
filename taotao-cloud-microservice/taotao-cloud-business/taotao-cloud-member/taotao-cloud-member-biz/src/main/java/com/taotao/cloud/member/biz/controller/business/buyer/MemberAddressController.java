@@ -63,10 +63,8 @@ public class MemberAddressController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping
     public Result<PageResult<MemberAddressVO>> page(@Validated PageQuery page) {
-        IPage<MemberAddress> memberAddressPage =
-                memberAddressService.queryPage(page, SecurityUtils.getUserId());
-        return Result.success(
-                PageResult.convertMybatisPage(memberAddressPage, MemberAddressVO.class));
+        IPage<MemberAddress> memberAddressPage = memberAddressService.queryPage(page, SecurityUtils.getUserId());
+        return Result.success(PageResult.convertMybatisPage(memberAddressPage, MemberAddressVO.class));
     }
 
     @Operation(summary = "根据ID获取会员收件地址", description = "根据ID获取会员收件地址")
@@ -74,9 +72,7 @@ public class MemberAddressController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping(value = "/{id}")
     public Result<MemberAddressVO> getShippingAddress(
-            @Parameter(description = "会员地址ID", required = true)
-                    @NotNull(message = "id不能为空")
-                    @PathVariable(value = "id")
+            @Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空") @PathVariable(value = "id")
                     Long id) {
         MemberAddress memberAddress = memberAddressService.getMemberAddress(id);
         return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddress));
@@ -117,9 +113,7 @@ public class MemberAddressController {
     @PreAuthorize("@el.check('admin','timing:list')")
     @DeleteMapping(value = "/{id}")
     public Result<Boolean> delShippingAddressById(
-            @Parameter(description = "会员地址ID", required = true)
-                    @NotNull(message = "id不能为空")
-                    @PathVariable(value = "id")
+            @Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空") @PathVariable(value = "id")
                     Long id) {
         return Result.success(memberAddressService.removeMemberAddress(id));
     }

@@ -37,8 +37,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StreamController {
 
-    @Autowired private MediaService mediaService;
-    @Autowired private CameraMapper cameraMapper;
+    @Autowired
+    private MediaService mediaService;
+
+    @Autowired
+    private CameraMapper cameraMapper;
 
     /**
      * 分页查询

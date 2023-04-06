@@ -33,8 +33,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /** 基于阿里云app手机号码一键登录 */
-public class OneClickAuthenticationProvider
-        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+public class OneClickAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private final OneClickUserDetailsService oneClickUserDetailsService;
@@ -45,18 +44,15 @@ public class OneClickAuthenticationProvider
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
                 OneClickAuthenticationToken.class,
                 authentication,
-                () ->
-                        messages.getMessage(
-                                "AccountVerificationAuthenticationProvider.onlySupports",
-                                "Only AccountVerificationAuthenticationProvider is supported"));
+                () -> messages.getMessage(
+                        "AccountVerificationAuthenticationProvider.onlySupports",
+                        "Only AccountVerificationAuthenticationProvider is supported"));
 
-        OneClickAuthenticationToken unAuthenticationToken =
-                (OneClickAuthenticationToken) authentication;
+        OneClickAuthenticationToken unAuthenticationToken = (OneClickAuthenticationToken) authentication;
 
         String username = unAuthenticationToken.getName();
         String passowrd = (String) unAuthenticationToken.getCredentials();
@@ -90,13 +86,10 @@ public class OneClickAuthenticationProvider
      * @param user the user
      * @return the authentication
      */
-    protected Authentication createSuccessAuthentication(
-            Authentication authentication, UserDetails user) {
+    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
 
-        Collection<? extends GrantedAuthority> authorities =
-                authoritiesMapper.mapAuthorities(user.getAuthorities());
-        OneClickAuthenticationToken authenticationToken =
-                new OneClickAuthenticationToken(user, null, authorities);
+        Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
+        OneClickAuthenticationToken authenticationToken = new OneClickAuthenticationToken(user, null, authorities);
         authenticationToken.setDetails(authentication.getDetails());
 
         return authenticationToken;

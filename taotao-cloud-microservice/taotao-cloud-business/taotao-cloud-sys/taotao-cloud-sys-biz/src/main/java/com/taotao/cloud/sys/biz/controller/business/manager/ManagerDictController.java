@@ -49,8 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/dict")
 @Tag(name = "管理端-字典管理API", description = "管理端-字典管理API")
 public class ManagerDictController
-        extends BaseSuperController<
-                IDictService, Dict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
+        extends BaseSuperController<IDictService, Dict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
 
     @GetMapping("/list-code")
     // @ApiOperation(value = "字典列表code查询", notes = "字典列表code查询")

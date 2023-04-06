@@ -39,8 +39,7 @@ public interface JustAuthSocialMapper extends BaseMapper<JustAuthSocial> {
      * @return
      */
     Page<JustAuthSocialDTO> queryJustAuthSocialList(
-            Page<JustAuthSocialDTO> page,
-            @Param("justAuthSocial") QueryJustAuthSocialDTO justAuthSocialDTO);
+            Page<JustAuthSocialDTO> page, @Param("justAuthSocial") QueryJustAuthSocialDTO justAuthSocialDTO);
 
     /**
      * 查询第三方用户信息列表
@@ -48,8 +47,7 @@ public interface JustAuthSocialMapper extends BaseMapper<JustAuthSocial> {
      * @param justAuthSocialDTO
      * @return
      */
-    List<JustAuthSocialDTO> queryJustAuthSocialList(
-            @Param("justAuthSocial") QueryJustAuthSocialDTO justAuthSocialDTO);
+    List<JustAuthSocialDTO> queryJustAuthSocialList(@Param("justAuthSocial") QueryJustAuthSocialDTO justAuthSocialDTO);
 
     /**
      * 查询第三方用户绑定的系统用户id
@@ -65,6 +63,5 @@ public interface JustAuthSocialMapper extends BaseMapper<JustAuthSocial> {
      * @param justAuthSocialDTO
      * @return
      */
-    JustAuthSocialDTO queryJustAuthSocial(
-            @Param("justAuthSocial") QueryJustAuthSocialDTO justAuthSocialDTO);
+    JustAuthSocialDTO queryJustAuthSocial(@Param("justAuthSocial") QueryJustAuthSocialDTO justAuthSocialDTO);
 }

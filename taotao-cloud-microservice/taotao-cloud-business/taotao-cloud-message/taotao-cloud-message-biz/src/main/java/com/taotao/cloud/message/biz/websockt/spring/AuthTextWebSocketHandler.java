@@ -51,20 +51,17 @@ public class AuthTextWebSocketHandler extends TextWebSocketHandler {
      * @throws Exception
      */
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message)
-            throws Exception {
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         // 获得客户端传来的消息
         String payload = message.getPayload();
         Object token = session.getAttributes().get("token");
         System.out.println("server 接收到 " + token + " 发送的 " + payload);
-        session.sendMessage(
-                new TextMessage(
-                        "server 发送给 "
-                                + token
-                                + " 消息 "
-                                + payload
-                                + " "
-                                + LocalDateTime.now().toString()));
+        session.sendMessage(new TextMessage("server 发送给 "
+                + token
+                + " 消息 "
+                + payload
+                + " "
+                + LocalDateTime.now().toString()));
     }
 
     /**
@@ -75,8 +72,7 @@ public class AuthTextWebSocketHandler extends TextWebSocketHandler {
      * @throws Exception
      */
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status)
-            throws Exception {
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         Object token = session.getAttributes().get("token");
         if (token != null) {
             // 用户退出，移除缓存

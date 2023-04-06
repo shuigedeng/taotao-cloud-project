@@ -34,21 +34,27 @@ import lombok.NoArgsConstructor;
 public class EchartsVo {
 
     /** title 标题 */
-    @JsonProperty private TitleVO title;
+    @JsonProperty
+    private TitleVO title;
     /** tooltip 提示 */
-    @JsonProperty private TooltipVO tooltip;
+    @JsonProperty
+    private TooltipVO tooltip;
     /** legend 图例 */
-    @JsonProperty private LegendVO legend;
+    @JsonProperty
+    private LegendVO legend;
     /** xAxis x轴 */
-    @JsonProperty private XaxisVO xAxis;
+    @JsonProperty
+    private XaxisVO xAxis;
     /** yAxis y轴 */
-    @JsonProperty private YaxisVO yAxis;
+    @JsonProperty
+    private YaxisVO yAxis;
     /**
      * series 系列列表
      *
      * <p>每个系列通过 type 决定自己的图表类型
      */
-    @JsonProperty private List<SeriesVO> series;
+    @JsonProperty
+    private List<SeriesVO> series;
 
     /** TitleVO */
     @Data

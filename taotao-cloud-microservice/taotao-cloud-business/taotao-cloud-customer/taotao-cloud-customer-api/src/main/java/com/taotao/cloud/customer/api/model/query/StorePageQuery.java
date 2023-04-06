@@ -38,7 +38,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "店铺搜索参数VO")
 public class StorePageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = 6916054310764833369L;
+    @Serial
+    private static final long serialVersionUID = 6916054310764833369L;
 
     @Schema(description = "会员名称")
     private String memberName;

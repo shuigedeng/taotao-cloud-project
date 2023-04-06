@@ -32,19 +32,13 @@ public class CommonExecutor {
 
     private BlockingQueue<Runnable> queue = new LinkedBlockingDeque(queueSize);
 
-    private Executor executorService =
-            new ThreadPoolExecutor(
-                    threadCount,
-                    threadCount,
-                    600,
-                    TimeUnit.SECONDS,
-                    queue,
-                    new RejectedExecutionHandler() {
-                        @Override
-                        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-                            log.warn("request for is rejected");
-                        }
-                    });
+    private Executor executorService = new ThreadPoolExecutor(
+            threadCount, threadCount, 600, TimeUnit.SECONDS, queue, new RejectedExecutionHandler() {
+                @Override
+                public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+                    log.warn("request for is rejected");
+                }
+            });
 
     public void runTask(Runnable task) {
         executorService.execute(task);

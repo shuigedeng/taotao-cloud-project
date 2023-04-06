@@ -418,10 +418,7 @@ public class StringUtil extends StringUtils {
         do {
             formerStarOffset = indexOf(pattern, START, beginOffset);
             prefixPattern =
-                    substring(
-                            pattern,
-                            beginOffset,
-                            formerStarOffset > -1 ? formerStarOffset : pattern.length());
+                    substring(pattern, beginOffset, formerStarOffset > -1 ? formerStarOffset : pattern.length());
 
             // 匹配前缀Pattern
             result = remainingUri.contains(prefixPattern);
@@ -441,11 +438,8 @@ public class StringUtil extends StringUtils {
 
             // 匹配后缀Pattern
             latterStarOffset = indexOf(pattern, START, formerStarOffset + 1);
-            suffixPattern =
-                    substring(
-                            pattern,
-                            formerStarOffset + 1,
-                            latterStarOffset > -1 ? latterStarOffset : pattern.length());
+            suffixPattern = substring(
+                    pattern, formerStarOffset + 1, latterStarOffset > -1 ? latterStarOffset : pattern.length());
 
             result = remainingUri.contains(suffixPattern);
             // 匹配失败，直接返回

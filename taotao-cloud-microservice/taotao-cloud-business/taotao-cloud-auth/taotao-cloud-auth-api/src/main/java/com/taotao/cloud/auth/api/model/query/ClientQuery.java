@@ -30,7 +30,8 @@ import java.io.Serializable;
 @Schema(name = "ClientQuery", description = "客户端查询query")
 public class ClientQuery implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "应用标识")
     private String clientId;

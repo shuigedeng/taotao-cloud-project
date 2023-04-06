@@ -49,10 +49,7 @@ public interface PurchaseListService extends IService<PurchaseListEntity> {
      * @param purchaseListEntryEntityList 子表
      * @throws WorkFlowException 异常
      */
-    void save(
-            String id,
-            PurchaseListEntity entity,
-            List<PurchaseListEntryEntity> purchaseListEntryEntityList)
+    void save(String id, PurchaseListEntity entity, List<PurchaseListEntryEntity> purchaseListEntryEntityList)
             throws WorkFlowException;
 
     /**

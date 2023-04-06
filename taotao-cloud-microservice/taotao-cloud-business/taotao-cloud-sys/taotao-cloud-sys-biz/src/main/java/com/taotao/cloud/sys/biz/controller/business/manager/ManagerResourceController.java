@@ -67,22 +67,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-资源管理API", description = "管理端-资源管理API")
 public class ManagerResourceController
         extends BaseSuperController<
-                IResourceService,
-                Resource,
-                Long,
-                BaseQuery,
-                ResourceSaveDTO,
-                ResourceUpdateDTO,
-                MenuQueryVO> {
+                IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, MenuQueryVO> {
 
     // ************************************************菜单*************************************************************
 
     @Operation(summary = "根据角色id获取菜单列表", description = "根据角色id获取菜单列表")
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @SentinelResource(
-            value = "findResourceByRoleId",
-            blockHandler = "findResourceByRoleIdException")
+    @SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
     @GetMapping("/roleId/{roleId}")
     public Result<List<MenuQueryVO>> findResourceByRoleId(
             @Parameter(description = "角色id", required = true)
@@ -182,18 +174,14 @@ public class ManagerResourceController
 
     @Operation(
             summary = "获取树形菜单集合",
-            description =
-                    "获取树形菜单集合 1.false-非懒加载，查询全部 "
-                            + "2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
+            description = "获取树形菜单集合 1.false-非懒加载，查询全部 " + "2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:tree')")
     @GetMapping("/tree")
     @SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
     public Result<List<MenuTreeVO>> findResourceTree(
-            @Parameter(name = "lazy", description = "是否是延迟查询") @RequestParam(value = "lazy")
-                    boolean lazy,
-            @Parameter(name = "parentId", description = "父id") @RequestParam(value = "parentId")
-                    Long parentId) {
+            @Parameter(name = "lazy", description = "是否是延迟查询") @RequestParam(value = "lazy") boolean lazy,
+            @Parameter(name = "parentId", description = "父id") @RequestParam(value = "parentId") Long parentId) {
         List<MenuTreeVO> trees = service().findMenuTree(lazy, parentId);
         return success(trees);
     }

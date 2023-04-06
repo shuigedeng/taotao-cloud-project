@@ -59,14 +59,18 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 public class MpMaterialServiceImpl implements MpMaterialService {
 
-    @Resource private MpMaterialMapper mpMaterialMapper;
+    @Resource
+    private MpMaterialMapper mpMaterialMapper;
 
-    @Resource private FileApi fileApi;
+    @Resource
+    private FileApi fileApi;
 
-    @Resource @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource
+    @Lazy // 延迟加载，解决循环依赖的问题
     private MpAccountService mpAccountService;
 
-    @Resource @Lazy // 延迟加载，解决循环依赖的问题
+    @Resource
+    @Lazy // 延迟加载，解决循环依赖的问题
     private MpServiceFactory mpServiceFactory;
 
     @Override
@@ -83,10 +87,9 @@ public class MpMaterialServiceImpl implements MpMaterialService {
             return null;
         }
         MpAccountDO account = mpAccountService.getRequiredAccount(accountId);
-        material =
-                MpMaterialConvert.INSTANCE
-                        .convert(mediaId, type, url, account, null)
-                        .setPermanent(false);
+        material = MpMaterialConvert.INSTANCE
+                .convert(mediaId, type, url, account, null)
+                .setPermanent(false);
         mpMaterialMapper.insert(material);
 
         // 不考虑下载永久素材，因为上传的时候已经保存
@@ -94,8 +97,7 @@ public class MpMaterialServiceImpl implements MpMaterialService {
     }
 
     @Override
-    public MpMaterialDO uploadTemporaryMaterial(MpMaterialUploadTemporaryReqVO reqVO)
-            throws IOException {
+    public MpMaterialDO uploadTemporaryMaterial(MpMaterialUploadTemporaryReqVO reqVO) throws IOException {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(reqVO.getAccountId());
         // 第一步，上传到公众号
         File file = null;
@@ -104,9 +106,7 @@ public class MpMaterialServiceImpl implements MpMaterialService {
         String url;
         try {
             // 写入到临时文件
-            file =
-                    FileUtil.newFile(
-                            FileUtil.getTmpDirPath() + reqVO.getFile().getOriginalFilename());
+            file = FileUtil.newFile(FileUtil.getTmpDirPath() + reqVO.getFile().getOriginalFilename());
             reqVO.getFile().transferTo(file);
             // 上传到公众号
             result = mpService.getMaterialService().mediaUpload(reqVO.getType(), file);
@@ -121,17 +121,15 @@ public class MpMaterialServiceImpl implements MpMaterialService {
 
         // 第二步，存储到数据库
         MpAccountDO account = mpAccountService.getRequiredAccount(reqVO.getAccountId());
-        MpMaterialDO material =
-                MpMaterialConvert.INSTANCE
-                        .convert(mediaId, reqVO.getType(), url, account, reqVO.getFile().getName())
-                        .setPermanent(false);
+        MpMaterialDO material = MpMaterialConvert.INSTANCE
+                .convert(mediaId, reqVO.getType(), url, account, reqVO.getFile().getName())
+                .setPermanent(false);
         mpMaterialMapper.insert(material);
         return material;
     }
 
     @Override
-    public MpMaterialDO uploadPermanentMaterial(MpMaterialUploadPermanentReqVO reqVO)
-            throws IOException {
+    public MpMaterialDO uploadPermanentMaterial(MpMaterialUploadPermanentReqVO reqVO) throws IOException {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(reqVO.getAccountId());
         // 第一步，上传到公众号
         String name = StrUtil.blankToDefault(reqVO.getName(), reqVO.getFile().getName());
@@ -141,18 +139,14 @@ public class MpMaterialServiceImpl implements MpMaterialService {
         String url;
         try {
             // 写入到临时文件
-            file =
-                    FileUtil.newFile(
-                            FileUtil.getTmpDirPath() + reqVO.getFile().getOriginalFilename());
+            file = FileUtil.newFile(FileUtil.getTmpDirPath() + reqVO.getFile().getOriginalFilename());
             reqVO.getFile().transferTo(file);
             // 上传到公众号
-            result =
-                    mpService
-                            .getMaterialService()
-                            .materialFileUpload(
-                                    reqVO.getType(),
-                                    MpMaterialConvert.INSTANCE.convert(
-                                            name, file, reqVO.getTitle(), reqVO.getIntroduction()));
+            result = mpService
+                    .getMaterialService()
+                    .materialFileUpload(
+                            reqVO.getType(),
+                            MpMaterialConvert.INSTANCE.convert(name, file, reqVO.getTitle(), reqVO.getIntroduction()));
             // 上传到文件服务
             mediaId = ObjUtil.defaultIfNull(result.getMediaId(), result.getMediaId());
             url = uploadFile(mediaId, file);
@@ -164,18 +158,17 @@ public class MpMaterialServiceImpl implements MpMaterialService {
 
         // 第二步，存储到数据库
         MpAccountDO account = mpAccountService.getRequiredAccount(reqVO.getAccountId());
-        MpMaterialDO material =
-                MpMaterialConvert.INSTANCE
-                        .convert(
-                                mediaId,
-                                reqVO.getType(),
-                                url,
-                                account,
-                                name,
-                                reqVO.getTitle(),
-                                reqVO.getIntroduction(),
-                                result.getUrl())
-                        .setPermanent(true);
+        MpMaterialDO material = MpMaterialConvert.INSTANCE
+                .convert(
+                        mediaId,
+                        reqVO.getType(),
+                        url,
+                        account,
+                        name,
+                        reqVO.getTitle(),
+                        reqVO.getIntroduction(),
+                        result.getUrl())
+                .setPermanent(true);
         mpMaterialMapper.insert(material);
         return material;
     }
@@ -186,9 +179,7 @@ public class MpMaterialServiceImpl implements MpMaterialService {
         File file = null;
         try {
             // 写入到临时文件
-            file =
-                    FileUtil.newFile(
-                            FileUtil.getTmpDirPath() + reqVO.getFile().getOriginalFilename());
+            file = FileUtil.newFile(FileUtil.getTmpDirPath() + reqVO.getFile().getOriginalFilename());
             reqVO.getFile().transferTo(file);
             // 上传到公众号
             return mpService.getMaterialService().mediaImgUpload(file).getUrl();

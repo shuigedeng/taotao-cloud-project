@@ -104,9 +104,8 @@ public class CheckDataRender implements ICartRenderStep {
             // 缓存中的商品信息
             GoodsSku dataSku =
                     goodsSkuApi.getGoodsSkuByIdFromCache(cartSkuVO.getGoodsSku().getId());
-            Map<String, Object> promotionMap =
-                    promotionGoodsService.getCurrentGoodsPromotion(
-                            dataSku, tradeDTO.getCartTypeEnum().name());
+            Map<String, Object> promotionMap = promotionGoodsService.getCurrentGoodsPromotion(
+                    dataSku, tradeDTO.getCartTypeEnum().name());
             // 商品有效性判定
             if (dataSku == null
                     || dataSku.getUpdateTime().after(cartSkuVO.getGoodsSku().getUpdateTime())) {
@@ -116,8 +115,7 @@ public class CheckDataRender implements ICartRenderStep {
                 CartSkuVO newCartSkuVO = new CartSkuVO(dataSku, promotionMap);
                 newCartSkuVO.setCartType(tradeDTO.getCartTypeEnum());
                 newCartSkuVO.setNum(cartSkuVO.getNum());
-                newCartSkuVO.setSubTotal(
-                        CurrencyUtil.mul(newCartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+                newCartSkuVO.setSubTotal(CurrencyUtil.mul(newCartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
                 cartSkuVOS.add(newCartSkuVO);
                 continue;
             }
@@ -144,19 +142,16 @@ public class CheckDataRender implements ICartRenderStep {
                     && (CollUtil.isNotEmpty(cartSkuVO.getNotFilterPromotionMap())
                             || Boolean.TRUE.equals(cartSkuVO.getGoodsSku().getPromotionFlag()))) {
                 // 获取当前最新的促销信息
-                cartSkuVO.setPromotionMap(
-                        this.promotionGoodsService.getCurrentGoodsPromotion(
-                                cartSkuVO.getGoodsSku(), tradeDTO.getCartTypeEnum().name()));
+                cartSkuVO.setPromotionMap(this.promotionGoodsService.getCurrentGoodsPromotion(
+                        cartSkuVO.getGoodsSku(), tradeDTO.getCartTypeEnum().name()));
                 // 设定商品价格
-                Double goodsPrice =
-                        cartSkuVO.getGoodsSku().getPromotionFlag() != null
-                                        && cartSkuVO.getGoodsSku().getPromotionFlag()
-                                ? cartSkuVO.getGoodsSku().getPromotionPrice()
-                                : cartSkuVO.getGoodsSku().getPrice();
+                Double goodsPrice = cartSkuVO.getGoodsSku().getPromotionFlag() != null
+                                && cartSkuVO.getGoodsSku().getPromotionFlag()
+                        ? cartSkuVO.getGoodsSku().getPromotionPrice()
+                        : cartSkuVO.getGoodsSku().getPrice();
                 cartSkuVO.setPurchasePrice(goodsPrice);
                 cartSkuVO.setUtilPrice(goodsPrice);
-                cartSkuVO.setSubTotal(
-                        CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
+                cartSkuVO.setSubTotal(CurrencyUtil.mul(cartSkuVO.getPurchasePrice(), cartSkuVO.getNum()));
             }
         }
     }
@@ -172,8 +167,7 @@ public class CheckDataRender implements ICartRenderStep {
 
         // 根据店铺分组
         Map<String, List<CartSkuVO>> storeCollect =
-                tradeDTO.getSkuList().parallelStream()
-                        .collect(Collectors.groupingBy(CartSkuVO::getStoreId));
+                tradeDTO.getSkuList().parallelStream().collect(Collectors.groupingBy(CartSkuVO::getStoreId));
         for (Map.Entry<String, List<CartSkuVO>> storeCart : storeCollect.entrySet()) {
             if (!storeCart.getValue().isEmpty()) {
                 CartVO cartVO = new CartVO(storeCart.getValue().get(0));
@@ -205,19 +199,17 @@ public class CheckDataRender implements ICartRenderStep {
                 // 订单接收
                 Order parentOrder = orderService.getBySn(tradeDTO.getParentOrderSn());
                 // 参与活动判定
-                if (parentOrder.getMemberId().equals(UserContext.getCurrentUser().getId())) {
+                if (parentOrder
+                        .getMemberId()
+                        .equals(UserContext.getCurrentUser().getId())) {
                     throw new BusinessException(ResultEnum.PINTUAN_JOIN_ERROR);
                 }
             }
             // 判断拼团商品的限购数量
-            Optional<String> pintuanId =
-                    tradeDTO.getSkuList().get(0).getPromotions().stream()
-                            .filter(
-                                    i ->
-                                            i.getPromotionType()
-                                                    .equals(PromotionTypeEnum.PINTUAN.name()))
-                            .map(PromotionGoods::getPromotionId)
-                            .findFirst();
+            Optional<String> pintuanId = tradeDTO.getSkuList().get(0).getPromotions().stream()
+                    .filter(i -> i.getPromotionType().equals(PromotionTypeEnum.PINTUAN.name()))
+                    .map(PromotionGoods::getPromotionId)
+                    .findFirst();
             if (pintuanId.isPresent()) {
                 Pintuan pintuan = pintuanApi.getById(pintuanId.get());
                 Integer limitNum = pintuan.getLimitNum();

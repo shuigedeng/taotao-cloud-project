@@ -52,7 +52,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion/pointsGoods")
 public class PointsGoodsManagerController {
 
-    @Autowired private IPointsGoodsService pointsGoodsService;
+    @Autowired
+    private IPointsGoodsService pointsGoodsService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -79,8 +80,7 @@ public class PointsGoodsManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @PutMapping("/status/{ids}")
     @Operation(summary = "修改积分商品状态")
-    public Result<Object> updatePointsGoodsStatus(
-            @PathVariable String ids, Long startTime, Long endTime) {
+    public Result<Object> updatePointsGoodsStatus(@PathVariable String ids, Long startTime, Long endTime) {
         if (pointsGoodsService.updateStatus(Arrays.asList(ids.split(",")), startTime, endTime)) {
             return Result.success();
         }
@@ -102,8 +102,7 @@ public class PointsGoodsManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping
     @Operation(summary = "分页获取积分商品")
-    public Result<IPage<PointsGoods>> getPointsGoodsPage(
-            PointsGoodsPageQuery searchParams, PageVO page) {
+    public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsPageQuery searchParams, PageVO page) {
         IPage<PointsGoods> pointsGoodsByPage = pointsGoodsService.pageFindAll(searchParams, page);
         return Result.success(pointsGoodsByPage);
     }

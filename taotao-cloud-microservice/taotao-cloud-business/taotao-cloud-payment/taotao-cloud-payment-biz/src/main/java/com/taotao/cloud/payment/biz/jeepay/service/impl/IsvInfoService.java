@@ -36,11 +36,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class IsvInfoService extends ServiceImpl<IsvInfoMapper, IsvInfo> {
 
-    @Autowired private MchInfoService mchInfoService;
+    @Autowired
+    private MchInfoService mchInfoService;
 
-    @Autowired private IsvInfoService isvInfoService;
+    @Autowired
+    private IsvInfoService isvInfoService;
 
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
 
     @Transactional
     public void removeByIsvNo(String isvNo) {
@@ -51,20 +54,16 @@ public class IsvInfoService extends ServiceImpl<IsvInfoMapper, IsvInfo> {
         }
 
         // 1.查询当前服务商下是否存在商户
-        long mchCount =
-                mchInfoService.count(
-                        MchInfo.gw()
-                                .eq(MchInfo::getIsvNo, isvNo)
-                                .eq(MchInfo::getType, CS.MCH_TYPE_ISVSUB));
+        long mchCount = mchInfoService.count(
+                MchInfo.gw().eq(MchInfo::getIsvNo, isvNo).eq(MchInfo::getType, CS.MCH_TYPE_ISVSUB));
         if (mchCount > 0) {
             throw new BizException("该服务商下存在商户，不可删除");
         }
 
         // 2.删除当前服务商支付接口配置参数
-        payInterfaceConfigService.remove(
-                PayInterfaceConfig.gw()
-                        .eq(PayInterfaceConfig::getInfoId, isvNo)
-                        .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_ISV));
+        payInterfaceConfigService.remove(PayInterfaceConfig.gw()
+                .eq(PayInterfaceConfig::getInfoId, isvNo)
+                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_ISV));
 
         // 3.删除该服务商
         boolean remove = isvInfoService.removeById(isvNo);

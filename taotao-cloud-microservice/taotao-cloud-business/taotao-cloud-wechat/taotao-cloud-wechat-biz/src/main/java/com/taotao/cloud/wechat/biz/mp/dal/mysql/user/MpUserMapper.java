@@ -42,9 +42,8 @@ public interface MpUserMapper extends BaseMapperX<MpUserDO> {
     }
 
     default List<MpUserDO> selectListByAppIdAndOpenid(String appId, List<String> openids) {
-        return selectList(
-                new LambdaQueryWrapperX<MpUserDO>()
-                        .eq(MpUserDO::getAppId, appId)
-                        .in(MpUserDO::getOpenid, openids));
+        return selectList(new LambdaQueryWrapperX<MpUserDO>()
+                .eq(MpUserDO::getAppId, appId)
+                .in(MpUserDO::getOpenid, openids));
     }
 }

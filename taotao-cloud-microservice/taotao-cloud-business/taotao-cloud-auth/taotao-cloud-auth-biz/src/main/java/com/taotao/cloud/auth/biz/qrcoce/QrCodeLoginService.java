@@ -27,7 +27,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class QrCodeLoginService {
 
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     public String getScanUUID(String uuid) {
         return "QR_CODE_UUID:" + uuid;
@@ -39,11 +40,7 @@ public class QrCodeLoginService {
             String uuid = UUID.randomUUID().toString();
             redisRepository
                     .opsForValue()
-                    .set(
-                            getScanUUID(uuid),
-                            CodeUtil.getUnusedCodeInfo(),
-                            30 * 1000,
-                            TimeUnit.MINUTES);
+                    .set(getScanUUID(uuid), CodeUtil.getUnusedCodeInfo(), 30 * 1000, TimeUnit.MINUTES);
             return uuid;
         } catch (Exception e) {
             LogUtils.warn("redis二维码生成异常{}", e.getMessage());
@@ -72,11 +69,7 @@ public class QrCodeLoginService {
             if (codeStatus == CodeStatusEnum.UNUSED) {
                 redisRepository
                         .opsForValue()
-                        .set(
-                                getScanUUID(uuid),
-                                CodeUtil.getConfirmingCodeInfo(),
-                                30 * 10000,
-                                TimeUnit.MINUTES);
+                        .set(getScanUUID(uuid), CodeUtil.getConfirmingCodeInfo(), 30 * 10000, TimeUnit.MINUTES);
                 // 你的逻辑
 
                 // return new CommonResult<>("请确认登录", 200, null);

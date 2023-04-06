@@ -22,11 +22,9 @@ import org.springframework.stereotype.Component;
 
 /** */
 @Component
-public class EmbeddedTomcatConfig
-        implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
+public class EmbeddedTomcatConfig implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
     @Override
     public void customize(TomcatServletWebServerFactory factory) {
-        factory.addConnectorCustomizers(
-                connector -> connector.setProperty("relaxedQueryChars", "[]"));
+        factory.addConnectorCustomizers(connector -> connector.setProperty("relaxedQueryChars", "[]"));
     }
 }

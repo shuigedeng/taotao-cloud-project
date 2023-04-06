@@ -77,8 +77,7 @@ public class WeChatMenuController {
 
     @Operation(summary = "分页查询")
     @GetMapping(value = "/page")
-    public ResResult<PageResult<WeChatMenuDto>> page(
-            PageQuery PageQuery, WeChatMenuParam weChatMenuParam) {
+    public ResResult<PageResult<WeChatMenuDto>> page(PageQuery PageQuery, WeChatMenuParam weChatMenuParam) {
         return Res.ok(weChatMenuService.page(PageQuery, weChatMenuParam));
     }
 

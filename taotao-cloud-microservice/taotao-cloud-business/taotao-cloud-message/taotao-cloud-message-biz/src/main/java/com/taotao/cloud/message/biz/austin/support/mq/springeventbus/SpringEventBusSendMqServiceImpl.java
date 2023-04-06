@@ -32,23 +32,20 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@ConditionalOnProperty(
-        name = "austin.mq.pipeline",
-        havingValue = MessageQueuePipeline.SPRING_EVENT_BUS)
+@ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.SPRING_EVENT_BUS)
 public class SpringEventBusSendMqServiceImpl implements SendMqService {
 
-    @Autowired private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Override
     public void send(String topic, String jsonValue, String tagId) {
-        AustinSpringEventSource source =
-                AustinSpringEventSource.builder()
-                        .topic(topic)
-                        .jsonValue(jsonValue)
-                        .tagId(tagId)
-                        .build();
-        AustinSpringEventBusEvent austinSpringEventBusEvent =
-                new AustinSpringEventBusEvent(this, source);
+        AustinSpringEventSource source = AustinSpringEventSource.builder()
+                .topic(topic)
+                .jsonValue(jsonValue)
+                .tagId(tagId)
+                .build();
+        AustinSpringEventBusEvent austinSpringEventBusEvent = new AustinSpringEventBusEvent(this, source);
         applicationContext.publishEvent(austinSpringEventBusEvent);
     }
 

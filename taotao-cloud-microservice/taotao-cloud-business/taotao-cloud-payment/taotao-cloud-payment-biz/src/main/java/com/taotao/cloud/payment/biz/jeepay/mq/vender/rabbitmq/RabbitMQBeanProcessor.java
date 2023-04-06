@@ -44,14 +44,12 @@ public class RabbitMQBeanProcessor implements BeanDefinitionRegistryPostProcesso
     protected BeanDefinitionRegistry beanDefinitionRegistry;
 
     @Override
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry)
-            throws BeansException {
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) throws BeansException {
         this.beanDefinitionRegistry = beanDefinitionRegistry;
     }
 
     @Override
-    public void postProcessBeanFactory(
-            ConfigurableListableBeanFactory configurableListableBeanFactory)
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory)
             throws BeansException {}
 
     /** 自定义交换机： 用于延迟消息 * */
@@ -59,7 +57,6 @@ public class RabbitMQBeanProcessor implements BeanDefinitionRegistryPostProcesso
     CustomExchange delayedExchange() {
         Map<String, Object> args = new HashMap<>();
         args.put("x-delayed-type", "direct");
-        return new CustomExchange(
-                RabbitMQConfig.DELAYED_EXCHANGE_NAME, "x-delayed-message", true, false, args);
+        return new CustomExchange(RabbitMQConfig.DELAYED_EXCHANGE_NAME, "x-delayed-message", true, false, args);
     }
 }

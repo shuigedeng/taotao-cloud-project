@@ -39,26 +39,26 @@ public class AliYunRocketMQSender implements IMQSender {
     /** 最小延迟1秒 */
     private static final int MIN_DELAY_TIME = 1;
 
-    @Autowired private AliYunRocketMQFactory aliYunRocketMQFactory;
+    @Autowired
+    private AliYunRocketMQFactory aliYunRocketMQFactory;
+
     private Producer producerClient;
 
     @Override
     public void send(AbstractMQ mqModel) {
-        Message message =
-                new Message(
-                        mqModel.getMQName(),
-                        AliYunRocketMQFactory.defaultTag,
-                        mqModel.toMessage().getBytes());
+        Message message = new Message(
+                mqModel.getMQName(),
+                AliYunRocketMQFactory.defaultTag,
+                mqModel.toMessage().getBytes());
         sendMessage(message);
     }
 
     @Override
     public void send(AbstractMQ mqModel, int delaySeconds) {
-        Message message =
-                new Message(
-                        mqModel.getMQName(),
-                        AliYunRocketMQFactory.defaultTag,
-                        mqModel.toMessage().getBytes());
+        Message message = new Message(
+                mqModel.getMQName(),
+                AliYunRocketMQFactory.defaultTag,
+                mqModel.toMessage().getBytes());
         if (delaySeconds > 0) {
             long delayTime = System.currentTimeMillis() + delayTimeCorrector(delaySeconds) * 1000;
             // 设置消息需要被投递的时间。

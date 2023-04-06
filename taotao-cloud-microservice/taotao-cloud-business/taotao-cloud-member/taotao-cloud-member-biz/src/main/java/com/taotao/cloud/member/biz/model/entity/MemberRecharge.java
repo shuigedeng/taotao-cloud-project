@@ -50,7 +50,8 @@ public class MemberRecharge extends BaseSuperEntity<MemberRecharge, Long> {
 
     public static final String TABLE_NAME = "tt_recharge";
 
-    @Serial private static final long serialVersionUID = -1529240544327161096L;
+    @Serial
+    private static final long serialVersionUID = -1529240544327161096L;
     /** 充值订单编号 */
     @Column(name = "recharge_sn", columnDefinition = "varchar(32) not null comment '发票抬头'")
     private String rechargeSn;

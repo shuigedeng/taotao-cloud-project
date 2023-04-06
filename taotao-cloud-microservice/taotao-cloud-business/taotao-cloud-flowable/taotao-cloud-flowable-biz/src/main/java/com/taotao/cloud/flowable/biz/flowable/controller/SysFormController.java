@@ -40,9 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/flowable/form")
 public class SysFormController extends BaseController {
 
-    @Autowired private ISysFormService SysFormService;
+    @Autowired
+    private ISysFormService SysFormService;
 
-    @Autowired private ISysDeployFormService sysDeployFormService;
+    @Autowired
+    private ISysDeployFormService sysDeployFormService;
 
     /** 查询流程表单列表 */
     @PreAuthorize("@ss.hasPermi('flowable:form:list')")

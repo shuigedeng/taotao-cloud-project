@@ -47,21 +47,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("chatMsgService")
 public class ChatMsgServiceImpl extends BaseServiceImpl<ChatMsg> implements ChatMsgService {
 
-    @Resource private ChatMsgDao chatMsgDao;
+    @Resource
+    private ChatMsgDao chatMsgDao;
 
-    @Resource private ChatFriendService friendService;
+    @Resource
+    private ChatFriendService friendService;
 
-    @Resource private ChatGroupService groupService;
+    @Resource
+    private ChatGroupService groupService;
 
-    @Resource private ChatGroupInfoService groupInfoService;
+    @Resource
+    private ChatGroupInfoService groupInfoService;
 
-    @Resource private ChatPushService chatPushService;
+    @Resource
+    private ChatPushService chatPushService;
 
-    @Resource private ChatUserService chatUserService;
+    @Resource
+    private ChatUserService chatUserService;
 
-    @Resource private ChatTalkService chatTalkService;
+    @Resource
+    private ChatTalkService chatTalkService;
 
-    @Resource private RedisUtils redisUtils;
+    @Resource
+    private RedisUtils redisUtils;
 
     @Autowired
     public void setBaseDao() {
@@ -89,10 +97,9 @@ public class ChatMsgServiceImpl extends BaseServiceImpl<ChatMsg> implements Chat
         }
         // 自己给自己发消息
         else if (userId.equals(friendId)) {
-            paramVo =
-                    ChatUser.initParam(chatUserService.getById(userId))
-                            .setUserType(FriendTypeEnum.SELF)
-                            .setContent(chatVo.getContent());
+            paramVo = ChatUser.initParam(chatUserService.getById(userId))
+                    .setUserType(FriendTypeEnum.SELF)
+                    .setContent(chatVo.getContent());
         }
         // 发送给好友的消息
         else {
@@ -112,30 +119,26 @@ public class ChatMsgServiceImpl extends BaseServiceImpl<ChatMsg> implements Chat
             if (toUser == null) {
                 return doResult(MsgStatusEnum.FRIEND_DELETED);
             }
-            paramVo =
-                    ChatUser.initParam(chatUserService.getById(userId))
-                            .setNickName(friend2.getRemark())
-                            .setTop(friend2.getTop())
-                            .setContent(chatVo.getContent());
-            if (PushMsgTypeEnum.TRTC_VOICE_START.equals(msgType)
-                    || PushMsgTypeEnum.TRTC_VIDEO_START.equals(msgType)) {
-                chatVo04 =
-                        new ChatVo04()
-                                .setUserId(friendId)
-                                .setTrtcId(ApiConstant.REDIS_TRTC_USER + friendId)
-                                .setPortrait(toUser.getPortrait())
-                                .setNickName(friend1.getRemark());
+            paramVo = ChatUser.initParam(chatUserService.getById(userId))
+                    .setNickName(friend2.getRemark())
+                    .setTop(friend2.getTop())
+                    .setContent(chatVo.getContent());
+            if (PushMsgTypeEnum.TRTC_VOICE_START.equals(msgType) || PushMsgTypeEnum.TRTC_VIDEO_START.equals(msgType)) {
+                chatVo04 = new ChatVo04()
+                        .setUserId(friendId)
+                        .setTrtcId(ApiConstant.REDIS_TRTC_USER + friendId)
+                        .setPortrait(toUser.getPortrait())
+                        .setNickName(friend1.getRemark());
             }
         }
         // 保存数据
-        ChatMsg chatMsg =
-                new ChatMsg()
-                        .setFromId(userId)
-                        .setToId(friendId)
-                        .setMsgType(msgType)
-                        .setTalkType(PushTalkEnum.SINGLE)
-                        .setContent(paramVo.getContent())
-                        .setCreateTime(DateUtil.date());
+        ChatMsg chatMsg = new ChatMsg()
+                .setFromId(userId)
+                .setToId(friendId)
+                .setMsgType(msgType)
+                .setTalkType(PushTalkEnum.SINGLE)
+                .setContent(paramVo.getContent())
+                .setCreateTime(DateUtil.date());
         this.add(chatMsg);
         // 推送
         chatPushService.pushMsg(paramVo.setToId(friendId), msgType);
@@ -163,23 +166,21 @@ public class ChatMsgServiceImpl extends BaseServiceImpl<ChatMsg> implements Chat
             return doResult(MsgStatusEnum.GROUP_INFO_NOT_EXIST);
         }
         // 保存数据
-        ChatMsg chatMsg =
-                new ChatMsg()
-                        .setFromId(fromId)
-                        .setToId(groupId)
-                        .setMsgType(chatVo.getMsgType())
-                        .setTalkType(PushTalkEnum.GROUP)
-                        .setContent(content)
-                        .setCreateTime(DateUtil.date());
+        ChatMsg chatMsg = new ChatMsg()
+                .setFromId(fromId)
+                .setToId(groupId)
+                .setMsgType(chatVo.getMsgType())
+                .setTalkType(PushTalkEnum.GROUP)
+                .setContent(content)
+                .setCreateTime(DateUtil.date());
         this.add(chatMsg);
         // 查询群列表
         List<PushParamVo> userList = groupService.queryFriendPushFrom(groupId, content);
         // 群信息
-        PushParamVo groupUser =
-                new PushParamVo()
-                        .setUserId(group.getId())
-                        .setNickName(group.getName())
-                        .setPortrait(group.getPortrait());
+        PushParamVo groupUser = new PushParamVo()
+                .setUserId(group.getId())
+                .setNickName(group.getName())
+                .setPortrait(group.getPortrait());
         // 推送
         chatPushService.pushMsg(userList, groupUser, chatVo.getMsgType());
         return doResult(MsgStatusEnum.NORMAL);

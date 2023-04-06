@@ -43,7 +43,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class EsGoodsIndexVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -6856471777036048874L;
+    @Serial
+    private static final long serialVersionUID = -6856471777036048874L;
 
     private Long id;
 

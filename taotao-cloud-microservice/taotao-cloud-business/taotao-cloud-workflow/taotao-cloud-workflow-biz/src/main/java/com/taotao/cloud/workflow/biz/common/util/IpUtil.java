@@ -39,12 +39,10 @@ public class IpUtil {
     private static final String IP_URL =
             "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={ip}&resource_id=6006";
     /** IP的正则 */
-    private static Pattern pattern =
-            Pattern.compile(
-                    "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
-                            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
-                            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
-                            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})");
+    private static Pattern pattern = Pattern.compile("(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
+            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
+            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})\\."
+            + "(1\\d{1,2}|2[0-4]\\d|25[0-5]|\\d{1,2})");
 
     /**
      * 内网IP
@@ -55,19 +53,16 @@ public class IpUtil {
 
     static {
         Set<String> ipFilter = new HashSet<String>();
-        ipFilter.add(
-                "^10\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])"
-                        + "\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])"
-                        + "\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
+        ipFilter.add("^10\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])"
+                + "\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])"
+                + "\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
         // B类地址范围: 172.16.0.0---172.31.255.255
-        ipFilter.add(
-                "^172\\.(1[6789]|2[0-9]|3[01])\\"
-                        + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])\\"
-                        + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
+        ipFilter.add("^172\\.(1[6789]|2[0-9]|3[01])\\"
+                + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])\\"
+                + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
         // C类地址范围: 192.168.0.0---192.168.255.255
-        ipFilter.add(
-                "^192\\.168\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])\\"
-                        + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
+        ipFilter.add("^192\\.168\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])\\"
+                + ".(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[0-9])$");
         ipFilter.add("127.0.0.1");
         ipFilter.add("0.0.0.0");
         ipFilter.add("localhost");
@@ -132,8 +127,7 @@ public class IpUtil {
                 URL url = new URL(ipUrl);
                 HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
                 httpUrlConnection.setRequestMethod("GET");
-                httpUrlConnection.setRequestProperty(
-                        "Content-type", "application/x-www-form-urlencoded");
+                httpUrlConnection.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
                 httpUrlConnection.setDoInput(true);
                 httpUrlConnection.setDoOutput(true);
                 httpUrlConnection.setReadTimeout(5000);

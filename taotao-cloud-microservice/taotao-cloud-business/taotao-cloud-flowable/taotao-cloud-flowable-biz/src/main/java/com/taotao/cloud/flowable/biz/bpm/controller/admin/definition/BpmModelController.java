@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class BpmModelController {
 
-    @Resource private BpmModelService modelService;
+    @Resource
+    private BpmModelService modelService;
 
     @GetMapping("/page")
     @ApiOperation(value = "获得模型分页")
@@ -50,12 +51,7 @@ public class BpmModelController {
 
     @GetMapping("/get")
     @ApiOperation("获得模型")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = String.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
     @PreAuthorize("@ss.hasPermission('bpm:model:query')")
     public CommonResult<BpmModelRespVO> getModel(@RequestParam("id") String id) {
         BpmModelRespVO model = modelService.getModel(id);
@@ -80,8 +76,7 @@ public class BpmModelController {
     @PostMapping("/import")
     @ApiOperation(value = "导入模型")
     @PreAuthorize("@ss.hasPermission('bpm:model:import')")
-    public CommonResult<String> importModel(@Valid BpmModeImportReqVO importReqVO)
-            throws IOException {
+    public CommonResult<String> importModel(@Valid BpmModeImportReqVO importReqVO) throws IOException {
         BpmModelCreateReqVO createReqVO = BpmModelConvert.INSTANCE.convert(importReqVO);
         // 读取文件
         String bpmnXml = IoUtils.readUtf8(importReqVO.getBpmnFile().getInputStream(), false);
@@ -90,12 +85,7 @@ public class BpmModelController {
 
     @PostMapping("/deploy")
     @ApiOperation(value = "部署模型")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = String.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
     @PreAuthorize("@ss.hasPermission('bpm:model:deploy')")
     public CommonResult<Boolean> deployModel(@RequestParam("id") String id) {
         modelService.deployModel(id);
@@ -105,20 +95,14 @@ public class BpmModelController {
     @PutMapping("/update-state")
     @ApiOperation(value = "修改模型的状态", notes = "实际更新的部署的流程定义的状态")
     @PreAuthorize("@ss.hasPermission('bpm:model:update')")
-    public CommonResult<Boolean> updateModelState(
-            @Valid @RequestBody BpmModelUpdateStateReqVO reqVO) {
+    public CommonResult<Boolean> updateModelState(@Valid @RequestBody BpmModelUpdateStateReqVO reqVO) {
         modelService.updateModelState(reqVO.getId(), reqVO.getState());
         return success(true);
     }
 
     @DeleteMapping("/delete")
     @ApiOperation("删除模型")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = String.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
     @PreAuthorize("@ss.hasPermission('bpm:model:delete')")
     public CommonResult<Boolean> deleteModel(@RequestParam("id") String id) {
         modelService.deleteModel(id);

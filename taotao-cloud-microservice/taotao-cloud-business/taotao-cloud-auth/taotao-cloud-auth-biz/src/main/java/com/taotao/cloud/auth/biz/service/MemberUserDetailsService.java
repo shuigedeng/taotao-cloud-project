@@ -34,7 +34,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class MemberUserDetailsService implements UserDetailsService {
 
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignMemberApi memberApi;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

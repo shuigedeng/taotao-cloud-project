@@ -27,8 +27,7 @@ import org.springframework.web.util.HtmlUtils;
 @Data
 public class SqlOracle extends SqlBase {
 
-    private final String dbTimeSql =
-            "select to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') as TIME from dual";
+    private final String dbTimeSql = "select to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') as TIME from dual";
 
     protected String deleteSql = "DROP TABLE ?;";
 
@@ -40,68 +39,66 @@ public class SqlOracle extends SqlBase {
     @Override
     protected void init() {
         // TODO BINARY_FLOAT类型查询不出来，这个语句有隐患
-        String fieldListSql =
-                "SELECT * FROM \n"
-                        + "\n"
-                        + "(\n"
-                        + "SELECT DISTINCT\n"
-                        + "\tA.column_name AS "
-                        + DbAliasConst.FIELD_NAME
-                        + ",\n"
-                        + "\tA.data_type AS "
-                        + DbAliasConst.DATA_TYPE
-                        + ",\n"
-                        + "\tA.CHAR_COL_DECL_LENGTH AS "
-                        + DbAliasConst.DATA_LENGTH
-                        + ",\n"
-                        + "CASE\n"
-                        + "\t\tA.nullable \n"
-                        + "\t\tWHEN 'N' THEN\n"
-                        + "\t\t'0' ELSE '1' \n"
-                        + "\tEND AS "
-                        + DbAliasConst.ALLOW_NULL
-                        + ",\n"
-                        + "CASE\n"
-                        + "\tA.nullable \n"
-                        + "\tWHEN 'N' THEN\n"
-                        + "\t'1' ELSE '0' \n"
-                        + "\tEND AS "
-                        + DbAliasConst.PRIMARY_KEY
-                        + ",\n"
-                        + "\tB.comments AS "
-                        + DbAliasConst.FIELD_COMMENT
-                        + "\nFROM\n"
-                        + "\tuser_tab_columns A,\n"
-                        + "\tuser_col_comments B,\n"
-                        + "\tall_cons_columns C,\n"
-                        + "\tUSER_TAB_COMMENTS D \n"
-                        + "WHERE\n"
-                        + "\ta.COLUMN_NAME = b.column_name \n"
-                        + "\tAND A.Table_Name = B.Table_Name \n"
-                        + "\tAND A.Table_Name = D.Table_Name \n"
-                        + "\tAND ( A.TABLE_NAME = c.table_name ) \n"
-                        + "\tAND A.Table_Name = "
-                        + ParamEnum.TABLE.getParamSign()
-                        + "\n"
-                        + ") A,\n"
-                        + "(\n"
-                        + "select a.column_name name,case when a.column_name=t.column_name then 1"
-                        + " else 0 end "
-                        + DbAliasConst.PRIMARY_KEY
-                        + "\n"
-                        + "from user_tab_columns a\n"
-                        + "left join (select b.table_name,b.column_name from user_cons_columns b\n"
-                        + "join user_constraints c on c.CONSTRAINT_NAME=b.CONSTRAINT_NAME\n"
-                        + "where c.constraint_type   ='P') t\n"
-                        + "on a.table_name=t.table_name\n"
-                        + "where a.table_name= "
-                        + ParamEnum.TABLE.getParamSign()
-                        + "\n"
-                        + ") B WHERE A."
-                        + DbAliasConst.FIELD_NAME
-                        + " = b.NAME";
-        String tableListSql =
-                "SELECT "
+        String fieldListSql = "SELECT * FROM \n"
+                + "\n"
+                + "(\n"
+                + "SELECT DISTINCT\n"
+                + "\tA.column_name AS "
+                + DbAliasConst.FIELD_NAME
+                + ",\n"
+                + "\tA.data_type AS "
+                + DbAliasConst.DATA_TYPE
+                + ",\n"
+                + "\tA.CHAR_COL_DECL_LENGTH AS "
+                + DbAliasConst.DATA_LENGTH
+                + ",\n"
+                + "CASE\n"
+                + "\t\tA.nullable \n"
+                + "\t\tWHEN 'N' THEN\n"
+                + "\t\t'0' ELSE '1' \n"
+                + "\tEND AS "
+                + DbAliasConst.ALLOW_NULL
+                + ",\n"
+                + "CASE\n"
+                + "\tA.nullable \n"
+                + "\tWHEN 'N' THEN\n"
+                + "\t'1' ELSE '0' \n"
+                + "\tEND AS "
+                + DbAliasConst.PRIMARY_KEY
+                + ",\n"
+                + "\tB.comments AS "
+                + DbAliasConst.FIELD_COMMENT
+                + "\nFROM\n"
+                + "\tuser_tab_columns A,\n"
+                + "\tuser_col_comments B,\n"
+                + "\tall_cons_columns C,\n"
+                + "\tUSER_TAB_COMMENTS D \n"
+                + "WHERE\n"
+                + "\ta.COLUMN_NAME = b.column_name \n"
+                + "\tAND A.Table_Name = B.Table_Name \n"
+                + "\tAND A.Table_Name = D.Table_Name \n"
+                + "\tAND ( A.TABLE_NAME = c.table_name ) \n"
+                + "\tAND A.Table_Name = "
+                + ParamEnum.TABLE.getParamSign()
+                + "\n"
+                + ") A,\n"
+                + "(\n"
+                + "select a.column_name name,case when a.column_name=t.column_name then 1"
+                + " else 0 end "
+                + DbAliasConst.PRIMARY_KEY
+                + "\n"
+                + "from user_tab_columns a\n"
+                + "left join (select b.table_name,b.column_name from user_cons_columns b\n"
+                + "join user_constraints c on c.CONSTRAINT_NAME=b.CONSTRAINT_NAME\n"
+                + "where c.constraint_type   ='P') t\n"
+                + "on a.table_name=t.table_name\n"
+                + "where a.table_name= "
+                + ParamEnum.TABLE.getParamSign()
+                + "\n"
+                + ") B WHERE A."
+                + DbAliasConst.FIELD_NAME
+                + " = b.NAME";
+        String tableListSql = "SELECT "
                         + "a.TABLE_NAME "
                         + DbAliasConst.TABLE_NAME
                         + ", "
@@ -114,13 +111,12 @@ public class SqlOracle extends SqlBase {
                         + "WHERE a.TABLE_NAME = b.TABLE_NAME "
                 /*+ "and a.TABLESPACE_NAME='"+ DbSttEnum.TABLE_SPACE.getTarget()+"'"*/ ;
 
-        String existsTableSql =
-                "SELECT "
-                        + "a.TABLE_NAME "
-                        + DbAliasConst.TABLE_NAME
-                        + " FROM user_tables a "
-                        + "WHERE a.TABLE_NAME = "
-                        + ParamEnum.TABLE.getParamSign();
+        String existsTableSql = "SELECT "
+                + "a.TABLE_NAME "
+                + DbAliasConst.TABLE_NAME
+                + " FROM user_tables a "
+                + "WHERE a.TABLE_NAME = "
+                + ParamEnum.TABLE.getParamSign();
         setInstance(fieldListSql, tableListSql, existsTableSql, "{table}:{table}", "", "{table}");
     }
 
@@ -136,16 +132,15 @@ public class SqlOracle extends SqlBase {
         LIMIT index;SELECT FOUND_ROWS();方法获得两个结果集*/
         // 获取dataListSql
         String sortSql = StringUtil.isEmpty(sortType) ? "" : " ORDER BY " + sortType;
-        String dataListSql =
-                "SELECT *FROM ("
-                        + "SELECT workflow_tt.*, ROWNUM AS rowno FROM ("
-                        + sql
-                        + ") workflow_tt "
-                        + sortSql
-                        + ") jnfp_tab WHERE jnfp_tab.rowno between "
-                        + (currentPage - 1) * pageSize
-                        + " and "
-                        + currentPage * pageSize;
+        String dataListSql = "SELECT *FROM ("
+                + "SELECT workflow_tt.*, ROWNUM AS rowno FROM ("
+                + sql
+                + ") workflow_tt "
+                + sortSql
+                + ") jnfp_tab WHERE jnfp_tab.rowno between "
+                + (currentPage - 1) * pageSize
+                + " and "
+                + currentPage * pageSize;
         // 获取totalSql
         String totalSql = "SELECT COUNT(*) totalRecord FROM (" + sql + ") workflow_tab";
         return new String[] {dataListSql, totalSql};

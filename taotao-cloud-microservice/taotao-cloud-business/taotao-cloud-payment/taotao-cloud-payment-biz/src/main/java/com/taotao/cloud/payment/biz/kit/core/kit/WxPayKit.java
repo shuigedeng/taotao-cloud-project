@@ -96,8 +96,7 @@ public class WxPayKit {
      * @param signType {@link SignType}
      * @return {@link Boolean} 验证签名结果
      */
-    public static boolean verifyNotify(
-            Map<String, String> params, String partnerKey, SignType signType) {
+    public static boolean verifyNotify(Map<String, String> params, String partnerKey, SignType signType) {
         String sign = params.get("sign");
         String localSign = createSign(params, partnerKey, signType);
         return sign.equals(localSign);
@@ -111,8 +110,7 @@ public class WxPayKit {
      * @param signType 签名类型
      * @return 签名后的数据
      */
-    public static String createSign(
-            Map<String, String> params, String partnerKey, SignType signType) {
+    public static String createSign(Map<String, String> params, String partnerKey, SignType signType) {
         if (signType == null) {
             signType = SignType.MD5;
         }
@@ -172,8 +170,7 @@ public class WxPayKit {
      * @param signType 签名类型
      * @return 签名后的 Map
      */
-    public static Map<String, String> buildSign(
-            Map<String, String> params, String partnerKey, SignType signType) {
+    public static Map<String, String> buildSign(Map<String, String> params, String partnerKey, SignType signType) {
         return buildSign(params, partnerKey, signType, true);
     }
 
@@ -187,10 +184,7 @@ public class WxPayKit {
      * @return 签名后的 Map
      */
     public static Map<String, String> buildSign(
-            Map<String, String> params,
-            String partnerKey,
-            SignType signType,
-            boolean haveSignType) {
+            Map<String, String> params, String partnerKey, SignType signType, boolean haveSignType) {
         if (haveSignType) {
             params.put(FIELD_SIGN_TYPE, signType.getType());
         }
@@ -199,8 +193,7 @@ public class WxPayKit {
         return params;
     }
 
-    public static StringBuffer forEachMap(
-            Map<String, String> params, String prefix, String suffix) {
+    public static StringBuffer forEachMap(Map<String, String> params, String prefix, String suffix) {
         return PayKit.forEachMap(params, prefix, suffix);
     }
 
@@ -238,12 +231,7 @@ public class WxPayKit {
      * @return {String}
      */
     public static String bizPayUrl(
-            String sign,
-            String appId,
-            String mchId,
-            String productId,
-            String timeStamp,
-            String nonceStr) {
+            String sign, String appId, String mchId, String productId, String timeStamp, String nonceStr) {
         String rules =
                 "weixin://wxpay/bizpayurl?sign=Temp&appid=Temp&mch_id=Temp&product_id=Temp&time_stamp=Temp&nonce_str=Temp";
         return replace(rules, "Temp", sign, appId, mchId, productId, timeStamp, nonceStr);
@@ -276,18 +264,10 @@ public class WxPayKit {
         map.put("mch_id", mchId);
         map.put(
                 "time_stamp",
-                StrUtil.isEmpty(timeStamp)
-                        ? Long.toString(System.currentTimeMillis() / 1000)
-                        : timeStamp);
+                StrUtil.isEmpty(timeStamp) ? Long.toString(System.currentTimeMillis() / 1000) : timeStamp);
         map.put("nonce_str", StrUtil.isEmpty(nonceStr) ? IdUtil.fastSimpleUUID() : nonceStr);
         map.put("product_id", productId);
-        return bizPayUrl(
-                createSign(map, partnerKey, signType),
-                appId,
-                mchId,
-                productId,
-                timeStamp,
-                nonceStr);
+        return bizPayUrl(createSign(map, partnerKey, signType), appId, mchId, productId, timeStamp, nonceStr);
     }
 
     /**
@@ -301,8 +281,7 @@ public class WxPayKit {
      * @param productId 商品ID
      * @return {String}
      */
-    public static String bizPayUrl(
-            String partnerKey, String appId, String mchId, String productId) {
+    public static String bizPayUrl(String partnerKey, String appId, String mchId, String productId) {
         String timeStamp = Long.toString(System.currentTimeMillis() / 1000);
         String nonceStr = IdUtil.fastSimpleUUID();
         HashMap<String, String> map = new HashMap<>(5);
@@ -311,8 +290,7 @@ public class WxPayKit {
         map.put("time_stamp", timeStamp);
         map.put("nonce_str", nonceStr);
         map.put("product_id", productId);
-        return bizPayUrl(
-                createSign(map, partnerKey, null), appId, mchId, productId, timeStamp, nonceStr);
+        return bizPayUrl(createSign(map, partnerKey, null), appId, mchId, productId, timeStamp, nonceStr);
     }
 
     /**
@@ -376,8 +354,7 @@ public class WxPayKit {
      * @return 唤起支付需要的参数
      * @throws Exception 错误信息
      */
-    public static Map<String, String> jsApiCreateSign(String appId, String prepayId, String keyPath)
-            throws Exception {
+    public static Map<String, String> jsApiCreateSign(String appId, String prepayId, String keyPath) throws Exception {
         String timeStamp = String.valueOf(System.currentTimeMillis() / 1000);
         String nonceStr = String.valueOf(System.currentTimeMillis());
         String packageStr = "prepay_id=" + prepayId;
@@ -438,8 +415,8 @@ public class WxPayKit {
      * @return 唤起支付需要的参数
      * @throws Exception 错误信息
      */
-    public static Map<String, String> appCreateSign(
-            String appId, String partnerId, String prepayId, String keyPath) throws Exception {
+    public static Map<String, String> appCreateSign(String appId, String partnerId, String prepayId, String keyPath)
+            throws Exception {
         String timeStamp = String.valueOf(System.currentTimeMillis() / 1000);
         String nonceStr = String.valueOf(System.currentTimeMillis());
         Map<String, String> packageParams = new HashMap<>(8);
@@ -514,12 +491,10 @@ public class WxPayKit {
             String authType)
             throws Exception {
         // 构建签名参数
-        String buildSignMessage =
-                PayKit.buildSignMessage(method, urlSuffix, timestamp, nonceStr, body);
+        String buildSignMessage = PayKit.buildSignMessage(method, urlSuffix, timestamp, nonceStr, body);
         String signature = PayKit.createSign(buildSignMessage, keyPath);
         // 根据平台规则生成请求头 authorization
-        return PayKit.getAuthorization(
-                mchId, serialNo, nonceStr, String.valueOf(timestamp), signature, authType);
+        return PayKit.getAuthorization(mchId, serialNo, nonceStr, String.valueOf(timestamp), signature, authType);
     }
 
     /**
@@ -549,12 +524,10 @@ public class WxPayKit {
             String authType)
             throws Exception {
         // 构建签名参数
-        String buildSignMessage =
-                PayKit.buildSignMessage(method, urlSuffix, timestamp, nonceStr, body);
+        String buildSignMessage = PayKit.buildSignMessage(method, urlSuffix, timestamp, nonceStr, body);
         String signature = PayKit.createSign(buildSignMessage, privateKey);
         // 根据平台规则生成请求头 authorization
-        return PayKit.getAuthorization(
-                mchId, serialNo, nonceStr, String.valueOf(timestamp), signature, authType);
+        return PayKit.getAuthorization(mchId, serialNo, nonceStr, String.valueOf(timestamp), signature, authType);
     }
 
     /**
@@ -570,20 +543,14 @@ public class WxPayKit {
      * @throws Exception 异常信息
      */
     public static String buildAuthorization(
-            RequestMethodEnums method,
-            String urlSuffix,
-            String mchId,
-            String serialNo,
-            String keyPath,
-            String body)
+            RequestMethodEnums method, String urlSuffix, String mchId, String serialNo, String keyPath, String body)
             throws Exception {
 
         long timestamp = System.currentTimeMillis() / 1000;
         String authType = "WECHATPAY2-SHA256-RSA2048";
         String nonceStr = IdUtil.fastSimpleUUID();
 
-        return buildAuthorization(
-                method, urlSuffix, mchId, serialNo, keyPath, body, nonceStr, timestamp, authType);
+        return buildAuthorization(method, urlSuffix, mchId, serialNo, keyPath, body, nonceStr, timestamp, authType);
     }
 
     /**
@@ -611,16 +578,7 @@ public class WxPayKit {
         String authType = "WECHATPAY2-SHA256-RSA2048";
         String nonceStr = IdUtil.fastSimpleUUID();
 
-        return buildAuthorization(
-                method,
-                urlSuffix,
-                mchId,
-                serialNo,
-                privateKey,
-                body,
-                nonceStr,
-                timestamp,
-                authType);
+        return buildAuthorization(method, urlSuffix, mchId, serialNo, privateKey, body, nonceStr, timestamp, authType);
     }
 
     /**
@@ -631,14 +589,12 @@ public class WxPayKit {
      * @return 签名结果
      * @throws Exception 异常信息
      */
-    public static boolean verifySignature(PaymentHttpResponse response, String certPath)
-            throws Exception {
+    public static boolean verifySignature(PaymentHttpResponse response, String certPath) throws Exception {
         String timestamp = response.getHeader("Wechatpay-Timestamp");
         String nonceStr = response.getHeader("Wechatpay-Nonce");
         String signature = response.getHeader("Wechatpay-Signature");
         String body = response.getBody();
-        return verifySignature(
-                signature, body, nonceStr, timestamp, FileUtil.getInputStream(certPath));
+        return verifySignature(signature, body, nonceStr, timestamp, FileUtil.getInputStream(certPath));
     }
 
     /**
@@ -649,8 +605,7 @@ public class WxPayKit {
      * @return 签名结果
      * @throws Exception 异常信息
      */
-    public static boolean verifySignature(PaymentHttpResponse response, X509Certificate cert)
-            throws Exception {
+    public static boolean verifySignature(PaymentHttpResponse response, X509Certificate cert) throws Exception {
         String timestamp = response.getHeader("Wechatpay-Timestamp");
         String nonceStr = response.getHeader("Wechatpay-Nonce");
         String signature = response.getHeader("Wechatpay-Signature");
@@ -670,8 +625,7 @@ public class WxPayKit {
      * @throws Exception 异常信息
      */
     public static boolean verifySignature(
-            String signature, String body, String nonce, String timestamp, String publicKey)
-            throws Exception {
+            String signature, String body, String nonce, String timestamp, String publicKey) throws Exception {
         String buildSignMessage = PayKit.buildSignMessage(timestamp, nonce, body);
         return RsaKit.checkByPublicKey(buildSignMessage, signature, publicKey);
     }
@@ -688,8 +642,7 @@ public class WxPayKit {
      * @throws Exception 异常信息
      */
     public static boolean verifySignature(
-            String signature, String body, String nonce, String timestamp, PublicKey publicKey)
-            throws Exception {
+            String signature, String body, String nonce, String timestamp, PublicKey publicKey) throws Exception {
         String buildSignMessage = PayKit.buildSignMessage(timestamp, nonce, body);
         return RsaKit.checkByPublicKey(buildSignMessage, signature, publicKey);
     }
@@ -706,11 +659,7 @@ public class WxPayKit {
      * @throws Exception 异常信息
      */
     public static boolean verifySignature(
-            String signature,
-            String body,
-            String nonce,
-            String timestamp,
-            InputStream certInputStream)
+            String signature, String body, String nonce, String timestamp, InputStream certInputStream)
             throws Exception {
         String buildSignMessage = PayKit.buildSignMessage(timestamp, nonce, body);
         // 获取证书
@@ -731,11 +680,7 @@ public class WxPayKit {
      * @throws Exception 异常信息
      */
     public static boolean verifySignature(
-            String signature,
-            String body,
-            String nonce,
-            String timestamp,
-            X509Certificate certificate)
+            String signature, String body, String nonce, String timestamp, X509Certificate certificate)
             throws Exception {
         String buildSignMessage = PayKit.buildSignMessage(timestamp, nonce, body);
         PublicKey publicKey = certificate.getPublicKey();
@@ -756,13 +701,7 @@ public class WxPayKit {
      * @throws Exception 异常信息
      */
     public static String verifyNotify(
-            String serialNo,
-            String body,
-            String signature,
-            String nonce,
-            String timestamp,
-            String key,
-            String certPath)
+            String serialNo, String body, String signature, String nonce, String timestamp, String key, String certPath)
             throws Exception {
         BufferedInputStream inputStream = FileUtil.getInputStream(certPath);
         // 获取平台证书序列号
@@ -772,8 +711,7 @@ public class WxPayKit {
         // 验证证书序列号
         if (serialNumber.equals(serialNo)) {
             boolean verifySignature =
-                    WxPayKit.verifySignature(
-                            signature, body, nonce, timestamp, certificate.getPublicKey());
+                    WxPayKit.verifySignature(signature, body, nonce, timestamp, certificate.getPublicKey());
             if (verifySignature) {
                 JSONObject resultObject = JSONUtil.parseObj(body);
                 JSONObject resource = resultObject.getJSONObject("resource");
@@ -817,8 +755,7 @@ public class WxPayKit {
         // 验证证书序列号
         if (serialNumber.equals(serialNo)) {
             boolean verifySignature =
-                    WxPayKit.verifySignature(
-                            signature, body, nonce, timestamp, certificate.getPublicKey());
+                    WxPayKit.verifySignature(signature, body, nonce, timestamp, certificate.getPublicKey());
             if (verifySignature) {
                 JSONObject resultObject = JSONUtil.parseObj(body);
                 JSONObject resource = resultObject.getJSONObject("resource");

@@ -25,8 +25,7 @@ import org.springframework.stereotype.Service;
 
 /** 短链接 业务实现 */
 @Service
-public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink>
-        implements ShortLinkService {
+public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink> implements ShortLinkService {
 
     @Override
     public List<ShortLink> queryShortLinks(ShortLink shortLink) {

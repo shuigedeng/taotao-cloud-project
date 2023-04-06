@@ -37,25 +37,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class LinkGroupManager extends ServiceImpl<LinkGroupMapper, LinkGroup> {
 
-    @Resource private LinkGroupMapper linkGroupMapper;
+    @Resource
+    private LinkGroupMapper linkGroupMapper;
 
     public Optional<LinkGroupDTO> findLinkGroup(Long accountId, Long groupId) {
-        QueryWrapper<LinkGroup> queryWrapper =
-                new QueryWrapper<LinkGroup>()
-                        .eq(LinkGroup.COL_ID, groupId)
-                        .eq(LinkGroup.COL_ACCOUNT_NO, accountId)
-                        .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode());
+        QueryWrapper<LinkGroup> queryWrapper = new QueryWrapper<LinkGroup>()
+                .eq(LinkGroup.COL_ID, groupId)
+                .eq(LinkGroup.COL_ACCOUNT_NO, accountId)
+                .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode());
 
         List<LinkGroup> LinkGroups = linkGroupMapper.selectList(queryWrapper);
         if (CollectionUtils.isNotEmpty(LinkGroups)) {
             LinkGroup linkGroup = LinkGroups.get(0);
 
-            LinkGroupDTO domainDTO =
-                    LinkGroupDTO.builder()
-                            .id(linkGroup.getId())
-                            .accountNo(linkGroup.getAccountNo())
-                            .title(linkGroup.getTitle())
-                            .build();
+            LinkGroupDTO domainDTO = LinkGroupDTO.builder()
+                    .id(linkGroup.getId())
+                    .accountNo(linkGroup.getAccountNo())
+                    .title(linkGroup.getTitle())
+                    .build();
             return Optional.of(domainDTO);
         }
 

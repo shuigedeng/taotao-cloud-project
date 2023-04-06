@@ -39,7 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth/qrcode")
 public class QrCodeController {
 
-    @Autowired private QrCodeService qrCodeService;
+    @Autowired
+    private QrCodeService qrCodeService;
 
     @Operation(summary = "获取二维码", description = "获取二维码")
     // @RequestLogger

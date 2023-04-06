@@ -41,9 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/my")
 public class MyController extends BaseController {
 
-    @Resource private ChatUserService chatUserService;
+    @Resource
+    private ChatUserService chatUserService;
 
-    @Resource private ChatFeedbackService feedbackService;
+    @Resource
+    private ChatFeedbackService feedbackService;
 
     /**
      * 修改密码
@@ -96,8 +98,7 @@ public class MyController extends BaseController {
     @PostMapping("/editPortrait")
     public AjaxResult editPortrait(@Validated @RequestBody MyVo02 myVo) {
         // 执行修改
-        ChatUser chatUser =
-                new ChatUser().setUserId(ShiroUtils.getUserId()).setPortrait(myVo.getPortrait());
+        ChatUser chatUser = new ChatUser().setUserId(ShiroUtils.getUserId()).setPortrait(myVo.getPortrait());
         chatUserService.updateById(chatUser);
         return AjaxResult.successMsg("修改成功");
     }
@@ -110,8 +111,7 @@ public class MyController extends BaseController {
     @ApiVersion(VersionEnum.V1_0_0)
     @PostMapping("/editNick")
     public AjaxResult editNick(@Validated @RequestBody MyVo03 myVo) {
-        ChatUser chatUser =
-                new ChatUser().setUserId(ShiroUtils.getUserId()).setNickName(myVo.getNickName());
+        ChatUser chatUser = new ChatUser().setUserId(ShiroUtils.getUserId()).setNickName(myVo.getNickName());
         chatUserService.updateById(chatUser);
         return AjaxResult.successMsg("修改成功");
     }
@@ -125,8 +125,7 @@ public class MyController extends BaseController {
     @PostMapping("/editGender")
     public AjaxResult editGender(@Validated @RequestBody MyVo05 myVo) {
         // 执行修改
-        ChatUser chatUser =
-                new ChatUser().setUserId(ShiroUtils.getUserId()).setGender(myVo.getGender());
+        ChatUser chatUser = new ChatUser().setUserId(ShiroUtils.getUserId()).setGender(myVo.getGender());
         chatUserService.updateById(chatUser);
         return AjaxResult.successMsg("修改成功");
     }
@@ -153,8 +152,7 @@ public class MyController extends BaseController {
     @PostMapping("/editIntro")
     public AjaxResult editIntro(@Validated @RequestBody MyVo07 myVo) {
         // 执行修改
-        ChatUser chatUser =
-                new ChatUser().setUserId(ShiroUtils.getUserId()).setIntro(myVo.getIntro());
+        ChatUser chatUser = new ChatUser().setUserId(ShiroUtils.getUserId()).setIntro(myVo.getIntro());
         chatUserService.updateById(chatUser);
         return AjaxResult.successMsg("修改成功");
     }
@@ -168,11 +166,10 @@ public class MyController extends BaseController {
     @PostMapping("/editCity")
     public AjaxResult editCity(@Validated @RequestBody MyVo08 myVo) {
         // 执行修改
-        ChatUser chatUser =
-                new ChatUser()
-                        .setUserId(ShiroUtils.getUserId())
-                        .setProvinces(myVo.getProvinces())
-                        .setCity(myVo.getCity());
+        ChatUser chatUser = new ChatUser()
+                .setUserId(ShiroUtils.getUserId())
+                .setProvinces(myVo.getProvinces())
+                .setCity(myVo.getCity());
         chatUserService.updateById(chatUser);
         return AjaxResult.successMsg("修改成功");
     }

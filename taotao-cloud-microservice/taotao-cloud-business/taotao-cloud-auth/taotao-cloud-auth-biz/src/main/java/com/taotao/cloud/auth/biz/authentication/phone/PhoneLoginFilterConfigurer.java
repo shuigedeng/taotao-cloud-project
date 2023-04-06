@@ -32,10 +32,7 @@ import org.springframework.util.Assert;
 
 public class PhoneLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H,
-                PhoneLoginFilterConfigurer<H>,
-                PhoneAuthenticationFilter,
-                LoginFilterSecurityConfigurer<H>> {
+                H, PhoneLoginFilterConfigurer<H>, PhoneAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private PhoneUserDetailsService phoneUserDetailsService;
 
@@ -47,8 +44,7 @@ public class PhoneLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         super(securityConfigurer, new PhoneAuthenticationFilter(), "/login/phone");
     }
 
-    public PhoneLoginFilterConfigurer<H> phoneUserDetailsService(
-            PhoneUserDetailsService phoneUserDetailsService) {
+    public PhoneLoginFilterConfigurer<H> phoneUserDetailsService(PhoneUserDetailsService phoneUserDetailsService) {
         this.phoneUserDetailsService = phoneUserDetailsService;
         return this;
     }
@@ -72,16 +68,13 @@ public class PhoneLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-        PhoneUserDetailsService phoneUserDetailsService =
-                this.phoneUserDetailsService != null
-                        ? this.phoneUserDetailsService
-                        : getBeanOrNull(applicationContext, PhoneUserDetailsService.class);
+        PhoneUserDetailsService phoneUserDetailsService = this.phoneUserDetailsService != null
+                ? this.phoneUserDetailsService
+                : getBeanOrNull(applicationContext, PhoneUserDetailsService.class);
         Assert.notNull(phoneUserDetailsService, "phoneUserDetailsService is required");
 
         PhoneService phoneService =
-                this.phoneService != null
-                        ? this.phoneService
-                        : getBeanOrNull(applicationContext, PhoneService.class);
+                this.phoneService != null ? this.phoneService : getBeanOrNull(applicationContext, PhoneService.class);
         Assert.notNull(phoneService, "phoneService is required");
 
         return new PhoneAuthenticationProvider(phoneUserDetailsService, phoneService);

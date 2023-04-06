@@ -53,15 +53,13 @@ public class PaymentController {
 
     @Operation(summary = "分页查询")
     @GetMapping("/page")
-    public ResResult<PageResult<PaymentDto>> page(
-            PageQuery PageQuery, PaymentQuery param, OrderParam orderParam) {
+    public ResResult<PageResult<PaymentDto>> page(PageQuery PageQuery, PaymentQuery param, OrderParam orderParam) {
         return Res.ok(paymentQueryService.page(PageQuery, param, orderParam));
     }
 
     @Operation(summary = "分页查询(超级查询)")
     @PostMapping("/superPage")
-    public ResResult<PageResult<PaymentDto>> superPage(
-            PageQuery PageQuery, @RequestBody QueryParams queryParams) {
+    public ResResult<PageResult<PaymentDto>> superPage(PageQuery PageQuery, @RequestBody QueryParams queryParams) {
         return Res.ok(paymentQueryService.superPage(PageQuery, queryParams));
     }
 

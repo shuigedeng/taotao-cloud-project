@@ -56,8 +56,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/engine/flow-comment")
 public class FlowCommentController {
 
-    @Autowired private ServiceAllUtil serviceUtil;
-    @Autowired private FlowCommentService flowCommentService;
+    @Autowired
+    private ServiceAllUtil serviceUtil;
+
+    @Autowired
+    private FlowCommentService flowCommentService;
 
     @Operation(summary = "分页获取流程评论列表", description = "分页获取流程评论列表")
     @GetMapping("/page")
@@ -69,18 +72,15 @@ public class FlowCommentController {
                 list.stream().map(FlowCommentEntity::getCreatorUserId).collect(Collectors.toList());
         List<UserEntity> userName = serviceUtil.getUserName(userId);
         for (FlowCommentListVO commentModel : listVO) {
-            UserEntity userEntity =
-                    userName.stream()
-                            .filter(t -> t.getId().equals(commentModel.getCreatorUserId()))
-                            .findFirst()
-                            .orElse(null);
-            commentModel.setIsDel(
-                    commentModel.getCreatorUserId().equals(SecurityUtils.getUserId()));
+            UserEntity userEntity = userName.stream()
+                    .filter(t -> t.getId().equals(commentModel.getCreatorUserId()))
+                    .findFirst()
+                    .orElse(null);
+            commentModel.setIsDel(commentModel.getCreatorUserId().equals(SecurityUtils.getUserId()));
             commentModel.setCreatorUserName(userEntity != null ? userEntity.getRealName() : "");
             commentModel.setCreatorUserId(userEntity != null ? userEntity.getId() : 0L);
             if (userEntity != null) {
-                commentModel.setCreatorUserHeadIcon(
-                        UploaderUtil.uploaderImg(userEntity.getHeadIcon()));
+                commentModel.setCreatorUserHeadIcon(UploaderUtil.uploaderImg(userEntity.getHeadIcon()));
             }
         }
         PaginationVO vo = JsonUtils.getJsonToBean(pagination, PaginationVO.class);
@@ -96,8 +96,7 @@ public class FlowCommentController {
 
     @Operation(summary = "新建流程评论", description = "新建流程评论")
     @PostMapping
-    public Result<String> create(@RequestBody @Valid FlowCommentForm commentForm)
-            throws DataException {
+    public Result<String> create(@RequestBody @Valid FlowCommentForm commentForm) throws DataException {
         FlowCommentEntity entity = FlowTaskConvert.INSTANCE.convert(commentForm);
         flowCommentService.create(entity);
         return Result.success(MsgCode.SU002.get());
@@ -105,8 +104,7 @@ public class FlowCommentController {
 
     @Operation(summary = "更新流程评论", description = "更新流程评论")
     @PutMapping("/{id}")
-    public Result<String> update(
-            @PathVariable("id") String id, @RequestBody @Valid FlowCommentForm commentForm)
+    public Result<String> update(@PathVariable("id") String id, @RequestBody @Valid FlowCommentForm commentForm)
             throws DataException {
         FlowCommentEntity info = flowCommentService.getInfo(id);
         if (info != null) {

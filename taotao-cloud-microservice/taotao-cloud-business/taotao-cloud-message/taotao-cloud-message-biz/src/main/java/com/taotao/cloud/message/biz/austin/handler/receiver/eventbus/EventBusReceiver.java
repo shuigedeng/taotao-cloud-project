@@ -34,7 +34,8 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.EVENT_BUS)
 public class EventBusReceiver implements EventBusListener {
 
-    @Autowired private ConsumeService consumeService;
+    @Autowired
+    private ConsumeService consumeService;
 
     @Override
     @Subscribe

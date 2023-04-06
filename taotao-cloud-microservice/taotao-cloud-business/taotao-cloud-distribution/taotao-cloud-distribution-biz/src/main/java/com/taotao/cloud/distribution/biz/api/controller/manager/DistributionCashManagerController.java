@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/distribution/cash")
 public class DistributionCashManagerController {
 
-    @Autowired private IDistributionCashService distributorCashService;
+    @Autowired
+    private IDistributionCashService distributorCashService;
 
     @Operation(summary = "通过id获取分销佣金详情", description = "通过id获取分销佣金详情")
     @RequestLogger
@@ -56,8 +57,7 @@ public class DistributionCashManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/getByPage")
-    public Result<IPage<DistributionCash>> getByPage(
-            DistributionCashSearchVO distributionCashSearchVO) {
+    public Result<IPage<DistributionCash>> getByPage(DistributionCashSearchVO distributionCashSearchVO) {
         return Result.success(distributorCashService.getDistributionCash(distributionCashSearchVO));
     }
 

@@ -39,11 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CategoryBrandServiceImpl
         extends BaseSuperServiceImpl<
-                ICategoryBrandMapper,
-                CategoryBrand,
-                CategoryBrandRepository,
-                ICategoryBrandRepository,
-                Long>
+                ICategoryBrandMapper, CategoryBrand, CategoryBrandRepository, ICategoryBrandRepository, Long>
         implements ICategoryBrandService {
 
     @Override

@@ -35,54 +35,42 @@ import org.springframework.stereotype.Component;
 public class DataEventListener {
 
     @Component
-    public static class RepositoriesPopulatedEventListener
-            implements ApplicationListener<RepositoriesPopulatedEvent> {
+    public static class RepositoriesPopulatedEventListener implements ApplicationListener<RepositoriesPopulatedEvent> {
         @Override
         public void onApplicationEvent(RepositoriesPopulatedEvent event) {
-            LogUtils.info(
-                    "DataEventListener ----- RepositoriesPopulatedEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("DataEventListener ----- RepositoriesPopulatedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class RelationalSaveEventListener
-            implements ApplicationListener<RelationalSaveEvent> {
+    public static class RelationalSaveEventListener implements ApplicationListener<RelationalSaveEvent> {
         @Override
         public void onApplicationEvent(RelationalSaveEvent event) {
-            LogUtils.info(
-                    "DataEventListener ----- RelationalSaveEvent onApplicationEvent {}", event);
+            LogUtils.info("DataEventListener ----- RelationalSaveEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class RelationalDeleteEventListener
-            implements ApplicationListener<RelationalDeleteEvent> {
+    public static class RelationalDeleteEventListener implements ApplicationListener<RelationalDeleteEvent> {
         @Override
         public void onApplicationEvent(RelationalDeleteEvent event) {
-            LogUtils.info(
-                    "DataEventListener ----- RelationalDeleteEvent onApplicationEvent {}", event);
+            LogUtils.info("DataEventListener ----- RelationalDeleteEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class RelationalEventWithEntityListener
-            implements ApplicationListener<RelationalEventWithEntity> {
+    public static class RelationalEventWithEntityListener implements ApplicationListener<RelationalEventWithEntity> {
         @Override
         public void onApplicationEvent(RelationalEventWithEntity event) {
-            LogUtils.info(
-                    "DataEventListener ----- RelationalEventWithEntity onApplicationEvent {}",
-                    event);
+            LogUtils.info("DataEventListener ----- RelationalEventWithEntity onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class MappingContextEventListener
-            implements ApplicationListener<MappingContextEvent> {
+    public static class MappingContextEventListener implements ApplicationListener<MappingContextEvent> {
         @Override
         public void onApplicationEvent(MappingContextEvent event) {
-            LogUtils.info(
-                    "DataEventListener ----- MappingContextEvent onApplicationEvent {}", event);
+            LogUtils.info("DataEventListener ----- MappingContextEvent onApplicationEvent {}", event);
         }
     }
 
@@ -95,18 +83,15 @@ public class DataEventListener {
     }
 
     @Component
-    public static class BeforeConvertEventListener
-            implements ApplicationListener<BeforeConvertEvent> {
+    public static class BeforeConvertEventListener implements ApplicationListener<BeforeConvertEvent> {
         @Override
         public void onApplicationEvent(BeforeConvertEvent event) {
-            LogUtils.info(
-                    "DataEventListener ----- BeforeConvertEvent onApplicationEvent {}", event);
+            LogUtils.info("DataEventListener ----- BeforeConvertEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class BeforeDeleteEventListener
-            implements ApplicationListener<BeforeDeleteEvent> {
+    public static class BeforeDeleteEventListener implements ApplicationListener<BeforeDeleteEvent> {
         @Override
         public void onApplicationEvent(BeforeDeleteEvent event) {
             LogUtils.info("DataEventListener ----- BeforeDeleteEvent onApplicationEvent {}", event);

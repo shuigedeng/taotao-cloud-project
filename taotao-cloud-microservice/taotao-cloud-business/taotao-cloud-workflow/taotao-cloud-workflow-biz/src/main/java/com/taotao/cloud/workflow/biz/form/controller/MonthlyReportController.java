@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/MonthlyReport")
 public class MonthlyReportController {
 
-    @Autowired private MonthlyReportService monthlyReportService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private MonthlyReportService monthlyReportService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取月工作总结信息
@@ -51,17 +54,14 @@ public class MonthlyReportController {
      */
     @Operation("获取月工作总结信息")
     @GetMapping("/{id}")
-    public Result<MonthlyReportInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<MonthlyReportInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         MonthlyReportInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), MonthlyReportInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), MonthlyReportInfoVO.class);
                     isData = false;
                 }
             }
@@ -81,10 +81,8 @@ public class MonthlyReportController {
      */
     @Operation("新建月工作总结")
     @PostMapping
-    public Result create(@RequestBody MonthlyReportForm monthlyReportForm)
-            throws WorkFlowException {
-        MonthlyReportEntity entity =
-                JsonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
+    public Result create(@RequestBody MonthlyReportForm monthlyReportForm) throws WorkFlowException {
+        MonthlyReportEntity entity = JsonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(monthlyReportForm.getStatus())) {
             monthlyReportService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -102,11 +100,9 @@ public class MonthlyReportController {
      */
     @Operation("修改月工作总结")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody MonthlyReportForm monthlyReportForm, @PathVariable("id") String id)
+    public Result update(@RequestBody MonthlyReportForm monthlyReportForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        MonthlyReportEntity entity =
-                JsonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
+        MonthlyReportEntity entity = JsonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(monthlyReportForm.getStatus())) {
             monthlyReportService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -33,7 +33,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DruidConfig {
 
-    @Autowired DataSourceUtil dataSourceUtil;
+    @Autowired
+    DataSourceUtil dataSourceUtil;
 
     //    @Bean
     public DataSource druid() throws DataException {
@@ -47,8 +48,7 @@ public class DruidConfig {
      */
     @Bean
     public ServletRegistrationBean statViewServlet() {
-        ServletRegistrationBean bean =
-                new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+        ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         Map<String, String> initParams = new HashMap<>(4);
         // 配置druid页面监控的账户密码
         initParams.put("loginUsername", "workflow");

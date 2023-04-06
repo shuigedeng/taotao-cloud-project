@@ -55,24 +55,32 @@ import org.springframework.util.StringUtils;
 
 /** 好友表 服务层实现 q3z3 */
 @Service("chatFriendService")
-public class ChatFriendServiceImpl extends BaseServiceImpl<ChatFriend>
-        implements ChatFriendService {
+public class ChatFriendServiceImpl extends BaseServiceImpl<ChatFriend> implements ChatFriendService {
 
-    @Resource private ChatFriendDao chatFriendDao;
+    @Resource
+    private ChatFriendDao chatFriendDao;
 
-    @Resource @Lazy private ChatUserService chatUserService;
+    @Resource
+    @Lazy
+    private ChatUserService chatUserService;
 
-    @Resource private ChatApplyService chatApplyService;
+    @Resource
+    private ChatApplyService chatApplyService;
 
-    @Resource private ChatPushService chatPushService;
+    @Resource
+    private ChatPushService chatPushService;
 
-    @Resource private ChatGroupService groupService;
+    @Resource
+    private ChatGroupService groupService;
 
-    @Resource private ChatGroupInfoService groupInfoService;
+    @Resource
+    private ChatGroupInfoService groupInfoService;
 
-    @Resource private ChatTalkService chatTalkService;
+    @Resource
+    private ChatTalkService chatTalkService;
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Autowired
     public void setBaseDao() {
@@ -148,8 +156,7 @@ public class ChatFriendServiceImpl extends BaseServiceImpl<ChatFriend>
         ChatApply apply = verifyApply(applyId);
         ChatUser fromUser = chatUserService.getById(apply.getFromId());
         // 更新申请
-        chatApplyService.updateById(
-                new ChatApply().setId(apply.getId()).setApplyStatus(ApplyStatusEnum.AGREE));
+        chatApplyService.updateById(new ChatApply().setId(apply.getId()).setApplyStatus(ApplyStatusEnum.AGREE));
         if (fromUser == null) {
             return;
         }
@@ -171,21 +178,19 @@ public class ChatFriendServiceImpl extends BaseServiceImpl<ChatFriend>
         List<ChatFriend> friendList = new ArrayList<>();
         ChatFriend friend1 = new ChatFriend().setFromId(toId).setToId(fromId);
         if (this.queryOne(friend1) == null) {
-            friendList.add(
-                    friend1.setCreateTime(now)
-                            .setSource(source)
-                            .setBlack(YesOrNoEnum.NO)
-                            .setTop(YesOrNoEnum.NO)
-                            .setRemark(fromUser.getNickName()));
+            friendList.add(friend1.setCreateTime(now)
+                    .setSource(source)
+                    .setBlack(YesOrNoEnum.NO)
+                    .setTop(YesOrNoEnum.NO)
+                    .setRemark(fromUser.getNickName()));
         }
         ChatFriend friend2 = new ChatFriend().setFromId(fromId).setToId(toId);
         if (this.queryOne(friend2) == null) {
-            friendList.add(
-                    friend2.setCreateTime(now)
-                            .setSource(source)
-                            .setTop(YesOrNoEnum.NO)
-                            .setBlack(YesOrNoEnum.NO)
-                            .setRemark(toUser.getNickName()));
+            friendList.add(friend2.setCreateTime(now)
+                    .setSource(source)
+                    .setTop(YesOrNoEnum.NO)
+                    .setBlack(YesOrNoEnum.NO)
+                    .setRemark(toUser.getNickName()));
         }
         if (CollectionUtils.isEmpty(friendList)) {
             return;
@@ -238,16 +243,14 @@ public class ChatFriendServiceImpl extends BaseServiceImpl<ChatFriend>
     public void refused(Long applyId) {
         ChatApply apply = verifyApply(applyId);
         // 更新申请
-        chatApplyService.updateById(
-                new ChatApply().setId(apply.getId()).setApplyStatus(ApplyStatusEnum.REFUSED));
+        chatApplyService.updateById(new ChatApply().setId(apply.getId()).setApplyStatus(ApplyStatusEnum.REFUSED));
     }
 
     @Override
     public void ignore(Long applyId) {
         ChatApply apply = verifyApply(applyId);
         // 更新申请
-        chatApplyService.updateById(
-                new ChatApply().setId(apply.getId()).setApplyStatus(ApplyStatusEnum.IGNORE));
+        chatApplyService.updateById(new ChatApply().setId(apply.getId()).setApplyStatus(ApplyStatusEnum.IGNORE));
     }
 
     @Override
@@ -320,10 +323,9 @@ public class ChatFriendServiceImpl extends BaseServiceImpl<ChatFriend>
         }
         if (!StringUtils.isEmpty(param)) {
             // 过滤
-            dataList =
-                    dataList.stream()
-                            .filter(data -> data.getNickName().contains(param))
-                            .collect(Collectors.toList());
+            dataList = dataList.stream()
+                    .filter(data -> data.getNickName().contains(param))
+                    .collect(Collectors.toList());
         }
         return dataList;
     }
@@ -387,8 +389,7 @@ public class ChatFriendServiceImpl extends BaseServiceImpl<ChatFriend>
         if (friend == null) {
             return null;
         }
-        redisUtils.set(
-                key, JSONUtil.toJsonStr(friend), ApiConstant.REDIS_FRIEND_TIME, TimeUnit.DAYS);
+        redisUtils.set(key, JSONUtil.toJsonStr(friend), ApiConstant.REDIS_FRIEND_TIME, TimeUnit.DAYS);
         return friend;
     }
 

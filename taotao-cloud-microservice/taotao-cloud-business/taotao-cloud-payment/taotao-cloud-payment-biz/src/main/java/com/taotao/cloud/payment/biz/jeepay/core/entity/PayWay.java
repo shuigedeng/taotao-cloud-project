@@ -45,7 +45,8 @@ public class PayWay extends BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 支付方式代码 例如： wxpay_jsapi */
-    @TableId private String wayCode;
+    @TableId
+    private String wayCode;
 
     /** 支付方式名称 */
     private String wayName;

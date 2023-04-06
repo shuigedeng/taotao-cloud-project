@@ -32,7 +32,8 @@ import lombok.Data;
 public class SysOssEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @TableId private Long id;
+    @TableId
+    private Long id;
     // URL地址
     private String url;
     // 创建时间

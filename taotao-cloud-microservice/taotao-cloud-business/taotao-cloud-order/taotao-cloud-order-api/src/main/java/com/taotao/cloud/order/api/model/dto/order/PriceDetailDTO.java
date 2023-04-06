@@ -60,20 +60,17 @@ public record PriceDetailDTO(
 
         // =========end update price==========
 
-        @Schema(
-                        description =
-                                "流水金额(入账 出帐金额) = goodsPrice + freight - discountPrice - couponPrice"
-                                        + " + updatePrice")
+        @Schema(description = "流水金额(入账 出帐金额) = goodsPrice + freight - discountPrice - couponPrice" + " + updatePrice")
                 BigDecimal flowPrice,
         @Schema(description = "结算价格 与 商家/供应商 结算价格（例如积分商品/砍价商品）") BigDecimal settlementPrice,
-        @Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission")
-                BigDecimal billPrice,
+        @Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission") BigDecimal billPrice,
 
         /** 参与的促销活动 */
         @Schema(description = "参与的促销活动") List<PromotionSkuVO> joinPromotion)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 
     // public BigDecimal getOriginalPrice() {
     // 	if (originalPrice.compareTo(BigDecimal.ZERO) == 0) {

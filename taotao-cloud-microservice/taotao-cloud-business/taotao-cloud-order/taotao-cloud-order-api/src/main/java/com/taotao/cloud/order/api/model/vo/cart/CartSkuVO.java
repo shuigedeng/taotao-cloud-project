@@ -41,14 +41,12 @@ public record CartSkuVO(
         @Schema(description = "是否失效 ") Boolean invalid,
         @Schema(description = "购物车商品错误消息") String errorMessage,
         @Schema(description = "是否可配送") Boolean isShip,
-        @Schema(description = "拼团id 如果是拼团购买 此值为拼团活动id，" + "当pintuanId为空，则表示普通购买（或者拼团商品，单独购买）")
-                String pintuanId,
+        @Schema(description = "拼团id 如果是拼团购买 此值为拼团活动id，" + "当pintuanId为空，则表示普通购买（或者拼团商品，单独购买）") String pintuanId,
         @Schema(description = "砍价ID") String kanjiaId,
         @Schema(description = "积分兑换ID") String pointsId,
         @Schema(description = "积分购买 积分数量") Long point,
         @Schema(description = "可参与的单品活动") List<PromotionGoodsVO> promotions,
-        @Schema(description = "参与促销活动更新时间(一天更新一次) 例如时间为：2020-01-01  00：00：01")
-                Date updatePromotionTime,
+        @Schema(description = "参与促销活动更新时间(一天更新一次) 例如时间为：2020-01-01  00：00：01") Date updatePromotionTime,
 
         /**
          * @see CartTypeEnum
@@ -57,7 +55,8 @@ public record CartSkuVO(
         CartBaseVO CartBase)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -894598033321906974L;
+    @Serial
+    private static final long serialVersionUID = -894598033321906974L;
 
     // /**
     //  * 在构造器里初始化促销列表，规格列表

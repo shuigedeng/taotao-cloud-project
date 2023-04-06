@@ -45,11 +45,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/topic")
 public class TopicController extends BaseController {
 
-    @Resource private ChatTopicService topicService;
+    @Resource
+    private ChatTopicService topicService;
 
-    @Resource private ChatTopicReplyService chatTopicReplyService;
+    @Resource
+    private ChatTopicReplyService chatTopicReplyService;
 
-    @Resource private ChatUserService chatUserService;
+    @Resource
+    private ChatUserService chatUserService;
 
     /**
      * 修改封面
@@ -60,8 +63,7 @@ public class TopicController extends BaseController {
     @PostMapping("/editCover")
     public AjaxResult editCover(@Validated @RequestBody TopicVo02 topicVo) {
         // 执行修改
-        ChatUser chatUser =
-                new ChatUser().setUserId(ShiroUtils.getUserId()).setCover(topicVo.getCover());
+        ChatUser chatUser = new ChatUser().setUserId(ShiroUtils.getUserId()).setCover(topicVo.getCover());
         chatUserService.updateById(chatUser);
         return AjaxResult.successMsg("修改成功");
     }

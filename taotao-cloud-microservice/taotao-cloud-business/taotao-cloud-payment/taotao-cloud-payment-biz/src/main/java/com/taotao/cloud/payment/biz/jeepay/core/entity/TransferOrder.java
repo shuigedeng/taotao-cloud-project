@@ -56,7 +56,8 @@ public class TransferOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 转账订单号 */
-    @TableId private String transferId;
+    @TableId
+    private String transferId;
 
     /** 商户号 */
     private String mchNo;

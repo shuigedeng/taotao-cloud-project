@@ -30,8 +30,7 @@ import org.springframework.stereotype.Service;
 public class FrequencyDeduplicationService extends AbstractDeduplicationService {
 
     @Autowired
-    public FrequencyDeduplicationService(
-            @Qualifier("SimpleLimitService") LimitService limitService) {
+    public FrequencyDeduplicationService(@Qualifier("SimpleLimitService") LimitService limitService) {
 
         this.limitService = limitService;
         deduplicationType = DeduplicationType.FREQUENCY.getCode();

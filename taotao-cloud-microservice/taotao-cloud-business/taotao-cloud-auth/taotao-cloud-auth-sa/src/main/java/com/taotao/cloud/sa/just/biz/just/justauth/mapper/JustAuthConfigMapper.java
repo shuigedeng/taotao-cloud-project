@@ -40,8 +40,7 @@ public interface JustAuthConfigMapper extends BaseMapper<JustAuthConfig> {
      * @return
      */
     Page<JustAuthConfigDTO> queryJustAuthConfigList(
-            Page<JustAuthConfigDTO> page,
-            @Param("justAuthConfig") QueryJustAuthConfigDTO justAuthConfigDTO);
+            Page<JustAuthConfigDTO> page, @Param("justAuthConfig") QueryJustAuthConfigDTO justAuthConfigDTO);
 
     /**
      * 查询租户第三方登录功能配置表列表
@@ -49,8 +48,7 @@ public interface JustAuthConfigMapper extends BaseMapper<JustAuthConfig> {
      * @param justAuthConfigDTO
      * @return
      */
-    List<JustAuthConfigDTO> queryJustAuthConfigList(
-            @Param("justAuthConfig") QueryJustAuthConfigDTO justAuthConfigDTO);
+    List<JustAuthConfigDTO> queryJustAuthConfigList(@Param("justAuthConfig") QueryJustAuthConfigDTO justAuthConfigDTO);
 
     /**
      * 查询租户第三方登录功能配置表信息
@@ -58,8 +56,7 @@ public interface JustAuthConfigMapper extends BaseMapper<JustAuthConfig> {
      * @param justAuthConfigDTO
      * @return
      */
-    JustAuthConfigDTO queryJustAuthConfig(
-            @Param("justAuthConfig") QueryJustAuthConfigDTO justAuthConfigDTO);
+    JustAuthConfigDTO queryJustAuthConfig(@Param("justAuthConfig") QueryJustAuthConfigDTO justAuthConfigDTO);
 
     /**
      * 查询租户第三方登录功能配置表列表
@@ -68,6 +65,5 @@ public interface JustAuthConfigMapper extends BaseMapper<JustAuthConfig> {
      * @return
      */
     @InterceptorIgnore(tenantLine = "true")
-    List<JustAuthConfigDTO> initJustAuthConfigList(
-            @Param("justAuthConfig") QueryJustAuthConfigDTO justAuthConfigDTO);
+    List<JustAuthConfigDTO> initJustAuthConfigList(@Param("justAuthConfig") QueryJustAuthConfigDTO justAuthConfigDTO);
 }

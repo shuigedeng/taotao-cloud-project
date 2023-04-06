@@ -35,12 +35,8 @@ public class Tianqi {
         String result = null;
         JSONObject today = new JSONObject();
         try {
-            result =
-                    HttpUtil.getUrl(
-                            "https://api.map.baidu.com/weather/v1/?district_id="
-                                    + district_id
-                                    + "&data_type=all&ak="
-                                    + ak);
+            result = HttpUtil.getUrl(
+                    "https://api.map.baidu.com/weather/v1/?district_id=" + district_id + "&data_type=all&ak=" + ak);
             JSONObject jsonObject = JSONObject.parseObject(result);
             if (jsonObject.getString("message").equals("success")) {
                 JSONArray arr = jsonObject.getJSONObject("result").getJSONArray("forecasts");

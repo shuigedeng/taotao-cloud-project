@@ -46,17 +46,14 @@ public class OrderComplaintCommunicationServiceImpl
     }
 
     @Override
-    public IPage<OrderComplaintCommunication> getCommunication(
-            OrderComplaintCommunicationPageQuery pageQuery) {
+    public IPage<OrderComplaintCommunication> getCommunication(OrderComplaintCommunicationPageQuery pageQuery) {
         LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(
                 StrUtil.isNotEmpty(pageQuery.getComplainId()),
                 OrderComplaintCommunication::getComplainId,
                 pageQuery.getComplainId());
         queryWrapper.eq(
-                StrUtil.isNotEmpty(pageQuery.getOwner()),
-                OrderComplaintCommunication::getOwner,
-                pageQuery.getOwner());
+                StrUtil.isNotEmpty(pageQuery.getOwner()), OrderComplaintCommunication::getOwner, pageQuery.getOwner());
         queryWrapper.eq(
                 StrUtil.isNotEmpty(pageQuery.getOwnerName()),
                 OrderComplaintCommunication::getOwnerName,

@@ -32,7 +32,10 @@ public enum PushNoticeTypeEnum {
     FRIEND_APPLY("FRIEND_APPLY", "好友_申请"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     PushNoticeTypeEnum(String code, String info) {

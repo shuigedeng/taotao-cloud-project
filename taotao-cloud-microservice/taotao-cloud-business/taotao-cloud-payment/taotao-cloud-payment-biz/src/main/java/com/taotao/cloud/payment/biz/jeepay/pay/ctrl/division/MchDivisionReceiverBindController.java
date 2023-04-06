@@ -52,10 +52,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MchDivisionReceiverBindController extends ApiController {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
-    @Autowired private MchDivisionReceiverService mchDivisionReceiverService;
-    @Autowired private MchDivisionReceiverGroupService mchDivisionReceiverGroupService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
+
+    @Autowired
+    private MchDivisionReceiverService mchDivisionReceiverService;
+
+    @Autowired
+    private MchDivisionReceiverGroupService mchDivisionReceiverGroupService;
 
     /** 分账账号绑定 * */
     @PostMapping("/api/division/receiver/bind")
@@ -71,8 +78,7 @@ public class MchDivisionReceiverBindController extends ApiController {
 
             // 商户配置信息
             MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(
-                            bizRQ.getMchNo(), bizRQ.getAppId());
+                    configContextQueryService.queryMchInfoAndAppInfo(bizRQ.getMchNo(), bizRQ.getAppId());
             if (mchAppConfigContext == null) {
                 throw new BizException("获取商户应用信息失败");
             }
@@ -84,15 +90,13 @@ public class MchDivisionReceiverBindController extends ApiController {
             }
 
             MchDivisionReceiverGroup group =
-                    mchDivisionReceiverGroupService.findByIdAndMchNo(
-                            bizRQ.getReceiverGroupId(), bizRQ.getMchNo());
+                    mchDivisionReceiverGroupService.findByIdAndMchNo(bizRQ.getReceiverGroupId(), bizRQ.getMchNo());
             if (group == null) {
                 throw new BizException("商户分账账号组不存在，请检查或进入商户平台进行创建操作");
             }
 
             BigDecimal divisionProfit = new BigDecimal(bizRQ.getDivisionProfit());
-            if (divisionProfit.compareTo(BigDecimal.ZERO) <= 0
-                    || divisionProfit.compareTo(BigDecimal.ONE) > 1) {
+            if (divisionProfit.compareTo(BigDecimal.ZERO) <= 0 || divisionProfit.compareTo(BigDecimal.ONE) > 1) {
                 throw new BizException("账号分账比例有误, 配置值为[0.0001~1.0000]");
             }
 
@@ -144,14 +148,10 @@ public class MchDivisionReceiverBindController extends ApiController {
     }
 
     private MchDivisionReceiver genRecord(
-            DivisionReceiverBindRQ bizRQ,
-            MchDivisionReceiverGroup group,
-            MchInfo mchInfo,
-            BigDecimal divisionProfit) {
+            DivisionReceiverBindRQ bizRQ, MchDivisionReceiverGroup group, MchInfo mchInfo, BigDecimal divisionProfit) {
 
         MchDivisionReceiver receiver = new MchDivisionReceiver();
-        receiver.setReceiverAlias(
-                StringUtils.defaultIfEmpty(bizRQ.getReceiverAlias(), bizRQ.getAccNo())); // 别名
+        receiver.setReceiverAlias(StringUtils.defaultIfEmpty(bizRQ.getReceiverAlias(), bizRQ.getAccNo())); // 别名
         receiver.setReceiverGroupId(bizRQ.getReceiverGroupId()); // 分组ID
         receiver.setReceiverGroupName(group.getReceiverGroupName()); // 组名称
         receiver.setMchNo(bizRQ.getMchNo()); // 商户号

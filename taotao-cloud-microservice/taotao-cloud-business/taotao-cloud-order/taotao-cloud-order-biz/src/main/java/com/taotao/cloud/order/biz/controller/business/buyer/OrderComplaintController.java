@@ -81,12 +81,9 @@ public class OrderComplaintController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/page")
-    public Result<PageResult<OrderComplaintBaseVO>> get(
-            @Validated OrderComplaintPageQuery orderComplaintPageQuery) {
-        IPage<OrderComplaint> orderComplainByPage =
-                orderComplaintService.pageQuery(orderComplaintPageQuery);
-        return Result.success(
-                PageResult.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
+    public Result<PageResult<OrderComplaintBaseVO>> get(@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
+        IPage<OrderComplaint> orderComplainByPage = orderComplaintService.pageQuery(orderComplaintPageQuery);
+        return Result.success(PageResult.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
     }
 
     @Operation(summary = "添加交易投诉", description = "添加交易投诉")
@@ -105,17 +102,15 @@ public class OrderComplaintController {
             @PathVariable("complainId") Long complainId,
             @Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
         SecurityUser user = SecurityUtils.getCurrentUser();
-        OrderComplaintCommunication orderComplaintCommunication =
-                OrderComplaintCommunication.builder()
-                        .complainId(complainId)
-                        .content(orderComplaintCommunicationDTO.content())
-                        .owner(CommunicationOwnerEnum.BUYER.name())
-                        .ownerName(user.getNickname())
-                        .ownerId(user.getUserId())
-                        .build();
+        OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
+                .complainId(complainId)
+                .content(orderComplaintCommunicationDTO.content())
+                .owner(CommunicationOwnerEnum.BUYER.name())
+                .ownerName(user.getNickname())
+                .ownerId(user.getUserId())
+                .build();
 
-        return Result.success(
-                orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
+        return Result.success(orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
     }
 
     @Operation(summary = "取消售后", description = "取消售后")

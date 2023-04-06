@@ -42,8 +42,7 @@ public class WalletLogService {
     /** 个人钱包日志分页 */
     public PageResult<WalletLogDto> pageByPersonal(PageQuery PageQuery, WalletLogQueryParam param) {
         Long userId = SecurityUtil.getUserId();
-        return MpUtil.convert2DtoPageResult(
-                walletLogManager.pageByUserId(PageQuery, param, userId));
+        return MpUtil.convert2DtoPageResult(walletLogManager.pageByUserId(PageQuery, param, userId));
     }
 
     /** 钱包日志分页 */

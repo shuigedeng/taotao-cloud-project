@@ -46,9 +46,7 @@ public class ContextEventListener {
      */
     @EventListener(ContextRefreshedEvent.class)
     public void contextRefreshedEventListener(ContextRefreshedEvent event) {
-        LogUtils.info(
-                "ApplicationContextEventListener ----- ContextRefreshedEvent onApplicationEvent {}",
-                event);
+        LogUtils.info("ApplicationContextEventListener ----- ContextRefreshedEvent onApplicationEvent {}", event);
     }
 
     // @Async
@@ -57,49 +55,37 @@ public class ContextEventListener {
     // }
 
     @Component
-    public static class ContextStartedEventListener
-            implements ApplicationListener<ContextStartedEvent> {
+    public static class ContextStartedEventListener implements ApplicationListener<ContextStartedEvent> {
         @Override
         public void onApplicationEvent(ContextStartedEvent event) {
             LogUtils.info(
-                    "ApplicationContextEventListener ----- ContextStartedEvent onApplicationEvent"
-                            + " {}",
-                    event);
+                    "ApplicationContextEventListener ----- ContextStartedEvent onApplicationEvent" + " {}", event);
         }
     }
 
     @Component
-    public static class ContextStoppedEventListener
-            implements ApplicationListener<ContextStoppedEvent> {
+    public static class ContextStoppedEventListener implements ApplicationListener<ContextStoppedEvent> {
         @Override
         public void onApplicationEvent(ContextStoppedEvent event) {
             LogUtils.info(
-                    "ApplicationContextEventListener ----- ContextStoppedEvent onApplicationEvent"
-                            + " {}",
-                    event);
+                    "ApplicationContextEventListener ----- ContextStoppedEvent onApplicationEvent" + " {}", event);
         }
     }
 
     @Component
-    public static class ContextClosedEventListener
-            implements ApplicationListener<ContextClosedEvent> {
+    public static class ContextClosedEventListener implements ApplicationListener<ContextClosedEvent> {
         @Override
         public void onApplicationEvent(ContextClosedEvent event) {
-            LogUtils.info(
-                    "ApplicationContextEventListener ----- ContextClosedEvent onApplicationEvent"
-                            + " {}",
-                    event);
+            LogUtils.info("ApplicationContextEventListener ----- ContextClosedEvent onApplicationEvent" + " {}", event);
         }
     }
 
     @Component
-    public static class ServletRequestHandledEventListener
-            implements ApplicationListener<ServletRequestHandledEvent> {
+    public static class ServletRequestHandledEventListener implements ApplicationListener<ServletRequestHandledEvent> {
         @Override
         public void onApplicationEvent(ServletRequestHandledEvent event) {
             LogUtils.info(
-                    "ApplicationContextEventListener ----- ServletRequestHandledEvent"
-                            + " onApplicationEvent {}",
+                    "ApplicationContextEventListener ----- ServletRequestHandledEvent" + " onApplicationEvent {}",
                     event);
         }
     }

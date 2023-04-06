@@ -28,7 +28,8 @@ public class JobWorker {
     @Value("${target.openId}")
     private String openId;
 
-    @Autowired Pusher pusherService;
+    @Autowired
+    Pusher pusherService;
 
     @Scheduled(cron = "0 30 7 * * ?")
     public void goodMorning() {

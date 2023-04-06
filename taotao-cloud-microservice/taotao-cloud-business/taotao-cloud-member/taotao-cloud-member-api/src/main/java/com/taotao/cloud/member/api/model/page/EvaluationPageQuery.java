@@ -40,7 +40,8 @@ import lombok.Setter;
 @Schema(description = "评价查询条件")
 public class EvaluationPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "skuid")
     private Long skuId;
@@ -63,9 +64,7 @@ public class EvaluationPageQuery extends PageQuery {
     @Schema(description = "商品ID")
     private Long goodsId;
 
-    @Schema(
-            description = "好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评",
-            allowableValues = "GOOD,MODERATE,WORSE")
+    @Schema(description = "好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评", allowableValues = "GOOD,MODERATE,WORSE")
     private String grade;
 
     @Schema(description = "是否有图")

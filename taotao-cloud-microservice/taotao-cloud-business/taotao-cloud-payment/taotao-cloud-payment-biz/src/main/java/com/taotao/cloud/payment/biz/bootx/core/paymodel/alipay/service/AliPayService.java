@@ -62,15 +62,13 @@ public class AliPayService {
 
     /** 支付前检查支付方式是否可用 */
     public void validation(PayModeParam payModeParam, AlipayConfig alipayConfig) {
-        List<String> payWays =
-                Optional.ofNullable(alipayConfig.getPayWays())
-                        .filter(StrUtil::isNotBlank)
-                        .map(s -> StrUtil.split(s, ','))
-                        .orElse(new ArrayList<>(1));
+        List<String> payWays = Optional.ofNullable(alipayConfig.getPayWays())
+                .filter(StrUtil::isNotBlank)
+                .map(s -> StrUtil.split(s, ','))
+                .orElse(new ArrayList<>(1));
         // 发起的支付类型是否在支持的范围内
-        PayWayEnum payWayEnum =
-                Optional.ofNullable(AliPayWay.findByNo(payModeParam.getPayWay()))
-                        .orElseThrow(() -> new PayFailureException("非法的支付宝支付类型"));
+        PayWayEnum payWayEnum = Optional.ofNullable(AliPayWay.findByNo(payModeParam.getPayWay()))
+                .orElseThrow(() -> new PayFailureException("非法的支付宝支付类型"));
         if (!payWays.contains(payWayEnum.getCode())) {
             throw new PayFailureException("该支付宝支付方式不可用");
         }
@@ -113,11 +111,7 @@ public class AliPayService {
     }
 
     /** wap支付 */
-    public String wapPay(
-            BigDecimal amount,
-            Payment payment,
-            AlipayConfig alipayConfig,
-            AliPayParam aliPayParam) {
+    public String wapPay(BigDecimal amount, Payment payment, AlipayConfig alipayConfig, AliPayParam aliPayParam) {
 
         AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
         model.setSubject(payment.getTitle());
@@ -154,8 +148,7 @@ public class AliPayService {
         model.setTotalAmount(amount.toPlainString());
 
         try {
-            AlipayTradeAppPayResponse response =
-                    AliPayApi.appPayToResponse(model, alipayConfig.getNotifyUrl());
+            AlipayTradeAppPayResponse response = AliPayApi.appPayToResponse(model, alipayConfig.getNotifyUrl());
             return response.getBody();
         } catch (AlipayApiException e) {
             log.error("支付宝APP支付失败", e);
@@ -164,11 +157,7 @@ public class AliPayService {
     }
 
     /** PC支付 */
-    public String webPay(
-            BigDecimal amount,
-            Payment payment,
-            AlipayConfig alipayConfig,
-            AliPayParam aliPayParam) {
+    public String webPay(BigDecimal amount, Payment payment, AlipayConfig alipayConfig, AliPayParam aliPayParam) {
 
         AlipayTradePagePayModel model = new AlipayTradePagePayModel();
 
@@ -215,11 +204,7 @@ public class AliPayService {
     }
 
     /** 付款码支付 */
-    public void barCode(
-            BigDecimal amount,
-            Payment payment,
-            AliPayParam aliPayParam,
-            AlipayConfig alipayConfig) {
+    public void barCode(BigDecimal amount, Payment payment, AliPayParam aliPayParam, AlipayConfig alipayConfig) {
         AlipayTradePayModel model = new AlipayTradePayModel();
 
         model.setSubject(payment.getTitle());
@@ -232,8 +217,7 @@ public class AliPayService {
         model.setTotalAmount(amount.toPlainString());
 
         try {
-            AlipayTradePayResponse response =
-                    AliPayApi.tradePayToResponse(model, alipayConfig.getNotifyUrl());
+            AlipayTradePayResponse response = AliPayApi.tradePayToResponse(model, alipayConfig.getNotifyUrl());
 
             // 支付成功处理 金额2000以下免密支付
             if (Objects.equals(response.getCode(), AliPayCode.SUCCESS)) {

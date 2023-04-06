@@ -36,7 +36,8 @@ import lombok.*;
 @Schema(description = "菜单VO")
 public class MenuVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -5853343562172855421L;
+    @Serial
+    private static final long serialVersionUID = -5853343562172855421L;
 
     @Schema(description = "菜单名称")
     private String name;

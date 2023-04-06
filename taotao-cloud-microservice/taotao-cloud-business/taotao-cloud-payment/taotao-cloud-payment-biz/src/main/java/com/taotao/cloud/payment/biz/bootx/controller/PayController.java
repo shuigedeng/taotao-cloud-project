@@ -69,8 +69,7 @@ public class PayController {
 
     @Operation(summary = "刷新指定业务id的支付单状态")
     @PostMapping("/syncByBusinessId")
-    public ResResult<PaymentDto> syncByBusinessId(
-            @Parameter(description = "业务id") String businessId) {
+    public ResResult<PaymentDto> syncByBusinessId(@Parameter(description = "业务id") String businessId) {
         return Res.ok(paySyncService.syncByBusinessId(businessId));
     }
 

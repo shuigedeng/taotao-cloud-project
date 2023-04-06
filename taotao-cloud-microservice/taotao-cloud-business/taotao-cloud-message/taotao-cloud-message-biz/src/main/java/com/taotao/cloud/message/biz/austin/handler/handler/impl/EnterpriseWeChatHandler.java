@@ -43,7 +43,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     public EnterpriseWeChatHandler() {
         channelCode = ChannelType.ENTERPRISE_WE_CHAT.getCode();
@@ -53,12 +54,9 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
     public boolean handler(TaskInfo taskInfo) {
         try {
             WxCpDefaultConfigImpl accountConfig =
-                    accountUtils.getAccountById(
-                            taskInfo.getSendAccount(), WxCpDefaultConfigImpl.class);
-            WxCpMessageServiceImpl messageService =
-                    new WxCpMessageServiceImpl(initService(accountConfig));
-            WxCpMessageSendResult result =
-                    messageService.send(buildWxCpMessage(taskInfo, accountConfig.getAgentId()));
+                    accountUtils.getAccountById(taskInfo.getSendAccount(), WxCpDefaultConfigImpl.class);
+            WxCpMessageServiceImpl messageService = new WxCpMessageServiceImpl(initService(accountConfig));
+            WxCpMessageSendResult result = messageService.send(buildWxCpMessage(taskInfo, accountConfig.getAgentId()));
             if (Integer.valueOf(WxMpErrorMsgEnum.CODE_0.getCode()).equals(result.getErrCode())) {
                 return true;
             }
@@ -102,8 +100,7 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
         } else {
             userId = StringUtils.join(taskInfo.getReceiver(), CommonConstant.RADICAL);
         }
-        EnterpriseWeChatContentModel contentModel =
-                (EnterpriseWeChatContentModel) taskInfo.getContentModel();
+        EnterpriseWeChatContentModel contentModel = (EnterpriseWeChatContentModel) taskInfo.getContentModel();
 
         // 通用配置
         WxCpMessage wxCpMessage = null;
@@ -115,45 +112,39 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
         } else if (SendMessageType.VOICE.getCode().equals(contentModel.getSendType())) {
             wxCpMessage = WxCpMessage.VOICE().mediaId(contentModel.getMediaId()).build();
         } else if (SendMessageType.VIDEO.getCode().equals(contentModel.getSendType())) {
-            wxCpMessage =
-                    WxCpMessage.VIDEO()
-                            .mediaId(contentModel.getMediaId())
-                            .description(contentModel.getDescription())
-                            .title(contentModel.getTitle())
-                            .build();
+            wxCpMessage = WxCpMessage.VIDEO()
+                    .mediaId(contentModel.getMediaId())
+                    .description(contentModel.getDescription())
+                    .title(contentModel.getTitle())
+                    .build();
         } else if (SendMessageType.FILE.getCode().equals(contentModel.getSendType())) {
             wxCpMessage = WxCpMessage.FILE().mediaId(contentModel.getMediaId()).build();
         } else if (SendMessageType.TEXT_CARD.getCode().equals(contentModel.getSendType())) {
-            wxCpMessage =
-                    WxCpMessage.TEXTCARD()
-                            .url(contentModel.getUrl())
-                            .title(contentModel.getTitle())
-                            .description(contentModel.getDescription())
-                            .btnTxt(contentModel.getBtnTxt())
-                            .build();
+            wxCpMessage = WxCpMessage.TEXTCARD()
+                    .url(contentModel.getUrl())
+                    .title(contentModel.getTitle())
+                    .description(contentModel.getDescription())
+                    .btnTxt(contentModel.getBtnTxt())
+                    .build();
         } else if (SendMessageType.NEWS.getCode().equals(contentModel.getSendType())) {
-            List<NewArticle> newArticles =
-                    JSON.parseArray(contentModel.getArticles(), NewArticle.class);
+            List<NewArticle> newArticles = JSON.parseArray(contentModel.getArticles(), NewArticle.class);
             wxCpMessage = WxCpMessage.NEWS().articles(newArticles).build();
         } else if (SendMessageType.MP_NEWS.getCode().equals(contentModel.getSendType())) {
-            List<MpnewsArticle> mpNewsArticles =
-                    JSON.parseArray(contentModel.getMpNewsArticle(), MpnewsArticle.class);
+            List<MpnewsArticle> mpNewsArticles = JSON.parseArray(contentModel.getMpNewsArticle(), MpnewsArticle.class);
             wxCpMessage = WxCpMessage.MPNEWS().articles(mpNewsArticles).build();
         } else if (SendMessageType.MARKDOWN.getCode().equals(contentModel.getSendType())) {
-            wxCpMessage = WxCpMessage.MARKDOWN().content(contentModel.getContent()).build();
-        } else if (SendMessageType.MINI_PROGRAM_NOTICE
-                .getCode()
-                .equals(contentModel.getSendType())) {
-            Map contentItems = JSON.parseObject(contentModel.getContentItems(), Map.class);
             wxCpMessage =
-                    WxCpMessage.newMiniProgramNoticeBuilder()
-                            .appId(contentModel.getAppId())
-                            .page(contentModel.getPage())
-                            .emphasisFirstItem(contentModel.getEmphasisFirstItem())
-                            .contentItems(contentItems)
-                            .title(contentModel.getTitle())
-                            .description(contentModel.getDescription())
-                            .build();
+                    WxCpMessage.MARKDOWN().content(contentModel.getContent()).build();
+        } else if (SendMessageType.MINI_PROGRAM_NOTICE.getCode().equals(contentModel.getSendType())) {
+            Map contentItems = JSON.parseObject(contentModel.getContentItems(), Map.class);
+            wxCpMessage = WxCpMessage.newMiniProgramNoticeBuilder()
+                    .appId(contentModel.getAppId())
+                    .page(contentModel.getPage())
+                    .emphasisFirstItem(contentModel.getEmphasisFirstItem())
+                    .contentItems(contentItems)
+                    .title(contentModel.getTitle())
+                    .description(contentModel.getDescription())
+                    .build();
         } else if (SendMessageType.TEMPLATE_CARD.getCode().equals(contentModel.getSendType())) {
             // WxJava 未支持
         }

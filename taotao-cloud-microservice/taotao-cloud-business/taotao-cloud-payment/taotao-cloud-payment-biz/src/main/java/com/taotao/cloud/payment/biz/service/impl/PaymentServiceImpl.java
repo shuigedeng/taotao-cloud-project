@@ -29,8 +29,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
-    @Autowired private List<CashierExecute> cashierExecutes;
-    @Autowired private CashierSupport cashierSupport;
+    @Autowired
+    private List<CashierExecute> cashierExecutes;
+
+    @Autowired
+    private CashierSupport cashierSupport;
 
     @Override
     public void success(PaymentSuccessParams paymentSuccessParams) {

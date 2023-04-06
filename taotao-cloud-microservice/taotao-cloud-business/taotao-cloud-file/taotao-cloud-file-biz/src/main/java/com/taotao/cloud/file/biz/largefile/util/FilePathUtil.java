@@ -62,12 +62,11 @@ public class FilePathUtil implements ApplicationRunner {
     }
 
     public String getPath(FileUploadRequest param) {
-        String path =
-                this.getBasePath()
-                        + FileConstant.FILE_SEPARATORCHAR
-                        + param.getPath()
-                        + FileConstant.FILE_SEPARATORCHAR
-                        + param.getMd5();
+        String path = this.getBasePath()
+                + FileConstant.FILE_SEPARATORCHAR
+                + param.getPath()
+                + FileConstant.FILE_SEPARATORCHAR
+                + param.getMd5();
         return path;
     }
 }

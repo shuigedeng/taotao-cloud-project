@@ -46,26 +46,19 @@ public class FlowJsonUtil {
 
     /** 获取下一节点 */
     public static String getNextNode(
-            String nodeId,
-            String data,
-            List<ChildNodeList> childNodeListAll,
-            List<ConditionList> conditionListAll) {
+            String nodeId, String data, List<ChildNodeList> childNodeListAll, List<ConditionList> conditionListAll) {
         return nextNodeId(data, nodeId, childNodeListAll, conditionListAll);
     }
 
     /** 下一节点id */
     private static String nextNodeId(
-            String data,
-            String nodeId,
-            List<ChildNodeList> childNodeListAll,
-            List<ConditionList> conditionListAll) {
+            String data, String nodeId, List<ChildNodeList> childNodeListAll, List<ConditionList> conditionListAll) {
         String nextId = "";
         boolean flag = false;
-        ChildNodeList childNode =
-                childNodeListAll.stream()
-                        .filter(t -> t.getCustom().getNodeId().equals(nodeId))
-                        .findFirst()
-                        .orElse(null);
+        ChildNodeList childNode = childNodeListAll.stream()
+                .filter(t -> t.getCustom().getNodeId().equals(nodeId))
+                .findFirst()
+                .orElse(null);
         String contextType = childNode.getConditionType();
         // 条件、分流的判断
         if (StringUtils.isNotEmpty(contextType)) {
@@ -107,24 +100,16 @@ public class FlowJsonUtil {
 
     /** 获取当前已完成节点 */
     private static void upList(
-            List<FlowTaskNodeEntity> flowTaskNodeList,
-            String node,
-            Set<String> upList,
-            String[] tepId) {
-        FlowTaskNodeEntity entity =
-                flowTaskNodeList.stream()
-                        .filter(t -> t.getNodeCode().equals(node))
-                        .findFirst()
-                        .orElse(null);
+            List<FlowTaskNodeEntity> flowTaskNodeList, String node, Set<String> upList, String[] tepId) {
+        FlowTaskNodeEntity entity = flowTaskNodeList.stream()
+                .filter(t -> t.getNodeCode().equals(node))
+                .findFirst()
+                .orElse(null);
         if (entity != null) {
-            List<String> list =
-                    flowTaskNodeList.stream()
-                            .filter(
-                                    t ->
-                                            t.getSortCode() != null
-                                                    && t.getSortCode() < entity.getSortCode())
-                            .map(FlowTaskNodeEntity::getNodeCode)
-                            .collect(Collectors.toList());
+            List<String> list = flowTaskNodeList.stream()
+                    .filter(t -> t.getSortCode() != null && t.getSortCode() < entity.getSortCode())
+                    .map(FlowTaskNodeEntity::getNodeCode)
+                    .collect(Collectors.toList());
             list.removeAll(Arrays.asList(tepId));
             upList.addAll(list);
         }
@@ -132,24 +117,16 @@ public class FlowJsonUtil {
 
     /** 获取当前未完成节点 */
     private static void nextList(
-            List<FlowTaskNodeEntity> flowTaskNodeList,
-            String node,
-            Set<String> nextList,
-            String[] tepId) {
-        FlowTaskNodeEntity entity =
-                flowTaskNodeList.stream()
-                        .filter(t -> t.getNodeCode().equals(node))
-                        .findFirst()
-                        .orElse(null);
+            List<FlowTaskNodeEntity> flowTaskNodeList, String node, Set<String> nextList, String[] tepId) {
+        FlowTaskNodeEntity entity = flowTaskNodeList.stream()
+                .filter(t -> t.getNodeCode().equals(node))
+                .findFirst()
+                .orElse(null);
         if (entity != null) {
-            List<String> list =
-                    flowTaskNodeList.stream()
-                            .filter(
-                                    t ->
-                                            t.getSortCode() != null
-                                                    && t.getSortCode() > entity.getSortCode())
-                            .map(FlowTaskNodeEntity::getNodeCode)
-                            .collect(Collectors.toList());
+            List<String> list = flowTaskNodeList.stream()
+                    .filter(t -> t.getSortCode() != null && t.getSortCode() > entity.getSortCode())
+                    .map(FlowTaskNodeEntity::getNodeCode)
+                    .collect(Collectors.toList());
             list.removeAll(Arrays.asList(tepId));
             nextList.addAll(list);
         }
@@ -159,23 +136,19 @@ public class FlowJsonUtil {
 
     /** 递归条件 */
     private static void getContionNextNode(
-            String data,
-            List<ConditionList> conditionListAll,
-            String nodeId,
-            List<String> nextNodeId) {
-        List<ConditionList> conditionAll =
-                conditionListAll.stream().filter(t -> t.getPrevId().equals(nodeId)).toList();
+            String data, List<ConditionList> conditionListAll, String nodeId, List<String> nextNodeId) {
+        List<ConditionList> conditionAll = conditionListAll.stream()
+                .filter(t -> t.getPrevId().equals(nodeId))
+                .toList();
         for (ConditionList condition : conditionAll) {
             List<ProperCond> conditions = condition.getConditions();
-            boolean flag =
-                    nodeConditionDecide(data, conditions, new HashMap<>(100), new HashMap<>(100));
+            boolean flag = nodeConditionDecide(data, conditions, new HashMap<>(100), new HashMap<>(100));
             // 判断条件是否成立或者其他情况条件
             if (flag || condition.getIsDefault()) {
                 String conditionId = condition.getNodeId();
-                List<ConditionList> collect =
-                        conditionListAll.stream()
-                                .filter(t -> t.getPrevId().equals(conditionId))
-                                .toList();
+                List<ConditionList> collect = conditionListAll.stream()
+                        .filter(t -> t.getPrevId().equals(conditionId))
+                        .toList();
                 if (collect.size() > 0) {
                     getContionNextNode(data, conditionListAll, conditionId, nextNodeId);
                 } else {
@@ -219,10 +192,7 @@ public class FlowJsonUtil {
             }
             String value = conditionList.get(i).getFiledValue();
             String filedValue = "'" + value + "'";
-            if (">".equals(symbol)
-                    || ">=".equals(symbol)
-                    || "<=".equals(symbol)
-                    || "<".equals(symbol)) {
+            if (">".equals(symbol) || ">=".equals(symbol) || "<=".equals(symbol) || "<".equals(symbol)) {
                 formValue = "parseFloat(" + formValue + ")";
                 filedValue = "parseFloat(" + filedValue + ")";
             }
@@ -258,9 +228,7 @@ public class FlowJsonUtil {
 
     /** 最外层的json */
     public static void getTemplateAll(
-            ChildNode childNode,
-            List<ChildNodeList> childNodeListAll,
-            List<ConditionList> conditionListAll) {
+            ChildNode childNode, List<ChildNodeList> childNodeListAll, List<ConditionList> conditionListAll) {
         List<ChildNode> chilNodeList = new ArrayList<>();
         childListAll(childNode, chilNodeList);
         if (childNode != null) {
@@ -288,18 +256,15 @@ public class FlowJsonUtil {
             // 判断子节点数据是否还有分流节点,有的话保存分流节点id
             if (hasconditionNodes) {
                 childNodeList.setConditionType(FlowCondition.CONDITION);
-                List<ChildNode> conditionNodes =
-                        childNode.getConditionNodes().stream()
-                                .filter(t -> t.getIsInterflow() != null)
-                                .toList();
+                List<ChildNode> conditionNodes = childNode.getConditionNodes().stream()
+                        .filter(t -> t.getIsInterflow() != null)
+                        .toList();
                 boolean isFlow = conditionNodes.size() > 0;
                 if (isFlow) {
                     customModel.setFlow(isFlow);
                     childNodeList.setConditionType(FlowCondition.INTERFLOW);
                     List<String> flowIdAll =
-                            conditionNodes.stream()
-                                    .map(ChildNode::getNodeId)
-                                    .collect(Collectors.toList());
+                            conditionNodes.stream().map(ChildNode::getNodeId).collect(Collectors.toList());
                     customModel.setFlowId(String.join(",", flowIdAll));
                 }
             }
@@ -355,18 +320,15 @@ public class FlowJsonUtil {
             // 判断子节点数据是否还有分流节点,有的话保存分流节点id
             if (hasconditionNodes) {
                 childNodeList.setConditionType(FlowCondition.CONDITION);
-                List<ChildNode> conditionNodes =
-                        childNode.getConditionNodes().stream()
-                                .filter(t -> t.getIsInterflow() != null)
-                                .toList();
+                List<ChildNode> conditionNodes = childNode.getConditionNodes().stream()
+                        .filter(t -> t.getIsInterflow() != null)
+                        .toList();
                 boolean isFlow = conditionNodes.size() > 0;
                 if (isFlow) {
                     customModel.setFlow(isFlow);
                     childNodeList.setConditionType(FlowCondition.INTERFLOW);
                     List<String> flowIdAll =
-                            conditionNodes.stream()
-                                    .map(ChildNode::getNodeId)
-                                    .collect(Collectors.toList());
+                            conditionNodes.stream().map(ChildNode::getNodeId).collect(Collectors.toList());
                     customModel.setFlowId(String.join(",", flowIdAll));
                 }
             }
@@ -398,11 +360,10 @@ public class FlowJsonUtil {
             if (childNodeModel != null) {
                 firstId = childNodeModel.getNodeId();
             } else {
-                ChildNode nodes =
-                        chilNodeList.stream()
-                                .filter(t -> t.getNodeId().equals(childNode.getNodeId()))
-                                .findFirst()
-                                .orElse(null);
+                ChildNode nodes = chilNodeList.stream()
+                        .filter(t -> t.getNodeId().equals(childNode.getNodeId()))
+                        .findFirst()
+                        .orElse(null);
                 if (nodes != null) {
                     if (nodes.getChildNode() != null) {
                         firstId = childNode.getChildNode().getNodeId();
@@ -416,8 +377,7 @@ public class FlowJsonUtil {
                 if (conditionType) {
                     getCondition(node, firstId, childNodeListAll, conditionListAll, chilNodeList);
                 } else {
-                    getConditonFlow(
-                            node, firstId, childNodeListAll, conditionListAll, chilNodeList);
+                    getConditonFlow(node, firstId, childNodeListAll, conditionListAll, chilNodeList);
                 }
             }
         }
@@ -435,10 +395,9 @@ public class FlowJsonUtil {
             String prevId = childNode.getPrevId();
             boolean haschildNode = childNode.getChildNode() != null;
             boolean hasconditionNodes = childNode.getConditionNodes() != null;
-            boolean isDefault =
-                    childNode.getProperties().getIsDefault() != null
-                            ? childNode.getProperties().getIsDefault()
-                            : false;
+            boolean isDefault = childNode.getProperties().getIsDefault() != null
+                    ? childNode.getProperties().getIsDefault()
+                    : false;
             ConditionList conditionList = new ConditionList();
             conditionList.setNodeId(nodeId);
             conditionList.setPrevId(prevId);
@@ -450,17 +409,14 @@ public class FlowJsonUtil {
             conditionList.setFirstId(firstId);
             // 判断子节点数据是否还有分流节点,有的话保存分流节点id
             if (hasconditionNodes) {
-                List<ChildNode> conditionNodes =
-                        childNode.getConditionNodes().stream()
-                                .filter(t -> t.getIsInterflow() != null)
-                                .toList();
+                List<ChildNode> conditionNodes = childNode.getConditionNodes().stream()
+                        .filter(t -> t.getIsInterflow() != null)
+                        .toList();
                 boolean isFlow = conditionNodes.size() > 0;
                 if (isFlow) {
                     conditionList.setFlow(isFlow);
                     List<String> flowIdAll =
-                            conditionNodes.stream()
-                                    .map(ChildNode::getNodeId)
-                                    .collect(Collectors.toList());
+                            conditionNodes.stream().map(ChildNode::getNodeId).collect(Collectors.toList());
                     conditionList.setFlowId(String.join(",", flowIdAll));
                 }
             }
@@ -508,18 +464,15 @@ public class FlowJsonUtil {
             // 判断子节点数据是否还有分流节点,有的话保存分流节点id
             if (hasconditionNodes) {
                 childNodeList.setConditionType(FlowCondition.CONDITION);
-                List<ChildNode> conditionNodes =
-                        childNode.getConditionNodes().stream()
-                                .filter(t -> t.getIsInterflow() != null)
-                                .toList();
+                List<ChildNode> conditionNodes = childNode.getConditionNodes().stream()
+                        .filter(t -> t.getIsInterflow() != null)
+                        .toList();
                 boolean isFlow = conditionNodes.size() > 0;
                 if (isFlow) {
                     customModel.setFlow(isFlow);
                     childNodeList.setConditionType(FlowCondition.INTERFLOW);
                     List<String> flowIdAll =
-                            conditionNodes.stream()
-                                    .map(ChildNode::getNodeId)
-                                    .collect(Collectors.toList());
+                            conditionNodes.stream().map(ChildNode::getNodeId).collect(Collectors.toList());
                     customModel.setFlowId(String.join(",", flowIdAll));
                 }
             }

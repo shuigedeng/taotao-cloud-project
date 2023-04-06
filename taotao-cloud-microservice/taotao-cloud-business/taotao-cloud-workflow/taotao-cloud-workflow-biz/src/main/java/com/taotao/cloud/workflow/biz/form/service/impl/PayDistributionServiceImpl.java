@@ -33,12 +33,14 @@ import org.springframework.stereotype.Service;
 
 /** 薪酬发放 */
 @Service
-public class PayDistributionServiceImpl
-        extends ServiceImpl<PayDistributionMapper, PayDistributionEntity>
+public class PayDistributionServiceImpl extends ServiceImpl<PayDistributionMapper, PayDistributionEntity>
         implements PayDistributionService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public PayDistributionEntity getInfo(String id) {
@@ -72,8 +74,7 @@ public class PayDistributionServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, PayDistributionEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, PayDistributionEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -99,10 +100,8 @@ public class PayDistributionServiceImpl
 
     @Override
     public void data(String id, String data) {
-        PayDistributionForm payDistributionForm =
-                JsonUtils.getJsonToBean(data, PayDistributionForm.class);
-        PayDistributionEntity entity =
-                JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
+        PayDistributionForm payDistributionForm = JsonUtils.getJsonToBean(data, PayDistributionForm.class);
+        PayDistributionEntity entity = JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

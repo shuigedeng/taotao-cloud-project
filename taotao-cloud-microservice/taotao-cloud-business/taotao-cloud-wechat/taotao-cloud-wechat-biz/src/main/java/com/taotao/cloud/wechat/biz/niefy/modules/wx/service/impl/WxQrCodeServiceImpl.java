@@ -36,20 +36,18 @@ import org.springframework.util.StringUtils;
 
 @Service("wxQrCodeService")
 @RequiredArgsConstructor
-public class WxQrCodeServiceImpl extends ServiceImpl<WxQrCodeMapper, WxQrCode>
-        implements WxQrCodeService {
+public class WxQrCodeServiceImpl extends ServiceImpl<WxQrCodeMapper, WxQrCode> implements WxQrCodeService {
     private final WxMpService wxService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String sceneStr = (String) params.get("sceneStr");
         String appid = (String) params.get("appid");
-        IPage<WxQrCode> page =
-                this.page(
-                        new Query<WxQrCode>().getPage(params),
-                        new QueryWrapper<WxQrCode>()
-                                .eq(StringUtils.hasText(appid), "appid", appid)
-                                .like(StringUtils.hasText(sceneStr), "scene_str", sceneStr));
+        IPage<WxQrCode> page = this.page(
+                new Query<WxQrCode>().getPage(params),
+                new QueryWrapper<WxQrCode>()
+                        .eq(StringUtils.hasText(appid), "appid", appid)
+                        .like(StringUtils.hasText(sceneStr), "scene_str", sceneStr));
 
         return new PageUtils(page);
     }
@@ -65,10 +63,7 @@ public class WxQrCodeServiceImpl extends ServiceImpl<WxQrCodeMapper, WxQrCode>
     public WxMpQrCodeTicket createQrCode(String appid, WxQrCodeForm form) throws WxErrorException {
         WxMpQrCodeTicket ticket;
         if (form.getIsTemp()) { // 创建临时二维码
-            ticket =
-                    wxService
-                            .getQrcodeService()
-                            .qrCodeCreateTmpTicket(form.getSceneStr(), form.getExpireSeconds());
+            ticket = wxService.getQrcodeService().qrCodeCreateTmpTicket(form.getSceneStr(), form.getExpireSeconds());
         } else { // 创建永久二维码
             ticket = wxService.getQrcodeService().qrCodeCreateLastTicket(form.getSceneStr());
         }
@@ -76,8 +71,7 @@ public class WxQrCodeServiceImpl extends ServiceImpl<WxQrCodeMapper, WxQrCode>
         wxQrCode.setTicket(ticket.getTicket());
         wxQrCode.setUrl(ticket.getUrl());
         if (form.getIsTemp()) {
-            wxQrCode.setExpireTime(
-                    new Date(System.currentTimeMillis() + ticket.getExpireSeconds() * 1000L));
+            wxQrCode.setExpireTime(new Date(System.currentTimeMillis() + ticket.getExpireSeconds() * 1000L));
         }
         this.save(wxQrCode);
         return ticket;

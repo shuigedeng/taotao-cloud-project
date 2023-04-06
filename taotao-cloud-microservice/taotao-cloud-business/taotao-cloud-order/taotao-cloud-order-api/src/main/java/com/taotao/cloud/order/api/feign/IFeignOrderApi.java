@@ -46,14 +46,8 @@ public interface IFeignOrderApi {
     @ApiInfo(
             create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
             update = {
-                @Update(
-                        version = V2022_07,
-                        content = "主要修改了配置信息的接口查询",
-                        date = "2022-07-01 17:11:55"),
-                @Update(
-                        version = V2022_08,
-                        content = "主要修改了配置信息的接口查询08",
-                        date = "2022-07-01 17:11:55")
+                @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+                @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
     @GetMapping(value = "/order/feign/info/{code}")
     OrderVO findOrderInfoByCode(@PathVariable("code") String code);
@@ -61,14 +55,8 @@ public interface IFeignOrderApi {
     @ApiInfo(
             create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
             update = {
-                @Update(
-                        version = V2022_07,
-                        content = "主要修改了配置信息的接口查询",
-                        date = "2022-07-01 17:11:55"),
-                @Update(
-                        version = V2022_08,
-                        content = "主要修改了配置信息的接口查询08",
-                        date = "2022-07-01 17:11:55")
+                @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+                @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
     @PostMapping(value = "/order/feign/saveOrder")
     OrderVO saveOrder(@RequestBody OrderSaveDTO orderDTO);
@@ -76,14 +64,8 @@ public interface IFeignOrderApi {
     @ApiInfo(
             create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
             update = {
-                @Update(
-                        version = V2022_07,
-                        content = "主要修改了配置信息的接口查询",
-                        date = "2022-07-01 17:11:55"),
-                @Update(
-                        version = V2022_08,
-                        content = "主要修改了配置信息的接口查询08",
-                        date = "2022-07-01 17:11:55")
+                @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+                @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
     @GetMapping(value = "/order/feign/queryDetail")
     OrderDetailVO queryDetail(String sn);
@@ -91,14 +73,8 @@ public interface IFeignOrderApi {
     @ApiInfo(
             create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
             update = {
-                @Update(
-                        version = V2022_07,
-                        content = "主要修改了配置信息的接口查询",
-                        date = "2022-07-01 17:11:55"),
-                @Update(
-                        version = V2022_08,
-                        content = "主要修改了配置信息的接口查询08",
-                        date = "2022-07-01 17:11:55")
+                @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+                @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
     @PostMapping(value = "/order/feign/payOrder")
     Boolean payOrder(String sn, String paymentMethod, String receivableNo);
@@ -106,14 +82,8 @@ public interface IFeignOrderApi {
     @ApiInfo(
             create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
             update = {
-                @Update(
-                        version = V2022_07,
-                        content = "主要修改了配置信息的接口查询",
-                        date = "2022-07-01 17:11:55"),
-                @Update(
-                        version = V2022_08,
-                        content = "主要修改了配置信息的接口查询08",
-                        date = "2022-07-01 17:11:55")
+                @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+                @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
     @GetMapping(value = "/order/feign/getBySn")
     OrderVO getBySn(String sn);
@@ -121,14 +91,8 @@ public interface IFeignOrderApi {
     @ApiInfo(
             create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
             update = {
-                @Update(
-                        version = V2022_07,
-                        content = "主要修改了配置信息的接口查询",
-                        date = "2022-07-01 17:11:55"),
-                @Update(
-                        version = V2022_08,
-                        content = "主要修改了配置信息的接口查询08",
-                        date = "2022-07-01 17:11:55")
+                @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
+                @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
     @GetMapping(value = "/order/feign/getByTradeSn")
     List<OrderVO> getByTradeSn(String sn);

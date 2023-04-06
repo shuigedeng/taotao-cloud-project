@@ -64,11 +64,9 @@ public class OAuth2DataJpaConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public RegisteredClientRepository registeredClientRepository(
-            HerodotusRegisteredClientService herodotusRegisteredClientService,
-            PasswordEncoder passwordEncoder) {
+            HerodotusRegisteredClientService herodotusRegisteredClientService, PasswordEncoder passwordEncoder) {
         JpaRegisteredClientRepository jpaRegisteredClientRepository =
-                new JpaRegisteredClientRepository(
-                        herodotusRegisteredClientService, passwordEncoder);
+                new JpaRegisteredClientRepository(herodotusRegisteredClientService, passwordEncoder);
         log.debug("[Herodotus] |- Bean [Jpa Registered Client Repository] Auto Configure.");
         return jpaRegisteredClientRepository;
     }
@@ -79,8 +77,7 @@ public class OAuth2DataJpaConfiguration {
             HerodotusAuthorizationService herodotusAuthorizationService,
             RegisteredClientRepository registeredClientRepository) {
         JpaOAuth2AuthorizationService jpaOAuth2AuthorizationService =
-                new JpaOAuth2AuthorizationService(
-                        herodotusAuthorizationService, registeredClientRepository);
+                new JpaOAuth2AuthorizationService(herodotusAuthorizationService, registeredClientRepository);
         log.debug("[Herodotus] |- Bean [Jpa OAuth2 Authorization Service] Auto Configure.");
         return jpaOAuth2AuthorizationService;
     }

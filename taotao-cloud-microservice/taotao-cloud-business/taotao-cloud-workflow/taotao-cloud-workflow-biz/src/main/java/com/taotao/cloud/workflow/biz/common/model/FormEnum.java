@@ -70,18 +70,17 @@ public enum FormEnum {
     }
 
     // 无用的对象
-    private static List<String> isNodeList =
-            new ArrayList<String>() {
-                {
-                    add(FormEnum.groupTitle.getMessage());
-                    add(FormEnum.divider.getMessage());
-                    add(FormEnum.WORKFLOWText.getMessage());
-                    add(FormEnum.button.getMessage());
-                    //        add(FormEnum.relationFormAttr.getMessage());
-                    add(FormEnum.BARCODE.getMessage());
-                    add(FormEnum.QR_CODE.getMessage());
-                }
-            };
+    private static List<String> isNodeList = new ArrayList<String>() {
+        {
+            add(FormEnum.groupTitle.getMessage());
+            add(FormEnum.divider.getMessage());
+            add(FormEnum.WORKFLOWText.getMessage());
+            add(FormEnum.button.getMessage());
+            //        add(FormEnum.relationFormAttr.getMessage());
+            add(FormEnum.BARCODE.getMessage());
+            add(FormEnum.QR_CODE.getMessage());
+        }
+    };
 
     public static boolean isModel(String value) {
         boolean isData = isNodeList.contains(value);

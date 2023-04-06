@@ -101,7 +101,8 @@ public class QueryTransferOrderRS extends AbstractRS {
         BeanUtils.copyProperties(record, result);
         result.setSuccessTime(
                 record.getSuccessTime() == null ? null : record.getSuccessTime().getTime());
-        result.setCreatedAt(record.getCreatedAt() == null ? null : record.getCreatedAt().getTime());
+        result.setCreatedAt(
+                record.getCreatedAt() == null ? null : record.getCreatedAt().getTime());
         return result;
     }
 }

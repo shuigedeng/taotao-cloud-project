@@ -59,9 +59,7 @@ public class Message extends BaseSuperEntity<Message, Long> {
      *
      * @see RangeEnum
      */
-    @Column(
-            name = "message_range",
-            columnDefinition = "varchar(255) not null default '' comment '发送范围'")
+    @Column(name = "message_range", columnDefinition = "varchar(255) not null default '' comment '发送范围'")
     private String messageRange;
 
     /**
@@ -69,20 +67,14 @@ public class Message extends BaseSuperEntity<Message, Long> {
      *
      * @see MessageSendClientEnum
      */
-    @Column(
-            name = "message_client",
-            columnDefinition = "varchar(255) not null default '' comment '发送客户端 商家或者会员'")
+    @Column(name = "message_client", columnDefinition = "varchar(255) not null default '' comment '发送客户端 商家或者会员'")
     private String messageClient;
 
     /** 发送指定用户id */
-    @Column(
-            name = "user_ids",
-            columnDefinition = "varchar(255) not null default '' comment '发送指定用户id'")
+    @Column(name = "user_ids", columnDefinition = "varchar(255) not null default '' comment '发送指定用户id'")
     private String[] userIds;
 
     /** 发送指定用户名称 */
-    @Column(
-            name = "user_names",
-            columnDefinition = "varchar(255) not null default '' comment '发送指定用户名称'")
+    @Column(name = "user_names", columnDefinition = "varchar(255) not null default '' comment '发送指定用户名称'")
     private String[] userNames;
 }

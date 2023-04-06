@@ -42,11 +42,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class FileController {
 
-    @Autowired private FileService fileService;
+    @Autowired
+    private FileService fileService;
 
-    @Autowired private HttpServletRequest request;
+    @Autowired
+    private HttpServletRequest request;
 
-    @Autowired private HttpServletResponse response;
+    @Autowired
+    private HttpServletResponse response;
 
     @GetMapping(value = "/")
     public String gotoPage() {
